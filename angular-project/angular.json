@@ -1,0 +1,127 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "otec": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/otec",
+      "sourceRoot": "projects/otec/src",
+      "prefix": "otec",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/otec",
+            "index": "projects/otec/src/index.html",
+            "main": "projects/otec/src/main.ts",
+            "polyfills": "projects/otec/src/polyfills.ts",
+            "tsConfig": "projects/otec/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/otec/src/favicon.ico",
+              "projects/otec/src/assets"
+            ],
+            "styles": [
+              "projects/otec/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/otec/src/environments/environment.ts",
+                  "with": "projects/otec/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "otec:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "otec:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "otec:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/otec/src/test.ts",
+            "polyfills": "projects/otec/src/polyfills.ts",
+            "tsConfig": "projects/otec/tsconfig.spec.json",
+            "karmaConfig": "projects/otec/karma.conf.js",
+            "assets": [
+              "projects/otec/src/favicon.ico",
+              "projects/otec/src/assets"
+            ],
+            "styles": [
+              "projects/otec/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/otec/tsconfig.app.json",
+              "projects/otec/tsconfig.spec.json",
+              "projects/otec/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/otec/e2e/protractor.conf.js",
+            "devServerTarget": "otec:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "otec:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "cli": {
+    "analytics": false
+  },
+  "defaultProject": "otec"
+}
