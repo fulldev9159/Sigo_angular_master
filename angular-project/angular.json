@@ -24,7 +24,8 @@
               "projects/otec/src/assets"
             ],
             "styles": [
-              "projects/otec/src/styles.css"
+              "projects/otec/src/styles.css",
+              "node_modules/semantic-ui-css/components/button.min.css"
             ],
             "scripts": []
           },
