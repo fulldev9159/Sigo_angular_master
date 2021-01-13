@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "analyze":"ng build --prod --stats-json && webpack-bundle-analyzer ./dist/otec/stats.json"
+    "analyze": "ng build --prod --stats-json && webpack-bundle-analyzer ./dist/otec/stats.json"
   },
   "private": true,
   "dependencies": {
