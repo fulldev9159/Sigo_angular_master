@@ -43,4 +43,11 @@ describe('AppRoutingModule', () => {
       done();
     });
   });
+
+  xit('navegate to "dashboard" redirects you to /dashboad', (done) => {
+    // router.navigate(['']).then(() => {
+    //   expect(location.path()).toBe('/login');
+    //   done(); //Llamada asyncronica que ejecuta el expect una vez terminado el router.navigate
+    // });
+  });
 });

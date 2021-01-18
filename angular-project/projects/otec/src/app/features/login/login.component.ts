@@ -2,6 +2,10 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import * as loginModel from './login.model'
 import {AuthService}from '../../core/services/auth.service'
+import { ThrowStmt } from '@angular/compiler';
+import {
+  Router,
+} from '@angular/router';
 @Component({
   selector: 'otec-login',
   templateUrl: './login.component.html',
@@ -13,7 +17,8 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   constructor(
     private readonly fb: FormBuilder,
-    private authService:AuthService
+    private authService:AuthService,
+    private router:Router
     ) {
     this.form = this.fb.group({
       username: ['', [Validators.required,Validators.maxLength(50)]],
@@ -40,6 +45,9 @@ export class LoginComponent implements OnInit {
       console.log(this.values)
       this.authService.auth(this.values.username,this.values.password).subscribe(response=>{
         console.log(response)
+        this.authService.setToken(response.data.token)
+        this.authService.setPrivilegios(response.data.roles)
+        this.router.navigate(['/dashboard']);
       })
     //   this.service.login(this.values).subscribe(response => {
     //     this.router.navigate(['/admin']);

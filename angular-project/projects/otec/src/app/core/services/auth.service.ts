@@ -10,10 +10,12 @@ export class AuthService {
   constructor(@Optional() private httpClient?: HttpClient) {}
 
   getToken(): string | null {
+    console.log(localStorage.getItem('otec_token'))
     return localStorage.getItem('otec_token');
   }
 
   isLogin(): boolean {
+    console.log(localStorage.getItem('otec_token'))
     if (localStorage.getItem('otec_token') === null) {
       return false;
     }

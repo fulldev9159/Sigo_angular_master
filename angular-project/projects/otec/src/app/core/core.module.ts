@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
-import { AppRoutingModule } from '../app-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +16,6 @@ import { AppRoutingModule } from '../app-routing.module';
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     HttpClientModule
   ],
   exports:[
