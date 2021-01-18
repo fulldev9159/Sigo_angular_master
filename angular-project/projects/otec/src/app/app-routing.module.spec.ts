@@ -23,8 +23,8 @@ describe('AppRoutingModule', () => {
       ],
       declarations: [AppComponent],
     });
-    router = TestBed.inject(Router);
-    location = TestBed.inject(Location);
+    router = TestBed.inject(Router); //injecta una instancia de router
+    location = TestBed.inject(Location);  //injecta una instancia de router
 
     fixture = TestBed.createComponent(AppComponent);
     router.initialNavigation();
@@ -33,7 +33,7 @@ describe('AppRoutingModule', () => {
   it('navegate to "" redirects you to /login', (done) => {
     router.navigate(['']).then(() => {
       expect(location.path()).toBe('/login');
-      done();
+      done(); //Llamada asyncronica que ejecuta el expect una vez terminado el router.navigate
     });
   });
 

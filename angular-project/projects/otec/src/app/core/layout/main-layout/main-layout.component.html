@@ -1,7 +1,11 @@
-<p>main-layout works!</p>
-<button class="ui blue button">Blue</button>
-<div class="ui buttons">
+<div class="main" *ngIf="isLogin">  
+  <p>main-layout works!</p>
+  <button class="ui blue button">Blue</button>
+  <div class="ui buttons">
     <button class="ui button">Cancel</button>
     <div class="or"></div>
     <button class="ui positive button">Save</button>
   </div>
+</div>
+
+<router-outlet></router-outlet>

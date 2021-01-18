@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {AuthToLoginUrlGuard} from './core/guard/auth-to-login-url.guard'
 
 export const routes: Routes = [
   {
@@ -9,7 +10,8 @@ export const routes: Routes = [
   },
   { 
     path: 'login', 
-    loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule) 
+    loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule),
+    canActivate:[AuthToLoginUrlGuard]
   }
 ];
 
