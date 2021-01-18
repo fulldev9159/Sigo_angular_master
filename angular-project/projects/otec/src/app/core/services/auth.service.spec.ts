@@ -124,4 +124,6 @@ describe('AuthService', () => {
     expect(req.request.method).toBe("POST");
     req.flush(dummyLoginResponse);
   })
+
+  xit('should logout',()=>{})
 });

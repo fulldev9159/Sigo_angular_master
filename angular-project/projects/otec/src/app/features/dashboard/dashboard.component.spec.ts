@@ -22,4 +22,6 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  xit('should logout after press button cerrar sesion',()=>{})
 });

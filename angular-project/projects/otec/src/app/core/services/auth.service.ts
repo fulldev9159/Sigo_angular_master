@@ -14,6 +14,10 @@ export class AuthService {
     return localStorage.getItem('otec_token');
   }
 
+  deleteToken():void{
+    localStorage.clear()
+  }
+  
   isLogin(): boolean {
     console.log(localStorage.getItem('otec_token'))
     if (localStorage.getItem('otec_token') === null) {
