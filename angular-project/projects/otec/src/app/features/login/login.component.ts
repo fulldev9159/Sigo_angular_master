@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import * as loginModel from './login.model'
+import {AuthService}from '../../core/services/auth.service'
 @Component({
   selector: 'otec-login',
   templateUrl: './login.component.html',
@@ -9,30 +10,17 @@ import * as loginModel from './login.model'
 })
 export class LoginComponent implements OnInit {
 
-//   form:FormGroup=this.formBuilder.group({
-//     username: ['', [Validators.required,Validators.maxLength(50)]],
-//     password: ['', [Validators.required, Validators.maxLength(100)]],
-// });
-  // controls = {
-  //   username: new FormControl('', [
-  //     Validators.required,
-  //     Validators.maxLength(50)
-  //   ]),
-  //   password: new FormControl('', [
-  //     Validators.required,
-  //     Validators.maxLength(100)
-  //   ]),
-  // };
-
-  // form: FormGroup = new FormGroup(this.controls);
-
   form: FormGroup;
-  constructor(private readonly fb: FormBuilder) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private authService:AuthService
+    ) {
     this.form = this.fb.group({
       username: ['', [Validators.required,Validators.maxLength(50)]],
       password: ['', [Validators.required,Validators.maxLength(100)]]
     });
   }
+  
   ngOnInit(): void {  }
 
   get values(): loginModel.Credential {
@@ -50,6 +38,9 @@ export class LoginComponent implements OnInit {
   submit() {
     if (this.valid) {
       console.log(this.values)
+      this.authService.auth(this.values.username,this.values.password).subscribe(response=>{
+        console.log(response)
+      })
     //   this.service.login(this.values).subscribe(response => {
     //     this.router.navigate(['/admin']);
     //   }, err => {

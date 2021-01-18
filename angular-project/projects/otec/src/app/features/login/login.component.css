@@ -28,8 +28,8 @@
   height: 74px;
 }
 
-.container-logo-movistar.mobile{
-    margin-top: -10vh;
+.container-logo-movistar.mobile {
+  margin-top: -10vh;
 }
 
 .container-logo-movistar.mobile img {
@@ -120,7 +120,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: -118px;
+  margin-top: -91px;
 }
 
 .login-form-section.mobile {
@@ -145,8 +145,9 @@
   margin-left: -18px;
 }
 
-.form-section.mobile input{
-    width: 100%;
+.form-section.mobile input {
+  width: 100%;
+  padding-left: 8px;
 }
 
 .form-text.desktop {
@@ -177,24 +178,34 @@
   border: 0;
   border-bottom: 1px rgba(0, 0, 0, 0.45) solid;
   display: block;
-  width: 126%;
+  width: 113%;
   padding: 3px 0;
   margin-bottom: 38px;
+  padding-left: 8px;
+  font-weight: 700;
 }
-
+.form-section.desktop input {
+  color: #658eac;
+}
 .form-section.mobile input {
-    border-bottom: 2px #fff solid;
-  }
+  color: #fff;
+  border-bottom: 2px #fff solid;
+}
 
 .button-login.desktop button {
   width: 150px;
   margin-top: 15px;
 }
 
-.button-login.mobile button{
-    width: 199px;
-    margin-top: 34px;
-    border: 1px solid;
+.button-login.mobile button {
+  width: 199px;
+  margin-top: 34px;
+  border: 1px solid;
+}
+
+input:focus,
+input:valid {
+  outline: 0;
 }
 @media (max-width: 800px) {
   .container-desktop {
