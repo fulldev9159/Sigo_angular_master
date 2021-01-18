@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
     constructor(
-      private httpClient: HttpClient
+     @Optional() private httpClient?: HttpClient
     ) { }
 
     getToken(): string|null {
@@ -28,6 +28,6 @@ export class AuthService {
         User:user,
         Password:password
       }
-      return this.httpClient.post<LoginModel.AuthLoginResponse>('http://localhost:8021/Test/OTEC/login',JSON.stringify(data))
+      return (this.httpClient as HttpClient).post<LoginModel.AuthLoginResponse>('http://localhost:8021/Test/OTEC/login',JSON.stringify(data))
     }
 }
