@@ -30,7 +30,10 @@ describe('AuthGuard', () => {
     authService = {
       isLogin: () => true,
       getToken: () => null,
-      auth: () =>auth
+      auth: () =>auth,
+      setToken:()=>null,
+      setPrivilegios:()=>null,
+      getPrivilegios:()=>[],
     };
     router = TestBed.inject(Router);
     guard = new AuthGuard(authService, router);
@@ -41,7 +44,10 @@ describe('AuthGuard', () => {
     authService = {
       isLogin: () => false,
       getToken: () => null,
-      auth: () =>auth
+      auth: () =>auth,
+      setToken:()=>null,
+      setPrivilegios:()=>null,
+      getPrivilegios:()=>[],
     };
     router = TestBed.inject(Router);
     guard = new AuthGuard(authService, router);

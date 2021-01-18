@@ -51,7 +51,57 @@ describe('AuthService', () => {
     expect(service.getToken()).toEqual('testToken');
   });
 
-  xit('setToken should update token', () => {});
+  it('setToken should update token', () => {
+    service.setToken('testToken2')
+    expect(service.getToken()).toEqual('testToken2')
+  });
+
+  xit('setPrivilegios should update LocalStorage key privilegios',()=>{
+    let roles = [
+      {
+          id: 1,
+          nombre: "gestor",
+          accesos: [
+              {
+                  modulo: "A",
+                  privilegio: {
+                      ver: true,
+                      editar: false
+                  }
+              },
+              {
+                  modulo: "B",
+                  privilegio: {
+                      ver: true,
+                      editar: false
+                  }
+              }
+          ]
+      },
+      {
+          id: 1,
+          nombre: "coordinador",
+          accesos: [
+              {
+                  modulo: "A",
+                  privilegio: {
+                      ver: true,
+                      editar: false
+                  }
+              },
+              {
+                  modulo: "B",
+                  privilegio: {
+                      ver: true,
+                      editar: false
+                  }
+              }
+          ]
+      }
+  ]
+    service.setPrivilegios(roles)
+    expect(service.getPrivilegios).toEqual(roles)
+  })
 
   it('isLogin should return true if token exist',()=>{
     localStorage.setItem('otec_token', 'testToken');
@@ -61,6 +111,7 @@ describe('AuthService', () => {
   it('isLogin should return false if token not exist',()=>{
     expect(service.isLogin()).toEqual(false)
   })
+
 
   it('should return a observable<AuthLoginResponse>',()=>{
     let user = 'dummyuser';

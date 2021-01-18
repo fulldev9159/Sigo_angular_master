@@ -32,7 +32,10 @@ describe('AuthToLoginUrlGuard', () => {
     authService = {
       isLogin: () => false,
       getToken: () => null,
-      auth: () => auth
+      auth: () => auth,
+      setToken:()=>null,
+      setPrivilegios:()=>null,
+      getPrivilegios:()=>[],
     };
     router = TestBed.inject(Router);
     guard = new AuthToLoginUrlGuard(authService, router);
@@ -47,7 +50,10 @@ describe('AuthToLoginUrlGuard', () => {
     authService = {
       isLogin: () => true,
       getToken: () => null,
-      auth: () => auth
+      auth: () => auth,
+      setToken:()=>null,
+      setPrivilegios:()=>null,
+      getPrivilegios:()=>[],
     };
     router = TestBed.inject(Router);
     guard = new AuthToLoginUrlGuard(authService, router);
