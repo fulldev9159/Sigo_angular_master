@@ -34,6 +34,7 @@ describe('AuthGuard', () => {
       setToken:()=>null,
       setPrivilegios:()=>null,
       getPrivilegios:()=>[],
+      deleteToken:()=>null,
     };
     router = TestBed.inject(Router);
     guard = new AuthGuard(authService, router);
@@ -48,6 +49,7 @@ describe('AuthGuard', () => {
       setToken:()=>null,
       setPrivilegios:()=>null,
       getPrivilegios:()=>[],
+      deleteToken:()=>null,
     };
     router = TestBed.inject(Router);
     guard = new AuthGuard(authService, router);
