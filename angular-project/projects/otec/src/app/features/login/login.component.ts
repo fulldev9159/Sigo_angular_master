@@ -53,12 +53,6 @@ export class LoginComponent implements OnInit {
           this.authService.setPrivilegios(response.data.roles);
           this.router.navigate(['/dashboard']);
         });
-      //   this.service.login(this.values).subscribe(response => {
-      //     this.router.navigate(['/admin']);
-      //   }, err => {
-      //     this.showMessage('No fue posible iniciar sesión', 'error');
-      //     console.error(err.message);
-      //   });
     }
   }
 }
