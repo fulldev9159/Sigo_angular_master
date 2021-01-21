@@ -9,6 +9,7 @@ import {
 
 import { AppComponent } from './app.component';
 import { routes } from './app-routing.module';
+import {environment} from '@environment'
 
 describe('AppRoutingModule', () => {
   let location: Location;
@@ -22,6 +23,7 @@ describe('AppRoutingModule', () => {
         HttpClientTestingModule,
       ],
       declarations: [AppComponent],
+      providers:[{ provide: 'environment', useValue: environment }] 
     });
     router = TestBed.inject(Router); //injecta una instancia de router
     location = TestBed.inject(Location);  //injecta una instancia de router

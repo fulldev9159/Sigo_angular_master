@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import * as LoginModel from '../../features/login/login.model';
+import {environment} from '@environment'
 
 describe('AuthToLoginUrlGuard', () => {
   let guard: AuthToLoginUrlGuard;
@@ -20,6 +21,7 @@ describe('AuthToLoginUrlGuard', () => {
       imports: [
         RouterTestingModule
       ],
+      providers:[{ provide: 'environment', useValue: environment }] 
     });
     guard = TestBed.inject(AuthToLoginUrlGuard);
   });
@@ -30,6 +32,7 @@ describe('AuthToLoginUrlGuard', () => {
 
   it('should return true for NOT logged in user', () => {
     authService = {
+      apiBase:'',
       isLogin: () => false,
       getToken: () => null,
       auth: () => auth,
@@ -49,6 +52,7 @@ describe('AuthToLoginUrlGuard', () => {
 
   it('should return false for logged in user and redirect to /dashboard', () => {
     authService = {
+      apiBase:'',
       isLogin: () => true,
       getToken: () => null,
       auth: () => auth,

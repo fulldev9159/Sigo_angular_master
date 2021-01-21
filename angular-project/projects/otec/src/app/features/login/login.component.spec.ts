@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import {environment} from '@environment'
 
 import { LoginComponent } from './login.component';
 
@@ -12,7 +13,8 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports:[ReactiveFormsModule,HttpClientTestingModule,RouterTestingModule],
-      declarations: [ LoginComponent ]
+      declarations: [ LoginComponent ],
+      providers:[{ provide: 'environment', useValue: environment }] 
     })
     .compileComponents();
   });

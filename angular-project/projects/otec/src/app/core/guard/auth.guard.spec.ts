@@ -6,6 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import {environment} from '@environment'
 
 import * as LoginModel from '../../features/login/login.model';
 
@@ -17,7 +18,8 @@ describe('AuthGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[RouterTestingModule]
+      imports:[RouterTestingModule],
+      providers:[{ provide: 'environment', useValue: environment }] 
     });
     guard = TestBed.inject(AuthGuard);
   });
@@ -28,6 +30,7 @@ describe('AuthGuard', () => {
 
   it('should return true for logged in user',()=>{
     authService = {
+      apiBase:'',
       isLogin: () => true,
       getToken: () => null,
       auth: () =>auth,
@@ -43,6 +46,7 @@ describe('AuthGuard', () => {
 
   it('should navigate to login for a logged in user',()=>{
     authService = {
+      apiBase:'',
       isLogin: () => false,
       getToken: () => null,
       auth: () =>auth,
