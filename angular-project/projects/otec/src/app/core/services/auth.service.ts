@@ -1,4 +1,4 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable, Optional,Inject } from '@angular/core';
 import * as LoginModel from '../../features/login/login.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,19 +7,25 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(@Optional() private httpClient?: HttpClient) {}
+  apiBase='http://localhost:8021'
+  constructor(
+    @Inject('environment') environment,
+    @Optional() private httpClient?: HttpClient
+  ) {
+    this.apiBase = environment.api || 'http://localhost:8021'
+  }
 
   getToken(): string | null {
-    console.log(localStorage.getItem('otec_token'))
+    console.log(localStorage.getItem('otec_token'));
     return localStorage.getItem('otec_token');
   }
 
-  deleteToken():void{
-    localStorage.clear()
+  deleteToken(): void {
+    localStorage.clear();
   }
-  
+
   isLogin(): boolean {
-    console.log(localStorage.getItem('otec_token'))
+    console.log(localStorage.getItem('otec_token'));
     if (localStorage.getItem('otec_token') === null) {
       return false;
     }
@@ -36,7 +42,7 @@ export class AuthService {
       Password: password,
     };
     return (this.httpClient as HttpClient).post<LoginModel.AuthLoginResponse>(
-      'http://localhost:8021/Test/OTEC/login',
+      `${this.apiBase}/Test/OTEC/login`,
       JSON.stringify(data)
     );
   }
@@ -46,12 +52,12 @@ export class AuthService {
   }
 
   setPrivilegios(privilegios: LoginModel.rolesSectionResponse[]) {
-    let privilegiosJSON=JSON.stringify(privilegios)
+    let privilegiosJSON = JSON.stringify(privilegios);
     localStorage.setItem('privilegios_user', privilegiosJSON);
   }
 
-  getPrivilegios():LoginModel.rolesSectionResponse[]{
-    let privilegios = localStorage.getItem('privilegios_user')
-    return JSON.parse(privilegios as string)
+  getPrivilegios(): LoginModel.rolesSectionResponse[] {
+    let privilegios = localStorage.getItem('privilegios_user');
+    return JSON.parse(privilegios as string);
   }
 }

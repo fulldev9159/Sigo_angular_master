@@ -20,7 +20,16 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@environment": ["projects/otec/src/environments/environment"],
+      "@core": ["projects/otec/src/app/core"],
+      "@core/*": ["projects/otec/src/app/core/*"],
+      "@features": ["projects/otec/src/app/features"],
+      "@features/*": ["projects/otec/src/app/features/*"],
+      "@shared": ["projects/otec/src/app/shared"],
+      "@shared/*": ["projects/otec/src/app/shared/*"]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

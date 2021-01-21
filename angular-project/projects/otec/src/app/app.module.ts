@@ -1,7 +1,8 @@
 
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import {CoreModule} from './core/core.module'
+import {CoreModule} from '@core';
+import {environment} from '@environment'
 
 import { AppRoutingModule } from './app-routing.module';
 @NgModule({
@@ -9,10 +10,12 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent
   ],
   imports: [
-    CoreModule,
+    CoreModule.forRoot(environment),
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    { provide: 'environment', useValue: environment }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
