@@ -3,7 +3,6 @@ FROM registryv2.zweicom.com:5000/trion/ng-cli:10.1.6 AS base
 WORKDIR /app
 
 COPY ./angular-project/  /app
-COPY ./docker  /app/docker
 
 RUN npm install
 RUN ng build --prod
@@ -18,6 +17,6 @@ COPY angular-project/nginx/nginx.conf /etc/nginx/nginx.conf
 WORKDIR /usr/share/nginx/html
 
 COPY --from=base /app/dist/otec/ .
-COPY --from=base /app/docker/deploy/docker_entrypoint.sh .
+COPY docker/deploy/docker_entrypoint.sh .
 
 ENTRYPOINT [ "/usr/share/nginx/html/docker_entrypoint.sh" ]
