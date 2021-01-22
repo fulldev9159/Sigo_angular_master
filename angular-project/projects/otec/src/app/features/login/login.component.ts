@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     return this.form.valid;
   }
 
-  submit() {
+  submit(): void {
     if (this.valid) {
       console.log(this.values);
       this.authService

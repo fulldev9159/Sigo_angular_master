@@ -4,24 +4,19 @@ import { AuthToLoginUrlGuard } from './auth-to-login-url.guard';
 
 import { RouterTestingModule } from '@angular/router/testing'; // Se debe importar la versión testing de Router
 
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import * as LoginModel from '../../features/login/login.model';
-import {environment} from '@environment'
 
 describe('AuthToLoginUrlGuard', () => {
   let guard: AuthToLoginUrlGuard;
   let authService: AuthService;
   let router: Router;
-  let auth:Observable<LoginModel.AuthLoginResponse>
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      providers:[{ provide: 'environment', useValue: environment }] 
+      imports: [RouterTestingModule],
+      providers: [{ provide: 'environment', useValue: {} }],
     });
     guard = TestBed.inject(AuthToLoginUrlGuard);
   });
@@ -32,14 +27,14 @@ describe('AuthToLoginUrlGuard', () => {
 
   it('should return true for NOT logged in user', () => {
     authService = {
-      apiBase:'',
+      apiBase: '',
       isLogin: () => false,
       getToken: () => null,
-      auth: () => auth,
-      setToken:()=>null,
-      setPrivilegios:()=>null,
-      getPrivilegios:()=>[],
-      deleteToken:()=>null,
+      auth: () => of(),
+      setToken: () => null,
+      setPrivilegios: () => null,
+      getPrivilegios: () => [],
+      deleteToken: () => null,
     };
     router = TestBed.inject(Router);
     guard = new AuthToLoginUrlGuard(authService, router);
@@ -52,14 +47,14 @@ describe('AuthToLoginUrlGuard', () => {
 
   it('should return false for logged in user and redirect to /dashboard', () => {
     authService = {
-      apiBase:'',
+      apiBase: '',
       isLogin: () => true,
       getToken: () => null,
-      auth: () => auth,
-      setToken:()=>null,
-      setPrivilegios:()=>null,
-      getPrivilegios:()=>[],
-      deleteToken:()=>null,
+      auth: () => of(),
+      setToken: () => null,
+      setPrivilegios: () => null,
+      getPrivilegios: () => [],
+      deleteToken: () => null,
     };
     router = TestBed.inject(Router);
     guard = new AuthToLoginUrlGuard(authService, router);

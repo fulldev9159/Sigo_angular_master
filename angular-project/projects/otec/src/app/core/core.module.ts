@@ -31,7 +31,7 @@ export class CoreModule {
     }
   }
 
-  static forRoot(environment: any): ModuleWithProviders<any> {
+  static forRoot(environment: object): ModuleWithProviders<NgModule> {
     return {
       ngModule: CoreModule,
       providers: [

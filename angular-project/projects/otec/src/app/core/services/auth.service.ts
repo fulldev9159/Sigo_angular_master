@@ -1,4 +1,4 @@
-import { Injectable, Optional,Inject } from '@angular/core';
+import { Injectable, Optional, Inject } from '@angular/core';
 import * as LoginModel from '../../features/login/login.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  apiBase='http://localhost:8021'
+  apiBase = 'http://localhost:8021';
   constructor(
     @Inject('environment') environment,
     @Optional() private httpClient?: HttpClient
   ) {
-    this.apiBase = environment.api || 'http://localhost:8021'
+    this.apiBase = environment.api || 'http://localhost:8021';
   }
 
   getToken(): string | null {
@@ -37,7 +37,7 @@ export class AuthService {
     password: string
   ): Observable<LoginModel.AuthLoginResponse> {
     console.log('iniciando login...');
-    let data = {
+    const data = {
       User: user,
       Password: password,
     };
@@ -47,17 +47,17 @@ export class AuthService {
     );
   }
 
-  setToken(token: string) {
+  setToken(token: string): void {
     localStorage.setItem('otec_token', token);
   }
 
-  setPrivilegios(privilegios: LoginModel.rolesSectionResponse[]) {
-    let privilegiosJSON = JSON.stringify(privilegios);
+  setPrivilegios(privilegios: LoginModel.RolesSectionResponse[]): void {
+    const privilegiosJSON = JSON.stringify(privilegios);
     localStorage.setItem('privilegios_user', privilegiosJSON);
   }
 
-  getPrivilegios(): LoginModel.rolesSectionResponse[] {
-    let privilegios = localStorage.getItem('privilegios_user');
+  getPrivilegios(): LoginModel.RolesSectionResponse[] {
+    const privilegios = localStorage.getItem('privilegios_user');
     return JSON.parse(privilegios as string);
   }
 }

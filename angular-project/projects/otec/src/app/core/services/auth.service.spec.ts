@@ -4,28 +4,25 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 
-import { AuthService } from './auth.service'; //1. Se importa el servicio a probar
-import {environment} from '@environment'
+import { AuthService } from './auth.service'; // 1. Se importa el servicio a probar
 
 describe('AuthService', () => {
-  let service: AuthService; //2.- Se crea la variable type del servicio a probar
+  let service: AuthService; // 2.- Se crea la variable type del servicio a probar
   let injector: TestBed;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        { provide: 'environment', useValue: environment },
-        AuthService,
-      ], //3.- Se limita el acceso al servicio solo a este componente --Leer más al respecto
+      // 3.- Se limita el acceso al servicio solo a este componente --Leer más al respecto
+      providers: [{ provide: 'environment', useValue: {} }, AuthService],
     });
     injector = getTestBed();
     httpMock = injector.inject(HttpTestingController);
-    service = TestBed.inject(AuthService); //4.- Se realiza un inject de una instancia del servicio dentro de la variable creada para luego ser usada
-
+    // 4.- Se realiza un inject de una instancia del servicio dentro de la variable creada para luego ser usada
+    service = TestBed.inject(AuthService);
     let store: { [key: string]: string } = {};
-    //MockLocalstorage para simular el funcionamiento del LocalStorage del navegador
+    // MockLocalstorage para simular el funcionamiento del LocalStorage del navegador
     const mockLocalStorage = {
       getItem: (key: string): string | null => {
         return key in store ? store[key] : null;
@@ -62,7 +59,7 @@ describe('AuthService', () => {
   });
 
   xit('setPrivilegios should update LocalStorage key privilegios', () => {
-    let roles = [
+    const roles = [
       {
         id: 1,
         nombre: 'gestor',
@@ -118,8 +115,8 @@ describe('AuthService', () => {
   });
 
   it('should return a observable<AuthLoginResponse>', () => {
-    let user = 'dummyuser';
-    let password = 'dummypassword';
+    const user = 'dummyuser';
+    const password = 'dummypassword';
     const dummyLoginResponse = {
       data: {
         token: 'token0xafgfgfgtoken',
