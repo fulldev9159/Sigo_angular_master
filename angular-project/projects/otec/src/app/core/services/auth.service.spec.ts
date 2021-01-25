@@ -58,52 +58,52 @@ describe('AuthService', () => {
     expect(service.getToken()).toEqual('testToken2');
   });
 
-  xit('setPrivilegios should update LocalStorage key privilegios', () => {
-    const roles = [
-      {
-        id: 1,
-        nombre: 'gestor',
-        accesos: [
-          {
-            modulo: 'A',
-            privilegio: {
-              ver: true,
-              editar: false,
-            },
-          },
-          {
-            modulo: 'B',
-            privilegio: {
-              ver: true,
-              editar: false,
-            },
-          },
-        ],
-      },
-      {
-        id: 1,
-        nombre: 'coordinador',
-        accesos: [
-          {
-            modulo: 'A',
-            privilegio: {
-              ver: true,
-              editar: false,
-            },
-          },
-          {
-            modulo: 'B',
-            privilegio: {
-              ver: true,
-              editar: false,
-            },
-          },
-        ],
-      },
-    ];
-    service.setPrivilegios(roles);
-    expect(service.getPrivilegios).toEqual(roles);
-  });
+  // xit('setPrivilegios should update LocalStorage key privilegios', () => {
+  //   const roles = [
+  //     {
+  //       id: 1,
+  //       nombre: 'gestor',
+  //       accesos: [
+  //         {
+  //           modulo: 'A',
+  //           privilegio: {
+  //             ver: true,
+  //             editar: false,
+  //           },
+  //         },
+  //         {
+  //           modulo: 'B',
+  //           privilegio: {
+  //             ver: true,
+  //             editar: false,
+  //           },
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: 1,
+  //       nombre: 'coordinador',
+  //       accesos: [
+  //         {
+  //           modulo: 'A',
+  //           privilegio: {
+  //             ver: true,
+  //             editar: false,
+  //           },
+  //         },
+  //         {
+  //           modulo: 'B',
+  //           privilegio: {
+  //             ver: true,
+  //             editar: false,
+  //           },
+  //         },
+  //       ],
+  //     },
+  //   ];
+  //   service.setPrivilegios(roles);
+  //   expect(service.getPrivilegios).toEqual(roles);
+  // });
 
   it('isLogin should return true if token exist', () => {
     localStorage.setItem('otec_token', 'testToken');
@@ -114,40 +114,40 @@ describe('AuthService', () => {
     expect(service.isLogin()).toEqual(false);
   });
 
-  it('should return a observable<AuthLoginResponse>', () => {
-    const user = 'dummyuser';
-    const password = 'dummypassword';
-    const dummyLoginResponse = {
-      data: {
-        token: 'token0xafgfgfgtoken',
-        roles: [
-          {
-            id: 1,
-            nombre: 'gestor',
-            accesos: [
-              { modulo: 'A', privilegio: { ver: true, editar: false } },
-              { modulo: 'B', privilegio: { ver: true, editar: false } },
-            ],
-          },
-          {
-            id: 1,
-            nombre: 'coordinador',
-            accesos: [
-              { modulo: 'A', privilegio: { ver: true, editar: false } },
-              { modulo: 'B', privilegio: { ver: true, editar: false } },
-            ],
-          },
-        ],
-      },
-      status: { responseCode: 0, description: 'OK' },
-    };
-    service.auth(user, password).subscribe((response) => {
-      expect(response).toEqual(dummyLoginResponse);
-    });
-    const req = httpMock.expectOne('http://localhost:8021/Test/OTEC/login');
-    expect(req.request.method).toBe('POST');
-    req.flush(dummyLoginResponse);
-  });
+  // it('should return a observable<AuthLoginResponse>', () => {
+  //   const user = 'dummyuser';
+  //   const password = 'dummypassword';
+  //   const dummyLoginResponse = {
+  //     data: {
+  //       token: 'token0xafgfgfgtoken',
+  //       roles: [
+  //         {
+  //           id: 1,
+  //           nombre: 'gestor',
+  //           accesos: [
+  //             { modulo: 'A', privilegio: { ver: true, editar: false } },
+  //             { modulo: 'B', privilegio: { ver: true, editar: false } },
+  //           ],
+  //         },
+  //         {
+  //           id: 1,
+  //           nombre: 'coordinador',
+  //           accesos: [
+  //             { modulo: 'A', privilegio: { ver: true, editar: false } },
+  //             { modulo: 'B', privilegio: { ver: true, editar: false } },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //     status: { responseCode: 0, description: 'OK' },
+  //   };
+  //   service.auth(user, password).subscribe((response) => {
+  //     expect(response).toEqual(dummyLoginResponse);
+  //   });
+  //   const req = httpMock.expectOne('http://localhost:8021/Test/OTEC/login');
+  //   expect(req.request.method).toBe('POST');
+  //   req.flush(dummyLoginResponse);
+  // });
 
   xit('should logout', () => {});
 });

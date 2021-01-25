@@ -45,12 +45,21 @@ export class LoginComponent implements OnInit {
   submit(): void {
     if (this.valid) {
       console.log(this.values);
+      // this.authService
+      //   .auth(this.values.username, this.values.password)
+      //   .subscribe((response) => {
+      //     console.log(response);
+      //     this.authService.setToken(response.data.token);
+      //     this.authService.setPrivilegios(response.data.roles_modules);
+      //     this.router.navigate(['/dashboard']);
+      //   });
       this.authService
-        .auth(this.values.username, this.values.password)
+        .authmock(this.values.username)
         .subscribe((response) => {
           console.log(response);
           this.authService.setToken(response.data.token);
-          this.authService.setPrivilegios(response.data.roles);
+          this.authService.setPrivilegios(response.data.roles_modules);
+          this.authService.setNombre(response.data.nombre_usuario)
           this.router.navigate(['/dashboard']);
         });
     }

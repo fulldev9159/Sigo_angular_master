@@ -10,24 +10,26 @@ export interface AuthLoginResponse {
 
 export interface DataSectionResponse {
   token: string;
-  roles: RolesSectionResponse[];
+  nombre_usuario:string;
+  roles_modules: RolesSectionResponse[];
 }
 
 export interface RolesSectionResponse {
   id: number;
   nombre: string;
-  accesos: ModuloSectionResponse[];
+  modulos: ModuloSectionResponse[];
 }
 
 export interface ModuloSectionResponse {
-  modulo: string;
-  privilegio: PrivilegiosSectionResponse;
+  id:number,
+  nombre: string;
+  // privilegio: PrivilegiosSectionResponse;
 }
 
-export interface PrivilegiosSectionResponse {
-  ver: boolean;
-  editar: boolean;
-}
+// export interface PrivilegiosSectionResponse {
+//   ver: boolean;
+//   editar: boolean;
+// }
 export interface StatusSectionResponse {
   responseCode: number;
   description: string;

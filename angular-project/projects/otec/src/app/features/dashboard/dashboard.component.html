@@ -1,2 +1,23 @@
-<p>dashboard works!</p>
-<button class="ui grey button" (click)="logout()">Cerrar session</button>
+<nav>
+    <div class="icon">
+        <!-- <div class="container-logo-movistar desktop"> -->
+            <img src="../../../assets/images/logo-movistar.png" alt="cover" />
+          <!-- </div> -->
+      
+          <div class="title-otec">otec</div>
+    </div>
+    <div class="menu">
+        <ul>
+            <li *ngFor='let item of Menu'>
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    <div class="section-usuario">
+        <span class="usuario">{{nombre_usuario}}</span>
+        <span class="rol"><strong>{{rol}}</strong></span>
+        <button class="mini ui grey button" (click)="logout()">Cerrar session</button>
+    </div>
+</nav>
+
+
