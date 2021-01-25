@@ -10,7 +10,7 @@ export interface AuthLoginResponse {
 
 export interface DataSectionResponse {
   token: string;
-  nombre_usuario:string;
+  nombre_usuario: string;
   roles_modules: RolesSectionResponse[];
 }
 
@@ -21,7 +21,7 @@ export interface RolesSectionResponse {
 }
 
 export interface ModuloSectionResponse {
-  id:number,
+  id: number;
   nombre: string;
   // privilegio: PrivilegiosSectionResponse;
 }

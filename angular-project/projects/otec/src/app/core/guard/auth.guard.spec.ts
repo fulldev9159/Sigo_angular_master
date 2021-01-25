@@ -7,7 +7,6 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
-
 describe('AuthGuard', () => {
   let guard: AuthGuard;
   let authService: AuthService;
@@ -35,6 +34,11 @@ describe('AuthGuard', () => {
       setPrivilegios: () => null,
       getPrivilegios: () => [],
       deleteToken: () => null,
+      getMenu: () => [],
+      authmock: () => of(),
+      setNombre: () => null,
+      getNombre: () => '',
+      getRol: () => '',
     };
     router = TestBed.inject(Router);
     guard = new AuthGuard(authService, router);
@@ -51,6 +55,11 @@ describe('AuthGuard', () => {
       setPrivilegios: () => null,
       getPrivilegios: () => [],
       deleteToken: () => null,
+      getMenu: () => [],
+      authmock: () => of(),
+      setNombre: () => null,
+      getNombre: () => '',
+      getRol: () => '',
     };
     router = TestBed.inject(Router);
     guard = new AuthGuard(authService, router);

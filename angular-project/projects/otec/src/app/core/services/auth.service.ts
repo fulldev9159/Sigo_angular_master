@@ -34,7 +34,8 @@ export class AuthService {
 
   authmock(user: string): Observable<LoginModel.AuthLoginResponse> {
     const arrayMock: { [key: string]: LoginModel.AuthLoginResponse } = {};
-    arrayMock['jcastill'] = {
+    const userlocal = 'jcastill';
+    arrayMock[userlocal] = {
       data: {
         token: '0xestasdad',
         nombre_usuario: 'JESSICA LORENA CASTILLO GONZÁLEZ',
@@ -61,7 +62,8 @@ export class AuthService {
       },
     };
 
-    arrayMock['carloscj'] = {
+    const userlocal2 = 'carloscj';
+    arrayMock[userlocal2] = {
       data: {
         token: '0xestasdad',
         nombre_usuario: 'Carlos Alberto Campos Jaraquemada',
@@ -73,7 +75,7 @@ export class AuthService {
               {
                 id: 1,
                 nombre: 'OT',
-              }
+              },
             ],
           },
         ],
@@ -84,7 +86,8 @@ export class AuthService {
       },
     };
 
-    arrayMock['erickuc'] = {
+    const userlocal3 = 'erickuc';
+    arrayMock[userlocal3] = {
       data: {
         token: '0xestasdad',
         nombre_usuario: 'Erick Urrutia Correa',
@@ -96,7 +99,7 @@ export class AuthService {
               {
                 id: 1,
                 nombre: 'OT',
-              }
+              },
             ],
           },
         ],
@@ -107,7 +110,8 @@ export class AuthService {
       },
     };
 
-    arrayMock['jaimecc'] = {
+    const userlocal4 = 'jaimecc';
+    arrayMock[userlocal4] = {
       data: {
         token: '0xestasdad',
         nombre_usuario: 'Jaime Contreras Cortes',
@@ -119,7 +123,7 @@ export class AuthService {
               {
                 id: 1,
                 nombre: 'OT',
-              }
+              },
             ],
           },
         ],
@@ -130,7 +134,8 @@ export class AuthService {
       },
     };
 
-    arrayMock['admin'] = {
+    const userlocal5 = 'admin';
+    arrayMock[userlocal5] = {
       data: {
         token: '0xestasdad',
         nombre_usuario: 'Admin',
@@ -165,7 +170,8 @@ export class AuthService {
       },
     };
 
-    arrayMock['carlosvb'] = {
+    const userlocal6 = 'carlosvb';
+    arrayMock[userlocal6] = {
       data: {
         token: '0xestasdad',
         nombre_usuario: 'Carlos Antonio Valdivia Bustamante',
@@ -177,7 +183,7 @@ export class AuthService {
               {
                 id: 3,
                 nombre: 'Reportería',
-              }
+              },
             ],
           },
         ],
@@ -188,7 +194,7 @@ export class AuthService {
       },
     };
 
-    return of(arrayMock[user])
+    return of(arrayMock[user]);
   }
 
   auth(
@@ -220,32 +226,43 @@ export class AuthService {
     return JSON.parse(privilegios as string);
   }
 
-  setNombre(nombre:string): void {
+  setNombre(nombre: string): void {
     localStorage.setItem('nombre_usuario', nombre);
   }
 
-  getNombre():string{
-    return localStorage.getItem('nombre_usuario') as string
+  getNombre(): string {
+    return localStorage.getItem('nombre_usuario') as string;
   }
 
-  getMenu(rol:string):string[]{
-    const MenuRol:{[key:string]:Array<string>}={}
+  getMenu(rol: string): string[] {
+    const MenuRol: { [key: string]: Array<string> } = {};
+    const rollocal = 'Gestor';
+    MenuRol[rollocal] = ['OT', 'Cubicación'];
+    const rollocal2 = 'Coordinador';
+    MenuRol[rollocal2] = ['OT'];
+    const rollocal3 = 'Trabajador';
+    MenuRol[rollocal3] = ['OT'];
+    const rollocal4 = 'Administrador de Contrato';
+    MenuRol[rollocal4] = ['OT'];
+    const rollocal5 = 'Administrador OTEC';
+    MenuRol[rollocal5] = ['OT', 'Cubicación', 'Reportería', 'Administración'];
+    const rollocal6 = 'Reporteria';
+    MenuRol[rollocal6] = ['Reportería'];
 
-    MenuRol["Gestor"]=['OT','Cubicación'];
-    MenuRol["Coordinador"]=['OT'];
-    MenuRol["Trabajador"]=['OT'];
-    MenuRol["Administrador de Contrato"]=['OT']
-    MenuRol["Administrador OTEC"]=['OT','Cubicación','Reportería','Administración']
-    MenuRol["Reporteria"]=['Reportería']
-
-    return MenuRol[rol]
-
+    return MenuRol[rol];
   }
 
-  getRol():string{
-    const local=localStorage.getItem('privilegios_user');
-    const json:LoginModel.RolesSectionResponse=JSON.parse(local as string)
-       
-    return json[0].nombre
+  getRol(): string {
+    const local = localStorage.getItem('privilegios_user');
+    const json: LoginModel.RolesSectionResponse = JSON.parse(local as string);
+    // console.log(json.hasOwnProperty(0))
+    let response = '';
+    if (json !== null) {
+      if (json.hasOwnProperty(0)) {
+        response = json[0].nombre;
+      }
+    }
+
+    return response;
   }
 }

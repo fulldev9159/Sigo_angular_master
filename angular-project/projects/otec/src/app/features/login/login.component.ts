@@ -53,15 +53,13 @@ export class LoginComponent implements OnInit {
       //     this.authService.setPrivilegios(response.data.roles_modules);
       //     this.router.navigate(['/dashboard']);
       //   });
-      this.authService
-        .authmock(this.values.username)
-        .subscribe((response) => {
-          console.log(response);
-          this.authService.setToken(response.data.token);
-          this.authService.setPrivilegios(response.data.roles_modules);
-          this.authService.setNombre(response.data.nombre_usuario)
-          this.router.navigate(['/dashboard']);
-        });
+      this.authService.authmock(this.values.username).subscribe((response) => {
+        console.log(response);
+        this.authService.setToken(response.data.token);
+        this.authService.setPrivilegios(response.data.roles_modules);
+        this.authService.setNombre(response.data.nombre_usuario);
+        this.router.navigate(['/dashboard']);
+      });
     }
   }
 }
