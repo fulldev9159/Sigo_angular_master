@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainLayoutComponent } from './main-layout.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
@@ -8,9 +9,10 @@ describe('MainLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainLayoutComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule],
+      declarations: [MainLayoutComponent],
+      providers: [{ provide: 'environment', useValue: {} }],
+    }).compileComponents();
   });
 
   beforeEach(() => {

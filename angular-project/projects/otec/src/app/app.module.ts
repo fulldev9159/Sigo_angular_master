@@ -1,19 +1,13 @@
-
 import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { CoreModule } from '@core';
+import { environment } from '@environment';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {CoreModule} from './core/core.module'
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    CoreModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [CoreModule.forRoot(environment), AppRoutingModule],
+  providers: [{ provide: 'environment', useValue: environment }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

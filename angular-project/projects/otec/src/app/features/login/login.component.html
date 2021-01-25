@@ -1,0 +1,57 @@
+<div class="container-desktop">
+  <div class="logo-section">
+    <div class="container-logo-movistar desktop">
+      <img src="../../../assets/images/logo-movistar.png" alt="cover" />
+    </div>
+
+    <div class="title-otec">otec</div>
+
+    <div class="container-cover desktop">
+      <img src="../../../assets/images/img-cover.png" alt="logo-movistar" />
+    </div>
+  </div>
+
+  <div class="login-form-section desktop">
+    <div class="title-bienvenida">Te damos la Bienvenida</div>
+    <div class="subtitle"><span>Login</span> your account</div>
+    <form [formGroup]="form">
+      <div class="form-section desktop">
+        <p class="form-text desktop">Usuario</p>
+        <input type="text" [formControlName]="'username'"/>
+        <p class="form-text desktop">Password</p>
+        <input type="password" [formControlName]="'password'" />
+      </div>
+      <div class="button-login desktop">
+        <button class="ui blue button" (click)="submit()">Ingresar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container-mobile">
+  <div class="container-cover mobile">
+    <img src="../../../assets/images/img-cover.png" alt="cover" />
+  </div>
+
+  <div class="login-form-section mobile">
+    <div class="container-logo-movistar mobile">
+      <img src="../../../assets/images/logo-movistar.png" alt="logo-movistar" />
+    </div>
+    <div class="title-otec mobile">otec</div>
+    <form [formGroup]="form">
+      <div class="form-section mobile">
+        <p class="form-text mobile">
+          Usuario
+        </p>
+        <input type="text"  [formControlName]="'username'"/>
+        <p class="form-text mobile">
+          Contraseña
+        </p>
+        <input type="password"  [formControlName]="'password'"/>
+      </div>
+      <div class="button-login mobile">
+        <button class="ui blue button" (click)="submit()">Ingresar</button>
+      </div>
+    </form>
+  </div>
+</div>
