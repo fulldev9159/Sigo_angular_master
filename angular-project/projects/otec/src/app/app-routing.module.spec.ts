@@ -2,9 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Location } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import {
-  HttpClientTestingModule,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { AppComponent } from './app.component';
 import { routes } from './app-routing.module';
@@ -31,7 +29,7 @@ describe('AppRoutingModule', () => {
   });
 
   it('navegate to "" redirects you to /login', (done) => {
-    localStorage.clear()
+    localStorage.clear();
     router.navigate(['']).then(() => {
       expect(location.path()).toBe('/login');
       // Llamada asyncronica que ejecuta el expect una vez terminado el router.navigate
@@ -40,7 +38,7 @@ describe('AppRoutingModule', () => {
   });
 
   it('navegate to "login" redirects you to /login', (done) => {
-    localStorage.clear()
+    localStorage.clear();
     router.navigate(['/login']).then(() => {
       expect(location.path()).toBe('/login');
       done();
@@ -51,7 +49,7 @@ describe('AppRoutingModule', () => {
     localStorage.setItem('otec_token', 'testToken');
     router.navigate(['/dashboard']).then(() => {
       expect(location.path()).toBe('/dashboard');
-      done(); //Llamada asyncronica que ejecuta el expect una vez terminado el router.navigate
+      done(); // Llamada asyncronica que ejecuta el expect una vez terminado el router.navigate
     });
   });
 });
