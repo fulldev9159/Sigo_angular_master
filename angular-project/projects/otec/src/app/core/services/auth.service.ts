@@ -238,7 +238,7 @@ export class AuthService {
     const json: LoginModel.RolesSectionResponse = JSON.parse(local as string);
     let response = '';
     if (json !== null) {
-        response = json[0].nombre;
+      response = json[0].nombre;
     }
     return response;
   }
@@ -246,12 +246,12 @@ export class AuthService {
   getMenu(): string[] {
     const local = localStorage.getItem('privilegios_user');
     const json: LoginModel.RolesSectionResponse = JSON.parse(local as string);
-    let response :string[]=[]
+    const response: string[] = [];
     if (json !== null) {
-        const mod:LoginModel.ModuloSectionResponse[] = json[0].modulos;
-        mod.forEach(element => {
-          response.push(element.nombre)
-        });
+      const mod: LoginModel.ModuloSectionResponse[] = json[0].modulos;
+      mod.forEach((element) => {
+        response.push(element.nombre);
+      });
     }
     return response;
   }
