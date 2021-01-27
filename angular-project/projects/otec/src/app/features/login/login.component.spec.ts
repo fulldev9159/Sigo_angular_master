@@ -30,4 +30,14 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  xit('get values() should return values of the form ');
+  xit('get valid() should return true for a valid form ');
+  xit('get valid() should return false for a valid form ');
+  xit('form invalid when empty');
+  xit('username field validity');
+  xit('password field validity');
+  xit('show message when username is empty');
+  xit('show username when username is empty');
+  xit('submitting a form emits a user');
 });

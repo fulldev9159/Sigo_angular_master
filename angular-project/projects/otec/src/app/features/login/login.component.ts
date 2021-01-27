@@ -8,7 +8,7 @@ import {
 import * as loginModel from './login.model';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
-declare let Snackbar: any;
+declare let Snackbar: object | any;
 @Component({
   selector: 'otec-login',
   templateUrl: './login.component.html',
@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.showMessage('No fue posible iniciar sesión', 'error');
+  }
 
   get values(): loginModel.Credential {
     const data = this.form.getRawValue();
@@ -44,16 +46,35 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     if (this.valid) {
-      console.log(this.values);
-      this.authService.authmock(this.values.username).subscribe((response) => {
-        console.log(response);
-        this.authService.setToken(response.data.token);
-        this.authService.setPrivilegios(response.data.roles_modules);
-        this.authService.setNombre(response.data.nombre_usuario);
-        this.router.navigate(['/dashboard']);
-      });
-    }else{
-      
+      this.authService.authmock(this.values.username).subscribe(
+        (response) => {
+          console.log(response);
+          this.authService.setToken(response.data.token);
+          this.authService.setPrivilegios(response.data.roles_modules);
+          this.authService.setNombre(response.data.nombre_usuario);
+          this.router.navigate(['/dashboard']);
+        },
+        (err) => {
+          this.showMessage('No fue posible iniciar sesión', 'error');
+          console.error(err.message);
+        }
+      );
     }
+  }
+
+  showMessage(message: string, type: string): void {
+    Snackbar.show({
+      pos: 'bottom-right',
+      text: message,
+      backgroundColor: '#212121',
+      actionText: 'OK',
+      actionTextColor: ((color) => {
+        if (color === 'error') {
+          return '#DB2828';
+        }
+        return '#2185D0';
+      })(type),
+      duration: 5000,
+    });
   }
 }
