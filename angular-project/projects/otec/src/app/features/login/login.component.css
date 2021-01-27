@@ -227,6 +227,13 @@ input:valid {
   }
 }
 
+.error {
+  font-size: 10px;
+  color: red;
+  font-weight: 700;
+  margin-left: -5px;
+}
+
 /* .container-desktop .logo-movistar{
     background-repeat: no-repeat;
     background-size:contain;

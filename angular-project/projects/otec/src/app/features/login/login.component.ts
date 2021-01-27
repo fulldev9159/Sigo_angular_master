@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import * as loginModel from './login.model';
 import { AuthService } from '../../core/services/auth.service';
-import { ThrowStmt } from '@angular/compiler';
 import { Router } from '@angular/router';
+declare let Snackbar: any;
 @Component({
   selector: 'otec-login',
   templateUrl: './login.component.html',
@@ -45,14 +45,6 @@ export class LoginComponent implements OnInit {
   submit(): void {
     if (this.valid) {
       console.log(this.values);
-      // this.authService
-      //   .auth(this.values.username, this.values.password)
-      //   .subscribe((response) => {
-      //     console.log(response);
-      //     this.authService.setToken(response.data.token);
-      //     this.authService.setPrivilegios(response.data.roles_modules);
-      //     this.router.navigate(['/dashboard']);
-      //   });
       this.authService.authmock(this.values.username).subscribe((response) => {
         console.log(response);
         this.authService.setToken(response.data.token);
@@ -60,6 +52,8 @@ export class LoginComponent implements OnInit {
         this.authService.setNombre(response.data.nombre_usuario);
         this.router.navigate(['/dashboard']);
       });
+    }else{
+      
     }
   }
 }

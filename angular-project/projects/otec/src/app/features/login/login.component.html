@@ -16,8 +16,24 @@
     <div class="subtitle"><span>Login</span> your account</div>
     <form [formGroup]="form">
       <div class="form-section desktop">
+        <div class="error"
+          *ngIf="!this.form.get('username').valid && this.form.get('username').touched && this.form.get('username').hasError('required')">
+          Debe ingresar un nombre de usuario.
+        </div>
+        <div class="error"
+          *ngIf="!this.form.get('username').valid && this.form.get('username').touched && this.form.get('username').hasError('maxlength')">
+          Nombre de usuario no debe superar los 50 caracteres
+        </div>
         <p class="form-text desktop">Usuario</p>
-        <input type="text" [formControlName]="'username'"/>
+        <input type="text" [formControlName]="'username'" name="username" />
+        <div class="error"
+          *ngIf="!this.form.get('password').valid && this.form.get('password').touched && this.form.get('password').hasError('required')">
+          Debe ingresar password de usuario.
+        </div>
+        <div class="error"
+          *ngIf="!this.form.get('password').valid && this.form.get('password').touched && this.form.get('password').hasError('maxlength')">
+          Password no debe superar los 100 caracteres
+        </div>
         <p class="form-text desktop">Password</p>
         <input type="password" [formControlName]="'password'" />
       </div>
@@ -43,11 +59,11 @@
         <p class="form-text mobile">
           Usuario
         </p>
-        <input type="text"  [formControlName]="'username'"/>
+        <input type="text" [formControlName]="'username'" />
         <p class="form-text mobile">
           Contraseña
         </p>
-        <input type="password"  [formControlName]="'password'"/>
+        <input type="password" [formControlName]="'password'" />
       </div>
       <div class="button-login mobile">
         <button class="ui blue button" (click)="submit()">Ingresar</button>

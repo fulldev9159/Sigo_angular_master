@@ -27,9 +27,12 @@
               "projects/otec/src/styles.css",
               "node_modules/semantic-ui-css/components/button.min.css",
               "node_modules/semantic-ui-css/components/input.min.css",
-              "node_modules/semantic-ui-css/components/icon.min.css"
+              "node_modules/semantic-ui-css/components/icon.min.css",
+              "node_modules/node-snackbar/dist/snackbar.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/node-snackbar/dist/snackbar.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -91,9 +94,15 @@
               "projects/otec/src/assets"
             ],
             "styles": [
-              "projects/otec/src/styles.css"
+              "projects/otec/src/styles.css",
+              "node_modules/semantic-ui-css/components/button.min.css",
+              "node_modules/semantic-ui-css/components/input.min.css",
+              "node_modules/semantic-ui-css/components/icon.min.css",
+              "node_modules/node-snackbar/dist/snackbar.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/node-snackbar/dist/snackbar.min.js"
+            ]
           }
         },
         "lint": {
