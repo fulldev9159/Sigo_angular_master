@@ -15,23 +15,6 @@ export class AuthService {
     this.apiBase = environment.api || 'http://localhost:8021';
   }
 
-  getToken(): string | null {
-    console.log(localStorage.getItem('otec_token'));
-    return localStorage.getItem('otec_token');
-  }
-
-  deleteToken(): void {
-    localStorage.clear();
-  }
-
-  isLogin(): boolean {
-    console.log(localStorage.getItem('otec_token'));
-    if (localStorage.getItem('otec_token') === null) {
-      return false;
-    }
-    return true;
-  }
-
   authmock(user: string): Observable<LoginModel.AuthLoginResponse> {
     const arrayMock: { [key: string]: LoginModel.AuthLoginResponse } = {};
     const userlocal = 'jcastill';
@@ -197,6 +180,26 @@ export class AuthService {
     return of(arrayMock[user]);
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('otec_token');
+  }
+
+  setToken(token: string): void {
+    localStorage.setItem('otec_token', token);
+  }
+
+  deleteToken(): void {
+    localStorage.clear();
+  }
+
+  isLogin(): boolean {
+    console.log(localStorage.getItem('otec_token'));
+    if (localStorage.getItem('otec_token') === null) {
+      return false;
+    }
+    return true;
+  }
+
   auth(
     user: string,
     password: string
@@ -210,10 +213,6 @@ export class AuthService {
       `${this.apiBase}/Test/OTEC/login`,
       JSON.stringify(data)
     );
-  }
-
-  setToken(token: string): void {
-    localStorage.setItem('otec_token', token);
   }
 
   setPrivilegios(privilegios: LoginModel.RolesSectionResponse[]): void {
@@ -234,35 +233,26 @@ export class AuthService {
     return localStorage.getItem('nombre_usuario') as string;
   }
 
-  getMenu(rol: string): string[] {
-    const MenuRol: { [key: string]: Array<string> } = {};
-    const rollocal = 'Gestor';
-    MenuRol[rollocal] = ['OT', 'Cubicación'];
-    const rollocal2 = 'Coordinador';
-    MenuRol[rollocal2] = ['OT'];
-    const rollocal3 = 'Trabajador';
-    MenuRol[rollocal3] = ['OT'];
-    const rollocal4 = 'Administrador de Contrato';
-    MenuRol[rollocal4] = ['OT'];
-    const rollocal5 = 'Administrador OTEC';
-    MenuRol[rollocal5] = ['OT', 'Cubicación', 'Reportería', 'Administración'];
-    const rollocal6 = 'Reporteria';
-    MenuRol[rollocal6] = ['Reportería'];
-
-    return MenuRol[rol];
-  }
-
   getRol(): string {
     const local = localStorage.getItem('privilegios_user');
     const json: LoginModel.RolesSectionResponse = JSON.parse(local as string);
-    // console.log(json.hasOwnProperty(0))
     let response = '';
     if (json !== null) {
-      if (json.hasOwnProperty(0)) {
         response = json[0].nombre;
-      }
     }
+    return response;
+  }
 
+  getMenu(): string[] {
+    const local = localStorage.getItem('privilegios_user');
+    const json: LoginModel.RolesSectionResponse = JSON.parse(local as string);
+    let response :string[]=[]
+    if (json !== null) {
+        const mod:LoginModel.ModuloSectionResponse[] = json[0].modulos;
+        mod.forEach(element => {
+          response.push(element.nombre)
+        });
+    }
     return response;
   }
 }

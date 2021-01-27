@@ -48,6 +48,11 @@ describe('AuthService', () => {
     httpMock.verify();
   });
 
+  it('should be created', () => {
+    const service: AuthService = TestBed.inject(AuthService);
+    expect(service).toBeTruthy();
+  });
+
   it('getToken should return token', () => {
     localStorage.setItem('otec_token', 'testToken');
     expect(service.getToken()).toEqual('testToken');
@@ -58,52 +63,10 @@ describe('AuthService', () => {
     expect(service.getToken()).toEqual('testToken2');
   });
 
-  // xit('setPrivilegios should update LocalStorage key privilegios', () => {
-  //   const roles = [
-  //     {
-  //       id: 1,
-  //       nombre: 'gestor',
-  //       accesos: [
-  //         {
-  //           modulo: 'A',
-  //           privilegio: {
-  //             ver: true,
-  //             editar: false,
-  //           },
-  //         },
-  //         {
-  //           modulo: 'B',
-  //           privilegio: {
-  //             ver: true,
-  //             editar: false,
-  //           },
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 1,
-  //       nombre: 'coordinador',
-  //       accesos: [
-  //         {
-  //           modulo: 'A',
-  //           privilegio: {
-  //             ver: true,
-  //             editar: false,
-  //           },
-  //         },
-  //         {
-  //           modulo: 'B',
-  //           privilegio: {
-  //             ver: true,
-  //             editar: false,
-  //           },
-  //         },
-  //       ],
-  //     },
-  //   ];
-  //   service.setPrivilegios(roles);
-  //   expect(service.getPrivilegios).toEqual(roles);
-  // });
+  it('deleteToken should clear localStorage', () => {
+    service.deleteToken();
+    expect(service.getToken()).toEqual(null);
+  });
 
   it('isLogin should return true if token exist', () => {
     localStorage.setItem('otec_token', 'testToken');
@@ -114,40 +77,141 @@ describe('AuthService', () => {
     expect(service.isLogin()).toEqual(false);
   });
 
-  // it('should return a observable<AuthLoginResponse>', () => {
-  //   const user = 'dummyuser';
-  //   const password = 'dummypassword';
-  //   const dummyLoginResponse = {
-  //     data: {
-  //       token: 'token0xafgfgfgtoken',
-  //       roles: [
-  //         {
-  //           id: 1,
-  //           nombre: 'gestor',
-  //           accesos: [
-  //             { modulo: 'A', privilegio: { ver: true, editar: false } },
-  //             { modulo: 'B', privilegio: { ver: true, editar: false } },
-  //           ],
-  //         },
-  //         {
-  //           id: 1,
-  //           nombre: 'coordinador',
-  //           accesos: [
-  //             { modulo: 'A', privilegio: { ver: true, editar: false } },
-  //             { modulo: 'B', privilegio: { ver: true, editar: false } },
-  //           ],
-  //         },
-  //       ],
-  //     },
-  //     status: { responseCode: 0, description: 'OK' },
-  //   };
-  //   service.auth(user, password).subscribe((response) => {
-  //     expect(response).toEqual(dummyLoginResponse);
-  //   });
-  //   const req = httpMock.expectOne('http://localhost:8021/Test/OTEC/login');
-  //   expect(req.request.method).toBe('POST');
-  //   req.flush(dummyLoginResponse);
-  // });
+  it('should return a observable<AuthLoginResponse>', () => {
+    const user = 'dummyuser';
+    const password = 'dummypassword';
+    const dummyLoginResponse = {
+      data: {
+        token: '0xestasdad',
+        nombre_usuario: 'JESSICA LORENA CASTILLO GONZÁLEZ',
+        roles_modules: [
+          {
+            id: 2,
+            nombre: 'Gestor',
+            modulos: [
+              {
+                id: 1,
+                nombre: 'OT',
+              },
+              {
+                id: 2,
+                nombre: 'Cubicacion',
+              },
+            ],
+          },
+        ],
+      },
+      status: {
+        responseCode: 0,
+        description: 'Consulta OK',
+      },
+    };
+    service.auth(user, password).subscribe((response) => {
+      expect(response).toEqual(dummyLoginResponse);
+    });
+    const req = httpMock.expectOne('http://localhost:8021/Test/OTEC/login');
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyLoginResponse);
+  });
+
+  it('setPrivilegios should update LocalStorage key privilegios', () => {
+    const roles = [
+      {
+        id: 2,
+        nombre: 'Gestor',
+        modulos: [
+          {
+            id: 1,
+            nombre: 'OT',
+          },
+          {
+            id: 2,
+            nombre: 'Cubicacion',
+          },
+        ],
+      },
+    ];
+    service.setPrivilegios(roles);
+
+    expect(service.getPrivilegios()).toEqual(roles);
+  });
+
+  it('getPrivilegios should return privilegios', () => {
+    const roles = [
+      {
+        id: 2,
+        nombre: 'Gestor',
+        modulos: [
+          {
+            id: 1,
+            nombre: 'OT',
+          },
+          {
+            id: 2,
+            nombre: 'Cubicacion',
+          },
+        ],
+      },
+    ];
+    const privilegiosJSON = JSON.stringify(roles);
+    localStorage.setItem('privilegios_user', privilegiosJSON);
+    expect(service.getPrivilegios()).toEqual(roles);
+  });
+
+  it('setNombre should update LocalStorage key nombre_usuario', () => {
+    service.setNombre('Jorge Retamal Aburto');
+    expect(service.getNombre()).toEqual('Jorge Retamal Aburto');
+  });
+
+  it('getNombre should return Nombre', () => {
+    localStorage.setItem('nombre_usuario', 'Jorge Retamal Aburto');
+    expect(service.getNombre()).toEqual('Jorge Retamal Aburto');
+  });
+
+  it('getRol should return rol', () => {
+    const roles = [
+      {
+        id: 2,
+        nombre: 'Gestor',
+        modulos: [
+          {
+            id: 1,
+            nombre: 'OT',
+          },
+          {
+            id: 2,
+            nombre: 'Cubicacion',
+          },
+        ],
+      },
+    ];
+    const privilegiosJSON = JSON.stringify(roles);
+    localStorage.setItem('privilegios_user', privilegiosJSON);
+    expect(service.getRol()).toEqual('Gestor');
+  });
+
+  it('getMenu should return ArrayMenu', () => {
+    const Menu = ['OT', 'Cubicacion'];
+    const roles = [
+      {
+        id: 2,
+        nombre: 'Gestor',
+        modulos: [
+          {
+            id: 1,
+            nombre: 'OT',
+          },
+          {
+            id: 2,
+            nombre: 'Cubicacion',
+          },
+        ],
+      },
+    ];
+    const privilegiosJSON = JSON.stringify(roles);
+    localStorage.setItem('privilegios_user', privilegiosJSON);
+    expect(service.getMenu()).toEqual(Menu);
+  });
 
   xit('should logout', () => {});
 });

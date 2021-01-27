@@ -47,4 +47,4 @@ Thumbs.db
 
 **/*.swp
 
-./angular-project/debug.log
+/angular-project/debug.log
