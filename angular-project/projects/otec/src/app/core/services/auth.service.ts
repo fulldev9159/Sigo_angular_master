@@ -216,7 +216,7 @@ export class AuthService {
       // Password: password,
     };
     return (this.httpClient as HttpClient).post<LoginModel.AuthLoginResponse>(
-      `${this.apiBase}/OTEC/login`,
+      `${this.apiBase}d/login`,
       JSON.stringify(data)
     );
   }
