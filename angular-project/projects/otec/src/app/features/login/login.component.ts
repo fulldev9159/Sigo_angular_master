@@ -46,19 +46,23 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     if (this.valid) {
-      this.authService.authmock(this.values.username).subscribe(
-        (response) => {
-          console.log(response);
-          this.authService.setToken(response.data.token);
-          this.authService.setPrivilegios(response.data.roles_modules);
-          this.authService.setNombre(response.data.nombre_usuario);
-          this.router.navigate(['/dashboard']);
-        },
-        (err) => {
-          this.showMessage('No fue posible iniciar sesión', 'error');
-          console.error(err.message);
-        }
-      );
+      this.authService
+        .auth(this.values.username, this.values.password)
+        .subscribe(
+          (response) => {
+            console.log('response');
+            console.log(response);
+            // console.log(Object.keys(response.data.roles_modules))
+            this.authService.setToken(response.data.token);
+            this.authService.setPrivilegios(response.data.roles_modulos);
+            this.authService.setNombre(response.data.nombre_usuario);
+            this.router.navigate(['/dashboard']);
+          },
+          (err) => {
+            this.showMessage('No fue posible iniciar sesión', 'error');
+            console.error(err.message);
+          }
+        );
     }
   }
 
