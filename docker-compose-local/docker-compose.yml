@@ -24,8 +24,10 @@ services:
             DB_MAXLIFETIMECONNECTION: 300
             API_SCE_ADDRESS: http://35.192.99.178:2004
         restart: always
-        expose:
-            - 4040
+        ports:
+            - 4040:4040
+        # expose:
+        #     - 4040
         depends_on: 
             - mcl_otec_db     
     mcl_otec_web:
