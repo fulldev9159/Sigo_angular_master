@@ -15,14 +15,19 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    // console.log(this.authService.getRol());
     this.Menu = this.authService.getMenu();
     this.nombreUsuario = this.authService.getNombre();
     this.rol = this.authService.getRol();
   }
 
   logout(): void {
-    this.authService.deleteToken();
-    this.router.navigate(['/login']);
+    this.authService
+      .logOut(this.authService.getUser(), this.authService.getToken() as string)
+      .subscribe((x) => {
+        console.log('response logout');
+        this.authService.deleteToken();
+        this.router.navigate(['/login']);
+        console.log(x);
+      });
   }
 }

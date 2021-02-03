@@ -8,6 +8,12 @@ export interface AuthLoginResponse {
   status: StatusSectionResponse;
 }
 
+export interface LogoutResponse {
+  user: string;
+  token: string;
+  createdat: string;
+  modifiedat: string;
+}
 export interface DataSectionResponse {
   token: string;
   nombre_usuario: string;

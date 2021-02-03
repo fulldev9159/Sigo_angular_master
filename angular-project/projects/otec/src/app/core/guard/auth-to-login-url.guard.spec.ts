@@ -39,6 +39,9 @@ describe('AuthToLoginUrlGuard', () => {
       setNombre: () => null,
       getNombre: () => '',
       getRol: () => '',
+      getUser: () => '',
+      setUser: () => null,
+      logOut: () => of(),
     };
     router = TestBed.inject(Router);
     guard = new AuthToLoginUrlGuard(authService, router);
@@ -63,6 +66,9 @@ describe('AuthToLoginUrlGuard', () => {
       setNombre: () => null,
       getNombre: () => '',
       getRol: () => '',
+      getUser: () => '',
+      setUser: () => null,
+      logOut: () => of(),
     };
     router = TestBed.inject(Router);
     guard = new AuthToLoginUrlGuard(authService, router);

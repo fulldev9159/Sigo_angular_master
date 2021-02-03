@@ -38,6 +38,9 @@ describe('AuthGuard', () => {
       setNombre: () => null,
       getNombre: () => '',
       getRol: () => '',
+      getUser: () => '',
+      setUser: () => null,
+      logOut: () => of(),
     };
     router = TestBed.inject(Router);
     guard = new AuthGuard(authService, router);
@@ -58,6 +61,9 @@ describe('AuthGuard', () => {
       setNombre: () => null,
       getNombre: () => '',
       getRol: () => '',
+      getUser: () => '',
+      setUser: () => null,
+      logOut: () => of(),
     };
     router = TestBed.inject(Router);
     guard = new AuthGuard(authService, router);

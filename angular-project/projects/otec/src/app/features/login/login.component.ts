@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           (response) => {
             console.log('response');
             console.log(response);
-            // console.log(Object.keys(response.data.roles_modules))
+            this.authService.setUser(this.values.username);
             this.authService.setToken(response.data.token);
             this.authService.setPrivilegios(response.data.roles_modulos);
             this.authService.setNombre(response.data.nombre_usuario);
