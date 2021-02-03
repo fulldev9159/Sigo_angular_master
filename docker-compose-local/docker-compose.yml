@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+    # OTEC
+    mcl_otec_db:
+        image: registryv2.zweicom.com:5000/mcl-otec-db:latest
+        restart: always
+        environment:
+            TZ: America/Santiago
+            MYSQL_DATABASE: OTEC
+            MYSQL_ROOT_PASSWORD: pass
+            MYSQL_USER: otec_user
+            MYSQL_PASSWORD: otec_pass
+    mcl_api_otec:
+        image: registryv2.zweicom.com:5000/api-otec:develop
+        environment: 
+            TZ: America/Santiago
+            LOG_LEVEL: INFO
+            SERVICE_PORT: 4040
+            OTEC_DB: root:pass@tcp(mcl_otec_db:3306)/OTEC
+            DB_MAXOPENCONNECTIONS: 10
+            DB_MAXIDLECONNECTIONS: 5
+            DB_PINGINTERVAL: 30
+            DB_MAXLIFETIMECONNECTION: 300
+            API_SCE_ADDRESS: http://35.192.99.178:2004
+        restart: always
+        expose:
+            - 4040
+        depends_on: 
+            - mcl_otec_db     
+    mcl_otec_web:
+        image: registryv2.zweicom.com:5000/mcl-otec-webclient:latest
+        environment:
+            WEBAPI_NAME: "mcl_api_otec"
+            WEBAPI_PORT: "4040"
+        ports: 
+            - 4200:80
+        restart: always
+        depends_on: 
+            - mcl_api_otec
