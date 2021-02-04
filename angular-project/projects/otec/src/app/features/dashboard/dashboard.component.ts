@@ -12,17 +12,25 @@ export class DashboardComponent implements OnInit {
   public nombreUsuario = '';
   public rol = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.Menu = this.authService.getItemStorage('modulos') === null ? [] : (this.authService.getItemStorage('modulos') as string).split(",");
-    this.nombreUsuario = this.authService.getItemStorage('nombreCompleto') as string;
+    this.Menu =
+      this.authService.getItemStorage('modulos') === null
+        ? []
+        : (this.authService.getItemStorage('modulos') as string).split(',');
+    this.nombreUsuario = this.authService.getItemStorage(
+      'nombreCompleto'
+    ) as string;
     this.rol = this.authService.getItemStorage('rol') as string;
   }
 
   logout(): void {
     this.authService
-      .logOut(this.authService.getItemStorage('username') as string, this.authService.getItemStorage('otec_token') as string)
+      .logOut(
+        this.authService.getItemStorage('username') as string,
+        this.authService.getItemStorage('otec_token') as string
+      )
       .subscribe((x) => {
         console.log('response logout');
         this.authService.deleteItemStorage();

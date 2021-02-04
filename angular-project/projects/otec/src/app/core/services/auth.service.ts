@@ -57,30 +57,4 @@ export class AuthService {
     );
   }
 
-  // getRol(): string {
-  //   const local = localStorage.getItem('privilegios_user');
-  //   const json: object = JSON.parse(local as string);
-  //   let response = '';
-  //   if (json !== null) {
-  //     // response = json[0].nombre;
-  //     Object.keys(json).forEach((x) => {
-  //       response = x;
-  //     });
-  //   }
-  //   return response;
-  // }
-
-  // getMenu(): string[] {
-  //   const local = localStorage.getItem('privilegios_user');
-  //   const json: LoginModel.RolesModuleSectionResponse = JSON.parse(
-  //     local as string
-  //   );
-  //   let response: string[] = [];
-  //   if (json !== null) {
-  //     Object.keys(json).forEach((x) => {
-  //       response = Object.keys(json[x].modulos);
-  //     });
-  //   }
-  //   return response;
-  // }
 }

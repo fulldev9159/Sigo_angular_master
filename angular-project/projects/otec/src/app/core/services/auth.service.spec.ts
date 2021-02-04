@@ -59,42 +59,43 @@ describe('AuthService', () => {
   });
 
   it('isLoggedIn should return false if token not exist', () => {
-    localStorage.clear()
+    localStorage.clear();
     expect(service.isLoggedIn()).toEqual(false);
   });
 
-  it('setItemStorage should storage key,value in a localstorage',()=>{
-    service.setItemStorage('testkey','testvalue');
-    expect(service.getItemStorage('testkey')).toEqual('testvalue')
-  })
+  it('setItemStorage should storage key,value in a localstorage', () => {
+    service.setItemStorage('testkey', 'testvalue');
+    expect(service.getItemStorage('testkey')).toEqual('testvalue');
+  });
 
   it('deleteItemStorage should clear localStorage', () => {
-    service.setItemStorage('testkey','testvalue');
+    service.setItemStorage('testkey', 'testvalue');
     service.deleteItemStorage();
     expect(service.getItemStorage('testkey')).toEqual(null);
   });
 
   it('should return user information', () => {
-    const user = 'carloscj', password = 'dummypassword';
+    const user = 'carloscj';
+    const password = 'dummypassword';
     const dummyLoginResponse: LoginModel.AuthLoginResponse = {
       data: {
         token: '01EXND28AQ6ZF4ER4JVMWTB7YV',
         nombre_usuario: 'Carlos Alberto Campos Jaraquemada',
         roles_modulos: {
-          "Trabajador": {
-            "id": 5,
-            "nombre": "Trabajador",
-            "modulos": {
-              "OT": {
-                "nombre": "OT",
-                "privilegio": {
-                  "ver": false,
-                  "editar": false
-                }
-              }
-            }
-          }
-        }
+          Trabajador: {
+            id: 5,
+            nombre: 'Trabajador',
+            modulos: {
+              OT: {
+                nombre: 'OT',
+                privilegio: {
+                  ver: false,
+                  editar: false,
+                },
+              },
+            },
+          },
+        },
       },
       status: {
         responseCode: 0,
@@ -110,12 +111,13 @@ describe('AuthService', () => {
   });
 
   it('should return response for logout', () => {
-    const user = 'carloscj', token = '01EXM8Q1RSB1WGW1WBQ07WB6YA';
+    const user = 'carloscj';
+    const token = '01EXM8Q1RSB1WGW1WBQ07WB6YA';
     const dummyResponse: LoginModel.LogoutResponse = {
-      "user": "jcastill",
-      "token": "01EXM8Q1RSB1WGW1WBQ07WB6YA",
-      "createdat": "",
-      "modifiedat": ""
+      user: 'jcastill',
+      token: '01EXM8Q1RSB1WGW1WBQ07WB6YA',
+      createdat: '',
+      modifiedat: '',
     };
     service.logOut(user, token).subscribe((response) => {
       expect(response).toEqual(dummyResponse);
@@ -124,51 +126,4 @@ describe('AuthService', () => {
     expect(req.request.method).toBe('POST');
     req.flush(dummyResponse);
   });
-
-  // xit('getRol should return rol', () => {
-  //   const roles = [
-  //     {
-  //       id: 2,
-  //       nombre: 'Gestor',
-  //       modulos: [
-  //         {
-  //           id: 1,
-  //           nombre: 'OT',
-  //         },
-  //         {
-  //           id: 2,
-  //           nombre: 'Cubicacion',
-  //         },
-  //       ],
-  //     },
-  //   ];
-  //   const privilegiosJSON = JSON.stringify(roles);
-  //   localStorage.setItem('privilegios_user', privilegiosJSON);
-  //   expect(service.getRol()).toEqual('Gestor');
-  // });
-
-  // xit('getMenu should return ArrayMenu', () => {
-  //   const Menu = ['OT', 'Cubicacion'];
-  //   const roles = [
-  //     {
-  //       id: 2,
-  //       nombre: 'Gestor',
-  //       modulos: [
-  //         {
-  //           id: 1,
-  //           nombre: 'OT',
-  //         },
-  //         {
-  //           id: 2,
-  //           nombre: 'Cubicacion',
-  //         },
-  //       ],
-  //     },
-  //   ];
-  //   const privilegiosJSON = JSON.stringify(roles);
-  //   localStorage.setItem('privilegios_user', privilegiosJSON);
-  //   expect(service.getMenu()).toEqual(Menu);
-  // });
-
-  xit('should logout', () => {});
 });

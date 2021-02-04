@@ -45,7 +45,7 @@ describe('AppRoutingModule', () => {
     });
   });
 
-  it('navegate to "dashboard" redirects you to /dashboad', (done) => {
+  it('navegate to "dashboard" redirects you to /dashboard', (done) => {
     localStorage.setItem('otec_token', 'testToken');
     router.navigate(['/dashboard']).then(() => {
       expect(location.path()).toBe('/dashboard');

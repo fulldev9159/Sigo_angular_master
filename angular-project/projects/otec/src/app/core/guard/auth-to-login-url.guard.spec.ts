@@ -24,7 +24,6 @@ describe('AuthToLoginUrlGuard', () => {
 
   it('should let pass to a not  logged in users', () => {
     spyOn(authService, 'isLoggedIn').and.returnValue(false);
-    router = TestBed.inject(Router);
     expect(guard.canActivate()).toEqual(true);
   });
 

@@ -50,17 +50,25 @@ export class LoginComponent implements OnInit {
         .auth(this.values.username, this.values.password)
         .subscribe(
           (response) => {
-            this.authService.setItemStorage('username',this.values.username);
-            this.authService.setItemStorage('otec_token',response.data.token);
+            this.authService.setItemStorage('username', this.values.username);
+            this.authService.setItemStorage('otec_token', response.data.token);
             // const modulosJSON = JSON.stringify(response.data.roles_modulos);
             // this.authService.setItemStorage('modules_access',modulosJSON);
-            this.authService.setItemStorage('nombreCompleto',response.data.nombre_usuario);
-            Object.keys(response.data.roles_modulos).forEach(roles=>{
-              this.authService.setItemStorage('rol',roles)
-            })
-            Object.keys(response.data.roles_modulos).forEach(roles=>{
-              this.authService.setItemStorage('modulos',Object.keys(response.data.roles_modulos[roles].modulos).toString()) 
-            })
+            this.authService.setItemStorage(
+              'nombreCompleto',
+              response.data.nombre_usuario
+            );
+            Object.keys(response.data.roles_modulos).forEach((roles) => {
+              this.authService.setItemStorage('rol', roles);
+            });
+            Object.keys(response.data.roles_modulos).forEach((roles) => {
+              this.authService.setItemStorage(
+                'modulos',
+                Object.keys(
+                  response.data.roles_modulos[roles].modulos
+                ).toString()
+              );
+            });
             this.router.navigate(['/dashboard']);
           },
           (err) => {
