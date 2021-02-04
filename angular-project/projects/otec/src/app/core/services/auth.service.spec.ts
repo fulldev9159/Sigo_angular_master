@@ -50,175 +50,125 @@ describe('AuthService', () => {
   });
 
   it('should be created', () => {
-    service = TestBed.inject(AuthService);
     expect(service).toBeTruthy();
   });
 
-  it('getToken should return token', () => {
-    localStorage.setItem('otec_token', 'testToken');
-    expect(service.getToken()).toEqual('testToken');
-  });
-
-  it('setToken should update token', () => {
-    service.setToken('testToken2');
-    expect(service.getToken()).toEqual('testToken2');
-  });
-
-  it('deleteToken should clear localStorage', () => {
-    service.deleteToken();
-    expect(service.getToken()).toEqual(null);
-  });
-
-  it('isLogin should return true if token exist', () => {
+  it('isLoggedIn should return true if token exist', () => {
     localStorage.setItem('otec_token', 'testToken');
     expect(service.isLoggedIn()).toEqual(true);
   });
 
-  it('isLogin should return false if token not exist', () => {
+  it('isLoggedIn should return false if token not exist', () => {
+    localStorage.clear()
     expect(service.isLoggedIn()).toEqual(false);
   });
 
-  xit('should return a observable<AuthLoginResponse>', () => {
-    const user = 'dummyuser';
-    const password = 'dummypassword';
+  it('setItemStorage should storage key,value in a localstorage',()=>{
+    service.setItemStorage('testkey','testvalue');
+    expect(service.getItemStorage('testkey')).toEqual('testvalue')
+  })
+
+  it('deleteItemStorage should clear localStorage', () => {
+    service.setItemStorage('testkey','testvalue');
+    service.deleteItemStorage();
+    expect(service.getItemStorage('testkey')).toEqual(null);
+  });
+
+  it('should return user information', () => {
+    const user = 'carloscj', password = 'dummypassword';
     const dummyLoginResponse: LoginModel.AuthLoginResponse = {
       data: {
-        token: '0xestasdad',
-        nombre_usuario: 'JESSICA LORENA CASTILLO GONZÁLEZ',
+        token: '01EXND28AQ6ZF4ER4JVMWTB7YV',
+        nombre_usuario: 'Carlos Alberto Campos Jaraquemada',
         roles_modulos: {
-          Gestor: {
-            id: 2,
-            nombre: 'Gestor',
-            modulos: {
-              Cubicación: {
-                nombre: 'Cubicación',
-                privilegio: {
-                  ver: false,
-                  editar: false,
-                },
-              },
-              OT: {
-                nombre: 'OT',
-                privilegio: {
-                  ver: false,
-                  editar: false,
-                },
-              },
-            },
-          },
-        },
+          "Trabajador": {
+            "id": 5,
+            "nombre": "Trabajador",
+            "modulos": {
+              "OT": {
+                "nombre": "OT",
+                "privilegio": {
+                  "ver": false,
+                  "editar": false
+                }
+              }
+            }
+          }
+        }
       },
       status: {
         responseCode: 0,
-        description: 'Consulta OK',
+        description: '',
       },
     };
     service.auth(user, password).subscribe((response) => {
       expect(response).toEqual(dummyLoginResponse);
     });
-    const req = httpMock.expectOne('http://192.168.11.251:4040');
+    const req = httpMock.expectOne('http://localhost:4040/login');
     expect(req.request.method).toBe('POST');
     req.flush(dummyLoginResponse);
   });
 
-  xit('setPrivilegios should update LocalStorage key privilegios', () => {
-    const roles = [
-      {
-        id: 2,
-        nombre: 'Gestor',
-        modulos: [
-          {
-            id: 1,
-            nombre: 'OT',
-          },
-          {
-            id: 2,
-            nombre: 'Cubicacion',
-          },
-        ],
-      },
-    ];
-    service.setPrivilegios(roles);
-
-    expect(service.getPrivilegios()).toEqual(roles);
+  it('should return response for logout', () => {
+    const user = 'carloscj', token = '01EXM8Q1RSB1WGW1WBQ07WB6YA';
+    const dummyResponse: LoginModel.LogoutResponse = {
+      "user": "jcastill",
+      "token": "01EXM8Q1RSB1WGW1WBQ07WB6YA",
+      "createdat": "",
+      "modifiedat": ""
+    };
+    service.logOut(user, token).subscribe((response) => {
+      expect(response).toEqual(dummyResponse);
+    });
+    const req = httpMock.expectOne('http://localhost:4040/logout');
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyResponse);
   });
 
-  xit('getPrivilegios should return privilegios', () => {
-    const roles = [
-      {
-        id: 2,
-        nombre: 'Gestor',
-        modulos: [
-          {
-            id: 1,
-            nombre: 'OT',
-          },
-          {
-            id: 2,
-            nombre: 'Cubicacion',
-          },
-        ],
-      },
-    ];
-    const privilegiosJSON = JSON.stringify(roles);
-    localStorage.setItem('privilegios_user', privilegiosJSON);
-    expect(service.getPrivilegios()).toEqual(roles);
-  });
+  // xit('getRol should return rol', () => {
+  //   const roles = [
+  //     {
+  //       id: 2,
+  //       nombre: 'Gestor',
+  //       modulos: [
+  //         {
+  //           id: 1,
+  //           nombre: 'OT',
+  //         },
+  //         {
+  //           id: 2,
+  //           nombre: 'Cubicacion',
+  //         },
+  //       ],
+  //     },
+  //   ];
+  //   const privilegiosJSON = JSON.stringify(roles);
+  //   localStorage.setItem('privilegios_user', privilegiosJSON);
+  //   expect(service.getRol()).toEqual('Gestor');
+  // });
 
-  it('setNombre should update LocalStorage key nombre_usuario', () => {
-    service.setNombre('Jorge Retamal Aburto');
-    expect(service.getNombre()).toEqual('Jorge Retamal Aburto');
-  });
-
-  it('getNombre should return Nombre', () => {
-    localStorage.setItem('nombre_usuario', 'Jorge Retamal Aburto');
-    expect(service.getNombre()).toEqual('Jorge Retamal Aburto');
-  });
-
-  xit('getRol should return rol', () => {
-    const roles = [
-      {
-        id: 2,
-        nombre: 'Gestor',
-        modulos: [
-          {
-            id: 1,
-            nombre: 'OT',
-          },
-          {
-            id: 2,
-            nombre: 'Cubicacion',
-          },
-        ],
-      },
-    ];
-    const privilegiosJSON = JSON.stringify(roles);
-    localStorage.setItem('privilegios_user', privilegiosJSON);
-    expect(service.getRol()).toEqual('Gestor');
-  });
-
-  xit('getMenu should return ArrayMenu', () => {
-    const Menu = ['OT', 'Cubicacion'];
-    const roles = [
-      {
-        id: 2,
-        nombre: 'Gestor',
-        modulos: [
-          {
-            id: 1,
-            nombre: 'OT',
-          },
-          {
-            id: 2,
-            nombre: 'Cubicacion',
-          },
-        ],
-      },
-    ];
-    const privilegiosJSON = JSON.stringify(roles);
-    localStorage.setItem('privilegios_user', privilegiosJSON);
-    expect(service.getMenu()).toEqual(Menu);
-  });
+  // xit('getMenu should return ArrayMenu', () => {
+  //   const Menu = ['OT', 'Cubicacion'];
+  //   const roles = [
+  //     {
+  //       id: 2,
+  //       nombre: 'Gestor',
+  //       modulos: [
+  //         {
+  //           id: 1,
+  //           nombre: 'OT',
+  //         },
+  //         {
+  //           id: 2,
+  //           nombre: 'Cubicacion',
+  //         },
+  //       ],
+  //     },
+  //   ];
+  //   const privilegiosJSON = JSON.stringify(roles);
+  //   localStorage.setItem('privilegios_user', privilegiosJSON);
+  //   expect(service.getMenu()).toEqual(Menu);
+  // });
 
   xit('should logout', () => {});
 });

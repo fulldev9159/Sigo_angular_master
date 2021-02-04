@@ -7,41 +7,35 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  apiBase = 'http://localhost:8021';
+  apiBase: string;
+
   constructor(
     @Inject('environment') environment,
     @Optional() private httpClient?: HttpClient
   ) {
-    this.apiBase = environment.api || 'http://localhost:8021';
+    this.apiBase = environment.api || 'http://localhost:4040';
   }
 
   isLoggedIn(): boolean {
-    console.log(localStorage.getItem('otec_token'));
-    if (localStorage.getItem('otec_token') === null) {
-      return false;
-    }
-    return true;
+    return localStorage.getItem('otec_token') === null ? false : true;
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('otec_token');
+  setItemStorage(key: string, value: string): void {
+    localStorage.setItem(key, value);
   }
 
-  setToken(token: string): void {
-    localStorage.setItem('otec_token', token);
+  getItemStorage(key: string): string|null {
+    return localStorage.getItem(key);
   }
 
-  deleteToken(): void {
+  deleteItemStorage(): void {
     localStorage.clear();
   }
-
-
 
   auth(
     user: string,
     password: string
   ): Observable<LoginModel.AuthLoginResponse> {
-    console.log('iniciando login...');
     const data = {
       User: user,
       // Password: password,
@@ -53,7 +47,6 @@ export class AuthService {
   }
 
   logOut(user: string, token: string): Observable<LoginModel.LogoutResponse> {
-    console.log('iniciando logout...');
     const data = {
       User: user,
       Token: token,
@@ -64,55 +57,30 @@ export class AuthService {
     );
   }
 
-  setUser(user: string): void {
-    localStorage.setItem('user', user);
-  }
+  // getRol(): string {
+  //   const local = localStorage.getItem('privilegios_user');
+  //   const json: object = JSON.parse(local as string);
+  //   let response = '';
+  //   if (json !== null) {
+  //     // response = json[0].nombre;
+  //     Object.keys(json).forEach((x) => {
+  //       response = x;
+  //     });
+  //   }
+  //   return response;
+  // }
 
-  getUser(): string {
-    return localStorage.getItem('user') as string;
-  }
-  setPrivilegios(privilegios: object): void {
-    const privilegiosJSON = JSON.stringify(privilegios);
-    localStorage.setItem('privilegios_user', privilegiosJSON);
-  }
-
-  getPrivilegios(): object {
-    const privilegios = localStorage.getItem('privilegios_user');
-    return JSON.parse(privilegios as string);
-  }
-
-  setNombre(nombre: string): void {
-    localStorage.setItem('nombre_usuario', nombre);
-  }
-
-  getNombre(): string {
-    return localStorage.getItem('nombre_usuario') as string;
-  }
-
-  getRol(): string {
-    const local = localStorage.getItem('privilegios_user');
-    const json: object = JSON.parse(local as string);
-    let response = '';
-    if (json !== null) {
-      // response = json[0].nombre;
-      Object.keys(json).forEach((x) => {
-        response = x;
-      });
-    }
-    return response;
-  }
-
-  getMenu(): string[] {
-    const local = localStorage.getItem('privilegios_user');
-    const json: LoginModel.RolesModuleSectionResponse = JSON.parse(
-      local as string
-    );
-    let response: string[] = [];
-    if (json !== null) {
-      Object.keys(json).forEach((x) => {
-        response = Object.keys(json[x].modulos);
-      });
-    }
-    return response;
-  }
+  // getMenu(): string[] {
+  //   const local = localStorage.getItem('privilegios_user');
+  //   const json: LoginModel.RolesModuleSectionResponse = JSON.parse(
+  //     local as string
+  //   );
+  //   let response: string[] = [];
+  //   if (json !== null) {
+  //     Object.keys(json).forEach((x) => {
+  //       response = Object.keys(json[x].modulos);
+  //     });
+  //   }
+  //   return response;
+  // }
 }
