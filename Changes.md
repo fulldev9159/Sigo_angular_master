@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0] - 2021-02-07
+
+### features
+
+- Se crea el modulo de cubicación
+
+### Changes
+
+- Se crea un component para el navbar
+
 ## [0.2.0] - 2021-01-25
 
 ### features
