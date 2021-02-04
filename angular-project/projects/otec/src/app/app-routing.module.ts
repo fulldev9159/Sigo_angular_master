@@ -24,6 +24,14 @@ export const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'dashboard/cubicacion',
+    loadChildren: () =>
+      import('./features/cubicacion/cubicacion.module').then(
+        (m) => m.CubicacionModule
+      ),
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
