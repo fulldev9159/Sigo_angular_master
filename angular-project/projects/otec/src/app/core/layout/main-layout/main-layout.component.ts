@@ -13,6 +13,6 @@ export class MainLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLogin = this.authServices.isLogin();
+    this.isLogin = this.authServices.isLoggedIn();
   }
 }

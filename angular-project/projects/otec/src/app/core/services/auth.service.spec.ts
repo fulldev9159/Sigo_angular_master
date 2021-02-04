@@ -71,11 +71,11 @@ describe('AuthService', () => {
 
   it('isLogin should return true if token exist', () => {
     localStorage.setItem('otec_token', 'testToken');
-    expect(service.isLogin()).toEqual(true);
+    expect(service.isLoggedIn()).toEqual(true);
   });
 
   it('isLogin should return false if token not exist', () => {
-    expect(service.isLogin()).toEqual(false);
+    expect(service.isLoggedIn()).toEqual(false);
   });
 
   xit('should return a observable<AuthLoginResponse>', () => {

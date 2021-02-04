@@ -15,6 +15,14 @@ export class AuthService {
     this.apiBase = environment.api || 'http://localhost:8021';
   }
 
+  isLoggedIn(): boolean {
+    console.log(localStorage.getItem('otec_token'));
+    if (localStorage.getItem('otec_token') === null) {
+      return false;
+    }
+    return true;
+  }
+
   getToken(): string | null {
     return localStorage.getItem('otec_token');
   }
@@ -27,13 +35,7 @@ export class AuthService {
     localStorage.clear();
   }
 
-  isLogin(): boolean {
-    console.log(localStorage.getItem('otec_token'));
-    if (localStorage.getItem('otec_token') === null) {
-      return false;
-    }
-    return true;
-  }
+
 
   auth(
     user: string,
