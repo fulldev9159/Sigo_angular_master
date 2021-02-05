@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+// import * as $ from 'jquery';
 
+declare var $: any;
 @Component({
   selector: 'otec-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
+  // encapsulation: ViewEncapsulation.None,
 })
 export class NavbarComponent implements OnInit {
   public Menu: string[] = [];
-  public nombreUsuario = '';
-  public rol = '';
+  public nombreUsuario: string = '';
+  public rol: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,6 +26,11 @@ export class NavbarComponent implements OnInit {
       'nombreCompleto'
     ) as string;
     this.rol = this.authService.getItemStorage('rol') as string;
+
+    (<any>$('.dropdown')).dropdown({
+      // you can use any ui transition
+      // transition: 'drop',
+    });
   }
 
   logout(): void {
@@ -36,5 +44,13 @@ export class NavbarComponent implements OnInit {
         this.authService.deleteItemStorage();
         this.router.navigate(['/login']);
       });
+  }
+
+  showGestor(rol: string): boolean {
+    return rol === this.rol ? true : false;
+  }
+
+  navegate(){
+    this.router.navigate(['dashboard/cubicacion/crear-cubicacion'])
   }
 }

@@ -1,23 +1,95 @@
 <nav>
     <div class="icon">
         <!-- <div class="container-logo-movistar desktop"> -->
-            <img src="../../../assets/images/logo-movistar.png" alt="cover" />
-          <!-- </div> -->
-      
-          <div class="title-otec">otec V0.2.0</div>
+        <img src="../../../assets/images/logo-movistar.png" alt="cover" />
+        <!-- </div> -->
+
+        <div class="title-otec">otec V0.3.0</div>
     </div>
-    <div class="menu">
-        <ul>
-            <li *ngFor='let item of Menu'>
-                {{item}}
-            </li>
-        </ul>
+
+    <!-- <div class="ui menu">
+    <a  *ngFor="let modulo of Menu" [ngClass]="(modulo==='Cubicación')?'ui dropdown item':'item'"> 
+        {{modulo}}
+        <i class="dropdown icon" [hidden]="!showMenu(modulo)" ></i>
+        <div class="menu" [hidden]="!showMenu(modulo)">
+            <div [hidden]="!!showMenu(modulo)" class="item">Crear Cubicación</div>
+        </div>
+    </a>
+  </div> -->
+
+
+    <!-- <div class="menu">
+    <ul>
+      <li *ngFor="let item of Menu">
+        {{ item }}
+      </li>
+    </ul>
+  </div> -->
+
+
+
+
+<div [hidden]="!showGestor('Gestor')">
+        <div class="ui menu">
+            <a class="ui dropdown item">
+                Cubicación
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="item" (click)="navegate()">Crear Cubicación</div>
+                </div>
+            </a>
+            <a class="item"> OT </a>
+        </div>
+</div>
+
+
+    <div [hidden]="!showGestor('Trabajador')">
+        <div class="ui menu" >
+            <a class="item"> OT </a>
+        </div>
     </div>
+
+    <div [hidden]="!showGestor('Administrador de Contrato')" >
+        <div class="ui menu" >
+            <a class="item"> OT </a>
+        </div>
+    </div>
+
+    <div [hidden]="!showGestor('Coordador')" >
+        <div class="ui menu" >
+            <a class="item"> OT </a>
+        </div>
+    </div>
+
+
+    <div [hidden]="!showGestor('Administrador OTEC')">
+        <div class="ui menu">
+            <a class="ui dropdown item">
+                Cubicación
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <div class="item">Crear Cubicación</div>
+                </div>
+            </a>
+            <a class="item"> OT </a>
+            <a class="item"> Reportería </a>
+            <a class="item"> Administración de sistema </a>
+        </div>
+    </div>
+    
+
+    <div [hidden]="!showGestor('Reporteria')">
+        <div class="ui menu">
+            <a class="item"> Reportería </a>
+        </div>
+    </div>
+
+
     <div class="section-usuario">
-        <span class="usuario">{{nombreUsuario}}</span>
-        <span class="rol"><strong>{{rol}}</strong></span>
-        <button class="mini ui grey button" (click)="logout()" id="logout-button">Cerrar session</button>
+        <span class="usuario">{{ nombreUsuario }}</span>
+        <span class="rol"><strong>{{ rol }}</strong></span>
+        <button class="mini ui grey button" (click)="logout()" id="logout-button">
+            Cerrar session
+        </button>
     </div>
 </nav>
-
-

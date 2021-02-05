@@ -4,11 +4,12 @@
 
 ### features
 
-- Se crea el modulo de cubicación
+- Se crea el módulo de cubicación
+- Se crea el component para crear cubicación
 
 ### Changes
 
-- Se crea un component para el navbar
+- Se crea un component para el manejo del navbar
 
 ## [0.2.0] - 2021-01-25
 
