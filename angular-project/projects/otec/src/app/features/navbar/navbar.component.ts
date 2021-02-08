@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
     return rol === this.rol ? true : false;
   }
 
-  navegate(){
-    this.router.navigate(['dashboard/cubicacion/crear-cubicacion'])
+  navegate() {
+    this.router.navigate(['dashboard/cubicacion/crear-cubicacion']);
   }
 }

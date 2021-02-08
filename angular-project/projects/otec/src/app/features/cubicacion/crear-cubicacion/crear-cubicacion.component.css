@@ -1,0 +1,30 @@
+.crear-cubicacion-container{
+    display: flex;
+    height: 100vh;
+}
+
+.cubicacion-navbar{
+    width: 10%;
+    border-right: 1px solid #fff5f570;
+    background: #11a4f5;
+    box-shadow: 2px 2px #fbfbfb30;
+}
+
+.cubicacion-content{
+    width: 90%;
+    padding: 10px;
+}
+
+.title{
+    text-align: center;
+    font-weight: 700;
+    color: #021737;
+    text-decoration: overline;
+}
+
+.form-content{
+    padding: 10px 34px;
+    border: 1px solid #f1f1f1;
+    margin-top: 14px;
+    margin-left: 53px;
+}

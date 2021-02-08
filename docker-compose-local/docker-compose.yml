@@ -30,13 +30,13 @@ services:
         #     - 4040
         depends_on: 
             - mcl_otec_db     
-    mcl_otec_web:
-        image: registryv2.zweicom.com:5000/mcl-otec-webclient:latest
-        environment:
-            WEBAPI_NAME: "mcl_api_otec"
-            WEBAPI_PORT: "4040"
-        ports: 
-            - 4200:80
-        restart: always
-        depends_on: 
-            - mcl_api_otec
+    # mcl_otec_web:
+    #     image: registryv2.zweicom.com:5000/mcl-otec-webclient:latest
+    #     environment:
+    #         WEBAPI_NAME: "mcl_api_otec"
+    #         WEBAPI_PORT: "4040"
+    #     ports: 
+    #         - 4200:80
+    #     restart: always
+    #     depends_on: 
+    #         - mcl_api_otec

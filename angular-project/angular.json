@@ -31,13 +31,16 @@
               "node_modules/semantic-ui-css/components/dropdown.min.css",
               "node_modules/semantic-ui-css/components/menu.min.css",
               "node_modules/node-snackbar/dist/snackbar.min.css",
-              "node_modules/semantic-ui-css/components/transition.min.css"
+              "node_modules/semantic-ui-css/components/transition.min.css",
+              "node_modules/semantic-ui-css/components/segment.min.css",
+              "node_modules/semantic-ui-css/components/form.min.css"
             ],
             "scripts": [
               "node_modules/node-snackbar/dist/snackbar.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/semantic-ui-css/components/dropdown.min.js",
-              "node_modules/semantic-ui-css/components/transition.js"
+              "node_modules/semantic-ui-css/components/transition.js",
+              "node_modules/semantic-ui-css/components/form.min.js"
             ]
           },
           "configurations": {
@@ -107,13 +110,16 @@
               "node_modules/semantic-ui-css/components/dropdown.min.css",
               "node_modules/node-snackbar/dist/snackbar.min.css",
               "node_modules/semantic-ui-css/components/menu.min.css",
-              "node_modules/semantic-ui-css/components/transition.min.css"
+              "node_modules/semantic-ui-css/components/transition.min.css",
+              "node_modules/semantic-ui-css/components/segment.min.css",
+              "node_modules/semantic-ui-css/components/form.min.css"
             ],
             "scripts": [
               "node_modules/node-snackbar/dist/snackbar.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/semantic-ui-css/components/dropdown.min.js",
-              "node_modules/semantic-ui-css/components/transition.js"
+              "node_modules/semantic-ui-css/components/transition.js",
+              "node_modules/semantic-ui-css/components/form.min.js"
             ]
           }
         },
