@@ -9,56 +9,35 @@
                 <div class="ui form">
                     <div class="field">
                         <label>Contrato</label>
-                        <div class="ui selection dropdown">
-                            <input type="hidden" name="contrato">
-                            <i class="dropdown icon"></i>
-                            <div class="default text">Contrato</div>
-                            <div class="menu">
-                                <div class="item" data-value="1">SBE</div>
-                                <div class="item" data-value="0">RAN</div>
-                            </div>
-                        </div>
+                        <select name="contrato" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="contrato_id">
+                            <option value="1">SBE</option>
+                            <option value="2">RAN</option>
+                          </select>
                     </div>
 
-                    <div class="field">
+                    <div class="field" *ngIf="contrato_id!==''">
                         <label>Proveedor</label>
-                        <div class="ui selection dropdown">
-                            <input type="hidden" name="proveedor">
-                            <i class="dropdown icon"></i>
-                            <div class="default text">Proveedor</div>
-                            <div class="menu">
-                                <div class="item" data-value="1">ERICSSON CHILE S.A.</div>
-                                <div class="item" data-value="0">NOKIA SOLUTIONS AND NETWORKS CHILE LTDA</div>
-                            </div>
-                        </div>
+                        <select name="proveedor" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="proveedor_id">
+                            <option value="1">ERICSSON CHILE S.A.</option>
+                            <option value="2">NOKIA SOLUTIONS AND NETWORKS CHILE LTDA</option>
+                          </select>
                     </div>
 
-
-                    <div class="field">
-                        <label>Region</label>
-                        <div class="ui selection dropdown">
-                            <input type="hidden" name="region">
-                            <i class="dropdown icon"></i>
-                            <div class="default text">Region</div>
-                            <div class="menu">
-                                <div class="item" data-value="1">ERICSSON CHILE S.A.</div>
-                                <div class="item" data-value="0">NOKIA SOLUTIONS AND NETWORKS CHILE LTDA</div>
-                            </div>
-                        </div>
+                    <div class="field" *ngIf="proveedor_id!==''">
+                        <label>Región</label>
+                        <select name="region" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="region_id">
+                            <option value="1">Región Metropolitana de Santiago</option>
+                            <option value="2">Región del Bíobío</option>
+                          </select>
                     </div>
 
-                    <div class="field">
-                        <label>Tipo Servicio</label>
-                        <div class="ui selection dropdown">
-                            <input type="hidden" name="tiposervicio">
-                            <i class="dropdown icon"></i>
-                            <div class="default text">Tipo Servicio</div>
-                            <div class="menu">
-                                <div class="item" data-value="1">ERICSSON CHILE S.A.</div>
-                                <div class="item" data-value="0">NOKIA SOLUTIONS AND NETWORKS CHILE LTDA</div>
-                            </div>
-                        </div>
+                    <div class="field" *ngIf="region_id!==''">
+                        <label>Tipo de servicio</label>
+                        <select name="tipodeservicio" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="tipo_servicio_id">
+                            <option value="1">CD1</option>
+                          </select>
                     </div>
+
 
                   </div>
             </div>
