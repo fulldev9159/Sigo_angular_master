@@ -51,14 +51,14 @@ export class CubicacionService {
   }
 
   getRegionesSubcontrato(
-    user: string,
+    username: string,
     tok: string,
-    subcontratos: number
+    subcontratosid: number
   ): Observable<CubicacionModel.ResponseRegion> {
     const request: CubicacionModel.RequestRegion = {
-      username: user,
+      user: username,
       token: tok,
-      subcontrato: subcontratos,
+      subcontratos: subcontratosid,
     };
 
     return (this.httpClient as HttpClient).post<CubicacionModel.ResponseRegion>(
@@ -70,13 +70,13 @@ export class CubicacionService {
   getTipoServicioSubcontrato(
     user: string,
     tok: string,
-    subcontratos: number,
+    subcontratosid: number,
     regionId: number
   ): Observable<CubicacionModel.ResponseTipoServicioSubContrato> {
     const request: CubicacionModel.RequestTipoServicioSubContrato = {
       username: user,
       token: tok,
-      subcontrato: subcontratos,
+      subcontratos: subcontratosid,
       region: regionId,
     };
 
@@ -90,16 +90,16 @@ export class CubicacionService {
   getServicioSubcontrato(
     user: string,
     tok: string,
-    subcontratos: number,
+    subcontratosid: number,
     regionId: number,
     tipoServicioId: number
   ): Observable<CubicacionModel.ResponseServicioContrato> {
     const request: CubicacionModel.RequestServiciosSubContrato = {
       username: user,
       token: tok,
-      subcontrato: subcontratos,
+      subcontratos: subcontratosid,
       region: regionId,
-      tipoServicio: tipoServicioId,
+      tipo_servicio: tipoServicioId,
     };
 
     return (this

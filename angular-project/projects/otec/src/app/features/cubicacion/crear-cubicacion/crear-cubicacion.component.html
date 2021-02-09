@@ -16,24 +16,35 @@
 
                     <div class="field" *ngIf="contratoId!==''">
                         <label>Proveedor</label>
-                        <select name="proveedor" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="proveedorId">
-                            <option value="1">ERICSSON CHILE S.A.</option>
-                            <option value="2">NOKIA SOLUTIONS AND NETWORKS CHILE LTDA</option>
+                        <select name="proveedor" class="ui dropdown" id="select" (change)="selectedProveedor()" [(ngModel)]="proveedorId">
+                            <option value=""> </option>
+                            <option *ngFor="let proveedor of proveedorArr" value="{{proveedor.id}}">{{proveedor.nombre}}</option>
                           </select>
                     </div>
 
                     <div class="field" *ngIf="proveedorId!==''">
                         <label>Región</label>
-                        <select name="region" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="regionId">
-                            <option value="1">Región Metropolitana de Santiago</option>
-                            <option value="2">Región del Bíobío</option>
+                        <select name="region" class="ui dropdown" id="select" (change)="selectedRegion()" [(ngModel)]="regionId">
+                            <option value=""> </option>
+                            <option *ngFor="let region of regionArr" value="{{region.id}}">{{region.codigo}} {{region.nombre}}</option>
                           </select>
                     </div>
 
                     <div class="field" *ngIf="regionId!==''">
                         <label>Tipo de servicio</label>
-                        <select name="tipodeservicio" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="tipoServicioId">
-                            <option value="1">CD1</option>
+                        <select name="tipodeservicio" class="ui dropdown" id="select" (change)="selectedTipoServicio()" [(ngModel)]="tipoServicioId">
+                            <option value=""> </option>
+                            <option *ngFor="let tiposervicio of tipoServicioArr" value="{{tiposervicio.id}}">{{tiposervicio.nombre}}</option>
+                          </select>
+                    </div>
+
+                    <div class="field" *ngIf="tipoServicioId!==''">
+                        <label>Servicio</label>
+                        <select name="tipodeservicio" class="ui dropdown" id="select" (change)="selectedServicio()" [(ngModel)]="servicioId">
+                            <option value=""> </option>
+                            <option *ngFor="let servicio of servicioArr" value="{{servicio.id}}">{{servicio.nombre}} - ${{servicio.precio}}</option>
+                            <!-- <option value="1">CD1-Instalación e Integración completa de una RBS utilizando coaxiles con aluminio</option>
+                            <option value="2">CD1-Posicionamiento e Instalación de Gabinete adicional</option> -->
                           </select>
                     </div>
 

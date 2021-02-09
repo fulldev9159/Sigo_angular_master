@@ -44,9 +44,9 @@ export interface Proveedores {
 
 // Regiones subcontrato
 export interface RequestRegion {
-  username: string;
+  user: string;
   token: string;
-  subcontrato: number;
+  subcontratos: number;
 }
 
 export interface ResponseRegion {
@@ -66,7 +66,7 @@ export interface Region {
 export interface RequestTipoServicioSubContrato {
   username: string;
   token: string;
-  subcontrato: number;
+  subcontratos: number;
   region: number;
 }
 
@@ -86,9 +86,9 @@ export interface TipoServicio {
 export interface RequestServiciosSubContrato {
   username: string;
   token: string;
-  subcontrato: number;
+  subcontratos: number;
   region: number;
-  tipoServicio: number;
+  tipo_servicio: number;
 }
 
 export interface ResponseServicioContrato {
