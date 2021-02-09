@@ -9,31 +9,30 @@
                 <div class="ui form">
                     <div class="field">
                         <label>Contrato</label>
-                        <select name="contrato" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="contrato_id">
-                            <option value="1">SBE</option>
-                            <option value="2">RAN</option>
+                        <select name="contrato" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="contratoId">
+                            <option *ngFor="let contrato of contratosArr" value="{{contrato.id}}">{{contrato.nombre}}</option>
                           </select>
                     </div>
 
-                    <div class="field" *ngIf="contrato_id!==''">
+                    <div class="field" *ngIf="contratoId!==''">
                         <label>Proveedor</label>
-                        <select name="proveedor" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="proveedor_id">
+                        <select name="proveedor" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="proveedorId">
                             <option value="1">ERICSSON CHILE S.A.</option>
                             <option value="2">NOKIA SOLUTIONS AND NETWORKS CHILE LTDA</option>
                           </select>
                     </div>
 
-                    <div class="field" *ngIf="proveedor_id!==''">
+                    <div class="field" *ngIf="proveedorId!==''">
                         <label>Región</label>
-                        <select name="region" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="region_id">
+                        <select name="region" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="regionId">
                             <option value="1">Región Metropolitana de Santiago</option>
                             <option value="2">Región del Bíobío</option>
                           </select>
                     </div>
 
-                    <div class="field" *ngIf="region_id!==''">
+                    <div class="field" *ngIf="regionId!==''">
                         <label>Tipo de servicio</label>
-                        <select name="tipodeservicio" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="tipo_servicio_id">
+                        <select name="tipodeservicio" class="ui dropdown" id="select" (change)="selectedContrato()" [(ngModel)]="tipoServicioId">
                             <option value="1">CD1</option>
                           </select>
                     </div>

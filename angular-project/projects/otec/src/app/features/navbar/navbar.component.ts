@@ -12,8 +12,8 @@ declare var $: any;
 })
 export class NavbarComponent implements OnInit {
   public Menu: string[] = [];
-  public nombreUsuario: string = '';
-  public rol: string = '';
+  public nombreUsuario = '';
+  public rol = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
     ) as string;
     this.rol = this.authService.getItemStorage('rol') as string;
 
-    (<any>$('.dropdown')).dropdown({
+    ($('.dropdown') as any).dropdown({
       // you can use any ui transition
       // transition: 'drop',
     });
@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
     return rol === this.rol ? true : false;
   }
 
-  navegate() {
+  navegate(): void {
     this.router.navigate(['dashboard/cubicacion/crear-cubicacion']);
   }
 }
