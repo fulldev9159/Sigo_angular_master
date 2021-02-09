@@ -1,3 +1,9 @@
+export interface StatusSectionResponse {
+  responseCode: number;
+  description: string;
+}
+
+// Contratos
 export interface RequestContrato {
   username: string;
   token: string;
@@ -15,11 +21,8 @@ export interface ContratoMarco {
   nombre: string;
   tipo_contrato: string;
 }
-export interface StatusSectionResponse {
-  responseCode: number;
-  description: string;
-}
 
+// Proveedores subcontrato
 export interface RequestProveedor {
   username: string;
   token: string;
@@ -39,6 +42,7 @@ export interface Proveedores {
   subcontratos: number[];
 }
 
+// Regiones subcontrato
 export interface RequestRegion {
   username: string;
   token: string;
@@ -56,4 +60,48 @@ export interface Region {
   id: number;
   nombre: string;
   codigo: string;
+}
+
+// Tipo Servicio subcontrato
+export interface RequestTipoServicioSubContrato {
+  username: string;
+  token: string;
+  subcontrato: number;
+  region: number;
+}
+
+export interface ResponseTipoServicioSubContrato {
+  data: {
+    [id: string]: TipoServicio[];
+  };
+  status: StatusSectionResponse;
+}
+
+export interface TipoServicio {
+  id: number;
+  nombre: string;
+}
+
+// Servicios subcontrato
+export interface RequestServiciosSubContrato {
+  username: string;
+  token: string;
+  subcontrato: number;
+  region: number;
+  tipoServicio: number;
+}
+
+export interface ResponseServicioContrato {
+  data: {
+    [id: string]: Servicio[];
+  };
+  status: StatusSectionResponse;
+}
+
+export interface Servicio {
+  id: number;
+  nombre: string;
+  precio: number;
+  tipoMoneda: string;
+  NumeroProducto: string;
 }

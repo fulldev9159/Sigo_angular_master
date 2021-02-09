@@ -111,4 +111,101 @@ describe('AuthService', () => {
     expect(req.request.method).toBe('POST');
     req.flush(dummyLoginResponse);
   });
+
+  it('should return Regiones', () => {
+    const user = 'carloscj';
+    const token = 'dummytoken';
+    const subcontratos = 1;
+    const dummyLoginResponse: CubicacionModel.ResponseRegion = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: {
+        regiones: [
+          {
+            id: 1,
+            nombre: 'Región Metropolitana',
+            codigo: 'XVIII',
+          },
+        ],
+      },
+    };
+    service
+      .getRegionesSubcontrato(user, token, subcontratos)
+      .subscribe((response) => {
+        expect(response).toEqual(dummyLoginResponse);
+      });
+    const req = httpMock.expectOne(
+      'http://localhost:4040/getRegionesSubcontratos'
+    );
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyLoginResponse);
+  });
+
+  it('should return Tipo Servicio', () => {
+    const user = 'carloscj';
+    const token = 'dummytoken';
+    const subcontratos = 1;
+    const region = 1;
+    const dummyLoginResponse: CubicacionModel.ResponseTipoServicioSubContrato = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: {
+        prooveedores: [
+          {
+            id: 1,
+            nombre: 'CD1',
+          },
+        ],
+      },
+    };
+    service
+      .getTipoServicioSubcontrato(user, token, subcontratos, region)
+      .subscribe((response) => {
+        expect(response).toEqual(dummyLoginResponse);
+      });
+    const req = httpMock.expectOne(
+      'http://localhost:4040/getTiposServiciosSubcontrato'
+    );
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyLoginResponse);
+  });
+
+  it('should return Tipo Servicio', () => {
+    const user = 'carloscj';
+    const token = 'dummytoken';
+    const subcontratos = 1;
+    const region = 1;
+    const tipoServicio = 1;
+    const dummyLoginResponse: CubicacionModel.ResponseServicioContrato = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: {
+        servicios: [
+          {
+            id: 1,
+            nombre: 'CD1',
+            precio: 9999,
+            tipoMoneda: 'Pesos',
+            NumeroProducto: 'CD1asda',
+          },
+        ],
+      },
+    };
+    service
+      .getServicioSubcontrato(user, token, subcontratos, region, tipoServicio)
+      .subscribe((response) => {
+        expect(response).toEqual(dummyLoginResponse);
+      });
+    const req = httpMock.expectOne(
+      'http://localhost:4040/getServiciosSubcontrato'
+    );
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyLoginResponse);
+  });
 });
