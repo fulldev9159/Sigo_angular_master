@@ -1,33 +1,8 @@
 <nav>
     <div class="icon">
-        <!-- <div class="container-logo-movistar desktop"> -->
         <img src="../../../assets/images/logo-movistar.png" alt="cover" />
-        <!-- </div> -->
-
         <div class="title-otec">otec V0.3.0</div>
     </div>
-
-    <!-- <div class="ui menu">
-    <a  *ngFor="let modulo of Menu" [ngClass]="(modulo==='Cubicación')?'ui dropdown item':'item'"> 
-        {{modulo}}
-        <i class="dropdown icon" [hidden]="!showMenu(modulo)" ></i>
-        <div class="menu" [hidden]="!showMenu(modulo)">
-            <div [hidden]="!!showMenu(modulo)" class="item">Crear Cubicación</div>
-        </div>
-    </a>
-  </div> -->
-
-
-    <!-- <div class="menu">
-    <ul>
-      <li *ngFor="let item of Menu">
-        {{ item }}
-      </li>
-    </ul>
-  </div> -->
-
-
-
 
     <div [hidden]="!showOnlyForRol('Gestor')">
         <div class="ui menu">
@@ -61,7 +36,6 @@
         </div>
     </div>
 
-
     <div [hidden]="!showOnlyForRol('Administrador OTEC')">
         <div class="ui menu">
             <a class="ui dropdown item">
@@ -77,13 +51,11 @@
         </div>
     </div>
 
-
     <div [hidden]="!showOnlyForRol('Reporteria')">
         <div class="ui menu">
             <a class="item"> Reportería </a>
         </div>
     </div>
-
 
     <div class="section-usuario">
         <span class="usuario">{{ nombreUsuario }}</span>

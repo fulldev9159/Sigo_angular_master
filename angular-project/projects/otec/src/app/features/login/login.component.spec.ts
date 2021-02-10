@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 import * as LoginModel from './login.model';
 import { of } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
+declare let Snackbar: object | any;
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -173,4 +174,12 @@ describe('LoginComponent', () => {
     expect(service.getItemStorage('rol')).toBe('Trabajador');
     expect(router.navigate).toHaveBeenCalledWith(['/dashboard']);
   }));
+
+  it('ErrMessage Open', () => {
+    spyOn(Snackbar, 'show');
+    const a = 'No fue posible iniciar sesión';
+    const b = 'error';
+    component.showMessage(a, b);
+    expect(Snackbar.show).toHaveBeenCalled();
+  });
 });

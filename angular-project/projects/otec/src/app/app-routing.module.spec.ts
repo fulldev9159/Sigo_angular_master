@@ -10,7 +10,6 @@ import { routes } from './app-routing.module';
 describe('AppRoutingModule', () => {
   let location: Location;
   let router: Router;
-  // let fixture;
 
   beforeEach(() => {
     TestBed.configureTestingModule({

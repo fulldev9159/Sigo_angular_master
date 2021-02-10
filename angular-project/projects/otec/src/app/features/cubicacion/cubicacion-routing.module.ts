@@ -9,7 +9,6 @@ const routes: Routes = [
   {
     path: 'crear-cubicacion',
     component: CrearCubicacionComponent,
-    // outlet:'crear-cubicacion'
   },
 ];
 

@@ -39,7 +39,7 @@ export interface ResponseProveedor {
 export interface Proveedores {
   id: number;
   nombre: string;
-  subcontratos: number[];
+  subcontrato_id: number[];
 }
 
 // Regiones subcontrato
@@ -102,6 +102,6 @@ export interface Servicio {
   id: number;
   nombre: string;
   precio: number;
-  tipoMoneda: string;
-  NumeroProducto: string;
+  tipo_moneda: string;
+  numero_producto: string;
 }
