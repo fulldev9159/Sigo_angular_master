@@ -25,7 +25,7 @@
           Nombre de usuario no debe superar los 50 caracteres
         </div>
         <p class="form-text desktop">Usuario</p>
-        <input type="text" [formControlName]="'username'" name="username" />
+        <input type="text" [formControlName]="'username'" name="username" id="username"/>
         <div class="error"
           *ngIf="!this.form.get('password')?.valid && this.form.get('password')?.touched && this.form.get('password')?.hasError('required')">
           Debe ingresar password de usuario.
@@ -35,7 +35,7 @@
           Password no debe superar los 100 caracteres
         </div>
         <p class="form-text desktop">Password</p>
-        <input type="password" [formControlName]="'password'" />
+        <input type="password" [formControlName]="'password'" id="password"/>
       </div>
       <div class="button-login desktop">
         <button class="ui blue button" (click)="submit()">Ingresar</button>

@@ -22,9 +22,11 @@ export class NavbarComponent implements OnInit {
       this.authService.getItemStorage('modulos') === null
         ? []
         : (this.authService.getItemStorage('modulos') as string).split(',');
+
     this.nombreUsuario = this.authService.getItemStorage(
       'nombreCompleto'
     ) as string;
+
     this.rol = this.authService.getItemStorage('rol') as string;
 
     ($('.dropdown') as any).dropdown({
@@ -46,11 +48,11 @@ export class NavbarComponent implements OnInit {
       });
   }
 
-  showGestor(rol: string): boolean {
+  showOnlyForRol(rol: string): boolean {
     return rol === this.rol ? true : false;
   }
 
-  navegate(): void {
-    this.router.navigate(['dashboard/cubicacion/crear-cubicacion']);
+  navegateTo(ruta: string): void {
+    this.router.navigate([ruta]);
   }
 }

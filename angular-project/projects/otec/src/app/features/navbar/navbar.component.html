@@ -29,13 +29,13 @@
 
 
 
-    <div [hidden]="!showGestor('Gestor')">
+    <div [hidden]="!showOnlyForRol('Gestor')">
         <div class="ui menu">
             <a class="ui dropdown item">
                 Cubicación
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                    <div class="item" (click)="navegate()">Crear Cubicación</div>
+                    <div class="item" (click)="navegateTo('dashboard/cubicacion/crear-cubicacion')">Crear Cubicación</div>
                 </div>
             </a>
             <a class="item"> OT </a>
@@ -43,32 +43,32 @@
     </div>
 
 
-    <div [hidden]="!showGestor('Trabajador')">
+    <div [hidden]="!showOnlyForRol('Trabajador')">
         <div class="ui menu">
             <a class="item"> OT </a>
         </div>
     </div>
 
-    <div [hidden]="!showGestor('Administrador de Contrato')">
+    <div [hidden]="!showOnlyForRol('Administrador de Contrato')">
         <div class="ui menu">
             <a class="item"> OT </a>
         </div>
     </div>
 
-    <div [hidden]="!showGestor('Coordador')">
+    <div [hidden]="!showOnlyForRol('Coordador')">
         <div class="ui menu">
             <a class="item"> OT </a>
         </div>
     </div>
 
 
-    <div [hidden]="!showGestor('Administrador OTEC')">
+    <div [hidden]="!showOnlyForRol('Administrador OTEC')">
         <div class="ui menu">
             <a class="ui dropdown item">
                 Cubicación
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                    <div class="item">Crear Cubicación</div>
+                    <div class="item" (click)="navegateTo('dashboard/cubicacion/crear-cubicacion')">Crear Cubicación</div>
                 </div>
             </a>
             <a class="item"> OT </a>
@@ -78,7 +78,7 @@
     </div>
 
 
-    <div [hidden]="!showGestor('Reporteria')">
+    <div [hidden]="!showOnlyForRol('Reporteria')">
         <div class="ui menu">
             <a class="item"> Reportería </a>
         </div>

@@ -35,6 +35,7 @@ export class CrearCubicacionComponent implements OnInit {
         const id = 'contratos_marco';
         this.contratosArr = response.data[id];
         console.log(response);
+        console.log(this.contratosArr);
       });
   }
 

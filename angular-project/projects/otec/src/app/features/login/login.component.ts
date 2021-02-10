@@ -17,6 +17,7 @@ declare let Snackbar: object | any;
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+
   constructor(
     private readonly fb: FormBuilder,
     private authService: AuthService,
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showMessage('No fue posible iniciar sesión', 'error');
+    // this.showMessage('No fue posible iniciar sesión', 'error');
   }
 
   get values(): loginModel.Credential {
@@ -52,8 +53,6 @@ export class LoginComponent implements OnInit {
           (response) => {
             this.authService.setItemStorage('username', this.values.username);
             this.authService.setItemStorage('otec_token', response.data.token);
-            // const modulosJSON = JSON.stringify(response.data.roles_modulos);
-            // this.authService.setItemStorage('modules_access',modulosJSON);
             this.authService.setItemStorage(
               'nombreCompleto',
               response.data.nombre_usuario
