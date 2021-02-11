@@ -49,9 +49,9 @@
                         <div class="right-form">
                             <div class="carrito">
                                 <p-pickList [source]="(sourceProducts$|async)!" [target]="targetProducts" sourceHeader="Available"
-                                targetHeader="Selected" [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'300px'}"
-                                [targetStyle]="{'height':'300px'}" filterBy="nombre" sourceFilterPlaceholder="Search by name"
-                                targetFilterPlaceholder="Search by name" [metaKeySelection]="true">
+                                targetHeader="Selected" [dragdrop]="true" [responsive]="true" [sourceStyle]="{'height':'300px', 'width':'501px'}"
+                                [targetStyle]="{'height':'300px','width':'501px'}" filterBy="nombre" sourceFilterPlaceholder="Search by name"
+                                targetFilterPlaceholder="Search by name" [metaKeySelection]="true" [showSourceControls]="false" [showTargetControls]="false">
                                 <ng-template let-product pTemplate="item">
                                     <div class="product-item">
                                         <div class="product-list-detail">

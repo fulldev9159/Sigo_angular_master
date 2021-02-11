@@ -113,5 +113,5 @@ export interface Product {
   tipo_moneda: string;
   numero_producto: string;
   cantidad: number;
-  unidad:string;
+  unidad: string;
 }
