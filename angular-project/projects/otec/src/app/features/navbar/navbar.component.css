@@ -20,7 +20,7 @@ nav{
     color: #ffffff;
 }
 
-ul{
+/* ul{
     display: flex;
     justify-content: center;
     width: 100%;
@@ -35,7 +35,7 @@ li{
 
 li:hover{
     background-color: #ffffff;
-}
+} */
 
 .section-usuario{
     display: flex;

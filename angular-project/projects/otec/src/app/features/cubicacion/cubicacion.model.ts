@@ -105,3 +105,13 @@ export interface Servicio {
   tipo_moneda: string;
   numero_producto: string;
 }
+
+export interface Product {
+  id: number;
+  nombre: string;
+  precio: number;
+  tipo_moneda: string;
+  numero_producto: string;
+  cantidad: number;
+  unidad:string;
+}

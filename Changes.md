@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0] - 2021-02-11
+
+### features
+
+- Se crea sección de carrito de compras con drag and drop
+
+### Changes
+
+- Se agrega container al template de crear-cubicación para agregar overflow scroll
+- Se realiza cambio de aspecto de la página de creación de cubicación
+
 ## [0.3.0] - 2021-02-07
 
 ### features

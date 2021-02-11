@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { of, Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { CubicacionService } from '../../../core/services/cubicacion.service';
 import * as CubicacionModel from '../cubicacion.model';
+
 @Component({
   selector: 'otec-crear-cubicacion',
   templateUrl: './crear-cubicacion.component.html',
@@ -19,6 +21,9 @@ export class CrearCubicacionComponent implements OnInit {
   public tipoServicioId = '';
   public servicioArr: CubicacionModel.Servicio[] = [];
   public servicioId = '';
+  public sourceProducts$: Observable<CubicacionModel.Product[]> = of([]);
+  public sourcePtemp: CubicacionModel.Product[] = [];
+  public targetProducts: CubicacionModel.Product[] = [];
 
   constructor(
     private authService: AuthService,
@@ -37,6 +42,16 @@ export class CrearCubicacionComponent implements OnInit {
         console.log(response);
         console.log(this.contratosArr);
       });
+
+    // this.sourceProducts =[
+    //   {cantidad: 0,
+    //     id: 4,
+    //     nombre: "Aumento de Channel  Element NSN",
+    //     numero_producto: "Adicional - Nokia 187",
+    //     precio: 564869,
+    //     tipo_moneda: "Pesos",
+    //     unidad: "UNIDAD"}
+    // ]
   }
 
   selectedContrato(): void {
@@ -111,7 +126,34 @@ export class CrearCubicacionComponent implements OnInit {
       .subscribe((response) => {
         const id = 'servicios';
         this.servicioArr = response.data[id];
+        response.data[id].forEach((servicio) => {
+          this.sourcePtemp.push({
+            id: servicio.id,
+            nombre: servicio.nombre,
+            tipo_moneda: servicio.tipo_moneda,
+            precio: servicio.precio,
+            numero_producto: servicio.numero_producto,
+            cantidad: 0,
+            unidad: 'UNIDAD',
+          });
+        });
+        this.sourceProducts$ = of(this.sourcePtemp);
+        // response.data[id].forEach((servicio) => {
+        //   this.sourceProducts.subscribe(x=>{
+        //     x.push({
+        //       id: servicio.id,
+        //       nombre: servicio.nombre,
+        //       tipo_moneda: servicio.tipo_moneda,
+        //       precio: servicio.precio,
+        //       numero_producto: servicio.numero_producto,
+        //       cantidad: 0,
+        //       unidad: 'UNIDAD',
+        //     });
+        //   })
+        // });
         console.log(response);
+        // console.log("productos")
+        // console.log(this.sourceProducts$)
       });
   }
 
