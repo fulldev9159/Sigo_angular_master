@@ -101,6 +101,9 @@ export class CrearCubicacionComponent implements OnInit {
           .subscribe((response) => {
             const id = 'regiones';
             this.regionArr = response.data[id];
+            this.regionArr.forEach((value, index) => {
+              this.regionArr[index].nombre = value.nombre.replace('Ã³', 'ó');
+            });
             console.log(response);
           });
       }
