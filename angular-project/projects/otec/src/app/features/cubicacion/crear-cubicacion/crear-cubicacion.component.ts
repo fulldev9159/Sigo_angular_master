@@ -30,6 +30,7 @@ export class CrearCubicacionComponent implements OnInit {
   public targetProducts: CubicacionModel.Product[] = [];
   public servicios: CubicacionModel.Product[] = [];
   public selectedServicios: CubicacionModel.Product[] = [];
+  public total = 0;
 
   constructor(
     private authService: AuthService,
@@ -45,13 +46,15 @@ export class CrearCubicacionComponent implements OnInit {
       .subscribe((response) => {
         const id = 'contratos_marco';
         this.contratosArr = response.data[id];
-        // response.data[id].forEach(x=>{
-        //   console.log(x.nombre)
-        //   this.contratos.push({label:x.nombre.toString(),value:x.id.toString()})
-        // })
         console.log(response);
-        console.log(this.contratosArr);
       });
+  }
+
+  acentos(nombre: string): string {
+    nombre = nombre.replace('Ã³', 'ó');
+    nombre = nombre.replace('Ã¡', 'á');
+    nombre = nombre.replace('Ã', 'í');
+    return nombre;
   }
 
   selectedContrato(): void {
@@ -102,7 +105,9 @@ export class CrearCubicacionComponent implements OnInit {
             const id = 'regiones';
             this.regionArr = response.data[id];
             this.regionArr.forEach((value, index) => {
-              this.regionArr[index].nombre = value.nombre.replace('Ã³', 'ó');
+              this.regionArr[index].nombre = this.acentos(
+                this.regionArr[index].nombre
+              );
             });
             console.log(response);
           });
@@ -160,11 +165,11 @@ export class CrearCubicacionComponent implements OnInit {
         response.data[id].forEach((servicio) => {
           this.sourcePtemp.push({
             id: servicio.id,
-            nombre: servicio.nombre,
+            nombre: this.acentos(servicio.nombre),
             tipo_moneda: servicio.tipo_moneda,
             precio: servicio.precio,
             numero_producto: servicio.numero_producto,
-            cantidad: 0,
+            cantidad: 1,
             unidad: 'UNIDAD',
             region: this.regionName,
             tiposervicio: this.tipoServicioName,
@@ -179,5 +184,13 @@ export class CrearCubicacionComponent implements OnInit {
 
   counter(i: number): Array<number> {
     return new Array(i);
+  }
+
+  getTotal(): any {
+    console.log(this.selectedServicios);
+    this.total = 0;
+    this.selectedServicios.forEach((servicio) => {
+      this.total = this.total + servicio.precio * servicio.cantidad;
+    });
   }
 }

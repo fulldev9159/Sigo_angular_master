@@ -5,6 +5,7 @@
 ### features
 
 - Se crea sección de carrito de compras
+- Se genera un WA para manejar los problemas con los acentos. Consiste en ejecutar un replace sobre los nombres y cambiarlos por acentos correctos.
 
 ### Changes
 

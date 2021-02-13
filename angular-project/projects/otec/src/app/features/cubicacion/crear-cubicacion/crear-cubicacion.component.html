@@ -49,7 +49,7 @@
                             </div>
                             <div class="field">
                                 <label>Servicios</label>
-                                <p-listbox [options]="(sourceProducts$|async)!" [(ngModel)]="selectedServicios" [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="nombre" [listStyle]="{'max-height':'250px'}" [style]="{'width':'56rem','height':'285px'}">
+                                <p-listbox (click)="getTotal()" [options]="(sourceProducts$|async)!" [(ngModel)]="selectedServicios" [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="nombre" [listStyle]="{'max-height':'250px'}" [style]="{'width':'56rem','height':'285px'}">
                                     <ng-template let-servicio pTemplate="item">
                                         <div class="country-item">
                                             <div>{{servicio.nombre}}</div>
@@ -70,26 +70,32 @@
                             <th style="width: 102px">Cantidad</th>
                             <th style="width:125px">Unidad</th>
                             <th style="width:125px">Precio</th>
-                            <th style="width:125px">Total</th>
+                            <th style="width:125px">Sub Total</th>
                             <th style="width:125px">Opciones</th>
                         </tr>
 
                         <tr *ngFor="let itemC of selectedServicios; let i = index">
-                            <td>{{itemC.nombre}}</td>
-                            <td>{{itemC.region}}</td>
-                            <td>{{itemC.tiposervicio}}</td>
-                            <td>
-                                <select name="cantidad-{{itemC.id}}"  id="cantidad-{{itemC.id}}"
+                            <td> <span>{{itemC.nombre}}</span></td>
+                            <td class="center">{{itemC.region}}</td>
+                            <td class="center">{{itemC.tiposervicio}}</td>
+                            <td class="center">
+                                <select (change)="getTotal()" name="cantidad-{{itemC.id}}"  id="cantidad-{{itemC.id}}"
                                      [(ngModel)]="selectedServicios[i].cantidad">
                                     <option value=""> </option>
-                                    <option *ngFor="let numero of counter(5) ;let j = index" value="j">
+                                    <option *ngFor="let numero of counter(5) ;let j = index" value="{{j}}">
                                         {{j}}</option>
                                 </select>
                             </td>
-                            <td>UNIDAD</td>
-                            <td>${{itemC.precio}}</td>
-                            <td>${{itemC.precio * itemC.cantidad}}</td>
-                            <td></td>
+                            <td class="center">UNIDAD</td>
+                            <td class="center">${{itemC.precio}}</td>
+                            <td class="center">${{itemC.precio * itemC.cantidad}}</td>
+                            <td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="text-align: right">
+                                <span style="    
+                                margin-right: 31px;"><strong>Total</strong>: {{total}}</span>
+                                </td>
                         </tr>
                     </table>
                 </div>

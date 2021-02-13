@@ -19,7 +19,7 @@
     padding: 4px;
 }
 
-select{
+.field select{
     width: 100%;
     padding: 9px;
     border-radius: 7px;
@@ -117,4 +117,29 @@ select{
 
 .table-carro tr{
     border-bottom: 2px solid #616060d9;;
+}
+
+.table-carro tr th{
+    background: #9d9c9c;
+    color: white;
+    padding: 8px;
+    border: 1px;
+}
+
+.table-carro tr td span{
+    margin-left: 14px;
+}
+
+.table-carro tr td select{
+    width: 100%;
+    padding: 2px;
+    padding-left: 8px;
+}
+
+.center{
+    text-align: center;
+}
+
+table{
+    margin-left: 81px;
 }
