@@ -114,4 +114,11 @@ export interface Product {
   numero_producto: string;
   cantidad: number;
   unidad: string;
+  region: string;
+  tiposervicio: string;
 }
+
+// export interface Listbox {
+//   label: string;
+//   code: string;
+// }

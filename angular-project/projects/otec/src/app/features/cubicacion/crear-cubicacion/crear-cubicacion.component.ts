@@ -3,6 +3,7 @@ import { of, Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { CubicacionService } from '../../../core/services/cubicacion.service';
 import * as CubicacionModel from '../cubicacion.model';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'otec-crear-cubicacion',
@@ -10,6 +11,7 @@ import * as CubicacionModel from '../cubicacion.model';
   styleUrls: ['./crear-cubicacion.component.css'],
 })
 export class CrearCubicacionComponent implements OnInit {
+  public contratos: SelectItem[] = [];
   public contratosArr: CubicacionModel.ContratoMarco[] = [];
   public contratoId = '';
   public proveedorArr: CubicacionModel.Proveedores[] = [];
@@ -17,13 +19,17 @@ export class CrearCubicacionComponent implements OnInit {
   public subcontratoId = 0;
   public regionArr: CubicacionModel.Region[] = [];
   public regionId = '';
+  public regionName = '';
   public tipoServicioArr: CubicacionModel.TipoServicio[] = [];
   public tipoServicioId = '';
+  public tipoServicioName = '';
   public servicioArr: CubicacionModel.Servicio[] = [];
   public servicioId = '';
   public sourceProducts$: Observable<CubicacionModel.Product[]> = of([]);
   public sourcePtemp: CubicacionModel.Product[] = [];
   public targetProducts: CubicacionModel.Product[] = [];
+  public servicios: CubicacionModel.Product[] = [];
+  public selectedServicios: CubicacionModel.Product[] = [];
 
   constructor(
     private authService: AuthService,
@@ -39,27 +45,26 @@ export class CrearCubicacionComponent implements OnInit {
       .subscribe((response) => {
         const id = 'contratos_marco';
         this.contratosArr = response.data[id];
+        // response.data[id].forEach(x=>{
+        //   console.log(x.nombre)
+        //   this.contratos.push({label:x.nombre.toString(),value:x.id.toString()})
+        // })
         console.log(response);
         console.log(this.contratosArr);
       });
-
-    // this.sourceProducts =[
-    //   {cantidad: 0,
-    //     id: 4,
-    //     nombre: "Aumento de Channel  Element NSN",
-    //     numero_producto: "Adicional - Nokia 187",
-    //     precio: 564869,
-    //     tipo_moneda: "Pesos",
-    //     unidad: "UNIDAD"}
-    // ]
   }
 
   selectedContrato(): void {
     console.log(`getProveedoresSubcontrato -> ${this.contratoId}`);
     this.proveedorId = '';
+    this.sourcePtemp = [];
     this.regionId = '';
     this.tipoServicioId = '';
     this.servicioId = '';
+    this.sourceProducts$ = of([]);
+    this.targetProducts = [];
+    this.servicios = [];
+    this.selectedServicios = [];
     this.cubicacionService
       .getProveedoresSubcontrato(
         this.authService.getItemStorage('username') as string,
@@ -75,6 +80,11 @@ export class CrearCubicacionComponent implements OnInit {
 
   selectedProveedor(): void {
     console.log(`getRegionesSubcontrato -> ${this.proveedorId}`);
+    this.sourceProducts$ = of([]);
+    this.targetProducts = [];
+    this.sourcePtemp = [];
+    this.servicios = [];
+    this.selectedServicios = [];
     this.proveedorArr.forEach((x) => {
       const provID = parseInt(this.proveedorId, 10);
       if (x.id === provID) {
@@ -99,6 +109,16 @@ export class CrearCubicacionComponent implements OnInit {
 
   selectedRegion(): void {
     console.log(`getTipoServicioSubcontrato -> ${this.regionId}`);
+    this.sourceProducts$ = of([]);
+    this.targetProducts = [];
+    this.sourcePtemp = [];
+    this.servicios = [];
+    this.selectedServicios = [];
+    this.regionArr.forEach((region) => {
+      if (parseInt(this.regionId, 10) === region.id) {
+        this.regionName = region.nombre;
+      }
+    });
     this.cubicacionService
       .getTipoServicioSubcontrato(
         this.authService.getItemStorage('username') as string,
@@ -115,6 +135,14 @@ export class CrearCubicacionComponent implements OnInit {
 
   selectedTipoServicio(): void {
     console.log(`getServicioSubcontrato -> ${this.tipoServicioId}`);
+    this.sourceProducts$ = of([]);
+    this.sourcePtemp = [];
+    this.servicios = [];
+    this.tipoServicioArr.forEach((tipo) => {
+      if (parseInt(this.tipoServicioId, 10) === tipo.id) {
+        this.tipoServicioName = tipo.nombre;
+      }
+    });
     this.cubicacionService
       .getServicioSubcontrato(
         this.authService.getItemStorage('username') as string,
@@ -135,29 +163,18 @@ export class CrearCubicacionComponent implements OnInit {
             numero_producto: servicio.numero_producto,
             cantidad: 0,
             unidad: 'UNIDAD',
+            region: this.regionName,
+            tiposervicio: this.tipoServicioName,
           });
         });
         this.sourceProducts$ = of(this.sourcePtemp);
-        // response.data[id].forEach((servicio) => {
-        //   this.sourceProducts.subscribe(x=>{
-        //     x.push({
-        //       id: servicio.id,
-        //       nombre: servicio.nombre,
-        //       tipo_moneda: servicio.tipo_moneda,
-        //       precio: servicio.precio,
-        //       numero_producto: servicio.numero_producto,
-        //       cantidad: 0,
-        //       unidad: 'UNIDAD',
-        //     });
-        //   })
-        // });
         console.log(response);
         // console.log("productos")
         // console.log(this.sourceProducts$)
       });
   }
 
-  selectedServicio(): void {
-    console.log('servicio');
+  counter(i: number): Array<number> {
+    return new Array(i);
   }
 }

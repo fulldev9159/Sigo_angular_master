@@ -4,12 +4,13 @@
 
 ### features
 
-- Se crea sección de carrito de compras con drag and drop
+- Se crea sección de carrito de compras
 
 ### Changes
 
 - Se agrega container al template de crear-cubicación para agregar overflow scroll
 - Se realiza cambio de aspecto de la página de creación de cubicación
+- Cambio a PrimeNg
 
 ## [0.3.0] - 2021-02-07
 

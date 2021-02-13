@@ -120,9 +120,6 @@ describe('LoginComponent', () => {
     expect(component.valid).toBe(false);
   });
 
-  xit('show message when username is empty');
-  xit('show username when username is empty');
-
   it('should submit user to storage an redirect to dashboard', fakeAsync(() => {
     const username = 'username';
     const password = 'password';

@@ -5,15 +5,16 @@ import { SharedModule } from '../../shared/shared.module';
 import { CubicacionRoutingModule } from './cubicacion-routing.module';
 import { CubicacionComponent } from './cubicacion.component';
 import { CrearCubicacionComponent } from './crear-cubicacion/crear-cubicacion.component';
-import { PickListModule } from 'primeng/picklist';
-
+import { DropdownModule } from 'primeng/dropdown';
+import { ListboxModule } from 'primeng/listbox';
 @NgModule({
   declarations: [CubicacionComponent, CrearCubicacionComponent],
   imports: [
     CommonModule,
     CubicacionRoutingModule,
     SharedModule,
-    PickListModule,
+    DropdownModule,
+    ListboxModule,
   ],
 })
 export class CubicacionModule {}
