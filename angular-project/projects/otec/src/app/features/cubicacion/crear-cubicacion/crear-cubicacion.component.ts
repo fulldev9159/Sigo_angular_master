@@ -164,7 +164,7 @@ export class CrearCubicacionComponent implements OnInit {
         this.servicioArr = response.data[id];
         response.data[id].forEach((servicio) => {
           this.sourcePtemp.push({
-            id: servicio.id,
+            id_lpu: servicio.id_lpu,
             nombre: this.acentos(servicio.nombre),
             tipo_moneda: servicio.tipo_moneda,
             precio: servicio.precio,

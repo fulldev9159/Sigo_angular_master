@@ -163,7 +163,7 @@ describe('CrearCubicacionComponent', () => {
   it('should storage servicios de un contrato', fakeAsync(() => {
     const arrExpect: CubicacionModel.Servicio[] = [
       {
-        id: 3,
+        id_lpu: 3,
         nombre: 'CD1-Acometida para Media Tensinnn de hasta 100 m',
         numero_producto: 'CD 1 - Bsico ER 67',
         precio: 2171824,
@@ -178,7 +178,7 @@ describe('CrearCubicacionComponent', () => {
       data: {
         servicios: [
           {
-            id: 3,
+            id_lpu: 3,
             nombre: 'CD1-Acometida para Media Tensinnn de hasta 100 m',
             numero_producto: 'CD 1 - Bsico ER 67',
             precio: 2171824,

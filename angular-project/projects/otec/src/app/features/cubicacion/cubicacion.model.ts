@@ -99,7 +99,7 @@ export interface ResponseServicioContrato {
 }
 
 export interface Servicio {
-  id: number;
+  id_lpu: number;
   nombre: string;
   precio: number;
   tipo_moneda: string;
@@ -107,7 +107,7 @@ export interface Servicio {
 }
 
 export interface Product {
-  id: number;
+  id_lpu: number;
   nombre: string;
   precio: number;
   tipo_moneda: string;
@@ -117,8 +117,3 @@ export interface Product {
   region: string;
   tiposervicio: string;
 }
-
-// export interface Listbox {
-//   label: string;
-//   code: string;
-// }

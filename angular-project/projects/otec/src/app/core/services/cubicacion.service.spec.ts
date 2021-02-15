@@ -188,7 +188,7 @@ describe('AuthService', () => {
       data: {
         servicios: [
           {
-            id: 1,
+            id_lpu: 1,
             nombre: 'CD1',
             precio: 9999,
             tipo_moneda: 'Pesos',

@@ -79,7 +79,7 @@
                             <td class="center">{{itemC.region}}</td>
                             <td class="center">{{itemC.tiposervicio}}</td>
                             <td class="center">
-                                <select (change)="getTotal()" name="cantidad-{{itemC.id}}"  id="cantidad-{{itemC.id}}"
+                                <select (change)="getTotal()" name="cantidad-{{itemC.id_lpu}}"  id="cantidad-{{itemC.id_lpu}}"
                                      [(ngModel)]="selectedServicios[i].cantidad">
                                     <option value=""> </option>
                                     <option *ngFor="let numero of counter(5) ;let j = index" value="{{j}}">
