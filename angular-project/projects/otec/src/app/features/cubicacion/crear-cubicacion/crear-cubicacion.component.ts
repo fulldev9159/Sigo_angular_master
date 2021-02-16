@@ -34,9 +34,10 @@ export class CrearCubicacionComponent implements OnInit {
   public servicios: CubicacionModel.Product[] = [];
   public selectedServicios: CubicacionModel.Product[] = [];
   public total = 0;
-  public contratoDisabled: boolean = false;
-  public proveedorDisabled: boolean = false;
-  public regionDisabled: boolean = false;
+  public contratoDisabled = false;
+  public proveedorDisabled = false;
+  public regionDisabled = false;
+  public nombreCubicacion = '';
 
   constructor(
     private authService: AuthService,
@@ -204,9 +205,30 @@ export class CrearCubicacionComponent implements OnInit {
     });
   }
 
-  confirm(event: Event, input: string) {
+  limpiarCarro(event: Event): any {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: `Se borraran todos los sevicios seleccionados. Está seguro que desea proceder?`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.selectedServicios = [];
+        this.proveedorId = '';
+        this.sourcePtemp = [];
+        this.regionId = '';
+        this.tipoServicioId = '';
+        this.servicioId = '';
+        this.sourceProducts$ = of([]);
+        this.targetProducts = [];
+        this.servicios = [];
+        this.selectedServicios = [];
+      },
+      reject: () => {},
+    });
+  }
+
+  confirm(event: Event, input: string): any {
     console.log(this.selectedServicios.length);
-    let permitirMensaje: boolean = false;
+    let permitirMensaje = false;
     if (input === 'contrato' && this.contratoDisabled) {
       permitirMensaje = true;
     }
@@ -245,5 +267,12 @@ export class CrearCubicacionComponent implements OnInit {
         this.regionDisabled = false;
       }
     }
+  }
+
+  save(): any {
+    console.log(this.authService.getItemStorage('username') as string);
+    console.log(this.nombreCubicacion);
+    console.log(this.total);
+    console.log(this.selectedServicios);
   }
 }

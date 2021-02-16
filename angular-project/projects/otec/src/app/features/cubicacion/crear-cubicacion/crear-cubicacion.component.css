@@ -107,7 +107,10 @@
     letter-spacing: 3px;
     color: #616060d9;;
     margin-bottom: 11px;
-    border-bottom: 2px solid #616060d9;;
+    border-bottom: 2px solid #616060d9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .table-carro{
@@ -142,4 +145,17 @@
 
 table{
     margin-left: 81px;
+}
+
+.buttons-carro{
+    margin-right: 175px;
+    margin-bottom: 9px;
+}
+
+.nombre-cubicacion{
+    width: 100%;
+    border: 1px solid #767676;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 15px;
 }

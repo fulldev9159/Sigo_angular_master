@@ -7,6 +7,11 @@
                 <div class="title">Creación de cubicación</div>
                 <div class="form-content">
                     <div class="left-form">
+                        <div class="field">
+                            <label>Nombre</label>
+                                <input type="text" class="nombre-cubicacion" [(ngModel)]="nombreCubicacion" >
+                        </div>
+
                         <p-confirmPopup></p-confirmPopup>
                         <div class="field">
                             <label>Contrato</label>
@@ -18,7 +23,6 @@
                                     </option>
                                 </select>
                             </div>
-
                         </div>
                         <div class="field">
                             <label>Proveedor</label>
@@ -70,7 +74,16 @@
                     </div>
                 </div>
                 <div class="carro">
-                    <div class="title-carro">Resumen de Servicios</div>
+                    <div class="title-carro">
+                        Resumen de Servicios
+                        <div class="buttons-carro">
+                            <div class="ui buttons">
+                                <button class="ui button" (click)="limpiarCarro($event)">Clear</button>
+                                <div class="or"></div>
+                                <button class="ui positive button active" (click)="save()">Save</button>
+                              </div>
+                        </div>
+                    </div>
 
                     <table class="table-carro">
                         <tr>
