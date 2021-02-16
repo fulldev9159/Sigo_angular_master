@@ -12,6 +12,8 @@ services:
             MYSQL_USER: otec_user
             MYSQL_PASSWORD: otec_pass
         command: --event_scheduler=ON --character-set-server=utf8 --collation-server=utf8_unicode_ci
+        ports:
+            - 3307:3306
     mcl_api_otec:
         image: registryv2.zweicom.com:5000/api-otec:develop
         environment: 

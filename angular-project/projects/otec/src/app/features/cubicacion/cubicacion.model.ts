@@ -117,3 +117,21 @@ export interface Product {
   region: string;
   tiposervicio: string;
 }
+
+export interface RequestSaveCubicacion {
+  // user: string;
+  token: string;
+  nombre: string;
+  total: number;
+  lpus: Lpus[];
+}
+
+export interface Lpus {
+  id_lpu: number;
+  cantidad: number;
+}
+
+export interface ResponseSaveCubicacion {
+  data: string;
+  status: StatusSectionResponse;
+}
