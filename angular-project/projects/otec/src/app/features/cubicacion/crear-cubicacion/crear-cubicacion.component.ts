@@ -4,11 +4,14 @@ import { AuthService } from '../../../core/services/auth.service';
 import { CubicacionService } from '../../../core/services/cubicacion.service';
 import * as CubicacionModel from '../cubicacion.model';
 import { SelectItem } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
+import { identifierModuleUrl, templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'otec-crear-cubicacion',
   templateUrl: './crear-cubicacion.component.html',
   styleUrls: ['./crear-cubicacion.component.css'],
+  providers: [ConfirmationService],
 })
 export class CrearCubicacionComponent implements OnInit {
   public contratos: SelectItem[] = [];
@@ -31,10 +34,14 @@ export class CrearCubicacionComponent implements OnInit {
   public servicios: CubicacionModel.Product[] = [];
   public selectedServicios: CubicacionModel.Product[] = [];
   public total = 0;
+  public contratoDisabled: boolean = false;
+  public proveedorDisabled: boolean = false;
+  public regionDisabled: boolean = false;
 
   constructor(
     private authService: AuthService,
-    private cubicacionService: CubicacionService
+    private cubicacionService: CubicacionService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +75,7 @@ export class CrearCubicacionComponent implements OnInit {
     this.targetProducts = [];
     this.servicios = [];
     this.selectedServicios = [];
+    this.contratoDisabled = true;
     this.cubicacionService
       .getProveedoresSubcontrato(
         this.authService.getItemStorage('username') as string,
@@ -88,6 +96,7 @@ export class CrearCubicacionComponent implements OnInit {
     this.sourcePtemp = [];
     this.servicios = [];
     this.selectedServicios = [];
+    this.proveedorDisabled = true;
     this.proveedorArr.forEach((x) => {
       const provID = parseInt(this.proveedorId, 10);
       if (x.id === provID) {
@@ -122,6 +131,7 @@ export class CrearCubicacionComponent implements OnInit {
     this.sourcePtemp = [];
     this.servicios = [];
     this.selectedServicios = [];
+    this.regionDisabled = true;
     this.regionArr.forEach((region) => {
       if (parseInt(this.regionId, 10) === region.id) {
         this.regionName = region.nombre;
@@ -192,5 +202,48 @@ export class CrearCubicacionComponent implements OnInit {
     this.selectedServicios.forEach((servicio) => {
       this.total = this.total + servicio.precio * servicio.cantidad;
     });
+  }
+
+  confirm(event: Event, input: string) {
+    console.log(this.selectedServicios.length);
+    let permitirMensaje: boolean = false;
+    if (input === 'contrato' && this.contratoDisabled) {
+      permitirMensaje = true;
+    }
+    if (input === 'proveedor' && this.proveedorDisabled) {
+      permitirMensaje = true;
+    }
+    if (input === 'region' && this.regionDisabled) {
+      permitirMensaje = true;
+    }
+    if (this.selectedServicios.length > 0 && permitirMensaje) {
+      this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: `Si cambia de ${input} borrara todos los sevicios seleccionados. Está seguro que desea proceder?`,
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          if (input === 'contrato') {
+            this.contratoDisabled = false;
+          }
+          if (input === 'proveedor') {
+            this.proveedorDisabled = false;
+          }
+          if (input === 'region') {
+            this.regionDisabled = false;
+          }
+        },
+        reject: () => {},
+      });
+    } else {
+      if (input === 'contrato') {
+        this.contratoDisabled = false;
+      }
+      if (input === 'proveedor') {
+        this.proveedorDisabled = false;
+      }
+      if (input === 'region') {
+        this.regionDisabled = false;
+      }
+    }
   }
 }

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.0] - 2021-02-15
+
+### features
+
+- Se agrega un popup para que el cliente pueda confirmar cuando desee cambiar el contrato al crear una cubicación
+- Se crea lógica para el almancenado de una cubicación
+### Changes
+
+- 
+
 ## [0.4.0] - 2021-02-11
 
 ### features
