@@ -1,128 +1,123 @@
-<div class="container-crear-cubicacion">
-    <otec-navbar></otec-navbar>
-    <div class="crear-cubicacion-section">
-        <div class="cubicacion-navbar"></div>
-        <div class="cubicacion-content">
-            <div class="ui segment">
-                <div class="title">Creación de cubicación</div>
-                <div class="form-content">
-                    <div class="left-form">
-                        <div class="field">
-                            <label>Nombre</label>
-                                <input type="text" class="nombre-cubicacion" [(ngModel)]="nombreCubicacion" >
-                        </div>
-
-                        <p-confirmPopup></p-confirmPopup>
-                        <div class="field">
-                            <label>Contrato</label>
-                            <div (click)="confirm($event,'contrato')">
-                                <select name="contrato" id="contrato" (change)="selectedContrato()"
-                                    [(ngModel)]="contratoId" [disabled]="contratoDisabled">
-                                    <option *ngFor="let contrato of contratosArr" value="{{contrato.id}}">
-                                        {{contrato.nombre}}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Proveedor</label>
-                            <div (click)="confirm($event,'proveedor')">
-                                <select name="proveedor" id="proveedor" (change)="selectedProveedor()"
-                                    [(ngModel)]="proveedorId" [disabled]="contratoId==''||proveedorDisabled">
-                                    <option value=""> </option>
-                                    <option *ngFor="let proveedor of proveedorArr" value="{{proveedor.id}}">
-                                        {{proveedor.nombre}}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label>Región</label>
-                            <div (click)="confirm($event,'region')">
-                                <select name="region" id="region" (change)="selectedRegion()" [(ngModel)]="regionId"
-                                    [disabled]="proveedorId==''||regionDisabled">
-                                    <option value=""> </option>
-                                    <option *ngFor="let region of regionArr" value="{{region.id}}">{{region.codigo}}
-                                        {{region.nombre}}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-form">
-                        <div class="field">
-                            <label>Tipo de servicio</label>
-                            <select name="tipodeservicio" id="tipodeservicio" (change)="selectedTipoServicio()"
-                                [(ngModel)]="tipoServicioId" [disabled]="regionId==''">
-                                <option value=""> </option>
-                                <option *ngFor="let tiposervicio of tipoServicioArr" value="{{tiposervicio.id}}">
-                                    {{tiposervicio.nombre}}</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label>Servicios</label>
-                            <p-listbox (click)="getTotal()" [options]="(sourceProducts$|async)!"
-                                [(ngModel)]="selectedServicios" [metaKeySelection]="false" [checkbox]="true"
-                                [filter]="true" [multiple]="true" optionLabel="nombre"
-                                [listStyle]="{'max-height':'250px'}" [style]="{'width':'56rem','height':'285px'}">
-                                <ng-template let-servicio pTemplate="item">
-                                    <div class="country-item">
-                                        <div>{{servicio.nombre}}</div>
-                                    </div>
-                                </ng-template>
-                            </p-listbox>
-                        </div>
+<p-confirmPopup></p-confirmPopup>
+<otec-navbar></otec-navbar>
+<div class="crear-cubicacion-section">
+    <div class="cubicacion-navbar"></div>
+    <div class="cubicacion-content ui segment">
+        <div class="title">Creación de cubicación</div>
+        <div class="form-content">
+            <div class="left-form">
+                <div class="field">
+                    <label>Nombre</label>
+                    <input type="text" class="nombre-cubicacion" [(ngModel)]="nombreCubicacion">
+                </div>
+                <div class="field">
+                    <label>Contrato</label>
+                    <div (click)="confirm($event,'contrato')">
+                        <select name="contrato" id="contrato" (change)="selectedContrato()" [(ngModel)]="contratoId"
+                            [disabled]="contratoDisabled">
+                            <option *ngFor="let contrato of contratosArr" value="{{contrato.id}}">
+                                {{contrato.nombre}}
+                            </option>
+                        </select>
                     </div>
                 </div>
-                <div class="carro">
-                    <div class="title-carro">
-                        Resumen de Servicios
-                        <div class="buttons-carro">
-                            <div class="ui buttons">
-                                <button class="ui button" (click)="limpiarCarro($event)">Clear</button>
-                                <div class="or"></div>
-                                <button class="ui positive button active" (click)="save()">Save</button>
-                              </div>
-                        </div>
+                <div class="field">
+                    <label>Proveedor</label>
+                    <div (click)="confirm($event,'proveedor')">
+                        <select name="proveedor" id="proveedor" (change)="selectedProveedor()" [(ngModel)]="proveedorId"
+                            [disabled]="contratoId==''||proveedorDisabled">
+                            <option value=""> </option>
+                            <option *ngFor="let proveedor of proveedorArr" value="{{proveedor.id}}">
+                                {{proveedor.nombre}}
+                            </option>
+                        </select>
                     </div>
-
-                    <table class="table-carro">
-                        <tr>
-                            <th style="width: 318px"> Descripcion</th>
-                            <th style="width: 269px">Región</th>
-                            <th style="width: 140px">Tipo Servicio</th>
-                            <th style="width: 102px">Cantidad</th>
-                            <th style="width:125px">Unidad</th>
-                            <th style="width:125px">Precio</th>
-                            <th style="width:125px">Sub Total</th>
-                            <th style="width:125px">Opciones</th>
-                        </tr>
-
-                        <tr *ngFor="let itemC of selectedServicios; let i = index">
-                            <td> <span>{{itemC.nombre}}</span></td>
-                            <td class="center">{{itemC.region}}</td>
-                            <td class="center">{{itemC.tiposervicio}}</td>
-                            <td class="center">
-                                <select (change)="getTotal()" name="cantidad-{{itemC.id_lpu}}"
-                                    id="cantidad-{{itemC.id_lpu}}" [(ngModel)]="selectedServicios[i].cantidad">
-                                    <option value=""> </option>
-                                    <option *ngFor="let numero of counter(5) ;let j = index" value="{{j}}">
-                                        {{j}}</option>
-                                </select>
-                            </td>
-                            <td class="center">UNIDAD</td>
-                            <td class="center">${{itemC.precio}}</td>
-                            <td class="center">${{itemC.precio * itemC.cantidad}}</td>
-                            <td class="center"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="7" style="text-align: right">
-                                <span style="    
-                                margin-right: 31px;"><strong>Total</strong>: {{total}}</span>
-                            </td>
-                        </tr>
-                    </table>
+                </div>
+                <div class="field">
+                    <label>Región</label>
+                    <div (click)="confirm($event,'region')">
+                        <select name="region" id="region" (change)="selectedRegion()" [(ngModel)]="regionId"
+                            [disabled]="proveedorId==''||regionDisabled">
+                            <option value=""> </option>
+                            <option *ngFor="let region of regionArr" value="{{region.id}}">{{region.codigo}}
+                                {{region.nombre}}</option>
+                        </select>
+                    </div>
                 </div>
             </div>
+            <div class="right-form">
+                <div class="field">
+                    <label>Tipo de servicio</label>
+                    <select name="tipodeservicio" id="tipodeservicio" (change)="selectedTipoServicio()"
+                        [(ngModel)]="tipoServicioId" [disabled]="regionId==''">
+                        <option value=""> </option>
+                        <option *ngFor="let tiposervicio of tipoServicioArr" value="{{tiposervicio.id}}">
+                            {{tiposervicio.nombre}}</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Servicios</label>
+                    <p-listbox (click)="getTotal()" [options]="(sourceProducts$|async)!" [(ngModel)]="selectedServicios"
+                        [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true"
+                        optionLabel="nombre" [listStyle]="{'max-height':'250px'}"
+                        [style]="{'width':'56rem','height':'285px'}">
+                        <ng-template let-servicio pTemplate="item">
+                            <div class="country-item">
+                                <div>{{servicio.nombre}}</div>
+                            </div>
+                        </ng-template>
+                    </p-listbox>
+                </div>
+            </div>
+        </div>
+        <div class="carro">
+            <div class="title-carro">
+                Resumen de Servicios
+                <div class="buttons-carro">
+                    <div class="ui buttons">
+                        <button class="ui button" (click)="limpiarCarro($event)">Clear</button>
+                        <div class="or"></div>
+                        <button class="ui positive button active" (click)="save()">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table-carro">
+                <tr>
+                    <th style="width: 318px"> Descripcion</th>
+                    <th style="width: 269px">Región</th>
+                    <th style="width: 140px">Tipo Servicio</th>
+                    <th style="width: 102px">Cantidad</th>
+                    <th style="width:125px">Unidad</th>
+                    <th style="width:125px">Precio</th>
+                    <th style="width:125px">Sub Total</th>
+                    <th style="width:125px">Opciones</th>
+                </tr>
+
+                <tr *ngFor="let itemC of selectedServicios; let i = index">
+                    <td> <span>{{itemC.nombre}}</span></td>
+                    <td class="center">{{itemC.region}}</td>
+                    <td class="center">{{itemC.tiposervicio}}</td>
+                    <td class="center">
+                        <select (change)="getTotal()" name="cantidad-{{itemC.id_lpu}}" id="cantidad-{{itemC.id_lpu}}"
+                            [(ngModel)]="selectedServicios[i].cantidad">
+                            <option value=""> </option>
+                            <option *ngFor="let numero of counter(5) ;let j = index" value="{{j}}">
+                                {{j}}</option>
+                        </select>
+                    </td>
+                    <td class="center">UNIDAD</td>
+                    <td class="center">${{itemC.precio}}</td>
+                    <td class="center">${{itemC.precio * itemC.cantidad}}</td>
+                    <td class="center"></td>
+                </tr>
+                <tr>
+                    <td colspan="7" style="text-align: right">
+                        <span style="    
+                                margin-right: 31px;"><strong>Total</strong>: {{total}}</span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

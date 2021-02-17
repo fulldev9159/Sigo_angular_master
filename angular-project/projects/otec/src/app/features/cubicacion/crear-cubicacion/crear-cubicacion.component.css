@@ -1,7 +1,3 @@
-.container-crear-cubicacion {
-    overflow: scroll;
-    height: 100vh;
-}
 .crear-cubicacion-section {
     display: flex;
     height: 100vh;

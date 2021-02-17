@@ -8,7 +8,7 @@ import { CubicacionService } from './cubicacion.service';
 
 import * as CubicacionModel from '../../features/cubicacion/cubicacion.model';
 
-describe('AuthService', () => {
+describe('CubicacionService', () => {
   let service: CubicacionService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
@@ -207,5 +207,41 @@ describe('AuthService', () => {
     );
     expect(req.request.method).toBe('POST');
     req.flush(dummyLoginResponse);
+  });
+
+  it('should send cubicacion for save', () => {
+    const user = 'carloscj';
+    const token = 'dummytoken';
+    const nombreC = 'cubicaciontest';
+    const total = 1000;
+    const lpus: CubicacionModel.Product[] = [
+      {
+        id_lpu: 1,
+        nombre: 'servicio1',
+        precio: 11000,
+        tipo_moneda: 'PESOS',
+        numero_producto: 'asdasd',
+        cantidad: 1,
+        unidad: 'Unidad',
+        region: '1 region',
+        tiposervicio: 'CD1',
+      },
+    ];
+    const dummyResponse: CubicacionModel.ResponseSaveCubicacion = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: '',
+    };
+
+    service
+      .saveCubicacion(token, user, nombreC, total, lpus)
+      .subscribe((response) => {
+        expect(response).toEqual(dummyResponse);
+      });
+    const req = httpMock.expectOne('http://localhost:4040/saveCubicacion');
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyResponse);
   });
 });

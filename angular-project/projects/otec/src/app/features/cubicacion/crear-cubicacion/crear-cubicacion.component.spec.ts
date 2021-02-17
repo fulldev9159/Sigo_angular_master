@@ -10,17 +10,23 @@ import { CubicacionService } from '../../../core/services/cubicacion.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import * as CubicacionModel from '../cubicacion.model';
 import { of } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
 
 describe('CrearCubicacionComponent', () => {
   let component: CrearCubicacionComponent;
   let fixture: ComponentFixture<CrearCubicacionComponent>;
   let service: CubicacionService;
+  let confirmationService: ConfirmationService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       declarations: [CrearCubicacionComponent],
-      providers: [{ provide: 'environment', useValue: {} }, CubicacionService],
+      providers: [
+        { provide: 'environment', useValue: {} },
+        CubicacionService,
+        ConfirmationService,
+      ],
     }).compileComponents();
   });
 
@@ -28,6 +34,7 @@ describe('CrearCubicacionComponent', () => {
     fixture = TestBed.createComponent(CrearCubicacionComponent);
     component = fixture.componentInstance;
     service = TestBed.inject(CubicacionService);
+    confirmationService = TestBed.inject(ConfirmationService);
     fixture.detectChanges();
   });
 
@@ -43,10 +50,11 @@ describe('CrearCubicacionComponent', () => {
     const tipodeservicioSelect = compiled.querySelector(
       'select[id="tipodeservicio"]'
     );
-    const servicioSelect = compiled.querySelector('select[id="servicio"]');
 
     expect(contratoSelect).toBeTruthy();
-    // expect(proveedorSelect).toBeTruthy();
+    expect(proveedorSelect).toBeTruthy();
+    expect(regionSelect).toBeTruthy();
+    expect(tipodeservicioSelect).toBeTruthy();
   });
 
   it('should be store contratos', fakeAsync(() => {
@@ -160,16 +168,25 @@ describe('CrearCubicacionComponent', () => {
     expect(component.tipoServicioArr).toEqual(arrExpect);
   }));
 
-  it('should storage servicios de un contrato', fakeAsync(() => {
-    const arrExpect: CubicacionModel.Servicio[] = [
+  it('should storage servicios', fakeAsync(() => {
+    component.regionArr = [{ codigo: 'XIII', id: 13, nombre: '1Region' }];
+    component.regionId = '13';
+    component.tipoServicioId = '1';
+    component.tipoServicioArr = [{ id: 1, nombre: 'CD1' }];
+    const arrExpect: CubicacionModel.Product[] = [
       {
-        id_lpu: 3,
-        nombre: 'CD1-Acometida para Media Tensinnn de hasta 100 m',
-        numero_producto: 'CD 1 - Bsico ER 67',
-        precio: 2171824,
-        tipo_moneda: 'Pesos',
+        id_lpu: 1,
+        nombre: 'SERVICIO1',
+        tipo_moneda: 'PESOS',
+        precio: 1000,
+        numero_producto: '213213',
+        cantidad: 1,
+        unidad: 'UNIDAD',
+        region: '1Region',
+        tiposervicio: 'CD1',
       },
     ];
+
     const response: CubicacionModel.ResponseServicioContrato = {
       status: {
         responseCode: 0,
@@ -178,11 +195,11 @@ describe('CrearCubicacionComponent', () => {
       data: {
         servicios: [
           {
-            id_lpu: 3,
-            nombre: 'CD1-Acometida para Media Tensinnn de hasta 100 m',
-            numero_producto: 'CD 1 - Bsico ER 67',
-            precio: 2171824,
-            tipo_moneda: 'Pesos',
+            id_lpu: 1,
+            nombre: 'SERVICIO1',
+            precio: 1000,
+            tipo_moneda: 'PESOS',
+            numero_producto: '213213',
           },
         ],
       },
@@ -192,6 +209,75 @@ describe('CrearCubicacionComponent', () => {
     component.selectedTipoServicio();
     tick();
     fixture.detectChanges();
-    expect(component.servicioArr).toEqual(arrExpect);
+    expect(component.sourcePtemp).toEqual(arrExpect);
   }));
+
+  it('counter should return array of number', () => {
+    expect(component.counter(4).length).toBe(4);
+  });
+
+  it('Should return total cash of services', () => {
+    component.selectedServicios = [
+      {
+        id_lpu: 1,
+        nombre: 'SERVICIO1',
+        tipo_moneda: 'PESOS',
+        precio: 1000,
+        numero_producto: '213213',
+        cantidad: 1,
+        unidad: 'UNIDAD',
+        region: '1Region',
+        tiposervicio: 'CD1',
+      },
+      {
+        id_lpu: 2,
+        nombre: 'SERVICIO2',
+        tipo_moneda: 'PESOS',
+        precio: 1000,
+        numero_producto: '113213',
+        cantidad: 1,
+        unidad: 'UNIDAD',
+        region: '1Region',
+        tiposervicio: 'CD1',
+      },
+    ];
+    component.getTotal();
+    expect(component.total).toBe(2000);
+  });
+
+  xit('should display message for confirm clear', () => {
+    const event: Event = new Event('MouseEvent', {
+      bubbles: true,
+      cancelable: false,
+    });
+    spyOn(confirmationService, 'confirm');
+    component.limpiarCarro(event);
+    expect(confirmationService.confirm).toHaveBeenCalled();
+  });
+
+  it('should let show message of confirm', () => {
+    component.selectedServicios = [];
+    const event: Event = new Event('MouseEvent', {
+      bubbles: true,
+      cancelable: false,
+    });
+    const input = 'contrato';
+    component.contratoDisabled = false;
+    component.confirm(event, input);
+    expect(component.contratoDisabled).toBe(false);
+  });
+
+  it('should invoke service save cubicacion', () => {
+    const dummyResponse: CubicacionModel.ResponseSaveCubicacion = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: '',
+    };
+    spyOn(service, 'saveCubicacion').and.returnValue(of(dummyResponse));
+    // spyOn(service, 'saveCubicacion');
+    component.save();
+    expect(service.saveCubicacion).toHaveBeenCalled();
+  });
 });

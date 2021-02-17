@@ -12,5 +12,5 @@ body{
     background: linear-gradient(0.87deg, #019DF4 1.07%, #019DF4 59.08%, rgba(1, 157, 244, 0.296875) 99.59%);
     /* height: 100vh; */
     margin:0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
