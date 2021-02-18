@@ -5,6 +5,7 @@ import { CubicacionService } from '../../../core/services/cubicacion.service';
 import * as CubicacionModel from '../cubicacion.model';
 import { ConfirmationService } from 'primeng/api';
 import { SharedService } from '../../../core/services/shared.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'otec-crear-cubicacion',
@@ -246,13 +247,21 @@ export class CrearCubicacionComponent implements OnInit {
         this.total,
         this.selectedServicios
       )
-      .subscribe((x) => {
-        this.sharedService.showMessage(
-          'cubicación almacenada exitosamente',
-          'ok'
-        );
-        this.sharedService.navegateTo('dashboard/cubicacion');
-        console.log(x);
-      });
+      .subscribe(
+        (x) => {
+          this.sharedService.showMessage(
+            'cubicación almacenada exitosamente',
+            'ok'
+          );
+          this.sharedService.navegateTo('dashboard/cubicacion');
+          console.log(x);
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            `(HTTP code: ${err.status}) ${err.error.status.description}`,
+            'error'
+          );
+        }
+      );
   }
 }

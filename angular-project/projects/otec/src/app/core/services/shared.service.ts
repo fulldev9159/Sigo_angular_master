@@ -20,7 +20,7 @@ export class SharedService {
         }
         return '#2185D0';
       })(type),
-      duration: 5000,
+      duration: 7000,
     });
   }
 
