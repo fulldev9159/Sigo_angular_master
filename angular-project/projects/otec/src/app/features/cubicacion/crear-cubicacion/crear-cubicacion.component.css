@@ -3,6 +3,11 @@
     height: 100vh;
 }
 
+span.error{
+    display: block;
+    font-size: 11px;
+    color: red;
+}
 .cubicacion-navbar {
     width: 7%;
     border-right: 1px solid #fff5f570;
@@ -11,8 +16,9 @@
 }
 
 .cubicacion-content {
-    width: 93%;
-    padding: 4px;
+    width: 92%;
+    margin-top: 3px;
+    margin-left: 2px;
 }
 
 .field select{

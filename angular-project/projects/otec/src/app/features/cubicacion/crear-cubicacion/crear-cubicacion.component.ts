@@ -33,6 +33,7 @@ export class CrearCubicacionComponent implements OnInit {
   public proveedorDisabled = false;
   public regionDisabled = false;
   public nombreCubicacion = '';
+  public NombreErr = false;
 
   constructor(
     private authService: AuthService,
@@ -59,6 +60,9 @@ export class CrearCubicacionComponent implements OnInit {
 
   selectedContrato(): void {
     // console.log(`getProveedoresSubcontrato -> ${this.contratoId}`);
+    if (this.nombreCubicacion === '') {
+      this.NombreErr = true;
+    }
     this.proveedorId = '';
     this.regionId = '';
     this.tipoServicioId = '';
@@ -79,6 +83,9 @@ export class CrearCubicacionComponent implements OnInit {
 
   selectedProveedor(): void {
     // console.log(`getRegionesSubcontrato -> ${this.proveedorId}`);
+    if (this.nombreCubicacion === '') {
+      this.NombreErr = true;
+    }
     this.reset();
     this.proveedorDisabled = true;
     this.proveedorArr.forEach((x) => {
@@ -105,6 +112,9 @@ export class CrearCubicacionComponent implements OnInit {
 
   selectedRegion(): void {
     // console.log(`getTipoServicioSubcontrato -> ${this.regionId}`);
+    if (this.nombreCubicacion === '') {
+      this.NombreErr = true;
+    }
     this.regionDisabled = true;
     this.reset();
     this.cubicacionService
@@ -122,6 +132,9 @@ export class CrearCubicacionComponent implements OnInit {
 
   selectedTipoServicio(): void {
     // console.log(`getServicioSubcontrato -> ${this.tipoServicioId}`);
+    if (this.nombreCubicacion === '') {
+      this.NombreErr = true;
+    }
     let tipoServicioName: string;
     let regionName: string;
     this.sourceProducts$ = of([]);
@@ -196,6 +209,9 @@ export class CrearCubicacionComponent implements OnInit {
   }
 
   confirm(event: Event, input: string): any {
+    if (this.nombreCubicacion === '') {
+      this.NombreErr = true;
+    }
     // console.log(this.selectedServicios.length);
     let permitirMensaje = false;
     if (input === 'contrato' && this.contratoDisabled) {
