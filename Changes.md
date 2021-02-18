@@ -1,11 +1,24 @@
 # Changelog
 
+## [0.6.0] - 2021-02-20
+
+### features
+
+- Se agrega mensajes al realizar una inserción de cubicación para exito o falla
+- Se crea shared service para funciones genericas que se utilizan en todos los componentes
+
+### Changes
+
+- Se migra la funcion de Snackbar a shared services para que todos puedan usarlo
+- Se migra la función navegateTo a shared services para que todos puedan usarlo
+
 ## [0.5.0] - 2021-02-15
 
 ### features
 
 - Se agrega un popup para que el cliente pueda confirmar cuando desee cambiar el contrato al crear una cubicación
 - Se crea lógica para el almancenado de una cubicación
+- Se inserta la cubicación via API
 
 ### Changes
 

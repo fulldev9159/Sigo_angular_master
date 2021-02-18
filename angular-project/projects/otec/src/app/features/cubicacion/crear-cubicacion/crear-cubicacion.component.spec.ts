@@ -7,10 +7,12 @@ import {
 
 import { CrearCubicacionComponent } from './crear-cubicacion.component';
 import { CubicacionService } from '../../../core/services/cubicacion.service';
+import { SharedService } from '../../../core/services/shared.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import * as CubicacionModel from '../cubicacion.model';
 import { of } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CrearCubicacionComponent', () => {
   let component: CrearCubicacionComponent;
@@ -20,12 +22,13 @@ describe('CrearCubicacionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [CrearCubicacionComponent],
       providers: [
         { provide: 'environment', useValue: {} },
         CubicacionService,
         ConfirmationService,
+        SharedService,
       ],
     }).compileComponents();
   });

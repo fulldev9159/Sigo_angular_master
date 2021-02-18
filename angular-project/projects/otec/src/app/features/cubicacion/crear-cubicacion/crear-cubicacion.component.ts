@@ -4,6 +4,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { CubicacionService } from '../../../core/services/cubicacion.service';
 import * as CubicacionModel from '../cubicacion.model';
 import { ConfirmationService } from 'primeng/api';
+import { SharedService } from '../../../core/services/shared.service';
 
 @Component({
   selector: 'otec-crear-cubicacion',
@@ -35,7 +36,8 @@ export class CrearCubicacionComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private cubicacionService: CubicacionService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit(): void {
@@ -245,6 +247,11 @@ export class CrearCubicacionComponent implements OnInit {
         this.selectedServicios
       )
       .subscribe((x) => {
+        this.sharedService.showMessage(
+          'cubicación almacenada exitosamente',
+          'ok'
+        );
+        this.sharedService.navegateTo('dashboard/cubicacion');
         console.log(x);
       });
   }
