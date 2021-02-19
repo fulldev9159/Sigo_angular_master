@@ -7,8 +7,9 @@ import { CubicacionComponent } from './cubicacion.component';
 import { CrearCubicacionComponent } from './crear-cubicacion/crear-cubicacion.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { ListboxModule } from 'primeng/listbox';
-import {ConfirmPopupModule} from 'primeng/confirmpopup';
-import {TooltipModule} from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { TooltipModule } from 'primeng/tooltip';
 @NgModule({
   declarations: [CubicacionComponent, CrearCubicacionComponent],
   imports: [
@@ -17,8 +18,9 @@ import {TooltipModule} from 'primeng/tooltip';
     SharedModule,
     DropdownModule,
     ListboxModule,
+    TableModule,
     ConfirmPopupModule,
-    TooltipModule
+    TooltipModule,
   ],
 })
 export class CubicacionModule {}

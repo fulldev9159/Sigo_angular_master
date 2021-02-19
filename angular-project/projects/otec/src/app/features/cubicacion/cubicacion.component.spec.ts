@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CubicacionComponent } from './cubicacion.component';
 
 describe('CubicacionComponent', () => {
@@ -8,9 +8,10 @@ describe('CubicacionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CubicacionComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule],
+      providers: [{ provide: 'environment', useValue: {} }],
+      declarations: [CubicacionComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

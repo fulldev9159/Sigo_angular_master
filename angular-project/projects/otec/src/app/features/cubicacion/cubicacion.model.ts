@@ -123,6 +123,8 @@ export interface RequestSaveCubicacion {
   token: string;
   nombre: string;
   total: number;
+  region: string;
+  contrato_marco: string;
   lpus: Lpus[];
 }
 
@@ -134,4 +136,27 @@ export interface Lpus {
 export interface ResponseSaveCubicacion {
   data: string;
   status: StatusSectionResponse;
+}
+
+// Cubicaciones
+export interface RequestCubicaciones {
+  user: string;
+  token: string;
+}
+
+export interface ResponseCubicaciones {
+  data: {
+    [id: string]: Cubicacion[];
+  };
+  status: StatusSectionResponse;
+}
+
+export interface Cubicacion {
+  cobicacion_id: number;
+  total: number;
+  nombre: string;
+  fecha: string;
+  usuario_id: number;
+  region: string;
+  contrato_marco: string;
 }

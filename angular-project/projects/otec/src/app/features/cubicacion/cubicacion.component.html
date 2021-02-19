@@ -1,2 +1,30 @@
-<p>cubicacion works!</p>
 <otec-navbar></otec-navbar>
+<div class="listar-cubicacion-section">
+    <div class="cubicacion-navbar"></div>
+    <div class="cubicacion-content">
+        <p-table [value]="cubicaciones">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha creación</th>
+                    <th>Region</th>
+                    <th>Contrato marco</th>
+                    <th>Total</th>
+                    <th>Opciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-cub>
+                <tr>
+                    <td>{{cub.cobicacion_id}}</td>
+                    <td>{{cub.nombre}}</td>
+                    <td>{{cub.fecha}}</td>
+                    <td>{{cub.region}}</td>
+                    <td>{{cub.contrato_marco}}</td>
+                    <td>{{cub.total}}</td>
+                    <td></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

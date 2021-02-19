@@ -114,6 +114,8 @@ export class CubicacionService {
     usernameC: string,
     nombreC: string,
     totalC: number,
+    regionC: string,
+    contratoC: string,
     lpus: CubicacionModel.Product[]
   ): Observable<CubicacionModel.ResponseSaveCubicacion> {
     const temp: CubicacionModel.Lpus[] = [];
@@ -127,12 +129,30 @@ export class CubicacionService {
       // user:usernameC,
       nombre: nombreC,
       total: totalC,
+      region: regionC,
+      contrato_marco: contratoC,
       lpus: temp,
     };
 
     return (this
       .httpClient as HttpClient).post<CubicacionModel.ResponseSaveCubicacion>(
       `${this.apiBase}/saveCubicacion`,
+      JSON.stringify(request)
+    );
+  }
+
+  getCubicaciones(
+    userC: string,
+    tok: string
+  ): Observable<CubicacionModel.ResponseCubicaciones> {
+    const request: CubicacionModel.RequestCubicaciones = {
+      user: userC,
+      token: tok,
+    };
+
+    return (this
+      .httpClient as HttpClient).post<CubicacionModel.ResponseCubicaciones>(
+      `${this.apiBase}/getCubicaciones`,
       JSON.stringify(request)
     );
   }

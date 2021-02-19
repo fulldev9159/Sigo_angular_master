@@ -1,0 +1,17 @@
+.listar-cubicacion-section {
+    display: flex;
+    height: 100vh;
+}
+
+.cubicacion-navbar {
+    width: 7%;
+    border-right: 1px solid #fff5f570;
+    background: #11a4f5;
+    box-shadow: 2px 2px #fbfbfb30;
+}
+
+.cubicacion-content {
+    width: 92%;
+    margin-top: 3px;
+    margin-left: 2px;
+}

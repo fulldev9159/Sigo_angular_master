@@ -1,11 +1,12 @@
 # Changelog
 
-## [0.6.0] - 2021-02-20
+## [0.6.0] - 2021-02-23
 
 ### features
 
 - Se agrega mensajes al realizar una inserción de cubicación para exito o falla
 - Se crea shared service para funciones genericas que se utilizan en todos los componentes
+- Se despliega lista de cubicaciones
 
 ### Changes
 

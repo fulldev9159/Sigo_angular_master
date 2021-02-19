@@ -255,12 +255,26 @@ export class CrearCubicacionComponent implements OnInit {
   }
 
   save(): any {
+    let regionName = '';
+    this.regionArr.forEach((region) => {
+      if (parseInt(this.regionId, 10) === region.id) {
+        regionName = `${region.codigo} - ${region.nombre}`;
+      }
+    });
+    let contratoName = '';
+    this.contratosArr.forEach((contrato) => {
+      if (parseInt(this.contratoId, 10) === contrato.id) {
+        contratoName = contrato.nombre;
+      }
+    });
     this.cubicacionService
       .saveCubicacion(
         this.token,
         'ss',
         this.nombreCubicacion,
         this.total,
+        regionName,
+        contratoName,
         this.selectedServicios
       )
       .subscribe(
