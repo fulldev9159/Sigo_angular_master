@@ -109,14 +109,14 @@
                         </select>
                     </td>
                     <td class="center">UNIDAD</td>
-                    <td class="center">${{itemC.precio}}</td>
+                    <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
                     <td class="center">${{itemC.precio * itemC.cantidad}}</td>
                     <td class="center"></td>
                 </tr>
                 <tr>
                     <td colspan="7" style="text-align: right">
                         <span style="    
-                                margin-right: 31px;"><strong>Total</strong>: {{total}}</span>
+                                margin-right: 31px;"><strong>Total</strong>: {{total| currency:'CLP':'symbol'}}</span>
                     </td>
                 </tr>
             </table>

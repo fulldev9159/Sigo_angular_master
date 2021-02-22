@@ -10,6 +10,8 @@ import { ListboxModule } from 'primeng/listbox';
 import { TableModule } from 'primeng/table';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
+import { DialogModule } from 'primeng/dialog';
+
 @NgModule({
   declarations: [CubicacionComponent, CrearCubicacionComponent],
   imports: [
@@ -21,6 +23,7 @@ import { TooltipModule } from 'primeng/tooltip';
     TableModule,
     ConfirmPopupModule,
     TooltipModule,
+    DialogModule,
   ],
 })
 export class CubicacionModule {}

@@ -152,11 +152,35 @@ export interface ResponseCubicaciones {
 }
 
 export interface Cubicacion {
-  cobicacion_id: number;
+  cubicacion_id: number;
   total: number;
   nombre: string;
   fecha: string;
   usuario_id: number;
   region: string;
   contrato_marco: string;
+}
+
+// Detalle cubicacion
+export interface RequestDetalleCubicaciones {
+  user: string;
+  token: string;
+  cubicacion_id: number;
+}
+
+export interface ResponseDetalleCubicaciones {
+  data: {
+    [id: string]: DetalleCubicacion[];
+  };
+  status: StatusSectionResponse;
+}
+
+export interface DetalleCubicacion {
+  id_lpu: number;
+  nombre: string;
+  id_servicio: number;
+  precio: number;
+  tipo_moneda: string;
+  cantidad: number;
+  subtotal: number;
 }

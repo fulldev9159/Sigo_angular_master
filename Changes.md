@@ -1,17 +1,19 @@
 # Changelog
 
-## [0.6.0] - 2021-02-23
+## [0.6.1] - 2021-02-23
 
 ### features
 
 - Se agrega mensajes al realizar una inserción de cubicación para exito o falla
 - Se crea shared service para funciones genericas que se utilizan en todos los componentes
 - Se despliega lista de cubicaciones
+- Se depliega detalle de una cubicacion
 
 ### Changes
 
 - Se migra la funcion de Snackbar a shared services para que todos puedan usarlo
 - Se migra la función navegateTo a shared services para que todos puedan usarlo
+- Se usa el pipe  currency para desplegar de mejor manera los valores de moneda
 
 ## [0.5.0] - 2021-02-15
 
