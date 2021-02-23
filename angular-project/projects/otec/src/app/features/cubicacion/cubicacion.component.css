@@ -33,9 +33,9 @@
     border: 1px;
 }
 
-.table-carro tr td span{
+/* .table-carro tr td span{ */
     /* margin-left: 14px; */
-}
+/* } */
 
 .table-carro tr td select{
     width: 100%;
