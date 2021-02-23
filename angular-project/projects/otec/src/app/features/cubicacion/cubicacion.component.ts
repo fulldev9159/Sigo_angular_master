@@ -16,6 +16,7 @@ export class CubicacionComponent implements OnInit {
   public displayModal = false;
   public detallesCubicacion: CubicacionModel.DetalleCubicacion[] = [];
   public total = 0;
+  public nombreCubicacion = '';
 
   constructor(
     private cubicacionService: CubicacionService,
@@ -34,13 +35,14 @@ export class CubicacionComponent implements OnInit {
       });
   }
 
-  displayDetaill(id: number, totalC: number): void {
+  displayDetaill(id: number, totalC: number, nombreC: string): void {
     this.displayModal = true;
     this.cubicacionService
       .getDetalleCubicacion(this.username, this.token, id)
       .subscribe((x) => {
         console.log(x);
         this.total = totalC;
+        this.nombreCubicacion = nombreC;
         const idArray = 'detalle_cubicacion';
         this.detallesCubicacion = x.data[idArray];
       });

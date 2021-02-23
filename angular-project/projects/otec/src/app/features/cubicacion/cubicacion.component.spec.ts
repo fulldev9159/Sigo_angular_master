@@ -78,6 +78,7 @@ describe('CubicacionComponent', () => {
     component.token = 'asdsadas';
     const id = 1;
     const total = 100;
+    const nombreC = 'hola';
 
     const arrExpect: CubicacionModel.DetalleCubicacion[] = [
       {
@@ -113,11 +114,12 @@ describe('CubicacionComponent', () => {
     spyOn(service, 'getDetalleCubicacion').and.returnValue(
       of(responseContratos)
     );
-    component.displayDetaill(id, total);
+    component.displayDetaill(id, total, nombreC);
     tick();
     fixture.detectChanges();
     expect(component.detallesCubicacion).toEqual(arrExpect);
     expect(component.displayModal).toBe(true);
     expect(component.total).toBe(100);
+    expect(component.nombreCubicacion).toBe('hola');
   }));
 });

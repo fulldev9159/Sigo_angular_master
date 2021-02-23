@@ -34,7 +34,7 @@
 }
 
 .table-carro tr td span{
-    margin-left: 14px;
+    /* margin-left: 14px; */
 }
 
 .table-carro tr td select{
@@ -45,8 +45,4 @@
 
 .center{
     text-align: center;
-}
-
-table{
-    margin-left: 81px;
 }

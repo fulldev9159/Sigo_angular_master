@@ -24,7 +24,7 @@
                     <td  class="center" style="text-align: center;">{{cub.contrato_marco}}</td>
                     <td  class="center" style="text-align: center;">{{cub.total| currency:'CLP':'symbol'}}</td>
                     <td style="text-align: center;">
-                        <button class="circular ui icon button" (click)="displayDetaill(cub.cubicacion_id,cub.total)">
+                        <button class="circular ui icon button" (click)="displayDetaill(cub.cubicacion_id,cub.total,cub.nombre)">
                         <i class="eye icon"></i>
                       </button>
                     </td>
@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '70vw'}" [baseZIndex]="10000"
+<p-dialog header="Detalle de la cubicación {{nombreCubicacion}}" [(visible)]="displayModal" [modal]="true" [style]="{width: '70vw'}" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
             <table class="table-carro">
             <tr>
