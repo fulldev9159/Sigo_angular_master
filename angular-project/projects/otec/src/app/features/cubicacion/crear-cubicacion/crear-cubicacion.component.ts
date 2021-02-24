@@ -43,12 +43,18 @@ export class CrearCubicacionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cubicacionService
-      .getContratos(this.username, this.token)
-      .subscribe((response) => {
+    this.cubicacionService.getContratos(this.username, this.token).subscribe(
+      (response) => {
         const id = 'contratos_marco';
         this.contratosArr = response.data[id];
-      });
+      },
+      (err: HttpErrorResponse) => {
+        this.sharedService.showMessage(
+          this.sharedService.getErrorMessage(err),
+          'error'
+        );
+      }
+    );
   }
 
   acentos(nombre: string): string {
@@ -74,11 +80,19 @@ export class CrearCubicacionComponent implements OnInit {
         this.token,
         parseInt(this.contratoId, 10)
       )
-      .subscribe((response) => {
-        const id = 'proveedores';
-        this.proveedorArr = response.data[id];
-        // console.log(response);
-      });
+      .subscribe(
+        (response) => {
+          const id = 'proveedores';
+          this.proveedorArr = response.data[id];
+          // console.log(response);
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
   selectedProveedor(): void {
@@ -97,15 +111,23 @@ export class CrearCubicacionComponent implements OnInit {
         });
         this.cubicacionService
           .getRegionesSubcontrato(this.username, this.token, this.subcontratoId)
-          .subscribe((response) => {
-            const id = 'regiones';
-            this.regionArr = response.data[id];
-            this.regionArr.forEach((value, index) => {
-              this.regionArr[index].nombre = this.acentos(
-                this.regionArr[index].nombre
+          .subscribe(
+            (response) => {
+              const id = 'regiones';
+              this.regionArr = response.data[id];
+              this.regionArr.forEach((value, index) => {
+                this.regionArr[index].nombre = this.acentos(
+                  this.regionArr[index].nombre
+                );
+              });
+            },
+            (err: HttpErrorResponse) => {
+              this.sharedService.showMessage(
+                this.sharedService.getErrorMessage(err),
+                'error'
               );
-            });
-          });
+            }
+          );
       }
     });
   }
@@ -124,10 +146,18 @@ export class CrearCubicacionComponent implements OnInit {
         this.subcontratoId,
         parseInt(this.regionId, 10)
       )
-      .subscribe((response) => {
-        const id = 'tipo_servicios';
-        this.tipoServicioArr = response.data[id];
-      });
+      .subscribe(
+        (response) => {
+          const id = 'tipo_servicios';
+          this.tipoServicioArr = response.data[id];
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
   selectedTipoServicio(): void {
@@ -157,23 +187,31 @@ export class CrearCubicacionComponent implements OnInit {
         parseInt(this.regionId, 10),
         parseInt(this.tipoServicioId, 10)
       )
-      .subscribe((response) => {
-        const id = 'servicios';
-        response.data[id].forEach((servicio) => {
-          this.sourcePtemp.push({
-            id_lpu: servicio.id_lpu,
-            nombre: this.acentos(servicio.nombre),
-            tipo_moneda: servicio.tipo_moneda,
-            precio: servicio.precio,
-            numero_producto: servicio.numero_producto,
-            cantidad: 1,
-            unidad: 'UNIDAD',
-            region: regionName,
-            tiposervicio: tipoServicioName,
+      .subscribe(
+        (response) => {
+          const id = 'servicios';
+          response.data[id].forEach((servicio) => {
+            this.sourcePtemp.push({
+              id_lpu: servicio.id_lpu,
+              nombre: this.acentos(servicio.nombre),
+              tipo_moneda: servicio.tipo_moneda,
+              precio: servicio.precio,
+              numero_producto: servicio.numero_producto,
+              cantidad: 1,
+              unidad: 'UNIDAD',
+              region: regionName,
+              tiposervicio: tipoServicioName,
+            });
           });
-        });
-        this.sourceProducts$ = of(this.sourcePtemp);
-      });
+          this.sourceProducts$ = of(this.sourcePtemp);
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
   counter(i: number): Array<number> {

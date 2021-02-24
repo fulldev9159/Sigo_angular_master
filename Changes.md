@@ -9,6 +9,7 @@
 ### Changes
 
 - Se cambian a español palabras en ingles
+- Se mejora el manejo de los errores HTTP y se agrega mensaje de error si el API está caída
 
 ## [0.6.1] - 2021-02-23
 

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable, Optional, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 declare let Snackbar: object | any;
@@ -26,5 +27,11 @@ export class SharedService {
 
   navegateTo(ruta: string): void {
     this.router.navigate([ruta]);
+  }
+
+  getErrorMessage(err: HttpErrorResponse): string {
+    return typeof err.error.status === 'undefined'
+      ? 'API caída'
+      : `(HTTP code: ${err.status}) ${err.error.status.description}`;
   }
 }

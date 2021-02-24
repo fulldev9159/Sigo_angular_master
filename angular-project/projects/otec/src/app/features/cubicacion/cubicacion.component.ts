@@ -39,7 +39,7 @@ export class CubicacionComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         this.sharedService.showMessage(
-          `(HTTP code: ${err.status}) ${err.error.status.description}`,
+          this.sharedService.getErrorMessage(err),
           'error'
         );
       }
@@ -94,16 +94,24 @@ export class CubicacionComponent implements OnInit {
                 this.cubicaciones = [];
                 this.cubicacionService
                   .getCubicaciones(this.username, this.token)
-                  .subscribe((cubicacion) => {
-                    const id = 'cubicaciones';
-                    cubicacion.data[id].forEach((x) => {
-                      this.cubicaciones.push(x);
-                    });
-                  });
+                  .subscribe(
+                    (cubicacion) => {
+                      const id = 'cubicaciones';
+                      cubicacion.data[id].forEach((x) => {
+                        this.cubicaciones.push(x);
+                      });
+                    },
+                    (err: HttpErrorResponse) => {
+                      this.sharedService.showMessage(
+                        this.sharedService.getErrorMessage(err),
+                        'error'
+                      );
+                    }
+                  );
               },
               (err: HttpErrorResponse) => {
                 this.sharedService.showMessage(
-                  `(HTTP code: ${err.status}) ${err.error.status.description}`,
+                  this.sharedService.getErrorMessage(err),
                   'error'
                 );
               }
@@ -111,7 +119,7 @@ export class CubicacionComponent implements OnInit {
         },
         (err: HttpErrorResponse) => {
           this.sharedService.showMessage(
-            `(HTTP code: ${err.status}) ${err.error.status.description}`,
+            this.sharedService.getErrorMessage(err),
             'error'
           );
         }

@@ -20,7 +20,7 @@ services:
             TZ: America/Santiago
             LOG_LEVEL: INFO
             SERVICE_PORT: 4040
-            OTEC_DB: root:pass@tcp(mcl_otec_db:3306)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s
+            OTEC_DB: root:pass@tcp(mcl_otec_db:3306)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true
             DB_MAXOPENCONNECTIONS: 10
             DB_MAXIDLECONNECTIONS: 5
             DB_PINGINTERVAL: 30
