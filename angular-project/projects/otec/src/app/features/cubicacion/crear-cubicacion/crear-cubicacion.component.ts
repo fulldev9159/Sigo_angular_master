@@ -255,6 +255,13 @@ export class CrearCubicacionComponent implements OnInit {
   }
 
   save(): any {
+    const lpus: CubicacionModel.Lpus[] = [];
+    this.selectedServicios.forEach((x) => {
+      lpus.push({
+        id_lpu: x.id_lpu,
+        cantidad: parseInt(x.cantidad.toString(), 10),
+      });
+    });
     let regionName = '';
     this.regionArr.forEach((region) => {
       if (parseInt(this.regionId, 10) === region.id) {
@@ -275,7 +282,7 @@ export class CrearCubicacionComponent implements OnInit {
         this.total,
         regionName,
         contratoName,
-        this.selectedServicios
+        lpus
       )
       .subscribe(
         (x) => {

@@ -76,10 +76,10 @@
                 Resumen de Servicios
                 <div class="buttons-carro">
                     <div class="ui buttons">
-                        <button class="ui button" (click)="limpiarCarro($event)">Clear</button>
+                        <button class="ui button" (click)="limpiarCarro($event)">Limpiar selecciones</button>
                         <div class="or"></div>
-                        <div  pTooltip="Debe escoger servicios y llenar todos los campos" tooltipPosition="top" ><button *ngIf="selectedServicios.length===0||nombreCubicacion===''"class="ui positive button active" disabled>Save</button></div>
-                        <button *ngIf="selectedServicios.length>0 && nombreCubicacion!==''" class="ui positive button active" (click)="save()">Save</button>
+                        <div  pTooltip="Debe escoger servicios y llenar todos los campos" tooltipPosition="top" ><button *ngIf="selectedServicios.length===0||nombreCubicacion===''"class="ui positive button active" disabled>Finalizar Cubicación</button></div>
+                        <button *ngIf="selectedServicios.length>0 && nombreCubicacion!==''" class="ui positive button active" (click)="save()">Finalizar Cubicación</button>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                     </td>
                     <td class="center">UNIDAD</td>
                     <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
-                    <td class="center">${{itemC.precio * itemC.cantidad}}</td>
+                    <td class="center">${{itemC.precio * itemC.cantidad|currency:'CLP':'symbol'}}</td>
                     <td class="center"></td>
                 </tr>
                 <tr>

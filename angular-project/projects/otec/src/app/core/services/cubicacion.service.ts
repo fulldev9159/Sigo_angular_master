@@ -116,16 +116,9 @@ export class CubicacionService {
     totalC: number,
     regionC: string,
     contratoC: string,
-    lpus: CubicacionModel.Product[]
+    lpusC: CubicacionModel.Lpus[]
   ): Observable<CubicacionModel.ResponseSaveCubicacion> {
-    const temp: CubicacionModel.Lpus[] = [];
-
-    lpus.forEach((x) => {
-      temp.push({
-        id_lpu: x.id_lpu,
-        cantidad: parseInt(x.cantidad.toString(), 10),
-      });
-    });
+    // const temp: CubicacionModel.Lpus[] = [];
 
     const request: CubicacionModel.RequestSaveCubicacion = {
       token: tokenC,
@@ -134,7 +127,7 @@ export class CubicacionService {
       total: totalC,
       region: regionC,
       contrato_marco: contratoC,
-      lpus: temp,
+      lpus: lpusC,
     };
 
     return (this

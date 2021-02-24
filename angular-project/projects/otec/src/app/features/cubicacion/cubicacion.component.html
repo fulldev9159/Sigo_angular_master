@@ -1,3 +1,4 @@
+<p-confirmPopup></p-confirmPopup>
 <otec-navbar></otec-navbar>
 <div class="listar-cubicacion-section">
     <div class="cubicacion-navbar"></div>
@@ -7,12 +8,12 @@
                 <tr>
                     <th style="width:20px;text-align: center;">ID</th>
                     <th style="width:289px;text-align: center;">Nombre</th>
-                    <th style="width: 222px;
+                    <th style="width: 177px;
                     text-align: center;">Fecha creación</th>
                     <th style="text-align: center;">Region</th>
                     <th style="text-align: center;">Contrato marco</th>
                     <th style="text-align: center;">Total</th>
-                    <th style="text-align: center;">Opciones</th>
+                    <th style="text-align: center;width: 223px;">Opciones</th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-cub>
@@ -24,8 +25,17 @@
                     <td  class="center" style="text-align: center;">{{cub.contrato_marco}}</td>
                     <td  class="center" style="text-align: center;">{{cub.total| currency:'CLP':'symbol'}}</td>
                     <td style="text-align: center;">
-                        <button class="circular ui icon button" (click)="displayDetaill(cub.cubicacion_id,cub.total,cub.nombre)">
+                        <button id ="buttonDetalles-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Ver detalles" tooltipPosition="top" placeholder="Top" (click)="displayDetaill(cub.cubicacion_id,cub.total,cub.nombre)">
                         <i class="eye icon"></i>
+                      </button>
+                      <button id="buttonCopiar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Crear copia" tooltipPosition="top" placeholder="Top" (click)="clonar(cub.cubicacion_id,cub.total,cub.nombre,cub.region,cub.contrato_marco)">
+                        <i class="clone icon"></i>
+                      </button>
+                      <button id="buttonEditar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Editar" tooltipPosition="top" placeholder="Top">
+                        <i class="edit icon"></i>
+                      </button>
+                      <button id="buttonEliminar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Eliminar" tooltipPosition="top" placeholder="Top">
+                        <i class="trash icon"></i>
                       </button>
                     </td>
                 </tr>

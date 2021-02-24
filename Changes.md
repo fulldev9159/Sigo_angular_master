@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.0] - 2021-02-28
+
+### features
+
+- Se crea lógica de clonación de cubicación
+
+### Changes
+
+- Se cambian a español palabras en ingles
+
 ## [0.6.1] - 2021-02-23
 
 ### features
