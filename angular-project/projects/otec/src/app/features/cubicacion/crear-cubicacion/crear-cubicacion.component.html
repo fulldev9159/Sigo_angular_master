@@ -12,7 +12,7 @@
                     <input type="text" class="nombre-cubicacion" [(ngModel)]="nombreCubicacion">
                 </div>
                 <div class="field">
-                    <label>*Contrato</label>
+                    <label>Contrato*</label>
                     <div (click)="confirm($event,'contrato')">
                         <select name="contrato" id="contrato" (change)="selectedContrato()" [(ngModel)]="contratoId"
                             [disabled]="contratoDisabled">
@@ -103,9 +103,8 @@
                     <td class="center">
                         <select (change)="getTotal()" name="cantidad-{{itemC.id_lpu}}" id="cantidad-{{itemC.id_lpu}}"
                             [(ngModel)]="selectedServicios[i].cantidad">
-                            <option value=""> </option>
-                            <option *ngFor="let numero of counter(5) ;let j = index" value="{{j}}">
-                                {{j}}</option>
+                            <option *ngFor="let numero of counter(5) ;let j = index" value="{{j+1}}">
+                                {{j+1}}</option>
                         </select>
                     </td>
                     <td class="center">UNIDAD</td>

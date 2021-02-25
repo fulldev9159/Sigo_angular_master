@@ -128,6 +128,7 @@ describe('CubicacionComponent', () => {
         tipo_moneda: 'PESOS',
         precio: 100,
         cantidad: 1,
+        tipo_servicio: 'CD1',
       },
     ];
     const responseContratos: CubicacionModel.ResponseDetalleCubicaciones = {
@@ -145,6 +146,7 @@ describe('CubicacionComponent', () => {
             tipo_moneda: 'PESOS',
             precio: 100,
             cantidad: 1,
+            tipo_servicio: 'CD1',
           },
         ],
       },
@@ -219,6 +221,7 @@ describe('CubicacionComponent', () => {
             tipo_moneda: 'PESOS',
             precio: 100,
             cantidad: 1,
+            tipo_servicio: 'CD1',
           },
         ],
       },
@@ -243,4 +246,8 @@ describe('CubicacionComponent', () => {
     flush();
     expect(component.cubicaciones).toEqual(arrExpect);
   }));
+  
+  it('counter should return array of number', () => {
+    expect(component.counter(4).length).toBe(4);
+  });
 });

@@ -31,7 +31,7 @@
                       <button id="buttonCopiar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Crear copia" tooltipPosition="top" placeholder="Top" (click)="clonar(cub.cubicacion_id,cub.total,cub.nombre,cub.region,cub.contrato_marco)">
                         <i class="clone icon"></i>
                       </button>
-                      <button id="buttonEditar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Editar" tooltipPosition="top" placeholder="Top">
+                      <button id="buttonEditar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Editar" tooltipPosition="top" placeholder="Top" (click)="editar(cub.nombre,cub.contrato_marco,2,cub.region,8,cub.cubicacion_id)">
                         <i class="edit icon"></i>
                       </button>
                       <button id="buttonEliminar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Eliminar" tooltipPosition="top" placeholder="Top">
@@ -71,4 +71,124 @@
                 </td>
             </tr>
         </table>
+</p-dialog>
+
+
+<p-dialog header="Editar cubicación {{nombreCubicacion}}" [(visible)]="displayModalEdit" [modal]="true" [style]="{width: '99vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+            <div class="cubicacion-content ui segment">
+                <div class="form-content">
+                    <div class="left-form">
+                        <div class="field">
+                            <label>Nombre*</label>
+                            <input type="text" class="nombre-cubicacion" [(ngModel)]="nombreCubicacion">
+                        </div>
+                        <div class="field">
+                            <label>Contrato*</label>
+                            <!-- <div (click)="confirm($event,'contrato')"> -->
+                                <select name="contrato" id="contrato" (change)="selectedContrato()" [(ngModel)]="contratoId"
+                                    [disabled]="contratoDisabled">
+                                    <option *ngFor="let contrato of contratosArr" value="{{contrato.id}}">
+                                        {{contrato.nombre}}
+                                    </option>
+                                </select>
+                            <!-- </div> -->
+                        </div>
+                        <div class="field">
+                            <label>Proveedor*</label>
+                            <!-- <div (click)="confirm($event,'proveedor')"> -->
+                                <select name="proveedor" id="proveedor" (change)="selectedProveedor()" [(ngModel)]="proveedorId"
+                                    >
+                                    <option *ngFor="let proveedor of proveedorArr" value="{{proveedor.id}}">
+                                        {{proveedor.nombre}}
+                                    </option>
+                                </select>
+                            <!-- </div> -->
+                        </div>
+                        <div class="field">
+                            <label>Región*</label>
+                            <!-- <div (click)="confirm($event,'region')"> -->
+                                <select name="region" id="region" (change)="selectedRegion()" [(ngModel)]="regionId"
+                                    >
+                                    <option *ngFor="let region of regionArr" value="{{region.id}}">{{region.codigo}}
+                                        {{region.nombre}}</option>
+                                </select>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div class="right-form">
+                        <div class="field">
+                            <label>Tipo de servicio*</label>
+                            <select name="tipodeservicio" id="tipodeservicio" (change)="selectedTipoServicio()"
+                                [(ngModel)]="tipoServicioId" >
+                                <option value=""> </option>
+                                <option *ngFor="let tiposervicio of tipoServicioArr" value="{{tiposervicio.id}}">
+                                    {{tiposervicio.nombre}}</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Servicios*</label>
+                            <p-listbox (click)="getTotal()" [options]="(sourceProducts$|async)!" [(ngModel)]="selectedServicios"
+                                [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true"
+                                optionLabel="nombre" [listStyle]="{'max-height':'250px'}"
+                                [style]="{'width':'56rem','height':'285px'}">
+                                <ng-template let-servicio pTemplate="item">
+                                    <div class="country-item">
+                                        <div>{{servicio.nombre}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-listbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="carro">
+                    <div class="title-carro">
+                        Resumen de Servicios
+                        <div class="buttons-carro">
+                            <div class="ui buttons">
+                                <button class="ui button" (click)="limpiarCarro($event)">Limpiar selecciones</button>
+                                <div class="or"></div>
+                                <div  pTooltip="Debe escoger servicios y llenar todos los campos" tooltipPosition="top" ><button *ngIf="selectedServicios.length===0||nombreCubicacion===''"class="ui positive button active" disabled>Finalizar Cubicación</button></div>
+                                <button *ngIf="selectedServicios.length>0 && nombreCubicacion!==''" class="ui positive button active" (click)="save()">Finalizar Cubicación</button>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <table class="table-carro">
+                        <tr>
+                            <th style="width: 318px"> Descripcion</th>
+                            <th style="width: 269px">Región</th>
+                            <th style="width: 140px">Tipo Servicio</th>
+                            <th style="width: 102px">Cantidad</th>
+                            <th style="width:125px">Unidad</th>
+                            <th style="width:125px">Precio</th>
+                            <th style="width:125px">Sub Total</th>
+                            <th style="width:125px">Opciones</th>
+                        </tr>
+        
+                        <tr *ngFor="let itemC of selectedServicios; let i = index">
+                            <td> <span>{{itemC.nombre}}</span></td>
+                            <td class="center">{{itemC.region}}</td>
+                            <td class="center">{{itemC.tiposervicio}}</td>
+                            <td class="center">
+                                <select (change)="getTotal()" name="cantidad-{{itemC.id_lpu}}" id="cantidad-{{itemC.id_lpu}}"
+                                    [(ngModel)]="selectedServicios[i].cantidad">
+                                    <option *ngFor="let numero of counter(5) ;let j = index" value="{{j}}">
+                                        {{j+1}}</option>
+                                </select>
+                            </td>
+                            <td class="center">UNIDAD</td>
+                            <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
+                            <td class="center">${{itemC.precio * itemC.cantidad|currency:'CLP':'symbol'}}</td>
+                            <td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="text-align: right">
+                                <span style="    
+                                        margin-right: 31px;"><strong>Total</strong>: {{total| currency:'CLP':'symbol'}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 </p-dialog>

@@ -183,4 +183,5 @@ export interface DetalleCubicacion {
   tipo_moneda: string;
   cantidad: number;
   subtotal: number;
+  tipo_servicio: string;
 }
