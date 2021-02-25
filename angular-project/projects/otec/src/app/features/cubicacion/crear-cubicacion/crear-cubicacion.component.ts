@@ -312,14 +312,20 @@ export class CrearCubicacionComponent implements OnInit {
         contratoName = contrato.nombre;
       }
     });
+    const proveedorName = this.proveedorArr.filter(
+      (x) => x.id === parseInt(this.proveedorId, 10)
+    )[0].nombre;
     this.cubicacionService
       .saveCubicacion(
         this.token,
         'ss',
         this.nombreCubicacion,
         this.total,
+        parseInt(this.regionId, 10),
         regionName,
         contratoName,
+        proveedorName,
+        this.subcontratoId,
         lpus
       )
       .subscribe(

@@ -123,8 +123,11 @@ export interface RequestSaveCubicacion {
   token: string;
   nombre: string;
   total: number;
+  region_id: number;
   region: string;
   contrato_marco: string;
+  proveedor: string;
+  subcontrato_id: number;
   lpus: Lpus[];
 }
 
@@ -157,8 +160,13 @@ export interface Cubicacion {
   nombre: string;
   fecha: string;
   usuario_id: number;
+  region_id: number;
   region: string;
   contrato_marco: string;
+  proveedor: string;
+  subcontrato_id: number;
+  asignado: boolean;
+  proveedor_id: number;
 }
 
 // Detalle cubicacion

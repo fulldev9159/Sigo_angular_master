@@ -12,6 +12,7 @@
                     text-align: center;">Fecha creación</th>
                     <th style="text-align: center;">Region</th>
                     <th style="text-align: center;">Contrato marco</th>
+                    <th style="text-align: center;">Proveedor</th>
                     <th style="text-align: center;">Total</th>
                     <th style="text-align: center;width: 223px;">Opciones</th>
                 </tr>
@@ -23,15 +24,16 @@
                     <td  class="center">{{cub.fecha}}</td>
                     <td  style="text-align: center;">{{cub.region}}</td>
                     <td  class="center" style="text-align: center;">{{cub.contrato_marco}}</td>
+                    <td  class="center" style="text-align: center;">{{cub.proveedor}}</td>
                     <td  class="center" style="text-align: center;">{{cub.total| currency:'CLP':'symbol'}}</td>
                     <td style="text-align: center;">
                         <button id ="buttonDetalles-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Ver detalles" tooltipPosition="top" placeholder="Top" (click)="displayDetaill(cub.cubicacion_id,cub.total,cub.nombre)">
                         <i class="eye icon"></i>
                       </button>
-                      <button id="buttonCopiar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Crear copia" tooltipPosition="top" placeholder="Top" (click)="clonar(cub.cubicacion_id,cub.total,cub.nombre,cub.region,cub.contrato_marco)">
+                      <button id="buttonCopiar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Crear copia" tooltipPosition="top" placeholder="Top" (click)="clonar(cub.cubicacion_id,cub.nombre,cub.total,cub.region_id,cub.region,cub.contrato_marco,cub.proveedor,cub.subcontrato_id)">
                         <i class="clone icon"></i>
                       </button>
-                      <button id="buttonEditar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Editar" tooltipPosition="top" placeholder="Top" (click)="editar(cub.nombre,cub.contrato_marco,2,cub.region,8,cub.cubicacion_id)">
+                      <button id="buttonEditar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Editar" tooltipPosition="top" placeholder="Top" (click)="editar(cub.nombre,cub.contrato_marco,cub.proveedor_id,cub.region,cub.region_id,cub.cubicacion_id)">
                         <i class="edit icon"></i>
                       </button>
                       <button id="buttonEliminar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Eliminar" tooltipPosition="top" placeholder="Top">
@@ -51,6 +53,7 @@
                 <th style="width: 318px"> Descripcion</th>
                 <!-- <th style="width: 140px">Tipo Servicio</th> -->
                 <th style="width:125px">Tipo Moneda</th>
+                <th style="width:125px">Tipo Servicio</th>
                 <th style="width:125px">Precio Unitatio</th>
                 <th style="width: 102px">Cantidad</th>
                 <th style="width:125px">Sub Total</th>
@@ -60,6 +63,7 @@
                 <td> <span>{{itemC.nombre}}</span></td>
                 <!-- <td class="center">{{itemC.tiposervicio}}</td> -->
                 <td class="center">{{itemC.tipo_moneda}}</td>
+                <td class="center">{{itemC.tipo_servicio}}</td>
                 <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
                 <td class="center">{{itemC.cantidad}}</td>
                 <td class="center">${{itemC.subtotal| currency:'CLP':'symbol'}}</td>

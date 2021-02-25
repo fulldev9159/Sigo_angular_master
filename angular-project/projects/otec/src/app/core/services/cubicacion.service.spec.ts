@@ -214,8 +214,12 @@ describe('CubicacionService', () => {
     const token = 'dummytoken';
     const nombreC = 'cubicaciontest';
     const total = 1000;
+    const regionID = 1;
     const regionC = '1Region';
     const contratoMarcoC = 'SBE';
+    const proveedorID = 1;
+    const proveedor = 'ERICSON';
+
     const lpus: CubicacionModel.Product[] = [
       {
         id_lpu: 1,
@@ -238,11 +242,22 @@ describe('CubicacionService', () => {
     };
 
     service
-      .saveCubicacion(token, user, nombreC, total, regionC, regionC, lpus)
+      .saveCubicacion(
+        token,
+        user,
+        nombreC,
+        total,
+        regionID,
+        regionC,
+        contratoMarcoC,
+        proveedor,
+        proveedorID,
+        lpus
+      )
       .subscribe((response) => {
         expect(response).toEqual(dummyResponse);
       });
-    const req = httpMock.expectOne('http://localhost:4040/saveCubicacion');
+    const req = httpMock.expectOne('http://localhost:4040/saveEditCubicacion');
     expect(req.request.method).toBe('POST');
     req.flush(dummyResponse);
   });

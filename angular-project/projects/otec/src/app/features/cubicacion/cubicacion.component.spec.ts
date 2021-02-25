@@ -81,8 +81,13 @@ describe('CubicacionComponent', () => {
         total: 100,
         fecha: '2020-01-02 00:00:00',
         usuario_id: 1,
+        region_id: 1,
         region: '1Región',
         contrato_marco: 'SBE',
+        proveedor: 'ERICSON',
+        subcontrato_id: 2,
+        asignado: false,
+        proveedor_id: 1,
       },
     ];
     const responseContratos: CubicacionModel.ResponseCubicaciones = {
@@ -98,8 +103,13 @@ describe('CubicacionComponent', () => {
             total: 100,
             fecha: '2020-01-02 00:00:00',
             usuario_id: 1,
+            region_id: 1,
             region: '1Región',
             contrato_marco: 'SBE',
+            proveedor: 'ERICSON',
+            subcontrato_id: 2,
+            asignado: false,
+            proveedor_id: 1,
           },
         ],
       },
@@ -170,8 +180,12 @@ describe('CubicacionComponent', () => {
     const id = 1;
     const total = 100;
     const nombreC = 'hola';
+    const regionID = 1;
     const regionC = '1Región';
     const contratoC = 'SBE';
+    const proveedor = 'ERICSON';
+    const subcontratoId = 2;
+    const asignado = false;
 
     const arrExpect: CubicacionModel.Cubicacion[] = [
       {
@@ -180,8 +194,13 @@ describe('CubicacionComponent', () => {
         total: 100,
         fecha: '2020-01-02 00:00:00',
         usuario_id: 1,
+        region_id: 1,
         region: '1Región',
         contrato_marco: 'SBE',
+        proveedor: 'ERICSON',
+        subcontrato_id: 2,
+        asignado: false,
+        proveedor_id: 1,
       },
     ];
     const responseContratos: CubicacionModel.ResponseCubicaciones = {
@@ -197,8 +216,13 @@ describe('CubicacionComponent', () => {
             total: 100,
             fecha: '2020-01-02 00:00:00',
             usuario_id: 1,
+            region_id: 1,
             region: '1Región',
             contrato_marco: 'SBE',
+            proveedor: 'ERICSON',
+            subcontrato_id: 2,
+            asignado: false,
+            proveedor_id: 1,
           },
         ],
       },
@@ -240,13 +264,22 @@ describe('CubicacionComponent', () => {
     };
     spyOn(service, 'saveCubicacion').and.returnValue(of(dummyResponse));
 
-    component.clonar(id, total, nombreC, regionC, contratoC);
+    component.clonar(
+      id,
+      nombreC,
+      total,
+      regionID,
+      regionC,
+      contratoC,
+      proveedor,
+      subcontratoId
+    );
     tick();
     fixture.detectChanges();
     flush();
     expect(component.cubicaciones).toEqual(arrExpect);
   }));
-  
+
   it('counter should return array of number', () => {
     expect(component.counter(4).length).toBe(4);
   });

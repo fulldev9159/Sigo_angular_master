@@ -78,10 +78,13 @@ export class CubicacionComponent implements OnInit {
 
   clonar(
     idCubicacion: number,
-    totalC: number,
     nombreC: string,
+    totalC: number,
+    regionIdC: number,
     regionC: string,
-    contratoC: string
+    contratoC: string,
+    proveedorC: string,
+    subcontratoIDC: number
   ): void {
     const NombreClon = `Copia de ${nombreC}`;
     const lpus: CubicacionModel.Lpus[] = [];
@@ -99,8 +102,11 @@ export class CubicacionComponent implements OnInit {
               'ss',
               NombreClon,
               totalC,
+              regionIdC,
               regionC,
               contratoC,
+              proveedorC,
+              subcontratoIDC,
               lpus
             )
             .subscribe(
@@ -190,9 +196,12 @@ export class CubicacionComponent implements OnInit {
           .subscribe(
             (responseProveedorSubcontrato) => {
               const idProveedorSubcontrato = 'proveedores';
-              this.proveedorArr = responseProveedorSubcontrato.data[idProveedorSubcontrato];
+              this.proveedorArr =
+                responseProveedorSubcontrato.data[idProveedorSubcontrato];
               this.proveedorId = proveedorSubcontratoID.toString();
-              this.subcontratoId = responseProveedorSubcontrato.data[idProveedorSubcontrato]
+              this.subcontratoId = responseProveedorSubcontrato.data[
+                idProveedorSubcontrato
+              ]
                 .filter((x) => x.id === proveedorSubcontratoID)
                 .map((x) => x.subcontrato_id)[0][0];
               this.cubicacionService
@@ -204,7 +213,8 @@ export class CubicacionComponent implements OnInit {
                 .subscribe(
                   (responseRegionSubcontrato) => {
                     const idRegionSubcontrato = 'regiones';
-                    this.regionArr = responseRegionSubcontrato.data[idRegionSubcontrato];
+                    this.regionArr =
+                      responseRegionSubcontrato.data[idRegionSubcontrato];
                     this.regionId = regionID.toString();
                     this.cubicacionService
                       .getTipoServicioSubcontrato(
@@ -216,7 +226,10 @@ export class CubicacionComponent implements OnInit {
                       .subscribe(
                         (responseTipoServicioSubcontrato) => {
                           const idTipoServicioSubcontrato = 'tipo_servicios';
-                          this.tipoServicioArr = responseTipoServicioSubcontrato.data[idTipoServicioSubcontrato];
+                          this.tipoServicioArr =
+                            responseTipoServicioSubcontrato.data[
+                              idTipoServicioSubcontrato
+                            ];
                         },
                         (err: HttpErrorResponse) => {
                           this.sharedService.showMessage(
