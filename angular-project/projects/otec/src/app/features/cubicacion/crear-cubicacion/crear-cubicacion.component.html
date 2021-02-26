@@ -110,7 +110,9 @@
                     <td class="center">UNIDAD</td>
                     <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
                     <td class="center">${{itemC.precio * itemC.cantidad|currency:'CLP':'symbol'}}</td>
-                    <td class="center"></td>
+                    <td class="center"><button  (click)="elimnarLPU(i)" class=" ui icon button"  pTooltip="Eliminar LPU" tooltipPosition="top" placeholder="Top">
+                        <i class="trash icon"></i>
+                      </button></td>
                 </tr>
                 <tr>
                     <td colspan="7" style="text-align: right">

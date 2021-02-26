@@ -355,4 +355,10 @@ export class CubicacionComponent implements OnInit {
   counter(i: number): Array<number> {
     return new Array(i);
   }
+
+  elimnarLPU(index:number){
+    this.selectedServicios = this.selectedServicios.filter(
+      (value, indice) => indice != index
+    );
+  }
 }

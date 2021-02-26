@@ -345,4 +345,10 @@ export class CrearCubicacionComponent implements OnInit {
         }
       );
   }
+
+  elimnarLPU(index:number){
+    this.selectedServicios = this.selectedServicios.filter(
+      (value, indice) => indice != index
+    );
+  }
 }

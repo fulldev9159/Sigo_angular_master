@@ -33,10 +33,10 @@
                       <button id="buttonCopiar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Crear copia" tooltipPosition="top" placeholder="Top" (click)="clonar(cub.cubicacion_id,cub.nombre,cub.total,cub.region_id,cub.region,cub.contrato_marco,cub.proveedor,cub.subcontrato_id)">
                         <i class="clone icon"></i>
                       </button>
-                      <button id="buttonEditar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Editar" tooltipPosition="top" placeholder="Top" (click)="editar(cub.nombre,cub.contrato_marco,cub.proveedor_id,cub.region,cub.region_id,cub.cubicacion_id)">
+                      <button id="buttonEditar-{{cub.cubicacion_id}}" *ngIf="!cub.asignado" class="circular ui icon button"  pTooltip="Editar" tooltipPosition="top" placeholder="Top" (click)="editar(cub.nombre,cub.contrato_marco,cub.proveedor_id,cub.region,cub.region_id,cub.cubicacion_id)">
                         <i class="edit icon"></i>
                       </button>
-                      <button id="buttonEliminar-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Eliminar" tooltipPosition="top" placeholder="Top">
+                      <button id="buttonEliminar-{{cub.cubicacion_id}}" *ngIf="!cub.asignado" class="circular ui icon button"  pTooltip="Eliminar" tooltipPosition="top" placeholder="Top">
                         <i class="trash icon"></i>
                       </button>
                     </td>
@@ -184,7 +184,9 @@
                             <td class="center">UNIDAD</td>
                             <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
                             <td class="center">${{itemC.precio * itemC.cantidad|currency:'CLP':'symbol'}}</td>
-                            <td class="center"></td>
+                            <td class="center"><button  (click)="elimnarLPU(i)" class=" ui icon button"  pTooltip="Eliminar LPU" tooltipPosition="top" placeholder="Top">
+                                <i class="trash icon"></i>
+                              </button></td>
                         </tr>
                         <tr>
                             <td colspan="7" style="text-align: right">
