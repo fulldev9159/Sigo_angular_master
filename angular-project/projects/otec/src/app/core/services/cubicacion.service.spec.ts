@@ -226,7 +226,7 @@ describe('CubicacionService', () => {
         nombre: 'servicio1',
         precio: 11000,
         tipo_moneda: 'PESOS',
-        numero_producto: 'asdasd',
+        // numero_producto: 'asdasd',
         cantidad: 1,
         unidad: 'Unidad',
         region: '1 region',

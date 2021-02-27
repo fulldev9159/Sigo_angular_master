@@ -111,7 +111,7 @@ export interface Product {
   nombre: string;
   precio: number;
   tipo_moneda: string;
-  numero_producto: string;
+  // numero_producto: string;
   cantidad: number;
   unidad: string;
   region: string;

@@ -171,10 +171,10 @@ export class CubicacionComponent implements OnInit {
             nombre: lpu.nombre,
             tipo_moneda: lpu.tipo_moneda,
             precio: lpu.precio,
-            numero_producto: 'servicio.numero_producto',
-            cantidad: 1,
+            // numero_producto: 'servicio.numero_producto',
+            cantidad: lpu.cantidad,
             unidad: 'UNIDAD',
-            region: regionC,
+            region: regionC.split('-')[1].substring(1),
             tiposervicio: lpu.tipo_servicio,
           });
         });
@@ -298,6 +298,7 @@ export class CubicacionComponent implements OnInit {
   selectedProveedor(): void {}
   selectedRegion(): void {}
   selectedTipoServicio(): void {
+    console.log(this.selectedServicios);
     let tipoServicioName: string;
     let regionName: string;
     this.sourceProducts$ = of([]);
@@ -330,7 +331,7 @@ export class CubicacionComponent implements OnInit {
               nombre: servicio.nombre,
               tipo_moneda: servicio.tipo_moneda,
               precio: servicio.precio,
-              numero_producto: servicio.numero_producto,
+              // numero_producto: servicio.numero_producto,
               cantidad: 1,
               unidad: 'UNIDAD',
               region: regionName,
@@ -356,9 +357,9 @@ export class CubicacionComponent implements OnInit {
     return new Array(i);
   }
 
-  elimnarLPU(index:number){
+  elimnarLPU(index: number): void {
     this.selectedServicios = this.selectedServicios.filter(
-      (value, indice) => indice != index
+      (value, indice) => indice !== index
     );
   }
 }

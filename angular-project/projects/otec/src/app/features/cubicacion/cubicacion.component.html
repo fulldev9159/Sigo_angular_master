@@ -133,7 +133,7 @@
                         <div class="field">
                             <label>Servicios*</label>
                             <p-listbox (click)="getTotal()" [options]="(sourceProducts$|async)!" [(ngModel)]="selectedServicios"
-                                [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true"
+                                [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true" dataKey="id_lpu"
                                 optionLabel="nombre" [listStyle]="{'max-height':'250px'}"
                                 [style]="{'width':'56rem','height':'285px'}">
                                 <ng-template let-servicio pTemplate="item">
@@ -177,7 +177,7 @@
                             <td class="center">
                                 <select (change)="getTotal()" name="cantidad-{{itemC.id_lpu}}" id="cantidad-{{itemC.id_lpu}}"
                                     [(ngModel)]="selectedServicios[i].cantidad">
-                                    <option *ngFor="let numero of counter(5) ;let j = index" value="{{j}}">
+                                    <option *ngFor="let numero of counter(5) ;let j = index" value="{{j+1}}">
                                         {{j+1}}</option>
                                 </select>
                             </td>

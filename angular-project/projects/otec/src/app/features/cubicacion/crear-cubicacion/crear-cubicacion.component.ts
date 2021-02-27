@@ -196,7 +196,7 @@ export class CrearCubicacionComponent implements OnInit {
               nombre: this.acentos(servicio.nombre),
               tipo_moneda: servicio.tipo_moneda,
               precio: servicio.precio,
-              numero_producto: servicio.numero_producto,
+              // numero_producto: servicio.numero_producto,
               cantidad: 1,
               unidad: 'UNIDAD',
               region: regionName,
@@ -346,9 +346,9 @@ export class CrearCubicacionComponent implements OnInit {
       );
   }
 
-  elimnarLPU(index:number){
+  elimnarLPU(index: number): void {
     this.selectedServicios = this.selectedServicios.filter(
-      (value, indice) => indice != index
+      (value, indice) => indice !== index
     );
   }
 }
