@@ -121,6 +121,7 @@ export interface Product {
 export interface RequestSaveCubicacion {
   // user: string;
   token: string;
+  id_cubicacion?: number;
   nombre: string;
   total: number;
   region_id: number;
@@ -176,6 +177,11 @@ export interface RequestDetalleCubicaciones {
   cubicacion_id: number;
 }
 
+export interface RequestBorrarCubicaciones {
+  user: string;
+  token: string;
+  id_cubicacion: number;
+}
 export interface ResponseDetalleCubicaciones {
   data: {
     [id: string]: DetalleCubicacion[];

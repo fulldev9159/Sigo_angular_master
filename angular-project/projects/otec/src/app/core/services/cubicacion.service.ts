@@ -175,4 +175,58 @@ export class CubicacionService {
       JSON.stringify(request)
     );
   }
+
+  editCubicacion(
+    tokenC: string,
+    usernameC: string,
+    idCubicacion: number,
+    nombreC: string,
+    totalC: number,
+    regionIDC: number,
+    regionC: string,
+    contratoC: string,
+    proveedorC: string,
+    subcontratoIDC: number,
+    lpusC: CubicacionModel.Lpus[]
+  ): Observable<CubicacionModel.ResponseSaveCubicacion> {
+    // const temp: CubicacionModel.Lpus[] = [];
+
+    const request: CubicacionModel.RequestSaveCubicacion = {
+      token: tokenC,
+      // user:usernameC,
+      id_cubicacion: idCubicacion,
+      nombre: nombreC,
+      total: totalC,
+      region_id: regionIDC,
+      region: regionC,
+      contrato_marco: contratoC,
+      proveedor: proveedorC,
+      subcontrato_id: subcontratoIDC,
+      lpus: lpusC,
+    };
+
+    console.log(request);
+    return (this
+      .httpClient as HttpClient).post<CubicacionModel.ResponseSaveCubicacion>(
+      `${this.apiBase}/saveEditCubicacion`,
+      JSON.stringify(request)
+    );
+  }
+
+  eliminarCubicacion(
+    userC: string,
+    tok: string,
+    idCubicacion: number
+  ): Observable<CubicacionModel.ResponseSaveCubicacion> {
+    const request: CubicacionModel.RequestBorrarCubicaciones = {
+      user: userC,
+      token: tok,
+      id_cubicacion: idCubicacion,
+    };
+    return (this
+      .httpClient as HttpClient).post<CubicacionModel.ResponseSaveCubicacion>(
+      `${this.apiBase}/deleteCubicacion`,
+      JSON.stringify(request)
+    );
+  }
 }

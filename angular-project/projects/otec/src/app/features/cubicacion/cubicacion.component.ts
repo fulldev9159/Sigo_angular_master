@@ -40,6 +40,7 @@ export class CubicacionComponent implements OnInit {
   public contratoDisabled = true;
   public proveedorDisabled = true;
   public regionDisabled = true;
+  public idCubicacion = 0;
 
   constructor(
     private cubicacionService: CubicacionService,
@@ -163,6 +164,7 @@ export class CubicacionComponent implements OnInit {
     this.displayModalEdit = true;
     this.nombreCubicacion = nombreC;
     this.selectedServicios = [];
+    this.idCubicacion = idCubicacion;
 
     this.cubicacionService.getContratos(this.username, this.token).subscribe(
       (response) => {
@@ -194,6 +196,7 @@ export class CubicacionComponent implements OnInit {
             tiposervicio: lpu.tipo_servicio,
           });
         });
+        this.getTotal();
       });
 
     this.cubicacionService.getContratos(this.username, this.token).subscribe(
@@ -323,9 +326,6 @@ export class CubicacionComponent implements OnInit {
             (response) => {
               const id = 'regiones';
               this.regionArr = response.data[id];
-              // this.regionArr.forEach((value, index) => {
-              //   this.regionArr[index].nombre;
-              // });
             },
             (err: HttpErrorResponse) => {
               this.sharedService.showMessage(
@@ -421,7 +421,77 @@ export class CubicacionComponent implements OnInit {
     });
   }
   limpiarCarro(event: Event): any {}
-  save(): any {}
+  saveEdit(): any {
+    this.getTotal();
+    const lpus: CubicacionModel.Lpus[] = [];
+    this.selectedServicios.forEach((x) => {
+      lpus.push({
+        id_lpu: x.id_lpu,
+        cantidad: parseInt(x.cantidad.toString(), 10),
+      });
+    });
+    let regionName = '';
+    this.regionArr.forEach((region) => {
+      if (parseInt(this.regionId, 10) === region.id) {
+        regionName = `${region.codigo} - ${region.nombre}`;
+      }
+    });
+    let contratoName = '';
+    this.contratosArr.forEach((contrato) => {
+      if (parseInt(this.contratoId, 10) === contrato.id) {
+        contratoName = contrato.nombre;
+      }
+    });
+    const proveedorName = this.proveedorArr.filter(
+      (x) => x.id === parseInt(this.proveedorId, 10)
+    )[0].nombre;
+    this.cubicacionService
+      .editCubicacion(
+        this.token,
+        'ss',
+        this.idCubicacion,
+        this.nombreCubicacion,
+        this.total,
+        parseInt(this.regionId, 10),
+        regionName,
+        contratoName,
+        proveedorName,
+        this.subcontratoId,
+        lpus
+      )
+      .subscribe(
+        (x) => {
+          this.displayModalEdit = false;
+          this.sharedService.showMessage(
+            'cubicación editada exitosamente',
+            'ok'
+          );
+          this.cubicaciones = [];
+          this.cubicacionService
+            .getCubicaciones(this.username, this.token)
+            .subscribe(
+              (cubicacion) => {
+                const id = 'cubicaciones';
+                cubicacion.data[id].forEach((cub) => {
+                  this.cubicaciones.push(cub);
+                });
+              },
+              (err: HttpErrorResponse) => {
+                this.sharedService.showMessage(
+                  this.sharedService.getErrorMessage(err),
+                  'error'
+                );
+              }
+            );
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            `(HTTP code: ${err.status}) ${err.error.status.description}`,
+            'error'
+          );
+        }
+      );
+  }
 
   counter(i: number): Array<number> {
     return new Array(i);
@@ -431,6 +501,7 @@ export class CubicacionComponent implements OnInit {
     this.selectedServicios = this.selectedServicios.filter(
       (value, indice) => indice !== index
     );
+    this.getTotal();
   }
 
   confirm(event: Event, input: string): any {
@@ -479,5 +550,49 @@ export class CubicacionComponent implements OnInit {
     this.sourceProducts$ = of([]);
     this.sourcePtemp = [];
     this.selectedServicios = [];
+  }
+
+  confirmEliminacion(event: Event, idCubicacion: number): any {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: `¿Está seguro que desea eliminar esta cubicación?`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.cubicacionService
+          .eliminarCubicacion(this.username, this.token, idCubicacion)
+          .subscribe(
+            (x) => {
+              this.sharedService.showMessage(
+                'cubicación eliminada exitosamente',
+                'ok'
+              );
+              this.cubicaciones = [];
+              this.cubicacionService
+                .getCubicaciones(this.username, this.token)
+                .subscribe(
+                  (cubicacion) => {
+                    const id = 'cubicaciones';
+                    cubicacion.data[id].forEach((cub) => {
+                      this.cubicaciones.push(cub);
+                    });
+                  },
+                  (err: HttpErrorResponse) => {
+                    this.sharedService.showMessage(
+                      this.sharedService.getErrorMessage(err),
+                      'error'
+                    );
+                  }
+                );
+            },
+            (err: HttpErrorResponse) => {
+              this.sharedService.showMessage(
+                `(HTTP code: ${err.status}) ${err.error.status.description}`,
+                'error'
+              );
+            }
+          );
+      },
+      reject: () => {},
+    });
   }
 }
