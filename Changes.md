@@ -1,10 +1,11 @@
 # Changelog
 
-## [0.7.0] - 2021-02-28
+## [0.8.0] - 2021-02-28
 
 ### features
 
 - Se crea lógica de clonación de cubicación
+- Se crea lógica de eliminación
 
 ### Changes
 
