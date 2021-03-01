@@ -1,4 +1,4 @@
-<p-confirmPopup></p-confirmPopup>
+
 <otec-navbar></otec-navbar>
 <div class="listar-cubicacion-section">
     <div class="cubicacion-navbar"></div>
@@ -91,7 +91,7 @@
                             <label>Contrato*</label>
                             <!-- <div (click)="confirm($event,'contrato')"> -->
                                 <select name="contrato" id="contrato" (change)="selectedContrato()" [(ngModel)]="contratoId"
-                                    [disabled]="contratoDisabled">
+                                    >
                                     <option *ngFor="let contrato of contratosArr" value="{{contrato.id}}">
                                         {{contrato.nombre}}
                                     </option>
@@ -102,7 +102,7 @@
                             <label>Proveedor*</label>
                             <!-- <div (click)="confirm($event,'proveedor')"> -->
                                 <select name="proveedor" id="proveedor" (change)="selectedProveedor()" [(ngModel)]="proveedorId"
-                                    >
+                                >
                                     <option *ngFor="let proveedor of proveedorArr" value="{{proveedor.id}}">
                                         {{proveedor.nombre}}
                                     </option>
@@ -113,7 +113,7 @@
                             <label>Región*</label>
                             <!-- <div (click)="confirm($event,'region')"> -->
                                 <select name="region" id="region" (change)="selectedRegion()" [(ngModel)]="regionId"
-                                    >
+                                >
                                     <option *ngFor="let region of regionArr" value="{{region.id}}">{{region.codigo}}
                                         {{region.nombre}}</option>
                                 </select>

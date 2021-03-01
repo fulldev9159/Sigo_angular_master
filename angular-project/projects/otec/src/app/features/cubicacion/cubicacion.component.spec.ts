@@ -283,4 +283,161 @@ describe('CubicacionComponent', () => {
   it('counter should return array of number', () => {
     expect(component.counter(4).length).toBe(4);
   });
+
+  it('Should return total cash of services', () => {
+    component.selectedServicios = [
+      {
+        id_lpu: 1,
+        nombre: 'SERVICIO1',
+        tipo_moneda: 'PESOS',
+        precio: 1000,
+        // numero_producto: '213213',
+        cantidad: 1,
+        unidad: 'UNIDAD',
+        region: '1Region',
+        tiposervicio: 'CD1',
+      },
+      {
+        id_lpu: 2,
+        nombre: 'SERVICIO2',
+        tipo_moneda: 'PESOS',
+        precio: 1000,
+        // numero_producto: '113213',
+        cantidad: 1,
+        unidad: 'UNIDAD',
+        region: '1Region',
+        tiposervicio: 'CD1',
+      },
+    ];
+    component.getTotal();
+    expect(component.total).toBe(2000);
+  });
+
+  it('should storage servicios', fakeAsync(() => {
+    component.regionArr = [{ codigo: 'XIII', id: 13, nombre: '1Region' }];
+    component.regionId = '13';
+    component.tipoServicioId = '1';
+    component.tipoServicioArr = [{ id: 1, nombre: 'CD1' }];
+    const arrExpect: CubicacionModel.Product[] = [
+      {
+        id_lpu: 1,
+        nombre: 'SERVICIO1',
+        tipo_moneda: 'PESOS',
+        precio: 1000,
+        // numero_producto: '213213',
+        cantidad: 1,
+        unidad: 'UNIDAD',
+        region: '1Region',
+        tiposervicio: 'CD1',
+      },
+    ];
+
+    const response: CubicacionModel.ResponseServicioContrato = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: {
+        servicios: [
+          {
+            id_lpu: 1,
+            nombre: 'SERVICIO1',
+            precio: 1000,
+            tipo_moneda: 'PESOS',
+            numero_producto: '213213',
+          },
+        ],
+      },
+    };
+
+    spyOn(service, 'getServicioSubcontrato').and.returnValue(of(response));
+    component.selectedTipoServicio();
+    tick();
+    fixture.detectChanges();
+    expect(component.sourcePtemp).toEqual(arrExpect);
+  }));
+
+  it('should storage tiposervicios de un contrato', fakeAsync(() => {
+    const arrExpect: CubicacionModel.TipoServicio[] = [
+      { id: 1, nombre: 'CD1' },
+    ];
+    const response: CubicacionModel.ResponseTipoServicioSubContrato = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: {
+        tipo_servicios: [
+          {
+            id: 1,
+            nombre: 'CD1',
+          },
+        ],
+      },
+    };
+
+    spyOn(service, 'getTipoServicioSubcontrato').and.returnValue(of(response));
+    component.selectedRegion();
+    tick();
+    fixture.detectChanges();
+    expect(component.tipoServicioArr).toEqual(arrExpect);
+  }));
+
+  it('should storage regiones de un contrato', fakeAsync(() => {
+    component.proveedorId = '2';
+    component.proveedorArr = [
+      { id: 2, nombre: 'ERICSSON CHILE S.A.', subcontrato_id: [1] },
+    ];
+    const arrExpect: CubicacionModel.Region[] = [
+      { codigo: 'XIII', id: 13, nombre: 'Reginnn Metropolitana de Santiago' },
+    ];
+    const response: CubicacionModel.ResponseRegion = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: {
+        regiones: [
+          {
+            codigo: 'XIII',
+            id: 13,
+            nombre: 'Reginnn Metropolitana de Santiago',
+          },
+        ],
+      },
+    };
+
+    spyOn(service, 'getRegionesSubcontrato').and.returnValue(of(response));
+    component.selectedProveedor();
+    tick();
+    fixture.detectChanges();
+    expect(component.regionArr).toEqual(arrExpect);
+  }));
+
+  it('should storage prooveedores de un contrato', fakeAsync(() => {
+    const arrExpect: CubicacionModel.Proveedores[] = [
+      { id: 2, nombre: 'ERICSSON CHILE S.A.', subcontrato_id: [1] },
+    ];
+    const response: CubicacionModel.ResponseProveedor = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: {
+        proveedores: [
+          {
+            id: 2,
+            nombre: 'ERICSSON CHILE S.A.',
+            subcontrato_id: [1],
+          },
+        ],
+      },
+    };
+
+    spyOn(service, 'getProveedoresSubcontrato').and.returnValue(of(response));
+    component.selectedContrato();
+    tick();
+    fixture.detectChanges();
+    expect(component.proveedorArr).toEqual(arrExpect);
+  }));
 });

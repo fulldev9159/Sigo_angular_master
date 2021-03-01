@@ -44,7 +44,8 @@ export class CubicacionComponent implements OnInit {
   constructor(
     private cubicacionService: CubicacionService,
     private authService: AuthService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -158,9 +159,24 @@ export class CubicacionComponent implements OnInit {
     regionID: number,
     idCubicacion: number
   ): void {
+    this.reset();
     this.displayModalEdit = true;
     this.nombreCubicacion = nombreC;
     this.selectedServicios = [];
+
+    this.cubicacionService.getContratos(this.username, this.token).subscribe(
+      (response) => {
+        const id = 'contratos_marco';
+        this.contratosArr = response.data[id];
+      },
+      (err: HttpErrorResponse) => {
+        this.sharedService.showMessage(
+          this.sharedService.getErrorMessage(err),
+          'error'
+        );
+      }
+    );
+
     this.cubicacionService
       .getDetalleCubicacion(this.username, this.token, idCubicacion)
       .subscribe((detalleCubicaion) => {
@@ -265,38 +281,87 @@ export class CubicacionComponent implements OnInit {
   }
 
   selectedContrato(): void {
-    // console.log(`getProveedoresSubcontrato -> ${this.contratoId}`);
-    // if (this.nombreCubicacion === '') {
-    //   this.NombreErr = true;
-    // }
-    // this.proveedorId = '';
-    // this.regionId = '';
-    // this.tipoServicioId = '';
-    // this.reset();
-    // this.contratoDisabled = true;
-    // this.cubicacionService
-    //   .getProveedoresSubcontrato(
-    //     this.username,
-    //     this.token,
-    //     parseInt(this.contratoId, 10)
-    //   )
-    //   .subscribe(
-    //     (response) => {
-    //       const id = 'proveedores';
-    //       this.proveedorArr = response.data[id];
-    //       // console.log(response);
-    //     },
-    //     (err: HttpErrorResponse) => {
-    //       this.sharedService.showMessage(
-    //         this.sharedService.getErrorMessage(err),
-    //         'error'
-    //       );
-    //     }
-    //   );
+    this.proveedorId = '';
+    this.regionId = '';
+    this.tipoServicioId = '';
+    this.reset();
+    this.contratoDisabled = true;
+    this.cubicacionService
+      .getProveedoresSubcontrato(
+        this.username,
+        this.token,
+        parseInt(this.contratoId, 10)
+      )
+      .subscribe(
+        (response) => {
+          const id = 'proveedores';
+          this.proveedorArr = response.data[id];
+          // console.log(response);
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
-  selectedProveedor(): void {}
-  selectedRegion(): void {}
+  selectedProveedor(): void {
+    this.reset();
+    this.proveedorDisabled = true;
+    this.proveedorArr.forEach((x) => {
+      const provID = parseInt(this.proveedorId, 10);
+      if (x.id === provID) {
+        const ids = 'subcontrato_id';
+        x[ids].forEach((sub: number) => {
+          this.subcontratoId = sub;
+        });
+        this.cubicacionService
+          .getRegionesSubcontrato(this.username, this.token, this.subcontratoId)
+          .subscribe(
+            (response) => {
+              const id = 'regiones';
+              this.regionArr = response.data[id];
+              // this.regionArr.forEach((value, index) => {
+              //   this.regionArr[index].nombre;
+              // });
+            },
+            (err: HttpErrorResponse) => {
+              this.sharedService.showMessage(
+                this.sharedService.getErrorMessage(err),
+                'error'
+              );
+            }
+          );
+      }
+    });
+  }
+
+  selectedRegion(): void {
+    this.regionDisabled = true;
+    this.reset();
+    this.cubicacionService
+      .getTipoServicioSubcontrato(
+        this.username,
+        this.token,
+        this.subcontratoId,
+        parseInt(this.regionId, 10)
+      )
+      .subscribe(
+        (response) => {
+          const id = 'tipo_servicios';
+          this.tipoServicioArr = response.data[id];
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
+  }
+
   selectedTipoServicio(): void {
     console.log(this.selectedServicios);
     let tipoServicioName: string;
@@ -349,7 +414,12 @@ export class CubicacionComponent implements OnInit {
       );
   }
 
-  getTotal(): void {}
+  getTotal(): void {
+    this.total = 0;
+    this.selectedServicios.forEach((servicio) => {
+      this.total = this.total + servicio.precio * servicio.cantidad;
+    });
+  }
   limpiarCarro(event: Event): any {}
   save(): any {}
 
@@ -361,5 +431,53 @@ export class CubicacionComponent implements OnInit {
     this.selectedServicios = this.selectedServicios.filter(
       (value, indice) => indice !== index
     );
+  }
+
+  confirm(event: Event, input: string): any {
+    let permitirMensaje = false;
+    if (input === 'contrato' && this.contratoDisabled) {
+      permitirMensaje = true;
+    }
+    if (input === 'proveedor' && this.proveedorDisabled) {
+      permitirMensaje = true;
+    }
+    if (input === 'region' && this.regionDisabled) {
+      permitirMensaje = true;
+    }
+    if (this.selectedServicios.length > 0 && permitirMensaje) {
+      this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: `Si cambia de ${input} borrara todos los sevicios seleccionados. Está seguro que desea proceder?`,
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          if (input === 'contrato') {
+            this.contratoDisabled = false;
+          }
+          if (input === 'proveedor') {
+            this.proveedorDisabled = false;
+          }
+          if (input === 'region') {
+            this.regionDisabled = false;
+          }
+        },
+        reject: () => {},
+      });
+    } else {
+      if (input === 'contrato') {
+        this.contratoDisabled = false;
+      }
+      if (input === 'proveedor') {
+        this.proveedorDisabled = false;
+      }
+      if (input === 'region') {
+        this.regionDisabled = false;
+      }
+    }
+  }
+
+  reset(): any {
+    this.sourceProducts$ = of([]);
+    this.sourcePtemp = [];
+    this.selectedServicios = [];
   }
 }
