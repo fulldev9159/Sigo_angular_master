@@ -108,8 +108,8 @@
                         </select>
                     </td>
                     <td class="center">UNIDAD</td>
-                    <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
-                    <td class="center">${{itemC.precio * itemC.cantidad|currency:'CLP':'symbol'}}</td>
+                    <td class="center">${{itemC.precio| number: '1.0-0':'es-CL'}}</td>
+                    <td class="center">${{itemC.precio * itemC.cantidad|number: '1.0-0':'es-CL'}}</td>
                     <td class="center"><button  (click)="elimnarLPU(i)" class=" ui icon button"  pTooltip="Eliminar LPU" tooltipPosition="top" placeholder="Top">
                         <i class="trash icon"></i>
                       </button></td>
@@ -117,7 +117,7 @@
                 <tr>
                     <td colspan="7" style="text-align: right">
                         <span style="    
-                                margin-right: 31px;"><strong>Total</strong>: {{total| currency:'CLP':'symbol'}}</span>
+                                margin-right: 31px;"><strong>Total</strong>: {{total| number: '1.0-0':'es-CL'}}</span>
                     </td>
                 </tr>
             </table>

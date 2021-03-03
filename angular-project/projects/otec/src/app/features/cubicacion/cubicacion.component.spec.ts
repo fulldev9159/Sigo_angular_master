@@ -5,6 +5,13 @@ import {
   tick,
   flush,
 } from '@angular/core/testing';
+import {
+  LOCALE_ID
+} from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeCl from '@angular/common/locales/es-CL';
+import localeClExtra from '@angular/common/locales/extra/es-CL';
+registerLocaleData(localeCl, 'es-CL', localeClExtra);
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CubicacionComponent } from './cubicacion.component';
 import * as CubicacionModel from './cubicacion.model';
@@ -28,6 +35,7 @@ describe('CubicacionComponent', () => {
           provide: 'environment',
           useValue: {},
         },
+        { provide: LOCALE_ID, useValue: 'es-CL'},
         SharedService,
         ConfirmationService,
       ],

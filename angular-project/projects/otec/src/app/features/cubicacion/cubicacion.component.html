@@ -25,7 +25,7 @@
                     <td  style="text-align: center;">{{cub.region}}</td>
                     <td  class="center" style="text-align: center;">{{cub.contrato_marco}}</td>
                     <td  class="center" style="text-align: center;">{{cub.proveedor}}</td>
-                    <td  class="center" style="text-align: center;">{{cub.total| currency:'CLP':'symbol'}}</td>
+                    <td  class="center" style="text-align: center;">${{cub.total| number: '1.0-0':'es-CL'}}</td>
                     <td style="text-align: center;">
                         <button id ="buttonDetalles-{{cub.cubicacion_id}}" class="circular ui icon button"  pTooltip="Ver detalles" tooltipPosition="top" placeholder="Top" (click)="displayDetaill(cub.cubicacion_id,cub.total,cub.nombre)">
                         <i class="eye icon"></i>
@@ -64,14 +64,14 @@
                 <!-- <td class="center">{{itemC.tiposervicio}}</td> -->
                 <td class="center">{{itemC.tipo_moneda}}</td>
                 <td class="center">{{itemC.tipo_servicio}}</td>
-                <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
+                <td class="center">${{itemC.precio| number: '1.0-0':'es-CL'}}</td>
                 <td class="center">{{itemC.cantidad}}</td>
-                <td class="center">${{itemC.subtotal| currency:'CLP':'symbol'}}</td>
+                <td class="center">${{itemC.subtotal| number: '1.0-0':'es-CL'}}</td>
             </tr>
             <tr>
                 <td colspan="7" style="text-align: right">
                     <span style="    
-                            margin-right: 31px;"><strong>Total</strong>: {{total| currency:'CLP':'symbol'}}</span>
+                            margin-right: 31px;"><strong>Total</strong>: ${{total| number: '1.0-0':'es-CL'}}</span>
                 </td>
             </tr>
         </table>
@@ -99,7 +99,7 @@
                             <!-- </div> -->
                         </div>
                         <div class="field">
-                            <label>Proveedor*</label>
+                            <label>Proveedor* </label>
                             <!-- <div (click)="confirm($event,'proveedor')"> -->
                                 <select name="proveedor" id="proveedor" (change)="selectedProveedor()" [(ngModel)]="proveedorId"
                                 >
@@ -110,7 +110,7 @@
                             <!-- </div> -->
                         </div>
                         <div class="field">
-                            <label>Región*</label>
+                            <label>Región* </label>
                             <!-- <div (click)="confirm($event,'region')"> -->
                                 <select name="region" id="region" (change)="selectedRegion()" [(ngModel)]="regionId"
                                 >
@@ -182,8 +182,8 @@
                                 </select>
                             </td>
                             <td class="center">UNIDAD</td>
-                            <td class="center">${{itemC.precio| currency:'CLP':'symbol'}}</td>
-                            <td class="center">${{itemC.precio * itemC.cantidad|currency:'CLP':'symbol'}}</td>
+                            <td class="center">${{itemC.precio| number: '1.0-0':'es-CL'}}</td>
+                            <td class="center">${{itemC.precio * itemC.cantidad|number: '1.0-0':'es-CL'}}</td>
                             <td class="center"><button  (click)="elimnarLPU(i)" class=" ui icon button red"  pTooltip="Eliminar LPU" tooltipPosition="top" placeholder="Top">
                                 <i class="trash icon"></i>
                               </button></td>
@@ -191,7 +191,7 @@
                         <tr>
                             <td colspan="7" style="text-align: right">
                                 <span style="    
-                                        margin-right: 31px;"><strong>Total</strong>: {{total| currency:'CLP':'symbol'}}</span>
+                                        margin-right: 31px;"><strong>Total</strong>: ${{total| number: '1.0-0':'es-CL'}}</span>
                             </td>
                         </tr>
                     </table>

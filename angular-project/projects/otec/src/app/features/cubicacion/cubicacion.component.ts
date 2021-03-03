@@ -7,6 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ConfirmationService } from 'primeng/api';
 
 import { of, Observable } from 'rxjs';
+import { convertActionBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 
 @Component({
   selector: 'otec-cubicacion',
@@ -161,7 +162,10 @@ export class CubicacionComponent implements OnInit {
     idCubicacion: number
   ): void {
     this.reset();
-    this.displayModalEdit = true;
+    this.proveedorId = '';
+    this.contratoId = '';
+    this.regionId = '';
+    console.log(`Proveedor: ${proveedorSubcontratoID} region: ${regionID}`);
     this.nombreCubicacion = nombreC;
     this.selectedServicios = [];
     this.idCubicacion = idCubicacion;
@@ -217,7 +221,12 @@ export class CubicacionComponent implements OnInit {
               const idProveedorSubcontrato = 'proveedores';
               this.proveedorArr =
                 responseProveedorSubcontrato.data[idProveedorSubcontrato];
+              console.log(this.proveedorArr);
+              // setTimeout(()=>{
               this.proveedorId = proveedorSubcontratoID.toString();
+              console.log('se llena proveedorId');
+              // },3000)
+
               this.subcontratoId = responseProveedorSubcontrato.data[
                 idProveedorSubcontrato
               ]
@@ -235,6 +244,9 @@ export class CubicacionComponent implements OnInit {
                     this.regionArr =
                       responseRegionSubcontrato.data[idRegionSubcontrato];
                     this.regionId = regionID.toString();
+
+                    // console.log(this.regionArr)
+                    // console.log(`regionId: ${this.regionId}`)
                     this.cubicacionService
                       .getTipoServicioSubcontrato(
                         this.username,
@@ -244,6 +256,7 @@ export class CubicacionComponent implements OnInit {
                       )
                       .subscribe(
                         (responseTipoServicioSubcontrato) => {
+                          this.displayModalEdit = true;
                           const idTipoServicioSubcontrato = 'tipo_servicios';
                           this.tipoServicioArr =
                             responseTipoServicioSubcontrato.data[
