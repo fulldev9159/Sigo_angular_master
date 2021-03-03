@@ -168,6 +168,7 @@ export interface Cubicacion {
   subcontrato_id: number;
   asignado: boolean;
   proveedor_id: number;
+  admin_contrato?: string;
 }
 
 // Detalle cubicacion

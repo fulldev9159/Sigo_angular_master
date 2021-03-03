@@ -59,4 +59,12 @@ describe('AppRoutingModule', () => {
       done(); // Llamada asyncronica que ejecuta el expect una vez terminado el router.navigate
     });
   });
+
+  it('navegate to "dashboard/ot" redirects you to /dashboard/ot', (done) => {
+    localStorage.setItem('otec_token', 'testToken');
+    router.navigate(['/dashboard/ot']).then(() => {
+      expect(location.path()).toBe('/dashboard/ot');
+      done(); // Llamada asyncronica que ejecuta el expect una vez terminado el router.navigate
+    });
+  });
 });

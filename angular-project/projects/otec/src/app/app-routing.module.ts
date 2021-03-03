@@ -31,6 +31,7 @@ export const routes: Routes = [
       ),
     canActivate: [AuthGuard],
   },
+  { path: 'dashboard/ot', loadChildren: () => import('./features/ot/ot.module').then(m => m.OtModule) },
 ];
 
 @NgModule({
