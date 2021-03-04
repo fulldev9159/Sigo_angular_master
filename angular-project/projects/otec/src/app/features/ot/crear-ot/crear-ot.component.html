@@ -4,7 +4,7 @@
     <div class="content ui segment">
         <div class="title">Creación de una orden de trabajo</div>
 
-        
+
         <div class="form-content">
             <h2 class="etapa">Etapa 1</h2>
             <div class="form-etapa">
@@ -14,21 +14,40 @@
                 </div>
                 <div class="field">
                     <label>Tipo OT*</label>
-                        <select name="tipoOT" id="tipoOT"  [(ngModel)]="tipoOT">
-                            <option value="OT">OT</option>
-                            <option value="AP">AP</option>
-                        </select>
+                    <select name="tipoOT" id="tipoOT" [(ngModel)]="tipoOT">
+                        <option value="OT">OT</option>
+                        <option value="AP">AP</option>
+                    </select>
                 </div>
                 <div class="field">
                     <label>Cubicación (costeo)*</label>
-                        <select name="cubicacion" id="cubicacion" (change)="selectedCubicacion()" [(ngModel)]="cubicacionId">
-                            <option value=""> </option>
-                            <option *ngFor="let cubicacion of cubicacionesArr" value="{{cubicacion.cubicacion_id}}">
-                                {{cubicacion.nombre}}
-                            </option>
-                        </select>
+                    <select name="cubicacion" id="cubicacion" (change)="selectedCubicacion()"
+                        [(ngModel)]="cubicacionId">
+                        <option value=""> </option>
+                        <option *ngFor="let cubicacion of cubicacionesArr" value="{{cubicacion.cubicacion_id}}">
+                            {{cubicacion.nombre}}
+                        </option>
+                    </select>
                 </div>
-                
+
+                <div *ngIf="cubicacionId!=''" id="detalleCubicacion">
+                    <div class="field" >
+                        <label>Contrato: <span>{{contrato}}</span></label>
+                    </div>
+                    <div class="field" style="margin-top: 10px;"> <label>Proveedor: <span>{{proveedor}}</span></label></div>
+                    <div class="field" style="margin-top: 10px;"> <label>Región: <span>{{region}}</span></label></div>
+                    <div class="field" style="margin-top: 10px;"> <label>Adm. de contrato: <span>{{administradorContrato}}</span></label></div>
+
+
+                    
+                </div>
+                <div class="field" style="  flex-direction: column;  margin-top:10px;align-items: center;
+                    display: flex;">
+                        <label>Observaciones (opcional)</label>
+                        <textarea name="textarea" rows="10" cols="50">Write something here</textarea>
+                    </div>
+
+
             </div>
         </div>
 

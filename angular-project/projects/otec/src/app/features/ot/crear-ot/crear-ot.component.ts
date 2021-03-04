@@ -17,6 +17,10 @@ export class CrearOtComponent implements OnInit {
   public token = this.authService.getItemStorage('otec_token') as string;
   public cubicacionesArr: CubicacionModel.Cubicacion[] = [];
   public cubicacionId = '';
+  public contrato ='';
+  public proveedor = '';
+  public region = '';
+  public administradorContrato = 'Juan Perez'
 
   constructor(
     private cubicacionService: CubicacionService,
@@ -41,5 +45,10 @@ export class CrearOtComponent implements OnInit {
     );
   }
 
-  selectedCubicacion(): void {}
+  selectedCubicacion(): void {
+    let cubicacionSelected = this.cubicacionesArr.filter(x=>x.cubicacion_id===parseInt(this.cubicacionId,10))
+    this.contrato = cubicacionSelected[0].contrato_marco
+    this.proveedor = cubicacionSelected[0].proveedor
+    this.region = cubicacionSelected[0].region
+  }
 }

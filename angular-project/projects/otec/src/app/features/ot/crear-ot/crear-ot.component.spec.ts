@@ -35,7 +35,7 @@ describe('CrearOtComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should be store cubicaciones', fakeAsync(() => {
+  it('should be store cubicaciones', fakeAsync(() => {
     const arrExpect: CubicacionModel.Cubicacion[] = [
       {
         cubicacion_id: 1,
@@ -83,4 +83,29 @@ describe('CrearOtComponent', () => {
     fixture.detectChanges();
     expect(component.cubicacionesArr).toEqual(arrExpect);
   }));
+
+  it('should selected cubicacion show details', () => {
+    component.cubicacionId = '1';
+    component.cubicacionesArr = [
+      {
+        cubicacion_id: 1,
+        nombre: 'CubTest',
+        total: 100,
+        fecha: '2020-01-02 00:00:00',
+        usuario_id: 1,
+        region_id: 1,
+        region: '1Región',
+        contrato_marco: 'SBE',
+        proveedor: 'ERICSON',
+        subcontrato_id: 2,
+        asignado: false,
+        proveedor_id: 1,
+      },
+    ];
+
+    component.selectedCubicacion();
+    expect(component.contrato).toBe('SBE');
+    expect(component.proveedor).toBe('ERICSON');
+    expect(component.region).toBe('1Región');
+  });
 });

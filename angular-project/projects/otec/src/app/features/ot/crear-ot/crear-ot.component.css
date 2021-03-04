@@ -25,4 +25,15 @@
   justify-content: space-evenly;
   align-items: center;
   display: flex;
+  
+}
+
+label span{
+    margin-top: 10px;
+    font-weight: 400
+}
+
+#detalleCubicacion{
+    margin-left: 97px;
+    margin-bottom: 39px
 }
