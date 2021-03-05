@@ -1,0 +1,49 @@
+<div class="step-content">
+    <p-card>
+        <ng-template pTemplate="title">
+            Configuración de orden de trabajo - Plan de proyecto
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Ingrese el plan de proyecto y el sitio
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="tipoot">Plan de proyecto</label>
+                    <select name="tipoOT" id="tipoOT" >
+                        <option value="OT">OT</option>
+                        <option value="AP">AP</option>
+                    </select>
+                </div>
+                <div class="p-field">
+                    <label for="cubicacion">Sitio</label>
+                    <!-- <input #cubicacion="ngModel" id="cubicacion" type="text" required  [(ngModel)]="cubicacionProyecto.cubicacion">  -->
+                    <select name="tipoOT" id="tipoOT" >
+                        <option value="OT">OT</option>
+                        <option value="AP">AP</option>
+                    </select>     
+                </div>
+
+                <div class="ui info message" >
+                    <div class="header">
+                      Detalles del plan de proyecto
+                    </div>
+                    <ul class="list">
+                      <li>Codigo de proyecto: </li>
+                      <li>Nombre sitio: </li>
+                      <li>Direcccion: </li>
+                      <li>Latitud: </li>
+                      <li>Longitud: </li>
+                    </ul>
+                  </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-between">
+                <button class="ui green button" (click)="back()">Atras</button>
+                <button class="ui blue button" (click) ="next()">Siguiente</button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>
+

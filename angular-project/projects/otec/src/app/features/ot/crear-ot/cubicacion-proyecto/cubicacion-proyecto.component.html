@@ -1,0 +1,54 @@
+<div class="step-content">
+    <p-card>
+        <ng-template pTemplate="title">
+            Configuración de orden de trabajo - Cubicacion
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Ingrese la cubicación y plan de proyecto asociado a la orden de trabajo
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="nombreot">Nombre de la orden de trabajo</label>
+                    <input #nombreot="ngModel" id="nombreot" type="text" required  [(ngModel)]="cubicacionProyecto.nombre"> 
+                    <!-- <small *ngIf="(firstname.invalid && submitted) || (firstname.dirty && firstname.invalid)" class="p-error">Firstname is required.</small> -->
+                </div>
+                <div class="p-field">
+                    <label for="tipoot">Tipo OT</label>
+                    <select name="tipoOT" id="tipoOT" [(ngModel)]="cubicacionProyecto.tipoOT">
+                        <option value="OT">OT</option>
+                        <option value="AP">AP</option>
+                    </select>
+                </div>
+                <div class="p-field">
+                    <label for="cubicacion">Cubicación</label>
+                    <!-- <input #cubicacion="ngModel" id="cubicacion" type="text" required  [(ngModel)]="cubicacionProyecto.cubicacion">  -->
+                    <select name="cubicacion" id="cubicacion" (change)="selectedCubicacion()"
+                        [(ngModel)]="cubicacionProyecto.cubicacion.cubicacion_id">
+                        <option value=""> </option>
+                        <option *ngFor="let cubicacion of cubicacionesArr" value="{{cubicacion.cubicacion_id}}">
+                            {{cubicacion.nombre}}
+                        </option>
+                    </select>                    
+                </div>
+
+                <div class="ui info message" *ngIf="cubicacionProyecto.cubicacion!=null">
+                    <div class="header">
+                      Detalles de la cubicación
+                    </div>
+                    <ul class="list">
+                      <li>Contrato: {{cubicacionProyecto.cubicacion.contrato}}</li>
+                      <li>Proveedor: {{cubicacionProyecto.cubicacion.proveedor}}</li>
+                      <li>Región: {{cubicacionProyecto.cubicacion.region}}</li>
+                    </ul>
+                  </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-end">
+                <!-- <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button> -->
+                <button class="ui blue button" (click)="next()">Siguiente</button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>

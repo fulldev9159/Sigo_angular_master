@@ -1,56 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { CubicacionService } from '../../../core/services/cubicacion.service';
-import { AuthService } from '../../../core/services/auth.service';
-import { SharedService } from '../../../core/services/shared.service';
-import * as CubicacionModel from '../../cubicacion/cubicacion.model';
-
-import { HttpErrorResponse } from '@angular/common/http';
+import { MenuItem, MessageService } from 'primeng/api';
 @Component({
   selector: 'otec-crear-ot',
   templateUrl: './crear-ot.component.html',
   styleUrls: ['./crear-ot.component.css'],
+  providers: [MessageService],
 })
 export class CrearOtComponent implements OnInit {
-  public nombreOT = '';
-  public tipoOT = 'OT';
-  public username = this.authService.getItemStorage('username') as string;
-  public token = this.authService.getItemStorage('otec_token') as string;
-  public cubicacionesArr: CubicacionModel.Cubicacion[] = [];
-  public cubicacionId = '';
-  public contrato = '';
-  public proveedor = '';
-  public region = '';
-  public administradorContrato = 'Juan Perez';
+  public items: MenuItem[] = [];
 
   constructor(
-    private cubicacionService: CubicacionService,
-    private authService: AuthService,
-    private sharedService: SharedService
+    public messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    this.cubicacionService.getCubicaciones(this.username, this.token).subscribe(
-      (cubicacion) => {
-        const id = 'cubicaciones';
-        cubicacion.data[id].forEach((x) => {
-          this.cubicacionesArr.push(x);
-        });
+    this.items = [
+      {
+        label: 'Cubicacion',
+        routerLink: 'cubicacion-proyecto',
       },
-      (err: HttpErrorResponse) => {
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
-  }
-
-  selectedCubicacion(): void {
-    const cubicacionSelected = this.cubicacionesArr.filter(
-      (x) => x.cubicacion_id === parseInt(this.cubicacionId, 10)
-    );
-    this.contrato = cubicacionSelected[0].contrato_marco;
-    this.proveedor = cubicacionSelected[0].proveedor;
-    this.region = cubicacionSelected[0].region;
+      {
+        label: 'Plan de proyecto',
+        routerLink: 'proyecto',
+      },
+      {
+        label: 'Pep2',
+        routerLink: 'pep2',
+      },
+      {
+        label: 'Organigrama',
+        routerLink: 'organigrama',
+      },
+      {
+        label: 'Confirmación',
+        routerLink: 'confirmacion',
+      },
+    ];
   }
 }

@@ -1,0 +1,55 @@
+<div class="step-content">
+    <p-card>
+        <ng-template pTemplate="title">
+            Confirmación 
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            Ingrese fecha y observaciones
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="p-fluid">
+                <div class="ui info message" >
+                    <div class="header">
+                      Detalles del plan de proyecto
+                    </div>
+                    <ul class="list">
+                      <li>Codigo de proyecto: </li>
+                      <li>Nombre sitio: </li>
+                      <li>Direcccion: </li>
+                      <li>Latitud: </li>
+                      <li>Longitud: </li>
+                    </ul>
+                  </div>
+                <div class="p-field">
+                    <label for="tipoot">Fecha Inicio</label>
+                    <select name="tipoOT" id="tipoOT" >
+                        <option value="OT">OT</option>
+                        <option value="AP">AP</option>
+                    </select>
+                </div>
+                <div class="p-field">
+                    <label for="cubicacion">Fecha Fin</label>
+                    <!-- <input #cubicacion="ngModel" id="cubicacion" type="text" required  [(ngModel)]="cubicacionProyecto.cubicacion">  -->
+                    <select name="tipoOT" id="tipoOT" >
+                        <option value="OT">OT</option>
+                        <option value="AP">AP</option>
+                    </select>     
+                </div>
+                <div class="p-field">
+                    <label for="cubicacion">Observaciones</label>
+                    <!-- <input #cubicacion="ngModel" id="cubicacion" type="text" required  [(ngModel)]="cubicacionProyecto.cubicacion">  -->
+                    <select name="tipoOT" id="tipoOT" >
+                        <option value="OT">OT</option>
+                        <option value="AP">AP</option>
+                    </select>     
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-nogutter p-justify-between">
+                <button class="ui green button" (click)="back()">Atras</button>
+                <button class="ui red button">Finalizar</button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>
