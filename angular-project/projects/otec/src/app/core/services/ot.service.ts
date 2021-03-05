@@ -18,7 +18,7 @@ export class OtService {
     },
   };
 
-  getOTInformation() {
+  getOTInformation(): any {
     return this.otInformation;
   }
 }

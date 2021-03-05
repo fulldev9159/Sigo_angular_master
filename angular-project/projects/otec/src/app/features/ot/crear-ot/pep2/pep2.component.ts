@@ -4,21 +4,18 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'otec-pep2',
   templateUrl: './pep2.component.html',
-  styleUrls: ['./pep2.component.css']
+  styleUrls: ['./pep2.component.css'],
 })
 export class Pep2Component implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  next():void{
+  next(): void {
     this.router.navigate(['dashboard/ot/crear-ot/organigrama']);
   }
 
-  back():void{
+  back(): void {
     this.router.navigate(['dashboard/ot/crear-ot/proyecto']);
   }
-
 }

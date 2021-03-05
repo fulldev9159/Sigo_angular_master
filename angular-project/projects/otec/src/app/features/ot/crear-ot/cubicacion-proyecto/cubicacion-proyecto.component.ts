@@ -54,7 +54,9 @@ export class CubicacionProyectoComponent implements OnInit {
   selectedCubicacion(): void {
     console.log(this.cubicacionProyecto);
     const cubicacionSelected = this.cubicacionesArr.filter(
-      (x) => x.cubicacion_id === parseInt(this.cubicacionProyecto.cubicacion.cubicacion_id,10)
+      (x) =>
+        x.cubicacion_id ===
+        parseInt(this.cubicacionProyecto.cubicacion.cubicacion_id, 10)
     );
     this.cubicacionProyecto.cubicacion = {
       cubicacion_id: cubicacionSelected[0].cubicacion_id,

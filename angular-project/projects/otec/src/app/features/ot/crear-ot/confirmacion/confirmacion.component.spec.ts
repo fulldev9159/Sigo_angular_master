@@ -8,10 +8,9 @@ describe('ConfirmacionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[RouterTestingModule],
-      declarations: [ ConfirmacionComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule],
+      declarations: [ConfirmacionComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

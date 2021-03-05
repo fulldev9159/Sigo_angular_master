@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import {OrganigramaComponent } from './organigrama.component';
+import { OrganigramaComponent } from './organigrama.component';
 
 describe('CubicacionPlanComponent', () => {
   let component: OrganigramaComponent;
@@ -9,14 +9,15 @@ describe('CubicacionPlanComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[RouterTestingModule],
-      providers:[ {
-        provide: 'environment',
-        useValue: {},
-      }],
-      declarations: [ OrganigramaComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule],
+      providers: [
+        {
+          provide: 'environment',
+          useValue: {},
+        },
+      ],
+      declarations: [OrganigramaComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

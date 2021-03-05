@@ -14,7 +14,22 @@ import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
 
 @NgModule({
-  declarations: [OtComponent, CrearOtComponent, CubicacionProyectoComponent,Pep2Component,OrganigramaComponent,ConfirmacionComponent,ProyectoComponent],
-  imports: [CommonModule, OtRoutingModule, SharedModule, StepsModule,ToastModule,CardModule],
+  declarations: [
+    OtComponent,
+    CrearOtComponent,
+    CubicacionProyectoComponent,
+    Pep2Component,
+    OrganigramaComponent,
+    ConfirmacionComponent,
+    ProyectoComponent,
+  ],
+  imports: [
+    CommonModule,
+    OtRoutingModule,
+    SharedModule,
+    StepsModule,
+    ToastModule,
+    CardModule,
+  ],
 })
 export class OtModule {}

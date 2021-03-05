@@ -9,14 +9,15 @@ describe('Pep2Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[RouterTestingModule],
-      providers:[ {
-        provide: 'environment',
-        useValue: {},
-      }],
-      declarations: [ Pep2Component ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule],
+      providers: [
+        {
+          provide: 'environment',
+          useValue: {},
+        },
+      ],
+      declarations: [Pep2Component],
+    }).compileComponents();
   });
 
   beforeEach(() => {

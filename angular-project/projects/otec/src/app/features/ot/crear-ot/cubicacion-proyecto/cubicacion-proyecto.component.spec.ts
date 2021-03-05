@@ -1,5 +1,9 @@
-import { ComponentFixture, TestBed,fakeAsync,
-  tick, } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { CubicacionProyectoComponent } from './cubicacion-proyecto.component';
@@ -16,14 +20,16 @@ describe('CubicacionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[RouterTestingModule,HttpClientTestingModule],
-      providers:[ {
-        provide: 'environment',
-        useValue: {},
-      },CubicacionService],
-      declarations: [ CubicacionProyectoComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      providers: [
+        {
+          provide: 'environment',
+          useValue: {},
+        },
+        CubicacionService,
+      ],
+      declarations: [CubicacionProyectoComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

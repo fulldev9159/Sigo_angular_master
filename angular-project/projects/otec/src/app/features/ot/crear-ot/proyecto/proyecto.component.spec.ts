@@ -9,14 +9,15 @@ describe('ConfirmacionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[RouterTestingModule],
-      providers:[ {
-        provide: 'environment',
-        useValue: {},
-      }],
-      declarations: [ ProyectoComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule],
+      providers: [
+        {
+          provide: 'environment',
+          useValue: {},
+        },
+      ],
+      declarations: [ProyectoComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
