@@ -32,7 +32,7 @@
                     </select>                    
                 </div>
 
-                <div class="ui info message" *ngIf="cubicacionProyecto.cubicacion!=null">
+                <div class="ui info message" *ngIf="cubicacionProyecto.cubicacion.cubicacion_id!==''">
                     <div class="header">
                       Detalles de la cubicación
                     </div>
@@ -46,8 +46,8 @@
         </ng-template>
         <ng-template pTemplate="footer">
             <div class="p-grid p-nogutter p-justify-end">
-                <!-- <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button> -->
-                <button class="ui blue button" (click)="next()">Siguiente</button>
+                <div  pTooltip="Debe ingresar todos los campos" tooltipPosition="top" ><button *ngIf="cubicacionProyecto.nombre===''||cubicacionProyecto.tipoOT===''||cubicacionProyecto.cubicacion.cubicacion_id===''" class="ui blue button" disabled>Siguiente</button></div>
+                <button *ngIf="cubicacionProyecto.nombre!==''&&cubicacionProyecto.tipoOT!==''&&cubicacionProyecto.cubicacion.cubicacion_id!==''" class="ui blue button" (click)="next()">Siguiente</button>
             </div>
         </ng-template>
     </p-card>

@@ -12,6 +12,7 @@ import { ProyectoComponent } from './crear-ot/proyecto/proyecto.component';
 import { StepsModule } from 'primeng/steps';
 import { ToastModule } from 'primeng/toast';
 import { CardModule } from 'primeng/card';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CardModule } from 'primeng/card';
     StepsModule,
     ToastModule,
     CardModule,
+    TooltipModule,
   ],
 })
 export class OtModule {}

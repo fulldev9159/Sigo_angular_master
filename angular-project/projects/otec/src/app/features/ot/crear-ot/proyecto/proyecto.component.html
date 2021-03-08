@@ -28,7 +28,7 @@
                     </select>     
                 </div>
 
-                <div class="ui info message" >
+                <div class="ui info message" *ngIf="PlanInfomation.sitio.sitio_id!==''" >
                     <div class="header">
                       Detalles del plan de proyecto
                     </div>
@@ -45,7 +45,8 @@
         <ng-template pTemplate="footer">
             <div class="p-grid p-nogutter p-justify-between">
                 <button class="ui green button" (click)="back()">Atras</button>
-                <button class="ui blue button" (click) ="next()">Siguiente</button>
+                <div  pTooltip="Debe ingresar todos los campos" tooltipPosition="top" ><button *ngIf="PlanInfomation.plandespliegue.plan_despliegue_id===''||PlanInfomation.sitio.sitio_id===''" class="ui blue button" disabled>Siguiente</button></div>
+                <button class="ui blue button" *ngIf="PlanInfomation.plandespliegue.plan_despliegue_id!==''&&PlanInfomation.sitio.sitio_id!==''" (click) ="next()">Siguiente</button>
             </div>
         </ng-template>
     </p-card>
