@@ -52,7 +52,7 @@ export class CubicacionProyectoComponent implements OnInit {
   }
 
   selectedCubicacion(): void {
-    console.log(this.cubicacionProyecto);
+    // console.log(this.cubicacionProyecto);
     const cubicacionSelected = this.cubicacionesArr.filter(
       (x) =>
         x.cubicacion_id ===
@@ -63,7 +63,8 @@ export class CubicacionProyectoComponent implements OnInit {
       contrato: cubicacionSelected[0].contrato_marco,
       proveedor: cubicacionSelected[0].proveedor,
       region: cubicacionSelected[0].region,
+      region_id: cubicacionSelected[0].region_id,
     };
-    console.log(this.cubicacionProyecto);
+    // console.log(this.cubicacionProyecto);
   }
 }

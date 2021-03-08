@@ -23,6 +23,7 @@ export class OtService {
         contrato: '',
         proveedor: '',
         region: '',
+        region_id: '',
       },
     },
     plan: {
@@ -43,6 +44,22 @@ export class OtService {
 
   getOTInformation(): any {
     return this.otInformation;
+  }
+
+  getPlanes(
+    user: string,
+    toK: string,
+    regionId: number
+  ): Observable<OTModel.ResponsePlanes> {
+    const request: OTModel.RequestPlanes = {
+      token: toK,
+      region_id: parseInt(regionId.toString(), 10),
+    };
+
+    return (this.httpClient as HttpClient).post<OTModel.ResponsePlanes>(
+      `${this.apiBase}/getPlanes`,
+      JSON.stringify(request)
+    );
   }
 
   getSitios(

@@ -1,9 +1,32 @@
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
+
 export interface StatusSectionResponse {
   responseCode: number;
   description: string;
 }
 
-// Cubicaciones
+// Plan
+export interface RequestPlanes {
+  //   user: string;
+  token: string;
+  region_id: number;
+}
+
+export interface ResponsePlanes {
+  data: {
+    [id: string]: Planes[];
+  };
+  status: StatusSectionResponse;
+}
+
+export interface Planes {
+  plandespliegue_id: number;
+  plan: string;
+  meta: string;
+  tipo: string;
+}
+
+// Sitios
 export interface RequestSitios {
   //   user: string;
   token: string;

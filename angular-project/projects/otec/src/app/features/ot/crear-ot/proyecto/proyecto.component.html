@@ -14,6 +14,7 @@
                     <select name="tipoOT" id="tipoOT"  (change)="selectedPlan()"
                     [(ngModel)]="PlanInfomation.plandespliegue.plan_despliegue_id">
                         <option value=""></option>
+                        <!-- <option *ngFor="let plan of PlanArr" value="{{plan.plandespliegue_id}}" >{{plan.plan}}</option> -->
                         <option value="321">LTE 700 - COMERCIAL</option>
                         <option value="384">SINGLE RAN - NEW</option>
                     </select>
@@ -22,6 +23,7 @@
                     <label for="cubicacion">Sitio</label>
                     <select name="tipoOT" id="tipoOT" (change)="selectedSitio()"
                     [(ngModel)]="PlanInfomation.sitio.sitio_id">
+                        <option value=""></option>
                         <option *ngFor="let sitio of SitiosArr" value="{{sitio.sitio_id}}" >{{sitio.nombre_sitio}}</option>
                     </select>     
                 </div>

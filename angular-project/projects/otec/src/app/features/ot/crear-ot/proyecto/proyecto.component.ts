@@ -16,6 +16,8 @@ export class ProyectoComponent implements OnInit {
   public username = this.authService.getItemStorage('username') as string;
   public token = this.authService.getItemStorage('otec_token') as string;
   public SitiosArr: OTModel.Sitios[] = [];
+  public PlanArr: OTModel.Planes[] = [];
+  public regionID = '';
 
   constructor(
     private router: Router,
@@ -27,6 +29,12 @@ export class ProyectoComponent implements OnInit {
 
   ngOnInit(): void {
     this.PlanInfomation = this.otService.getOTInformation().plan;
+    this.regionID = this.otService.getOTInformation().cubicacionProyecto.cubicacion.region_id;
+    console.log(this.regionID);
+    // this.otService.getPlanes(this.username,this.token,parseInt(this.region_id,10)).subscribe(response=>{
+    //   const id="planes_despliegue"
+    //   this.PlanArr = response.data[id]
+    // })
   }
 
   selectedPlan(): void {
