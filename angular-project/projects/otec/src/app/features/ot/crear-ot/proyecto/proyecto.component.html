@@ -1,3 +1,4 @@
+<!-- <p-confirmPopup></p-confirmPopup> -->
 <div class="step-content">
     <p-card>
         <ng-template pTemplate="title">
@@ -10,17 +11,18 @@
             <div class="p-fluid">
                 <div class="p-field">
                     <label for="tipoot">Plan de proyecto</label>
-                    <select name="tipoOT" id="tipoOT" >
-                        <option value="OT">OT</option>
-                        <option value="AP">AP</option>
+                    <select name="tipoOT" id="tipoOT"  (change)="selectedPlan()"
+                    [(ngModel)]="PlanInfomation.plandespliegue.plan_despliegue_id">
+                        <option value=""></option>
+                        <option value="321">LTE 700 - COMERCIAL</option>
+                        <option value="384">SINGLE RAN - NEW</option>
                     </select>
                 </div>
                 <div class="p-field">
                     <label for="cubicacion">Sitio</label>
-                    <!-- <input #cubicacion="ngModel" id="cubicacion" type="text" required  [(ngModel)]="cubicacionProyecto.cubicacion">  -->
-                    <select name="tipoOT" id="tipoOT" >
-                        <option value="OT">OT</option>
-                        <option value="AP">AP</option>
+                    <select name="tipoOT" id="tipoOT" (change)="selectedSitio()"
+                    [(ngModel)]="PlanInfomation.sitio.sitio_id">
+                        <option *ngFor="let sitio of SitiosArr" value="{{sitio.sitio_id}}" >{{sitio.nombre_sitio}}</option>
                     </select>     
                 </div>
 
@@ -29,11 +31,11 @@
                       Detalles del plan de proyecto
                     </div>
                     <ul class="list">
-                      <li>Codigo de proyecto: </li>
-                      <li>Nombre sitio: </li>
-                      <li>Direcccion: </li>
-                      <li>Latitud: </li>
-                      <li>Longitud: </li>
+                      <li>Codigo de proyecto: {{PlanInfomation.sitio.codigo}}</li>
+                      <li>Nombre sitio:  {{PlanInfomation.sitio.nombre_sitio}}</li>
+                      <li>Direcccion:  {{PlanInfomation.sitio.direccion}}</li>
+                      <li>Latitud:  {{PlanInfomation.sitio.latitud}}</li>
+                      <li>Longitud: {{PlanInfomation.sitio.longitud}} </li>
                     </ul>
                   </div>
             </div>
