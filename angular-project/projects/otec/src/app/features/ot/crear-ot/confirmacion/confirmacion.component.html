@@ -1,47 +1,62 @@
 <div class="step-content">
     <p-card>
         <ng-template pTemplate="title">
-            Confirmación 
+            Confirmación
         </ng-template>
         <ng-template pTemplate="subtitle">
             Ingrese fecha y observaciones
         </ng-template>
         <ng-template pTemplate="content">
             <div class="p-fluid">
-                <div class="ui info message" >
+                <div class="ui info message">
                     <div class="header">
-                      Detalles del plan de proyecto
+                        Detalles de Cubicacion
                     </div>
                     <ul class="list">
-                      <li>Codigo de proyecto: </li>
-                      <li>Nombre sitio: </li>
-                      <li>Direcccion: </li>
-                      <li>Latitud: </li>
-                      <li>Longitud: </li>
+                        <li>Nombre Cubicación: </li>
+                        <li>Contrato: </li>
+                        <li>Proveedor: </li>
+                        <li>Región: </li>
+                        <li>Total: </li>
                     </ul>
-                  </div>
-                <div class="p-field">
+                </div>
+                <div class="ui info message">
+                    <div class="header">
+                        Detalles del plan de proyecto
+                    </div>
+                    <ul class="list">
+                        <li>Codigo de proyecto: </li>
+                        <li>Nombre sitio: </li>
+                        <li>Direcccion: </li>
+                        <li>Latitud: </li>
+                        <li>Longitud: </li>
+                    </ul>
+                </div>
+                <div class="ui info message">
+                    <div class="header">
+                        Detalles PEP2
+                    </div>
+                    <ul class="list">
+                        <li>id PMO: </li>
+                        <li>Línea presupuestaría: </li>
+                        <li>PEP2: </li>
+                    </ul>
+                </div>
+                <div style="display: flex;"><div class="p-field">
                     <label for="tipoot">Fecha Inicio</label>
-                    <select name="tipoOT" id="tipoOT" >
-                        <option value="OT">OT</option>
-                        <option value="AP">AP</option>
-                    </select>
+                    <input type="date" id="start" name="trip-start"
+       value="2020-06-01" >
                 </div>
                 <div class="p-field">
                     <label for="cubicacion">Fecha Fin</label>
-                    <!-- <input #cubicacion="ngModel" id="cubicacion" type="text" required  [(ngModel)]="cubicacionProyecto.cubicacion">  -->
-                    <select name="tipoOT" id="tipoOT" >
-                        <option value="OT">OT</option>
-                        <option value="AP">AP</option>
-                    </select>     
-                </div>
-                <div class="p-field">
+                    <input type="date" id="start" name="trip-start"
+       value="2020-06-01" >
+                </div></div>
+                
+                <div class="p-field" style="    display: flex;
+                flex-direction: column;">
                     <label for="cubicacion">Observaciones</label>
-                    <!-- <input #cubicacion="ngModel" id="cubicacion" type="text" required  [(ngModel)]="cubicacionProyecto.cubicacion">  -->
-                    <select name="tipoOT" id="tipoOT" >
-                        <option value="OT">OT</option>
-                        <option value="AP">AP</option>
-                    </select>     
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
                 </div>
             </div>
         </ng-template>

@@ -64,6 +64,7 @@ export class CubicacionProyectoComponent implements OnInit {
       proveedor: cubicacionSelected[0].proveedor,
       region: cubicacionSelected[0].region,
       region_id: cubicacionSelected[0].region_id,
+      total: cubicacionSelected[0].total,
     };
     // console.log(this.cubicacionProyecto);
   }

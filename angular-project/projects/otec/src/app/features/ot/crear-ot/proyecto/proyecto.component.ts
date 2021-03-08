@@ -31,10 +31,12 @@ export class ProyectoComponent implements OnInit {
     this.PlanInfomation = this.otService.getOTInformation().plan;
     this.regionID = this.otService.getOTInformation().cubicacionProyecto.cubicacion.region_id;
     console.log(this.regionID);
-    // this.otService.getPlanes(this.username,this.token,parseInt(this.region_id,10)).subscribe(response=>{
-    //   const id="planes_despliegue"
-    //   this.PlanArr = response.data[id]
-    // })
+    this.otService
+      .getPlanes(this.username, this.token, parseInt(this.regionID, 10))
+      .subscribe((response) => {
+        const id = 'planes';
+        this.PlanArr = response.data[id];
+      });
   }
 
   selectedPlan(): void {
