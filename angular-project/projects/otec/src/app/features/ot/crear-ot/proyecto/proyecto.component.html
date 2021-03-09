@@ -14,7 +14,7 @@
                     <select name="tipoOT" id="tipoOT"  (change)="selectedPlan()"
                     [(ngModel)]="PlanInfomation.plandespliegue.plan_despliegue_id">
                         <option value=""></option>
-                        <option *ngFor="let plan of PlanArr" value="{{plan.plandespliegue_id}}" >{{plan.plan}}</option>
+                        <option *ngFor="let plan of PlanArr" value="{{plan.plandespliegue_id}}" >{{plan.plan}} - {{plan.metas}}</option>
                         <!-- <option value="321">LTE 700 - COMERCIAL</option>
                         <option value="384">SINGLE RAN - NEW</option> -->
                     </select>

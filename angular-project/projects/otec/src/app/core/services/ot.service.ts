@@ -24,7 +24,6 @@ export class OtService {
         proveedor: '',
         region: '',
         region_id: '',
-        total: '',
       },
     },
     plan: {

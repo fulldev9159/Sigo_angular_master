@@ -22,7 +22,7 @@ export interface ResponsePlanes {
 export interface Planes {
   plandespliegue_id: number;
   plan: string;
-  meta: string;
+  metas: string;
   tipo: string;
 }
 
