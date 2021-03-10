@@ -20,21 +20,15 @@ docker:
   stage: deployment
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
+    - docker-compose -f docker-compose.yml build --no-cache develop
+    - docker-compose -f docker-compose.yml push develop
+
+docker:
+  stage: deployment
+  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  script:
     - docker-compose -f docker-compose.yml build --no-cache deploy
     - docker-compose -f docker-compose.yml push deploy
   only:
     - tags
     - develop
-
-# integration-golang:
-#   stage: triggers
-#   image: registryv2.zweicom.com:5000/appropriate/curl
-#   script:
-#     - |
-#       curl -X POST \
-#       -F "variables[ORIGIN]=$CI_PROJECT_NAME" \
-#       -F "variables[CI_PIPELINE_ID]=$CI_PIPELINE_ID" \
-#       -F token=e88fcd4c08dcef63ed51973bf50b5c \
-#       -F ref=develop http://192.168.14.50/api/v4/projects/899/trigger/pipeline
-#   only:
-#     - develop

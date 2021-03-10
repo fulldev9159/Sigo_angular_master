@@ -14,30 +14,29 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "noImplicitAny": false,
     "target": "es2015",
     "module": "es2020",
     "paths": {
       "@environment": [
-        "projects/otec/src/environments/environment"
+        "projects/ot/src/environments/environment"
       ],
       "@core": [
-        "projects/otec/src/app/core"
+        "projects/ot/src/app/core"
       ],
       "@core/*": [
-        "projects/otec/src/app/core/*"
+        "projects/ot/src/app/core/*"
       ],
       "@features": [
-        "projects/otec/src/app/features"
+        "projects/ot/src/app/features"
       ],
       "@features/*": [
-        "projects/otec/src/app/features/*"
+        "projects/ot/src/app/features/*"
       ],
       "@shared": [
-        "projects/otec/src/app/shared"
+        "projects/ot/src/app/shared"
       ],
       "@shared/*": [
-        "projects/otec/src/app/shared/*"
+        "projects/ot/src/app/shared/*"
       ]
     },
     "lib": [
