@@ -14,28 +14,29 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "noImplicitAny": false,
     "target": "es2015",
     "module": "es2020",
     "paths": {
       "@environment": [
         "projects/ot/src/environments/environment"
       ],
-      "@core": [
+      "@coreOT": [
         "projects/ot/src/app/core"
       ],
-      "@core/*": [
+      "@coreOT/*": [
         "projects/ot/src/app/core/*"
       ],
-      "@features": [
+      "@featuresOT": [
         "projects/ot/src/app/features"
       ],
-      "@features/*": [
+      "@featuresOT/*": [
         "projects/ot/src/app/features/*"
       ],
-      "@shared": [
+      "@sharedOT": [
         "projects/ot/src/app/shared"
       ],
-      "@shared/*": [
+      "@sharedOT/*": [
         "projects/ot/src/app/shared/*"
       ]
     },
