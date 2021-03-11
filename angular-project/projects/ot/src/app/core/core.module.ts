@@ -7,10 +7,15 @@ import {
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { LoginComponent } from './layout/login/login.component';
+import { MainComponent } from './layout/main/main.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [],
-  imports: [BrowserModule, CommonModule, BrowserAnimationsModule],
+  declarations: [NavbarComponent, LoginComponent, MainComponent],
+  imports: [BrowserModule, CommonModule, BrowserAnimationsModule, RouterModule],
+  exports: [MainComponent],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
@@ -24,9 +29,7 @@ export class CoreModule {
   static forRoot(environment: object): ModuleWithProviders<NgModule> {
     return {
       ngModule: CoreModule,
-      providers: [
-        { provide: 'environment', useValue: environment }
-      ],
+      providers: [{ provide: 'environment', useValue: environment }],
     };
   }
 }
