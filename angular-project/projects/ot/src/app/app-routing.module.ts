@@ -15,10 +15,27 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () =>
-      import('./features/dashboard/dashboard.module').then(
-        (m) => m.DashboardModule
-      ),
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./features/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+      },
+      {
+        path: 'cubicacion',
+        loadChildren: () =>
+          import('./features/cubicacion/cubicacion.module').then(
+            (m) => m.CubicacionModule
+          ),
+      },
+      {
+        path: 'ot',
+        loadChildren: () =>
+          import('./features/ot/ot.module').then((m) => m.OtModule),
+      },
+    ],
   },
 ];
 
