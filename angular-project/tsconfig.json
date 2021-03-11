@@ -22,7 +22,7 @@
         "projects/ot/src/environments/environment"
       ],
       "@coreOT": [
-        "projects/ot/src/app/core"
+        "projects/ot/src/app/core/core.module"
       ],
       "@coreOT/*": [
         "projects/ot/src/app/core/*"
