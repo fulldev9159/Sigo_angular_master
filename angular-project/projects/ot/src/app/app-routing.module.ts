@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '@coreOT/layout/login/login.component';
+import { AuthToLoginUrlGuard } from './core/guards/auth-to-login-url.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,10 +13,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    // canActivate: [AuthToLoginUrlGuard],
+    canActivate: [AuthToLoginUrlGuard],
   },
   {
     path: 'dashboard',
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

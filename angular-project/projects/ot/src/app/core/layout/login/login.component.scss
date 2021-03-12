@@ -1,0 +1,249 @@
+.container-desktop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .logo-section {
+    margin-right: 71px;
+    margin-top: 20px;
+    margin-left: -18px;
+  }
+}
+
+.container-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container-logo-movistar {
+    &.desktop img {
+      width: 100%;
+      max-width: 352px;
+      margin: 0 auto;
+      display: inline-block;
+      vertical-align: top;
+      height: 74px;
+    }
+  
+    &.mobile {
+      margin-top: -10vh;
+  
+      img {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+        display: inline-block;
+        vertical-align: top;
+        height: 64px;
+      }
+    }
+  }
+
+  .title-otec {
+    font-style: normal;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 10px;
+    letter-spacing: 3px;
+    text-transform: lowercase;
+    margin-left: 125px;
+    color: #ffffff;
+  
+    &.mobile {
+      margin-left: 144px;
+    }
+  }
+  
+  .container-cover {
+    &.desktop img {
+      width: 100%;
+      max-width: 291px;
+      margin-top: -11px;
+      height: 283px;
+    }
+  
+    &.mobile img {
+      width: 100%;
+      max-width: 256px;
+  
+      /* margin-top: -113px; */
+      height: 241px;
+    }
+  }
+
+
+  .title-bienvenida {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 101.5%;
+  
+    /* or 30px */
+  
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.13em;
+    color: #0f90d8;
+    width: 219px;
+    height: 87px;
+    margin-top: -24px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .subtitle {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 101.5%;
+  
+    /* or 23px */
+  
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.13em;
+    color: rgba(6, 6, 6, 0.66);
+  
+    span {
+      color: #0f90d8;
+      margin-right: 8px;
+    }
+  }
+  
+  .login-form-section {
+    &.desktop {
+      width: 288px;
+      height: 440px;
+      background: #ffffff;
+      border: 1px solid rgba(155, 153, 153, 0.22);
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 41px 39px 46px 46px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: -91px;
+    }
+  
+    &.mobile {
+      width: 411px;
+      height: 100%;
+      background: #0588d0;
+      border-radius: 70px 70px 0px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: -25px;
+    }
+  }
+  
+  .form-section {
+    &.desktop {
+      margin-top: 52px;
+      margin-left: -36px;
+    }
+  
+    &.mobile {
+      margin-top: 29px;
+      margin-left: -18px;
+  
+      input {
+        width: 100%;
+        padding-left: 8px;
+      }
+    }
+  }
+  
+  .form-text {
+    &.desktop {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      letter-spacing: 0.19em;
+      font-size: 15px;
+      line-height: 0px;
+      letter-spacing: 0.19em;
+      color: rgba(0, 0, 0, 0.45);
+    }
+  
+    &.mobile {
+      font-size: 18px;
+      line-height: 21px;
+      letter-spacing: 0.19em;
+      color: #fdfdfd;
+    }
+  }
+  
+  .form-section {
+    input {
+      background-color: transparent !important;
+      border: 0;
+      border-bottom: 1px rgba(0, 0, 0, 0.45) solid;
+      display: block;
+      width: 113%;
+      padding: 3px 0;
+      margin-bottom: 38px;
+      padding-left: 8px;
+      font-weight: 700;
+    }
+  
+    &.desktop input {
+      color: #658eac;
+    }
+  
+    &.mobile input {
+      color: #fff;
+      border-bottom: 2px #fff solid;
+    }
+  }
+  
+  .button-login {
+    &.desktop button {
+      width: 150px;
+      margin-top: 15px;
+    }
+  
+    &.mobile button {
+      width: 199px;
+      margin-top: 34px;
+      border: 1px solid;
+    }
+  }
+  
+  input {
+    &:focus, &:valid {
+      outline: 0;
+    }
+  }
+  
+  @media (max-width: 800px) {
+    .container-desktop {
+      display: none;
+    }
+  
+    .container-mobile {
+      display: flex;
+    }
+  }
+  
+  @media (min-width: 800px) {
+    .container-mobile {
+      display: none;
+    }
+  
+    .container-desktop {
+      display: flex;
+    }
+  }
+  
+  .error {
+    font-size: 10px;
+    color: red;
+    font-weight: 700;
+    margin-left: -5px;
+  }

@@ -28,9 +28,16 @@
               "projects/ot/src/assets"
             ],
             "styles": [
-              "projects/ot/src/styles.scss"
+              "projects/ot/src/styles.scss",
+              "node_modules/node-snackbar/dist/snackbar.min.css",
+              "node_modules/semantic-ui-css/components/button.min.css",
+              "node_modules/semantic-ui-css/components/input.min.css",
+              "node_modules/semantic-ui-css/components/icon.min.css",
+              "node_modules/semantic-ui-css/components/dropdown.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/node-snackbar/dist/snackbar.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -92,9 +99,16 @@
               "projects/ot/src/assets"
             ],
             "styles": [
-              "projects/ot/src/styles.scss"
+              "projects/ot/src/styles.scss",
+              "node_modules/node-snackbar/dist/snackbar.min.css",
+              "node_modules/semantic-ui-css/components/button.min.css",
+              "node_modules/semantic-ui-css/components/input.min.css",
+              "node_modules/semantic-ui-css/components/icon.min.css",
+              "node_modules/semantic-ui-css/components/dropdown.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/node-snackbar/dist/snackbar.min.js"
+            ]
           }
         },
         "lint": {

@@ -11,10 +11,21 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { LoginComponent } from './layout/login/login.component';
 import { MainComponent } from './layout/main/main.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from '@coreOT/services/auth.service';
 
 @NgModule({
   declarations: [NavbarComponent, LoginComponent, MainComponent],
-  imports: [BrowserModule, CommonModule, BrowserAnimationsModule, RouterModule],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   exports: [MainComponent],
 })
 export class CoreModule {
@@ -29,7 +40,10 @@ export class CoreModule {
   static forRoot(environment: object): ModuleWithProviders<NgModule> {
     return {
       ngModule: CoreModule,
-      providers: [{ provide: 'environment', useValue: environment }],
+      providers: [
+        { provide: 'environment', useValue: environment },
+        AuthService,
+      ],
     };
   }
 }
