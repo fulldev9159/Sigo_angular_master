@@ -33,10 +33,15 @@
               "node_modules/semantic-ui-css/components/button.min.css",
               "node_modules/semantic-ui-css/components/input.min.css",
               "node_modules/semantic-ui-css/components/icon.min.css",
-              "node_modules/semantic-ui-css/components/dropdown.min.css"
+              "node_modules/semantic-ui-css/components/dropdown.min.css",
+              "node_modules/semantic-ui-css/components/menu.min.css",
+              "node_modules/semantic-ui-css/components/transition.min.css"
             ],
             "scripts": [
-              "node_modules/node-snackbar/dist/snackbar.min.js"
+              "node_modules/node-snackbar/dist/snackbar.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/semantic-ui-css/components/transition.js",
+              "node_modules/semantic-ui-css/components/dropdown.min.js"
             ]
           },
           "configurations": {
@@ -104,10 +109,15 @@
               "node_modules/semantic-ui-css/components/button.min.css",
               "node_modules/semantic-ui-css/components/input.min.css",
               "node_modules/semantic-ui-css/components/icon.min.css",
-              "node_modules/semantic-ui-css/components/dropdown.min.css"
+              "node_modules/semantic-ui-css/components/dropdown.min.css",
+              "node_modules/semantic-ui-css/components/menu.min.css",
+              "node_modules/semantic-ui-css/components/transition.min.css"
             ],
             "scripts": [
-              "node_modules/node-snackbar/dist/snackbar.min.js"
+              "node_modules/node-snackbar/dist/snackbar.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/semantic-ui-css/components/transition.js",
+              "node_modules/semantic-ui-css/components/dropdown.min.js"
             ]
           }
         },

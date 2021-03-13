@@ -1,0 +1,38 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 31px;
+  background: #11a4f5;
+  height: 90px;
+  align-items: center;
+
+  .icon img {
+    width: 141px;
+  }
+
+  .icon .title-otec {
+    font-style: normal;
+    font-weight: 200;
+    font-size: 13px;
+    line-height: 0px;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    margin-left: 13px;
+    color: #ffffff;
+  }
+  .section-usuario {
+    display: flex;
+    flex-direction: column;
+    .usuario {
+      font-size: 12px;
+    }
+
+    .rol {
+      align-self: center;
+    }
+  }
+}
+
+.hide-menu {
+  display: none !important;
+}
