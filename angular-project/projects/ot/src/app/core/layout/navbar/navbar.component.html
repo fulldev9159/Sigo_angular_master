@@ -5,7 +5,7 @@
     </div>
 
     <div class="ui menu">
-        <a class="ui dropdown item"
+        <a id="cubicacion-menu" class="ui dropdown item"
             [ngClass]="(showOnlyForRol('Gestor')||showOnlyForRol('Administrador OTEC'))?'show-menu':'hide-menu'">
             Cubicación
             <i class="dropdown icon"></i>
@@ -14,7 +14,7 @@
                 <div class="item" (click)="navegateTo('dashboard/cubicacion')">Listar Cubicación</div>
             </div>
         </a>
-        <a class="ui dropdown item"
+        <a id="ot-menu" class="ui dropdown item"
             [ngClass]="(showOnlyForRol('Gestor')||showOnlyForRol('Trabajador')||showOnlyForRol('Administrador de Contrato')||showOnlyForRol('Coordador')||showOnlyForRol('Administrador OTEC'))?'show-menu':'hide-menu'">
             OT
             <i class="dropdown icon"></i>
@@ -23,10 +23,10 @@
                 <div class="item">Listar OT</div>
             </div>
         </a>
-        <a class="item"
+        <a id="reporteria-menu" class="item"
             [ngClass]="(showOnlyForRol('Reporteria')||showOnlyForRol('Administrador OTEC'))?'show-menu':'hide-menu'">
             Reportería </a>
-        <a class="item" [ngClass]="(showOnlyForRol('Administrador OTEC'))?'show-menu':'hide-menu'"> Administración de
+        <a id="admin-sistema-menu" class="item" [ngClass]="(showOnlyForRol('Administrador OTEC'))?'show-menu':'hide-menu'"> Administración de
             sistema </a>
     </div>
 
