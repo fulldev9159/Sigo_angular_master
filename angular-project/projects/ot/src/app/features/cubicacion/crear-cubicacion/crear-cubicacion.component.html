@@ -1,0 +1,30 @@
+<p-confirmPopup></p-confirmPopup>
+<div class="section">
+    <div class="left-navbar"></div>
+    <div class="content ui segment">
+        <div class="title">Ingreso de una cubicación</div>
+        <form [formGroup]="form">
+            <div class="form-content">
+                <div class="left-form">
+                    <div class="field">
+                        <label>Nombre*</label>
+                        <!-- <span class="error" *ngIf="NombreErr">* Debe ingresar el nombre</span> -->
+                        <input type="text" class="nombre-cubicacion" [formControlName]="'nombre'" name="nombre"
+                            id="nombre">
+                    </div>
+                    <div class="field">
+                        <label>Contrato*</label>
+                        <div (click)="confirm($event,'contratoId')">
+                            <select  [formControlName]="'contratoId'" name="contratoId"
+                                id="contratoId" (change)="selectedContrato()">
+                                <option *ngFor="let contrato of contratosArr" value="{{contrato.id}}">
+                                    {{contrato.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

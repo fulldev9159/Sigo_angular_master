@@ -18,6 +18,7 @@ import * as LoginModel from '@coreOT/models/login.model';
 import * as BaseModel from '@coreOT/models/main.model';
 import { of, throwError } from 'rxjs';
 import { AuthService } from '@coreOT/services/auth.service';
+import { SharedService } from '@coreOT/services/shared.service';
 declare let Snackbar: object | any;
 
 describe('LoginComponent', () => {
@@ -25,6 +26,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
   let router: Router;
   let service: AuthService;
+  let sharedService: SharedService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -52,6 +54,7 @@ describe('LoginComponent', () => {
       ]),
     });
     service = TestBed.inject(AuthService);
+    sharedService = TestBed.inject(SharedService);
     fixture.detectChanges();
   });
 
@@ -155,37 +158,21 @@ describe('LoginComponent', () => {
   it('Err login response should be handler', fakeAsync(() => {
     component.form.controls['username'].setValue('aasdasd');
     component.form.controls['password'].setValue('aasdasd');
-    spyOn(component, 'showMessage');
+    spyOn(sharedService, 'showMessage');
 
     spyOn(service, 'auth').and.returnValue(throwError(new Error('Err')));
 
     component.submit();
     tick();
     fixture.detectChanges();
-    expect(component.showMessage).toHaveBeenCalled();
+    expect(sharedService.showMessage).toHaveBeenCalled();
   }));
 
-  it('ErrMessage Open', () => {
-    spyOn(Snackbar, 'show');
-    const a = 'No fue posible iniciar sesión';
-    const b = 'error';
-    component.showMessage(a, b);
-    expect(Snackbar.show).toHaveBeenCalled();
-  });
-
-  it('OKMessage Open', () => {
-    spyOn(Snackbar, 'show');
-    const a = 'TODO OK';
-    const b = 'ok';
-    component.showMessage(a, b);
-    expect(Snackbar.show).toHaveBeenCalled();
-  });
-
   it('invalid form should display ErrMessage', fakeAsync(() => {
-    spyOn(component, 'showMessage');
+    spyOn(sharedService, 'showMessage');
     component.submit();
     tick();
     fixture.detectChanges();
-    expect(component.showMessage).toHaveBeenCalled();
+    expect(sharedService.showMessage).toHaveBeenCalled();
   }));
 });

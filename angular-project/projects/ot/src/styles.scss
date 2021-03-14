@@ -13,3 +13,32 @@ body{
     margin:0;
     /* overflow: hidden; */
 }
+
+.container{
+    height: 100vh;
+    .section {
+        display: flex;
+        height: 100vh;
+        .left-navbar {
+            width: 7%;
+            border-right: 1px solid #fff5f570;
+            background: #11a4f5;
+            box-shadow: 2px 2px #fbfbfb30;
+        }
+        .content {
+            width: 92%;
+            margin-top: 3px;
+            margin-left: 2px;
+            .title {
+                text-align: center;
+                font-weight: 700;
+                color: #9b9b9b;
+                font-size: 24px;
+                letter-spacing: 1px;
+                border-bottom: 1px solid #f1eaea;
+                margin-bottom: 40px;
+            }
+        }
+    }
+}
+

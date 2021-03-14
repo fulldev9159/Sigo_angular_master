@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@coreOT/services/auth.service';
 import * as loginModel from '@coreOT/models/login.model';
 import { Router } from '@angular/router';
+import { SharedService } from '@coreOT/services/shared.service';
 declare let Snackbar: object | any;
 @Component({
   selector: 'ot-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private authService: AuthService,
+    private sharedService: SharedService,
     private router: Router
   ) {
     this.form = this.fb.group({
@@ -39,7 +41,6 @@ export class LoginComponent implements OnInit {
   }
 
   submit(): void {
-    // console.log(this.valid)
     if (this.valid) {
       this.authService.auth(this.values.username).subscribe(
         (response) => {
@@ -61,28 +62,18 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         },
         (err) => {
-          this.showMessage('No fue posible iniciar sesión', 'error');
+          this.sharedService.showMessage(
+            'No fue posible iniciar sesión',
+            'error'
+          );
           console.error(err.message);
         }
       );
     } else {
-      this.showMessage('Debe ingresar todos los campos correctamente', 'error');
+      this.sharedService.showMessage(
+        'Debe ingresar todos los campos correctamente',
+        'error'
+      );
     }
-  }
-
-  showMessage(message: string, type: string): void {
-    Snackbar.show({
-      pos: 'bottom-right',
-      text: message,
-      backgroundColor: '#212121',
-      actionText: 'OK',
-      actionTextColor: ((color) => {
-        if (color === 'error') {
-          return '#DB2828';
-        }
-        return '#2185D0';
-      })(type),
-      duration: 5000,
-    });
   }
 }
