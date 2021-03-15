@@ -46,98 +46,82 @@ export class CubicacionService {
     >(`${this.apiBase}/getProveedoresSubcontratos`, JSON.stringify(request));
   }
 
-  // getRegionesSubcontrato(
-  //   username: string,
-  //   tok: string,
-  //   subcontratosid: number
-  // ): Observable<CubicacionModel.ResponseRegion> {
-  //   const request: CubicacionModel.RequestRegion = {
-  //     user: username,
-  //     token: tok,
-  //     subcontratos: subcontratosid,
-  //   };
+  getRegionesSubcontrato(
+    subcontratosid: number
+  ): Observable<Response<CubicacionModel.DataRegion>> {
+    const request: CubicacionModel.RequestRegion = {
+      user: this.username,
+      token: this.token,
+      subcontratos: subcontratosid,
+    };
 
-  //   return (this.httpClient as HttpClient).post<CubicacionModel.ResponseRegion>(
-  //     `${this.apiBase}/getRegionesSubcontratos`,
-  //     JSON.stringify(request)
-  //   );
-  // }
+    return (this.httpClient as HttpClient).post<
+      Response<CubicacionModel.DataRegion>
+    >(`${this.apiBase}/getRegionesSubcontratos`, JSON.stringify(request));
+  }
 
-  // getTipoServicioSubcontrato(
-  //   user: string,
-  //   tok: string,
-  //   subcontratosid: number,
-  //   regionId: number
-  // ): Observable<CubicacionModel.ResponseTipoServicioSubContrato> {
-  //   const request: CubicacionModel.RequestTipoServicioSubContrato = {
-  //     username: user,
-  //     token: tok,
-  //     subcontratos: subcontratosid,
-  //     region: regionId,
-  //   };
+  getTipoServicioSubcontrato(
+    subcontratosid: number,
+    regionId: number
+  ): Observable<Response<CubicacionModel.DataTipoServicioSubContrato>> {
+    const request: CubicacionModel.RequestTipoServicioSubContrato = {
+      username: this.username,
+      token: this.token,
+      subcontratos: subcontratosid,
+      region: regionId,
+    };
 
-  //   return (this
-  //     .httpClient as HttpClient).post<CubicacionModel.ResponseTipoServicioSubContrato>(
-  //     `${this.apiBase}/getTiposServiciosSubcontrato`,
-  //     JSON.stringify(request)
-  //   );
-  // }
+    return (this.httpClient as HttpClient).post<
+      Response<CubicacionModel.DataTipoServicioSubContrato>
+    >(`${this.apiBase}/getTiposServiciosSubcontrato`, JSON.stringify(request));
+  }
 
-  // getServicioSubcontrato(
-  //   user: string,
-  //   tok: string,
-  //   subcontratosid: number,
-  //   regionId: number,
-  //   tipoServicioId: number
-  // ): Observable<CubicacionModel.ResponseServicioContrato> {
-  //   const request: CubicacionModel.RequestServiciosSubContrato = {
-  //     username: user,
-  //     token: tok,
-  //     subcontratos: subcontratosid,
-  //     region: regionId,
-  //     tipo_servicio: tipoServicioId,
-  //   };
+  getServicioSubcontrato(
+    subcontratosid: number,
+    regionId: number,
+    tipoServicioId: number
+  ): Observable<Response<CubicacionModel.DataServicioContrato>> {
+    const request: CubicacionModel.RequestServiciosSubContrato = {
+      username: this.username,
+      token: this.token,
+      subcontratos: subcontratosid,
+      region: regionId,
+      tipo_servicio: tipoServicioId,
+    };
 
-  //   return (this
-  //     .httpClient as HttpClient).post<CubicacionModel.ResponseServicioContrato>(
-  //     `${this.apiBase}/getServiciosSubcontrato`,
-  //     JSON.stringify(request)
-  //   );
-  // }
+    return (this.httpClient as HttpClient).post<
+      Response<CubicacionModel.DataServicioContrato>
+    >(`${this.apiBase}/getServiciosSubcontrato`, JSON.stringify(request));
+  }
 
-  // saveCubicacion(
-  //   tokenC: string,
-  //   usernameC: string,
-  //   nombreC: string,
-  //   totalC: number,
-  //   regionIDC: number,
-  //   regionC: string,
-  //   contratoC: string,
-  //   proveedorC: string,
-  //   subcontratoIDC: number,
-  //   lpusC: CubicacionModel.Lpus[]
-  // ): Observable<CubicacionModel.ResponseSaveCubicacion> {
-  //   // const temp: CubicacionModel.Lpus[] = [];
+  saveCubicacion(
+    nombreC: string,
+    totalC: number,
+    regionIDC: number,
+    regionC: string,
+    contratoC: string,
+    proveedorC: string,
+    subcontratoIDC: number,
+    lpusC: CubicacionModel.Lpus[]
+  ): Observable<Response<string>> {
+    const request: CubicacionModel.RequestSaveCubicacion = {
+      token: this.token,
+      // user:usernameC,
+      nombre: nombreC,
+      total: totalC,
+      region_id: regionIDC,
+      region: regionC,
+      contrato_marco: contratoC,
+      proveedor: proveedorC,
+      subcontrato_id: subcontratoIDC,
+      lpus: lpusC,
+    };
 
-  //   const request: CubicacionModel.RequestSaveCubicacion = {
-  //     token: tokenC,
-  //     // user:usernameC,
-  //     nombre: nombreC,
-  //     total: totalC,
-  //     region_id: regionIDC,
-  //     region: regionC,
-  //     contrato_marco: contratoC,
-  //     proveedor: proveedorC,
-  //     subcontrato_id: subcontratoIDC,
-  //     lpus: lpusC,
-  //   };
-
-  //   return (this
-  //     .httpClient as HttpClient).post<CubicacionModel.ResponseSaveCubicacion>(
-  //     `${this.apiBase}/saveEditCubicacion`,
-  //     JSON.stringify(request)
-  //   );
-  // }
+    return (this.httpClient as HttpClient).post<Response<string>>(
+      `${this.apiBase}/saveEditCubicacion`,
+      JSON.stringify(request)
+    );
+  }
 
   // getCubicaciones(
   //   userC: string,
