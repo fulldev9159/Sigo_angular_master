@@ -1,4 +1,4 @@
-import { TestBed, getTestBed } from '@angular/core/testing';
+import { TestBed, getTestBed, fakeAsync } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -258,4 +258,38 @@ describe('CubicacionService', () => {
     expect(req.request.method).toBe('POST');
     req.flush(dummyResponse);
   });
+
+  it('should return detalle cubicacion', fakeAsync(() => {
+    authService.setItemStorage('username', 'carloscj');
+    authService.setItemStorage('otec_token', 'dummytoken');
+
+    const dummyResponse: Response<CubicacionModel.DataDetalleCubicaciones> = {
+      status: {
+        responseCode: 0,
+        description: 'Ok',
+      },
+      data: {
+        detalle_cubicacion: [
+          {
+            id_lpu: 1,
+            id_servicio: 1,
+            nombre:
+              'CD1Instalación e Integración completa de una RBS utilizando coaxiles con aluminio',
+            precio: 2803268,
+            tipo_moneda: 'Pesos',
+            cantidad: 2,
+            subtotal: 5606536,
+            tipo_servicio: 'CD1',
+          },
+        ],
+      },
+    };
+
+    service.getDetalleCubicacion(1).subscribe((response) => {
+      expect(response).toEqual(dummyResponse);
+    });
+    const req = httpMock.expectOne('http://localhost:4040/getDetalleCubicacion');
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyResponse);
+  }));
 });

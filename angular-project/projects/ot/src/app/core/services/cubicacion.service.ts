@@ -123,38 +123,29 @@ export class CubicacionService {
     );
   }
 
-  // getCubicaciones(
-  //   userC: string,
-  //   tok: string
-  // ): Observable<CubicacionModel.ResponseCubicaciones> {
-  //   const request: CubicacionModel.RequestCubicaciones = {
-  //     user: userC,
-  //     token: tok,
-  //   };
+  getCubicaciones(): Observable<Response<CubicacionModel.DataCubicaciones>> {
+    const request: CubicacionModel.RequestCubicaciones = {
+      user: this.username,
+      token: this.token,
+    };
 
-  //   return (this
-  //     .httpClient as HttpClient).post<CubicacionModel.ResponseCubicaciones>(
-  //     `${this.apiBase}/getCubicaciones`,
-  //     JSON.stringify(request)
-  //   );
-  // }
+    return (this.httpClient as HttpClient).post<
+      Response<CubicacionModel.DataCubicaciones>
+    >(`${this.apiBase}/getCubicaciones`, JSON.stringify(request));
+  }
 
-  // getDetalleCubicacion(
-  //   userC: string,
-  //   tok: string,
-  //   idCubicacion: number
-  // ): Observable<CubicacionModel.ResponseDetalleCubicaciones> {
-  //   const request: CubicacionModel.RequestDetalleCubicaciones = {
-  //     user: userC,
-  //     token: tok,
-  //     cubicacion_id: idCubicacion,
-  //   };
-  //   return (this
-  //     .httpClient as HttpClient).post<CubicacionModel.ResponseDetalleCubicaciones>(
-  //     `${this.apiBase}/getDetalleCubicacion`,
-  //     JSON.stringify(request)
-  //   );
-  // }
+  getDetalleCubicacion(
+    idCubicacion: number
+  ): Observable<Response<CubicacionModel.DataDetalleCubicaciones>> {
+    const request: CubicacionModel.RequestDetalleCubicaciones = {
+      user: this.username,
+      token: this.token,
+      cubicacion_id: idCubicacion,
+    };
+    return (this.httpClient as HttpClient).post<
+      Response<CubicacionModel.DataDetalleCubicaciones>
+    >(`${this.apiBase}/getDetalleCubicacion`, JSON.stringify(request));
+  }
 
   // editCubicacion(
   //   tokenC: string,

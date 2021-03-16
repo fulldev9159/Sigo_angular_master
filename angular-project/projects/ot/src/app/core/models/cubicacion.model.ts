@@ -127,3 +127,56 @@ export interface Lpus {
   id_lpu: number;
   cantidad: number;
 }
+
+// Cubicaciones
+export interface RequestCubicaciones {
+  user: string;
+  token: string;
+}
+
+export interface DataCubicaciones {
+  cubicaciones: Cubicacion[];
+}
+
+export interface Cubicacion {
+  cubicacion_id: number;
+  total: number;
+  nombre: string;
+  fecha: string;
+  usuario_id: number;
+  region_id: number;
+  region: string;
+  contrato_marco: string;
+  proveedor: string;
+  subcontrato_id: number;
+  asignado: boolean;
+  proveedor_id: number;
+  admin_contrato?: string;
+}
+
+// Detalle cubicacion
+export interface RequestDetalleCubicaciones {
+  user: string;
+  token: string;
+  cubicacion_id: number;
+}
+export interface DataDetalleCubicaciones {
+  detalle_cubicacion: DetalleCubicacion[];
+}
+
+export interface DetalleCubicacion {
+  id_lpu: number;
+  nombre: string;
+  id_servicio: number;
+  precio: number;
+  tipo_moneda: string;
+  cantidad: number;
+  subtotal: number;
+  tipo_servicio: string;
+}
+
+export interface RequestBorrarCubicaciones {
+  user: string;
+  token: string;
+  id_cubicacion: number;
+}

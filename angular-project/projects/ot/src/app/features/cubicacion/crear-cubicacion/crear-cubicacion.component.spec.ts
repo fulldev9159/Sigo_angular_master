@@ -5,40 +5,44 @@ import {
   tick,
 } from '@angular/core/testing';
 
-// import { CrearCubicacionComponent } from './crear-cubicacion.component';
-// import { CubicacionService } from '../../../core/services/cubicacion.service';
-// import { SharedService } from '../../../core/services/shared.service';
-// import { HttpClientTestingModule } from '@angular/common/http/testing';
-// import * as CubicacionModel from '../cubicacion.model';
-// import { of } from 'rxjs';
-// import { ConfirmationService } from 'primeng/api';
-// import { RouterTestingModule } from '@angular/router/testing';
+import { CrearCubicacionComponent } from './crear-cubicacion.component';
+import { CubicacionService } from '@coreOT/services/cubicacion.service';
+import { SharedService } from '@coreOT/services/shared.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import * as CubicacionModel from '@coreOT/models/cubicacion.model';
+import { Response } from '@coreOT/models/main.model';
+import { of } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 describe('CrearCubicacionComponent', () => {
-  // let component: CrearCubicacionComponent;
-  // let fixture: ComponentFixture<CrearCubicacionComponent>;
-  // let service: CubicacionService;
-  // let confirmationService: ConfirmationService;
+  let component: CrearCubicacionComponent;
+  let fixture: ComponentFixture<CrearCubicacionComponent>;
+  let service: CubicacionService;
+  let confirmationService: ConfirmationService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      // imports: [HttpClientTestingModule, RouterTestingModule],
-      // declarations: [CrearCubicacionComponent],
-      // providers: [
-      //   { provide: 'environment', useValue: {} },
-      //   CubicacionService,
-      //   ConfirmationService,
-      //   SharedService,
-      // ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [CrearCubicacionComponent],
+      providers: [
+        { provide: 'environment', useValue: {} },
+        CubicacionService,
+        ConfirmationService,
+        SharedService,
+        FormBuilder,
+        FormGroup
+      ],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    // fixture = TestBed.createComponent(CrearCubicacionComponent);
-    // component = fixture.componentInstance;
-    // service = TestBed.inject(CubicacionService);
-    // confirmationService = TestBed.inject(ConfirmationService);
-    // fixture.detectChanges();
+    fixture = TestBed.createComponent(CrearCubicacionComponent);
+    component = fixture.componentInstance;
+    service = TestBed.inject(CubicacionService);
+    confirmationService = TestBed.inject(ConfirmationService);
+    fixture.detectChanges();
   });
 
   // it('should create', () => {
@@ -47,11 +51,11 @@ describe('CrearCubicacionComponent', () => {
 
   // it('should render input elements', () => {
   //   const compiled = fixture.debugElement.nativeElement;
-  //   const contratoSelect = compiled.querySelector('select[id="contrato"]');
-  //   const proveedorSelect = compiled.querySelector('select[id="proveedor"]');
-  //   const regionSelect = compiled.querySelector('select[id="region"]');
+  //   const contratoSelect = compiled.querySelector('select[id="contratoId"]');
+  //   const proveedorSelect = compiled.querySelector('select[id="proveedorId"]');
+  //   const regionSelect = compiled.querySelector('select[id="regionId"]');
   //   const tipodeservicioSelect = compiled.querySelector(
-  //     'select[id="tipodeservicio"]'
+  //     'select[id="tipodeservicioId"]'
   //   );
 
   //   expect(contratoSelect).toBeTruthy();
@@ -64,7 +68,7 @@ describe('CrearCubicacionComponent', () => {
   //   const arrExpect: CubicacionModel.ContratoMarco[] = [
   //     { id: 1, nombre: 'SBE', tipo_contrato: 'Movil' },
   //   ];
-  //   const responseContratos: CubicacionModel.ResponseContrato = {
+  //   const responseContratos: Response<CubicacionModel.DataContrato> = {
   //     status: {
   //       responseCode: 0,
   //       description: 'Ok',
@@ -91,7 +95,7 @@ describe('CrearCubicacionComponent', () => {
   //   const arrExpect: CubicacionModel.Proveedores[] = [
   //     { id: 2, nombre: 'ERICSSON CHILE S.A.', subcontrato_id: [1] },
   //   ];
-  //   const response: CubicacionModel.ResponseProveedor = {
+  //   const response: Response<CubicacionModel.DataProveedor> = {
   //     status: {
   //       responseCode: 0,
   //       description: 'Ok',
@@ -115,14 +119,14 @@ describe('CrearCubicacionComponent', () => {
   // }));
 
   // it('should storage regiones de un contrato', fakeAsync(() => {
-  //   component.proveedorId = '2';
+  //   component.form.controls.proveedorId.setValue('2');
   //   component.proveedorArr = [
   //     { id: 2, nombre: 'ERICSSON CHILE S.A.', subcontrato_id: [1] },
   //   ];
   //   const arrExpect: CubicacionModel.Region[] = [
   //     { codigo: 'XIII', id: 13, nombre: 'Reginnn Metropolitana de Santiago' },
   //   ];
-  //   const response: CubicacionModel.ResponseRegion = {
+  //   const response: Response<CubicacionModel.DataRegion> = {
   //     status: {
   //       responseCode: 0,
   //       description: 'Ok',
@@ -149,7 +153,7 @@ describe('CrearCubicacionComponent', () => {
   //   const arrExpect: CubicacionModel.TipoServicio[] = [
   //     { id: 1, nombre: 'CD1' },
   //   ];
-  //   const response: CubicacionModel.ResponseTipoServicioSubContrato = {
+  //   const response: Response<CubicacionModel.DataTipoServicioSubContrato> = {
   //     status: {
   //       responseCode: 0,
   //       description: 'Ok',
@@ -173,10 +177,10 @@ describe('CrearCubicacionComponent', () => {
 
   // it('should storage servicios', fakeAsync(() => {
   //   component.regionArr = [{ codigo: 'XIII', id: 13, nombre: '1Region' }];
-  //   component.regionId = '13';
-  //   component.tipoServicioId = '1';
+  //   component.form.controls.regionId.setValue('13');
+  //   component.form.controls.tiposervicioId.setValue('1');
   //   component.tipoServicioArr = [{ id: 1, nombre: 'CD1' }];
-  //   const arrExpect: CubicacionModel.Product[] = [
+  //   const arrExpect: CubicacionModel.LPU[] = [
   //     {
   //       id_lpu: 1,
   //       nombre: 'SERVICIO1',
@@ -190,7 +194,7 @@ describe('CrearCubicacionComponent', () => {
   //     },
   //   ];
 
-  //   const response: CubicacionModel.ResponseServicioContrato = {
+  //   const response: Response<CubicacionModel.DataServicioContrato> = {
   //     status: {
   //       responseCode: 0,
   //       description: 'Ok',
@@ -259,19 +263,20 @@ describe('CrearCubicacionComponent', () => {
   // });
 
   // it('should let show message of confirm', () => {
+  //   spyOn(confirmationService, 'confirm');
   //   component.selectedServicios = [];
   //   const event: Event = new Event('MouseEvent', {
   //     bubbles: true,
   //     cancelable: false,
   //   });
-  //   const input = 'contrato';
-  //   component.contratoDisabled = false;
+  //   const input = 'contratoId';
+  //   component.form.controls.contratoId.disable();
   //   component.confirm(event, input);
-  //   expect(component.contratoDisabled).toBe(false);
+  //   expect(confirmationService.confirm).toHaveBeenCalled;
   // });
 
   // xit('should invoke service save cubicacion', () => {
-  //   const dummyResponse: CubicacionModel.ResponseSaveCubicacion = {
+  //   const dummyResponse: Response<string> = {
   //     status: {
   //       responseCode: 0,
   //       description: 'Ok',

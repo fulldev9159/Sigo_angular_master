@@ -16,21 +16,13 @@ import { of, Observable, zip } from 'rxjs';
 export class CrearCubicacionComponent implements OnInit {
   form: FormGroup;
   public contratosArr: CubicacionModel.ContratoMarco[] = [];
-  // public contratoId = '';
   public proveedorArr: CubicacionModel.Proveedores[] = [];
-  // public proveedorId = '';
-  // public subcontratoId = 0;
   public regionArr: CubicacionModel.Region[] = [];
-  // public regionId = '';
   public tipoServicioArr: CubicacionModel.TipoServicio[] = [];
-  // public tipoServicioId = '';
   public sourceProducts$: Observable<CubicacionModel.LPU[]> = of([]);
   public sourcePtemp: CubicacionModel.LPU[] = [];
   public selectedServicios: CubicacionModel.LPU[] = [];
   public total = 0;
-  // public proveedorDisabled = false;
-  // public regionDisabled = false;
-  // public nombreCubicacion = '';
 
   constructor(
     private readonly fb: FormBuilder,
