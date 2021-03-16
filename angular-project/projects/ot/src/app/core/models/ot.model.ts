@@ -4,6 +4,8 @@ export interface OTForm {
   cubicacionId: string;
   planId: string;
   sitioId: string;
+  pmoId: string;
+  lineapresupuestariaId: string;
 }
 
 // Plan
@@ -42,4 +44,46 @@ export interface Sitios {
   latitud: string;
   longitud: string;
   direccion: string;
+}
+
+// PMO
+export interface RequestPMO {
+  //   user: string;
+  token: string;
+  codigo: number;
+}
+
+export interface DataPMO {
+  pmo: PMO[];
+}
+
+export interface PMO {
+  codigo: number;
+}
+
+// Linea Presupuestaria
+export interface RequestLineaPresupuestaria {
+  //   user: string;
+  token: string;
+  pmo_id: number;
+}
+
+export interface DataLineaPresupuestaria {
+  lineas_presupuestarias: string[];
+}
+
+// export interface LinePresupuestaria {
+//   _: number;
+// }
+
+// Linea Presupuestaria
+export interface RequestPEP2 {
+  //   user: string;
+  token: string;
+  pmo_codigo: string;
+  linea_presupuestaria_codigo: string;
+}
+
+export interface DataPEP2 {
+  pep2: string[];
 }

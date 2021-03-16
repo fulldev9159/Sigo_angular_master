@@ -25,6 +25,12 @@ export class CrearOtComponent implements OnInit {
   planSelected: OTModel.Planes = {} as OTModel.Planes;
   public SitiosArr: OTModel.Sitios[] = [];
   sitioSelected: OTModel.Sitios = {} as OTModel.Sitios;
+  public PMOArr: OTModel.PMO[] = [];
+  PMOSelected: OTModel.PMO = {} as OTModel.PMO;
+  public LineaPresupuestariaArr: string[] = [];
+  LineaPresupuestariaSelected = '';
+  public PEP2Arr: string[] = [];
+  PEP2Selected = '';
 
   constructor(
     private readonly fb: FormBuilder,
@@ -39,7 +45,9 @@ export class CrearOtComponent implements OnInit {
       cubicacionId: ['', [Validators.required]],
       planId: ['', [Validators.required]],
       sitioId: ['', [Validators.required]],
-      tiposervicioId: ['', [Validators.required]],
+      pmoId: ['', [Validators.required]],
+      lineapresupuestariaId: ['', [Validators.required]],
+      pep2Id: ['', [Validators.required]],
     });
   }
 
@@ -51,6 +59,9 @@ export class CrearOtComponent implements OnInit {
       cubicacionId: data.cubicacionId.trim(),
       planId: data.planId.trim(),
       sitioId: data.sitioId.trim(),
+      pmoId: data.pmoId.trim(),
+      lineapresupuestariaId: data.lineapresupuestariaId.trim(),
+      pep2Id: data.pep2Id.trim(),
     } as OTModel.OTForm;
   }
 
@@ -87,17 +98,74 @@ export class CrearOtComponent implements OnInit {
     this.planSelected = this.PlanArr.filter(
       (x) => x.plandespliegue_id === parseInt(this.values.planId, 10)
     )[0];
-    this.otService
-      .getSitios(parseInt(this.values.planId, 10))
-      .subscribe((sitios) => {
+    this.otService.getSitios(parseInt(this.values.planId, 10)).subscribe(
+      (sitios) => {
         this.SitiosArr = sitios.data.sitios;
-      });
+      },
+      (err: HttpErrorResponse) => {
+        this.sharedService.showMessage(
+          this.sharedService.getErrorMessage(err),
+          'error'
+        );
+      }
+    );
   }
 
   selectedSitio(): void {
-    console.log(this.values.sitioId);
     this.sitioSelected = this.SitiosArr.filter(
       (x) => x.sitio_id === parseInt(this.values.sitioId, 10)
     )[0];
+    this.otService.getPMO(parseInt(this.sitioSelected.codigo, 10)).subscribe(
+      (response) => {
+        this.PMOArr = response.data.pmo;
+      },
+      (err: HttpErrorResponse) => {
+        this.sharedService.showMessage(
+          this.sharedService.getErrorMessage(err),
+          'error'
+        );
+      }
+    );
   }
+
+  selectedPMO(): void {
+    // console.log(this.values.pmoId)
+    // this.PMOSelected = this.PMOArr.filter(
+    //   (x) => x.codigo === parseInt(this.values.pmoId, 10)
+    // )[0];
+    this.otService
+      .getLineaPresupuestaria(parseInt(this.values.pmoId, 10))
+      .subscribe(
+        (response) => {
+          this.LineaPresupuestariaArr = response.data.lineas_presupuestarias;
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
+  }
+
+  selectedLineaPresupuestaria(): void {
+    this.LineaPresupuestariaSelected = this.LineaPresupuestariaArr.filter(
+      (x) => x === this.values.lineapresupuestariaId
+    )[0];
+    this.otService
+      .getPEP2(this.values.pmoId, this.values.lineapresupuestariaId)
+      .subscribe(
+        (response) => {
+          this.PEP2Arr = response.data.pep2;
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
+  }
+
+  selectedpep2(): void {}
 }
