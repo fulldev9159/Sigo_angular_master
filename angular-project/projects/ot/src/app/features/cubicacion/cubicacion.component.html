@@ -1,3 +1,4 @@
+<p-confirmPopup></p-confirmPopup>
 <div class="section">
     <div class="left-navbar"></div>
     <div class="content">
@@ -30,22 +31,22 @@
                             (click)="displayModalDetaillesCubicacion(cub.cubicacion_id)">
                             <i class="eye icon"></i>
                         </button>
-                        <!-- <button id="buttonCopiar-{{cub.cubicacion_id}}" class="circular ui icon button"
+                        <button id="buttonCopiar-{{cub.cubicacion_id}}" class="circular ui icon button"
                             pTooltip="Crear copia" tooltipPosition="top" placeholder="Top"
-                            (click)="clonar(cub.cubicacion_id,cub.nombre,cub.total,cub.region_id,cub.region,cub.contrato_marco,cub.proveedor,cub.subcontrato_id)">
+                            (click)="clonar(cub.cubicacion_id)">
                             <i class="clone icon"></i>
                         </button>
-                        <button id="buttonEditar-{{cub.cubicacion_id}}" *ngIf="!cub.asignado"
+                        <!-- <button id="buttonEditar-{{cub.cubicacion_id}}" *ngIf="!cub.asignado"
                             class="circular ui icon button" pTooltip="Editar" tooltipPosition="top" placeholder="Top"
                             (click)="editar(cub.nombre,cub.contrato_marco,cub.proveedor_id,cub.region,cub.region_id,cub.cubicacion_id)">
                             <i class="edit icon"></i>
-                        </button>
+                        </button> -->
                         <button id="buttonEliminar-{{cub.cubicacion_id}}" *ngIf="!cub.asignado"
                             class="circular ui icon button red" pTooltip="Eliminar"
                             (click)="confirmEliminacion($event,cub.cubicacion_id)" tooltipPosition="top"
                             placeholder="Top">
                             <i class="trash icon"></i>
-                        </button> -->
+                        </button>
                     </td>
                 </tr>
             </ng-template>

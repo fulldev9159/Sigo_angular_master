@@ -184,20 +184,18 @@ export class CubicacionService {
   //   );
   // }
 
-  // eliminarCubicacion(
-  //   userC: string,
-  //   tok: string,
-  //   idCubicacion: number
-  // ): Observable<CubicacionModel.ResponseSaveCubicacion> {
-  //   const request: CubicacionModel.RequestBorrarCubicaciones = {
-  //     user: userC,
-  //     token: tok,
-  //     id_cubicacion: idCubicacion,
-  //   };
-  //   return (this
-  //     .httpClient as HttpClient).post<CubicacionModel.ResponseSaveCubicacion>(
-  //     `${this.apiBase}/deleteCubicacion`,
-  //     JSON.stringify(request)
-  //   );
-  // }
+  eliminarCubicacion(
+    idCubicacion: number
+  ): Observable<Response<string>> {
+    const request: CubicacionModel.RequestBorrarCubicaciones = {
+      user: this.username,
+      token: this.token,
+      id_cubicacion: idCubicacion,
+    };
+    return (this
+      .httpClient as HttpClient).post<Response<string>>(
+      `${this.apiBase}/deleteCubicacion`,
+      JSON.stringify(request)
+    );
+  }
 }
