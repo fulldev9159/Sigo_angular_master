@@ -44,6 +44,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-
-angular-project/debug.log
+**/*.swp
+/angular-project/debug.log
