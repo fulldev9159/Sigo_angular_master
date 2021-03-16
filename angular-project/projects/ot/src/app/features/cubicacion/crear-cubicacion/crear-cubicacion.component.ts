@@ -5,7 +5,7 @@ import { CubicacionService } from '@coreOT/services/cubicacion.service';
 import { SharedService } from '@coreOT/services/shared.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ConfirmationService } from 'primeng/api';
-import { of, Observable, zip } from 'rxjs';
+import { of, Observable } from 'rxjs';
 
 @Component({
   selector: 'ot-crear-cubicacion',
@@ -26,7 +26,6 @@ export class CrearCubicacionComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    // private authService: AuthService,
     private cubicacionService: CubicacionService,
     private confirmationService: ConfirmationService,
     private sharedService: SharedService

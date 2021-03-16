@@ -1,0 +1,101 @@
+<div class="section">
+    <div class="left-navbar"></div>
+    <div class="content ui segment" style="width: 53%;margin-left: 327px">
+        <div class="title">Ingreso de orden de trabajo</div>
+        <form [formGroup]="form">
+            <div class="form-content" style="flex-direction: column;align-items: center;">
+                <div class="union" style="display: flex;">
+                    <div class="field" style="width: 326px;">
+                        <label>Nombre de la orden de trabajo*</label>
+                        <!-- <span class="error" *ngIf="NombreErr">* Debe ingresar el nombre</span> -->
+                        <input type="text" class="nombre-ot" [formControlName]="'nombre'" name="nombre" id="nombre"
+                            style="margin-top: 9px;margin-left: -53px;">
+                    </div>
+                    <div class="field" style="width: 326px;">
+                        <label style="margin-left: 81px;">Tipo OT</label>
+                        <select name="tipoOT" id="tipoOT" [formControlName]="'tipoOT'" style="margin-left: 81px;">
+                            <option value="OT">OT</option>
+                            <option value="AP">AP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field" style="display: flex;align-items: baseline;">
+                    <div style="display: flex;
+                    flex-direction: column;">
+                        <label style="margin-left: 56px;">Cubicación</label>
+                        <select name="cubicacion" id="cubicacion" (change)="selectedCubicacion()"
+                            [formControlName]="'cubicacionId'" style="width: 326px;
+                        height: 40px;margin-left: 56px;">
+                            <option value="">Seleccione una cubicación....</option>
+                            <option *ngFor="let cubicacion of cubicaciones" value="{{cubicacion.cubicacion_id}}">
+                                {{cubicacion.nombre}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="ui info message" style="margin-left: 102px;
+                    width: 384px;">
+                        <div class="header">
+                            Detalles de la cubicación
+                        </div>
+                        <ul class="list">
+                            <li>Contrato: {{cubicacionSelected.contrato_marco}}</li>
+                            <li>Proveedor: {{cubicacionSelected.proveedor}}</li>
+                            <li>Región: {{cubicacionSelected.region}}</li>
+                            <li>Total: ${{cubicacionSelected.total|number: '1.0-0':'es-CL'}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- <p-divider align="center" type="dashed">
+                    <b>Step2: Plan de Proyecto</b>
+                </p-divider> -->
+                <div class="field" style="display: flex;align-items: baseline;">
+                    <div>
+                        <div style="display: flex;
+                    flex-direction: column;">
+                            <label style="margin-left: 56px;">Plan de proyecto</label>
+                            <select name="cubicacion" id="cubicacion" (change)="selectedPlan()"
+                                [formControlName]="'planId'" style="width: 326px;
+                        height: 40px;margin-left: 56px;">
+                                <option value="">Seleccione un plan de proyecto....</option>
+                                <option *ngFor="let plan of PlanArr" value="{{plan.plandespliegue_id}}">{{plan.plan}} -
+                                    {{plan.metas}}</option>
+                            </select>
+                        </div>
+                        <div style="display: flex;
+                    flex-direction: column;">
+                            <label style="margin-left: 56px;">Sitio</label>
+                            <select name="cubicacion" id="cubicacion" (change)="selectedSitio()"
+                                [formControlName]="'sitioId'" style="width: 326px;
+                        height: 40px;margin-left: 56px;">
+                                <option value="">Seleccione un sitio....</option>
+                                <option *ngFor="let sitio of SitiosArr" value="{{sitio.sitio_id}}">
+                                    {{sitio.nombre_sitio}} - {{sitio.codigo}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ui info message" style="margin-left: 102px;width: 384px;">
+                        <div class="header">
+                            Detalles del plan de proyecto
+                        </div>
+                        <ul class="list">
+                            <li>Plan: {{planSelected.plan}}</li>
+                            <li>Codigo de proyecto: {{sitioSelected.codigo}}</li>
+                            <li>Nombre sitio: {{sitioSelected.nombre_sitio}}</li>
+                            <li>Direcccion: {{sitioSelected.direccion}}</li>
+                            <li>Latitud: {{sitioSelected.latitud}}</li>
+                            <li>Longitud: {{sitioSelected.longitud}} </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </form>
+
+    </div>
+</div>

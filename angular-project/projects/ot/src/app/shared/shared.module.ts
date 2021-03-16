@@ -7,6 +7,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
+import { DividerModule } from 'primeng/divider';
 @NgModule({
   declarations: [],
   imports: [
@@ -19,6 +20,7 @@ import { DialogModule } from 'primeng/dialog';
     TableModule,
     TooltipModule,
     DialogModule,
+    DividerModule,
   ],
   exports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { DialogModule } from 'primeng/dialog';
     TableModule,
     TooltipModule,
     DialogModule,
+    DividerModule,
   ],
 })
 export class SharedModule {}
