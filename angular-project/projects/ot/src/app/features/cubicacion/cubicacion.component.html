@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<p-dialog header="Detalle de la cubicación << {{cubicacionSelected.nombre}} >>" [(visible)]="showModalDetaillesCubicacion" [modal]="true" [style]="{width: '70vw'}" [baseZIndex]="10000"
+<p-dialog header="Detalle de la cubicación ( {{cubicacionSelected.nombre}} )" [(visible)]="showModalDetaillesCubicacion" [modal]="true" [style]="{width: '70vw'}" [baseZIndex]="10000"
     [draggable]="false" [resizable]="false">
     <ot-detalle-cubicacion  [cubicacionSelected]="cubicacionSelected" [detallesCubicacionSelected]="detallesCubicacionSelected"></ot-detalle-cubicacion>
 </p-dialog>
