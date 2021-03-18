@@ -147,42 +147,40 @@ export class CubicacionService {
     >(`${this.apiBase}/getDetalleCubicacion`, JSON.stringify(request));
   }
 
-  // editCubicacion(
-  //   tokenC: string,
-  //   usernameC: string,
-  //   idCubicacion: number,
-  //   nombreC: string,
-  //   totalC: number,
-  //   regionIDC: number,
-  //   regionC: string,
-  //   contratoC: string,
-  //   proveedorC: string,
-  //   subcontratoIDC: number,
-  //   lpusC: CubicacionModel.Lpus[]
-  // ): Observable<CubicacionModel.ResponseSaveCubicacion> {
-  //   // const temp: CubicacionModel.Lpus[] = [];
+  editCubicacion(
+    idCubicacion: number,
+    nombreC: string,
+    totalC: number,
+    regionIDC: number,
+    regionC: string,
+    contratoC: string,
+    proveedorC: string,
+    subcontratoIDC: number,
+    lpusC: CubicacionModel.Lpus[]
+  ): Observable<Response<string>> {
+    // const temp: CubicacionModel.Lpus[] = [];
 
-  //   const request: CubicacionModel.RequestSaveCubicacion = {
-  //     token: tokenC,
-  //     // user:usernameC,
-  //     id_cubicacion: idCubicacion,
-  //     nombre: nombreC,
-  //     total: totalC,
-  //     region_id: regionIDC,
-  //     region: regionC,
-  //     contrato_marco: contratoC,
-  //     proveedor: proveedorC,
-  //     subcontrato_id: subcontratoIDC,
-  //     lpus: lpusC,
-  //   };
+    const request: CubicacionModel.RequestSaveCubicacion = {
+      token: this.token,
+      // user:usernameC,
+      id_cubicacion: idCubicacion,
+      nombre: nombreC,
+      total: totalC,
+      region_id: regionIDC,
+      region: regionC,
+      contrato_marco: contratoC,
+      proveedor: proveedorC,
+      subcontrato_id: subcontratoIDC,
+      lpus: lpusC,
+    };
 
-  //   console.log(request);
-  //   return (this
-  //     .httpClient as HttpClient).post<CubicacionModel.ResponseSaveCubicacion>(
-  //     `${this.apiBase}/saveEditCubicacion`,
-  //     JSON.stringify(request)
-  //   );
-  // }
+    console.log(request);
+    return (this
+      .httpClient as HttpClient).post<Response<string>>(
+      `${this.apiBase}/saveEditCubicacion`,
+      JSON.stringify(request)
+    );
+  }
 
   eliminarCubicacion(
     idCubicacion: number
