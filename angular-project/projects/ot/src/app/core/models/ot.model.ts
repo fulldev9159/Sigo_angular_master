@@ -1,11 +1,18 @@
+import { Dropdown } from 'primeng/dropdown';
+
 export interface OTForm {
   nombre: string;
   tipoOT: string;
   cubicacionId: string;
   planId: string;
-  sitioId: string;
+  sitioId: DropdownForm;
   pmoId: string;
   lineapresupuestariaId: string;
+}
+
+export interface DropdownForm {
+  name: string;
+  code: string;
 }
 
 // Plan

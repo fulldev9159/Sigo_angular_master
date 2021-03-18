@@ -67,13 +67,16 @@
                         <div style="display: flex;
                     flex-direction: column;">
                             <label style="margin-left: 56px;">Sitio</label>
-                            <select name="cubicacion" id="cubicacion" (change)="selectedSitio()"
+                            <!-- <select name="cubicacion" id="cubicacion" (change)="selectedSitio()"
                                 [formControlName]="'sitioId'" style="width: 326px;
                         height: 40px;margin-left: 56px;">
                                 <option value="">Seleccione un sitio....</option>
                                 <option *ngFor="let sitio of SitiosArr" value="{{sitio.sitio_id}}">
                                     {{sitio.nombre_sitio}} - {{sitio.codigo}}</option>
-                            </select>
+                            </select> -->
+                            <p-dropdown (onChange)="selectedSitio()" [options]="sitios" [formControlName]="'sitioId'" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Seleccione un sitio....">
+                                    {{sitios.name}}
+                            </p-dropdown>
                         </div>
                     </div>
                     <div class="ui info message" style="margin-left: 102px;width: 384px;">

@@ -24,6 +24,7 @@ export class CrearOtComponent implements OnInit {
   public PlanArr: OTModel.Planes[] = [];
   planSelected: OTModel.Planes = {} as OTModel.Planes;
   public SitiosArr: OTModel.Sitios[] = [];
+  public sitios: any = [{ name: '', code: '' }];
   sitioSelected: OTModel.Sitios = {} as OTModel.Sitios;
   public PMOArr: OTModel.PMO[] = [];
   PMOSelected: OTModel.PMO = {} as OTModel.PMO;
@@ -44,7 +45,7 @@ export class CrearOtComponent implements OnInit {
       tipoOT: ['OT', [Validators.required]],
       cubicacionId: ['', [Validators.required]],
       planId: ['', [Validators.required]],
-      sitioId: ['', [Validators.required]],
+      sitioId: [{ name: '', code: '' }, [Validators.required]],
       pmoId: ['', [Validators.required]],
       lineapresupuestariaId: ['', [Validators.required]],
       pep2Id: ['', [Validators.required]],
@@ -58,7 +59,7 @@ export class CrearOtComponent implements OnInit {
       tipoOT: data.tipoOT.trim(),
       cubicacionId: data.cubicacionId.trim(),
       planId: data.planId.trim(),
-      sitioId: data.sitioId.trim(),
+      sitioId: data.sitioId,
       pmoId: data.pmoId.trim(),
       lineapresupuestariaId: data.lineapresupuestariaId.trim(),
       pep2Id: data.pep2Id.trim(),
@@ -101,6 +102,10 @@ export class CrearOtComponent implements OnInit {
     this.otService.getSitios(parseInt(this.values.planId, 10)).subscribe(
       (sitios) => {
         this.SitiosArr = sitios.data.sitios;
+        this.sitios = this.SitiosArr.map((x) => ({
+          name: `${x.nombre_sitio} - ${x.codigo}`,
+          code: x.sitio_id,
+        }));
       },
       (err: HttpErrorResponse) => {
         this.sharedService.showMessage(
@@ -112,8 +117,12 @@ export class CrearOtComponent implements OnInit {
   }
 
   selectedSitio(): void {
+    // console.log(`SitioId: ${this.values.sitioId}`)
+    // console.log(this.values.sitioId)
+    // console.log('event :' + event);
+    // console.log(event.value);
     this.sitioSelected = this.SitiosArr.filter(
-      (x) => x.sitio_id === parseInt(this.values.sitioId, 10)
+      (x) => x.sitio_id === parseInt(this.values.sitioId.code, 10)
     )[0];
     this.otService.getPMO(parseInt(this.sitioSelected.codigo, 10)).subscribe(
       (response) => {
