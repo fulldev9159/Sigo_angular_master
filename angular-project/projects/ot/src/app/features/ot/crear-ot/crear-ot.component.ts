@@ -32,6 +32,7 @@ export class CrearOtComponent implements OnInit {
   LineaPresupuestariaSelected = '';
   public PEP2Arr: string[] = [];
   PEP2Selected = '';
+  public autoResize = false;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -49,6 +50,10 @@ export class CrearOtComponent implements OnInit {
       pmoId: ['', [Validators.required]],
       lineapresupuestariaId: ['', [Validators.required]],
       pep2Id: ['', [Validators.required]],
+      fechainicio: ['', [Validators.required]],
+      fechatermino: ['', [Validators.required]],
+      observacion: [''],
+      pep2provisorio: [''],
     });
   }
 
@@ -63,6 +68,10 @@ export class CrearOtComponent implements OnInit {
       pmoId: data.pmoId.trim(),
       lineapresupuestariaId: data.lineapresupuestariaId.trim(),
       pep2Id: data.pep2Id.trim(),
+      fechainicio: data.fechainicio,
+      fechatermino: data.fechatermino,
+      observacion: data.observacion.trim(),
+      pep2provisorio: data.pep2provisorio.trim(),
     } as OTModel.OTForm;
   }
 

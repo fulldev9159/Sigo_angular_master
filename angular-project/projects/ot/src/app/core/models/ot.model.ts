@@ -8,6 +8,10 @@ export interface OTForm {
   sitioId: DropdownForm;
   pmoId: string;
   lineapresupuestariaId: string;
+  fechainicio: Date;
+  fechatermino: Date;
+  observacion: string;
+  pep2provisorio: string;
 }
 
 export interface DropdownForm {

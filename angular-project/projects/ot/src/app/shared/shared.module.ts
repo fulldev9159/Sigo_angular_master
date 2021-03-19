@@ -8,6 +8,8 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 @NgModule({
   declarations: [],
   imports: [
@@ -21,6 +23,8 @@ import { DividerModule } from 'primeng/divider';
     TooltipModule,
     DialogModule,
     DividerModule,
+    CalendarModule,
+    InputTextareaModule,
   ],
   exports: [
     CommonModule,
@@ -33,6 +37,8 @@ import { DividerModule } from 'primeng/divider';
     TooltipModule,
     DialogModule,
     DividerModule,
+    CalendarModule,
+    InputTextareaModule,
   ],
 })
 export class SharedModule {}

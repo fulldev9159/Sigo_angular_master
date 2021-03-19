@@ -1,32 +1,33 @@
 <div class="section">
     <div class="left-navbar"></div>
-    <div class="content ui segment" style="width: 53%;margin-left: 327px">
+    <div class="content ui segment" style="  width: 72%;
+    text-align: center;
+    margin-left: 13%;">
         <div class="title">Ingreso de orden de trabajo</div>
         <form [formGroup]="form">
             <div class="form-content" style="flex-direction: column;align-items: center;">
                 <div class="union" style="display: flex;">
                     <div class="field" style="width: 326px;">
                         <label>Nombre de la orden de trabajo*</label>
-                        <!-- <span class="error" *ngIf="NombreErr">* Debe ingresar el nombre</span> -->
                         <input type="text" class="nombre-ot" [formControlName]="'nombre'" name="nombre" id="nombre"
                             style="margin-top: 9px;margin-left: -53px;">
                     </div>
                     <div class="field" style="width: 326px;">
-                        <label style="margin-left: 81px;">Tipo OT</label>
-                        <select name="tipoOT" id="tipoOT" [formControlName]="'tipoOT'" style="margin-left: 81px;">
+                        <label style="margin-left: 20px;">Tipo OT</label>
+                        <select name="tipoOT" id="tipoOT" [formControlName]="'tipoOT'" style="margin-left: 20px;">
                             <option value="OT">OT</option>
                             <option value="AP">AP</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="field" style="display: flex;align-items: baseline;">
+                <div class="field" style="display: flex;align-items: center;">
                     <div style="display: flex;
                     flex-direction: column;">
-                        <label style="margin-left: 56px;">Cubicación</label>
+                        <label>Cubicación</label>
                         <select name="cubicacion" id="cubicacion" (change)="selectedCubicacion()"
                             [formControlName]="'cubicacionId'" style="width: 326px;
-                        height: 40px;margin-left: 56px;">
+                        height: 40px;">
                             <option value="">Seleccione una cubicación....</option>
                             <option *ngFor="let cubicacion of cubicaciones" value="{{cubicacion.cubicacion_id}}">
                                 {{cubicacion.nombre}}
@@ -34,72 +35,52 @@
                         </select>
                     </div>
 
-                    <div class="ui info message" style="margin-left: 102px;
-                    width: 384px;">
-                        <div class="header">
-                            Detalles de la cubicación
+                    <div class="field" style="display: flex;align-items: baseline;">
+                        <div>
+                            <div style="display: flex;
+                        flex-direction: column;">
+                                <label style="margin-left: 56px;">Plan de proyecto</label>
+                                <select name="cubicacion" id="cubicacion" (change)="selectedPlan()"
+                                    [formControlName]="'planId'" style="width: 326px;
+                            height: 40px;margin-left: 56px;">
+                                    <option value="">Seleccione un plan de proyecto....</option>
+                                    <option *ngFor="let plan of PlanArr" value="{{plan.plandespliegue_id}}">
+                                        {{plan.plan}} -
+                                        {{plan.metas}}</option>
+                                </select>
+                            </div>
+                            <div style="display: flex;
+                        flex-direction: column;">
+                                <label style="margin-left: 56px;">Sitio</label>
+                                <!-- <select name="cubicacion" id="cubicacion" (change)="selectedSitio()"
+                                    [formControlName]="'sitioId'" style="width: 326px;
+                            height: 40px;margin-left: 56px;">
+                                    <option value="">Seleccione un sitio....</option>
+                                    <option *ngFor="let sitio of SitiosArr" value="{{sitio.sitio_id}}">
+                                        {{sitio.nombre_sitio}} - {{sitio.codigo}}</option>
+                                </select> -->
+                                <p-dropdown (onChange)="selectedSitio()" [options]="sitios"
+                                    [formControlName]="'sitioId'" optionLabel="name" [filter]="true" filterBy="name"
+                                    [showClear]="true" placeholder="Seleccione un sitio....">
+                                    {{sitios.name}}
+                                </p-dropdown>
+                            </div>
                         </div>
-                        <ul class="list">
-                            <li>Contrato: {{cubicacionSelected.contrato_marco}}</li>
-                            <li>Proveedor: {{cubicacionSelected.proveedor}}</li>
-                            <li>Región: {{cubicacionSelected.region}}</li>
-                            <li>Total: ${{cubicacionSelected.total|number: '1.0-0':'es-CL'}}</li>
-                        </ul>
+
                     </div>
                 </div>
 
                 <!-- <p-divider align="center" type="dashed">
                     <b>Step2: Plan de Proyecto</b>
                 </p-divider> -->
-                <div class="field" style="display: flex;align-items: baseline;">
-                    <div>
-                        <div style="display: flex;
-                    flex-direction: column;">
-                            <label style="margin-left: 56px;">Plan de proyecto</label>
-                            <select name="cubicacion" id="cubicacion" (change)="selectedPlan()"
-                                [formControlName]="'planId'" style="width: 326px;
-                        height: 40px;margin-left: 56px;">
-                                <option value="">Seleccione un plan de proyecto....</option>
-                                <option *ngFor="let plan of PlanArr" value="{{plan.plandespliegue_id}}">{{plan.plan}} -
-                                    {{plan.metas}}</option>
-                            </select>
-                        </div>
-                        <div style="display: flex;
-                    flex-direction: column;">
-                            <label style="margin-left: 56px;">Sitio</label>
-                            <!-- <select name="cubicacion" id="cubicacion" (change)="selectedSitio()"
-                                [formControlName]="'sitioId'" style="width: 326px;
-                        height: 40px;margin-left: 56px;">
-                                <option value="">Seleccione un sitio....</option>
-                                <option *ngFor="let sitio of SitiosArr" value="{{sitio.sitio_id}}">
-                                    {{sitio.nombre_sitio}} - {{sitio.codigo}}</option>
-                            </select> -->
-                            <p-dropdown (onChange)="selectedSitio()" [options]="sitios" [formControlName]="'sitioId'" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Seleccione un sitio....">
-                                    {{sitios.name}}
-                            </p-dropdown>
-                        </div>
-                    </div>
-                    <div class="ui info message" style="margin-left: 102px;width: 384px;">
-                        <div class="header">
-                            Detalles del plan de proyecto
-                        </div>
-                        <ul class="list">
-                            <li>Plan: {{planSelected.plan}}</li>
-                            <li>Codigo de proyecto: {{sitioSelected.codigo}}</li>
-                            <li>Nombre sitio: {{sitioSelected.nombre_sitio}}</li>
-                            <li>Direcccion: {{sitioSelected.direccion}}</li>
-                            <li>Latitud: {{sitioSelected.latitud}}</li>
-                            <li>Longitud: {{sitioSelected.longitud}} </li>
-                        </ul>
-                    </div>
-                </div>
+
 
 
                 <!-- <p-divider align="center" type="dashed">
                     <b>Step3: PMO</b>
                 </p-divider> -->
 
-                <div class="field" style="display: flex;align-items: baseline;">
+                <div class="field" style="display: flex;align-items: baseline;margin: 72px 0px 0px 392px">
                     <div style="margin-left: -438px;">
                         <div style="display: flex;
                     flex-direction: column;">
@@ -111,17 +92,7 @@
                                 <option *ngFor="let plan of PMOArr" value="{{plan.codigo}}">{{plan.codigo}} </option>
                             </select>
                         </div>
-                        <div style="display: flex;
-                    flex-direction: column;">
-                            <label style="margin-left: 56px;">Linea Presupuestaria</label>
-                            <select name="cubicacion" id="cubicacion" (change)="selectedLineaPresupuestaria()"
-                                [formControlName]="'lineapresupuestariaId'" style="width: 326px;
-                        height: 40px;margin-left: 56px;">
-                                <option value="">Seleccione Linea Presupuestaria....</option>
-                                <option *ngFor="let sitio of LineaPresupuestariaArr" value="{{sitio}}">
-                                    {{sitio}}</option>
-                            </select>
-                        </div>
+
                         <div style="display: flex;
                     flex-direction: column;">
                             <label style="margin-left: 56px;">PEP2</label>
@@ -129,28 +100,99 @@
                                 [formControlName]="'pep2Id'" style="width: 326px;
                         height: 40px;margin-left: 56px;">
                                 <option value="">Seleccione un PEP2....</option>
+                                <option value="0">PEP2 Provisorio</option>
                                 <option *ngFor="let sitio of PEP2Arr" value="{{sitio}}">
                                     {{sitio}}</option>
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="ui info message" style="margin-left: 102px;width: 384px;">
-                        <div class="header">
-                            Detalles del plan de proyecto
+                    <div>
+                        <div style="display: flex;
+                        flex-direction: column;">
+                            <label style="margin-left: 56px;">Linea Presupuestaria</label>
+                            <select name="cubicacion" id="cubicacion" (change)="selectedLineaPresupuestaria()"
+                                [formControlName]="'lineapresupuestariaId'" style="width: 326px;
+                            height: 40px;margin-left: 56px;">
+                                <option value="">Seleccione Linea Presupuestaria....</option>
+                                <option *ngFor="let sitio of LineaPresupuestariaArr" value="{{sitio}}">
+                                    {{sitio}}</option>
+                            </select>
                         </div>
-                        <ul class="list">
-                            <li>Plan: {{planSelected.plan}}</li>
-                            <li>Codigo de proyecto: {{sitioSelected.codigo}}</li>
-                            <li>Nombre sitio: {{sitioSelected.nombre_sitio}}</li>
-                            <li>Direcccion: {{sitioSelected.direccion}}</li>
-                            <li>Latitud: {{sitioSelected.latitud}}</li>
-                            <li>Longitud: {{sitioSelected.longitud}} </li>
-                        </ul>
-                    </div> -->
+
+                        <div class="field" style="width: 326px;" *ngIf="form.value.pep2Id==='0'">
+                            <label>PEP2 Provisorio</label>
+                            <input type="text" class="pep2provisorio-ot" [formControlName]="'pep2provisorio'" name="pep2provisorio" id="pep2provisorio"
+                                style="margin-top: 9px;margin-left: 51px;">
+                        </div>
+                    </div>
                 </div>
+
+                <div style="width: 481px;"><p-divider></p-divider>
+                </div>                
+                <div style="display: flex;">
+                <div class="ui info message" style="    margin-left: 63px;
+                width: 384px;">
+                <div class="header">
+                    Detalles de la cubicación
+                </div>
+                <ul class="list">
+                    <li><strong>Contrato:</strong> {{cubicacionSelected.contrato_marco}}</li>
+                    <li><strong>Proveedor:</strong> {{cubicacionSelected.proveedor}}</li>
+                    <li><strong>Región:</strong> {{cubicacionSelected.region}}</li>
+                    <li><strong>Total:</strong> ${{cubicacionSelected.total|number: '1.0-0':'es-CL'}}</li>
+                </ul>
+            </div>
+            <div class="ui info message" style="    margin-left: 16px;
+            width: 410px;
+            margin-top: 0;">
+                <div class="header">
+                    Detalles del plan de proyecto
+                </div>
+                <ul class="list">
+                    <li><strong>Plan:</strong> {{planSelected.plan}}</li>
+                    <li><strong>Codigo de proyecto:</strong> {{sitioSelected.codigo}}</li>
+                    <li><strong>Nombre sitio:</strong> {{sitioSelected.nombre_sitio}}</li>
+                    <li><strong>Direcccion: </strong>{{sitioSelected.direccion}}</li>
+                    <li><strong>Latitud:</strong> {{sitioSelected.latitud}}</li>
+                    <li><strong>Longitud:</strong> {{sitioSelected.longitud}} </li>
+                </ul>
+            </div></div>
+
+                <div class="field" style="display: flex;align-items: center;    align-self: baseline;justify-content: space-evenly;
+                width: 100%;margin-top: 29px;
+            ">
+                    <div style="display: flex;
+                    flex-direction: column;">
+
+                        <label >Fecha de inicio</label>
+                        <p-calendar [formControlName]="'fechainicio'" [showIcon]="true" inputId="icon"></p-calendar>
+                        <label style="margin-top: 16px;">Fecha de termino</label>
+                        <p-calendar [formControlName]="'fechatermino'" [showIcon]="true" inputId="icon"></p-calendar>
+                    </div>
+                    <div>
+                        <div class="field" style="display: flex;
+                flex-direction: column;
+                align-items: initial;
+                width: 100%;margin-top:10px">
+                            <label style="margin-left: 56px;">Observación</label>
+                            <textarea rows="5" cols="30"  pInputTextarea [formControlName]="'observacion'" ></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
             </div>
 
+            
 
+            <div style="    margin-top: 56px;"  pTooltip="Debe llenar todos los campos" tooltipPosition="top">
+                <button *ngIf="!valid" class="ui positive button active" disabled>Finalizar
+                    Cubicación</button>
+            </div>
+            <button style="    margin-top: 56px;"  *ngIf="valid" class="ui positive button active" id="guardarCubicacion">Finalizar
+                Cubicación</button>
         </form>
 
     </div>

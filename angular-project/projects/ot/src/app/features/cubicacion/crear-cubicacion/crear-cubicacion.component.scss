@@ -97,3 +97,8 @@
 table {
   margin-left: 81px;
 }
+
+:host ::ng-deep .p-dropdown{
+  width: 333px;
+  margin-left: 50px;
+}
