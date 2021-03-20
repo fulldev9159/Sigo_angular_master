@@ -121,7 +121,7 @@ export interface OT {
 // Get OT
 
 export interface RequestGetOt {
-    // user: string;
+  // user: string;
   token: string;
 }
 export interface DataGetOT {
@@ -140,4 +140,17 @@ export interface OT {
   pmo_codigo: string;
   pep2_codigo: string;
   pep2_provisorio: boolean;
+}
+
+// GET OT
+
+export interface TableOT {
+  nombre_ot: string;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  fecha_creacion: Date;
+  contrato: string;
+  proveedor: string;
+  gestor: string;
+  tipo_ot: string;
 }
