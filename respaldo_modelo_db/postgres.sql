@@ -1,8 +1,16 @@
 /*Todos los contratos */
-select * from contratos ;
+select * from contratos where estado='A';
+select * from proveedores; 
+-- Proveedores_contrato (subcontratos)
+SELECT c.nombre,p.nombre,cp.codigo_acuerdo,cp.fecha_inicio,cp.fecha_termino,cp.region_id from contratos_proveedores cp INNER JOIN proveedores p on cp.proveedor_id=p.id INNER JOIN contratos c on cp.contrato_id= c.id where cp.contrato_id=1 ;
+select * from tipo_servicio where estado='A';
+select * from servicios where estado='A' and contrato_id=1;
+select * from proveedores_servicios where estado='A' and contrato_id=1;
+
+
 
 select * from tipo_moneda where id in (2,4);
-select a.id,a.nombre,a.tipo_servicio_id,b.nombre from servicios a INNER JOIN tipo_servicio b on a.tipo_servicio_id= b.id where a.id in (12156,12158,12157,12164,29769,29771,28872,28873,28874,363,364,365,366);
+select s.id,s.nombre,s.tipo_servicio_id,s.nombre from servicios s INNER JOIN tipo_servicio b on s.tipo_servicio_id= b.id where s.id in (12156,12158,12157,12164,29769,29771,28872,28873,28874,363,364,365,366);
 
 /*select * from servicios where id in (12164,12158);*/
 

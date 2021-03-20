@@ -189,7 +189,7 @@ export class CrearOtComponent implements OnInit {
 
   save(): void {
     let pep2id = this.values.pep2Id;
-    let Isprovisorio: boolean = false;
+    let Isprovisorio = false;
     if (this.values.pep2Id === 'provisorio') {
       Isprovisorio = true;
       pep2id = this.values.pep2provisorio;
@@ -213,10 +213,10 @@ export class CrearOtComponent implements OnInit {
     console.log(ot);
 
     // this.otService.saveOT(ot).subscribe((x) => {
-      // this.sharedService.showMessage(
-      //   'OT almacenada exitosamente',
-      //   'ok'
-      // );
+    // this.sharedService.showMessage(
+    //   'OT almacenada exitosamente',
+    //   'ok'
+    // );
     //   console.log(x);
     //   this.sharedService.navegateTo('dashboard/ot');
     // });
