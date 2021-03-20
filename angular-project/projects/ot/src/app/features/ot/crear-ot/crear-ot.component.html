@@ -1,3 +1,4 @@
+<p-confirmPopup></p-confirmPopup>
 <div class="section">
     <div class="left-navbar"></div>
     <div class="content ui segment" style="  width: 72%;
@@ -100,7 +101,7 @@
                                 [formControlName]="'pep2Id'" style="width: 326px;
                         height: 40px;margin-left: 56px;">
                                 <option value="">Seleccione un PEP2....</option>
-                                <option value="0">PEP2 Provisorio</option>
+                                <option value="provisorio">PEP2 Provisorio</option>
                                 <option *ngFor="let sitio of PEP2Arr" value="{{sitio}}">
                                     {{sitio}}</option>
                             </select>
@@ -119,7 +120,7 @@
                             </select>
                         </div>
 
-                        <div class="field" style="width: 326px;" *ngIf="form.value.pep2Id==='0'">
+                        <div class="field" style="width: 326px;" *ngIf="form.value.pep2Id==='provisorio'">
                             <label>PEP2 Provisorio</label>
                             <input type="text" class="pep2provisorio-ot" [formControlName]="'pep2provisorio'" name="pep2provisorio" id="pep2provisorio"
                                 style="margin-top: 9px;margin-left: 51px;">
@@ -185,14 +186,14 @@
 
             </div>
 
-            
+            Será notificado el Administrador de la empresa contratista:             . Para su aceptación
 
             <div style="    margin-top: 56px;"  pTooltip="Debe llenar todos los campos" tooltipPosition="top">
                 <button *ngIf="!valid" class="ui positive button active" disabled>Finalizar
-                    Cubicación</button>
+                    OT</button>
             </div>
-            <button style="    margin-top: 56px;"  *ngIf="valid" class="ui positive button active" id="guardarCubicacion">Finalizar
-                Cubicación</button>
+            <button (click)="save()" style="    margin-top: 56px;"  *ngIf="valid" class="ui positive button active" id="guardarCubicacion">Finalizar
+                OT</button>
         </form>
 
     </div>

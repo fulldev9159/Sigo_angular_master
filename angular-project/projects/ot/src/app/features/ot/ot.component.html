@@ -1,1 +1,55 @@
-<p>ot works!</p>
+<p-confirmPopup></p-confirmPopup>
+<div class="section">
+    <div class="left-navbar"></div>
+    <div class="content ui segment">
+        <!-- <p-table [value]="cubicaciones">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:20px;text-align: center;">ID</th>
+                    <th style="width:289px;text-align: center;">Nombre</th>
+                    <th style="width: 177px;
+                text-align: center;">Fecha creación</th>
+                    <th style="text-align: center;">Region</th>
+                    <th style="text-align: center;">Contrato marco</th>
+                    <th style="text-align: center;">Proveedor</th>
+                    <th style="text-align: center;">Total</th>
+                    <th style="text-align: center;width: 223px;">Opciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-cub>
+                <tr>
+                    <td class="center">{{cub.cubicacion_id}}</td>
+                    <td class="center">{{cub.nombre}}</td>
+                    <td class="center">{{cub.fecha}}</td>
+                    <td style="text-align: center;">{{cub.region}}</td>
+                    <td class="center" style="text-align: center;">{{cub.contrato_marco}}</td>
+                    <td class="center" style="text-align: center;">{{cub.proveedor}}</td>
+                    <td class="center" style="text-align: center;">${{cub.total| number: '1.0-0':'es-CL'}}</td>
+                    <td style="text-align: center;">
+                        <button id="buttonDetalles-{{cub.cubicacion_id}}" class="circular ui icon button"
+                            pTooltip="Ver detalles" tooltipPosition="top" placeholder="Top"
+                            (click)="displayModalDetaillesCubicacion(cub.cubicacion_id)">
+                            <i class="eye icon"></i>
+                        </button>
+                        <button id="buttonCopiar-{{cub.cubicacion_id}}" class="circular ui icon button"
+                            pTooltip="Crear copia" tooltipPosition="top" placeholder="Top"
+                            (click)="clonar(cub.cubicacion_id)">
+                            <i class="clone icon"></i>
+                        </button>
+                        <button id="buttonEditar-{{cub.cubicacion_id}}" *ngIf="!cub.asignado"
+                            class="circular ui icon button" pTooltip="Editar" tooltipPosition="top" placeholder="Top"
+                            (click)="editar(cub.cubicacion_id)">
+                            <i class="edit icon"></i>
+                        </button>
+                        <button id="buttonEliminar-{{cub.cubicacion_id}}" *ngIf="!cub.asignado"
+                            class="circular ui icon button red" pTooltip="Eliminar"
+                            (click)="confirmEliminacion($event,cub.cubicacion_id)" tooltipPosition="top"
+                            placeholder="Top">
+                            <i class="trash icon"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table> -->
+    </div>
+</div>

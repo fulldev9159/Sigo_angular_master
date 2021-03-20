@@ -86,4 +86,38 @@ export class OtService {
       JSON.stringify(request)
     );
   }
+
+  saveOT(ot: OTModel.OT): Observable<Response<string>> {
+    const request: OTModel.OT = {
+      token: this.token,
+      nombre_ot: ot.nombre_ot,
+      tipo_ot: ot.tipo_ot,
+      cubicacion_id: ot.cubicacion_id,
+      plan_despliegue_id: ot.plan_despliegue_id,
+      emplazamiento_id: ot.emplazamiento_id,
+      fecha_inicio: ot.fecha_inicio,
+      fecha_fin: ot.fecha_fin,
+      observacion: ot.observacion,
+      linea_presupuestaria_codigo: ot.linea_presupuestaria_codigo,
+      pmo_codigo: ot.pmo_codigo,
+      pep2_codigo: ot.pep2_codigo,
+      pep2_provisorio: ot.pep2_provisorio,
+    };
+    return (this.httpClient as HttpClient).post<Response<string>>(
+      `${this.apiBase}/saveOT`,
+      JSON.stringify(request)
+    );
+  }
+
+
+  getOT(): Observable<Response<OTModel.DataGetOT>> {
+    const request: OTModel.RequestGetOt = {
+      token: this.token,
+      // user_id:
+    };
+    return (this.httpClient as HttpClient).post<Response<OTModel.DataGetOT>>(
+      `${this.apiBase}/GetOT`,
+      JSON.stringify(request)
+    );
+  }
 }

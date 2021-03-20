@@ -12,6 +12,7 @@ export interface OTForm {
   fechatermino: Date;
   observacion: string;
   pep2provisorio: string;
+  pep2Id: string;
 }
 
 export interface DropdownForm {
@@ -97,4 +98,46 @@ export interface RequestPEP2 {
 
 export interface DataPEP2 {
   pep2: string[];
+}
+
+// GUARDAR OT
+
+export interface OT {
+  token: string;
+  nombre_ot: string;
+  tipo_ot: string;
+  cubicacion_id: number;
+  plan_despliegue_id: number;
+  emplazamiento_id: number;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  observacion: string;
+  linea_presupuestaria_codigo: string;
+  pmo_codigo: string;
+  pep2_codigo: string;
+  pep2_provisorio: boolean;
+}
+
+// Get OT
+
+export interface RequestGetOt {
+    // user: string;
+  token: string;
+}
+export interface DataGetOT {
+  ots: OT[];
+}
+export interface OT {
+  nombre_ot: string;
+  tipo_ot: string;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  cubicacion_id: number;
+  plan_despliegue_id: number;
+  emplazamiento_id: number;
+  observacion: string;
+  linea_presupuestaria_codigo: string;
+  pmo_codigo: string;
+  pep2_codigo: string;
+  pep2_provisorio: boolean;
 }

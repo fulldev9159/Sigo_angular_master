@@ -186,4 +186,35 @@ export class CrearOtComponent implements OnInit {
   }
 
   selectedpep2(): void {}
+
+  save(): void {
+    let pep2id = this.values.pep2Id;
+    let Isprovisorio: boolean = false;
+    if (this.values.pep2Id === 'provisorio') {
+      Isprovisorio = true;
+      pep2id = this.values.pep2provisorio;
+    }
+    const ot: OTModel.OT = {
+      token: '',
+      nombre_ot: this.values.nombre,
+      tipo_ot: this.values.tipoOT,
+      cubicacion_id: parseInt(this.values.cubicacionId, 10),
+      plan_despliegue_id: parseInt(this.values.planId, 10),
+      emplazamiento_id: parseInt(this.values.sitioId.code, 10),
+      fecha_inicio: this.values.fechainicio,
+      fecha_fin: this.values.fechatermino,
+      observacion: this.values.observacion,
+      linea_presupuestaria_codigo: this.values.lineapresupuestariaId,
+      pmo_codigo: this.values.pmoId,
+      pep2_codigo: pep2id,
+      pep2_provisorio: Isprovisorio,
+    };
+
+    console.log(ot);
+
+    // this.otService.saveOT(ot).subscribe((x) => {
+    //   console.log(x);
+    //   this.sharedService.navegateTo('dashboard/ot');
+    // });
+  }
 }
