@@ -50,6 +50,10 @@ export class LoginComponent implements OnInit {
             'nombreCompleto',
             response.data.nombre_usuario
           );
+          this.authService.setItemStorage(
+            'userId',
+            response.data.usuario_id.toString()
+          );
           Object.keys(response.data.roles_modulos).forEach((roles) => {
             this.authService.setItemStorage('rol', roles);
           });

@@ -1,11 +1,60 @@
+
 /*Todos los contratos */
 select * from contratos where estado='A';
-select * from proveedores; 
--- Proveedores_contrato (subcontratos)
-SELECT c.nombre,p.nombre,cp.codigo_acuerdo,cp.fecha_inicio,cp.fecha_termino,cp.region_id from contratos_proveedores cp INNER JOIN proveedores p on cp.proveedor_id=p.id INNER JOIN contratos c on cp.contrato_id= c.id where cp.contrato_id=1 ;
+select rut,dv,nombre,email,telefono,direccion,estado,tipo_proveedor_id from proveedores where estado='A'; 
+-- contratos_proveedores (subcontratos) para que se usa esta tabla? debería representar el subcontrato. Aparentemente no se usa realmente en el sistema de DB
+select DISTINCT(contrato_id) from contratos_proveedores;
+SELECT c.nombre,p.nombre,cp.codigo_acuerdo,cp.fecha_inicio,cp.fecha_termino,cp.region_id from contratos_proveedores cp INNER JOIN proveedores p on cp.proveedor_id=p.id INNER JOIN contratos c on cp.contrato_id= c.id where cp.contrato_id=25 ;
+-- Esta tabla sería nuestra tabla subcontrato pero ellos a nivel de db solo lo usan para almacenar info. Nosotros lo usamos de base para las LPU
+select * from proveedores_numeroscontratos where contrato_id=25 and proveedor_id=10059;
+
+-- Servicios de un proveedor
+--- Nombres de Servicios de un contrato y de un proveedor para luego procesar y dejar los unicos
+select DISTINCT(nombre) from servicios s INNER JOIN proveedores_servicios ps on ps.servicio_id=s.id where s.estado='A' and ps.contrato_id=25 and ps.proveedor_id= 10059 order by nombre;
+-- LPUS
+-- Los nombres se parecen y están incompletos Especiales Suministro de un metro adicional a 10 metros de  cruzada
+select ps.region_id,s.tipo_servicio_id,s.nombre, ps.precio,ps.tipo_moneda_id, ps.numero_producto from servicios s INNER JOIN proveedores_servicios ps on ps.servicio_id=s.id where s.estado='A' and ps.contrato_id=25 and ps.proveedor_id= 10059 ;
+--- hay servicios con el mismo nombre pero con distinto tipo
+select * from servicios where nombre like '%Especiales Readecuación de Red - Instalación/Integración Nodob/BTS%'
+---- Servicios con distinta ciudad
+select * from servicios where nombre like '%Especiales Adicional por transporte de materiales desde 15,1 a 30 Mts3 %'
+--- servicios proveedores
+select ps.proveedor_id,ps.contrato_id,ps.precio,s.nombre from servicios s INNER JOIN proveedores_servicios ps on ps.servicio_id=s.id where s.estado='A' and s.nombre like '%TRASLADO ING/TEC SOPORTE AÉREO IDA Y RETORNO Región%'
+
 select * from tipo_servicio where estado='A';
-select * from servicios where estado='A' and contrato_id=1;
-select * from proveedores_servicios where estado='A' and contrato_id=1;
+
+
+
+-- Distintos contratos usados en cubicaciones
+select DISTINCT(cc.nombre) from cubicador_detalle cd INNER JOIN cubicador c on cd.cubicador_id=c.id INNER JOIN contratos cc on c.contrato_id=cc.id;
+-- UNIFICADO-2019-FIJA
+-- Desmantelamiento
+-- MINERIA
+-- UNIFICADO-2019-MOVIL
+-- Contrato Unificado
+-- LVES
+
+-- Mayor cantidad de serivicos por cubicacion UNIFICADO-2019-MOVIL
+select cubicador_id,p.nombre,c.proveedor_id,count(*) from cubicador_detalle cd INNER JOIN cubicador c on cd.cubicador_id=c.id INNER JOIN proveedores p on c.proveedor_id = p.id where c.contrato_id=25 and c.proveedor_id not in (10058) GROUP BY cubicador_id,p.nombre,c.proveedor_id HAVING count(*)>10;
+-- 54652	SIAE Microelettronica Chile SPA	10045	12
+-- 56334	SIAE Microelettronica Chile SPA	10045	11
+-- 53188	GENERATEL SPA	10059	12
+-- 45719	SIAE Microelettronica Chile SPA	10045	11
+-- 56922	TECNOCOM CHILE S.A.	7	12
+-- 47873	GENERATEL SPA	10059	11
+
+-- Datos de los servicios de una cubicacion
+select  s.nombre from cubicador_detalle cd INNER JOIN cubicador c on cd.cubicador_id=c.id INNER JOIN servicios s on cd.servicio_id=s.id where cubicador_id=53188;
+select * from proveedores where id=10059;
+-- Roles de los usuarios de un proveedor -- GENERATEL SPA 10059
+select u.nombre_usuario as nombre_usuario,r.nombre from usuarios u INNER JOIN usuarios_roles ur on u.id= ur.usuario_id INNER JOIN roles r on r.id= ur.rol_id  where proveedor_id=10059 and u.estado='A' ;
+-- Seleccion de usuarios proveedor
+select u.nombre_usuario as nombre_usuario,u.rut,u.dv,nombres,apellidos,celular,u.estado,p.nombre,area_id,u.email from usuarios u  INNER JOIN proveedores p on u.proveedor_id=p.id where proveedor_id=10059 and u.estado='A' ;
+
+-- Agregar Contrato
+select * from contratos where id=25;
+
+
 
 
 

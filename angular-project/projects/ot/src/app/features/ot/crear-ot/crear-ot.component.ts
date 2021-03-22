@@ -30,7 +30,7 @@ export class CrearOtComponent implements OnInit {
   PMOSelected: OTModel.PMO = {} as OTModel.PMO;
   public LineaPresupuestariaArr: string[] = [];
   LineaPresupuestariaSelected = '';
-  public PEP2Arr: string[] = [];
+  public PEP2Arr: OTModel.PEP2[] = [];
   PEP2Selected = '';
   public autoResize = false;
 
@@ -195,7 +195,6 @@ export class CrearOtComponent implements OnInit {
       pep2id = this.values.pep2provisorio;
     }
     const ot: OTModel.OT = {
-      token: '',
       nombre_ot: this.values.nombre,
       tipo_ot: this.values.tipoOT,
       cubicacion_id: parseInt(this.values.cubicacionId, 10),
@@ -203,7 +202,7 @@ export class CrearOtComponent implements OnInit {
       emplazamiento_id: parseInt(this.values.sitioId.code, 10),
       fecha_inicio: this.values.fechainicio,
       fecha_fin: this.values.fechatermino,
-      observacion: this.values.observacion,
+      observaciones: this.values.observacion,
       linea_presupuestaria_codigo: this.values.lineapresupuestariaId,
       pmo_codigo: this.values.pmoId,
       pep2_codigo: pep2id,
@@ -212,13 +211,13 @@ export class CrearOtComponent implements OnInit {
 
     console.log(ot);
 
-    // this.otService.saveOT(ot).subscribe((x) => {
-    // this.sharedService.showMessage(
-    //   'OT almacenada exitosamente',
-    //   'ok'
-    // );
-    //   console.log(x);
-    //   this.sharedService.navegateTo('dashboard/ot');
-    // });
+    this.otService.saveOT(ot).subscribe((x) => {
+    this.sharedService.showMessage(
+      'OT almacenada exitosamente',
+      'ok'
+    );
+      console.log(x);
+      this.sharedService.navegateTo('dashboard/ot');
+    });
   }
 }

@@ -87,9 +87,10 @@ export class OtService {
     );
   }
 
-  saveOT(ot: OTModel.OT): Observable<Response<string>> {
-    const request: OTModel.OT = {
+  saveOT(ot: OTModel.OT): Observable<Response<OTModel.DataSaveOT>> {
+    const request: OTModel.RequestOT = {
       token: this.token,
+      gestor_id: parseInt(localStorage.getItem('userId') as string,10),
       nombre_ot: ot.nombre_ot,
       tipo_ot: ot.tipo_ot,
       cubicacion_id: ot.cubicacion_id,
@@ -97,13 +98,13 @@ export class OtService {
       emplazamiento_id: ot.emplazamiento_id,
       fecha_inicio: ot.fecha_inicio,
       fecha_fin: ot.fecha_fin,
-      observacion: ot.observacion,
+      observaciones: ot.observaciones,
       linea_presupuestaria_codigo: ot.linea_presupuestaria_codigo,
       pmo_codigo: ot.pmo_codigo,
       pep2_codigo: ot.pep2_codigo,
       pep2_provisorio: ot.pep2_provisorio,
     };
-    return (this.httpClient as HttpClient).post<Response<string>>(
+    return (this.httpClient as HttpClient).post<Response<OTModel.DataSaveOT>>(
       `${this.apiBase}/saveOT`,
       JSON.stringify(request)
     );

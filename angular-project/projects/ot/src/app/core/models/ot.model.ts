@@ -97,13 +97,15 @@ export interface RequestPEP2 {
 }
 
 export interface DataPEP2 {
-  pep2: string[];
+  pep2: PEP2[];
 }
 
-// GUARDAR OT
+export interface PEP2{
+  linea_presupuestaria_id: number
+  pep2_codigo: string
+}
 
 export interface OT {
-  token: string;
   nombre_ot: string;
   tipo_ot: string;
   cubicacion_id: number;
@@ -111,7 +113,26 @@ export interface OT {
   emplazamiento_id: number;
   fecha_inicio: Date;
   fecha_fin: Date;
-  observacion: string;
+  observaciones: string;
+  linea_presupuestaria_codigo: string;
+  pmo_codigo: string;
+  pep2_codigo: string;
+  pep2_provisorio: boolean;
+}
+
+// GUARDAR OT
+
+export interface RequestOT {
+  token: string;
+  gestor_id: number;
+  nombre_ot: string;
+  tipo_ot: string;
+  cubicacion_id: number;
+  plan_despliegue_id: number;
+  emplazamiento_id: number;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  observaciones: string;
   linea_presupuestaria_codigo: string;
   pmo_codigo: string;
   pep2_codigo: string;
@@ -125,9 +146,9 @@ export interface RequestGetOt {
   token: string;
 }
 export interface DataGetOT {
-  ots: OT[];
+  ots: dataOT[];
 }
-export interface OT {
+export interface dataOT {
   nombre_ot: string;
   tipo_ot: string;
   fecha_inicio: Date;
@@ -135,7 +156,7 @@ export interface OT {
   cubicacion_id: number;
   plan_despliegue_id: number;
   emplazamiento_id: number;
-  observacion: string;
+  observaciones: string;
   linea_presupuestaria_codigo: string;
   pmo_codigo: string;
   pep2_codigo: string;
@@ -153,4 +174,10 @@ export interface TableOT {
   proveedor: string;
   gestor: string;
   tipo_ot: string;
+}
+
+
+export interface DataSaveOT{
+  ot_id: number,
+  admin_contrato_nombre: string
 }

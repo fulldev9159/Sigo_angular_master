@@ -27,6 +27,7 @@ export interface DataResponseLogin {
       };
     };
   };
+  usuario_id: number;
 }
 
 export interface LogoutRequest {
