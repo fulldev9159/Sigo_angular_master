@@ -90,7 +90,7 @@ export class OtService {
   saveOT(ot: OTModel.OT): Observable<Response<OTModel.DataSaveOT>> {
     const request: OTModel.RequestOT = {
       token: this.token,
-      gestor_id: parseInt(localStorage.getItem('userId') as string,10),
+      gestor_id: parseInt(localStorage.getItem('userId') as string, 10),
       nombre_ot: ot.nombre_ot,
       tipo_ot: ot.tipo_ot,
       cubicacion_id: ot.cubicacion_id,
@@ -109,7 +109,6 @@ export class OtService {
       JSON.stringify(request)
     );
   }
-
 
   getOT(): Observable<Response<OTModel.DataGetOT>> {
     const request: OTModel.RequestGetOt = {

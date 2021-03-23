@@ -212,10 +212,7 @@ export class CrearOtComponent implements OnInit {
     console.log(ot);
 
     this.otService.saveOT(ot).subscribe((x) => {
-    this.sharedService.showMessage(
-      'OT almacenada exitosamente',
-      'ok'
-    );
+      this.sharedService.showMessage('OT almacenada exitosamente', 'ok');
       console.log(x);
       this.sharedService.navegateTo('dashboard/ot');
     });

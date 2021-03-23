@@ -130,6 +130,7 @@ describe('LoginComponent', () => {
             },
           },
         },
+        usuario_id: 1,
       },
       status: {
         responseCode: 0,

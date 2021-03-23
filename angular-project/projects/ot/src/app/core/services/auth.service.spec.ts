@@ -98,6 +98,7 @@ describe('AuthService', () => {
             },
           },
         },
+        usuario_id: 1,
       },
       status: {
         responseCode: 0,

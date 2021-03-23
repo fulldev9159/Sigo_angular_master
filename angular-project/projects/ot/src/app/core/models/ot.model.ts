@@ -100,9 +100,9 @@ export interface DataPEP2 {
   pep2: PEP2[];
 }
 
-export interface PEP2{
-  linea_presupuestaria_id: number
-  pep2_codigo: string
+export interface PEP2 {
+  linea_presupuestaria_id: number;
+  pep2_codigo: string;
 }
 
 export interface OT {
@@ -146,9 +146,9 @@ export interface RequestGetOt {
   token: string;
 }
 export interface DataGetOT {
-  ots: dataOT[];
+  ots: DataOT[];
 }
-export interface dataOT {
+export interface DataOT {
   nombre_ot: string;
   tipo_ot: string;
   fecha_inicio: Date;
@@ -176,8 +176,7 @@ export interface TableOT {
   tipo_ot: string;
 }
 
-
-export interface DataSaveOT{
-  ot_id: number,
-  admin_contrato_nombre: string
+export interface DataSaveOT {
+  ot_id: number;
+  admin_contrato_nombre: string;
 }
