@@ -29,7 +29,17 @@ Framework javascript que permite desarrollar grandes y complejas aplicaciones en
 
 ## Links
 
-- Miro: <https://miro.com/app/board/o9J_laHeYUg=/>
+- Miro: <https://miro.com/app/board/o9J_lRnu24c=/>
 - Repo API-Otec: <http://gitserver.zweicom.com/cl-movistar/otec-cigpe/api-otec>
 - Repo Db: <http://gitserver.zweicom.com/database/databases/blob/master/docker-compose.yml>
 - Repo Env: <http://gitserver.zweicom.com/Products/SCE/demos-env/blob/develop/docker-compose.yml>
+- 
+
+## Ejecución
+
+- cd ambiente-local
+- docker-compose up -d -d mcl_api_otec
+- cd ../angular-project
+- npm install
+- npm start
+
