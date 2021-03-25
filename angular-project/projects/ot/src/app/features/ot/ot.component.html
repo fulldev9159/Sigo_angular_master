@@ -6,6 +6,7 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th style="width:20px;text-align: center;">ID</th>
+                    <th style="width:20px;text-align: center;">sesión SCE</th>
                     <th style="width:289px;text-align: center;">Nombre</th>
                     <th style="width: 177px;
                     text-align: center;">Fecha inicio</th>
@@ -21,6 +22,7 @@
             <ng-template pTemplate="body" let-ot>
                 <tr style="    font-size: 13px;">
                     <td class="center">{{ot.ot_id}}</td>
+                    <td class="center">{{ot.sesion_sce}}</td>
                     <td class="center">{{ot.nombre_ot}}</td>
                     <td class="center">{{ot.fecha_inicio}}</td>
                     <td class="center">{{ot.fecha_fin}}</td>
