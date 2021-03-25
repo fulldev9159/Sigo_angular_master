@@ -9,8 +9,8 @@ import { AuthService } from '@coreOT/services/auth.service';
 })
 export class OtService {
   apiBase: string;
-  username = this.authService.getItemStorage('username') as string;
-  token = this.authService.getItemStorage('otec_token') as string;
+  username = localStorage.getItem('username') as string;
+  token = localStorage.getItem('otec_token') as string;
 
   constructor(
     @Inject('environment') environment,

@@ -10,8 +10,8 @@ import { AuthService } from '@coreOT/services/auth.service';
 })
 export class CubicacionService {
   apiBase: string;
-  username = this.authService.getItemStorage('username') as string;
-  token = this.authService.getItemStorage('otec_token') as string;
+  username = localStorage.getItem('username') as string;
+  token = localStorage.getItem('otec_token') as string;
 
   constructor(
     @Inject('environment') environment,
@@ -175,23 +175,19 @@ export class CubicacionService {
     };
 
     console.log(request);
-    return (this
-      .httpClient as HttpClient).post<Response<string>>(
+    return (this.httpClient as HttpClient).post<Response<string>>(
       `${this.apiBase}/saveEditCubicacion`,
       JSON.stringify(request)
     );
   }
 
-  eliminarCubicacion(
-    idCubicacion: number
-  ): Observable<Response<string>> {
+  eliminarCubicacion(idCubicacion: number): Observable<Response<string>> {
     const request: CubicacionModel.RequestBorrarCubicaciones = {
       user: this.username,
       token: this.token,
       id_cubicacion: idCubicacion,
     };
-    return (this
-      .httpClient as HttpClient).post<Response<string>>(
+    return (this.httpClient as HttpClient).post<Response<string>>(
       `${this.apiBase}/deleteCubicacion`,
       JSON.stringify(request)
     );
