@@ -110,13 +110,27 @@ export class OtService {
     );
   }
 
-  getOT(): Observable<Response<OTModel.DataGetOT>> {
+  getOT(column: string): Observable<Response<OTModel.DataGetOT>> {
     const request: OTModel.RequestGetOt = {
       token: this.token,
-      // user_id:
+      nombre_columna: column,
+      usuario_id: parseInt(localStorage.getItem('userId') as string, 10),
     };
     return (this.httpClient as HttpClient).post<Response<OTModel.DataGetOT>>(
-      `${this.apiBase}/GetOT`,
+      `${this.apiBase}/listarOTs`,
+      JSON.stringify(request)
+    );
+  }
+
+  setAceptacion(sesion: string, message: string): Observable<Response<string>> {
+    const request: OTModel.RequestSetAceptacion = {
+      token: this.token,
+      sesion_sce: sesion,
+      respuesta_aceptacion: message,
+    };
+
+    return (this.httpClient as HttpClient).post<Response<string>>(
+      `${this.apiBase}/aceptarRechazar`,
       JSON.stringify(request)
     );
   }

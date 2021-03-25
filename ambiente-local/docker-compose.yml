@@ -47,3 +47,7 @@ services:
 
     # export OTEC_DB="root:pass@tcp(localhost:3307)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true"
     # export API_SCE_ADDRESS="http://35.192.99.178:2004"
+
+
+# curl -vvv -X POST -d'{"parameters":{"msisdn":"ot"}}'  http://35.192.99.178:2004/tenants/default/trees/mcl_OT/releases/production/execution%7C python -m json.tool
+# curl -vvv -X POST -H 'X-Session-Id: 01F1D7Q6BJ6KNS5WY1QYDNEYA9' -d'{"parameters":{"respuestaAceptacion":"OTAceptadaAdminEC"}}'  http://35.192.99.178:2004/tree/continue%7C python -m json.tool

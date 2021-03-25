@@ -19,7 +19,7 @@
             OT
             <i class="dropdown icon"></i>
             <div class="menu">
-                <div class="item" (click)="navegateTo('dashboard/ot/crear-ot')" id="crear-ot-submenu">Crear OT</div>
+                <div class="item" (click)="navegateTo('dashboard/ot/crear-ot')" [ngClass]="(showOnlyForRol('Gestor')||showOnlyForRol('Administrador OTEC'))?'show-menu':'hide-menu'" id="crear-ot-submenu">Crear OT</div>
                 <div class="item" (click)="navegateTo('dashboard/ot')" id="listar-ot-submenu">Listar OT</div>
             </div>
         </a>

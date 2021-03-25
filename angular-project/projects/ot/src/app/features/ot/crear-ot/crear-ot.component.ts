@@ -34,6 +34,9 @@ export class CrearOtComponent implements OnInit {
   PEP2Selected = '';
   public autoResize = false;
 
+  showModal = false;
+  adminContrato = '';
+
   constructor(
     private readonly fb: FormBuilder,
     private cubicacionService: CubicacionService,
@@ -82,7 +85,9 @@ export class CrearOtComponent implements OnInit {
   ngOnInit(): void {
     this.cubicacionService.getCubicaciones().subscribe(
       (response) => {
-        this.cubicaciones = response.data.cubicaciones;
+        this.cubicaciones = response.data.cubicaciones.filter(
+          (x) => x.asignado !== true
+        );
       },
       (err: HttpErrorResponse) => {
         this.sharedService.showMessage(
@@ -112,7 +117,7 @@ export class CrearOtComponent implements OnInit {
       (sitios) => {
         this.SitiosArr = sitios.data.sitios;
         this.sitios = this.SitiosArr.map((x) => ({
-          name: `${x.nombre_sitio} - ${x.codigo}`,
+          name: `${x.codigo} - ${x.nombre_sitio}`,
           code: x.sitio_id,
         }));
       },
@@ -212,9 +217,13 @@ export class CrearOtComponent implements OnInit {
     console.log(ot);
 
     this.otService.saveOT(ot).subscribe((x) => {
-      this.sharedService.showMessage('OT almacenada exitosamente', 'ok');
-      console.log(x);
-      this.sharedService.navegateTo('dashboard/ot');
+      this.adminContrato = x.data.admin_contrato_nombre;
+      this.showModal = true;
     });
+  }
+
+  ok(): void {
+    this.sharedService.showMessage('OT almacenada exitosamente', 'ok');
+    this.sharedService.navegateTo('dashboard/ot');
   }
 }

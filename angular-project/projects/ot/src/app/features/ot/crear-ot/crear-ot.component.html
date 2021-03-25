@@ -186,8 +186,6 @@
 
             </div>
 
-            Será notificado el Administrador de la empresa contratista:             . Para su aceptación
-
             <div style="    margin-top: 56px;"  pTooltip="Debe llenar todos los campos" tooltipPosition="top">
                 <button *ngIf="!valid" class="ui positive button active" disabled>Finalizar
                     OT</button>
@@ -198,3 +196,12 @@
 
     </div>
 </div>
+
+
+<p-dialog header="OT creada exitosamente" [(visible)]="showModal"
+    [modal]="true" [style]="{width: '54vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <div class="cubicacion-content ui segment" style="text-align: center" >
+        <p>Se informará al administrador de contrato de la empresa contratista: <strong>{{adminContrato}} </strong></p>
+        <button (click)="ok()" class="ui positive button">OK</button>
+    </div>
+</p-dialog>

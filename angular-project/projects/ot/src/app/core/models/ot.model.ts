@@ -144,39 +144,42 @@ export interface RequestOT {
 export interface RequestGetOt {
   // user: string;
   token: string;
+  nombre_columna: string;
+  usuario_id: number;
 }
 export interface DataGetOT {
-  ots: DataOT[];
+  OTs: DataOT[];
 }
 export interface DataOT {
+  ot_id: number;
   nombre_ot: string;
   tipo_ot: string;
   fecha_inicio: Date;
   fecha_fin: Date;
-  cubicacion_id: number;
-  plan_despliegue_id: number;
-  emplazamiento_id: number;
-  observaciones: string;
-  linea_presupuestaria_codigo: string;
-  pmo_codigo: string;
-  pep2_codigo: string;
-  pep2_provisorio: boolean;
-}
-
-// GET OT
-
-export interface TableOT {
-  nombre_ot: string;
-  fecha_inicio: Date;
-  fecha_fin: Date;
-  fecha_creacion: Date;
-  contrato: string;
+  contrato_marco: string;
   proveedor: string;
-  gestor: string;
-  tipo_ot: string;
+  usuario: string;
+  sesion_sce: string;
 }
+
+// export interface TableOT {
+//   nombre_ot: string;
+//   fecha_inicio: Date;
+//   fecha_fin: Date;
+//   fecha_creacion: Date;
+//   contrato: string;
+//   proveedor: string;
+//   gestor: string;
+//   tipo_ot: string;
+// }
 
 export interface DataSaveOT {
   ot_id: number;
   admin_contrato_nombre: string;
+}
+
+export interface RequestSetAceptacion {
+  token: string;
+  sesion_sce: string;
+  respuesta_aceptacion: string;
 }
