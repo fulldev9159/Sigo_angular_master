@@ -9,8 +9,8 @@ import { AuthService } from '@coreOT/services/auth.service';
 })
 export class OtService {
   apiBase: string;
-  username = localStorage.getItem('username') as string;
-  token = localStorage.getItem('otec_token') as string;
+  // username = localStorage.getItem('username') as string;
+  // token = localStorage.getItem('otec_token') as string;
 
   constructor(
     @Inject('environment') environment,
@@ -20,9 +20,13 @@ export class OtService {
     this.apiBase = environment.api || 'http://localhost:4040';
   }
 
-  getPlanes(regionId: number): Observable<Response<OTModel.DataPlanes>> {
+  getPlanes(
+    reqUsername: string,
+    reqToken: string,
+    regionId: number
+  ): Observable<Response<OTModel.DataPlanes>> {
     const request: OTModel.RequestPlanes = {
-      token: this.token,
+      token: reqToken,
       region_id: parseInt(regionId.toString(), 10),
     };
 
@@ -33,10 +37,12 @@ export class OtService {
   }
 
   getSitios(
+    reqUsername: string,
+    reqToken: string,
     plandespliegueIDOT: number
   ): Observable<Response<OTModel.DataSitios>> {
     const request: OTModel.RequestSitios = {
-      token: this.token,
+      token: reqToken,
       plandespliegue_id: parseInt(plandespliegueIDOT.toString(), 10),
     };
 
@@ -46,9 +52,13 @@ export class OtService {
     );
   }
 
-  getPMO(codigo: number): Observable<Response<OTModel.DataPMO>> {
+  getPMO(
+    reqUsername: string,
+    reqToken: string,
+    codigo: number
+  ): Observable<Response<OTModel.DataPMO>> {
     const request: OTModel.RequestPMO = {
-      token: this.token,
+      token: reqToken,
       codigo: parseInt(codigo.toString(), 10),
     };
 
@@ -59,10 +69,12 @@ export class OtService {
   }
 
   getLineaPresupuestaria(
+    reqUsername: string,
+    reqToken: string,
     pmoId: number
   ): Observable<Response<OTModel.DataLineaPresupuestaria>> {
     const request: OTModel.RequestLineaPresupuestaria = {
-      token: this.token,
+      token: reqToken,
       pmo_id: parseInt(pmoId.toString(), 10),
     };
 
@@ -72,11 +84,13 @@ export class OtService {
   }
 
   getPEP2(
+    reqUsername: string,
+    reqToken: string,
     pmoId: string,
     lineaPresupuestariaCodigo: string
   ): Observable<Response<OTModel.DataPEP2>> {
     const request: OTModel.RequestPEP2 = {
-      token: this.token,
+      token: reqToken,
       pmo_codigo: pmoId,
       linea_presupuestaria_codigo: lineaPresupuestariaCodigo,
     };
@@ -87,9 +101,13 @@ export class OtService {
     );
   }
 
-  saveOT(ot: OTModel.OT): Observable<Response<OTModel.DataSaveOT>> {
+  saveOT(
+    reqUsername: string,
+    reqToken: string,
+    ot: OTModel.OT
+  ): Observable<Response<OTModel.DataSaveOT>> {
     const request: OTModel.RequestOT = {
-      token: this.token,
+      token: reqToken,
       gestor_id: parseInt(localStorage.getItem('userId') as string, 10),
       nombre_ot: ot.nombre_ot,
       tipo_ot: ot.tipo_ot,
@@ -110,9 +128,13 @@ export class OtService {
     );
   }
 
-  getOT(column: string): Observable<Response<OTModel.DataGetOT>> {
+  getOT(
+    reqUsername: string,
+    reqToken: string,
+    column: string
+  ): Observable<Response<OTModel.DataGetOT>> {
     const request: OTModel.RequestGetOt = {
-      token: this.token,
+      token: reqToken,
       nombre_columna: column,
       usuario_id: parseInt(localStorage.getItem('userId') as string, 10),
     };
@@ -122,9 +144,14 @@ export class OtService {
     );
   }
 
-  setAceptacion(sesion: string, message: string): Observable<Response<string>> {
+  setAceptacion(
+    reqUsername: string,
+    reqToken: string,
+    sesion: string,
+    message: string
+  ): Observable<Response<string>> {
     const request: OTModel.RequestSetAceptacion = {
-      token: this.token,
+      token: reqToken,
       sesion_sce: sesion,
       respuesta_aceptacion: message,
     };

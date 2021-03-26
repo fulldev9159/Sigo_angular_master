@@ -122,42 +122,44 @@
 
                         <div class="field" style="width: 326px;" *ngIf="form.value.pep2Id==='provisorio'">
                             <label>PEP2 Provisorio</label>
-                            <input type="text" class="pep2provisorio-ot" [formControlName]="'pep2provisorio'" name="pep2provisorio" id="pep2provisorio"
-                                style="margin-top: 9px;margin-left: 51px;">
+                            <input type="text" class="pep2provisorio-ot" [formControlName]="'pep2provisorio'"
+                                name="pep2provisorio" id="pep2provisorio" style="margin-top: 9px;margin-left: 51px;">
                         </div>
                     </div>
                 </div>
 
-                <div style="width: 481px;"><p-divider></p-divider>
-                </div>                
-                <div style="display: flex;">
-                <div class="ui info message" style="    margin-left: 63px;
-                width: 384px;">
-                <div class="header">
-                    Detalles de la cubicación
+                <div style="width: 481px;">
+                    <p-divider></p-divider>
                 </div>
-                <ul class="list">
-                    <li><strong>Contrato:</strong> {{cubicacionSelected.contrato_marco}}</li>
-                    <li><strong>Proveedor:</strong> {{cubicacionSelected.proveedor}}</li>
-                    <li><strong>Región:</strong> {{cubicacionSelected.region}}</li>
-                    <li><strong>Total:</strong> ${{cubicacionSelected.total|number: '1.0-0':'es-CL'}}</li>
-                </ul>
-            </div>
-            <div class="ui info message" style="    margin-left: 16px;
+                <div style="display: flex;">
+                    <div class="ui info message" style="    margin-left: 63px;
+                width: 384px;">
+                        <div class="header">
+                            Detalles de la cubicación
+                        </div>
+                        <ul class="list">
+                            <li><strong>Contrato:</strong> {{cubicacionSelected.contrato_marco}}</li>
+                            <li><strong>Proveedor:</strong> {{cubicacionSelected.proveedor}}</li>
+                            <li><strong>Región:</strong> {{cubicacionSelected.region}}</li>
+                            <li><strong>Total:</strong> ${{cubicacionSelected.total|number: '1.0-0':'es-CL'}}</li>
+                        </ul>
+                    </div>
+                    <div class="ui info message" style="    margin-left: 16px;
             width: 410px;
             margin-top: 0;">
-                <div class="header">
-                    Detalles del plan de proyecto
+                        <div class="header">
+                            Detalles del plan de proyecto
+                        </div>
+                        <ul class="list">
+                            <li><strong>Plan:</strong> {{planSelected.plan}}</li>
+                            <li><strong>Codigo de proyecto:</strong> {{sitioSelected.codigo}}</li>
+                            <li><strong>Nombre sitio:</strong> {{sitioSelected.nombre_sitio}}</li>
+                            <li><strong>Direcccion: </strong>{{sitioSelected.direccion}}</li>
+                            <li><strong>Latitud:</strong> {{sitioSelected.latitud}}</li>
+                            <li><strong>Longitud:</strong> {{sitioSelected.longitud}} </li>
+                        </ul>
+                    </div>
                 </div>
-                <ul class="list">
-                    <li><strong>Plan:</strong> {{planSelected.plan}}</li>
-                    <li><strong>Codigo de proyecto:</strong> {{sitioSelected.codigo}}</li>
-                    <li><strong>Nombre sitio:</strong> {{sitioSelected.nombre_sitio}}</li>
-                    <li><strong>Direcccion: </strong>{{sitioSelected.direccion}}</li>
-                    <li><strong>Latitud:</strong> {{sitioSelected.latitud}}</li>
-                    <li><strong>Longitud:</strong> {{sitioSelected.longitud}} </li>
-                </ul>
-            </div></div>
 
                 <div class="field" style="display: flex;align-items: center;    align-self: baseline;justify-content: space-evenly;
                 width: 100%;margin-top: 29px;
@@ -165,7 +167,7 @@
                     <div style="display: flex;
                     flex-direction: column;">
 
-                        <label >Fecha de inicio</label>
+                        <label>Fecha de inicio</label>
                         <p-calendar [formControlName]="'fechainicio'" [showIcon]="true" inputId="icon"></p-calendar>
                         <label style="margin-top: 16px;">Fecha de termino</label>
                         <p-calendar [formControlName]="'fechatermino'" [showIcon]="true" inputId="icon"></p-calendar>
@@ -176,21 +178,18 @@
                 align-items: initial;
                 width: 100%;margin-top:10px">
                             <label style="margin-left: 56px;">Observación</label>
-                            <textarea rows="5" cols="30"  pInputTextarea [formControlName]="'observacion'" ></textarea>
+                            <textarea rows="5" cols="30" pInputTextarea [formControlName]="'observacion'"></textarea>
                         </div>
 
                     </div>
                 </div>
-
-
-
             </div>
-
-            <div style="    margin-top: 56px;"  pTooltip="Debe llenar todos los campos" tooltipPosition="top">
+            <div style="    margin-top: 56px;" pTooltip="Debe llenar todos los campos" tooltipPosition="top">
                 <button *ngIf="!valid" class="ui positive button active" disabled>Finalizar
                     OT</button>
             </div>
-            <button (click)="save()" style="    margin-top: 56px;"  *ngIf="valid" class="ui positive button active" id="guardarCubicacion">Finalizar
+            <button (click)="save()" style="    margin-top: 56px;" *ngIf="valid" class="ui positive button active"
+                id="guardarCubicacion">Finalizar
                 OT</button>
         </form>
 
@@ -198,9 +197,9 @@
 </div>
 
 
-<p-dialog header="OT creada exitosamente" [(visible)]="showModal"
-    [modal]="true" [style]="{width: '54vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-    <div class="cubicacion-content ui segment" style="text-align: center" >
+<p-dialog header="OT creada exitosamente" [(visible)]="showModal" [modal]="true" [style]="{width: '54vw'}"
+    [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <div class="cubicacion-content ui segment" style="text-align: center">
         <p>Se informará al administrador de contrato de la empresa contratista: <strong>{{adminContrato}} </strong></p>
         <button (click)="ok()" class="ui positive button">OK</button>
     </div>

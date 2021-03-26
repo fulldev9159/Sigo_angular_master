@@ -76,18 +76,23 @@ export class CrearCubicacionComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.cubicacionService.getContratos().subscribe(
-      (response) => {
-        this.contratosArr = response.data.contratos_marco;
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err);
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
+    this.cubicacionService
+      .getContratos(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string
+      )
+      .subscribe(
+        (response) => {
+          this.contratosArr = response.data.contratos_marco;
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
   confirm(event: Event, input: string): any {
@@ -168,7 +173,11 @@ export class CrearCubicacionComponent implements OnInit {
     this.form.controls.regionId.enable();
     this.form.controls.tiposervicioId.setValue('');
     this.cubicacionService
-      .getProveedoresSubcontrato(parseInt(this.values.contratoId, 10))
+      .getProveedoresSubcontrato(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        parseInt(this.values.contratoId, 10)
+      )
       .subscribe(
         (response) => {
           this.proveedorArr = response.data.proveedores;
@@ -194,7 +203,11 @@ export class CrearCubicacionComponent implements OnInit {
       )[0].subcontrato_id[0]
     );
     this.cubicacionService
-      .getRegionesSubcontrato(this.values.subcontratoId)
+      .getRegionesSubcontrato(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        this.values.subcontratoId
+      )
       .subscribe(
         (response) => {
           this.regionArr = response.data.regiones;
@@ -214,6 +227,8 @@ export class CrearCubicacionComponent implements OnInit {
     this.form.controls.tiposervicioId.setValue('');
     this.cubicacionService
       .getTipoServicioSubcontrato(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
         this.values.subcontratoId,
         parseInt(this.values.regionId, 10)
       )
@@ -242,6 +257,8 @@ export class CrearCubicacionComponent implements OnInit {
 
     this.cubicacionService
       .getServicioSubcontrato(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
         this.values.subcontratoId,
         parseInt(this.values.regionId, 10),
         parseInt(this.values.tiposervicioId, 10)
@@ -288,6 +305,8 @@ export class CrearCubicacionComponent implements OnInit {
     )[0].nombre;
     this.cubicacionService
       .saveCubicacion(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
         this.values.nombre,
         this.total,
         parseInt(this.values.regionId, 10),

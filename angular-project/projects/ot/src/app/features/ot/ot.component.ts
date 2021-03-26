@@ -25,21 +25,34 @@ export class OtComponent implements OnInit {
     } else {
       colum = 'administrador_contrato_id';
     }
-    this.otService.getOT(colum).subscribe((response) => {
-      console.log(response);
-      this.ots = response.data.OTs;
-    });
+    this.otService
+      .getOT(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        colum
+      )
+      .subscribe((response) => {
+        console.log(response);
+        this.ots = response.data.OTs;
+      });
   }
 
   Aceptacion(SesionSce: string, message: string): void {
-    this.otService.setAceptacion(SesionSce, message).subscribe((x) => {
-      const mensaje =
-        message === 'OTAceptadaAdminEC'
-          ? 'OT aceptada correctamente'
-          : 'OT rechazada correctamente';
-      this.sharedService.showMessage(mensaje, 'ok');
-      this.showAceptacion = false;
-      console.log(x);
-    });
+    this.otService
+      .setAceptacion(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        SesionSce,
+        message
+      )
+      .subscribe((x) => {
+        const mensaje =
+          message === 'OTAceptadaAdminEC'
+            ? 'OT aceptada correctamente'
+            : 'OT rechazada correctamente';
+        this.sharedService.showMessage(mensaje, 'ok');
+        this.showAceptacion = false;
+        console.log(x);
+      });
   }
 }

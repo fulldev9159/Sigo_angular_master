@@ -83,19 +83,24 @@ export class CrearOtComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cubicacionService.getCubicaciones().subscribe(
-      (response) => {
-        this.cubicaciones = response.data.cubicaciones.filter(
-          (x) => x.asignado !== true
-        );
-      },
-      (err: HttpErrorResponse) => {
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
+    this.cubicacionService
+      .getCubicaciones(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string
+      )
+      .subscribe(
+        (response) => {
+          this.cubicaciones = response.data.cubicaciones.filter(
+            (x) => x.asignado !== true
+          );
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
   selectedCubicacion(): void {
@@ -103,7 +108,11 @@ export class CrearOtComponent implements OnInit {
       (x) => x.cubicacion_id === parseInt(this.values.cubicacionId, 10)
     )[0];
     this.otService
-      .getPlanes(this.cubicacionSelected.region_id)
+      .getPlanes(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        this.cubicacionSelected.region_id
+      )
       .subscribe((response) => {
         this.PlanArr = response.data.planes;
       });
@@ -113,21 +122,27 @@ export class CrearOtComponent implements OnInit {
     this.planSelected = this.PlanArr.filter(
       (x) => x.plandespliegue_id === parseInt(this.values.planId, 10)
     )[0];
-    this.otService.getSitios(parseInt(this.values.planId, 10)).subscribe(
-      (sitios) => {
-        this.SitiosArr = sitios.data.sitios;
-        this.sitios = this.SitiosArr.map((x) => ({
-          name: `${x.codigo} - ${x.nombre_sitio}`,
-          code: x.sitio_id,
-        }));
-      },
-      (err: HttpErrorResponse) => {
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
+    this.otService
+      .getSitios(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        parseInt(this.values.planId, 10)
+      )
+      .subscribe(
+        (sitios) => {
+          this.SitiosArr = sitios.data.sitios;
+          this.sitios = this.SitiosArr.map((x) => ({
+            name: `${x.codigo} - ${x.nombre_sitio}`,
+            code: x.sitio_id,
+          }));
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
   selectedSitio(): void {
@@ -138,17 +153,23 @@ export class CrearOtComponent implements OnInit {
     this.sitioSelected = this.SitiosArr.filter(
       (x) => x.sitio_id === parseInt(this.values.sitioId.code, 10)
     )[0];
-    this.otService.getPMO(parseInt(this.sitioSelected.codigo, 10)).subscribe(
-      (response) => {
-        this.PMOArr = response.data.pmo;
-      },
-      (err: HttpErrorResponse) => {
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
+    this.otService
+      .getPMO(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        parseInt(this.sitioSelected.codigo, 10)
+      )
+      .subscribe(
+        (response) => {
+          this.PMOArr = response.data.pmo;
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
   selectedPMO(): void {
@@ -157,7 +178,11 @@ export class CrearOtComponent implements OnInit {
     //   (x) => x.codigo === parseInt(this.values.pmoId, 10)
     // )[0];
     this.otService
-      .getLineaPresupuestaria(parseInt(this.values.pmoId, 10))
+      .getLineaPresupuestaria(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        parseInt(this.values.pmoId, 10)
+      )
       .subscribe(
         (response) => {
           this.LineaPresupuestariaArr = response.data.lineas_presupuestarias;
@@ -176,7 +201,12 @@ export class CrearOtComponent implements OnInit {
       (x) => x === this.values.lineapresupuestariaId
     )[0];
     this.otService
-      .getPEP2(this.values.pmoId, this.values.lineapresupuestariaId)
+      .getPEP2(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        this.values.pmoId,
+        this.values.lineapresupuestariaId
+      )
       .subscribe(
         (response) => {
           this.PEP2Arr = response.data.pep2;
@@ -216,10 +246,16 @@ export class CrearOtComponent implements OnInit {
 
     console.log(ot);
 
-    this.otService.saveOT(ot).subscribe((x) => {
-      this.adminContrato = x.data.admin_contrato_nombre;
-      this.showModal = true;
-    });
+    this.otService
+      .saveOT(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        ot
+      )
+      .subscribe((x) => {
+        this.adminContrato = x.data.admin_contrato_nombre;
+        this.showModal = true;
+      });
   }
 
   ok(): void {

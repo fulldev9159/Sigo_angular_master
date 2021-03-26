@@ -76,7 +76,7 @@ describe('CubicacionService', () => {
         ],
       },
     };
-    service.getContratos().subscribe((response) => {
+    service.getContratos('carloscj', 'ASJJAA').subscribe((response) => {
       expect(response).toEqual(dummyLoginResponse);
     });
     const req = httpMock.expectOne('http://localhost:4040/getContratosMarco');
@@ -103,9 +103,11 @@ describe('CubicacionService', () => {
         ],
       },
     };
-    service.getProveedoresSubcontrato(contratoMarco).subscribe((response) => {
-      expect(response).toEqual(dummyLoginResponse);
-    });
+    service
+      .getProveedoresSubcontrato('carloscj', 'ASJJAA', contratoMarco)
+      .subscribe((response) => {
+        expect(response).toEqual(dummyLoginResponse);
+      });
     const req = httpMock.expectOne(
       'http://localhost:4040/getProveedoresSubcontratos'
     );
@@ -132,9 +134,11 @@ describe('CubicacionService', () => {
         ],
       },
     };
-    service.getRegionesSubcontrato(subcontratos).subscribe((response) => {
-      expect(response).toEqual(dummyLoginResponse);
-    });
+    service
+      .getRegionesSubcontrato('carloscj', 'ASJJAA', subcontratos)
+      .subscribe((response) => {
+        expect(response).toEqual(dummyLoginResponse);
+      });
     const req = httpMock.expectOne(
       'http://localhost:4040/getRegionesSubcontratos'
     );
@@ -162,7 +166,7 @@ describe('CubicacionService', () => {
       },
     };
     service
-      .getTipoServicioSubcontrato(subcontratos, region)
+      .getTipoServicioSubcontrato('carloscj', 'ASJJAA', subcontratos, region)
       .subscribe((response) => {
         expect(response).toEqual(dummyLoginResponse);
       });
@@ -174,8 +178,8 @@ describe('CubicacionService', () => {
   });
 
   it('should return Tipo Servicio', () => {
-    authService.setItemStorage('username', 'carloscj');
-    authService.setItemStorage('otec_token', 'dummytoken');
+    // authService.setItemStorage('username', 'carloscj');
+    // authService.setItemStorage('otec_token', 'dummytoken');
     const subcontratos = 1;
     const region = 1;
     const tipoServicio = 1;
@@ -197,7 +201,13 @@ describe('CubicacionService', () => {
       },
     };
     service
-      .getServicioSubcontrato(subcontratos, region, tipoServicio)
+      .getServicioSubcontrato(
+        'carloscj',
+        'ASJJAA',
+        subcontratos,
+        region,
+        tipoServicio
+      )
       .subscribe((response) => {
         expect(response).toEqual(dummyLoginResponse);
       });
@@ -242,6 +252,8 @@ describe('CubicacionService', () => {
 
     service
       .saveCubicacion(
+        'carloscj',
+        'ASJJAA',
         nombreC,
         total,
         regionID,
@@ -285,10 +297,14 @@ describe('CubicacionService', () => {
       },
     };
 
-    service.getDetalleCubicacion(1).subscribe((response) => {
-      expect(response).toEqual(dummyResponse);
-    });
-    const req = httpMock.expectOne('http://localhost:4040/getDetalleCubicacion');
+    service
+      .getDetalleCubicacion('carloscj', 'ASJJAA', 1)
+      .subscribe((response) => {
+        expect(response).toEqual(dummyResponse);
+      });
+    const req = httpMock.expectOne(
+      'http://localhost:4040/getDetalleCubicacion'
+    );
     expect(req.request.method).toBe('POST');
     req.flush(dummyResponse);
   }));

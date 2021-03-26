@@ -59,29 +59,39 @@ export class CubicacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cubicacionService.getCubicaciones().subscribe(
-      (response) => {
-        this.cubicaciones = response.data.cubicaciones;
-      },
-      (err: HttpErrorResponse) => {
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
-    this.cubicacionService.getContratos().subscribe(
-      (response) => {
-        this.contratosArr = response.data.contratos_marco;
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err);
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
+    this.cubicacionService
+      .getCubicaciones(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string
+      )
+      .subscribe(
+        (response) => {
+          this.cubicaciones = response.data.cubicaciones;
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
+    this.cubicacionService
+      .getContratos(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string
+      )
+      .subscribe(
+        (response) => {
+          this.contratosArr = response.data.contratos_marco;
+        },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
   }
 
   displayModalDetaillesCubicacion(id: number): void {
@@ -90,7 +100,11 @@ export class CubicacionComponent implements OnInit {
       (x) => x.cubicacion_id === id
     )[0];
     this.cubicacionService
-      .getDetalleCubicacion(this.cubicacionSelected.cubicacion_id)
+      .getDetalleCubicacion(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        this.cubicacionSelected.cubicacion_id
+      )
       .subscribe((response) => {
         this.detallesCubicacionSelected = response.data.detalle_cubicacion;
       });
@@ -102,75 +116,54 @@ export class CubicacionComponent implements OnInit {
     )[0];
     const NombreClon = `Copia de ${this.cubicacionSelected.nombre}`;
 
-    this.cubicacionService.getDetalleCubicacion(id).subscribe(
-      (detallesCubicacion) => {
-        const lpus: CubicacionModel.Lpus[] = detallesCubicacion.data.detalle_cubicacion.map(
-          (x) => ({ id_lpu: x.id_lpu, cantidad: x.cantidad })
-        );
-
-        this.cubicacionService
-          .saveCubicacion(
-            NombreClon,
-            this.cubicacionSelected.total,
-            this.cubicacionSelected.region_id,
-            this.cubicacionSelected.region,
-            this.cubicacionSelected.contrato_marco,
-            this.cubicacionSelected.proveedor,
-            this.cubicacionSelected.subcontrato_id,
-            lpus
-          )
-          .subscribe(
-            (responseSave) => {
-              this.sharedService.showMessage(
-                'cubicación copiada exitosamente',
-                'ok'
-              );
-              this.cubicaciones = [];
-              this.cubicacionService.getCubicaciones().subscribe(
-                (response) => {
-                  this.cubicaciones = response.data.cubicaciones;
-                },
-                (err: HttpErrorResponse) => {
-                  this.sharedService.showMessage(
-                    this.sharedService.getErrorMessage(err),
-                    'error'
-                  );
-                }
-              );
-            },
-            (err: HttpErrorResponse) => {
-              this.sharedService.showMessage(
-                this.sharedService.getErrorMessage(err),
-                'error'
-              );
-            }
+    this.cubicacionService
+      .getDetalleCubicacion(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        id
+      )
+      .subscribe(
+        (detallesCubicacion) => {
+          const lpus: CubicacionModel.Lpus[] = detallesCubicacion.data.detalle_cubicacion.map(
+            (x) => ({ id_lpu: x.id_lpu, cantidad: x.cantidad })
           );
-      },
-      (err: HttpErrorResponse) => {
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
-  }
 
-  confirmEliminacion(event: Event, idCubicacion: number): any {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: `¿Está seguro que desea eliminar esta cubicación?`,
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.cubicacionService.eliminarCubicacion(idCubicacion).subscribe(
-          (x) => {
-            this.sharedService.showMessage(
-              'cubicación eliminada exitosamente',
-              'ok'
-            );
-            this.cubicaciones = [];
-            this.cubicacionService.getCubicaciones().subscribe(
-              (response) => {
-                this.cubicaciones = response.data.cubicaciones;
+          this.cubicacionService
+            .saveCubicacion(
+              localStorage.getItem('username') as string,
+              localStorage.getItem('otec_token') as string,
+              NombreClon,
+              this.cubicacionSelected.total,
+              this.cubicacionSelected.region_id,
+              this.cubicacionSelected.region,
+              this.cubicacionSelected.contrato_marco,
+              this.cubicacionSelected.proveedor,
+              this.cubicacionSelected.subcontrato_id,
+              lpus
+            )
+            .subscribe(
+              (responseSave) => {
+                this.sharedService.showMessage(
+                  'cubicación copiada exitosamente',
+                  'ok'
+                );
+                this.cubicaciones = [];
+                this.cubicacionService
+                  .getCubicaciones(
+                    localStorage.getItem('username') as string,
+                    localStorage.getItem('otec_token') as string
+                  )
+                  .subscribe(
+                    (response) => {
+                      this.cubicaciones = response.data.cubicaciones;
+                    },
+                    (err: HttpErrorResponse) => {
+                      this.sharedService.showMessage(
+                        this.sharedService.getErrorMessage(err),
+                        'error'
+                      );
+                    }
+                  );
               },
               (err: HttpErrorResponse) => {
                 this.sharedService.showMessage(
@@ -179,14 +172,59 @@ export class CubicacionComponent implements OnInit {
                 );
               }
             );
-          },
-          (err: HttpErrorResponse) => {
-            this.sharedService.showMessage(
-              `(HTTP code: ${err.status}) ${err.error.status.description}`,
-              'error'
-            );
-          }
-        );
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
+  }
+
+  confirmEliminacion(event: Event, idCubicacion: number): any {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: `¿Está seguro que desea eliminar esta cubicación?`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.cubicacionService
+          .eliminarCubicacion(
+            localStorage.getItem('username') as string,
+            localStorage.getItem('otec_token') as string,
+            idCubicacion
+          )
+          .subscribe(
+            (x) => {
+              this.sharedService.showMessage(
+                'cubicación eliminada exitosamente',
+                'ok'
+              );
+              this.cubicaciones = [];
+              this.cubicacionService
+                .getCubicaciones(
+                  localStorage.getItem('username') as string,
+                  localStorage.getItem('otec_token') as string
+                )
+                .subscribe(
+                  (response) => {
+                    this.cubicaciones = response.data.cubicaciones;
+                  },
+                  (err: HttpErrorResponse) => {
+                    this.sharedService.showMessage(
+                      this.sharedService.getErrorMessage(err),
+                      'error'
+                    );
+                  }
+                );
+            },
+            (err: HttpErrorResponse) => {
+              this.sharedService.showMessage(
+                `(HTTP code: ${err.status}) ${err.error.status.description}`,
+                'error'
+              );
+            }
+          );
       },
       reject: () => {},
     });
@@ -206,20 +244,29 @@ export class CubicacionComponent implements OnInit {
     this.nombreCubicacion = this.cubicacionSelected.nombre;
     this.reset();
 
-    this.cubicacionService.getContratos().subscribe(
-      (response) => {
-        this.contratosArr = response.data.contratos_marco;
-      },
-      (err: HttpErrorResponse) => {
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
+    this.cubicacionService
+      .getContratos(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string
+      )
+      .subscribe(
+        (response) => {
+          this.contratosArr = response.data.contratos_marco;
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
+          );
+        }
+      );
 
     this.cubicacionService
-      .getDetalleCubicacion(id)
+      .getDetalleCubicacion(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        id
+      )
       .subscribe((detalleCubicaion) => {
         const idDetalleCubicacion = 'detalle_cubicacion';
         detalleCubicaion.data[idDetalleCubicacion].forEach((lpu) => {
@@ -238,85 +285,100 @@ export class CubicacionComponent implements OnInit {
         this.getTotal();
       });
 
-    this.cubicacionService.getContratos().subscribe(
-      (response) => {
-        this.contratosArr = response.data.contratos_marco;
-        this.contratoId = this.contratosArr
-          .filter(
-            (contratos) =>
-              contratos.nombre === this.cubicacionSelected.contrato_marco
-          )[0]
-          .id.toString();
-        this.cubicacionService
-          .getProveedoresSubcontrato(parseInt(this.contratoId, 10))
-          .subscribe(
-            (responseProveedorSubcontrato) => {
-              const idProveedorSubcontrato = 'proveedores';
-              this.proveedorArr =
-                responseProveedorSubcontrato.data[idProveedorSubcontrato];
-              console.log(this.proveedorArr);
-              // setTimeout(()=>{
-              this.proveedorId = this.cubicacionSelected.proveedor_id.toString();
-              console.log('se llena proveedorId');
-              // },3000)
+    this.cubicacionService
+      .getContratos(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string
+      )
+      .subscribe(
+        (response) => {
+          this.contratosArr = response.data.contratos_marco;
+          this.contratoId = this.contratosArr
+            .filter(
+              (contratos) =>
+                contratos.nombre === this.cubicacionSelected.contrato_marco
+            )[0]
+            .id.toString();
+          this.cubicacionService
+            .getProveedoresSubcontrato(
+              localStorage.getItem('username') as string,
+              localStorage.getItem('otec_token') as string,
+              parseInt(this.contratoId, 10)
+            )
+            .subscribe(
+              (responseProveedorSubcontrato) => {
+                const idProveedorSubcontrato = 'proveedores';
+                this.proveedorArr =
+                  responseProveedorSubcontrato.data[idProveedorSubcontrato];
+                console.log(this.proveedorArr);
+                // setTimeout(()=>{
+                this.proveedorId = this.cubicacionSelected.proveedor_id.toString();
+                console.log('se llena proveedorId');
+                // },3000)
 
-              this.subcontratoId = this.cubicacionSelected.subcontrato_id;
-              this.cubicacionService
-                .getRegionesSubcontrato(this.subcontratoId)
-                .subscribe(
-                  (responseRegionSubcontrato) => {
-                    const idRegionSubcontrato = 'regiones';
-                    this.regionArr =
-                      responseRegionSubcontrato.data[idRegionSubcontrato];
-                    this.regionId = this.cubicacionSelected.region_id.toString();
+                this.subcontratoId = this.cubicacionSelected.subcontrato_id;
+                this.cubicacionService
+                  .getRegionesSubcontrato(
+                    localStorage.getItem('username') as string,
+                    localStorage.getItem('otec_token') as string,
+                    this.subcontratoId
+                  )
+                  .subscribe(
+                    (responseRegionSubcontrato) => {
+                      const idRegionSubcontrato = 'regiones';
+                      this.regionArr =
+                        responseRegionSubcontrato.data[idRegionSubcontrato];
+                      this.regionId = this.cubicacionSelected.region_id.toString();
 
-                    // console.log(this.regionArr)
-                    // console.log(`regionId: ${this.regionId}`)
-                    this.cubicacionService
-                      .getTipoServicioSubcontrato(
-                        this.subcontratoId,
-                        parseInt(this.regionId, 10)
-                      )
-                      .subscribe(
-                        (responseTipoServicioSubcontrato) => {
-                          this.showModalEditarCubicacion = true;
-                          const idTipoServicioSubcontrato = 'tipo_servicios';
-                          this.tipoServicioArr =
-                            responseTipoServicioSubcontrato.data[
-                              idTipoServicioSubcontrato
-                            ];
-                        },
-                        (err: HttpErrorResponse) => {
-                          this.sharedService.showMessage(
-                            this.sharedService.getErrorMessage(err),
-                            'error'
-                          );
-                        }
+                      // console.log(this.regionArr)
+                      // console.log(`regionId: ${this.regionId}`)
+                      this.cubicacionService
+                        .getTipoServicioSubcontrato(
+                          localStorage.getItem('username') as string,
+                          localStorage.getItem('otec_token') as string,
+                          this.subcontratoId,
+                          parseInt(this.regionId, 10)
+                        )
+                        .subscribe(
+                          (responseTipoServicioSubcontrato) => {
+                            this.showModalEditarCubicacion = true;
+                            const idTipoServicioSubcontrato = 'tipo_servicios';
+                            this.tipoServicioArr =
+                              responseTipoServicioSubcontrato.data[
+                                idTipoServicioSubcontrato
+                              ];
+                          },
+                          (err: HttpErrorResponse) => {
+                            this.sharedService.showMessage(
+                              this.sharedService.getErrorMessage(err),
+                              'error'
+                            );
+                          }
+                        );
+                    },
+                    (err: HttpErrorResponse) => {
+                      this.sharedService.showMessage(
+                        this.sharedService.getErrorMessage(err),
+                        'error'
                       );
-                  },
-                  (err: HttpErrorResponse) => {
-                    this.sharedService.showMessage(
-                      this.sharedService.getErrorMessage(err),
-                      'error'
-                    );
-                  }
+                    }
+                  );
+              },
+              (err: HttpErrorResponse) => {
+                this.sharedService.showMessage(
+                  this.sharedService.getErrorMessage(err),
+                  'error'
                 );
-            },
-            (err: HttpErrorResponse) => {
-              this.sharedService.showMessage(
-                this.sharedService.getErrorMessage(err),
-                'error'
-              );
-            }
+              }
+            );
+        },
+        (err: HttpErrorResponse) => {
+          this.sharedService.showMessage(
+            this.sharedService.getErrorMessage(err),
+            'error'
           );
-      },
-      (err: HttpErrorResponse) => {
-        this.sharedService.showMessage(
-          this.sharedService.getErrorMessage(err),
-          'error'
-        );
-      }
-    );
+        }
+      );
 
     // this.form.controls.contratoId.setValue(
     //   this.contratosArr.filter(
@@ -487,14 +549,19 @@ export class CubicacionComponent implements OnInit {
 
   selectedContrato(): void {
     this.reset();
-    this.disableInput('contratoId');
-    this.form.controls.proveedorId.setValue('');
-    // this.form.controls.proveedorId.enable();
-    this.form.controls.regionId.setValue('');
-    // this.form.controls.regionId.enable();
-    this.form.controls.tiposervicioId.setValue('');
+    this.proveedorId = '';
+    // this.disableInput('contratoId');
+    // this.form.controls.proveedorId.setValue('');
+    // // this.form.controls.proveedorId.enable();
+    // this.form.controls.regionId.setValue('');
+    // // this.form.controls.regionId.enable();
+    // this.form.controls.tiposervicioId.setValue('');
     this.cubicacionService
-      .getProveedoresSubcontrato(parseInt(this.values.contratoId, 10))
+      .getProveedoresSubcontrato(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        parseInt(this.contratoId, 10)
+      )
       .subscribe(
         (response) => {
           this.proveedorArr = response.data.proveedores;
@@ -510,17 +577,21 @@ export class CubicacionComponent implements OnInit {
 
   selectedProveedor(): void {
     this.reset();
-    this.disableInput('proveedorId');
-    this.form.controls.regionId.setValue('');
-    // this.form.controls.regionId.enable();
-    this.form.controls.tiposervicioId.setValue('');
-    this.form.controls.subcontratoId.setValue(
-      this.proveedorArr.filter(
-        (x) => x.id === parseInt(this.values.proveedorId, 10)
-      )[0].subcontrato_id[0]
-    );
+    this.regionId = '';
+    // this.disableInput('proveedorId');
+    // this.form.controls.regionId.setValue('');
+    // // this.form.controls.regionId.enable();
+    // this.form.controls.tiposervicioId.setValue('');
+    // this.form.controls.subcontratoId.setValue(
+    this.subcontratoId = this.proveedorArr.filter(
+      (x) => x.id === parseInt(this.proveedorId, 10)
+    )[0].subcontrato_id[0];
     this.cubicacionService
-      .getRegionesSubcontrato(this.values.subcontratoId)
+      .getRegionesSubcontrato(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        this.subcontratoId
+      )
       .subscribe(
         (response) => {
           this.regionArr = response.data.regiones;
@@ -540,8 +611,10 @@ export class CubicacionComponent implements OnInit {
     this.form.controls.tiposervicioId.setValue('');
     this.cubicacionService
       .getTipoServicioSubcontrato(
-        this.values.subcontratoId,
-        parseInt(this.values.regionId, 10)
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
+        this.subcontratoId,
+        parseInt(this.regionId, 10)
       )
       .subscribe(
         (response) => {
@@ -574,6 +647,8 @@ export class CubicacionComponent implements OnInit {
 
     this.cubicacionService
       .getServicioSubcontrato(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
         this.subcontratoId,
         parseInt(this.regionId, 10),
         parseInt(this.tipoServicioId, 10)
@@ -630,6 +705,8 @@ export class CubicacionComponent implements OnInit {
     )[0].nombre;
     this.cubicacionService
       .editCubicacion(
+        localStorage.getItem('username') as string,
+        localStorage.getItem('otec_token') as string,
         this.cubicacionSelected.cubicacion_id,
         this.nombreCubicacion,
         this.total,
@@ -648,19 +725,24 @@ export class CubicacionComponent implements OnInit {
             'ok'
           );
           this.cubicaciones = [];
-          this.cubicacionService.getCubicaciones().subscribe(
-            (cubicacion) => {
-              cubicacion.data.cubicaciones.forEach((cub) => {
-                this.cubicaciones.push(cub);
-              });
-            },
-            (err: HttpErrorResponse) => {
-              this.sharedService.showMessage(
-                this.sharedService.getErrorMessage(err),
-                'error'
-              );
-            }
-          );
+          this.cubicacionService
+            .getCubicaciones(
+              localStorage.getItem('username') as string,
+              localStorage.getItem('otec_token') as string
+            )
+            .subscribe(
+              (cubicacion) => {
+                cubicacion.data.cubicaciones.forEach((cub) => {
+                  this.cubicaciones.push(cub);
+                });
+              },
+              (err: HttpErrorResponse) => {
+                this.sharedService.showMessage(
+                  this.sharedService.getErrorMessage(err),
+                  'error'
+                );
+              }
+            );
         },
         (err: HttpErrorResponse) => {
           this.sharedService.showMessage(

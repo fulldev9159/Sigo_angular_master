@@ -10,8 +10,8 @@ import { AuthService } from '@coreOT/services/auth.service';
 })
 export class CubicacionService {
   apiBase: string;
-  username = localStorage.getItem('username') as string;
-  token = localStorage.getItem('otec_token') as string;
+  // username = localStorage.getItem('username') as string;
+  // token = localStorage.getItem('otec_token') as string;
 
   constructor(
     @Inject('environment') environment,
@@ -21,10 +21,13 @@ export class CubicacionService {
     this.apiBase = environment.api || 'http://localhost:4040';
   }
 
-  getContratos(): Observable<Response<CubicacionModel.DataContrato>> {
+  getContratos(
+    reqUsername: string,
+    reqToken: string
+  ): Observable<Response<CubicacionModel.DataContrato>> {
     const request: CubicacionModel.RequestContrato = {
-      username: this.username,
-      token: this.token,
+      username: reqUsername,
+      token: reqToken,
     };
 
     return (this.httpClient as HttpClient).post<
@@ -33,11 +36,13 @@ export class CubicacionService {
   }
 
   getProveedoresSubcontrato(
+    reqUsername: string,
+    reqToken: string,
     contratoId: number
   ): Observable<Response<CubicacionModel.DataProveedor>> {
     const request: CubicacionModel.RequestProveedor = {
-      username: this.username,
-      token: this.token,
+      username: reqUsername,
+      token: reqToken,
       contrato_marco: contratoId,
     };
 
@@ -47,11 +52,13 @@ export class CubicacionService {
   }
 
   getRegionesSubcontrato(
+    reqUsername: string,
+    reqToken: string,
     subcontratosid: number
   ): Observable<Response<CubicacionModel.DataRegion>> {
     const request: CubicacionModel.RequestRegion = {
-      user: this.username,
-      token: this.token,
+      user: reqUsername,
+      token: reqToken,
       subcontratos: subcontratosid,
     };
 
@@ -61,12 +68,14 @@ export class CubicacionService {
   }
 
   getTipoServicioSubcontrato(
+    reqUsername: string,
+    reqToken: string,
     subcontratosid: number,
     regionId: number
   ): Observable<Response<CubicacionModel.DataTipoServicioSubContrato>> {
     const request: CubicacionModel.RequestTipoServicioSubContrato = {
-      username: this.username,
-      token: this.token,
+      username: reqUsername,
+      token: reqToken,
       subcontratos: subcontratosid,
       region: regionId,
     };
@@ -77,13 +86,15 @@ export class CubicacionService {
   }
 
   getServicioSubcontrato(
+    reqUsername: string,
+    reqToken: string,
     subcontratosid: number,
     regionId: number,
     tipoServicioId: number
   ): Observable<Response<CubicacionModel.DataServicioContrato>> {
     const request: CubicacionModel.RequestServiciosSubContrato = {
-      username: this.username,
-      token: this.token,
+      username: reqUsername,
+      token: reqToken,
       subcontratos: subcontratosid,
       region: regionId,
       tipo_servicio: tipoServicioId,
@@ -95,6 +106,8 @@ export class CubicacionService {
   }
 
   saveCubicacion(
+    reqUsername: string,
+    reqToken: string,
     nombreC: string,
     totalC: number,
     regionIDC: number,
@@ -105,7 +118,7 @@ export class CubicacionService {
     lpusC: CubicacionModel.Lpus[]
   ): Observable<Response<string>> {
     const request: CubicacionModel.RequestSaveCubicacion = {
-      token: this.token,
+      token: reqToken,
       // user:usernameC,
       nombre: nombreC,
       total: totalC,
@@ -123,10 +136,13 @@ export class CubicacionService {
     );
   }
 
-  getCubicaciones(): Observable<Response<CubicacionModel.DataCubicaciones>> {
+  getCubicaciones(
+    reqUsername: string,
+    reqToken: string
+  ): Observable<Response<CubicacionModel.DataCubicaciones>> {
     const request: CubicacionModel.RequestCubicaciones = {
-      user: this.username,
-      token: this.token,
+      user: reqUsername,
+      token: reqToken,
     };
 
     return (this.httpClient as HttpClient).post<
@@ -135,11 +151,13 @@ export class CubicacionService {
   }
 
   getDetalleCubicacion(
+    reqUsername: string,
+    reqToken: string,
     idCubicacion: number
   ): Observable<Response<CubicacionModel.DataDetalleCubicaciones>> {
     const request: CubicacionModel.RequestDetalleCubicaciones = {
-      user: this.username,
-      token: this.token,
+      user: reqUsername,
+      token: reqToken,
       cubicacion_id: idCubicacion,
     };
     return (this.httpClient as HttpClient).post<
@@ -148,6 +166,8 @@ export class CubicacionService {
   }
 
   editCubicacion(
+    reqUsername: string,
+    reqToken: string,
     idCubicacion: number,
     nombreC: string,
     totalC: number,
@@ -161,7 +181,7 @@ export class CubicacionService {
     // const temp: CubicacionModel.Lpus[] = [];
 
     const request: CubicacionModel.RequestSaveCubicacion = {
-      token: this.token,
+      token: reqToken,
       // user:usernameC,
       id_cubicacion: idCubicacion,
       nombre: nombreC,
@@ -181,10 +201,14 @@ export class CubicacionService {
     );
   }
 
-  eliminarCubicacion(idCubicacion: number): Observable<Response<string>> {
+  eliminarCubicacion(
+    reqUsername: string,
+    reqToken: string,
+    idCubicacion: number
+  ): Observable<Response<string>> {
     const request: CubicacionModel.RequestBorrarCubicaciones = {
-      user: this.username,
-      token: this.token,
+      user: reqUsername,
+      token: reqToken,
       id_cubicacion: idCubicacion,
     };
     return (this.httpClient as HttpClient).post<Response<string>>(
