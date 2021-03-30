@@ -38,7 +38,7 @@ Framework javascript que permite desarrollar grandes y complejas aplicaciones en
 ## Ejecución
 
 - cd ambiente-local
-- docker-compose up -d -d mcl_api_otec
+- docker-compose up -d mcl_api_otec
 - cd ../angular-project
 - npm install
 - npm start
