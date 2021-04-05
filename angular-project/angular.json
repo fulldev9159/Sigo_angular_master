@@ -3,61 +3,50 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ot": {
+    "app-ot": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/ot",
-      "sourceRoot": "projects/ot/src",
-      "prefix": "ot",
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ot",
-            "index": "projects/ot/src/index.html",
-            "main": "projects/ot/src/main.ts",
-            "polyfills": "projects/ot/src/polyfills.ts",
-            "tsConfig": "projects/ot/tsconfig.app.json",
+            "outputPath": "dist/app-ot",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/ot/src/favicon.ico",
-              "projects/ot/src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "projects/ot/src/styles.scss",
-              "node_modules/node-snackbar/dist/snackbar.min.css",
-              "node_modules/semantic-ui-css/components/button.min.css",
-              "node_modules/semantic-ui-css/components/input.min.css",
-              "node_modules/semantic-ui-css/components/icon.min.css",
-              "node_modules/semantic-ui-css/components/dropdown.min.css",
-              "node_modules/semantic-ui-css/components/menu.min.css",
-              "node_modules/semantic-ui-css/components/transition.min.css",
-              "node_modules/semantic-ui-css/components/segment.min.css",
-              "node_modules/semantic-ui-css/components/form.min.css",
-              "node_modules/semantic-ui-css/components/message.css",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/saga-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeflex/primeflex.css"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeng/resources/themes/bootstrap4-light-purple/theme.css",
+              "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/node-snackbar/dist/snackbar.min.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/semantic-ui-css/components/transition.js",
-              "node_modules/semantic-ui-css/components/dropdown.min.js",
-              "node_modules/semantic-ui-css/components/form.min.js"
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/ot/src/environments/environment.ts",
-                  "with": "projects/ot/src/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -86,64 +75,44 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ot:build"
+            "browserTarget": "app-ot:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ot:build:production"
+              "browserTarget": "app-ot:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ot:build"
+            "browserTarget": "app-ot:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ot/src/test.ts",
-            "polyfills": "projects/ot/src/polyfills.ts",
-            "tsConfig": "projects/ot/tsconfig.spec.json",
-            "karmaConfig": "projects/ot/karma.conf.js",
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
             "assets": [
-              "projects/ot/src/favicon.ico",
-              "projects/ot/src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "projects/ot/src/styles.scss",
-              "node_modules/node-snackbar/dist/snackbar.min.css",
-              "node_modules/semantic-ui-css/components/button.min.css",
-              "node_modules/semantic-ui-css/components/input.min.css",
-              "node_modules/semantic-ui-css/components/icon.min.css",
-              "node_modules/semantic-ui-css/components/dropdown.min.css",
-              "node_modules/semantic-ui-css/components/menu.min.css",
-              "node_modules/semantic-ui-css/components/transition.min.css",
-              "node_modules/semantic-ui-css/components/segment.min.css",
-              "node_modules/semantic-ui-css/components/form.min.css",
-              "node_modules/semantic-ui-css/components/message.css",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/saga-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeflex/primeflex.css"
+              "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/node-snackbar/dist/snackbar.min.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/semantic-ui-css/components/transition.js",
-              "node_modules/semantic-ui-css/components/dropdown.min.js",
-              "node_modules/semantic-ui-css/components/form.min.js"
-            ]
+            "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ot/tsconfig.app.json",
-              "projects/ot/tsconfig.spec.json",
-              "projects/ot/e2e/tsconfig.json"
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -153,19 +122,20 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/ot/e2e/protractor.conf.js",
-            "devServerTarget": "ot:serve"
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "app-ot:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ot:serve:production"
+              "devServerTarget": "app-ot:serve:production"
             }
           }
         }
       }
-    }},
+    }
+  },
+  "defaultProject": "app-ot",
   "cli": {
     "analytics": false
-  },
-  "defaultProject": "ot"
+  }
 }

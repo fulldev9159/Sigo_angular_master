@@ -1,0 +1,28 @@
+//_myTheme.scss
+
+$theme-colors: (
+  "primary": #00a9e0,
+  "secondary": #84329b,
+  // "success": ,
+  // "info": ,
+  // "warning": ,
+  // "danger": ,
+  // "light": ,
+  // "dark": ,,,
+);
+
+$enable-rounded: false;
+$enable-shadows: true;
+$enable-gradients: false;
+$enable-grid-classes: true;
+$enable-print-styles: true;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+$spacer: 1rem;

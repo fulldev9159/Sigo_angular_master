@@ -16,12 +16,12 @@ ci:
     - ng test --code-coverage --progress false --watch false
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
-# docker-develop:
-#   stage: deployment
-#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-#   script:
-#     - docker-compose -f docker-compose.yml build --no-cache develop
-#     - docker-compose -f docker-compose.yml push develop
+docker-develop:
+  stage: deployment
+  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  script:
+    - docker-compose -f docker-compose.yml build --no-cache develop
+    - docker-compose -f docker-compose.yml push develop
 
 docker:
   stage: deployment

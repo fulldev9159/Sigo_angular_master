@@ -1,0 +1,6 @@
+@import "custom-bootstrap";
+@import "~bootstrap/scss/bootstrap";
+
+table thead tr th span.ui-column-title {
+  display: block !important;
+}
