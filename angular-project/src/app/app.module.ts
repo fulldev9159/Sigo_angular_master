@@ -7,11 +7,7 @@ import { AppComponent } from './app.component';
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from 'src/environments/environment';
-import {
-  routerReducer,
-  RouterState,
-  StoreRouterConnectingModule,
-} from '@ngrx/router-store';
+import { routerReducer, RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LayoutModule } from './layout/layout.module';
 import { RouterModule } from '@angular/router';
@@ -23,7 +19,9 @@ import { UiModule } from './ui/ui.module';
 const metaReducers: Array<MetaReducer<any, any>> = [];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -45,15 +43,15 @@ const metaReducers: Array<MetaReducer<any, any>> = [];
     StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
     LayoutModule,
     StoreAllModule,
-    UiModule,
+    UiModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -20,16 +20,16 @@ describe('AppComponent', () => {
   //   expect(app).toBeTruthy();
   // });
 
-  // it(`should have as title 'app-ot'`, () => {
+  // it(`should have as title 'app-otec'`, () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   const app = fixture.componentInstance;
-  //   expect(app.title).toEqual('app-ot');
+  //   expect(app.title).toEqual('app-otec');
   // });
 
   // it('should render title', () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   fixture.detectChanges();
   //   const compiled = fixture.nativeElement;
-  //   expect(compiled.querySelector('.content span').textContent).toContain('app-ot app is running!');
+  //   expect(compiled.querySelector('.content span').textContent).toContain('app-otec app is running!');
   // });
 });

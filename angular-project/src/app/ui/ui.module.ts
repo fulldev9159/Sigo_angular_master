@@ -4,11 +4,17 @@ import { PrimeNgModule } from './primeng/primeng.module';
 
 // Components
 import { CardComponent } from './card/card.component';
+import { TableComponent } from './table/table.component';
+import { SelecionComponent } from './selecion/selecion.component';
+import { ModalComponent } from './modal/modal.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
+import { ToastComponent } from './toast/toast.component';
+import { PopupComponent } from './popup/popup.component';
 
 
 
 @NgModule({
-  declarations: [CardComponent],
+  declarations: [CardComponent, TableComponent, SelecionComponent, ModalComponent, DatepickerComponent, ToastComponent, PopupComponent],
   exports: [CardComponent, PrimeNgModule],
   imports: [
     CommonModule,
