@@ -1,31 +1,113 @@
 <div class="container">
-  <h1 class="mt-4">KIT-UI </h1>
+  <h1 class="mt-4">KIT-UI</h1>
   <p>Componentes de presentación disponibles en proyecto</p>
-  <hr>
+  <hr />
 
   <app-card>
-    <ng-container card-header-title>
-      Componente Tabla
-    </ng-container>
+    <ng-container card-header-title> Componente Tabla </ng-container>
     <ng-container card-body>
       <app-table [config]="configTable" [items]="data"></app-table>
 
-      <br>
+      <br />
 
       <h3>Como utilizar</h3>
-      <hr>
-      <div><code>&lt;app-table [config]="configTable" [items]="data"&gt; &lt;app-table&gt;</code></div>
-      <br>
+      <hr />
+      <div>
+        <code
+          >&lt;app-table [config]="configTable" [items]="data"&gt;
+          &lt;app-table&gt;</code
+        >
+      </div>
+      <br />
       <h4>JSON de configuración = config</h4>
       <code>
-        <pre>{{configTable | json}}</pre>
+        <pre>{{ configTable | json }}</pre>
       </code>
 
       <h4>JSON datos = items</h4>
       <code>
-        <pre>{{[data[0]] | json}}</pre>
+        <pre>{{ [data[0]] | json }}</pre>
       </code>
     </ng-container>
   </app-card>
+<br />
+  <app-card>
+    <ng-container card-header-title> Componente selección </ng-container>
+    <ng-container card-body>
+      <h4>Type Select</h4>
+      <app-seleccion
+        [textSeleccion]="'Seleccione una ciudad'"
+        [items]="itemsExampleSeleccion"
+        (selected)="itemSelected($event)"
+        [type]="'select'"
+      ></app-seleccion>
+      <h4>Type listbox</h4>
+      <app-seleccion
+        [items]="itemsExampleSeleccion"
+        (selected)="itemSelected($event)"
+        [type]="'listbox'"
+      ></app-seleccion>
+      <br />
 
+      <h3>Como utilizar</h3>
+      <hr />
+      <div>
+        <code
+          >&lt;app-seleccion [textSeleccion]="'Seleccione una ciudad'" [items]="itemsExampleSeleccion" [type]="'select' (selected)="itemSelected($event)" &gt;
+          &lt;app-seleccion&gt;</code
+        >
+      </div>
+      <br />
+      <h4>Propiedades: </h4>
+      <ul>
+        <li><strong>[type]</strong>: Tipo de selecctor (<strong>select</strong> para un selector común y <strong>listbox</strong> para utilizar un componente primeng multiseleccion más potenciado)</li>
+        <li><strong>[textSeleccion]</strong>: Para indicar el texto inicial que desee que aparezca dentro select. </li>
+        <li><strong>[items]</strong>: Datos a desplegar para ser seleccionados </li>
+      </ul>
+      <br />
+      <h4>Funciones:</h4>
+      <ul><li>(selected): Callback que retorna el valor seleccionado (el code en caso de select común y un array en caso de listbox)</li></ul>
+      <br />
+      <h4>JSON de datos = itemsExampleSeleccion</h4>
+      <code>
+        <pre>{{ itemsExampleSeleccion | json }}</pre>
+      </code>
+
+    </ng-container>
+  </app-card>
+
+
+  <br />
+  <app-card>
+    <ng-container card-header-title> Componente DatePicker </ng-container>
+    <ng-container card-body>
+      <app-datepicker (selected)="dateSelected($event)"></app-datepicker>
+      <br />
+
+      <h3>Como utilizar</h3>
+      <hr />
+      <div>
+        <code
+          >&lt;app-seleccion [textSeleccion]="'Seleccione una ciudad'" [items]="itemsExampleSeleccion" [type]="'select' (selected)="itemSelected($event)" &gt;
+          &lt;app-seleccion&gt;</code
+        >
+      </div>
+      <br />
+      <h4>Propiedades: </h4>
+      <ul>
+        <li><strong>[type]</strong>: Tipo de selecctor (<strong>select</strong> para un selector común y <strong>listbox</strong> para utilizar un componente primeng multiseleccion más potenciado)</li>
+        <li><strong>[textSeleccion]</strong>: Para indicar el texto inicial que desee que aparezca dentro select. </li>
+        <li><strong>[items]</strong>: Datos a desplegar para ser seleccionados </li>
+      </ul>
+      <br />
+      <h4>Funciones:</h4>
+      <ul><li>(selected): Callback que retorna el valor seleccionado (el code en caso de select común y un array en caso de listbox)</li></ul>
+      <br />
+      <h4>JSON de datos = itemsExampleSeleccion</h4>
+      <code>
+        <pre>{{ itemsExampleSeleccion | json }}</pre>
+      </code>
+
+    </ng-container>
+  </app-card>
 </div>

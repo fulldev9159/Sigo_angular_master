@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeleccionType } from '@uiOT/seleccion/seleccion.model';
 
 @Component({
   selector: 'app-kitui',
@@ -425,9 +426,30 @@ export class KituiComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+
+  dataRealRecibida = [
+    { ciudad: 'New York', id: 'NY', contratos: 1 },
+    { ciudad: 'Rome', id: 'RM', contratos: 5 },
+    { ciudad: 'London', id: 'LDN', contratos: 4 },
+    { ciudad: 'Istanbul', id: 'IST', contratos: 12 },
+    { ciudad: 'Paris', id: 'PRS', contratos: 12 },
+  ];
+  itemsExampleSeleccion: SeleccionType[];
+  constructor() {
+    this.itemsExampleSeleccion = this.dataRealRecibida.map((x) => ({
+      name: x.ciudad,
+      code: x.id,
+    }));
+  }
 
   ngOnInit(): void {
   }
 
+  itemSelected(event: string | Array<any>): void {
+    console.log(event);
+  }
+
+  dateSelected(event:Event):void{
+    console.log(event)
+  }
 }
