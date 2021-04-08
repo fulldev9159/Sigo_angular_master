@@ -12,14 +12,10 @@ import { ToastComponent } from './toast/toast.component';
 import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
-<<<<<<< HEAD
-  declarations: [CardComponent, TableComponent, SelecionComponent, ModalComponent, DatepickerComponent, ToastComponent, PopupComponent],
-  exports: [CardComponent, TableComponent, SelecionComponent, ModalComponent, DatepickerComponent, ToastComponent, PopupComponent],
   imports: [
     CommonModule,
     PrimeNgModule
-  ]
-=======
+  ],
   declarations: [
     CardComponent,
     TableComponent,
@@ -38,8 +34,6 @@ import { PopupComponent } from './popup/popup.component';
     DatepickerComponent,
     ToastComponent,
     PopupComponent,
-  ],
-  imports: [CommonModule, PrimeNgModule],
->>>>>>> 198185f68c43068ec015a2bfeafd0e294e6c4e8d
+  ]
 })
-export class UiModule {}
+export class UiModule { }
