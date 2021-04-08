@@ -24,7 +24,8 @@ export class CubicacionComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  itemSelected(event: Event): void {
-    console.log((event.target as HTMLInputElement).value);
+  itemSelected(event: string | Array<any>): void {
+    console.log(event);
+    // console.log((eventd.target as HTMLInputElement).value);
   }
 }
