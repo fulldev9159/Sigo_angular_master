@@ -66,7 +66,7 @@
       </ul>
       <br />
       <h4>Funciones:</h4>
-      <ul><li>(selected): Callback que retorna el valor seleccionado (el code en caso de select común y un array en caso de listbox)</li></ul>
+      <ul><li><strong>(selected)</strong>: Callback que retorna el valor seleccionado (el code en caso de select común y un array en caso de listbox)</li></ul>
       <br />
       <h4>JSON de datos = itemsExampleSeleccion</h4>
       <code>
@@ -83,31 +83,19 @@
     <ng-container card-body>
       <app-datepicker (selected)="dateSelected($event)"></app-datepicker>
       <br />
-
+      <br />
       <h3>Como utilizar</h3>
       <hr />
       <div>
         <code
-          >&lt;app-seleccion [textSeleccion]="'Seleccione una ciudad'" [items]="itemsExampleSeleccion" [type]="'select' (selected)="itemSelected($event)" &gt;
-          &lt;app-seleccion&gt;</code
+          >&lt;app-datepicker (selected)="dateSelected($event)" &gt;
+          &lt;app-datepicker&gt;</code
         >
       </div>
       <br />
-      <h4>Propiedades: </h4>
-      <ul>
-        <li><strong>[type]</strong>: Tipo de selecctor (<strong>select</strong> para un selector común y <strong>listbox</strong> para utilizar un componente primeng multiseleccion más potenciado)</li>
-        <li><strong>[textSeleccion]</strong>: Para indicar el texto inicial que desee que aparezca dentro select. </li>
-        <li><strong>[items]</strong>: Datos a desplegar para ser seleccionados </li>
-      </ul>
-      <br />
       <h4>Funciones:</h4>
-      <ul><li>(selected): Callback que retorna el valor seleccionado (el code en caso de select común y un array en caso de listbox)</li></ul>
+      <ul><li><strong>(selected)</strong>: Callback que retorna el valor seleccionado </li></ul>
       <br />
-      <h4>JSON de datos = itemsExampleSeleccion</h4>
-      <code>
-        <pre>{{ itemsExampleSeleccion | json }}</pre>
-      </code>
-
     </ng-container>
   </app-card>
 </div>
