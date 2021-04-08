@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "app-otec": {
+    "app-ot": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app-otec",
+            "outputPath": "dist/app-ot",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -75,18 +75,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app-otec:build"
+            "browserTarget": "app-ot:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app-otec:build:production"
+              "browserTarget": "app-ot:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app-otec:build"
+            "browserTarget": "app-ot:build"
           }
         },
         "test": {
@@ -123,18 +123,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "app-otec:serve"
+            "devServerTarget": "app-ot:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "app-otec:serve:production"
+              "devServerTarget": "app-ot:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "app-otec",
+  "defaultProject": "app-ot",
   "cli": {
     "analytics": false
   }

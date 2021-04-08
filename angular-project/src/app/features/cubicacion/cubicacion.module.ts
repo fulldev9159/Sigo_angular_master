@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { CubicacionRoutingModule } from './cubicacion-routing.module';
 import { CubicacionComponent } from './cubicacion.component';
-
+import { UiModule } from '@uiOT/ui.module';
 
 @NgModule({
   declarations: [CubicacionComponent],
   imports: [
     CommonModule,
-    CubicacionRoutingModule
+    CubicacionRoutingModule,
+    UiModule
   ]
 })
 export class CubicacionModule { }

@@ -1,0 +1,9 @@
+<form>
+  <div class="form-group">
+    <!-- <label for="exampleFormControlSelect1">Example select</label> -->
+    <select class="form-control" (change)="itemSelected($event)">
+      <option>{{textSeleccion}}</option>
+      <option *ngFor="let item of items" value="{{item.code}}">{{item.name}}</option> 
+    </select>
+  </div>
+</form>
