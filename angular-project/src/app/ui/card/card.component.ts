@@ -3,28 +3,33 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
-  // animations: [simpliAnimationFade],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnDestroy {
+
   // declarations
   @Input() public classCard: string;
   @Input() public classCardHeader: string;
   @Output() outputAction: EventEmitter<any> = new EventEmitter();
+  private destroyInstance: Subject<boolean> = new Subject();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  clickOutputAction(): void {
-    this.outputAction.emit();
+  ngOnDestroy(): void {
+    this.destroyInstance.next(true);
+    this.destroyInstance.complete();
   }
+
 }

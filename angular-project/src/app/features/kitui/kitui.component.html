@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="mt-4">KIT-UI </h1>
+  <p>Componentes de presentación disponibles en proyecto</p>
+  <hr>
+
+  <app-card>
+    <ng-container card-header-title>
+      Componente Tabla
+    </ng-container>
+    <ng-container card-body>
+      <app-table [config]="configTable" [items]="data"></app-table>
+
+      <br>
+
+      <h3>Como utilizar</h3>
+      <hr>
+      <div><code>&lt;app-table [config]="configTable" [items]="data"&gt; &lt;app-table&gt;</code></div>
+      <br>
+      <h4>JSON de configuración = config</h4>
+      <code>
+        <pre>{{configTable | json}}</pre>
+      </code>
+
+      <h4>JSON datos = items</h4>
+      <code>
+        <pre>{{[data[0]] | json}}</pre>
+      </code>
+    </ng-container>
+  </app-card>
+
+</div>

@@ -15,7 +15,7 @@ import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [CardComponent, TableComponent, SelecionComponent, ModalComponent, DatepickerComponent, ToastComponent, PopupComponent],
-  exports: [CardComponent, PrimeNgModule],
+  exports: [CardComponent, TableComponent, SelecionComponent, ModalComponent, DatepickerComponent, ToastComponent, PopupComponent],
   imports: [
     CommonModule,
     PrimeNgModule

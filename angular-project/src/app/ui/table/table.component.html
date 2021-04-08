@@ -1,1 +1,60 @@
-<p>table works!</p>
+<div class="card">
+  <p-table #dt [value]="items" [rows]="10" [paginator]="true"
+    [globalFilterFields]="['name','country.name','representative.name','status']" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true"
+    styleClass="p-datatable-sm p-datatable-responsive-demo">
+    <ng-template *ngIf="config.header" pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0">{{config.headerConfig.title}}</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            [placeholder]="config.headerConfig.searchText" />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <ng-container *ngFor="let column of config.body.headers">
+          <ng-container [ngSwitch]="column.type">
+            <th *ngSwitchCase="'CHECKBOX'" style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th *ngSwitchCase="'TEXT'" [pSortableColumn]="column.sort">{{column.field}} <p-sortIcon
+                [field]="column.sort">
+              </p-sortIcon>
+            </th>
+            <th *ngSwitchCase="'NUMBER'" [pSortableColumn]="column.sort">{{column.field}} <p-sortIcon
+                [field]="column.sort">
+              </p-sortIcon>
+            </th>
+            <th *ngSwitchCase="'ACTIONS'"></th>
+          </ng-container>
+        </ng-container>
+
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <ng-container *ngFor="let column of config.body.headers" [ngSwitch]="column.type">
+          <td *ngSwitchCase="'CHECKBOX'">
+            <p-tableCheckbox [value]="item"></p-tableCheckbox>
+          </td>
+          <td *ngSwitchCase="'TEXT'">{{item[column.header]}}</td>
+          <td *ngSwitchCase="'NUMBER'">{{item[column.header] | currency:'USD'}}</td>
+          <td *ngSwitchCase="'ACTIONS'">
+            <ng-container *ngIf="config.body.actions.length > 0">
+              <button *ngFor="let button of config.body.actions" pButton pRipple [icon]="button.icon"
+                [class]="button.class" (click)="button.onClick(item);"></button>
+            </ng-container>
+          </td>
+        </ng-container>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        En total hay {{items ? items.length : 0 }} elementos.
+      </div>
+    </ng-template>
+  </p-table>
+</div>

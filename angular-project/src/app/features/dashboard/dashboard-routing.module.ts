@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'cubicacion',
         loadChildren: () => import('../cubicacion/cubicacion.module').then(m => m.CubicacionModule)
+      },
+      {
+        path: 'kitui',
+        loadChildren: () => import('../kitui/kitui.module').then(m => m.KituiModule)
       }
     ]
   }
