@@ -15,7 +15,6 @@ export class ListTestComponent implements OnInit {
 
   ngOnInit(): void {
     this.musicFacade.getMusicList();
-
     this.musicList$ = this.musicFacade.getMusicList$();
   }
 

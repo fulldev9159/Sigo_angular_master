@@ -433,6 +433,9 @@ export class KituiComponent implements OnInit {
     { ciudad: 'Paris', id: 'PRS', contratos: 12 },
   ];
   itemsExampleSeleccion: SeleccionType[];
+
+  testDisplayModal = false;
+
   constructor() {
     this.itemsExampleSeleccion = this.dataRealRecibida.map((x) => ({
       name: x.ciudad,
@@ -448,5 +451,9 @@ export class KituiComponent implements OnInit {
 
   dateSelected(event: Event): void {
     console.log(event);
+  }
+
+  testModal(): void {
+    this.testDisplayModal = true;
   }
 }
