@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-xs-12 col-md-4">
+    <div class="row">
+      <div class="col-12 ">
+        <label for="">Nombre OT</label>
+        <input class="form-control" placeholder="Nombre OT" type="text">
+        <br>
+      </div>
+      <div class="col-12 ">
+        <label for="">Nombre OT</label>
+        <select class="form-control" name="" id="">
+          <option value="0" selected>Seleccione Tipo OT</option>
+          <option value="1">PMO</option>
+        </select>
+        <br>
+      </div>
+      <div class="col-12 ">
+        <label for="">Nombre OT</label>
+        <select class="form-control" name="" id="">
+          <option value="0" selected>Seleccione Cubicación</option>
+          <option value="1">PMO</option>
+        </select>
+        <br>
+      </div>
+      <div class="col-12 ">
+        <label for="">Nombre OT</label>
+        <select class="form-control" name="" id="">
+          <option value="0" selected>Seleccione Plan proyecto</option>
+          <option value="1">PMO</option>
+        </select>
+        <br>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-8">
+    <app-seleccion [textSeleccion]="'Seleccione una ciudad'" [items]="itemsExample" (selected)="itemSelected($event)"
+      [type]="'select'"></app-seleccion>
+    <app-seleccion [items]="itemsExample" (selected)="itemSelected($event)" [type]="'listbox'">
+    </app-seleccion>
+  </div>
+
+  <div class="col-12">
+    <h1>Acá va una tabla simple</h1>
+  </div>
+</div>

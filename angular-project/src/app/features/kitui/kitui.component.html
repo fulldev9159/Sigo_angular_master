@@ -1,31 +1,146 @@
 <div class="container">
-  <h1 class="mt-4">KIT-UI </h1>
+  <h1 class="mt-4">KIT-UI</h1>
   <p>Componentes de presentación disponibles en proyecto</p>
-  <hr>
+  <hr />
 
   <app-card>
-    <ng-container card-header-title>
-      Componente Tabla
-    </ng-container>
+    <ng-container card-header-title> Componente Tabla </ng-container>
     <ng-container card-body>
       <app-table [config]="configTable" [items]="data"></app-table>
 
-      <br>
+      <br />
 
       <h3>Como utilizar</h3>
-      <hr>
-      <div><code>&lt;app-table [config]="configTable" [items]="data"&gt; &lt;app-table&gt;</code></div>
-      <br>
+      <hr />
+      <div>
+        <code
+          >&lt;app-table [config]="configTable" [items]="data"&gt;
+          &lt;app-table&gt;</code
+        >
+      </div>
+      <br />
       <h4>JSON de configuración = config</h4>
       <code>
-        <pre>{{configTable | json}}</pre>
+        <pre>{{ configTable | json }}</pre>
       </code>
 
       <h4>JSON datos = items</h4>
       <code>
-        <pre>{{[data[0]] | json}}</pre>
+        <pre>{{ [data[0]] | json }}</pre>
       </code>
     </ng-container>
   </app-card>
+<br />
+  <app-card>
+    <ng-container card-header-title> Componente selección </ng-container>
+    <ng-container card-body>
+      <h4>Type Select</h4>
+      <app-seleccion
+        [textSeleccion]="'Seleccione una ciudad'"
+        [items]="itemsExampleSeleccion"
+        (selected)="itemSelected($event)"
+        [type]="'select'"
+      ></app-seleccion>
+      <h4>Type listbox</h4>
+      <app-seleccion
+        [items]="itemsExampleSeleccion"
+        (selected)="itemSelected($event)"
+        [type]="'listbox'"
+      ></app-seleccion>
+      <br />
 
+      <h3>Como utilizar</h3>
+      <hr />
+      <div>
+        <code
+          >&lt;app-seleccion [textSeleccion]="'Seleccione una ciudad'" [items]="itemsExampleSeleccion" [type]="'select' (selected)="itemSelected($event)" &gt;
+          &lt;app-seleccion&gt;</code
+        >
+      </div>
+      <br />
+      <h4>Propiedades: </h4>
+      <ul>
+        <li><strong>[type]</strong>: Tipo de selecctor (<strong>select</strong> para un selector común y <strong>listbox</strong> para utilizar un componente primeng multiseleccion más potenciado)</li>
+        <li><strong>[textSeleccion]</strong>: Para indicar el texto inicial que desee que aparezca dentro select. </li>
+        <li><strong>[items]</strong>: Datos a desplegar para ser seleccionados </li>
+      </ul>
+      <br />
+      <h4>Funciones:</h4>
+      <ul><li><strong>(selected)</strong>: Callback que retorna el valor seleccionado (el code en caso de select común y un array en caso de listbox)</li></ul>
+      <br />
+      <h4>JSON de datos = itemsExampleSeleccion</h4>
+      <code>
+        <pre>{{ itemsExampleSeleccion | json }}</pre>
+      </code>
+
+    </ng-container>
+  </app-card>
+
+
+  <br />
+  <app-card>
+    <ng-container card-header-title> Componente DatePicker </ng-container>
+    <ng-container card-body>
+      <app-datepicker (selected)="dateSelected($event)"></app-datepicker>
+      <br />
+      <br />
+      <h3>Como utilizar</h3>
+      <hr />
+      <div>
+        <code
+          >&lt;app-datepicker (selected)="dateSelected($event)" &gt;
+          &lt;app-datepicker&gt;</code
+        >
+      </div>
+      <br />
+      <h4>Funciones:</h4>
+      <ul><li><strong>(selected)</strong>: Callback que retorna el valor seleccionado </li></ul>
+      <br />
+    </ng-container>
+  </app-card>
+
+
+  <br />
+  <app-card>
+    <ng-container card-header-title> Componente Modal </ng-container>
+    <ng-container card-body>
+      <button class="btn btn-sm btn-outline-success" (click)="testModal();">Botón Modal</button>
+      <app-modal [display]="testDisplayModal" (CloseEvent)="testDisplayModal=false">
+        <ng-container modal-header-title>
+          <span>Modal title example</span>
+        </ng-container>
+        <ng-container modal-content>
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam enim erat, fermentum et elit et, laoreet scelerisque sapien. Suspendisse feugiat erat eu ante ullamcorper rhoncus. Aliquam iaculis metus ut egestas commodo. Sed bibendum turpis eget facilisis euismod. Suspendisse nec accumsan ex, non fermentum neque. Donec ullamcorper arcu vitae justo vulputate aliquet. Aliquam blandit augue ex, vitae fringilla quam auctor ac. Aenean cursus, sapien vel ornare posuere, nisl tortor dictum ante, ut dictum ante sapien et massa. Vestibulum faucibus consequat bibendum. Integer in ornare augue.
+
+            Vestibulum pretium malesuada aliquam. In erat turpis, imperdiet et leo eget, pretium ullamcorper purus. Proin posuere felis id massa fringilla interdum. Maecenas a erat auctor, porta urna in, volutpat quam. Curabitur vel orci at eros ultricies tempus. Fusce accumsan semper est at aliquam. Nulla facilisi. Integer quis ante eget mi scelerisque molestie rutrum eu ligula. Mauris feugiat ligula a tortor commodo, eu molestie nibh tincidunt. Proin cursus id ipsum eget mollis. Ut quam ligula, faucibus at est ac, facilisis viverra nisl. Sed volutpat non dolor a consequat. Pellentesque facilisis faucibus tortor, malesuada scelerisque orci condimentum pharetra. Fusce malesuada molestie tellus id dictum. Curabitur tempus efficitur gravida. Pellentesque molestie diam justo.
+            
+            Donec consequat ullamcorper sapien, et cursus orci pretium vitae. Morbi tempus lorem venenatis elit aliquet, quis hendrerit tortor placerat. Curabitur et placerat eros, vitae aliquam risus. Sed vitae eros nec mauris suscipit porttitor. Suspendisse potenti. Suspendisse potenti. Aenean hendrerit quis felis a malesuada. Suspendisse tempor libero eget porta viverra. Vestibulum ante felis, facilisis vel leo sed, sagittis accumsan risus. Ut lorem est, varius sit amet interdum at, vulputate id eros. Proin tincidunt, nisl sit amet lacinia sagittis, dolor ante vehicula mauris, in malesuada lorem felis vitae orci. Cras risus dolor, lacinia ac tincidunt eu, consectetur quis ex. Nunc auctor vel enim a viverra. Etiam eu mauris augue. Morbi tristique dolor et neque volutpat maximus. Nunc at orci elit.</span>
+        </ng-container>
+        <ng-container modal-footer>
+          <span>Footer buttons</span>
+        </ng-container>
+      </app-modal>
+      <br />
+      <br />
+      <h3>Como utilizar</h3>
+      <hr />
+      <div>
+        <code
+          >&lt;app-modal [display]="testDisplayModal" (CloseEvent)="testDisplayModal=false" &gt;
+          <br />
+          &lt;ng-container modal-header-title &gt;&lt;ng-container &gt;
+          <br />
+          &lt;ng-container modal-content &gt;&lt;ng-container &gt;
+          <br />
+          &lt;ng-container modal-footer &gt;&lt;ng-container &gt;
+          <br />
+          &lt;app-modal&gt;</code
+        >
+      </div>
+      <br />
+      <h4>Funciones:</h4>
+      <ul><li><strong>(CloseEvent)</strong>: Callback del evento de cerrar el modal para lograr modificar el boolean local</li></ul>
+      <br />
+    </ng-container>
+  </app-card>
 </div>

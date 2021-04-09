@@ -5,8 +5,8 @@ import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
-
-
+import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,14 +14,18 @@ import { ListboxModule } from 'primeng/listbox';
     ButtonModule,
     InputTextModule,
     ToolbarModule,
-    ListboxModule
+    ListboxModule,
+    CalendarModule,
+    DialogModule,
   ],
   exports: [
     TableModule,
     ButtonModule,
     InputTextModule,
     ToolbarModule,
-    ListboxModule
-  ]
+    ListboxModule,
+    CalendarModule,
+    DialogModule,
+  ],
 })
-export class PrimeNgModule { }
+export class PrimeNgModule {}

@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <h1 class="mt-4">Cubicaciones </h1>
+      <span>listado de cubicaciones en sistema</span>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <button [routerLink]="['/app/cubicacion/form-cub']" pButton type="button" label="Nueva Cubicación" icon="pi pi-plus"
+        class="p-button-sm mt-5 float-right"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-table [config]="configTable" [items]="data"></app-table>
+
+</div>

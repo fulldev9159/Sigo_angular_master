@@ -1,18 +1,3 @@
-<p>cubicacion works!</p>
-<app-seleccion
-  [textSeleccion]="'Seleccione una ciudad'"
-  [items]="itemsExample"
-  (selected)="itemSelected($event)"
-  [type]="'select'"
-></app-seleccion>
-
-<br>
-
-<app-seleccion
-  [items]="itemsExample"
-  (selected)="itemSelected($event)"
-  [type]="'listbox'"
-></app-seleccion>
-
-
-<router-outlet></router-outlet>
+<div [@rotateCarousel]="getState(outletCub)">
+  <router-outlet #outletCub="outlet"></router-outlet>
+</div>
