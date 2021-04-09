@@ -2,18 +2,18 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-kitui',
-  templateUrl: './kitui.component.html',
-  styleUrls: ['./kitui.component.scss']
+  selector: 'app-list-ot',
+  templateUrl: './list-ot.component.html',
+  styleUrls: ['./list-ot.component.scss']
 })
-export class KituiComponent implements OnInit, OnDestroy {
+export class ListOtComponent implements OnInit, OnDestroy {
 
   // declarations
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
     header: true,
     headerConfig: {
-      title: 'Tabla de productos',
+      title: '',
       searchText: 'buscar...'
     },
     body: {
@@ -26,35 +26,35 @@ export class KituiComponent implements OnInit, OnDestroy {
           editable: false
         },
         {
-          field: 'Nombre',
+          field: 'Sesión SCE',
           type: 'TEXT',
           sort: 'name',
           header: 'name',
           editable: false
         },
         {
-          field: 'Precio',
+          field: 'Nombre',
           type: 'NUMBER',
           sort: 'price',
           header: 'price',
           editable: false
         },
         {
-          field: 'Categoría',
+          field: 'Fecha inicio',
           type: 'TEXT',
           sort: 'category',
           header: 'category',
           editable: false
         },
         {
-          field: 'Vistas',
+          field: 'Fecha termino	',
           type: 'TEXT',
           sort: 'quantity',
           header: 'quantity',
           editable: false
         },
         {
-          field: 'Estado',
+          field: 'Contrato marco	',
           type: 'TEXT',
           sort: 'inventoryStatus',
           header: 'inventoryStatus',

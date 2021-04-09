@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="p-grid">
+    <div class="p-col">
+      <h1 class="mt-4">Orden de trabajo </h1>
+      <span>formulario OT</span>
+    </div>
+    <div class="p-col">
+      <button [routerLink]="['/app/ot/list-ot']" pButton type="button" label="volver" icon="pi pi-arrow-left"
+        class="p-button-sm mt-5 float-right p-button-outlined "></button>
+    </div>
+    <div class="p-col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-header-title>
+      Detalle OT
+    </ng-container>
+    <ng-container card-body>
+      <div class="row">
+        <div class="col-xs-12 col-md-8">
+          <app-form></app-form>
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <app-card [classCardHeader]="'bg-info'">
+            <ng-container card-header-title>Detalle Cubicación</ng-container>
+            <ng-container card-body>
+              <ol>
+                <li>Contrato:</li>
+                <li>Proveedor:</li>
+                <li>Región:</li>
+                <li>Total: $</li>
+              </ol>
+            </ng-container>
+          </app-card>
+
+          <app-card [classCard]="'mt-3'" [classCardHeader]="'bg-info'">
+            <ng-container card-header-title>Plan de proyecto</ng-container>
+            <ng-container card-body>
+              <ol>
+                <li>Plan:</li>
+                <li>Código proyecto:</li>
+                <li>Nombre sitio:</li>
+                <li>Dirección: </li>
+                <li>Latitud: </li>
+                <li>Longitud: </li>
+              </ol>
+            </ng-container>
+          </app-card>
+        </div>
+      </div>
+    </ng-container>
+  </app-card>
+
+
+</div>

@@ -1,2 +1,4 @@
-<p>ot works!</p>
-<router-outlet></router-outlet>
+<div [@rotateCarousel]="getState(trainingPlan)">
+  <router-outlet #trainingPlan="outlet"></router-outlet>
+</div>
+

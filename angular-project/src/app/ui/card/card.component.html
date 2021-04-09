@@ -1,6 +1,5 @@
-<div [ngClass]="{'card' : !classCard, classCard : classCard}">
-  <div class="card-header-tab card-header"
-    [ngClass]="{'card-header' : !classCardHeader, classCardHeader : classCardHeader}">
+<div class="card {{classCard}}">
+  <div class="card-header-tab card-header {{classCardHeader}}">
     <div class="card-header-title">
       <ng-content select="[card-header-title]"></ng-content>
     </div>
