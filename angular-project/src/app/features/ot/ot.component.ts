@@ -21,7 +21,7 @@ export class OtComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getState(outlet) {
+  getState(outlet): void {
     return outlet.activatedRouteData.state;
   }
 

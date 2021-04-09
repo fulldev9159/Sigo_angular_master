@@ -4,10 +4,6 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
 
-#wrapper {
-  overflow-x: hidden;
-}
-
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -260px;
@@ -534,5 +530,17 @@ body {
     &:nth-child(2) {
       color: #fff;
     }
+  }
+}
+
+.icon-angle-bottom {
+  position: absolute;
+  right: 8px;
+  top: 18px;
+}
+
+.active-item {
+  a {
+    color: #fff !important;
   }
 }
