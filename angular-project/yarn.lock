@@ -5927,6 +5927,13 @@
   "resolved" "https://registry.npmjs.org/next-tick/-/next-tick-1.0.0.tgz"
   "version" "1.0.0"
 
+"ngx-router-animations@0.0.9":
+  "integrity" "sha512-30kqbnFp30Vgvi2GKKjpFD6tXBXxsodfR6xwuLt6krqBm7JOrryhC2MrgRLlZn0O815PCYk7YIOd0XqmZ0HxUQ=="
+  "resolved" "https://registry.npmjs.org/ngx-router-animations/-/ngx-router-animations-0.0.9.tgz"
+  "version" "0.0.9"
+  dependencies:
+    "tslib" "^1.9.0"
+
 "nice-try@^1.0.4":
   "integrity" "sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ=="
   "resolved" "https://registry.npmjs.org/nice-try/-/nice-try-1.0.5.tgz"
@@ -5979,6 +5986,11 @@
   "integrity" "sha512-zR6HoT6LrLCRBwukmrVbHv0EpEQjksO6GmFcZQQuCAy139BEsoVKPYnf3jongYW83fAa1torLGYwxxky/p28sg=="
   "resolved" "https://registry.npmjs.org/node-releases/-/node-releases-1.1.71.tgz"
   "version" "1.1.71"
+
+"node-snackbar@^0.1.16":
+  "integrity" "sha512-3s43QMKgABXdnqUfpKAXG+WlvS8bbuO6n6LAOmmLNZs87CGdpexqfGYCktFVi9NHFgREwNJARgeVTLOFAf2MQg=="
+  "resolved" "https://registry.npmjs.org/node-snackbar/-/node-snackbar-0.1.16.tgz"
+  "version" "0.1.16"
 
 "normalize-package-data@^2.0.0", "normalize-package-data@^2.4.0":
   "integrity" "sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA=="
