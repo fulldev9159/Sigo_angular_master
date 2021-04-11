@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { fromTopEasing, fromBottomEasing } from 'ngx-router-animations';
+import { fromTopEasing, fromBottomEasing, scaleDownFromBottom, scaleDownFromTop } from 'ngx-router-animations';
 
 @Component({
   selector: 'app-cubicacion',
@@ -8,8 +8,12 @@ import { fromTopEasing, fromBottomEasing } from 'ngx-router-animations';
   styleUrls: ['./cubicacion.component.scss'],
   animations: [
     trigger('rotateCarousel', [
-      transition('list-cub => form-cub', useAnimation(fromTopEasing)),
-      transition('form-cub => list-cub', useAnimation(fromBottomEasing)),
+      transition('list-cub => form-cub', useAnimation(scaleDownFromTop, {
+        params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
+      })),
+      transition('form-cub => list-cub', useAnimation(scaleDownFromBottom, {
+        params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
+      })),
     ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush

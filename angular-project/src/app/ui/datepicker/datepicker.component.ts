@@ -3,6 +3,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
+  OnDestroy,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
@@ -13,12 +14,13 @@ import { Subject } from 'rxjs';
   styleUrls: ['./datepicker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatepickerComponent implements OnInit {
-  @Output() selected: EventEmitter<any> = new EventEmitter();
+export class DatepickerComponent implements OnInit, OnDestroy {
+  // declarations
+  public es: any;
   private destroyInstance: Subject<boolean> = new Subject();
-
+  @Output() selected: EventEmitter<any> = new EventEmitter();
   constructor(private config: PrimeNGConfig) {}
-  es: any;
+
   ngOnInit(): void {
     this.es = {
       closeText: 'Cerrar',

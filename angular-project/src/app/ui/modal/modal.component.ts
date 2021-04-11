@@ -4,6 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnDestroy,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -14,10 +15,12 @@ import { Subject } from 'rxjs';
   styleUrls: ['./modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
+  // declarations
   @Input() public display: boolean;
   @Output() public CloseEvent: EventEmitter<any> = new EventEmitter();
   private destroyInstance: Subject<boolean> = new Subject();
+
   constructor() {}
 
   ngOnInit(): void {}

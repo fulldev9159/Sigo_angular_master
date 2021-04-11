@@ -5,6 +5,7 @@ import {
   Output,
   EventEmitter,
   ChangeDetectionStrategy,
+  OnDestroy
 } from '@angular/core';
 import { SeleccionType } from '@uiOT/seleccion/seleccion.model';
 import { Subject } from 'rxjs';
@@ -14,15 +15,18 @@ import { Subject } from 'rxjs';
   styleUrls: ['./seleccion.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SeleccionComponent implements OnInit {
+export class SeleccionComponent implements OnInit, OnDestroy {
+
+  // declarations
   @Input() public items: SeleccionType[];
   @Input() public type: string;
   @Input() public textSeleccion?: string;
   @Output() selected: EventEmitter<any> = new EventEmitter();
   private destroyInstance: Subject<boolean> = new Subject();
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor() { }
+
+  ngOnInit(): void { }
 
   itemSelected(event: Event | object): void {
     if (this.type === 'select') {
