@@ -1,15 +1,25 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { SeleccionType } from '@uiOT/seleccion/seleccion.model';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-seleccion',
   templateUrl: './seleccion.component.html',
   styleUrls: ['./seleccion.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SeleccionComponent implements OnInit {
   @Input() public items: SeleccionType[];
   @Input() public type: string;
   @Input() public textSeleccion?: string;
   @Output() selected: EventEmitter<any> = new EventEmitter();
+  private destroyInstance: Subject<boolean> = new Subject();
   constructor() {}
 
   ngOnInit(): void {}
@@ -21,5 +31,10 @@ export class SeleccionComponent implements OnInit {
       const key = 'value';
       this.selected.emit(event[key]);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroyInstance.next(true);
+    this.destroyInstance.complete();
   }
 }

@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,7 @@ import { DialogModule } from 'primeng/dialog';
     ListboxModule,
     CalendarModule,
     DialogModule,
+    ConfirmPopupModule,
   ],
   exports: [
     TableModule,
@@ -26,6 +28,7 @@ import { DialogModule } from 'primeng/dialog';
     ListboxModule,
     CalendarModule,
     DialogModule,
+    ConfirmPopupModule,
   ],
 })
 export class PrimeNgModule {}
