@@ -31,6 +31,9 @@
       "@storeOT/*": [
         "src/app/store/*"
       ],
+      "@utilsSIGO/*": [
+        "src/app/utils/*"
+      ],
     },
     "lib": [
       "es2018",
