@@ -4,6 +4,10 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
 
+#page-content-wrapper {
+  background-color: #dae9ec;
+}
+
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -260px;
@@ -20,10 +24,6 @@
 
 #sidebar-wrapper .list-group {
   width: 15rem;
-}
-
-#page-content-wrapper {
-  min-width: 100vw;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -121,7 +121,7 @@ body {
 }
 
 .page-wrapper .theme.chiller-theme {
-  background: #1e2229;
+  background: #00507d;
 }
 
 /*----------------toggeled sidebar----------------*/
@@ -452,13 +452,13 @@ body {
 /*-----------------------------chiller-theme-------------------------------------------------*/
 
 .chiller-theme .sidebar-wrapper {
-  background: #31353d;
+  background: #02486f;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-header,
 .chiller-theme .sidebar-wrapper .sidebar-search,
 .chiller-theme .sidebar-wrapper .sidebar-menu {
-  border-top: 1px solid #3a3f48;
+  border-top: 1px solid #00507d;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu,
@@ -504,7 +504,7 @@ body {
 .chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown div,
 .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu,
 .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text {
-  background: #3a3f48;
+  background: #cee1e5;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-menu .header-menu span {
