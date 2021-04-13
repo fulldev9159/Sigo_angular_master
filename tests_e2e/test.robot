@@ -8,7 +8,7 @@ Resource          resource.robot
 *** Test Cases ***
 Valid Page
     Open Browser To Page    https://stackoverflow.com/
-    ${"search_button"}    set variable    class:s-btn__fille
+    ${"search_button"}    set variable    class:s-btn__filled
 
     element should be visible    ${"search_button"}
 
