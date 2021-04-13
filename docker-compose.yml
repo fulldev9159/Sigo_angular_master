@@ -1,45 +1,31 @@
-version: "3"
+version: "3.4"
 
 services:
-  mvp_otec_db:
-    image: registryv2.zweicom.com:5000/mcl-otec-db:mvp-demp
-    restart: always
+  deploy:
+    image: registryv2.zweicom.com:5000/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}
+    build:
+      context: .
+      dockerfile: docker/deploy/Dockerfile
     environment:
-      TZ: America/Santiago
-      MYSQL_DATABASE: OTEC
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_USER: otec_user
-      MYSQL_PASSWORD: otec_pass
-    # volumes:
-    #     - otec_db:/var/lib/mysql
-    command:
-      [
-        "mysqld",
-        "--character-set-server=utf8mb4",
-        "--collation-server=utf8mb4_unicode_ci",
-      ]
-  mvp_api_otec:
-    image: registryv2.zweicom.com:5000/api-otec:mvp-demp
-    environment:
-      TZ: America/Santiago
-      LOG_LEVEL: INFO
-      SERVICE_PORT: 4040
-      OTEC_DB: root:pass@tcp(mvp_otec_db:3306)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true
-      DB_MAXOPENCONNECTIONS: 10
-      DB_MAXIDLECONNECTIONS: 5
-      DB_PINGINTERVAL: 30
-      DB_MAXLIFETIMECONNECTION: 300
-      API_SCE_ADDRESS: http://35.192.99.178:2004
-    restart: always
-    expose:
-      - 4040
-    depends_on:
-      - mvp_otec_db
-  mvp_otec_web:
-    image: registryv2.zweicom.com:5000/mcl-otec-webclient:mvp-demp
-    environment:
-      WEBAPI_NAME: "mvp_api_otec"
-      WEBAPI_PORT: "4040"
+      WEBAPI_NAME: "backend"
+      WEBAPI_PORT: "8021"
     ports:
       - 4200:80
     restart: always
+
+  develop:
+    image: registryv2.zweicom.com:5000/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}-develop
+    build:
+      context: .
+      dockerfile: docker/deploy/Dockerfile
+    environment:
+      WEBAPI_NAME: "backend"
+      WEBAPI_PORT: "8021"
+    ports:
+      - 4200:80
+    restart: always
+
+  # backend:
+  #   image: registryv2.zweicom.com:5000/cloud-webapi:latest
+  #   expose:
+  #     - 8021

@@ -1,14 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { SeleccionType } from '@uiOT/seleccion/seleccion.model';
-
+import { SnackBarService } from '@utilsSIGO/snack-bar';
+import { ConfirmationService } from 'primeng/api';
 @Component({
   selector: 'app-kitui',
   templateUrl: './kitui.component.html',
   styleUrls: ['./kitui.component.scss'],
+  providers: [ConfirmationService],
 })
 export class KituiComponent implements OnInit, OnDestroy {
-
   // declarations
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
@@ -439,14 +440,17 @@ export class KituiComponent implements OnInit, OnDestroy {
 
   testDisplayModal = false;
 
-  constructor() {
+  constructor(
+    private snackService: SnackBarService,
+    private confirmationService: ConfirmationService
+  ) {
     this.itemsExampleSeleccion = this.dataRealRecibida.map((x) => ({
       name: x.ciudad,
       code: x.id,
     }));
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   itemSelected(event: string | Array<any>): void {
     console.log(event);
@@ -463,5 +467,21 @@ export class KituiComponent implements OnInit, OnDestroy {
 
   testModal(): void {
     this.testDisplayModal = true;
+  }
+
+  Snack(message: string): void {
+    message === 'error'
+      ? this.snackService.showMessage('Test ERR snack', 'error')
+      : this.snackService.showMessage('Test OK Snackbar', 'OK');
+  }
+
+  Popup(event: Event): void {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: `Si cambia de valor se borrara todos los sevicios seleccionados. Está seguro que desea proceder?`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {},
+      reject: () => {},
+    });
   }
 }
