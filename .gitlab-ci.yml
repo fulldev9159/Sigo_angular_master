@@ -16,6 +16,12 @@ ci:
     - ng test --code-coverage --progress false --watch false
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
+robotframework:
+  stage: ci
+  image: registryv2.zweicom.com:5000/robotframework:latest
+  script:
+    - robot .
+    
 docker-develop:
   stage: deployment
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
