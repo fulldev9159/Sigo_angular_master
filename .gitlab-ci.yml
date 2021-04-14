@@ -28,25 +28,28 @@ unit test and lint:
     - ng test --code-coverage --progress false --watch false
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
+build a develop image for test:
+  stage: ci
+  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  script:
+    - docker-compose -f docker-compose.yml build --no-cache develop
+    - docker-compose -f docker-compose.yml push develop
+  needs: ["unit test and lint"]
+
 up ambiente test:
   stage: ci
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - cd dockers-ambiente-local
-    - docker-compose up -d mcl_api_otec
+    - docker-compose up -d mcl_web_otec
+  needs: ["build a develop image for test"]
 
 robotframework:
   stage: ci
   image: registryv2.zweicom.com:5000/robotframework:latest
   script:
     - robot .
-
-docker-develop:
-  stage: deployment
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-  script:
-    - docker-compose -f docker-compose.yml build --no-cache develop
-    - docker-compose -f docker-compose.yml push develop
+  needs: ["up ambiente test"]
 
 docker:
   stage: deployment
