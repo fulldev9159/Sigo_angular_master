@@ -28,6 +28,13 @@ unit test and lint:
     - ng test --code-coverage --progress false --watch false
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
+up ambiente test:
+  stage: ci
+  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  script:
+    - cd dockers-ambiente-local
+    - docker-compose up -d mcl_api_otec
+
 robotframework:
   stage: ci
   image: registryv2.zweicom.com:5000/robotframework:latest
