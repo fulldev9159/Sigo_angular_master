@@ -1,7 +1,10 @@
 stages:
   - ci
+  - unit test
+  - build test
+  - up test environment
+  - e2e test
   - deployment
-  - build
 # - triggers
 
 variables:
@@ -20,7 +23,7 @@ build robot framework:
       - dockerfiles/robotframework/robotframework/Dockerfile
 
 unit test and lint:
-  stage: ci
+  stage: unit test
   image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
   script:
     - cd angular-project
@@ -30,27 +33,24 @@ unit test and lint:
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
 build a develop image for test:
-  stage: ci
+  stage: build test
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - docker-compose -f docker-compose.yml build --no-cache develop
     - docker-compose -f docker-compose.yml push develop
-  when: on_success
 
 up ambiente test:
-  stage: ci
+  stage: up test environment
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - cd dockers-ambiente-local
-    - docker-compose up -d mcl_web_otec
-  when: on_success
+    - docker-compose up -d mcl_otec_web
 
 robotframework:
-  stage: ci
+  stage: e2e test
   image: registryv2.zweicom.com:5000/robotframework:latest
   script:
     - robot .
-  when: on_success
 
 docker:
   stage: deployment
