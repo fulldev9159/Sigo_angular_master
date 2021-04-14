@@ -2,8 +2,8 @@ stages:
   - ci
   - unit test
   - build test
-  - notifications
-  - up test environment
+  # - notifications
+  # - up test environment
   - e2e test
   - deployment
 # - triggers
@@ -23,34 +23,34 @@ build robot framework:
     changes:
       - dockerfiles/robotframework/robotframework/Dockerfile
 
-# unit test and lint:
-#   stage: unit test
-#   image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
-#   script:
-#     - cd angular-project
-#     - npm ci
-#     - ng lint
-#     - ng test --code-coverage --progress false --watch false
-#   coverage: '/^Statements\s*:\s*([^%]+)/'
+unit test and lint:
+  stage: unit test
+  image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
+  script:
+    - cd angular-project
+    - npm ci
+    - ng lint
+    - ng test --code-coverage --progress false --watch false
+  coverage: '/^Statements\s*:\s*([^%]+)/'
 
-# build a develop image for test:
-#   stage: build test
-#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-#   script:
-#     - docker-compose -f docker-compose.yml build --no-cache develop
-#     - docker-compose -f docker-compose.yml push develop
+build a develop image for test:
+  stage: build test
+  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  script:
+    - docker-compose -f docker-compose.yml build --no-cache develop
+    - docker-compose -f docker-compose.yml push develop
 
-demos_env:
-    image: registryv2.zweicom.com:5000/appropriate/curl
-    stage: notifications
-    script:
-        - |
-          curl -X POST \
-          -F "variables[ORIGIN]=$ORIGIN" \
-          -F "variables[CI_PIPELINE_ID]=$CI_PIPELINE_ID" \
-          -F "variables[PRECURSOR]=$CI_PROJECT_NAME" \
-          -F token=74396a440c70c392dabe7f01341bb0 \
-          -F ref=develop http://192.168.14.50/api/v4/projects/665/trigger/pipeline
+# demos_env:
+#     image: registryv2.zweicom.com:5000/appropriate/curl
+#     stage: notifications
+#     script:
+#         - |
+#           curl -X POST \
+#           -F "variables[ORIGIN]=$ORIGIN" \
+#           -F "variables[CI_PIPELINE_ID]=$CI_PIPELINE_ID" \
+#           -F "variables[PRECURSOR]=$CI_PROJECT_NAME" \
+#           -F token=74396a440c70c392dabe7f01341bb0 \
+#           -F ref=develop http://192.168.14.50/api/v4/projects/665/trigger/pipeline
 
 # up ambiente test:
 #   stage: up test environment
@@ -59,11 +59,11 @@ demos_env:
 #     - cd dockers-ambiente-local
 #     - docker-compose up -d mcl_otec_web
 
-# robotframework:
-#   stage: e2e test
-#   image: registryv2.zweicom.com:5000/robotframework:latest
-#   script:
-#     - robot .
+robotframework:
+  stage: e2e test
+  image: registryv2.zweicom.com:5000/robotframework:latest
+  script:
+    - robot .
 
 
 docker:

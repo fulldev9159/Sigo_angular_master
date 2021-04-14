@@ -7,7 +7,7 @@ Resource          resource.robot
 
 *** Test Cases ***
 Valid Page
-    Open Browser To Page    http://localhost:4200/
+    Open Browser To Page    http://35.192.99.178:4400/
     ${"user_name"}    set variable    class:user-name
 
     element should be visible    ${"user_name"}
