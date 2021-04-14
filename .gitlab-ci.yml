@@ -30,26 +30,27 @@ unit test and lint:
 
 build a develop image for test:
   stage: ci
+  needs: ["unit test and lint"]
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - docker-compose -f docker-compose.yml build --no-cache develop
     - docker-compose -f docker-compose.yml push develop
-  needs: ["unit test and lint"]
 
 up ambiente test:
   stage: ci
+  needs: ["build a develop image for test"]
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - cd dockers-ambiente-local
     - docker-compose up -d mcl_web_otec
-  needs: ["build a develop image for test"]
+
 
 robotframework:
   stage: ci
+  needs: ["up ambiente test"]
   image: registryv2.zweicom.com:5000/robotframework:latest
   script:
     - robot .
-  needs: ["up ambiente test"]
 
 docker:
   stage: deployment
