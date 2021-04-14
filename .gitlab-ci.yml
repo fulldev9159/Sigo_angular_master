@@ -18,6 +18,7 @@ build robot framework:
       - develop
     changes:
       - dockerfiles/robotframework/robotframework/Dockerfile
+
 unit test and lint:
   stage: ci
   image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
@@ -30,28 +31,27 @@ unit test and lint:
 
 build a develop image for test:
   stage: ci
-  needs: ["unit test and lint"]
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - docker-compose -f docker-compose.yml build --no-cache develop
     - docker-compose -f docker-compose.yml push develop
+  when: on_succes
 
 up ambiente test:
   stage: ci
-  needs: ["build a develop image for test"]
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - cd dockers-ambiente-local
     - docker-compose up -d mcl_web_otec
-
+  when: on_succes
 
 robotframework:
   stage: ci
-  needs: ["up ambiente test"]
   image: registryv2.zweicom.com:5000/robotframework:latest
   script:
     - robot .
-
+  when: on_succes
+  
 docker:
   stage: deployment
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
