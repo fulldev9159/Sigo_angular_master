@@ -5,6 +5,7 @@ stages:
   - up test environment
   - e2e test
   - deployment
+  - deploy
 # - triggers
 
 variables:
@@ -40,7 +41,7 @@ build robot framework:
 #     - docker-compose -f docker-compose.yml push develop
 
 test cloud:
-  stage: up test environment
+  stage: deploy
   script:
     - pwd
   tags:
