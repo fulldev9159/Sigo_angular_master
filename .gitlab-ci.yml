@@ -1,12 +1,24 @@
 stages:
   - ci
   - deployment
+  - build
 # - triggers
 
 variables:
   CLI_VERSION: 10.1.6
 
-ci:
+build robot framework:
+  stage: ci
+  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  script:
+    - docker-compose build --no-cache robotframework
+    - docker-compose push robotframework
+  only:
+    refs:
+      - develop
+    changes:
+      - dockerfiles/robotframework/robotframework/Dockerfile
+unit test and lint:
   stage: ci
   image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
   script:
@@ -21,7 +33,7 @@ robotframework:
   image: registryv2.zweicom.com:5000/robotframework:latest
   script:
     - robot .
-    
+
 docker-develop:
   stage: deployment
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
