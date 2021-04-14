@@ -39,6 +39,14 @@ build robot framework:
 #     - docker-compose -f docker-compose.yml build --no-cache develop
 #     - docker-compose -f docker-compose.yml push develop
 
+test cloud:
+  stage: up test environment
+  script:
+    - pwd
+  tags:
+    - gcloud_tpb
+  environment: google cloud tpb
+
 # up ambiente test:
 #   stage: up test environment
 #   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
@@ -46,11 +54,12 @@ build robot framework:
 #     - cd dockers-ambiente-local
 #     - docker-compose up -d mcl_otec_web
 
-robotframework:
-  stage: e2e test
-  image: registryv2.zweicom.com:5000/robotframework:latest
-  script:
-    - robot .
+# robotframework:
+#   stage: e2e test
+#   image: registryv2.zweicom.com:5000/robotframework:latest
+#   script:
+#     - robot .
+
 
 docker:
   stage: deployment
