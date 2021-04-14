@@ -2,10 +2,10 @@ stages:
   - ci
   - unit test
   - build test
+  - notifications
   - up test environment
   - e2e test
   - deployment
-  - deploy
 # - triggers
 
 variables:
@@ -40,13 +40,17 @@ build robot framework:
 #     - docker-compose -f docker-compose.yml build --no-cache develop
 #     - docker-compose -f docker-compose.yml push develop
 
-test cloud:
-  stage: deploy
-  script:
-    - pwd
-  tags:
-    - gcloud_tpb
-  environment: google cloud tpb
+demos_env:
+    image: registryv2.zweicom.com:5000/appropriate/curl
+    stage: notifications
+    script:
+        - |
+          curl -X POST \
+          -F "variables[ORIGIN]=$ORIGIN" \
+          -F "variables[CI_PIPELINE_ID]=$CI_PIPELINE_ID" \
+          -F "variables[PRECURSOR]=$CI_PROJECT_NAME" \
+          -F token=74396a440c70c392dabe7f01341bb0 \
+          -F ref=develop http://192.168.14.50/api/v4/projects/665/trigger/pipeline
 
 # up ambiente test:
 #   stage: up test environment
