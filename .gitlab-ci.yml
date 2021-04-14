@@ -35,7 +35,7 @@ build a develop image for test:
   script:
     - docker-compose -f docker-compose.yml build --no-cache develop
     - docker-compose -f docker-compose.yml push develop
-  when: on_succes
+  when: on_success
 
 up ambiente test:
   stage: ci
@@ -43,15 +43,15 @@ up ambiente test:
   script:
     - cd dockers-ambiente-local
     - docker-compose up -d mcl_web_otec
-  when: on_succes
+  when: on_success
 
 robotframework:
   stage: ci
   image: registryv2.zweicom.com:5000/robotframework:latest
   script:
     - robot .
-  when: on_succes
-  
+  when: on_success
+
 docker:
   stage: deployment
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
