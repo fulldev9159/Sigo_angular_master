@@ -22,29 +22,29 @@ build robot framework:
     changes:
       - dockerfiles/robotframework/robotframework/Dockerfile
 
-unit test and lint:
-  stage: unit test
-  image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
-  script:
-    - cd angular-project
-    - npm ci
-    - ng lint
-    - ng test --code-coverage --progress false --watch false
-  coverage: '/^Statements\s*:\s*([^%]+)/'
+# unit test and lint:
+#   stage: unit test
+#   image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
+#   script:
+#     - cd angular-project
+#     - npm ci
+#     - ng lint
+#     - ng test --code-coverage --progress false --watch false
+#   coverage: '/^Statements\s*:\s*([^%]+)/'
 
-build a develop image for test:
-  stage: build test
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-  script:
-    - docker-compose -f docker-compose.yml build --no-cache develop
-    - docker-compose -f docker-compose.yml push develop
+# build a develop image for test:
+#   stage: build test
+#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+#   script:
+#     - docker-compose -f docker-compose.yml build --no-cache develop
+#     - docker-compose -f docker-compose.yml push develop
 
-up ambiente test:
-  stage: up test environment
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-  script:
-    - cd dockers-ambiente-local
-    - docker-compose up -d mcl_otec_web
+# up ambiente test:
+#   stage: up test environment
+#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+#   script:
+#     - cd dockers-ambiente-local
+#     - docker-compose up -d mcl_otec_web
 
 robotframework:
   stage: e2e test
