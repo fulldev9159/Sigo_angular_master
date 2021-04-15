@@ -48,3 +48,8 @@ Thumbs.db
 **/*.swp
 
 /angular-project/debug.log
+
+tests_e2e/log.html
+tests_e2e/output.xml
+tests_e2e/report.html
+tests_e2e/selenium-screenshot*

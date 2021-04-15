@@ -5,7 +5,7 @@ services:
     image: registryv2.zweicom.com:5000/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}
     build:
       context: .
-      dockerfile: docker/deploy/Dockerfile
+      dockerfile: dockerfiles/deploy/Dockerfile
     environment:
       WEBAPI_NAME: "backend"
       WEBAPI_PORT: "8021"
@@ -17,7 +17,7 @@ services:
     image: registryv2.zweicom.com:5000/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}-develop
     build:
       context: .
-      dockerfile: docker/deploy/Dockerfile
+      dockerfile: dockerfiles/deploy/Dockerfile
     environment:
       WEBAPI_NAME: "backend"
       WEBAPI_PORT: "8021"
