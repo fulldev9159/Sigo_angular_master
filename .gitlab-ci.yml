@@ -63,6 +63,7 @@ e2e robotframework:
   stage: e2e test
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
+    - cd dockers-ambiente-local
     - docker-compose exec -T mcl_robotframework robot .
 
 
