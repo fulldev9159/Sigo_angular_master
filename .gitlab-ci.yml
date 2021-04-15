@@ -52,18 +52,18 @@ build robot framework:
 #           -F token=74396a440c70c392dabe7f01341bb0 \
 #           -F ref=develop http://192.168.14.50/api/v4/projects/665/trigger/pipeline
 
-up ambiente test:
-  stage: up test environment
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-  script:
-    - cd dockers-ambiente-local
-    - docker-compose up -d mcl_otec_web
+# up ambiente test:
+#   stage: up test environment
+#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+#   script:
+#     - cd dockers-ambiente-local
+#     - docker-compose up -d mcl_otec_web
 
 e2e robotframework:
   stage: e2e test
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
-    - docker-compose exec sh -c "robot ."
+    - docker-compose exec bash -c "robot ."
 
 
 docker:
