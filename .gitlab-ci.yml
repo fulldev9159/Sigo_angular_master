@@ -61,6 +61,7 @@ up ambiente test:
 
 e2e robotframework:
   stage: e2e test
+  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - docker-compose exec sh -c "robot ."
 
