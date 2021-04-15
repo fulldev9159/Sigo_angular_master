@@ -3,7 +3,7 @@ stages:
   - unit test
   - build test
   # - notifications
-  # - up test environment
+  - up test environment
   - e2e test
   - deployment
 # - triggers
