@@ -17,7 +17,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 WORKDIR /usr/share/nginx/html
 
 COPY --from=base /app/dist/app-ot/ .
-COPY dockerfiles/deploy/docker_entrypoint.sh .
+COPY docker/deploy/docker_entrypoint.sh .
 RUN chmod +x docker_entrypoint.sh
 
 ENTRYPOINT [ "/usr/share/nginx/html/docker_entrypoint.sh" ]
