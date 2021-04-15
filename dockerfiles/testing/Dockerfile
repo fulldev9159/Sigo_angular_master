@@ -12,4 +12,4 @@ WORKDIR /app
 
 COPY tests_e2e .
 
-ENTRYPOINT [ "robot" , "-output", "NONE" , "." ]   
+ENTRYPOINT [ "robot" , "--output", "NONE" , "--report" , "NONE" , "--log" , "NONE", "." ]   
