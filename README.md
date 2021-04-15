@@ -1,10 +1,8 @@
 # Project OTEC WEB
 
-![logo](./images/login_op2.PNG)
-
 ## Objetivo
 
-El objetivo de es otorgar un administrador web para que el cliente logre administrar las ordenes de trabajo que se realizan en Movistar.
+El objetivo de es otorgar un administrador web que permita al cliente administrar las ordenes de trabajo que se realizan en Movistar.
 
 ## Funcionalidades
 

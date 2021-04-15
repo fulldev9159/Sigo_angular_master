@@ -6,26 +6,11 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/deploy/Dockerfile
-    environment:
-      WEBAPI_NAME: "backend"
-      WEBAPI_PORT: "8021"
-    ports:
-      - 4200:80
-    restart: always
 
   develop:
     image: registryv2.zweicom.com:5000/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}-develop
     build:
       context: .
       dockerfile: dockerfiles/deploy/Dockerfile
-    environment:
-      WEBAPI_NAME: "backend"
-      WEBAPI_PORT: "8021"
-    ports:
-      - 4200:80
-    restart: always
 
-  # backend:
-  #   image: registryv2.zweicom.com:5000/cloud-webapi:latest
-  #   expose:
-  #     - 8021
+
