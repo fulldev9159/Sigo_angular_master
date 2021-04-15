@@ -41,7 +41,7 @@ build a develop image for test:
     - docker-compose -f docker-compose.yml push develop
 
 e2e robotframework:
-  stage: up test environment
+  stage: e2e test
   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
   script:
     - docker-compose -f dockers-ambiente-local/docker-compose.yml down -v
