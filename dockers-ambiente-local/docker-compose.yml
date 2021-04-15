@@ -47,8 +47,6 @@ services:
             
     mcl_robotframework:
         image: registryv2.zweicom.com:5000/robotframework:latest
-        restart: always
-
 
     # export OTEC_DB="root:pass@tcp(localhost:3307)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true"
     # export API_SCE_ADDRESS="http://35.192.99.178:2004"
