@@ -7,7 +7,7 @@ Resource          resource.robot
 
 *** Test Cases ***
 Valid Page
-    Open Browser To Page    http://35.192.99.178:4400/
+    Open Browser To Page    http://mcl_otec_web:4200/
     ${"user_name"}    set variable    class:user-name
 
     element should be visible    ${"user_name"}

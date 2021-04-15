@@ -43,6 +43,11 @@ services:
         restart: always
         depends_on: 
             - mcl_api_otec
+            - mcl_robotframework
+            
+    mcl_robotframework:
+        image: registryv2.zweicom.com:5000/robotframework:latest
+        restart: always
 
 
     # export OTEC_DB="root:pass@tcp(localhost:3307)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true"
