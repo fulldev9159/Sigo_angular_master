@@ -55,7 +55,7 @@ services:
 
   mcl_e2e_robotframework:
     build:
-      context: ..
+      context: .
       dockerfile: docker/testing/Dockerfile
 
   #   MVP
