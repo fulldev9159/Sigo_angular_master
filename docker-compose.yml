@@ -43,7 +43,7 @@ services:
     depends_on:
       - mcl_test_sigo_db
   mcl_test_sigo_web:
-    image: registryv2.zweicom.com:5000/mcl-otec-webclient:latest-develop
+    image: registryv2.zweicom.com:5000/mcl-otec-webclient:latest-testing
     environment:
       WEBAPI_NAME: "mcl_test_sigo_api"
       WEBAPI_PORT: "4040"
