@@ -7,7 +7,7 @@ Resource          resource.robot
 
 *** Test Cases ***
 Valid Page
-    Open Browser To Page    http://mcl_otec_web/
+    Open Browser To Page    http://mcl_test_sigo_web/
     ${"user_name"}    set variable    class:user-name
 
     element should be visible    ${"user_name"}
