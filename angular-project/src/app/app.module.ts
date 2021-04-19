@@ -1,13 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '@environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { environment } from 'src/environments/environment';
-import { routerReducer, RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import {
+  routerReducer,
+  RouterState,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LayoutModule } from './layout/layout.module';
 import { RouterModule } from '@angular/router';
@@ -22,9 +26,7 @@ import { LoadingService } from '@utilsSIGO/service-progress';
 const metaReducers: Array<MetaReducer<any, any>> = [];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -46,9 +48,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [];
     StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
     LayoutModule,
     StoreAllModule,
-    UiModule
+    UiModule,
   ],
   providers: [
+<<<<<<< HEAD
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: JwtAppInterceptor,
@@ -66,7 +69,15 @@ const metaReducers: Array<MetaReducer<any, any>> = [];
     // },
     { provide: LOCALE_ID, useValue: 'es-CL' },
     LoadingService
+=======
+    { provide: 'environment', useValue: environment },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+>>>>>>> 7e7ee7469b5ec06bbe049156a5802858df434fae
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

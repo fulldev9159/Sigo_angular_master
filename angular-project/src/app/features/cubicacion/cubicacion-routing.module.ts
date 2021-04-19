@@ -4,7 +4,7 @@ import { FormCubComponent } from './container/form-cub/form-cub.component';
 import { ListCubComponent } from './container/list-cub/list-cub.component';
 import { CubicacionComponent } from './cubicacion.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: CubicacionComponent,

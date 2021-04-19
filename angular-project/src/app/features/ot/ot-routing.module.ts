@@ -4,7 +4,7 @@ import { FormOtComponent } from './container/form-ot/form-ot.component';
 import { ListOtComponent } from './container/list-ot/list-ot.component';
 import { OtComponent } from './ot.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: OtComponent,

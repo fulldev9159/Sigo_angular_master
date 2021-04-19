@@ -12,7 +12,6 @@ import { SeleccionComponent } from './seleccion/seleccion.component';
 import { ModalComponent } from './modal/modal.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ToastComponent } from './toast/toast.component';
-import { PopupComponent } from './popup/popup.component';
 import { ConfirmationService } from 'primeng/api';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
@@ -28,7 +27,6 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     ModalComponent,
     DatepickerComponent,
     ToastComponent,
-    PopupComponent,
     ProgressBarComponent,
   ],
   exports: [
@@ -39,7 +37,6 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     ModalComponent,
     DatepickerComponent,
     ToastComponent,
-    PopupComponent,
     ProgressBarComponent
   ],
   providers: [ConfirmationService],
