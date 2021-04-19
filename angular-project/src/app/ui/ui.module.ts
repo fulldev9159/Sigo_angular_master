@@ -9,7 +9,6 @@ import { SeleccionComponent } from './seleccion/seleccion.component';
 import { ModalComponent } from './modal/modal.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ToastComponent } from './toast/toast.component';
-import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   imports: [
@@ -23,7 +22,6 @@ import { PopupComponent } from './popup/popup.component';
     ModalComponent,
     DatepickerComponent,
     ToastComponent,
-    PopupComponent,
   ],
   exports: [
     CardComponent,
@@ -33,7 +31,6 @@ import { PopupComponent } from './popup/popup.component';
     ModalComponent,
     DatepickerComponent,
     ToastComponent,
-    PopupComponent,
   ]
 })
 export class UiModule { }
