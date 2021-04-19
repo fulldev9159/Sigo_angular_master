@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(): void {
+    console.log('asdsadsdsds');
     this.authFacade.postLogin();
     // this.router.navigate(['/app']);
   }

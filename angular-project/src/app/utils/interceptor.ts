@@ -34,7 +34,7 @@ export class JwtAppInterceptor implements HttpInterceptor {
       const token = `Bearer ${this.token}`;
       req = req.clone({
         setHeaders: {
-          // Authorization: `${token}`
+          Authorization: `${token}`
         }
       });
     } else {

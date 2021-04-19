@@ -51,33 +51,24 @@ const metaReducers: Array<MetaReducer<any, any>> = [];
     UiModule,
   ],
   providers: [
-<<<<<<< HEAD
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: JwtAppInterceptor,
-    //   multi: true
-    // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpRequestInterceptor,
-    //   multi: true
-    // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: JwtInterceptor,
-    //   multi: true
-    // },
-    { provide: LOCALE_ID, useValue: 'es-CL' },
-    LoadingService
-=======
-    { provide: 'environment', useValue: environment },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtAppInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true,
+      multi: true
     },
->>>>>>> 7e7ee7469b5ec06bbe049156a5802858df434fae
+    { provide: LOCALE_ID, useValue: 'es-CL' },
+    LoadingService
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
