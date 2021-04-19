@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { RouterModule } from '@angular/router';
+import { UiModule } from '@uiOT/ui.module';
 
 
 
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
   exports: [AppLayoutComponent, AuthLayoutComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    UiModule
   ]
 })
 export class LayoutModule { }

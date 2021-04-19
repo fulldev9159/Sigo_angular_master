@@ -5,39 +5,39 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import * as authActions from './auth.actions';
+import * as cubicacionActions from './cubicacion.actions';
 import { environment } from '@environment';
 
 @Injectable()
-export class AuthEffects {
+export class CubicacionEffects {
   constructor(private actions$: Actions, private http: HttpClient) { }
 
   // postLogin$ = createEffect(() =>
   //   this.actions$.pipe(
-  //     ofType(authActions.login),
+  //     ofType(cubicacionActions.login),
   //     concatMap(() =>
   //       this.http
   //         .post<any>(`${environment.api}login`, null)
   //         .pipe(
   //           map((res) =>
-  //             authActions.loginSuccess({ login: res.data })
+  //             cubicacionActions.loginSuccess({ login: res.data })
   //           ),
   //           catchError((err) =>
-  //             of(authActions.loginError({ error: err }))
+  //             of(cubicacionActions.loginError({ error: err }))
   //           )
   //         )
   //     )
   //   )
   // );
 
-  postLogin$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(authActions.login),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}login`, { User: 'jcastill' }).pipe(map(res =>
-          authActions.loginSuccess({ login: data.data }),
-        ),
-          catchError(err => of(authActions.loginSuccess({ login: err }))
-          ))))
-  );
+  // postLogin$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(cubicacionActions.login),
+  //     concatMap((data: any) =>
+  //       this.http.post(`${environment.api}login`, { User: 'jcastill' }).pipe(map(res =>
+  //         cubicacionActions.loginSuccess({ login: data.data }),
+  //       ),
+  //         catchError(err => of(cubicacionActions.loginSuccess({ login: err }))
+  //         ))))
+  // );
 }

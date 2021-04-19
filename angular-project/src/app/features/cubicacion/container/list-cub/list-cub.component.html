@@ -13,6 +13,6 @@
     </div>
   </div>
 
-  <app-table [config]="configTable" [items]="data"></app-table>
+  <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
 
 </div>

@@ -16,9 +16,14 @@
   <app-card [classCardHeader]="'bg-secondary text-white'">
     <ng-container card-header-title>
       Detalle Cubicación
+      formCubicacion: {{formCubicacion.value | json}}
     </ng-container>
     <ng-container card-body>
-      <app-form></app-form>
+      <app-form [formCubicacion]="formCubicacion" [constractMarco]="(constractMarco$ | async)"
+        [subContractedProviders]="(subContractedProviders$ | async)"
+        [subContractedRegions]="(subContractedRegions$ | async)"
+        [subContractedTypeServices]="(subContractedTypeServices$ | async)"
+        [subContractedServices]="(subContractedServices$ | async)" (selected)="selected($event);"></app-form>
     </ng-container>
   </app-card>
 

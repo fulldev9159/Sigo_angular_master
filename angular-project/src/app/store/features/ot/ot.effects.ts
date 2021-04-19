@@ -5,11 +5,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import * as authActions from './auth.actions';
+import * as authActions from './ot.actions';
 import { environment } from '@environment';
 
 @Injectable()
-export class AuthEffects {
+export class OtEffects {
   constructor(private actions$: Actions, private http: HttpClient) { }
 
   // postLogin$ = createEffect(() =>
@@ -30,14 +30,14 @@ export class AuthEffects {
   //   )
   // );
 
-  postLogin$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(authActions.login),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}login`, { User: 'jcastill' }).pipe(map(res =>
-          authActions.loginSuccess({ login: data.data }),
-        ),
-          catchError(err => of(authActions.loginSuccess({ login: err }))
-          ))))
-  );
+  // postLogin$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(authActions.login),
+  //     concatMap((data: any) =>
+  //       this.http.post(`${environment.api}login`, { User: 'jcastill' }).pipe(map(res =>
+  //         authActions.loginSuccess({ login: data.data }),
+  //       ),
+  //         catchError(err => of(authActions.loginSuccess({ login: err }))
+  //         ))))
+  // );
 }

@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class DetailComponent implements OnInit, OnDestroy {
 
   // declarations
-  @Input() public config: any;
-  @Input() public items: any[];
+  @Input() formOt: any;
   private destroyInstance: Subject<boolean> = new Subject();
 
   constructor() { }

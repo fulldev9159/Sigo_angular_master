@@ -20,34 +20,13 @@
     <ng-container card-body>
       <div class="row">
         <div class="col-xs-12 col-md-8">
-          <app-form></app-form>
+          <app-form [formOt]="formOt" [cubicaciones]="(cubicaciones$ | async)" [planes]="(planes$ | async)"
+            [sitios]="(sitios$ | async)" [pmos]="(pmos$ | async)" [lps]="(lps$ | async)" [pep2s]="(pep2s$ | async)"
+            (cancel)="cancel($event);" (save)="save($event);">
+          </app-form>
         </div>
         <div class="col-xs-12 col-md-4">
-          <app-card [classCardHeader]="'bg-info'">
-            <ng-container card-header-title>Detalle Cubicación</ng-container>
-            <ng-container card-body>
-              <ol>
-                <li>Contrato:</li>
-                <li>Proveedor:</li>
-                <li>Región:</li>
-                <li>Total: $</li>
-              </ol>
-            </ng-container>
-          </app-card>
-
-          <app-card [classCard]="'mt-3'" [classCardHeader]="'bg-info'">
-            <ng-container card-header-title>Plan de proyecto</ng-container>
-            <ng-container card-body>
-              <ol>
-                <li>Plan:</li>
-                <li>Código proyecto:</li>
-                <li>Nombre sitio:</li>
-                <li>Dirección: </li>
-                <li>Latitud: </li>
-                <li>Longitud: </li>
-              </ol>
-            </ng-container>
-          </app-card>
+          <app-detail [formOt]="formOt.value"></app-detail>
         </div>
       </div>
     </ng-container>

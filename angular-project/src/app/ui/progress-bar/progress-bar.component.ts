@@ -2,16 +2,15 @@ import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@a
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: 'app-progress-bar',
+  templateUrl: './progress-bar.component.html',
+  styleUrls: ['./progress-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class ProgressBarComponent implements OnInit, OnDestroy {
 
   // declarations
-  @Input() public config: any;
-  @Input() public items: any[];
+  @Input() public mode = 'indeterminate'; // determinate or indeterminate
   private destroyInstance: Subject<boolean> = new Subject();
 
   constructor() { }

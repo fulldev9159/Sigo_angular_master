@@ -6,6 +6,16 @@ body {
   background-color: #dae9ec;
 }
 
+h1 {
+  font-family: "RobotoRegularLigth", sans-serif;
+}
+
 table thead tr th span.ui-column-title {
   display: block !important;
+}
+
+select,
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
 }

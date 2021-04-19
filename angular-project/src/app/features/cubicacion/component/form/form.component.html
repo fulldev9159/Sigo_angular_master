@@ -1,46 +1,64 @@
-<div class="row">
+<div [formGroup]="formCubicacion" class="row">
   <div class="col-xs-12 col-md-4">
     <div class="row">
       <div class="col-12 ">
-        <label for="">Nombre OT</label>
-        <input class="form-control" placeholder="Nombre OT" type="text">
+        <label for="">Nombre</label>
+        <input formControlName="nombre" class="form-control" placeholder="..." type="text">
         <br>
       </div>
       <div class="col-12 ">
-        <label for="">Nombre OT</label>
-        <select class="form-control" name="" id="">
-          <option value="0" selected>Seleccione Tipo OT</option>
-          <option value="1">PMO</option>
+        <label for="">Contrato</label>
+        <select formControlName="contrato_marco_id" class="form-control" name="" id="">
+          <option value="null" selected disabled>Seleccione contrato</option>
+          <option *ngFor="let constract of constractMarco" [value]="constract.id">{{constract.nombre}}</option>
         </select>
         <br>
       </div>
       <div class="col-12 ">
-        <label for="">Nombre OT</label>
-        <select class="form-control" name="" id="">
-          <option value="0" selected>Seleccione Cubicación</option>
-          <option value="1">PMO</option>
+        <label for="">Proveedor</label>
+        <select formControlName="proveedor_id" [attr.disabled]="subContractedProviders.length === 0 ? '' : null"
+          class="form-control" name="" id="">
+          <option value="null" selected disabled>Seleccione proveedor</option>
+          <option *ngFor="let provider of subContractedProviders" [value]="provider.id">{{provider.nombre}}</option>
         </select>
         <br>
       </div>
       <div class="col-12 ">
-        <label for="">Nombre OT</label>
-        <select class="form-control" name="" id="">
-          <option value="0" selected>Seleccione Plan proyecto</option>
-          <option value="1">PMO</option>
+        <label for="">Región</label>
+        <select formControlName="region_id" [attr.disabled]="subContractedRegions.length === 0 ? '' : null"
+          class="form-control" name="" id="">
+          <option value="null" selected disabled>Seleccione región</option>
+          <option *ngFor="let region of subContractedRegions" [value]="region.id">{{region.nombre}}</option>
         </select>
         <br>
       </div>
     </div>
   </div>
   <div class="col-xs-12 col-md-8">
-    <app-seleccion [textSeleccion]="'Seleccione una ciudad'" [items]="itemsExample" (selected)="itemSelected($event)"
-      [type]="'select'"></app-seleccion>
-    <app-seleccion [items]="itemsExample" (selected)="itemSelected($event)" [type]="'listbox'">
-    </app-seleccion>
+    <select formControlName="subcontrato_id" [attr.disabled]="subContractedTypeServices.length === 0 ? '' : null"
+      class="form-control mb-1" name="" id="">
+      <option value="null" selected disabled>Seleccione un tipo de servicio</option>
+      <option *ngFor="let typeService of subContractedTypeServices" [value]="typeService.id">{{typeService.nombre}}
+      </option>
+    </select>
+
+    <p-listbox [metaKeySelection]="false" [options]="subContractedServices" [checkbox]="true" [filter]="true"
+      [multiple]="true" optionLabel="name" (onChange)="itemSelected($event)">
+      <ng-template let-data pTemplate="item">
+        <div class="country-item">
+          <div>{{ data.lpu_nombre }}</div>
+        </div>
+      </ng-template>
+    </p-listbox>
+
+    <!-- <app-seleccion formControlName="subcontrato_id" [textSeleccion]="'Seleccione un tipo de servicio'"
+      [items]="subContractedTypeServices" (selected)="itemSelected($event)" [type]="'select'"></app-seleccion> -->
+    <!-- <app-seleccion [items]="subContractedServices" (selected)="itemSelected($event)" [type]="'listbox'">
+    </app-seleccion> -->
   </div>
 
   <div class="col-12">
     <hr>
-    <app-table [config]="configTable" [items]="data"></app-table>
+    <!-- <app-table [config]="configTable" [items]="data"></app-table> -->
   </div>
 </div>

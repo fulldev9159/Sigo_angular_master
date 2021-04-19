@@ -1,6 +1,9 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from './primeng/primeng.module';
+
+// Services
+
 
 // Components
 import { CardComponent } from './card/card.component';
@@ -10,6 +13,8 @@ import { ModalComponent } from './modal/modal.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ToastComponent } from './toast/toast.component';
 import { PopupComponent } from './popup/popup.component';
+import { ConfirmationService } from 'primeng/api';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 @NgModule({
   imports: [
@@ -24,6 +29,7 @@ import { PopupComponent } from './popup/popup.component';
     DatepickerComponent,
     ToastComponent,
     PopupComponent,
+    ProgressBarComponent,
   ],
   exports: [
     CardComponent,
@@ -34,6 +40,9 @@ import { PopupComponent } from './popup/popup.component';
     DatepickerComponent,
     ToastComponent,
     PopupComponent,
-  ]
+    ProgressBarComponent
+  ],
+  providers: [ConfirmationService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class UiModule { }

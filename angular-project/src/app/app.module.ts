@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,9 @@ import { StoreAllModule } from './store/store.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './utils/interceptor-music';
 import { UiModule } from './ui/ui.module';
+import { JwtAppInterceptor } from '@utilsSIGO/interceptor';
+import { HttpRequestInterceptor } from '@utilsSIGO/interceptor-progress';
+import { LoadingService } from '@utilsSIGO/service-progress';
 
 const metaReducers: Array<MetaReducer<any, any>> = [];
 
@@ -46,11 +49,23 @@ const metaReducers: Array<MetaReducer<any, any>> = [];
     UiModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: JwtAppInterceptor,
+    //   multi: true
+    // },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpRequestInterceptor,
+    //   multi: true
+    // },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: JwtInterceptor,
+    //   multi: true
+    // },
+    { provide: LOCALE_ID, useValue: 'es-CL' },
+    LoadingService
   ],
   bootstrap: [AppComponent]
 })

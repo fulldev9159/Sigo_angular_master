@@ -8,6 +8,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ProgressBarModule } from 'primeng/progressbar';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +20,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     CalendarModule,
     DialogModule,
     ConfirmPopupModule,
+    ProgressBarModule
   ],
   exports: [
     TableModule,
@@ -29,6 +31,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     CalendarModule,
     DialogModule,
     ConfirmPopupModule,
+    ProgressBarModule
   ],
 })
-export class PrimeNgModule {}
+export class PrimeNgModule { }

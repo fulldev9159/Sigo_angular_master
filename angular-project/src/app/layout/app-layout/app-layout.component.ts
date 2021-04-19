@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { LoadingService } from '@utilsSIGO/service-progress';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-app-layout',
@@ -7,12 +9,16 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppLayoutComponent implements OnInit {
+
+  public loading;
   public toggleState = false;
   public toggle = 'd-flex';
 
-  constructor() {}
+  constructor(private _loading: LoadingService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listenToLoading();
+  }
 
   toggleAction(): void {
     switch (true) {
@@ -23,5 +29,13 @@ export class AppLayoutComponent implements OnInit {
         this.toggle = 'd-flex toggled';
         break;
     }
+  }
+
+  listenToLoading(): void {
+    this._loading.loadingSub
+      .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
+      .subscribe((loading) => {
+        this.loading = loading;
+      });
   }
 }
