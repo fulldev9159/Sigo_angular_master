@@ -13,6 +13,7 @@ services:
       context: .
       dockerfile: docker/deploy/Dockerfile
 
+# TESTING
   mcl_test_sigo_db:
     image: registryv2.zweicom.com:5000/mcl-otec-db:latest
     restart: always
@@ -57,6 +58,24 @@ services:
     build:
       context: .
       dockerfile: docker/testing/Dockerfile
+
+  mcl_local_sigo_api:
+    image: registryv2.zweicom.com:5000/api-otec:develop
+    environment:
+      TZ: America/Santiago
+      LOG_LEVEL: INFO
+      SERVICE_PORT: 4040
+      OTEC_DB: root:pass@tcp(mcl_test_sigo_db:3306)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true
+      DB_MAXOPENCONNECTIONS: 10
+      DB_MAXIDLECONNECTIONS: 5
+      DB_PINGINTERVAL: 30
+      DB_MAXLIFETIMECONNECTION: 300
+      API_SCE_ADDRESS: http://35.192.99.178:2004
+    restart: always
+    ports: 
+      - 4040:4040
+    depends_on:
+      - mcl_test_sigo_db
 
   #   MVP
   mvp_otec_db:
