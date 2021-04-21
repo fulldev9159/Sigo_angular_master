@@ -16,8 +16,8 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getOt),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/ingreot/ot/get`, { token: '01F3RXH4FFBBG5Y9VH8R8M597T', usuario_id: 1, tipo_usuario: 'gestor' }).pipe(map((res: any) =>
-          otActions.getOtSuccess({ ot: res.data }),
+        this.http.post(`${environment.api}/ingreot/ot/get`, { token: '01F3TNA8BW2ZANCJ62M8BR6PY3', usuario_id: 6, tipo_usuario: 'gestor' }).pipe(map((res: any) =>
+          otActions.getOtSuccess({ ot: res.data.items }),
         ),
           catchError(err => of(otActions.getOtError({ error: err }))
           ))))
