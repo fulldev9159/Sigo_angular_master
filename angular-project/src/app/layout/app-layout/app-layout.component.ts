@@ -1,5 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { LoadingService } from '@utilsSIGO/service-progress';
+import { Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 @Component({
@@ -8,16 +11,26 @@ import { delay } from 'rxjs/operators';
   styleUrls: ['./app-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppLayoutComponent implements OnInit {
+export class AppLayoutComponent implements OnInit, OnDestroy {
 
   public loading;
   public toggleState = false;
   public toggle = 'd-flex';
+  private destroyInstance$: Subject<boolean> = new Subject();
 
-  constructor(private _loading: LoadingService) {}
+  constructor(
+    private router: Router,
+    private authFacade: AuthFacade,
+    private _loading: LoadingService
+  ) { }
 
   ngOnInit(): void {
     this.listenToLoading();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyInstance$.next(true);
+    this.destroyInstance$.complete();
   }
 
   toggleAction(): void {
@@ -37,5 +50,11 @@ export class AppLayoutComponent implements OnInit {
       .subscribe((loading) => {
         this.loading = loading;
       });
+  }
+
+  logout() {
+    localStorage.removeItem('auth');
+    this.authFacade.postLoginSuccess(null);
+    this.router.navigate(['/auth/login']);
   }
 }

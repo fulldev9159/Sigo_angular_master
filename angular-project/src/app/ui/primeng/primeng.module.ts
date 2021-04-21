@@ -9,6 +9,10 @@ import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +24,10 @@ import { ProgressBarModule } from 'primeng/progressbar';
     CalendarModule,
     DialogModule,
     ConfirmPopupModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ToastModule,
+    MessagesModule,
+    MessageModule
   ],
   exports: [
     TableModule,
@@ -31,7 +38,11 @@ import { ProgressBarModule } from 'primeng/progressbar';
     CalendarModule,
     DialogModule,
     ConfirmPopupModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ToastModule,
+    MessagesModule,
+    MessageModule
   ],
+  providers: [MessageService]
 })
 export class PrimeNgModule { }

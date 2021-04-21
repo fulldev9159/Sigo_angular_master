@@ -5,13 +5,9 @@ import { environment } from '@environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MetaReducer, StoreModule } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import {
-  routerReducer,
-  RouterState,
-  StoreRouterConnectingModule,
-} from '@ngrx/router-store';
+import { routerReducer, RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LayoutModule } from './layout/layout.module';
 import { RouterModule } from '@angular/router';
@@ -22,8 +18,24 @@ import { UiModule } from './ui/ui.module';
 import { JwtAppInterceptor } from '@utilsSIGO/interceptor';
 import { HttpRequestInterceptor } from '@utilsSIGO/interceptor-progress';
 import { LoadingService } from '@utilsSIGO/service-progress';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
-const metaReducers: Array<MetaReducer<any, any>> = [];
+// const reducers: ActionReducerMap<any> = { routerReducer };
+// // , rehydrate: true
+// export function localStorageSyncReducer(rootReducer: any) {
+//   return localStorageSync({ keys: ['auth', 'login'] })(rootReducer);
+// }
+
+// const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+
+const reducers: ActionReducerMap<any> = { routerReducer };
+
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({ keys: ['auth'], rehydrate: true })(reducer);
+}
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+
+// const metaReducers: Array<MetaReducer<any, any>> = [];
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +48,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [];
     StoreModule.forRoot(
       { router: routerReducer },
       {
-        metaReducers,
+        metaReducers: metaReducers,
         runtimeChecks: {
           strictActionImmutability: true,
           strictStateImmutability: true,
@@ -51,16 +63,16 @@ const metaReducers: Array<MetaReducer<any, any>> = [];
     UiModule,
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: JwtAppInterceptor,
-    //   multi: true
-    // },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpRequestInterceptor,
-    //   multi: true
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtAppInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: JwtInterceptor,
@@ -71,4 +83,4 @@ const metaReducers: Array<MetaReducer<any, any>> = [];
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

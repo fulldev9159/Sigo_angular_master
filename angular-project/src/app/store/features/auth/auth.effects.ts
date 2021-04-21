@@ -12,30 +12,12 @@ import { environment } from '@environment';
 export class AuthEffects {
   constructor(private actions$: Actions, private http: HttpClient) { }
 
-  // postLogin$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(authActions.login),
-  //     concatMap(() =>
-  //       this.http
-  //         .post<any>(`${environment.api}login`, null)
-  //         .pipe(
-  //           map((res) =>
-  //             authActions.loginSuccess({ login: res.data })
-  //           ),
-  //           catchError((err) =>
-  //             of(authActions.loginError({ error: err }))
-  //           )
-  //         )
-  //     )
-  //   )
-  // );
-
   postLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.login),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/login`, { User: 'jcastill' }).pipe(map(res =>
-          authActions.loginSuccess({ login: data.data }),
+        this.http.post(`${environment.api}/login`, { username: data.login.username, password: data.login.password }).pipe(map((res: any) =>
+          authActions.loginSuccess({ login: res.data }),
         ),
           catchError(err => of(authActions.loginSuccess({ login: err }))
           ))))

@@ -124,6 +124,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.otFacade.getOt();
     this.items$ = this.otFacade.getOt$();
   }
 

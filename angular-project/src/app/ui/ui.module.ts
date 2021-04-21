@@ -14,6 +14,7 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ToastComponent } from './toast/toast.component';
 import { ConfirmationService } from 'primeng/api';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
   imports: [

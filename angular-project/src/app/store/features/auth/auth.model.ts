@@ -1,3 +1,7 @@
+export interface LoginAuth {
+  username: string;
+  password: string;
+}
 
 export interface Login {
   token: string;
@@ -5,7 +9,6 @@ export interface Login {
   usuario_id: number;
   roles_modulos: Rol[];
 }
-
 
 export interface Rol {
   id: number;
