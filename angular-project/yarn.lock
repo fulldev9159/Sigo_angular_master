@@ -3144,6 +3144,11 @@
     "object-keys" "^1.1.1"
     "regexp.prototype.flags" "^1.2.0"
 
+"deepmerge@^3.2.0":
+  "integrity" "sha512-GRQOafGHwMHpjPx9iCvTgpu9NojZ49q794EEL94JVEw6VaeA8XTUyBKvAkOOjBX9oJNiV6G3P+T+tihFjo2TqA=="
+  "resolved" "https://registry.npmjs.org/deepmerge/-/deepmerge-3.3.0.tgz"
+  "version" "3.3.0"
+
 "default-gateway@^4.2.0":
   "integrity" "sha512-h6sMrVB1VMWVrW13mSc6ia/DwYYw5MN6+exNu1OaJeFac5aSAvwM7lZ0NVfTABuSkQelr4h5oebg3KB1XPdjgA=="
   "resolved" "https://registry.npmjs.org/default-gateway/-/default-gateway-4.2.0.tgz"
@@ -5926,6 +5931,14 @@
   "integrity" "sha1-yobR/ogoFpsBICCOPchCS524NCw="
   "resolved" "https://registry.npmjs.org/next-tick/-/next-tick-1.0.0.tgz"
   "version" "1.0.0"
+
+"ngrx-store-localstorage@^11.0.0":
+  "integrity" "sha512-/bLA9/0orlEffBGH4Nqp5XwdgFX9XkpBD5p2ZwRYPPYAHi+bs4yFdKl6c4RvKsS9IOGHXiO5mm2vLaK+n7mvTw=="
+  "resolved" "https://registry.npmjs.org/ngrx-store-localstorage/-/ngrx-store-localstorage-11.0.0.tgz"
+  "version" "11.0.0"
+  dependencies:
+    "deepmerge" "^3.2.0"
+    "tslib" "^2.0.0"
 
 "ngx-router-animations@0.0.9":
   "integrity" "sha512-30kqbnFp30Vgvi2GKKjpFD6tXBXxsodfR6xwuLt6krqBm7JOrryhC2MrgRLlZn0O815PCYk7YIOd0XqmZ0HxUQ=="
