@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json --port 4040 --open",
+    "start": "ng serve --port 4200 --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -29,6 +29,7 @@
     "@popperjs/core": "^2.9.1",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
+    "ngrx-store-localstorage": "^11.0.0",
     "ngx-router-animations": "0.0.9",
     "node-snackbar": "^0.1.16",
     "primeflex": "^2.0.0",
