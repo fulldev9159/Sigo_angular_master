@@ -14,10 +14,10 @@
               alt="User picture">
           </div>
           <div class="user-info">
-            <span class="user-name" id="user-name">Pedro
-              <strong>Gallegos</strong>
+            <span class="user-name" id="user-name">{{(loginAuth$ | async).name | titlecase}}
             </span>
-            <span class="user-role" id="user-role">Administrator</span>
+            <span class="user-role" id="user-role">{{(loginAuth$ | async).roles_modulos.Gestor.nombre |
+              titlecase}}</span>
             <span class="user-status">
               <i class="fa fa-circle"></i>
               <span>Online</span>
@@ -41,18 +41,17 @@
             <li class="header-menu">
               <span>Módulos</span>
             </li>
-            <li routerLinkActive="active">
+            <li *ngxPermissionsOnly="['OT_LIST']" routerLinkActive="active">
               <a href="#otSub" data-toggle="collapse" aria-expanded="false">
                 <i class="pi pi-check-square"></i>
                 <span>OT</span>
-                <span class="badge badge-pill badge-warning">Nueva</span>
                 <em class="pi pi-angle-down float-right icon-angle-bottom"></em>
               </a>
               <ul class="collapse show list-unstyled" id="otSub">
-                <li class="pl-5" routerLinkActive="active-item">
+                <li *ngxPermissionsOnly="['OT_LIST']" class="pl-5" routerLinkActive="active-item">
                   <a [routerLink]="['/app/ot/list-ot']">Listado OT</a>
                 </li>
-                <li class="pl-5" routerLinkActive="active-item">
+                <li *ngxPermissionsOnly="['OT_CREATE']" class="pl-5" routerLinkActive="active-item">
                   <a [routerLink]="['/app/ot/form-ot']">Crear OT</a>
                 </li>
               </ul>
@@ -71,6 +70,13 @@
                   <a [routerLink]="['/app/cubicacion/form-cub']">Crear Cubicación</a>
                 </li>
               </ul>
+            </li>
+            <li routerLinkActive="active">
+              <a [routerLink]="['/app/profile']">
+                <i class="pi pi-users"></i>
+                <span>Perfiles</span>
+                <span class="badge badge-pill badge-warning">Nuevo</span>
+              </a>
             </li>
             <li routerLinkActive="active">
               <a [routerLink]="['/app/kitui']">

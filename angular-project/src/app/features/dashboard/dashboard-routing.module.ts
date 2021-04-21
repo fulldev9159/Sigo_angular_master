@@ -33,6 +33,11 @@ const routes: Routes = [
         canActivate: [GuardTokenGuard]
       },
       {
+        path: 'profile',
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
+        canActivate: [GuardTokenGuard]
+      },
+      {
         path: 'kitui',
         loadChildren: () => import('../kitui/kitui.module').then(m => m.KituiModule)
       }

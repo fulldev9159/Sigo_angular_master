@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Perfil </h1>
+      <span>formulario perfil</span>
+    </div>
+    <div class="col">
+      <button [routerLink]="['/app/profile/list-pro']" pButton type="button" label="volver" icon="pi pi-arrow-left"
+        class="p-button-sm mt-5 float-right p-button-outlined "></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-header-title>
+      Detalle Perfil
+    </ng-container>
+    <ng-container card-header-actions>
+      <span class="badge badge-pill badge-info  float-right">19 permisos</span>
+    </ng-container>
+    <ng-container card-body>
+      <div class="row">
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <div class="row">
+            <div class="col-12">
+              <label for="">Nombre perfil</label>
+              <input type="text" class="form-control">
+            </div>
+
+            <div class="col-12">
+              <label for="">Descripción perfil</label>
+              <textarea name="" id="" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+            <ng-template pTemplate="header">
+              Ordenes de trabajo
+            </ng-template>
+          </p-listbox>
+        </div>
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+            <ng-template pTemplate="header">
+              Cubicaciones
+            </ng-template>
+          </p-listbox>
+        </div>
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+            <ng-template pTemplate="header">
+              Perfiles
+            </ng-template>
+          </p-listbox>
+        </div>
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+            <ng-template pTemplate="header">
+              Perfiles
+            </ng-template>
+          </p-listbox>
+        </div>
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+            <ng-template pTemplate="header">
+              Perfiles
+            </ng-template>
+          </p-listbox>
+        </div>
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+            <ng-template pTemplate="header">
+              Perfiles
+            </ng-template>
+          </p-listbox>
+        </div>
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+            <ng-template pTemplate="header">
+              Perfiles
+            </ng-template>
+          </p-listbox>
+        </div>
+
+        <div class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+            <ng-template pTemplate="header">
+              Perfiles
+            </ng-template>
+          </p-listbox>
+        </div>
+
+      </div>
+    </ng-container>
+  </app-card>
+
+
+</div>

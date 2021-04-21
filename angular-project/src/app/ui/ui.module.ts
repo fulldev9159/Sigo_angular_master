@@ -15,11 +15,13 @@ import { ToastComponent } from './toast/toast.component';
 import { ConfirmationService } from 'primeng/api';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { MessageModule } from 'primeng/message';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
     CommonModule,
-    PrimeNgModule
+    PrimeNgModule,
+    NgxPermissionsModule
   ],
   declarations: [
     CardComponent,
@@ -38,7 +40,8 @@ import { MessageModule } from 'primeng/message';
     ModalComponent,
     DatepickerComponent,
     ToastComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    NgxPermissionsModule
   ],
   providers: [ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -13,6 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
+import { CheckboxModule } from 'primeng/checkbox';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +28,8 @@ import { MessageService } from 'primeng/api';
     ProgressBarModule,
     ToastModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    CheckboxModule
   ],
   exports: [
     TableModule,
@@ -41,7 +43,8 @@ import { MessageService } from 'primeng/api';
     ProgressBarModule,
     ToastModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    CheckboxModule
   ],
   providers: [MessageService]
 })

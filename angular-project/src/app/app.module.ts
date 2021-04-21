@@ -19,6 +19,8 @@ import { JwtAppInterceptor } from '@utilsSIGO/interceptor';
 import { HttpRequestInterceptor } from '@utilsSIGO/interceptor-progress';
 import { LoadingService } from '@utilsSIGO/service-progress';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { ZweiconPermissionDirective } from './utils/zweicon-permission.directive';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 // const reducers: ActionReducerMap<any> = { routerReducer };
 // // , rehydrate: true
@@ -35,10 +37,8 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
 }
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
-// const metaReducers: Array<MetaReducer<any, any>> = [];
-
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ZweiconPermissionDirective],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -61,6 +61,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     LayoutModule,
     StoreAllModule,
     UiModule,
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     {

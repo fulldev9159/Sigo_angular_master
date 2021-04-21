@@ -30,6 +30,7 @@
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
     "ngrx-store-localstorage": "^11.0.0",
+    "ngx-permissions": "^8.1.1",
     "ngx-router-animations": "0.0.9",
     "node-snackbar": "^0.1.16",
     "primeflex": "^2.0.0",
