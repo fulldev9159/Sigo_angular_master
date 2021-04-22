@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormCubComponent } from './form-cub.component';
 
@@ -8,7 +10,12 @@ describe('FormCubComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormCubComponent ]
+      imports:[ReactiveFormsModule],
+      declarations: [ FormCubComponent ],
+      providers: [
+        FormBuilder,
+        FormGroup,
+      ],
     })
     .compileComponents();
   });

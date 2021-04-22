@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormComponent } from './form.component';
 
-describe('FormComponent', () => {
+describe('CubFormComponent', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
 
@@ -20,6 +20,7 @@ describe('FormComponent', () => {
   });
 
   it('should create', () => {
+    component.formCubicacion
     expect(component).toBeTruthy();
   });
 });
