@@ -13,11 +13,11 @@
               src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
               alt="User picture">
           </div>
-          <div class="user-info">
+          <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info">
             <span class="user-name" id="user-name">{{(loginAuth$ | async).name | titlecase}}
             </span>
-            <span class="user-role" id="user-role">{{(loginAuth$ | async).roles_modulos.Gestor.nombre |
-              titlecase}}</span>
+            <!-- <span class="user-role" id="user-role">{{(loginAuth$ | async).roles_modulos.Gestor.nombre |
+              titlecase}}</span> -->
             <span class="user-status">
               <i class="fa fa-circle"></i>
               <span>Online</span>

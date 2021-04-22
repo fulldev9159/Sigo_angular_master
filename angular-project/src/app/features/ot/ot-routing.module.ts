@@ -14,12 +14,12 @@ export const routes: Routes = [
       {
         path: 'list-ot',
         component: ListOtComponent,
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          permissions: {
-            only: 'ADMIN'
-          }
-        }
+        // canActivate: [NgxPermissionsGuard],
+        // data: {
+        //   permissions: {
+        //     only: 'OT_LIST'
+        //   }
+        // }
       },
       {
         path: 'form-ot',

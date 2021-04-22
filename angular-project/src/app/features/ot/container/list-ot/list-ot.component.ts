@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Ot } from '@storeOT/features/ot/ot.model';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-ot',
@@ -40,8 +42,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
         {
           field: 'Nombre',
           type: 'TEXT',
-          sort: 'name',
-          header: 'name',
+          sort: 'nombre',
+          header: 'nombre',
           editable: false
         },
         {
@@ -80,7 +82,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
           editable: false
         }
       ],
-      sort: ['sesion_sce', 'name', 'fecha_inicio', 'contrato_marco_nombre', 'proveedor_nombre'],
+      sort: ['sesion_sce', 'nombre', 'fecha_inicio', 'contrato_marco_nombre', 'proveedor_nombre'],
       actions: [
         {
           icon: 'p-button-icon pi pi-check',
@@ -120,11 +122,19 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   constructor(
     private otFacade: OtFacade,
+    private authFacade: AuthFacade,
     private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
-    this.otFacade.getOt();
+    this.authFacade.getLogin$()
+      .pipe(takeUntil(this.destroyInstance))
+      .subscribe(authLogin => {
+        if (authLogin) {
+          this.otFacade.getOt({ token: authLogin.token, usuario_id: authLogin.usuario_id, tipo_usuario: 'gestor' });
+        }
+      })
+
     this.items$ = this.otFacade.getOt$();
   }
 

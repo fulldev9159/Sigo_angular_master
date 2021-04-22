@@ -12,8 +12,8 @@ export class OtFacade {
   constructor(private store: Store<Ot>) { }
 
   // OT
-  public getOt(): void {
-    this.store.dispatch(otActions.getOt());
+  public getOt(data: any): void {
+    this.store.dispatch(otActions.getOt(data));
   }
 
   public getOt$(): Observable<Ot[]> {
@@ -31,11 +31,17 @@ export class OtFacade {
     this.store.dispatch(otActions.replyOt({ ot }));
   }
   // REPLY
+
+  // POST
+  public postOt(ot: Ot): void {
+    this.store.dispatch(otActions.postOt({ ot }));
+  }
+  // POST
   // OT
 
   // PLANS
-  public getPlans(): void {
-    this.store.dispatch(otActions.getPlans());
+  public getPlans(data): void {
+    this.store.dispatch(otActions.getPlans(data));
   }
 
   public getPlansSuccess(plan: Plan[]): void {
@@ -48,8 +54,8 @@ export class OtFacade {
   // PLANS
 
   // SITES
-  public getSites(): void {
-    this.store.dispatch(otActions.getSite());
+  public getSites(data): void {
+    this.store.dispatch(otActions.getSite(data));
   }
 
   public getSitesSuccess(site: Site[]): void {
@@ -62,8 +68,8 @@ export class OtFacade {
   // SITES
 
   // PMOS
-  public getPmos(): void {
-    this.store.dispatch(otActions.getPmo());
+  public getPmos(data): void {
+    this.store.dispatch(otActions.getPmo(data));
   }
 
   public getPmosSuccess(pmo: PMO[]): void {
@@ -76,8 +82,8 @@ export class OtFacade {
   // PMOS
 
   // LPS
-  public getLps(): void {
-    this.store.dispatch(otActions.getBudgetLine());
+  public getLps(data): void {
+    this.store.dispatch(otActions.getBudgetLine(data));
   }
 
   public getLpsSuccess(lp: Lp): void {
@@ -90,8 +96,8 @@ export class OtFacade {
   // LPS
 
   // PEP2
-  public getPep2s(): void {
-    this.store.dispatch(otActions.getPep2());
+  public getPep2s(data): void {
+    this.store.dispatch(otActions.getPep2(data));
   }
 
   public getPep2sSuccess(pep2: Pep2[]): void {

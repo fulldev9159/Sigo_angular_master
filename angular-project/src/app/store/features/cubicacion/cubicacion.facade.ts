@@ -12,8 +12,8 @@ export class CubicacionFacade {
   constructor(private store: Store<Cubicacion>) { }
 
   // CUBICACION
-  public getCubicacion(): void {
-    this.store.dispatch(cubicacionActions.getCubicacion());
+  public getCubicacion(data): void {
+    this.store.dispatch(cubicacionActions.getCubicacion(data));
   }
 
   public getCubicacion$(): Observable<Cubicacion[]> {
@@ -32,9 +32,15 @@ export class CubicacionFacade {
   }
   // REPLY
 
+  // POST
+  public postCubicacion(cubicacion: Cubicacion): void {
+    this.store.dispatch(cubicacionActions.postCubicacion({ cubicacion }));
+  }
+  // POST
+
   // CONSTRACT MARCO
-  public getContractMarco(): void {
-    this.store.dispatch(cubicacionActions.getContractMarco());
+  public getContractMarco(data): void {
+    this.store.dispatch(cubicacionActions.getContractMarco(data));
   }
 
   public getContractMarcoSuccess(contractMarco: ContractMarco[]): void {
@@ -47,8 +53,8 @@ export class CubicacionFacade {
   // CONSTRACT MARCO
 
   // SUBCONTRACTPROVIDERS
-  public getSubContractedProviders(): void {
-    this.store.dispatch(cubicacionActions.getSubContractProviders());
+  public getSubContractedProviders(data): void {
+    this.store.dispatch(cubicacionActions.getSubContractProviders(data));
   }
 
   public getSubContractedProvidersSuccess(subContractedProviders: SubContractedProviders[]): void {
@@ -61,8 +67,8 @@ export class CubicacionFacade {
   // SUBCONTRACTPROVIDERS
 
   // SUBCONTRACTREGIONS
-  public getSubContractedRegions(): void {
-    this.store.dispatch(cubicacionActions.getSubContractedRegions());
+  public getSubContractedRegions(data): void {
+    this.store.dispatch(cubicacionActions.getSubContractedRegions(data));
   }
 
   public getSubContractedRegionsSuccess(subContractedRegions: SubContractedRegions[]): void {
@@ -75,8 +81,8 @@ export class CubicacionFacade {
   // SUBCONTRACTREGIONS
 
   // SUBCONTRACTTYPESERVICES
-  public getSubContractedTypeServices(): void {
-    this.store.dispatch(cubicacionActions.getSubContractedTypeServices());
+  public getSubContractedTypeServices(data): void {
+    this.store.dispatch(cubicacionActions.getSubContractedTypeServices(data));
   }
 
   public getSubContractedTypeServicesSuccess(subContractedTypeServices: SubContractedTypeServices[]): void {
@@ -89,8 +95,8 @@ export class CubicacionFacade {
   // SUBCONTRACTTYPESERVICES
 
   // SUBCONTRACTSERVICES
-  public getSubContractedServices(): void {
-    this.store.dispatch(cubicacionActions.getSubContractedServices());
+  public getSubContractedServices(data): void {
+    this.store.dispatch(cubicacionActions.getSubContractedServices(data));
   }
 
   public getSubContractedServicesSuccess(subContractedServices: SubContractedServices[]): void {

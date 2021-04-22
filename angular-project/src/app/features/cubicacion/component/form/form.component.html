@@ -16,7 +16,8 @@
       </div>
       <div class="col-12 ">
         <label for="">Proveedor</label>
-        <select formControlName="proveedor_id" [attr.disabled]="subContractedProviders.length === 0 ? '' : null"
+        <select formControlName="proveedor_id"
+          [attr.disabled]="subContractedProviders ? subContractedProviders.length === 0 ? '' : null : null "
           class="form-control" name="" id="">
           <option value="null" selected disabled>Seleccione proveedor</option>
           <option *ngFor="let provider of subContractedProviders" [value]="provider.id">{{provider.nombre}}</option>
@@ -25,7 +26,8 @@
       </div>
       <div class="col-12 ">
         <label for="">Región</label>
-        <select formControlName="region_id" [attr.disabled]="subContractedRegions.length === 0 ? '' : null"
+        <select formControlName="region_id"
+          [attr.disabled]="subContractedRegions ? subContractedRegions.length === 0 ? '' : null : null"
           class="form-control" name="" id="">
           <option value="null" selected disabled>Seleccione región</option>
           <option *ngFor="let region of subContractedRegions" [value]="region.id">{{region.nombre}}</option>
@@ -35,26 +37,31 @@
     </div>
   </div>
   <div class="col-xs-12 col-md-8">
-    <select formControlName="subcontrato_id" [attr.disabled]="subContractedTypeServices.length === 0 ? '' : null"
+    <select formControlName="tipo_servicio_id"
+      [attr.disabled]="subContractedTypeServices ? subContractedTypeServices?.length === 0 ? '' : null : null"
       class="form-control mb-1" name="" id="">
       <option value="null" selected disabled>Seleccione un tipo de servicio</option>
       <option *ngFor="let typeService of subContractedTypeServices" [value]="typeService.id">{{typeService.nombre}}
       </option>
     </select>
 
-    <p-listbox [metaKeySelection]="false" [options]="subContractedServices" [checkbox]="true" [filter]="true"
-      [multiple]="true" optionLabel="name" (onChange)="itemSelected($event)">
-      <ng-template let-data pTemplate="item">
-        <div class="country-item">
-          <div>{{ data.lpu_nombre }}</div>
-        </div>
-      </ng-template>
-    </p-listbox>
+    <div style="height: 300px;max-height: 300px;overflow-y: scroll;">
 
-    <!-- <app-seleccion formControlName="subcontrato_id" [textSeleccion]="'Seleccione un tipo de servicio'"
-      [items]="subContractedTypeServices" (selected)="itemSelected($event)" [type]="'select'"></app-seleccion> -->
-    <!-- <app-seleccion [items]="subContractedServices" (selected)="itemSelected($event)" [type]="'listbox'">
-    </app-seleccion> -->
+      <p-listbox [metaKeySelection]="false" [options]="subContractedServices" [checkbox]="true" [filter]="true"
+        [multiple]="true" optionLabel="name" (onChange)="itemSelected($event)">
+        <ng-template let-data pTemplate="item">
+          <div class="country-item">
+            <div>{{ data.lpu_nombre }}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+    </div>
+  </div>
+
+  <div class="col-xs-12 offset-md-7 col-md-5 text-right">
+    <button (click)="cancelAction();" class="btn btn-light mr-2"><em class="pi pi-refresh mr-1"></em>Cancelar</button>
+    <button (click)="saveAction();" [disabled]="!formCubicacion.valid" class="btn btn-primary"><em
+        class="pi pi-save mr-1"></em>Guardar</button>
   </div>
 
   <div class="col-12">

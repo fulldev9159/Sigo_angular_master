@@ -16,7 +16,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(authActions.login),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/login`, { username: data.login.username, password: data.login.password }).pipe(map((res: any) =>
+        this.http.post(`${environment.api}/login_new`, { username: data.login.username, password: data.login.password }).pipe(map((res: any) =>
           authActions.loginSuccess({ login: res.data }),
         ),
           catchError(err => of(authActions.loginSuccess({ login: err }))

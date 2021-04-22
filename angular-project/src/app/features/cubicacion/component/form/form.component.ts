@@ -14,11 +14,11 @@ export class FormComponent implements OnInit, OnDestroy {
 
   // declarations
   @Input() formCubicacion: FormGroup;
-  @Input() constractMarco: ContractMarco[];
-  @Input() subContractedProviders: SubContractedProviders[];
-  @Input() subContractedRegions: SubContractedRegions[];
-  @Input() subContractedTypeServices: SubContractedTypeServices[];
-  @Input() subContractedServices: SubContractedServices[];
+  @Input() constractMarco: ContractMarco[] = [];
+  @Input() subContractedProviders: SubContractedProviders[] = [];
+  @Input() subContractedRegions: SubContractedRegions[] = [];
+  @Input() subContractedTypeServices: SubContractedTypeServices[] = [];
+  @Input() subContractedServices: SubContractedServices[] = [];
   @Output() public cancel = new EventEmitter();
   @Output() public save = new EventEmitter();
   @Output() public selected = new EventEmitter();
@@ -122,6 +122,14 @@ export class FormComponent implements OnInit, OnDestroy {
   itemSelected(event: any): void {
     console.log(event);
     this.selected.emit(event.value);
+  }
+
+  cancelAction() {
+    this.cancel.emit(true);
+  }
+
+  saveAction() {
+    this.save.emit(true);
   }
 
 }

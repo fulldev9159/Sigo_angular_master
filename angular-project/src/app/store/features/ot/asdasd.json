@@ -1,0 +1,27 @@
+{
+  "id": 1,
+  "usuario_id": 1,
+  "usuario_nombre": "Carlos Cifuentes",
+  "profiles": [
+    {
+      "id": 1,
+      "name": "Nombre Perfil",
+      "permissions": [
+        {
+          "permiso_id": 1,
+          "permiso_slug": "OT_LIST"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Nombre Perfil 2",
+      "permissions": [
+        {
+          "permiso_id": 1,
+          "permiso_slug": "OT_LIST"
+        }
+      ]
+    }
+  ]
+}

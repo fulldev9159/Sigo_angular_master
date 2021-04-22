@@ -41,8 +41,11 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     this.listenToLoading();
     this.loginAuth$ = this.authFacade.getLogin$()
       .pipe(map(loginAuth => {
-        const nameArray = loginAuth.usuario_nombre.split(' ');
-        const auth = { ...loginAuth, name: `${nameArray[0]} ${nameArray[2]}` };
+        let auth;
+        if (loginAuth) {
+          const nameArray = loginAuth.usuario_nombre.split(' ');
+          auth = { ...loginAuth, name: `${nameArray[0]} ${nameArray[2]}` };
+        }
         return auth;
       }));
   }

@@ -18,13 +18,14 @@
       Detalle Cubicación
     </ng-container>
     <ng-container card-body>
+      formCubicacion: {{(formCubicacion.value | json)}}
       <app-form [formCubicacion]="formCubicacion" [constractMarco]="(constractMarco$ | async)"
         [subContractedProviders]="(subContractedProviders$ | async)"
         [subContractedRegions]="(subContractedRegions$ | async)"
         [subContractedTypeServices]="(subContractedTypeServices$ | async)"
-        [subContractedServices]="(subContractedServices$ | async)" (selected)="selected($event);"></app-form>
+        [subContractedServices]="(subContractedServices$ | async)" (selected)="selected($event);"
+        (cancel)="cancel($event);" (save)="save($event);"></app-form>
     </ng-container>
   </app-card>
-
 
 </div>

@@ -2,10 +2,10 @@
   <ng-container card-header-title>Detalle Cubicación</ng-container>
   <ng-container card-body>
     <ol>
-      <li>Contrato: {{formOt.cubicacion_id}}</li>
-      <li>Proveedor: {{formOt.cubicacion_id}}</li>
-      <li>Región:{{formOt.cubicacion_id}}</li>
-      <li>Total: ${{formOt.cubicacion_id}}</li>
+      <li>Contrato: {{cubage ? cubage.contrato_marco_nombre : ' ---'}}</li>
+      <li>Proveedor: {{cubage ? cubage.proveedor_nombre : ' ---'}}</li>
+      <li>Región:{{cubage ? cubage.region_nombre : ' ---'}}</li>
+      <li>Total: ${{cubage ? cubage.total : ' ---'}}</li>
     </ol>
   </ng-container>
 </app-card>

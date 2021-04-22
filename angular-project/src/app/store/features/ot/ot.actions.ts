@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Lp, Ot, Pep2, Plan, PMO, Site } from './ot.model';
 
 // OT LIST
-export const getOt = createAction('[Ot GetAll] GET Ot');
+export const getOt = createAction('[Ot GetAll] GET Ot', props<{ token: string, usuario_id: number, tipo_usuario: string }>());
 
 export const getOtSuccess = createAction('[Ot GetAll] GET Ot Success', props<{ ot: Ot[] }>());
 
@@ -31,34 +31,40 @@ export const stateOt = createAction('[Ot State] POST State Ot', props<{ ot: Ot }
 export const stateOtSuccess = createAction('[Ot State] POST State Ot Success', props<{ ot: Ot }>());
 
 export const stateOtError = createAction('[Ot State] POST State Ot Error', props<{ error: any }>());
+
+export const postOt = createAction('[Ot Post] CREATE Ot', props<{ ot: Ot }>());
+
+export const postOtSuccess = createAction('[Ot Post] CREATE Ot Success', props<{ ot: Ot }>());
+
+export const postOtError = createAction('[Ot Post] CREATE Ot Error', props<{ error: any }>());
 // OT LIST
 
 // OT FORM
-export const getPlans = createAction('[Plans Get By Id Cobage] GET By Id Cobage');
+export const getPlans = createAction('[Plans Get By Id Cobage] GET By Id Cobage', props<{ token: string, region_id: number }>());
 
 export const getPlansSuccess = createAction('[Plans Get By Id Cobage] GET By Id Cobage Success', props<{ plan: Plan[] }>());
 
 export const getPlansError = createAction('[Plans Get By Id Cobage] GET By Id Cobage Error', props<{ error: any }>());
 
-export const getSite = createAction('[Sites Get By Id Plan] GET By Id Plan');
+export const getSite = createAction('[Sites Get By Id Plan] GET By Id Plan', props<{ token: string, plan_despliegue_id: number }>());
 
 export const getSiteSuccess = createAction('[Sites Get By Id Plan] GET By Id Plan Success', props<{ site: Site[] }>());
 
 export const getSiteError = createAction('[Sites Get By Id Plan] GET By Id Plan Error', props<{ error: any }>());
 
-export const getPmo = createAction('[Pmo Get By Id Site] GET By Id Site');
+export const getPmo = createAction('[Pmo Get By Id Site] GET By Id Site', props<{ token: string, emplazamiento_codigo: number }>());
 
 export const getPmoSuccess = createAction('[Pmo Get By Id Site] GET By Id Site Success', props<{ pmo: PMO[] }>());
 
 export const getPmoError = createAction('[Pmo Get By Id Site] GET By Id Site Error', props<{ error: any }>());
 
-export const getBudgetLine = createAction('[BudgetLine Get By Id Pmo] GET By Id Pmo');
+export const getBudgetLine = createAction('[BudgetLine Get By Id Pmo] GET By Id Pmo', props<{ token: string, pmo_id: number }>());
 
 export const getBudgetLineSuccess = createAction('[BudgetLine Get By Id Pmo] GET By Id Pmo Success', props<{ lp: Lp }>());
 
 export const getBudgetLineError = createAction('[BudgetLine Get By Id Pmo] GET By Id Pmo Error', props<{ error: any }>());
 
-export const getPep2 = createAction('[getPep2 Get By Id BudgetLine] GET By Id BudgetLine');
+export const getPep2 = createAction('[getPep2 Get By Id BudgetLine] GET By Id BudgetLine', props<{ token: string, pmo_codigo: number, lp_codigo: string }>());
 
 export const getPep2Success = createAction('[getPep2 Get By Id BudgetLine] GET By Id BudgetLine Success', props<{ pep2: Pep2[] }>());
 

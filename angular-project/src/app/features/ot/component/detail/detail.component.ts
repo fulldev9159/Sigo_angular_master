@@ -12,6 +12,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   // declarations
   @Input() formOt: any;
+  @Input() cubage: any;
   private destroyInstance: Subject<boolean> = new Subject();
 
   constructor() { }

@@ -1,7 +1,7 @@
 <div [formGroup]="formOt" class="row">
   <div class="col-xs-12 col-md-6">
     <label for="">Nombre de la orden de trabajo</label>
-    <input formControlName="name" class="form-control" placeholder="Nombre OT" type="text">
+    <input formControlName="nombre" class="form-control" placeholder="Nombre OT" type="text">
     <br>
   </div>
   <div class="col-xs-12 col-md-6">
@@ -32,7 +32,7 @@
   </div>
   <div class="col-xs-12 col-md-6">
     <label for="">Sitio</label>
-    <select formControlName="emplazamiento_id" [attr.disabled]="sitios.length === 0 ? '' : null" class="form-control"
+    <select formControlName="sitio_id" [attr.disabled]="sitios.length === 0 ? '' : null" class="form-control"
       name="" id="">
       <option value="null" selected disabled>Seleccione sitio</option>
       <option *ngFor="let site of sitios" [value]="site.id">{{site.nombre}}</option>
@@ -50,16 +50,17 @@
   </div>
   <div class="col-xs-12 col-md-6">
     <label for="">Linea Presupuestaria</label>
-    <select formControlName="linea_presupuestaria_codigo" [attr.disabled]="lps.length === 0 ? '' : null"
+    <select formControlName="lp_codigo" [attr.disabled]="lps.length === 0 ? '' : null"
       class="form-control" name="" id="">
       <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
-      <option *ngFor="let lp of lps" [value]="lp">{{lp}}</option>
+      <option *ngFor="let lp of lps" [value]="lp.codigo">{{lp.codigo}}</option>
     </select>
     <br>
   </div>
   <div class="col-xs-12 col-md-6">
     <label for="">PEP2</label>
-    <select formControlName="pep2_codigo" [attr.disabled]="pep2s.length === 0 ? '' : null" class="form-control" name=""
+    <!-- formControlName="pep2_codigo" -->
+    <select  [attr.disabled]="pep2s.length === 0 ? '' : null" class="form-control" name=""
       id="">
       <option value="null" selected disabled>Seleccione Pep2</option>
       <option *ngFor="let pep2 of pep2s" [value]="pep2.linea_presupuestaria_id">{{pep2.pep2_codigo}}</option>
@@ -74,7 +75,7 @@
   <div class="col-xs-12 col-md-6">
     <label for="">Fecha termino</label>
     <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block"
-      formControlName="fecha_termino"></p-calendar>
+      formControlName="fecha_fin"></p-calendar>
   </div>
   <div class="col-12">
     <br>
