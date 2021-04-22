@@ -9,7 +9,7 @@ import { Login, LoginAuth } from './auth.model';
   providedIn: 'root',
 })
 export class AuthFacade {
-  constructor(private store: Store<Login>) { }
+  constructor(private store: Store<Login>) {}
 
   // LOGIN
   public postLogin(loginAuth: LoginAuth): void {
