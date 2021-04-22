@@ -1,0 +1,10 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import * as fromProfile from './profile.reducer';
+
+export const selectProfile = createFeatureSelector<fromProfile.StateProfile>(
+  fromProfile.ProfileFeatureKey
+);
+
+export const getProfiles = createSelector(selectProfile,
+  (state: fromProfile.StateProfile) => state.items
+);

@@ -8,9 +8,8 @@ describe('DetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DetailComponent ]
-    })
-    .compileComponents();
+      declarations: [DetailComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -20,6 +19,7 @@ describe('DetailComponent', () => {
   });
 
   it('should create', () => {
+    component.cubage = 1;
     expect(component).toBeTruthy();
   });
 });

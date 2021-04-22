@@ -3,10 +3,6 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-// MUSIC STORE EXAMPLE
-import { MusicEffects } from './features/test/test.effects';
-import * as formMusicReduce from './features/test/test.reducer';
-// MUSIC STORE EXAMPLE
 
 // AUTH STORE
 import { AuthEffects } from './features/auth/auth.effects';
@@ -23,15 +19,15 @@ import { CubicacionEffects } from './features/cubicacion/cubicacion.effects';
 import * as formCubicacionReduce from './features/cubicacion/cubicacion.reducer';
 // AUCUBICACIONTH STORE
 
+// CUBICACION STORE
+import { ProfileEffects } from './features/profile/profile.effects';
+import * as formProfileReduce from './features/profile/profile.reducer';
+// AUCUBICACIONTH STORE
+
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-
-    // MUSIC STORE EXAMPLE
-    EffectsModule.forFeature([MusicEffects]),
-    StoreModule.forFeature(formMusicReduce.musicFeatureKey, formMusicReduce.reducerMusic),
-    // MUSIC STORE EXAMPLE
 
     // AUTH STORE
     EffectsModule.forFeature([AuthEffects]),
@@ -45,8 +41,13 @@ import * as formCubicacionReduce from './features/cubicacion/cubicacion.reducer'
 
     // CUBICACION STORE
     EffectsModule.forFeature([CubicacionEffects]),
-    StoreModule.forFeature(formCubicacionReduce.CubicacionFeatureKey, formCubicacionReduce.reducerCubicacion)
+    StoreModule.forFeature(formCubicacionReduce.CubicacionFeatureKey, formCubicacionReduce.reducerCubicacion),
     // CUBICACION STORE
+
+     // PROFILE STORE
+     EffectsModule.forFeature([ProfileEffects]),
+     StoreModule.forFeature(formProfileReduce.ProfileFeatureKey, formProfileReduce.reducerProfile)
+     // PROFILE STORE
   ]
 })
 export class StoreAllModule { }

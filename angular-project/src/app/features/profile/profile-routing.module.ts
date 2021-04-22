@@ -4,7 +4,7 @@ import { FormProComponent } from './container/form-pro/form-pro.component';
 import { ListProComponent } from './container/list-pro/list-pro.component';
 import { ProfileComponent } from './profile.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: ProfileComponent,
