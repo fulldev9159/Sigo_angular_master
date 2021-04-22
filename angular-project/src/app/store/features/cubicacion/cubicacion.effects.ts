@@ -94,7 +94,7 @@ export class CubicacionEffects {
     this.actions$.pipe(
       ofType(cubicacionActions.postCubicacion),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/cubicacion/save_edit`, data).pipe(map((res: any) =>
+        this.http.post(`${environment.api}/cubicacion/save_edit`, data.cubicacion).pipe(map((res: any) =>
           cubicacionActions.postCubicacionSuccess({ cubicacion: res.data.items }),
         ),
           catchError(err => of(cubicacionActions.postCubicacionError({ error: err }))

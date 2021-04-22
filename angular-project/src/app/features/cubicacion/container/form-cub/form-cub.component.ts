@@ -226,8 +226,29 @@ export class FormCubComponent implements OnInit, OnDestroy {
       subcontrato_id: form.subcontrato_id
     };
 
+    const subcontrato = this.providers.find(c => +c.id === +form.proveedor_id);
+
+    const cubage = {
+      token: this.authLogin.token,
+      cubicacion_id: +form.cubicacion_id,
+      cubicacion_nombre: form.nombre,
+      total: 10000,
+      region_id: +form.region_id,
+      usuario_id: +this.authLogin.usuario_id,
+      contrato_marco_id: +form.contrato_marco_id,
+      proveedor_id: +form.proveedor_id,
+      subcontrato_id: +subcontrato[0],
+      lpus: this.lpus.map(lpu => {
+        const lpuCUstom = {
+          lpu_id: lpu.lpu_id,
+          cantidad: 2
+        };
+        return lpuCUstom;
+      })
+    };
+
     this.cubageFacade.replyCubicacion(cubitation);
-    this.cubageFacade.postCubicacion(form);
+    this.cubageFacade.postCubicacion(cubage);
     this.formCubicacion.reset();
     this.messageService.add({ severity: 'success', summary: 'Registro guardado', detail: 'Registro se ha generado con Éxito!' });
 

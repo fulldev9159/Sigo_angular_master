@@ -33,7 +33,7 @@ export class CubicacionFacade {
   // REPLY
 
   // POST
-  public postCubicacion(cubicacion: Cubicacion): void {
+  public postCubicacion(cubicacion): void {
     this.store.dispatch(cubicacionActions.postCubicacion({ cubicacion }));
   }
   // POST
