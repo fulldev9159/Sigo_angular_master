@@ -7,7 +7,7 @@ import {
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
 
-describe('ListCubComponent', () => {
+describe('ListCubContainer', () => {
   let component: ListCubComponent;
   let fixture: ComponentFixture<ListCubComponent>;
 
@@ -28,7 +28,7 @@ describe('ListCubComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });
