@@ -35,8 +35,8 @@ export class ListProComponent implements OnInit, OnDestroy {
         {
           field: 'Nombre Perfil',
           type: 'TEXT',
-          sort: 'name',
-          header: 'name',
+          sort: 'nombre',
+          header: 'nombre',
           editable: false
         },
         {
@@ -79,74 +79,13 @@ export class ListProComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-eye',
           class: 'p-button-rounded p-button-info',
           onClick: (item) => {
-            this.ModalDataPermissions= item.permissions
+            this.ModalDataPermissions= item.permisos
             this.DisplayModal=true
           },
         },
       ],
     },
   };
-
-  public data = [
-    {
-      id: 1,
-      name: 'Gestor',
-      descripcion:'Perfil que gestiona las Cubicaciones y OTs',
-      fecha_creacion: "2021-03-01T03:00:00.000Z",
-      fecha_actualizacion:"2021-03-28T03:00:00.000Z",
-      permissions: [
-        {
-          permiso_id: 1,
-          permiso_slug: 'OT_LIST',
-        },
-        {
-          permiso_id: 2,
-          permiso_slug: 'OT_CREATE',
-        },
-        {
-          permiso_id: 3,
-          permiso_slug: 'OT_EDIT',
-        },
-        {
-          permiso_id: 6,
-          permiso_slug: 'OT_DELETE',
-        },
-        {
-          permiso_id: 7,
-          permiso_slug: 'CUBAGE_LIST',
-        },
-        {
-          permiso_id: 8,
-          permiso_slug: 'CUBAGE_CREATE',
-        },
-        {
-          permiso_id: 11,
-          permiso_slug: 'CUBAGE_EDIT',
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Administrador de contrato',
-      descripcion:'Perfil para quien de parte del proveedor asignado gestione el equipo que ejecutará los trabajos',
-      fecha_creacion: "2021-03-01T03:00:00.000Z",
-      fecha_actualizacion:"2021-03-28T03:00:00.000Z",
-      permissions: [
-        {
-          permiso_id: 1,
-          permiso_slug: 'OT_LIST',
-        },
-        {
-          permiso_id: 3,
-          permiso_slug: 'OT_ACCEPT',
-        },
-        {
-          permiso_id: 4,
-          permiso_slug: 'OT_REJECT',
-        },
-      ],
-    },
-  ];
 
   constructor(
     private router: Router,
@@ -163,6 +102,8 @@ export class ListProComponent implements OnInit, OnDestroy {
           this.profileFacade.getProfile({ token: authLogin.token});
         }
       });
+
+      this.items$ = this.profileFacade.getProfile$();
   }
 
   ngOnDestroy(): void {

@@ -49,7 +49,7 @@ Thumbs.db
 
 /angular-project/debug.log
 
-tests_e2e/log.html
-tests_e2e/output.xml
-tests_e2e/report.html
-tests_e2e/selenium-screenshot*
+robot_e2e/selenium-screenshot*
+robot_e2e/report.html
+robot_e2e/output.xml
+robot_e2e/log.html

@@ -13,12 +13,12 @@
     </div>
   </div>
 
-  <app-table [config]="configTable" [items]="data"></app-table>
+  <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
   <app-modal [display]="DisplayModal" (CloseEvent)="DisplayModal=false" >
     <ng-container modal-header-title >Lista de Permisos del perfil</ng-container >
     <ng-container modal-content >
-      <ul >
-        <li *ngFor="let item of ModalDataPermissions">{{item.permiso_slug}}</li>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of ModalDataPermissions">{{item.slug}}  - {{item.descripcion}}</li>
       </ul>
     </ng-container >
     <ng-container modal-footer ></ng-container >
