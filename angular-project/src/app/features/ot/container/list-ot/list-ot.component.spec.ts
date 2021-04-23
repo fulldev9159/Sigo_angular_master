@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListOtComponent } from './list-ot.component';
 
-describe('ListOtComponent', () => {
+describe('ListOtContainer', () => {
   let component: ListOtComponent;
   let fixture: ComponentFixture<ListOtComponent>;
 
@@ -19,7 +19,7 @@ describe('ListOtComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
 });
