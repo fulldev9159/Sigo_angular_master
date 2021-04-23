@@ -32,7 +32,7 @@ Redirect to dashboard to a login person
     element should be enabled    id:login
     Click Button    id:login
     
-    Wait Until Element Is Visible    id:user-name    timeout=3
+    Wait Until Element Is Visible    id:user-name    timeout=5
     Location Should Be    ${url}/app/ot/list-ot
     element should be visible    id:user-name
 
