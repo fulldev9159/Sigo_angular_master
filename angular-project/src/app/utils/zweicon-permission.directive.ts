@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive({
-  selector: '[ZweiconPermission]'
+  selector: '[appZweiconPermission]'
 })
 export class ZweiconPermissionDirective implements OnInit {
 
@@ -21,26 +21,16 @@ export class ZweiconPermissionDirective implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authFacade.getLogin$()
       .pipe(takeUntil(this.destroyInstance))
       .subscribe(loginAuth => {
-        debugger;
         this.currentUser = loginAuth;
         this.updateView();
       });
   }
 
-  // @Input()
-  // set ZweiconPermission(val) {
-  //   console.log('val...');
-  //   console.log(val);
-  //   console.log('val...');
-  //   this.permissions = val;
-  //   this.updateView();
-  // }
-
-  private updateView() {
+  private updateView(): void {
     if (this.checkPermission()) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
@@ -48,8 +38,8 @@ export class ZweiconPermissionDirective implements OnInit {
     }
   }
 
-  private checkPermission() {
-    let hasPermission = true;
+  private checkPermission(): any {
+    const hasPermission = true;
 
     if (this.currentUser && this.currentUser.permissions) {
       for (const checkPermission of this.permissions) {

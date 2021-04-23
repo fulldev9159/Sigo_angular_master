@@ -69,7 +69,7 @@ export class OtEffects {
       ofType(otActions.getBudgetLine),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/ingreot/lp/get`, {
-          token: data.token, pmo_id: +data.pmo_id
+          token: data.token, pmo_codigo: +data.pmo_codigo
         }).pipe(map((res: any) =>
           otActions.getBudgetLineSuccess({ lp: res.data.items }),
         ),
@@ -82,7 +82,7 @@ export class OtEffects {
       ofType(otActions.getPep2),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/ingreot/pep2/get`, {
-          token: data.token, pmo_codigo: data.pmo_id, lp_codigo: data.lp_codigo
+          token: data.token, pmo_codigo: +data.pmo_codigo, lp_codigo: data.lp_codigo
         }).pipe(map((res: any) =>
           otActions.getPep2Success({ pep2: res.data.items }),
         ),

@@ -10,14 +10,14 @@ describe('FormCubComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[ReactiveFormsModule],
-      declarations: [ FormCubComponent ],
+      imports: [ReactiveFormsModule],
+      declarations: [FormCubComponent],
       providers: [
         FormBuilder,
         FormGroup,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

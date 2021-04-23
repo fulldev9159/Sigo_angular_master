@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { Message } from 'primeng//api';
-import { MessageService } from 'primeng/api';;
+import { MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.destroyInstance.complete();
   }
 
-  initForm() {
+  initForm(): void {
     this.formLogin = this.fb.group({
       username: [null, Validators.required],
       password: [null, Validators.required]
@@ -58,10 +58,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(): void {
-    this.authFacade.postLogin(this.formLogin.value);;
+    this.authFacade.postLogin(this.formLogin.value);
   }
 
-  clickMessage() {
+  clickMessage(): void {
     this.messageService.add({ severity: 'error', summary: 'Acceso denegado!', detail: 'No tienes acceso a plataforma, ingresa tus credenciales de manera correcta!' });
   }
 

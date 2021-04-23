@@ -1,8 +1,8 @@
-import { ZweiconPermissionDirective } from './zweicon-permission.directive';
+import { appZweiconPermissionDirective } from './zweicon-permission.directive';
 
-describe('ZweiconPermissionDirective', () => {
+describe('appZweiconPermissionDirective', () => {
   // it('should create an instance', () => {
-  //   const directive = new ZweiconPermissionDirective();
+  //   const directive = new appZweiconPermissionDirective();
   //   expect(directive).toBeTruthy();
   // });
 });

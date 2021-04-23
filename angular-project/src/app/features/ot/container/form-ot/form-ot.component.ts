@@ -5,6 +5,7 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Lp, Pep2, Plan, PMO, Site } from '@storeOT/features/ot/ot.model';
+import { MessageService } from 'primeng/api';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 
@@ -38,7 +39,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
-    private cubageFacade: CubicacionFacade
+    private cubageFacade: CubicacionFacade,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -183,7 +185,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         if (pmo_codigo) {
           // actualizamos store para
           // Lp según pmo
-          this.otFacade.getLps({ token: this.authLogin.token, pmo_id: pmo_codigo });
+          this.otFacade.getLps({ token: this.authLogin.token, pmo_codigo: pmo_codigo });
           // this.otFacade.getLpsSuccess({ lineas_presupuestarias: ['-', 'asdasdsds'] });
 
           // refrescamos parte de
@@ -199,7 +201,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         if (lp_codigo) {
           // actualizamos store para
           // Pep2 según lp
-          this.otFacade.getPep2s({ token: this.authLogin.token, pmo_id: this.formOt.value.pmo_codigo, lp_codigo: lp_codigo });
+          this.otFacade.getPep2s({ token: this.authLogin.token, pmo_codigo: this.formOt.value.pmo_codigo, lp_codigo: lp_codigo });
           // this.otFacade.getPep2sSuccess([{
           //   linea_presupuestaria_id: 50,
           //   pep2_codigo: 'P-1594-20-0302-01102-516'
@@ -251,8 +253,13 @@ export class FormOtComponent implements OnInit, OnDestroy {
     form.id = (+(new Date())).toString();
     form.pep2_codigo = 'P-0404-20-1318-40005-807';
     // this.otFacade.replyOt(form);
+    delete form.id;
+    console.log('form:::::');
+    console.log(form);
+    console.log('form:::::');
     this.otFacade.postOt(form);
     this.formOt.reset();
+    this.messageService.add({ severity: 'success', summary: 'Registro guardado', detail: 'Registro se ha generado con Éxito!' });
   }
 
 }

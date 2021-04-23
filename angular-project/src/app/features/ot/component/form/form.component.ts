@@ -34,11 +34,11 @@ export class FormComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
-  cancelAction() {
+  cancelAction(): void {
     this.cancel.emit(true);
   }
 
-  saveAction() {
+  saveAction(): void {
     this.save.emit(true);
   }
 

@@ -84,7 +84,7 @@ export class FormCubComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
-  initForm() {
+  initForm(): void {
     this.formCubicacion = this.fb.group({
       cubicacion_id: null,
       cubicacion_nombre: null,
@@ -110,7 +110,7 @@ export class FormCubComponent implements OnInit, OnDestroy {
     this.detectChangesForm();
   }
 
-  detectChangesForm() {
+  detectChangesForm(): void {
     this.formCubicacion
       .get('contrato_marco_id')
       .valueChanges
@@ -169,15 +169,16 @@ export class FormCubComponent implements OnInit, OnDestroy {
       .subscribe(tipo_servicio_id => {
         if (tipo_servicio_id) {
           // actualizamos store
-          this.cubageFacade.getSubContractedServices({ token: this.authLogin.token, subcontrato_id: 3, region_id: +this.formCubicacion.value.region_id, tipo_servicio_id: +tipo_servicio_id });
+          this.cubageFacade
+            .getSubContractedServices({ token: this.authLogin.token, subcontrato_id: 3, region_id: +this.formCubicacion.value.region_id, tipo_servicio_id: +tipo_servicio_id });
 
           // refrescamos parte de
           // this.resetForm('SUBCONTRACTEDSERVICES');
         }
       });
-  }
+  };
 
-  resetForm(part: string) {
+  resetForm(part: string): void {
     switch (true) {
       case part === 'CONSTRACTMARCO':
         // actualizar formulario
@@ -195,19 +196,18 @@ export class FormCubComponent implements OnInit, OnDestroy {
     }
   }
 
-  selected(items: SubContractedServices[]) {
+  selected(items: SubContractedServices[]): void {
     this.lpus = items;
     console.log('items:::::');
     console.log(items);
     console.log('items:::::');
   }
 
-  cancel(data: any) {
+  cancel(data: any): void {
     this.initForm();
   }
 
-  save(data: any) {
-    debugger;
+  save(data: any): void {
     const form = this.formCubicacion.value;
     form.id = (+(new Date())).toString();
     form.lpus = this.lpus;
@@ -230,14 +230,14 @@ export class FormCubComponent implements OnInit, OnDestroy {
 
     const cubage = {
       token: this.authLogin.token,
-      cubicacion_id: +form.cubicacion_id,
+      // cubicacion_id: +form.cubicacion_id,
       cubicacion_nombre: form.nombre,
       total: 10000,
       region_id: +form.region_id,
       usuario_id: +this.authLogin.usuario_id,
       contrato_marco_id: +form.contrato_marco_id,
       proveedor_id: +form.proveedor_id,
-      subcontrato_id: +subcontrato[0],
+      subcontrato_id: subcontrato ? +subcontrato.subcontrato_id[0] : null,
       lpus: this.lpus.map(lpu => {
         const lpuCUstom = {
           lpu_id: lpu.lpu_id,
@@ -252,6 +252,6 @@ export class FormCubComponent implements OnInit, OnDestroy {
     this.formCubicacion.reset();
     this.messageService.add({ severity: 'success', summary: 'Registro guardado', detail: 'Registro se ha generado con Éxito!' });
 
-  }
+  };
 
 }

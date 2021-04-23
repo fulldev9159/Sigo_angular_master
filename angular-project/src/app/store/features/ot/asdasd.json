@@ -1,27 +1,20 @@
 {
-  "id": 1,
-  "usuario_id": 1,
-  "usuario_nombre": "Carlos Cifuentes",
-  "profiles": [
+  "token": "01F3XVBNRPFF7479E3KZMN3Y06",
+  "cubicacion_nombre": "asdasdsa",
+  "total": 10000,
+  "region_id": 13,
+  "usuario_id": 6,
+  "contrato_marco_id": 1,
+  "proveedor_id": 3,
+  "subcontrato_id": 2,
+  "lpus": [
     {
-      "id": 1,
-      "name": "Nombre Perfil",
-      "permissions": [
-        {
-          "permiso_id": 1,
-          "permiso_slug": "OT_LIST"
-        }
-      ]
+      "lpu_id": 1,
+      "cantidad": 2
     },
     {
-      "id": 2,
-      "name": "Nombre Perfil 2",
-      "permissions": [
-        {
-          "permiso_id": 1,
-          "permiso_slug": "OT_LIST"
-        }
-      ]
+      "lpu_id": 4,
+      "cantidad": 2
     }
   ]
 }

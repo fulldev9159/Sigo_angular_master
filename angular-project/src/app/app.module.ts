@@ -48,7 +48,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     StoreModule.forRoot(
       { router: routerReducer },
       {
-        metaReducers: metaReducers,
+        metaReducers,
         runtimeChecks: {
           strictActionImmutability: true,
           strictStateImmutability: true,
