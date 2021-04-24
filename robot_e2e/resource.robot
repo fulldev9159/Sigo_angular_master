@@ -8,18 +8,18 @@ Library           SeleniumLibrary
 
 *** Variables ***
 # ${SERVER}         otec.zweicom.services
-${SERVER}         localhost:4200
+# ${SERVER}         localhost:4200
 # ${HTTP}    https
-${HTTP}    http
-${BROWSER}        Chrome
-${DELAY}          0
-${VALID USER}     demo
-${VALID PASSWORD}    mode
-${LOGIN URL}      ${HTTP}://${SERVER}/login
-${WELCOME URL}    ${HTTP}://${SERVER}/dashboard
-${CUBICACION_URL}    ${HTTP}://${SERVER}/dashboard/cubicacion
-${CREARCUBICACION_URL}    ${HTTP}://${SERVER}/dashboard/cubicacion/crear-cubicacion
-${ERROR URL}      ${HTTP}://${SERVER}/error.html
+# ${HTTP}    http
+# ${BROWSER}        Chrome
+# ${DELAY}          0
+# ${VALID USER}     demo
+# ${VALID PASSWORD}    mode
+# ${LOGIN URL}      ${HTTP}://${SERVER}/login
+# ${WELCOME URL}    ${HTTP}://${SERVER}/dashboard
+# ${CUBICACION_URL}    ${HTTP}://${SERVER}/dashboard/cubicacion
+# ${CREARCUBICACION_URL}    ${HTTP}://${SERVER}/dashboard/cubicacion/crear-cubicacion
+# ${ERROR URL}      ${HTTP}://${SERVER}/error.html
 
 *** Keywords ***
 Open Browser To Page

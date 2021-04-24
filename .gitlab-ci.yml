@@ -14,7 +14,7 @@ unit test and lint:
   script:
     - cd angular-project
     - npm ci
-    - ng lint
+    # - ng lint
     - ng test --code-coverage --progress false --watch false
   coverage: '/^Statements\s*:\s*([^%]+)/'
 

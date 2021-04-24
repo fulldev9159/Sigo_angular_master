@@ -17,9 +17,9 @@ export class ProfileEffects {
       ofType(profileActions.getProfile),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/perfiles/get_all`, {
-          token: data.token, usuario_id: data.usuario_id
+          token: data.token
         }).pipe(map((res: any) =>
-          profileActions.getProfileSuccess({ profile: res.data.items }),
+        profileActions.getProfileSuccess({ profile: res.data }),
         ),
           catchError(err => of(profileActions.getProfileError({ error: err }))
           ))))
