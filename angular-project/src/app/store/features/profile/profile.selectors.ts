@@ -8,3 +8,7 @@ export const selectProfile = createFeatureSelector<fromProfile.StateProfile>(
 export const getProfiles = createSelector(selectProfile,
   (state: fromProfile.StateProfile) => state.items
 );
+
+export const getPermissions = createSelector(selectProfile,
+  (state: fromProfile.StateProfile) => state.permissions
+);

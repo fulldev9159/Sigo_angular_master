@@ -15,6 +15,9 @@
 
   <app-card [classCardHeader]="'bg-secondary text-white'">
     <ng-container card-header-title>
+      group: {{(groups | async) | json}}
+      permissions$:
+      <pre>{{(permissions$ | async) | json}}</pre>
       Detalle Perfil
     </ng-container>
     <ng-container card-header-actions>

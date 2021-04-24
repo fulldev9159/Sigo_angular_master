@@ -33,5 +33,15 @@ export class ProfileFacade {
   }
   // POST
 
+  // PERMISSIONS
+  public getPermissions(data): void {
+    this.store.dispatch(profileActions.getPermissions(data));
+  }
+
+  public getPermissions$(): Observable<Model.Permit[]> {
+    return this.store.select(profileSelectors.getPermissions);
+  }
+  // PERMISSIONS
+
   // PROFILE
 }

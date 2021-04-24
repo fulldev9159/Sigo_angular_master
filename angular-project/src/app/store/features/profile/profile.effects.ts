@@ -19,19 +19,32 @@ export class ProfileEffects {
         this.http.post(`${environment.api}/perfiles/get_all`, {
           token: data.token, usuario_id: data.usuario_id
         }).pipe(map((res: any) =>
-        profileActions.getProfileSuccess({ profile: res.data.items }),
+          profileActions.getProfileSuccess({ profile: res.data.items }),
         ),
           catchError(err => of(profileActions.getProfileError({ error: err }))
           ))))
   );
 
-  
+  getPermissions$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.getPermissions),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/perfiles/permisos/get_all`, {
+          token: data.token
+        }).pipe(map((res: any) =>
+          profileActions.getPermissionsSuccess({ permissions: res.data.items }),
+        ),
+          catchError(err => of(profileActions.getPermissionsError({ error: err }))
+          ))))
+  );
+
+
   postProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.postProfile),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/perfiles/create`, data).pipe(map((res: any) =>
-        profileActions.postProfileSuccess({ profile: res.data.items }),
+          profileActions.postProfileSuccess({ profile: res.data.items }),
         ),
           catchError(err => of(profileActions.postProfileError({ error: err }))
           ))))

@@ -249,7 +249,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
   }
 
   save(data: any) {
-    const form = this.formOt.value;
+    const form = { ...this.formOt.value, token: this.authLogin.token };
     form.id = (+(new Date())).toString();
     form.pep2_codigo = 'P-0404-20-1318-40005-807';
     // this.otFacade.replyOt(form);

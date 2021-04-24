@@ -107,7 +107,8 @@ export class OtEffects {
           pmo_codigo: +data.ot.pmo_codigo,
           lp_codigo: data.ot.lp_codigo,
           pep2_codigo: data.ot.pep2_codigo,
-          pep2_provisorio: data.ot.pep2_provisorio
+          pep2_provisorio: data.ot.pep2_provisorio,
+          token: data.ot.token
         }).pipe(map((res: any) =>
           otActions.postOtSuccess({ ot: res.data.items }),
         ),

@@ -17,6 +17,7 @@ export const initialStateOt: StateOt = {
   items: [
     {
       id: 123,
+      token: '',
       name: 'Orden de trabajo',
       tipo: 'TIPO',
       fecha_inicio: '2021-02-21T00:50:23Z',

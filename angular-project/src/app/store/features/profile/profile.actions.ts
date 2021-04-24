@@ -26,5 +26,10 @@ export const postProfileSuccess = createAction('[Profile Post] CREATE Profile Su
 
 export const postProfileError = createAction('[Profile Post] CREATE Profile Error', props<{ error: any }>());
 
-// CUBICACION LIST
+export const getPermissions = createAction('[Permissions GetAll] GET Permissions', props<{ token: string }>());
+
+export const getPermissionsSuccess = createAction('[Permissions GetAll] GET Permissions Success', props<{ permissions: Model.Permit[] }>());
+
+export const getPermissionsError = createAction('[Permissions GetAll] GET Permissions Error', props<{ error: any }>());
+// PROFILE LIST
 

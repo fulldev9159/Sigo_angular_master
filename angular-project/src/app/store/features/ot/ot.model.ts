@@ -9,6 +9,7 @@ export interface Ot {
   proveedor_nombre: string;
   usuario_nombre: string;
   sesion_sce: string;
+  token: string;
 }
 
 export interface Plan {
