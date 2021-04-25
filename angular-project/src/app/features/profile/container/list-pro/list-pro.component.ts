@@ -10,6 +10,7 @@ import { Observable, Subject } from 'rxjs';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { takeUntil } from 'rxjs/operators';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
+import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 
 
 @Component({
@@ -19,7 +20,9 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListProComponent implements OnInit, OnDestroy {
+
   // declarations
+  public authLogin = null;
   public DisplayModal = false;
   public ModalDataPermissions = []
   public items$: Observable<any[]>;
@@ -67,20 +70,48 @@ export class ListProComponent implements OnInit, OnDestroy {
           "header": null,
           "editable": false
         }
-        
+
       ],
       sort: ['nombre', 'descripcion', 'fecha_creacion', 'fecha_actualizacion'],
       actions: [
         {
           icon: 'p-button-icon pi pi-pencil',
           class: 'p-button-rounded p-button-warning p-mr-2',
+          onClick: (item) => {
+            this.profileFacade.setFormProfile({
+              form: {
+                id: item.id,
+                nombre: item.nombre,
+                descripcion: item.descripcion,
+                permisos: item.permisos
+              }
+            });
+
+            this.router.navigate(['/app/profile/form-pro', item.id]);
+          }
         },
         {
           icon: 'p-button-icon pi pi-eye',
-          class: 'p-button-rounded p-button-info',
+          class: 'p-button-rounded p-button-info p-mr-2',
           onClick: (item) => {
-            this.ModalDataPermissions= item.permisos
-            this.DisplayModal=true
+            this.ModalDataPermissions = item.permisos;
+            this.DisplayModal = true;
+          },
+        },
+        {
+          icon: 'p-button-icon pi pi-trash',
+          class: 'p-button-rounded p-button-danger',
+          onClick: (item) => {
+            this.confirmationService.confirm({
+              target: event.target as EventTarget,
+              message: `¿Está seguro que desea eliminar esta cubicación?`,
+              icon: 'pi pi-exclamation-triangle',
+              acceptLabel: 'Confirmar',
+              rejectLabel: 'Cancelar',
+              accept: () => {
+                this.profileFacade.deleteProfile({ profileDelete: { toke: this.authLogin.token, perfil_id: item.id } });
+              },
+            });
           },
         },
       ],
@@ -92,18 +123,28 @@ export class ListProComponent implements OnInit, OnDestroy {
     private authFacade: AuthFacade,
     private profileFacade: ProfileFacade,
     private confirmationService: ConfirmationService
-  ) {}
+  ) {
+    // traemos contratos des api mediante efectos
+    this.authFacade.getLogin$()
+      .pipe(takeUntil(this.destroyInstance))
+      .subscribe(authLogin => {
+        if (authLogin) {
+          // asignamos datos de usuario autenticado a variable local
+          this.authLogin = authLogin;
+        }
+      });
+  }
 
   ngOnInit(): void {
     this.authFacade.getLogin$()
       .pipe(takeUntil(this.destroyInstance))
       .subscribe(authLogin => {
         if (authLogin) {
-          this.profileFacade.getProfile({ token: authLogin.token});
+          this.profileFacade.getProfile({ token: authLogin.token });
         }
       });
 
-      this.items$ = this.profileFacade.getProfile$();
+    this.items$ = this.profileFacade.getProfile$();
   }
 
   ngOnDestroy(): void {

@@ -7,11 +7,13 @@ export const ProfileFeatureKey = 'profile';
 export interface StateProfile {
   items: Model.Profile[];
   permissions: Model.Permit[];
+  form: Model.Form;
 }
 
 export const initialStateProfile: StateProfile = {
   items: [],
-  permissions: []
+  permissions: [],
+  form: null
 };
 
 export const reducerProfile = createReducer(
@@ -34,5 +36,10 @@ export const reducerProfile = createReducer(
   on(ProfileActions.getPermissionsSuccess, (state, payload) => ({
     ...state,
     permissions: payload.permissions
+  })),
+
+  on(ProfileActions.setFormProfile, (state, payload) => ({
+    ...state,
+    form: payload.form
   })),
 );

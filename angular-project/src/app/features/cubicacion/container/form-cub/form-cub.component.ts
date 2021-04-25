@@ -61,22 +61,6 @@ export class FormCubComponent implements OnInit, OnDestroy {
           this.cubageFacade.getContractMarco({ token: authLogin.token, usuario_id: authLogin.usuario_id });
         }
       });
-
-    // // poblamos contratos marco con data mock de momento
-    // this.cubageFacade.getContractMarcoSuccess([
-    //   {
-    //     id: 12,
-    //     nombre: 'SBE',
-    //     tipo_contrato_id: '1',
-    //     tipo_contrato_nombre: 'Movil'
-    //   },
-    //   {
-    //     id: 13,
-    //     nombre: 'UNIFICADO-2019-MOVIL',
-    //     tipo_contrato_id: '2',
-    //     tipo_contrato_nombre: 'Movil'
-    //   }
-    // ]);
   }
 
   ngOnDestroy(): void {
@@ -198,9 +182,6 @@ export class FormCubComponent implements OnInit, OnDestroy {
 
   selected(items: SubContractedServices[]): void {
     this.lpus = items;
-    console.log('items:::::');
-    console.log(items);
-    console.log('items:::::');
   }
 
   cancel(data: any): void {
@@ -251,7 +232,6 @@ export class FormCubComponent implements OnInit, OnDestroy {
     this.cubageFacade.postCubicacion(cubage);
     this.formCubicacion.reset();
     this.messageService.add({ severity: 'success', summary: 'Registro guardado', detail: 'Registro se ha generado con Éxito!' });
-
   };
 
 }

@@ -19,7 +19,7 @@ export class ProfileEffects {
         this.http.post(`${environment.api}/perfiles/get_all`, {
           token: data.token
         }).pipe(map((res: any) =>
-        profileActions.getProfileSuccess({ profile: res.data }),
+          profileActions.getProfileSuccess({ profile: res.data }),
         ),
           catchError(err => of(profileActions.getProfileError({ error: err }))
           ))))
@@ -43,10 +43,32 @@ export class ProfileEffects {
     this.actions$.pipe(
       ofType(profileActions.postProfile),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/perfiles/create`, data).pipe(map((res: any) =>
+        this.http.post(`${environment.api}/perfiles/create`, data.profile).pipe(map((res: any) =>
           profileActions.postProfileSuccess({ profile: res.data.items }),
         ),
           catchError(err => of(profileActions.postProfileError({ error: err }))
+          ))))
+  );
+
+  putProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.editProfile),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/perfiles/edit`, data).pipe(map((res: any) =>
+          profileActions.editProfileSuccess(),
+        ),
+          catchError(err => of(profileActions.editProfileError({ error: err }))
+          ))))
+  );
+
+  deleteProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.deleteProfile),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/perfiles/delete`, data.profileDelete).pipe(map((res: any) =>
+          profileActions.deleteProfileSuccess({ profileId: null }),
+        ),
+          catchError(err => of(profileActions.deleteProfileError({ error: err }))
           ))))
   );
 

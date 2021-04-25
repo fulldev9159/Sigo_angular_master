@@ -15,91 +15,39 @@
 
   <app-card [classCardHeader]="'bg-secondary text-white'">
     <ng-container card-header-title>
-      group: {{(groups | async) | json}}
-      permissions$:
-      <pre>{{(permissions$ | async) | json}}</pre>
       Detalle Perfil
     </ng-container>
     <ng-container card-header-actions>
-      <span class="badge badge-pill badge-info  float-right">19 permisos</span>
+      <span class="badge badge-pill badge-info  float-right">{{(permissionsOriginal$ | async).length}} permisos</span>
     </ng-container>
     <ng-container card-body>
       <div class="row">
 
-        <div class="col-xs-12 col-md-4 pt-2">
+        <div [formGroup]="formProfile" class="col-xs-12 col-md-4 pt-2">
           <div class="row">
             <div class="col-12">
               <label for="">Nombre perfil</label>
-              <input type="text" class="form-control">
+              <input formControlName="nombre" type="text" class="form-control">
             </div>
 
             <div class="col-12">
               <label for="">Descripción perfil</label>
-              <textarea name="" id="" class="form-control" cols="30" rows="10"></textarea>
+              <textarea formControlName="descripcion" name="" id="" class="form-control" cols="30" rows="10"></textarea>
             </div>
+          </div>
+          <div class="col-12 text-right mt-2 p-0">
+            <button (click)="cancelAction();" class="btn btn-light mr-2"><em
+                class="pi pi-refresh mr-1"></em>Cancelar</button>
+            <button (click)="saveProfile();" [disabled]="!formProfile.valid || selectedItems.length === 0"
+              class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
           </div>
         </div>
 
-        <div class="col-xs-12 col-md-4 pt-2">
-          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
+        <div *ngFor="let item of (permissions$ | async)" class="col-xs-12 col-md-4 pt-2">
+          <p-listbox [options]="item.permissions" optionValue="id" [(ngModel)]="selectedItems" checkbox="checkbox"
+            [multiple]="true" [filter]="true" optionLabel="nombre_corto">
             <ng-template pTemplate="header">
-              Ordenes de trabajo
-            </ng-template>
-          </p-listbox>
-        </div>
-
-        <div class="col-xs-12 col-md-4 pt-2">
-          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
-            <ng-template pTemplate="header">
-              Cubicaciones
-            </ng-template>
-          </p-listbox>
-        </div>
-
-        <div class="col-xs-12 col-md-4 pt-2">
-          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
-            <ng-template pTemplate="header">
-              Perfiles
-            </ng-template>
-          </p-listbox>
-        </div>
-
-        <div class="col-xs-12 col-md-4 pt-2">
-          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
-            <ng-template pTemplate="header">
-              Perfiles
-            </ng-template>
-          </p-listbox>
-        </div>
-
-        <div class="col-xs-12 col-md-4 pt-2">
-          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
-            <ng-template pTemplate="header">
-              Perfiles
-            </ng-template>
-          </p-listbox>
-        </div>
-
-        <div class="col-xs-12 col-md-4 pt-2">
-          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
-            <ng-template pTemplate="header">
-              Perfiles
-            </ng-template>
-          </p-listbox>
-        </div>
-
-        <div class="col-xs-12 col-md-4 pt-2">
-          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
-            <ng-template pTemplate="header">
-              Perfiles
-            </ng-template>
-          </p-listbox>
-        </div>
-
-        <div class="col-xs-12 col-md-4 pt-2">
-          <p-listbox [options]="cities" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="name">
-            <ng-template pTemplate="header">
-              Perfiles
+              {{item.module}}
             </ng-template>
           </p-listbox>
         </div>

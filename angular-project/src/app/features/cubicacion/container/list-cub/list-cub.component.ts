@@ -25,13 +25,6 @@ export class ListCubComponent implements OnInit, OnDestroy {
     },
     body: {
       headers: [
-        // {
-        //   field: null,
-        //   type: 'CHECKBOX',
-        //   sort: 'id',
-        //   header: 'id',
-        //   editable: false
-        // },
         {
           field: 'Nombre',
           type: 'TEXT',

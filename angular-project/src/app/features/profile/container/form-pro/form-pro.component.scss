@@ -11,3 +11,10 @@
 li {
   border: 0 none;
 }
+
+:ng-deep .p-listbox-list-wrapper {
+  max-height: 300px;
+  height: 300px;
+  overflow-y: auto;
+  min-height: 300px;
+}

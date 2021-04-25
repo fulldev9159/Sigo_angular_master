@@ -22,8 +22,8 @@ export class ProfileFacade {
   }
 
   // DELETE
-  public deleteProfile(position: number): void {
-    this.store.dispatch(profileActions.deleteProfile({ profilePosition: position }));
+  public deleteProfile(data): void {
+    this.store.dispatch(profileActions.deleteProfile(data));
   }
   // DELETE
 
@@ -42,6 +42,20 @@ export class ProfileFacade {
     return this.store.select(profileSelectors.getPermissions);
   }
   // PERMISSIONS
+
+  // FORM
+  public setFormProfile(data): void {
+    this.store.dispatch(profileActions.setFormProfile(data));
+  }
+
+  public getFormProfile$(): Observable<Model.Form> {
+    return this.store.select(profileSelectors.getProfile);
+  }
+
+  public editFormProfile(data): void {
+    this.store.dispatch(profileActions.editProfile(data));
+  }
+  // FORM
 
   // PROFILE
 }

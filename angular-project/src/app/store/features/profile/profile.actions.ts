@@ -16,7 +16,7 @@ export const deleteProfileError = createAction('[Profile DeleteById] DELETE Prof
 
 export const editProfile = createAction('[Profile EditById] EDIT Profile', props<{ profile: Model.Profile }>());
 
-export const editProfileSuccess = createAction('[Profile EditById] EDIT Profile Success', props<{ profileId: string, profile: Model.Profile }>());
+export const editProfileSuccess = createAction('[Profile EditById] EDIT Profile Success');
 
 export const editProfileError = createAction('[Profile EditById] EDIT Profile Error', props<{ error: any }>());
 
@@ -31,5 +31,8 @@ export const getPermissions = createAction('[Permissions GetAll] GET Permissions
 export const getPermissionsSuccess = createAction('[Permissions GetAll] GET Permissions Success', props<{ permissions: Model.Permit[] }>());
 
 export const getPermissionsError = createAction('[Permissions GetAll] GET Permissions Error', props<{ error: any }>());
+
+export const setFormProfile = createAction('[Set FormProfile] SET FormProfile', props<{ form: Model.Form }>());
+
 // PROFILE LIST
 

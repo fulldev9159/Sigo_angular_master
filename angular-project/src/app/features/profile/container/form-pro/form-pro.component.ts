@@ -1,9 +1,13 @@
-import { Component, ModuleWithComponentFactories, OnInit } from '@angular/core';
-import { Observable, of, Subject, zip } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import * as Model from '@storeOT/features/profile/profile.model';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { groupBy, map, mergeMap, takeUntil, toArray } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
+import * as _ from "lodash";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 interface City {
   name: string,
@@ -17,22 +21,33 @@ interface City {
   templateUrl: './form-pro.component.html',
   styleUrls: ['./form-pro.component.scss']
 })
-export class FormProComponent implements OnInit {
+export class FormProComponent implements OnInit, OnDestroy {
 
   // declarations
   public groups = null
   cities: City[];
   selectedCities: City[];
+  public profileId = null;
   public authLogin = null;
+  public selectedItems = [];
+  public formProfile: FormGroup;
   public permissions$: Observable<any>;
+  public permissionsOriginal$: Observable<Model.Permit[]>;
   private destroyInstance$: Subject<boolean> = new Subject();
 
   constructor(
+    private router: Router,
+    private fb: FormBuilder,
     private authFacade: AuthFacade,
-    private profileFacade: ProfileFacade
-  ) { }
+    private rutaActiva: ActivatedRoute,
+    private profileFacade: ProfileFacade,
+    private messageService: MessageService
+  ) {
+  }
 
   ngOnInit(): void {
+
+    this.initForm();
 
     // traemos contratos des api mediante efectos
     this.authFacade.getLogin$()
@@ -43,39 +58,82 @@ export class FormProComponent implements OnInit {
           // asignamos datos de usuario autenticado a variable local
           this.authLogin = authLogin;
 
+          if (this.authLogin) {
+            this.formProfile.get('token').setValue(this.authLogin.token);
+          }
+
           // generamos llamada a api para rescatar permisos
           this.profileFacade.getPermissions({ token: authLogin.token });
         }
       });
 
     // escuchamos cambios en store para traer permisos a la vista permisos
+    this.permissionsOriginal$ = this.profileFacade.getPermissions$();
+
     this.permissions$ = this.profileFacade.getPermissions$()
       .pipe(
-        map(async (permissions: Model.Permit[]) => {
+        map((permissions: Model.Permit[]) => {
           const data = permissions.map((permit: Model.Permit) => {
             let permitCustom; if (permit && permit.slug) {
               permitCustom = { ...permit, module: permit.slug.split('_')[0] }
             }; return permitCustom;
           });
 
-          return of(data) // <- this gets Observable<Object[]>
-            .pipe(
-              mergeMap(res => res), // <- use concatMap() if you care about the order
-              groupBy(person => person.module),
-              mergeMap(group => zip(of(group.key), group.pipe(toArray()))),
-            );
-        })
+          return _.chain(data).groupBy("module").map((value, key) => ({ module: key, permissions: value })).value();
+        }),
       );
 
+    this.rutaActiva.params.subscribe(
+      (params: Params) => {
+        if (params.id)
+          this.profileId = params.id;
+        if (this.profileId) {
+          this.profileFacade.getFormProfile$()
+            .pipe(takeUntil(this.destroyInstance$))
+            .subscribe(res => {
+              if (res) {
+                // inicializamos formulario
+                this.formProfile.patchValue(res);
+                this.selectedItems = res.permisos.map((p: any) => p.id);
+              } else {
+                this.router.navigate(['/app/profile/list-pro']);
+              }
+            });
+        }
+      }
+    );
+  }
 
-    this.cities = [
-      { name: 'Listar Ot', code: 'NY', inactive: false, checkbox: true },
-      { name: 'Crear Ot', code: 'RM', inactive: true, checkbox: true },
-      { name: 'Editar Ot', code: 'LDN', inactive: false, checkbox: true },
-      { name: 'Eliminar Ot', code: 'IST', inactive: true, checkbox: true },
-      { name: 'Aceptar Ot', code: 'PRS', inactive: false, checkbox: true },
-      { name: 'Rechazar Ot', code: 'PRS', inactive: false, checkbox: true }
-    ];
+  ngOnDestroy(): void {
+    this.destroyInstance$.next(true);
+    this.destroyInstance$.complete();
+  }
+
+  initForm(form?: Model.Form) {
+    this.formProfile = this.fb.group({
+      id: null,
+      token: [form ? this.authLogin.token : null, Validators.required],
+      nombre: [form ? this.authLogin.nombre : null, Validators.required],
+      descripcion: form ? this.authLogin.descripcion : null,
+      permisos: form ? this.authLogin.permisos.map(p => p.id) : null
+    });
+  }
+
+  cancelAction(): void {
+    this.formProfile.reset();
+  }
+
+  saveProfile() {
+    const formData = { ...this.formProfile.value, token: this.authLogin.token, permisos: this.selectedItems };
+    if (formData.id) {
+      this.profileFacade.editFormProfile(formData);
+      this.messageService.add({ severity: 'success', summary: 'Perfil editado', detail: 'Perfil editado con Éxito!' });
+    } else {
+      delete formData['id'];
+      this.profileFacade.postProfile(formData);
+      this.messageService.add({ severity: 'success', summary: 'Perfil generado', detail: 'Perfil generado con Éxito!' });
+    }
+
   }
 
 }

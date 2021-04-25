@@ -14,3 +14,10 @@ export interface Permit {
   descripcion: string;
   module: string;
 }
+
+export interface Form {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  permisos: number[];
+}
