@@ -4,17 +4,10 @@ import * as Model from '@storeOT/features/profile/profile.model';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { map, takeUntil } from 'rxjs/operators';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
-interface City {
-  name: string,
-  code: string,
-  inactive: boolean,
-  checkbox: boolean
-}
 
 @Component({
   selector: 'app-form-pro',
@@ -24,9 +17,7 @@ interface City {
 export class FormProComponent implements OnInit, OnDestroy {
 
   // declarations
-  public groups = null
-  cities: City[];
-  selectedCities: City[];
+  public groups = null;
   public profileId = null;
   public authLogin = null;
   public selectedItems = [];
@@ -75,18 +66,21 @@ export class FormProComponent implements OnInit, OnDestroy {
         map((permissions: Model.Permit[]) => {
           const data = permissions.map((permit: Model.Permit) => {
             let permitCustom; if (permit && permit.slug) {
-              permitCustom = { ...permit, module: permit.slug.split('_')[0] }
-            }; return permitCustom;
+              permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+            }
+            return permitCustom;
           });
 
-          return _.chain(data).groupBy("module").map((value, key) => ({ module: key, permissions: value })).value();
+          return _.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value();
         }),
       );
 
     this.rutaActiva.params.subscribe(
       (params: Params) => {
-        if (params.id)
+        if (params.id) {
           this.profileId = params.id;
+        }
+
         if (this.profileId) {
           this.profileFacade.getFormProfile$()
             .pipe(takeUntil(this.destroyInstance$))
@@ -109,7 +103,7 @@ export class FormProComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
-  initForm(form?: Model.Form) {
+  initForm(form?: Model.Form): void {
     this.formProfile = this.fb.group({
       id: null,
       token: [form ? this.authLogin.token : null, Validators.required],
@@ -123,17 +117,16 @@ export class FormProComponent implements OnInit, OnDestroy {
     this.formProfile.reset();
   }
 
-  saveProfile() {
+  saveProfile(): void {
     const formData = { ...this.formProfile.value, token: this.authLogin.token, permisos: this.selectedItems };
     if (formData.id) {
       this.profileFacade.editFormProfile(formData);
       this.messageService.add({ severity: 'success', summary: 'Perfil editado', detail: 'Perfil editado con Éxito!' });
     } else {
-      delete formData['id'];
+      delete formData.id;
       this.profileFacade.postProfile(formData);
       this.messageService.add({ severity: 'success', summary: 'Perfil generado', detail: 'Perfil generado con Éxito!' });
     }
-
   }
 
 }

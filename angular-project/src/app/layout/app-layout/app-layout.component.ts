@@ -24,19 +24,15 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private authFacade: AuthFacade,
-    private _loading: LoadingService,
+    private loadingS: LoadingService,
     private permissionsService: NgxPermissionsService
   ) { }
 
   ngOnInit(): void {
 
-    const perm = ["OT_LIST", "OT_CREATE"];
+    const perm = ['OT_LIST', 'OT_CREATE'];
 
     this.permissionsService.loadPermissions(perm);
-
-    //const perm = ["ADMIN", "EDITOR"]; example of permissions
-    this.permissionsService.loadPermissions(perm);
-
 
     this.listenToLoading();
     this.loginAuth$ = this.authFacade.getLogin$()
@@ -67,14 +63,14 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   }
 
   listenToLoading(): void {
-    this._loading.loadingSub
+    this.loadingS.loadingSub
       .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
       .subscribe((loading) => {
         this.loading = loading;
       });
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('auth');
     this.authFacade.postLoginSuccess(null);
     this.router.navigate(['/auth/login']);

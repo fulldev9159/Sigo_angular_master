@@ -75,8 +75,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           class: 'p-button-rounded p-button-info p-mr-2',
           onClick: (item) => {
             this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: `¿Está seguro que desea realizar copia de esta cubicación?`,
+              message: '¿Está seguro que desea realizar copia de esta cubicación?',
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
@@ -84,7 +83,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
                 const cubicacion = {
                   ...item,
                   id: (+(new Date())).toString()
-                }
+                };
                 this.cubageFacade.replyCubicacion(cubicacion);
               },
             });
@@ -104,19 +103,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
           class: 'p-button-rounded p-button-danger',
           onClick: (item, position) => {
             this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: `¿Está seguro que desea eliminar esta cubicación?`,
+              message: '¿Está seguro que desea eliminar esta cubicación?',
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
                 this.cubageFacade.deleteCubicacion(position);
               },
-              // reject: () => {
-              //   console.log('Cancelo eliminar');
-              //   console.log(item);
-              //   console.log('Cancelo eliminar');
-              // },
             });
           }
         }
@@ -136,7 +129,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyInstance))
       .subscribe(authLogin => {
         if (authLogin) {
-          this.cubageFacade.getCubicacion({ token: authLogin.token});
+          this.cubageFacade.getCubicacion({ token: authLogin.token });
         }
       });
 

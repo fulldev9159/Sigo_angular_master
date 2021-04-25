@@ -34,7 +34,7 @@ export interface PMO {
 }
 
 export interface Lp {
-  lineas_presupuestarias: string[]
+  lineas_presupuestarias: string[];
 }
 
 export interface Pep2 {

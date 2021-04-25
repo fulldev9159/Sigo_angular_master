@@ -61,11 +61,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
       });
 
     this.cubicaciones$ = this.cubageFacade.getCubicacion$().pipe(map(cubicaciones => this.cubicaciones = cubicaciones));
-    this.planes$ = this.otFacade.getPlans$().pipe(map(plans => { this.plans = plans; return plans }));
+    this.planes$ = this.otFacade.getPlans$().pipe(map(plans => { this.plans = plans; return plans; }));
     this.sitios$ = this.otFacade.getSites$().pipe(map(sitios => this.sitios = sitios));
     this.pmos$ = this.otFacade.getPmos$().pipe(map(pmos => this.pmos = pmos));
     this.lps$ = this.otFacade.getLps$().pipe(map(lps => this.lps = lps));
-    this.pep2s$ = this.otFacade.getPep2s$().pipe(map(pep2s => { this.pep2s = pep2s; return pep2s }));
+    this.pep2s$ = this.otFacade.getPep2s$().pipe(map(pep2s => { this.pep2s = pep2s; return pep2s; }));
   }
 
   ngOnDestroy(): void {
@@ -73,7 +73,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
-  initForm() {
+  initForm(): void {
     this.formOt = this.fb.group({
       id: null,
       token: null,
@@ -97,7 +97,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.detectChangesForm();
   }
 
-  detectChangesForm() {
+  detectChangesForm(): void {
     this.formOt
       .get('cubicacion_id')
       .valueChanges
@@ -110,13 +110,6 @@ export class FormOtComponent implements OnInit, OnDestroy {
           if (this.cubage) {
             this.otFacade.getPlans({ token: this.authLogin.token, region_id: this.cubage.region_id });
           }
-          // this.otFacade.getPlansSuccess([{
-          //   id: 12312,
-          //   nombre: 'nombre plan',
-          //   metas: 'metas',
-          //   vendor: 'vendor',
-          //   tipo: 'tipo',
-          // }]);
 
           // refrescamos parte de
           //  formulario al cambiar cubicación
@@ -139,15 +132,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
           // actualizamos store para
           // Sitios según plan
-          this.otFacade.getSites({ token: this.authLogin.token, plan_despliegue_id: plan_despliegue_id });
-          // this.otFacade.getSitesSuccess([{
-          //   id: 12312,
-          //   nombre: 'nombre site',
-          //   codigo: 'metas',
-          //   latitud: 'vendor',
-          //   longitud: 'tipo',
-          //   direccion: 'tipo'
-          // }]);
+          this.otFacade.getSites({ token: this.authLogin.token, plan_despliegue_id });
 
           // refrescamos parte de
           //  formulario al cambiar plan
@@ -167,10 +152,6 @@ export class FormOtComponent implements OnInit, OnDestroy {
           if (site) {
             this.otFacade.getPmos({ token: this.authLogin.token, emplazamiento_codigo: site.codigo });
           }
-          // this.otFacade.getPmosSuccess([{
-          //   codigo: 'PMOS',
-          // }]);
-
           // refrescamos parte de
           //  formulario al cambiar site
           // this.resetForm('SITE');
@@ -185,8 +166,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         if (pmo_codigo) {
           // actualizamos store para
           // Lp según pmo
-          this.otFacade.getLps({ token: this.authLogin.token, pmo_codigo: pmo_codigo });
-          // this.otFacade.getLpsSuccess({ lineas_presupuestarias: ['-', 'asdasdsds'] });
+          this.otFacade.getLps({ token: this.authLogin.token, pmo_codigo });
 
           // refrescamos parte de
           //  formulario al cambiar pmo
@@ -201,11 +181,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         if (lp_codigo) {
           // actualizamos store para
           // Pep2 según lp
-          this.otFacade.getPep2s({ token: this.authLogin.token, pmo_codigo: this.formOt.value.pmo_codigo, lp_codigo: lp_codigo });
-          // this.otFacade.getPep2sSuccess([{
-          //   linea_presupuestaria_id: 50,
-          //   pep2_codigo: 'P-1594-20-0302-01102-516'
-          // }]);
+          this.otFacade.getPep2s({ token: this.authLogin.token, pmo_codigo: this.formOt.value.pmo_codigo, lp_codigo });
 
           // refrescamos parte de
           //  formulario al cambiar lp
@@ -214,7 +190,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       });
   }
 
-  resetForm(part: string) {
+  resetForm(part: string): void {
     switch (true) {
       case part === 'CUBICATION':
         this.formOt.get('plan_despliegue_id').reset();
@@ -244,11 +220,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
     }
   }
 
-  cancel(data: any) {
+  cancel(data: any): void {
     this.initForm();
   }
 
-  save(data: any) {
+  save(data: any): void {
     const form = { ...this.formOt.value, token: this.authLogin.token };
     form.id = (+(new Date())).toString();
     form.pep2_codigo = 'P-0404-20-1318-40005-807';

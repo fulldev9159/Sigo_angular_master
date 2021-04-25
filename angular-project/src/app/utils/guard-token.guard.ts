@@ -21,13 +21,13 @@ export class GuardTokenGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authFacade.getLogin$()
       .pipe(takeUntil(this.destroyInstance$), map(loginAuth => {
-        if (loginAuth && (loginAuth.token && (loginAuth.usuario_id !== 0)))
+        if (loginAuth && (loginAuth.token && (loginAuth.usuario_id !== 0))) {
           return true;
-        else
+        } else {
           this.router.navigate(['/auth']);
+        }
         return false;
-      }))
-
+      }));
   }
 
 }

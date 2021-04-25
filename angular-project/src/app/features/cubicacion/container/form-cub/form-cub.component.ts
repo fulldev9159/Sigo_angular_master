@@ -154,13 +154,16 @@ export class FormCubComponent implements OnInit, OnDestroy {
         if (tipo_servicio_id) {
           // actualizamos store
           this.cubageFacade
-            .getSubContractedServices({ token: this.authLogin.token, subcontrato_id: 3, region_id: +this.formCubicacion.value.region_id, tipo_servicio_id: +tipo_servicio_id });
+            .getSubContractedServices({
+              token: this.authLogin.token, subcontrato_id: 3,
+              region_id: +this.formCubicacion.value.region_id, tipo_servicio_id: +tipo_servicio_id
+            });
 
           // refrescamos parte de
           // this.resetForm('SUBCONTRACTEDSERVICES');
         }
       });
-  };
+  }
 
   resetForm(part: string): void {
     switch (true) {
@@ -232,6 +235,6 @@ export class FormCubComponent implements OnInit, OnDestroy {
     this.cubageFacade.postCubicacion(cubage);
     this.formCubicacion.reset();
     this.messageService.add({ severity: 'success', summary: 'Registro guardado', detail: 'Registro se ha generado con Éxito!' });
-  };
+  }
 
 }

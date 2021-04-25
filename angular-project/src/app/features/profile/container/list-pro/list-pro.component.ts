@@ -24,7 +24,7 @@ export class ListProComponent implements OnInit, OnDestroy {
   // declarations
   public authLogin = null;
   public DisplayModal = false;
-  public ModalDataPermissions = []
+  public ModalDataPermissions = [];
   public items$: Observable<any[]>;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
@@ -64,11 +64,11 @@ export class ListProComponent implements OnInit, OnDestroy {
           editable: false,
         },
         {
-          "field": null,
-          "type": "ACTIONS",
-          "sort": null,
-          "header": null,
-          "editable": false
+          field: null,
+          type: 'ACTIONS',
+          sort: null,
+          header: null,
+          editable: false
         }
 
       ],
@@ -103,8 +103,7 @@ export class ListProComponent implements OnInit, OnDestroy {
           class: 'p-button-rounded p-button-danger',
           onClick: (item) => {
             this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: `¿Está seguro que desea eliminar esta cubicación?`,
+              message: `¿Está seguro que desea eliminar este Perfil?`,
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',

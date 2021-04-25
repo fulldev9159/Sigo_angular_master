@@ -64,7 +64,8 @@ export const getBudgetLineSuccess = createAction('[BudgetLine Get By Id Pmo] GET
 
 export const getBudgetLineError = createAction('[BudgetLine Get By Id Pmo] GET By Id Pmo Error', props<{ error: any }>());
 
-export const getPep2 = createAction('[getPep2 Get By Id BudgetLine] GET By Id BudgetLine', props<{ token: string, pmo_codigo: number, lp_codigo: string }>());
+export const getPep2 = createAction('[getPep2 Get By Id BudgetLine] GET By Id BudgetLine',
+  props<{ token: string, pmo_codigo: number, lp_codigo: string }>());
 
 export const getPep2Success = createAction('[getPep2 Get By Id BudgetLine] GET By Id BudgetLine Success', props<{ pep2: Pep2[] }>());
 
