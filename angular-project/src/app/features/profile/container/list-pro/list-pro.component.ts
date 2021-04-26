@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { takeUntil } from 'rxjs/operators';
@@ -103,12 +103,14 @@ export class ListProComponent implements OnInit, OnDestroy {
           class: 'p-button-rounded p-button-danger',
           onClick: (item) => {
             this.confirmationService.confirm({
+              target: event.target,
               message: `¿Está seguro que desea eliminar este Perfil?`,
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
-                this.profileFacade.deleteProfile({ profileDelete: { toke: this.authLogin.token, perfil_id: +item.id } });
+                this.profileFacade.deleteProfile({ profileDelete: { token: this.authLogin.token, perfil_id: +item.id } });
+                this.messageService.add({ severity: 'success', summary: 'Perfil eliminado', detail: 'Eliminación realizada con Éxito!' });
               },
             });
           },
@@ -121,6 +123,7 @@ export class ListProComponent implements OnInit, OnDestroy {
     private router: Router,
     private authFacade: AuthFacade,
     private profileFacade: ProfileFacade,
+    private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {
     // traemos contratos des api mediante efectos

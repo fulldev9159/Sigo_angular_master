@@ -66,7 +66,7 @@ export class ProfileEffects {
       ofType(profileActions.deleteProfile),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/perfiles/delete`, data.profileDelete).pipe(map((res: any) =>
-          profileActions.deleteProfileSuccess({ profileId: null }),
+          profileActions.deleteProfileSuccess({ profileId: data.profileDelete.perfil_id, res: res.status }),
         ),
           catchError(err => of(profileActions.deleteProfileError({ error: err }))
           ))))

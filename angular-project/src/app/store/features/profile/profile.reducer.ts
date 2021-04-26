@@ -5,12 +5,14 @@ import * as Model from './profile.model';
 export const ProfileFeatureKey = 'profile';
 
 export interface StateProfile {
+  deleteItem: boolean,
   items: Model.Profile[];
   permissions: Model.Permit[];
   form: Model.Form;
 }
 
 export const initialStateProfile: StateProfile = {
+  deleteItem: false,
   items: [],
   permissions: [],
   form: null
@@ -24,13 +26,6 @@ export const reducerProfile = createReducer(
     ...state,
     items: payload.profile,
   })),
-  on(ProfileActions.deleteProfile, (state, payload) => ({
-    ...state,
-    items: [
-      ...state.items.slice(0, payload.profilePosition),
-      ...state.items.slice(payload.profilePosition + 1),
-    ],
-  })),
 
   on(ProfileActions.getPermissions, (state) => state),
   on(ProfileActions.getPermissionsSuccess, (state, payload) => ({
@@ -41,5 +36,10 @@ export const reducerProfile = createReducer(
   on(ProfileActions.setFormProfile, (state, payload) => ({
     ...state,
     form: payload.form
+  })),
+
+  on(ProfileActions.deleteProfileSuccess, (state, payload) => ({
+    ...state,
+    items: [...state.items.filter(i => +i.id !== +payload.profileId)]
   })),
 );
