@@ -38,7 +38,8 @@
           <div class="col-12 text-right mt-2 p-0">
             <button (click)="cancelAction();" class="btn btn-light mr-2"><em
                 class="pi pi-refresh mr-1"></em>Cancelar</button>
-            <button (click)="saveProfile();" [disabled]="!formProfile.valid || selectedItems.length === 0"
+            <!-- || selectedItems.length === 0 -->
+            <button (click)="saveProfile();" [disabled]="!formProfile.valid"
               class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
           </div>
         </div>
