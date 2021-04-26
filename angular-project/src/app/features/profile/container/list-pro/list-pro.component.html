@@ -17,9 +17,16 @@
   <app-modal [display]="DisplayModal" (CloseEvent)="DisplayModal=false" >
     <ng-container modal-header-title >Lista de Permisos del perfil</ng-container >
     <ng-container modal-content >
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let item of ModalDataPermissions">{{item.slug}}  - {{item.descripcion}}</li>
-      </ul>
+      <div *ngFor="let item of ModalDataPermissions" class="col-xs-12 col-md-4 pt-2">
+        <p-listbox [options]="item.permissions" optionLabel="nombre_corto" optionDisabled="inactive" [disabled]="true">
+          <ng-template pTemplate="header">
+            {{item.module}}
+          </ng-template>
+        </p-listbox>
+      </div>
+      <!-- <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of ModalDataPermissions"> <strong>{{item.nombre_corto}}</strong>  : {{item.descripcion}}</li>
+      </ul> -->
     </ng-container >
     <ng-container modal-footer ></ng-container >
     </app-modal>

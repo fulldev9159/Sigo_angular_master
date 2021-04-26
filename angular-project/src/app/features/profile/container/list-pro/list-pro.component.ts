@@ -10,8 +10,8 @@ import { Observable, Subject } from 'rxjs';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { takeUntil } from 'rxjs/operators';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
-import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
-
+import * as ModelProfile from '@storeOT/features/profile/profile.model'
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-list-pro',
@@ -24,7 +24,7 @@ export class ListProComponent implements OnInit, OnDestroy {
   // declarations
   public authLogin = null;
   public DisplayModal = false;
-  public ModalDataPermissions = [];
+  public ModalDataPermissions:ModelProfile.Permit[] = [];
   public items$: Observable<any[]>;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
@@ -94,7 +94,24 @@ export class ListProComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-eye',
           class: 'p-button-rounded p-button-info p-mr-2',
           onClick: (item) => {
-            this.ModalDataPermissions = item.permisos;
+            // this.ModalDataPermissions = item.permisos;
+
+            // console.log(item)
+            // console.log(this.ModalDataPermissions.map((permit: ModelProfile.Permit) => {
+            //   let permitCustom; if (permit && permit.slug) {
+            //     permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+            //   }
+            //   return permitCustom;
+            // }))
+            let data = item.permisos.map((permit: ModelProfile.Permit) => {
+              let permitCustom; if (permit && permit.slug) {
+                permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+              }
+              return permitCustom;
+            })
+            // console.log(_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value())
+            this.ModalDataPermissions =_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value()
+            console.log(this.ModalDataPermissions)
             this.DisplayModal = true;
           },
         },
