@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
@@ -14,10 +19,9 @@ import { Router } from '@angular/router';
   selector: 'app-form-ot',
   templateUrl: './form-ot.component.html',
   styleUrls: ['./form-ot.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormOtComponent implements OnInit, OnDestroy {
-
   // declarations
   public formOt: FormGroup;
   public cubage = null;
@@ -43,7 +47,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     private cubageFacade: CubicacionFacade,
     private messageService: MessageService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // inicializamos formulario reactivo
@@ -51,9 +55,10 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
     // rescatamos data inicial
 
-    this.authFacade.getLogin$()
+    this.authFacade
+      .getLogin$()
       .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(authLogin => {
+      .subscribe((authLogin) => {
         if (authLogin) {
           this.authLogin = authLogin;
           this.formOt.get('token').setValue(this.authLogin.token);
@@ -62,12 +67,36 @@ export class FormOtComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.cubicaciones$ = this.cubageFacade.getCubicacion$().pipe(map(cubicaciones => this.cubicaciones = cubicaciones));
-    this.planes$ = this.otFacade.getPlans$().pipe(map(plans => { this.plans = plans; return plans; }));
-    this.sitios$ = this.otFacade.getSites$().pipe(map(sitios => this.sitios = sitios.map(x=>({...x,nombre:`${x.codigo} - ${x.nombre}`}))));
-    this.pmos$ = this.otFacade.getPmos$().pipe(map(pmos => this.pmos = pmos));
-    this.lps$ = this.otFacade.getLps$().pipe(map(lps => this.lps = lps));
-    this.pep2s$ = this.otFacade.getPep2s$().pipe(map(pep2s => { this.pep2s = pep2s; return pep2s; }));
+    this.cubicaciones$ = this.cubageFacade
+      .getCubicacion$()
+      .pipe(map((cubicaciones) => (this.cubicaciones = cubicaciones)));
+    this.planes$ = this.otFacade.getPlans$().pipe(
+      map((plans) => {
+        this.plans = plans;
+        return plans;
+      })
+    );
+    this.sitios$ = this.otFacade
+      .getSites$()
+      .pipe(
+        map(
+          (sitios) =>
+            (this.sitios = sitios.map((x) => ({
+              ...x,
+              nombre: `${x.codigo} - ${x.nombre}`,
+            })))
+        )
+      );
+    this.pmos$ = this.otFacade
+      .getPmos$()
+      .pipe(map((pmos) => (this.pmos = pmos)));
+    this.lps$ = this.otFacade.getLps$().pipe(map((lps) => (this.lps = lps)));
+    this.pep2s$ = this.otFacade.getPep2s$().pipe(
+      map((pep2s) => {
+        this.pep2s = pep2s;
+        return pep2s;
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -92,7 +121,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       pep2_codigo: 'P-0404-20-1318-40005-807',
       observaciones: null,
       pep2_provisorio: false,
-      gestor_id: null
+      gestor_id: null,
     });
 
     // detectamos cambios en formulario
@@ -102,15 +131,17 @@ export class FormOtComponent implements OnInit, OnDestroy {
   detectChangesForm(): void {
     this.formOt
       .get('cubicacion_id')
-      .valueChanges
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(cubicacionId => {
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe((cubicacionId) => {
         if (cubicacionId) {
           // actualizamos store para
           // Planes según cubicación
-          this.cubage = this.cubicaciones.find(c => +c.id === +cubicacionId);
+          this.cubage = this.cubicaciones.find((c) => +c.id === +cubicacionId);
           if (this.cubage) {
-            this.otFacade.getPlans({ token: this.authLogin.token, region_id: this.cubage.region_id });
+            this.otFacade.getPlans({
+              token: this.authLogin.token,
+              region_id: this.cubage.region_id,
+            });
           }
 
           // refrescamos parte de
@@ -121,20 +152,21 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
     this.formOt
       .get('plan_despliegue_id')
-      .valueChanges
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(plan_despliegue_id => {
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe((plan_despliegue_id) => {
         if (plan_despliegue_id) {
-
           // actualizamos nombre plan seleccionado
-          const plan = this.plans.find(p => p.id === plan_despliegue_id);
+          const plan = this.plans.find((p) => p.id === plan_despliegue_id);
           if (plan) {
             this.formOt.get('plan_nombre').setValue(plan.nombre);
           }
 
           // actualizamos store para
           // Sitios según plan
-          this.otFacade.getSites({ token: this.authLogin.token, plan_despliegue_id });
+          this.otFacade.getSites({
+            token: this.authLogin.token,
+            plan_despliegue_id,
+          });
 
           // refrescamos parte de
           //  formulario al cambiar plan
@@ -144,15 +176,17 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
     this.formOt
       .get('sitio_id')
-      .valueChanges
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(sitio_id => {
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe((sitio_id) => {
         if (sitio_id) {
           // actualizamos store para
           // PMOS según site
-          const site = this.sitios.find(s => +s.id === +sitio_id);
+          const site = this.sitios.find((s) => +s.id === +sitio_id);
           if (site) {
-            this.otFacade.getPmos({ token: this.authLogin.token, emplazamiento_codigo: site.codigo });
+            this.otFacade.getPmos({
+              token: this.authLogin.token,
+              emplazamiento_codigo: site.codigo,
+            });
           }
           // refrescamos parte de
           //  formulario al cambiar site
@@ -162,9 +196,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
     this.formOt
       .get('pmo_codigo')
-      .valueChanges
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(pmo_codigo => {
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe((pmo_codigo) => {
         if (pmo_codigo) {
           // actualizamos store para
           // Lp según pmo
@@ -177,13 +210,16 @@ export class FormOtComponent implements OnInit, OnDestroy {
       });
     this.formOt
       .get('lp_codigo')
-      .valueChanges
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(lp_codigo => {
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe((lp_codigo) => {
         if (lp_codigo) {
           // actualizamos store para
           // Pep2 según lp
-          this.otFacade.getPep2s({ token: this.authLogin.token, pmo_codigo: this.formOt.value.pmo_codigo, lp_codigo });
+          this.otFacade.getPep2s({
+            token: this.authLogin.token,
+            pmo_codigo: this.formOt.value.pmo_codigo,
+            lp_codigo,
+          });
 
           // refrescamos parte de
           //  formulario al cambiar lp
@@ -228,7 +264,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
   save(data: any): void {
     const form = { ...this.formOt.value, token: this.authLogin.token };
-    form.id = (+(new Date())).toString();
+    form.id = (+new Date()).toString();
     form.pep2_codigo = 'P-0404-20-1318-40005-807';
     // this.otFacade.replyOt(form);
     delete form.id;
@@ -237,8 +273,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
     console.log('form:::::');
     this.otFacade.postOt(form);
     this.formOt.reset();
-    this.messageService.add({ severity: 'success', summary: 'Registro guardado', detail: 'Registro se ha generado con Éxito!' });
-    this.router.navigate(["app/ot/list-ot"])
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Registro guardado',
+      detail: 'Registro se ha generado con Éxito!',
+    });
+    this.router.navigate(['app/ot/list-ot']);
   }
-
 }

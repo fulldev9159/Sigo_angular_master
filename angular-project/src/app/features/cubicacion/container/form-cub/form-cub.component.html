@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1 class="mt-4">Cubicación </h1>
-      <span>formulario cubicación</span>
+      <h1 class="mt-4">Ingreso de Cubicación </h1>
+      <span>formulario para crear una cubicación</span>
     </div>
     <div class="col">
       <button [routerLink]="['/app/cubicacion/list-cub']" pButton type="button" label="volver" icon="pi pi-arrow-left"
@@ -15,7 +15,7 @@
 
   <app-card [classCardHeader]="'bg-secondary text-white'">
     <ng-container card-header-title>
-      Detalle Cubicación
+
     </ng-container>
     <ng-container card-body>
       <app-form [formCubicacion]="formCubicacion" [constractMarco]="(constractMarco$ | async)"
