@@ -16,7 +16,3 @@ export const getPermissions = createSelector(selectProfile,
 export const getProfile = createSelector(selectProfile,
   (state: fromProfile.StateProfile) => state.form
 );
-
-export const getDeleteState = createSelector(selectProfile,
-  (state: fromProfile.StateProfile) => state.deleteItem
-);
