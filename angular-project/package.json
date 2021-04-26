@@ -35,7 +35,7 @@
     "node-snackbar": "^0.1.16",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
-    "primeng": "^11.3.1",
+    "primeng": "^11.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

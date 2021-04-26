@@ -24,13 +24,6 @@ export const reducerProfile = createReducer(
     ...state,
     items: payload.profile,
   })),
-  on(ProfileActions.deleteProfile, (state, payload) => ({
-    ...state,
-    items: [
-      ...state.items.slice(0, payload.profilePosition),
-      ...state.items.slice(payload.profilePosition + 1),
-    ],
-  })),
 
   on(ProfileActions.getPermissions, (state) => state),
   on(ProfileActions.getPermissionsSuccess, (state, payload) => ({
@@ -41,5 +34,10 @@ export const reducerProfile = createReducer(
   on(ProfileActions.setFormProfile, (state, payload) => ({
     ...state,
     form: payload.form
+  })),
+
+  on(ProfileActions.deleteProfileSuccess, (state, payload) => ({
+    ...state,
+    items: [...state.items.filter(i => +i.id !== +payload.profileId)]
   })),
 );

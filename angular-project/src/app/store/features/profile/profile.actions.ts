@@ -10,7 +10,7 @@ export const getProfileError = createAction('[Profile GetAll] GET Profile Error'
 
 export const deleteProfile = createAction('[Profile DeleteById] DELETE Profile', props<{ profilePosition: number }>());
 
-export const deleteProfileSuccess = createAction('[Profile DeleteById] DELETE Profile Success', props<{ profileId: string }>());
+export const deleteProfileSuccess = createAction('[Profile DeleteById] DELETE Profile Success', props<{ profileId: any, res: any }>());
 
 export const deleteProfileError = createAction('[Profile DeleteById] DELETE Profile Error', props<{ error: any }>());
 

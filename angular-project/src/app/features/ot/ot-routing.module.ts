@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NgxPermissionsGuard } from 'ngx-permissions';
 import { FormOtComponent } from './container/form-ot/form-ot.component';
 import { ListOtComponent } from './container/list-ot/list-ot.component';
 import { OtComponent } from './ot.component';
@@ -14,12 +13,7 @@ export const routes: Routes = [
       {
         path: 'list-ot',
         component: ListOtComponent,
-        // canActivate: [NgxPermissionsGuard],
-        // data: {
-        //   permissions: {
-        //     only: 'OT_LIST'
-        //   }
-        // }
+        data: { state: 'list-ot' }
       },
       {
         path: 'form-ot',

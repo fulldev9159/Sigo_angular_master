@@ -5,12 +5,12 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { takeUntil } from 'rxjs/operators';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
-import * as ModelProfile from '@storeOT/features/profile/profile.model'
+import * as ModelProfile from '@storeOT/features/profile/profile.model';
 import * as _ from 'lodash';
 
 @Component({
@@ -24,7 +24,7 @@ export class ListProComponent implements OnInit, OnDestroy {
   // declarations
   public authLogin = null;
   public DisplayModal = false;
-  public ModalDataPermissions:ModelProfile.Permit[] = [];
+  public ModalDataPermissions: ModelProfile.Permit[] = [];
   public items$: Observable<any[]>;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
@@ -103,29 +103,30 @@ export class ListProComponent implements OnInit, OnDestroy {
             //   }
             //   return permitCustom;
             // }))
-            let data = item.permisos.map((permit: ModelProfile.Permit) => {
+            const data = item.permisos.map((permit: ModelProfile.Permit) => {
               let permitCustom; if (permit && permit.slug) {
                 permitCustom = { ...permit, module: permit.slug.split('_')[0] };
               }
               return permitCustom;
-            })
+            });
             // console.log(_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value())
-            this.ModalDataPermissions =_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value()
-            console.log(this.ModalDataPermissions)
+            this.ModalDataPermissions = _.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value();
             this.DisplayModal = true;
           },
         },
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (item) => {
+          onClick: (item, event) => {
             this.confirmationService.confirm({
+              target: event.target as EventTarget,
               message: `¿Está seguro que desea eliminar este Perfil?`,
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
-                this.profileFacade.deleteProfile({ profileDelete: { toke: this.authLogin.token, perfil_id: item.id } });
+                this.profileFacade.deleteProfile({ profileDelete: { token: this.authLogin.token, perfil_id: +item.id } });
+                this.messageService.add({ severity: 'success', summary: 'Perfil eliminado', detail: 'Eliminación realizada con Éxito!' });
               },
             });
           },
@@ -138,6 +139,7 @@ export class ListProComponent implements OnInit, OnDestroy {
     private router: Router,
     private authFacade: AuthFacade,
     private profileFacade: ProfileFacade,
+    private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {
     // traemos contratos des api mediante efectos
