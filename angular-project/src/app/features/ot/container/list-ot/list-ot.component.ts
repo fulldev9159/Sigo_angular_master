@@ -87,9 +87,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-check',
           class: 'p-button-rounded p-button-success p-mr-2',
-          onClick: (item) => {
+          onClick: (item, event) => {
             this.confirmationService.confirm({
-              target: event.target,
+              target: event.target as EventTarget,
               message: `¿Desea aceptar Orden de trabajo?`,
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
@@ -102,9 +102,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-times',
           class: 'p-button-rounded p-button-danger p-mr-2',
-          onClick: (item) => {
+          onClick: (item, event) => {
             this.confirmationService.confirm({
-              target: event.target,
+              target: event.target as EventTarget,
               message: `¿Desea rechazar Orden de trabajo?`,
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',

@@ -5,14 +5,12 @@ import * as Model from './profile.model';
 export const ProfileFeatureKey = 'profile';
 
 export interface StateProfile {
-  deleteItem: boolean,
   items: Model.Profile[];
   permissions: Model.Permit[];
   form: Model.Form;
 }
 
 export const initialStateProfile: StateProfile = {
-  deleteItem: false,
   items: [],
   permissions: [],
   form: null

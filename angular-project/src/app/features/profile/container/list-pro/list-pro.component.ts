@@ -10,7 +10,7 @@ import { Observable, Subject } from 'rxjs';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { takeUntil } from 'rxjs/operators';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
-import * as ModelProfile from '@storeOT/features/profile/profile.model'
+import * as ModelProfile from '@storeOT/features/profile/profile.model';
 import * as _ from 'lodash';
 
 @Component({
@@ -24,7 +24,7 @@ export class ListProComponent implements OnInit, OnDestroy {
   // declarations
   public authLogin = null;
   public DisplayModal = false;
-  public ModalDataPermissions:ModelProfile.Permit[] = [];
+  public ModalDataPermissions: ModelProfile.Permit[] = [];
   public items$: Observable<any[]>;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
@@ -103,24 +103,23 @@ export class ListProComponent implements OnInit, OnDestroy {
             //   }
             //   return permitCustom;
             // }))
-            let data = item.permisos.map((permit: ModelProfile.Permit) => {
+            const data = item.permisos.map((permit: ModelProfile.Permit) => {
               let permitCustom; if (permit && permit.slug) {
                 permitCustom = { ...permit, module: permit.slug.split('_')[0] };
               }
               return permitCustom;
-            })
+            });
             // console.log(_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value())
-            this.ModalDataPermissions =_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value()
-            console.log(this.ModalDataPermissions)
+            this.ModalDataPermissions = _.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value();
             this.DisplayModal = true;
           },
         },
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (item) => {
+          onClick: (item, event) => {
             this.confirmationService.confirm({
-              target: event.target,
+              target: event.target as EventTarget,
               message: `¿Está seguro que desea eliminar este Perfil?`,
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',

@@ -73,8 +73,9 @@ export class ListCubComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-copy',
           class: 'p-button-rounded p-button-info p-mr-2',
-          onClick: (item) => {
+          onClick: (item, event) => {
             this.confirmationService.confirm({
+              target: event.target as EventTarget,
               message: '¿Está seguro que desea realizar copia de esta cubicación?',
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
@@ -101,8 +102,9 @@ export class ListCubComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (item, position) => {
+          onClick: (item, position, event) => {
             this.confirmationService.confirm({
+              target: event.target as EventTarget,
               message: '¿Está seguro que desea eliminar esta cubicación?',
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
