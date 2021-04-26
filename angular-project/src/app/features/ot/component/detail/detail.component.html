@@ -1,25 +1,25 @@
 <app-card [classCardHeader]="'bg-info'">
   <ng-container card-header-title>Detalle Cubicación</ng-container>
   <ng-container card-body>
-    <ol>
-      <li>Contrato: {{cubage ? cubage.contrato_marco_nombre : ' ---'}}</li>
-      <li>Proveedor: {{cubage ? cubage.proveedor_nombre : ' ---'}}</li>
-      <li>Región:{{cubage ? cubage.region_nombre : ' ---'}}</li>
-      <li>Total: ${{cubage ? cubage.total : ' ---'}}</li>
-    </ol>
+    <ul>
+      <li><strong>Contrato:</strong>  <span class="tab"></span>{{cubage ? cubage.contrato_marco_nombre : ' ---'}}</li>
+      <li><strong>Proveedor:</strong> <span class="tab"></span>{{cubage ? cubage.proveedor_nombre : ' ---'}}</li>
+      <li><strong>Región:</strong>  <span class="tab"></span>{{cubage ? cubage.region_nombre : ' ---'}}</li>
+      <li><strong>Total:</strong> <span class="tab"></span> ${{cubage ? cubage.total : ' ---'}}</li>
+    </ul>
   </ng-container>
 </app-card>
 
 <app-card [classCard]="'mt-3'" [classCardHeader]="'bg-info'">
   <ng-container card-header-title>Plan de proyecto</ng-container>
   <ng-container card-body>
-    <ol>
-      <li>Plan:{{formOt.cubicacion_id}}</li>
-      <li>Código proyecto:{{formOt.cubicacion_id}}</li>
-      <li>Nombre sitio:{{formOt.cubicacion_id}}</li>
-      <li>Dirección:{{formOt.cubicacion_id}} </li>
-      <li>Latitud: {{formOt.cubicacion_id}}</li>
-      <li>Longitud:{{formOt.cubicacion_id}} </li>
-    </ol>
+    <ul>
+      <li>Plan:<span class="tab"></span>{{formOt.plan_nombre}}</li>
+      <li>Código proyecto:<span class="tab"></span>{{formOt.sitio_id}}</li>
+      <li>Nombre sitio:<span class="tab"></span>{{formOt.cubicacion_id}}</li>
+      <li>Dirección:<span class="tab"></span>{{formOt.cubicacion_id}} </li>
+      <li>Latitud: <span class="tab"></span>{{formOt.cubicacion_id}}</li>
+      <li>Longitud:<span class="tab"></span>{{formOt.cubicacion_id}} </li>
+    </ul>
   </ng-container>
 </app-card>
