@@ -6,6 +6,7 @@ import { ContractMarco, Cubicacion, SubContractedProviders, SubContractedRegions
 import { MessageService } from 'primeng/api';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-form-cub',
   templateUrl: './form-cub.component.html',
@@ -34,7 +35,8 @@ export class FormCubComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -234,6 +236,7 @@ export class FormCubComponent implements OnInit, OnDestroy {
     this.cubageFacade.replyCubicacion(cubitation);
     this.cubageFacade.postCubicacion(cubage);
     this.formCubicacion.reset();
+    this.router.navigate(['app/cubicacion/list-cub']);
     this.messageService.add({ severity: 'success', summary: 'Registro guardado', detail: 'Registro se ha generado con Éxito!' });
   }
 
