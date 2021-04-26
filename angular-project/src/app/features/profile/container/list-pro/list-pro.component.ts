@@ -117,7 +117,7 @@ export class ListProComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (item, event) => {
+          onClick: (item) => {
             this.confirmationService.confirm({
               target: event.target as EventTarget,
               message: `¿Está seguro que desea eliminar este Perfil?`,
