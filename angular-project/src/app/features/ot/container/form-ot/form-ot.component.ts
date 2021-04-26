@@ -8,6 +8,7 @@ import { Lp, Pep2, Plan, PMO, Site } from '@storeOT/features/ot/ot.model';
 import { MessageService } from 'primeng/api';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-ot',
@@ -40,7 +41,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -62,7 +64,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
     this.cubicaciones$ = this.cubageFacade.getCubicacion$().pipe(map(cubicaciones => this.cubicaciones = cubicaciones));
     this.planes$ = this.otFacade.getPlans$().pipe(map(plans => { this.plans = plans; return plans; }));
-    this.sitios$ = this.otFacade.getSites$().pipe(map(sitios => this.sitios = sitios));
+    this.sitios$ = this.otFacade.getSites$().pipe(map(sitios => this.sitios = sitios.map(x=>({...x,nombre:`${x.codigo} - ${x.nombre}`}))));
     this.pmos$ = this.otFacade.getPmos$().pipe(map(pmos => this.pmos = pmos));
     this.lps$ = this.otFacade.getLps$().pipe(map(lps => this.lps = lps));
     this.pep2s$ = this.otFacade.getPep2s$().pipe(map(pep2s => { this.pep2s = pep2s; return pep2s; }));
@@ -236,6 +238,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.otFacade.postOt(form);
     this.formOt.reset();
     this.messageService.add({ severity: 'success', summary: 'Registro guardado', detail: 'Registro se ha generado con Éxito!' });
+    this.router.navigate(["app/ot/list-ot"])
   }
 
 }
