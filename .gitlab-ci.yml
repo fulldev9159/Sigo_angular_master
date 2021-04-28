@@ -8,35 +8,22 @@ stages:
 variables:
   CLI_VERSION: 10.1.6
 
-# unit test and lint:
-#   stage: unit test
-#   image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
-#   script:
-#     - cd angular-project
-#     - npm ci
-#     - ng lint
-#     - ng test --code-coverage --progress false --watch false
-#   coverage: '/^Statements\s*:\s*([^%]+)/'
+unit test and lint:
+  stage: unit test
+  image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
+  script:
+    - cd angular-project
+    - npm ci
+    - ng lint
+    - ng test --code-coverage --progress false --watch false
+  coverage: '/^Statements\s*:\s*([^%]+)/'
 
-# build a testing image:
-#   stage: build test
-#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-#   script:
-#     - docker-compose -f docker-compose.yml build --no-cache testing
-#     - docker-compose -f docker-compose.yml push testing
-
-# e2e robotframework:
-#   stage: e2e test
-#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-#   script:
-#     - docker pull registryv2.zweicom.com:5000/mcl-otec-webclient:latest-develop
-#     - docker-compose -f docker-compose.yml down -v
-#     - docker-compose -f docker-compose.yml rm mcl_test_sigo_web
-#     - docker-compose -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
-#     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_web
-#     - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
-#   after_script:
-#     - docker-compose -f docker-compose.yml down -v
+build a testing image:
+  stage: build test
+  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  script:
+    - docker-compose -f docker-compose.yml build --no-cache testing
+    - docker-compose -f docker-compose.yml push testing
 
 e2e robotframework:
   stage: e2e test
@@ -52,8 +39,8 @@ e2e robotframework:
     - sleep 1
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_web
     - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
-  # after_script:
-  #   - docker-compose -f docker-compose.yml down -v
+  after_script:
+    - docker-compose -f docker-compose.yml down -v
 
 docker:
   stage: deployment
