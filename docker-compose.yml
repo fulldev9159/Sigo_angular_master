@@ -51,10 +51,10 @@ services:
     environment:
       WEBAPI_NAME: "mcl_test_sigo_api"
       WEBAPI_PORT: "4040"
-    # expose:
-    #   - 80
-    ports:
-      - 4003:80
+    expose:
+      - 80
+    # ports:
+    #   - 4003:80
     restart: always
     depends_on:
       - mcl_test_sigo_api
