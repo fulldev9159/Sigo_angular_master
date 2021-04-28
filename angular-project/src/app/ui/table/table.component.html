@@ -50,7 +50,7 @@
           <td *ngSwitchCase="'ACTIONS'">
             <ng-container *ngIf="config.body.actions.length > 0">
               <button *ngFor="let button of config.body.actions" pButton pRipple [icon]="button.icon"
-                [class]="button.class" (click)="button.onClick(item, rowIndex);"></button>
+                [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
             </ng-container>
           </td>
         </ng-container>
