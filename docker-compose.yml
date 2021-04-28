@@ -29,7 +29,6 @@ services:
   mcl_test_sigo_api:
     image: registryv2.zweicom.com:5000/api-otec:develop
     environment:
-      MOCKUP_PATH: /go/src/api-otec/mockups
       TZ: America/Santiago
       LOG_LEVEL: INFO
       SERVICE_PORT: 4040
