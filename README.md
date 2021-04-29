@@ -1,15 +1,24 @@
 # Project OTEC WEB
 
 ## Robot e2e
-command
+documentación: https://robotframework.org/robotframework/
+### **command**
 
 ``` robot --variable url:http://localhost:4201 --variable ambiente:visual <archivo o directorio de archivos de testing>```
 
-sintax
-```--variable url:<url de la web a testear> ```
-```--variable ambiente:<ambiente en que se probará>```: 
-    - visual = Para probar de manera local y poder ver la interfaz de chrome
-    - testing = Para que no ejecute una intefaz visual. Este ambiente es usado para la pipeline
+### sintax
+- ```--variable url:<url de la web a testear> ```
+- ```--variable ambiente:<ambiente en que se probará>```: 
+    - **visual** = Para probar de manera local y poder ver la interfaz de chrome
+    - **testing** = Para que no ejecute una intefaz visual. Este ambiente es usado para la pipeline
+
+### Comandos internos robotframework
+
+>```Open Browser To Page    <url>``` - Permite abrir una url a la que se le ejecutarán los test. Esta usa la variable de ambiente dada al ejecutar el comando robot.
+
+>``` Element text should be    <element selector>   <texto>``` - Permite verificar el texto de un elemento en la web.
+
+>> ```Element text s>hould be    id:user-name    Jessica Castillo```
 
 ## Objetivo
 

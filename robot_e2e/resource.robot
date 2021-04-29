@@ -34,4 +34,7 @@ Open Browser To Page
     Create WebDriver  Chrome    chrome_options=${options}
     Go To    ${page}  
 
-
+Element text should be
+   [Arguments]    ${element}    ${texto}
+   ${txt}=    Get Text    ${element}
+   Should Be Equal    ${txt}    ${texto}

@@ -7,7 +7,6 @@ Resource          resource.robot
 
 *** Test Cases ***
 Redirect to page Login not login person
-    # Open Browser To Page    http://mcl_test_sigo_web/
     Open Browser To Page    ${url}
     Location Should Be    ${url}/auth/login
     close Browser
@@ -35,9 +34,7 @@ Redirect to dashboard to a login person
     Wait Until Element Is Visible    id:user-name    timeout=5
     Location Should Be    ${url}/app/ot/list-ot
     element should be visible    id:user-name
-
-    ${txtLogin}=    Get Text    id:user-name
-    Should Be Equal    ${txtLogin}    Jessica Castillo
+    Element text should be    id:user-name    Jessica Castillo
 
     # close Browser
 
