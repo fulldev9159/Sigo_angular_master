@@ -41,7 +41,7 @@
             <li class="header-menu">
               <span>Módulos</span>
             </li>
-            <li *ngxPermissionsOnly="['OT_LIST']" routerLinkActive="active">
+            <li *ngxPermissionsOnly="['OT_LIST']" routerLinkActive="active" id="menu-ot">
               <a href="#otSub" data-toggle="collapse" aria-expanded="false">
                 <i class="pi pi-check-square"></i>
                 <span>OT</span>
@@ -49,14 +49,14 @@
               </a>
               <ul class="collapse show list-unstyled" id="otSub">
                 <li *ngxPermissionsOnly="['OT_LIST']" class="pl-5" routerLinkActive="active-item">
-                  <a [routerLink]="['/app/ot/list-ot']">Listado OT</a>
+                  <a [routerLink]="['/app/ot/list-ot']">Listar OTs</a>
                 </li>
                 <li *ngxPermissionsOnly="['OT_CREATE']" class="pl-5" routerLinkActive="active-item">
                   <a [routerLink]="['/app/ot/form-ot']">Crear OT</a>
                 </li>
               </ul>
             </li>
-            <li routerLinkActive="active">
+            <li routerLinkActive="active" id="menu-cubicacion">
               <a href="#cubSub" data-toggle="collapse" aria-expanded="false">
                 <i class="pi pi-clone"></i>
                 <span>Cubicación</span>
@@ -64,21 +64,21 @@
               </a>
               <ul class="collapse list-unstyled" id="cubSub">
                 <li class="pl-5" routerLinkActive="active-item">
-                  <a [routerLink]="['/app/cubicacion/list-cub']">Listado Cubicación</a>
+                  <a [routerLink]="['/app/cubicacion/list-cub']">Listar Cubicaciones</a>
                 </li>
                 <li class="pl-5" routerLinkActive="active-item">
                   <a [routerLink]="['/app/cubicacion/form-cub']">Crear Cubicación</a>
                 </li>
               </ul>
             </li>
-            <li routerLinkActive="active">
+            <li routerLinkActive="active" id="menu-perfil">
               <a [routerLink]="['/app/profile']">
                 <i class="pi pi-users"></i>
                 <span>Perfiles</span>
                 <span class="badge badge-pill badge-warning">Nuevo</span>
               </a>
             </li>
-            <li routerLinkActive="active">
+            <li routerLinkActive="active" id="menu-components">
               <a [routerLink]="['/app/kitui']">
                 <i class="far fa-gem"></i>
                 <span>Components</span>

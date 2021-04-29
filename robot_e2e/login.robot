@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     A test suite with a single test for test.
+Documentation     Test de funcionanildad del login.
 ...
 ...               This test has a workflow that is created using keywords in
 ...               the imported resource file.
@@ -33,27 +33,5 @@ Redirect to dashboard to a login person
     element should be visible    id:user-name
     Element text should be    id:user-name    Jessica Castillo
 
-    # close Browser
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # ${"user_name"}    set variable    class:user-name
-
-    # element should be visible    ${"user_name"}
-    # ${txt-user-name}=    Get Text    ${"user_name"}
-    # Should Be Equal    ${txt-user-name}    Pedro Gallegos
-
+    close Browser
 
