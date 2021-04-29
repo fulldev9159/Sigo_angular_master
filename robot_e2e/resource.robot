@@ -25,11 +25,11 @@ Library           SeleniumLibrary
 Open Browser To Page
     [Arguments]    ${page}
     ${options}=  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys, selenium.webdriver
-    Call Method    ${options}    add_argument      disable-web-security
-    Call Method    ${options}    add_argument      allow-running-insecure-content
-    Call Method         ${options}   add_argument    headless
-    Call Method         ${options}   add_argument    disable-gpu
-    Call Method         ${options}   add_argument    no-sandbox
+    Run Keyword If    '${ambiente}' == 'testing'    Call Method    ${options}    add_argument      disable-web-security
+    Run Keyword If    '${ambiente}' == 'testing'    Call Method    ${options}    add_argument      allow-running-insecure-content
+    Run Keyword If    '${ambiente}' == 'testing'    Call Method         ${options}   add_argument    headless
+    Run Keyword If    '${ambiente}' == 'testing'    Call Method         ${options}   add_argument    disable-gpu
+    Run Keyword If    '${ambiente}' == 'testing'    Call Method         ${options}   add_argument    no-sandbox
     # Set Window Size     1500    1500
     Create WebDriver  Chrome    chrome_options=${options}
     Go To    ${page}  
