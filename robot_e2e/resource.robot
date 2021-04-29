@@ -33,6 +33,12 @@ Open Browser To Page
     # Set Window Size     1500    1500
     Create WebDriver  Chrome    chrome_options=${options}
     Go To    ${page}  
+Login
+    [Arguments]   ${username}    ${password}
+    input text    name:username    ${username}
+    input password    name:password    ${password}
+    element should be enabled    id:login
+    Click Button    id:login
 
 Element text should be
    [Arguments]    ${element}    ${texto}
