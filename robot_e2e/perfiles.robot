@@ -27,6 +27,7 @@ Create perfil
     Element text should be    ${menus}[1]    Crear Cubicación
     Element text should be    css:#menu-perfil>a>span    Perfiles
 
+    
     close Browser
 
 

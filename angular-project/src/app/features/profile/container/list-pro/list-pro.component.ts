@@ -75,7 +75,7 @@ export class ListProComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-pencil',
           class: 'p-button-rounded p-button-warning p-mr-2',
-          onClick: (item) => {
+          onClick: (event:Event,item) => {
             this.profileFacade.setFormProfile({
               form: {
                 id: item.id,
@@ -91,7 +91,7 @@ export class ListProComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-eye',
           class: 'p-button-rounded p-button-info p-mr-2',
-          onClick: (item) => {
+          onClick: (event:Event,item) => {
             // this.ModalDataPermissions = item.permisos;
 
             // console.log(item)
