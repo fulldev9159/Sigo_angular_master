@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
@@ -10,10 +15,9 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'app-list-cub',
   templateUrl: './list-cub.component.html',
   styleUrls: ['./list-cub.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListCubComponent implements OnInit, OnDestroy {
-
   // declarations
   public items$: Observable<Cubicacion[]>;
   private destroyInstance: Subject<boolean> = new Subject();
@@ -21,7 +25,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
     header: true,
     headerConfig: {
       title: '',
-      searchText: 'buscar...'
+      searchText: 'buscar...',
     },
     body: {
       headers: [
@@ -30,65 +34,72 @@ export class ListCubComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'nombre',
           header: 'nombre',
-          editable: false
+          editable: false,
         },
         {
           field: 'Fecha creación',
           type: 'DATE',
           sort: 'fecha_creacion',
           header: 'fecha_creacion',
-          editable: false
+          editable: false,
         },
         {
           field: 'Región',
           type: 'TEXT',
           sort: 'region_nombre',
           header: 'region_nombre',
-          editable: false
+          editable: false,
         },
         {
           field: 'Contrato marco',
           type: 'TEXT',
           sort: 'contrato_marco_nombre',
           header: 'contrato_marco_nombre',
-          editable: false
+          editable: false,
         },
         {
           field: 'Total',
           type: 'NUMBER',
           sort: 'total',
           header: 'total',
-          editable: false
+          editable: false,
         },
         {
           field: null,
           type: 'ACTIONS',
           sort: null,
           header: null,
-          editable: false
-        }
+          editable: false,
+        },
       ],
-      sort: ['nombre', 'fecha', 'region_nombre', 'contrato_marco_nombre', 'total'],
+      sort: [
+        'nombre',
+        'fecha',
+        'region_nombre',
+        'contrato_marco_nombre',
+        'total',
+      ],
       actions: [
         {
           icon: 'p-button-icon pi pi-copy',
           class: 'p-button-rounded p-button-info p-mr-2',
-          onClick: (item) => {
+          onClick: (event: Event, item) => {
             this.confirmationService.confirm({
               target: event.target as EventTarget,
-              message: '¿Está seguro que desea realizar copia de esta cubicación?',
+              message:
+                '¿Está seguro que desea realizar copia de esta cubicación?',
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
                 const cubicacion = {
                   ...item,
-                  id: (+(new Date())).toString()
+                  id: (+new Date()).toString(),
                 };
                 this.cubageFacade.replyCubicacion(cubicacion);
               },
             });
-          }
+          },
         },
         {
           icon: 'p-button-icon pi pi-pencil',
@@ -97,12 +108,12 @@ export class ListCubComponent implements OnInit, OnDestroy {
             if (item) {
               this.router.navigate(['/app/cubicacion/form-cub', item.id]);
             }
-          }
+          },
         },
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (item, position) => {
+          onClick: (event: Event, item, position) => {
             this.confirmationService.confirm({
               target: event.target as EventTarget,
               message: '¿Está seguro que desea eliminar esta cubicación?',
@@ -113,10 +124,10 @@ export class ListCubComponent implements OnInit, OnDestroy {
                 this.cubageFacade.deleteCubicacion(position);
               },
             });
-          }
-        }
-      ]
-    }
+          },
+        },
+      ],
+    },
   };
 
   constructor(
@@ -124,12 +135,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
     private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
     private confirmationService: ConfirmationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.authFacade.getLogin$()
+    this.authFacade
+      .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe(authLogin => {
+      .subscribe((authLogin) => {
         if (authLogin) {
           this.cubageFacade.getCubicacion({ token: authLogin.token });
         }
@@ -142,5 +154,4 @@ export class ListCubComponent implements OnInit, OnDestroy {
     this.destroyInstance.next(true);
     this.destroyInstance.complete();
   }
-
 }

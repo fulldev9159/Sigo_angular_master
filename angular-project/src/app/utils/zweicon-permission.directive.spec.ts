@@ -1,4 +1,4 @@
-import { appZweiconPermissionDirective } from './zweicon-permission.directive';
+// import { appZweiconPermissionDirective } from './zweicon-permission.directive';
 
 describe('appZweiconPermissionDirective', () => {
   // it('should create an instance', () => {

@@ -1,5 +1,5 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { scaleDownFromTop, scaleDownFromBottom } from 'ngx-router-animations';
 import { Subject } from 'rxjs';
 
