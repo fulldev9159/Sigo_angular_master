@@ -14,7 +14,7 @@ unit test and lint:
   script:
     - cd angular-project
     - npm ci
-    # - ng lint
+    - ng lint
     - ng test --code-coverage --progress false --watch false
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
@@ -31,8 +31,12 @@ e2e robotframework:
   script:
     - docker pull registryv2.zweicom.com:5000/mcl-otec-webclient:latest-develop
     - docker-compose -f docker-compose.yml down -v
-    - docker-compose -f docker-compose.yml rm mcl_test_sigo_web
+    - docker-compose -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
     - docker-compose -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
+    - docker-compose -f docker-compose.yml up -d mcl_test_sigo_db
+    - sleep 10
+    - docker-compose -f docker-compose.yml up -d mcl_test_sigo_api
+    - sleep 1
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_web
     - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
   after_script:
