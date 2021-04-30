@@ -14,15 +14,19 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
+        path: 'cubicacion',
+        loadChildren: () => import('../cubicacion/cubicacion.module').then(m => m.CubicacionModule),
+        canActivate: [GuardTokenGuard]
+      },
+      {
         path: 'ot',
         loadChildren: () => import('../ot/ot.module').then(m => m.OtModule),
         canActivate: [GuardTokenGuard]
         // canLoad: [GuardTokenGuard]
       },
       {
-        path: 'cubicacion',
-        loadChildren: () => import('../cubicacion/cubicacion.module').then(m => m.CubicacionModule),
-        canActivate: [GuardTokenGuard]
+        path: 'kitui',
+        loadChildren: () => import('../kitui/kitui.module').then(m => m.KituiModule)
       },
       {
         path: 'profile',
@@ -30,8 +34,9 @@ const routes: Routes = [
         canActivate: [GuardTokenGuard]
       },
       {
-        path: 'kitui',
-        loadChildren: () => import('../kitui/kitui.module').then(m => m.KituiModule)
+        path: 'user',
+        loadChildren: () => import('../user/user.module').then(m => m.UserModule),
+        canActivate: [GuardTokenGuard]
       }
     ]
   }

@@ -1,25 +1,25 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { scaleDownFromTop, scaleDownFromBottom } from 'ngx-router-animations';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss'],
   animations: [
     trigger('rotateCarousel', [
-      transition('list-pro => form-pro', useAnimation(scaleDownFromTop, {
+      transition('list-user => form-user', useAnimation(scaleDownFromTop, {
         params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
       })),
-      transition('form-pro => list-pro', useAnimation(scaleDownFromBottom, {
+      transition('form-user => list-user', useAnimation(scaleDownFromBottom, {
         params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
       })),
     ])
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class UserComponent implements OnInit, OnDestroy {
 
   // declarations
   private destroyInstance$: Subject<boolean> = new Subject();
