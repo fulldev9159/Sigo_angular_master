@@ -47,10 +47,14 @@
           <td *ngSwitchCase="'NUMBER'">{{item[column.header] | currency : 'CLP' : '$
             ':'.0-2':'es-CL'}}</td>
           <td *ngSwitchCase="'DATE'">{{item[column.header] | date:'dd-MM-yyyy'}}</td>
-          <td *ngSwitchCase="'ACTIONS'">
+          <td *ngSwitchCase="'ACTIONS'" id="action-buttons">
             <ng-container *ngIf="config.body.actions.length > 0">
-              <button *ngFor="let button of config.body.actions" pButton pRipple [icon]="button.icon"
-                [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+              <div *ngFor="let button of config.body.actions">
+                <button  pButton pRipple [icon]="button.icon"
+                [class]="button.class" (click)="button.onClick($event,item, rowIndex);" *ngIf="button.tooltip!==''|| button.tooltip!==undefined"  pTooltip="button.tooltip"></button>
+                <button pButton pRipple [icon]="button.icon"
+                [class]="button.class" (click)="button.onClick($event,item, rowIndex);"  *ngIf="button.tooltip===''"></button>
+              </div>
             </ng-container>
           </td>
         </ng-container>

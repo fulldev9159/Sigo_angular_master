@@ -49,17 +49,17 @@ export class ListProComponent implements OnInit, OnDestroy {
           editable: false,
         },
         {
-          field: 'Fecha creación',
-          type: 'DATE',
-          sort: 'fecha_creacion',
-          header: 'fecha_creacion',
+          field: 'Perfil Superior',
+          type: 'TEXT',
+          sort: 'superior_nombre',
+          header: 'superior_nombre',
           editable: false,
         },
         {
-          field: 'Fecha modificación',
+          field: 'Fecha Creación',
           type: 'DATE',
-          sort: 'fecha_actualizacion',
-          header: 'fecha_actualizacion',
+          sort: 'created_at',
+          header: 'created_at',
           editable: false,
         },
         {
@@ -70,7 +70,7 @@ export class ListProComponent implements OnInit, OnDestroy {
           editable: false,
         },
       ],
-      sort: ['nombre', 'descripcion', 'fecha_creacion', 'fecha_actualizacion'],
+      sort: ['nombre', 'descripcion', 'created_at', 'superior'],
       actions: [
         {
           icon: 'p-button-icon pi pi-pencil',
@@ -110,27 +110,30 @@ export class ListProComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
+          tooltip:'No puede eliminar perfiles con usuarios asignados',
           onClick: (event: Event, item) => {
-            this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: `¿Está seguro que desea eliminar este Perfil?`,
-              icon: 'pi pi-exclamation-triangle',
-              acceptLabel: 'Confirmar',
-              rejectLabel: 'Cancelar',
-              accept: () => {
-                this.profileFacade.deleteProfile({
-                  profileDelete: {
-                    token: this.authLogin.token,
-                    perfil_id: +item.id,
-                  },
-                });
-                this.messageService.add({
-                  severity: 'success',
-                  summary: 'Perfil eliminado',
-                  detail: 'Eliminación realizada con Éxito!',
-                });
-              },
-            });
+            if (item.eliminable) {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Está seguro que desea eliminar este Perfil?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.profileFacade.deleteProfile({
+                    profileDelete: {
+                      token: this.authLogin.token,
+                      perfil_id: +item.id,
+                    },
+                  });
+                  this.messageService.add({
+                    severity: 'success',
+                    summary: 'Perfil eliminado',
+                    detail: 'Eliminación realizada con Éxito!',
+                  });
+                },
+              });
+            }
           },
         },
       ],

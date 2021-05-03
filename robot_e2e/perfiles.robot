@@ -12,6 +12,7 @@ Create perfil
     Login    admin    password
     Wait Until Element Is Visible    id:user-name    timeout=5
 
+######### NAVBAR #############
     Element text should be    class:header-menu    Módulos
     Element text should be    css:#menu-ot>a>span    OT
     ${menus}=    Get WebElements    css:#otSub>li
@@ -119,10 +120,27 @@ Create perfil
     Click Element    id:guardar-button
 
     
+
+  ####### LISTAR PEFILES ###########
+    ${"title-list-profile"}    set variable    css:#title-list-profile
+    Wait Until Element Is Visible    ${"title-list-profile"}>h1    timeout=3
+    Location Should Be    ${url}/app/profile/list-pro
+
+    ${selector titulos de la tabla}    set variable    css:.p-datatable-thead>tr>th
+    ${titulos de la tabla}    Get WebElements    ${selector titulos de la tabla}
+    Element text should be    ${titulos de la tabla}[0]    Nombre Perfil
+    Element text should be    ${titulos de la tabla}[1]    Descripción
+    Element text should be    ${titulos de la tabla}[2]    Perfil Superior
+    Element text should be    ${titulos de la tabla}[3]    Fecha Creación
+
+    ${txt}=    get element count    css:.p-datatable-wrapper>table>tbody>tr
+    Log to Console    ${txt}
     # close Browser
 
 # Vamos a permitir crear perfiles sin permisos?
 # Ver como validar los toast en robotfaramework
+# Falta desplegar a nivel web el error cuando se crea un perfil con un nombre ya existe
 
 # ${txt}=    Get Text    ${permisos del modulo PROFILE}[0]
 # Log to Console    ${txt}
+

@@ -1,10 +1,13 @@
 :host ::ng-deep {
   th {
     font-size: 0.8rem;
-    text-align: center !important;
+    // text-align: center !important;
   }
   td {
     font-size: 0.7rem;
+  }
+  #action-buttons{
+    display: flex;
   }
   div.p-datatable-header.ng-star-inserted > div > span > input {
     height: 30px;
