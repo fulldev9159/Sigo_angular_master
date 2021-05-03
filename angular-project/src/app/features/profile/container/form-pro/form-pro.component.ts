@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-form-pro',
   templateUrl: './form-pro.component.html',
@@ -122,10 +123,12 @@ export class FormProComponent implements OnInit, OnDestroy {
     if (formData.id) {
       this.profileFacade.editFormProfile(formData);
       this.messageService.add({ severity: 'success', summary: 'Perfil editado', detail: 'Perfil editado con Éxito!' });
+      this.router.navigate(['/app/profile/list-pro']);
     } else {
       delete formData.id;
       this.profileFacade.postProfile(formData);
       this.messageService.add({ severity: 'success', summary: 'Perfil generado', detail: 'Perfil generado con Éxito!' });
+      this.router.navigate(['/app/profile/list-pro']);
     }
   }
 
