@@ -21,7 +21,7 @@ export class FormUComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  clearProvider() {
+  clearProvider(): void {
     this.formUser.get('proveedor_id').setValue(null);
   }
 

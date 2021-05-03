@@ -60,7 +60,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.highers$ = this.userFacade.getHighers$();
   }
 
-  initForm() {
+  initForm(): void {
     this.formUser = this.fb.group({
       username: null,
       nombre: [null, Validators.required],
