@@ -7,11 +7,11 @@ import { ListUserComponent } from './container/list-user/list-user.component';
 import { FormUserComponent } from './container/form-user/form-user.component';
 import { UiModule } from '@uiOT/ui.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormComponent } from './component/form/form.component';
+import { FormUComponent } from './component/form-u/form-u.component';
 
 
 @NgModule({
-  declarations: [UserComponent, ListUserComponent, FormUserComponent, FormComponent],
+  declarations: [UserComponent, ListUserComponent, FormUserComponent, FormUComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

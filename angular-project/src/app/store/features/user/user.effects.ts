@@ -5,62 +5,62 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import * as profileActions from './user.actions';
+import * as userActions from './user.actions';
 import { environment } from '@environment';
 
 @Injectable()
-export class ProfileEffects {
+export class UserEffects {
   constructor(private actions$: Actions, private http: HttpClient) { }
 
   getUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(profileActions.getUser),
+      ofType(userActions.getUser),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/usuarios/get_all`, {
           token: data.token
         }).pipe(map((res: any) =>
-          profileActions.getUserSuccess({ user: res.data }),
+          userActions.getUserSuccess({ user: res.data }),
         ),
-          catchError(err => of(profileActions.getUserError({ error: err }))
+          catchError(err => of(userActions.getUserError({ error: err }))
           ))))
   );
 
   getArea$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(profileActions.getArea),
+      ofType(userActions.getArea),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/areas/get_all`, {
           token: data.token
         }).pipe(map((res: any) =>
-          profileActions.getAreaSuccess({ area: res.data.items }),
+          userActions.getAreaSuccess({ area: res.data.items }),
         ),
-          catchError(err => of(profileActions.getAreaError({ error: err }))
+          catchError(err => of(userActions.getAreaError({ error: err }))
           ))))
   );
 
   getProvider$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(profileActions.getProvider),
+      ofType(userActions.getProvider),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/proveedores/get_all`, {
           token: data.token
         }).pipe(map((res: any) =>
-          profileActions.getProviderSuccess({ provider: res.data.items }),
+          userActions.getProviderSuccess({ provider: res.data.items }),
         ),
-          catchError(err => of(profileActions.getProviderError({ error: err }))
+          catchError(err => of(userActions.getProviderError({ error: err }))
           ))))
   );
 
   getHigher$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(profileActions.getHigher),
+      ofType(userActions.getHigher),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/usuarios/superior_jerarquico/get`, {
+        this.http.post(`${environment.api}/mockup/usuarios/superior_jerarquico/get`, {
           token: data.token
         }).pipe(map((res: any) =>
-          profileActions.getHigherSuccess({ higher: res.data.items }),
+          userActions.getHigherSuccess({ higher: res.data.items }),
         ),
-          catchError(err => of(profileActions.getHigherError({ error: err }))
+          catchError(err => of(userActions.getHigherError({ error: err }))
           ))))
   );
 

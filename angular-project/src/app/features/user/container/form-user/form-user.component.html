@@ -14,17 +14,11 @@
   </div>
 
   <app-card [classCardHeader]="'bg-secondary text-white'">
-    <ng-container card-header-title>
-
-    </ng-container>
     <ng-container card-body>
       <div class="row">
         <div class="col-xs-12 col-md-8">
-          <!-- <app-form [formOt]="formOt" [cubicaciones]="(cubicaciones$ | async)" [planes]="(planes$ | async)"
-            [sitios]="(sitios$ | async)" [pmos]="(pmos$ | async)" [lps]="(lps$ | async)" [pep2s]="(pep2s$ | async)"
-            (cancel)="cancel($event);" (save)="save($event);">
-          </app-form> -->
-          <app-form></app-form>
+          <app-form-u [formUser]="formUser" [areas]="(areas$ | async)" [highers]="(highers$ | async)"
+            [profiles]="(profiles$ | async)" [providers]="(providers$ | async)"></app-form-u>
         </div>
         <div class="col-xs-12 col-md-4">
           <!-- <app-detail [cubage]="cubage" [formOt]="formOt.value"></app-detail> -->
@@ -32,6 +26,4 @@
       </div>
     </ng-container>
   </app-card>
-
-
 </div>

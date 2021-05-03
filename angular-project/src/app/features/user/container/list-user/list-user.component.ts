@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ConfirmationService } from 'primeng/api';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-user',
@@ -11,6 +14,8 @@ import { Subject } from 'rxjs';
 export class ListUserComponent implements OnInit, OnDestroy {
 
   // declarations
+  public authLogin = null;
+  public items$: Observable<any[]>;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
     header: true,
@@ -107,10 +112,28 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private authFacade: AuthFacade,
+    private userFacade: UserFacade,
     private confirmationService: ConfirmationService
-  ) { }
+  ) {
+    this.authFacade
+      .getLogin$()
+      .pipe(takeUntil(this.destroyInstance))
+      .subscribe((authLogin) => {
+        if (authLogin) {
+          // asignamos datos de usuario autenticado a variable local
+          this.authLogin = authLogin;
+        }
+      });
+  }
 
   ngOnInit(): void {
+
+    this.userFacade.getUsers({
+      token: this.authLogin.token
+    });
+
+    this.items$ = this.userFacade.getUsers$();
   }
 
   ngOnDestroy(): void {

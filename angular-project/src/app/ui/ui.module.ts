@@ -16,14 +16,12 @@ import { ConfirmationService } from 'primeng/api';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { MessageModule } from 'primeng/message';
 import { NgxPermissionsModule } from 'ngx-permissions';
-import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   imports: [
     CommonModule,
     PrimeNgModule,
-    NgxPermissionsModule,
-    RadioButtonModule
+    NgxPermissionsModule
   ],
   declarations: [
     CardComponent,
@@ -43,8 +41,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     DatepickerComponent,
     ToastComponent,
     ProgressBarComponent,
-    NgxPermissionsModule,
-    RadioButtonModule
+    NgxPermissionsModule
   ],
   providers: [ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

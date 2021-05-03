@@ -1,0 +1,84 @@
+<div [formGroup]="formUser" class="row">
+  <div class="col-xs-12 col-md-6">
+    <label for="">Nombre</label>
+    <input formControlName="nombre" placeholder="Juan Perez" class="form-control" type="text">
+    <br>
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+    <label for="">Rut</label>
+    <input formControlName="rut" placeholder="xx.xxx.xxx-x" class="form-control" type="text">
+    <br>
+  </div>
+  <div class="col-xs-12 col-md-3">
+    <label for="">Celular</label>
+    <input formControlName="celular" placeholder="569123123xx" class="form-control" type="text">
+    <br>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <label for="">Tipo</label>
+    <div class="row">
+      <div class="col-xs-12 col-md-4">
+        <div class="p-field-radiobutton">
+          <p-radioButton formControlName="provider" (click)="clearProvider();" [value]="false"></p-radioButton>
+          <label for="city1">Movistar</label>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div class="p-field-radiobutton">
+          <p-radioButton formControlName="provider" [value]="true"></p-radioButton>
+          <label for="city1">Proveedor</label>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  <div *ngIf="formUser.value.provider !== true" class="col-xs-12 col-md-6">
+
+  </div>
+  <div *ngIf="formUser.value.provider === true" class="col-xs-12 col-md-6">
+    <label for="">Proveedor</label>
+    <select formControlName="proveedor_id" class="form-control" name="" id="">
+      <option value="null" selected disabled>Seleccione proveedor</option>
+      <option *ngFor="let provider of providers" [value]="provider.id">{{provider.nombre}}</option>
+    </select>
+    <br>
+  </div>
+
+  <div class="col-xs-12 col-md-4">
+    <label for="">Área</label>
+    <select formControlName="area_id" class="form-control" name="" id="">
+      <option value="null" selected disabled>Seleccione área</option>
+      <option *ngFor="let area of areas" [value]="area.id">{{area.nombre}}</option>
+    </select>
+    <br>
+  </div>
+
+  <div class="col-xs-12 col-md-4">
+    <label for="">Perfil</label>
+    <select formControlName="profile_id" class="form-control" name="" id="">
+      <option value="null" selected disabled>Seleccione perfil</option>
+      <option *ngFor="let profile of profiles" [value]="profile.id">{{profile.nombre}}</option>
+    </select>
+    <br>
+  </div>
+
+  <div class="col-xs-12 col-md-4">
+    <label for="">Jefatura</label>
+    <select formControlName="superior_id" class="form-control" name="" id="">
+      <option value="null" selected disabled>Seleccione jefe</option>
+      <option *ngFor="let higher of highers" [value]="higher.id">{{higher.nombres}} {{higher.apellidos}}</option>
+    </select>
+    <br>
+  </div>
+
+  <div class="col-xs-12 col-md-12">
+    <label for="">Datos extras</label>
+    <textarea class="form-control" placeholder="..." name="" id="" cols="30" rows="3"></textarea>
+    <br>
+  </div>
+
+  <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+    <button [disabled]="!formUser.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
+  </div>
+</div>
