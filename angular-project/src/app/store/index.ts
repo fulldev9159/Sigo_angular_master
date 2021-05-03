@@ -1,8 +1,3 @@
-// MUSIC TEST
-export * from './features/test/test.facade';
-export * from './features/test/test.model';
-// MUSIC TEST
-
 // AUTH
 export * from './features/auth/auth.facade';
 export * from './features/auth/auth.model';
@@ -17,3 +12,8 @@ export * from './features/ot/ot.model';
 export * from './features/cubicacion/cubicacion.facade';
 export * from './features/cubicacion/cubicacion.model';
 // CUBICACION
+
+// USER
+export * from './features/user/user.facade';
+export * from './features/user/user.model';
+// USER

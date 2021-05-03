@@ -17,12 +17,17 @@ import * as formOtReduce from './features/ot/ot.reducer';
 // CUBICACION STORE
 import { CubicacionEffects } from './features/cubicacion/cubicacion.effects';
 import * as formCubicacionReduce from './features/cubicacion/cubicacion.reducer';
-// AUCUBICACIONTH STORE
-
 // CUBICACION STORE
+
+// PROFILES STORE
 import { ProfileEffects } from './features/profile/profile.effects';
 import * as formProfileReduce from './features/profile/profile.reducer';
-// AUCUBICACIONTH STORE
+// PROFILES STORE
+
+// USER STORE
+import { UserEffects } from './features/user/user.effects';
+import * as formUserReduce from './features/user/user.reducer';
+// USER STORE
 
 @NgModule({
   declarations: [],
@@ -44,10 +49,15 @@ import * as formProfileReduce from './features/profile/profile.reducer';
     StoreModule.forFeature(formCubicacionReduce.CubicacionFeatureKey, formCubicacionReduce.reducerCubicacion),
     // CUBICACION STORE
 
-     // PROFILE STORE
-     EffectsModule.forFeature([ProfileEffects]),
-     StoreModule.forFeature(formProfileReduce.ProfileFeatureKey, formProfileReduce.reducerProfile)
-     // PROFILE STORE
+    // PROFILE STORE
+    EffectsModule.forFeature([ProfileEffects]),
+    StoreModule.forFeature(formProfileReduce.ProfileFeatureKey, formProfileReduce.reducerProfile),
+    // PROFILE STORE
+
+    // USER STORE
+    EffectsModule.forFeature([UserEffects]),
+    StoreModule.forFeature(formUserReduce.UserFeatureKey, formUserReduce.reducerUser)
+    // USER STORE
   ]
 })
 export class StoreAllModule { }

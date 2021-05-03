@@ -21,7 +21,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
   imports: [
     CommonModule,
     PrimeNgModule,
-    NgxPermissionsModule,
+    NgxPermissionsModule
   ],
   declarations: [
     CardComponent,

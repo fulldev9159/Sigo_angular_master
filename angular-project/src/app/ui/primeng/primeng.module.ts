@@ -14,6 +14,8 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     ToastModule,
     MessagesModule,
     MessageModule,
-    CheckboxModule
+    CheckboxModule,
+    RadioButtonModule
   ],
   exports: [
     TableModule,
@@ -44,7 +47,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     ToastModule,
     MessagesModule,
     MessageModule,
-    CheckboxModule
+    CheckboxModule,
+    RadioButtonModule
   ],
   providers: [MessageService]
 })
