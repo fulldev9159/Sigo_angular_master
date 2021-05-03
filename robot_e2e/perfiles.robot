@@ -16,8 +16,6 @@ Create perfil
     Element text should be    class:header-menu    Módulos
     Element text should be    css:#menu-ot>a>span    OT
     ${menus}=    Get WebElements    css:#otSub>li
-    # ${txt}=    Get Text    ${menus}[0]
-    # Log to Console    ${txt}
     Element text should be    ${menus}[0]    Listar OTs
     Element text should be    ${menus}[1]    Crear OT
     Element text should be    css:#menu-cubicacion>a>span    Cubicación
