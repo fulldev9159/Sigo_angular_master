@@ -133,6 +133,30 @@ Create perfil
 
     ${txt}=    get element count    css:.p-datatable-wrapper>table>tbody>tr
     Log to Console    ${txt}
+
+    FOR    ${i}    IN RANGE    ${txt}
+        Log to Console    ${i + 1}
+        
+        ${nombre-perfil}    set variable    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
+        ${txt nombre perfil}=    Get Text    ${nombre-perfil}
+        Log to Console    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
+        Log to Console    ${txt nombre perfil}
+        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil robot
+        # ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${i + 1}    -3
+        Log to Console     ${areYouMyLine}
+        ${numero de fila}   set variable    ${i + 1}
+        Set Suite Variable    ${numero de fila}
+        Run Keyword If     ${areYouMyLine}    Exit For Loop        
+    END
+    Should Be True    ${areYouMyLine}
+
+##### ELIMINAR ##########
+    Log to Console    ${numero de fila}
+    Click Element    css:.p-datatable-wrapper>table>tbody>tr:nth-child(2)>td:nth-child(5)>div:nth-child(3)>button
+    ${boton de confirmar}    set variable    css:body>div>div.p-confirm-popup-footer.ng-tns-c99-5>button.ng-tns-c99-5.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
+    Wait Until Element Is Visible    ${boton de confirmar}    timeout=3
+    Click Element    ${boton de confirmar}
+    
     # close Browser
 
 # Vamos a permitir crear perfiles sin permisos?
