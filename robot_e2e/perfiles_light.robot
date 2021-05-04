@@ -6,7 +6,7 @@ Documentation     Test de funcionanildad del modulo de Perfiles.
 Resource          resource.robot
 
 *** Test Cases ***
-Create perfil
+Crear perfil
     Open Browser To Page                                         ${url}
     Login    admin    password
     Wait Until Element Is Visible                                id:user-name    timeout=5
