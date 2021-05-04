@@ -110,6 +110,7 @@ export class ListProComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
+          conditionKey: 'eliminable',
           tooltip: 'No puede eliminar perfiles con usuarios asignados',
           onClick: (event: Event, item) => {
             if (item.eliminable) {

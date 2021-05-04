@@ -50,10 +50,13 @@
           <td *ngSwitchCase="'ACTIONS'" id="action-buttons">
             <ng-container *ngIf="config.body.actions.length > 0">
               <div *ngFor="let button of config.body.actions">
-                <button  pButton pRipple [icon]="button.icon"
-                [class]="button.class" (click)="button.onClick($event,item, rowIndex);" *ngIf="button.tooltip!==''|| button.tooltip!==undefined"  pTooltip="button.tooltip"></button>
-                <button pButton pRipple [icon]="button.icon"
-                [class]="button.class" (click)="button.onClick($event,item, rowIndex);"  *ngIf="button.tooltip===''"></button>
+                <div *ngIf="!item[button.conditionKey]" pTooltip="{{button.tooltip}}">
+                  <button [disabled]="item[button.conditionKey] === false" pButton pRipple [icon]="button.icon"
+                  [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                </div>
+                <button [disabled]="item[button.conditionKey] === false" pButton pRipple [icon]="button.icon"
+                  [class]="button.class" (click)="button.onClick($event,item, rowIndex);"
+                  *ngIf="item[button.conditionKey]"></button>
               </div>
             </ng-container>
           </td>

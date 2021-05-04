@@ -15,6 +15,8 @@ import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { TooltipModule } from 'primeng/tooltip';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     MessagesModule,
     MessageModule,
     CheckboxModule,
-    RadioButtonModule
+    RadioButtonModule,
+    TooltipModule,
+    OverlayPanelModule
   ],
   exports: [
     TableModule,
@@ -48,8 +52,10 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     MessagesModule,
     MessageModule,
     CheckboxModule,
-    RadioButtonModule
+    RadioButtonModule,
+    TooltipModule,
+    OverlayPanelModule
   ],
-  providers: [MessageService]
+  providers: [MessageService],
 })
-export class PrimeNgModule { }
+export class PrimeNgModule {}
