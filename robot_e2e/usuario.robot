@@ -13,5 +13,7 @@ Ingresar usuario
     Wait Until Element Is Visible    id:user-name    timeout=5
     ${"boton-perfil-menu"}    set variable    css:#menu-usuario>a>span
     Click Element    css:#menu-usuario>a>span
+    
+    close Browser
     # Wait Until Element Is Visible    css:agregar-usuario    timeout=5
     # Click Element    css:agregar-usuario
