@@ -12,8 +12,8 @@ Crear perfil
     Wait Until Element Is Visible                                id:user-name    timeout=5
     ###### Acceder a ver listar pefiles a través del navbar
     Click Element                                                css:#menu-perfil>a>span
-    # Wait Until Element Is Visible                                id:add-profile-button    timeout=3
-    # Click Element                                                id:add-profile-button
+    Wait Until Element Is Visible                                id:add-profile-button    timeout=3
+    Click Element                                                id:add-profile-button
 #     ###### Guardar Perfil ###############
 #     ${"input-nombre-perfil"}    set variable                     css:#nombre-perfil-input
 #     input text    ${"input-nombre-perfil"}>input                 Nuevo Perfil robot
