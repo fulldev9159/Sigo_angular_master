@@ -16,10 +16,10 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(userActions.getUser),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/usuarios/get_all`, {
+        this.http.post(`${environment.api}/mockup/usuario/get_all`, {
           token: data.token
         }).pipe(map((res: any) =>
-          userActions.getUserSuccess({ user: res.data }),
+          userActions.getUserSuccess({ user: res.data.items }),
         ),
           catchError(err => of(userActions.getUserError({ error: err }))
           ))))

@@ -10,7 +10,7 @@ import * as Model from './user.model';
   providedIn: 'root',
 })
 export class UserFacade {
-  constructor(private store: Store<Model.User>) { }
+  constructor(private store: Store<Model.User>) {}
 
   // USER
   public getUsers(data): void {
@@ -51,4 +51,9 @@ export class UserFacade {
   }
   // HIGHERS
   // USER
+
+  // FORM
+  public setFormUser(data): void {
+    this.store.dispatch(userActions.setFormUser(data));
+  }
 }

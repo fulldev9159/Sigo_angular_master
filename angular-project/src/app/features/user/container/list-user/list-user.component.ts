@@ -26,52 +26,52 @@ export class ListUserComponent implements OnInit, OnDestroy {
     body: {
       headers: [
         {
-          field: 'Usuario',
+          field: 'username',
           type: 'TEXT',
-          sort: 'nombre',
-          header: 'nombre',
+          sort: 'username',
+          header: 'username',
           editable: false
         },
         {
           field: 'Rut',
           type: 'TEXT',
-          sort: 'descripcion',
-          header: 'descripcion',
-          editable: false,
-        },
-        {
-          field: 'DV',
-          type: 'TEXT',
-          sort: 'fecha_creacion',
-          header: 'fecha_creacion',
+          sort: 'rut',
+          header: 'rut',
           editable: false,
         },
         {
           field: 'Nombres',
           type: 'TEXT',
-          sort: 'nombre',
+          sort: 'nombres',
           header: 'nombre',
           editable: false,
         },
         {
           field: 'Apellidos',
           type: 'TEXT',
-          sort: 'nombre',
+          sort: 'apellidos',
           header: 'nombre',
           editable: false,
         },
         {
           field: 'Email',
           type: 'TEXT',
-          sort: 'nombre',
-          header: 'nombre',
+          sort: 'email',
+          header: 'email',
           editable: false,
         },
         {
           field: 'Celular',
           type: 'TEXT',
-          sort: 'nombre',
+          sort: 'celular',
           header: 'nombre',
+          editable: false,
+        },
+        {
+          field: 'Compañia',
+          type: 'TEXT',
+          sort: 'proveedor_nombre',
+          header: 'proveedor_nombre',
           editable: false,
         },
         {
@@ -83,14 +83,23 @@ export class ListUserComponent implements OnInit, OnDestroy {
         }
 
       ],
-      sort: ['nombre', 'descripcion'],
+      sort: ['username', 'rut','nombres','apellidos','email','celular','proveedor_nombre'],
       actions: [
         {
           icon: 'p-button-icon pi pi-pencil',
           class: 'p-button-rounded p-button-warning p-mr-2',
-          onClick: (item) => {
-            console.log(item);
-          }
+          onClick: (event: Event, item) => {
+            this.userFacade.setFormUser({
+              form: {
+                id: item.id,
+                nombre: item.nombre,
+                descripcion: item.descripcion,
+                permisos: item.permisos,
+              },
+            });
+
+            this.router.navigate(['/app/profile/form-pro', item.id]);
+          },
         },
         {
           icon: 'p-button-icon pi pi-eye',
