@@ -15,13 +15,10 @@ Crear perfil
     Wait Until Element Is Visible                                id:add-profile-button    timeout=3
     Click Element                                                id:add-profile-button
 #     ###### Guardar Perfil ###############
-#     ${"input-nombre-perfil"}    set variable                     css:#nombre-perfil-input
-#     input text    ${"input-nombre-perfil"}>input                 Nuevo Perfil robot
-#     ${"input-descripcion-perfil"}    set variable                css:#descripcion-perfil-input
-#     input text    ${"input-descripcion-perfil"}>textarea         Nuevo Descripcion perfil robot
-#     ${"selector permisos del modulo OT"}    set variable         css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
-#     ${permisos del modulo OT}=    Get WebElements                ${"selector permisos del modulo OT"}
-#     Click Element                                                ${permisos del modulo OT}[0]
+    input text    css:#nombre-perfil-input>input                 Nuevo Perfil robot
+    input text    css:#descripcion-perfil-input>textarea         Nuevo Descripcion perfil robot
+    ${permisos del modulo OT}=    Get WebElements                css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
+    Click Element                                                ${permisos del modulo OT}[0]
 #     ${"selector permisos del modulo CUBAGE"}    set variable     css:#modulos-pefil-CUBAGE>p-listbox>div>div.p-listbox-list-wrapper>ul>li
 #     ${permisos del modulo CUBAGE}=    Get WebElements            ${"selector permisos del modulo CUBAGE"}
 #     Click Element                                                ${permisos del modulo CUBAGE}[0]
