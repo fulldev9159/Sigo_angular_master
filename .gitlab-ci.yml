@@ -31,11 +31,6 @@ robot framework:
   script:
     - docker-compose build --no-cache robotframework
     - docker-compose push robotframework
-  only:
-    refs:
-      - develop
-    changes:
-      - docker/robotframework/Dockerfile
 
 e2e robotframework:
   stage: e2e test
