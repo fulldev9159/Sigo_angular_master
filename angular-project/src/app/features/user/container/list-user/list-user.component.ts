@@ -9,10 +9,9 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
-  styleUrls: ['./list-user.component.scss']
+  styleUrls: ['./list-user.component.scss'],
 })
 export class ListUserComponent implements OnInit, OnDestroy {
-
   // declarations
   public authLogin = null;
   public items$: Observable<any[]>;
@@ -30,7 +29,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'username',
           header: 'username',
-          editable: false
+          editable: false,
         },
         {
           field: 'Rut',
@@ -79,11 +78,18 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'ACTIONS',
           sort: null,
           header: null,
-          editable: false
-        }
-
+          editable: false,
+        },
       ],
-      sort: ['username', 'rut','nombres','apellidos','email','celular','proveedor_nombre'],
+      sort: [
+        'username',
+        'rut',
+        'nombres',
+        'apellidos',
+        'email',
+        'celular',
+        'proveedor_nombre',
+      ],
       actions: [
         {
           icon: 'p-button-icon pi pi-pencil',
@@ -137,9 +143,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.userFacade.getUsers({
-      token: this.authLogin.token
+      token: this.authLogin.token,
     });
 
     this.items$ = this.userFacade.getUsers$();
@@ -149,5 +154,4 @@ export class ListUserComponent implements OnInit, OnDestroy {
     this.destroyInstance.next(true);
     this.destroyInstance.complete();
   }
-
 }
