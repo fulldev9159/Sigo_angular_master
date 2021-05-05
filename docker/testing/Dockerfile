@@ -1,4 +1,5 @@
-FROM registryv2.zweicom.com:5000/robotframework:latest
+# FROM registryv2.zweicom.com:5000/robotframework:latest
+FROM ppodgorsek/robot-framework:latest
 
 WORKDIR /app
 
