@@ -17,8 +17,8 @@ Crear perfil
 #     ###### Guardar Perfil ###############
     input text    css:#nombre-perfil-input>input                 Nuevo Perfil robot
     input text    css:#descripcion-perfil-input>textarea         Nuevo Descripcion perfil robot
-    ${permisos del modulo OT}=    Get WebElements                css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
-    Click Element                                                ${permisos del modulo OT}[0]
+    ${Listar OT}=    set variable                                css:#modulos-pefil-OT >p-listbox>div>div.p-listbox-list-wrapper>ul>li:nth-child(1)>div>div
+    Click Element                                                ${Listar OT}
 #     ${"selector permisos del modulo CUBAGE"}    set variable     css:#modulos-pefil-CUBAGE>p-listbox>div>div.p-listbox-list-wrapper>ul>li
 #     ${permisos del modulo CUBAGE}=    Get WebElements            ${"selector permisos del modulo CUBAGE"}
 #     Click Element                                                ${permisos del modulo CUBAGE}[0]
