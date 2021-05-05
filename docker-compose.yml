@@ -137,3 +137,10 @@ services:
     ports:
       - 4200:80
     restart: always
+
+  robotframework:
+    image: registryv2.zweicom.com:5000/robotframework:${CI_COMMIT_TAG:-latest}
+    build:
+      context: .
+      dockerfile: docker/robotframework/Dockerfile
+    
