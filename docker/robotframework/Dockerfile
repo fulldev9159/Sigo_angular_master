@@ -9,8 +9,8 @@ RUN apk update && apk upgrade \
     python3 \
     py-pip \
   && pip3 install robotframework-faker \
-  && pip3 -Iv robotframework==3.2.2 \
-  && pip3 -Iv robotframework-seleniumlibrary==4.5.0 \
+  && pip3 robotframework==3.2.2 \
+  && pip3 robotframework-seleniumlibrary==4.5.0 \
   && rm -rf /var/lib/apt/lists/* \
     /var/cache/apk/* \
     /usr/share/man \
