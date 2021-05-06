@@ -40,6 +40,7 @@ e2e robotframework:
     - docker-compose -f docker-compose.yml down -v
     - docker-compose -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
     - docker-compose -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
+    - docker-compose pull
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_db
     - sleep 10
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_api
