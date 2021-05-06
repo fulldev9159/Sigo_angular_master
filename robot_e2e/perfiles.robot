@@ -22,7 +22,7 @@ Crear perfil
     Wait Until Element Is Visible    ${Listar OT}
     sleep    10
     Click Element                                                ${Listar OT}
-    Execute Javascript    document.querySelector("#modulos-pefil-OT >p-listbox>div>div.p-listbox-list-wrapper>ul>li:nth-child(1)>div>div").click()
+    Execute Javascript    document.querySelector("#modulos-pefil-OT >p-listbox>div>div.p-listbox-list-wrapper>ul>li:nth-child(1)").click()
 #     ${"selector permisos del modulo CUBAGE"}    set variable     css:#modulos-pefil-CUBAGE>p-listbox>div>div.p-listbox-list-wrapper>ul>li
 #     ${permisos del modulo CUBAGE}=    Get WebElements            ${"selector permisos del modulo CUBAGE"}
 #     Click Element                                                ${permisos del modulo CUBAGE}[0]
