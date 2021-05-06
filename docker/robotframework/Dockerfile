@@ -8,13 +8,15 @@ RUN apk update && apk upgrade \
     chromium-chromedriver@latest-stable \
     python3 \
     py-pip \
-  && pip3 install robotframework robotframework-seleniumlibrary robotframework-faker \
+  && pip3 install robotframework-faker \
+  && pip3 -Iv robotframework==3.2.2 \
+  && pip3 -Iv robotframework-seleniumlibrary==4.5.0 \
   && rm -rf /var/lib/apt/lists/* \
     /var/cache/apk/* \
     /usr/share/man \
     /tmp/*
 
-RUN pip freeze | grep seleniumlibrary
+RUN pip freeze | grep robot
 # Add Chrome as a user
 RUN mkdir -p /robot \
     && adduser -D chrome \
