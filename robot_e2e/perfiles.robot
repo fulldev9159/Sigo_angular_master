@@ -18,11 +18,12 @@ Crear perfil
     input text    css:#nombre-perfil-input>input                 Nuevo Perfil robot
     input text    css:#descripcion-perfil-input>textarea         Nuevo Descripcion perfil robot
     ${Listar OT}=    set variable                                css:#modulos-pefil-OT >p-listbox>div>div.p-listbox-list-wrapper>ul>li:nth-child(1)>div>div
-    Wait Until Element Is Enabled    ${Listar OT}
-    Wait Until Element Is Visible    ${Listar OT}
-    sleep    10
-    Click Element                                                ${Listar OT}
-    Execute Javascript    document.querySelector("#modulos-pefil-OT >p-listbox>div>div.p-listbox-list-wrapper>ul>li:nth-child(1)").click()
+    Click Element                                                id:guardar-button
+    # Wait Until Element Is Enabled    ${Listar OT}
+    # Wait Until Element Is Visible    ${Listar OT}
+    # sleep    10
+    # Click Element                                                ${Listar OT}
+    # Execute Javascript    document.querySelector("#modulos-pefil-OT >p-listbox>div>div.p-listbox-list-wrapper>ul>li:nth-child(1)").click()
 #     ${"selector permisos del modulo CUBAGE"}    set variable     css:#modulos-pefil-CUBAGE>p-listbox>div>div.p-listbox-list-wrapper>ul>li
 #     ${permisos del modulo CUBAGE}=    Get WebElements            ${"selector permisos del modulo CUBAGE"}
 #     Click Element                                                ${permisos del modulo CUBAGE}[0]
