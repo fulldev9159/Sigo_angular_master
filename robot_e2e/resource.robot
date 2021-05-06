@@ -35,3 +35,8 @@ Element text should be
    [Arguments]    ${element}    ${texto}
    ${txt}=    Get Text    ${element}
    Should Be Equal    ${txt}    ${texto}
+
+Click Visible Element
+   [Arguments]   ${element}
+   Wait Until Element Is Visible    ${element}    timeout=4
+   Click Element    ${element}
