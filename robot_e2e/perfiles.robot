@@ -121,7 +121,7 @@ Eliminar Perfil
     END
     Click Element                                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(5)>div:nth-child(3)>button
     ${boton de confirmar}    set variable                         css:body>div>div.p-confirm-popup-footer.ng-tns-c99-5>button.ng-tns-c99-5.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
-    Wait Until Element Is Visible    ${boton de confirmar}    timeout=3
+    Wait Until Element Is Visible    ${boton de confirmar}    timeout=10
     Click Element    ${boton de confirmar}
     Wait Until Element Is Visible                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
     close Browser
