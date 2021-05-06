@@ -42,14 +42,14 @@ export class ListUserComponent implements OnInit, OnDestroy {
           field: 'Nombres',
           type: 'TEXT',
           sort: 'nombres',
-          header: 'nombre',
+          header: 'nombres',
           editable: false,
         },
         {
           field: 'Apellidos',
           type: 'TEXT',
           sort: 'apellidos',
-          header: 'nombre',
+          header: 'apellidos',
           editable: false,
         },
         {
