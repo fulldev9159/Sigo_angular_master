@@ -45,9 +45,9 @@ e2e robotframework:
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_api
     - sleep 1
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_web
-  #   - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
-  # after_script:
-  #   - docker-compose -f docker-compose.yml down -v
+    - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
+  after_script:
+    - docker-compose -f docker-compose.yml down -v
 
 docker:
   stage: deployment
