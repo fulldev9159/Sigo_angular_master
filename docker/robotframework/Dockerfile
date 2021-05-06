@@ -14,6 +14,7 @@ RUN apk update && apk upgrade \
     /usr/share/man \
     /tmp/*
 
+RUN pip freeze | grep seleniumlibrary
 # Add Chrome as a user
 RUN mkdir -p /robot \
     && adduser -D chrome \
