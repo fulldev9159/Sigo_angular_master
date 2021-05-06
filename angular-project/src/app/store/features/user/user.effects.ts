@@ -26,6 +26,22 @@ export class UserEffects {
     )
   );
 
+  getUserDetail$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getUserDetail),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/mockup/usuario/detalle/get`, {
+          usuario_id: data.userId
+        }).pipe(
+          map((res: any) =>
+            userActions.getUserDetailSuccess({ userDetail: res.data.items })
+          ),
+          catchError((err) => of(userActions.getUserError({ error: err })))
+        )
+      )
+    )
+  );
+
   getArea$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getArea),

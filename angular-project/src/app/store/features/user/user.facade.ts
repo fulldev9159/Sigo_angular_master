@@ -13,12 +13,20 @@ export class UserFacade {
   constructor(private store: Store<Model.User>) {}
 
   // USER
-  public getUsers(data): void {
-    this.store.dispatch(userActions.getUser(data));
+  public getUsers(): void {
+    this.store.dispatch(userActions.getUser());
   }
 
   public getUsers$(): Observable<Model.User[]> {
     return this.store.select(userSelectors.getUser);
+  }
+
+  public getUserDetail(userId: number): void {
+    this.store.dispatch(userActions.getUserDetail({ userId }));
+  }
+
+  public getUserDetail$(): Observable<Model.UserDetail> {
+    return this.store.select(userSelectors.getUserDetail);
   }
 
   // AREAS

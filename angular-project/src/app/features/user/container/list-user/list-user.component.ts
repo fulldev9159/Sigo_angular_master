@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
+import * as Model from '@storeOT/features/user/user.model';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -14,7 +15,9 @@ import { takeUntil } from 'rxjs/operators';
 export class ListUserComponent implements OnInit, OnDestroy {
   // declarations
   public authLogin = null;
+  public DisplayModal = false;
   public items$: Observable<any[]>;
+  public itemsDetail$: Observable<Model.UserDetail>;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
     header: true,
@@ -110,8 +113,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-eye',
           class: 'p-button-rounded p-button-info p-mr-2',
-          onClick: (item) => {
-            console.log(item);
+          onClick: (event: Event, item) => {
+            this.userFacade.getUserDetail(item.id);
+            this.itemsDetail$ = this.userFacade.getUserDetail$();
+            this.DisplayModal = true;
           },
         },
         {
@@ -143,9 +148,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userFacade.getUsers({
-      token: this.authLogin.token,
-    });
+    this.userFacade.getUsers();
 
     this.items$ = this.userFacade.getUsers$();
   }

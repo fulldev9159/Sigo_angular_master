@@ -47,3 +47,25 @@ export interface Form {
   descripcion: string;
   interno: boolean;
 }
+
+export interface UserDetail {
+  perfiles: Perfil[];
+  contratos_marco: Contrato[];
+}
+
+export interface Perfil {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  superior_id: number;
+  superior_nombre: string;
+  superior_descripcion: string;
+  persona_a_cargo_id: number;
+  persona_a_cargo_nombre: string;
+}
+
+export interface Contrato {
+  id: number;
+  nombre: string;
+  tipo: string;
+}

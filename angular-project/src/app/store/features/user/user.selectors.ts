@@ -9,6 +9,10 @@ export const getUser = createSelector(selectUser,
   (state: fromUser.StateUser) => state.items
 );
 
+export const getUserDetail = createSelector(selectUser,
+  (state: fromUser.StateUser) => state.itemsDetail
+);
+
 export const getAreas = createSelector(selectUser,
   (state: fromUser.StateUser) => state.areas
 );

@@ -6,6 +6,7 @@ export const UserFeatureKey = 'user';
 
 export interface StateUser {
   items: Model.User[];
+  itemsDetail: Model.UserDetail;
   areas: Model.Area[];
   providers: Model.Provider[];
   highers: Model.Higher[];
@@ -13,9 +14,10 @@ export interface StateUser {
 
 export const initialStateUser: StateUser = {
   items: [],
+  itemsDetail: { perfiles: [], contratos_marco: [] },
   areas: [],
   providers: [],
-  highers: []
+  highers: [],
 };
 
 export const reducerUser = createReducer(
@@ -27,22 +29,27 @@ export const reducerUser = createReducer(
     items: payload.user,
   })),
 
+  on(UserActions.getUserDetail, (state) => state),
+  on(UserActions.getUserDetailSuccess, (state, payload) => ({
+    ...state,
+    itemsDetail: payload.userDetail,
+  })),
+
   on(UserActions.getArea, (state) => state),
   on(UserActions.getAreaSuccess, (state, payload) => ({
     ...state,
-    areas: payload.area
+    areas: payload.area,
   })),
 
   on(UserActions.getProvider, (state) => state),
   on(UserActions.getProviderSuccess, (state, payload) => ({
     ...state,
-    providers: payload.provider
+    providers: payload.provider,
   })),
 
   on(UserActions.getHigher, (state) => state),
   on(UserActions.getHigherSuccess, (state, payload) => ({
     ...state,
-    highers: payload.higher
-  })),
-
+    highers: payload.higher,
+  }))
 );
