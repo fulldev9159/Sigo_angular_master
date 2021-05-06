@@ -24,8 +24,6 @@ Listar usuarios
     Login    admin    password
     Wait Until Element Is Visible                         id:user-name    timeout=5
     Click Element                                         css:#menu-usuario>a>span
-    ${txt}=    Get Text    css:#menu-usuario>a>span
-    Log to Console    ${txt}
     Wait Until Element Is Visible                         css:.p-datatable-wrapper    timeout=5
     ${cantidad de filas}=    get element count            css:.p-datatable-wrapper>table>tbody>tr
     ${status}=    Evaluate                                ${cantidad de filas} > 0
