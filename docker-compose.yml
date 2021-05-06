@@ -38,6 +38,7 @@ services:
       DB_PINGINTERVAL: 30
       DB_MAXLIFETIMECONNECTION: 300
       API_SCE_ADDRESS: http://35.192.99.178:2004
+      MOCKUP_PATH: /go/bin/mockups/
     restart: always
     # ports:
     #   - 4040:4040
