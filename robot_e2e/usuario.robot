@@ -28,7 +28,7 @@ Listar usuarios
     ${cantidad de filas}=    get element count            css:.p-datatable-wrapper>table>tbody>tr
     ${status}=    Evaluate                                ${cantidad de filas} > 0
     Should Be True                                        ${status}
-    Click Element                                         css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(8)>div:nth-child(2)>div>button
+    Click Element                                         css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(9)>div:nth-child(2)>div>button
     Wait Until Element Is Visible                         css:p-dialog    timeout=3
     ${cantidad de datos de contrato detalle usuario}=     get element count            css:#detalle_contrato_marco>p-listbox>div>div.p-listbox-list-wrapper>ul>li
     ${statusContratoDetalle}=    Evaluate                 ${cantidad de datos de contrato detalle usuario} > 0
