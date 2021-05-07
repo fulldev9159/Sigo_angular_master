@@ -77,6 +77,13 @@ export class ListUserComponent implements OnInit, OnDestroy {
           editable: false,
         },
         {
+          field: 'Area',
+          type: 'TEXT',
+          sort: 'area_nombre',
+          header: 'area_nombre',
+          editable: false,
+        },
+        {
           field: null,
           type: 'ACTIONS',
           sort: null,
@@ -122,8 +129,29 @@ export class ListUserComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (item) => {
-            console.log(item);
+          onClick: (event: Event, item) => {
+            // if (item.eliminable) {
+            this.confirmationService.confirm({
+              target: event.target as EventTarget,
+              message: `¿Está seguro que desea eliminar este Usuario?`,
+              icon: 'pi pi-exclamation-triangle',
+              acceptLabel: 'Confirmar',
+              rejectLabel: 'Cancelar',
+              accept: () => {
+                // this.profileFacade.deleteProfile({
+                //   profileDelete: {
+                //     token: this.authLogin.token,
+                //     perfil_id: +item.id,
+                //   },
+                // });
+                // this.messageService.add({
+                //   severity: 'success',
+                //   summary: 'Perfil eliminado',
+                //   detail: 'Eliminación realizada con Éxito!',
+                // });
+              },
+            });
+            // }
           },
         },
       ],

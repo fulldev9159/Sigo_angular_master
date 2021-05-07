@@ -34,7 +34,7 @@ export class UserEffects {
           usuario_id: data.userId
         }).pipe(
           map((res: any) =>
-            userActions.getUserDetailSuccess({ userDetail: res.data.items })
+            userActions.getUserDetailSuccess({ userDetail: res.data })
           ),
           catchError((err) => of(userActions.getUserError({ error: err })))
         )
