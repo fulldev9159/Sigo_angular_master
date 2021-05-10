@@ -10,6 +10,7 @@ export interface StateUser {
   areas: Model.Area[];
   providers: Model.Provider[];
   highers: Model.Higher[];
+  contract: Model.Contract[];
 }
 
 export const initialStateUser: StateUser = {
@@ -18,6 +19,7 @@ export const initialStateUser: StateUser = {
   areas: [],
   providers: [],
   highers: [],
+  contract: []
 };
 
 export const reducerUser = createReducer(
@@ -44,12 +46,19 @@ export const reducerUser = createReducer(
   on(UserActions.getProvider, (state) => state),
   on(UserActions.getProviderSuccess, (state, payload) => ({
     ...state,
-    providers: payload.provider,
+    providers: payload.provider.filter(provider => provider.id !== 1)
   })),
 
   on(UserActions.getHigher, (state) => state),
   on(UserActions.getHigherSuccess, (state, payload) => ({
     ...state,
-    highers: payload.higher,
-  }))
+    highers: payload.higher
+  })),
+
+  on(UserActions.getContracts, (state) => state),
+  on(UserActions.getContractsSuccess, (state, payload) => ({
+    ...state,
+    contract: payload.contract
+  })),
+
 );

@@ -1,84 +1,134 @@
-<div [formGroup]="formUser" class="row">
-  <div class="col-xs-12 col-md-6">
-    <label for="">Nombre</label>
-    <input formControlName="nombre" placeholder="Juan Perez" class="form-control" type="text">
-    <br>
-  </div>
+<!-- formUser: {{formUser.value | json}} -->
+<form [formGroup]="formUser" (ngSubmit)="saveForm(formUser.value)">
+  <div class="row">
 
-  <div class="col-xs-12 col-md-3">
-    <label for="">Rut</label>
-    <input formControlName="rut" placeholder="xx.xxx.xxx-x" class="form-control" type="text">
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-3">
-    <label for="">Celular</label>
-    <input formControlName="celular" placeholder="569123123xx" class="form-control" type="text">
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label for="">Tipo</label>
-    <div class="row">
-      <div class="col-xs-12 col-md-4">
-        <div class="p-field-radiobutton">
-          <p-radioButton formControlName="provider" (click)="clearProvider();" [value]="false"></p-radioButton>
-          <label for="city1">Movistar</label>
+    <div class="col-xs-12 col-md-4">
+      <label for="">Usuario</label>
+      <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('username').valid}">*</span>
+      <input formControlName="username" required placeholder="username" class="form-control" type="text">
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <label for="">Documento identidad</label>
+      <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('rut').valid}">*</span>
+      <input formControlName="rut" maxlength="15" minlength="10" placeholder="xx.xxx.xxx-x" class="form-control"
+        type="text">
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <label for="">Nombres</label>
+      <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('nombres').valid}">*</span>
+      <input formControlName="nombres" placeholder="Juan Andrés" class="form-control" type="text">
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <label for="">Apellidos</label>
+      <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('apellidos').valid}">*</span>
+      <input formControlName="apellidos" placeholder="Perez Poblete" class="form-control" type="text">
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <label for="">Email</label>
+      <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('email').valid}">*</span>
+      <input formControlName="email" placeholder="XXX@XXX.cl" class="form-control" type="email">
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <label for="">Celular</label>
+      <p-inputMask formControlName="celular" styleClass="form-control" mask="(99) 9 9999 9999" unmask="true">
+      </p-inputMask>
+      <br>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+      <label for="">Tipo</label>
+      <div class="row">
+        <div class="col-xs-12 col-md-5">
+          <div class="p-field-radiobutton">
+            <p-radioButton id="movistar" formControlName="provider" value="false"></p-radioButton>
+            <label for="movistar">Movistar</label>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-7">
+          <div class="p-field-radiobutton">
+            <p-radioButton id="proveedor" formControlName="provider" value="true"></p-radioButton>
+            <label for="proveedor">Proveedor</label>
+          </div>
         </div>
       </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="p-field-radiobutton">
-          <p-radioButton formControlName="provider" [value]="true"></p-radioButton>
-          <label for="city1">Proveedor</label>
-        </div>
+      <br>
+    </div>
+    <div *ngIf="formUser.value.provider !== 'true'" class="col-xs-12 col-md-4">
+
+    </div>
+    <div *ngIf="formUser.value.provider === 'true'" class="col-xs-12 col-md-4">
+      <label for="">Proveedor</label>
+      <select formControlName="proveedor_id" class="form-control" name="" id="">
+        <option value="null" selected disabled>Seleccione proveedor</option>
+        <option *ngFor="let provider of providers" [value]="provider.id">{{provider.nombre}}</option>
+      </select>
+      <br>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+      <label for="">Área</label>
+      <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('area_id').valid}">*</span>
+      <select formControlName="area_id" class="form-control" name="" id="">
+        <option value="null" selected disabled>Seleccione área</option>
+        <option *ngFor="let area of areas" [value]="area.id">{{area.nombre}}</option>
+      </select>
+      <br>
+    </div>
+
+    <div class="col-12 mb-2">
+      <label for="">Contratos</label>
+      <div>
+        <p-multiSelect [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="contracts"
+          formControlName="contratos_marco" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30">
+        </p-multiSelect>
       </div>
     </div>
-    <br>
-  </div>
-  <div *ngIf="formUser.value.provider !== true" class="col-xs-12 col-md-6">
 
-  </div>
-  <div *ngIf="formUser.value.provider === true" class="col-xs-12 col-md-6">
-    <label for="">Proveedor</label>
-    <select formControlName="proveedor_id" class="form-control" name="" id="">
-      <option value="null" selected disabled>Seleccione proveedor</option>
-      <option *ngFor="let provider of providers" [value]="provider.id">{{provider.nombre}}</option>
-    </select>
-    <br>
-  </div>
+    <div class="col-12">
+      <label for="">Perfiles</label>
+      <button (click)="addItem();" pButton pRipple type="button" icon="pi pi-plus"
+        class="p-button-rounded p-button-outlined float-right"></button>
+      <hr>
+    </div>
 
-  <div class="col-xs-12 col-md-4">
-    <label for="">Área</label>
-    <select formControlName="area_id" class="form-control" name="" id="">
-      <option value="null" selected disabled>Seleccione área</option>
-      <option *ngFor="let area of areas" [value]="area.id">{{area.nombre}}</option>
-    </select>
-    <br>
-  </div>
+    <ng-container formArrayName="perfiles">
+      <div class="col-xs-12 col-md-4 mb-3" *ngFor="let perfil of formUser.value.perfiles; let i=index;">
+        <div class="card m-auto" style="width: 18rem;">
+          <ng-container [formGroupName]="i">
+            <div class="card-body">
+              <h5 class="card-title mb-1">Perfil
+                <span class="ml-1"
+                  [ngClass]="{'text-danger' : !formUser.get('perfiles').controls[i].get('perfil_id').valid}">*</span>
+              </h5>
+              <select formControlName="perfil_id" (change)="changePerfil(i);" class="form-control mb-1" name=""
+                id="">
+                <option value="null" selected disabled>Seleccione perfil</option>
+                <option *ngFor="let profile of profiles" [value]="profile.id">{{profile.nombre}}
+                </option>
+              </select>
+              <h6 class="card-subtitle mb-1 mt-2 text-muted ">Superior directo</h6>
+              <select formControlName="persona_a_cargo_id" class="form-control mb-3" name="" id="">
+                <option value="null" selected disabled>Seleccione jefatura</option>
+                <option *ngFor="let higher of highers" [value]="higher.id">{{higher.nombres}} {{higher.apellidos}}
+                </option>
+              </select>
+              <a *ngIf="formUser.value.perfiles.length > 1" (click)="deleteItem(i);"
+                class="card-link text-danger">Eliminar</a>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
 
-  <div class="col-xs-12 col-md-4">
-    <label for="">Perfil</label>
-    <select formControlName="profile_id" class="form-control" name="" id="">
-      <option value="null" selected disabled>Seleccione perfil</option>
-      <option *ngFor="let profile of profiles" [value]="profile.id">{{profile.nombre}}</option>
-    </select>
-    <br>
+    <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+      <!-- (click)="saveForm(formUser.value)" -->
+      <button type="submit" [disabled]="!formUser.valid" class="btn btn-primary"><em
+          class="pi pi-save mr-1"></em>Guardar</button>
+    </div>
   </div>
-
-  <div class="col-xs-12 col-md-4">
-    <label for="">Jefatura</label>
-    <select formControlName="superior_id" class="form-control" name="" id="">
-      <option value="null" selected disabled>Seleccione jefe</option>
-      <option *ngFor="let higher of highers" [value]="higher.id">{{higher.nombres}} {{higher.apellidos}}</option>
-    </select>
-    <br>
-  </div>
-
-  <div class="col-xs-12 col-md-12">
-    <label for="">Datos extras</label>
-    <textarea class="form-control" placeholder="..." name="" id="" cols="30" rows="3"></textarea>
-    <br>
-  </div>
-
-  <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
-    <button [disabled]="!formUser.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
-  </div>
-</div>
+</form>

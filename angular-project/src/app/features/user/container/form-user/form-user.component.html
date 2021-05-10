@@ -16,12 +16,11 @@
   <app-card [classCardHeader]="'bg-secondary text-white'">
     <ng-container card-body>
       <div class="row">
-        <div class="col-xs-12 col-md-8">
+        <div class="col-12">
           <app-form-u [formUser]="formUser" [areas]="(areas$ | async)" [highers]="(highers$ | async)"
-            [profiles]="(profiles$ | async)" [providers]="(providers$ | async)"></app-form-u>
-        </div>
-        <div class="col-xs-12 col-md-4">
-          <!-- <app-detail [cubage]="cubage" [formOt]="formOt.value"></app-detail> -->
+            [profiles]="(profiles$ | async)" [providers]="(providers$ | async)" [contracts]="(contracts$ | async)"
+            (add)="addProfile();" (delete)="removeProfile($event);" (changeItem)="changePerfil($event);"
+            (save)="save($event);"></app-form-u>
         </div>
       </div>
     </ng-container>

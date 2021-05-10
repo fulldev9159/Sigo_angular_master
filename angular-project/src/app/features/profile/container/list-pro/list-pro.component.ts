@@ -73,6 +73,7 @@ export class ListProComponent implements OnInit, OnDestroy {
       sort: ['nombre', 'descripcion', 'created_at', 'superior'],
       actions: [
         {
+          conditionKey: 'eliminable',
           icon: 'p-button-icon pi pi-pencil',
           class: 'p-button-rounded p-button-warning p-mr-2',
           onClick: (event: Event, item) => {
@@ -82,6 +83,7 @@ export class ListProComponent implements OnInit, OnDestroy {
                 nombre: item.nombre,
                 descripcion: item.descripcion,
                 permisos: item.permisos,
+                superior: item.superior
               },
             });
 
@@ -108,9 +110,9 @@ export class ListProComponent implements OnInit, OnDestroy {
           },
         },
         {
+          conditionKey: 'eliminable',
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          conditionKey: 'eliminable',
           tooltip: 'No puede eliminar perfiles con usuarios asignados',
           onClick: (event: Event, item) => {
             if (item.eliminable) {

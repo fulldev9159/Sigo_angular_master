@@ -1,3 +1,7 @@
+label {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
 .card {
   margin-top: 16px;
 }
@@ -12,9 +16,9 @@ li {
   border: 0 none;
 }
 
-:ng-deep .p-listbox-list-wrapper {
-  max-height: 300px;
-  height: 300px;
-  overflow-y: auto;
-  min-height: 300px;
+::ng-deep ul {
+  max-height: 244px !important;
+  // height: 200px;
+  // overflow-y: auto;
+  // min-height: 200px;
 }
