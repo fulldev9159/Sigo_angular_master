@@ -19,3 +19,8 @@ button:disabled {
   cursor: not-allowed;
   pointer-events: all !important;
 }
+
+label {
+  margin-bottom: 0;
+  margin-top: 10px;
+}

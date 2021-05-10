@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -15,14 +15,32 @@ export class FormUComponent implements OnInit {
   @Input() profiles: any[] = [];
   @Input() constractsMarco: any[] = [];
   @Input() highers: any[] = [];
+  @Input() contracts: any[] = [];
+  @Output() public add = new EventEmitter();
+  @Output() public delete = new EventEmitter();
+  @Output() public save = new EventEmitter();
+  @Output() public changeItem = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  clearProvider(): void {
-    this.formUser.get('proveedor_id').setValue(null);
+  addItem(): void {
+    this.add.emit();
+  }
+
+  deleteItem(index: number): void {
+    this.delete.emit(index);
+  }
+
+  saveForm(form: any): void {
+    this.save.emit(form);
+  }
+
+  changePerfil(position: number): void {
+    console.log('CHANGE PERFIL!!!!');
+    this.changeItem.emit(+this.formUser.value.perfiles[position].perfil_id);
   }
 
 }

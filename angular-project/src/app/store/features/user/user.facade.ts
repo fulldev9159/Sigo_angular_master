@@ -58,6 +58,22 @@ export class UserFacade {
     return this.store.select(userSelectors.getHighers);
   }
   // HIGHERS
+
+  // CONTRACT
+  public getContracts(data): void {
+    this.store.dispatch(userActions.getContracts(data));
+  }
+
+  public getContracts$(): Observable<Model.Contract[]> {
+    return this.store.select(userSelectors.getContracts);
+  }
+  // CONTRACT
+
+  // USER POST
+  public postUser(data): void {
+    this.store.dispatch(userActions.postUser(data));
+  }
+  // USER POST
   // USER
 
   // FORM

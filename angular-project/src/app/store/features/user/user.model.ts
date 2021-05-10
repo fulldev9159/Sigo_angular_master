@@ -48,6 +48,15 @@ export interface Form {
   interno: boolean;
 }
 
+export interface Contract {
+  id: number;
+  nombre: string;
+  fecha_inicio: string;
+  fecha_fin: string;
+  tipo_codigo: number;
+  tipo_glosa: string;
+  estado: boolean;
+}
 export interface UserDetail {
   perfiles: Perfil[];
   contratos_marco: Contrato[];

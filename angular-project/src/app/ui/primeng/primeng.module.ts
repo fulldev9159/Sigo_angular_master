@@ -15,6 +15,8 @@ import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputMaskModule } from 'primeng/inputmask';
 import { TooltipModule } from 'primeng/tooltip';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 
@@ -35,6 +37,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     MessageModule,
     CheckboxModule,
     RadioButtonModule,
+    MultiSelectModule,
+    InputMaskModule,
     TooltipModule,
     OverlayPanelModule
   ],
@@ -53,9 +57,11 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     MessageModule,
     CheckboxModule,
     RadioButtonModule,
+    MultiSelectModule,
+    InputMaskModule,
     TooltipModule,
     OverlayPanelModule
   ],
   providers: [MessageService],
 })
-export class PrimeNgModule {}
+export class PrimeNgModule { }

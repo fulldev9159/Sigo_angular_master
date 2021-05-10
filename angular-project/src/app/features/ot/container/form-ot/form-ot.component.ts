@@ -268,9 +268,6 @@ export class FormOtComponent implements OnInit, OnDestroy {
     form.pep2_codigo = 'P-0404-20-1318-40005-807';
     // this.otFacade.replyOt(form);
     delete form.id;
-    console.log('form:::::');
-    console.log(form);
-    console.log('form:::::');
     this.otFacade.postOt(form);
     this.formOt.reset();
     this.messageService.add({

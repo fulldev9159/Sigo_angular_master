@@ -24,6 +24,7 @@ export class FormProComponent implements OnInit, OnDestroy {
   public selectedItems = [];
   public formProfile: FormGroup;
   public permissions$: Observable<any>;
+  public profiles$: Observable<any[]>;
   public permissionsOriginal$: Observable<Model.Permit[]>;
   private destroyInstance$: Subject<boolean> = new Subject();
 
@@ -56,8 +57,15 @@ export class FormProComponent implements OnInit, OnDestroy {
 
           // generamos llamada a api para rescatar permisos
           this.profileFacade.getPermissions({ token: authLogin.token });
+
+
+          // generamos llamada a api para perfiles
+          this.profileFacade.getProfile({ token: authLogin.token });
         }
       });
+
+    // escuchamos cambios en store para traer perfiles
+    this.profiles$ = this.profileFacade.getProfile$();
 
     // escuchamos cambios en store para traer permisos a la vista permisos
     this.permissionsOriginal$ = this.profileFacade.getPermissions$();
@@ -110,7 +118,8 @@ export class FormProComponent implements OnInit, OnDestroy {
       token: [form ? this.authLogin.token : null, Validators.required],
       nombre: [form ? this.authLogin.nombre : null, Validators.required],
       descripcion: form ? this.authLogin.descripcion : null,
-      permisos: form ? this.authLogin.permisos.map(p => p.id) : null
+      permisos: form ? this.authLogin.permisos.map(p => p.id) : null,
+      superior: form ? this.authLogin.superior : -1,
     });
   }
 
@@ -121,11 +130,13 @@ export class FormProComponent implements OnInit, OnDestroy {
   saveProfile(): void {
     const formData = { ...this.formProfile.value, token: this.authLogin.token, permisos: this.selectedItems };
     if (formData.id) {
+      formData.superior = +formData.superior;
       this.profileFacade.editFormProfile(formData);
       this.messageService.add({ severity: 'success', summary: 'Perfil editado', detail: 'Perfil editado con Éxito!' });
       this.router.navigate(['/app/profile/list-pro']);
     } else {
       delete formData.id;
+      formData.superior = +formData.superior;
       this.profileFacade.postProfile(formData);
       this.messageService.add({ severity: 'success', summary: 'Perfil generado', detail: 'Perfil generado con Éxito!' });
       this.router.navigate(['/app/profile/list-pro']);
