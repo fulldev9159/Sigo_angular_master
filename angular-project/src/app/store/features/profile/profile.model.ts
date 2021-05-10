@@ -5,6 +5,7 @@ export interface Profile {
   fecha_creacion: Date;
   fecha_actualizacion: Date;
   permissions: Permit[];
+  superior: number;
 }
 
 export interface Permit {
@@ -20,4 +21,5 @@ export interface Form {
   nombre: string;
   descripcion: string;
   permisos: number[];
+  superior: number;
 }

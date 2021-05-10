@@ -10,7 +10,7 @@ import { environment } from '@environment';
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(private actions$: Actions, private http: HttpClient) { }
 
   getUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -67,18 +67,14 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(userActions.getArea),
       concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/areas/get_all`, {
-            token: data.token,
-          })
-          .pipe(
-            map((res: any) =>
-              userActions.getAreaSuccess({ area: res.data.items })
-            ),
-            catchError((err) => of(userActions.getAreaError({ error: err })))
-          )
-      )
-    )
+        this.http.post(`${environment.api}/areas/get`, {
+          token: data.token,
+          interno: data.interno
+        }).pipe(map((res: any) =>
+          userActions.getAreaSuccess({ area: res.data.items }),
+        ),
+          catchError(err => of(userActions.getAreaError({ error: err }))
+          ))))
   );
 
   getProvider$ = createEffect(() =>
@@ -105,17 +101,42 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(userActions.getHigher),
       concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/mockup/usuarios/superior_jerarquico/get`, {
-            token: data.token,
-          })
-          .pipe(
-            map((res: any) =>
-              userActions.getHigherSuccess({ higher: res.data.items })
-            ),
-            catchError((err) => of(userActions.getHigherError({ error: err })))
-          )
-      )
-    )
+        this.http.post(`${environment.api}/usuarios/superior_jerarquico/get`, {
+          token: data.token,
+          proveedor_id: data.proveedor_id,
+          perfil_id: data.perfil_id
+
+        }).pipe(map((res: any) =>
+          userActions.getHigherSuccess({ higher: res.data.items }),
+        ),
+          catchError(err => of(userActions.getHigherError({ error: err }))
+          ))))
   );
+
+  getContracts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getContracts),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/usuario/contratos_marco/get`, {
+          proveedor_id: data.proveedor_id
+        }).pipe(map((res: any) =>
+          userActions.getContractsSuccess({ contract: res.data.items }),
+        ),
+          catchError(err => of(userActions.getContractsError({ error: err }))
+          ))))
+  );
+
+
+
+  postUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.postUser),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/usuario/create`, data.user).pipe(map((res: any) =>
+          userActions.postUserSuccess(),
+        ),
+          catchError(err => of(userActions.postUserError({ error: err }))
+          ))))
+  );
+
 }

@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col" id="title-create-profile">
-      <h1 class="mt-4" >Creación de Perfil </h1>
-      <span >formulario para crear un nuevo perfil</span>
+      <h1 class="mt-4">Creación de Perfil </h1>
+      <span>formulario para crear un nuevo perfil</span>
     </div>
     <div class="col">
       <button [routerLink]="['/app/profile/list-pro']" pButton type="button" label="volver" icon="pi pi-arrow-left"
@@ -17,7 +17,8 @@
     <ng-container card-header-title>
     </ng-container>
     <ng-container card-header-actions>
-      <span class="badge badge-pill badge-info  float-right">{{(permissionsOriginal$ | async).length}} permisos</span>
+      <span class="badge badge-pill badge-info  float-right">{{(permissionsOriginal$ | async).length}}
+        permisos</span>
     </ng-container>
     <ng-container card-body>
       <div class="row">
@@ -28,18 +29,27 @@
               <input formControlName="nombre" type="text" class="form-control">
             </div>
 
+            <div class="col-12" id="nombre-perfil-input">
+              <label for="">Jefatura</label>
+              <select formControlName="superior" class="form-control" name="" id="">
+                <option value="-1" selected disabled>Seleccione superior</option>
+                <option *ngFor="let profile of (profiles$ | async)" [value]="profile.id">{{profile.nombre}}</option>
+              </select>
+            </div>
+
             <div class="col-12" id="descripcion-perfil-input">
-              <label for="">Descripción perfil</label>
-              <textarea formControlName="descripcion" name="" id="" class="form-control" cols="30" rows="10"></textarea>
+              <label class="mb-1" for="">Descripción perfil</label>
+              <textarea formControlName="descripcion" name="" id="" class="form-control" cols="30" rows="5"></textarea>
             </div>
           </div>
           <div class="col-12 text-right mt-2 p-0">
-            <button (click)="saveProfile();" [disabled]="!formProfile.valid"
-              class="btn btn-primary" id="guardar-button"><em class="pi pi-save mr-1"></em>Guardar</button>
+            <button (click)="saveProfile();" [disabled]="!formProfile.valid" class="btn btn-primary"
+              id="guardar-button"><em class="pi pi-save mr-1"></em>Guardar</button>
           </div>
         </div>
 
-        <div *ngFor="let item of (permissions$ | async)" class="col-xs-12 col-md-4 pt-2" id="modulos-pefil-{{item.module}}">
+        <div *ngFor="let item of (permissions$ | async)" class="col-xs-12 col-md-4 pt-2"
+          id="modulos-pefil-{{item.module}}">
           <p-listbox [options]="item.permissions" optionValue="id" [(ngModel)]="selectedItems" checkbox="checkbox"
             [multiple]="true" [filter]="true" optionLabel="nombre_corto">
             <ng-template pTemplate="header">

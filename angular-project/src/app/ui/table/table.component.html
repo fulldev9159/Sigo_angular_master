@@ -44,15 +44,14 @@
             <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
           <td *ngSwitchCase="'TEXT'">{{item[column.header]}}</td>
-          <td *ngSwitchCase="'NUMBER'">{{item[column.header] | currency : 'CLP' : '$
-            ':'.0-2':'es-CL'}}</td>
+          <td *ngSwitchCase="'NUMBER'">{{item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
           <td *ngSwitchCase="'DATE'">{{item[column.header] | date:'dd-MM-yyyy'}}</td>
           <td *ngSwitchCase="'ACTIONS'" id="action-buttons">
             <ng-container *ngIf="config.body.actions.length > 0">
               <div *ngFor="let button of config.body.actions">
                 <div *ngIf="!item[button.conditionKey]" pTooltip="{{button.tooltip}}">
                   <button [disabled]="item[button.conditionKey] === false" pButton pRipple [icon]="button.icon"
-                  [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                    [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
                 </div>
                 <button [disabled]="item[button.conditionKey] === false" pButton pRipple [icon]="button.icon"
                   [class]="button.class" (click)="button.onClick($event,item, rowIndex);"
