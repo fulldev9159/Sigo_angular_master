@@ -31,7 +31,7 @@ export class UserEffects {
       ofType(userActions.getUserDetail),
       concatMap((data: any) =>
         this.http
-          .post(`${environment.api}/mockup/usuario/detalle/get`, {
+          .post(`${environment.api}/usuario/detalle/get`, {
             usuario_id: data.userId,
           })
           .pipe(
