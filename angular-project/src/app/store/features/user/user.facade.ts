@@ -29,6 +29,11 @@ export class UserFacade {
     return this.store.select(userSelectors.getUserDetail);
   }
 
+  // DELETE
+  public deleteUser(data): void {
+    this.store.dispatch(userActions.deleteUser(data));
+  }
+
   // AREAS
   public getAreas(data): void {
     this.store.dispatch(userActions.getArea(data));

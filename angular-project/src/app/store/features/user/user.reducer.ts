@@ -51,5 +51,9 @@ export const reducerUser = createReducer(
   on(UserActions.getHigherSuccess, (state, payload) => ({
     ...state,
     highers: payload.higher,
+  })),
+  on(UserActions.deleteUserSuccess, (state, payload) => ({
+    ...state,
+    items: [...state.items.filter((i) => +i.id !== +payload.userId)],
   }))
 );
