@@ -75,7 +75,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       celular: null,
       email: [null, Validators.compose([Validators.required, Validators.email])],
       provider: 'false',
-      proveedor_id: null,
+      proveedor_id: 1,
       area_id: [null, Validators.required],
       perfiles: this.fb.array([]),
       contratos_marco: null
