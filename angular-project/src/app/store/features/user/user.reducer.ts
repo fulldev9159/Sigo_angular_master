@@ -61,4 +61,9 @@ export const reducerUser = createReducer(
     contract: payload.contract
   })),
 
+  on(UserActions.deleteUserSuccess, (state, payload) => ({
+    ...state,
+    items: [...state.items.filter((i) => +i.id !== +payload.userId)],
+  }))
+
 );

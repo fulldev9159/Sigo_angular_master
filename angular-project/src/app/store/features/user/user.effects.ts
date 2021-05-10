@@ -30,14 +30,35 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(userActions.getUserDetail),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/mockup/usuario/detalle/get`, {
-          usuario_id: data.userId
-        }).pipe(
-          map((res: any) =>
-            userActions.getUserDetailSuccess({ userDetail: res.data })
-          ),
-          catchError((err) => of(userActions.getUserError({ error: err })))
-        )
+        this.http
+          .post(`${environment.api}/mockup/usuario/detalle/get`, {
+            usuario_id: data.userId,
+          })
+          .pipe(
+            map((res: any) =>
+              userActions.getUserDetailSuccess({ userDetail: res.data })
+            ),
+            catchError((err) => of(userActions.getUserError({ error: err })))
+          )
+      )
+    )
+  );
+
+  deleteUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.deleteUser),
+      concatMap((data: any) =>
+        this.http
+          .post(`${environment.api}/usuario/delete`, data.userDelete)
+          .pipe(
+            map((res: any) =>
+              userActions.deleteUserSuccess({
+                userId: +data.userDelete.usuario_id,
+                res: res.status,
+              })
+            ),
+            catchError((err) => of(userActions.deleteUserError({ error: err })))
+          )
       )
     )
   );

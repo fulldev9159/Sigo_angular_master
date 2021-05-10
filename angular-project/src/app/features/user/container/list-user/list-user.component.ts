@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import * as Model from '@storeOT/features/user/user.model';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -62,13 +62,13 @@ export class ListUserComponent implements OnInit, OnDestroy {
           header: 'email',
           editable: false,
         },
-        {
-          field: 'Celular',
-          type: 'TEXT',
-          sort: 'celular',
-          header: 'nombre',
-          editable: false,
-        },
+        // {
+        //   field: 'Celular',
+        //   type: 'TEXT',
+        //   sort: 'celular',
+        //   header: 'nombre',
+        //   editable: false,
+        // },
         {
           field: 'Compañia',
           type: 'TEXT',
@@ -138,17 +138,16 @@ export class ListUserComponent implements OnInit, OnDestroy {
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
-                // this.profileFacade.deleteProfile({
-                //   profileDelete: {
-                //     token: this.authLogin.token,
-                //     perfil_id: +item.id,
-                //   },
-                // });
-                // this.messageService.add({
-                //   severity: 'success',
-                //   summary: 'Perfil eliminado',
-                //   detail: 'Eliminación realizada con Éxito!',
-                // });
+                this.userFacade.deleteUser({
+                  userDelete: {
+                    usuario_id: +item.id,
+                  },
+                });
+                this.messageService.add({
+                  severity: 'success',
+                  summary: 'usuario eliminado',
+                  detail: 'Eliminación realizada con Éxito!',
+                });
               },
             });
             // }
@@ -162,6 +161,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
     private router: Router,
     private authFacade: AuthFacade,
     private userFacade: UserFacade,
+    private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {
     this.authFacade
