@@ -94,7 +94,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
           // rescatamos contratos para contratista
           this.formUser.get('proveedor_id').setValue(1);
           // this.proveedor_id = null;
-          this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null })
+          this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null });
           this.userFacade.getAreas({ token: this.authLogin.token, interno: true });
         }
 
@@ -113,27 +113,32 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.addProfile();
   }
 
-  get perfiles() {
+  get perfiles(): FormArray {
     return this.formUser.get('perfiles') as FormArray;
   }
 
-  addProfile() {
+  addProfile(): void {
     this.perfiles.push(this.fb.group({ perfil_id: [null, Validators.required], persona_a_cargo_id: null }));
   }
 
-  removeProfile(index: number) {
+  removeProfile(index: number): void {
     this.perfiles.removeAt(index);
   }
 
   changePerfil(perfilId: number): void {
-    this.userFacade.getHighers({ token: this.authLogin.token, proveedor_id: +this.formUser.value.proveedor_id !== 0 ? +this.formUser.value.proveedor_id : 1, perfil_id: perfilId });
+    this.userFacade.getHighers({
+      token: this.authLogin.token,
+      proveedor_id: +this.formUser.value.proveedor_id !== 0 ? +this.formUser.value.proveedor_id : 1, perfil_id: perfilId
+    });
   }
 
   save(form: any): void {
     delete form.provider;
     form.proveedor_id = +form.proveedor_id;
     form.area_id = +form.area_id;
-    form.perfiles = form.perfiles.map(p => { return { perfil_id: +p.perfil_id, persona_a_cargo_id: p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null } });
+    form.perfiles = form.perfiles.map(p => {
+      return { perfil_id: +p.perfil_id, persona_a_cargo_id: p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null };
+    });
     this.userFacade.postUser({ user: form });
     this.messageService.add({
       severity: 'success',

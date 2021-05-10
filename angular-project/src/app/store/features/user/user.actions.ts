@@ -11,7 +11,8 @@ export const getUserError = createAction('[User GetAll] GET User Error', props<{
 
 export const getUserDetail = createAction('[User getUserDetail] GET User Detail', props<{ userId: number }>());
 
-export const getUserDetailSuccess = createAction('[User getUserDetailSuccess] GET User Detail Success', props<{ userDetail: Model.UserDetail }>());
+export const getUserDetailSuccess = createAction('[User getUserDetailSuccess] GET User Detail Success',
+    props<{ userDetail: Model.UserDetail }>());
 
 export const getUserDetailError = createAction('[User getUserDetailError] GET User Detail Error', props<{ error: any }>());
 
