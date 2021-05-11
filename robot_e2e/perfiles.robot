@@ -92,11 +92,11 @@ Editar perfil
     # Click Element                                                ${permisos del modulo OT}[0]
     # Click Element                                                ${permisos del modulo OT}[1]
     
-    # Click Element                                                 id:guardar-button
-    # Wait Until Element Is Visible                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
-    # ${cantidad de filas}=    get element count                    css:.p-datatable-wrapper>table>tbody>tr
-    # ${status}=    Evaluate                         ${cantidad de filas} > 0
-    # Should Be True                                        ${status}
+    Click Element                                                 id:guardar-button
+    Wait Until Element Is Visible                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    ${cantidad de filas}=    get element count                    css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=    Evaluate                         ${cantidad de filas} > 0
+    Should Be True                                        ${status}
     
     # FOR    ${i}    IN RANGE    ${cantidad de filas}
     #     ${txt nombre perfil}=    Get Text                        css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
