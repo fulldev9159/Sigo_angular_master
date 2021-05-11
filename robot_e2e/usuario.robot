@@ -48,6 +48,7 @@ Delete usuario
     Scroll Element Into View                              css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(8)>div:nth-child(3)>div>button
     Wait Until Element Is Visible                         css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(8)>div:nth-child(3)>div>button    timeout=3
     Click Element                                         css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(8)>div:nth-child(3)>div>button
+    Scroll Element Into View                              css:body>div>div.p-confirm-popup-footer.ng-tns-c99-5>button.ng-tns-c99-5.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
     ${boton de confirmar}    set variable                 css:body>div>div.p-confirm-popup-footer.ng-tns-c99-5>button.ng-tns-c99-5.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
     Wait Until Element Is Visible    ${boton de confirmar}    timeout=10
     Click Element    ${boton de confirmar}
