@@ -66,10 +66,10 @@ Editar perfil
     Login    admin    password
     Wait Until Element Is Visible                                id:user-name    timeout=5
     Click Element                                                css:#menu-perfil>a>span
-    # Wait Until Element Is Visible                                css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
-    # ${cantidad de filas}=    get element count                   css:.p-datatable-wrapper>table>tbody>tr
-    # ${status}=    Evaluate                         ${cantidad de filas} > 0
-    # Should Be True                                        ${status}
+    Wait Until Element Is Visible                                css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    ${cantidad de filas}=    get element count                   css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=    Evaluate                         ${cantidad de filas} > 0
+    Should Be True                                        ${status}
     
     # FOR    ${i}    IN RANGE    ${cantidad de filas}
     #     ${txt nombre perfil}=    Get Text                        css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
@@ -82,10 +82,10 @@ Editar perfil
     # Should Be True    ${areYouMyLine}
     # Click Element                                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(5)>div:nth-child(1)>div>button
     
-    # Click Element                                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(3)>td:nth-child(5)>div:nth-child(1)>button
-    # Wait Until Element Is Visible                                 css:#title-create-profile>h1    timeout=3
-    # Wait Until Element Is Enabled                                 css:#nombre-perfil-input>input
-    # input text    css:#nombre-perfil-input>input                  Nuevo Perfil robot editado
+    Click Element                                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(3)>td:nth-child(5)>div:nth-child(1)>button
+    Wait Until Element Is Visible                                 css:#title-create-profile>h1    timeout=3
+    Wait Until Element Is Enabled                                 css:#nombre-perfil-input>input
+    input text    css:#nombre-perfil-input>input                  Nuevo Perfil robot editado
     
     ##### SE COMENTA LA SELECCIÖN DE PERMISOS DEBIDO A PROBLEMAS CON SELENIUM EN AMBIENTE DE TEST. LOCALMENTE FUNCIONA BIEN ########
     # ${permisos del modulo OT}=    Get WebElements                css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
