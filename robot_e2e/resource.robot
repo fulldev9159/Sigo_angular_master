@@ -22,6 +22,7 @@ Open Browser To Page
     Run Keyword If    '${ambiente}' == 'testing'    Call Method         ${options}   add_argument    no-sandbox
     # Set Window Size     1500    1500
     Create WebDriver  Chrome    chrome_options=${options}
+    Maximize Browser Window
     Go To    ${page}  
     
 Login
