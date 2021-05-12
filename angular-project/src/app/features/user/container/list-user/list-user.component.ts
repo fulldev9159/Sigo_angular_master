@@ -114,7 +114,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
               },
             });
 
-            this.router.navigate(['/app/profile/form-pro', item.id]);
+            this.router.navigate(['/app/user/form-user', item.id]);
           },
         },
         {
