@@ -42,7 +42,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
           // asignamos datos de usuario autenticado a variable local
           this.authLogin = authLogin;
 
-          this.userFacade.getProviders({ token: this.authLogin.token });
+          this.userFacade.getProviders({ token: this.authLogin.token, interno: true });
 
           this.profileFacade.getProfile({ token: this.authLogin.token });
         }
@@ -75,7 +75,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       celular: null,
       email: [null, Validators.compose([Validators.required, Validators.email])],
       provider: 'false',
-      proveedor_id: 1,
+      proveedor_id: null,
       area_id: [null, Validators.required],
       perfiles: this.fb.array([]),
       contratos_marco: null
@@ -94,11 +94,13 @@ export class FormUserComponent implements OnInit, OnDestroy {
           // rescatamos contratos para contratista
           this.formUser.get('proveedor_id').setValue(1);
           // this.proveedor_id = null;
+          this.userFacade.getProviders({ token: this.authLogin.token, interno: true });
           this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null });
           this.userFacade.getAreas({ token: this.authLogin.token, interno: true });
         }
 
         if (provider === 'true') {
+          this.userFacade.getProviders({ token: this.authLogin.token, interno: false });
           this.userFacade.getAreas({ token: this.authLogin.token, interno: false });
         }
       }

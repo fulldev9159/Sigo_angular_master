@@ -77,13 +77,15 @@ export class UserEffects {
           ))))
   );
 
+  // proveedores/get_all
   getProvider$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getProvider),
       concatMap((data: any) =>
         this.http
-          .post(`${environment.api}/proveedores/get_all`, {
+          .post(`${environment.api}/proveedores/get`, {
             token: data.token,
+            interno: data.interno
           })
           .pipe(
             map((res: any) =>
