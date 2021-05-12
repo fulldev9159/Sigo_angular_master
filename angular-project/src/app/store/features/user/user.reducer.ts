@@ -46,7 +46,7 @@ export const reducerUser = createReducer(
   on(UserActions.getProvider, (state) => state),
   on(UserActions.getProviderSuccess, (state, payload) => ({
     ...state,
-    providers: payload.provider.filter(provider => provider.id !== 1)
+    providers: payload.provider
   })),
 
   on(UserActions.getHigher, (state) => state),
