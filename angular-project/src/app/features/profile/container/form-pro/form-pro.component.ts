@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import * as Model from '@storeOT/features/profile/profile.model';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
@@ -9,11 +9,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-form-pro',
   templateUrl: './form-pro.component.html',
-  styleUrls: ['./form-pro.component.scss']
+  styleUrls: ['./form-pro.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormProComponent implements OnInit, OnDestroy {
 
@@ -112,14 +112,14 @@ export class FormProComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
-  initForm(form?: Model.Form): void {
+  initForm(): void {
     this.formProfile = this.fb.group({
       id: null,
-      token: [form ? this.authLogin.token : null, Validators.required],
-      nombre: [form ? this.authLogin.nombre : null, Validators.required],
-      descripcion: form ? this.authLogin.descripcion : null,
-      permisos: form ? this.authLogin.permisos.map(p => p.id) : null,
-      superior: form ? this.authLogin.superior : -1,
+      token: [null, Validators.required],
+      nombre: [null, Validators.required],
+      descripcion: null,
+      permisos: null,
+      superior: null,
     });
   }
 

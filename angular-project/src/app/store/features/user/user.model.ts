@@ -36,16 +36,25 @@ export interface Higher {
 
 export interface User {
   id: number;
-  nombre: string;
+  nombres: string;
   descripcion: string;
   interno: boolean;
 }
 
 export interface Form {
   id: number;
-  nombre: string;
-  descripcion: string;
-  interno: boolean;
+  username: string;
+  nombres: string;
+  apellidos: string;
+  rut: string;
+  firma: string;
+  celular: string;
+  email: string;
+  proveedor_id: number;
+  area_id: number;
+  perfiles: PerfilFormUser[];
+  contratos_marco: number[];
+  activo: boolean;
 }
 
 export interface Contract {
@@ -77,4 +86,9 @@ export interface Contrato {
   id: number;
   nombre: string;
   tipo: string;
+}
+
+export interface PerfilFormUser {
+  perfil_id: number;
+  persona_a_cargo_id: number;
 }

@@ -23,7 +23,7 @@ export class ListProComponent implements OnInit, OnDestroy {
   // declarations
   public authLogin = null;
   public DisplayModal = false;
-  public ModalDataPermissions: ModelProfile.Permit[] = [];
+  public ModalDataPermissions: any[] = [];
   public items$: Observable<any[]>;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {

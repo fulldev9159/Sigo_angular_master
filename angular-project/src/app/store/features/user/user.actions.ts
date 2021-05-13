@@ -9,6 +9,12 @@ export const getUserSuccess = createAction('[User GetAll] GET User Success', pro
 
 export const getUserError = createAction('[User GetAll] GET User Error', props<{ error: any }>());
 
+export const getUserById = createAction('[User GetUserById] GET User');
+
+export const getUserByIdSuccess = createAction('[User GetUserById] GET User Success', props<{ user: Model.User[] }>());
+
+export const getUserByIdError = createAction('[User GetUserById] GET User Error', props<{ error: any }>());
+
 export const getUserDetail = createAction('[User getUserDetail] GET User Detail', props<{ userId: number }>());
 
 export const getUserDetailSuccess = createAction('[User getUserDetailSuccess] GET User Detail Success',

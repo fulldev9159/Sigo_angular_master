@@ -1,22 +1,28 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { MessageService } from 'primeng/api';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, of, Subject, Subscription } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
+import * as Model from '@storeOT/features/user/user.model';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-form-user',
   templateUrl: './form-user.component.html',
-  styleUrls: ['./form-user.component.scss']
+  styleUrls: ['./form-user.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormUserComponent implements OnInit, OnDestroy {
 
   // declarations
+  public user_id: number;
+  public perfilId: number;
   public proveedor_id = null;
+  public profiles = [];
   public formUser: FormGroup;
   public authLogin = null;
   public areas$: Observable<any[]>;
@@ -24,19 +30,22 @@ export class FormUserComponent implements OnInit, OnDestroy {
   public profiles$: Observable<any[]>;
   public highers$: Observable<any[]>;
   public contracts$: Observable<any[]>;
-  private destroyInstance: Subject<boolean> = new Subject();
+  public profilesMandatory$: Observable<any[]>;
+  private destroyInstance$: Subject<boolean> = new Subject();
+  private pageSubscription: Subscription[] = [];
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private authFacade: AuthFacade,
     private userFacade: UserFacade,
+    private rutaActiva: ActivatedRoute,
     private profileFacade: ProfileFacade,
     private messageService: MessageService
   ) {
-    this.authFacade
+    const subscription = this.authFacade
       .getLogin$()
-      .pipe(takeUntil(this.destroyInstance))
+      .pipe(takeUntil(this.destroyInstance$))
       .subscribe((authLogin) => {
         if (authLogin) {
           // asignamos datos de usuario autenticado a variable local
@@ -47,6 +56,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
           this.profileFacade.getProfile({ token: this.authLogin.token });
         }
       });
+    this.pageSubscription.push(subscription);
   }
 
   ngOnInit(): void {
@@ -59,12 +69,68 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
     this.profiles$ = this.profileFacade.getProfile$();
 
-    this.highers$ = this.userFacade.getHighers$();
+    this.highers$ = this.userFacade.getHighers$()
+      .pipe(takeUntil(this.destroyInstance$),
+        map(highers => {
+          if (highers && highers.length > 0) {
+            const perfil = this.formUser.get('perfiles').value.findIndex(p => +p.perfil_id === +this.perfilId);
+            if (perfil !== -1) {
+              this.profiles.push({ perfil_id: +this.perfilId, perfiles: highers });
+              this.profilesMandatory$ = of(this.profiles);
+            }
+          }
+          return highers;
+        }));
 
     this.contracts$ = this.userFacade.getContracts$();
+
+    const subscription = this.rutaActiva.params
+      .pipe(takeUntil(this.destroyInstance$))
+      .subscribe(
+        (params: Params) => {
+          if (params.id) {
+            this.user_id = params.id;
+          }
+
+          if (this.user_id) {
+            const subscription2 = this.userFacade.getForm$()
+              .pipe(takeUntil(this.destroyInstance$))
+              .subscribe(res => {
+                if (res) {
+                  // inicializamos formulario
+                  this.formUser.patchValue(res);
+                  if (res.perfiles.length > 1) {
+                    for (let index = 0; index < res.perfiles.length; index++) {
+                      if (index > 0) {
+                        this.addProfile(res.perfiles[index]);
+                      }
+                    }
+
+                    // agrupamos en perfil_id
+                    const groups = _.chain(res.perfiles)
+                      .groupBy('perfil_id')
+                      .map((value, key) => ({ perfil_id: key, profiles: value }))
+                      .value();
+
+                    // rescatamos jefaturas
+                    groups.forEach(group => {
+                      this.changePerfil(+group.perfil_id);
+                    });
+                  }
+                } else {
+                  this.router.navigate(['/app/user/list-user']);
+                }
+              });
+            this.pageSubscription.push(subscription2);
+          }
+        }
+      );
+
+    this.pageSubscription.push(subscription);
+
   }
 
-  initForm(): void {
+  initForm(form?: Model.Form): void {
     this.formUser = this.fb.group({
       id: null,
       username: [null, Validators.required],
@@ -81,30 +147,37 @@ export class FormUserComponent implements OnInit, OnDestroy {
       contratos_marco: null
     });
 
-    this.formUser.get('proveedor_id').valueChanges.subscribe(p => {
-      if (p) {
-        // this.proveedor_id = +p;
-        this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: +p });
-      }
-    });
-
-    this.formUser.get('provider').valueChanges.subscribe(provider => {
-      if (provider) {
-        if (provider === 'false') {
-          // rescatamos contratos para contratista
-          this.formUser.get('proveedor_id').setValue(1);
-          // this.proveedor_id = null;
-          this.userFacade.getProviders({ token: this.authLogin.token, interno: true });
-          this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null });
-          this.userFacade.getAreas({ token: this.authLogin.token, interno: true });
+    const subscriptionForm = this.formUser.get('proveedor_id').valueChanges
+      .pipe(takeUntil(this.destroyInstance$))
+      .subscribe(p => {
+        if (p) {
+          // this.proveedor_id = +p;
+          this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: +p });
         }
+      });
+    this.pageSubscription.push(subscriptionForm);
 
-        if (provider === 'true') {
-          this.userFacade.getProviders({ token: this.authLogin.token, interno: false });
-          this.userFacade.getAreas({ token: this.authLogin.token, interno: false });
+    const subscriptionForm2 = this.formUser.get('provider').valueChanges
+      .pipe(takeUntil(this.destroyInstance$))
+      .subscribe(provider => {
+        if (provider) {
+          if (provider === 'false') {
+            // rescatamos contratos para contratista
+            this.formUser.get('proveedor_id').setValue(null);
+            // this.proveedor_id = null;
+            this.userFacade.getProviders({ token: this.authLogin.token, interno: true });
+            this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null });
+            this.userFacade.getAreas({ token: this.authLogin.token, interno: true });
+          }
+
+          if (provider === 'true') {
+            this.userFacade.getProviders({ token: this.authLogin.token, interno: false });
+            this.userFacade.getAreas({ token: this.authLogin.token, interno: false });
+          }
         }
-      }
-    });
+      });
+
+    this.pageSubscription.push(subscriptionForm2);
 
     // rescatamos contratos para movistar
     this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null });
@@ -119,8 +192,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
     return this.formUser.get('perfiles') as FormArray;
   }
 
-  addProfile(): void {
-    this.perfiles.push(this.fb.group({ perfil_id: [null, Validators.required], persona_a_cargo_id: null }));
+  addProfile(profile?: any): void {
+    this.perfiles.push(this.fb.group({
+      perfil_id: [profile ? profile.perfil_id : null, Validators.required],
+      persona_a_cargo_id: profile ? profile.persona_a_cargo_id : null
+    }));
   }
 
   removeProfile(index: number): void {
@@ -128,32 +204,58 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   changePerfil(perfilId: number): void {
-    this.userFacade.getHighers({
-      token: this.authLogin.token,
-      proveedor_id: +this.formUser.value.proveedor_id !== 0 ? +this.formUser.value.proveedor_id : 1, perfil_id: perfilId
-    });
+    this.perfilId = +perfilId;
+
+    // verificamos si existen jefes para perfil seleccionado
+    // de existir no ejecutamos petición
+    const inArray = this.profiles.findIndex(p => +p.perfil_id === +this.perfilId);
+    if (inArray === -1) {
+      this.userFacade.getHighers({
+        token: this.authLogin.token,
+        proveedor_id: +this.formUser.value.proveedor_id !== 0 ? +this.formUser.value.proveedor_id : 1, perfil_id: perfilId
+      });
+    }
   }
 
   save(form: any): void {
-    delete form.provider;
-    form.proveedor_id = +form.proveedor_id;
-    form.area_id = +form.area_id;
-    form.perfiles = form.perfiles.map(p => {
-      return { perfil_id: +p.perfil_id, persona_a_cargo_id: p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null };
-    });
-    this.userFacade.postUser({ user: form });
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Usuario guardado',
-      detail: 'Datos de usuario con Éxito!',
-    });
+    if (!form.id) {
+      delete form.provider;
+      form.proveedor_id = +form.proveedor_id;
+      form.area_id = +form.area_id;
+      form.perfiles = form.perfiles.map(p => {
+        return { perfil_id: +p.perfil_id, persona_a_cargo_id: p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null };
+      });
+      this.userFacade.postUser({ user: form });
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Usuario creado',
+        detail: 'Datos de usuario guardados con Éxito!',
+      });
+    }
+
+    if (form.id) {
+      delete form.provider;
+      form.username = null;
+      form.proveedor_id = +form.proveedor_id;
+      form.area_id = +form.area_id;
+      form.perfiles = form.perfiles.map(p => {
+        return { perfil_id: +p.perfil_id, persona_a_cargo_id: p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null };
+      });
+      this.userFacade.editUser({ user: form });
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Usuario guardado',
+        detail: 'edición realizada con Éxito!',
+      });
+    }
 
     this.router.navigate(['/app/user/list-user']);
   }
 
   ngOnDestroy(): void {
-    this.destroyInstance.next(true);
-    this.destroyInstance.complete();
+    this.destroyInstance$.next(true);
+    this.destroyInstance$.complete();
+    this.pageSubscription.forEach((subscription) => subscription.unsubscribe());
   }
 
 }

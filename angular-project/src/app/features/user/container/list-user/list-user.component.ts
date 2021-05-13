@@ -108,16 +108,42 @@ export class ListUserComponent implements OnInit, OnDestroy {
           class: 'p-button-rounded p-button-warning p-mr-2',
           label: 'Editar',
           onClick: (event: Event, item) => {
-            this.userFacade.setFormUser({
-              form: {
-                id: item.id,
-                nombre: item.nombre,
-                descripcion: item.descripcion,
-                permisos: item.permisos,
-              },
-            });
-
-            this.router.navigate(['/app/user/form-user', item.id]);
+            console.log('item...');
+            console.log(item);
+            console.log('item...');
+            this.userFacade.getUserDetail(item.id);
+            this.userFacade.getUserDetail$()
+              .pipe(takeUntil(this.destroyInstance))
+              .subscribe(userData => {
+                console.log('userData...');
+                console.log(userData);
+                console.log('userData...');
+                if (userData.perfiles.length > 0 || userData.contratos_marco.length > 0) {
+                  setTimeout(() => {
+                    this.userFacade.setFormUser({
+                      form: {
+                        id: item.id,
+                        username: item.username,
+                        nombres: item.nombres,
+                        apellidos: item.apellidos,
+                        email: item.email,
+                        celular: item.celular,
+                        provider: (+item.proveedor_id === 1) ? 'false' : 'true',
+                        proveedor_id: item.proveedor_id,
+                        area_id: item.area_id,
+                        activo: item.activo,
+                        rut: item.rut,
+                        perfiles: userData.perfiles.length > 0 ? userData.perfiles.map(p => {
+                          return { perfil_id: +p.id, persona_a_cargo_id: p.persona_a_cargo_id };
+                        }) : [],
+                        contratos_marco: userData.contratos_marco.length > 0 ?
+                          userData.contratos_marco.map(c => c.id) : null
+                      }
+                    });
+                    this.router.navigate(['/app/user/form-user', item.id]);
+                  }, 300);
+                }
+              });
           },
         },
         {
