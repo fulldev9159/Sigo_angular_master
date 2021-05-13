@@ -33,7 +33,7 @@
               <label for="">Jefatura</label>
               <select formControlName="superior" class="form-control" name="" id="">
                 <option value="-1" selected disabled>Seleccione superior</option>
-                <option *ngFor="let profile of (profiles$ | async)" [value]="profile.id">{{profile.nombre}}</option>
+                <option *ngFor="let profile of (profiles$ | async)" [ngValue]="profile.id">{{profile.nombre}}</option>
               </select>
             </div>
 

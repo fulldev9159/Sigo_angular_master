@@ -83,7 +83,7 @@ export class ListProComponent implements OnInit, OnDestroy {
                 nombre: item.nombre,
                 descripcion: item.descripcion,
                 permisos: item.permisos,
-                superior: item.superior
+                superior: item.superior_id
               },
             });
 

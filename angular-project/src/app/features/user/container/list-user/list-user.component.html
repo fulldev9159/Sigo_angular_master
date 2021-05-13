@@ -12,12 +12,12 @@
       <hr>
     </div>
   </div>
-
   <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
   <app-modal [display]="DisplayModal" (CloseEvent)="DisplayModal=false" [style]="{width: '50vw'}">
     <ng-container modal-header-title>Detalles del usuario</ng-container>
     <ng-container modal-content>
       <div class="row">
+        
         <div class="col-xs-12 col-md-6 pt-2" id="detalle_contrato_marco">
           <p-listbox [options]="(itemsDetail$|async)?.contratos_marco" optionLabel="contratos_marco" optionDisabled="inactive"
             [disabled]="true">
@@ -28,6 +28,13 @@
               {{contrato.nombre}}
           </ng-template>
           </p-listbox>
+          <div class="card">
+            <h5 class="card-header">Información adicional</h5>
+            <div class="card-body">
+              <p><strong>Email:</strong> {{email}}</p>
+              <p><strong>Celular:</strong> {{celular}}</p>
+            </div>
+          </div>
         </div>
         <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
           <p-listbox [options]="(itemsDetail$|async)?.perfiles" optionLabel="perfil" optionDisabled="inactive"
@@ -41,8 +48,7 @@
               <strong>Persona a cargo: </strong>{{perfil.persona_a_cargo_nombre}}</p>
           </ng-template>
           </p-listbox>
-        </div>
-        
+        </div>  
       </div>
     </ng-container>
     <ng-container modal-footer></ng-container>
