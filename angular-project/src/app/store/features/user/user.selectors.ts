@@ -28,3 +28,7 @@ export const getHighers = createSelector(selectUser,
 export const getContracts = createSelector(selectUser,
   (state: fromUser.StateUser) => state.contract
 );
+
+export const getForm = createSelector(selectUser,
+  (state: fromUser.StateUser) => state.form
+);

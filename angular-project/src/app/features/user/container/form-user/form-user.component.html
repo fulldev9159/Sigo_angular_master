@@ -19,6 +19,7 @@
         <div class="col-12">
           <app-form-u [formUser]="formUser" [areas]="(areas$ | async)" [highers]="(highers$ | async)"
             [profiles]="(profiles$ | async)" [providers]="(providers$ | async)" [contracts]="(contracts$ | async)"
+            [profilesMandatory]="(profilesMandatory$ | async)"
             (add)="addProfile();" (delete)="removeProfile($event);" (changeItem)="changePerfil($event);"
             (save)="save($event);"></app-form-u>
         </div>

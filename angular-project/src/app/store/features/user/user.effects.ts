@@ -26,6 +26,20 @@ export class UserEffects {
     )
   );
 
+  getUserById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getUserById),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/usuario/get`, { usuario_id: data.id }).pipe(
+          map((res: any) =>
+            userActions.getUserByIdSuccess({ user: res.data.items })
+          ),
+          catchError((err) => of(userActions.getUserByIdError({ error: err })))
+        )
+      )
+    )
+  );
+
   getUserDetail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getUserDetail),
@@ -122,7 +136,7 @@ export class UserEffects {
         this.http.post(`${environment.api}/usuario/contratos_marco/get`, {
           proveedor_id: data.proveedor_id
         }).pipe(map((res: any) =>
-          userActions.getContractsSuccess({ contract: res.data.items }),
+          userActions.getContractsSuccess({ contract: res.data.items.length > 0 ? res.data.items : [] }),
         ),
           catchError(err => of(userActions.getContractsError({ error: err }))
           ))))
@@ -138,6 +152,17 @@ export class UserEffects {
           userActions.postUserSuccess(),
         ),
           catchError(err => of(userActions.postUserError({ error: err }))
+          ))))
+  );
+
+  editUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.editUser),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/usuario/edit`, data.user).pipe(map((res: any) =>
+          userActions.editUserSuccess(),
+        ),
+          catchError(err => of(userActions.editUserError({ error: err }))
           ))))
   );
 

@@ -10,7 +10,7 @@ import * as Model from './user.model';
   providedIn: 'root',
 })
 export class UserFacade {
-  constructor(private store: Store<Model.User>) {}
+  constructor(private store: Store<Model.User>) { }
 
   // USER
   public getUsers(): void {
@@ -79,10 +79,20 @@ export class UserFacade {
     this.store.dispatch(userActions.postUser(data));
   }
   // USER POST
-  // USER
+
+  // USER EDIT
+  public editUser(data): void {
+    this.store.dispatch(userActions.editUser(data));
+  }
+  // USER EDIT
 
   // FORM
   public setFormUser(data): void {
     this.store.dispatch(userActions.setFormUser(data));
   }
+
+  public getForm$(): Observable<Model.Form> {
+    return this.store.select(userSelectors.getForm);
+  }
 }
+

@@ -1,11 +1,13 @@
-<!-- formUser: {{formUser.value | json}} -->
 <form [formGroup]="formUser" (ngSubmit)="saveForm(formUser.value)">
   <div class="row">
 
     <div class="col-xs-12 col-md-4">
       <label for="">Usuario Guia</label>
       <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('username').valid}">*</span>
-      <input formControlName="username" required placeholder="username" class="form-control" type="text">
+      <input *ngIf="!formUser.value.id" formControlName="username" [disabled]="true" required placeholder="username"
+        class="form-control" type="text">
+      <div class="p-mt-2" *ngIf="formUser.value.id">{{formUser.value.username}}</div>
+
       <br>
     </div>
     <div class="col-xs-12 col-md-4">
@@ -62,7 +64,7 @@
       <label for="">Proveedor</label>
       <select formControlName="proveedor_id" class="form-control" name="" id="">
         <option value="null" selected disabled>Seleccione proveedor</option>
-        <option *ngFor="let provider of providers" [value]="provider.id">{{provider.nombre}}</option>
+        <option *ngFor="let provider of providers" [ngValue]="provider.id">{{provider.nombre}}</option>
       </select>
       <br>
     </div>
@@ -102,8 +104,7 @@
                 <span class="ml-1"
                   [ngClass]="{'text-danger' : !formUser.get('perfiles').controls[i].get('perfil_id').valid}">*</span>
               </h5>
-              <select formControlName="perfil_id" (change)="changePerfil(i);" class="form-control mb-1" name=""
-                id="">
+              <select formControlName="perfil_id" (change)="changePerfil(i);" class="form-control mb-1" name="" id="">
                 <option value="null" selected disabled>Seleccione perfil</option>
                 <option *ngFor="let profile of profiles" [value]="profile.id">{{profile.nombre}}
                 </option>
@@ -111,7 +112,8 @@
               <h6 class="card-subtitle mb-1 mt-2 text-muted ">Superior directo</h6>
               <select formControlName="persona_a_cargo_id" class="form-control mb-3" name="" id="">
                 <option value="null" selected disabled>Seleccione jefatura</option>
-                <option *ngFor="let higher of highers" [value]="higher.id">{{higher.nombres}} {{higher.apellidos}}
+                <option *ngFor="let higher of listMandatory(formUser.value.perfiles[i].perfil_id)" [value]="higher.id">
+                  {{higher.nombres}} {{higher.apellidos}}
                 </option>
               </select>
               <a *ngIf="formUser.value.perfiles.length > 1" (click)="deleteItem(i);"
