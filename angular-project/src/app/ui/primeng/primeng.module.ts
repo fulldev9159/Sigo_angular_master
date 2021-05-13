@@ -19,9 +19,12 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TooltipModule } from 'primeng/tooltip';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { DropdownModule } from 'primeng/dropdown';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   imports: [
+    DropdownModule,
     CommonModule,
     TableModule,
     ButtonModule,
@@ -40,9 +43,12 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     MultiSelectModule,
     InputMaskModule,
     TooltipModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    MenuModule,
   ],
   exports: [
+    MenuModule,
+    DropdownModule,
     TableModule,
     ButtonModule,
     InputTextModule,
@@ -60,8 +66,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     MultiSelectModule,
     InputMaskModule,
     TooltipModule,
-    OverlayPanelModule
+    OverlayPanelModule,
   ],
   providers: [MessageService],
 })
-export class PrimeNgModule { }
+export class PrimeNgModule {}

@@ -1,0 +1,21 @@
+:host ::ng-deep {
+  .p-menu {
+    width: 13%;
+    top: auto !important;
+    left: auto !important;
+    right: 0rem;
+    margin-top: 38px;
+  }
+}
+
+
+@media (max-width: 767px) {
+  :host ::ng-deep{
+    .p-menu {
+      margin: -95px 3px 0 0;
+      width: 34%;
+    }
+  }
+}
+
+

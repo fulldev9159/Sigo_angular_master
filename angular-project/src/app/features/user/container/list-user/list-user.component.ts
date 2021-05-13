@@ -6,7 +6,6 @@ import * as Model from '@storeOT/features/user/user.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
@@ -16,9 +15,12 @@ export class ListUserComponent implements OnInit, OnDestroy {
   // declarations
   public authLogin = null;
   public DisplayModal = false;
+  public celular = '';
+  public email = '';
   public items$: Observable<any[]>;
   public itemsDetail$: Observable<Model.UserDetail>;
   private destroyInstance: Subject<boolean> = new Subject();
+
   public configTable = {
     header: true,
     headerConfig: {
@@ -55,13 +57,13 @@ export class ListUserComponent implements OnInit, OnDestroy {
           header: 'apellidos',
           editable: false,
         },
-        {
-          field: 'Email',
-          type: 'TEXT',
-          sort: 'email',
-          header: 'email',
-          editable: false,
-        },
+        // {
+        //   field: 'Email',
+        //   type: 'TEXT',
+        //   sort: 'email',
+        //   header: 'email',
+        //   editable: false,
+        // },
         // {
         //   field: 'Celular',
         //   type: 'TEXT',
@@ -96,14 +98,15 @@ export class ListUserComponent implements OnInit, OnDestroy {
         'rut',
         'nombres',
         'apellidos',
-        'email',
-        'celular',
+        // 'email',
+        // 'celular',
         'proveedor_nombre',
       ],
       actions: [
         {
           icon: 'p-button-icon pi pi-pencil',
           class: 'p-button-rounded p-button-warning p-mr-2',
+          label: 'Editar',
           onClick: (event: Event, item) => {
             this.userFacade.setFormUser({
               form: {
@@ -120,7 +123,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-eye',
           class: 'p-button-rounded p-button-info p-mr-2',
+          label: 'Detalle',
           onClick: (event: Event, item) => {
+            this.email = item.email;
+            this.celular = item.celular;
             this.userFacade.getUserDetail(item.id);
             this.itemsDetail$ = this.userFacade.getUserDetail$();
             this.DisplayModal = true;
@@ -129,6 +135,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
+          label: 'Eliminar',
           onClick: (event: Event, item) => {
             // if (item.eliminable) {
             this.confirmationService.confirm({
@@ -169,7 +176,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyInstance))
       .subscribe((authLogin) => {
         if (authLogin) {
-          // asignamos datos de usuario autenticado a variable local
           this.authLogin = authLogin;
         }
       });
@@ -177,7 +183,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userFacade.getUsers();
-
     this.items$ = this.userFacade.getUsers$();
   }
 

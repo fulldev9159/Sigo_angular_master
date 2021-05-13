@@ -4,7 +4,6 @@ import { PrimeNgModule } from './primeng/primeng.module';
 
 // Services
 
-
 // Components
 import { CardComponent } from './card/card.component';
 import { TableComponent } from './table/table.component';
@@ -14,15 +13,11 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ToastComponent } from './toast/toast.component';
 import { ConfirmationService } from 'primeng/api';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
-import { MessageModule } from 'primeng/message';
+import { MenuComponent } from './menu/menu.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    PrimeNgModule,
-    NgxPermissionsModule
-  ],
+  imports: [CommonModule, PrimeNgModule, NgxPermissionsModule],
   declarations: [
     CardComponent,
     TableComponent,
@@ -31,6 +26,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     DatepickerComponent,
     ToastComponent,
     ProgressBarComponent,
+    MenuComponent,
   ],
   exports: [
     CardComponent,
@@ -41,9 +37,10 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     DatepickerComponent,
     ToastComponent,
     ProgressBarComponent,
-    NgxPermissionsModule
+    MenuComponent,
+    NgxPermissionsModule,
   ],
   providers: [ConfirmationService],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class UiModule { }
+export class UiModule {}

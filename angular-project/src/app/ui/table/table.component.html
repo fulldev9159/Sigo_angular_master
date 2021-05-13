@@ -47,7 +47,7 @@
           <td *ngSwitchCase="'NUMBER'">{{item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
           <td *ngSwitchCase="'DATE'">{{item[column.header] | date:'dd-MM-yyyy'}}</td>
           <td *ngSwitchCase="'ACTIONS'" id="action-buttons">
-            <ng-container *ngIf="config.body.actions.length > 0">
+            <ng-container *ngIf="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6">
               <div *ngFor="let button of config.body.actions">
                 <div *ngIf="!item[button.conditionKey]" pTooltip="{{button.tooltip}}">
                   <button [disabled]="item[button.conditionKey] === false" pButton pRipple [icon]="button.icon"
@@ -57,6 +57,9 @@
                   [class]="button.class" (click)="button.onClick($event,item, rowIndex);"
                   *ngIf="item[button.conditionKey]"></button>
               </div>
+            </ng-container>
+            <ng-container *ngIf="config.body.actions.length >4||config.body.headers.length>6">
+               <app-menu [actions]="config.body.actions" [item]="item" [rowIndex]="rowIndex" ></app-menu>
             </ng-container>
           </td>
         </ng-container>
