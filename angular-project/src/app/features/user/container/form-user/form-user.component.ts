@@ -6,7 +6,7 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { MessageService } from 'primeng/api';
 import { Observable, of, Subject, Subscription } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, take, takeUntil } from 'rxjs/operators';
 import * as Model from '@storeOT/features/user/user.model';
 import * as _ from 'lodash';
 
@@ -45,7 +45,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   ) {
     const subscription = this.authFacade
       .getLogin$()
-      .pipe(takeUntil(this.destroyInstance$))
+      .pipe(take(1), takeUntil(this.destroyInstance$))
       .subscribe((authLogin) => {
         if (authLogin) {
           // asignamos datos de usuario autenticado a variable local
@@ -57,9 +57,12 @@ export class FormUserComponent implements OnInit, OnDestroy {
         }
       });
     this.pageSubscription.push(subscription);
+
   }
 
   ngOnInit(): void {
+
+    this.profilesMandatory$ = of([]);
 
     this.initForm();
 
@@ -70,7 +73,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.profiles$ = this.profileFacade.getProfile$();
 
     this.highers$ = this.userFacade.getHighers$()
-      .pipe(takeUntil(this.destroyInstance$),
+      .pipe(
         map(highers => {
           if (highers && highers.length > 0) {
             const perfil = this.formUser.get('perfiles').value.findIndex(p => +p.perfil_id === +this.perfilId);
@@ -80,31 +83,31 @@ export class FormUserComponent implements OnInit, OnDestroy {
             }
           }
           return highers;
-        }));
+        }), takeUntil(this.destroyInstance$));
 
     this.contracts$ = this.userFacade.getContracts$();
 
     const subscription = this.rutaActiva.params
-      .pipe(takeUntil(this.destroyInstance$))
+      .pipe(take(1), takeUntil(this.destroyInstance$))
       .subscribe(
         (params: Params) => {
           if (params.id) {
             this.user_id = params.id;
+          } else {
+            this.addProfile();
           }
 
           if (this.user_id) {
             const subscription2 = this.userFacade.getForm$()
-              .pipe(takeUntil(this.destroyInstance$))
+              .pipe(take(1), takeUntil(this.destroyInstance$))
               .subscribe(res => {
                 if (res) {
                   // inicializamos formulario
                   this.formUser.patchValue(res);
                   if (res.perfiles.length > 1) {
-                    for (let index = 0; index < res.perfiles.length; index++) {
-                      if (index > 0) {
-                        this.addProfile(res.perfiles[index]);
-                      }
-                    }
+                    res.perfiles.forEach(profile => {
+                      this.addProfile(profile);
+                    });
 
                     // agrupamos en perfil_id
                     const groups = _.chain(res.perfiles)
@@ -148,7 +151,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     });
 
     const subscriptionForm = this.formUser.get('proveedor_id').valueChanges
-      .pipe(takeUntil(this.destroyInstance$))
+      .pipe(take(1), takeUntil(this.destroyInstance$))
       .subscribe(p => {
         if (p) {
           // this.proveedor_id = +p;
@@ -185,7 +188,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
     // rescatamos areas
     this.userFacade.getAreas({ token: this.authLogin.token, interno: true });
 
-    this.addProfile();
   }
 
   get perfiles(): FormArray {
