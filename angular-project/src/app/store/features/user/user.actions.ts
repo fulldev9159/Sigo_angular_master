@@ -5,65 +5,162 @@ import * as Model from './user.model';
 
 export const getUser = createAction('[User GetAll] GET User');
 
-export const getUserSuccess = createAction('[User GetAll] GET User Success', props<{ user: Model.User[] }>());
+export const getUserSuccess = createAction(
+  '[User GetAll] GET User Success',
+  props<{ user: Model.User[] }>()
+);
 
-export const getUserError = createAction('[User GetAll] GET User Error', props<{ error: any }>());
+export const getUserError = createAction(
+  '[User GetAll] GET User Error',
+  props<{ error: any }>()
+);
 
 export const getUserById = createAction('[User GetUserById] GET User');
 
-export const getUserByIdSuccess = createAction('[User GetUserById] GET User Success', props<{ user: Model.User[] }>());
+export const getUserByIdSuccess = createAction(
+  '[User GetUserById] GET User Success',
+  props<{ user: Model.User[] }>()
+);
 
-export const getUserByIdError = createAction('[User GetUserById] GET User Error', props<{ error: any }>());
+export const getUserByIdError = createAction(
+  '[User GetUserById] GET User Error',
+  props<{ error: any }>()
+);
 
-export const getUserDetail = createAction('[User getUserDetail] GET User Detail', props<{ userId: number }>());
+export const getUserDetail = createAction(
+  '[User getUserDetail] GET User Detail',
+  props<{ userId: number }>()
+);
 
-export const getUserDetailSuccess = createAction('[User getUserDetailSuccess] GET User Detail Success',
-    props<{ userDetail: Model.UserDetail }>());
+export const getUserDetailSuccess = createAction(
+  '[User getUserDetailSuccess] GET User Detail Success',
+  props<{ userDetail: Model.UserDetail }>()
+);
 
-export const getUserDetailError = createAction('[User getUserDetailError] GET User Detail Error', props<{ error: any }>());
+export const getUserDetailError = createAction(
+  '[User getUserDetailError] GET User Detail Error',
+  props<{ error: any }>()
+);
 
-export const getArea = createAction('[Area GetAll] GET Area', props<{ token: string }>());
+export const getArea = createAction(
+  '[Area GetAll] GET Area',
+  props<{ token: string }>()
+);
 
-export const getAreaSuccess = createAction('[Area GetAll] GET Area Success', props<{ area: Model.Area[] }>());
+export const getAreaSuccess = createAction(
+  '[Area GetAll] GET Area Success',
+  props<{ area: Model.Area[] }>()
+);
 
-export const getAreaError = createAction('[Area GetAll] GET Area Error', props<{ error: any }>());
+export const getAreaError = createAction(
+  '[Area GetAll] GET Area Error',
+  props<{ error: any }>()
+);
 
-export const getProvider = createAction('[Provider GetAll] GET Provider', props<{ token: string }>());
+export const getProvider = createAction(
+  '[Provider GetAll] GET Provider',
+  props<{ token: string }>()
+);
 
-export const getProviderSuccess = createAction('[Provider GetAll] GET Provider Success', props<{ provider: Model.Provider[] }>());
+export const getProviderSuccess = createAction(
+  '[Provider GetAll] GET Provider Success',
+  props<{ provider: Model.Provider[] }>()
+);
 
-export const getProviderError = createAction('[Provider GetAll] GET Provider Error', props<{ error: any }>());
+export const getProviderError = createAction(
+  '[Provider GetAll] GET Provider Error',
+  props<{ error: any }>()
+);
 
-export const getHigher = createAction('[Higher GetAll] GET Higher', props<{ token: string }>());
+export const getHigher = createAction(
+  '[Higher GetAll] GET Higher',
+  props<{ token: string }>()
+);
 
-export const getHigherSuccess = createAction('[Higher GetAll] GET Higher Success', props<{ higher: Model.Higher[] }>());
+export const getHigherSuccess = createAction(
+  '[Higher GetAll] GET Higher Success',
+  props<{ higher: Model.Higher[] }>()
+);
 
-export const getHigherError = createAction('[Higher GetAll] GET Higher Error', props<{ error: any }>());
+export const getHigherError = createAction(
+  '[Higher GetAll] GET Higher Error',
+  props<{ error: any }>()
+);
 
-export const getContracts = createAction('[Contract GetAll] GET Contract', props<{ token: string, proveedor_id: number }>());
+export const getContracts = createAction(
+  '[Contract GetAll] GET Contract',
+  props<{ token: string; proveedor_id: number }>()
+);
 
-export const getContractsSuccess = createAction('[Contract GetAll] GET Contract Success', props<{ contract: Model.Contract[] }>());
+export const getContractsSuccess = createAction(
+  '[Contract GetAll] GET Contract Success',
+  props<{ contract: Model.Contract[] }>()
+);
 
-export const getContractsError = createAction('[Contract GetAll] GET Contract Error', props<{ error: any }>());
+export const getContractsError = createAction(
+  '[Contract GetAll] GET Contract Error',
+  props<{ error: any }>()
+);
 
-export const deleteUser = createAction('[User DeleteById] DELETE User', props<{ userPosition: number }>());
+export const deleteUser = createAction(
+  '[User DeleteById] DELETE User',
+  props<{ userPosition: number }>()
+);
 
-export const deleteUserSuccess = createAction('[User DeleteById] DELETE User Success', props<{ userId: any, res: any }>());
+export const deleteUserSuccess = createAction(
+  '[User DeleteById] DELETE User Success',
+  props<{ userId: any; res: any }>()
+);
 
-export const deleteUserError = createAction('[User DeleteById] DELETE User Error', props<{ error: any }>());
+export const deleteUserError = createAction(
+  '[User DeleteById] DELETE User Error',
+  props<{ error: any }>()
+);
 
-export const editUser = createAction('[User EditById] EDIT User', props<{ user: Model.User }>());
+export const activateUser = createAction(
+  '[User Activate ById] ACTIVATE User',
+  props<{ userId: number; activacion: boolean }>()
+);
 
-export const editUserSuccess = createAction('[User EditById] EDIT User Success');
+export const activateUserSuccess = createAction(
+  '[User Activate ById] ACTIVATE User Success',
+  props<{ userId: any; res: any }>()
+);
 
-export const editUserError = createAction('[User EditById] EDIT User Error', props<{ error: any }>());
+export const activateUserError = createAction(
+  '[User Activate ById] ACTIVATE User Error',
+  props<{ error: any }>()
+);
 
-export const postUser = createAction('[User Post] CREATE User', props<{ user: any }>());
+export const editUser = createAction(
+  '[User EditById] EDIT User',
+  props<{ user: Model.User }>()
+);
+
+export const editUserSuccess = createAction(
+  '[User EditById] EDIT User Success'
+);
+
+export const editUserError = createAction(
+  '[User EditById] EDIT User Error',
+  props<{ error: any }>()
+);
+
+export const postUser = createAction(
+  '[User Post] CREATE User',
+  props<{ user: any }>()
+);
 
 export const postUserSuccess = createAction('[User Post] CREATE User Success');
 
-export const postUserError = createAction('[User Post] CREATE User Error', props<{ error: any }>());
+export const postUserError = createAction(
+  '[User Post] CREATE User Error',
+  props<{ error: any }>()
+);
 
-export const setFormUser = createAction('[Set FormUser] SET FormUser', props<{ form: Model.Form }>());
+export const setFormUser = createAction(
+  '[Set FormUser] SET FormUser',
+  props<{ form: Model.Form }>()
+);
 
 // USER ACTIONS

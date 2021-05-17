@@ -25,12 +25,20 @@ export class MenuComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    this.MenuItems = this.actions.map((x) => ({
-      label: x.label,
-      icon: x.icon,
-      command: ($event) =>
-        x.onClick($event.originalEvent, this.item, this.rowIndex),
-    }));
+    this.MenuItems = this.actions.map((x) => {
+      let label = '';
+      if (x.labelVariable) {
+        label = this.item[x.label] ? 'Bloquear' : 'Activar';
+      } else {
+        label = x.label;
+      }
+      return {
+        label,
+        icon: x.icon,
+        command: ($event) =>
+          x.onClick($event.originalEvent, this.item, this.rowIndex),
+      };
+    });
   }
 
   ngOnDestroy(): void {

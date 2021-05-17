@@ -51,3 +51,13 @@ Delete usuario
     ${boton de confirmar}            set variable                                                                css:.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
     Click Visible Element            ${boton de confirmar}
     close Browser
+
+Activar usuario
+    Open Browser To Page             ${url}
+    Location Should Be               ${url}/auth/login
+    Login                            admin                                                                       password
+    Wait Until Element Is Visible    id:user-name                                                                timeout=5
+    Click Element                    css:#menu-usuario>a>span
+    Wait Until Element Is Visible    css:.p-datatable-wrapper 
+    Click Visible Element            css:#action-buttons>app-menu>button
+    Click Visible Element            css:#action-buttons > app-menu > p-menu > div > ul > li:nth-child(4) > a                   

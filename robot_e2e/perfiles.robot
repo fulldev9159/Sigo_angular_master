@@ -15,7 +15,7 @@ Crear perfil
     Click Visible Element            id:add-profile-button
     ####### Crear perfil en la interfaz  ###############
     Wait Until Element Is Enabled    css:#nombre-perfil-input>input
-    input text                       css:#nombre-perfil-input>input            Nuevo Perfil robot
+    input text                       css:#nombre-perfil-input>input            Nuevo Perfil Robot
     input text                       css:#descripcion-perfil-input>textarea    Nuevo Descripcion perfil robot
     Select item                      css:#nombre-perfil-input > select         AdminContrato
     ${Option Listar OT}=                         set variable                         css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li:nth-child(1)
@@ -44,14 +44,14 @@ Listar perfil y desplegar detalle
     Should Be True                   ${status}
     FOR    ${i}    IN RANGE    ${cantidad de filas}
         ${txt nombre perfil}=    Get Text                        css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
-        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil robot
+        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil Robot
         Set Suite Variable    ${areYouMyLine}
         ${numero de fila}   set variable    ${i + 1}
         Set Suite Variable    ${numero de fila}
         Run Keyword If     ${areYouMyLine}    Exit For Loop
     END
     Should Be True    ${areYouMyLine}
-    Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(3)    AdminContrato
+    Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(3)    Admincontrato
     Click Visible Element                                         css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(5)>div:nth-child(2)>div>button
     Wait Until Element Is Visible    css:p-dialog                                                                                        timeout=3
     Element text should be    css:#permisos-modulo-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li>span.ng-star-inserted         Listar OT
@@ -71,18 +71,18 @@ Editar perfil
 
     FOR    ${i}    IN RANGE    ${cantidad de filas}
         ${txt nombre perfil}=    Get Text                        css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
-        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil robot
+        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil Robot
         Set Suite Variable    ${areYouMyLine}
         ${numero de fila}   set variable    ${i + 1}
         Set Suite Variable    ${numero de fila}
         Run Keyword If     ${areYouMyLine}    Exit For Loop
     END
-    Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(3)    AdminContrato
+    Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(3)    Admincontrato
     Should Be True    ${areYouMyLine}
     Click Element                                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(5)>div:nth-child(1)>button
     Wait Until Element Is Visible    css:#title-create-profile>h1                                                                    timeout=3
     Wait Until Element Is Enabled    css:#nombre-perfil-input>input
-    input text                       css:#nombre-perfil-input>input                                                                  Nuevo Perfil robot editado
+    input text                       css:#nombre-perfil-input>input                                                                  Nuevo Perfil Robot Editado
 
     ${permisos del modulo OT}=    Get WebElements                css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
     Click Visible Element                                                ${permisos del modulo OT}[0]
@@ -104,7 +104,7 @@ Editar perfil
     #     Run Keyword If     ${areYouMyLine}    Exit For Loop
     # END
     # Should Be True    ${areYouMyLine}
-    # Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila2})>td:nth-child(3)    AdminContrato
+    # Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila2})>td:nth-child(3)    Admincontrato
     # Click Visible Element                                               css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila2})>td:nth-child(5)>div:nth-child(2)>div>button
     # Wait Until Element Is Visible                                       css:p-dialog    timeout=3
 
@@ -122,7 +122,7 @@ Eliminar Perfil
     Should Be True                   ${status}
     FOR    ${i}    IN RANGE    ${cantidad de filas}
         ${txt nombre perfil}=    Get Text                        css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
-        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil robot editado
+        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil Robot Editado
         Set Suite Variable    ${areYouMyLine}
         ${numero de fila}   set variable    ${i + 1}
         Set Suite Variable    ${numero de fila}
@@ -134,7 +134,7 @@ Eliminar Perfil
     Click Visible Element    ${boton de confirmar}
     FOR    ${i}    IN RANGE    ${cantidad de filas}
         ${txt nombre perfil}=    Get Text                        css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
-        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil robot editado
+        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre perfil}    Nuevo Perfil Robot Editado
         Set Suite Variable    ${areYouMyLine}
         ${numero de fila}   set variable    ${i + 1}
         Set Suite Variable    ${numero de fila}
