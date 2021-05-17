@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
@@ -15,7 +10,7 @@ import { take, takeUntil } from 'rxjs/operators';
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListUserComponent implements OnInit, OnDestroy {
   // declarations
@@ -216,15 +211,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.userFacade
-      .getUserDetail$()
+    this.userFacade.getUserDetail$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe((userData) => {
-        if (
-          (userData.perfiles.length > 0 ||
-            userData.contratos_marco.length > 0) &&
-          this.item
-        ) {
+      .subscribe(userData => {
+        if (((userData.perfiles.length > 0 || userData.contratos_marco.length > 0) && this.item)) {
           this.userFacade.setFormUser({
             form: {
               id: this.item.id,
@@ -233,25 +223,17 @@ export class ListUserComponent implements OnInit, OnDestroy {
               apellidos: this.item.apellidos,
               email: this.item.email,
               celular: this.item.celular,
-              provider: +this.item.proveedor_id === 1 ? 'false' : 'true',
+              provider: (+this.item.proveedor_id === 1) ? 'false' : 'true',
               proveedor_id: this.item.proveedor_id,
               area_id: this.item.area_id,
               activo: this.item.activo,
               rut: this.item.rut,
-              perfiles:
-                userData.perfiles.length > 0
-                  ? userData.perfiles.map((p) => {
-                      return {
-                        perfil_id: +p.id,
-                        persona_a_cargo_id: p.persona_a_cargo_id,
-                      };
-                    })
-                  : [],
-              contratos_marco:
-                userData.contratos_marco.length > 0
-                  ? userData.contratos_marco.map((c) => c.id)
-                  : null,
-            },
+              perfiles: userData.perfiles.length > 0 ? userData.perfiles.map(p => {
+                return { perfil_id: +p.id, persona_a_cargo_id: p.persona_a_cargo_id };
+              }) : [],
+              contratos_marco: userData.contratos_marco.length > 0 ?
+                userData.contratos_marco.map(c => c.id) : null
+            }
           });
           this.router.navigate(['/app/user/form-user', this.item.id]);
         }
