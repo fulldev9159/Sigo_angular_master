@@ -10,7 +10,7 @@ import * as Model from './user.model';
   providedIn: 'root',
 })
 export class UserFacade {
-  constructor(private store: Store<Model.User>) { }
+  constructor(private store: Store<Model.User>) {}
 
   // USER
   public getUsers(): void {
@@ -34,6 +34,10 @@ export class UserFacade {
     this.store.dispatch(userActions.deleteUser(data));
   }
 
+  // ACTIVACION
+  public activateUser(userId: number, activacion: boolean): void {
+    this.store.dispatch(userActions.activateUser({ userId, activacion }));
+  }
   // AREAS
   public getAreas(data): void {
     this.store.dispatch(userActions.getArea(data));
@@ -95,4 +99,3 @@ export class UserFacade {
     return this.store.select(userSelectors.getForm);
   }
 }
-

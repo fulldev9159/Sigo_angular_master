@@ -1,10 +1,10 @@
-:host {
+:host ::ng-deep {
   display: block;
   position: absolute;
   max-width: 100%;
   max-width: 100%;
   background: transparent;
-  .modal{
+  .modal {
     width: 100px;
   }
 }
@@ -18,3 +18,4 @@
     background: transparent;
   }
 }
+

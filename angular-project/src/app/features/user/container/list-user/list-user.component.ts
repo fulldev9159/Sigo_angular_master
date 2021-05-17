@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
@@ -10,7 +15,7 @@ import { take, takeUntil } from 'rxjs/operators';
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListUserComponent implements OnInit, OnDestroy {
   // declarations
@@ -74,7 +79,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
         //   editable: false,
         // },
         {
-          field: 'Compañia',
+          field: 'Empresa',
           type: 'TEXT',
           sort: 'proveedor_nombre',
           header: 'proveedor_nombre',
@@ -85,6 +90,15 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'area_nombre',
           header: 'area_nombre',
+          editable: false,
+        },
+        {
+          field: 'Estado',
+          type: 'BOOLEANTEXT',
+          sort: 'activo',
+          header: 'activo',
+          booleantrue: 'Activo',
+          booleanfalse: 'Bloqueado',
           editable: false,
         },
         {
@@ -154,6 +168,34 @@ export class ListUserComponent implements OnInit, OnDestroy {
             // }
           },
         },
+        {
+          icon: 'p-button-icon pi pi-ban',
+          class: 'p-button-rounded p-button-danger',
+          labelVariable: true,
+          label: 'activo',
+          onClick: (event: Event, item) => {
+            // if (item.eliminable) {
+            const txt = item.activo ? 'Bloquear' : 'Activar';
+            const summary = item.activo ? 'Bloqueado' : 'Activado';
+            const detail = item.activo ? 'Deshabilitación' : 'Activación';
+            this.confirmationService.confirm({
+              target: event.target as EventTarget,
+              message: `¿Está seguro que desea ${txt} este Usuario?`,
+              icon: 'pi pi-exclamation-triangle',
+              acceptLabel: 'Confirmar',
+              rejectLabel: 'Cancelar',
+              accept: () => {
+                this.userFacade.activateUser(+item.id, !item.activo);
+                this.messageService.add({
+                  severity: 'success',
+                  summary: `usuario ${summary}`,
+                  detail: `${detail} realizada con Éxito!`,
+                });
+              },
+            });
+            // }
+          },
+        },
       ],
     },
   };
@@ -174,10 +216,15 @@ export class ListUserComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.userFacade.getUserDetail$()
+    this.userFacade
+      .getUserDetail$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe(userData => {
-        if (((userData.perfiles.length > 0 || userData.contratos_marco.length > 0) && this.item)) {
+      .subscribe((userData) => {
+        if (
+          (userData.perfiles.length > 0 ||
+            userData.contratos_marco.length > 0) &&
+          this.item
+        ) {
           this.userFacade.setFormUser({
             form: {
               id: this.item.id,
@@ -186,17 +233,25 @@ export class ListUserComponent implements OnInit, OnDestroy {
               apellidos: this.item.apellidos,
               email: this.item.email,
               celular: this.item.celular,
-              provider: (+this.item.proveedor_id === 1) ? 'false' : 'true',
+              provider: +this.item.proveedor_id === 1 ? 'false' : 'true',
               proveedor_id: this.item.proveedor_id,
               area_id: this.item.area_id,
               activo: this.item.activo,
               rut: this.item.rut,
-              perfiles: userData.perfiles.length > 0 ? userData.perfiles.map(p => {
-                return { perfil_id: +p.id, persona_a_cargo_id: p.persona_a_cargo_id };
-              }) : [],
-              contratos_marco: userData.contratos_marco.length > 0 ?
-                userData.contratos_marco.map(c => c.id) : null
-            }
+              perfiles:
+                userData.perfiles.length > 0
+                  ? userData.perfiles.map((p) => {
+                      return {
+                        perfil_id: +p.id,
+                        persona_a_cargo_id: p.persona_a_cargo_id,
+                      };
+                    })
+                  : [],
+              contratos_marco:
+                userData.contratos_marco.length > 0
+                  ? userData.contratos_marco.map((c) => c.id)
+                  : null,
+            },
           });
           this.router.navigate(['/app/user/form-user', this.item.id]);
         }

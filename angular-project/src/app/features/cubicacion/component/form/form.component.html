@@ -37,6 +37,7 @@
     </div>
   </div>
   <div class="col-xs-12 col-md-8">
+    <label for="">Tipo Servicio</label>
     <select formControlName="tipo_servicio_id"
       [attr.disabled]="subContractedTypeServices ? subContractedTypeServices?.length === 0 ? '' : null : null"
       class="form-control mb-1" name="" id="">
@@ -46,7 +47,7 @@
     </select>
 
     <div style="height: 300px;max-height: 300px;overflow-y: scroll;">
-
+      <label for="">Servicios LPU</label>
       <p-listbox [metaKeySelection]="false" [options]="subContractedServices" [checkbox]="true" [filter]="true"
         [multiple]="true" optionLabel="name" (onChange)="itemSelected($event)">
         <ng-template let-data pTemplate="item">

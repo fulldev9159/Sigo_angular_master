@@ -1,5 +1,9 @@
 :host ::ng-deep {
-  #action-buttons{
+  #action-buttons {
+    justify-content: center;
+    align-items: center;
+  }
+  .action-buttons-flex{
     display: flex;
   }
   div.p-datatable-header.ng-star-inserted > div > span > input {
@@ -13,7 +17,30 @@
       margin-left: auto;
     }
   }
+  // .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+  //   background: rgba(0, 0, 0, 0.02);
+  // }
+  .p-datatable.p-datatable-sm .p-datatable-header {
+    background: #efefef;
+  }
+  .p-datatable .p-datatable-thead > tr > th {
+    border: 0px;
+    border-width: 0px;
+    border-right: 1px solid #f4f4f4 !important;
+    border-bottom: 1px solid #9e9e9e;
+    background-color: #efefef;
+  }
+  td,
+  #action-buttons {
+    padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
+    border: 0 !important;
+    border-right: 1px solid #d8d8d8 !important;
+    border-bottom: 1px solid #d8d8d8 !important;
+  }
 
+  .bloqueado {
+    color: #ccc !important;
+  }
   .p-progressbar {
     height: 0.5rem;
     background-color: #d8dadc;

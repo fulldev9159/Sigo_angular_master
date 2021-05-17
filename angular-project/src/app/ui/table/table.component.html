@@ -1,7 +1,7 @@
 <div class="card">
   <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
     dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos"
-    [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
+    [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
     <ng-template *ngIf="config.header" pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <h5 class="p-m-0">{{config.headerConfig.title}}</h5>
@@ -19,6 +19,10 @@
             <th *ngSwitchCase="'CHECKBOX'" style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
+            <th *ngSwitchCase="'BOOLEANTEXT'" [pSortableColumn]="column.sort">{{column.field}} <p-sortIcon
+              [field]="column.sort">
+            </p-sortIcon>
+            </th>
             <th *ngSwitchCase="'TEXT'" [pSortableColumn]="column.sort">{{column.field}} <p-sortIcon
                 [field]="column.sort">
               </p-sortIcon>
@@ -34,19 +38,22 @@
             <th *ngSwitchCase="'ACTIONS'"></th>
           </ng-container>
         </ng-container>
-
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
-      <tr>
+      <tr [ngClass]="item['activo']===false ? 'bloqueado' : ''">
         <ng-container *ngFor="let column of config.body.headers" [ngSwitch]="column.type">
           <td *ngSwitchCase="'CHECKBOX'">
             <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
-          <td *ngSwitchCase="'TEXT'">{{item[column.header]}}</td>
+          <td *ngSwitchCase="'TEXT'">{{item[column.header]| titlecase}}</td>
           <td *ngSwitchCase="'NUMBER'">{{item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
           <td *ngSwitchCase="'DATE'">{{item[column.header] | date:'dd-MM-yyyy'}}</td>
-          <td *ngSwitchCase="'ACTIONS'" id="action-buttons">
+          <td *ngSwitchCase="'BOOLEANTEXT'">
+            <span *ngIf="item[column.header]">{{column.booleantrue}}</span>
+            <span *ngIf="!item[column.header]">{{column.booleanfalse}}</span>
+          </td>
+          <td *ngSwitchCase="'ACTIONS'" id="action-buttons" [ngClass]="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6 ? 'action-buttons-flex' : ''">
             <ng-container *ngIf="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6">
               <div *ngFor="let button of config.body.actions">
                 <div *ngIf="!item[button.conditionKey]" pTooltip="{{button.tooltip}}">

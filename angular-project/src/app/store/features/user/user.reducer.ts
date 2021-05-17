@@ -21,7 +21,7 @@ export const initialStateUser: StateUser = {
   providers: [],
   highers: [],
   contract: [],
-  form: null
+  form: null,
 };
 
 export const reducerUser = createReducer(
@@ -48,7 +48,7 @@ export const reducerUser = createReducer(
   on(UserActions.getProvider, (state) => state),
   on(UserActions.getProviderSuccess, (state, payload) => ({
     ...state,
-    providers: payload.provider
+    providers: payload.provider,
   })),
 
   on(UserActions.getHigher, (state) => state),
@@ -59,15 +59,27 @@ export const reducerUser = createReducer(
   on(UserActions.getContracts, (state) => state),
   on(UserActions.getContractsSuccess, (state, payload) => ({
     ...state,
-    contract: payload.contract
+    contract: payload.contract,
   })),
   on(UserActions.deleteUserSuccess, (state, payload) => ({
     ...state,
     items: [...state.items.filter((i) => +i.id !== +payload.userId)],
   })),
+  on(UserActions.activateUserSuccess, (state, payload) => ({
+    ...state,
+    items: [
+      ...state.items.map((x) => {
+        const activo = payload.userId === x.id ? !x.activo : x.activo;
+        return {
+          ...x,
+          activo,
+        };
+      }),
+    ],
+  })),
 
   on(UserActions.setFormUser, (state, payload) => ({
     ...state,
-    form: payload.form
-  })),
+    form: payload.form,
+  }))
 );
