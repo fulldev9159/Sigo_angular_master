@@ -7,16 +7,16 @@ import { Subject } from 'rxjs';
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  animations: [
-    trigger('rotateCarousel', [
-      transition('list-user => form-user', useAnimation(scaleDownFromTop, {
-        params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
-      })),
-      transition('form-user => list-user', useAnimation(scaleDownFromBottom, {
-        params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
-      })),
-    ])
-  ],
+  // animations: [
+  //   trigger('rotateCarousel', [
+  //     transition('list-user => form-user', useAnimation(scaleDownFromTop, {
+  //       params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
+  //     })),
+  //     transition('form-user => list-user', useAnimation(scaleDownFromBottom, {
+  //       params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
+  //     })),
+  //   ])
+  // ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserComponent implements OnInit, OnDestroy {

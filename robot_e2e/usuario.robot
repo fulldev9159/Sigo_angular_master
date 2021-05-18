@@ -6,17 +6,15 @@ Documentation    Test de funcionanildad del modulo de Usuarios.
 Resource    resource.robot
 
 *** Test Cases ***
-# Ingresar usuario
-#    Open Browser To Page             ${url}
-#    Location Should Be               ${url}/auth/login
-#    Login                            admin                       password
-#    Wait Until Element Is Visible    id:user-name                timeout=5
-#    ${"boton-perfil-menu"}           set variable                css:#menu-usuario>a>span
-#    Click Element                    css:#menu-usuario>a>span
-
-#    close Browser
-    # Wait Until Element Is Visible    css:agregar-usuario    timeout=5
-    # Click Element    css:agregar-usuario
+Crear usuario
+    Open Browser To Page             ${url}
+    Login                            admin                                     password
+    Wait Until Element Is Visible    id:user-name                              timeout=5
+    # Datos Formulario Usuario
+    Click Visible Element            css:#menu-usuario>a>span
+    Click Visible Element            id:add-user-button
+    # Creacion Usuario
+    Usuario   carloscfuentes     17.220.899-1    Nombre Robot     Apllidos Robot     emailrobot@robot.cl    
 
 Listar usuarios
     Open Browser To Page             ${url}
