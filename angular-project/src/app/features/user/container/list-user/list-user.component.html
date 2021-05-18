@@ -6,7 +6,7 @@
     </div>
     <div class="col">
       <button [routerLink]="['/app/user/form-user']" pButton type="button" label="Nuevo Usuario" icon="pi pi-plus"
-        class="p-button-sm mt-5 float-right" id="agregar-usuario"></button>
+        class="p-button-sm mt-5 float-right" id="add-user-button"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -17,16 +17,16 @@
     <ng-container modal-header-title>Detalles del usuario</ng-container>
     <ng-container modal-content>
       <div class="row">
-        
+
         <div class="col-xs-12 col-md-6 pt-2" id="detalle_contrato_marco">
-          <p-listbox [options]="(itemsDetail$|async)?.contratos_marco" optionLabel="contratos_marco" optionDisabled="inactive"
-            [disabled]="true">
+          <p-listbox [options]="(itemsDetail$|async)?.contratos_marco" optionLabel="contratos_marco"
+            optionDisabled="inactive" [disabled]="true">
             <ng-template pTemplate="header">
               Contratos con los que el usuario puede trabajar
             </ng-template>
             <ng-template let-contrato pTemplate="item">
               {{contrato.nombre}}
-          </ng-template>
+            </ng-template>
           </p-listbox>
           <div class="card">
             <h5 class="card-header">Información adicional</h5>
@@ -38,17 +38,18 @@
         </div>
         <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
           <p-listbox [options]="(itemsDetail$|async)?.perfiles" optionLabel="perfil" optionDisabled="inactive"
-            [disabled]="true" >
+            [disabled]="true">
             <ng-template pTemplate="header">
               Perfiles del usuario
             </ng-template>
             <ng-template let-perfil pTemplate="item">
               <p><strong> Perfil: </strong> {{perfil.nombre}}
-              <br/>
-              <strong>Persona a cargo: </strong>{{perfil.persona_a_cargo_nombre}}</p>
-          </ng-template>
+                <br />
+                <strong>Persona a cargo: </strong>{{perfil.persona_a_cargo_nombre}}
+              </p>
+            </ng-template>
           </p-listbox>
-        </div>  
+        </div>
       </div>
     </ng-container>
     <ng-container modal-footer></ng-container>

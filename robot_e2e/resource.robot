@@ -49,4 +49,29 @@ Select item
     Click Visible Element    ${select element}
     Select From List By Label    ${select element}    ${value}
 
+Select item value
+    [Arguments]    ${selector}     ${value}
+    ${select element}    Get WebElement    ${selector}
+    Click Visible Element        ${select element}
+    Select From List By Value    ${select element}    ${value}
+
+Usuario
+    [Arguments]                  ${username}     ${documento}     ${nombres}     ${apellidos}     ${email}  
+    input text                        name:username                                 ${username} 
+    input text                        name:documento-input                          ${documento} 
+    input text                        name:nombre-input                             ${nombres} 
+    input text                        name:apellidos-input                          ${apellidos} 
+    input text                        name:email-input                              ${email} 
+    Select item                       css:#proveedor_id > select                    Telefonica Chile Servicios Corporativos Ltda.
+    Select item                       css:#area_id > select                         CONECTIVIDAD Y BACKHAUL
+    Click Visible Element             id:contratos_marco_multi     
+    Wait Until Element Is Visible     id:contratos_marco_multi                     
+    Click Visible Element             css:.p-multiselect-items-wrapper>ul>cdk-virtual-scroll-viewport>div>p-multiselectitem:nth-child(1)>li>div>div
+    Click Visible Element             id: caja_formulario
+    sleep  2
+    Scroll Element Into View          css:#perfil_id > select
+    Select item                       css:#perfil_id > select                       Admin
+    element should be enabled         id:submit-user
+    Click Visible Element             id:submit-user
+
 
