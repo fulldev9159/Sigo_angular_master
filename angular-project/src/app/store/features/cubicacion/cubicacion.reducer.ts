@@ -1,6 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
-import { ContractMarco, Cubicacion, SubContractedProviders, SubContractedRegions, SubContractedServices, SubContractedTypeServices } from './cubicacion.model';
+import {
+  ContractMarco,
+  Cubicacion,
+  SubContractedProviders,
+  SubContractedRegions,
+  SubContractedServices,
+  SubContractedTypeServices,
+} from './cubicacion.model';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
@@ -14,55 +21,12 @@ export interface StateCubicacion {
 }
 
 export const initialStateCubicacion: StateCubicacion = {
-  items: [
-    {
-      id: '123',
-      total: 300000,
-      nombre: 'Cubicación Test',
-      fecha_creacion: '2021-02-21T00:50:23Z',
-      usuario_id: 1212,
-      usuario_nombre: 'Carlos Cifuentes',
-      region_id: 1,
-      region_nombre: 'Metropolitana',
-      contrato_marco_nombre: 'Contrato nombre',
-      proveedor_id: 1,
-      proveedor_nombre: '',
-      subcontrato_id: 1
-    },
-    {
-      id: '1234',
-      total: 400000,
-      nombre: 'Cubicación Test',
-      fecha_creacion: '2021-02-21T00:50:23Z',
-      usuario_id: 1212,
-      usuario_nombre: 'Carlos Cifuentes',
-      region_id: 1,
-      region_nombre: 'Metropolitana',
-      contrato_marco_nombre: 'Contrato nombre',
-      proveedor_id: 1,
-      proveedor_nombre: '',
-      subcontrato_id: 1
-    },
-    {
-      id: '2222',
-      total: 500000,
-      nombre: 'Cubicación Test',
-      fecha_creacion: '2021-02-21T00:50:23Z',
-      usuario_id: 1212,
-      usuario_nombre: 'Carlos Cifuentes',
-      region_id: 1,
-      region_nombre: 'Metropolitana',
-      contrato_marco_nombre: 'Contrato nombre',
-      proveedor_id: 1,
-      proveedor_nombre: '',
-      subcontrato_id: 1
-    }
-  ],
+  items: [],
   contractMarco: [],
   subContractedProviders: [],
   subContractedRegions: [],
   subContractedTypeServices: [],
-  subContractedServices: []
+  subContractedServices: [],
 };
 
 export const reducerCubicacion = createReducer(
@@ -77,7 +41,7 @@ export const reducerCubicacion = createReducer(
     ...state,
     items: [
       ...state.items.slice(0, payload.cubicacionPosition),
-      ...state.items.slice(payload.cubicacionPosition + 1)
+      ...state.items.slice(payload.cubicacionPosition + 1),
     ],
   })),
   on(CubicacionActions.replyCubicacion, (state, payload) => ({
@@ -104,14 +68,26 @@ export const reducerCubicacion = createReducer(
   })),
 
   on(CubicacionActions.getSubContractedTypeServices, (state) => state),
-  on(CubicacionActions.getSubContractedTypeServicesSuccess, (state, payload) => ({
-    ...state,
-    subContractedTypeServices: payload.subContractedTypeServices,
-  })),
+  on(
+    CubicacionActions.getSubContractedTypeServicesSuccess,
+    (state, payload) => ({
+      ...state,
+      subContractedTypeServices: payload.subContractedTypeServices,
+    })
+  ),
 
   on(CubicacionActions.getSubContractedServices, (state) => state),
   on(CubicacionActions.getSubContractedServicesSuccess, (state, payload) => ({
     ...state,
     subContractedServices: payload.subContractedServices,
   })),
+
+  on(CubicacionActions.resetData, (state, payload) => ({
+    ...state,
+    contractMarco: [],
+    subContractedProviders: [],
+    subContractedRegions: [],
+    subContractedTypeServices: [],
+    subContractedServices: [],
+  }))
 );
