@@ -25,12 +25,12 @@ build a testing image:
     - docker-compose -f docker-compose.yml build --no-cache testing
     - docker-compose -f docker-compose.yml push testing
 
-robot framework:
-  stage: build test
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-  script:
-    - docker-compose build --no-cache robotframework
-    - docker-compose push robotframework
+# robot framework:
+#   stage: build test
+#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+#   script:
+#     - docker-compose build --no-cache robotframework
+#     - docker-compose push robotframework
 
 e2e robotframework:
   stage: e2e test

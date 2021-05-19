@@ -3,13 +3,20 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
-import { ContractMarco, Cubicacion, SubContractedProviders, SubContractedRegions, SubContractedServices, SubContractedTypeServices } from './cubicacion.model';
+import {
+  ContractMarco,
+  Cubicacion,
+  SubContractedProviders,
+  SubContractedRegions,
+  SubContractedServices,
+  SubContractedTypeServices,
+} from './cubicacion.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CubicacionFacade {
-  constructor(private store: Store<Cubicacion>) { }
+  constructor(private store: Store<Cubicacion>) {}
 
   // CUBICACION
   public getCubicacion(data): void {
@@ -22,7 +29,9 @@ export class CubicacionFacade {
 
   // DELETE
   public deleteCubicacion(position: number): void {
-    this.store.dispatch(cubicacionActions.deleteCubicacion({ cubicacionPosition: position }));
+    this.store.dispatch(
+      cubicacionActions.deleteCubicacion({ cubicacionPosition: position })
+    );
   }
   // DELETE
 
@@ -44,7 +53,9 @@ export class CubicacionFacade {
   }
 
   public getContractMarcoSuccess(contractMarco: ContractMarco[]): void {
-    this.store.dispatch(cubicacionActions.getContractMarcoSuccess({ contractMarco }));
+    this.store.dispatch(
+      cubicacionActions.getContractMarcoSuccess({ contractMarco })
+    );
   }
 
   public getContractMarco$(): Observable<ContractMarco[]> {
@@ -57,8 +68,14 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractProviders(data));
   }
 
-  public getSubContractedProvidersSuccess(subContractedProviders: SubContractedProviders[]): void {
-    this.store.dispatch(cubicacionActions.getSubContractProvidersSuccess({ subContractedProviders }));
+  public getSubContractedProvidersSuccess(
+    subContractedProviders: SubContractedProviders[]
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.getSubContractProvidersSuccess({
+        subContractedProviders,
+      })
+    );
   }
 
   public getSubContractedProviders$(): Observable<SubContractedProviders[]> {
@@ -71,8 +88,12 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedRegions(data));
   }
 
-  public getSubContractedRegionsSuccess(subContractedRegions: SubContractedRegions[]): void {
-    this.store.dispatch(cubicacionActions.getSubContractedRegionsSuccess({ subContractedRegions }));
+  public getSubContractedRegionsSuccess(
+    subContractedRegions: SubContractedRegions[]
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.getSubContractedRegionsSuccess({ subContractedRegions })
+    );
   }
 
   public getSubContractedRegions$(): Observable<SubContractedRegions[]> {
@@ -85,11 +106,19 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedTypeServices(data));
   }
 
-  public getSubContractedTypeServicesSuccess(subContractedTypeServices: SubContractedTypeServices[]): void {
-    this.store.dispatch(cubicacionActions.getSubContractedTypeServicesSuccess({ subContractedTypeServices }));
+  public getSubContractedTypeServicesSuccess(
+    subContractedTypeServices: SubContractedTypeServices[]
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.getSubContractedTypeServicesSuccess({
+        subContractedTypeServices,
+      })
+    );
   }
 
-  public getSubContractedTypeServices$(): Observable<SubContractedTypeServices[]> {
+  public getSubContractedTypeServices$(): Observable<
+    SubContractedTypeServices[]
+  > {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
   }
   // SUBCONTRACTTYPESERVICES
@@ -99,12 +128,22 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedServices(data));
   }
 
-  public getSubContractedServicesSuccess(subContractedServices: SubContractedServices[]): void {
-    this.store.dispatch(cubicacionActions.getSubContractedServicesSuccess({ subContractedServices }));
+  public getSubContractedServicesSuccess(
+    subContractedServices: SubContractedServices[]
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.getSubContractedServicesSuccess({
+        subContractedServices,
+      })
+    );
   }
 
   public getSubContractedServices$(): Observable<SubContractedServices[]> {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
+  }
+
+  public resetData(): void {
+    this.store.dispatch(cubicacionActions.resetData());
   }
   // SUBCONTRACTSERVICES
   // CUBICACION

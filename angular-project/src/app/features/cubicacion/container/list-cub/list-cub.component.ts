@@ -104,7 +104,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-pencil',
           class: 'p-button-rounded p-button-warning p-mr-2',
-          onClick: (item) => {
+          onClick: (event: Event, item) => {
             if (item) {
               this.router.navigate(['/app/cubicacion/form-cub', item.id]);
             }
