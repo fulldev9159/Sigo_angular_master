@@ -7,40 +7,34 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-import {
-  ContractMarco,
-  Cubicacion,
-  SubContractedProviders,
-  SubContractedRegions,
-  SubContractedServices,
-  SubContractedTypeServices,
-} from '@storeOT/features/cubicacion/cubicacion.model';
+import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { MessageService } from 'primeng/api';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Login } from '@storeOT/features/auth/auth.model';
 @Component({
-  selector: 'app-form-cub',
-  templateUrl: './form-cub.component.html',
-  styleUrls: ['./form-cub.component.scss'],
+  selector: 'app-form-cub-container',
+  templateUrl: './form-cub-container.component.html',
+  styleUrls: ['./form-cub-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormCubComponent implements OnInit, OnDestroy {
-  // declarations
-  public lpus = [];
-  public authLogin = null;
+export class FormCubContainerComponent implements OnInit, OnDestroy {
+  public lpus: CubModel.SubContractedServices[] = [];
+  public authLogin: Login = null;
   public providers = null;
   public formCubicacion: FormGroup;
-  public constractMarco$: Observable<ContractMarco[]>;
-  public subContractedProviders: SubContractedProviders[];
-  public subContractedProviders$: Observable<SubContractedProviders[]> = of([]);
-  public subContractedRegions: SubContractedRegions[];
-  public subContractedRegions$: Observable<SubContractedRegions[]> = of([]);
-  public subContractedTypeServices: SubContractedTypeServices[];
-  public subContractedTypeServices$: Observable<SubContractedTypeServices[]> =
+  public constractMarco$: Observable<CubModel.ContractMarco[]>;
+  public subContractedProviders$: Observable<
+    CubModel.SubContractedProviders[]
+  > = of([]);
+  public subContractedRegions$: Observable<CubModel.SubContractedRegions[]> =
     of([]);
-  public subContractedServices: SubContractedServices[];
-  public subContractedServices$: Observable<SubContractedServices[]> = of();
+  public subContractedTypeServices$: Observable<
+    CubModel.SubContractedTypeServices[]
+  > = of([]);
+  public subContractedServices$: Observable<CubModel.SubContractedServices[]> =
+    of();
   private destroyInstance$: Subject<boolean> = new Subject();
 
   constructor(
@@ -52,35 +46,17 @@ export class FormCubComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // inicializamos formulario reactivo
     this.initForm();
-
-    // rescatamos data inicial
-    this.constractMarco$ = this.cubageFacade.getContractMarco$();
-    this.subContractedProviders$ = this.cubageFacade
-      .getSubContractedProviders$()
-      .pipe(map((providers) => (this.providers = providers)));
-    this.subContractedRegions$ = this.cubageFacade.getSubContractedRegions$();
+    this.constractMarco$ = this.cubageFacade.getContractMarcoSelector$();
+    this.subContractedProviders$ =
+      this.cubageFacade.getSubContractedProvidersSelector$();
+    this.subContractedRegions$ =
+      this.cubageFacade.getSubContractedRegionsSelector$();
     this.subContractedTypeServices$ =
-      this.cubageFacade.getSubContractedTypeServices$();
-    this.subContractedServices$ = this.cubageFacade.getSubContractedServices$();
-
-    // traemos contratos des api mediante efectos
-    this.authFacade
-      .getLogin$()
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe((authLogin) => {
-        if (authLogin) {
-          // asignamos datos de usuario autenticado a variable local
-          this.authLogin = authLogin;
-
-          // rescatamos contratos marco desde api
-          this.cubageFacade.getContractMarco({
-            token: authLogin.token,
-            usuario_id: authLogin.usuario_id,
-          });
-        }
-      });
+      this.cubageFacade.getSubContractedTypeServicesSelector$();
+    this.subContractedServices$ =
+      this.cubageFacade.getSubContractedServicesSelector$();
+    this.cubageFacade.getContractMarcoAction();
   }
 
   ngOnDestroy(): void {
@@ -109,8 +85,6 @@ export class FormCubComponent implements OnInit, OnDestroy {
       lpus: [],
       tipo_servicio_id: null,
     });
-
-    // detectamos cambios en formulario
     this.detectChangesForm();
   }
 
@@ -120,11 +94,7 @@ export class FormCubComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((contrato_marco_id) => {
         if (contrato_marco_id) {
-          console.log('DENTRO contrato_marco_id...');
-          // actualizamos store para
-          // SubContractedProviders según ConstractMarco
-          this.cubageFacade.getSubContractedProviders({
-            token: this.authLogin.token,
+          this.cubageFacade.getSubContractedProvidersAction({
             contrato_marco_id: +contrato_marco_id,
           });
 
@@ -139,11 +109,7 @@ export class FormCubComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((proveedor_id) => {
         if (proveedor_id) {
-          console.log('DENTRO proveedor_id...');
-          // actualizamos store para
-          // SubContractedProviders según ConstractMarco
-          this.cubageFacade.getSubContractedRegions({
-            token: this.authLogin.token,
+          this.cubageFacade.getSubContractedRegionsAction({
             subcontrato_id: +proveedor_id,
           });
 
@@ -158,11 +124,9 @@ export class FormCubComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((region_id) => {
         if (region_id) {
-          console.log('DENTRO region_id...');
           // actualizamos store
           // const provider = this.providers.find(p => +p.id === +this.formCubicacion.value.proveedor_id);
-          this.cubageFacade.getSubContractedTypeServices({
-            token: this.authLogin.token,
+          this.cubageFacade.getSubContractedTypeServicesAction({
             subcontrato_id: 3,
             region_id: +region_id,
           });
@@ -179,8 +143,7 @@ export class FormCubComponent implements OnInit, OnDestroy {
       .subscribe((tipo_servicio_id) => {
         if (tipo_servicio_id) {
           // actualizamos store
-          this.cubageFacade.getSubContractedServices({
-            token: this.authLogin.token,
+          this.cubageFacade.getSubContractedServicesAction({
             subcontrato_id: 3,
             region_id: +this.formCubicacion.value.region_id,
             tipo_servicio_id: +tipo_servicio_id,
@@ -210,7 +173,7 @@ export class FormCubComponent implements OnInit, OnDestroy {
     }
   }
 
-  selected(items: SubContractedServices[]): void {
+  selected(items: CubModel.SubContractedServices[]): void {
     this.lpus = items;
   }
 
@@ -242,7 +205,6 @@ export class FormCubComponent implements OnInit, OnDestroy {
     );
 
     const cubage = {
-      token: this.authLogin.token,
       // cubicacion_id: +form.cubicacion_id,
       cubicacion_nombre: form.nombre,
       total: 10000,
@@ -262,17 +224,12 @@ export class FormCubComponent implements OnInit, OnDestroy {
 
     this.cubageFacade.replyCubicacion(cubitation);
     this.cubageFacade.postCubicacion(cubage);
-    this.cubageFacade.resetData();
-    this.reset();
+    this.formCubicacion.reset();
     this.router.navigate(['app/cubicacion/list-cub']);
     this.messageService.add({
       severity: 'success',
       summary: 'Registro guardado',
       detail: 'Registro se ha generado con Éxito!',
     });
-  }
-
-  reset(): void {
-    this.cubageFacade.resetData();
   }
 }

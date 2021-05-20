@@ -27,9 +27,9 @@ export class JwtAppInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log(':::login:::');
-    console.log(this.token);
-    console.log(':::login:::');
+    // console.log(':::login:::');
+    // console.log(this.token);
+    // console.log(':::login:::');
     if (!req.url.includes('/login')) {
       const token = `Bearer ${this.token}`;
       req = req.clone({

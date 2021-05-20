@@ -1,5 +1,5 @@
 <div class="card">
-  <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
+  <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" [rowHover]="true"
     dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos"
     [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
     <ng-template *ngIf="config.header" pTemplate="caption">
@@ -19,11 +19,12 @@
             <th *ngSwitchCase="'CHECKBOX'" style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th *ngSwitchCase="'BOOLEANTEXT'" [pSortableColumn]="column.sort">{{column.field}} <p-sortIcon
+            <th *ngSwitchCase="'BOOLEANTEXT'" [pSortableColumn]="column.sort" >{{column.field}} <p-sortIcon
               [field]="column.sort">
             </p-sortIcon>
             </th>
-            <th *ngSwitchCase="'TEXT'" [pSortableColumn]="column.sort">{{column.field}} <p-sortIcon
+            <th *ngSwitchCase="'TEXT'" [pSortableColumn]="column.sort" [ngStyle]="{'width': column.width}">{{column.field}} 
+              <p-sortIcon *ngIf="column.sort"
                 [field]="column.sort">
               </p-sortIcon>
             </th>

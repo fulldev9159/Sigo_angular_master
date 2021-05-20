@@ -2,16 +2,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { FormCubComponent } from './form-cub.component';
+import { FormCubContainerComponent } from './form-cub-container.component';
 
 describe('FormCubContainer', () => {
-  let component: FormCubComponent;
-  let fixture: ComponentFixture<FormCubComponent>;
+  let component: FormCubContainerComponent;
+  let fixture: ComponentFixture<FormCubContainerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
-      declarations: [FormCubComponent],
+      declarations: [FormCubContainerComponent],
       providers: [
         FormBuilder,
         FormGroup,
@@ -21,7 +21,7 @@ describe('FormCubContainer', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormCubComponent);
+    fixture = TestBed.createComponent(FormCubContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

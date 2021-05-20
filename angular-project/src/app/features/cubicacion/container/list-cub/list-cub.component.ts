@@ -26,6 +26,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
     headerConfig: {
       title: '',
       searchText: 'buscar...',
+      paginator: true,
     },
     body: {
       headers: [
@@ -143,7 +144,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyInstance))
       .subscribe((authLogin) => {
         if (authLogin) {
-          this.cubageFacade.getCubicacion({ token: authLogin.token });
+          this.cubageFacade.getCubicacion();
         }
       });
 

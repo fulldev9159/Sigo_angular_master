@@ -31,6 +31,7 @@ export class ListProComponent implements OnInit, OnDestroy {
     headerConfig: {
       title: '',
       searchText: 'buscar...',
+      paginator: true,
     },
     body: {
       headers: [
