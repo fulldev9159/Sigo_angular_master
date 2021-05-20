@@ -48,7 +48,7 @@ export interface SubContractedServices {
   tipo_servicio: string;
 }
 
-export interface saveCubicacionRequest {
+export interface SaveCubicacionRequest {
   cubicacion_nombre: string;
   region_id: number;
   usuario_id: number;
