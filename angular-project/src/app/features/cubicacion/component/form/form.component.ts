@@ -63,7 +63,7 @@ export class FormComponent implements OnInit, OnDestroy {
         },
         {
           field: 'Cantidad	',
-          type: 'TEXT',
+          type: 'INPUTNUMBER',
           sort: 'quantity',
           header: 'quantity',
           editable: false,
