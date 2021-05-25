@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   deploy:
-    image: registryv2.zweicom.com:5000/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}
+    image: gcr.io/zwcsce/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}
     build:
       context: .
       dockerfile: docker/deploy/Dockerfile

@@ -1,3 +1,10 @@
+.connect_gcr: &connect_gcr
+    before_script:
+        - echo $GCLOUD_SERVICE_KEY
+        - echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+        - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+        - docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
+
 stages:
   - ci
   - deployment
@@ -8,7 +15,7 @@ variables:
 
 ci:
   stage: ci
-  image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
+  image: trion/ng-cli-karma:${CLI_VERSION}
   script:
     - cd angular-project
     - npm ci
@@ -17,8 +24,9 @@ ci:
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
 docker:
+  <<: *connect_gcr
   stage: deployment
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest 
   script:
     - docker-compose -f docker-compose.yml build --no-cache deploy
     - docker-compose -f docker-compose.yml push deploy

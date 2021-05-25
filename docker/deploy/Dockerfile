@@ -1,4 +1,4 @@
-FROM registryv2.zweicom.com:5000/trion/ng-cli:10.1.6 AS base
+FROM trion/ng-cli:10.1.6 AS base
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ RUN ng build --prod
 RUN sed -i "s/commit_hash = ''/commit_hash = '${CI_COMMIT_SHA}'/" dist/otec/index.html
 RUN sed -i "s/build_date = ''/build_date = '$(date)'/" dist/otec/index.html
 
-FROM registryv2.zweicom.com:5000/nginx:alpine
+FROM nginx:alpine
 
 COPY angular-project/nginx/nginx.conf /etc/nginx/nginx.conf
 
