@@ -8,9 +8,16 @@ stages:
 variables:
   CLI_VERSION: 10.1.6
 
+.connect_gcr: &connect_gcr
+    before_script:
+        - echo $GCLOUD_SERVICE_KEY
+        - echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+        - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+        - docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
+
 unit test and lint:
   stage: unit test
-  image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
+  image: trion/ng-cli-karma:${CLI_VERSION}
   script:
     - cd angular-project
     - npm ci
@@ -19,8 +26,9 @@ unit test and lint:
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
 build a testing image:
+  <<: *connect_gcr
   stage: build test
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
     - docker-compose -f docker-compose.yml build --no-cache testing
     - docker-compose -f docker-compose.yml push testing
@@ -34,9 +42,9 @@ build a testing image:
 
 e2e robotframework:
   stage: e2e test
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  image: tmaier/docker-compose:latest
   script:
-    - docker pull registryv2.zweicom.com:5000/mcl-otec-webclient:latest-develop
+    - docker pull gcr.io/zwcsce/mcl-otec-webclient:latest-develop
     - docker-compose -f docker-compose.yml down -v
     - docker-compose -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
     - docker-compose -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
@@ -50,8 +58,9 @@ e2e robotframework:
     - docker-compose -f docker-compose.yml down -v
 
 docker:
+  <<: *connect_gcr
   stage: deployment
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
     - docker-compose -f docker-compose.yml build --no-cache deploy
     - docker-compose -f docker-compose.yml push deploy
