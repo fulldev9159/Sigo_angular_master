@@ -9,6 +9,7 @@ import { Observable, of, Subject, Subscription } from 'rxjs';
 import { map, take, takeUntil } from 'rxjs/operators';
 import * as Model from '@storeOT/features/user/user.model';
 import * as _ from 'lodash';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-form-user',
@@ -70,7 +71,10 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
     this.providers$ = this.userFacade.getProviders$();
 
-    this.profiles$ = this.profileFacade.getProfile$();
+    this.profiles$ = this.profileFacade.getProfile$()
+      .pipe(map(prof => {
+        return prof;
+      }), takeUntil(this.destroyInstance$));
 
     this.highers$ = this.userFacade.getHighers$()
       .pipe(
@@ -104,7 +108,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
                 if (res) {
                   // inicializamos formulario
                   this.formUser.patchValue(res);
-                  if (res.perfiles.length > 1) {
+                  if (res.perfiles.length > 0) {
                     res.perfiles.forEach(profile => {
                       this.addProfile(profile);
                     });
@@ -151,10 +155,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
     });
 
     const subscriptionForm = this.formUser.get('proveedor_id').valueChanges
-      .pipe(take(1), takeUntil(this.destroyInstance$))
+      .pipe(takeUntil(this.destroyInstance$))
       .subscribe(p => {
         if (p) {
-          // this.proveedor_id = +p;
           this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: +p });
         }
       });
@@ -167,6 +170,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
           if (provider === 'false') {
             // rescatamos contratos para contratista
             this.formUser.get('proveedor_id').setValue(null);
+            this.formUser.get('contratos_marco').setValue(null);
             // this.proveedor_id = null;
             this.userFacade.getProviders({ token: this.authLogin.token, interno: true });
             this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null });
@@ -174,8 +178,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
           }
 
           if (provider === 'true') {
+            this.formUser.get('proveedor_id').setValue(null);
+            this.formUser.get('contratos_marco').setValue(null);
             this.userFacade.getProviders({ token: this.authLogin.token, interno: false });
             this.userFacade.getAreas({ token: this.authLogin.token, interno: false });
+            this.userFacade.getContractsSuccess({ contract: null });
           }
         }
       });
