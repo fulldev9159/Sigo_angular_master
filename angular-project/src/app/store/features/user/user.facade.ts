@@ -10,7 +10,7 @@ import * as Model from './user.model';
   providedIn: 'root',
 })
 export class UserFacade {
-  constructor(private store: Store<Model.User>) {}
+  constructor(private store: Store<Model.User>) { }
 
   // USER
   public getUsers(): void {
@@ -71,6 +71,10 @@ export class UserFacade {
   // CONTRACT
   public getContracts(data): void {
     this.store.dispatch(userActions.getContracts(data));
+  }
+
+  public getContractsSuccess(data): void {
+    this.store.dispatch(userActions.getContractsSuccess(data));
   }
 
   public getContracts$(): Observable<Model.Contract[]> {

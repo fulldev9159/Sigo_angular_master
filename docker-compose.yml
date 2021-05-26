@@ -27,7 +27,7 @@ services:
     expose:
       - 3306
   mcl_test_sigo_api:
-    image: gcr.io/zwcsce/api-otec:develop
+    image: gcr.io/zwcsce/api-sigo:develop
     environment:
       TZ: America/Santiago
       LOG_LEVEL: INFO
@@ -37,8 +37,8 @@ services:
       DB_MAXIDLECONNECTIONS: 5
       DB_PINGINTERVAL: 30
       DB_MAXLIFETIMECONNECTION: 300
-      API_SCE_ADDRESS: http://34.122.92.38:2004
-      MOCKUP_PATH: /go/bin/mockups/
+      API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
+      MOCKUP_PATH: /go/bin/mockups
     restart: always
     # ports:
     #   - 4040:4040
@@ -66,7 +66,7 @@ services:
 
 # LOCAL
   mcl_local_sigo_api:
-    image: gcr.io/zwcsce/api-otec:develop
+    image: gcr.io/zwcsce/api-sigo:develop
     environment:
       TZ: America/Santiago
       LOG_LEVEL: INFO
@@ -76,8 +76,8 @@ services:
       DB_MAXIDLECONNECTIONS: 5
       DB_PINGINTERVAL: 30
       DB_MAXLIFETIMECONNECTION: 300
-      API_SCE_ADDRESS: http://34.122.92.38:2004
-      MOCKUP_PATH: /go/bin/mockups/
+      API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
+      MOCKUP_PATH: /go/bin/mockups
     restart: always
     ports: 
       - 4040:4040
@@ -124,7 +124,7 @@ services:
       DB_MAXIDLECONNECTIONS: 5
       DB_PINGINTERVAL: 30
       DB_MAXLIFETIMECONNECTION: 300
-      API_SCE_ADDRESS: http://34.122.92.38:2004
+      API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
     restart: always
     expose:
       - 4040
@@ -144,4 +144,11 @@ services:
     build:
       context: .
       dockerfile: docker/robotframework/Dockerfile
+  
+  dockerize-test-waiting:
+    image: "jwilder/dockerize"
+    command: >
+      -timeout 5m -wait-retry-interval 10s
+      -wait tcp://mcl_test_sigo_db:3306
+      -wait tcp://mcl_test_sigo_api:4040
     

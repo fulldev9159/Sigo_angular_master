@@ -23,7 +23,7 @@ Open Browser To Page
     # Set Window Size     1500    1500
     Create WebDriver           Chrome                        chrome_options=${options}
     Maximize Browser Window
-    Go To                      ${page}                       
+    Go To                      ${page}
 
 Login
     [Arguments]                  ${username}      ${password}
@@ -56,21 +56,36 @@ Select item value
     Select From List By Value    ${select element}    ${value}
 
 Usuario
-    [Arguments]                  ${username}     ${documento}     ${nombres}     ${apellidos}     ${email}  
-    input text                        name:username                                 ${username} 
-    input text                        name:documento-input                          ${documento} 
-    input text                        name:nombre-input                             ${nombres} 
-    input text                        name:apellidos-input                          ${apellidos} 
-    input text                        name:email-input                              ${email} 
+    [Arguments]                  ${username}     ${documento}     ${nombres}     ${apellidos}     ${email}
+    input text                        name:username                                 ${username}
+    input text                        name:documento-input                          ${documento}
+    input text                        name:nombre-input                             ${nombres}
+    input text                        name:apellidos-input                          ${apellidos}
+    input text                        name:email-input                              ${email}
     Select item                       css:#proveedor_id > select                    Telefonica Chile Servicios Corporativos Ltda.
     Select item                       css:#area_id > select                         CONECTIVIDAD Y BACKHAUL
-    Click Visible Element             id:contratos_marco_multi     
-    Wait Until Element Is Visible     id:contratos_marco_multi                     
+    Click Visible Element             id:contratos_marco_multi
+    Wait Until Element Is Visible     id:contratos_marco_multi
     Click Visible Element             css:.p-multiselect-items-wrapper>ul>cdk-virtual-scroll-viewport>div>p-multiselectitem:nth-child(1)>li>div>div
     Click Visible Element             id: caja_formulario
     sleep  2
     Scroll Element Into View          css:#perfil_id > select
     Select item                       css:#perfil_id > select                       Admin
+    element should be enabled         id:submit-user
+    Click Visible Element             id:submit-user
+
+UsuarioEdit
+    [Arguments]                   ${documento}     ${nombres}     ${apellidos}     ${email}
+    input text                        name:documento-input                          ${documento}
+    input text                        name:nombre-input                             ${nombres}
+    input text                        name:apellidos-input                          ${apellidos}
+    input text                        name:email-input                              ${email}
+    Select item                       css:#proveedor_id > select                    Telefonica Chile Servicios Corporativos Ltda.
+    Select item                       css:#area_id > select                         CONECTIVIDAD Y BACKHAUL
+    Click Visible Element             id:contratos_marco_multi
+    Wait Until Element Is Visible     id:contratos_marco_multi
+    Click Visible Element             css:.p-multiselect-items-wrapper>ul>cdk-virtual-scroll-viewport>div>p-multiselectitem:nth-child(1)>li>div>div
+    Click Visible Element             id: caja_formulario
     element should be enabled         id:submit-user
     Click Visible Element             id:submit-user
 
