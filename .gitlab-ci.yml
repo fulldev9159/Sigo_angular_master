@@ -7,10 +7,17 @@ stages:
 
 variables:
   CLI_VERSION: 10.1.6
+  GIT_STRATEGY: clone
+
+.connect_gcr: &connect_gcr
+  before_script:
+    - echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+    - docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
 
 unit test and lint:
   stage: unit test
-  image: registryv2.zweicom.com:5000/trion/ng-cli-karma:${CLI_VERSION}
+  image: trion/ng-cli-karma:${CLI_VERSION}
   script:
     - cd angular-project
     - npm ci
@@ -19,24 +26,27 @@ unit test and lint:
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
 build a testing image:
+  <<: *connect_gcr
   stage: build test
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
     - docker-compose -f docker-compose.yml build --no-cache testing
     - docker-compose -f docker-compose.yml push testing
 
-# robot framework:
-#   stage: build test
-#   image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
-#   script:
-#     - docker-compose build --no-cache robotframework
-#     - docker-compose push robotframework
+robot framework:
+  <<: *connect_gcr
+  stage: build test
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+  script:
+    - docker-compose build --no-cache robotframework
+    - docker-compose push robotframework
 
 e2e robotframework:
+  <<: *connect_gcr
   stage: e2e test
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
-    - docker pull registryv2.zweicom.com:5000/mcl-otec-webclient:latest-develop
+    - docker pull gcr.io/zwcsce/mcl-otec-webclient:latest-testing
     - docker-compose -f docker-compose.yml down -v
     - docker-compose -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
     - docker-compose -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
@@ -45,13 +55,17 @@ e2e robotframework:
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_api
     - sleep 1
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_web
+    # - docker-compose -p ${CI_PIPELINE_ID} run dockerize-test-waiting
     - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
-  after_script:
-    - docker-compose -f docker-compose.yml down -v
+  # after_script:
+  #   - docker-compose -f docker-compose.yml down -v
+  tags:
+    - docker_sigo
 
 docker:
+  <<: *connect_gcr
   stage: deployment
-  image: registryv2.zweicom.com:5000/tmaier/docker-compose:latest
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
     - docker-compose -f docker-compose.yml build --no-cache deploy
     - docker-compose -f docker-compose.yml push deploy

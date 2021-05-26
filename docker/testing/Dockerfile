@@ -1,4 +1,4 @@
-FROM registryv2.zweicom.com:5000/robotframework:latest
+FROM gcr.io/zwcsce/robotframework:latest
 
 WORKDIR /app
 

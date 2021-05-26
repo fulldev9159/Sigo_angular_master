@@ -2,20 +2,20 @@ version: "3.4"
 
 services:
   deploy:
-    image: registryv2.zweicom.com:5000/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}
+    image: gcr.io/zwcsce/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}
     build:
       context: .
       dockerfile: docker/deploy/Dockerfile
 
   testing:
-    image: registryv2.zweicom.com:5000/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}-testing
+    image: gcr.io/zwcsce/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}-testing
     build:
       context: .
       dockerfile: docker/deploy/Dockerfile
 
 # TESTING
   mcl_test_sigo_db:
-    image: registryv2.zweicom.com:5000/mcl-otec-db:latest
+    image: gcr.io/zwcsce/mcl-otec-db:latest
     restart: always
     environment:
       TZ: America/Santiago
@@ -27,7 +27,7 @@ services:
     expose:
       - 3306
   mcl_test_sigo_api:
-    image: registryv2.zweicom.com:5000/api-otec:develop
+    image: gcr.io/zwcsce/api-sigo:develop
     environment:
       TZ: America/Santiago
       LOG_LEVEL: INFO
@@ -37,8 +37,8 @@ services:
       DB_MAXIDLECONNECTIONS: 5
       DB_PINGINTERVAL: 30
       DB_MAXLIFETIMECONNECTION: 300
-      API_SCE_ADDRESS: http://35.192.99.178:2004
-      MOCKUP_PATH: /go/bin/mockups/
+      API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
+      MOCKUP_PATH: /go/bin/mockups
     restart: always
     # ports:
     #   - 4040:4040
@@ -47,7 +47,7 @@ services:
     depends_on:
       - mcl_test_sigo_db
   mcl_test_sigo_web:
-    image: registryv2.zweicom.com:5000/mcl-otec-webclient:latest-testing
+    image: gcr.io/zwcsce/mcl-otec-webclient:latest-testing
     environment:
       WEBAPI_NAME: "mcl_test_sigo_api"
       WEBAPI_PORT: "4040"
@@ -66,7 +66,7 @@ services:
 
 # LOCAL
   mcl_local_sigo_api:
-    image: registryv2.zweicom.com:5000/api-otec:develop
+    image: gcr.io/zwcsce/api-sigo:develop
     environment:
       TZ: America/Santiago
       LOG_LEVEL: INFO
@@ -76,8 +76,8 @@ services:
       DB_MAXIDLECONNECTIONS: 5
       DB_PINGINTERVAL: 30
       DB_MAXLIFETIMECONNECTION: 300
-      API_SCE_ADDRESS: http://35.192.99.178:2004
-      MOCKUP_PATH: /go/bin/mockups/
+      API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
+      MOCKUP_PATH: /go/bin/mockups
     restart: always
     ports: 
       - 4040:4040
@@ -85,7 +85,7 @@ services:
       - mcl_test_sigo_db
 
   mcl_local_sigo_db:
-    image: registryv2.zweicom.com:5000/mcl-otec-db:latest
+    image: gcr.io/zwcsce/mcl-otec-db:latest
     restart: always
     environment:
       TZ: America/Santiago
@@ -99,7 +99,7 @@ services:
       
   #   MVP
   mvp_otec_db:
-    image: registryv2.zweicom.com:5000/mcl-otec-db:mvp-demp
+    image: gcr.io/zwcsce/mcl-otec-db:mvp-demp
     restart: always
     environment:
       TZ: America/Santiago
@@ -114,7 +114,7 @@ services:
         "--collation-server=utf8mb4_unicode_ci",
       ]
   mvp_api_otec:
-    image: registryv2.zweicom.com:5000/api-otec:mvp-demp
+    image: gcr.io/zwcsce/api-otec:mvp-demp
     environment:
       TZ: America/Santiago
       LOG_LEVEL: INFO
@@ -124,14 +124,14 @@ services:
       DB_MAXIDLECONNECTIONS: 5
       DB_PINGINTERVAL: 30
       DB_MAXLIFETIMECONNECTION: 300
-      API_SCE_ADDRESS: http://35.192.99.178:2004
+      API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
     restart: always
     expose:
       - 4040
     depends_on:
       - mvp_otec_db
   mvp_otec_web:
-    image: registryv2.zweicom.com:5000/mcl-otec-webclient:mvp-demp
+    image: gcr.io/zwcsce/mcl-otec-webclient:mvp-demp
     environment:
       WEBAPI_NAME: "mvp_api_otec"
       WEBAPI_PORT: "4040"
@@ -140,8 +140,15 @@ services:
     restart: always
 
   robotframework:
-    image: registryv2.zweicom.com:5000/robotframework:${CI_COMMIT_TAG:-latest}
+    image: gcr.io/zwcsce/robotframework:${CI_COMMIT_TAG:-latest}
     build:
       context: .
       dockerfile: docker/robotframework/Dockerfile
+  
+  dockerize-test-waiting:
+    image: "jwilder/dockerize"
+    command: >
+      -timeout 5m -wait-retry-interval 10s
+      -wait tcp://mcl_test_sigo_db:3306
+      -wait tcp://mcl_test_sigo_api:4040
     
