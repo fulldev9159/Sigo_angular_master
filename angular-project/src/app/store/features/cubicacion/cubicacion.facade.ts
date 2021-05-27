@@ -19,8 +19,8 @@ export class CubicacionFacade {
   constructor(private store: Store<Cubicacion>) {}
 
   // CUBICACION
-  public getCubicacion(data): void {
-    this.store.dispatch(cubicacionActions.getCubicacion(data));
+  public getCubicacion(): void {
+    this.store.dispatch(cubicacionActions.getCubicacion());
   }
 
   public getCubicacion$(): Observable<Cubicacion[]> {
@@ -48,8 +48,8 @@ export class CubicacionFacade {
   // POST
 
   // CONSTRACT MARCO
-  public getContractMarco(data): void {
-    this.store.dispatch(cubicacionActions.getContractMarco(data));
+  public getContractMarcoAction(): void {
+    this.store.dispatch(cubicacionActions.getContractMarco());
   }
 
   public getContractMarcoSuccess(contractMarco: ContractMarco[]): void {
@@ -58,13 +58,13 @@ export class CubicacionFacade {
     );
   }
 
-  public getContractMarco$(): Observable<ContractMarco[]> {
+  public getContractMarcoSelector$(): Observable<ContractMarco[]> {
     return this.store.select(cubicacionSelectors.getConstractMarco);
   }
   // CONSTRACT MARCO
 
   // SUBCONTRACTPROVIDERS
-  public getSubContractedProviders(data): void {
+  public getSubContractedProvidersAction(data): void {
     this.store.dispatch(cubicacionActions.getSubContractProviders(data));
   }
 
@@ -78,13 +78,13 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedProviders$(): Observable<SubContractedProviders[]> {
+  public getSubContractedProvidersSelector$(): Observable<SubContractedProviders[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);
   }
   // SUBCONTRACTPROVIDERS
 
   // SUBCONTRACTREGIONS
-  public getSubContractedRegions(data): void {
+  public getSubContractedRegionsAction(data): void {
     this.store.dispatch(cubicacionActions.getSubContractedRegions(data));
   }
 
@@ -96,13 +96,13 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedRegions$(): Observable<SubContractedRegions[]> {
+  public getSubContractedRegionsSelector$(): Observable<SubContractedRegions[]> {
     return this.store.select(cubicacionSelectors.getSubContractedRegions);
   }
   // SUBCONTRACTREGIONS
 
   // SUBCONTRACTTYPESERVICES
-  public getSubContractedTypeServices(data): void {
+  public getSubContractedTypeServicesAction(data): void {
     this.store.dispatch(cubicacionActions.getSubContractedTypeServices(data));
   }
 
@@ -116,15 +116,13 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedTypeServices$(): Observable<
-    SubContractedTypeServices[]
-  > {
+  public getSubContractedTypeServicesSelector$(): Observable<SubContractedTypeServices[]> {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
   }
   // SUBCONTRACTTYPESERVICES
 
   // SUBCONTRACTSERVICES
-  public getSubContractedServices(data): void {
+  public getSubContractedServicesAction(data): void {
     this.store.dispatch(cubicacionActions.getSubContractedServices(data));
   }
 
@@ -138,7 +136,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedServices$(): Observable<SubContractedServices[]> {
+  public getSubContractedServicesSelector$(): Observable<SubContractedServices[]> {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
   }
 

@@ -63,7 +63,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
           this.authLogin = authLogin;
           this.formOt.get('token').setValue(this.authLogin.token);
           this.formOt.get('gestor_id').setValue(this.authLogin.usuario_id);
-          this.cubageFacade.getCubicacion({ token: authLogin.token });
+          this.cubageFacade.getCubicacion();
         }
       });
 

@@ -1,118 +1,118 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ContractMarco, SubContractedProviders, SubContractedRegions, SubContractedServices, SubContractedTypeServices } from '@storeOT/features/cubicacion/cubicacion.model';
-import { SeleccionType } from '@uiOT/seleccion/seleccion.model';
+import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent implements OnInit, OnDestroy {
-
   // declarations
   @Input() formCubicacion: FormGroup;
-  @Input() constractMarco: ContractMarco[] = [];
-  @Input() subContractedProviders: SubContractedProviders[] = [];
-  @Input() subContractedRegions: SubContractedRegions[] = [];
-  @Input() subContractedTypeServices: SubContractedTypeServices[] = [];
-  @Input() subContractedServices: SubContractedServices[] = [];
+  @Input() constractMarco: CubModel.ContractMarco[] = [];
+  @Input() subContractedProviders: CubModel.SubContractedProviders[] = [];
+  @Input() subContractedRegions: CubModel.SubContractedRegions[] = [];
+  @Input() subContractedTypeServices: CubModel.SubContractedTypeServices[] = [];
+  @Input() subContractedServices: CubModel.SubContractedServices[] = [];
   @Output() public cancel = new EventEmitter();
   @Output() public save = new EventEmitter();
   @Output() public selected = new EventEmitter();
   private destroyInstance$: Subject<boolean> = new Subject();
+  public lpuSelected: CubModel.SubContractedServices[];
   public configTable = {
     header: true,
     headerConfig: {
       title: '',
-      searchText: 'buscar...'
+      searchText: 'buscar...',
+      paginator: false,
     },
     body: {
       headers: [
         {
-          field: null,
-          type: 'CHECKBOX',
-          sort: 'id',
-          header: 'id',
-          editable: false
-        },
-        {
-          field: 'Sesión SCE',
+          field: 'Servicio LPU',
           type: 'TEXT',
-          sort: 'name',
-          header: 'name',
-          editable: false
+          sort: 'lpu_nombre',
+          header: 'lpu_nombre',
+          width: '33%',
+          editable: false,
         },
         {
-          field: 'Nombre',
-          type: 'NUMBER',
-          sort: 'price',
-          header: 'price',
-          editable: false
-        },
-        {
-          field: 'Fecha inicio',
+          field: 'Región',
           type: 'TEXT',
-          sort: 'category',
-          header: 'category',
-          editable: false
+          header: 'region',
+          width: '10%',
+          editable: false,
         },
         {
-          field: 'Fecha termino	',
+          field: 'Tipo Servicio',
           type: 'TEXT',
+          sort: 'tipo_servicio',
+          header: 'tipo_servicio',
+          editable: false,
+        },
+        {
+          field: 'Cantidad	',
+          type: 'INPUTNUMBER',
           sort: 'quantity',
           header: 'quantity',
-          editable: false
+          editable: false,
         },
         {
-          field: 'Contrato marco	',
+          field: 'Unidad	',
           type: 'TEXT',
           sort: 'inventoryStatus',
           header: 'inventoryStatus',
-          editable: false
+          editable: false,
+        },
+        {
+          field: 'Precio',
+          type: 'NUMBER',
+          sort: 'lpu_precio',
+          header: 'lpu_precio',
+          editable: false,
         },
         {
           field: null,
           type: 'ACTIONS',
           sort: null,
           header: null,
-          editable: false
-        }
+          editable: false,
+        },
       ],
+      sort: ['lpu_nombre', 'tipo_servicio', 'lpu_precio'],
       actions: [
         {
-          icon: 'p-button-icon pi pi-save',
-          class: 'p-button-rounded p-button-success p-mr-2',
-          onClick: (item) => {
-            console.log(item);
-          }
-        },
-        {
-          icon: 'p-button-icon pi pi-pencil',
+          icon: 'p-button-icon pi pi-eye',
           class: 'p-button-rounded p-button-warning p-mr-2',
           onClick: (item) => {
             console.log(item);
-          }
+          },
         },
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
           onClick: (item) => {
             console.log(item);
-          }
-        }
-      ]
-    }
+          },
+        },
+      ],
+    },
   };
 
+  constructor() {}
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destroyInstance$.next(true);
@@ -120,7 +120,23 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   itemSelected(event: any): void {
-    console.log(event);
+    const regionIDstr = 'region_id';
+    const regionID = this.formCubicacion.controls[regionIDstr].value;
+    const tipoServicioIDstr = 'tipo_servicio_id';
+    const tipoServicioID =
+      this.formCubicacion.controls[tipoServicioIDstr].value;
+    const regionName = this.subContractedRegions.filter(
+      (x) => x.id === +regionID
+    )[0].codigo;
+    const tipoServicioName = this.subContractedTypeServices.filter(
+      (x) => x.id === +tipoServicioID
+    )[0].nombre;
+
+    this.lpuSelected = event.value.map((x) => ({
+      ...x,
+      region: regionName,
+      tipo_servicio: tipoServicioName,
+    }));
     this.selected.emit(event.value);
   }
 
@@ -131,5 +147,4 @@ export class FormComponent implements OnInit, OnDestroy {
   saveAction(): void {
     this.save.emit(true);
   }
-
 }

@@ -10,8 +10,7 @@ import {
 
 // CUBICACION LIST
 export const getCubicacion = createAction(
-  '[Cubicacion GetAll] GET Cubicacion',
-  props<{ token: string }>()
+  '[Cubicacion GetAll] GET Cubicacion'
 );
 
 export const getCubicacionSuccess = createAction(
@@ -87,10 +86,7 @@ export const postCubicacionError = createAction(
 // CUBICACION LIST
 
 // CUBICACION FORM
-export const getContractMarco = createAction(
-  '[ContactMarco Get] GET Data',
-  props<{ token: string; usuario_id: number }>()
-);
+export const getContractMarco = createAction('[ContactMarco Get] GET Data');
 
 export const getContractMarcoSuccess = createAction(
   '[ContactMarco Get] GET Data Success',
@@ -104,7 +100,7 @@ export const getContractMarcoError = createAction(
 
 export const getSubContractProviders = createAction(
   '[SubContractedProviders Get] GET Data',
-  props<{ token: string; contrato_marco_id: number }>()
+  props<{ contrato_marco_id: number }>()
 );
 
 export const getSubContractProvidersSuccess = createAction(
@@ -119,7 +115,7 @@ export const getSubContractProvidersError = createAction(
 
 export const getSubContractedRegions = createAction(
   '[SubContractedRegions Get] GET Data',
-  props<{ token: string; subcontrato_id: number }>()
+  props<{ subcontrato_id: number }>()
 );
 
 export const getSubContractedRegionsSuccess = createAction(
@@ -134,7 +130,7 @@ export const getSubContractedRegionsError = createAction(
 
 export const getSubContractedTypeServices = createAction(
   '[SubContractedTypeServices Get] GET Data',
-  props<{ token: string; subcontrato_id: number; region_id: number }>()
+  props<{ subcontrato_id: number; region_id: number }>()
 );
 
 export const getSubContractedTypeServicesSuccess = createAction(
@@ -150,7 +146,6 @@ export const getSubContractedTypeServicesError = createAction(
 export const getSubContractedServices = createAction(
   '[SubContractedServices Get] GET Data',
   props<{
-    token: string;
     subcontrato_id: number;
     region_id: number;
     tipo_servicio_id: number;

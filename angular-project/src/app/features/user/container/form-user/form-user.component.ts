@@ -62,9 +62,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.profilesMandatory$ = of([]);
-
     this.initForm();
 
     this.areas$ = this.userFacade.getAreas$();

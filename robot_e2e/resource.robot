@@ -46,14 +46,15 @@ Click Visible Element
 Select item
     [Arguments]    ${selector}     ${value}
     ${select element}    Get WebElement    ${selector}
-    Click Visible Element    ${select element}
-    Select From List By Label    ${select element}    ${value}
+    Scroll Element Into View               ${select element}
+    Click Visible Element                  ${select element}
+    Select From List By Label              ${select element}    ${value}
 
 Select item value
     [Arguments]    ${selector}     ${value}
     ${select element}    Get WebElement    ${selector}
-    Click Visible Element        ${select element}
-    Select From List By Value    ${select element}    ${value}
+    Click Visible Element                  ${select element}
+    Select From List By Value              ${select element}    ${value}
 
 Usuario
     [Arguments]                  ${username}     ${documento}     ${nombres}     ${apellidos}     ${email}
@@ -73,6 +74,15 @@ Usuario
     Select item                       css:#perfil_id > select                       Admin
     element should be enabled         id:submit-user
     Click Visible Element             id:submit-user
+
+Crear Cubicacion
+   [Arguments]    ${nombre cubicacion}    ${contrato}    ${proveedor}    ${region}    ${tipo servicio}
+   input text                          name:input-nombreCubicacion                  ${nombre cubicacion}                     
+   Select item                         name:select-contratoMarco                    ${contrato} 
+   Select item                         name:select-proveedor                        ${proveedor}
+   Select item                         name:select-region                           ${region} 
+   Select item                         name:select-tipoServicio                     ${tipo servicio}
+   Click Visible Element               css:#page-content-wrapper > div > app-cubicacion > div > app-form-cub-container > div > app-card > div > div.card-body > app-form > div > div.col-xs-12.col-md-8 > div > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(1)
 
 UsuarioEdit
     [Arguments]                   ${documento}     ${nombres}     ${apellidos}     ${email}
