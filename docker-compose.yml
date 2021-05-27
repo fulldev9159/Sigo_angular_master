@@ -140,7 +140,7 @@ services:
     restart: always
 
   robotframework:
-    image: gcr.io/zwcsce/robotframework:${CI_COMMIT_TAG:-latest}
+    image: gcr.io/zwcsce/robotframework:latest-chrome
     build:
       context: .
       dockerfile: docker/robotframework/Dockerfile
