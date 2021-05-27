@@ -1,7 +1,7 @@
 # Project OTEC WEB
 
 ## Robot e2e
-documentación: https://robotframework.org/robotframework/
+Documentación: https://robotframework.org/robotframework/
 ### **command**
 
 > ``` robot --variable url:<url de la web a testear> --variable ambiente:ambiente en que se probará> <archivo o directorio de archivos de testing>```
