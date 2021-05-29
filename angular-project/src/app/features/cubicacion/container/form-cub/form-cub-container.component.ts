@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
@@ -84,6 +84,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       adm_contrato_nombre: null,
       lpus: [],
       tipo_servicio_id: null,
+      // tickets:new FormArray([])
     });
     this.detectChangesForm();
   }
@@ -225,11 +226,16 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.cubageFacade.replyCubicacion(cubitation);
     this.cubageFacade.postCubicacion(cubage);
     this.formCubicacion.reset();
+    this.cubageFacade.resetData();
     this.router.navigate(['app/cubicacion/list-cub']);
     this.messageService.add({
       severity: 'success',
       summary: 'Registro guardado',
       detail: 'Registro se ha generado con Éxito!',
     });
+  }
+
+  reset(): void {
+    this.cubageFacade.resetData();
   }
 }

@@ -27,6 +27,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
       title: '',
       searchText: 'buscar...',
       paginator: true,
+      actionsType: 'Buttons',
     },
     body: {
       headers: [

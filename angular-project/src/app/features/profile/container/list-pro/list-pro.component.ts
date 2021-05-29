@@ -32,6 +32,7 @@ export class ListProComponent implements OnInit, OnDestroy {
       title: '',
       searchText: 'buscar...',
       paginator: true,
+      actionsType: 'Buttons',
     },
     body: {
       headers: [
@@ -84,7 +85,7 @@ export class ListProComponent implements OnInit, OnDestroy {
                 nombre: item.nombre,
                 descripcion: item.descripcion,
                 permisos: item.permisos,
-                superior: item.superior_id
+                superior: item.superior_id,
               },
             });
 

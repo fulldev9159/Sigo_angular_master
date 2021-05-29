@@ -7,10 +7,9 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Subject } from 'rxjs';
-
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -29,13 +28,18 @@ export class FormComponent implements OnInit, OnDestroy {
   @Output() public save = new EventEmitter();
   @Output() public selected = new EventEmitter();
   private destroyInstance$: Subject<boolean> = new Subject();
-  public lpuSelected: CubModel.SubContractedServices[];
+  public lpuSelected: CubModel.SubContractedServices[] = [];
+  public total = 0;
+  // get f() { return this.formCubicacion.controls; }
+  // get t() { return this.f.tickets as FormArray; }
+
   public configTable = {
     header: true,
     headerConfig: {
       title: '',
       searchText: 'buscar...',
       paginator: false,
+      actionsType: 'Buttons',
     },
     body: {
       headers: [
@@ -56,7 +60,7 @@ export class FormComponent implements OnInit, OnDestroy {
         },
         {
           field: 'Tipo Servicio',
-          type: 'TEXT',
+          type: 'TEXT-TITLECASE',
           sort: 'tipo_servicio',
           header: 'tipo_servicio',
           editable: false,
@@ -64,9 +68,26 @@ export class FormComponent implements OnInit, OnDestroy {
         {
           field: 'Cantidad	',
           type: 'INPUTNUMBER',
-          sort: 'quantity',
-          header: 'quantity',
-          editable: false,
+          sort: 'cantidad',
+          header: 'cantidad',
+          editable: true,
+          onchange: (event: Event, item) => {
+            this.lpuSelected = this.lpuSelected.map((x) => {
+              if (x.lpu_id === item.lpu_id) {
+                return {
+                  ...x,
+                  cantidad: +(event.target as HTMLInputElement).value,
+                  lpu_subtotal: +(
+                    +x.lpu_precio * +(event.target as HTMLInputElement).value
+                  ),
+                };
+              }
+              return x;
+            });
+            this.total = this.lpuSelected.reduce((total, currentValue) => {
+              return total + currentValue.lpu_subtotal;
+            }, 0);
+          },
         },
         {
           field: 'Unidad	',
@@ -76,11 +97,24 @@ export class FormComponent implements OnInit, OnDestroy {
           editable: false,
         },
         {
+          field: 'Tipo Moneda	',
+          type: 'TEXT',
+          sort: 'tipo_moneda_cod',
+          header: 'tipo_moneda_cod',
+          editable: false,
+        },
+        {
           field: 'Precio',
           type: 'NUMBER',
           sort: 'lpu_precio',
           header: 'lpu_precio',
           editable: false,
+        },
+        {
+          field: 'Subtotal	',
+          type: 'NUMBER',
+          sort: 'lpu_subtotal',
+          header: 'lpu_subtotal',
         },
         {
           field: null,
@@ -132,11 +166,29 @@ export class FormComponent implements OnInit, OnDestroy {
       (x) => x.id === +tipoServicioID
     )[0].nombre;
 
-    this.lpuSelected = event.value.map((x) => ({
-      ...x,
-      region: regionName,
-      tipo_servicio: tipoServicioName,
-    }));
+    this.lpuSelected = event.value.map((x) => {
+      let cantidad = 1;
+      let lpu_subtotal = x.lpu_precio;
+      if (this.lpuSelected.length > 0) {
+        const lpuExistente = this.lpuSelected.filter(
+          (y) => +y.lpu_id === +x.lpu_id
+        );
+        if (lpuExistente.length > 0) {
+          cantidad = lpuExistente[0].cantidad;
+          lpu_subtotal = +(+x.lpu_precio * +cantidad);
+        }
+      }
+      return {
+        ...x,
+        region: regionName,
+        tipo_servicio: tipoServicioName,
+        cantidad,
+        lpu_subtotal,
+      };
+    });
+    this.total = this.lpuSelected.reduce((total, currentValue) => {
+      return total + currentValue.lpu_subtotal;
+    }, 0);
     this.selected.emit(event.value);
   }
 

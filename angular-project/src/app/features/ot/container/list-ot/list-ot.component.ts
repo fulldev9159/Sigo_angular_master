@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Ot } from '@storeOT/features/ot/ot.model';
@@ -10,10 +15,9 @@ import { map, takeUntil } from 'rxjs/operators';
   selector: 'app-list-ot',
   templateUrl: './list-ot.component.html',
   styleUrls: ['./list-ot.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOtComponent implements OnInit, OnDestroy {
-
   // declarations
   public items$: Observable<Ot[]>;
   private destroyInstance: Subject<boolean> = new Subject();
@@ -21,7 +25,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
     header: true,
     headerConfig: {
       title: '',
-      searchText: 'buscar...'
+      searchText: 'buscar...',
+      actionsType: 'Buttons',
     },
     body: {
       headers: [
@@ -37,52 +42,58 @@ export class ListOtComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'sesion_sce',
           header: 'sesion_sce',
-          editable: false
+          editable: false,
         },
         {
           field: 'Nombre',
           type: 'TEXT',
           sort: 'nombre',
           header: 'nombre',
-          editable: false
+          editable: false,
         },
         {
           field: 'Fecha inicio',
           type: 'DATE',
           sort: 'fecha_inicio',
           header: 'fecha_inicio',
-          editable: false
+          editable: false,
         },
         {
           field: 'Fecha termino',
           type: 'DATE',
           sort: 'fecha_termino',
           header: 'fecha_termino',
-          editable: false
+          editable: false,
         },
         {
           field: 'Contrato',
           type: 'TEXT',
           sort: 'contrato_marco_nombre',
           header: 'contrato_marco_nombre',
-          editable: false
+          editable: false,
         },
         {
           field: 'Proveedor',
           type: 'TEXT',
           sort: 'proveedor_nombre',
           header: 'proveedor_nombre',
-          editable: false
+          editable: false,
         },
         {
           field: null,
           type: 'ACTIONS',
           sort: null,
           header: null,
-          editable: false
-        }
+          editable: false,
+        },
       ],
-      sort: ['sesion_sce', 'nombre', 'fecha_inicio', 'contrato_marco_nombre', 'proveedor_nombre'],
+      sort: [
+        'sesion_sce',
+        'nombre',
+        'fecha_inicio',
+        'contrato_marco_nombre',
+        'proveedor_nombre',
+      ],
       actions: [
         {
           icon: 'p-button-icon pi pi-check',
@@ -94,10 +105,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
-              accept: () => {
-              },
+              accept: () => {},
             });
-          }
+          },
         },
         {
           icon: 'p-button-icon pi pi-times',
@@ -109,13 +119,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
               icon: 'pi pi-exclamation-triangle',
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
-              accept: () => {
-              },
+              accept: () => {},
             });
-          }
-        }
-      ]
-    }
+          },
+        },
+      ],
+    },
   };
 
   public data = [];
@@ -124,14 +133,19 @@ export class ListOtComponent implements OnInit, OnDestroy {
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
     private confirmationService: ConfirmationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.authFacade.getLogin$()
+    this.authFacade
+      .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe(authLogin => {
+      .subscribe((authLogin) => {
         if (authLogin) {
-          this.otFacade.getOt({ token: authLogin.token, usuario_id: authLogin.usuario_id, tipo_usuario: 'gestor' });
+          this.otFacade.getOt({
+            token: authLogin.token,
+            usuario_id: authLogin.usuario_id,
+            tipo_usuario: 'gestor',
+          });
         }
       });
 
@@ -142,5 +156,4 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.destroyInstance.next(true);
     this.destroyInstance.complete();
   }
-
 }

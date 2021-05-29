@@ -51,8 +51,11 @@
           <td *ngSwitchCase="'CHECKBOX'">
             <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
-          <td *ngSwitchCase="'TEXT'">{{item[column.header]| titlecase}}</td>
-          <td *ngSwitchCase="'INPUTNUMBER'"><input type="number" pInputText style="width: 100%;" /></td>
+          <td *ngSwitchCase="'TEXT-TITLECASE'" >{{item[column.header]| titlecase}}</td>
+          <td *ngSwitchCase="'TEXT'">{{item[column.header]}}</td>
+          <td *ngSwitchCase="'INPUTNUMBER'">
+            <input type="number" pInputText style="width: 100%;" (change)="item[column.onchange($event,item)]" value="{{item[column.header]}}" />
+          </td>
           <td *ngSwitchCase="'NUMBER'">{{item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
           <td *ngSwitchCase="'DATE'">{{item[column.header] | date:'dd-MM-yyyy'}}</td>
           <td *ngSwitchCase="'BOOLEANTEXT'">
@@ -60,7 +63,8 @@
             <span *ngIf="!item[column.header]">{{column.booleanfalse}}</span>
           </td>
           <td *ngSwitchCase="'ACTIONS'" id="action-buttons" [ngClass]="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6 ? 'action-buttons-flex' : ''">
-            <ng-container *ngIf="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6">
+            <!-- <ng-container *ngIf="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6"> -->
+            <ng-container *ngIf="config.headerConfig.actionsType==='Buttons'">
               <div *ngFor="let button of config.body.actions">
                 <div *ngIf="!item[button.conditionKey]" pTooltip="{{button.tooltip}}">
                   <button [disabled]="item[button.conditionKey] === false" pButton pRipple [icon]="button.icon"
@@ -71,7 +75,8 @@
                   *ngIf="item[button.conditionKey]"></button>
               </div>
             </ng-container>
-            <ng-container *ngIf="config.body.actions.length >4||config.body.headers.length>6">
+            <!-- <ng-container *ngIf="config.body.actions.length >4||config.body.headers.length>6"> -->
+              <ng-container *ngIf="config.headerConfig.actionsType==='Menu'">
                <app-menu [actions]="config.body.actions" [item]="item" [rowIndex]="rowIndex" ></app-menu>
             </ng-container>
           </td>

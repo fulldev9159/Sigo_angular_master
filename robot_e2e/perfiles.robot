@@ -51,7 +51,7 @@ Listar perfil y desplegar detalle
         Run Keyword If     ${areYouMyLine}    Exit For Loop
     END
     Should Be True    ${areYouMyLine}
-    Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(3)    Admincontrato
+    Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(3)    AdminContrato
     Click Visible Element                                         css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(5)>div:nth-child(2)>div>button
     Wait Until Element Is Visible    css:p-dialog                                                                                        timeout=3
     Element text should be    css:#permisos-modulo-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li>span.ng-star-inserted         Listar OT
@@ -77,7 +77,7 @@ Editar perfil
         Set Suite Variable    ${numero de fila}
         Run Keyword If     ${areYouMyLine}    Exit For Loop
     END
-    Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(3)    Admincontrato
+    Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(3)    AdminContrato
     Should Be True    ${areYouMyLine}
     Click Element                                                 css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>td:nth-child(5)>div:nth-child(1)>button
     Wait Until Element Is Visible    css:#title-create-profile>h1                                                                    timeout=3
@@ -104,7 +104,7 @@ Editar perfil
     #     Run Keyword If     ${areYouMyLine}    Exit For Loop
     # END
     # Should Be True    ${areYouMyLine}
-    # Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila2})>td:nth-child(3)    Admincontrato
+    # Element text should be    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila2})>td:nth-child(3)    AdminContrato
     # Click Visible Element                                               css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila2})>td:nth-child(5)>div:nth-child(2)>div>button
     # Wait Until Element Is Visible                                       css:p-dialog    timeout=3
 

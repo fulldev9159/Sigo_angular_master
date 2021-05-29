@@ -45,7 +45,9 @@ export interface SubContractedServices {
   tipo_moneda_cod: string;
   lpu_numero_producto: string;
   region: string;
+  lpu_subtotal: number;
   tipo_servicio: string;
+  cantidad: number;
 }
 
 export interface SaveCubicacionRequest {

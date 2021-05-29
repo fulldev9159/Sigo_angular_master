@@ -17,6 +17,7 @@ export class KituiComponent implements OnInit, OnDestroy {
     headerConfig: {
       title: 'Tabla de productos',
       searchText: 'buscar...',
+      actionsType: 'Buttons',
     },
     body: {
       headers: [
