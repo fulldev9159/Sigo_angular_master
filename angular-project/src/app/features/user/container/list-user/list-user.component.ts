@@ -34,6 +34,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
       title: '',
       searchText: 'buscar...',
       paginator: true,
+      actionsType: 'Menu',
     },
     body: {
       headers: [
@@ -53,14 +54,14 @@ export class ListUserComponent implements OnInit, OnDestroy {
         },
         {
           field: 'Nombres',
-          type: 'TEXT',
+          type: 'TEXT-TITLECASE',
           sort: 'nombres',
           header: 'nombres',
           editable: false,
         },
         {
           field: 'Apellidos',
-          type: 'TEXT',
+          type: 'TEXT-TITLECASE',
           sort: 'apellidos',
           header: 'apellidos',
           editable: false,
@@ -81,14 +82,14 @@ export class ListUserComponent implements OnInit, OnDestroy {
         // },
         {
           field: 'Empresa',
-          type: 'TEXT',
+          type: 'TEXT-TITLECASE',
           sort: 'proveedor_nombre',
           header: 'proveedor_nombre',
           editable: false,
         },
         {
           field: 'Area',
-          type: 'TEXT',
+          type: 'TEXT-TITLECASE',
           sort: 'area_nombre',
           header: 'area_nombre',
           editable: false,
