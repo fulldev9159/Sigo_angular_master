@@ -51,7 +51,7 @@
     <div style="height: 300px;max-height: 300px">
       <label for="">Servicios LPU</label>
       <p-listbox [metaKeySelection]="false" [options]="subContractedServices" [checkbox]="true" [filter]="true"
-        [multiple]="true" optionLabel="name" (onChange)="itemSelected($event)" [listStyle]="{'max-height':'203px'}">
+        [multiple]="true" optionLabel="lpu_nombre" (onChange)="itemSelected($event)" [listStyle]="{'max-height':'203px'}" >
         <ng-template let-data pTemplate="item">
           <div class="country-item">
             <div>{{ data.lpu_nombre }}</div>
