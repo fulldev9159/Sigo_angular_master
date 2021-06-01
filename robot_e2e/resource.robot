@@ -99,4 +99,19 @@ UsuarioEdit
     element should be enabled         id:submit-user
     Click Visible Element             id:submit-user
 
-
+Validar si existe en la Lista
+    [Arguments]    ${columna a validar}    ${nombre}
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                                timeout=5
+    ${cantidad de filas}=            get element count                                                                                   css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=                       Evaluate                                                                                            ${cantidad de filas} > 0
+    Should Be True                   ${status}
+    FOR    ${i}    IN RANGE    ${cantidad de filas}
+        ${txt nombre fila}=    Get Text                        css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(${columna a validar})
+        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre fila}    ${nombre}
+        Set Suite Variable    ${areYouMyLine}
+        ${numero de fila}   set variable    ${i + 1}
+        Set Suite Variable    ${numero de fila}
+        Run Keyword If     ${areYouMyLine}    Exit For Loop
+    END
+    Should Be True    ${areYouMyLine}
+    close Browser
