@@ -106,12 +106,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       });
 
     this.formCubicacion
-      .get('proveedor_id')
+      .get('subcontrato_id')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((proveedor_id) => {
-        if (proveedor_id) {
+      .subscribe((subcontratoId) => {
+        if (subcontratoId) {
+          console.log(subcontratoId);
           this.cubageFacade.getSubContractedRegionsAction({
-            subcontrato_id: +proveedor_id,
+            subcontrato_id: subcontratoId.split(',').map((x) => +x),
           });
 
           // refrescamos parte de
@@ -128,7 +129,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           // actualizamos store
           // const provider = this.providers.find(p => +p.id === +this.formCubicacion.value.proveedor_id);
           this.cubageFacade.getSubContractedTypeServicesAction({
-            subcontrato_id: 3,
+            subcontrato_id: this.formCubicacion.value.subcontrato_id
+              .split(',')
+              .map((x) => +x),
             region_id: +region_id,
           });
 
@@ -145,7 +148,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         if (tipo_servicio_id) {
           // actualizamos store
           this.cubageFacade.getSubContractedServicesAction({
-            subcontrato_id: 3,
+            subcontrato_id: this.formCubicacion.value.subcontrato_id
+              .split(',')
+              .map((x) => +x),
             region_id: +this.formCubicacion.value.region_id,
             tipo_servicio_id: +tipo_servicio_id,
           });

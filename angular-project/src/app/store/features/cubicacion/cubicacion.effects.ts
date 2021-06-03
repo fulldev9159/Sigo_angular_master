@@ -116,7 +116,7 @@ export class CubicacionEffects {
         this.http
           .post(`${environment.api}/cubicacion/tipos_servicios/get`, {
             token: data.token,
-            subcontrato_id: 3,
+            subcontrato_id: data.subcontrato_id,
             region_id: data.region_id,
           })
           .pipe(
@@ -144,7 +144,7 @@ export class CubicacionEffects {
         this.http
           .post(`${environment.api}/cubicacion/servicios_subcontrato/get`, {
             token: data.token,
-            subcontrato_id: 3,
+            subcontrato_id: data.subcontrato_id,
             region_id: data.region_id,
             tipo_servicio_id: data.tipo_servicio_id,
           })

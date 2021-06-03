@@ -18,11 +18,11 @@
       </div>
       <div class="col-12 ">
         <label for="">Proveedor</label>
-        <select formControlName="proveedor_id"
+        <select formControlName="subcontrato_id"
           [attr.disabled]="subContractedProviders ? subContractedProviders.length === 0 ? '' : null : null "
           class="form-control" name="" id="select-proveedor" name="select-proveedor">
           <option value="null" selected disabled>Seleccione proveedor</option>
-          <option *ngFor="let provider of subContractedProviders" [value]="provider.id">{{provider.nombre}}</option>
+          <option *ngFor="let provider of subContractedProviders" [value]="provider.subcontrato_id">{{provider.nombre}}</option>
         </select>
         <br>
       </div>
