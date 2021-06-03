@@ -1,7 +1,5 @@
 <div [class]="toggle" id="wrapper">
-
-  <!-- sidebar -->
-  <div class="bg-primary text-light border-right page-wrapper chiller-theme toggled" id="sidebar-wrapper">
+  <div class="bg-primary toggled" id="sidebar-wrapper">
     <nav id="sidebar" class="sidebar-wrapper">
       <div class="sidebar-content">
         <div class="sidebar-brand">
@@ -16,24 +14,11 @@
           <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info">
             <span class="user-name" id="user-name">{{(loginAuth$ | async).name | titlecase}}
             </span>
-            <!-- <span class="user-role" id="user-role">{{(loginAuth$ | async).roles_modulos.Gestor.nombre |
-              titlecase}}</span> -->
-            <span class="user-status">
+            <span class="user-role" id="user-role">Gertor</span>
+            <!-- <span class="user-status">
               <i class="fa fa-circle"></i>
               <span>Online</span>
-            </span>
-          </div>
-        </div>
-        <div class="sidebar-search">
-          <div>
-            <div class="input-group">
-              <input type="text" class="form-control search-menu" placeholder="Buscar...">
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </span>
-              </div>
-            </div>
+            </span> -->
           </div>
         </div>
         <div class="sidebar-menu">
@@ -93,17 +78,12 @@
           </ul>
         </div>
       </div>
-
     </nav>
   </div>
-  <!-- sidebar -->
+  <div id="page-content-wrapper" style="height: 98vh;border-radius: 20px;">
 
-  <!-- content -->
-  <div id="page-content-wrapper">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary border-bottom">
-
-      <button class="btn btn-warning" (click)="toggleState = !toggleState;toggleAction();">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary border-bottom sticky-top" style="background-color:#fff !important">
+      <button class="btn" (click)="toggleState = !toggleState;toggleAction();">
         <i class="navbar-toggler-icon"></i>
       </button>
 
@@ -137,9 +117,8 @@
     </nav>
     <app-progress-bar *ngIf="loading"></app-progress-bar>
 
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0" style="height: 100vh;overflow: scroll;">
       <router-outlet></router-outlet>
     </div>
   </div>
-  <!-- content -->
 </div>

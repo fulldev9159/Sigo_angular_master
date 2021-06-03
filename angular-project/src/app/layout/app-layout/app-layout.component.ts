@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { LoginAuth } from '@storeOT/features/auth/auth.model';
@@ -12,9 +18,9 @@ import { delay, map } from 'rxjs/operators';
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppLayoutComponent implements OnInit, OnDestroy {
-
   public loading;
   public toggleState = false;
   public toggle = 'd-flex';
@@ -26,24 +32,24 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     private authFacade: AuthFacade,
     private loadingS: LoadingService,
     private permissionsService: NgxPermissionsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     const perm = ['OT_LIST', 'OT_CREATE'];
 
     this.permissionsService.loadPermissions(perm);
 
     this.listenToLoading();
-    this.loginAuth$ = this.authFacade.getLogin$()
-      .pipe(map(loginAuth => {
+    this.loginAuth$ = this.authFacade.getLogin$().pipe(
+      map((loginAuth) => {
         let auth;
         if (loginAuth) {
           const nameArray = loginAuth.usuario_nombre.split(' ');
           auth = { ...loginAuth, name: `${nameArray[0]} ${nameArray[2]}` };
         }
         return auth;
-      }));
+      })
+    );
   }
 
   ngOnDestroy(): void {

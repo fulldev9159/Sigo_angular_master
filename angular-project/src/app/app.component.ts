@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { registerLocaleData } from '@angular/common';
 import localeEsCl from '@angular/common/locales/es-CL';
@@ -7,15 +12,14 @@ import localeEsCl from '@angular/common/locales/es-CL';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-
   // declarations
   title = '';
 
-  constructor(
-    private primengConfig: PrimeNGConfig) {
+  constructor(private primengConfig: PrimeNGConfig) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
 

@@ -13,5 +13,5 @@ Crear cubicacion
     # Datos Formulario Usuario
     Click Visible Element            css:#menu-cubicacion > a > span
     Click Visible Element            id:listarCubSubMenu
-    Crear Cubicacion    RobotCubicacion    SBE    AJ INGENIEROS S.A.    Región Metropolitana de Santiago    PROYECTO (FIJA)
+    Crear Cubicacion    RobotCubicacion    SBE    COASIN    Región Metropolitana de Santiago    PROYECTO (FIJA)
     close Browser 

@@ -1,18 +1,27 @@
+#wrapper {
+  background-color: #00507a;
+  height: 100vh;
+  padding: 8px;
+}
+
 #page-content-wrapper {
   height: 100vh;
   max-height: 100vh;
   overflow: hidden;
   position: relative;
   overflow-y: scroll;
+  background-color: #fff;
 }
 
 #sidebar-wrapper {
-  min-height: 100vh;
+  // min-height: 100vh;
   margin-left: -260px;
   -webkit-transition: margin 0.25s ease-out;
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
   transition: margin 0.25s ease-out;
+  border-radius: 12px 0px 0px 12px;
+  height: 100% 
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -187,6 +196,7 @@ body {
   padding: 10px 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .sidebar-wrapper .sidebar-brand > a {
