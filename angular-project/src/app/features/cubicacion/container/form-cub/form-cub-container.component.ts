@@ -35,6 +35,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   > = of([]);
   public subContractedServices$: Observable<CubModel.SubContractedServices[]> =
     of();
+  public autoSuggest$: Observable<CubModel.AutoSuggestForm[]> = of();
   private destroyInstance$: Subject<boolean> = new Subject();
 
   constructor(
@@ -46,6 +47,17 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // traemos contratos des api mediante efectos
+    this.authFacade
+      .getLogin$()
+      .pipe(takeUntil(this.destroyInstance$))
+      .subscribe((authLogin) => {
+        if (authLogin) {
+          // asignamos datos de usuario autenticado a variable local
+          this.authLogin = authLogin;
+        }
+      });
+
     this.initForm();
     this.constractMarco$ = this.cubageFacade.getContractMarcoSelector$();
     this.subContractedProviders$ =
@@ -56,7 +68,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       this.cubageFacade.getSubContractedTypeServicesSelector$();
     this.subContractedServices$ =
       this.cubageFacade.getSubContractedServicesSelector$();
+    this.autoSuggest$ = this.cubageFacade.getAutoSuggestSelector$();
     this.cubageFacade.getContractMarcoAction();
+    this.cubageFacade.getAutoSuggestAction('', 5);
   }
 
   ngOnDestroy(): void {
@@ -111,8 +125,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .subscribe((subcontratoId) => {
         if (subcontratoId) {
           console.log(subcontratoId);
+          const [subcontratos, proveedor] = subcontratoId.split('-');
+          const idProve = 'proveedor_id';
+          const idsubCon = 'subcontrato_id';
+          this.formCubicacion.controls[idProve].setValue(+proveedor);
+          // this.formCubicacion.controls[idsubCon].setValue(subcontratos)
           this.cubageFacade.getSubContractedRegionsAction({
-            subcontrato_id: subcontratoId.split(',').map((x) => +x),
+            subcontrato_id: subcontratos.split(',').map((x) => +x),
           });
 
           // refrescamos parte de
@@ -128,10 +147,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         if (region_id) {
           // actualizamos store
           // const provider = this.providers.find(p => +p.id === +this.formCubicacion.value.proveedor_id);
+          const [subcontratos, proveedor] =
+            this.formCubicacion.value.subcontrato_id.split('-');
           this.cubageFacade.getSubContractedTypeServicesAction({
-            subcontrato_id: this.formCubicacion.value.subcontrato_id
-              .split(',')
-              .map((x) => +x),
+            subcontrato_id: subcontratos.split(',').map((x) => +x),
             region_id: +region_id,
           });
 
@@ -147,10 +166,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .subscribe((tipo_servicio_id) => {
         if (tipo_servicio_id) {
           // actualizamos store
+          const [subcontratos, proveedor] =
+            this.formCubicacion.value.subcontrato_id.split('-');
           this.cubageFacade.getSubContractedServicesAction({
-            subcontrato_id: this.formCubicacion.value.subcontrato_id
-              .split(',')
-              .map((x) => +x),
+            subcontrato_id: subcontratos.split(',').map((x) => +x),
             region_id: +this.formCubicacion.value.region_id,
             tipo_servicio_id: +tipo_servicio_id,
           });
@@ -206,10 +225,11 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       subcontrato_id: form.subcontrato_id,
     };
 
-    const subcontrato = this.providers.find(
-      (c) => +c.id === +form.proveedor_id
-    );
-
+    // const subcontrato = this.providers.find(
+    //   (c) => +c.id === +form.proveedor_id
+    // );
+    const [subcontratos, proveedor] = form.subcontrato_id.split('-');
+    const idProve = 'proveedor_id';
     const cubage = {
       // cubicacion_id: +form.cubicacion_id,
       cubicacion_nombre: form.nombre,
@@ -218,16 +238,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       usuario_id: +this.authLogin.usuario_id,
       contrato_marco_id: +form.contrato_marco_id,
       proveedor_id: +form.proveedor_id,
-      subcontrato_id: subcontrato ? +subcontrato.subcontrato_id[0] : null,
-      lpus: this.lpus.map((lpu) => {
-        const lpuCUstom = {
-          lpu_id: lpu.lpu_id,
-          cantidad: 2,
-        };
-        return lpuCUstom;
-      }),
+      subcontrato_id: 1,
+      lpus: this.lpus.map((x) => ({
+        lpu_id: x.lpu_id,
+        cantidad: x.cantidad,
+      })),
     };
-
+    console.log(cubage);
     this.cubageFacade.replyCubicacion(cubitation);
     this.cubageFacade.postCubicacion(cubage);
     this.formCubicacion.reset();
@@ -242,5 +259,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   reset(): void {
     this.cubageFacade.resetData();
+  }
+
+  ChangeSearch(filter: string): void {
+    console.log(filter);
+    const idNombre = 'nombre';
+    this.formCubicacion.controls[idNombre].setValue(filter);
+    this.cubageFacade.getAutoSuggestAction(filter, 5);
   }
 }

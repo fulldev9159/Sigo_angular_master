@@ -62,3 +62,17 @@ export interface SaveCubicacionRequest {
     cantidad: number;
   };
 }
+
+export interface AutoSuggestRequest {
+  filter: string;
+  cantidad: number;
+}
+
+export interface AutoSuggestResponseData {
+  items: string[];
+}
+
+export interface AutoSuggestForm {
+  id: number;
+  name: string;
+}

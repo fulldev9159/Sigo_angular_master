@@ -24,12 +24,15 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input() subContractedRegions: CubModel.SubContractedRegions[] = [];
   @Input() subContractedTypeServices: CubModel.SubContractedTypeServices[] = [];
   @Input() subContractedServices: CubModel.SubContractedServices[] = [];
+  @Input() autoSuggestData: CubModel.AutoSuggestForm[] = [];
   @Output() public cancel = new EventEmitter();
   @Output() public save = new EventEmitter();
   @Output() public selected = new EventEmitter();
+  @Output() public ChangeSearchContainer = new EventEmitter();
   private destroyInstance$: Subject<boolean> = new Subject();
   public lpuSelected: CubModel.SubContractedServices[] = [];
   public total = 0;
+  public keyword = 'name';
   // get f() { return this.formCubicacion.controls; }
   // get t() { return this.f.tickets as FormArray; }
 
@@ -190,6 +193,22 @@ export class FormComponent implements OnInit, OnDestroy {
       return total + currentValue.lpu_subtotal;
     }, 0);
     this.selected.emit(event.value);
+  }
+
+
+
+  selectEvent(item): void {
+    // do something with selected item
+  }
+
+  onChangeSearch(val: string): void {
+    this.ChangeSearchContainer.emit(val);
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e): void {
+    // do something when input is focused
   }
 
   cancelAction(): void {

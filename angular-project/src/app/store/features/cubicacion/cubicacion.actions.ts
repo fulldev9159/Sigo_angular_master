@@ -6,12 +6,11 @@ import {
   SubContractedRegions,
   SubContractedServices,
   SubContractedTypeServices,
+  AutoSuggestForm
 } from './cubicacion.model';
 
 // CUBICACION LIST
-export const getCubicacion = createAction(
-  '[Cubicacion GetAll] GET Cubicacion'
-);
+export const getCubicacion = createAction('[Cubicacion GetAll] GET Cubicacion');
 
 export const getCubicacionSuccess = createAction(
   '[Cubicacion GetAll] GET Cubicacion Success',
@@ -164,3 +163,19 @@ export const getSubContractedServicesError = createAction(
 // CUBICACION FORM
 
 export const resetData = createAction('[ResetData] ResetData');
+
+// Auto Suggest
+export const getAutoSuggest = createAction(
+  '[Cubicacion Get] GET AutoSuggest',
+  props<{ filter: string; cantidad: number }>()
+);
+
+export const getAutoSuggestSuccess = createAction(
+  '[Cubicacion Get] GET AutoSuggest Success',
+  props<{ autosuggests: AutoSuggestForm[] }>()
+);
+
+export const getAutoSuggestError = createAction(
+  '[Cubicacion Get] GET AutoSuggest Error',
+  props<{ error: any }>()
+);

@@ -10,6 +10,7 @@ import {
   SubContractedRegions,
   SubContractedServices,
   SubContractedTypeServices,
+  AutoSuggestForm
 } from './cubicacion.model';
 
 @Injectable({
@@ -78,7 +79,9 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedProvidersSelector$(): Observable<SubContractedProviders[]> {
+  public getSubContractedProvidersSelector$(): Observable<
+    SubContractedProviders[]
+  > {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);
   }
   // SUBCONTRACTPROVIDERS
@@ -96,7 +99,9 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedRegionsSelector$(): Observable<SubContractedRegions[]> {
+  public getSubContractedRegionsSelector$(): Observable<
+    SubContractedRegions[]
+  > {
     return this.store.select(cubicacionSelectors.getSubContractedRegions);
   }
   // SUBCONTRACTREGIONS
@@ -116,7 +121,9 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedTypeServicesSelector$(): Observable<SubContractedTypeServices[]> {
+  public getSubContractedTypeServicesSelector$(): Observable<
+    SubContractedTypeServices[]
+  > {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
   }
   // SUBCONTRACTTYPESERVICES
@@ -136,7 +143,9 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedServicesSelector$(): Observable<SubContractedServices[]> {
+  public getSubContractedServicesSelector$(): Observable<
+    SubContractedServices[]
+  > {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
   }
 
@@ -145,4 +154,18 @@ export class CubicacionFacade {
   }
   // SUBCONTRACTSERVICES
   // CUBICACION
+  // CONSTRACT MARCO
+  public getAutoSuggestAction(filter: string, cantidad: number): void {
+    this.store.dispatch(cubicacionActions.getAutoSuggest({filter, cantidad}));
+  }
+
+  public getAutoSuggestSuccess(contractMarco: ContractMarco[]): void {
+    this.store.dispatch(
+      cubicacionActions.getContractMarcoSuccess({ contractMarco })
+    );
+  }
+
+  public getAutoSuggestSelector$(): Observable<AutoSuggestForm[]> {
+    return this.store.select(cubicacionSelectors.getAutoSuggest);
+  }
 }

@@ -6,6 +6,8 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as cubicacionActions from './cubicacion.actions';
+import * as cubicacionModel from '@storeOT/features/cubicacion/cubicacion.model';
+import { Response } from '@storeOT/model';
 import { environment } from '@environment';
 
 @Injectable()
@@ -184,6 +186,32 @@ export class CubicacionEffects {
             ),
             catchError((err) =>
               of(cubicacionActions.postCubicacionError({ error: err }))
+            )
+          )
+      )
+    )
+  );
+
+  getAutoSuggest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.getAutoSuggest),
+      concatMap((data: any) =>
+        this.http
+          .post(`${environment.api}/cubicacion/autosuggest/nombre`, {
+            filtro: data.filter,
+            cantidad: data.cantidad,
+          })
+          .pipe(
+            map((res: Response<cubicacionModel.AutoSuggestResponseData>) =>
+              cubicacionActions.getAutoSuggestSuccess({
+                autosuggests: res.data.items.map((x, i) => ({
+                  id: +i + 1,
+                  name: x,
+                })),
+              })
+            ),
+            catchError((err) =>
+              of(cubicacionActions.getAutoSuggestError({ error: err }))
             )
           )
       )

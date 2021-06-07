@@ -7,6 +7,7 @@ import {
   SubContractedRegions,
   SubContractedServices,
   SubContractedTypeServices,
+  AutoSuggestForm
 } from './cubicacion.model';
 
 export const CubicacionFeatureKey = 'cubicacion';
@@ -18,6 +19,7 @@ export interface StateCubicacion {
   subContractedRegions: SubContractedRegions[];
   subContractedTypeServices: SubContractedTypeServices[];
   subContractedServices: SubContractedServices[];
+  autoSuggest: AutoSuggestForm[];
 }
 
 export const initialStateCubicacion: StateCubicacion = {
@@ -27,6 +29,7 @@ export const initialStateCubicacion: StateCubicacion = {
   subContractedRegions: [],
   subContractedTypeServices: [],
   subContractedServices: [],
+  autoSuggest: [],
 };
 
 export const reducerCubicacion = createReducer(
@@ -89,5 +92,10 @@ export const reducerCubicacion = createReducer(
     subContractedRegions: [],
     subContractedTypeServices: [],
     subContractedServices: [],
+  })),
+  on(CubicacionActions.getAutoSuggest, (state) => state),
+  on(CubicacionActions.getAutoSuggestSuccess, (state, payload) => ({
+    ...state,
+    autoSuggest: payload.autosuggests,
   }))
 );

@@ -8,6 +8,7 @@ import { ListCubComponent } from './container/list-cub/list-cub.component';
 import { FormCubContainerComponent } from './container/form-cub/form-cub-container.component';
 import { FormComponent } from './component/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [CubicacionComponent, ListCubComponent, FormCubContainerComponent, FormComponent],
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CubicacionRoutingModule,
     UiModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AutocompleteLibModule
   ]
 })
 export class CubicacionModule { }
