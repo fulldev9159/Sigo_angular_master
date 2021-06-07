@@ -4,6 +4,7 @@
 
 ### features
 
+- Se agrega autocompletado en nombre cubicacion
 
 ### Changes
 

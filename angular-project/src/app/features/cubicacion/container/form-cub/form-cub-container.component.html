@@ -22,8 +22,11 @@
         [subContractedProviders]="(subContractedProviders$ | async)"
         [subContractedRegions]="(subContractedRegions$ | async)"
         [subContractedTypeServices]="(subContractedTypeServices$ | async)"
-        [subContractedServices]="(subContractedServices$ | async)" (selected)="selected($event);"
-        (cancel)="cancel($event);" (save)="save($event);"></app-form>
+        [subContractedServices]="(subContractedServices$ | async)"
+        [autoSuggestData]="(autoSuggest$|async)"
+        (selected)="selected($event);"
+        (cancel)="cancel($event);" (save)="save($event);"
+        (ChangeSearchContainer)="ChangeSearch($event)"></app-form>
     </ng-container>
   </app-card>
 

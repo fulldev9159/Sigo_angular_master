@@ -28,3 +28,7 @@ export const getSubContractedTypeServices = createSelector(selectCubicacion,
 export const getSubContractedServices = createSelector(selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.subContractedServices
 );
+
+export const getAutoSuggest = createSelector(selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.autoSuggest
+);

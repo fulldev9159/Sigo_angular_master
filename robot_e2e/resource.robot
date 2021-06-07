@@ -77,7 +77,9 @@ Usuario
 
 Crear Cubicacion
    [Arguments]    ${nombre cubicacion}    ${contrato}    ${proveedor}    ${region}    ${tipo servicio}
-   input text                          name:input-nombreCubicacion                  ${nombre cubicacion}                     
+   Wait Until Element Is Visible       css:ng-autocomplete > div > div.input-container > input    
+   input text                          css:ng-autocomplete > div > div.input-container > input                  ${nombre cubicacion}         
+   Click Visible Element               id:box
    Select item                         name:select-contratoMarco                    ${contrato} 
    Select item                         name:select-proveedor                        ${proveedor}
    Select item                         name:select-region                           ${region} 
