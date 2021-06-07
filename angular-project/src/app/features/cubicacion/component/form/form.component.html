@@ -90,9 +90,6 @@
   <div class="col-xs-12 offset-md-7 col-md-5 text-right button-guardar-cubicacion">
     <button (click)="cancelAction();" class="btn btn-light mr-2"><em class="pi pi-refresh mr-1"></em>Cancelar</button>
     <button (click)="saveAction();" [disabled]="!formCubicacion.valid" class="btn btn-primary"><em
-        class="pi pi-save mr-1"></em>Guardar</button>
+        class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
   </div>
-
-  {{formCubicacion.status|json}}
-  {{formCubicacion.value|json}}
 </div>

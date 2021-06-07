@@ -1,38 +1,39 @@
-# Changelog
+# Changelog
 
-## [0.22.0] - 2021-05-07
+## [0.22.0] - 2021-05-07
 
-### features
+### features
 
-- Se agrega autocompletado en nombre cubicacion
+- Se agrega autocompletado en nombre cubicación
+- Se crea automatización de inserción de datos con robotframework
 
-### Changes
+### Changes
 
--  Camibio en el desing
+-  Cambio en el diseño
 
-### Fix
+### Fix
 
--  Se corrige el envio de parametro subcontrato_ids en la creacion de cubicacion
+-  Se corrige el envío de parámetro subcontrato_ids en la creación de cubicación
 
-## [0.21.0] - 2021-05-31
+## [0.21.0] - 2021-05-31
 
-### features
+### features
 
-- Se agrega tabla resumen de lpus seleccionadas y se programa funcionalidad para agregar cantidad de LPU.
-- Se agrega el campo tipo moneda a la tabla resumen LPU
-- Se agrega el total a tabla resumen LPU
-- Ahora se puede parametrizar el componente tabla usa o no paginación
+- Se agrega tabla resumen de lpus seleccionadas y se programa funcionalidad para agregar cantidad de LPU.
+- Se agrega el campo tipo moneda a la tabla resumen LPU
+- Se agrega el total a tabla resumen LPU
+- Ahora se puede parametrizar el componente tabla usa o no paginación
 
-### Changes
+### Changes
 
-- Cambios visuales en configuración de componente tabla para que el despliegue sea configurable por parámetro    
-- Cambios funcionales del componente tabla para el manejo de inputs en fields.    
-- Cambios funcionales del componente tabla para el manejo del despliegue de acciones
-- Se ordenan los textos de los combobox    
-- TitleCase en nombres ahora es parametrizado
+- Cambios visuales en configuración de componente tabla para que el despliegue sea configurable por parámetro    
+- Cambios funcionales del componente tabla para el manejo de inputs en fields.    
+- Cambios funcionales del componente tabla para el manejo del despliegue de acciones
+- Se ordenan los textos de los combobox    
+- TitleCase en nombres ahora es parametrizado
 
-### Fix
+### Fix
 
-- Se recupera el buscador de servicios
-- Reset de LPUs seleccionadas al salir del crear/editar Cubicación
-- Se agregan labels faltantes
+- Se recupera el buscador de servicios
+- Reset de LPUs seleccionadas al salir del crear/editar Cubicación
+- Se agregan labels faltantes
