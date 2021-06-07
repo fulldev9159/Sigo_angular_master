@@ -26,11 +26,12 @@ Open Browser To Page
     Go To                      ${page}
 
 Login
-    [Arguments]                  ${username}      ${password}
-    input text                   name:username    ${username}
-    input password               name:password    ${password}
-    element should be enabled    id:login
-    Click Button                 id:login
+    [Arguments]                      ${username}      ${password}
+    input text                       name:username    ${username}
+    input password                   name:password    ${password}
+    element should be enabled        id:login
+    Click Button                     id:login
+    Wait Until Element Is Visible    id:user-name     timeout=5
 
 Element text should be
     [Arguments]        ${element}    ${texto}
@@ -44,76 +45,110 @@ Click Visible Element
     Click Element                    ${element}
 
 Select item
-    [Arguments]    ${selector}     ${value}
-    ${select element}    Get WebElement    ${selector}
-    Scroll Element Into View               ${select element}
-    Click Visible Element                  ${select element}
-    Select From List By Label              ${select element}    ${value}
+    [Arguments]                  ${selector}          ${value}
+    ${select element}            Get WebElement       ${selector}
+    Scroll Element Into View     ${select element}
+    Click Visible Element        ${select element}
+    Select From List By Label    ${select element}    ${value}
 
 Select item value
-    [Arguments]    ${selector}     ${value}
-    ${select element}    Get WebElement    ${selector}
-    Click Visible Element                  ${select element}
-    Select From List By Value              ${select element}    ${value}
+    [Arguments]                  ${selector}          ${value}
+    ${select element}            Get WebElement       ${selector}
+    Click Visible Element        ${select element}
+    Select From List By Value    ${select element}    ${value}
 
 Usuario
-    [Arguments]                  ${username}     ${documento}     ${nombres}     ${apellidos}     ${email}
-    input text                        name:username                                 ${username}
-    input text                        name:documento-input                          ${documento}
-    input text                        name:nombre-input                             ${nombres}
-    input text                        name:apellidos-input                          ${apellidos}
-    input text                        name:email-input                              ${email}
-    Select item                       css:#proveedor_id > select                    Telefonica Chile Servicios Corporativos Ltda.
-    Select item                       css:#area_id > select                         CONECTIVIDAD Y BACKHAUL
-    Click Visible Element             id:contratos_marco_multi
-    Wait Until Element Is Visible     id:contratos_marco_multi
-    Click Visible Element             css:.p-multiselect-items-wrapper>ul>cdk-virtual-scroll-viewport>div>p-multiselectitem:nth-child(1)>li>div>div
-    Click Visible Element             id: caja_formulario
-    sleep  2
-    Scroll Element Into View          css:#perfil_id > select
-    Select item                       css:#perfil_id > select                       Admin
-    element should be enabled         id:submit-user
-    Click Visible Element             id:submit-user
+    [Arguments]                      ${username}                                                                                                      ${documento}                                     ${nombres}    ${apellidos}    ${email}
+    input text                       name:username                                                                                                    ${username}
+    input text                       name:documento-input                                                                                             ${documento}
+    input text                       name:nombre-input                                                                                                ${nombres}
+    input text                       name:apellidos-input                                                                                             ${apellidos}
+    input text                       name:email-input                                                                                                 ${email}
+    Select item                      css:#proveedor_id > select                                                                                       Telefonica Chile Servicios Corporativos Ltda.
+    Select item                      css:#area_id > select                                                                                            CONECTIVIDAD Y BACKHAUL
+    Click Visible Element            id:contratos_marco_multi
+    Wait Until Element Is Visible    id:contratos_marco_multi
+    Click Visible Element            css:.p-multiselect-items-wrapper>ul>cdk-virtual-scroll-viewport>div>p-multiselectitem:nth-child(1)>li>div>div
+    Click Visible Element            id: caja_formulario
+    sleep                            2
+    Scroll Element Into View         css:#perfil_id > select
+    Select item                      css:#perfil_id > select                                                                                          Admin
+    element should be enabled        id:submit-user
+    Click Visible Element            id:submit-user
 
 Crear Cubicacion
-   [Arguments]    ${nombre cubicacion}    ${contrato}    ${proveedor}    ${region}    ${tipo servicio}
-   Wait Until Element Is Visible       css:ng-autocomplete > div > div.input-container > input    
-   input text                          css:ng-autocomplete > div > div.input-container > input                  ${nombre cubicacion}         
-   Click Visible Element               id:box
-   Select item                         name:select-contratoMarco                    ${contrato} 
-   Select item                         name:select-proveedor                        ${proveedor}
-   Select item                         name:select-region                           ${region} 
-   Select item                         name:select-tipoServicio                     ${tipo servicio}
-   Click Visible Element               css:#page-content-wrapper > div > app-cubicacion > div > app-form-cub-container > div > app-card > div > div.card-body > app-form > div > div.col-xs-12.col-md-8 > div > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(1)
+    [Arguments]                      ${nombre cubicacion}                                                                                                                                                                                                                            ${contrato}             ${proveedor}    ${region}    ${tipo servicio}
+    Wait Until Element Is Visible    css:ng-autocomplete > div > div.input-container > input                                                                                                                                                                                         
+    input text                       css:ng-autocomplete > div > div.input-container > input                                                                                                                                                                                         ${nombre cubicacion}    
+    Click Visible Element            id:box
+    Select item                      name:select-contratoMarco                                                                                                                                                                                                                       ${contrato} 
+    Select item                      name:select-proveedor                                                                                                                                                                                                                           ${proveedor}
+    Select item                      name:select-region                                                                                                                                                                                                                              ${region} 
+    Select item                      name:select-tipoServicio                                                                                                                                                                                                                        ${tipo servicio}
+    Click Visible Element            css:#page-content-wrapper > div > app-cubicacion > div > app-form-cub-container > div > app-card > div > div.card-body > app-form > div > div.col-xs-12.col-md-8 > div > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(1)
 
 UsuarioEdit
-    [Arguments]                   ${documento}     ${nombres}     ${apellidos}     ${email}
-    input text                        name:documento-input                          ${documento}
-    input text                        name:nombre-input                             ${nombres}
-    input text                        name:apellidos-input                          ${apellidos}
-    input text                        name:email-input                              ${email}
-    Select item                       css:#proveedor_id > select                    Telefonica Chile Servicios Corporativos Ltda.
-    Select item                       css:#area_id > select                         CONECTIVIDAD Y BACKHAUL
-    Click Visible Element             id:contratos_marco_multi
-    Wait Until Element Is Visible     id:contratos_marco_multi
-    Click Visible Element             css:.p-multiselect-items-wrapper>ul>cdk-virtual-scroll-viewport>div>p-multiselectitem:nth-child(1)>li>div>div
-    Click Visible Element             id: caja_formulario
-    element should be enabled         id:submit-user
-    Click Visible Element             id:submit-user
+    [Arguments]                      ${documento}                                                                                                     ${nombres}                                       ${apellidos}    ${email}
+    input text                       name:documento-input                                                                                             ${documento}
+    input text                       name:nombre-input                                                                                                ${nombres}
+    input text                       name:apellidos-input                                                                                             ${apellidos}
+    input text                       name:email-input                                                                                                 ${email}
+    Select item                      css:#proveedor_id > select                                                                                       Telefonica Chile Servicios Corporativos Ltda.
+    Select item                      css:#area_id > select                                                                                            CONECTIVIDAD Y BACKHAUL
+    Click Visible Element            id:contratos_marco_multi
+    Wait Until Element Is Visible    id:contratos_marco_multi
+    Click Visible Element            css:.p-multiselect-items-wrapper>ul>cdk-virtual-scroll-viewport>div>p-multiselectitem:nth-child(1)>li>div>div
+    Click Visible Element            id: caja_formulario
+    element should be enabled        id:submit-user
+    Click Visible Element            id:submit-user
 
 Validar si existe en la Lista
-    [Arguments]    ${columna a validar}    ${nombre}
-    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                                timeout=5
-    ${cantidad de filas}=            get element count                                                                                   css:.p-datatable-wrapper>table>tbody>tr
-    ${status}=                       Evaluate                                                                                            ${cantidad de filas} > 0
+    [Arguments]                      ${columna a validar}                                                    ${nombre}
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    ${cantidad de filas}=            get element count                                                       css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=                       Evaluate                                                                ${cantidad de filas} > 0
     Should Be True                   ${status}
-    FOR    ${i}    IN RANGE    ${cantidad de filas}
-        ${txt nombre fila}=    Get Text                        css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(${columna a validar})
-        ${areYouMyLine} =   Run Keyword and Return Status    Should Be Equal As Strings    ${txt nombre fila}    ${nombre}
-        Set Suite Variable    ${areYouMyLine}
-        ${numero de fila}   set variable    ${i + 1}
-        Set Suite Variable    ${numero de fila}
-        Run Keyword If     ${areYouMyLine}    Exit For Loop
+    FOR                              ${i}                                                                    IN RANGE                                                                                          ${cantidad de filas}
+    ${txt nombre fila}=              Get Text                                                                css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(${columna a validar})
+    ${areYouMyLine} =                Run Keyword and Return Status                                           Should Be Equal As Strings                                                                        ${txt nombre fila}      ${nombre}
+    Set Suite Variable               ${areYouMyLine}
+    ${numero de fila}                set variable                                                            ${i + 1}
+    Set Suite Variable               ${numero de fila}
+    Run Keyword If                   ${areYouMyLine}                                                         Exit For Loop
     END
-    Should Be True    ${areYouMyLine}
+    Should Be True                   ${areYouMyLine}
     close Browser
+
+Click Menu Editar
+    [Arguments]                      ${usuario}
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                                    timeout=5
+    ${cantidad de filas}=            get element count                                                                                       css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=                       Evaluate                                                                                                ${cantidad de filas} > 0
+    Should Be True                   ${status}
+    FOR                              ${i}                                                                                                    IN RANGE                                                                       ${cantidad de filas}
+    ${txt nombre fila}=              Get Text                                                                                                css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(1)
+    ${areYouMyLine} =                Run Keyword and Return Status                                                                           Should Be Equal As Strings                                                     ${txt nombre fila}      ${usuario}
+    Set Suite Variable               ${areYouMyLine}
+    ${numero de fila}                set variable                                                                                            ${i + 1}
+    Set Suite Variable               ${numero de fila}
+    Run Keyword If                   ${areYouMyLine}                                                                                         Exit For Loop
+    END
+    Should Be True                   ${areYouMyLine}
+    Click Visible Element            css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>#action-buttons>app-menu>button
+    Click Visible Element            css:app-menu > p-menu > div > ul > li:nth-child(1) > a
+
+Editar documento de identidad del usuario
+    [Arguments]    ${usuario}              ${documento}
+    input text     name:documento-input    ${documento}
+
+Editar contratos del usuario
+    [Arguments]              ${contratos}
+    Click Visible Element    css:#contratos_marco_multi > div > div.p-multiselect-label-container> div
+    Click Visible Element    css:#contratos_marco_multi > div > div>div>div:nth-child(1)
+    Click Visible Element    id: caja_formulario
+
+Navegar al menu
+    [Arguments]       ${menu}
+    Run Keyword If    '${menu}' == 'Usuario'             Click Element            css:#menu-usuario>a>span
+    Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
+    Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    id:listarCubSubMenu

@@ -66,12 +66,12 @@ Resource    resource.robot
 #     Click Visible Element            ${boton de confirmar}
 #     close Browser
 
-Activar usuario
-     Open Browser To Page             ${url}
-     Location Should Be               ${url}/auth/login
-     Login                            admin                                                                       password
-     Wait Until Element Is Visible    id:user-name                                                                timeout=5
-     Click Element                    css:#menu-usuario>a>span
-     Wait Until Element Is Visible    css:.p-datatable-wrapper 
-     Click Visible Element            css:app-menu>button
-     Click Visible Element            css:app-menu > p-menu > div > ul > li:nth-child(4) > a                   
+# Activar usuario
+#      Open Browser To Page             ${url}
+#      Location Should Be               ${url}/auth/login
+#      Login                            admin                                                                       password
+#      Wait Until Element Is Visible    id:user-name                                                                timeout=5
+#      Click Element                    css:#menu-usuario>a>span
+#      Wait Until Element Is Visible    css:.p-datatable-wrapper 
+#      Click Visible Element            css:app-menu>button
+#      Click Visible Element            css:app-menu > p-menu > div > ul > li:nth-child(4) > a                   

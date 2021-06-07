@@ -28,4 +28,11 @@ input {
     top: 8px;
     left: 77%;
   }
+
+  .autocomplete-container{
+    box-shadow: none;
+  }
+  .autocomplete-container .input-container input{
+    border: 1px solid #ced4da;
+  }
 }
