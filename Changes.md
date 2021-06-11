@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.23.0] - 2021-05-15
+
+### features
+
+-  Automatizacion del ingreso y configuracion de perfiles
+
+### Changes
+
+
+### Fix
+
+
 ## [0.22.0] - 2021-05-07
 
 ### features

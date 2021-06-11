@@ -45,11 +45,11 @@ Click Visible Element
     Click Element                    ${element}
 
 Select item
-    [Arguments]                  ${selector}          ${value}
-    ${select element}            Get WebElement       ${selector}
-    Scroll Element Into View     ${select element}
-    Click Visible Element        ${select element}
-    Select From List By Label    ${select element}    ${value}
+    [Arguments]                 ${selector}          ${value}
+    ${select element}           Get WebElement       ${selector}
+    Scroll Element Into View    ${select element}
+    Click Visible Element       ${select element}
+   # Select From List By Label    ${select element}    ${value}
 
 Select item value
     [Arguments]                  ${selector}          ${value}
@@ -119,6 +119,23 @@ Validar si existe en la Lista
     Should Be True                   ${areYouMyLine}
     close Browser
 
+Get index list
+    [Arguments]                      ${columna a validar}                                                    ${valor}
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    ${cantidad de filas}=            get element count                                                       css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=                       Evaluate                                                                ${cantidad de filas} > 0
+    Should Be True                   ${status}
+    FOR                              ${i}                                                                    IN RANGE                                                                                          ${cantidad de filas}
+    ${txt nombre fila}=              Get Text                                                                css:.p-datatable-wrapper>table>tbody>tr:nth-child(${i + 1})>td:nth-child(${columna a validar})
+    ${areYouMyLine} =                Run Keyword and Return Status                                           Should Be Equal As Strings                                                                        ${txt nombre fila}      ${valor}
+    Set Suite Variable               ${areYouMyLine}
+    ${numero de fila}                set variable                                                            ${i + 1}
+    Set Suite Variable               ${numero de fila}
+    Run Keyword If                   ${areYouMyLine}                                                         Exit For Loop
+    END
+    Should Be True                   ${areYouMyLine}
+    [return]                         ${numero de fila}
+
 Click Menu Editar
     [Arguments]                      ${usuario}
     Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                                    timeout=5
@@ -141,14 +158,65 @@ Editar documento de identidad del usuario
     [Arguments]    ${usuario}              ${documento}
     input text     name:documento-input    ${documento}
 
+Editar email del usuario
+    [Arguments]    ${usuario}          ${email}
+    input text     name:email-input    ${email}
+
 Editar contratos del usuario
     [Arguments]              ${contratos}
     Click Visible Element    css:#contratos_marco_multi > div > div.p-multiselect-label-container> div
     Click Visible Element    css:#contratos_marco_multi > div > div>div>div:nth-child(1)
     Click Visible Element    id: caja_formulario
 
+Eliminar todos los perfiles
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1) 
+    ${cantidad de filas}=            get element count                                                                               css:.p-datatable-wrapper>table>tbody>tr
+    FOR                              ${i}                                                                                            IN RANGE                                                                         ${cantidad de filas}
+    Click Visible Element            css:.p-datatable-wrapper>table>tbody>tr:nth-child(2)>td:nth-child(5)>div:nth-child(3)>button
+    ${boton de confirmar}            set variable                                                                                    css:.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
+    Click Visible Element            ${boton de confirmar}
+    END
+
+Eliminar usuario
+    [Arguments]              ${usuario}
+    ${numero de fila}=       Get index list                                                                                          1                                                                                ${usuario}
+    Click Visible Element    css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>#action-buttons>app-menu>button
+    Click Visible Element    css:app-menu > p-menu > div > ul > li:nth-child(3) > a
+    ${boton de confirmar}    set variable                                                                                            css:.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
+    Click Visible Element    ${boton de confirmar}
+
 Navegar al menu
     [Arguments]       ${menu}
     Run Keyword If    '${menu}' == 'Usuario'             Click Element            css:#menu-usuario>a>span
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    id:listarCubSubMenu
+    Run Keyword If    '${menu}' == 'Perfil'              Click Visible Element    css:#menu-perfil>a>span
+
+Click boton Editar
+    [Arguments]              ${valor} 
+    input text               css:div.p-datatable-header.ng-star-inserted > div > span > input                                ${valor}
+    Click Visible Element    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(5)>div:nth-child(1)>button
+    
+Set Permisos OT
+    [Arguments]                   ${perfil}                    @{permisos}
+    ${permisos del modulo OT}=    Get WebElements              css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
+    Set Suite Variable            ${permisos del modulo OT}
+    FOR                           ${permiso a escoger}         IN                                                                      @{permisos}
+    Log To Console                ${permiso a escoger}
+    ${selector permiso}=          Get selector permisos        ${permiso a escoger}                                                    @{permisos del modulo OT}    
+    Click Visible Element         ${selector permiso}
+    END
+
+Get selector permisos
+    [Arguments]           ${permisoescoger}                @{permisosmoduloOT}           
+    FOR                   ${perm}                          IN                            @{permisosmoduloOT}
+    ${txt}=               Get Text                         ${perm}
+    ${areYouMyLine} =     Run Keyword and Return Status    Should Be Equal As Strings    ${txt}                 ${permisoescoger}
+    ${selector}           set variable                     ${perm}
+    Set Suite Variable    ${selector}
+    Run Keyword If        ${areYouMyLine}                  Exit For Loop                 
+    END
+    [return]              ${selector}
+
+Editar Jefatura
+    [Arguments]    ${jerarquia}
