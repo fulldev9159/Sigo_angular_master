@@ -221,7 +221,7 @@ Set Jefatura
     Select item                      css:#nombre-perfil-input > select    ${jerarquia}
 
 Acceder a creacion de nuevo perfil
-    Click Visible Element    id:add-perfil-button    
+    Click Visible Element    id:add-profile-button    
 
 Acceder a creacion de nuevo usuario
     Click Visible Element    id:add-user-button
