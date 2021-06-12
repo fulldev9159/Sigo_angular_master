@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import * as Model from '@storeOT/features/profile/profile.model';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
@@ -13,10 +18,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   selector: 'app-form-pro',
   templateUrl: './form-pro.component.html',
   styleUrls: ['./form-pro.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormProComponent implements OnInit, OnDestroy {
-
   // declarations
   public groups = null;
   public profileId = null;
@@ -35,19 +39,17 @@ export class FormProComponent implements OnInit, OnDestroy {
     private rutaActiva: ActivatedRoute,
     private profileFacade: ProfileFacade,
     private messageService: MessageService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-
     this.initForm();
 
     // traemos contratos des api mediante efectos
-    this.authFacade.getLogin$()
+    this.authFacade
+      .getLogin$()
       .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(authLogin => {
+      .subscribe((authLogin) => {
         if (authLogin) {
-
           // asignamos datos de usuario autenticado a variable local
           this.authLogin = authLogin;
 
@@ -57,7 +59,6 @@ export class FormProComponent implements OnInit, OnDestroy {
 
           // generamos llamada a api para rescatar permisos
           this.profileFacade.getPermissions({ token: authLogin.token });
-
 
           // generamos llamada a api para perfiles
           this.profileFacade.getProfile({ token: authLogin.token });
@@ -70,41 +71,43 @@ export class FormProComponent implements OnInit, OnDestroy {
     // escuchamos cambios en store para traer permisos a la vista permisos
     this.permissionsOriginal$ = this.profileFacade.getPermissions$();
 
-    this.permissions$ = this.profileFacade.getPermissions$()
-      .pipe(
-        map((permissions: Model.Permit[]) => {
-          const data = permissions.map((permit: Model.Permit) => {
-            let permitCustom; if (permit && permit.slug) {
-              permitCustom = { ...permit, module: permit.slug.split('_')[0] };
-            }
-            return permitCustom;
-          });
+    this.permissions$ = this.profileFacade.getPermissions$().pipe(
+      map((permissions: Model.Permit[]) => {
+        const data = permissions.map((permit: Model.Permit) => {
+          let permitCustom;
+          if (permit && permit.slug) {
+            permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+          }
+          return permitCustom;
+        });
 
-          return _.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value();
-        }),
-      );
-
-    this.rutaActiva.params.subscribe(
-      (params: Params) => {
-        if (params.id) {
-          this.profileId = params.id;
-        }
-
-        if (this.profileId) {
-          this.profileFacade.getFormProfile$()
-            .pipe(takeUntil(this.destroyInstance$))
-            .subscribe(res => {
-              if (res) {
-                // inicializamos formulario
-                this.formProfile.patchValue(res);
-                this.selectedItems = res.permisos.map((p: any) => p.id);
-              } else {
-                this.router.navigate(['/app/profile/list-pro']);
-              }
-            });
-        }
-      }
+        return _.chain(data)
+          .groupBy('module')
+          .map((value, key) => ({ module: key, permissions: value }))
+          .value();
+      })
     );
+
+    this.rutaActiva.params.subscribe((params: Params) => {
+      if (params.id) {
+        this.profileId = params.id;
+      }
+
+      if (this.profileId) {
+        this.profileFacade
+          .getFormProfile$()
+          .pipe(takeUntil(this.destroyInstance$))
+          .subscribe((res) => {
+            if (res) {
+              // inicializamos formulario
+              this.formProfile.patchValue(res);
+              this.selectedItems = res.permisos.map((p: any) => p.id);
+            } else {
+              this.router.navigate(['/app/profile/list-pro']);
+            }
+          });
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -128,19 +131,36 @@ export class FormProComponent implements OnInit, OnDestroy {
   }
 
   saveProfile(): void {
-    const formData = { ...this.formProfile.value, token: this.authLogin.token, permisos: this.selectedItems };
+    const formData = {
+      ...this.formProfile.value,
+      token: this.authLogin.token,
+      permisos: this.selectedItems,
+    };
     if (formData.id) {
       formData.superior = +formData.superior;
+      if (formData.superior === 0) {
+        formData.superior = null;
+      }
       this.profileFacade.editFormProfile(formData);
-      this.messageService.add({ severity: 'success', summary: 'Perfil editado', detail: 'Perfil editado con Éxito!' });
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Perfil editado',
+        detail: 'Perfil editado con Éxito!',
+      });
       this.router.navigate(['/app/profile/list-pro']);
     } else {
       delete formData.id;
       formData.superior = +formData.superior;
+      if (formData.superior === 0) {
+        formData.superior = null;
+      }
       this.profileFacade.postProfile(formData);
-      this.messageService.add({ severity: 'success', summary: 'Perfil generado', detail: 'Perfil generado con Éxito!' });
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Perfil generado',
+        detail: 'Perfil generado con Éxito!',
+      });
       this.router.navigate(['/app/profile/list-pro']);
     }
   }
-
 }

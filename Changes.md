@@ -4,12 +4,17 @@
 
 ### features
 
--  Automatizacion del ingreso y configuracion de perfiles
+- Automatización del ingreso y configuración de perfiles
+- Automatización del ingreso y configuración de usuarios
+- Se incorpora la UNIDAD en las LPUS
 
 ### Changes
 
+- Mejoras de diseño en crear nuevo perfil seleccion de permisos
 
 ### Fix
+
+- Se envía null como valor para perfiles que son superiores máximos
 
 
 ## [0.22.0] - 2021-05-07

@@ -45,11 +45,11 @@ Click Visible Element
     Click Element                    ${element}
 
 Select item
-    [Arguments]                 ${selector}          ${value}
-    ${select element}           Get WebElement       ${selector}
-    Scroll Element Into View    ${select element}
-    Click Visible Element       ${select element}
-   # Select From List By Label    ${select element}    ${value}
+    [Arguments]                      ${selector}          ${value}
+    ${select element}                Get WebElement       ${selector}
+    Wait Until Element Is Visible    ${select element}    timeout=4
+    Scroll Element Into View         ${select element}
+    Select From List By Label        ${select element}    ${value}
 
 Select item value
     [Arguments]                  ${selector}          ${value}
@@ -154,19 +154,6 @@ Click Menu Editar
     Click Visible Element            css:.p-datatable-wrapper>table>tbody>tr:nth-child(${numero de fila})>#action-buttons>app-menu>button
     Click Visible Element            css:app-menu > p-menu > div > ul > li:nth-child(1) > a
 
-Editar documento de identidad del usuario
-    [Arguments]    ${usuario}              ${documento}
-    input text     name:documento-input    ${documento}
-
-Editar email del usuario
-    [Arguments]    ${usuario}          ${email}
-    input text     name:email-input    ${email}
-
-Editar contratos del usuario
-    [Arguments]              ${contratos}
-    Click Visible Element    css:#contratos_marco_multi > div > div.p-multiselect-label-container> div
-    Click Visible Element    css:#contratos_marco_multi > div > div>div>div:nth-child(1)
-    Click Visible Element    id: caja_formulario
 
 Eliminar todos los perfiles
     Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1) 
@@ -196,13 +183,13 @@ Click boton Editar
     [Arguments]              ${valor} 
     input text               css:div.p-datatable-header.ng-star-inserted > div > span > input                                ${valor}
     Click Visible Element    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(5)>div:nth-child(1)>button
-    
-Set Permisos OT
-    [Arguments]                   ${perfil}                    @{permisos}
+
+Set Permisos modulo OT
+    [Arguments]                   @{permisos}
     ${permisos del modulo OT}=    Get WebElements              css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
     Set Suite Variable            ${permisos del modulo OT}
     FOR                           ${permiso a escoger}         IN                                                                      @{permisos}
-    Log To Console                ${permiso a escoger}
+    # Log To Console                ${permiso a escoger}
     ${selector permiso}=          Get selector permisos        ${permiso a escoger}                                                    @{permisos del modulo OT}    
     Click Visible Element         ${selector permiso}
     END
@@ -218,5 +205,75 @@ Get selector permisos
     END
     [return]              ${selector}
 
-Editar Jefatura
-    [Arguments]    ${jerarquia}
+Set nombre perfil
+    [Arguments]                      ${nombre}
+    Wait Until Element Is Visible    css:#nombre-perfil-input>input
+    input text                       css:#nombre-perfil-input>input    ${nombre}
+
+Set descripcion perfil
+    [Arguments]                      ${descripcion}
+    Wait Until Element Is Visible    css:#descripcion-perfil-input>textarea
+    input text                       css:#descripcion-perfil-input>textarea    ${descripcion}
+
+Set Jefatura
+    [Arguments]                      ${jerarquia}
+    Wait Until Element Is Visible    css:#nombre-perfil-input > select
+    Select item                      css:#nombre-perfil-input > select    ${jerarquia}
+
+Acceder a creacion de nuevo perfil
+    Click Visible Element    id:add-perfil-button    
+
+Acceder a creacion de nuevo usuario
+    Click Visible Element    id:add-user-button
+
+Guardar perfil
+    Click Visible Element    id:guardar-button
+
+Guardar usuario
+    Click Visible Element    id:submit-user
+
+Set username
+    [Arguments]    ${valor}
+    input text     name:username    ${valor}
+
+Set documento de identidad
+    [Arguments]    ${documento}
+    input text     name:documento-input    ${documento}
+
+Set nombres y apellidos
+    [Arguments]    ${nombres}              ${apellidos}
+    input text     name:nombre-input       ${nombres}
+    input text     name:apellidos-input    ${apellidos}
+
+Set email
+    [Arguments]    ${email}
+    input text     name:email-input    ${email}
+
+Set empresa
+    [Arguments]    ${valor}
+    Select item    css:#proveedor_id > select    ${valor}
+
+Set area
+    [Arguments]    ${valor}
+    Select item    css:#area_id > select    ${valor}
+
+Set todos los contratos
+    # [Arguments]              ${contratos}
+    Click Visible Element    css:#contratos_marco_multi > div > div.p-multiselect-label-container> div
+    Click Visible Element    css:#contratos_marco_multi > div > div>div>div:nth-child(1)
+    Click Visible Element    id: caja_formulario
+
+Set tipo empresa
+    [Arguments]       ${valor}
+    Run Keyword If    '${valor}' == 'proveedor'    Click Visible Element    id:proveedor
+    Run Keyword If    '${valor}' == 'movistar'     Click Visible Element    id:movistar
+
+Set perfil usuario
+    [Arguments]              ${valor}
+    Click Visible Element    id:perfil_id
+    Select item              id:perfil-0            ${valor}
+
+Set superior directo
+    [Arguments]              ${valor}
+    Click Visible Element    id:perfil_id
+    Select item              css:#perfil_id > select.form-control.mb-3.ng-untouched.ng-pristine.ng-valid    ${valor}

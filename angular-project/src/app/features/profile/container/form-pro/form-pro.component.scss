@@ -16,6 +16,23 @@ li {
   border: 0 none;
 }
 
+:host ::ng-deep {
+  .p-listbox,
+  .p-listbox-header .p-listbox-filter,
+  .p-checkbox .p-checkbox-box  {
+    border: 1px solid #ced4da;
+  }
+
+  .p-listbox .p-listbox-list .p-listbox-item{
+    color:#545454;
+  }
+  .p-listbox-header{
+    font-weight: 600;
+    color: #00507a;
+    justify-content: center;
+    background: #f9f9f9;
+  }
+}
 ::ng-deep ul {
   max-height: 244px !important;
   // height: 200px;
