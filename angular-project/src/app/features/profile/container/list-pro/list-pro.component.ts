@@ -127,7 +127,6 @@ export class ListProComponent implements OnInit, OnDestroy {
                 accept: () => {
                   this.profileFacade.deleteProfile({
                     profileDelete: {
-                      token: this.authLogin.token,
                       perfil_id: +item.id,
                     },
                   });

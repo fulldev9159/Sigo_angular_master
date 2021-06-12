@@ -33,8 +33,6 @@ export class FormComponent implements OnInit, OnDestroy {
   public lpuSelected: CubModel.SubContractedServices[] = [];
   public total = 0;
   public keyword = 'name';
-  // get f() { return this.formCubicacion.controls; }
-  // get t() { return this.f.tickets as FormArray; }
 
   public configTable = {
     header: true,
@@ -95,8 +93,8 @@ export class FormComponent implements OnInit, OnDestroy {
         {
           field: 'Unidad	',
           type: 'TEXT',
-          sort: 'inventoryStatus',
-          header: 'inventoryStatus',
+          sort: 'lpu_unidad_nombre',
+          header: 'lpu_unidad_nombre',
           editable: false,
         },
         {
@@ -194,8 +192,6 @@ export class FormComponent implements OnInit, OnDestroy {
     }, 0);
     this.selected.emit(event.value);
   }
-
-
 
   selectEvent(item): void {
     // do something with selected item
