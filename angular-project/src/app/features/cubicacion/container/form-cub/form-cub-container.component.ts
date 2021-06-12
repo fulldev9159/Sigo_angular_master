@@ -244,7 +244,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         cantidad: x.cantidad,
       })),
     };
-    console.log(cubage);
     this.cubageFacade.replyCubicacion(cubitation);
     this.cubageFacade.postCubicacion(cubage);
     this.formCubicacion.reset();
