@@ -6,11 +6,14 @@ import {
   SubContractedRegions,
   SubContractedServices,
   SubContractedTypeServices,
-  AutoSuggestForm
+  AutoSuggestForm,
 } from './cubicacion.model';
 
 // CUBICACION LIST
-export const getCubicacion = createAction('[Cubicacion GetAll] GET Cubicacion');
+export const getCubicacion = createAction(
+  '[Cubicacion GetAll] GET Cubicacion',
+  props<{ perfilID: number }>()
+);
 
 export const getCubicacionSuccess = createAction(
   '[Cubicacion GetAll] GET Cubicacion Success',
