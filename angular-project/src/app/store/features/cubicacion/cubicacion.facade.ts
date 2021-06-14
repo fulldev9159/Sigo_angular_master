@@ -10,7 +10,7 @@ import {
   SubContractedRegions,
   SubContractedServices,
   SubContractedTypeServices,
-  AutoSuggestForm
+  AutoSuggestForm,
 } from './cubicacion.model';
 
 @Injectable({
@@ -20,8 +20,8 @@ export class CubicacionFacade {
   constructor(private store: Store<Cubicacion>) {}
 
   // CUBICACION
-  public getCubicacion(): void {
-    this.store.dispatch(cubicacionActions.getCubicacion());
+  public getCubicacion(perfilID: number): void {
+    this.store.dispatch(cubicacionActions.getCubicacion({perfilID}));
   }
 
   public getCubicacion$(): Observable<Cubicacion[]> {
@@ -156,7 +156,7 @@ export class CubicacionFacade {
   // CUBICACION
   // CONSTRACT MARCO
   public getAutoSuggestAction(filter: string, cantidad: number): void {
-    this.store.dispatch(cubicacionActions.getAutoSuggest({filter, cantidad}));
+    this.store.dispatch(cubicacionActions.getAutoSuggest({ filter, cantidad }));
   }
 
   public getAutoSuggestSuccess(contractMarco: ContractMarco[]): void {

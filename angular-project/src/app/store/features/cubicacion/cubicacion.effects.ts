@@ -19,10 +19,8 @@ export class CubicacionEffects {
       ofType(cubicacionActions.getCubicacion),
       concatMap((data: any) =>
         this.http
-          .post(`${environment.api}/cubicacion/get_all`, {
-            token: data.token,
-            usuario_id: data.usuario_id,
-            tipo_usuario: data.tipo_usuario,
+          .post(`${environment.api}/cubicacion/get`, {
+            perfil_id: data.perfilID,
           })
           .pipe(
             map((res: any) =>

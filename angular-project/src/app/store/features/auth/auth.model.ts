@@ -7,17 +7,20 @@ export interface Login {
   token: string;
   usuario_nombre: string;
   usuario_id: number;
-  roles_modulos: Rol[];
+  perfiles: Perfil[];
 }
 
-export interface Rol {
+export interface Perfil {
+  created_at: Date;
+  descripcion: string;
+  eliminable: boolean;
   id: number;
   nombre: string;
-  modulos: Module[];
+  permisos: Permisos[];
+  updated_at: Date;
 }
 
-export interface Module {
-  nombre: string;
-  privilegio: any;
+export interface Permisos {
+  id: number;
+  slug: string;
 }
-
