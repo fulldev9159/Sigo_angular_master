@@ -1,99 +1,157 @@
 <div [formGroup]="formOt" class="row">
-  <div class="col-xs-12 col-md-6">
-    <label for="">Nombre de la orden de trabajo</label>
-    <input formControlName="nombre" class="form-control" type="text">
-    <br>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <label for="">Nombre de la orden de trabajo</label>
+      <input formControlName="nombre" class="form-control" type="text">
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <label for="">Tipo OT</label>
+      <select formControlName="tipo" class="form-control" name="" id="">
+        <option value="null" selected disabled>Seleccione tipo</option>
+        <option value="OT">OT</option>
+        <option value="AP">AP</option>
+      </select>
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <label for="">Cubicación</label>
+      <select formControlName="cubicacion_id" class="form-control" name="" id="">
+        <option value="null" selected disabled>Seleccione cubicación</option>
+        <option *ngFor="let cubicacion of cubicaciones" [value]="cubicacion.id">{{cubicacion.nombre}}</option>
+      </select>
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <label for="">Plan de proyecto</label>
+      <select formControlName="plan_proyecto_id" [attr.disabled]="planes.length === 0 ? '' : null" class="form-control"
+        name="" id="">
+        <option value="null" selected disabled>Seleccione un plan de proyecto</option>
+        <option *ngFor="let plan of planes" [value]="plan.id">{{plan.nombre}} -
+          {{plan.metas}}
+        </option>
+      </select>
+      <br>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <label for="">Sitio</label>
+      <select formControlName="sitio_id" [attr.disabled]="sitios.length === 0 ? '' : null" class="form-control" name=""
+        id="">
+        <option value="null" selected disabled>Seleccione sitio</option>
+        <option *ngFor="let site of sitios" [value]="site.id">{{site.nombre}}</option>
+      </select>
+      <!-- <p-dropdown  [options]="sitios"
+                                      [formControlName]="'sitio_id'" optionLabel="name" [filter]="true" filterBy="name"
+                                      [showClear]="true" placeholder="Seleccione un sitio....">
+                                      {{sitios.name}}
+                                  </p-dropdown>-->
+      <br>
+    </div>
   </div>
+  
+
   <div class="col-xs-12 col-md-6">
-    <label for="">Tipo OT</label>
-    <select formControlName="tipo" class="form-control" name="" id="">
-      <option value="null" selected disabled>Seleccione tipo</option>
-      <option value="OT">OT</option>
-      <option value="AP">AP</option>
-    </select>
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label for="">Cubicación</label>
-    <select formControlName="cubicacion_id" class="form-control" name="" id="">
-      <option value="null" selected disabled>Seleccione cubicación</option>
-      <option *ngFor="let cubicacion of cubicaciones" [value]="cubicacion.id">{{cubicacion.nombre}}</option>
-    </select>
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label for="">Plan de proyecto</label>
-    <select formControlName="plan_despliegue_id" [attr.disabled]="planes.length === 0 ? '' : null" class="form-control"
-      name="" id="">
-      <option value="null" selected disabled>Seleccione un plan de proyecto</option>
-      <option *ngFor="let plan of planes" [value]="plan.id">{{plan.nombre}} -
-        {{plan.metas}}
-      </option>
-    </select>
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label for="">Sitio</label>
-    <select formControlName="sitio_id" [attr.disabled]="sitios.length === 0 ? '' : null" class="form-control" name=""
-      id="">
-      <option value="null" selected disabled>Seleccione sitio</option>
-      <option *ngFor="let site of sitios" [value]="site.id">{{site.nombre}}</option>
-    </select>
-    <!-- <p-dropdown  [options]="sitios"
-                                    [formControlName]="'sitio_id'" optionLabel="name" [filter]="true" filterBy="name"
-                                    [showClear]="true" placeholder="Seleccione un sitio....">
-                                    {{sitios.name}}
-                                </p-dropdown> -->
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label for="">PMO</label>
-    <select formControlName="pmo_codigo" [attr.disabled]="pmos.length === 0 ? '' : null" class="form-control" name=""
-      id="">
-      <option value="null" selected disabled>Seleccione PMO</option>
-      <option *ngFor="let pmo of pmos" [value]="pmo.codigo">{{pmo.codigo}}</option>
-    </select>
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label for="">Linea Presupuestaria</label>
-    <select formControlName="lp_codigo" [attr.disabled]="lps.length === 0 ? '' : null" class="form-control" name=""
-      id="">
-      <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
-      <option *ngFor="let lp of lps" [value]="lp.codigo">{{lp.codigo}}</option>
-    </select>
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label for="">PEP2</label>
-    <!-- formControlName="pep2_codigo" -->
-    <select [attr.disabled]="pep2s.length === 0 ? '' : null" class="form-control" name="" id="">
-      <option value="null" selected disabled>Seleccione Pep2</option>
-      <option *ngFor="let pep2 of pep2s" [value]="pep2.linea_presupuestaria_id">{{pep2.pep2_codigo}}</option>
-    </select>
-    <br>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label class="mr-1" for="">Fecha inicio</label>
-    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block"
-      formControlName="fecha_inicio"></p-calendar>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <label for="">Fecha termino</label>
-    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block"
-      formControlName="fecha_fin"></p-calendar>
-  </div>
-  <div class="col-12">
-    <br>
-    <label for="">Observaciones</label>
-    <textarea formControlName="observaciones" class="form-control" placeholder="..." name="observaciones"
-      id="observaciones" cols="30" rows="2"></textarea>
+    <label for="">Sustento Financiero</label>
+    <div class="row">
+      <div class="col-xs-12 col-md-5">
+        <div class="p-field-radiobutton">
+          <p-radioButton id="capex" name="costos" formControlName="costos" value="capex" ></p-radioButton>
+          <label for="capex">Capex</label>
+        </div>
+      </div>
+      <div class="col-xs-12 col-md-5">
+        <div class="p-field-radiobutton">
+          <p-radioButton id="opex" name="costos" formControlName="costos" value="opex" ></p-radioButton>
+          <label for="opex">Opex</label>
+        </div>
+      </div>
+    </div>
     <br>
   </div>
 
-  <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
-    <button (click)="cancelAction();" class="btn btn-light mr-2"><em class="pi pi-refresh mr-1"></em>Cancelar</button>
-    <button (click)="saveAction();" [disabled]="!formOt.valid" class="btn btn-primary"><em
-        class="pi pi-save mr-1"></em>Guardar</button>
+
+  <div *ngIf= "sfinanciero==='capex'" [formGroup]="formOt" class="col-12">
+    <div class="col-7">
+      <label for="">PMO</label>
+      <select formControlName="pmo_codigo" [attr.disabled]="pmos.length === 0 ? '' : null" class="form-control" name=""
+        id="">
+        <option value="null" selected disabled>Seleccione PMO</option>
+        <option *ngFor="let pmo of pmos" [value]="pmo.codigo">{{pmo.codigo}}</option>
+      </select>
+      <br>
+    </div>
+    <div class="col-7">
+      <label for="">Linea Presupuestaria</label>
+      <select formControlName="lp_codigo" [attr.disabled]="lps.length === 0 ? '' : null" class="form-control" name=""
+        id="">
+        <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
+        <option *ngFor="let lp of lps" [value]="lp.codigo">{{lp.codigo}}</option>
+      </select>
+      <br>
+    </div>
+   <div class="col-7">
+      <label for="">PEP2</label>
+      <select [attr.disabled]="pep2s.length === 0 ? '' : null" class="form-control" name="" id="">
+        <option value="null" selected disabled>Seleccione Pep2</option>
+        <option *ngFor="let pep2 of pep2s" [value]="pep2.linea_presupuestaria_id">{{pep2.pep2_codigo}}</option>
+      </select>
+      <br>
+    </div> 
   </div>
+
+  <div *ngIf="sfinanciero === 'opex'" class="col-12">
+   <div class="col-7">
+      <label for="">ID Opex</label>
+      <select formControlName="id_opex_codigo" [attr.disabled]="ids_opex.length === 0 ? '' : null" class="form-control" name=""
+        id="">
+        <option value="null" selected disabled>Seleccione ID Opex</option>
+        <option *ngFor="let id_opex of ids_opex" [value]="id_opex.codigo">{{id_opex.codigo}}</option>
+      </select>
+      <br>
+    </div>
+    <div class="col-7">
+      <label for="">Cuenta SAP</label>
+      <select formControlName="cuenta_sap_codigo" [attr.disabled]="cuentas_sap.length === 0 ? '' : null" class="form-control" name=""
+        id="">
+        <option value="null" selected disabled>Seleccione Cuenta SAP</option>
+        <option *ngFor="let cuenta_sap of cuentas_sap" [value]="cuenta_sap.codigo">{{cuenta_sap.codigo}}</option>
+      </select>
+      <br>
+    </div>
+    <div class="col-7">
+      <label for="">CECO</label>
+      <select formControlName="ceco_codigo" [attr.disabled]="cecos.length === 0 ? '' : null" class="form-control" name="" id="">
+        <option value="null" selected disabled>Seleccione CECO</option>
+        <option *ngFor="let ceco of cecos" [value]="ceco.codigo">{{ceco.codigo}}</option>
+      </select>
+      <br>
+    </div> 
+  </div>
+
+
+    <div class="col-xs-12 col-md-6">
+      <label class="mr-1" for="">Fecha inicio</label>
+      <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block"
+        formControlName="fecha_inicio"></p-calendar>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <label for="">Fecha termino</label>
+      <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block"
+        formControlName="fecha_fin"></p-calendar>
+    </div>
+    <div class="col-12">
+      <br>
+      <label for="">Observaciones</label>
+      <textarea formControlName="observaciones" class="form-control" placeholder="..." name="observaciones"
+        id="observaciones" cols="30" rows="2"></textarea>
+      <br>
+    </div>
+  
+    <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+      <button (click)="cancelAction();" class="btn btn-light mr-2"><em class="pi pi-refresh mr-1"></em>Cancelar</button>
+      <button (click)="saveAction();" [disabled]="!formOt.valid" class="btn btn-primary"><em
+          class="pi pi-save mr-1"></em>Guardar</button>
+    </div>
+
 </div>

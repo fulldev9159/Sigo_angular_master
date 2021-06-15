@@ -1,6 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
-import { Lp, Ot, Pep2, Plan, PMO, Site } from './ot.model';
+import {
+  CECO,
+  CuentaSap,
+  IDOpex,
+  Lp,
+  Ot,
+  Pep2,
+  Plan,
+  PMO,
+  Site,
+} from './ot.model';
 
 export const otFeatureKey = 'ot';
 
@@ -9,8 +19,11 @@ export interface StateOt {
   planes: Plan[];
   sites: Site[];
   pmos: PMO[];
-  budgetLines: Lp;
+  budgetLines: Lp[];
   pep2s: Pep2[];
+  id_opex: IDOpex[];
+  cuentas_sap: CuentaSap[];
+  cecos: CECO[];
 }
 
 export const initialStateOt: StateOt = {
@@ -25,14 +38,17 @@ export const initialStateOt: StateOt = {
       contrato_marco_nombre: '1231232',
       proveedor_nombre: 'Fuente Alemana',
       usuario_nombre: 'Carlos Cifuentes',
-      sesion_sce: 'Hola Mundo'
+      sesion_sce: 'Hola Mundo',
     },
   ],
   planes: [],
   sites: [],
   pmos: [],
-  budgetLines: { lineas_presupuestarias: [] },
-  pep2s: []
+  budgetLines: [],
+  pep2s: [],
+  id_opex: [],
+  cuentas_sap: [],
+  cecos: [],
 };
 
 export const reducerOt = createReducer(
@@ -47,7 +63,7 @@ export const reducerOt = createReducer(
     ...state,
     items: [
       ...state.items.slice(0, payload.otPosition),
-      ...state.items.slice(payload.otPosition + 1)
+      ...state.items.slice(payload.otPosition + 1),
     ],
   })),
   on(OtActions.replyOt, (state, payload) => ({
@@ -73,6 +89,24 @@ export const reducerOt = createReducer(
     pmos: payload.pmo,
   })),
 
+  on(OtActions.getIDOpex, (state) => state),
+  on(OtActions.getIDOpexSuccess, (state, payload) => ({
+    ...state,
+    ids_opex: payload.id_opex,
+  })),
+
+  on(OtActions.getCuentaSAP, (state) => state),
+  on(OtActions.getCuentaSAPSuccess, (state, payload) => ({
+    ...state,
+    cuentas_sap: payload.cuentas_sap,
+  })),
+
+  on(OtActions.getCECO, (state) => state),
+  on(OtActions.getCECOSuccess, (state, payload) => ({
+    ...state,
+    cecos: payload.cecos,
+  })),
+
   on(OtActions.getBudgetLine, (state) => state),
   on(OtActions.getBudgetLineSuccess, (state, payload) => ({
     ...state,
@@ -83,5 +117,5 @@ export const reducerOt = createReducer(
   on(OtActions.getPep2Success, (state, payload) => ({
     ...state,
     pep2s: payload.pep2,
-  })),
+  }))
 );
