@@ -15,7 +15,8 @@
 ### Fix
 
 - Se envía null como valor para perfiles que son superiores máximos
-
+- Se corrige el get cubicaciones
+- Se corrigen los valores enviados en el save cubicaciones
 
 ## [0.22.0] - 2021-05-07
 

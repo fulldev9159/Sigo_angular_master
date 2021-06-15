@@ -229,11 +229,14 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     //   (c) => +c.id === +form.proveedor_id
     // );
     const [subcontratos, proveedor] = form.subcontrato_id.split('-');
-    const idProve = 'proveedor_id';
+    console.log(this.lpus);
     const cubage = {
       // cubicacion_id: +form.cubicacion_id,
       cubicacion_nombre: form.nombre,
-      total: 10000,
+      total: this.lpus.reduce(
+        (acc, value) => +acc + +value.lpu_precio * +value.cantidad,
+        0
+      ),
       region_id: +form.region_id,
       usuario_id: +this.authLogin.usuario_id,
       contrato_marco_id: +form.contrato_marco_id,
@@ -244,7 +247,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         cantidad: x.cantidad,
       })),
     };
-    this.cubageFacade.replyCubicacion(cubitation);
+    // this.cubageFacade.replyCubicacion(cubitation);
     this.cubageFacade.postCubicacion(cubage);
     this.formCubicacion.reset();
     this.cubageFacade.resetData();
@@ -261,9 +264,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   ChangeSearch(filter: string): void {
-    console.log(filter);
     const idNombre = 'nombre';
     this.formCubicacion.controls[idNombre].setValue(filter);
     this.cubageFacade.getAutoSuggestAction(filter, 5);
+  }
+
+  selectSearch(filter: string): void {
+    const idNombre = 'nombre';
+    this.formCubicacion.controls[idNombre].setValue(filter);
   }
 }

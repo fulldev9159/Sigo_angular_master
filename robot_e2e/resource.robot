@@ -277,3 +277,6 @@ Set superior directo
     [Arguments]              ${valor}
     Click Visible Element    id:perfil_id
     Select item              css:#perfil_id > select.form-control.mb-3.ng-untouched.ng-pristine.ng-valid    ${valor}
+
+Set Permisos modulo CUBICACION
+   Click Visible Element    css:#modulos-pefil-CUBICACION > p-listbox > div > div:nth-child(2) > div.p-checkbox.p-component.ng-star-inserted > div.p-checkbox-box

@@ -26,8 +26,9 @@
         [autoSuggestData]="(autoSuggest$|async)"
         (selected)="selected($event);"
         (cancel)="cancel($event);" (save)="save($event);"
-        (ChangeSearchContainer)="ChangeSearch($event)"></app-form>
+        (ChangeSearchContainer)="ChangeSearch($event)" (selectSearch)="selectSearch($event)"></app-form>
     </ng-container>
   </app-card>
 
+  {{formCubicacion.value|json}}
 </div>
