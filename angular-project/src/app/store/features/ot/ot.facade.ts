@@ -91,12 +91,10 @@ export class OtFacade {
   }
   // PMOS
 
-  // IDOpex DUDA: se debe poner el data?, no se le ingresa nada asi que no tiene props
   public getIDsOpex(): void {
     this.store.dispatch(otActions.getIDOpex());
   }
 
-  // DUDA: debe ir el getIDOpexSuccess({ id_opex })
   public getIDsOpexSuccess(id_opex: IDOpex[]): void {
     this.store.dispatch(otActions.getIDOpexSuccess({ id_opex }));
   }

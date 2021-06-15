@@ -266,7 +266,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
         if (id_opex_codigo) {
           // actualizamos store para
           // cuenta SAP según id_opex_codigo
-          // this.otFacade.getCuentasSAP({ token: this.authLogin.token, id_opex_codigo });
+          this.otFacade.getCuentaSAP({
+            id_opex_codigo: this.formOt.value.id_opex_codigo,
+          });
           // refrescamos parte de
           //  formulario al cambiar id_opex
           // this.resetForm('ID_OPEX');
@@ -310,21 +312,18 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((costos) => {
         if (costos) {
-          // const id_sitio_controls = 'sitio_id'
-          // const sitio_id = this.formOt.controls[id_sitio_controls].value
-          // const site = this.sitios.find((s) => +s.id === +sitio_id);
+          const id_sitio_controls = 'sitio_id';
+          const sitio_id = this.formOt.controls[id_sitio_controls].value;
+          const site = this.sitios.find((s) => +s.id === +sitio_id);
           // const id_sustento_controls = 'costos'
           // const rbutton = this.formOt.controls[id_sustento_controls].value
-          // if (site) {
-          //   if (rbutton === 'capex'){
-          //     this.otFacade.getPmos({
-          //       sitio_codigo: site.codigo
-          //     });
-          //   }
-          //   else if (rbutton === 'opex'){
-          //     this.otFacade.getIDsOpex();
-          //   }
-          // }
+          if (costos === 'capex') {
+            this.otFacade.getPmos({
+              sitio_codigo: site.codigo,
+            });
+          } else if (costos === 'opex') {
+            this.otFacade.getIDsOpex();
+          }
         }
       });
   }

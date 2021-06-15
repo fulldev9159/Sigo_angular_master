@@ -150,7 +150,7 @@ export const getPmoError = createAction(
 export const getIDOpex = createAction('[IDOpex Get All] GET All');
 
 export const getIDOpexSuccess = createAction(
-  '[IDOpex Get All] GET All',
+  '[IDOpex Get All] GET All Success',
   props<{ id_opex: IDOpex[] }>()
 );
 
