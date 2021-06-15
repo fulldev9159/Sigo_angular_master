@@ -21,6 +21,18 @@ export const getPmos = createSelector(selectOt,
   (state: fromOt.StateOt) => state.pmos
 );
 
+export const getIDsOpex = createSelector(selectOt,
+  (state: fromOt.StateOt) => state.id_opex
+);
+
+export const getCuentasSAP = createSelector(selectOt,
+  (state: fromOt.StateOt) => state.cuentas_sap
+);
+
+export const getCECOs = createSelector(selectOt,
+  (state: fromOt.StateOt) => state.cecos
+);
+
 export const getLps = createSelector(selectOt,
   (state: fromOt.StateOt) => state.budgetLines
 );

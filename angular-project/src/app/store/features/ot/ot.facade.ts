@@ -3,13 +3,23 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
-import { Lp, Ot, Pep2, Plan, PMO, Site } from './ot.model';
+import {
+  CECO,
+  CuentaSap,
+  IDOpex,
+  Lp,
+  Ot,
+  Pep2,
+  Plan,
+  PMO,
+  Site,
+} from './ot.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OtFacade {
-  constructor(private store: Store<Ot>) { }
+  constructor(private store: Store<Ot>) {}
 
   // OT
   public getOt(data: any): void {
@@ -81,16 +91,59 @@ export class OtFacade {
   }
   // PMOS
 
+  // IDOpex DUDA: se debe poner el data?, no se le ingresa nada asi que no tiene props
+  public getIDsOpex(): void {
+    this.store.dispatch(otActions.getIDOpex());
+  }
+
+  // DUDA: debe ir el getIDOpexSuccess({ id_opex })
+  public getIDsOpexSuccess(id_opex: IDOpex[]): void {
+    this.store.dispatch(otActions.getIDOpexSuccess({ id_opex }));
+  }
+
+  public getIDsOpex$(): Observable<IDOpex[]> {
+    return this.store.select(otSelectors.getIDsOpex);
+  }
+  // IDOpex
+
+  // Cuentas SAP
+  public getCuentaSAP(data): void {
+    this.store.dispatch(otActions.getCuentaSAP(data));
+  }
+
+  public getCuentaSAPSuccess(cuentas_sap: CuentaSap[]): void {
+    this.store.dispatch(otActions.getCuentaSAPSuccess({ cuentas_sap }));
+  }
+
+  public getCuentaSAP$(): Observable<CuentaSap[]> {
+    return this.store.select(otSelectors.getCuentasSAP);
+  }
+  // Cuentas SAP
+
+  // CECOs
+  public getCECO(data): void {
+    this.store.dispatch(otActions.getCECO(data));
+  }
+
+  public getCECOSuccess(cecos: CECO[]): void {
+    this.store.dispatch(otActions.getCECOSuccess({ cecos }));
+  }
+
+  public getCECO$(): Observable<CECO[]> {
+    return this.store.select(otSelectors.getCECOs);
+  }
+  // CECOs
+
   // LPS
   public getLps(data): void {
     this.store.dispatch(otActions.getBudgetLine(data));
   }
 
-  public getLpsSuccess(lp: Lp): void {
+  public getLpsSuccess(lp: Lp[]): void {
     this.store.dispatch(otActions.getBudgetLineSuccess({ lp }));
   }
 
-  public getLps$(): Observable<Lp> {
+  public getLps$(): Observable<Lp[]> {
     return this.store.select(otSelectors.getLps);
   }
   // LPS

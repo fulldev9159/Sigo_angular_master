@@ -29,7 +29,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getPlans),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/ingreot/plan/get`, {
+        this.http.post(`${environment.api}/ingreot/plan/get_all`, {
           token: data.token, region_id: data.region_id
         }).pipe(map((res: any) =>
           otActions.getPlansSuccess({ plan: res.data.items }),
@@ -43,7 +43,7 @@ export class OtEffects {
       ofType(otActions.getSite),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/ingreot/sitio/get`, {
-          token: data.token, plan_despliegue_id: +data.plan_despliegue_id
+          plan_proyecto_id: +data.plan_proyecto_id, region_id: +data.region_id
         }).pipe(map((res: any) =>
           otActions.getSiteSuccess({ site: res.data.items }),
         ),
@@ -56,12 +56,36 @@ export class OtEffects {
       ofType(otActions.getPmo),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/ingreot/pmo/get`, {
-          token: data.token, emplazamiento_codigo: data.emplazamiento_codigo
+          sitio_codigo: data.sitio_codigo
         }).pipe(map((res: any) =>
           otActions.getPmoSuccess({ pmo: res.data.items }),
         ),
           catchError(err => of(otActions.getPmoError({ error: err }))
           ))))
+  );
+
+  getIDOpex$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(otActions.getIDOpex),
+    concatMap((data: any) =>
+      this.http.post(`${environment.api}/ingreot/opex/id_opex/get_all`, {}).pipe(
+        map((res: any) =>
+        otActions.getIDOpexSuccess({ id_opex: res.data.items }),
+      ),
+        catchError(err => of(otActions.getIDOpexError({ error: err }))
+        ))))
+  );
+
+  getCuentasSAP$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(otActions.getCuentaSAP),
+    concatMap((data: any) =>
+      this.http.post(`${environment.api}/ingreot/opex/cuenta_sap/get`, {}).pipe(
+        map((res: any) =>
+        otActions.getCuentaSAPSuccess({ cuentas_sap: res.data.items }),
+      ),
+        catchError(err => of(otActions.getCuentaSAPError({ error: err }))
+        ))))
   );
 
   getLineaPresupuestaria$ = createEffect(() =>

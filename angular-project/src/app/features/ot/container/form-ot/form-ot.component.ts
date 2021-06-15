@@ -9,7 +9,16 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { Lp, Pep2, Plan, PMO, Site } from '@storeOT/features/ot/ot.model';
+import {
+  Lp,
+  Pep2,
+  Plan,
+  PMO,
+  Site,
+  CECO,
+  CuentaSap,
+  IDOpex,
+} from '@storeOT/features/ot/ot.model';
 import { MessageService } from 'primeng/api';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
@@ -34,10 +43,16 @@ export class FormOtComponent implements OnInit, OnDestroy {
   public sitios$: Observable<Site[]> = of([]);
   public pmos = null;
   public pmos$: Observable<PMO[]> = of([]);
-  public lps: Lp;
+  public lps: Lp[];
   public lps$: Observable<any> = of();
   public pep2s: Pep2[];
   public pep2s$: Observable<Pep2[]> = of([]);
+  public ids_opex = null;
+  public ids_opex$: Observable<IDOpex[]> = of([]);
+  public cuentas_sap: CuentaSap[];
+  public cuentas_sap$: Observable<CuentaSap[]> = of([]);
+  public cecos: CECO[];
+  public cecos$: Observable<CECO[]> = of([]);
   private destroyInstance$: Subject<boolean> = new Subject();
 
   constructor(
@@ -76,25 +91,43 @@ export class FormOtComponent implements OnInit, OnDestroy {
         return plans;
       })
     );
-    this.sitios$ = this.otFacade
-      .getSites$()
-      .pipe(
-        map(
-          (sitios) =>
-            (this.sitios = sitios.map((x) => ({
-              ...x,
-              nombre: `${x.codigo} - ${x.nombre}`,
-            })))
-        )
-      );
+    this.sitios$ = this.otFacade.getSites$().pipe(
+      map(
+        (sitios) =>
+          (this.sitios = sitios.map((x) => ({
+            ...x,
+            nombre: `${x.codigo} - ${x.nombre}`,
+          })))
+      )
+    );
     this.pmos$ = this.otFacade
       .getPmos$()
       .pipe(map((pmos) => (this.pmos = pmos)));
-    this.lps$ = this.otFacade.getLps$().pipe(map((lps) => (this.lps = lps)));
+    this.lps$ = this.otFacade.getLps$().pipe(
+      map((lps) => {
+        this.lps = lps;
+        return lps;
+      })
+    );
     this.pep2s$ = this.otFacade.getPep2s$().pipe(
       map((pep2s) => {
         this.pep2s = pep2s;
         return pep2s;
+      })
+    );
+    this.ids_opex$ = this.otFacade
+      .getIDsOpex$()
+      .pipe(map((ids_opex) => (this.ids_opex = ids_opex)));
+    this.cuentas_sap$ = this.otFacade.getCuentaSAP$().pipe(
+      map((cuentas_sap) => {
+        this.cuentas_sap = cuentas_sap;
+        return cuentas_sap;
+      })
+    );
+    this.cecos$ = this.otFacade.getCECO$().pipe(
+      map((cecos) => {
+        this.cecos = cecos;
+        return cecos;
       })
     );
   }
@@ -104,6 +137,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
+  // DUDA: por qué el pep2 parte con ese código?
   initForm(): void {
     this.formOt = this.fb.group({
       id: null,
@@ -113,11 +147,15 @@ export class FormOtComponent implements OnInit, OnDestroy {
       fecha_inicio: [null, Validators.required],
       fecha_fin: [null, Validators.required],
       cubicacion_id: [null, Validators.required],
-      plan_despliegue_id: [null, Validators.required],
+      plan_proyecto_id: [null, Validators.required],
       plan_nombre: null,
+      costos: 'capex',
       sitio_id: [null, Validators.required],
       pmo_codigo: [null, Validators.required],
+      id_opex_codigo: [null, Validators.required],
       lp_codigo: [null, Validators.required],
+      cuenta_sap_codigo: [null, Validators.required],
+      ceco_codigo: [null, Validators.required],
       pep2_codigo: 'P-0404-20-1318-40005-807',
       observaciones: null,
       pep2_provisorio: false,
@@ -128,6 +166,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.detectChangesForm();
   }
 
+  // DUDA: por qué está comentadp el reset ?
   detectChangesForm(): void {
     this.formOt
       .get('cubicacion_id')
@@ -151,26 +190,32 @@ export class FormOtComponent implements OnInit, OnDestroy {
       });
 
     this.formOt
-      .get('plan_despliegue_id')
+      .get('plan_proyecto_id')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((plan_despliegue_id) => {
-        if (plan_despliegue_id) {
+      .subscribe((plan_proyecto_id) => {
+        if (plan_proyecto_id) {
           // actualizamos nombre plan seleccionado
-          const plan = this.plans.find((p) => p.id === plan_despliegue_id);
+          const plan = this.plans.find((p) => p.id === plan_proyecto_id);
           if (plan) {
             this.formOt.get('plan_nombre').setValue(plan.nombre);
           }
 
+          // Obtenemos el id de la cubicacion obtenida
+          // const id_cubicacion_control = 'cubicacion_id'
+          // const id_cubicacion = this.formOt.controls[id_cubicacion_control].value
+
+          // this.cubage = this.cubicaciones.find((c) => +c.id === +id_cubicacion);
+
           // actualizamos store para
           // Sitios según plan
           this.otFacade.getSites({
-            token: this.authLogin.token,
-            plan_despliegue_id,
+            plan_proyecto_id,
+            region_id: this.cubage.region_id,
           });
 
           // refrescamos parte de
           //  formulario al cambiar plan
-          this.resetForm('PLAN');
+          // this.resetForm('PLAN');
         }
       });
 
@@ -182,11 +227,16 @@ export class FormOtComponent implements OnInit, OnDestroy {
           // actualizamos store para
           // PMOS según site
           const site = this.sitios.find((s) => +s.id === +sitio_id);
+          const id_sustento_controls = 'costos';
+          const rbutton = this.formOt.controls[id_sustento_controls].value;
           if (site) {
-            this.otFacade.getPmos({
-              token: this.authLogin.token,
-              emplazamiento_codigo: site.codigo,
-            });
+            if (rbutton === 'capex') {
+              this.otFacade.getPmos({
+                sitio_codigo: site.codigo,
+              });
+            } else if (rbutton === 'opex') {
+              this.otFacade.getIDsOpex();
+            }
           }
           // refrescamos parte de
           //  formulario al cambiar site
@@ -208,6 +258,35 @@ export class FormOtComponent implements OnInit, OnDestroy {
           this.resetForm('PMO');
         }
       });
+
+    this.formOt
+      .get('id_opex_codigo')
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe((id_opex_codigo) => {
+        if (id_opex_codigo) {
+          // actualizamos store para
+          // cuenta SAP según id_opex_codigo
+          // this.otFacade.getCuentasSAP({ token: this.authLogin.token, id_opex_codigo });
+          // refrescamos parte de
+          //  formulario al cambiar id_opex
+          // this.resetForm('ID_OPEX');
+        }
+      });
+
+    this.formOt
+      .get('cuenta_sap_codigo')
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe((cuenta_sap_codigo) => {
+        if (cuenta_sap_codigo) {
+          // actualizamos store para
+          // ceco según cuenta_sap_codigo
+          // this.otFacade.getCECOs({ token: this.authLogin.token, cuenta_sap_codigo });
+          // refrescamos parte de
+          //  formulario al cambiar cuenta sap
+          // this.resetForm('CUENTA_SAP');
+        }
+      });
+
     this.formOt
       .get('lp_codigo')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
@@ -224,6 +303,28 @@ export class FormOtComponent implements OnInit, OnDestroy {
           // refrescamos parte de
           //  formulario al cambiar lp
           // this.resetForm('LP');
+        }
+      });
+    this.formOt
+      .get('costos')
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe((costos) => {
+        if (costos) {
+          // const id_sitio_controls = 'sitio_id'
+          // const sitio_id = this.formOt.controls[id_sitio_controls].value
+          // const site = this.sitios.find((s) => +s.id === +sitio_id);
+          // const id_sustento_controls = 'costos'
+          // const rbutton = this.formOt.controls[id_sustento_controls].value
+          // if (site) {
+          //   if (rbutton === 'capex'){
+          //     this.otFacade.getPmos({
+          //       sitio_codigo: site.codigo
+          //     });
+          //   }
+          //   else if (rbutton === 'opex'){
+          //     this.otFacade.getIDsOpex();
+          //   }
+          // }
         }
       });
   }
@@ -255,6 +356,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
       case part === 'LP':
         this.formOt.get('pep2_codigo').reset();
         break;
+      // case part === 'ID_OPEX':
+      //  this.formOt.get('cuenta_sap').reset();
+      //  this.formOt.get('ceco').reset();
+      // case part === 'CUENTA_SAP':
+      //  this.formOt.get('ceco').reset();
     }
   }
 

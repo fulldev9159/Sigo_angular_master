@@ -1,0 +1,3751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20210601 14:12:54.657" schemaversion="2" generator="Robot 4.0.3 (Python 2.7.17 on linux2)">
+<suite source="/home/zweicom/web-sigo" id="s1" name="Web-Sigo">
+<suite source="/home/zweicom/web-sigo/robot_e2e" id="s1-s1" name="Robot E2E">
+<suite source="/home/zweicom/web-sigo/robot_e2e/cubicacion.robot" id="s1-s1-s1" name="Cubicacion">
+<test id="s1-s1-s1-t1" name="Crear cubicacion">
+<kw name="Open Browser To Page" library="resource">
+<arg>${url}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:12:54.834" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f87e1ff9410&gt;</msg>
+<status status="PASS" endtime="20210601 14:12:54.835" starttime="20210601 14:12:54.834"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-web-security</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:12:54.835" starttime="20210601 14:12:54.835"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>allow-running-insecure-content</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:12:54.835" starttime="20210601 14:12:54.835"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>headless</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:12:54.836" starttime="20210601 14:12:54.836"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-gpu</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:12:54.836" starttime="20210601 14:12:54.836"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>no-sandbox</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:12:54.837" starttime="20210601 14:12:54.836"/>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20210601 14:12:54.837" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" endtime="20210601 14:12:56.215" starttime="20210601 14:12:54.837"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210601 14:12:56.323" starttime="20210601 14:12:56.216"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${page}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20210601 14:12:56.324" level="INFO">Opening url 'http://localhost:4201'</msg>
+<status status="PASS" endtime="20210601 14:12:57.942" starttime="20210601 14:12:56.323"/>
+</kw>
+<status status="PASS" endtime="20210601 14:12:57.943" starttime="20210601 14:12:54.833"/>
+</kw>
+<kw name="Login" library="resource">
+<arg>admin</arg>
+<arg>password</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:12:57.948" level="INFO">Typing text 'admin' into text field 'name:username'.</msg>
+<status status="PASS" endtime="20210601 14:12:58.063" starttime="20210601 14:12:57.947"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>name:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:12:58.064" level="INFO">Typing password into text field 'name:password'.</msg>
+<msg timestamp="20210601 14:12:58.112" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20210601 14:12:58.176" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" endtime="20210601 14:12:58.176" starttime="20210601 14:12:58.064"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:12:58.204" starttime="20210601 14:12:58.177"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210601 14:12:58.204" level="INFO">Clicking button 'id:login'.</msg>
+<status status="PASS" endtime="20210601 14:12:58.291" starttime="20210601 14:12:58.204"/>
+</kw>
+<status status="PASS" endtime="20210601 14:12:58.292" starttime="20210601 14:12:57.945"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id:user-name</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:12:58.648" starttime="20210601 14:12:58.292"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>css:#menu-cubicacion &gt; a &gt; span</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:12:58.684" starttime="20210601 14:12:58.649"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:12:58.954" starttime="20210601 14:12:58.685"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:12:58.957" level="INFO">Clicking element 'css:#menu-cubicacion &gt; a &gt; span'.</msg>
+<status status="PASS" endtime="20210601 14:12:59.118" starttime="20210601 14:12:58.955"/>
+</kw>
+<status status="PASS" endtime="20210601 14:12:59.119" starttime="20210601 14:12:58.648"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>id:listarCubSubMenu</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:12:59.441" starttime="20210601 14:12:59.121"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:12:59.728" starttime="20210601 14:12:59.442"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:12:59.730" level="INFO">Clicking element 'id:listarCubSubMenu'.</msg>
+<status status="PASS" endtime="20210601 14:12:59.879" starttime="20210601 14:12:59.728"/>
+</kw>
+<status status="PASS" endtime="20210601 14:12:59.880" starttime="20210601 14:12:59.119"/>
+</kw>
+<kw name="Crear Cubicacion" library="resource">
+<arg>RobotCubicacion</arg>
+<arg>SBE</arg>
+<arg>AJ INGENIEROS S.A.</arg>
+<arg>Región Metropolitana de Santiago</arg>
+<arg>PROYECTO (FIJA)</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name:input-nombreCubicacion</arg>
+<arg>${nombre cubicacion}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:12:59.885" level="INFO">Typing text 'RobotCubicacion' into text field 'name:input-nombreCubicacion'.</msg>
+<status status="PASS" endtime="20210601 14:13:00.132" starttime="20210601 14:12:59.883"/>
+</kw>
+<kw name="Select item" library="resource">
+<arg>name:select-contratoMarco</arg>
+<arg>${contrato}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${select element}</var>
+<arg>${selector}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210601 14:13:00.146" level="INFO">${select element} = &lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="1ed8f100-a268-46f9-b4c4-8580bb7b858a")&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:00.146" starttime="20210601 14:13:00.133"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:00.427" starttime="20210601 14:13:00.146"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${select element}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:00.447" starttime="20210601 14:13:00.428"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:00.727" starttime="20210601 14:13:00.447"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:00.729" level="INFO">Clicking element '&lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="1ed8f100-a268-46f9-b4c4-8580bb7b858a")&gt;'.</msg>
+<status status="PASS" endtime="20210601 14:13:00.866" starttime="20210601 14:13:00.727"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:00.867" starttime="20210601 14:13:00.427"/>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<arg>${value}</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<msg timestamp="20210601 14:13:00.869" level="INFO">Selecting options from selection list '&lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="1ed8f100-a268-46f9-b4c4-8580bb7b858a")&gt;' by label SBE.</msg>
+<status status="PASS" endtime="20210601 14:13:00.962" starttime="20210601 14:13:00.867"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:00.963" starttime="20210601 14:13:00.132"/>
+</kw>
+<kw name="Select item" library="resource">
+<arg>name:select-proveedor</arg>
+<arg>${proveedor}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${select element}</var>
+<arg>${selector}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210601 14:13:00.979" level="INFO">${select element} = &lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="f530449f-c43a-4fdb-9109-d7953aead05b")&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:00.979" starttime="20210601 14:13:00.964"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:01.259" starttime="20210601 14:13:00.979"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${select element}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:01.313" starttime="20210601 14:13:01.262"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:01.603" starttime="20210601 14:13:01.313"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:01.606" level="INFO">Clicking element '&lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="f530449f-c43a-4fdb-9109-d7953aead05b")&gt;'.</msg>
+<status status="PASS" endtime="20210601 14:13:01.724" starttime="20210601 14:13:01.604"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:01.724" starttime="20210601 14:13:01.260"/>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<arg>${value}</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<msg timestamp="20210601 14:13:01.726" level="INFO">Selecting options from selection list '&lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="f530449f-c43a-4fdb-9109-d7953aead05b")&gt;' by label AJ INGENIEROS S.A..</msg>
+<status status="PASS" endtime="20210601 14:13:01.811" starttime="20210601 14:13:01.725"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:01.811" starttime="20210601 14:13:00.963"/>
+</kw>
+<kw name="Select item" library="resource">
+<arg>name:select-region</arg>
+<arg>${region}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${select element}</var>
+<arg>${selector}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210601 14:13:01.828" level="INFO">${select element} = &lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="6c4dba3f-70be-4162-9d35-bec70370d5fd")&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:01.828" starttime="20210601 14:13:01.812"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:02.107" starttime="20210601 14:13:01.828"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${select element}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:02.157" starttime="20210601 14:13:02.110"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:02.421" starttime="20210601 14:13:02.158"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:02.421" level="INFO">Clicking element '&lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="6c4dba3f-70be-4162-9d35-bec70370d5fd")&gt;'.</msg>
+<status status="PASS" endtime="20210601 14:13:02.484" starttime="20210601 14:13:02.421"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:02.484" starttime="20210601 14:13:02.108"/>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<arg>${value}</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<msg timestamp="20210601 14:13:02.486" level="INFO">Selecting options from selection list '&lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="6c4dba3f-70be-4162-9d35-bec70370d5fd")&gt;' by label Región Metropolitana de Santiago.</msg>
+<status status="PASS" endtime="20210601 14:13:02.577" starttime="20210601 14:13:02.484"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:02.578" starttime="20210601 14:13:01.811"/>
+</kw>
+<kw name="Select item" library="resource">
+<arg>name:select-tipoServicio</arg>
+<arg>${tipo servicio}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${select element}</var>
+<arg>${selector}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210601 14:13:02.597" level="INFO">${select element} = &lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="e53878ff-873e-46e9-843f-1626c6567b57")&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:02.597" starttime="20210601 14:13:02.580"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:02.875" starttime="20210601 14:13:02.597"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${select element}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:02.926" starttime="20210601 14:13:02.878"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:03.192" starttime="20210601 14:13:02.927"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:03.195" level="INFO">Clicking element '&lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="e53878ff-873e-46e9-843f-1626c6567b57")&gt;'.</msg>
+<status status="PASS" endtime="20210601 14:13:03.299" starttime="20210601 14:13:03.193"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:03.299" starttime="20210601 14:13:02.876"/>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<arg>${value}</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<msg timestamp="20210601 14:13:03.300" level="INFO">Selecting options from selection list '&lt;selenium.webdriver.remote.webelement.WebElement (session="db8cf6f7d5f3f1b86655038038eb1945", element="e53878ff-873e-46e9-843f-1626c6567b57")&gt;' by label PROYECTO (FIJA).</msg>
+<status status="PASS" endtime="20210601 14:13:03.687" starttime="20210601 14:13:03.299"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:03.687" starttime="20210601 14:13:02.579"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>css:#page-content-wrapper &gt; div &gt; app-cubicacion &gt; div &gt; app-form-cub-container &gt; div &gt; app-card &gt; div &gt; div.card-body &gt; app-form &gt; div &gt; div.col-xs-12.col-md-8 &gt; div &gt; p-listbox &gt; div &gt; div.p-listbox-list-wrapper &gt; ul &gt; li:nth-child(1)</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:03.743" starttime="20210601 14:13:03.688"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:04.026" starttime="20210601 14:13:03.743"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:04.028" level="INFO">Clicking element 'css:#page-content-wrapper &gt; div &gt; app-cubicacion &gt; div &gt; app-form-cub-container &gt; div &gt; app-card &gt; div &gt; div.card-body &gt; app-form &gt; div &gt; div.col-xs-12.col-md-8 &gt; div &gt; p-listbox &gt; div &gt; div.p-listbox-list-wrapper &gt; ul &gt; li:nth-child(1)'.</msg>
+<status status="PASS" endtime="20210601 14:13:04.183" starttime="20210601 14:13:04.026"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:04.183" starttime="20210601 14:13:03.687"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:04.183" starttime="20210601 14:12:59.881"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210601 14:13:04.244" starttime="20210601 14:13:04.184"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:04.244" starttime="20210601 14:12:54.833"/>
+</test>
+<doc>Test de funcionanildad del modulo de Usuarios.
+
+This test has a workflow that is created using keywords in
+the imported resource file.</doc>
+<status status="PASS" endtime="20210601 14:13:04.245" starttime="20210601 14:12:54.724"/>
+</suite>
+<suite source="/home/zweicom/web-sigo/robot_e2e/login.robot" id="s1-s1-s2" name="Login">
+<test id="s1-s1-s2-t1" name="Redirect to page Login not login person">
+<kw name="Open Browser To Page" library="resource">
+<arg>${url}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:04.253" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f87e1d45e90&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:04.254" starttime="20210601 14:13:04.253"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-web-security</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:04.254" starttime="20210601 14:13:04.254"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>allow-running-insecure-content</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:04.255" starttime="20210601 14:13:04.254"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>headless</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:04.257" starttime="20210601 14:13:04.256"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-gpu</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:04.258" starttime="20210601 14:13:04.257"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>no-sandbox</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:04.258" starttime="20210601 14:13:04.258"/>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20210601 14:13:04.259" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" endtime="20210601 14:13:05.653" starttime="20210601 14:13:04.258"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210601 14:13:05.763" starttime="20210601 14:13:05.653"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${page}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20210601 14:13:05.764" level="INFO">Opening url 'http://localhost:4201'</msg>
+<status status="PASS" endtime="20210601 14:13:07.106" starttime="20210601 14:13:05.763"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:07.107" starttime="20210601 14:13:04.252"/>
+</kw>
+<kw name="Location Should Be" library="SeleniumLibrary">
+<arg>${url}/auth/login</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<msg timestamp="20210601 14:13:07.128" level="INFO">Current location is 'http://localhost:4201/auth/login'.</msg>
+<status status="PASS" endtime="20210601 14:13:07.129" starttime="20210601 14:13:07.108"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210601 14:13:07.258" starttime="20210601 14:13:07.129"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:07.258" starttime="20210601 14:13:04.251"/>
+</test>
+<test id="s1-s1-s2-t2" name="Redirect to dashboard to a login person">
+<kw name="Open Browser To Page" library="resource">
+<arg>${url}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:07.262" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f87e1d777d0&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:07.262" starttime="20210601 14:13:07.261"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-web-security</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:07.263" starttime="20210601 14:13:07.263"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>allow-running-insecure-content</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:07.264" starttime="20210601 14:13:07.263"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>headless</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:07.264" starttime="20210601 14:13:07.264"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-gpu</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:07.265" starttime="20210601 14:13:07.265"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>no-sandbox</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:07.266" starttime="20210601 14:13:07.266"/>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20210601 14:13:07.267" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" endtime="20210601 14:13:08.659" starttime="20210601 14:13:07.267"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210601 14:13:08.765" starttime="20210601 14:13:08.660"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${page}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20210601 14:13:08.766" level="INFO">Opening url 'http://localhost:4201'</msg>
+<status status="PASS" endtime="20210601 14:13:10.511" starttime="20210601 14:13:08.765"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:10.512" starttime="20210601 14:13:07.260"/>
+</kw>
+<kw name="Location Should Be" library="SeleniumLibrary">
+<arg>${url}/auth/login</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<msg timestamp="20210601 14:13:10.552" level="INFO">Current location is 'http://localhost:4201/auth/login'.</msg>
+<status status="PASS" endtime="20210601 14:13:10.553" starttime="20210601 14:13:10.513"/>
+</kw>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>name:username</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20210601 14:13:10.609" level="INFO">Element 'name:username' is displayed.</msg>
+<status status="PASS" endtime="20210601 14:13:10.609" starttime="20210601 14:13:10.554"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>name:username</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:10.629" starttime="20210601 14:13:10.609"/>
+</kw>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>name:password</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20210601 14:13:10.653" level="INFO">Element 'name:password' is displayed.</msg>
+<status status="PASS" endtime="20210601 14:13:10.653" starttime="20210601 14:13:10.629"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>name:password</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:10.674" starttime="20210601 14:13:10.654"/>
+</kw>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20210601 14:13:10.694" level="INFO">Element 'id:login' is displayed.</msg>
+<status status="PASS" endtime="20210601 14:13:10.694" starttime="20210601 14:13:10.674"/>
+</kw>
+<kw name="Element Should Be Disabled" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Verifies that element identified by ``locator`` is disabled.</doc>
+<status status="PASS" endtime="20210601 14:13:10.709" starttime="20210601 14:13:10.694"/>
+</kw>
+<kw name="Login" library="resource">
+<arg>admin</arg>
+<arg>password</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:10.710" level="INFO">Typing text 'admin' into text field 'name:username'.</msg>
+<status status="PASS" endtime="20210601 14:13:10.800" starttime="20210601 14:13:10.710"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>name:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:10.800" level="INFO">Typing password into text field 'name:password'.</msg>
+<msg timestamp="20210601 14:13:10.842" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20210601 14:13:10.902" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" endtime="20210601 14:13:10.902" starttime="20210601 14:13:10.800"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:10.922" starttime="20210601 14:13:10.902"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:10.923" level="INFO">Clicking button 'id:login'.</msg>
+<status status="PASS" endtime="20210601 14:13:10.999" starttime="20210601 14:13:10.922"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:11.000" starttime="20210601 14:13:10.709"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id:user-name</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:11.264" starttime="20210601 14:13:11.000"/>
+</kw>
+<kw name="Location Should Be" library="SeleniumLibrary">
+<arg>${url}/app/ot/list-ot</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<msg timestamp="20210601 14:13:11.268" level="INFO">Current location is 'http://localhost:4201/app/ot/list-ot'.</msg>
+<status status="PASS" endtime="20210601 14:13:11.268" starttime="20210601 14:13:11.264"/>
+</kw>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>id:user-name</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20210601 14:13:11.286" level="INFO">Element 'id:user-name' is displayed.</msg>
+<status status="PASS" endtime="20210601 14:13:11.287" starttime="20210601 14:13:11.268"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210601 14:13:11.348" starttime="20210601 14:13:11.287"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:11.348" starttime="20210601 14:13:07.259"/>
+</test>
+<doc>Test de funcionanildad del login.
+
+This test has a workflow that is created using keywords in
+the imported resource file.</doc>
+<status status="PASS" endtime="20210601 14:13:11.350" starttime="20210601 14:13:04.247"/>
+</suite>
+<suite source="/home/zweicom/web-sigo/robot_e2e/perfiles.robot" id="s1-s1-s3" name="Perfiles">
+<test id="s1-s1-s3-t1" name="Crear perfil">
+<kw name="Open Browser To Page" library="resource">
+<arg>${url}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:11.363" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f87e1d06f50&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:11.363" starttime="20210601 14:13:11.362"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-web-security</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:11.364" starttime="20210601 14:13:11.363"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>allow-running-insecure-content</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:11.365" starttime="20210601 14:13:11.364"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>headless</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:11.366" starttime="20210601 14:13:11.365"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-gpu</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:11.367" starttime="20210601 14:13:11.366"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>no-sandbox</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:11.368" starttime="20210601 14:13:11.367"/>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20210601 14:13:11.369" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" endtime="20210601 14:13:12.708" starttime="20210601 14:13:11.368"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210601 14:13:12.818" starttime="20210601 14:13:12.709"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${page}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20210601 14:13:12.818" level="INFO">Opening url 'http://localhost:4201'</msg>
+<status status="PASS" endtime="20210601 14:13:14.327" starttime="20210601 14:13:12.818"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:14.327" starttime="20210601 14:13:11.361"/>
+</kw>
+<kw name="Login" library="resource">
+<arg>admin</arg>
+<arg>password</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:14.330" level="INFO">Typing text 'admin' into text field 'name:username'.</msg>
+<status status="PASS" endtime="20210601 14:13:14.450" starttime="20210601 14:13:14.329"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>name:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:14.451" level="INFO">Typing password into text field 'name:password'.</msg>
+<msg timestamp="20210601 14:13:14.495" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20210601 14:13:14.558" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" endtime="20210601 14:13:14.559" starttime="20210601 14:13:14.450"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:14.596" starttime="20210601 14:13:14.559"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:14.597" level="INFO">Clicking button 'id:login'.</msg>
+<status status="PASS" endtime="20210601 14:13:14.679" starttime="20210601 14:13:14.596"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:14.681" starttime="20210601 14:13:14.328"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id:user-name</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:14.945" starttime="20210601 14:13:14.682"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>css:#menu-perfil&gt;a&gt;span</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:14.980" starttime="20210601 14:13:14.946"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:15.260" starttime="20210601 14:13:14.981"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:15.262" level="INFO">Clicking element 'css:#menu-perfil&gt;a&gt;span'.</msg>
+<status status="PASS" endtime="20210601 14:13:15.411" starttime="20210601 14:13:15.261"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:15.412" starttime="20210601 14:13:14.945"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>id:add-profile-button</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:15.800" starttime="20210601 14:13:15.413"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:16.115" starttime="20210601 14:13:15.801"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:16.116" level="INFO">Clicking element 'id:add-profile-button'.</msg>
+<status status="PASS" endtime="20210601 14:13:16.401" starttime="20210601 14:13:16.115"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:16.402" starttime="20210601 14:13:15.412"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<arg>css:#nombre-perfil-input&gt;input</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:16.498" starttime="20210601 14:13:16.403"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>css:#nombre-perfil-input&gt;input</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:16.498" level="INFO">Typing text 'Nuevo Perfil Robot' into text field 'css:#nombre-perfil-input&gt;input'.</msg>
+<status status="PASS" endtime="20210601 14:13:16.667" starttime="20210601 14:13:16.498"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>css:#descripcion-perfil-input&gt;textarea</arg>
+<arg>Nuevo Descripcion perfil robot</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:16.668" level="INFO">Typing text 'Nuevo Descripcion perfil robot' into text field 'css:#descripcion-perfil-input&gt;textarea'.</msg>
+<status status="PASS" endtime="20210601 14:13:16.846" starttime="20210601 14:13:16.667"/>
+</kw>
+<kw name="Select item" library="resource">
+<arg>css:#nombre-perfil-input &gt; select</arg>
+<arg>AdminContrato</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${select element}</var>
+<arg>${selector}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210601 14:13:16.862" level="INFO">${select element} = &lt;selenium.webdriver.remote.webelement.WebElement (session="0d1f9beca11f96000625cc3dcb0d2144", element="032773fa-a500-44b5-a8cb-b99fb93f7dbb")&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:16.862" starttime="20210601 14:13:16.847"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:17.148" starttime="20210601 14:13:16.862"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${select element}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:17.203" starttime="20210601 14:13:17.151"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:17.486" starttime="20210601 14:13:17.203"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:17.488" level="INFO">Clicking element '&lt;selenium.webdriver.remote.webelement.WebElement (session="0d1f9beca11f96000625cc3dcb0d2144", element="032773fa-a500-44b5-a8cb-b99fb93f7dbb")&gt;'.</msg>
+<status status="PASS" endtime="20210601 14:13:17.593" starttime="20210601 14:13:17.487"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:17.593" starttime="20210601 14:13:17.149"/>
+</kw>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<arg>${select element}</arg>
+<arg>${value}</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<msg timestamp="20210601 14:13:17.594" level="INFO">Selecting options from selection list '&lt;selenium.webdriver.remote.webelement.WebElement (session="0d1f9beca11f96000625cc3dcb0d2144", element="032773fa-a500-44b5-a8cb-b99fb93f7dbb")&gt;' by label AdminContrato.</msg>
+<status status="PASS" endtime="20210601 14:13:17.666" starttime="20210601 14:13:17.593"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:17.667" starttime="20210601 14:13:16.846"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Option Listar OT}</var>
+<arg>css:#modulos-pefil-OT&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:17.667" level="INFO">${Option Listar OT} = css:#modulos-pefil-OT&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)</msg>
+<status status="PASS" endtime="20210601 14:13:17.667" starttime="20210601 14:13:17.667"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${Option Listar OT}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:17.699" starttime="20210601 14:13:17.668"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:17.975" starttime="20210601 14:13:17.699"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:17.978" level="INFO">Clicking element 'css:#modulos-pefil-OT&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)'.</msg>
+<status status="PASS" endtime="20210601 14:13:18.099" starttime="20210601 14:13:17.976"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:18.099" starttime="20210601 14:13:17.668"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Option Listar CUBAGE}</var>
+<arg>css:#modulos-pefil-CUBAGE&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:18.099" level="INFO">${Option Listar CUBAGE} = css:#modulos-pefil-CUBAGE&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)</msg>
+<status status="PASS" endtime="20210601 14:13:18.099" starttime="20210601 14:13:18.099"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${Option Listar CUBAGE}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:18.129" starttime="20210601 14:13:18.100"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:18.412" starttime="20210601 14:13:18.129"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:18.417" level="INFO">Clicking element 'css:#modulos-pefil-CUBAGE&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)'.</msg>
+<status status="PASS" endtime="20210601 14:13:18.500" starttime="20210601 14:13:18.414"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:18.500" starttime="20210601 14:13:18.100"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Option Listar PROFILE}</var>
+<arg>css:#modulos-pefil-PROFILE&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:18.502" level="INFO">${Option Listar PROFILE} = css:#modulos-pefil-PROFILE&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)</msg>
+<status status="PASS" endtime="20210601 14:13:18.502" starttime="20210601 14:13:18.501"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${Option Listar PROFILE}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:18.542" starttime="20210601 14:13:18.508"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:18.827" starttime="20210601 14:13:18.542"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:18.830" level="INFO">Clicking element 'css:#modulos-pefil-PROFILE&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li:nth-child(1)'.</msg>
+<status status="PASS" endtime="20210601 14:13:19.041" starttime="20210601 14:13:18.828"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:19.042" starttime="20210601 14:13:18.506"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>id:guardar-button</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:19.093" starttime="20210601 14:13:19.044"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:19.378" starttime="20210601 14:13:19.093"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:19.382" level="INFO">Clicking element 'id:guardar-button'.</msg>
+<status status="PASS" endtime="20210601 14:13:19.714" starttime="20210601 14:13:19.379"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:19.714" starttime="20210601 14:13:19.042"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210601 14:13:19.776" starttime="20210601 14:13:19.715"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:19.776" starttime="20210601 14:13:11.360"/>
+</test>
+<test id="s1-s1-s3-t2" name="Listar perfil y desplegar detalle">
+<kw name="Open Browser To Page" library="resource">
+<arg>${url}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:19.781" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f87e1d22590&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:19.781" starttime="20210601 14:13:19.779"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-web-security</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:19.782" starttime="20210601 14:13:19.781"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>allow-running-insecure-content</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:19.784" starttime="20210601 14:13:19.783"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>headless</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:19.785" starttime="20210601 14:13:19.785"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-gpu</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:19.786" starttime="20210601 14:13:19.785"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>no-sandbox</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:19.786" starttime="20210601 14:13:19.786"/>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20210601 14:13:19.787" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" endtime="20210601 14:13:21.195" starttime="20210601 14:13:19.786"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210601 14:13:21.302" starttime="20210601 14:13:21.195"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${page}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20210601 14:13:21.303" level="INFO">Opening url 'http://localhost:4201'</msg>
+<status status="PASS" endtime="20210601 14:13:22.832" starttime="20210601 14:13:21.303"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:22.832" starttime="20210601 14:13:19.779"/>
+</kw>
+<kw name="Login" library="resource">
+<arg>admin</arg>
+<arg>password</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:22.834" level="INFO">Typing text 'admin' into text field 'name:username'.</msg>
+<status status="PASS" endtime="20210601 14:13:22.934" starttime="20210601 14:13:22.833"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>name:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:22.934" level="INFO">Typing password into text field 'name:password'.</msg>
+<msg timestamp="20210601 14:13:22.979" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20210601 14:13:23.043" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" endtime="20210601 14:13:23.043" starttime="20210601 14:13:22.934"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:23.070" starttime="20210601 14:13:23.043"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:23.071" level="INFO">Clicking button 'id:login'.</msg>
+<status status="PASS" endtime="20210601 14:13:23.167" starttime="20210601 14:13:23.071"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:23.167" starttime="20210601 14:13:22.832"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id:user-name</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:23.498" starttime="20210601 14:13:23.168"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>css:#menu-perfil&gt;a&gt;span</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:23.528" starttime="20210601 14:13:23.499"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:23.814" starttime="20210601 14:13:23.528"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:23.816" level="INFO">Clicking element 'css:#menu-perfil&gt;a&gt;span'.</msg>
+<status status="PASS" endtime="20210601 14:13:24.032" starttime="20210601 14:13:23.815"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.033" starttime="20210601 14:13:23.498"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(1)&gt;td:nth-child(1)</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:24.281" starttime="20210601 14:13:24.033"/>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${cantidad de filas}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.298" level="INFO">${cantidad de filas} = 10</msg>
+<status status="PASS" endtime="20210601 14:13:24.298" starttime="20210601 14:13:24.281"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${status}</var>
+<arg>${cantidad de filas} &gt; 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:24.298" level="INFO">${status} = True</msg>
+<status status="PASS" endtime="20210601 14:13:24.298" starttime="20210601 14:13:24.298"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${status}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.299" starttime="20210601 14:13:24.299"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>${cantidad de filas}</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.322" level="INFO">${txt nombre perfil} = Admin</msg>
+<status status="PASS" endtime="20210601 14:13:24.322" starttime="20210601 14:13:24.299"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:24.324" level="FAIL">Admin != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:24.324" starttime="20210601 14:13:24.323"/>
+</kw>
+<msg timestamp="20210601 14:13:24.324" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.324" starttime="20210601 14:13:24.323"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.325" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.325" starttime="20210601 14:13:24.325"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.326" level="INFO">${numero de fila} = 1</msg>
+<status status="PASS" endtime="20210601 14:13:24.326" starttime="20210601 14:13:24.325"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.327" level="INFO">${numero de fila} = 1</msg>
+<status status="PASS" endtime="20210601 14:13:24.327" starttime="20210601 14:13:24.326"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.328" starttime="20210601 14:13:24.327"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.328" starttime="20210601 14:13:24.299"/>
+</iter>
+<iter>
+<var name="${i}">1</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.362" level="INFO">${txt nombre perfil} = AdminContrato</msg>
+<status status="PASS" endtime="20210601 14:13:24.362" starttime="20210601 14:13:24.328"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:24.364" level="FAIL">AdminContrato != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:24.364" starttime="20210601 14:13:24.363"/>
+</kw>
+<msg timestamp="20210601 14:13:24.364" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.364" starttime="20210601 14:13:24.363"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.366" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.366" starttime="20210601 14:13:24.365"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.368" level="INFO">${numero de fila} = 2</msg>
+<status status="PASS" endtime="20210601 14:13:24.368" starttime="20210601 14:13:24.366"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.369" level="INFO">${numero de fila} = 2</msg>
+<status status="PASS" endtime="20210601 14:13:24.369" starttime="20210601 14:13:24.368"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.370" starttime="20210601 14:13:24.370"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.370" starttime="20210601 14:13:24.328"/>
+</iter>
+<iter>
+<var name="${i}">2</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.409" level="INFO">${txt nombre perfil} = Cons</msg>
+<status status="PASS" endtime="20210601 14:13:24.409" starttime="20210601 14:13:24.371"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:24.410" level="FAIL">Cons != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:24.410" starttime="20210601 14:13:24.410"/>
+</kw>
+<msg timestamp="20210601 14:13:24.410" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.411" starttime="20210601 14:13:24.409"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.411" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.411" starttime="20210601 14:13:24.411"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.413" level="INFO">${numero de fila} = 3</msg>
+<status status="PASS" endtime="20210601 14:13:24.413" starttime="20210601 14:13:24.411"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.413" level="INFO">${numero de fila} = 3</msg>
+<status status="PASS" endtime="20210601 14:13:24.414" starttime="20210601 14:13:24.413"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.414" starttime="20210601 14:13:24.414"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.414" starttime="20210601 14:13:24.371"/>
+</iter>
+<iter>
+<var name="${i}">3</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.439" level="INFO">${txt nombre perfil} = CoordinadorEC</msg>
+<status status="PASS" endtime="20210601 14:13:24.439" starttime="20210601 14:13:24.414"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:24.440" level="FAIL">CoordinadorEC != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:24.440" starttime="20210601 14:13:24.440"/>
+</kw>
+<msg timestamp="20210601 14:13:24.440" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.440" starttime="20210601 14:13:24.439"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.441" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.441" starttime="20210601 14:13:24.440"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.442" level="INFO">${numero de fila} = 4</msg>
+<status status="PASS" endtime="20210601 14:13:24.442" starttime="20210601 14:13:24.441"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.442" level="INFO">${numero de fila} = 4</msg>
+<status status="PASS" endtime="20210601 14:13:24.443" starttime="20210601 14:13:24.442"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.443" starttime="20210601 14:13:24.443"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.443" starttime="20210601 14:13:24.414"/>
+</iter>
+<iter>
+<var name="${i}">4</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.467" level="INFO">${txt nombre perfil} = Elim</msg>
+<status status="PASS" endtime="20210601 14:13:24.467" starttime="20210601 14:13:24.443"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:24.468" level="FAIL">Elim != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:24.468" starttime="20210601 14:13:24.467"/>
+</kw>
+<msg timestamp="20210601 14:13:24.468" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.468" starttime="20210601 14:13:24.467"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.469" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.469" starttime="20210601 14:13:24.468"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.470" level="INFO">${numero de fila} = 5</msg>
+<status status="PASS" endtime="20210601 14:13:24.470" starttime="20210601 14:13:24.469"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.470" level="INFO">${numero de fila} = 5</msg>
+<status status="PASS" endtime="20210601 14:13:24.470" starttime="20210601 14:13:24.470"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.471" starttime="20210601 14:13:24.471"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.471" starttime="20210601 14:13:24.443"/>
+</iter>
+<iter>
+<var name="${i}">5</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.494" level="INFO">${txt nombre perfil} = Gerente</msg>
+<status status="PASS" endtime="20210601 14:13:24.494" starttime="20210601 14:13:24.471"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:24.495" level="FAIL">Gerente != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:24.495" starttime="20210601 14:13:24.495"/>
+</kw>
+<msg timestamp="20210601 14:13:24.495" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.496" starttime="20210601 14:13:24.494"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.496" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.496" starttime="20210601 14:13:24.496"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.497" level="INFO">${numero de fila} = 6</msg>
+<status status="PASS" endtime="20210601 14:13:24.497" starttime="20210601 14:13:24.496"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.498" level="INFO">${numero de fila} = 6</msg>
+<status status="PASS" endtime="20210601 14:13:24.498" starttime="20210601 14:13:24.497"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.498" starttime="20210601 14:13:24.498"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.498" starttime="20210601 14:13:24.471"/>
+</iter>
+<iter>
+<var name="${i}">6</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.521" level="INFO">${txt nombre perfil} = JP/Gestor</msg>
+<status status="PASS" endtime="20210601 14:13:24.521" starttime="20210601 14:13:24.498"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:24.522" level="FAIL">JP/Gestor != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:24.522" starttime="20210601 14:13:24.522"/>
+</kw>
+<msg timestamp="20210601 14:13:24.522" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.522" starttime="20210601 14:13:24.521"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.523" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.523" starttime="20210601 14:13:24.523"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.524" level="INFO">${numero de fila} = 7</msg>
+<status status="PASS" endtime="20210601 14:13:24.524" starttime="20210601 14:13:24.523"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.525" level="INFO">${numero de fila} = 7</msg>
+<status status="PASS" endtime="20210601 14:13:24.525" starttime="20210601 14:13:24.524"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.525" starttime="20210601 14:13:24.525"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.525" starttime="20210601 14:13:24.498"/>
+</iter>
+<iter>
+<var name="${i}">7</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.548" level="INFO">${txt nombre perfil} = JefeArea</msg>
+<status status="PASS" endtime="20210601 14:13:24.548" starttime="20210601 14:13:24.525"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:24.549" level="FAIL">JefeArea != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:24.549" starttime="20210601 14:13:24.549"/>
+</kw>
+<msg timestamp="20210601 14:13:24.550" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.550" starttime="20210601 14:13:24.549"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.550" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:24.550" starttime="20210601 14:13:24.550"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.551" level="INFO">${numero de fila} = 8</msg>
+<status status="PASS" endtime="20210601 14:13:24.551" starttime="20210601 14:13:24.550"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.552" level="INFO">${numero de fila} = 8</msg>
+<status status="PASS" endtime="20210601 14:13:24.552" starttime="20210601 14:13:24.551"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.552" starttime="20210601 14:13:24.552"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.552" starttime="20210601 14:13:24.525"/>
+</iter>
+<iter>
+<var name="${i}">8</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.578" level="INFO">${txt nombre perfil} = Nuevo Perfil Robot</msg>
+<status status="PASS" endtime="20210601 14:13:24.578" starttime="20210601 14:13:24.552"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20210601 14:13:24.579" starttime="20210601 14:13:24.578"/>
+</kw>
+<msg timestamp="20210601 14:13:24.579" level="INFO">${areYouMyLine} = True</msg>
+<status status="PASS" endtime="20210601 14:13:24.579" starttime="20210601 14:13:24.578"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.580" level="INFO">${areYouMyLine} = True</msg>
+<status status="PASS" endtime="20210601 14:13:24.580" starttime="20210601 14:13:24.579"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:24.581" level="INFO">${numero de fila} = 9</msg>
+<status status="PASS" endtime="20210601 14:13:24.581" starttime="20210601 14:13:24.580"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:24.581" level="INFO">${numero de fila} = 9</msg>
+<status status="PASS" endtime="20210601 14:13:24.581" starttime="20210601 14:13:24.581"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing for loop.</doc>
+<msg timestamp="20210601 14:13:24.582" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" endtime="20210601 14:13:24.582" starttime="20210601 14:13:24.582"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.582" starttime="20210601 14:13:24.581"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.582" starttime="20210601 14:13:24.552"/>
+</iter>
+<status status="PASS" endtime="20210601 14:13:24.582" starttime="20210601 14:13:24.299"/>
+</for>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" endtime="20210601 14:13:24.583" starttime="20210601 14:13:24.582"/>
+</kw>
+<kw name="Element text should be" library="resource">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${numero de fila})&gt;td:nth-child(3)</arg>
+<arg>AdminContrato</arg>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt}</var>
+<arg>${element}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.605" level="INFO">${txt} = AdminContrato</msg>
+<status status="PASS" endtime="20210601 14:13:24.605" starttime="20210601 14:13:24.583"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${txt}</arg>
+<arg>${texto}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" endtime="20210601 14:13:24.606" starttime="20210601 14:13:24.606"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:24.606" starttime="20210601 14:13:24.583"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${numero de fila})&gt;td:nth-child(5)&gt;div:nth-child(2)&gt;div&gt;button</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:24.629" starttime="20210601 14:13:24.607"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:24.901" starttime="20210601 14:13:24.629"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:24.904" level="INFO">Clicking element 'css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(9)&gt;td:nth-child(5)&gt;div:nth-child(2)&gt;div&gt;button'.</msg>
+<status status="PASS" endtime="20210601 14:13:25.033" starttime="20210601 14:13:24.902"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:25.033" starttime="20210601 14:13:24.606"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>css:p-dialog</arg>
+<arg>timeout=3</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:25.068" starttime="20210601 14:13:25.034"/>
+</kw>
+<kw name="Element text should be" library="resource">
+<arg>css:#permisos-modulo-OT&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li&gt;span.ng-star-inserted</arg>
+<arg>Listar OT</arg>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt}</var>
+<arg>${element}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:25.097" level="INFO">${txt} = Listar OT</msg>
+<status status="PASS" endtime="20210601 14:13:25.097" starttime="20210601 14:13:25.069"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${txt}</arg>
+<arg>${texto}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" endtime="20210601 14:13:25.098" starttime="20210601 14:13:25.097"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:25.098" starttime="20210601 14:13:25.068"/>
+</kw>
+<kw name="Element text should be" library="resource">
+<arg>css:#permisos-modulo-CUBAGE&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li&gt;span.ng-star-inserted</arg>
+<arg>Listar Cubicacion</arg>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt}</var>
+<arg>${element}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:25.127" level="INFO">${txt} = Listar Cubicacion</msg>
+<status status="PASS" endtime="20210601 14:13:25.127" starttime="20210601 14:13:25.098"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${txt}</arg>
+<arg>${texto}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" endtime="20210601 14:13:25.127" starttime="20210601 14:13:25.127"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:25.128" starttime="20210601 14:13:25.098"/>
+</kw>
+<kw name="Element text should be" library="resource">
+<arg>css:#permisos-modulo-PROFILE&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li&gt;span.ng-star-inserted</arg>
+<arg>Listar Perfiles</arg>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt}</var>
+<arg>${element}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:25.155" level="INFO">${txt} = Listar Perfiles</msg>
+<status status="PASS" endtime="20210601 14:13:25.155" starttime="20210601 14:13:25.128"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${txt}</arg>
+<arg>${texto}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" endtime="20210601 14:13:25.155" starttime="20210601 14:13:25.155"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:25.156" starttime="20210601 14:13:25.128"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210601 14:13:25.219" starttime="20210601 14:13:25.156"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:25.219" starttime="20210601 14:13:19.777"/>
+</test>
+<test id="s1-s1-s3-t3" name="Editar perfil">
+<kw name="Open Browser To Page" library="resource">
+<arg>${url}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:25.221" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f87e1cbec10&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:25.222" starttime="20210601 14:13:25.221"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-web-security</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:25.222" starttime="20210601 14:13:25.222"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>allow-running-insecure-content</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:25.223" starttime="20210601 14:13:25.222"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>headless</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:25.223" starttime="20210601 14:13:25.223"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-gpu</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:25.224" starttime="20210601 14:13:25.224"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>no-sandbox</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:25.225" starttime="20210601 14:13:25.224"/>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20210601 14:13:25.227" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" endtime="20210601 14:13:26.629" starttime="20210601 14:13:25.225"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210601 14:13:26.739" starttime="20210601 14:13:26.630"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${page}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20210601 14:13:26.739" level="INFO">Opening url 'http://localhost:4201'</msg>
+<status status="PASS" endtime="20210601 14:13:28.947" starttime="20210601 14:13:26.739"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:28.948" starttime="20210601 14:13:25.220"/>
+</kw>
+<kw name="Login" library="resource">
+<arg>admin</arg>
+<arg>password</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:28.951" level="INFO">Typing text 'admin' into text field 'name:username'.</msg>
+<status status="PASS" endtime="20210601 14:13:29.061" starttime="20210601 14:13:28.950"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>name:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:29.062" level="INFO">Typing password into text field 'name:password'.</msg>
+<msg timestamp="20210601 14:13:29.109" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20210601 14:13:29.172" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" endtime="20210601 14:13:29.172" starttime="20210601 14:13:29.061"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:29.198" starttime="20210601 14:13:29.172"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:29.198" level="INFO">Clicking button 'id:login'.</msg>
+<status status="PASS" endtime="20210601 14:13:29.279" starttime="20210601 14:13:29.198"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:29.279" starttime="20210601 14:13:28.949"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id:user-name</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:29.628" starttime="20210601 14:13:29.279"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>css:#menu-perfil&gt;a&gt;span</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:29.628" level="INFO">Clicking element 'css:#menu-perfil&gt;a&gt;span'.</msg>
+<status status="PASS" endtime="20210601 14:13:29.693" starttime="20210601 14:13:29.628"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(1)&gt;td:nth-child(1)</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:30.202" starttime="20210601 14:13:29.694"/>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${cantidad de filas}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.243" level="INFO">${cantidad de filas} = 10</msg>
+<status status="PASS" endtime="20210601 14:13:30.243" starttime="20210601 14:13:30.203"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${status}</var>
+<arg>${cantidad de filas} &gt; 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:30.245" level="INFO">${status} = True</msg>
+<status status="PASS" endtime="20210601 14:13:30.245" starttime="20210601 14:13:30.244"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${status}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.246" starttime="20210601 14:13:30.246"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>${cantidad de filas}</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.290" level="INFO">${txt nombre perfil} = Admin</msg>
+<status status="PASS" endtime="20210601 14:13:30.290" starttime="20210601 14:13:30.247"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:30.293" level="FAIL">Admin != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:30.293" starttime="20210601 14:13:30.292"/>
+</kw>
+<msg timestamp="20210601 14:13:30.293" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.293" starttime="20210601 14:13:30.291"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.294" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.295" starttime="20210601 14:13:30.294"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.297" level="INFO">${numero de fila} = 1</msg>
+<status status="PASS" endtime="20210601 14:13:30.297" starttime="20210601 14:13:30.295"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.298" level="INFO">${numero de fila} = 1</msg>
+<status status="PASS" endtime="20210601 14:13:30.298" starttime="20210601 14:13:30.297"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.299" starttime="20210601 14:13:30.299"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.299" starttime="20210601 14:13:30.247"/>
+</iter>
+<iter>
+<var name="${i}">1</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.355" level="INFO">${txt nombre perfil} = AdminContrato</msg>
+<status status="PASS" endtime="20210601 14:13:30.355" starttime="20210601 14:13:30.300"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:30.357" level="FAIL">AdminContrato != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:30.357" starttime="20210601 14:13:30.356"/>
+</kw>
+<msg timestamp="20210601 14:13:30.358" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.358" starttime="20210601 14:13:30.355"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.359" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.359" starttime="20210601 14:13:30.358"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.361" level="INFO">${numero de fila} = 2</msg>
+<status status="PASS" endtime="20210601 14:13:30.361" starttime="20210601 14:13:30.359"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.363" level="INFO">${numero de fila} = 2</msg>
+<status status="PASS" endtime="20210601 14:13:30.363" starttime="20210601 14:13:30.362"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.364" starttime="20210601 14:13:30.363"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.364" starttime="20210601 14:13:30.300"/>
+</iter>
+<iter>
+<var name="${i}">2</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.402" level="INFO">${txt nombre perfil} = Cons</msg>
+<status status="PASS" endtime="20210601 14:13:30.402" starttime="20210601 14:13:30.364"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:30.403" level="FAIL">Cons != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:30.403" starttime="20210601 14:13:30.402"/>
+</kw>
+<msg timestamp="20210601 14:13:30.403" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.403" starttime="20210601 14:13:30.402"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.403" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.403" starttime="20210601 14:13:30.403"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.404" level="INFO">${numero de fila} = 3</msg>
+<status status="PASS" endtime="20210601 14:13:30.404" starttime="20210601 14:13:30.404"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.405" level="INFO">${numero de fila} = 3</msg>
+<status status="PASS" endtime="20210601 14:13:30.405" starttime="20210601 14:13:30.405"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.406" starttime="20210601 14:13:30.405"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.406" starttime="20210601 14:13:30.364"/>
+</iter>
+<iter>
+<var name="${i}">3</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.436" level="INFO">${txt nombre perfil} = CoordinadorEC</msg>
+<status status="PASS" endtime="20210601 14:13:30.436" starttime="20210601 14:13:30.406"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:30.437" level="FAIL">CoordinadorEC != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:30.437" starttime="20210601 14:13:30.436"/>
+</kw>
+<msg timestamp="20210601 14:13:30.437" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.437" starttime="20210601 14:13:30.436"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.438" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.438" starttime="20210601 14:13:30.437"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.439" level="INFO">${numero de fila} = 4</msg>
+<status status="PASS" endtime="20210601 14:13:30.439" starttime="20210601 14:13:30.438"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.439" level="INFO">${numero de fila} = 4</msg>
+<status status="PASS" endtime="20210601 14:13:30.439" starttime="20210601 14:13:30.439"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.440" starttime="20210601 14:13:30.439"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.440" starttime="20210601 14:13:30.406"/>
+</iter>
+<iter>
+<var name="${i}">4</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.464" level="INFO">${txt nombre perfil} = Elim</msg>
+<status status="PASS" endtime="20210601 14:13:30.464" starttime="20210601 14:13:30.440"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:30.465" level="FAIL">Elim != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:30.465" starttime="20210601 14:13:30.465"/>
+</kw>
+<msg timestamp="20210601 14:13:30.465" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.465" starttime="20210601 14:13:30.464"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.466" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.466" starttime="20210601 14:13:30.465"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.467" level="INFO">${numero de fila} = 5</msg>
+<status status="PASS" endtime="20210601 14:13:30.467" starttime="20210601 14:13:30.466"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.467" level="INFO">${numero de fila} = 5</msg>
+<status status="PASS" endtime="20210601 14:13:30.467" starttime="20210601 14:13:30.467"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.468" starttime="20210601 14:13:30.468"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.468" starttime="20210601 14:13:30.440"/>
+</iter>
+<iter>
+<var name="${i}">5</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.491" level="INFO">${txt nombre perfil} = Gerente</msg>
+<status status="PASS" endtime="20210601 14:13:30.491" starttime="20210601 14:13:30.468"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:30.492" level="FAIL">Gerente != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:30.492" starttime="20210601 14:13:30.491"/>
+</kw>
+<msg timestamp="20210601 14:13:30.492" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.492" starttime="20210601 14:13:30.491"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.493" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.493" starttime="20210601 14:13:30.492"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.494" level="INFO">${numero de fila} = 6</msg>
+<status status="PASS" endtime="20210601 14:13:30.494" starttime="20210601 14:13:30.493"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.494" level="INFO">${numero de fila} = 6</msg>
+<status status="PASS" endtime="20210601 14:13:30.494" starttime="20210601 14:13:30.494"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.495" starttime="20210601 14:13:30.494"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.495" starttime="20210601 14:13:30.468"/>
+</iter>
+<iter>
+<var name="${i}">6</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.518" level="INFO">${txt nombre perfil} = JP/Gestor</msg>
+<status status="PASS" endtime="20210601 14:13:30.518" starttime="20210601 14:13:30.495"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:30.519" level="FAIL">JP/Gestor != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:30.519" starttime="20210601 14:13:30.519"/>
+</kw>
+<msg timestamp="20210601 14:13:30.519" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.520" starttime="20210601 14:13:30.519"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.520" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.520" starttime="20210601 14:13:30.520"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.521" level="INFO">${numero de fila} = 7</msg>
+<status status="PASS" endtime="20210601 14:13:30.521" starttime="20210601 14:13:30.520"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.522" level="INFO">${numero de fila} = 7</msg>
+<status status="PASS" endtime="20210601 14:13:30.522" starttime="20210601 14:13:30.521"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.522" starttime="20210601 14:13:30.522"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.522" starttime="20210601 14:13:30.495"/>
+</iter>
+<iter>
+<var name="${i}">7</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.547" level="INFO">${txt nombre perfil} = JefeArea</msg>
+<status status="PASS" endtime="20210601 14:13:30.547" starttime="20210601 14:13:30.522"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:30.548" level="FAIL">JefeArea != Nuevo Perfil Robot</msg>
+<status status="FAIL" endtime="20210601 14:13:30.548" starttime="20210601 14:13:30.547"/>
+</kw>
+<msg timestamp="20210601 14:13:30.548" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.548" starttime="20210601 14:13:30.547"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.548" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:30.549" starttime="20210601 14:13:30.548"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.549" level="INFO">${numero de fila} = 8</msg>
+<status status="PASS" endtime="20210601 14:13:30.550" starttime="20210601 14:13:30.549"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.550" level="INFO">${numero de fila} = 8</msg>
+<status status="PASS" endtime="20210601 14:13:30.550" starttime="20210601 14:13:30.550"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.551" starttime="20210601 14:13:30.550"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.551" starttime="20210601 14:13:30.522"/>
+</iter>
+<iter>
+<var name="${i}">8</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.574" level="INFO">${txt nombre perfil} = Nuevo Perfil Robot</msg>
+<status status="PASS" endtime="20210601 14:13:30.574" starttime="20210601 14:13:30.551"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20210601 14:13:30.575" starttime="20210601 14:13:30.575"/>
+</kw>
+<msg timestamp="20210601 14:13:30.575" level="INFO">${areYouMyLine} = True</msg>
+<status status="PASS" endtime="20210601 14:13:30.575" starttime="20210601 14:13:30.575"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.576" level="INFO">${areYouMyLine} = True</msg>
+<status status="PASS" endtime="20210601 14:13:30.576" starttime="20210601 14:13:30.575"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:30.577" level="INFO">${numero de fila} = 9</msg>
+<status status="PASS" endtime="20210601 14:13:30.577" starttime="20210601 14:13:30.576"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:30.577" level="INFO">${numero de fila} = 9</msg>
+<status status="PASS" endtime="20210601 14:13:30.578" starttime="20210601 14:13:30.577"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing for loop.</doc>
+<msg timestamp="20210601 14:13:30.578" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" endtime="20210601 14:13:30.579" starttime="20210601 14:13:30.578"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.579" starttime="20210601 14:13:30.578"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.579" starttime="20210601 14:13:30.551"/>
+</iter>
+<status status="PASS" endtime="20210601 14:13:30.579" starttime="20210601 14:13:30.247"/>
+</for>
+<kw name="Element text should be" library="resource">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${numero de fila})&gt;td:nth-child(3)</arg>
+<arg>AdminContrato</arg>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt}</var>
+<arg>${element}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.606" level="INFO">${txt} = AdminContrato</msg>
+<status status="PASS" endtime="20210601 14:13:30.606" starttime="20210601 14:13:30.580"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${txt}</arg>
+<arg>${texto}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" endtime="20210601 14:13:30.607" starttime="20210601 14:13:30.606"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:30.607" starttime="20210601 14:13:30.579"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" endtime="20210601 14:13:30.609" starttime="20210601 14:13:30.608"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${numero de fila})&gt;td:nth-child(5)&gt;div:nth-child(1)&gt;button</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:30.609" level="INFO">Clicking element 'css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(9)&gt;td:nth-child(5)&gt;div:nth-child(1)&gt;button'.</msg>
+<status status="PASS" endtime="20210601 14:13:30.770" starttime="20210601 14:13:30.609"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>css:#title-create-profile&gt;h1</arg>
+<arg>timeout=3</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:31.051" starttime="20210601 14:13:30.771"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<arg>css:#nombre-perfil-input&gt;input</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:31.094" starttime="20210601 14:13:31.051"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>css:#nombre-perfil-input&gt;input</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:31.095" level="INFO">Typing text 'Nuevo Perfil Robot Editado' into text field 'css:#nombre-perfil-input&gt;input'.</msg>
+<status status="PASS" endtime="20210601 14:13:31.264" starttime="20210601 14:13:31.094"/>
+</kw>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>${permisos del modulo OT}</var>
+<arg>css:#modulos-pefil-OT&gt;p-listbox&gt;div&gt;div.p-listbox-list-wrapper&gt;ul&gt;li</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<msg timestamp="20210601 14:13:31.276" level="INFO">${permisos del modulo OT} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="dadf1c063eb8efd134e7dc71ea615e61", element="49da16e0-4461-4731-857c-4e635b44e198")&gt;, &lt;selenium.webdriver.remote.webelement.WebElement (sessi...</msg>
+<status status="PASS" endtime="20210601 14:13:31.276" starttime="20210601 14:13:31.264"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${permisos del modulo OT}[0]</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:31.291" starttime="20210601 14:13:31.277"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:31.556" starttime="20210601 14:13:31.292"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:31.558" level="INFO">Clicking element '&lt;selenium.webdriver.remote.webelement.WebElement (session="dadf1c063eb8efd134e7dc71ea615e61", element="49da16e0-4461-4731-857c-4e635b44e198")&gt;'.</msg>
+<status status="PASS" endtime="20210601 14:13:31.661" starttime="20210601 14:13:31.557"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:31.662" starttime="20210601 14:13:31.277"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${permisos del modulo OT}[1]</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:31.680" starttime="20210601 14:13:31.663"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:31.956" starttime="20210601 14:13:31.680"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:31.959" level="INFO">Clicking element '&lt;selenium.webdriver.remote.webelement.WebElement (session="dadf1c063eb8efd134e7dc71ea615e61", element="936a8426-2357-425b-ae0c-91efd7a38ce5")&gt;'.</msg>
+<status status="PASS" endtime="20210601 14:13:32.078" starttime="20210601 14:13:31.957"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:32.079" starttime="20210601 14:13:31.662"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>id:guardar-button</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:32.119" starttime="20210601 14:13:32.081"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:32.392" starttime="20210601 14:13:32.119"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:32.397" level="INFO">Clicking element 'id:guardar-button'.</msg>
+<status status="PASS" endtime="20210601 14:13:32.762" starttime="20210601 14:13:32.394"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:32.762" starttime="20210601 14:13:32.079"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(1)&gt;td:nth-child(1)</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:32.793" starttime="20210601 14:13:32.763"/>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${cantidad de filas}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20210601 14:13:32.802" level="INFO">${cantidad de filas} = 10</msg>
+<status status="PASS" endtime="20210601 14:13:32.802" starttime="20210601 14:13:32.793"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${status}</var>
+<arg>${cantidad de filas} &gt; 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:32.803" level="INFO">${status} = True</msg>
+<status status="PASS" endtime="20210601 14:13:32.804" starttime="20210601 14:13:32.802"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${status}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" endtime="20210601 14:13:32.805" starttime="20210601 14:13:32.804"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210601 14:13:32.869" starttime="20210601 14:13:32.806"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:32.870" starttime="20210601 14:13:25.220"/>
+</test>
+<test id="s1-s1-s3-t4" name="Eliminar Perfil">
+<kw name="Open Browser To Page" library="resource">
+<arg>${url}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:32.873" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f87e1d0ee10&gt;</msg>
+<status status="PASS" endtime="20210601 14:13:32.873" starttime="20210601 14:13:32.872"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-web-security</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:32.874" starttime="20210601 14:13:32.874"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>allow-running-insecure-content</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:32.875" starttime="20210601 14:13:32.874"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>headless</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:32.876" starttime="20210601 14:13:32.875"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>disable-gpu</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:32.877" starttime="20210601 14:13:32.876"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${ambiente}' == 'testing'</arg>
+<arg>Call Method</arg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>no-sandbox</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:32.878" starttime="20210601 14:13:32.877"/>
+</kw>
+<kw name="Create Webdriver" library="SeleniumLibrary">
+<arg>Chrome</arg>
+<arg>chrome_options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20210601 14:13:32.880" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" endtime="20210601 14:13:34.212" starttime="20210601 14:13:32.879"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210601 14:13:34.325" starttime="20210601 14:13:34.213"/>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${page}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20210601 14:13:34.325" level="INFO">Opening url 'http://localhost:4201'</msg>
+<status status="PASS" endtime="20210601 14:13:35.866" starttime="20210601 14:13:34.325"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:35.866" starttime="20210601 14:13:32.871"/>
+</kw>
+<kw name="Login" library="resource">
+<arg>admin</arg>
+<arg>password</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>name:username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:35.869" level="INFO">Typing text 'admin' into text field 'name:username'.</msg>
+<status status="PASS" endtime="20210601 14:13:35.976" starttime="20210601 14:13:35.868"/>
+</kw>
+<kw name="Input Password" library="SeleniumLibrary">
+<arg>name:password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:35.976" level="INFO">Typing password into text field 'name:password'.</msg>
+<msg timestamp="20210601 14:13:36.019" level="INFO">Temporally setting log level to: NONE</msg>
+<msg timestamp="20210601 14:13:36.087" level="INFO">Log level changed from NONE to INFO.</msg>
+<status status="PASS" endtime="20210601 14:13:36.088" starttime="20210601 14:13:35.976"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" endtime="20210601 14:13:36.114" starttime="20210601 14:13:36.088"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id:login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:36.115" level="INFO">Clicking button 'id:login'.</msg>
+<status status="PASS" endtime="20210601 14:13:36.192" starttime="20210601 14:13:36.115"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:36.192" starttime="20210601 14:13:35.867"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>id:user-name</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:36.528" starttime="20210601 14:13:36.193"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>css:#menu-perfil&gt;a&gt;span</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:36.552" starttime="20210601 14:13:36.529"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:36.822" starttime="20210601 14:13:36.552"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:36.827" level="INFO">Clicking element 'css:#menu-perfil&gt;a&gt;span'.</msg>
+<status status="PASS" endtime="20210601 14:13:37.029" starttime="20210601 14:13:36.823"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.030" starttime="20210601 14:13:36.528"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(1)&gt;td:nth-child(1)</arg>
+<arg>timeout=5</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:37.406" starttime="20210601 14:13:37.031"/>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${cantidad de filas}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.425" level="INFO">${cantidad de filas} = 10</msg>
+<status status="PASS" endtime="20210601 14:13:37.425" starttime="20210601 14:13:37.407"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${status}</var>
+<arg>${cantidad de filas} &gt; 0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210601 14:13:37.425" level="INFO">${status} = True</msg>
+<status status="PASS" endtime="20210601 14:13:37.425" starttime="20210601 14:13:37.425"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${status}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.426" starttime="20210601 14:13:37.426"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>${cantidad de filas}</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.457" level="INFO">${txt nombre perfil} = Admin</msg>
+<status status="PASS" endtime="20210601 14:13:37.457" starttime="20210601 14:13:37.427"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:37.459" level="FAIL">Admin != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:37.459" starttime="20210601 14:13:37.458"/>
+</kw>
+<msg timestamp="20210601 14:13:37.459" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.459" starttime="20210601 14:13:37.457"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.460" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.460" starttime="20210601 14:13:37.459"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.462" level="INFO">${numero de fila} = 1</msg>
+<status status="PASS" endtime="20210601 14:13:37.462" starttime="20210601 14:13:37.461"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.464" level="INFO">${numero de fila} = 1</msg>
+<status status="PASS" endtime="20210601 14:13:37.464" starttime="20210601 14:13:37.463"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.464" starttime="20210601 14:13:37.464"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.465" starttime="20210601 14:13:37.427"/>
+</iter>
+<iter>
+<var name="${i}">1</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.490" level="INFO">${txt nombre perfil} = AdminContrato</msg>
+<status status="PASS" endtime="20210601 14:13:37.490" starttime="20210601 14:13:37.465"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:37.491" level="FAIL">AdminContrato != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:37.491" starttime="20210601 14:13:37.490"/>
+</kw>
+<msg timestamp="20210601 14:13:37.491" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.491" starttime="20210601 14:13:37.490"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.491" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.491" starttime="20210601 14:13:37.491"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.492" level="INFO">${numero de fila} = 2</msg>
+<status status="PASS" endtime="20210601 14:13:37.492" starttime="20210601 14:13:37.492"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.493" level="INFO">${numero de fila} = 2</msg>
+<status status="PASS" endtime="20210601 14:13:37.493" starttime="20210601 14:13:37.493"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.493" starttime="20210601 14:13:37.493"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.494" starttime="20210601 14:13:37.465"/>
+</iter>
+<iter>
+<var name="${i}">2</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.517" level="INFO">${txt nombre perfil} = Cons</msg>
+<status status="PASS" endtime="20210601 14:13:37.517" starttime="20210601 14:13:37.494"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:37.518" level="FAIL">Cons != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:37.518" starttime="20210601 14:13:37.518"/>
+</kw>
+<msg timestamp="20210601 14:13:37.519" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.519" starttime="20210601 14:13:37.518"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.519" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.519" starttime="20210601 14:13:37.519"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.520" level="INFO">${numero de fila} = 3</msg>
+<status status="PASS" endtime="20210601 14:13:37.520" starttime="20210601 14:13:37.519"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.521" level="INFO">${numero de fila} = 3</msg>
+<status status="PASS" endtime="20210601 14:13:37.521" starttime="20210601 14:13:37.520"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.521" starttime="20210601 14:13:37.521"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.521" starttime="20210601 14:13:37.494"/>
+</iter>
+<iter>
+<var name="${i}">3</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.545" level="INFO">${txt nombre perfil} = CoordinadorEC</msg>
+<status status="PASS" endtime="20210601 14:13:37.545" starttime="20210601 14:13:37.521"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:37.546" level="FAIL">CoordinadorEC != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:37.546" starttime="20210601 14:13:37.545"/>
+</kw>
+<msg timestamp="20210601 14:13:37.546" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.546" starttime="20210601 14:13:37.545"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.547" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.547" starttime="20210601 14:13:37.546"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.548" level="INFO">${numero de fila} = 4</msg>
+<status status="PASS" endtime="20210601 14:13:37.548" starttime="20210601 14:13:37.547"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.548" level="INFO">${numero de fila} = 4</msg>
+<status status="PASS" endtime="20210601 14:13:37.548" starttime="20210601 14:13:37.548"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.549" starttime="20210601 14:13:37.548"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.549" starttime="20210601 14:13:37.521"/>
+</iter>
+<iter>
+<var name="${i}">4</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.573" level="INFO">${txt nombre perfil} = Elim</msg>
+<status status="PASS" endtime="20210601 14:13:37.573" starttime="20210601 14:13:37.549"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:37.574" level="FAIL">Elim != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:37.574" starttime="20210601 14:13:37.574"/>
+</kw>
+<msg timestamp="20210601 14:13:37.574" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.574" starttime="20210601 14:13:37.573"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.575" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.575" starttime="20210601 14:13:37.575"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.576" level="INFO">${numero de fila} = 5</msg>
+<status status="PASS" endtime="20210601 14:13:37.576" starttime="20210601 14:13:37.575"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.576" level="INFO">${numero de fila} = 5</msg>
+<status status="PASS" endtime="20210601 14:13:37.576" starttime="20210601 14:13:37.576"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.577" starttime="20210601 14:13:37.577"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.577" starttime="20210601 14:13:37.549"/>
+</iter>
+<iter>
+<var name="${i}">5</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.604" level="INFO">${txt nombre perfil} = Gerente</msg>
+<status status="PASS" endtime="20210601 14:13:37.604" starttime="20210601 14:13:37.577"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:37.605" level="FAIL">Gerente != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:37.605" starttime="20210601 14:13:37.604"/>
+</kw>
+<msg timestamp="20210601 14:13:37.605" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.605" starttime="20210601 14:13:37.604"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.606" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.606" starttime="20210601 14:13:37.605"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.607" level="INFO">${numero de fila} = 6</msg>
+<status status="PASS" endtime="20210601 14:13:37.607" starttime="20210601 14:13:37.606"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.607" level="INFO">${numero de fila} = 6</msg>
+<status status="PASS" endtime="20210601 14:13:37.607" starttime="20210601 14:13:37.607"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.608" starttime="20210601 14:13:37.607"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.608" starttime="20210601 14:13:37.577"/>
+</iter>
+<iter>
+<var name="${i}">6</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.632" level="INFO">${txt nombre perfil} = JP/Gestor</msg>
+<status status="PASS" endtime="20210601 14:13:37.632" starttime="20210601 14:13:37.608"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:37.633" level="FAIL">JP/Gestor != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:37.633" starttime="20210601 14:13:37.633"/>
+</kw>
+<msg timestamp="20210601 14:13:37.633" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.633" starttime="20210601 14:13:37.632"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.634" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.634" starttime="20210601 14:13:37.633"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.635" level="INFO">${numero de fila} = 7</msg>
+<status status="PASS" endtime="20210601 14:13:37.635" starttime="20210601 14:13:37.634"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.636" level="INFO">${numero de fila} = 7</msg>
+<status status="PASS" endtime="20210601 14:13:37.636" starttime="20210601 14:13:37.635"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.636" starttime="20210601 14:13:37.636"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.636" starttime="20210601 14:13:37.608"/>
+</iter>
+<iter>
+<var name="${i}">7</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.660" level="INFO">${txt nombre perfil} = JefeArea</msg>
+<status status="PASS" endtime="20210601 14:13:37.661" starttime="20210601 14:13:37.636"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:37.661" level="FAIL">JefeArea != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:37.662" starttime="20210601 14:13:37.661"/>
+</kw>
+<msg timestamp="20210601 14:13:37.662" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.662" starttime="20210601 14:13:37.661"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.662" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:37.662" starttime="20210601 14:13:37.662"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.663" level="INFO">${numero de fila} = 8</msg>
+<status status="PASS" endtime="20210601 14:13:37.663" starttime="20210601 14:13:37.662"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.664" level="INFO">${numero de fila} = 8</msg>
+<status status="PASS" endtime="20210601 14:13:37.664" starttime="20210601 14:13:37.663"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.664" starttime="20210601 14:13:37.664"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.664" starttime="20210601 14:13:37.636"/>
+</iter>
+<iter>
+<var name="${i}">8</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.688" level="INFO">${txt nombre perfil} = Nuevo Perfil Robot Editado</msg>
+<status status="PASS" endtime="20210601 14:13:37.688" starttime="20210601 14:13:37.665"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" endtime="20210601 14:13:37.689" starttime="20210601 14:13:37.689"/>
+</kw>
+<msg timestamp="20210601 14:13:37.689" level="INFO">${areYouMyLine} = True</msg>
+<status status="PASS" endtime="20210601 14:13:37.689" starttime="20210601 14:13:37.688"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.690" level="INFO">${areYouMyLine} = True</msg>
+<status status="PASS" endtime="20210601 14:13:37.690" starttime="20210601 14:13:37.689"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:37.691" level="INFO">${numero de fila} = 9</msg>
+<status status="PASS" endtime="20210601 14:13:37.691" starttime="20210601 14:13:37.690"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:37.691" level="INFO">${numero de fila} = 9</msg>
+<status status="PASS" endtime="20210601 14:13:37.691" starttime="20210601 14:13:37.691"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing for loop.</doc>
+<msg timestamp="20210601 14:13:37.692" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" endtime="20210601 14:13:37.692" starttime="20210601 14:13:37.692"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.692" starttime="20210601 14:13:37.691"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:37.692" starttime="20210601 14:13:37.664"/>
+</iter>
+<status status="PASS" endtime="20210601 14:13:37.692" starttime="20210601 14:13:37.426"/>
+</for>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" endtime="20210601 14:13:37.693" starttime="20210601 14:13:37.692"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(5)&gt;div:nth-child(3)&gt;button</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:37.716" starttime="20210601 14:13:37.694"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:37.986" starttime="20210601 14:13:37.716"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:37.989" level="INFO">Clicking element 'css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(9)&gt;td:nth-child(5)&gt;div:nth-child(3)&gt;button'.</msg>
+<status status="PASS" endtime="20210601 14:13:38.080" starttime="20210601 14:13:37.987"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.080" starttime="20210601 14:13:37.693"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${boton de confirmar}</var>
+<arg>css:.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.081" level="INFO">${boton de confirmar} = css:.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted</msg>
+<status status="PASS" endtime="20210601 14:13:38.081" starttime="20210601 14:13:38.080"/>
+</kw>
+<kw name="Click Visible Element" library="resource">
+<arg>${boton de confirmar}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${element}</arg>
+<arg>timeout=4</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" endtime="20210601 14:13:38.116" starttime="20210601 14:13:38.083"/>
+</kw>
+<kw name="Scroll Element Into View" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" endtime="20210601 14:13:38.392" starttime="20210601 14:13:38.116"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${element}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.395" level="INFO">Clicking element 'css:.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted'.</msg>
+<status status="PASS" endtime="20210601 14:13:38.489" starttime="20210601 14:13:38.393"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.490" starttime="20210601 14:13:38.082"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>${cantidad de filas}</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.510" level="INFO">${txt nombre perfil} = Admin</msg>
+<status status="PASS" endtime="20210601 14:13:38.510" starttime="20210601 14:13:38.491"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.511" level="FAIL">Admin != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.511" starttime="20210601 14:13:38.511"/>
+</kw>
+<msg timestamp="20210601 14:13:38.511" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.511" starttime="20210601 14:13:38.510"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.512" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.512" starttime="20210601 14:13:38.511"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.513" level="INFO">${numero de fila} = 1</msg>
+<status status="PASS" endtime="20210601 14:13:38.513" starttime="20210601 14:13:38.512"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.514" level="INFO">${numero de fila} = 1</msg>
+<status status="PASS" endtime="20210601 14:13:38.514" starttime="20210601 14:13:38.513"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.514" starttime="20210601 14:13:38.514"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.514" starttime="20210601 14:13:38.491"/>
+</iter>
+<iter>
+<var name="${i}">1</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.560" level="INFO">${txt nombre perfil} = AdminContrato</msg>
+<status status="PASS" endtime="20210601 14:13:38.560" starttime="20210601 14:13:38.514"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.561" level="FAIL">AdminContrato != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.561" starttime="20210601 14:13:38.561"/>
+</kw>
+<msg timestamp="20210601 14:13:38.561" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.561" starttime="20210601 14:13:38.560"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.562" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.562" starttime="20210601 14:13:38.561"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.563" level="INFO">${numero de fila} = 2</msg>
+<status status="PASS" endtime="20210601 14:13:38.563" starttime="20210601 14:13:38.562"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.564" level="INFO">${numero de fila} = 2</msg>
+<status status="PASS" endtime="20210601 14:13:38.564" starttime="20210601 14:13:38.563"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.564" starttime="20210601 14:13:38.564"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.564" starttime="20210601 14:13:38.514"/>
+</iter>
+<iter>
+<var name="${i}">2</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.583" level="INFO">${txt nombre perfil} = Cons</msg>
+<status status="PASS" endtime="20210601 14:13:38.583" starttime="20210601 14:13:38.564"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.584" level="FAIL">Cons != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.584" starttime="20210601 14:13:38.583"/>
+</kw>
+<msg timestamp="20210601 14:13:38.584" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.584" starttime="20210601 14:13:38.583"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.585" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.585" starttime="20210601 14:13:38.584"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.587" level="INFO">${numero de fila} = 3</msg>
+<status status="PASS" endtime="20210601 14:13:38.587" starttime="20210601 14:13:38.585"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.588" level="INFO">${numero de fila} = 3</msg>
+<status status="PASS" endtime="20210601 14:13:38.589" starttime="20210601 14:13:38.588"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.591" starttime="20210601 14:13:38.589"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.592" starttime="20210601 14:13:38.564"/>
+</iter>
+<iter>
+<var name="${i}">3</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.617" level="INFO">${txt nombre perfil} = CoordinadorEC</msg>
+<status status="PASS" endtime="20210601 14:13:38.617" starttime="20210601 14:13:38.593"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.618" level="FAIL">CoordinadorEC != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.618" starttime="20210601 14:13:38.618"/>
+</kw>
+<msg timestamp="20210601 14:13:38.618" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.618" starttime="20210601 14:13:38.617"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.619" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.619" starttime="20210601 14:13:38.619"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.621" level="INFO">${numero de fila} = 4</msg>
+<status status="PASS" endtime="20210601 14:13:38.621" starttime="20210601 14:13:38.620"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.623" level="INFO">${numero de fila} = 4</msg>
+<status status="PASS" endtime="20210601 14:13:38.623" starttime="20210601 14:13:38.621"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.623" starttime="20210601 14:13:38.623"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.623" starttime="20210601 14:13:38.592"/>
+</iter>
+<iter>
+<var name="${i}">4</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.641" level="INFO">${txt nombre perfil} = Elim</msg>
+<status status="PASS" endtime="20210601 14:13:38.642" starttime="20210601 14:13:38.623"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.642" level="FAIL">Elim != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.642" starttime="20210601 14:13:38.642"/>
+</kw>
+<msg timestamp="20210601 14:13:38.643" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.643" starttime="20210601 14:13:38.642"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.643" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.643" starttime="20210601 14:13:38.643"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.644" level="INFO">${numero de fila} = 5</msg>
+<status status="PASS" endtime="20210601 14:13:38.644" starttime="20210601 14:13:38.643"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.645" level="INFO">${numero de fila} = 5</msg>
+<status status="PASS" endtime="20210601 14:13:38.645" starttime="20210601 14:13:38.644"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.645" starttime="20210601 14:13:38.645"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.645" starttime="20210601 14:13:38.623"/>
+</iter>
+<iter>
+<var name="${i}">5</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.664" level="INFO">${txt nombre perfil} = Gerente</msg>
+<status status="PASS" endtime="20210601 14:13:38.664" starttime="20210601 14:13:38.646"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.665" level="FAIL">Gerente != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.665" starttime="20210601 14:13:38.664"/>
+</kw>
+<msg timestamp="20210601 14:13:38.665" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.665" starttime="20210601 14:13:38.664"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.665" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.665" starttime="20210601 14:13:38.665"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.666" level="INFO">${numero de fila} = 6</msg>
+<status status="PASS" endtime="20210601 14:13:38.666" starttime="20210601 14:13:38.666"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.667" level="INFO">${numero de fila} = 6</msg>
+<status status="PASS" endtime="20210601 14:13:38.667" starttime="20210601 14:13:38.667"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.667" starttime="20210601 14:13:38.667"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.668" starttime="20210601 14:13:38.645"/>
+</iter>
+<iter>
+<var name="${i}">6</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.685" level="INFO">${txt nombre perfil} = JP/Gestor</msg>
+<status status="PASS" endtime="20210601 14:13:38.685" starttime="20210601 14:13:38.668"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.686" level="FAIL">JP/Gestor != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.686" starttime="20210601 14:13:38.686"/>
+</kw>
+<msg timestamp="20210601 14:13:38.687" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.687" starttime="20210601 14:13:38.685"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.688" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.688" starttime="20210601 14:13:38.687"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.690" level="INFO">${numero de fila} = 7</msg>
+<status status="PASS" endtime="20210601 14:13:38.690" starttime="20210601 14:13:38.688"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.691" level="INFO">${numero de fila} = 7</msg>
+<status status="PASS" endtime="20210601 14:13:38.692" starttime="20210601 14:13:38.691"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.692" starttime="20210601 14:13:38.692"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.692" starttime="20210601 14:13:38.668"/>
+</iter>
+<iter>
+<var name="${i}">7</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.710" level="INFO">${txt nombre perfil} = JefeArea</msg>
+<status status="PASS" endtime="20210601 14:13:38.710" starttime="20210601 14:13:38.692"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.711" level="FAIL">JefeArea != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.711" starttime="20210601 14:13:38.710"/>
+</kw>
+<msg timestamp="20210601 14:13:38.711" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.711" starttime="20210601 14:13:38.710"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.711" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.712" starttime="20210601 14:13:38.711"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.712" level="INFO">${numero de fila} = 8</msg>
+<status status="PASS" endtime="20210601 14:13:38.713" starttime="20210601 14:13:38.712"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.713" level="INFO">${numero de fila} = 8</msg>
+<status status="PASS" endtime="20210601 14:13:38.713" starttime="20210601 14:13:38.713"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.714" starttime="20210601 14:13:38.713"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.714" starttime="20210601 14:13:38.692"/>
+</iter>
+<iter>
+<var name="${i}">8</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.738" level="INFO">${txt nombre perfil} = SubGerente</msg>
+<status status="PASS" endtime="20210601 14:13:38.738" starttime="20210601 14:13:38.714"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.740" level="FAIL">SubGerente != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.740" starttime="20210601 14:13:38.739"/>
+</kw>
+<msg timestamp="20210601 14:13:38.740" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.740" starttime="20210601 14:13:38.738"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.740" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.741" starttime="20210601 14:13:38.740"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.742" level="INFO">${numero de fila} = 9</msg>
+<status status="PASS" endtime="20210601 14:13:38.742" starttime="20210601 14:13:38.741"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.742" level="INFO">${numero de fila} = 9</msg>
+<status status="PASS" endtime="20210601 14:13:38.742" starttime="20210601 14:13:38.742"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.743" starttime="20210601 14:13:38.742"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.743" starttime="20210601 14:13:38.714"/>
+</iter>
+<iter>
+<var name="${i}">9</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${txt nombre perfil}</var>
+<arg>css:.p-datatable-wrapper&gt;table&gt;tbody&gt;tr:nth-child(${i + 1})&gt;td:nth-child(1)</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210601 14:13:38.767" level="INFO">${txt nombre perfil} = Supervisor</msg>
+<status status="PASS" endtime="20210601 14:13:38.767" starttime="20210601 14:13:38.743"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${areYouMyLine}</var>
+<arg>Should Be Equal As Strings</arg>
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${txt nombre perfil}</arg>
+<arg>Nuevo Perfil Robot Editado</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20210601 14:13:38.768" level="FAIL">Supervisor != Nuevo Perfil Robot Editado</msg>
+<status status="FAIL" endtime="20210601 14:13:38.768" starttime="20210601 14:13:38.767"/>
+</kw>
+<msg timestamp="20210601 14:13:38.768" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.768" starttime="20210601 14:13:38.767"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.769" level="INFO">${areYouMyLine} = False</msg>
+<status status="PASS" endtime="20210601 14:13:38.769" starttime="20210601 14:13:38.768"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${numero de fila}</var>
+<arg>${i + 1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20210601 14:13:38.771" level="INFO">${numero de fila} = 10</msg>
+<status status="PASS" endtime="20210601 14:13:38.771" starttime="20210601 14:13:38.769"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${numero de fila}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20210601 14:13:38.772" level="INFO">${numero de fila} = 10</msg>
+<status status="PASS" endtime="20210601 14:13:38.772" starttime="20210601 14:13:38.771"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<arg>Exit For Loop</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.772" starttime="20210601 14:13:38.772"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.772" starttime="20210601 14:13:38.743"/>
+</iter>
+<status status="PASS" endtime="20210601 14:13:38.773" starttime="20210601 14:13:38.490"/>
+</for>
+<kw name="Should Not Be True" library="BuiltIn">
+<arg>${areYouMyLine}</arg>
+<doc>Fails if the given condition is true.</doc>
+<status status="PASS" endtime="20210601 14:13:38.773" starttime="20210601 14:13:38.773"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210601 14:13:38.834" starttime="20210601 14:13:38.773"/>
+</kw>
+<status status="PASS" endtime="20210601 14:13:38.834" starttime="20210601 14:13:32.871"/>
+</test>
+<doc>Test de funcionanildad del modulo de Perfiles.
+
+This test has a workflow that is created using keywords in
+the imported resource file.</doc>
+<status status="PASS" endtime="20210601 14:13:38.835" starttime="20210601 14:13:11.352"/>
+</suite>
+<status status="PASS" endtime="20210601 14:13:38.840" starttime="20210601 14:12:54.723"/>
+</suite>
+<status status="PASS" endtime="20210601 14:13:38.842" starttime="20210601 14:12:54.696"/>
+</suite>
+<statistics>
+<total>
+<stat fail="0" skip="0" pass="7">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" skip="0" id="s1" name="Web-Sigo" pass="7">Web-Sigo</stat>
+<stat fail="0" skip="0" id="s1-s1" name="Robot E2E" pass="7">Web-Sigo.Robot E2E</stat>
+<stat fail="0" skip="0" id="s1-s1-s1" name="Cubicacion" pass="1">Web-Sigo.Robot E2E.Cubicacion</stat>
+<stat fail="0" skip="0" id="s1-s1-s2" name="Login" pass="2">Web-Sigo.Robot E2E.Login</stat>
+<stat fail="0" skip="0" id="s1-s1-s3" name="Perfiles" pass="4">Web-Sigo.Robot E2E.Perfiles</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
