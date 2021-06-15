@@ -87,6 +87,7 @@ Index
     Set jefatura                          Jefe de Área Telefónica
     Set descripcion perfil                Gestor de proyectos de telefónica
     Set Permisos modulo OT                @{permisos gestor}
+    Set Permisos modulo CUBICACION
     Guardar perfil
 
 

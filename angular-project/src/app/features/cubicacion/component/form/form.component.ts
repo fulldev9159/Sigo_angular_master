@@ -29,6 +29,7 @@ export class FormComponent implements OnInit, OnDestroy {
   @Output() public save = new EventEmitter();
   @Output() public selected = new EventEmitter();
   @Output() public ChangeSearchContainer = new EventEmitter();
+  @Output() public selectSearch = new EventEmitter();
   private destroyInstance$: Subject<boolean> = new Subject();
   public lpuSelected: CubModel.SubContractedServices[] = [];
   public total = 0;
@@ -88,6 +89,7 @@ export class FormComponent implements OnInit, OnDestroy {
             this.total = this.lpuSelected.reduce((total, currentValue) => {
               return total + currentValue.lpu_subtotal;
             }, 0);
+            this.selected.emit(this.lpuSelected);
           },
         },
         {
@@ -190,11 +192,12 @@ export class FormComponent implements OnInit, OnDestroy {
     this.total = this.lpuSelected.reduce((total, currentValue) => {
       return total + currentValue.lpu_subtotal;
     }, 0);
-    this.selected.emit(event.value);
+    this.selected.emit(this.lpuSelected);
   }
 
   selectEvent(item): void {
     // do something with selected item
+    this.selectSearch.emit(item.name);
   }
 
   onChangeSearch(val: string): void {
@@ -203,7 +206,7 @@ export class FormComponent implements OnInit, OnDestroy {
     // And reassign the 'data' which is binded to 'data' property.
   }
 
-  onFocused(e): void {
+  onFocused(val: string): void {
     // do something when input is focused
   }
 
