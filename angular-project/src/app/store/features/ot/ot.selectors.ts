@@ -5,38 +5,47 @@ export const selectOt = createFeatureSelector<fromOt.StateOt>(
   fromOt.otFeatureKey
 );
 
-export const getOt = createSelector(selectOt,
+export const getOt = createSelector(
+  selectOt,
   (state: fromOt.StateOt) => state.items
 );
 
-export const getPlans = createSelector(selectOt,
+export const getPlans = createSelector(
+  selectOt,
   (state: fromOt.StateOt) => state.planes
 );
 
-export const getSites = createSelector(selectOt,
+export const getSites = createSelector(
+  selectOt,
   (state: fromOt.StateOt) => state.sites
 );
 
-export const getPmos = createSelector(selectOt,
+export const getPmos = createSelector(
+  selectOt,
   (state: fromOt.StateOt) => state.pmos
 );
 
-export const getIDsOpex = createSelector(selectOt,
-  (state: fromOt.StateOt) => state.id_opex
+export const getIDsOpex = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.ids_opex
 );
 
-export const getCuentasSAP = createSelector(selectOt,
+export const getCuentasSAP = createSelector(
+  selectOt,
   (state: fromOt.StateOt) => state.cuentas_sap
 );
 
-export const getCECOs = createSelector(selectOt,
+export const getCECOs = createSelector(
+  selectOt,
   (state: fromOt.StateOt) => state.cecos
 );
 
-export const getLps = createSelector(selectOt,
+export const getLps = createSelector(
+  selectOt,
   (state: fromOt.StateOt) => state.budgetLines
 );
 
-export const getPeps2 = createSelector(selectOt,
+export const getPeps2 = createSelector(
+  selectOt,
   (state: fromOt.StateOt) => state.pep2s
 );

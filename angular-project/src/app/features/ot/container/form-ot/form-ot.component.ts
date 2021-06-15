@@ -230,13 +230,17 @@ export class FormOtComponent implements OnInit, OnDestroy {
           const id_sustento_controls = 'costos';
           const rbutton = this.formOt.controls[id_sustento_controls].value;
           if (site) {
-            if (rbutton === 'capex') {
-              this.otFacade.getPmos({
-                sitio_codigo: site.codigo,
-              });
-            } else if (rbutton === 'opex') {
-              this.otFacade.getIDsOpex();
-            }
+            this.otFacade.getPmos({
+              sitio_codigo: site.codigo,
+            });
+            // if (rbutton === 'capex') {
+            //   this.otFacade.getPmos({
+            //     sitio_codigo: site.codigo,
+            //   });
+            // } else if (rbutton === 'opex') {
+            //   // NUNCA ENTRA ACA! -> SACAR
+            //   this.otFacade.getIDsOpex();
+            // }
           }
           // refrescamos parte de
           //  formulario al cambiar site
@@ -266,7 +270,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
         if (id_opex_codigo) {
           // actualizamos store para
           // cuenta SAP según id_opex_codigo
-          // this.otFacade.getCuentasSAP({ token: this.authLogin.token, id_opex_codigo });
+          this.otFacade.getCuentaSAP({
+            id_opex_codigo,
+          });
           // refrescamos parte de
           //  formulario al cambiar id_opex
           // this.resetForm('ID_OPEX');
@@ -280,7 +286,12 @@ export class FormOtComponent implements OnInit, OnDestroy {
         if (cuenta_sap_codigo) {
           // actualizamos store para
           // ceco según cuenta_sap_codigo
-          // this.otFacade.getCECOs({ token: this.authLogin.token, cuenta_sap_codigo });
+          const id_opex_controls = 'id_opex_codigo';
+          const id_opex = this.formOt.controls[id_opex_controls].value;
+          this.otFacade.getCECO({
+            id_opex_codigo: id_opex,
+            cuenta_sap_codigo,
+          });
           // refrescamos parte de
           //  formulario al cambiar cuenta sap
           // this.resetForm('CUENTA_SAP');
@@ -310,21 +321,18 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((costos) => {
         if (costos) {
-          // const id_sitio_controls = 'sitio_id'
-          // const sitio_id = this.formOt.controls[id_sitio_controls].value
-          // const site = this.sitios.find((s) => +s.id === +sitio_id);
+          const id_sitio_controls = 'sitio_id';
+          const sitio_id = this.formOt.controls[id_sitio_controls].value;
+          const site = this.sitios.find((s) => +s.id === +sitio_id);
           // const id_sustento_controls = 'costos'
           // const rbutton = this.formOt.controls[id_sustento_controls].value
-          // if (site) {
-          //   if (rbutton === 'capex'){
-          //     this.otFacade.getPmos({
-          //       sitio_codigo: site.codigo
-          //     });
-          //   }
-          //   else if (rbutton === 'opex'){
-          //     this.otFacade.getIDsOpex();
-          //   }
-          // }
+          if (costos === 'capex') {
+            this.otFacade.getPmos({
+              sitio_codigo: site.codigo,
+            });
+          } else if (costos === 'opex') {
+            this.otFacade.getIDsOpex();
+          }
         }
       });
   }

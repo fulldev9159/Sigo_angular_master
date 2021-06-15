@@ -123,7 +123,7 @@
       <label for="">CECO</label>
       <select formControlName="ceco_codigo" [attr.disabled]="cecos.length === 0 ? '' : null" class="form-control" name="" id="">
         <option value="null" selected disabled>Seleccione CECO</option>
-        <option *ngFor="let ceco of cecos" [value]="ceco.codigo">{{ceco.codigo}}</option>
+        <option *ngFor="let ceco of cecos" [value]="ceco.codigo">{{ceco.ceco}}</option>
       </select>
       <br>
     </div> 
