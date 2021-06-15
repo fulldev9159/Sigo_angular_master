@@ -21,7 +21,7 @@ export interface StateOt {
   pmos: PMO[];
   budgetLines: Lp[];
   pep2s: Pep2[];
-  id_opex: IDOpex[];
+  ids_opex: IDOpex[];
   cuentas_sap: CuentaSap[];
   cecos: CECO[];
 }
@@ -46,7 +46,7 @@ export const initialStateOt: StateOt = {
   pmos: [],
   budgetLines: [],
   pep2s: [],
-  id_opex: [],
+  ids_opex: [],
   cuentas_sap: [],
   cecos: [],
 };
@@ -92,7 +92,7 @@ export const reducerOt = createReducer(
   on(OtActions.getIDOpex, (state) => state),
   on(OtActions.getIDOpexSuccess, (state, payload) => ({
     ...state,
-    ids_opex: payload.id_opex,
+    ids_opex: payload.ids_opex,
   })),
 
   on(OtActions.getCuentaSAP, (state) => state),

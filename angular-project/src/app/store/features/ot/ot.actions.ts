@@ -146,12 +146,11 @@ export const getPmoError = createAction(
   props<{ error: any }>()
 );
 
-// DUDA: se debe poner props de alguna forma null?
 export const getIDOpex = createAction('[IDOpex Get All] GET All');
 
 export const getIDOpexSuccess = createAction(
   '[IDOpex Get All] GET All Success',
-  props<{ id_opex: IDOpex[] }>()
+  props<{ ids_opex: IDOpex[] }>()
 );
 
 export const getIDOpexError = createAction(

@@ -92,7 +92,7 @@ export class OtEffects {
           .post(`${environment.api}/ingreot/opex/id_opex/get_all`, {})
           .pipe(
             map((res: any) =>
-              otActions.getIDOpexSuccess({ id_opex: res.data.items })
+              otActions.getIDOpexSuccess({ ids_opex: res.data.items })
             ),
             catchError((err) => of(otActions.getIDOpexError({ error: err })))
           )

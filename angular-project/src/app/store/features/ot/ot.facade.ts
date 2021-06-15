@@ -95,8 +95,8 @@ export class OtFacade {
     this.store.dispatch(otActions.getIDOpex());
   }
 
-  public getIDsOpexSuccess(id_opex: IDOpex[]): void {
-    this.store.dispatch(otActions.getIDOpexSuccess({ id_opex }));
+  public getIDsOpexSuccess(ids_opex: IDOpex[]): void {
+    this.store.dispatch(otActions.getIDOpexSuccess({ ids_opex }));
   }
 
   public getIDsOpex$(): Observable<IDOpex[]> {
