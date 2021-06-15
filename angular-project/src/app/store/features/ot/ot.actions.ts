@@ -175,7 +175,7 @@ export const getCuentaSAPError = createAction(
 
 export const getCECO = createAction(
   '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP',
-  props<{ cecos_codigo: string }>()
+  props<{ id_opex_codigo: string; cuenta_sap_codigo: string }>()
 );
 
 export const getCECOSuccess = createAction(

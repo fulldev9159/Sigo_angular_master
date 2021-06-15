@@ -105,12 +105,33 @@ export class OtEffects {
       ofType(otActions.getCuentaSAP),
       concatMap((data: any) =>
         this.http
-          .post(`${environment.api}/ingreot/opex/cuenta_sap/get`, {})
+          .post(`${environment.api}/ingreot/opex/cuenta_sap/get`, {
+            id_opex: data.id_opex_codigo,
+          })
           .pipe(
             map((res: any) =>
               otActions.getCuentaSAPSuccess({ cuentas_sap: res.data.items })
             ),
             catchError((err) => of(otActions.getCuentaSAPError({ error: err })))
+          )
+      )
+    )
+  );
+
+  getCECO$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCECO),
+      concatMap((data: any) =>
+        this.http
+          .post(`${environment.api}/ingreot/opex/ceco/get`, {
+            id_opex: data.id_opex_codigo,
+            cuenta_sap: data.cuenta_sap_codigo,
+          })
+          .pipe(
+            map((res: any) =>
+              otActions.getCECOSuccess({ cecos: res.data.items })
+            ),
+            catchError((err) => of(otActions.getCECOError({ error: err })))
           )
       )
     )
