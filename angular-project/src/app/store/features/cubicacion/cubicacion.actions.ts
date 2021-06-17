@@ -2,11 +2,11 @@ import { createAction, props } from '@ngrx/store';
 import {
   ContractMarco,
   Cubicacion,
-  SubContractedProviders,
-  SubContractedRegions,
-  SubContractedServices,
-  SubContractedTypeServices,
-  AutoSuggestForm,
+  Provider,
+  Region,
+  Service,
+  TypeService,
+  AutoSuggestItem,
 } from './cubicacion.model';
 
 // CUBICACION LIST
@@ -107,7 +107,7 @@ export const getSubContractProviders = createAction(
 
 export const getSubContractProvidersSuccess = createAction(
   '[SubContractedProviders Get] GET Data Success',
-  props<{ subContractedProviders: SubContractedProviders[] }>()
+  props<{ subContractedProviders: Provider[] }>()
 );
 
 export const getSubContractProvidersError = createAction(
@@ -122,7 +122,7 @@ export const getSubContractedRegions = createAction(
 
 export const getSubContractedRegionsSuccess = createAction(
   '[SubContractedRegions Get] GET Data Success',
-  props<{ subContractedRegions: SubContractedRegions[] }>()
+  props<{ subContractedRegions: Region[] }>()
 );
 
 export const getSubContractedRegionsError = createAction(
@@ -137,7 +137,7 @@ export const getSubContractedTypeServices = createAction(
 
 export const getSubContractedTypeServicesSuccess = createAction(
   '[SubContractedTypeServices Get] GET Data Success',
-  props<{ subContractedTypeServices: SubContractedTypeServices[] }>()
+  props<{ subContractedTypeServices: TypeService[] }>()
 );
 
 export const getSubContractedTypeServicesError = createAction(
@@ -156,7 +156,7 @@ export const getSubContractedServices = createAction(
 
 export const getSubContractedServicesSuccess = createAction(
   '[SubContractedServices Get] GET Data Success',
-  props<{ subContractedServices: SubContractedServices[] }>()
+  props<{ subContractedServices: Service[] }>()
 );
 
 export const getSubContractedServicesError = createAction(
@@ -175,7 +175,7 @@ export const getAutoSuggest = createAction(
 
 export const getAutoSuggestSuccess = createAction(
   '[Cubicacion Get] GET AutoSuggest Success',
-  props<{ autosuggests: AutoSuggestForm[] }>()
+  props<{ autosuggests: AutoSuggestItem[] }>()
 );
 
 export const getAutoSuggestError = createAction(

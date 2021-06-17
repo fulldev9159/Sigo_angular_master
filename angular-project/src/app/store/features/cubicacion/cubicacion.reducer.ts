@@ -3,11 +3,11 @@ import * as CubicacionActions from './cubicacion.actions';
 import {
   ContractMarco,
   Cubicacion,
-  SubContractedProviders,
-  SubContractedRegions,
-  SubContractedServices,
-  SubContractedTypeServices,
-  AutoSuggestForm
+  Provider,
+  Region,
+  Service,
+  TypeService,
+  AutoSuggestItem
 } from './cubicacion.model';
 
 export const CubicacionFeatureKey = 'cubicacion';
@@ -15,11 +15,11 @@ export const CubicacionFeatureKey = 'cubicacion';
 export interface StateCubicacion {
   items: Cubicacion[];
   contractMarco: ContractMarco[];
-  subContractedProviders: SubContractedProviders[];
-  subContractedRegions: SubContractedRegions[];
-  subContractedTypeServices: SubContractedTypeServices[];
-  subContractedServices: SubContractedServices[];
-  autoSuggest: AutoSuggestForm[];
+  subContractedProviders: Provider[];
+  subContractedRegions: Region[];
+  subContractedTypeServices: TypeService[];
+  subContractedServices: Service[];
+  autoSuggest: AutoSuggestItem[];
 }
 
 export const initialStateCubicacion: StateCubicacion = {

@@ -10,9 +10,15 @@ import * as cubicacionModel from '@storeOT/features/cubicacion/cubicacion.model'
 import { Response } from '@storeOT/model';
 import { environment } from '@environment';
 
+import { SnackBarService } from '@utilsSIGO/snack-bar';
+
 @Injectable()
 export class CubicacionEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private snackService: SnackBarService
+  ) {}
 
   getOt$ = createEffect(() =>
     this.actions$.pipe(
@@ -23,14 +29,18 @@ export class CubicacionEffects {
             perfil_id: data.perfilID,
           })
           .pipe(
-            map((res: any) =>
-              cubicacionActions.getCubicacionSuccess({
+            map((res: any) => {
+              if (+res.status.responseCode !== 0) {
+                this.snackService.showMessage(res.status.description, 'error');
+              }
+              return cubicacionActions.getCubicacionSuccess({
                 cubicacion: res.data.items,
-              })
-            ),
-            catchError((err) =>
-              of(cubicacionActions.getCubicacionError({ error: err }))
-            )
+              });
+            }),
+            catchError((err) => {
+              console.log(err);
+              return of(cubicacionActions.getCubicacionError({ error: err }));
+            })
           )
       )
     )
@@ -46,13 +56,20 @@ export class CubicacionEffects {
             usuario_id: data.usuario_id,
           })
           .pipe(
-            map((res: any) =>
-              cubicacionActions.getContractMarcoSuccess({
+            map((res: any) => {
+              let message = '';
+              if (+res.status.responseCode !== 0) {
+                if (res.status.description === 'Sin resultados') {
+                  message = 'El usuario no tiene contratos asignados';
+                }
+                this.snackService.showMessage(message, 'error');
+              }
+              return cubicacionActions.getContractMarcoSuccess({
                 contractMarco: res.data.items.sort((a, b) =>
                   a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
                 ),
-              })
-            ),
+              });
+            }),
             catchError((err) =>
               of(cubicacionActions.getContractMarcoError({ error: err }))
             )
@@ -177,11 +194,20 @@ export class CubicacionEffects {
         this.http
           .post(`${environment.api}/cubicacion/save_edit`, data.cubicacion)
           .pipe(
-            map((res: any) =>
-              cubicacionActions.postCubicacionSuccess({
-                cubicacion: res.data.items,
-              })
-            ),
+            map((res: any) => {
+              let message = '';
+              if (+res.status.responseCode !== 0) {
+                if (res.status.description === 'Sin resultados') {
+                  message = 'El usuario no tiene contratos asignados';
+                } else {
+                  message = res.status.description;
+                }
+                this.snackService.showMessage(message, 'error');
+              }
+              return cubicacionActions.postCubicacionSuccess({
+                cubicacion: res.data.iteFms,
+              });
+            }),
             catchError((err) =>
               of(cubicacionActions.postCubicacionError({ error: err }))
             )

@@ -12,7 +12,7 @@ export class SnackBarService {
       pos: 'bottom-right',
       text: message,
       backgroundColor: '#212121',
-      actionText: 'OK',
+      actionText: type,
       actionTextColor: ((color) => {
         if (color === 'error') {
           return '#DB2828';

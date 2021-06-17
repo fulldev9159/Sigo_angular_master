@@ -15,4 +15,11 @@
 
   <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
 
+  <app-modal [display]="DisplayModal" (CloseEvent)="DisplayModal=false">
+    <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>
+    <ng-container modal-content>
+      
+    </ng-container>
+    <ng-container modal-footer></ng-container>
+  </app-modal>
 </div>
