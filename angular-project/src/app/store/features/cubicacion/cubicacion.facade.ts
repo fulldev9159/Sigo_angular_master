@@ -6,11 +6,11 @@ import * as cubicacionSelectors from './cubicacion.selectors';
 import {
   ContractMarco,
   Cubicacion,
-  SubContractedProviders,
-  SubContractedRegions,
-  SubContractedServices,
-  SubContractedTypeServices,
-  AutoSuggestForm,
+  Provider,
+  Region,
+  Service,
+  TypeService,
+  AutoSuggestItem,
 } from './cubicacion.model';
 
 @Injectable({
@@ -70,7 +70,7 @@ export class CubicacionFacade {
   }
 
   public getSubContractedProvidersSuccess(
-    subContractedProviders: SubContractedProviders[]
+    subContractedProviders: Provider[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractProvidersSuccess({
@@ -79,8 +79,8 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedProvidersSelector$(): Observable<
-    SubContractedProviders[]
+  public getProvidersSelector$(): Observable<
+    Provider[]
   > {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);
   }
@@ -92,15 +92,15 @@ export class CubicacionFacade {
   }
 
   public getSubContractedRegionsSuccess(
-    subContractedRegions: SubContractedRegions[]
+    subContractedRegions: Region[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedRegionsSuccess({ subContractedRegions })
     );
   }
 
-  public getSubContractedRegionsSelector$(): Observable<
-    SubContractedRegions[]
+  public getRegionsSelector$(): Observable<
+    Region[]
   > {
     return this.store.select(cubicacionSelectors.getSubContractedRegions);
   }
@@ -112,7 +112,7 @@ export class CubicacionFacade {
   }
 
   public getSubContractedTypeServicesSuccess(
-    subContractedTypeServices: SubContractedTypeServices[]
+    subContractedTypeServices: TypeService[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedTypeServicesSuccess({
@@ -121,8 +121,8 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedTypeServicesSelector$(): Observable<
-    SubContractedTypeServices[]
+  public getTypeServicesSelector$(): Observable<
+    TypeService[]
   > {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
   }
@@ -134,7 +134,7 @@ export class CubicacionFacade {
   }
 
   public getSubContractedServicesSuccess(
-    subContractedServices: SubContractedServices[]
+    subContractedServices: Service[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedServicesSuccess({
@@ -143,8 +143,8 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedServicesSelector$(): Observable<
-    SubContractedServices[]
+  public getServicesSelector$(): Observable<
+    Service[]
   > {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
   }
@@ -165,7 +165,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getAutoSuggestSelector$(): Observable<AutoSuggestForm[]> {
+  public getAutoSuggestSelector$(): Observable<AutoSuggestItem[]> {
     return this.store.select(cubicacionSelectors.getAutoSuggest);
   }
 }

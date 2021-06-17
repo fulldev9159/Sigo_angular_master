@@ -1,4 +1,20 @@
 # Changelog
+## [0.24.0] - 2021-05-22
+
+### features
+
+- En get contratos ahora despliega los errores de tipo 'Sin registros'
+- Captua de errores en save Cubicación
+- Se recupera el save cubicación
+- Se recupera el delete lpu del carrito
+
+### Changes
+
+- Se refactoriza código del formulario cubicación creandose un service que maneje la lógica del formulario
+
+### Fix
+
+
 
 ## [0.23.0] - 2021-05-15
 

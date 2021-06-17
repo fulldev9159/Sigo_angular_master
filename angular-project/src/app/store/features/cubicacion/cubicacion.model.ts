@@ -20,24 +20,24 @@ export interface ContractMarco {
   tipo_contrato_nombre: string;
 }
 
-export interface SubContractedProviders {
+export interface Provider {
   id: number;
   nombre: string;
   subcontrato_id: number[];
 }
 
-export interface SubContractedRegions {
+export interface Region {
   id: number;
   nombre: string;
   codigo: string;
 }
 
-export interface SubContractedTypeServices {
+export interface TypeService {
   id: number;
   nombre: string;
 }
 
-export interface SubContractedServices {
+export interface Service {
   lpu_id: number;
   lpu_nombre: string;
   lpu_precio: number;
@@ -72,7 +72,7 @@ export interface AutoSuggestResponseData {
   items: string[];
 }
 
-export interface AutoSuggestForm {
+export interface AutoSuggestItem {
   id: number;
   name: string;
 }

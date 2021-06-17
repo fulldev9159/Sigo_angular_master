@@ -4,73 +4,83 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Observable, of, Subject } from 'rxjs';
+import { map, filter, takeUntil } from 'rxjs/operators';
+
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { Login } from '@storeOT/features/auth/auth.model';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
+
+import { FormCubConfig } from './form-cub-config.service';
+// import { TableComponetType } from '@storeOT/model';
+import { FormGroup } from '@angular/forms';
+
 import { MessageService } from 'primeng/api';
-import { Observable, of, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { Login } from '@storeOT/features/auth/auth.model';
+
 @Component({
   selector: 'app-form-cub-container',
   templateUrl: './form-cub-container.component.html',
   styleUrls: ['./form-cub-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [FormCubConfig],
 })
 export class FormCubContainerComponent implements OnInit, OnDestroy {
-  public lpus: CubModel.SubContractedServices[] = [];
-  public authLogin: Login = null;
-  public providers = null;
-  public formCubicacion: FormGroup;
-  public constractMarco$: Observable<CubModel.ContractMarco[]>;
-  public subContractedProviders$: Observable<
-    CubModel.SubContractedProviders[]
-  > = of([]);
-  public subContractedRegions$: Observable<CubModel.SubContractedRegions[]> =
-    of([]);
-  public subContractedTypeServices$: Observable<
-    CubModel.SubContractedTypeServices[]
-  > = of([]);
-  public subContractedServices$: Observable<CubModel.SubContractedServices[]> =
-    of();
-  public autoSuggest$: Observable<CubModel.AutoSuggestForm[]> = of();
   private destroyInstance$: Subject<boolean> = new Subject();
+  public authLogin: Login = null;
+  public formCubicacion: FormGroup;
+  public autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of();
+  public contratosMarcos$: Observable<CubModel.ContractMarco[]>;
+  public Providers$: Observable<CubModel.Provider[]> = of([]);
+  public Regions$: Observable<CubModel.Region[]> = of([]);
+  public Regiones: CubModel.Region[];
+  public TypeServices$: Observable<CubModel.TypeService[]> = of([]);
+  public TipoServicios: CubModel.TypeService[];
+  public Services$: Observable<CubModel.Service[]> = of();
+  // public ConfigTableResumen: TableComponetType;
+  public lpusCarrito: CubModel.Service[] = [];
+  public total = 0;
 
   constructor(
-    private fb: FormBuilder,
-    private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
-    private messageService: MessageService,
-    private router: Router
+    private authFacade: AuthFacade,
+    private formConfig: FormCubConfig,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    // traemos contratos des api mediante efectos
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance$))
       .subscribe((authLogin) => {
         if (authLogin) {
-          // asignamos datos de usuario autenticado a variable local
           this.authLogin = authLogin;
         }
       });
 
-    this.initForm();
-    this.constractMarco$ = this.cubageFacade.getContractMarcoSelector$();
-    this.subContractedProviders$ =
-      this.cubageFacade.getSubContractedProvidersSelector$();
-    this.subContractedRegions$ =
-      this.cubageFacade.getSubContractedRegionsSelector$();
-    this.subContractedTypeServices$ =
-      this.cubageFacade.getSubContractedTypeServicesSelector$();
-    this.subContractedServices$ =
-      this.cubageFacade.getSubContractedServicesSelector$();
-    this.autoSuggest$ = this.cubageFacade.getAutoSuggestSelector$();
-    this.cubageFacade.getContractMarcoAction();
+    // Inicialización de formularios y detectores de cambios
+    this.formCubicacion = this.formConfig.initForm();
+    this.formConfig.detectChangesForm(
+      this.formCubicacion,
+      this.destroyInstance$
+    );
+    // this.ConfigTableResumen = this.formConfig.configTableResumen();
+
+    // Obtener datos iniciales
     this.cubageFacade.getAutoSuggestAction('', 5);
+    this.cubageFacade.getContractMarcoAction();
+
+    // Observar datos del store y almacenar en variables locales
+    this.autoSuggestItems$ = this.cubageFacade.getAutoSuggestSelector$();
+    this.contratosMarcos$ = this.cubageFacade.getContractMarcoSelector$();
+    this.Providers$ = this.cubageFacade.getProvidersSelector$();
+    this.Regions$ = this.cubageFacade
+      .getRegionsSelector$()
+      .pipe(map((regiones) => (this.Regiones = regiones)));
+    this.TypeServices$ = this.cubageFacade
+      .getTypeServicesSelector$()
+      .pipe(map((tiposervicios) => (this.TipoServicios = tiposervicios)));
+    this.Services$ = this.cubageFacade.getServicesSelector$();
   }
 
   ngOnDestroy(): void {
@@ -78,199 +88,121 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
-  initForm(): void {
-    this.formCubicacion = this.fb.group({
-      cubicacion_id: null,
-      cubicacion_nombre: null,
-      total: 0,
-      nombre: [null, Validators.required],
-      fecha_creacion: null,
-      usuario_id: null,
-      usuario_nombre: null,
-      region_id: [null, Validators.required],
-      region_nombre: null,
-      contrato_marco_id: [null, Validators.required],
-      contrato_marco_nombre: null,
-      proveedor_id: [null, Validators.required],
-      proveedor_nombre: null,
-      subcontrato_id: null,
-      asignado: null,
-      adm_contrato_nombre: null,
-      lpus: [],
-      tipo_servicio_id: null,
-      // tickets:new FormArray([])
+  resetDataPage(): void {
+    this.cubageFacade.resetData();
+  }
+
+  ChangeSearchSuggest(filterName: string): void {
+    const idNombreControls = 'nombre';
+    this.formCubicacion.controls[idNombreControls].setValue(filterName);
+    this.cubageFacade.getAutoSuggestAction(filterName, 5);
+  }
+
+  NameSelected(cubName: string): void {
+    const idNombreControls = 'nombre';
+    this.formCubicacion.controls[idNombreControls].setValue(cubName);
+  }
+
+  lpusSelected(event: any): void {
+    const regionControls = 'region_id';
+    const regionID = this.formCubicacion.controls[regionControls].value;
+    const tipoServicioControls = 'tipo_servicio_id';
+    const tipoServicioID =
+      this.formCubicacion.controls[tipoServicioControls].value;
+    const regionName = this.Regiones.filter((x) => x.id === +regionID)[0]
+      .codigo;
+    const tipoServicioName = this.TipoServicios.filter(
+      (x) => x.id === +tipoServicioID
+    )[0].nombre;
+
+    this.lpusCarrito = event.value.map((x) => {
+      let cantidad = 1;
+      let lpu_subtotal = x.lpu_precio;
+      if (this.lpusCarrito.length > 0) {
+        const lpuExistente = this.lpusCarrito.filter(
+          (y) => +y.lpu_id === +x.lpu_id
+        );
+        if (lpuExistente.length > 0) {
+          cantidad = lpuExistente[0].cantidad;
+          lpu_subtotal = +(+x.lpu_precio * +cantidad);
+        }
+      }
+      return {
+        ...x,
+        region: regionName,
+        tipo_servicio: tipoServicioName,
+        cantidad,
+        lpu_subtotal,
+      };
     });
-    this.detectChangesForm();
+    this.total = this.lpusCarrito.reduce((total, currentValue) => {
+      return total + currentValue.lpu_subtotal;
+    }, 0);
   }
 
-  detectChangesForm(): void {
-    this.formCubicacion
-      .get('contrato_marco_id')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((contrato_marco_id) => {
-        if (contrato_marco_id) {
-          this.cubageFacade.getSubContractedProvidersAction({
-            contrato_marco_id: +contrato_marco_id,
-          });
-
-          // refrescamos parte de
-          //  formulario al cambiar ConstractMarco
-          // this.resetForm('CONSTRACTMARCO');
-        }
-      });
-
-    this.formCubicacion
-      .get('subcontrato_id')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((subcontratoId) => {
-        if (subcontratoId) {
-          console.log(subcontratoId);
-          const [subcontratos, proveedor] = subcontratoId.split('-');
-          const idProve = 'proveedor_id';
-          const idsubCon = 'subcontrato_id';
-          this.formCubicacion.controls[idProve].setValue(+proveedor);
-          // this.formCubicacion.controls[idsubCon].setValue(subcontratos)
-          this.cubageFacade.getSubContractedRegionsAction({
-            subcontrato_id: subcontratos.split(',').map((x) => +x),
-          });
-
-          // refrescamos parte de
-          //  formulario al cambiar SubContractedProviders
-          // this.resetForm('SUBCONTRACTEDPROVIDERS');
-        }
-      });
-
-    this.formCubicacion
-      .get('region_id')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((region_id) => {
-        if (region_id) {
-          // actualizamos store
-          // const provider = this.providers.find(p => +p.id === +this.formCubicacion.value.proveedor_id);
-          const [subcontratos, proveedor] =
-            this.formCubicacion.value.subcontrato_id.split('-');
-          this.cubageFacade.getSubContractedTypeServicesAction({
-            subcontrato_id: subcontratos.split(',').map((x) => +x),
-            region_id: +region_id,
-          });
-
-          // refrescamos parte de
-          //  formulario al cambiar SubContractedProviders
-          // this.resetForm('SUBCONTRACTEDTYPESERVICES');
-        }
-      });
-
-    this.formCubicacion
-      .get('tipo_servicio_id')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((tipo_servicio_id) => {
-        if (tipo_servicio_id) {
-          // actualizamos store
-          const [subcontratos, proveedor] =
-            this.formCubicacion.value.subcontrato_id.split('-');
-          this.cubageFacade.getSubContractedServicesAction({
-            subcontrato_id: subcontratos.split(',').map((x) => +x),
-            region_id: +this.formCubicacion.value.region_id,
-            tipo_servicio_id: +tipo_servicio_id,
-          });
-
-          // refrescamos parte de
-          // this.resetForm('SUBCONTRACTEDSERVICES');
-        }
-      });
+  CantidadSelected(event: any): void {
+    this.lpusCarrito = this.lpusCarrito.map((x) => {
+      if (x.lpu_id === event.item.lpu_id) {
+        return {
+          ...x,
+          cantidad: +(event.event.target as HTMLInputElement).value,
+          lpu_subtotal: +(
+            +x.lpu_precio * +(event.event.target as HTMLInputElement).value
+          ),
+        };
+      }
+      return x;
+    });
+    this.total = this.lpusCarrito.reduce((total, currentValue) => {
+      return total + currentValue.lpu_subtotal;
+    }, 0);
   }
 
-  resetForm(part: string): void {
-    switch (true) {
-      case part === 'CONSTRACTMARCO':
-        // actualizar formulario
-        this.formCubicacion.get('proveedor_id').reset();
-        this.formCubicacion.get('region_id').reset();
-        break;
-      case part === 'SUBCONTRACTEDPROVIDERS':
-        // actualizar formulario
-        this.formCubicacion.get('region_id').reset();
-        break;
-      case part === 'SUBCONTRACTEDPROVIDERS':
-        // actualizar formulario
-        this.formCubicacion.get('region_id').reset();
-        break;
-    }
-  }
-
-  selected(items: CubModel.SubContractedServices[]): void {
-    this.lpus = items;
+  BorrarLPUCarrito(event: any): void {
+    this.lpusCarrito = this.lpusCarrito.filter(
+      (lpu) => lpu.lpu_id !== event.item.lpu_id
+    );
+    const lpuIDControls = 'lpus';
+    this.formCubicacion.controls[lpuIDControls].setValue(
+      this.formCubicacion.controls[lpuIDControls].value.filter(
+        (lpu) => lpu.lpu_id !== event.item.lpu_id
+      )
+    );
+    console.log(this.formCubicacion.controls[lpuIDControls].value);
+    this.total = this.lpusCarrito.reduce((total, currentValue) => {
+      return total + currentValue.lpu_subtotal;
+    }, 0);
   }
 
   cancel(data: any): void {
-    this.initForm();
+    this.formConfig.initForm();
   }
 
   save(data: any): void {
     const form = this.formCubicacion.value;
-    form.id = (+new Date()).toString();
-    form.lpus = this.lpus;
-    const cubitation = {
-      id: form.id,
-      nombre: form.nombre,
-      total: form.total,
-      fecha_creacion: new Date().toString(),
-      usuario_id: this.authLogin.usuario_id,
-      usuario_nombre: this.authLogin.usuario_nombre,
-      region_id: form.region_id,
-      region_nombre: null,
-      contrato_marco_nombre: null,
-      proveedor_id: form.proveedor_id,
-      proveedor_nombre: null,
-      subcontrato_id: form.subcontrato_id,
-    };
-
-    // const subcontrato = this.providers.find(
-    //   (c) => +c.id === +form.proveedor_id
-    // );
-    const [subcontratos, proveedor] = form.subcontrato_id.split('-');
-    console.log(this.lpus);
-    const cubage = {
+    const nuevaCubicacion = {
       // cubicacion_id: +form.cubicacion_id,
       cubicacion_nombre: form.nombre,
-      total: this.lpus.reduce(
-        (acc, value) => +acc + +value.lpu_precio * +value.cantidad,
-        0
-      ),
+      total: this.total,
       region_id: +form.region_id,
       usuario_id: +this.authLogin.usuario_id,
       contrato_marco_id: +form.contrato_marco_id,
       proveedor_id: +form.proveedor_id,
       subcontrato_id: 1,
-      lpus: this.lpus.map((x) => ({
+      lpus: this.lpusCarrito.map((x) => ({
         lpu_id: x.lpu_id,
         cantidad: x.cantidad,
       })),
     };
-    // this.cubageFacade.replyCubicacion(cubitation);
-    this.cubageFacade.postCubicacion(cubage);
+    console.log(nuevaCubicacion);
+    this.cubageFacade.postCubicacion(nuevaCubicacion);
     this.formCubicacion.reset();
     this.cubageFacade.resetData();
-    this.router.navigate(['app/cubicacion/list-cub']);
+    // this.router.navigate(['app/cubicacion/list-cub']);
     this.messageService.add({
       severity: 'success',
       summary: 'Registro guardado',
       detail: 'Registro se ha generado con Éxito!',
     });
-  }
-
-  reset(): void {
-    this.cubageFacade.resetData();
-  }
-
-  ChangeSearch(filter: string): void {
-    const idNombre = 'nombre';
-    this.formCubicacion.controls[idNombre].setValue(filter);
-    this.cubageFacade.getAutoSuggestAction(filter, 5);
-  }
-
-  selectSearch(filter: string): void {
-    const idNombre = 'nombre';
-    this.formCubicacion.controls[idNombre].setValue(filter);
   }
 }

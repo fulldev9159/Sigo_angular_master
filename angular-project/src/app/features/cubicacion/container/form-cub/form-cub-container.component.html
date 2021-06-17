@@ -1,34 +1,47 @@
 <div class="container-fluid" style="background: #f0f8fb">
+  {{ formCubicacion.value | json }}
   <div class="row">
     <div class="col">
-      <h1 class="mt-4">Ingreso de Cubicación </h1>
+      <h1 class="mt-4">Ingreso de Cubicación</h1>
       <span>formulario para crear una cubicación</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/app/cubicacion/list-cub']" pButton type="button" label="volver" icon="pi pi-arrow-left"
-        class="p-button-sm mt-5 float-right p-button-outlined " (click)="reset()"></button>
+      <button
+        [routerLink]="['/app/cubicacion/list-cub']"
+        pButton
+        type="button"
+        label="volver"
+        icon="pi pi-arrow-left"
+        class="p-button-sm mt-5 float-right p-button-outlined"
+        (click)="resetDataPage()"
+      ></button>
     </div>
     <div class="col-12">
-      <hr>
+      <hr />
     </div>
+
+    <app-card [classCardHeader]="'bg-secondary text-white'">
+      <ng-container card-header-title> </ng-container>
+      <ng-container card-body>
+        <app-form
+          [formCubicacion]="formCubicacion"
+          [autoSuggestData]="autoSuggestItems$ | async"
+          (ChangeSearchSuggest)="ChangeSearchSuggest($event)"
+          (NameSelected)="NameSelected($event)"
+          [contratosMarcos]="contratosMarcos$ | async"
+          [Providers]="Providers$ | async"
+          [Regions]="Regions$ | async"
+          [TypeServices]="TypeServices$ | async"
+          [Services]="Services$ | async"
+          (lpusSelected)="lpusSelected($event)"
+          [lpusCarrito]="lpusCarrito"
+          (CantidadSelected) ="CantidadSelected($event)"
+          (BorrarLPUCarrito) = "BorrarLPUCarrito($event)"
+          [total]="total"
+          (cancel)="cancel($event)"
+          (save)="save($event)"
+        ></app-form>
+      </ng-container>
+    </app-card>
   </div>
-
-  <app-card [classCardHeader]="'bg-secondary text-white'">
-    <ng-container card-header-title>
-
-    </ng-container>
-    <ng-container card-body>
-      <app-form [formCubicacion]="formCubicacion" [constractMarco]="(constractMarco$ | async)"
-        [subContractedProviders]="(subContractedProviders$ | async)"
-        [subContractedRegions]="(subContractedRegions$ | async)"
-        [subContractedTypeServices]="(subContractedTypeServices$ | async)"
-        [subContractedServices]="(subContractedServices$ | async)"
-        [autoSuggestData]="(autoSuggest$|async)"
-        (selected)="selected($event);"
-        (cancel)="cancel($event);" (save)="save($event);"
-        (ChangeSearchContainer)="ChangeSearch($event)" (selectSearch)="selectSearch($event)"></app-form>
-    </ng-container>
-  </app-card>
-
-  {{formCubicacion.value|json}}
 </div>

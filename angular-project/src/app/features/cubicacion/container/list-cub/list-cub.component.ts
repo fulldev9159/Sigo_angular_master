@@ -20,6 +20,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ListCubComponent implements OnInit, OnDestroy {
   // declarations
   public items$: Observable<Cubicacion[]>;
+  public DisplayModal = false;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
     header: true,
@@ -57,6 +58,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'contrato_marco_nombre',
           header: 'contrato_marco_nombre',
+          editable: false,
+        },
+        {
+          field: 'Proveedor',
+          type: 'TEXT',
+          sort: 'proveedor_nombre',
+          header: 'proveedor_nombre',
           editable: false,
         },
         {
@@ -101,6 +109,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
                 this.cubageFacade.replyCubicacion(cubicacion);
               },
             });
+          },
+        },
+        {
+          icon: 'p-button-icon pi pi-eye',
+          class: 'p-button-rounded p-button-info p-mr-2',
+          onClick: (event: Event, item) => {
+            this.DisplayModal = true;
           },
         },
         {
