@@ -9,6 +9,7 @@ import {
   Pep2,
   Plan,
   PMO,
+  Proyecto,
   Site,
 } from './ot.model';
 
@@ -24,6 +25,7 @@ export interface StateOt {
   ids_opex: IDOpex[];
   cuentas_sap: CuentaSap[];
   cecos: CECO[];
+  proyectos: Proyecto[];
 }
 
 export const initialStateOt: StateOt = {
@@ -49,6 +51,7 @@ export const initialStateOt: StateOt = {
   ids_opex: [],
   cuentas_sap: [],
   cecos: [],
+  proyectos: [],
 };
 
 export const reducerOt = createReducer(
@@ -66,10 +69,10 @@ export const reducerOt = createReducer(
       ...state.items.slice(payload.otPosition + 1),
     ],
   })),
-  on(OtActions.replyOt, (state, payload) => ({
-    ...state,
-    items: [...state.items, payload.ot],
-  })),
+  // on(OtActions.replyOt, (state, payload) => ({
+  //   ...state,
+  //   items: [...state.items, payload.ot],
+  // })),
 
   on(OtActions.getPlans, (state) => state),
   on(OtActions.getPlansSuccess, (state, payload) => ({
@@ -117,5 +120,11 @@ export const reducerOt = createReducer(
   on(OtActions.getPep2Success, (state, payload) => ({
     ...state,
     pep2s: payload.pep2,
+  })),
+
+  on(OtActions.getProyecto, (state) => state),
+  on(OtActions.getProyectoSuccess, (state, payload) => ({
+    ...state,
+    proyectos: payload.proyectos,
   }))
 );

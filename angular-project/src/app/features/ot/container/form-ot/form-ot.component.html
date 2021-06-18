@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  {{formOt.value|json}}
   <div class="row">
     <div class="col">
       <h1 class="mt-4">Orden de trabajo </h1>
@@ -21,12 +22,12 @@
       <div class="row">
         <div class="col-xs-12 col-md-8">
           <app-form [formOt]="formOt" [cubicaciones]="(cubicaciones$ | async)" [planes]="(planes$ | async)"
-            [sitios]="(sitios$ | async)" [pmos]="(pmos$ | async)" [lps]="(lps$ | async)" [pep2s]="(pep2s$ | async)" [ids_opex]="(ids_opex$ | async)" [cuentas_sap]="(cuentas_sap$ | async)" [cecos]="(cecos$ | async)"
+            [sitios]="(sitios$ | async)" [pmos]="(pmos$ | async)" [lps]="(lps$ | async)" [pep2s]="(pep2s$ | async)" [ids_opex]="(ids_opex$ | async)" [cuentas_sap]="(cuentas_sap$ | async)" [cecos]="(cecos$ | async)" [proyectos]="(proyectos$ | async)"
             (cancel)="cancel($event);" (save)="save($event);">
           </app-form>
         </div>
         <div class="col-xs-12 col-md-4">
-          <app-detail [cubage]="cubage" [formOt]="formOt.value"></app-detail>
+          <app-detail [cubicacionSeleccionada]="cubicacionSeleccionada" [formOt]="formOt.value"></app-detail>
         </div>
       </div>
     </ng-container>

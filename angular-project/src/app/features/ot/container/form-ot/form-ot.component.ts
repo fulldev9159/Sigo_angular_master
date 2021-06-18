@@ -9,20 +9,12 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import {
-  Lp,
-  Pep2,
-  Plan,
-  PMO,
-  Site,
-  CECO,
-  CuentaSap,
-  IDOpex,
-} from '@storeOT/features/ot/ot.model';
+import * as OTmodel from '@storeOT/features/ot/ot.model';
 import { MessageService } from 'primeng/api';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Login } from '@storeOT/features/auth/auth.model';
 
 @Component({
   selector: 'app-form-ot',
@@ -33,26 +25,28 @@ import { Router } from '@angular/router';
 export class FormOtComponent implements OnInit, OnDestroy {
   // declarations
   public formOt: FormGroup;
-  public cubage = null;
-  public authLogin = null;
-  public cubicaciones = null;
+  public cubicacionSeleccionada: Cubicacion = null;
+  public authLogin: Login = null;
+  public cubicaciones: Cubicacion[] = [];
   public cubicaciones$: Observable<Cubicacion[]>;
-  public plans: Plan[];
-  public planes$: Observable<Plan[]> = of([]);
-  public sitios = null;
-  public sitios$: Observable<Site[]> = of([]);
-  public pmos = null;
-  public pmos$: Observable<PMO[]> = of([]);
-  public lps: Lp[];
-  public lps$: Observable<any> = of();
-  public pep2s: Pep2[];
-  public pep2s$: Observable<Pep2[]> = of([]);
-  public ids_opex = null;
-  public ids_opex$: Observable<IDOpex[]> = of([]);
-  public cuentas_sap: CuentaSap[];
-  public cuentas_sap$: Observable<CuentaSap[]> = of([]);
-  public cecos: CECO[];
-  public cecos$: Observable<CECO[]> = of([]);
+  public plans: OTmodel.Plan[];
+  public planes$: Observable<OTmodel.Plan[]> = of([]);
+  public sitios: OTmodel.Site[] = [];
+  public sitios$: Observable<OTmodel.Site[]> = of([]);
+  public pmos: OTmodel.PMO[] = [];
+  public pmos$: Observable<OTmodel.PMO[]> = of([]);
+  public lps: OTmodel.Lp[];
+  public lps$: Observable<OTmodel.Lp[]> = of([]);
+  public pep2s: OTmodel.Pep2[];
+  public pep2s$: Observable<OTmodel.Pep2[]> = of([]);
+  public ids_opex: OTmodel.IDOpex[] = [];
+  public ids_opex$: Observable<OTmodel.IDOpex[]> = of([]);
+  public cuentas_sap: OTmodel.CuentaSap[];
+  public cuentas_sap$: Observable<OTmodel.CuentaSap[]> = of([]);
+  public cecos: OTmodel.CECO[];
+  public cecos$: Observable<OTmodel.CECO[]> = of([]);
+  public proyectos: OTmodel.Proyecto[];
+  public proyectos$: Observable<OTmodel.Proyecto[]> = of([]);
   private destroyInstance$: Subject<boolean> = new Subject();
 
   constructor(
@@ -65,33 +59,25 @@ export class FormOtComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // inicializamos formulario reactivo
     this.initForm();
-
-    // rescatamos data inicial
-
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance$))
       .subscribe((authLogin) => {
         if (authLogin) {
           this.authLogin = authLogin;
-          this.formOt.get('token').setValue(this.authLogin.token);
           this.formOt.get('gestor_id').setValue(this.authLogin.usuario_id);
-          this.cubageFacade.getCubicacion(+authLogin.perfiles[0].id);
+          this.cubageFacade.getCubicacionAction(+authLogin.perfiles[0].id);
         }
       });
 
     this.cubicaciones$ = this.cubageFacade
-      .getCubicacion$()
+      .getCubicacionSelector$()
       .pipe(map((cubicaciones) => (this.cubicaciones = cubicaciones)));
-    this.planes$ = this.otFacade.getPlans$().pipe(
-      map((plans) => {
-        this.plans = plans;
-        return plans;
-      })
-    );
-    this.sitios$ = this.otFacade.getSites$().pipe(
+    this.planes$ = this.otFacade
+      .getPlansSelector$()
+      .pipe(map((plans) => (this.plans = plans)));
+    this.sitios$ = this.otFacade.getSitesSelector$().pipe(
       map(
         (sitios) =>
           (this.sitios = sitios.map((x) => ({
@@ -101,35 +87,27 @@ export class FormOtComponent implements OnInit, OnDestroy {
       )
     );
     this.pmos$ = this.otFacade
-      .getPmos$()
+      .getPmosSelector$()
       .pipe(map((pmos) => (this.pmos = pmos)));
-    this.lps$ = this.otFacade.getLps$().pipe(
-      map((lps) => {
-        this.lps = lps;
-        return lps;
-      })
-    );
-    this.pep2s$ = this.otFacade.getPep2s$().pipe(
-      map((pep2s) => {
-        this.pep2s = pep2s;
-        return pep2s;
-      })
-    );
+    this.lps$ = this.otFacade
+      .getLpsSelector$()
+      .pipe(map((lps) => (this.lps = lps)));
+    this.pep2s$ = this.otFacade
+      .getPep2sSelector$()
+      .pipe(map((pep2s) => (this.pep2s = pep2s)));
     this.ids_opex$ = this.otFacade
-      .getIDsOpex$()
+      .getIDsOpexSelector$()
       .pipe(map((ids_opex) => (this.ids_opex = ids_opex)));
-    this.cuentas_sap$ = this.otFacade.getCuentaSAP$().pipe(
-      map((cuentas_sap) => {
-        this.cuentas_sap = cuentas_sap;
-        return cuentas_sap;
-      })
-    );
-    this.cecos$ = this.otFacade.getCECO$().pipe(
-      map((cecos) => {
-        this.cecos = cecos;
-        return cecos;
-      })
-    );
+    this.cuentas_sap$ = this.otFacade
+      .getCuentaSAPSelector$()
+      .pipe(map((cuentas_sap) => (this.cuentas_sap = cuentas_sap)));
+    this.cecos$ = this.otFacade
+      .getCECOSelector$()
+      .pipe(map((cecos) => (this.cecos = cecos)));
+    this.otFacade.getProyectoAction();
+    this.proyectos$ = this.otFacade
+      .getProyectoSelector$()
+      .pipe(map((proyectos) => (this.proyectos = proyectos)));
   }
 
   ngOnDestroy(): void {
@@ -137,7 +115,6 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
-  // DUDA: por qué el pep2 parte con ese código?
   initForm(): void {
     this.formOt = this.fb.group({
       id: null,
@@ -148,38 +125,42 @@ export class FormOtComponent implements OnInit, OnDestroy {
       fecha_fin: [null, Validators.required],
       cubicacion_id: [null, Validators.required],
       plan_proyecto_id: [null, Validators.required],
-      plan_nombre: null,
+      plan_nombre: [null, Validators.required],
       costos: 'capex',
       sitio_id: [null, Validators.required],
       pmo_codigo: [null, Validators.required],
       id_opex_codigo: [null, Validators.required],
-      lp_codigo: [null, Validators.required],
+      lp_codigo: null,
       cuenta_sap_codigo: [null, Validators.required],
       ceco_codigo: [null, Validators.required],
-      pep2_codigo: 'P-0404-20-1318-40005-807',
+      pep2_codigo: [null, Validators.required],
       observaciones: null,
-      pep2_provisorio: false,
+      pep2_provisorio: null,
+      ceco_provisorio: null,
+      capex_id: null,
       gestor_id: null,
+      sitio_nombre: [null, Validators.required],
+      codigo: [null, Validators.required],
+      direccion: [null, Validators.required],
+      latitud: [null, Validators.required],
+      longitud: [null, Validators.required],
+      proyecto_id: [null, Validators.required],
     });
-
-    // detectamos cambios en formulario
     this.detectChangesForm();
   }
 
-  // DUDA: por qué está comentadp el reset ?
   detectChangesForm(): void {
     this.formOt
       .get('cubicacion_id')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((cubicacionId) => {
         if (cubicacionId) {
-          // actualizamos store para
-          // Planes según cubicación
-          this.cubage = this.cubicaciones.find((c) => +c.id === +cubicacionId);
-          if (this.cubage) {
-            this.otFacade.getPlans({
-              token: this.authLogin.token,
-              region_id: this.cubage.region_id,
+          this.cubicacionSeleccionada = this.cubicaciones.find(
+            (c) => +c.id === +cubicacionId
+          );
+          if (this.cubicacionSeleccionada) {
+            this.otFacade.getPlansAction({
+              region_id: this.cubicacionSeleccionada.region_id,
             });
           }
 
@@ -194,28 +175,18 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((plan_proyecto_id) => {
         if (plan_proyecto_id) {
-          // actualizamos nombre plan seleccionado
-          const plan = this.plans.find((p) => p.id === plan_proyecto_id);
+          const plan = this.plans.find((p) => +p.id === +plan_proyecto_id);
           if (plan) {
             this.formOt.get('plan_nombre').setValue(plan.nombre);
           }
-
-          // Obtenemos el id de la cubicacion obtenida
-          // const id_cubicacion_control = 'cubicacion_id'
-          // const id_cubicacion = this.formOt.controls[id_cubicacion_control].value
-
-          // this.cubage = this.cubicaciones.find((c) => +c.id === +id_cubicacion);
-
-          // actualizamos store para
-          // Sitios según plan
-          this.otFacade.getSites({
+          this.otFacade.getSitesAction({
             plan_proyecto_id,
-            region_id: this.cubage.region_id,
+            region_id: this.cubicacionSeleccionada.region_id,
           });
 
           // refrescamos parte de
           //  formulario al cambiar plan
-          // this.resetForm('PLAN');
+          this.resetForm('PLAN');
         }
       });
 
@@ -224,23 +195,19 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((sitio_id) => {
         if (sitio_id) {
-          // actualizamos store para
-          // PMOS según site
           const site = this.sitios.find((s) => +s.id === +sitio_id);
-          const id_sustento_controls = 'costos';
-          const rbutton = this.formOt.controls[id_sustento_controls].value;
+          // const id_sustento_controls = 'costos';
+          // const rbutton = this.formOt.controls[id_sustento_controls].value;
           if (site) {
-            this.otFacade.getPmos({
+            this.otFacade.getPmosAction({
               sitio_codigo: site.codigo,
             });
-            // if (rbutton === 'capex') {
-            //   this.otFacade.getPmos({
-            //     sitio_codigo: site.codigo,
-            //   });
-            // } else if (rbutton === 'opex') {
-            //   // NUNCA ENTRA ACA! -> SACAR
-            //   this.otFacade.getIDsOpex();
-            // }
+            this.otFacade.getIDsOpex();
+            this.formOt.get('sitio_nombre').setValue(site.nombre);
+            this.formOt.get('codigo').setValue(site.codigo);
+            this.formOt.get('direccion').setValue(site.direccion);
+            this.formOt.get('latitud').setValue(site.geo_lat);
+            this.formOt.get('longitud').setValue(site.geo_lon);
           }
           // refrescamos parte de
           //  formulario al cambiar site
@@ -253,13 +220,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((pmo_codigo) => {
         if (pmo_codigo) {
-          // actualizamos store para
-          // Lp según pmo
-          this.otFacade.getLps({ token: this.authLogin.token, pmo_codigo });
+          this.otFacade.getLpsAction({ pmo_codigo });
 
           // refrescamos parte de
           //  formulario al cambiar pmo
-          this.resetForm('PMO');
+          // this.resetForm('PMO');
         }
       });
 
@@ -268,9 +233,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((id_opex_codigo) => {
         if (id_opex_codigo) {
-          // actualizamos store para
-          // cuenta SAP según id_opex_codigo
-          this.otFacade.getCuentaSAP({
+          this.otFacade.getCuentaSAPAction({
             id_opex_codigo,
           });
           // refrescamos parte de
@@ -284,12 +247,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((cuenta_sap_codigo) => {
         if (cuenta_sap_codigo) {
-          // actualizamos store para
-          // ceco según cuenta_sap_codigo
-          const id_opex_controls = 'id_opex_codigo';
-          const id_opex = this.formOt.controls[id_opex_controls].value;
-          this.otFacade.getCECO({
-            id_opex_codigo: id_opex,
+          this.otFacade.getCECOAction({
+            id_opex_codigo: this.formOt.value.id_opex_codigo,
             cuenta_sap_codigo,
           });
           // refrescamos parte de
@@ -303,10 +262,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((lp_codigo) => {
         if (lp_codigo) {
-          // actualizamos store para
-          // Pep2 según lp
-          this.otFacade.getPep2s({
-            token: this.authLogin.token,
+          this.otFacade.getPep2sAction({
             pmo_codigo: this.formOt.value.pmo_codigo,
             lp_codigo,
           });
@@ -321,13 +277,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe((costos) => {
         if (costos) {
-          const id_sitio_controls = 'sitio_id';
-          const sitio_id = this.formOt.controls[id_sitio_controls].value;
-          const site = this.sitios.find((s) => +s.id === +sitio_id);
-          // const id_sustento_controls = 'costos'
-          // const rbutton = this.formOt.controls[id_sustento_controls].value
+          const site = this.sitios.find(
+            (s) => +s.id === +this.formOt.value.sitio_id
+          );
           if (costos === 'capex') {
-            this.otFacade.getPmos({
+            this.otFacade.getPmosAction({
               sitio_codigo: site.codigo,
             });
           } else if (costos === 'opex') {
@@ -377,18 +331,58 @@ export class FormOtComponent implements OnInit, OnDestroy {
   }
 
   save(data: any): void {
-    const form = { ...this.formOt.value, token: this.authLogin.token };
-    form.id = (+new Date()).toString();
-    form.pep2_codigo = 'P-0404-20-1318-40005-807';
-    // this.otFacade.replyOt(form);
-    delete form.id;
-    this.otFacade.postOt(form);
-    this.formOt.reset();
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Registro guardado',
-      detail: 'Registro se ha generado con Éxito!',
-    });
-    this.router.navigate(['app/ot/list-ot']);
+    const form = this.formOt.value;
+
+    const request: OTmodel.RequestCreateOT = {
+      nombre: form.nombre,
+      tipo: form.tipo,
+      proyecto_id: +form.plan_proyecto_id,
+      cubicacion_id: +form.cubicacion_id,
+      sitio_id: +form.sitio_id,
+      propietario_id: +form.gestor_id,
+      fecha_inicio: form.fecha_inicio,
+      fecha_fin: form.fecha_fin,
+      observaciones: form.observaciones,
+      sustento_financiero: {
+        tipo_sustento: form.costos.toUpperCase(),
+        capex_id: null,
+        opex_id: null,
+        capex_provisorio: null,
+        opex_provisorio: null,
+      },
+    };
+
+    if (form.costos.toUpperCase() === 'CAPEX') {
+      if (form.capex_id === 'capex_provisorio') {
+        request.sustento_financiero.capex_provisorio = {
+          pmo_codigo: +form.pmo_codigo,
+          lp_codigo: form.lp_codigo,
+          pep2_codigo: form.pep2_provisorio,
+        };
+      } else {
+        request.sustento_financiero.capex_id = +form.capex_id;
+      }
+    } else if (form.costos.toUpperCase() === 'OPEX') {
+      if (form.ceco_codigo === 'ceco_provisorio') {
+        request.sustento_financiero.opex_provisorio = {
+          id_opex: form.id_opex_codigo,
+          cuenta_sap: form.cuenta_sap_codigo,
+          ceco_codigo: form.ceco_provisorio,
+        };
+      } else {
+        request.sustento_financiero.opex_id = +form.ceco_codigo;
+      }
+    }
+
+    console.log(request);
+    // // this.otFacade.replyOt(form);
+    this.otFacade.postOt(request);
+    // this.formOt.reset();
+    // this.messageService.add({
+    //   severity: 'success',
+    //   summary: 'Registro guardado',
+    //   detail: 'Registro se ha generado con Éxito!',
+    // });
+    // this.router.navigate(['app/ot/list-ot']);
   }
 }

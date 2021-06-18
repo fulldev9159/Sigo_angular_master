@@ -8,9 +8,15 @@ import { of } from 'rxjs';
 import * as otActions from './ot.actions';
 import { environment } from '@environment';
 
+import { SnackBarService } from '@utilsSIGO/snack-bar';
+
 @Injectable()
 export class OtEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private snackService: SnackBarService
+  ) {}
 
   getOt$ = createEffect(() =>
     this.actions$.pipe(
@@ -178,31 +184,35 @@ export class OtEffects {
     )
   );
 
+  getProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getProyecto),
+      concatMap((data: any) =>
+        this.http.post(`${environment.api}/proyectos/get_all`, {}).pipe(
+          map((res: any) => {
+            let message = '';
+            if (+res.status.responseCode !== 0) {
+              if (res.status.description === 'Sin resultados') {
+                message = 'No existe ningún proyecto en el sistema';
+              }
+              this.snackService.showMessage(message, 'error');
+            }
+            return otActions.getProyectoSuccess({ proyectos: res.data.items });
+          }),
+          catchError((err) => of(otActions.getProyectoError({ error: err })))
+        )
+      )
+    )
+  );
+
   postOt$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.postOt),
       concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/ot/save`, {
-            gestor_id: +data.ot.gestor_id,
-            nombre: data.ot.nombre,
-            tipo: data.ot.tipo,
-            cubicacion_id: +data.ot.cubicacion_id,
-            plan_despliegue_id: +data.ot.plan_despliegue_id,
-            sitio_id: +data.ot.sitio_id,
-            fecha_inicio: data.ot.fecha_inicio,
-            fecha_fin: data.ot.fecha_fin,
-            observaciones: data.ot.observaciones,
-            pmo_codigo: +data.ot.pmo_codigo,
-            lp_codigo: data.ot.lp_codigo,
-            pep2_codigo: data.ot.pep2_codigo,
-            pep2_provisorio: data.ot.pep2_provisorio,
-            token: data.ot.token,
-          })
-          .pipe(
-            map((res: any) => otActions.postOtSuccess({ ot: res.data.items })),
-            catchError((err) => of(otActions.postOtError({ error: err })))
-          )
+        this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
+          map((res: any) => otActions.postOtSuccess({ ot: res.data.items })),
+          catchError((err) => of(otActions.postOtError({ error: err })))
+        )
       )
     )
   );
