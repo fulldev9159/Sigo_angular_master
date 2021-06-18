@@ -1,4 +1,4 @@
-<div [formGroup]="formOt" class="row">
+<div [formGroup]="formOt">
 
   <div class="row">
     <div class="col-xs-12 col-md-6">
@@ -23,6 +23,9 @@
       </select>
       <br>
     </div>
+  </div>
+  
+  <div class="row">
     <div class="col-xs-12 col-md-6">
       <label for="">Plan de proyecto</label>
       <select formControlName="plan_proyecto_id" [attr.disabled]="planes.length === 0 ? '' : null" class="form-control"
@@ -49,7 +52,6 @@
       <br>
     </div>
   </div>
-  
 
   <div class="col-xs-12 col-md-6">
     <label for="">Sustento Financiero</label>
@@ -92,10 +94,14 @@
     </div>
    <div class="col-7">
       <label for="">PEP2</label>
-      <select [attr.disabled]="pep2s.length === 0 ? '' : null" class="form-control" name="" id="">
+      <select formControlName="capex_id" [attr.disabled]="pep2s.length === 0 ? '' : null" class="form-control" name="" id="">
         <option value="null" selected disabled>Seleccione Pep2</option>
+        <option value="capex_provisorio" >PEP2 provisorio</option>
         <option *ngFor="let pep2 of pep2s" [value]="pep2.linea_presupuestaria_id">{{pep2.pep2_codigo}}</option>
       </select>
+      <br>
+      <label for="" *ngIf="formOt.value.capex_id==='capex_provisorio'">PEP2 provisorio</label>
+      <input *ngIf="formOt.value.capex_id==='capex_provisorio'" formControlName="pep2_provisorio" class="form-control" type="text">
       <br>
     </div> 
   </div>
@@ -123,13 +129,17 @@
       <label for="">CECO</label>
       <select formControlName="ceco_codigo" [attr.disabled]="cecos.length === 0 ? '' : null" class="form-control" name="" id="">
         <option value="null" selected disabled>Seleccione CECO</option>
-        <option *ngFor="let ceco of cecos" [value]="ceco.codigo">{{ceco.ceco}}</option>
+        <option value="ceco_provisorio" >CECO provisorio</option>
+        <option *ngFor="let ceco of cecos" [value]="ceco.id">{{ceco.ceco}}</option>
       </select>
+      <br>
+      <label for="" *ngIf="formOt.value.ceco_codigo==='ceco_provisorio'">CECO provisorio</label>
+      <input *ngIf="formOt.value.ceco_codigo==='ceco_provisorio'" formControlName="ceco_provisorio" class="form-control" type="text">
       <br>
     </div> 
   </div>
 
-
+  <div class="row">
     <div class="col-xs-12 col-md-6">
       <label class="mr-1" for="">Fecha inicio</label>
       <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block"
@@ -140,6 +150,15 @@
       <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block"
         formControlName="fecha_fin"></p-calendar>
     </div>
+    <div class="col-xs-12 col-md-6">
+      <br>
+      <label for="">Proyecto</label>
+      <select formControlName="proyecto_id" [attr.disabled]="proyectos.length === 0 ? '' : null" class="form-control" name="" id="">
+        <option value="null" selected disabled>Seleccione Proyecto</option>
+        <option *ngFor="let proyecto of proyectos" [value]="proyecto.id">{{proyecto.nombre}}</option>
+      </select>
+      <br>
+    </div> 
     <div class="col-12">
       <br>
       <label for="">Observaciones</label>
@@ -147,10 +166,11 @@
         id="observaciones" cols="30" rows="2"></textarea>
       <br>
     </div>
+  </div>
   
     <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
       <button (click)="cancelAction();" class="btn btn-light mr-2"><em class="pi pi-refresh mr-1"></em>Cancelar</button>
-      <button (click)="saveAction();" [disabled]="!formOt.valid" class="btn btn-primary"><em
+      <button (click)="saveAction();" class="btn btn-primary"><em
           class="pi pi-save mr-1"></em>Guardar</button>
     </div>
 

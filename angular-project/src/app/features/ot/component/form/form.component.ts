@@ -9,16 +9,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
-import {
-  CECO,
-  CuentaSap,
-  IDOpex,
-  Lp,
-  Pep2,
-  Plan,
-  PMO,
-  Site,
-} from '@storeOT/features/ot/ot.model';
+import * as OTmodel from '@storeOT/features/ot/ot.model';
 import { Observable, Subject } from 'rxjs';
 import { RadioButtonModule } from 'primeng/radiobutton';
 
@@ -32,21 +23,20 @@ export class FormComponent implements OnInit, OnDestroy {
   // declarations
   @Input() formOt: FormGroup;
   @Input() cubicaciones: Cubicacion[];
-  @Input() planes: Plan[];
-  @Input() sitios: Site[];
-  @Input() pmos: PMO[];
-  @Input() lps: Lp[];
-  @Input() pep2s: Pep2[];
-  @Input() ids_opex: IDOpex[];
-  @Input() cuentas_sap: CuentaSap[];
-  @Input() cecos: CECO[];
-  public capex = false;
-  public opex = false;
+  @Input() planes: OTmodel.Plan[];
+  @Input() sitios: OTmodel.Site[];
+  @Input() pmos: OTmodel.PMO[];
+  @Input() lps: OTmodel.Lp[];
+  @Input() pep2s: OTmodel.Pep2[];
+  @Input() ids_opex: OTmodel.IDOpex[];
+  @Input() cuentas_sap: OTmodel.CuentaSap[];
+  @Input() cecos: OTmodel.CECO[];
+  @Input() proyectos: OTmodel.Proyecto[];
+  // public capex = false;
+  // public opex = false;
   @Output() public cancel = new EventEmitter();
   @Output() public save = new EventEmitter();
   private destroyInstance$: Subject<boolean> = new Subject();
-  // selectedCategory: any = null;
-  // categories: any[] = [{name: 'Capex', key: 'C'}, {name: 'Opex', key: 'O'}];
 
   constructor() {}
 
@@ -55,7 +45,6 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyInstance$.next(true);
     this.destroyInstance$.complete();
-    // this.selectedCategory = this.categories[1];
   }
 
   cancelAction(): void {
@@ -67,7 +56,6 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   get sfinanciero(): string {
-    const idSf = 'costos';
-    return this.formOt.controls[idSf].value;
+    return this.formOt.value.costos;
   }
 }

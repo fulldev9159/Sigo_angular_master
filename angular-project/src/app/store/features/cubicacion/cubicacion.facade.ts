@@ -20,11 +20,11 @@ export class CubicacionFacade {
   constructor(private store: Store<Cubicacion>) {}
 
   // CUBICACION
-  public getCubicacion(perfilID: number): void {
-    this.store.dispatch(cubicacionActions.getCubicacion({perfilID}));
+  public getCubicacionAction(perfilID: number): void {
+    this.store.dispatch(cubicacionActions.getCubicacion({ perfilID }));
   }
 
-  public getCubicacion$(): Observable<Cubicacion[]> {
+  public getCubicacionSelector$(): Observable<Cubicacion[]> {
     return this.store.select(cubicacionSelectors.getCubicaciones);
   }
 
@@ -79,9 +79,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getProvidersSelector$(): Observable<
-    Provider[]
-  > {
+  public getProvidersSelector$(): Observable<Provider[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);
   }
   // SUBCONTRACTPROVIDERS
@@ -91,17 +89,13 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedRegions(data));
   }
 
-  public getSubContractedRegionsSuccess(
-    subContractedRegions: Region[]
-  ): void {
+  public getSubContractedRegionsSuccess(subContractedRegions: Region[]): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedRegionsSuccess({ subContractedRegions })
     );
   }
 
-  public getRegionsSelector$(): Observable<
-    Region[]
-  > {
+  public getRegionsSelector$(): Observable<Region[]> {
     return this.store.select(cubicacionSelectors.getSubContractedRegions);
   }
   // SUBCONTRACTREGIONS
@@ -121,9 +115,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getTypeServicesSelector$(): Observable<
-    TypeService[]
-  > {
+  public getTypeServicesSelector$(): Observable<TypeService[]> {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
   }
   // SUBCONTRACTTYPESERVICES
@@ -143,9 +135,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getServicesSelector$(): Observable<
-    Service[]
-  > {
+  public getServicesSelector$(): Observable<Service[]> {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
   }
 

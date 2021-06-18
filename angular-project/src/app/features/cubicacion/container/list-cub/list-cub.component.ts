@@ -160,11 +160,11 @@ export class ListCubComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyInstance))
       .subscribe((authLogin) => {
         if (authLogin) {
-          this.cubageFacade.getCubicacion(+authLogin.perfiles[0].id);
+          this.cubageFacade.getCubicacionAction(+authLogin.perfiles[0].id);
         }
       });
 
-    this.items$ = this.cubageFacade.getCubicacion$();
+    this.items$ = this.cubageFacade.getCubicacionSelector$();
   }
 
   ngOnDestroy(): void {

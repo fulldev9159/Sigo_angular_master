@@ -8,7 +8,9 @@ import {
   Pep2,
   Plan,
   PMO,
+  Proyecto,
   Site,
+  RequestCreateOT,
 } from './ot.model';
 
 // OT LIST
@@ -59,7 +61,7 @@ export const editOtError = createAction(
 
 export const replyOt = createAction(
   '[Ot Reply] POST Reply Ot',
-  props<{ ot: Ot }>()
+  props<{ ot: RequestCreateOT }>()
 );
 
 export const replyOtSuccess = createAction(
@@ -87,7 +89,10 @@ export const stateOtError = createAction(
   props<{ error: any }>()
 );
 
-export const postOt = createAction('[Ot Post] CREATE Ot', props<{ ot: Ot }>());
+export const postOt = createAction(
+  '[Ot Post] CREATE Ot',
+  props<{ ot: RequestCreateOT }>()
+);
 
 export const postOtSuccess = createAction(
   '[Ot Post] CREATE Ot Success',
@@ -217,4 +222,15 @@ export const getPep2Error = createAction(
   '[getPep2 Get By Id BudgetLine] GET By Id BudgetLine Error',
   props<{ error: any }>()
 );
-// OT FORM
+
+export const getProyecto = createAction('[Proyecto Get All] GET All');
+
+export const getProyectoSuccess = createAction(
+  '[Proyecto Get All] GET All Success',
+  props<{ proyectos: Proyecto[] }>()
+);
+
+export const getProyectoError = createAction(
+  '[Proyecto Get All] GET All Error',
+  props<{ error: any }>()
+);

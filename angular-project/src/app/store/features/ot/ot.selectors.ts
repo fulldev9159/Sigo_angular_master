@@ -49,3 +49,8 @@ export const getPeps2 = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.pep2s
 );
+
+export const getProyectos = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.proyectos
+);

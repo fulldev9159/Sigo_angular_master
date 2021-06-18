@@ -5,16 +5,20 @@
 
 - En get contratos ahora despliega los errores de tipo 'Sin registros'
 - Captua de errores en save Cubicación
-- Se recupera el save cubicación
-- Se recupera el delete lpu del carrito
+- Se recupera el save cubicación en crear Cubicación
+- Se recupera el delete lpu del carrito en crear Cubicación
+- Se incorpora el dropdown de proyectos en crear OT
+- Se agrega funcionalidad para escoger sustento financiero en crear OT
 
 ### Changes
 
 - Se refactoriza código del formulario cubicación creandose un service que maneje la lógica del formulario
+- Se reordena el Plan y sitio en crear OT
 
 ### Fix
 
-
+- Se arregla alineación de cuadros de detalle en crear OT
+- Se arregla información de los cuadros de detalle en crear OT
 
 ## [0.23.0] - 2021-05-15
 
