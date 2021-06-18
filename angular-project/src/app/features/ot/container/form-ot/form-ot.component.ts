@@ -336,7 +336,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     const request: OTmodel.RequestCreateOT = {
       nombre: form.nombre,
       tipo: form.tipo,
-      proyecto_id: +form.plan_proyecto_id,
+      proyecto_id: +form.proyecto_id,
       cubicacion_id: +form.cubicacion_id,
       sitio_id: +form.sitio_id,
       propietario_id: +form.gestor_id,
