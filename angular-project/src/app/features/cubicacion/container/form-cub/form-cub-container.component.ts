@@ -11,6 +11,7 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { Login } from '@storeOT/features/auth/auth.model';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { FormCubConfig } from './form-cub-config.service';
 // import { TableComponetType } from '@storeOT/model';
@@ -45,7 +46,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private formConfig: FormCubConfig,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -198,7 +200,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.cubageFacade.postCubicacion(nuevaCubicacion);
     this.formCubicacion.reset();
     this.cubageFacade.resetData();
-    // this.router.navigate(['app/cubicacion/list-cub']);
+    this.router.navigate(['app/cubicacion/list-cub']);
     this.messageService.add({
       severity: 'success',
       summary: 'Registro guardado',
