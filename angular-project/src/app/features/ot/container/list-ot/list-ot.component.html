@@ -15,7 +15,7 @@
 
 
   <div class="row">
-    <p-card header="¿Qué OTs desea listar?" [style]="{'width': '28rem'}" class="col-xs-12 col-md-6">
+    <p-card header="¿Qué OTs desea listar?" [style]="{'width': '28rem', 'height': '7rem' }" class="col-xs-12 col-md-6">
       <div class="row">
         <div class="p-field-radiobutton col-xs-12 col-md-3">
           <p-radioButton id="mias" name="responsable" value="mias" [(ngModel)]="responsable"
@@ -38,7 +38,7 @@
       </div>
     </p-card>
 
-    <p-card header="Tipo de OT" [style]="{'width': '28rem'}" class="col-xs-12 col-md-6">
+    <p-card header="Tipo de OT" [style]="{'width': '28rem' , 'height': '7rem'}" class="col-xs-12 col-md-6">
       <div class="row">
         <div class="p-field-radiobutton col-xs-12 col-md-3">
           <p-radioButton id="OT" name="tipoOT" value="OT" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
