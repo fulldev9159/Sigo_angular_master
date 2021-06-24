@@ -6,11 +6,22 @@
 }
 
 @media (max-width: 767px) {
-  :host {
+  :host  {
     display: block;
     position: relative;
     width: 100%;
     max-width: 100%;
     background: transparent;
   }
+}
+
+:host ::ng-deep .p-field-radiobutton {
+	color: #00507a;
+  border: #00507a;
+  font-size: 90%;
+}
+
+:host ::ng-deep .p-card-title {
+	color: #00507a;
+  font-size: 90%;
 }

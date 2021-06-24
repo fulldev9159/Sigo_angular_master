@@ -21,6 +21,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { DropdownModule } from 'primeng/dropdown';
 import { MenuModule } from 'primeng/menu';
+import {CardModule} from 'primeng/card';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { MenuModule } from 'primeng/menu';
     TooltipModule,
     OverlayPanelModule,
     MenuModule,
+    CardModule,
   ],
   exports: [
     MenuModule,
@@ -67,6 +69,7 @@ import { MenuModule } from 'primeng/menu';
     InputMaskModule,
     TooltipModule,
     OverlayPanelModule,
+    CardModule,
   ],
   providers: [MessageService],
 })

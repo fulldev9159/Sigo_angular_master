@@ -2,6 +2,9 @@ export interface Ot {
   id: number;
   name: string;
   tipo: string;
+  estado: string;
+  etapa: string;
+  responsable: string;
   fecha_inicio: string;
   fecha_termino: string;
   contrato_marco_nombre: string;

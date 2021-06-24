@@ -20,6 +20,8 @@ import { map, takeUntil } from 'rxjs/operators';
 export class ListOtComponent implements OnInit, OnDestroy {
   // declarations
   public items$: Observable<Ot[]>;
+  public responsable: 'mias';
+  public tipoOT: 'OT';
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
     header: true,
@@ -38,6 +40,14 @@ export class ListOtComponent implements OnInit, OnDestroy {
         //   editable: false
         // },
         {
+          field: 'ID',
+          type: 'TEXT',
+          sort: 'id',
+          header: 'id',
+          width: '5%',
+          editable: false,
+        },
+        {
           field: 'Sesión SCE',
           type: 'TEXT',
           sort: 'sesion_sce',
@@ -49,6 +59,27 @@ export class ListOtComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'nombre',
           header: 'nombre',
+          editable: false,
+        },
+        {
+          field: 'Responsable',
+          type: 'TEXT',
+          sort: 'responsable',
+          header: 'responsable',
+          editable: false,
+        },
+        {
+          field: 'Estado',
+          type: 'TEXT',
+          sort: 'estado',
+          header: 'estado',
+          editable: false,
+        },
+        {
+          field: 'Etapa',
+          type: 'TEXT',
+          sort: 'etapa',
+          header: 'etapa',
           editable: false,
         },
         {
@@ -84,10 +115,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
           type: 'ACTIONS',
           sort: null,
           header: null,
+          width: '6%',
           editable: false,
         },
       ],
       sort: [
+        'id',
         'sesion_sce',
         'nombre',
         'fecha_inicio',
@@ -148,12 +181,21 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
       });
-
+    this.responsable = 'mias';
+    this.tipoOT = 'OT';
     this.items$ = this.otFacade.getOt$();
-  }
+    }
 
   ngOnDestroy(): void {
     this.destroyInstance.next(true);
     this.destroyInstance.complete();
+  }
+
+  onClick(event): void {
+    console.log(this.responsable);
+  }
+
+  onClickTipo(event): void {
+    console.log(this.tipoOT);
   }
 }
