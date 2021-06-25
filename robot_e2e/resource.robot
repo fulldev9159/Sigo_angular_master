@@ -178,6 +178,8 @@ Navegar al menu
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    id:listarCubSubMenu
     Run Keyword If    '${menu}' == 'Perfil'              Click Visible Element    css:#menu-perfil>a>span
+    Run Keyword If    '${menu}' == 'Crear OT'            Click Visible Element    id:otSub
+    Run Keyword If    '${menu}' == 'Crear OT'            Click Visible Element    css:#otSub>li.pl-5.ng-star-inserted.active-item>a
 
 Click boton Editar
     [Arguments]              ${valor} 
@@ -280,3 +282,95 @@ Set superior directo
 
 Set Permisos modulo CUBICACION
    Click Visible Element    css:#modulos-pefil-CUBICACION > p-listbox > div > div:nth-child(2) > div.p-checkbox.p-component.ng-star-inserted > div.p-checkbox-box
+
+Set Nombre OT
+    [Arguments]    ${nombre}             
+    input text     id: nombre-ot       ${nombre}
+
+Set Tipo OT
+    [Arguments]              ${valor}
+    Click Visible Element    id:tipo-ot
+    Select item              id:tipo-ot     ${valor}
+
+Set Cubicacion de la OT
+    [Arguments]              ${valor}
+    Click Visible Element    id:cubicacion-de-ot
+    Select item              id:cubicacion-de-ot     ${valor}
+
+Set Plan Proyecto OT
+    [Arguments]              ${valor}
+    Wait Until Element Is Visible       id:plan-proyecto
+    Click Visible Element               id:plan-proyecto
+    Select item                         id:plan-proyecto    ${valor}
+
+Set Sitio OT
+    [Arguments]              ${valor}
+    Wait Until Element Is Visible       id:sitio
+    Click Visible Element               id:sitio
+    Select item                         id:sitio    ${valor}
+
+Click Opex OT
+    Wait Until Element Is Visible       id:opex
+    Scroll Element Into View            id:opex
+    Click Visible Element               id:opex
+
+Set ID OPEX OT
+    [Arguments]              ${valor}
+    Wait Until Element Is Visible       id:id-opex
+    Scroll Element Into View            id:id-opex
+    Click Visible Element               id:id-opex
+    Select item                         id:id-opex    ${valor}
+
+Set Cuenta SAP OT
+    [Arguments]              ${valor}
+    Wait Until Element Is Visible       id:cuenta-sap
+    Scroll Element Into View            id:cuenta-sap
+    Click Visible Element               id:cuenta-sap
+    Select item                         id:cuenta-sap    ${valor}
+
+Set CECO OT
+    [Arguments]              ${valor}
+    Wait Until Element Is Visible       id:ceco
+    Scroll Element Into View            id:ceco
+    Click Visible Element               id:ceco
+    Select item                         id:ceco    ${valor}
+
+Set CECO Provisorio
+    [Arguments]              ${nombre-ceco}
+    Wait Until Element Is Visible       id:ceco-provisorio
+    Scroll Element Into View            id:ceco-provisorio
+    input text                          id:ceco-provisorio       ${nombre-ceco}
+
+Set Fecha Inicio
+    Wait Until Element Is Visible       id:fecha-inicio-ot
+    Scroll Element Into View            id:fecha-inicio-ot
+    Click Visible Element               id:fecha-inicio-ot
+    Wait Until Element Is Visible       css:#fecha-inicio-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-4.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    Click Visible Element               css:#fecha-inicio-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-4.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+
+Set Fecha Termino
+    Wait Until Element Is Visible       id:fecha-termino-ot
+    Scroll Element Into View            id:fecha-termino-ot
+    Click Visible Element               id:fecha-termino-ot
+    Wait Until Element Is Visible       css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-5.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    Click Visible Element               css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-5.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+
+Set Proyecto OT
+    [Arguments]              ${valor}
+    Wait Until Element Is Visible       id:proyecto-ot
+    Scroll Element Into View            id:proyecto-ot
+    Click Visible Element               id:proyecto-ot
+    Select item                         id:proyecto-ot    ${valor}
+
+Set Observaciones OT
+    [Arguments]              ${observaciones}
+    Wait Until Element Is Visible       id:observaciones
+    Scroll Element Into View            id:observaciones
+    input text                          id:observaciones       ${observaciones}
+
+Guardar OT
+    Wait Until Element Is Visible       id:guardar-ot
+    Scroll Element Into View            id:guardar-ot
+    Click Visible Element               id:guardar-ot
+
+
