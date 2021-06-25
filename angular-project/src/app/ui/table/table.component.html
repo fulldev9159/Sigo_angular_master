@@ -62,17 +62,18 @@
             <span *ngIf="item[column.header]">{{column.booleantrue}}</span>
             <span *ngIf="!item[column.header]">{{column.booleanfalse}}</span>
           </td>
-          <td *ngSwitchCase="'ACTIONS'" id="action-buttons" [ngClass]="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6 ? 'action-buttons-flex' : ''">
+          <td *ngSwitchCase="'ACTIONS'" id="action-buttons" [ngClass]="config.headerConfig.actionsType==='Buttons' ? 'action-buttons-flex' : ''">
             <!-- <ng-container *ngIf="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6"> -->
             <ng-container *ngIf="config.headerConfig.actionsType==='Buttons'">
               <div *ngFor="let button of config.body.actions">
-                <div *ngIf="!item[button.conditionKey]" pTooltip="{{button.tooltip}}">
-                  <button [disabled]="item[button.conditionKey] === false" pButton pRipple [icon]="button.icon"
+                <div *ngIf="item[button.disabled]" pTooltip="{{button.tooltipDisabled}}">
+                  <button [disabled]="item[button.disabled]" pButton pRipple [icon]="button.icon"
                     [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
                 </div>
-                <button [disabled]="item[button.conditionKey] === false" pButton pRipple [icon]="button.icon"
+                
+                <button *ngIf="!item[button.disabled]" pButton pRipple [icon]="button.icon"
                   [class]="button.class" (click)="button.onClick($event,item, rowIndex);"
-                  *ngIf="item[button.conditionKey]"></button>
+                  ></button>
               </div>
             </ng-container>
             <!-- <ng-container *ngIf="config.body.actions.length >4||config.body.headers.length>6"> -->

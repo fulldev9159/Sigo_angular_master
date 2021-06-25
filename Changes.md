@@ -1,5 +1,21 @@
 # Changelog
-## [0.24.0] - 2021-05-22
+
+## [0.25.0] - 2021-06-29
+
+### features
+
+- Se desarrolla el clonado de una cubicación
+- Se desarrolla el despliegue de detalles de la cubicación
+- Se hace refactoring de test robotframework para usuarios y perfiles
+
+### Changes
+
+- Se realizan cambios en el componente tabla para que maneje de mejor manera el valor de disabled button
+
+### Fix
+
+
+## [0.24.0] - 2021-06-22
 
 ### features
 
@@ -20,7 +36,7 @@
 - Se arregla alineación de cuadros de detalle en crear OT
 - Se arregla información de los cuadros de detalle en crear OT
 
-## [0.23.0] - 2021-05-15
+## [0.23.0] - 2021-06-15
 
 ### features
 
@@ -38,7 +54,7 @@
 - Se corrige el get cubicaciones
 - Se corrigen los valores enviados en el save cubicaciones
 
-## [0.22.0] - 2021-05-07
+## [0.22.0] - 2021-06-07
 
 ### features
 
