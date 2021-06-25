@@ -357,6 +357,7 @@ Set Fecha Inicio
     Scroll Element Into View            id:fecha-inicio-ot
     Click Visible Element               id:fecha-inicio-ot
     Wait Until Element Is Visible       css:#fecha-inicio-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-4.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    Scroll Element Into View            css:#fecha-inicio-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-4.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
     Click Visible Element               css:#fecha-inicio-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-4.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
 
 Set Fecha Termino
@@ -364,6 +365,7 @@ Set Fecha Termino
     Scroll Element Into View            id:fecha-termino-ot
     Click Visible Element               id:fecha-termino-ot
     Wait Until Element Is Visible       css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-5.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    Scroll Element Into View            css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-5.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
     Click Visible Element               css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-5.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
 
 Set Proyecto OT
