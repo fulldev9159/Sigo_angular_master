@@ -12,22 +12,22 @@ Crear usuario
     Login                                  admin                                            password
     Navegar al menu                        Usuario
     #### Creacion del usuario #######
-    Acceder a creacion de nuevo usuario
-    Set username                           testjjefearea
-    Set nombres y apellidos                Juan                                             Cancino
-    Set email                              admin@contrato.com
-    Set documento de identidad             12345671123
-    #Set celular                       5555555 5555
-    Set tipo empresa                       movistar
-    Set empresa                            Telefonica Chile Servicios Corporativos Ltda.
-    Set area                               CONECTIVIDAD Y BACKHAUL
-    Set todos los contratos 
-    Set perfil usuario                     TEST Jefe Área                                   
-    Guardar usuario
-    Log To Console                         testjjefearea
-    sleep                                  5
-    Validar existencia en la tabla         1                                                testjjefearea
-    Reload Page
+    # Acceder a creacion de nuevo usuario
+    # Set username                           testjjefearea
+    # Set nombres y apellidos                Juan                                             Cancino
+    # Set email                              admin@contrato.com
+    # Set documento de identidad             12345671123
+    # #Set celular                       5555555 5555
+    # Set tipo empresa                       movistar
+    # Set empresa                            Telefonica Chile Servicios Corporativos Ltda.
+    # Set area                               CONECTIVIDAD Y BACKHAUL
+    # Set todos los contratos 
+    # Set perfil usuario                     TEST Jefe Área                                   
+    # Guardar usuario
+    # Log To Console                         testjjefearea
+    # sleep                                  5
+    # Validar existencia en la tabla         1                                                testjjefearea
+    # Reload Page
     # Acceder a creacion de nuevo usuario
     # Set username                           testjgestor
     # Set nombres y apellidos                Juan                                             Cancino

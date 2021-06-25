@@ -45,6 +45,7 @@ Select item
     [Arguments]                      ${selector}          ${value}
     ${select element}                Get WebElement       ${selector}
     Wait Until Element Is Visible    ${select element}    timeout=4
+    Wait Until Element Is enabled    ${select element}
     Scroll Element Into View         ${select element}
     Select From List By Label        ${select element}    ${value}
 
@@ -302,9 +303,10 @@ Set Tipo OT
     Select item                     id:tipo-ot     ${valor}
 
 Set Cubicacion de la OT
-    Wait Until Element Is Visible   id:cubicacion-de-ot
-    click element   xpath=//select[@id="cubicacion-de-ot"]
-    Select From List By Index    xpath=//select[@id="cubicacion-de-ot"]    1
+    [Arguments]              ${valor}
+    Wait Until Element Is Visible       id:cubicacion-de-ot
+    Click Visible Element               id:cubicacion-de-ot
+    Select item                         id:cubicacion-de-ot    ${valor}
 
 Set Plan Proyecto OT
     [Arguments]              ${valor}
