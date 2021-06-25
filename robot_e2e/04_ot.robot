@@ -10,6 +10,7 @@ Crear OT
     Open Browser To Page        ${url}
     Login                       jcastill    password 
     Navegar al menu             Crear OT 
+    Sleep                       10s
     Set Nombre OT               OT Robot Test
     Set Tipo OT                 OT
     Set Cubicacion de la OT     
