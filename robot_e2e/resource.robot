@@ -353,20 +353,20 @@ Set CECO Provisorio
     input text                          id:ceco-provisorio       ${nombre-ceco}
 
 Set Fecha Inicio
-    Wait Until Element Is Visible       id:fecha-inicio-ot
-    Scroll Element Into View            id:fecha-inicio-ot
-    Click Visible Element               id:fecha-inicio-ot
-    Wait Until Element Is Visible       css:#fecha-inicio-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-4.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
-    Scroll Element Into View            css:#fecha-inicio-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-4.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
-    Click Visible Element               css:#fecha-inicio-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-4.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    [Arguments]              ${nombre-ceco}
+    Click Visible Element               css:p-calendar
+    ${selector fecha}=    set variable    css: p-calendar > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(3) > span
+    Wait Until Element Is Visible       ${selector fecha}
+    Scroll Element Into View            ${selector fecha} 
+    Click Visible Element              ${selector fecha} 
 
 Set Fecha Termino
     Wait Until Element Is Visible       id:fecha-termino-ot
     Scroll Element Into View            id:fecha-termino-ot
     Click Visible Element               id:fecha-termino-ot
-    Wait Until Element Is Visible       css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-5.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
-    Scroll Element Into View            css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-5.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
-    Click Visible Element               css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container.ng-tns-c69-5.ng-star-inserted > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    Wait Until Element Is Visible       css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    Scroll Element Into View            css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    Click Visible Element               css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
 
 Set Proyecto OT
     [Arguments]              ${valor}

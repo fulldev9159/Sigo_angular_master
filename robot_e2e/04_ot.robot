@@ -21,7 +21,7 @@ Crear OT
     Set Cuenta SAP OT           6051591
     Set CECO OT                 CECO provisorio
     Set CECO Provisorio         Robot CECO provisorio
-    Set Fecha Inicio            
+    Set Fecha Inicio            06/22/2021        
     Set Fecha Termino
     Set Proyecto OT             proyecto test(1)
     Set Observaciones OT        Robot Observaciones
