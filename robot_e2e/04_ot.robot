@@ -12,6 +12,7 @@ Crear OT
     Navegar al menu             Crear OT 
     Set Nombre OT               OT Robot Test
     Set Tipo OT                 OT
+    sleep    5
     Set Cubicacion de la OT     Cubicación test
     Set Plan Proyecto OT        3G -
     Set Sitio OT                NEWUMTS0061F7 - SAN PEDRO - CORONEL 1 RUTA COSITE
