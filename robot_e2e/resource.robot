@@ -364,9 +364,9 @@ Set Fecha Termino
     Wait Until Element Is Visible       id:fecha-termino-ot
     Scroll Element Into View            id:fecha-termino-ot
     Click Visible Element               id:fecha-termino-ot
-    Wait Until Element Is Visible       css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
-    Scroll Element Into View            css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
-    Click Visible Element               css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container > table > tbody > tr:nth-child(5) > td:nth-child(4) > span
+    Wait Until Element Is Visible       css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(4) > span
+    Scroll Element Into View            css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(4) > span
+    Click Visible Element               css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(4) > span
 
 Set Proyecto OT
     [Arguments]              ${valor}
