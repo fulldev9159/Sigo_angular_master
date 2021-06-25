@@ -46,8 +46,8 @@ e2e robotframework:
   stage: e2e test
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
-    - sudo docker pull gcr.io/zwcsce/mcl-otec-db:latest
-    - sudo docker pull gcr.io/zwcsce/api-sigo:develop
+    - docker pull gcr.io/zwcsce/mcl-otec-db:latest
+    - docker pull gcr.io/zwcsce/api-sigo:develop
     - docker pull gcr.io/zwcsce/mcl-otec-webclient:latest-testing
     - docker-compose -f docker-compose.yml down -v
     - docker-compose -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
