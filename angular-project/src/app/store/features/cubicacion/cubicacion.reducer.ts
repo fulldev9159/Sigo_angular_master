@@ -1,25 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
-import {
-  ContractMarco,
-  Cubicacion,
-  Provider,
-  Region,
-  Service,
-  TypeService,
-  AutoSuggestItem
-} from './cubicacion.model';
+import * as cubModel from './cubicacion.model';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
-  items: Cubicacion[];
-  contractMarco: ContractMarco[];
-  subContractedProviders: Provider[];
-  subContractedRegions: Region[];
-  subContractedTypeServices: TypeService[];
-  subContractedServices: Service[];
-  autoSuggest: AutoSuggestItem[];
+  items: cubModel.Cubicacion[];
+  contractMarco: cubModel.ContractMarco[];
+  subContractedProviders: cubModel.Provider[];
+  subContractedRegions: cubModel.Region[];
+  subContractedTypeServices: cubModel.TypeService[];
+  subContractedServices: cubModel.Service[];
+  autoSuggest: cubModel.AutoSuggestItem[];
+  detalleCubicacion: cubModel.ResponseDetalleCubicacion[];
 }
 
 export const initialStateCubicacion: StateCubicacion = {
@@ -30,6 +23,7 @@ export const initialStateCubicacion: StateCubicacion = {
   subContractedTypeServices: [],
   subContractedServices: [],
   autoSuggest: [],
+  detalleCubicacion: [],
 };
 
 export const reducerCubicacion = createReducer(
@@ -83,6 +77,12 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.getSubContractedServicesSuccess, (state, payload) => ({
     ...state,
     subContractedServices: payload.subContractedServices,
+  })),
+
+  on(CubicacionActions.getDetalleCubicacion, (state) => state),
+  on(CubicacionActions.getDetalleCubicacionSuccess, (state, payload) => ({
+    ...state,
+    detalleCubicacion: payload.detallecubicacion,
   })),
 
   on(CubicacionActions.resetData, (state, payload) => ({

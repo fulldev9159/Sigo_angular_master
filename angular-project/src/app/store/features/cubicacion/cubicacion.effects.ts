@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import * as cubModel from './cubicacion.model';
 
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -10,6 +11,8 @@ import * as cubicacionModel from '@storeOT/features/cubicacion/cubicacion.model'
 import { Response } from '@storeOT/model';
 import { environment } from '@environment';
 
+import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 @Injectable()
@@ -17,7 +20,8 @@ export class CubicacionEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private snackService: SnackBarService
+    private snackService: SnackBarService,
+    private cubageFacade: CubicacionFacade
   ) {}
 
   getOt$ = createEffect(() =>
@@ -192,7 +196,7 @@ export class CubicacionEffects {
       ofType(cubicacionActions.postCubicacion),
       concatMap((data: any) =>
         this.http
-          .post(`${environment.api}/cubicacion/save_edit`, data.cubicacion)
+          .post(`${environment.api}/cubicacion/create`, data.cubicacion)
           .pipe(
             map((res: any) => {
               let message = '';
@@ -205,7 +209,7 @@ export class CubicacionEffects {
                 this.snackService.showMessage(message, 'error');
               }
               return cubicacionActions.postCubicacionSuccess({
-                cubicacion: res.data.iteFms,
+                cubicacion: res.data.items,
               });
             }),
             catchError((err) =>
@@ -237,6 +241,66 @@ export class CubicacionEffects {
             catchError((err) =>
               of(cubicacionActions.getAutoSuggestError({ error: err }))
             )
+          )
+      )
+    )
+  );
+
+  getDetalleCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.getDetalleCubicacion),
+      concatMap((data: any) =>
+        this.http
+          .post(`${environment.api}/cubicacion/detalle/get`, {
+            cubicacion_id: data.cubicacion_id,
+          })
+          .pipe(
+            map((res: any) =>
+              cubicacionActions.getDetalleCubicacionSuccess({
+                detallecubicacion: res.data.items,
+              })
+            ),
+            catchError((err) =>
+              of(cubicacionActions.getDetalleCubicacionError({ error: err }))
+            )
+          )
+      )
+    )
+  );
+
+  clonarCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.clonarCubicacion),
+      concatMap((data: any) =>
+        this.http
+          .post(`${environment.api}/cubicacion/detalle/get`, {
+            cubicacion_id: data.cubicacion_id,
+          })
+          .pipe(
+            map((res: any) => {
+              const requestSave: cubModel.RequestSaveCubicacion = {
+                cubicacion_nombre: `Copia de ${data.cubicacion.nombre}`,
+                region_id: data.cubicacion.region_id,
+                usuario_id: 1,
+                contrato_marco_id: data.cubicacion.contrato_marco_id,
+                proveedor_id: data.cubicacion.proveedor_id,
+                lpus: res.data.items.map((x) => ({
+                  lpu_id: x.lpu_id,
+                  cantidad: x.lpu_cantidad,
+                })),
+              };
+              console.log(requestSave);
+              // this.cubageFacade.postCubicacion(requestSave);
+              return cubicacionActions.postCubicacion({
+                cubicacion: requestSave,
+              });
+            }),
+            catchError((err) => {
+              console.log(err);
+              return of(
+                cubicacionActions.clonarCubicacionError({ error: err })
+              );
+            })
           )
       )
     )

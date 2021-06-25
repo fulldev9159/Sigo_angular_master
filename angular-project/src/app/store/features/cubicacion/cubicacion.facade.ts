@@ -3,28 +3,20 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
-import {
-  ContractMarco,
-  Cubicacion,
-  Provider,
-  Region,
-  Service,
-  TypeService,
-  AutoSuggestItem,
-} from './cubicacion.model';
+import * as cubModel from './cubicacion.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CubicacionFacade {
-  constructor(private store: Store<Cubicacion>) {}
+  constructor(private store: Store<cubModel.Cubicacion>) {}
 
   // CUBICACION
   public getCubicacionAction(perfilID: number): void {
     this.store.dispatch(cubicacionActions.getCubicacion({ perfilID }));
   }
 
-  public getCubicacionSelector$(): Observable<Cubicacion[]> {
+  public getCubicacionSelector$(): Observable<cubModel.Cubicacion[]> {
     return this.store.select(cubicacionSelectors.getCubicaciones);
   }
 
@@ -37,7 +29,7 @@ export class CubicacionFacade {
   // DELETE
 
   // REPLY
-  public replyCubicacion(cubicacion: Cubicacion): void {
+  public replyCubicacion(cubicacion: cubModel.Cubicacion): void {
     this.store.dispatch(cubicacionActions.replyCubicacion({ cubicacion }));
   }
   // REPLY
@@ -53,13 +45,15 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getContractMarco());
   }
 
-  public getContractMarcoSuccess(contractMarco: ContractMarco[]): void {
+  public getContractMarcoSuccess(
+    contractMarco: cubModel.ContractMarco[]
+  ): void {
     this.store.dispatch(
       cubicacionActions.getContractMarcoSuccess({ contractMarco })
     );
   }
 
-  public getContractMarcoSelector$(): Observable<ContractMarco[]> {
+  public getContractMarcoSelector$(): Observable<cubModel.ContractMarco[]> {
     return this.store.select(cubicacionSelectors.getConstractMarco);
   }
   // CONSTRACT MARCO
@@ -70,7 +64,7 @@ export class CubicacionFacade {
   }
 
   public getSubContractedProvidersSuccess(
-    subContractedProviders: Provider[]
+    subContractedProviders: cubModel.Provider[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractProvidersSuccess({
@@ -79,7 +73,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getProvidersSelector$(): Observable<Provider[]> {
+  public getProvidersSelector$(): Observable<cubModel.Provider[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);
   }
   // SUBCONTRACTPROVIDERS
@@ -89,13 +83,15 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedRegions(data));
   }
 
-  public getSubContractedRegionsSuccess(subContractedRegions: Region[]): void {
+  public getSubContractedRegionsSuccess(
+    subContractedRegions: cubModel.Region[]
+  ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedRegionsSuccess({ subContractedRegions })
     );
   }
 
-  public getRegionsSelector$(): Observable<Region[]> {
+  public getRegionsSelector$(): Observable<cubModel.Region[]> {
     return this.store.select(cubicacionSelectors.getSubContractedRegions);
   }
   // SUBCONTRACTREGIONS
@@ -106,7 +102,7 @@ export class CubicacionFacade {
   }
 
   public getSubContractedTypeServicesSuccess(
-    subContractedTypeServices: TypeService[]
+    subContractedTypeServices: cubModel.TypeService[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedTypeServicesSuccess({
@@ -115,7 +111,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getTypeServicesSelector$(): Observable<TypeService[]> {
+  public getTypeServicesSelector$(): Observable<cubModel.TypeService[]> {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
   }
   // SUBCONTRACTTYPESERVICES
@@ -126,7 +122,7 @@ export class CubicacionFacade {
   }
 
   public getSubContractedServicesSuccess(
-    subContractedServices: Service[]
+    subContractedServices: cubModel.Service[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedServicesSuccess({
@@ -135,7 +131,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getServicesSelector$(): Observable<Service[]> {
+  public getServicesSelector$(): Observable<cubModel.Service[]> {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
   }
 
@@ -149,13 +145,34 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getAutoSuggest({ filter, cantidad }));
   }
 
-  public getAutoSuggestSuccess(contractMarco: ContractMarco[]): void {
+  public getAutoSuggestSuccess(contractMarco: cubModel.ContractMarco[]): void {
     this.store.dispatch(
       cubicacionActions.getContractMarcoSuccess({ contractMarco })
     );
   }
 
-  public getAutoSuggestSelector$(): Observable<AutoSuggestItem[]> {
+  public getAutoSuggestSelector$(): Observable<cubModel.AutoSuggestItem[]> {
     return this.store.select(cubicacionSelectors.getAutoSuggest);
+  }
+
+  public getDetallesCubicacionAction(cubicacion_id: number): void {
+    this.store.dispatch(
+      cubicacionActions.getDetalleCubicacion({ cubicacion_id })
+    );
+  }
+
+  public getDetallesCubicacionSelector$(): Observable<
+    cubModel.ResponseDetalleCubicacion[]
+  > {
+    return this.store.select(cubicacionSelectors.getDetalleCubicacion);
+  }
+
+  public ClonarCubicacionAction(
+    cubicacion: cubModel.ResponseGetAllCub,
+    cubicacion_id: number
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.clonarCubicacion({ cubicacion, cubicacion_id })
+    );
   }
 }
