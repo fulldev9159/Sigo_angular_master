@@ -293,9 +293,10 @@ Set Tipo OT
     Select item              id:tipo-ot     ${valor}
 
 Set Cubicacion de la OT
-    [Arguments]              ${valor}
-    Click Visible Element    id:cubicacion-de-ot
-    Select item              id:cubicacion-de-ot     ${valor}
+    [Arguments]                     ${valor}
+    Wait Until Element Is Visible   id:cubicacion-de-ot
+    Click Visible Element           id:cubicacion-de-ot
+    Select item                     id:cubicacion-de-ot     ${valor}
 
 Set Plan Proyecto OT
     [Arguments]              ${valor}
