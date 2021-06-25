@@ -46,16 +46,17 @@ e2e robotframework:
   stage: e2e test
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
+    - sudo docker pull gcr.io/zwcsce/mcl-otec-db:latest
+    - sudo docker pull gcr.io/zwcsce/api-sigo:develop
     - docker pull gcr.io/zwcsce/mcl-otec-webclient:latest-testing
     - docker-compose -f docker-compose.yml down -v
     - docker-compose -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
     - docker-compose -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_db
-    - sleep 10
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_api
-    - sleep 1
     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_web
     # - docker-compose -p ${CI_PIPELINE_ID} run dockerize-test-waiting
+    - sleep 10
     - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
   # after_script:
   #   - docker-compose -f docker-compose.yml down -v
