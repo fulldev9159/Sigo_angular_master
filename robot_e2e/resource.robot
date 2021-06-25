@@ -284,13 +284,15 @@ Set Permisos modulo CUBICACION
    Click Visible Element    css:#modulos-pefil-CUBICACION > p-listbox > div > div:nth-child(2) > div.p-checkbox.p-component.ng-star-inserted > div.p-checkbox-box
 
 Set Nombre OT
-    [Arguments]    ${nombre}             
-    input text     id: nombre-ot       ${nombre}
+    [Arguments]                         ${nombre}
+    Wait Until Element Is Visible       id: nombre-ot        
+    input text                          id: nombre-ot       ${nombre}
 
 Set Tipo OT
-    [Arguments]              ${valor}
-    Click Visible Element    id:tipo-ot
-    Select item              id:tipo-ot     ${valor}
+    [Arguments]                     ${valor}
+    Wait Until Element Is Visible   id:tipo-ot
+    Click Visible Element           id:tipo-ot
+    Select item                     id:tipo-ot     ${valor}
 
 Set Cubicacion de la OT
     Wait Until Element Is Visible   id:cubicacion-de-ot
