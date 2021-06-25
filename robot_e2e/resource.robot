@@ -293,10 +293,9 @@ Set Tipo OT
     Select item              id:tipo-ot     ${valor}
 
 Set Cubicacion de la OT
-    [Arguments]                     ${valor}
     Wait Until Element Is Visible   id:cubicacion-de-ot
-    Click Visible Element           id:cubicacion-de-ot
-    Select item                     id:cubicacion-de-ot     ${valor}
+    click element   xpath=//select[@id="cubicacion-de-ot"]
+    Select From List By Index    xpath=//select[@id="cubicacion-de-ot"]    1
 
 Set Plan Proyecto OT
     [Arguments]              ${valor}
