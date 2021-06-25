@@ -1,13 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  ContractMarco,
-  Cubicacion,
-  Provider,
-  Region,
-  Service,
-  TypeService,
-  AutoSuggestItem,
-} from './cubicacion.model';
+import * as cubModel from './cubicacion.model';
 
 // CUBICACION LIST
 export const getCubicacion = createAction(
@@ -17,7 +9,7 @@ export const getCubicacion = createAction(
 
 export const getCubicacionSuccess = createAction(
   '[Cubicacion GetAll] GET Cubicacion Success',
-  props<{ cubicacion: Cubicacion[] }>()
+  props<{ cubicacion: cubModel.Cubicacion[] }>()
 );
 
 export const getCubicacionError = createAction(
@@ -42,12 +34,12 @@ export const deleteCubicacionError = createAction(
 
 export const editCubicacion = createAction(
   '[Cubicacion EditById] EDIT Cubicacion',
-  props<{ cubicacion: Cubicacion }>()
+  props<{ cubicacion: cubModel.Cubicacion }>()
 );
 
 export const editCubicacionSuccess = createAction(
   '[Cubicacion EditById] EDIT Cubicacion Success',
-  props<{ cubicacionId: string; cubicacion: Cubicacion }>()
+  props<{ cubicacionId: string; cubicacion: cubModel.Cubicacion }>()
 );
 
 export const editCubicacionError = createAction(
@@ -57,12 +49,12 @@ export const editCubicacionError = createAction(
 
 export const replyCubicacion = createAction(
   '[Cubicacion Reply] POST Reply Cubicacion',
-  props<{ cubicacion: Cubicacion }>()
+  props<{ cubicacion: cubModel.Cubicacion }>()
 );
 
 export const replyCubicacionSuccess = createAction(
   '[Cubicacion Reply] POST Reply Cubicacion Success',
-  props<{ cubicacion: Cubicacion }>()
+  props<{ cubicacion: cubModel.Cubicacion }>()
 );
 
 export const replyCubicacionError = createAction(
@@ -77,7 +69,7 @@ export const postCubicacion = createAction(
 
 export const postCubicacionSuccess = createAction(
   '[Cubicacion Post] CREATE Cubicacion Success',
-  props<{ cubicacion: Cubicacion }>()
+  props<{ cubicacion: cubModel.Cubicacion }>()
 );
 
 export const postCubicacionError = createAction(
@@ -92,7 +84,7 @@ export const getContractMarco = createAction('[ContactMarco Get] GET Data');
 
 export const getContractMarcoSuccess = createAction(
   '[ContactMarco Get] GET Data Success',
-  props<{ contractMarco: ContractMarco[] }>()
+  props<{ contractMarco: cubModel.ContractMarco[] }>()
 );
 
 export const getContractMarcoError = createAction(
@@ -107,7 +99,7 @@ export const getSubContractProviders = createAction(
 
 export const getSubContractProvidersSuccess = createAction(
   '[SubContractedProviders Get] GET Data Success',
-  props<{ subContractedProviders: Provider[] }>()
+  props<{ subContractedProviders: cubModel.Provider[] }>()
 );
 
 export const getSubContractProvidersError = createAction(
@@ -122,7 +114,7 @@ export const getSubContractedRegions = createAction(
 
 export const getSubContractedRegionsSuccess = createAction(
   '[SubContractedRegions Get] GET Data Success',
-  props<{ subContractedRegions: Region[] }>()
+  props<{ subContractedRegions: cubModel.Region[] }>()
 );
 
 export const getSubContractedRegionsError = createAction(
@@ -137,7 +129,7 @@ export const getSubContractedTypeServices = createAction(
 
 export const getSubContractedTypeServicesSuccess = createAction(
   '[SubContractedTypeServices Get] GET Data Success',
-  props<{ subContractedTypeServices: TypeService[] }>()
+  props<{ subContractedTypeServices: cubModel.TypeService[] }>()
 );
 
 export const getSubContractedTypeServicesError = createAction(
@@ -156,7 +148,7 @@ export const getSubContractedServices = createAction(
 
 export const getSubContractedServicesSuccess = createAction(
   '[SubContractedServices Get] GET Data Success',
-  props<{ subContractedServices: Service[] }>()
+  props<{ subContractedServices: cubModel.Service[] }>()
 );
 
 export const getSubContractedServicesError = createAction(
@@ -175,10 +167,41 @@ export const getAutoSuggest = createAction(
 
 export const getAutoSuggestSuccess = createAction(
   '[Cubicacion Get] GET AutoSuggest Success',
-  props<{ autosuggests: AutoSuggestItem[] }>()
+  props<{ autosuggests: cubModel.AutoSuggestItem[] }>()
 );
 
 export const getAutoSuggestError = createAction(
   '[Cubicacion Get] GET AutoSuggest Error',
+  props<{ error: any }>()
+);
+
+// Detalle Cubicacion
+export const getDetalleCubicacion = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getDetalleCubicacionSuccess = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion Success',
+  props<{ detallecubicacion: cubModel.ResponseDetalleCubicacion[] }>()
+);
+
+export const getDetalleCubicacionError = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion Error',
+  props<{ error: any }>()
+);
+
+// Clonar cubicacion
+export const clonarCubicacion = createAction(
+  '[Clonar cubicacion] SET clonar cubicacion',
+  props<{ cubicacion: cubModel.ResponseGetAllCub; cubicacion_id: number }>()
+);
+
+export const clonarCubicacionSuccess = createAction(
+  '[Clonar cubicacion] SET clonar cubicacion Success'
+);
+
+export const clonarCubicacionError = createAction(
+  '[Clonar cubicacion] SET clonar cubicacion Error',
   props<{ error: any }>()
 );

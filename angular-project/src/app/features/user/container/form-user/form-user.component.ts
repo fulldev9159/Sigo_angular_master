@@ -141,7 +141,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       username: [null, Validators.required],
       nombres: [null, Validators.required],
       apellidos: [null, Validators.required],
-      rut: [null, Validators.compose([Validators.required, Validators.maxLength(15), Validators.minLength(10)])],
+      rut: [null, Validators.compose([Validators.required, Validators.maxLength(15)])],
       firma: null,
       celular: null,
       email: [null, Validators.compose([Validators.required, Validators.email])],

@@ -30,7 +30,7 @@ services:
     image: gcr.io/zwcsce/api-sigo:develop
     environment:
       TZ: America/Santiago
-      LOG_LEVEL: INFO
+      LOG_LEVEL: DEBUG
       SERVICE_PORT: 4040
       OTEC_DB: root:pass@tcp(mcl_test_sigo_db:3306)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true
       DB_MAXOPENCONNECTIONS: 10

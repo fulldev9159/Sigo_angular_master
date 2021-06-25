@@ -7,9 +7,6 @@ Documentation    A resource file with reusable keywords and variables.
 Library    SeleniumLibrary
 
 *** Variables ***
-# ${SERVER}    otec.zweicom.services
-# ${SERVER}    localhost:4200
-# ${HTTP}      https
 
 *** Keywords ***
 Open Browser To Page
@@ -77,15 +74,15 @@ Usuario
     Click Visible Element            id:submit-user
 
 Crear Cubicacion
-    [Arguments]                      ${nombre cubicacion}                                                                                                                                                                                                                            ${contrato}             ${proveedor}    ${region}    ${tipo servicio}
-    Wait Until Element Is Visible    css:ng-autocomplete > div > div.input-container > input                                                                                                                                                                                         
-    input text                       css:ng-autocomplete > div > div.input-container > input                                                                                                                                                                                         ${nombre cubicacion}    
+    [Arguments]                      ${nombre cubicacion}                                                                                                                                                 ${contrato}             ${proveedor}    ${region}    ${tipo servicio}
+    Wait Until Element Is Visible    css:ng-autocomplete > div > div.input-container > input                                                                                                              
+    input text                       css:ng-autocomplete > div > div.input-container > input                                                                                                              ${nombre cubicacion}    
     Click Visible Element            id:box
-    Select item                      name:select-contratoMarco                                                                                                                                                                                                                       ${contrato} 
-    Select item                      name:select-proveedor                                                                                                                                                                                                                           ${proveedor}
-    Select item                      name:select-region                                                                                                                                                                                                                              ${region} 
-    Select item                      name:select-tipoServicio                                                                                                                                                                                                                        ${tipo servicio}
-    Click Visible Element            css:#page-content-wrapper > div > app-cubicacion > div > app-form-cub-container > div > app-card > div > div.card-body > app-form > div > div.col-xs-12.col-md-8 > div > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(1)
+    Select item                      name:select-contratoMarco                                                                                                                                            ${contrato} 
+    Select item                      name:select-proveedor                                                                                                                                                ${proveedor}
+    Select item                      name:select-region                                                                                                                                                   ${region} 
+    Select item                      name:select-tipoServicio                                                                                                                                             ${tipo servicio}
+    Click Visible Element            css:#box > div.col-xs-12.col-md-8 > div > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(1) > div.p-checkbox.p-component.ng-star-inserted > div
 
 UsuarioEdit
     [Arguments]                      ${documento}                                                                                                     ${nombres}                                       ${apellidos}    ${email}
@@ -102,9 +99,11 @@ UsuarioEdit
     element should be enabled        id:submit-user
     Click Visible Element            id:submit-user
 
-Validar si existe en la Lista
+Validar existencia en la tabla
     [Arguments]                      ${columna a validar}                                                    ${nombre}
     Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    input text                       css:div.p-datatable-header.ng-star-inserted > div > span > input        ${nombre}
+    sleep                            1
     ${cantidad de filas}=            get element count                                                       css:.p-datatable-wrapper>table>tbody>tr
     ${status}=                       Evaluate                                                                ${cantidad de filas} > 0
     Should Be True                   ${status}
@@ -117,7 +116,6 @@ Validar si existe en la Lista
     Run Keyword If                   ${areYouMyLine}                                                         Exit For Loop
     END
     Should Be True                   ${areYouMyLine}
-    close Browser
 
 Get index list
     [Arguments]                      ${columna a validar}                                                    ${valor}
@@ -186,21 +184,26 @@ Click boton Editar
     input text               css:div.p-datatable-header.ng-star-inserted > div > span > input                                ${valor}
     Click Visible Element    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(5)>div:nth-child(1)>button
 
-Set Permisos modulo OT
-    [Arguments]                   @{permisos}
-    ${permisos del modulo OT}=    Get WebElements              css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
-    Set Suite Variable            ${permisos del modulo OT}
-    FOR                           ${permiso a escoger}         IN                                                                      @{permisos}
-    # Log To Console                ${permiso a escoger}
-    ${selector permiso}=          Get selector permisos        ${permiso a escoger}                                                    @{permisos del modulo OT}    
-    Click Visible Element         ${selector permiso}
+Set Permisos modulo
+    [Arguments]                ${modulo}                                   @{permisos a seleccionar}
+    ${selectorID}=             Run Keyword If                              '${modulo}' == 'OT'
+    ...                        Set variable                                css:#modulos-pefil-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li
+    ...                        ELSE
+    ...                        Run Keyword If                              '${modulo}' == 'CUBICACION'
+    ...                        Set variable                                css:#modulos-pefil-CUBICACION>p-listbox>div>div.p-listbox-list-wrapper>ul>li
+    ${permisos del modulo}=    Get WebElements                             ${selectorID}
+    Set Suite Variable         ${permisos del modulo}
+    FOR                        ${permiso escogido}                         IN                                                                              @{permisos a seleccionar}
+    ${selector}=               Obtener el selector del permiso escogido    ${permiso escogido}                                                             @{permisos del modulo}       
+    Click Visible Element      ${selector}
+    sleep                      1
     END
 
-Get selector permisos
-    [Arguments]           ${permisoescoger}                @{permisosmoduloOT}           
-    FOR                   ${perm}                          IN                            @{permisosmoduloOT}
+Obtener el selector del permiso escogido
+    [Arguments]           ${permisoescoger}                @{permisosmodulo}             
+    FOR                   ${perm}                          IN                            @{permisosmodulo}
     ${txt}=               Get Text                         ${perm}
-    ${areYouMyLine} =     Run Keyword and Return Status    Should Be Equal As Strings    ${txt}                 ${permisoescoger}
+    ${areYouMyLine} =     Run Keyword and Return Status    Should Be Equal As Strings    ${txt}               ${permisoescoger}
     ${selector}           set variable                     ${perm}
     Set Suite Variable    ${selector}
     Run Keyword If        ${areYouMyLine}                  Exit For Loop                 
@@ -251,6 +254,10 @@ Set email
     [Arguments]    ${email}
     input text     name:email-input    ${email}
 
+Set celular
+    [Arguments]    ${valor}
+    input text     name:celular-input    ${valor}
+
 Set empresa
     [Arguments]    ${valor}
     Select item    css:#proveedor_id > select    ${valor}
@@ -273,7 +280,7 @@ Set tipo empresa
 Set perfil usuario
     [Arguments]              ${valor}
     Click Visible Element    id:perfil_id
-    Select item              id:perfil-0            ${valor}
+    Select item              id:perfil-0     ${valor}
 
 Set superior directo
     [Arguments]              ${valor}
@@ -375,4 +382,20 @@ Guardar OT
     Scroll Element Into View            id:guardar-ot
     Click Visible Element               id:guardar-ot
 
+Eliminar perfil
+    [Arguments]                      ${nombre}
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                            timeout=5
+    input text                       css:div.p-datatable-header.ng-star-inserted > div > span > input                                ${nombre}
+    sleep                            1
+    Click Visible Element            css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(5)>div:nth-child(3)>button
+    Click Visible Element            css:.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
+
+No debe existir en la tabla
+    [Arguments]                      ${nombre}
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    input text                       css:div.p-datatable-header.ng-star-inserted > div > span > input        ${nombre}
+    sleep                            1
+    ${cantidad de filas}=            get element count                                                       css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=                       Evaluate                                                                ${cantidad de filas} > 0
+    Should Not Be True               ${status}
 

@@ -185,12 +185,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     const nuevaCubicacion = {
       // cubicacion_id: +form.cubicacion_id,
       cubicacion_nombre: form.nombre,
-      total: this.total,
       region_id: +form.region_id,
-      usuario_id: +this.authLogin.usuario_id,
+      // usuario_id: +this.authLogin.usuario_id,
       contrato_marco_id: +form.contrato_marco_id,
       proveedor_id: +form.proveedor_id,
-      subcontrato_id: 1,
       lpus: this.lpusCarrito.map((x) => ({
         lpu_id: x.lpu_id,
         cantidad: x.cantidad,
