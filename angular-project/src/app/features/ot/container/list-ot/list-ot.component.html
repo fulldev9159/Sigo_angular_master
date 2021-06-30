@@ -54,9 +54,15 @@
     </p-card>
   </div>
 
-  <br>
-
-
-  <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
-
 </div>
+
+<br>
+
+<p-tabView (onChange)="onChange($event)" [activeIndex]="selectedIndex">
+  <p-tabPanel header="Abiertas" id="abiertas" tooltip="Listar OTs abiertas" [selected]="true">
+    <app-table [config]="configTable" [items]="(items$ | async)"></app-table>   
+  </p-tabPanel>
+  <p-tabPanel header="Cerradas" id="cerradas" tooltip="Listar OTs cerradas" >
+    <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
+  </p-tabPanel>
+</p-tabView>

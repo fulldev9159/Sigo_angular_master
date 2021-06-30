@@ -4,13 +4,11 @@ export interface Ot {
   tipo: string;
   estado: string;
   etapa: string;
-  responsable: string;
   fecha_inicio: string;
   fecha_termino: string;
   contrato_marco_nombre: string;
   proveedor_nombre: string;
   usuario_nombre: string;
-  sesion_sce: string;
   token: string;
 }
 

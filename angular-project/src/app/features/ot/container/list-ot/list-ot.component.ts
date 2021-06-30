@@ -22,6 +22,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   public items$: Observable<Ot[]>;
   public responsable: 'mias';
   public tipoOT: 'OT';
+  public selectedIndex = 0;
   private destroyInstance: Subject<boolean> = new Subject();
   public configTable = {
     header: true,
@@ -47,27 +48,27 @@ export class ListOtComponent implements OnInit, OnDestroy {
           width: '5%',
           editable: false,
         },
-        {
-          field: 'Sesión SCE',
-          type: 'TEXT',
-          sort: 'sesion_sce',
-          header: 'sesion_sce',
-          editable: false,
-        },
+        // {
+        //   field: 'Sesión SCE',
+        //   type: 'TEXT',
+        //   sort: 'sesion_sce',
+        //   header: 'sesion_sce',
+        //   editable: false,
+        // },
         {
           field: 'Nombre',
           type: 'TEXT',
-          sort: 'nombre',
-          header: 'nombre',
+          sort: 'name',
+          header: 'name',
           editable: false,
         },
-        {
-          field: 'Responsable',
-          type: 'TEXT',
-          sort: 'responsable',
-          header: 'responsable',
-          editable: false,
-        },
+        // {
+        //   field: 'Responsable',
+        //   type: 'TEXT',
+        //   sort: 'responsable',
+        //   header: 'responsable',
+        //   editable: false,
+        // },
         {
           field: 'Estado',
           type: 'TEXT',
@@ -121,7 +122,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
       ],
       sort: [
         'id',
-        'sesion_sce',
         'nombre',
         'fecha_inicio',
         'contrato_marco_nombre',
@@ -184,7 +184,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.responsable = 'mias';
     this.tipoOT = 'OT';
     this.items$ = this.otFacade.getOt$();
-    }
+    this.selectedIndex = 0;
+  }
+
+  onChange($event) {
+    this.selectedIndex = $event.index;
+    console.log(this.selectedIndex);
+  }
 
   ngOnDestroy(): void {
     this.destroyInstance.next(true);
