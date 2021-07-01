@@ -15,8 +15,12 @@ import {
 
 // OT LIST
 export const getOt = createAction(
-  '[Ot GetAll] GET Ot',
-  props<{ token: string; usuario_id: number; tipo_usuario: string }>()
+  '[Ot Get Abiertas] GET Ot',
+  props<{
+    perfil_id: number;
+    filtro_propietario: string;
+    filtro_tipo: string;
+  }>()
 );
 
 export const getOtSuccess = createAction(
