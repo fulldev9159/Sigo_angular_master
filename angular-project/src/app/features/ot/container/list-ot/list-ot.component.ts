@@ -193,7 +193,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.items$ = this.otFacade.getOt$();
   }
 
-  onChange($event) {
+  onChange($event): void {
     this.selectedIndex = $event.index;
     if (this.selectedIndex === 0) {
       console.log(this.selectedIndex);
