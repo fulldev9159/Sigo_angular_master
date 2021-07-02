@@ -45,10 +45,15 @@
           </p-radioButton>
           <label for="OT">OT</label>
         </div>
-        <div class="p-field-radiobutton col-xs-12 col-md-4">
+        <div class="p-field-radiobutton col-xs-12 col-md-3">
           <p-radioButton id="AP" name="tipoOT" value="AP" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
           </p-radioButton>
           <label for="AP">AP</label>
+        </div>
+        <div class="p-field-radiobutton col-xs-12 col-md-4">
+          <p-radioButton id="TODAS" name="tipoOT" value="TODAS" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
+          </p-radioButton>
+          <label for="TODAS">Todas</label>
         </div>
       </div>
     </p-card>
