@@ -15,7 +15,7 @@ export const initialStateAuth: StateAuth = {
 export const reducerAuth = createReducer(
   initialStateAuth,
 
-  on(authActions.login, (state) => state),
+  on(authActions.login, state => state),
   on(authActions.loginSuccess, (state, payload) => ({
     ...state,
     login: payload.login,
