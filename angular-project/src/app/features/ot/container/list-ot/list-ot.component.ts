@@ -61,8 +61,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
         {
           field: 'Nombre',
           type: 'TEXT',
-          sort: 'name',
-          header: 'name',
+          sort: 'nombre',
+          header: 'nombre',
           editable: false,
         },
         // {
@@ -75,15 +75,15 @@ export class ListOtComponent implements OnInit, OnDestroy {
         {
           field: 'Estado',
           type: 'TEXT',
-          sort: 'estado',
-          header: 'estado',
+          sort: 'estado_otdesc',
+          header: 'estado_otdesc',
           editable: false,
         },
         {
           field: 'Etapa',
           type: 'TEXT',
-          sort: 'etapa',
-          header: 'etapa',
+          sort: 'etapa_otdesc',
+          header: 'etapa_otdesc',
           editable: false,
         },
         {
