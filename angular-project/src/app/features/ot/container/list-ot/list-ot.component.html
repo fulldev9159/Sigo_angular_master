@@ -18,19 +18,19 @@
     <p-card header="¿Qué OTs desea listar?" [style]="{'width': '28rem', 'height': '7rem' }" class="col-xs-12 col-md-6">
       <div class="row">
         <div class="p-field-radiobutton col-xs-12 col-md-3">
-          <p-radioButton id="mias" name="responsable" value="mias" [(ngModel)]="responsable"
+          <p-radioButton id="mias" name="responsable" value="MIAS" [(ngModel)]="responsable"
             (onClick)="onClick($event)">
           </p-radioButton>
           <label for="mias">Mis OTs</label>
         </div>
         <div class="p-field-radiobutton col-xs-12 col-md-4">
-          <p-radioButton id="otros" name="responsable" value="otros" [(ngModel)]="responsable"
+          <p-radioButton id="otros" name="responsable" value="OTRAS" [(ngModel)]="responsable"
             (onClick)="onClick($event)">
           </p-radioButton>
           <label for="otros">OTs de otros</label>
         </div>
         <div class="p-field-radiobutton col-xs-12 col-md-5">
-          <p-radioButton id="todas" name="responsable" value="todas" [(ngModel)]="responsable"
+          <p-radioButton id="todas" name="responsable" value="TODAS" [(ngModel)]="responsable"
             (onClick)="onClick($event)">
           </p-radioButton>
           <label for="mias">Todas las OTs</label>
@@ -45,18 +45,29 @@
           </p-radioButton>
           <label for="OT">OT</label>
         </div>
-        <div class="p-field-radiobutton col-xs-12 col-md-4">
+        <div class="p-field-radiobutton col-xs-12 col-md-3">
           <p-radioButton id="AP" name="tipoOT" value="AP" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
           </p-radioButton>
           <label for="AP">AP</label>
+        </div>
+        <div class="p-field-radiobutton col-xs-12 col-md-4">
+          <p-radioButton id="TODAS" name="tipoOT" value="TODAS" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
+          </p-radioButton>
+          <label for="TODAS">Todas</label>
         </div>
       </div>
     </p-card>
   </div>
 
-  <br>
-
-
-  <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
-
 </div>
+
+<br>
+
+<p-tabView (onChange)="onChange($event)" [activeIndex]="selectedIndex">
+  <p-tabPanel header="Abiertas" id="abiertas" tooltip="Listar OTs abiertas" [selected]="true">
+    <app-table [config]="configTable" [items]="(items$ | async)"></app-table>   
+  </p-tabPanel>
+  <p-tabPanel header="Cerradas" id="cerradas" tooltip="Listar OTs cerradas" >
+    <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
+  </p-tabPanel>
+</p-tabView>

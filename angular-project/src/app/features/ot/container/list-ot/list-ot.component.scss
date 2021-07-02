@@ -6,7 +6,7 @@
 }
 
 @media (max-width: 767px) {
-  :host  {
+  :host {
     display: block;
     position: relative;
     width: 100%;
@@ -15,13 +15,47 @@
   }
 }
 
-:host ::ng-deep .p-field-radiobutton {
-	color: #00507a;
-  border: #00507a;
-  font-size: 90%;
-}
-
-:host ::ng-deep .p-card-title {
-	color: #00507a;
-  font-size: 90%;
+:host ::ng-deep {
+  .p-field-radiobutton {
+    color: #00507a;
+    border: #00507a;
+    font-size: 90%;
+  }
+  .p-card-title {
+    color: #00507a;
+    font-size: 90%;
+  }
+  .p-tabview-title {
+    color: #00507a;
+    font-size: 90%;
+    margin: 0 2rem;
+    line-height: 1.5;
+  }
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: #5c9bbf;
+  }
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link > span {
+    color: #fff;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  // .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link:focus {
+  //   border: 3px solid black;
+  // }
+  .p-tabview .p-tabview-nav {
+    background: none;
+  }
+  .p-tabview .p-tabview-panels {
+    background: #5c9bbf;
+  }
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background: #efefef;
+  }
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    border-color: #5c9bbf;
+  }
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background: #5c9bbf70;
+  }
 }

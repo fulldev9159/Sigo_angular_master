@@ -23,10 +23,10 @@ export class OtEffects {
       ofType(otActions.getOt),
       concatMap((data: any) =>
         this.http
-          .post(`${environment.api}/ingreot/ot/get`, {
-            token: data.token,
-            usuario_id: data.usuario_id,
-            tipo_usuario: data.tipo_usuario,
+          .post(`${environment.api}/ingreot/ot/get/abiertas`, {
+            perfil_id: data.perfil_id,
+            filtro_propietario: data.filtro_propietario,
+            filtro_tipo: data.filtro_tipo,
           })
           .pipe(
             map((res: any) => otActions.getOtSuccess({ ot: res.data.items })),

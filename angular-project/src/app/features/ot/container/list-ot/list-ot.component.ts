@@ -10,6 +10,7 @@ import { Ot } from '@storeOT/features/ot/ot.model';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { Login } from '@storeOT/features/auth/auth.model';
 
 @Component({
   selector: 'app-list-ot',
@@ -20,9 +21,12 @@ import { map, takeUntil } from 'rxjs/operators';
 export class ListOtComponent implements OnInit, OnDestroy {
   // declarations
   public items$: Observable<Ot[]>;
-  public responsable: 'mias';
+  public responsable: 'MIAS';
   public tipoOT: 'OT';
+  public selectedIndex = 0;
+  public selectedOTs: string;
   private destroyInstance: Subject<boolean> = new Subject();
+  public authLogin: Login = null;
   public configTable = {
     header: true,
     headerConfig: {
@@ -47,13 +51,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
           width: '5%',
           editable: false,
         },
-        {
-          field: 'Sesión SCE',
-          type: 'TEXT',
-          sort: 'sesion_sce',
-          header: 'sesion_sce',
-          editable: false,
-        },
+        // {
+        //   field: 'Sesión SCE',
+        //   type: 'TEXT',
+        //   sort: 'sesion_sce',
+        //   header: 'sesion_sce',
+        //   editable: false,
+        // },
         {
           field: 'Nombre',
           type: 'TEXT',
@@ -61,25 +65,25 @@ export class ListOtComponent implements OnInit, OnDestroy {
           header: 'nombre',
           editable: false,
         },
-        {
-          field: 'Responsable',
-          type: 'TEXT',
-          sort: 'responsable',
-          header: 'responsable',
-          editable: false,
-        },
+        // {
+        //   field: 'Responsable',
+        //   type: 'TEXT',
+        //   sort: 'responsable',
+        //   header: 'responsable',
+        //   editable: false,
+        // },
         {
           field: 'Estado',
           type: 'TEXT',
-          sort: 'estado',
-          header: 'estado',
+          sort: 'estado_otdesc',
+          header: 'estado_otdesc',
           editable: false,
         },
         {
           field: 'Etapa',
           type: 'TEXT',
-          sort: 'etapa',
-          header: 'etapa',
+          sort: 'etapa_otdesc',
+          header: 'etapa_otdesc',
           editable: false,
         },
         {
@@ -121,7 +125,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
       ],
       sort: [
         'id',
-        'sesion_sce',
         'nombre',
         'fecha_inicio',
         'contrato_marco_nombre',
@@ -169,22 +172,51 @@ export class ListOtComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.responsable = 'MIAS';
+    this.tipoOT = 'OT';
+    this.selectedIndex = 0;
+    this.selectedOTs = 'ABIERTAS';
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
       .subscribe((authLogin) => {
         if (authLogin) {
+          this.authLogin = authLogin;
           this.otFacade.getOt({
-            token: authLogin.token,
-            usuario_id: authLogin.usuario_id,
-            tipo_usuario: 'gestor',
+            perfil_id: +this.authLogin.perfiles[0].id,
+            filtro_propietario: this.responsable,
+            filtro_tipo: this.tipoOT,
           });
         }
       });
-    this.responsable = 'mias';
-    this.tipoOT = 'OT';
+
     this.items$ = this.otFacade.getOt$();
+  }
+
+  onChange($event): void {
+    this.selectedIndex = $event.index;
+    if (this.selectedIndex === 0) {
+      console.log(this.selectedIndex);
+      console.log(this.responsable);
+      console.log(this.tipoOT);
+      this.selectedOTs = 'CERRADAS';
+      this.otFacade.getOt({
+        perfil_id: +this.authLogin.perfiles[0].id,
+        filtro_propietario: this.responsable,
+        filtro_tipo: this.tipoOT,
+      });
+    } else if (this.selectedIndex === 1) {
+      console.log(this.selectedIndex);
+      console.log(this.responsable);
+      console.log(this.tipoOT);
+      this.selectedOTs = 'ABIERTAS';
+      this.otFacade.getOt({
+        perfil_id: +this.authLogin.perfiles[0].id,
+        filtro_propietario: this.responsable,
+        filtro_tipo: this.tipoOT,
+      });
     }
+  }
 
   ngOnDestroy(): void {
     this.destroyInstance.next(true);
@@ -192,10 +224,24 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   onClick(event): void {
+    console.log(this.selectedIndex);
     console.log(this.responsable);
+    console.log(this.tipoOT);
+    this.otFacade.getOt({
+      perfil_id: +this.authLogin.perfiles[0].id,
+      filtro_propietario: this.responsable,
+      filtro_tipo: this.tipoOT,
+    });
   }
 
   onClickTipo(event): void {
+    console.log(this.selectedIndex);
+    console.log(this.responsable);
     console.log(this.tipoOT);
+    this.otFacade.getOt({
+      perfil_id: +this.authLogin.perfiles[0].id,
+      filtro_propietario: this.responsable,
+      filtro_tipo: this.tipoOT,
+    });
   }
 }
