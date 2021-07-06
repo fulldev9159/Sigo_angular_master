@@ -13,24 +13,24 @@ export const routes: Routes = [
       {
         path: 'list-pro',
         component: ListProComponent,
-        data: { state: 'list-pro' }
+        data: { state: 'list-pro' },
       },
       {
         path: 'form-pro',
         component: FormProComponent,
-        data: { state: 'form-pro' }
+        data: { state: 'form-pro' },
       },
       {
         path: 'form-pro/:id',
         component: FormProComponent,
-        data: { state: 'form-pro' }
-      }
-    ]
-  }
+        data: { state: 'form-pro' },
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProfileRoutingModule { }
+export class ProfileRoutingModule {}

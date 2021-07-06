@@ -75,21 +75,21 @@ export class KituiComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-save',
           class: 'p-button-rounded p-button-success p-mr-2',
-          onClick: (item) => {
+          onClick: item => {
             console.log(item);
           },
         },
         {
           icon: 'p-button-icon pi pi-pencil',
           class: 'p-button-rounded p-button-warning p-mr-2',
-          onClick: (item) => {
+          onClick: item => {
             console.log(item);
           },
         },
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (item) => {
+          onClick: item => {
             console.log(item);
           },
         },
@@ -445,7 +445,7 @@ export class KituiComponent implements OnInit, OnDestroy {
     private snackService: SnackBarService,
     private confirmationService: ConfirmationService
   ) {
-    this.itemsExampleSeleccion = this.dataRealRecibida.map((x) => ({
+    this.itemsExampleSeleccion = this.dataRealRecibida.map(x => ({
       name: x.ciudad,
       code: x.id,
     }));

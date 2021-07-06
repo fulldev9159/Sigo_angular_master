@@ -5,8 +5,7 @@
       <span>listado de ot en sistema</span>
     </div>
     <div class="col-xs-12 col-md-6">
-      <button [routerLink]="['/app/ot/form-ot']" pButton type="button" label="Nueva OT" icon="pi pi-plus"
-        class="p-button-sm mt-5 float-right"></button>
+      <button [routerLink]="['/app/ot/form-ot']" pButton type="button" label="Nueva OT" icon="pi pi-plus" class="p-button-sm mt-5 float-right"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -18,20 +17,17 @@
     <p-card header="¿Qué OTs desea listar?" [style]="{'width': '28rem', 'height': '7rem' }" class="col-xs-12 col-md-6">
       <div class="row">
         <div class="p-field-radiobutton col-xs-12 col-md-3">
-          <p-radioButton id="mias" name="responsable" value="MIAS" [(ngModel)]="responsable"
-            (onClick)="onClick($event)">
+          <p-radioButton id="mias" name="responsable" value="MIAS" [(ngModel)]="responsable" (onClick)="onClick($event)">
           </p-radioButton>
           <label for="mias">Mis OTs</label>
         </div>
         <div class="p-field-radiobutton col-xs-12 col-md-4">
-          <p-radioButton id="otros" name="responsable" value="OTRAS" [(ngModel)]="responsable"
-            (onClick)="onClick($event)">
+          <p-radioButton id="otros" name="responsable" value="OTRAS" [(ngModel)]="responsable" (onClick)="onClick($event)">
           </p-radioButton>
           <label for="otros">OTs de otros</label>
         </div>
         <div class="p-field-radiobutton col-xs-12 col-md-5">
-          <p-radioButton id="todas" name="responsable" value="TODAS" [(ngModel)]="responsable"
-            (onClick)="onClick($event)">
+          <p-radioButton id="todas" name="responsable" value="TODAS" [(ngModel)]="responsable" (onClick)="onClick($event)">
           </p-radioButton>
           <label for="mias">Todas las OTs</label>
         </div>
@@ -65,9 +61,9 @@
 
 <p-tabView (onChange)="onChange($event)" [activeIndex]="selectedIndex">
   <p-tabPanel header="Abiertas" id="abiertas" tooltip="Listar OTs abiertas" [selected]="true">
-    <app-table [config]="configTable" [items]="(items$ | async)"></app-table>   
+    <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
   </p-tabPanel>
-  <p-tabPanel header="Cerradas" id="cerradas" tooltip="Listar OTs cerradas" >
+  <p-tabPanel header="Cerradas" id="cerradas" tooltip="Listar OTs cerradas">
     <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
   </p-tabPanel>
 </p-tabView>

@@ -5,30 +5,37 @@ export const selectUser = createFeatureSelector<fromUser.StateUser>(
   fromUser.UserFeatureKey
 );
 
-export const getUser = createSelector(selectUser,
+export const getUser = createSelector(
+  selectUser,
   (state: fromUser.StateUser) => state.items
 );
 
-export const getUserDetail = createSelector(selectUser,
+export const getUserDetail = createSelector(
+  selectUser,
   (state: fromUser.StateUser) => state.itemsDetail
 );
 
-export const getAreas = createSelector(selectUser,
+export const getAreas = createSelector(
+  selectUser,
   (state: fromUser.StateUser) => state.areas
 );
 
-export const getProviders = createSelector(selectUser,
+export const getProviders = createSelector(
+  selectUser,
   (state: fromUser.StateUser) => state.providers
 );
 
-export const getHighers = createSelector(selectUser,
+export const getHighers = createSelector(
+  selectUser,
   (state: fromUser.StateUser) => state.highers
 );
 
-export const getContracts = createSelector(selectUser,
+export const getContracts = createSelector(
+  selectUser,
   (state: fromUser.StateUser) => state.contract
 );
 
-export const getForm = createSelector(selectUser,
+export const getForm = createSelector(
+  selectUser,
   (state: fromUser.StateUser) => state.form
 );

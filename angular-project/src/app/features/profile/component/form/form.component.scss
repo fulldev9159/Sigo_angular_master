@@ -1,11 +1,11 @@
-:host ::ng-deep{
+:host ::ng-deep {
   display: block;
   position: absolute;
   max-width: 100%;
   background: transparent;
   overflow: hidden;
 
-  .p-listbox{
+  .p-listbox {
     border: 1px solid #ced4da;
   }
 }

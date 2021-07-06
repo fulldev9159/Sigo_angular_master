@@ -179,7 +179,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe((authLogin) => {
+      .subscribe(authLogin => {
         if (authLogin) {
           this.authLogin = authLogin;
           this.otFacade.getOt({

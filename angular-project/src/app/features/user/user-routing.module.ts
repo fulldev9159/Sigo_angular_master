@@ -13,24 +13,24 @@ const routes: Routes = [
       {
         path: 'list-user',
         component: ListUserComponent,
-        data: { state: 'list-user' }
+        data: { state: 'list-user' },
       },
       {
         path: 'form-user',
         component: FormUserComponent,
-        data: { state: 'form-user' }
+        data: { state: 'form-user' },
       },
       {
         path: 'form-user/:id',
         component: FormUserComponent,
-        data: { state: 'form-user' }
-      }
-    ]
-  }
+        data: { state: 'form-user' },
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}

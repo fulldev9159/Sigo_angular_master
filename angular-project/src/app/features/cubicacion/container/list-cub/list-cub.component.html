@@ -5,8 +5,7 @@
       <span>listado de cubicaciones en sistema</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/app/cubicacion/form-cub']" pButton type="button" label="Nueva Cubicación"
-        icon="pi pi-plus" class="p-button-sm mt-5 float-right"></button>
+      <button [routerLink]="['/app/cubicacion/form-cub']" pButton type="button" label="Nueva Cubicación" icon="pi pi-plus" class="p-button-sm mt-5 float-right"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -19,7 +18,7 @@
     <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>
     <ng-container modal-content>
       <app-table [config]="ConfigTableResumen" [items]="detalleCubicacion$|async"></app-table>
-    <!-- <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span> -->
+      <!-- <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span> -->
     </ng-container>
     <ng-container modal-footer></ng-container>
   </app-modal>

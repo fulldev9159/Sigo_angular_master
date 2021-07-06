@@ -1,23 +1,14 @@
 <form>
   <div class="form-group">
     <!-- <label for="exampleFormControlSelect1">Example select</label> -->
-    <select *ngIf="type==='select'"class="form-control" (change)="itemSelected($event)">
+    <select *ngIf="type==='select'" class="form-control" (change)="itemSelected($event)">
       <option>{{ textSeleccion }}</option>
       <option *ngFor="let item of items" value="{{ item.code }}">
         {{ item.name }}
       </option>
     </select>
 
-    <p-listbox
-      *ngIf="type==='listbox'"
-      [options]="items"
-      [metaKeySelection]="false"
-      [checkbox]="true"
-      [filter]="true"
-      [multiple]="true"
-      optionLabel="name"
-      (onChange)="itemSelected($event)"
-    >
+    <p-listbox *ngIf="type==='listbox'" [options]="items" [metaKeySelection]="false" [checkbox]="true" [filter]="true" [multiple]="true" optionLabel="name" (onChange)="itemSelected($event)">
       <ng-template let-data pTemplate="item">
         <div class="country-item">
           <div>{{ data.name }}</div>

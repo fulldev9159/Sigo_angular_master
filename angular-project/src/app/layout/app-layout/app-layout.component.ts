@@ -41,7 +41,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
 
     this.listenToLoading();
     this.loginAuth$ = this.authFacade.getLogin$().pipe(
-      map((loginAuth) => {
+      map(loginAuth => {
         let auth;
         if (loginAuth) {
           const nameArray = loginAuth.usuario_nombre.split(' ');
@@ -71,7 +71,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   listenToLoading(): void {
     this.loadingS.loadingSub
       .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
-      .subscribe((loading) => {
+      .subscribe(loading => {
         this.loading = loading;
       });
   }

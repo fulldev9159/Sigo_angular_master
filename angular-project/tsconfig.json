@@ -13,32 +13,14 @@
     "target": "es2015",
     "module": "es2020",
     "paths": {
-      "@environment": [
-        "src/environments/environment"
-      ],
-      "@layoytOT": [
-        "src/app/layout/layout.module"
-      ],
-      "@layoytOT/*": [
-        "src/app/layout/*"
-      ],
-      "@featureOT/*": [
-        "src/app/feature/*"
-      ],
-      "@uiOT/*": [
-        "src/app/ui/*"
-      ],
-      "@storeOT/*": [
-        "src/app/store/*"
-      ],
-      "@utilsSIGO/*": [
-        "src/app/utils/*"
-      ],
+      "@environment": ["src/environments/environment"],
+      "@layoytOT": ["src/app/layout/layout.module"],
+      "@layoytOT/*": ["src/app/layout/*"],
+      "@featureOT/*": ["src/app/feature/*"],
+      "@uiOT/*": ["src/app/ui/*"],
+      "@storeOT/*": ["src/app/store/*"],
+      "@utilsSIGO/*": ["src/app/utils/*"]
     },
-    "lib": [
-      "es2018",
-      "dom",
-      "es2019"
-    ]
+    "lib": ["es2018", "dom", "es2019"]
   }
 }

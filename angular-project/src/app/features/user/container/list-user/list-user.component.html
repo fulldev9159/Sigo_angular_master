@@ -5,8 +5,7 @@
       <span>listado de usuarios en sistema</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/app/user/form-user']" pButton type="button" label="Nuevo Usuario" icon="pi pi-plus"
-        class="p-button-sm mt-5 float-right" id="add-user-button"></button>
+      <button [routerLink]="['/app/user/form-user']" pButton type="button" label="Nuevo Usuario" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-user-button"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -19,8 +18,7 @@
       <div class="row">
 
         <div class="col-xs-12 col-md-6 pt-2" id="detalle_contrato_marco">
-          <p-listbox [options]="(itemsDetail$|async)?.contratos_marco" optionLabel="contratos_marco"
-            optionDisabled="inactive" [disabled]="true">
+          <p-listbox [options]="(itemsDetail$|async)?.contratos_marco" optionLabel="contratos_marco" optionDisabled="inactive" [disabled]="true">
             <ng-template pTemplate="header">
               Contratos con los que el usuario puede trabajar
             </ng-template>
@@ -37,8 +35,7 @@
           </div>
         </div>
         <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
-          <p-listbox [options]="(itemsDetail$|async)?.perfiles" optionLabel="perfil" optionDisabled="inactive"
-            [disabled]="true">
+          <p-listbox [options]="(itemsDetail$|async)?.perfiles" optionLabel="perfil" optionDisabled="inactive" [disabled]="true">
             <ng-template pTemplate="header">
               Perfiles del usuario
             </ng-template>

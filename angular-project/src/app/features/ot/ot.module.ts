@@ -10,15 +10,20 @@ import { FormComponent } from './component/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailComponent } from './component/detail/detail.component';
 
-
 @NgModule({
-  declarations: [OtComponent, ListOtComponent, FormOtComponent, FormComponent, DetailComponent],
+  declarations: [
+    OtComponent,
+    ListOtComponent,
+    FormOtComponent,
+    FormComponent,
+    DetailComponent,
+  ],
   imports: [
     CommonModule,
     OtRoutingModule,
     UiModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class OtModule { }
+export class OtModule {}

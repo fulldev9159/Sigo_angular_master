@@ -10,7 +10,7 @@ import * as Model from './profile.model';
   providedIn: 'root',
 })
 export class ProfileFacade {
-  constructor(private store: Store<Model.Profile>) { }
+  constructor(private store: Store<Model.Profile>) {}
 
   // PROFILE
   public getProfile(data): void {

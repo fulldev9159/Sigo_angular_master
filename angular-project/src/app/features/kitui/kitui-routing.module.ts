@@ -5,12 +5,12 @@ import { KituiComponent } from './kitui.component';
 const routes: Routes = [
   {
     path: '',
-    component: KituiComponent
-  }
+    component: KituiComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class KituiRoutingModule { }
+export class KituiRoutingModule {}

@@ -8,9 +8,8 @@ describe('ListOtContainer', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListOtComponent ]
-    })
-    .compileComponents();
+      declarations: [ListOtComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

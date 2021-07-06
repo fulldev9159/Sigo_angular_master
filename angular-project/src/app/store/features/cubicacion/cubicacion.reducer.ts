@@ -29,7 +29,7 @@ export const initialStateCubicacion: StateCubicacion = {
 export const reducerCubicacion = createReducer(
   initialStateCubicacion,
 
-  on(CubicacionActions.getCubicacion, (state) => state),
+  on(CubicacionActions.getCubicacion, state => state),
   on(CubicacionActions.getCubicacionSuccess, (state, payload) => ({
     ...state,
     items: payload.cubicacion,
@@ -46,25 +46,25 @@ export const reducerCubicacion = createReducer(
     items: [...state.items, payload.cubicacion],
   })),
 
-  on(CubicacionActions.getContractMarco, (state) => state),
+  on(CubicacionActions.getContractMarco, state => state),
   on(CubicacionActions.getContractMarcoSuccess, (state, payload) => ({
     ...state,
     contractMarco: payload.contractMarco,
   })),
 
-  on(CubicacionActions.getSubContractProviders, (state) => state),
+  on(CubicacionActions.getSubContractProviders, state => state),
   on(CubicacionActions.getSubContractProvidersSuccess, (state, payload) => ({
     ...state,
     subContractedProviders: payload.subContractedProviders,
   })),
 
-  on(CubicacionActions.getSubContractedRegions, (state) => state),
+  on(CubicacionActions.getSubContractedRegions, state => state),
   on(CubicacionActions.getSubContractedRegionsSuccess, (state, payload) => ({
     ...state,
     subContractedRegions: payload.subContractedRegions,
   })),
 
-  on(CubicacionActions.getSubContractedTypeServices, (state) => state),
+  on(CubicacionActions.getSubContractedTypeServices, state => state),
   on(
     CubicacionActions.getSubContractedTypeServicesSuccess,
     (state, payload) => ({
@@ -73,13 +73,13 @@ export const reducerCubicacion = createReducer(
     })
   ),
 
-  on(CubicacionActions.getSubContractedServices, (state) => state),
+  on(CubicacionActions.getSubContractedServices, state => state),
   on(CubicacionActions.getSubContractedServicesSuccess, (state, payload) => ({
     ...state,
     subContractedServices: payload.subContractedServices,
   })),
 
-  on(CubicacionActions.getDetalleCubicacion, (state) => state),
+  on(CubicacionActions.getDetalleCubicacion, state => state),
   on(CubicacionActions.getDetalleCubicacionSuccess, (state, payload) => ({
     ...state,
     detalleCubicacion: payload.detallecubicacion,
@@ -93,7 +93,7 @@ export const reducerCubicacion = createReducer(
     subContractedTypeServices: [],
     subContractedServices: [],
   })),
-  on(CubicacionActions.getAutoSuggest, (state) => state),
+  on(CubicacionActions.getAutoSuggest, state => state),
   on(CubicacionActions.getAutoSuggestSuccess, (state, payload) => ({
     ...state,
     autoSuggest: payload.autosuggests,

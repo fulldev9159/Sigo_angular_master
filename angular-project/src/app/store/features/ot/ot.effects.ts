@@ -30,7 +30,7 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => otActions.getOtSuccess({ ot: res.data.items })),
-            catchError((err) => of(otActions.getOtError({ error: err })))
+            catchError(err => of(otActions.getOtError({ error: err })))
           )
       )
     )
@@ -49,7 +49,7 @@ export class OtEffects {
             map((res: any) =>
               otActions.getPlansSuccess({ plan: res.data.items })
             ),
-            catchError((err) => of(otActions.getPlansError({ error: err })))
+            catchError(err => of(otActions.getPlansError({ error: err })))
           )
       )
     )
@@ -68,7 +68,7 @@ export class OtEffects {
             map((res: any) =>
               otActions.getSiteSuccess({ site: res.data.items })
             ),
-            catchError((err) => of(otActions.getSiteError({ error: err })))
+            catchError(err => of(otActions.getSiteError({ error: err })))
           )
       )
     )
@@ -84,7 +84,7 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => otActions.getPmoSuccess({ pmo: res.data.items })),
-            catchError((err) => of(otActions.getPmoError({ error: err })))
+            catchError(err => of(otActions.getPmoError({ error: err })))
           )
       )
     )
@@ -100,7 +100,7 @@ export class OtEffects {
             map((res: any) =>
               otActions.getIDOpexSuccess({ ids_opex: res.data.items })
             ),
-            catchError((err) => of(otActions.getIDOpexError({ error: err })))
+            catchError(err => of(otActions.getIDOpexError({ error: err })))
           )
       )
     )
@@ -118,7 +118,7 @@ export class OtEffects {
             map((res: any) =>
               otActions.getCuentaSAPSuccess({ cuentas_sap: res.data.items })
             ),
-            catchError((err) => of(otActions.getCuentaSAPError({ error: err })))
+            catchError(err => of(otActions.getCuentaSAPError({ error: err })))
           )
       )
     )
@@ -137,7 +137,7 @@ export class OtEffects {
             map((res: any) =>
               otActions.getCECOSuccess({ cecos: res.data.items })
             ),
-            catchError((err) => of(otActions.getCECOError({ error: err })))
+            catchError(err => of(otActions.getCECOError({ error: err })))
           )
       )
     )
@@ -156,9 +156,7 @@ export class OtEffects {
             map((res: any) =>
               otActions.getBudgetLineSuccess({ lp: res.data.items })
             ),
-            catchError((err) =>
-              of(otActions.getBudgetLineError({ error: err }))
-            )
+            catchError(err => of(otActions.getBudgetLineError({ error: err })))
           )
       )
     )
@@ -178,7 +176,7 @@ export class OtEffects {
             map((res: any) =>
               otActions.getPep2Success({ pep2: res.data.items })
             ),
-            catchError((err) => of(otActions.getPep2Error({ error: err })))
+            catchError(err => of(otActions.getPep2Error({ error: err })))
           )
       )
     )
@@ -199,7 +197,7 @@ export class OtEffects {
             }
             return otActions.getProyectoSuccess({ proyectos: res.data.items });
           }),
-          catchError((err) => of(otActions.getProyectoError({ error: err })))
+          catchError(err => of(otActions.getProyectoError({ error: err })))
         )
       )
     )
@@ -211,7 +209,7 @@ export class OtEffects {
       concatMap((data: any) =>
         this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
           map((res: any) => otActions.postOtSuccess({ ot: res.data.items })),
-          catchError((err) => of(otActions.postOtError({ error: err })))
+          catchError(err => of(otActions.postOtError({ error: err })))
         )
       )
     )

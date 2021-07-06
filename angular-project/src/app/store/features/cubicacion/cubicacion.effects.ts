@@ -41,7 +41,7 @@ export class CubicacionEffects {
                 cubicacion: res.data.items,
               });
             }),
-            catchError((err) => {
+            catchError(err => {
               console.log(err);
               return of(cubicacionActions.getCubicacionError({ error: err }));
             })
@@ -74,7 +74,7 @@ export class CubicacionEffects {
                 ),
               });
             }),
-            catchError((err) =>
+            catchError(err =>
               of(cubicacionActions.getContractMarcoError({ error: err }))
             )
           )
@@ -99,7 +99,7 @@ export class CubicacionEffects {
                 ),
               })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(cubicacionActions.getSubContractProvidersError({ error: err }))
             )
           )
@@ -122,7 +122,7 @@ export class CubicacionEffects {
                 subContractedRegions: res.data.items,
               })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(cubicacionActions.getSubContractedRegionsError({ error: err }))
             )
           )
@@ -146,7 +146,7 @@ export class CubicacionEffects {
                 subContractedTypeServices: res.data.items,
               })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(
                 cubicacionActions.getSubContractedTypeServicesError({
                   error: err,
@@ -181,7 +181,7 @@ export class CubicacionEffects {
                 ),
               })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(
                 cubicacionActions.getSubContractedServicesError({ error: err })
               )
@@ -212,7 +212,7 @@ export class CubicacionEffects {
                 cubicacion: res.data.items,
               });
             }),
-            catchError((err) =>
+            catchError(err =>
               of(cubicacionActions.postCubicacionError({ error: err }))
             )
           )
@@ -238,7 +238,7 @@ export class CubicacionEffects {
                 })),
               })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(cubicacionActions.getAutoSuggestError({ error: err }))
             )
           )
@@ -260,7 +260,7 @@ export class CubicacionEffects {
                 detallecubicacion: res.data.items,
               })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(cubicacionActions.getDetalleCubicacionError({ error: err }))
             )
           )
@@ -284,7 +284,7 @@ export class CubicacionEffects {
                 usuario_id: 1,
                 contrato_marco_id: data.cubicacion.contrato_marco_id,
                 proveedor_id: data.cubicacion.proveedor_id,
-                lpus: res.data.items.map((x) => ({
+                lpus: res.data.items.map(x => ({
                   lpu_id: x.lpu_id,
                   cantidad: x.lpu_cantidad,
                 })),
@@ -295,7 +295,7 @@ export class CubicacionEffects {
                 cubicacion: requestSave,
               });
             }),
-            catchError((err) => {
+            catchError(err => {
               console.log(err);
               return of(
                 cubicacionActions.clonarCubicacionError({ error: err })

@@ -9,15 +9,19 @@ import { FormComponent } from './component/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '@uiOT/ui.module';
 
-
 @NgModule({
-  declarations: [ProfileComponent, ListProComponent, FormProComponent, FormComponent],
+  declarations: [
+    ProfileComponent,
+    ListProComponent,
+    FormProComponent,
+    FormComponent,
+  ],
   imports: [
     CommonModule,
     ProfileRoutingModule,
     UiModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class ProfileModule { }
+export class ProfileModule {}

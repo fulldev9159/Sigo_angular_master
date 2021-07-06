@@ -1,14 +1,20 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-u',
   templateUrl: './form-u.component.html',
   styleUrls: ['./form-u.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormUComponent implements OnInit {
-
   // declarations
   @Input() formUser: FormGroup;
   @Input() areas: any[] = [];
@@ -23,10 +29,9 @@ export class FormUComponent implements OnInit {
   @Output() public save = new EventEmitter();
   @Output() public changeItem = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   addItem(): void {
     this.add.emit();
@@ -47,7 +52,9 @@ export class FormUComponent implements OnInit {
   listMandatory(perfil_id: number): any {
     if (perfil_id) {
       if (this.profilesMandatory && this.profilesMandatory.length > 0) {
-        const perfilObject = this.profilesMandatory.find(m => +m.perfil_id === +perfil_id);
+        const perfilObject = this.profilesMandatory.find(
+          m => +m.perfil_id === +perfil_id
+        );
         if (perfilObject) {
           return perfilObject.perfiles;
         } else {

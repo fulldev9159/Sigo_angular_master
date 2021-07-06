@@ -3,33 +3,40 @@
     justify-content: center;
     align-items: center;
   }
+
   .action-buttons-flex {
     display: flex;
   }
-  div.p-datatable-header.ng-star-inserted > div > span > input {
+
+  div.p-datatable-header.ng-star-inserted>div>span>input {
     height: 30px;
   }
+
   .p-paginator-bottom {
     font-size: 0.8rem;
   }
+
   .p-paginator {
     .p-paginator-current {
       margin-left: auto;
     }
   }
+
   // .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
   //   background: rgba(0, 0, 0, 0.02);
   // }
   .p-datatable.p-datatable-sm .p-datatable-header {
     background: #efefef;
   }
-  .p-datatable .p-datatable-thead > tr > th {
+
+  .p-datatable .p-datatable-thead>tr>th {
     border: 0px;
     border-width: 0px;
     border-right: 1px solid #f4f4f4 !important;
     border-bottom: 1px solid #9e9e9e;
     background-color: #efefef;
   }
+
   td,
   #action-buttons {
     padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
@@ -41,6 +48,7 @@
   .bloqueado {
     color: #ccc !important;
   }
+
   .p-progressbar {
     height: 0.5rem;
     background-color: #d8dadc;
@@ -63,7 +71,7 @@
     }
   }
 
-  th > p-sorticon > i {
+  th>p-sorticon>i {
     font-size: 0.8rem !important;
   }
 
@@ -78,11 +86,11 @@
       padding: 1rem;
     }
 
-    .p-datatable-thead > tr > th {
+    .p-datatable-thead>tr>th {
       text-align: left;
     }
 
-    .p-datatable-tbody > tr > td {
+    .p-datatable-tbody>tr>td {
       cursor: auto;
     }
 
@@ -92,7 +100,7 @@
   }
 
   /* Responsive */
-  .p-datatable-customers .p-datatable-tbody > tr > td .p-column-title {
+  .p-datatable-customers .p-datatable-tbody>tr>td .p-column-title {
     display: none;
   }
 }
@@ -101,15 +109,16 @@
   :host ::ng-deep {
     .p-datatable {
       &.p-datatable-customers {
-        .p-datatable-thead > tr > th,
-        .p-datatable-tfoot > tr > td {
+
+        .p-datatable-thead>tr>th,
+        .p-datatable-tfoot>tr>td {
           display: none !important;
         }
 
-        .p-datatable-tbody > tr {
+        .p-datatable-tbody>tr {
           border-bottom: 1px solid var(--layer-2);
 
-          > td {
+          >td {
             text-align: left;
             display: block;
             border: 0 none !important;
@@ -137,7 +146,7 @@
 }
 
 :host ::ng-deep {
-  .p-datatable-responsive-demo .p-datatable-tbody > tr > td .p-column-title {
+  .p-datatable-responsive-demo .p-datatable-tbody>tr>td .p-column-title {
     display: none;
   }
 }
@@ -146,12 +155,13 @@
   :host ::ng-deep {
     .p-datatable {
       &.p-datatable-responsive-demo {
-        .p-datatable-thead > tr > th,
-        .p-datatable-tfoot > tr > td {
+
+        .p-datatable-thead>tr>th,
+        .p-datatable-tfoot>tr>td {
           display: none !important;
         }
 
-        .p-datatable-tbody > tr > td {
+        .p-datatable-tbody>tr>td {
           text-align: left;
           display: block;
           width: 100%;

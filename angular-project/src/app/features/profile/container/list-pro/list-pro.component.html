@@ -5,8 +5,7 @@
       <span>listado de perfiles en sistema</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/app/profile/form-pro']" pButton type="button" label="Nuevo Perfil" icon="pi pi-plus"
-        class="p-button-sm mt-5 float-right" id="add-profile-button" ></button>
+      <button [routerLink]="['/app/profile/form-pro']" pButton type="button" label="Nuevo Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-profile-button"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -17,22 +16,21 @@
     <ng-container card-header-title>
     </ng-container>
     <ng-container card-header-actions>
-     
+
     </ng-container>
     <ng-container card-body>
-      
+
       <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
     </ng-container>
   </app-card>
 
-  
+
   <app-modal [display]="DisplayModal" (CloseEvent)="DisplayModal=false">
     <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>
     <ng-container modal-content>
       <div class="row">
         <div *ngFor="let item of ModalDataPermissions" class="col-xs-12 col-md-4 pt-2" id="permisos-modulo-{{item.module}}">
-          <p-listbox [options]="item.permissions" optionLabel="nombre_corto" optionDisabled="inactive"
-            [disabled]="true">
+          <p-listbox [options]="item.permissions" optionLabel="nombre_corto" optionDisabled="inactive" [disabled]="true">
             <ng-template pTemplate="header">
               {{item.module}}
             </ng-template>

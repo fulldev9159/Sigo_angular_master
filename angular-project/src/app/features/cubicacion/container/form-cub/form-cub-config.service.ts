@@ -50,7 +50,7 @@ export class FormCubConfig {
     formCubicacion
       .get('contrato_marco_id')
       .valueChanges.pipe(takeUntil(destroyInstance$))
-      .subscribe((contrato_marco_id) => {
+      .subscribe(contrato_marco_id => {
         if (contrato_marco_id) {
           this.cubageFacade.getSubContractedProvidersAction({
             contrato_marco_id: +contrato_marco_id,
@@ -65,7 +65,7 @@ export class FormCubConfig {
     formCubicacion
       .get('subcontrato_id')
       .valueChanges.pipe(takeUntil(destroyInstance$))
-      .subscribe((subcontratoId) => {
+      .subscribe(subcontratoId => {
         if (subcontratoId) {
           const [subcontratos, proveedor] = subcontratoId.split('-');
           const idProve = 'proveedor_id';
@@ -83,10 +83,12 @@ export class FormCubConfig {
     formCubicacion
       .get('region_id')
       .valueChanges.pipe(takeUntil(destroyInstance$))
-      .subscribe((region_id) => {
+      .subscribe(region_id => {
         if (region_id) {
-          const [subcontratos, proveedor] =
-            formCubicacion.value.subcontrato_id.split('-');
+          const [
+            subcontratos,
+            proveedor,
+          ] = formCubicacion.value.subcontrato_id.split('-');
           this.cubageFacade.getSubContractedTypeServicesAction({
             subcontrato_id: subcontratos.split(',').map((x: number) => +x),
             region_id: +region_id,
@@ -101,10 +103,12 @@ export class FormCubConfig {
     formCubicacion
       .get('tipo_servicio_id')
       .valueChanges.pipe(takeUntil(destroyInstance$))
-      .subscribe((tipo_servicio_id) => {
+      .subscribe(tipo_servicio_id => {
         if (tipo_servicio_id) {
-          const [subcontratos, proveedor] =
-            formCubicacion.value.subcontrato_id.split('-');
+          const [
+            subcontratos,
+            proveedor,
+          ] = formCubicacion.value.subcontrato_id.split('-');
           this.cubageFacade.getSubContractedServicesAction({
             subcontrato_id: subcontratos.split(',').map((x: number) => +x),
             region_id: +formCubicacion.value.region_id,

@@ -1,14 +1,11 @@
 <div class="card">
-  <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" [rowHover]="true"
-    dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos"
-    [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
+  <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
     <ng-template *ngIf="config.header" pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <h5 class="p-m-0">{{config.headerConfig.title}}</h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-            [placeholder]="config.headerConfig.searchText" />
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" [placeholder]="config.headerConfig.searchText" />
         </span>
       </div>
     </ng-template>
@@ -19,15 +16,15 @@
             <th *ngSwitchCase="'CHECKBOX'" style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th *ngSwitchDefault [pSortableColumn]="column.sort"  [ngStyle]="{'width': column.width}">{{column.field}} <p-sortIcon
-              *ngIf="column.sort" [field]="column.sort">
-            </p-sortIcon>
+            <th *ngSwitchDefault [pSortableColumn]="column.sort" [ngStyle]="{'width': column.width}">{{column.field}}
+              <p-sortIcon *ngIf="column.sort" [field]="column.sort">
+              </p-sortIcon>
             </th>
-            <!-- <th *ngSwitchCase="'BOOLEANTEXT'" [pSortableColumn]="column.sort" >{{column.field}} <p-sortIcon 
+            <!-- <th *ngSwitchCase="'BOOLEANTEXT'" [pSortableColumn]="column.sort" >{{column.field}} <p-sortIcon
               [field]="column.sort">
             </p-sortIcon>
             </th>
-            <th *ngSwitchCase="'TEXT'" [pSortableColumn]="column.sort" [ngStyle]="{'width': column.width}">{{column.field}} 
+            <th *ngSwitchCase="'TEXT'" [pSortableColumn]="column.sort" [ngStyle]="{'width': column.width}">{{column.field}}
               <p-sortIcon *ngIf="column.sort"
                 [field]="column.sort">
               </p-sortIcon>
@@ -51,7 +48,7 @@
           <td *ngSwitchCase="'CHECKBOX'">
             <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
-          <td *ngSwitchCase="'TEXT-TITLECASE'" >{{item[column.header]| titlecase}}</td>
+          <td *ngSwitchCase="'TEXT-TITLECASE'">{{item[column.header]| titlecase}}</td>
           <td *ngSwitchCase="'TEXT'">{{item[column.header]}}</td>
           <td *ngSwitchCase="'INPUTNUMBER'">
             <input type="number" pInputText style="width: 100%;" (change)="item[column.onchange($event,item)]" value="{{item[column.header]}}" />
@@ -67,18 +64,15 @@
             <ng-container *ngIf="config.headerConfig.actionsType==='Buttons'">
               <div *ngFor="let button of config.body.actions">
                 <div *ngIf="item[button.disabled]" pTooltip="{{button.tooltipDisabled}}">
-                  <button [disabled]="item[button.disabled]" pButton pRipple [icon]="button.icon"
-                    [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                  <button [disabled]="item[button.disabled]" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
                 </div>
-                
-                <button *ngIf="!item[button.disabled]" pButton pRipple [icon]="button.icon"
-                  [class]="button.class" (click)="button.onClick($event,item, rowIndex);"
-                  ></button>
+
+                <button *ngIf="!item[button.disabled]" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
               </div>
             </ng-container>
             <!-- <ng-container *ngIf="config.body.actions.length >4||config.body.headers.length>6"> -->
-              <ng-container *ngIf="config.headerConfig.actionsType==='Menu'">
-               <app-menu [actions]="config.body.actions" [item]="item" [rowIndex]="rowIndex" ></app-menu>
+            <ng-container *ngIf="config.headerConfig.actionsType==='Menu'">
+              <app-menu [actions]="config.body.actions" [item]="item" [rowIndex]="rowIndex"></app-menu>
             </ng-container>
           </td>
         </ng-container>

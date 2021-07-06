@@ -27,48 +27,48 @@ export const initialStateUser: StateUser = {
 export const reducerUser = createReducer(
   initialStateUser,
 
-  on(UserActions.getUser, (state) => state),
+  on(UserActions.getUser, state => state),
   on(UserActions.getUserSuccess, (state, payload) => ({
     ...state,
     items: payload.user,
   })),
 
-  on(UserActions.getUserDetail, (state) => state),
+  on(UserActions.getUserDetail, state => state),
   on(UserActions.getUserDetailSuccess, (state, payload) => ({
     ...state,
     itemsDetail: payload.userDetail,
   })),
 
-  on(UserActions.getArea, (state) => state),
+  on(UserActions.getArea, state => state),
   on(UserActions.getAreaSuccess, (state, payload) => ({
     ...state,
     areas: payload.area,
   })),
 
-  on(UserActions.getProvider, (state) => state),
+  on(UserActions.getProvider, state => state),
   on(UserActions.getProviderSuccess, (state, payload) => ({
     ...state,
     providers: payload.provider,
   })),
 
-  on(UserActions.getHigher, (state) => state),
+  on(UserActions.getHigher, state => state),
   on(UserActions.getHigherSuccess, (state, payload) => ({
     ...state,
     highers: payload.higher && payload.higher.length > 0 ? payload.higher : [],
   })),
-  on(UserActions.getContracts, (state) => state),
+  on(UserActions.getContracts, state => state),
   on(UserActions.getContractsSuccess, (state, payload) => ({
     ...state,
     contract: payload.contract,
   })),
   on(UserActions.deleteUserSuccess, (state, payload) => ({
     ...state,
-    items: [...state.items.filter((i) => +i.id !== +payload.userId)],
+    items: [...state.items.filter(i => +i.id !== +payload.userId)],
   })),
   on(UserActions.activateUserSuccess, (state, payload) => ({
     ...state,
     items: [
-      ...state.items.map((x) => {
+      ...state.items.map(x => {
         const activo = payload.userId === x.id ? !x.activo : x.activo;
         return {
           ...x,

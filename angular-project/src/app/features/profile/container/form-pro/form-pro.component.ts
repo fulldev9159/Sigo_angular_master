@@ -48,7 +48,7 @@ export class FormProComponent implements OnInit, OnDestroy {
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance$))
-      .subscribe((authLogin) => {
+      .subscribe(authLogin => {
         if (authLogin) {
           // asignamos datos de usuario autenticado a variable local
           this.authLogin = authLogin;
@@ -97,7 +97,7 @@ export class FormProComponent implements OnInit, OnDestroy {
         this.profileFacade
           .getFormProfile$()
           .pipe(takeUntil(this.destroyInstance$))
-          .subscribe((res) => {
+          .subscribe(res => {
             if (res) {
               // inicializamos formulario
               this.formProfile.patchValue(res);

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -15,10 +20,9 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   selector: 'app-form-user',
   templateUrl: './form-user.component.html',
   styleUrls: ['./form-user.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormUserComponent implements OnInit, OnDestroy {
-
   // declarations
   public user_id: number;
   public perfilId: number;
@@ -47,18 +51,20 @@ export class FormUserComponent implements OnInit, OnDestroy {
     const subscription = this.authFacade
       .getLogin$()
       .pipe(take(1), takeUntil(this.destroyInstance$))
-      .subscribe((authLogin) => {
+      .subscribe(authLogin => {
         if (authLogin) {
           // asignamos datos de usuario autenticado a variable local
           this.authLogin = authLogin;
 
-          this.userFacade.getProviders({ token: this.authLogin.token, interno: true });
+          this.userFacade.getProviders({
+            token: this.authLogin.token,
+            interno: true,
+          });
 
           this.profileFacade.getProfile({ token: this.authLogin.token });
         }
       });
     this.pageSubscription.push(subscription);
-
   }
 
   ngOnInit(): void {
@@ -69,70 +75,76 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
     this.providers$ = this.userFacade.getProviders$();
 
-    this.profiles$ = this.profileFacade.getProfile$()
-      .pipe(map(prof => {
+    this.profiles$ = this.profileFacade.getProfile$().pipe(
+      map(prof => {
         return prof;
-      }), takeUntil(this.destroyInstance$));
+      }),
+      takeUntil(this.destroyInstance$)
+    );
 
-    this.highers$ = this.userFacade.getHighers$()
-      .pipe(
-        map(highers => {
-          if (highers && highers.length > 0) {
-            const perfil = this.formUser.get('perfiles').value.findIndex(p => +p.perfil_id === +this.perfilId);
-            if (perfil !== -1) {
-              this.profiles.push({ perfil_id: +this.perfilId, perfiles: highers });
-              this.profilesMandatory$ = of(this.profiles);
-            }
+    this.highers$ = this.userFacade.getHighers$().pipe(
+      map(highers => {
+        if (highers && highers.length > 0) {
+          const perfil = this.formUser
+            .get('perfiles')
+            .value.findIndex(p => +p.perfil_id === +this.perfilId);
+          if (perfil !== -1) {
+            this.profiles.push({
+              perfil_id: +this.perfilId,
+              perfiles: highers,
+            });
+            this.profilesMandatory$ = of(this.profiles);
           }
-          return highers;
-        }), takeUntil(this.destroyInstance$));
+        }
+        return highers;
+      }),
+      takeUntil(this.destroyInstance$)
+    );
 
     this.contracts$ = this.userFacade.getContracts$();
 
     const subscription = this.rutaActiva.params
       .pipe(take(1), takeUntil(this.destroyInstance$))
-      .subscribe(
-        (params: Params) => {
-          if (params.id) {
-            this.user_id = params.id;
-          } else {
-            this.addProfile();
-          }
-
-          if (this.user_id) {
-            const subscription2 = this.userFacade.getForm$()
-              .pipe(take(1), takeUntil(this.destroyInstance$))
-              .subscribe(res => {
-                if (res) {
-                  // inicializamos formulario
-                  this.formUser.patchValue(res);
-                  if (res.perfiles.length > 0) {
-                    res.perfiles.forEach(profile => {
-                      this.addProfile(profile);
-                    });
-
-                    // agrupamos en perfil_id
-                    const groups = _.chain(res.perfiles)
-                      .groupBy('perfil_id')
-                      .map((value, key) => ({ perfil_id: key, profiles: value }))
-                      .value();
-
-                    // rescatamos jefaturas
-                    groups.forEach(group => {
-                      this.changePerfil(+group.perfil_id);
-                    });
-                  }
-                } else {
-                  this.router.navigate(['/app/user/list-user']);
-                }
-              });
-            this.pageSubscription.push(subscription2);
-          }
+      .subscribe((params: Params) => {
+        if (params.id) {
+          this.user_id = params.id;
+        } else {
+          this.addProfile();
         }
-      );
+
+        if (this.user_id) {
+          const subscription2 = this.userFacade
+            .getForm$()
+            .pipe(take(1), takeUntil(this.destroyInstance$))
+            .subscribe(res => {
+              if (res) {
+                // inicializamos formulario
+                this.formUser.patchValue(res);
+                if (res.perfiles.length > 0) {
+                  res.perfiles.forEach(profile => {
+                    this.addProfile(profile);
+                  });
+
+                  // agrupamos en perfil_id
+                  const groups = _.chain(res.perfiles)
+                    .groupBy('perfil_id')
+                    .map((value, key) => ({ perfil_id: key, profiles: value }))
+                    .value();
+
+                  // rescatamos jefaturas
+                  groups.forEach(group => {
+                    this.changePerfil(+group.perfil_id);
+                  });
+                }
+              } else {
+                this.router.navigate(['/app/user/list-user']);
+              }
+            });
+          this.pageSubscription.push(subscription2);
+        }
+      });
 
     this.pageSubscription.push(subscription);
-
   }
 
   initForm(form?: Model.Form): void {
@@ -141,28 +153,39 @@ export class FormUserComponent implements OnInit, OnDestroy {
       username: [null, Validators.required],
       nombres: [null, Validators.required],
       apellidos: [null, Validators.required],
-      rut: [null, Validators.compose([Validators.required, Validators.maxLength(15)])],
+      rut: [
+        null,
+        Validators.compose([Validators.required, Validators.maxLength(15)]),
+      ],
       firma: null,
       celular: null,
-      email: [null, Validators.compose([Validators.required, Validators.email])],
+      email: [
+        null,
+        Validators.compose([Validators.required, Validators.email]),
+      ],
       provider: 'false',
       proveedor_id: null,
       area_id: [null, Validators.required],
       perfiles: this.fb.array([]),
-      contratos_marco: null
+      contratos_marco: null,
     });
 
-    const subscriptionForm = this.formUser.get('proveedor_id').valueChanges
-      .pipe(takeUntil(this.destroyInstance$))
+    const subscriptionForm = this.formUser
+      .get('proveedor_id')
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe(p => {
         if (p) {
-          this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: +p });
+          this.userFacade.getContracts({
+            token: this.authLogin.token,
+            proveedor_id: +p,
+          });
         }
       });
     this.pageSubscription.push(subscriptionForm);
 
-    const subscriptionForm2 = this.formUser.get('provider').valueChanges
-      .pipe(takeUntil(this.destroyInstance$))
+    const subscriptionForm2 = this.formUser
+      .get('provider')
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
       .subscribe(provider => {
         if (provider) {
           if (provider === 'false') {
@@ -170,16 +193,31 @@ export class FormUserComponent implements OnInit, OnDestroy {
             this.formUser.get('proveedor_id').setValue(null);
             this.formUser.get('contratos_marco').setValue(null);
             // this.proveedor_id = null;
-            this.userFacade.getProviders({ token: this.authLogin.token, interno: true });
-            this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null });
-            this.userFacade.getAreas({ token: this.authLogin.token, interno: true });
+            this.userFacade.getProviders({
+              token: this.authLogin.token,
+              interno: true,
+            });
+            this.userFacade.getContracts({
+              token: this.authLogin.token,
+              proveedor_id: null,
+            });
+            this.userFacade.getAreas({
+              token: this.authLogin.token,
+              interno: true,
+            });
           }
 
           if (provider === 'true') {
             this.formUser.get('proveedor_id').setValue(null);
             this.formUser.get('contratos_marco').setValue(null);
-            this.userFacade.getProviders({ token: this.authLogin.token, interno: false });
-            this.userFacade.getAreas({ token: this.authLogin.token, interno: false });
+            this.userFacade.getProviders({
+              token: this.authLogin.token,
+              interno: false,
+            });
+            this.userFacade.getAreas({
+              token: this.authLogin.token,
+              interno: false,
+            });
             this.userFacade.getContractsSuccess({ contract: null });
           }
         }
@@ -188,11 +226,13 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.pageSubscription.push(subscriptionForm2);
 
     // rescatamos contratos para movistar
-    this.userFacade.getContracts({ token: this.authLogin.token, proveedor_id: null });
+    this.userFacade.getContracts({
+      token: this.authLogin.token,
+      proveedor_id: null,
+    });
 
     // rescatamos areas
     this.userFacade.getAreas({ token: this.authLogin.token, interno: true });
-
   }
 
   get perfiles(): FormArray {
@@ -200,10 +240,12 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   addProfile(profile?: any): void {
-    this.perfiles.push(this.fb.group({
-      perfil_id: [profile ? profile.perfil_id : null, Validators.required],
-      persona_a_cargo_id: profile ? profile.persona_a_cargo_id : null
-    }));
+    this.perfiles.push(
+      this.fb.group({
+        perfil_id: [profile ? profile.perfil_id : null, Validators.required],
+        persona_a_cargo_id: profile ? profile.persona_a_cargo_id : null,
+      })
+    );
   }
 
   removeProfile(index: number): void {
@@ -215,11 +257,17 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
     // verificamos si existen jefes para perfil seleccionado
     // de existir no ejecutamos petición
-    const inArray = this.profiles.findIndex(p => +p.perfil_id === +this.perfilId);
+    const inArray = this.profiles.findIndex(
+      p => +p.perfil_id === +this.perfilId
+    );
     if (inArray === -1) {
       this.userFacade.getHighers({
         token: this.authLogin.token,
-        proveedor_id: +this.formUser.value.proveedor_id !== 0 ? +this.formUser.value.proveedor_id : 1, perfil_id: perfilId
+        proveedor_id:
+          +this.formUser.value.proveedor_id !== 0
+            ? +this.formUser.value.proveedor_id
+            : 1,
+        perfil_id: perfilId,
       });
     }
   }
@@ -230,7 +278,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
       form.proveedor_id = +form.proveedor_id;
       form.area_id = +form.area_id;
       form.perfiles = form.perfiles.map(p => {
-        return { perfil_id: +p.perfil_id, persona_a_cargo_id: p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null };
+        return {
+          perfil_id: +p.perfil_id,
+          persona_a_cargo_id:
+            p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null,
+        };
       });
       this.userFacade.postUser({ user: form });
       this.messageService.add({
@@ -246,7 +298,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
       form.proveedor_id = +form.proveedor_id;
       form.area_id = +form.area_id;
       form.perfiles = form.perfiles.map(p => {
-        return { perfil_id: +p.perfil_id, persona_a_cargo_id: p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null };
+        return {
+          perfil_id: +p.perfil_id,
+          persona_a_cargo_id:
+            p.persona_a_cargo_id !== null ? +p.persona_a_cargo_id : null,
+        };
       });
       this.userFacade.editUser({ user: form });
       this.messageService.add({
@@ -262,7 +318,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyInstance$.next(true);
     this.destroyInstance$.complete();
-    this.pageSubscription.forEach((subscription) => subscription.unsubscribe());
+    this.pageSubscription.forEach(subscription => subscription.unsubscribe());
   }
-
 }

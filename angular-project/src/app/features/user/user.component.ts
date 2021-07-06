@@ -1,5 +1,10 @@
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { scaleDownFromTop, scaleDownFromBottom } from 'ngx-router-animations';
 import { Subject } from 'rxjs';
 
@@ -17,17 +22,15 @@ import { Subject } from 'rxjs';
   //     })),
   //   ])
   // ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnInit, OnDestroy {
-
   // declarations
   private destroyInstance$: Subject<boolean> = new Subject();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destroyInstance$.next(true);
@@ -37,5 +40,4 @@ export class UserComponent implements OnInit, OnDestroy {
   getState(outlet): void {
     return outlet.activatedRouteData.state;
   }
-
 }
