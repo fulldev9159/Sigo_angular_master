@@ -10,17 +10,22 @@ import { environment } from '@environment';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private http: HttpClient) { }
+  constructor(private actions$: Actions, private http: HttpClient) {}
 
   postLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.login),
       concatMap((data: any) =>
-        this.http.post(`${environment.api}/login_new`,
-          { username: data.login.username, password: data.login.password }).pipe(map((res: any) =>
-            authActions.loginSuccess({ login: res.data }),
-          ),
-            catchError(err => of(authActions.loginSuccess({ login: err }))
-            ))))
+        this.http
+          .post(`${environment.api}/login_new`, {
+            username: data.login.username,
+            password: data.login.password,
+          })
+          .pipe(
+            map((res: any) => authActions.loginSuccess({ login: res.data })),
+            catchError(err => of(authActions.loginSuccess({ login: err })))
+          )
+      )
+    )
   );
 }

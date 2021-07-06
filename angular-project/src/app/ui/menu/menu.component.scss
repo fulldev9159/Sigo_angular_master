@@ -10,12 +10,10 @@
 
 
 @media (max-width: 767px) {
-  :host ::ng-deep{
+  :host ::ng-deep {
     .p-menu {
       margin: -95px 3px 0 0;
       width: 34%;
     }
   }
 }
-
-

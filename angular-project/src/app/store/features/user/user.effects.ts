@@ -21,7 +21,7 @@ export class UserEffects {
           map((res: any) =>
             userActions.getUserSuccess({ user: res.data.items })
           ),
-          catchError((err) => of(userActions.getUserError({ error: err })))
+          catchError(err => of(userActions.getUserError({ error: err })))
         )
       )
     )
@@ -37,9 +37,7 @@ export class UserEffects {
             map((res: any) =>
               userActions.getUserByIdSuccess({ user: res.data.items })
             ),
-            catchError((err) =>
-              of(userActions.getUserByIdError({ error: err }))
-            )
+            catchError(err => of(userActions.getUserByIdError({ error: err })))
           )
       )
     )
@@ -57,7 +55,7 @@ export class UserEffects {
             map((res: any) =>
               userActions.getUserDetailSuccess({ userDetail: res.data })
             ),
-            catchError((err) => of(userActions.getUserError({ error: err })))
+            catchError(err => of(userActions.getUserError({ error: err })))
           )
       )
     )
@@ -76,7 +74,7 @@ export class UserEffects {
                 res: res.status,
               })
             ),
-            catchError((err) => of(userActions.deleteUserError({ error: err })))
+            catchError(err => of(userActions.deleteUserError({ error: err })))
           )
       )
     )
@@ -98,9 +96,7 @@ export class UserEffects {
                 res: res.status,
               })
             ),
-            catchError((err) =>
-              of(userActions.activateUserError({ error: err }))
-            )
+            catchError(err => of(userActions.activateUserError({ error: err })))
           )
       )
     )
@@ -119,7 +115,7 @@ export class UserEffects {
             map((res: any) =>
               userActions.getAreaSuccess({ area: res.data.items })
             ),
-            catchError((err) => of(userActions.getAreaError({ error: err })))
+            catchError(err => of(userActions.getAreaError({ error: err })))
           )
       )
     )
@@ -139,9 +135,7 @@ export class UserEffects {
             map((res: any) =>
               userActions.getProviderSuccess({ provider: res.data.items })
             ),
-            catchError((err) =>
-              of(userActions.getProviderError({ error: err }))
-            )
+            catchError(err => of(userActions.getProviderError({ error: err })))
           )
       )
     )
@@ -161,7 +155,7 @@ export class UserEffects {
             map((res: any) =>
               userActions.getHigherSuccess({ higher: res.data.items })
             ),
-            catchError((err) => of(userActions.getHigherError({ error: err })))
+            catchError(err => of(userActions.getHigherError({ error: err })))
           )
       )
     )
@@ -181,9 +175,7 @@ export class UserEffects {
                 contract: res.data.items.length > 0 ? res.data.items : [],
               })
             ),
-            catchError((err) =>
-              of(userActions.getContractsError({ error: err }))
-            )
+            catchError(err => of(userActions.getContractsError({ error: err })))
           )
       )
     )
@@ -195,7 +187,7 @@ export class UserEffects {
       concatMap((data: any) =>
         this.http.post(`${environment.api}/usuario/create`, data.user).pipe(
           map((res: any) => userActions.postUserSuccess()),
-          catchError((err) => of(userActions.postUserError({ error: err })))
+          catchError(err => of(userActions.postUserError({ error: err })))
         )
       )
     )
@@ -207,7 +199,7 @@ export class UserEffects {
       concatMap((data: any) =>
         this.http.post(`${environment.api}/usuario/edit`, data.user).pipe(
           map((res: any) => userActions.editUserSuccess()),
-          catchError((err) => of(userActions.editUserError({ error: err })))
+          catchError(err => of(userActions.editUserError({ error: err })))
         )
       )
     )

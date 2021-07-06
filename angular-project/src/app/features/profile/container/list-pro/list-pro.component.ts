@@ -155,7 +155,7 @@ export class ListProComponent implements OnInit, OnDestroy {
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe((authLogin) => {
+      .subscribe(authLogin => {
         if (authLogin) {
           // asignamos datos de usuario autenticado a variable local
           this.authLogin = authLogin;
@@ -167,7 +167,7 @@ export class ListProComponent implements OnInit, OnDestroy {
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe((authLogin) => {
+      .subscribe(authLogin => {
         if (authLogin) {
           this.profileFacade.getProfile({ token: authLogin.token });
         }

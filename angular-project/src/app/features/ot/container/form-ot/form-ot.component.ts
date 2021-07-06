@@ -63,7 +63,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance$))
-      .subscribe((authLogin) => {
+      .subscribe(authLogin => {
         if (authLogin) {
           this.authLogin = authLogin;
           this.formOt.get('gestor_id').setValue(this.authLogin.usuario_id);
@@ -73,14 +73,14 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
     this.cubicaciones$ = this.cubageFacade
       .getCubicacionSelector$()
-      .pipe(map((cubicaciones) => (this.cubicaciones = cubicaciones)));
+      .pipe(map(cubicaciones => (this.cubicaciones = cubicaciones)));
     this.planes$ = this.otFacade
       .getPlansSelector$()
-      .pipe(map((plans) => (this.plans = plans)));
+      .pipe(map(plans => (this.plans = plans)));
     this.sitios$ = this.otFacade.getSitesSelector$().pipe(
       map(
-        (sitios) =>
-          (this.sitios = sitios.map((x) => ({
+        sitios =>
+          (this.sitios = sitios.map(x => ({
             ...x,
             nombre: `${x.codigo} - ${x.nombre}`,
           })))
@@ -88,26 +88,26 @@ export class FormOtComponent implements OnInit, OnDestroy {
     );
     this.pmos$ = this.otFacade
       .getPmosSelector$()
-      .pipe(map((pmos) => (this.pmos = pmos)));
+      .pipe(map(pmos => (this.pmos = pmos)));
     this.lps$ = this.otFacade
       .getLpsSelector$()
-      .pipe(map((lps) => (this.lps = lps)));
+      .pipe(map(lps => (this.lps = lps)));
     this.pep2s$ = this.otFacade
       .getPep2sSelector$()
-      .pipe(map((pep2s) => (this.pep2s = pep2s)));
+      .pipe(map(pep2s => (this.pep2s = pep2s)));
     this.ids_opex$ = this.otFacade
       .getIDsOpexSelector$()
-      .pipe(map((ids_opex) => (this.ids_opex = ids_opex)));
+      .pipe(map(ids_opex => (this.ids_opex = ids_opex)));
     this.cuentas_sap$ = this.otFacade
       .getCuentaSAPSelector$()
-      .pipe(map((cuentas_sap) => (this.cuentas_sap = cuentas_sap)));
+      .pipe(map(cuentas_sap => (this.cuentas_sap = cuentas_sap)));
     this.cecos$ = this.otFacade
       .getCECOSelector$()
-      .pipe(map((cecos) => (this.cecos = cecos)));
+      .pipe(map(cecos => (this.cecos = cecos)));
     this.otFacade.getProyectoAction();
     this.proyectos$ = this.otFacade
       .getProyectoSelector$()
-      .pipe(map((proyectos) => (this.proyectos = proyectos)));
+      .pipe(map(proyectos => (this.proyectos = proyectos)));
   }
 
   ngOnDestroy(): void {
@@ -153,10 +153,10 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt
       .get('cubicacion_id')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((cubicacionId) => {
+      .subscribe(cubicacionId => {
         if (cubicacionId) {
           this.cubicacionSeleccionada = this.cubicaciones.find(
-            (c) => +c.id === +cubicacionId
+            c => +c.id === +cubicacionId
           );
           if (this.cubicacionSeleccionada) {
             this.otFacade.getPlansAction({
@@ -173,9 +173,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt
       .get('plan_proyecto_id')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((plan_proyecto_id) => {
+      .subscribe(plan_proyecto_id => {
         if (plan_proyecto_id) {
-          const plan = this.plans.find((p) => +p.id === +plan_proyecto_id);
+          const plan = this.plans.find(p => +p.id === +plan_proyecto_id);
           if (plan) {
             this.formOt.get('plan_nombre').setValue(plan.nombre);
           }
@@ -193,9 +193,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt
       .get('sitio_id')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((sitio_id) => {
+      .subscribe(sitio_id => {
         if (sitio_id) {
-          const site = this.sitios.find((s) => +s.id === +sitio_id);
+          const site = this.sitios.find(s => +s.id === +sitio_id);
           // const id_sustento_controls = 'costos';
           // const rbutton = this.formOt.controls[id_sustento_controls].value;
           if (site) {
@@ -218,7 +218,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt
       .get('pmo_codigo')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((pmo_codigo) => {
+      .subscribe(pmo_codigo => {
         if (pmo_codigo) {
           this.otFacade.getLpsAction({ pmo_codigo });
 
@@ -231,7 +231,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt
       .get('id_opex_codigo')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((id_opex_codigo) => {
+      .subscribe(id_opex_codigo => {
         if (id_opex_codigo) {
           this.otFacade.getCuentaSAPAction({
             id_opex_codigo,
@@ -245,7 +245,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt
       .get('cuenta_sap_codigo')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((cuenta_sap_codigo) => {
+      .subscribe(cuenta_sap_codigo => {
         if (cuenta_sap_codigo) {
           this.otFacade.getCECOAction({
             id_opex_codigo: this.formOt.value.id_opex_codigo,
@@ -260,7 +260,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt
       .get('lp_codigo')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((lp_codigo) => {
+      .subscribe(lp_codigo => {
         if (lp_codigo) {
           this.otFacade.getPep2sAction({
             pmo_codigo: this.formOt.value.pmo_codigo,
@@ -275,10 +275,10 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt
       .get('costos')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe((costos) => {
+      .subscribe(costos => {
         if (costos) {
           const site = this.sitios.find(
-            (s) => +s.id === +this.formOt.value.sitio_id
+            s => +s.id === +this.formOt.value.sitio_id
           );
           if (costos === 'capex') {
             this.otFacade.getPmosAction({

@@ -60,9 +60,9 @@ export interface RequestSaveCubicacion {
   lpus: LpusRequest[];
 }
 
-export interface LpusRequest{
+export interface LpusRequest {
   lpu_id: number;
-    cantidad: number;
+  cantidad: number;
 }
 
 export interface AutoSuggestRequest {

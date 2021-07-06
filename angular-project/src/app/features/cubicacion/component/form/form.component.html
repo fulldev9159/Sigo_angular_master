@@ -3,31 +3,23 @@
     <div class="row">
       <div class="col-12 ">
         <label for="">Nombre</label>
-          <div class="ng-autocomplete">
-            <ng-autocomplete 
-              [data]="autoSuggestData"
-              [searchKeyword]="'name'"
-              (selected)='NameSelectedDummy($event)'
-              (inputChanged)='onChangeAutoSuggest($event)'
-              (inputFocused)='onFocused($event)'
-              [itemTemplate]="itemTemplate"
-              [notFoundTemplate]="notFoundTemplate">                                 
-            </ng-autocomplete>
-            
-            <ng-template #itemTemplate let-item>
+        <div class="ng-autocomplete">
+          <ng-autocomplete [data]="autoSuggestData" [searchKeyword]="'name'" (selected)='NameSelectedDummy($event)' (inputChanged)='onChangeAutoSuggest($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+
+          <ng-template #itemTemplate let-item>
             <a [innerHTML]="item.name"></a>
-            </ng-template>
-            
-            <ng-template #notFoundTemplate let-notFound>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
             <div [innerHTML]="notFound"></div>
-            </ng-template>
-            </div>
+          </ng-template>
+        </div>
         <br>
       </div>
       <div class="col-12 ">
         <label for="">Contrato</label>
-        <select formControlName="contrato_marco_id" class="form-control" name="" id="select-contratoMarco"
-          name="select-contratoMarco">
+        <select formControlName="contrato_marco_id" class="form-control" name="" id="select-contratoMarco" name="select-contratoMarco">
           <option value="null" selected disabled>Seleccione contrato</option>
           <option *ngFor="let constract of contratosMarcos" [value]="constract.id">{{constract.nombre}}</option>
         </select>
@@ -35,9 +27,7 @@
       </div>
       <div class="col-12 ">
         <label for="">Proveedor</label>
-        <select formControlName="subcontrato_id"
-          [attr.disabled]="Providers ? Providers.length === 0 ? '' : null : null "
-          class="form-control" name="" id="select-proveedor" name="select-proveedor">
+        <select formControlName="subcontrato_id" [attr.disabled]="Providers ? Providers.length === 0 ? '' : null : null " class="form-control" name="" id="select-proveedor" name="select-proveedor">
           <option value="null" selected disabled>Seleccione proveedor</option>
           <option *ngFor="let provider of Providers" [value]="provider.subcontrato_id + '-' + provider.id">{{provider.nombre}}</option>
         </select>
@@ -45,9 +35,7 @@
       </div>
       <div class="col-12 ">
         <label for="">Región</label>
-        <select formControlName="region_id"
-          [attr.disabled]="Regions ? Regions.length === 0 ? '' : null : null"
-          class="form-control" name="" id="select-region" name="select-region">
+        <select formControlName="region_id" [attr.disabled]="Regions ? Regions.length === 0 ? '' : null : null" class="form-control" name="" id="select-region" name="select-region">
           <option value="null" selected disabled>Seleccione región</option>
           <option *ngFor="let region of Regions" [value]="region.id">{{region.nombre}}</option>
         </select>
@@ -57,9 +45,7 @@
   </div>
   <div class="col-xs-12 col-md-8">
     <label for="">Tipo Servicio</label>
-    <select formControlName="tipo_servicio_id"
-      [attr.disabled]="TypeServices ? TypeServices?.length === 0 ? '' : null : null"
-      class="form-control mb-1" name="" id="select-tipoServicio" name="select-tipoServicio">
+    <select formControlName="tipo_servicio_id" [attr.disabled]="TypeServices ? TypeServices?.length === 0 ? '' : null : null" class="form-control mb-1" name="" id="select-tipoServicio" name="select-tipoServicio">
       <option value="null" selected disabled>Seleccione un tipo de servicio</option>
       <option *ngFor="let typeService of TypeServices" [value]="typeService.id">{{typeService.nombre}}
       </option>
@@ -67,8 +53,7 @@
 
     <div style="height: 300px;max-height: 300px">
       <label for="">Servicios LPU</label>
-      <p-listbox [metaKeySelection]="false" [options]="Services" [checkbox]="true" [filter]="true" formControlName="lpus"
-        [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpusSelectedDummy($event)" [listStyle]="{'max-height':'203px'}" >
+      <p-listbox [metaKeySelection]="false" [options]="Services" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpusSelectedDummy($event)" [listStyle]="{'max-height':'203px'}">
         <ng-template let-data pTemplate="item">
           <div class="country-item">
             <div>{{ data.lpu_nombre }}</div>
@@ -87,7 +72,6 @@
 
   <div class="col-xs-12 offset-md-7 col-md-5 text-right button-guardar-cubicacion">
     <button (click)="cancelAction();" class="btn btn-light mr-2"><em class="pi pi-refresh mr-1"></em>Cancelar</button>
-    <button (click)="saveAction();" [disabled]="!formCubicacion.valid" class="btn btn-primary"><em
-        class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
+    <button (click)="saveAction();" [disabled]="!formCubicacion.valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
   </div>
 </div>

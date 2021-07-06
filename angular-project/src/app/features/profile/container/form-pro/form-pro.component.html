@@ -5,8 +5,7 @@
       <span>formulario para crear un nuevo perfil</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/app/profile/list-pro']" pButton type="button" label="volver" icon="pi pi-arrow-left"
-        class="p-button-sm mt-5 float-right p-button-outlined " id="volver-button"></button>
+      <button [routerLink]="['/app/profile/list-pro']" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined " id="volver-button"></button>
     </div>
     <div class="col-12">
       <hr>
@@ -43,15 +42,12 @@
             </div>
           </div>
           <div class="col-12 text-right mt-2 p-0">
-            <button (click)="saveProfile();" [disabled]="!formProfile.valid" class="btn btn-primary"
-              id="guardar-button"><em class="pi pi-save mr-1"></em>Guardar</button>
+            <button (click)="saveProfile();" [disabled]="!formProfile.valid" class="btn btn-primary" id="guardar-button"><em class="pi pi-save mr-1"></em>Guardar</button>
           </div>
         </div>
 
-        <div *ngFor="let item of (permissions$ | async)" class="col-xs-12 col-md-4 pt-2"
-          id="modulos-pefil-{{item.module}}">
-          <p-listbox [options]="item.permissions" optionValue="id" [(ngModel)]="selectedItems" checkbox="checkbox"
-            [multiple]="true" [filter]="true" optionLabel="nombre_corto">
+        <div *ngFor="let item of (permissions$ | async)" class="col-xs-12 col-md-4 pt-2" id="modulos-pefil-{{item.module}}">
+          <p-listbox [options]="item.permissions" optionValue="id" [(ngModel)]="selectedItems" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="nombre_corto">
             <ng-template pTemplate="header">
               {{item.module}}
             </ng-template>

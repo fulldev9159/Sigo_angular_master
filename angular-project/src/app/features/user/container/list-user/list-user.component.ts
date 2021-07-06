@@ -212,7 +212,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
     this.authFacade
       .getLogin$()
       .pipe(take(1), takeUntil(this.destroyInstance))
-      .subscribe((authLogin) => {
+      .subscribe(authLogin => {
         if (authLogin) {
           this.authLogin = authLogin;
         }
@@ -221,7 +221,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
     this.userFacade
       .getUserDetail$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe((userData) => {
+      .subscribe(userData => {
         if (
           (userData.perfiles.length > 0 ||
             userData.contratos_marco.length > 0) &&
@@ -242,7 +242,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
               rut: this.item.rut,
               perfiles:
                 userData.perfiles.length > 0
-                  ? userData.perfiles.map((p) => {
+                  ? userData.perfiles.map(p => {
                       return {
                         perfil_id: +p.id,
                         persona_a_cargo_id: p.persona_a_cargo_id,
@@ -251,7 +251,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
                   : [],
               contratos_marco:
                 userData.contratos_marco.length > 0
-                  ? userData.contratos_marco.map((c) => c.id)
+                  ? userData.contratos_marco.map(c => c.id)
                   : null,
             },
           });

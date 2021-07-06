@@ -12,12 +12,8 @@ describe('FormCubContainer', () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [FormCubContainerComponent],
-      providers: [
-        FormBuilder,
-        FormGroup,
-      ],
-    })
-      .compileComponents();
+      providers: [FormBuilder, FormGroup],
+    }).compileComponents();
   });
 
   beforeEach(() => {

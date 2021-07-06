@@ -5,15 +5,7 @@
       <span>formulario para crear una cubicación</span>
     </div>
     <div class="col">
-      <button
-        [routerLink]="['/app/cubicacion/list-cub']"
-        pButton
-        type="button"
-        label="volver"
-        icon="pi pi-arrow-left"
-        class="p-button-sm mt-5 float-right p-button-outlined"
-        (click)="resetDataPage()"
-      ></button>
+      <button [routerLink]="['/app/cubicacion/list-cub']" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="resetDataPage()"></button>
     </div>
     <div class="col-12">
       <hr />
@@ -22,24 +14,7 @@
     <app-card [classCardHeader]="'bg-secondary text-white'">
       <ng-container card-header-title> </ng-container>
       <ng-container card-body>
-        <app-form
-          [formCubicacion]="formCubicacion"
-          [autoSuggestData]="autoSuggestItems$ | async"
-          (ChangeSearchSuggest)="ChangeSearchSuggest($event)"
-          (NameSelected)="NameSelected($event)"
-          [contratosMarcos]="contratosMarcos$ | async"
-          [Providers]="Providers$ | async"
-          [Regions]="Regions$ | async"
-          [TypeServices]="TypeServices$ | async"
-          [Services]="Services$ | async"
-          (lpusSelected)="lpusSelected($event)"
-          [lpusCarrito]="lpusCarrito"
-          (CantidadSelected) ="CantidadSelected($event)"
-          (BorrarLPUCarrito) = "BorrarLPUCarrito($event)"
-          [total]="total"
-          (cancel)="cancel($event)"
-          (save)="save($event)"
-        ></app-form>
+        <app-form [formCubicacion]="formCubicacion" [autoSuggestData]="autoSuggestItems$ | async" (ChangeSearchSuggest)="ChangeSearchSuggest($event)" (NameSelected)="NameSelected($event)" [contratosMarcos]="contratosMarcos$ | async" [Providers]="Providers$ | async" [Regions]="Regions$ | async" [TypeServices]="TypeServices$ | async" [Services]="Services$ | async" (lpusSelected)="lpusSelected($event)" [lpusCarrito]="lpusCarrito" (CantidadSelected)="CantidadSelected($event)" (BorrarLPUCarrito)="BorrarLPUCarrito($event)" [total]="total" (cancel)="cancel($event)" (save)="save($event)"></app-form>
       </ng-container>
     </app-card>
   </div>

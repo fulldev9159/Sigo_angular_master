@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { fromTopEasing, fromBottomEasing, scaleDownFromBottom, scaleDownFromTop } from 'ngx-router-animations';
+import {
+  fromTopEasing,
+  fromBottomEasing,
+  scaleDownFromBottom,
+  scaleDownFromTop,
+} from 'ngx-router-animations';
 
 @Component({
   selector: 'app-cubicacion',
@@ -8,21 +13,36 @@ import { fromTopEasing, fromBottomEasing, scaleDownFromBottom, scaleDownFromTop 
   styleUrls: ['./cubicacion.component.scss'],
   animations: [
     trigger('rotateCarousel', [
-      transition('list-cub => form-cub', useAnimation(scaleDownFromTop, {
-        params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
-      })),
-      transition('form-cub => list-cub', useAnimation(scaleDownFromBottom, {
-        params: { enterTiming: '0.4', leaveTiming: '0.4', enterDelay: '0', leaveDelay: '0' }
-      })),
-    ])
+      transition(
+        'list-cub => form-cub',
+        useAnimation(scaleDownFromTop, {
+          params: {
+            enterTiming: '0.4',
+            leaveTiming: '0.4',
+            enterDelay: '0',
+            leaveDelay: '0',
+          },
+        })
+      ),
+      transition(
+        'form-cub => list-cub',
+        useAnimation(scaleDownFromBottom, {
+          params: {
+            enterTiming: '0.4',
+            leaveTiming: '0.4',
+            enterDelay: '0',
+            leaveDelay: '0',
+          },
+        })
+      ),
+    ]),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CubicacionComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   getState(outlet): void {
     return outlet.activatedRouteData.state;

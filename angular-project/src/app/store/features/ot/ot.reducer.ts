@@ -58,7 +58,7 @@ export const initialStateOt: StateOt = {
 export const reducerOt = createReducer(
   initialStateOt,
 
-  on(OtActions.getOt, (state) => state),
+  on(OtActions.getOt, state => state),
   on(OtActions.getOtSuccess, (state, payload) => ({
     ...state,
     items: payload.ot,
@@ -75,55 +75,55 @@ export const reducerOt = createReducer(
   //   items: [...state.items, payload.ot],
   // })),
 
-  on(OtActions.getPlans, (state) => state),
+  on(OtActions.getPlans, state => state),
   on(OtActions.getPlansSuccess, (state, payload) => ({
     ...state,
     planes: payload.plan,
   })),
 
-  on(OtActions.getSite, (state) => state),
+  on(OtActions.getSite, state => state),
   on(OtActions.getSiteSuccess, (state, payload) => ({
     ...state,
     sites: payload.site,
   })),
 
-  on(OtActions.getPmo, (state) => state),
+  on(OtActions.getPmo, state => state),
   on(OtActions.getPmoSuccess, (state, payload) => ({
     ...state,
     pmos: payload.pmo,
   })),
 
-  on(OtActions.getIDOpex, (state) => state),
+  on(OtActions.getIDOpex, state => state),
   on(OtActions.getIDOpexSuccess, (state, payload) => ({
     ...state,
     ids_opex: payload.ids_opex,
   })),
 
-  on(OtActions.getCuentaSAP, (state) => state),
+  on(OtActions.getCuentaSAP, state => state),
   on(OtActions.getCuentaSAPSuccess, (state, payload) => ({
     ...state,
     cuentas_sap: payload.cuentas_sap,
   })),
 
-  on(OtActions.getCECO, (state) => state),
+  on(OtActions.getCECO, state => state),
   on(OtActions.getCECOSuccess, (state, payload) => ({
     ...state,
     cecos: payload.cecos,
   })),
 
-  on(OtActions.getBudgetLine, (state) => state),
+  on(OtActions.getBudgetLine, state => state),
   on(OtActions.getBudgetLineSuccess, (state, payload) => ({
     ...state,
     budgetLines: payload.lp,
   })),
 
-  on(OtActions.getPep2, (state) => state),
+  on(OtActions.getPep2, state => state),
   on(OtActions.getPep2Success, (state, payload) => ({
     ...state,
     pep2s: payload.pep2,
   })),
 
-  on(OtActions.getProyecto, (state) => state),
+  on(OtActions.getProyecto, state => state),
   on(OtActions.getProyectoSuccess, (state, payload) => ({
     ...state,
     proyectos: payload.proyectos,

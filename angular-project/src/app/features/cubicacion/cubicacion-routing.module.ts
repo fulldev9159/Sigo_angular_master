@@ -13,24 +13,24 @@ export const routes: Routes = [
       {
         path: 'list-cub',
         component: ListCubComponent,
-        data: { state: 'list-cub' }
+        data: { state: 'list-cub' },
       },
       {
         path: 'form-cub',
         component: FormCubContainerComponent,
-        data: { state: 'form-cub' }
+        data: { state: 'form-cub' },
       },
       {
         path: 'form-cub/:id',
         component: FormCubContainerComponent,
-        data: { state: 'form-cub' }
-      }
-    ]
-  }
+        data: { state: 'form-cub' },
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CubicacionRoutingModule { }
+export class CubicacionRoutingModule {}

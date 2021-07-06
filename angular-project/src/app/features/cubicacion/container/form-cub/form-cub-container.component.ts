@@ -54,7 +54,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance$))
-      .subscribe((authLogin) => {
+      .subscribe(authLogin => {
         if (authLogin) {
           this.authLogin = authLogin;
         }
@@ -78,10 +78,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.Providers$ = this.cubageFacade.getProvidersSelector$();
     this.Regions$ = this.cubageFacade
       .getRegionsSelector$()
-      .pipe(map((regiones) => (this.Regiones = regiones)));
+      .pipe(map(regiones => (this.Regiones = regiones)));
     this.TypeServices$ = this.cubageFacade
       .getTypeServicesSelector$()
-      .pipe(map((tiposervicios) => (this.TipoServicios = tiposervicios)));
+      .pipe(map(tiposervicios => (this.TipoServicios = tiposervicios)));
     this.Services$ = this.cubageFacade.getServicesSelector$();
   }
 
@@ -109,20 +109,19 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     const regionControls = 'region_id';
     const regionID = this.formCubicacion.controls[regionControls].value;
     const tipoServicioControls = 'tipo_servicio_id';
-    const tipoServicioID =
-      this.formCubicacion.controls[tipoServicioControls].value;
-    const regionName = this.Regiones.filter((x) => x.id === +regionID)[0]
-      .codigo;
+    const tipoServicioID = this.formCubicacion.controls[tipoServicioControls]
+      .value;
+    const regionName = this.Regiones.filter(x => x.id === +regionID)[0].codigo;
     const tipoServicioName = this.TipoServicios.filter(
-      (x) => x.id === +tipoServicioID
+      x => x.id === +tipoServicioID
     )[0].nombre;
 
-    this.lpusCarrito = event.value.map((x) => {
+    this.lpusCarrito = event.value.map(x => {
       let cantidad = 1;
       let lpu_subtotal = x.lpu_precio;
       if (this.lpusCarrito.length > 0) {
         const lpuExistente = this.lpusCarrito.filter(
-          (y) => +y.lpu_id === +x.lpu_id
+          y => +y.lpu_id === +x.lpu_id
         );
         if (lpuExistente.length > 0) {
           cantidad = lpuExistente[0].cantidad;
@@ -143,7 +142,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   CantidadSelected(event: any): void {
-    this.lpusCarrito = this.lpusCarrito.map((x) => {
+    this.lpusCarrito = this.lpusCarrito.map(x => {
       if (x.lpu_id === event.item.lpu_id) {
         return {
           ...x,
@@ -162,12 +161,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   BorrarLPUCarrito(event: any): void {
     this.lpusCarrito = this.lpusCarrito.filter(
-      (lpu) => lpu.lpu_id !== event.item.lpu_id
+      lpu => lpu.lpu_id !== event.item.lpu_id
     );
     const lpuIDControls = 'lpus';
     this.formCubicacion.controls[lpuIDControls].setValue(
       this.formCubicacion.controls[lpuIDControls].value.filter(
-        (lpu) => lpu.lpu_id !== event.item.lpu_id
+        lpu => lpu.lpu_id !== event.item.lpu_id
       )
     );
     console.log(this.formCubicacion.controls[lpuIDControls].value);
@@ -189,7 +188,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       // usuario_id: +this.authLogin.usuario_id,
       contrato_marco_id: +form.contrato_marco_id,
       proveedor_id: +form.proveedor_id,
-      lpus: this.lpusCarrito.map((x) => ({
+      lpus: this.lpusCarrito.map(x => ({
         lpu_id: x.lpu_id,
         cantidad: x.cantidad,
       })),

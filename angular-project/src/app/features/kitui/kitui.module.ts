@@ -6,10 +6,6 @@ import { UiModule } from '@uiOT/ui.module';
 
 @NgModule({
   declarations: [KituiComponent],
-  imports: [
-    CommonModule,
-    KituiRoutingModule,
-    UiModule
-  ]
+  imports: [CommonModule, KituiRoutingModule, UiModule],
 })
-export class KituiModule { }
+export class KituiModule {}

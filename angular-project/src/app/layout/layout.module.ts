@@ -5,15 +5,9 @@ import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { RouterModule } from '@angular/router';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
-
-
 @NgModule({
   declarations: [AppLayoutComponent, AuthLayoutComponent],
   exports: [AppLayoutComponent, AuthLayoutComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    NgxPermissionsModule.forChild()
-  ]
+  imports: [CommonModule, RouterModule, NgxPermissionsModule.forChild()],
 })
-export class LayoutModule { }
+export class LayoutModule {}

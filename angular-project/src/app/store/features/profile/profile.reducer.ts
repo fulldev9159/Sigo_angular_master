@@ -13,31 +13,31 @@ export interface StateProfile {
 export const initialStateProfile: StateProfile = {
   items: [],
   permissions: [],
-  form: null
+  form: null,
 };
 
 export const reducerProfile = createReducer(
   initialStateProfile,
 
-  on(ProfileActions.getProfile, (state) => state),
+  on(ProfileActions.getProfile, state => state),
   on(ProfileActions.getProfileSuccess, (state, payload) => ({
     ...state,
     items: payload.profile,
   })),
 
-  on(ProfileActions.getPermissions, (state) => state),
+  on(ProfileActions.getPermissions, state => state),
   on(ProfileActions.getPermissionsSuccess, (state, payload) => ({
     ...state,
-    permissions: payload.permissions
+    permissions: payload.permissions,
   })),
 
   on(ProfileActions.setFormProfile, (state, payload) => ({
     ...state,
-    form: payload.form
+    form: payload.form,
   })),
 
   on(ProfileActions.deleteProfileSuccess, (state, payload) => ({
     ...state,
-    items: [...state.items.filter(i => +i.id !== +payload.profileId)]
-  })),
+    items: [...state.items.filter(i => +i.id !== +payload.profileId)],
+  }))
 );

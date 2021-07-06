@@ -5,8 +5,7 @@
       <span>formulario de ingreso</span>
     </div>
     <div class="col">
-      <button [routerLink]="['/app/user/list-user']" pButton type="button" label="volver" icon="pi pi-arrow-left"
-        class="p-button-sm mt-5 float-right p-button-outlined "></button>
+      <button [routerLink]="['/app/user/list-user']" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined "></button>
     </div>
     <div class="col-12">
       <hr>
@@ -17,11 +16,7 @@
     <ng-container card-body>
       <div class="row">
         <div class="col-12">
-          <app-form-u [formUser]="formUser" [areas]="(areas$ | async)" [highers]="(highers$ | async)"
-            [profiles]="(profiles$ | async)" [providers]="(providers$ | async)" [contracts]="(contracts$ | async)"
-            [profilesMandatory]="(profilesMandatory$ | async)"
-            (add)="addProfile();" (delete)="removeProfile($event);" (changeItem)="changePerfil($event);"
-            (save)="save($event);"></app-form-u>
+          <app-form-u [formUser]="formUser" [areas]="(areas$ | async)" [highers]="(highers$ | async)" [profiles]="(profiles$ | async)" [providers]="(providers$ | async)" [contracts]="(contracts$ | async)" [profilesMandatory]="(profilesMandatory$ | async)" (add)="addProfile();" (delete)="removeProfile($event);" (changeItem)="changePerfil($event);" (save)="save($event);"></app-form-u>
         </div>
       </div>
     </ng-container>

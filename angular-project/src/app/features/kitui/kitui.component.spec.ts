@@ -8,9 +8,8 @@ describe('KituiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ KituiComponent ]
-    })
-    .compileComponents();
+      declarations: [KituiComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

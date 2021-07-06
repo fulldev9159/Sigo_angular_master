@@ -14,10 +14,8 @@
       <h3>Como utilizar</h3>
       <hr />
       <div>
-        <code
-          >&lt;app-table [config]="configTable" [items]="data"&gt;
-          &lt;app-table&gt;</code
-        >
+        <code>&lt;app-table [config]="configTable" [items]="data"&gt;
+          &lt;app-table&gt;</code>
       </div>
       <br />
       <h4>JSON de configuración = config</h4>
@@ -36,28 +34,17 @@
     <ng-container card-header-title> Componente selección </ng-container>
     <ng-container card-body>
       <h4>Type Select</h4>
-      <app-seleccion
-        [textSeleccion]="'Seleccione una ciudad'"
-        [items]="itemsExampleSeleccion"
-        (selected)="itemSelected($event)"
-        [type]="'select'"
-      ></app-seleccion>
+      <app-seleccion [textSeleccion]="'Seleccione una ciudad'" [items]="itemsExampleSeleccion" (selected)="itemSelected($event)" [type]="'select'"></app-seleccion>
       <h4>Type listbox</h4>
-      <app-seleccion
-        [items]="itemsExampleSeleccion"
-        (selected)="itemSelected($event)"
-        [type]="'listbox'"
-      ></app-seleccion>
+      <app-seleccion [items]="itemsExampleSeleccion" (selected)="itemSelected($event)" [type]="'listbox'"></app-seleccion>
       <br />
 
       <h3>Como utilizar</h3>
       <hr />
       <div>
-        <code
-          >&lt;app-seleccion [textSeleccion]="'Seleccione una ciudad'"
+        <code>&lt;app-seleccion [textSeleccion]="'Seleccione una ciudad'"
           [items]="itemsExampleSeleccion" [type]="'select'
-          (selected)="itemSelected($event)" &gt; &lt;app-seleccion&gt;</code
-        >
+          (selected)="itemSelected($event)" &gt; &lt;app-seleccion&gt;</code>
       </div>
       <br />
       <h4>Propiedades:</h4>
@@ -102,10 +89,8 @@
       <h3>Como utilizar</h3>
       <hr />
       <div>
-        <code
-          >&lt;app-datepicker (selected)="dateSelected($event)" &gt;
-          &lt;app-datepicker&gt;</code
-        >
+        <code>&lt;app-datepicker (selected)="dateSelected($event)" &gt;
+          &lt;app-datepicker&gt;</code>
       </div>
       <br />
       <h4>Funciones:</h4>
@@ -126,16 +111,12 @@
       <button class="btn btn-sm btn-outline-success" (click)="testModal()">
         Botón Modal
       </button>
-      <app-modal
-        [display]="testDisplayModal"
-        (CloseEvent)="testDisplayModal = false"
-      >
+      <app-modal [display]="testDisplayModal" (CloseEvent)="testDisplayModal = false">
         <ng-container modal-header-title>
           <span>Modal title example</span>
         </ng-container>
         <ng-container modal-content>
-          <span
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+          <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
             enim erat, fermentum et elit et, laoreet scelerisque sapien.
             Suspendisse feugiat erat eu ante ullamcorper rhoncus. Aliquam
             iaculis metus ut egestas commodo. Sed bibendum turpis eget facilisis
@@ -167,8 +148,7 @@
             dolor ante vehicula mauris, in malesuada lorem felis vitae orci.
             Cras risus dolor, lacinia ac tincidunt eu, consectetur quis ex. Nunc
             auctor vel enim a viverra. Etiam eu mauris augue. Morbi tristique
-            dolor et neque volutpat maximus. Nunc at orci elit.</span
-          >
+            dolor et neque volutpat maximus. Nunc at orci elit.</span>
         </ng-container>
         <ng-container modal-footer>
           <span>Footer buttons</span>
@@ -179,8 +159,7 @@
       <h3>Como utilizar</h3>
       <hr />
       <div>
-        <code
-          >&lt;app-modal [display]="testDisplayModal"
+        <code>&lt;app-modal [display]="testDisplayModal"
           (CloseEvent)="testDisplayModal=false" &gt;
           <br />
           &lt;ng-container modal-header-title &gt;&lt;ng-container &gt;
@@ -189,8 +168,7 @@
           <br />
           &lt;ng-container modal-footer &gt;&lt;ng-container &gt;
           <br />
-          &lt;app-modal&gt;</code
-        >
+          &lt;app-modal&gt;</code>
       </div>
       <br />
       <h4>Funciones:</h4>

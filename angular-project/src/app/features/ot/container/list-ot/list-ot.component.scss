@@ -21,40 +21,50 @@
     border: #00507a;
     font-size: 90%;
   }
+
   .p-card-title {
     color: #00507a;
     font-size: 90%;
   }
+
   .p-tabview-title {
     color: #00507a;
     font-size: 90%;
     margin: 0 2rem;
     line-height: 1.5;
   }
+
   .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
     background: #5c9bbf;
   }
-  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link > span {
+
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link>span {
     color: #fff;
   }
+
   a:hover {
     text-decoration: none;
   }
+
   // .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link:focus {
   //   border: 3px solid black;
   // }
   .p-tabview .p-tabview-nav {
     background: none;
   }
+
   .p-tabview .p-tabview-panels {
     background: #5c9bbf;
   }
+
   .p-tabview .p-tabview-nav li .p-tabview-nav-link {
     background: #efefef;
   }
+
   .p-tabview .p-tabview-nav li .p-tabview-nav-link {
     border-color: #5c9bbf;
   }
+
   .p-tabview .p-tabview-nav li .p-tabview-nav-link {
     background: #5c9bbf70;
   }

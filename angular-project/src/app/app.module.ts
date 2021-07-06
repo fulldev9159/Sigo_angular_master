@@ -5,9 +5,18 @@ import { environment } from '@environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx/store';
+import {
+  ActionReducer,
+  ActionReducerMap,
+  MetaReducer,
+  StoreModule,
+} from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { routerReducer, RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import {
+  routerReducer,
+  RouterState,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LayoutModule } from './layout/layout.module';
 import { RouterModule } from '@angular/router';
@@ -32,7 +41,9 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 
 const reducers: ActionReducerMap<any> = { routerReducer };
 
-export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+export function localStorageSyncReducer(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
   return localStorageSync({ keys: ['auth'], rehydrate: true })(reducer);
 }
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
@@ -61,18 +72,18 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     LayoutModule,
     StoreAllModule,
     UiModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtAppInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpRequestInterceptor,
-      multi: true
+      multi: true,
     },
     // {
     //   provide: HTTP_INTERCEPTORS,
@@ -80,8 +91,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     //   multi: true
     // },
     { provide: LOCALE_ID, useValue: 'es-CL' },
-    LoadingService
+    LoadingService,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

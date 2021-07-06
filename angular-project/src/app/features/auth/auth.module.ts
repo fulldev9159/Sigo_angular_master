@@ -14,7 +14,7 @@ import { UiModule } from '@uiOT/ui.module';
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    UiModule
-  ]
+    UiModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

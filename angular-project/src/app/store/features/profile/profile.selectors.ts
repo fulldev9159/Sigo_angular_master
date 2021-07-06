@@ -5,14 +5,17 @@ export const selectProfile = createFeatureSelector<fromProfile.StateProfile>(
   fromProfile.ProfileFeatureKey
 );
 
-export const getProfiles = createSelector(selectProfile,
+export const getProfiles = createSelector(
+  selectProfile,
   (state: fromProfile.StateProfile) => state.items
 );
 
-export const getPermissions = createSelector(selectProfile,
+export const getPermissions = createSelector(
+  selectProfile,
   (state: fromProfile.StateProfile) => state.permissions
 );
 
-export const getProfile = createSelector(selectProfile,
+export const getProfile = createSelector(
+  selectProfile,
   (state: fromProfile.StateProfile) => state.form
 );

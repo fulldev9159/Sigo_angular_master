@@ -1,7 +1,6 @@
 //_myTheme.scss
 
-$theme-colors: (
-  "primary": #00507a,
+$theme-colors: ("primary": #00507a,
   "secondary": #51c6d9,
   "success": #8cc63f,
   "light": #d3e1e4,
@@ -16,8 +15,7 @@ $enable-gradients: false;
 $enable-grid-classes: true;
 $enable-print-styles: true;
 
-$grid-breakpoints: (
-  xs: 0,
+$grid-breakpoints: (xs: 0,
   sm: 576px,
   md: 768px,
   lg: 992px,

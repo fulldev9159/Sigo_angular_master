@@ -13,24 +13,24 @@ export const routes: Routes = [
       {
         path: 'list-ot',
         component: ListOtComponent,
-        data: { state: 'list-ot' }
+        data: { state: 'list-ot' },
       },
       {
         path: 'form-ot',
         component: FormOtComponent,
-        data: { state: 'form-ot' }
+        data: { state: 'form-ot' },
       },
       {
         path: 'form-ot/:id',
         component: FormOtComponent,
-        data: { state: 'form-ot' }
-      }
-    ]
-  }
+        data: { state: 'form-ot' },
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class OtRoutingModule { }
+export class OtRoutingModule {}

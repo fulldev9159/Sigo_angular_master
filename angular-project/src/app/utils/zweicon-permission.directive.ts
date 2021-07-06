@@ -1,13 +1,19 @@
-import { Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive({
-  selector: '[appZweiconPermission]'
+  selector: '[appZweiconPermission]',
 })
 export class ZweiconPermissionDirective implements OnInit {
-
   // declarations
   private currentUser;
   private permissions = [];
@@ -18,11 +24,11 @@ export class ZweiconPermissionDirective implements OnInit {
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private authFacade: AuthFacade
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.authFacade.getLogin$()
+    this.authFacade
+      .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
       .subscribe(loginAuth => {
         this.currentUser = loginAuth;
@@ -43,12 +49,12 @@ export class ZweiconPermissionDirective implements OnInit {
 
     if (this.currentUser && this.currentUser.permissions) {
       for (const checkPermission of this.permissions) {
-        const permissionFound = this.currentUser.permissions.find(x => x.toUpperCase() === checkPermission.toUpperCase());
-
+        const permissionFound = this.currentUser.permissions.find(
+          x => x.toUpperCase() === checkPermission.toUpperCase()
+        );
       }
     }
 
     return hasPermission;
   }
-
 }

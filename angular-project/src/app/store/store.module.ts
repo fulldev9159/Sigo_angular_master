@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-
 // AUTH STORE
 import { AuthEffects } from './features/auth/auth.effects';
 import * as formAuthReduce from './features/auth/auth.reducer';
@@ -36,7 +35,10 @@ import * as formUserReduce from './features/user/user.reducer';
 
     // AUTH STORE
     EffectsModule.forFeature([AuthEffects]),
-    StoreModule.forFeature(formAuthReduce.authFeatureKey, formAuthReduce.reducerAuth),
+    StoreModule.forFeature(
+      formAuthReduce.authFeatureKey,
+      formAuthReduce.reducerAuth
+    ),
     // AUTH STORE
 
     // OT STORE
@@ -46,18 +48,27 @@ import * as formUserReduce from './features/user/user.reducer';
 
     // CUBICACION STORE
     EffectsModule.forFeature([CubicacionEffects]),
-    StoreModule.forFeature(formCubicacionReduce.CubicacionFeatureKey, formCubicacionReduce.reducerCubicacion),
+    StoreModule.forFeature(
+      formCubicacionReduce.CubicacionFeatureKey,
+      formCubicacionReduce.reducerCubicacion
+    ),
     // CUBICACION STORE
 
     // PROFILE STORE
     EffectsModule.forFeature([ProfileEffects]),
-    StoreModule.forFeature(formProfileReduce.ProfileFeatureKey, formProfileReduce.reducerProfile),
+    StoreModule.forFeature(
+      formProfileReduce.ProfileFeatureKey,
+      formProfileReduce.reducerProfile
+    ),
     // PROFILE STORE
 
     // USER STORE
     EffectsModule.forFeature([UserEffects]),
-    StoreModule.forFeature(formUserReduce.UserFeatureKey, formUserReduce.reducerUser)
+    StoreModule.forFeature(
+      formUserReduce.UserFeatureKey,
+      formUserReduce.reducerUser
+    ),
     // USER STORE
-  ]
+  ],
 })
-export class StoreAllModule { }
+export class StoreAllModule {}

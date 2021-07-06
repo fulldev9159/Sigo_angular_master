@@ -42,7 +42,7 @@ export class ProfileEffects {
             map((res: any) =>
               profileActions.getProfileSuccess({ profile: res.data })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(profileActions.getProfileError({ error: err }))
             )
           )
@@ -64,7 +64,7 @@ export class ProfileEffects {
                 permissions: res.data.items,
               })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(profileActions.getPermissionsError({ error: err }))
             )
           )
@@ -90,7 +90,7 @@ export class ProfileEffects {
               // this.handleError(error);
             }
           ),
-          catchError((err) =>
+          catchError(err =>
             of(profileActions.getPermissionsError({ error: err }))
           )
         )
@@ -104,9 +104,7 @@ export class ProfileEffects {
       concatMap((data: any) =>
         this.http.post(`${environment.api}/perfiles/edit`, data).pipe(
           map((res: any) => profileActions.editProfileSuccess()),
-          catchError((err) =>
-            of(profileActions.editProfileError({ error: err }))
-          )
+          catchError(err => of(profileActions.editProfileError({ error: err })))
         )
       )
     )
@@ -125,7 +123,7 @@ export class ProfileEffects {
                 res: res.status,
               })
             ),
-            catchError((err) =>
+            catchError(err =>
               of(profileActions.deleteProfileError({ error: err }))
             )
           )

@@ -7,14 +7,17 @@ select,
 input {
   font-size: 0.9rem;
 }
-.ng-autocomplete{
+
+.ng-autocomplete {
   width: 100%;
 }
+
 .button-guardar-cubicacion {
   margin-top: 58px;
 }
+
 :host ::ng-deep {
-  p-listbox > div {
+  p-listbox>div {
     height: 93%;
     border-color: #ced4da;
   }
@@ -29,10 +32,11 @@ input {
     left: 77%;
   }
 
-  .autocomplete-container{
+  .autocomplete-container {
     box-shadow: none;
   }
-  .autocomplete-container .input-container input{
+
+  .autocomplete-container .input-container input {
     border: 1px solid #ced4da;
   }
 }
