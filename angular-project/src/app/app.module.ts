@@ -3,6 +3,8 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '@environment';
 
+import { DataModule } from '@data';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
@@ -56,6 +58,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
+    DataModule.forRoot(environment),
     StoreModule.forRoot(
       { router: routerReducer },
       {

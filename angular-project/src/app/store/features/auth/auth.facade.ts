@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as authActions from './auth.actions';
 import * as authSelectors from './auth.selectors';
-import { Login, LoginAuth } from './auth.model';
+import { Login } from '@data';
+import { LoginAuth } from './auth.model';
 
 @Injectable({
   providedIn: 'root',

@@ -12,7 +12,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { map, filter, takeUntil } from 'rxjs/operators';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
-import { Login } from '@storeOT/features/auth/auth.model';
+import { Login } from '@data';
 import { MessageService } from 'primeng/api';
 
 @Component({

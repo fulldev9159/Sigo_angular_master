@@ -14,7 +14,7 @@ import { MessageService } from 'primeng/api';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Login } from '@storeOT/features/auth/auth.model';
+import { Login } from '@data';
 
 @Component({
   selector: 'app-form-ot',

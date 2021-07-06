@@ -10,7 +10,7 @@ import { Ot } from '@storeOT/features/ot/ot.model';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { Login } from '@storeOT/features/auth/auth.model';
+import { Login } from '@data';
 
 @Component({
   selector: 'app-list-ot',
