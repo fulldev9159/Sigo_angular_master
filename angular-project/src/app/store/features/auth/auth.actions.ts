@@ -3,6 +3,8 @@ import { Login } from '@data';
 import { LoginAuth } from './auth.model';
 
 // LOGIN
+export const reset = createAction('[Auth Login] reset');
+
 export const login = createAction(
   '[Auth Login] POST Login',
   props<{ login: LoginAuth }>()

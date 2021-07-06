@@ -1,8 +1,3 @@
-export interface LoginAuth {
-  username: string;
-  password: string;
-}
-
 export interface Login {
   token: string;
   usuario_nombre: string;

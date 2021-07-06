@@ -9,3 +9,8 @@ export const getLogin = createSelector(
   selectAuth,
   (state: fromAuth.StateAuth) => state.login
 );
+
+export const getCurrentProfile = createSelector(
+  selectAuth,
+  (state: fromAuth.StateAuth) => state.currentProfile
+);

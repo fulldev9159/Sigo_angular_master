@@ -78,7 +78,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
 
   logout(): void {
     localStorage.removeItem('auth');
-    this.authFacade.postLoginSuccess(null);
+    this.authFacade.reset();
     this.router.navigate(['/auth/login']);
   }
 }

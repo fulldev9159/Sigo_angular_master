@@ -236,7 +236,15 @@ export class ListCubComponent implements OnInit, OnDestroy {
       .subscribe(authLogin => {
         if (authLogin) {
           this.authLogin = authLogin;
-          this.cubageFacade.getCubicacionAction(+authLogin.perfiles[0].id);
+        }
+      });
+
+    this.authFacade
+      .getCurrentProfile$()
+      .pipe(takeUntil(this.destroyInstance))
+      .subscribe(profile => {
+        if (profile) {
+          this.cubageFacade.getCubicacionAction(+profile.id);
         }
       });
 
