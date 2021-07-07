@@ -15,6 +15,7 @@ import { of } from 'rxjs';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { OTService, OT } from '@data';
 import * as otActions from './ot.actions';
 
@@ -27,7 +28,8 @@ export class OtEffects {
     private http: HttpClient,
     private snackService: SnackBarService,
     private otService: OTService,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private otFacade: OtFacade
   ) {}
 
   getOTs$ = createEffect(() =>
@@ -241,8 +243,12 @@ export class OtEffects {
     () =>
       this.actions$.pipe(
         ofType(otActions.approveOTSuccess),
-        tap(() => {
-          console.log('APROBADO!');
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
         })
       ),
     { dispatch: false }
@@ -276,8 +282,12 @@ export class OtEffects {
     () =>
       this.actions$.pipe(
         ofType(otActions.rejectOTSuccess),
-        tap(() => {
-          console.log('RECHAZADO!');
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
         })
       ),
     { dispatch: false }

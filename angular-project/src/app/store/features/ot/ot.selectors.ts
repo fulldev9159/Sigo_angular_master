@@ -10,6 +10,14 @@ export const getOt = createSelector(
   (state: fromOt.StateOt) => state.items
 );
 
+export const getOtFilters = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => ({
+    filtro_propietario: state.filtro_propietario,
+    filtro_tipo: state.filtro_tipo,
+  })
+);
+
 export const getPlans = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.planes

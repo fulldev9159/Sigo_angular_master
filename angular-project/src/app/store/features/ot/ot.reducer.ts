@@ -16,6 +16,9 @@ import { OT } from '@data';
 export const otFeatureKey = 'ot';
 
 export interface StateOt {
+  filtro_propietario: string;
+  filtro_tipo: string;
+
   items: OT[];
   planes: Plan[];
   sites: Site[];
@@ -29,6 +32,9 @@ export interface StateOt {
 }
 
 export const initialStateOt: StateOt = {
+  filtro_propietario: '',
+  filtro_tipo: '',
+
   items: [
     {
       id: 123,
@@ -66,8 +72,10 @@ export const initialStateOt: StateOt = {
 export const reducerOt = createReducer(
   initialStateOt,
 
-  on(OtActions.getOt, state => ({
+  on(OtActions.getOt, (state, { filtro_propietario, filtro_tipo }) => ({
     ...state,
+    filtro_propietario,
+    filtro_tipo,
   })),
   on(OtActions.getOtSuccess, (state, payload) => ({
     ...state,

@@ -21,6 +21,13 @@ export class OtFacade {
     return this.store.select(otSelectors.getOt);
   }
 
+  public getOtFilters$(): Observable<{
+    filtro_propietario: string;
+    filtro_tipo: string;
+  }> {
+    return this.store.select(otSelectors.getOtFilters);
+  }
+
   // ESTADOS DE OT
   public approveOT(otID: number): void {
     this.store.dispatch(otActions.approveOT({ otID }));
