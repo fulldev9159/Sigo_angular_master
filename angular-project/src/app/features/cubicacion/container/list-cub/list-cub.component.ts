@@ -105,7 +105,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-copy',
           class: 'p-button p-button-help p-mr-2',
-          onClick: (event: Event, item: cubModel.ResponseGetAllCub) => {
+          onClick: (event: Event, item: cubModel.Cubicacion) => {
             this.cubageFacade.ClonarCubicacionAction(item, item.id);
             window.location.reload();
             this.messageService.add({
@@ -240,7 +240,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.detalleCubicacion$ = this.cubageFacade.getDetallesCubicacionSelector$();
+    this.detalleCubicacion$ =
+      this.cubageFacade.getDetallesCubicacionSelector$();
     this.items$ = this.cubageFacade.getCubicacionSelector$();
   }
 

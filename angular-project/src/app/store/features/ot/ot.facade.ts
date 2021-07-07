@@ -36,6 +36,11 @@ export class OtFacade {
   public postOt(ot: OTmodel.RequestCreateOT): void {
     this.store.dispatch(otActions.postOt({ ot }));
   }
+
+  // IngreOT con SCE ***
+  public postOtSCE(ot: OTmodel.RequestCreateOT): void {
+    this.store.dispatch(otActions.postOtSCE({ ot }));
+  }
   // POST
   // OT
 

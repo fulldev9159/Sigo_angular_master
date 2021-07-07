@@ -218,6 +218,23 @@ export class OtEffects {
     )
   );
 
+  // IngreOt con SCE ***
+  postOtSCE$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.postOtSCE),
+      concatMap((data: any) =>
+        this.http
+          .post(`${environment.api}/fromsce/ingreot/ot/create`, data.ot)
+          .pipe(
+            map((res: any) =>
+              otActions.postOtSCESuccess({ ot: res.data.items })
+            ),
+            catchError(err => of(otActions.postOtError({ error: err })))
+          )
+      )
+    )
+  );
+
   getDetalleOt$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getDetalleOt),
