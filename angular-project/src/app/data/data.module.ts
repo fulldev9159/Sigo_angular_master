@@ -8,6 +8,7 @@ import {
 import { CommonModule } from '@angular/common';
 
 import { AuthService } from './service/auth.service';
+import { OTService } from './service/ot.service';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ export class DataModule {
       providers: [
         { provide: 'environment', useValue: environment },
         AuthService,
+        OTService,
       ],
     };
   }

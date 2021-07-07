@@ -5,18 +5,18 @@ import {
   CuentaSap,
   IDOpex,
   Lp,
-  Ot,
   Pep2,
   Plan,
   PMO,
   Proyecto,
   Site,
 } from './ot.model';
+import { OT } from '@data';
 
 export const otFeatureKey = 'ot';
 
 export interface StateOt {
-  items: Ot[];
+  items: OT[];
   planes: Plan[];
   sites: Site[];
   pmos: PMO[];
@@ -42,6 +42,14 @@ export const initialStateOt: StateOt = {
       sesion_sce: 'AF4GSHJ46G3GSVB',
       estado_otdesc: 'ACTIVA',
       etapa_otdesc: 'Pendiente de Autorización por Adm. Contrato',
+      acciones: [
+        {
+          id: 8,
+          slug: 'OT_AUTORIZAR',
+          nombre_corto: 'Autorizar OT',
+          descripcion: 'Poder aceptar o rechazar una OT',
+        },
+      ],
     },
   ],
   planes: [],

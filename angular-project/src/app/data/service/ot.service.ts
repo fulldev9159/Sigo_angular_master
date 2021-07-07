@@ -2,23 +2,28 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Login, LoginResponse } from '../model';
+import { OT, OTsResponse } from '../model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class OTService {
   apiUrl = '';
   constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  login(username: string, password: string): Observable<Login> {
+  getOTs(
+    perfil_id: number,
+    filtro_propietario: string,
+    filtro_tipo: string
+  ): Observable<OT[]> {
     return this.http
-      .post<LoginResponse>(`${this.apiUrl}/login_new`, {
-        username,
-        password,
+      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/abiertas`, {
+        perfil_id,
+        filtro_propietario,
+        filtro_tipo,
       })
-      .pipe(map(res => res.data));
+      .pipe(map(res => res.data.items));
   }
 }

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { Ot } from '@storeOT/features/ot/ot.model';
+import { OT } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
@@ -20,7 +20,7 @@ import { Login, Perfil } from '@data';
 })
 export class ListOtComponent implements OnInit, OnDestroy {
   // declarations
-  public items$: Observable<Ot[]>;
+  public items$: Observable<OT[]>;
   public responsable: 'MIAS';
   public tipoOT: 'OT';
   public selectedIndex = 0;

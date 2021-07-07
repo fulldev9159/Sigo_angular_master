@@ -4,7 +4,6 @@ import {
   CuentaSap,
   IDOpex,
   Lp,
-  Ot,
   Pep2,
   Plan,
   PMO,
@@ -12,6 +11,7 @@ import {
   Site,
   RequestCreateOT,
 } from './ot.model';
+import { OT } from '@data';
 
 // OT LIST
 export const getOt = createAction(
@@ -25,7 +25,7 @@ export const getOt = createAction(
 
 export const getOtSuccess = createAction(
   '[Ot GetAll] GET Ot Success',
-  props<{ ot: Ot[] }>()
+  props<{ ot: OT[] }>()
 );
 
 export const getOtError = createAction(
@@ -50,12 +50,12 @@ export const deleteOtError = createAction(
 
 export const editOt = createAction(
   '[Ot EditById] EDIT Ot',
-  props<{ ot: Ot }>()
+  props<{ ot: OT }>()
 );
 
 export const editOtSuccess = createAction(
   '[Ot EditById] EDIT Ot Success',
-  props<{ OtId: string; Ot: Ot }>()
+  props<{ OtId: string; Ot: OT }>()
 );
 
 export const editOtError = createAction(
@@ -70,7 +70,7 @@ export const replyOt = createAction(
 
 export const replyOtSuccess = createAction(
   '[Ot Reply] POST Reply Ot Success',
-  props<{ ot: Ot }>()
+  props<{ ot: OT }>()
 );
 
 export const replyOtError = createAction(
@@ -80,12 +80,12 @@ export const replyOtError = createAction(
 
 export const stateOt = createAction(
   '[Ot State] POST State Ot',
-  props<{ ot: Ot }>()
+  props<{ ot: OT }>()
 );
 
 export const stateOtSuccess = createAction(
   '[Ot State] POST State Ot Success',
-  props<{ ot: Ot }>()
+  props<{ ot: OT }>()
 );
 
 export const stateOtError = createAction(
@@ -100,7 +100,7 @@ export const postOt = createAction(
 
 export const postOtSuccess = createAction(
   '[Ot Post] CREATE Ot Success',
-  props<{ ot: Ot }>()
+  props<{ ot: OT }>()
 );
 
 export const postOtError = createAction(

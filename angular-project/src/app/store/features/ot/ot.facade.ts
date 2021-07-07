@@ -4,19 +4,20 @@ import { Observable } from 'rxjs';
 import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
 import * as OTmodel from './ot.model';
+import { OT } from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OtFacade {
-  constructor(private store: Store<OTmodel.Ot>) {}
+  constructor(private store: Store<OT>) {}
 
   // OT
   public getOt(data: any): void {
     this.store.dispatch(otActions.getOt(data));
   }
 
-  public getOt$(): Observable<OTmodel.Ot[]> {
+  public getOt$(): Observable<OT[]> {
     return this.store.select(otSelectors.getOt);
   }
 

@@ -9,28 +9,26 @@ import * as otActions from './ot.actions';
 import { environment } from '@environment';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
+import { OTService, OT } from '@data';
 
 @Injectable()
 export class OtEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private snackService: SnackBarService
+    private snackService: SnackBarService,
+    private otService: OTService
   ) {}
 
   getOt$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getOt),
       concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/ot/get/abiertas`, {
-            perfil_id: data.perfil_id,
-            filtro_propietario: data.filtro_propietario,
-            filtro_tipo: data.filtro_tipo,
-          })
+        this.otService
+          .getOTs(data.perfil_id, data.filtro_propietario, data.filtro_tipo)
           .pipe(
-            map((res: any) => otActions.getOtSuccess({ ot: res.data.items })),
-            catchError(err => of(otActions.getOtError({ error: err })))
+            map((ots: OT[]) => otActions.getOtSuccess({ ot: ots })),
+            catchError(error => of(otActions.getOtError({ error })))
           )
       )
     )
