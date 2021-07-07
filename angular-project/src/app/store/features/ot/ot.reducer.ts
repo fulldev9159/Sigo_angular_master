@@ -66,7 +66,9 @@ export const initialStateOt: StateOt = {
 export const reducerOt = createReducer(
   initialStateOt,
 
-  on(OtActions.getOt, state => state),
+  on(OtActions.getOt, state => ({
+    ...state,
+  })),
   on(OtActions.getOtSuccess, (state, payload) => ({
     ...state,
     items: payload.ot,
@@ -135,5 +137,25 @@ export const reducerOt = createReducer(
   on(OtActions.getProyectoSuccess, (state, payload) => ({
     ...state,
     proyectos: payload.proyectos,
+  })),
+
+  on(OtActions.approveOT, state => ({
+    ...state,
+  })),
+  on(OtActions.approveOTSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.approveOTError, state => ({
+    ...state,
+  })),
+
+  on(OtActions.rejectOT, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectOTSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectOTError, state => ({
+    ...state,
   }))
 );

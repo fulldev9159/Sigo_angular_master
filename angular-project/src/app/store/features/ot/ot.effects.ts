@@ -2,7 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  map,
+  mapTo,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
@@ -215,5 +222,75 @@ export class OtEffects {
         )
       )
     )
+  );
+
+  approveOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.approveOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.approveOT(profile.id, otID).pipe(
+          mapTo(otActions.approveOTSuccess()),
+          catchError(error => of(otActions.approveOTError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterApproveOTSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.approveOTSuccess),
+        tap(() => {
+          console.log('APROBADO!');
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterApproveOTError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.approveOTError),
+        tap(({ error }) => {
+          console.error(`could not approve the ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  rejectOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.rejectOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.rejectOT(profile.id, otID).pipe(
+          mapTo(otActions.rejectOTSuccess()),
+          catchError(error => of(otActions.rejectOTError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterRejectOTSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectOTSuccess),
+        tap(() => {
+          console.log('RECHAZADO!');
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterRejectOTError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectOTError),
+        tap(({ error }) => {
+          console.error(`could not reject the ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
   );
 }

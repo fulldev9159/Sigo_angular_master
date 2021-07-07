@@ -237,3 +237,28 @@ export const getProyectoError = createAction(
   '[Proyecto Get All] GET All Error',
   props<{ error: any }>()
 );
+
+// Estados de la OT
+export const approveOT = createAction(
+  '[OT] Approve OT',
+  props<{ otID: number }>()
+);
+
+export const approveOTSuccess = createAction('[OT] Approve OT success');
+
+export const approveOTError = createAction(
+  '[OT] Approve OT error',
+  props<{ error: any }>()
+);
+
+export const rejectOT = createAction(
+  '[OT] Reject OT',
+  props<{ otID: number }>()
+);
+
+export const rejectOTSuccess = createAction('[OT] Reject OT success');
+
+export const rejectOTError = createAction(
+  '[OT] Reject OT error',
+  props<{ error: any }>()
+);

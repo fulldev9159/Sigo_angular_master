@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { OT, OTsResponse } from '../model';
 
@@ -25,5 +25,15 @@ export class OTService {
         filtro_tipo,
       })
       .pipe(map(res => res.data.items));
+  }
+
+  approveOT(perfil_id: number, otID: number): Observable<any> {
+    console.log('approve OT still not implemented');
+    return of({});
+  }
+
+  rejectOT(perfil_id: number, otID: number): Observable<any> {
+    console.log('reject OT still not implemented');
+    return of({});
   }
 }

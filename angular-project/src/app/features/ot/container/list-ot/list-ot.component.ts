@@ -130,8 +130,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
         'contrato_marco_nombre',
         'proveedor_nombre',
       ],
-      actions: row => {
-        const otAutorizar = row.acciones.find(
+      actions: ot => {
+        const otAutorizar = ot.acciones.find(
           accion => accion.slug === 'OT_AUTORIZAR'
         );
 
@@ -140,7 +140,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             {
               icon: 'p-button-icon pi pi-check',
               class: 'p-button-rounded p-button-success p-mr-2',
-              label: 'Estado de Aceptación',
+              label: 'Aceptar',
               onClick: (event: Event, item) => {
                 this.confirmationService.confirm({
                   target: event.target as EventTarget,
@@ -148,7 +148,26 @@ export class ListOtComponent implements OnInit, OnDestroy {
                   icon: 'pi pi-exclamation-triangle',
                   acceptLabel: 'Confirmar',
                   rejectLabel: 'Cancelar',
-                  accept: () => {},
+                  accept: () => {
+                    this.otFacade.approveOT(ot.id);
+                  },
+                });
+              },
+            },
+            {
+              icon: 'p-button-icon pi pi-times',
+              class: 'p-button-rounded p-button-danger p-mr-2',
+              label: 'Rechazar',
+              onClick: (event: Event, item) => {
+                this.confirmationService.confirm({
+                  target: event.target as EventTarget,
+                  message: `¿Desea rechazar Orden de trabajo?`,
+                  icon: 'pi pi-exclamation-triangle',
+                  acceptLabel: 'Confirmar',
+                  rejectLabel: 'Cancelar',
+                  accept: () => {
+                    this.otFacade.rejectOT(ot.id);
+                  },
                 });
               },
             },

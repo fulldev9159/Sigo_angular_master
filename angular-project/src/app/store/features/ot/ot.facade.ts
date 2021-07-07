@@ -21,6 +21,16 @@ export class OtFacade {
     return this.store.select(otSelectors.getOt);
   }
 
+  // ESTADOS DE OT
+  public approveOT(otID: number): void {
+    this.store.dispatch(otActions.approveOT({ otID }));
+  }
+
+  public rejectOT(otID: number): void {
+    this.store.dispatch(otActions.rejectOT({ otID }));
+  }
+  // ESTADOS DE OT
+
   // DELETE
   public deleteOt(position: number): void {
     this.store.dispatch(otActions.deleteOt({ otPosition: position }));
