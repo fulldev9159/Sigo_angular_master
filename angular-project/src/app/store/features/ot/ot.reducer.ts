@@ -12,6 +12,7 @@ import {
   Proyecto,
   Site,
 } from './ot.model';
+import * as OTmodel from './ot.model';
 
 export const otFeatureKey = 'ot';
 
@@ -26,6 +27,7 @@ export interface StateOt {
   cuentas_sap: CuentaSap[];
   cecos: CECO[];
   proyectos: Proyecto[];
+  detalleOt: OTmodel.DataRspDetalleOT;
 }
 
 export const initialStateOt: StateOt = {
@@ -53,6 +55,7 @@ export const initialStateOt: StateOt = {
   cuentas_sap: [],
   cecos: [],
   proyectos: [],
+  detalleOt: null,
 };
 
 export const reducerOt = createReducer(
@@ -127,5 +130,11 @@ export const reducerOt = createReducer(
   on(OtActions.getProyectoSuccess, (state, payload) => ({
     ...state,
     proyectos: payload.proyectos,
+  })),
+
+  on(OtActions.getDetalleOt, state => state),
+  on(OtActions.getDetalleOtSuccess, (state, payload) => ({
+    ...state,
+    detalleOt: payload.detalleot,
   }))
 );
