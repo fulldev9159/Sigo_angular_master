@@ -8,9 +8,9 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { OT } from '@data';
 import { ConfirmationService } from 'primeng/api';
-import { Observable, Subject, combineLatest } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { Login, Perfil } from '@data';
+import { Login } from '@data';
 
 @Component({
   selector: 'app-list-ot',
@@ -27,7 +27,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
   public selectedOTs: string;
   private destroyInstance: Subject<boolean> = new Subject();
   public authLogin: Login = null;
-  public currentProfile: Perfil = null;
   public configTable = {
     header: true,
     headerConfig: {
@@ -177,17 +176,14 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.tipoOT = 'OT';
     this.selectedIndex = 0;
     this.selectedOTs = 'ABIERTAS';
-    combineLatest([
-      this.authFacade.getLogin$(),
-      this.authFacade.getCurrentProfile$(),
-    ])
+
+    this.authFacade
+      .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
-      .subscribe(([authLogin, profile]) => {
-        if (authLogin && profile) {
+      .subscribe(authLogin => {
+        if (authLogin) {
           this.authLogin = authLogin;
-          this.currentProfile = profile;
           this.otFacade.getOt({
-            perfil_id: +this.currentProfile.id,
             filtro_propietario: this.responsable,
             filtro_tipo: this.tipoOT,
           });
@@ -205,7 +201,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
       console.log(this.tipoOT);
       this.selectedOTs = 'CERRADAS';
       this.otFacade.getOt({
-        perfil_id: +this.currentProfile.id,
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
       });
@@ -215,7 +210,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
       console.log(this.tipoOT);
       this.selectedOTs = 'ABIERTAS';
       this.otFacade.getOt({
-        perfil_id: +this.currentProfile.id,
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
       });
@@ -232,7 +226,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
     console.log(this.responsable);
     console.log(this.tipoOT);
     this.otFacade.getOt({
-      perfil_id: +this.currentProfile.id,
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });
@@ -243,7 +236,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
     console.log(this.responsable);
     console.log(this.tipoOT);
     this.otFacade.getOt({
-      perfil_id: +this.currentProfile.id,
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });

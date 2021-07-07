@@ -2,14 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { catchError, concatMap, map, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import * as otActions from './ot.actions';
-import { environment } from '@environment';
-
 import { SnackBarService } from '@utilsSIGO/snack-bar';
+
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OTService, OT } from '@data';
+import * as otActions from './ot.actions';
+
+import { environment } from '@environment';
 
 @Injectable()
 export class OtEffects {
@@ -17,15 +19,17 @@ export class OtEffects {
     private actions$: Actions,
     private http: HttpClient,
     private snackService: SnackBarService,
-    private otService: OTService
+    private otService: OTService,
+    private authFacade: AuthFacade
   ) {}
 
-  getOt$ = createEffect(() =>
+  getOTs$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getOt),
-      concatMap((data: any) =>
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([data, profile]) =>
         this.otService
-          .getOTs(data.perfil_id, data.filtro_propietario, data.filtro_tipo)
+          .getOTs(profile.id, data.filtro_propietario, data.filtro_tipo)
           .pipe(
             map((ots: OT[]) => otActions.getOtSuccess({ ot: ots })),
             catchError(error => of(otActions.getOtError({ error })))

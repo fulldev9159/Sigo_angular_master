@@ -17,7 +17,6 @@ import { OT } from '@data';
 export const getOt = createAction(
   '[Ot Get Abiertas] GET Ot',
   props<{
-    perfil_id: number;
     filtro_propietario: string;
     filtro_tipo: string;
   }>()

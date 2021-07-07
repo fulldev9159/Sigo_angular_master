@@ -19,7 +19,7 @@ export class OTService {
     filtro_tipo: string
   ): Observable<OT[]> {
     return this.http
-      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/abiertas`, {
+      .post<OTsResponse>(`${this.apiUrl}/mockup/ingreot/ot/get/abiertas`, {
         perfil_id,
         filtro_propietario,
         filtro_tipo,

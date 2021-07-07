@@ -13,8 +13,8 @@ export class OtFacade {
   constructor(private store: Store<OT>) {}
 
   // OT
-  public getOt(data: any): void {
-    this.store.dispatch(otActions.getOt(data));
+  public getOt({ filtro_propietario, filtro_tipo }): void {
+    this.store.dispatch(otActions.getOt({ filtro_propietario, filtro_tipo }));
   }
 
   public getOt$(): Observable<OT[]> {
