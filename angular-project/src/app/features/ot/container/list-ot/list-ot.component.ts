@@ -32,7 +32,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     headerConfig: {
       title: '',
       searchText: 'buscar...',
-      actionsType: 'Buttons',
+      actionsType: 'Menu',
     },
     body: {
       headers: [
@@ -130,36 +130,33 @@ export class ListOtComponent implements OnInit, OnDestroy {
         'contrato_marco_nombre',
         'proveedor_nombre',
       ],
-      actions: [
-        {
-          icon: 'p-button-icon pi pi-check',
-          class: 'p-button-rounded p-button-success p-mr-2',
-          onClick: (item, event) => {
-            this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: `¿Desea aceptar Orden de trabajo?`,
-              icon: 'pi pi-exclamation-triangle',
-              acceptLabel: 'Confirmar',
-              rejectLabel: 'Cancelar',
-              accept: () => {},
-            });
-          },
-        },
-        {
-          icon: 'p-button-icon pi pi-times',
-          class: 'p-button-rounded p-button-danger p-mr-2',
-          onClick: (item, event) => {
-            this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: `¿Desea rechazar Orden de trabajo?`,
-              icon: 'pi pi-exclamation-triangle',
-              acceptLabel: 'Confirmar',
-              rejectLabel: 'Cancelar',
-              accept: () => {},
-            });
-          },
-        },
-      ],
+      actions: row => {
+        const otAutorizar = row.acciones.find(
+          accion => accion.slug === 'OT_AUTORIZAR'
+        );
+
+        if (otAutorizar) {
+          return [
+            {
+              icon: 'p-button-icon pi pi-check',
+              class: 'p-button-rounded p-button-success p-mr-2',
+              label: 'Estado de Aceptación',
+              onClick: (event: Event, item) => {
+                this.confirmationService.confirm({
+                  target: event.target as EventTarget,
+                  message: `¿Desea aceptar Orden de trabajo?`,
+                  icon: 'pi pi-exclamation-triangle',
+                  acceptLabel: 'Confirmar',
+                  rejectLabel: 'Cancelar',
+                  accept: () => {},
+                });
+              },
+            },
+          ];
+        }
+
+        return [];
+      },
     },
   };
 
