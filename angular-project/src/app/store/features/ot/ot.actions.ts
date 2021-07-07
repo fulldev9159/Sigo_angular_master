@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import * as OtModel from './ot.model';
 import {
   CECO,
   CuentaSap,
@@ -236,5 +237,20 @@ export const getProyectoSuccess = createAction(
 
 export const getProyectoError = createAction(
   '[Proyecto Get All] GET All Error',
+  props<{ error: any }>()
+);
+
+export const getDetalleOt = createAction(
+  '[OT Get Detalle OT] GET Detalle OT',
+  props<{ id: number }>()
+);
+
+export const getDetalleOtSuccess = createAction(
+  '[OT Get Detalle OT] GET Detalle OT Success',
+  props<{ detalleot: OtModel.DataRspDetalleOT }>()
+);
+
+export const getDetalleOtError = createAction(
+  '[OT Get Detalle OT] GET Detalle OT  Error',
   props<{ error: any }>()
 );

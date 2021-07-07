@@ -163,4 +163,17 @@ export class OtFacade {
     return this.store.select(otSelectors.getProyectos);
   }
   // Proyectos
+
+  // Detalle OT
+  public getDetalleOtAction(id: number): void {
+    this.store.dispatch(otActions.getDetalleOt({ id }));
+  }
+
+  public getDetalleOtSuccess(detalleot: OTmodel.DataRspDetalleOT): void {
+    this.store.dispatch(otActions.getDetalleOtSuccess({ detalleot }));
+  }
+
+  public getDetalleOtSelector$(): Observable<OTmodel.DataRspDetalleOT> {
+    return this.store.select(otSelectors.getDetalleOt);
+  }
 }

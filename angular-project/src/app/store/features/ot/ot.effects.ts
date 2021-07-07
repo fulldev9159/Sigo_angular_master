@@ -10,6 +10,9 @@ import { environment } from '@environment';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
+import { Response } from '@storeOT/model';
+import * as OtModel from './ot.model';
+
 @Injectable()
 export class OtEffects {
   constructor(
@@ -211,6 +214,24 @@ export class OtEffects {
           map((res: any) => otActions.postOtSuccess({ ot: res.data.items })),
           catchError(err => of(otActions.postOtError({ error: err })))
         )
+      )
+    )
+  );
+
+  getDetalleOt$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDetalleOt),
+      concatMap((data: any) =>
+        this.http
+          .post(`${environment.api}/ingreot/ot/detalle/get`, {
+            id: data.id,
+          })
+          .pipe(
+            map((res: Response<OtModel.DataRspDetalleOT>) =>
+              otActions.getDetalleOtSuccess({ detalleot: res.data })
+            ),
+            catchError(err => of(otActions.postOtError({ error: err })))
+          )
       )
     )
   );
