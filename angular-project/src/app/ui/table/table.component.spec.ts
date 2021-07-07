@@ -20,6 +20,8 @@ describe('TableComponent', () => {
       headerConfig: {
         title: 'Tabla de productos',
         searchText: 'buscar...',
+        actionsType: '',
+        paginator: false,
       },
       body: {
         headers: [
@@ -29,6 +31,7 @@ describe('TableComponent', () => {
             sort: 'id',
             header: 'id',
             editable: false,
+            width: '',
           },
           {
             field: 'Nombre',
@@ -36,6 +39,7 @@ describe('TableComponent', () => {
             sort: 'name',
             header: 'name',
             editable: false,
+            width: '',
           },
           {
             field: 'Precio',
@@ -43,6 +47,7 @@ describe('TableComponent', () => {
             sort: 'price',
             header: 'price',
             editable: false,
+            width: '',
           },
           {
             field: 'Categoría',
@@ -50,6 +55,7 @@ describe('TableComponent', () => {
             sort: 'category',
             header: 'category',
             editable: false,
+            width: '',
           },
           {
             field: 'Vistas',
@@ -57,6 +63,7 @@ describe('TableComponent', () => {
             sort: 'quantity',
             header: 'quantity',
             editable: false,
+            width: '',
           },
           {
             field: 'Estado',
@@ -64,6 +71,7 @@ describe('TableComponent', () => {
             sort: 'inventoryStatus',
             header: 'inventoryStatus',
             editable: false,
+            width: '',
           },
           {
             field: null,
@@ -71,20 +79,28 @@ describe('TableComponent', () => {
             sort: null,
             header: null,
             editable: false,
+            width: '',
           },
         ],
+        sort: [],
         actions: [
           {
             icon: 'p-button-icon pi pi-save',
             class: 'p-button-rounded p-button-success p-mr-2',
+            label: '',
+            onClick: (item, event) => {},
           },
           {
             icon: 'p-button-icon pi pi-pencil',
             class: 'p-button-rounded p-button-warning p-mr-2',
+            label: '',
+            onClick: (item, event) => {},
           },
           {
             icon: 'p-button-icon pi pi-trash',
             class: 'p-button-rounded p-button-danger',
+            label: '',
+            onClick: (item, event) => {},
           },
         ],
       },
