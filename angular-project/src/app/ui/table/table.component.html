@@ -85,7 +85,9 @@
               <!-- <ng-container *ngIf="actions.length >4||config.body.headers.length>6"> -->
 
               <ng-container *ngIf="config.headerConfig.actionsType === 'Menu'">
-                <app-menu [actions]="actions" [item]="item" [rowIndex]="rowIndex"></app-menu>
+                <ng-container *ngIf="actions.length > 0">
+                  <app-menu [actions]="actions" [item]="item" [rowIndex]="rowIndex"></app-menu>
+                </ng-container>
               </ng-container>
             </ng-template>
           </td>
