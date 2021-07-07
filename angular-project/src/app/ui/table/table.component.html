@@ -2,13 +2,14 @@
   <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
     <ng-template *ngIf="config.header" pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
-        <h5 class="p-m-0">{{config.headerConfig.title}}</h5>
+        <h5 class="p-m-0">{{ config.headerConfig.title }}</h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" [placeholder]="config.headerConfig.searchText" />
         </span>
       </div>
     </ng-template>
+
     <ng-template pTemplate="header">
       <tr>
         <ng-container *ngFor="let column of config.body.headers">
@@ -42,42 +43,56 @@
         </ng-container>
       </tr>
     </ng-template>
+
     <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
       <tr [ngClass]="item['activo']===false ? 'bloqueado' : ''">
         <ng-container *ngFor="let column of config.body.headers" [ngSwitch]="column.type">
           <td *ngSwitchCase="'CHECKBOX'">
             <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
-          <td *ngSwitchCase="'TEXT-TITLECASE'">{{item[column.header]| titlecase}}</td>
-          <td *ngSwitchCase="'TEXT'">{{item[column.header]}}</td>
+          <td *ngSwitchCase="'TEXT-TITLECASE'">{{ item[column.header] | titlecase }}</td>
+          <td *ngSwitchCase="'TEXT'">{{ item[column.header] }}</td>
           <td *ngSwitchCase="'INPUTNUMBER'">
             <input type="number" pInputText style="width: 100%;" (change)="item[column.onchange($event,item)]" value="{{item[column.header]}}" />
           </td>
-          <td *ngSwitchCase="'NUMBER'">{{item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-          <td *ngSwitchCase="'DATE'">{{item[column.header] | date:'dd-MM-yyyy'}}</td>
+          <td *ngSwitchCase="'NUMBER'">{{ item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+          <td *ngSwitchCase="'DATE'">{{ item[column.header] | date:'dd-MM-yyyy' }}</td>
           <td *ngSwitchCase="'BOOLEANTEXT'">
-            <span *ngIf="item[column.header]">{{column.booleantrue}}</span>
-            <span *ngIf="!item[column.header]">{{column.booleanfalse}}</span>
+            <span *ngIf="item[column.header]">{{ column.booleantrue }}</span>
+            <span *ngIf="!item[column.header]">{{ column.booleanfalse }}</span>
           </td>
-          <td *ngSwitchCase="'ACTIONS'" id="action-buttons" [ngClass]="config.headerConfig.actionsType==='Buttons' ? 'action-buttons-flex' : ''">
-            <!-- <ng-container *ngIf="(config.body.actions.length > 0 && config.body.actions.length <= 4)&&config.body.headers.length<=6"> -->
-            <ng-container *ngIf="config.headerConfig.actionsType==='Buttons'">
-              <div *ngFor="let button of config.body.actions">
-                <div *ngIf="item[button.disabled]" pTooltip="{{button.tooltipDisabled}}">
-                  <button [disabled]="item[button.disabled]" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
-                </div>
+          <td *ngSwitchCase="'ACTIONS'" id="action-buttons" [ngClass]="config.headerConfig.actionsType === 'Buttons' ? 'action-buttons-flex' : ''">
+            <ng-container *ngIf="typeAction(config.body.actions) === 'function'">
+              <ng-container *ngTemplateOutlet="menu; context: context(config.body.actions(item))"></ng-container>
+            </ng-container>
 
-                <button *ngIf="!item[button.disabled]" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
-              </div>
+            <ng-container *ngIf="typeAction(config.body.actions) === 'object'">
+              <ng-container *ngTemplateOutlet="menu; context: context(config.body.actions)"></ng-container>
             </ng-container>
-            <!-- <ng-container *ngIf="config.body.actions.length >4||config.body.headers.length>6"> -->
-            <ng-container *ngIf="config.headerConfig.actionsType==='Menu'">
-              <app-menu [actions]="config.body.actions" [item]="item" [rowIndex]="rowIndex"></app-menu>
-            </ng-container>
+
+            <ng-template #menu let-actions="actions">
+              <!-- <ng-container *ngIf="(actions.length > 0 && actions.length <= 4)&&config.body.headers.length<=6"> -->
+              <ng-container *ngIf="config.headerConfig.actionsType === 'Buttons'">
+                <div *ngFor="let button of actions">
+                  <div *ngIf="item[button.disabled]" pTooltip="{{ button.tooltipDisabled }}">
+                    <button [disabled]="item[button.disabled]" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                  </div>
+
+                  <button *ngIf="!item[button.disabled]" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                </div>
+              </ng-container>
+
+              <!-- <ng-container *ngIf="actions.length >4||config.body.headers.length>6"> -->
+
+              <ng-container *ngIf="config.headerConfig.actionsType === 'Menu'">
+                <app-menu [actions]="actions" [item]="item" [rowIndex]="rowIndex"></app-menu>
+              </ng-container>
+            </ng-template>
           </td>
         </ng-container>
       </tr>
     </ng-template>
+
     <ng-template pTemplate="summary">
       <div class="p-d-flex p-ai-center p-jc-between">
         En total hay {{items ? items.length : 0 }} elementos.
