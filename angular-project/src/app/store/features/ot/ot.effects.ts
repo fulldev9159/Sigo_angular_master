@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
 import {
   catchError,
   concatMap,
@@ -245,6 +244,8 @@ export class OtEffects {
         ofType(otActions.approveOTSuccess),
         withLatestFrom(this.otFacade.getOtFilters$()),
         tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Orden de trabajo aceptada', 'ok');
+
           this.otFacade.getOt({
             filtro_propietario,
             filtro_tipo,
@@ -259,6 +260,10 @@ export class OtEffects {
       this.actions$.pipe(
         ofType(otActions.approveOTError),
         tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible aceptar la orden de trabajo',
+            'error'
+          );
           console.error(`could not approve the ot [${error.message}]`);
         })
       ),
@@ -284,6 +289,8 @@ export class OtEffects {
         ofType(otActions.rejectOTSuccess),
         withLatestFrom(this.otFacade.getOtFilters$()),
         tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Orden de trabajo rechazada', 'ok');
+
           this.otFacade.getOt({
             filtro_propietario,
             filtro_tipo,
@@ -298,6 +305,10 @@ export class OtEffects {
       this.actions$.pipe(
         ofType(otActions.rejectOTError),
         tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible rechazar la orden de trabajo',
+            'error'
+          );
           console.error(`could not reject the ot [${error.message}]`);
         })
       ),

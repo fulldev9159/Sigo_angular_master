@@ -131,7 +131,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
         'proveedor_nombre',
       ],
       actions: ot => {
-        const otAutorizar = ot.acciones.find(
+        const otAutorizar = (ot.acciones || []).find(
           accion => accion.slug === 'OT_AUTORIZAR'
         );
 
