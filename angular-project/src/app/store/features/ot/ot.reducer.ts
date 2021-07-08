@@ -9,6 +9,8 @@ export interface StateOt {
   filtro_propietario: string;
   filtro_tipo: string;
 
+  selectedOT: OT;
+
   items: OT[];
   planes: OTModel.Plan[];
   sites: OTModel.Site[];
@@ -25,6 +27,8 @@ export interface StateOt {
 export const initialStateOt: StateOt = {
   filtro_propietario: '',
   filtro_tipo: '',
+
+  selectedOT: null,
 
   items: [
     {
@@ -144,6 +148,12 @@ export const reducerOt = createReducer(
     ...state,
     detalleOt: payload.detalleot,
   })),
+
+  on(OtActions.selectOT, (state, { ot }) => ({
+    ...state,
+    selectedOT: ot,
+  })),
+
   on(OtActions.approveOT, state => ({
     ...state,
   })),

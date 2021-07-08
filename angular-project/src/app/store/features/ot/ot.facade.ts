@@ -28,6 +28,14 @@ export class OtFacade {
     return this.store.select(otSelectors.getOtFilters);
   }
 
+  public selectOT(ot: OT): void {
+    this.store.dispatch(otActions.selectOT({ ot }));
+  }
+
+  public getSelectedOT$(): Observable<OT> {
+    return this.store.select(otSelectors.getSelectedOT);
+  }
+
   // ESTADOS DE OT
   public approveOT(otID: number): void {
     this.store.dispatch(otActions.approveOT({ otID }));

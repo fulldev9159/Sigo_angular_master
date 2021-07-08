@@ -66,3 +66,9 @@
     <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
   </p-tabPanel>
 </p-tabView>
+
+<app-modal [display]="displayAssignCoordinatorModal" (CloseEvent)="displayAssignCoordinatorModal=false" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title>Asignación de Coordinador</ng-container>
+  <ng-container modal-content></ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>

@@ -11,6 +11,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Login } from '@data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-ot',
@@ -19,14 +20,19 @@ import { Login } from '@data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOtComponent implements OnInit, OnDestroy {
-  // declarations
   public items$: Observable<OT[]>;
+
   public responsable: 'MIAS';
   public tipoOT: 'OT';
   public selectedIndex = 0;
   public selectedOTs: string;
+
   private destroyInstance: Subject<boolean> = new Subject();
+
   public authLogin: Login = null;
+
+  displayAssignCoordinatorModal = false;
+
   public configTable = {
     header: true,
     headerConfig: {
@@ -130,51 +136,77 @@ export class ListOtComponent implements OnInit, OnDestroy {
         'contrato_marco_nombre',
         'proveedor_nombre',
       ],
-      actions: ot => {
+      actions: (ot: OT) => {
+        const actions = [
+          {
+            icon: 'p-button-icon pi pi-info-circle',
+            class: 'p-button-rounded p-button-info p-mr-2',
+            label: 'Información',
+            onClick: (event: Event, item) => {
+              this.router.navigate(['/app/ot/detalle-ot/', item.id]);
+            },
+          },
+        ];
+
         const otAutorizar = (ot.acciones || []).find(
           accion => accion.slug === 'OT_AUTORIZAR'
         );
 
         if (otAutorizar) {
-          return [
-            {
-              icon: 'p-button-icon pi pi-check',
-              class: 'p-button-rounded p-button-success p-mr-2',
-              label: 'Aceptar',
-              onClick: (event: Event, item) => {
-                this.confirmationService.confirm({
-                  target: event.target as EventTarget,
-                  message: `¿Desea aceptar Orden de trabajo?`,
-                  icon: 'pi pi-exclamation-triangle',
-                  acceptLabel: 'Confirmar',
-                  rejectLabel: 'Cancelar',
-                  accept: () => {
-                    this.otFacade.approveOT(ot.id);
-                  },
-                });
-              },
+          actions.push({
+            icon: 'p-button-icon pi pi-check',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Aceptar',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea aceptar Orden de trabajo?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.approveOT(ot.id);
+                },
+              });
             },
-            {
-              icon: 'p-button-icon pi pi-times',
-              class: 'p-button-rounded p-button-danger p-mr-2',
-              label: 'Rechazar',
-              onClick: (event: Event, item) => {
-                this.confirmationService.confirm({
-                  target: event.target as EventTarget,
-                  message: `¿Desea rechazar Orden de trabajo?`,
-                  icon: 'pi pi-exclamation-triangle',
-                  acceptLabel: 'Confirmar',
-                  rejectLabel: 'Cancelar',
-                  accept: () => {
-                    this.otFacade.rejectOT(ot.id);
-                  },
-                });
-              },
+          });
+
+          actions.push({
+            icon: 'p-button-icon pi pi-times',
+            class: 'p-button-rounded p-button-danger p-mr-2',
+            label: 'Rechazar',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea rechazar Orden de trabajo?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.rejectOT(ot.id);
+                },
+              });
             },
-          ];
+          });
         }
 
-        return [];
+        const otAsignarCoordinador = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ASIGNAR_COORDINADOR'
+        );
+
+        if (otAsignarCoordinador) {
+          actions.push({
+            icon: 'p-button-icon pi pi-user',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otAsignarCoordinador.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.otFacade.selectOT(ot);
+              this.displayAssignCoordinatorModal = true;
+            },
+          });
+        }
+
+        return actions;
       },
     },
   };
@@ -184,7 +216,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
   constructor(
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {

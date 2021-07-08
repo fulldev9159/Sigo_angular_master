@@ -266,6 +266,13 @@ export const getDetalleOtError = createAction(
   props<{ error: any }>()
 );
 
+export const selectOT = createAction(
+  '[OT] select OT',
+  props<{
+    ot: OT;
+  }>()
+);
+
 // Estados de la OT
 export const approveOT = createAction(
   '[OT] Approve OT',

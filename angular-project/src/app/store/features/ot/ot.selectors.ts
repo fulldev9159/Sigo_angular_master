@@ -10,6 +10,11 @@ export const getOt = createSelector(
   (state: fromOt.StateOt) => state.items
 );
 
+export const getSelectedOT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.selectedOT
+);
+
 export const getOtFilters = createSelector(
   selectOt,
   (state: fromOt.StateOt) => ({
