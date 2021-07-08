@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
-import { OT } from '@data';
+import * as Data from '@data';
 
 export const otFeatureKey = 'ot';
 
@@ -9,7 +9,9 @@ export interface StateOt {
   filtro_propietario: string;
   filtro_tipo: string;
 
-  items: OT[];
+  selectedOT: Data.OT;
+
+  items: Data.OT[];
   planes: OTModel.Plan[];
   sites: OTModel.Site[];
   pmos: OTModel.PMO[];
@@ -20,11 +22,15 @@ export interface StateOt {
   cecos: OTModel.CECO[];
   proyectos: OTModel.Proyecto[];
   detalleOt: OTModel.DataRspDetalleOT;
+
+  coordinators: Data.User[];
 }
 
 export const initialStateOt: StateOt = {
   filtro_propietario: '',
   filtro_tipo: '',
+
+  selectedOT: null,
 
   items: [
     {
@@ -59,6 +65,8 @@ export const initialStateOt: StateOt = {
   cecos: [],
   proyectos: [],
   detalleOt: null,
+
+  coordinators: [],
 };
 
 export const reducerOt = createReducer(
@@ -144,6 +152,12 @@ export const reducerOt = createReducer(
     ...state,
     detalleOt: payload.detalleot,
   })),
+
+  on(OtActions.selectOT, (state, { ot }) => ({
+    ...state,
+    selectedOT: ot,
+  })),
+
   on(OtActions.approveOT, state => ({
     ...state,
   })),
@@ -162,5 +176,15 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.rejectOTError, state => ({
     ...state,
+  })),
+
+  on(OtActions.getCoordinators, state => state),
+  on(OtActions.getCoordinatorsSuccess, (state, { coordinators }) => ({
+    ...state,
+    coordinators,
+  })),
+  on(OtActions.getCoordinatorsError, (state, { error }) => ({
+    ...state,
+    coordinators: [],
   }))
 );

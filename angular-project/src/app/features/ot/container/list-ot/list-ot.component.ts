@@ -3,14 +3,17 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { OT } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, tap, takeUntil } from 'rxjs/operators';
 import { Login } from '@data';
+import { Router } from '@angular/router';
+import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
 
 @Component({
   selector: 'app-list-ot',
@@ -19,14 +22,19 @@ import { Login } from '@data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOtComponent implements OnInit, OnDestroy {
-  // declarations
   public items$: Observable<OT[]>;
+
   public responsable: 'MIAS';
   public tipoOT: 'OT';
   public selectedIndex = 0;
   public selectedOTs: string;
+
   private destroyInstance: Subject<boolean> = new Subject();
+
   public authLogin: Login = null;
+
+  displayAssignCoordinatorModal = false;
+
   public configTable = {
     header: true,
     headerConfig: {
@@ -130,61 +138,94 @@ export class ListOtComponent implements OnInit, OnDestroy {
         'contrato_marco_nombre',
         'proveedor_nombre',
       ],
-      actions: ot => {
+      actions: (ot: OT) => {
+        const actions = [
+          {
+            icon: 'p-button-icon pi pi-info-circle',
+            class: 'p-button-rounded p-button-info p-mr-2',
+            label: 'Información',
+            onClick: (event: Event, item) => {
+              this.router.navigate(['/app/ot/detalle-ot/', item.id]);
+            },
+          },
+        ];
+
         const otAutorizar = (ot.acciones || []).find(
           accion => accion.slug === 'OT_AUTORIZAR'
         );
 
         if (otAutorizar) {
-          return [
-            {
-              icon: 'p-button-icon pi pi-check',
-              class: 'p-button-rounded p-button-success p-mr-2',
-              label: 'Aceptar',
-              onClick: (event: Event, item) => {
-                this.confirmationService.confirm({
-                  target: event.target as EventTarget,
-                  message: `¿Desea aceptar Orden de trabajo?`,
-                  icon: 'pi pi-exclamation-triangle',
-                  acceptLabel: 'Confirmar',
-                  rejectLabel: 'Cancelar',
-                  accept: () => {
-                    this.otFacade.approveOT(ot.id);
-                  },
-                });
-              },
+          actions.push({
+            icon: 'p-button-icon pi pi-check',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Aceptar',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea aceptar Orden de trabajo?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.approveOT(ot.id);
+                },
+              });
             },
-            {
-              icon: 'p-button-icon pi pi-times',
-              class: 'p-button-rounded p-button-danger p-mr-2',
-              label: 'Rechazar',
-              onClick: (event: Event, item) => {
-                this.confirmationService.confirm({
-                  target: event.target as EventTarget,
-                  message: `¿Desea rechazar Orden de trabajo?`,
-                  icon: 'pi pi-exclamation-triangle',
-                  acceptLabel: 'Confirmar',
-                  rejectLabel: 'Cancelar',
-                  accept: () => {
-                    this.otFacade.rejectOT(ot.id);
-                  },
-                });
-              },
+          });
+
+          actions.push({
+            icon: 'p-button-icon pi pi-times',
+            class: 'p-button-rounded p-button-danger p-mr-2',
+            label: 'Rechazar',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea rechazar Orden de trabajo?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.rejectOT(ot.id);
+                },
+              });
             },
-          ];
+          });
         }
 
-        return [];
+        const otAsignarCoordinador = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ASIGNAR_COORDINADOR'
+        );
+
+        if (otAsignarCoordinador) {
+          actions.push({
+            icon: 'p-button-icon pi pi-user',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otAsignarCoordinador.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.otFacade.selectOT(ot);
+              this.displayAssignCoordinatorModal = true;
+            },
+          });
+        }
+
+        return actions;
       },
     },
   };
 
   public data = [];
 
+  @ViewChild('assignCoordinatorForm', {
+    read: AssignCoordinatorFormComponent,
+    static: false,
+  })
+  assignCoordinatorForm: AssignCoordinatorFormComponent;
+
   constructor(
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -206,24 +247,28 @@ export class ListOtComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.items$ = this.otFacade.getOt$();
+    this.items$ = this.otFacade.getOt$().pipe(
+      tap(ots => {
+        this.closeAssignCoordinatorModal();
+      })
+    );
   }
 
   onChange($event): void {
     this.selectedIndex = $event.index;
     if (this.selectedIndex === 0) {
-      console.log(this.selectedIndex);
-      console.log(this.responsable);
-      console.log(this.tipoOT);
+      // console.log(this.selectedIndex);
+      // console.log(this.responsable);
+      // console.log(this.tipoOT);
       this.selectedOTs = 'CERRADAS';
       this.otFacade.getOt({
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
       });
     } else if (this.selectedIndex === 1) {
-      console.log(this.selectedIndex);
-      console.log(this.responsable);
-      console.log(this.tipoOT);
+      // console.log(this.selectedIndex);
+      // console.log(this.responsable);
+      // console.log(this.tipoOT);
       this.selectedOTs = 'ABIERTAS';
       this.otFacade.getOt({
         filtro_propietario: this.responsable,
@@ -238,9 +283,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   onClick(event): void {
-    console.log(this.selectedIndex);
-    console.log(this.responsable);
-    console.log(this.tipoOT);
+    // console.log(this.selectedIndex);
+    // console.log(this.responsable);
+    // console.log(this.tipoOT);
     this.otFacade.getOt({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
@@ -248,12 +293,21 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   onClickTipo(event): void {
-    console.log(this.selectedIndex);
-    console.log(this.responsable);
-    console.log(this.tipoOT);
+    // console.log(this.selectedIndex);
+    // console.log(this.responsable);
+    // console.log(this.tipoOT);
     this.otFacade.getOt({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });
+  }
+
+  closeAssignCoordinatorModal(): void {
+    this.otFacade.selectOT(null); // workaround for subscribing the same ot multiple times
+    this.displayAssignCoordinatorModal = false;
+  }
+
+  assignCoordinatorFormSubmit(): void {
+    this.assignCoordinatorForm.submit();
   }
 }

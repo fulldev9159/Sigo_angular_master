@@ -15,7 +15,7 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { OTService, OT } from '@data';
+import * as Data from '@data';
 import * as otActions from './ot.actions';
 
 import { environment } from '@environment';
@@ -29,7 +29,7 @@ export class OtEffects {
     private actions$: Actions,
     private http: HttpClient,
     private snackService: SnackBarService,
-    private otService: OTService,
+    private otService: Data.OTService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade
   ) {}
@@ -42,7 +42,7 @@ export class OtEffects {
         this.otService
           .getOTs(profile.id, data.filtro_propietario, data.filtro_tipo)
           .pipe(
-            map((ots: OT[]) => otActions.getOtSuccess({ ot: ots })),
+            map((ots: Data.OT[]) => otActions.getOtSuccess({ ot: ots })),
             catchError(error => of(otActions.getOtError({ error })))
           )
       )
@@ -245,19 +245,6 @@ export class OtEffects {
     )
   );
 
-  approveOT$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.approveOT),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.approveOT(profile.id, otID).pipe(
-          mapTo(otActions.approveOTSuccess()),
-          catchError(error => of(otActions.approveOTError({ error })))
-        )
-      )
-    )
-  );
-
   getDetalleOt$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getDetalleOt),
@@ -272,6 +259,19 @@ export class OtEffects {
             ),
             catchError(err => of(otActions.postOtError({ error: err })))
           )
+      )
+    )
+  );
+
+  approveOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.approveOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.approveOT(profile.id, otID).pipe(
+          mapTo(otActions.approveOTSuccess()),
+          catchError(error => of(otActions.approveOTError({ error })))
+        )
       )
     )
   );
@@ -348,6 +348,66 @@ export class OtEffects {
             'error'
           );
           console.error(`could not reject the ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  getCoordinators$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCoordinators),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.getCoordinators(profile.id, otID).pipe(
+          map((coordinators: Data.User[]) =>
+            otActions.getCoordinatorsSuccess({ coordinators })
+          ),
+          catchError(error => of(otActions.getCoordinatorsError({ error })))
+        )
+      )
+    )
+  );
+
+  assignCoordinator$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.assignCoordinator),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID, coordinatorID }, profile]) =>
+        this.otService.assignCoordinator(profile.id, otID, coordinatorID).pipe(
+          mapTo(otActions.assignCoordinatorSuccess()),
+          catchError(error => of(otActions.assignCoordinatorError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterAssignCoordinatorSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.assignCoordinatorSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Coordinador asignado', 'ok');
+
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterAssignCoordinatorError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.assignCoordinatorError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible asignar el coordinador',
+            'error'
+          );
+          console.error(`could not assign the coordinator [${error.message}]`);
         })
       ),
     { dispatch: false }

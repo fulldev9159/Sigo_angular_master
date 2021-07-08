@@ -10,6 +10,11 @@ export const getOt = createSelector(
   (state: fromOt.StateOt) => state.items
 );
 
+export const getSelectedOT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.selectedOT
+);
+
 export const getOtFilters = createSelector(
   selectOt,
   (state: fromOt.StateOt) => ({
@@ -66,4 +71,9 @@ export const getProyectos = createSelector(
 export const getDetalleOt = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.detalleOt
+);
+
+export const getCoordinators = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.coordinators
 );

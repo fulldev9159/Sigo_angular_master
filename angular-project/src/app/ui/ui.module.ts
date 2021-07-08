@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeNgModule } from './primeng/primeng.module';
 
 // Services
@@ -15,9 +16,16 @@ import { ConfirmationService } from 'primeng/api';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { MenuComponent } from './menu/menu.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { SelectComponent } from './select/select.component';
 
 @NgModule({
-  imports: [CommonModule, PrimeNgModule, NgxPermissionsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PrimeNgModule,
+    NgxPermissionsModule,
+  ],
   declarations: [
     CardComponent,
     TableComponent,
@@ -27,6 +35,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     ToastComponent,
     ProgressBarComponent,
     MenuComponent,
+    SelectComponent,
   ],
   exports: [
     CardComponent,
@@ -39,6 +48,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     ProgressBarComponent,
     MenuComponent,
     NgxPermissionsModule,
+    SelectComponent,
   ],
   providers: [ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
