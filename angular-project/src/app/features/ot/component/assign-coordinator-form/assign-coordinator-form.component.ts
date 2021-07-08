@@ -21,7 +21,7 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
   coordinators$: Observable<Data.User[]>;
   subscription: Subscription = new Subscription();
   formControls = {
-    coordinator: new FormControl('', [Validators.required]),
+    coordinatorID: new FormControl('', [Validators.required]),
   };
   form: FormGroup = new FormGroup(this.formControls);
 
@@ -80,10 +80,19 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    this.subscription.add(
-      this.ot$.subscribe(ot => {
-        console.log('submit', ot);
-      })
-    );
+    this.touch();
+    if (this.valid) {
+      this.subscription.add(
+        this.ot$.subscribe(ot => {
+          const { coordinatorID } = this.form.getRawValue();
+          console.log('assign', {
+            otID: ot.id,
+            coordinatorID,
+          });
+        })
+      );
+    } else {
+      console.error('invalid form');
+    }
   }
 }

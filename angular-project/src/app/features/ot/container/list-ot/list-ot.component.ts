@@ -3,6 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
@@ -12,6 +13,7 @@ import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Login } from '@data';
 import { Router } from '@angular/router';
+import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
 
 @Component({
   selector: 'app-list-ot',
@@ -213,6 +215,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   public data = [];
 
+  @ViewChild('assignCoordinatorForm', {
+    read: AssignCoordinatorFormComponent,
+    static: false,
+  })
+  assignCoordinatorForm: AssignCoordinatorFormComponent;
+
   constructor(
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
@@ -293,5 +301,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
   closeAssignCoordinatorModal(): void {
     this.otFacade.selectOT(null); // workaround for subscribing the same ot multiple times
     this.displayAssignCoordinatorModal = false;
+  }
+
+  assignCoordinatorFormSubmit(): void {
+    this.assignCoordinatorForm.submit();
   }
 }

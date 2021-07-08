@@ -70,11 +70,11 @@
 <app-modal [display]="displayAssignCoordinatorModal" (CloseEvent)="closeAssignCoordinatorModal()" [style]="{ width: '50vw' }">
   <ng-container modal-header-title>Asignación de Coordinador</ng-container>
   <ng-container modal-content>
-    <app-assign-coordinator-form></app-assign-coordinator-form>
+    <app-assign-coordinator-form #assignCoordinatorForm></app-assign-coordinator-form>
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeAssignCoordinatorModal()">Cancelar</button>
-    <button class="btn btn-primary">
+    <button class="btn btn-primary" (click)="assignCoordinatorFormSubmit()">
       <em class="pi pi-save mr-1"></em>Guardar
     </button>
   </ng-container>
