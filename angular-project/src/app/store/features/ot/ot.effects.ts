@@ -245,19 +245,6 @@ export class OtEffects {
     )
   );
 
-  approveOT$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.approveOT),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.approveOT(profile.id, otID).pipe(
-          mapTo(otActions.approveOTSuccess()),
-          catchError(error => of(otActions.approveOTError({ error })))
-        )
-      )
-    )
-  );
-
   getDetalleOt$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getDetalleOt),
@@ -272,6 +259,19 @@ export class OtEffects {
             ),
             catchError(err => of(otActions.postOtError({ error: err })))
           )
+      )
+    )
+  );
+
+  approveOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.approveOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.approveOT(profile.id, otID).pipe(
+          mapTo(otActions.approveOTSuccess()),
+          catchError(error => of(otActions.approveOTError({ error })))
+        )
       )
     )
   );
@@ -366,5 +366,50 @@ export class OtEffects {
         )
       )
     )
+  );
+
+  assignCoordinator$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.assignCoordinator),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID, coordinatorID }, profile]) =>
+        this.otService.assignCoordinator(profile.id, otID, coordinatorID).pipe(
+          mapTo(otActions.assignCoordinatorSuccess()),
+          catchError(error => of(otActions.assignCoordinatorError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterAssignCoordinatorSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.assignCoordinatorSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Coordinador asignado', 'ok');
+
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterAssignCoordinatorError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.assignCoordinatorError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible asignar el coordinador',
+            'error'
+          );
+          console.error(`could not assign the coordinator [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
   );
 }

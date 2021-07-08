@@ -10,7 +10,7 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { OT } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map, tap, takeUntil } from 'rxjs/operators';
 import { Login } from '@data';
 import { Router } from '@angular/router';
 import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
@@ -193,7 +193,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
         }
 
         const otAsignarCoordinador = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_AUTORIZAR'
+          accion => accion.slug === 'OT_ASIGNAR_COORDINADOR'
         );
 
         if (otAsignarCoordinador) {
@@ -247,7 +247,11 @@ export class ListOtComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.items$ = this.otFacade.getOt$();
+    this.items$ = this.otFacade.getOt$().pipe(
+      tap(ots => {
+        this.closeAssignCoordinatorModal();
+      })
+    );
   }
 
   onChange($event): void {

@@ -301,3 +301,17 @@ export const getCoordinatorsError = createAction(
   '[OT] get coordinators error',
   props<{ error: any }>()
 );
+
+export const assignCoordinator = createAction(
+  '[OT] assign coordinator',
+  props<{ otID: number; coordinatorID: number }>()
+);
+
+export const assignCoordinatorSuccess = createAction(
+  '[OT] assign coordinator success'
+);
+
+export const assignCoordinatorError = createAction(
+  '[OT] assign coordinator error',
+  props<{ error: any }>()
+);

@@ -216,4 +216,8 @@ export class OtFacade {
   public getCoordinators$(): Observable<Data.User[]> {
     return this.store.select(otSelectors.getCoordinators);
   }
+
+  public assignCoordinator(otID: number, coordinatorID: number): void {
+    this.store.dispatch(otActions.assignCoordinator({ otID, coordinatorID }));
+  }
 }

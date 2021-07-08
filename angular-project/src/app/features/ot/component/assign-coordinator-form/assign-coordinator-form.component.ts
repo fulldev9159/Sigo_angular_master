@@ -18,6 +18,7 @@ import * as Data from '@data';
 })
 export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
   ot$: Observable<Data.OT>;
+  otID: number;
   coordinators$: Observable<Data.User[]>;
   subscription: Subscription = new Subscription();
   formControls = {
@@ -42,6 +43,7 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.ot$.subscribe(ot => {
+        this.otID = ot.id;
         this.reset();
         this.otFacade.getCoordinators(ot.id);
       })
@@ -82,15 +84,8 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
   submit(): void {
     this.touch();
     if (this.valid) {
-      this.subscription.add(
-        this.ot$.subscribe(ot => {
-          const { coordinatorID } = this.form.getRawValue();
-          console.log('assign', {
-            otID: ot.id,
-            coordinatorID,
-          });
-        })
-      );
+      const { coordinatorID } = this.form.getRawValue();
+      this.otFacade.assignCoordinator(this.otID, coordinatorID);
     } else {
       console.error('invalid form');
     }
