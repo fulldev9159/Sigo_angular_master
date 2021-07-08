@@ -8,7 +8,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { map, filter, takeUntil } from 'rxjs/operators';
 
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { Login } from '@storeOT/features/auth/auth.model';
+import { Login } from '@data';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';

@@ -55,7 +55,7 @@ export class JwtAppInterceptor implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
               localStorage.removeItem('auth');
-              this.authFacade.postLoginSuccess(null);
+              this.authFacade.reset();
               this.router.navigate(['/auth']);
             }
           }

@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as authActions from './auth.actions';
 import * as authSelectors from './auth.selectors';
-import { Login, LoginAuth } from './auth.model';
+import { Login, Perfil } from '@data';
+import { LoginAuth } from './auth.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,10 @@ import { Login, LoginAuth } from './auth.model';
 export class AuthFacade {
   constructor(private store: Store<Login>) {}
 
-  // LOGIN
+  public reset(): void {
+    this.store.dispatch(authActions.reset());
+  }
+
   public postLogin(loginAuth: LoginAuth): void {
     this.store.dispatch(authActions.login({ login: loginAuth }));
   }
@@ -23,5 +27,8 @@ export class AuthFacade {
   public getLogin$(): Observable<Login> {
     return this.store.select(authSelectors.getLogin);
   }
-  // LOGIN
+
+  public getCurrentProfile$(): Observable<Perfil> {
+    return this.store.select(authSelectors.getCurrentProfile);
+  }
 }

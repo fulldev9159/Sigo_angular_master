@@ -1,14 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { catchError, concatMap, map } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  map,
+  mapTo,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import * as otActions from './ot.actions';
-import { environment } from '@environment';
-
 import { SnackBarService } from '@utilsSIGO/snack-bar';
+
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { OtFacade } from '@storeOT/features/ot/ot.facade';
+import { OTService, OT } from '@data';
+import * as otActions from './ot.actions';
+
+import { environment } from '@environment';
 
 import { Response } from '@storeOT/model';
 import * as OtModel from './ot.model';
@@ -18,22 +28,22 @@ export class OtEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private snackService: SnackBarService
+    private snackService: SnackBarService,
+    private otService: OTService,
+    private authFacade: AuthFacade,
+    private otFacade: OtFacade
   ) {}
 
-  getOt$ = createEffect(() =>
+  getOTs$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getOt),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/ot/get/abiertas`, {
-            perfil_id: data.perfil_id,
-            filtro_propietario: data.filtro_propietario,
-            filtro_tipo: data.filtro_tipo,
-          })
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([data, profile]) =>
+        this.otService
+          .getOTs(profile.id, data.filtro_propietario, data.filtro_tipo)
           .pipe(
-            map((res: any) => otActions.getOtSuccess({ ot: res.data.items })),
-            catchError(err => of(otActions.getOtError({ error: err })))
+            map((ots: OT[]) => otActions.getOtSuccess({ ot: ots })),
+            catchError(error => of(otActions.getOtError({ error })))
           )
       )
     )
@@ -235,6 +245,19 @@ export class OtEffects {
     )
   );
 
+  approveOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.approveOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.approveOT(profile.id, otID).pipe(
+          mapTo(otActions.approveOTSuccess()),
+          catchError(error => of(otActions.approveOTError({ error })))
+        )
+      )
+    )
+  );
+
   getDetalleOt$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getDetalleOt),
@@ -251,5 +274,82 @@ export class OtEffects {
           )
       )
     )
+  );
+
+  notifyAfterApproveOTSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.approveOTSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Orden de trabajo aceptada', 'ok');
+
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterApproveOTError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.approveOTError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible aceptar la orden de trabajo',
+            'error'
+          );
+          console.error(`could not approve the ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  rejectOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.rejectOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.rejectOT(profile.id, otID).pipe(
+          mapTo(otActions.rejectOTSuccess()),
+          catchError(error => of(otActions.rejectOTError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterRejectOTSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectOTSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Orden de trabajo rechazada', 'ok');
+
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterRejectOTError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectOTError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible rechazar la orden de trabajo',
+            'error'
+          );
+          console.error(`could not reject the ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
   );
 }

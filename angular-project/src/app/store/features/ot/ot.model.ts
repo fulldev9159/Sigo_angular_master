@@ -1,17 +1,3 @@
-export interface Ot {
-  id: number;
-  nombre: string;
-  tipo: string;
-  fecha_inicio: string;
-  fecha_termino: string;
-  contrato_marco_nombre: string;
-  proveedor_nombre: string;
-  usuario_nombre: string;
-  sesion_sce: string;
-  estado_otdesc: string;
-  etapa_otdesc: string;
-}
-
 export interface Plan {
   id: number;
   nombre: string;

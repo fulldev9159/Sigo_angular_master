@@ -6,11 +6,11 @@ import {
 } from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { Ot } from '@storeOT/features/ot/ot.model';
+import { OT } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { Login } from '@storeOT/features/auth/auth.model';
+import { Login } from '@data';
 
 @Component({
   selector: 'app-list-ot',
@@ -20,7 +20,7 @@ import { Login } from '@storeOT/features/auth/auth.model';
 })
 export class ListOtComponent implements OnInit, OnDestroy {
   // declarations
-  public items$: Observable<Ot[]>;
+  public items$: Observable<OT[]>;
   public responsable: 'MIAS';
   public tipoOT: 'OT';
   public selectedIndex = 0;
@@ -32,7 +32,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     headerConfig: {
       title: '',
       searchText: 'buscar...',
-      actionsType: 'Buttons',
+      actionsType: 'Menu',
     },
     body: {
       headers: [
@@ -130,36 +130,52 @@ export class ListOtComponent implements OnInit, OnDestroy {
         'contrato_marco_nombre',
         'proveedor_nombre',
       ],
-      actions: [
-        {
-          icon: 'p-button-icon pi pi-check',
-          class: 'p-button-rounded p-button-success p-mr-2',
-          onClick: (item, event) => {
-            this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: `¿Desea aceptar Orden de trabajo?`,
-              icon: 'pi pi-exclamation-triangle',
-              acceptLabel: 'Confirmar',
-              rejectLabel: 'Cancelar',
-              accept: () => {},
-            });
-          },
-        },
-        {
-          icon: 'p-button-icon pi pi-times',
-          class: 'p-button-rounded p-button-danger p-mr-2',
-          onClick: (item, event) => {
-            this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: `¿Desea rechazar Orden de trabajo?`,
-              icon: 'pi pi-exclamation-triangle',
-              acceptLabel: 'Confirmar',
-              rejectLabel: 'Cancelar',
-              accept: () => {},
-            });
-          },
-        },
-      ],
+      actions: ot => {
+        const otAutorizar = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_AUTORIZAR'
+        );
+
+        if (otAutorizar) {
+          return [
+            {
+              icon: 'p-button-icon pi pi-check',
+              class: 'p-button-rounded p-button-success p-mr-2',
+              label: 'Aceptar',
+              onClick: (event: Event, item) => {
+                this.confirmationService.confirm({
+                  target: event.target as EventTarget,
+                  message: `¿Desea aceptar Orden de trabajo?`,
+                  icon: 'pi pi-exclamation-triangle',
+                  acceptLabel: 'Confirmar',
+                  rejectLabel: 'Cancelar',
+                  accept: () => {
+                    this.otFacade.approveOT(ot.id);
+                  },
+                });
+              },
+            },
+            {
+              icon: 'p-button-icon pi pi-times',
+              class: 'p-button-rounded p-button-danger p-mr-2',
+              label: 'Rechazar',
+              onClick: (event: Event, item) => {
+                this.confirmationService.confirm({
+                  target: event.target as EventTarget,
+                  message: `¿Desea rechazar Orden de trabajo?`,
+                  icon: 'pi pi-exclamation-triangle',
+                  acceptLabel: 'Confirmar',
+                  rejectLabel: 'Cancelar',
+                  accept: () => {
+                    this.otFacade.rejectOT(ot.id);
+                  },
+                });
+              },
+            },
+          ];
+        }
+
+        return [];
+      },
     },
   };
 
@@ -176,6 +192,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.tipoOT = 'OT';
     this.selectedIndex = 0;
     this.selectedOTs = 'ABIERTAS';
+
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance))
@@ -183,7 +200,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
         if (authLogin) {
           this.authLogin = authLogin;
           this.otFacade.getOt({
-            perfil_id: +this.authLogin.perfiles[0].id,
             filtro_propietario: this.responsable,
             filtro_tipo: this.tipoOT,
           });
@@ -201,7 +217,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
       console.log(this.tipoOT);
       this.selectedOTs = 'CERRADAS';
       this.otFacade.getOt({
-        perfil_id: +this.authLogin.perfiles[0].id,
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
       });
@@ -211,7 +226,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
       console.log(this.tipoOT);
       this.selectedOTs = 'ABIERTAS';
       this.otFacade.getOt({
-        perfil_id: +this.authLogin.perfiles[0].id,
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
       });
@@ -228,7 +242,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
     console.log(this.responsable);
     console.log(this.tipoOT);
     this.otFacade.getOt({
-      perfil_id: +this.authLogin.perfiles[0].id,
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });
@@ -239,7 +252,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
     console.log(this.responsable);
     console.log(this.tipoOT);
     this.otFacade.getOt({
-      perfil_id: +this.authLogin.perfiles[0].id,
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });

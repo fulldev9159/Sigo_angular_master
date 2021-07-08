@@ -4,21 +4,39 @@ import { Observable } from 'rxjs';
 import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
 import * as OTmodel from './ot.model';
+import { OT } from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OtFacade {
-  constructor(private store: Store<OTmodel.Ot>) {}
+  constructor(private store: Store<OT>) {}
 
   // OT
-  public getOt(data: any): void {
-    this.store.dispatch(otActions.getOt(data));
+  public getOt({ filtro_propietario, filtro_tipo }): void {
+    this.store.dispatch(otActions.getOt({ filtro_propietario, filtro_tipo }));
   }
 
-  public getOt$(): Observable<OTmodel.Ot[]> {
+  public getOt$(): Observable<OT[]> {
     return this.store.select(otSelectors.getOt);
   }
+
+  public getOtFilters$(): Observable<{
+    filtro_propietario: string;
+    filtro_tipo: string;
+  }> {
+    return this.store.select(otSelectors.getOtFilters);
+  }
+
+  // ESTADOS DE OT
+  public approveOT(otID: number): void {
+    this.store.dispatch(otActions.approveOT({ otID }));
+  }
+
+  public rejectOT(otID: number): void {
+    this.store.dispatch(otActions.rejectOT({ otID }));
+  }
+  // ESTADOS DE OT
 
   // DELETE
   public deleteOt(position: number): void {

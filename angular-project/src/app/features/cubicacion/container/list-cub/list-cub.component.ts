@@ -12,7 +12,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { map, filter, takeUntil } from 'rxjs/operators';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
-import { Login } from '@storeOT/features/auth/auth.model';
+import { Login } from '@data';
 import { MessageService } from 'primeng/api';
 
 @Component({
@@ -236,7 +236,15 @@ export class ListCubComponent implements OnInit, OnDestroy {
       .subscribe(authLogin => {
         if (authLogin) {
           this.authLogin = authLogin;
-          this.cubageFacade.getCubicacionAction(+authLogin.perfiles[0].id);
+        }
+      });
+
+    this.authFacade
+      .getCurrentProfile$()
+      .pipe(takeUntil(this.destroyInstance))
+      .subscribe(profile => {
+        if (profile) {
+          this.cubageFacade.getCubicacionAction(+profile.id);
         }
       });
 

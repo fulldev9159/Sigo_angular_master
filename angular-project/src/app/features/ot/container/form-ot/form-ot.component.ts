@@ -14,7 +14,7 @@ import { MessageService } from 'primeng/api';
 import { Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Login } from '@storeOT/features/auth/auth.model';
+import { Login } from '@data';
 
 @Component({
   selector: 'app-form-ot',
@@ -67,7 +67,15 @@ export class FormOtComponent implements OnInit, OnDestroy {
         if (authLogin) {
           this.authLogin = authLogin;
           this.formOt.get('gestor_id').setValue(this.authLogin.usuario_id);
-          this.cubageFacade.getCubicacionAction(+authLogin.perfiles[0].id);
+        }
+      });
+
+    this.authFacade
+      .getCurrentProfile$()
+      .pipe(takeUntil(this.destroyInstance$))
+      .subscribe(profile => {
+        if (profile) {
+          this.cubageFacade.getCubicacionAction(+profile.id);
         }
       });
 

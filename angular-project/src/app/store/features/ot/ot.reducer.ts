@@ -1,36 +1,31 @@
 import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
-import {
-  CECO,
-  CuentaSap,
-  IDOpex,
-  Lp,
-  Ot,
-  Pep2,
-  Plan,
-  PMO,
-  Proyecto,
-  Site,
-} from './ot.model';
-import * as OTmodel from './ot.model';
+import * as OTModel from './ot.model';
+import { OT } from '@data';
 
 export const otFeatureKey = 'ot';
 
 export interface StateOt {
-  items: Ot[];
-  planes: Plan[];
-  sites: Site[];
-  pmos: PMO[];
-  budgetLines: Lp[];
-  pep2s: Pep2[];
-  ids_opex: IDOpex[];
-  cuentas_sap: CuentaSap[];
-  cecos: CECO[];
-  proyectos: Proyecto[];
-  detalleOt: OTmodel.DataRspDetalleOT;
+  filtro_propietario: string;
+  filtro_tipo: string;
+
+  items: OT[];
+  planes: OTModel.Plan[];
+  sites: OTModel.Site[];
+  pmos: OTModel.PMO[];
+  budgetLines: OTModel.Lp[];
+  pep2s: OTModel.Pep2[];
+  ids_opex: OTModel.IDOpex[];
+  cuentas_sap: OTModel.CuentaSap[];
+  cecos: OTModel.CECO[];
+  proyectos: OTModel.Proyecto[];
+  detalleOt: OTModel.DataRspDetalleOT;
 }
 
 export const initialStateOt: StateOt = {
+  filtro_propietario: '',
+  filtro_tipo: '',
+
   items: [
     {
       id: 123,
@@ -44,6 +39,14 @@ export const initialStateOt: StateOt = {
       sesion_sce: 'AF4GSHJ46G3GSVB',
       estado_otdesc: 'ACTIVA',
       etapa_otdesc: 'Pendiente de Autorización por Adm. Contrato',
+      acciones: [
+        {
+          id: 8,
+          slug: 'OT_AUTORIZAR',
+          nombre_corto: 'Autorizar OT',
+          descripcion: 'Poder aceptar o rechazar una OT',
+        },
+      ],
     },
   ],
   planes: [],
@@ -61,7 +64,11 @@ export const initialStateOt: StateOt = {
 export const reducerOt = createReducer(
   initialStateOt,
 
-  on(OtActions.getOt, state => state),
+  on(OtActions.getOt, (state, { filtro_propietario, filtro_tipo }) => ({
+    ...state,
+    filtro_propietario,
+    filtro_tipo,
+  })),
   on(OtActions.getOtSuccess, (state, payload) => ({
     ...state,
     items: payload.ot,
@@ -136,5 +143,24 @@ export const reducerOt = createReducer(
   on(OtActions.getDetalleOtSuccess, (state, payload) => ({
     ...state,
     detalleOt: payload.detalleot,
+  })),
+  on(OtActions.approveOT, state => ({
+    ...state,
+  })),
+  on(OtActions.approveOTSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.approveOTError, state => ({
+    ...state,
+  })),
+
+  on(OtActions.rejectOT, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectOTSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectOTError, state => ({
+    ...state,
   }))
 );
