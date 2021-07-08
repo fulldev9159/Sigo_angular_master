@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailComponent } from './component/detail/detail.component';
 import { CDetalleOtComponent } from './container/c-detalle-ot/c-detalle-ot.component';
 import { DetalleOtComponent } from './component/detalle-ot/detalle-ot.component';
+import { AssignCoordinatorFormComponent } from './component/assign-coordinator-form/assign-coordinator-form.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DetalleOtComponent } from './component/detalle-ot/detalle-ot.component'
     DetailComponent,
     CDetalleOtComponent,
     DetalleOtComponent,
+    AssignCoordinatorFormComponent,
   ],
   imports: [
     CommonModule,

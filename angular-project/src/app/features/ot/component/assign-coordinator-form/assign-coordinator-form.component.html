@@ -1,0 +1,9 @@
+<form novalidate autocomplete="off" [formGroup]="form">
+  <app-select [control]="formControls.coordinator" label="Coordinador" [errorMessageFn]="errorMessageFn">
+    <ng-container options>
+      <option value="" selected disabled>Seleccione tipo</option>
+      <option value="OT">OT</option>
+      <option value="AP">AP</option>
+    </ng-container>
+  </app-select>
+</form>

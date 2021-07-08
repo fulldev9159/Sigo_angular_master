@@ -191,7 +191,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
         }
 
         const otAsignarCoordinador = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_ASIGNAR_COORDINADOR'
+          accion => accion.slug === 'OT_AUTORIZAR'
         );
 
         if (otAsignarCoordinador) {
@@ -245,18 +245,18 @@ export class ListOtComponent implements OnInit, OnDestroy {
   onChange($event): void {
     this.selectedIndex = $event.index;
     if (this.selectedIndex === 0) {
-      console.log(this.selectedIndex);
-      console.log(this.responsable);
-      console.log(this.tipoOT);
+      // console.log(this.selectedIndex);
+      // console.log(this.responsable);
+      // console.log(this.tipoOT);
       this.selectedOTs = 'CERRADAS';
       this.otFacade.getOt({
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
       });
     } else if (this.selectedIndex === 1) {
-      console.log(this.selectedIndex);
-      console.log(this.responsable);
-      console.log(this.tipoOT);
+      // console.log(this.selectedIndex);
+      // console.log(this.responsable);
+      // console.log(this.tipoOT);
       this.selectedOTs = 'ABIERTAS';
       this.otFacade.getOt({
         filtro_propietario: this.responsable,
@@ -271,9 +271,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   onClick(event): void {
-    console.log(this.selectedIndex);
-    console.log(this.responsable);
-    console.log(this.tipoOT);
+    // console.log(this.selectedIndex);
+    // console.log(this.responsable);
+    // console.log(this.tipoOT);
     this.otFacade.getOt({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
@@ -281,12 +281,17 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   onClickTipo(event): void {
-    console.log(this.selectedIndex);
-    console.log(this.responsable);
-    console.log(this.tipoOT);
+    // console.log(this.selectedIndex);
+    // console.log(this.responsable);
+    // console.log(this.tipoOT);
     this.otFacade.getOt({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });
+  }
+
+  closeAssignCoordinatorModal(): void {
+    this.otFacade.selectOT(null); // workaround for subscribing the same ot multiple times
+    this.displayAssignCoordinatorModal = false;
   }
 }
