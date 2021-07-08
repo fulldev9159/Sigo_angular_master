@@ -4,20 +4,20 @@ import { Observable } from 'rxjs';
 import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
 import * as OTmodel from './ot.model';
-import { OT } from '@data';
+import * as Data from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OtFacade {
-  constructor(private store: Store<OT>) {}
+  constructor(private store: Store<Data.OT>) {}
 
   // OT
   public getOt({ filtro_propietario, filtro_tipo }): void {
     this.store.dispatch(otActions.getOt({ filtro_propietario, filtro_tipo }));
   }
 
-  public getOt$(): Observable<OT[]> {
+  public getOt$(): Observable<Data.OT[]> {
     return this.store.select(otSelectors.getOt);
   }
 
@@ -28,11 +28,11 @@ export class OtFacade {
     return this.store.select(otSelectors.getOtFilters);
   }
 
-  public selectOT(ot: OT): void {
+  public selectOT(ot: Data.OT): void {
     this.store.dispatch(otActions.selectOT({ ot }));
   }
 
-  public getSelectedOT$(): Observable<OT> {
+  public getSelectedOT$(): Observable<Data.OT> {
     return this.store.select(otSelectors.getSelectedOT);
   }
 
@@ -206,5 +206,14 @@ export class OtFacade {
 
   public getDetalleOtSelector$(): Observable<OTmodel.DataRspDetalleOT> {
     return this.store.select(otSelectors.getDetalleOt);
+  }
+
+  // Coordinadores OT
+  public getCoordinators(otID: number): void {
+    this.store.dispatch(otActions.getCoordinators({ otID }));
+  }
+
+  public getCoordinators$(): Observable<Data.User[]> {
+    return this.store.select(otSelectors.getCoordinators);
   }
 }

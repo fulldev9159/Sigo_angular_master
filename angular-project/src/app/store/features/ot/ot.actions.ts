@@ -1,18 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import * as OtModel from './ot.model';
-import {
-  CECO,
-  CuentaSap,
-  IDOpex,
-  Lp,
-  Pep2,
-  Plan,
-  PMO,
-  Proyecto,
-  Site,
-  RequestCreateOT,
-} from './ot.model';
-import { OT } from '@data';
+import * as Data from '@data';
 
 // OT LIST
 export const getOt = createAction(
@@ -25,7 +13,7 @@ export const getOt = createAction(
 
 export const getOtSuccess = createAction(
   '[Ot GetAll] GET Ot Success',
-  props<{ ot: OT[] }>()
+  props<{ ot: Data.OT[] }>()
 );
 
 export const getOtError = createAction(
@@ -50,12 +38,12 @@ export const deleteOtError = createAction(
 
 export const editOt = createAction(
   '[Ot EditById] EDIT Ot',
-  props<{ ot: OT }>()
+  props<{ ot: Data.OT }>()
 );
 
 export const editOtSuccess = createAction(
   '[Ot EditById] EDIT Ot Success',
-  props<{ OtId: string; Ot: OT }>()
+  props<{ OtId: string; Ot: Data.OT }>()
 );
 
 export const editOtError = createAction(
@@ -65,12 +53,12 @@ export const editOtError = createAction(
 
 export const replyOt = createAction(
   '[Ot Reply] POST Reply Ot',
-  props<{ ot: RequestCreateOT }>()
+  props<{ ot: OtModel.RequestCreateOT }>()
 );
 
 export const replyOtSuccess = createAction(
   '[Ot Reply] POST Reply Ot Success',
-  props<{ ot: OT }>()
+  props<{ ot: Data.OT }>()
 );
 
 export const replyOtError = createAction(
@@ -80,12 +68,12 @@ export const replyOtError = createAction(
 
 export const stateOt = createAction(
   '[Ot State] POST State Ot',
-  props<{ ot: OT }>()
+  props<{ ot: Data.OT }>()
 );
 
 export const stateOtSuccess = createAction(
   '[Ot State] POST State Ot Success',
-  props<{ ot: OT }>()
+  props<{ ot: Data.OT }>()
 );
 
 export const stateOtError = createAction(
@@ -95,12 +83,12 @@ export const stateOtError = createAction(
 
 export const postOt = createAction(
   '[Ot Post] CREATE Ot',
-  props<{ ot: RequestCreateOT }>()
+  props<{ ot: OtModel.RequestCreateOT }>()
 );
 
 export const postOtSuccess = createAction(
   '[Ot Post] CREATE Ot Success',
-  props<{ ot: OT }>()
+  props<{ ot: Data.OT }>()
 );
 
 export const postOtError = createAction(
@@ -111,12 +99,12 @@ export const postOtError = createAction(
 // IngreOT con SCE **
 export const postOtSCE = createAction(
   '[Ot Post] CREATE Ot SCE',
-  props<{ ot: RequestCreateOT }>()
+  props<{ ot: OtModel.RequestCreateOT }>()
 );
 
 export const postOtSCESuccess = createAction(
   '[Ot Post] CREATE Ot SCE Success',
-  props<{ ot: OT }>()
+  props<{ ot: Data.OT }>()
 );
 
 // OT LIST
@@ -129,7 +117,7 @@ export const getPlans = createAction(
 
 export const getPlansSuccess = createAction(
   '[Plans Get By Id Cobage] GET By Id Cobage Success',
-  props<{ plan: Plan[] }>()
+  props<{ plan: OtModel.Plan[] }>()
 );
 
 export const getPlansError = createAction(
@@ -144,7 +132,7 @@ export const getSite = createAction(
 
 export const getSiteSuccess = createAction(
   '[Sites Get By Id Plan] GET By Id Plan Success',
-  props<{ site: Site[] }>()
+  props<{ site: OtModel.Site[] }>()
 );
 
 export const getSiteError = createAction(
@@ -159,7 +147,7 @@ export const getPmo = createAction(
 
 export const getPmoSuccess = createAction(
   '[Pmo Get By Id Site] GET By Id Site Success',
-  props<{ pmo: PMO[] }>()
+  props<{ pmo: OtModel.PMO[] }>()
 );
 
 export const getPmoError = createAction(
@@ -171,7 +159,7 @@ export const getIDOpex = createAction('[IDOpex Get All] GET All');
 
 export const getIDOpexSuccess = createAction(
   '[IDOpex Get All] GET All Success',
-  props<{ ids_opex: IDOpex[] }>()
+  props<{ ids_opex: OtModel.IDOpex[] }>()
 );
 
 export const getIDOpexError = createAction(
@@ -186,7 +174,7 @@ export const getCuentaSAP = createAction(
 
 export const getCuentaSAPSuccess = createAction(
   '[CuentaSAP Get By Id IDOpex] GET By Id IDOpex Success',
-  props<{ cuentas_sap: CuentaSap[] }>()
+  props<{ cuentas_sap: OtModel.CuentaSap[] }>()
 );
 
 export const getCuentaSAPError = createAction(
@@ -201,7 +189,7 @@ export const getCECO = createAction(
 
 export const getCECOSuccess = createAction(
   '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP Success',
-  props<{ cecos: CECO[] }>()
+  props<{ cecos: OtModel.CECO[] }>()
 );
 
 export const getCECOError = createAction(
@@ -216,7 +204,7 @@ export const getBudgetLine = createAction(
 
 export const getBudgetLineSuccess = createAction(
   '[BudgetLine Get By Id Pmo] GET By Id Pmo Success',
-  props<{ lp: Lp[] }>()
+  props<{ lp: OtModel.Lp[] }>()
 );
 
 export const getBudgetLineError = createAction(
@@ -231,7 +219,7 @@ export const getPep2 = createAction(
 
 export const getPep2Success = createAction(
   '[getPep2 Get By Id BudgetLine] GET By Id BudgetLine Success',
-  props<{ pep2: Pep2[] }>()
+  props<{ pep2: OtModel.Pep2[] }>()
 );
 
 export const getPep2Error = createAction(
@@ -243,7 +231,7 @@ export const getProyecto = createAction('[Proyecto Get All] GET All');
 
 export const getProyectoSuccess = createAction(
   '[Proyecto Get All] GET All Success',
-  props<{ proyectos: Proyecto[] }>()
+  props<{ proyectos: OtModel.Proyecto[] }>()
 );
 
 export const getProyectoError = createAction(
@@ -269,7 +257,7 @@ export const getDetalleOtError = createAction(
 export const selectOT = createAction(
   '[OT] select OT',
   props<{
-    ot: OT;
+    ot: Data.OT;
   }>()
 );
 
@@ -295,5 +283,21 @@ export const rejectOTSuccess = createAction('[OT] Reject OT success');
 
 export const rejectOTError = createAction(
   '[OT] Reject OT error',
+  props<{ error: any }>()
+);
+
+// Coordinadores
+export const getCoordinators = createAction(
+  '[OT] get coordinators',
+  props<{ otID: number }>()
+);
+
+export const getCoordinatorsSuccess = createAction(
+  '[OT] get coordinators success',
+  props<{ coordinators: Data.User[] }>()
+);
+
+export const getCoordinatorsError = createAction(
+  '[OT] get coordinators error',
   props<{ error: any }>()
 );

@@ -5,10 +5,10 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { OT } from '@data';
+import * as Data from '@data';
 
 @Component({
   selector: 'app-assign-coordinator-form',
@@ -17,7 +17,8 @@ import { OT } from '@data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
-  ot$: Observable<OT>;
+  ot$: Observable<Data.OT>;
+  coordinators$: Observable<Data.User[]>;
   subscription: Subscription = new Subscription();
   formControls = {
     coordinator: new FormControl('', [Validators.required]),
@@ -35,12 +36,14 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.ot$ = this.otFacade.getSelectedOT$().pipe(filter(ot => ot !== null));
+    this.coordinators$ = this.otFacade
+      .getCoordinators$()
+      .pipe(map(coordinators => coordinators || []));
 
     this.subscription.add(
       this.ot$.subscribe(ot => {
-        console.log('ot', ot);
-        console.log('TODO Call coordinator');
         this.reset();
+        this.otFacade.getCoordinators(ot.id);
       })
     );
   }

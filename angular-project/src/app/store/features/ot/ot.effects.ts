@@ -15,7 +15,7 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { OTService, OT } from '@data';
+import * as Data from '@data';
 import * as otActions from './ot.actions';
 
 import { environment } from '@environment';
@@ -29,7 +29,7 @@ export class OtEffects {
     private actions$: Actions,
     private http: HttpClient,
     private snackService: SnackBarService,
-    private otService: OTService,
+    private otService: Data.OTService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade
   ) {}
@@ -42,7 +42,7 @@ export class OtEffects {
         this.otService
           .getOTs(profile.id, data.filtro_propietario, data.filtro_tipo)
           .pipe(
-            map((ots: OT[]) => otActions.getOtSuccess({ ot: ots })),
+            map((ots: Data.OT[]) => otActions.getOtSuccess({ ot: ots })),
             catchError(error => of(otActions.getOtError({ error })))
           )
       )
@@ -351,5 +351,20 @@ export class OtEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  getCoordinators$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCoordinators),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.getCoordinators(profile.id, otID).pipe(
+          map((coordinators: Data.User[]) =>
+            otActions.getCoordinatorsSuccess({ coordinators })
+          ),
+          catchError(error => of(otActions.getCoordinatorsError({ error })))
+        )
+      )
+    )
   );
 }

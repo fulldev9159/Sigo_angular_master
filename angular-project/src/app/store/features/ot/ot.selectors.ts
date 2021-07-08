@@ -72,3 +72,8 @@ export const getDetalleOt = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.detalleOt
 );
+
+export const getCoordinators = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.coordinators
+);
