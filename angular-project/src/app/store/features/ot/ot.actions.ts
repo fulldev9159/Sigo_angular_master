@@ -108,6 +108,18 @@ export const postOtError = createAction(
   '[Ot Post] CREATE Ot Error',
   props<{ error: any }>()
 );
+
+// IngreOT con SCE **
+export const postOtSCE = createAction(
+  '[Ot Post] CREATE Ot SCE',
+  props<{ ot: RequestCreateOT }>()
+);
+
+export const postOtSCESuccess = createAction(
+  '[Ot Post] CREATE Ot SCE Success',
+  props<{ ot: Ot }>()
+);
+
 // OT LIST
 
 // OT FORM

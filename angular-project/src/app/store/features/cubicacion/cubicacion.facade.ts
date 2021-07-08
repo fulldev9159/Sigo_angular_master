@@ -168,7 +168,7 @@ export class CubicacionFacade {
   }
 
   public ClonarCubicacionAction(
-    cubicacion: cubModel.ResponseGetAllCub,
+    cubicacion: cubModel.Cubicacion,
     cubicacion_id: number
   ): void {
     this.store.dispatch(

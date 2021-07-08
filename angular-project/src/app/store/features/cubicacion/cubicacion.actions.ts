@@ -194,7 +194,7 @@ export const getDetalleCubicacionError = createAction(
 // Clonar cubicacion
 export const clonarCubicacion = createAction(
   '[Clonar cubicacion] SET clonar cubicacion',
-  props<{ cubicacion: cubModel.ResponseGetAllCub; cubicacion_id: number }>()
+  props<{ cubicacion: cubModel.Cubicacion; cubicacion_id: number }>()
 );
 
 export const clonarCubicacionSuccess = createAction(

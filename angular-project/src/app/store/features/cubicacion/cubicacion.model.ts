@@ -1,18 +1,3 @@
-export interface Cubicacion {
-  id: string;
-  total: number;
-  nombre: string;
-  fecha_creacion: string;
-  usuario_id: number;
-  usuario_nombre: string;
-  region_id: number;
-  region_nombre: string;
-  contrato_marco_nombre: string;
-  proveedor_id: number;
-  proveedor_nombre: string;
-  subcontrato_id: number;
-}
-
 export interface ContractMarco {
   id: number;
   nombre: string;
@@ -79,7 +64,7 @@ export interface AutoSuggestItem {
   name: string;
 }
 
-export interface ResponseGetAllCub {
+export interface Cubicacion {
   adm_contrato_nombre: string;
   asignado: boolean;
   contrato_marco_id: number;
