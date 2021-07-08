@@ -116,7 +116,7 @@ export const postOtSCE = createAction(
 
 export const postOtSCESuccess = createAction(
   '[Ot Post] CREATE Ot SCE Success',
-  props<{ ot: Ot }>()
+  props<{ ot: OT }>()
 );
 
 // OT LIST
