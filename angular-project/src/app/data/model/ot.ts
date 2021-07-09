@@ -37,3 +37,14 @@ export interface OTsResponse {
     responseCode: number;
   };
 }
+
+export interface ApprovalOTResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
