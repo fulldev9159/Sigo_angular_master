@@ -7,45 +7,46 @@ import {
   HttpRequest,
   HttpResponse,
   HttpErrorResponse,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 
 @Injectable()
 export class JwtAppInterceptor implements HttpInterceptor {
-  // declarations
   public token = null;
-  private destroyInstance: Subject<boolean> = new Subject();
+  public profileID = null;
 
   constructor(private router: Router, private authFacade: AuthFacade) {
     authFacade
       .getLogin$()
-      .pipe(takeUntil(this.destroyInstance))
-      .subscribe(login => {
-        if (login) {
-          this.token = login.token;
-        }
-      });
+      .pipe(filter(login => login !== null))
+      .subscribe(login => (this.token = login.token));
+
+    authFacade
+      .getCurrentProfile$()
+      .pipe(filter(profile => profile !== null))
+      .subscribe(profile => (this.profileID = profile.id));
   }
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (!req.url.includes('/login')) {
-      const token = `Bearer ${this.token}`;
-      req = req.clone({
-        setHeaders: {
-          Authorization: `${token}`,
-        },
-      });
-    } else {
-      const token = `Bearer ${this.token}`;
+    if (req.url.includes('/login')) {
       req = req.clone({
         setHeaders: {},
       });
+    } else {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${this.token}`,
+        // 'X-SIGO-User-Profile': `${this.profileID}`, // TODO: esperar a que el backend acepte este header en el CORS
+      });
+
+      req = req.clone({ headers });
     }
+
     return next.handle(req).pipe(
       tap(
         (event: any) => {
