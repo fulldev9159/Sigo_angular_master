@@ -41,7 +41,7 @@ export class JwtAppInterceptor implements HttpInterceptor {
     } else {
       const headers = new HttpHeaders({
         Authorization: `Bearer ${this.token}`,
-        // 'X-SIGO-User-Profile': `${this.profileID}`, // TODO: esperar a que el backend acepte este header en el CORS
+        'X-SIGO-User-Profile': `${this.profileID}`,
       });
 
       req = req.clone({ headers });
