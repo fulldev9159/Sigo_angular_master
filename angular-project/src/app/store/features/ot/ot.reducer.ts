@@ -33,27 +33,27 @@ export const initialStateOt: StateOt = {
   selectedOT: null,
 
   items: [
-    {
-      id: 123,
-      nombre: 'Orden de trabajo',
-      tipo: 'TIPO',
-      fecha_inicio: '2021-02-21T00:50:23Z',
-      fecha_termino: '2021-02-21T00:50:23Z',
-      contrato_marco_nombre: '1231232',
-      proveedor_nombre: 'Fuente Alemana',
-      usuario_nombre: 'Carlos Cifuentes',
-      sesion_sce: 'AF4GSHJ46G3GSVB',
-      estado_otdesc: 'ACTIVA',
-      etapa_otdesc: 'Pendiente de Autorización por Adm. Contrato',
-      acciones: [
-        {
-          id: 8,
-          slug: 'OT_AUTORIZAR',
-          nombre_corto: 'Autorizar OT',
-          descripcion: 'Poder aceptar o rechazar una OT',
-        },
-      ],
-    },
+    // {
+    //   id: 123,
+    //   nombre: 'Orden de trabajo',
+    //   tipo: 'TIPO',
+    //   fecha_inicio: '2021-02-21T00:50:23Z',
+    //   fecha_termino: '2021-02-21T00:50:23Z',
+    //   contrato_marco_nombre: '1231232',
+    //   proveedor_nombre: 'Fuente Alemana',
+    //   usuario_nombre: 'Carlos Cifuentes',
+    //   sesion_sce: 'AF4GSHJ46G3GSVB',
+    //   estado_otdesc: 'ACTIVA',
+    //   etapa_otdesc: 'Pendiente de Autorización por Adm. Contrato',
+    //   acciones: [
+    //     {
+    //       id: 8,
+    //       slug: 'OT_AUTORIZAR',
+    //       nombre_corto: 'Autorizar OT',
+    //       descripcion: 'Poder aceptar o rechazar una OT',
+    //     },
+    //   ],
+    // },
   ],
   planes: [],
   sites: [],

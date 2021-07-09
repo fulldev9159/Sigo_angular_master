@@ -11,7 +11,6 @@ import { OT } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
-import { Login } from '@data';
 import { Router } from '@angular/router';
 import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
 
@@ -30,8 +29,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
   public selectedOTs: string;
 
   private destroyInstance: Subject<boolean> = new Subject();
-
-  public authLogin: Login = null;
 
   displayAssignCoordinatorModal = false;
 
@@ -234,24 +231,16 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.selectedIndex = 0;
     this.selectedOTs = 'ABIERTAS';
 
-    this.authFacade
-      .getLogin$()
-      .pipe(takeUntil(this.destroyInstance))
-      .subscribe(authLogin => {
-        if (authLogin) {
-          this.authLogin = authLogin;
-          this.otFacade.getOt({
-            filtro_propietario: this.responsable,
-            filtro_tipo: this.tipoOT,
-          });
-        }
-      });
-
     this.items$ = this.otFacade.getOt$().pipe(
       tap(ots => {
         this.closeAssignCoordinatorModal();
       })
     );
+
+    this.otFacade.getOt({
+      filtro_propietario: this.responsable,
+      filtro_tipo: this.tipoOT,
+    });
   }
 
   onChange($event): void {
