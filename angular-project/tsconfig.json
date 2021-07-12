@@ -18,7 +18,7 @@
       "@data/*": ["src/app/data/*"],
       "@layoytOT": ["src/app/layout/layout.module"],
       "@layoytOT/*": ["src/app/layout/*"],
-      "@featureOT/*": ["src/app/feature/*"],
+      "@featureOT/*": ["src/app/features/*"],
       "@uiOT/*": ["src/app/ui/*"],
       "@storeOT/*": ["src/app/store/*"],
       "@utilsSIGO/*": ["src/app/utils/*"]

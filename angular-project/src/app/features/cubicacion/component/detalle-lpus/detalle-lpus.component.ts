@@ -1,29 +1,34 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnDestroy,
   OnInit,
+  Input,
   Output,
   EventEmitter,
 } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
+import { ConfirmationService } from 'primeng/api';
 import { Subscription, Subject, Observable } from 'rxjs';
-import * as otModel from '@storeOT/features/ot/ot.model';
+import { map, filter, takeUntil } from 'rxjs/operators';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
+import { Login } from '@data';
+import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-detalle-ot',
-  templateUrl: './detalle-ot.component.html',
-  styleUrls: ['./detalle-ot.component.scss'],
+  selector: 'app-detalle-lpus',
+  templateUrl: './detalle-lpus.component.html',
+  styleUrls: ['./detalle-lpus.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetalleOtComponent implements OnInit, OnDestroy {
-  @Input() formOt: any;
-  @Input() detalleOt: otModel.DataRspDetalleOT;
+export class DetalleLpusComponent implements OnInit, OnDestroy {
   @Input() DisplayModal: boolean;
   @Input() detalleCubicacion: cubModel.ResponseDetalleCubicacion[];
-  @Output() public getlpus = new EventEmitter();
-  @Output() public cerrar = new EventEmitter();
+  @Output() closes = new EventEmitter();
+  subscription: Subscription = new Subscription();
   public ConfigTableResumen = {
     header: true,
     headerConfig: {
@@ -89,8 +94,6 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
       actions: [],
     },
   };
-
-  subscription: Subscription = new Subscription();
   constructor() {}
 
   ngOnInit(): void {}
@@ -99,12 +102,8 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public getLPUs(cubicacion_id: number): void {
-    this.getlpus.emit(cubicacion_id);
-  }
-
-  public Close(): void {
-    console.log('Close desde dummy ot detalle-ot');
-    this.cerrar.emit();
-  }
+  // Close(): void {
+  //   console.log('sdas');
+  //   this.close.emit();
+  // }
 }

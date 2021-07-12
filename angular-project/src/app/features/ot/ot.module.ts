@@ -12,6 +12,7 @@ import { DetailComponent } from './component/detail/detail.component';
 import { CDetalleOtComponent } from './container/c-detalle-ot/c-detalle-ot.component';
 import { DetalleOtComponent } from './component/detalle-ot/detalle-ot.component';
 import { AssignCoordinatorFormComponent } from './component/assign-coordinator-form/assign-coordinator-form.component';
+import { DetalleLpusComponent } from '@featureOT/cubicacion/component/detalle-lpus/detalle-lpus.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AssignCoordinatorFormComponent } from './component/assign-coordinator-f
     CDetalleOtComponent,
     DetalleOtComponent,
     AssignCoordinatorFormComponent,
+    DetalleLpusComponent,
   ],
   imports: [
     CommonModule,

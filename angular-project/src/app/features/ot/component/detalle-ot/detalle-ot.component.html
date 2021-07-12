@@ -19,6 +19,10 @@
           <li>Proveedor: <span style="margin-right:2.3em"></span>{{detalleOt ? '----' : ' ---'}}</li>
           <li>Región: <span style="margin-right:4em"></span>{{detalleOt ? detalleOt.sitio.region_nombre : ' ---'}}</li>
           <li>Total: <span style="margin-right:4.8em"></span> ${{detalleOt ? '--- ': ' ---'}}</li>
+          <button (click)="getLPUs(detalleOt.cubicacion_id)" class="btn btn-primary" style="width: 83px;
+          font-size: 12px;
+          margin-top: 10px;
+          margin-left: -19px;">Ver Lpus</button>
         </ul>
       </ng-container>
     </app-card>
@@ -83,3 +87,13 @@
     </app-card>
   </div>
 </div>
+
+<!-- <app-detalle-lpus [DisplayModal]="DisplayModal" [detalleCubicacion]="detalleCubicacion$|async" (close)="Close()"></app-detalle-lpus> -->
+<app-modal [display]="DisplayModal" (CloseEvent)="Close()">
+  <ng-container modal-header-title>Detalle de las LPUs</ng-container>
+  <ng-container modal-content>
+    <app-table [config]="ConfigTableResumen" [items]="detalleCubicacion"></app-table>
+    <!-- <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span> -->
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>

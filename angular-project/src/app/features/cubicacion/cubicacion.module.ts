@@ -6,6 +6,7 @@ import { CubicacionComponent } from './cubicacion.component';
 import { UiModule } from '@uiOT/ui.module';
 import { ListCubComponent } from './container/list-cub/list-cub.component';
 import { FormCubContainerComponent } from './container/form-cub/form-cub-container.component';
+// import { DetalleLpusComponent } from '@featureOT/cubicacion/component/detalle-lpus/detalle-lpus.component';
 import { FormComponent } from './component/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
@@ -16,6 +17,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     ListCubComponent,
     FormCubContainerComponent,
     FormComponent,
+    // DetalleLpusComponent
   ],
   imports: [
     CommonModule,
