@@ -392,11 +392,5 @@ export class FormOtComponent implements OnInit, OnDestroy {
     // this.otFacade.postOtSCE(request);
     this.otFacade.postOt(request);
     // this.formOt.reset();
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Registro guardado',
-      detail: 'Registro se ha generado con Éxito!',
-    });
-    this.router.navigate(['app/ot/list-ot']);
   }
 }

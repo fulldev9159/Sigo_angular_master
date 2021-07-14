@@ -19,33 +19,33 @@ Resource    resource.robot
 *** Test Cases ***
 Crear perfil
     Open Browser To Page                  ${url}
-    Login                                 admin                                     password
+    Login                                 admin                           password
     Navegar al menu                       Perfil
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     TEST Jefe Área
     Set descripcion perfil                Test Jefe Área de telefónica
-    Set Permisos modulo                   OT                                        @{permisos OT jefe area}
-    Set Permisos modulo                   CUBICACION                                @{permisos Cubicacion jefe area}
+    Set Permisos modulo                   OT                              @{permisos OT jefe area}
+    Set Permisos modulo                   CUBICACION                      @{permisos Cubicacion jefe area}
     Guardar perfil
-    Validar existencia en la tabla        1                                         TEST Jefe Área
-    Validar existencia en la tabla        2                                         Test Jefe Área de telefónica
-    Reload Page
-    Acceder a creacion de nuevo perfil
-    Set nombre perfil                     TEST Gestor Telefónica
-    Set jefatura                          TEST Jefe Área
-    Set descripcion perfil                Test Gestor de proyectos de telefónica
-    Set Permisos modulo                   OT                                        @{permisos OT gestor}
-    Set Permisos modulo                   CUBICACION                                @{permisos Cubicacion gestor}
-    Guardar perfil
-    Validar existencia en la tabla        1                                         TEST Gestor Telefónica
-    Validar existencia en la tabla        2                                         Test Gestor de proyectos de telefónica
-     #Validar existencia en la tabla        3                                         TEST Jefe Área
-    Reload Page
-    Acceder a creacion de nuevo perfil
-    Set nombre perfil                     TEST para borrar
-    Set descripcion perfil                Test borrado
-    Set Permisos modulo                   OT                                        @{permisos OT jefe area}
-    Guardar perfil
+    # Validar existencia en la tabla        1                                         TEST Jefe Área
+    # Validar existencia en la tabla        2                                         Test Jefe Área de telefónica
+    # Reload Page
+    # Acceder a creacion de nuevo perfil
+    # Set nombre perfil                     TEST Gestor Telefónica
+    # Set jefatura                          TEST Jefe Área
+    # Set descripcion perfil                Test Gestor de proyectos de telefónica
+    # Set Permisos modulo                   OT                                        @{permisos OT gestor}
+    # Set Permisos modulo                   CUBICACION                                @{permisos Cubicacion gestor}
+    # Guardar perfil
+    # Validar existencia en la tabla        1                                         TEST Gestor Telefónica
+    # Validar existencia en la tabla        2                                         Test Gestor de proyectos de telefónica
+    #  #Validar existencia en la tabla        3                                         TEST Jefe Área
+    # Reload Page
+    # Acceder a creacion de nuevo perfil
+    # Set nombre perfil                     TEST para borrar
+    # Set descripcion perfil                Test borrado
+    # Set Permisos modulo                   OT                                        @{permisos OT jefe area}
+    # Guardar perfil
     close Browser
 
 #Desplegar detalle
@@ -126,13 +126,13 @@ Crear perfil
 #    # Element text should be    css:#permisos-modulo-OT>p-listbox>div>div.p-listbox-list-wrapper>ul>li>span.ng-star-inserted    Crear OT
 #    close Browser
 
-Eliminar Perfil
-    Open Browser To Page           ${url}
-    Login                          admin               password
-    Navegar al menu                Perfil
-    Eliminar perfil                TEST para borrar
-    Reload Page
-    No debe existir en la tabla    TEST para borrar
-    close Browser
+# Eliminar Perfil
+#    Open Browser To Page           ${url}
+#    Login                          admin               password
+#    Navegar al menu                Perfil
+#    Eliminar perfil                TEST para borrar
+#    Reload Page
+#    No debe existir en la tabla    TEST para borrar
+#    close Browser
 
 
