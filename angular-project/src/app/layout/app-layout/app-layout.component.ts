@@ -35,17 +35,21 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const perm = ['OT_LIST', 'OT_CREATE'];
-
-    this.permissionsService.loadPermissions(perm);
-
     this.listenToLoading();
     this.loginAuth$ = this.authFacade.getLogin$().pipe(
       map(loginAuth => {
         let auth;
         if (loginAuth) {
+          const perm = loginAuth.perfiles[0].permisos.map(x => x.slug);
+          console.log(perm);
+          this.permissionsService.loadPermissions(perm);
           const nameArray = loginAuth.usuario_nombre.split(' ');
-          auth = { ...loginAuth, name: `${nameArray[0]} ${nameArray[2]}` };
+          auth = {
+            ...loginAuth,
+            // name: `${nameArray[0]} ${nameArray[2]}`,
+            name: loginAuth.usuario_nombre,
+            perfil: loginAuth.perfiles[0].nombre,
+          };
         }
         return auth;
       })
