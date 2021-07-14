@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
+
 import {
   catchError,
   concatMap,
@@ -31,7 +34,9 @@ export class OtEffects {
     private snackService: SnackBarService,
     private otService: Data.OTService,
     private authFacade: AuthFacade,
-    private otFacade: OtFacade
+    private otFacade: OtFacade,
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   getOTs$ = createEffect(() =>
@@ -221,6 +226,14 @@ export class OtEffects {
       ofType(otActions.postOt),
       concatMap((data: any) =>
         this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
+          tap(res => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Registro guardado',
+              detail: 'Registro se ha generado con Éxito!',
+            });
+            this.router.navigate(['app/ot/list-ot']);
+          }),
           map((res: any) => otActions.postOtSuccess({ ot: res.data.items })),
           catchError(err => of(otActions.postOtError({ error: err })))
         )

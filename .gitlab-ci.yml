@@ -33,14 +33,6 @@ build a testing image:
     - docker-compose -f docker-compose.yml build --no-cache testing
     - docker-compose -f docker-compose.yml push testing
 
-# robot framework:
-#   <<: *connect_gcr
-#   stage: build test
-#   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
-#   script:
-#     - docker-compose build --no-cache robotframework
-#     - docker-compose push robotframework
-
 e2e robotframework:
   <<: *connect_gcr
   stage: e2e test
@@ -73,3 +65,10 @@ docker:
   only:
     - tags
     - develop
+# robot framework:
+#   <<: *connect_gcr
+#   stage: build test
+#   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+#   script:
+#     - docker-compose build --no-cache robotframework
+#     - docker-compose push robotframework
