@@ -11,7 +11,7 @@ Resource    ../resource.robot
 ...                            Asignar coordinador
 ...                            Autorizar actas
 ...                            Registrar en libro de obras
-# ...                          Agregar lpu adicionales
+...                            Agregar LPUs adicionales
 
 @{permisos coordinador}=    Listar
 ...                         Asignar trabajador
@@ -20,7 +20,7 @@ Resource    ../resource.robot
 ...                                 Validar trabajos
 ...                                 Finalizar trabajos
 ...                                 Registrar en libro de obras
-# ...                               Agregar lpu adicionales
+...                                 Agregar LPUs adicionales
 
 @{permisos gestor}=    Listar
 ...                    Crear
@@ -29,6 +29,13 @@ Resource    ../resource.robot
 ...                    Autorizar actas
 ...                    Finalizar OT
 ...                    Autotizar LPUs adicionales
+...                    Listar OTs del Area
+
+@{permisos Cubicacion gestor}=    Listar
+...                               Crear
+...                               Editar
+...                               Eliminar
+...                               Copiar
 
 @{permisos jerarquia superior}=    Listar
 ...                                Autorizar pagos
@@ -44,55 +51,55 @@ Index
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     Admin Contratos EC
     Set descripcion perfil                Administrador de contratos de la empresa contratista
-    Set Permisos modulo OT                @{permisos admin contrato}
+    Set Permisos modulo                   OT                                                      @{permisos admin contrato}
     Guardar perfil
 
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     Coordinador EC
     Set jefatura                          Admin Contratos EC
     Set descripcion perfil                Es el coordinador de la empresa contratista
-    Set Permisos modulo OT                @{permisos coordinador}
+    Set Permisos modulo                   OT                                             @{permisos coordinador}
     Guardar perfil
 
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     Supervisor Trabajos EC
     Set jefatura                          Coordinador EC
     Set descripcion perfil                Es el perfil que se encarga de supervisar los trabajos
-    Set Permisos modulo OT                @{permisos supervisor trabajos}
+    Set Permisos modulo                   OT                                                        @{permisos supervisor trabajos}
     Guardar perfil
 
 
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     Gerente Telefónica
     Set descripcion perfil                Gerente del área de telefónica
-    Set Permisos modulo OT                @{permisos jerarquia superior}
+    Set Permisos modulo                   OT                                @{permisos jerarquia superior}
     Guardar perfil
 
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     SubGerente Telefónica
     Set jefatura                          Gerente Telefónica
     Set descripcion perfil                SubGerente del área de telefónica
-    Set Permisos modulo OT                @{permisos jerarquia superior}
+    Set Permisos modulo                   OT                                   @{permisos jerarquia superior}
     Guardar perfil
 
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     Jefe de Área Telefónica
     Set jefatura                          SubGerente Telefónica
     Set descripcion perfil                Jefe de área de telefónica
-    Set Permisos modulo OT                @{permisos jerarquia superior}
+    Set Permisos modulo                   OT                            @{permisos jerarquia superior}
     Guardar perfil
 
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     Gestor Telefónica
     Set jefatura                          Jefe de Área Telefónica
     Set descripcion perfil                Gestor de proyectos de telefónica
-    Set Permisos modulo OT                @{permisos gestor}
-    Set Permisos modulo CUBICACION
+    Set Permisos modulo                   OT                                   @{permisos gestor}
+    Set Permisos modulo                   CUBICACION                           @{permisos Cubicacion gestor}
     Guardar perfil
 
 
     ### CREAR USUARIOS ####
-    Navegar al menu    Usuario
+    Navegar al menu                        Usuario
     Acceder a creacion de nuevo usuario
     Set username                           jadmincontrato
     Set nombres y apellidos                Esteban               Alarcon

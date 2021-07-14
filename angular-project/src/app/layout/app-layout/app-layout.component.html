@@ -10,13 +10,9 @@
             <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg" alt="User picture">
           </div>
           <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info">
-            <span class="user-name" id="user-name">{{(loginAuth$ | async).name | titlecase}}
+            <span class="user-name" id="user-name" style="width: 140px">{{(loginAuth$ | async).name | titlecase}}
             </span>
-            <span class="user-role" id="user-role">Gertor</span>
-            <!-- <span class="user-status">
-              <i class="fa fa-circle"></i>
-              <span>Online</span>
-            </span> -->
+            <span class="user-role" id="user-role">{{(loginAuth$ |async).perfil}}</span>
           </div>
         </div>
         <div class="sidebar-menu">
@@ -30,61 +26,52 @@
             <li class="header-menu">
               <span>MODULOS</span>
             </li>
-            <li *ngxPermissionsOnly="['OT_LIST']" routerLinkActive="active" id="menu-ot">
+            <li *ngxPermissionsOnly="['OT_LISTAR']" routerLinkActive="active" id="menu-ot">
               <a href="#otSub" data-toggle="collapse" aria-expanded="false">
                 <i class="pi pi-briefcase"></i>
                 <span>OT</span>
                 <em class="pi pi-angle-down float-right icon-angle-bottom"></em>
               </a>
               <ul class="collapse show list-unstyled" id="otSub">
-                <li *ngxPermissionsOnly="['OT_LIST']" class="pl-5" routerLinkActive="active-item">
+                <li *ngxPermissionsOnly="['OT_LISTAR']" class="pl-5" routerLinkActive="active-item">
                   <a [routerLink]="['/app/ot/list-ot']">Listar OTs</a>
                 </li>
-                <li *ngxPermissionsOnly="['OT_CREATE']" class="pl-5" routerLinkActive="active-item">
+                <li *ngxPermissionsOnly="['OT_CREAR']" class="pl-5" routerLinkActive="active-item">
                   <a [routerLink]="['/app/ot/form-ot']">Crear OT</a>
                 </li>
               </ul>
             </li>
-            <!-- <a [routerLink]="['/app/ot/list-ot']">
-              <i class="far fa-id-badge"></i>
-              <span>OT</span>
-            </a> -->
-            <li routerLinkActive="active" id="menu-cubicacion">
-              <!-- <a [routerLink]="['/app/cubicacion/list-cub']">
-                <i class="far fa-id-badge"></i>
-                <span>Cubicación</span>
-              </a> -->
+            <li *ngxPermissionsOnly="['CUBICACION_LISTAR']" routerLinkActive="active" id="menu-cubicacion">
               <a href="#cubSub" data-toggle="collapse" aria-expanded="false">
                 <i class="pi pi-shopping-cart"></i>
                 <span>Cubicación</span>
                 <em class="pi pi-angle-down float-right icon-angle-bottom"></em>
               </a>
               <ul class="collapse list-unstyled" id="cubSub">
-                <li class="pl-5" routerLinkActive="active-item">
+                <li *ngxPermissionsOnly="['CUBICACION_LISTAR']" class="pl-5" routerLinkActive="active-item">
                   <a [routerLink]="['/app/cubicacion/list-cub']">Listar Cubicaciones</a>
                 </li>
-                <li class="pl-5" routerLinkActive="active-item" id="listarCubSubMenu">
+                <li *ngxPermissionsOnly="['CUBICACION_CREAR']" class="pl-5" routerLinkActive="active-item" id="listarCubSubMenu">
                   <a [routerLink]="['/app/cubicacion/form-cub']">Crear Cubicación</a>
                 </li>
               </ul>
             </li>
-            <li class="header-menu">
+            <li class="header-menu" *ngxPermissionsOnly="['PERFIL_LISTAR','PERFIL_CREAR']">
               <span>ADMINISTRACION</span>
             </li>
-            <li routerLinkActive="active" id="menu-perfil">
+            <li *ngxPermissionsOnly="['PERFIL_LISTAR','PERFIL_CREAR']" routerLinkActive="active" id="menu-perfil">
               <a [routerLink]="['/app/profile']">
                 <i class="pi pi-id-card"></i>
                 <span>Perfiles</span>
               </a>
             </li>
-            <li routerLinkActive="active" id="menu-usuario">
+            <li *ngxPermissionsOnly="['PERFIL_LISTAR','PERFIL_CREAR']" routerLinkActive="active" id="menu-usuario">
               <a [routerLink]="['/app/user']">
                 <i class="pi pi-users"></i>
                 <span>Usuarios</span>
-                <!-- <span class="badge badge-pill badge-warning">Nuevo</span> -->
               </a>
             </li>
-            <li routerLinkActive="active" id="menu-components">
+            <li *ngxPermissionsOnly="['PERFIL_LISTAR','PERFIL_CREAR']" routerLinkActive="active" id="menu-components">
               <a [routerLink]="['/app/kitui']">
                 <i class="far fa-gem"></i>
                 <span>Components</span>
