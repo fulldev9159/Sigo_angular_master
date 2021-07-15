@@ -34,22 +34,22 @@ export class OTService {
   }
 
   approveOT(perfil_id: number, otID: number): Observable<any> {
-    console.log('[TODO] approve OT using mockup. Still not implemented', {
-      perfil_id,
-      otID,
-    });
     return this.http.post<ApprovalOTResponse>(
-      `${this.apiUrl}/mockup/ingreot/ot/aceptar`,
-      {}
+      `${this.apiUrl}/validaot/ot/accept`,
+      {
+        ot_id: otID,
+      }
     );
   }
 
   rejectOT(perfil_id: number, otID: number): Observable<any> {
-    console.log('[TODO] reject OT still not implemented', {
-      perfil_id,
-      otID,
-    });
-    return of({});
+    return this.http.post<ApprovalOTResponse>(
+      `${this.apiUrl}/validaot/ot/reject`,
+      {
+        ot_id: otID,
+        motivo: `Se rechaza OT con id ${otID}`,
+      }
+    );
   }
 
   getCoordinators(perfil_id: number, otID: number): Observable<User[]> {
