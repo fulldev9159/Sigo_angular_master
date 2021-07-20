@@ -42,12 +42,12 @@ export class OTService {
     );
   }
 
-  rejectOT(perfil_id: number, otID: number): Observable<any> {
+  rejectOT(perfil_id: number, otID: number, motivo: string): Observable<any> {
     return this.http.post<ApprovalOTResponse>(
       `${this.apiUrl}/validaot/ot/reject`,
       {
         ot_id: otID,
-        motivo: `Se rechaza OT con id ${otID}`,
+        motivo,
       }
     );
   }
