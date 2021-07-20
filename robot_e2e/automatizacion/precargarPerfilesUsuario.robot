@@ -47,12 +47,12 @@ Index
     Login                   jcastill          password
 
     ### CREAR PERFILES ####
-    Navegar al menu    Perfil
-    # Acceder a creacion de nuevo perfil
-    # Set nombre perfil                     Admin Contratos EC
-    # Set descripcion perfil                Administrador de contratos de la empresa contratista
-    # Set Permisos modulo                   OT                                                      @{permisos admin contrato}
-    # Guardar perfil
+    Navegar al menu                       Perfil
+    Acceder a creacion de nuevo perfil
+    Set nombre perfil                     Admin Contratos EC
+    Set descripcion perfil                Administrador de contratos de la empresa contratista
+    Set Permisos modulo                   OT                                                      @{permisos admin contrato}
+    Guardar perfil
 
     # Acceder a creacion de nuevo perfil
     # Set nombre perfil                     Coordinador EC
