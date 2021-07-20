@@ -315,3 +315,33 @@ export const assignCoordinatorError = createAction(
   '[OT] assign coordinator error',
   props<{ error: any }>()
 );
+
+// Trabajadores
+export const getTrabajadores = createAction(
+  '[OT] get trabajadores',
+  props<{ otID: number }>()
+);
+
+export const getTrabajadoresSuccess = createAction(
+  '[OT] get trabajadores success',
+  props<{ trabajadores: Data.User[] }>()
+);
+
+export const getTrabajadoresError = createAction(
+  '[OT] get trabajadores error',
+  props<{ error: any }>()
+);
+
+export const assignTrabajador = createAction(
+  '[OT] assign trabajador',
+  props<{ otID: number; trabajadorID: number }>()
+);
+
+export const assignTrabajadorSuccess = createAction(
+  '[OT] assign trabajador success'
+);
+
+export const assignTrabajadorError = createAction(
+  '[OT] assign trabajador error',
+  props<{ error: any }>()
+);

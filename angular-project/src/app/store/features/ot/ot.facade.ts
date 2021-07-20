@@ -220,4 +220,17 @@ export class OtFacade {
   public assignCoordinator(otID: number, coordinatorID: number): void {
     this.store.dispatch(otActions.assignCoordinator({ otID, coordinatorID }));
   }
+
+  // Trabajador Supervisor OT
+  public getTrabajadores(otID: number): void {
+    this.store.dispatch(otActions.getTrabajadores({ otID }));
+  }
+
+  public getTrabajadores$(): Observable<Data.User[]> {
+    return this.store.select(otSelectors.getTrabajadores);
+  }
+
+  public assignTrabajador(otID: number, trabajadorID: number): void {
+    this.store.dispatch(otActions.assignTrabajador({ otID, trabajadorID }));
+  }
 }

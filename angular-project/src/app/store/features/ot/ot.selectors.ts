@@ -77,3 +77,8 @@ export const getCoordinators = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.coordinators
 );
+
+export const getTrabajadores = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.trabajadores
+);
