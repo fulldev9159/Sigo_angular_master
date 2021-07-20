@@ -286,6 +286,18 @@ export const rejectOTError = createAction(
   props<{ error: any }>()
 );
 
+export const cancelOT = createAction(
+  '[OT] Cancel OT',
+  props<{ otID: number }>()
+);
+
+export const cancelOTSuccess = createAction('[OT] Cancel OT success');
+
+export const cancelOTError = createAction(
+  '[OT] Cancel OT error',
+  props<{ error: any }>()
+);
+
 // Coordinadores
 export const getCoordinators = createAction(
   '[OT] get coordinators',
