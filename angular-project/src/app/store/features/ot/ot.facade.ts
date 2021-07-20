@@ -41,8 +41,8 @@ export class OtFacade {
     this.store.dispatch(otActions.approveOT({ otID }));
   }
 
-  public rejectOT(otID: number): void {
-    this.store.dispatch(otActions.rejectOT({ otID }));
+  public rejectOT(otID: number, motivo: string): void {
+    this.store.dispatch(otActions.rejectOT({ otID, motivo }));
   }
   // ESTADOS DE OT
 

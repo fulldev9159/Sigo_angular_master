@@ -27,10 +27,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
   public tipoOT: 'OT';
   public selectedIndex = 0;
   public selectedOTs: string;
-
+  public idOtSelected: number;
+  public razonrechazo: string;
   private destroyInstance: Subject<boolean> = new Subject();
 
   displayAssignCoordinatorModal = false;
+  displayAuthOTModal = false;
 
   public configTable = {
     header: true,
@@ -175,16 +177,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
             class: 'p-button-rounded p-button-danger p-mr-2',
             label: 'Rechazar',
             onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea rechazar Orden de trabajo?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.rejectOT(ot.id);
-                },
-              });
+              this.idOtSelected = item.id;
+              this.displayAuthOTModal = true;
             },
           });
         }
@@ -298,5 +292,16 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   assignCoordinatorFormSubmit(): void {
     this.assignCoordinatorForm.submit();
+  }
+
+  closeAuthOTModal(): void {
+    this.idOtSelected = null;
+    this.displayAuthOTModal = false;
+  }
+
+  rechazarOT(otId: number): void {
+    console.log(this.razonrechazo);
+    this.otFacade.rejectOT(otId, this.razonrechazo);
+    this.closeAuthOTModal();
   }
 }

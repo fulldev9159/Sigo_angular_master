@@ -276,7 +276,7 @@ export const approveOTError = createAction(
 
 export const rejectOT = createAction(
   '[OT] Reject OT',
-  props<{ otID: number }>()
+  props<{ otID: number; motivo: string }>()
 );
 
 export const rejectOTSuccess = createAction('[OT] Reject OT success');

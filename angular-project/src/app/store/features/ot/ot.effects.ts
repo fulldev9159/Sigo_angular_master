@@ -325,8 +325,8 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.rejectOT),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.rejectOT(profile.id, otID).pipe(
+      concatMap(([{ otID, motivo }, profile]) =>
+        this.otService.rejectOT(profile.id, otID, motivo).pipe(
           mapTo(otActions.rejectOTSuccess()),
           catchError(error => of(otActions.rejectOTError({ error })))
         )
