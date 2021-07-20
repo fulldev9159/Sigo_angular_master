@@ -79,11 +79,20 @@ export interface RequestCreateOT {
 export interface DataRspDetalleOT {
   id: number;
   nombre: string;
-  tipo: string;
-  proyecto_id: number;
-  proyecto_nombre: string;
+  tipo: string; // OT/AP
+  proyecto_id: number; // o -1, si no aplica
+  proyecto_nombre: string; // o vacio, si no aplica
   cubicacion_id: number;
   cubicacion_nombre: string;
+  contrato_marco_id: number;
+  contrato_marco_nombre: string;
+  proveedor_id: number;
+  proveedor_nombre: string;
+  region_id: number;
+  region_nombre: string;
+  total: number;
+  plan_id: number;
+  plan_nombre: string;
   propietario_id: number;
   propietario_nombre: string;
   responsable_id: number;
@@ -112,8 +121,8 @@ export interface DataRspDetalleOT {
     region_id: number;
     region_nombre: string;
     comuna: string;
-    geo_lat: string;
-    geo_lon: string;
+    geo_lat: number;
+    geo_lon: number;
     direccion: string;
   };
   sustento_financiero: {
@@ -142,7 +151,7 @@ export interface DataRspDetalleOT {
     opex_provisorio: {
       // o null, si no aplica o si viene OPEX real
       id: number;
-      id_opex: number;
+      id_opex: string;
       cuenta_sap: number;
       ceco_codigo: string;
     };
