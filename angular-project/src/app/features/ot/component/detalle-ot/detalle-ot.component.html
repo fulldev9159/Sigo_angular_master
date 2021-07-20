@@ -15,10 +15,10 @@
       <ng-container card-header-title>Detalle de la Cubicación: {{detalleOt ? detalleOt.cubicacion_nombre : ' ---'}} </ng-container>
       <ng-container card-body>
         <ul>
-          <li>Contrato: <span style="margin-right:3em"></span>{{detalleOt ? '----' : ' ---'}}</li>
-          <li>Proveedor: <span style="margin-right:2.3em"></span>{{detalleOt ? '----' : ' ---'}}</li>
+          <li>Contrato: <span style="margin-right:3em"></span>{{detalleOt ? detalleOt.contrato_marco_nombre : ' ---'}}</li>
+          <li>Proveedor: <span style="margin-right:2.3em"></span>{{detalleOt ? detalleOt.proveedor_nombre : ' ---'}}</li>
           <li>Región: <span style="margin-right:4em"></span>{{detalleOt ? detalleOt.sitio.region_nombre : ' ---'}}</li>
-          <li>Total: <span style="margin-right:4.8em"></span> ${{detalleOt ? '--- ': ' ---'}}</li>
+          <li>Total: <span style="margin-right:4.8em"></span> {{detalleOt ? (detalleOt.total|currency : 'CLP' : '$':'.0-2':'es-CL'): ' ---'}}</li>
           <button (click)="getLPUs(detalleOt.cubicacion_id)" class="btn btn-primary" style="width: 83px;
           font-size: 12px;
           margin-top: 10px;
@@ -53,7 +53,7 @@
       <ng-container card-header-title>Plan de proyecto</ng-container>
       <ng-container card-body>
         <ul>
-          <li>Plan:<span style="margin-right:5em"></span>{{detalleOt ? '---' : ' ---' }}</li>
+          <li>Plan:<span style="margin-right:5em"></span>{{detalleOt ? detalleOt.plan_nombre : ' ---' }}</li>
           <li>Código:<span style="margin-right:3.8em"></span>{{detalleOt ? detalleOt.sitio.codigo : ' ---'}}</li>
           <li>Nombre sitio:<span style="margin-right:1em"></span>{{detalleOt ? detalleOt.sitio.nombre : ' ---'}}</li>
           <li>Dirección:<span style="margin-right:2.7em"></span>{{detalleOt ? detalleOt.sitio.direccion: ' ---' }} </li>

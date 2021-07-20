@@ -188,3 +188,7 @@ Index
     Set perfil usuario                     Gestor Telefónica
     Set superior directo                   Juan Cancino                                     
     Guardar usuario
+
+
+    #jcastill cambiarle el perfil a gestor
+    #carloscj agregarle contratos y cambiarle el perfil a admincontrato
