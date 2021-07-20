@@ -186,5 +186,15 @@ export const reducerOt = createReducer(
   on(OtActions.getCoordinatorsError, (state, { error }) => ({
     ...state,
     coordinators: [],
+  })),
+
+  on(OtActions.cancelOT, state => ({
+    ...state,
+  })),
+  on(OtActions.cancelOTSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.cancelOTError, state => ({
+    ...state,
   }))
 );

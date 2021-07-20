@@ -48,3 +48,14 @@ export interface ApprovalOTResponse {
     responseCode: number;
   };
 }
+
+export interface CancelOTResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

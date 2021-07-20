@@ -8,6 +8,7 @@ import {
   ApprovalOTResponse,
   User,
   UsersResponse,
+  CancelOTResponse,
 } from '../model';
 
 @Injectable({
@@ -48,6 +49,15 @@ export class OTService {
       {
         ot_id: otID,
         motivo: `Se rechaza OT con id ${otID}`,
+      }
+    );
+  }
+
+  cancelOT(perfil_id: number, otID: number): Observable<any> {
+    return this.http.post<CancelOTResponse>(
+      `${this.apiUrl}/mockup/validaot/ot/cancel`,
+      {
+        ot_id: otID,
       }
     );
   }

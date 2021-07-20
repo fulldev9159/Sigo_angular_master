@@ -425,4 +425,49 @@ export class OtEffects {
       ),
     { dispatch: false }
   );
+
+  cancelOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.cancelOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.cancelOT(profile.id, otID).pipe(
+          mapTo(otActions.cancelOTSuccess()),
+          catchError(error => of(otActions.cancelOTError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterCancelOTSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.cancelOTSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Orden de trabajo anular', 'ok');
+
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterCancelOTError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.cancelOTError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible anular orden de trabajo',
+            'error'
+          );
+          console.error(`could not cancel the ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
 }
