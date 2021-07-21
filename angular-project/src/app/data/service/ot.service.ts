@@ -5,10 +5,13 @@ import { map } from 'rxjs/operators';
 import {
   OT,
   OTsResponse,
-  ApprovalOTResponse,
   User,
   UsersResponse,
+  ApprovalOTResponse,
+  RejectionOTResponse,
+  AssignCoordinatorOTResponse,
   CancelOTResponse,
+  FinalizeOTJobsResponse,
 } from '../model';
 
 @Injectable({
@@ -44,7 +47,7 @@ export class OTService {
   }
 
   rejectOT(perfil_id: number, otID: number, motivo: string): Observable<any> {
-    return this.http.post<ApprovalOTResponse>(
+    return this.http.post<RejectionOTResponse>(
       `${this.apiUrl}/validaot/ot/reject`,
       {
         ot_id: otID,
@@ -62,18 +65,22 @@ export class OTService {
     );
   }
 
-  getCoordinators(perfil_id: number, otID: number): Observable<User[]> {
-    console.log(
-      '[TODO] get OT coordinators using mockup. Still not implemented',
+  finalizeOTJobs(perfil_id: number, otID: number): Observable<any> {
+    return this.http.post<FinalizeOTJobsResponse>(
+      `${this.apiUrl}/mockup/ingreot/ot/trabajo/finalize`,
       {
-        perfil_id,
-        otID,
+        ot_id: otID,
       }
     );
+  }
+
+  getCoordinators(perfil_id: number, otID: number): Observable<User[]> {
     return this.http
       .post<UsersResponse>(
-        `${this.apiUrl}/mockup/ingreot/ot/get/coordinadores`,
-        {}
+        `${this.apiUrl}/mockup/ingreot/ot/coordinador/get_candidatos`,
+        {
+          ot_id: otID,
+        }
       )
       .pipe(map(res => res.data.items));
   }
@@ -83,11 +90,12 @@ export class OTService {
     otID: number,
     coordinatorID: number
   ): Observable<any> {
-    console.log('[TODO] assign coordinator to OT still not implemented', {
-      perfil_id,
-      otID,
-      coordinatorID,
-    });
-    return of({});
+    return this.http.post<AssignCoordinatorOTResponse>(
+      `${this.apiUrl}/mockup/ingreot/ot/coordinador/assign`,
+      {
+        ot_id: otID,
+        user_id: coordinatorID,
+      }
+    );
   }
 }
