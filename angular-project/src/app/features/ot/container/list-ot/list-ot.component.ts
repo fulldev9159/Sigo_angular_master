@@ -364,6 +364,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   assignCoordinatorFormSubmit(): void {
+    console.log(this.assignCoordinatorForm);
     this.assignCoordinatorForm.submit();
   }
 
@@ -373,6 +374,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   assignTrabajadorFormSubmit(): void {
+    console.log(this.assignTrabajadorForm);
     this.assignTrabajadorForm.submit();
   }
 
