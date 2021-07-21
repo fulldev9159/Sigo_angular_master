@@ -241,23 +241,6 @@ export class OtEffects {
     )
   );
 
-  // IngreOt con SCE ***
-  postOtSCE$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.postOtSCE),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/fromsce/ingreot/ot/create`, data.ot)
-          .pipe(
-            map((res: any) =>
-              otActions.postOtSCESuccess({ ot: res.data.items })
-            ),
-            catchError(err => of(otActions.postOtError({ error: err })))
-          )
-      )
-    )
-  );
-
   getDetalleOt$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getDetalleOt),
@@ -437,19 +420,6 @@ export class OtEffects {
             otActions.getTrabajadoresSuccess({ trabajadores })
           ),
           catchError(error => of(otActions.getTrabajadoresError({ error })))
-          )
-      )
-    )
-  );
-  
-  cancelOT$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.cancelOT),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.cancelOT(profile.id, otID).pipe(
-          mapTo(otActions.cancelOTSuccess()),
-          catchError(error => of(otActions.cancelOTError({ error })))
         )
       )
     )
@@ -463,11 +433,57 @@ export class OtEffects {
         this.otService.assignTrabajador(profile.id, otID, trabajadorID).pipe(
           mapTo(otActions.assignTrabajadorSuccess()),
           catchError(error => of(otActions.assignTrabajadorError({ error })))
-          )
-          )
         )
-      );
-      
+      )
+    )
+  );
+
+  notifyAfterAssignTrabajadorSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.assignTrabajadorSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Trabajador asignado', 'ok');
+
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterAssignTrabajadorError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.assignTrabajadorError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible asignar el trabajador',
+            'error'
+          );
+          console.error(`could not assign the trabajador [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // Cancelar
+  cancelOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.cancelOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.cancelOT(profile.id, otID).pipe(
+          mapTo(otActions.cancelOTSuccess()),
+          catchError(error => of(otActions.cancelOTError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfterCancelOTSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -500,6 +516,7 @@ export class OtEffects {
     { dispatch: false }
   );
 
+  // Finalizar trabajados
   finalizeOTJobs$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.finalizeOTJobs),
@@ -513,18 +530,6 @@ export class OtEffects {
     )
   );
 
-  notifyAfterAssignTrabajadorSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.assignTrabajadorSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Trabajador asignado', 'ok');
-          )
-          )
-        )
-      );
-      
   notifyAfterFinalizeOTJobsSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -545,20 +550,6 @@ export class OtEffects {
     { dispatch: false }
   );
 
-  notifyAfterAssignTrabajadorError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.assignTrabajadorError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible asignar el trabajador',
-            'error'
-          );
-          console.error(`could not assign the trabajador [${error.message}]`);
-          )
-          )
-        )
-      );
   notifyAfterFinalizeOTJobsError$ = createEffect(
     () =>
       this.actions$.pipe(
