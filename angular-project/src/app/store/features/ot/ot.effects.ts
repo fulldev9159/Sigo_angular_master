@@ -445,7 +445,7 @@ export class OtEffects {
         ofType(otActions.cancelOTSuccess),
         withLatestFrom(this.otFacade.getOtFilters$()),
         tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Orden de trabajo anular', 'ok');
+          this.snackService.showMessage('Orden de trabajo anulada', 'ok');
 
           this.otFacade.getOt({
             filtro_propietario,
@@ -466,6 +466,54 @@ export class OtEffects {
             'error'
           );
           console.error(`could not cancel the ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  finalizeOTJobs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.finalizeOTJobs),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.finalizeOTJobs(profile.id, otID).pipe(
+          mapTo(otActions.finalizeOTJobsSuccess()),
+          catchError(error => of(otActions.finalizeOTJobsError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterFinalizeOTJobsSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.finalizeOTJobsSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage(
+            'Trabajos de esta orden finalizados',
+            'ok'
+          );
+
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterFinalizeOTJobsError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.finalizeOTJobsError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible finalizar los trabajos para esta orden',
+            'error'
+          );
+          console.error(`could not finalize the ot jobs [${error.message}]`);
         })
       ),
     { dispatch: false }

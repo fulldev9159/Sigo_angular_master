@@ -298,6 +298,20 @@ export const cancelOTError = createAction(
   props<{ error: any }>()
 );
 
+export const finalizeOTJobs = createAction(
+  '[OT] Finalize OT Jobs',
+  props<{ otID: number }>()
+);
+
+export const finalizeOTJobsSuccess = createAction(
+  '[OT] Finalize OT Jobs success'
+);
+
+export const finalizeOTJobsError = createAction(
+  '[OT] Finalize OT Jobs error',
+  props<{ error: any }>()
+);
+
 // Coordinadores
 export const getCoordinators = createAction(
   '[OT] get coordinators',

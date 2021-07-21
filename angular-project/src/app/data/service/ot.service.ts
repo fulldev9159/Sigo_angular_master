@@ -26,7 +26,7 @@ export class OTService {
     filtro_tipo: string
   ): Observable<OT[]> {
     return this.http
-      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/abiertas`, {
+      .post<OTsResponse>(`${this.apiUrl}/mockup/ingreot/ot/get/abiertas`, {
         perfil_id,
         filtro_propietario,
         filtro_tipo,
@@ -56,6 +56,15 @@ export class OTService {
   cancelOT(perfil_id: number, otID: number): Observable<any> {
     return this.http.post<CancelOTResponse>(
       `${this.apiUrl}/mockup/validaot/ot/cancel`,
+      {
+        ot_id: otID,
+      }
+    );
+  }
+
+  finalizeOTJobs(perfil_id: number, otID: number): Observable<any> {
+    return this.http.post<CancelOTResponse>(
+      `${this.apiUrl}/mockup/ingreot/ot/trabajo/finalize`,
       {
         ot_id: otID,
       }

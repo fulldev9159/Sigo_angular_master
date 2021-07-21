@@ -48,6 +48,10 @@ export class OtFacade {
   public cancelOT(otID: number): void {
     this.store.dispatch(otActions.cancelOT({ otID }));
   }
+
+  public finalizeOTJobs(otID: number): void {
+    this.store.dispatch(otActions.finalizeOTJobs({ otID }));
+  }
   // ESTADOS DE OT
 
   // DELETE

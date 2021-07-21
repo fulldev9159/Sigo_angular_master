@@ -59,3 +59,14 @@ export interface CancelOTResponse {
     responseCode: number;
   };
 }
+
+export interface FinalizeOTJobsResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

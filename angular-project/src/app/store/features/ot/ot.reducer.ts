@@ -196,5 +196,15 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.cancelOTError, state => ({
     ...state,
+  })),
+
+  on(OtActions.finalizeOTJobs, state => ({
+    ...state,
+  })),
+  on(OtActions.finalizeOTJobsSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.finalizeOTJobsError, state => ({
+    ...state,
   }))
 );
