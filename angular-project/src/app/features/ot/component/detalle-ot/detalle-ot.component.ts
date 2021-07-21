@@ -80,7 +80,7 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   constructor(private permissionsService: NgxPermissionsService) {
     this.subscription.add(
       permissionsService.permissions$.subscribe(permissions => {
-        if (permissions['OT_VER_VALOR_LPU']) {
+        if (permissions.OT_VER_VALOR_LPU) {
           this.ConfigTableResumen = {
             ...this.ConfigTableResumen,
             body: {
