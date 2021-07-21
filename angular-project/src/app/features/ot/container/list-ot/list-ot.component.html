@@ -93,3 +93,16 @@
     </button>
   </ng-container>
 </app-modal>
+
+<app-modal [display]="displayAssignTrabajadorModal" (CloseEvent)="closeAssignTrabajadorModal()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title>Asignación de trabajador supervisor </ng-container>
+  <ng-container modal-content>
+    <app-assign-coordinator-form #assignTrabajadorForm></app-assign-coordinator-form>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeAssignTrabajadorModal()">Cancelar</button>
+    <button class="btn btn-primary" (click)="assignTrabajadorFormSubmit()">
+      <em class="pi pi-save mr-1"></em>Guardar
+    </button>
+  </ng-container>
+</app-modal>
