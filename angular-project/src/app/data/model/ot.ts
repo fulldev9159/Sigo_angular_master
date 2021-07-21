@@ -48,3 +48,48 @@ export interface ApprovalOTResponse {
     responseCode: number;
   };
 }
+
+export interface RejectionOTResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface AssignCoordinatorOTResponse {
+  data: {
+    ot_id: number;
+    user_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface CancelOTResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface FinalizeOTJobsResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

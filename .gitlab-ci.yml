@@ -4,6 +4,7 @@ stages:
   - build test
   - e2e test
   - deployment
+  - triggers
 
 variables:
   CLI_VERSION: 10.1.6
@@ -72,3 +73,13 @@ docker:
 #   script:
 #     - docker-compose build --no-cache robotframework
 #     - docker-compose push robotframework
+
+update-demos-sigo:
+  stage: triggers
+  variables:
+    ORIGIN: $ORIGIN
+    CI_PIPELINE_ID: $CI_PIPELINE_ID
+    PRECURSOR: $CI_PROJECT_NAME
+  trigger: zweicom/cl-movistar/sigo/demos-sigo
+  only:
+    - develop

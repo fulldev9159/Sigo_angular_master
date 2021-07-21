@@ -199,6 +199,54 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const otAnular = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ANULAR'
+        );
+
+        if (otAnular) {
+          actions.push({
+            icon: 'p-button-icon pi pi-times-circle',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otAnular.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea anular Orden de trabajo?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.cancelOT(ot.id);
+                },
+              });
+            },
+          });
+        }
+
+        const otFinalizarTrabajos = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_FINALIZAR_TRABAJOS'
+        );
+
+        if (otFinalizarTrabajos) {
+          actions.push({
+            icon: 'p-button-icon pi pi-check-square',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otFinalizarTrabajos.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea finalizar trabajos?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.finalizeOTJobs(ot.id);
+                },
+              });
+            },
+          });
+        }
+
         return actions;
       },
     },
