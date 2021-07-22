@@ -13,14 +13,22 @@ export class OtFacade {
   constructor(private store: Store<Data.OT>) {}
 
   // OT
-  public getOt({ filtro_propietario, filtro_tipo }): void {
-    this.store.dispatch(otActions.getOt({ filtro_propietario, filtro_tipo }));
+  public getOts({ filtro_propietario, filtro_tipo }): void {
+    this.store.dispatch(
+      otActions.getOtAbiertas({ filtro_propietario, filtro_tipo })
+    );
+    this.store.dispatch(
+      otActions.getOtCerradas({ filtro_propietario, filtro_tipo })
+    );
   }
 
-  public getOt$(): Observable<Data.OT[]> {
-    return this.store.select(otSelectors.getOt);
+  public getOtAbiertas$(): Observable<Data.OT[]> {
+    return this.store.select(otSelectors.getOtAbiertas);
   }
 
+  public getOtCerradas$(): Observable<Data.OT[]> {
+    return this.store.select(otSelectors.getOtCerradas);
+  }
   public getOtFilters$(): Observable<{
     filtro_propietario: string;
     filtro_tipo: string;

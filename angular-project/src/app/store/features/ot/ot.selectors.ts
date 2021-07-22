@@ -5,9 +5,14 @@ export const selectOt = createFeatureSelector<fromOt.StateOt>(
   fromOt.otFeatureKey
 );
 
-export const getOt = createSelector(
+export const getOtAbiertas = createSelector(
   selectOt,
-  (state: fromOt.StateOt) => state.items
+  (state: fromOt.StateOt) => state.itemsAbiertas
+);
+
+export const getOtCerradas = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.itemsCerradas
 );
 
 export const getSelectedOT = createSelector(
