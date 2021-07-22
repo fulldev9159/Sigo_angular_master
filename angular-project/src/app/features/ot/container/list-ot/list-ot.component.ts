@@ -13,6 +13,7 @@ import { Observable, Subject } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
+import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador-form/assign-trabajador-form.component';
 
 @Component({
   selector: 'app-list-ot',
@@ -32,6 +33,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
   private destroyInstance: Subject<boolean> = new Subject();
 
   displayAssignCoordinatorModal = false;
+  displayAssignTrabajadorModal = false;
+
   displayAuthOTModal = false;
 
   public configTable = {
@@ -246,6 +249,21 @@ export class ListOtComponent implements OnInit, OnDestroy {
             },
           });
         }
+        const otAsignarTranbajador = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ASIGNAR_TRABAJADOR'
+        );
+
+        if (otAsignarTranbajador) {
+          actions.push({
+            icon: 'p-button-icon pi pi-user',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otAsignarTranbajador.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.otFacade.selectOT(ot);
+              this.displayAssignTrabajadorModal = true;
+            },
+          });
+        }
 
         return actions;
       },
@@ -259,6 +277,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
     static: false,
   })
   assignCoordinatorForm: AssignCoordinatorFormComponent;
+
+  @ViewChild('assignTrabajadorForm', {
+    read: AssignTrabajadorFormComponent,
+    static: false,
+  })
+  assignTrabajadorForm: AssignTrabajadorFormComponent;
 
   constructor(
     private otFacade: OtFacade,
@@ -276,6 +300,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.items$ = this.otFacade.getOt$().pipe(
       tap(ots => {
         this.closeAssignCoordinatorModal();
+        this.closeAssignTrabajadorModal();
       })
     );
 
@@ -339,7 +364,18 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   assignCoordinatorFormSubmit(): void {
+    console.log(this.assignCoordinatorForm);
     this.assignCoordinatorForm.submit();
+  }
+
+  closeAssignTrabajadorModal(): void {
+    this.otFacade.selectOT(null); // workaround for subscribing the same ot multiple times
+    this.displayAssignTrabajadorModal = false;
+  }
+
+  assignTrabajadorFormSubmit(): void {
+    console.log(this.assignTrabajadorForm);
+    this.assignTrabajadorForm.submit();
   }
 
   closeAuthOTModal(): void {

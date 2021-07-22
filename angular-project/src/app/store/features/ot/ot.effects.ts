@@ -241,23 +241,6 @@ export class OtEffects {
     )
   );
 
-  // IngreOt con SCE ***
-  postOtSCE$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.postOtSCE),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/fromsce/ingreot/ot/create`, data.ot)
-          .pipe(
-            map((res: any) =>
-              otActions.postOtSCESuccess({ ot: res.data.items })
-            ),
-            catchError(err => of(otActions.postOtError({ error: err })))
-          )
-      )
-    )
-  );
-
   getDetalleOt$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getDetalleOt),
@@ -426,6 +409,68 @@ export class OtEffects {
     { dispatch: false }
   );
 
+  // Trabajadores
+  getTrabajador$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTrabajadores),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.getTrabajadores(profile.id, otID).pipe(
+          map((trabajadores: Data.User[]) =>
+            otActions.getTrabajadoresSuccess({ trabajadores })
+          ),
+          catchError(error => of(otActions.getTrabajadoresError({ error })))
+        )
+      )
+    )
+  );
+
+  assignTrabajador$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.assignTrabajador),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID, trabajadorID }, profile]) =>
+        this.otService.assignTrabajador(profile.id, otID, trabajadorID).pipe(
+          mapTo(otActions.assignTrabajadorSuccess()),
+          catchError(error => of(otActions.assignTrabajadorError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterAssignTrabajadorSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.assignTrabajadorSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Trabajador asignado', 'ok');
+
+          this.otFacade.getOt({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterAssignTrabajadorError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.assignTrabajadorError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible asignar el trabajador',
+            'error'
+          );
+          console.error(`could not assign the trabajador [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // Cancelar
   cancelOT$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.cancelOT),
@@ -471,6 +516,7 @@ export class OtEffects {
     { dispatch: false }
   );
 
+  // Finalizar trabajados
   finalizeOTJobs$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.finalizeOTJobs),

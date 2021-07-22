@@ -98,4 +98,32 @@ export class OTService {
       }
     );
   }
+  getTrabajadores(perfil_id: number, otID: number): Observable<User[]> {
+    console.log(
+      '[TODO] get OT trabajadores using mockup. Still not implemented',
+      {
+        perfil_id,
+        otID,
+      }
+    );
+    return this.http
+      .post<UsersResponse>(
+        `${this.apiUrl}/mockup/ingreot/ot/get/trabajadores`,
+        {}
+      )
+      .pipe(map(res => res.data.items));
+  }
+
+  assignTrabajador(
+    perfil_id: number,
+    otID: number,
+    trabajadorID: number
+  ): Observable<any> {
+    console.log('[TODO] assign trabajador to OT still not implemented', {
+      perfil_id,
+      otID,
+      trabajadorID,
+    });
+    return of({});
+  }
 }

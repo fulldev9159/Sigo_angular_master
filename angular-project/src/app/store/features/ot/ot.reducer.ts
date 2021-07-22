@@ -24,6 +24,7 @@ export interface StateOt {
   detalleOt: OTModel.DataRspDetalleOT;
 
   coordinators: Data.User[];
+  trabajadores: Data.User[];
 }
 
 export const initialStateOt: StateOt = {
@@ -67,6 +68,7 @@ export const initialStateOt: StateOt = {
   detalleOt: null,
 
   coordinators: [],
+  trabajadores: [],
 };
 
 export const reducerOt = createReducer(
@@ -188,6 +190,15 @@ export const reducerOt = createReducer(
     coordinators: [],
   })),
 
+  on(OtActions.getTrabajadores, state => state),
+  on(OtActions.getTrabajadoresSuccess, (state, { trabajadores }) => ({
+    ...state,
+    trabajadores,
+  })),
+  on(OtActions.getTrabajadoresError, (state, { error }) => ({
+    ...state,
+    trabajadores: [],
+  })),
   on(OtActions.cancelOT, state => ({
     ...state,
   })),

@@ -41,7 +41,6 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
         let auth;
         if (loginAuth) {
           const perm = loginAuth.perfiles[0].permisos.map(x => x.slug);
-          console.log(perm);
           this.permissionsService.loadPermissions(perm);
           const nameArray = loginAuth.usuario_nombre.split(' ');
           auth = {
