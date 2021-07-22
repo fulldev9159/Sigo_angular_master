@@ -27,7 +27,28 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input() Services: CubModel.Service[] = [];
   @Input() autoSuggestData: CubModel.AutoSuggestItem[] = [];
   // @Input() ConfigTableResumen: TableComponetType;
-  @Input() lpusCarrito: CubModel.Service[] = [];
+  msgsLPULength = [
+    {
+      severity: 'info',
+      summary: 'INFO',
+      detail: 'Al menos 1 LPU debe ser ingresada',
+    },
+  ];
+  msgsLPUQuantityZero = [
+    {
+      severity: 'error',
+      summary: 'ERROR',
+      detail: 'No puede haber LPUs con cantidad inferior a 1',
+    },
+  ];
+  hasLPUWithZeroQuantity = false;
+  lpusCarrito: CubModel.Service[] = [];
+  @Input('lpusCarrito')
+  set lpusCarritoInput(lpusCarrito: CubModel.Service[]) {
+    this.lpusCarrito = lpusCarrito;
+    const item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
+    this.hasLPUWithZeroQuantity = item !== undefined;
+  }
   @Input() total: number;
   @Output() public cancel = new EventEmitter();
   @Output() public save = new EventEmitter();

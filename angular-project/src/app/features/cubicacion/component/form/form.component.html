@@ -72,12 +72,27 @@
 
   <div class="col-12">
     <hr>
+
     <app-table [config]="ConfigTableResumen" [items]="lpusCarrito"></app-table>
     <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span>
+
+    <hr>
+
+    <ng-container *ngIf="lpusCarrito.length === 0">
+      <div class="text-right">
+        <p-messages [(value)]="msgsLPULength" [closable]="false"></p-messages>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="hasLPUWithZeroQuantity">
+      <div class="text-right">
+        <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
+      </div>
+    </ng-container>
   </div>
 
   <div class="col-xs-12 offset-md-7 col-md-5 text-right button-guardar-cubicacion">
     <button (click)="cancelAction();" class="btn btn-light mr-2">Cancelar</button>
-    <button (click)="saveAction();" [disabled]="!formCubicacion.valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
+    <button (click)="saveAction();" [disabled]="!(formCubicacion.valid && lpusCarrito.length > 0 && !hasLPUWithZeroQuantity)" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
   </div>
 </div>
