@@ -132,7 +132,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt = this.fb.group({
       id: null,
       token: null,
-      nombre: [null, Validators.required],
+      nombre: [null, [Validators.required, Validators.maxLength(100)]],
       tipo: [null, Validators.required],
       fecha_inicio: [null, Validators.required],
       fecha_fin: [null, Validators.required],
