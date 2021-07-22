@@ -18,7 +18,7 @@ export class FormCubConfig {
   initForm(): FormGroup {
     return this.fb.group({
       cubicacion_id: null,
-      nombre: [null, Validators.required],
+      nombre: [null, [Validators.required, Validators.maxLength(300)]],
       contrato_marco_id: [null, Validators.required],
       subcontrato_id: null,
       proveedor_id: [null, Validators.required],
