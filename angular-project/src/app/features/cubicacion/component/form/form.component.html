@@ -15,6 +15,12 @@
             <div [innerHTML]="notFound"></div>
           </ng-template>
         </div>
+
+        <ng-container *ngIf="formCubicacion.controls['nombre'] as control">
+          <ng-container *ngIf="control.invalid && control.errors.maxlength">
+            <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
+          </ng-container>
+        </ng-container>
         <br>
       </div>
       <div class="col-12 ">
