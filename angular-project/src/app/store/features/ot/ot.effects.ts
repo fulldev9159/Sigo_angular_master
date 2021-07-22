@@ -39,15 +39,34 @@ export class OtEffects {
     private router: Router
   ) {}
 
-  getOTs$ = createEffect(() =>
+  getOTsAbiertas$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(otActions.getOt),
+      ofType(otActions.getOtAbiertas),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
       concatMap(([data, profile]) =>
         this.otService
-          .getOTs(profile.id, data.filtro_propietario, data.filtro_tipo)
+          .getOTsAbiertas(profile.id, data.filtro_propietario, data.filtro_tipo)
           .pipe(
-            map((ots: Data.OT[]) => otActions.getOtSuccess({ ot: ots })),
+            map((ots: Data.OT[]) =>
+              otActions.getOtSuccessAbiertas({ ot: ots })
+            ),
+            catchError(error => of(otActions.getOtError({ error })))
+          )
+      )
+    )
+  );
+
+  getOTsCerradas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getOtCerradas),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([data, profile]) =>
+        this.otService
+          .getOTsCerradas(profile.id, data.filtro_propietario, data.filtro_tipo)
+          .pipe(
+            map((ots: Data.OT[]) =>
+              otActions.getOtSuccessCerradas({ ot: ots })
+            ),
             catchError(error => of(otActions.getOtError({ error })))
           )
       )
@@ -280,7 +299,7 @@ export class OtEffects {
         tap(([data, { filtro_propietario, filtro_tipo }]) => {
           this.snackService.showMessage('Orden de trabajo aceptada', 'ok');
 
-          this.otFacade.getOt({
+          this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
           });
@@ -325,7 +344,7 @@ export class OtEffects {
         tap(([data, { filtro_propietario, filtro_tipo }]) => {
           this.snackService.showMessage('Orden de trabajo rechazada', 'ok');
 
-          this.otFacade.getOt({
+          this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
           });
@@ -385,7 +404,7 @@ export class OtEffects {
         tap(([data, { filtro_propietario, filtro_tipo }]) => {
           this.snackService.showMessage('Coordinador asignado', 'ok');
 
-          this.otFacade.getOt({
+          this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
           });
@@ -446,7 +465,7 @@ export class OtEffects {
         tap(([data, { filtro_propietario, filtro_tipo }]) => {
           this.snackService.showMessage('Trabajador asignado', 'ok');
 
-          this.otFacade.getOt({
+          this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
           });
@@ -492,7 +511,7 @@ export class OtEffects {
         tap(([data, { filtro_propietario, filtro_tipo }]) => {
           this.snackService.showMessage('Orden de trabajo anulada', 'ok');
 
-          this.otFacade.getOt({
+          this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
           });
@@ -541,7 +560,7 @@ export class OtEffects {
             'ok'
           );
 
-          this.otFacade.getOt({
+          this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
           });

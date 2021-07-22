@@ -3,19 +3,31 @@ import * as OtModel from './ot.model';
 import * as Data from '@data';
 
 // OT LIST
-export const getOt = createAction(
-  '[Ot Get Abiertas] GET Ot',
+export const getOtAbiertas = createAction(
+  '[Ot Get Abiertas] GET Ot Abiertas',
   props<{
     filtro_propietario: string;
     filtro_tipo: string;
   }>()
 );
 
-export const getOtSuccess = createAction(
-  '[Ot GetAll] GET Ot Success',
+export const getOtCerradas = createAction(
+  '[Ot Get Abiertas] GET Ot Cerradas',
+  props<{
+    filtro_propietario: string;
+    filtro_tipo: string;
+  }>()
+);
+
+export const getOtSuccessAbiertas = createAction(
+  '[Ot GetAll] GET Ot Success Abiertas',
   props<{ ot: Data.OT[] }>()
 );
 
+export const getOtSuccessCerradas = createAction(
+  '[Ot GetAll] GET Ot Success Cerradas',
+  props<{ ot: Data.OT[] }>()
+);
 export const getOtError = createAction(
   '[Ot GetAll] GET Ot Error',
   props<{ error: any }>()

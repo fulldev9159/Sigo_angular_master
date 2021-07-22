@@ -24,13 +24,27 @@ export class OTService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getOTs(
+  getOTsAbiertas(
     perfil_id: number,
     filtro_propietario: string,
     filtro_tipo: string
   ): Observable<OT[]> {
     return this.http
       .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/abiertas`, {
+        perfil_id,
+        filtro_propietario,
+        filtro_tipo,
+      })
+      .pipe(map(res => res.data.items));
+  }
+
+  getOTsCerradas(
+    perfil_id: number,
+    filtro_propietario: string,
+    filtro_tipo: string
+  ): Observable<OT[]> {
+    return this.http
+      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/cerradas`, {
         perfil_id,
         filtro_propietario,
         filtro_tipo,
