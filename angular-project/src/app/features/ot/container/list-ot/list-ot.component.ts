@@ -22,7 +22,8 @@ import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOtComponent implements OnInit, OnDestroy {
-  public items$: Observable<OT[]>;
+  public itemsAbiertas$: Observable<OT[]>;
+  public itemsCerradas$: Observable<OT[]>;
 
   public responsable: 'MIAS';
   public tipoOT: 'OT';
@@ -297,14 +298,21 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.selectedIndex = 0;
     this.selectedOTs = 'ABIERTAS';
 
-    this.items$ = this.otFacade.getOt$().pipe(
+    this.itemsAbiertas$ = this.otFacade.getOtAbiertas$().pipe(
       tap(ots => {
         this.closeAssignCoordinatorModal();
         this.closeAssignTrabajadorModal();
       })
     );
 
-    this.otFacade.getOt({
+    this.itemsCerradas$ = this.otFacade.getOtCerradas$().pipe(
+      tap(ots => {
+        this.closeAssignCoordinatorModal();
+        this.closeAssignTrabajadorModal();
+      })
+    );
+
+    this.otFacade.getOts({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });
@@ -317,7 +325,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       // console.log(this.responsable);
       // console.log(this.tipoOT);
       this.selectedOTs = 'CERRADAS';
-      this.otFacade.getOt({
+      this.otFacade.getOts({
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
       });
@@ -326,7 +334,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       // console.log(this.responsable);
       // console.log(this.tipoOT);
       this.selectedOTs = 'ABIERTAS';
-      this.otFacade.getOt({
+      this.otFacade.getOts({
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
       });
@@ -342,7 +350,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     // console.log(this.selectedIndex);
     // console.log(this.responsable);
     // console.log(this.tipoOT);
-    this.otFacade.getOt({
+    this.otFacade.getOts({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });
@@ -352,7 +360,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     // console.log(this.selectedIndex);
     // console.log(this.responsable);
     // console.log(this.tipoOT);
-    this.otFacade.getOt({
+    this.otFacade.getOts({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
     });

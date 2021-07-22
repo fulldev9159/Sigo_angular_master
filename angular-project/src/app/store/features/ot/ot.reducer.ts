@@ -11,7 +11,8 @@ export interface StateOt {
 
   selectedOT: Data.OT;
 
-  items: Data.OT[];
+  itemsAbiertas: Data.OT[];
+  itemsCerradas: Data.OT[];
   planes: OTModel.Plan[];
   sites: OTModel.Site[];
   pmos: OTModel.PMO[];
@@ -33,7 +34,7 @@ export const initialStateOt: StateOt = {
 
   selectedOT: null,
 
-  items: [
+  itemsAbiertas: [
     // {
     //   id: 123,
     //   nombre: 'Orden de trabajo',
@@ -56,6 +57,7 @@ export const initialStateOt: StateOt = {
     //   ],
     // },
   ],
+  itemsCerradas: [],
   planes: [],
   sites: [],
   pmos: [],
@@ -74,22 +76,31 @@ export const initialStateOt: StateOt = {
 export const reducerOt = createReducer(
   initialStateOt,
 
-  on(OtActions.getOt, (state, { filtro_propietario, filtro_tipo }) => ({
+  on(OtActions.getOtAbiertas, (state, { filtro_propietario, filtro_tipo }) => ({
     ...state,
     filtro_propietario,
     filtro_tipo,
   })),
-  on(OtActions.getOtSuccess, (state, payload) => ({
+  on(OtActions.getOtCerradas, (state, { filtro_propietario, filtro_tipo }) => ({
     ...state,
-    items: payload.ot,
+    filtro_propietario,
+    filtro_tipo,
   })),
-  on(OtActions.deleteOt, (state, payload) => ({
+  on(OtActions.getOtSuccessAbiertas, (state, payload) => ({
     ...state,
-    items: [
-      ...state.items.slice(0, payload.otPosition),
-      ...state.items.slice(payload.otPosition + 1),
-    ],
+    itemsAbiertas: payload.ot,
   })),
+  on(OtActions.getOtSuccessCerradas, (state, payload) => ({
+    ...state,
+    itemsCerradas: payload.ot,
+  })),
+  // on(OtActions.deleteOt, (state, payload) => ({
+  //   ...state,
+  //   items: [
+  //     ...state.items.slice(0, payload.otPosition),
+  //     ...state.items.slice(payload.otPosition + 1),
+  //   ],
+  // })),
   // on(OtActions.replyOt, (state, payload) => ({
   //   ...state,
   //   items: [...state.items, payload.ot],
