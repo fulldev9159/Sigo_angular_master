@@ -10,6 +10,7 @@ import {
   ApprovalOTResponse,
   RejectionOTResponse,
   AssignCoordinatorOTResponse,
+  AssignWorkerOTResponse,
   CancelOTResponse,
   FinalizeOTJobsResponse,
 } from '../model';
@@ -94,22 +95,18 @@ export class OTService {
       `${this.apiUrl}/mockup/ingreot/ot/coordinador/assign`,
       {
         ot_id: otID,
-        user_id: coordinatorID,
+        user_id: +coordinatorID,
       }
     );
   }
+
   getTrabajadores(perfil_id: number, otID: number): Observable<User[]> {
-    console.log(
-      '[TODO] get OT trabajadores using mockup. Still not implemented',
-      {
-        perfil_id,
-        otID,
-      }
-    );
     return this.http
       .post<UsersResponse>(
-        `${this.apiUrl}/mockup/ingreot/ot/get/trabajadores`,
-        {}
+        `${this.apiUrl}/mockup/ingreot/ot/trabajador/get_candidatos`,
+        {
+          ot_id: otID,
+        }
       )
       .pipe(map(res => res.data.items));
   }
@@ -119,11 +116,12 @@ export class OTService {
     otID: number,
     trabajadorID: number
   ): Observable<any> {
-    console.log('[TODO] assign trabajador to OT still not implemented', {
-      perfil_id,
-      otID,
-      trabajadorID,
-    });
-    return of({});
+    return this.http.post<AssignWorkerOTResponse>(
+      `${this.apiUrl}/mockup/ingreot/ot/trabajador/assign`,
+      {
+        ot_id: otID,
+        user_id: +trabajadorID,
+      }
+    );
   }
 }

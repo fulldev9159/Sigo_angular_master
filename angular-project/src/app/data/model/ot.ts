@@ -83,6 +83,18 @@ export interface CancelOTResponse {
   };
 }
 
+export interface AssignWorkerOTResponse {
+  data: {
+    ot_id: number;
+    user_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
 export interface FinalizeOTJobsResponse {
   data: {
     ot_id: number;
