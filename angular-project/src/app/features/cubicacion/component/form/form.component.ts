@@ -148,6 +148,10 @@ export class FormComponent implements OnInit, OnDestroy {
 
   onFocused(val: string): void {}
 
+  inputCleared(): void {
+    this.ChangeSearchSuggest.emit('');
+  }
+
   lpusSelectedDummy(event: any): void {
     this.lpusSelected.emit(event);
   }
