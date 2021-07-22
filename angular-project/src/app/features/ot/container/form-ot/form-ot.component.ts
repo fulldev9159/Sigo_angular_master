@@ -341,6 +341,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
   cancel(data: any): void {
     this.initForm();
+    this.router.navigate(['app/ot/list-ot']);
   }
 
   save(data: any): void {
