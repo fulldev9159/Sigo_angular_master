@@ -59,7 +59,7 @@ export class OTService {
 
   cancelOT(perfil_id: number, otID: number): Observable<any> {
     return this.http.post<CancelOTResponse>(
-      `${this.apiUrl}/mockup/validaot/ot/cancel`,
+      `${this.apiUrl}/validaot/ot/cancel`,
       {
         ot_id: otID,
       }
@@ -78,7 +78,7 @@ export class OTService {
   getCoordinators(perfil_id: number, otID: number): Observable<User[]> {
     return this.http
       .post<UsersResponse>(
-        `${this.apiUrl}/mockup/ingreot/ot/coordinador/get_candidatos`,
+        `${this.apiUrl}/ingreot/ot/coordinador/get_candidatos`,
         {
           ot_id: otID,
         }
