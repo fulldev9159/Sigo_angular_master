@@ -249,4 +249,21 @@ export class OtFacade {
   public assignTrabajador(otID: number, trabajadorID: number): void {
     this.store.dispatch(otActions.assignTrabajador({ otID, trabajadorID }));
   }
+
+  // Actas
+  public approveOTMinutesGeneration(otID: number): void {
+    this.store.dispatch(otActions.approveOTMinutesGeneration({ otID }));
+  }
+
+  public rejectOTMinutesGeneration(otID: number): void {
+    this.store.dispatch(otActions.rejectOTMinutesGeneration({ otID }));
+  }
+
+  public approveOTMinutesValidation(otID: number): void {
+    this.store.dispatch(otActions.approveOTMinutesValidation({ otID }));
+  }
+
+  public rejectOTMinutesValidation(otID: number): void {
+    this.store.dispatch(otActions.rejectOTMinutesValidation({ otID }));
+  }
 }
