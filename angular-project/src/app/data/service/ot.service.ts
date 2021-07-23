@@ -106,7 +106,7 @@ export class OTService {
     coordinatorID: number
   ): Observable<any> {
     return this.http.post<AssignCoordinatorOTResponse>(
-      `${this.apiUrl}/mockup/ingreot/ot/coordinador/assign`,
+      `${this.apiUrl}/ingreot/ot/coordinador/assign`,
       {
         ot_id: otID,
         user_id: +coordinatorID,
@@ -117,7 +117,7 @@ export class OTService {
   getTrabajadores(perfil_id: number, otID: number): Observable<User[]> {
     return this.http
       .post<UsersResponse>(
-        `${this.apiUrl}/mockup/ingreot/ot/trabajador/get_candidatos`,
+        `${this.apiUrl}/ingreot/ot/trabajador/get_candidatos`,
         {
           ot_id: otID,
         }
@@ -131,7 +131,7 @@ export class OTService {
     trabajadorID: number
   ): Observable<any> {
     return this.http.post<AssignWorkerOTResponse>(
-      `${this.apiUrl}/mockup/ingreot/ot/trabajador/assign`,
+      `${this.apiUrl}/ingreot/ot/trabajador/assign`,
       {
         ot_id: otID,
         user_id: +trabajadorID,
