@@ -4,7 +4,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
@@ -309,7 +314,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
             .get('pep2_provisorio')
             .setValidators([Validators.required, Validators.maxLength(100)]);
         } else {
-          this.formOt.get('pep2_provisorio').clearValidators();
+          this.resetControl(this.formOt.get('pep2_provisorio'));
         }
         this.formOt.get('pep2_provisorio').updateValueAndValidity();
       });
@@ -324,7 +329,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
             .get('ceco_provisorio')
             .setValidators([Validators.required, Validators.maxLength(200)]);
         } else {
-          this.formOt.get('ceco_provisorio').clearValidators();
+          this.resetControl(this.formOt.get('ceco_provisorio'));
         }
         this.formOt.get('ceco_provisorio').updateValueAndValidity();
       });
@@ -345,7 +350,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
             this.formOt.get('pmo_codigo').setValidators([Validators.required]);
             this.formOt.get('lp_codigo').setValidators([Validators.required]);
             this.formOt.get('capex_id').setValidators([Validators.required]);
-            this.formOt.get('pep2_provisorio').clearValidators();
+            this.resetControl(this.formOt.get('pep2_provisorio'));
 
             const { capex_id } = this.formOt.getRawValue();
             if (capex_id === 'capex_provisorio') {
@@ -356,20 +361,20 @@ export class FormOtComponent implements OnInit, OnDestroy {
                   Validators.maxLength(100),
                 ]);
             } else {
-              this.formOt.get('pep2_provisorio').clearValidators();
+              this.resetControl(this.formOt.get('pep2_provisorio'));
             }
 
-            this.formOt.get('id_opex_codigo').clearValidators();
-            this.formOt.get('cuenta_sap_codigo').clearValidators();
-            this.formOt.get('ceco_codigo').clearValidators();
-            this.formOt.get('ceco_provisorio').clearValidators();
+            this.resetControl(this.formOt.get('id_opex_codigo'));
+            this.resetControl(this.formOt.get('cuenta_sap_codigo'));
+            this.resetControl(this.formOt.get('ceco_codigo'));
+            this.resetControl(this.formOt.get('ceco_provisorio'));
           } else if (costos === 'opex') {
             this.otFacade.getIDsOpex();
 
-            this.formOt.get('pmo_codigo').clearValidators();
-            this.formOt.get('lp_codigo').clearValidators();
-            this.formOt.get('capex_id').clearValidators();
-            this.formOt.get('pep2_provisorio').clearValidators();
+            this.resetControl(this.formOt.get('pmo_codigo'));
+            this.resetControl(this.formOt.get('lp_codigo'));
+            this.resetControl(this.formOt.get('capex_id'));
+            this.resetControl(this.formOt.get('pep2_provisorio'));
 
             this.formOt
               .get('id_opex_codigo')
@@ -388,7 +393,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
                   Validators.maxLength(200),
                 ]);
             } else {
-              this.formOt.get('ceco_provisorio').clearValidators();
+              this.resetControl(this.formOt.get('ceco_provisorio'));
             }
           }
 
@@ -403,6 +408,14 @@ export class FormOtComponent implements OnInit, OnDestroy {
           this.formOt.get('ceco_provisorio').updateValueAndValidity();
         }
       });
+  }
+
+  resetControl(control: AbstractControl): void {
+    control.reset();
+    control.clearValidators();
+    control.markAsUntouched();
+    control.markAsPristine();
+    control.updateValueAndValidity();
   }
 
   resetForm(part: string): void {
