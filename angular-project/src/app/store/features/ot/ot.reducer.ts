@@ -228,5 +228,45 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.finalizeOTJobsError, state => ({
     ...state,
+  })),
+
+  on(OtActions.approveOTMinutesGeneration, state => ({
+    ...state,
+  })),
+  on(OtActions.approveOTMinutesGenerationSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.approveOTMinutesGenerationError, state => ({
+    ...state,
+  })),
+
+  on(OtActions.rejectOTMinutesGeneration, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectOTMinutesGenerationSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectOTMinutesGenerationError, state => ({
+    ...state,
+  })),
+
+  on(OtActions.approveOTMinutesValidation, state => ({
+    ...state,
+  })),
+  on(OtActions.approveOTMinutesValidationSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.approveOTMinutesValidationError, state => ({
+    ...state,
+  })),
+
+  on(OtActions.rejectOTMinutesValidation, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectOTMinutesValidationSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectOTMinutesValidationError, state => ({
+    ...state,
   }))
 );

@@ -266,6 +266,90 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const otGenerarActas = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_GENERAR_ACTAS'
+        );
+
+        if (otGenerarActas) {
+          actions.push({
+            icon: 'p-button-icon pi pi-check',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Aceptar la generación del acta',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea aceptar la generación del acta?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.approveOTMinutesGeneration(ot.id);
+                },
+              });
+            },
+          });
+
+          actions.push({
+            icon: 'p-button-icon pi pi-times',
+            class: 'p-button-rounded p-button-danger p-mr-2',
+            label: 'Rechazar la generación del acta',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea rechazar la generación del acta?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.rejectOTMinutesGeneration(ot.id);
+                },
+              });
+            },
+          });
+        }
+
+        const otValidarActas = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_AUTORIZAR_ACTAS'
+        );
+
+        if (otValidarActas) {
+          actions.push({
+            icon: 'p-button-icon pi pi-check',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Aceptar la validación del acta',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea aceptar la validación del acta?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.approveOTMinutesValidation(ot.id);
+                },
+              });
+            },
+          });
+
+          actions.push({
+            icon: 'p-button-icon pi pi-times',
+            class: 'p-button-rounded p-button-danger p-mr-2',
+            label: 'Rechazar la validación del acta',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea rechazar la validación del acta?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.rejectOTMinutesValidation(ot.id);
+                },
+              });
+            },
+          });
+        }
+
         return actions;
       },
     },

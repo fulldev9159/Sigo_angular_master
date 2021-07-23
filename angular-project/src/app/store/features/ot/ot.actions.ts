@@ -324,6 +324,66 @@ export const finalizeOTJobsError = createAction(
   props<{ error: any }>()
 );
 
+// Aprobar la generación del acta
+export const approveOTMinutesGeneration = createAction(
+  '[OT] Approve OT minutes generation',
+  props<{ otID: number }>()
+);
+
+export const approveOTMinutesGenerationSuccess = createAction(
+  '[OT] Approve OT minutes generation success'
+);
+
+export const approveOTMinutesGenerationError = createAction(
+  '[OT] Approve OT minutes generation error',
+  props<{ error: any }>()
+);
+
+// Rechazar la generación del acta
+export const rejectOTMinutesGeneration = createAction(
+  '[OT] Reject OT minutes generation',
+  props<{ otID: number }>()
+);
+
+export const rejectOTMinutesGenerationSuccess = createAction(
+  '[OT] Reject OT minutes generation success'
+);
+
+export const rejectOTMinutesGenerationError = createAction(
+  '[OT] Reject OT minutes generation error',
+  props<{ error: any }>()
+);
+
+// Aprobar la validación del acta
+export const approveOTMinutesValidation = createAction(
+  '[OT] Approve OT minutes validation',
+  props<{ otID: number }>()
+);
+
+export const approveOTMinutesValidationSuccess = createAction(
+  '[OT] Approve OT minutes validation success'
+);
+
+export const approveOTMinutesValidationError = createAction(
+  '[OT] Approve OT minutes validation error',
+  props<{ error: any }>()
+);
+
+// Rechazar la validación del acta
+export const rejectOTMinutesValidation = createAction(
+  '[OT] Reject OT minutes validation',
+  props<{ otID: number }>()
+);
+
+export const rejectOTMinutesValidationSuccess = createAction(
+  '[OT] Reject OT minutes validation success'
+);
+
+export const rejectOTMinutesValidationError = createAction(
+  '[OT] Reject OT minutes validation error',
+  props<{ error: any }>()
+);
+
 // Coordinadores
 export const getCoordinators = createAction(
   '[OT] get coordinators',
