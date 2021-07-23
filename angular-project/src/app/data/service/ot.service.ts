@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   OT,
@@ -30,7 +30,7 @@ export class OTService {
     filtro_tipo: string
   ): Observable<OT[]> {
     return this.http
-      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/abiertas`, {
+      .post<OTsResponse>(`${this.apiUrl}/mockup/ingreot/ot/get/abiertas`, {
         perfil_id,
         filtro_propietario,
         filtro_tipo,
@@ -140,28 +140,28 @@ export class OTService {
   }
 
   approveOTMinutesGeneration(perfil_id: number, otID: number): Observable<any> {
-    console.log('approve minutes generation. stil not implemented', {
+    console.log('approve minutes generation. still not implemented', {
       ot_id: otID,
     });
     return of({});
   }
 
   rejectOTMinutesGeneration(perfil_id: number, otID: number): Observable<any> {
-    console.log('reject minutes generation. stil not implemented', {
+    console.log('reject minutes generation. still not implemented', {
       ot_id: otID,
     });
     return of({});
   }
 
   approveOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
-    console.log('approve minutes validation. stil not implemented', {
+    console.log('approve minutes validation. still not implemented', {
       ot_id: otID,
     });
     return of({});
   }
 
   rejectOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
-    console.log('reject minutes generation. stil not implemented', {
+    console.log('reject minutes validation. still not implemented', {
       ot_id: otID,
     });
     return of({});
