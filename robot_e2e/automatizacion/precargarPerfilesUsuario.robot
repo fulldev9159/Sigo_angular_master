@@ -44,7 +44,7 @@ Resource    ../resource.robot
 Index
     [Tags]                  automatizacion
     Open Browser To Page    ${url}
-    Login                   jcastill          password
+    Login                   admin             password
 
     ### CREAR PERFILES ####
     Navegar al menu                       Perfil
@@ -98,7 +98,7 @@ Index
     Guardar perfil
 
 
-    # ### CREAR USUARIOS ####
+    # # ### CREAR USUARIOS ####
     Navegar al menu                        Usuario
     Acceder a creacion de nuevo usuario
     Set username                           jadmincontrato
@@ -171,7 +171,7 @@ Index
     Set tipo empresa                       movistar
     Set empresa                            Telefonica Chile Servicios Corporativos Ltda.
     Set area                               CONECTIVIDAD Y BACKHAUL
-    Set todos los contratos 
+    Set todos los contratos
     Set perfil usuario                     Jefe de Área Telefónica
     Set superior directo                   Camilo Cancino
     Guardar usuario
@@ -184,11 +184,37 @@ Index
     Set tipo empresa                       movistar
     Set empresa                            Telefonica Chile Servicios Corporativos Ltda.
     Set area                               CONECTIVIDAD Y BACKHAUL
-    Set todos los contratos 
+    Set todos los contratos
     Set perfil usuario                     Gestor Telefónica
-    Set superior directo                   Juan Cancino                                     
+    Set superior directo                   Juan Cancino
     Guardar usuario
 
 
+    Reload Page
     #jcastill cambiarle el perfil a gestor
+    Click Menu Editar             jcastill
+    Set documento de identidad    12345671123
+    Set perfil usuario            Gestor Telefónica
+    Guardar usuario
     #carloscj agregarle contratos y cambiarle el perfil a admincontrato
+    Click Menu Editar             carloscj
+    Set documento de identidad    12345671123
+    Set todos los contratos
+    Set perfil usuario            Admin Contratos EC 
+    Guardar usuario
+    #erickuc agregarle contratos y cambiarle el perfil a coordinador y jerarquia
+    Click Menu Editar             erickuc
+    Set documento de identidad    12345671123
+    Set todos los contratos
+    Click Visible Element         css:#perfil_id > a
+    Set perfil usuario            Coordinador EC 
+    Guardar usuario
+    #erickuc agregarle contratos y cambiarle el perfil a coordinador y jerarquia
+    Click Menu Editar             jaimecc
+    Set documento de identidad    12345671123
+    Set todos los contratos
+    Click Visible Element         css:#perfil_id > a
+    Set perfil usuario            Supervisor Trabajos EC 
+    Guardar usuario
+
+    close Browser
