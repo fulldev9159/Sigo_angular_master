@@ -5,6 +5,11 @@
       <label for="">Nombre de la orden de trabajo</label>
       <input id="nombre-ot" formControlName="nombre" class="form-control" type="text">
       <br>
+      <ng-container *ngIf="formOt.controls['nombre'] as control">
+        <ng-container *ngIf="control.invalid && control.errors.maxlength">
+          <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
+        </ng-container>
+      </ng-container>
     </div>
     <div class="col-xs-12 col-md-6">
       <label for="">Tipo OT</label>
@@ -98,6 +103,11 @@
       <br>
       <label for="" *ngIf="formOt.value.capex_id==='capex_provisorio'">PEP2 provisorio</label>
       <input *ngIf="formOt.value.capex_id==='capex_provisorio'" formControlName="pep2_provisorio" class="form-control" type="text">
+      <ng-container *ngIf="formOt.controls['pep2_provisorio'] as control">
+        <ng-container *ngIf="control.invalid && control.errors.maxlength">
+          <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
+        </ng-container>
+      </ng-container>
       <br>
     </div>
   </div>
@@ -129,6 +139,11 @@
       <br>
       <label for="" *ngIf="formOt.value.ceco_codigo==='ceco_provisorio'">CECO provisorio</label>
       <input *ngIf="formOt.value.ceco_codigo==='ceco_provisorio'" formControlName="ceco_provisorio" id="ceco-provisorio" class="form-control" type="text">
+      <ng-container *ngIf="formOt.controls['ceco_provisorio'] as control">
+        <ng-container *ngIf="control.invalid && control.errors.maxlength">
+          <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
+        </ng-container>
+      </ng-container>
       <br>
     </div>
   </div>
@@ -142,6 +157,13 @@
       <label for="">Fecha termino</label>
       <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot"></p-calendar>
     </div>
+
+    <ng-container *ngIf="invalidDates">
+      <div class="col-12">
+        <p-messages [(value)]="msgsWrongDates" [closable]="false"></p-messages>
+      </div>
+    </ng-container>
+
     <div class="col-xs-12 col-md-6">
       <br>
       <label for="">Proyecto</label>
@@ -151,6 +173,7 @@
       </select>
       <br>
     </div>
+
     <div class="col-12">
       <br>
       <label for="">Observaciones</label>
@@ -160,8 +183,8 @@
   </div>
 
   <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
-    <button (click)="cancelAction();" class="btn btn-light mr-2"><em class="pi pi-refresh mr-1"></em>Cancelar</button>
-    <button (click)="saveAction();" class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar</button>
+    <button (click)="cancelAction();" class="btn btn-light mr-2">Cancelar</button>
+    <button (click)="saveAction();" [disabled]="!formOt.valid || invalidDates" class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar</button>
   </div>
 
 </div>

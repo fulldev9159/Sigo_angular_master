@@ -4,7 +4,12 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
@@ -24,6 +29,8 @@ import { Login } from '@data';
 })
 export class FormOtComponent implements OnInit, OnDestroy {
   // declarations
+  public capexID = '';
+  public cecoCodigo = '';
   public formOt: FormGroup;
   public cubicacionSeleccionada: Cubicacion = null;
   public authLogin: Login = null;
@@ -132,33 +139,44 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.formOt = this.fb.group({
       id: null,
       token: null,
-      nombre: [null, Validators.required],
-      tipo: [null, Validators.required],
-      fecha_inicio: [null, Validators.required],
-      fecha_fin: [null, Validators.required],
-      cubicacion_id: [null, Validators.required],
-      plan_proyecto_id: [null, Validators.required],
-      plan_nombre: [null, Validators.required],
-      costos: 'capex',
-      sitio_id: [null, Validators.required],
-      pmo_codigo: [null, Validators.required],
-      id_opex_codigo: [null, Validators.required],
-      lp_codigo: null,
-      cuenta_sap_codigo: [null, Validators.required],
-      ceco_codigo: [null, Validators.required],
-      pep2_codigo: [null, Validators.required],
-      observaciones: null,
-      pep2_provisorio: null,
-      ceco_provisorio: null,
-      capex_id: null,
       gestor_id: null,
+
+      nombre: [null, [Validators.required, Validators.maxLength(100)]],
+      tipo: [null, Validators.required],
+      cubicacion_id: [null, Validators.required],
+
+      plan_proyecto_id: [null, Validators.required],
+      plan_nombre: [null, Validators.required], // depende de plan_proyecto_id
+      sitio_id: [null, Validators.required],
+      costos: 'capex',
+
+      // dependen de sitio_id
       sitio_nombre: [null, Validators.required],
       codigo: [null, Validators.required],
       direccion: [null, Validators.required],
       latitud: [null, Validators.required],
       longitud: [null, Validators.required],
-      proyecto_id: [null, Validators.required],
+
+      // costos = 'capex'
+      pmo_codigo: [null, Validators.required],
+      lp_codigo: [null, Validators.required],
+      capex_id: [null, Validators.required],
+      pep2_provisorio: null,
+
+      // costos = 'opex'
+      id_opex_codigo: null,
+      cuenta_sap_codigo: null,
+      ceco_codigo: null,
+      ceco_provisorio: null,
+
+      fecha_inicio: [null, Validators.required],
+      fecha_fin: [null, Validators.required],
+      proyecto_id: null,
+      observaciones: null,
+
+      pep2_codigo: null, // ?
     });
+
     this.detectChangesForm();
   }
 
@@ -285,6 +303,37 @@ export class FormOtComponent implements OnInit, OnDestroy {
           // this.resetForm('LP');
         }
       });
+
+    this.formOt
+      .get('capex_id')
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe(capex_id => {
+        this.capexID = capex_id;
+        if (capex_id === 'capex_provisorio') {
+          this.formOt
+            .get('pep2_provisorio')
+            .setValidators([Validators.required, Validators.maxLength(100)]);
+        } else {
+          this.resetControl(this.formOt.get('pep2_provisorio'));
+        }
+        this.formOt.get('pep2_provisorio').updateValueAndValidity();
+      });
+
+    this.formOt
+      .get('ceco_codigo')
+      .valueChanges.pipe(takeUntil(this.destroyInstance$))
+      .subscribe(ceco_codigo => {
+        this.cecoCodigo = ceco_codigo;
+        if (ceco_codigo === 'ceco_provisorio') {
+          this.formOt
+            .get('ceco_provisorio')
+            .setValidators([Validators.required, Validators.maxLength(200)]);
+        } else {
+          this.resetControl(this.formOt.get('ceco_provisorio'));
+        }
+        this.formOt.get('ceco_provisorio').updateValueAndValidity();
+      });
+
     this.formOt
       .get('costos')
       .valueChanges.pipe(takeUntil(this.destroyInstance$))
@@ -297,11 +346,76 @@ export class FormOtComponent implements OnInit, OnDestroy {
             this.otFacade.getPmosAction({
               sitio_codigo: site.codigo,
             });
+
+            this.formOt.get('pmo_codigo').setValidators([Validators.required]);
+            this.formOt.get('lp_codigo').setValidators([Validators.required]);
+            this.formOt.get('capex_id').setValidators([Validators.required]);
+            this.resetControl(this.formOt.get('pep2_provisorio'));
+
+            const { capex_id } = this.formOt.getRawValue();
+            if (capex_id === 'capex_provisorio') {
+              this.formOt
+                .get('pep2_provisorio')
+                .setValidators([
+                  Validators.required,
+                  Validators.maxLength(100),
+                ]);
+            } else {
+              this.resetControl(this.formOt.get('pep2_provisorio'));
+            }
+
+            this.resetControl(this.formOt.get('id_opex_codigo'));
+            this.resetControl(this.formOt.get('cuenta_sap_codigo'));
+            this.resetControl(this.formOt.get('ceco_codigo'));
+            this.resetControl(this.formOt.get('ceco_provisorio'));
           } else if (costos === 'opex') {
             this.otFacade.getIDsOpex();
+
+            this.resetControl(this.formOt.get('pmo_codigo'));
+            this.resetControl(this.formOt.get('lp_codigo'));
+            this.resetControl(this.formOt.get('capex_id'));
+            this.resetControl(this.formOt.get('pep2_provisorio'));
+
+            this.formOt
+              .get('id_opex_codigo')
+              .setValidators([Validators.required]);
+            this.formOt
+              .get('cuenta_sap_codigo')
+              .setValidators([Validators.required]);
+            this.formOt.get('ceco_codigo').setValidators([Validators.required]);
+
+            const { ceco_codigo } = this.formOt.getRawValue();
+            if (ceco_codigo === 'ceco_provisorio') {
+              this.formOt
+                .get('ceco_provisorio')
+                .setValidators([
+                  Validators.required,
+                  Validators.maxLength(200),
+                ]);
+            } else {
+              this.resetControl(this.formOt.get('ceco_provisorio'));
+            }
           }
+
+          this.formOt.get('pmo_codigo').updateValueAndValidity();
+          this.formOt.get('lp_codigo').updateValueAndValidity();
+          this.formOt.get('capex_id').updateValueAndValidity();
+          this.formOt.get('pep2_provisorio').updateValueAndValidity();
+
+          this.formOt.get('id_opex_codigo').updateValueAndValidity();
+          this.formOt.get('cuenta_sap_codigo').updateValueAndValidity();
+          this.formOt.get('ceco_codigo').updateValueAndValidity();
+          this.formOt.get('ceco_provisorio').updateValueAndValidity();
         }
       });
+  }
+
+  resetControl(control: AbstractControl): void {
+    control.reset();
+    control.clearValidators();
+    control.markAsUntouched();
+    control.markAsPristine();
+    control.updateValueAndValidity();
   }
 
   resetForm(part: string): void {
@@ -341,56 +455,73 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
   cancel(data: any): void {
     this.initForm();
+    this.router.navigate(['app/ot/list-ot']);
+  }
+
+  touch(): void {
+    Object.keys(this.formOt.controls).forEach(field => {
+      const control = this.formOt.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.formOt.markAsTouched({
+      onlySelf: true,
+    });
   }
 
   save(data: any): void {
-    const form = this.formOt.value;
+    this.touch();
+    if (this.formOt.valid) {
+      const form = this.formOt.value;
 
-    const request: OTmodel.RequestCreateOT = {
-      nombre: form.nombre,
-      tipo: form.tipo,
-      proyecto_id: +form.proyecto_id,
-      cubicacion_id: +form.cubicacion_id,
-      sitio_id: +form.sitio_id,
-      propietario_id: +form.gestor_id,
-      fecha_inicio: form.fecha_inicio,
-      fecha_fin: form.fecha_fin,
-      observaciones: form.observaciones,
-      sustento_financiero: {
-        tipo_sustento: form.costos.toUpperCase(),
-        capex_id: null,
-        opex_id: null,
-        capex_provisorio: null,
-        opex_provisorio: null,
-      },
-    };
+      const request: OTmodel.RequestCreateOT = {
+        nombre: form.nombre,
+        tipo: form.tipo,
+        proyecto_id: +form.proyecto_id,
+        cubicacion_id: +form.cubicacion_id,
+        sitio_id: +form.sitio_id,
+        propietario_id: +form.gestor_id,
+        fecha_inicio: form.fecha_inicio,
+        fecha_fin: form.fecha_fin,
+        observaciones: form.observaciones,
+        sustento_financiero: {
+          tipo_sustento: form.costos.toUpperCase(),
+          capex_id: null,
+          opex_id: null,
+          capex_provisorio: null,
+          opex_provisorio: null,
+        },
+      };
 
-    if (form.costos.toUpperCase() === 'CAPEX') {
-      if (form.capex_id === 'capex_provisorio') {
-        request.sustento_financiero.capex_provisorio = {
-          pmo_codigo: +form.pmo_codigo,
-          lp_codigo: form.lp_codigo,
-          pep2_codigo: form.pep2_provisorio,
-        };
-      } else {
-        request.sustento_financiero.capex_id = +form.capex_id;
+      if (form.costos.toUpperCase() === 'CAPEX') {
+        if (form.capex_id === 'capex_provisorio') {
+          request.sustento_financiero.capex_provisorio = {
+            pmo_codigo: +form.pmo_codigo,
+            lp_codigo: form.lp_codigo,
+            pep2_codigo: form.pep2_provisorio,
+          };
+        } else {
+          request.sustento_financiero.capex_id = +form.capex_id;
+        }
+      } else if (form.costos.toUpperCase() === 'OPEX') {
+        if (form.ceco_codigo === 'ceco_provisorio') {
+          request.sustento_financiero.opex_provisorio = {
+            id_opex: form.id_opex_codigo,
+            cuenta_sap: form.cuenta_sap_codigo,
+            ceco_codigo: form.ceco_provisorio,
+          };
+        } else {
+          request.sustento_financiero.opex_id = +form.ceco_codigo;
+        }
       }
-    } else if (form.costos.toUpperCase() === 'OPEX') {
-      if (form.ceco_codigo === 'ceco_provisorio') {
-        request.sustento_financiero.opex_provisorio = {
-          id_opex: form.id_opex_codigo,
-          cuenta_sap: form.cuenta_sap_codigo,
-          ceco_codigo: form.ceco_provisorio,
-        };
-      } else {
-        request.sustento_financiero.opex_id = +form.ceco_codigo;
-      }
+
+      console.log(request);
+      // // this.otFacade.replyOt(form);
+      // this.otFacade.postOtSCE(request);
+      this.otFacade.postOt(request);
+      // this.formOt.reset();
     }
-
-    console.log(request);
-    // // this.otFacade.replyOt(form);
-    // this.otFacade.postOtSCE(request);
-    this.otFacade.postOt(request);
-    // this.formOt.reset();
   }
 }

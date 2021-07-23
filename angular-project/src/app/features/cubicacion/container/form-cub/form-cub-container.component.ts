@@ -177,6 +177,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   cancel(data: any): void {
     this.formConfig.initForm();
+    this.router.navigate(['app/cubicacion/list-cub']);
   }
 
   save(data: any): void {
