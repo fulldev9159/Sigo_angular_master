@@ -97,7 +97,7 @@ export class OtEffects {
       ofType(otActions.getSite),
       concatMap((data: any) =>
         this.http
-          .post(`${environment.api}/mockup/ingreot/sitio/get`, {
+          .post(`${environment.api}/ingreot/sitio/get`, {
             plan_proyecto_id: +data.plan_proyecto_id,
             region_id: +data.region_id,
           })
@@ -244,20 +244,18 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.postOt),
       concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/mockup/ingreot/ot/create`, data.ot)
-          .pipe(
-            tap(res => {
-              this.messageService.add({
-                severity: 'success',
-                summary: 'Registro guardado',
-                detail: 'Registro se ha generado con Éxito!',
-              });
-              this.router.navigate(['app/ot/list-ot']);
-            }),
-            map((res: any) => otActions.postOtSuccess({ ot: res.data.items })),
-            catchError(err => of(otActions.postOtError({ error: err })))
-          )
+        this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
+          tap(res => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Registro guardado',
+              detail: 'Registro se ha generado con Éxito!',
+            });
+            this.router.navigate(['app/ot/list-ot']);
+          }),
+          map((res: any) => otActions.postOtSuccess({ ot: res.data.items })),
+          catchError(err => of(otActions.postOtError({ error: err })))
+        )
       )
     )
   );
