@@ -38,6 +38,14 @@ export class FormComponent implements OnInit, OnDestroy {
   @Output() public save = new EventEmitter();
   private destroyInstance$: Subject<boolean> = new Subject();
 
+  msgsWrongDates = [
+    {
+      severity: 'error',
+      summary: 'ERROR',
+      detail: 'La fecha de fin no puede ser inferior a la fecha de inicio',
+    },
+  ];
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -53,6 +61,34 @@ export class FormComponent implements OnInit, OnDestroy {
 
   saveAction(): void {
     this.save.emit(true);
+  }
+
+  get invalidDates(): boolean {
+    if (
+      this.formOt.get('fecha_inicio').valid &&
+      this.formOt.get('fecha_fin').valid
+    ) {
+      const { fecha_inicio, fecha_fin } = this.formOt.getRawValue();
+      const sdDay = fecha_inicio.getDate();
+      const sdMonth = fecha_inicio.getMonth() + 1;
+      const sdYear = fecha_inicio.getFullYear();
+
+      const edDay = fecha_fin.getDate();
+      const edMonth = fecha_fin.getMonth() + 1;
+      const edYear = fecha_fin.getFullYear();
+
+      if (sdYear > edYear) {
+        return true;
+      }
+      if (sdMonth > edMonth) {
+        return true;
+      }
+      if (sdDay > edDay) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   get sfinanciero(): string {

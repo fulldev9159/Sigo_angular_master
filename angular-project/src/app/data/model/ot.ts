@@ -105,3 +105,47 @@ export interface FinalizeOTJobsResponse {
     responseCode: number;
   };
 }
+
+export interface ApproveOTMinutesGenerationResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface RejectOTMinutesGenerationResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface ApproveOTMinutesValidationResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface RejectOTMinutesValidationResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

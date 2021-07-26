@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   OT,
@@ -80,15 +80,6 @@ export class OTService {
     );
   }
 
-  finalizeOTJobs(perfil_id: number, otID: number): Observable<any> {
-    return this.http.post<FinalizeOTJobsResponse>(
-      `${this.apiUrl}/mockup/ingreot/ot/trabajo/finalize`,
-      {
-        ot_id: otID,
-      }
-    );
-  }
-
   getCoordinators(perfil_id: number, otID: number): Observable<User[]> {
     return this.http
       .post<UsersResponse>(
@@ -106,7 +97,7 @@ export class OTService {
     coordinatorID: number
   ): Observable<any> {
     return this.http.post<AssignCoordinatorOTResponse>(
-      `${this.apiUrl}/mockup/ingreot/ot/coordinador/assign`,
+      `${this.apiUrl}/ingreot/ot/coordinador/assign`,
       {
         ot_id: otID,
         user_id: +coordinatorID,
@@ -117,7 +108,7 @@ export class OTService {
   getTrabajadores(perfil_id: number, otID: number): Observable<User[]> {
     return this.http
       .post<UsersResponse>(
-        `${this.apiUrl}/mockup/ingreot/ot/trabajador/get_candidatos`,
+        `${this.apiUrl}/ingreot/ot/trabajador/get_candidatos`,
         {
           ot_id: otID,
         }
@@ -131,11 +122,48 @@ export class OTService {
     trabajadorID: number
   ): Observable<any> {
     return this.http.post<AssignWorkerOTResponse>(
-      `${this.apiUrl}/mockup/ingreot/ot/trabajador/assign`,
+      `${this.apiUrl}/ingreot/ot/trabajador/assign`,
       {
         ot_id: otID,
         user_id: +trabajadorID,
       }
     );
+  }
+
+  finalizeOTJobs(perfil_id: number, otID: number): Observable<any> {
+    return this.http.post<FinalizeOTJobsResponse>(
+      `${this.apiUrl}/mockup/ingreot/ot/trabajo/finalize`,
+      {
+        ot_id: otID,
+      }
+    );
+  }
+
+  approveOTMinutesGeneration(perfil_id: number, otID: number): Observable<any> {
+    console.log('approve minutes generation. still not implemented', {
+      ot_id: otID,
+    });
+    return of({});
+  }
+
+  rejectOTMinutesGeneration(perfil_id: number, otID: number): Observable<any> {
+    console.log('reject minutes generation. still not implemented', {
+      ot_id: otID,
+    });
+    return of({});
+  }
+
+  approveOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
+    console.log('approve minutes validation. still not implemented', {
+      ot_id: otID,
+    });
+    return of({});
+  }
+
+  rejectOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
+    console.log('reject minutes validation. still not implemented', {
+      ot_id: otID,
+    });
+    return of({});
   }
 }

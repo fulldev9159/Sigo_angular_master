@@ -583,4 +583,216 @@ export class OtEffects {
       ),
     { dispatch: false }
   );
+
+  // Aprobar la generación del acta
+  approveOTMinutesGeneration$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.approveOTMinutesGeneration),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.approveOTMinutesGeneration(profile.id, otID).pipe(
+          mapTo(otActions.approveOTMinutesGenerationSuccess()),
+          catchError(error =>
+            of(otActions.approveOTMinutesGenerationError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfterApproveOTMinutesGenerationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.approveOTMinutesGenerationSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage(
+            'Aceptada la generación del acta',
+            'ok'
+          );
+
+          this.otFacade.getOts({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterApproveOTMinutesGenerationError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.approveOTMinutesGenerationError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible aceptar la generación del acta',
+            'error'
+          );
+          console.error(
+            `could not approve the ot minutes generation [${error.message}]`
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // Rechazar la generación del acta
+  rejectOTMinutesGeneration$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.rejectOTMinutesGeneration),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.rejectOTMinutesGeneration(profile.id, otID).pipe(
+          mapTo(otActions.rejectOTMinutesGenerationSuccess()),
+          catchError(error =>
+            of(otActions.rejectOTMinutesGenerationError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfterRejectOTMinutesGenerationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectOTMinutesGenerationSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage(
+            'Rechazada la generación del acta',
+            'ok'
+          );
+
+          this.otFacade.getOts({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterRejectOTMinutesGenerationError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectOTMinutesGenerationError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible rechazar la generación del acta',
+            'error'
+          );
+          console.error(
+            `could not reject the ot minutes generation [${error.message}]`
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // Aprobar la validación del acta
+  approveOTMinutesValidation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.approveOTMinutesValidation),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.approveOTMinutesValidation(profile.id, otID).pipe(
+          mapTo(otActions.approveOTMinutesValidationSuccess()),
+          catchError(error =>
+            of(otActions.approveOTMinutesValidationError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfterApproveOTMinutesValidationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.approveOTMinutesValidationSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage(
+            'Aceptada la validación del acta',
+            'ok'
+          );
+
+          this.otFacade.getOts({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterApproveOTMinutesValidationError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.approveOTMinutesValidationError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible aceptar la validación del acta',
+            'error'
+          );
+          console.error(
+            `could not approve the ot minutes validation [${error.message}]`
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // Rechazar la validación del acta
+  rejectOTMinutesValidation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.rejectOTMinutesValidation),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.rejectOTMinutesValidation(profile.id, otID).pipe(
+          mapTo(otActions.rejectOTMinutesValidationSuccess()),
+          catchError(error =>
+            of(otActions.rejectOTMinutesValidationError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfterRejectOTMinutesValidationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectOTMinutesValidationSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage(
+            'Rechazada la validación del acta',
+            'ok'
+          );
+
+          this.otFacade.getOts({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterRejectOTMinutesValidationError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectOTMinutesValidationError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible rechazar la validación del acta',
+            'error'
+          );
+          console.error(
+            `could not reject the ot minutes validation [${error.message}]`
+          );
+        })
+      ),
+    { dispatch: false }
+  );
 }
