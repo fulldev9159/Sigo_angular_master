@@ -132,7 +132,7 @@ export class OTService {
 
   finalizeOTJobs(perfil_id: number, otID: number): Observable<any> {
     return this.http.post<FinalizeOTJobsResponse>(
-      `${this.apiUrl}/mockup/ingreot/ot/trabajo/finalize`,
+      `${this.apiUrl}/ingreot/ot/trabajo/finalize`,
       {
         ot_id: otID,
       }

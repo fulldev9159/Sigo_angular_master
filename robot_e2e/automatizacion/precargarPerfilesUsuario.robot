@@ -49,21 +49,21 @@ Index
     ### CREAR PERFILES ####
     Navegar al menu                       Perfil
     Acceder a creacion de nuevo perfil
-    Set nombre perfil                     Admin Contratos EC
+    Set nombre perfil                     Administrador EECC
     Set descripcion perfil                Administrador de contratos de la empresa contratista
     Set Permisos modulo                   OT                                                      @{permisos admin contrato}
     Guardar perfil
 
     Acceder a creacion de nuevo perfil
-    Set nombre perfil                     Coordinador EC
-    Set jefatura                          Admin Contratos EC
+    Set nombre perfil                     Coordinador EECC
+    Set jefatura                          Administrador EECC
     Set descripcion perfil                Es el coordinador de la empresa contratista
     Set Permisos modulo                   OT                                             @{permisos coordinador}
     Guardar perfil
 
     Acceder a creacion de nuevo perfil
-    Set nombre perfil                     Supervisor Trabajos EC
-    Set jefatura                          Coordinador EC
+    Set nombre perfil                     Trabajador EECC
+    Set jefatura                          Coordinador EECC
     Set descripcion perfil                Es el perfil que se encarga de supervisar los trabajos
     Set Permisos modulo                   OT                                                        @{permisos supervisor trabajos}
     Guardar perfil
@@ -90,7 +90,7 @@ Index
     Guardar perfil
 
     Acceder a creacion de nuevo perfil
-    Set nombre perfil                     Gestor Telefónica
+    Set nombre perfil                     Gestor/JP
     Set jefatura                          Jefe de Área Telefónica
     Set descripcion perfil                Gestor de proyectos de telefónica
     Set Permisos modulo                   OT                                   @{permisos gestor}
@@ -98,7 +98,7 @@ Index
     Guardar perfil
 
 
-    # # ### CREAR USUARIOS ####
+    # # # ### CREAR USUARIOS ####
     Navegar al menu                        Usuario
     Acceder a creacion de nuevo usuario
     Set username                           jadmincontrato
@@ -109,7 +109,7 @@ Index
     Set empresa                            COASIN
     Set area                               Contratista
     Set todos los contratos
-    Set perfil usuario                     Admin Contratos EC
+    Set perfil usuario                     Administrador EECC
     Guardar usuario
 
     Acceder a creacion de nuevo usuario
@@ -121,20 +121,20 @@ Index
     Set empresa                            COASIN
     Set area                               Contratista
     Set todos los contratos
-    Set perfil usuario                     Coordinador EC
+    Set perfil usuario                     Coordinador EECC
     Set superior directo                   Esteban Alarcon
     Guardar usuario
 
     Acceder a creacion de nuevo usuario
     Set username                           jsupervisor
-    Set nombres y apellidos                Oscar                     Cancino
+    Set nombres y apellidos                Oscar                 Cancino
     Set email                              admin@contrato.com
     Set documento de identidad             12345671123
     Set tipo empresa                       proveedor
     Set empresa                            COASIN
     Set area                               Contratista
     Set todos los contratos
-    Set perfil usuario                     Supervisor Trabajos EC
+    Set perfil usuario                     Trabajador EECC
     Set superior directo                   Gustavo Rodríguez
     Guardar usuario
 
@@ -185,7 +185,7 @@ Index
     Set empresa                            Telefonica Chile Servicios Corporativos Ltda.
     Set area                               CONECTIVIDAD Y BACKHAUL
     Set todos los contratos
-    Set perfil usuario                     Gestor Telefónica
+    Set perfil usuario                     Gestor/JP
     Set superior directo                   Juan Cancino
     Guardar usuario
 
@@ -194,27 +194,27 @@ Index
     #jcastill cambiarle el perfil a gestor
     Click Menu Editar             jcastill
     Set documento de identidad    12345671123
-    Set perfil usuario            Gestor Telefónica
+    Set perfil usuario            Gestor/JP
     Guardar usuario
     #carloscj agregarle contratos y cambiarle el perfil a admincontrato
     Click Menu Editar             carloscj
     Set documento de identidad    12345671123
     Set todos los contratos
-    Set perfil usuario            Admin Contratos EC 
+    Set perfil usuario            Administrador EECC 
     Guardar usuario
     #erickuc agregarle contratos y cambiarle el perfil a coordinador y jerarquia
     Click Menu Editar             erickuc
     Set documento de identidad    12345671123
     Set todos los contratos
     Click Visible Element         css:#perfil_id > a
-    Set perfil usuario            Coordinador EC 
+    Set perfil usuario            Coordinador EECC 
     Guardar usuario
     #erickuc agregarle contratos y cambiarle el perfil a coordinador y jerarquia
     Click Menu Editar             jaimecc
     Set documento de identidad    12345671123
     Set todos los contratos
     Click Visible Element         css:#perfil_id > a
-    Set perfil usuario            Supervisor Trabajos EC 
+    Set perfil usuario            Trabajador EECC 
     Guardar usuario
 
     close Browser
