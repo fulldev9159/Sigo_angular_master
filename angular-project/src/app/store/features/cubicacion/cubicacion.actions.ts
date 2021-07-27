@@ -19,12 +19,11 @@ export const getCubicacionError = createAction(
 
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',
-  props<{ cubicacionPosition: number }>()
+  props<{ cubicacion_id: number }>()
 );
 
 export const deleteCubicacionSuccess = createAction(
-  '[Cubicacion DeleteById] DELETE Cubicacion Success',
-  props<{ cubicacionId: string }>()
+  '[Cubicacion DeleteById] DELETE Cubicacion Success'
 );
 
 export const deleteCubicacionError = createAction(

@@ -3,7 +3,14 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as cubModel from './cubicacion.model';
 
-import { catchError, concatMap, map } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  map,
+  mapTo,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as cubicacionActions from './cubicacion.actions';
@@ -14,6 +21,8 @@ import { environment } from '@environment';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import * as Data from '@data';
 
 @Injectable()
 export class CubicacionEffects {
@@ -21,7 +30,9 @@ export class CubicacionEffects {
     private actions$: Actions,
     private http: HttpClient,
     private snackService: SnackBarService,
-    private cubageFacade: CubicacionFacade
+    private cubageFacade: CubicacionFacade,
+    private authFacade: AuthFacade,
+    private cubicacionService: Data.CubicacionService
   ) {}
 
   getOt$ = createEffect(() =>
@@ -302,6 +313,24 @@ export class CubicacionEffects {
               );
             })
           )
+      )
+    )
+  );
+
+  deleteCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.deleteCubicacion),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([data, profile]) =>
+        this.cubicacionService.deleteOT(data.cubicacion_id).pipe(
+          map(() => {
+            window.location.reload();
+            return cubicacionActions.deleteCubicacionSuccess();
+          }),
+          catchError(error =>
+            of(cubicacionActions.deleteCubicacionError({ error }))
+          )
+        )
       )
     )
   );

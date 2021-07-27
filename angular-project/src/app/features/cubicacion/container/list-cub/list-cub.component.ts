@@ -14,6 +14,7 @@ import { map, filter, takeUntil } from 'rxjs/operators';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Login } from '@data';
 import { MessageService } from 'primeng/api';
+import * as Data from '@data';
 
 @Component({
   selector: 'app-list-cub',
@@ -139,7 +140,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           tooltipDisabled: 'No puede eliminar una cubicacion asignada a una OT',
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button p-button-danger',
-          onClick: (event: Event, item, position) => {
+          onClick: (event: Event, item) => {
             this.confirmationService.confirm({
               target: event.target as EventTarget,
               message: '¿Está seguro que desea eliminar esta cubicación?',
@@ -147,7 +148,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
-                this.cubageFacade.deleteCubicacion(position);
+                this.cubageFacade.deleteCubicacion(item.id);
               },
             });
           },
