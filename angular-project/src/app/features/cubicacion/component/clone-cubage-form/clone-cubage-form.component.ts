@@ -11,6 +11,7 @@ import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 })
 export class CloneCubageFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  submitSubscription: Subscription = new Subscription();
   formControls = {
     nombre: new FormControl(null, [
       Validators.required,
@@ -39,14 +40,23 @@ export class CloneCubageFormComponent implements OnInit, OnDestroy {
 
   constructor(private cubageFacade: CubicacionFacade) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscription.add(
+      this.cubageFacade.getSelectedCubicacion$().subscribe(cubicacion => {
+        if (cubicacion !== null) {
+          this.form.get('nombre').setValue(cubicacion.nombre);
+        }
+      })
+    );
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.submitSubscription.unsubscribe();
   }
 
   reset(): void {
-    this.subscription.unsubscribe();
+    this.submitSubscription.unsubscribe();
     // this.form.reset();
     Object.keys(this.form.controls).forEach(field => {
       const control = this.form.get(field);
@@ -77,7 +87,7 @@ export class CloneCubageFormComponent implements OnInit, OnDestroy {
     this.touch();
     if (this.valid) {
       const { nombre } = this.form.getRawValue();
-      this.subscription.add(
+      this.submitSubscription.add(
         this.cubageFacade.getSelectedCubicacion$().subscribe(cubicacion => {
           if (cubicacion !== null) {
             const nuevo = { ...cubicacion };

@@ -109,8 +109,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-copy',
           class: 'p-button p-button-help p-mr-2',
           onClick: (event: Event, item: cubModel.Cubicacion) => {
-            this.cubageFacade.selectCubicacion(item);
             this.cloneCubageForm.reset();
+            this.cubageFacade.selectCubicacion(item);
             this.displayClonatedCubageNameModal = true;
           },
         },
