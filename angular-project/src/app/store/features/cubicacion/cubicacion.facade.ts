@@ -173,4 +173,12 @@ export class CubicacionFacade {
       cubicacionActions.clonarCubicacion({ cubicacion, cubicacion_id })
     );
   }
+
+  public selectCubicacion(cubicacion: cubModel.Cubicacion): void {
+    this.store.dispatch(cubicacionActions.selectCubicacion({ cubicacion }));
+  }
+
+  public getSelectedCubicacion$(): Observable<cubModel.Cubicacion> {
+    return this.store.select(cubicacionSelectors.getSelectedCubicacion);
+  }
 }

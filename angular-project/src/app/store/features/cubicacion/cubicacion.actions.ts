@@ -204,3 +204,10 @@ export const clonarCubicacionError = createAction(
   '[Clonar cubicacion] SET clonar cubicacion Error',
   props<{ error: any }>()
 );
+
+export const selectCubicacion = createAction(
+  '[OT] select Cubicacion',
+  props<{
+    cubicacion: cubModel.Cubicacion;
+  }>()
+);

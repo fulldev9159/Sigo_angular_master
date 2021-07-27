@@ -6,6 +6,7 @@ export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
   items: cubModel.Cubicacion[];
+  selectedCubicacion: cubModel.Cubicacion;
   contractMarco: cubModel.ContractMarco[];
   subContractedProviders: cubModel.Provider[];
   subContractedRegions: cubModel.Region[];
@@ -17,6 +18,7 @@ export interface StateCubicacion {
 
 export const initialStateCubicacion: StateCubicacion = {
   items: [],
+  selectedCubicacion: null,
   contractMarco: [],
   subContractedProviders: [],
   subContractedRegions: [],
@@ -97,5 +99,10 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.getAutoSuggestSuccess, (state, payload) => ({
     ...state,
     autoSuggest: payload.autosuggests,
+  })),
+
+  on(CubicacionActions.selectCubicacion, (state, { cubicacion }) => ({
+    ...state,
+    selectedCubicacion: cubicacion,
   }))
 );

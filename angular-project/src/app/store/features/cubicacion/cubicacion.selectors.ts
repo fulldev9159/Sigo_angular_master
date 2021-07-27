@@ -44,3 +44,8 @@ export const getDetalleCubicacion = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.detalleCubicacion
 );
+
+export const getSelectedCubicacion = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.selectedCubicacion
+);

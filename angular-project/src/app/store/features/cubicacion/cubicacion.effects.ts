@@ -2,17 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as cubModel from './cubicacion.model';
+import { Router } from '@angular/router';
 
 import {
   catchError,
   concatMap,
   map,
+<<<<<<< HEAD
   mapTo,
+=======
+>>>>>>> develop
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
 
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Response } from '@storeOT/model';
@@ -32,7 +37,11 @@ export class CubicacionEffects {
     private snackService: SnackBarService,
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
+<<<<<<< HEAD
     private cubicacionService: Data.CubicacionService
+=======
+    private router: Router
+>>>>>>> develop
   ) {}
 
   getOt$ = createEffect(() =>
@@ -231,6 +240,20 @@ export class CubicacionEffects {
     )
   );
 
+  notifyAfterCubageCreated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubicacionActions.postCubicacionSuccess),
+        withLatestFrom(this.authFacade.getCurrentProfile$()),
+        tap(([data, profile]) => {
+          this.snackService.showMessage('Cubicación creada exitosamente', 'ok');
+
+          this.cubageFacade.getCubicacionAction(profile.id);
+        })
+      ),
+    { dispatch: false }
+  );
+
   getAutoSuggest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubicacionActions.getAutoSuggest),
@@ -282,7 +305,8 @@ export class CubicacionEffects {
   clonarCubicacion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubicacionActions.clonarCubicacion),
-      concatMap((data: any) =>
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([data, profile]) =>
         this.http
           .post(`${environment.api}/cubicacion/detalle/get`, {
             cubicacion_id: data.cubicacion_id,
@@ -290,7 +314,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               const requestSave: cubModel.RequestSaveCubicacion = {
-                cubicacion_nombre: `Copia de ${data.cubicacion.nombre}`,
+                cubicacion_nombre: data.cubicacion.nombre,
                 region_id: data.cubicacion.region_id,
                 usuario_id: 1,
                 contrato_marco_id: data.cubicacion.contrato_marco_id,
@@ -300,7 +324,7 @@ export class CubicacionEffects {
                   cantidad: x.lpu_cantidad,
                 })),
               };
-              console.log(requestSave);
+              // console.log(requestSave);
               // this.cubageFacade.postCubicacion(requestSave);
               return cubicacionActions.postCubicacion({
                 cubicacion: requestSave,

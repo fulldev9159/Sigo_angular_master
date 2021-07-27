@@ -3,6 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -14,7 +15,7 @@ import { map, filter, takeUntil } from 'rxjs/operators';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Login } from '@data';
 import { MessageService } from 'primeng/api';
-import * as Data from '@data';
+import { CloneCubageFormComponent } from '../../component/clone-cubage-form/clone-cubage-form.component';
 
 @Component({
   selector: 'app-list-cub',
@@ -25,6 +26,7 @@ import * as Data from '@data';
 export class ListCubComponent implements OnInit, OnDestroy {
   // declarations
   public items$: Observable<Cubicacion[]>;
+  public displayClonatedCubageNameModal = false;
   public DisplayModal = false;
   private destroyInstance: Subject<boolean> = new Subject();
   public detalleCubicacion$: Observable<cubModel.ResponseDetalleCubicacion[]>;
@@ -107,13 +109,9 @@ export class ListCubComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-copy',
           class: 'p-button p-button-help p-mr-2',
           onClick: (event: Event, item: cubModel.Cubicacion) => {
-            this.cubageFacade.ClonarCubicacionAction(item, item.id);
-            window.location.reload();
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Registro copiado',
-              detail: 'Registro se ha copiado con Éxito!',
-            });
+            this.cloneCubageForm.reset();
+            this.cubageFacade.selectCubicacion(item);
+            this.displayClonatedCubageNameModal = true;
           },
         },
         {
@@ -222,6 +220,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
       actions: [],
     },
   };
+
+  @ViewChild('cloneCubageForm', {
+    read: CloneCubageFormComponent,
+    static: false,
+  })
+  cloneCubageForm: CloneCubageFormComponent;
+
   constructor(
     private router: Router,
     private authFacade: AuthFacade,
@@ -257,5 +262,14 @@ export class ListCubComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyInstance.next(true);
     this.destroyInstance.complete();
+  }
+
+  closeClonatedCubageNameModal(): void {
+    this.displayClonatedCubageNameModal = false;
+  }
+
+  cloneCubabeFormSubmit(): void {
+    this.cloneCubageForm.submit();
+    this.displayClonatedCubageNameModal = false;
   }
 }

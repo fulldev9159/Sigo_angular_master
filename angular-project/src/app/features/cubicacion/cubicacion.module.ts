@@ -10,6 +10,7 @@ import { FormCubContainerComponent } from './container/form-cub/form-cub-contain
 import { FormComponent } from './component/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { CloneCubageFormComponent } from './component/clone-cubage-form/clone-cubage-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     ListCubComponent,
     FormCubContainerComponent,
     FormComponent,
+    CloneCubageFormComponent,
     // DetalleLpusComponent
   ],
   imports: [
