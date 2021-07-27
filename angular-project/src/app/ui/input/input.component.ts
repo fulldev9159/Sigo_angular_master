@@ -10,6 +10,7 @@ export class InputComponent implements OnInit {
   @Input() control: FormControl;
   @Input() label = '';
   @Input() placeholder = '';
+  // tslint:disable-next-line:no-input-rename
   @Input('type') inputType = 'text';
   @Input() errorMessageFn = errors => 'Este campo es inválido';
 
