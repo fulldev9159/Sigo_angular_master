@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [formGroup]="form">
   <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
     <ng-template *ngIf="config.header" pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
@@ -18,8 +18,7 @@
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
             <th *ngSwitchDefault [pSortableColumn]="column.sort" [ngStyle]="{'width': column.width}">{{column.field}}
-              <p-sortIcon *ngIf="column.sort" [field]="column.sort">
-              </p-sortIcon>
+              <p-sortIcon *ngIf="column.sort" [field]="column.sort"></p-sortIcon>
             </th>
             <!-- <th *ngSwitchCase="'BOOLEANTEXT'" [pSortableColumn]="column.sort" >{{column.field}} <p-sortIcon
               [field]="column.sort">
@@ -53,7 +52,10 @@
           <td *ngSwitchCase="'TEXT-TITLECASE'">{{ item[column.header] | titlecase }}</td>
           <td *ngSwitchCase="'TEXT'">{{ item[column.header] }}</td>
           <td *ngSwitchCase="'INPUTNUMBER'">
-            <input type="number" pInputText style="width: 100%;" (change)="item[column.onchange($event,item)]" value="{{item[column.header]}}" />
+            <!--
+            <input type="number" pInputText style="width: 100%;" (change)="column.onchange($event,item)" value="{{item[column.header]}}" />
+            -->
+            <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="number"></app-input>
           </td>
           <td *ngSwitchCase="'NUMBER'">{{ item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
           <td *ngSwitchCase="'DATE'">{{ item[column.header] | date:'dd-MM-yyyy' }}</td>

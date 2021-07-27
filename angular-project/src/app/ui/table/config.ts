@@ -1,3 +1,5 @@
+import { ValidatorFn } from '@angular/forms';
+
 export interface HeaderConfig {
   title: string;
   searchText: string;
@@ -12,6 +14,8 @@ export interface Header {
   header: string;
   width: string;
   editable: boolean;
+  onchange: (event, item) => void;
+  validators?: ValidatorFn[];
 }
 
 export interface Action {
