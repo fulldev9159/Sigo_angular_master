@@ -81,9 +81,9 @@ export class TableComponent implements OnInit, OnDestroy {
     this.touch();
   }
 
-  errorMessageFn = errors => 'Este campo es inválido';
-
   private destroyInstance: Subject<boolean> = new Subject();
+
+  errorMessageFn = errors => 'Este campo es inválido';
 
   constructor() {}
 
