@@ -279,7 +279,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               const requestSave: cubModel.RequestSaveCubicacion = {
-                cubicacion_nombre: `Copia de ${data.cubicacion.nombre}`,
+                cubicacion_nombre: data.cubicacion.nombre,
                 region_id: data.cubicacion.region_id,
                 usuario_id: 1,
                 contrato_marco_id: data.cubicacion.contrato_marco_id,

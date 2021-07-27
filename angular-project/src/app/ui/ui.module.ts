@@ -17,6 +17,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { MenuComponent } from './menu/menu.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { SelectComponent } from './select/select.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { SelectComponent } from './select/select.component';
     ProgressBarComponent,
     MenuComponent,
     SelectComponent,
+    InputComponent,
   ],
   exports: [
     CardComponent,
@@ -49,6 +51,7 @@ import { SelectComponent } from './select/select.component';
     MenuComponent,
     NgxPermissionsModule,
     SelectComponent,
+    InputComponent,
   ],
   providers: [ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
