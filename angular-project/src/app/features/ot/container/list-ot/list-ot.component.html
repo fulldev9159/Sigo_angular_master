@@ -5,7 +5,7 @@
       <span>listado de ot en sistema</span>
     </div>
     <div class="col-xs-12 col-md-6">
-      <button [routerLink]="['/app/ot/form-ot']" pButton type="button" label="Nueva OT" icon="pi pi-plus" class="p-button-sm mt-5 float-right"></button>
+      <button *ngxPermissionsOnly="['OT_CREAR']" [routerLink]="['/app/ot/form-ot']" pButton type="button" label="Nueva OT" icon="pi pi-plus" class="p-button-sm mt-5 float-right"></button>
     </div>
     <div class="col-12">
       <hr>

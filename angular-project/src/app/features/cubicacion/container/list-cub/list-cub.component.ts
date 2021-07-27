@@ -138,7 +138,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           tooltipDisabled: 'No puede eliminar una cubicacion asignada a una OT',
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button p-button-danger',
-          onClick: (event: Event, item) => {
+          onClick: (event: Event, item: cubModel.Cubicacion) => {
             this.confirmationService.confirm({
               target: event.target as EventTarget,
               message: '¿Está seguro que desea eliminar esta cubicación?',
