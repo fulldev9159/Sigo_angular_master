@@ -8,16 +8,12 @@ import {
   catchError,
   concatMap,
   map,
-<<<<<<< HEAD
   mapTo,
-=======
->>>>>>> develop
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Response } from '@storeOT/model';
@@ -37,11 +33,8 @@ export class CubicacionEffects {
     private snackService: SnackBarService,
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
-<<<<<<< HEAD
-    private cubicacionService: Data.CubicacionService
-=======
+    private cubicacionService: Data.CubicacionService,
     private router: Router
->>>>>>> develop
   ) {}
 
   getOt$ = createEffect(() =>
@@ -348,7 +341,6 @@ export class CubicacionEffects {
       concatMap(([data, profile]) =>
         this.cubicacionService.deleteOT(data.cubicacion_id).pipe(
           map(() => {
-            window.location.reload();
             return cubicacionActions.deleteCubicacionSuccess();
           }),
           catchError(error =>
@@ -357,5 +349,22 @@ export class CubicacionEffects {
         )
       )
     )
+  );
+
+  notifyAfterCubageDelete$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubicacionActions.deleteCubicacionSuccess),
+        withLatestFrom(this.authFacade.getCurrentProfile$()),
+        tap(([data, profile]) => {
+          this.snackService.showMessage(
+            'Cubicación eliminada exitosamente',
+            'ok'
+          );
+
+          this.cubageFacade.getCubicacionAction(profile.id);
+        })
+      ),
+    { dispatch: false }
   );
 }
