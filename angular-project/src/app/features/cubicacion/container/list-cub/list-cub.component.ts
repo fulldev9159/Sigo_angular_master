@@ -112,16 +112,6 @@ export class ListCubComponent implements OnInit, OnDestroy {
             this.cubageFacade.selectCubicacion(item);
             this.cloneCubageForm.reset();
             this.displayClonatedCubageNameModal = true;
-
-            //// item.nombre = item.nombre;
-
-            //// this.cubageFacade.ClonarCubicacionAction(item, item.id);
-            //// window.location.reload();
-            //// this.messageService.add({
-            ////   severity: 'success',
-            ////   summary: 'Registro copiado',
-            ////   detail: 'Registro se ha copiado con Éxito!',
-            //// });
           },
         },
         {
@@ -274,12 +264,11 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
 
   closeClonatedCubageNameModal(): void {
-    // this.otFacade.selectOT(null); // workaround for subscribing the same ot multiple times
     this.displayClonatedCubageNameModal = false;
   }
 
   cloneCubabeFormSubmit(): void {
-    // console.log(this.assignCoordinatorForm);
     this.cloneCubageForm.submit();
+    this.displayClonatedCubageNameModal = false;
   }
 }
