@@ -35,10 +35,11 @@ export class TableComponent implements OnInit, OnDestroy {
         ...ac,
         ...this.config.body.headers.reduce((ac2, header) => {
           if (header.type === 'INPUTNUMBER') {
-            ac2[this.getControlName(rowIndex, header.header)] = new FormControl(
-              item[header.header],
-              []
-            );
+            ac2[
+              this.getControlName(rowIndex, header.header)
+            ] = new FormControl(item[header.header] + '', [
+              ...(header.validators || []),
+            ]);
           }
           return ac2;
         }, {}),
@@ -76,7 +77,11 @@ export class TableComponent implements OnInit, OnDestroy {
           })
       );
     });
+
+    this.touch();
   }
+
+  errorMessageFn = errors => 'Este campo es inválido';
 
   private destroyInstance: Subject<boolean> = new Subject();
 
@@ -106,5 +111,22 @@ export class TableComponent implements OnInit, OnDestroy {
 
   extractControlNameElements(controlName: string): string[] {
     return controlName.split('_');
+  }
+
+  touch(): void {
+    Object.keys(this.form.controls).forEach(field => {
+      const control = this.form.get(field);
+      console.log(field);
+
+      control.markAsTouched({
+        onlySelf: true,
+      });
+
+      control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
+    });
+
+    this.form.markAsTouched({
+      onlySelf: true,
+    });
   }
 }

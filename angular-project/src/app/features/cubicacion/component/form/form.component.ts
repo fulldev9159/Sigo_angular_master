@@ -8,7 +8,7 @@ import {
   Output,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponetType } from '@storeOT/model';
 
@@ -101,6 +101,21 @@ export class FormComponent implements OnInit, OnDestroy {
           onchange: (event: Event, item: CubModel.Service) => {
             this.CantidadSelected.emit({ event, item });
           },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            Validators.maxLength(6),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
+          },
         },
         {
           field: 'Unidad	',
@@ -149,6 +164,12 @@ export class FormComponent implements OnInit, OnDestroy {
       ],
     },
   };
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
 
   constructor() {}
 

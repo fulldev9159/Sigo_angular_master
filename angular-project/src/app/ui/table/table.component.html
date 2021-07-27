@@ -55,7 +55,7 @@
             <!--
             <input type="number" pInputText style="width: 100%;" (change)="column.onchange($event,item)" value="{{item[column.header]}}" />
             -->
-            <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="number"></app-input>
+            <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="number" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
           </td>
           <td *ngSwitchCase="'NUMBER'">{{ item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
           <td *ngSwitchCase="'DATE'">{{ item[column.header] | date:'dd-MM-yyyy' }}</td>
