@@ -53,7 +53,7 @@ export class TableComponent implements OnInit, OnDestroy {
       this.subscription.add(
         this.form
           .get(controlName)
-          .valueChanges.pipe(distinctUntilChanged(), debounceTime(1000))
+          .valueChanges.pipe(distinctUntilChanged(), debounceTime(800))
           .subscribe(value => {
             const [rowIndex, header] = this.extractControlNameElements(
               controlName
@@ -128,5 +128,9 @@ export class TableComponent implements OnInit, OnDestroy {
     this.form.markAsTouched({
       onlySelf: true,
     });
+  }
+
+  get valid(): boolean {
+    return this.form.valid;
   }
 }
