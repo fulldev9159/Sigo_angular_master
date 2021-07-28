@@ -14,7 +14,7 @@ export interface Header {
   header: string;
   width: string;
   editable: boolean;
-  onchange: (event, item) => void;
+  onchange?: (event, item) => void;
   validators?: ValidatorFn[];
   errorMessageFn?: (errors) => string;
 }
