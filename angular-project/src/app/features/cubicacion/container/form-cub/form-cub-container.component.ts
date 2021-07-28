@@ -142,18 +142,21 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   CantidadSelected(event: any): void {
+    const cantidad = (val => (isNaN(val) ? 0 : val))(
+      parseInt(event.event.target.value, 10)
+    );
+
     this.lpusCarrito = this.lpusCarrito.map(x => {
       if (x.lpu_id === event.item.lpu_id) {
         return {
           ...x,
-          cantidad: +(event.event.target as HTMLInputElement).value,
-          lpu_subtotal: +(
-            +x.lpu_precio * +(event.event.target as HTMLInputElement).value
-          ),
+          cantidad,
+          lpu_subtotal: +x.lpu_precio * cantidad,
         };
       }
       return x;
     });
+
     this.total = this.lpusCarrito.reduce((total, currentValue) => {
       return total + currentValue.lpu_subtotal;
     }, 0);

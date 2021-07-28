@@ -6,11 +6,13 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponetType } from '@storeOT/model';
+import { TableComponent } from '@uiOT/table/table.component';
 
 @Component({
   selector: 'app-form',
@@ -19,6 +21,13 @@ import { TableComponetType } from '@storeOT/model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent implements OnInit, OnDestroy {
+  tableValid = true;
+  @ViewChild('tableLpus', {
+    read: TableComponent,
+    static: false,
+  })
+  tableLpus: TableComponent;
+
   @Input() formCubicacion: FormGroup;
   @Input() contratosMarcos: CubModel.ContractMarco[] = [];
   @Input() Providers: CubModel.Provider[] = [];
@@ -27,13 +36,6 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input() Services: CubModel.Service[] = [];
   @Input() autoSuggestData: CubModel.AutoSuggestItem[] = [];
   // @Input() ConfigTableResumen: TableComponetType;
-  msgsLPULength = [
-    {
-      severity: 'info',
-      summary: 'INFO',
-      detail: 'Al menos 1 LPU debe ser ingresada',
-    },
-  ];
   msgsLPUQuantityZero = [
     {
       severity: 'error',
@@ -99,7 +101,26 @@ export class FormComponent implements OnInit, OnDestroy {
           header: 'cantidad',
           editable: true,
           onchange: (event: Event, item: CubModel.Service) => {
+            this.tableValid = this.tableLpus.valid;
             this.CantidadSelected.emit({ event, item });
+          },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            this.nonZero,
+            Validators.maxLength(6),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.nonzero) {
+              return 'No son permitidos valores inferiores a 1';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
           },
         },
         {
@@ -143,12 +164,25 @@ export class FormComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
           onClick: (event: Event, item: CubModel.Service) => {
+            this.tableValid = this.tableLpus.valid;
             this.BorrarLPUCarrito.emit({ event, item });
           },
         },
       ],
     },
   };
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+
+  nonZero(control: FormControl): any {
+    const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
+    console.log(value);
+    return value < 1 ? { nonzero: true } : null;
+  }
 
   constructor() {}
 
