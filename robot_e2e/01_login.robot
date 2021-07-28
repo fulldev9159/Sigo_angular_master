@@ -28,10 +28,9 @@ Redirect to dashboard to a login person
    # Ingresar datos de login
     Login    admin    password
 
-    Wait Until Element Is Visible    id:user-name    timeout=5
+    # Wait Until Element Is Visible    id:user-name    timeout=5
     Location Should Be    ${url}/app/ot/list-ot
     # element should be visible    id:user-name
     # Element text should be    id:user-name    Jessica Castillo
 
     close Browser
-
