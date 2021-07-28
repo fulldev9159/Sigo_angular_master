@@ -28,7 +28,7 @@ Login
     input password                   name:password    ${password}
     element should be enabled        id:login
     Click Button                     id:login
-    Wait Until Element Is Visible    id:user-name     timeout=5
+    # Wait Until Element Is Visible    id:user-name     timeout=5
 
 Element text should be
     [Arguments]        ${element}    ${texto}
