@@ -8,12 +8,12 @@ import {
   catchError,
   concatMap,
   map,
+  mapTo,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Response } from '@storeOT/model';
@@ -22,6 +22,8 @@ import { environment } from '@environment';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import * as Data from '@data';
 
 @Injectable()
 export class CubicacionEffects {
@@ -31,6 +33,7 @@ export class CubicacionEffects {
     private snackService: SnackBarService,
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
+    private cubicacionService: Data.CubicacionService,
     private router: Router
   ) {}
 
@@ -329,5 +332,39 @@ export class CubicacionEffects {
           )
       )
     )
+  );
+
+  deleteCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.deleteCubicacion),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([data, profile]) =>
+        this.cubicacionService.deleteOT(data.cubicacion_id).pipe(
+          map(() => {
+            return cubicacionActions.deleteCubicacionSuccess();
+          }),
+          catchError(error =>
+            of(cubicacionActions.deleteCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfterCubageDelete$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubicacionActions.deleteCubicacionSuccess),
+        withLatestFrom(this.authFacade.getCurrentProfile$()),
+        tap(([data, profile]) => {
+          this.snackService.showMessage(
+            'Cubicación eliminada exitosamente',
+            'ok'
+          );
+
+          this.cubageFacade.getCubicacionAction(profile.id);
+        })
+      ),
+    { dispatch: false }
   );
 }

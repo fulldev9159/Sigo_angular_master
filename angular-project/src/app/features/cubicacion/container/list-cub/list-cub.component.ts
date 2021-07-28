@@ -138,7 +138,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           tooltipDisabled: 'No puede eliminar una cubicacion asignada a una OT',
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button p-button-danger',
-          onClick: (event: Event, item, position) => {
+          onClick: (event: Event, item: cubModel.Cubicacion) => {
             this.confirmationService.confirm({
               target: event.target as EventTarget,
               message: '¿Está seguro que desea eliminar esta cubicación?',
@@ -146,7 +146,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
-                this.cubageFacade.deleteCubicacion(position);
+                this.cubageFacade.deleteCubicacion(item.id);
               },
             });
           },
@@ -254,7 +254,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.detalleCubicacion$ = this.cubageFacade.getDetallesCubicacionSelector$();
+    this.detalleCubicacion$ =
+      this.cubageFacade.getDetallesCubicacionSelector$();
     this.items$ = this.cubageFacade.getCubicacionSelector$();
   }
 

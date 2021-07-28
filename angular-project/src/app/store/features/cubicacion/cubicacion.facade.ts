@@ -21,10 +21,8 @@ export class CubicacionFacade {
   }
 
   // DELETE
-  public deleteCubicacion(position: number): void {
-    this.store.dispatch(
-      cubicacionActions.deleteCubicacion({ cubicacionPosition: position })
-    );
+  public deleteCubicacion(cubicacion_id: number): void {
+    this.store.dispatch(cubicacionActions.deleteCubicacion({ cubicacion_id }));
   }
   // DELETE
 

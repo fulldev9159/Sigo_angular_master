@@ -36,13 +36,13 @@ export const reducerCubicacion = createReducer(
     ...state,
     items: payload.cubicacion,
   })),
-  on(CubicacionActions.deleteCubicacion, (state, payload) => ({
-    ...state,
-    items: [
-      ...state.items.slice(0, payload.cubicacionPosition),
-      ...state.items.slice(payload.cubicacionPosition + 1),
-    ],
-  })),
+  // on(CubicacionActions.deleteCubicacion, (state, payload) => ({
+  //   ...state,
+  //   items: [
+  //     ...state.items.slice(0, payload.cubicacionPosition),
+  //     ...state.items.slice(payload.cubicacionPosition + 1),
+  //   ],
+  // })),
   on(CubicacionActions.replyCubicacion, (state, payload) => ({
     ...state,
     items: [...state.items, payload.cubicacion],
