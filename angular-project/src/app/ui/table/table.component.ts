@@ -28,7 +28,7 @@ export class TableComponent implements OnInit, OnDestroy {
   items: any[] = [];
   @Input('items')
   set itemsInput(items: any[]) {
-    this.items = items;
+    this.items = items || [];
 
     this.controls = this.items.reduce(
       (ac, item, rowIndex) => ({
