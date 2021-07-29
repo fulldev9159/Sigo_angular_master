@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
 import * as cubModel from './cubicacion.model';
+import { CubicacionWithLpu } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,14 @@ export class CubicacionFacade {
 
   public getCubicacionSelector$(): Observable<cubModel.Cubicacion[]> {
     return this.store.select(cubicacionSelectors.getCubicaciones);
+  }
+
+  public getSingleCubicacion(id: number): void {
+    this.store.dispatch(cubicacionActions.getSingleCubicacion({ id }));
+  }
+
+  public getSingleCubicacion$(): Observable<CubicacionWithLpu> {
+    return this.store.select(cubicacionSelectors.getSingleCubicacion);
   }
 
   // DELETE

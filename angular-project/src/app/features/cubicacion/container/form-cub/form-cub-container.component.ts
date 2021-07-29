@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Subscription, Observable, of, Subject } from 'rxjs';
 import { map, filter, takeUntil } from 'rxjs/operators';
 
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -27,6 +27,10 @@ import { MessageService } from 'primeng/api';
   providers: [FormCubConfig],
 })
 export class FormCubContainerComponent implements OnInit, OnDestroy {
+  editID = null;
+  editCubicacion$: Observable<any>;
+
+  subscription: Subscription = new Subscription();
   private destroyInstance$: Subject<boolean> = new Subject();
   public authLogin: Login = null;
   public formCubicacion: FormGroup;
@@ -47,7 +51,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     private authFacade: AuthFacade,
     private formConfig: FormCubConfig,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -83,9 +88,27 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .getTypeServicesSelector$()
       .pipe(map(tiposervicios => (this.TipoServicios = tiposervicios)));
     this.Services$ = this.cubageFacade.getServicesSelector$();
+
+    this.subscription.add(
+      this.route.paramMap.subscribe(params => {
+        if (params.get('id')) {
+          this.editID = +params.get('id');
+          this.cubageFacade.getSingleCubicacion(this.editID);
+        } else {
+          this.editID = null;
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.cubageFacade
+        .getSingleCubicacion$()
+        .subscribe(res => console.log('cubage obtenido', res))
+    );
   }
 
   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
     this.destroyInstance$.next(true);
     this.destroyInstance$.complete();
   }
