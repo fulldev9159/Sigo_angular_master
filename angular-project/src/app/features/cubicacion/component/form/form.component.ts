@@ -34,6 +34,7 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input() Regions: CubModel.Region[] = [];
   @Input() TypeServices: CubModel.TypeService[] = [];
   @Input() Services: CubModel.Service[] = [];
+  @Input() autoSuggestInitialValue: string = '';
   @Input() autoSuggestData: CubModel.AutoSuggestItem[] = [];
   // @Input() ConfigTableResumen: TableComponetType;
   msgsLPUQuantityZero = [

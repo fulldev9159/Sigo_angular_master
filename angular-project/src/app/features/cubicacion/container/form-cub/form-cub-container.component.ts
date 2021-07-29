@@ -4,8 +4,15 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subscription, Observable, of, Subject } from 'rxjs';
-import { map, filter, takeUntil } from 'rxjs/operators';
+import { combineLatest, Subscription, Observable, of, Subject } from 'rxjs';
+import {
+  map,
+  concatMap,
+  tap,
+  filter,
+  takeUntil,
+  withLatestFrom,
+} from 'rxjs/operators';
 
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { Login } from '@data';
@@ -35,6 +42,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   private destroyInstance$: Subject<boolean> = new Subject();
   public authLogin: Login = null;
   public formCubicacion: FormGroup;
+  public autoSuggestInitialValue = '';
   public autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of();
   public contratosMarcos$: Observable<CubModel.ContractMarco[]>;
   public Providers$: Observable<CubModel.Provider[]> = of([]);
@@ -90,6 +98,62 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .pipe(map(tiposervicios => (this.TipoServicios = tiposervicios)));
     this.Services$ = this.cubageFacade.getServicesSelector$();
 
+    this.selectedCubicacion$ = this.cubageFacade.getSingleCubicacion$().pipe(
+      filter(cubicacion => cubicacion !== null && cubicacion !== undefined),
+      tap(cub => console.log('cub', cub))
+    );
+
+    this.subscription.add(
+      this.selectedCubicacion$
+        .pipe(
+          tap((cubicacion: CubicacionWithLpu) => {
+            this.autoSuggestInitialValue = cubicacion.nombre;
+            // this.formCubicacion.get('nombre').setValue(cubicacion.nombre);
+            this.formCubicacion
+              .get('contrato_marco_id')
+              .setValue(cubicacion.contrato_marco_id);
+          })
+        )
+        .subscribe(() => console.log('contrato marco OK'))
+    );
+
+    this.subscription.add(
+      this.Providers$.pipe(
+        withLatestFrom(this.selectedCubicacion$),
+        tap(([providers, cubicacion]) => {
+          const provider = providers.find(
+            prov => prov.id === cubicacion.proveedor_id
+          );
+
+          const subcontratos = provider.subcontrato_id.join(',');
+          const subcontrato_id = `${subcontratos}-${provider.id}`;
+
+          this.formCubicacion.get('subcontrato_id').setValue(subcontrato_id);
+        })
+      ).subscribe(() => console.log('provider OK'))
+    );
+
+    this.subscription.add(
+      this.Regions$.pipe(
+        withLatestFrom(this.selectedCubicacion$),
+        tap(([regions, cubicacion]) => {
+          const region = regions.find(reg => reg.id === cubicacion.region_id);
+
+          this.formCubicacion.get('region_id').setValue(region.id);
+        })
+      ).subscribe(() => console.log('provider OK'))
+    );
+
+    this.subscription.add(
+      this.TypeServices$.pipe(
+        withLatestFrom(this.selectedCubicacion$),
+        tap(([types, cubicacion]) => {
+          const typeService = types[0]; // TODO se necesita el tipo servicio
+          this.formCubicacion.get('tipo_servicio_id').setValue(typeService.id);
+        })
+      ).subscribe(() => console.log('tipo servicio OK'))
+    );
+
     this.subscription.add(
       this.route.paramMap.subscribe(params => {
         if (params.get('id')) {
@@ -100,12 +164,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         }
       })
     );
-
-    this.selectedCubicacion$ = this.cubageFacade
-      .getSingleCubicacion$()
-      .pipe(
-        filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
-      );
   }
 
   ngOnDestroy(): void {
@@ -203,7 +261,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   cancel(data: any): void {
-    this.formConfig.initForm();
+    this.formCubicacion = this.formConfig.initForm();
     this.router.navigate(['app/cubicacion/list-cub']);
   }
 
