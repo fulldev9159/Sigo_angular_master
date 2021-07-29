@@ -30,6 +30,7 @@ Resource    ../resource.robot
 ...                    Finalizar OT
 ...                    Autotizar LPUs adicionales
 ...                    Listar OTs del Area
+...                    Ver valores LPU
 
 @{permisos Cubicacion gestor}=    Listar
 ...                               Crear
