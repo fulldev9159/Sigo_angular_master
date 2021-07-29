@@ -18,6 +18,7 @@ import { FormCubConfig } from './form-cub-config.service';
 import { FormGroup } from '@angular/forms';
 
 import { MessageService } from 'primeng/api';
+import { CubicacionWithLpu } from '@data';
 
 @Component({
   selector: 'app-form-cub-container',
@@ -28,7 +29,7 @@ import { MessageService } from 'primeng/api';
 })
 export class FormCubContainerComponent implements OnInit, OnDestroy {
   editID = null;
-  editCubicacion$: Observable<any>;
+  selectedCubicacion$: Observable<CubicacionWithLpu>;
 
   subscription: Subscription = new Subscription();
   private destroyInstance$: Subject<boolean> = new Subject();
@@ -100,11 +101,11 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       })
     );
 
-    this.subscription.add(
-      this.cubageFacade
-        .getSingleCubicacion$()
-        .subscribe(res => console.log('cubage obtenido', res))
-    );
+    this.selectedCubicacion$ = this.cubageFacade
+      .getSingleCubicacion$()
+      .pipe(
+        filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
+      );
   }
 
   ngOnDestroy(): void {
