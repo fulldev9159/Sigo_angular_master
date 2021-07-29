@@ -10,12 +10,13 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
 import { ConfirmationService } from 'primeng/api';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { map, filter, takeUntil } from 'rxjs/operators';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Login } from '@data';
 import { MessageService } from 'primeng/api';
 import { CloneCubageFormComponent } from '../../component/clone-cubage-form/clone-cubage-form.component';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-list-cub',
@@ -155,6 +156,41 @@ export class ListCubComponent implements OnInit, OnDestroy {
     },
   };
 
+  configHeaders = [
+    {
+      field: 'Servicio LPU',
+      type: 'TEXT',
+      sort: 'lpu_nombre',
+      header: 'lpu_nombre',
+      width: '33%',
+      editable: false,
+    },
+    {
+      field: 'Tipo Servicio',
+      type: 'TEXT-TITLECASE',
+      sort: 'tipo_servicio_nombre',
+      header: 'tipo_servicio_nombre',
+      width: '15%',
+      editable: false,
+    },
+    {
+      field: 'Cantidad	',
+      type: 'TEXT',
+      sort: 'lpu_cantidad',
+      header: 'lpu_cantidad',
+      editable: true,
+    },
+    {
+      field: 'Unidad	',
+      type: 'TEXT',
+      sort: 'tipo_unidad_nombre',
+      header: 'tipo_unidad_nombre',
+      editable: false,
+    },
+  ];
+
+  configSort = ['lpu_nombre', 'tipo_servicio'];
+
   public ConfigTableResumen = {
     header: true,
     headerConfig: {
@@ -164,59 +200,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
       actionsType: 'Buttons',
     },
     body: {
-      headers: [
-        {
-          field: 'Servicio LPU',
-          type: 'TEXT',
-          sort: 'lpu_nombre',
-          header: 'lpu_nombre',
-          width: '33%',
-          editable: false,
-        },
-        {
-          field: 'Tipo Servicio',
-          type: 'TEXT-TITLECASE',
-          sort: 'tipo_servicio_nombre',
-          header: 'tipo_servicio_nombre',
-          width: '15%',
-          editable: false,
-        },
-        {
-          field: 'Cantidad	',
-          type: 'TEXT',
-          sort: 'lpu_cantidad',
-          header: 'lpu_cantidad',
-          editable: true,
-        },
-        {
-          field: 'Unidad	',
-          type: 'TEXT',
-          sort: 'tipo_unidad_nombre',
-          header: 'tipo_unidad_nombre',
-          editable: false,
-        },
-        {
-          field: 'Tipo Moneda	',
-          type: 'TEXT',
-          sort: 'tipo_moneda_cod',
-          header: 'tipo_moneda_cod',
-          editable: false,
-        },
-        {
-          field: 'Precio',
-          type: 'NUMBER',
-          sort: 'lpu_precio',
-          header: 'lpu_precio',
-          editable: false,
-        },
-        {
-          field: 'Subtotal	',
-          type: 'NUMBER',
-          sort: 'lpu_subtotal',
-          header: 'lpu_subtotal',
-        },
-      ],
-      sort: ['lpu_nombre', 'tipo_servicio', 'lpu_precio'],
+      headers: this.configHeaders,
+      sort: this.configSort,
       actions: [],
     },
   };
@@ -227,13 +212,53 @@ export class ListCubComponent implements OnInit, OnDestroy {
   })
   cloneCubageForm: CloneCubageFormComponent;
 
+  subscription: Subscription = new Subscription();
   constructor(
     private router: Router,
     private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
-  ) {}
+    private messageService: MessageService,
+    private permissionsService: NgxPermissionsService
+  ) {
+    this.subscription.add(
+      permissionsService.permissions$.subscribe(permissions => {
+        if (permissions.OT_VER_VALOR_LPU) {
+          this.ConfigTableResumen = {
+            ...this.ConfigTableResumen,
+            body: {
+              headers: [
+                ...this.configHeaders,
+                {
+                  field: 'Tipo Moneda	',
+                  type: 'TEXT',
+                  sort: 'tipo_moneda_cod',
+                  header: 'tipo_moneda_cod',
+                  editable: false,
+                },
+                {
+                  field: 'Precio',
+                  type: 'NUMBER',
+                  sort: 'lpu_precio',
+                  header: 'lpu_precio',
+                  editable: false,
+                },
+                {
+                  field: 'Subtotal	',
+                  type: 'NUMBER',
+                  sort: 'lpu_subtotal',
+                  header: 'lpu_subtotal',
+                  editable: false,
+                },
+              ],
+              sort: [...this.configSort, 'lpu_precio'],
+              actions: [],
+            },
+          };
+        }
+      })
+    );
+  }
 
   ngOnInit(): void {
     this.authFacade

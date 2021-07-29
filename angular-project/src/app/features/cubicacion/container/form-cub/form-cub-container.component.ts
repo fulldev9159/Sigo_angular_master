@@ -41,6 +41,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   // public ConfigTableResumen: TableComponetType;
   public lpusCarrito: CubModel.Service[] = [];
   public total = 0;
+  public currency = '';
 
   constructor(
     private cubageFacade: CubicacionFacade,
@@ -109,8 +110,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     const regionControls = 'region_id';
     const regionID = this.formCubicacion.controls[regionControls].value;
     const tipoServicioControls = 'tipo_servicio_id';
-    const tipoServicioID = this.formCubicacion.controls[tipoServicioControls]
-      .value;
+    const tipoServicioID =
+      this.formCubicacion.controls[tipoServicioControls].value;
     const regionName = this.Regiones.filter(x => x.id === +regionID)[0].codigo;
     const tipoServicioName = this.TipoServicios.filter(
       x => x.id === +tipoServicioID
@@ -136,6 +137,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         lpu_subtotal,
       };
     });
+    this.currency = this.lpusCarrito[0].tipo_moneda_cod;
     this.total = this.lpusCarrito.reduce((total, currentValue) => {
       return total + currentValue.lpu_subtotal;
     }, 0);
@@ -172,10 +174,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         lpu => lpu.lpu_id !== event.item.lpu_id
       )
     );
-    console.log(this.formCubicacion.controls[lpuIDControls].value);
     this.total = this.lpusCarrito.reduce((total, currentValue) => {
       return total + currentValue.lpu_subtotal;
     }, 0);
+
+    this.currency =
+      this.lpusCarrito.length === 0 ? '' : this.lpusCarrito[0].tipo_moneda_cod;
   }
 
   cancel(data: any): void {

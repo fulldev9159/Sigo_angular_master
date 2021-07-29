@@ -14,7 +14,7 @@
     <app-card [classCardHeader]="'bg-secondary text-white'">
       <ng-container card-header-title> </ng-container>
       <ng-container card-body>
-        <app-form [formCubicacion]="formCubicacion" [autoSuggestData]="autoSuggestItems$ | async" (ChangeSearchSuggest)="ChangeSearchSuggest($event)" (NameSelected)="NameSelected($event)" [contratosMarcos]="contratosMarcos$ | async" [Providers]="Providers$ | async" [Regions]="Regions$ | async" [TypeServices]="TypeServices$ | async" [Services]="Services$ | async" (lpusSelected)="lpusSelected($event)" [lpusCarrito]="lpusCarrito" (CantidadSelected)="CantidadSelected($event)" (BorrarLPUCarrito)="BorrarLPUCarrito($event)" [total]="total" (cancel)="cancel($event)" (save)="save($event)"></app-form>
+        <app-form [formCubicacion]="formCubicacion" [autoSuggestData]="autoSuggestItems$ | async" (ChangeSearchSuggest)="ChangeSearchSuggest($event)" (NameSelected)="NameSelected($event)" [contratosMarcos]="contratosMarcos$ | async" [Providers]="Providers$ | async" [Regions]="Regions$ | async" [TypeServices]="TypeServices$ | async" [Services]="Services$ | async" (lpusSelected)="lpusSelected($event)" [lpusCarrito]="lpusCarrito" (CantidadSelected)="CantidadSelected($event)" (BorrarLPUCarrito)="BorrarLPUCarrito($event)" [total]="total" [currency]="currency" (cancel)="cancel($event)" (save)="save($event)"></app-form>
       </ng-container>
     </app-card>
   </div>

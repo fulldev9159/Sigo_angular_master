@@ -52,6 +52,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.hasLPUWithZeroQuantity = item !== undefined;
   }
   @Input() total: number;
+  @Input() currency: string;
   @Output() public cancel = new EventEmitter();
   @Output() public save = new EventEmitter();
   @Output() public lpusSelected = new EventEmitter();

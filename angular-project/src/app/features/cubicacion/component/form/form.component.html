@@ -74,7 +74,7 @@
     <hr>
 
     <app-table [config]="ConfigTableResumen" #tableLpus [items]="lpusCarrito"></app-table>
-    <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span>
+    <span id="total"> <strong>Total:</strong> {{ total| currency : currency : currency===''?'':currency + '$ ':'.0-2':'es-CL' }}</span>
 
     <hr>
 
