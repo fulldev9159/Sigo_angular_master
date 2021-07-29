@@ -40,7 +40,11 @@ export const reducerCubicacion = createReducer(
     items: payload.cubicacion,
   })),
 
-  on(CubicacionActions.getSingleCubicacion, state => ({
+  on(CubicacionActions.resetSingleCubicacion, state => ({
+    ...state,
+    cubicacion: null,
+  })),
+  on(CubicacionActions.getSingleCubicacion, (state, { id }) => ({
     ...state,
     cubicacion: null,
   })),
@@ -103,12 +107,7 @@ export const reducerCubicacion = createReducer(
   })),
 
   on(CubicacionActions.resetData, (state, payload) => ({
-    ...state,
-    contractMarco: [],
-    subContractedProviders: [],
-    subContractedRegions: [],
-    subContractedTypeServices: [],
-    subContractedServices: [],
+    ...initialStateCubicacion,
   })),
   on(CubicacionActions.getAutoSuggest, state => state),
   on(CubicacionActions.getAutoSuggestSuccess, (state, payload) => ({

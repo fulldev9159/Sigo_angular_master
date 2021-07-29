@@ -116,7 +116,6 @@ export class TableComponent implements OnInit, OnDestroy {
   touch(): void {
     Object.keys(this.form.controls).forEach(field => {
       const control = this.form.get(field);
-      console.log(field);
 
       control.markAsTouched({
         onlySelf: true,

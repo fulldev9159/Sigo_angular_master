@@ -65,6 +65,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.cubageFacade.resetData();
+
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance$))
@@ -98,29 +100,27 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .pipe(map(tiposervicios => (this.TipoServicios = tiposervicios)));
     this.Services$ = this.cubageFacade.getServicesSelector$();
 
-    this.selectedCubicacion$ = this.cubageFacade.getSingleCubicacion$().pipe(
-      filter(cubicacion => cubicacion !== null && cubicacion !== undefined),
-      tap(cub => console.log('cub', cub))
+    this.selectedCubicacion$ = this.cubageFacade
+      .getSingleCubicacion$()
+      .pipe(
+        filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
+      );
+
+    this.subscription.add(
+      this.selectedCubicacion$.subscribe((cubicacion: CubicacionWithLpu) => {
+        this.autoSuggestInitialValue = cubicacion.nombre;
+        this.formCubicacion
+          .get('nombre')
+          .setValue(this.autoSuggestInitialValue);
+        this.formCubicacion
+          .get('contrato_marco_id')
+          .setValue(cubicacion.contrato_marco_id);
+      })
     );
 
     this.subscription.add(
-      this.selectedCubicacion$
-        .pipe(
-          tap((cubicacion: CubicacionWithLpu) => {
-            this.autoSuggestInitialValue = cubicacion.nombre;
-            // this.formCubicacion.get('nombre').setValue(cubicacion.nombre);
-            this.formCubicacion
-              .get('contrato_marco_id')
-              .setValue(cubicacion.contrato_marco_id);
-          })
-        )
-        .subscribe(() => console.log('contrato marco OK'))
-    );
-
-    this.subscription.add(
-      this.Providers$.pipe(
-        withLatestFrom(this.selectedCubicacion$),
-        tap(([providers, cubicacion]) => {
+      this.Providers$.pipe(withLatestFrom(this.selectedCubicacion$)).subscribe(
+        ([providers, cubicacion]) => {
           const provider = providers.find(
             prov => prov.id === cubicacion.proveedor_id
           );
@@ -129,29 +129,61 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           const subcontrato_id = `${subcontratos}-${provider.id}`;
 
           this.formCubicacion.get('subcontrato_id').setValue(subcontrato_id);
-        })
-      ).subscribe(() => console.log('provider OK'))
+        }
+      )
     );
 
     this.subscription.add(
-      this.Regions$.pipe(
-        withLatestFrom(this.selectedCubicacion$),
-        tap(([regions, cubicacion]) => {
+      this.Regions$.pipe(withLatestFrom(this.selectedCubicacion$)).subscribe(
+        ([regions, cubicacion]) => {
           const region = regions.find(reg => reg.id === cubicacion.region_id);
 
           this.formCubicacion.get('region_id').setValue(region.id);
-        })
-      ).subscribe(() => console.log('provider OK'))
+        }
+      )
     );
 
     this.subscription.add(
       this.TypeServices$.pipe(
-        withLatestFrom(this.selectedCubicacion$),
-        tap(([types, cubicacion]) => {
-          const typeService = types[0]; // TODO se necesita el tipo servicio
-          this.formCubicacion.get('tipo_servicio_id').setValue(typeService.id);
-        })
-      ).subscribe(() => console.log('tipo servicio OK'))
+        withLatestFrom(this.selectedCubicacion$)
+      ).subscribe(([types, cubicacion]) => {
+        const typeService = types[0]; // TODO se necesita el tipo servicio
+        this.formCubicacion.get('tipo_servicio_id').setValue(typeService.id);
+      })
+    );
+
+    this.subscription.add(
+      this.Services$.pipe(withLatestFrom(this.selectedCubicacion$)).subscribe(
+        ([services, cubicacion]) => {
+          const lpuIDsWithQuantity = cubicacion.lpus.reduce((ac, lpu) => {
+            ac[lpu.lpu_id] = lpu.lpu_cantidad;
+            return ac;
+          }, {});
+
+          const selectedServices = services.filter(
+            service => lpuIDsWithQuantity[service.lpu_id] !== undefined
+          );
+
+          this.formCubicacion.get('lpus').setValue(selectedServices);
+
+          this.lpusSelected({ value: selectedServices });
+
+          this.lpusCarrito = this.lpusCarrito.map(item => {
+            const cantidad = lpuIDsWithQuantity[item.lpu_id];
+            const lpu_subtotal = item.lpu_precio * cantidad;
+
+            return {
+              ...item,
+              cantidad,
+              lpu_subtotal,
+            };
+          });
+
+          this.total = this.lpusCarrito.reduce((total, currentValue) => {
+            return total + currentValue.lpu_subtotal;
+          }, 0);
+        }
+      )
     );
 
     this.subscription.add(
@@ -279,8 +311,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         cantidad: x.cantidad,
       })),
     };
-    console.log(nuevaCubicacion);
+
     this.cubageFacade.postCubicacion(nuevaCubicacion);
+
     this.formCubicacion.reset();
     this.cubageFacade.resetData();
     this.router.navigate(['app/cubicacion/list-cub']);

@@ -21,6 +21,10 @@ export class CubicacionFacade {
     return this.store.select(cubicacionSelectors.getCubicaciones);
   }
 
+  public resetSingleCubicacion(): void {
+    this.store.dispatch(cubicacionActions.resetSingleCubicacion());
+  }
+
   public getSingleCubicacion(id: number): void {
     this.store.dispatch(cubicacionActions.getSingleCubicacion({ id }));
   }

@@ -3,6 +3,8 @@ import * as cubModel from './cubicacion.model';
 import { CubicacionWithLpu } from '@data';
 
 // CUBICACION LIST
+export const reset = createAction('[Cubicacion] reset');
+
 export const getCubicacion = createAction(
   '[Cubicacion GetAll] GET Cubicacion',
   props<{ perfilID: number }>()
@@ -16,6 +18,10 @@ export const getCubicacionSuccess = createAction(
 export const getCubicacionError = createAction(
   '[Cubicacion GetAll] GET Cubicacion Error',
   props<{ error: any }>()
+);
+
+export const resetSingleCubicacion = createAction(
+  '[Cubicacion] reset single Cubicacion'
 );
 
 export const getSingleCubicacion = createAction(
