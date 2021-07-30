@@ -35,8 +35,25 @@ import { CubicacionWithLpu } from '@data';
   providers: [FormCubConfig],
 })
 export class FormCubContainerComponent implements OnInit, OnDestroy {
-  editID = null;
   selectedCubicacion$: Observable<CubicacionWithLpu>;
+  selectedCubicacionError$: Observable<Error> = of(null);
+  invalidCubicacionIDError$: Observable<Error> = of(null);
+
+  msgsGetCubicacionError = [
+    {
+      severity: 'error',
+      summary: 'ERROR',
+      detail: 'La cubicación solicitada no existe',
+    },
+  ];
+
+  msgsInvalidCubicacionIDError = [
+    {
+      severity: 'error',
+      summary: 'ERROR',
+      detail: 'El ID ingresado debe ser númerico superior a 0',
+    },
+  ];
 
   subscription: Subscription = new Subscription();
   private destroyInstance$: Subject<boolean> = new Subject();
@@ -105,6 +122,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .pipe(
         filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
       );
+
+    this.selectedCubicacionError$ = this.cubageFacade
+      .getSingleCubicacionError$()
+      .pipe(filter(error => error !== null && error !== undefined));
 
     this.subscription.add(
       this.selectedCubicacion$
@@ -196,11 +217,14 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.route.paramMap.subscribe(params => {
-        if (params.get('id')) {
-          this.editID = +params.get('id');
-          this.cubageFacade.getSingleCubicacion(this.editID);
-        } else {
-          this.editID = null;
+        const id = params.get('id');
+        if (id !== null) {
+          const cubicacionID = +params.get('id');
+          if (isNaN(cubicacionID)) {
+            this.invalidCubicacionIDError$ = of(new Error('invalid cubage id'));
+          } else {
+            this.cubageFacade.getSingleCubicacion(cubicacionID);
+          }
         }
       })
     );

@@ -8,6 +8,7 @@ export const CubicacionFeatureKey = 'cubicacion';
 export interface StateCubicacion {
   items: cubModel.Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
+  cubicacionError: Error;
   selectedCubicacion: cubModel.Cubicacion;
   contractMarco: cubModel.ContractMarco[];
   subContractedProviders: cubModel.Provider[];
@@ -21,6 +22,7 @@ export interface StateCubicacion {
 export const initialStateCubicacion: StateCubicacion = {
   items: [],
   cubicacion: null,
+  cubicacionError: null,
   selectedCubicacion: null,
   contractMarco: [],
   subContractedProviders: [],
@@ -47,13 +49,16 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.getSingleCubicacion, (state, { id }) => ({
     ...state,
     cubicacion: null,
+    cubicacionError: null,
   })),
   on(CubicacionActions.getSingleCubicacionSuccess, (state, { cubicacion }) => ({
     ...state,
     cubicacion,
+    cubicacionError: null,
   })),
   on(CubicacionActions.getSingleCubicacionError, (state, { error }) => ({
     ...state,
+    cubicacionError: error,
   })),
   // on(CubicacionActions.deleteCubicacion, (state, payload) => ({
   //   ...state,

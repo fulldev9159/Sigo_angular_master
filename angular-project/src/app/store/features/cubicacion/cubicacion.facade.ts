@@ -33,6 +33,10 @@ export class CubicacionFacade {
     return this.store.select(cubicacionSelectors.getSingleCubicacion);
   }
 
+  public getSingleCubicacionError$(): Observable<Error> {
+    return this.store.select(cubicacionSelectors.getCubicacionError);
+  }
+
   // DELETE
   public deleteCubicacion(cubicacion_id: number): void {
     this.store.dispatch(cubicacionActions.deleteCubicacion({ cubicacion_id }));

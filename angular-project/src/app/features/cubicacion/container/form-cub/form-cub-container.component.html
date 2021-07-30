@@ -1,4 +1,16 @@
 <div class="container-fluid" style="background: #f0f8fb">
+  <ng-container *ngIf="selectedCubicacionError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsGetCubicacionError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="invalidCubicacionIDError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsInvalidCubicacionIDError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
   <div class="row">
     <ng-container *ngIf="selectedCubicacion$ | async as cubicacion; else newCubage">
       <div class="col">
