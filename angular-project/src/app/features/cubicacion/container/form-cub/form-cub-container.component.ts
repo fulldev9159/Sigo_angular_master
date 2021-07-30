@@ -107,15 +107,24 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       );
 
     this.subscription.add(
-      this.selectedCubicacion$.subscribe((cubicacion: CubicacionWithLpu) => {
-        this.autoSuggestInitialValue = cubicacion.nombre;
-        this.formCubicacion
-          .get('nombre')
-          .setValue(this.autoSuggestInitialValue);
-        this.formCubicacion
-          .get('contrato_marco_id')
-          .setValue(cubicacion.contrato_marco_id);
-      })
+      this.selectedCubicacion$
+        .pipe(withLatestFrom(this.contratosMarcos$))
+        .subscribe(([cubicacion, contratos]) => {
+          this.autoSuggestInitialValue = cubicacion.nombre;
+          this.formCubicacion
+            .get('nombre')
+            .setValue(this.autoSuggestInitialValue);
+
+          const contrato = contratos.find(
+            con => con.id === cubicacion.contrato_marco_id
+          );
+
+          if (contrato) {
+            this.formCubicacion.get('contrato_marco_id').setValue(contrato.id);
+          } else {
+            // TODO: no se cargó el 100%
+          }
+        })
     );
 
     this.subscription.add(
@@ -125,10 +134,14 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             prov => prov.id === cubicacion.proveedor_id
           );
 
-          const subcontratos = provider.subcontrato_id.join(',');
-          const subcontrato_id = `${subcontratos}-${provider.id}`;
+          if (provider) {
+            const subcontratos = provider.subcontrato_id.join(',');
+            const subcontrato_id = `${subcontratos}-${provider.id}`;
 
-          this.formCubicacion.get('subcontrato_id').setValue(subcontrato_id);
+            this.formCubicacion.get('subcontrato_id').setValue(subcontrato_id);
+          } else {
+            // TODO: no se cargó el 100%
+          }
         }
       )
     );
@@ -139,51 +152,46 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           const region = regions.find(reg => reg.id === cubicacion.region_id);
 
           this.formCubicacion.get('region_id').setValue(region.id);
+
+          if (region) {
+            this.lpusCarrito = cubicacion.lpus.map(lpu => ({
+              cantidad: lpu.lpu_cantidad,
+              lpu_id: lpu.lpu_id,
+              lpu_nombre: lpu.lpu_nombre,
+              lpu_numero_producto: '', // TODO: aparentemente no se usa
+              lpu_precio: lpu.lpu_precio,
+              lpu_subtotal: lpu.lpu_subtotal,
+              lpu_unidad_codigo: lpu.tipo_unidad_codigo,
+              lpu_unidad_nombre: lpu.tipo_unidad_nombre,
+              region: region.codigo,
+              tipo_moneda_cod: lpu.tipo_moneda_cod,
+              tipo_moneda_id: lpu.tipo_moneda_id,
+              tipo_servicio: lpu.tipo_servicio_nombre,
+            }));
+
+            this.total = this.lpusCarrito.reduce((total, currentValue) => {
+              return total + currentValue.lpu_subtotal;
+            }, 0);
+          } else {
+            // TODO: no se cargó el 100%
+          }
         }
       )
     );
 
     this.subscription.add(
-      this.TypeServices$.pipe(
-        withLatestFrom(this.selectedCubicacion$)
-      ).subscribe(([types, cubicacion]) => {
-        const typeService = types[0]; // TODO se necesita el tipo servicio
-        this.formCubicacion.get('tipo_servicio_id').setValue(typeService.id);
+      this.Services$.subscribe(services => {
+        const lpuIDsWithQuantity = this.lpusCarrito.reduce((ac, lpu) => {
+          ac[lpu.lpu_id] = lpu.cantidad;
+          return ac;
+        }, {});
+
+        const selectedServices = services.filter(
+          service => lpuIDsWithQuantity[service.lpu_id] !== undefined
+        );
+
+        this.formCubicacion.get('lpus').setValue(selectedServices);
       })
-    );
-
-    this.subscription.add(
-      this.Services$.pipe(withLatestFrom(this.selectedCubicacion$)).subscribe(
-        ([services, cubicacion]) => {
-          const lpuIDsWithQuantity = cubicacion.lpus.reduce((ac, lpu) => {
-            ac[lpu.lpu_id] = lpu.lpu_cantidad;
-            return ac;
-          }, {});
-
-          const selectedServices = services.filter(
-            service => lpuIDsWithQuantity[service.lpu_id] !== undefined
-          );
-
-          this.formCubicacion.get('lpus').setValue(selectedServices);
-
-          this.lpusSelected({ value: selectedServices });
-
-          this.lpusCarrito = this.lpusCarrito.map(item => {
-            const cantidad = lpuIDsWithQuantity[item.lpu_id];
-            const lpu_subtotal = item.lpu_precio * cantidad;
-
-            return {
-              ...item,
-              cantidad,
-              lpu_subtotal,
-            };
-          });
-
-          this.total = this.lpusCarrito.reduce((total, currentValue) => {
-            return total + currentValue.lpu_subtotal;
-          }, 0);
-        }
-      )
     );
 
     this.subscription.add(
