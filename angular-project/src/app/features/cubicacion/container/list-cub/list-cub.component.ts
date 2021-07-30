@@ -84,9 +84,10 @@ export class ListCubComponent implements OnInit, OnDestroy {
         },
         {
           field: 'Total',
-          type: 'NUMBER',
+          type: 'MONEY',
           sort: 'total',
           header: 'total',
+          currency: 'total_tipo_moneda',
           width: '10%',
           editable: false,
         },

@@ -58,6 +58,7 @@
             <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="number" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
           </td>
           <td *ngSwitchCase="'NUMBER'">{{ item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+          <td *ngSwitchCase="'MONEY'">{{ item[column.header] | currency : item[column.currency] : item[column.currency]===''?'':item[column.currency] + ' $':'.0-2':'es-CL' }}</td>
           <td *ngSwitchCase="'DATE'">{{ item[column.header] | date:'dd-MM-yyyy' }}</td>
           <td *ngSwitchCase="'BOOLEANTEXT'">
             <span *ngIf="item[column.header]">{{ column.booleantrue }}</span>
