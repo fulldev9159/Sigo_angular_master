@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormProComponent } from './container/form-pro/form-pro.component';
 import { ListProComponent } from './container/list-pro/list-pro.component';
 import { ProfileComponent } from './profile.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 export const routes: Routes = [
   {
@@ -13,17 +14,38 @@ export const routes: Routes = [
       {
         path: 'list-pro',
         component: ListProComponent,
-        data: { state: 'list-pro' },
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'PERFIL_LISTAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'list-pro',
+        },
       },
       {
         path: 'form-pro',
         component: FormProComponent,
-        data: { state: 'form-pro' },
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'PERFIL_CREAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'form-pro',
+        },
       },
       {
         path: 'form-pro/:id',
         component: FormProComponent,
-        data: { state: 'form-pro' },
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'PERFIL_EDITAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'form-pro',
+        },
       },
     ],
   },

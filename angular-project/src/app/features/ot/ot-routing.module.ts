@@ -4,6 +4,7 @@ import { FormOtComponent } from './container/form-ot/form-ot.component';
 import { CDetalleOtComponent } from './container/c-detalle-ot/c-detalle-ot.component';
 import { ListOtComponent } from './container/list-ot/list-ot.component';
 import { OtComponent } from './ot.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 export const routes: Routes = [
   {
@@ -14,21 +15,44 @@ export const routes: Routes = [
       {
         path: 'list-ot',
         component: ListOtComponent,
-        data: { state: 'list-ot' },
+        // canActivate: [NgxPermissionsGuard],
+        data: {
+          // permissions: {
+          //   only: 'OT_LISTAR',
+          //   redirectTo: '/app/ot/list-ot',
+          // },
+          state: 'list-ot',
+        },
       },
       {
         path: 'form-ot',
         component: FormOtComponent,
-        data: { state: 'form-ot' },
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'OT_CREAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'form-ot',
+        },
       },
-      {
-        path: 'form-ot/:id',
-        component: FormOtComponent,
-        data: { state: 'form-ot' },
-      },
+      // {
+      //   path: 'form-ot/:id',
+      //   component: FormOtComponent,
+      //   canActivate: [NgxPermissionsGuard],
+      //   data: { state: 'form-ot' },
+      // },
       {
         path: 'detalle-ot/:id',
         component: CDetalleOtComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'OT_LISTAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'detalle-ot',
+        },
       },
     ],
   },
