@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
 import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu } from '@data';
+import { CubicacionWithLpu, RequestEditCubicacion } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +52,12 @@ export class CubicacionFacade {
   // POST
   public postCubicacion(cubicacion): void {
     this.store.dispatch(cubicacionActions.postCubicacion({ cubicacion }));
+  }
+  // POST
+
+  // POST
+  public editCubicacion(cubicacion: RequestEditCubicacion): void {
+    this.store.dispatch(cubicacionActions.editCubicacion({ cubicacion }));
   }
   // POST
 

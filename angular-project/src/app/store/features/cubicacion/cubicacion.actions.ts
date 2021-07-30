@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu } from '@data';
+import { CubicacionWithLpu, RequestEditCubicacion } from '@data';
 
 // CUBICACION LIST
 export const reset = createAction('[Cubicacion] reset');
@@ -55,12 +55,12 @@ export const deleteCubicacionError = createAction(
 
 export const editCubicacion = createAction(
   '[Cubicacion EditById] EDIT Cubicacion',
-  props<{ cubicacion: cubModel.Cubicacion }>()
+  props<{ cubicacion: RequestEditCubicacion }>()
 );
 
 export const editCubicacionSuccess = createAction(
   '[Cubicacion EditById] EDIT Cubicacion Success',
-  props<{ cubicacionId: string; cubicacion: cubModel.Cubicacion }>()
+  props<{ id: number }>()
 );
 
 export const editCubicacionError = createAction(

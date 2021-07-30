@@ -79,3 +79,29 @@ export interface LpusResponse {
     responseCode: number;
   };
 }
+
+export interface LpusRequest {
+  lpu_id: number;
+  cantidad: number;
+}
+
+export interface RequestEditCubicacion {
+  cubicacion_id: number;
+  cubicacion_nombre: string;
+  region_id: number;
+  // usuario_id: number;
+  contrato_marco_id: number;
+  proveedor_id: number;
+  lpus: LpusRequest[];
+}
+
+export interface EditCubicacionResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

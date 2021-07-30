@@ -265,6 +265,84 @@ export class CubicacionEffects {
           this.snackService.showMessage('Cubicación creada exitosamente', 'ok');
 
           this.cubageFacade.getCubicacionAction(profile.id);
+
+          this.router.navigate(['app/cubicacion/list-cub']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterCreateCubageError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubicacionActions.postCubicacionError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible crear la cubicacion',
+            'error'
+          );
+          console.error(`could not create the cubage [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  editCubication$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.editCubicacion),
+      concatMap(({ cubicacion }) =>
+        this.cubicacionService.updateCubicacion(cubicacion).pipe(
+          map((res: any) => {
+            /// let message = '';
+            /// if (+res.status.responseCode !== 0) {
+            ///   if (res.status.description === 'Sin resultados') {
+            ///     message = 'El usuario no tiene contratos asignados';
+            ///   } else {
+            ///     message = res.status.description;
+            ///   }
+            ///   this.snackService.showMessage(message, 'error');
+            /// }
+            return cubicacionActions.editCubicacionSuccess({
+              id: cubicacion.cubicacion_id,
+            });
+          }),
+          catchError(error =>
+            of(cubicacionActions.editCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfterCubageUpdated$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubicacionActions.editCubicacionSuccess),
+        withLatestFrom(this.authFacade.getCurrentProfile$()),
+        tap(([data, profile]) => {
+          this.snackService.showMessage(
+            'Cubicación actualizada exitosamente',
+            'ok'
+          );
+
+          this.cubageFacade.getCubicacionAction(profile.id);
+
+          this.router.navigate(['app/cubicacion/list-cub']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterUpdateCubageError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubicacionActions.editCubicacionError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible editar la cubicacion',
+            'error'
+          );
+          console.error(`could not update the cubage [${error.message}]`);
         })
       ),
     { dispatch: false }

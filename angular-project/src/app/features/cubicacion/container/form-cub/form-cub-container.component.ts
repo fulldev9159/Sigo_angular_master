@@ -38,6 +38,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   selectedCubicacion$: Observable<CubicacionWithLpu>;
   selectedCubicacionError$: Observable<Error> = of(null);
   invalidCubicacionIDError$: Observable<Error> = of(null);
+  incompleteCubicacionError$: Observable<Error> = of(null);
 
   msgsGetCubicacionError = [
     {
@@ -52,6 +53,15 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       severity: 'error',
       summary: 'ERROR',
       detail: 'El ID ingresado debe ser númerico superior a 0',
+    },
+  ];
+
+  msgsIncompleteCubicacionError = [
+    {
+      severity: 'warn',
+      summary: 'ATENCION',
+      detail:
+        'La información asociada a esta cubicación no pudo ser cargada completamente',
     },
   ];
 
@@ -143,7 +153,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           if (contrato) {
             this.formCubicacion.get('contrato_marco_id').setValue(contrato.id);
           } else {
-            // TODO: no se cargó el 100%
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
           }
         })
     );
@@ -161,7 +173,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
             this.formCubicacion.get('subcontrato_id').setValue(subcontrato_id);
           } else {
-            // TODO: no se cargó el 100%
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
           }
         }
       )
@@ -194,7 +208,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               return total + currentValue.lpu_subtotal;
             }, 0);
           } else {
-            // TODO: no se cargó el 100%
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
           }
         }
       )
@@ -318,7 +334,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         lpu => lpu.lpu_id !== event.item.lpu_id
       )
     );
-    console.log(this.formCubicacion.controls[lpuIDControls].value);
+    // console.log(this.formCubicacion.controls[lpuIDControls].value);
     this.total = this.lpusCarrito.reduce((total, currentValue) => {
       return total + currentValue.lpu_subtotal;
     }, 0);
@@ -344,15 +360,18 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       })),
     };
 
-    this.cubageFacade.postCubicacion(nuevaCubicacion);
-
-    this.formCubicacion.reset();
-    this.cubageFacade.resetData();
-    this.router.navigate(['app/cubicacion/list-cub']);
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Registro guardado',
-      detail: 'Registro se ha generado con Éxito!',
-    });
+    this.subscription.add(
+      this.cubageFacade.getSingleCubicacion$().subscribe(cubicacion => {
+        if (cubicacion) {
+          const editCubicacion = {
+            ...nuevaCubicacion,
+            cubicacion_id: cubicacion.id,
+          };
+          this.cubageFacade.editCubicacion(editCubicacion);
+        } else {
+          this.cubageFacade.postCubicacion(nuevaCubicacion);
+        }
+      })
+    );
   }
 }

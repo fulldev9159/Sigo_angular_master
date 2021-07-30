@@ -7,6 +7,8 @@ import {
   CubicacionWithLpu,
   CubicacionesResponse,
   LpusResponse,
+  RequestEditCubicacion,
+  EditCubicacionResponse,
 } from '../model';
 
 @Injectable({
@@ -53,6 +55,15 @@ export class CubicacionService {
           return throwError(new Error(`no cubages found`));
         })
       );
+  }
+
+  updateCubicacion(
+    request: RequestEditCubicacion
+  ): Observable<EditCubicacionResponse> {
+    return this.http.post<EditCubicacionResponse>(
+      `${this.apiUrl}/cubicacion/edit`,
+      request
+    );
   }
 
   deleteOT(cubicacion_id: number): Observable<Response<string>> {
