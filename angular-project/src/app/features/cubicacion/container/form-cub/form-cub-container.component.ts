@@ -336,10 +336,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         lpu => lpu.lpu_id !== event.item.lpu_id
       )
     );
-<<<<<<< HEAD
-=======
     // console.log(this.formCubicacion.controls[lpuIDControls].value);
->>>>>>> develop
     this.total = this.lpusCarrito.reduce((total, currentValue) => {
       return total + currentValue.lpu_subtotal;
     }, 0);
