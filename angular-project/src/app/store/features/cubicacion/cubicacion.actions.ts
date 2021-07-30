@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import * as cubModel from './cubicacion.model';
+import { CubicacionWithLpu, RequestEditCubicacion } from '@data';
 
 // CUBICACION LIST
+export const reset = createAction('[Cubicacion] reset');
+
 export const getCubicacion = createAction(
   '[Cubicacion GetAll] GET Cubicacion',
   props<{ perfilID: number }>()
@@ -14,6 +17,25 @@ export const getCubicacionSuccess = createAction(
 
 export const getCubicacionError = createAction(
   '[Cubicacion GetAll] GET Cubicacion Error',
+  props<{ error: any }>()
+);
+
+export const resetSingleCubicacion = createAction(
+  '[Cubicacion] reset single Cubicacion'
+);
+
+export const getSingleCubicacion = createAction(
+  '[Cubicacion] GET single Cubicacion',
+  props<{ id: number }>()
+);
+
+export const getSingleCubicacionSuccess = createAction(
+  '[Cubicacion] GET single Cubicacion Success',
+  props<{ cubicacion: CubicacionWithLpu }>()
+);
+
+export const getSingleCubicacionError = createAction(
+  '[Cubicacion] GET single Cubicacion Error',
   props<{ error: any }>()
 );
 
@@ -33,12 +55,12 @@ export const deleteCubicacionError = createAction(
 
 export const editCubicacion = createAction(
   '[Cubicacion EditById] EDIT Cubicacion',
-  props<{ cubicacion: cubModel.Cubicacion }>()
+  props<{ cubicacion: RequestEditCubicacion }>()
 );
 
 export const editCubicacionSuccess = createAction(
   '[Cubicacion EditById] EDIT Cubicacion Success',
-  props<{ cubicacionId: string; cubicacion: cubModel.Cubicacion }>()
+  props<{ id: number }>()
 );
 
 export const editCubicacionError = createAction(

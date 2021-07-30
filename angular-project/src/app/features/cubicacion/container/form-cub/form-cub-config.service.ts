@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { TableComponetType } from '@storeOT/model';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
+import { CubicacionWithLpu } from '@data';
 
 @Injectable({
   providedIn: 'root',

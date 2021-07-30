@@ -28,7 +28,7 @@ export class TableComponent implements OnInit, OnDestroy {
   items: any[] = [];
   @Input('items')
   set itemsInput(items: any[]) {
-    this.items = items;
+    this.items = items || [];
 
     this.controls = this.items.reduce(
       (ac, item, rowIndex) => ({
@@ -116,7 +116,6 @@ export class TableComponent implements OnInit, OnDestroy {
   touch(): void {
     Object.keys(this.form.controls).forEach(field => {
       const control = this.form.get(field);
-      console.log(field);
 
       control.markAsTouched({
         onlySelf: true,

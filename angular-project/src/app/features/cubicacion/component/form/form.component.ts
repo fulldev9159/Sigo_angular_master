@@ -34,6 +34,7 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input() Regions: CubModel.Region[] = [];
   @Input() TypeServices: CubModel.TypeService[] = [];
   @Input() Services: CubModel.Service[] = [];
+  @Input() autoSuggestInitialValue = '';
   @Input() autoSuggestData: CubModel.AutoSuggestItem[] = [];
   // @Input() ConfigTableResumen: TableComponetType;
   msgsLPUQuantityZero = [
@@ -180,7 +181,6 @@ export class FormComponent implements OnInit, OnDestroy {
 
   nonZero(control: FormControl): any {
     const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
-    console.log(value);
     return value < 1 ? { nonzero: true } : null;
   }
 
