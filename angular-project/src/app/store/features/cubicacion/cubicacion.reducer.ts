@@ -1,11 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
 import * as cubModel from './cubicacion.model';
+import { CubicacionWithLpu } from '@data';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
   items: cubModel.Cubicacion[];
+  cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
+  cubicacionError: Error;
   selectedCubicacion: cubModel.Cubicacion;
   contractMarco: cubModel.ContractMarco[];
   subContractedProviders: cubModel.Provider[];
@@ -18,6 +21,8 @@ export interface StateCubicacion {
 
 export const initialStateCubicacion: StateCubicacion = {
   items: [],
+  cubicacion: null,
+  cubicacionError: null,
   selectedCubicacion: null,
   contractMarco: [],
   subContractedProviders: [],
@@ -35,6 +40,25 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.getCubicacionSuccess, (state, payload) => ({
     ...state,
     items: payload.cubicacion,
+  })),
+
+  on(CubicacionActions.resetSingleCubicacion, state => ({
+    ...state,
+    cubicacion: null,
+  })),
+  on(CubicacionActions.getSingleCubicacion, (state, { id }) => ({
+    ...state,
+    cubicacion: null,
+    cubicacionError: null,
+  })),
+  on(CubicacionActions.getSingleCubicacionSuccess, (state, { cubicacion }) => ({
+    ...state,
+    cubicacion,
+    cubicacionError: null,
+  })),
+  on(CubicacionActions.getSingleCubicacionError, (state, { error }) => ({
+    ...state,
+    cubicacionError: error,
   })),
   // on(CubicacionActions.deleteCubicacion, (state, payload) => ({
   //   ...state,
@@ -88,12 +112,7 @@ export const reducerCubicacion = createReducer(
   })),
 
   on(CubicacionActions.resetData, (state, payload) => ({
-    ...state,
-    contractMarco: [],
-    subContractedProviders: [],
-    subContractedRegions: [],
-    subContractedTypeServices: [],
-    subContractedServices: [],
+    ...initialStateCubicacion,
   })),
   on(CubicacionActions.getAutoSuggest, state => state),
   on(CubicacionActions.getAutoSuggestSuccess, (state, payload) => ({

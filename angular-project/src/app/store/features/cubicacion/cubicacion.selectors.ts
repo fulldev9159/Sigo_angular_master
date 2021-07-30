@@ -10,6 +10,16 @@ export const getCubicaciones = createSelector(
   (state: fromCubicacion.StateCubicacion) => state.items
 );
 
+export const getSingleCubicacion = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.cubicacion
+);
+
+export const getCubicacionError = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.cubicacionError
+);
+
 export const getConstractMarco = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.contractMarco

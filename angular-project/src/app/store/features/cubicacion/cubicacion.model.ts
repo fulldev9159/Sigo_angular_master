@@ -33,6 +33,9 @@ export interface Service {
   lpu_subtotal: number;
   tipo_servicio: string;
   cantidad: number;
+
+  lpu_unidad_codigo?: number;
+  lpu_unidad_nombre?: string;
 }
 
 export interface RequestSaveCubicacion {

@@ -4,7 +4,7 @@
       <div class="col-12 ">
         <label for="">Nombre</label>
         <div class="ng-autocomplete">
-          <ng-autocomplete [data]="autoSuggestData" [searchKeyword]="'name'" (selected)='NameSelectedDummy($event)' (inputChanged)='onChangeAutoSuggest($event)' (inputFocused)='onFocused($event)' (inputCleared)="inputCleared()" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+          <ng-autocomplete formControlName="nombre" [data]="autoSuggestData" [searchKeyword]="'name'" (selected)='NameSelectedDummy($event)' (inputChanged)='onChangeAutoSuggest($event)' (inputFocused)='onFocused($event)' (inputCleared)="inputCleared()" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
           </ng-autocomplete>
 
           <ng-template #itemTemplate let-item>
