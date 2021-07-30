@@ -81,5 +81,8 @@ export const reducerUser = createReducer(
   on(UserActions.setFormUser, (state, payload) => ({
     ...state,
     form: payload.form,
+  })),
+  on(UserActions.resetData, (state, payload) => ({
+    ...initialStateUser,
   }))
 );

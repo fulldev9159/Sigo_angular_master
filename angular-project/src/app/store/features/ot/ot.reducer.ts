@@ -268,5 +268,8 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.rejectOTMinutesValidationError, state => ({
     ...state,
+  })),
+  on(OtActions.resetData, (state, payload) => ({
+    ...initialStateOt,
   }))
 );

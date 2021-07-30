@@ -266,4 +266,8 @@ export class OtFacade {
   public rejectOTMinutesValidation(otID: number): void {
     this.store.dispatch(otActions.rejectOTMinutesValidation({ otID }));
   }
+
+  public resetData(): void {
+    this.store.dispatch(otActions.resetData());
+  }
 }

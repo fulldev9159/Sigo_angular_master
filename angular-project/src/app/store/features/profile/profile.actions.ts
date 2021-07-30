@@ -81,4 +81,6 @@ export const setFormProfile = createAction(
   props<{ form: Model.Form }>()
 );
 
+export const resetData = createAction('[ResetData] ResetData');
+
 // PROFILE LIST

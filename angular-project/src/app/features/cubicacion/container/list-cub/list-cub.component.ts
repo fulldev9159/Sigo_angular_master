@@ -261,6 +261,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.cubageFacade.resetData();
     this.authFacade
       .getLogin$()
       .pipe(takeUntil(this.destroyInstance))

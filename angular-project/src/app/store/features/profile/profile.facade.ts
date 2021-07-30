@@ -56,6 +56,8 @@ export class ProfileFacade {
     this.store.dispatch(profileActions.editProfile(data));
   }
   // FORM
-
+  public resetData(): void {
+    this.store.dispatch(profileActions.resetData());
+  }
   // PROFILE
 }
