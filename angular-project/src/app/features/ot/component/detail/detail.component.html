@@ -5,7 +5,7 @@
       <li><strong>Contrato:</strong> <span style="margin-right:3em"></span>{{cubicacionSeleccionada ? cubicacionSeleccionada.contrato_marco_nombre : ' ---'}}</li>
       <li><strong>Proveedor:</strong> <span style="margin-right:2.3em"></span>{{cubicacionSeleccionada ? cubicacionSeleccionada.proveedor_nombre : ' ---'}}</li>
       <li><strong>Región:</strong> <span style="margin-right:4em"></span>{{cubicacionSeleccionada ? cubicacionSeleccionada.region_nombre : ' ---'}}</li>
-      <li><strong>Total:</strong> <span style="margin-right:4.1em"></span> ${{cubicacionSeleccionada ? cubicacionSeleccionada.total : ' ---'}}</li>
+      <li *ngxPermissionsOnly="['OT_VER_VALOR_LPU']"><strong>Total:</strong> <span style="margin-right:4.5em"></span> {{cubicacionSeleccionada ? (cubicacionSeleccionada.total|currency : cubicacionSeleccionada.total_tipo_moneda : cubicacionSeleccionada.total_tipo_moneda===''?'':cubicacionSeleccionada.total_tipo_moneda + ' $':'.0-2':'es-CL') : ' ---'}}</li>
     </ul>
   </ng-container>
 </app-card>

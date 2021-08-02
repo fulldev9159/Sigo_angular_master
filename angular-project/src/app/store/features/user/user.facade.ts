@@ -102,4 +102,8 @@ export class UserFacade {
   public getForm$(): Observable<Model.Form> {
     return this.store.select(userSelectors.getForm);
   }
+
+  public resetData(): void {
+    this.store.dispatch(userActions.resetData());
+  }
 }

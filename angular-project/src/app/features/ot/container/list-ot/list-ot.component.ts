@@ -377,6 +377,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.otFacade.resetData();
     this.responsable = 'MIAS';
     this.tipoOT = 'OT';
     this.selectedIndex = 0;

@@ -443,3 +443,5 @@ export const assignTrabajadorError = createAction(
   '[OT] assign trabajador error',
   props<{ error: any }>()
 );
+
+export const resetData = createAction('[ResetData] ResetData');

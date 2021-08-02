@@ -163,4 +163,5 @@ export const setFormUser = createAction(
   props<{ form: Model.Form }>()
 );
 
+export const resetData = createAction('[ResetData] ResetData');
 // USER ACTIONS

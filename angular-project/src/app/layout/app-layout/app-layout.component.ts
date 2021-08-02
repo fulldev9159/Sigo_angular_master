@@ -7,6 +7,11 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import { OtFacade } from '@storeOT/features/ot/ot.facade';
+import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
+import { UserFacade } from '@storeOT/features/user/user.facade';
+
 import { LoginAuth } from '@storeOT/features/auth/auth.model';
 import { LoadingService } from '@utilsSIGO/service-progress';
 import { NgxPermissionsService } from 'ngx-permissions';
@@ -30,6 +35,10 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private authFacade: AuthFacade,
+    private cubicacionFacade: CubicacionFacade,
+    private otFacade: OtFacade,
+    private profileFacade: ProfileFacade,
+    private userFacade: UserFacade,
     private loadingS: LoadingService,
     private permissionsService: NgxPermissionsService
   ) {}
@@ -82,6 +91,10 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   logout(): void {
     localStorage.removeItem('auth');
     this.authFacade.reset();
+    this.cubicacionFacade.resetData();
+    this.otFacade.resetData();
+    this.profileFacade.resetData();
+    this.userFacade.resetData();
     this.router.navigate(['/auth/login']);
   }
 }

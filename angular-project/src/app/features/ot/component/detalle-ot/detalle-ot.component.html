@@ -19,7 +19,7 @@
           <li>Proveedor: <span style="margin-right:2.3em"></span>{{detalleOt ? detalleOt.proveedor_nombre : ' ---'}}</li>
           <li>Región: <span style="margin-right:4em"></span>{{detalleOt ? detalleOt.sitio.region_nombre : ' ---'}}</li>
           <ng-container *ngxPermissionsOnly="['OT_VER_VALOR_LPU']">
-            <li>Total: <span style="margin-right:4.8em"></span> {{detalleOt ? (detalleOt.total|currency : 'CLP' : '$':'.0-2':'es-CL'): ' ---'}}</li>
+            <li>Total: <span style="margin-right:4.8em"></span> {{detalleOt ? (detalleOt.total|currency : detalleOt.total_tipo_moneda : detalleOt.total_tipo_moneda===''?'':detalleOt.total_tipo_moneda + ' $':'.0-2':'es-CL') : ' ---'}}</li>
           </ng-container>
           <button (click)="getLPUs(detalleOt.cubicacion_id)" class="btn btn-primary" style="width: 83px;
           font-size: 12px;
