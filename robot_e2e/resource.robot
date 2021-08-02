@@ -23,11 +23,11 @@ Open Browser To Page
     Go To                      ${page}
 
 Login
-    [Arguments]                      ${username}      ${password}
-    input text                       name:username    ${username}
-    input password                   name:password    ${password}
-    element should be enabled        id:login
-    Click Button                     id:login
+    [Arguments]                  ${username}      ${password}
+    input text                   name:username    ${username}
+    input password               name:password    ${password}
+    element should be enabled    id:login
+    Click Button                 id:login
     # Wait Until Element Is Visible    id:user-name     timeout=5
 
 Element text should be
@@ -237,7 +237,8 @@ Guardar perfil
     Click Visible Element    id:guardar-button
 
 Guardar usuario
-    Click Visible Element    id:submit-user
+    Click Visible Element            id:submit-user
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
 
 Set username
     [Arguments]    ${valor}
