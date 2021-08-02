@@ -15,7 +15,7 @@
   <app-table [config]="configTable" [items]="(items$ | async)"></app-table>
 
   <app-modal [display]="DisplayModal" (CloseEvent)="DisplayModal=false">
-    <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>
+    <ng-container modal-header-title>Detalles de a cubicación</ng-container>
     <ng-container modal-content>
       <app-table [config]="ConfigTableResumen" [items]="detalleCubicacion$|async"></app-table>
       <!-- <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span> -->

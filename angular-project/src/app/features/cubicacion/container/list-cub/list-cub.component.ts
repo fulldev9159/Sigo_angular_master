@@ -63,7 +63,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'region_nombre',
           header: 'region_nombre',
-          width: '15%',
+          width: '10%',
           editable: false,
         },
         {
@@ -72,7 +72,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           sort: 'contrato_marco_nombre',
           header: 'contrato_marco_nombre',
           editable: false,
-          width: '10%',
+          width: '8%',
         },
         {
           field: 'Proveedor',
@@ -80,7 +80,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           sort: 'proveedor_nombre',
           header: 'proveedor_nombre',
           editable: false,
-          width: '15%',
+          width: '10%',
         },
         {
           field: 'Total',
@@ -89,6 +89,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
           header: 'total',
           currency: 'total_tipo_moneda',
           width: '10%',
+          editable: false,
+        },
+        {
+          field: 'Creado Por',
+          type: 'TEXT',
+          sort: 'creador_usuario_nombre',
+          header: 'creador_usuario_nombre',
           editable: false,
         },
         {
@@ -105,55 +112,73 @@ export class ListCubComponent implements OnInit, OnDestroy {
         'region_nombre',
         'contrato_marco_nombre',
         'total',
+        'creador_usuario_nombre',
       ],
-      actions: [
-        {
-          icon: 'p-button-icon pi pi-copy',
-          class: 'p-button p-button-help p-mr-2',
-          onClick: (event: Event, item: cubModel.Cubicacion) => {
-            this.cloneCubageForm.reset();
-            this.cubageFacade.selectCubicacion(item);
-            this.displayClonatedCubageNameModal = true;
+      actions: (cub: cubModel.Cubicacion) => {
+        const actions = [
+          {
+            disabled: false,
+            tooltipDisabled: '',
+            icon: 'p-button-icon pi pi-copy',
+            class: 'p-button p-button-help p-mr-2',
+            onClick: (event: Event, item: cubModel.Cubicacion) => {
+              this.cloneCubageForm.reset();
+              this.cubageFacade.selectCubicacion(item);
+              this.displayClonatedCubageNameModal = true;
+            },
           },
-        },
-        {
-          icon: 'p-button-icon pi pi-eye',
-          class: 'p-button p-button-info p-mr-2',
-          onClick: (event: Event, item) => {
-            this.DisplayModal = true;
-            this.cubageFacade.getDetallesCubicacionAction(item.id);
+          {
+            icon: 'p-button-icon pi pi-eye',
+            class: 'p-button p-button-info p-mr-2',
+            onClick: (event: Event, item) => {
+              this.DisplayModal = true;
+              this.cubageFacade.getDetallesCubicacionAction(item.id);
+            },
           },
-        },
-        {
-          disabled: 'asignado',
-          tooltipDisabled: 'No puede editar una cubicacion asignada a una OT',
-          icon: 'p-button-icon pi pi-pencil',
-          class: 'p-button p-button-warning p-mr-2',
-          onClick: (event: Event, item) => {
-            if (item) {
-              this.router.navigate(['/app/cubicacion/form-cub', item.id]);
-            }
+        ];
+        let disabled = false;
+        let tooltipText = '';
+        if (cub.asignado) {
+          disabled = true;
+          tooltipText = 'No puede editar una cubicacion asignada a una OT';
+        } else if (this.authLogin.usuario_id !== cub.creador_usuario_id) {
+          disabled = true;
+          tooltipText = 'No puede editar cubicaciones de otro usuario';
+        }
+        console.log(disabled);
+        actions.push(
+          {
+            disabled,
+            tooltipDisabled: tooltipText,
+            icon: 'p-button-icon pi pi-pencil',
+            class: 'p-button p-button-warning p-mr-2',
+            onClick: (event: Event, item) => {
+              if (item) {
+                this.router.navigate(['/app/cubicacion/form-cub', item.id]);
+              }
+            },
           },
-        },
-        {
-          disabled: 'asignado',
-          tooltipDisabled: 'No puede eliminar una cubicacion asignada a una OT',
-          icon: 'p-button-icon pi pi-trash',
-          class: 'p-button p-button-danger',
-          onClick: (event: Event, item: cubModel.Cubicacion) => {
-            this.confirmationService.confirm({
-              target: event.target as EventTarget,
-              message: '¿Está seguro que desea eliminar esta cubicación?',
-              icon: 'pi pi-exclamation-triangle',
-              acceptLabel: 'Confirmar',
-              rejectLabel: 'Cancelar',
-              accept: () => {
-                this.cubageFacade.deleteCubicacion(item.id);
-              },
-            });
-          },
-        },
-      ],
+          {
+            disabled,
+            tooltipDisabled: tooltipText,
+            icon: 'p-button-icon pi pi-trash',
+            class: 'p-button p-button-danger',
+            onClick: (event: Event, item: cubModel.Cubicacion) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: '¿Está seguro que desea eliminar esta cubicación?',
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.cubageFacade.deleteCubicacion(item.id);
+                },
+              });
+            },
+          }
+        );
+        return actions;
+      },
     },
   };
 

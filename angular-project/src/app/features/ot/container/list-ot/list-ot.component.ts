@@ -126,6 +126,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
           editable: false,
         },
         {
+          field: 'Creado Por',
+          type: 'TEXT',
+          sort: 'usuario_nombre',
+          header: 'usuario_nombre',
+          editable: false,
+        },
+        {
           field: null,
           type: 'ACTIONS',
           sort: null,
@@ -140,6 +147,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
         'fecha_inicio',
         'contrato_marco_nombre',
         'proveedor_nombre',
+        'usuario_nombre',
       ],
       actions: (ot: OT) => {
         const actions = [

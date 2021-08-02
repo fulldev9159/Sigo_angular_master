@@ -68,13 +68,15 @@ export interface AutoSuggestItem {
 }
 
 export interface Cubicacion {
-  adm_contrato_nombre: string;
   asignado: boolean;
   contrato_marco_id: number;
   contrato_marco_nombre: string;
   contrato_marco_tipo_id: number;
   contrato_marco_tipo_nombre: string;
-  fecha_creacion: Date;
+  creador_username: string;
+  creador_usuario_id: number;
+  creador_usuario_nombre: string;
+  fecha_creacion: string;
   id: number;
   nombre: string;
   ot_id: number;
@@ -83,11 +85,8 @@ export interface Cubicacion {
   proveedor_nombre: string;
   region_id: number;
   region_nombre: string;
-  subcontrato_id: number;
   total: number;
-  username: string;
-  usuario_id: number;
-  usuario_nombre: string;
+  total_tipo_moneda: string;
 }
 
 export interface ResponseDetalleCubicacion {
