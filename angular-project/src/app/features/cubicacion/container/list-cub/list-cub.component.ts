@@ -63,7 +63,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'region_nombre',
           header: 'region_nombre',
-          width: '15%',
+          width: '10%',
           editable: false,
         },
         {
@@ -72,7 +72,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           sort: 'contrato_marco_nombre',
           header: 'contrato_marco_nombre',
           editable: false,
-          width: '10%',
+          width: '8%',
         },
         {
           field: 'Proveedor',
@@ -80,7 +80,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           sort: 'proveedor_nombre',
           header: 'proveedor_nombre',
           editable: false,
-          width: '15%',
+          width: '10%',
         },
         {
           field: 'Total',
@@ -89,6 +89,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
           header: 'total',
           currency: 'total_tipo_moneda',
           width: '10%',
+          editable: false,
+        },
+        {
+          field: 'Creado Por',
+          type: 'TEXT',
+          sort: 'creador_usuario_nombre',
+          header: 'creador_usuario_nombre',
           editable: false,
         },
         {
@@ -105,6 +112,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
         'region_nombre',
         'contrato_marco_nombre',
         'total',
+        'creador_usuario_nombre',
       ],
       actions: [
         {
