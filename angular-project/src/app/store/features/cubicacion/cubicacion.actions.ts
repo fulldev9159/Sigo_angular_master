@@ -179,6 +179,7 @@ export const getSubContractedServicesError = createAction(
 // CUBICACION FORM
 
 export const resetData = createAction('[ResetData] ResetData');
+export const resetServices = createAction('[ResetData] Reset Services');
 
 // Auto Suggest
 export const getAutoSuggest = createAction(
