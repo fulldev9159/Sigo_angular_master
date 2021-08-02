@@ -103,7 +103,11 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) =>
-              otActions.getSiteSuccess({ site: res.data.items })
+              otActions.getSiteSuccess({
+                site: res.data.items.sort((a: OtModel.Site, b: OtModel.Site) =>
+                  a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+                ),
+              })
             ),
             catchError(err => of(otActions.getSiteError({ error: err })))
           )
@@ -120,7 +124,13 @@ export class OtEffects {
             sitio_codigo: data.sitio_codigo,
           })
           .pipe(
-            map((res: any) => otActions.getPmoSuccess({ pmo: res.data.items })),
+            map((res: any) =>
+              otActions.getPmoSuccess({
+                pmo: res.data.items.sort((a: OtModel.PMO, b: OtModel.PMO) =>
+                  a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
+                ),
+              })
+            ),
             catchError(err => of(otActions.getPmoError({ error: err })))
           )
       )
@@ -135,7 +145,12 @@ export class OtEffects {
           .post(`${environment.api}/ingreot/opex/id_opex/get_all`, {})
           .pipe(
             map((res: any) =>
-              otActions.getIDOpexSuccess({ ids_opex: res.data.items })
+              otActions.getIDOpexSuccess({
+                ids_opex: res.data.items.sort(
+                  (a: OtModel.IDOpex, b: OtModel.IDOpex) =>
+                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
+                ),
+              })
             ),
             catchError(err => of(otActions.getIDOpexError({ error: err })))
           )
@@ -153,7 +168,12 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) =>
-              otActions.getCuentaSAPSuccess({ cuentas_sap: res.data.items })
+              otActions.getCuentaSAPSuccess({
+                cuentas_sap: res.data.items.sort(
+                  (a: OtModel.CuentaSap, b: OtModel.CuentaSap) =>
+                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
+                ),
+              })
             ),
             catchError(err => of(otActions.getCuentaSAPError({ error: err })))
           )
@@ -172,7 +192,11 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) =>
-              otActions.getCECOSuccess({ cecos: res.data.items })
+              otActions.getCECOSuccess({
+                cecos: res.data.items.sort((a: OtModel.CECO, b: OtModel.CECO) =>
+                  a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
+                ),
+              })
             ),
             catchError(err => of(otActions.getCECOError({ error: err })))
           )
@@ -191,7 +215,15 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) =>
-              otActions.getBudgetLineSuccess({ lp: res.data.items })
+              otActions.getBudgetLineSuccess({
+                lp: res.data.items.sort((a: OtModel.Lp, b: OtModel.Lp) =>
+                  a.lineas_presupuestarias > b.lineas_presupuestarias
+                    ? 1
+                    : b.lineas_presupuestarias > a.lineas_presupuestarias
+                    ? -1
+                    : 0
+                ),
+              })
             ),
             catchError(err => of(otActions.getBudgetLineError({ error: err })))
           )
