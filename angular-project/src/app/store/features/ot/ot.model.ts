@@ -102,6 +102,7 @@ export interface DataRspDetalleOT {
   observaciones: string;
   sce_sesion: string;
   created_at: Date;
+  total_tipo_moneda: string;
   tipo_estado_ot: {
     id: number;
     slug: string;
