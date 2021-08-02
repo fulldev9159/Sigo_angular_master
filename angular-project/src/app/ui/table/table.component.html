@@ -77,11 +77,11 @@
               <!-- <ng-container *ngIf="(actions.length > 0 && actions.length <= 4)&&config.body.headers.length<=6"> -->
               <ng-container *ngIf="config.headerConfig.actionsType === 'Buttons'">
                 <div *ngFor="let button of actions">
-                  <div *ngIf="item[button.disabled]" pTooltip="{{ button.tooltipDisabled }}">
-                    <button [disabled]="item[button.disabled]" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                  <div *ngIf="button.disabled" pTooltip="{{ button.tooltipDisabled }}">
+                    <button [disabled]="button.disabled" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
                   </div>
 
-                  <button *ngIf="!item[button.disabled]" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                  <button *ngIf="!button.disabled" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
                 </div>
               </ng-container>
 
