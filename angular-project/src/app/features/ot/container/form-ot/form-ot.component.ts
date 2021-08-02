@@ -91,7 +91,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .pipe(
         map(
           cubicaciones =>
-            (this.cubicaciones = cubicaciones.filter(x => !x.asignado))
+            (this.cubicaciones = cubicaciones.filter(
+              x =>
+                !x.asignado &&
+                this.authLogin.usuario_id === x.creador_usuario_id
+            ))
         )
       );
     this.planes$ = this.otFacade
