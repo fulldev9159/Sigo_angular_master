@@ -11,6 +11,7 @@ export interface StateOt {
 
   selectedOT: Data.OT;
 
+  itemsPendiente: Data.OT[];
   itemsAbiertas: Data.OT[];
   itemsCerradas: Data.OT[];
   planes: OTModel.Plan[];
@@ -34,6 +35,7 @@ export const initialStateOt: StateOt = {
 
   selectedOT: null,
 
+  itemsPendiente: [],
   itemsAbiertas: [
     // {
     //   id: 123,
@@ -81,10 +83,22 @@ export const reducerOt = createReducer(
     filtro_propietario,
     filtro_tipo,
   })),
+  on(
+    OtActions.getOtPendiente,
+    (state, { filtro_propietario, filtro_tipo }) => ({
+      ...state,
+      filtro_propietario,
+      filtro_tipo,
+    })
+  ),
   on(OtActions.getOtCerradas, (state, { filtro_propietario, filtro_tipo }) => ({
     ...state,
     filtro_propietario,
     filtro_tipo,
+  })),
+  on(OtActions.getOtSuccessPendiente, (state, payload) => ({
+    ...state,
+    itemsPendiente: payload.ot,
   })),
   on(OtActions.getOtSuccessAbiertas, (state, payload) => ({
     ...state,

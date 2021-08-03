@@ -15,11 +15,18 @@ export class OtFacade {
   // OT
   public getOts({ filtro_propietario, filtro_tipo }): void {
     this.store.dispatch(
+      otActions.getOtPendiente({ filtro_propietario, filtro_tipo })
+    );
+    this.store.dispatch(
       otActions.getOtAbiertas({ filtro_propietario, filtro_tipo })
     );
     this.store.dispatch(
       otActions.getOtCerradas({ filtro_propietario, filtro_tipo })
     );
+  }
+
+  public getOtPendiente$(): Observable<Data.OT[]> {
+    return this.store.select(otSelectors.getOtPendiente);
   }
 
   public getOtAbiertas$(): Observable<Data.OT[]> {
