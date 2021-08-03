@@ -110,6 +110,25 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       this.formCubicacion,
       this.destroyInstance$
     );
+
+    this.subscription.add(
+      this.formCubicacion
+        .get('contrato_marco_id')
+        .valueChanges.subscribe(value => this.resetLpusCarrito())
+    );
+
+    this.subscription.add(
+      this.formCubicacion
+        .get('subcontrato_id')
+        .valueChanges.subscribe(value => this.resetLpusCarrito())
+    );
+
+    this.subscription.add(
+      this.formCubicacion
+        .get('region_id')
+        .valueChanges.subscribe(value => this.resetLpusCarrito())
+    );
+
     // this.ConfigTableResumen = this.formConfig.configTableResumen();
 
     // Obtener datos iniciales
@@ -272,8 +291,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     const regionControls = 'region_id';
     const regionID = this.formCubicacion.controls[regionControls].value;
     const tipoServicioControls = 'tipo_servicio_id';
-    const tipoServicioID =
-      this.formCubicacion.controls[tipoServicioControls].value;
+    const tipoServicioID = this.formCubicacion.controls[tipoServicioControls]
+      .value;
     const regionName = this.Regiones.filter(x => x.id === +regionID)[0].codigo;
     const tipoServicioName = this.TipoServicios.filter(
       x => x.id === +tipoServicioID
@@ -343,6 +362,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
     this.currency =
       this.lpusCarrito.length === 0 ? '' : this.lpusCarrito[0].tipo_moneda_cod;
+  }
+
+  resetLpusCarrito(): void {
+    this.formCubicacion.get('lpus').setValue([]);
+    this.lpusCarrito = [];
+    this.total = 0;
+    this.currency = '';
   }
 
   cancel(data: any): void {
