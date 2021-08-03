@@ -201,7 +201,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
           // refrescamos parte de
           //  formulario al cambiar cubicación
-          // this.resetForm('CUBICATION');
+          this.resetForm('CUBICATION');
         }
       });
 
@@ -246,7 +246,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
           }
           // refrescamos parte de
           //  formulario al cambiar site
-          // this.resetForm('SITE');
+          this.resetForm('SITE');
         }
       });
 
@@ -259,7 +259,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
           // refrescamos parte de
           //  formulario al cambiar pmo
-          // this.resetForm('PMO');
+          this.resetForm('PMO');
         }
       });
 
@@ -273,7 +273,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
           });
           // refrescamos parte de
           //  formulario al cambiar id_opex
-          // this.resetForm('ID_OPEX');
+          this.resetForm('ID_OPEX');
         }
       });
 
@@ -288,7 +288,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
           });
           // refrescamos parte de
           //  formulario al cambiar cuenta sap
-          // this.resetForm('CUENTA_SAP');
+          this.resetForm('CUENTA_SAP');
         }
       });
 
@@ -304,7 +304,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
           // refrescamos parte de
           //  formulario al cambiar lp
-          // this.resetForm('LP');
+          this.resetForm('LP');
         }
       });
 
@@ -423,9 +423,10 @@ export class FormOtComponent implements OnInit, OnDestroy {
   }
 
   resetForm(part: string): void {
+    console.log(part);
     switch (true) {
       case part === 'CUBICATION':
-        this.formOt.get('plan_despliegue_id').reset();
+        this.formOt.get('plan_proyecto_id').reset();
         this.formOt.get('sitio_id').reset();
         this.formOt.get('pmo_codigo').reset();
         this.formOt.get('lp_codigo').reset();

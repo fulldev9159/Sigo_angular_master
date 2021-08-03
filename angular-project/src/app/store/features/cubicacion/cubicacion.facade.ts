@@ -159,6 +159,10 @@ export class CubicacionFacade {
   public resetData(): void {
     this.store.dispatch(cubicacionActions.resetData());
   }
+
+  public resetServices(): void {
+    this.store.dispatch(cubicacionActions.resetServices());
+  }
   // SUBCONTRACTSERVICES
   // CUBICACION
   // CONSTRACT MARCO

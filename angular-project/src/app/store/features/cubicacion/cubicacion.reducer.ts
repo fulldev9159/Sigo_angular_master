@@ -123,5 +123,9 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.selectCubicacion, (state, { cubicacion }) => ({
     ...state,
     selectedCubicacion: cubicacion,
+  })),
+  on(CubicacionActions.resetServices, (state, payload) => ({
+    ...state,
+    subContractedServices: [],
   }))
 );
