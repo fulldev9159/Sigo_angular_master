@@ -474,4 +474,17 @@ export const assignTrabajadorError = createAction(
   props<{ error: any }>()
 );
 
+// finalizar OT
+export const finalizeOT = createAction(
+  '[OT] finalize OT',
+  props<{ otID: number }>()
+);
+
+export const finalizeOTSuccess = createAction('[OT] finalize OT success');
+
+export const finalizeOTError = createAction(
+  '[OT] finalize OT error',
+  props<{ error: any }>()
+);
+
 export const resetData = createAction('[ResetData] ResetData');

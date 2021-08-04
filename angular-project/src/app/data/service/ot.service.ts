@@ -180,4 +180,11 @@ export class OTService {
     });
     return of({});
   }
+
+  finalizeOT(perfil_id: number, otID: number): Observable<any> {
+    console.log('finalizar ot. no implementado aun', {
+      ot_id: otID,
+    });
+    return of({});
+  }
 }

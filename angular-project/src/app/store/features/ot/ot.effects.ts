@@ -919,4 +919,50 @@ export class OtEffects {
       ),
     { dispatch: false }
   );
+
+  // Cerrar OT
+  finalizeOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.finalizeOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.finalizeOT(profile.id, otID).pipe(
+          mapTo(otActions.finalizeOTSuccess()),
+          catchError(error => of(otActions.finalizeOTError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterFinalizeOTSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.finalizeOTSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Orden de trabajo finalizada', 'ok');
+
+          this.otFacade.getOts({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterFinalizeOTError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.finalizeOTError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible finalizar la Orden de Trabajo',
+            'error'
+          );
+          console.error(`could not finalize ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
 }
