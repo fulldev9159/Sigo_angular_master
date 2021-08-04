@@ -13,7 +13,7 @@ Redirect to page Login not login person
 
 Redirect to dashboard to a login person
     Open Browser To Page    ${url}
-    sleep                   10
+    sleep                   100
     Location Should Be      ${url}/auth/login
 
    # Validar elementos
