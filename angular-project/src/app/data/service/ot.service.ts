@@ -35,59 +35,7 @@ export class OTService {
         filtro_propietario,
         filtro_tipo,
       })
-      .pipe(
-        map(res => ({
-          status: {
-            responseCode: 0,
-            description: 'Ok',
-          },
-          pagination: {
-            page: 1,
-            items_per_page: 100,
-            field_order: [
-              {
-                id: 'ASC',
-              },
-            ],
-            total_pages: 1,
-            total_items: 2,
-          },
-          data: {
-            items: [
-              {
-                id: 1,
-                delegacion: 'MIAS',
-                nombre: 'Orden de Trabajo cerrada por rechazo',
-                tipo: 'OT',
-                fecha_inicio: '2021-04-21T01:00:00Z',
-                fecha_termino: '2021-05-22T02:00:00Z',
-                sesion_sce: '01FADN1JW7DZZT1PAV0KM8JNYZ',
-                estado_otid: 1,
-                etapa_otid: 2,
-                proveedor_id: 2,
-                proveedor_nombre:
-                  'Telefonica Chile Servicios Corporativos Ltda.',
-                etapa_slug: 'OT_ET_PEND_ANULACION',
-                estado_slug: 'OT_ST_ABIERTA',
-                etapa_otdesc: 'Pendiente de Anulación por Responsable',
-                estado_otdesc: 'Abierta',
-                contrato_marco_nombre: 'SBE',
-                usuario_nombre: 'JESSICA LORENA CASTILLO GONZÁLEZ',
-                acciones: [
-                  {
-                    id: 5,
-                    slug: 'OT_AUTORIZAR_PAGOS',
-                    nombre_corto: 'Autorizar pagos',
-                    descripcion: 'Poder autorizar pagos de OT',
-                  },
-                ],
-                acciones_str: 'OT_AUTORIZAR_PAGOS',
-              },
-            ],
-          },
-        })),
-        map(res => res.data.items)
-      );
+      .pipe(map(res => res.data.items));
   }
 
   getOTsCerradas(
