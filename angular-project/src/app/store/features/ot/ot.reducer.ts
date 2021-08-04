@@ -290,6 +290,16 @@ export const reducerOt = createReducer(
     ...state,
   })),
 
+  on(OtActions.finalizeOT, state => ({
+    ...state,
+  })),
+  on(OtActions.finalizeOTSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.finalizeOTError, state => ({
+    ...state,
+  })),
+
   on(OtActions.resetData, (state, payload) => ({
     ...initialStateOt,
   }))
