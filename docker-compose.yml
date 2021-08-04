@@ -9,6 +9,9 @@ services:
 
   testing:
     image: gcr.io/zwcsce/mcl-otec-webclient:${CI_COMMIT_TAG:-latest}-testing
+    environment:
+      WEBAPI_NAME: 'mcl_test_sigo_api'
+      WEBAPI_PORT: '4040'
     build:
       context: .
       dockerfile: docker/deploy/Dockerfile
