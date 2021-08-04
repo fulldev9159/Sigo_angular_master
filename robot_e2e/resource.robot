@@ -23,12 +23,12 @@ Open Browser To Page
     Go To                      ${page}
 
 Login
-    [Arguments]                  ${username}      ${password}
-    input text                   name:username    ${username}
-    input password               name:password    ${password}
-    element should be enabled    id:login
-    Click Button                 id:login
-    # Wait Until Element Is Visible    id:user-name     timeout=5
+    [Arguments]                      ${username}      ${password}
+    input text                       name:username    ${username}
+    input password                   name:password    ${password}
+    element should be enabled        id:login
+    Click Button                     id:login
+    Wait Until Element Is Visible    id:user-name     timeout=5
 
 Element text should be
     [Arguments]        ${element}    ${texto}

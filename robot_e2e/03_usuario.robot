@@ -8,9 +8,9 @@ Resource    resource.robot
 *** Test Cases ***
 Crear usuario
 #delete from Usuario_has_contrato where id_usuario=(select id from Usuario_new where username='testjjefearea'); delete from Usuario_has_perfil where usuario_id=(select id from Usuario_new where username='testjjefearea');delete from Usuario_new where username='testjjefearea';
-    Open Browser To Page                   ${url}
-    Login                                  admin                                            password
-    Navegar al menu                        Usuario
+    Open Browser To Page    ${url}
+    Login                   admin      password
+    Navegar al menu         Usuario
     #### Creacion del usuario #######
     # Acceder a creacion de nuevo usuario
     # Set username                           testjjefearea
@@ -21,8 +21,8 @@ Crear usuario
     # Set tipo empresa                       movistar
     # Set empresa                            Telefonica Chile Servicios Corporativos Ltda.
     # Set area                               CONECTIVIDAD Y BACKHAUL
-    # Set todos los contratos 
-    # Set perfil usuario                     TEST Jefe Área                                   
+    # Set todos los contratos
+    # Set perfil usuario                     TEST Jefe Área
     # Guardar usuario
     # Log To Console                         testjjefearea
     # sleep                                  5
