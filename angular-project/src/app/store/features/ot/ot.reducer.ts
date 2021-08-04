@@ -269,6 +269,27 @@ export const reducerOt = createReducer(
   on(OtActions.rejectOTMinutesValidationError, state => ({
     ...state,
   })),
+
+  on(OtActions.authorizePayments, state => ({
+    ...state,
+  })),
+  on(OtActions.authorizePaymentsSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.authorizePaymentsError, state => ({
+    ...state,
+  })),
+
+  on(OtActions.rejectPayments, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectPaymentsSuccess, state => ({
+    ...state,
+  })),
+  on(OtActions.rejectPaymentsError, state => ({
+    ...state,
+  })),
+
   on(OtActions.resetData, (state, payload) => ({
     ...initialStateOt,
   }))
