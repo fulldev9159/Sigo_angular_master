@@ -106,4 +106,3 @@ services:
     command: >
       -timeout 5m -wait-retry-interval 10s
       -wait tcp://mcl_test_sigo_db:3306
-      -wait tcp://mcl_test_sigo_api:4040
