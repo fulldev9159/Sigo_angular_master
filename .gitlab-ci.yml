@@ -41,16 +41,10 @@ e2e robotframework:
   before_script:
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
   script:
-    - docker pull gcr.io/zwcsce/mcl-otec-db:latest
-    - docker pull gcr.io/zwcsce/api-sigo:develop
-    - docker pull gcr.io/zwcsce/mcl-otec-webclient:latest-testing
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d mcl_test_sigo_db
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d mcl_test_sigo_api
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d mcl_test_sigo_web
-    - docker-compose -p ${CI_PIPELINE_ID} run dockerize-test-waiting
-    - sleep 60
+    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml pull mcl_test_sigo_db mcl_test_sigo_api mcl_test_sigo_web
+    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_e2e_robotframework
+    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_db mcl_test_sigo_api mcl_test_sigo_web
+    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml run dockerize-test-waiting
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml run mcl_e2e_robotframework
   after_script:
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
