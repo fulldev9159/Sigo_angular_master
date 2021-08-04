@@ -34,27 +34,27 @@ build a testing image:
     - docker-compose -f docker-compose.yml build --no-cache testing
     - docker-compose -f docker-compose.yml push testing
 
-# e2e robotframework:
-#   <<: *connect_gcr
-#   stage: e2e test
-#   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
-#   script:
-#     - docker pull gcr.io/zwcsce/mcl-otec-db:latest
-#     - docker pull gcr.io/zwcsce/api-sigo:develop
-#     - docker pull gcr.io/zwcsce/mcl-otec-webclient:latest-testing
-#     - docker-compose -f docker-compose.yml down -v
-#     - docker-compose -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
-#     - docker-compose -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
-#     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_db
-#     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_api
-#     - docker-compose -f docker-compose.yml up -d mcl_test_sigo_web
-#     # - docker-compose -p ${CI_PIPELINE_ID} run dockerize-test-waiting
-#     - sleep 10
-#     - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
-#   after_script:
-#     - docker-compose -f docker-compose.yml down -v
-#   tags:
-#     - docker_sigo
+e2e robotframework:
+  <<: *connect_gcr
+  stage: e2e test
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+  script:
+    - docker pull gcr.io/zwcsce/mcl-otec-db:latest
+    - docker pull gcr.io/zwcsce/api-sigo:develop
+    - docker pull gcr.io/zwcsce/mcl-otec-webclient:latest-testing
+    - docker-compose -f docker-compose.yml down -v
+    - docker-compose -f docker-compose.yml rm mcl_test_sigo_web mcl_test_sigo_db mcl_test_sigo_api
+    - docker-compose -f docker-compose.yml build --no-cache mcl_test_sigo_web mcl_e2e_robotframework
+    - docker-compose -f docker-compose.yml up -d mcl_test_sigo_db
+    - docker-compose -f docker-compose.yml up -d mcl_test_sigo_api
+    - docker-compose -f docker-compose.yml up -d mcl_test_sigo_web
+    # - docker-compose -p ${CI_PIPELINE_ID} run dockerize-test-waiting
+    - sleep 10
+    - docker-compose -f docker-compose.yml run mcl_e2e_robotframework
+  # after_script:
+  #   - docker-compose -f docker-compose.yml down -v
+  tags:
+    - docker_sigo
 
 docker:
   <<: *connect_gcr
@@ -66,13 +66,6 @@ docker:
   only:
     - tags
     - develop
-# robot framework:
-#   <<: *connect_gcr
-#   stage: build test
-#   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
-#   script:
-#     - docker-compose build --no-cache robotframework
-#     - docker-compose push robotframework
 
 update-demos-sigo:
   stage: triggers
