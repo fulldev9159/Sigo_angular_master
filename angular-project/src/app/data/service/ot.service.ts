@@ -140,28 +140,42 @@ export class OTService {
   }
 
   approveOTMinutesGeneration(perfil_id: number, otID: number): Observable<any> {
-    console.log('approve minutes generation. still not implemented', {
+    console.log('aprobar generacion del acta. no implementado aun', {
       ot_id: otID,
     });
     return of({});
   }
 
   rejectOTMinutesGeneration(perfil_id: number, otID: number): Observable<any> {
-    console.log('reject minutes generation. still not implemented', {
+    console.log('rechazar generacion del acta. no implementado aun', {
       ot_id: otID,
     });
     return of({});
   }
 
   approveOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
-    console.log('approve minutes validation. still not implemented', {
+    console.log('aprobar validación del acta. no implementado aun', {
       ot_id: otID,
     });
     return of({});
   }
 
   rejectOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
-    console.log('reject minutes validation. still not implemented', {
+    console.log('rechazar validación del acta. no implementado aun', {
+      ot_id: otID,
+    });
+    return of({});
+  }
+
+  authorizePayments(perfil_id: number, otID: number): Observable<any> {
+    console.log('autorizar pagos. no implementado aun', {
+      ot_id: otID,
+    });
+    return of({});
+  }
+
+  rejectPayments(perfil_id: number, otID: number): Observable<any> {
+    console.log('rechazar pagos. no implementado aun', {
       ot_id: otID,
     });
     return of({});

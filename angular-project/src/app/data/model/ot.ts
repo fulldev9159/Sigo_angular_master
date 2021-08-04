@@ -149,3 +149,25 @@ export interface RejectOTMinutesValidationResponse {
     responseCode: number;
   };
 }
+
+export interface AuthorizePaymentsResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface RejectPaymentsResponse {
+  data: {
+    ot_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
