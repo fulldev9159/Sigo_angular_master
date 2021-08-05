@@ -7,7 +7,7 @@ import {
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, Subscription, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap, filter } from 'rxjs/operators';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
@@ -23,8 +23,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of([]);
   contratosMarcos$: Observable<CubModel.ContractMarco[]> = of([]);
-  disableProveedores = true;
   proveedores$: Observable<CubModel.Provider[]> = of([]);
+  regiones$: Observable<CubModel.Region[]> = of([]);
 
   formControls = {
     // cubicacion_id: null,
@@ -36,7 +36,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     contrato_marco_id: new FormControl(null, [Validators.required]),
     subcontrato_id: new FormControl(null, [Validators.required]),
     proveedor_id: new FormControl(null, [Validators.required]),
-    // region_id: [null, Validators.required],
+    region_id: new FormControl(null, [Validators.required]),
     // tipo_servicio_id: null,
     // lpus: [],
   };
@@ -73,6 +73,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.autoSuggestItems$ = this.cubageFacade.getAutoSuggestSelector$();
     this.contratosMarcos$ = this.cubageFacade.getContractMarcoSelector$();
     this.proveedores$ = this.cubageFacade.getProvidersSelector$().pipe(
+      map(proveedores => proveedores || []),
       tap(proveedores => {
         this.formCubicacion.get('subcontrato_id').reset();
         this.formCubicacion.get('proveedor_id').reset();
@@ -83,6 +84,18 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         } else {
           this.formCubicacion.get('subcontrato_id').disable();
           this.formCubicacion.get('proveedor_id').disable();
+        }
+      })
+    );
+    this.regiones$ = this.cubageFacade.getRegionsSelector$().pipe(
+      map(regiones => regiones || []),
+      tap(regiones => {
+        this.formCubicacion.get('region_id').reset();
+
+        if (regiones.length > 0) {
+          this.formCubicacion.get('region_id').enable();
+        } else {
+          this.formCubicacion.get('region_id').disable();
         }
       })
     );
@@ -101,7 +114,21 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           // this.formCubicacion.get('region_id').reset();
           // this.formCubicacion.get('tipo_servicio_id').reset();
 
-          this.cubageFacade.resetServices();
+          // this.cubageFacade.resetServices();
+        })
+    );
+
+    this.subscription.add(
+      this.formCubicacion
+        .get('subcontrato_id')
+        .valueChanges.pipe(filter(key => key !== undefined && key !== null))
+        .subscribe(key => {
+          const { subcontratosID, proveedorID } = this.extractProviderKeys(key);
+          this.formCubicacion.get('proveedor_id').setValue(proveedorID);
+
+          this.cubageFacade.getSubContractedRegionsAction({
+            subcontrato_id: subcontratosID,
+          });
         })
     );
   }
@@ -109,6 +136,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   initData(): void {
     this.formCubicacion.get('subcontrato_id').disable({ emitEvent: false });
     this.formCubicacion.get('proveedor_id').disable({ emitEvent: false });
+
+    this.formCubicacion.get('region_id').disable({ emitEvent: false });
 
     this.cubageFacade.getAutoSuggestAction('', 5);
     this.cubageFacade.getContractMarcoAction();
@@ -138,6 +167,25 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   providerKey(provider: CubModel.Provider): string {
-    return `${provider.subcontrato_id}-${provider.id}`;
+    return `${provider.subcontrato_id.map(sID => sID + '').join(',')}-${
+      provider.id
+    }`;
+  }
+
+  extractProviderKeys(
+    key: string
+  ): {
+    subcontratosID: number[];
+    proveedorID: number;
+  } {
+    const [subcontratosIDStr, proveedorID] = key.split('-');
+    const subcontratosID = subcontratosIDStr
+      .split(',')
+      .map(subcontratoID => +subcontratoID);
+
+    return {
+      subcontratosID,
+      proveedorID: +proveedorID,
+    };
   }
 }

@@ -76,6 +76,19 @@
                 </ng-container>
               </app-select>
             </div>
+
+            <div class="col-12 field-box">
+              <app-select [control]="formControls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione región</option>
+                  <ng-container *ngFor="let region of regiones$ | async">
+                    <option [value]="region.id">
+                      {{ region.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
           </div>
         </ng-container>
       </app-card>
