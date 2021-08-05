@@ -21,6 +21,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of([]);
+  contratosMarcos$: Observable<CubModel.ContractMarco[]> = of([]);
 
   formControls = {
     // cubicacion_id: null,
@@ -29,7 +30,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       this.noWhitespace,
       Validators.maxLength(300),
     ]),
-    // contrato_marco_id: [null, Validators.required],
+    contrato_marco_id: new FormControl(null, [Validators.required]),
     // subcontrato_id: null,
     // proveedor_id: [null, Validators.required],
     // region_id: [null, Validators.required],
@@ -45,11 +46,26 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     return isValid ? null : { whitespace: true };
   }
 
+  errorMessageFn = errors => {
+    if (errors.required || errors.whitespace) {
+      return 'Este campo es requerido';
+    }
+    if (errors.maxlength) {
+      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+    }
+    return 'Este campo es inválido';
+  }; // tslint:disable-line
+
   constructor(private cubageFacade: CubicacionFacade) {}
 
   ngOnInit(): void {
     this.cubageFacade.resetData();
+
     this.autoSuggestItems$ = this.cubageFacade.getAutoSuggestSelector$();
+    this.contratosMarcos$ = this.cubageFacade.getContractMarcoSelector$();
+
+    this.cubageFacade.getAutoSuggestAction('', 5);
+    this.cubageFacade.getContractMarcoAction();
   }
 
   ngOnDestroy(): void {

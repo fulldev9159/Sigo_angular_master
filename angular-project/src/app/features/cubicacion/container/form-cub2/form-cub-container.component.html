@@ -18,7 +18,7 @@
         <ng-container card-header-title>&nbsp;</ng-container>
         <ng-container card-body>
           <div [formGroup]="formCubicacion" class="row" id="box">
-            <div class="col-12 ">
+            <div class="col-12 field-box">
               <label for="">Nombre</label>
               <div class="ng-autocomplete">
                 <ng-autocomplete formControlName="nombre" [data]="autoSuggestItems$ | async" [searchKeyword]="'name'" (selected)="nameSelected($event)" (inputChanged)="nameChanged($event)" (inputFocused)="nameFocused($event)" (inputCleared)="nameCleared($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"></ng-autocomplete>
@@ -49,7 +49,19 @@
                   </ng-container>
                 </ng-container>
               </ng-container>
-              <br>
+            </div>
+
+            <div class="col-12 field-box">
+              <app-select [control]="formControls.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione contrato</option>
+                  <ng-container *ngFor="let contratoMarco of contratosMarcos$ | async">
+                    <option [value]="contratoMarco.id">
+                      {{ contratoMarco.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
             </div>
           </div>
         </ng-container>
