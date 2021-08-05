@@ -63,6 +63,19 @@
                 </ng-container>
               </app-select>
             </div>
+
+            <div class="col-12 field-box">
+              <app-select [control]="formControls.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione proveedor</option>
+                  <ng-container *ngFor="let proveedor of proveedores$ | async">
+                    <option [value]="providerKey(proveedor)">
+                      {{ proveedor.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
           </div>
         </ng-container>
       </app-card>
