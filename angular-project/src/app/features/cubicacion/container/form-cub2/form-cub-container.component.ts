@@ -74,34 +74,43 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.contratosMarcos$ = this.cubageFacade.getContractMarcoSelector$();
     this.proveedores$ = this.cubageFacade.getProvidersSelector$().pipe(
       map(proveedores => proveedores || []),
-      tap(proveedores => {
-        this.formCubicacion.get('subcontrato_id').reset();
-        this.formCubicacion.get('proveedor_id').reset();
-
-        if (proveedores.length > 0) {
-          this.formCubicacion.get('subcontrato_id').enable();
-          this.formCubicacion.get('proveedor_id').enable();
-        } else {
-          this.formCubicacion.get('subcontrato_id').disable();
-          this.formCubicacion.get('proveedor_id').disable();
-        }
-      })
+      tap(proveedores => this.resetProveedoresFormControl(proveedores))
     );
     this.regiones$ = this.cubageFacade.getRegionsSelector$().pipe(
       map(regiones => regiones || []),
-      tap(regiones => {
-        this.formCubicacion.get('region_id').reset();
-
-        if (regiones.length > 0) {
-          this.formCubicacion.get('region_id').enable();
-        } else {
-          this.formCubicacion.get('region_id').disable();
-        }
-      })
+      tap(regiones => this.resetRegionesFormControl(regiones))
     );
   }
 
+  resetProveedoresFormControl(proveedores: CubModel.Provider[]): void {
+    this.formCubicacion.get('subcontrato_id').reset();
+    this.formCubicacion.get('proveedor_id').reset();
+
+    if (proveedores.length > 0) {
+      this.formCubicacion.get('subcontrato_id').enable();
+      this.formCubicacion.get('proveedor_id').enable();
+    } else {
+      this.formCubicacion.get('subcontrato_id').disable();
+      this.formCubicacion.get('proveedor_id').disable();
+    }
+  }
+
+  resetRegionesFormControl(regiones: CubModel.Region[]): void {
+    this.formCubicacion.get('region_id').reset();
+
+    if (regiones.length > 0) {
+      this.formCubicacion.get('region_id').enable();
+    } else {
+      this.formCubicacion.get('region_id').disable();
+    }
+  }
+
   initFormControlsEvents(): void {
+    this.initContratoMarcoFormControlEvent();
+    this.initProveedorFormControlEvent();
+  }
+
+  initContratoMarcoFormControlEvent(): void {
     this.subscription.add(
       this.formCubicacion
         .get('contrato_marco_id')
@@ -117,7 +126,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           // this.cubageFacade.resetServices();
         })
     );
+  }
 
+  initProveedorFormControlEvent(): void {
     this.subscription.add(
       this.formCubicacion
         .get('subcontrato_id')
