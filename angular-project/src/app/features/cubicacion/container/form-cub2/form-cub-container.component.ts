@@ -26,6 +26,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   proveedores$: Observable<CubModel.Provider[]> = of([]);
   regiones$: Observable<CubModel.Region[]> = of([]);
   tiposServicio$: Observable<CubModel.TypeService[]> = of([]);
+  servicios$: Observable<CubModel.Service[]> = of();
 
   formControls = {
     // cubicacion_id: null,
@@ -39,7 +40,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     proveedor_id: new FormControl(null, [Validators.required]),
     region_id: new FormControl(null, [Validators.required]),
     tipo_servicio_id: new FormControl(null, []),
-    // lpus: [],
+    lpus: new FormControl([], []),
   };
 
   formCubicacion: FormGroup = new FormGroup(this.formControls);
@@ -85,6 +86,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       map(tiposServicio => tiposServicio || []),
       tap(tiposServicio => this.resetTiposServicioFormControl(tiposServicio))
     );
+    this.servicios$ = this.cubageFacade.getServicesSelector$().pipe(
+      map(servicios => servicios || []),
+      tap(servicios => this.resetServiciosFormControl(servicios))
+    );
   }
 
   resetProveedoresFormControl(proveedores: CubModel.Provider[]): void {
@@ -120,10 +125,13 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     }
   }
 
+  resetServiciosFormControl(servicios: CubModel.Service[]): void {}
+
   initFormControlsEvents(): void {
     this.initContratoMarcoFormControlEvent();
     this.initProveedorFormControlEvent();
     this.initRegionFormControlEvent();
+    this.initTipoServicioFormControlEvent();
   }
 
   initContratoMarcoFormControlEvent(): void {
@@ -195,6 +203,44 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     );
   }
 
+  initTipoServicioFormControlEvent(): void {
+    this.subscription.add(
+      this.formCubicacion
+        .get('tipo_servicio_id')
+        .valueChanges.pipe(
+          withLatestFrom(
+            this.formCubicacion
+              .get('subcontrato_id')
+              .valueChanges.pipe(
+                filter(key => key !== undefined && key !== null)
+              ),
+            this.formCubicacion
+              .get('region_id')
+              .valueChanges.pipe(
+                filter(
+                  region_id => region_id !== undefined && region_id !== null
+                )
+              )
+          )
+        )
+        .subscribe(([tipo_servicio_id, key, region_id]) => {
+          if (tipo_servicio_id !== null && tipo_servicio_id !== undefined) {
+            const { subcontratosID, proveedorID } = this.extractProviderKeys(
+              key
+            );
+
+            this.cubageFacade.getSubContractedServicesAction({
+              subcontrato_id: subcontratosID,
+              region_id: +region_id,
+              tipo_servicio_id: +tipo_servicio_id,
+            });
+          } else {
+            this.cubageFacade.resetServices();
+          }
+        })
+    );
+  }
+
   initData(): void {
     this.formCubicacion.get('subcontrato_id').disable({ emitEvent: false });
     this.formCubicacion.get('proveedor_id').disable({ emitEvent: false });
@@ -250,5 +296,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       subcontratosID,
       proveedorID: +proveedorID,
     };
+  }
+
+  lpuServiceSelected(event: any): void {
+    console.log('lpu service selected', event);
+    console.log('lpus form control', this.formCubicacion.getRawValue());
   }
 }

@@ -25,6 +25,15 @@
 }
 
 :host ::ng-deep {
+  p-listbox>div {
+    height: 93%;
+    border-color: #ced4da;
+  }
+
+  .p-listbox .p-listbox-header .p-listbox-filter {
+    border-color: #aaadaf;
+  }
+
   .autocomplete-container {
     box-shadow: none;
   }
