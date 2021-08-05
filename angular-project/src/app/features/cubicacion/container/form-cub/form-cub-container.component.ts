@@ -12,6 +12,7 @@ import {
   filter,
   takeUntil,
   withLatestFrom,
+  take,
 } from 'rxjs/operators';
 
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -288,40 +289,67 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   lpusSelected(event: any): void {
-    const regionControls = 'region_id';
-    const regionID = this.formCubicacion.controls[regionControls].value;
-    const tipoServicioControls = 'tipo_servicio_id';
-    const tipoServicioID = this.formCubicacion.controls[tipoServicioControls]
-      .value;
-    const regionName = this.Regiones.filter(x => x.id === +regionID)[0].codigo;
-    const tipoServicioName = this.TipoServicios.filter(
-      x => x.id === +tipoServicioID
-    )[0].nombre;
+    this.subscription.add(
+      combineLatest([this.Services$, this.Regions$, this.TypeServices$])
+        .pipe(take(1))
+        .subscribe(([services, regions, tiposServicio]) => {
+          const regionID = this.formCubicacion.get('region_id').value;
+          const region = regions.find(r => r.id === +regionID);
+          const tipoServicioID = this.formCubicacion.get('tipo_servicio_id')
+            .value;
+          const tipoServicio = tiposServicio.find(
+            t => t.id === +tipoServicioID
+          );
 
-    this.lpusCarrito = event.value.map(x => {
-      let cantidad = 1;
-      let lpu_subtotal = x.lpu_precio;
-      if (this.lpusCarrito.length > 0) {
-        const lpuExistente = this.lpusCarrito.filter(
-          y => +y.lpu_id === +x.lpu_id
-        );
-        if (lpuExistente.length > 0) {
-          cantidad = lpuExistente[0].cantidad;
-          lpu_subtotal = +(+x.lpu_precio * +cantidad);
-        }
-      }
-      return {
-        ...x,
-        region: regionName,
-        tipo_servicio: tipoServicioName,
-        cantidad,
-        lpu_subtotal,
-      };
-    });
-    this.currency = this.lpusCarrito[0].tipo_moneda_cod;
-    this.total = this.lpusCarrito.reduce((total, currentValue) => {
-      return total + currentValue.lpu_subtotal;
-    }, 0);
+          const selectedServices = event.value;
+          const selectedServicesByLpuID = selectedServices.reduce((ac, lpu) => {
+            ac[lpu.lpu_id] = true;
+            return ac;
+          }, {});
+
+          const unselectedServices = services.filter(
+            service => selectedServicesByLpuID[service.lpu_id] === undefined
+          );
+          const unselectedServicesByLpuID = unselectedServices.reduce(
+            (ac, lpu) => {
+              ac[lpu.lpu_id] = true;
+              return ac;
+            },
+            {}
+          );
+
+          const isInCart = this.lpusCarrito.reduce((ac, lpu) => {
+            ac[lpu.lpu_id] = true;
+            return ac;
+          }, {});
+
+          const newLpus = selectedServices
+            .filter(lpu => isInCart[lpu.lpu_id] === undefined)
+            .map(lpu => ({
+              ...lpu,
+              region: region.codigo,
+              tipo_servicio: tipoServicio.nombre,
+              cantidad: 1,
+              lpu_subtotal: lpu.lpu_precio,
+            }));
+
+          this.lpusCarrito = [
+            ...this.lpusCarrito.filter(
+              lpu => unselectedServicesByLpuID[lpu.lpu_id] === undefined
+            ),
+            ...newLpus,
+          ];
+
+          this.currency =
+            this.lpusCarrito.length === 0
+              ? ''
+              : this.lpusCarrito[0].tipo_moneda_cod;
+
+          this.total = this.lpusCarrito.reduce((total, currentValue) => {
+            return total + currentValue.lpu_subtotal;
+          }, 0);
+        })
+    );
   }
 
   CantidadSelected(event: any): void {
@@ -355,7 +383,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         lpu => lpu.lpu_id !== event.item.lpu_id
       )
     );
-    // console.log(this.formCubicacion.controls[lpuIDControls].value);
     this.total = this.lpusCarrito.reduce((total, currentValue) => {
       return total + currentValue.lpu_subtotal;
     }, 0);

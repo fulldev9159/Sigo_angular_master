@@ -397,6 +397,36 @@ export const rejectOTMinutesValidationError = createAction(
   props<{ error: any }>()
 );
 
+// Autorizar pagos
+export const authorizePayments = createAction(
+  '[OT] Authorize payments',
+  props<{ otID: number }>()
+);
+
+export const authorizePaymentsSuccess = createAction(
+  '[OT] Authorize payments success'
+);
+
+export const authorizePaymentsError = createAction(
+  '[OT] Authorize payments error',
+  props<{ error: any }>()
+);
+
+// Rechazar pagos
+export const rejectPayments = createAction(
+  '[OT] Reject payments',
+  props<{ otID: number }>()
+);
+
+export const rejectPaymentsSuccess = createAction(
+  '[OT] Reject payments success'
+);
+
+export const rejectPaymentsError = createAction(
+  '[OT] Reject payments error',
+  props<{ error: any }>()
+);
+
 // Coordinadores
 export const getCoordinators = createAction(
   '[OT] get coordinators',
@@ -454,6 +484,19 @@ export const assignTrabajadorSuccess = createAction(
 
 export const assignTrabajadorError = createAction(
   '[OT] assign trabajador error',
+  props<{ error: any }>()
+);
+
+// finalizar OT
+export const finalizeOT = createAction(
+  '[OT] finalize OT',
+  props<{ otID: number }>()
+);
+
+export const finalizeOTSuccess = createAction('[OT] finalize OT success');
+
+export const finalizeOTError = createAction(
+  '[OT] finalize OT error',
   props<{ error: any }>()
 );
 

@@ -359,6 +359,72 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const otAutorizarPagos = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_AUTORIZAR_PAGOS'
+        );
+
+        if (otAutorizarPagos) {
+          actions.push({
+            icon: 'p-button-icon pi pi-money-bill',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Authorizar Pago',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea autorizar pago?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.authorizePayments(ot.id);
+                },
+              });
+            },
+          });
+
+          actions.push({
+            icon: 'p-button-icon pi pi-times',
+            class: 'p-button-rounded p-button-danger p-mr-2',
+            label: 'Rechazar pago',
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea rechazar pago?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.rejectPayments(ot.id);
+                },
+              });
+            },
+          });
+        }
+
+        const otFinalizar = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_FINALIZAR_OT'
+        );
+
+        if (otFinalizar) {
+          actions.push({
+            icon: 'p-button-icon pi pi-check-circle',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otFinalizar.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.confirmationService.confirm({
+                target: event.target as EventTarget,
+                message: `¿Desea finalizar la Orden de Trabajo?`,
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Confirmar',
+                rejectLabel: 'Cancelar',
+                accept: () => {
+                  this.otFacade.finalizeOT(ot.id);
+                },
+              });
+            },
+          });
+        }
+
         return actions;
       },
     },

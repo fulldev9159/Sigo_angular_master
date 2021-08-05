@@ -274,6 +274,20 @@ export class OtFacade {
     this.store.dispatch(otActions.rejectOTMinutesValidation({ otID }));
   }
 
+  // Pagos
+  public authorizePayments(otID: number): void {
+    this.store.dispatch(otActions.authorizePayments({ otID }));
+  }
+
+  public rejectPayments(otID: number): void {
+    this.store.dispatch(otActions.rejectPayments({ otID }));
+  }
+
+  // Pagos
+  public finalizeOT(otID: number): void {
+    this.store.dispatch(otActions.finalizeOT({ otID }));
+  }
+
   public resetData(): void {
     this.store.dispatch(otActions.resetData());
   }

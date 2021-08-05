@@ -848,4 +848,142 @@ export class OtEffects {
       ),
     { dispatch: false }
   );
+
+  // Autorizar pagos
+  authorizePayments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.authorizePayments),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.authorizePayments(profile.id, otID).pipe(
+          mapTo(otActions.authorizePaymentsSuccess()),
+          catchError(error => of(otActions.authorizePaymentsError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterAuthorizePaymentsSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.authorizePaymentsSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Pago autorizado', 'ok');
+
+          this.otFacade.getOts({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterAuthorizePaymentsError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.authorizePaymentsError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible autorizar el pago',
+            'error'
+          );
+          console.error(`could not authorize the payments [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // Rechazar pagos
+  rejectPayments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.rejectPayments),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.rejectPayments(profile.id, otID).pipe(
+          mapTo(otActions.rejectPaymentsSuccess()),
+          catchError(error => of(otActions.rejectPaymentsError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterRejectPaymentsSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectPaymentsSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Pago rechazado', 'ok');
+
+          this.otFacade.getOts({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterRejectPaymentsError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.rejectPaymentsError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible rechazar el pago',
+            'error'
+          );
+          console.error(`could not reject the payments [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // Cerrar OT
+  finalizeOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.finalizeOT),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ otID }, profile]) =>
+        this.otService.finalizeOT(profile.id, otID).pipe(
+          mapTo(otActions.finalizeOTSuccess()),
+          catchError(error => of(otActions.finalizeOTError({ error })))
+        )
+      )
+    )
+  );
+
+  notifyAfterFinalizeOTSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.finalizeOTSuccess),
+        withLatestFrom(this.otFacade.getOtFilters$()),
+        tap(([data, { filtro_propietario, filtro_tipo }]) => {
+          this.snackService.showMessage('Orden de trabajo finalizada', 'ok');
+
+          this.otFacade.getOts({
+            filtro_propietario,
+            filtro_tipo,
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterFinalizeOTError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.finalizeOTError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible finalizar la Orden de Trabajo',
+            'error'
+          );
+          console.error(`could not finalize ot [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
 }
