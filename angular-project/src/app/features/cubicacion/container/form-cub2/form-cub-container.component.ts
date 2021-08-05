@@ -127,6 +127,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   resetServiciosFormControl(servicios: CubModel.Service[]): void {}
 
+  resetSelectedLpusFormControl(lpus: CubModel.Service[]): void {
+    this.formCubicacion.get('lpus').reset();
+  }
+
   initFormControlsEvents(): void {
     this.initContratoMarcoFormControlEvent();
     this.initProveedorFormControlEvent();
@@ -143,15 +147,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             this.cubageFacade.getSubContractedProvidersAction({
               contrato_marco_id: +contrato_marco_id,
             });
-            // this.formCubicacion.get('subcontrato_id').reset();
-            // this.formCubicacion.get('proveedor_id').reset();
-            // this.formCubicacion.get('region_id').reset();
-            // this.formCubicacion.get('tipo_servicio_id').reset();
-
-            // this.cubageFacade.resetServices();
           } else {
             this.resetProveedoresFormControl([]);
           }
+          this.resetSelectedLpusFormControl([]);
         })
     );
   }
@@ -169,6 +168,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         } else {
           this.resetRegionesFormControl([]);
         }
+        this.resetSelectedLpusFormControl([]);
       })
     );
   }
@@ -199,6 +199,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           } else {
             this.resetTiposServicioFormControl([]);
           }
+          this.resetSelectedLpusFormControl([]);
         })
     );
   }
@@ -235,6 +236,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
               tipo_servicio_id: +tipo_servicio_id,
             });
           } else {
+            this.resetSelectedLpusFormControl([]);
             this.cubageFacade.resetServices();
           }
         })
