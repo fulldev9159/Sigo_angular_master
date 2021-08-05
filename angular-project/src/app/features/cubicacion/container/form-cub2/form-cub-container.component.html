@@ -122,7 +122,6 @@
 
             <div class="col-12">
               <hr>
-              {{ lpusCarrito }}
               <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
 
               <div id="total">
@@ -131,13 +130,11 @@
 
               <hr>
 
-              <!--
-    <ng-container *ngIf="hasLPUWithZeroQuantity">
-      <div class="text-right">
-        <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
-      </div>
-    </ng-container>
-    -->
+              <ng-container *ngIf="hasLPUWithZeroQuantity">
+                <div class="text-right">
+                  <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
+                </div>
+              </ng-container>
             </div>
 
             <div class="col-xs-12 col-md-12 text-right button-guardar-cubicacion">
@@ -147,9 +144,7 @@
                 </span>
               </ng-container>
               <button (click)="goBack()" class="btn btn-light mr-2">Cancelar</button>
-              <!--
-              <button (click)="saveAction();" [disabled]="!(formCubicacion.valid && lpusCarrito.length > 0 && !hasLPUWithZeroQuantity && tableValid)" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
-              -->
+              <button (click)="submit()" [disabled]="!valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
             </div>
           </div>
         </ng-container>

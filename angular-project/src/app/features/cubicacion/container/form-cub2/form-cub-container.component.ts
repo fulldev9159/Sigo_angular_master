@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable, Subscription, of } from 'rxjs';
-import { map, tap, filter, withLatestFrom } from 'rxjs/operators';
+import { Observable, Subscription, of, combineLatest } from 'rxjs';
+import { map, tap, filter, withLatestFrom, take } from 'rxjs/operators';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
@@ -30,9 +30,14 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   contratosMarcos$: Observable<CubModel.ContractMarco[]> = of([]);
   proveedores$: Observable<CubModel.Provider[]> = of([]);
   regiones$: Observable<CubModel.Region[]> = of([]);
+  regiones: CubModel.Region[] = []; // TODO: mejorar ésto
   tiposServicio$: Observable<CubModel.TypeService[]> = of([]);
+  tiposServicio: CubModel.TypeService[] = []; // TODO: mejorar ésto
   servicios$: Observable<CubModel.Service[]> = of([]);
+  servicios: CubModel.Service[] = []; // TODO: mejorar ésto
 
+  hasLPUWithZeroQuantity = false;
+  tableValid = true;
   lpusCarrito: CartItem[] = [];
   @ViewChild('tableLpus', {
     read: TableComponent,
@@ -97,10 +102,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           sort: 'cantidad',
           header: 'cantidad',
           editable: true,
-          onchange: (event: Event, item: CubModel.Service) => {
-            console.log('form control carrito change', event, item);
-            // this.tableValid = this.tableLpus.valid;
-            // this.CantidadSelected.emit({ event, item });
+          onchange: (event: any, item: CartItem) => {
+            this.tableValid = this.tableLpus.valid;
+            this.cantidadChanged(event.target.value, item);
           },
           validators: [
             Validators.required,
@@ -162,9 +166,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
           onClick: (event: Event, item: CubModel.Service) => {
-            console.log('borrar carrito', event, item);
-            // this.tableValid = this.tableLpus.valid;
-            // this.BorrarLPUCarrito.emit({ event, item });
+            this.tableValid = this.tableLpus.valid;
+            this.deleteCartItem(item);
           },
         },
       ],
@@ -211,26 +214,30 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.contratosMarcos$ = this.cubageFacade.getContractMarcoSelector$();
     this.proveedores$ = this.cubageFacade.getProvidersSelector$().pipe(
       map(proveedores => proveedores || []),
-      tap(proveedores => this.resetProveedoresFormControl(proveedores))
+      tap(proveedores => this.checkProveedoresAndEnable(proveedores))
     );
     this.regiones$ = this.cubageFacade.getRegionsSelector$().pipe(
       map(regiones => regiones || []),
-      tap(regiones => this.resetRegionesFormControl(regiones))
+      map(regiones => (this.regiones = regiones)),
+      tap(regiones => this.checkRegionesAndEnable(regiones))
     );
     this.tiposServicio$ = this.cubageFacade.getTypeServicesSelector$().pipe(
       map(tiposServicio => tiposServicio || []),
-      tap(tiposServicio => this.resetTiposServicioFormControl(tiposServicio))
+      map(tiposServicio => (this.tiposServicio = tiposServicio)),
+      tap(tiposServicio => this.checkTiposServicioAndEnable(tiposServicio))
     );
     this.servicios$ = this.cubageFacade.getServicesSelector$().pipe(
       map(servicios => servicios || []),
-      tap(servicios => this.resetServiciosFormControl(servicios))
+      map(servicios => (this.servicios = servicios))
     );
   }
 
-  resetProveedoresFormControl(proveedores: CubModel.Provider[]): void {
+  resetProveedoresFormControl(): void {
     this.formCubicacion.get('subcontrato_id').reset();
     this.formCubicacion.get('proveedor_id').reset();
+  }
 
+  checkProveedoresAndEnable(proveedores: CubModel.Provider[]): void {
     if (proveedores.length > 0) {
       this.formCubicacion.get('subcontrato_id').enable();
       this.formCubicacion.get('proveedor_id').enable();
@@ -240,9 +247,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetRegionesFormControl(regiones: CubModel.Region[]): void {
+  resetRegionesFormControl(): void {
     this.formCubicacion.get('region_id').reset();
+  }
 
+  checkRegionesAndEnable(regiones: CubModel.Region[]): void {
     if (regiones.length > 0) {
       this.formCubicacion.get('region_id').enable();
     } else {
@@ -250,9 +259,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetTiposServicioFormControl(tiposServicio: CubModel.TypeService[]): void {
+  resetTiposServicioFormControl(): void {
     this.formCubicacion.get('tipo_servicio_id').reset();
+  }
 
+  checkTiposServicioAndEnable(tiposServicio: CubModel.TypeService[]): void {
     if (tiposServicio.length > 0) {
       this.formCubicacion.get('tipo_servicio_id').enable();
     } else {
@@ -260,10 +271,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetServiciosFormControl(servicios: CubModel.Service[]): void {}
-
   resetSelectedLpusFormControl(lpus: CubModel.Service[]): void {
     this.formCubicacion.get('lpus').reset();
+    this.formCubicacion.get('lpus').setValue([]);
   }
 
   initFormControlsEvents(): void {
@@ -283,9 +293,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
               contrato_marco_id: +contrato_marco_id,
             });
           } else {
-            this.resetProveedoresFormControl([]);
+            this.resetProveedoresFormControl();
           }
-          this.resetSelectedLpusFormControl([]);
+          this.resetLpusCarrito();
         })
     );
   }
@@ -301,9 +311,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             subcontrato_id: subcontratosID,
           });
         } else {
-          this.resetRegionesFormControl([]);
+          this.resetRegionesFormControl();
         }
-        this.resetSelectedLpusFormControl([]);
+        this.resetLpusCarrito();
       })
     );
   }
@@ -332,9 +342,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
               region_id: +region_id,
             });
           } else {
-            this.resetTiposServicioFormControl([]);
+            this.resetTiposServicioFormControl();
           }
-          this.resetSelectedLpusFormControl([]);
+          this.resetLpusCarrito();
         })
     );
   }
@@ -437,7 +447,171 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   lpuServiceSelected(event: any): void {
-    console.log('lpu service selected', event);
-    console.log('lpus form control', this.formCubicacion.getRawValue());
+    const { region_id, tipo_servicio_id } = this.formCubicacion.getRawValue();
+    const region = this.regiones.find(r => r.id === +region_id);
+    const tipoServicio = this.tiposServicio.find(
+      t => t.id === +tipo_servicio_id
+    );
+
+    const selectedServices = event.value;
+    const selectedServicesByLpuID = selectedServices.reduce((ac, lpu) => {
+      ac[lpu.lpu_id] = true;
+      return ac;
+    }, {});
+
+    const unselectedServices = this.servicios.filter(
+      service => selectedServicesByLpuID[service.lpu_id] === undefined
+    );
+    const unselectedServicesByLpuID = unselectedServices.reduce((ac, lpu) => {
+      ac[lpu.lpu_id] = true;
+      return ac;
+    }, {});
+
+    const isInCart = this.lpusCarrito.reduce((ac, lpu) => {
+      ac[lpu.lpu_id] = true;
+      return ac;
+    }, {});
+
+    const newLpus = selectedServices
+      .filter(lpu => isInCart[lpu.lpu_id] === undefined)
+      .map(lpu => ({
+        ...lpu,
+        region: region.codigo,
+        tipo_servicio: tipoServicio.nombre,
+        cantidad: 1,
+        lpu_subtotal: lpu.lpu_precio,
+      }));
+
+    this.lpusCarrito = [
+      ...this.lpusCarrito.filter(
+        lpu => unselectedServicesByLpuID[lpu.lpu_id] === undefined
+      ),
+      ...newLpus,
+    ];
+
+    this.updateTotal();
+    this.updateCurrency();
+    this.validateLpusWithZeroQuantiy();
+  }
+
+  cantidadChanged(value: string, item: CartItem): void {
+    const cantidad = (val => (isNaN(val) ? 0 : val))(parseInt(value, 10));
+
+    this.lpusCarrito = this.lpusCarrito.map(x => {
+      if (x.lpu_id === item.lpu_id) {
+        return {
+          ...x,
+          cantidad,
+          lpu_subtotal: +x.lpu_precio * cantidad,
+        };
+      }
+      return x;
+    });
+
+    this.updateLpusTableInformation();
+  }
+
+  deleteCartItem(item: CartItem): void {
+    this.lpusCarrito = this.lpusCarrito.filter(
+      lpu => lpu.lpu_id !== item.lpu_id
+    );
+
+    this.formCubicacion
+      .get('lpus')
+      .setValue(
+        this.formCubicacion
+          .get('lpus')
+          .value.filter(lpu => lpu.lpu_id !== item.lpu_id)
+      );
+
+    this.updateLpusTableInformation();
+  }
+
+  resetLpusCarrito(): void {
+    this.resetSelectedLpusFormControl([]);
+    this.lpusCarrito = [];
+    this.updateLpusTableInformation();
+  }
+
+  updateLpusTableInformation(): void {
+    this.updateTotal();
+    this.updateCurrency();
+    this.validateLpusWithZeroQuantiy();
+  }
+
+  updateCurrency(): void {
+    this.currency =
+      this.lpusCarrito.length === 0 ? '' : this.lpusCarrito[0].tipo_moneda_cod;
+  }
+
+  updateTotal(): void {
+    this.total = this.lpusCarrito.reduce((total, currentValue) => {
+      return total + currentValue.lpu_subtotal;
+    }, 0);
+  }
+
+  validateLpusWithZeroQuantiy(): void {
+    const item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
+    this.hasLPUWithZeroQuantity = item !== undefined;
+  }
+
+  touch(): void {
+    Object.keys(this.formCubicacion.controls).forEach(field => {
+      const control = this.formCubicacion.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.formCubicacion.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
+  get valid(): boolean {
+    return (
+      this.formCubicacion.valid &&
+      this.lpusCarrito.length > 0 &&
+      !this.hasLPUWithZeroQuantity &&
+      this.tableValid
+    );
+  }
+
+  submit(): void {
+    this.touch();
+    this.tableLpus.touch();
+    if (this.valid) {
+      const form = this.formCubicacion.getRawValue();
+
+      const nuevaCubicacion = {
+        // cubicacion_id: +form.cubicacion_id,
+        cubicacion_nombre: form.nombre,
+        region_id: +form.region_id,
+        // usuario_id: +this.authLogin.usuario_id,
+        contrato_marco_id: +form.contrato_marco_id,
+        proveedor_id: +form.proveedor_id,
+        lpus: this.lpusCarrito.map(x => ({
+          lpu_id: x.lpu_id,
+          cantidad: x.cantidad,
+        })),
+      };
+
+      this.cubageFacade.postCubicacion(nuevaCubicacion);
+
+      // TODO: falta edicion
+      // this.subscription.add(
+      //   this.cubageFacade.getSingleCubicacion$().subscribe(cubicacion => {
+      //     if (cubicacion) {
+      //       const editCubicacion = {
+      //         ...nuevaCubicacion,
+      //         cubicacion_id: cubicacion.id,
+      //       };
+      //       this.cubageFacade.editCubicacion(editCubicacion);
+      //     } else {
+      //       this.cubageFacade.postCubicacion(nuevaCubicacion);
+      //     }
+      //   })
+      // );
+    }
   }
 }
