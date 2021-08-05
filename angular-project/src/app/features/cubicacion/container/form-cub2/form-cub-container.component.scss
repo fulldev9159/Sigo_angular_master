@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  position: absolute;
+  max-width: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  :host {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+  }
+}

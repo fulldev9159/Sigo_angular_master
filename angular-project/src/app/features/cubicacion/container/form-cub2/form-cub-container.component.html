@@ -1,0 +1,59 @@
+<div class="container-fluid" style="background: #f0f8fb">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Ingreso de Cubicación</h1>
+      <span>Formulario de creación de una cubicación</span>
+    </div>
+
+    <div class="col">
+      <button [routerLink]="['/app/cubicacion/list-cub']" pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
+    </div>
+
+    <div class="col-12">
+      <hr>
+    </div>
+
+    <div class="col">
+      <app-card [classCardHeader]="'bg-secondary text-white'">
+        <ng-container card-header-title>&nbsp;</ng-container>
+        <ng-container card-body>
+          <div [formGroup]="formCubicacion" class="row" id="box">
+            <div class="col-12 ">
+              <label for="">Nombre</label>
+              <div class="ng-autocomplete">
+                <ng-autocomplete formControlName="nombre" [data]="autoSuggestItems$ | async" [searchKeyword]="'name'" (selected)="nameSelected($event)" (inputChanged)="nameChanged($event)" (inputFocused)="nameFocused($event)" (inputCleared)="nameCleared($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"></ng-autocomplete>
+
+                <ng-template #itemTemplate let-item>
+                  <a [innerHTML]="item.name"></a>
+                </ng-template>
+
+                <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                </ng-template>
+              </div>
+
+              <ng-container *ngIf="formCubicacion.controls['nombre'] as control">
+                <ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
+                  <ng-container *ngIf="control.errors.required; else whitespace">
+                    <p-message severity="error" text="Este campo es requerido"></p-message>
+                  </ng-container>
+
+                  <ng-template #whitespace>
+                    <ng-container *ngIf="control.errors.whitespace">
+                      <p-message severity="error" text="Este campo es requerido"></p-message>
+                    </ng-container>
+                  </ng-template>
+
+                  <ng-container *ngIf="control.errors.maxlength">
+                    <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <br>
+            </div>
+          </div>
+        </ng-container>
+      </app-card>
+    </div>
+  </div>
+</div>

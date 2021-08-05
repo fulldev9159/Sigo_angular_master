@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormCubContainerComponent } from './container/form-cub/form-cub-container.component';
+import { FormCub2ContainerComponent } from './container/form-cub2/form-cub-container.component';
 import { ListCubComponent } from './container/list-cub/list-cub.component';
 import { CubicacionComponent } from './cubicacion.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
@@ -45,6 +46,30 @@ export const routes: Routes = [
             redirectTo: '/app/ot/list-ot',
           },
           state: 'form-cub',
+        },
+      },
+      {
+        path: 'form-cub2',
+        component: FormCub2ContainerComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'CUBICACION_CREAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'form-cub2',
+        },
+      },
+      {
+        path: 'form-cub2/:id',
+        component: FormCub2ContainerComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'CUBICACION_EDITAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'form-cub2',
         },
       },
     ],
