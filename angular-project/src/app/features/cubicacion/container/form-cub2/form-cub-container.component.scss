@@ -15,3 +15,17 @@
     background: transparent;
   }
 }
+
+// .ng-autocomplete {
+//   width: 100%;
+// }
+
+:host ::ng-deep {
+  .autocomplete-container {
+    box-shadow: none;
+  }
+
+  .autocomplete-container .input-container input {
+    border: 1px solid #ced4da;
+  }
+}

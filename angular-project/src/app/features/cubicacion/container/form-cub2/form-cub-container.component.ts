@@ -23,13 +23,12 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of([]);
 
   formControls = {
+    // cubicacion_id: null,
     nombre: new FormControl('', [
       Validators.required,
       this.noWhitespace,
       Validators.maxLength(300),
     ]),
-    // cubicacion_id: null,
-    // nombre: [null, [Validators.required, Validators.maxLength(300)]],
     // contrato_marco_id: [null, Validators.required],
     // subcontrato_id: null,
     // proveedor_id: [null, Validators.required],
