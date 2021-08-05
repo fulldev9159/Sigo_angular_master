@@ -4,6 +4,10 @@ import * as fromOt from './ot.reducer';
 export const selectOt = createFeatureSelector<fromOt.StateOt>(
   fromOt.otFeatureKey
 );
+export const getOtEjecucion = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.itemsEjecucion
+);
 
 export const getOtAbiertas = createSelector(
   selectOt,

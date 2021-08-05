@@ -3,6 +3,15 @@ import * as OtModel from './ot.model';
 import * as Data from '@data';
 
 // OT LIST
+
+export const getOtEjecucion = createAction(
+  '[Ot Get Ejecucion] GET Ot Ejecucion',
+  props<{
+    filtro_propietario: string;
+    filtro_tipo: string;
+  }>()
+);
+
 export const getOtAbiertas = createAction(
   '[Ot Get Abiertas] GET Ot Abiertas',
   props<{
@@ -12,13 +21,17 @@ export const getOtAbiertas = createAction(
 );
 
 export const getOtCerradas = createAction(
-  '[Ot Get Abiertas] GET Ot Cerradas',
+  '[Ot Get Cerradas] GET Ot Cerradas',
   props<{
     filtro_propietario: string;
     filtro_tipo: string;
   }>()
 );
 
+export const getOtSuccessEjecucion = createAction(
+  '[Ot GetAll] GET Ot Success Ejecucion',
+  props<{ ot: Data.OT[] }>()
+);
 export const getOtSuccessAbiertas = createAction(
   '[Ot GetAll] GET Ot Success Abiertas',
   props<{ ot: Data.OT[] }>()

@@ -39,6 +39,19 @@ export class OtEffects {
     private router: Router
   ) {}
 
+  getOTsEjecucion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getOtEjecucion),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([data, profile]) =>
+        this.otService.getOTsEjecucion(profile.id, data.filtro_tipo).pipe(
+          map((ots: Data.OT[]) => otActions.getOtSuccessEjecucion({ ot: ots })),
+          catchError(error => of(otActions.getOtError({ error })))
+        )
+      )
+    )
+  );
+
   getOTsAbiertas$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getOtAbiertas),

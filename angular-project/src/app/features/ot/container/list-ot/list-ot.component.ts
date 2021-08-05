@@ -22,6 +22,7 @@ import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOtComponent implements OnInit, OnDestroy {
+  public itemsEjecucion$: Observable<OT[]>;
   public itemsAbiertas$: Observable<OT[]>;
   public itemsCerradas$: Observable<OT[]>;
 
@@ -456,6 +457,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.tipoOT = 'OT';
     this.selectedIndex = 0;
     this.selectedOTs = 'ABIERTAS';
+
+    this.itemsEjecucion$ = this.otFacade.getOtEjecucion$().pipe(
+      tap(ots => {
+        this.closeAssignCoordinatorModal();
+        this.closeAssignTrabajadorModal();
+      })
+    );
 
     this.itemsAbiertas$ = this.otFacade.getOtAbiertas$().pipe(
       tap(ots => {
