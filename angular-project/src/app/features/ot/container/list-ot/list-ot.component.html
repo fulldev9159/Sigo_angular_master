@@ -57,8 +57,8 @@
   <br>
 
   <p-tabView (onChange)="onChange($event)" [activeIndex]="selectedIndex">
-    <p-tabPanel header="Pendiente" id="pendiente" tooltip="Listar OTs pendiente" [selected]="true">
-      <app-table [config]="configTable" [items]="(itemsPendiente$ | async)"></app-table>
+    <p-tabPanel header="Ejecucion" id="Ejecucion" tooltip="Listar OTs Ejecucion" [selected]="true">
+      <app-table [config]="configTable" [items]="(itemsEjecucion$ | async)"></app-table>
     </p-tabPanel>
     <p-tabPanel header="Abiertas" id="abiertas" tooltip="Listar OTs abiertas">
       <app-table [config]="configTable" [items]="(itemsAbiertas$ | async)"></app-table>

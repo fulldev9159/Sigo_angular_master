@@ -39,23 +39,15 @@ export class OtEffects {
     private router: Router
   ) {}
 
-  getOTsPendiente$ = createEffect(() =>
+  getOTsEjecucion$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(otActions.getOtPendiente),
+      ofType(otActions.getOtEjecucion),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
       concatMap(([data, profile]) =>
-        this.otService
-          .getOTsPendiente(
-            profile.id,
-            data.filtro_propietario,
-            data.filtro_tipo
-          )
-          .pipe(
-            map((ots: Data.OT[]) =>
-              otActions.getOtSuccessPendiente({ ot: ots })
-            ),
-            catchError(error => of(otActions.getOtError({ error })))
-          )
+        this.otService.getOTsEjecucion(profile.id, data.filtro_tipo).pipe(
+          map((ots: Data.OT[]) => otActions.getOtSuccessEjecucion({ ot: ots })),
+          catchError(error => of(otActions.getOtError({ error })))
+        )
       )
     )
   );

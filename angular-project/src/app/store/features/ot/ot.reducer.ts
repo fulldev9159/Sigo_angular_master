@@ -11,7 +11,7 @@ export interface StateOt {
 
   selectedOT: Data.OT;
 
-  itemsPendiente: Data.OT[];
+  itemsEjecucion: Data.OT[];
   itemsAbiertas: Data.OT[];
   itemsCerradas: Data.OT[];
   planes: OTModel.Plan[];
@@ -35,7 +35,7 @@ export const initialStateOt: StateOt = {
 
   selectedOT: null,
 
-  itemsPendiente: [],
+  itemsEjecucion: [],
   itemsAbiertas: [
     // {
     //   id: 123,
@@ -48,7 +48,7 @@ export const initialStateOt: StateOt = {
     //   usuario_nombre: 'Carlos Cifuentes',
     //   sesion_sce: 'AF4GSHJ46G3GSVB',
     //   estado_otdesc: 'ACTIVA',
-    //   etapa_otdesc: 'Pendiente de Autorización por Adm. Contrato',
+    //   etapa_otdesc: 'Ejecucion de Autorización por Adm. Contrato',
     //   acciones: [
     //     {
     //       id: 8,
@@ -84,7 +84,7 @@ export const reducerOt = createReducer(
     filtro_tipo,
   })),
   on(
-    OtActions.getOtPendiente,
+    OtActions.getOtEjecucion,
     (state, { filtro_propietario, filtro_tipo }) => ({
       ...state,
       filtro_propietario,
@@ -96,9 +96,9 @@ export const reducerOt = createReducer(
     filtro_propietario,
     filtro_tipo,
   })),
-  on(OtActions.getOtSuccessPendiente, (state, payload) => ({
+  on(OtActions.getOtSuccessEjecucion, (state, payload) => ({
     ...state,
-    itemsPendiente: payload.ot,
+    itemsEjecucion: payload.ot,
   })),
   on(OtActions.getOtSuccessAbiertas, (state, payload) => ({
     ...state,

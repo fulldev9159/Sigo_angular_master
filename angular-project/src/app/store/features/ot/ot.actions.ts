@@ -4,8 +4,8 @@ import * as Data from '@data';
 
 // OT LIST
 
-export const getOtPendiente = createAction(
-  '[Ot Get Pendiente] GET Ot Pendiente',
+export const getOtEjecucion = createAction(
+  '[Ot Get Ejecucion] GET Ot Ejecucion',
   props<{
     filtro_propietario: string;
     filtro_tipo: string;
@@ -28,8 +28,8 @@ export const getOtCerradas = createAction(
   }>()
 );
 
-export const getOtSuccessPendiente = createAction(
-  '[Ot GetAll] GET Ot Success Pendiente',
+export const getOtSuccessEjecucion = createAction(
+  '[Ot GetAll] GET Ot Success Ejecucion',
   props<{ ot: Data.OT[] }>()
 );
 export const getOtSuccessAbiertas = createAction(

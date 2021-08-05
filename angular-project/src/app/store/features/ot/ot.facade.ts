@@ -15,7 +15,7 @@ export class OtFacade {
   // OT
   public getOts({ filtro_propietario, filtro_tipo }): void {
     this.store.dispatch(
-      otActions.getOtPendiente({ filtro_propietario, filtro_tipo })
+      otActions.getOtEjecucion({ filtro_propietario, filtro_tipo })
     );
     this.store.dispatch(
       otActions.getOtAbiertas({ filtro_propietario, filtro_tipo })
@@ -25,8 +25,8 @@ export class OtFacade {
     );
   }
 
-  public getOtPendiente$(): Observable<Data.OT[]> {
-    return this.store.select(otSelectors.getOtPendiente);
+  public getOtEjecucion$(): Observable<Data.OT[]> {
+    return this.store.select(otSelectors.getOtEjecucion);
   }
 
   public getOtAbiertas$(): Observable<Data.OT[]> {
