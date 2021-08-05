@@ -3,6 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -11,6 +12,10 @@ import { map, tap, filter, withLatestFrom } from 'rxjs/operators';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
+import { TableComponent } from '@uiOT/table/table.component';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
+interface CartItem extends CubModel.Service {}
 
 @Component({
   selector: 'app-form-cub2-container',
@@ -26,7 +31,16 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   proveedores$: Observable<CubModel.Provider[]> = of([]);
   regiones$: Observable<CubModel.Region[]> = of([]);
   tiposServicio$: Observable<CubModel.TypeService[]> = of([]);
-  servicios$: Observable<CubModel.Service[]> = of();
+  servicios$: Observable<CubModel.Service[]> = of([]);
+
+  lpusCarrito: CartItem[] = [];
+  @ViewChild('tableLpus', {
+    read: TableComponent,
+    static: false,
+  })
+  tableLpus: TableComponent;
+  total = 0;
+  currency = '';
 
   formControls = {
     // cubicacion_id: null,
@@ -45,6 +59,123 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   formCubicacion: FormGroup = new FormGroup(this.formControls);
 
+  tableConfiguration = {
+    header: true,
+    headerConfig: {
+      title: '',
+      searchText: 'Filtrar...',
+      paginator: false,
+      actionsType: 'Buttons',
+    },
+    body: {
+      headers: [
+        {
+          field: 'Servicio LPU',
+          type: 'TEXT',
+          sort: 'lpu_nombre',
+          header: 'lpu_nombre',
+          width: '33%',
+          editable: false,
+        },
+        {
+          field: 'Región',
+          type: 'TEXT',
+          header: 'region',
+          width: '10%',
+          editable: false,
+        },
+        {
+          field: 'Tipo Servicio',
+          type: 'TEXT-TITLECASE',
+          sort: 'tipo_servicio',
+          header: 'tipo_servicio',
+          editable: false,
+        },
+        {
+          field: 'Cantidad	',
+          type: 'INPUTNUMBER',
+          sort: 'cantidad',
+          header: 'cantidad',
+          editable: true,
+          onchange: (event: Event, item: CubModel.Service) => {
+            console.log('form control carrito change', event, item);
+            // this.tableValid = this.tableLpus.valid;
+            // this.CantidadSelected.emit({ event, item });
+          },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            this.nonZero,
+            Validators.maxLength(6),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.nonzero) {
+              return 'No son permitidos valores inferiores a 1';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
+          },
+        },
+        {
+          field: 'Unidad	',
+          type: 'TEXT',
+          sort: 'lpu_unidad_nombre',
+          header: 'lpu_unidad_nombre',
+          editable: false,
+        },
+        {
+          field: 'Tipo Moneda	',
+          type: 'TEXT',
+          sort: 'tipo_moneda_cod',
+          header: 'tipo_moneda_cod',
+          editable: false,
+        },
+        {
+          field: 'Precio',
+          type: 'NUMBER',
+          sort: 'lpu_precio',
+          header: 'lpu_precio',
+          editable: false,
+        },
+        {
+          field: 'Subtotal	',
+          type: 'NUMBER',
+          sort: 'lpu_subtotal',
+          header: 'lpu_subtotal',
+        },
+        {
+          field: null,
+          type: 'ACTIONS',
+          sort: null,
+          header: null,
+          editable: false,
+        },
+      ],
+      sort: ['lpu_nombre', 'tipo_servicio', 'lpu_precio'],
+      actions: [
+        {
+          icon: 'p-button-icon pi pi-trash',
+          class: 'p-button-rounded p-button-danger',
+          onClick: (event: Event, item: CubModel.Service) => {
+            console.log('borrar carrito', event, item);
+            // this.tableValid = this.tableLpus.valid;
+            // this.BorrarLPUCarrito.emit({ event, item });
+          },
+        },
+      ],
+    },
+  }; // tslint:disable-line
+
+  nonZero(control: FormControl): any {
+    const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
+    return value < 1 ? { nonzero: true } : null;
+  }
+
   noWhitespace(control: FormControl): any {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
@@ -61,7 +192,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     return 'Este campo es inválido';
   }; // tslint:disable-line
 
-  constructor(private cubageFacade: CubicacionFacade) {}
+  constructor(
+    private cubageFacade: CubicacionFacade,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.cubageFacade.resetData();
@@ -260,6 +395,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.cubageFacade.resetData();
+    this.router.navigate(['app/cubicacion/list-cub']);
   }
 
   // acciones del autocompletado con el campo 'nombre'

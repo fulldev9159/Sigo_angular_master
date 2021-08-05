@@ -6,7 +6,7 @@
     </div>
 
     <div class="col">
-      <button [routerLink]="['/app/cubicacion/list-cub']" pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
+      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
     </div>
 
     <div class="col-12">
@@ -117,17 +117,39 @@
                     </div>
                   </ng-template>
                 </p-listbox>
-
-                <!--
-                <p-listbox [metaKeySelection]="false" [options]="Services" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpusSelectedDummy($event)" [listStyle]="{'max-height':'203px'}">
-                  <ng-template let-data pTemplate="item">
-                    <div class="country-item">
-                      <div>{{ data.lpu_nombre }}</div>
-                    </div>
-                  </ng-template>
-                </p-listbox>
-                -->
               </div>
+            </div>
+
+            <div class="col-12">
+              <hr>
+              {{ lpusCarrito }}
+              <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
+
+              <div id="total">
+                <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
+              </div>
+
+              <hr>
+
+              <!--
+    <ng-container *ngIf="hasLPUWithZeroQuantity">
+      <div class="text-right">
+        <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
+      </div>
+    </ng-container>
+    -->
+            </div>
+
+            <div class="col-xs-12 col-md-12 text-right button-guardar-cubicacion">
+              <ng-container *ngIf="lpusCarrito.length === 0">
+                <span>
+                  <p-message severity="info" text="Al menos 1 LPU debe ser ingresada"></p-message>&nbsp;
+                </span>
+              </ng-container>
+              <button (click)="goBack()" class="btn btn-light mr-2">Cancelar</button>
+              <!--
+              <button (click)="saveAction();" [disabled]="!(formCubicacion.valid && lpusCarrito.length > 0 && !hasLPUWithZeroQuantity && tableValid)" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
+              -->
             </div>
           </div>
         </ng-container>
