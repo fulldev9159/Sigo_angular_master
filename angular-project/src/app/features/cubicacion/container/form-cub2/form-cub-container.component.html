@@ -15,79 +15,98 @@
 
     <div class="col">
       <app-card [classCardHeader]="'bg-secondary text-white'">
-        <ng-container card-header-title>&nbsp;</ng-container>
+        <ng-container card-header-title> </ng-container>
         <ng-container card-body>
           <div [formGroup]="formCubicacion" class="row" id="box">
-            <div class="col-12 field-box">
-              <label for="">Nombre</label>
-              <div class="ng-autocomplete">
-                <ng-autocomplete formControlName="nombre" [data]="autoSuggestItems$ | async" [searchKeyword]="'name'" (selected)="nameSelected($event)" (inputChanged)="nameChanged($event)" (inputFocused)="nameFocused($event)" (inputCleared)="nameCleared($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"></ng-autocomplete>
+            <div class="col-xs-12 col-md-4">
+              <div class="row">
+                <div class="col-12 field-box">
+                  <label for="">Nombre</label>
+                  <div class="ng-autocomplete">
+                    <ng-autocomplete formControlName="nombre" [data]="autoSuggestItems$ | async" [searchKeyword]="'name'" (selected)="nameSelected($event)" (inputChanged)="nameChanged($event)" (inputFocused)="nameFocused($event)" (inputCleared)="nameCleared($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"></ng-autocomplete>
 
-                <ng-template #itemTemplate let-item>
-                  <a [innerHTML]="item.name"></a>
-                </ng-template>
+                    <ng-template #itemTemplate let-item>
+                      <a [innerHTML]="item.name"></a>
+                    </ng-template>
 
-                <ng-template #notFoundTemplate let-notFound>
-                  <div [innerHTML]="notFound"></div>
-                </ng-template>
-              </div>
+                    <ng-template #notFoundTemplate let-notFound>
+                      <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                  </div>
 
-              <ng-container *ngIf="formCubicacion.controls['nombre'] as control">
-                <ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
-                  <ng-container *ngIf="control.errors.required; else whitespace">
-                    <p-message severity="error" text="Este campo es requerido"></p-message>
-                  </ng-container>
+                  <ng-container *ngIf="formCubicacion.controls['nombre'] as control">
+                    <ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
+                      <ng-container *ngIf="control.errors.required; else whitespace">
+                        <p-message severity="error" text="Este campo es requerido"></p-message>
+                      </ng-container>
 
-                  <ng-template #whitespace>
-                    <ng-container *ngIf="control.errors.whitespace">
-                      <p-message severity="error" text="Este campo es requerido"></p-message>
+                      <ng-template #whitespace>
+                        <ng-container *ngIf="control.errors.whitespace">
+                          <p-message severity="error" text="Este campo es requerido"></p-message>
+                        </ng-container>
+                      </ng-template>
+
+                      <ng-container *ngIf="control.errors.maxlength">
+                        <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
+                      </ng-container>
                     </ng-container>
-                  </ng-template>
-
-                  <ng-container *ngIf="control.errors.maxlength">
-                    <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
                   </ng-container>
-                </ng-container>
-              </ng-container>
+                </div>
+
+                <div class="col-12 field-box">
+                  <app-select [control]="formControls.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione contrato</option>
+                      <ng-container *ngFor="let contratoMarco of contratosMarcos$ | async">
+                        <option [value]="contratoMarco.id">
+                          {{ contratoMarco.nombre }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+
+                <div class="col-12 field-box">
+                  <app-select [control]="formControls.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione proveedor</option>
+                      <ng-container *ngFor="let proveedor of proveedores$ | async">
+                        <option [value]="providerKey(proveedor)">
+                          {{ proveedor.nombre }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+
+                <div class="col-12 field-box">
+                  <app-select [control]="formControls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione región</option>
+                      <ng-container *ngFor="let region of regiones$ | async">
+                        <option [value]="region.id">
+                          {{ region.nombre }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+              </div>
             </div>
 
-            <div class="col-12 field-box">
-              <app-select [control]="formControls.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
-                <ng-container options>
-                  <option value="null" selected disabled>Seleccione contrato</option>
-                  <ng-container *ngFor="let contratoMarco of contratosMarcos$ | async">
-                    <option [value]="contratoMarco.id">
-                      {{ contratoMarco.nombre }}
-                    </option>
+            <div class="col-xs-12 col-md-8">
+              <div class="col-12 field-box">
+                <app-select [control]="formControls.tipo_servicio_id" label="Tipo Servicio" [errorMessageFn]="errorMessageFn">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un tipo de servicio</option>
+                    <ng-container *ngFor="let tipoServicio of tiposServicio$ | async">
+                      <option [value]="tipoServicio.id">
+                        {{ tipoServicio.nombre }}
+                      </option>
+                    </ng-container>
                   </ng-container>
-                </ng-container>
-              </app-select>
-            </div>
-
-            <div class="col-12 field-box">
-              <app-select [control]="formControls.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
-                <ng-container options>
-                  <option value="null" selected disabled>Seleccione proveedor</option>
-                  <ng-container *ngFor="let proveedor of proveedores$ | async">
-                    <option [value]="providerKey(proveedor)">
-                      {{ proveedor.nombre }}
-                    </option>
-                  </ng-container>
-                </ng-container>
-              </app-select>
-            </div>
-
-            <div class="col-12 field-box">
-              <app-select [control]="formControls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
-                <ng-container options>
-                  <option value="null" selected disabled>Seleccione región</option>
-                  <ng-container *ngFor="let region of regiones$ | async">
-                    <option [value]="region.id">
-                      {{ region.nombre }}
-                    </option>
-                  </ng-container>
-                </ng-container>
-              </app-select>
+                </app-select>
+              </div>
             </div>
           </div>
         </ng-container>
