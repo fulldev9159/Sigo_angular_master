@@ -8,7 +8,7 @@ import {
 import { Subject } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 import { Config } from './config';
 
@@ -53,7 +53,7 @@ export class TableComponent implements OnInit, OnDestroy {
       this.subscription.add(
         this.form
           .get(controlName)
-          .valueChanges.pipe(distinctUntilChanged(), debounceTime(800))
+          .valueChanges.pipe(distinctUntilChanged())
           .subscribe(value => {
             const [rowIndex, header] = this.extractControlNameElements(
               controlName

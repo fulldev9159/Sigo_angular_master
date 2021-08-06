@@ -8,7 +8,14 @@ import {
 } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subject, Observable, Subscription, of, combineLatest } from 'rxjs';
+import {
+  BehaviorSubject,
+  Subject,
+  Observable,
+  Subscription,
+  of,
+  combineLatest,
+} from 'rxjs';
 import {
   map,
   tap,
@@ -16,6 +23,7 @@ import {
   withLatestFrom,
   take,
   takeUntil,
+  debounceTime,
 } from 'rxjs/operators';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
@@ -36,6 +44,11 @@ interface CartItem extends CubModel.Service {}
 export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   initializationFinished$: Subject<boolean> = new Subject();
+  updatingCantidad = false;
+  cantidadDebouncer$ = new BehaviorSubject<{
+    value: string;
+    item: CartItem;
+  }>(null);
 
   invalidCubicacionIDError$: Observable<Error> = of(null);
   selectedCubicacion$: Observable<CubicacionWithLpu>;
@@ -146,7 +159,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           editable: true,
           onchange: (event: any, item: CartItem) => {
             this.tableValid = this.tableLpus.valid;
-            this.cantidadChanged(event.target.value, item);
+            this.updatingCantidad = true;
+            this.cantidadDebouncer$.next({
+              value: event.target.value,
+              item,
+            });
           },
           validators: [
             Validators.required,
@@ -337,6 +354,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.initProveedorFormControlEvent();
     this.initRegionFormControlEvent();
     this.initTipoServicioFormControlEvent();
+    this.initLpuCarritoEvent();
   }
 
   initContratoMarcoFormControlEvent(): void {
@@ -443,6 +461,17 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             });
           }
         })
+    );
+  }
+
+  initLpuCarritoEvent(): void {
+    this.subscription.add(
+      this.cantidadDebouncer$
+        .pipe(
+          filter(target => target !== null),
+          debounceTime(800)
+        )
+        .subscribe(({ value, item }) => this.cantidadChanged(value, item))
     );
   }
 
@@ -594,6 +623,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
     this.initializationFinished$.next(true);
     this.initializationFinished$.complete();
+    this.cantidadDebouncer$.complete();
   }
 
   goBack(): void {
@@ -701,6 +731,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       return x;
     });
 
+    this.updatingCantidad = false;
     this.updateLpusTableInformation();
     this.detector.detectChanges();
   }
@@ -767,7 +798,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       this.formCubicacion.valid &&
       this.lpusCarrito.length > 0 &&
       !this.hasLPUWithZeroQuantity &&
-      this.tableValid
+      this.tableValid &&
+      !this.updatingCantidad
     );
   }
 
