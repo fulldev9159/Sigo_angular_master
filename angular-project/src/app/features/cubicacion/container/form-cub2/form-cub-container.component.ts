@@ -15,6 +15,7 @@ import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponent } from '@uiOT/table/table.component';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
+// tslint:disable-next-line:no-empty-interface
 interface CartItem extends CubModel.Service {}
 
 @Component({
