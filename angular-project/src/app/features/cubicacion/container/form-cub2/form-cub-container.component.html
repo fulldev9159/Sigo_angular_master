@@ -1,9 +1,36 @@
 <div class="container-fluid" style="background: #f0f8fb">
-  <div class="row">
-    <div class="col">
-      <h1 class="mt-4">Ingreso de Cubicación</h1>
-      <span>Formulario de creación de una cubicación</span>
+  <ng-container *ngIf="incompleteCubicacionError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsIncompleteCubicacionError" [closable]="true"></p-messages>
     </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedCubicacionError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsGetCubicacionError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="invalidCubicacionIDError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsInvalidCubicacionIDError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
+  <div class="row">
+    <ng-container *ngIf="selectedCubicacion$ | async as cubicacion; else newCubage">
+      <div class="col">
+        <h1 class="mt-4">Edición de Cubicación</h1>
+        <span>{{ cubicacion.nombre }}</span>
+      </div>
+    </ng-container>
+
+    <ng-template #newCubage>
+      <div class="col">
+        <h1 class="mt-4">Ingreso de Cubicación</h1>
+        <span>Formulario de creación de una cubicación</span>
+      </div>
+    </ng-template>
 
     <div class="col">
       <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>

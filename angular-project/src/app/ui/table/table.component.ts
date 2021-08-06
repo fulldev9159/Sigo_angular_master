@@ -53,7 +53,7 @@ export class TableComponent implements OnInit, OnDestroy {
       this.subscription.add(
         this.form
           .get(controlName)
-          .valueChanges.pipe(distinctUntilChanged()) // , debounceTime(800))
+          .valueChanges.pipe(distinctUntilChanged(), debounceTime(800))
           .subscribe(value => {
             const [rowIndex, header] = this.extractControlNameElements(
               controlName
@@ -68,6 +68,8 @@ export class TableComponent implements OnInit, OnDestroy {
               column.onchange(
                 {
                   target: {
+                    rowIndex,
+                    controlName,
                     value,
                   },
                 },

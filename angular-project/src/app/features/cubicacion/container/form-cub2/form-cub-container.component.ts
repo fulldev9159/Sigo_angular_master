@@ -4,16 +4,25 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ChangeDetectorRef,
 } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable, Subscription, of, combineLatest } from 'rxjs';
-import { map, tap, filter, withLatestFrom, take } from 'rxjs/operators';
+import { Subject, Observable, Subscription, of, combineLatest } from 'rxjs';
+import {
+  map,
+  tap,
+  filter,
+  withLatestFrom,
+  take,
+  takeUntil,
+} from 'rxjs/operators';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponent } from '@uiOT/table/table.component';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { CubicacionWithLpu } from '@data';
 
 // tslint:disable-next-line:no-empty-interface
 interface CartItem extends CubModel.Service {}
@@ -26,6 +35,38 @@ interface CartItem extends CubModel.Service {}
 })
 export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  initializationFinished$: Subject<boolean> = new Subject();
+
+  invalidCubicacionIDError$: Observable<Error> = of(null);
+  selectedCubicacion$: Observable<CubicacionWithLpu>;
+  selectedCubicacion: CubicacionWithLpu;
+  selectedCubicacionError$: Observable<Error> = of(null);
+  incompleteCubicacionError$: Observable<Error> = of(null);
+
+  msgsGetCubicacionError = [
+    {
+      severity: 'error',
+      summary: 'ERROR',
+      detail: 'La cubicación solicitada no existe',
+    },
+  ];
+
+  msgsInvalidCubicacionIDError = [
+    {
+      severity: 'error',
+      summary: 'ERROR',
+      detail: 'El ID ingresado debe ser númerico superior a 0',
+    },
+  ];
+
+  msgsIncompleteCubicacionError = [
+    {
+      severity: 'warn',
+      summary: 'ATENCION',
+      detail:
+        'La información asociada a esta cubicación no pudo ser cargada completamente',
+    },
+  ];
 
   autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of([]);
   contratosMarcos$: Observable<CubModel.ContractMarco[]> = of([]);
@@ -199,7 +240,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   constructor(
     private cubageFacade: CubicacionFacade,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -208,6 +250,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.initObservables();
     this.initFormControlsEvents();
     this.initData();
+
+    this.checkCubageEditionFromParams();
+    this.initEditionData();
   }
 
   initObservables(): void {
@@ -231,6 +276,16 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       map(servicios => servicios || []),
       map(servicios => (this.servicios = servicios))
     );
+
+    // Edición
+    this.selectedCubicacion$ = this.cubageFacade
+      .getSingleCubicacion$()
+      .pipe(
+        filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
+      );
+    this.selectedCubicacionError$ = this.cubageFacade
+      .getSingleCubicacionError$()
+      .pipe(filter(error => error !== null && error !== undefined));
   }
 
   resetProveedoresFormControl(): void {
@@ -289,12 +344,13 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       this.formCubicacion
         .get('contrato_marco_id')
         .valueChanges.subscribe(contrato_marco_id => {
+          this.resetProveedoresFormControl();
           if (contrato_marco_id !== null && contrato_marco_id !== undefined) {
             this.cubageFacade.getSubContractedProvidersAction({
               contrato_marco_id: +contrato_marco_id,
             });
           } else {
-            this.resetProveedoresFormControl();
+            this.checkProveedoresAndEnable([]);
           }
           this.resetLpusCarrito();
         })
@@ -304,6 +360,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   initProveedorFormControlEvent(): void {
     this.subscription.add(
       this.formCubicacion.get('subcontrato_id').valueChanges.subscribe(key => {
+        this.resetRegionesFormControl();
         if (key !== undefined && key !== null) {
           const { subcontratosID, proveedorID } = this.extractProviderKeys(key);
           this.formCubicacion.get('proveedor_id').setValue(proveedorID);
@@ -312,7 +369,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             subcontrato_id: subcontratosID,
           });
         } else {
-          this.resetRegionesFormControl();
+          this.checkRegionesAndEnable([]);
         }
         this.resetLpusCarrito();
       })
@@ -333,6 +390,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           )
         )
         .subscribe(([region_id, key]) => {
+          this.resetTiposServicioFormControl();
           if (region_id !== undefined && region_id !== null) {
             const { subcontratosID, proveedorID } = this.extractProviderKeys(
               key
@@ -343,7 +401,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
               region_id: +region_id,
             });
           } else {
-            this.resetTiposServicioFormControl();
+            this.checkTiposServicioAndEnable([]);
           }
           this.resetLpusCarrito();
         })
@@ -371,6 +429,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           )
         )
         .subscribe(([tipo_servicio_id, key, region_id]) => {
+          this.resetSelectedLpusFormControl([]);
+          this.cubageFacade.resetServices();
           if (tipo_servicio_id !== null && tipo_servicio_id !== undefined) {
             const { subcontratosID, proveedorID } = this.extractProviderKeys(
               key
@@ -381,9 +441,6 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
               region_id: +region_id,
               tipo_servicio_id: +tipo_servicio_id,
             });
-          } else {
-            this.resetSelectedLpusFormControl([]);
-            this.cubageFacade.resetServices();
           }
         })
     );
@@ -400,8 +457,143 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.cubageFacade.getContractMarcoAction();
   }
 
+  checkCubageEditionFromParams(): void {
+    this.subscription.add(
+      this.route.paramMap.subscribe(params => {
+        const id = params.get('id');
+        if (id !== null) {
+          const cubicacionID = +params.get('id');
+          if (isNaN(cubicacionID)) {
+            this.invalidCubicacionIDError$ = of(new Error('invalid cubage id'));
+          } else {
+            this.cubageFacade.getSingleCubicacion(cubicacionID);
+          }
+        }
+      })
+    );
+  }
+
+  initEditionData(): void {
+    this.subscription.add(
+      this.selectedCubicacion$
+        .pipe(
+          takeUntil(this.initializationFinished$),
+          withLatestFrom(this.contratosMarcos$)
+        )
+        .subscribe(([cubicacion, contratos]) => {
+          this.formCubicacion.get('nombre').setValue(cubicacion.nombre);
+
+          const contrato = contratos.find(
+            con => con.id === cubicacion.contrato_marco_id
+          );
+
+          if (contrato) {
+            this.formCubicacion.get('contrato_marco_id').setValue(contrato.id);
+          } else {
+            this.initializationFinished$.next(true);
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.proveedores$
+        .pipe(
+          takeUntil(this.initializationFinished$),
+          withLatestFrom(this.selectedCubicacion$)
+        )
+        .subscribe(([proveedores, cubicacion]) => {
+          const proveedor = proveedores.find(
+            prov => prov.id === cubicacion.proveedor_id
+          );
+
+          if (proveedor) {
+            const key = this.providerKey(proveedor);
+
+            this.formCubicacion.get('subcontrato_id').setValue(key);
+          } else {
+            this.initializationFinished$.next(true);
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.regiones$
+        .pipe(
+          takeUntil(this.initializationFinished$),
+          withLatestFrom(this.selectedCubicacion$)
+        )
+        .subscribe(([regiones, cubicacion]) => {
+          const region = regiones.find(reg => reg.id === cubicacion.region_id);
+
+          this.formCubicacion.get('region_id').setValue(region.id);
+
+          if (region) {
+            setTimeout(() => {
+              this.lpusCarrito = cubicacion.lpus.map(lpu => ({
+                cantidad: lpu.lpu_cantidad,
+                lpu_id: lpu.lpu_id,
+                lpu_nombre: lpu.lpu_nombre,
+                lpu_numero_producto: '', // TODO: aparentemente no se usa
+                lpu_precio: lpu.lpu_precio,
+                lpu_subtotal: lpu.lpu_subtotal,
+                lpu_unidad_codigo: lpu.tipo_unidad_codigo,
+                lpu_unidad_nombre: lpu.tipo_unidad_nombre,
+                region: region.codigo,
+                tipo_moneda_cod: lpu.tipo_moneda_cod,
+                tipo_moneda_id: lpu.tipo_moneda_id,
+                tipo_servicio: lpu.tipo_servicio_nombre,
+              }));
+
+              this.updateLpusTableInformation();
+              this.initializationFinished$.next(true);
+              this.detector.detectChanges();
+            }, 1000);
+          } else {
+            this.initializationFinished$.next(true);
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.servicios$.subscribe(servicios => {
+        const lpusInCartIndex = this.lpusCarrito.reduce((ac, lpu) => {
+          ac[lpu.lpu_id] = true;
+          return ac;
+        }, {});
+
+        const { lpus } = this.formCubicacion.getRawValue();
+
+        const lpusInFormControl = (lpus || []).reduce((ac, lpu) => {
+          ac[lpu.lpu_id] = true;
+          return ac;
+        }, {});
+
+        const servicesToBeSelected = servicios.filter(
+          service =>
+            lpusInCartIndex[service.lpu_id] !== undefined &&
+            lpusInFormControl[service.lpu_id] === undefined
+        );
+
+        this.formCubicacion
+          .get('lpus')
+          .setValue([...lpus, ...servicesToBeSelected]);
+      })
+    );
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.initializationFinished$.next(true);
+    this.initializationFinished$.complete();
   }
 
   goBack(): void {
@@ -425,7 +617,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   providerKey(provider: CubModel.Provider): string {
-    return `${provider.subcontrato_id.map(sID => sID + '').join(',')}-${
+    return `${(provider.subcontrato_id || []).map(sID => sID + '').join(',')}-${
       provider.id
     }`;
   }
@@ -510,6 +702,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     });
 
     this.updateLpusTableInformation();
+    this.detector.detectChanges();
   }
 
   deleteCartItem(item: CartItem): void {
@@ -597,22 +790,22 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         })),
       };
 
-      this.cubageFacade.postCubicacion(nuevaCubicacion);
-
-      // TODO: falta edicion
-      // this.subscription.add(
-      //   this.cubageFacade.getSingleCubicacion$().subscribe(cubicacion => {
-      //     if (cubicacion) {
-      //       const editCubicacion = {
-      //         ...nuevaCubicacion,
-      //         cubicacion_id: cubicacion.id,
-      //       };
-      //       this.cubageFacade.editCubicacion(editCubicacion);
-      //     } else {
-      //       this.cubageFacade.postCubicacion(nuevaCubicacion);
-      //     }
-      //   })
-      // );
+      this.subscription.add(
+        this.cubageFacade
+          .getSingleCubicacion$()
+          .pipe(take(1))
+          .subscribe(cubicacion => {
+            if (cubicacion) {
+              const editCubicacion = {
+                ...nuevaCubicacion,
+                cubicacion_id: cubicacion.id,
+              };
+              this.cubageFacade.editCubicacion(editCubicacion);
+            } else {
+              this.cubageFacade.postCubicacion(nuevaCubicacion);
+            }
+          })
+      );
     }
   }
 }

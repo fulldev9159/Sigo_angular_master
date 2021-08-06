@@ -24,9 +24,33 @@ export const routes: Routes = [
           state: 'list-cub',
         },
       },
+      // {
+      //   path: 'form-cub',
+      //   component: FormCubContainerComponent,
+      //   canActivate: [NgxPermissionsGuard],
+      //   data: {
+      //     permissions: {
+      //       only: 'CUBICACION_CREAR',
+      //       redirectTo: '/app/ot/list-ot',
+      //     },
+      //     state: 'form-cub',
+      //   },
+      // },
+      // {
+      //   path: 'form-cub/:id',
+      //   component: FormCubContainerComponent,
+      //   canActivate: [NgxPermissionsGuard],
+      //   data: {
+      //     permissions: {
+      //       only: 'CUBICACION_EDITAR',
+      //       redirectTo: '/app/ot/list-ot',
+      //     },
+      //     state: 'form-cub',
+      //   },
+      // },
       {
         path: 'form-cub',
-        component: FormCubContainerComponent,
+        component: FormCub2ContainerComponent,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
@@ -38,7 +62,7 @@ export const routes: Routes = [
       },
       {
         path: 'form-cub/:id',
-        component: FormCubContainerComponent,
+        component: FormCub2ContainerComponent,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
@@ -46,30 +70,6 @@ export const routes: Routes = [
             redirectTo: '/app/ot/list-ot',
           },
           state: 'form-cub',
-        },
-      },
-      {
-        path: 'form-cub2',
-        component: FormCub2ContainerComponent,
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          permissions: {
-            only: 'CUBICACION_CREAR',
-            redirectTo: '/app/ot/list-ot',
-          },
-          state: 'form-cub2',
-        },
-      },
-      {
-        path: 'form-cub2/:id',
-        component: FormCub2ContainerComponent,
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          permissions: {
-            only: 'CUBICACION_EDITAR',
-            redirectTo: '/app/ot/list-ot',
-          },
-          state: 'form-cub2',
         },
       },
     ],
