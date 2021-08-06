@@ -158,7 +158,6 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           header: 'cantidad',
           editable: true,
           onchange: (event: any, item: CartItem) => {
-            this.tableValid = this.tableLpus.valid;
             this.updatingCantidad = true;
             this.cantidadDebouncer$.next({
               value: event.target.value,
@@ -225,7 +224,6 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
           onClick: (event: Event, item: CubModel.Service) => {
-            this.tableValid = this.tableLpus.valid;
             this.deleteCartItem(item);
           },
         },
@@ -731,6 +729,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       return x;
     });
 
+    this.tableValid = this.tableLpus.valid;
     this.updatingCantidad = false;
     this.updateLpusTableInformation();
     this.detector.detectChanges();
@@ -749,6 +748,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           .value.filter(lpu => lpu.lpu_id !== item.lpu_id)
       );
 
+    this.tableValid = this.tableLpus.valid;
     this.updateLpusTableInformation();
   }
 
