@@ -1,0 +1,181 @@
+<div class="container-fluid" style="background: #f0f8fb">
+  <ng-container *ngIf="incompleteCubicacionError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsIncompleteCubicacionError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedCubicacionError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsGetCubicacionError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="invalidCubicacionIDError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsInvalidCubicacionIDError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
+  <div class="row">
+    <ng-container *ngIf="selectedCubicacion$ | async as cubicacion; else newCubage">
+      <div class="col">
+        <h1 class="mt-4">Edición de Cubicación</h1>
+        <span>{{ cubicacion.nombre }}</span>
+      </div>
+    </ng-container>
+
+    <ng-template #newCubage>
+      <div class="col">
+        <h1 class="mt-4">Ingreso de Cubicación</h1>
+        <span>Formulario de creación de una cubicación</span>
+      </div>
+    </ng-template>
+
+    <div class="col">
+      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
+    </div>
+
+    <div class="col-12">
+      <hr>
+    </div>
+
+    <div class="col">
+      <app-card [classCardHeader]="'bg-secondary text-white'">
+        <ng-container card-header-title> </ng-container>
+        <ng-container card-body>
+          <div [formGroup]="formCubicacion" class="row" id="box">
+            <div class="col-xs-12 col-md-4">
+              <div class="row">
+                <div class="col-12 field-box">
+                  <label for="">Nombre</label>
+                  <div class="ng-autocomplete">
+                    <ng-autocomplete formControlName="nombre" [data]="autoSuggestItems$ | async" [searchKeyword]="'name'" (selected)="nameSelected($event)" (inputChanged)="nameChanged($event)" (inputFocused)="nameFocused($event)" (inputCleared)="nameCleared($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"></ng-autocomplete>
+
+                    <ng-template #itemTemplate let-item>
+                      <a [innerHTML]="item.name"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                      <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                  </div>
+
+                  <ng-container *ngIf="formCubicacion.controls['nombre'] as control">
+                    <ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
+                      <ng-container *ngIf="control.errors.required; else whitespace">
+                        <p-message severity="error" text="Este campo es requerido"></p-message>
+                      </ng-container>
+
+                      <ng-template #whitespace>
+                        <ng-container *ngIf="control.errors.whitespace">
+                          <p-message severity="error" text="Este campo es requerido"></p-message>
+                        </ng-container>
+                      </ng-template>
+
+                      <ng-container *ngIf="control.errors.maxlength">
+                        <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                </div>
+
+                <div class="col-12 field-box">
+                  <app-select [control]="formControls.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione contrato</option>
+                      <ng-container *ngFor="let contratoMarco of contratosMarcos$ | async">
+                        <option [value]="contratoMarco.id">
+                          {{ contratoMarco.nombre }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+
+                <div class="col-12 field-box">
+                  <app-select [control]="formControls.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione proveedor</option>
+                      <ng-container *ngFor="let proveedor of proveedores$ | async">
+                        <option [value]="providerKey(proveedor)">
+                          {{ proveedor.nombre }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+
+                <div class="col-12 field-box">
+                  <app-select [control]="formControls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione región</option>
+                      <ng-container *ngFor="let region of regiones$ | async">
+                        <option [value]="region.id">
+                          {{ region.nombre }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-md-8">
+              <div class="col-12 field-box">
+                <app-select [control]="formControls.tipo_servicio_id" label="Tipo Servicio" [errorMessageFn]="errorMessageFn">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un tipo de servicio</option>
+                    <ng-container *ngFor="let tipoServicio of tiposServicio$ | async">
+                      <option [value]="tipoServicio.id">
+                        {{ tipoServicio.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
+
+              <div class="col-12 field-box" style="height: 300px; max-height: 300px">
+                <label for="">Servicios LPU</label>
+                <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
+                  <ng-template let-data pTemplate="item">
+                    <div class="country-item">
+                      <div>{{ data.lpu_nombre }}</div>
+                    </div>
+                  </ng-template>
+                </p-listbox>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <hr>
+              <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
+
+              <div id="total">
+                <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
+              </div>
+
+              <hr>
+
+              <ng-container *ngIf="hasLPUWithZeroQuantity">
+                <div class="text-right">
+                  <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
+                </div>
+              </ng-container>
+            </div>
+
+            <div class="col-xs-12 col-md-12 text-right button-guardar-cubicacion">
+              <ng-container *ngIf="lpusCarrito.length === 0">
+                <span>
+                  <p-message severity="info" text="Al menos 1 LPU debe ser ingresada"></p-message>&nbsp;
+                </span>
+              </ng-container>
+              <button (click)="goBack()" class="btn btn-light mr-2">Cancelar</button>
+              <button (click)="submit()" [disabled]="!valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
+            </div>
+          </div>
+        </ng-container>
+      </app-card>
+    </div>
+  </div>
+</div>
