@@ -13,6 +13,8 @@ import {
   AssignWorkerOTResponse,
   CancelOTResponse,
   FinalizeOTJobsResponse,
+  ApproveOTMinutesGenerationResponse,
+  RejectOTMinutesGenerationResponse,
 } from '../model';
 
 @Injectable({
@@ -150,32 +152,37 @@ export class OTService {
   }
 
   approveOTMinutesGeneration(perfil_id: number, otID: number): Observable<any> {
-    console.log('aprobar generacion del acta. no implementado aun', {
-      ot_id: otID,
-    });
-    return of({});
+    return this.http.post<ApproveOTMinutesGenerationResponse>(
+      `${this.apiUrl}/ingreot/ot/acta/accept`,
+      {
+        ot_id: otID,
+      }
+    );
   }
 
   rejectOTMinutesGeneration(perfil_id: number, otID: number): Observable<any> {
-    console.log('rechazar generacion del acta. no implementado aun', {
-      ot_id: otID,
-    });
-    return of({});
+    return this.http.post<RejectOTMinutesGenerationResponse>(
+      `${this.apiUrl}/ingreot/ot/acta/reject`,
+      {
+        ot_id: otID,
+        motivo: 'Vacío',
+      }
+    );
   }
 
-  approveOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
-    console.log('aprobar validación del acta. no implementado aun', {
-      ot_id: otID,
-    });
-    return of({});
-  }
+  // approveOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
+  //   console.log('aprobar validación del acta. no implementado aun', {
+  //     ot_id: otID,
+  //   });
+  //   return of({});
+  // }
 
-  rejectOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
-    console.log('rechazar validación del acta. no implementado aun', {
-      ot_id: otID,
-    });
-    return of({});
-  }
+  // rejectOTMinutesValidation(perfil_id: number, otID: number): Observable<any> {
+  //   console.log('rechazar validación del acta. no implementado aun', {
+  //     ot_id: otID,
+  //   });
+  //   return of({});
+  // }
 
   authorizePayments(perfil_id: number, otID: number): Observable<any> {
     console.log('autorizar pagos. no implementado aun', {

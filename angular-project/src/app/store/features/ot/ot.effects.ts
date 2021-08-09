@@ -735,21 +735,21 @@ export class OtEffects {
     { dispatch: false }
   );
 
-  // Aprobar la validación del acta
-  approveOTMinutesValidation$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.approveOTMinutesValidation),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.approveOTMinutesValidation(profile.id, otID).pipe(
-          mapTo(otActions.approveOTMinutesValidationSuccess()),
-          catchError(error =>
-            of(otActions.approveOTMinutesValidationError({ error }))
-          )
-        )
-      )
-    )
-  );
+  // // Aprobar la validación del acta
+  // approveOTMinutesValidation$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(otActions.approveOTMinutesValidation),
+  //     withLatestFrom(this.authFacade.getCurrentProfile$()),
+  //     concatMap(([{ otID }, profile]) =>
+  //       this.otService.approveOTMinutesValidation(profile.id, otID).pipe(
+  //         mapTo(otActions.approveOTMinutesValidationSuccess()),
+  //         catchError(error =>
+  //           of(otActions.approveOTMinutesValidationError({ error }))
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
   notifyAfterApproveOTMinutesValidationSuccess$ = createEffect(
     () =>
@@ -789,20 +789,20 @@ export class OtEffects {
   );
 
   // Rechazar la validación del acta
-  rejectOTMinutesValidation$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.rejectOTMinutesValidation),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.rejectOTMinutesValidation(profile.id, otID).pipe(
-          mapTo(otActions.rejectOTMinutesValidationSuccess()),
-          catchError(error =>
-            of(otActions.rejectOTMinutesValidationError({ error }))
-          )
-        )
-      )
-    )
-  );
+  // rejectOTMinutesValidation$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(otActions.rejectOTMinutesValidation),
+  //     withLatestFrom(this.authFacade.getCurrentProfile$()),
+  //     concatMap(([{ otID }, profile]) =>
+  //       this.otService.rejectOTMinutesValidation(profile.id, otID).pipe(
+  //         mapTo(otActions.rejectOTMinutesValidationSuccess()),
+  //         catchError(error =>
+  //           of(otActions.rejectOTMinutesValidationError({ error }))
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
   notifyAfterRejectOTMinutesValidationSuccess$ = createEffect(
     () =>
