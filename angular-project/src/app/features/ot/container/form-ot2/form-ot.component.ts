@@ -32,6 +32,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
       this.noWhitespace,
       Validators.maxLength(100),
     ]),
+    tipo: new FormControl(null, [Validators.required]),
   };
 
   formOT: FormGroup = new FormGroup(this.formControls);

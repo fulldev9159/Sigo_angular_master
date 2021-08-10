@@ -408,9 +408,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         .subscribe(([region_id, key]) => {
           this.resetTiposServicioFormControl();
           if (region_id !== undefined && region_id !== null) {
-            const { subcontratosID, proveedorID } = this.extractProviderKeys(
-              key
-            );
+            const { subcontratosID, proveedorID } =
+              this.extractProviderKeys(key);
 
             this.cubageFacade.getSubContractedTypeServicesAction({
               subcontrato_id: subcontratosID,
@@ -448,9 +447,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           this.resetSelectedLpusFormControl([]);
           this.cubageFacade.resetServices();
           if (tipo_servicio_id !== null && tipo_servicio_id !== undefined) {
-            const { subcontratosID, proveedorID } = this.extractProviderKeys(
-              key
-            );
+            const { subcontratosID, proveedorID } =
+              this.extractProviderKeys(key);
 
             this.cubageFacade.getSubContractedServicesAction({
               subcontrato_id: subcontratosID,
@@ -650,9 +648,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     }`;
   }
 
-  extractProviderKeys(
-    key: string
-  ): {
+  extractProviderKeys(key: string): {
     subcontratosID: number[];
     proveedorID: number;
   } {
@@ -809,6 +805,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     if (this.valid) {
       const form = this.formCubicacion.getRawValue();
 
+      console.log(form.nombre);
       const nuevaCubicacion = {
         // cubicacion_id: +form.cubicacion_id,
         cubicacion_nombre: form.nombre,
