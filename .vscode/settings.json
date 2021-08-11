@@ -24,5 +24,6 @@
   },
   "[less]": {
     "editor.defaultFormatter": "HookyQR.beautify"
-  }
+  },
+  "angular.enable-strict-mode-prompt": false
 }
