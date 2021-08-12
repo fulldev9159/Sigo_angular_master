@@ -28,7 +28,7 @@ Login
     input password                   name:password    ${password}
     element should be enabled        id:login
     Click Button                     id:login
-    Wait Until Element Is Visible    id:user-name     timeout=5
+    Wait Until Element Is Visible    id:user-name     timeout=15
 
 Element text should be
     [Arguments]        ${element}    ${texto}
@@ -37,7 +37,7 @@ Element text should be
 
 Click Visible Element
     [Arguments]                      ${element}
-    Wait Until Element Is Visible    ${element}    timeout=4
+    Wait Until Element Is Visible    ${element}    timeout=10
     Scroll Element Into View         ${element}
     Click Element                    ${element}
 
@@ -102,7 +102,7 @@ UsuarioEdit
 
 Validar existencia en la tabla
     [Arguments]                      ${columna a validar}                                                    ${nombre}
-    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=15
     input text                       css:div.p-datatable-header.ng-star-inserted > div > span > input        ${nombre}
     sleep                            1
     ${cantidad de filas}=            get element count                                                       css:.p-datatable-wrapper>table>tbody>tr
@@ -120,7 +120,7 @@ Validar existencia en la tabla
 
 Get index list
     [Arguments]                      ${columna a validar}                                                    ${valor}
-    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=15
     ${cantidad de filas}=            get element count                                                       css:.p-datatable-wrapper>table>tbody>tr
     ${status}=                       Evaluate                                                                ${cantidad de filas} > 0
     Should Be True                   ${status}
@@ -137,8 +137,8 @@ Get index list
 
 Click Menu Editar
     [Arguments]                      ${usuario}
-    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                                      timeout=5
-    input text                       css:div.p-datatable-header.ng-star-inserted > div > span > input                                          ${usuario}    timeout=5
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                                      timeout=15
+    input text                       css:div.p-datatable-header.ng-star-inserted > div > span > input                                          ${usuario}    timeout=15
     # ${cantidad de filas}=            get element count                                                                                         css:.p-datatable-wrapper>table>tbody>tr
     # ${status}=                       Evaluate                                                                                                  ${cantidad de filas} > 0
     # Should Be True                   ${status}
@@ -178,8 +178,8 @@ Navegar al menu
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    id:listarCubSubMenu
     Run Keyword If    '${menu}' == 'Perfil'              Click Visible Element    css:#menu-perfil>a>span
-    Run Keyword If    '${menu}' == 'Crear OT'            Click Visible Element    id:otSub
-    Run Keyword If    '${menu}' == 'Crear OT'            Click Visible Element    css:#otSub>li.pl-5.ng-star-inserted.active-item>a
+    # Run Keyword If    '${menu}' == 'Crear OT'            Click Visible Element    id:otSub
+    Run Keyword If    '${menu}' == 'Crear OT'            Execute javascript       document.querySelector("#otSub>li:nth-child(2)>a").click()
 
 Click boton Editar
     [Arguments]              ${valor} 
@@ -238,7 +238,7 @@ Guardar perfil
 
 Guardar usuario
     Click Visible Element            id:submit-user
-    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=5
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)    timeout=15
 
 Set username
     [Arguments]    ${valor}
@@ -342,8 +342,8 @@ Guardar Cubicacion
 ## CREAR OT
 Set Nombre OT
     [Arguments]       ${nombre}
-    ${selector}=      set variable    id: nombre-ot
-    Set input text    ${nombre}       ${selector}      
+    ${selector}=      set variable    id:nombre-ot
+    Set input text    ${nombre}       ${selector}     
 
 Set Tipo OT
     [Arguments]        ${valor}
@@ -440,7 +440,7 @@ Guardar OT
 ##    PERFIL
 Eliminar perfil
     [Arguments]                      ${nombre}
-    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                            timeout=5
+    Wait Until Element Is Visible    css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(1)                            timeout=15
     input text                       css:div.p-datatable-header.ng-star-inserted > div > span > input                                ${nombre}
     sleep                            1
     Click Visible Element            css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(5)>div:nth-child(3)>button
@@ -523,6 +523,94 @@ Acciones PEND AUTH ADMIN Contrato
     Element text should be    ${items}[1]                                                                      Aceptar                                                  
     Element text should be    ${items}[2]                                                                      Rechazar                                                 
 
+Acciones PEND ASING COORDINADOR
+    Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
+    FOR                       ${item}                                                                          IN                                                       @{items}
+    ${txt} =                  Get Text                                                                         ${item}
+    Log To Console            ${txt}
+    END
+    ${cantidad de filas}=     Get length                                                                       ${items}
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
+    Should Be True            ${status}
+    Element text should be    ${items}[0]                                                                      Información                                              
+    Element text should be    ${items}[1]                                                                      Asignar coordinador                                      
+
+Acciones PEND ASING TRABAJADOR
+    Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
+    FOR                       ${item}                                                                          IN                                                       @{items}
+    ${txt} =                  Get Text                                                                         ${item}
+    Log To Console            ${txt}
+    END
+    ${cantidad de filas}=     Get length                                                                       ${items}
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
+    Should Be True            ${status}
+    Element text should be    ${items}[0]                                                                      Información                                              
+    Element text should be    ${items}[1]                                                                      Asignar trabajador 
+
+Acciones PEND FIN TRABAJOS
+    Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
+    FOR                       ${item}                                                                          IN                                                       @{items}
+    ${txt} =                  Get Text                                                                         ${item}
+    Log To Console            ${txt}
+    END
+    ${cantidad de filas}=     Get length                                                                       ${items}
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
+    Should Be True            ${status}
+    Element text should be    ${items}[0]                                                                      Información                                              
+    Element text should be    ${items}[1]                                                                      Finalizar trabajos 
+
+Acciones PEND VALID GEN ACTA
+    Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
+    FOR                       ${item}                                                                          IN                                                       @{items}
+    ${txt} =                  Get Text                                                                         ${item}
+    Log To Console            ${txt}
+    END
+    ${cantidad de filas}=     Get length                                                                       ${items}
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
+    Should Be True            ${status}
+    Element text should be    ${items}[0]                                                                      Información                                              
+    Element text should be    ${items}[1]                                                                      Aceptar la generación del acta                           
+    Element text should be    ${items}[2]                                                                      Rechazar la generación del acta                          
+
+Acciones PEND VALID GEN ACTA GESTOR
+    Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
+    FOR                       ${item}                                                                          IN                                                       @{items}
+    ${txt} =                  Get Text                                                                         ${item}
+    Log To Console            ${txt}
+    END
+    ${cantidad de filas}=     Get length                                                                       ${items}
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
+    Should Be True            ${status}
+    Element text should be    ${items}[0]                                                                      Información                                              
+    Element text should be    ${items}[1]                                                                      Aceptar la generación del acta                           
+    Element text should be    ${items}[2]                                                                      Rechazar la generación del acta                          
+
 Logout
     Click Visible Element    css:#navbarDropdown
     Click Visible Element    css:#navbarSupportedContent > ul > li > div > a
+
+Accionar
+    [Arguments]       ${accion}
+    Run Keyword If    '${accion}' == 'Aceptar OT'    Click Visible Element    css:#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a
+
+Confirmar
+    Click Visible Element    css:div.p-confirm-popup-footer>button:nth-child(2)
+
+Seleccionar coordinador
+    [Arguments]        ${valor}
+    ${selector}=       set variable    css:app-assign-coordinator-form > form > app-select > select
+    Set select item    ${valor}        ${selector}
+
+Seleccionar trabajador
+    [Arguments]        ${valor}
+    ${selector}=       set variable    css:app-assign-trabajador-form > form > app-select > select
+    Set select item    ${valor}        ${selector}
+
+
+SSLEEP
+    sleep    10

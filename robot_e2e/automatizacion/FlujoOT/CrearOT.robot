@@ -25,8 +25,8 @@ Crear OT happy path
     Guardar Cubicacion
 
     #CREAR OT
-    Navegar al menu            Crear OT
-    sleep                      1
+    SSLEEP
+    Execute javascript         document.querySelector("#otSub>li:nth-child(2)>a").click()
     Set Nombre OT              OT ${prefijo} HAPPY PATH ROBOT
     Set Tipo OT                OT
     Set Cubicacion de la OT    CUBICACION ${prefijo} HAPPY PATH ROBOT
@@ -41,3 +41,5 @@ Crear OT happy path
     Set Proyecto OT            proyecto test(1)
     Set Observaciones OT       Robot Observaciones
     Guardar OT
+
+    close Browser
