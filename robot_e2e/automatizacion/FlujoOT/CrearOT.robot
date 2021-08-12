@@ -42,4 +42,5 @@ Crear OT happy path
     Set Observaciones OT       Robot Observaciones
     Guardar OT
 
+    sleep            5
     close Browser
