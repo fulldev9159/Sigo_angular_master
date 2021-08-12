@@ -19,6 +19,9 @@ export class ErrMesaggesServices {
     } else {
       message = errDescription;
     }
-    this.snackService.showMessage(message, 'error');
+
+    if (identify !== 'Listar OT') {
+      this.snackService.showMessage(message, 'error');
+    }
   }
 }
