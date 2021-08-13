@@ -43,7 +43,6 @@ export class JwtAppInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this.token}`,
         'X-SIGO-User-Profile': `${this.profileID}`,
       });
-
       req = req.clone({ headers });
     }
 
@@ -59,6 +58,11 @@ export class JwtAppInterceptor implements HttpInterceptor {
               this.authFacade.reset();
               this.router.navigate(['/auth']);
             }
+            console.log(err);
+            // if (err.status.description === 'Sin resultados') {
+            //   message = 'El usuario no tiene contratos asignados';
+            // }
+            // this.snackService.showMessage(message, 'error');
           }
         }
       )

@@ -35,6 +35,7 @@ export class CubicacionEffects {
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private cubicacionService: Data.CubicacionService,
+    private errMessage: Data.ErrMesaggesServices,
     private router: Router
   ) {}
 
@@ -49,7 +50,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
+                this.errMessage.SetErrMessage(res.status.description);
               }
               return cubicacionActions.getCubicacionSuccess({
                 cubicacion: res.data.items,
@@ -97,12 +98,11 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              let message = '';
               if (+res.status.responseCode !== 0) {
-                if (res.status.description === 'Sin resultados') {
-                  message = 'El usuario no tiene contratos asignados';
-                }
-                this.snackService.showMessage(message, 'error');
+                this.errMessage.SetErrMessage(
+                  res.status.description,
+                  'Contratos'
+                );
               }
               return cubicacionActions.getContractMarcoSuccess({
                 contractMarco: res.data.items.sort((a, b) =>
@@ -128,13 +128,17 @@ export class CubicacionEffects {
             contrato_marco_id: data.contrato_marco_id,
           })
           .pipe(
-            map((res: any) =>
-              cubicacionActions.getSubContractProvidersSuccess({
+            map((res: any) => {
+              if (+res.status.responseCode !== 0) {
+                this.errMessage.SetErrMessage(res.status.description);
+              }
+
+              return cubicacionActions.getSubContractProvidersSuccess({
                 subContractedProviders: res.data.items.sort((a, b) =>
                   a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
                 ),
-              })
-            ),
+              });
+            }),
             catchError(err =>
               of(cubicacionActions.getSubContractProvidersError({ error: err }))
             )
@@ -153,11 +157,15 @@ export class CubicacionEffects {
             subcontrato_id: data.subcontrato_id,
           })
           .pipe(
-            map((res: any) =>
-              cubicacionActions.getSubContractedRegionsSuccess({
+            map((res: any) => {
+              if (+res.status.responseCode !== 0) {
+                this.errMessage.SetErrMessage(res.status.description);
+              }
+
+              return cubicacionActions.getSubContractedRegionsSuccess({
                 subContractedRegions: res.data.items,
-              })
-            ),
+              });
+            }),
             catchError(err =>
               of(cubicacionActions.getSubContractedRegionsError({ error: err }))
             )
@@ -177,11 +185,14 @@ export class CubicacionEffects {
             region_id: data.region_id,
           })
           .pipe(
-            map((res: any) =>
-              cubicacionActions.getSubContractedTypeServicesSuccess({
+            map((res: any) => {
+              if (+res.status.responseCode !== 0) {
+                this.errMessage.SetErrMessage(res.status.description);
+              }
+              return cubicacionActions.getSubContractedTypeServicesSuccess({
                 subContractedTypeServices: res.data.items,
-              })
-            ),
+              });
+            }),
             catchError(err =>
               of(
                 cubicacionActions.getSubContractedTypeServicesError({
@@ -206,8 +217,11 @@ export class CubicacionEffects {
             tipo_servicio_id: data.tipo_servicio_id,
           })
           .pipe(
-            map((res: any) =>
-              cubicacionActions.getSubContractedServicesSuccess({
+            map((res: any) => {
+              if (+res.status.responseCode !== 0) {
+                this.errMessage.SetErrMessage(res.status.description);
+              }
+              return cubicacionActions.getSubContractedServicesSuccess({
                 subContractedServices: res.data.items.sort((a, b) =>
                   a.lpu_nombre > b.lpu_nombre
                     ? 1
@@ -215,8 +229,8 @@ export class CubicacionEffects {
                     ? -1
                     : 0
                 ),
-              })
-            ),
+              });
+            }),
             catchError(err =>
               of(
                 cubicacionActions.getSubContractedServicesError({ error: err })
@@ -235,14 +249,8 @@ export class CubicacionEffects {
           .post(`${environment.api}/cubicacion/create`, data.cubicacion)
           .pipe(
             map((res: any) => {
-              let message = '';
               if (+res.status.responseCode !== 0) {
-                if (res.status.description === 'Sin resultados') {
-                  message = 'El usuario no tiene contratos asignados';
-                } else {
-                  message = res.status.description;
-                }
-                this.snackService.showMessage(message, 'error');
+                this.errMessage.SetErrMessage(res.status.description);
               }
               return cubicacionActions.postCubicacionSuccess({
                 cubicacion: res.data.items,
@@ -293,15 +301,9 @@ export class CubicacionEffects {
       concatMap(({ cubicacion }) =>
         this.cubicacionService.updateCubicacion(cubicacion).pipe(
           map((res: any) => {
-            /// let message = '';
-            /// if (+res.status.responseCode !== 0) {
-            ///   if (res.status.description === 'Sin resultados') {
-            ///     message = 'El usuario no tiene contratos asignados';
-            ///   } else {
-            ///     message = res.status.description;
-            ///   }
-            ///   this.snackService.showMessage(message, 'error');
-            /// }
+            if (+res.status.responseCode !== 0) {
+              this.errMessage.SetErrMessage(res.status.description);
+            }
             return cubicacionActions.editCubicacionSuccess({
               id: cubicacion.cubicacion_id,
             });
@@ -383,11 +385,14 @@ export class CubicacionEffects {
             cubicacion_id: data.cubicacion_id,
           })
           .pipe(
-            map((res: any) =>
-              cubicacionActions.getDetalleCubicacionSuccess({
+            map((res: any) => {
+              if (+res.status.responseCode !== 0) {
+                this.errMessage.SetErrMessage(res.status.description);
+              }
+              return cubicacionActions.getDetalleCubicacionSuccess({
                 detallecubicacion: res.data.items,
-              })
-            ),
+              });
+            }),
             catchError(err =>
               of(cubicacionActions.getDetalleCubicacionError({ error: err }))
             )
@@ -407,6 +412,9 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
+              if (+res.status.responseCode !== 0) {
+                this.errMessage.SetErrMessage(res.status.description);
+              }
               const requestSave: cubModel.RequestSaveCubicacion = {
                 cubicacion_nombre: data.cubicacion.nombre,
                 region_id: data.cubicacion.region_id,

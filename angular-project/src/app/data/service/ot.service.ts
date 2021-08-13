@@ -2,6 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as Data from '@data';
+
 import {
   OT,
   OTsResponse,
@@ -22,7 +24,11 @@ import {
 })
 export class OTService {
   apiUrl = '';
-  constructor(@Inject('environment') environment, private http: HttpClient) {
+  constructor(
+    @Inject('environment') environment,
+    private http: HttpClient,
+    private errMessage: Data.ErrMesaggesServices
+  ) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
@@ -61,7 +67,14 @@ export class OTService {
         filtro_propietario,
         filtro_tipo,
       })
-      .pipe(map(res => res.data.items));
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.errMessage.SetErrMessage(res.status.description, 'Listar OT');
+          }
+          return res.data.items;
+        })
+      );
   }
 
   approveOT(perfil_id: number, otID: number): Observable<any> {
@@ -100,7 +113,14 @@ export class OTService {
           ot_id: otID,
         }
       )
-      .pipe(map(res => res.data.items));
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.errMessage.SetErrMessage(res.status.description);
+          }
+          return res.data.items;
+        })
+      );
   }
 
   assignCoordinator(
@@ -125,7 +145,14 @@ export class OTService {
           ot_id: otID,
         }
       )
-      .pipe(map(res => res.data.items));
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.errMessage.SetErrMessage(res.status.description);
+          }
+          return res.data.items;
+        })
+      );
   }
 
   assignTrabajador(
