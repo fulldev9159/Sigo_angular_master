@@ -69,8 +69,9 @@ export class OTService {
       })
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0)
+          if (+res.status.responseCode !== 0) {
             this.errMessage.SetErrMessage(res.status.description, 'Listar OT');
+          }
           return res.data.items;
         })
       );
@@ -114,8 +115,9 @@ export class OTService {
       )
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0)
+          if (+res.status.responseCode !== 0) {
             this.errMessage.SetErrMessage(res.status.description);
+          }
           return res.data.items;
         })
       );
@@ -145,8 +147,9 @@ export class OTService {
       )
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0)
+          if (+res.status.responseCode !== 0) {
             this.errMessage.SetErrMessage(res.status.description);
+          }
           return res.data.items;
         })
       );

@@ -49,8 +49,9 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return cubicacionActions.getCubicacionSuccess({
                 cubicacion: res.data.items,
               });
@@ -97,11 +98,12 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(
                   res.status.description,
                   'Contratos'
                 );
+              }
               return cubicacionActions.getContractMarcoSuccess({
                 contractMarco: res.data.items.sort((a, b) =>
                   a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
@@ -127,8 +129,9 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
 
               return cubicacionActions.getSubContractProvidersSuccess({
                 subContractedProviders: res.data.items.sort((a, b) =>
@@ -155,8 +158,9 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
 
               return cubicacionActions.getSubContractedRegionsSuccess({
                 subContractedRegions: res.data.items,
@@ -182,8 +186,9 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return cubicacionActions.getSubContractedTypeServicesSuccess({
                 subContractedTypeServices: res.data.items,
               });
@@ -213,8 +218,9 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return cubicacionActions.getSubContractedServicesSuccess({
                 subContractedServices: res.data.items.sort((a, b) =>
                   a.lpu_nombre > b.lpu_nombre
@@ -243,8 +249,9 @@ export class CubicacionEffects {
           .post(`${environment.api}/cubicacion/create`, data.cubicacion)
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return cubicacionActions.postCubicacionSuccess({
                 cubicacion: res.data.items,
               });
@@ -294,8 +301,9 @@ export class CubicacionEffects {
       concatMap(({ cubicacion }) =>
         this.cubicacionService.updateCubicacion(cubicacion).pipe(
           map((res: any) => {
-            if (+res.status.responseCode !== 0)
+            if (+res.status.responseCode !== 0) {
               this.errMessage.SetErrMessage(res.status.description);
+            }
             return cubicacionActions.editCubicacionSuccess({
               id: cubicacion.cubicacion_id,
             });
@@ -378,8 +386,9 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return cubicacionActions.getDetalleCubicacionSuccess({
                 detallecubicacion: res.data.items,
               });
@@ -403,8 +412,9 @@ export class CubicacionEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               const requestSave: cubModel.RequestSaveCubicacion = {
                 cubicacion_nombre: data.cubicacion.nombre,
                 region_id: data.cubicacion.region_id,

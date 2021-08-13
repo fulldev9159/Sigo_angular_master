@@ -98,8 +98,9 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getPlansSuccess({ plan: res.data.items });
             }),
             catchError(err => of(otActions.getPlansError({ error: err })))
@@ -119,8 +120,9 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getSiteSuccess({
                 site: res.data.items.sort((a: OtModel.Site, b: OtModel.Site) =>
                   a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
@@ -143,8 +145,9 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getPmoSuccess({
                 pmo: res.data.items.sort((a: OtModel.PMO, b: OtModel.PMO) =>
                   a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
@@ -165,8 +168,9 @@ export class OtEffects {
           .post(`${environment.api}/ingreot/opex/id_opex/get_all`, {})
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getIDOpexSuccess({
                 ids_opex: res.data.items.sort(
                   (a: OtModel.IDOpex, b: OtModel.IDOpex) =>
@@ -190,8 +194,9 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getCuentaSAPSuccess({
                 cuentas_sap: res.data.items.sort(
                   (a: OtModel.CuentaSap, b: OtModel.CuentaSap) =>
@@ -216,8 +221,9 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getCECOSuccess({
                 cecos: res.data.items.sort((a: OtModel.CECO, b: OtModel.CECO) =>
                   a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
@@ -241,8 +247,9 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getBudgetLineSuccess({
                 lp: res.data.items.sort((a: OtModel.Lp, b: OtModel.Lp) =>
                   a.lineas_presupuestarias > b.lineas_presupuestarias
@@ -271,8 +278,9 @@ export class OtEffects {
           })
           .pipe(
             map((res: any) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getPep2Success({ pep2: res.data.items });
             }),
             catchError(err => of(otActions.getPep2Error({ error: err })))
@@ -336,8 +344,9 @@ export class OtEffects {
           })
           .pipe(
             map((res: Response<OtModel.DataRspDetalleOT>) => {
-              if (+res.status.responseCode !== 0)
+              if (+res.status.responseCode !== 0) {
                 this.errMessage.SetErrMessage(res.status.description);
+              }
               return otActions.getDetalleOtSuccess({ detalleot: res.data });
             }),
             catchError(err => of(otActions.postOtError({ error: err })))

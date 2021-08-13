@@ -7,7 +7,7 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 export class ErrMesaggesServices {
   constructor(private snackService: SnackBarService) {}
 
-  SetErrMessage(errDescription: string, identify: string = '') {
+  SetErrMessage(errDescription: string, identify: string = ''): void {
     let message = '';
 
     if (errDescription === 'Sin resultados') {
