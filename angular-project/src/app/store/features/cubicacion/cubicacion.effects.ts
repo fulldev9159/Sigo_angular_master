@@ -50,7 +50,10 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.errMessage.SetErrMessage(
+                  res.status.description,
+                  'Get Cubicaciones'
+                );
               }
               return cubicacionActions.getCubicacionSuccess({
                 cubicacion: res.data.items,
