@@ -9,7 +9,16 @@ import { FormControl } from '@angular/forms';
 export class SelectComponent implements OnInit {
   @Input() control: FormControl;
   @Input() label = '';
-  @Input() errorMessageFn = errors => 'Este campo es inválido';
+  @Input() errorMessageFn = errors => {
+    if (errors.required) {
+      return 'Este campo es requerido';
+    } else if (errors.whitespace) {
+      return 'Este campo es requerido';
+    } else if (errors.maxlength) {
+      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
+    }
+    return 'Este campo es inválido';
+  };
 
   constructor() {}
 

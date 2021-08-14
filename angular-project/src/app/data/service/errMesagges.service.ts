@@ -14,7 +14,9 @@ export class ErrMesaggesServices {
       if (identify === 'Contratos') {
         message = 'El usuario no tiene contratos asignados';
       } else if (identify === 'Proyectos') {
-        message = 'No existe ningún proyecto en el sistema';
+        message = 'No existen proyectos';
+      } else if (identify === 'Get Cubicaciones') {
+        message = 'No existen cubicaciones';
       }
     } else {
       message = errDescription;

@@ -40,7 +40,7 @@
     "object-literal-key-quotes": [true, "as-needed"],
     "quotemark": [true, "single"],
     "semicolon": {
-      "options": ["always"]
+      "options": [true, "always", "strict-bound-class-methods"]
     },
     "space-before-function-paren": {
       "options": {

@@ -9,7 +9,7 @@ export class SnackBarService {
 
   showMessage(message: string, type: string): void {
     Snackbar.show({
-      pos: 'bottom-right',
+      pos: 'bottom-left',
       text: message,
       backgroundColor: '#212121',
       actionText: type,
