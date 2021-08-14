@@ -55,7 +55,7 @@ services:
       context: .
       dockerfile: docker/deploy/Dockerfile
     environment:
-      WEBAPI_NAME: 'mcl_test_sigo_api'
+      WEBAPI_NAME: '34.122.92.38'
       WEBAPI_PORT: '4040'
     # expose:
     #   - 80
