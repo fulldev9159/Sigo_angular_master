@@ -12,7 +12,13 @@ import {
   of,
   combineLatest,
 } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import {
+  ignoreElements,
+  map,
+  takeUntil,
+  withLatestFrom,
+  tap,
+} from 'rxjs/operators';
 
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -22,6 +28,7 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
+import { Plan } from '@storeOT/features/ot/ot.model';
 import { Login } from '@data';
 
 @Component({
@@ -34,6 +41,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   public authLogin: Login = null;
   public cubicaciones$: Observable<Cubicacion[]>;
+  public planes$: Observable<Plan[]> = of([]);
 
   formControls = {
     nombre: new FormControl('', [
@@ -43,6 +51,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
     ]),
     tipo: new FormControl(null, [Validators.required]),
     cubicacion_id: new FormControl(null, [Validators.required]),
+    plan_proyecto_id: new FormControl(null, [Validators.required]),
   };
 
   formOT: FormGroup = new FormGroup(this.formControls);
@@ -57,6 +66,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.otFacade.resetData();
     this.initObservables();
+    this.initFormControlsEvents();
     this.initData();
   }
 
@@ -76,6 +86,48 @@ export class FormOt2Component implements OnInit, OnDestroy {
           )
         )
       );
+
+    this.planes$ = this.otFacade.getPlansSelector$().pipe(
+      map(proveedores => proveedores || []),
+      tap(proveedores => this.checkProveedoresAndEnable(proveedores))
+    );
+  }
+
+  initFormControlsEvents(): void {
+    this.initCubicacionFormControlEvent();
+  }
+
+  initCubicacionFormControlEvent(): void {
+    this.subscription.add(
+      this.formOT
+        .get('cubicacion_id')
+        .valueChanges.pipe(withLatestFrom(this.cubicaciones$))
+        .subscribe(([cubicacion_id, cubicaciones]) => {
+          this.resetPlanProyectoFormControl();
+          if (cubicacion_id !== null && cubicacion_id !== undefined) {
+            const cubicacionSeleccionada = cubicaciones.find(
+              cubicacion => +cubicacion.id === +cubicacion_id
+            );
+            if (cubicacionSeleccionada) {
+              this.otFacade.getPlansAction({
+                region_id: cubicacionSeleccionada.region_id,
+              });
+            }
+          }
+        })
+    );
+  }
+
+  resetPlanProyectoFormControl(): void {
+    this.formOT.get('plan_proyecto_id').reset();
+  }
+
+  checkProveedoresAndEnable(planes: Plan[]): void {
+    if (planes.length > 0) {
+      this.formOT.get('plan_proyecto_id').enable();
+    } else {
+      this.formOT.get('plan_proyecto_id').disable();
+    }
   }
 
   initData(): void {

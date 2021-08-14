@@ -36,14 +36,35 @@
             <div class="col-xs-12 col-md-6">
               <app-select [control]="formControls.cubicacion_id" label="Cubicación">
                 <ng-container options>
+                  <option value="null" selected disabled>Seleccione cubicación</option>
                   <ng-container *ngFor="let cubicacion of cubicaciones$ | async">
-                    <option value="null" selected disabled>Seleccione cubicación</option>
                     <option [value]="cubicacion.id">
                       {{ cubicacion.nombre }}
                     </option>
                   </ng-container>
                 </ng-container>
               </app-select>
+              <br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <app-select [control]="formControls.plan_proyecto_id" label="Plan de proyecto">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione plan de proyecto</option>
+                  <ng-container *ngFor="let plan of planes$ | async">
+                    <option [value]="plan.id">
+                      {{ plan.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <!-- <select formControlName="plan_proyecto_id" [attr.disabled]="planes.length === 0 ? '' : null" class="form-control" name="" id="plan-proyecto">
+                <option value="null" selected disabled>Seleccione un plan de proyecto</option>
+                <option *ngFor="let plan of planes" [value]="plan.id">{{plan.nombre}} -
+                  {{plan.metas}}
+                </option>
+              </select> -->
               <br>
             </div>
           </div>
