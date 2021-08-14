@@ -3,13 +3,13 @@ Documentation    Test de funcionanildad del modulo de Usuarios.
 ...
 ...         This test has a workflow that is created using keywords in
 ...         the imported resource file.
-Resource    ../../resource.robot
+Resource    ../resource.robot
 
 *** Test Cases ***
 Flujo happy path
     Open Browser To Page    ${url}
    #  Execute javascript      document.body.style.zoom="80%"
-    ${OT name}=             set variable    OT ${prefijo} HAPPY PATH ROBOT
+   #  ${OT name}=             set variable    OT ${prefijo} HAPPY PATH ROBOT
 #VALIDACIONES
       # REGLAS
          # - Soy el usuario (mgestor1)  que creó la OT
@@ -53,7 +53,7 @@ Flujo happy path
     Login                                cadmincontrato1                                                                                       password
    #  No Debe existir en la tabla          ${OT name}                                                                                            Abiertas
    #  No debe existir en la tabla          ${OT name}                                                                                            Cerradas
-    Debe existir en la tabla             ${OT name}                                                                                            Ejecucion
+    Debe existir en la tabla             ${nombre OT}                                                                                          Ejecucion
     Acciones PEND AUTH ADMIN Contrato
     Execute javascript                   document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
     Confirmar
@@ -90,7 +90,7 @@ Flujo happy path
          # - Seleccionar a  ctrabajador1
     SSLEEP
     Login                             ccoordinador1                                                                                         password
-    Debe existir en la tabla          ${OT name}                                                                                            Ejecucion
+    Debe existir en la tabla          ${nombre OT}                                                                                          Ejecucion
     Acciones PEND ASING TRABAJADOR
     Execute javascript                document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
     sleep                             4
@@ -113,7 +113,7 @@ Flujo happy path
          # - Poder apretar botón finalizar trabajos
     SSLEEP
     Login                         ctrabajador1                                                                                          password
-    Debe existir en la tabla      ${OT name}                                                                                            Ejecucion
+    Debe existir en la tabla      ${nombre OT}                                                                                          Ejecucion
     Acciones PEND FIN TRABAJOS
     Execute javascript            document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
     Confirmar
@@ -133,7 +133,7 @@ Flujo happy path
          # - Poder apretar botón
     SSLEEP
     Login                           cadmincontrato1                                                                                       password
-    Debe existir en la tabla        ${OT name}                                                                                            Ejecucion
+    Debe existir en la tabla        ${nombre OT}                                                                                          Ejecucion
     Acciones PEND VALID GEN ACTA
     Execute javascript              document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
     Confirmar
@@ -153,7 +153,7 @@ Flujo happy path
          # - Poder apretar botón Aceptar
     SSLEEP
     Login                                  mgestor1                                                                                              password
-    Debe existir en la tabla               ${OT name}                                                                                            Ejecucion
+    Debe existir en la tabla               ${nombre OT}                                                                                          Ejecucion
     Acciones PEND VALID GEN ACTA GESTOR
     Execute javascript                     document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
     Confirmar
