@@ -13,8 +13,8 @@ export class CubicacionFacade {
   constructor(private store: Store<cubModel.Cubicacion>) {}
 
   // CUBICACION
-  public getCubicacionAction(perfilID: number): void {
-    this.store.dispatch(cubicacionActions.getCubicacion({ perfilID }));
+  public getCubicacionAction(): void {
+    this.store.dispatch(cubicacionActions.getCubicacion());
   }
 
   public getCubicacionSelector$(): Observable<cubModel.Cubicacion[]> {

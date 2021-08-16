@@ -43,27 +43,23 @@ export class CubicacionEffects {
     this.actions$.pipe(
       ofType(cubicacionActions.getCubicacion),
       concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/get`, {
-            perfil_id: data.perfilID,
+        this.http.post(`${environment.api}/cubicacion/get`, {}).pipe(
+          map((res: any) => {
+            if (+res.status.responseCode !== 0) {
+              this.errMessage.SetErrMessage(
+                res.status.description,
+                'Get Cubicaciones'
+              );
+            }
+            return cubicacionActions.getCubicacionSuccess({
+              cubicacion: res.data.items,
+            });
+          }),
+          catchError(err => {
+            console.log(err);
+            return of(cubicacionActions.getCubicacionError({ error: err }));
           })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(
-                  res.status.description,
-                  'Get Cubicaciones'
-                );
-              }
-              return cubicacionActions.getCubicacionSuccess({
-                cubicacion: res.data.items,
-              });
-            }),
-            catchError(err => {
-              console.log(err);
-              return of(cubicacionActions.getCubicacionError({ error: err }));
-            })
-          )
+        )
       )
     )
   );
@@ -275,7 +271,7 @@ export class CubicacionEffects {
         tap(([data, profile]) => {
           this.snackService.showMessage('Cubicación creada exitosamente', 'ok');
 
-          this.cubageFacade.getCubicacionAction(profile.id);
+          this.cubageFacade.getCubicacionAction();
 
           this.router.navigate(['app/cubicacion/list-cub']);
         })
@@ -330,7 +326,7 @@ export class CubicacionEffects {
             'ok'
           );
 
-          this.cubageFacade.getCubicacionAction(profile.id);
+          this.cubageFacade.getCubicacionAction();
 
           this.router.navigate(['app/cubicacion/list-cub']);
         })
@@ -474,7 +470,7 @@ export class CubicacionEffects {
             'ok'
           );
 
-          this.cubageFacade.getCubicacionAction(profile.id);
+          this.cubageFacade.getCubicacionAction();
         })
       ),
     { dispatch: false }

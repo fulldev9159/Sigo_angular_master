@@ -134,7 +134,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.subscription.add(
       this.authFacade.getLogin$().subscribe(profile => {
         if (profile) {
-          this.cubageFacade.getCubicacionAction(+profile.perfiles[0].id);
+          this.cubageFacade.getCubicacionAction();
           this.authLogin = profile;
         }
       })
