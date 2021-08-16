@@ -82,7 +82,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyInstance$))
       .subscribe(profile => {
         if (profile) {
-          this.cubageFacade.getCubicacionAction(+profile.id);
+          this.cubageFacade.getCubicacionAction();
         }
       });
 

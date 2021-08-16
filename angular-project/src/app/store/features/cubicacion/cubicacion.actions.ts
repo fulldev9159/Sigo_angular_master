@@ -5,10 +5,7 @@ import { CubicacionWithLpu, RequestEditCubicacion } from '@data';
 // CUBICACION LIST
 export const reset = createAction('[Cubicacion] reset');
 
-export const getCubicacion = createAction(
-  '[Cubicacion GetAll] GET Cubicacion',
-  props<{ perfilID: number }>()
-);
+export const getCubicacion = createAction('[Cubicacion GetAll] GET Cubicacion');
 
 export const getCubicacionSuccess = createAction(
   '[Cubicacion GetAll] GET Cubicacion Success',
