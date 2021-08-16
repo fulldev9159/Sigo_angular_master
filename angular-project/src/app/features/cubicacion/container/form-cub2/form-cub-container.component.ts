@@ -237,7 +237,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   noWhitespace(control: FormControl): any {
-    const isWhitespace = (control.value || '').trim().length === 0;
+    const nombreCub =
+      typeof control.value === 'object' ? control.value.name : control.value;
+    console.log('CONTROL', nombreCub);
+    const isWhitespace = (nombreCub || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
@@ -630,6 +633,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   // acciones del autocompletado con el campo 'nombre'
   nameSelected(event: any): void {
     console.log('name selected', event);
+    // this.formCubicacion.get('nombre').setValue(event.name);
   }
 
   nameChanged(name: string): void {
@@ -804,11 +808,12 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.tableLpus.touch();
     if (this.valid) {
       const form = this.formCubicacion.getRawValue();
-
-      console.log(form.nombre);
+      const nombreCub =
+        typeof form.nombre === 'object' ? form.nombre.name : form.nombre;
+      console.log(nombreCub);
       const nuevaCubicacion = {
         // cubicacion_id: +form.cubicacion_id,
-        cubicacion_nombre: form.nombre,
+        cubicacion_nombre: nombreCub,
         region_id: +form.region_id,
         // usuario_id: +this.authLogin.usuario_id,
         contrato_marco_id: +form.contrato_marco_id,
