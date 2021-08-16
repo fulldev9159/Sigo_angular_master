@@ -72,7 +72,7 @@ export class OTService {
       .pipe(
         map(res => {
           if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
+            // if(res.status.description==='Sin resultados'){this.snackService.showMessage(`No hay OTs cerradas ${res.status.description}`, '')};
           }
           return res.data.items;
         })
