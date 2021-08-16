@@ -337,7 +337,6 @@ Set Proyecto OT
 
 Set Observaciones OT
     [Arguments]       ${valor}
-    [Arguments]       ${valor}
     ${selector}=      set variable    id:observaciones
     Set input text    ${valor}        ${selector}         
 

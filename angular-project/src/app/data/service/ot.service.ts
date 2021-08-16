@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as Data from '@data';
+import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import {
   OT,
@@ -27,7 +28,8 @@ export class OTService {
   constructor(
     @Inject('environment') environment,
     private http: HttpClient,
-    private errMessage: Data.ErrMesaggesServices
+    // private errMessage: Data.ErrMesaggesServices,
+    private snackService: SnackBarService
   ) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
@@ -39,7 +41,16 @@ export class OTService {
         filtro_propietario: 'EJECUCION',
         filtro_tipo,
       })
-      .pipe(map(res => res.data.items));
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            if (res.status.description !== 'Sin resultados') {
+              this.snackService.showMessage(`${res.status.description}`, '');
+            }
+          }
+          return res.data.items;
+        })
+      );
   }
 
   getOTsAbiertas(
@@ -53,7 +64,16 @@ export class OTService {
         filtro_propietario,
         filtro_tipo,
       })
-      .pipe(map(res => res.data.items));
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            if (res.status.description !== 'Sin resultados') {
+              this.snackService.showMessage(`${res.status.description}`, '');
+            }
+          }
+          return res.data.items;
+        })
+      );
   }
 
   getOTsCerradas(
@@ -70,7 +90,9 @@ export class OTService {
       .pipe(
         map(res => {
           if (+res.status.responseCode !== 0) {
-            this.errMessage.SetErrMessage(res.status.description, 'Listar OT');
+            if (res.status.description !== 'Sin resultados') {
+              this.snackService.showMessage(`${res.status.description}`, '');
+            }
           }
           return res.data.items;
         })
@@ -116,7 +138,7 @@ export class OTService {
       .pipe(
         map(res => {
           if (+res.status.responseCode !== 0) {
-            this.errMessage.SetErrMessage(res.status.description);
+            this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.items;
         })
@@ -148,7 +170,7 @@ export class OTService {
       .pipe(
         map(res => {
           if (+res.status.responseCode !== 0) {
-            this.errMessage.SetErrMessage(res.status.description);
+            this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.items;
         })
