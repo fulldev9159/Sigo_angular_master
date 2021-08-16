@@ -36,7 +36,6 @@ export class OtEffects {
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
     private messageService: MessageService,
-    private errMessage: Data.ErrMesaggesServices,
     private router: Router
   ) {}
 
@@ -99,7 +98,7 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getPlansSuccess({ plan: res.data.items });
             }),
@@ -121,7 +120,7 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getSiteSuccess({
                 site: res.data.items.sort((a: OtModel.Site, b: OtModel.Site) =>
@@ -146,7 +145,7 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getPmoSuccess({
                 pmo: res.data.items.sort((a: OtModel.PMO, b: OtModel.PMO) =>
@@ -169,7 +168,7 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getIDOpexSuccess({
                 ids_opex: res.data.items.sort(
@@ -195,7 +194,7 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getCuentaSAPSuccess({
                 cuentas_sap: res.data.items.sort(
@@ -222,7 +221,7 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getCECOSuccess({
                 cecos: res.data.items.sort((a: OtModel.CECO, b: OtModel.CECO) =>
@@ -248,7 +247,7 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getBudgetLineSuccess({
                 lp: res.data.items.sort((a: OtModel.Lp, b: OtModel.Lp) =>
@@ -279,7 +278,7 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getPep2Success({ pep2: res.data.items });
             }),
@@ -296,9 +295,9 @@ export class OtEffects {
         this.http.post(`${environment.api}/proyectos/get_all`, {}).pipe(
           map((res: any) => {
             if (+res.status.responseCode !== 0) {
-              this.errMessage.SetErrMessage(
-                res.status.description,
-                'Proyectos'
+              this.snackService.showMessage(
+                `No existen proyectos - ${res.status.description}`,
+                'error'
               );
             }
             return otActions.getProyectoSuccess({ proyectos: res.data.items });
@@ -324,7 +323,7 @@ export class OtEffects {
           }),
           map((res: any) => {
             if (+res.status.responseCode !== 0) {
-              this.errMessage.SetErrMessage(res.status.description);
+              this.snackService.showMessage(res.status.description, 'error');
             }
             return otActions.postOtSuccess({ ot: res.data.items });
           }),
@@ -345,7 +344,7 @@ export class OtEffects {
           .pipe(
             map((res: Response<OtModel.DataRspDetalleOT>) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return otActions.getDetalleOtSuccess({ detalleot: res.data });
             }),

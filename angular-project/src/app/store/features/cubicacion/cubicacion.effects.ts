@@ -35,7 +35,6 @@ export class CubicacionEffects {
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private cubicacionService: Data.CubicacionService,
-    private errMessage: Data.ErrMesaggesServices,
     private router: Router
   ) {}
 
@@ -46,9 +45,9 @@ export class CubicacionEffects {
         this.http.post(`${environment.api}/cubicacion/get`, {}).pipe(
           map((res: any) => {
             if (+res.status.responseCode !== 0) {
-              this.errMessage.SetErrMessage(
-                res.status.description,
-                'Get Cubicaciones'
+              this.snackService.showMessage(
+                `No existen cubicaciones - ${res.status.description}`,
+                ''
               );
             }
             return cubicacionActions.getCubicacionSuccess({
@@ -98,9 +97,9 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(
-                  res.status.description,
-                  'Contratos'
+                this.snackService.showMessage(
+                  `No existen contratos asosiados - ${res.status.description}`,
+                  ''
                 );
               }
               return cubicacionActions.getContractMarcoSuccess({
@@ -129,7 +128,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
 
               return cubicacionActions.getSubContractProvidersSuccess({
@@ -158,7 +157,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
 
               return cubicacionActions.getSubContractedRegionsSuccess({
@@ -186,7 +185,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return cubicacionActions.getSubContractedTypeServicesSuccess({
                 subContractedTypeServices: res.data.items,
@@ -218,7 +217,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return cubicacionActions.getSubContractedServicesSuccess({
                 subContractedServices: res.data.items.sort((a, b) =>
@@ -249,7 +248,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return cubicacionActions.postCubicacionSuccess({
                 cubicacion: res.data.items,
@@ -284,8 +283,9 @@ export class CubicacionEffects {
       this.actions$.pipe(
         ofType(cubicacionActions.postCubicacionError),
         tap(({ error }) => {
-          this.errMessage.SetErrMessage(
-            `No fue posible crear la cubicacion - ${error.error.status.description}`
+          this.snackService.showMessage(
+            `No fue posible crear la cubicacion - ${error.error.status.description}`,
+            'error'
           );
           console.error(`could not create the cubage [${error.message}]`);
         })
@@ -300,7 +300,7 @@ export class CubicacionEffects {
         this.cubicacionService.updateCubicacion(cubicacion).pipe(
           map((res: any) => {
             if (+res.status.responseCode !== 0) {
-              this.errMessage.SetErrMessage(res.status.description);
+              this.snackService.showMessage(res.status.description, 'error');
             }
             return cubicacionActions.editCubicacionSuccess({
               id: cubicacion.cubicacion_id,
@@ -338,13 +338,10 @@ export class CubicacionEffects {
       this.actions$.pipe(
         ofType(cubicacionActions.editCubicacionError),
         tap(({ error }) => {
-          this.errMessage.SetErrMessage(
-            `No fue posible editar la cubicacion - ${error.error.status.description}`
+          this.snackService.showMessage(
+            `No fue posible editar la cubicacion - ${error.error.status.description}`,
+            'error'
           );
-          // this.snackService.showMessage(
-          //   'No fue posible editar la cubicacion',
-          //   'error'
-          // );
           console.error(`could not update the cubage [${error.message}]`);
         })
       ),
@@ -388,7 +385,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               return cubicacionActions.getDetalleCubicacionSuccess({
                 detallecubicacion: res.data.items,
@@ -414,7 +411,7 @@ export class CubicacionEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.errMessage.SetErrMessage(res.status.description);
+                this.snackService.showMessage(res.status.description, 'error');
               }
               const requestSave: cubModel.RequestSaveCubicacion = {
                 cubicacion_nombre: data.cubicacion.nombre,
