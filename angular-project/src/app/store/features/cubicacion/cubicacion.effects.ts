@@ -284,9 +284,8 @@ export class CubicacionEffects {
       this.actions$.pipe(
         ofType(cubicacionActions.postCubicacionError),
         tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible crear la cubicacion',
-            'error'
+          this.errMessage.SetErrMessage(
+            `No fue posible crear la cubicacion - ${error.error.status.description}`
           );
           console.error(`could not create the cubage [${error.message}]`);
         })
@@ -339,10 +338,13 @@ export class CubicacionEffects {
       this.actions$.pipe(
         ofType(cubicacionActions.editCubicacionError),
         tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible editar la cubicacion',
-            'error'
+          this.errMessage.SetErrMessage(
+            `No fue posible editar la cubicacion - ${error.error.status.description}`
           );
+          // this.snackService.showMessage(
+          //   'No fue posible editar la cubicacion',
+          //   'error'
+          // );
           console.error(`could not update the cubage [${error.message}]`);
         })
       ),
