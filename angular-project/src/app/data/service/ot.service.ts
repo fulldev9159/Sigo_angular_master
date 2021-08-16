@@ -41,7 +41,16 @@ export class OTService {
         filtro_propietario: 'EJECUCION',
         filtro_tipo,
       })
-      .pipe(map(res => res.data.items));
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            if (res.status.description !== 'Sin resultados') {
+              this.snackService.showMessage(`${res.status.description}`, '');
+            }
+          }
+          return res.data.items;
+        })
+      );
   }
 
   getOTsAbiertas(
@@ -55,7 +64,16 @@ export class OTService {
         filtro_propietario,
         filtro_tipo,
       })
-      .pipe(map(res => res.data.items));
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            if (res.status.description !== 'Sin resultados') {
+              this.snackService.showMessage(`${res.status.description}`, '');
+            }
+          }
+          return res.data.items;
+        })
+      );
   }
 
   getOTsCerradas(
@@ -72,7 +90,9 @@ export class OTService {
       .pipe(
         map(res => {
           if (+res.status.responseCode !== 0) {
-            // if(res.status.description==='Sin resultados'){this.snackService.showMessage(`No hay OTs cerradas ${res.status.description}`, '')};
+            if (res.status.description !== 'Sin resultados') {
+              this.snackService.showMessage(`${res.status.description}`, '');
+            }
           }
           return res.data.items;
         })
