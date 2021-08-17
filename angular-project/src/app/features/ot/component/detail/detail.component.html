@@ -14,7 +14,10 @@
   <ng-container card-header-title>Plan de proyecto</ng-container>
   <ng-container card-body>
     <ul>
-      <li>Plan:<span style="margin-right:5em"></span>{{formOt.plan_nombre ? formOt.plan_nombre : ' ---' }}</li>
+      <li>Plan:<span style="margin-right:5em"></span>
+        <span *ngIf="formOt.plan_nombre">{{formOt.plan_nombre ? formOt.plan_nombre : ' ---' }}</span>
+        <span *ngIf="plan">{{plan ? plan : ' ---' }}</span>
+      </li>
       <li>Código:<span style="margin-right:3.8em"></span>{{formOt.codigo ? formOt.codigo : ' ---'}}</li>
       <li>Nombre sitio:<span style="margin-right:1em"></span>{{formOt.sitio_nombre ? formOt.sitio_nombre : ' ---'}}</li>
       <li>Dirección:<span style="margin-right:2.7em"></span>{{formOt.direccion ? formOt.direccion: ' ---' }} </li>

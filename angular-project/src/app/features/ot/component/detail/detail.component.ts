@@ -17,6 +17,7 @@ import { Subject } from 'rxjs';
 export class DetailComponent implements OnInit, OnDestroy {
   // declarations
   @Input() formOt: any;
+  @Input() plan: string;
   @Input() cubicacionSeleccionada: any;
   private destroyInstance: Subject<boolean> = new Subject();
 
