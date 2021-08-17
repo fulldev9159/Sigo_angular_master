@@ -23,6 +23,8 @@ import {
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { SnackBarService } from '@utilsSIGO/snack-bar';
+
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -45,6 +47,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
   cubicacionSeleccionada: Cubicacion = null;
   nombre_plan_proyecto = '';
   sitios$: Observable<Site[]> = of([]);
+  sitioSeleccionado: Site = null;
 
   formControls = {
     nombre: new FormControl('', [
@@ -64,7 +67,8 @@ export class FormOt2Component implements OnInit, OnDestroy {
     private router: Router,
     private otFacade: OtFacade,
     private cubageFacade: CubicacionFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private snackService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -90,10 +94,19 @@ export class FormOt2Component implements OnInit, OnDestroy {
           )
         )
       );
+    // this.cubicaciones$.subscribe(misCubs => {
+    //   console.log(misCubs);
+    //   if (misCubs.length === 0) {
+    //     this.snackService.showMessage(
+    //       'No hay cubicaciones que se puedan escoger',
+    //       'warning'
+    //     );
+    //   }
+    // });
 
     this.planes$ = this.otFacade.getPlansSelector$().pipe(
       map(proveedores => proveedores || []),
-      tap(proveedores => this.checkProveedoresAndEnable(proveedores))
+      tap(proveedores => this.checkPlanProyectoAndEnable(proveedores))
     );
 
     this.sitios$ = this.otFacade.getSitesSelector$().pipe(
@@ -104,6 +117,8 @@ export class FormOt2Component implements OnInit, OnDestroy {
 
   initFormControlsEvents(): void {
     this.initCubicacionFormControlEvent();
+    this.initProyectoPlanFormControlEvent();
+    this.initSitioFormControlEvent();
   }
 
   initCubicacionFormControlEvent(): void {
@@ -125,7 +140,9 @@ export class FormOt2Component implements OnInit, OnDestroy {
           }
         })
     );
+  }
 
+  initProyectoPlanFormControlEvent(): void {
     this.subscription.add(
       this.formOT
         .get('plan_proyecto_id')
@@ -148,6 +165,24 @@ export class FormOt2Component implements OnInit, OnDestroy {
     );
   }
 
+  initSitioFormControlEvent(): void {
+    this.subscription.add(
+      this.formOT
+        .get('sitio_id')
+        .valueChanges.pipe(withLatestFrom(this.sitios$))
+        .subscribe(([sitio_id, sitios]) => {
+          if (sitio_id !== null && sitio_id !== undefined) {
+            console.log('Sitio ID:', sitio_id);
+            console.log(
+              'Sitio Selected',
+              sitios.find(s => +s.id === +sitio_id)
+            );
+            this.sitioSeleccionado = sitios.find(s => +s.id === +sitio_id);
+          }
+        })
+    );
+  }
+
   resetPlanProyectoFormControl(): void {
     this.formOT.get('plan_proyecto_id').reset();
   }
@@ -156,7 +191,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.formOT.get('sitio_id').reset();
   }
 
-  checkProveedoresAndEnable(planes: Plan[]): void {
+  checkPlanProyectoAndEnable(planes: Plan[]): void {
     if (planes.length > 0) {
       this.formOT.get('plan_proyecto_id').enable();
     } else {

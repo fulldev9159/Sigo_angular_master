@@ -18,11 +18,22 @@
         <span *ngIf="formOt.plan_nombre">{{formOt.plan_nombre ? formOt.plan_nombre : ' ---' }}</span>
         <span *ngIf="plan">{{plan ? plan : ' ---' }}</span>
       </li>
-      <li>Código:<span style="margin-right:3.8em"></span>{{formOt.codigo ? formOt.codigo : ' ---'}}</li>
-      <li>Nombre sitio:<span style="margin-right:1em"></span>{{formOt.sitio_nombre ? formOt.sitio_nombre : ' ---'}}</li>
-      <li>Dirección:<span style="margin-right:2.7em"></span>{{formOt.direccion ? formOt.direccion: ' ---' }} </li>
-      <li>Latitud: <span style="margin-right:3.7em"></span>{{formOt.latitud ? formOt.latitud : ' ---' }}</li>
-      <li>Longitud:<span style="margin-right:2.9em"></span>{{formOt.longitud ? formOt.longitud : ' ---' }} </li>
+      <ng-container *ngIf="sitioSeleccionado;else old">
+        <li>Código:<span style="margin-right:3.8em"></span>{{sitioSeleccionado.codigo ? sitioSeleccionado.codigo : ' ---'}}</li>
+        <li>Nombre sitio:<span style="margin-right:1em"></span>{{sitioSeleccionado.nombre ? sitioSeleccionado.nombre : ' ---'}}</li>
+        <li>Dirección:<span style="margin-right:2.7em"></span>{{sitioSeleccionado.direccion ? sitioSeleccionado.direccion: ' ---' }} </li>
+        <li>Latitud: <span style="margin-right:3.7em"></span>{{sitioSeleccionado.geo_lat ? sitioSeleccionado.geo_lat : ' ---' }}</li>
+        <li>Longitud:<span style="margin-right:2.9em"></span>{{sitioSeleccionado.geo_lon ? sitioSeleccionado.geo_lon : ' ---' }} </li>
+      </ng-container>
+
+      <ng-template #old>
+        <li>Código:<span style="margin-right:3.8em"></span>{{formOt.codigo ? formOt.codigo : ' ---'}}</li>
+        <li>Nombre sitio:<span style="margin-right:1em"></span>{{formOt.sitio_nombre ? formOt.sitio_nombre : ' ---'}}</li>
+        <li>Dirección:<span style="margin-right:2.7em"></span>{{formOt.direccion ? formOt.direccion: ' ---' }} </li>
+        <li>Latitud: <span style="margin-right:3.7em"></span>{{formOt.latitud ? formOt.latitud : ' ---' }}</li>
+        <li>Longitud:<span style="margin-right:2.9em"></span>{{formOt.longitud ? formOt.longitud : ' ---' }} </li>
+      </ng-template>
+
     </ul>
   </ng-container>
 </app-card>

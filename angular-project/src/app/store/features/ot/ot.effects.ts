@@ -120,7 +120,17 @@ export class OtEffects {
           .pipe(
             map((res: any) => {
               if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
+                if (res.status.description === 'Sin resultados') {
+                  this.snackService.showMessage(
+                    `No existen sitios para el proyecto seleccionado - ${res.status.description}`,
+                    'warning'
+                  );
+                } else {
+                  this.snackService.showMessage(
+                    res.status.description,
+                    'error'
+                  );
+                }
               }
               return otActions.getSiteSuccess({
                 site: res.data.items.sort((a: OtModel.Site, b: OtModel.Site) =>
