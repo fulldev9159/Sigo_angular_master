@@ -316,5 +316,17 @@ export const reducerOt = createReducer(
 
   on(OtActions.resetData, (state, payload) => ({
     ...initialStateOt,
+  })),
+  on(OtActions.resetPlan, (state, payload) => ({
+    ...state,
+    planes: [],
+  })),
+  on(OtActions.resetSitio, (state, payload) => ({
+    ...state,
+    sites: [],
+  })),
+  on(OtActions.resetPMO, (state, payload) => ({
+    ...state,
+    pmos: [],
   }))
 );

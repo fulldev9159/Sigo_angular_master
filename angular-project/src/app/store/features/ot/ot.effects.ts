@@ -132,10 +132,14 @@ export class OtEffects {
                   );
                 }
               }
+              console.log();
+              const SortSites = res.data.items
+                ? res.data.items.sort((a: OtModel.Site, b: OtModel.Site) =>
+                    a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+                  )
+                : [];
               return otActions.getSiteSuccess({
-                site: res.data.items.sort((a: OtModel.Site, b: OtModel.Site) =>
-                  a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-                ),
+                site: SortSites,
               });
             }),
             catchError(err => of(otActions.getSiteError({ error: err })))
@@ -157,10 +161,13 @@ export class OtEffects {
               if (+res.status.responseCode !== 0) {
                 this.snackService.showMessage(res.status.description, 'error');
               }
+              const SortPMOs = res.data.items
+                ? res.data.items.sort((a: OtModel.PMO, b: OtModel.PMO) =>
+                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
+                  )
+                : [];
               return otActions.getPmoSuccess({
-                pmo: res.data.items.sort((a: OtModel.PMO, b: OtModel.PMO) =>
-                  a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                ),
+                pmo: SortPMOs,
               });
             }),
             catchError(err => of(otActions.getPmoError({ error: err })))
@@ -180,11 +187,14 @@ export class OtEffects {
               if (+res.status.responseCode !== 0) {
                 this.snackService.showMessage(res.status.description, 'error');
               }
-              return otActions.getIDOpexSuccess({
-                ids_opex: res.data.items.sort(
-                  (a: OtModel.IDOpex, b: OtModel.IDOpex) =>
+
+              const SortOPEXs = res.data.items
+                ? res.data.items.sort((a: OtModel.IDOpex, b: OtModel.IDOpex) =>
                     a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                ),
+                  )
+                : [];
+              return otActions.getIDOpexSuccess({
+                ids_opex: SortOPEXs,
               });
             }),
             catchError(err => of(otActions.getIDOpexError({ error: err })))
@@ -206,11 +216,14 @@ export class OtEffects {
               if (+res.status.responseCode !== 0) {
                 this.snackService.showMessage(res.status.description, 'error');
               }
+              const SortCuentasSOAP = res.data.items
+                ? res.data.items.sort(
+                    (a: OtModel.CuentaSap, b: OtModel.CuentaSap) =>
+                      a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
+                  )
+                : [];
               return otActions.getCuentaSAPSuccess({
-                cuentas_sap: res.data.items.sort(
-                  (a: OtModel.CuentaSap, b: OtModel.CuentaSap) =>
-                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                ),
+                cuentas_sap: SortCuentasSOAP,
               });
             }),
             catchError(err => of(otActions.getCuentaSAPError({ error: err })))
@@ -233,10 +246,13 @@ export class OtEffects {
               if (+res.status.responseCode !== 0) {
                 this.snackService.showMessage(res.status.description, 'error');
               }
+              const SortCECOs = res.data.items
+                ? res.data.items.sort((a: OtModel.CECO, b: OtModel.CECO) =>
+                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
+                  )
+                : [];
               return otActions.getCECOSuccess({
-                cecos: res.data.items.sort((a: OtModel.CECO, b: OtModel.CECO) =>
-                  a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                ),
+                cecos: SortCECOs,
               });
             }),
             catchError(err => of(otActions.getCECOError({ error: err })))
@@ -259,14 +275,17 @@ export class OtEffects {
               if (+res.status.responseCode !== 0) {
                 this.snackService.showMessage(res.status.description, 'error');
               }
+              const SortLPs = res.data.items
+                ? res.data.items.sort((a: OtModel.Lp, b: OtModel.Lp) =>
+                    a.lineas_presupuestarias > b.lineas_presupuestarias
+                      ? 1
+                      : b.lineas_presupuestarias > a.lineas_presupuestarias
+                      ? -1
+                      : 0
+                  )
+                : [];
               return otActions.getBudgetLineSuccess({
-                lp: res.data.items.sort((a: OtModel.Lp, b: OtModel.Lp) =>
-                  a.lineas_presupuestarias > b.lineas_presupuestarias
-                    ? 1
-                    : b.lineas_presupuestarias > a.lineas_presupuestarias
-                    ? -1
-                    : 0
-                ),
+                lp: SortLPs,
               });
             }),
             catchError(err => of(otActions.getBudgetLineError({ error: err })))

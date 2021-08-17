@@ -501,3 +501,6 @@ export const finalizeOTError = createAction(
 );
 
 export const resetData = createAction('[ResetData] ResetData');
+export const resetPlan = createAction('[ResetData] ResetPlan');
+export const resetSitio = createAction('[ResetData] ResetSitio');
+export const resetPMO = createAction('[ResetData] ResetPMO');

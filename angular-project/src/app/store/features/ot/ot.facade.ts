@@ -291,4 +291,15 @@ export class OtFacade {
   public resetData(): void {
     this.store.dispatch(otActions.resetData());
   }
+
+  public resetPlanProyecto(): void {
+    this.store.dispatch(otActions.resetPlan());
+  }
+  public resetSitio(): void {
+    this.store.dispatch(otActions.resetSitio());
+  }
+
+  public resetPMO(): void {
+    this.store.dispatch(otActions.resetPMO());
+  }
 }

@@ -78,6 +78,60 @@
               </app-select>
             </div>
           </div>
+          <div class="col-xs-12 col-md-6">
+            <label for="">Sustento Financiero</label>
+            <div class="row">
+              <div class="col-xs-12 col-md-5">
+                <div class="p-field-radiobutton">
+                  <p-radioButton id="capex" name="costos" formControlName="costos" value="capex"></p-radioButton>
+                  <label for="capex">Capex</label>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-5">
+                <div class="p-field-radiobutton">
+                  <p-radioButton id="opex" name="costos" formControlName="costos" value="opex"></p-radioButton>
+                  <label for="opex">Opex</label>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+          <div *ngIf="formOT.value.costos === 'capex'" class="col-12">
+            <div class="col-7">
+              <app-select [control]="formControls.pmo_codigo" label="PMO">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione PMO</option>
+                  <ng-container *ngFor="let pmo of pmos$ | async">
+                    <option [value]="pmo.codigo">
+                      {{ pmo.codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <br>
+            </div>
+          </div>
+
+          <div *ngIf="formOT.value.costos === 'opex'" class="col-12">
+            <div class="col-7">
+              <app-select [control]="formControls.id_opex_codigo" label="ID OPEX">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione ID OPEX</option>
+                  <ng-container *ngFor="let opex of ids_opex$ | async">
+                    <option [value]="opex.codigo">
+                      {{ opex.codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <!-- <label for="">ID Opex</label>
+              <select formControlName="id_opex_codigo" [attr.disabled]="ids_opex.length === 0 ? '' : null" class="form-control" name="" id="id-opex">
+                <option value="null" selected disabled>Seleccione ID Opex</option>
+                <option *ngFor="let id_opex of ids_opex" [value]="id_opex.codigo">{{id_opex.codigo}}</option>
+              </select> -->
+              <br>
+            </div>
+          </div>
         </div>
         <div class="col-xs-12 col-md-4">
           <app-detail [cubicacionSeleccionada]="cubicacionSeleccionada" [plan]="nombre_plan_proyecto" [sitioSeleccionado]="sitioSeleccionado" [formOt]="formOT.value"></app-detail>

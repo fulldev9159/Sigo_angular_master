@@ -30,7 +30,7 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
-import { Plan, Site } from '@storeOT/features/ot/ot.model';
+import { Plan, Site, PMO, IDOpex } from '@storeOT/features/ot/ot.model';
 import { Login } from '@data';
 
 @Component({
@@ -48,6 +48,8 @@ export class FormOt2Component implements OnInit, OnDestroy {
   nombre_plan_proyecto = '';
   sitios$: Observable<Site[]> = of([]);
   sitioSeleccionado: Site = null;
+  pmos$: Observable<PMO[]> = of([]);
+  ids_opex$: Observable<IDOpex[]> = of([]);
 
   formControls = {
     nombre: new FormControl('', [
@@ -59,6 +61,9 @@ export class FormOt2Component implements OnInit, OnDestroy {
     cubicacion_id: new FormControl(null, [Validators.required]),
     plan_proyecto_id: new FormControl(null, [Validators.required]),
     sitio_id: new FormControl(null, [Validators.required]),
+    costos: new FormControl('capex', []),
+    pmo_codigo: new FormControl(null, [Validators.required]),
+    id_opex_codigo: new FormControl(null, []),
   };
 
   formOT: FormGroup = new FormGroup(this.formControls);
@@ -112,6 +117,16 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.sitios$ = this.otFacade.getSitesSelector$().pipe(
       map(sitios => sitios || []),
       tap(sitios => this.checkSitiosAndEnable(sitios))
+    );
+
+    this.pmos$ = this.otFacade.getPmosSelector$().pipe(
+      map(pmos => pmos || []),
+      tap(pmos => this.checkPMOsAndEnable(pmos))
+    );
+
+    this.ids_opex$ = this.otFacade.getIDsOpexSelector$().pipe(
+      map(opexs => opexs || []),
+      tap(opexs => this.checkOPEXsAndEnable(opexs))
     );
   }
 
@@ -171,13 +186,13 @@ export class FormOt2Component implements OnInit, OnDestroy {
         .get('sitio_id')
         .valueChanges.pipe(withLatestFrom(this.sitios$))
         .subscribe(([sitio_id, sitios]) => {
+          this.resetPMOCodigoFormControl();
           if (sitio_id !== null && sitio_id !== undefined) {
-            console.log('Sitio ID:', sitio_id);
-            console.log(
-              'Sitio Selected',
-              sitios.find(s => +s.id === +sitio_id)
-            );
             this.sitioSeleccionado = sitios.find(s => +s.id === +sitio_id);
+            this.otFacade.getPmosAction({
+              sitio_codigo: this.sitioSeleccionado.codigo,
+            });
+            this.otFacade.getIDsOpex();
           }
         })
     );
@@ -185,10 +200,17 @@ export class FormOt2Component implements OnInit, OnDestroy {
 
   resetPlanProyectoFormControl(): void {
     this.formOT.get('plan_proyecto_id').reset();
+    this.otFacade.resetSitio();
   }
 
   resetSitioFormControl(): void {
     this.formOT.get('sitio_id').reset();
+    this.otFacade.resetPMO();
+    this.sitioSeleccionado = null;
+  }
+
+  resetPMOCodigoFormControl(): void {
+    this.formOT.get('pmo_codigo').reset();
   }
 
   checkPlanProyectoAndEnable(planes: Plan[]): void {
@@ -207,6 +229,22 @@ export class FormOt2Component implements OnInit, OnDestroy {
     }
   }
 
+  checkPMOsAndEnable(pmos: PMO[]): void {
+    if (pmos.length > 0) {
+      this.formOT.get('pmo_codigo').enable();
+    } else {
+      this.formOT.get('pmo_codigo').disable();
+    }
+  }
+
+  checkOPEXsAndEnable(opexs: IDOpex[]): void {
+    if (opexs.length > 0) {
+      this.formOT.get('id_opex_codigo').enable();
+    } else {
+      this.formOT.get('id_opex_codigo').disable();
+    }
+  }
+
   initData(): void {
     this.subscription.add(
       this.authFacade.getLogin$().subscribe(profile => {
@@ -221,6 +259,8 @@ export class FormOt2Component implements OnInit, OnDestroy {
   goBack(): void {
     this.otFacade.resetData();
     this.cubicacionSeleccionada = null;
+    this.nombre_plan_proyecto = '';
+    this.sitioSeleccionado = null;
     this.router.navigate(['/app/ot/list-ot']);
   }
 
