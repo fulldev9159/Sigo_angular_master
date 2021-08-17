@@ -59,18 +59,28 @@
                   </ng-container>
                 </ng-container>
               </app-select>
-              <!-- <select formControlName="plan_proyecto_id" [attr.disabled]="planes.length === 0 ? '' : null" class="form-control" name="" id="plan-proyecto">
-                <option value="null" selected disabled>Seleccione un plan de proyecto</option>
-                <option *ngFor="let plan of planes" [value]="plan.id">{{plan.nombre}} -
-                  {{plan.metas}}
-                </option>
-              </select> -->
               <br>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <!-- <label for="">Sitio</label>
+              <p-dropdown [options]="sitios$ |async" [formControlName]="'sitio_id'" optionLabel="nombre" [filter]="true" filterBy="nombre" [showClear]="true" placeholder="Seleccione un sitio....">
+
+              </p-dropdown> -->
+              <app-select [control]="formControls.sitio_id" label="Sitio">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione sitio</option>
+                  <ng-container *ngFor="let sitio of sitios$ | async">
+                    <option [value]="sitio.id">
+                      {{ sitio.codigo }} - {{ sitio.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
             </div>
           </div>
         </div>
         <div class="col-xs-12 col-md-4">
-          <!-- <app-detail [cubicacionSeleccionada]="cubicacionSeleccionada" [formOt]="formOt.value"></app-detail> -->
+          <app-detail [cubicacionSeleccionada]="cubicacionSeleccionada" [formOt]="formOT.value"></app-detail>
         </div>
       </div>
     </ng-container>
