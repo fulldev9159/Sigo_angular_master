@@ -302,4 +302,19 @@ export class OtFacade {
   public resetPMO(): void {
     this.store.dispatch(otActions.resetPMO());
   }
+  public resetLPs(): void {
+    this.store.dispatch(otActions.resetLPs());
+  }
+
+  public resetSAP(): void {
+    this.store.dispatch(otActions.resetSAP());
+  }
+
+  public resetPEP2(): void {
+    this.store.dispatch(otActions.resetPEP2());
+  }
+
+  public resetCECO(): void {
+    this.store.dispatch(otActions.resetCECO());
+  }
 }

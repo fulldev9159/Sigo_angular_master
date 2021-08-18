@@ -110,6 +110,24 @@
               </app-select>
               <br>
             </div>
+            <div class="col-7">
+              <app-select [control]="formControls.lp_codigo" label="Linea Presupuestaria">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
+                  <ng-container *ngFor="let lp of lps$ | async">
+                    <option [value]="lp.codigo">
+                      {{ lp.codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <!-- <label for="">Linea Presupuestaria</label>
+      <select formControlName="lp_codigo" [attr.disabled]="lps.length === 0 ? '' : null" class="form-control" name="" id="">
+        <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
+        <option *ngFor="let lp of lps" [value]="lp.codigo">{{lp.codigo}}</option>
+      </select> -->
+              <br>
+            </div>
           </div>
 
           <div *ngIf="formOT.value.costos === 'opex'" class="col-12">
@@ -124,11 +142,20 @@
                   </ng-container>
                 </ng-container>
               </app-select>
-              <!-- <label for="">ID Opex</label>
-              <select formControlName="id_opex_codigo" [attr.disabled]="ids_opex.length === 0 ? '' : null" class="form-control" name="" id="id-opex">
-                <option value="null" selected disabled>Seleccione ID Opex</option>
-                <option *ngFor="let id_opex of ids_opex" [value]="id_opex.codigo">{{id_opex.codigo}}</option>
-              </select> -->
+              <br>
+            </div>
+
+            <div class="col-7">
+              <app-select [control]="formControls.cuentas_sap" label="Cuenta SAP">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione Cuenta SAP</option>
+                  <ng-container *ngFor="let sap of cuentas_sap$ | async">
+                    <option [value]="sap.codigo">
+                      {{ sap.codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
               <br>
             </div>
           </div>

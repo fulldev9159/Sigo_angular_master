@@ -504,3 +504,7 @@ export const resetData = createAction('[ResetData] ResetData');
 export const resetPlan = createAction('[ResetData] ResetPlan');
 export const resetSitio = createAction('[ResetData] ResetSitio');
 export const resetPMO = createAction('[ResetData] ResetPMO');
+export const resetSAP = createAction('[ResetData] ResetSAP');
+export const resetLPs = createAction('[ResetData] ResetLPs');
+export const resetPEP2 = createAction('[ResetData] ResetPEP2');
+export const resetCECO = createAction('[ResetData] ResetCECO');

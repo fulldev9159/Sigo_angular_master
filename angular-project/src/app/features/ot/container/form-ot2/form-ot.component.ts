@@ -30,7 +30,14 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
-import { Plan, Site, PMO, IDOpex } from '@storeOT/features/ot/ot.model';
+import {
+  Plan,
+  Site,
+  PMO,
+  IDOpex,
+  CuentaSap,
+  Lp,
+} from '@storeOT/features/ot/ot.model';
 import { Login } from '@data';
 
 @Component({
@@ -49,7 +56,9 @@ export class FormOt2Component implements OnInit, OnDestroy {
   sitios$: Observable<Site[]> = of([]);
   sitioSeleccionado: Site = null;
   pmos$: Observable<PMO[]> = of([]);
+  cuentas_sap$: Observable<CuentaSap[]> = of([]);
   ids_opex$: Observable<IDOpex[]> = of([]);
+  lps$: Observable<Lp[]> = of([]);
 
   formControls = {
     nombre: new FormControl('', [
@@ -63,7 +72,9 @@ export class FormOt2Component implements OnInit, OnDestroy {
     sitio_id: new FormControl(null, [Validators.required]),
     costos: new FormControl('capex', []),
     pmo_codigo: new FormControl(null, [Validators.required]),
+    lp_codigo: new FormControl(null, [Validators.required]),
     id_opex_codigo: new FormControl(null, []),
+    cuentas_sap: new FormControl(null, []),
   };
 
   formOT: FormGroup = new FormGroup(this.formControls);
@@ -124,9 +135,19 @@ export class FormOt2Component implements OnInit, OnDestroy {
       tap(pmos => this.checkPMOsAndEnable(pmos))
     );
 
+    this.lps$ = this.otFacade.getLpsSelector$().pipe(
+      map(lps => lps || []),
+      tap(lps => this.checkLPsAndEnable(lps))
+    );
+
     this.ids_opex$ = this.otFacade.getIDsOpexSelector$().pipe(
       map(opexs => opexs || []),
       tap(opexs => this.checkOPEXsAndEnable(opexs))
+    );
+
+    this.cuentas_sap$ = this.otFacade.getCuentaSAPSelector$().pipe(
+      map(saps => saps || []),
+      tap(saps => this.checkSAPsAndEnable(saps))
     );
   }
 
@@ -134,6 +155,10 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.initCubicacionFormControlEvent();
     this.initProyectoPlanFormControlEvent();
     this.initSitioFormControlEvent();
+    this.initCostosFormControlEvent();
+    this.initPMOFormControlEvent();
+    this.initOPEXFormControlEvent();
+    // this.initCuentaSAPFormControlEvent()
   }
 
   initCubicacionFormControlEvent(): void {
@@ -198,21 +223,70 @@ export class FormOt2Component implements OnInit, OnDestroy {
     );
   }
 
-  resetPlanProyectoFormControl(): void {
-    this.formOT.get('plan_proyecto_id').reset();
-    this.otFacade.resetSitio();
+  initCostosFormControlEvent(): void {
+    this.subscription.add(
+      this.formOT.get('costos').valueChanges.subscribe(costos => {
+        if (costos === 'capex') {
+          this.resetOPEXFormControl();
+          this.formOT.get('pmo_codigo').setValidators([Validators.required]);
+          this.formOT.get('lp_codigo').setValidators([Validators.required]);
+          this.formOT.get('id_opex_codigo').setValidators(null);
+          this.formOT.get('cuentas_sap').setValidators(null);
+        } else if (costos === 'opex') {
+          this.formOT.get('pmo_codigo').reset();
+          this.formOT
+            .get('id_opex_codigo')
+            .setValidators([Validators.required]);
+          this.formOT.get('cuentas_sap').setValidators([Validators.required]);
+          this.formOT.get('pmo_codigo').setValidators(null);
+          this.formOT.get('lp_codigo').setValidators(null);
+        }
+      })
+    );
   }
 
-  resetSitioFormControl(): void {
-    this.formOT.get('sitio_id').reset();
-    this.otFacade.resetPMO();
-    this.sitioSeleccionado = null;
+  initPMOFormControlEvent(): void {
+    this.subscription.add(
+      this.formOT.get('pmo_codigo').valueChanges.subscribe(pmo_codigo => {
+        this.resetLPFormControl();
+        if (pmo_codigo !== null && pmo_codigo !== undefined) {
+          this.otFacade.getLpsAction({ pmo_codigo });
+        }
+      })
+    );
   }
 
-  resetPMOCodigoFormControl(): void {
-    this.formOT.get('pmo_codigo').reset();
+  initOPEXFormControlEvent(): void {
+    this.subscription.add(
+      this.formOT
+        .get('id_opex_codigo')
+        .valueChanges.subscribe(id_opex_codigo => {
+          this.resetSAPsFormControl();
+          if (id_opex_codigo !== null && id_opex_codigo !== undefined) {
+            this.otFacade.getCuentaSAPAction({ id_opex_codigo });
+          }
+        })
+    );
   }
 
+  // initCuentaSAPFormControlEvent(): void {
+  //   this.subscription.add(
+  //     this.formOT
+  //       .get('cuentas_sap')
+  //       .subscribe((saps) => {
+  //         this.resetSAPsFormControl();
+  //         if (saps !== null && saps !== undefined) {
+  //           this.sitioSeleccionado = sitios.find(s => +s.id === +sitio_id);
+  //           this.otFacade.getPmosAction({
+  //             sitio_codigo: this.sitioSeleccionado.codigo,
+  //           });
+  //           this.otFacade.getIDsOpex();
+  //         }
+  //       })
+  //   );
+  // }
+
+  //// ------ CHECKS ENABLED -------
   checkPlanProyectoAndEnable(planes: Plan[]): void {
     if (planes.length > 0) {
       this.formOT.get('plan_proyecto_id').enable();
@@ -237,12 +311,59 @@ export class FormOt2Component implements OnInit, OnDestroy {
     }
   }
 
+  checkLPsAndEnable(lps: Lp[]): void {
+    if (lps.length > 0) {
+      this.formOT.get('lp_codigo').enable();
+    } else {
+      this.formOT.get('lp_codigo').disable();
+    }
+  }
+
   checkOPEXsAndEnable(opexs: IDOpex[]): void {
     if (opexs.length > 0) {
       this.formOT.get('id_opex_codigo').enable();
     } else {
       this.formOT.get('id_opex_codigo').disable();
     }
+  }
+
+  checkSAPsAndEnable(saps: CuentaSap[]): void {
+    if (saps.length > 0) {
+      this.formOT.get('cuentas_sap').enable();
+    } else {
+      this.formOT.get('cuentas_sap').disable();
+    }
+  }
+
+  /// ----------- RESETS -----------------
+  resetPlanProyectoFormControl(): void {
+    this.formOT.get('plan_proyecto_id').reset();
+    this.otFacade.resetPlanProyecto();
+  }
+
+  resetSitioFormControl(): void {
+    this.formOT.get('sitio_id').reset();
+    this.otFacade.resetSitio();
+    this.sitioSeleccionado = null;
+  }
+
+  resetPMOCodigoFormControl(): void {
+    this.formOT.get('pmo_codigo').reset();
+    this.otFacade.resetPMO();
+  }
+
+  resetLPFormControl(): void {
+    this.formOT.get('lp_codigo').reset();
+    this.otFacade.resetLPs();
+  }
+
+  resetOPEXFormControl(): void {
+    this.formOT.get('ids_opex').reset();
+  }
+
+  resetSAPsFormControl(): void {
+    this.formOT.get('cuentas_sap').reset();
+    this.otFacade.resetSAP();
   }
 
   initData(): void {
