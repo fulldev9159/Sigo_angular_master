@@ -135,20 +135,8 @@
                   </ng-container>
                 </ng-container>
               </app-select>
-              <!-- <label for="">PEP2</label>
-              <select formControlName="capex_id" [attr.disabled]="pep2s.length === 0 ? '' : null" class="form-control" name="" id="">
-                <option value="null" selected disabled>Seleccione Pep2</option>
-                <option value="capex_provisorio">PEP2 provisorio</option>
-                <option *ngFor="let pep2 of pep2s" [value]="pep2.linea_presupuestaria_id">{{pep2.pep2_codigo}}</option>
-              </select> -->
               <br>
-              <!-- <label for="" *ngIf="formOt.value.capex_id==='capex_provisorio'">PEP2 provisorio</label>
-              <input *ngIf="formOt.value.capex_id==='capex_provisorio'" formControlName="pep2_provisorio" class="form-control" type="text">
-              <ng-container *ngIf="formOt.controls['pep2_provisorio'] as control">
-                <ng-container *ngIf="control.invalid && control.errors.maxlength">
-                  <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
-                </ng-container>
-              </ng-container> -->
+              <app-input *ngIf="formOT.value.pep2_capex_id==='capex_provisorio'" [control]="formControls.pep2_provisorio" [label]="'PEP2 provisorio'"></app-input>
               <br>
             </div>
           </div>
@@ -192,14 +180,9 @@
                   </ng-container>
                 </ng-container>
               </app-select>
-              <!-- <label for="">CECO</label>
-              <select formControlName="ceco_codigo" [attr.disabled]="cecos.length === 0 ? '' : null" class="form-control" name="" id="ceco">
-                <option value="null" selected disabled>Seleccione CECO</option>
-                <option value="ceco_provisorio">CECO provisorio</option>
-                <option *ngFor="let ceco of cecos" [value]="ceco.id">{{ceco.ceco}}</option>
-              </select> -->
               <br>
-              <!-- <label for="" *ngIf="formOt.value.ceco_codigo==='ceco_provisorio'">CECO provisorio</label>
+              <app-input *ngIf="formOT.value.ceco_codigo==='ceco_provisorio'" [control]="formControls.ceco_provisorio" [label]="'CECO provisorio'" id="ceco-provisorio"></app-input>
+              <!-- 
               <input *ngIf="formOt.value.ceco_codigo==='ceco_provisorio'" formControlName="ceco_provisorio" id="ceco-provisorio" class="form-control" type="text">
               <ng-container *ngIf="formOt.controls['ceco_provisorio'] as control">
                 <ng-container *ngIf="control.invalid && control.errors.maxlength">

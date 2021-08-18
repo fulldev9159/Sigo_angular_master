@@ -184,10 +184,10 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.initCostosFormControlEvent();
     this.initPMOFormControlEvent();
     this.initLPsFormControlEvent();
-    // this.initPep2FormControlEvent();
+    this.initPEP2FormControlEvent();
     this.initOPEXFormControlEvent();
     this.initCuentaSAPFormControlEvent();
-    // this.initCECOFormControlEvent();
+    this.initCECOFormControlEvent();
   }
 
   initCubicacionFormControlEvent(): void {
@@ -268,6 +268,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
           this.formOT.get('id_opex_codigo').setValidators(null);
           this.formOT.get('cuenta_sap_codigo').setValidators(null);
           this.formOT.get('ceco_codigo').setValidators(null);
+          this.formOT.get('ceco_provisorio').setValidators(null);
           this.resetControl(this.formOT.get('id_opex_codigo'));
           this.resetControl(this.formOT.get('cuenta_sap_codigo'));
           this.resetControl(this.formOT.get('ceco_codigo'));
@@ -287,6 +288,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
           this.formOT.get('pmo_codigo').setValidators(null);
           this.formOT.get('lp_codigo').setValidators(null);
           this.formOT.get('pep2_capex_id').setValidators(null);
+          this.formOT.get('pep2_provisorio').setValidators(null);
         }
       })
     );
@@ -321,6 +323,29 @@ export class FormOt2Component implements OnInit, OnDestroy {
     );
   }
 
+  initPEP2FormControlEvent(): void {
+    this.subscription.add(
+      this.formOT.get('pep2_capex_id').valueChanges.subscribe(pep2_capex_id => {
+        this.resetPep2ProvisorioFormControl();
+        if (
+          pep2_capex_id !== null &&
+          pep2_capex_id !== undefined &&
+          pep2_capex_id === 'capex_provisorio'
+        ) {
+          this.formOT
+            .get('pep2_provisorio')
+            .setValidators([Validators.required, this.noWhitespace]);
+        } else if (
+          pep2_capex_id !== null &&
+          pep2_capex_id !== undefined &&
+          pep2_capex_id !== 'capex_provisorio'
+        ) {
+          this.formOT.get('pep2_provisorio').setValidators(null);
+        }
+      })
+    );
+  }
+
   initOPEXFormControlEvent(): void {
     this.subscription.add(
       this.formOT
@@ -349,6 +374,29 @@ export class FormOt2Component implements OnInit, OnDestroy {
             });
           }
         })
+    );
+  }
+
+  initCECOFormControlEvent(): void {
+    this.subscription.add(
+      this.formOT.get('ceco_codigo').valueChanges.subscribe(ceco_codigo => {
+        this.resetCECOProvisorioFormControl();
+        if (
+          ceco_codigo !== null &&
+          ceco_codigo !== undefined &&
+          ceco_codigo === 'ceco_provisorio'
+        ) {
+          this.formOT
+            .get('ceco_provisorio')
+            .setValidators([Validators.required, this.noWhitespace]);
+        } else if (
+          ceco_codigo !== null &&
+          ceco_codigo !== undefined &&
+          ceco_codigo !== 'ceco_provisorio'
+        ) {
+          this.formOT.get('ceco_provisorio').setValidators(null);
+        }
+      })
     );
   }
 
@@ -443,6 +491,10 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.otFacade.resetPEP2();
   }
 
+  resetPep2ProvisorioFormControl(): void {
+    this.formOT.get('pep2_provisorio').reset();
+  }
+
   resetOPEXFormControl(): void {
     this.formOT.get('ids_opex').reset();
   }
@@ -455,6 +507,10 @@ export class FormOt2Component implements OnInit, OnDestroy {
   resetCECOFormControl(): void {
     this.formOT.get('ceco_codigo').reset();
     this.otFacade.resetCECO();
+  }
+
+  resetCECOProvisorioFormControl(): void {
+    this.formOT.get('ceco_provisorio').reset();
   }
 
   resetControl(control: AbstractControl): void {
