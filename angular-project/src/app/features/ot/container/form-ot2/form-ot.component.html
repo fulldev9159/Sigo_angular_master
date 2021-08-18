@@ -182,16 +182,53 @@
               </app-select>
               <br>
               <app-input *ngIf="formOT.value.ceco_codigo==='ceco_provisorio'" [control]="formControls.ceco_provisorio" [label]="'CECO provisorio'" id="ceco-provisorio"></app-input>
-              <!-- 
-              <input *ngIf="formOt.value.ceco_codigo==='ceco_provisorio'" formControlName="ceco_provisorio" id="ceco-provisorio" class="form-control" type="text">
-              <ng-container *ngIf="formOt.controls['ceco_provisorio'] as control">
-                <ng-container *ngIf="control.invalid && control.errors.maxlength">
-                  <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
-                </ng-container>
-              </ng-container> -->
               <br>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <label class="mr-1" for="">Fecha inicio</label>
+              <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot" name="fecha-inicio-ot"></p-calendar>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <label for="">Fecha termino</label>
+              <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot"></p-calendar>
+            </div>
+
+            <ng-container *ngIf="invalidDates">
+              <div class="col-12">
+                <p-messages [(value)]="msgsWrongDates" [closable]="false"></p-messages>
+              </div>
+            </ng-container>
+
+            <div class="col-xs-12 col-md-6">
+              <br>
+              <app-select [control]="formControls.proyecto_id" label="Proyecto">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione Proyecto</option>
+                  <ng-container *ngFor="let proyecto of proyectos$|async">
+                    <option [value]="proyecto.id">{{proyecto.nombre}}</option>
+                  </ng-container>
+                </ng-container>
+
+              </app-select>
+              <br>
+            </div>
+
+            <div class="col-12">
+              <br>
+              <label for="">Observaciones</label>
+              <textarea formControlName="observaciones" class="form-control" placeholder="..." name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
+              <br>
+            </div>
+
+            <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+              <button (click)="cancel();" class="btn btn-light mr-2">Cancelar</button>
+              <button (click)="save();" [disabled]="!formOT.valid || invalidDates" class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar</button>
+            </div>
+          </div>
+
         </div>
         <div class="col-xs-12 col-md-4">
           <app-detail [cubicacionSeleccionada]="cubicacionSeleccionada" [plan]="nombre_plan_proyecto" [sitioSeleccionado]="sitioSeleccionado" [formOt]="formOT.value"></app-detail>

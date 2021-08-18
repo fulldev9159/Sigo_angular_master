@@ -44,8 +44,11 @@ import {
   Lp,
   Pep2,
   CECO,
+  Proyecto,
+  RequestCreateOT,
 } from '@storeOT/features/ot/ot.model';
 import { Login } from '@data';
+import { resetData } from '@storeOT/features/cubicacion/cubicacion.actions';
 
 @Component({
   selector: 'app-form-ot2',
@@ -65,10 +68,19 @@ export class FormOt2Component implements OnInit, OnDestroy {
   pmos$: Observable<PMO[]> = of([]);
   lps$: Observable<Lp[]> = of([]);
   pep2s$: Observable<Pep2[]> = of([]);
+  proyectos$: Observable<Proyecto[]> = of([]);
 
   ids_opex$: Observable<IDOpex[]> = of([]);
   cuentas_sap$: Observable<CuentaSap[]> = of([]);
   cecos$: Observable<CECO[]> = of([]);
+
+  msgsWrongDates = [
+    {
+      severity: 'error',
+      summary: 'ERROR',
+      detail: 'La fecha de fin no puede ser inferior a la fecha de inicio',
+    },
+  ];
 
   formControls = {
     nombre: new FormControl('', [
@@ -91,6 +103,11 @@ export class FormOt2Component implements OnInit, OnDestroy {
     cuenta_sap_codigo: new FormControl(null, []),
     ceco_codigo: new FormControl(null, []),
     ceco_provisorio: new FormControl(null, []),
+
+    fecha_inicio: new FormControl(null, [Validators.required]),
+    fecha_fin: new FormControl(null, [Validators.required]),
+    proyecto_id: new FormControl(null, [Validators.required]),
+    observaciones: new FormControl(null, []),
   };
 
   formOT: FormGroup = new FormGroup(this.formControls);
@@ -175,6 +192,8 @@ export class FormOt2Component implements OnInit, OnDestroy {
       map(cecos => cecos || []),
       tap(cecos => this.checkCECOsAndEnable(cecos))
     );
+
+    this.proyectos$ = this.otFacade.getProyectoSelector$();
   }
 
   initFormControlsEvents(): void {
@@ -522,11 +541,12 @@ export class FormOt2Component implements OnInit, OnDestroy {
   }
 
   initData(): void {
+    this.cubageFacade.getCubicacionAction();
+    this.otFacade.getIDsOpex();
+    this.otFacade.getProyectoAction();
     this.subscription.add(
       this.authFacade.getLogin$().subscribe(profile => {
         if (profile) {
-          this.cubageFacade.getCubicacionAction();
-          this.otFacade.getIDsOpex();
           this.authLogin = profile;
         }
       })
@@ -545,5 +565,106 @@ export class FormOt2Component implements OnInit, OnDestroy {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
+  }
+
+  get invalidDates(): boolean {
+    if (
+      this.formOT.get('fecha_inicio').valid &&
+      this.formOT.get('fecha_fin').valid
+    ) {
+      const { fecha_inicio, fecha_fin } = this.formOT.getRawValue();
+      const sdDay = fecha_inicio.getDate();
+      const sdMonth = fecha_inicio.getMonth() + 1;
+      const sdYear = fecha_inicio.getFullYear();
+
+      const edDay = fecha_fin.getDate();
+      const edMonth = fecha_fin.getMonth() + 1;
+      const edYear = fecha_fin.getFullYear();
+
+      if (sdYear > edYear) {
+        return true;
+      }
+      if (sdMonth > edMonth) {
+        return true;
+      }
+      if (sdDay > edDay) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  cancel(): void {
+    // this.initForm(});
+    this.otFacade.resetData();
+    this.router.navigate(['app/ot/list-ot']);
+  }
+
+  touch(): void {
+    Object.keys(this.formOT.controls).forEach(field => {
+      const control = this.formOT.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.formOT.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
+  save(): void {
+    this.touch();
+    if (this.formOT.valid) {
+      const form = this.formOT.value;
+
+      const request: RequestCreateOT = {
+        nombre: form.nombre,
+        tipo: form.tipo,
+        proyecto_id: +form.proyecto_id,
+        cubicacion_id: +form.cubicacion_id,
+        sitio_id: +form.sitio_id,
+        propietario_id: +this.authLogin.usuario_id,
+        fecha_inicio: form.fecha_inicio,
+        fecha_fin: form.fecha_fin,
+        observaciones: form.observaciones,
+        sustento_financiero: {
+          tipo_sustento: form.costos.toUpperCase(),
+          capex_id: null,
+          opex_id: null,
+          capex_provisorio: null,
+          opex_provisorio: null,
+        },
+      };
+
+      if (form.costos.toUpperCase() === 'CAPEX') {
+        if (form.pep2_capex_id === 'capex_provisorio') {
+          request.sustento_financiero.capex_provisorio = {
+            pmo_codigo: +form.pmo_codigo,
+            lp_codigo: form.lp_codigo,
+            pep2_codigo: form.pep2_provisorio,
+          };
+        } else {
+          request.sustento_financiero.capex_id = +form.pep2_capex_id;
+        }
+      } else if (form.costos.toUpperCase() === 'OPEX') {
+        if (form.ceco_codigo === 'ceco_provisorio') {
+          request.sustento_financiero.opex_provisorio = {
+            id_opex: form.id_opex_codigo,
+            cuenta_sap: form.cuenta_sap_codigo,
+            ceco_codigo: form.ceco_provisorio,
+          };
+        } else {
+          request.sustento_financiero.opex_id = +form.ceco_codigo;
+        }
+      }
+
+      console.log(request);
+      // // this.otFacade.replyOt(form);
+      // this.otFacade.postOtSCE(request);
+      // this.otFacade.postOt(request);
+      // this.formOt.reset();
+    }
   }
 }
