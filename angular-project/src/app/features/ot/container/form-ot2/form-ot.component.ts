@@ -21,7 +21,12 @@ import {
 } from 'rxjs/operators';
 
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
@@ -37,6 +42,8 @@ import {
   IDOpex,
   CuentaSap,
   Lp,
+  Pep2,
+  CECO,
 } from '@storeOT/features/ot/ot.model';
 import { Login } from '@data';
 
@@ -56,9 +63,12 @@ export class FormOt2Component implements OnInit, OnDestroy {
   sitios$: Observable<Site[]> = of([]);
   sitioSeleccionado: Site = null;
   pmos$: Observable<PMO[]> = of([]);
-  cuentas_sap$: Observable<CuentaSap[]> = of([]);
-  ids_opex$: Observable<IDOpex[]> = of([]);
   lps$: Observable<Lp[]> = of([]);
+  pep2s$: Observable<Pep2[]> = of([]);
+
+  ids_opex$: Observable<IDOpex[]> = of([]);
+  cuentas_sap$: Observable<CuentaSap[]> = of([]);
+  cecos$: Observable<CECO[]> = of([]);
 
   formControls = {
     nombre: new FormControl('', [
@@ -71,10 +81,16 @@ export class FormOt2Component implements OnInit, OnDestroy {
     plan_proyecto_id: new FormControl(null, [Validators.required]),
     sitio_id: new FormControl(null, [Validators.required]),
     costos: new FormControl('capex', []),
+
     pmo_codigo: new FormControl(null, [Validators.required]),
     lp_codigo: new FormControl(null, [Validators.required]),
+    pep2_capex_id: new FormControl(null, [Validators.required]),
+    pep2_provisorio: new FormControl(null, []),
+
     id_opex_codigo: new FormControl(null, []),
-    cuentas_sap: new FormControl(null, []),
+    cuenta_sap_codigo: new FormControl(null, []),
+    ceco_codigo: new FormControl(null, []),
+    ceco_provisorio: new FormControl(null, []),
   };
 
   formOT: FormGroup = new FormGroup(this.formControls);
@@ -140,6 +156,11 @@ export class FormOt2Component implements OnInit, OnDestroy {
       tap(lps => this.checkLPsAndEnable(lps))
     );
 
+    this.pep2s$ = this.otFacade.getPep2sSelector$().pipe(
+      map(pep2s => pep2s || []),
+      tap(pep2s => this.checkPep2sAndEnable(pep2s))
+    );
+
     this.ids_opex$ = this.otFacade.getIDsOpexSelector$().pipe(
       map(opexs => opexs || []),
       tap(opexs => this.checkOPEXsAndEnable(opexs))
@@ -149,6 +170,11 @@ export class FormOt2Component implements OnInit, OnDestroy {
       map(saps => saps || []),
       tap(saps => this.checkSAPsAndEnable(saps))
     );
+
+    this.cecos$ = this.otFacade.getCECOSelector$().pipe(
+      map(cecos => cecos || []),
+      tap(cecos => this.checkCECOsAndEnable(cecos))
+    );
   }
 
   initFormControlsEvents(): void {
@@ -157,8 +183,11 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.initSitioFormControlEvent();
     this.initCostosFormControlEvent();
     this.initPMOFormControlEvent();
+    this.initLPsFormControlEvent();
+    // this.initPep2FormControlEvent();
     this.initOPEXFormControlEvent();
-    // this.initCuentaSAPFormControlEvent()
+    this.initCuentaSAPFormControlEvent();
+    // this.initCECOFormControlEvent();
   }
 
   initCubicacionFormControlEvent(): void {
@@ -177,6 +206,8 @@ export class FormOt2Component implements OnInit, OnDestroy {
                 region_id: this.cubicacionSeleccionada.region_id,
               });
             }
+          } else {
+            this.checkPlanProyectoAndEnable([]);
           }
         })
     );
@@ -200,6 +231,8 @@ export class FormOt2Component implements OnInit, OnDestroy {
                 region_id: this.cubicacionSeleccionada.region_id,
               });
             }
+          } else {
+            this.checkSitiosAndEnable([]);
           }
         })
     );
@@ -217,7 +250,8 @@ export class FormOt2Component implements OnInit, OnDestroy {
             this.otFacade.getPmosAction({
               sitio_codigo: this.sitioSeleccionado.codigo,
             });
-            this.otFacade.getIDsOpex();
+          } else {
+            this.checkPMOsAndEnable([]);
           }
         })
     );
@@ -227,19 +261,32 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.subscription.add(
       this.formOT.get('costos').valueChanges.subscribe(costos => {
         if (costos === 'capex') {
-          this.resetOPEXFormControl();
+          this.resetControl(this.formOT.get('pep2_provisorio'));
           this.formOT.get('pmo_codigo').setValidators([Validators.required]);
           this.formOT.get('lp_codigo').setValidators([Validators.required]);
+          this.formOT.get('pep2_capex_id').setValidators([Validators.required]);
           this.formOT.get('id_opex_codigo').setValidators(null);
-          this.formOT.get('cuentas_sap').setValidators(null);
+          this.formOT.get('cuenta_sap_codigo').setValidators(null);
+          this.formOT.get('ceco_codigo').setValidators(null);
+          this.resetControl(this.formOT.get('id_opex_codigo'));
+          this.resetControl(this.formOT.get('cuenta_sap_codigo'));
+          this.resetControl(this.formOT.get('ceco_codigo'));
+          this.resetControl(this.formOT.get('ceco_provisorio'));
         } else if (costos === 'opex') {
-          this.formOT.get('pmo_codigo').reset();
+          this.resetControl(this.formOT.get('pmo_codigo'));
+          this.resetControl(this.formOT.get('lp_codigo'));
+          this.resetControl(this.formOT.get('pep2_capex_id'));
+          this.resetControl(this.formOT.get('pep2_provisorio'));
           this.formOT
             .get('id_opex_codigo')
             .setValidators([Validators.required]);
-          this.formOT.get('cuentas_sap').setValidators([Validators.required]);
+          this.formOT
+            .get('cuenta_sap_codigo')
+            .setValidators([Validators.required]);
+          this.formOT.get('ceco_codigo').setValidators([Validators.required]);
           this.formOT.get('pmo_codigo').setValidators(null);
           this.formOT.get('lp_codigo').setValidators(null);
+          this.formOT.get('pep2_capex_id').setValidators(null);
         }
       })
     );
@@ -251,6 +298,24 @@ export class FormOt2Component implements OnInit, OnDestroy {
         this.resetLPFormControl();
         if (pmo_codigo !== null && pmo_codigo !== undefined) {
           this.otFacade.getLpsAction({ pmo_codigo });
+        } else {
+          this.checkLPsAndEnable([]);
+        }
+      })
+    );
+  }
+
+  initLPsFormControlEvent(): void {
+    this.subscription.add(
+      this.formOT.get('lp_codigo').valueChanges.subscribe(lp_codigo => {
+        this.resetPep2FormControl();
+        if (lp_codigo !== null && lp_codigo !== undefined) {
+          this.otFacade.getPep2sAction({
+            pmo_codigo: this.formOT.value.pmo_codigo,
+            lp_codigo,
+          });
+        } else {
+          this.checkPep2sAndEnable([]);
         }
       })
     );
@@ -264,27 +329,28 @@ export class FormOt2Component implements OnInit, OnDestroy {
           this.resetSAPsFormControl();
           if (id_opex_codigo !== null && id_opex_codigo !== undefined) {
             this.otFacade.getCuentaSAPAction({ id_opex_codigo });
+          } else {
+            this.checkSAPsAndEnable([]);
           }
         })
     );
   }
 
-  // initCuentaSAPFormControlEvent(): void {
-  //   this.subscription.add(
-  //     this.formOT
-  //       .get('cuentas_sap')
-  //       .subscribe((saps) => {
-  //         this.resetSAPsFormControl();
-  //         if (saps !== null && saps !== undefined) {
-  //           this.sitioSeleccionado = sitios.find(s => +s.id === +sitio_id);
-  //           this.otFacade.getPmosAction({
-  //             sitio_codigo: this.sitioSeleccionado.codigo,
-  //           });
-  //           this.otFacade.getIDsOpex();
-  //         }
-  //       })
-  //   );
-  // }
+  initCuentaSAPFormControlEvent(): void {
+    this.subscription.add(
+      this.formOT
+        .get('cuenta_sap_codigo')
+        .valueChanges.subscribe(cuenta_sap_codigo => {
+          this.resetCECOFormControl();
+          if (cuenta_sap_codigo !== null && cuenta_sap_codigo !== undefined) {
+            this.otFacade.getCECOAction({
+              id_opex_codigo: this.formOT.value.id_opex_codigo,
+              cuenta_sap_codigo,
+            });
+          }
+        })
+    );
+  }
 
   //// ------ CHECKS ENABLED -------
   checkPlanProyectoAndEnable(planes: Plan[]): void {
@@ -319,6 +385,14 @@ export class FormOt2Component implements OnInit, OnDestroy {
     }
   }
 
+  checkPep2sAndEnable(pep2s: Pep2[]): void {
+    if (pep2s.length > 0) {
+      this.formOT.get('pep2_capex_id').enable();
+    } else {
+      this.formOT.get('pep2_capex_id').disable();
+    }
+  }
+
   checkOPEXsAndEnable(opexs: IDOpex[]): void {
     if (opexs.length > 0) {
       this.formOT.get('id_opex_codigo').enable();
@@ -329,12 +403,19 @@ export class FormOt2Component implements OnInit, OnDestroy {
 
   checkSAPsAndEnable(saps: CuentaSap[]): void {
     if (saps.length > 0) {
-      this.formOT.get('cuentas_sap').enable();
+      this.formOT.get('cuenta_sap_codigo').enable();
     } else {
-      this.formOT.get('cuentas_sap').disable();
+      this.formOT.get('cuenta_sap_codigo').disable();
     }
   }
 
+  checkCECOsAndEnable(cecos: CECO[]): void {
+    if (cecos.length > 0) {
+      this.formOT.get('ceco_codigo').enable();
+    } else {
+      this.formOT.get('ceco_codigo').disable();
+    }
+  }
   /// ----------- RESETS -----------------
   resetPlanProyectoFormControl(): void {
     this.formOT.get('plan_proyecto_id').reset();
@@ -357,13 +438,31 @@ export class FormOt2Component implements OnInit, OnDestroy {
     this.otFacade.resetLPs();
   }
 
+  resetPep2FormControl(): void {
+    this.formOT.get('pep2_capex_id').reset();
+    this.otFacade.resetPEP2();
+  }
+
   resetOPEXFormControl(): void {
     this.formOT.get('ids_opex').reset();
   }
 
   resetSAPsFormControl(): void {
-    this.formOT.get('cuentas_sap').reset();
+    this.formOT.get('cuenta_sap_codigo').reset();
     this.otFacade.resetSAP();
+  }
+
+  resetCECOFormControl(): void {
+    this.formOT.get('ceco_codigo').reset();
+    this.otFacade.resetCECO();
+  }
+
+  resetControl(control: AbstractControl): void {
+    control.reset();
+    control.clearValidators();
+    control.markAsUntouched();
+    control.markAsPristine();
+    control.updateValueAndValidity();
   }
 
   initData(): void {
@@ -371,6 +470,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
       this.authFacade.getLogin$().subscribe(profile => {
         if (profile) {
           this.cubageFacade.getCubicacionAction();
+          this.otFacade.getIDsOpex();
           this.authLogin = profile;
         }
       })
