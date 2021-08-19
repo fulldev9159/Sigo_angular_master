@@ -80,7 +80,7 @@
                   </ng-container>
                 </div>
 
-                <div class="col-12 field-box" [formGroup]="formGeneral">
+                <div class="col-12 field-box" [formGroup]="formGeneral" id="contratoField">
                   <app-select [control]="formControlsGeneral.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione contrato</option>
@@ -93,7 +93,7 @@
                   </app-select>
                 </div>
 
-                <div class="col-12 field-box" [formGroup]="formGeneral">
+                <div class="col-12 field-box" [formGroup]="formGeneral" id="proveedorField">
                   <app-select [control]="formControlsGeneral.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione proveedor</option>
@@ -106,7 +106,7 @@
                   </app-select>
                 </div>
 
-                <div class="col-12 field-box" [formGroup]="formCubicacion">
+                <div class="col-12 field-box" [formGroup]="formNormal" id="regionField">
                   <app-select [control]="formControls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione región</option>
@@ -123,7 +123,7 @@
 
             <div class="col-xs-12 col-md-8">
               <div class="row">
-                <div class="col-12 field-box" [formGroup]="formCubicacion">
+                <div class="col-12 field-box" [formGroup]="formNormal" id="tipoServicioField">
                   <app-select [control]="formControls.tipo_servicio_id" label="Tipo Servicio" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione un tipo de servicio</option>
@@ -136,7 +136,7 @@
                   </app-select>
                 </div>
 
-                <div class="col-12 field-box" style="height: 300px; max-height: 300px" [formGroup]="formCubicacion">
+                <div class="col-12 field-box" style="height: 300px; max-height: 300px" [formGroup]="formNormal" id="lpusBox">
                   <label for="">Servicios LPU</label>
                   <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
                     <ng-template let-data pTemplate="item">
@@ -169,7 +169,7 @@
               </ng-container>
             </div>
 
-            <div class="col-xs-12 col-md-12 text-right button-guardar-cubicacion">
+            <div class="col-xs-12 col-md-12 text-right button-guardar-cubicacion" id="submitButtonBox">
               <ng-container *ngIf="lpusCarrito.length === 0">
                 <span>
                   <p-message severity="info" text="Al menos 1 LPU debe ser ingresada"></p-message>&nbsp;
