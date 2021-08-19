@@ -120,6 +120,21 @@
                     </app-select>
                   </div>
                 </ng-container>
+
+                <ng-container *ngIf="(ordinaryContract$ | async) === true">
+                  <div class="col-12 field-box" [formGroup]="formOrdinario" id="tipoMonedaField">
+                    <app-select [control]="formOrdinarioControls.tipo_moneda_id" label="Moneda" [errorMessageFn]="errorMessageFn">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione tipo de moneda</option>
+                        <ng-container *ngFor="let tipoMoneda of tiposMoneda$ | async">
+                          <option [value]="tipoMoneda.id">
+                            {{tipoMoneda.codigo}} - {{ tipoMoneda.nombre }}
+                          </option>
+                        </ng-container>
+                      </ng-container>
+                    </app-select>
+                  </div>
+                </ng-container>
               </div>
             </div>
 

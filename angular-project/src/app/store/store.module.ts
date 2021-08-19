@@ -8,6 +8,11 @@ import { AuthEffects } from './features/auth/auth.effects';
 import * as formAuthReduce from './features/auth/auth.reducer';
 // AUTH STORE
 
+// TIPO MONEDA STORE
+import { TipoMonedaEffects } from './features/tipo-moneda/tipo-moneda.effects';
+import * as formTipoMonedaReduce from './features/tipo-moneda/tipo-moneda.reducer';
+// TIPO MONEDA STORE
+
 // OT STORE
 import { OtEffects } from './features/ot/ot.effects';
 import * as formOtReduce from './features/ot/ot.reducer';
@@ -40,6 +45,14 @@ import * as formUserReduce from './features/user/user.reducer';
       formAuthReduce.reducerAuth
     ),
     // AUTH STORE
+
+    // TIPO MONEDA STORE
+    EffectsModule.forFeature([TipoMonedaEffects]),
+    StoreModule.forFeature(
+      formTipoMonedaReduce.featureKey,
+      formTipoMonedaReduce.reducerTipoMoneda
+    ),
+    // TIPO MONEDA STORE
 
     // OT STORE
     EffectsModule.forFeature([OtEffects]),

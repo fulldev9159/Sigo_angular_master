@@ -27,10 +27,11 @@ import {
 } from 'rxjs/operators';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import { TipoMonedaFacade } from '@storeOT/features/tipo-moneda/tipo-moneda.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponent } from '@uiOT/table/table.component';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CubicacionWithLpu } from '@data';
+import { CubicacionWithLpu, TipoMoneda } from '@data';
 
 // tslint:disable-next-line:no-empty-interface
 interface CartItem extends CubModel.Service {}
@@ -91,6 +92,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   tiposServicio: CubModel.TypeService[] = []; // TODO: mejorar ésto
   servicios$: Observable<CubModel.Service[]> = of([]);
   servicios: CubModel.Service[] = []; // TODO: mejorar ésto
+  tiposMoneda$: Observable<TipoMoneda[]> = of([]);
+  tiposMoneda: TipoMoneda[] = []; // TODO: mejorar ésto
 
   hasLPUWithZeroQuantity = false;
   tableValid = true;
@@ -279,6 +282,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     private cubageFacade: CubicacionFacade,
+    private tipoMonedaFacade: TipoMonedaFacade,
     private router: Router,
     private route: ActivatedRoute,
     private detector: ChangeDetectorRef
@@ -286,6 +290,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cubageFacade.resetData();
+    this.tipoMonedaFacade.resetData();
 
     this.initObservables();
     this.initFormControlsEvents();
@@ -315,6 +320,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.servicios$ = this.cubageFacade.getServicesSelector$().pipe(
       map(servicios => servicios || []),
       map(servicios => (this.servicios = servicios))
+    );
+
+    this.tiposMoneda$ = this.tipoMonedaFacade.getTiposMoneda$().pipe(
+      map(tiposMoneda => tiposMoneda || []),
+      map(tiposMoneda => (this.tiposMoneda = tiposMoneda))
     );
 
     // Edición
@@ -375,9 +385,12 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   initFormControlsEvents(): void {
     this.initContratoMarcoFormControlEvent();
     this.initProveedorFormControlEvent();
+
     this.initRegionFormControlEvent();
     this.initTipoServicioFormControlEvent();
     this.initLpuCarritoEvent();
+
+    this.initTipoMonedaFormControlEvent();
   }
 
   initContratoMarcoFormControlEvent(): void {
@@ -499,12 +512,23 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     );
   }
 
+  initTipoMonedaFormControlEvent(): void {
+    this.subscription.add(
+      this.formOrdinario
+        .get('tipo_moneda_id')
+        .valueChanges.subscribe(tipo_moneda_id => {
+          console.log('tipo moneda selected', tipo_moneda_id);
+        })
+    );
+  }
+
   initFormData(): void {
     this.formGeneral.get('subcontrato_id').disable({ emitEvent: false });
     this.formGeneral.get('proveedor_id').disable({ emitEvent: false });
 
     this.cubageFacade.getAutoSuggestAction('', 5);
     this.cubageFacade.getContractMarcoAction();
+    this.tipoMonedaFacade.getTiposMoneda();
 
     this.formNormal.get('region_id').disable({ emitEvent: false });
     this.formNormal.get('tipo_servicio_id').disable({ emitEvent: false });

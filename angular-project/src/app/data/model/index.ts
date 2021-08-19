@@ -5,3 +5,4 @@ export * from './perfil';
 export * from './permiso';
 export * from './accion';
 export * from './user';
+export * from './tipo-moneda';
