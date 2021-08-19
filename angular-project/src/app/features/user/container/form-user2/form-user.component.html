@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Usuario </h1>
+      <span>formulario de ingreso</span>
+    </div>
+    <div class="col">
+      <!-- <button [routerLink]="['/app/user/list-user']" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined "></button> -->
+      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-body>
+      <div class="row">
+        <div class="col-12">
+
+        </div>
+      </div>
+    </ng-container>
+  </app-card>
+</div>
