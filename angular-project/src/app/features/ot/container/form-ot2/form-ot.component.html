@@ -17,14 +17,14 @@
 
     </ng-container>
     <ng-container card-body>
-      <div [formGroup]="formOT" class="row">
+      <div [formGroup]="formOT" class="row" id="box">
         <div class="col-xs-12 col-md-8">
           <div class="row">
             <div class="col-xs-12 col-md-6">
-              <app-input [control]="formControls.nombre" [label]="'Nombre de la orden de trabajo'"></app-input>
+              <app-input ID="nombre-ot" [control]="formControls.nombre" [label]="'Nombre de la orden de trabajo'"></app-input>
             </div>
             <div class="col-xs-12 col-md-6">
-              <app-select [control]="formControls.tipo" label="Tipo OT">
+              <app-select [control]="formControls.tipo" label="Tipo OT" ID="tipo-ot">
                 <ng-container options>
                   <option value="null" selected disabled>Seleccione tipo OT</option>
                   <option value="OT">OT</option>
@@ -34,7 +34,7 @@
               <br>
             </div>
             <div class="col-xs-12 col-md-6">
-              <app-select [control]="formControls.cubicacion_id" label="Cubicación">
+              <app-select [control]="formControls.cubicacion_id" label="Cubicación" ID="cubicacion-de-ot">
                 <ng-container options>
                   <option value="null" selected disabled>Seleccione cubicación</option>
                   <ng-container *ngFor="let cubicacion of cubicaciones$ | async">
@@ -49,7 +49,7 @@
           </div>
           <div class="row">
             <div class="col-xs-12 col-md-6">
-              <app-select [control]="formControls.plan_proyecto_id" label="Plan de proyecto">
+              <app-select [control]="formControls.plan_proyecto_id" label="Plan de proyecto" ID="plan-proyecto">
                 <ng-container options>
                   <option value="null" selected disabled>Seleccione plan de proyecto</option>
                   <ng-container *ngFor="let plan of planes$ | async">
@@ -59,18 +59,179 @@
                   </ng-container>
                 </ng-container>
               </app-select>
-              <!-- <select formControlName="plan_proyecto_id" [attr.disabled]="planes.length === 0 ? '' : null" class="form-control" name="" id="plan-proyecto">
-                <option value="null" selected disabled>Seleccione un plan de proyecto</option>
-                <option *ngFor="let plan of planes" [value]="plan.id">{{plan.nombre}} -
-                  {{plan.metas}}
-                </option>
-              </select> -->
+              <br>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <!-- <label for="">Sitio</label>
+              <p-dropdown [options]="sitios$ |async" [formControlName]="'sitio_id'" optionLabel="nombre" [filter]="true" filterBy="nombre" [showClear]="true" placeholder="Seleccione un sitio....">
+
+              </p-dropdown> -->
+              <app-select [control]="formControls.sitio_id" label="Sitio" ID="sitio">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione sitio</option>
+                  <ng-container *ngFor="let sitio of sitios$ | async">
+                    <option [value]="sitio.id">
+                      {{ sitio.codigo }} - {{ sitio.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <label for="">Sustento Financiero</label>
+            <div class="row">
+              <div class="col-xs-12 col-md-5">
+                <div class="p-field-radiobutton">
+                  <p-radioButton id="capex" name="costos" formControlName="costos" value="capex"></p-radioButton>
+                  <label for="capex">Capex</label>
+                </div>
+              </div>
+              <div class="col-xs-12 col-md-5">
+                <div class="p-field-radiobutton">
+                  <p-radioButton id="opex" name="costos" formControlName="costos" value="opex"></p-radioButton>
+                  <label for="opex">Opex</label>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+          <div *ngIf="formOT.value.costos === 'capex'" class="col-12">
+            <div class="col-7">
+              <app-select [control]="formControls.pmo_codigo" label="PMO" ID="pmo">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione PMO</option>
+                  <ng-container *ngFor="let pmo of pmos$ | async">
+                    <option [value]="pmo.codigo">
+                      {{ pmo.codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <br>
+            </div>
+            <div class="col-7">
+              <app-select [control]="formControls.lp_codigo" label="Linea Presupuestaria" ID="linea-presupuestaria">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
+                  <ng-container *ngFor="let lp of lps$ | async">
+                    <option [value]="lp.codigo">
+                      {{ lp.codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <br>
+            </div>
+            <div class="col-7">
+              <app-select [control]="formControls.pep2_capex_id" label="PEP2" ID="pep2">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione Pep2</option>
+                  <option value="capex_provisorio">PEP2 provisorio</option>
+                  <ng-container *ngFor="let pep2 of pep2s$ | async">
+                    <option [value]="pep2.linea_presupuestaria_id">
+                      {{ pep2.pep2_codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <br>
+              <app-input ID="pep2-provisorio" *ngIf="formOT.value.pep2_capex_id==='capex_provisorio'" [control]="formControls.pep2_provisorio" [label]="'PEP2 provisorio'"></app-input>
               <br>
             </div>
           </div>
+
+          <div *ngIf="formOT.value.costos === 'opex'" class="col-12">
+            <div class="col-7">
+              <app-select [control]="formControls.id_opex_codigo" label="ID OPEX" ID="id-opex">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione ID OPEX</option>
+                  <ng-container *ngFor="let opex of ids_opex$ | async">
+                    <option [value]="opex.codigo">
+                      {{ opex.codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <br>
+            </div>
+            <div class="col-7">
+              <app-select [control]="formControls.cuenta_sap_codigo" label="Cuenta SAP" ID="cuenta-sap">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione Cuenta SAP</option>
+                  <ng-container *ngFor="let sap of cuentas_sap$ | async">
+                    <option [value]="sap.codigo">
+                      {{ sap.codigo }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <br>
+            </div>
+            <div class="col-7">
+              <app-select [control]="formControls.ceco_codigo" label="CECO" ID="ceco">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione CECO</option>
+                  <option value="ceco_provisorio">CECO provisorio</option>
+                  <ng-container *ngFor="let ceco of cecos$ | async">
+                    <option [value]="ceco.id">
+                      {{ ceco.ceco }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+              <br>
+              <app-input ID="ceco" *ngIf="formOT.value.ceco_codigo==='ceco_provisorio'" [control]="formControls.ceco_provisorio" [label]="'CECO provisorio'" id="ceco-provisorio"></app-input>
+              <br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <label class="mr-1" for="">Fecha inicio</label>
+              <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot" name="fecha-inicio-ot"></p-calendar>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <label for="">Fecha termino</label>
+              <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot"></p-calendar>
+            </div>
+
+            <ng-container *ngIf="invalidDates">
+              <div class="col-12">
+                <p-messages [(value)]="msgsWrongDates" [closable]="false"></p-messages>
+              </div>
+            </ng-container>
+
+            <div class="col-xs-12 col-md-6">
+              <br>
+              <app-select [control]="formControls.proyecto_id" label="Proyecto" ID="proyecto-ot">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione Proyecto</option>
+                  <ng-container *ngFor="let proyecto of proyectos$|async">
+                    <option [value]="proyecto.id">{{proyecto.nombre}}</option>
+                  </ng-container>
+                </ng-container>
+
+              </app-select>
+              <br>
+            </div>
+
+            <div class="col-12">
+              <br>
+              <label for="">Observaciones</label>
+              <textarea formControlName="observaciones" class="form-control" placeholder="..." name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
+              <br>
+            </div>
+
+            <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+              <button (click)="cancel();" class="btn btn-light mr-2">Cancelar</button>
+              <button (click)="save();" [disabled]="!formOT.valid || invalidDates" class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar</button>
+            </div>
+          </div>
+
         </div>
         <div class="col-xs-12 col-md-4">
-          <!-- <app-detail [cubicacionSeleccionada]="cubicacionSeleccionada" [formOt]="formOt.value"></app-detail> -->
+          <app-detail [cubicacionSeleccionada]="cubicacionSeleccionada" [plan]="nombre_plan_proyecto" [sitioSeleccionado]="sitioSeleccionado" [formOt]="formOT.value"></app-detail>
         </div>
       </div>
     </ng-container>

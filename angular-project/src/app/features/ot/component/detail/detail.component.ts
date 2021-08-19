@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Site } from '@storeOT/features/ot/ot.model';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -17,6 +18,8 @@ import { Subject } from 'rxjs';
 export class DetailComponent implements OnInit, OnDestroy {
   // declarations
   @Input() formOt: any;
+  @Input() plan: string;
+  @Input() sitioSeleccionado: Site;
   @Input() cubicacionSeleccionada: any;
   private destroyInstance: Subject<boolean> = new Subject();
 

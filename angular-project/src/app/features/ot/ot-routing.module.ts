@@ -27,7 +27,7 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'form-ot',
+        path: 'form-ot2',
         component: FormOtComponent,
         canActivate: [NgxPermissionsGuard],
         data: {
@@ -35,11 +35,11 @@ export const routes: Routes = [
             only: 'OT_CREAR',
             redirectTo: '/app/ot/list-ot',
           },
-          state: 'form-ot',
+          state: 'form-ot2',
         },
       },
       {
-        path: 'form-ot2',
+        path: 'form-ot',
         component: FormOt2Component,
         canActivate: [NgxPermissionsGuard],
         data: {
@@ -47,7 +47,7 @@ export const routes: Routes = [
             only: 'OT_CREAR',
             redirectTo: '/app/ot/list-ot',
           },
-          state: 'form-ot2',
+          state: 'form-ot',
         },
       },
       // {
