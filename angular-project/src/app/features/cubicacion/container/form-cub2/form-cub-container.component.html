@@ -44,10 +44,10 @@
       <app-card [classCardHeader]="'bg-secondary text-white'">
         <ng-container card-header-title> </ng-container>
         <ng-container card-body>
-          <div [formGroup]="formCubicacion" class="row" id="box">
+          <div class="row">
             <div class="col-xs-12 col-md-4">
               <div class="row">
-                <div class="col-12 field-box">
+                <div class="col-12 field-box" [formGroup]="formGeneral">
                   <label for="">Nombre</label>
                   <div class="ng-autocomplete">
                     <ng-autocomplete formControlName="nombre" [data]="autoSuggestItems$ | async" [searchKeyword]="'name'" (selected)="nameSelected($event)" (inputChanged)="nameChanged($event)" (inputFocused)="nameFocused($event)" (inputCleared)="nameCleared($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"></ng-autocomplete>
@@ -61,7 +61,7 @@
                     </ng-template>
                   </div>
 
-                  <ng-container *ngIf="formCubicacion.controls['nombre'] as control">
+                  <ng-container *ngIf="formGeneral.controls['nombre'] as control">
                     <ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
                       <ng-container *ngIf="control.errors.required; else whitespace">
                         <p-message severity="error" text="Este campo es requerido"></p-message>
@@ -80,8 +80,8 @@
                   </ng-container>
                 </div>
 
-                <div class="col-12 field-box">
-                  <app-select [control]="formControls.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
+                <div class="col-12 field-box" [formGroup]="formGeneral">
+                  <app-select [control]="formControlsGeneral.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione contrato</option>
                       <ng-container *ngFor="let contratoMarco of contratosMarcos$ | async">
@@ -93,8 +93,8 @@
                   </app-select>
                 </div>
 
-                <div class="col-12 field-box">
-                  <app-select [control]="formControls.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
+                <div class="col-12 field-box" [formGroup]="formGeneral">
+                  <app-select [control]="formControlsGeneral.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione proveedor</option>
                       <ng-container *ngFor="let proveedor of proveedores$ | async">
@@ -106,7 +106,7 @@
                   </app-select>
                 </div>
 
-                <div class="col-12 field-box">
+                <div class="col-12 field-box" [formGroup]="formCubicacion">
                   <app-select [control]="formControls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione región</option>
@@ -122,33 +122,38 @@
             </div>
 
             <div class="col-xs-12 col-md-8">
-              <div class="col-12 field-box">
-                <app-select [control]="formControls.tipo_servicio_id" label="Tipo Servicio" [errorMessageFn]="errorMessageFn">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione un tipo de servicio</option>
-                    <ng-container *ngFor="let tipoServicio of tiposServicio$ | async">
-                      <option [value]="tipoServicio.id">
-                        {{ tipoServicio.nombre }}
-                      </option>
+              <div class="row">
+                <div class="col-12 field-box" [formGroup]="formCubicacion">
+                  <app-select [control]="formControls.tipo_servicio_id" label="Tipo Servicio" [errorMessageFn]="errorMessageFn">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione un tipo de servicio</option>
+                      <ng-container *ngFor="let tipoServicio of tiposServicio$ | async">
+                        <option [value]="tipoServicio.id">
+                          {{ tipoServicio.nombre }}
+                        </option>
+                      </ng-container>
                     </ng-container>
-                  </ng-container>
-                </app-select>
-              </div>
+                  </app-select>
+                </div>
 
-              <div class="col-12 field-box" style="height: 300px; max-height: 300px">
-                <label for="">Servicios LPU</label>
-                <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
-                  <ng-template let-data pTemplate="item">
-                    <div class="country-item">
-                      <div>{{ data.lpu_nombre }}</div>
-                    </div>
-                  </ng-template>
-                </p-listbox>
+                <div class="col-12 field-box" style="height: 300px; max-height: 300px" [formGroup]="formCubicacion">
+                  <label for="">Servicios LPU</label>
+                  <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
+                    <ng-template let-data pTemplate="item">
+                      <div class="country-item">
+                        <div>{{ data.lpu_nombre }}</div>
+                      </div>
+                    </ng-template>
+                  </p-listbox>
+                </div>
               </div>
             </div>
+          </div>
 
+          <hr>
+
+          <div class="row">
             <div class="col-12">
-              <hr>
               <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
 
               <div id="total">

@@ -102,8 +102,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   total = 0;
   currency = '';
 
-  formControls = {
-    // cubicacion_id: null,
+  formControlsGeneral = {
     nombre: new FormControl('', [
       Validators.required,
       this.noWhitespace,
@@ -112,6 +111,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     contrato_marco_id: new FormControl(null, [Validators.required]),
     subcontrato_id: new FormControl(null, [Validators.required]),
     proveedor_id: new FormControl(null, [Validators.required]),
+  };
+
+  formGeneral: FormGroup = new FormGroup(this.formControlsGeneral);
+
+  formControls = {
     region_id: new FormControl(null, [Validators.required]),
     tipo_servicio_id: new FormControl(null, []),
     lpus: new FormControl([], []),
@@ -239,7 +243,6 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   noWhitespace(control: FormControl): any {
     const nombreCub =
       typeof control.value === 'object' ? control.value.name : control.value;
-    console.log('CONTROL', nombreCub);
     const isWhitespace = (nombreCub || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
@@ -266,11 +269,15 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.cubageFacade.resetData();
 
     this.initObservables();
-    this.initFormControlsEvents();
-    this.initData();
+    this.initFormGeneralControlsEvents();
+    this.initFormCubicacionControlsEvents();
+    this.initFormGeneralData();
+    this.initFormCubicacionData();
 
     this.checkCubageEditionFromParams();
-    this.initEditionData();
+
+    this.initFormGeneralEditionData();
+    this.initFormCubicacionEditionData();
   }
 
   initObservables(): void {
@@ -307,17 +314,17 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   resetProveedoresFormControl(): void {
-    this.formCubicacion.get('subcontrato_id').reset();
-    this.formCubicacion.get('proveedor_id').reset();
+    this.formGeneral.get('subcontrato_id').reset();
+    this.formGeneral.get('proveedor_id').reset();
   }
 
   checkProveedoresAndEnable(proveedores: CubModel.Provider[]): void {
     if (proveedores.length > 0) {
-      this.formCubicacion.get('subcontrato_id').enable();
-      this.formCubicacion.get('proveedor_id').enable();
+      this.formGeneral.get('subcontrato_id').enable();
+      this.formGeneral.get('proveedor_id').enable();
     } else {
-      this.formCubicacion.get('subcontrato_id').disable();
-      this.formCubicacion.get('proveedor_id').disable();
+      this.formGeneral.get('subcontrato_id').disable();
+      this.formGeneral.get('proveedor_id').disable();
     }
   }
 
@@ -350,9 +357,12 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.formCubicacion.get('lpus').setValue([]);
   }
 
-  initFormControlsEvents(): void {
+  initFormGeneralControlsEvents(): void {
     this.initContratoMarcoFormControlEvent();
     this.initProveedorFormControlEvent();
+  }
+
+  initFormCubicacionControlsEvents(): void {
     this.initRegionFormControlEvent();
     this.initTipoServicioFormControlEvent();
     this.initLpuCarritoEvent();
@@ -360,7 +370,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   initContratoMarcoFormControlEvent(): void {
     this.subscription.add(
-      this.formCubicacion
+      this.formGeneral
         .get('contrato_marco_id')
         .valueChanges.subscribe(contrato_marco_id => {
           this.resetProveedoresFormControl();
@@ -378,11 +388,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   initProveedorFormControlEvent(): void {
     this.subscription.add(
-      this.formCubicacion.get('subcontrato_id').valueChanges.subscribe(key => {
+      this.formGeneral.get('subcontrato_id').valueChanges.subscribe(key => {
         this.resetRegionesFormControl();
         if (key !== undefined && key !== null) {
           const { subcontratosID, proveedorID } = this.extractProviderKeys(key);
-          this.formCubicacion.get('proveedor_id').setValue(proveedorID);
+          this.formGeneral.get('proveedor_id').setValue(proveedorID);
 
           this.cubageFacade.getSubContractedRegionsAction({
             subcontrato_id: subcontratosID,
@@ -401,7 +411,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         .get('region_id')
         .valueChanges.pipe(
           withLatestFrom(
-            this.formCubicacion
+            this.formGeneral
               .get('subcontrato_id')
               .valueChanges.pipe(
                 filter(key => key !== undefined && key !== null)
@@ -432,7 +442,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         .get('tipo_servicio_id')
         .valueChanges.pipe(
           withLatestFrom(
-            this.formCubicacion
+            this.formGeneral
               .get('subcontrato_id')
               .valueChanges.pipe(
                 filter(key => key !== undefined && key !== null)
@@ -474,15 +484,17 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  initData(): void {
-    this.formCubicacion.get('subcontrato_id').disable({ emitEvent: false });
-    this.formCubicacion.get('proveedor_id').disable({ emitEvent: false });
-
-    this.formCubicacion.get('region_id').disable({ emitEvent: false });
-    this.formCubicacion.get('tipo_servicio_id').disable({ emitEvent: false });
+  initFormGeneralData(): void {
+    this.formGeneral.get('subcontrato_id').disable({ emitEvent: false });
+    this.formGeneral.get('proveedor_id').disable({ emitEvent: false });
 
     this.cubageFacade.getAutoSuggestAction('', 5);
     this.cubageFacade.getContractMarcoAction();
+  }
+
+  initFormCubicacionData(): void {
+    this.formCubicacion.get('region_id').disable({ emitEvent: false });
+    this.formCubicacion.get('tipo_servicio_id').disable({ emitEvent: false });
   }
 
   checkCubageEditionFromParams(): void {
@@ -501,7 +513,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  initEditionData(): void {
+  initFormGeneralEditionData(): void {
     this.subscription.add(
       this.selectedCubicacion$
         .pipe(
@@ -509,14 +521,14 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           withLatestFrom(this.contratosMarcos$)
         )
         .subscribe(([cubicacion, contratos]) => {
-          this.formCubicacion.get('nombre').setValue(cubicacion.nombre);
+          this.formGeneral.get('nombre').setValue(cubicacion.nombre);
 
           const contrato = contratos.find(
             con => con.id === cubicacion.contrato_marco_id
           );
 
           if (contrato) {
-            this.formCubicacion.get('contrato_marco_id').setValue(contrato.id);
+            this.formGeneral.get('contrato_marco_id').setValue(contrato.id);
           } else {
             this.initializationFinished$.next(true);
             this.incompleteCubicacionError$ = of(
@@ -540,7 +552,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           if (proveedor) {
             const key = this.providerKey(proveedor);
 
-            this.formCubicacion.get('subcontrato_id').setValue(key);
+            this.formGeneral.get('subcontrato_id').setValue(key);
           } else {
             this.initializationFinished$.next(true);
             this.incompleteCubicacionError$ = of(
@@ -549,7 +561,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           }
         })
     );
+  }
 
+  initFormCubicacionEditionData(): void {
     this.subscription.add(
       this.regiones$
         .pipe(
@@ -633,7 +647,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   // acciones del autocompletado con el campo 'nombre'
   nameSelected(event: any): void {
     console.log('name selected', event);
-    // this.formCubicacion.get('nombre').setValue(event.name);
+    // this.formGeneral.get('nombre').setValue(event.name);
   }
 
   nameChanged(name: string): void {
@@ -781,6 +795,25 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   touch(): void {
+    this.touchFormGeneral();
+    this.touchFormCubicacion();
+    this.tableLpus.touch();
+  }
+
+  touchFormGeneral(): void {
+    Object.keys(this.formGeneral.controls).forEach(field => {
+      const control = this.formGeneral.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.formGeneral.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
+  touchFormCubicacion(): void {
     Object.keys(this.formCubicacion.controls).forEach(field => {
       const control = this.formCubicacion.get(field);
       control.markAsTouched({
@@ -795,6 +828,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   get valid(): boolean {
     return (
+      this.formGeneral.valid &&
       this.formCubicacion.valid &&
       this.lpusCarrito.length > 0 &&
       !this.hasLPUWithZeroQuantity &&
@@ -805,19 +839,22 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   submit(): void {
     this.touch();
-    this.tableLpus.touch();
     if (this.valid) {
-      const form = this.formCubicacion.getRawValue();
-      const nombreCub =
-        typeof form.nombre === 'object' ? form.nombre.name : form.nombre;
-      console.log(nombreCub);
+      const formGeneralData = this.formGeneral.getRawValue();
+      const formCubicacionData = this.formCubicacion.getRawValue();
+
+      const cubicacion_nombre =
+        typeof formGeneralData.nombre === 'object'
+          ? formGeneralData.nombre.name
+          : formGeneralData.nombre;
+
       const nuevaCubicacion = {
-        // cubicacion_id: +form.cubicacion_id,
-        cubicacion_nombre: nombreCub,
-        region_id: +form.region_id,
+        // cubicacion_id: +formGeneralData.cubicacion_id,
+        cubicacion_nombre,
+        region_id: +formCubicacionData.region_id,
         // usuario_id: +this.authLogin.usuario_id,
-        contrato_marco_id: +form.contrato_marco_id,
-        proveedor_id: +form.proveedor_id,
+        contrato_marco_id: +formGeneralData.contrato_marco_id,
+        proveedor_id: +formGeneralData.proveedor_id,
         lpus: this.lpusCarrito.map(x => ({
           lpu_id: x.lpu_id,
           cantidad: x.cantidad,
