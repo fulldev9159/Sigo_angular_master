@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="col-12 field-box" [formGroup]="formGeneral" id="contratoField">
-                  <app-select [control]="formControlsGeneral.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
+                  <app-select [control]="formGeneralControls.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione contrato</option>
                       <ng-container *ngFor="let contratoMarco of contratosMarcos$ | async">
@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="col-12 field-box" [formGroup]="formGeneral" id="proveedorField">
-                  <app-select [control]="formControlsGeneral.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
+                  <app-select [control]="formGeneralControls.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione proveedor</option>
                       <ng-container *ngFor="let proveedor of proveedores$ | async">
@@ -106,46 +106,52 @@
                   </app-select>
                 </div>
 
-                <div class="col-12 field-box" [formGroup]="formNormal" id="regionField">
-                  <app-select [control]="formControls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione región</option>
-                      <ng-container *ngFor="let region of regiones$ | async">
-                        <option [value]="region.id">
-                          {{ region.nombre }}
-                        </option>
+                <ng-container *ngIf="(ordinaryContract$ | async) === false">
+                  <div class="col-12 field-box" [formGroup]="formNormal" id="regionField">
+                    <app-select [control]="formNormalControls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione región</option>
+                        <ng-container *ngFor="let region of regiones$ | async">
+                          <option [value]="region.id">
+                            {{ region.nombre }}
+                          </option>
+                        </ng-container>
                       </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
+                    </app-select>
+                  </div>
+                </ng-container>
               </div>
             </div>
 
             <div class="col-xs-12 col-md-8">
               <div class="row">
-                <div class="col-12 field-box" [formGroup]="formNormal" id="tipoServicioField">
-                  <app-select [control]="formControls.tipo_servicio_id" label="Tipo Servicio" [errorMessageFn]="errorMessageFn">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione un tipo de servicio</option>
-                      <ng-container *ngFor="let tipoServicio of tiposServicio$ | async">
-                        <option [value]="tipoServicio.id">
-                          {{ tipoServicio.nombre }}
-                        </option>
+                <ng-container *ngIf="(ordinaryContract$ | async) === false">
+                  <div class="col-12 field-box" [formGroup]="formNormal" id="tipoServicioField">
+                    <app-select [control]="formNormalControls.tipo_servicio_id" label="Tipo Servicio" [errorMessageFn]="errorMessageFn">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione un tipo de servicio</option>
+                        <ng-container *ngFor="let tipoServicio of tiposServicio$ | async">
+                          <option [value]="tipoServicio.id">
+                            {{ tipoServicio.nombre }}
+                          </option>
+                        </ng-container>
                       </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
+                    </app-select>
+                  </div>
+                </ng-container>
 
-                <div class="col-12 field-box" style="height: 300px; max-height: 300px" [formGroup]="formNormal" id="lpusBox">
-                  <label for="">Servicios LPU</label>
-                  <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
-                    <ng-template let-data pTemplate="item">
-                      <div class="country-item">
-                        <div>{{ data.lpu_nombre }}</div>
-                      </div>
-                    </ng-template>
-                  </p-listbox>
-                </div>
+                <ng-container *ngIf="(ordinaryContract$ | async) === false">
+                  <div class="col-12 field-box" style="height: 300px; max-height: 300px" [formGroup]="formNormal" id="lpusBox">
+                    <label for="">Servicios LPU</label>
+                    <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
+                      <ng-template let-data pTemplate="item">
+                        <div class="country-item">
+                          <div>{{ data.lpu_nombre }}</div>
+                        </div>
+                      </ng-template>
+                    </p-listbox>
+                  </div>
+                </ng-container>
               </div>
             </div>
           </div>
@@ -154,7 +160,9 @@
 
           <div class="row">
             <div class="col-12">
-              <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
+              <ng-container *ngIf="(ordinaryContract$ | async) === false">
+                <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
+              </ng-container>
 
               <div id="total">
                 <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
