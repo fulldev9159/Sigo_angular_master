@@ -218,6 +218,7 @@ Set Permisos modulo CUBICACION
 WAIT
     [Arguments]                      ${selector}
     Wait Until Element Is Visible    ${selector}    timeout=15
+    Wait Until Element Is enabled    ${selector}    timeout=15
     Scroll Element Into View         ${selector}
 
 Set input text
@@ -226,9 +227,10 @@ Set input text
     input text     ${selector}    ${valor}        
 
 Set select item
-    [Arguments]    ${valor}       ${selector} 
-    WAIT           ${selector}
-    Select item    ${selector}    ${valor}
+    [Arguments]                    ${valor}       ${selector} 
+    WAIT                           ${selector}
+    Wait Until Element Contains    ${selector}    ${valor}        timeout=15
+    Select item                    ${selector}    ${valor}
 
 ## CREAR CUBICACION
 Set Nombre Cubicacion
@@ -264,53 +266,51 @@ Guardar Cubicacion
 ## CREAR OT
 Set Nombre OT
     [Arguments]       ${nombre}
-    ${selector}=      set variable    id:nombre-ot
-    Set input text    ${nombre}       ${selector}     
+    ${selector}=      set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(1)>div:nth-child(1)>app-input>input
+    Set input text    ${nombre}       ${selector}                                                                            
 
 Set Tipo OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    id:tipo-ot
+    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(1)>div:nth-child(2)>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Cubicacion de la OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    id:cubicacion-de-ot
+    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(1)>div:nth-child(3)>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Plan Proyecto OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    id:plan-proyecto
+    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(2)>div:nth-child(1)>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Sitio OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    id:sitio
+    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(2)>div:nth-child(2)>app-select>select
     Set select item    ${valor}        ${selector}
 
 Click Opex OT
-    WAIT                     id:opex
     Click Visible Element    id:opex
 
 Set ID OPEX OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    id:id-opex
+    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(4)>div:nth-child(1)>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Cuenta SAP OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    id:cuenta-sap
+    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(4)>div:nth-child(2)>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set CECO OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    id:ceco
+    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(4)>div:nth-child(3)>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set CECO Provisorio
-    [Arguments]                      ${nombre-ceco}
-    Wait Until Element Is Visible    id:ceco-provisorio
-    Scroll Element Into View         id:ceco-provisorio
-    input text                       id:ceco-provisorio    ${nombre-ceco}
+    [Arguments]       ${nombre-ceco}
+    ${selector}=      set variable      css:#box > div.col-xs-12.col-md-8>div:nth-child(4)>div:nth-child(4)>app-select>select
+    Set input text    ${nombre-ceco}    ${selector}
 
 Set Fecha Inicio
     [Arguments]                      ${nombre-ceco}
@@ -329,16 +329,14 @@ Set Fecha Termino
     Click Visible Element            css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(4) > span
 
 Set Proyecto OT
-    [Arguments]                      ${valor}
-    Wait Until Element Is Visible    id:proyecto-ot
-    Scroll Element Into View         id:proyecto-ot
-    Click Visible Element            id:proyecto-ot
-    Select item                      id:proyecto-ot    ${valor}
+    [Arguments]        ${valor}
+    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(5)>div:nth-child(3)>app-select>select
+    Set select item    ${valor}        ${selector}
 
 Set Observaciones OT
     [Arguments]       ${valor}
-    ${selector}=      set variable    id:observaciones
-    Set input text    ${valor}        ${selector}         
+    ${selector}=      set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(5)>div:nth-child(4)>textarea
+    Set input text    ${valor}        ${selector}                                                                     
 
 Guardar OT
     Wait Until Element Is Visible    id:guardar-ot

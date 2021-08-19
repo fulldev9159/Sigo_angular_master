@@ -48,7 +48,7 @@ Crear OT happy path
     Set Nombre OT              ${nombre OT}
     Set Tipo OT                OT
     Set Cubicacion de la OT    ${nombre cubicacion}
-    Set Plan Proyecto OT       EMPRESAS -
+    Set Plan Proyecto OT       EMPRESAS
     Set Sitio OT               NEWIND0021F3 - BANCO RIPLEY
     Click Opex OT
     Set ID OPEX OT             00-01820

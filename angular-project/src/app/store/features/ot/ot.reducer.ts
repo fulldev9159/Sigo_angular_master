@@ -316,5 +316,33 @@ export const reducerOt = createReducer(
 
   on(OtActions.resetData, (state, payload) => ({
     ...initialStateOt,
+  })),
+  on(OtActions.resetPlan, (state, payload) => ({
+    ...state,
+    planes: [],
+  })),
+  on(OtActions.resetSitio, (state, payload) => ({
+    ...state,
+    sites: [],
+  })),
+  on(OtActions.resetPMO, (state, payload) => ({
+    ...state,
+    pmos: [],
+  })),
+  on(OtActions.resetSAP, (state, payload) => ({
+    ...state,
+    cuentas_sap: [],
+  })),
+  on(OtActions.resetLPs, (state, payload) => ({
+    ...state,
+    budgetLines: [],
+  })),
+  on(OtActions.resetPEP2, (state, payload) => ({
+    ...state,
+    pep2s: [],
+  })),
+  on(OtActions.resetCECO, (state, payload) => ({
+    ...state,
+    cecos: [],
   }))
 );
