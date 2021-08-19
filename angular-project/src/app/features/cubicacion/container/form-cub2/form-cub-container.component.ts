@@ -456,7 +456,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
     this.tiposMoneda$ = this.tipoMonedaFacade.getTiposMoneda$().pipe(
       map(tiposMoneda => tiposMoneda || []),
-      map(tiposMoneda => (this.tiposMoneda = tiposMoneda))
+      map(tiposMoneda => (this.tiposMoneda = tiposMoneda)),
+      tap(tiposMoneda => this.checkTiposMonedaAndEnable(tiposMoneda))
     );
 
     // Edición
@@ -514,6 +515,18 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.formNormal.get('lpus').setValue([]);
   }
 
+  // resetTiposMonedaFormControl(): void {
+  //   this.formOrdinario.get('tipo_moneda_id').reset();
+  // }
+
+  checkTiposMonedaAndEnable(tiposMoneda: TipoMoneda[]): void {
+    if (tiposMoneda.length > 0) {
+      this.formOrdinario.get('tipo_moneda_id').enable();
+    } else {
+      this.formOrdinario.get('tipo_moneda_id').disable();
+    }
+  }
+
   initFormControlsEvents(): void {
     this.initContratoMarcoFormControlEvent();
     this.initProveedorFormControlEvent();
@@ -548,20 +561,28 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   initProveedorFormControlEvent(): void {
     this.subscription.add(
-      this.formGeneral.get('subcontrato_id').valueChanges.subscribe(key => {
-        this.resetRegionesFormControl();
-        if (key !== undefined && key !== null) {
-          const { subcontratosID, proveedorID } = this.extractProviderKeys(key);
-          this.formGeneral.get('proveedor_id').setValue(proveedorID);
+      this.formGeneral
+        .get('subcontrato_id')
+        .valueChanges.pipe(withLatestFrom(this.ordinaryContract$))
+        .subscribe(([key, isOrdinaryContract]) => {
+          this.resetRegionesFormControl();
+          if (key !== undefined && key !== null) {
+            if (isOrdinaryContract) {
+              this.tipoMonedaFacade.getTiposMoneda();
+            } else {
+              const { subcontratosID, proveedorID } =
+                this.extractProviderKeys(key);
+              this.formGeneral.get('proveedor_id').setValue(proveedorID);
 
-          this.cubageFacade.getSubContractedRegionsAction({
-            subcontrato_id: subcontratosID,
-          });
-        } else {
-          this.checkRegionesAndEnable([]);
-        }
-        this.resetLpusCarrito();
-      })
+              this.cubageFacade.getSubContractedRegionsAction({
+                subcontrato_id: subcontratosID,
+              });
+            }
+          } else {
+            this.checkRegionesAndEnable([]);
+          }
+          this.resetLpusCarrito();
+        })
     );
   }
 
@@ -672,10 +693,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
     this.cubageFacade.getAutoSuggestAction('', 5);
     this.cubageFacade.getContractMarcoAction();
-    this.tipoMonedaFacade.getTiposMoneda();
 
     this.formNormal.get('region_id').disable({ emitEvent: false });
     this.formNormal.get('tipo_servicio_id').disable({ emitEvent: false });
+
+    this.formOrdinario.get('tipo_moneda_id').disable({ emitEvent: false });
   }
 
   checkCubageEditionFromParams(): void {
