@@ -22,7 +22,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
     apellidos: new FormControl(null, [Validators.required, this.noWhitespace]),
     rut: new FormControl(null, [Validators.required, this.noWhitespace]),
     firma: new FormControl(null),
-    calular: new FormControl(null),
+    celular: new FormControl(null),
     email: new FormControl(null, [Validators.required, Validators.email]),
   };
 

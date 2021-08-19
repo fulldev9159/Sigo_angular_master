@@ -20,13 +20,33 @@
             <div class="row" id="caja_formulario">
               <div class="col-xs-12 col-md-4">
                 <app-input [control]="formControls.username" [label]="'Usuario Guia'"></app-input>
-                <!-- <label for="">Usuario Guia</label>
-                <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('username').valid}">*</span>
-                <input id="username-input" name="username" *ngIf="!formUser.value.id" formControlName="username" [disabled]="true" required placeholder="username" class="form-control" type="text">
-                <div class="p-mt-2" *ngIf="formUser.value.id">{{formUser.value.username}}</div>
-           -->
                 <br>
               </div>
+              <div class="col-xs-12 col-md-4">
+                <app-input [control]="formControls.rut" [label]="'Documento identidad'"></app-input>
+                <!-- <input id="documento-input" name="documento-input" formControlName="rut" maxlength="15" minlength="10" placeholder="xx.xxx.xxx-x" class="form-control" type="text">  -->
+                <br>
+              </div>
+              <div class="col-xs-12 col-md-4">
+                <app-input [control]="formControls.nombres" [label]="'Nombres'"></app-input>
+                <br>
+              </div>
+              <div class="col-xs-12 col-md-4">
+                <app-input [control]="formControls.apellidos" [label]="'Apellidos'"></app-input>
+                <br>
+              </div>
+              <div class="col-xs-12 col-md-4">
+                <app-input [control]="formControls.email" [label]="'Email'"></app-input>
+                <!-- <input id="email-input" name="email-input" formControlName="email" placeholder="XXX@XXX.cl" class="form-control" type="email"> -->
+                <br>
+              </div>
+              <div class="col-xs-12 col-md-4">
+                <label for="">Celular</label>
+                <p-inputMask id="celular-input" name="celular-input" formControlName="celular" styleClass="form-control" mask="(99) 9 9999 9999" unmask="true">
+                </p-inputMask>
+                <br>
+              </div>
+
             </div>
           </form>
         </div>
