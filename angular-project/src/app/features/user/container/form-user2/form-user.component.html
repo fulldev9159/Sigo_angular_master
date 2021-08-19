@@ -5,7 +5,6 @@
       <span>formulario de ingreso</span>
     </div>
     <div class="col">
-      <!-- <button [routerLink]="['/app/user/list-user']" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined "></button> -->
       <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
     </div>
     <div class="col-12">
@@ -17,7 +16,19 @@
     <ng-container card-body>
       <div class="row">
         <div class="col-12">
-
+          <form [formGroup]="formUser">
+            <div class="row" id="caja_formulario">
+              <div class="col-xs-12 col-md-4">
+                <app-input [control]="formControls.username" [label]="'Usuario Guia'"></app-input>
+                <!-- <label for="">Usuario Guia</label>
+                <span class="ml-1" [ngClass]="{'text-danger' : !formUser.get('username').valid}">*</span>
+                <input id="username-input" name="username" *ngIf="!formUser.value.id" formControlName="username" [disabled]="true" required placeholder="username" class="form-control" type="text">
+                <div class="p-mt-2" *ngIf="formUser.value.id">{{formUser.value.username}}</div>
+           -->
+                <br>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </ng-container>
