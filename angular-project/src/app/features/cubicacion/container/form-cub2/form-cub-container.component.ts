@@ -515,6 +515,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.formNormal.get('lpus').setValue([]);
   }
 
+  resetOrdinaryLpusFormControl(lpus: any): void {
+    this.formOrdinario.get('lpus').reset();
+    this.formOrdinario.get('lpus').setValue([]);
+  }
+
   // resetTiposMonedaFormControl(): void {
   //   this.formOrdinario.get('tipo_moneda_id').reset();
   // }
@@ -555,6 +560,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             this.checkProveedoresAndEnable([]);
           }
           this.resetLpusCarrito();
+          this.resetOrdinaryLpusCarrito();
         })
     );
   }
@@ -582,6 +588,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             this.checkRegionesAndEnable([]);
           }
           this.resetLpusCarrito();
+          this.resetOrdinaryLpusCarrito();
         })
     );
   }
@@ -683,6 +690,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           } else {
             this.currency = '';
           }
+          this.resetOrdinaryLpusCarrito();
         })
     );
   }
@@ -971,6 +979,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.resetSelectedLpusFormControl([]);
     this.lpusCarrito = [];
     this.updateLpusTableInformation();
+  }
+
+  resetOrdinaryLpusCarrito(): void {
+    this.resetOrdinaryLpusFormControl([]);
   }
 
   updateLpusTableInformation(): void {
