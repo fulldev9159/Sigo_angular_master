@@ -1,7 +1,7 @@
 <ng-container *ngIf="label !== ''">
   <label>{{ label }}</label>
 </ng-container>
-<input [formControl]="control" class="form-control" type="{{ inputType }}" placeholder="{{ placeholder }}">
+<input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
 <div *ngIf="control.invalid && (control.dirty || control.touched)">
   <p-message severity="error" text="{{ errorMessageFn(control.errors) }}"></p-message>
 </div>
