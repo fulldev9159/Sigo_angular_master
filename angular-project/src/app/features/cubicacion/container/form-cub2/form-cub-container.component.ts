@@ -121,7 +121,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     lpus: new FormControl([], []),
   };
 
-  formCubicacion: FormGroup = new FormGroup(this.formControls);
+  formNormal: FormGroup = new FormGroup(this.formControls);
 
   tableConfiguration = {
     header: true,
@@ -268,25 +268,40 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cubageFacade.resetData();
 
-    this.initObservables();
+    this.initFormGeneralObservables();
+    this.initFormNormalObservables();
+
     this.initFormGeneralControlsEvents();
-    this.initFormCubicacionControlsEvents();
+    this.initFormNormalControlsEvents();
     this.initFormGeneralData();
-    this.initFormCubicacionData();
+    this.initFormNormalData();
 
     this.checkCubageEditionFromParams();
 
     this.initFormGeneralEditionData();
-    this.initFormCubicacionEditionData();
+    this.initFormNormalEditionData();
   }
 
-  initObservables(): void {
+  initFormGeneralObservables(): void {
     this.autoSuggestItems$ = this.cubageFacade.getAutoSuggestSelector$();
     this.contratosMarcos$ = this.cubageFacade.getContractMarcoSelector$();
     this.proveedores$ = this.cubageFacade.getProvidersSelector$().pipe(
       map(proveedores => proveedores || []),
       tap(proveedores => this.checkProveedoresAndEnable(proveedores))
     );
+
+    // Edición
+    this.selectedCubicacion$ = this.cubageFacade
+      .getSingleCubicacion$()
+      .pipe(
+        filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
+      );
+    this.selectedCubicacionError$ = this.cubageFacade
+      .getSingleCubicacionError$()
+      .pipe(filter(error => error !== null && error !== undefined));
+  }
+
+  initFormNormalObservables(): void {
     this.regiones$ = this.cubageFacade.getRegionsSelector$().pipe(
       map(regiones => regiones || []),
       map(regiones => (this.regiones = regiones)),
@@ -301,16 +316,6 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       map(servicios => servicios || []),
       map(servicios => (this.servicios = servicios))
     );
-
-    // Edición
-    this.selectedCubicacion$ = this.cubageFacade
-      .getSingleCubicacion$()
-      .pipe(
-        filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
-      );
-    this.selectedCubicacionError$ = this.cubageFacade
-      .getSingleCubicacionError$()
-      .pipe(filter(error => error !== null && error !== undefined));
   }
 
   resetProveedoresFormControl(): void {
@@ -329,32 +334,32 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   resetRegionesFormControl(): void {
-    this.formCubicacion.get('region_id').reset();
+    this.formNormal.get('region_id').reset();
   }
 
   checkRegionesAndEnable(regiones: CubModel.Region[]): void {
     if (regiones.length > 0) {
-      this.formCubicacion.get('region_id').enable();
+      this.formNormal.get('region_id').enable();
     } else {
-      this.formCubicacion.get('region_id').disable();
+      this.formNormal.get('region_id').disable();
     }
   }
 
   resetTiposServicioFormControl(): void {
-    this.formCubicacion.get('tipo_servicio_id').reset();
+    this.formNormal.get('tipo_servicio_id').reset();
   }
 
   checkTiposServicioAndEnable(tiposServicio: CubModel.TypeService[]): void {
     if (tiposServicio.length > 0) {
-      this.formCubicacion.get('tipo_servicio_id').enable();
+      this.formNormal.get('tipo_servicio_id').enable();
     } else {
-      this.formCubicacion.get('tipo_servicio_id').disable();
+      this.formNormal.get('tipo_servicio_id').disable();
     }
   }
 
   resetSelectedLpusFormControl(lpus: CubModel.Service[]): void {
-    this.formCubicacion.get('lpus').reset();
-    this.formCubicacion.get('lpus').setValue([]);
+    this.formNormal.get('lpus').reset();
+    this.formNormal.get('lpus').setValue([]);
   }
 
   initFormGeneralControlsEvents(): void {
@@ -362,7 +367,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.initProveedorFormControlEvent();
   }
 
-  initFormCubicacionControlsEvents(): void {
+  initFormNormalControlsEvents(): void {
     this.initRegionFormControlEvent();
     this.initTipoServicioFormControlEvent();
     this.initLpuCarritoEvent();
@@ -407,7 +412,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   initRegionFormControlEvent(): void {
     this.subscription.add(
-      this.formCubicacion
+      this.formNormal
         .get('region_id')
         .valueChanges.pipe(
           withLatestFrom(
@@ -438,7 +443,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   initTipoServicioFormControlEvent(): void {
     this.subscription.add(
-      this.formCubicacion
+      this.formNormal
         .get('tipo_servicio_id')
         .valueChanges.pipe(
           withLatestFrom(
@@ -447,7 +452,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
               .valueChanges.pipe(
                 filter(key => key !== undefined && key !== null)
               ),
-            this.formCubicacion
+            this.formNormal
               .get('region_id')
               .valueChanges.pipe(
                 filter(
@@ -492,9 +497,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.cubageFacade.getContractMarcoAction();
   }
 
-  initFormCubicacionData(): void {
-    this.formCubicacion.get('region_id').disable({ emitEvent: false });
-    this.formCubicacion.get('tipo_servicio_id').disable({ emitEvent: false });
+  initFormNormalData(): void {
+    this.formNormal.get('region_id').disable({ emitEvent: false });
+    this.formNormal.get('tipo_servicio_id').disable({ emitEvent: false });
   }
 
   checkCubageEditionFromParams(): void {
@@ -563,7 +568,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  initFormCubicacionEditionData(): void {
+  initFormNormalEditionData(): void {
     this.subscription.add(
       this.regiones$
         .pipe(
@@ -573,7 +578,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         .subscribe(([regiones, cubicacion]) => {
           const region = regiones.find(reg => reg.id === cubicacion.region_id);
 
-          this.formCubicacion.get('region_id').setValue(region.id);
+          this.formNormal.get('region_id').setValue(region.id);
 
           if (region) {
             setTimeout(() => {
@@ -612,7 +617,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           return ac;
         }, {});
 
-        const { lpus } = this.formCubicacion.getRawValue();
+        const { lpus } = this.formNormal.getRawValue();
 
         const lpusInFormControl = (lpus || []).reduce((ac, lpu) => {
           ac[lpu.lpu_id] = true;
@@ -625,7 +630,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             lpusInFormControl[service.lpu_id] === undefined
         );
 
-        this.formCubicacion
+        this.formNormal
           .get('lpus')
           .setValue([...lpus, ...servicesToBeSelected]);
       })
@@ -682,7 +687,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   lpuServiceSelected(event: any): void {
-    const { region_id, tipo_servicio_id } = this.formCubicacion.getRawValue();
+    const { region_id, tipo_servicio_id } = this.formNormal.getRawValue();
     const region = this.regiones.find(r => r.id === +region_id);
     const tipoServicio = this.tiposServicio.find(
       t => t.id === +tipo_servicio_id
@@ -754,10 +759,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       lpu => lpu.lpu_id !== item.lpu_id
     );
 
-    this.formCubicacion
+    this.formNormal
       .get('lpus')
       .setValue(
-        this.formCubicacion
+        this.formNormal
           .get('lpus')
           .value.filter(lpu => lpu.lpu_id !== item.lpu_id)
       );
@@ -796,7 +801,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   touch(): void {
     this.touchFormGeneral();
-    this.touchFormCubicacion();
+    this.touchFormNormal();
     this.tableLpus.touch();
   }
 
@@ -813,15 +818,15 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     });
   }
 
-  touchFormCubicacion(): void {
-    Object.keys(this.formCubicacion.controls).forEach(field => {
-      const control = this.formCubicacion.get(field);
+  touchFormNormal(): void {
+    Object.keys(this.formNormal.controls).forEach(field => {
+      const control = this.formNormal.get(field);
       control.markAsTouched({
         onlySelf: true,
       });
     });
 
-    this.formCubicacion.markAsTouched({
+    this.formNormal.markAsTouched({
       onlySelf: true,
     });
   }
@@ -829,7 +834,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   get valid(): boolean {
     return (
       this.formGeneral.valid &&
-      this.formCubicacion.valid &&
+      this.formNormal.valid &&
       this.lpusCarrito.length > 0 &&
       !this.hasLPUWithZeroQuantity &&
       this.tableValid &&
@@ -841,7 +846,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.touch();
     if (this.valid) {
       const formGeneralData = this.formGeneral.getRawValue();
-      const formCubicacionData = this.formCubicacion.getRawValue();
+      const formNormalData = this.formNormal.getRawValue();
 
       const cubicacion_nombre =
         typeof formGeneralData.nombre === 'object'
@@ -851,7 +856,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       const nuevaCubicacion = {
         // cubicacion_id: +formGeneralData.cubicacion_id,
         cubicacion_nombre,
-        region_id: +formCubicacionData.region_id,
+        region_id: +formNormalData.region_id,
         // usuario_id: +this.authLogin.usuario_id,
         contrato_marco_id: +formGeneralData.contrato_marco_id,
         proveedor_id: +formGeneralData.proveedor_id,
