@@ -69,14 +69,13 @@ export class FormUser2Component implements OnInit, OnDestroy {
       .pipe(map(perfiles => perfiles || []));
   }
 
-  initFormControlsEvents() {
+  initFormControlsEvents(): void {
     this.initProveerdorFromControlEvent();
   }
 
-  initProveerdorFromControlEvent() {
+  initProveerdorFromControlEvent(): void {
     this.subscription.add(
       this.formUser.get('proveedor_id').valueChanges.subscribe(proveedor_id => {
-        this.resetAreaFormControler();
         if (proveedor_id !== null && proveedor_id !== undefined) {
           this.userFacade.getContracts({
             proveedor_id: +proveedor_id,
@@ -84,11 +83,6 @@ export class FormUser2Component implements OnInit, OnDestroy {
         }
       })
     );
-  }
-
-  resetAreaFormControler() {
-    this.userFacade.resetArea();
-    this.formUser.get('area_id').reset;
   }
 
   initData(): void {
