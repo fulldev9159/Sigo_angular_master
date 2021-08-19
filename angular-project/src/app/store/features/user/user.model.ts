@@ -2,7 +2,6 @@ export interface Provider {
   id: number;
   nombre: string;
   rut: number;
-  dv: string;
   email: string;
   telefono: string;
   direccion: string;

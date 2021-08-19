@@ -164,4 +164,5 @@ export const setFormUser = createAction(
 );
 
 export const resetData = createAction('[ResetData] ResetData');
+export const resetArea = createAction('[User] Reset Area');
 // USER ACTIONS

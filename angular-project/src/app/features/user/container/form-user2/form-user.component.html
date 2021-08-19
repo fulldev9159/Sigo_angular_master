@@ -47,6 +47,53 @@
                 <br>
               </div>
 
+
+              <div class="col-xs-12 col-md-4">
+                <label for="">Tipo</label>
+                <div class="row">
+                  <div class="col-xs-12 col-md-5">
+                    <div class="p-field-radiobutton">
+                      <p-radioButton id="movistar" name="provider" formControlName="provider" value="false"></p-radioButton>
+                      <label for="movistar">Movistar</label>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-md-7">
+                    <div class="p-field-radiobutton">
+                      <p-radioButton id="proveedor" name="provider" formControlName="provider" value="true"></p-radioButton>
+                      <label for="proveedor">Proveedor</label>
+                    </div>
+                  </div>
+                </div>
+                <br>
+              </div>
+
+              <div class="col-xs-12 col-md-4" id="proveedor_id">
+                <app-select [control]="formControls.proveedor_id" label="Proveedor">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione proveedor</option>
+                    <ng-container *ngFor="let proveedor of providers$ | async">
+                      <option [value]="proveedor.id">
+                        {{ proveedor.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+                <br>
+              </div>
+              <div class="col-xs-12 col-md-4" id="area_id">
+                <app-select [control]="formControls.area_id" label="Área">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione área</option>
+                    <ng-container *ngFor="let area of areas$ | async">
+                      <option [value]="area.id">
+                        {{ area.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+                <br>
+              </div>
+
             </div>
           </form>
         </div>

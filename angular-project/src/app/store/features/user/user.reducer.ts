@@ -84,5 +84,9 @@ export const reducerUser = createReducer(
   })),
   on(UserActions.resetData, (state, payload) => ({
     ...initialStateUser,
+  })),
+  on(UserActions.resetArea, (state, payload) => ({
+    ...state,
+    areas: [],
   }))
 );

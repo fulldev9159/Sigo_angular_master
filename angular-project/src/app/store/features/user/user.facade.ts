@@ -106,4 +106,8 @@ export class UserFacade {
   public resetData(): void {
     this.store.dispatch(userActions.resetData());
   }
+
+  public resetArea(): void {
+    this.store.dispatch(userActions.resetArea());
+  }
 }
