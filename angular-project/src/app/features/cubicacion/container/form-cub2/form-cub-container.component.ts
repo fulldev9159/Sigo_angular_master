@@ -97,12 +97,21 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   hasLPUWithZeroQuantity = false;
   tableValid = true;
+
   lpusCarrito: CartItem[] = [];
+
   @ViewChild('tableLpus', {
     read: TableComponent,
     static: false,
   })
   tableLpus: TableComponent;
+
+  @ViewChild('tableOrdinarioLpus', {
+    read: TableComponent,
+    static: false,
+  })
+  tableOrdinarioLpus: TableComponent;
+
   total = 0;
   currency = '';
 
@@ -139,7 +148,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   formOrdinario: FormGroup = new FormGroup(this.formOrdinarioControls);
 
-  tableConfiguration = {
+  tableNormalConfiguration = {
     header: true,
     headerConfig: {
       title: '',
@@ -245,6 +254,129 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           class: 'p-button-rounded p-button-danger',
           onClick: (event: Event, item: CubModel.Service) => {
             this.deleteCartItem(item);
+          },
+        },
+      ],
+    },
+  }; // tslint:disable-line
+
+  tableOrdinarioConfiguration = {
+    header: true,
+    headerConfig: {
+      title: '',
+      searchText: 'Filtrar...',
+      paginator: false,
+      actionsType: 'Buttons',
+    },
+    body: {
+      headers: [
+        {
+          field: 'Servicio LPU',
+          type: 'TEXT',
+          sort: 'lpu_nombre',
+          header: 'lpu_nombre',
+          // width: '33%',
+          editable: false,
+        },
+        {
+          field: 'Unidad	',
+          type: 'TEXT',
+          sort: 'lpu_unidad_nombre',
+          header: 'lpu_unidad_nombre',
+          editable: false,
+        },
+        {
+          field: 'Cantidad	',
+          type: 'INPUTNUMBER',
+          sort: 'cantidad',
+          header: 'cantidad',
+          editable: true,
+          onchange: (event: any, item: CartItem) => {
+            this.updatingCantidad = true;
+            this.cantidadDebouncer$.next({
+              value: event.target.value,
+              item,
+            });
+          },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            this.nonZero,
+            Validators.maxLength(6),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.nonzero) {
+              return 'No son permitidos valores inferiores a 1';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
+          },
+        },
+        {
+          field: 'Precio	',
+          type: 'INPUTNUMBER',
+          sort: 'lpu_precio',
+          header: 'lpu_precio',
+          editable: true,
+          onchange: (event: any, item: any) => {
+            // this.updatingCantidad = true;
+            // this.cantidadDebouncer$.next({
+            //   value: event.target.value,
+            //   item,
+            // });
+          },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            this.nonZero,
+            Validators.maxLength(6),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.nonzero) {
+              return 'No son permitidos valores inferiores a 1';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
+          },
+        },
+        {
+          field: 'Tipo Moneda	',
+          type: 'TEXT',
+          sort: 'tipo_moneda_cod',
+          header: 'tipo_moneda_cod',
+          editable: false,
+        },
+        {
+          field: 'Subtotal	',
+          type: 'NUMBER',
+          sort: 'lpu_subtotal',
+          header: 'lpu_subtotal',
+        },
+        {
+          field: null,
+          type: 'ACTIONS',
+          sort: null,
+          header: null,
+          editable: false,
+        },
+      ],
+      sort: ['lpu_nombre'],
+      actions: [
+        {
+          icon: 'p-button-icon pi pi-trash',
+          class: 'p-button-rounded p-button-danger',
+          onClick: (event: Event, item: any) => {
+            // this.deleteCartItem(item);
           },
         },
       ],
@@ -516,8 +648,20 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.formOrdinario
         .get('tipo_moneda_id')
-        .valueChanges.subscribe(tipo_moneda_id => {
-          console.log('tipo moneda selected', tipo_moneda_id);
+        .valueChanges.pipe(withLatestFrom(this.tiposMoneda$))
+        .subscribe(([tipo_moneda_id, tiposMoneda]) => {
+          if (tipo_moneda_id !== undefined && tipo_moneda_id !== null) {
+            const tipoMoneda = (tiposMoneda || []).find(
+              t => t.id === +tipo_moneda_id
+            );
+            if (tipoMoneda) {
+              this.currency = tipoMoneda.codigo;
+            } else {
+              this.currency = '';
+            }
+          } else {
+            this.currency = '';
+          }
         })
     );
   }

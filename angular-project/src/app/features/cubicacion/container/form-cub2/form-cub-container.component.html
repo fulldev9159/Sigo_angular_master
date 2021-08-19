@@ -170,7 +170,7 @@
 
                 <ng-container *ngIf="(ordinaryContract$ | async) === true">
                   <div class="col-12 field-box" [formGroup]="formOrdinario" id="descripcionField">
-                    <app-textarea [control]="formOrdinarioControls.descripcion" label="Descripción" [errorMessageFn]="errorMessageFn">
+                    <app-textarea [control]="formOrdinarioControls.descripcion" label="Descripción" [errorMessageFn]="errorMessageFn" [rows]="4">
                     </app-textarea>
                   </div>
                 </ng-container>
@@ -183,7 +183,11 @@
           <div class="row">
             <div class="col-12">
               <ng-container *ngIf="(ordinaryContract$ | async) === false">
-                <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
+                <app-table [config]="tableNormalConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
+              </ng-container>
+
+              <ng-container *ngIf="(ordinaryContract$ | async) === true">
+                <app-table [config]="tableOrdinarioConfiguration" #tableOrdinarioLpus [items]="[]"></app-table>
               </ng-container>
 
               <div id="total">
