@@ -88,5 +88,9 @@ export const reducerUser = createReducer(
   on(UserActions.resetArea, (state, payload) => ({
     ...state,
     areas: [],
+  })),
+  on(UserActions.resetContratos, (state, payload) => ({
+    ...state,
+    contract: [],
   }))
 );

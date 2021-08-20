@@ -7,12 +7,12 @@ import {
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { map, take, takeUntil } from 'rxjs/operators';
+import { map, take, takeUntil, withLatestFrom, filter } from 'rxjs/operators';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-import { Provider, Area } from '@storeOT/features/user/user.model';
+import { Provider, Area, Contract } from '@storeOT/features/user/user.model';
 import { Profile } from '@storeOT/features/profile/profile.model';
 
 @Component({
@@ -31,9 +31,10 @@ export class FormUser2Component implements OnInit, OnDestroy {
     firma: new FormControl(null),
     celular: new FormControl(null),
     email: new FormControl(null, [Validators.required, Validators.email]),
-    provider: new FormControl('false'),
+    provider: new FormControl('movistar'),
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),
+    contratos_marco: new FormControl(null, []),
   };
 
   formUser: FormGroup = new FormGroup(this.formControls);
@@ -41,6 +42,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
   providers$: Observable<Provider[]>;
   areas$: Observable<Area[]>;
   profiles$: Observable<Profile[]>;
+  contracts$: Observable<Contract[]>;
 
   constructor(
     private userFacade: UserFacade,
@@ -67,22 +69,74 @@ export class FormUser2Component implements OnInit, OnDestroy {
     this.profiles$ = this.profileFacade
       .getProfile$()
       .pipe(map(perfiles => perfiles || []));
+    this.contracts$ = this.userFacade
+      .getContracts$()
+      .pipe(map(contratos => contratos || []));
   }
 
   initFormControlsEvents(): void {
+    this.initProviderRadioFormControlEvent();
     this.initProveerdorFromControlEvent();
   }
 
+  initProviderRadioFormControlEvent(): void {
+    this.formUser.get('provider').valueChanges.subscribe(provider => {
+      this.resetProveedorFormControl();
+      this.resetAreaFormControl();
+      if (provider === 'movistar') {
+        this.userFacade.getProviders({
+          interno: true,
+        });
+        this.userFacade.getAreas({
+          interno: true,
+        });
+        this.userFacade.getContracts({
+          proveedor_id: null,
+        });
+      } else if (provider === 'contratista') {
+        this.userFacade.getProviders({
+          interno: false,
+        });
+        this.userFacade.getAreas({
+          interno: false,
+        });
+        this.userFacade.resetContratos();
+      }
+    });
+  }
   initProveerdorFromControlEvent(): void {
     this.subscription.add(
-      this.formUser.get('proveedor_id').valueChanges.subscribe(proveedor_id => {
-        if (proveedor_id !== null && proveedor_id !== undefined) {
-          this.userFacade.getContracts({
-            proveedor_id: +proveedor_id,
-          });
-        }
-      })
+      this.formUser
+        .get('proveedor_id')
+        .valueChanges.pipe(
+          withLatestFrom(
+            this.formUser
+              .get('provider')
+              .valueChanges.pipe(
+                filter(key => key !== undefined && key !== null)
+              )
+          )
+        )
+        .subscribe(([proveedor_id, provider]) => {
+          if (
+            proveedor_id !== null &&
+            proveedor_id !== undefined &&
+            provider === 'contratista'
+          ) {
+            this.userFacade.getContracts({
+              proveedor_id: +proveedor_id,
+            });
+          }
+        })
     );
+  }
+
+  resetProveedorFormControl(): void {
+    this.formUser.get('proveedor_id').reset();
+  }
+
+  resetAreaFormControl(): void {
+    this.formUser.get('area_id').reset();
   }
 
   initData(): void {
@@ -91,6 +145,9 @@ export class FormUser2Component implements OnInit, OnDestroy {
     });
     this.userFacade.getAreas({
       interno: true,
+    });
+    this.userFacade.getContracts({
+      proveedor_id: null,
     });
   }
 

@@ -110,4 +110,7 @@ export class UserFacade {
   public resetArea(): void {
     this.store.dispatch(userActions.resetArea());
   }
+  public resetContratos(): void {
+    this.store.dispatch(userActions.resetContratos());
+  }
 }

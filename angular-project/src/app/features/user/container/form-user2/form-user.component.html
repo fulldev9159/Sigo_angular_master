@@ -53,14 +53,14 @@
                 <div class="row">
                   <div class="col-xs-12 col-md-5">
                     <div class="p-field-radiobutton">
-                      <p-radioButton id="movistar" name="provider" formControlName="provider" value="false"></p-radioButton>
+                      <p-radioButton id="movistar" name="provider" formControlName="provider" value="movistar"></p-radioButton>
                       <label for="movistar">Movistar</label>
                     </div>
                   </div>
                   <div class="col-xs-12 col-md-7">
                     <div class="p-field-radiobutton">
-                      <p-radioButton id="proveedor" name="provider" formControlName="provider" value="true"></p-radioButton>
-                      <label for="proveedor">Proveedor</label>
+                      <p-radioButton id="proveedor" name="provider" formControlName="provider" value="contratista"></p-radioButton>
+                      <label for="proveedor">Contratista</label>
                     </div>
                   </div>
                 </div>
@@ -92,6 +92,14 @@
                   </ng-container>
                 </app-select>
                 <br>
+              </div>
+
+              <div class="col-12 mb-2" id="contratos_marco">
+                <label for="">Contratos</label>
+                <div>
+                  <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="contracts$|async" formControlName="contratos_marco" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30">
+                  </p-multiSelect>
+                </div>
               </div>
 
             </div>

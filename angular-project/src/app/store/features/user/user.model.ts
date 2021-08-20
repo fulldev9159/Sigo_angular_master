@@ -72,7 +72,7 @@ export interface Contract {
   fecha_fin: string;
   tipo_codigo: number;
   tipo_glosa: string;
-  estado: boolean;
+  activo: boolean;
 }
 export interface UserDetail {
   perfiles: Perfil[];
