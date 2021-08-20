@@ -36,6 +36,17 @@ import { CubicacionWithLpu, TipoMoneda } from '@data';
 // tslint:disable-next-line:no-empty-interface
 interface CartItem extends CubModel.Service {}
 
+interface CartOrdinaryItem {
+  lpu_nombre: string;
+  lpu_unidad_codigo: number;
+  lpu_unidad_nombre: string;
+  cantidad: number;
+  lpu_precio: number;
+  tipo_moneda_cod: string;
+  tipo_moneda_id: number;
+  lpu_subtotal: number;
+}
+
 @Component({
   selector: 'app-form-cub2-container',
   templateUrl: './form-cub-container.component.html',
@@ -138,6 +149,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   formOrdinarioControls = {
     tipo_moneda_id: new FormControl(null, [Validators.required]),
+    tipo_moneda_cod: new FormControl(null, [Validators.required]),
     descripcion: new FormControl(null, [
       Validators.required,
       this.noWhitespace,
@@ -683,11 +695,16 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
               t => t.id === +tipo_moneda_id
             );
             if (tipoMoneda) {
+              this.formOrdinario
+                .get('tipo_moneda_cod')
+                .setValue(tipoMoneda.codigo);
               this.currency = tipoMoneda.codigo;
             } else {
+              this.formOrdinario.get('tipo_moneda_cod').setValue('');
               this.currency = '';
             }
           } else {
+            this.formOrdinario.get('tipo_moneda_cod').setValue('');
             this.currency = '';
           }
           this.resetOrdinaryLpusCarrito();
