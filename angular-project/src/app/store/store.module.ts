@@ -13,6 +13,11 @@ import { TipoMonedaEffects } from './features/tipo-moneda/tipo-moneda.effects';
 import * as formTipoMonedaReduce from './features/tipo-moneda/tipo-moneda.reducer';
 // TIPO MONEDA STORE
 
+// UNIDAD STORE
+import { UnidadEffects } from './features/unidad/unidad.effects';
+import * as formUnidadReduce from './features/unidad/unidad.reducer';
+// UNIDAD STORE
+
 // OT STORE
 import { OtEffects } from './features/ot/ot.effects';
 import * as formOtReduce from './features/ot/ot.reducer';
@@ -53,6 +58,14 @@ import * as formUserReduce from './features/user/user.reducer';
       formTipoMonedaReduce.reducerTipoMoneda
     ),
     // TIPO MONEDA STORE
+
+    // UNIDAD STORE
+    EffectsModule.forFeature([UnidadEffects]),
+    StoreModule.forFeature(
+      formUnidadReduce.featureKey,
+      formUnidadReduce.reducerUnidad
+    ),
+    // UNIDAD STORE
 
     // OT STORE
     EffectsModule.forFeature([OtEffects]),

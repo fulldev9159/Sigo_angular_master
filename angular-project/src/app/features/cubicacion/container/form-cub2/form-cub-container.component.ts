@@ -28,10 +28,11 @@ import {
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { TipoMonedaFacade } from '@storeOT/features/tipo-moneda/tipo-moneda.facade';
+import { UnidadFacade } from '@storeOT/features/unidad/unidad.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponent } from '@uiOT/table/table.component';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CubicacionWithLpu, TipoMoneda } from '@data';
+import { CubicacionWithLpu, Unidad, TipoMoneda } from '@data';
 
 // tslint:disable-next-line:no-empty-interface
 interface CartItem extends CubModel.Service {}
@@ -105,11 +106,15 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   servicios: CubModel.Service[] = []; // TODO: mejorar ésto
   tiposMoneda$: Observable<TipoMoneda[]> = of([]);
   tiposMoneda: TipoMoneda[] = []; // TODO: mejorar ésto
+  unidades$: Observable<Unidad[]> = of([]);
+  unidades: Unidad[] = []; // TODO: mejorar ésto
 
   hasLPUWithZeroQuantity = false;
   tableValid = true;
+  tableOrdinaryValid = true;
 
   lpusCarrito: CartItem[] = [];
+  lpusOrdinaryCarrito: CartOrdinaryItem[] = [];
 
   @ViewChild('tableLpus', {
     read: TableComponent,
@@ -117,11 +122,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   })
   tableLpus: TableComponent;
 
-  @ViewChild('tableOrdinarioLpus', {
+  @ViewChild('tableOrdinaryLpus', {
     read: TableComponent,
     static: false,
   })
-  tableOrdinarioLpus: TableComponent;
+  tableOrdinaryLpus: TableComponent;
 
   total = 0;
   currency = '';
@@ -155,7 +160,6 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       this.noWhitespace,
       Validators.maxLength(300),
     ]),
-    lpus: new FormControl([], []),
   };
 
   formOrdinario: FormGroup = new FormGroup(this.formOrdinarioControls);
@@ -272,7 +276,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     },
   }; // tslint:disable-line
 
-  tableOrdinarioConfiguration = {
+  tableOrdinaryConfiguration = {
     header: true,
     headerConfig: {
       title: '',
@@ -284,11 +288,33 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       headers: [
         {
           field: 'Servicio LPU',
-          type: 'TEXT',
+          type: 'INPUTNUMBER',
           sort: 'lpu_nombre',
           header: 'lpu_nombre',
           // width: '33%',
-          editable: false,
+          editable: true,
+          onchange: (event: any, item: CartOrdinaryItem) => {
+            // this.updatingCantidad = true;
+            // this.cantidadDebouncer$.next({
+            //   value: event.target.value,
+            //   item,
+            // });
+          },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            Validators.maxLength(100),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
+          },
         },
         {
           field: 'Unidad	',
@@ -303,12 +329,12 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           sort: 'cantidad',
           header: 'cantidad',
           editable: true,
-          onchange: (event: any, item: CartItem) => {
-            this.updatingCantidad = true;
-            this.cantidadDebouncer$.next({
-              value: event.target.value,
-              item,
-            });
+          onchange: (event: any, item: CartOrdinaryItem) => {
+            // this.updatingCantidad = true;
+            // this.cantidadDebouncer$.next({
+            //   value: event.target.value,
+            //   item,
+            // });
           },
           validators: [
             Validators.required,
@@ -335,7 +361,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           sort: 'lpu_precio',
           header: 'lpu_precio',
           editable: true,
-          onchange: (event: any, item: any) => {
+          onchange: (event: any, item: CartOrdinaryItem) => {
             // this.updatingCantidad = true;
             // this.cantidadDebouncer$.next({
             //   value: event.target.value,
@@ -387,7 +413,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (event: Event, item: any) => {
+          onClick: (event: Event, item: CartOrdinaryItem) => {
             // this.deleteCartItem(item);
           },
         },
@@ -427,6 +453,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   constructor(
     private cubageFacade: CubicacionFacade,
     private tipoMonedaFacade: TipoMonedaFacade,
+    private unidadFacade: UnidadFacade,
     private router: Router,
     private route: ActivatedRoute,
     private detector: ChangeDetectorRef
@@ -435,6 +462,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cubageFacade.resetData();
     this.tipoMonedaFacade.resetData();
+    this.unidadFacade.resetData();
 
     this.initObservables();
     this.initFormControlsEvents();
@@ -470,6 +498,11 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       map(tiposMoneda => tiposMoneda || []),
       map(tiposMoneda => (this.tiposMoneda = tiposMoneda)),
       tap(tiposMoneda => this.checkTiposMonedaAndEnable(tiposMoneda))
+    );
+
+    this.unidades$ = this.unidadFacade.getUnidades$().pipe(
+      map(unidades => unidades || []),
+      map(unidades => (this.unidades = unidades))
     );
 
     // Edición
@@ -527,11 +560,6 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.formNormal.get('lpus').setValue([]);
   }
 
-  resetOrdinaryLpusFormControl(lpus: any): void {
-    this.formOrdinario.get('lpus').reset();
-    this.formOrdinario.get('lpus').setValue([]);
-  }
-
   // resetTiposMonedaFormControl(): void {
   //   this.formOrdinario.get('tipo_moneda_id').reset();
   // }
@@ -587,6 +615,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           if (key !== undefined && key !== null) {
             if (isOrdinaryContract) {
               this.tipoMonedaFacade.getTiposMoneda();
+              this.unidadFacade.getUnidades();
             } else {
               const { subcontratosID, proveedorID } =
                 this.extractProviderKeys(key);
@@ -999,7 +1028,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   resetOrdinaryLpusCarrito(): void {
-    this.resetOrdinaryLpusFormControl([]);
+    this.lpusOrdinaryCarrito = [];
   }
 
   updateLpusTableInformation(): void {
@@ -1022,6 +1051,27 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   validateLpusWithZeroQuantiy(): void {
     const item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
     this.hasLPUWithZeroQuantity = item !== undefined;
+  }
+
+  addOrdinaryTableRow(): void {
+    const { tipo_moneda_id, tipo_moneda_cod } =
+      this.formOrdinario.getRawValue();
+
+    this.lpusOrdinaryCarrito = [
+      ...this.lpusOrdinaryCarrito,
+      {
+        lpu_nombre: '',
+        lpu_unidad_codigo: null,
+        lpu_unidad_nombre: '',
+        cantidad: 1,
+        lpu_precio: 1,
+        tipo_moneda_cod,
+        tipo_moneda_id,
+        lpu_subtotal: 0,
+      },
+    ];
+
+    this.tableOrdinaryValid = this.tableOrdinaryLpus.valid;
   }
 
   touch(): void {

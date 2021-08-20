@@ -187,7 +187,12 @@
               </ng-container>
 
               <ng-container *ngIf="(ordinaryContract$ | async) === true">
-                <app-table [config]="tableOrdinarioConfiguration" #tableOrdinarioLpus [items]="[]"></app-table>
+                <div class="text-right" id="addOrdinaryItemButtonBox">
+                  <ng-container *ngIf="formOrdinario.controls['tipo_moneda_id'] as control">
+                    <button (click)="addOrdinaryTableRow()" [disabled]="!control.valid" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-outlined"></button>
+                  </ng-container>
+                </div>
+                <app-table [config]="tableOrdinaryConfiguration" #tableOrdinaryLpus [items]="lpusOrdinaryCarrito"></app-table>
               </ng-container>
 
               <div id="total">
