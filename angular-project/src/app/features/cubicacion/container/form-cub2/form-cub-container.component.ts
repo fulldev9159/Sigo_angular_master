@@ -637,7 +637,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           this.resetProveedoresFormControl();
           if (contrato_marco_id !== null && contrato_marco_id !== undefined) {
             // TODO: chequear que el contrato marco sea ordinario o no
-            this.ordinaryContract$.next(true);
+            // this.ordinaryContract$.next(true);
 
             this.cubageFacade.getSubContractedProvidersAction({
               contrato_marco_id: +contrato_marco_id,
