@@ -556,6 +556,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       .pipe(
         filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
       );
+
     this.selectedCubicacionError$ = this.cubageFacade
       .getSingleCubicacionError$()
       .pipe(filter(error => error !== null && error !== undefined));
@@ -1001,6 +1002,47 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           .get('lpus')
           .setValue([...lpus, ...servicesToBeSelected]);
       })
+    );
+
+    this.subscription.add(
+      this.tiposMoneda$
+        .pipe(
+          takeUntil(this.initializationFinished$),
+          withLatestFrom(this.selectedCubicacion$)
+        )
+        .subscribe(([tiposMoneda, cubicacion]) => {
+          const tipoMoneda = tiposMoneda.find(
+            reg => reg.id === cubicacion.lpus[0].tipo_moneda_id
+          );
+
+          this.formOrdinary.get('descripcion').setValue('No tiene descripcion');
+
+          if (tipoMoneda) {
+            this.formOrdinary.get('tipo_moneda_id').setValue(tipoMoneda.id);
+
+            setTimeout(() => {
+              this.lpusOrdinaryCarrito = cubicacion.lpus.map(lpu => ({
+                lpu_nombre: lpu.lpu_nombre,
+                lpu_unidad_codigo: lpu.tipo_unidad_codigo,
+                lpu_unidad_nombre: lpu.tipo_unidad_nombre,
+                cantidad: lpu.lpu_cantidad,
+                lpu_precio: lpu.lpu_precio,
+                tipo_moneda_cod: lpu.tipo_moneda_cod,
+                tipo_moneda_id: lpu.tipo_moneda_id,
+                lpu_subtotal: lpu.lpu_subtotal,
+              }));
+
+              this.updateLpusTableInformation();
+              this.initializationFinished$.next(true);
+              this.detector.detectChanges();
+            }, 1000);
+          } else {
+            this.initializationFinished$.next(true);
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
+          }
+        })
     );
   }
 
