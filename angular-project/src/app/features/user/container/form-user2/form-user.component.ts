@@ -24,11 +24,6 @@ import { Profile } from '@storeOT/features/profile/profile.model';
 export class FormUser2Component implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
-  perfilFormControls = {
-    perfil_id: new FormControl(null, [Validators.required]),
-    persona_a_cargo_id: new FormControl(null, []),
-  };
-
   formControls = {
     username: new FormControl(null, [Validators.required, this.noWhitespace]),
     nombres: new FormControl(null, [Validators.required, this.noWhitespace]),
@@ -41,7 +36,12 @@ export class FormUser2Component implements OnInit, OnDestroy {
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),
     contratos_marco: new FormControl(null, []),
-    perfiles: new FormArray([new FormGroup(this.perfilFormControls)]),
+    perfiles: new FormArray([
+      new FormGroup({
+        perfil_id: new FormControl(null, [Validators.required]),
+        persona_a_cargo_id: new FormControl(null, []),
+      }),
+    ]),
   };
 
   formUser: FormGroup = new FormGroup(this.formControls);
@@ -173,7 +173,10 @@ export class FormUser2Component implements OnInit, OnDestroy {
 
   addPerfil(): void {
     (this.formUser.get('perfiles') as FormArray).push(
-      new FormGroup(this.perfilFormControls)
+      new FormGroup({
+        perfil_id: new FormControl(null, [Validators.required]),
+        persona_a_cargo_id: new FormControl(null, []),
+      })
     );
   }
 }
