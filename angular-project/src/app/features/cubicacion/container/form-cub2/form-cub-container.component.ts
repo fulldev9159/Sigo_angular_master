@@ -778,6 +778,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
                   u => u.id === lpu_unidad_codigo
                 );
                 if (unidad) {
+                  // tslint:disable-next-line:no-string-literal
                   this.cumulativeOrdinaryItems[rowIndex + ''][
                     'lpu_unidad_nombre'
                   ] = unidad.nombre;
@@ -812,10 +813,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     value: string,
     item: CartOrdinaryItem
   ): void {
-    Object.keys(this.cumulativeOrdinaryItems).forEach(rowIndex => {
-      Object.keys(this.cumulativeOrdinaryItems[rowIndex]).forEach(field => {
-        this.lpusOrdinaryCarrito[+rowIndex][field] =
-          this.cumulativeOrdinaryItems[rowIndex][field];
+    Object.keys(this.cumulativeOrdinaryItems).forEach(index => {
+      Object.keys(this.cumulativeOrdinaryItems[index]).forEach(field => {
+        this.lpusOrdinaryCarrito[+index][field] =
+          this.cumulativeOrdinaryItems[index][field];
       });
     });
     this.cumulativeOrdinaryItems = {};
