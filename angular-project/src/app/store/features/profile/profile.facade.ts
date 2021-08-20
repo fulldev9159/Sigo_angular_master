@@ -13,8 +13,8 @@ export class ProfileFacade {
   constructor(private store: Store<Model.Profile>) {}
 
   // PROFILE
-  public getProfile(data): void {
-    this.store.dispatch(profileActions.getProfile(data));
+  public getProfile(): void {
+    this.store.dispatch(profileActions.getProfile());
   }
 
   public getProfile$(): Observable<Model.Profile[]> {

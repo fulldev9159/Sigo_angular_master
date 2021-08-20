@@ -61,7 +61,7 @@ export class FormProComponent implements OnInit, OnDestroy {
           this.profileFacade.getPermissions({ token: authLogin.token });
 
           // generamos llamada a api para perfiles
-          this.profileFacade.getProfile({ token: authLogin.token });
+          this.profileFacade.getProfile();
         }
       });
 

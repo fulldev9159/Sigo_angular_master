@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of, Subject, Subscription } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { map, take, takeUntil, withLatestFrom, filter } from 'rxjs/operators';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
@@ -23,6 +23,12 @@ import { Profile } from '@storeOT/features/profile/profile.model';
 })
 export class FormUser2Component implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+
+  perfilFormControls = {
+    perfil_id: new FormControl(null, [Validators.required]),
+    persona_a_cargo_id: new FormControl(null, []),
+  };
+
   formControls = {
     username: new FormControl(null, [Validators.required, this.noWhitespace]),
     nombres: new FormControl(null, [Validators.required, this.noWhitespace]),
@@ -35,14 +41,15 @@ export class FormUser2Component implements OnInit, OnDestroy {
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),
     contratos_marco: new FormControl(null, []),
+    perfiles: new FormArray([new FormGroup(this.perfilFormControls)]),
   };
 
   formUser: FormGroup = new FormGroup(this.formControls);
 
   providers$: Observable<Provider[]>;
   areas$: Observable<Area[]>;
-  profiles$: Observable<Profile[]>;
   contracts$: Observable<Contract[]>;
+  profiles$: Observable<Profile[]>;
 
   constructor(
     private userFacade: UserFacade,
@@ -104,6 +111,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
       }
     });
   }
+
   initProveerdorFromControlEvent(): void {
     this.subscription.add(
       this.formUser
@@ -149,6 +157,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
     this.userFacade.getContracts({
       proveedor_id: null,
     });
+    this.profileFacade.getProfile();
   }
 
   goBack(): void {
@@ -160,5 +169,11 @@ export class FormUser2Component implements OnInit, OnDestroy {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
+  }
+
+  addPerfil(): void {
+    (this.formUser.get('perfiles') as FormArray).push(
+      new FormGroup(this.perfilFormControls)
+    );
   }
 }

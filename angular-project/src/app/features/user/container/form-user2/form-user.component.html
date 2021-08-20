@@ -102,6 +102,33 @@
                 </div>
               </div>
 
+              <div class="col-12">
+                <label for="">Perfiles</label>
+                <button (click)="addPerfil();" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-outlined float-right"></button>
+                <hr>
+              </div>
+
+              <ng-container formArrayName="perfiles">
+                <div class="col-xs-12 col-md-4 mb-3" *ngFor="let perfil of formUser.value.perfiles; let i=index;">
+                  <div class="card m-auto" style="width: 18rem;">
+                    <ng-container [formGroupName]="i">
+                      <div class="card-body" id="perfil_id">
+                        <app-select [control]="formControls.perfiles.controls[i].controls.perfil_id" label="Perfil">
+                          <ng-container options>
+                            <option value="null" selected disabled>Seleccione perfil</option>
+                            <ng-container *ngFor="let perfil of profiles$ | async">
+                              <option [value]="perfil.id">
+                                {{ perfil.nombre }}
+                              </option>
+                            </ng-container>
+                          </ng-container>
+                        </app-select>
+                        <!-- <select id="perfil-{{i}}" name="perfil_id-{{i}}" formControlName="perfil_id" class="form-control mb-1"> -->
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
             </div>
           </form>
         </div>

@@ -61,7 +61,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
             interno: true,
           });
 
-          this.profileFacade.getProfile({ token: this.authLogin.token });
+          this.profileFacade.getProfile();
         }
       });
     this.pageSubscription.push(subscription);

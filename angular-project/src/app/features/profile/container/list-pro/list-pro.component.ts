@@ -169,7 +169,7 @@ export class ListProComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyInstance))
       .subscribe(authLogin => {
         if (authLogin) {
-          this.profileFacade.getProfile({ token: authLogin.token });
+          this.profileFacade.getProfile();
         }
       });
 

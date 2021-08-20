@@ -34,18 +34,12 @@ export class ProfileEffects {
     this.actions$.pipe(
       ofType(profileActions.getProfile),
       concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/perfiles/get_all`, {
-            token: data.token,
-          })
-          .pipe(
-            map((res: any) =>
-              profileActions.getProfileSuccess({ profile: res.data })
-            ),
-            catchError(err =>
-              of(profileActions.getProfileError({ error: err }))
-            )
-          )
+        this.http.post(`${environment.api}/perfiles/get_all`, {}).pipe(
+          map((res: any) =>
+            profileActions.getProfileSuccess({ profile: res.data })
+          ),
+          catchError(err => of(profileActions.getProfileError({ error: err })))
+        )
       )
     )
   );

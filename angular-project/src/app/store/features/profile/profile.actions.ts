@@ -2,10 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import * as Model from './profile.model';
 
 // PROFILE LIST
-export const getProfile = createAction(
-  '[Profile GetAll] GET Profile',
-  props<{ token: string }>()
-);
+export const getProfile = createAction('[Profile GetAll] GET Profile');
 
 export const getProfileSuccess = createAction(
   '[Profile GetAll] GET Profile Success',
