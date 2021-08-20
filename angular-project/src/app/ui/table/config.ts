@@ -22,7 +22,7 @@ export interface Header {
   onchange?: (event, item) => void;
   validators?: ValidatorFn[];
   errorMessageFn?: (errors) => string;
-  optionsFn: (item) => SelectionOption[];
+  optionsFn?: (item) => SelectionOption[];
 }
 
 export interface Action {
