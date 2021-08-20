@@ -58,10 +58,17 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   ordinaryContract$ = new BehaviorSubject<boolean>(false);
   initializationFinished$: Subject<boolean> = new Subject();
-  updatingCantidad = false;
+  updatingTables = false;
   cantidadDebouncer$ = new BehaviorSubject<{
     value: string;
     item: CartItem;
+  }>(null);
+  cumulativeOrdinaryItems = {};
+  ordinaryFieldDebouncer$ = new BehaviorSubject<{
+    header: string;
+    rowIndex: number;
+    value: string;
+    item: CartOrdinaryItem;
   }>(null);
 
   invalidCubicacionIDError$: Observable<Error> = of(null);
@@ -152,7 +159,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   formNormal: FormGroup = new FormGroup(this.formNormalControls);
 
-  formOrdinarioControls = {
+  formOrdinaryControls = {
     tipo_moneda_id: new FormControl(null, [Validators.required]),
     tipo_moneda_cod: new FormControl(null, [Validators.required]),
     descripcion: new FormControl(null, [
@@ -162,7 +169,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     ]),
   };
 
-  formOrdinario: FormGroup = new FormGroup(this.formOrdinarioControls);
+  formOrdinary: FormGroup = new FormGroup(this.formOrdinaryControls);
 
   tableNormalConfiguration = {
     header: true,
@@ -203,7 +210,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           header: 'cantidad',
           editable: true,
           onchange: (event: any, item: CartItem) => {
-            this.updatingCantidad = true;
+            this.updatingTables = true;
             this.cantidadDebouncer$.next({
               value: event.target.value,
               item,
@@ -269,7 +276,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
           onClick: (event: Event, item: CubModel.Service) => {
-            this.deleteCartItem(item);
+            if (!this.updatingTables) {
+              this.deleteCartItem(item);
+            }
           },
         },
       ],
@@ -288,17 +297,19 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       headers: [
         {
           field: 'Servicio LPU',
-          type: 'INPUTNUMBER',
+          type: 'INPUT',
           sort: 'lpu_nombre',
           header: 'lpu_nombre',
           // width: '33%',
           editable: true,
           onchange: (event: any, item: CartOrdinaryItem) => {
-            // this.updatingCantidad = true;
-            // this.cantidadDebouncer$.next({
-            //   value: event.target.value,
-            //   item,
-            // });
+            this.updatingTables = true;
+            this.ordinaryFieldDebouncer$.next({
+              header: event.target.header,
+              rowIndex: +event.target.rowIndex,
+              value: event.target.value,
+              item,
+            });
           },
           validators: [
             Validators.required,
@@ -318,10 +329,32 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         },
         {
           field: 'Unidad	',
-          type: 'TEXT',
-          sort: 'lpu_unidad_nombre',
-          header: 'lpu_unidad_nombre',
-          editable: false,
+          type: 'SELECT',
+          sort: 'lpu_unidad_codigo',
+          header: 'lpu_unidad_codigo',
+          editable: true,
+          optionsFn: (item: CartOrdinaryItem) => {
+            return this.unidades.map(unidad => ({
+              id: unidad.id,
+              name: unidad.nombre,
+            }));
+          },
+          onchange: (event: any, item: CartOrdinaryItem) => {
+            this.updatingTables = true;
+            this.ordinaryFieldDebouncer$.next({
+              header: event.target.header,
+              rowIndex: +event.target.rowIndex,
+              value: event.target.value,
+              item,
+            });
+          },
+          validators: [Validators.required],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            }
+            return 'Este campo es inválido';
+          },
         },
         {
           field: 'Cantidad	',
@@ -330,11 +363,13 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           header: 'cantidad',
           editable: true,
           onchange: (event: any, item: CartOrdinaryItem) => {
-            // this.updatingCantidad = true;
-            // this.cantidadDebouncer$.next({
-            //   value: event.target.value,
-            //   item,
-            // });
+            this.updatingTables = true;
+            this.ordinaryFieldDebouncer$.next({
+              header: event.target.header,
+              rowIndex: +event.target.rowIndex,
+              value: event.target.value,
+              item,
+            });
           },
           validators: [
             Validators.required,
@@ -362,11 +397,13 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           header: 'lpu_precio',
           editable: true,
           onchange: (event: any, item: CartOrdinaryItem) => {
-            // this.updatingCantidad = true;
-            // this.cantidadDebouncer$.next({
-            //   value: event.target.value,
-            //   item,
-            // });
+            this.updatingTables = true;
+            this.ordinaryFieldDebouncer$.next({
+              header: event.target.header,
+              rowIndex: +event.target.rowIndex,
+              value: event.target.value,
+              item,
+            });
           },
           validators: [
             Validators.required,
@@ -413,8 +450,10 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (event: Event, item: CartOrdinaryItem) => {
-            // this.deleteCartItem(item);
+          onClick: (event: Event, item: CartOrdinaryItem, rowIndex: number) => {
+            if (!this.updatingTables) {
+              this.deleteOrdinaryCartItem(item, rowIndex);
+            }
           },
         },
       ],
@@ -504,6 +543,12 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       map(unidades => unidades || []),
       map(unidades => (this.unidades = unidades))
     );
+    this.subscription.add(
+      this.unidades$.subscribe(
+        unidades => (this.unidades = unidades),
+        err => (this.unidades = [])
+      )
+    );
 
     // Edición
     this.selectedCubicacion$ = this.cubageFacade
@@ -561,14 +606,14 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   // resetTiposMonedaFormControl(): void {
-  //   this.formOrdinario.get('tipo_moneda_id').reset();
+  //   this.formOrdinary.get('tipo_moneda_id').reset();
   // }
 
   checkTiposMonedaAndEnable(tiposMoneda: TipoMoneda[]): void {
     if (tiposMoneda.length > 0) {
-      this.formOrdinario.get('tipo_moneda_id').enable();
+      this.formOrdinary.get('tipo_moneda_id').enable();
     } else {
-      this.formOrdinario.get('tipo_moneda_id').disable();
+      this.formOrdinary.get('tipo_moneda_id').disable();
     }
   }
 
@@ -581,6 +626,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.initLpuCarritoEvent();
 
     this.initTipoMonedaFormControlEvent();
+    this.initOrdinaryLpuCarritoEvent();
   }
 
   initContratoMarcoFormControlEvent(): void {
@@ -613,14 +659,14 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         .subscribe(([key, isOrdinaryContract]) => {
           this.resetRegionesFormControl();
           if (key !== undefined && key !== null) {
+            const { subcontratosID, proveedorID } =
+              this.extractProviderKeys(key);
+            this.formGeneral.get('proveedor_id').setValue(proveedorID);
+
             if (isOrdinaryContract) {
               this.tipoMonedaFacade.getTiposMoneda();
               this.unidadFacade.getUnidades();
             } else {
-              const { subcontratosID, proveedorID } =
-                this.extractProviderKeys(key);
-              this.formGeneral.get('proveedor_id').setValue(proveedorID);
-
               this.cubageFacade.getSubContractedRegionsAction({
                 subcontrato_id: subcontratosID,
               });
@@ -713,9 +759,80 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     );
   }
 
+  initOrdinaryLpuCarritoEvent(): void {
+    this.subscription.add(
+      this.ordinaryFieldDebouncer$
+        .pipe(
+          filter(target => target !== null),
+          tap(({ header, rowIndex, value, item }) => {
+            if (this.cumulativeOrdinaryItems[rowIndex + ''] === undefined) {
+              this.cumulativeOrdinaryItems[rowIndex + ''] = {};
+            }
+
+            switch (header) {
+              case 'lpu_unidad_codigo':
+                const lpu_unidad_codigo = (val => (isNaN(val) ? 0 : val))(
+                  parseInt(value, 10)
+                );
+                const unidad = this.unidades.find(
+                  u => u.id === lpu_unidad_codigo
+                );
+                if (unidad) {
+                  this.cumulativeOrdinaryItems[rowIndex + ''][
+                    'lpu_unidad_nombre'
+                  ] = unidad.nombre;
+                }
+                this.cumulativeOrdinaryItems[rowIndex + ''][header] =
+                  lpu_unidad_codigo;
+                break;
+              case 'cantidad':
+              case 'lpu_precio':
+                const numericValue = (val => (isNaN(val) ? 0 : val))(
+                  parseInt(value, 10)
+                );
+                this.cumulativeOrdinaryItems[rowIndex + ''][header] =
+                  numericValue;
+                break;
+              case 'lpu_nombre':
+                this.cumulativeOrdinaryItems[rowIndex + ''][header] = value;
+                break;
+            }
+          }),
+          debounceTime(800)
+        )
+        .subscribe(({ header, rowIndex, value, item }) =>
+          this.ordinaryLpuFieldChanged(header, rowIndex, value, item)
+        )
+    );
+  }
+
+  ordinaryLpuFieldChanged(
+    header: string,
+    rowIndex: number,
+    value: string,
+    item: CartOrdinaryItem
+  ): void {
+    Object.keys(this.cumulativeOrdinaryItems).forEach(rowIndex => {
+      Object.keys(this.cumulativeOrdinaryItems[rowIndex]).forEach(field => {
+        this.lpusOrdinaryCarrito[+rowIndex][field] =
+          this.cumulativeOrdinaryItems[rowIndex][field];
+      });
+    });
+    this.cumulativeOrdinaryItems = {};
+    this.lpusOrdinaryCarrito = this.lpusOrdinaryCarrito.map((x, index) => ({
+      ...x,
+      lpu_subtotal: +x.lpu_precio * +x.cantidad,
+    }));
+
+    this.tableOrdinaryValid = this.tableOrdinaryLpus.valid;
+    this.updatingTables = false;
+    this.updateLpusTableInformation();
+    this.detector.detectChanges();
+  }
+
   initTipoMonedaFormControlEvent(): void {
     this.subscription.add(
-      this.formOrdinario
+      this.formOrdinary
         .get('tipo_moneda_id')
         .valueChanges.pipe(withLatestFrom(this.tiposMoneda$))
         .subscribe(([tipo_moneda_id, tiposMoneda]) => {
@@ -724,17 +841,17 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
               t => t.id === +tipo_moneda_id
             );
             if (tipoMoneda) {
-              this.formOrdinario
+              this.formOrdinary
                 .get('tipo_moneda_cod')
                 .setValue(tipoMoneda.codigo);
-              this.currency = tipoMoneda.codigo;
+              this.updateCurrency(tipoMoneda.codigo);
             } else {
-              this.formOrdinario.get('tipo_moneda_cod').setValue('');
-              this.currency = '';
+              this.formOrdinary.get('tipo_moneda_cod').setValue('');
+              this.updateCurrency('');
             }
           } else {
-            this.formOrdinario.get('tipo_moneda_cod').setValue('');
-            this.currency = '';
+            this.formOrdinary.get('tipo_moneda_cod').setValue('');
+            this.updateCurrency('');
           }
           this.resetOrdinaryLpusCarrito();
         })
@@ -751,7 +868,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.formNormal.get('region_id').disable({ emitEvent: false });
     this.formNormal.get('tipo_servicio_id').disable({ emitEvent: false });
 
-    this.formOrdinario.get('tipo_moneda_id').disable({ emitEvent: false });
+    this.formOrdinary.get('tipo_moneda_id').disable({ emitEvent: false });
   }
 
   checkCubageEditionFromParams(): void {
@@ -901,7 +1018,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   // acciones del autocompletado con el campo 'nombre'
   nameSelected(event: any): void {
-    console.log('name selected', event);
+    // console.log('name selected', event);
     // this.formGeneral.get('nombre').setValue(event.name);
   }
 
@@ -980,7 +1097,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     ];
 
     this.updateTotal();
-    this.updateCurrency();
+    this.updateCurrencyNormal();
     this.validateLpusWithZeroQuantiy();
   }
 
@@ -999,7 +1116,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     });
 
     this.tableValid = this.tableLpus.valid;
-    this.updatingCantidad = false;
+    this.updatingTables = false;
     this.updateLpusTableInformation();
     this.detector.detectChanges();
   }
@@ -1019,6 +1136,17 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
     this.tableValid = this.tableLpus.valid;
     this.updateLpusTableInformation();
+    this.detector.detectChanges();
+  }
+
+  deleteOrdinaryCartItem(item: CartOrdinaryItem, rowIndex): void {
+    const tmp = [...this.lpusOrdinaryCarrito];
+    tmp.splice(rowIndex, 1);
+    this.lpusOrdinaryCarrito = [...tmp];
+
+    this.tableOrdinaryValid = this.tableOrdinaryLpus.valid;
+    this.updateLpusTableInformation();
+    this.detector.detectChanges();
   }
 
   resetLpusCarrito(): void {
@@ -1029,40 +1157,74 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   resetOrdinaryLpusCarrito(): void {
     this.lpusOrdinaryCarrito = [];
+    this.updateLpusTableInformation();
   }
 
   updateLpusTableInformation(): void {
     this.updateTotal();
-    this.updateCurrency();
+    this.updateCurrencyNormal();
     this.validateLpusWithZeroQuantiy();
   }
 
-  updateCurrency(): void {
-    this.currency =
-      this.lpusCarrito.length === 0 ? '' : this.lpusCarrito[0].tipo_moneda_cod;
+  updateCurrencyNormal(): void {
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (!isOrdinaryContract) {
+      this.currency =
+        this.lpusCarrito.length === 0
+          ? ''
+          : this.lpusCarrito[0].tipo_moneda_cod;
+    }
+  }
+
+  updateCurrency(currency: string): void {
+    this.currency = currency;
   }
 
   updateTotal(): void {
-    this.total = this.lpusCarrito.reduce((total, currentValue) => {
-      return total + currentValue.lpu_subtotal;
-    }, 0);
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (isOrdinaryContract) {
+      this.total = this.lpusOrdinaryCarrito.reduce((total, currentValue) => {
+        return total + currentValue.lpu_subtotal;
+      }, 0);
+    } else {
+      this.total = this.lpusCarrito.reduce((total, currentValue) => {
+        return total + currentValue.lpu_subtotal;
+      }, 0);
+    }
   }
 
   validateLpusWithZeroQuantiy(): void {
-    const item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
+    let item;
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (isOrdinaryContract) {
+      item = this.lpusOrdinaryCarrito.find(lpu => lpu.cantidad < 1);
+    } else {
+      item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
+    }
     this.hasLPUWithZeroQuantity = item !== undefined;
   }
 
+  notAllowedToAddRow(): boolean {
+    const { tipo_moneda_id } = this.formOrdinary.getRawValue();
+    return !(
+      tipo_moneda_id !== null &&
+      !this.hasLPUWithZeroQuantity &&
+      this.tableOrdinaryValid &&
+      !this.updatingTables
+    );
+  }
+
   addOrdinaryTableRow(): void {
-    const { tipo_moneda_id, tipo_moneda_cod } =
-      this.formOrdinario.getRawValue();
+    const { tipo_moneda_id, tipo_moneda_cod } = this.formOrdinary.getRawValue();
 
     this.lpusOrdinaryCarrito = [
       ...this.lpusOrdinaryCarrito,
       {
-        lpu_nombre: '',
-        lpu_unidad_codigo: null,
-        lpu_unidad_nombre: '',
+        lpu_nombre: 'Nuevo',
+        lpu_unidad_codigo:
+          this.unidades.length > 0 ? this.unidades[0].id : null,
+        lpu_unidad_nombre:
+          this.unidades.length > 0 ? this.unidades[0].nombre : '',
         cantidad: 1,
         lpu_precio: 1,
         tipo_moneda_cod,
@@ -1070,14 +1232,26 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         lpu_subtotal: 0,
       },
     ];
+    this.lpusOrdinaryCarrito = this.lpusOrdinaryCarrito.map((x, index) => ({
+      ...x,
+      lpu_subtotal: +x.lpu_precio * +x.cantidad,
+    }));
 
     this.tableOrdinaryValid = this.tableOrdinaryLpus.valid;
+    this.updateLpusTableInformation();
+    this.detector.detectChanges();
   }
 
   touch(): void {
     this.touchFormGeneral();
-    this.touchFormNormal();
-    this.tableLpus.touch();
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (isOrdinaryContract) {
+      this.touchFormOrdinary();
+      this.tableOrdinaryLpus.touch();
+    } else {
+      this.touchFormNormal();
+      this.tableLpus.touch();
+    }
   }
 
   touchFormGeneral(): void {
@@ -1106,14 +1280,39 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     });
   }
 
+  touchFormOrdinary(): void {
+    Object.keys(this.formOrdinary.controls).forEach(field => {
+      const control = this.formOrdinary.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.formOrdinary.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
   get valid(): boolean {
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (isOrdinaryContract) {
+      return (
+        this.formGeneral.valid &&
+        this.formOrdinary.valid &&
+        this.lpusOrdinaryCarrito.length > 0 &&
+        !this.hasLPUWithZeroQuantity &&
+        this.tableOrdinaryValid &&
+        !this.updatingTables
+      );
+    }
+
     return (
       this.formGeneral.valid &&
       this.formNormal.valid &&
       this.lpusCarrito.length > 0 &&
       !this.hasLPUWithZeroQuantity &&
       this.tableValid &&
-      !this.updatingCantidad
+      !this.updatingTables
     );
   }
 
@@ -1121,42 +1320,59 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.touch();
     if (this.valid) {
       const formGeneralData = this.formGeneral.getRawValue();
-      const formNormalData = this.formNormal.getRawValue();
-
       const cubicacion_nombre =
         typeof formGeneralData.nombre === 'object'
           ? formGeneralData.nombre.name
           : formGeneralData.nombre;
 
-      const nuevaCubicacion = {
-        // cubicacion_id: +formGeneralData.cubicacion_id,
-        cubicacion_nombre,
-        region_id: +formNormalData.region_id,
-        // usuario_id: +this.authLogin.usuario_id,
-        contrato_marco_id: +formGeneralData.contrato_marco_id,
-        proveedor_id: +formGeneralData.proveedor_id,
-        lpus: this.lpusCarrito.map(x => ({
-          lpu_id: x.lpu_id,
-          cantidad: x.cantidad,
-        })),
-      };
+      const isOrdinaryContract = this.ordinaryContract$.value;
 
-      this.subscription.add(
-        this.cubageFacade
-          .getSingleCubicacion$()
-          .pipe(take(1))
-          .subscribe(cubicacion => {
-            if (cubicacion) {
-              const editCubicacion = {
-                ...nuevaCubicacion,
-                cubicacion_id: cubicacion.id,
-              };
-              this.cubageFacade.editCubicacion(editCubicacion);
-            } else {
-              this.cubageFacade.postCubicacion(nuevaCubicacion);
-            }
-          })
-      );
+      if (isOrdinaryContract) {
+        const formOrdinaryData = this.formOrdinary.getRawValue();
+
+        console.log('guardar contrato ordinario', {
+          cubicacion_nombre,
+          contrato_marco_id: +formGeneralData.contrato_marco_id,
+          proveedor_id: +formGeneralData.proveedor_id,
+
+          tipo_moneda_id: formOrdinaryData.tipo_moneda_id,
+          tipo_moneda_cod: formOrdinaryData.tipo_moneda_cod,
+          descripcion: formOrdinaryData.descripcion,
+          lpus: this.lpusOrdinaryCarrito,
+        });
+      } else {
+        const formNormalData = this.formNormal.getRawValue();
+
+        const nuevaCubicacion = {
+          // cubicacion_id: +formGeneralData.cubicacion_id,
+          cubicacion_nombre,
+          region_id: +formNormalData.region_id,
+          // usuario_id: +this.authLogin.usuario_id,
+          contrato_marco_id: +formGeneralData.contrato_marco_id,
+          proveedor_id: +formGeneralData.proveedor_id,
+          lpus: this.lpusCarrito.map(x => ({
+            lpu_id: x.lpu_id,
+            cantidad: x.cantidad,
+          })),
+        };
+
+        this.subscription.add(
+          this.cubageFacade
+            .getSingleCubicacion$()
+            .pipe(take(1))
+            .subscribe(cubicacion => {
+              if (cubicacion) {
+                const editCubicacion = {
+                  ...nuevaCubicacion,
+                  cubicacion_id: cubicacion.id,
+                };
+                this.cubageFacade.editCubicacion(editCubicacion);
+              } else {
+                this.cubageFacade.postCubicacion(nuevaCubicacion);
+              }
+            })
+        );
+      }
     }
   }
 }

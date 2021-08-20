@@ -154,8 +154,8 @@
                 </ng-container>
 
                 <ng-container *ngIf="(ordinaryContract$ | async) === true">
-                  <div class="col-12 field-box" [formGroup]="formOrdinario" id="tipoMonedaField">
-                    <app-select [control]="formOrdinarioControls.tipo_moneda_id" label="Moneda" [errorMessageFn]="errorMessageFn">
+                  <div class="col-12 field-box" [formGroup]="formOrdinary" id="tipoMonedaField">
+                    <app-select [control]="formOrdinaryControls.tipo_moneda_id" label="Moneda" [errorMessageFn]="errorMessageFn">
                       <ng-container options>
                         <option value="null" selected disabled>Seleccione tipo de moneda</option>
                         <ng-container *ngFor="let tipoMoneda of tiposMoneda$ | async">
@@ -169,8 +169,8 @@
                 </ng-container>
 
                 <ng-container *ngIf="(ordinaryContract$ | async) === true">
-                  <div class="col-12 field-box" [formGroup]="formOrdinario" id="descripcionField">
-                    <app-textarea [control]="formOrdinarioControls.descripcion" label="Descripción" [errorMessageFn]="errorMessageFn" [rows]="4">
+                  <div class="col-12 field-box" [formGroup]="formOrdinary" id="descripcionField">
+                    <app-textarea [control]="formOrdinaryControls.descripcion" label="Descripción" [errorMessageFn]="errorMessageFn" [rows]="4">
                     </app-textarea>
                   </div>
                 </ng-container>
@@ -188,9 +188,7 @@
 
               <ng-container *ngIf="(ordinaryContract$ | async) === true">
                 <div class="text-right" id="addOrdinaryItemButtonBox">
-                  <ng-container *ngIf="formOrdinario.controls['tipo_moneda_id'] as control">
-                    <button (click)="addOrdinaryTableRow()" [disabled]="!control.valid" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-outlined"></button>
-                  </ng-container>
+                  <button (click)="addOrdinaryTableRow()" [disabled]="notAllowedToAddRow()" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-outlined"></button>
                 </div>
                 <app-table [config]="tableOrdinaryConfiguration" #tableOrdinaryLpus [items]="lpusOrdinaryCarrito"></app-table>
               </ng-container>

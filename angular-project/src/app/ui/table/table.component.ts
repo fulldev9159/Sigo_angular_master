@@ -34,12 +34,15 @@ export class TableComponent implements OnInit, OnDestroy {
       (ac, item, rowIndex) => ({
         ...ac,
         ...this.config.body.headers.reduce((ac2, header) => {
-          if (header.type === 'INPUTNUMBER') {
-            ac2[
-              this.getControlName(rowIndex, header.header)
-            ] = new FormControl(item[header.header] + '', [
-              ...(header.validators || []),
-            ]);
+          if (
+            header.type === 'INPUT' ||
+            header.type === 'INPUTNUMBER' ||
+            header.type === 'SELECT'
+          ) {
+            ac2[this.getControlName(rowIndex, header.header)] = new FormControl(
+              item[header.header] + '',
+              [...(header.validators || [])]
+            );
           }
           return ac2;
         }, {}),
@@ -52,9 +55,8 @@ export class TableComponent implements OnInit, OnDestroy {
     Object.keys(this.controls).forEach(controlName => {
       this.subscription.add(
         this.form.get(controlName).valueChanges.subscribe(value => {
-          const [rowIndex, header] = this.extractControlNameElements(
-            controlName
-          );
+          const [rowIndex, header] =
+            this.extractControlNameElements(controlName);
 
           const column = this.config.body.headers.find(
             col => col.header === header
@@ -65,6 +67,7 @@ export class TableComponent implements OnInit, OnDestroy {
             column.onchange(
               {
                 target: {
+                  header,
                   rowIndex,
                   controlName,
                   value,
@@ -109,7 +112,10 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   extractControlNameElements(controlName: string): string[] {
-    return controlName.split('_');
+    const words = controlName.split('_');
+    const rowIndex = words.shift();
+    const header = words.join('_');
+    return [rowIndex, header];
   }
 
   touch(): void {
