@@ -778,10 +778,9 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
                   u => u.id === lpu_unidad_codigo
                 );
                 if (unidad) {
-                  // tslint:disable-next-line:no-string-literal
-                  this.cumulativeOrdinaryItems[rowIndex + ''][
-                    'lpu_unidad_nombre'
-                  ] = unidad.nombre;
+                  const key = 'lpu_unidad_nombre';
+                  this.cumulativeOrdinaryItems[rowIndex + ''][key] =
+                    unidad.nombre;
                 }
                 this.cumulativeOrdinaryItems[rowIndex + ''][header] =
                   lpu_unidad_codigo;
