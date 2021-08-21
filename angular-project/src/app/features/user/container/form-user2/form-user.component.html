@@ -109,9 +109,10 @@
               </div>
 
               <ng-container formArrayName="perfiles">
-                <div class="container-jerarquia">
+                <div class="ol-xs-12 col-md-4 mb-1 container-jerarquia">
                   <div style="text-align: center; color:#1f658a"><label for="">Jerarquía de perfiles</label></div>
-                  <ul>
+                  <ul style="padding-left: 25px;
+                  font-size: 14px;">
                     <li style="margin-bottom:14px" *ngFor="let superior of getSuperiores()">{{superior}} <button (click)="showPermisos(superior)">Ver permisos</button>
                       <ul>
                         <li style="margin-top:6px" *ngFor="let sub of getSub(superior)"> {{sub}} <button (click)="showPermisos(sub)">Ver permisos</button>
@@ -131,7 +132,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="col-xs-12 col-md-3 mb-1" *ngFor="let perfil of formUser.value.perfiles; let i=index;">
+                <div class="col-xs-12 col-md-4 mb-1" *ngFor="let perfil of formUser.value.perfiles; let i=index;">
                   <div class="card m-auto" style="width: 18rem;">
                     <ng-container [formGroupName]="i">
                       <div class="card-body" id="perfil_id">
