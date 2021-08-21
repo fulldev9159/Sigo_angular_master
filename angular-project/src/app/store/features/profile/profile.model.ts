@@ -1,11 +1,12 @@
 export interface Profile {
   id: number;
-  name: string;
+  nombre: string;
   descripcion: string;
-  fecha_creacion: Date;
-  fecha_actualizacion: Date;
-  permissions: Permit[];
-  superior: number;
+  created_at: Date;
+  updated_at: Date;
+  permisos: Permit[];
+  superior_id: number;
+  superior_nombre: string;
 }
 
 export interface Permit {
@@ -13,7 +14,6 @@ export interface Permit {
   slug: string;
   nombre_corto: string;
   descripcion: string;
-  module: string;
 }
 
 export interface Form {

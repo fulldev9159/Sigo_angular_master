@@ -109,7 +109,29 @@
               </div>
 
               <ng-container formArrayName="perfiles">
-                <div class="col-xs-12 col-md-4 mb-3" *ngFor="let perfil of formUser.value.perfiles; let i=index;">
+                <div class="container-jerarquia">
+                  <div style="text-align: center; color:#1f658a"><label for="">Jerarquía de perfiles</label></div>
+                  <ul>
+                    <li style="margin-bottom:14px" *ngFor="let superior of getSuperiores()">{{superior}} <button (click)="showPermisos(superior)">Ver permisos</button>
+                      <ul>
+                        <li style="margin-top:6px" *ngFor="let sub of getSub(superior)"> {{sub}} <button (click)="showPermisos(sub)">Ver permisos</button>
+                          <ul>
+                            <li style="margin-top:6px" *ngFor="let subsub of getSubSub(superior,sub)">{{subsub}} <button (click)="showPermisos(subsub)">Ver permisos</button>
+                              <ul>
+                                <li style="margin-top:6px" *ngFor="let subsubsub of getSubSubSub(superior,sub,subsub)">{{subsubsub}} <button (click)="showPermisos(subsubsub)">Ver permisos</button>
+                                  <ul>
+                                    <li style="margin-top:6px" *ngFor="let subsubsubsub of getSubSubSubSub(superior,sub,subsub,subsubsub)">{{subsubsubsub}} <button (click)="showPermisos(subsubsubsub)">Ver permisos</button></li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-xs-12 col-md-3 mb-1" *ngFor="let perfil of formUser.value.perfiles; let i=index;">
                   <div class="card m-auto" style="width: 18rem;">
                     <ng-container [formGroupName]="i">
                       <div class="card-body" id="perfil_id">
@@ -124,6 +146,25 @@
                           </ng-container>
                         </app-select>
                         <!-- <select id="perfil-{{i}}" name="perfil_id-{{i}}" formControlName="perfil_id" class="form-control mb-1"> -->
+                        <!-- <app-select [control]="formControls.perfiles.controls[i].controls.perfil_id" label="Superior directo">
+                            <ng-container options>
+                              <option value="null" selected disabled>Seleccione jefatura</option>
+                              <ng-container *ngFor="let perfil of profiles$ | async">
+                                <option [value]="perfil.id">
+                                  {{ perfil.nombre }}
+                                </option>
+                              </ng-container>
+                            </ng-container>
+                          </app-select> -->
+
+                        <!-- <h6 class="card-subtitle mb-1 mt-2 text-muted ">Superior directo</h6>
+                          <select formControlName="persona_a_cargo_id" class="form-control mb-3">
+                            <option value="null" selected disabled>Seleccione jefatura</option>
+                            <option *ngFor="let higher of listMandatory(formUser.value.perfiles[i].perfil_id)" [ngValue]="higher.id">
+                              {{higher.nombres}} {{higher.apellidos}}
+                            </option>
+                          </select> -->
+                        <a *ngIf="formUser.value.perfiles.length > 1" (click)="deletePerfil(i);" class="card-link text-danger">Eliminar</a>
                       </div>
                     </ng-container>
                   </div>
@@ -138,3 +179,20 @@
 
   {{formUser.value|json}}
 </div>
+
+
+<app-modal [display]="DisplayPermisosModal" (CloseEvent)="DisplayPermisosModal=false">
+  <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      <div *ngFor="let item of ModalDataPermissions" class="col-xs-12 col-md-4 pt-2" id="permisos-modulo-{{item.module}}">
+        <p-listbox [options]="item.permissions" optionLabel="nombre_corto" optionDisabled="inactive" [disabled]="true">
+          <ng-template pTemplate="header">
+            {{item.module}}
+          </ng-template>
+        </p-listbox>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>
