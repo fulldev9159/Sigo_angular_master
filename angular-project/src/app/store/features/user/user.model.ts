@@ -104,3 +104,8 @@ export interface PerfilFormUser {
 export interface ActivateUserResponse {
   id: number;
 }
+
+export interface PerfilSuperiorFormUser {
+  perfil_id: number;
+  personas_superiores: User[];
+}

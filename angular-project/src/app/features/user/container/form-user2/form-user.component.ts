@@ -20,9 +20,15 @@ import {
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-import { Provider, Area, Contract } from '@storeOT/features/user/user.model';
+import {
+  Provider,
+  Area,
+  Contract,
+  PerfilSuperiorFormUser,
+} from '@storeOT/features/user/user.model';
 import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
+import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as _ from 'lodash';
 
 @Component({
@@ -33,9 +39,14 @@ import * as _ from 'lodash';
 })
 export class FormUser2Component implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+
   jerarquia: any = {};
   ModalDataPermissions: any[] = [];
   DisplayPermisosModal = false;
+
+  superiores = [];
+  perfilId: number;
+  profilesConSuperiores: PerfilSuperiorFormUser[] = [];
 
   formControls = {
     username: new FormControl(null, [Validators.required, this.noWhitespace]),
@@ -63,11 +74,13 @@ export class FormUser2Component implements OnInit, OnDestroy {
   areas$: Observable<Area[]>;
   contracts$: Observable<Contract[]>;
   profiles$: Observable<Profile[]>;
+  highers$: Observable<any[]>;
 
   constructor(
     private userFacade: UserFacade,
     private router: Router,
-    private profileFacade: ProfileFacade
+    private profileFacade: ProfileFacade,
+    private snackService: SnackBarService
   ) {}
   ngOnInit(): void {
     this.userFacade.resetData();
@@ -141,11 +154,71 @@ export class FormUser2Component implements OnInit, OnDestroy {
     this.contracts$ = this.userFacade
       .getContracts$()
       .pipe(map(contratos => contratos || []));
+
+    this.highers$ = this.userFacade.getHighers$();
   }
 
   initFormControlsEvents(): void {
     this.initProviderRadioFormControlEvent();
     this.initProveerdorFromControlEvent();
+    this.subscription.add(
+      this.highers$
+        .pipe(withLatestFrom(this.providers$, this.profiles$))
+        .subscribe(([superiores, proveedores, perfiles]) => {
+          console.log('incio $', superiores);
+          let Proveedor = '';
+          let perfilExistente;
+          let nombrePerfil: any;
+          if (this.formUser.get('provider').value === 'movistar') {
+            Proveedor = 'Movitar';
+          } else if (this.formUser.get('provider').value === 'contratista') {
+            Proveedor = proveedores.find(
+              proveedor =>
+                +proveedor.id === +this.formUser.get('proveedor_id').value
+            ).nombre;
+          }
+
+          console.log('Proveedor', Proveedor);
+
+          if (this.perfilId !== undefined) {
+            console.log('perfilId', this.perfilId);
+            console.log(
+              'PerfilesConSuperior Actual:',
+              this.profilesConSuperiores
+            );
+            perfilExistente = this.profilesConSuperiores.find(
+              x => x.perfil_id === this.perfilId
+            );
+            console.log('PerfilExistente', perfilExistente);
+            console.log('perfiles', perfiles);
+            nombrePerfil = perfiles.find(x => +x.id === +this.perfilId).nombre;
+            console.log('nombre', nombrePerfil);
+
+            if (perfilExistente === undefined) {
+              this.profilesConSuperiores.push({
+                perfil_id: +this.perfilId,
+                personas_superiores: superiores,
+              });
+              console.log(
+                'PerfilesConSuperior Saliente:',
+                this.profilesConSuperiores
+              );
+              if (superiores.length === 0) {
+                this.snackService.showMessage(
+                  `El perfil ${nombrePerfil} no tienen personas superiores de ${Proveedor}`,
+                  'warning'
+                );
+              }
+            } else if (superiores && superiores.length === 0) {
+              this.snackService.showMessage(
+                `El perfil ${nombrePerfil} no tienen personas superiores de ${Proveedor}`,
+                'warning'
+              );
+            }
+          }
+          return superiores;
+        })
+    );
   }
 
   initProviderRadioFormControlEvent(): void {
@@ -153,6 +226,8 @@ export class FormUser2Component implements OnInit, OnDestroy {
       this.formUser.get('provider').valueChanges.subscribe(provider => {
         this.resetProveedorFormControl();
         this.resetAreaFormControl();
+        this.resetProfilesFormControl();
+
         if (provider === 'movistar') {
           this.userFacade.getProviders({
             interno: true,
@@ -190,6 +265,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
           )
         )
         .subscribe(([proveedor_id, provider]) => {
+          this.resetProfilesFormControl();
           if (
             proveedor_id !== null &&
             proveedor_id !== undefined &&
@@ -209,6 +285,10 @@ export class FormUser2Component implements OnInit, OnDestroy {
 
   resetAreaFormControl(): void {
     this.formUser.get('area_id').reset();
+  }
+
+  resetProfilesFormControl(): void {
+    this.formUser.get('perfiles').reset();
   }
 
   initData(): void {
@@ -246,6 +326,39 @@ export class FormUser2Component implements OnInit, OnDestroy {
 
   deletePerfil(): void {}
 
+  changePerfil(index: number): void {
+    this.perfilId = +this.formUser.value.perfiles[index].perfil_id;
+    // const inArray = this.profilesConSuperiores.findIndex(
+    //   p => +p.perfil_id === +this.perfilId
+    // );
+    // if (inArray === -1) {
+    this.userFacade.getHighers({
+      proveedor_id:
+        +this.formUser.value.proveedor_id !== 0
+          ? +this.formUser.value.proveedor_id
+          : 1,
+      perfil_id: this.perfilId,
+    });
+    // }
+  }
+
+  listMandatory(perfil_id: number): any {
+    if (perfil_id) {
+      if (this.profilesConSuperiores.length > 0) {
+        const perfilObject = this.profilesConSuperiores.find(
+          m => +m.perfil_id === +perfil_id
+        );
+        if (perfilObject) {
+          return perfilObject.personas_superiores;
+        } else {
+          return [];
+        }
+      } else {
+        return [];
+      }
+    }
+  }
+
   getSuperiores(): string[] {
     return Object.keys(this.jerarquia).length > 0
       ? Object.keys(this.jerarquia)
@@ -280,7 +393,6 @@ export class FormUser2Component implements OnInit, OnDestroy {
     subsub: string,
     subsubsub: string
   ): string[] {
-    console.log(this.jerarquia[superior][sub][subsub][subsubsub]);
     if (this.jerarquia[superior][sub][subsub][subsubsub]) {
       return Object.keys(this.jerarquia[superior][sub][subsub][subsubsub])
         .length > 0
@@ -294,8 +406,6 @@ export class FormUser2Component implements OnInit, OnDestroy {
       this.profiles$.pipe(take(1)).subscribe(x => {
         x.forEach(y => {
           if (y.nombre === perfil) {
-            console.log(y.nombre);
-            console.log(y.permisos);
             const data = y.permisos.map(permit => {
               let permitCustom;
               if (permit && permit.slug) {
