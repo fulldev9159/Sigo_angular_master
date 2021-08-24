@@ -27,13 +27,26 @@ import {
 } from 'rxjs/operators';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import { TipoMonedaFacade } from '@storeOT/features/tipo-moneda/tipo-moneda.facade';
+import { UnidadFacade } from '@storeOT/features/unidad/unidad.facade';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponent } from '@uiOT/table/table.component';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CubicacionWithLpu } from '@data';
+import { CubicacionWithLpu, Unidad, TipoMoneda } from '@data';
 
 // tslint:disable-next-line:no-empty-interface
 interface CartItem extends CubModel.Service {}
+
+interface CartOrdinaryItem {
+  lpu_nombre: string;
+  lpu_unidad_codigo: number;
+  lpu_unidad_nombre: string;
+  cantidad: number;
+  lpu_precio: number;
+  tipo_moneda_cod: string;
+  tipo_moneda_id: number;
+  lpu_subtotal: number;
+}
 
 @Component({
   selector: 'app-form-cub2-container',
@@ -43,11 +56,19 @@ interface CartItem extends CubModel.Service {}
 })
 export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  ordinaryContract$ = new BehaviorSubject<boolean>(false);
   initializationFinished$: Subject<boolean> = new Subject();
-  updatingCantidad = false;
+  updatingTables = false;
   cantidadDebouncer$ = new BehaviorSubject<{
     value: string;
     item: CartItem;
+  }>(null);
+  cumulativeOrdinaryItems = {};
+  ordinaryFieldDebouncer$ = new BehaviorSubject<{
+    header: string;
+    rowIndex: number;
+    value: string;
+    item: CartOrdinaryItem;
   }>(null);
 
   invalidCubicacionIDError$: Observable<Error> = of(null);
@@ -90,36 +111,67 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   tiposServicio: CubModel.TypeService[] = []; // TODO: mejorar ésto
   servicios$: Observable<CubModel.Service[]> = of([]);
   servicios: CubModel.Service[] = []; // TODO: mejorar ésto
+  tiposMoneda$: Observable<TipoMoneda[]> = of([]);
+  tiposMoneda: TipoMoneda[] = []; // TODO: mejorar ésto
+  unidades$: Observable<Unidad[]> = of([]);
+  unidades: Unidad[] = []; // TODO: mejorar ésto
 
   hasLPUWithZeroQuantity = false;
   tableValid = true;
+  tableOrdinaryValid = true;
+
   lpusCarrito: CartItem[] = [];
+  lpusOrdinaryCarrito: CartOrdinaryItem[] = [];
+
   @ViewChild('tableLpus', {
     read: TableComponent,
     static: false,
   })
   tableLpus: TableComponent;
+
+  @ViewChild('tableOrdinaryLpus', {
+    read: TableComponent,
+    static: false,
+  })
+  tableOrdinaryLpus: TableComponent;
+
   total = 0;
   currency = '';
 
-  formControls = {
-    // cubicacion_id: null,
+  formGeneralControls = {
     nombre: new FormControl('', [
       Validators.required,
-      this.noWhitespace,
+      this.noWhitespaceName,
       Validators.maxLength(300),
     ]),
     contrato_marco_id: new FormControl(null, [Validators.required]),
     subcontrato_id: new FormControl(null, [Validators.required]),
     proveedor_id: new FormControl(null, [Validators.required]),
+  };
+
+  formGeneral: FormGroup = new FormGroup(this.formGeneralControls);
+
+  formNormalControls = {
     region_id: new FormControl(null, [Validators.required]),
     tipo_servicio_id: new FormControl(null, []),
     lpus: new FormControl([], []),
   };
 
-  formCubicacion: FormGroup = new FormGroup(this.formControls);
+  formNormal: FormGroup = new FormGroup(this.formNormalControls);
 
-  tableConfiguration = {
+  formOrdinaryControls = {
+    tipo_moneda_id: new FormControl(null, [Validators.required]),
+    tipo_moneda_cod: new FormControl(null, [Validators.required]),
+    descripcion: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      Validators.maxLength(300),
+    ]),
+  };
+
+  formOrdinary: FormGroup = new FormGroup(this.formOrdinaryControls);
+
+  tableNormalConfiguration = {
     header: true,
     headerConfig: {
       title: '',
@@ -158,7 +210,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           header: 'cantidad',
           editable: true,
           onchange: (event: any, item: CartItem) => {
-            this.updatingCantidad = true;
+            this.updatingTables = true;
             this.cantidadDebouncer$.next({
               value: event.target.value,
               item,
@@ -224,7 +276,184 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
           onClick: (event: Event, item: CubModel.Service) => {
-            this.deleteCartItem(item);
+            if (!this.updatingTables) {
+              this.deleteCartItem(item);
+            }
+          },
+        },
+      ],
+    },
+  }; // tslint:disable-line
+
+  tableOrdinaryConfiguration = {
+    header: true,
+    headerConfig: {
+      title: '',
+      searchText: 'Filtrar...',
+      paginator: false,
+      actionsType: 'Buttons',
+    },
+    body: {
+      headers: [
+        {
+          field: 'Servicio LPU',
+          type: 'INPUT',
+          sort: 'lpu_nombre',
+          header: 'lpu_nombre',
+          // width: '33%',
+          editable: true,
+          onchange: (event: any, item: CartOrdinaryItem) => {
+            this.updatingTables = true;
+            this.ordinaryFieldDebouncer$.next({
+              header: event.target.header,
+              rowIndex: +event.target.rowIndex,
+              value: event.target.value,
+              item,
+            });
+          },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            Validators.maxLength(100),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
+          },
+        },
+        {
+          field: 'Unidad	',
+          type: 'SELECT',
+          sort: 'lpu_unidad_codigo',
+          header: 'lpu_unidad_codigo',
+          editable: true,
+          optionsFn: (item: CartOrdinaryItem) => {
+            return this.unidades.map(unidad => ({
+              id: unidad.id,
+              name: unidad.nombre,
+            }));
+          },
+          onchange: (event: any, item: CartOrdinaryItem) => {
+            this.updatingTables = true;
+            this.ordinaryFieldDebouncer$.next({
+              header: event.target.header,
+              rowIndex: +event.target.rowIndex,
+              value: event.target.value,
+              item,
+            });
+          },
+          validators: [Validators.required],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            }
+            return 'Este campo es inválido';
+          },
+        },
+        {
+          field: 'Cantidad	',
+          type: 'INPUTNUMBER',
+          sort: 'cantidad',
+          header: 'cantidad',
+          editable: true,
+          onchange: (event: any, item: CartOrdinaryItem) => {
+            this.updatingTables = true;
+            this.ordinaryFieldDebouncer$.next({
+              header: event.target.header,
+              rowIndex: +event.target.rowIndex,
+              value: event.target.value,
+              item,
+            });
+          },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            this.nonZero,
+            Validators.maxLength(6),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.nonzero) {
+              return 'No son permitidos valores inferiores a 1';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
+          },
+        },
+        {
+          field: 'Precio	',
+          type: 'INPUTNUMBER',
+          sort: 'lpu_precio',
+          header: 'lpu_precio',
+          editable: true,
+          onchange: (event: any, item: CartOrdinaryItem) => {
+            this.updatingTables = true;
+            this.ordinaryFieldDebouncer$.next({
+              header: event.target.header,
+              rowIndex: +event.target.rowIndex,
+              value: event.target.value,
+              item,
+            });
+          },
+          validators: [
+            Validators.required,
+            this.noWhitespace,
+            this.nonZero,
+            Validators.maxLength(6),
+          ],
+          errorMessageFn: errors => {
+            if (errors.required) {
+              return 'Este campo es requerido';
+            } else if (errors.whitespace) {
+              return 'Este campo es requerido';
+            } else if (errors.nonzero) {
+              return 'No son permitidos valores inferiores a 1';
+            } else if (errors.maxlength) {
+              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
+            }
+            return 'Este campo es inválido';
+          },
+        },
+        {
+          field: 'Tipo Moneda	',
+          type: 'TEXT',
+          sort: 'tipo_moneda_cod',
+          header: 'tipo_moneda_cod',
+          editable: false,
+        },
+        {
+          field: 'Subtotal	',
+          type: 'NUMBER',
+          sort: 'lpu_subtotal',
+          header: 'lpu_subtotal',
+        },
+        {
+          field: null,
+          type: 'ACTIONS',
+          sort: null,
+          header: null,
+          editable: false,
+        },
+      ],
+      sort: ['lpu_nombre'],
+      actions: [
+        {
+          icon: 'p-button-icon pi pi-trash',
+          class: 'p-button-rounded p-button-danger',
+          onClick: (event: Event, item: CartOrdinaryItem, rowIndex: number) => {
+            if (!this.updatingTables) {
+              this.deleteOrdinaryCartItem(item, rowIndex);
+            }
           },
         },
       ],
@@ -236,11 +465,16 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     return value < 1 ? { nonzero: true } : null;
   }
 
-  noWhitespace(control: FormControl): any {
+  noWhitespaceName(control: FormControl): any {
     const nombreCub =
       typeof control.value === 'object' ? control.value.name : control.value;
-    console.log('CONTROL', nombreCub);
     const isWhitespace = (nombreCub || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
@@ -257,6 +491,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   constructor(
     private cubageFacade: CubicacionFacade,
+    private tipoMonedaFacade: TipoMonedaFacade,
+    private unidadFacade: UnidadFacade,
     private router: Router,
     private route: ActivatedRoute,
     private detector: ChangeDetectorRef
@@ -264,11 +500,12 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cubageFacade.resetData();
+    this.tipoMonedaFacade.resetData();
+    this.unidadFacade.resetData();
 
     this.initObservables();
     this.initFormControlsEvents();
-    this.initData();
-
+    this.initFormData();
     this.checkCubageEditionFromParams();
     this.initEditionData();
   }
@@ -280,6 +517,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       map(proveedores => proveedores || []),
       tap(proveedores => this.checkProveedoresAndEnable(proveedores))
     );
+
     this.regiones$ = this.cubageFacade.getRegionsSelector$().pipe(
       map(regiones => regiones || []),
       map(regiones => (this.regiones = regiones)),
@@ -295,76 +533,113 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       map(servicios => (this.servicios = servicios))
     );
 
+    this.tiposMoneda$ = this.tipoMonedaFacade.getTiposMoneda$().pipe(
+      map(tiposMoneda => tiposMoneda || []),
+      map(tiposMoneda => (this.tiposMoneda = tiposMoneda)),
+      tap(tiposMoneda => this.checkTiposMonedaAndEnable(tiposMoneda))
+    );
+
+    this.unidades$ = this.unidadFacade.getUnidades$().pipe(
+      map(unidades => unidades || []),
+      map(unidades => (this.unidades = unidades))
+    );
+    this.subscription.add(
+      this.unidades$.subscribe(
+        unidades => (this.unidades = unidades),
+        err => (this.unidades = [])
+      )
+    );
+
     // Edición
     this.selectedCubicacion$ = this.cubageFacade
       .getSingleCubicacion$()
       .pipe(
         filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
       );
+
     this.selectedCubicacionError$ = this.cubageFacade
       .getSingleCubicacionError$()
       .pipe(filter(error => error !== null && error !== undefined));
   }
 
   resetProveedoresFormControl(): void {
-    this.formCubicacion.get('subcontrato_id').reset();
-    this.formCubicacion.get('proveedor_id').reset();
+    this.formGeneral.get('subcontrato_id').reset();
+    this.formGeneral.get('proveedor_id').reset();
   }
 
   checkProveedoresAndEnable(proveedores: CubModel.Provider[]): void {
     if (proveedores.length > 0) {
-      this.formCubicacion.get('subcontrato_id').enable();
-      this.formCubicacion.get('proveedor_id').enable();
+      this.formGeneral.get('subcontrato_id').enable();
+      this.formGeneral.get('proveedor_id').enable();
     } else {
-      this.formCubicacion.get('subcontrato_id').disable();
-      this.formCubicacion.get('proveedor_id').disable();
+      this.formGeneral.get('subcontrato_id').disable();
+      this.formGeneral.get('proveedor_id').disable();
     }
   }
 
   resetRegionesFormControl(): void {
-    this.formCubicacion.get('region_id').reset();
+    this.formNormal.get('region_id').reset();
   }
 
   checkRegionesAndEnable(regiones: CubModel.Region[]): void {
     if (regiones.length > 0) {
-      this.formCubicacion.get('region_id').enable();
+      this.formNormal.get('region_id').enable();
     } else {
-      this.formCubicacion.get('region_id').disable();
+      this.formNormal.get('region_id').disable();
     }
   }
 
   resetTiposServicioFormControl(): void {
-    this.formCubicacion.get('tipo_servicio_id').reset();
+    this.formNormal.get('tipo_servicio_id').reset();
   }
 
   checkTiposServicioAndEnable(tiposServicio: CubModel.TypeService[]): void {
     if (tiposServicio.length > 0) {
-      this.formCubicacion.get('tipo_servicio_id').enable();
+      this.formNormal.get('tipo_servicio_id').enable();
     } else {
-      this.formCubicacion.get('tipo_servicio_id').disable();
+      this.formNormal.get('tipo_servicio_id').disable();
     }
   }
 
   resetSelectedLpusFormControl(lpus: CubModel.Service[]): void {
-    this.formCubicacion.get('lpus').reset();
-    this.formCubicacion.get('lpus').setValue([]);
+    this.formNormal.get('lpus').reset();
+    this.formNormal.get('lpus').setValue([]);
+  }
+
+  // resetTiposMonedaFormControl(): void {
+  //   this.formOrdinary.get('tipo_moneda_id').reset();
+  // }
+
+  checkTiposMonedaAndEnable(tiposMoneda: TipoMoneda[]): void {
+    if (tiposMoneda.length > 0) {
+      this.formOrdinary.get('tipo_moneda_id').enable();
+    } else {
+      this.formOrdinary.get('tipo_moneda_id').disable();
+    }
   }
 
   initFormControlsEvents(): void {
     this.initContratoMarcoFormControlEvent();
     this.initProveedorFormControlEvent();
+
     this.initRegionFormControlEvent();
     this.initTipoServicioFormControlEvent();
     this.initLpuCarritoEvent();
+
+    this.initTipoMonedaFormControlEvent();
+    this.initOrdinaryLpuCarritoEvent();
   }
 
   initContratoMarcoFormControlEvent(): void {
     this.subscription.add(
-      this.formCubicacion
+      this.formGeneral
         .get('contrato_marco_id')
         .valueChanges.subscribe(contrato_marco_id => {
           this.resetProveedoresFormControl();
           if (contrato_marco_id !== null && contrato_marco_id !== undefined) {
+            // TODO: chequear que el contrato marco sea ordinario o no
+            // this.ordinaryContract$.next(true);
+
             this.cubageFacade.getSubContractedProvidersAction({
               contrato_marco_id: +contrato_marco_id,
             });
@@ -372,36 +647,47 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             this.checkProveedoresAndEnable([]);
           }
           this.resetLpusCarrito();
+          this.resetOrdinaryLpusCarrito();
         })
     );
   }
 
   initProveedorFormControlEvent(): void {
     this.subscription.add(
-      this.formCubicacion.get('subcontrato_id').valueChanges.subscribe(key => {
-        this.resetRegionesFormControl();
-        if (key !== undefined && key !== null) {
-          const { subcontratosID, proveedorID } = this.extractProviderKeys(key);
-          this.formCubicacion.get('proveedor_id').setValue(proveedorID);
+      this.formGeneral
+        .get('subcontrato_id')
+        .valueChanges.pipe(withLatestFrom(this.ordinaryContract$))
+        .subscribe(([key, isOrdinaryContract]) => {
+          this.resetRegionesFormControl();
+          if (key !== undefined && key !== null) {
+            const { subcontratosID, proveedorID } =
+              this.extractProviderKeys(key);
+            this.formGeneral.get('proveedor_id').setValue(proveedorID);
 
-          this.cubageFacade.getSubContractedRegionsAction({
-            subcontrato_id: subcontratosID,
-          });
-        } else {
-          this.checkRegionesAndEnable([]);
-        }
-        this.resetLpusCarrito();
-      })
+            if (isOrdinaryContract) {
+              this.tipoMonedaFacade.getTiposMoneda();
+              this.unidadFacade.getUnidades();
+            } else {
+              this.cubageFacade.getSubContractedRegionsAction({
+                subcontrato_id: subcontratosID,
+              });
+            }
+          } else {
+            this.checkRegionesAndEnable([]);
+          }
+          this.resetLpusCarrito();
+          this.resetOrdinaryLpusCarrito();
+        })
     );
   }
 
   initRegionFormControlEvent(): void {
     this.subscription.add(
-      this.formCubicacion
+      this.formNormal
         .get('region_id')
         .valueChanges.pipe(
           withLatestFrom(
-            this.formCubicacion
+            this.formGeneral
               .get('subcontrato_id')
               .valueChanges.pipe(
                 filter(key => key !== undefined && key !== null)
@@ -428,16 +714,16 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   initTipoServicioFormControlEvent(): void {
     this.subscription.add(
-      this.formCubicacion
+      this.formNormal
         .get('tipo_servicio_id')
         .valueChanges.pipe(
           withLatestFrom(
-            this.formCubicacion
+            this.formGeneral
               .get('subcontrato_id')
               .valueChanges.pipe(
                 filter(key => key !== undefined && key !== null)
               ),
-            this.formCubicacion
+            this.formNormal
               .get('region_id')
               .valueChanges.pipe(
                 filter(
@@ -474,15 +760,116 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  initData(): void {
-    this.formCubicacion.get('subcontrato_id').disable({ emitEvent: false });
-    this.formCubicacion.get('proveedor_id').disable({ emitEvent: false });
+  initOrdinaryLpuCarritoEvent(): void {
+    this.subscription.add(
+      this.ordinaryFieldDebouncer$
+        .pipe(
+          filter(target => target !== null),
+          tap(({ header, rowIndex, value, item }) => {
+            if (this.cumulativeOrdinaryItems[rowIndex + ''] === undefined) {
+              this.cumulativeOrdinaryItems[rowIndex + ''] = {};
+            }
 
-    this.formCubicacion.get('region_id').disable({ emitEvent: false });
-    this.formCubicacion.get('tipo_servicio_id').disable({ emitEvent: false });
+            switch (header) {
+              case 'lpu_unidad_codigo':
+                const lpu_unidad_codigo = (val => (isNaN(val) ? 0 : val))(
+                  parseInt(value, 10)
+                );
+                const unidad = this.unidades.find(
+                  u => u.id === lpu_unidad_codigo
+                );
+                if (unidad) {
+                  const key = 'lpu_unidad_nombre';
+                  this.cumulativeOrdinaryItems[rowIndex + ''][key] =
+                    unidad.nombre;
+                }
+                this.cumulativeOrdinaryItems[rowIndex + ''][header] =
+                  lpu_unidad_codigo;
+                break;
+              case 'cantidad':
+              case 'lpu_precio':
+                const numericValue = (val => (isNaN(val) ? 0 : val))(
+                  parseInt(value, 10)
+                );
+                this.cumulativeOrdinaryItems[rowIndex + ''][header] =
+                  numericValue;
+                break;
+              case 'lpu_nombre':
+                this.cumulativeOrdinaryItems[rowIndex + ''][header] = value;
+                break;
+            }
+          }),
+          debounceTime(800)
+        )
+        .subscribe(({ header, rowIndex, value, item }) =>
+          this.ordinaryLpuFieldChanged(header, rowIndex, value, item)
+        )
+    );
+  }
+
+  ordinaryLpuFieldChanged(
+    header: string,
+    rowIndex: number,
+    value: string,
+    item: CartOrdinaryItem
+  ): void {
+    Object.keys(this.cumulativeOrdinaryItems).forEach(index => {
+      Object.keys(this.cumulativeOrdinaryItems[index]).forEach(field => {
+        this.lpusOrdinaryCarrito[+index][field] =
+          this.cumulativeOrdinaryItems[index][field];
+      });
+    });
+    this.cumulativeOrdinaryItems = {};
+    this.lpusOrdinaryCarrito = this.lpusOrdinaryCarrito.map((x, index) => ({
+      ...x,
+      lpu_subtotal: +x.lpu_precio * +x.cantidad,
+    }));
+
+    this.tableOrdinaryValid = this.tableOrdinaryLpus.valid;
+    this.updatingTables = false;
+    this.updateLpusTableInformation();
+    this.detector.detectChanges();
+  }
+
+  initTipoMonedaFormControlEvent(): void {
+    this.subscription.add(
+      this.formOrdinary
+        .get('tipo_moneda_id')
+        .valueChanges.pipe(withLatestFrom(this.tiposMoneda$))
+        .subscribe(([tipo_moneda_id, tiposMoneda]) => {
+          if (tipo_moneda_id !== undefined && tipo_moneda_id !== null) {
+            const tipoMoneda = (tiposMoneda || []).find(
+              t => t.id === +tipo_moneda_id
+            );
+            if (tipoMoneda) {
+              this.formOrdinary
+                .get('tipo_moneda_cod')
+                .setValue(tipoMoneda.codigo);
+              this.updateCurrency(tipoMoneda.codigo);
+            } else {
+              this.formOrdinary.get('tipo_moneda_cod').setValue('');
+              this.updateCurrency('');
+            }
+          } else {
+            this.formOrdinary.get('tipo_moneda_cod').setValue('');
+            this.updateCurrency('');
+          }
+          this.resetOrdinaryLpusCarrito();
+        })
+    );
+  }
+
+  initFormData(): void {
+    this.formGeneral.get('subcontrato_id').disable({ emitEvent: false });
+    this.formGeneral.get('proveedor_id').disable({ emitEvent: false });
 
     this.cubageFacade.getAutoSuggestAction('', 5);
     this.cubageFacade.getContractMarcoAction();
+
+    this.formNormal.get('region_id').disable({ emitEvent: false });
+    this.formNormal.get('tipo_servicio_id').disable({ emitEvent: false });
+
+    this.formOrdinary.get('tipo_moneda_id').disable({ emitEvent: false });
   }
 
   checkCubageEditionFromParams(): void {
@@ -509,14 +896,14 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           withLatestFrom(this.contratosMarcos$)
         )
         .subscribe(([cubicacion, contratos]) => {
-          this.formCubicacion.get('nombre').setValue(cubicacion.nombre);
+          this.formGeneral.get('nombre').setValue(cubicacion.nombre);
 
           const contrato = contratos.find(
             con => con.id === cubicacion.contrato_marco_id
           );
 
           if (contrato) {
-            this.formCubicacion.get('contrato_marco_id').setValue(contrato.id);
+            this.formGeneral.get('contrato_marco_id').setValue(contrato.id);
           } else {
             this.initializationFinished$.next(true);
             this.incompleteCubicacionError$ = of(
@@ -540,7 +927,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           if (proveedor) {
             const key = this.providerKey(proveedor);
 
-            this.formCubicacion.get('subcontrato_id').setValue(key);
+            this.formGeneral.get('subcontrato_id').setValue(key);
           } else {
             this.initializationFinished$.next(true);
             this.incompleteCubicacionError$ = of(
@@ -559,7 +946,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
         .subscribe(([regiones, cubicacion]) => {
           const region = regiones.find(reg => reg.id === cubicacion.region_id);
 
-          this.formCubicacion.get('region_id').setValue(region.id);
+          this.formNormal.get('region_id').setValue(region.id);
 
           if (region) {
             setTimeout(() => {
@@ -598,7 +985,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
           return ac;
         }, {});
 
-        const { lpus } = this.formCubicacion.getRawValue();
+        const { lpus } = this.formNormal.getRawValue();
 
         const lpusInFormControl = (lpus || []).reduce((ac, lpu) => {
           ac[lpu.lpu_id] = true;
@@ -611,10 +998,51 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
             lpusInFormControl[service.lpu_id] === undefined
         );
 
-        this.formCubicacion
+        this.formNormal
           .get('lpus')
           .setValue([...lpus, ...servicesToBeSelected]);
       })
+    );
+
+    this.subscription.add(
+      this.tiposMoneda$
+        .pipe(
+          takeUntil(this.initializationFinished$),
+          withLatestFrom(this.selectedCubicacion$)
+        )
+        .subscribe(([tiposMoneda, cubicacion]) => {
+          const tipoMoneda = tiposMoneda.find(
+            reg => reg.id === cubicacion.lpus[0].tipo_moneda_id
+          );
+
+          this.formOrdinary.get('descripcion').setValue('No tiene descripcion');
+
+          if (tipoMoneda) {
+            this.formOrdinary.get('tipo_moneda_id').setValue(tipoMoneda.id);
+
+            setTimeout(() => {
+              this.lpusOrdinaryCarrito = cubicacion.lpus.map(lpu => ({
+                lpu_nombre: lpu.lpu_nombre,
+                lpu_unidad_codigo: lpu.tipo_unidad_codigo,
+                lpu_unidad_nombre: lpu.tipo_unidad_nombre,
+                cantidad: lpu.lpu_cantidad,
+                lpu_precio: lpu.lpu_precio,
+                tipo_moneda_cod: lpu.tipo_moneda_cod,
+                tipo_moneda_id: lpu.tipo_moneda_id,
+                lpu_subtotal: lpu.lpu_subtotal,
+              }));
+
+              this.updateLpusTableInformation();
+              this.initializationFinished$.next(true);
+              this.detector.detectChanges();
+            }, 1000);
+          } else {
+            this.initializationFinished$.next(true);
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
+          }
+        })
     );
   }
 
@@ -632,8 +1060,8 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
 
   // acciones del autocompletado con el campo 'nombre'
   nameSelected(event: any): void {
-    console.log('name selected', event);
-    // this.formCubicacion.get('nombre').setValue(event.name);
+    // console.log('name selected', event);
+    // this.formGeneral.get('nombre').setValue(event.name);
   }
 
   nameChanged(name: string): void {
@@ -668,7 +1096,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
   }
 
   lpuServiceSelected(event: any): void {
-    const { region_id, tipo_servicio_id } = this.formCubicacion.getRawValue();
+    const { region_id, tipo_servicio_id } = this.formNormal.getRawValue();
     const region = this.regiones.find(r => r.id === +region_id);
     const tipoServicio = this.tiposServicio.find(
       t => t.id === +tipo_servicio_id
@@ -711,7 +1139,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     ];
 
     this.updateTotal();
-    this.updateCurrency();
+    this.updateCurrencyNormal();
     this.validateLpusWithZeroQuantiy();
   }
 
@@ -730,7 +1158,7 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     });
 
     this.tableValid = this.tableLpus.valid;
-    this.updatingCantidad = false;
+    this.updatingTables = false;
     this.updateLpusTableInformation();
     this.detector.detectChanges();
   }
@@ -740,16 +1168,27 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
       lpu => lpu.lpu_id !== item.lpu_id
     );
 
-    this.formCubicacion
+    this.formNormal
       .get('lpus')
       .setValue(
-        this.formCubicacion
+        this.formNormal
           .get('lpus')
           .value.filter(lpu => lpu.lpu_id !== item.lpu_id)
       );
 
     this.tableValid = this.tableLpus.valid;
     this.updateLpusTableInformation();
+    this.detector.detectChanges();
+  }
+
+  deleteOrdinaryCartItem(item: CartOrdinaryItem, rowIndex): void {
+    const tmp = [...this.lpusOrdinaryCarrito];
+    tmp.splice(rowIndex, 1);
+    this.lpusOrdinaryCarrito = [...tmp];
+
+    this.tableOrdinaryValid = this.tableOrdinaryLpus.valid;
+    this.updateLpusTableInformation();
+    this.detector.detectChanges();
   }
 
   resetLpusCarrito(): void {
@@ -758,88 +1197,224 @@ export class FormCub2ContainerComponent implements OnInit, OnDestroy {
     this.updateLpusTableInformation();
   }
 
+  resetOrdinaryLpusCarrito(): void {
+    this.lpusOrdinaryCarrito = [];
+    this.updateLpusTableInformation();
+  }
+
   updateLpusTableInformation(): void {
     this.updateTotal();
-    this.updateCurrency();
+    this.updateCurrencyNormal();
     this.validateLpusWithZeroQuantiy();
   }
 
-  updateCurrency(): void {
-    this.currency =
-      this.lpusCarrito.length === 0 ? '' : this.lpusCarrito[0].tipo_moneda_cod;
+  updateCurrencyNormal(): void {
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (!isOrdinaryContract) {
+      this.currency =
+        this.lpusCarrito.length === 0
+          ? ''
+          : this.lpusCarrito[0].tipo_moneda_cod;
+    }
+  }
+
+  updateCurrency(currency: string): void {
+    this.currency = currency;
   }
 
   updateTotal(): void {
-    this.total = this.lpusCarrito.reduce((total, currentValue) => {
-      return total + currentValue.lpu_subtotal;
-    }, 0);
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (isOrdinaryContract) {
+      this.total = this.lpusOrdinaryCarrito.reduce((total, currentValue) => {
+        return total + currentValue.lpu_subtotal;
+      }, 0);
+    } else {
+      this.total = this.lpusCarrito.reduce((total, currentValue) => {
+        return total + currentValue.lpu_subtotal;
+      }, 0);
+    }
   }
 
   validateLpusWithZeroQuantiy(): void {
-    const item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
+    let item;
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (isOrdinaryContract) {
+      item = this.lpusOrdinaryCarrito.find(lpu => lpu.cantidad < 1);
+    } else {
+      item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
+    }
     this.hasLPUWithZeroQuantity = item !== undefined;
   }
 
+  notAllowedToAddRow(): boolean {
+    const { tipo_moneda_id } = this.formOrdinary.getRawValue();
+    return !(
+      tipo_moneda_id !== null &&
+      !this.hasLPUWithZeroQuantity &&
+      this.tableOrdinaryValid &&
+      !this.updatingTables
+    );
+  }
+
+  addOrdinaryTableRow(): void {
+    const { tipo_moneda_id, tipo_moneda_cod } = this.formOrdinary.getRawValue();
+
+    this.lpusOrdinaryCarrito = [
+      ...this.lpusOrdinaryCarrito,
+      {
+        lpu_nombre: 'Nuevo',
+        lpu_unidad_codigo:
+          this.unidades.length > 0 ? this.unidades[0].id : null,
+        lpu_unidad_nombre:
+          this.unidades.length > 0 ? this.unidades[0].nombre : '',
+        cantidad: 1,
+        lpu_precio: 1,
+        tipo_moneda_cod,
+        tipo_moneda_id,
+        lpu_subtotal: 0,
+      },
+    ];
+    this.lpusOrdinaryCarrito = this.lpusOrdinaryCarrito.map((x, index) => ({
+      ...x,
+      lpu_subtotal: +x.lpu_precio * +x.cantidad,
+    }));
+
+    this.tableOrdinaryValid = this.tableOrdinaryLpus.valid;
+    this.updateLpusTableInformation();
+    this.detector.detectChanges();
+  }
+
   touch(): void {
-    Object.keys(this.formCubicacion.controls).forEach(field => {
-      const control = this.formCubicacion.get(field);
+    this.touchFormGeneral();
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (isOrdinaryContract) {
+      this.touchFormOrdinary();
+      this.tableOrdinaryLpus.touch();
+    } else {
+      this.touchFormNormal();
+      this.tableLpus.touch();
+    }
+  }
+
+  touchFormGeneral(): void {
+    Object.keys(this.formGeneral.controls).forEach(field => {
+      const control = this.formGeneral.get(field);
       control.markAsTouched({
         onlySelf: true,
       });
     });
 
-    this.formCubicacion.markAsTouched({
+    this.formGeneral.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
+  touchFormNormal(): void {
+    Object.keys(this.formNormal.controls).forEach(field => {
+      const control = this.formNormal.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.formNormal.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
+  touchFormOrdinary(): void {
+    Object.keys(this.formOrdinary.controls).forEach(field => {
+      const control = this.formOrdinary.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.formOrdinary.markAsTouched({
       onlySelf: true,
     });
   }
 
   get valid(): boolean {
+    const isOrdinaryContract = this.ordinaryContract$.value;
+    if (isOrdinaryContract) {
+      return (
+        this.formGeneral.valid &&
+        this.formOrdinary.valid &&
+        this.lpusOrdinaryCarrito.length > 0 &&
+        !this.hasLPUWithZeroQuantity &&
+        this.tableOrdinaryValid &&
+        !this.updatingTables
+      );
+    }
+
     return (
-      this.formCubicacion.valid &&
+      this.formGeneral.valid &&
+      this.formNormal.valid &&
       this.lpusCarrito.length > 0 &&
       !this.hasLPUWithZeroQuantity &&
       this.tableValid &&
-      !this.updatingCantidad
+      !this.updatingTables
     );
   }
 
   submit(): void {
     this.touch();
-    this.tableLpus.touch();
     if (this.valid) {
-      const form = this.formCubicacion.getRawValue();
-      const nombreCub =
-        typeof form.nombre === 'object' ? form.nombre.name : form.nombre;
-      console.log(nombreCub);
-      const nuevaCubicacion = {
-        // cubicacion_id: +form.cubicacion_id,
-        cubicacion_nombre: nombreCub,
-        region_id: +form.region_id,
-        // usuario_id: +this.authLogin.usuario_id,
-        contrato_marco_id: +form.contrato_marco_id,
-        proveedor_id: +form.proveedor_id,
-        lpus: this.lpusCarrito.map(x => ({
-          lpu_id: x.lpu_id,
-          cantidad: x.cantidad,
-        })),
-      };
+      const formGeneralData = this.formGeneral.getRawValue();
+      const cubicacion_nombre =
+        typeof formGeneralData.nombre === 'object'
+          ? formGeneralData.nombre.name
+          : formGeneralData.nombre;
 
-      this.subscription.add(
-        this.cubageFacade
-          .getSingleCubicacion$()
-          .pipe(take(1))
-          .subscribe(cubicacion => {
-            if (cubicacion) {
-              const editCubicacion = {
-                ...nuevaCubicacion,
-                cubicacion_id: cubicacion.id,
-              };
-              this.cubageFacade.editCubicacion(editCubicacion);
-            } else {
-              this.cubageFacade.postCubicacion(nuevaCubicacion);
-            }
-          })
-      );
+      const isOrdinaryContract = this.ordinaryContract$.value;
+
+      if (isOrdinaryContract) {
+        const formOrdinaryData = this.formOrdinary.getRawValue();
+
+        console.log('guardar contrato ordinario', {
+          cubicacion_nombre,
+          contrato_marco_id: +formGeneralData.contrato_marco_id,
+          proveedor_id: +formGeneralData.proveedor_id,
+
+          tipo_moneda_id: formOrdinaryData.tipo_moneda_id,
+          tipo_moneda_cod: formOrdinaryData.tipo_moneda_cod,
+          descripcion: formOrdinaryData.descripcion,
+          lpus: this.lpusOrdinaryCarrito,
+        });
+      } else {
+        const formNormalData = this.formNormal.getRawValue();
+
+        const nuevaCubicacion = {
+          // cubicacion_id: +formGeneralData.cubicacion_id,
+          cubicacion_nombre,
+          region_id: +formNormalData.region_id,
+          // usuario_id: +this.authLogin.usuario_id,
+          contrato_marco_id: +formGeneralData.contrato_marco_id,
+          proveedor_id: +formGeneralData.proveedor_id,
+          lpus: this.lpusCarrito.map(x => ({
+            lpu_id: x.lpu_id,
+            cantidad: x.cantidad,
+          })),
+        };
+
+        this.subscription.add(
+          this.cubageFacade
+            .getSingleCubicacion$()
+            .pipe(take(1))
+            .subscribe(cubicacion => {
+              if (cubicacion) {
+                const editCubicacion = {
+                  ...nuevaCubicacion,
+                  cubicacion_id: cubicacion.id,
+                };
+                this.cubageFacade.editCubicacion(editCubicacion);
+              } else {
+                this.cubageFacade.postCubicacion(nuevaCubicacion);
+              }
+            })
+        );
+      }
     }
   }
 }

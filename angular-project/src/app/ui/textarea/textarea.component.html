@@ -1,0 +1,7 @@
+<ng-container *ngIf="label !== ''">
+  <label>{{ label }}</label>
+</ng-container>
+<textarea [formControl]="control" class="form-control" id="{{ ID }}" placeholder="{{ placeholder }}" cols="{{ cols }}" rows="{{ rows }}"></textarea>
+<div *ngIf="control.invalid && (control.dirty || control.touched)">
+  <p-message severity="error" text="{{ errorMessageFn(control.errors) }}"></p-message>
+</div>

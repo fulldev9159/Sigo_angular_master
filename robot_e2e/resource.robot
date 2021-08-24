@@ -240,26 +240,26 @@ Set Nombre Cubicacion
 
 Set contrato
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-4 > div > div:nth-child(2) > app-select > select
+    ${selector}=       set variable    css:#contratoField > app-select > select
     Set select item    ${valor}        ${selector}
 
 Set proveedor
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-4 > div > div:nth-child(3) > app-select > select
+    ${selector}=       set variable    css:#proveedorField > app-select > select
     Set select item    ${valor}        ${selector}
 
 Set region
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-4 > div > div:nth-child(4) > app-select > select
+    ${selector}=       set variable    css:#regionField > app-select > select
     Set select item    ${valor}        ${selector}
 
 Set tipo servicio
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8 > div:nth-child(1) > app-select > select
+    ${selector}=       set variable    css:#tipoServicioField > app-select > select
     Set select item    ${valor}        ${selector}
 
 Guardar Cubicacion
-    ${selector}=             set variable    css:#box > div.col-xs-12.col-md-12.text-right.button-guardar-cubicacion > button.btn.btn-primary
+    ${selector}=             set variable    css:#submitButtonBox > button.btn.btn-primary
     WAIT                     ${selector}
     Click Visible Element    ${selector}
 

@@ -37,8 +37,8 @@ Crear OT happy path
     Set region               Región Metropolitana de Santiago
     Set tipo servicio        PROYECTO (FIJA)
     sleep                    2
-    Click Visible Element    css:#box > div.col-xs-12.col-md-8 > div:nth-child(2) > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(1) > div.p-checkbox.p-component.ng-star-inserted > div
-    Click Visible Element    css:#box > div.col-xs-12.col-md-8 > div:nth-child(2) > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(2) > div.p-checkbox.p-component.ng-star-inserted > div
+    Click Visible Element    css:#lpusBox > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(1) > div.p-checkbox.p-component.ng-star-inserted > div
+    Click Visible Element    css:#lpusBox > p-listbox > div > div.p-listbox-list-wrapper > ul > li:nth-child(2) > div.p-checkbox.p-component.ng-star-inserted > div
     sleep                    2
     Guardar Cubicacion
 
