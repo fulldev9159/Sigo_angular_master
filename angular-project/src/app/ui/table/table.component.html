@@ -51,11 +51,23 @@
           </td>
           <td *ngSwitchCase="'TEXT-TITLECASE'">{{ item[column.header] | titlecase }}</td>
           <td *ngSwitchCase="'TEXT'">{{ item[column.header] }}</td>
+          <td *ngSwitchCase="'INPUT'">
+            <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="text" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
+          </td>
           <td *ngSwitchCase="'INPUTNUMBER'">
-            <!--
-            <input type="number" pInputText style="width: 100%;" (change)="column.onchange($event,item)" value="{{item[column.header]}}" />
-            -->
             <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="number" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
+          </td>
+          <td *ngSwitchCase="'SELECT'">
+            <app-select [control]="controls[getControlName(rowIndex, column.header)]" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione</option>
+                <ng-container *ngFor="let option of column.optionsFn(item)">
+                  <option [value]="option.id">
+                    {{ option.name }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
           </td>
           <td *ngSwitchCase="'NUMBER'">{{ item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
           <td *ngSwitchCase="'MONEY'">{{ item[column.header] | currency : item[column.currency] : item[column.currency]===''?'':item[column.currency] + ' $':'.0-2':'es-CL' }}</td>
@@ -78,10 +90,10 @@
               <ng-container *ngIf="config.headerConfig.actionsType === 'Buttons'">
                 <div *ngFor="let button of actions">
                   <div *ngIf="button.disabled" pTooltip="{{ button.tooltipDisabled }}">
-                    <button [disabled]="button.disabled" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                    <button [disabled]="button.disabled" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event, item, rowIndex);"></button>
                   </div>
 
-                  <button *ngIf="!button.disabled" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event,item, rowIndex);"></button>
+                  <button *ngIf="!button.disabled" pButton pRipple [icon]="button.icon" [class]="button.class" (click)="button.onClick($event, item, rowIndex);"></button>
                 </div>
               </ng-container>
 

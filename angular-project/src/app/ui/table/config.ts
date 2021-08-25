@@ -7,6 +7,11 @@ export interface HeaderConfig {
   paginator: boolean;
 }
 
+export interface SelectionOption {
+  id: any;
+  name: string;
+}
+
 export interface Header {
   field: string;
   type: string;
@@ -17,6 +22,7 @@ export interface Header {
   onchange?: (event, item) => void;
   validators?: ValidatorFn[];
   errorMessageFn?: (errors) => string;
+  optionsFn?: (item) => SelectionOption[];
 }
 
 export interface Action {
