@@ -663,7 +663,7 @@ export class FormOt2Component implements OnInit, OnDestroy {
       console.log(request);
       // // this.otFacade.replyOt(form);
       // this.otFacade.postOtSCE(request);
-      // this.otFacade.postOt(request);
+      this.otFacade.postOt(request);
       // this.formOt.reset();
     }
   }
