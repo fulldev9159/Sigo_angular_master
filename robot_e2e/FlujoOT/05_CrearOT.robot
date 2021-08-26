@@ -6,16 +6,16 @@ Documentation    Test de funcionanildad del modulo de Usuarios.
 Resource    ../resource.robot
 
 *** Test Cases ***
-Crear OT happy path
+Crear OT
     Open Browser To Page    ${url}
     # Login                   ${user}                           password
     Login                   mgestor1                          password
     Go To                   ${url}/app/cubicacion/list-cub
     FOR                     ${i}                              IN RANGE                            99
     ${cub existe}=          Existe cubicacion                 CUBICACION ${i} HAPPY PATH ROBOT
-    Log To Console          ${cub existe}
+    # Log To Console          ${cub existe}
     ${numero}               set variable                      ${i - 1}
-    Log To Console          ${numero}
+    # Log To Console          ${numero}
     Set Suite Variable      ${numero}
     Exit For Loop If        '${cub existe}' == 'False' 
     END
