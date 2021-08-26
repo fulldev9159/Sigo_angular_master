@@ -25,6 +25,7 @@ Flujo rechazo OT
     Debe existir en la tabla    ${nombre OT}                                                                                          Ejecucion
     Acciones PEND ANULACION
     Execute javascript          document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
+    SSLEEP
     Execute javascript          document.querySelector("div.p-confirm-popup-footer>button:nth-child(2)").click()
 
     # # Confirmar
