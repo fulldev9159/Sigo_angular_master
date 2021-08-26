@@ -21,10 +21,10 @@ Flujo rechazo OT
     Execute javascript                   document.querySelector("#navbarSupportedContent > ul > li > div > a").click()
     # Logout
 
-    Login                       mgestor1        password
-    Debe existir en la tabla    ${nombre OT}    Ejecucion
+    Login                       mgestor1                                                                                              password
+    Debe existir en la tabla    ${nombre OT}                                                                                          Ejecucion
     Acciones PEND ANULACION
-    # Execute javascript          document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
+    Execute javascript          document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
     # Execute javascript          document.querySelector("div.p-confirm-popup-footer>button:nth-child(2)").click()
 
     # # Confirmar
