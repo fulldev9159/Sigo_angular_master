@@ -29,6 +29,6 @@ Flujo rechazo OT
 
     # Confirmar
     SSLEEP
-    Debe existir en la tabla    ${OT name}    Cerradas
+    Debe existir en la tabla    ${nombre OT}    Cerradas
     SSLEEP
     close Browser
