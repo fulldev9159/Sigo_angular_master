@@ -16,7 +16,10 @@ Flujo rechazo OT
     Input Motivo                         "Porque quiero y porque puedo"
     Click Visible Element                css:#page-content-wrapper > div > app-ot > div > app-list-ot > app-modal:nth-child(3) > p-dialog > div > div > div > p-footer > button.btn.btn-primary
     SSLEEP
-    Logout
+    Execute javascript                   document.querySelector("#navbarDropdown").click()
+    sleep                                1
+    Execute javascript                   document.querySelector("#navbarSupportedContent > ul > li > div > a").click()
+    # Logout
 
     Login                       mgestor1                                                                                              password
     Debe existir en la tabla    ${nombre OT}                                                                                          Ejecucion
