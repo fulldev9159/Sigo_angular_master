@@ -542,7 +542,7 @@ Acciones PEND ANULACION
     ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
     FOR                       ${item}                                                                          IN                                                       @{items}
     ${txt} =                  Get Text                                                                         ${item}
-    # Log To Console            ${txt}
+    Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
     ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
