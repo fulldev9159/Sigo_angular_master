@@ -99,7 +99,7 @@ export class FormCub2Component implements OnInit, OnDestroy {
     this.router.navigate(['app/cubicacion/list-cub']);
   }
 
-  contratoMovilFormValueChanges(item: any) {
+  contratoMovilFormValueChanges(item: any): void {
     if (item && item.value) {
       // console.log('movil', item);
     }
