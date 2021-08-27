@@ -1,9 +1,36 @@
 <div class="container-fluid" style="background: #f0f8fb">
-  <div class="row">
-    <div class="col">
-      <h1 class="mt-4">Ingreso de Cubicación</h1>
-      <span>Formulario de creación de una cubicación</span>
+  <ng-container *ngIf="incompleteCubicacionError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsIncompleteCubicacionError" [closable]="true"></p-messages>
     </div>
+  </ng-container>
+
+  <ng-container *ngIf="selectedCubicacionError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsGetCubicacionError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="invalidCubicacionIDError$ | async as error">
+    <div>
+      <p-messages [(value)]="msgsInvalidCubicacionIDError" [closable]="true"></p-messages>
+    </div>
+  </ng-container>
+
+  <div class="row">
+    <ng-container *ngIf="selectedCubicacion$ | async as cubicacion; else newCubage">
+      <div class="col">
+        <h1 class="mt-4">Edición de Cubicación</h1>
+        <span>{{ cubicacion.nombre }}</span>
+      </div>
+    </ng-container>
+
+    <ng-template #newCubage>
+      <div class="col">
+        <h1 class="mt-4">Ingreso de Cubicación</h1>
+        <span>Formulario de creación de una cubicación</span>
+      </div>
+    </ng-template>
 
     <div class="col">
       <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
@@ -17,7 +44,31 @@
       <app-card [classCardHeader]="'bg-secondary text-white'">
         <ng-container card-header-title> </ng-container>
         <ng-container card-body>
-          <app-general-form></app-general-form>
+          <app-general-form #generalForm></app-general-form>
+
+          <div class="col-12">
+            <hr>
+          </div>
+
+          <ng-container [ngSwitch]="contractType$ | async">
+            <ng-container *ngSwitchCase="'MOVIL'">
+              <app-contrato-movil-form #contratoMovilForm (valueChanges)="contratoMovilFormValueChanges($event)"></app-contrato-movil-form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'FIJO'">
+              <app-contrato-movil-form #contratoMovilForm (valueChanges)="contratoMovilFormValueChanges($event)"></app-contrato-movil-form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'ORDINARIO'">
+              <app-contrato-ordinario-form></app-contrato-ordinario-form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'BUCLE'">
+              contrato bucle
+            </ng-container>
+          </ng-container>
+
+          <div class="col-xs-12 col-md-12 text-right button-guardar-cubicacion" id="submitButtonBox">
+            <button (click)="goBack()" class="btn btn-light mr-2">Cancelar</button>
+            <button (click)="submit()" [disabled]="!valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
+          </div>
         </ng-container>
       </app-card>
     </div>

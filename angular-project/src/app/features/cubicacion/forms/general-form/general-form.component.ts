@@ -4,13 +4,15 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-import { Observable, Subscription, of } from 'rxjs';
-import { tap, map, withLatestFrom } from 'rxjs/operators';
+import { Observable, Subscription, of, Subject } from 'rxjs';
+import { tap, map, withLatestFrom, takeUntil, filter } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
+import { CubicacionWithLpu } from '@data';
 
 @Component({
   selector: 'app-general-form',
@@ -19,6 +21,12 @@ import { GeneralFormService } from '../../service/general-form.service';
 })
 export class GeneralFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+
+  initializationFinished$: Subject<boolean> = new Subject();
+  selectedCubicacion$: Observable<CubicacionWithLpu>;
+  selectedCubicacion: CubicacionWithLpu;
+  selectedCubicacionError$: Observable<Error> = of(null);
+  incompleteCubicacionError$: Observable<Error> = of(null);
 
   autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of([]);
   contratosMarcos$: Observable<CubModel.ContractMarco[]> = of([]);
@@ -57,7 +65,8 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private cubageFacade: CubicacionFacade,
-    private generalFormService: GeneralFormService
+    private generalFormService: GeneralFormService,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +76,16 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
       map(proveedores => proveedores || []),
       tap(proveedores => this.checkProveedoresAndEnable(proveedores))
     );
+
+    this.selectedCubicacion$ = this.cubageFacade
+      .getSingleCubicacion$()
+      .pipe(
+        filter(cubicacion => cubicacion !== null && cubicacion !== undefined)
+      );
+
+    this.selectedCubicacionError$ = this.cubageFacade
+      .getSingleCubicacionError$()
+      .pipe(filter(error => error !== null && error !== undefined));
 
     this.subscription.add(
       this.form.get('nombre').valueChanges.subscribe(value => {
@@ -159,53 +178,53 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
     this.cubageFacade.getAutoSuggestAction('', 5);
     this.cubageFacade.getContractMarcoAction();
 
-    // this.subscription.add(
-    //   this.selectedCubicacion$
-    //     .pipe(
-    //       takeUntil(this.initializationFinished$),
-    //       withLatestFrom(this.contratosMarcos$)
-    //     )
-    //     .subscribe(([cubicacion, contratos]) => {
-    //       this.form.get('nombre').setValue(cubicacion.nombre);
+    this.subscription.add(
+      this.selectedCubicacion$
+        .pipe(
+          takeUntil(this.initializationFinished$),
+          withLatestFrom(this.contratosMarcos$)
+        )
+        .subscribe(([cubicacion, contratos]) => {
+          this.form.get('nombre').setValue(cubicacion.nombre);
 
-    //       const contrato = contratos.find(
-    //         con => con.id === cubicacion.contrato_marco_id
-    //       );
+          const contrato = contratos.find(
+            con => con.id === cubicacion.contrato_marco_id
+          );
 
-    //       if (contrato) {
-    //         this.form.get('contrato_marco_id').setValue(contrato.id);
-    //       } else {
-    //         this.initializationFinished$.next(true);
-    //         this.incompleteCubicacionError$ = of(
-    //           new Error('incomplete cubage')
-    //         );
-    //       }
-    //     })
-    // );
+          if (contrato) {
+            this.form.get('contrato_marco_id').setValue(contrato.id);
+          } else {
+            this.initializationFinished$.next(true);
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
+          }
+        })
+    );
 
-    // this.subscription.add(
-    //   this.proveedores$
-    //     .pipe(
-    //       takeUntil(this.initializationFinished$),
-    //       withLatestFrom(this.selectedCubicacion$)
-    //     )
-    //     .subscribe(([proveedores, cubicacion]) => {
-    //       const proveedor = proveedores.find(
-    //         prov => prov.id === cubicacion.proveedor_id
-    //       );
+    this.subscription.add(
+      this.proveedores$
+        .pipe(
+          takeUntil(this.initializationFinished$),
+          withLatestFrom(this.selectedCubicacion$)
+        )
+        .subscribe(([proveedores, cubicacion]) => {
+          const proveedor = proveedores.find(
+            prov => prov.id === cubicacion.proveedor_id
+          );
 
-    //       if (proveedor) {
-    //         const key = this.providerKey(proveedor);
+          if (proveedor) {
+            const key = this.providerKey(proveedor);
 
-    //         this.form.get('subcontrato_id').setValue(key);
-    //       } else {
-    //         this.initializationFinished$.next(true);
-    //         this.incompleteCubicacionError$ = of(
-    //           new Error('incomplete cubage')
-    //         );
-    //       }
-    //     })
-    // );
+            this.form.get('subcontrato_id').setValue(key);
+          } else {
+            this.initializationFinished$.next(true);
+            this.incompleteCubicacionError$ = of(
+              new Error('incomplete cubage')
+            );
+          }
+        })
+    );
   }
 
   checkProveedoresAndEnable(proveedores: CubModel.Provider[]): void {
@@ -261,6 +280,36 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
     return {
       subcontratosID,
       proveedorID: +proveedorID,
+    };
+  }
+
+  touch(): void {
+    Object.keys(this.form.controls).forEach(field => {
+      const control = this.form.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.form.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
+  get valid(): boolean {
+    return this.form.valid;
+  }
+
+  get values(): any {
+    const { nombre, contrato_marco_id, proveedor_id, subcontrato_id } =
+      this.form.getRawValue();
+    const cubicacion_nombre = typeof nombre === 'object' ? nombre.name : nombre;
+
+    return {
+      cubicacion_nombre,
+      contrato_marco_id: +contrato_marco_id,
+      proveedor_id: +proveedor_id,
+      subcontrato_id,
     };
   }
 }
