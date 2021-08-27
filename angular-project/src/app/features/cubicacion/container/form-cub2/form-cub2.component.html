@@ -1,0 +1,25 @@
+<div class="container-fluid" style="background: #f0f8fb">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Ingreso de Cubicación</h1>
+      <span>Formulario de creación de una cubicación</span>
+    </div>
+
+    <div class="col">
+      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
+    </div>
+
+    <div class="col-12">
+      <hr>
+    </div>
+
+    <div class="col">
+      <app-card [classCardHeader]="'bg-secondary text-white'">
+        <ng-container card-header-title> </ng-container>
+        <ng-container card-body>
+          <app-general-form></app-general-form>
+        </ng-container>
+      </app-card>
+    </div>
+  </div>
+</div>

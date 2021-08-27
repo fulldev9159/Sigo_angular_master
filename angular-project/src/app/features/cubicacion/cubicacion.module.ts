@@ -11,6 +11,11 @@ import { FormComponent } from './component/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { CloneCubageFormComponent } from './component/clone-cubage-form/clone-cubage-form.component';
+import { ContratoOrdinarioFormComponent } from './forms/contrato-ordinario-form/contrato-ordinario-form.component';
+import { FormCub2Component } from './container/form-cub2/form-cub2.component';
+import { ContratoMovilFormComponent } from './forms/contrato-movil-form/contrato-movil-form.component';
+import { GeneralFormComponent } from './forms/general-form/general-form.component';
+import { GeneralFormService } from './service/general-form.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +24,10 @@ import { CloneCubageFormComponent } from './component/clone-cubage-form/clone-cu
     FormCubContainerComponent,
     FormComponent,
     CloneCubageFormComponent,
+    ContratoOrdinarioFormComponent,
+    FormCub2Component,
+    ContratoMovilFormComponent,
+    GeneralFormComponent,
     // DetalleLpusComponent
   ],
   imports: [
@@ -29,5 +38,6 @@ import { CloneCubageFormComponent } from './component/clone-cubage-form/clone-cu
     ReactiveFormsModule,
     AutocompleteLibModule,
   ],
+  providers: [GeneralFormService],
 })
 export class CubicacionModule {}
