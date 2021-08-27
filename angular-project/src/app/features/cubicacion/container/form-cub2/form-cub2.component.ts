@@ -16,18 +16,20 @@ export class FormCub2Component implements OnInit, OnDestroy {
   constructor(
     private cubageFacade: CubicacionFacade,
     private router: Router,
-    private route: ActivatedRoute,
-    private generalFormService: GeneralFormService
-  ) {}
+    private route: ActivatedRoute
+  ) // private generalFormService: GeneralFormService
+  {}
 
   ngOnInit(): void {
     this.cubageFacade.resetData();
 
-    this.subscription.add(
-      this.generalFormService.valueChanges.subscribe(item =>
-        console.log('form general changes', item)
-      )
-    );
+    // this.subscription.add(
+    //   this.generalFormService.valueChanges.subscribe(item => {
+    //     if (item && item.value) {
+    //       console.log('form general changes', item);
+    //     }
+    //   })
+    // );
   }
 
   ngOnDestroy(): void {

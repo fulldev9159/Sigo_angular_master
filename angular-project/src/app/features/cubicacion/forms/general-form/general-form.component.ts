@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Observable, Subscription, of } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, withLatestFrom } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
@@ -81,20 +81,29 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.form
         .get('contrato_marco_id')
-        .valueChanges.subscribe(contrato_marco_id => {
+        .valueChanges.pipe(withLatestFrom(this.contratosMarcos$))
+        .subscribe(([contrato_marco_id, contratos]) => {
           this.resetProveedoresFormControl();
           if (contrato_marco_id !== null && contrato_marco_id !== undefined) {
+            this.generalFormService.setValueChanges({
+              controlName: 'contrato_marco_id',
+              value: {
+                contrato_marco_id,
+                contrato_marco: contratos.find(
+                  contrato => contrato.id === +contrato_marco_id
+                ),
+              },
+            });
             this.cubageFacade.getSubContractedProvidersAction({
               contrato_marco_id: +contrato_marco_id,
             });
           } else {
+            this.generalFormService.setValueChanges({
+              controlName: 'contrato_marco_id',
+              value: null,
+            });
             this.checkProveedoresAndEnable([]);
           }
-
-          this.generalFormService.setValueChanges({
-            controlName: 'contrato_marco_id',
-            value: contrato_marco_id,
-          });
         })
     );
 
@@ -102,29 +111,46 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
       this.form.get('subcontrato_id').valueChanges.subscribe(key => {
         if (key !== undefined && key !== null) {
           const { subcontratosID, proveedorID } = this.extractProviderKeys(key);
+
           this.form.get('proveedor_id').setValue(proveedorID);
 
           this.generalFormService.setValueChanges({
             controlName: 'subcontrato_id',
-            value: subcontratosID,
-          });
-
-          this.generalFormService.setValueChanges({
-            controlName: 'proveedor_id',
-            value: proveedorID,
+            value: {
+              subcontrato_id: subcontratosID,
+            },
           });
         } else {
           this.generalFormService.setValueChanges({
             controlName: 'subcontrato_id',
-            value: key,
-          });
-
-          this.generalFormService.setValueChanges({
-            controlName: 'proveedor_id',
-            value: key,
+            value: null,
           });
         }
       })
+    );
+
+    this.subscription.add(
+      this.form
+        .get('proveedor_id')
+        .valueChanges.pipe(withLatestFrom(this.proveedores$))
+        .subscribe(([proveedor_id, proveedores]) => {
+          if (proveedor_id !== undefined && proveedor_id !== null) {
+            this.generalFormService.setValueChanges({
+              controlName: 'proveedor_id',
+              value: {
+                proveedor_id,
+                proveedor: proveedores.find(
+                  proveedor => proveedor.id === proveedor_id
+                ),
+              },
+            });
+          } else {
+            this.generalFormService.setValueChanges({
+              controlName: 'proveedor_id',
+              value: null,
+            });
+          }
+        })
     );
 
     this.form.get('subcontrato_id').disable({ emitEvent: false });
