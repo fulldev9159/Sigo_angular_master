@@ -1,1 +1,62 @@
-<p>contrato-ordinario-form works!</p>
+<div class="row">
+  <div class="col-xs-12 col-md-4">
+    <div class="row">
+      <div class="col-12 field-box" [formGroup]="form" id="tipoMonedaField">
+        <app-select [control]="controls.tipo_moneda_id" label="Moneda" [errorMessageFn]="errorMessageFn">
+          <ng-container options>
+            <option value="null" selected disabled>Seleccione tipo de moneda</option>
+            <ng-container *ngFor="let tipoMoneda of tiposMoneda$ | async">
+              <option [value]="tipoMoneda.id">
+                {{tipoMoneda.codigo}} - {{ tipoMoneda.nombre }}
+              </option>
+            </ng-container>
+          </ng-container>
+        </app-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-8">
+    <div class="row">
+      <div class="col-12 field-box" [formGroup]="form" id="descripcionField">
+        <app-textarea [control]="controls.descripcion" label="Descripción" [errorMessageFn]="errorMessageFn" [rows]="4">
+        </app-textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-12">
+    <div class="text-right" id="addItemButtonBox">
+      <button (click)="addTableRow()" [disabled]="notAllowedToAddRow()" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-outlined"></button>
+    </div>
+    <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
+
+    <div id="total">
+      <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
+    </div>
+
+    <hr>
+
+    <ng-container *ngIf="hasLPUWithZeroQuantity">
+      <div class="text-right">
+        <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="lpusCarrito.length === 0">
+      <div class="text-right">
+        <p-messages [(value)]="msgsLPUSQuantity" [closable]="false"></p-messages>
+      </div>
+
+      <!--
+      <span>
+        <p-message severity="info" text="Al menos 1 LPU debe ser ingresada"></p-message>&nbsp;
+      </span>
+      -->
+    </ng-container>
+  </div>
+</div>

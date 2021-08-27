@@ -302,7 +302,7 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
             });
             this.checkTiposServicioAndEnable([]);
           }
-          // this.resetLpusCarrito();
+          this.resetLpusCarrito();
         })
     );
 
@@ -543,6 +543,18 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
     this.tableValid = this.tableLpus.valid;
     this.updateLpusTableInformation();
     this.detector.detectChanges();
+    this.valueChanges.emit({
+      controlName: 'lpus',
+      value: {
+        lpus: this.lpusCarrito,
+      },
+    });
+  }
+
+  resetLpusCarrito(): void {
+    this.resetSelectedLpusFormControl([]);
+    this.lpusCarrito = [];
+    this.updateLpusTableInformation();
     this.valueChanges.emit({
       controlName: 'lpus',
       value: {

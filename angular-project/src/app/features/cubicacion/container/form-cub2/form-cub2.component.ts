@@ -13,6 +13,7 @@ import { GeneralFormService } from '../../service/general-form.service';
 import { CubicacionWithLpu } from '@data';
 import { GeneralFormComponent } from '../../forms/general-form/general-form.component';
 import { ContratoMovilFormComponent } from '../../forms/contrato-movil-form/contrato-movil-form.component';
+import { ContratoOrdinarioFormComponent } from '../../forms/contrato-ordinario-form/contrato-ordinario-form.component';
 
 @Component({
   selector: 'app-form-cub2',
@@ -41,6 +42,12 @@ export class FormCub2Component implements OnInit, OnDestroy {
   })
   contratoMovilForm: ContratoMovilFormComponent;
 
+  @ViewChild('contratoOrdinarioForm', {
+    read: ContratoOrdinarioFormComponent,
+    static: false,
+  })
+  contratoOrdinarioForm: ContratoOrdinarioFormComponent;
+
   constructor(
     private cubageFacade: CubicacionFacade,
     private router: Router,
@@ -54,9 +61,9 @@ export class FormCub2Component implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.generalFormService.valueChanges.subscribe(item => {
-        if (item && item.value) {
+        if (item && item.controlName === 'contrato_marco_id' && item.value) {
           // TODO: validar el tipo de contrato
-          this.contractType$.next('MOVIL');
+          // this.contractType$.next('ORDINARIO');
         }
         this.detector.detectChanges();
       })
@@ -100,9 +107,16 @@ export class FormCub2Component implements OnInit, OnDestroy {
   }
 
   contratoMovilFormValueChanges(item: any): void {
-    if (item && item.value) {
-      // console.log('movil', item);
-    }
+    // if (item && item.value) {
+    //   console.log('movil', item);
+    // }
+    this.detector.detectChanges();
+  }
+
+  contratoOrdinarioFormValueChanges(item: any): void {
+    // if (item && item.value) {
+    //   console.log('ordinario', item);
+    // }
     this.detector.detectChanges();
   }
 
@@ -114,6 +128,10 @@ export class FormCub2Component implements OnInit, OnDestroy {
         if (this.generalForm && this.contratoMovilForm) {
           return this.generalForm.valid && this.contratoMovilForm.valid;
         }
+      case 'ORDINARIO':
+        if (this.generalForm && this.contratoOrdinarioForm) {
+          return this.generalForm.valid && this.contratoOrdinarioForm.valid;
+        }
     }
     return false;
   }
@@ -122,44 +140,102 @@ export class FormCub2Component implements OnInit, OnDestroy {
     if (this.valid) {
       const contractType = this.contractType$.value;
 
-      const {
-        cubicacion_nombre,
-        contrato_marco_id,
-        proveedor_id,
-        subcontrato_id,
-      } = this.generalForm.values;
-
       switch (contractType) {
         case 'MOVIL':
         case 'FIJO':
-          const { region_id, lpus } = this.contratoMovilForm.values;
-
-          const nuevaCubicacion = {
-            cubicacion_nombre,
-            region_id,
-            contrato_marco_id,
-            proveedor_id,
-            lpus,
-          };
-
-          this.subscription.add(
-            this.cubageFacade
-              .getSingleCubicacion$()
-              .pipe(take(1))
-              .subscribe(cubicacion => {
-                if (cubicacion) {
-                  const editCubicacion = {
-                    ...nuevaCubicacion,
-                    cubicacion_id: cubicacion.id,
-                  };
-                  this.cubageFacade.editCubicacion(editCubicacion);
-                } else {
-                  this.cubageFacade.postCubicacion(nuevaCubicacion);
-                }
-              })
-          );
+          this.saveCubicacionContratoMovil();
+          return;
+        case 'ORDINARIO':
+          this.saveCubicacionContratoOrdinario();
           return;
       }
     }
+  }
+
+  saveCubicacionContratoMovil(): void {
+    const {
+      cubicacion_nombre,
+      contrato_marco_id,
+      proveedor_id,
+      subcontrato_id,
+    } = this.generalForm.values;
+
+    const { region_id, lpus } = this.contratoMovilForm.values;
+
+    const nuevaCubicacion = {
+      cubicacion_nombre,
+      contrato_marco_id,
+      proveedor_id,
+
+      region_id,
+
+      lpus,
+    };
+
+    this.subscription.add(
+      this.cubageFacade
+        .getSingleCubicacion$()
+        .pipe(take(1))
+        .subscribe(cubicacion => {
+          if (cubicacion) {
+            const editCubicacion = {
+              ...nuevaCubicacion,
+              cubicacion_id: cubicacion.id,
+            };
+            this.cubageFacade.editCubicacion(editCubicacion);
+          } else {
+            this.cubageFacade.postCubicacion(nuevaCubicacion);
+          }
+        })
+    );
+  }
+
+  saveCubicacionContratoOrdinario(): void {
+    const {
+      cubicacion_nombre,
+      contrato_marco_id,
+      proveedor_id,
+      subcontrato_id,
+    } = this.generalForm.values;
+
+    const { tipo_moneda_id, tipo_moneda_cod, descripcion, lpus } =
+      this.contratoOrdinarioForm.values;
+
+    const nuevaCubicacion = {
+      cubicacion_nombre,
+      contrato_marco_id,
+      proveedor_id,
+
+      tipo_moneda_id,
+      tipo_moneda_cod,
+      descripcion,
+
+      lpus,
+    };
+
+    this.subscription.add(
+      this.cubageFacade
+        .getSingleCubicacion$()
+        .pipe(take(1))
+        .subscribe(cubicacion => {
+          if (cubicacion) {
+            const editCubicacion = {
+              ...nuevaCubicacion,
+              cubicacion_id: cubicacion.id,
+            };
+            console.log(
+              'actualiza cubicacion contrato ordinario',
+              editCubicacion
+            );
+            // this.cubageFacade.editCubicacion(editCubicacion);
+          } else {
+            console.log(
+              'guarda cubicacion contrato ordinario',
+              nuevaCubicacion
+            );
+            // this.cubageFacade.postCubicacion(nuevaCubicacion);
+          }
+        })
+    );
   }
 }

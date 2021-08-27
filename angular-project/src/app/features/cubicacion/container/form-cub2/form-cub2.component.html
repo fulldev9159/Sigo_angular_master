@@ -58,7 +58,7 @@
               <app-contrato-movil-form #contratoMovilForm (valueChanges)="contratoMovilFormValueChanges($event)"></app-contrato-movil-form>
             </ng-container>
             <ng-container *ngSwitchCase="'ORDINARIO'">
-              <app-contrato-ordinario-form></app-contrato-ordinario-form>
+              <app-contrato-ordinario-form #contratoOrdinarioForm (valueChanges)="contratoOrdinarioFormValueChanges($event)"></app-contrato-ordinario-form>
             </ng-container>
             <ng-container *ngSwitchCase="'BUCLE'">
               contrato bucle

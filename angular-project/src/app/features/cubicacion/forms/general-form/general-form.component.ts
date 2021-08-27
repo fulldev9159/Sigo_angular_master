@@ -92,7 +92,7 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
         const nombre = typeof value === 'object' ? value.name : value;
         this.generalFormService.setValueChanges({
           controlName: 'nombre',
-          value: nombre,
+          value: { nombre },
         });
       })
     );
