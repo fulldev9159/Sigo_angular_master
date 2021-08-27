@@ -21,16 +21,22 @@ Flujo rechazo OT
     Execute javascript                   document.querySelector("#navbarSupportedContent > ul > li > div > a").click()
     # Logout
 
-    Login                       mgestor1                                                                                              password
-    Debe existir en la tabla    ${nombre OT}                                                                                          Ejecucion
-    Acciones PEND ANULACION
-    Log To Console              "click en anular"
-    Execute javascript          document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
-    sleep                       2
-    Log To Console              "boton aceptar"
-    Execute javascript          document.querySelector("div.p-confirm-popup-footer>button:nth-child(2)").click()
+    Login                       mgestor1        password
+    Debe existir en la tabla    ${nombre OT}    Ejecucion
 
-    # # Confirmar
-    # SSLEEP
-    # Debe existir en la tabla    ${nombre OT}    Cerradas
+
+    Acciones PEND ANULACION
+    # capture page screenshot          /opt/robotframework/reports/cp1.png
+    Wait Until Element Is Visible    css:#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a                                  timeout=5
+    Scroll Element Into View         css:#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a
+    # capture page screenshot          /opt/robotframework/reports/cp2.png
+    Execute javaScript               window.scrollBy(900, 900);
+    # capture page screenshot          /opt/robotframework/reports/cp3.png
+    Click Visible Element            css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    # capture page screenshot          /opt/robotframework/reports/cp4.png
+    Execute javascript               document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a").click()
+    # capture page screenshot          /opt/robotframework/reports/cp5.png
+    Execute javascript               document.querySelector("div.p-confirm-popup-footer>button:nth-child(2)").click()
+    SSLEEP
+    Debe existir en la tabla         ${nombre OT}                                                                                          Cerradas
     # SSLEEP
