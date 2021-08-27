@@ -122,16 +122,14 @@ export class FormCub2Component implements OnInit, OnDestroy {
 
   get valid(): boolean {
     const contractType = this.contractType$.value;
-    switch (contractType) {
-      case 'MOVIL':
-      case 'FIJO':
-        if (this.generalForm && this.contratoMovilForm) {
-          return this.generalForm.valid && this.contratoMovilForm.valid;
-        }
-      case 'ORDINARIO':
-        if (this.generalForm && this.contratoOrdinarioForm) {
-          return this.generalForm.valid && this.contratoOrdinarioForm.valid;
-        }
+    if (contractType === 'MOVIL' || contractType === 'FIJO') {
+      if (this.generalForm && this.contratoMovilForm) {
+        return this.generalForm.valid && this.contratoMovilForm.valid;
+      }
+    } else if (contractType === 'ORDINARIO') {
+      if (this.generalForm && this.contratoOrdinarioForm) {
+        return this.generalForm.valid && this.contratoOrdinarioForm.valid;
+      }
     }
     return false;
   }
@@ -140,14 +138,10 @@ export class FormCub2Component implements OnInit, OnDestroy {
     if (this.valid) {
       const contractType = this.contractType$.value;
 
-      switch (contractType) {
-        case 'MOVIL':
-        case 'FIJO':
-          this.saveCubicacionContratoMovil();
-          return;
-        case 'ORDINARIO':
-          this.saveCubicacionContratoOrdinario();
-          return;
+      if (contractType === 'MOVIL' || contractType === 'FIJO') {
+        this.saveCubicacionContratoMovil();
+      } else if (contractType === 'ORDINARIO') {
+        this.saveCubicacionContratoOrdinario();
       }
     }
   }
