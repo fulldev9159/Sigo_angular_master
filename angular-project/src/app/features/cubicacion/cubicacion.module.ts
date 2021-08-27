@@ -6,7 +6,6 @@ import { CubicacionComponent } from './cubicacion.component';
 import { UiModule } from '@uiOT/ui.module';
 import { ListCubComponent } from './container/list-cub/list-cub.component';
 import { FormCubContainerComponent } from './container/form-cub/form-cub-container.component';
-import { FormCub2ContainerComponent } from './container/form-cub2/form-cub-container.component';
 // import { DetalleLpusComponent } from '@featureOT/cubicacion/component/detalle-lpus/detalle-lpus.component';
 import { FormComponent } from './component/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { CloneCubageFormComponent } from './component/clone-cubage-form/clone-cu
     CubicacionComponent,
     ListCubComponent,
     FormCubContainerComponent,
-    FormCub2ContainerComponent,
     FormComponent,
     CloneCubageFormComponent,
     // DetalleLpusComponent
