@@ -1,8 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, BehaviorSubject } from 'rxjs';
+import { withLatestFrom } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
+import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
 
 @Component({
   selector: 'app-form-ot',
@@ -12,6 +15,8 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   contractType$ = new BehaviorSubject<string>('MOVIL');
+
+  cubicacionSeleccionada: Cubicacion = null;
 
   form: FormGroup = new FormGroup({
     general: new FormGroup({
@@ -57,11 +62,34 @@ export class FormOtComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private otFacade: OtFacade
+    private otFacade: OtFacade,
+    private cubageFacade: CubicacionFacade
   ) {}
 
   ngOnInit(): void {
     this.otFacade.resetData();
+
+    this.subscription.add(
+      this.form
+        .get('general')
+        .get('cubicacion_id')
+        .valueChanges.pipe(
+          withLatestFrom(this.cubageFacade.getCubicacionSelector$())
+        )
+        .subscribe(([cubicacion_id, cubicaciones]) => {
+          this.cubicacionSeleccionada = null;
+          if (cubicacion_id !== null && cubicacion_id !== undefined) {
+            this.cubicacionSeleccionada = cubicaciones.find(
+              cubicacion => +cubicacion.id === +cubicacion_id
+            );
+
+            if (this.cubicacionSeleccionada) {
+              // TODO: checkear el tipo contrato de la cubicacion
+              // this.contractType$.next('MOVIL');
+            }
+          }
+        })
+    );
   }
 
   ngOnDestroy(): void {
@@ -70,7 +98,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.otFacade.resetData();
-    // this.cubicacionSeleccionada = null;
+    this.cubicacionSeleccionada = null;
     // this.nombre_plan_proyecto = '';
     // this.sitioSeleccionado = null;
     this.router.navigate(['/app/ot/list-ot']);

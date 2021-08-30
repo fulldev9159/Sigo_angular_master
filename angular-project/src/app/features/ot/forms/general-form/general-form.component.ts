@@ -29,14 +29,13 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
           .getLogin$()
           .pipe(filter(profile => profile !== undefined && profile !== null))
       ),
-      map(([cubicaciones, profile]) => {
-        console.log(profile);
-        return cubicaciones.filter(
+      map(([cubicaciones, profile]) =>
+        cubicaciones.filter(
           cubicacion =>
             !cubicacion.asignado &&
             profile.usuario_id === cubicacion.creador_usuario_id
-        );
-      })
+        )
+      )
     );
 
     this.cubageFacade.getCubicacionAction();

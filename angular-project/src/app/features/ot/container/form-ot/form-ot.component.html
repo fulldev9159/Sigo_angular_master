@@ -24,7 +24,7 @@
           </div>
 
           <ng-container *ngIf="(contractType$ | async) === 'MOVIL'">
-            <app-plan-proyecto-form [form]="form.get('planProyecto')"></app-plan-proyecto-form>
+            <app-plan-proyecto-form [form]="form.get('planProyecto')" [cubicacion]="cubicacionSeleccionada"></app-plan-proyecto-form>
 
             <div class="col-12">
               <hr>
