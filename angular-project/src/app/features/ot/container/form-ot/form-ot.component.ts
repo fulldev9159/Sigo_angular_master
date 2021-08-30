@@ -297,7 +297,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
           if (pep2_capex_id === 'capex_provisorio') {
             request.sustento_financiero.capex_provisorio = {
               pmo_codigo: +pmo_codigo,
-              lp_codigo: lp_codigo,
+              lp_codigo,
               pep2_codigo: pep2_provisorio,
             };
           } else {
