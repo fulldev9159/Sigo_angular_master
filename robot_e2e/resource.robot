@@ -409,7 +409,7 @@ Acciones solo Info
     ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu>div>ul>li
     FOR                       ${item}                                                                          IN                                                     @{items}
     ${txt} =                  Get Text                                                                         ${item}
-    Log To Console            ${txt}
+    # Log To Console            ${txt}
     END
     ${cantidad de filas}=     get element count                                                                css:#action-buttons > app-menu > p-menu > div>ul>li
     ${status}=                Evaluate                                                                         ${cantidad de filas} == 1
@@ -421,7 +421,7 @@ Acciones PEND AUTH ADMIN Contrato
     ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
     FOR                       ${item}                                                                          IN                                                       @{items}
     ${txt} =                  Get Text                                                                         ${item}
-    Log To Console            ${txt}
+    # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
     ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
@@ -435,7 +435,7 @@ Acciones PEND ASING COORDINADOR
     ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
     FOR                       ${item}                                                                          IN                                                       @{items}
     ${txt} =                  Get Text                                                                         ${item}
-    Log To Console            ${txt}
+    # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
     ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
@@ -448,7 +448,7 @@ Acciones PEND ASING TRABAJADOR
     ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
     FOR                       ${item}                                                                          IN                                                       @{items}
     ${txt} =                  Get Text                                                                         ${item}
-    Log To Console            ${txt}
+    # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
     ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
@@ -461,7 +461,7 @@ Acciones PEND FIN TRABAJOS
     ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
     FOR                       ${item}                                                                          IN                                                       @{items}
     ${txt} =                  Get Text                                                                         ${item}
-    Log To Console            ${txt}
+    # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
     ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
@@ -474,7 +474,7 @@ Acciones PEND VALID GEN ACTA
     ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
     FOR                       ${item}                                                                          IN                                                       @{items}
     ${txt} =                  Get Text                                                                         ${item}
-    Log To Console            ${txt}
+    # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
     ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
@@ -488,7 +488,7 @@ Acciones PEND VALID GEN ACTA GESTOR
     ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
     FOR                       ${item}                                                                          IN                                                       @{items}
     ${txt} =                  Get Text                                                                         ${item}
-    Log To Console            ${txt}
+    # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
     ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
@@ -530,3 +530,22 @@ Existe cubicacion
     ${status}=               Evaluate                                                                                                                     ${cantidad de filas} > 0
     sleep                    1
     [return]                 ${status}
+
+Input Motivo
+    [Arguments]       ${nombre}
+    ${selector}=      set variable    css:#observaciones
+    Set input text    ${nombre}       ${selector}           
+
+
+Acciones PEND ANULACION
+    Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
+    FOR                       ${item}                                                                          IN                                                       @{items}
+    ${txt} =                  Get Text                                                                         ${item}
+    Log To Console            ${txt}
+    END
+    ${cantidad de filas}=     Get length                                                                       ${items}
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
+    Should Be True            ${status}
+    Element text should be    ${items}[0]                                                                      Información                                              
+    Element text should be    ${items}[1]                                                                      Anular 

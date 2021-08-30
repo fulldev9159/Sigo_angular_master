@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="row">
+      <div class="col-12 field-box" [formGroup]="form">
+        <label for="">Nombre</label>
+        <div class="ng-autocomplete">
+          <ng-autocomplete formControlName="nombre" [data]="autoSuggestItems$ | async" [searchKeyword]="'name'" (selected)="nameSelected($event)" (inputChanged)="nameChanged($event)" (inputFocused)="nameFocused($event)" (inputCleared)="nameCleared($event)" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"></ng-autocomplete>
+
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+
+        <ng-container *ngIf="form.controls['nombre'] as control">
+          <ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
+            <ng-container *ngIf="control.errors.required; else whitespace">
+              <p-message severity="error" text="Este campo es requerido"></p-message>
+            </ng-container>
+
+            <ng-template #whitespace>
+              <ng-container *ngIf="control.errors.whitespace">
+                <p-message severity="error" text="Este campo es requerido"></p-message>
+              </ng-container>
+            </ng-template>
+
+            <ng-container *ngIf="control.errors.maxlength">
+              <p-message severity="error" text="Debe tener a lo más {{ control.errors.maxlength.requiredLength }} caracteres de largo"></p-message>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div class="col-6 field-box" [formGroup]="form" id="contratoField">
+        <app-select [control]="controls.contrato_marco_id" label="Contrato" [errorMessageFn]="errorMessageFn">
+          <ng-container options>
+            <option value="null" selected disabled>Seleccione contrato</option>
+            <ng-container *ngFor="let contratoMarco of contratosMarcos$ | async">
+              <option [value]="contratoMarco.id">
+                {{ contratoMarco.nombre }}
+              </option>
+            </ng-container>
+          </ng-container>
+        </app-select>
+      </div>
+
+      <div class="col-6 field-box" [formGroup]="form" id="proveedorField">
+        <app-select [control]="controls.subcontrato_id" label="Proveedor" [errorMessageFn]="errorMessageFn">
+          <ng-container options>
+            <option value="null" selected disabled>Seleccione proveedor</option>
+            <ng-container *ngFor="let proveedor of proveedores$ | async">
+              <option [value]="providerKey(proveedor)">
+                {{ proveedor.nombre }}
+              </option>
+            </ng-container>
+          </ng-container>
+        </app-select>
+      </div>
+    </div>
+  </div>
+</div>

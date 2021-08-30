@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-xs-12 col-md-4">
+    <div class="row">
+      <div class="col-12 field-box" [formGroup]="form" id="regionField">
+        <app-select [control]="controls.region_id" label="Región" [errorMessageFn]="errorMessageFn">
+          <ng-container options>
+            <option value="null" selected disabled>Seleccione región</option>
+            <ng-container *ngFor="let region of regiones$ | async">
+              <option [value]="region.id">
+                {{ region.nombre }}
+              </option>
+            </ng-container>
+          </ng-container>
+        </app-select>
+      </div>
+
+      <div class="col-12 field-box" [formGroup]="form" id="tipoServicioField">
+        <app-select [control]="controls.tipo_servicio_id" label="Tipo Servicio" [errorMessageFn]="errorMessageFn">
+          <ng-container options>
+            <option value="null" selected disabled>Seleccione un tipo de servicio</option>
+            <ng-container *ngFor="let tipoServicio of tiposServicio$ | async">
+              <option [value]="tipoServicio.id">
+                {{ tipoServicio.nombre }}
+              </option>
+            </ng-container>
+          </ng-container>
+        </app-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-8">
+    <div class="row">
+      <div class="col-12 field-box" style="height: 300px; max-height: 300px" [formGroup]="form" id="lpusBox">
+        <label for="">Servicios LPU</label>
+        <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
+          <ng-template let-data pTemplate="item">
+            <div class="country-item">
+              <div>{{ data.lpu_nombre }}</div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-12">
+    <app-table [config]="tableNormalConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
+
+    <div id="total">
+      <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
+    </div>
+
+    <hr>
+
+    <ng-container *ngIf="hasLPUWithZeroQuantity">
+      <div class="text-right">
+        <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="lpusCarrito.length === 0">
+      <div class="text-right">
+        <p-messages [(value)]="msgsLPUSQuantity" [closable]="false"></p-messages>
+      </div>
+
+      <!--
+      <span>
+        <p-message severity="info" text="Al menos 1 LPU debe ser ingresada"></p-message>&nbsp;
+      </span>
+      -->
+    </ng-container>
+  </div>
+</div>
