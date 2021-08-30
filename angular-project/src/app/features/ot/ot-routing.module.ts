@@ -27,18 +27,6 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'form-ot2',
-        component: FormOtComponent,
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          permissions: {
-            only: 'OT_CREAR',
-            redirectTo: '/app/ot/list-ot',
-          },
-          state: 'form-ot2',
-        },
-      },
-      {
         path: 'form-ot',
         component: FormOt2Component,
         canActivate: [NgxPermissionsGuard],
