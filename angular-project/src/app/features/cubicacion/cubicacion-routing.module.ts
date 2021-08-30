@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormCubContainerComponent } from './container/form-cub/form-cub-container.component';
-import { FormCub2ContainerComponent } from './container/form-cub2/form-cub-container.component';
+import { FormCub2Component } from './container/form-cub2/form-cub2.component';
 import { ListCubComponent } from './container/list-cub/list-cub.component';
 import { CubicacionComponent } from './cubicacion.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
@@ -50,7 +50,7 @@ export const routes: Routes = [
       // },
       {
         path: 'form-cub',
-        component: FormCub2ContainerComponent,
+        component: FormCub2Component,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
@@ -62,7 +62,7 @@ export const routes: Routes = [
       },
       {
         path: 'form-cub/:id',
-        component: FormCub2ContainerComponent,
+        component: FormCub2Component,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
