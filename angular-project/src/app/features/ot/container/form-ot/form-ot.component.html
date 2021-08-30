@@ -1,1 +1,44 @@
-<p>form-ot works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Orden de trabajo </h1>
+      <span>Formulario de ingreso de OT</span>
+    </div>
+
+    <div class="col">
+      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined " (click)="goBack()"></button>
+    </div>
+
+    <div class="col-12">
+      <hr>
+    </div>
+
+    <div class="col">
+      <app-card [classCardHeader]="'bg-secondary text-white'">
+        <ng-container card-header-title> </ng-container>
+        <ng-container card-body>
+          <app-general-form [form]="form.get('general')"></app-general-form>
+
+          <div class="col-12">
+            <hr>
+          </div>
+
+          <ng-container *ngIf="(contractType$ | async) === 'MOVIL'">
+            <app-plan-proyecto-form [form]="form.get('planProyecto')"></app-plan-proyecto-form>
+
+            <div class="col-12">
+              <hr>
+            </div>
+          </ng-container>
+
+          <app-sustento-financiero-form [form]="form.get('sustentoFinanciero')"></app-sustento-financiero-form>
+
+          <div class="col-12">
+            <hr>
+          </div>
+          <app-extras-form [form]="form.get('extras')"></app-extras-form>
+        </ng-container>
+      </app-card>
+    </div>
+  </div>
+</div>

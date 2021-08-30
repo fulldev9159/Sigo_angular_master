@@ -16,6 +16,10 @@ import { DetalleOtComponent } from './component/detalle-ot/detalle-ot.component'
 import { AssignCoordinatorFormComponent } from './component/assign-coordinator-form/assign-coordinator-form.component';
 import { DetalleLpusComponent } from '@featureOT/cubicacion/component/detalle-lpus/detalle-lpus.component';
 import { AssignTrabajadorFormComponent } from './component/assign-trabajador-form/assign-trabajador-form.component';
+import { GeneralFormComponent } from './forms/general-form/general-form.component';
+import { PlanProyectoFormComponent } from './forms/plan-proyecto-form/plan-proyecto-form.component';
+import { SustentoFinancieroFormComponent } from './forms/sustento-financiero-form/sustento-financiero-form.component';
+import { ExtrasFormComponent } from './forms/extras-form/extras-form.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,10 @@ import { AssignTrabajadorFormComponent } from './component/assign-trabajador-for
     AssignCoordinatorFormComponent,
     DetalleLpusComponent,
     AssignTrabajadorFormComponent,
+    GeneralFormComponent,
+    PlanProyectoFormComponent,
+    SustentoFinancieroFormComponent,
+    ExtrasFormComponent,
   ],
   imports: [
     CommonModule,

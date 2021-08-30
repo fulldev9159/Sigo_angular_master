@@ -1,0 +1,30 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xs-12 col-md-6">
+    <app-input ID="nombre-ot" [control]="form.get('nombre')" [label]="'Nombre de la orden de trabajo'"></app-input>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+    <app-select [control]="form.get('tipo')" label="Tipo OT" ID="tipo-ot">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione tipo OT</option>
+        <option value="OT">OT</option>
+        <option value="AP">AP</option>
+      </ng-container>
+    </app-select>
+    <br>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+    <app-select [control]="form.get('cubicacion_id')" label="Cubicación" ID="cubicacion-de-ot">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione cubicación</option>
+        <ng-container *ngFor="let cubicacion of cubicaciones$ | async">
+          <option [value]="cubicacion.id">
+            {{ cubicacion.nombre }}
+          </option>
+        </ng-container>
+      </ng-container>
+    </app-select>
+    <br>
+  </div>
+</div>

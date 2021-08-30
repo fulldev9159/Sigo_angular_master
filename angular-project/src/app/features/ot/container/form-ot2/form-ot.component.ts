@@ -59,6 +59,7 @@ import { resetData } from '@storeOT/features/cubicacion/cubicacion.actions';
 export class FormOt2Component implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   authLogin: Login = null;
+
   cubicaciones$: Observable<Cubicacion[]>;
   planes$: Observable<Plan[]> = of([]);
   cubicacionSeleccionada: Cubicacion = null;
