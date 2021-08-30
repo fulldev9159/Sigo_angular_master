@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, BehaviorSubject } from 'rxjs';
-import { withLatestFrom } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
+import { Site, PMO } from '@storeOT/features/ot/ot.model';
 
 @Component({
   selector: 'app-form-ot',
@@ -17,6 +18,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
   contractType$ = new BehaviorSubject<string>('MOVIL');
 
   cubicacionSeleccionada: Cubicacion = null;
+  sitioSeleccionado: Site = null;
 
   form: FormGroup = new FormGroup({
     general: new FormGroup({
@@ -74,9 +76,15 @@ export class FormOtComponent implements OnInit, OnDestroy {
         .get('general')
         .get('cubicacion_id')
         .valueChanges.pipe(
-          withLatestFrom(this.cubageFacade.getCubicacionSelector$())
+          withLatestFrom(
+            this.cubageFacade
+              .getCubicacionSelector$()
+              .pipe(map(cubicaciones => cubicaciones || []))
+          )
         )
         .subscribe(([cubicacion_id, cubicaciones]) => {
+          this.resetPlanProyectoFormControl();
+
           this.cubicacionSeleccionada = null;
           if (cubicacion_id !== null && cubicacion_id !== undefined) {
             this.cubicacionSeleccionada = cubicaciones.find(
@@ -87,9 +95,60 @@ export class FormOtComponent implements OnInit, OnDestroy {
               // TODO: checkear el tipo contrato de la cubicacion
               // this.contractType$.next('MOVIL');
             }
+          } else {
+            this.disablePlanProyectoFormControl();
           }
         })
     );
+
+    this.subscription.add(
+      this.form
+        .get('planProyecto')
+        .get('sitio_id')
+        .valueChanges.pipe(
+          withLatestFrom(
+            this.otFacade.getSitesSelector$().pipe(map(sitios => sitios || []))
+          )
+        )
+        .subscribe(([sitio_id, sitios]) => {
+          this.resetPMOCodigoFormControl();
+          if (sitio_id !== null && sitio_id !== undefined) {
+            this.sitioSeleccionado = sitios.find(s => +s.id === +sitio_id);
+
+            if (this.sitioSeleccionado) {
+              this.otFacade.getPmosAction({
+                sitio_codigo: this.sitioSeleccionado.codigo,
+              });
+            }
+          } else {
+            this.disablePMOCodigoFormControl();
+          }
+        })
+    );
+  }
+
+  resetPlanProyectoFormControl(): void {
+    this.form.get('planProyecto').get('plan_proyecto_id').reset();
+    this.otFacade.resetPlanProyecto();
+  }
+
+  disablePlanProyectoFormControl(): void {
+    this.form
+      .get('planProyecto')
+      .get('plan_proyecto_id')
+      .disable({ emitEvent: false });
+  }
+
+  resetPMOCodigoFormControl(): void {
+    this.form.get('sustentoFinanciero').get('pmo_codigo').reset();
+    this.otFacade.resetPMO();
+  }
+
+  disablePMOCodigoFormControl(): void {
+    this.form
+      .get('sustentoFinanciero')
+      .get('pmo_codigo')
+      .disable({ emitEvent: false });
   }
 
   ngOnDestroy(): void {
@@ -100,7 +159,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.otFacade.resetData();
     this.cubicacionSeleccionada = null;
     // this.nombre_plan_proyecto = '';
-    // this.sitioSeleccionado = null;
+    this.sitioSeleccionado = null;
     this.router.navigate(['/app/ot/list-ot']);
   }
 }
