@@ -16,11 +16,11 @@ import { ContratoMovilFormComponent } from '../../forms/contrato-movil-form/cont
 import { ContratoOrdinarioFormComponent } from '../../forms/contrato-ordinario-form/contrato-ordinario-form.component';
 
 @Component({
-  selector: 'app-form-cub2',
-  templateUrl: './form-cub2.component.html',
-  styleUrls: ['./form-cub2.component.scss'],
+  selector: 'app-form-cub',
+  templateUrl: './form-cub.component.html',
+  styleUrls: ['./form-cub.component.scss'],
 })
-export class FormCub2Component implements OnInit, OnDestroy {
+export class FormCubContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   contractType$ = new BehaviorSubject<string>('MOVIL');
 
