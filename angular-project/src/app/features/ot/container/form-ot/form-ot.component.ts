@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription, BehaviorSubject } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
@@ -9,6 +9,10 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
 import { Site, PMO, RequestCreateOT } from '@storeOT/features/ot/ot.model';
 import { Login } from '@data';
+import { GeneralFormComponent } from '../../forms/general-form/general-form.component';
+import { PlanProyectoFormComponent } from '../../forms/plan-proyecto-form/plan-proyecto-form.component';
+import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero-form/sustento-financiero-form.component';
+import { ExtrasFormComponent } from '../../forms/extras-form/extras-form.component';
 
 @Component({
   selector: 'app-form-ot',
@@ -22,6 +26,30 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
   cubicacionSeleccionada: Cubicacion = null;
   sitioSeleccionado: Site = null;
+
+  @ViewChild('generalForm', {
+    read: GeneralFormComponent,
+    static: false,
+  })
+  generalForm: GeneralFormComponent;
+
+  @ViewChild('planProyectoForm', {
+    read: PlanProyectoFormComponent,
+    static: false,
+  })
+  planProyectoForm: PlanProyectoFormComponent;
+
+  @ViewChild('sustentoFinancieroForm', {
+    read: SustentoFinancieroFormComponent,
+    static: false,
+  })
+  sustentoFinancieroForm: SustentoFinancieroFormComponent;
+
+  @ViewChild('extrasForm', {
+    read: ExtrasFormComponent,
+    static: false,
+  })
+  extrasForm: ExtrasFormComponent;
 
   form: FormGroup = new FormGroup({
     general: new FormGroup({
@@ -181,10 +209,44 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.router.navigate(['app/ot/list-ot']);
   }
 
-  touch(): void {}
+  touch(): void {
+    const contractType = this.contractType$.value;
+
+    if (contractType === 'MOVIL') {
+      if (
+        this.generalForm &&
+        this.planProyectoForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        this.generalForm.touch();
+        this.planProyectoForm.touch();
+        this.sustentoFinancieroForm.touch();
+        this.extrasForm.touch();
+      }
+    }
+  }
 
   get valid(): boolean {
-    return true;
+    const contractType = this.contractType$.value;
+
+    if (contractType === 'MOVIL') {
+      if (
+        this.generalForm &&
+        this.planProyectoForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        return (
+          this.generalForm.valid &&
+          this.planProyectoForm.valid &&
+          this.sustentoFinancieroForm.valid &&
+          this.extrasForm.valid
+        );
+      }
+    }
+
+    return false;
   }
 
   save(): void {

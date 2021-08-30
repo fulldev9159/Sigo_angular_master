@@ -319,4 +319,21 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
     control.markAsPristine();
     control.updateValueAndValidity();
   }
+
+  touch(): void {
+    Object.keys(this.form.controls).forEach(field => {
+      const control = this.form.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.form.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
+  get valid(): boolean {
+    return this.form.valid;
+  }
 }

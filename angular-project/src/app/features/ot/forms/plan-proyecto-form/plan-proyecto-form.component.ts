@@ -100,4 +100,21 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  touch(): void {
+    Object.keys(this.form.controls).forEach(field => {
+      const control = this.form.get(field);
+      control.markAsTouched({
+        onlySelf: true,
+      });
+    });
+
+    this.form.markAsTouched({
+      onlySelf: true,
+    });
+  }
+
+  get valid(): boolean {
+    return this.form.valid;
+  }
 }
