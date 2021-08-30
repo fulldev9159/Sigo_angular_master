@@ -37,6 +37,11 @@
             <hr>
           </div>
           <app-extras-form [form]="form.get('extras')"></app-extras-form>
+
+          <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+            <button (click)="cancel();" class="btn btn-light mr-2">Cancelar</button>
+            <button (click)="save();" [disabled]="!valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar</button>
+          </div>
         </ng-container>
       </app-card>
     </div>

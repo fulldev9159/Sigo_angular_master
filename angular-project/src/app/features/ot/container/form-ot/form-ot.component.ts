@@ -4,9 +4,11 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
-import { Site, PMO } from '@storeOT/features/ot/ot.model';
+import { Site, PMO, RequestCreateOT } from '@storeOT/features/ot/ot.model';
+import { Login } from '@data';
 
 @Component({
   selector: 'app-form-ot',
@@ -16,6 +18,7 @@ import { Site, PMO } from '@storeOT/features/ot/ot.model';
 export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   contractType$ = new BehaviorSubject<string>('MOVIL');
+  authLogin: Login = null;
 
   cubicacionSeleccionada: Cubicacion = null;
   sitioSeleccionado: Site = null;
@@ -65,7 +68,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private otFacade: OtFacade,
-    private cubageFacade: CubicacionFacade
+    private cubageFacade: CubicacionFacade,
+    private authFacade: AuthFacade
   ) {}
 
   ngOnInit(): void {
@@ -125,6 +129,14 @@ export class FormOtComponent implements OnInit, OnDestroy {
           }
         })
     );
+
+    this.subscription.add(
+      this.authFacade.getLogin$().subscribe(profile => {
+        if (profile) {
+          this.authLogin = profile;
+        }
+      })
+    );
   }
 
   resetPlanProyectoFormControl(): void {
@@ -161,5 +173,89 @@ export class FormOtComponent implements OnInit, OnDestroy {
     // this.nombre_plan_proyecto = '';
     this.sitioSeleccionado = null;
     this.router.navigate(['/app/ot/list-ot']);
+  }
+
+  cancel(): void {
+    // this.initForm(});
+    this.otFacade.resetData();
+    this.router.navigate(['app/ot/list-ot']);
+  }
+
+  touch(): void {}
+
+  get valid(): boolean {
+    return true;
+  }
+
+  save(): void {
+    this.touch();
+    if (this.valid) {
+      const {
+        general: { nombre, tipo, cubicacion_id },
+        planProyecto: { plan_proyecto_id, sitio_id },
+        sustentoFinanciero: {
+          costos,
+
+          pmo_codigo,
+          lp_codigo,
+          pep2_capex_id,
+          pep2_provisorio,
+
+          id_opex_codigo,
+          cuenta_sap_codigo,
+          ceco_codigo,
+          ceco_provisorio,
+        },
+        extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
+      } = this.form.getRawValue();
+
+      const contractType = this.contractType$.value;
+
+      if (contractType === 'MOVIL') {
+        const request: RequestCreateOT = {
+          nombre,
+          tipo,
+          proyecto_id: +proyecto_id,
+          cubicacion_id: +cubicacion_id,
+          sitio_id: +sitio_id,
+          propietario_id: +this.authLogin.usuario_id,
+          fecha_inicio,
+          fecha_fin,
+          observaciones,
+          sustento_financiero: {
+            tipo_sustento: costos.toUpperCase(),
+            capex_id: null,
+            opex_id: null,
+            capex_provisorio: null,
+            opex_provisorio: null,
+          },
+        };
+
+        if (costos.toUpperCase() === 'CAPEX') {
+          if (pep2_capex_id === 'capex_provisorio') {
+            request.sustento_financiero.capex_provisorio = {
+              pmo_codigo: +pmo_codigo,
+              lp_codigo: lp_codigo,
+              pep2_codigo: pep2_provisorio,
+            };
+          } else {
+            request.sustento_financiero.capex_id = +pep2_capex_id;
+          }
+        } else if (costos.toUpperCase() === 'OPEX') {
+          if (ceco_codigo === 'ceco_provisorio') {
+            request.sustento_financiero.opex_provisorio = {
+              id_opex: id_opex_codigo,
+              cuenta_sap: cuenta_sap_codigo,
+              ceco_codigo: ceco_provisorio,
+            };
+          } else {
+            request.sustento_financiero.opex_id = +ceco_codigo;
+          }
+        }
+
+        console.log(request);
+        this.otFacade.postOt(request);
+      }
+    }
   }
 }
