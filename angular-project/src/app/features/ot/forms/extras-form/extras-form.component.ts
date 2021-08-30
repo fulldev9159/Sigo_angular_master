@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { Proyecto } from '@storeOT/features/ot/ot.model';
+import { OtFacade } from '@storeOT/features/ot/ot.facade';
 
 @Component({
   selector: 'app-extras-form',
@@ -12,11 +13,23 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   proyectos$: Observable<Proyecto[]> = of([]);
 
+  msgsWrongDates = [
+    {
+      severity: 'error',
+      summary: 'ERROR',
+      detail: 'La fecha de fin no puede ser inferior a la fecha de inicio',
+    },
+  ];
+
   @Input() form: FormGroup;
 
-  constructor() {}
+  constructor(private otFacade: OtFacade) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.otFacade.getProyectoAction();
+
+    this.proyectos$ = this.otFacade.getProyectoSelector$();
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
