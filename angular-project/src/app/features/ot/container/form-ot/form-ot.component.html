@@ -41,6 +41,14 @@
                 </div>
               </ng-container>
 
+              <ng-container *ngIf="(contractType$ | async) === 'ORDINARIO'">
+                <app-detalle-adjudicacion-form [form]="form.get('detalleAdjudicacion')" #detalleAdjudicacionForm></app-detalle-adjudicacion-form>
+
+                <div class="col-12">
+                  <hr>
+                </div>
+              </ng-container>
+
               <app-sustento-financiero-form [form]="form.get('sustentoFinanciero')" #sustentoFinancieroForm></app-sustento-financiero-form>
 
               <div class="col-12">
