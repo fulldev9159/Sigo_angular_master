@@ -1,0 +1,28 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xs-12 col-md-6" id="control_plan_proyecto_id">
+    <app-select [control]="form.get('plan_proyecto_id')" label="Plan de proyecto" ID="plan-proyecto">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione plan de proyecto</option>
+        <ng-container *ngFor="let plan of planes$ | async">
+          <option [value]="plan.id">
+            {{ plan.nombre }}
+          </option>
+        </ng-container>
+      </ng-container>
+    </app-select>
+    <br>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control_sitio_id">
+    <app-select [control]="form.get('sitio_id')" label="Sitio" ID="sitio">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione sitio</option>
+        <ng-container *ngFor="let sitio of sitios$ | async">
+          <option [value]="sitio.id">
+            {{ sitio.codigo }} - {{ sitio.nombre }}
+          </option>
+        </ng-container>
+      </ng-container>
+    </app-select>
+  </div>
+</div>

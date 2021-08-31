@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormOtComponent } from './container/form-ot/form-ot.component';
-import { FormOt2Component } from './container/form-ot2/form-ot.component';
 
 import { CDetalleOtComponent } from './container/c-detalle-ot/c-detalle-ot.component';
 import { ListOtComponent } from './container/list-ot/list-ot.component';
@@ -27,20 +26,8 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'form-ot2',
-        component: FormOtComponent,
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          permissions: {
-            only: 'OT_CREAR',
-            redirectTo: '/app/ot/list-ot',
-          },
-          state: 'form-ot2',
-        },
-      },
-      {
         path: 'form-ot',
-        component: FormOt2Component,
+        component: FormOtComponent,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
