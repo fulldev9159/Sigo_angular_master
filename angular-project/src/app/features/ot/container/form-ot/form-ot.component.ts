@@ -166,7 +166,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
             if (this.cubicacionSeleccionada) {
               // TODO: checkear el tipo contrato de la cubicacion
-              const contractType = 'ORDINARIO';
+              const contractType = 'MOVIL';
 
               // TODO descomentar ésto cuando la obtención del tipo de contrato sea dinámica
               //// if (contractType === 'FIJO' || contractType === 'ORDINARIO') {
@@ -175,9 +175,6 @@ export class FormOtComponent implements OnInit, OnDestroy {
               ////     sitio_codigo: 'NEW4PHW0003F10',
               ////   });
               //// }
-              this.otFacade.getPmosAction({
-                sitio_codigo: 'NEW4PHW0003F10',
-              });
 
               this.contractType$.next(contractType);
             }
