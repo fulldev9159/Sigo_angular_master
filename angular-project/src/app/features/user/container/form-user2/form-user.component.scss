@@ -1,13 +1,30 @@
-.container-jerarquia {
-  border: 1px solid #e4e3e3;
-  padding-right: 12px;
-  color: gray;
-  background: #f9f9f9;
-  max-width: 361px;
-  // margin-left: 14px;
-}
+:host ::ng-deep {
+  .card {
+    font-size: 0.76rem;
+  }
 
-.container-jerarquia button {
-  font-size: 11px;
-  border: 1px solid #c3c2c2;
+  input {
+    height: 30px;
+  }
+
+  select {
+    height: 35px;
+    font-size: 0.79rem;
+  }
+
+  .tipoEmpresa {
+    border: 1px solid #cecece;
+    padding: 8px;
+    width: 321px;
+    padding-left: 24px;
+  }
+
+  .p-multiselect {
+    border-color: #ced4da;
+    height: 35px;
+  }
+
+  .p-multiselect-items-wrapper>ul {
+    font-size: 0.79rem;
+  }
 }

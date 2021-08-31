@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
+  @Input() DisplayLabelMode = 'up';
   @Input() control: FormControl;
   @Input() label = '';
   @Input() placeholder = '';
