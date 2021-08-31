@@ -266,50 +266,50 @@ Guardar Cubicacion
 ## CREAR OT
 Set Nombre OT
     [Arguments]       ${nombre}
-    ${selector}=      set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(1)>div:nth-child(1)>app-input>input
-    Set input text    ${nombre}       ${selector}                                                                            
+    ${selector}=      set variable    css:#control_nombre>app-input>input
+    Set input text    ${nombre}       ${selector}
 
 Set Tipo OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(1)>div:nth-child(2)>app-select>select
+    ${selector}=       set variable    css:#control_tipo_ot>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Cubicacion de la OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(1)>div:nth-child(3)>app-select>select
+    ${selector}=       set variable    css:#control_cubicacion_id>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Plan Proyecto OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(2)>div:nth-child(1)>app-select>select
+    ${selector}=       set variable    css:#control_plan_proyecto_id>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Sitio OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(2)>div:nth-child(2)>app-select>select
+    ${selector}=       set variable    css:#control_sitio_id>app-select>select
     Set select item    ${valor}        ${selector}
 
 Click Opex OT
-    Click Visible Element    id:opex
+    Click Visible Element    id:option_opex
 
 Set ID OPEX OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(4)>div:nth-child(1)>app-select>select
+    ${selector}=       set variable    css:#control_id_opex_codigo>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Cuenta SAP OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(4)>div:nth-child(2)>app-select>select
+    ${selector}=       set variable    css:#cuenta_sap_codigo>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set CECO OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(4)>div:nth-child(3)>app-select>select
+    ${selector}=       set variable    css:#control_ceco_codigo>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set CECO Provisorio
     [Arguments]       ${nombre-ceco}
-    ${selector}=      set variable      css:#box > div.col-xs-12.col-md-8>div:nth-child(4)>div:nth-child(4)>app-select>select
+    ${selector}=      set variable      css:#control_ceco_codigo>app-select>select
     Set input text    ${nombre-ceco}    ${selector}
 
 Set Fecha Inicio
@@ -317,8 +317,8 @@ Set Fecha Inicio
     Click Visible Element            css:p-calendar
     ${selector fecha}=               set variable          css: p-calendar > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(3) > span
     Wait Until Element Is Visible    ${selector fecha}
-    Scroll Element Into View         ${selector fecha} 
-    Click Visible Element            ${selector fecha} 
+    Scroll Element Into View         ${selector fecha}
+    Click Visible Element            ${selector fecha}
 
 Set Fecha Termino
     Wait Until Element Is Visible    id:fecha-termino-ot
@@ -330,13 +330,13 @@ Set Fecha Termino
 
 Set Proyecto OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(5)>div:nth-child(3)>app-select>select
+    ${selector}=       set variable    css:#control_proyecto_id>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set Observaciones OT
     [Arguments]       ${valor}
-    ${selector}=      set variable    css:#box > div.col-xs-12.col-md-8>div:nth-child(5)>div:nth-child(4)>textarea
-    Set input text    ${valor}        ${selector}                                                                     
+    ${selector}=      set variable    css:#control_observaciones>textarea
+    Set input text    ${valor}        ${selector}
 
 Guardar OT
     Wait Until Element Is Visible    id:guardar-ot

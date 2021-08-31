@@ -1,9 +1,9 @@
 <div class="row" [formGroup]="form">
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-6" id="control_fecha_inicio">
     <label class="mr-1" for="">Fecha inicio</label>
     <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot" name="fecha-inicio-ot"></p-calendar>
   </div>
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-6" id="control_fecha_termino">
     <label for="">Fecha termino</label>
     <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot"></p-calendar>
   </div>
@@ -14,7 +14,7 @@
     </div>
   </ng-container>
 
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-6" id="control_proyecto_id">
     <br>
     <app-select [control]="form.get('proyecto_id')" label="Proyecto" ID="proyecto-ot">
       <ng-container options>
@@ -28,7 +28,7 @@
     <br>
   </div>
 
-  <div class="col-12">
+  <div class="col-12" id="control_observaciones">
     <br>
     <label for="">Observaciones</label>
     <textarea formControlName="observaciones" class="form-control" placeholder="..." name="observaciones" id="observaciones" cols="30" rows="2"></textarea>

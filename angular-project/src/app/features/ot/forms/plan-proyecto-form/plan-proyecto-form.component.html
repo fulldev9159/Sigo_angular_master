@@ -1,5 +1,5 @@
 <div class="row" [formGroup]="form">
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-6" id="control_plan_proyecto_id">
     <app-select [control]="form.get('plan_proyecto_id')" label="Plan de proyecto" ID="plan-proyecto">
       <ng-container options>
         <option value="null" selected disabled>Seleccione plan de proyecto</option>
@@ -13,7 +13,7 @@
     <br>
   </div>
 
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-6" id="control_sitio_id">
     <app-select [control]="form.get('sitio_id')" label="Sitio" ID="sitio">
       <ng-container options>
         <option value="null" selected disabled>Seleccione sitio</option>
