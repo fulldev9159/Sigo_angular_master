@@ -299,7 +299,7 @@ Set ID OPEX OT
 
 Set Cuenta SAP OT
     [Arguments]        ${valor}
-    ${selector}=       set variable    css:#cuenta_sap_codigo>app-select>select
+    ${selector}=       set variable    css:#control_cuenta_sap_codigo>app-select>select
     Set select item    ${valor}        ${selector}
 
 Set CECO OT
