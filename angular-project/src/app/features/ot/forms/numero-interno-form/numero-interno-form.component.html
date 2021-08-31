@@ -1,0 +1,20 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xs-12 col-md-6" id="control_tipo_numero_interno_id">
+    <app-select [control]="form.get('tipo_numero_interno_id')" label="Tipo Número interno" ID="tipo-numero-interno">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione tipo</option>
+        <ng-container *ngFor="let tipo of tiposNumeroInterno$ | async">
+          <option [value]="tipo.id">
+            {{ tipo.nombre }}
+          </option>
+        </ng-container>
+      </ng-container>
+    </app-select>
+    <br>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control_numero_interno">
+    <app-input [control]="form.get('numero_interno')" label="Número interno" ID="numero-interno"></app-input>
+    <br>
+  </div>
+</div>

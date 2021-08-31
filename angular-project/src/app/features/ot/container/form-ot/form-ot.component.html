@@ -31,6 +31,14 @@
             </div>
           </ng-container>
 
+          <ng-container *ngIf="(contractType$ | async) === 'FIJO'">
+            <app-numero-interno-form [form]="form.get('numeroInterno')" #numeroInternoForm></app-numero-interno-form>
+
+            <div class="col-12">
+              <hr>
+            </div>
+          </ng-container>
+
           <app-sustento-financiero-form [form]="form.get('sustentoFinanciero')" #sustentoFinancieroForm></app-sustento-financiero-form>
 
           <div class="col-12">

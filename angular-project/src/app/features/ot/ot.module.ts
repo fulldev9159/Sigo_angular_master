@@ -20,6 +20,7 @@ import { GeneralFormComponent } from './forms/general-form/general-form.componen
 import { PlanProyectoFormComponent } from './forms/plan-proyecto-form/plan-proyecto-form.component';
 import { SustentoFinancieroFormComponent } from './forms/sustento-financiero-form/sustento-financiero-form.component';
 import { ExtrasFormComponent } from './forms/extras-form/extras-form.component';
+import { NumeroInternoFormComponent } from './forms/numero-interno-form/numero-interno-form.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ExtrasFormComponent } from './forms/extras-form/extras-form.component';
     PlanProyectoFormComponent,
     SustentoFinancieroFormComponent,
     ExtrasFormComponent,
+    NumeroInternoFormComponent,
   ],
   imports: [
     CommonModule,

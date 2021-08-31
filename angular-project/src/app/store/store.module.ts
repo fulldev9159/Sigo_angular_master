@@ -18,6 +18,11 @@ import { UnidadEffects } from './features/unidad/unidad.effects';
 import * as formUnidadReduce from './features/unidad/unidad.reducer';
 // UNIDAD STORE
 
+// TIPO NUMERO INTERNO STORE
+import { TipoNumeroInternoEffects } from './features/tipo-numero-interno/tipo-numero-interno.effects';
+import * as formTipoNumeroInternoReduce from './features/tipo-numero-interno/tipo-numero-interno.reducer';
+// TIPO NUMERO INTERNO STORE
+
 // OT STORE
 import { OtEffects } from './features/ot/ot.effects';
 import * as formOtReduce from './features/ot/ot.reducer';
@@ -66,6 +71,14 @@ import * as formUserReduce from './features/user/user.reducer';
       formUnidadReduce.reducerUnidad
     ),
     // UNIDAD STORE
+
+    // TIPO NUMERO INTERNO STORE
+    EffectsModule.forFeature([TipoNumeroInternoEffects]),
+    StoreModule.forFeature(
+      formTipoNumeroInternoReduce.featureKey,
+      formTipoNumeroInternoReduce.reducerTipoNumeroInterno
+    ),
+    // TIPO NUMERO INTERNO STORE
 
     // OT STORE
     EffectsModule.forFeature([OtEffects]),
