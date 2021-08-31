@@ -60,12 +60,13 @@ export class FormUser2Component implements OnInit, OnDestroy {
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),
     contratos_marco: new FormControl(null, []),
-    perfiles: new FormArray([
-      new FormGroup({
-        perfil_id: new FormControl(null, [Validators.required]),
-        persona_a_cargo_id: new FormControl(null, []),
-      }),
-    ]),
+    perfiles: new FormControl([], []),
+    // new FormArray([
+    //   new FormGroup({
+    //     perfil_id: new FormControl(null, [Validators.required]),
+    //     persona_a_cargo_id: new FormControl(null, []),
+    //   }),
+    // ]),
   };
 
   formUser: FormGroup = new FormGroup(this.formControls);
@@ -401,11 +402,12 @@ export class FormUser2Component implements OnInit, OnDestroy {
     }
   }
 
-  showPermisos(perfil: string): void {
+  showPermisos(perfil: number): void {
     this.subscription.add(
       this.profiles$.pipe(take(1)).subscribe(x => {
         x.forEach(y => {
-          if (y.nombre === perfil) {
+          console.log('dsfs');
+          if (y.id === perfil) {
             const data = y.permisos.map(permit => {
               let permitCustom;
               if (permit && permit.slug) {

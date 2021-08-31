@@ -114,10 +114,22 @@
                 <hr>
               </div>
             </div>
-            <div class="row">
-              <div class="col-12">
-
+            <div class="row justify-content-center">
+              <div class="col-3"></div>
+              <div class="col-5" style="border: solid 1px #ced4da;
+              padding: 33px;">
+                <h5>Perfil</h5>
+                <div class="row justify-content-center" *ngFor="let perfil of profiles$|async">
+                  <!-- <div class="row"> -->
+                  <div class="col-1">
+                    <p-checkbox name="group1" value="perfil.id" formControlName="perfiles"></p-checkbox>
+                  </div>
+                  <div class="col-8"> <label for="ny">{{perfil.nombre}}</label></div>
+                  <div class="col-2" style="text-align: start"> <button (click)="showPermisos(perfil.id)" style="border: 1px solid;">permisos</button></div>
+                  <!-- </div> -->
+                </div>
               </div>
+              <div class="col-3"></div>
             </div>
           </form>
         </div>
