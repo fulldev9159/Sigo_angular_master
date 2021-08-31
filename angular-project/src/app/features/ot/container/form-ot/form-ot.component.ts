@@ -27,6 +27,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
   cubicacionSeleccionada: Cubicacion = null;
   sitioSeleccionado: Site = null;
+  nombre_plan_proyecto: string;
 
   @ViewChild('generalForm', {
     read: GeneralFormComponent,
@@ -154,6 +155,26 @@ export class FormOtComponent implements OnInit, OnDestroy {
             }
           } else {
             this.disablePlanProyectoFormControl();
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.form
+        .get('planProyecto')
+        .get('plan_proyecto_id')
+        .valueChanges.pipe(
+          withLatestFrom(
+            this.otFacade.getPlansSelector$().pipe(map(planes => planes || []))
+          )
+        )
+        .subscribe(([plan_proyecto_id, planes]) => {
+          this.nombre_plan_proyecto = null;
+          if (plan_proyecto_id !== null && plan_proyecto_id !== undefined) {
+            const plan = planes.find(p => +p.id === +plan_proyecto_id);
+            if (plan) {
+              this.nombre_plan_proyecto = plan.nombre;
+            }
           }
         })
     );

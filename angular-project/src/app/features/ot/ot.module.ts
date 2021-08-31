@@ -21,6 +21,8 @@ import { PlanProyectoFormComponent } from './forms/plan-proyecto-form/plan-proye
 import { SustentoFinancieroFormComponent } from './forms/sustento-financiero-form/sustento-financiero-form.component';
 import { ExtrasFormComponent } from './forms/extras-form/extras-form.component';
 import { NumeroInternoFormComponent } from './forms/numero-interno-form/numero-interno-form.component';
+import { CubicacionDetailComponent } from './component/cubicacion-detail/cubicacion-detail.component';
+import { PlanProyectoDetailComponent } from './component/plan-proyecto-detail/plan-proyecto-detail.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { NumeroInternoFormComponent } from './forms/numero-interno-form/numero-i
     SustentoFinancieroFormComponent,
     ExtrasFormComponent,
     NumeroInternoFormComponent,
+    CubicacionDetailComponent,
+    PlanProyectoDetailComponent,
   ],
   imports: [
     CommonModule,

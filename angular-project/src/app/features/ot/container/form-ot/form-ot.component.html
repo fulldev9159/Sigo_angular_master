@@ -17,38 +17,48 @@
       <app-card [classCardHeader]="'bg-secondary text-white'">
         <ng-container card-header-title> </ng-container>
         <ng-container card-body>
-          <app-general-form [form]="form.get('general')" #generalForm></app-general-form>
+          <div class="row">
+            <div class="col-xs-12 col-md-8">
+              <app-general-form [form]="form.get('general')" #generalForm></app-general-form>
 
-          <div class="col-12">
-            <hr>
-          </div>
+              <div class="col-12">
+                <hr>
+              </div>
 
-          <ng-container *ngIf="(contractType$ | async) === 'MOVIL'">
-            <app-plan-proyecto-form [form]="form.get('planProyecto')" [cubicacion]="cubicacionSeleccionada" #planProyectoForm></app-plan-proyecto-form>
+              <ng-container *ngIf="(contractType$ | async) === 'MOVIL'">
+                <app-plan-proyecto-form [form]="form.get('planProyecto')" [cubicacion]="cubicacionSeleccionada" #planProyectoForm></app-plan-proyecto-form>
 
-            <div class="col-12">
-              <hr>
+                <div class="col-12">
+                  <hr>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="(contractType$ | async) === 'FIJO'">
+                <app-numero-interno-form [form]="form.get('numeroInterno')" #numeroInternoForm></app-numero-interno-form>
+
+                <div class="col-12">
+                  <hr>
+                </div>
+              </ng-container>
+
+              <app-sustento-financiero-form [form]="form.get('sustentoFinanciero')" #sustentoFinancieroForm></app-sustento-financiero-form>
+
+              <div class="col-12">
+                <hr>
+              </div>
+              <app-extras-form [form]="form.get('extras')" #extrasForm></app-extras-form>
+
+              <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+                <button (click)="cancel();" class="btn btn-light mr-2">Cancelar</button>
+                <button (click)="save();" [disabled]="!valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar</button>
+              </div>
             </div>
-          </ng-container>
-
-          <ng-container *ngIf="(contractType$ | async) === 'FIJO'">
-            <app-numero-interno-form [form]="form.get('numeroInterno')" #numeroInternoForm></app-numero-interno-form>
-
-            <div class="col-12">
-              <hr>
+            <div class="col-xs-12 col-md-4">
+              <app-cubicacion-detail [cubicacion]="cubicacionSeleccionada"></app-cubicacion-detail>
+              <ng-container *ngIf="(contractType$ | async) === 'MOVIL'">
+                <app-plan-proyecto-detail [nombrePlan]="nombre_plan_proyecto" [sitio]="sitioSeleccionado"></app-plan-proyecto-detail>
+              </ng-container>
             </div>
-          </ng-container>
-
-          <app-sustento-financiero-form [form]="form.get('sustentoFinanciero')" #sustentoFinancieroForm></app-sustento-financiero-form>
-
-          <div class="col-12">
-            <hr>
-          </div>
-          <app-extras-form [form]="form.get('extras')" #extrasForm></app-extras-form>
-
-          <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
-            <button (click)="cancel();" class="btn btn-light mr-2">Cancelar</button>
-            <button (click)="save();" [disabled]="!valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar</button>
           </div>
         </ng-container>
       </app-card>
