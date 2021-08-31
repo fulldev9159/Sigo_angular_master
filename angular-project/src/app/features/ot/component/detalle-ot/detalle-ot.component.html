@@ -1,94 +1,115 @@
-<div class="row" style="padding: 15px;">
-  <div class="col-xs-12 col-md-6">
-    <app-card [classCardHeader]="'bg-info'">
-      <ng-container card-header-title>Información de sistema</ng-container>
-      <ng-container card-body>
-        <ul>
-          <li>SCE session: <span style="margin-right:6.6em"></span>{{detalleOt ?detalleOt.sce_sesion : ' ---'}}</li>
-          <li>Etapa: <span style="margin-right:9.3em"></span>{{detalleOt ? detalleOt.tipo_etapa_ot.nombre : ' ---'}}</li>
-          <li>Estado: <span style="margin-right:8.8em"></span>{{detalleOt ? detalleOt.tipo_estado_ot.nombre : ' ---'}}</li>
-          <li>Tipo: <span style="margin-right:9.8em"></span> {{detalleOt ? detalleOt.tipo : ' ---'}}</li>
-        </ul>
-      </ng-container>
-    </app-card>
-    <app-card [classCardHeader]="'bg-info'">
-      <ng-container card-header-title>Detalle de la Cubicación: {{detalleOt ? detalleOt.cubicacion_nombre : ' ---'}} </ng-container>
-      <ng-container card-body>
-        <ul>
-          <li>Contrato: <span style="margin-right:8em"></span>{{detalleOt ? detalleOt.contrato_marco_nombre : ' ---'}}</li>
-          <li>Proveedor: <span style="margin-right:7.3em"></span>{{detalleOt ? detalleOt.proveedor_nombre : ' ---'}}</li>
-          <li>Región: <span style="margin-right:8.8em"></span>{{detalleOt ? detalleOt.sitio.region_nombre : ' ---'}}</li>
-          <ng-container *ngxPermissionsOnly="['OT_VER_VALOR_LPU']">
-            <li>Total: <span style="margin-right:9.8em"></span> {{detalleOt ? (detalleOt.total|currency : detalleOt.total_tipo_moneda : detalleOt.total_tipo_moneda===''?'':detalleOt.total_tipo_moneda + ' $':'.0-2':'es-CL') : ' ---'}}</li>
+<app-tabs (tabSelected)="optionSelected($event)">
+  <app-tab label="Información" icon="pi pi-fw pi-info-circle">
+    <div class="row" style="padding: 15px;">
+      <div class="col-xs-12 col-md-6">
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Información de sistema</ng-container>
+          <ng-container card-body>
+            <ul>
+              <li>SCE session: <span style="margin-right:6.6em"></span>{{detalleOt ?detalleOt.sce_sesion : ' ---'}}</li>
+              <li>Etapa: <span style="margin-right:9.3em"></span>{{detalleOt ? detalleOt.tipo_etapa_ot.nombre : ' ---'}}</li>
+              <li>Estado: <span style="margin-right:8.8em"></span>{{detalleOt ? detalleOt.tipo_estado_ot.nombre : ' ---'}}</li>
+              <li>Tipo: <span style="margin-right:9.8em"></span> {{detalleOt ? detalleOt.tipo : ' ---'}}</li>
+            </ul>
           </ng-container>
-          <button (click)="getLPUs(detalleOt.cubicacion_id)" class="btn btn-primary" style="width: 83px;
-          font-size: 12px;
-          margin-top: 10px;
-          margin-left: -19px;">Ver Lpus</button>
-        </ul>
-      </ng-container>
-    </app-card>
-    <app-card [classCardHeader]="'bg-info'">
-      <ng-container card-header-title>Fechas</ng-container>
-      <ng-container card-body>
-        <ul>
-          <li>Fecha Inicio OT: <span style="margin-right:5em"></span>{{detalleOt ? (detalleOt.fecha_inicio|date:"dd/MM/yyyy"): "---"}}</li>
-          <li>Fecha Fin OT: <span style="margin-right:6.1em"></span>{{detalleOt ? (detalleOt.fecha_fin|date:"dd/MM/yyyy") : ' ---'}}</li>
-        </ul>
-      </ng-container>
-    </app-card>
-    <app-card [classCardHeader]="'bg-info'">
-      <ng-container card-header-title>Información adicional</ng-container>
-      <ng-container card-body>
-        <ul>
-          <li>Propietario: <span style="margin-right:7em"></span>{{detalleOt ?detalleOt.propietario_nombre : ' ---'}}</li>
-          <li>Responsable: <span style="margin-right:6.4em"></span>{{detalleOt ? detalleOt.responsable_nombre : ' ---'}}</li>
-          <li>Fecha de creación: <span style="margin-right:4em"></span>{{detalleOt ? (detalleOt.created_at|date:"dd/MM/yyyy") : ' ---'}}</li>
-          <li>Proyecto: <span style="margin-right:8.1em"></span> {{detalleOt ? detalleOt.proyecto_nombre : ' ---'}}</li>
-          <li>Observaciones: <span style="margin-right:5.6em"></span> {{detalleOt ?detalleOt.observaciones : ' ---'}}</li>
-        </ul>
-      </ng-container>
-    </app-card>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <app-card [classCardHeader]="'bg-info'">
-      <ng-container card-header-title>Plan de proyecto</ng-container>
-      <ng-container card-body>
-        <ul>
-          <li>Plan:<span style="margin-right:10em"></span>{{detalleOt ? detalleOt.plan_nombre : ' ---' }}</li>
-          <li>Código:<span style="margin-right:8.7em"></span>{{detalleOt ? detalleOt.sitio.codigo : ' ---'}}</li>
-          <li>Nombre sitio:<span style="margin-right:6.01em"></span>{{detalleOt ? detalleOt.sitio.nombre : ' ---'}}</li>
-          <li>Dirección:<span style="margin-right:7.7em"></span>{{detalleOt ? detalleOt.sitio.direccion: ' ---' }} </li>
-          <li>Latitud: <span style="margin-right:8.5em"></span>{{detalleOt ? detalleOt.sitio.geo_lat : ' ---' }}</li>
-          <li>Longitud:<span style="margin-right:7.9em"></span>{{detalleOt ? detalleOt.sitio.geo_lon : ' ---' }} </li>
-        </ul>
-      </ng-container>
-    </app-card>
+        </app-card>
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Fechas</ng-container>
+          <ng-container card-body>
+            <ul>
+              <li>Fecha Inicio OT: <span style="margin-right:5em"></span>{{detalleOt ? (detalleOt.fecha_inicio|date:"dd/MM/yyyy"): "---"}}</li>
+              <li>Fecha Fin OT: <span style="margin-right:6.1em"></span>{{detalleOt ? (detalleOt.fecha_fin|date:"dd/MM/yyyy") : ' ---'}}</li>
+            </ul>
+          </ng-container>
+        </app-card>
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Información adicional</ng-container>
+          <ng-container card-body>
+            <ul>
+              <li>Propietario: <span style="margin-right:7em"></span>{{detalleOt ?detalleOt.propietario_nombre : ' ---'}}</li>
+              <li>Responsable: <span style="margin-right:6.4em"></span>{{detalleOt ? detalleOt.responsable_nombre : ' ---'}}</li>
+              <li>Fecha de creación: <span style="margin-right:4em"></span>{{detalleOt ? (detalleOt.created_at|date:"dd/MM/yyyy") : ' ---'}}</li>
+              <li>Proyecto: <span style="margin-right:8.1em"></span> {{detalleOt ? detalleOt.proyecto_nombre : ' ---'}}</li>
+              <li>Observaciones: <span style="margin-right:5.6em"></span> {{detalleOt ?detalleOt.observaciones : ' ---'}}</li>
+            </ul>
+          </ng-container>
+        </app-card>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Plan de proyecto</ng-container>
+          <ng-container card-body>
+            <ul>
+              <li>Plan:<span style="margin-right:10em"></span>{{detalleOt ? detalleOt.plan_nombre : ' ---' }}</li>
+              <li>Código:<span style="margin-right:8.7em"></span>{{detalleOt ? detalleOt.sitio.codigo : ' ---'}}</li>
+              <li>Nombre sitio:<span style="margin-right:6.01em"></span>{{detalleOt ? detalleOt.sitio.nombre : ' ---'}}</li>
+              <li>Dirección:<span style="margin-right:7.7em"></span>{{detalleOt ? detalleOt.sitio.direccion: ' ---' }} </li>
+              <li>Latitud: <span style="margin-right:8.5em"></span>{{detalleOt ? detalleOt.sitio.geo_lat : ' ---' }}</li>
+              <li>Longitud:<span style="margin-right:7.9em"></span>{{detalleOt ? detalleOt.sitio.geo_lon : ' ---' }} </li>
+            </ul>
+          </ng-container>
+        </app-card>
 
 
-    <app-card [classCardHeader]="'bg-info'">
-      <ng-container card-header-title>Sustento Financiero</ng-container>
-      <ng-container card-body>
-        <ul>
-          <li>Tipo:<span style="margin-right:10em"></span>{{detalleOt ? detalleOt.sustento_financiero.tipo_sustento : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex!==null">PMO:<span style="margin-right:9.7em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex.pmo_codigo : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex!==null">Línea presupuestaria:<span style="margin-right:2.61em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex.lp_codigo : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex!==null">PEP2:<span style="margin-right:9.72em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex.pep2_codigo : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex_provisorio!==null">PMO:<span style="margin-right:9.7em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex_provisorio.pmo_codigo : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex_provisorio!==null">Línea presupuestaria:<span style="margin-right:2.8em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex_provisorio.lp_codigo : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex_provisorio!==null">PEP2 Provisorio*:<span style="margin-right:15em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex_provisorio.pep2_codigo : ' ---' }}</li>
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Sustento Financiero</ng-container>
+          <ng-container card-body>
+            <ul>
+              <li>Tipo:<span style="margin-right:10em"></span>{{detalleOt ? detalleOt.sustento_financiero.tipo_sustento : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex!==null">PMO:<span style="margin-right:9.7em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex.pmo_codigo : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex!==null">Línea presupuestaria:<span style="margin-right:2.61em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex.lp_codigo : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex!==null">PEP2:<span style="margin-right:9.72em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex.pep2_codigo : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex_provisorio!==null">PMO:<span style="margin-right:9.7em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex_provisorio.pmo_codigo : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex_provisorio!==null">Línea presupuestaria:<span style="margin-right:2.8em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex_provisorio.lp_codigo : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.capex_provisorio!==null">PEP2 Provisorio*:<span style="margin-right:15em"></span>{{detalleOt ? detalleOt.sustento_financiero.capex_provisorio.pep2_codigo : ' ---' }}</li>
 
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex!==null">ID Opex:<span style="margin-right:9.7em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex.id_opex : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex!==null">Cuenta SAP:<span style="margin-right:2.8em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex.cuenta_sap : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex!==null">CECO:<span style="margin-right:10em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex.ceco_codigo : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex_provisorio!==null">ID Opex:<span style="margin-right:9.7em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex_provisorio.id_opex : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex_provisorio!==null">Cuenta SAP:<span style="margin-right:2.8em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex_provisorio.cuenta_sap : ' ---' }}</li>
-          <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex_provisorio!==null">CECO Provisorio*:<span style="margin-right:15em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex_provisorio.ceco_codigo : ' ---' }}</li>
-        </ul>
-      </ng-container>
-    </app-card>
-  </div>
-</div>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex!==null">ID Opex:<span style="margin-right:9.7em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex.id_opex : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex!==null">Cuenta SAP:<span style="margin-right:2.8em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex.cuenta_sap : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex!==null">CECO:<span style="margin-right:10em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex.ceco_codigo : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex_provisorio!==null">ID Opex:<span style="margin-right:9.7em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex_provisorio.id_opex : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex_provisorio!==null">Cuenta SAP:<span style="margin-right:2.8em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex_provisorio.cuenta_sap : ' ---' }}</li>
+              <li *ngIf="detalleOt && detalleOt.sustento_financiero.opex_provisorio!==null">CECO Provisorio*:<span style="margin-right:15em"></span>{{detalleOt ? detalleOt.sustento_financiero.opex_provisorio.ceco_codigo : ' ---' }}</li>
+            </ul>
+          </ng-container>
+        </app-card>
+      </div>
+    </div>
+  </app-tab>
+
+  <app-tab label="Costeo" icon="pi pi-fw pi-dollar">
+    <div class="row" style="padding: 15px;">
+      <div class="col-xs-12 col-md-6">
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Detalle de la Cubicación: {{detalleOt ? detalleOt.cubicacion_nombre : ' ---'}} </ng-container>
+          <ng-container card-body>
+            <ul>
+              <li>Contrato: <span style="margin-right:8em"></span>{{detalleOt ? detalleOt.contrato_marco_nombre : ' ---'}}</li>
+              <li>Proveedor: <span style="margin-right:7.3em"></span>{{detalleOt ? detalleOt.proveedor_nombre : ' ---'}}</li>
+              <li>Región: <span style="margin-right:8.8em"></span>{{detalleOt ? detalleOt.sitio.region_nombre : ' ---'}}</li>
+              <ng-container *ngxPermissionsOnly="['OT_VER_VALOR_LPU']">
+                <li>Total: <span style="margin-right:9.8em"></span> {{detalleOt ? (detalleOt.total|currency : detalleOt.total_tipo_moneda : detalleOt.total_tipo_moneda===''?'':detalleOt.total_tipo_moneda + ' $':'.0-2':'es-CL') : ' ---'}}</li>
+              </ng-container>
+              <button (click)="getLPUs(detalleOt.cubicacion_id)" class="btn btn-primary" style="width: 83px;
+  font-size: 12px;
+  margin-top: 10px;
+  margin-left: -19px;">Ver Lpus</button>
+            </ul>
+          </ng-container>
+        </app-card>
+      </div>
+    </div>
+  </app-tab>
+
+  <app-tab label="Acta" icon="pi pi-fw pi-file-o">Acta</app-tab>
+
+  <app-tab label="Libro de obra" icon="pi pi-fw pi-book">Libro de obra</app-tab>
+
+  <app-tab label="Bitácora" icon="pi pi-fw pi-briefcase">Bitácora</app-tab>
+
+  <app-tab label="Usuarios por etapa" icon="pi pi-fw pi-users">Usuarios por etapa</app-tab>
+
+  <app-tab label="Anexos" icon="pi pi-fw pi-paperclip">Anexos</app-tab>
+</app-tabs>
 
 <!-- <app-detalle-lpus [DisplayModal]="DisplayModal" [detalleCubicacion]="detalleCubicacion$|async" (close)="Close()"></app-detalle-lpus> -->
 <app-modal [display]="DisplayModal" (CloseEvent)="Close()">

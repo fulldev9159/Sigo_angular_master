@@ -131,4 +131,8 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
     console.log('Close desde dummy ot detalle-ot');
     this.cerrar.emit();
   }
+
+  optionSelected(event): void {
+    console.log('event', event);
+  }
 }
