@@ -9,6 +9,7 @@ import {
   ContentChildren,
   QueryList,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { TabComponent } from './tab.component';
 
@@ -20,6 +21,7 @@ import { TabComponent } from './tab.component';
 export class TabsComponent
   implements OnInit, AfterViewInit, AfterContentInit, OnDestroy
 {
+  subscription: Subscription = new Subscription();
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
   @Output() tabSelected = new EventEmitter<{ index: number; label: string }>();
 
@@ -34,18 +36,30 @@ export class TabsComponent
 
   ngAfterContentInit(): void {
     this.tabs.toArray().forEach(tabC => (tabC.active = false));
+
     this.options = this.tabs.toArray().map(tabC => ({
       label: tabC.label || '',
       icon: tabC.icon || '',
+      disabled: tabC.disabled || false,
       command: event => this.selectTab(tabC),
     }));
+
+    this.tabs.toArray().forEach((tabC, index) => {
+      this.subscription.add(
+        tabC.disabledChanged.subscribe(
+          ({ target, disabled }) => (this.options[index].disabled = disabled)
+        )
+      );
+    });
 
     if (this.options.length > 0) {
       this.selectTab(this.tabs.first);
     }
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   private selectTab(tab: TabComponent): void {
     this.tabs.toArray().forEach(tabC => (tabC.active = false));

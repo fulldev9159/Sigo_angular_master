@@ -132,7 +132,7 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
     this.cerrar.emit();
   }
 
-  optionSelected(event): void {
-    console.log('event', event);
+  tabSelected(event): void {
+    // console.log('event', event);
   }
 }

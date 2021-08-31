@@ -1,4 +1,4 @@
-<app-tabs (tabSelected)="optionSelected($event)">
+<app-tabs (tabSelected)="tabSelected($event)">
   <app-tab label="Información" icon="pi pi-fw pi-info-circle">
     <div class="row" style="padding: 15px;">
       <div class="col-xs-12 col-md-6">
@@ -100,15 +100,11 @@
     </div>
   </app-tab>
 
-  <app-tab label="Acta" icon="pi pi-fw pi-file-o">Acta</app-tab>
-
-  <app-tab label="Libro de obra" icon="pi pi-fw pi-book">Libro de obra</app-tab>
-
-  <app-tab label="Bitácora" icon="pi pi-fw pi-briefcase">Bitácora</app-tab>
-
-  <app-tab label="Usuarios por etapa" icon="pi pi-fw pi-users">Usuarios por etapa</app-tab>
-
-  <app-tab label="Anexos" icon="pi pi-fw pi-paperclip">Anexos</app-tab>
+  <app-tab label="Acta" icon="pi pi-fw pi-file-o" [disabled]="true">Acta</app-tab>
+  <app-tab label="Libro de obra" icon="pi pi-fw pi-book" [disabled]="true">Libro de obra</app-tab>
+  <app-tab label="Bitácora" icon="pi pi-fw pi-briefcase" [disabled]="true">Bitácora</app-tab>
+  <app-tab label="Usuarios por etapa" icon="pi pi-fw pi-users" [disabled]="true">Usuarios por etapa</app-tab>
+  <app-tab label="Anexos" icon="pi pi-fw pi-paperclip" [disabled]="true">Anexos</app-tab>
 </app-tabs>
 
 <!-- <app-detalle-lpus [DisplayModal]="DisplayModal" [detalleCubicacion]="detalleCubicacion$|async" (close)="Close()"></app-detalle-lpus> -->
