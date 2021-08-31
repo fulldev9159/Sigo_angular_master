@@ -14,6 +14,7 @@ import { PlanProyectoFormComponent } from '../../forms/plan-proyecto-form/plan-p
 import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero-form/sustento-financiero-form.component';
 import { ExtrasFormComponent } from '../../forms/extras-form/extras-form.component';
 import { NumeroInternoFormComponent } from '../../forms/numero-interno-form/numero-interno-form.component';
+import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicacion-form/detalle-adjudicacion-form.component';
 
 @Component({
   selector: 'app-form-ot',
@@ -59,6 +60,12 @@ export class FormOtComponent implements OnInit, OnDestroy {
   })
   numeroInternoForm: NumeroInternoFormComponent;
 
+  @ViewChild('detalleAdjudicacionForm', {
+    read: DetalleAdjudicacionFormComponent,
+    static: false,
+  })
+  detalleAdjudicacionForm: DetalleAdjudicacionFormComponent;
+
   form: FormGroup = new FormGroup({
     general: new FormGroup({
       nombre: new FormControl('', [
@@ -95,6 +102,24 @@ export class FormOtComponent implements OnInit, OnDestroy {
     numeroInterno: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
       numero_interno: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(100),
+      ]),
+    }),
+    detalleAdjudicacion: new FormGroup({
+      fecha_adjudicacion: new FormControl(null, [Validators.required]),
+      numero_carta: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(100),
+      ]),
+      numero_pedido: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(100),
+      ]),
+      materia: new FormControl(null, [
         Validators.required,
         this.noWhitespace,
         Validators.maxLength(100),
@@ -141,15 +166,18 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
             if (this.cubicacionSeleccionada) {
               // TODO: checkear el tipo contrato de la cubicacion
-              const contractType = 'MOVIL';
+              const contractType = 'ORDINARIO';
 
               // TODO descomentar ésto cuando la obtención del tipo de contrato sea dinámica
-              //// if (contractType === 'FIJO') {
+              //// if (contractType === 'FIJO' || contractType === 'ORDINARIO') {
               ////   // TODO: se necesita obtener el listado de PMOs sin especificar un sitio
               ////   this.otFacade.getPmosAction({
               ////     sitio_codigo: 'NEW4PHW0003F10',
               ////   });
               //// }
+              this.otFacade.getPmosAction({
+                sitio_codigo: 'NEW4PHW0003F10',
+              });
 
               this.contractType$.next(contractType);
             }
@@ -282,6 +310,18 @@ export class FormOtComponent implements OnInit, OnDestroy {
         this.sustentoFinancieroForm.touch();
         this.extrasForm.touch();
       }
+    } else if (contractType === 'ORDINARIO') {
+      if (
+        this.generalForm &&
+        this.detalleAdjudicacionForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        this.generalForm.touch();
+        this.detalleAdjudicacionForm.touch();
+        this.sustentoFinancieroForm.touch();
+        this.extrasForm.touch();
+      }
     }
   }
 
@@ -316,6 +356,20 @@ export class FormOtComponent implements OnInit, OnDestroy {
           this.extrasForm.valid
         );
       }
+    } else if (contractType === 'ORDINARIO') {
+      if (
+        this.generalForm &&
+        this.detalleAdjudicacionForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        return (
+          this.generalForm.valid &&
+          this.detalleAdjudicacionForm.valid &&
+          this.sustentoFinancieroForm.valid &&
+          this.extrasForm.valid
+        );
+      }
     }
 
     return false;
@@ -330,6 +384,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
         this.saveMovilForm();
       } else if (contractType === 'FIJO') {
         this.saveFijoForm();
+      } else if (contractType === 'ORDINARIO') {
+        this.saveOrdinarioForm();
       }
     }
   }
@@ -436,6 +492,78 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
       tipo_numero_interno_id,
       numero_interno,
+    };
+
+    if (costos.toUpperCase() === 'CAPEX') {
+      if (pep2_capex_id === 'capex_provisorio') {
+        request.sustento_financiero.capex_provisorio = {
+          pmo_codigo: +pmo_codigo,
+          lp_codigo,
+          pep2_codigo: pep2_provisorio,
+        };
+      } else {
+        request.sustento_financiero.capex_id = +pep2_capex_id;
+      }
+    } else if (costos.toUpperCase() === 'OPEX') {
+      if (ceco_codigo === 'ceco_provisorio') {
+        request.sustento_financiero.opex_provisorio = {
+          id_opex: id_opex_codigo,
+          cuenta_sap: cuenta_sap_codigo,
+          ceco_codigo: ceco_provisorio,
+        };
+      } else {
+        request.sustento_financiero.opex_id = +ceco_codigo;
+      }
+    }
+
+    console.log('SAVE contrato fijo', request);
+  }
+
+  saveOrdinarioForm(): void {
+    const {
+      general: { nombre, tipo, cubicacion_id },
+      sustentoFinanciero: {
+        costos,
+
+        pmo_codigo,
+        lp_codigo,
+        pep2_capex_id,
+        pep2_provisorio,
+
+        id_opex_codigo,
+        cuenta_sap_codigo,
+        ceco_codigo,
+        ceco_provisorio,
+      },
+      extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
+      detalleAdjudicacion: {
+        fecha_adjudicacion,
+        numero_carta,
+        numero_pedido,
+        materia,
+      },
+    } = this.form.getRawValue();
+
+    const request = {
+      nombre,
+      tipo,
+      cubicacion_id: +cubicacion_id,
+      propietario_id: +this.authLogin.usuario_id,
+      fecha_inicio,
+      fecha_fin,
+      observaciones,
+      sustento_financiero: {
+        tipo_sustento: costos.toUpperCase(),
+        capex_id: null,
+        opex_id: null,
+        capex_provisorio: null,
+        opex_provisorio: null,
+      },
+
+      fecha_adjudicacion,
+      numero_carta,
+      numero_pedido,
+      materia,
     };
 
     if (costos.toUpperCase() === 'CAPEX') {
