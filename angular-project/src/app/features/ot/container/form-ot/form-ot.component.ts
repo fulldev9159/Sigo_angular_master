@@ -1,532 +1,590 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription, BehaviorSubject } from 'rxjs';
+import { map, withLatestFrom } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
-import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import * as OTmodel from '@storeOT/features/ot/ot.model';
-import { MessageService } from 'primeng/api';
-import { Observable, of, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Site, PMO, RequestCreateOT } from '@storeOT/features/ot/ot.model';
 import { Login } from '@data';
+import { GeneralFormComponent } from '../../forms/general-form/general-form.component';
+import { PlanProyectoFormComponent } from '../../forms/plan-proyecto-form/plan-proyecto-form.component';
+import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero-form/sustento-financiero-form.component';
+import { ExtrasFormComponent } from '../../forms/extras-form/extras-form.component';
+import { NumeroInternoFormComponent } from '../../forms/numero-interno-form/numero-interno-form.component';
+import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicacion-form/detalle-adjudicacion-form.component';
 
 @Component({
   selector: 'app-form-ot',
   templateUrl: './form-ot.component.html',
   styleUrls: ['./form-ot.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormOtComponent implements OnInit, OnDestroy {
-  // declarations
-  public capexID = '';
-  public cecoCodigo = '';
-  public formOt: FormGroup;
-  public cubicacionSeleccionada: Cubicacion = null;
-  public authLogin: Login = null;
-  public cubicaciones: Cubicacion[] = [];
-  public cubicaciones$: Observable<Cubicacion[]>;
-  public plans: OTmodel.Plan[];
-  public planes$: Observable<OTmodel.Plan[]> = of([]);
-  public sitios: OTmodel.Site[] = [];
-  public sitios$: Observable<OTmodel.Site[]> = of([]);
-  public pmos: OTmodel.PMO[] = [];
-  public pmos$: Observable<OTmodel.PMO[]> = of([]);
-  public lps: OTmodel.Lp[];
-  public lps$: Observable<OTmodel.Lp[]> = of([]);
-  public pep2s: OTmodel.Pep2[];
-  public pep2s$: Observable<OTmodel.Pep2[]> = of([]);
-  public ids_opex: OTmodel.IDOpex[] = [];
-  public ids_opex$: Observable<OTmodel.IDOpex[]> = of([]);
-  public cuentas_sap: OTmodel.CuentaSap[];
-  public cuentas_sap$: Observable<OTmodel.CuentaSap[]> = of([]);
-  public cecos: OTmodel.CECO[];
-  public cecos$: Observable<OTmodel.CECO[]> = of([]);
-  public proyectos: OTmodel.Proyecto[];
-  public proyectos$: Observable<OTmodel.Proyecto[]> = of([]);
-  private destroyInstance$: Subject<boolean> = new Subject();
+  subscription: Subscription = new Subscription();
+  contractType$ = new BehaviorSubject<string>('MOVIL');
+  authLogin: Login = null;
+
+  cubicacionSeleccionada: Cubicacion = null;
+  sitioSeleccionado: Site = null;
+  nombre_plan_proyecto: string;
+
+  @ViewChild('generalForm', {
+    read: GeneralFormComponent,
+    static: false,
+  })
+  generalForm: GeneralFormComponent;
+
+  @ViewChild('planProyectoForm', {
+    read: PlanProyectoFormComponent,
+    static: false,
+  })
+  planProyectoForm: PlanProyectoFormComponent;
+
+  @ViewChild('sustentoFinancieroForm', {
+    read: SustentoFinancieroFormComponent,
+    static: false,
+  })
+  sustentoFinancieroForm: SustentoFinancieroFormComponent;
+
+  @ViewChild('extrasForm', {
+    read: ExtrasFormComponent,
+    static: false,
+  })
+  extrasForm: ExtrasFormComponent;
+
+  @ViewChild('numeroInternoForm', {
+    read: NumeroInternoFormComponent,
+    static: false,
+  })
+  numeroInternoForm: NumeroInternoFormComponent;
+
+  @ViewChild('detalleAdjudicacionForm', {
+    read: DetalleAdjudicacionFormComponent,
+    static: false,
+  })
+  detalleAdjudicacionForm: DetalleAdjudicacionFormComponent;
+
+  form: FormGroup = new FormGroup({
+    general: new FormGroup({
+      nombre: new FormControl('', [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(100),
+      ]),
+      tipo: new FormControl(null, [Validators.required]),
+      cubicacion_id: new FormControl(null, [Validators.required]),
+    }),
+    planProyecto: new FormGroup({
+      plan_proyecto_id: new FormControl(null, [Validators.required]),
+      sitio_id: new FormControl(null, [Validators.required]),
+    }),
+    sustentoFinanciero: new FormGroup({
+      costos: new FormControl('capex', []),
+
+      pmo_codigo: new FormControl(null, [Validators.required]),
+      lp_codigo: new FormControl(null, [Validators.required]),
+      pep2_capex_id: new FormControl(null, [Validators.required]),
+      pep2_provisorio: new FormControl(null, []),
+
+      id_opex_codigo: new FormControl(null, []),
+      cuenta_sap_codigo: new FormControl(null, []),
+      ceco_codigo: new FormControl(null, []),
+      ceco_provisorio: new FormControl(null, []),
+    }),
+    extras: new FormGroup({
+      fecha_inicio: new FormControl(null, [Validators.required]),
+      fecha_fin: new FormControl(null, [Validators.required]),
+      proyecto_id: new FormControl(null, [Validators.required]),
+      observaciones: new FormControl(null, []),
+    }),
+    numeroInterno: new FormGroup({
+      tipo_numero_interno_id: new FormControl(null, [Validators.required]),
+      numero_interno: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(100),
+      ]),
+    }),
+    detalleAdjudicacion: new FormGroup({
+      fecha_adjudicacion: new FormControl(null, [Validators.required]),
+      numero_carta: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(100),
+      ]),
+      numero_pedido: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(100),
+      ]),
+      materia: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(100),
+      ]),
+    }),
+  });
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
 
   constructor(
-    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
     private otFacade: OtFacade,
-    private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
-    private messageService: MessageService,
-    private router: Router
+    private authFacade: AuthFacade
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
-    this.authFacade
-      .getLogin$()
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(authLogin => {
-        if (authLogin) {
-          this.authLogin = authLogin;
-          this.formOt.get('gestor_id').setValue(this.authLogin.usuario_id);
-        }
-      });
+    this.otFacade.resetData();
 
-    this.authFacade
-      .getCurrentProfile$()
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(profile => {
-        if (profile) {
-          this.cubageFacade.getCubicacionAction();
-        }
-      });
-
-    this.cubicaciones$ = this.cubageFacade
-      .getCubicacionSelector$()
-      .pipe(
-        map(
-          cubicaciones =>
-            (this.cubicaciones = cubicaciones.filter(
-              x =>
-                !x.asignado &&
-                this.authLogin.usuario_id === x.creador_usuario_id
-            ))
+    this.subscription.add(
+      this.form
+        .get('general')
+        .get('cubicacion_id')
+        .valueChanges.pipe(
+          withLatestFrom(
+            this.cubageFacade
+              .getCubicacionSelector$()
+              .pipe(map(cubicaciones => cubicaciones || []))
+          )
         )
-      );
-    this.planes$ = this.otFacade
-      .getPlansSelector$()
-      .pipe(map(plans => (this.plans = plans)));
-    this.sitios$ = this.otFacade.getSitesSelector$().pipe(
-      map(
-        sitios =>
-          (this.sitios = sitios.map(x => ({
-            ...x,
-            nombre: `${x.codigo} - ${x.nombre}`,
-          })))
-      )
+        .subscribe(([cubicacion_id, cubicaciones]) => {
+          this.resetPlanProyectoFormControl();
+
+          this.cubicacionSeleccionada = null;
+          if (cubicacion_id !== null && cubicacion_id !== undefined) {
+            this.cubicacionSeleccionada = cubicaciones.find(
+              cubicacion => +cubicacion.id === +cubicacion_id
+            );
+
+            if (this.cubicacionSeleccionada) {
+              // TODO: checkear el tipo contrato de la cubicacion
+              const contractType = 'MOVIL';
+
+              // TODO descomentar ésto cuando la obtención del tipo de contrato sea dinámica
+              //// if (contractType === 'FIJO' || contractType === 'ORDINARIO') {
+              ////   // TODO: se necesita obtener el listado de PMOs sin especificar un sitio
+              ////   this.otFacade.getPmosAction({
+              ////     sitio_codigo: 'NEW4PHW0003F10',
+              ////   });
+              //// }
+
+              this.contractType$.next(contractType);
+            }
+          } else {
+            this.disablePlanProyectoFormControl();
+          }
+        })
     );
-    this.pmos$ = this.otFacade
-      .getPmosSelector$()
-      .pipe(map(pmos => (this.pmos = pmos)));
-    this.lps$ = this.otFacade
-      .getLpsSelector$()
-      .pipe(map(lps => (this.lps = lps)));
-    this.pep2s$ = this.otFacade
-      .getPep2sSelector$()
-      .pipe(map(pep2s => (this.pep2s = pep2s)));
-    this.ids_opex$ = this.otFacade
-      .getIDsOpexSelector$()
-      .pipe(map(ids_opex => (this.ids_opex = ids_opex)));
-    this.cuentas_sap$ = this.otFacade
-      .getCuentaSAPSelector$()
-      .pipe(map(cuentas_sap => (this.cuentas_sap = cuentas_sap)));
-    this.cecos$ = this.otFacade
-      .getCECOSelector$()
-      .pipe(map(cecos => (this.cecos = cecos)));
-    this.otFacade.getProyectoAction();
-    this.proyectos$ = this.otFacade
-      .getProyectoSelector$()
-      .pipe(map(proyectos => (this.proyectos = proyectos)));
+
+    this.subscription.add(
+      this.form
+        .get('planProyecto')
+        .get('plan_proyecto_id')
+        .valueChanges.pipe(
+          withLatestFrom(
+            this.otFacade.getPlansSelector$().pipe(map(planes => planes || []))
+          )
+        )
+        .subscribe(([plan_proyecto_id, planes]) => {
+          this.nombre_plan_proyecto = null;
+          if (plan_proyecto_id !== null && plan_proyecto_id !== undefined) {
+            const plan = planes.find(p => +p.id === +plan_proyecto_id);
+            if (plan) {
+              this.nombre_plan_proyecto = plan.nombre;
+            }
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.form
+        .get('planProyecto')
+        .get('sitio_id')
+        .valueChanges.pipe(
+          withLatestFrom(
+            this.otFacade.getSitesSelector$().pipe(map(sitios => sitios || []))
+          )
+        )
+        .subscribe(([sitio_id, sitios]) => {
+          this.resetPMOCodigoFormControl();
+          if (sitio_id !== null && sitio_id !== undefined) {
+            this.sitioSeleccionado = sitios.find(s => +s.id === +sitio_id);
+
+            if (this.sitioSeleccionado) {
+              this.otFacade.getPmosAction({
+                sitio_codigo: this.sitioSeleccionado.codigo,
+              });
+            }
+          } else {
+            this.disablePMOCodigoFormControl();
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.authFacade.getLogin$().subscribe(profile => {
+        if (profile) {
+          this.authLogin = profile;
+        }
+      })
+    );
+  }
+
+  resetPlanProyectoFormControl(): void {
+    this.form.get('planProyecto').get('plan_proyecto_id').reset();
+    this.otFacade.resetPlanProyecto();
+  }
+
+  disablePlanProyectoFormControl(): void {
+    this.form
+      .get('planProyecto')
+      .get('plan_proyecto_id')
+      .disable({ emitEvent: false });
+  }
+
+  resetPMOCodigoFormControl(): void {
+    this.form.get('sustentoFinanciero').get('pmo_codigo').reset();
+    this.otFacade.resetPMO();
+  }
+
+  disablePMOCodigoFormControl(): void {
+    this.form
+      .get('sustentoFinanciero')
+      .get('pmo_codigo')
+      .disable({ emitEvent: false });
   }
 
   ngOnDestroy(): void {
-    this.destroyInstance$.next(true);
-    this.destroyInstance$.complete();
+    this.subscription.unsubscribe();
   }
 
-  initForm(): void {
-    this.formOt = this.fb.group({
-      id: null,
-      token: null,
-      gestor_id: null,
-
-      nombre: [null, [Validators.required, Validators.maxLength(100)]],
-      tipo: [null, Validators.required],
-      cubicacion_id: [null, Validators.required],
-
-      plan_proyecto_id: [null, Validators.required],
-      plan_nombre: [null, Validators.required], // depende de plan_proyecto_id
-      sitio_id: [null, Validators.required],
-      costos: 'capex',
-
-      // dependen de sitio_id
-      sitio_nombre: [null, Validators.required],
-      codigo: [null, Validators.required],
-      direccion: [null, Validators.required],
-      latitud: [null, Validators.required],
-      longitud: [null, Validators.required],
-
-      // costos = 'capex'
-      pmo_codigo: [null, Validators.required],
-      lp_codigo: [null, Validators.required],
-      capex_id: [null, Validators.required],
-      pep2_provisorio: null,
-
-      // costos = 'opex'
-      id_opex_codigo: null,
-      cuenta_sap_codigo: null,
-      ceco_codigo: null,
-      ceco_provisorio: null,
-
-      fecha_inicio: [null, Validators.required],
-      fecha_fin: [null, Validators.required],
-      proyecto_id: null,
-      observaciones: null,
-
-      pep2_codigo: null, // ?
-    });
-
-    this.detectChangesForm();
+  goBack(): void {
+    this.otFacade.resetData();
+    this.cubicacionSeleccionada = null;
+    // this.nombre_plan_proyecto = '';
+    this.sitioSeleccionado = null;
+    this.router.navigate(['/app/ot/list-ot']);
   }
 
-  detectChangesForm(): void {
-    this.formOt
-      .get('cubicacion_id')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(cubicacionId => {
-        if (cubicacionId) {
-          this.cubicacionSeleccionada = this.cubicaciones.find(
-            c => +c.id === +cubicacionId
-          );
-          if (this.cubicacionSeleccionada) {
-            this.otFacade.getPlansAction({
-              region_id: this.cubicacionSeleccionada.region_id,
-            });
-          }
-
-          // refrescamos parte de
-          //  formulario al cambiar cubicación
-          this.resetForm('CUBICATION');
-        }
-      });
-
-    this.formOt
-      .get('plan_proyecto_id')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(plan_proyecto_id => {
-        if (plan_proyecto_id) {
-          const plan = this.plans.find(p => +p.id === +plan_proyecto_id);
-          if (plan) {
-            this.formOt.get('plan_nombre').setValue(plan.nombre);
-          }
-          this.otFacade.getSitesAction({
-            plan_proyecto_id,
-            region_id: this.cubicacionSeleccionada.region_id,
-          });
-
-          // refrescamos parte de
-          //  formulario al cambiar plan
-          this.resetForm('PLAN');
-        }
-      });
-
-    this.formOt
-      .get('sitio_id')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(sitio_id => {
-        if (sitio_id) {
-          const site = this.sitios.find(s => +s.id === +sitio_id);
-          // const id_sustento_controls = 'costos';
-          // const rbutton = this.formOt.controls[id_sustento_controls].value;
-          if (site) {
-            this.otFacade.getPmosAction({
-              sitio_codigo: site.codigo,
-            });
-            this.otFacade.getIDsOpex();
-            this.formOt.get('sitio_nombre').setValue(site.nombre);
-            this.formOt.get('codigo').setValue(site.codigo);
-            this.formOt.get('direccion').setValue(site.direccion);
-            this.formOt.get('latitud').setValue(site.geo_lat);
-            this.formOt.get('longitud').setValue(site.geo_lon);
-          }
-          // refrescamos parte de
-          //  formulario al cambiar site
-          this.resetForm('SITE');
-        }
-      });
-
-    this.formOt
-      .get('pmo_codigo')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(pmo_codigo => {
-        if (pmo_codigo) {
-          this.otFacade.getLpsAction({ pmo_codigo });
-
-          // refrescamos parte de
-          //  formulario al cambiar pmo
-          this.resetForm('PMO');
-        }
-      });
-
-    this.formOt
-      .get('id_opex_codigo')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(id_opex_codigo => {
-        if (id_opex_codigo) {
-          this.otFacade.getCuentaSAPAction({
-            id_opex_codigo,
-          });
-          // refrescamos parte de
-          //  formulario al cambiar id_opex
-          this.resetForm('ID_OPEX');
-        }
-      });
-
-    this.formOt
-      .get('cuenta_sap_codigo')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(cuenta_sap_codigo => {
-        if (cuenta_sap_codigo) {
-          this.otFacade.getCECOAction({
-            id_opex_codigo: this.formOt.value.id_opex_codigo,
-            cuenta_sap_codigo,
-          });
-          // refrescamos parte de
-          //  formulario al cambiar cuenta sap
-          this.resetForm('CUENTA_SAP');
-        }
-      });
-
-    this.formOt
-      .get('lp_codigo')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(lp_codigo => {
-        if (lp_codigo) {
-          this.otFacade.getPep2sAction({
-            pmo_codigo: this.formOt.value.pmo_codigo,
-            lp_codigo,
-          });
-
-          // refrescamos parte de
-          //  formulario al cambiar lp
-          this.resetForm('LP');
-        }
-      });
-
-    this.formOt
-      .get('capex_id')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(capex_id => {
-        this.capexID = capex_id;
-        if (capex_id === 'capex_provisorio') {
-          this.formOt
-            .get('pep2_provisorio')
-            .setValidators([Validators.required, Validators.maxLength(100)]);
-        } else {
-          this.resetControl(this.formOt.get('pep2_provisorio'));
-        }
-        this.formOt.get('pep2_provisorio').updateValueAndValidity();
-      });
-
-    this.formOt
-      .get('ceco_codigo')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(ceco_codigo => {
-        this.cecoCodigo = ceco_codigo;
-        if (ceco_codigo === 'ceco_provisorio') {
-          this.formOt
-            .get('ceco_provisorio')
-            .setValidators([Validators.required, Validators.maxLength(200)]);
-        } else {
-          this.resetControl(this.formOt.get('ceco_provisorio'));
-        }
-        this.formOt.get('ceco_provisorio').updateValueAndValidity();
-      });
-
-    this.formOt
-      .get('costos')
-      .valueChanges.pipe(takeUntil(this.destroyInstance$))
-      .subscribe(costos => {
-        if (costos) {
-          const site = this.sitios.find(
-            s => +s.id === +this.formOt.value.sitio_id
-          );
-          if (costos === 'capex') {
-            this.otFacade.getPmosAction({
-              sitio_codigo: site.codigo,
-            });
-
-            this.formOt.get('pmo_codigo').setValidators([Validators.required]);
-            this.formOt.get('lp_codigo').setValidators([Validators.required]);
-            this.formOt.get('capex_id').setValidators([Validators.required]);
-            this.resetControl(this.formOt.get('pep2_provisorio'));
-
-            const { capex_id } = this.formOt.getRawValue();
-            if (capex_id === 'capex_provisorio') {
-              this.formOt
-                .get('pep2_provisorio')
-                .setValidators([
-                  Validators.required,
-                  Validators.maxLength(100),
-                ]);
-            } else {
-              this.resetControl(this.formOt.get('pep2_provisorio'));
-            }
-
-            this.resetControl(this.formOt.get('id_opex_codigo'));
-            this.resetControl(this.formOt.get('cuenta_sap_codigo'));
-            this.resetControl(this.formOt.get('ceco_codigo'));
-            this.resetControl(this.formOt.get('ceco_provisorio'));
-          } else if (costos === 'opex') {
-            this.otFacade.getIDsOpex();
-
-            this.resetControl(this.formOt.get('pmo_codigo'));
-            this.resetControl(this.formOt.get('lp_codigo'));
-            this.resetControl(this.formOt.get('capex_id'));
-            this.resetControl(this.formOt.get('pep2_provisorio'));
-
-            this.formOt
-              .get('id_opex_codigo')
-              .setValidators([Validators.required]);
-            this.formOt
-              .get('cuenta_sap_codigo')
-              .setValidators([Validators.required]);
-            this.formOt.get('ceco_codigo').setValidators([Validators.required]);
-
-            const { ceco_codigo } = this.formOt.getRawValue();
-            if (ceco_codigo === 'ceco_provisorio') {
-              this.formOt
-                .get('ceco_provisorio')
-                .setValidators([
-                  Validators.required,
-                  Validators.maxLength(200),
-                ]);
-            } else {
-              this.resetControl(this.formOt.get('ceco_provisorio'));
-            }
-          }
-
-          this.formOt.get('pmo_codigo').updateValueAndValidity();
-          this.formOt.get('lp_codigo').updateValueAndValidity();
-          this.formOt.get('capex_id').updateValueAndValidity();
-          this.formOt.get('pep2_provisorio').updateValueAndValidity();
-
-          this.formOt.get('id_opex_codigo').updateValueAndValidity();
-          this.formOt.get('cuenta_sap_codigo').updateValueAndValidity();
-          this.formOt.get('ceco_codigo').updateValueAndValidity();
-          this.formOt.get('ceco_provisorio').updateValueAndValidity();
-        }
-      });
-  }
-
-  resetControl(control: AbstractControl): void {
-    control.reset();
-    control.clearValidators();
-    control.markAsUntouched();
-    control.markAsPristine();
-    control.updateValueAndValidity();
-  }
-
-  resetForm(part: string): void {
-    console.log(part);
-    switch (true) {
-      case part === 'CUBICATION':
-        this.formOt.get('plan_proyecto_id').reset();
-        this.formOt.get('sitio_id').reset();
-        this.formOt.get('pmo_codigo').reset();
-        this.formOt.get('lp_codigo').reset();
-        this.formOt.get('pep2_codigo').reset();
-        break;
-      case part === 'PLAN':
-        this.formOt.get('sitio_id').reset();
-        this.formOt.get('pmo_codigo').reset();
-        this.formOt.get('lp_codigo').reset();
-        this.formOt.get('pep2_codigo').reset();
-        break;
-      case part === 'SITE':
-        this.formOt.get('pmo_codigo').reset();
-        this.formOt.get('lp_codigo').reset();
-        this.formOt.get('pep2_codigo').reset();
-        break;
-      case part === 'PMO':
-        this.formOt.get('lp_codigo').reset();
-        this.formOt.get('pep2_codigo').reset();
-        break;
-      case part === 'LP':
-        this.formOt.get('pep2_codigo').reset();
-        break;
-      // case part === 'ID_OPEX':
-      //  this.formOt.get('cuenta_sap').reset();
-      //  this.formOt.get('ceco').reset();
-      // case part === 'CUENTA_SAP':
-      //  this.formOt.get('ceco').reset();
-    }
-  }
-
-  cancel(data: any): void {
-    this.initForm();
+  cancel(): void {
+    // this.initForm(});
+    this.otFacade.resetData();
     this.router.navigate(['app/ot/list-ot']);
   }
 
   touch(): void {
-    Object.keys(this.formOt.controls).forEach(field => {
-      const control = this.formOt.get(field);
-      control.markAsTouched({
-        onlySelf: true,
-      });
-    });
+    const contractType = this.contractType$.value;
 
-    this.formOt.markAsTouched({
-      onlySelf: true,
-    });
+    if (contractType === 'MOVIL') {
+      if (
+        this.generalForm &&
+        this.planProyectoForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        this.generalForm.touch();
+        this.planProyectoForm.touch();
+        this.sustentoFinancieroForm.touch();
+        this.extrasForm.touch();
+      }
+    } else if (contractType === 'FIJO') {
+      if (
+        this.generalForm &&
+        this.numeroInternoForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        this.generalForm.touch();
+        this.numeroInternoForm.touch();
+        this.sustentoFinancieroForm.touch();
+        this.extrasForm.touch();
+      }
+    } else if (contractType === 'ORDINARIO') {
+      if (
+        this.generalForm &&
+        this.detalleAdjudicacionForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        this.generalForm.touch();
+        this.detalleAdjudicacionForm.touch();
+        this.sustentoFinancieroForm.touch();
+        this.extrasForm.touch();
+      }
+    }
   }
 
-  save(data: any): void {
-    this.touch();
-    if (this.formOt.valid) {
-      const form = this.formOt.value;
+  get valid(): boolean {
+    const contractType = this.contractType$.value;
 
-      const request: OTmodel.RequestCreateOT = {
-        nombre: form.nombre,
-        tipo: form.tipo,
-        proyecto_id: +form.proyecto_id,
-        cubicacion_id: +form.cubicacion_id,
-        sitio_id: +form.sitio_id,
-        propietario_id: +form.gestor_id,
-        fecha_inicio: form.fecha_inicio,
-        fecha_fin: form.fecha_fin,
-        observaciones: form.observaciones,
-        sustento_financiero: {
-          tipo_sustento: form.costos.toUpperCase(),
-          capex_id: null,
-          opex_id: null,
-          capex_provisorio: null,
-          opex_provisorio: null,
-        },
-      };
-
-      if (form.costos.toUpperCase() === 'CAPEX') {
-        if (form.capex_id === 'capex_provisorio') {
-          request.sustento_financiero.capex_provisorio = {
-            pmo_codigo: +form.pmo_codigo,
-            lp_codigo: form.lp_codigo,
-            pep2_codigo: form.pep2_provisorio,
-          };
-        } else {
-          request.sustento_financiero.capex_id = +form.capex_id;
-        }
-      } else if (form.costos.toUpperCase() === 'OPEX') {
-        if (form.ceco_codigo === 'ceco_provisorio') {
-          request.sustento_financiero.opex_provisorio = {
-            id_opex: form.id_opex_codigo,
-            cuenta_sap: form.cuenta_sap_codigo,
-            ceco_codigo: form.ceco_provisorio,
-          };
-        } else {
-          request.sustento_financiero.opex_id = +form.ceco_codigo;
-        }
+    if (contractType === 'MOVIL') {
+      if (
+        this.generalForm &&
+        this.planProyectoForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        return (
+          this.generalForm.valid &&
+          this.planProyectoForm.valid &&
+          this.sustentoFinancieroForm.valid &&
+          this.extrasForm.valid
+        );
       }
-
-      console.log(request);
-      // // this.otFacade.replyOt(form);
-      // this.otFacade.postOtSCE(request);
-      // this.otFacade.postOt(request);
-      // this.formOt.reset();
+    } else if (contractType === 'FIJO') {
+      if (
+        this.generalForm &&
+        this.numeroInternoForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        return (
+          this.generalForm.valid &&
+          this.numeroInternoForm.valid &&
+          this.sustentoFinancieroForm.valid &&
+          this.extrasForm.valid
+        );
+      }
+    } else if (contractType === 'ORDINARIO') {
+      if (
+        this.generalForm &&
+        this.detalleAdjudicacionForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        return (
+          this.generalForm.valid &&
+          this.detalleAdjudicacionForm.valid &&
+          this.sustentoFinancieroForm.valid &&
+          this.extrasForm.valid
+        );
+      }
     }
+
+    return false;
+  }
+
+  save(): void {
+    this.touch();
+    if (this.valid) {
+      const contractType = this.contractType$.value;
+
+      if (contractType === 'MOVIL') {
+        this.saveMovilForm();
+      } else if (contractType === 'FIJO') {
+        this.saveFijoForm();
+      } else if (contractType === 'ORDINARIO') {
+        this.saveOrdinarioForm();
+      }
+    }
+  }
+
+  saveMovilForm(): void {
+    const {
+      general: { nombre, tipo, cubicacion_id },
+      planProyecto: { plan_proyecto_id, sitio_id },
+      sustentoFinanciero: {
+        costos,
+
+        pmo_codigo,
+        lp_codigo,
+        pep2_capex_id,
+        pep2_provisorio,
+
+        id_opex_codigo,
+        cuenta_sap_codigo,
+        ceco_codigo,
+        ceco_provisorio,
+      },
+      extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
+    } = this.form.getRawValue();
+
+    const request: RequestCreateOT = {
+      nombre,
+      tipo,
+      proyecto_id: +proyecto_id,
+      cubicacion_id: +cubicacion_id,
+      sitio_id: +sitio_id,
+      propietario_id: +this.authLogin.usuario_id,
+      fecha_inicio,
+      fecha_fin,
+      observaciones,
+      sustento_financiero: {
+        tipo_sustento: costos.toUpperCase(),
+        capex_id: null,
+        opex_id: null,
+        capex_provisorio: null,
+        opex_provisorio: null,
+      },
+    };
+
+    if (costos.toUpperCase() === 'CAPEX') {
+      if (pep2_capex_id === 'capex_provisorio') {
+        request.sustento_financiero.capex_provisorio = {
+          pmo_codigo: +pmo_codigo,
+          lp_codigo,
+          pep2_codigo: pep2_provisorio,
+        };
+      } else {
+        request.sustento_financiero.capex_id = +pep2_capex_id;
+      }
+    } else if (costos.toUpperCase() === 'OPEX') {
+      if (ceco_codigo === 'ceco_provisorio') {
+        request.sustento_financiero.opex_provisorio = {
+          id_opex: id_opex_codigo,
+          cuenta_sap: cuenta_sap_codigo,
+          ceco_codigo: ceco_provisorio,
+        };
+      } else {
+        request.sustento_financiero.opex_id = +ceco_codigo;
+      }
+    }
+
+    this.otFacade.postOt(request);
+  }
+
+  saveFijoForm(): void {
+    const {
+      general: { nombre, tipo, cubicacion_id },
+      sustentoFinanciero: {
+        costos,
+
+        pmo_codigo,
+        lp_codigo,
+        pep2_capex_id,
+        pep2_provisorio,
+
+        id_opex_codigo,
+        cuenta_sap_codigo,
+        ceco_codigo,
+        ceco_provisorio,
+      },
+      extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
+      numeroInterno: { tipo_numero_interno_id, numero_interno },
+    } = this.form.getRawValue();
+
+    const request = {
+      nombre,
+      tipo,
+      cubicacion_id: +cubicacion_id,
+      propietario_id: +this.authLogin.usuario_id,
+      fecha_inicio,
+      fecha_fin,
+      observaciones,
+      sustento_financiero: {
+        tipo_sustento: costos.toUpperCase(),
+        capex_id: null,
+        opex_id: null,
+        capex_provisorio: null,
+        opex_provisorio: null,
+      },
+
+      tipo_numero_interno_id,
+      numero_interno,
+    };
+
+    if (costos.toUpperCase() === 'CAPEX') {
+      if (pep2_capex_id === 'capex_provisorio') {
+        request.sustento_financiero.capex_provisorio = {
+          pmo_codigo: +pmo_codigo,
+          lp_codigo,
+          pep2_codigo: pep2_provisorio,
+        };
+      } else {
+        request.sustento_financiero.capex_id = +pep2_capex_id;
+      }
+    } else if (costos.toUpperCase() === 'OPEX') {
+      if (ceco_codigo === 'ceco_provisorio') {
+        request.sustento_financiero.opex_provisorio = {
+          id_opex: id_opex_codigo,
+          cuenta_sap: cuenta_sap_codigo,
+          ceco_codigo: ceco_provisorio,
+        };
+      } else {
+        request.sustento_financiero.opex_id = +ceco_codigo;
+      }
+    }
+
+    console.log('SAVE contrato fijo', request);
+  }
+
+  saveOrdinarioForm(): void {
+    const {
+      general: { nombre, tipo, cubicacion_id },
+      sustentoFinanciero: {
+        costos,
+
+        pmo_codigo,
+        lp_codigo,
+        pep2_capex_id,
+        pep2_provisorio,
+
+        id_opex_codigo,
+        cuenta_sap_codigo,
+        ceco_codigo,
+        ceco_provisorio,
+      },
+      extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
+      detalleAdjudicacion: {
+        fecha_adjudicacion,
+        numero_carta,
+        numero_pedido,
+        materia,
+      },
+    } = this.form.getRawValue();
+
+    const request = {
+      nombre,
+      tipo,
+      cubicacion_id: +cubicacion_id,
+      propietario_id: +this.authLogin.usuario_id,
+      fecha_inicio,
+      fecha_fin,
+      observaciones,
+      sustento_financiero: {
+        tipo_sustento: costos.toUpperCase(),
+        capex_id: null,
+        opex_id: null,
+        capex_provisorio: null,
+        opex_provisorio: null,
+      },
+
+      fecha_adjudicacion,
+      numero_carta,
+      numero_pedido,
+      materia,
+    };
+
+    if (costos.toUpperCase() === 'CAPEX') {
+      if (pep2_capex_id === 'capex_provisorio') {
+        request.sustento_financiero.capex_provisorio = {
+          pmo_codigo: +pmo_codigo,
+          lp_codigo,
+          pep2_codigo: pep2_provisorio,
+        };
+      } else {
+        request.sustento_financiero.capex_id = +pep2_capex_id;
+      }
+    } else if (costos.toUpperCase() === 'OPEX') {
+      if (ceco_codigo === 'ceco_provisorio') {
+        request.sustento_financiero.opex_provisorio = {
+          id_opex: id_opex_codigo,
+          cuenta_sap: cuenta_sap_codigo,
+          ceco_codigo: ceco_provisorio,
+        };
+      } else {
+        request.sustento_financiero.opex_id = +ceco_codigo;
+      }
+    }
+
+    console.log('SAVE contrato fijo', request);
   }
 }

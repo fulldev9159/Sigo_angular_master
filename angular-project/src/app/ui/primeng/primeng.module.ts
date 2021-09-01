@@ -23,6 +23,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MenuModule } from 'primeng/menu';
 import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { TabViewModule } from 'primeng/tabview';
     MenuModule,
     CardModule,
     TabViewModule,
+    TabMenuModule,
   ],
   exports: [
     MenuModule,
@@ -73,6 +75,7 @@ import { TabViewModule } from 'primeng/tabview';
     OverlayPanelModule,
     CardModule,
     TabViewModule,
+    TabMenuModule,
   ],
   providers: [MessageService],
 })
