@@ -18,7 +18,7 @@
         <div class="col-12">
           <form [formGroup]="formUser">
             <div class="row justify-content-center">
-              <div class="col-md-4 col-xs-12 ">
+              <div class="col-md-6 col-xs-12 ">
                 <app-input [control]="formControls.username" DisplayLabelMode="side" label="* Usuario Guia:"></app-input>
                 <br>
                 <app-input [control]="formControls.rut" label="*Documento identidad:" DisplayLabelMode="side"></app-input>
@@ -40,47 +40,54 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-7 col-xs-12 ">
-                <div class="tipoEmpresa">
-                  <label for="">Empresa</label>
-                  <div class="row">
-                    <div class="col-xs-12 col-md-5">
-                      <div class="p-field-radiobutton">
-                        <p-radioButton id="movistar" name="provider" formControlName="provider" value="movistar"></p-radioButton>
-                        <label for="movistar">Movistar</label>
+              <div class="col-md-6 col-xs-12">
+                <div class="row align-items-center" style="height: 100%;">
+                  <div class="col-12">
+                    <div class="tipoEmpresa">
+                      <label for="">Empresa</label>
+                      <div class="row" style="margin-left: 19%;">
+                        <div class="col-xs-12 col-md-5">
+                          <div class="p-field-radiobutton">
+                            <p-radioButton id="movistar" name="provider" formControlName="provider" value="movistar"></p-radioButton>
+                            <label for="movistar">Movistar</label>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-md-7">
+                          <div class="p-field-radiobutton">
+                            <p-radioButton id="proveedor" name="provider" formControlName="provider" value="contratista"></p-radioButton>
+                            <label for="proveedor">Contratista</label>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-xs-12 col-md-7">
-                      <div class="p-field-radiobutton">
-                        <p-radioButton id="proveedor" name="provider" formControlName="provider" value="contratista"></p-radioButton>
-                        <label for="proveedor">Contratista</label>
-                      </div>
-                    </div>
+
+                    <br>
+
+                    <app-select [control]="formControls.proveedor_id" label="* Proveedor">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione proveedor</option>
+                        <ng-container *ngFor="let proveedor of providers$ | async">
+                          <option [value]="proveedor.id">
+                            {{ proveedor.nombre }}
+                          </option>
+                        </ng-container>
+                      </ng-container>
+                    </app-select>
+                    <br>
+                    <app-select [control]="formControls.area_id" label="* Área">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione área</option>
+                        <ng-container *ngFor="let area of areas$ | async">
+                          <option [value]="area.id">
+                            {{ area.nombre }}
+                          </option>
+                        </ng-container>
+                      </ng-container>
+                    </app-select>
                   </div>
                 </div>
-                <br>
 
-                <app-select [control]="formControls.proveedor_id" label="* Proveedor">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione proveedor</option>
-                    <ng-container *ngFor="let proveedor of providers$ | async">
-                      <option [value]="proveedor.id">
-                        {{ proveedor.nombre }}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
-                <br>
-                <app-select [control]="formControls.area_id" label="* Área">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione área</option>
-                    <ng-container *ngFor="let area of areas$ | async">
-                      <option [value]="area.id">
-                        {{ area.nombre }}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
+
               </div>
             </div>
             <div class="row">

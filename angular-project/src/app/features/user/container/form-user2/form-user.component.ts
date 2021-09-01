@@ -100,58 +100,9 @@ export class FormUser2Component implements OnInit, OnDestroy {
       .getProviders$()
       .pipe(map(perfiles => perfiles || []));
     this.areas$ = this.userFacade.getAreas$().pipe(map(areas => areas || []));
-    this.profiles$ = this.profileFacade.getProfile$().pipe(
-      map(perfiles => perfiles || []),
-      tap(perfiles => {
-        perfiles.forEach(perfil => {
-          if (perfil.superior_nombre === undefined) {
-            this.jerarquia[perfil.nombre] = {};
-          }
-        });
-
-        perfiles.forEach(perfil => {
-          Object.keys(this.jerarquia).forEach(j => {
-            if (perfil.superior_nombre === j) {
-              this.jerarquia[perfil.superior_nombre][perfil.nombre] = {};
-            }
-          });
-        });
-
-        perfiles.forEach(perfil => {
-          Object.keys(this.jerarquia).forEach(superior => {
-            if (Object.keys(this.jerarquia[superior]).length > 0) {
-              Object.keys(this.jerarquia[superior]).forEach(subjerarquia => {
-                if (perfil.superior_nombre === subjerarquia) {
-                  this.jerarquia[superior][subjerarquia][perfil.nombre] = {};
-                }
-              });
-            }
-          });
-        });
-
-        perfiles.forEach(perfil => {
-          Object.keys(this.jerarquia).forEach(superior => {
-            if (Object.keys(this.jerarquia[superior]).length > 0) {
-              Object.keys(this.jerarquia[superior]).forEach(subjerarquia => {
-                if (
-                  Object.keys(this.jerarquia[superior][subjerarquia]).length > 0
-                ) {
-                  Object.keys(this.jerarquia[superior][subjerarquia]).forEach(
-                    subsubjerarquia => {
-                      if (perfil.superior_nombre === subsubjerarquia) {
-                        this.jerarquia[superior][subjerarquia][subsubjerarquia][
-                          perfil.nombre
-                        ] = {};
-                      }
-                    }
-                  );
-                }
-              });
-            }
-          });
-        });
-      })
-    );
+    this.profiles$ = this.profileFacade
+      .getProfile$()
+      .pipe(map(perfiles => perfiles || []));
     this.contracts$ = this.userFacade
       .getContracts$()
       .pipe(map(contratos => contratos || []));
