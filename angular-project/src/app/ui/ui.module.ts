@@ -19,6 +19,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { SelectComponent } from './select/select.component';
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
+import { TabComponent } from './tabs/tab.component';
+import { TabsComponent } from './tabs/tabs.component';
 
 @NgModule({
   imports: [
@@ -40,6 +42,8 @@ import { TextareaComponent } from './textarea/textarea.component';
     SelectComponent,
     InputComponent,
     TextareaComponent,
+    TabComponent,
+    TabsComponent,
   ],
   exports: [
     CardComponent,
@@ -55,6 +59,8 @@ import { TextareaComponent } from './textarea/textarea.component';
     SelectComponent,
     InputComponent,
     TextareaComponent,
+    TabComponent,
+    TabsComponent,
   ],
   providers: [ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
