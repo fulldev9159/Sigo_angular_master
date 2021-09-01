@@ -1,11 +1,11 @@
 <div class="row" [formGroup]="form">
   <div class="col-xs-12 col-md-6" id="control_fecha_inicio">
     <label class="mr-1" for="">Fecha inicio</label>
-    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot" name="fecha-inicio-ot"></p-calendar>
+    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot" name="fecha-inicio-ot" dateFormat="dd/mm/yy"></p-calendar>
   </div>
   <div class="col-xs-12 col-md-6" id="control_fecha_termino">
     <label for="">Fecha termino</label>
-    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot"></p-calendar>
+    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot" dateFormat="dd/mm/yy"></p-calendar>
   </div>
 
   <ng-container *ngIf="invalidDates">

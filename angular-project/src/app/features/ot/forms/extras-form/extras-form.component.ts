@@ -52,10 +52,10 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
       if (sdYear > edYear) {
         return true;
       }
-      if (sdMonth > edMonth) {
+      if (sdYear === edYear && sdMonth > edMonth) {
         return true;
       }
-      if (sdDay > edDay) {
+      if (sdYear === edYear && sdMonth === edMonth && sdDay > edDay) {
         return true;
       }
     }
