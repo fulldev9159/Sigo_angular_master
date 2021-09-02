@@ -1,21 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import {
-  map,
-  take,
-  takeUntil,
-  withLatestFrom,
-  filter,
-  tap,
-  find,
-} from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
@@ -24,7 +11,7 @@ import {
   Provider,
   Area,
   Contract,
-  PerfilSuperiorFormUser,
+  User,
 } from '@storeOT/features/user/user.model';
 import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
@@ -55,6 +42,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
     area_id: new FormControl(null, [Validators.required]),
     contratos_marco: new FormControl(null, []),
     perfiles: new FormControl([], []),
+    superior: new FormControl(null, Validators.required),
     // new FormArray([
     //   new FormGroup({
     //     perfil_id: new FormControl(null, [Validators.required]),
@@ -69,6 +57,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
   areas$: Observable<Area[]>;
   contracts$: Observable<Contract[]>;
   profiles$: Observable<Profile[]>;
+  superiores$: Observable<User[]>;
 
   constructor(
     private userFacade: UserFacade,
@@ -102,12 +91,17 @@ export class FormUser2Component implements OnInit, OnDestroy {
       map(contratos => contratos || []),
       tap(contratos => this.checkContratosAndEnable(contratos))
     );
+    this.superiores$ = this.userFacade.getSuperiores$().pipe(
+      map(usuarios => usuarios || []),
+      tap(usuarios => this.checkSuperioresAndEnable(usuarios))
+    );
   }
 
   initFormControlsEvents(): void {
     this.initProviderRadioFormControlEvent();
     this.initProveerdorFromControlEvent();
     this.initAreaFormControlEvent();
+    this.initSuperiorFromControlEvent();
   }
 
   initProviderRadioFormControlEvent(): void {
@@ -173,6 +167,21 @@ export class FormUser2Component implements OnInit, OnDestroy {
     );
   }
 
+  initSuperiorFromControlEvent(): void {
+    this.subscription.add(
+      this.formUser.get('contratos_marco').valueChanges.subscribe(contratos => {
+        this.resetSuperiorFormControl();
+        if (contratos !== null && contratos !== undefined) {
+          const providerID = this.formUser.get('proveedor_id').value;
+          const areaID = this.formUser.get('area_id').value;
+          this.userFacade.getSuperiores(1, 1, [1]);
+        } else {
+          this.disableSuperiorFormControl();
+        }
+      })
+    );
+  }
+
   //  --- ENABLED ---
   checkAreaAndEnable(areas: Area[]): void {
     if (areas.length > 0) {
@@ -189,6 +198,14 @@ export class FormUser2Component implements OnInit, OnDestroy {
       this.formUser.get('contratos_marco').disable();
     }
   }
+
+  checkSuperioresAndEnable(usuarios: User[]): void {
+    if (usuarios.length > 0) {
+      this.formUser.get('superior').enable();
+    } else {
+      this.formUser.get('superior').disable();
+    }
+  }
   //  ---- DISABLED ---
   disableAreaFormControl(): void {
     this.formUser.get('area_id').disable({ emitEvent: false });
@@ -196,6 +213,9 @@ export class FormUser2Component implements OnInit, OnDestroy {
 
   disableContratosFormControl(): void {
     this.formUser.get('contratos_marco').disable({ emitEvent: false });
+  }
+  disableSuperiorFormControl(): void {
+    this.formUser.get('superior').disable({ emitEvent: false });
   }
   //  --- RESET -----
   resetProveedorFormControl(): void {
@@ -208,6 +228,11 @@ export class FormUser2Component implements OnInit, OnDestroy {
 
   resetContratosFormControl(): void {
     this.formUser.get('contratos_marco').reset();
+  }
+
+  resetSuperiorFormControl(): void {
+    this.userFacade.resetSuperiores();
+    this.formUser.get('superior').reset();
   }
 
   // --- INIT DATA ---

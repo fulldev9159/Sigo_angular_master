@@ -59,12 +59,18 @@ export class UserFacade {
   // PROVIDERS
 
   // HIGHERS
-  public getHighers(data): void {
-    this.store.dispatch(userActions.getHigher(data));
+  public getSuperiores(
+    proveedor_id: number,
+    area_id: number,
+    contratos_id: number[]
+  ): void {
+    this.store.dispatch(
+      userActions.getUsers({ proveedor_id, area_id, contratos_id })
+    );
   }
 
-  public getHighers$(): Observable<Model.Higher[]> {
-    return this.store.select(userSelectors.getHighers);
+  public getSuperiores$(): Observable<Model.User[]> {
+    return this.store.select(userSelectors.getSuperiores);
   }
   // HIGHERS
 
@@ -110,7 +116,12 @@ export class UserFacade {
   public resetArea(): void {
     this.store.dispatch(userActions.resetArea());
   }
+
   public resetContratos(): void {
     this.store.dispatch(userActions.resetContratos());
+  }
+
+  public resetSuperiores(): void {
+    this.store.dispatch(userActions.resetSuperiores());
   }
 }

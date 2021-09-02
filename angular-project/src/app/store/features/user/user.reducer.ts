@@ -9,7 +9,7 @@ export interface StateUser {
   itemsDetail: Model.UserDetail;
   areas: Model.Area[];
   providers: Model.Provider[];
-  highers: Model.Higher[];
+  superiores: Model.User[];
   contract: Model.Contract[];
   form: Model.Form;
 }
@@ -19,7 +19,7 @@ export const initialStateUser: StateUser = {
   itemsDetail: { perfiles: [], contratos_marco: [] },
   areas: [],
   providers: [],
-  highers: [],
+  superiores: [],
   contract: [],
   form: null,
 };
@@ -31,6 +31,12 @@ export const reducerUser = createReducer(
   on(UserActions.getUserSuccess, (state, payload) => ({
     ...state,
     items: payload.user,
+  })),
+
+  on(UserActions.getUsers, state => state),
+  on(UserActions.getUsersSuccess, (state, payload) => ({
+    ...state,
+    superiores: payload.users,
   })),
 
   on(UserActions.getUserDetail, state => state),
@@ -92,5 +98,9 @@ export const reducerUser = createReducer(
   on(UserActions.resetContratos, (state, payload) => ({
     ...state,
     contract: [],
+  })),
+  on(UserActions.resetSuperiores, (state, payload) => ({
+    ...state,
+    superiores: [],
   }))
 );

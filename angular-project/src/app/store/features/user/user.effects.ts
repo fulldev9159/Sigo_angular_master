@@ -8,10 +8,14 @@ import { of } from 'rxjs';
 
 import * as userActions from './user.actions';
 import { environment } from '@environment';
-
+import * as Data from '@data';
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private userService: Data.UserService
+  ) {}
 
   getUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -22,6 +26,18 @@ export class UserEffects {
             userActions.getUserSuccess({ user: res.data.items })
           ),
           catchError(err => of(userActions.getUserError({ error: err })))
+        )
+      )
+    )
+  );
+
+  getUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getUsers),
+      concatMap(({ proveedor_id, area_id, contratos_id }) =>
+        this.userService.getUsers(proveedor_id, area_id, contratos_id).pipe(
+          map((users: any) => userActions.getUsersSuccess({ users })),
+          catchError(error => of(userActions.getUsersError({ error })))
         )
       )
     )

@@ -25,9 +25,9 @@ export const getProviders = createSelector(
   (state: fromUser.StateUser) => state.providers
 );
 
-export const getHighers = createSelector(
+export const getSuperiores = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.highers
+  (state: fromUser.StateUser) => state.superiores
 );
 
 export const getContracts = createSelector(

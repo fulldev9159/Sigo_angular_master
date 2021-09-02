@@ -104,12 +104,13 @@
                 </div>
               </div>
               <div class="col-md-6 col-xs-12">
-                <app-select [control]="formControls.area_id" label="* Superior directo">
+                <app-select [control]="formControls.superior" label="* Superior directo">
                   <ng-container options>
                     <option value="null" selected disabled>Seleccione persona</option>
-                    <ng-container *ngFor="let area of areas$ | async">
-                      <option [value]="area.id">
-                        {{ area.nombre }}
+                    <option value="null">No posee superior</option>
+                    <ng-container *ngFor="let superior of superiores$ | async">
+                      <option [value]="superior.id">
+                        {{ superior.nombres }} {{ superior.apellidos }}
                       </option>
                     </ng-container>
                   </ng-container>

@@ -15,6 +15,21 @@ export const getUserError = createAction(
   props<{ error: any }>()
 );
 
+export const getUsers = createAction(
+  '[Users] GET Users',
+  props<{ proveedor_id: number; area_id: number; contratos_id: number[] }>()
+);
+
+export const getUsersSuccess = createAction(
+  '[Users] GET Users Success',
+  props<{ users: Model.User[] }>()
+);
+
+export const getUsersError = createAction(
+  '[Users] GET Users Error',
+  props<{ error: any }>()
+);
+
 export const getUserById = createAction('[User GetUserById] GET User');
 
 export const getUserByIdSuccess = createAction(
@@ -166,4 +181,5 @@ export const setFormUser = createAction(
 export const resetData = createAction('[ResetData] ResetData');
 export const resetArea = createAction('[User] Reset Area');
 export const resetContratos = createAction('[User] Reset Contrartos');
+export const resetSuperiores = createAction('[User] Reset Superiores');
 // USER ACTIONS

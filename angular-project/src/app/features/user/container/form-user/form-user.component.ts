@@ -82,24 +82,24 @@ export class FormUserComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyInstance$)
     );
 
-    this.highers$ = this.userFacade.getHighers$().pipe(
-      map(highers => {
-        if (highers && highers.length > 0) {
-          const perfil = this.formUser
-            .get('perfiles')
-            .value.findIndex(p => +p.perfil_id === +this.perfilId);
-          if (perfil !== -1) {
-            this.profiles.push({
-              perfil_id: +this.perfilId,
-              perfiles: highers,
-            });
-            this.profilesMandatory$ = of(this.profiles);
-          }
-        }
-        return highers;
-      }),
-      takeUntil(this.destroyInstance$)
-    );
+    // this.highers$ = this.userFacade.getHighers$().pipe(
+    //   map(highers => {
+    //     if (highers && highers.length > 0) {
+    //       const perfil = this.formUser
+    //         .get('perfiles')
+    //         .value.findIndex(p => +p.perfil_id === +this.perfilId);
+    //       if (perfil !== -1) {
+    //         this.profiles.push({
+    //           perfil_id: +this.perfilId,
+    //           perfiles: highers,
+    //         });
+    //         this.profilesMandatory$ = of(this.profiles);
+    //       }
+    //     }
+    //     return highers;
+    //   }),
+    //   takeUntil(this.destroyInstance$)
+    // );
 
     this.contracts$ = this.userFacade.getContracts$();
 
@@ -253,23 +253,22 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   changePerfil(perfilId: number): void {
-    this.perfilId = +perfilId;
-
-    // verificamos si existen jefes para perfil seleccionado
-    // de existir no ejecutamos petición
-    const inArray = this.profiles.findIndex(
-      p => +p.perfil_id === +this.perfilId
-    );
-    if (inArray === -1) {
-      this.userFacade.getHighers({
-        token: this.authLogin.token,
-        proveedor_id:
-          +this.formUser.value.proveedor_id !== 0
-            ? +this.formUser.value.proveedor_id
-            : 1,
-        perfil_id: perfilId,
-      });
-    }
+    // this.perfilId = +perfilId;
+    // // verificamos si existen jefes para perfil seleccionado
+    // // de existir no ejecutamos petición
+    // const inArray = this.profiles.findIndex(
+    //   p => +p.perfil_id === +this.perfilId
+    // );
+    // if (inArray === -1) {
+    //   this.userFacade.getHighers({
+    //     token: this.authLogin.token,
+    //     proveedor_id:
+    //       +this.formUser.value.proveedor_id !== 0
+    //         ? +this.formUser.value.proveedor_id
+    //         : 1,
+    //     perfil_id: perfilId,
+    //   });
+    // }
   }
 
   save(form: any): void {
