@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import { User, UsersResponse } from '../model/user';
+import { UserPostRequest, UserPostResponse } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,6 @@ export class UserService {
     area_id: number,
     contratos_id: number[]
   ): Observable<User[]> {
-    console.log('user service');
     return of([
       {
         id: 1,
@@ -77,5 +77,18 @@ export class UserService {
     //       return res.data.items;
     //     })
     //   );
+  }
+
+  postUser(request: UserPostRequest): Observable<number> {
+    return this.http
+      .post<UserPostResponse>(`${this.apiUrl}/usuario/create`, request)
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.id;
+        })
+      );
   }
 }

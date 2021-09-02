@@ -1,3 +1,4 @@
+import { UserPostRequest } from '@data';
 import { createAction, props } from '@ngrx/store';
 import * as Model from './user.model';
 
@@ -170,6 +171,20 @@ export const postUserSuccess = createAction('[User Post] CREATE User Success');
 
 export const postUserError = createAction(
   '[User Post] CREATE User Error',
+  props<{ error: any }>()
+);
+
+export const postUserNew = createAction(
+  '[User Post] CREATE User New',
+  props<{ request: UserPostRequest }>()
+);
+
+export const postUserSuccessNew = createAction(
+  '[User Post] CREATE User New Success'
+);
+
+export const postUserErrorNew = createAction(
+  '[User Post] CREATE User New Error',
   props<{ error: any }>()
 );
 

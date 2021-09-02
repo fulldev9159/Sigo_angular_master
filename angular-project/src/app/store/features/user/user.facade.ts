@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Model from './user.model';
+import { UserPostRequest } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -91,6 +92,10 @@ export class UserFacade {
   // USER POST
   public postUser(data): void {
     this.store.dispatch(userActions.postUser(data));
+  }
+
+  public postUserNew(request: UserPostRequest): void {
+    this.store.dispatch(userActions.postUserNew({ request }));
   }
   // USER POST
 

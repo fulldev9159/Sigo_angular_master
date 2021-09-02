@@ -36,3 +36,34 @@ export interface UsersResponse {
     responseCode: number;
   };
 }
+
+export interface UserPostRequest {
+  id: number;
+  username: string;
+  nombres: string;
+  apellidos: string;
+  rut: string;
+  firma: string;
+  celular: string;
+  email: string;
+  proveedor_id: number;
+  area_id: number;
+  perfiles: PerfilFormUser[];
+  contratos_marco: number[];
+}
+
+export interface PerfilFormUser {
+  perfil_id: number;
+  persona_a_cargo_id: number;
+}
+
+export interface UserPostResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

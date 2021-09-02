@@ -3,18 +3,24 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Response } from '@storeOT/model';
 import * as UserModel from '@storeOT/features/user/user.model';
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
 import { of } from 'rxjs';
 
 import * as userActions from './user.actions';
 import { environment } from '@environment';
 import * as Data from '@data';
+import { SnackBarService } from '@utilsSIGO/snack-bar';
+import { UserPostRequest } from '@data';
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private userService: Data.UserService
+    private userService: Data.UserService,
+    private snackService: SnackBarService,
+    private router: Router
   ) {}
 
   getUser$ = createEffect(() =>
@@ -207,6 +213,33 @@ export class UserEffects {
         )
       )
     )
+  );
+
+  postUserNew$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.postUserNew),
+      concatMap(data =>
+        this.userService.postUser(data.request).pipe(
+          map((res: any) => userActions.postUserSuccessNew()),
+          catchError(err => of(userActions.postUserErrorNew({ error: err })))
+        )
+      )
+    )
+  );
+
+  notifyAfterpostUserNewValidationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(userActions.postUserSuccessNew),
+        tap(data => {
+          this.snackService.showMessage(
+            `Datos de usuario guardados con Éxito!`,
+            ''
+          );
+          this.router.navigate(['/app/user/list-user']);
+        })
+      ),
+    { dispatch: false }
   );
 
   editUser$ = createEffect(() =>

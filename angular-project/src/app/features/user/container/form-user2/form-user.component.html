@@ -127,17 +127,19 @@
               <div class="col-5" style="border: solid 1px #ced4da;
               padding: 33px;">
                 <h5>Perfil</h5>
-                <div class="row justify-content-center" *ngFor="let perfil of profiles$|async">
-                  <!-- <div class="row"> -->
+                <p-multiSelect id="perfiles" name="perfiles" [style]="{'width':'100%'}" placeholder="Seleccionar perfiles a usar..." [options]="profiles$|async" formControlName="perfiles" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30"></p-multiSelect>
+                <!-- <div class="row justify-content-center" *ngFor="let perfil of profiles$|async">
                   <div class="col-1">
-                    <p-checkbox name="group1" value="perfil.id" formControlName="perfiles"></p-checkbox>
+                    <p-checkbox name="group1" value="{{perfil.id}}" formControlName="perfiles"></p-checkbox>
                   </div>
                   <div class="col-8"> <label for="ny">{{perfil.nombre}}</label></div>
                   <div class="col-2" style="text-align: start"> <button (click)="showPermisos(perfil.id)" style="border: 1px solid;">permisos</button></div>
-                  <!-- </div> -->
-                </div>
+                </div> -->
               </div>
               <div class="col-3"></div>
+            </div>
+            <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+              <button id="submit-user" (click)="save()" type="submit" [disabled]="!formUser.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
             </div>
           </form>
         </div>

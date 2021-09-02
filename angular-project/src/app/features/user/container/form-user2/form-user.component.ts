@@ -17,6 +17,7 @@ import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as _ from 'lodash';
+import { UserPostRequest } from '@data';
 
 @Component({
   selector: 'app-form-user2',
@@ -41,7 +42,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),
     contratos_marco: new FormControl(null, []),
-    perfiles: new FormControl([], []),
+    perfiles: new FormControl([]),
     superior: new FormControl(null, Validators.required),
     // new FormArray([
     //   new FormGroup({
@@ -277,5 +278,30 @@ export class FormUser2Component implements OnInit, OnDestroy {
         });
       })
     );
+  }
+
+  save(): void {
+    let request: UserPostRequest;
+    const perfiles = this.formUser.get('perfiles').value;
+    request = {
+      id: null,
+      username: this.formUser.get('username').value,
+      nombres: this.formUser.get('nombres').value,
+      apellidos: this.formUser.get('apellidos').value,
+      rut: this.formUser.get('rut').value,
+      firma: null,
+      celular: this.formUser.get('celular').value,
+      email: this.formUser.get('email').value,
+      proveedor_id: +this.formUser.get('proveedor_id').value,
+      area_id: +this.formUser.get('area_id').value,
+      perfiles: perfiles.map(perfil_id => ({
+        perfil_id: perfil_id,
+        persona_a_cargo_id: 1,
+      })),
+      contratos_marco: this.formUser.get('contratos_marco').value,
+    };
+    console.log('REQUEST', request);
+
+    this.userFacade.postUserNew(request);
   }
 }
