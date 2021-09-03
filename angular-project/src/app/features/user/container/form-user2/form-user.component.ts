@@ -31,6 +31,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
   ModalDataPermissions = [];
 
   formControls = {
+    id: new FormControl(null),
     username: new FormControl(null, [Validators.required, this.noWhitespace]),
     nombres: new FormControl(null, [Validators.required, this.noWhitespace]),
     apellidos: new FormControl(null, [Validators.required, this.noWhitespace]),
@@ -89,7 +90,9 @@ export class FormUser2Component implements OnInit, OnDestroy {
         .subscribe(([user, proveedores]) => {
           if (user) {
             console.log(user);
+            this.formUser.get('id').setValue(user.id);
             this.formUser.get('username').setValue(user.username);
+            this.formUser.get('username').disable();
             this.formUser.get('nombres').setValue(user.nombres);
             this.formUser.get('apellidos').setValue(user.apellidos);
             this.formUser.get('email').setValue(user.email);
@@ -102,11 +105,17 @@ export class FormUser2Component implements OnInit, OnDestroy {
             } else {
               this.formUser.get('provider').setValue('contratista');
             }
-            this.formUser.get('proveedor_id').setValue(user.proveedor_id);
-            this.formUser.get('area_id').setValue(user.area_id);
-            this.formUser
-              .get('contratos_marco')
-              .setValue(user.contratos_marco.map(contrato => contrato.id));
+            setTimeout(() => {
+              this.formUser.get('proveedor_id').setValue(user.proveedor_id);
+            }, 1000);
+            setTimeout(() => {
+              this.formUser.get('area_id').setValue(user.area_id);
+            }, 1000);
+            setTimeout(() => {
+              this.formUser
+                .get('contratos_marco')
+                .setValue(user.contratos_marco.map(contrato => contrato.id));
+            }, 1000);
             this.formUser
               .get('perfiles')
               .setValue(user.perfiles.map(perfil => perfil.id));
@@ -325,8 +334,12 @@ export class FormUser2Component implements OnInit, OnDestroy {
   save(): void {
     let request: UserPostRequest;
     const perfiles = this.formUser.get('perfiles').value;
+    let id = null;
+    if (this.formUser.get('id').value !== null) {
+      id = +this.formUser.get('id').value;
+    }
     request = {
-      id: null,
+      id,
       username: this.formUser.get('username').value,
       nombres: this.formUser.get('nombres').value,
       apellidos: this.formUser.get('apellidos').value,
@@ -342,8 +355,13 @@ export class FormUser2Component implements OnInit, OnDestroy {
       })),
       contratos_marco: this.formUser.get('contratos_marco').value,
     };
+
     console.log('REQUEST', request);
 
-    this.userFacade.postUserNew(request);
+    if (id !== null) {
+      this.userFacade.editUserNew(request);
+    } else {
+      this.userFacade.postUserNew(request);
+    }
   }
 }

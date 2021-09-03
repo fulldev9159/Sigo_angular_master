@@ -103,6 +103,10 @@ export class UserFacade {
   public editUser(data): void {
     this.store.dispatch(userActions.editUser(data));
   }
+
+  public editUserNew(request: UserPostRequest): void {
+    this.store.dispatch(userActions.editUserNew({ request }));
+  }
   // USER EDIT
 
   // FORM

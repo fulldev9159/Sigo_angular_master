@@ -26,7 +26,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'form-user',
+        path: 'form-user2',
         component: FormUserComponent,
         canActivate: [NgxPermissionsGuard],
         data: {
@@ -39,7 +39,7 @@ const routes: Routes = [
       },
       {
         path: 'form-user/:id',
-        component: FormUserComponent,
+        component: FormUser2Component,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
@@ -50,7 +50,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'form-user2',
+        path: 'form-user',
         component: FormUser2Component,
         canActivate: [NgxPermissionsGuard],
         data: {

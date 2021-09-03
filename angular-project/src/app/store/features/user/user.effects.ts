@@ -227,6 +227,18 @@ export class UserEffects {
     )
   );
 
+  editUserNew$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.editUserNew),
+      concatMap(data =>
+        this.userService.editUser(data.request).pipe(
+          map((res: any) => userActions.editUserSuccessNew()),
+          catchError(err => of(userActions.editUserErrorNew({ error: err })))
+        )
+      )
+    )
+  );
+
   notifyAfterpostUserNewValidationSuccess$ = createEffect(
     () =>
       this.actions$.pipe(

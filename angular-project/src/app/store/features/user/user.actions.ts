@@ -188,6 +188,20 @@ export const postUserErrorNew = createAction(
   props<{ error: any }>()
 );
 
+export const editUserNew = createAction(
+  '[User Post] EDIT User New',
+  props<{ request: UserPostRequest }>()
+);
+
+export const editUserSuccessNew = createAction(
+  '[User Post] EDIT User New Success'
+);
+
+export const editUserErrorNew = createAction(
+  '[User Post] Edit User New Error',
+  props<{ error: any }>()
+);
+
 export const setFormUser = createAction(
   '[Set FormUser] SET FormUser',
   props<{ form: Model.Form }>()

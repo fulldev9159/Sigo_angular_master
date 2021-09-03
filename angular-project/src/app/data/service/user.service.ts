@@ -97,6 +97,19 @@ export class UserService {
       );
   }
 
+  editUser(request: UserPostRequest): Observable<number> {
+    return this.http
+      .post<UserPostResponse>(`${this.apiUrl}/usuario/edit`, request)
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.id;
+        })
+      );
+  }
+
   getUsuario(usuario_id: number): Observable<UserWithDetail> {
     return this.http
       .post<UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
