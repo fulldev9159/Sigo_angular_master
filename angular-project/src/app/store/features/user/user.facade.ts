@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Model from './user.model';
-import { UserPostRequest } from '@data';
+import { UserPostRequest, UserWithDetail } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -122,11 +122,23 @@ export class UserFacade {
     this.store.dispatch(userActions.resetArea());
   }
 
+  public resetSingleUser(): void {
+    this.store.dispatch(userActions.resetUsuarioEdit());
+  }
+
   public resetContratos(): void {
     this.store.dispatch(userActions.resetContratos());
   }
 
   public resetSuperiores(): void {
     this.store.dispatch(userActions.resetSuperiores());
+  }
+
+  public getSingleUsuario(id: number): void {
+    this.store.dispatch(userActions.getSingleUsuario({ id }));
+  }
+
+  public getSingleUsuario$(): Observable<UserWithDetail> {
+    return this.store.select(userSelectors.getSingleUser);
   }
 }

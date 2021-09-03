@@ -67,3 +67,39 @@ export interface UserPostResponse {
     responseCode: number;
   };
 }
+
+export interface DetalleUsuarioResponse {
+  data: DetalleUsuario;
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface DetalleUsuario {
+  contratos_marco: ContratoMarco[];
+  perfiles: PerfilUser[];
+}
+
+export interface ContratoMarco {
+  id: number;
+  nombre: string;
+  tipo_codigo: number;
+  tipo_glosa: string;
+}
+
+export interface PerfilUser {
+  id: number;
+  descripcion: string;
+  nombre: string;
+  persona_a_cargo_id: number;
+  persona_a_cargo_nombre: string;
+  superior_descripcion: string;
+  superior_id: number;
+}
+
+export interface UserWithDetail extends User {
+  contratos_marco: ContratoMarco[];
+  perfiles: PerfilUser[];
+}

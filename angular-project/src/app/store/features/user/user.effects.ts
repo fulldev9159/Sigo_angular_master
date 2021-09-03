@@ -12,7 +12,7 @@ import * as userActions from './user.actions';
 import { environment } from '@environment';
 import * as Data from '@data';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { UserPostRequest } from '@data';
+import { UserPostRequest, UserWithDetail } from '@data';
 @Injectable()
 export class UserEffects {
   constructor(
@@ -249,6 +249,25 @@ export class UserEffects {
         this.http.post(`${environment.api}/usuario/edit`, data.user).pipe(
           map((res: any) => userActions.editUserSuccess()),
           catchError(err => of(userActions.editUserError({ error: err })))
+        )
+      )
+    )
+  );
+
+  getUserData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getSingleUsuario),
+      concatMap(data =>
+        this.userService.getUsuario(data.id).pipe(
+          map((user: UserWithDetail) =>
+            userActions.getSingleUsuarioSuccess({
+              user,
+            })
+          ),
+          catchError(err => {
+            console.error(`could not retrieve the user [${err.message}]`);
+            return of(userActions.getSingleUsuarioError({ error: err }));
+          })
         )
       )
     )

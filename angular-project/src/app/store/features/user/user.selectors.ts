@@ -39,3 +39,8 @@ export const getForm = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.form
 );
+
+export const getSingleUser = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.user
+);

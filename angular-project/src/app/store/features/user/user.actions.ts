@@ -1,4 +1,4 @@
-import { UserPostRequest } from '@data';
+import { UserPostRequest, UserWithDetail } from '@data';
 import { createAction, props } from '@ngrx/store';
 import * as Model from './user.model';
 
@@ -193,8 +193,23 @@ export const setFormUser = createAction(
   props<{ form: Model.Form }>()
 );
 
+export const getSingleUsuario = createAction(
+  '[User Get] GET single usuario',
+  props<{ id: number }>()
+);
+export const getSingleUsuarioSuccess = createAction(
+  '[User Get] GET single Usuario Success',
+  props<{ user: UserWithDetail }>()
+);
+
+export const getSingleUsuarioError = createAction(
+  '[User Get] GET single Usuario Error',
+  props<{ error: any }>()
+);
+
 export const resetData = createAction('[ResetData] ResetData');
 export const resetArea = createAction('[User] Reset Area');
 export const resetContratos = createAction('[User] Reset Contrartos');
 export const resetSuperiores = createAction('[User] Reset Superiores');
+export const resetUsuarioEdit = createAction('[User] Reset Usuario Edit');
 // USER ACTIONS

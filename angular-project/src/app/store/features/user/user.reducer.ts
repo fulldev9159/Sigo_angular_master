@@ -1,3 +1,4 @@
+import { UserWithDetail } from '@data';
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Model from './user.model';
@@ -12,6 +13,7 @@ export interface StateUser {
   superiores: Model.User[];
   contract: Model.Contract[];
   form: Model.Form;
+  user: UserWithDetail;
 }
 
 export const initialStateUser: StateUser = {
@@ -22,6 +24,7 @@ export const initialStateUser: StateUser = {
   superiores: [],
   contract: [],
   form: null,
+  user: null,
 };
 
 export const reducerUser = createReducer(
@@ -102,5 +105,14 @@ export const reducerUser = createReducer(
   on(UserActions.resetSuperiores, (state, payload) => ({
     ...state,
     superiores: [],
+  })),
+  on(UserActions.resetUsuarioEdit, (state, payload) => ({
+    ...state,
+    user: null,
+  })),
+  on(UserActions.getSingleUsuarioSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    cubicacionError: null,
   }))
 );

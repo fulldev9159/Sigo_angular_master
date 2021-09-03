@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
@@ -64,13 +64,55 @@ export class FormUser2Component implements OnInit, OnDestroy {
     private userFacade: UserFacade,
     private router: Router,
     private profileFacade: ProfileFacade,
-    private snackService: SnackBarService
+    private snackService: SnackBarService,
+    private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
     this.userFacade.resetData();
     this.initObservables();
     this.initFormControlsEvents();
     this.initData();
+
+    this.subscription.add(
+      this.route.paramMap.subscribe(params => {
+        const id = params.get('id');
+        if (id !== null) {
+          const userID = +params.get('id');
+          this.userFacade.getSingleUsuario(userID);
+        }
+      })
+    );
+    this.subscription.add(
+      this.userFacade
+        .getSingleUsuario$()
+        .pipe(withLatestFrom(this.providers$))
+        .subscribe(([user, proveedores]) => {
+          if (user) {
+            console.log(user);
+            this.formUser.get('username').setValue(user.username);
+            this.formUser.get('nombres').setValue(user.nombres);
+            this.formUser.get('apellidos').setValue(user.apellidos);
+            this.formUser.get('email').setValue(user.email);
+            this.formUser.get('rut').setValue(user.rut);
+            this.formUser.get('celular').setValue(user.celular);
+            // ToDO: Que el endpoint de get proveedores retorne si este es interno o externo
+            // const proveedor = proveedores.find(proveedor=>{proveedor.id===user.proveedor_id})
+            if (user.proveedor_id === 1) {
+              this.formUser.get('provider').setValue('movistar');
+            } else {
+              this.formUser.get('provider').setValue('contratista');
+            }
+            this.formUser.get('proveedor_id').setValue(user.proveedor_id);
+            this.formUser.get('area_id').setValue(user.area_id);
+            this.formUser
+              .get('contratos_marco')
+              .setValue(user.contratos_marco.map(contrato => contrato.id));
+            this.formUser
+              .get('perfiles')
+              .setValue(user.perfiles.map(perfil => perfil.id));
+          }
+        })
+    );
   }
 
   ngOnDestroy(): void {
@@ -295,7 +337,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
       proveedor_id: +this.formUser.get('proveedor_id').value,
       area_id: +this.formUser.get('area_id').value,
       perfiles: perfiles.map(perfil_id => ({
-        perfil_id: perfil_id,
+        perfil_id,
         persona_a_cargo_id: 1,
       })),
       contratos_marco: this.formUser.get('contratos_marco').value,

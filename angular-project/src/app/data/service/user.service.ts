@@ -4,7 +4,12 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import { User, UsersResponse } from '../model/user';
-import { UserPostRequest, UserPostResponse } from '@data';
+import {
+  UserPostRequest,
+  UserPostResponse,
+  DetalleUsuarioResponse,
+  UserWithDetail,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -88,6 +93,38 @@ export class UserService {
             this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.id;
+        })
+      );
+  }
+
+  getUsuario(usuario_id: number): Observable<UserWithDetail> {
+    return this.http
+      .post<UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
+      .pipe(
+        concatMap((users: UsersResponse) => {
+          const userFound = users.data.items.find(
+            user => user.id === usuario_id
+          );
+          if (userFound) {
+            return this.http
+              .post<DetalleUsuarioResponse>(
+                `${this.apiUrl}/usuario/detalle/get`,
+                {
+                  usuario_id,
+                }
+              )
+              .pipe(
+                map((detalleUserResponse: DetalleUsuarioResponse) => {
+                  const detalle = detalleUserResponse.data;
+                  const response: UserWithDetail = {
+                    ...userFound,
+                    ...detalle,
+                  };
+                  return response;
+                })
+              );
+          }
+          return throwError(new Error(`no user found`));
         })
       );
   }
