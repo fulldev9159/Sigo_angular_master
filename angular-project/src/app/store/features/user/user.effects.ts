@@ -3,15 +3,25 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Response } from '@storeOT/model';
 import * as UserModel from '@storeOT/features/user/user.model';
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
 import { of } from 'rxjs';
 
 import * as userActions from './user.actions';
 import { environment } from '@environment';
-
+import * as Data from '@data';
+import { SnackBarService } from '@utilsSIGO/snack-bar';
+import { UserPostRequest, UserWithDetail } from '@data';
 @Injectable()
 export class UserEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private userService: Data.UserService,
+    private snackService: SnackBarService,
+    private router: Router
+  ) {}
 
   getUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -22,6 +32,18 @@ export class UserEffects {
             userActions.getUserSuccess({ user: res.data.items })
           ),
           catchError(err => of(userActions.getUserError({ error: err })))
+        )
+      )
+    )
+  );
+
+  getUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getUsers),
+      concatMap(({ proveedor_id, area_id, contratos_id }) =>
+        this.userService.getUsers(proveedor_id, area_id, contratos_id).pipe(
+          map((users: any) => userActions.getUsersSuccess({ users })),
+          catchError(error => of(userActions.getUsersError({ error })))
         )
       )
     )
@@ -193,6 +215,45 @@ export class UserEffects {
     )
   );
 
+  postUserNew$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.postUserNew),
+      concatMap(data =>
+        this.userService.postUser(data.request).pipe(
+          map((res: any) => userActions.postUserSuccessNew()),
+          catchError(err => of(userActions.postUserErrorNew({ error: err })))
+        )
+      )
+    )
+  );
+
+  editUserNew$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.editUserNew),
+      concatMap(data =>
+        this.userService.editUser(data.request).pipe(
+          map((res: any) => userActions.editUserSuccessNew()),
+          catchError(err => of(userActions.editUserErrorNew({ error: err })))
+        )
+      )
+    )
+  );
+
+  notifyAfterpostUserNewValidationSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(userActions.postUserSuccessNew),
+        tap(data => {
+          this.snackService.showMessage(
+            `Datos de usuario guardados con Éxito!`,
+            ''
+          );
+          this.router.navigate(['/app/user/list-user']);
+        })
+      ),
+    { dispatch: false }
+  );
+
   editUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.editUser),
@@ -200,6 +261,25 @@ export class UserEffects {
         this.http.post(`${environment.api}/usuario/edit`, data.user).pipe(
           map((res: any) => userActions.editUserSuccess()),
           catchError(err => of(userActions.editUserError({ error: err })))
+        )
+      )
+    )
+  );
+
+  getUserData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getSingleUsuario),
+      concatMap(data =>
+        this.userService.getUsuario(data.id).pipe(
+          map((user: UserWithDetail) =>
+            userActions.getSingleUsuarioSuccess({
+              user,
+            })
+          ),
+          catchError(err => {
+            console.error(`could not retrieve the user [${err.message}]`);
+            return of(userActions.getSingleUsuarioError({ error: err }));
+          })
         )
       )
     )

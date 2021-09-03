@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { Response } from '@storeOT/model';
-import { TipoNumeroInterno } from '../model';
+import { TipoNumeroInterno } from '../model/tipo-numero-interno';
 
 @Injectable({
   providedIn: 'root',

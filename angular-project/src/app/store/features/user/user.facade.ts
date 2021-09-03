@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Model from './user.model';
+import { UserPostRequest, UserWithDetail } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -59,12 +60,18 @@ export class UserFacade {
   // PROVIDERS
 
   // HIGHERS
-  public getHighers(data): void {
-    this.store.dispatch(userActions.getHigher(data));
+  public getSuperiores(
+    proveedor_id: number,
+    area_id: number,
+    contratos_id: number[]
+  ): void {
+    this.store.dispatch(
+      userActions.getUsers({ proveedor_id, area_id, contratos_id })
+    );
   }
 
-  public getHighers$(): Observable<Model.Higher[]> {
-    return this.store.select(userSelectors.getHighers);
+  public getSuperiores$(): Observable<Model.User[]> {
+    return this.store.select(userSelectors.getSuperiores);
   }
   // HIGHERS
 
@@ -86,11 +93,19 @@ export class UserFacade {
   public postUser(data): void {
     this.store.dispatch(userActions.postUser(data));
   }
+
+  public postUserNew(request: UserPostRequest): void {
+    this.store.dispatch(userActions.postUserNew({ request }));
+  }
   // USER POST
 
   // USER EDIT
   public editUser(data): void {
     this.store.dispatch(userActions.editUser(data));
+  }
+
+  public editUserNew(request: UserPostRequest): void {
+    this.store.dispatch(userActions.editUserNew({ request }));
   }
   // USER EDIT
 
@@ -105,5 +120,29 @@ export class UserFacade {
 
   public resetData(): void {
     this.store.dispatch(userActions.resetData());
+  }
+
+  public resetArea(): void {
+    this.store.dispatch(userActions.resetArea());
+  }
+
+  public resetSingleUser(): void {
+    this.store.dispatch(userActions.resetUsuarioEdit());
+  }
+
+  public resetContratos(): void {
+    this.store.dispatch(userActions.resetContratos());
+  }
+
+  public resetSuperiores(): void {
+    this.store.dispatch(userActions.resetSuperiores());
+  }
+
+  public getSingleUsuario(id: number): void {
+    this.store.dispatch(userActions.getSingleUsuario({ id }));
+  }
+
+  public getSingleUsuario$(): Observable<UserWithDetail> {
+    return this.store.select(userSelectors.getSingleUser);
   }
 }

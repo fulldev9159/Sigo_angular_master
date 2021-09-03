@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormUserComponent } from './container/form-user/form-user.component';
+import { FormUser2Component } from './container/form-user2/form-user.component';
+
 import { ListUserComponent } from './container/list-user/list-user.component';
 import { UserComponent } from './user.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
@@ -24,7 +26,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'form-user',
+        path: 'form-user2',
         component: FormUserComponent,
         canActivate: [NgxPermissionsGuard],
         data: {
@@ -37,7 +39,31 @@ const routes: Routes = [
       },
       {
         path: 'form-user/:id',
-        component: FormUserComponent,
+        component: FormUser2Component,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'PERFIL_EDITAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'form-user',
+        },
+      },
+      {
+        path: 'form-user',
+        component: FormUser2Component,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'PERFIL_CREAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'form-user',
+        },
+      },
+      {
+        path: 'form-user2/:id',
+        component: FormUser2Component,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {

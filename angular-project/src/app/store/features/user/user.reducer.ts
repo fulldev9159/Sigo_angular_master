@@ -1,3 +1,4 @@
+import { UserWithDetail } from '@data';
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Model from './user.model';
@@ -9,9 +10,10 @@ export interface StateUser {
   itemsDetail: Model.UserDetail;
   areas: Model.Area[];
   providers: Model.Provider[];
-  highers: Model.Higher[];
+  superiores: Model.User[];
   contract: Model.Contract[];
   form: Model.Form;
+  user: UserWithDetail;
 }
 
 export const initialStateUser: StateUser = {
@@ -19,9 +21,10 @@ export const initialStateUser: StateUser = {
   itemsDetail: { perfiles: [], contratos_marco: [] },
   areas: [],
   providers: [],
-  highers: [],
+  superiores: [],
   contract: [],
   form: null,
+  user: null,
 };
 
 export const reducerUser = createReducer(
@@ -31,6 +34,12 @@ export const reducerUser = createReducer(
   on(UserActions.getUserSuccess, (state, payload) => ({
     ...state,
     items: payload.user,
+  })),
+
+  on(UserActions.getUsers, state => state),
+  on(UserActions.getUsersSuccess, (state, payload) => ({
+    ...state,
+    superiores: payload.users,
   })),
 
   on(UserActions.getUserDetail, state => state),
@@ -84,5 +93,26 @@ export const reducerUser = createReducer(
   })),
   on(UserActions.resetData, (state, payload) => ({
     ...initialStateUser,
+  })),
+  on(UserActions.resetArea, (state, payload) => ({
+    ...state,
+    areas: [],
+  })),
+  on(UserActions.resetContratos, (state, payload) => ({
+    ...state,
+    contract: [],
+  })),
+  on(UserActions.resetSuperiores, (state, payload) => ({
+    ...state,
+    superiores: [],
+  })),
+  on(UserActions.resetUsuarioEdit, (state, payload) => ({
+    ...state,
+    user: null,
+  })),
+  on(UserActions.getSingleUsuarioSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    cubicacionError: null,
   }))
 );

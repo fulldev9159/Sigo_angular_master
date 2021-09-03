@@ -2,7 +2,6 @@ export interface Provider {
   id: number;
   nombre: string;
   rut: number;
-  dv: string;
   email: string;
   telefono: string;
   direccion: string;
@@ -73,7 +72,7 @@ export interface Contract {
   fecha_fin: string;
   tipo_codigo: number;
   tipo_glosa: string;
-  estado: boolean;
+  activo: boolean;
 }
 export interface UserDetail {
   perfiles: Perfil[];
@@ -104,4 +103,9 @@ export interface PerfilFormUser {
 
 export interface ActivateUserResponse {
   id: number;
+}
+
+export interface PerfilSuperiorFormUser {
+  perfil_id: number;
+  personas_superiores: User[];
 }
