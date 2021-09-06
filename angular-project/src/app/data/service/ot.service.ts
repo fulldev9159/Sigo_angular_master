@@ -18,6 +18,7 @@ import {
   FinalizeOTJobsResponse,
   ApproveOTMinutesGenerationResponse,
   RejectOTMinutesGenerationResponse,
+  ApprovalPagoOTResponse,
 } from '../model';
 
 @Injectable({
@@ -233,18 +234,35 @@ export class OTService {
   //   return of({});
   // }
 
-  authorizePayments(perfil_id: number, otID: number): Observable<any> {
+  authorizePayments(
+    perfil_id: number,
+    otID: number
+  ): Observable<ApprovalPagoOTResponse> {
     console.log('autorizar pagos. no implementado aun', {
       ot_id: otID,
     });
-    return of({});
+    return this.http.post<ApprovalPagoOTResponse>(
+      `${this.apiUrl}/ingreot/ot/pago/accept`,
+      {
+        ot_id: otID,
+      }
+    );
+
+    // return of({});
   }
 
   rejectPayments(perfil_id: number, otID: number): Observable<any> {
     console.log('rechazar pagos. no implementado aun', {
       ot_id: otID,
     });
-    return of({});
+    return this.http.post<RejectOTMinutesGenerationResponse>(
+      `${this.apiUrl}/ingreot/ot/pago/reject`,
+      {
+        ot_id: otID,
+        motivo: 'Vacío',
+      }
+    );
+    // return of({});
   }
 
   finalizeOT(perfil_id: number, otID: number): Observable<any> {
