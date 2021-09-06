@@ -49,6 +49,17 @@ export interface ApprovalOTResponse {
   };
 }
 
+export interface ApprovalPagoOTResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
 export interface RejectionOTResponse {
   data: {
     id: number;
