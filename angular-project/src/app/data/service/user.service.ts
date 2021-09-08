@@ -24,6 +24,19 @@ export class UserService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
+  getAllUsers(): Observable<User[]> {
+    return this.http
+      .post<UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
+      .pipe(
+        map((res: UsersResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.items;
+        })
+      );
+  }
+
   getUsers(
     proveedor_id: number,
     area_id: number,

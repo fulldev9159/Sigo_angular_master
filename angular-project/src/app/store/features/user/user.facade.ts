@@ -5,20 +5,21 @@ import { Observable } from 'rxjs';
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Model from './user.model';
+import * as Data from '@data';
 import { UserPostRequest, UserWithDetail } from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserFacade {
-  constructor(private store: Store<Model.User>) {}
+  constructor(private store: Store<Data.User>) {}
 
   // USER
-  public getUsers(): void {
-    this.store.dispatch(userActions.getUser());
+  public getAllUsers(): void {
+    this.store.dispatch(userActions.getAllUser());
   }
 
-  public getUsers$(): Observable<Model.User[]> {
+  public getUsers$(): Observable<Data.User[]> {
     return this.store.select(userSelectors.getUser);
   }
 
@@ -70,7 +71,7 @@ export class UserFacade {
     );
   }
 
-  public getSuperiores$(): Observable<Model.User[]> {
+  public getSuperiores$(): Observable<Data.User[]> {
     return this.store.select(userSelectors.getSuperiores);
   }
   // HIGHERS

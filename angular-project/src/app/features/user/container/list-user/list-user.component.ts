@@ -261,7 +261,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userFacade.getUsers();
+    this.userFacade.getAllUsers();
     this.items$ = this.userFacade.getUsers$();
   }
 

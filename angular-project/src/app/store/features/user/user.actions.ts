@@ -1,18 +1,19 @@
 import { UserPostRequest, UserWithDetail } from '@data';
 import { createAction, props } from '@ngrx/store';
 import * as Model from './user.model';
+import * as Data from '@data';
 
 // USER ACTIONS
 
-export const getUser = createAction('[User GetAll] GET User');
+export const getAllUser = createAction('[User GetAll] GET All User');
 
-export const getUserSuccess = createAction(
-  '[User GetAll] GET User Success',
-  props<{ user: Model.User[] }>()
+export const getAllUserSuccess = createAction(
+  '[User GetAll] GET All User Success',
+  props<{ users: Data.User[] }>()
 );
 
-export const getUserError = createAction(
-  '[User GetAll] GET User Error',
+export const getAllUserError = createAction(
+  '[User GetAll] GET All User Error',
   props<{ error: any }>()
 );
 
@@ -23,7 +24,7 @@ export const getUsers = createAction(
 
 export const getUsersSuccess = createAction(
   '[Users] GET Users Success',
-  props<{ users: Model.User[] }>()
+  props<{ users: Data.User[] }>()
 );
 
 export const getUsersError = createAction(
@@ -35,7 +36,7 @@ export const getUserById = createAction('[User GetUserById] GET User');
 
 export const getUserByIdSuccess = createAction(
   '[User GetUserById] GET User Success',
-  props<{ user: Model.User[] }>()
+  props<{ user: Data.User[] }>()
 );
 
 export const getUserByIdError = createAction(
@@ -150,7 +151,7 @@ export const activateUserError = createAction(
 
 export const editUser = createAction(
   '[User EditById] EDIT User',
-  props<{ user: Model.User }>()
+  props<{ user: Data.User }>()
 );
 
 export const editUserSuccess = createAction(

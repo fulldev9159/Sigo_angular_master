@@ -7,12 +7,8 @@ import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-import {
-  Provider,
-  Area,
-  Contract,
-  User,
-} from '@storeOT/features/user/user.model';
+import { Provider, Area, Contract } from '@storeOT/features/user/user.model';
+import * as Data from '@data';
 import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
@@ -45,12 +41,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
     contratos_marco: new FormControl(null, [Validators.required]),
     perfiles: new FormControl(null, [Validators.required]),
     superior: new FormControl(null, Validators.required),
-    // new FormArray([
-    //   new FormGroup({
-    //     perfil_id: new FormControl(null, [Validators.required]),
-    //     persona_a_cargo_id: new FormControl(null, []),
-    //   }),
-    // ]),
   };
 
   formUser: FormGroup = new FormGroup(this.formControls);
@@ -59,7 +49,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   areas$: Observable<Area[]>;
   contracts$: Observable<Contract[]>;
   profiles$: Observable<Profile[]>;
-  superiores$: Observable<User[]>;
+  superiores$: Observable<Data.User[]>;
 
   constructor(
     private userFacade: UserFacade,
@@ -252,7 +242,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkSuperioresAndEnable(usuarios: User[]): void {
+  checkSuperioresAndEnable(usuarios: Data.User[]): void {
     if (usuarios.length > 0) {
       this.formUser.get('superior').enable();
     } else {

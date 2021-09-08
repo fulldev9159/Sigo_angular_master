@@ -2,15 +2,16 @@ import { UserWithDetail } from '@data';
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Model from './user.model';
+import * as Data from '@data';
 
 export const UserFeatureKey = 'user';
 
 export interface StateUser {
-  items: Model.User[];
+  items: Data.User[];
   itemsDetail: Model.UserDetail;
   areas: Model.Area[];
   providers: Model.Provider[];
-  superiores: Model.User[];
+  superiores: Data.User[];
   contract: Model.Contract[];
   form: Model.Form;
   user: UserWithDetail;
@@ -30,10 +31,10 @@ export const initialStateUser: StateUser = {
 export const reducerUser = createReducer(
   initialStateUser,
 
-  on(UserActions.getUser, state => state),
-  on(UserActions.getUserSuccess, (state, payload) => ({
+  on(UserActions.getAllUser, state => state),
+  on(UserActions.getAllUserSuccess, (state, payload) => ({
     ...state,
-    items: payload.user,
+    items: payload.users,
   })),
 
   on(UserActions.getUsers, state => state),

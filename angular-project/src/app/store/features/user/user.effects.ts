@@ -23,15 +23,13 @@ export class UserEffects {
     private router: Router
   ) {}
 
-  getUser$ = createEffect(() =>
+  getAllUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(userActions.getUser),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}/usuario/get_all`, {}).pipe(
-          map((res: any) =>
-            userActions.getUserSuccess({ user: res.data.items })
-          ),
-          catchError(err => of(userActions.getUserError({ error: err })))
+      ofType(userActions.getAllUser),
+      concatMap(() =>
+        this.userService.getAllUsers().pipe(
+          map((users: Data.User[]) => userActions.getAllUserSuccess({ users })),
+          catchError(err => of(userActions.getAllUserError({ error: err })))
         )
       )
     )
@@ -77,7 +75,7 @@ export class UserEffects {
             map((res: any) =>
               userActions.getUserDetailSuccess({ userDetail: res.data })
             ),
-            catchError(err => of(userActions.getUserError({ error: err })))
+            catchError(err => of(userActions.getAllUserError({ error: err })))
           )
       )
     )

@@ -33,22 +33,6 @@ export interface Higher {
   activo: string;
 }
 
-export interface User {
-  id: number;
-  username: string;
-  nombres: string;
-  apellidos: string;
-  rut: string;
-  firma: string;
-  celular: string;
-  email: string;
-  proveedor_id: number;
-  area_id: number;
-  perfiles: PerfilFormUser[];
-  contratos_marco: number[];
-  activo: boolean;
-}
-
 export interface Form {
   id: number;
   username: string;
@@ -103,9 +87,4 @@ export interface PerfilFormUser {
 
 export interface ActivateUserResponse {
   id: number;
-}
-
-export interface PerfilSuperiorFormUser {
-  perfil_id: number;
-  personas_superiores: User[];
 }
