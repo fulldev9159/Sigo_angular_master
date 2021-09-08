@@ -34,7 +34,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
       title: '',
       searchText: 'buscar...',
       paginator: true,
-      actionsType: 'Menu',
+      actionsType: 'Buttons',
     },
     body: {
       headers: [
@@ -43,6 +43,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'username',
           header: 'username',
+          // width: '10%',
           editable: false,
         },
         {
@@ -50,6 +51,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'TEXT',
           sort: 'rut',
           header: 'rut',
+          // width: '10%',
           editable: false,
         },
         {
@@ -57,6 +59,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'TEXT-TITLECASE',
           sort: 'nombres',
           header: 'nombres',
+          // width: '10%',
           editable: false,
         },
         {
@@ -64,6 +67,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'TEXT-TITLECASE',
           sort: 'apellidos',
           header: 'apellidos',
+          width: '8%',
           editable: false,
         },
         // {
@@ -85,6 +89,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'TEXT-TITLECASE',
           sort: 'proveedor_nombre',
           header: 'proveedor_nombre',
+          // width: '10%',
           editable: false,
         },
         {
@@ -92,6 +97,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           type: 'TEXT-TITLECASE',
           sort: 'area_nombre',
           header: 'area_nombre',
+          // width: '10%',
           editable: false,
         },
         {
@@ -101,6 +107,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           header: 'activo',
           booleantrue: 'Activo',
           booleanfalse: 'Bloqueado',
+          width: '5%',
           editable: false,
         },
         {
@@ -122,8 +129,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
       ],
       actions: [
         {
-          icon: 'p-button-icon pi pi-pencil',
-          class: 'p-button-rounded p-button-warning p-mr-2',
+          icon: ' pi pi-pencil',
+          class: 'p-button-text p-button-sm',
           label: 'Editar',
           onClick: (event: Event, item) => {
             this.item = item;
@@ -131,8 +138,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
           },
         },
         {
-          icon: 'p-button-icon pi pi-eye',
-          class: 'p-button-rounded p-button-info p-mr-2',
+          icon: 'pi pi-eye',
+          class: 'p-button-text p-button-sm',
           label: 'Detalle',
           onClick: (event: Event, item) => {
             this.email = item.email;
@@ -143,8 +150,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
           },
         },
         {
-          icon: 'p-button-icon pi pi-trash',
-          class: 'p-button-rounded p-button-danger',
+          icon: 'pi pi-trash',
+          class: 'p-button-text p-button-danger p-button-sm',
           label: 'Eliminar',
           onClick: (event: Event, item) => {
             // if (item.eliminable) {
@@ -171,8 +178,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
           },
         },
         {
-          icon: 'p-button-icon pi pi-ban',
-          class: 'p-button-rounded p-button-danger',
+          icon: ' pi pi-ban',
+          class: 'p-button-text p-button-danger p-button-sm',
           labelVariable: true,
           label: 'activo',
           onClick: (event: Event, item) => {

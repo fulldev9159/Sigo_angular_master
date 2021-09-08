@@ -7,7 +7,7 @@ export const selectUser = createFeatureSelector<fromUser.StateUser>(
 
 export const getUser = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.items
+  (state: fromUser.StateUser) => state.users
 );
 
 export const getUserDetail = createSelector(

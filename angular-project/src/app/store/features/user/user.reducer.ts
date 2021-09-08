@@ -7,7 +7,7 @@ import * as Data from '@data';
 export const UserFeatureKey = 'user';
 
 export interface StateUser {
-  items: Data.User[];
+  users: Data.User[];
   itemsDetail: Model.UserDetail;
   areas: Model.Area[];
   providers: Model.Provider[];
@@ -18,7 +18,7 @@ export interface StateUser {
 }
 
 export const initialStateUser: StateUser = {
-  items: [],
+  users: [],
   itemsDetail: { perfiles: [], contratos_marco: [] },
   areas: [],
   providers: [],
@@ -34,7 +34,7 @@ export const reducerUser = createReducer(
   on(UserActions.getAllUser, state => state),
   on(UserActions.getAllUserSuccess, (state, payload) => ({
     ...state,
-    items: payload.users,
+    users: payload.users,
   })),
 
   on(UserActions.getUsers, state => state),
@@ -73,12 +73,12 @@ export const reducerUser = createReducer(
   })),
   on(UserActions.deleteUserSuccess, (state, payload) => ({
     ...state,
-    items: [...state.items.filter(i => +i.id !== +payload.userId)],
+    users: [...state.users.filter(i => +i.id !== +payload.userId)],
   })),
   on(UserActions.activateUserSuccess, (state, payload) => ({
     ...state,
-    items: [
-      ...state.items.map(x => {
+    users: [
+      ...state.users.map(x => {
         const activo = payload.userId === x.id ? !x.activo : x.activo;
         return {
           ...x,
