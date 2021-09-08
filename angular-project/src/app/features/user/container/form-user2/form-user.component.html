@@ -101,13 +101,16 @@
                 <div>
                   <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="contracts$|async" formControlName="contratos_marco" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30">
                   </p-multiSelect>
+                  <div *ngIf="formControls.contratos_marco.invalid && (formControls.contratos_marco.dirty || formControls.contratos_marco.touched)">
+                    <p-message severity="error" text="Este campo es requerido"></p-message>
+                  </div>
                 </div>
               </div>
               <div class="col-md-6 col-xs-12">
                 <app-select [control]="formControls.superior" label="* Superior directo">
                   <ng-container options>
                     <option value="null" selected disabled>Seleccione persona</option>
-                    <option value="null">No posee superior</option>
+                    <option value="null">No posee superior directo</option>
                     <ng-container *ngFor="let superior of superiores$ | async">
                       <option [value]="superior.id">
                         {{ superior.nombres }} {{ superior.apellidos }}
@@ -128,6 +131,9 @@
               padding: 33px;">
                 <h5>Perfil</h5>
                 <p-multiSelect id="perfiles" name="perfiles" [style]="{'width':'100%'}" placeholder="Seleccionar perfiles a usar..." [options]="profiles$|async" formControlName="perfiles" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30"></p-multiSelect>
+                <div *ngIf="formControls.perfiles.invalid && (formControls.perfiles.dirty || formControls.perfiles.touched)">
+                  <p-message severity="error" text="Este campo es requerido"></p-message>
+                </div>
                 <!-- <div class="row justify-content-center" *ngFor="let perfil of profiles$|async">
                   <div class="col-1">
                     <p-checkbox name="group1" value="{{perfil.id}}" formControlName="perfiles"></p-checkbox>

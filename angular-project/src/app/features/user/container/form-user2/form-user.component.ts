@@ -42,8 +42,8 @@ export class FormUser2Component implements OnInit, OnDestroy {
     provider: new FormControl('movistar'),
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),
-    contratos_marco: new FormControl(null, []),
-    perfiles: new FormControl([]),
+    contratos_marco: new FormControl(null, [Validators.required]),
+    perfiles: new FormControl(null, [Validators.required]),
     superior: new FormControl(null, Validators.required),
     // new FormArray([
     //   new FormGroup({
@@ -179,6 +179,7 @@ export class FormUser2Component implements OnInit, OnDestroy {
     this.subscription.add(
       this.formUser.get('proveedor_id').valueChanges.subscribe(proveedor_id => {
         this.resetAreaFormControl();
+        this.resetContratosFormControl();
         if (proveedor_id !== null && proveedor_id !== undefined) {
           const radioProvider = this.formUser.get('provider').value;
           if (radioProvider === 'contratista') {
