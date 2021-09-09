@@ -8,7 +8,7 @@ export const UserFeatureKey = 'user';
 
 export interface StateUser {
   users: Data.User[];
-  itemsDetail: Model.UserDetail;
+  userDetail: Data.DetalleUsuario;
   areas: Model.Area[];
   providers: Model.Provider[];
   samecompanyusers: Data.User[];
@@ -19,7 +19,7 @@ export interface StateUser {
 
 export const initialStateUser: StateUser = {
   users: [],
-  itemsDetail: { perfiles: [], contratos_marco: [] },
+  userDetail: { perfiles: [], contratos_marco: [] },
   areas: [],
   providers: [],
   samecompanyusers: [],
@@ -46,7 +46,7 @@ export const reducerUser = createReducer(
   on(UserActions.getUserDetail, state => state),
   on(UserActions.getUserDetailSuccess, (state, payload) => ({
     ...state,
-    itemsDetail: payload.userDetail,
+    userDetail: payload.user_detail,
   })),
 
   on(UserActions.getArea, state => state),

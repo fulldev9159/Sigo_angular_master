@@ -58,10 +58,6 @@ export interface Contract {
   tipo_glosa: string;
   activo: boolean;
 }
-export interface UserDetail {
-  perfiles: Perfil[];
-  contratos_marco: Contrato[];
-}
 
 export interface Perfil {
   id: number;

@@ -12,7 +12,7 @@ export const getUser = createSelector(
 
 export const getUserDetail = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.itemsDetail
+  (state: fromUser.StateUser) => state.userDetail
 );
 
 export const getAreas = createSelector(

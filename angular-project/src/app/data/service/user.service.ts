@@ -3,12 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { User, UsersResponse } from '../model/user';
 import {
+  User,
+  UsersResponse,
   UserPostRequest,
   UserPostResponse,
   DetalleUsuarioResponse,
   UserWithDetail,
+  DetalleUsuario,
 } from '@data';
 
 @Injectable({
@@ -33,6 +35,21 @@ export class UserService {
             this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.items;
+        })
+      );
+  }
+
+  getUserDetail(usuario_id: number): Observable<DetalleUsuario> {
+    return this.http
+      .post<DetalleUsuarioResponse>(`${this.apiUrl}/usuario/detalle/get`, {
+        usuario_id,
+      })
+      .pipe(
+        map((res: DetalleUsuarioResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data;
         })
       );
   }

@@ -4,7 +4,7 @@ import * as Model from './user.model';
 import * as Data from '@data';
 
 // USER ACTIONS
-
+// Get All User
 export const getAllUser = createAction('[User GetAll] GET All User');
 
 export const getAllUserSuccess = createAction(
@@ -17,6 +17,7 @@ export const getAllUserError = createAction(
   props<{ error: any }>()
 );
 
+// Get Same Company Users
 export const getSameCompanyUsers = createAction(
   '[Users] GET Same Company Users',
   props<{ proveedor_id: number; area_id: number; contratos_id: number[] }>()
@@ -32,6 +33,7 @@ export const getSameCompanyUsersError = createAction(
   props<{ error: any }>()
 );
 
+// Get user by ID
 export const getUserById = createAction('[User GetUserById] GET User');
 
 export const getUserByIdSuccess = createAction(
@@ -44,14 +46,15 @@ export const getUserByIdError = createAction(
   props<{ error: any }>()
 );
 
+// Get User Detail
 export const getUserDetail = createAction(
   '[User getUserDetail] GET User Detail',
-  props<{ userId: number }>()
+  props<{ usuario_id: number }>()
 );
 
 export const getUserDetailSuccess = createAction(
   '[User getUserDetailSuccess] GET User Detail Success',
-  props<{ userDetail: Model.UserDetail }>()
+  props<{ user_detail: Data.DetalleUsuario }>()
 );
 
 export const getUserDetailError = createAction(

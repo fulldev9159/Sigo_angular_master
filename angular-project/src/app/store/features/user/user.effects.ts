@@ -12,7 +12,7 @@ import * as userActions from './user.actions';
 import { environment } from '@environment';
 import * as Data from '@data';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { UserPostRequest, UserWithDetail } from '@data';
+import { DetalleUsuario, UserPostRequest, UserWithDetail } from '@data';
 @Injectable()
 export class UserEffects {
   constructor(
@@ -42,7 +42,7 @@ export class UserEffects {
         this.userService
           .getSameCompanyUsers(proveedor_id, area_id, contratos_id)
           .pipe(
-            map((users: any) =>
+            map((users: Data.User[]) =>
               userActions.getSameCompanyUsersSuccess({ users })
             ),
             catchError(error =>
@@ -71,19 +71,15 @@ export class UserEffects {
 
   getUserDetail$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(userActions.getUserDetail)
-      // concatMap((data: any) =>
-      //   this.http
-      //     .post(`${environment.api}/usuario/detalle/get`, {
-      //       usuario_id: data.userId,
-      //     })
-      //     .pipe(
-      //       map((res: any) =>
-      //         userActions.getUserDetailSuccess({ userDetail: res.data })
-      //       ),
-      //       catchError(err => of(userActions.getAllUserError({ error: err })))
-      //     )
-      // )
+      ofType(userActions.getUserDetail),
+      concatMap(({ usuario_id }) =>
+        this.userService.getUserDetail(usuario_id).pipe(
+          map((user_detail: DetalleUsuario) =>
+            userActions.getUserDetailSuccess({ user_detail })
+          ),
+          catchError(error => of(userActions.getUserDetailError({ error })))
+        )
+      )
     )
   );
 

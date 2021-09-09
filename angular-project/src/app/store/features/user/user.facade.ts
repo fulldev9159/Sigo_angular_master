@@ -23,11 +23,11 @@ export class UserFacade {
     return this.store.select(userSelectors.getUser);
   }
 
-  public getUserDetail(userId: number): void {
-    this.store.dispatch(userActions.getUserDetail({ userId }));
+  public getUserDetail(usuario_id: number): void {
+    this.store.dispatch(userActions.getUserDetail({ usuario_id }));
   }
 
-  public getUserDetail$(): Observable<Model.UserDetail> {
+  public getUserDetail$(): Observable<Data.DetalleUsuario> {
     return this.store.select(userSelectors.getUserDetail);
   }
 

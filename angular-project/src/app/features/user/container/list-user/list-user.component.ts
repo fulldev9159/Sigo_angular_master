@@ -11,6 +11,7 @@ import * as Model from '@storeOT/features/user/user.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
+import * as Data from '@data';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
@@ -25,7 +26,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   public celular = '';
   public email = '';
   public items$: Observable<any[]>;
-  public itemsDetail$: Observable<Model.UserDetail>;
+  public itemsDetail$: Observable<Data.DetalleUsuario>;
   private destroyInstance: Subject<boolean> = new Subject();
 
   public configTable = {
