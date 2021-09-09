@@ -12,7 +12,7 @@ import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as _ from 'lodash';
-import { UserPostRequest } from '@data';
+import { CreateUserRequest, EditUserRequest } from '@data';
 
 @Component({
   selector: 'app-form-user',
@@ -308,14 +308,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    let request: UserPostRequest;
+    let data: CreateUserRequest;
     const perfiles = this.formUser.get('perfiles').value;
-    let id = null;
-    if (this.formUser.get('id').value !== null) {
-      id = +this.formUser.get('id').value;
-    }
-    request = {
-      id,
+    data = {
       username: this.formUser.get('username').value,
       nombres: this.formUser.get('nombres').value,
       apellidos: this.formUser.get('apellidos').value,
@@ -331,13 +326,19 @@ export class FormUserComponent implements OnInit, OnDestroy {
       })),
       contratos_marco: this.formUser.get('contratos_marco').value,
     };
-
-    console.log('REQUEST', request);
-
-    if (id !== null) {
+    if (this.formUser.get('id').value !== null) {
+      let request: EditUserRequest;
+      request = {
+        id: +this.formUser.get('id').value,
+        ...data,
+      };
+      console.log('EDIT REQUEST', request);
       this.userFacade.editUserNew(request);
     } else {
-      this.userFacade.postUserNew(request);
+      let request: CreateUserRequest;
+      request = data;
+      console.log('CREATE REQUEST', request);
+      this.userFacade.createUser(request);
     }
   }
 }

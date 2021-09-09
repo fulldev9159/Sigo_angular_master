@@ -7,10 +7,8 @@ import {
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
-import * as Model from '@storeOT/features/user/user.model';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
 import * as Data from '@data';
 @Component({
   selector: 'app-list-user',
@@ -20,8 +18,6 @@ import * as Data from '@data';
 })
 export class ListUserComponent implements OnInit, OnDestroy {
   // declarations
-  public item = null;
-  public authLogin = null;
   public DisplayModal = false;
   public celular = '';
   public email = '';
@@ -134,8 +130,9 @@ export class ListUserComponent implements OnInit, OnDestroy {
           class: 'p-button-text p-button-sm',
           label: 'Editar',
           onClick: (event: Event, item) => {
-            this.item = item;
-            this.userFacade.getUserDetail(item.id);
+            if (item) {
+              this.router.navigate(['/app/user/form-user', item.id]);
+            }
           },
         },
         {
@@ -200,57 +197,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
     private userFacade: UserFacade,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) {
-    this.authFacade
-      .getLogin$()
-      .pipe(take(1), takeUntil(this.destroyInstance))
-      .subscribe(authLogin => {
-        if (authLogin) {
-          this.authLogin = authLogin;
-        }
-      });
-
-    this.userFacade
-      .getUserDetail$()
-      .pipe(takeUntil(this.destroyInstance))
-      .subscribe(userData => {
-        if (
-          (userData.perfiles.length > 0 ||
-            userData.contratos_marco.length > 0) &&
-          this.item
-        ) {
-          this.userFacade.setFormUser({
-            form: {
-              id: this.item.id,
-              username: this.item.username,
-              nombres: this.item.nombres,
-              apellidos: this.item.apellidos,
-              email: this.item.email,
-              celular: this.item.celular,
-              provider: +this.item.proveedor_id === 1 ? 'false' : 'true',
-              proveedor_id: this.item.proveedor_id,
-              area_id: this.item.area_id,
-              activo: this.item.activo,
-              rut: this.item.rut,
-              perfiles:
-                userData.perfiles.length > 0
-                  ? userData.perfiles.map(p => {
-                      return {
-                        perfil_id: +p.id,
-                        persona_a_cargo_id: p.persona_a_cargo_id,
-                      };
-                    })
-                  : [],
-              contratos_marco:
-                userData.contratos_marco.length > 0
-                  ? userData.contratos_marco.map(c => c.id)
-                  : null,
-            },
-          });
-          this.router.navigate(['/app/user/form-user', this.item.id]);
-        }
-      });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.userFacade.getAllUsers();

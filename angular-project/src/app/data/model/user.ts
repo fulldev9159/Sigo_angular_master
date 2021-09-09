@@ -37,8 +37,7 @@ export interface UsersResponse {
   };
 }
 
-export interface UserPostRequest {
-  id: number;
+export interface CreateUserRequest {
   username: string;
   nombres: string;
   apellidos: string;
@@ -52,22 +51,14 @@ export interface UserPostRequest {
   contratos_marco: number[];
 }
 
+export interface EditUserRequest extends CreateUserRequest {
+  id: number;
+}
+
 export interface PerfilFormUser {
   perfil_id: number;
   persona_a_cargo_id: number;
 }
-
-export interface UserPostResponse {
-  data: {
-    id: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-
 export interface DetalleUsuarioResponse {
   data: DetalleUsuario;
 
@@ -182,4 +173,26 @@ export interface Contrato {
   tipo_codigo: number;
   tipo_glosa: string;
   activo: boolean;
+}
+
+export interface CreateUserResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface EditUserResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
 }

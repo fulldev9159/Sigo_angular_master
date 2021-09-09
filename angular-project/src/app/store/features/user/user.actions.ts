@@ -1,6 +1,4 @@
-import { UserPostRequest, UserWithDetail } from '@data';
 import { createAction, props } from '@ngrx/store';
-import * as Model from './user.model';
 import * as Data from '@data';
 
 // USER ACTIONS
@@ -142,74 +140,43 @@ export const getContractsError = createAction(
   '[Contract GetAll] GET Contract Error',
   props<{ error: any }>()
 );
-// ::::::::::::::::::::::
 
-export const editUser = createAction(
-  '[User EditById] EDIT User',
-  props<{ user: Data.User }>()
-);
-
-export const editUserSuccess = createAction(
-  '[User EditById] EDIT User Success'
-);
-
-export const editUserError = createAction(
-  '[User EditById] EDIT User Error',
-  props<{ error: any }>()
-);
-
-export const postUser = createAction(
+// Crear Usuario
+export const createUser = createAction(
   '[User Post] CREATE User',
-  props<{ user: any }>()
+  props<{ createUserRequest: Data.CreateUserRequest }>()
 );
 
-export const postUserSuccess = createAction('[User Post] CREATE User Success');
+export const createUserSuccess = createAction(
+  '[User Post] CREATE User Success'
+);
 
-export const postUserError = createAction(
+export const createUserError = createAction(
   '[User Post] CREATE User Error',
   props<{ error: any }>()
 );
 
-export const postUserNew = createAction(
-  '[User Post] CREATE User New',
-  props<{ request: UserPostRequest }>()
+// Editar Usuario
+export const editUser = createAction(
+  '[User Post] EDIT User',
+  props<{ editUserRequest: Data.EditUserRequest }>()
 );
 
-export const postUserSuccessNew = createAction(
-  '[User Post] CREATE User New Success'
-);
+export const editUserSuccess = createAction('[User Post] EDIT User Success');
 
-export const postUserErrorNew = createAction(
-  '[User Post] CREATE User New Error',
+export const editUserError = createAction(
+  '[User Post] Edit User Error',
   props<{ error: any }>()
 );
 
-export const editUserNew = createAction(
-  '[User Post] EDIT User New',
-  props<{ request: UserPostRequest }>()
-);
-
-export const editUserSuccessNew = createAction(
-  '[User Post] EDIT User New Success'
-);
-
-export const editUserErrorNew = createAction(
-  '[User Post] Edit User New Error',
-  props<{ error: any }>()
-);
-
-export const setFormUser = createAction(
-  '[Set FormUser] SET FormUser',
-  props<{ form: Model.Form }>()
-);
-
+// Single User
 export const getSingleUsuario = createAction(
   '[User Get] GET single usuario',
   props<{ id: number }>()
 );
 export const getSingleUsuarioSuccess = createAction(
   '[User Get] GET single Usuario Success',
-  props<{ user: UserWithDetail }>()
+  props<{ user: Data.UserWithDetail }>()
 );
 
 export const getSingleUsuarioError = createAction(
@@ -222,4 +189,6 @@ export const resetArea = createAction('[User] Reset Area');
 export const resetContratos = createAction('[User] Reset Contrartos');
 export const resetSuperiores = createAction('[User] Reset Superiores');
 export const resetUsuarioEdit = createAction('[User] Reset Usuario Edit');
+// ::::::::::::::::::::::
+
 // USER ACTIONS

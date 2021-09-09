@@ -3,24 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import {
-  User,
-  UsersResponse,
-  UserPostRequest,
-  UserPostResponse,
-  DetalleUsuarioResponse,
-  UserWithDetail,
-  DetalleUsuario,
-  DeleteResponse,
-  ActivacionResponse,
-  Area,
-  AreaResponse,
-  ProveedorResponse,
-  Proveedor,
-  Contrato,
-  ContratoResponse,
-} from '@data';
-
+import * as Data from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -34,11 +17,11 @@ export class UserService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getAllUsers(): Observable<User[]> {
+  getAllUsers(): Observable<Data.User[]> {
     return this.http
-      .post<UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
+      .post<Data.UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
       .pipe(
-        map((res: UsersResponse) => {
+        map((res: Data.UsersResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
@@ -47,13 +30,13 @@ export class UserService {
       );
   }
 
-  getUserDetail(usuario_id: number): Observable<DetalleUsuario> {
+  getUserDetail(usuario_id: number): Observable<Data.DetalleUsuario> {
     return this.http
-      .post<DetalleUsuarioResponse>(`${this.apiUrl}/usuario/detalle/get`, {
+      .post<Data.DetalleUsuarioResponse>(`${this.apiUrl}/usuario/detalle/get`, {
         usuario_id,
       })
       .pipe(
-        map((res: DetalleUsuarioResponse) => {
+        map((res: Data.DetalleUsuarioResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
@@ -66,7 +49,7 @@ export class UserService {
     proveedor_id: number,
     area_id: number,
     contratos_id: number[]
-  ): Observable<User[]> {
+  ): Observable<Data.User[]> {
     return of([
       {
         id: 1,
@@ -122,11 +105,11 @@ export class UserService {
     //   );
   }
 
-  postUser(request: UserPostRequest): Observable<number> {
+  createUser(request: Data.CreateUserRequest): Observable<number> {
     return this.http
-      .post<UserPostResponse>(`${this.apiUrl}/usuario/create`, request)
+      .post<Data.CreateUserResponse>(`${this.apiUrl}/usuario/create`, request)
       .pipe(
-        map(res => {
+        map((res: Data.CreateUserResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
@@ -135,11 +118,11 @@ export class UserService {
       );
   }
 
-  editUser(request: UserPostRequest): Observable<number> {
+  editUser(request: Data.CreateUserRequest): Observable<number> {
     return this.http
-      .post<UserPostResponse>(`${this.apiUrl}/usuario/edit`, request)
+      .post<Data.EditUserResponse>(`${this.apiUrl}/usuario/edit`, request)
       .pipe(
-        map(res => {
+        map((res: Data.EditUserResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
@@ -150,9 +133,11 @@ export class UserService {
 
   deteleUser(usuario_id: number): Observable<number> {
     return this.http
-      .post<DeleteResponse>(`${this.apiUrl}/usuario/delete`, { usuario_id })
+      .post<Data.DeleteResponse>(`${this.apiUrl}/usuario/delete`, {
+        usuario_id,
+      })
       .pipe(
-        map((res: DeleteResponse) => {
+        map((res: Data.DeleteResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
@@ -163,12 +148,12 @@ export class UserService {
 
   activateUser(usuario_id: number, activacion: boolean): Observable<number> {
     return this.http
-      .post<ActivacionResponse>(`${this.apiUrl}/usuario/activacion/edit`, {
+      .post<Data.ActivacionResponse>(`${this.apiUrl}/usuario/activacion/edit`, {
         usuario_id,
         activacion,
       })
       .pipe(
-        map((res: ActivacionResponse) => {
+        map((res: Data.ActivacionResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
@@ -177,11 +162,11 @@ export class UserService {
       );
   }
 
-  getAreas(interno: boolean): Observable<Area[]> {
+  getAreas(interno: boolean): Observable<Data.Area[]> {
     return this.http
-      .post<AreaResponse>(`${this.apiUrl}/areas/get`, { interno })
+      .post<Data.AreaResponse>(`${this.apiUrl}/areas/get`, { interno })
       .pipe(
-        map((res: AreaResponse) => {
+        map((res: Data.AreaResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
@@ -190,26 +175,13 @@ export class UserService {
       );
   }
 
-  getProveedores(interno: boolean): Observable<Proveedor[]> {
+  getProveedores(interno: boolean): Observable<Data.Proveedor[]> {
     return this.http
-      .post<ProveedorResponse>(`${this.apiUrl}/proveedores/get`, { interno })
-      .pipe(
-        map((res: ProveedorResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.items;
-        })
-      );
-  }
-
-  getContratos(proveedor_id: number): Observable<Contrato[]> {
-    return this.http
-      .post<ContratoResponse>(`${this.apiUrl}/usuario/contratos_marco/get`, {
-        proveedor_id,
+      .post<Data.ProveedorResponse>(`${this.apiUrl}/proveedores/get`, {
+        interno,
       })
       .pipe(
-        map((res: ContratoResponse) => {
+        map((res: Data.ProveedorResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
@@ -218,26 +190,44 @@ export class UserService {
       );
   }
 
-  getUsuario(usuario_id: number): Observable<UserWithDetail> {
+  getContratos(proveedor_id: number): Observable<Data.Contrato[]> {
     return this.http
-      .post<UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
+      .post<Data.ContratoResponse>(
+        `${this.apiUrl}/usuario/contratos_marco/get`,
+        {
+          proveedor_id,
+        }
+      )
       .pipe(
-        concatMap((users: UsersResponse) => {
+        map((res: Data.ContratoResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.items;
+        })
+      );
+  }
+
+  getUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
+    return this.http
+      .post<Data.UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
+      .pipe(
+        concatMap((users: Data.UsersResponse) => {
           const userFound = users.data.items.find(
             user => user.id === usuario_id
           );
           if (userFound) {
             return this.http
-              .post<DetalleUsuarioResponse>(
+              .post<Data.DetalleUsuarioResponse>(
                 `${this.apiUrl}/usuario/detalle/get`,
                 {
                   usuario_id,
                 }
               )
               .pipe(
-                map((detalleUserResponse: DetalleUsuarioResponse) => {
+                map((detalleUserResponse: Data.DetalleUsuarioResponse) => {
                   const detalle = detalleUserResponse.data;
-                  const response: UserWithDetail = {
+                  const response: Data.UserWithDetail = {
                     ...userFound,
                     ...detalle,
                   };

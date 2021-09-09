@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
-import * as Model from './user.model';
 import * as Data from '@data';
-import { UserPostRequest, UserWithDetail } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -87,33 +85,16 @@ export class UserFacade {
   // CONTRACT
 
   // USER POST
-  public postUser(data): void {
-    this.store.dispatch(userActions.postUser(data));
-  }
-
-  public postUserNew(request: UserPostRequest): void {
-    this.store.dispatch(userActions.postUserNew({ request }));
+  public createUser(request: Data.CreateUserRequest): void {
+    this.store.dispatch(userActions.createUser({ createUserRequest: request }));
   }
   // USER POST
 
   // USER EDIT
-  public editUser(data): void {
-    this.store.dispatch(userActions.editUser(data));
-  }
-
-  public editUserNew(request: UserPostRequest): void {
-    this.store.dispatch(userActions.editUserNew({ request }));
+  public editUserNew(request: Data.EditUserRequest): void {
+    this.store.dispatch(userActions.editUser({ editUserRequest: request }));
   }
   // USER EDIT
-
-  // FORM
-  public setFormUser(data): void {
-    this.store.dispatch(userActions.setFormUser(data));
-  }
-
-  public getForm$(): Observable<Model.Form> {
-    return this.store.select(userSelectors.getForm);
-  }
 
   public resetData(): void {
     this.store.dispatch(userActions.resetData());
@@ -139,7 +120,7 @@ export class UserFacade {
     this.store.dispatch(userActions.getSingleUsuario({ id }));
   }
 
-  public getSingleUsuario$(): Observable<UserWithDetail> {
+  public getSingleUsuario$(): Observable<Data.UserWithDetail> {
     return this.store.select(userSelectors.getSingleUser);
   }
 }
