@@ -114,3 +114,14 @@ export interface DeleteResponse {
     responseCode: number;
   };
 }
+
+export interface ActivacionResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

@@ -177,8 +177,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
           onClick: (event: Event, item) => {
             // if (item.eliminable) {
             const txt = item.activo ? 'Bloquear' : 'Activar';
-            const summary = item.activo ? 'Bloqueado' : 'Activado';
-            const detail = item.activo ? 'Deshabilitación' : 'Activación';
             this.confirmationService.confirm({
               target: event.target as EventTarget,
               message: `¿Está seguro que desea ${txt} este Usuario?`,
@@ -187,11 +185,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
               rejectLabel: 'Cancelar',
               accept: () => {
                 this.userFacade.activateUser(+item.id, !item.activo);
-                this.messageService.add({
-                  severity: 'success',
-                  summary: `usuario ${summary}`,
-                  detail: `${detail} realizada con Éxito!`,
-                });
               },
             });
             // }

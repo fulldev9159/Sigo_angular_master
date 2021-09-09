@@ -37,8 +37,8 @@ export class UserFacade {
   }
 
   // ACTIVACION
-  public activateUser(userId: number, activacion: boolean): void {
-    this.store.dispatch(userActions.activateUser({ userId, activacion }));
+  public activateUser(usuario_id: number, activacion: boolean): void {
+    this.store.dispatch(userActions.activateUser({ usuario_id, activacion }));
   }
   // AREAS
   public getAreas(data): void {

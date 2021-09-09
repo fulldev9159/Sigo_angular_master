@@ -12,6 +12,7 @@ import {
   UserWithDetail,
   DetalleUsuario,
   DeleteResponse,
+  ActivacionResponse,
 } from '@data';
 
 @Injectable({
@@ -146,6 +147,22 @@ export class UserService {
       .post<DeleteResponse>(`${this.apiUrl}/usuario/delete`, { usuario_id })
       .pipe(
         map((res: DeleteResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.id;
+        })
+      );
+  }
+
+  activateUser(usuario_id: number, activacion: boolean): Observable<number> {
+    return this.http
+      .post<ActivacionResponse>(`${this.apiUrl}/usuario/activacion/edit`, {
+        usuario_id,
+        activacion,
+      })
+      .pipe(
+        map((res: ActivacionResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }

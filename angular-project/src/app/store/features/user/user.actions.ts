@@ -79,6 +79,22 @@ export const deleteUserError = createAction(
   props<{ error: any }>()
 );
 
+// Activate User
+export const activateUser = createAction(
+  '[User Activate ById] ACTIVATE User',
+  props<{ usuario_id: number; activacion: boolean }>()
+);
+
+export const activateUserSuccess = createAction(
+  '[User Activate ById] ACTIVATE User Success',
+  props<{ usuario_id: number; activo: boolean }>()
+);
+
+export const activateUserError = createAction(
+  '[User Activate ById] ACTIVATE User Error',
+  props<{ error: any }>()
+);
+
 // ::::::::::::::::::::::
 export const getArea = createAction(
   '[Area GetAll] GET Area',
@@ -137,21 +153,6 @@ export const getContractsSuccess = createAction(
 
 export const getContractsError = createAction(
   '[Contract GetAll] GET Contract Error',
-  props<{ error: any }>()
-);
-
-export const activateUser = createAction(
-  '[User Activate ById] ACTIVATE User',
-  props<{ userId: number; activacion: boolean }>()
-);
-
-export const activateUserSuccess = createAction(
-  '[User Activate ById] ACTIVATE User Success',
-  props<{ userId: any; res: any }>()
-);
-
-export const activateUserError = createAction(
-  '[User Activate ById] ACTIVATE User Error',
   props<{ error: any }>()
 );
 

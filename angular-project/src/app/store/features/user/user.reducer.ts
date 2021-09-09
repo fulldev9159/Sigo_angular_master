@@ -75,18 +75,18 @@ export const reducerUser = createReducer(
   //   ...state,
   //   users: [...state.users.filter(i => +i.id !== +payload.usuario_id)],
   // })),
-  on(UserActions.activateUserSuccess, (state, payload) => ({
-    ...state,
-    users: [
-      ...state.users.map(x => {
-        const activo = payload.userId === x.id ? !x.activo : x.activo;
-        return {
-          ...x,
-          activo,
-        };
-      }),
-    ],
-  })),
+  // on(UserActions.activateUserSuccess, (state, payload) => ({
+  //   ...state,
+  //   users: [
+  //     ...state.users.map(x => {
+  //       const activo = payload.usuario_id === x.id ? !x.activo : x.activo;
+  //       return {
+  //         ...x,
+  //         activo,
+  //       };
+  //     }),
+  //   ],
+  // })),
 
   on(UserActions.setFormUser, (state, payload) => ({
     ...state,

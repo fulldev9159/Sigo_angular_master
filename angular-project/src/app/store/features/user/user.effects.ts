@@ -90,8 +90,8 @@ export class UserEffects {
       ofType(userActions.deleteUser),
       concatMap(({ usuario_id }) =>
         this.userService.deteleUser(usuario_id).pipe(
-          map((usuario_id: number) =>
-            userActions.deleteUserSuccess({ usuario_id })
+          map((usuario_id_res: number) =>
+            userActions.deleteUserSuccess({ usuario_id: usuario_id_res })
           ),
           catchError(error => of(userActions.deleteUserError({ error })))
         )
@@ -114,23 +114,35 @@ export class UserEffects {
   activateUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.activateUser),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/usuario/activacion/edit`, {
-            usuario_id: data.userId,
-            activacion: data.activacion,
-          })
-          .pipe(
-            map((res: Response<UserModel.ActivateUserResponse>) =>
-              userActions.activateUserSuccess({
-                userId: +res.data.id,
-                res: res.status,
-              })
-            ),
-            catchError(err => of(userActions.activateUserError({ error: err })))
-          )
+      concatMap(({ usuario_id, activacion }) =>
+        this.userService.activateUser(usuario_id, activacion).pipe(
+          map((usuario_id_res: number) => {
+            console.log('response', usuario_id_res);
+            return userActions.activateUserSuccess({
+              usuario_id: usuario_id_res,
+              activo: activacion,
+            });
+          }),
+          catchError(error => of(userActions.activateUserError({ error })))
+        )
       )
     )
+  );
+
+  notifyAfterActivateUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(userActions.activateUserSuccess),
+        tap(({ usuario_id, activo }) => {
+          const summary = activo ? 'Activado' : 'Bloqueado';
+          this.snackService.showMessage(
+            `Usuario ${summary} exitosamente`,
+            'ok'
+          );
+          this.userFacade.getAllUsers();
+        })
+      ),
+    { dispatch: false }
   );
 
   getArea$ = createEffect(() =>
