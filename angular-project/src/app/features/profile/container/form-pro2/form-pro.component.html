@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" id="title-create-profile">
+      <h1 class="mt-4">Creación de Perfil </h1>
+      <span>formulario para crear un nuevo perfil</span>
+    </div>
+    <div class="col">
+      <button (click)="goBack()" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined " id="volver-button"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-header-title>
+    </ng-container>
+    <ng-container card-header-actions>
+
+    </ng-container>
+    <ng-container card-body>
+      <div class="row">
+        <div [formGroup]="formPerfil" class="col-xs-12 col-md-12 pt-2">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-12" id="nombre-perfil-input">
+                  <app-input [control]="formControls.nombre" DisplayLabelMode="side" label="* Nombre:"></app-input>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-12" id="descripcion-perfil-input">
+                  <label class="mb-1" for="">Descripción perfil</label>
+                  <textarea formControlName="descripcion" name="" id="" class="form-control" cols="30" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6"></div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </app-card>
+
+
+</div>

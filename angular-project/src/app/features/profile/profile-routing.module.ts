@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormProComponent } from './container/form-pro/form-pro.component';
 import { ListProComponent } from './container/list-pro/list-pro.component';
+import { FormPro2Component } from './container/form-pro2/form-pro.component';
+
 import { ProfileComponent } from './profile.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 
@@ -26,6 +28,18 @@ export const routes: Routes = [
       {
         path: 'form-pro',
         component: FormProComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'PERFIL_CREAR',
+            redirectTo: '/app/ot/list-ot',
+          },
+          state: 'form-pro',
+        },
+      },
+      {
+        path: 'form-pro2',
+        component: FormPro2Component,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
