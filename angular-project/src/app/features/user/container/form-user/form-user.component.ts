@@ -7,7 +7,6 @@ import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-import { Contract } from '@storeOT/features/user/user.model';
 import * as Data from '@data';
 import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
@@ -47,7 +46,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   proveedores$: Observable<Data.Proveedor[]>;
   areas$: Observable<Data.Area[]>;
-  contracts$: Observable<Contract[]>;
+  contracts$: Observable<Data.Contrato[]>;
   profiles$: Observable<Profile[]>;
   samecompanyusers$: Observable<Data.User[]>;
 
@@ -185,15 +184,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
       this.formUser.get('area_id').valueChanges.subscribe(area_id => {
         if (area_id !== null && area_id !== undefined) {
           const radioProvider = this.formUser.get('provider').value;
-          const providerID = this.formUser.get('proveedor_id').value;
+          const proveedor_id = this.formUser.get('proveedor_id').value;
           if (radioProvider === 'contratista') {
-            this.userFacade.getContracts({
-              proveedor_id: +providerID,
-            });
+            this.userFacade.getContracts(+proveedor_id);
           } else if (radioProvider === 'movistar') {
-            this.userFacade.getContracts({
-              proveedor_id: null,
-            });
+            this.userFacade.getContracts(null);
           }
         } else {
           this.disableContratosFormControl();
@@ -226,7 +221,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkContratosAndEnable(contratos: Contract[]): void {
+  checkContratosAndEnable(contratos: Data.Contrato[]): void {
     if (contratos.length > 0) {
       this.formUser.get('contratos_marco').enable();
     } else {

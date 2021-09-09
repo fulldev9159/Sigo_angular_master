@@ -13,7 +13,12 @@ import * as userActions from './user.actions';
 import { environment } from '@environment';
 import * as Data from '@data';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { DetalleUsuario, UserPostRequest, UserWithDetail } from '@data';
+import {
+  Contrato,
+  DetalleUsuario,
+  UserPostRequest,
+  UserWithDetail,
+} from '@data';
 @Injectable()
 export class UserEffects {
   constructor(
@@ -171,42 +176,17 @@ export class UserEffects {
     )
   );
 
-  getHigher$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.getHigher),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/usuarios/superior_jerarquico/get`, {
-            token: data.token,
-            proveedor_id: data.proveedor_id,
-            perfil_id: data.perfil_id,
-          })
-          .pipe(
-            map((res: any) =>
-              userActions.getHigherSuccess({ higher: res.data.items })
-            ),
-            catchError(err => of(userActions.getHigherError({ error: err })))
-          )
-      )
-    )
-  );
-
   getContracts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getContracts),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/usuario/contratos_marco/get`, {
-            proveedor_id: data.proveedor_id,
-          })
-          .pipe(
-            map((res: any) =>
-              userActions.getContractsSuccess({
-                contract: res.data.items.length > 0 ? res.data.items : [],
-              })
-            ),
-            catchError(err => of(userActions.getContractsError({ error: err })))
+      concatMap(({ proveedor_id }) =>
+        this.userService.getContratos(proveedor_id).pipe(
+          map(
+            (contratos: Data.Contrato[]) =>
+              userActions.getContractsSuccess({ contratos }),
+            catchError(error => of(userActions.getContractsError({ error })))
           )
+        )
       )
     )
   );

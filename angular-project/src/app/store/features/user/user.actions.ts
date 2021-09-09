@@ -126,37 +126,23 @@ export const getProviderError = createAction(
   '[Provider GetAll] GET Provider Error',
   props<{ error: any }>()
 );
-// ::::::::::::::::::::::
 
-export const getHigher = createAction(
-  '[Higher GetAll] GET Higher',
-  props<{ token: string }>()
-);
-
-export const getHigherSuccess = createAction(
-  '[Higher GetAll] GET Higher Success',
-  props<{ higher: Model.Higher[] }>()
-);
-
-export const getHigherError = createAction(
-  '[Higher GetAll] GET Higher Error',
-  props<{ error: any }>()
-);
-
+// Contratos
 export const getContracts = createAction(
   '[Contract GetAll] GET Contract',
-  props<{ token: string; proveedor_id: number }>()
+  props<{ proveedor_id: number }>()
 );
 
 export const getContractsSuccess = createAction(
   '[Contract GetAll] GET Contract Success',
-  props<{ contract: Model.Contract[] }>()
+  props<{ contratos: Data.Contrato[] }>()
 );
 
 export const getContractsError = createAction(
   '[Contract GetAll] GET Contract Error',
   props<{ error: any }>()
 );
+// ::::::::::::::::::::::
 
 export const editUser = createAction(
   '[User EditById] EDIT User',

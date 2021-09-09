@@ -163,3 +163,23 @@ export interface Proveedor {
   direccion: string;
   activo: boolean;
 }
+
+export interface ContratoResponse {
+  data: {
+    items: Contrato[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+export interface Contrato {
+  id: number;
+  nombre: string;
+  fecha_inicio: string;
+  fecha_fin: string;
+  tipo_codigo: number;
+  tipo_glosa: string;
+  activo: boolean;
+}

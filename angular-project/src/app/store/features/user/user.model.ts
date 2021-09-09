@@ -1,21 +1,3 @@
-export interface Higher {
-  id: number;
-  rut: number;
-  dv: string;
-  username: string;
-  nombres: string;
-  apellidos: string;
-  celular: string;
-  firma: string;
-  email: string;
-  proveedor_id: number;
-  area_id: number;
-  prefil_id: number;
-  perfil_nombre: string;
-  perfil_descripcion: string;
-  activo: string;
-}
-
 export interface Form {
   id: number;
   username: string;
@@ -29,16 +11,6 @@ export interface Form {
   area_id: number;
   perfiles: PerfilFormUser[];
   contratos_marco: number[];
-  activo: boolean;
-}
-
-export interface Contract {
-  id: number;
-  nombre: string;
-  fecha_inicio: string;
-  fecha_fin: string;
-  tipo_codigo: number;
-  tipo_glosa: string;
   activo: boolean;
 }
 

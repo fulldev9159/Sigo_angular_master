@@ -77,15 +77,11 @@ export class UserFacade {
   // HIGHERS
 
   // CONTRACT
-  public getContracts(data): void {
-    this.store.dispatch(userActions.getContracts(data));
+  public getContracts(proveedor_id: number): void {
+    this.store.dispatch(userActions.getContracts({ proveedor_id }));
   }
 
-  public getContractsSuccess(data): void {
-    this.store.dispatch(userActions.getContractsSuccess(data));
-  }
-
-  public getContracts$(): Observable<Model.Contract[]> {
+  public getContracts$(): Observable<Data.Contrato[]> {
     return this.store.select(userSelectors.getContracts);
   }
   // CONTRACT

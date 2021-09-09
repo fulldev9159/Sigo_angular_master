@@ -32,7 +32,7 @@ export const getSameCompanyUsers = createSelector(
 
 export const getContracts = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.contract
+  (state: fromUser.StateUser) => state.contratos
 );
 
 export const getForm = createSelector(
