@@ -1,3 +1,4 @@
+// GET USER
 export interface User {
   id: number;
   username: string;
@@ -37,8 +38,13 @@ export interface UsersResponse {
   };
 }
 
-export interface UserPostRequest {
-  id: number;
+export interface UserWithDetail extends User {
+  contratos_marco: ContratoMarco[];
+  perfiles: PerfilUser[];
+}
+
+// CREATE/ EDIT
+export interface CreateUserRequest {
   username: string;
   nombres: string;
   apellidos: string;
@@ -52,12 +58,11 @@ export interface UserPostRequest {
   contratos_marco: number[];
 }
 
-export interface PerfilFormUser {
-  perfil_id: number;
-  persona_a_cargo_id: number;
+export interface EditUserRequest extends CreateUserRequest {
+  id: number;
 }
 
-export interface UserPostResponse {
+export interface CreateUserResponse {
   data: {
     id: number;
   };
@@ -68,6 +73,18 @@ export interface UserPostResponse {
   };
 }
 
+export interface EditUserResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+// DETALLE USUARIO
 export interface DetalleUsuarioResponse {
   data: DetalleUsuario;
 
@@ -80,6 +97,36 @@ export interface DetalleUsuarioResponse {
 export interface DetalleUsuario {
   contratos_marco: ContratoMarco[];
   perfiles: PerfilUser[];
+}
+
+// DELETE
+export interface DeleteResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+// ACTIVACION
+export interface ActivacionResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+// DATOS
+export interface PerfilFormUser {
+  perfil_id: number;
+  persona_a_cargo_id: number;
 }
 
 export interface ContratoMarco {
@@ -99,7 +146,60 @@ export interface PerfilUser {
   superior_id: number;
 }
 
-export interface UserWithDetail extends User {
-  contratos_marco: ContratoMarco[];
-  perfiles: PerfilUser[];
+export interface AreaResponse {
+  data: {
+    items: Area[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface Area {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  interno: boolean;
+}
+
+export interface ProveedorResponse {
+  data: {
+    items: Proveedor[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+export interface Proveedor {
+  id: number;
+  nombre: string;
+  rut: number;
+  email: string;
+  telefono: string;
+  direccion: string;
+  activo: boolean;
+}
+
+export interface ContratoResponse {
+  data: {
+    items: Contrato[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+export interface Contrato {
+  id: number;
+  nombre: string;
+  fecha_inicio: string;
+  fecha_fin: string;
+  tipo_codigo: number;
+  tipo_glosa: string;
+  activo: boolean;
 }

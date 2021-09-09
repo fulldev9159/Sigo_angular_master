@@ -1,41 +1,43 @@
-import { UserPostRequest, UserWithDetail } from '@data';
 import { createAction, props } from '@ngrx/store';
-import * as Model from './user.model';
+import * as Data from '@data';
 
 // USER ACTIONS
 
-export const getUser = createAction('[User GetAll] GET User');
+// ::: Get All User
+export const getAllUser = createAction('[User GetAll] GET All User');
 
-export const getUserSuccess = createAction(
-  '[User GetAll] GET User Success',
-  props<{ user: Model.User[] }>()
+export const getAllUserSuccess = createAction(
+  '[User GetAll] GET All User Success',
+  props<{ users: Data.User[] }>()
 );
 
-export const getUserError = createAction(
-  '[User GetAll] GET User Error',
+export const getAllUserError = createAction(
+  '[User GetAll] GET All User Error',
   props<{ error: any }>()
 );
 
-export const getUsers = createAction(
-  '[Users] GET Users',
+// ::: Get Same Company Users
+export const getSameCompanyUsers = createAction(
+  '[Users] GET Same Company Users',
   props<{ proveedor_id: number; area_id: number; contratos_id: number[] }>()
 );
 
-export const getUsersSuccess = createAction(
-  '[Users] GET Users Success',
-  props<{ users: Model.User[] }>()
+export const getSameCompanyUsersSuccess = createAction(
+  '[Users] GET Same Company Users Success',
+  props<{ users: Data.User[] }>()
 );
 
-export const getUsersError = createAction(
-  '[Users] GET Users Error',
+export const getSameCompanyUsersError = createAction(
+  '[Users] GET Same Company Users Error',
   props<{ error: any }>()
 );
 
+// ::: Get user by ID
 export const getUserById = createAction('[User GetUserById] GET User');
 
 export const getUserByIdSuccess = createAction(
   '[User GetUserById] GET User Success',
-  props<{ user: Model.User[] }>()
+  props<{ user: Data.User[] }>()
 );
 
 export const getUserByIdError = createAction(
@@ -43,14 +45,15 @@ export const getUserByIdError = createAction(
   props<{ error: any }>()
 );
 
+// ::: Get User Detail
 export const getUserDetail = createAction(
   '[User getUserDetail] GET User Detail',
-  props<{ userId: number }>()
+  props<{ usuario_id: number }>()
 );
 
 export const getUserDetailSuccess = createAction(
   '[User getUserDetailSuccess] GET User Detail Success',
-  props<{ userDetail: Model.UserDetail }>()
+  props<{ user_detail: Data.DetalleUsuario }>()
 );
 
 export const getUserDetailError = createAction(
@@ -58,74 +61,15 @@ export const getUserDetailError = createAction(
   props<{ error: any }>()
 );
 
-export const getArea = createAction(
-  '[Area GetAll] GET Area',
-  props<{ token: string }>()
-);
-
-export const getAreaSuccess = createAction(
-  '[Area GetAll] GET Area Success',
-  props<{ area: Model.Area[] }>()
-);
-
-export const getAreaError = createAction(
-  '[Area GetAll] GET Area Error',
-  props<{ error: any }>()
-);
-
-export const getProvider = createAction(
-  '[Provider GetAll] GET Provider',
-  props<{ token: string }>()
-);
-
-export const getProviderSuccess = createAction(
-  '[Provider GetAll] GET Provider Success',
-  props<{ provider: Model.Provider[] }>()
-);
-
-export const getProviderError = createAction(
-  '[Provider GetAll] GET Provider Error',
-  props<{ error: any }>()
-);
-
-export const getHigher = createAction(
-  '[Higher GetAll] GET Higher',
-  props<{ token: string }>()
-);
-
-export const getHigherSuccess = createAction(
-  '[Higher GetAll] GET Higher Success',
-  props<{ higher: Model.Higher[] }>()
-);
-
-export const getHigherError = createAction(
-  '[Higher GetAll] GET Higher Error',
-  props<{ error: any }>()
-);
-
-export const getContracts = createAction(
-  '[Contract GetAll] GET Contract',
-  props<{ token: string; proveedor_id: number }>()
-);
-
-export const getContractsSuccess = createAction(
-  '[Contract GetAll] GET Contract Success',
-  props<{ contract: Model.Contract[] }>()
-);
-
-export const getContractsError = createAction(
-  '[Contract GetAll] GET Contract Error',
-  props<{ error: any }>()
-);
-
+// Delete User
 export const deleteUser = createAction(
   '[User DeleteById] DELETE User',
-  props<{ userPosition: number }>()
+  props<{ usuario_id: number }>()
 );
 
 export const deleteUserSuccess = createAction(
   '[User DeleteById] DELETE User Success',
-  props<{ userId: any; res: any }>()
+  props<{ usuario_id: number }>()
 );
 
 export const deleteUserError = createAction(
@@ -133,14 +77,15 @@ export const deleteUserError = createAction(
   props<{ error: any }>()
 );
 
+// Activate User
 export const activateUser = createAction(
   '[User Activate ById] ACTIVATE User',
-  props<{ userId: number; activacion: boolean }>()
+  props<{ usuario_id: number; activacion: boolean }>()
 );
 
 export const activateUserSuccess = createAction(
   '[User Activate ById] ACTIVATE User Success',
-  props<{ userId: any; res: any }>()
+  props<{ usuario_id: number; activo: boolean }>()
 );
 
 export const activateUserError = createAction(
@@ -148,76 +93,94 @@ export const activateUserError = createAction(
   props<{ error: any }>()
 );
 
-export const editUser = createAction(
-  '[User EditById] EDIT User',
-  props<{ user: Model.User }>()
+// Areas
+export const getArea = createAction(
+  '[Area GetAll] GET Area',
+  props<{ interno: boolean }>()
 );
 
-export const editUserSuccess = createAction(
-  '[User EditById] EDIT User Success'
+export const getAreaSuccess = createAction(
+  '[Area GetAll] GET Area Success',
+  props<{ areas: Data.Area[] }>()
 );
 
-export const editUserError = createAction(
-  '[User EditById] EDIT User Error',
+export const getAreaError = createAction(
+  '[Area GetAll] GET Area Error',
   props<{ error: any }>()
 );
 
-export const postUser = createAction(
-  '[User Post] CREATE User',
-  props<{ user: any }>()
+//  Proveedor
+export const getProvider = createAction(
+  '[Provider GetAll] GET Provider',
+  props<{ interno: boolean }>()
 );
 
-export const postUserSuccess = createAction('[User Post] CREATE User Success');
+export const getProviderSuccess = createAction(
+  '[Provider GetAll] GET Provider Success',
+  props<{ proveedores: Data.Proveedor[] }>()
+);
 
-export const postUserError = createAction(
+export const getProviderError = createAction(
+  '[Provider GetAll] GET Provider Error',
+  props<{ error: any }>()
+);
+
+// Contratos
+export const getContracts = createAction(
+  '[Contract GetAll] GET Contract',
+  props<{ proveedor_id: number }>()
+);
+
+export const getContractsSuccess = createAction(
+  '[Contract GetAll] GET Contract Success',
+  props<{ contratos: Data.Contrato[] }>()
+);
+
+export const getContractsError = createAction(
+  '[Contract GetAll] GET Contract Error',
+  props<{ error: any }>()
+);
+
+// Crear Usuario
+export const createUser = createAction(
+  '[User Post] CREATE User',
+  props<{ createUserRequest: Data.CreateUserRequest }>()
+);
+
+export const createUserSuccess = createAction(
+  '[User Post] CREATE User Success'
+);
+
+export const createUserError = createAction(
   '[User Post] CREATE User Error',
   props<{ error: any }>()
 );
 
-export const postUserNew = createAction(
-  '[User Post] CREATE User New',
-  props<{ request: UserPostRequest }>()
+// Editar Usuario
+export const editUser = createAction(
+  '[User Post] EDIT User',
+  props<{ editUserRequest: Data.EditUserRequest }>()
 );
 
-export const postUserSuccessNew = createAction(
-  '[User Post] CREATE User New Success'
-);
+export const editUserSuccess = createAction('[User Post] EDIT User Success');
 
-export const postUserErrorNew = createAction(
-  '[User Post] CREATE User New Error',
+export const editUserError = createAction(
+  '[User Post] Edit User Error',
   props<{ error: any }>()
 );
 
-export const editUserNew = createAction(
-  '[User Post] EDIT User New',
-  props<{ request: UserPostRequest }>()
-);
-
-export const editUserSuccessNew = createAction(
-  '[User Post] EDIT User New Success'
-);
-
-export const editUserErrorNew = createAction(
-  '[User Post] Edit User New Error',
-  props<{ error: any }>()
-);
-
-export const setFormUser = createAction(
-  '[Set FormUser] SET FormUser',
-  props<{ form: Model.Form }>()
-);
-
-export const getSingleUsuario = createAction(
-  '[User Get] GET single usuario',
+// Single User
+export const getAllDataUsuario = createAction(
+  '[User Get] GET all data usuario',
   props<{ id: number }>()
 );
-export const getSingleUsuarioSuccess = createAction(
-  '[User Get] GET single Usuario Success',
-  props<{ user: UserWithDetail }>()
+export const getAllDataUsuarioSuccess = createAction(
+  '[User Get] GET all Usuario Success',
+  props<{ user: Data.UserWithDetail }>()
 );
 
-export const getSingleUsuarioError = createAction(
-  '[User Get] GET single Usuario Error',
+export const getAllDataUsuarioError = createAction(
+  '[User Get] GET all Usuario Error',
   props<{ error: any }>()
 );
 
@@ -226,4 +189,6 @@ export const resetArea = createAction('[User] Reset Area');
 export const resetContratos = createAction('[User] Reset Contrartos');
 export const resetSuperiores = createAction('[User] Reset Superiores');
 export const resetUsuarioEdit = createAction('[User] Reset Usuario Edit');
+// ::::::::::::::::::::::
+
 // USER ACTIONS

@@ -4,119 +4,97 @@ import { Observable } from 'rxjs';
 
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
-import * as Model from './user.model';
-import { UserPostRequest, UserWithDetail } from '@data';
+import * as Data from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserFacade {
-  constructor(private store: Store<Model.User>) {}
+  constructor(private store: Store<Data.User>) {}
 
   // USER
-  public getUsers(): void {
-    this.store.dispatch(userActions.getUser());
+  public getAllUsers(): void {
+    this.store.dispatch(userActions.getAllUser());
   }
 
-  public getUsers$(): Observable<Model.User[]> {
+  public getAllUsers$(): Observable<Data.User[]> {
     return this.store.select(userSelectors.getUser);
   }
 
-  public getUserDetail(userId: number): void {
-    this.store.dispatch(userActions.getUserDetail({ userId }));
+  public getUserDetail(usuario_id: number): void {
+    this.store.dispatch(userActions.getUserDetail({ usuario_id }));
   }
 
-  public getUserDetail$(): Observable<Model.UserDetail> {
+  public getUserDetail$(): Observable<Data.DetalleUsuario> {
     return this.store.select(userSelectors.getUserDetail);
   }
 
   // DELETE
-  public deleteUser(data): void {
-    this.store.dispatch(userActions.deleteUser(data));
+  public deleteUser(usuario_id: number): void {
+    this.store.dispatch(userActions.deleteUser({ usuario_id }));
   }
 
   // ACTIVACION
-  public activateUser(userId: number, activacion: boolean): void {
-    this.store.dispatch(userActions.activateUser({ userId, activacion }));
+  public activateUser(usuario_id: number, activacion: boolean): void {
+    this.store.dispatch(userActions.activateUser({ usuario_id, activacion }));
   }
   // AREAS
-  public getAreas(data): void {
-    this.store.dispatch(userActions.getArea(data));
+  public getAreas(interno: boolean): void {
+    this.store.dispatch(userActions.getArea({ interno }));
   }
 
-  public getAreas$(): Observable<Model.Area[]> {
+  public getAreas$(): Observable<Data.Area[]> {
     return this.store.select(userSelectors.getAreas);
   }
   // AREAS
 
   // PROVIDERS
-  public getProviders(data): void {
-    this.store.dispatch(userActions.getProvider(data));
+  public getProviders(interno: boolean): void {
+    this.store.dispatch(userActions.getProvider({ interno }));
   }
 
-  public getProviders$(): Observable<Model.Provider[]> {
+  public getProviders$(): Observable<Data.Proveedor[]> {
     return this.store.select(userSelectors.getProviders);
   }
   // PROVIDERS
 
   // HIGHERS
-  public getSuperiores(
+  public getSameCompanyUsers(
     proveedor_id: number,
     area_id: number,
     contratos_id: number[]
   ): void {
     this.store.dispatch(
-      userActions.getUsers({ proveedor_id, area_id, contratos_id })
+      userActions.getSameCompanyUsers({ proveedor_id, area_id, contratos_id })
     );
   }
 
-  public getSuperiores$(): Observable<Model.User[]> {
-    return this.store.select(userSelectors.getSuperiores);
+  public getSameCompanyUsers$(): Observable<Data.User[]> {
+    return this.store.select(userSelectors.getSameCompanyUsers);
   }
   // HIGHERS
 
   // CONTRACT
-  public getContracts(data): void {
-    this.store.dispatch(userActions.getContracts(data));
+  public getContracts(proveedor_id: number): void {
+    this.store.dispatch(userActions.getContracts({ proveedor_id }));
   }
 
-  public getContractsSuccess(data): void {
-    this.store.dispatch(userActions.getContractsSuccess(data));
-  }
-
-  public getContracts$(): Observable<Model.Contract[]> {
+  public getContracts$(): Observable<Data.Contrato[]> {
     return this.store.select(userSelectors.getContracts);
   }
   // CONTRACT
 
   // USER POST
-  public postUser(data): void {
-    this.store.dispatch(userActions.postUser(data));
-  }
-
-  public postUserNew(request: UserPostRequest): void {
-    this.store.dispatch(userActions.postUserNew({ request }));
+  public createUser(request: Data.CreateUserRequest): void {
+    this.store.dispatch(userActions.createUser({ createUserRequest: request }));
   }
   // USER POST
 
   // USER EDIT
-  public editUser(data): void {
-    this.store.dispatch(userActions.editUser(data));
-  }
-
-  public editUserNew(request: UserPostRequest): void {
-    this.store.dispatch(userActions.editUserNew({ request }));
+  public editUserNew(request: Data.EditUserRequest): void {
+    this.store.dispatch(userActions.editUser({ editUserRequest: request }));
   }
   // USER EDIT
-
-  // FORM
-  public setFormUser(data): void {
-    this.store.dispatch(userActions.setFormUser(data));
-  }
-
-  public getForm$(): Observable<Model.Form> {
-    return this.store.select(userSelectors.getForm);
-  }
 
   public resetData(): void {
     this.store.dispatch(userActions.resetData());
@@ -138,11 +116,11 @@ export class UserFacade {
     this.store.dispatch(userActions.resetSuperiores());
   }
 
-  public getSingleUsuario(id: number): void {
-    this.store.dispatch(userActions.getSingleUsuario({ id }));
+  public getAllDataUsuario(id: number): void {
+    this.store.dispatch(userActions.getAllDataUsuario({ id }));
   }
 
-  public getSingleUsuario$(): Observable<UserWithDetail> {
-    return this.store.select(userSelectors.getSingleUser);
+  public getAllDataUsuario$(): Observable<Data.UserWithDetail> {
+    return this.store.select(userSelectors.getAllDataUser);
   }
 }

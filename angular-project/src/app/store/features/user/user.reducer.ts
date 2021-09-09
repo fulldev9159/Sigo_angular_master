@@ -1,95 +1,66 @@
-import { UserWithDetail } from '@data';
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
-import * as Model from './user.model';
+import * as Data from '@data';
 
 export const UserFeatureKey = 'user';
 
 export interface StateUser {
-  items: Model.User[];
-  itemsDetail: Model.UserDetail;
-  areas: Model.Area[];
-  providers: Model.Provider[];
-  superiores: Model.User[];
-  contract: Model.Contract[];
-  form: Model.Form;
-  user: UserWithDetail;
+  users: Data.User[];
+  userDetail: Data.DetalleUsuario;
+  areas: Data.Area[];
+  proveedores: Data.Proveedor[];
+  samecompanyusers: Data.User[];
+  contratos: Data.Contrato[];
+  alldatauser: Data.UserWithDetail;
 }
 
 export const initialStateUser: StateUser = {
-  items: [],
-  itemsDetail: { perfiles: [], contratos_marco: [] },
+  users: [],
+  userDetail: { perfiles: [], contratos_marco: [] },
   areas: [],
-  providers: [],
-  superiores: [],
-  contract: [],
-  form: null,
-  user: null,
+  proveedores: [],
+  samecompanyusers: [],
+  contratos: [],
+  alldatauser: null,
 };
 
 export const reducerUser = createReducer(
   initialStateUser,
 
-  on(UserActions.getUser, state => state),
-  on(UserActions.getUserSuccess, (state, payload) => ({
+  on(UserActions.getAllUser, state => state),
+  on(UserActions.getAllUserSuccess, (state, payload) => ({
     ...state,
-    items: payload.user,
+    users: payload.users,
   })),
 
-  on(UserActions.getUsers, state => state),
-  on(UserActions.getUsersSuccess, (state, payload) => ({
+  on(UserActions.getSameCompanyUsers, state => state),
+  on(UserActions.getSameCompanyUsersSuccess, (state, payload) => ({
     ...state,
-    superiores: payload.users,
+    samecompanyusers: payload.users,
   })),
 
   on(UserActions.getUserDetail, state => state),
   on(UserActions.getUserDetailSuccess, (state, payload) => ({
     ...state,
-    itemsDetail: payload.userDetail,
+    userDetail: payload.user_detail,
   })),
 
   on(UserActions.getArea, state => state),
   on(UserActions.getAreaSuccess, (state, payload) => ({
     ...state,
-    areas: payload.area,
+    areas: payload.areas,
   })),
 
   on(UserActions.getProvider, state => state),
   on(UserActions.getProviderSuccess, (state, payload) => ({
     ...state,
-    providers: payload.provider,
+    proveedores: payload.proveedores,
   })),
 
-  on(UserActions.getHigher, state => state),
-  on(UserActions.getHigherSuccess, (state, payload) => ({
-    ...state,
-    highers: payload.higher && payload.higher.length > 0 ? payload.higher : [],
-  })),
   on(UserActions.getContracts, state => state),
   on(UserActions.getContractsSuccess, (state, payload) => ({
     ...state,
-    contract: payload.contract,
-  })),
-  on(UserActions.deleteUserSuccess, (state, payload) => ({
-    ...state,
-    items: [...state.items.filter(i => +i.id !== +payload.userId)],
-  })),
-  on(UserActions.activateUserSuccess, (state, payload) => ({
-    ...state,
-    items: [
-      ...state.items.map(x => {
-        const activo = payload.userId === x.id ? !x.activo : x.activo;
-        return {
-          ...x,
-          activo,
-        };
-      }),
-    ],
-  })),
-
-  on(UserActions.setFormUser, (state, payload) => ({
-    ...state,
-    form: payload.form,
+    contratos: payload.contratos,
   })),
   on(UserActions.resetData, (state, payload) => ({
     ...initialStateUser,
@@ -100,19 +71,14 @@ export const reducerUser = createReducer(
   })),
   on(UserActions.resetContratos, (state, payload) => ({
     ...state,
-    contract: [],
+    contratos: [],
   })),
   on(UserActions.resetSuperiores, (state, payload) => ({
     ...state,
-    superiores: [],
+    samecompanyusers: [],
   })),
-  on(UserActions.resetUsuarioEdit, (state, payload) => ({
+  on(UserActions.getAllDataUsuarioSuccess, (state, { user }) => ({
     ...state,
-    user: null,
-  })),
-  on(UserActions.getSingleUsuarioSuccess, (state, { user }) => ({
-    ...state,
-    user,
-    cubicacionError: null,
+    alldatauser: user,
   }))
 );

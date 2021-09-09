@@ -25,7 +25,6 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnInit, OnDestroy {
-  // declarations
   private destroyInstance$: Subject<boolean> = new Subject();
 
   constructor() {}

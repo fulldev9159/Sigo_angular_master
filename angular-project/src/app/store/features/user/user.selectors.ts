@@ -7,12 +7,12 @@ export const selectUser = createFeatureSelector<fromUser.StateUser>(
 
 export const getUser = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.items
+  (state: fromUser.StateUser) => state.users
 );
 
 export const getUserDetail = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.itemsDetail
+  (state: fromUser.StateUser) => state.userDetail
 );
 
 export const getAreas = createSelector(
@@ -22,25 +22,20 @@ export const getAreas = createSelector(
 
 export const getProviders = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.providers
+  (state: fromUser.StateUser) => state.proveedores
 );
 
-export const getSuperiores = createSelector(
+export const getSameCompanyUsers = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.superiores
+  (state: fromUser.StateUser) => state.samecompanyusers
 );
 
 export const getContracts = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.contract
+  (state: fromUser.StateUser) => state.contratos
 );
 
-export const getForm = createSelector(
+export const getAllDataUser = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.form
-);
-
-export const getSingleUser = createSelector(
-  selectUser,
-  (state: fromUser.StateUser) => state.user
+  (state: fromUser.StateUser) => state.alldatauser
 );
