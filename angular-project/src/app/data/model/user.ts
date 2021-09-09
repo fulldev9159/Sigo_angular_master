@@ -1,3 +1,4 @@
+// GET USER
 export interface User {
   id: number;
   username: string;
@@ -37,6 +38,12 @@ export interface UsersResponse {
   };
 }
 
+export interface UserWithDetail extends User {
+  contratos_marco: ContratoMarco[];
+  perfiles: PerfilUser[];
+}
+
+// CREATE/ EDIT
 export interface CreateUserRequest {
   username: string;
   nombres: string;
@@ -55,10 +62,29 @@ export interface EditUserRequest extends CreateUserRequest {
   id: number;
 }
 
-export interface PerfilFormUser {
-  perfil_id: number;
-  persona_a_cargo_id: number;
+export interface CreateUserResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
 }
+
+export interface EditUserResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+// DETALLE USUARIO
 export interface DetalleUsuarioResponse {
   data: DetalleUsuario;
 
@@ -71,6 +97,36 @@ export interface DetalleUsuarioResponse {
 export interface DetalleUsuario {
   contratos_marco: ContratoMarco[];
   perfiles: PerfilUser[];
+}
+
+// DELETE
+export interface DeleteResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+// ACTIVACION
+export interface ActivacionResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+// DATOS
+export interface PerfilFormUser {
+  perfil_id: number;
+  persona_a_cargo_id: number;
 }
 
 export interface ContratoMarco {
@@ -88,33 +144,6 @@ export interface PerfilUser {
   persona_a_cargo_nombre: string;
   superior_descripcion: string;
   superior_id: number;
-}
-
-export interface UserWithDetail extends User {
-  contratos_marco: ContratoMarco[];
-  perfiles: PerfilUser[];
-}
-
-export interface DeleteResponse {
-  data: {
-    id: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-
-export interface ActivacionResponse {
-  data: {
-    id: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
 }
 
 export interface AreaResponse {
@@ -173,26 +202,4 @@ export interface Contrato {
   tipo_codigo: number;
   tipo_glosa: string;
   activo: boolean;
-}
-
-export interface CreateUserResponse {
-  data: {
-    id: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-
-export interface EditUserResponse {
-  data: {
-    id: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
 }

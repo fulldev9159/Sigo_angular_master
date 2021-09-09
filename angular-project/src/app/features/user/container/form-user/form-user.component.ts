@@ -1,18 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, of, Subject, Subscription } from 'rxjs';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
+import { Profile } from '@storeOT/features/profile/profile.model';
 
 import * as Data from '@data';
-import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as _ from 'lodash';
-import { CreateUserRequest, EditUserRequest } from '@data';
 
 @Component({
   selector: 'app-form-user',
@@ -54,7 +52,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
     private userFacade: UserFacade,
     private router: Router,
     private profileFacade: ProfileFacade,
-    private snackService: SnackBarService,
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
@@ -68,13 +65,13 @@ export class FormUserComponent implements OnInit, OnDestroy {
         const id = params.get('id');
         if (id !== null) {
           const userID = +params.get('id');
-          this.userFacade.getSingleUsuario(userID);
+          this.userFacade.getAllDataUsuario(userID);
         }
       })
     );
     this.subscription.add(
       this.userFacade
-        .getSingleUsuario$()
+        .getAllDataUsuario$()
         .pipe(withLatestFrom(this.proveedores$))
         .subscribe(([user, proveedores]) => {
           if (user) {
@@ -308,7 +305,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    let data: CreateUserRequest;
+    let data: Data.CreateUserRequest;
     const perfiles = this.formUser.get('perfiles').value;
     data = {
       username: this.formUser.get('username').value,
@@ -327,7 +324,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       contratos_marco: this.formUser.get('contratos_marco').value,
     };
     if (this.formUser.get('id').value !== null) {
-      let request: EditUserRequest;
+      let request: Data.EditUserRequest;
       request = {
         id: +this.formUser.get('id').value,
         ...data,
@@ -335,7 +332,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       console.log('EDIT REQUEST', request);
       this.userFacade.editUserNew(request);
     } else {
-      let request: CreateUserRequest;
+      let request: Data.CreateUserRequest;
       request = data;
       console.log('CREATE REQUEST', request);
       this.userFacade.createUser(request);

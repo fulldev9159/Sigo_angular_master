@@ -11,7 +11,7 @@ export interface StateUser {
   proveedores: Data.Proveedor[];
   samecompanyusers: Data.User[];
   contratos: Data.Contrato[];
-  user: Data.UserWithDetail;
+  alldatauser: Data.UserWithDetail;
 }
 
 export const initialStateUser: StateUser = {
@@ -21,7 +21,7 @@ export const initialStateUser: StateUser = {
   proveedores: [],
   samecompanyusers: [],
   contratos: [],
-  user: null,
+  alldatauser: null,
 };
 
 export const reducerUser = createReducer(
@@ -77,8 +77,8 @@ export const reducerUser = createReducer(
     ...state,
     samecompanyusers: [],
   })),
-  on(UserActions.getSingleUsuarioSuccess, (state, { user }) => ({
+  on(UserActions.getAllDataUsuarioSuccess, (state, { user }) => ({
     ...state,
-    user,
+    alldatauser: user,
   }))
 );

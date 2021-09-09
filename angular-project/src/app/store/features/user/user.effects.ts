@@ -261,19 +261,19 @@ export class UserEffects {
     { dispatch: false }
   );
 
-  getUserData$ = createEffect(() =>
+  getAllDataUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(userActions.getSingleUsuario),
+      ofType(userActions.getAllDataUsuario),
       concatMap(data =>
-        this.userService.getUsuario(data.id).pipe(
+        this.userService.getAllDataUsuario(data.id).pipe(
           map((user: Data.UserWithDetail) =>
-            userActions.getSingleUsuarioSuccess({
+            userActions.getAllDataUsuarioSuccess({
               user,
             })
           ),
           catchError(err => {
             console.error(`could not retrieve the user [${err.message}]`);
-            return of(userActions.getSingleUsuarioError({ error: err }));
+            return of(userActions.getAllDataUsuarioError({ error: err }));
           })
         )
       )

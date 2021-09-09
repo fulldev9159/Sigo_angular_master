@@ -208,7 +208,7 @@ export class UserService {
       );
   }
 
-  getUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
+  getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
     return this.http
       .post<Data.UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
       .pipe(

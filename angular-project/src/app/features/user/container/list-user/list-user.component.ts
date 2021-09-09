@@ -1,29 +1,18 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { Observable, Subject } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
+import { Observable } from 'rxjs';
 import * as Data from '@data';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListUserComponent implements OnInit, OnDestroy {
-  // declarations
+export class ListUserComponent implements OnInit {
   public DisplayModal = false;
-  public celular = '';
-  public email = '';
-  public items$: Observable<any[]>;
-  public itemsDetail$: Observable<Data.DetalleUsuario>;
-  private destroyInstance: Subject<boolean> = new Subject();
+  public users$: Observable<Data.User[]>;
+  public userDetail$: Observable<Data.UserWithDetail>;
 
   public configTable = {
     header: true,
@@ -67,20 +56,6 @@ export class ListUserComponent implements OnInit, OnDestroy {
           width: '8%',
           editable: false,
         },
-        // {
-        //   field: 'Email',
-        //   type: 'TEXT',
-        //   sort: 'email',
-        //   header: 'email',
-        //   editable: false,
-        // },
-        // {
-        //   field: 'Celular',
-        //   type: 'TEXT',
-        //   sort: 'celular',
-        //   header: 'nombre',
-        //   editable: false,
-        // },
         {
           field: 'Empresa',
           type: 'TEXT-TITLECASE',
@@ -115,21 +90,13 @@ export class ListUserComponent implements OnInit, OnDestroy {
           editable: false,
         },
       ],
-      sort: [
-        'username',
-        'rut',
-        'nombres',
-        'apellidos',
-        // 'email',
-        // 'celular',
-        'proveedor_nombre',
-      ],
+      sort: ['username', 'rut', 'nombres', 'apellidos', 'proveedor_nombre'],
       actions: [
         {
           icon: ' pi pi-pencil',
           class: 'p-button-text p-button-sm',
           label: 'Editar',
-          onClick: (event: Event, item) => {
+          onClick: (event: Event, item: Data.User) => {
             if (item) {
               this.router.navigate(['/app/user/form-user', item.id]);
             }
@@ -139,11 +106,8 @@ export class ListUserComponent implements OnInit, OnDestroy {
           icon: 'pi pi-eye',
           class: 'p-button-text p-button-sm',
           label: 'Detalle',
-          onClick: (event: Event, item) => {
-            this.email = item.email;
-            this.celular = item.celular;
-            this.userFacade.getUserDetail(item.id);
-            this.itemsDetail$ = this.userFacade.getUserDetail$();
+          onClick: (event: Event, item: Data.User) => {
+            this.userFacade.getAllDataUsuario(item.id);
             this.DisplayModal = true;
           },
         },
@@ -151,7 +115,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           icon: 'pi pi-trash',
           class: 'p-button-text p-button-danger p-button-sm',
           label: 'Eliminar',
-          onClick: (event: Event, item) => {
+          onClick: (event: Event, item: Data.User) => {
             // if (item.eliminable) {
             this.confirmationService.confirm({
               target: event.target as EventTarget,
@@ -171,7 +135,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
           class: 'p-button-text p-button-danger p-button-sm',
           labelVariable: true,
           label: 'activo',
-          onClick: (event: Event, item) => {
+          onClick: (event: Event, item: Data.User) => {
             // if (item.eliminable) {
             const txt = item.activo ? 'Bloquear' : 'Activar';
             this.confirmationService.confirm({
@@ -193,19 +157,13 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private authFacade: AuthFacade,
     private userFacade: UserFacade,
-    private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
     this.userFacade.getAllUsers();
-    this.items$ = this.userFacade.getUsers$();
-  }
-
-  ngOnDestroy(): void {
-    this.destroyInstance.next(true);
-    this.destroyInstance.complete();
+    this.users$ = this.userFacade.getAllUsers$();
+    this.userDetail$ = this.userFacade.getAllDataUsuario$();
   }
 }

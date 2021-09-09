@@ -170,17 +170,17 @@ export const editUserError = createAction(
 );
 
 // Single User
-export const getSingleUsuario = createAction(
-  '[User Get] GET single usuario',
+export const getAllDataUsuario = createAction(
+  '[User Get] GET all data usuario',
   props<{ id: number }>()
 );
-export const getSingleUsuarioSuccess = createAction(
-  '[User Get] GET single Usuario Success',
+export const getAllDataUsuarioSuccess = createAction(
+  '[User Get] GET all Usuario Success',
   props<{ user: Data.UserWithDetail }>()
 );
 
-export const getSingleUsuarioError = createAction(
-  '[User Get] GET single Usuario Error',
+export const getAllDataUsuarioError = createAction(
+  '[User Get] GET all Usuario Error',
   props<{ error: any }>()
 );
 

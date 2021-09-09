@@ -17,7 +17,7 @@ export class UserFacade {
     this.store.dispatch(userActions.getAllUser());
   }
 
-  public getUsers$(): Observable<Data.User[]> {
+  public getAllUsers$(): Observable<Data.User[]> {
     return this.store.select(userSelectors.getUser);
   }
 
@@ -116,11 +116,11 @@ export class UserFacade {
     this.store.dispatch(userActions.resetSuperiores());
   }
 
-  public getSingleUsuario(id: number): void {
-    this.store.dispatch(userActions.getSingleUsuario({ id }));
+  public getAllDataUsuario(id: number): void {
+    this.store.dispatch(userActions.getAllDataUsuario({ id }));
   }
 
-  public getSingleUsuario$(): Observable<Data.UserWithDetail> {
-    return this.store.select(userSelectors.getSingleUser);
+  public getAllDataUsuario$(): Observable<Data.UserWithDetail> {
+    return this.store.select(userSelectors.getAllDataUser);
   }
 }
