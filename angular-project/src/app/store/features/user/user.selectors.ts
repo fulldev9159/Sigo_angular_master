@@ -22,7 +22,7 @@ export const getAreas = createSelector(
 
 export const getProviders = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.providers
+  (state: fromUser.StateUser) => state.proveedores
 );
 
 export const getSameCompanyUsers = createSelector(

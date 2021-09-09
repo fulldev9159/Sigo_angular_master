@@ -51,11 +51,11 @@ export class UserFacade {
   // AREAS
 
   // PROVIDERS
-  public getProviders(data): void {
-    this.store.dispatch(userActions.getProvider(data));
+  public getProviders(interno: boolean): void {
+    this.store.dispatch(userActions.getProvider({ interno }));
   }
 
-  public getProviders$(): Observable<Model.Provider[]> {
+  public getProviders$(): Observable<Data.Proveedor[]> {
     return this.store.select(userSelectors.getProviders);
   }
   // PROVIDERS

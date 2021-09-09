@@ -66,7 +66,7 @@
                     <app-select [control]="formControls.proveedor_id" label="* Proveedor">
                       <ng-container options>
                         <option value="null" selected disabled>Seleccione proveedor</option>
-                        <ng-container *ngFor="let proveedor of providers$ | async">
+                        <ng-container *ngFor="let proveedor of proveedores$ | async">
                           <option [value]="proveedor.id">
                             {{ proveedor.nombre }}
                           </option>

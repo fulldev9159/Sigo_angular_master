@@ -7,7 +7,7 @@ import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-import { Provider, Contract } from '@storeOT/features/user/user.model';
+import { Contract } from '@storeOT/features/user/user.model';
 import * as Data from '@data';
 import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
@@ -45,7 +45,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   formUser: FormGroup = new FormGroup(this.formControls);
 
-  providers$: Observable<Provider[]>;
+  proveedores$: Observable<Data.Proveedor[]>;
   areas$: Observable<Data.Area[]>;
   contracts$: Observable<Contract[]>;
   profiles$: Observable<Profile[]>;
@@ -76,7 +76,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.userFacade
         .getSingleUsuario$()
-        .pipe(withLatestFrom(this.providers$))
+        .pipe(withLatestFrom(this.proveedores$))
         .subscribe(([user, proveedores]) => {
           if (user) {
             console.log(user);
@@ -119,7 +119,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   initObservables(): void {
-    this.providers$ = this.userFacade
+    this.proveedores$ = this.userFacade
       .getProviders$()
       .pipe(map(perfiles => perfiles || []));
     this.areas$ = this.userFacade.getAreas$().pipe(
@@ -153,13 +153,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
         this.resetAreaFormControl();
         this.userFacade.resetContratos();
         if (provider === 'movistar') {
-          this.userFacade.getProviders({
-            interno: true,
-          });
+          this.userFacade.getProviders(true);
         } else if (provider === 'contratista') {
-          this.userFacade.getProviders({
-            interno: false,
-          });
+          this.userFacade.getProviders(false);
         }
       })
     );
@@ -276,9 +272,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   // --- INIT DATA ---
   initData(): void {
-    this.userFacade.getProviders({
-      interno: true,
-    });
+    this.userFacade.getProviders(true);
     this.profileFacade.getProfile();
   }
 

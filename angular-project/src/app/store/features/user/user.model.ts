@@ -1,13 +1,3 @@
-export interface Provider {
-  id: number;
-  nombre: string;
-  rut: number;
-  email: string;
-  telefono: string;
-  direccion: string;
-  activo: boolean;
-}
-
 export interface Higher {
   id: number;
   rut: number;

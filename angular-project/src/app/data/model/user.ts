@@ -143,3 +143,23 @@ export interface Area {
   descripcion: string;
   interno: boolean;
 }
+
+export interface ProveedorResponse {
+  data: {
+    items: Proveedor[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+export interface Proveedor {
+  id: number;
+  nombre: string;
+  rut: number;
+  email: string;
+  telefono: string;
+  direccion: string;
+  activo: boolean;
+}

@@ -110,22 +110,23 @@ export const getAreaError = createAction(
   '[Area GetAll] GET Area Error',
   props<{ error: any }>()
 );
-// ::::::::::::::::::::::
 
+//  Proveedor
 export const getProvider = createAction(
   '[Provider GetAll] GET Provider',
-  props<{ token: string }>()
+  props<{ interno: boolean }>()
 );
 
 export const getProviderSuccess = createAction(
   '[Provider GetAll] GET Provider Success',
-  props<{ provider: Model.Provider[] }>()
+  props<{ proveedores: Data.Proveedor[] }>()
 );
 
 export const getProviderError = createAction(
   '[Provider GetAll] GET Provider Error',
   props<{ error: any }>()
 );
+// ::::::::::::::::::::::
 
 export const getHigher = createAction(
   '[Higher GetAll] GET Higher',

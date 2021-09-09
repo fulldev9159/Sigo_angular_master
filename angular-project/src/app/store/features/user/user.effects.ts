@@ -157,22 +157,16 @@ export class UserEffects {
     )
   );
 
-  // proveedores/get_all
   getProvider$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getProvider),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/proveedores/get`, {
-            token: data.token,
-            interno: data.interno,
-          })
-          .pipe(
-            map((res: any) =>
-              userActions.getProviderSuccess({ provider: res.data.items })
-            ),
-            catchError(err => of(userActions.getProviderError({ error: err })))
-          )
+      concatMap(({ interno }) =>
+        this.userService.getProveedores(interno).pipe(
+          map((proveedores: Data.Proveedor[]) =>
+            userActions.getProviderSuccess({ proveedores })
+          ),
+          catchError(error => of(userActions.getProviderError({ error })))
+        )
       )
     )
   );

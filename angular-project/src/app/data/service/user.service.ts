@@ -15,6 +15,8 @@ import {
   ActivacionResponse,
   Area,
   AreaResponse,
+  ProveedorResponse,
+  Proveedor,
 } from '@data';
 
 @Injectable({
@@ -178,6 +180,19 @@ export class UserService {
       .post<AreaResponse>(`${this.apiUrl}/areas/get`, { interno })
       .pipe(
         map((res: AreaResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.items;
+        })
+      );
+  }
+
+  getProveedores(interno: boolean): Observable<Proveedor[]> {
+    return this.http
+      .post<ProveedorResponse>(`${this.apiUrl}/proveedores/get`, { interno })
+      .pipe(
+        map((res: ProveedorResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
