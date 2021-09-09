@@ -7,7 +7,7 @@ import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-import { Provider, Area, Contract } from '@storeOT/features/user/user.model';
+import { Provider, Contract } from '@storeOT/features/user/user.model';
 import * as Data from '@data';
 import { Profile, Permit } from '@storeOT/features/profile/profile.model';
 
@@ -46,7 +46,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   formUser: FormGroup = new FormGroup(this.formControls);
 
   providers$: Observable<Provider[]>;
-  areas$: Observable<Area[]>;
+  areas$: Observable<Data.Area[]>;
   contracts$: Observable<Contract[]>;
   profiles$: Observable<Profile[]>;
   samecompanyusers$: Observable<Data.User[]>;
@@ -173,13 +173,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
         if (proveedor_id !== null && proveedor_id !== undefined) {
           const radioProvider = this.formUser.get('provider').value;
           if (radioProvider === 'contratista') {
-            this.userFacade.getAreas({
-              interno: false,
-            });
+            this.userFacade.getAreas(false);
           } else if (radioProvider === 'movistar') {
-            this.userFacade.getAreas({
-              interno: true,
-            });
+            this.userFacade.getAreas(true);
           }
         } else {
           this.disableAreaFormControl();
@@ -226,7 +222,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   //  --- ENABLED ---
-  checkAreaAndEnable(areas: Area[]): void {
+  checkAreaAndEnable(areas: Data.Area[]): void {
     if (areas.length > 0) {
       this.formUser.get('area_id').enable();
     } else {

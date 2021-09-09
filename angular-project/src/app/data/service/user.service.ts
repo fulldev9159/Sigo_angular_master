@@ -13,6 +13,8 @@ import {
   DetalleUsuario,
   DeleteResponse,
   ActivacionResponse,
+  Area,
+  AreaResponse,
 } from '@data';
 
 @Injectable({
@@ -167,6 +169,19 @@ export class UserService {
             this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.id;
+        })
+      );
+  }
+
+  getAreas(interno: boolean): Observable<Area[]> {
+    return this.http
+      .post<AreaResponse>(`${this.apiUrl}/areas/get`, { interno })
+      .pipe(
+        map((res: AreaResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.items;
         })
       );
   }

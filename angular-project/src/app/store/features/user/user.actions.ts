@@ -95,21 +95,22 @@ export const activateUserError = createAction(
   props<{ error: any }>()
 );
 
-// ::::::::::::::::::::::
+// Areas
 export const getArea = createAction(
   '[Area GetAll] GET Area',
-  props<{ token: string }>()
+  props<{ interno: boolean }>()
 );
 
 export const getAreaSuccess = createAction(
   '[Area GetAll] GET Area Success',
-  props<{ area: Model.Area[] }>()
+  props<{ areas: Data.Area[] }>()
 );
 
 export const getAreaError = createAction(
   '[Area GetAll] GET Area Error',
   props<{ error: any }>()
 );
+// ::::::::::::::::::::::
 
 export const getProvider = createAction(
   '[Provider GetAll] GET Provider',

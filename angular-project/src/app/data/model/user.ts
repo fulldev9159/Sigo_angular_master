@@ -125,3 +125,21 @@ export interface ActivacionResponse {
     responseCode: number;
   };
 }
+
+export interface AreaResponse {
+  data: {
+    items: Area[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface Area {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  interno: boolean;
+}

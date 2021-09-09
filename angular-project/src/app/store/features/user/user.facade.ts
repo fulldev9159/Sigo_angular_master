@@ -41,11 +41,11 @@ export class UserFacade {
     this.store.dispatch(userActions.activateUser({ usuario_id, activacion }));
   }
   // AREAS
-  public getAreas(data): void {
-    this.store.dispatch(userActions.getArea(data));
+  public getAreas(interno: boolean): void {
+    this.store.dispatch(userActions.getArea({ interno }));
   }
 
-  public getAreas$(): Observable<Model.Area[]> {
+  public getAreas$(): Observable<Data.Area[]> {
     return this.store.select(userSelectors.getAreas);
   }
   // AREAS

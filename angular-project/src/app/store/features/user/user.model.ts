@@ -8,13 +8,6 @@ export interface Provider {
   activo: boolean;
 }
 
-export interface Area {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  interno: boolean;
-}
-
 export interface Higher {
   id: number;
   rut: number;

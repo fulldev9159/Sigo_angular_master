@@ -148,18 +148,11 @@ export class UserEffects {
   getArea$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getArea),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/areas/get`, {
-            token: data.token,
-            interno: data.interno,
-          })
-          .pipe(
-            map((res: any) =>
-              userActions.getAreaSuccess({ area: res.data.items })
-            ),
-            catchError(err => of(userActions.getAreaError({ error: err })))
-          )
+      concatMap(({ interno }) =>
+        this.userService.getAreas(interno).pipe(
+          map((areas: Data.Area[]) => userActions.getAreaSuccess({ areas })),
+          catchError(error => of(userActions.getAreaError({ error })))
+        )
       )
     )
   );
