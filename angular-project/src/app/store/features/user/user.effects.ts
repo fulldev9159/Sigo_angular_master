@@ -35,14 +35,20 @@ export class UserEffects {
     )
   );
 
-  getUsers$ = createEffect(() =>
+  getSameCompanyUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(userActions.getUsers),
+      ofType(userActions.getSameCompanyUsers),
       concatMap(({ proveedor_id, area_id, contratos_id }) =>
-        this.userService.getUsers(proveedor_id, area_id, contratos_id).pipe(
-          map((users: any) => userActions.getUsersSuccess({ users })),
-          catchError(error => of(userActions.getUsersError({ error })))
-        )
+        this.userService
+          .getSameCompanyUsers(proveedor_id, area_id, contratos_id)
+          .pipe(
+            map((users: any) =>
+              userActions.getSameCompanyUsersSuccess({ users })
+            ),
+            catchError(error =>
+              of(userActions.getSameCompanyUsersError({ error }))
+            )
+          )
       )
     )
   );
@@ -65,19 +71,19 @@ export class UserEffects {
 
   getUserDetail$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(userActions.getUserDetail),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/usuario/detalle/get`, {
-            usuario_id: data.userId,
-          })
-          .pipe(
-            map((res: any) =>
-              userActions.getUserDetailSuccess({ userDetail: res.data })
-            ),
-            catchError(err => of(userActions.getAllUserError({ error: err })))
-          )
-      )
+      ofType(userActions.getUserDetail)
+      // concatMap((data: any) =>
+      //   this.http
+      //     .post(`${environment.api}/usuario/detalle/get`, {
+      //       usuario_id: data.userId,
+      //     })
+      //     .pipe(
+      //       map((res: any) =>
+      //         userActions.getUserDetailSuccess({ userDetail: res.data })
+      //       ),
+      //       catchError(err => of(userActions.getAllUserError({ error: err })))
+      //     )
+      // )
     )
   );
 

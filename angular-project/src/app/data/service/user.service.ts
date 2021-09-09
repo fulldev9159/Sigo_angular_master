@@ -37,7 +37,7 @@ export class UserService {
       );
   }
 
-  getUsers(
+  getSameCompanyUsers(
     proveedor_id: number,
     area_id: number,
     contratos_id: number[]

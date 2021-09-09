@@ -111,7 +111,7 @@
                   <ng-container options>
                     <option value="null" selected disabled>Seleccione persona</option>
                     <option value="null">No posee superior directo</option>
-                    <ng-container *ngFor="let superior of superiores$ | async">
+                    <ng-container *ngFor="let superior of samecompanyusers$ | async">
                       <option [value]="superior.id">
                         {{ superior.nombres }} {{ superior.apellidos }}
                       </option>

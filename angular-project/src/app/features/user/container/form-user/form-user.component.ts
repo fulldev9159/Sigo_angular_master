@@ -49,7 +49,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   areas$: Observable<Area[]>;
   contracts$: Observable<Contract[]>;
   profiles$: Observable<Profile[]>;
-  superiores$: Observable<Data.User[]>;
+  samecompanyusers$: Observable<Data.User[]>;
 
   constructor(
     private userFacade: UserFacade,
@@ -133,7 +133,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       map(contratos => contratos || []),
       tap(contratos => this.checkContratosAndEnable(contratos))
     );
-    this.superiores$ = this.userFacade.getSuperiores$().pipe(
+    this.samecompanyusers$ = this.userFacade.getSameCompanyUsers$().pipe(
       map(usuarios => usuarios || []),
       tap(usuarios => this.checkSuperioresAndEnable(usuarios))
     );
@@ -217,7 +217,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
         if (contratos !== null && contratos !== undefined) {
           const providerID = this.formUser.get('proveedor_id').value;
           const areaID = this.formUser.get('area_id').value;
-          this.userFacade.getSuperiores(1, 1, [1]);
+          this.userFacade.getSameCompanyUsers(1, 1, [1]);
         } else {
           this.disableSuperiorFormControl();
         }

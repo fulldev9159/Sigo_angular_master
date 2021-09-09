@@ -17,18 +17,18 @@ export const getAllUserError = createAction(
   props<{ error: any }>()
 );
 
-export const getUsers = createAction(
-  '[Users] GET Users',
+export const getSameCompanyUsers = createAction(
+  '[Users] GET Same Company Users',
   props<{ proveedor_id: number; area_id: number; contratos_id: number[] }>()
 );
 
-export const getUsersSuccess = createAction(
-  '[Users] GET Users Success',
+export const getSameCompanyUsersSuccess = createAction(
+  '[Users] GET Same Company Users Success',
   props<{ users: Data.User[] }>()
 );
 
-export const getUsersError = createAction(
-  '[Users] GET Users Error',
+export const getSameCompanyUsersError = createAction(
+  '[Users] GET Same Company Users Error',
   props<{ error: any }>()
 );
 

@@ -61,18 +61,18 @@ export class UserFacade {
   // PROVIDERS
 
   // HIGHERS
-  public getSuperiores(
+  public getSameCompanyUsers(
     proveedor_id: number,
     area_id: number,
     contratos_id: number[]
   ): void {
     this.store.dispatch(
-      userActions.getUsers({ proveedor_id, area_id, contratos_id })
+      userActions.getSameCompanyUsers({ proveedor_id, area_id, contratos_id })
     );
   }
 
-  public getSuperiores$(): Observable<Data.User[]> {
-    return this.store.select(userSelectors.getSuperiores);
+  public getSameCompanyUsers$(): Observable<Data.User[]> {
+    return this.store.select(userSelectors.getSameCompanyUsers);
   }
   // HIGHERS
 
