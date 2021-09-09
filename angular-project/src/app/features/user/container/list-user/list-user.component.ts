@@ -163,16 +163,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
-                this.userFacade.deleteUser({
-                  userDelete: {
-                    usuario_id: +item.id,
-                  },
-                });
-                this.messageService.add({
-                  severity: 'success',
-                  summary: 'usuario eliminado',
-                  detail: 'Eliminación realizada con Éxito!',
-                });
+                this.userFacade.deleteUser(+item.id);
               },
             });
             // }

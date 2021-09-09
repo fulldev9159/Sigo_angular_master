@@ -103,3 +103,14 @@ export interface UserWithDetail extends User {
   contratos_marco: ContratoMarco[];
   perfiles: PerfilUser[];
 }
+
+export interface DeleteResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

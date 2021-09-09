@@ -11,6 +11,7 @@ import {
   DetalleUsuarioResponse,
   UserWithDetail,
   DetalleUsuario,
+  DeleteResponse,
 } from '@data';
 
 @Injectable({
@@ -132,6 +133,19 @@ export class UserService {
       .post<UserPostResponse>(`${this.apiUrl}/usuario/edit`, request)
       .pipe(
         map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.id;
+        })
+      );
+  }
+
+  deteleUser(usuario_id: number): Observable<number> {
+    return this.http
+      .post<DeleteResponse>(`${this.apiUrl}/usuario/delete`, { usuario_id })
+      .pipe(
+        map((res: DeleteResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }

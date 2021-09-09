@@ -5,6 +5,7 @@ import { Response } from '@storeOT/model';
 import * as UserModel from '@storeOT/features/user/user.model';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { UserFacade } from '@storeOT/features/user/user.facade';
 
 import { of } from 'rxjs';
 
@@ -20,7 +21,8 @@ export class UserEffects {
     private http: HttpClient,
     private userService: Data.UserService,
     private snackService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private userFacade: UserFacade
   ) {}
 
   getAllUser$ = createEffect(() =>
@@ -86,20 +88,27 @@ export class UserEffects {
   deleteUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.deleteUser),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/usuario/delete`, data.userDelete)
-          .pipe(
-            map((res: any) =>
-              userActions.deleteUserSuccess({
-                userId: +data.userDelete.usuario_id,
-                res: res.status,
-              })
-            ),
-            catchError(err => of(userActions.deleteUserError({ error: err })))
-          )
+      concatMap(({ usuario_id }) =>
+        this.userService.deteleUser(usuario_id).pipe(
+          map((usuario_id: number) =>
+            userActions.deleteUserSuccess({ usuario_id })
+          ),
+          catchError(error => of(userActions.deleteUserError({ error })))
+        )
       )
     )
+  );
+
+  notifyAfterdeleteUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(userActions.deleteUserSuccess),
+        tap(() => {
+          this.snackService.showMessage('Usuario eliminado con exito', 'ok');
+          this.userFacade.getAllUsers();
+        })
+      ),
+    { dispatch: false }
   );
 
   activateUser$ = createEffect(() =>

@@ -4,7 +4,8 @@ import * as Model from './user.model';
 import * as Data from '@data';
 
 // USER ACTIONS
-// Get All User
+
+// ::: Get All User
 export const getAllUser = createAction('[User GetAll] GET All User');
 
 export const getAllUserSuccess = createAction(
@@ -17,7 +18,7 @@ export const getAllUserError = createAction(
   props<{ error: any }>()
 );
 
-// Get Same Company Users
+// ::: Get Same Company Users
 export const getSameCompanyUsers = createAction(
   '[Users] GET Same Company Users',
   props<{ proveedor_id: number; area_id: number; contratos_id: number[] }>()
@@ -33,7 +34,7 @@ export const getSameCompanyUsersError = createAction(
   props<{ error: any }>()
 );
 
-// Get user by ID
+// ::: Get user by ID
 export const getUserById = createAction('[User GetUserById] GET User');
 
 export const getUserByIdSuccess = createAction(
@@ -46,7 +47,7 @@ export const getUserByIdError = createAction(
   props<{ error: any }>()
 );
 
-// Get User Detail
+// ::: Get User Detail
 export const getUserDetail = createAction(
   '[User getUserDetail] GET User Detail',
   props<{ usuario_id: number }>()
@@ -62,6 +63,23 @@ export const getUserDetailError = createAction(
   props<{ error: any }>()
 );
 
+// Delete User
+export const deleteUser = createAction(
+  '[User DeleteById] DELETE User',
+  props<{ usuario_id: number }>()
+);
+
+export const deleteUserSuccess = createAction(
+  '[User DeleteById] DELETE User Success',
+  props<{ usuario_id: number }>()
+);
+
+export const deleteUserError = createAction(
+  '[User DeleteById] DELETE User Error',
+  props<{ error: any }>()
+);
+
+// ::::::::::::::::::::::
 export const getArea = createAction(
   '[Area GetAll] GET Area',
   props<{ token: string }>()
@@ -119,21 +137,6 @@ export const getContractsSuccess = createAction(
 
 export const getContractsError = createAction(
   '[Contract GetAll] GET Contract Error',
-  props<{ error: any }>()
-);
-
-export const deleteUser = createAction(
-  '[User DeleteById] DELETE User',
-  props<{ userPosition: number }>()
-);
-
-export const deleteUserSuccess = createAction(
-  '[User DeleteById] DELETE User Success',
-  props<{ userId: any; res: any }>()
-);
-
-export const deleteUserError = createAction(
-  '[User DeleteById] DELETE User Error',
   props<{ error: any }>()
 );
 

@@ -32,8 +32,8 @@ export class UserFacade {
   }
 
   // DELETE
-  public deleteUser(data): void {
-    this.store.dispatch(userActions.deleteUser(data));
+  public deleteUser(usuario_id: number): void {
+    this.store.dispatch(userActions.deleteUser({ usuario_id }));
   }
 
   // ACTIVACION

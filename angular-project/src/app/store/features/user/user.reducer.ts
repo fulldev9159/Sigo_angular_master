@@ -71,10 +71,10 @@ export const reducerUser = createReducer(
     ...state,
     contract: payload.contract,
   })),
-  on(UserActions.deleteUserSuccess, (state, payload) => ({
-    ...state,
-    users: [...state.users.filter(i => +i.id !== +payload.userId)],
-  })),
+  // on(UserActions.deleteUserSuccess, (state, payload) => ({
+  //   ...state,
+  //   users: [...state.users.filter(i => +i.id !== +payload.usuario_id)],
+  // })),
   on(UserActions.activateUserSuccess, (state, payload) => ({
     ...state,
     users: [
