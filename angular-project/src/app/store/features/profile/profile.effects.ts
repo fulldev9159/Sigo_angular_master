@@ -17,19 +17,6 @@ export class ProfileEffects {
     private snackService: SnackBarService
   ) {}
 
-  // handleError(error: HttpErrorResponse): void {
-  //   let errorMessage = 'Unknown error!';
-  //   if (error.error instanceof ErrorEvent) {
-  //     // Client-side errors
-  //     errorMessage = `Error: ${error.error.message}`;
-  //   } else {
-  //     // Server-side errors
-  //     errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-  //   }
-  //   console.log(errorMessage);
-  //   this.snackService.showMessage(errorMessage, 'error');
-  // }
-
   getProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.getProfile),
