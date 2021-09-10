@@ -22,6 +22,16 @@ export class ProfileFacade {
     return this.store.select(profileSelectors.getProfiles);
   }
 
+  // PERMISSIONS
+  public getPermissions(): void {
+    this.store.dispatch(profileActions.getPermissions());
+  }
+
+  public getPermissions$(): Observable<Data.Permiso[]> {
+    return this.store.select(profileSelectors.getPermissions);
+  }
+  // PERMISSIONS
+
   // DELETE
   public deleteProfile(data): void {
     this.store.dispatch(profileActions.deleteProfile(data));
@@ -33,16 +43,6 @@ export class ProfileFacade {
     this.store.dispatch(profileActions.postProfile({ profile }));
   }
   // POST
-
-  // PERMISSIONS
-  public getPermissions(data): void {
-    this.store.dispatch(profileActions.getPermissions(data));
-  }
-
-  public getPermissions$(): Observable<Data.Permiso[]> {
-    return this.store.select(profileSelectors.getPermissions);
-  }
-  // PERMISSIONS
 
   // FORM
   public setFormProfile(data): void {

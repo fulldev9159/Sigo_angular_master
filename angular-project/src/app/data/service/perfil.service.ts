@@ -19,13 +19,29 @@ export class PerfilService {
 
   getPerfiles(): Observable<Data.Perfil[]> {
     return this.http
-      .post<Data.PerfilResponse>(`${this.apiUrl}/usuario/get_all`, {})
+      .post<Data.PerfilResponse>(`${this.apiUrl}/perfiles/get_all`, {})
       .pipe(
         map((res: Data.PerfilResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data;
+        })
+      );
+  }
+
+  getPermisos(): Observable<Data.Permiso[]> {
+    return this.http
+      .post<Data.PermisoResponse>(
+        `${this.apiUrl}/perfiles/permisos/get_all`,
+        {}
+      )
+      .pipe(
+        map((res: Data.PermisoResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.items;
         })
       );
   }

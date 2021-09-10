@@ -6,7 +6,6 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import * as Data from '@data';
 
 @Component({
@@ -28,20 +27,12 @@ export class FormPro2Component implements OnInit, OnDestroy {
 
   formPerfil: FormGroup = new FormGroup(this.formControls);
 
-  constructor(
-    private profileFacade: ProfileFacade,
-    private router: Router,
-    private authFacade: AuthFacade
-  ) {}
+  constructor(private profileFacade: ProfileFacade, private router: Router) {}
 
   ngOnInit(): void {
     this.profileFacade.resetData();
     this.initObservables();
-    this.authFacade.getLogin$().subscribe(authLogin => {
-      if (authLogin) {
-        this.profileFacade.getPermissions({ token: authLogin.token });
-      }
-    });
+    this.initData();
   }
 
   initObservables() {
@@ -68,5 +59,9 @@ export class FormPro2Component implements OnInit, OnDestroy {
   goBack(): void {
     this.profileFacade.resetData();
     this.router.navigate(['/app/profile/list-pro']);
+  }
+
+  initData(): void {
+    this.profileFacade.getPermissions();
   }
 }

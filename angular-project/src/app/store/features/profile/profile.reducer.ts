@@ -6,14 +6,14 @@ import * as Data from '@data';
 export const ProfileFeatureKey = 'profile';
 
 export interface StateProfile {
-  items: Data.Perfil[];
-  permissions: Data.Permiso[];
+  perfiles: Data.Perfil[];
+  permisos: Data.Permiso[];
   form: Model.Form;
 }
 
 export const initialStateProfile: StateProfile = {
-  items: [],
-  permissions: [],
+  perfiles: [],
+  permisos: [],
   form: null,
 };
 
@@ -23,13 +23,13 @@ export const reducerProfile = createReducer(
   on(ProfileActions.getProfile, state => state),
   on(ProfileActions.getProfileSuccess, (state, payload) => ({
     ...state,
-    items: payload.perfiles,
+    perfiles: payload.perfiles,
   })),
 
   on(ProfileActions.getPermissions, state => state),
   on(ProfileActions.getPermissionsSuccess, (state, payload) => ({
     ...state,
-    permissions: payload.permissions,
+    permisos: payload.permisos,
   })),
 
   on(ProfileActions.setFormProfile, (state, payload) => ({
@@ -39,7 +39,7 @@ export const reducerProfile = createReducer(
 
   on(ProfileActions.deleteProfileSuccess, (state, payload) => ({
     ...state,
-    items: [...state.items.filter(i => +i.id !== +payload.profileId)],
+    perfiles: [...state.perfiles.filter(i => +i.id !== +payload.profileId)],
   })),
   on(ProfileActions.resetData, (state, payload) => ({
     ...initialStateProfile,

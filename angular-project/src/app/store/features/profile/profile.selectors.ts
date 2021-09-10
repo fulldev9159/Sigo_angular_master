@@ -7,12 +7,12 @@ export const selectProfile = createFeatureSelector<fromProfile.StateProfile>(
 
 export const getProfiles = createSelector(
   selectProfile,
-  (state: fromProfile.StateProfile) => state.items
+  (state: fromProfile.StateProfile) => state.perfiles
 );
 
 export const getPermissions = createSelector(
   selectProfile,
-  (state: fromProfile.StateProfile) => state.permissions
+  (state: fromProfile.StateProfile) => state.permisos
 );
 
 export const getProfile = createSelector(

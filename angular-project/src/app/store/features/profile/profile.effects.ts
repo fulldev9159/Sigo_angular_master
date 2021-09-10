@@ -37,21 +37,16 @@ export class ProfileEffects {
   getPermissions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.getPermissions),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/perfiles/permisos/get_all`, {
-            token: data.token,
-          })
-          .pipe(
-            map((res: any) =>
-              profileActions.getPermissionsSuccess({
-                permissions: res.data.items,
-              })
-            ),
-            catchError(err =>
-              of(profileActions.getPermissionsError({ error: err }))
+      concatMap(() =>
+        this.perfilService.getPermisos().pipe(
+          map(
+            (permisos: Data.Permiso[]) =>
+              profileActions.getPermissionsSuccess({ permisos }),
+            catchError(error =>
+              of(profileActions.getPermissionsError({ error }))
             )
           )
+        )
       )
     )
   );
