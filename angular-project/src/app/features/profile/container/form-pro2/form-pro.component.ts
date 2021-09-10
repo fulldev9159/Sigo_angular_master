@@ -7,8 +7,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import * as Data from '@data';
 
-import { Permit } from '@storeOT/features/profile/profile.model';
 @Component({
   selector: 'app-form-pro',
   templateUrl: './form-pro.component.html',
@@ -46,8 +46,8 @@ export class FormPro2Component implements OnInit, OnDestroy {
 
   initObservables() {
     this.permissions$ = this.profileFacade.getPermissions$().pipe(
-      map((permissions: Permit[]) => {
-        const data = permissions.map((permit: Permit) => {
+      map((permissions: Data.Permiso[]) => {
+        const data = permissions.map((permit: Data.Permiso) => {
           let permitCustom;
           if (permit && permit.slug) {
             permitCustom = { ...permit, module: permit.slug.split('_')[0] };

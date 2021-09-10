@@ -9,23 +9,26 @@ import * as profileActions from './profile.actions';
 import { environment } from '@environment';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
+import * as Data from '@data';
 @Injectable()
 export class ProfileEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
+    private perfilService: Data.PerfilService,
     private snackService: SnackBarService
   ) {}
 
   getProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.getProfile),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}/perfiles/get_all`, {}).pipe(
-          map((res: any) =>
-            profileActions.getProfileSuccess({ profile: res.data })
-          ),
-          catchError(err => of(profileActions.getProfileError({ error: err })))
+      concatMap(() =>
+        this.perfilService.getPerfiles().pipe(
+          map(
+            (perfiles: Data.Perfil[]) =>
+              profileActions.getProfileSuccess({ perfiles }),
+            catchError(error => of(profileActions.getProfileError({ error })))
+          )
         )
       )
     )

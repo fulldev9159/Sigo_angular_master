@@ -1,12 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ProfileActions from './profile.actions';
 import * as Model from './profile.model';
+import * as Data from '@data';
 
 export const ProfileFeatureKey = 'profile';
 
 export interface StateProfile {
-  items: Model.Profile[];
-  permissions: Model.Permit[];
+  items: Data.Perfil[];
+  permissions: Data.Permiso[];
   form: Model.Form;
 }
 
@@ -22,7 +23,7 @@ export const reducerProfile = createReducer(
   on(ProfileActions.getProfile, state => state),
   on(ProfileActions.getProfileSuccess, (state, payload) => ({
     ...state,
-    items: payload.profile,
+    items: payload.perfiles,
   })),
 
   on(ProfileActions.getPermissions, state => state),

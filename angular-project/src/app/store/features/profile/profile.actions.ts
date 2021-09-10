@@ -1,18 +1,21 @@
 import { createAction, props } from '@ngrx/store';
 import * as Model from './profile.model';
+import * as Data from '@data';
 
 // PROFILE LIST
 export const getProfile = createAction('[Profile GetAll] GET Profile');
 
 export const getProfileSuccess = createAction(
   '[Profile GetAll] GET Profile Success',
-  props<{ profile: Model.Profile[] }>()
+  props<{ perfiles: Data.Perfil[] }>()
 );
 
 export const getProfileError = createAction(
   '[Profile GetAll] GET Profile Error',
   props<{ error: any }>()
 );
+
+//  Delete
 
 export const deleteProfile = createAction(
   '[Profile DeleteById] DELETE Profile',
@@ -31,7 +34,7 @@ export const deleteProfileError = createAction(
 
 export const editProfile = createAction(
   '[Profile EditById] EDIT Profile',
-  props<{ profile: Model.Profile }>()
+  props<{ profile: Data.Perfil }>()
 );
 
 export const editProfileSuccess = createAction(
@@ -50,7 +53,7 @@ export const postProfile = createAction(
 
 export const postProfileSuccess = createAction(
   '[Profile Post] CREATE Profile Success',
-  props<{ profile: Model.Profile }>()
+  props<{ profile: Data.Perfil }>()
 );
 
 export const postProfileError = createAction(
@@ -65,7 +68,7 @@ export const getPermissions = createAction(
 
 export const getPermissionsSuccess = createAction(
   '[Permissions GetAll] GET Permissions Success',
-  props<{ permissions: Model.Permit[] }>()
+  props<{ permissions: Data.Permiso[] }>()
 );
 
 export const getPermissionsError = createAction(

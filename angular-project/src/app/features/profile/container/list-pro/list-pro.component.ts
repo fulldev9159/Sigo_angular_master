@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import * as ModelProfile from '@storeOT/features/profile/profile.model';
 import * as _ from 'lodash';
+import * as Data from '@data';
 
 @Component({
   selector: 'app-list-pro',
@@ -96,7 +97,7 @@ export class ListProComponent implements OnInit, OnDestroy {
           icon: 'p-button-icon pi pi-eye',
           class: 'p-button-rounded p-button-info p-mr-2',
           onClick: (event: Event, item) => {
-            const data = item.permisos.map((permit: ModelProfile.Permit) => {
+            const data = item.permisos.map((permit: Data.Permiso) => {
               let permitCustom;
               if (permit && permit.slug) {
                 permitCustom = { ...permit, module: permit.slug.split('_')[0] };

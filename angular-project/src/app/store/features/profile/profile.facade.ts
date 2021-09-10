@@ -5,19 +5,20 @@ import { Observable } from 'rxjs';
 import * as profileActions from './profile.actions';
 import * as profileSelectors from './profile.selectors';
 import * as Model from './profile.model';
+import * as Data from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileFacade {
-  constructor(private store: Store<Model.Profile>) {}
+  constructor(private store: Store<Data.Perfil>) {}
 
   // PROFILE
   public getProfile(): void {
     this.store.dispatch(profileActions.getProfile());
   }
 
-  public getProfile$(): Observable<Model.Profile[]> {
+  public getProfile$(): Observable<Data.Perfil[]> {
     return this.store.select(profileSelectors.getProfiles);
   }
 
@@ -28,7 +29,7 @@ export class ProfileFacade {
   // DELETE
 
   // POST
-  public postProfile(profile: Model.Profile): void {
+  public postProfile(profile: Data.Perfil): void {
     this.store.dispatch(profileActions.postProfile({ profile }));
   }
   // POST
@@ -38,7 +39,7 @@ export class ProfileFacade {
     this.store.dispatch(profileActions.getPermissions(data));
   }
 
-  public getPermissions$(): Observable<Model.Permit[]> {
+  public getPermissions$(): Observable<Data.Permiso[]> {
     return this.store.select(profileSelectors.getPermissions);
   }
   // PERMISSIONS

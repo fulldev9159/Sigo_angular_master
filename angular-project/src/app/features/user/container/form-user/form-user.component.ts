@@ -6,7 +6,6 @@ import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
-import { Profile } from '@storeOT/features/profile/profile.model';
 
 import * as Data from '@data';
 
@@ -45,7 +44,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   proveedores$: Observable<Data.Proveedor[]>;
   areas$: Observable<Data.Area[]>;
   contracts$: Observable<Data.Contrato[]>;
-  profiles$: Observable<Profile[]>;
+  profiles$: Observable<Data.Perfil[]>;
   samecompanyusers$: Observable<Data.User[]>;
 
   constructor(
@@ -69,6 +68,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
         }
       })
     );
+
     this.subscription.add(
       this.userFacade
         .getAllDataUsuario$()

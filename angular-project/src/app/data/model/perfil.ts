@@ -8,4 +8,15 @@ export interface Perfil {
   nombre: string;
   permisos: Permiso[];
   updated_at: Date;
+  superior_id: number;
+  superior_nombre: string;
+}
+
+export interface PerfilResponse {
+  data: Perfil[];
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
 }

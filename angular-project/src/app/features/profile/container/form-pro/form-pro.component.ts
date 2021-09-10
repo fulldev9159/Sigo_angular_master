@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import * as Data from '@data';
 
 @Component({
   selector: 'app-form-pro',
@@ -29,7 +30,7 @@ export class FormProComponent implements OnInit, OnDestroy {
   public formProfile: FormGroup;
   public permissions$: Observable<any>;
   public profiles$: Observable<any[]>;
-  public permissionsOriginal$: Observable<Model.Permit[]>;
+  public permissionsOriginal$: Observable<Data.Permiso[]>;
   private destroyInstance$: Subject<boolean> = new Subject();
 
   constructor(
@@ -72,8 +73,8 @@ export class FormProComponent implements OnInit, OnDestroy {
     this.permissionsOriginal$ = this.profileFacade.getPermissions$();
 
     this.permissions$ = this.profileFacade.getPermissions$().pipe(
-      map((permissions: Model.Permit[]) => {
-        const data = permissions.map((permit: Model.Permit) => {
+      map((permissions: Data.Permiso[]) => {
+        const data = permissions.map((permit: Data.Permiso) => {
           let permitCustom;
           if (permit && permit.slug) {
             permitCustom = { ...permit, module: permit.slug.split('_')[0] };
