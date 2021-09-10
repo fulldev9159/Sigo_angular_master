@@ -27,6 +27,9 @@ export interface StateOt {
 
   coordinators: Data.User[];
   trabajadores: Data.User[];
+
+  saving: boolean;
+  errorSaving: Error;
 }
 
 export const initialStateOt: StateOt = {
@@ -73,6 +76,9 @@ export const initialStateOt: StateOt = {
 
   coordinators: [],
   trabajadores: [],
+
+  saving: false,
+  errorSaving: null,
 };
 
 export const reducerOt = createReducer(
@@ -344,5 +350,37 @@ export const reducerOt = createReducer(
   on(OtActions.resetCECO, (state, payload) => ({
     ...state,
     cecos: [],
+  })),
+
+  on(OtActions.postOt, (state, { ot }) => ({
+    ...state,
+    saving: true,
+    errorSaving: null,
+  })),
+  on(OtActions.postOtSuccess, (state, { ot }) => ({
+    ...state,
+    saving: false,
+    errorSaving: null,
+  })),
+  on(OtActions.postOtError, (state, { error }) => ({
+    ...state,
+    saving: false,
+    errorSaving: error,
+  })),
+
+  on(OtActions.editOt, (state, { ot }) => ({
+    ...state,
+    saving: true,
+    errorSaving: null,
+  })),
+  on(OtActions.editOtSuccess, (state, { OtId, Ot }) => ({
+    ...state,
+    saving: false,
+    errorSaving: null,
+  })),
+  on(OtActions.editOtError, (state, { error }) => ({
+    ...state,
+    saving: false,
+    errorSaving: error,
   }))
 );

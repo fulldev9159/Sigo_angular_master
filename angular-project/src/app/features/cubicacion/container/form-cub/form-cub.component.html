@@ -67,7 +67,7 @@
 
           <div class="col-xs-12 col-md-12 text-right button-guardar-cubicacion" id="submitButtonBox">
             <button (click)="goBack()" class="btn btn-light mr-2">Cancelar</button>
-            <button (click)="submit()" [disabled]="!valid" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
+            <button (click)="submit()" [disabled]="!valid || (saving$ | async) === true" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
           </div>
         </ng-container>
       </app-card>

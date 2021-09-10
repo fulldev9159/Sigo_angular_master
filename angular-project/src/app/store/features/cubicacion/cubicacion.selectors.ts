@@ -1,9 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromCubicacion from './cubicacion.reducer';
 
-export const selectCubicacion = createFeatureSelector<fromCubicacion.StateCubicacion>(
-  fromCubicacion.CubicacionFeatureKey
-);
+export const selectCubicacion =
+  createFeatureSelector<fromCubicacion.StateCubicacion>(
+    fromCubicacion.CubicacionFeatureKey
+  );
 
 export const getCubicaciones = createSelector(
   selectCubicacion,
@@ -58,4 +59,14 @@ export const getDetalleCubicacion = createSelector(
 export const getSelectedCubicacion = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.selectedCubicacion
+);
+
+export const getSavingCubicacion = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.saving
+);
+
+export const getSaveCubicacionError = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.errorSaving
 );

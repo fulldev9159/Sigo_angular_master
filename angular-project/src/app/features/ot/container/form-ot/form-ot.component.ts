@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription, BehaviorSubject, of, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
@@ -29,6 +29,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
   cubicacionSeleccionada: Cubicacion = null;
   sitioSeleccionado: Site = null;
   nombre_plan_proyecto: string;
+
+  saving$: Observable<boolean> = of(false);
+  savingError$: Observable<Error> = of(null);
 
   @ViewChild('generalForm', {
     read: GeneralFormComponent,
@@ -236,6 +239,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    this.saving$ = this.otFacade.getSavingOT$();
+    this.savingError$ = this.otFacade.getSaveOTError$();
   }
 
   resetPlanProyectoFormControl(): void {

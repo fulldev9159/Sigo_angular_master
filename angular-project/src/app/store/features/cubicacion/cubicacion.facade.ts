@@ -208,4 +208,12 @@ export class CubicacionFacade {
   public getSelectedCubicacion$(): Observable<cubModel.Cubicacion> {
     return this.store.select(cubicacionSelectors.getSelectedCubicacion);
   }
+
+  public getSavingCubicacion$(): Observable<boolean> {
+    return this.store.select(cubicacionSelectors.getSavingCubicacion);
+  }
+
+  public getSaveCubicacionError$(): Observable<Error> {
+    return this.store.select(cubicacionSelectors.getSaveCubicacionError);
+  }
 }
