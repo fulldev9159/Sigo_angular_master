@@ -8,8 +8,8 @@ Resource    ../resource.robot
 *** Test Cases ***
 Crear OT
     Open Browser To Page    ${url}
-    # Login                   ${user}                           password
-    Login                   mgestor1                          password
+    # Login                   ${user}                           pass
+    Login                   mgestor1                          pass
     Go To                   ${url}/app/cubicacion/list-cub
     FOR                     ${i}                              IN RANGE                            122    199
     ${cub existe}=          Existe cubicacion                 CUBICACION ${i} HAPPY PATH ROBOT

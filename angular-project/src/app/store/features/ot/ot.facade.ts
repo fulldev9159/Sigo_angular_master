@@ -317,4 +317,12 @@ export class OtFacade {
   public resetCECO(): void {
     this.store.dispatch(otActions.resetCECO());
   }
+
+  public getSavingOT$(): Observable<boolean> {
+    return this.store.select(otSelectors.getSavingOT);
+  }
+
+  public getSaveOTError$(): Observable<Error> {
+    return this.store.select(otSelectors.getSaveOTError);
+  }
 }

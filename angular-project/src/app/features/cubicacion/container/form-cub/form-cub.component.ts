@@ -30,6 +30,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   selectedCubicacionError$: Observable<Error> = of(null);
   incompleteCubicacionError$: Observable<Error> = of(null);
 
+  saving$: Observable<boolean> = of(false);
+  savingError$: Observable<Error> = of(null);
+
   @ViewChild('generalForm', {
     read: GeneralFormComponent,
     static: false,
@@ -95,6 +98,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.selectedCubicacionError$ = this.cubageFacade
       .getSingleCubicacionError$()
       .pipe(filter(error => error !== null && error !== undefined));
+
+    this.saving$ = this.cubageFacade.getSavingCubicacion$();
+    this.savingError$ = this.cubageFacade.getSaveCubicacionError$();
   }
 
   ngOnDestroy(): void {

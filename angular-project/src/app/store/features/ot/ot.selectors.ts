@@ -91,3 +91,13 @@ export const getTrabajadores = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.trabajadores
 );
+
+export const getSavingOT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.saving
+);
+
+export const getSaveOTError = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.errorSaving
+);

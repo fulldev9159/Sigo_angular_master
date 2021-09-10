@@ -8,7 +8,7 @@ Resource    resource.robot
 *** Test Cases ***
 # Crear OT
 #    Open Browser To Page       ${url}
-#    Login                      jcastill                                             password 
+#    Login                      jcastill                                             pass 
 #    Navegar al menu            Crear OT 
 #    Set Nombre OT              OT Robot Test
 #    Set Tipo OT                OT

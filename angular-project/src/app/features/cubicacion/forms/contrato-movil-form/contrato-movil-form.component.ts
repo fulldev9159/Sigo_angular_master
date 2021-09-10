@@ -377,9 +377,11 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
         .subscribe(([regiones, cubicacion]) => {
           const region = regiones.find(reg => reg.id === cubicacion.region_id);
 
-          this.form.get('region_id').setValue(region.id);
-
           if (region) {
+            setTimeout(() => {
+              this.form.get('region_id').setValue(region.id);
+            }, 100);
+
             setTimeout(() => {
               this.lpusCarrito = (cubicacion.lpus || []).map(lpu => ({
                 cantidad: lpu.lpu_cantidad,

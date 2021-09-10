@@ -17,7 +17,7 @@ Flujo happy path
       # CRITERIOS DE ACEPTACION
          # - Debe ver la OT en la pestaña abiertas solamente
          # - Por ahora solo puede tener la acción de ver detalles de la OT
-   #  Login                          ${user}       password
+   #  Login                          ${user}       pass
    #  No debe existir en la tabla    ${OT name}    Ejecucion
    #  No debe existir en la tabla    ${OT name}    Cerradas
    #  Debe existir en la tabla       ${OT name}    Abiertas
