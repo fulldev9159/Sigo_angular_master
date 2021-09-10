@@ -155,7 +155,7 @@ export class FormProComponent implements OnInit, OnDestroy {
       if (formData.superior === 0) {
         formData.superior = null;
       }
-      this.profileFacade.postProfile(formData);
+      this.profileFacade.createPerfil(formData);
       this.messageService.add({
         severity: 'success',
         summary: 'Perfil generado',

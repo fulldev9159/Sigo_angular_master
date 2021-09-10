@@ -15,7 +15,7 @@ export const getProfileError = createAction(
   props<{ error: any }>()
 );
 
-// Get Permisos
+// GET PERMISOS
 
 export const getPermissions = createAction(
   '[Permissions GetAll] GET Permissions'
@@ -31,7 +31,24 @@ export const getPermissionsError = createAction(
   props<{ error: any }>()
 );
 
-//  Delete
+// CREATE PERFIL
+
+export const createPerfil = createAction(
+  '[Profile Post] CREATE Profile',
+  props<{ perfil: Data.CreatePerfilRequest }>()
+);
+
+export const createPerfilSuccess = createAction(
+  '[Profile Post] CREATE Profile Success',
+  props<{ perfil_id: number }>()
+);
+
+export const createPerfilError = createAction(
+  '[Profile Post] CREATE Profile Error',
+  props<{ error: any }>()
+);
+
+//  DELETE
 
 export const deleteProfile = createAction(
   '[Profile DeleteById] DELETE Profile',
@@ -59,21 +76,6 @@ export const editProfileSuccess = createAction(
 
 export const editProfileError = createAction(
   '[Profile EditById] EDIT Profile Error',
-  props<{ error: any }>()
-);
-
-export const postProfile = createAction(
-  '[Profile Post] CREATE Profile',
-  props<{ profile: any }>()
-);
-
-export const postProfileSuccess = createAction(
-  '[Profile Post] CREATE Profile Success',
-  props<{ profile: Data.Perfil }>()
-);
-
-export const postProfileError = createAction(
-  '[Profile Post] CREATE Profile Error',
   props<{ error: any }>()
 );
 

@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Router } from '@angular/router';
 
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as profileActions from './profile.actions';
@@ -16,7 +17,8 @@ export class ProfileEffects {
     private actions$: Actions,
     private http: HttpClient,
     private perfilService: Data.PerfilService,
-    private snackService: SnackBarService
+    private snackService: SnackBarService,
+    private router: Router
   ) {}
 
   getProfile$ = createEffect(() =>
@@ -53,28 +55,46 @@ export class ProfileEffects {
 
   postProfile$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(profileActions.postProfile),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}/perfiles/create`, data.profile).pipe(
+      ofType(profileActions.createPerfil),
+      concatMap(({ perfil }) =>
+        this.perfilService.creatPerfil(perfil).pipe(
           map(
-            (res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return profileActions.postProfileSuccess({
-                profile: res.data.items,
-              });
-            },
-            (error: HttpErrorResponse) => {
-              // this.handleError(error);
-            }
-          ),
-          catchError(err =>
-            of(profileActions.getPermissionsError({ error: err }))
+            (perfil_id: number) =>
+              profileActions.createPerfilSuccess({ perfil_id }),
+            catchError(error => of(profileActions.createPerfilError({ error })))
           )
         )
       )
     )
+  );
+
+  notifyAfterCreatePerfilSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(profileActions.createPerfilSuccess),
+        tap(() => {
+          this.snackService.showMessage(
+            `Datos del perfil guardados con Éxito!`,
+            ''
+          );
+          this.router.navigate(['/app/profile/list-pro']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterCreatePerfilError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(profileActions.createPerfilError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            `ERR: ${error.error.status.description}`,
+            'error'
+          );
+        })
+      ),
+    { dispatch: false }
   );
 
   putProfile$ = createEffect(() =>

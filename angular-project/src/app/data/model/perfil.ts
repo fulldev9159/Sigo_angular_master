@@ -20,3 +20,21 @@ export interface PerfilResponse {
     responseCode: number;
   };
 }
+
+export interface CreatePerfilRequest {
+  nombre: string;
+  descripcion: string;
+  superior: number;
+  permisos: number[];
+}
+
+export interface CreatePerfilResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

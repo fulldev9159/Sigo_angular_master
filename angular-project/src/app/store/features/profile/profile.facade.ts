@@ -38,11 +38,11 @@ export class ProfileFacade {
   }
   // DELETE
 
-  // POST
-  public postProfile(profile: Data.Perfil): void {
-    this.store.dispatch(profileActions.postProfile({ profile }));
+  // CREATE
+  public createPerfil(perfil: Data.CreatePerfilRequest): void {
+    this.store.dispatch(profileActions.createPerfil({ perfil }));
   }
-  // POST
+  // CREATE
 
   // FORM
   public setFormProfile(data): void {

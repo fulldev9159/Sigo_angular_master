@@ -45,4 +45,19 @@ export class PerfilService {
         })
       );
   }
+
+  creatPerfil(perfil: Data.CreatePerfilRequest): Observable<number> {
+    return this.http
+      .post<Data.CreatePerfilResponse>(`${this.apiUrl}/perfiles/create`, {
+        perfil,
+      })
+      .pipe(
+        map((res: Data.CreatePerfilResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.id;
+        })
+      );
+  }
 }
