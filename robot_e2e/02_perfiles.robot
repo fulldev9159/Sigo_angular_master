@@ -19,7 +19,7 @@ Resource    resource.robot
 *** Test Cases ***
 Crear perfil
     Open Browser To Page                  ${url}
-    Login                                 admin                           password
+    Login                                 admin                           pass
     Navegar al menu                       Perfil
     Acceder a creacion de nuevo perfil
     Set nombre perfil                     TEST Jefe Área
