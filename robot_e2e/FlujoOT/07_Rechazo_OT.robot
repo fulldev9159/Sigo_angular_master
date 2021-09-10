@@ -9,7 +9,7 @@ Resource    ../resource.robot
 *** Test Cases ***
 Flujo rechazo OT
     Open Browser To Page                 ${url}
-    Login                                cadmincontrato1                                                                                                                                           password
+    Login                                cadmincontrato1                                                                                                                                           pass
     Debe existir en la tabla             ${nombre OT}                                                                                                                                              Ejecucion
     Acciones PEND AUTH ADMIN Contrato
     Execute javascript                   document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(3)>a").click()
@@ -21,7 +21,7 @@ Flujo rechazo OT
     Execute javascript                   document.querySelector("#navbarSupportedContent > ul > li > div > a").click()
     # Logout
 
-    Login                       mgestor1        password
+    Login                       mgestor1        pass
     Debe existir en la tabla    ${nombre OT}    Ejecucion
 
 
