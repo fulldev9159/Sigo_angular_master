@@ -28,11 +28,10 @@ export class ProfileEffects {
       ofType(profileActions.getProfile),
       concatMap(() =>
         this.perfilService.getPerfiles().pipe(
-          map(
-            (perfiles: Data.Perfil[]) =>
-              profileActions.getProfileSuccess({ perfiles }),
-            catchError(error => of(profileActions.getProfileError({ error })))
-          )
+          map((perfiles: Data.Perfil[]) =>
+            profileActions.getProfileSuccess({ perfiles })
+          ),
+          catchError(error => of(profileActions.getProfileError({ error })))
         )
       )
     )
@@ -43,13 +42,10 @@ export class ProfileEffects {
       ofType(profileActions.getPermissions),
       concatMap(() =>
         this.perfilService.getPermisos().pipe(
-          map(
-            (permisos: Data.Permiso[]) =>
-              profileActions.getPermissionsSuccess({ permisos }),
-            catchError(error =>
-              of(profileActions.getPermissionsError({ error }))
-            )
-          )
+          map((permisos: Data.Permiso[]) =>
+            profileActions.getPermissionsSuccess({ permisos })
+          ),
+          catchError(error => of(profileActions.getPermissionsError({ error })))
         )
       )
     )
@@ -60,11 +56,10 @@ export class ProfileEffects {
       ofType(profileActions.createPerfil),
       concatMap(({ perfil }) =>
         this.perfilService.creatPerfil(perfil).pipe(
-          map(
-            (perfil_id: number) =>
-              profileActions.createPerfilSuccess({ perfil_id }),
-            catchError(error => of(profileActions.createPerfilError({ error })))
-          )
+          map((perfil_id: number) =>
+            profileActions.createPerfilSuccess({ perfil_id })
+          ),
+          catchError(error => of(profileActions.createPerfilError({ error })))
         )
       )
     )
@@ -104,11 +99,10 @@ export class ProfileEffects {
       ofType(profileActions.editProfile),
       concatMap(({ perfil }) =>
         this.perfilService.editPerfil(perfil).pipe(
-          map(
-            (perfil_id: number) =>
-              profileActions.editProfileSuccess({ perfil_id }),
-            catchError(error => of(profileActions.editProfileError({ error })))
-          )
+          map((perfil_id: number) =>
+            profileActions.editProfileSuccess({ perfil_id })
+          ),
+          catchError(error => of(profileActions.editProfileError({ error })))
         )
       )
     )
@@ -148,13 +142,10 @@ export class ProfileEffects {
       ofType(profileActions.deleteProfile),
       concatMap(({ perfil_id }) =>
         this.perfilService.deletePerfil(perfil_id).pipe(
-          map(
-            (perfil_id: number) =>
-              profileActions.deleteProfileSuccess({ perfil_id }),
-            catchError(error =>
-              of(profileActions.deleteProfileError({ error }))
-            )
-          )
+          map((perfil_id: number) =>
+            profileActions.deleteProfileSuccess({ perfil_id })
+          ),
+          catchError(error => of(profileActions.deleteProfileError({ error })))
         )
       )
     )

@@ -169,11 +169,10 @@ export class UserEffects {
       ofType(userActions.getContracts),
       concatMap(({ proveedor_id }) =>
         this.userService.getContratos(proveedor_id).pipe(
-          map(
-            (contratos: Data.Contrato[]) =>
-              userActions.getContractsSuccess({ contratos }),
-            catchError(error => of(userActions.getContractsError({ error })))
-          )
+          map((contratos: Data.Contrato[]) =>
+            userActions.getContractsSuccess({ contratos })
+          ),
+          catchError(error => of(userActions.getContractsError({ error })))
         )
       )
     )

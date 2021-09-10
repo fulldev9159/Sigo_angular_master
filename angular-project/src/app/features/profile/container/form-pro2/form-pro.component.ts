@@ -75,12 +75,25 @@ export class FormPro2Component implements OnInit, OnDestroy {
 
   saveProfile(): void {
     const perfil_id = this.formPerfil.get('id').value;
+    const permisosOT =
+      this.formPerfil.get('permisos_OT').value === null
+        ? []
+        : this.formPerfil.get('permisos_OT').value;
+    const permisosCubicacion =
+      this.formPerfil.get('permisos_CUBICACION').value === null
+        ? []
+        : this.formPerfil.get('permisos_CUBICACION').value;
+    const permisosPerfil =
+      this.formPerfil.get('permisos_PERFIL').value === null
+        ? []
+        : this.formPerfil.get('permisos_PERFIL').value;
+    const permisos: number[] = [
+      ...permisosOT,
+      ...permisosCubicacion,
+      ...permisosPerfil,
+    ];
+
     if (perfil_id === null) {
-      const permisos: number[] = [
-        ...this.formPerfil.get('permisos_OT').value,
-        ...this.formPerfil.get('permisos_CUBICACION').value,
-        ...this.formPerfil.get('permisos_PERFIL').value,
-      ];
       const request: Data.CreatePerfilRequest = {
         nombre: this.formPerfil.get('nombre').value,
         descripcion: this.formPerfil.get('descripcion').value,
@@ -89,6 +102,7 @@ export class FormPro2Component implements OnInit, OnDestroy {
       };
 
       console.log(request);
+      this.profileFacade.createPerfil(request);
     }
   }
 }
