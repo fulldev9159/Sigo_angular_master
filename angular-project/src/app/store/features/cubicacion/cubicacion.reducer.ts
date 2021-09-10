@@ -17,6 +17,8 @@ export interface StateCubicacion {
   subContractedServices: cubModel.Service[];
   autoSuggest: cubModel.AutoSuggestItem[];
   detalleCubicacion: cubModel.ResponseDetalleCubicacion[];
+  saving: boolean;
+  errorSaving: Error;
 }
 
 export const initialStateCubicacion: StateCubicacion = {
@@ -31,6 +33,8 @@ export const initialStateCubicacion: StateCubicacion = {
   subContractedServices: [],
   autoSuggest: [],
   detalleCubicacion: [],
+  saving: false,
+  errorSaving: null,
 };
 
 export const reducerCubicacion = createReducer(
@@ -127,5 +131,37 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.resetServices, (state, payload) => ({
     ...state,
     subContractedServices: [],
+  })),
+
+  on(CubicacionActions.postCubicacion, (state, { cubicacion }) => ({
+    ...state,
+    saving: true,
+    errorSaving: null,
+  })),
+  on(CubicacionActions.postCubicacionSuccess, (state, { cubicacion }) => ({
+    ...state,
+    saving: false,
+    errorSaving: null,
+  })),
+  on(CubicacionActions.postCubicacionError, (state, { error }) => ({
+    ...state,
+    saving: false,
+    errorSaving: error,
+  })),
+
+  on(CubicacionActions.editCubicacion, (state, { cubicacion }) => ({
+    ...state,
+    saving: true,
+    errorSaving: null,
+  })),
+  on(CubicacionActions.editCubicacionSuccess, (state, { id }) => ({
+    ...state,
+    saving: false,
+    errorSaving: null,
+  })),
+  on(CubicacionActions.editCubicacionError, (state, { error }) => ({
+    ...state,
+    saving: false,
+    errorSaving: error,
   }))
 );
