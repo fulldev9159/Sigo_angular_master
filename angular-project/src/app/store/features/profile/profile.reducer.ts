@@ -39,7 +39,7 @@ export const reducerProfile = createReducer(
 
   on(ProfileActions.deleteProfileSuccess, (state, payload) => ({
     ...state,
-    perfiles: [...state.perfiles.filter(i => +i.id !== +payload.profileId)],
+    perfiles: [...state.perfiles.filter(i => +i.id !== +payload.perfil_id)],
   })),
   on(ProfileActions.resetData, (state, payload) => ({
     ...initialStateProfile,

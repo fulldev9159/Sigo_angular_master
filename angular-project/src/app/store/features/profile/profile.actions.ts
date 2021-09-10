@@ -48,34 +48,37 @@ export const createPerfilError = createAction(
   props<{ error: any }>()
 );
 
-//  DELETE
-
-export const deleteProfile = createAction(
-  '[Profile DeleteById] DELETE Profile',
-  props<{ profilePosition: number }>()
-);
-
-export const deleteProfileSuccess = createAction(
-  '[Profile DeleteById] DELETE Profile Success',
-  props<{ profileId: any; res: any }>()
-);
-
-export const deleteProfileError = createAction(
-  '[Profile DeleteById] DELETE Profile Error',
-  props<{ error: any }>()
-);
+// EDIT
 
 export const editProfile = createAction(
   '[Profile EditById] EDIT Profile',
-  props<{ profile: Data.Perfil }>()
+  props<{ perfil: Data.EditPerfilRequest }>()
 );
 
 export const editProfileSuccess = createAction(
-  '[Profile EditById] EDIT Profile Success'
+  '[Profile EditById] EDIT Profile Success',
+  props<{ perfil_id: number }>()
 );
 
 export const editProfileError = createAction(
   '[Profile EditById] EDIT Profile Error',
+  props<{ error: any }>()
+);
+
+//  DELETE
+
+export const deleteProfile = createAction(
+  '[Profile DeleteById] DELETE Profile',
+  props<{ perfil_id: number }>()
+);
+
+export const deleteProfileSuccess = createAction(
+  '[Profile DeleteById] DELETE Profile Success',
+  props<{ perfil_id: number }>()
+);
+
+export const deleteProfileError = createAction(
+  '[Profile DeleteById] DELETE Profile Error',
   props<{ error: any }>()
 );
 

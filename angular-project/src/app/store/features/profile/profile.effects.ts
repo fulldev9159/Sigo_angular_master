@@ -7,6 +7,8 @@ import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as profileActions from './profile.actions';
+import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
+
 import { environment } from '@environment';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
@@ -15,10 +17,10 @@ import * as Data from '@data';
 export class ProfileEffects {
   constructor(
     private actions$: Actions,
-    private http: HttpClient,
     private perfilService: Data.PerfilService,
     private snackService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private profileFacade: ProfileFacade
   ) {}
 
   getProfile$ = createEffect(() =>
@@ -100,33 +102,85 @@ export class ProfileEffects {
   putProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.editProfile),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}/perfiles/edit`, data).pipe(
-          map((res: any) => profileActions.editProfileSuccess()),
-          catchError(err => of(profileActions.editProfileError({ error: err })))
+      concatMap(({ perfil }) =>
+        this.perfilService.editPerfil(perfil).pipe(
+          map(
+            (perfil_id: number) =>
+              profileActions.editProfileSuccess({ perfil_id }),
+            catchError(error => of(profileActions.editProfileError({ error })))
+          )
         )
       )
     )
   );
 
+  notifyAfterEditSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(profileActions.editProfileSuccess),
+        tap(() => {
+          this.snackService.showMessage(
+            `Datos del perfil guardados con Éxito!`,
+            ''
+          );
+          this.router.navigate(['/app/profile/list-pro']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterEditError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(profileActions.editProfileError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            `ERR: ${error.error.status.description}`,
+            'error'
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
   deleteProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.deleteProfile),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/perfiles/delete`, data.profileDelete)
-          .pipe(
-            map((res: any) =>
-              profileActions.deleteProfileSuccess({
-                profileId: data.profileDelete.perfil_id,
-                res: res.status,
-              })
-            ),
-            catchError(err =>
-              of(profileActions.deleteProfileError({ error: err }))
+      concatMap(({ perfil_id }) =>
+        this.perfilService.deletePerfil(perfil_id).pipe(
+          map(
+            (perfil_id: number) =>
+              profileActions.deleteProfileSuccess({ perfil_id }),
+            catchError(error =>
+              of(profileActions.deleteProfileError({ error }))
             )
           )
+        )
       )
+    )
+  );
+
+  notifyAfterDeleteProfileSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(profileActions.deleteProfileSuccess),
+        tap(() => {
+          this.snackService.showMessage(`perfil eliminado con Éxito!`, '');
+          this.profileFacade.getProfile();
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterDeleteProfileError = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.deleteProfileError),
+      tap(({ error }) => {
+        this.snackService.showMessage(
+          `ERR: ${error.error.status.description}`,
+          'error'
+        );
+      })
     )
   );
 }

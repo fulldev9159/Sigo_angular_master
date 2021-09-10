@@ -36,14 +36,14 @@
           <br>
           <div class="row">
             <div class="col-12 text-center mt-2 p-0">
-              <p-button label="Guardar" slyle="font-size: 0.83rem;" icon="pi pi-save" styleClass="p-button-raised p-button-sm"></p-button>
+              <p-button label="Guardar" (click)="saveProfile()" [disabled]="!formPerfil.valid" slyle="font-size: 0.83rem;" icon="pi pi-save" styleClass="p-button-raised p-button-sm"></p-button>
             </div>
           </div>
         </div>
         <div class="col-md-9">
           <div class="row">
             <div *ngFor="let item of (permissions$ | async)" class="col-xs-12 col-md-4 pt-2" id="modulos-pefil-{{item.module}}">
-              <p-listbox [options]="item.permissions" optionValue="id" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="nombre_corto">
+              <p-listbox formControlName="permisos_{{item.module}}" [options]="item.permissions" optionValue="id" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="nombre_corto">
                 <ng-template pTemplate="header">
                   {{item.module}}
                 </ng-template>
@@ -52,6 +52,7 @@
           </div>
         </div>
       </div>
+      {{formPerfil.value|json}}
     </ng-container>
   </app-card>
 

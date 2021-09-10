@@ -38,3 +38,33 @@ export interface CreatePerfilResponse {
     responseCode: number;
   };
 }
+
+export interface EditPerfilRequest {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  superior: number;
+  permisos: number[];
+}
+
+export interface EditPerfilResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface DeletePerfilResponse {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}

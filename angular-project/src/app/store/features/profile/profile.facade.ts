@@ -44,6 +44,11 @@ export class ProfileFacade {
   }
   // CREATE
 
+  // EDIT
+  public editFormProfile(perfil: Data.EditPerfilRequest): void {
+    this.store.dispatch(profileActions.editProfile({ perfil }));
+  }
+
   // FORM
   public setFormProfile(data): void {
     this.store.dispatch(profileActions.setFormProfile(data));
@@ -53,9 +58,6 @@ export class ProfileFacade {
     return this.store.select(profileSelectors.getProfile);
   }
 
-  public editFormProfile(data): void {
-    this.store.dispatch(profileActions.editProfile(data));
-  }
   // FORM
   public resetData(): void {
     this.store.dispatch(profileActions.resetData());

@@ -20,9 +20,11 @@ export class FormPro2Component implements OnInit, OnDestroy {
 
   formControls = {
     id: new FormControl(null),
-    nombre: new FormControl(null, [Validators.required]),
+    nombre: new FormControl(null, [Validators.required, this.noWhitespace]),
     descripcion: new FormControl(null, [Validators.required]),
-    permisos: new FormControl(null),
+    permisos_OT: new FormControl(null),
+    permisos_CUBICACION: new FormControl(null),
+    permisos_PERFIL: new FormControl(null),
   };
 
   formPerfil: FormGroup = new FormGroup(this.formControls);
@@ -61,7 +63,32 @@ export class FormPro2Component implements OnInit, OnDestroy {
     this.router.navigate(['/app/profile/list-pro']);
   }
 
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+
   initData(): void {
     this.profileFacade.getPermissions();
+  }
+
+  saveProfile(): void {
+    const perfil_id = this.formPerfil.get('id').value;
+    if (perfil_id === null) {
+      const permisos: number[] = [
+        ...this.formPerfil.get('permisos_OT').value,
+        ...this.formPerfil.get('permisos_CUBICACION').value,
+        ...this.formPerfil.get('permisos_PERFIL').value,
+      ];
+      const request: Data.CreatePerfilRequest = {
+        nombre: this.formPerfil.get('nombre').value,
+        descripcion: this.formPerfil.get('descripcion').value,
+        superior: 1,
+        permisos,
+      };
+
+      console.log(request);
+    }
   }
 }
