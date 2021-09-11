@@ -1,166 +1,179 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import * as Model from '@storeOT/features/profile/profile.model';
-import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { map, takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription, Observable } from 'rxjs';
+import { map, withLatestFrom } from 'rxjs/operators';
 import * as _ from 'lodash';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
+import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
+import * as Data from '@data';
 
 @Component({
   selector: 'app-form-pro',
   templateUrl: './form-pro.component.html',
   styleUrls: ['./form-pro.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormProComponent implements OnInit, OnDestroy {
-  // declarations
-  public groups = null;
-  public profileId = null;
-  public authLogin = null;
-  public selectedItems = [];
-  public formProfile: FormGroup;
-  public permissions$: Observable<any>;
-  public profiles$: Observable<any[]>;
-  public permissionsOriginal$: Observable<Model.Permit[]>;
-  private destroyInstance$: Subject<boolean> = new Subject();
+  subscription: Subscription = new Subscription();
+
+  permissions$: Observable<any>;
+  perfilSelected$: Observable<Data.Perfil>;
+
+  formControls = {
+    id: new FormControl(null),
+    nombre: new FormControl(null, [Validators.required, this.noWhitespace]),
+    descripcion: new FormControl(null, [Validators.required]),
+    permisos_OT: new FormControl(null),
+    permisos_CUBICACION: new FormControl(null),
+    permisos_PERFIL: new FormControl(null),
+  };
+
+  formPerfil: FormGroup = new FormGroup(this.formControls);
 
   constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private authFacade: AuthFacade,
-    private rutaActiva: ActivatedRoute,
+    private route: ActivatedRoute,
     private profileFacade: ProfileFacade,
-    private messageService: MessageService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    this.profileFacade.resetData();
+    this.initObservables();
+    this.initData();
 
-    // traemos contratos des api mediante efectos
-    this.authFacade
-      .getLogin$()
-      .pipe(takeUntil(this.destroyInstance$))
-      .subscribe(authLogin => {
-        if (authLogin) {
-          // asignamos datos de usuario autenticado a variable local
-          this.authLogin = authLogin;
-
-          if (this.authLogin) {
-            this.formProfile.get('token').setValue(this.authLogin.token);
-          }
-
-          // generamos llamada a api para rescatar permisos
-          this.profileFacade.getPermissions({ token: authLogin.token });
-
-          // generamos llamada a api para perfiles
-          this.profileFacade.getProfile();
+    this.subscription.add(
+      this.route.paramMap.subscribe(params => {
+        const id = params.get('id');
+        if (id !== null) {
+          const perfil_id = +params.get('id');
+          this.formPerfil.get('id').setValue(perfil_id);
+          this.profileFacade.getProfileSelected(perfil_id);
         }
-      });
-
-    // escuchamos cambios en store para traer perfiles
-    this.profiles$ = this.profileFacade.getProfile$();
-
-    // escuchamos cambios en store para traer permisos a la vista permisos
-    this.permissionsOriginal$ = this.profileFacade.getPermissions$();
-
-    this.permissions$ = this.profileFacade.getPermissions$().pipe(
-      map((permissions: Model.Permit[]) => {
-        const data = permissions.map((permit: Model.Permit) => {
-          let permitCustom;
-          if (permit && permit.slug) {
-            permitCustom = { ...permit, module: permit.slug.split('_')[0] };
-          }
-          return permitCustom;
-        });
-
-        return _.chain(data)
-          .groupBy('module')
-          .map((value, key) => ({ module: key, permissions: value }))
-          .value();
       })
     );
+  }
 
-    this.rutaActiva.params.subscribe((params: Params) => {
-      if (params.id) {
-        this.profileId = params.id;
+  initObservables(): void {
+    this.permissions$ = this.profileFacade
+      .getPermissions$()
+      .pipe(
+        map((permissions: Data.Permiso[]) =>
+          this.getPermissionsGroup(permissions)
+        )
+      );
+  }
+
+  ngOnDestroy(): void {}
+
+  goBack(): void {
+    this.profileFacade.resetData();
+    this.router.navigate(['/app/profile/list-pro']);
+  }
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+
+  initData(): void {
+    this.profileFacade.getPermissions();
+    this.subscription.add(
+      this.profileFacade.getProfileSelected$().subscribe(perfil => {
+        if (perfil) {
+          this.formPerfil.get('nombre').setValue(perfil.nombre);
+          this.formPerfil.get('descripcion').setValue(perfil.descripcion);
+          const PermissionsModules = this.getPermissionsGroup(perfil.permisos);
+          if (PermissionsModules.find(module => module.module === 'OT')) {
+            this.formPerfil
+              .get('permisos_OT')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'OT'
+                ).permissions.map(permiso => permiso.id)
+              );
+          }
+
+          if (
+            PermissionsModules.find(module => module.module === 'CUBICACION')
+          ) {
+            this.formPerfil
+              .get('permisos_CUBICACION')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'CUBICACION'
+                ).permissions.map(permiso => permiso.id)
+              );
+          }
+
+          if (PermissionsModules.find(module => module.module === 'PERFIL')) {
+            this.formPerfil
+              .get('permisos_PERFIL')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'PERFIL'
+                ).permissions.map(permiso => permiso.id)
+              );
+          }
+        }
+      })
+    );
+  }
+
+  getPermissionsGroup(permissions: Data.Permiso[]): Data.PermissionsGroup[] {
+    const data = permissions.map((permit: Data.Permiso) => {
+      let permitCustom: any;
+      if (permit && permit.slug) {
+        permitCustom = { ...permit, module: permit.slug.split('_')[0] };
       }
-
-      if (this.profileId) {
-        this.profileFacade
-          .getFormProfile$()
-          .pipe(takeUntil(this.destroyInstance$))
-          .subscribe(res => {
-            if (res) {
-              // inicializamos formulario
-              this.formProfile.patchValue(res);
-              this.selectedItems = res.permisos.map((p: any) => p.id);
-            } else {
-              this.router.navigate(['/app/profile/list-pro']);
-            }
-          });
-      }
+      return permitCustom;
     });
-  }
-
-  ngOnDestroy(): void {
-    this.destroyInstance$.next(true);
-    this.destroyInstance$.complete();
-  }
-
-  initForm(): void {
-    this.formProfile = this.fb.group({
-      id: null,
-      token: [null, Validators.required],
-      nombre: [null, Validators.required],
-      descripcion: null,
-      permisos: null,
-      superior: null,
-    });
-  }
-
-  cancelAction(): void {
-    this.formProfile.reset();
+    return _.chain(data)
+      .groupBy('module')
+      .map((value, key) => ({ module: key, permissions: value }))
+      .value();
   }
 
   saveProfile(): void {
-    const formData = {
-      ...this.formProfile.value,
-      token: this.authLogin.token,
-      permisos: this.selectedItems,
-    };
-    if (formData.id) {
-      formData.superior = +formData.superior;
-      if (formData.superior === 0) {
-        formData.superior = null;
-      }
-      this.profileFacade.editFormProfile(formData);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Perfil editado',
-        detail: 'Perfil editado con Éxito!',
-      });
-      this.router.navigate(['/app/profile/list-pro']);
+    const perfil_id = this.formPerfil.get('id').value;
+    const permisosOT =
+      this.formPerfil.get('permisos_OT').value === null
+        ? []
+        : this.formPerfil.get('permisos_OT').value;
+    const permisosCubicacion =
+      this.formPerfil.get('permisos_CUBICACION').value === null
+        ? []
+        : this.formPerfil.get('permisos_CUBICACION').value;
+    const permisosPerfil =
+      this.formPerfil.get('permisos_PERFIL').value === null
+        ? []
+        : this.formPerfil.get('permisos_PERFIL').value;
+    const permisos: number[] = [
+      ...permisosOT,
+      ...permisosCubicacion,
+      ...permisosPerfil,
+    ];
+
+    if (perfil_id === null) {
+      const request: Data.CreatePerfilRequest = {
+        nombre: this.formPerfil.get('nombre').value,
+        descripcion: this.formPerfil.get('descripcion').value,
+        superior: 1,
+        permisos,
+      };
+
+      console.log('CREATE', request);
+      this.profileFacade.createPerfil(request);
     } else {
-      delete formData.id;
-      formData.superior = +formData.superior;
-      if (formData.superior === 0) {
-        formData.superior = null;
-      }
-      this.profileFacade.postProfile(formData);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Perfil generado',
-        detail: 'Perfil generado con Éxito!',
-      });
-      this.router.navigate(['/app/profile/list-pro']);
+      const request: Data.EditPerfilRequest = {
+        id: perfil_id,
+        nombre: this.formPerfil.get('nombre').value,
+        descripcion: this.formPerfil.get('descripcion').value,
+        superior: 1,
+        permisos,
+      };
+      console.log('EDIT', request);
+      this.profileFacade.editProfile(request);
     }
   }
 }

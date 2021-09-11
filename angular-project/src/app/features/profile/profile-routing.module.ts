@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormProComponent } from './container/form-pro/form-pro.component';
 import { ListProComponent } from './container/list-pro/list-pro.component';
+
 import { ProfileComponent } from './profile.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import * as Data from '@data';
 
 export const routes: Routes = [
   {

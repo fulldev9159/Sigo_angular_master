@@ -24,11 +24,6 @@ const routes: Routes = [
         loadChildren: () => import('../ot/ot.module').then(m => m.OtModule),
       },
       {
-        path: 'kitui',
-        loadChildren: () =>
-          import('../kitui/kitui.module').then(m => m.KituiModule),
-      },
-      {
         path: 'profile',
         loadChildren: () =>
           import('../profile/profile.module').then(m => m.ProfileModule),

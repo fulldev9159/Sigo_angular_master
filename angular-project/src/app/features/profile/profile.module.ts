@@ -5,17 +5,11 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { ListProComponent } from './container/list-pro/list-pro.component';
 import { FormProComponent } from './container/form-pro/form-pro.component';
-import { FormComponent } from './component/form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '@uiOT/ui.module';
 
 @NgModule({
-  declarations: [
-    ProfileComponent,
-    ListProComponent,
-    FormProComponent,
-    FormComponent,
-  ],
+  declarations: [ProfileComponent, ListProComponent, FormProComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

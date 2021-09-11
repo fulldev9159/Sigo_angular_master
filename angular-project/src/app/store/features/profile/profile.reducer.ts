@@ -1,19 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ProfileActions from './profile.actions';
-import * as Model from './profile.model';
+import * as Data from '@data';
 
 export const ProfileFeatureKey = 'profile';
 
 export interface StateProfile {
-  items: Model.Profile[];
-  permissions: Model.Permit[];
-  form: Model.Form;
+  perfiles: Data.Perfil[];
+  permisos: Data.Permiso[];
+  perfil_selected: Data.Perfil;
 }
 
 export const initialStateProfile: StateProfile = {
-  items: [],
-  permissions: [],
-  form: null,
+  perfiles: [],
+  permisos: [],
+  perfil_selected: null,
 };
 
 export const reducerProfile = createReducer(
@@ -22,23 +22,16 @@ export const reducerProfile = createReducer(
   on(ProfileActions.getProfile, state => state),
   on(ProfileActions.getProfileSuccess, (state, payload) => ({
     ...state,
-    items: payload.profile,
+    perfiles: payload.perfiles,
   })),
-
   on(ProfileActions.getPermissions, state => state),
   on(ProfileActions.getPermissionsSuccess, (state, payload) => ({
     ...state,
-    permissions: payload.permissions,
+    permisos: payload.permisos,
   })),
-
-  on(ProfileActions.setFormProfile, (state, payload) => ({
+  on(ProfileActions.getProfileSelectedSuccess, (state, payload) => ({
     ...state,
-    form: payload.form,
-  })),
-
-  on(ProfileActions.deleteProfileSuccess, (state, payload) => ({
-    ...state,
-    items: [...state.items.filter(i => +i.id !== +payload.profileId)],
+    perfil_selected: payload.perfil,
   })),
   on(ProfileActions.resetData, (state, payload) => ({
     ...initialStateProfile,

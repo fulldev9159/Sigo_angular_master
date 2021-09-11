@@ -7,3 +7,4 @@ export * from './service/tipo-moneda.service';
 export * from './service/unidad.service';
 export * from './service/tipo-numero-interno.service';
 export * from './service/user.service';
+export * from './service/perfil.service';

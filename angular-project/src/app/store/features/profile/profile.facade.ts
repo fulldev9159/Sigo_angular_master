@@ -4,57 +4,58 @@ import { Observable } from 'rxjs';
 
 import * as profileActions from './profile.actions';
 import * as profileSelectors from './profile.selectors';
-import * as Model from './profile.model';
+import * as Data from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileFacade {
-  constructor(private store: Store<Model.Profile>) {}
+  constructor(private store: Store<Data.Perfil>) {}
 
   // PROFILE
   public getProfile(): void {
     this.store.dispatch(profileActions.getProfile());
   }
 
-  public getProfile$(): Observable<Model.Profile[]> {
+  public getProfile$(): Observable<Data.Perfil[]> {
     return this.store.select(profileSelectors.getProfiles);
   }
 
-  // DELETE
-  public deleteProfile(data): void {
-    this.store.dispatch(profileActions.deleteProfile(data));
+  public getProfileSelected(perfil_id: number): void {
+    this.store.dispatch(profileActions.getProfileSelected({ perfil_id }));
   }
-  // DELETE
 
-  // POST
-  public postProfile(profile: Model.Profile): void {
-    this.store.dispatch(profileActions.postProfile({ profile }));
+  public getProfileSelected$(): Observable<Data.Perfil> {
+    return this.store.select(profileSelectors.getProfileSelected);
   }
-  // POST
 
   // PERMISSIONS
-  public getPermissions(data): void {
-    this.store.dispatch(profileActions.getPermissions(data));
+  public getPermissions(): void {
+    this.store.dispatch(profileActions.getPermissions());
   }
 
-  public getPermissions$(): Observable<Model.Permit[]> {
+  public getPermissions$(): Observable<Data.Permiso[]> {
     return this.store.select(profileSelectors.getPermissions);
   }
   // PERMISSIONS
 
-  // FORM
-  public setFormProfile(data): void {
-    this.store.dispatch(profileActions.setFormProfile(data));
+  // DELETE
+  public deleteProfile(perfil_id: number): void {
+    this.store.dispatch(profileActions.deleteProfile({ perfil_id }));
+  }
+  // DELETE
+
+  // CREATE
+  public createPerfil(perfil: Data.CreatePerfilRequest): void {
+    this.store.dispatch(profileActions.createPerfil({ perfil }));
+  }
+  // CREATE
+
+  // EDIT
+  public editProfile(perfil: Data.EditPerfilRequest): void {
+    this.store.dispatch(profileActions.editProfile({ perfil }));
   }
 
-  public getFormProfile$(): Observable<Model.Form> {
-    return this.store.select(profileSelectors.getProfile);
-  }
-
-  public editFormProfile(data): void {
-    this.store.dispatch(profileActions.editProfile(data));
-  }
   // FORM
   public resetData(): void {
     this.store.dispatch(profileActions.resetData());

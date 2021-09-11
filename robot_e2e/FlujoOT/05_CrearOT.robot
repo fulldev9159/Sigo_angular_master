@@ -11,7 +11,7 @@ Crear OT
     # Login                   ${user}                           pass
     Login                   mgestor1                          pass
     Go To                   ${url}/app/cubicacion/list-cub
-    FOR                     ${i}                              IN RANGE                            96    199
+    FOR                     ${i}                              IN RANGE                            122    199
     ${cub existe}=          Existe cubicacion                 CUBICACION ${i} HAPPY PATH ROBOT
     # Log To Console          ${cub existe}
     ${numero}               set variable                      ${i - 1}
