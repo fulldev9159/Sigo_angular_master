@@ -19,14 +19,14 @@ Resource    resource.robot
 *** Test Cases ***
 Crear perfil
     Open Browser To Page                  ${url}
-    Login                                 admin                           pass
+    Login                                 admin     pass
     Navegar al menu                       Perfil
     Acceder a creacion de nuevo perfil
-    Set nombre perfil                     TEST Jefe Área
-    Set descripcion perfil                Test Jefe Área de telefónica
-    Set Permisos modulo                   OT                              @{permisos OT jefe area}
-    Set Permisos modulo                   CUBICACION                      @{permisos Cubicacion jefe area}
-    Guardar perfil
+    # Set nombre perfil                     TEST Jefe Área
+    # Set descripcion perfil                Test Jefe Área de telefónica
+    # Set Permisos modulo                   OT                              @{permisos OT jefe area}
+    # Set Permisos modulo                   CUBICACION                      @{permisos Cubicacion jefe area}
+    # Guardar perfil
     # Validar existencia en la tabla        1                                         TEST Jefe Área
     # Validar existencia en la tabla        2                                         Test Jefe Área de telefónica
     # Reload Page
