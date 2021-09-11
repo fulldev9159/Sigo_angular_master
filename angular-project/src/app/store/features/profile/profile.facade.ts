@@ -22,6 +22,14 @@ export class ProfileFacade {
     return this.store.select(profileSelectors.getProfiles);
   }
 
+  public getProfileSelected(perfil_id: number): void {
+    this.store.dispatch(profileActions.getProfileSelected({ perfil_id }));
+  }
+
+  public getProfileSelected$(): Observable<Data.Perfil> {
+    return this.store.select(profileSelectors.getProfileSelected);
+  }
+
   // PERMISSIONS
   public getPermissions(): void {
     this.store.dispatch(profileActions.getPermissions());
@@ -45,7 +53,7 @@ export class ProfileFacade {
   // CREATE
 
   // EDIT
-  public editFormProfile(perfil: Data.EditPerfilRequest): void {
+  public editProfile(perfil: Data.EditPerfilRequest): void {
     this.store.dispatch(profileActions.editProfile({ perfil }));
   }
 

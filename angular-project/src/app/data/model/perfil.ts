@@ -68,3 +68,8 @@ export interface DeletePerfilResponse {
     responseCode: number;
   };
 }
+
+export interface PermissionsGroup {
+  module: string;
+  permissions: Permiso[];
+}

@@ -6,6 +6,7 @@ import { FormPro2Component } from './container/form-pro2/form-pro.component';
 
 import { ProfileComponent } from './profile.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import * as Data from '@data';
 
 export const routes: Routes = [
   {
@@ -25,20 +26,20 @@ export const routes: Routes = [
           state: 'list-pro',
         },
       },
+      // {
+      //   path: 'form-pro',
+      //   component: FormProComponent,
+      //   canActivate: [NgxPermissionsGuard],
+      //   data: {
+      //     permissions: {
+      //       only: 'PERFIL_CREAR',
+      //       redirectTo: '/app/ot/list-ot',
+      //     },
+      //     state: 'form-pro',
+      //   },
+      // },
       {
         path: 'form-pro',
-        component: FormProComponent,
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          permissions: {
-            only: 'PERFIL_CREAR',
-            redirectTo: '/app/ot/list-ot',
-          },
-          state: 'form-pro',
-        },
-      },
-      {
-        path: 'form-pro2',
         component: FormPro2Component,
         canActivate: [NgxPermissionsGuard],
         data: {
@@ -51,7 +52,7 @@ export const routes: Routes = [
       },
       {
         path: 'form-pro/:id',
-        component: FormProComponent,
+        component: FormPro2Component,
         canActivate: [NgxPermissionsGuard],
         data: {
           permissions: {
@@ -61,6 +62,18 @@ export const routes: Routes = [
           state: 'form-pro',
         },
       },
+      // {
+      //   path: 'form-pro/:id',
+      //   component: FormProComponent,
+      //   canActivate: [NgxPermissionsGuard],
+      //   data: {
+      //     permissions: {
+      //       only: 'PERFIL_EDITAR',
+      //       redirectTo: '/app/ot/list-ot',
+      //     },
+      //     state: 'form-pro',
+      //   },
+      // },
     ],
   },
 ];

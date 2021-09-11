@@ -37,6 +37,22 @@ export class ProfileEffects {
     )
   );
 
+  getProfileSelected$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.getProfileSelected),
+      concatMap(({ perfil_id }) =>
+        this.perfilService.getPerfilSelected(perfil_id).pipe(
+          map((perfil: Data.Perfil) =>
+            profileActions.getProfileSelectedSuccess({ perfil })
+          ),
+          catchError(error =>
+            of(profileActions.getProfileSelectedError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   getPermissions$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.getPermissions),

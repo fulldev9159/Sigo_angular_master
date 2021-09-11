@@ -61,7 +61,7 @@ export class PerfilService {
 
   editPerfil(perfil: Data.EditPerfilRequest): Observable<number> {
     return this.http
-      .post<Data.EditPerfilResponse>(`${this.apiUrl}/perfiles/edit`, { perfil })
+      .post<Data.EditPerfilResponse>(`${this.apiUrl}/perfiles/edit`, perfil)
       .pipe(
         map((res: Data.EditPerfilResponse) => {
           if (+res.status.responseCode !== 0) {
@@ -83,6 +83,19 @@ export class PerfilService {
             this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.id;
+        })
+      );
+  }
+
+  getPerfilSelected(perfil_id: number): Observable<Data.Perfil> {
+    return this.http
+      .post<Data.PerfilResponse>(`${this.apiUrl}/perfiles/get_all`, {})
+      .pipe(
+        map((res: Data.PerfilResponse) => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.find(perfil => perfil.id === perfil_id);
         })
       );
   }

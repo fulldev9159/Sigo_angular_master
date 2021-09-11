@@ -8,12 +8,14 @@ export const ProfileFeatureKey = 'profile';
 export interface StateProfile {
   perfiles: Data.Perfil[];
   permisos: Data.Permiso[];
+  perfil_selected: Data.Perfil;
   form: Model.Form;
 }
 
 export const initialStateProfile: StateProfile = {
   perfiles: [],
   permisos: [],
+  perfil_selected: null,
   form: null,
 };
 
@@ -31,7 +33,10 @@ export const reducerProfile = createReducer(
     ...state,
     permisos: payload.permisos,
   })),
-
+  on(ProfileActions.getProfileSelectedSuccess, (state, payload) => ({
+    ...state,
+    perfil_selected: payload.perfil,
+  })),
   on(ProfileActions.setFormProfile, (state, payload) => ({
     ...state,
     form: payload.form,

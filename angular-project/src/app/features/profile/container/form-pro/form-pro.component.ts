@@ -142,7 +142,7 @@ export class FormProComponent implements OnInit, OnDestroy {
       if (formData.superior === 0) {
         formData.superior = null;
       }
-      this.profileFacade.editFormProfile(formData);
+      this.profileFacade.editProfile(formData);
       this.messageService.add({
         severity: 'success',
         summary: 'Perfil editado',

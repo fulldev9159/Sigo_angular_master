@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
@@ -16,7 +16,8 @@ import * as Data from '@data';
 export class FormPro2Component implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
-  public permissions$: Observable<any>;
+  permissions$: Observable<any>;
+  perfilSelected$: Observable<Data.Perfil>;
 
   formControls = {
     id: new FormControl(null),
@@ -29,31 +30,37 @@ export class FormPro2Component implements OnInit, OnDestroy {
 
   formPerfil: FormGroup = new FormGroup(this.formControls);
 
-  constructor(private profileFacade: ProfileFacade, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private profileFacade: ProfileFacade,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.profileFacade.resetData();
     this.initObservables();
     this.initData();
+
+    this.subscription.add(
+      this.route.paramMap.subscribe(params => {
+        const id = params.get('id');
+        if (id !== null) {
+          const perfil_id = +params.get('id');
+          this.formPerfil.get('id').setValue(perfil_id);
+          this.profileFacade.getProfileSelected(perfil_id);
+        }
+      })
+    );
   }
 
   initObservables() {
-    this.permissions$ = this.profileFacade.getPermissions$().pipe(
-      map((permissions: Data.Permiso[]) => {
-        const data = permissions.map((permit: Data.Permiso) => {
-          let permitCustom;
-          if (permit && permit.slug) {
-            permitCustom = { ...permit, module: permit.slug.split('_')[0] };
-          }
-          return permitCustom;
-        });
-
-        return _.chain(data)
-          .groupBy('module')
-          .map((value, key) => ({ module: key, permissions: value }))
-          .value();
-      })
-    );
+    this.permissions$ = this.profileFacade
+      .getPermissions$()
+      .pipe(
+        map((permissions: Data.Permiso[]) =>
+          this.getPermissionsGroup(permissions)
+        )
+      );
   }
 
   ngOnDestroy(): void {}
@@ -71,6 +78,60 @@ export class FormPro2Component implements OnInit, OnDestroy {
 
   initData(): void {
     this.profileFacade.getPermissions();
+    this.subscription.add(
+      this.profileFacade.getProfileSelected$().subscribe(perfil => {
+        if (perfil) {
+          this.formPerfil.get('nombre').setValue(perfil.nombre);
+          this.formPerfil.get('descripcion').setValue(perfil.descripcion);
+          const PermissionsModules = this.getPermissionsGroup(perfil.permisos);
+          if (PermissionsModules.find(module => module.module === 'OT')) {
+            this.formPerfil
+              .get('permisos_OT')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'OT'
+                ).permissions.map(permiso => permiso.id)
+              );
+          }
+
+          if (
+            PermissionsModules.find(module => module.module === 'CUBICACION')
+          ) {
+            this.formPerfil
+              .get('permisos_CUBICACION')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'CUBICACION'
+                ).permissions.map(permiso => permiso.id)
+              );
+          }
+
+          if (PermissionsModules.find(module => module.module === 'PERFIL')) {
+            this.formPerfil
+              .get('permisos_PERFIL')
+              .setValue(
+                PermissionsModules.find(
+                  module => module.module === 'PERFIL'
+                ).permissions.map(permiso => permiso.id)
+              );
+          }
+        }
+      })
+    );
+  }
+
+  getPermissionsGroup(permissions: Data.Permiso[]): Data.PermissionsGroup[] {
+    const data = permissions.map((permit: Data.Permiso) => {
+      let permitCustom: any;
+      if (permit && permit.slug) {
+        permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+      }
+      return permitCustom;
+    });
+    return _.chain(data)
+      .groupBy('module')
+      .map((value, key) => ({ module: key, permissions: value }))
+      .value();
   }
 
   saveProfile(): void {
@@ -101,8 +162,18 @@ export class FormPro2Component implements OnInit, OnDestroy {
         permisos,
       };
 
-      console.log(request);
+      console.log('CREATE', request);
       this.profileFacade.createPerfil(request);
+    } else {
+      const request: Data.EditPerfilRequest = {
+        id: perfil_id,
+        nombre: this.formPerfil.get('nombre').value,
+        descripcion: this.formPerfil.get('descripcion').value,
+        superior: 1,
+        permisos,
+      };
+      console.log('EDIT', request);
+      this.profileFacade.editProfile(request);
     }
   }
 }

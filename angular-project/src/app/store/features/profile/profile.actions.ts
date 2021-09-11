@@ -82,11 +82,26 @@ export const deleteProfileError = createAction(
   props<{ error: any }>()
 );
 
+export const resetData = createAction('[ResetData] ResetData');
+
+export const getProfileSelected = createAction(
+  '[Profile GetAll] GET Profile Selected',
+  props<{ perfil_id: number }>()
+);
+
+export const getProfileSelectedSuccess = createAction(
+  '[Profile GetAll] GET Profile Selected Success',
+  props<{ perfil: Data.Perfil }>()
+);
+
+export const getProfileSelectedError = createAction(
+  '[Profile GetAll] GET Profile Error',
+  props<{ error: any }>()
+);
+
 export const setFormProfile = createAction(
   '[Set FormProfile] SET FormProfile',
   props<{ form: Model.Form }>()
 );
-
-export const resetData = createAction('[ResetData] ResetData');
 
 // PROFILE LIST
