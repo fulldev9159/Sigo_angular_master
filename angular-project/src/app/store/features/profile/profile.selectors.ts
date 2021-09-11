@@ -19,8 +19,3 @@ export const getPermissions = createSelector(
   selectProfile,
   (state: fromProfile.StateProfile) => state.permisos
 );
-
-export const getProfile = createSelector(
-  selectProfile,
-  (state: fromProfile.StateProfile) => state.form
-);

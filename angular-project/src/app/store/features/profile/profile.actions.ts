@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import * as Model from './profile.model';
 import * as Data from '@data';
 
 // PROFILE LIST
@@ -97,11 +96,6 @@ export const getProfileSelectedSuccess = createAction(
 export const getProfileSelectedError = createAction(
   '[Profile GetAll] GET Profile Error',
   props<{ error: any }>()
-);
-
-export const setFormProfile = createAction(
-  '[Set FormProfile] SET FormProfile',
-  props<{ form: Model.Form }>()
 );
 
 // PROFILE LIST

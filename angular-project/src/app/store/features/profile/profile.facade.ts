@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 import * as profileActions from './profile.actions';
 import * as profileSelectors from './profile.selectors';
-import * as Model from './profile.model';
 import * as Data from '@data';
 
 @Injectable({
@@ -41,8 +40,8 @@ export class ProfileFacade {
   // PERMISSIONS
 
   // DELETE
-  public deleteProfile(data): void {
-    this.store.dispatch(profileActions.deleteProfile(data));
+  public deleteProfile(perfil_id: number): void {
+    this.store.dispatch(profileActions.deleteProfile({ perfil_id }));
   }
   // DELETE
 
@@ -55,15 +54,6 @@ export class ProfileFacade {
   // EDIT
   public editProfile(perfil: Data.EditPerfilRequest): void {
     this.store.dispatch(profileActions.editProfile({ perfil }));
-  }
-
-  // FORM
-  public setFormProfile(data): void {
-    this.store.dispatch(profileActions.setFormProfile(data));
-  }
-
-  public getFormProfile$(): Observable<Model.Form> {
-    return this.store.select(profileSelectors.getProfile);
   }
 
   // FORM

@@ -74,7 +74,7 @@ export class PerfilService {
 
   deletePerfil(perfil_id: number): Observable<number> {
     return this.http
-      .post<Data.DeletePerfilResponse>(`${this.apiUrl}/perfiles/edit`, {
+      .post<Data.DeletePerfilResponse>(`${this.apiUrl}/perfiles/delete`, {
         perfil_id,
       })
       .pipe(
@@ -82,7 +82,9 @@ export class PerfilService {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
-          return res.data.id;
+          // ToDo: Verificar que el endpoint siga el estadar
+          // return res.data.id;
+          return 1;
         })
       );
   }

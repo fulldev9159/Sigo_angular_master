@@ -1,4 +1,3 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
@@ -9,7 +8,6 @@ import { of } from 'rxjs';
 import * as profileActions from './profile.actions';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-import { environment } from '@environment';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import * as Data from '@data';
@@ -158,8 +156,8 @@ export class ProfileEffects {
       ofType(profileActions.deleteProfile),
       concatMap(({ perfil_id }) =>
         this.perfilService.deletePerfil(perfil_id).pipe(
-          map((perfil_id: number) =>
-            profileActions.deleteProfileSuccess({ perfil_id })
+          map((perfil_id_res: number) =>
+            profileActions.deleteProfileSuccess({ perfil_id: perfil_id_res })
           ),
           catchError(error => of(profileActions.deleteProfileError({ error })))
         )
@@ -179,15 +177,17 @@ export class ProfileEffects {
     { dispatch: false }
   );
 
-  notifyAfterDeleteProfileError = createEffect(() =>
-    this.actions$.pipe(
-      ofType(profileActions.deleteProfileError),
-      tap(({ error }) => {
-        this.snackService.showMessage(
-          `ERR: ${error.error.status.description}`,
-          'error'
-        );
-      })
-    )
+  notifyAfterDeleteProfileError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(profileActions.deleteProfileError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            `ERR: ${error.error.status.description}`,
+            'error'
+          );
+        })
+      ),
+    { dispatch: false }
   );
 }

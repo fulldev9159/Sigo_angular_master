@@ -1,16 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { Observable, Subject } from 'rxjs';
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { takeUntil } from 'rxjs/operators';
+import { ConfirmationService } from 'primeng/api';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
-import * as ModelProfile from '@storeOT/features/profile/profile.model';
 import * as _ from 'lodash';
 import * as Data from '@data';
 
@@ -18,16 +11,13 @@ import * as Data from '@data';
   selector: 'app-list-pro',
   templateUrl: './list-pro.component.html',
   styleUrls: ['./list-pro.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListProComponent implements OnInit, OnDestroy {
-  // declarations
-  public authLogin = null;
-  public DisplayModal = false;
-  public ModalDataPermissions: any[] = [];
-  public items$: Observable<any[]>;
-  private destroyInstance: Subject<boolean> = new Subject();
-  public configTable = {
+  DisplayDetallesPerfilModal = false;
+  ModalDataPermissions$: Observable<Data.PermissionsGroup[]>;
+  perfiles$: Observable<Data.Perfil[]>;
+
+  configTable = {
     header: true,
     headerConfig: {
       title: '',
@@ -50,20 +40,22 @@ export class ListProComponent implements OnInit, OnDestroy {
           sort: 'descripcion',
           header: 'descripcion',
           editable: false,
+          width: '41%',
         },
-        {
-          field: 'Perfil Superior',
-          type: 'TEXT',
-          sort: 'superior_nombre',
-          header: 'superior_nombre',
-          editable: false,
-        },
+        // {
+        //   field: 'Perfil Superior',
+        //   type: 'TEXT',
+        //   sort: 'superior_nombre',
+        //   header: 'superior_nombre',
+        //   editable: false,
+        // },
         {
           field: 'Fecha Creación',
           type: 'DATE',
           sort: 'created_at',
           header: 'created_at',
           editable: false,
+          width: '10%',
         },
         {
           field: null,
@@ -71,53 +63,32 @@ export class ListProComponent implements OnInit, OnDestroy {
           sort: null,
           header: null,
           editable: false,
+          width: '10%',
         },
       ],
       sort: ['nombre', 'descripcion', 'created_at', 'superior'],
       actions: [
         {
           conditionKey: 'eliminable',
-          icon: 'p-button-icon pi pi-pencil',
-          class: 'p-button-rounded p-button-warning p-mr-2',
-          onClick: (event: Event, item) => {
-            this.profileFacade.setFormProfile({
-              form: {
-                id: item.id,
-                nombre: item.nombre,
-                descripcion: item.descripcion,
-                permisos: item.permisos,
-                superior: item.superior_id,
-              },
-            });
-
+          icon: ' pi pi-pencil',
+          class: 'p-button-text p-button-sm',
+          onClick: (event: Event, item: Data.Perfil) => {
             this.router.navigate(['/app/profile/form-pro', item.id]);
           },
         },
         {
-          icon: 'p-button-icon pi pi-eye',
-          class: 'p-button-rounded p-button-info p-mr-2',
-          onClick: (event: Event, item) => {
-            const data = item.permisos.map((permit: Data.Permiso) => {
-              let permitCustom;
-              if (permit && permit.slug) {
-                permitCustom = { ...permit, module: permit.slug.split('_')[0] };
-              }
-              return permitCustom;
-            });
-            // console.log(_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value())
-            this.ModalDataPermissions = _.chain(data)
-              .groupBy('module')
-              .map((value, key) => ({ module: key, permissions: value }))
-              .value();
-            this.DisplayModal = true;
+          icon: 'pi pi-eye',
+          class: 'p-button-text p-button-sm',
+          onClick: (event: Event, item: Data.Perfil) => {
+            this.profileFacade.getProfileSelected(item.id);
           },
         },
         {
           conditionKey: 'eliminable',
-          icon: 'p-button-icon pi pi-trash',
-          class: 'p-button-rounded p-button-danger',
+          icon: 'pi pi-trash',
+          class: 'p-button-text p-button-danger p-button-sm',
           tooltip: 'No puede eliminar perfiles con usuarios asignados',
-          onClick: (event: Event, item) => {
+          onClick: (event: Event, item: Data.Perfil) => {
             if (item.eliminable) {
               this.confirmationService.confirm({
                 target: event.target as EventTarget,
@@ -126,16 +97,7 @@ export class ListProComponent implements OnInit, OnDestroy {
                 acceptLabel: 'Confirmar',
                 rejectLabel: 'Cancelar',
                 accept: () => {
-                  this.profileFacade.deleteProfile({
-                    profileDelete: {
-                      perfil_id: +item.id,
-                    },
-                  });
-                  this.messageService.add({
-                    severity: 'success',
-                    summary: 'Perfil eliminado',
-                    detail: 'Eliminación realizada con Éxito!',
-                  });
+                  this.profileFacade.deleteProfile(item.id);
                 },
               });
             }
@@ -147,38 +109,35 @@ export class ListProComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private authFacade: AuthFacade,
     private profileFacade: ProfileFacade,
-    private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) {
-    // traemos contratos des api mediante efectos
-    this.authFacade
-      .getLogin$()
-      .pipe(takeUntil(this.destroyInstance))
-      .subscribe(authLogin => {
-        if (authLogin) {
-          // asignamos datos de usuario autenticado a variable local
-          this.authLogin = authLogin;
-        }
-      });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.authFacade
-      .getLogin$()
-      .pipe(takeUntil(this.destroyInstance))
-      .subscribe(authLogin => {
-        if (authLogin) {
-          this.profileFacade.getProfile();
-        }
-      });
-
-    this.items$ = this.profileFacade.getProfile$();
+    this.profileFacade.getProfile();
+    this.perfiles$ = this.profileFacade.getProfile$();
+    this.ModalDataPermissions$ = this.profileFacade
+      .getProfileSelected$()
+      .pipe(
+        map((perfil: Data.Perfil) =>
+          perfil ? this.getPermissionsGroup(perfil.permisos) : []
+        )
+      );
   }
 
-  ngOnDestroy(): void {
-    this.destroyInstance.next(true);
-    this.destroyInstance.complete();
+  getPermissionsGroup(permissions: Data.Permiso[]): Data.PermissionsGroup[] {
+    const data = permissions.map((permit: Data.Permiso) => {
+      let permitCustom: any;
+      if (permit && permit.slug) {
+        permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+      }
+      return permitCustom;
+    });
+    return _.chain(data)
+      .groupBy('module')
+      .map((value, key) => ({ module: key, permissions: value }))
+      .value();
   }
+
+  ngOnDestroy(): void {}
 }
