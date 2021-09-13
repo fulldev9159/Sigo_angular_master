@@ -56,7 +56,7 @@ export const editProfile = createAction(
 
 export const editProfileSuccess = createAction(
   '[Profile EditById] EDIT Profile Success',
-  props<{ perfil_id: number }>()
+  props<{ edit_res: Data.EditPerfilResponse }>()
 );
 
 export const editProfileError = createAction(
@@ -73,7 +73,7 @@ export const deleteProfile = createAction(
 
 export const deleteProfileSuccess = createAction(
   '[Profile DeleteById] DELETE Profile Success',
-  props<{ perfil_id: number }>()
+  props<{ delete_res: Data.DeletePerfilResponse }>()
 );
 
 export const deleteProfileError = createAction(

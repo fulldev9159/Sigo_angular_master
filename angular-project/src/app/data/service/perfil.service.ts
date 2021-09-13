@@ -59,34 +59,22 @@ export class PerfilService {
       );
   }
 
-  editPerfil(perfil: Data.EditPerfilRequest): Observable<number> {
-    return this.http
-      .post<Data.EditPerfilResponse>(`${this.apiUrl}/perfiles/edit`, perfil)
-      .pipe(
-        map((res: Data.EditPerfilResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.id;
-        })
-      );
+  editPerfil(
+    perfil: Data.EditPerfilRequest
+  ): Observable<Data.EditPerfilResponse> {
+    return this.http.post<Data.EditPerfilResponse>(
+      `${this.apiUrl}/perfiles/edit`,
+      perfil
+    );
   }
 
-  deletePerfil(perfil_id: number): Observable<number> {
-    return this.http
-      .post<Data.DeletePerfilResponse>(`${this.apiUrl}/perfiles/delete`, {
+  deletePerfil(perfil_id: number): Observable<Data.DeletePerfilResponse> {
+    return this.http.post<Data.DeletePerfilResponse>(
+      `${this.apiUrl}/perfiles/delete`,
+      {
         perfil_id,
-      })
-      .pipe(
-        map((res: Data.DeletePerfilResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          // ToDo: Verificar que el endpoint siga el estadar
-          // return res.data.id;
-          return 1;
-        })
-      );
+      }
+    );
   }
 
   getPerfilSelected(perfil_id: number): Observable<Data.Perfil> {
