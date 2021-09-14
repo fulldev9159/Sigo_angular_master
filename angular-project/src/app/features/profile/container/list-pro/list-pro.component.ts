@@ -69,7 +69,7 @@ export class ListProComponent implements OnInit, OnDestroy {
       sort: ['nombre', 'descripcion', 'created_at', 'superior'],
       actions: (perfil: Data.Perfil) => {
         let disabled = false;
-        let actions = [
+        const actions = [
           {
             disabled,
             icon: 'pi pi-eye',

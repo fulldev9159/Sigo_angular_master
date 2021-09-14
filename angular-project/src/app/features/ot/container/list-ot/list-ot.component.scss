@@ -16,6 +16,11 @@
 }
 
 :host ::ng-deep {
+
+  app-table {
+    font-size: 0.8rem;
+  }
+
   .p-field-radiobutton {
     color: #00507a;
     border: #00507a;

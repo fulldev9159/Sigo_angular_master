@@ -137,19 +137,22 @@ export class ListCubComponent implements OnInit, OnDestroy {
           },
         ];
         let disabled = false;
-        let tooltipText = '';
+        let tooltipTextEdit = '';
+        let tooltipTextDelete = '';
         if (cub.asignado) {
           disabled = true;
-          tooltipText = 'No puede editar una cubicacion asignada a una OT';
+          tooltipTextEdit = 'No puede editar una cubicacion asignada a una OT';
+          tooltipTextDelete =
+            'No puede eliminar una cubicacion asignada a una OT';
         } else if (this.authLogin.usuario_id !== cub.creador_usuario_id) {
           disabled = true;
-          tooltipText = 'No puede editar cubicaciones de otro usuario';
+          tooltipTextEdit = 'No puede editar cubicaciones de otro usuario';
+          tooltipTextDelete = 'No puede eliminar cubicaciones de otro usuario';
         }
-        console.log(disabled);
         actions.push(
           {
             disabled,
-            tooltipDisabled: tooltipText,
+            tooltipDisabled: tooltipTextEdit,
             icon: 'p-button-icon pi pi-pencil',
             class: 'p-button p-button-warning p-mr-2',
             onClick: (event: Event, item) => {
@@ -160,7 +163,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
           },
           {
             disabled,
-            tooltipDisabled: tooltipText,
+            tooltipDisabled: tooltipTextDelete,
             icon: 'p-button-icon pi pi-trash',
             class: 'p-button p-button-danger',
             onClick: (event: Event, item: cubModel.Cubicacion) => {
