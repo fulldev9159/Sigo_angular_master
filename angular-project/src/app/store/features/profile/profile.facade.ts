@@ -60,5 +60,6 @@ export class ProfileFacade {
   public resetData(): void {
     this.store.dispatch(profileActions.resetData());
   }
+
   // PROFILE
 }

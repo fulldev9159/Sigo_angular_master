@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ConfirmationService } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import * as Data from '@data';
 @Component({
   selector: 'app-list-user',
@@ -10,7 +10,7 @@ import * as Data from '@data';
   styleUrls: ['./list-user.component.scss'],
 })
 export class ListUserComponent implements OnInit {
-  public DisplayModal = false;
+  public DisplayModal$ = of();
   public users$: Observable<Data.User[]>;
   public userDetail$: Observable<Data.UserWithDetail>;
 
@@ -108,7 +108,6 @@ export class ListUserComponent implements OnInit {
           label: 'Detalle',
           onClick: (event: Event, item: Data.User) => {
             this.userFacade.getAllDataUsuario(item.id);
-            this.DisplayModal = true;
           },
         },
         {
@@ -165,5 +164,10 @@ export class ListUserComponent implements OnInit {
     this.userFacade.getAllUsers();
     this.users$ = this.userFacade.getAllUsers$();
     this.userDetail$ = this.userFacade.getAllDataUsuario$();
+    this.DisplayModal$ = this.userFacade.DisplayDetalleModal$();
+  }
+
+  cerrarDisplayModal(value: boolean): void {
+    this.userFacade.SetDisplayDetalleModal(value);
   }
 }

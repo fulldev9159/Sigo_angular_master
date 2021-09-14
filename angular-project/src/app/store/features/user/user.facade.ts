@@ -123,4 +123,12 @@ export class UserFacade {
   public getAllDataUsuario$(): Observable<Data.UserWithDetail> {
     return this.store.select(userSelectors.getAllDataUser);
   }
+
+  public SetDisplayDetalleModal(value: boolean): void {
+    return this.store.dispatch(userActions.setDisplayDetalleModal({ value }));
+  }
+
+  public DisplayDetalleModal$(): Observable<boolean> {
+    return this.store.select(userSelectors.getDisplayDetalleModal);
+  }
 }

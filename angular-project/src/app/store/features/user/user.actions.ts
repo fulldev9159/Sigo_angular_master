@@ -184,6 +184,11 @@ export const getAllDataUsuarioError = createAction(
   props<{ error: any }>()
 );
 
+export const setDisplayDetalleModal = createAction(
+  '[User Set DisplayDetalleModal] SET DisplayDetalleModal',
+  props<{ value: boolean }>()
+);
+
 export const resetData = createAction('[ResetData] ResetData');
 export const resetArea = createAction('[User] Reset Area');
 export const resetContratos = createAction('[User] Reset Contrartos');
