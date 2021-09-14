@@ -77,6 +77,7 @@ export class ListProComponent implements OnInit, OnDestroy {
             class: 'p-button-text p-button-sm',
             onClick: (event: Event, item: Data.Perfil) => {
               this.profileFacade.getProfileSelected(item.id);
+              this.DisplayDetallesPerfilModal = true;
             },
           },
         ];

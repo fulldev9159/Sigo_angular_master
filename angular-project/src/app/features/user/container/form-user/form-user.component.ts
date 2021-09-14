@@ -24,13 +24,34 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   formControls = {
     id: new FormControl(null),
-    username: new FormControl(null, [Validators.required, this.noWhitespace]),
-    nombres: new FormControl(null, [Validators.required, this.noWhitespace]),
-    apellidos: new FormControl(null, [Validators.required, this.noWhitespace]),
-    rut: new FormControl(null, [Validators.required, this.noWhitespace]),
+    username: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      Validators.maxLength(45),
+    ]),
+    nombres: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      Validators.maxLength(45),
+    ]),
+    apellidos: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      ,
+      Validators.maxLength(45),
+    ]),
+    rut: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      Validators.maxLength(50),
+    ]),
     firma: new FormControl(null),
-    celular: new FormControl(null),
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    celular: new FormControl(null, [Validators.maxLength(15)]),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.email,
+      Validators.maxLength(45),
+    ]),
     provider: new FormControl('movistar'),
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),

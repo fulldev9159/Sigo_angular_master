@@ -29,8 +29,10 @@
           <br>
           <div class="row">
             <div class="col-12" id="descripcion-perfil-input">
-              <label class="mb-1" for="">Descripción perfil</label>
-              <textarea formControlName="descripcion" name="" id="" class="form-control" cols="30" rows="5"></textarea>
+              <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
+              </app-textarea>
+              <!-- <label class="mb-1" for="">Descripción perfil</label>
+              <textarea formControlName="descripcion" name="" id="" class="form-control" cols="30" rows="5"></textarea> -->
             </div>
           </div>
           <br>
