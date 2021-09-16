@@ -1,6 +1,10 @@
 @import "custom-bootstrap";
 @import "~bootstrap/scss/bootstrap";
 
+* {
+  font-size: 0.8rem;
+}
+
 body {
   font-family: "Inter-Regular", system-ui, -apple-system, BlinkMacSystemFont,
     Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -8,28 +12,6 @@ body {
   color: #00507a;
 }
 
-// body {
-//   font-family: "RobotoRegular", sans-serif;
-//   background-color: #dae9ec;
-// }
-
-// h1 {
-//   font-family: "RobotoRegularLigth", sans-serif;
-// }
-
-// table thead tr th span.ui-column-title {
-//   display: block !important;
-// }
-
-// select,
-// button:disabled {
-//   pointer-events: all !important;
-// }
-
-// label {
-//   margin-bottom: 0;
-//   margin-top: 10px;
-// }
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

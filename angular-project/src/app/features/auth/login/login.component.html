@@ -1,16 +1,17 @@
 <main class="row-main d-flex align-items-center min-vh-100 py-3 py-md-0">
-  <div class="container">
+  <div class="container" style="width: 736px;">
     <div class="card login-card">
       <div class="row no-gutters">
-        <div class="col-md-5">
-          <img src="../../../../assets/preview3.jpeg" alt="login" class="login-card-img">
+        <div class="col-md-5" style="align-self:center">
+          <img src="https://logos-marcas.com/wp-content/uploads/2020/04/Movistar-Logo.png" alt="login" width="100%">
         </div>
         <div class="col-md-7">
-          <div class="card-body">
+          <div class="card-body" style="text-align-last: center;">
             <div class="brand-wrapper">
-              <img src="../../../../assets/icon-app-mimovistar.svg" alt="logo" class="logo">
+              <!-- <img src="../../../../assets/icon-app-mimovistar.svg" alt="logo" class="logo"> -->
+              <p class="login-card-description">Inicie sesión en su cuenta</p>
             </div>
-            <p class="login-card-description">Inicia sesión en su cuenta</p>
+
             <form [formGroup]="formLogin" (ngSubmit)="login()">
               <div class="form-group">
                 <label for="text" class="sr-only">Usuario</label>
@@ -22,13 +23,13 @@
               </div>
               <input [disabled]="!formLogin.valid" name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Ingresar">
             </form>
-            <a href="#!" class="forgot-password-link">Olvido su contraseña</a>
+            <!-- <a href="#!" class="forgot-password-link">Olvido su contraseña</a>
             <p class="login-card-footer-text">¿No tienes una cuenta? <a href="#!" class="text-reset">Registrarse
                 aquí</a>
             </p>
             <nav class="login-card-footer-nav">
               <a href="#!">Política de privacidad</a>
-            </nav>
+            </nav> -->
           </div>
         </div>
       </div>
