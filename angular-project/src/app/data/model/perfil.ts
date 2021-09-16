@@ -8,8 +8,6 @@ export interface Perfil {
   nombre: string;
   permisos: Permiso[];
   updated_at: Date;
-  superior_id: number;
-  superior_nombre: string;
 }
 
 export interface PerfilResponse {
@@ -24,7 +22,6 @@ export interface PerfilResponse {
 export interface CreatePerfilRequest {
   nombre: string;
   descripcion: string;
-  superior: number;
   permisos: number[];
 }
 
@@ -43,7 +40,6 @@ export interface EditPerfilRequest {
   id: number;
   nombre: string;
   descripcion: string;
-  superior: number;
   permisos: number[];
 }
 

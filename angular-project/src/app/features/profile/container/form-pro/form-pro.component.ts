@@ -21,8 +21,15 @@ export class FormProComponent implements OnInit, OnDestroy {
 
   formControls = {
     id: new FormControl(null),
-    nombre: new FormControl(null, [Validators.required, this.noWhitespace]),
-    descripcion: new FormControl(null, [Validators.required]),
+    nombre: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      Validators.maxLength(100),
+    ]),
+    descripcion: new FormControl(null, [
+      Validators.required,
+      Validators.maxLength(200),
+    ]),
     permisos_OT: new FormControl(null),
     permisos_CUBICACION: new FormControl(null),
     permisos_PERFIL: new FormControl(null),
@@ -158,7 +165,6 @@ export class FormProComponent implements OnInit, OnDestroy {
       const request: Data.CreatePerfilRequest = {
         nombre: this.formPerfil.get('nombre').value,
         descripcion: this.formPerfil.get('descripcion').value,
-        superior: 1,
         permisos,
       };
 
@@ -169,7 +175,6 @@ export class FormProComponent implements OnInit, OnDestroy {
         id: perfil_id,
         nombre: this.formPerfil.get('nombre').value,
         descripcion: this.formPerfil.get('descripcion').value,
-        superior: 1,
         permisos,
       };
       console.log('EDIT', request);

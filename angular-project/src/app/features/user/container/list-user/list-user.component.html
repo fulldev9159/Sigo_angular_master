@@ -12,40 +12,49 @@
     </div>
   </div>
   <app-table [config]="configTable" [items]="(users$ | async)"></app-table>
-  <app-modal [display]="DisplayModal" (CloseEvent)="DisplayModal=false" [style]="{width: '50vw'}">
-    <ng-container modal-header-title>Detalles del usuario</ng-container>
+  <app-modal [display]="DisplayModal$|async" (CloseEvent)="cerrarDisplayModal(false)" [style]="{width: '50vw'}">
+    <ng-container modal-header-title>Detalles del usuario <strong>{{(userDetail$|async)?.username}}</strong> </ng-container>
     <ng-container modal-content>
       <div class="row">
-
         <div class="col-xs-12 col-md-6 pt-2" id="detalle_contrato_marco">
-          <p-listbox [options]="(userDetail$|async)?.contratos_marco" optionLabel="contratos_marco" optionDisabled="inactive" [disabled]="true">
-            <ng-template pTemplate="header">
-              Contratos con los que el usuario puede trabajar
-            </ng-template>
-            <ng-template let-contrato pTemplate="item">
-              {{contrato.nombre}}
-            </ng-template>
-          </p-listbox>
-          <div class="card">
-            <h5 class="card-header">Información adicional</h5>
-            <div class="card-body">
-              <p><strong>Email:</strong> {{(userDetail$|async)?.email}}</p>
-              <p><strong>Celular:</strong> {{(userDetail$|async)?.celular}}</p>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <h5 class="card-header">Contratos</h5>
+                <div class="card-body">
+                  <p-listbox [options]="(userDetail$|async)?.contratos_marco" optionLabel="contratos_marco" optionDisabled="inactive" [disabled]="true">
+                    <ng-template let-contrato pTemplate="item">
+                      {{contrato.nombre}}
+                    </ng-template>
+                  </p-listbox>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <h5 class="card-header">Información adicional</h5>
+                <div class="card-body">
+                  <p><strong>Email:</strong> {{(userDetail$|async)?.email}}</p>
+                  <p><strong>Celular:</strong> {{(userDetail$|async)?.celular}}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
-          <p-listbox [options]="(userDetail$|async)?.perfiles" optionLabel="perfil" optionDisabled="inactive" [disabled]="true">
-            <ng-template pTemplate="header">
-              Perfiles del usuario
-            </ng-template>
-            <ng-template let-perfil pTemplate="item">
-              <p><strong> Perfil: </strong> {{perfil.nombre}}
-                <br />
-                <strong>Persona a cargo: </strong>{{perfil.persona_a_cargo_nombre}}
-              </p>
-            </ng-template>
-          </p-listbox>
+          <div class="card">
+            <h5 class="card-header">Periles</h5>
+            <div class="card-body">
+              <p-listbox [options]="(userDetail$|async)?.perfiles" optionLabel="perfil" optionDisabled="inactive" [disabled]="true">
+                <ng-template let-perfil pTemplate="item">
+                  <p> {{perfil.nombre}}</p>
+                </ng-template>
+              </p-listbox>
+            </div>
+          </div>
         </div>
       </div>
     </ng-container>

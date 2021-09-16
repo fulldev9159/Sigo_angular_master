@@ -113,8 +113,8 @@ export class ProfileEffects {
       ofType(profileActions.editProfile),
       concatMap(({ perfil }) =>
         this.perfilService.editPerfil(perfil).pipe(
-          map((perfil_id: number) =>
-            profileActions.editProfileSuccess({ perfil_id })
+          map((edit_res: Data.EditPerfilResponse) =>
+            profileActions.editProfileSuccess({ edit_res })
           ),
           catchError(error => of(profileActions.editProfileError({ error })))
         )
@@ -126,12 +126,16 @@ export class ProfileEffects {
     () =>
       this.actions$.pipe(
         ofType(profileActions.editProfileSuccess),
-        tap(() => {
-          this.snackService.showMessage(
-            `Datos del perfil guardados con Éxito!`,
-            ''
-          );
-          this.router.navigate(['/app/profile/list-pro']);
+        tap(({ edit_res }) => {
+          if (+edit_res.status.responseCode !== 0) {
+            this.snackService.showMessage(edit_res.status.description, 'error');
+          } else {
+            this.snackService.showMessage(
+              `Datos del perfil guardados con Éxito!`,
+              ''
+            );
+            this.router.navigate(['/app/profile/list-pro']);
+          }
         })
       ),
     { dispatch: false }
@@ -156,8 +160,8 @@ export class ProfileEffects {
       ofType(profileActions.deleteProfile),
       concatMap(({ perfil_id }) =>
         this.perfilService.deletePerfil(perfil_id).pipe(
-          map((perfil_id_res: number) =>
-            profileActions.deleteProfileSuccess({ perfil_id: perfil_id_res })
+          map((delete_res: Data.EditPerfilResponse) =>
+            profileActions.deleteProfileSuccess({ delete_res })
           ),
           catchError(error => of(profileActions.deleteProfileError({ error })))
         )
@@ -169,9 +173,16 @@ export class ProfileEffects {
     () =>
       this.actions$.pipe(
         ofType(profileActions.deleteProfileSuccess),
-        tap(() => {
-          this.snackService.showMessage(`perfil eliminado con Éxito!`, '');
-          this.profileFacade.getProfile();
+        tap(({ delete_res }) => {
+          if (+delete_res.status.responseCode !== 0) {
+            this.snackService.showMessage(
+              delete_res.status.description,
+              'error'
+            );
+          } else {
+            this.snackService.showMessage(`perfil eliminado con Éxito!`, '');
+            this.profileFacade.getProfile();
+          }
         })
       ),
     { dispatch: false }

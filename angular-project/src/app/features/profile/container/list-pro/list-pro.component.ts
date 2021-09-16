@@ -67,27 +67,47 @@ export class ListProComponent implements OnInit, OnDestroy {
         },
       ],
       sort: ['nombre', 'descripcion', 'created_at', 'superior'],
-      actions: [
-        {
-          conditionKey: 'eliminable',
+      actions: (perfil: Data.Perfil) => {
+        let disabled = false;
+        const actions = [
+          {
+            disabled,
+            icon: 'pi pi-eye',
+            tooltipDisabled: '',
+            class: 'p-button-text p-button-sm',
+            onClick: (event: Event, item: Data.Perfil) => {
+              this.profileFacade.getProfileSelected(item.id);
+              this.DisplayDetallesPerfilModal = true;
+            },
+          },
+        ];
+
+        let tooltipEdit = '';
+        if (!perfil.eliminable) {
+          tooltipEdit = 'Este perfil no se puede editar';
+          disabled = true;
+        }
+
+        actions.push({
+          disabled,
           icon: ' pi pi-pencil',
           class: 'p-button-text p-button-sm',
+          tooltipDisabled: tooltipEdit,
           onClick: (event: Event, item: Data.Perfil) => {
             this.router.navigate(['/app/profile/form-pro', item.id]);
           },
-        },
-        {
-          icon: 'pi pi-eye',
-          class: 'p-button-text p-button-sm',
-          onClick: (event: Event, item: Data.Perfil) => {
-            this.profileFacade.getProfileSelected(item.id);
-          },
-        },
-        {
-          conditionKey: 'eliminable',
+        });
+        let tooltipEliminar = '';
+        if (!perfil.eliminable) {
+          tooltipEliminar = 'Este perfil no se puede eliminar';
+          disabled = true;
+        }
+
+        actions.push({
+          disabled,
+          tooltipDisabled: tooltipEliminar,
           icon: 'pi pi-trash',
           class: 'p-button-text p-button-danger p-button-sm',
-          tooltip: 'No puede eliminar perfiles con usuarios asignados',
           onClick: (event: Event, item: Data.Perfil) => {
             if (item.eliminable) {
               this.confirmationService.confirm({
@@ -102,8 +122,10 @@ export class ListProComponent implements OnInit, OnDestroy {
               });
             }
           },
-        },
-      ],
+        });
+
+        return actions;
+      },
     },
   };
 

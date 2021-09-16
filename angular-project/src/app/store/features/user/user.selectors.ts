@@ -39,3 +39,8 @@ export const getAllDataUser = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.alldatauser
 );
+
+export const getDisplayDetalleModal = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.displayDetalleModal
+);

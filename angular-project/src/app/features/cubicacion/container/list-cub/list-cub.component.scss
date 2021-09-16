@@ -1,9 +1,15 @@
-:host {
+:host ::ng-deep {
   display: block;
   position: absolute;
   max-width: 100%;
   max-width: 100%;
   background: transparent;
+
+
+  app-table {
+    font-size: 0.8rem;
+  }
+
 }
 
 @media (max-width: 767px) {

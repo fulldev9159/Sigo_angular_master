@@ -12,6 +12,7 @@ export interface StateUser {
   samecompanyusers: Data.User[];
   contratos: Data.Contrato[];
   alldatauser: Data.UserWithDetail;
+  displayDetalleModal: boolean;
 }
 
 export const initialStateUser: StateUser = {
@@ -22,6 +23,7 @@ export const initialStateUser: StateUser = {
   samecompanyusers: [],
   contratos: [],
   alldatauser: null,
+  displayDetalleModal: false,
 };
 
 export const reducerUser = createReducer(
@@ -80,5 +82,10 @@ export const reducerUser = createReducer(
   on(UserActions.getAllDataUsuarioSuccess, (state, { user }) => ({
     ...state,
     alldatauser: user,
+    displayDetalleModal: true,
+  })),
+  on(UserActions.setDisplayDetalleModal, (state, payload) => ({
+    ...state,
+    displayDetalleModal: payload.value,
   }))
 );
