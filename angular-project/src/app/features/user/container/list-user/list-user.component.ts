@@ -53,7 +53,7 @@ export class ListUserComponent implements OnInit {
           type: 'TEXT-TITLECASE',
           sort: 'apellidos',
           header: 'apellidos',
-          width: '8%',
+          // width: '8%',
           editable: false,
         },
         {
@@ -83,7 +83,7 @@ export class ListUserComponent implements OnInit {
           editable: false,
         },
         {
-          field: null,
+          field: 'Acciones',
           type: 'ACTIONS',
           sort: null,
           header: null,

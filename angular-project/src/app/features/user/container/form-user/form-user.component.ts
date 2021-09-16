@@ -352,6 +352,8 @@ export class FormUserComponent implements OnInit, OnDestroy {
       };
       console.log('EDIT REQUEST', request);
       this.userFacade.editUserNew(request);
+      //ToDo: Esto es un WA para que no se habra el modal
+      this.userFacade.SetDisplayDetalleModal(false);
     } else {
       let request: Data.CreateUserRequest;
       request = data;
