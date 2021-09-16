@@ -25,22 +25,22 @@ unit test and lint:
     - ng test --code-coverage --progress false --watch false
   coverage: '/^Statements\s*:\s*([^%]+)/'
 
-e2e robotframework:
-  <<: *connect_gcr
-  stage: e2e test
-  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
-  script:
-    - docker-compose -f docker-compose.yml down -v
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml pull mcl_test_sigo_db
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml pull mcl_test_sigo_api
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_e2e_robotframework mcl_test_sigo_web
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_db mcl_test_sigo_api mcl_test_sigo_web
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml run dockerize-test-waiting
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml run mcl_e2e_robotframework
-  after_script:
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
-  tags:
-    - docker_sigo
+#e2e robotframework:
+#  <<: *connect_gcr
+#  stage: e2e test
+#  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+#  script:
+#    - docker-compose -f docker-compose.yml down -v
+#    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml pull mcl_test_sigo_db
+#    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml pull mcl_test_sigo_api
+#    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_e2e_robotframework mcl_test_sigo_web
+#    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_db mcl_test_sigo_api mcl_test_sigo_web
+#    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml run dockerize-test-waiting
+#    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml run mcl_e2e_robotframework
+#  after_script:
+#    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
+#  tags:
+#    - docker_sigo
 
 docker:
   <<: *connect_gcr
