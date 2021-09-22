@@ -21,6 +21,8 @@ import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { TabComponent } from './tabs/tab.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { ContratoOrdinarioLpusTableComponent } from './contrato-ordinario-lpus-table/contrato-ordinario-lpus-table.component';
+import { ContratoMovilLpusTableComponent } from './contrato-movil-lpus-table/contrato-movil-lpus-table.component';
 
 @NgModule({
   imports: [
@@ -44,6 +46,8 @@ import { TabsComponent } from './tabs/tabs.component';
     TextareaComponent,
     TabComponent,
     TabsComponent,
+    ContratoOrdinarioLpusTableComponent,
+    ContratoMovilLpusTableComponent,
   ],
   exports: [
     CardComponent,
@@ -61,6 +65,8 @@ import { TabsComponent } from './tabs/tabs.component';
     TextareaComponent,
     TabComponent,
     TabsComponent,
+    ContratoOrdinarioLpusTableComponent,
+    ContratoMovilLpusTableComponent,
   ],
   providers: [ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

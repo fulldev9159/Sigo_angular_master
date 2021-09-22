@@ -1,0 +1,62 @@
+<div class="card">
+  <p-table #dt [columns]="['lpu_nombre', 'tipo_servicio', 'lpu_precio']" [value]="items" [rows]="10" [paginator]="false" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0">LPUs</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" [placeholder]="'Filtrar...'" />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th [pSortableColumn]="'lpu_nombre'" [ngStyle]="{ 'width': '33%' }">Servicio LPU
+          <p-sortIcon [field]="'lpu_nombre'"></p-sortIcon>
+        </th>
+        <th [ngStyle]="{ 'width': '10%' }">Región
+        </th>
+        <th [pSortableColumn]="'tipo_servicio'">Tipo Servicio
+          <p-sortIcon [field]="'tipo_servicio'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'cantidad'">Cantidad
+          <p-sortIcon [field]="'cantidad'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'lpu_unidad_nombre'">Unidad
+          <p-sortIcon [field]="'lpu_unidad_nombre'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'tipo_moneda_cod'">Tipo Moneda
+          <p-sortIcon [field]="'tipo_moneda_cod'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'lpu_precio'">Precio
+          <p-sortIcon [field]="'lpu_precio'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'lpu_subtotal'">Subtotal
+          <p-sortIcon [field]="'lpu_subtotal'"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+      <tr>
+        <td>{{ item['lpu_nombre'] }}</td>
+        <td>{{ item['region'] }}</td>
+        <td>{{ item['tipo_servicio'] }}</td>
+        <td>{{ item['cantidad'] }}</td>
+        <td>{{ item['lpu_unidad_nombre'] }}</td>
+        <td>{{ item['tipo_moneda_cod'] }}</td>
+        <td>{{ item['lpu_precio'] }}</td>
+        <td>{{ item['lpu_subtotal'] }}</td>
+        <td></td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        En total hay {{ items ? items.length : 0 }} elementos.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
