@@ -32,6 +32,15 @@ interface Service {
 export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
+  msgsLPUSQuantity = [
+    {
+      severity: 'info',
+      // summary: 'ATENCION',
+      detail: 'Al menos 1 LPU debe ser ingresada',
+    },
+  ];
+  total = 0;
+  currency = '';
   items: Service[] = [
     //// {
     ////   cantidad: 1,
@@ -67,9 +76,12 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
   set initItems(items: Service[]) {
     this.initFormControls(items);
     this.items = items;
+    this.updateTotal();
   }
 
-  form: FormGroup = new FormGroup({});
+  form: FormGroup = new FormGroup({
+    cantidades: new FormGroup({}),
+  });
 
   nonZero(control: FormControl): any {
     const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
@@ -97,64 +109,85 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscription.add(
+      this.cantidadesForm.valueChanges.subscribe(data => this.updateTotal())
+    );
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  get cantidades(): FormArray {
-    return this.form.get('cantidades') as FormArray;
+  get cantidadesForm(): FormGroup {
+    return this.form.get('cantidades') as FormGroup;
   }
 
   initFormControls(items: Service[]): void {
-    items.forEach(item => {
-      const key = this.lpuKey(item);
-      this.form.addControl(
-        key,
-        new FormControl(`${item.cantidad}`, [
-          Validators.required,
-          this.noWhitespace,
-          this.nonZero,
-          Validators.maxLength(6),
-        ])
-      );
-
-      this.subscription.add(
-        this.form.get(key).valueChanges.subscribe(value => {
-          const index = this.items.findIndex(i => i.lpu_id === item.lpu_id);
-          if (index > -1) {
-            const cantidad = +value;
-            if (!isNaN(cantidad) && cantidad > -1) {
-              this.items[index].cantidad = +cantidad;
-              this.items[index].lpu_subtotal =
-                +this.items[index].lpu_precio * +cantidad;
-            }
-          }
-        })
-      );
-    });
+    items.forEach(item => this.addItemControl(item));
   }
 
   lpuKey(item: Service): string {
     return `lpu_id__${item.lpu_id}`;
   }
 
+  updateTotal(): void {
+    this.currency =
+      this.items.length === 0 ? '' : this.items[0].tipo_moneda_cod;
+
+    this.total = this.items.reduce(
+      (total, item) => total + item.lpu_subtotal,
+      0
+    );
+  }
+
   get valid(): boolean {
-    return this.form.valid;
+    return this.cantidadesForm.valid && this.items.length > 0;
   }
 
   touch(): void {
-    Object.keys(this.form.controls).forEach(field => {
-      const control = this.form.get(field);
+    Object.keys(this.cantidadesForm.controls).forEach(field => {
+      const control = this.cantidadesForm.get(field);
       control.markAsTouched({
         onlySelf: true,
       });
     });
 
-    this.form.markAsTouched({
+    this.cantidadesForm.markAsTouched({
       onlySelf: true,
     });
+  }
+
+  addItemControl(item: Service): void {
+    const key = this.lpuKey(item);
+    this.cantidadesForm.addControl(
+      key,
+      new FormControl(`${item.cantidad}`, [
+        Validators.required,
+        this.noWhitespace,
+        this.nonZero,
+        Validators.maxLength(6),
+      ])
+    );
+
+    this.subscription.add(
+      this.cantidadesForm.get(key).valueChanges.subscribe(value => {
+        const index = this.items.findIndex(i => i.lpu_id === item.lpu_id);
+        if (index > -1) {
+          const cantidad = +value;
+          if (!isNaN(cantidad) && cantidad > -1) {
+            this.items[index].cantidad = +cantidad;
+            this.items[index].lpu_subtotal =
+              +this.items[index].lpu_precio * +cantidad;
+          }
+        }
+      })
+    );
+  }
+
+  addItem(item: Service): void {
+    this.items.push(item);
+    this.addItemControl(item);
   }
 
   get values(): Service[] {

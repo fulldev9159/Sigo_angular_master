@@ -45,7 +45,7 @@
         <td>{{ item['region'] }}</td>
         <td>{{ item['tipo_servicio'] | titlecase }}</td>
         <td>
-          <app-input [control]="form.get(lpuKey(item))" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+          <app-input [control]="cantidadesForm.get(lpuKey(item))" type="text" [errorMessageFn]="errorMessageFn"></app-input>
         </td>
         <td>{{ item['lpu_unidad_nombre'] }}</td>
         <td>{{ item['tipo_moneda_cod'] }}</td>
@@ -61,4 +61,14 @@
       </div>
     </ng-template>
   </p-table>
+</div>
+
+<ng-container *ngIf="items.length === 0">
+  <div class="text-right">
+    <p-messages [(value)]="msgsLPUSQuantity" [closable]="false"></p-messages>
+  </div>
+</ng-container>
+
+<div id="total">
+  <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
 </div>
