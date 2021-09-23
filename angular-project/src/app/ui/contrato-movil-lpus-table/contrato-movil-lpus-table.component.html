@@ -51,7 +51,13 @@
         <td>{{ item['tipo_moneda_cod'] }}</td>
         <td>{{ item['lpu_precio'] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
         <td>{{ item['lpu_subtotal'] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-        <td></td>
+        <td id="action-buttons">
+          <div style="display: flex;">
+            <div class="p-buttonset">
+              <button pButton pRipple [icon]="'p-button-icon pi pi-trash'" [class]="'p-button-rounded p-button-danger'" (click)="deleteItem(item)"></button>
+            </div>
+          </div>
+        </td>
       </tr>
     </ng-template>
 

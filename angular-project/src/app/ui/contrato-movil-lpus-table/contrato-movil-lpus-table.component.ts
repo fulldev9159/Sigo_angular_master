@@ -185,9 +185,22 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
     );
   }
 
+  removeItemControl(item: Service): void {
+    const key = this.lpuKey(item);
+    this.cantidadesForm.removeControl(key);
+  }
+
   addItem(item: Service): void {
     this.items.push(item);
     this.addItemControl(item);
+  }
+
+  deleteItem(item: Service): void {
+    const index = this.items.findIndex(i => i.lpu_id === item.lpu_id);
+    if (index > -1) {
+      this.items.splice(index, 1);
+      this.removeItemControl(item);
+    }
   }
 
   get values(): Service[] {
