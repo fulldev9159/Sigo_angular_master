@@ -21,6 +21,7 @@ import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { TableComponent } from '@uiOT/table/table.component';
+import { ContratoMovilLpusTableComponent } from '../../component/contrato-movil-lpus-table/contrato-movil-lpus-table.component';
 import { CubicacionWithLpu } from '@data';
 
 // tslint:disable-next-line:no-empty-interface
@@ -51,152 +52,13 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
   servicios$: Observable<CubModel.Service[]> = of([]);
   servicios: CubModel.Service[] = []; // TODO: mejorar ésto
 
-  msgsLPUQuantityZero = [
-    {
-      severity: 'warn',
-      summary: 'ATENCION',
-      detail: 'Hay LPUS con cantidad igual a 0 o inferior',
-    },
-  ];
-
-  msgsLPUSQuantity = [
-    {
-      severity: 'info',
-      // summary: 'ATENCION',
-      detail: 'Al menos 1 LPU debe ser ingresada',
-    },
-  ];
-
-  cantidadDebouncer$ = new BehaviorSubject<{
-    value: string;
-    item: CartItem;
-  }>(null);
-  updatingTables = false;
-  tableValid = true;
   lpusCarrito: CartItem[] = [];
-  hasLPUWithZeroQuantity = false;
-  total = 0;
-  currency = '';
 
   @ViewChild('tableLpus', {
-    read: TableComponent,
+    read: ContratoMovilLpusTableComponent,
     static: false,
   })
-  tableLpus: TableComponent;
-
-  tableNormalConfiguration = {
-    header: true,
-    headerConfig: {
-      title: '',
-      searchText: 'Filtrar...',
-      paginator: false,
-      actionsType: 'Buttons',
-    },
-    body: {
-      headers: [
-        {
-          field: 'Servicio LPU',
-          type: 'TEXT',
-          sort: 'lpu_nombre',
-          header: 'lpu_nombre',
-          width: '33%',
-          editable: false,
-        },
-        {
-          field: 'Región',
-          type: 'TEXT',
-          header: 'region',
-          width: '10%',
-          editable: false,
-        },
-        {
-          field: 'Tipo Servicio',
-          type: 'TEXT-TITLECASE',
-          sort: 'tipo_servicio',
-          header: 'tipo_servicio',
-          editable: false,
-        },
-        {
-          field: 'Cantidad	',
-          type: 'INPUTNUMBER',
-          sort: 'cantidad',
-          header: 'cantidad',
-          editable: true,
-          onchange: (event: any, item: CartItem) => {
-            this.updatingTables = true;
-            this.cantidadDebouncer$.next({
-              value: event.target.value,
-              item,
-            });
-          },
-          validators: [
-            Validators.required,
-            this.noWhitespace,
-            this.nonZero,
-            Validators.maxLength(6),
-          ],
-          errorMessageFn: errors => {
-            if (errors.required) {
-              return 'Este campo es requerido';
-            } else if (errors.whitespace) {
-              return 'Este campo es requerido';
-            } else if (errors.nonzero) {
-              return 'No son permitidos valores inferiores a 1';
-            } else if (errors.maxlength) {
-              return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
-            }
-            return 'Este campo es inválido';
-          },
-        },
-        {
-          field: 'Unidad	',
-          type: 'TEXT',
-          sort: 'lpu_unidad_nombre',
-          header: 'lpu_unidad_nombre',
-          editable: false,
-        },
-        {
-          field: 'Tipo Moneda	',
-          type: 'TEXT',
-          sort: 'tipo_moneda_cod',
-          header: 'tipo_moneda_cod',
-          editable: false,
-        },
-        {
-          field: 'Precio',
-          type: 'NUMBER',
-          sort: 'lpu_precio',
-          header: 'lpu_precio',
-          editable: false,
-        },
-        {
-          field: 'Subtotal	',
-          type: 'NUMBER',
-          sort: 'lpu_subtotal',
-          header: 'lpu_subtotal',
-        },
-        {
-          field: null,
-          type: 'ACTIONS',
-          sort: null,
-          header: null,
-          editable: false,
-        },
-      ],
-      sort: ['lpu_nombre', 'tipo_servicio', 'lpu_precio'],
-      actions: [
-        {
-          icon: 'p-button-icon pi pi-trash',
-          class: 'p-button-rounded p-button-danger',
-          onClick: (event: Event, item: CubModel.Service) => {
-            if (!this.updatingTables) {
-              this.deleteCartItem(item);
-            }
-          },
-        },
-      ],
-    },
-  }; // tslint:disable-line
+  tableLpus: ContratoMovilLpusTableComponent;
 
   controls = {
     region_id: new FormControl(null, [Validators.required]),
@@ -205,17 +67,6 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
   };
 
   form: FormGroup = new FormGroup(this.controls);
-
-  nonZero(control: FormControl): any {
-    const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
-    return value < 1 ? { nonzero: true } : null;
-  }
-
-  noWhitespace(control: FormControl): any {
-    const isWhitespace = (control.value || '').trim().length === 0;
-    const isValid = !isWhitespace;
-    return isValid ? null : { whitespace: true };
-  }
 
   errorMessageFn = errors => {
     if (errors.required || errors.whitespace) {
@@ -350,7 +201,8 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.servicios$.subscribe(servicios => {
-        const lpusInCartIndex = this.lpusCarrito.reduce((ac, lpu) => {
+        const items = this.tableLpusValues;
+        const lpusInCartIndex = items.reduce((ac, lpu) => {
           ac[lpu.lpu_id] = true;
           return ac;
         }, {});
@@ -398,7 +250,6 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
                 tipo_servicio: lpu.tipo_servicio_nombre,
               }));
 
-              this.updateLpusTableInformation();
               this.initializationFinished$.next(true);
               this.detector.detectChanges();
             }, 1000);
@@ -410,22 +261,12 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
           }
         })
     );
-
-    this.subscription.add(
-      this.cantidadDebouncer$
-        .pipe(
-          filter(target => target !== null),
-          debounceTime(800)
-        )
-        .subscribe(({ value, item }) => this.cantidadChanged(value, item))
-    );
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.initializationFinished$.next(true);
     this.initializationFinished$.complete();
-    this.cantidadDebouncer$.complete();
   }
 
   resetRegionesFormControl(): void {
@@ -463,128 +304,43 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
     const tipoServicio = this.tiposServicio.find(
       t => t.id === +tipo_servicio_id
     );
-    const selectedServices = event.value;
-    const selectedServicesByLpuID = selectedServices.reduce((ac, lpu) => {
-      ac[lpu.lpu_id] = true;
-      return ac;
-    }, {});
-    const unselectedServices = this.servicios.filter(
-      service => selectedServicesByLpuID[service.lpu_id] === undefined
-    );
-    const unselectedServicesByLpuID = unselectedServices.reduce((ac, lpu) => {
-      ac[lpu.lpu_id] = true;
-      return ac;
-    }, {});
-    const isInCart = this.lpusCarrito.reduce((ac, lpu) => {
-      ac[lpu.lpu_id] = true;
-      return ac;
-    }, {});
-    const newLpus = selectedServices
-      .filter(lpu => isInCart[lpu.lpu_id] === undefined)
-      .map(lpu => ({
-        ...lpu,
+
+    //// {
+    ////   lpu_id: 833
+    ////   lpu_nombre: "\"DESINST bastidores de 19\"\" o 24\"\"\""
+    ////   lpu_numero_producto: "ServGeneratel279"
+    ////   lpu_precio: 68942
+    ////   lpu_unidad_codigo: 3
+    ////   lpu_unidad_nombre: "UNIDAD"
+    ////   tipo_moneda_cod: "CLP"
+    ////   tipo_moneda_id: 2
+    //// }
+    const target = event.option;
+    const items = this.tableLpusValues;
+    const item = items.find(i => i.lpu_id === target.lpu_id);
+
+    if (item) {
+      this.tableLpusDeleteItem(item);
+    } else {
+      this.tableLpusAddItem({
+        ...target,
         region: region.codigo,
         tipo_servicio: tipoServicio.nombre,
         cantidad: 1,
-        lpu_subtotal: lpu.lpu_precio,
-      }));
-    this.lpusCarrito = [
-      ...this.lpusCarrito.filter(
-        lpu => unselectedServicesByLpuID[lpu.lpu_id] === undefined
-      ),
-      ...newLpus,
-    ];
-    this.updateTotal();
-    this.updateCurrencyNormal();
-    this.validateLpusWithZeroQuantiy();
-    this.valueChanges.emit({
-      controlName: 'lpus',
-      value: {
-        lpus: this.lpusCarrito,
-      },
-    });
-  }
-
-  cantidadChanged(value: string, item: CartItem): void {
-    const cantidad = (val => (isNaN(val) ? 0 : val))(parseInt(value, 10));
-
-    this.lpusCarrito = this.lpusCarrito.map(x => {
-      if (x.lpu_id === item.lpu_id) {
-        return {
-          ...x,
-          cantidad,
-          lpu_subtotal: +x.lpu_precio * cantidad,
-        };
-      }
-      return x;
-    });
-
-    this.tableValid = this.tableLpus.valid;
-    this.updatingTables = false;
-    this.updateLpusTableInformation();
-    this.detector.detectChanges();
-    this.valueChanges.emit({
-      controlName: 'lpus',
-      value: {
-        lpus: this.lpusCarrito,
-      },
-    });
-  }
-
-  deleteCartItem(item: CartItem): void {
-    this.lpusCarrito = this.lpusCarrito.filter(
-      lpu => lpu.lpu_id !== item.lpu_id
-    );
-
-    this.form
-      .get('lpus')
-      .setValue(
-        this.form.get('lpus').value.filter(lpu => lpu.lpu_id !== item.lpu_id)
-      );
-
-    this.tableValid = this.tableLpus.valid;
-    this.updateLpusTableInformation();
-    this.detector.detectChanges();
-    this.valueChanges.emit({
-      controlName: 'lpus',
-      value: {
-        lpus: this.lpusCarrito,
-      },
-    });
+        lpu_subtotal: target.lpu_precio,
+      });
+    }
   }
 
   resetLpusCarrito(): void {
     this.resetSelectedLpusFormControl([]);
-    this.lpusCarrito = [];
-    this.updateLpusTableInformation();
+    this.tableLpusReset();
     this.valueChanges.emit({
       controlName: 'lpus',
       value: {
-        lpus: this.lpusCarrito,
+        lpus: [],
       },
     });
-  }
-
-  updateLpusTableInformation(): void {
-    this.updateTotal();
-    this.updateCurrencyNormal();
-    this.validateLpusWithZeroQuantiy();
-  }
-
-  updateCurrencyNormal(): void {
-    this.currency =
-      this.lpusCarrito.length === 0 ? '' : this.lpusCarrito[0].tipo_moneda_cod;
-  }
-
-  updateTotal(): void {
-    this.total = this.lpusCarrito.reduce((total, currentValue) => {
-      return total + currentValue.lpu_subtotal;
-    }, 0);
-  }
-
-  validateLpusWithZeroQuantiy(): void {
-    const item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
-    this.hasLPUWithZeroQuantity = item !== undefined;
   }
 
   touch(): void {
@@ -599,25 +355,102 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
       onlySelf: true,
     });
 
-    this.tableLpus.touch();
+    this.tableLpusTouch();
   }
 
   get valid(): boolean {
-    return (
-      this.form.valid &&
-      this.lpusCarrito.length > 0 &&
-      !this.hasLPUWithZeroQuantity &&
-      this.tableValid &&
-      !this.updatingTables
-    );
+    return this.form.valid && this.tableLpusValid;
+  }
+
+  tableLpusAddItem(item: CartItem): void {
+    if (this.tableLpus !== undefined) {
+      this.tableLpus.addItem(item);
+    }
+  }
+
+  tableLpusAddItems(items: CartItem[]): void {
+    if (this.tableLpus !== undefined) {
+      this.tableLpus.addItems(items);
+    }
+  }
+
+  tableLpusDeleteItem(item: CartItem): void {
+    if (this.tableLpus !== undefined) {
+      this.tableLpus.deleteItem(item);
+    }
+  }
+
+  tableLpusReset(): void {
+    if (this.tableLpus !== undefined) {
+      this.tableLpus.reset();
+    }
+  }
+
+  tableLpusTouch(): void {
+    if (this.tableLpus !== undefined) {
+      this.tableLpus.touch();
+    }
+  }
+
+  get tableLpusValid(): boolean {
+    if (this.tableLpus === undefined) {
+      return false;
+    }
+    return this.tableLpus.valid;
+  }
+
+  get tableLpusValues(): CartItem[] {
+    if (this.tableLpus === undefined) {
+      return [];
+    }
+    return this.tableLpus.values;
+  }
+
+  itemAdded({ item }): void {
+    const items = this.tableLpusValues;
+    this.detector.detectChanges();
+    this.valueChanges.emit({
+      controlName: 'lpus',
+      value: {
+        lpus: items,
+      },
+    });
+  }
+
+  itemDeleted({ item }): void {
+    const items = this.tableLpusValues;
+    this.detector.detectChanges();
+    this.form
+      .get('lpus')
+      .setValue(
+        this.form.get('lpus').value.filter(lpu => lpu.lpu_id !== item.lpu_id)
+      );
+    this.valueChanges.emit({
+      controlName: 'lpus',
+      value: {
+        lpus: items,
+      },
+    });
+  }
+
+  cantidadChanged({ cantidad, item }): void {
+    const items = this.tableLpusValues;
+    this.detector.detectChanges();
+    this.valueChanges.emit({
+      controlName: 'lpus',
+      value: {
+        lpus: items,
+      },
+    });
   }
 
   get values(): any {
     const { region_id } = this.form.getRawValue();
+    const items = this.tableLpusValues;
 
     return {
       region_id: +region_id,
-      lpus: this.lpusCarrito.map(x => ({
+      lpus: items.map(x => ({
         lpu_id: x.lpu_id,
         cantidad: x.cantidad,
       })),

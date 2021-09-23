@@ -33,7 +33,7 @@
     <div class="row">
       <div class="col-12 field-box" style="height: 300px; max-height: 300px" [formGroup]="form" id="lpusBox">
         <label for="">Servicios LPU</label>
-        <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onChange)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
+        <p-listbox [metaKeySelection]="false" [options]="servicios$ | async" [checkbox]="true" [filter]="true" formControlName="lpus" [multiple]="true" optionLabel="lpu_nombre" (onClick)="lpuServiceSelected($event)" [listStyle]="{'max-height': '203px'}">
           <ng-template let-data pTemplate="item">
             <div class="country-item">
               <div>{{ data.lpu_nombre }}</div>
@@ -49,30 +49,7 @@
 
 <div class="row">
   <div class="col-12">
-    <app-table [config]="tableNormalConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
-
-    <div id="total">
-      <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
-    </div>
-
-    <hr>
-
-    <ng-container *ngIf="hasLPUWithZeroQuantity">
-      <div class="text-right">
-        <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="lpusCarrito.length === 0">
-      <div class="text-right">
-        <p-messages [(value)]="msgsLPUSQuantity" [closable]="false"></p-messages>
-      </div>
-
-      <!--
-      <span>
-        <p-message severity="info" text="Al menos 1 LPU debe ser ingresada"></p-message>&nbsp;
-      </span>
-      -->
-    </ng-container>
+    <app-contrato-movil-lpus-table #tableLpus [items]="lpusCarrito" (itemAdded)="itemAdded($event)" (itemDeleted)="itemDeleted($event)" (cantidadChanged)="cantidadChanged($event)"></app-contrato-movil-lpus-table>
+    <br>
   </div>
 </div>

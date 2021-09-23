@@ -1,0 +1,88 @@
+<div class="card" [formGroup]="form">
+  <p-table #dt [columns]="['lpu_nombre']" [value]="items" [rows]="10" [paginator]="false" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        <h5 class="p-m-0"> </h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" [placeholder]="'Filtrar...'" />
+        </span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th [pSortableColumn]="'lpu_nombre'">Servicio LPU
+          <p-sortIcon [field]="'lpu_nombre'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'lpu_unidad_codigo'">Unidad
+          <p-sortIcon [field]="'lpu_unidad_codigo'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'cantidad'">Cantidad
+          <p-sortIcon [field]="'cantidad'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'lpu_precio'">Precio CLP$
+          <p-sortIcon [field]="'lpu_precio'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'tipo_moneda_cod'">Tipo Moneda
+          <p-sortIcon [field]="'tipo_moneda_cod'"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'lpu_subtotal'">Subtotal
+          <p-sortIcon [field]="'lpu_subtotal'"></p-sortIcon>
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+      <tr>
+        <td>
+          <app-input [control]="lpuNombresForm.get(lpuKey(item))" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+        </td>
+        <td>
+          <app-select [control]="lpuUnidadesCodigoForm.get(lpuKey(item))" [errorMessageFn]="errorMessageFn">
+            <ng-container options>
+              <option value="null" selected disabled>Seleccione</option>
+              <ng-container *ngFor="let option of unidades">
+                <option [value]="option.id">
+                  {{ option.nombre }}
+                </option>
+              </ng-container>
+            </ng-container>
+          </app-select>
+        </td>
+        <td>
+          <app-input [control]="cantidadesForm.get(lpuKey(item))" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+        </td>
+        <td>
+          <app-input [control]="preciosForm.get(lpuKey(item))" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+        </td>
+        <td>{{ item['tipo_moneda_cod'] }}</td>
+        <td>{{ item['lpu_subtotal'] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+        <td id="action-buttons">
+          <div style="display: flex;">
+            <div class="p-buttonset">
+              <button pButton pRipple [icon]="'p-button-icon pi pi-trash'" [class]="'p-button-rounded p-button-danger'" (click)="deleteItem(item)"></button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      <div class="p-d-flex p-ai-center p-jc-between">
+        En total hay {{ items ? items.length : 0 }} elementos.
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-container *ngIf="items.length === 0">
+  <div class="text-right">
+    <p-messages [(value)]="msgsLPUSQuantity" [closable]="false"></p-messages>
+  </div>
+</ng-container>
+
+<div id="total">
+  <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
+</div>
