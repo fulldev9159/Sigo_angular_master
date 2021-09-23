@@ -15,6 +15,8 @@ import { FormCubContainerComponent } from './container/form-cub/form-cub.compone
 import { ContratoMovilFormComponent } from './forms/contrato-movil-form/contrato-movil-form.component';
 import { GeneralFormComponent } from './forms/general-form/general-form.component';
 import { GeneralFormService } from './service/general-form.service';
+import { ContratoOrdinarioLpusTableComponent } from './component/contrato-ordinario-lpus-table/contrato-ordinario-lpus-table.component';
+import { ContratoMovilLpusTableComponent } from './component/contrato-movil-lpus-table/contrato-movil-lpus-table.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { GeneralFormService } from './service/general-form.service';
     ContratoMovilFormComponent,
     GeneralFormComponent,
     // DetalleLpusComponent
+    ContratoOrdinarioLpusTableComponent,
+    ContratoMovilLpusTableComponent,
   ],
   imports: [
     CommonModule,

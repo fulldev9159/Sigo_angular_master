@@ -21,7 +21,7 @@ import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { TableComponent } from '@uiOT/table/table.component';
-import { ContratoMovilLpusTableComponent } from '@uiOT/contrato-movil-lpus-table/contrato-movil-lpus-table.component';
+import { ContratoMovilLpusTableComponent } from '../../component/contrato-movil-lpus-table/contrato-movil-lpus-table.component';
 import { CubicacionWithLpu } from '@data';
 
 // tslint:disable-next-line:no-empty-interface

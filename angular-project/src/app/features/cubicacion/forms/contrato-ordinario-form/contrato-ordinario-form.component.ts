@@ -21,7 +21,7 @@ import { GeneralFormService } from '../../service/general-form.service';
 import { TipoMonedaFacade } from '@storeOT/features/tipo-moneda/tipo-moneda.facade';
 import { UnidadFacade } from '@storeOT/features/unidad/unidad.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-import { ContratoOrdinarioLpusTableComponent } from '@uiOT/contrato-ordinario-lpus-table/contrato-ordinario-lpus-table.component';
+import { ContratoOrdinarioLpusTableComponent } from '../../component/contrato-ordinario-lpus-table/contrato-ordinario-lpus-table.component';
 import { Unidad, TipoMoneda } from '@data';
 import { CubicacionWithLpu } from '@data';
 
