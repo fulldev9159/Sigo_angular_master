@@ -299,39 +299,37 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
   }
 
   lpuServiceSelected(event: any): void {
-    let items = this.tableLpusValues;
     const { region_id, tipo_servicio_id } = this.form.getRawValue();
     const region = this.regiones.find(r => r.id === +region_id);
     const tipoServicio = this.tiposServicio.find(
       t => t.id === +tipo_servicio_id
     );
-    const selectedServices = event.value;
-    const selectedServicesByLpuID = selectedServices.reduce((ac, lpu) => {
-      ac[lpu.lpu_id] = true;
-      return ac;
-    }, {});
-    const unselectedServices = this.servicios.filter(
-      service => selectedServicesByLpuID[service.lpu_id] === undefined
-    );
-    const unselectedServicesByLpuID = unselectedServices.reduce((ac, lpu) => {
-      ac[lpu.lpu_id] = true;
-      return ac;
-    }, {});
-    const isInCart = items.reduce((ac, lpu) => {
-      ac[lpu.lpu_id] = true;
-      return ac;
-    }, {});
-    const newLpus = selectedServices
-      .filter(lpu => isInCart[lpu.lpu_id] === undefined)
-      .map(lpu => ({
-        ...lpu,
+
+    //// {
+    ////   lpu_id: 833
+    ////   lpu_nombre: "\"DESINST bastidores de 19\"\" o 24\"\"\""
+    ////   lpu_numero_producto: "ServGeneratel279"
+    ////   lpu_precio: 68942
+    ////   lpu_unidad_codigo: 3
+    ////   lpu_unidad_nombre: "UNIDAD"
+    ////   tipo_moneda_cod: "CLP"
+    ////   tipo_moneda_id: 2
+    //// }
+    const target = event.option;
+    const items = this.tableLpusValues;
+    const item = items.find(i => i.lpu_id === target.lpu_id);
+
+    if (item) {
+      this.tableLpusDeleteItem(item);
+    } else {
+      this.tableLpusAddItem({
+        ...target,
         region: region.codigo,
         tipo_servicio: tipoServicio.nombre,
         cantidad: 1,
-        lpu_subtotal: lpu.lpu_precio,
-      }));
-
-    this.tableLpusAddItems(newLpus);
+        lpu_subtotal: target.lpu_precio,
+      });
+    }
   }
 
   resetLpusCarrito(): void {
@@ -364,9 +362,21 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
     return this.form.valid && this.tableLpusValid;
   }
 
+  tableLpusAddItem(item: CartItem): void {
+    if (this.tableLpus !== undefined) {
+      this.tableLpus.addItem(item);
+    }
+  }
+
   tableLpusAddItems(items: CartItem[]): void {
     if (this.tableLpus !== undefined) {
       this.tableLpus.addItems(items);
+    }
+  }
+
+  tableLpusDeleteItem(item: CartItem): void {
+    if (this.tableLpus !== undefined) {
+      this.tableLpus.deleteItem(item);
     }
   }
 
