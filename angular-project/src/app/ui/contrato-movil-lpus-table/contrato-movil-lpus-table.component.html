@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [formGroup]="form">
   <p-table #dt [columns]="['lpu_nombre', 'tipo_servicio', 'lpu_precio']" [value]="items" [rows]="10" [paginator]="false" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
@@ -43,12 +43,14 @@
       <tr>
         <td>{{ item['lpu_nombre'] }}</td>
         <td>{{ item['region'] }}</td>
-        <td>{{ item['tipo_servicio'] }}</td>
-        <td>{{ item['cantidad'] }}</td>
+        <td>{{ item['tipo_servicio'] | titlecase }}</td>
+        <td>
+          <app-input [control]="form.get(lpuKey(item))" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+        </td>
         <td>{{ item['lpu_unidad_nombre'] }}</td>
         <td>{{ item['tipo_moneda_cod'] }}</td>
-        <td>{{ item['lpu_precio'] }}</td>
-        <td>{{ item['lpu_subtotal'] }}</td>
+        <td>{{ item['lpu_precio'] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+        <td>{{ item['lpu_subtotal'] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
         <td></td>
       </tr>
     </ng-template>
