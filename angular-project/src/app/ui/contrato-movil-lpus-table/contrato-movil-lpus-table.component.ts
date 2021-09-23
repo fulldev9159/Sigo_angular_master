@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import {
   FormControl,
@@ -79,9 +86,27 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
     this.updateTotal();
   }
 
+  @Output() itemAdded = new EventEmitter<{
+    item: Service;
+  }>();
+
+  @Output() itemDeleted = new EventEmitter<{
+    item: Service;
+  }>();
+
+  @Output() cantidadChanged = new EventEmitter<{
+    cantidad: number;
+    item: Service;
+  }>();
+
   form: FormGroup = new FormGroup({
     cantidades: new FormGroup({}),
   });
+
+  mustBeANumber(control: FormControl): any {
+    const result = /^\d+$/.test(control.value);
+    return result ? null : { benumber: true };
+  }
 
   nonZero(control: FormControl): any {
     const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
@@ -99,6 +124,8 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
       return 'Este campo es requerido';
     } else if (errors.whitespace) {
       return 'Este campo es requerido';
+    } else if (errors.benumber) {
+      return 'Debe ser un número';
     } else if (errors.nonzero) {
       return 'No son permitidos valores inferiores a 1';
     } else if (errors.maxlength) {
@@ -165,6 +192,7 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
       new FormControl(`${item.cantidad}`, [
         Validators.required,
         this.noWhitespace,
+        this.mustBeANumber,
         this.nonZero,
         Validators.maxLength(6),
       ])
@@ -179,6 +207,11 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
             this.items[index].cantidad = +cantidad;
             this.items[index].lpu_subtotal =
               +this.items[index].lpu_precio * +cantidad;
+            this.updateTotal();
+            this.cantidadChanged.emit({
+              cantidad,
+              item: this.items[index],
+            });
           }
         }
       })
@@ -193,6 +226,12 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
   addItem(item: Service): void {
     this.items.push(item);
     this.addItemControl(item);
+    this.updateTotal();
+    this.itemAdded.emit({ item });
+  }
+
+  addItems(items: Service[]): void {
+    items.forEach(item => this.addItem(item));
   }
 
   deleteItem(item: Service): void {
@@ -200,10 +239,21 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
     if (index > -1) {
       this.items.splice(index, 1);
       this.removeItemControl(item);
+      this.updateTotal();
+      this.itemDeleted.emit({ item });
     }
   }
 
   get values(): Service[] {
     return this.items;
+  }
+
+  reset(): void {
+    this.cantidadesForm.reset();
+    this.items = [];
+    this.form = new FormGroup({
+      cantidades: new FormGroup({}),
+    });
+    this.updateTotal();
   }
 }
