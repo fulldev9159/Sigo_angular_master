@@ -236,9 +236,7 @@ export class ContratoOrdinarioLpusTableComponent implements OnInit, OnDestroy {
         if (index > -1) {
           const lpu_unidad_codigo = +value;
           if (!isNaN(lpu_unidad_codigo)) {
-            const unidad = this.unidades.find(
-              unidad => unidad.id === lpu_unidad_codigo
-            );
+            const unidad = this.unidades.find(u => u.id === lpu_unidad_codigo);
             this.items[index].lpu_unidad_codigo = lpu_unidad_codigo;
             this.items[index].lpu_unidad_nombre = unidad ? unidad.nombre : '';
             this.cellValueChanged.emit({

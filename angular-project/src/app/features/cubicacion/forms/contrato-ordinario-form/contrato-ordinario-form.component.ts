@@ -406,27 +406,16 @@ export class ContratoOrdinarioFormComponent implements OnInit, OnDestroy {
       tipo_moneda_id: +tipo_moneda_id,
       tipo_moneda_cod,
       descripcion,
-      lpus: items.map(
-        ({
-          lpu_nombre,
-          lpu_unidad_codigo,
-          lpu_unidad_nombre,
-          cantidad,
-          lpu_precio,
-          tipo_moneda_cod,
-          tipo_moneda_id,
-          lpu_subtotal,
-        }) => ({
-          lpu_nombre,
-          lpu_unidad_codigo,
-          lpu_unidad_nombre,
-          cantidad,
-          lpu_precio,
-          tipo_moneda_cod,
-          tipo_moneda_id,
-          lpu_subtotal,
-        })
-      ),
+      lpus: items.map(item => ({
+        lpu_nombre: item.lpu_nombre,
+        lpu_unidad_codigo: item.lpu_unidad_codigo,
+        lpu_unidad_nombre: item.lpu_unidad_nombre,
+        cantidad: item.cantidad,
+        lpu_precio: item.lpu_precio,
+        tipo_moneda_cod: item.tipo_moneda_cod,
+        tipo_moneda_id: item.tipo_moneda_id,
+        lpu_subtotal: item.lpu_subtotal,
+      })),
     };
   }
 }
