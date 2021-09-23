@@ -33,30 +33,8 @@
     <div class="text-right" id="addItemButtonBox">
       <button (click)="addTableRow()" [disabled]="notAllowedToAddRow()" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-outlined"></button>
     </div>
-    <app-table [config]="tableConfiguration" #tableLpus [items]="lpusCarrito"></app-table>
 
-    <div id="total">
-      <strong>Total:</strong> {{ total | currency : currency : currency === '' ? '' : currency + '$ ':'.0-2':'es-CL' }}
-    </div>
-
-    <hr>
-
-    <ng-container *ngIf="hasLPUWithZeroQuantity">
-      <div class="text-right">
-        <p-messages [(value)]="msgsLPUQuantityZero" [closable]="false"></p-messages>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="lpusCarrito.length === 0">
-      <div class="text-right">
-        <p-messages [(value)]="msgsLPUSQuantity" [closable]="false"></p-messages>
-      </div>
-
-      <!--
-      <span>
-        <p-message severity="info" text="Al menos 1 LPU debe ser ingresada"></p-message>&nbsp;
-      </span>
-      -->
-    </ng-container>
+    <app-contrato-ordinario-lpus-table #tableLpus [items]="lpusCarrito" [unidades]="unidades$ | async" [currency]="currency" (itemAdded)="itemAdded($event)" (itemDeleted)="itemDeleted($event)" (cellValueChanged)="cellValueChanged($event)"></app-contrato-ordinario-lpus-table>
+    <br>
   </div>
 </div>
