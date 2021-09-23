@@ -2,7 +2,7 @@
   <p-table #dt [columns]="['lpu_nombre', 'tipo_servicio', 'lpu_precio']" [value]="items" [rows]="10" [paginator]="false" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
-        <h5 class="p-m-0">LPUs</h5>
+        <h5 class="p-m-0"> </h5>
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" [placeholder]="'Filtrar...'" />
