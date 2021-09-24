@@ -12,11 +12,11 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { map, filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-agregar-libro-obra',
-  templateUrl: './agregar-libro-obra.html',
-  styleUrls: ['./agregar-libro-obra.scss'],
+  selector: 'app-registrar-libro-obra',
+  templateUrl: './registrar-libro-obra.html',
+  styleUrls: ['./registrar-libro-obra.scss'],
 })
-export class AgregarLibroObraComponent implements OnInit, OnDestroy {
+export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
   ot$: Observable<Data.OT>;
   otID: number;
   uploadedFiles: any[] = [];
@@ -88,7 +88,14 @@ export class AgregarLibroObraComponent implements OnInit, OnDestroy {
   submit(): void {
     this.touch();
     if (this.valid) {
-      console.log(this.form.getRawValue());
+      const request: Data.RegistroLibroObraRequest = {
+        ot_id: this.otID,
+        observaciones: this.form.get('observaciones').value,
+        files: this.form.get('files').value,
+      };
+      console.log(request);
+
+      this.otFacade.registrarLibroObras(request);
     } else {
       console.error('invalid form');
     }

@@ -14,7 +14,7 @@ import { map, tap, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
 import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador-form/assign-trabajador-form.component';
-import { AgregarLibroObraComponent } from '@featureOT/ot/component/agregar-libro-obra/agregar-libro-obra';
+import { RegistrarLibroObraComponent } from '@featureOT/ot/component/registrar-libro-obra/registrar-libro-obra';
 
 @Component({
   selector: 'app-list-ot',
@@ -405,11 +405,11 @@ export class ListOtComponent implements OnInit, OnDestroy {
   })
   assignTrabajadorForm: AssignTrabajadorFormComponent;
 
-  @ViewChild('agregarLibroObraForm', {
-    read: AgregarLibroObraComponent,
+  @ViewChild('registrarLibroObraForm', {
+    read: RegistrarLibroObraComponent,
     static: false,
   })
-  agregarLibroObraForm: AgregarLibroObraComponent;
+  registrarLibroObraForm: RegistrarLibroObraComponent;
 
   constructor(
     private otFacade: OtFacade,
@@ -429,7 +429,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       tap(ots => {
         this.closeAssignCoordinatorModal();
         this.closeAssignTrabajadorModal();
-        this.closeAgregarLibroObraModal();
+        this.closeRegistrarLibroObraModal();
       })
     );
 
@@ -437,7 +437,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       tap(ots => {
         this.closeAssignCoordinatorModal();
         this.closeAssignTrabajadorModal();
-        this.closeAgregarLibroObraModal();
+        this.closeRegistrarLibroObraModal();
       })
     );
 
@@ -445,7 +445,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       tap(ots => {
         this.closeAssignCoordinatorModal();
         this.closeAssignTrabajadorModal();
-        this.closeAgregarLibroObraModal();
+        this.closeRegistrarLibroObraModal();
       })
     );
 
@@ -518,7 +518,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.displayAssignTrabajadorModal = false;
   }
 
-  closeAgregarLibroObraModal(): void {
+  closeRegistrarLibroObraModal(): void {
     this.otFacade.selectOT(null);
     this.displayLibroObra = false;
   }
@@ -528,9 +528,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.assignTrabajadorForm.submit();
   }
 
-  agregarLibroObraFormSubmit(): void {
-    console.log(this.agregarLibroObraForm);
-    this.agregarLibroObraForm.submit();
+  registrarLibroObraFormSubmit(): void {
+    this.registrarLibroObraForm.submit();
   }
 
   closeAuthOTModal(): void {
