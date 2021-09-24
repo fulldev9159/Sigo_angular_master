@@ -14,6 +14,7 @@ import { map, tap, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
 import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador-form/assign-trabajador-form.component';
+import { AgregarLibroObraComponent } from '@featureOT/ot/component/agregar-libro-obra/agregar-libro-obra';
 
 @Component({
   selector: 'app-list-ot',
@@ -36,7 +37,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   displayAssignCoordinatorModal = false;
   displayAssignTrabajadorModal = false;
-
+  displayLibroObra = false;
   displayAuthOTModal = false;
 
   public configTable = {
@@ -48,13 +49,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
     },
     body: {
       headers: [
-        // {
-        //   field: null,
-        //   type: 'CHECKBOX',
-        //   sort: 'id',
-        //   header: 'id',
-        //   editable: false
-        // },
         {
           field: 'ID',
           type: 'TEXT',
@@ -63,13 +57,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
           width: '5%',
           editable: false,
         },
-        // {
-        //   field: 'Sesión SCE',
-        //   type: 'TEXT',
-        //   sort: 'sesion_sce',
-        //   header: 'sesion_sce',
-        //   editable: false,
-        // },
+        {
+          field: 'Sesión SCE',
+          type: 'TEXT',
+          sort: 'sesion_sce',
+          header: 'sesion_sce',
+          editable: false,
+        },
         {
           field: 'Nombre',
           type: 'TEXT',
@@ -84,13 +78,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
         //   header: 'responsable',
         //   editable: false,
         // },
-        {
-          field: 'Estado',
-          type: 'TEXT',
-          sort: 'estado_otdesc',
-          header: 'estado_otdesc',
-          editable: false,
-        },
+        // {
+        //   field: 'Estado',
+        //   type: 'TEXT',
+        //   sort: 'estado_otdesc',
+        //   header: 'estado_otdesc',
+        //   editable: false,
+        // },
         {
           field: 'Etapa',
           type: 'TEXT',
@@ -158,6 +152,15 @@ export class ListOtComponent implements OnInit, OnDestroy {
             label: 'Información',
             onClick: (event: Event, item) => {
               this.router.navigate(['/app/ot/detalle-ot/', item.id]);
+            },
+          },
+          {
+            icon: 'p-button-icon pi pi-book',
+            class: 'p-button-rounded p-button-info p-mr-2',
+            label: 'Agregar al libro de obras',
+            onClick: (event: Event, item) => {
+              this.otFacade.selectOT(ot);
+              this.displayLibroObra = true;
             },
           },
         ];
@@ -317,48 +320,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
-        // const otValidarActas = (ot.acciones || []).find(
-        //   accion => accion.slug === 'OT_AUTORIZAR_ACTAS'
-        // );
-
-        // if (otValidarActas) {
-        //   actions.push({
-        //     icon: 'p-button-icon pi pi-check',
-        //     class: 'p-button-rounded p-button-success p-mr-2',
-        //     label: 'Aceptar la validación del acta',
-        //     onClick: (event: Event, item) => {
-        //       this.confirmationService.confirm({
-        //         target: event.target as EventTarget,
-        //         message: `¿Desea aceptar la validación del acta?`,
-        //         icon: 'pi pi-exclamation-triangle',
-        //         acceptLabel: 'Confirmar',
-        //         rejectLabel: 'Cancelar',
-        //         accept: () => {
-        //           this.otFacade.approveOTMinutesValidation(ot.id);
-        //         },
-        //       });
-        //     },
-        //   });
-
-        //   actions.push({
-        //     icon: 'p-button-icon pi pi-times',
-        //     class: 'p-button-rounded p-button-danger p-mr-2',
-        //     label: 'Rechazar la validación del acta',
-        //     onClick: (event: Event, item) => {
-        //       this.confirmationService.confirm({
-        //         target: event.target as EventTarget,
-        //         message: `¿Desea rechazar la validación del acta?`,
-        //         icon: 'pi pi-exclamation-triangle',
-        //         acceptLabel: 'Confirmar',
-        //         rejectLabel: 'Cancelar',
-        //         accept: () => {
-        //           this.otFacade.rejectOTMinutesValidation(ot.id);
-        //         },
-        //       });
-        //     },
-        //   });
-        // }
-
         const otAutorizarPagos = (ot.acciones || []).find(
           accion => accion.slug === 'OT_AUTORIZAR_PAGOS'
         );
@@ -444,6 +405,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
   })
   assignTrabajadorForm: AssignTrabajadorFormComponent;
 
+  @ViewChild('agregarLibroObraForm', {
+    read: AgregarLibroObraComponent,
+    static: false,
+  })
+  agregarLibroObraForm: AgregarLibroObraComponent;
+
   constructor(
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
@@ -462,6 +429,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       tap(ots => {
         this.closeAssignCoordinatorModal();
         this.closeAssignTrabajadorModal();
+        this.closeAgregarLibroObraModal();
       })
     );
 
@@ -469,6 +437,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       tap(ots => {
         this.closeAssignCoordinatorModal();
         this.closeAssignTrabajadorModal();
+        this.closeAgregarLibroObraModal();
       })
     );
 
@@ -476,6 +445,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       tap(ots => {
         this.closeAssignCoordinatorModal();
         this.closeAssignTrabajadorModal();
+        this.closeAgregarLibroObraModal();
       })
     );
 
@@ -548,9 +518,19 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.displayAssignTrabajadorModal = false;
   }
 
+  closeAgregarLibroObraModal(): void {
+    this.otFacade.selectOT(null);
+    this.displayLibroObra = false;
+  }
+
   assignTrabajadorFormSubmit(): void {
     console.log(this.assignTrabajadorForm);
     this.assignTrabajadorForm.submit();
+  }
+
+  agregarLibroObraFormSubmit(): void {
+    console.log(this.agregarLibroObraForm);
+    this.agregarLibroObraForm.submit();
   }
 
   closeAuthOTModal(): void {

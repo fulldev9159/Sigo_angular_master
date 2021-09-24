@@ -21,6 +21,7 @@ import { NumeroInternoFormComponent } from './forms/numero-interno-form/numero-i
 import { CubicacionDetailComponent } from './component/cubicacion-detail/cubicacion-detail.component';
 import { PlanProyectoDetailComponent } from './component/plan-proyecto-detail/plan-proyecto-detail.component';
 import { DetalleAdjudicacionFormComponent } from './forms/detalle-adjudicacion-form/detalle-adjudicacion-form.component';
+import { AgregarLibroObraComponent } from './component/agregar-libro-obra/agregar-libro-obra';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DetalleAdjudicacionFormComponent } from './forms/detalle-adjudicacion-f
     CubicacionDetailComponent,
     PlanProyectoDetailComponent,
     DetalleAdjudicacionFormComponent,
+    AgregarLibroObraComponent,
   ],
   imports: [
     CommonModule,
