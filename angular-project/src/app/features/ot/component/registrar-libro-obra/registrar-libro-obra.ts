@@ -85,20 +85,21 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
     });
   }
 
-  onUpload(event) {
+  onUpload(event): void {
     console.log('ADD', event);
     this.uploadedFiles = event;
   }
 
-  onDeleteFile(event) {}
+  onDeleteFile(event): void {}
 
   submit(): void {
     this.touch();
     if (this.valid) {
+      const index = 'files';
       const request: Data.RegistroLibroObraRequest = {
         ot_id: this.otID,
         observaciones: this.form.get('observaciones').value,
-        files: this.uploadedFiles['files'],
+        files: this.uploadedFiles[index],
       };
       this.filesform.clear();
       console.log(request);
