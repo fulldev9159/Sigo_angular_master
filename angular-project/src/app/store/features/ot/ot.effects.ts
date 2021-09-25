@@ -1038,4 +1038,45 @@ export class OtEffects {
       ),
     { dispatch: false }
   );
+
+  registrarLibroObras$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.registrarLibroObra),
+      concatMap(({ registro }) =>
+        this.otService.registrarLibroObra(registro).pipe(
+          mapTo(otActions.registrarLibroObraSuccess()),
+          catchError(error => of(otActions.registrarLibroObraError({ error })))
+        )
+      )
+    )
+  );
+
+  registrarLibroObrasSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.registrarLibroObraSuccess),
+        tap(() => {
+          this.snackService.showMessage(
+            'Registro agregado exitosamente al libro de obras',
+            'ok'
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  registrarLibroObrasError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.registrarLibroObraError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No fue posible registrar en el libro de obras',
+            'error'
+          );
+          console.error(`could not assign the coordinator [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
 }

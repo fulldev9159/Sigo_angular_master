@@ -15,10 +15,18 @@
   }
 }
 
+
 :host ::ng-deep {
 
   app-table {
     font-size: 0.8rem;
+  }
+
+  div.p-dialog-header {
+    background: #5b8aa5;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
   }
 
   .p-field-radiobutton {

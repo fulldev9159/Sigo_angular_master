@@ -107,3 +107,16 @@
     </button>
   </ng-container>
 </app-modal>
+
+<app-modal [display]="displayLibroObra" (CloseEvent)="closeRegistrarLibroObraModal()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title><i class="pi pi-book"></i> Agregar información al libro de obras</ng-container>
+  <ng-container modal-content>
+    <app-registrar-libro-obra #registrarLibroObraForm></app-registrar-libro-obra>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeRegistrarLibroObraModal()">Cancelar</button>
+    <button class="btn btn-primary" [disabled]="!registrarLibroObraForm.valid" (click)="registrarLibroObraFormSubmit()">
+      <em class="pi pi-save mr-1"></em>Guardar
+    </button>
+  </ng-container>
+</app-modal>

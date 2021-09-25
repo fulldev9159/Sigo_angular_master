@@ -500,6 +500,21 @@ export const finalizeOTError = createAction(
   props<{ error: any }>()
 );
 
+// Registrar en el libro de obras
+export const registrarLibroObra = createAction(
+  '[OT] Registrar en el libro de obras',
+  props<{ registro: Data.RegistroLibroObraRequest }>()
+);
+
+export const registrarLibroObraSuccess = createAction(
+  '[OT] Registrar en el libro de obras success'
+);
+
+export const registrarLibroObraError = createAction(
+  '[OT] Registrar en el libro de obras error',
+  props<{ error: any }>()
+);
+
 export const resetData = createAction('[ResetData] ResetData');
 export const resetPlan = createAction('[ResetData] ResetPlan');
 export const resetSitio = createAction('[ResetData] ResetSitio');

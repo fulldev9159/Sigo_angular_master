@@ -8,3 +8,4 @@ export * from './user';
 export * from './tipo-moneda';
 export * from './unidad';
 export * from './tipo-numero-interno';
+export * from './libro_obra';

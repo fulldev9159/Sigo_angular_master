@@ -271,4 +271,9 @@ export class OTService {
     });
     return of({});
   }
+
+  registrarLibroObra(registro: Data.RegistroLibroObraRequest): Observable<any> {
+    console.log('Agregar libro de obras. no implementado aún', registro);
+    return of({});
+  }
 }
