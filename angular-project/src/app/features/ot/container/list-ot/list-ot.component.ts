@@ -530,6 +530,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   registrarLibroObraFormSubmit(): void {
     this.registrarLibroObraForm.submit();
+    this.displayLibroObra = false;
   }
 
   closeAuthOTModal(): void {

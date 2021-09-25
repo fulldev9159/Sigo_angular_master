@@ -49,6 +49,7 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.ot$.subscribe(ot => {
         this.otID = ot.id;
+        this.filesform.clear();
         this.reset();
       })
     );
