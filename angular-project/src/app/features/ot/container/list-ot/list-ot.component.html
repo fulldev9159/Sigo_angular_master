@@ -115,7 +115,7 @@
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeRegistrarLibroObraModal()">Cancelar</button>
-    <button class="btn btn-primary" (click)="registrarLibroObraFormSubmit()">
+    <button class="btn btn-primary" [disabled]="!registrarLibroObraForm.valid" (click)="registrarLibroObraFormSubmit()">
       <em class="pi pi-save mr-1"></em>Guardar
     </button>
   </ng-container>

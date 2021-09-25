@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -17,6 +23,7 @@ import { map, filter } from 'rxjs/operators';
   styleUrls: ['./registrar-libro-obra.scss'],
 })
 export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
+  @ViewChild('filesform', { static: true }) filesform: any;
   ot$: Observable<Data.OT>;
   otID: number;
   uploadedFiles: any[] = [];
@@ -78,12 +85,11 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
   }
 
   onUpload(event) {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
-    }
-    console.log('onUpload', this.uploadedFiles);
-    this.form.get('files').setValue(this.uploadedFiles);
+    console.log('ADD', event);
+    this.uploadedFiles = event;
   }
+
+  onDeleteFile(event) {}
 
   submit(): void {
     this.touch();
@@ -91,8 +97,9 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
       const request: Data.RegistroLibroObraRequest = {
         ot_id: this.otID,
         observaciones: this.form.get('observaciones').value,
-        files: this.form.get('files').value,
+        files: this.uploadedFiles['files'],
       };
+      this.filesform.clear();
       console.log(request);
 
       this.otFacade.registrarLibroObras(request);

@@ -4,7 +4,7 @@
 
   <br>
   <h5>Adjuntar evidencias</h5>
-  <p-fileUpload name="demo[]" auto="true" (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple" accept="image/*" maxFileSize="1000000">
+  <p-fileUpload name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" multiple="multiple" accept="image/*" maxFileSize="1000000">
 
   </p-fileUpload>
 </form>
