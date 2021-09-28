@@ -43,6 +43,11 @@ import { UserEffects } from './features/user/user.effects';
 import * as formUserReduce from './features/user/user.reducer';
 // USER STORE
 
+// NOTIFICACIONES
+import { NotificacionesEffects } from './features/notificaciones/notificaciones.effects';
+import * as formNotificacionesReduce from './features/notificaciones/notificaciones.reducer';
+// NOTIFICACIONES
+
 @NgModule({
   declarations: [],
   imports: [
@@ -108,6 +113,14 @@ import * as formUserReduce from './features/user/user.reducer';
       formUserReduce.reducerUser
     ),
     // USER STORE
+
+    // NOTIFICACIONES STORE
+    EffectsModule.forFeature([NotificacionesEffects]),
+    StoreModule.forFeature(
+      formNotificacionesReduce.NotificacionesFeatureKey,
+      formNotificacionesReduce.reducerNotificaciones
+    ),
+    // NOTIFICACIONES STORE
   ],
 })
 export class StoreAllModule {}

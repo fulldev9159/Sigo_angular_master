@@ -11,6 +11,7 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
+import { NotificacionesFacade } from '@storeOT/features/notificaciones/notificaciones.facade';
 
 import { LoginAuth } from '@storeOT/features/auth/auth.model';
 import { LoadingService } from '@utilsSIGO/service-progress';
@@ -39,12 +40,14 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     private otFacade: OtFacade,
     private profileFacade: ProfileFacade,
     private userFacade: UserFacade,
+    private notificacioneFacade: NotificacionesFacade,
     private loadingS: LoadingService,
     private permissionsService: NgxPermissionsService
   ) {}
 
   ngOnInit(): void {
     this.listenToLoading();
+    this.notificacioneFacade.getNotificacioes();
     this.loginAuth$ = this.authFacade.getLogin$().pipe(
       map(loginAuth => {
         let auth;
