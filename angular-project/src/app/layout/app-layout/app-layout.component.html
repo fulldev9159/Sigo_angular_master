@@ -90,7 +90,8 @@
         <i class="navbar-toggler-icon"></i>
       </button>
 
-      <i (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary" severity="danger" pBadge style="font-size: 1.6rem;margin-left:77%;cursor: pointer;" [value]="(total_nuevas_notificaciones$|async)?.data.total_nuevos"></i>
+      <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos>0" (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary" severity="danger" pBadge style="font-size: 1.6rem;margin-left:77%;cursor: pointer;" [value]="(total_nuevas_notificaciones$|async)?.data.total_nuevos"></i>
+      <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos===0" (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary" severity="danger" style="font-size: 1.6rem;margin-left:77%;cursor: pointer;"></i>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -127,7 +128,7 @@
   </div>
 </div>
 
-<p-dialog header="Notificaciones" [(visible)]="displayNotificacionesModal" (CloseEvent)="displayNotificacionesModal=false" position="top-right" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+<p-dialog header="Notificaciones" [(visible)]="displayNotificacionesModal" (onHide)="closeNotificacionesModal()" position="top-right" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
   <ul class="list-group">
     <li class="list-group-item list-group-item-secondary" *ngFor="let nuevos of (total_nuevas_notificaciones$|async)?.data.registros_nuevos">{{nuevos.mensaje}}</li>
     <li class="list-group-item" *ngFor="let vistos of (total_nuevas_notificaciones$|async)?.data.registros_vistos">{{vistos.mensaje}}</li>
