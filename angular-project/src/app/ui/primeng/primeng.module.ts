@@ -25,6 +25,7 @@ import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { FileUploadModule } from 'primeng/fileupload';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     TabViewModule,
     TabMenuModule,
     FileUploadModule,
+    BadgeModule,
   ],
   exports: [
     MenuModule,
@@ -79,6 +81,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     TabViewModule,
     TabMenuModule,
     FileUploadModule,
+    BadgeModule,
   ],
   providers: [MessageService],
 })

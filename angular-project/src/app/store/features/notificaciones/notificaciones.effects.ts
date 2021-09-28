@@ -17,7 +17,7 @@ export class NotificacionesEffects {
       ofType(notificaionesAcion.getNotificaciones),
       concatMap(() =>
         this.notificacionesService.getNotificaciones().pipe(
-          map((notificaiones: any[]) =>
+          map((notificaiones: Data.Notificaciones) =>
             notificaionesAcion.getNotificacionesSuccess({ notificaiones })
           ),
           catchError(err =>

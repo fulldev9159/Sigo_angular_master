@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as Data from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,11 @@ export class NotificacionesService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getNotificaciones(): Observable<any> {
+  getNotificaciones(): Observable<Data.Notificaciones> {
     console.log('Get Notificaciones');
-    return this.http.post<any>(`${this.apiUrl}/notification_tray/get`, {});
+    return this.http.post<Data.Notificaciones>(
+      `${this.apiUrl}/notification_tray/get`,
+      {}
+    );
   }
 }

@@ -8,7 +8,7 @@ export const getNotificaciones = createAction(
 
 export const getNotificacionesSuccess = createAction(
   '[[Notificaiones Get] GET All Notificaciones Success',
-  props<{ notificaiones: any[] }>()
+  props<{ notificaiones: Data.Notificaciones }>()
 );
 
 export const getNotificaionesError = createAction(

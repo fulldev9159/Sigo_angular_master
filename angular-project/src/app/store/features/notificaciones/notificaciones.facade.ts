@@ -9,13 +9,13 @@ import * as Data from '@data';
   providedIn: 'root',
 })
 export class NotificacionesFacade {
-  constructor(private store: Store<any[]>) {}
+  constructor(private store: Store<Data.Notificaciones>) {}
 
   public getNotificacioes(): void {
     this.store.dispatch(NotificaionesActions.getNotificaciones());
   }
 
-  public getNotificaciones$(): Observable<any[]> {
+  public getNotificaciones$(): Observable<Data.Notificaciones> {
     return this.store.select(NotificacionesSelectors.getNotificacioes);
   }
 }

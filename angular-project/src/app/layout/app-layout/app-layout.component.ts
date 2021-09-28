@@ -16,8 +16,10 @@ import { NotificacionesFacade } from '@storeOT/features/notificaciones/notificac
 import { LoginAuth } from '@storeOT/features/auth/auth.model';
 import { LoadingService } from '@utilsSIGO/service-progress';
 import { NgxPermissionsService } from 'ngx-permissions';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
+
+import * as Data from '@data';
 
 @Component({
   selector: 'app-app-layout',
@@ -31,7 +33,11 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   public toggleState = false;
   public toggle = 'd-flex';
   public loginAuth$: Observable<any>;
+  displayNotificacionesModal = false;
   private destroyInstance$: Subject<boolean> = new Subject();
+  subscription: Subscription = new Subscription();
+  notificaciones_nuevas: Data.DataNotificaciones[] = [];
+  total_nuevas_notificaciones$: Observable<Data.Notificaciones>;
 
   constructor(
     private router: Router,
@@ -46,8 +52,19 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.listenToLoading();
+    // this.listenToLoading();
     this.notificacioneFacade.getNotificacioes();
+    this.total_nuevas_notificaciones$ = this.notificacioneFacade
+      .getNotificaciones$()
+      .pipe(
+        map((notificaciones: Data.Notificaciones) => {
+          if (notificaciones) {
+            this.notificaciones_nuevas = notificaciones.data.registros_nuevos;
+          }
+          return notificaciones;
+        })
+      );
+
     this.loginAuth$ = this.authFacade.getLogin$().pipe(
       map(loginAuth => {
         let auth;
@@ -70,6 +87,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroyInstance$.next(true);
     this.destroyInstance$.complete();
+    this.subscription.unsubscribe();
   }
 
   toggleAction(): void {
@@ -87,6 +105,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     this.loadingS.loadingSub
       .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
       .subscribe(loading => {
+        console.log('dasdas');
         this.loading = loading;
       });
   }
@@ -99,5 +118,10 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     this.profileFacade.resetData();
     this.userFacade.resetData();
     this.router.navigate(['/auth/login']);
+  }
+
+  openNotificacionesModal(): void {
+    this.displayNotificacionesModal = true;
+    console.log(this.notificaciones_nuevas);
   }
 }
