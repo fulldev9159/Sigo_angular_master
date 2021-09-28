@@ -18,4 +18,8 @@ export class NotificacionesFacade {
   public getNotificaciones$(): Observable<Data.Notificaciones> {
     return this.store.select(NotificacionesSelectors.getNotificacioes);
   }
+
+  public markNotification(id: number[]): void {
+    this.store.dispatch(NotificaionesActions.markNotification({ id }));
+  }
 }

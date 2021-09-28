@@ -19,4 +19,11 @@ export class NotificacionesService {
       {}
     );
   }
+
+  markNotificacion(id: number[]): Observable<any> {
+    console.log(`Se va a marcar la notificación id: ${id}`);
+    return this.http.post<any>(`${this.apiUrl}/notification_tray/check`, {
+      id,
+    });
+  }
 }

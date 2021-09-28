@@ -27,4 +27,18 @@ export class NotificacionesEffects {
       )
     )
   );
+
+  markNotification$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(notificaionesAcion.markNotification),
+      concatMap(({ id }) =>
+        this.notificacionesService.markNotificacion(id).pipe(
+          map(() => notificaionesAcion.markNotificationSuccess()),
+          catchError(err =>
+            of(notificaionesAcion.markNotificationError({ error: err }))
+          )
+        )
+      )
+    )
+  );
 }

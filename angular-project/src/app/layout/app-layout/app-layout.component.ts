@@ -122,6 +122,16 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
 
   openNotificacionesModal(): void {
     this.displayNotificacionesModal = true;
-    console.log(this.notificaciones_nuevas);
+    const notificaciones_ids = this.notificaciones_nuevas.map(
+      notificaciones => notificaciones.id
+    );
+    if (notificaciones_ids.length > 0) {
+      this.notificacioneFacade.markNotification(notificaciones_ids);
+    }
+  }
+
+  closeNotificacionesModal(): void {
+    this.displayNotificacionesModal = false;
+    this.notificacioneFacade.getNotificacioes();
   }
 }
