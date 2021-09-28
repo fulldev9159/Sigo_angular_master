@@ -36,7 +36,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   displayNotificacionesModal = false;
   private destroyInstance$: Subject<boolean> = new Subject();
   subscription: Subscription = new Subscription();
-
+  notificaciones_nuevas: Data.DataNotificaciones[] = [];
   total_nuevas_notificaciones$: Observable<Data.Notificaciones>;
 
   constructor(
@@ -54,8 +54,16 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.listenToLoading();
     this.notificacioneFacade.getNotificacioes();
-    this.total_nuevas_notificaciones$ =
-      this.notificacioneFacade.getNotificaciones$();
+    this.total_nuevas_notificaciones$ = this.notificacioneFacade
+      .getNotificaciones$()
+      .pipe(
+        map((notificaciones: Data.Notificaciones) => {
+          if (notificaciones) {
+            this.notificaciones_nuevas = notificaciones.data.registros_nuevos;
+          }
+          return notificaciones;
+        })
+      );
 
     this.loginAuth$ = this.authFacade.getLogin$().pipe(
       map(loginAuth => {
@@ -112,7 +120,8 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     this.router.navigate(['/auth/login']);
   }
 
-  openNotificacionesModal() {
+  openNotificacionesModal(): void {
     this.displayNotificacionesModal = true;
+    console.log(this.notificaciones_nuevas);
   }
 }
