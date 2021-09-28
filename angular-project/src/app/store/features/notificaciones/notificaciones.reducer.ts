@@ -5,11 +5,11 @@ import * as NotificaionesActions from './notificaciones.actions';
 export const NotificacionesFeatureKey = 'notificaciones';
 
 export interface StateNotificaciones {
-  notificaciones: any[];
+  notificaciones: Data.Notificaciones;
 }
 
 const initialStateNotificaciones: StateNotificaciones = {
-  notificaciones: [],
+  notificaciones: null,
 };
 
 export const reducerNotificaciones = createReducer(
