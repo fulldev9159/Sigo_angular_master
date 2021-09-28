@@ -33,6 +33,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   public toggleState = false;
   public toggle = 'd-flex';
   public loginAuth$: Observable<any>;
+  displayNotificacionesModal = false;
   private destroyInstance$: Subject<boolean> = new Subject();
   subscription: Subscription = new Subscription();
 
@@ -109,5 +110,9 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     this.profileFacade.resetData();
     this.userFacade.resetData();
     this.router.navigate(['/auth/login']);
+  }
+
+  openNotificacionesModal() {
+    this.displayNotificacionesModal = true;
   }
 }
