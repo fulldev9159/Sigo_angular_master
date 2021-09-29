@@ -34,8 +34,8 @@ e2e robotframework:
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_test_sigo_web
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_web
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d robot-framework
-  after_script:
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
+  # after_script:
+  #   - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
   tags:
     - docker_sigo
 
