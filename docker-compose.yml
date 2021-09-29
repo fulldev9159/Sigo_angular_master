@@ -77,6 +77,14 @@ services:
       context: .
       dockerfile: docker/testing/Dockerfile
 
+  robot-framework:
+    image: 'ppodgorsek/robot-framework:latest'
+    environment:
+      - 'ROBOT_OPTIONS=--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing'
+    volumes:
+      - '/tmp/reports:/opt/robotframework/reports:Z'
+      - 'robot_e2e:/opt/robotframework/tests:Z'
+
   # LOCAL
   mcl_local_sigo_api:
     image: gcr.io/zwcsce/api-sigo:develop

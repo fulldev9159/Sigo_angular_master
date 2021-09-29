@@ -26,12 +26,18 @@ variables:
 #   coverage: '/^Statements\s*:\s*([^%]+)/'
 
 e2e robotframework:
+  <<: *connect_gcr
   stage: e2e test
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
     - docker-compose -f docker-compose.yml down -v
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_test_sigo_web
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_web
-    - docker -p ${CI_PIPELINE_ID} run --user $(id -u):$(id -g) -e ROBOT_OPTIONS="--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing" -v /tmp/reports:/opt/robotframework/reports:Z -v robot_e2e:/opt/robotframework/tests:Z ppodgorsek/robot-framework:latest
+    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d robot-framework
+  after_script:
+    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
+  tags:
+    - docker_sigo
 
 #e2e robotframework:
 #  <<: *connect_gcr
