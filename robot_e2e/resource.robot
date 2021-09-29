@@ -315,7 +315,7 @@ Set CECO Provisorio
 Set Fecha Inicio
     [Arguments]                      ${nombre-ceco}
     Click Visible Element            css:p-calendar
-    ${selector fecha}=               set variable          css: p-calendar > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(3) > span
+    ${selector fecha}=               set variable         css: p-calendar > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(3) > span
     Wait Until Element Is Visible    ${selector fecha}
     Scroll Element Into View         ${selector fecha}
     Click Visible Element            ${selector fecha}
@@ -424,11 +424,12 @@ Acciones PEND AUTH ADMIN Contrato
     # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
-    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 4
     Should Be True            ${status}
     Element text should be    ${items}[0]                                                                      Información                                              
-    Element text should be    ${items}[1]                                                                      Aceptar                                                  
-    Element text should be    ${items}[2]                                                                      Rechazar                                                 
+    Element text should be    ${items}[1]                                                                      Agregar al libro de obras                                
+    Element text should be    ${items}[2]                                                                      Aceptar                                                  
+    Element text should be    ${items}[3]                                                                      Rechazar                                                 
 
 Acciones PEND ASING COORDINADOR
     Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
@@ -438,10 +439,11 @@ Acciones PEND ASING COORDINADOR
     # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
-    ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
     Should Be True            ${status}
     Element text should be    ${items}[0]                                                                      Información                                              
-    Element text should be    ${items}[1]                                                                      Asignar coordinador                                      
+    Element text should be    ${items}[1]                                                                      Agregar al libro de obras
+    Element text should be    ${items}[2]                                                                      Asignar coordinador                                      
 
 Acciones PEND ASING TRABAJADOR
     Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
@@ -451,10 +453,11 @@ Acciones PEND ASING TRABAJADOR
     # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
-    ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
     Should Be True            ${status}
     Element text should be    ${items}[0]                                                                      Información                                              
-    Element text should be    ${items}[1]                                                                      Asignar trabajador 
+    Element text should be    ${items}[1]                                                                      Agregar al libro de obras
+    Element text should be    ${items}[2]                                                                      Asignar trabajador 
 
 Acciones PEND FIN TRABAJOS
     Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
@@ -464,10 +467,11 @@ Acciones PEND FIN TRABAJOS
     # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
-    ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
     Should Be True            ${status}
-    Element text should be    ${items}[0]                                                                      Información                                              
-    Element text should be    ${items}[1]                                                                      Finalizar trabajos 
+    Element text should be    ${items}[0]                                                                      Información 
+    Element text should be    ${items}[1]                                                                      Agregar al libro de obras                                
+    Element text should be    ${items}[2]                                                                      Finalizar trabajos 
 
 Acciones PEND VALID GEN ACTA
     Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
@@ -477,11 +481,12 @@ Acciones PEND VALID GEN ACTA
     # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
-    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 4
     Should Be True            ${status}
-    Element text should be    ${items}[0]                                                                      Información                                              
-    Element text should be    ${items}[1]                                                                      Aceptar la generación del acta                           
-    Element text should be    ${items}[2]                                                                      Rechazar la generación del acta                          
+    Element text should be    ${items}[0]                                                                      Información 
+    Element text should be    ${items}[1]                                                                      Agregar al libro de obras                                
+    Element text should be    ${items}[2]                                                                      Aceptar la generación del acta                           
+    Element text should be    ${items}[3]                                                                      Rechazar la generación del acta                          
 
 Acciones PEND VALID GEN ACTA GESTOR
     Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
@@ -491,19 +496,21 @@ Acciones PEND VALID GEN ACTA GESTOR
     # Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
-    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 4
     Should Be True            ${status}
     Element text should be    ${items}[0]                                                                      Información                                              
-    Element text should be    ${items}[1]                                                                      Aceptar la generación del acta                           
-    Element text should be    ${items}[2]                                                                      Rechazar la generación del acta                          
+    Element text should be    ${items}[1]                                                                      Agregar al libro de obras                                
+    Element text should be    ${items}[2]                                                                      Aceptar la generación del acta                           
+    Element text should be    ${items}[3]                                                                      Rechazar la generación del acta                          
 
 Logout
+    Execute javascript       document.querySelector('#page-content-wrapper > nav > button.navbar-toggler').click()
     Click Visible Element    css:#navbarDropdown
     Click Visible Element    css:#navbarSupportedContent > ul > li > div > a
 
 Accionar
     [Arguments]       ${accion}
-    Run Keyword If    '${accion}' == 'Aceptar OT'    Click Visible Element    css:#action-buttons > app-menu > p-menu > div > ul>li:nth-child(2)>a
+    Run Keyword If    '${accion}' == 'Aceptar OT'    Click Visible Element    css:#action-buttons > app-menu > p-menu > div > ul>li:nth-child(3)>a
 
 Confirmar
     Click Visible Element    css:div.p-confirm-popup-footer>button:nth-child(2)
@@ -545,7 +552,8 @@ Acciones PEND ANULACION
     Log To Console            ${txt}
     END
     ${cantidad de filas}=     Get length                                                                       ${items}
-    ${status}=                Evaluate                                                                         ${cantidad de filas} == 2
+    ${status}=                Evaluate                                                                         ${cantidad de filas} == 3
     Should Be True            ${status}
     Element text should be    ${items}[0]                                                                      Información                                              
-    Element text should be    ${items}[1]                                                                      Anular 
+    Element text should be    ${items}[1]                                                                      Agregar al libro de obras                                
+    Element text should be    ${items}[2]                                                                      Anular 
