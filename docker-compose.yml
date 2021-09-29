@@ -83,7 +83,7 @@ services:
       - 'ROBOT_OPTIONS=--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing'
     volumes:
       - '/tmp/reports:/opt/robotframework/reports:Z'
-      - 'robot_e2e:/opt/robotframework/tests:Z'
+      - './robot_e2e:/opt/robotframework/tests:Z'
 
   # LOCAL
   mcl_local_sigo_api:
