@@ -79,6 +79,7 @@ services:
 
   robot-framework:
     image: 'ppodgorsek/robot-framework:latest'
+    user: '${UID}:${GID}'
     environment:
       - 'ROBOT_OPTIONS=--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing'
     volumes:
