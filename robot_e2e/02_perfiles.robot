@@ -46,7 +46,8 @@ Crear perfil
     # Set descripcion perfil                Test borrado
     # Set Permisos modulo                   OT                                        @{permisos OT jefe area}
     # Guardar perfil
-    close Browser
+    # close Browser
+
 
 #Desplegar detalle
 #    Open Browser To Page             ${url}
