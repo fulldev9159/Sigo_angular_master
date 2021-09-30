@@ -3,17 +3,17 @@ Documentation    Test de funcionanildad del login.
 ...
 ...         This test has a workflow that is created using keywords in
 ...         the imported resource file.
-Resource    resource.robot
+Resource    ./resources/general_resource.robot
 
 *** Test Cases ***
 Redirect to page Login not login person
-    Open Browser To Page    ${url}
-    Location Should Be      ${url}/auth/login
+    _Open Browser To Page    ${url}
+    Location Should Be       ${url}/auth/login
     close Browser
 
 Redirect to dashboard to a login person
-    Open Browser To Page    ${url}
-    Location Should Be      ${url}/auth/login
+    _Open Browser To Page    ${url}
+    Location Should Be       ${url}/auth/login
 
    # Validar elementos
     element should be visible    name:username
@@ -26,11 +26,17 @@ Redirect to dashboard to a login person
     element should be disabled    id:login
 
    # Ingresar datos de login
-    Login    admin    pass
+    input text        name:username    admin
+    input password    name:password    pass
 
-    Wait Until Element Is Visible    id:user-name             timeout=5
+    # Validar elementos
+    element should be enabled    id:login
+
+    # Presionar botón
+    _Click visible element    id:login
+
+    # Validar ubicación actual
+    Wait Until Element Is Visible    id:user-name             timeout=15
     Location Should Be               ${url}/app/ot/list-ot
-    # element should be visible    id:user-name
-    # Element text should be    id:user-name    Jessica Castillo
 
     close Browser

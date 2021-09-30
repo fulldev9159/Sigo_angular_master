@@ -9,51 +9,11 @@ Library    SeleniumLibrary
 *** Variables ***
 
 *** Keywords ***
-Open Browser To Page
-    [Arguments]                ${page}
-    ${options}=                Evaluate                      sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    disable-web-security
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    allow-running-insecure-content
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    headless
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    disable-gpu
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    no-sandbox
-    # Set Window Size     1500    1500
-    Create WebDriver           Chrome                        chrome_options=${options}
-    Maximize Browser Window
-    Go To                      ${page}
-
-Login
-    [Arguments]                      ${username}      ${password}
-    input text                       name:username    ${username}
-    input password                   name:password    ${password}
-    element should be enabled        id:login
-    Click Button                     id:login
-    Wait Until Element Is Visible    id:user-name     timeout=15
-
 Element text should be
     [Arguments]        ${element}    ${texto}
     ${txt}=            Get Text      ${element}
     Should Be Equal    ${txt}        ${texto}
 
-Click Visible Element
-    [Arguments]                      ${element}
-    Wait Until Element Is Visible    ${element}    timeout=10
-    Scroll Element Into View         ${element}
-    Click Element                    ${element}
-
-Select item
-    [Arguments]                      ${selector}          ${value}
-    ${select element}                Get WebElement       ${selector}
-    Wait Until Element Is Visible    ${select element}    timeout=4
-    Wait Until Element Is enabled    ${select element}
-    Scroll Element Into View         ${select element}
-    Select From List By Label        ${select element}    ${value}
-
-Select item value
-    [Arguments]                  ${selector}          ${value}
-    ${select element}            Get WebElement       ${selector}
-    Click Visible Element        ${select element}
-    Select From List By Value    ${select element}    ${value}
 
 Validar existencia en la tabla
     [Arguments]                      ${columna a validar}                                                    ${nombre}
@@ -97,15 +57,6 @@ Eliminar usuario
     Click Visible Element    css:app-menu > p-menu > div > ul > li:nth-child(3) > a
     ${boton de confirmar}    set variable                                                                                            css:.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
     Click Visible Element    ${boton de confirmar}
-
-Navegar al menu
-    [Arguments]       ${menu}
-    Run Keyword If    '${menu}' == 'Usuario'             Click Element            css:#menu-usuario>a>span
-    Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
-    Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    id:listarCubSubMenu
-    Run Keyword If    '${menu}' == 'Perfil'              Click Visible Element    css:#menu-perfil>a>span
-    # Run Keyword If    '${menu}' == 'Crear OT'            Click Visible Element    id:otSub
-    Run Keyword If    '${menu}' == 'Crear OT'            Execute javascript       document.querySelector("#otSub>li:nth-child(2)>a").click()
 
 Set Permisos modulo
     [Arguments]                ${modulo}                                   @{permisos a seleccionar}
@@ -215,12 +166,6 @@ Set superior directo
 Set Permisos modulo CUBICACION
     Click Visible Element    css:#modulos-pefil-CUBICACION > p-listbox > div > div:nth-child(2) > div.p-checkbox.p-component.ng-star-inserted > div.p-checkbox-box
 
-WAIT
-    [Arguments]                      ${selector}
-    Wait Until Element Is Visible    ${selector}    timeout=15
-    Wait Until Element Is enabled    ${selector}    timeout=15
-    Scroll Element Into View         ${selector}
-
 Set input text
     [Arguments]    ${valor}       ${selector} 
     WAIT           ${selector}
@@ -232,111 +177,6 @@ Set select item
     Wait Until Element Contains    ${selector}    ${valor}        timeout=15
     Select item                    ${selector}    ${valor}
 
-## CREAR CUBICACION
-Set Nombre Cubicacion
-    [Arguments]       ${nombre}
-    ${selector}=      set variable    css:ng-autocomplete > div > div.input-container > input
-    Set input text    ${nombre}       ${selector}                                                
-
-Set contrato
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#contratoField > app-select > select
-    Set select item    ${valor}        ${selector}
-
-Set proveedor
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#proveedorField > app-select > select
-    Set select item    ${valor}        ${selector}
-
-Set region
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#regionField > app-select > select
-    Set select item    ${valor}        ${selector}
-
-Set tipo servicio
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#tipoServicioField > app-select > select
-    Set select item    ${valor}        ${selector}
-
-Guardar Cubicacion
-    ${selector}=             set variable    css:#submitButtonBox > button.btn.btn-primary
-    WAIT                     ${selector}
-    Click Visible Element    ${selector}
-
-## CREAR OT
-Set Nombre OT
-    [Arguments]       ${nombre}
-    ${selector}=      set variable    css:#control_nombre>app-input>input
-    Set input text    ${nombre}       ${selector}
-
-Set Tipo OT
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#control_tipo_ot>app-select>select
-    Set select item    ${valor}        ${selector}
-
-Set Cubicacion de la OT
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#control_cubicacion_id>app-select>select
-    Set select item    ${valor}        ${selector}
-
-Set Plan Proyecto OT
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#control_plan_proyecto_id>app-select>select
-    Set select item    ${valor}        ${selector}
-
-Set Sitio OT
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#control_sitio_id>app-select>select
-    Set select item    ${valor}        ${selector}
-
-Click Opex OT
-    Click Visible Element    id:option_opex
-
-Set ID OPEX OT
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#control_id_opex_codigo>app-select>select
-    Set select item    ${valor}        ${selector}
-
-Set Cuenta SAP OT
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#control_cuenta_sap_codigo>app-select>select
-    Set select item    ${valor}        ${selector}
-
-Set CECO OT
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#control_ceco_codigo>app-select>select
-    Set select item    ${valor}        ${selector}
-
-Set CECO Provisorio
-    [Arguments]       ${nombre-ceco}
-    ${selector}=      set variable      css:#control_ceco_codigo>app-select>select
-    Set input text    ${nombre-ceco}    ${selector}
-
-Set Fecha Inicio
-    [Arguments]                      ${nombre-ceco}
-    Click Visible Element            css:p-calendar
-    ${selector fecha}=               set variable         css: p-calendar > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(3) > span
-    Wait Until Element Is Visible    ${selector fecha}
-    Scroll Element Into View         ${selector fecha}
-    Click Visible Element            ${selector fecha}
-
-Set Fecha Termino
-    Wait Until Element Is Visible    id:fecha-termino-ot
-    Scroll Element Into View         id:fecha-termino-ot
-    Click Visible Element            id:fecha-termino-ot
-    Wait Until Element Is Visible    css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(4) > span
-    Scroll Element Into View         css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(4) > span
-    Click Visible Element            css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(4) > span
-
-Set Proyecto OT
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:#control_proyecto_id>app-select>select
-    Set select item    ${valor}        ${selector}
-
-Set Observaciones OT
-    [Arguments]       ${valor}
-    ${selector}=      set variable    css:#control_observaciones>textarea
-    Set input text    ${valor}        ${selector}
 
 Guardar OT
     Wait Until Element Is Visible    id:guardar-ot
@@ -355,20 +195,7 @@ Eliminar perfil
 
 
 # TABLA
-Click en pestaña
-    [Arguments]              ${valor}
-    ${selector}=             Run Keyword If    '${valor}' == 'Ejecucion'
-    ...                      Set variable      css:#page-content-wrapper > div > app-ot > div > app-list-ot > div > p-tabview > div > ul > li:nth-child(1)>a
-    ...                      ELSE
-    ...                      Run Keyword If    '${valor}' == 'Abiertas'
-    ...                      Set variable      css:#page-content-wrapper > div > app-ot > div > app-list-ot > div > p-tabview > div > ul > li:nth-child(2)>a
-    ...                      ELSE
-    ...                      Run Keyword If    '${valor}' == 'Cerradas'
-    ...                      Set variable      css:#page-content-wrapper > div > app-ot > div > app-list-ot > div > p-tabview > div > ul > li:nth-child(3)>a
-    #p-tabpanel-3-label
-    WAIT                     ${selector}
-    Click Visible Element    ${selector}
-    sleep                    1
+    1
 
 Usar filtro tabla
     [Arguments]    ${nombre}                                                                                                                                                                                      ${number}    
@@ -382,27 +209,7 @@ No debe existir en la tabla
     ${status}=            Existe en la tabla    ${nombre}     ${pestaña}
     Should Not Be True    ${status}
 
-Debe existir en la tabla
-    [Arguments]         ${nombre}             ${pestaña}
-    Click en pestaña    ${pestaña}
-    ${status}=          Existe en la tabla    ${nombre}     ${pestaña}
-    Should Be True      ${status}
 
-Existe en la tabla
-    [Arguments]              ${nombre}            ${pestaña}                                                                                                                                                                                      
-    ${number}=               Run Keyword If       '${pestaña}' == 'Ejecucion'
-    ...                      Set variable         1
-    ...                      ELSE
-    ...                      Run Keyword If       '${pestaña}' == 'Abiertas'
-    ...                      Set variable         2
-    ...                      ELSE
-    ...                      Run Keyword If       '${pestaña}' == 'Cerradas'
-    ...                      Set variable         3
-    Usar filtro tabla        ${nombre}            ${number}
-    ${cantidad de filas}=    get element count    css:#page-content-wrapper > div > app-ot > div > app-list-ot > div > p-tabview > div > div>p-tabpanel:nth-child(${number})>div>app-table>div>p-table>div>.p-datatable-wrapper>table>tbody>tr    
-    # Log To Console           ${cantidad de filas}
-    ${status}=               Evaluate             ${cantidad de filas} > 0
-    [return]                 ${status}
 
 Acciones solo Info
     Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
@@ -529,14 +336,7 @@ Seleccionar trabajador
 SSLEEP
     sleep    10
 
-Existe cubicacion
-    [Arguments]              ${nombre}                                                                                                                    
-    WAIT                     css:#page-content-wrapper > div > app-cubicacion > div > app-list-cub > div >app-table>div>p-table>div>div>div>span>input
-    input text               css:#page-content-wrapper > div > app-cubicacion > div > app-list-cub > div >app-table>div>p-table>div>div>div>span>input    ${nombre} 
-    ${cantidad de filas}=    get element count                                                                                                            css:#page-content-wrapper > div > app-cubicacion > div > app-list-cub> div >app-table>div>p-table>div>.p-datatable-wrapper>table>tbody>tr
-    ${status}=               Evaluate                                                                                                                     ${cantidad de filas} > 0
-    sleep                    1
-    [return]                 ${status}
+
 
 Input Motivo
     [Arguments]       ${nombre}

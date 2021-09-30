@@ -13,45 +13,7 @@ services:
       context: .
       dockerfile: docker/deploy/Dockerfile
 
-  # TESTING
-  mcl_test_sigo_db:
-    image: gcr.io/zwcsce/mcl-otec-db:latest
-    restart: always
-    environment:
-      TZ: America/Santiago
-      MYSQL_DATABASE: OTEC
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_USER: otec_user
-      MYSQL_PASSWORD: otec_pass
-    command: --event_scheduler=ON --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    expose:
-      - 3306
-
-  mcl_test_sigo_api:
-    image: gcr.io/zwcsce/api-sigo:develop
-    environment:
-      TZ: America/Santiago
-      LOG_LEVEL: DEBUG
-      SERVICE_PORT: 4040
-      OTEC_DB: root:pass@tcp(mcl_test_sigo_db:3306)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true
-      DB_MAXOPENCONNECTIONS: 10
-      DB_MAXIDLECONNECTIONS: 5
-      DB_PINGINTERVAL: 30
-      DB_MAXLIFETIMECONNECTION: 300
-      API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
-      MOCKUP_PATH: /go/bin/mockups
-      TREEOT: mcl_OT
-      DEPLOY: test
-    restart: always
-    # ports:
-    #   - 4040:4040
-    expose:
-      - 4040
-    depends_on:
-      - mcl_test_sigo_db
-
   mcl_test_sigo_web:
-    # image: gcr.io/zwcsce/mcl-otec-webclient:latest-testing
     build:
       context: .
       dockerfile: docker/deploy/Dockerfile
@@ -61,31 +23,13 @@ services:
     expose:
       - 80
     container_name: mcl_test_sigo_web
-    # ports:
-    #   - 4003:80
     restart: always
-    # depends_on:
-    # - mcl_test_sigo_api
 
   dockerize-test-waiting:
     image: 'jwilder/dockerize'
     command: >
       -timeout 5m -wait-retry-interval 10s
       -wait tcp://mcl_test_sigo_db:3306
-
-  mcl_e2e_robotframework:
-    build:
-      context: .
-      dockerfile: docker/testing/Dockerfile
-
-  robot-framework:
-    image: 'ppodgorsek/robot-framework:latest'
-    user: '${UID}:${GID}'
-    environment:
-      - 'ROBOT_OPTIONS=--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing'
-    volumes:
-      - '/tmp/reports:/opt/robotframework/reports:Z'
-      - './robot_e2e:/opt/robotframework/tests:Z'
 
   # LOCAL
   mcl_local_sigo_api:
@@ -121,3 +65,8 @@ services:
     command: --event_scheduler=ON --character-set-server=utf8 --collation-server=utf8_unicode_ci
     ports:
       - 3307:3306
+
+  # mcl_e2e_robotframework:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/testing/Dockerfile
