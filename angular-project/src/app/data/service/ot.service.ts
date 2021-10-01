@@ -149,13 +149,13 @@ export class OTService {
   assignCoordinator(
     perfil_id: number,
     otID: number,
-    coordinatorID: number
+    coordinador_id: number
   ): Observable<any> {
     return this.http.post<AssignCoordinatorOTResponse>(
       `${this.apiUrl}/ingreot/ot/coordinador/assign`,
       {
         ot_id: otID,
-        user_id: +coordinatorID,
+        user_id: +coordinador_id,
       }
     );
   }

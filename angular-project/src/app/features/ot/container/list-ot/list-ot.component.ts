@@ -173,25 +173,27 @@ export class ListOtComponent implements OnInit, OnDestroy {
           actions.push({
             icon: 'p-button-icon pi pi-check',
             class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Aceptar',
+            label: 'Asignar coordinador',
             onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea aceptar Orden de trabajo?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.approveOT(ot.id);
-                },
-              });
+              this.otFacade.selectOT(ot);
+              this.displayAssignCoordinatorModal = true;
+              // this.confirmationService.confirm({
+              //   target: event.target as EventTarget,
+              //   message: `¿Desea aceptar Orden de trabajo?`,
+              //   icon: 'pi pi-exclamation-triangle',
+              //   acceptLabel: 'Confirmar',
+              //   rejectLabel: 'Cancelar',
+              //   accept: () => {
+              //     this.otFacade.approveOT(ot.id);
+              //   },
+              // });
             },
           });
 
           actions.push({
-            icon: 'p-button-icon pi pi-times',
+            icon: 'p-button-icon pi pi-times red',
             class: 'p-button-rounded p-button-danger p-mr-2',
-            label: 'Rechazar',
+            label: 'Rechazar OT',
             onClick: (event: Event, item) => {
               this.idOtSelected = item.id;
               this.displayAuthOTModal = true;

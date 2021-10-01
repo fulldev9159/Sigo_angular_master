@@ -387,9 +387,9 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.approveOT),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
+      concatMap(([{ otID, coordinador_id }, profile]) =>
         this.otService.approveOT(profile.id, otID).pipe(
-          mapTo(otActions.approveOTSuccess()),
+          map(() => otActions.assignCoordinator({ otID, coordinador_id })),
           catchError(error => of(otActions.approveOTError({ error })))
         )
       )
@@ -492,8 +492,8 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.assignCoordinator),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID, coordinatorID }, profile]) =>
-        this.otService.assignCoordinator(profile.id, otID, coordinatorID).pipe(
+      concatMap(([{ otID, coordinador_id }, profile]) =>
+        this.otService.assignCoordinator(profile.id, otID, coordinador_id).pipe(
           mapTo(otActions.assignCoordinatorSuccess()),
           catchError(error => of(otActions.assignCoordinatorError({ error })))
         )
