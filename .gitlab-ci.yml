@@ -30,7 +30,7 @@ e2e robotframework:
   stage: e2e test
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
-    - docker network create -d bridge web-sigo_default
+    # - docker network create -d bridge web-sigo_default
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_test_sigo_web
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_web
