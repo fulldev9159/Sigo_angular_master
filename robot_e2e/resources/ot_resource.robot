@@ -34,17 +34,18 @@ _Have to exist in table/tab
     Should Be True    ${status}
 
 _Click tab
-    [Arguments]               ${tab}
-    ${selector}=              Run Keyword If    '${tab}' == 'Ejecucion'
-    ...                       Set variable      css: p-tabview > div > ul > li:nth-child(1)>a
-    ...                       ELSE
-    ...                       Run Keyword If    '${tab}' == 'Abiertas'
-    ...                       Set variable      css:p-tabview > div > ul > li:nth-child(2)>a
-    ...                       ELSE
-    ...                       Run Keyword If    '${tab}' == 'Cerradas'
-    ...                       Set variable      css:p-tabview > div > ul > li:nth-child(3)>a
+    [Arguments]           ${tab}
+    ${selector}=          Run Keyword If                                                                '${tab}' == 'Ejecucion'
+    ...                   Set variable                                                                  css: p-tabview > div > ul > li:nth-child(1)>a
+    ...                   ELSE
+    ...                   Run Keyword If                                                                '${tab}' == 'Abiertas'
+    ...                   Set variable                                                                  css:p-tabview > div > ul > li:nth-child(2)>a
+    ...                   ELSE
+    ...                   Run Keyword If                                                                '${tab}' == 'Cerradas'
+    ...                   Set variable                                                                  css:p-tabview > div > ul > li:nth-child(3)>a
     # _Wait visibility          ${selector}
-    _Click visible element    ${selector}
+    # _Click visible element    ${selector}
+    Execute javascript    document.querySelector('p-tabview > div > ul > li:nth-child(2)>a').click()
 
 _Exist in table OT
     [Arguments]              ${nombre}                                                                                               ${pestaña}                                                                                               
