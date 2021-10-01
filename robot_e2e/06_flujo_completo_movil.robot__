@@ -1,0 +1,20 @@
+*** Settings ***
+Documentation    Test de funcionanildad del modulo de Flujo OT Movil.
+...
+...         This test has a workflow that is created using keywords in
+...         the imported resource file.
+Resource    ./resources/general_resource.robot
+Resource    ./resources/login_resource.robot
+Resource    ./resources/ot_resource.robot
+
+*** Test Cases ***
+Flujo OT Completo Movil
+    _Login                            cadmincontrato1    pass
+    # _Have to exist in table/tab       Ejecucion          ${nombre OT Movil}
+    # _Have No to exist in table/tab    Abiertas           ${nombre OT Movil}
+    # _Have No to exist in table/tab    Cerradas           ${nombre OT Movil}
+    _Have No to exist in table/tab    Abiertas           Prueba Octavio 2
+    _Have No to exist in table/tab    Cerradas           Prueba Octavio 2
+    _Have to exist in table/tab       Ejecucion          Prueba Octavio 2
+    _Press action                     Aceptar
+

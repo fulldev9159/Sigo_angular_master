@@ -43,7 +43,7 @@ Crear usuario
     # Guardar usuario
     # Log To Console                         testjgestor
     # Validar existencia en la tabla         1                                                testjgestor
-    close Browser
+    # close Browser
 
 # Editar usuario
 #    Open Browser To Page             ${url}
