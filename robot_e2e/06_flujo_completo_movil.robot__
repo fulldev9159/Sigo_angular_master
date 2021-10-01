@@ -1,0 +1,11 @@
+*** Settings ***
+Documentation    Test de funcionanildad del modulo de Flujo OT Movil.
+...
+...         This test has a workflow that is created using keywords in
+...         the imported resource file.
+Resource    ./resources/general_resource.robot
+Resource    ./resources/login_resource.robot
+
+*** Test Cases ***
+Flujo OT Completo Movil
+    _Login    cadmincontrato1    pass

@@ -61,11 +61,11 @@ Crear OT contrato movil
     element should not be visible    ${selector sap}
     element should not be visible    ${selector ceco}
     element should not be visible    ${selector ceco provisorio}
-    element should be visible        ${selector fecha inicio}
-    element should be visible        ${selector fecha termino}
-    element should be visible        ${selector proyecto}
-    element should be visible        ${selector observaciones}
-    element should be visible        ${selector guardar}
+    Wait Until Element Is Visible    ${selector fecha inicio}
+    Wait Until Element Is Visible    ${selector fecha termino}
+    Wait Until Element Is Visible    ${selector proyecto}
+    Wait Until Element Is Visible    ${selector observaciones}
+    Wait Until Element Is Visible    ${selector guardar}
 
 
      # Elementos habilitados y los que no
