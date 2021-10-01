@@ -34,6 +34,13 @@ _Have to exist in table/tab
     ${status}=        _Exist in table OT    ${nombre}    ${pestaña}
     Should Be True    ${status}
 
+_Have No to exist in table/tab
+    [Arguments]    ${pestaña}    ${nombre}    
+
+    _Click tab            ${pestaña}
+    ${status}=            _Exist in table OT    ${nombre}    ${pestaña}
+    Should Not Be True    ${status}
+
 _Click tab
     [Arguments]                      ${tab}
     ${number}=                       Run Keyword If                                                                        '${tab}' == 'Ejecucion'
@@ -58,6 +65,42 @@ _Exist in table OT
     ...                      Run Keyword If                                                                                          '${pestaña}' == 'Cerradas'
     ...                      Set variable                                                                                            3
     input text               css:p-tabpanel:nth-child(${number})>div>app-table>div>p-table>div>.p-datatable-header>div>span>input    ${nombre}
+    sleep                    0.5
     ${cantidad de filas}=    get element count                                                                                       css:p-tabpanel:nth-child(${number})>div>app-table>div>p-table>div>.p-datatable-wrapper>table>tbody>tr    
     ${status}=               Evaluate                                                                                                ${cantidad de filas} > 0
+    Log To Console           ${cantidad de filas}                                                                                    
     [return]                 ${status}
+
+_Press action
+    [Arguments]               ${action}
+    ${menu actions}=          set variable       css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    _Click visible element    ${menu actions}
+    ${items}=                 Get WebElements    css:#action-buttons > app-menu > p-menu > div > ul>li
+
+    ${index}=           Set Variable               1
+    FOR                 ${item}                    IN                    @{items}
+    ${txt} =            Get Text                   ${item}
+    Log To Console      ${txt}
+    Run Keyword If      '${txt}' == '${action}'    Set Suite Variable    ${index}
+    Exit For Loop If    '${txt}' == '${action}'
+    ${index}=           Evaluate                   ${index} + 1
+    END
+
+    Log To Console        ${index}
+    Execute javascript    document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(${index})>a").click()
+
+
+    # Acciones PEND AUTH ADMIN Contrato
+    # Click Visible Element     css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
+    # ${items}=                 Get WebElements                                                                  css:#action-buttons > app-menu > p-menu > div > ul>li
+    # FOR                       ${item}                                                                          IN                                                       @{items}
+    # ${txt} =                  Get Text                                                                         ${item}
+    # # Log To Console            ${txt}
+    # END
+    # ${cantidad de filas}=     Get length                                                                       ${items}
+    # ${status}=                Evaluate                                                                         ${cantidad de filas} == 4
+    # Should Be True            ${status}
+    # Element text should be    ${items}[0]                                                                      Información
+    # Element text should be    ${items}[1]                                                                      Agregar al libro de obras
+    # Element text should be    ${items}[2]                                                                      Aceptar
+    # Element text should be    ${items}[3]                                                                      Rechazar
