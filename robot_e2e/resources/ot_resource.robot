@@ -73,6 +73,7 @@ _Exist in table OT
 
 _Press action
     [Arguments]               ${action}
+    sleep                     0.5
     ${menu actions}=          set variable       css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
     _Click visible element    ${menu actions}
     ${items}=                 Get WebElements    css:#action-buttons > app-menu > p-menu > div > ul>li
@@ -81,6 +82,7 @@ _Press action
     FOR                 ${item}                    IN                    @{items}
     ${txt} =            Get Text                   ${item}
     Log To Console      ${txt}
+    Log To Console      ${index}
     Run Keyword If      '${txt}' == '${action}'    Set Suite Variable    ${index}
     Exit For Loop If    '${txt}' == '${action}'
     ${index}=           Evaluate                   ${index} + 1

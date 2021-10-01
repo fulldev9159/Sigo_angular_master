@@ -224,10 +224,6 @@ Acciones solo Info
     Element text should be    ${items}[0]                                                                      Información                                            
 
 
-Logout
-    Execute javascript       document.querySelector('#page-content-wrapper > nav > button.navbar-toggler').click()
-    Click Visible Element    css:#navbarDropdown
-    Click Visible Element    css:#navbarSupportedContent > ul > li > div > a
 
 Accionar
     [Arguments]       ${accion}
@@ -236,15 +232,7 @@ Accionar
 Confirmar
     Click Visible Element    css:div.p-confirm-popup-footer>button:nth-child(2)
 
-Seleccionar coordinador
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:app-assign-coordinator-form > form > app-select > select
-    Set select item    ${valor}        ${selector}
 
-Seleccionar trabajador
-    [Arguments]        ${valor}
-    ${selector}=       set variable    css:app-assign-trabajador-form > form > app-select > select
-    Set select item    ${valor}        ${selector}
 
 
 SSLEEP

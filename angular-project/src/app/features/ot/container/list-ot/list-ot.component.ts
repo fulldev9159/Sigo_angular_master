@@ -330,7 +330,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
           actions.push({
             icon: 'p-button-icon pi pi-money-bill',
             class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Authorizar Pago',
+            label: 'Autorizar Pago',
             onClick: (event: Event, item) => {
               this.confirmationService.confirm({
                 target: event.target as EventTarget,
