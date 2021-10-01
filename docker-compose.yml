@@ -50,8 +50,8 @@ services:
     restart: always
     ports:
       - 4040:4040
-    depends_on:
-      - mcl_test_sigo_db
+    # depends_on:
+    #   - mcl_test_sigo_db
 
   mcl_local_sigo_db:
     image: gcr.io/zwcsce/mcl-otec-db:latest
