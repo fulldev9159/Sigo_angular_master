@@ -28,24 +28,24 @@ _Set Fecha Termino
     _Click Visible Element           css:#fecha-termino-ot > span > div > div > div > div.p-datepicker-calendar-container> table > tbody > tr:nth-child(4) > td:nth-child(4) > span
 
 _Have to exist in table/tab
-    [Arguments]       ${pestaña}            ${nombre}    
+    [Arguments]    ${pestaña}    ${nombre}    
+
     _Click tab        ${pestaña}
     ${status}=        _Exist in table OT    ${nombre}    ${pestaña}
     Should Be True    ${status}
 
 _Click tab
-    [Arguments]           ${tab}
-    ${selector}=          Run Keyword If                                                                '${tab}' == 'Ejecucion'
-    ...                   Set variable                                                                  css: p-tabview > div > ul > li:nth-child(1)>a
-    ...                   ELSE
-    ...                   Run Keyword If                                                                '${tab}' == 'Abiertas'
-    ...                   Set variable                                                                  css:p-tabview > div > ul > li:nth-child(2)>a
-    ...                   ELSE
-    ...                   Run Keyword If                                                                '${tab}' == 'Cerradas'
-    ...                   Set variable                                                                  css:p-tabview > div > ul > li:nth-child(3)>a
-    # _Wait visibility          ${selector}
-    # _Click visible element    ${selector}
-    Execute javascript    document.querySelector('p-tabview > div > ul > li:nth-child(2)>a').click()
+    [Arguments]                      ${tab}
+    ${number}=                       Run Keyword If                                                                        '${tab}' == 'Ejecucion'
+    ...                              Set variable                                                                          1
+    ...                              ELSE
+    ...                              Run Keyword If                                                                        '${tab}' == 'Abiertas'
+    ...                              Set variable                                                                          2
+    ...                              ELSE
+    ...                              Run Keyword If                                                                        '${tab}' == 'Cerradas'
+    ...                              Set variable                                                                          3
+    Wait Until Element Is Visible    css:p-tabview > div > ul > li:nth-child(${number})>a                                  timeout=15
+    Execute javascript               document.querySelector('p-tabview > div > ul > li:nth-child(${number})>a').click()
 
 _Exist in table OT
     [Arguments]              ${nombre}                                                                                               ${pestaña}                                                                                               
