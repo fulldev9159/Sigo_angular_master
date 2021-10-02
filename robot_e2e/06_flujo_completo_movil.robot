@@ -50,87 +50,87 @@ Flujo OT Completo Movil
     _Logout
 
 # ETAPA: FINALIZAR TRABAJOS
-    _Login                            ctrabajador1          pass
-    _Have No to exist in table/tab    Abiertas              ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas              ${nombre OT Movil}
-    _Have to exist in table/tab       Ejecucion             ${nombre OT Movil}
+    _Login                            ctrabajador1                                            pass
+    _Have No to exist in table/tab    Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
+    _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Finalizar trabajos
-    ${boton confirmar}=               set variable          css:div.p-confirm-popup-footer>button:nth-child(2)
-    _Click visible element            ${boton confirmar}
+    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
-    _Have No to exist in table/tab    Ejecucion             ${nombre OT Movil}
-    _Have to exist in table/tab       Abiertas              ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas              ${nombre OT Movil}
+    _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
+    _Have to exist in table/tab       Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Logout
 
 # ETAPA: VALIDAR GENERACIOND DE ACTA ADMIN CONTRATO
-    _Login                            cadmincontrato1                   pass
-    _Have No to exist in table/tab    Abiertas                          ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas                          ${nombre OT Movil}
-    _Have to exist in table/tab       Ejecucion                         ${nombre OT Movil}
+    _Login                            cadmincontrato1                                         pass
+    _Have No to exist in table/tab    Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
+    _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Aceptar la generación del acta
-    ${boton confirmar}=               set variable                      css:div.p-confirm-popup-footer>button:nth-child(2)
-    _Click visible element            ${boton confirmar}
+    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
-    _Have No to exist in table/tab    Ejecucion                         ${nombre OT Movil}
-    _Have to exist in table/tab       Abiertas                          ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas                          ${nombre OT Movil}
+    _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
+    _Have to exist in table/tab       Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Logout
 
 # ETAPA: VALIDAR GENERACIOND DE ACTA GESTOR
-    _Login                            mgestor1                          pass
-    _Have No to exist in table/tab    Abiertas                          ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas                          ${nombre OT Movil}
-    _Have to exist in table/tab       Ejecucion                         ${nombre OT Movil}
+    _Login                            mgestor1                                                pass
+    _Have No to exist in table/tab    Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
+    _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Aceptar la generación del acta
-    ${boton confirmar}=               set variable                      css:div.p-confirm-popup-footer>button:nth-child(2)
-    _Click visible element            ${boton confirmar}
+    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
-    _Have No to exist in table/tab    Ejecucion                         ${nombre OT Movil}
-    _Have to exist in table/tab       Abiertas                          ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas                          ${nombre OT Movil}
+    _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
+    _Have to exist in table/tab       Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Logout
 
 # ETAPA: AUTORIZAR PAGO JEFE AREA
-    _Login                            mjefearea1            pass
-    _Have No to exist in table/tab    Abiertas              ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas              ${nombre OT Movil}
-    _Have to exist in table/tab       Ejecucion             ${nombre OT Movil}
+    _Login                            mjefearea1                                              pass
+    _Have No to exist in table/tab    Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
+    _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Autorizar Pago
-    ${boton confirmar}=               set variable          css:div.p-confirm-popup-footer>button:nth-child(2)
-    _Click visible element            ${boton confirmar}
+    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
-    _Have No to exist in table/tab    Ejecucion             ${nombre OT Movil}
-    _Have to exist in table/tab       Abiertas              ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas              ${nombre OT Movil}
+    _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
+    _Have to exist in table/tab       Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Logout
 
 # ETAPA: AUTORIZAR PAGO SUB GERENTE
-    _Login                            msubgerente1          pass
-    _Have No to exist in table/tab    Abiertas              ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas              ${nombre OT Movil}
-    _Have to exist in table/tab       Ejecucion             ${nombre OT Movil}
+    _Login                            msubgerente1                                            pass
+    _Have No to exist in table/tab    Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
+    _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Autorizar Pago
-    ${boton confirmar}=               set variable          css:div.p-confirm-popup-footer>button:nth-child(2)
-    _Click visible element            ${boton confirmar}
+    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
-    _Have No to exist in table/tab    Ejecucion             ${nombre OT Movil}
-    _Have to exist in table/tab       Abiertas              ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas              ${nombre OT Movil}
+    _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
+    _Have to exist in table/tab       Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Logout
 
 # # ETAPA: AUTORIZAR PAGO GERENTE
-    _Login                            mgerente1             pass
-    _Have No to exist in table/tab    Abiertas              ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas              ${nombre OT Movil}
-    _Have to exist in table/tab       Ejecucion             ${nombre OT Movil}
+    _Login                            mgerente1                                               pass
+    _Have No to exist in table/tab    Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
+    _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Autorizar Pago
-    ${boton confirmar}=               set variable          css:div.p-confirm-popup-footer>button:nth-child(2)
-    _Click visible element            ${boton confirmar}
+    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
-    _Have No to exist in table/tab    Ejecucion             ${nombre OT Movil}
-    _Have No to exist in table/tab    Abiertas              ${nombre OT Movil}
-    _Have No to exist in table/tab    Cerradas              ${nombre OT Movil}
+    _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
+    _Have No to exist in table/tab    Abiertas                                                ${nombre OT Movil}
+    _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Logout
 
     close Browser
