@@ -55,7 +55,7 @@ Flujo OT Completo Movil
     _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Finalizar trabajos
-    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    ${boton confirmar}=               set variable                                            div.p-confirm-popup-footer>button:nth-child(2)
     Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
     _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
@@ -69,7 +69,7 @@ Flujo OT Completo Movil
     _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Aceptar la generación del acta
-    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    ${boton confirmar}=               set variable                                            div.p-confirm-popup-footer>button:nth-child(2)
     Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
     _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
@@ -83,7 +83,7 @@ Flujo OT Completo Movil
     _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Aceptar la generación del acta
-    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    ${boton confirmar}=               set variable                                            div.p-confirm-popup-footer>button:nth-child(2)
     Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
     _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
@@ -97,7 +97,7 @@ Flujo OT Completo Movil
     _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Autorizar Pago
-    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    ${boton confirmar}=               set variable                                            div.p-confirm-popup-footer>button:nth-child(2)
     Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
     _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
@@ -111,7 +111,7 @@ Flujo OT Completo Movil
     _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Autorizar Pago
-    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    ${boton confirmar}=               set variable                                            div.p-confirm-popup-footer>button:nth-child(2)
     Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
     _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
@@ -125,7 +125,7 @@ Flujo OT Completo Movil
     _Have No to exist in table/tab    Cerradas                                                ${nombre OT Movil}
     _Have to exist in table/tab       Ejecucion                                               ${nombre OT Movil}
     _Press action                     Autorizar Pago
-    ${boton confirmar}=               set variable                                            css:div.p-confirm-popup-footer>button:nth-child(2)
+    ${boton confirmar}=               set variable                                            div.p-confirm-popup-footer>button:nth-child(2)
     Execute javascript                document.querySelector("${boton confirmar}").click()
     sleep                             0.5
     _Have No to exist in table/tab    Ejecucion                                               ${nombre OT Movil}
