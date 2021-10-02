@@ -76,8 +76,8 @@
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeAssignCoordinatorModal()">Cancelar</button>
-    <button class="btn btn-primary" (click)="assignCoordinatorFormSubmit()">
-      <em class="pi pi-save mr-1"></em>Guardar
+    <button class="btn btn-primary" [disabled]="!assignCoordinatorForm.form.valid" (click)="assignCoordinatorFormSubmit()">
+      <em class="pi pi-save mr-1"></em>Aceptar
     </button>
   </ng-container>
 </app-modal>
@@ -102,7 +102,7 @@
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeAssignTrabajadorModal()">Cancelar</button>
-    <button class="btn btn-primary" (click)="assignTrabajadorFormSubmit()">
+    <button class="btn btn-primary" [disabled]="!assignTrabajadorForm.form.valid" (click)="assignTrabajadorFormSubmit()">
       <em class="pi pi-save mr-1"></em>Guardar
     </button>
   </ng-container>

@@ -289,7 +289,7 @@ export const selectOT = createAction(
 // Estados de la OT
 export const approveOT = createAction(
   '[OT] Approve OT',
-  props<{ otID: number }>()
+  props<{ otID: number; coordinador_id: number }>()
 );
 
 export const approveOTSuccess = createAction('[OT] Approve OT success');
@@ -445,7 +445,7 @@ export const getCoordinatorsError = createAction(
 
 export const assignCoordinator = createAction(
   '[OT] assign coordinator',
-  props<{ otID: number; coordinatorID: number }>()
+  props<{ otID: number; coordinador_id: number }>()
 );
 
 export const assignCoordinatorSuccess = createAction(

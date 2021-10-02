@@ -52,8 +52,8 @@ export class OtFacade {
   }
 
   // ESTADOS DE OT
-  public approveOT(otID: number): void {
-    this.store.dispatch(otActions.approveOT({ otID }));
+  public approveOT(otID: number, coordinador_id: number): void {
+    this.store.dispatch(otActions.approveOT({ otID, coordinador_id }));
   }
 
   public rejectOT(otID: number, motivo: string): void {
@@ -241,7 +241,9 @@ export class OtFacade {
   }
 
   public assignCoordinator(otID: number, coordinatorID: number): void {
-    this.store.dispatch(otActions.assignCoordinator({ otID, coordinatorID }));
+    this.store.dispatch(
+      otActions.assignCoordinator({ otID, coordinador_id: coordinatorID })
+    );
   }
 
   // Trabajador Supervisor OT

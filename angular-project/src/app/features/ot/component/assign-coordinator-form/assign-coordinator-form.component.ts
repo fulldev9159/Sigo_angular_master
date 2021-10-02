@@ -18,6 +18,7 @@ import * as Data from '@data';
 })
 export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
   ot$: Observable<Data.OT>;
+  etapa = '';
   otID: number;
   coordinators$: Observable<Data.User[]>;
   subscription: Subscription = new Subscription();
@@ -44,6 +45,7 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.ot$.subscribe(ot => {
         this.otID = ot.id;
+        this.etapa = ot.etapa_otdesc;
         this.reset();
         this.otFacade.getCoordinators(ot.id);
       })
@@ -85,7 +87,12 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
     this.touch();
     if (this.valid) {
       const { coordinatorID } = this.form.getRawValue();
-      this.otFacade.assignCoordinator(this.otID, coordinatorID);
+      console.log(this.etapa);
+      if (this.etapa === 'Pendiente de Autorización por Adm. Contrato') {
+        this.otFacade.approveOT(this.otID, coordinatorID);
+      } else if (this.etapa === '') {
+        this.otFacade.assignCoordinator(this.otID, coordinatorID);
+      }
     } else {
       console.error('invalid form');
     }

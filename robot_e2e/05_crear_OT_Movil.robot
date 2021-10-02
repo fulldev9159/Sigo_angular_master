@@ -111,10 +111,10 @@ Crear OT contrato movil
     input text                      ${selector observaciones}    Robot Observaciones
 
     # Guardar
-    _Click visible element    ${selector guardar}
-
+    _Click visible element         ${selector guardar}
+    sleep                          1
     # Validar que se haya creado existosamente
-    _Have to exist in table/tab    Abiertas    ${nombre OT Movil}
+    _Have to exist in table/tab    Abiertas               ${nombre OT Movil}
 
     close Browser
 
