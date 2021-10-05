@@ -30,6 +30,12 @@
   }
 }
 
+.left-bar {
+  margin-left: 626px;
+  display: flex;
+  margin-top: 10px
+}
+
 img {
   width: 85%;
   margin-top: 3px;
@@ -87,6 +93,10 @@ img {
 
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -180px;
+  }
+
+  .left-bar {
+    margin-left: 0;
   }
 }
 
