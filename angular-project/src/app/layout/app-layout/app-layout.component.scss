@@ -31,9 +31,10 @@
 }
 
 .left-bar {
+  width: 377px;
   margin-left: 626px;
   display: flex;
-  margin-top: 10px
+  justify-content: space-between;
 }
 
 img {
@@ -94,8 +95,11 @@ img {
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -180px;
   }
+}
 
+@media (max-width:768px) {
   .left-bar {
+    // background-color: red;
     margin-left: 0;
   }
 }

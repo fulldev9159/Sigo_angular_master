@@ -78,13 +78,12 @@
         <i class="navbar-toggler-icon"></i>
       </button>
       <div class="left-bar">
-        <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info" style="    margin-right: 8px;color: #666565;
-        ">
-          <p class="user-name" id="user-name" |style="">{{(loginAuth$ | async).name | titlecase}} - Rol:
+        <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info" style="    margin-right: 8px;color: #666565;">
+          <p class="user-name" id="user-name">{{(loginAuth$ | async).name | titlecase}} - Rol:
             {{(loginAuth$ |async).perfil}}</p>
         </div>
-        <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos>0" (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary " severity="danger" pBadge style="font-size: 1.6rem;cursor: pointer;" [value]="(total_nuevas_notificaciones$|async)?.data.total_nuevos"></i>
-        <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos===0" (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary " severity="danger" style="font-size: 1.6rem;cursor: pointer;"></i>
+        <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos>0" (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary " severity="danger" pBadge style="font-size: 1.6rem;margin-top: 10px;cursor: pointer;" [value]="(total_nuevas_notificaciones$|async)?.data.total_nuevos"></i>
+        <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos===0" (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary " severity="danger" style="font-size: 1.6rem;cursor: pointer;margin-top: 10px"></i>
 
       </div>
 
