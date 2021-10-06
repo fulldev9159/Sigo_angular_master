@@ -12,6 +12,15 @@ import * as otModel from '@storeOT/features/ot/ot.model';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { NgxPermissionsService } from 'ngx-permissions';
 
+interface adjunto {
+  nombre: string;
+  type: string;
+  peso: string;
+  autor: string;
+  fecha: Date;
+  url: string;
+}
+
 @Component({
   selector: 'app-detalle-ot',
   templateUrl: './detalle-ot.component.html',
@@ -25,6 +34,9 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   @Input() detalleCubicacion: cubModel.ResponseDetalleCubicacion[];
   @Output() public getlpus = new EventEmitter();
   @Output() public cerrar = new EventEmitter();
+
+  adjuntos: adjunto[] = [];
+  adjuntosSelected: adjunto[] = [];
 
   configHeaders = [
     {
@@ -117,7 +129,18 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.adjuntos = [
+      {
+        autor: 'Yo',
+        nombre: 'documento.csv',
+        peso: '200kb',
+        type: 'csv',
+        fecha: new Date('20-04-2021'),
+        url: 'https://tutsplus.github.io/download/acme-doc-2.0.1.txt',
+      },
+    ];
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
