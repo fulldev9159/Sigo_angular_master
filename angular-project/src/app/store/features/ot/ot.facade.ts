@@ -295,6 +295,14 @@ export class OtFacade {
     this.store.dispatch(otActions.registrarLibroObra({ registro }));
   }
 
+  public getRegistrosLibroObras(ot_id: number): void {
+    this.store.dispatch(otActions.getRegistrosLibroObra({ ot_id }));
+  }
+
+  public getRegistrosLibroObras$(): Observable<Data.RegistroLibroObra[]> {
+    return this.store.select(otSelectors.getRegistrosLibroObra);
+  }
+
   // Resets
   public resetData(): void {
     this.store.dispatch(otActions.resetData());

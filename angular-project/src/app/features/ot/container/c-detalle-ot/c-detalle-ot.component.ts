@@ -10,6 +10,7 @@ import * as otModel from '@storeOT/features/ot/ot.model';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import * as Data from '@data';
 
 @Component({
   selector: 'app-c-detale-ot',
@@ -20,6 +21,7 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 export class CDetalleOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   public detalleOt$: Observable<otModel.DataRspDetalleOT>;
+  registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;
   public DisplayModal = false;
   public detalleCubicacion$: Observable<cubModel.ResponseDetalleCubicacion[]>;
   constructor(
@@ -33,12 +35,15 @@ export class CDetalleOtComponent implements OnInit, OnDestroy {
       this.rutaActiva.params.subscribe((params: Params) => {
         if (params.id) {
           this.otFacade.getDetalleOtAction(+params.id);
+          this.otFacade.getRegistrosLibroObras(+params.id);
         }
       })
     );
+
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
     this.detalleCubicacion$ =
       this.cubageFacade.getDetallesCubicacionSelector$();
+    // this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
   }
 
   ngOnDestroy(): void {

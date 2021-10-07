@@ -1079,4 +1079,35 @@ export class OtEffects {
       ),
     { dispatch: false }
   );
+
+  getRegistrarLibroObras$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getRegistrosLibroObra),
+      concatMap(({ ot_id }) =>
+        this.otService.getRegistrosLibroObra(ot_id).pipe(
+          map((registroslibroobras: Data.RegistroLibroObra[]) =>
+            otActions.getRegistrosLibroObraSuccess({ registroslibroobras })
+          ),
+          catchError(error =>
+            of(otActions.getRegistrosLibroObraError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getRegistrarLibroObrasError$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.registrarLibroObraError),
+        tap(({ error }) => {
+          this.snackService.showMessage(
+            'No se pudieron obtner los registros del libro de obras',
+            'error'
+          );
+          console.error(`can't get registers [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
 }
