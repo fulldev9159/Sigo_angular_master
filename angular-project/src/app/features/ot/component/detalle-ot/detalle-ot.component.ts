@@ -15,7 +15,7 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 
 import * as Data from '@data';
 
-interface icon {
+interface Icon {
   [st: string]: string;
 }
 @Component({
@@ -34,7 +34,7 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   @Output() public cerrar = new EventEmitter();
   registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;
 
-  icons: icon[] = [];
+  icons: Icon[] = [];
 
   adjuntos: Data.Adjunto[] = [];
   adjuntosSelected: Data.Adjunto[] = [];
@@ -135,9 +135,12 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.icons['docx'] = 'pi-file';
-    this.icons['jpg'] = 'pi-image';
-    this.icons['pdf'] = 'pi-file-pdf';
+    const docx = 'docx';
+    const jpg = 'jpg';
+    const pdf = 'pdf';
+    this.icons[docx] = 'pi-file';
+    this.icons[jpg] = 'pi-image';
+    this.icons[pdf] = 'pi-file-pdf';
     this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
     this.subscription.add(
       this.registosLibroDeObras$.subscribe(registros => {
