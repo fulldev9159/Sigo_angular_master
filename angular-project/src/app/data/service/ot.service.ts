@@ -276,4 +276,67 @@ export class OTService {
     console.log('Agregar libro de obras. no implementado aún', registro);
     return of({});
   }
+
+  getRegistrosLibroObra(ot_id: number): Observable<Data.RegistroLibroObra[]> {
+    console.log('Registros del libro de obra');
+    return of([
+      {
+        observacion:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus egestas mauris augue, et finibus orci pharetra nec. Praesent nec ex vitae mauris bibendum fringilla ut vehicula felis. Aliquam in dictum augue, in porta nibh. Cras sodales felis finibus tortor bibendum, vel porttitor erat commodo. Suspendisse augue ante, convallis eu augue sit amet, vehicula eleifend nisi. Phasellus dolor augue, faucibus ac lacus non, pulvinar luctus velit. Sed fermentum tempus odio eget pharetra. Proin vehicula odio velit, vel egestas tellus tristique in. Integer condimentum magna urna, et finibus velit luctus sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer ac risus accumsan, bibendum sem vitae, posuere tellus.',
+        adjuntos: [
+          {
+            nombre: 'Asignacion.docx',
+            type: 'docx',
+            peso: '200kb',
+            autor: 'Juanito Perez',
+            fecha: new Date('2021-01-01'),
+            url: 'https://tutsplus.github.io/download/acme-doc-2.0.1.txt',
+          },
+          {
+            nombre: 'DocumentoContrato.pdf',
+            type: 'pdf',
+            peso: '500kb',
+            autor: 'Juanito Perez',
+            fecha: new Date('2021-01-01'),
+            url: 'https://tutsplus.github.io/download/acme-doc-2.0.1.txt',
+          },
+        ],
+        autor: 'Juanito Perez',
+        fecha: new Date('2021-01-01'),
+        rol: 'Admin',
+      },
+      {
+        observacion: 'Lorem ipsum dolor sit amet, ',
+        adjuntos: [],
+        autor: 'Profesor Xavier',
+        fecha: new Date('2021-01-01'),
+        rol: 'Trabajador',
+      },
+      {
+        observacion:
+          'Lorem ipsum dolor sit amet,Etiam imperdiet, magna sed iaculis ornare, elit neque vestibulum enim, scelerisque hendrerit enim augue et ligula. Proin congue neque lorem, vitae porta odio ultrices in. Quisque tincidunt turpis sit amet nibh mollis blandit. Mauris viverra facilisis magna non aliquet. Nulla molestie felis tellus, vel luctus risus tristique et. Cras mattis convallis nibh, a gravida diam blandit eu. Ut velit mauris, facilisis vel convallis in, cursus vel nibh. Proin metus arcu, rhoncus vel risus ac, vestibulum finibus ex. Quisque a tincidunt est. Maecenas gravida orci dolor, ut commodo risus dignissim sed. Nulla volutpat semper massa, vel laoreet nibh elementum eu. Fusce feugiat neque sit amet lacus viverra faucibus. Etiam iaculis sagittis risus, sed iaculis eros egestas eget. Phasellus convallis viverra fringilla. Vivamus posuere consequat ipsum, sit amet tincidunt erat aliquet nec. Nulla faucibus nibh at dolor efficitur placerat. Quisque elementum tempor magna, at pulvinar nulla. Sed varius, elit eget malesuada pellentesque, felis metus euismod mi, in mattis lorem sem ut enim. Cras laoreet consequat nunc, vitae fermentum lacus sodales nec. In hac habitasse platea dictumst. Quisque ut malesuada elit. Aliquam molestie eros vitae eros suscipit, a finibus purus posuere. Integer viverra fermentum ligula, sit amet mattis orci pulvinar scelerisque. Mauris at convallis libero. In hac habitasse platea dictumst. ',
+        adjuntos: [
+          {
+            nombre: 'evidencia.jpeg',
+            type: 'jpg',
+            peso: '100kb',
+            autor: 'Profesor Xavier',
+            fecha: new Date('2021-01-03'),
+            url: 'https://tutsplus.github.io/download/acme-doc-2.0.1.txt',
+          },
+          {
+            nombre: 'evidencia2.jpeg',
+            type: 'jpg',
+            peso: '100kb',
+            autor: 'Profesor Xavier',
+            fecha: new Date('2021-01-03'),
+            url: 'https://tutsplus.github.io/download/acme-doc-2.0.1.txt',
+          },
+        ],
+        autor: 'Profesor Xavier',
+        fecha: new Date('2021-01-01'),
+        rol: 'Trabajador',
+      },
+    ]);
+  }
 }

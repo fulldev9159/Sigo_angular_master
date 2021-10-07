@@ -11,16 +11,13 @@ import { Subscription, Subject, Observable } from 'rxjs';
 import * as otModel from '@storeOT/features/ot/ot.model';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { OtFacade } from '@storeOT/features/ot/ot.facade';
 
-interface adjunto {
-  nombre: string;
-  type: string;
-  peso: string;
-  autor: string;
-  fecha: Date;
-  url: string;
+import * as Data from '@data';
+
+interface icon {
+  [st: string]: string;
 }
-
 @Component({
   selector: 'app-detalle-ot',
   templateUrl: './detalle-ot.component.html',
@@ -32,11 +29,15 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   @Input() detalleOt: otModel.DataRspDetalleOT;
   @Input() DisplayModal: boolean;
   @Input() detalleCubicacion: cubModel.ResponseDetalleCubicacion[];
+  @Input() registroLibroObras: Data.RegistroLibroObra[];
   @Output() public getlpus = new EventEmitter();
   @Output() public cerrar = new EventEmitter();
+  registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;
 
-  adjuntos: adjunto[] = [];
-  adjuntosSelected: adjunto[] = [];
+  icons: icon[] = [];
+
+  adjuntos: Data.Adjunto[] = [];
+  adjuntosSelected: Data.Adjunto[] = [];
 
   configHeaders = [
     {
@@ -89,7 +90,11 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   };
 
   subscription: Subscription = new Subscription();
-  constructor(private permissionsService: NgxPermissionsService) {
+
+  constructor(
+    private permissionsService: NgxPermissionsService,
+    private otFacade: OtFacade
+  ) {
     this.subscription.add(
       permissionsService.permissions$.subscribe(permissions => {
         if (permissions.OT_VER_VALOR_LPU) {
@@ -130,16 +135,15 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.adjuntos = [
-      {
-        autor: 'Yo',
-        nombre: 'documento.csv',
-        peso: '200kb',
-        type: 'csv',
-        fecha: new Date('20-04-2021'),
-        url: 'https://tutsplus.github.io/download/acme-doc-2.0.1.txt',
-      },
-    ];
+    this.icons['docx'] = 'pi-file';
+    this.icons['jpg'] = 'pi-image';
+    this.icons['pdf'] = 'pi-file-pdf';
+    this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
+    this.subscription.add(
+      this.registosLibroDeObras$.subscribe(registros => {
+        registros.forEach(registro => this.adjuntos.push(...registro.adjuntos));
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -153,6 +157,11 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   public Close(): void {
     console.log('Close desde dummy ot detalle-ot');
     this.cerrar.emit();
+  }
+
+  getIcon(type: string): void {
+    console.log('arr', this.icons);
+    return this.icons[type];
   }
 
   tabSelected(event): void {

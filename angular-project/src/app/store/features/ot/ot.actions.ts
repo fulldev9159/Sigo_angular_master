@@ -523,3 +523,19 @@ export const resetSAP = createAction('[ResetData] ResetSAP');
 export const resetLPs = createAction('[ResetData] ResetLPs');
 export const resetPEP2 = createAction('[ResetData] ResetPEP2');
 export const resetCECO = createAction('[ResetData] ResetCECO');
+
+// Registros libro de obra
+export const getRegistrosLibroObra = createAction(
+  '[OT] get registros libro de obra',
+  props<{ ot_id: number }>()
+);
+
+export const getRegistrosLibroObraSuccess = createAction(
+  '[OT] get registros libro de obra success',
+  props<{ registroslibroobras: Data.RegistroLibroObra[] }>()
+);
+
+export const getRegistrosLibroObraError = createAction(
+  '[OT] get registros libro de obra error',
+  props<{ error: any }>()
+);

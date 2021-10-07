@@ -101,3 +101,8 @@ export const getSaveOTError = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.errorSaving
 );
+
+export const getRegistrosLibroObra = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.registroslibroobras
+);

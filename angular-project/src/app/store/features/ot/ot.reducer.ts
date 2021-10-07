@@ -28,6 +28,8 @@ export interface StateOt {
   coordinators: Data.User[];
   trabajadores: Data.User[];
 
+  registroslibroobras: Data.RegistroLibroObra[];
+
   saving: boolean;
   errorSaving: Error;
 }
@@ -76,6 +78,8 @@ export const initialStateOt: StateOt = {
 
   coordinators: [],
   trabajadores: [],
+
+  registroslibroobras: [],
 
   saving: false,
   errorSaving: null,
@@ -382,5 +386,12 @@ export const reducerOt = createReducer(
     ...state,
     saving: false,
     errorSaving: error,
-  }))
+  })),
+  on(
+    OtActions.getRegistrosLibroObraSuccess,
+    (state, { registroslibroobras }) => ({
+      ...state,
+      registroslibroobras,
+    })
+  )
 );
