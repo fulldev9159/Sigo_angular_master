@@ -73,19 +73,27 @@
     </nav>
   </div>
   <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary border-bottom sticky-top" style="background-color:#fff !important">
-      <button class="btn" (click)="toggleState = !toggleState;toggleAction();">
-        <i class="navbar-toggler-icon"></i>
+    <nav class="navbar navbar-expand-lg navbar-light">
+
+      <button class="btn" style="border-color: rgba(0, 0, 0, 0.1)" (click)="toggleState = !toggleState;toggleAction();">
+        <i class="pi" [ngClass]="toggleIcon"></i>
       </button>
+
       <div class="left-bar">
         <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info" style="    margin-right: 8px;color: #666565;">
-          <p class="user-name" id="user-name">{{(loginAuth$ | async).name | titlecase}} - Rol:
-            {{(loginAuth$ |async).perfil}}</p>
+          <span class="user-name" id="user-name">
+            {{(loginAuth$ | async).name | titlecase}}
+            <strong>{{(loginAuth$ |async).perfil}}</strong></span>
         </div>
-        <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos>0" (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary " severity="danger" pBadge style="font-size: 1.6rem;margin-top: 10px;cursor: pointer;" [value]="(total_nuevas_notificaciones$|async)?.data.total_nuevos"></i>
-        <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos===0" (click)="openNotificacionesModal()" class="pi pi-bell p-mr-4 p-text-secondary " severity="danger" style="font-size: 1.6rem;cursor: pointer;margin-top: 10px"></i>
-
       </div>
+      <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos>0" (click)="openNotificacionesModal()" class="pi pi-bell p-text-secondary " severity="danger" pBadge style="    font-size: 1.4rem;
+        font-weight: 100;
+        cursor: pointer;
+        margin-right: 13px;cursor: pointer;" [value]="(total_nuevas_notificaciones$|async)?.data.total_nuevos"></i>
+      <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos===0" (click)="openNotificacionesModal()" class="pi pi-bell p-text-secondary " severity="danger" style="    font-size: 1.4rem;
+      font-weight: 100;
+      cursor: pointer;
+      margin-right: 13px;;cursor: pointer"></i>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
