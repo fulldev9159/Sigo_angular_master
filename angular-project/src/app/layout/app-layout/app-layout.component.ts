@@ -31,7 +31,7 @@ import * as Data from '@data';
 export class AppLayoutComponent implements OnInit, OnDestroy {
   public loading;
   public toggleState = false;
-  toggleIcon = 'pi-angle-double-right';
+  toggleIcon = '';
   public toggle = 'd-flex';
   public loginAuth$: Observable<any>;
   displayNotificacionesModal = false;
@@ -54,6 +54,11 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.listenToLoading();
+    if (window.innerWidth < 769) {
+      this.toggleIcon = 'pi-angle-double-right';
+    } else {
+      this.toggleIcon = 'pi-angle-double-left';
+    }
     this.notificacioneFacade.getNotificacioes();
     this.total_nuevas_notificaciones$ = this.notificacioneFacade
       .getNotificaciones$()
@@ -95,11 +100,19 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     switch (true) {
       case this.toggleState === false:
         this.toggle = 'd-flex';
-        this.toggleIcon = 'pi-angle-double-right';
+        if (window.innerWidth < 769) {
+          this.toggleIcon = 'pi-angle-double-right';
+        } else {
+          this.toggleIcon = 'pi-angle-double-left';
+        }
         break;
       case this.toggleState === true:
         this.toggle = 'd-flex toggled';
-        this.toggleIcon = 'pi-angle-double-left';
+        if (window.innerWidth < 769) {
+          this.toggleIcon = 'pi-angle-double-left';
+        } else {
+          this.toggleIcon = 'pi-angle-double-right';
+        }
         break;
     }
   }
