@@ -31,6 +31,7 @@ import * as Data from '@data';
 export class AppLayoutComponent implements OnInit, OnDestroy {
   public loading;
   public toggleState = false;
+  toggleIcon = 'pi-angle-double-right';
   public toggle = 'd-flex';
   public loginAuth$: Observable<any>;
   displayNotificacionesModal = false;
@@ -94,9 +95,11 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     switch (true) {
       case this.toggleState === false:
         this.toggle = 'd-flex';
+        this.toggleIcon = 'pi-angle-double-right';
         break;
       case this.toggleState === true:
         this.toggle = 'd-flex toggled';
+        this.toggleIcon = 'pi-angle-double-left';
         break;
     }
   }
