@@ -80,48 +80,46 @@
       </button>
 
       <div class="left-bar">
-        <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info" style="    margin-right: 8px;color: #666565;">
+        <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info">
           <span class="user-name" id="user-name">
             {{(loginAuth$ | async).name | titlecase}}
             <strong>{{(loginAuth$ |async).perfil}}</strong></span>
         </div>
       </div>
-      <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos>0" (click)="openNotificacionesModal()" class="pi pi-bell p-text-secondary " severity="danger" pBadge style="    font-size: 1.4rem;
-        font-weight: 100;
-        cursor: pointer;
-        margin-right: 13px;cursor: pointer;" [value]="(total_nuevas_notificaciones$|async)?.data.total_nuevos"></i>
-      <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos===0" (click)="openNotificacionesModal()" class="pi pi-bell p-text-secondary " severity="danger" style="    font-size: 1.4rem;
-      font-weight: 100;
-      cursor: pointer;
-      margin-right: 13px;;cursor: pointer"></i>
+
+      <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos>0" (click)="openNotificacionesModal()" class="pi pi-bell p-text-secondary campanita " severity="danger" pBadge [value]="(total_nuevas_notificaciones$|async)?.data.total_nuevos" pTooltip="Notificaciones" tooltipPosition="bottom"></i>
+      <i *ngIf="(total_nuevas_notificaciones$|async)?.data.total_nuevos === 0" (click)="openNotificacionesModal()" class="pi pi-bell p-text-secondary campanita " severity="danger" pTooltip="Notificaciones" tooltipPosition="bottom"></i>
+
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto mt-2 mt-lg-0" style="background-color: #5c9bbf !important;">
-          <!-- <li class="nav-item">
-                <a class="nav-link text-white" href="#">Noticicaciones <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">Perfil</a>
-              </li> -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Mi Cuenta
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item mobile-tablet-size ">
+            <a class="dropdown-item">Mis datos</a>
+            <a class="dropdown-item" id="logout" (click)="logout()">Salir</a>
+          </li>
+
+          <li class="nav-item dropdown desktop-size">
+            <a class="nav-link dropdown-toggle text-white" style="margin-right: -14px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="pi pi-user" style="color: #444343;
+              font-size: 20px;
+              border: 1px solid gray;
+              border-radius: 5px;
+              padding: 4px;"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <!-- <a class="dropdown-item">Action</a>
-                  <a class="dropdown-item">Action 1</a> -->
+              <a class="dropdown-item">Mis datos</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="logout()">Salir</a>
+              <a class="dropdown-item" id="logout" (click)="logout()">Salir</a>
             </div>
           </li>
         </ul>
       </div>
-    </nav>
 
+    </nav>
     <div class="container-fluid p-0" style="height: 100vh;overflow: scroll;background:#5c9bbf21">
       <router-outlet></router-outlet>
     </div>
