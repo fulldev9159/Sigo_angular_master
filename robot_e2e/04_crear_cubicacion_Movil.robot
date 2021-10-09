@@ -14,7 +14,7 @@ Crear Cubicacion
 
     # Obtener un nombre de cubicacion disponible
     ${numero movil disponible}=    _Get avaliable cubicacion name
-    Log To Console                 ${numero movil disponible}
+    # Log To Console                 ${numero movil disponible}
     ${nombre cubicacion movil}=    set variable                      CUBICACION ${numero movil disponible} HAPPY PATH ROBOT
     Set Global Variable            ${numero movil disponible}
     Set Global Variable            ${nombre cubicacion movil}

@@ -23,6 +23,5 @@ _Login
 _Logout
     sleep                    5
     Execute javascript       document.querySelector('#page-content-wrapper > nav > button.navbar-toggler').click()
-    Click Visible Element    css:#navbarDropdown
-    Click Visible Element    css:#navbarSupportedContent > ul > li > div > a
+    Click Visible Element    css:#logout
 

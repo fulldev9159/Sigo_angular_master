@@ -68,7 +68,7 @@ _Exist in table OT
     sleep                    0.5
     ${cantidad de filas}=    get element count                                                                                       css:p-tabpanel:nth-child(${number})>div>app-table>div>p-table>div>.p-datatable-wrapper>table>tbody>tr    
     ${status}=               Evaluate                                                                                                ${cantidad de filas} > 0
-    Log To Console           ${cantidad de filas}                                                                                    
+    # Log To Console           ${cantidad de filas}
     [return]                 ${status}
 
 _Press action
@@ -81,14 +81,14 @@ _Press action
     ${index}=           Set Variable               1
     FOR                 ${item}                    IN                    @{items}
     ${txt} =            Get Text                   ${item}
-    Log To Console      ${txt}
-    Log To Console      ${index}
+    # Log To Console      ${txt}
+    # Log To Console      ${index}
     Run Keyword If      '${txt}' == '${action}'    Set Suite Variable    ${index}
     Exit For Loop If    '${txt}' == '${action}'
     ${index}=           Evaluate                   ${index} + 1
     END
 
-    Log To Console        ${index}
+    # Log To Console        ${index}
     Execute javascript    document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(${index})>a").click()
 
 
