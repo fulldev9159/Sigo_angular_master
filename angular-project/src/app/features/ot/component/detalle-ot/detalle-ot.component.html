@@ -101,19 +101,18 @@
   </app-tab>
 
   <app-tab label="Libro de obra" icon="pi pi-fw pi-book">
-    {{registroLibroObras|json}}
     <div class="row" style="padding: 15px;">
       <div class="col-12" *ngFor="let registro of registosLibroDeObras$|async ">
         <app-card [classCardHeader]="'bg-info'">
-          <ng-container card-header-title><strong>Rol: </strong> {{registro.rol}} --- <strong>Autor:</strong> {{registro.autor}} </ng-container>
+          <ng-container card-header-title><strong>Perfil: </strong> {{registro.perfil_nombre}} --- <strong>Autor:</strong> {{registro.usuario_nombre}} </ng-container>
           <ng-container card-body>
             <div class="row">
-              <div class="col-md-9">
-                {{registro.observacion}}
+              <div class="col-md-7">
+                {{registro.observaciones}}
               </div>
-              <div class="col-md-3" style="display: flex;flex-direction: column;">
+              <div class="col-md-5" style="display: flex;flex-direction: column;">
                 <p>Adjuntos</p>
-                <span *ngFor="let adjunto of registro.adjuntos"><a href=""> <i class="pi" [ngClass]="getIcon(adjunto.type)"></i> {{adjunto.nombre}} {{adjunto.peso}}</a></span>
+                <span *ngFor="let adjunto of registro.archivos_adjuntos"><a [href]="getUrl(adjunto.url)"> <i class="pi" [ngClass]="getIcon(adjunto.extension)"></i> {{adjunto.nombre_original}} {{adjunto.size}}</a></span>
               </div>
             </div>
           </ng-container>
@@ -124,12 +123,9 @@
   <app-tab label="Anexos" icon="pi pi-fw pi-paperclip">
     <div class="card" style="padding: 26px;">
       <h5>Archivos adjuntos a la OT</h5>
-      <p-table [value]="adjuntos" [(selection)]="adjuntosSelected" dataKey="code" responsiveLayout="scroll">
+      <p-table [value]="adjuntos" dataKey="code" responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 3rem">
-              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
             <th>Autor</th>
             <th>Nombre</th>
             <th>Fecha</th>
@@ -140,15 +136,12 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
           <tr>
-            <td>
-              <p-tableCheckbox [value]="product"></p-tableCheckbox>
-            </td>
             <td>{{product.autor}}</td>
-            <td>{{product.nombre}}</td>
+            <td>{{product.nombre_original}}</td>
             <td>{{product.fecha}}</td>
-            <td>{{product.type}}</td>
-            <td>{{product.peso}}</td>
-            <td><a href="product.url" download="Acme Documentation (ver. 2.0.1).txt">Descargar</a></td>
+            <td>{{product.extension}}</td>
+            <td>{{product.size}}</td>
+            <td><a [href]="getUrl(product.url)" download="product.nombre_original">Descargar</a></td>
           </tr>
         </ng-template>
       </p-table>
