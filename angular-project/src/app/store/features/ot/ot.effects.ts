@@ -1085,8 +1085,10 @@ export class OtEffects {
       ofType(otActions.getRegistrosLibroObra),
       concatMap(({ ot_id }) =>
         this.otService.getRegistrosLibroObra(ot_id).pipe(
-          map((registroslibroobras: Data.RegistroLibroObra[]) =>
-            otActions.getRegistrosLibroObraSuccess({ registroslibroobras })
+          map((registroslibroobras: Data.GetLibroObrasResponse) =>
+            otActions.getRegistrosLibroObraSuccess({
+              registroslibroobras: registroslibroobras.data.items,
+            })
           ),
           catchError(error =>
             of(otActions.getRegistrosLibroObraError({ error }))

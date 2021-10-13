@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
+  Inject,
 } from '@angular/core';
 import { Subscription, Subject, Observable } from 'rxjs';
 import * as otModel from '@storeOT/features/ot/ot.model';
@@ -33,11 +34,10 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   @Output() public getlpus = new EventEmitter();
   @Output() public cerrar = new EventEmitter();
   registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;
+  adjuntos: Data.AdjuntosArray[] = [];
+  apiUrl = '';
 
   icons: Icon[] = [];
-
-  adjuntos: Data.Adjunto[] = [];
-  adjuntosSelected: Data.Adjunto[] = [];
 
   configHeaders = [
     {
@@ -92,9 +92,11 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   constructor(
+    @Inject('environment') environment,
     private permissionsService: NgxPermissionsService,
     private otFacade: OtFacade
   ) {
+    this.apiUrl = environment.api || 'http://localhost:4040';
     this.subscription.add(
       permissionsService.permissions$.subscribe(permissions => {
         if (permissions.OT_VER_VALOR_LPU) {
@@ -135,16 +137,28 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const docx = 'docx';
-    const jpg = 'jpg';
-    const pdf = 'pdf';
+    const docx = '.docx';
+    const jpg = '.jpeg';
+    const pdf = '.pdf';
     this.icons[docx] = 'pi-file';
     this.icons[jpg] = 'pi-image';
     this.icons[pdf] = 'pi-file-pdf';
     this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
     this.subscription.add(
       this.registosLibroDeObras$.subscribe(registros => {
-        registros.forEach(registro => this.adjuntos.push(...registro.adjuntos));
+        registros.forEach(registro => {
+          const temp: Data.AdjuntosArray[] = registro.archivos_adjuntos.map(
+            adjunto => ({
+              autor: registro.usuario_nombre,
+              fecha: registro.created_at,
+              extension: adjunto.extension,
+              nombre_original: adjunto.nombre_original,
+              size: adjunto.size,
+              url: adjunto.url,
+            })
+          );
+          this.adjuntos.push(...temp);
+        });
       })
     );
   }
@@ -163,11 +177,16 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   getIcon(type: string): void {
+    console.log(type);
     console.log('arr', this.icons);
     return this.icons[type];
   }
 
   tabSelected(event): void {
     // console.log('event', event);
+  }
+
+  getUrl(url: string): string {
+    return `${this.apiUrl}${url}`;
   }
 }
