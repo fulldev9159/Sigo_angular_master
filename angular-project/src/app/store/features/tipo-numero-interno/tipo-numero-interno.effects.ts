@@ -20,12 +20,11 @@ export class TipoNumeroInternoEffects {
   getTiposNumeroInterno$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TipoNumeroInternoActions.getTiposNumeroInterno),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.tipoNumeroInternoService.getTiposNumeroInterno(profile.id).pipe(
-          map((tiposNumeroInterno: Data.TipoNumeroInterno[]) =>
+      concatMap(() =>
+        this.tipoNumeroInternoService.getTiposNumeroInterno().pipe(
+          map((response: Data.ResponseTipoNumeroInterno) =>
             TipoNumeroInternoActions.getTiposNumeroInternoSuccess({
-              tiposNumeroInterno,
+              tiposNumeroInterno: response.data.items,
             })
           ),
           catchError(error =>

@@ -23,7 +23,7 @@ import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicaci
 })
 export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  contractType$ = new BehaviorSubject<string>('MOVIL');
+  contractType$ = new BehaviorSubject<string>('FIJO');
   authLogin: Login = null;
 
   cubicacionSeleccionada: Cubicacion = null;
