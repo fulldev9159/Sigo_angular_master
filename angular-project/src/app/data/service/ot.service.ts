@@ -276,13 +276,13 @@ export class OTService {
     const formData = new FormData();
     formData.append('ot_id', registro.ot_id.toString());
     formData.append('comment', registro.observaciones);
-    for (const file of registro.files) {
-      formData.append('file', file, file.name);
+    if (registro.files && registro.files.length > 0) {
+      for (const file of registro.files) {
+        formData.append('file', file, file.name);
+      }
     }
-    console.log('Agregar libro de obras. no implementado aún', registro);
     console.log('FormData', formData);
     return this.http.post<any>(`${this.apiUrl}/ot/libro_obra/upload`, formData);
-    // return of({});
   }
 
   getRegistrosLibroObra(ot_id: number): Observable<Data.GetLibroObrasResponse> {

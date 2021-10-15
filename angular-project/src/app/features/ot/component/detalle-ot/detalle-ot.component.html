@@ -104,15 +104,15 @@
     <div class="row" style="padding: 15px;">
       <div class="col-12" *ngFor="let registro of registosLibroDeObras$|async ">
         <app-card [classCardHeader]="'bg-info'">
-          <ng-container card-header-title><strong>Perfil: </strong> {{registro.perfil_nombre}} --- <strong>Autor:</strong> {{registro.usuario_nombre}} </ng-container>
+          <ng-container card-header-title><strong>Autor:</strong> {{registro.usuario_nombre}} <strong style="margin-left: 10px;">Perfil: </strong> {{registro.perfil_nombre}} <strong style="margin-left: 10px;">Fecha:</strong> {{registro.created_at| date:'medium'}}</ng-container>
           <ng-container card-body>
             <div class="row">
-              <div class="col-md-7">
+              <div class="col-md-7" style="border-right: 3px solid #dde8ea">
                 {{registro.observaciones}}
               </div>
               <div class="col-md-5" style="display: flex;flex-direction: column;">
-                <p>Adjuntos</p>
-                <span *ngFor="let adjunto of registro.archivos_adjuntos"><a [href]="getUrl(adjunto.url)"> <i class="pi" [ngClass]="getIcon(adjunto.extension)"></i> {{adjunto.nombre_original}} {{adjunto.size}}</a></span>
+                <u>Adjuntos</u>
+                <span style="margin-top:5px;" *ngFor="let adjunto of registro.archivos_adjuntos"><a [href]="getUrl(adjunto.url)"> <i class="pi" [ngClass]="getIcon(adjunto.extension)"></i> {{adjunto.nombre_original}}{{adjunto.extension}} ({{adjunto.size}})</a></span>
               </div>
             </div>
           </ng-container>
@@ -126,8 +126,8 @@
       <p-table [value]="adjuntos" dataKey="code" responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>
-            <th>Autor</th>
-            <th>Nombre</th>
+            <th style="width: 21%;">Autor</th>
+            <th style="width: 33%;">Nombre</th>
             <th>Fecha</th>
             <th>Extensión</th>
             <th>Peso</th>
@@ -138,7 +138,7 @@
           <tr>
             <td>{{product.autor}}</td>
             <td>{{product.nombre_original}}</td>
-            <td>{{product.fecha}}</td>
+            <td>{{product.fecha| date:'medium'}}</td>
             <td>{{product.extension}}</td>
             <td>{{product.size}}</td>
             <td><a [href]="getUrl(product.url)" download="product.nombre_original">Descargar</a></td>
