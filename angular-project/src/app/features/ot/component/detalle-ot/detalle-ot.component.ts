@@ -140,9 +140,19 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
     const docx = '.docx';
     const jpg = '.jpeg';
     const pdf = '.pdf';
+    const png = '.PNG';
+    const json = '.json';
+    const txt = '.txt';
+    const xls = '.xls';
+    const csv = '.csv';
     this.icons[docx] = 'pi-file';
+    this.icons[json] = 'pi-file';
+    this.icons[txt] = 'pi-file';
     this.icons[jpg] = 'pi-image';
+    this.icons[png] = 'pi-image';
     this.icons[pdf] = 'pi-file-pdf';
+    this.icons[xls] = 'pi-file-excel';
+    this.icons[csv] = 'pi-file-excel';
     this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
     this.subscription.add(
       this.registosLibroDeObras$.subscribe(registros => {
