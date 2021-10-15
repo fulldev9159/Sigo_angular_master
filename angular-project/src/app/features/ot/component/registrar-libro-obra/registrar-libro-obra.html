@@ -6,7 +6,7 @@
     <br>
     <label>Adjuntar evidencias</label>
     <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" multiple="multiple" accept=".docx,.json,image/*,application/pdf,video/JPEG,application/gzip,application/zip,.zip,.rar,.7zip,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed,dwg,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-    text/plain" maxFileSize="1000000">
+    text/plain" maxFileSize="50000000">
 
     </p-fileUpload>
   </div>

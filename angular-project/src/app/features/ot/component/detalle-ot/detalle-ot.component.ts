@@ -187,8 +187,6 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   getIcon(type: string): void {
-    console.log(type);
-    console.log('arr', this.icons);
     return this.icons[type];
   }
 
@@ -198,5 +196,26 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
 
   getUrl(url: string): string {
     return `${this.apiUrl}${url}`;
+  }
+
+  getColor(extension: string): string {
+    if (extension === '.xls' || extension === '.csv') {
+      return '#047004';
+    }
+    if (
+      extension === '.docx' ||
+      extension === '.txt' ||
+      extension === '.json'
+    ) {
+      return '#0d0d5a';
+    }
+
+    if (extension === '.pdf') {
+      return '#ab0e0e';
+    }
+
+    if (extension === '.jpeg' || extension === '.PNG') {
+      return '#01a5a5';
+    }
   }
 }
