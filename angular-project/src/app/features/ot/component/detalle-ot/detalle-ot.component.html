@@ -107,12 +107,17 @@
           <ng-container card-header-title><strong>Autor:</strong> {{registro.usuario_nombre}} <strong style="margin-left: 10px;">Perfil: </strong> {{registro.perfil_nombre}} <strong style="margin-left: 10px;">Fecha:</strong> {{registro.created_at| date:'medium'}}</ng-container>
           <ng-container card-body>
             <div class="row">
-              <div class="col-md-7" style="border-right: 3px solid #dde8ea">
+              <div class="col-md-7" style="border-right: 3px solid #dde8ea;color: #666565;white-space: pre-line;">
                 {{registro.observaciones}}
               </div>
               <div class="col-md-5" style="display: flex;flex-direction: column;">
                 <u>Adjuntos</u>
-                <span style="margin-top:5px;" *ngFor="let adjunto of registro.archivos_adjuntos"><a [href]="getUrl(adjunto.url)"> <i class="pi" [ngClass]="getIcon(adjunto.extension)"></i> {{adjunto.nombre_original}}{{adjunto.extension}} ({{adjunto.size}})</a></span>
+                <span *ngIf="registro.archivos_adjuntos.length===0" class="download-link">No existen adjuntos</span>
+                <span style="margin-top:5px;" *ngFor="let adjunto of registro.archivos_adjuntos">
+                  <a [href]="getUrl(adjunto.url)" class="download-link">
+                    <i class="pi" [ngClass]="getIcon(adjunto.extension)" [ngStyle]="{color:getColor(adjunto.extension)}"></i>
+                    {{adjunto.nombre_original}}{{adjunto.extension}} ({{adjunto.size}})
+                  </a></span>
               </div>
             </div>
           </ng-container>

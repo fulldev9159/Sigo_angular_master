@@ -290,6 +290,11 @@ export class OTService {
     return this.http.post<Data.GetLibroObrasResponse>(
       `${this.apiUrl}/ot/libro_obra/get`,
       {
+        pagination: {
+          page: 1,
+          items_per_page: 100,
+          field_order: [{ created_at: 'DESC' }],
+        },
         ot_id,
       }
     );
