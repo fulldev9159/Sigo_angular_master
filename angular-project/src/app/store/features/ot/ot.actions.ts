@@ -108,7 +108,7 @@ export const stateOtError = createAction(
 
 export const postOt = createAction(
   '[Ot Post] CREATE Ot',
-  props<{ ot: OtModel.RequestCreateOT }>()
+  props<{ ot: OtModel.RequestCreateOT | OtModel.RequestCreateOTFijo }>()
 );
 
 export const postOtSuccess = createAction(

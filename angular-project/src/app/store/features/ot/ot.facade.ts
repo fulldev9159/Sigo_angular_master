@@ -82,7 +82,9 @@ export class OtFacade {
   // REPLY
 
   // POST
-  public postOt(ot: OTmodel.RequestCreateOT): void {
+  public postOt(
+    ot: OTmodel.RequestCreateOT | OTmodel.RequestCreateOTFijo
+  ): void {
     this.store.dispatch(otActions.postOt({ ot }));
   }
 
