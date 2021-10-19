@@ -46,41 +46,41 @@ Crear OT contrato movil
      # Elementos que no deberían estar visibles
 
      # Elementos que deberían estar visibles
-    Wait Until Element Is Visible    ${selector nombre OT}          timeout=15
-    Wait Until Element Is Visible    ${selector tipo OT}            timeout=15
-    Wait Until Element Is Visible    ${selector cubicacion}         timeout=15
-    Wait Until Element Is Visible    ${selector plan}               timeout=15
-    Wait Until Element Is Visible    ${selector sitio}              timeout=15
-    Wait Until Element Is Visible    ${selector radio opex}         timeout=15
-    Wait Until Element Is Visible    ${selector radio capex}        timeout=15
-    Wait Until Element Is Visible    ${selector pmo}                timeout=15
-    Wait Until Element Is Visible    ${selector lp}                 timeout=15
-    Wait Until Element Is Visible    ${selector pep2}               timeout=15
-    element should not be visible    ${selector pep2 provisorio}
-    element should not be visible    ${selector opex}
-    element should not be visible    ${selector sap}
-    element should not be visible    ${selector ceco}
-    element should not be visible    ${selector ceco provisorio}
-    Wait Until Element Is Visible    ${selector fecha inicio}
-    Wait Until Element Is Visible    ${selector fecha termino}
-    Wait Until Element Is Visible    ${selector proyecto}
-    Wait Until Element Is Visible    ${selector observaciones}
-    Wait Until Element Is Visible    ${selector guardar}
+    # Wait Until Element Is Visible    ${selector nombre OT}          timeout=15
+    # Wait Until Element Is Visible    ${selector tipo OT}            timeout=15
+    # Wait Until Element Is Visible    ${selector cubicacion}         timeout=15
+    # Wait Until Element Is Visible    ${selector plan}               timeout=15
+    # Wait Until Element Is Visible    ${selector sitio}              timeout=15
+    # Wait Until Element Is Visible    ${selector radio opex}         timeout=15
+    # Wait Until Element Is Visible    ${selector radio capex}        timeout=15
+    # Wait Until Element Is Visible    ${selector pmo}                timeout=15
+    # Wait Until Element Is Visible    ${selector lp}                 timeout=15
+    # Wait Until Element Is Visible    ${selector pep2}               timeout=15
+    # element should not be visible    ${selector pep2 provisorio}
+    # element should not be visible    ${selector opex}
+    # element should not be visible    ${selector sap}
+    # element should not be visible    ${selector ceco}
+    # element should not be visible    ${selector ceco provisorio}
+    # Wait Until Element Is Visible    ${selector fecha inicio}
+    # Wait Until Element Is Visible    ${selector fecha termino}
+    # Wait Until Element Is Visible    ${selector proyecto}
+    # Wait Until Element Is Visible    ${selector observaciones}
+    # Wait Until Element Is Visible    ${selector guardar}
 
 
      # Elementos habilitados y los que no
-    element should be enabled     ${selector nombre OT}
-    element should be enabled     ${selector tipo OT}
-    element should be enabled     ${selector cubicacion}
-    element should be disabled    ${selector plan}
-    element should be disabled    ${selector sitio}
-    element should be disabled    ${selector pmo}
-    element should be disabled    ${selector lp}
-    element should be disabled    ${selector pep2}
-    element should be enabled     ${selector fecha inicio}
-    element should be enabled     ${selector fecha termino}
-    element should be enabled     ${selector proyecto}
-    element should be enabled     ${selector observaciones}
+    # element should be enabled     ${selector nombre OT}
+    # element should be enabled     ${selector tipo OT}
+    # element should be enabled     ${selector cubicacion}
+    # element should be disabled    ${selector plan}
+    # element should be disabled    ${selector sitio}
+    # element should be disabled    ${selector pmo}
+    # element should be disabled    ${selector lp}
+    # element should be disabled    ${selector pep2}
+    # element should be enabled     ${selector fecha inicio}
+    # element should be enabled     ${selector fecha termino}
+    # element should be enabled     ${selector proyecto}
+    # element should be enabled     ${selector observaciones}
     # element should be disabled    ${selector guardar}
 
 

@@ -76,6 +76,33 @@ export interface RequestCreateOT {
   };
 }
 
+export interface RequestCreateOTFijo {
+  cubicacion_id: number;
+  fecha_fin: Date;
+  fecha_inicio: Date;
+  nombre: string;
+  numero_interno: string;
+  observaciones: string;
+  propietario_id: number;
+  sustento_financiero: {
+    tipo_sustento?: string;
+    capex_id?: number;
+    opex_id?: number;
+    capex_provisorio?: {
+      pmo_codigo: number;
+      lp_codigo: string;
+      pep2_codigo: string;
+    };
+    opex_provisorio?: {
+      id_opex: string;
+      cuenta_sap: string;
+      ceco_codigo: string;
+    };
+  };
+  tipo: string;
+  tipo_numero_interno_id: number;
+}
+
 export interface DataRspDetalleOT {
   id: number;
   nombre: string;

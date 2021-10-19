@@ -51,6 +51,7 @@ _Element exist in table
     [Arguments]              ${nombre}                                           
     _Wait visibility         css:app-table>div>p-table>div>div>div>span>input
     input text               css:app-table>div>p-table>div>div>div>span>input    ${nombre} 
+    sleep                    0.5
     ${cantidad de filas}=    get element count                                   css:.p-datatable-wrapper>table>tbody>tr
     ${status}=               Evaluate                                            ${cantidad de filas} > 0
     [return]                 ${status}

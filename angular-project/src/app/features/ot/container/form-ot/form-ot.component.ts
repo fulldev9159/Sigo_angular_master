@@ -23,7 +23,7 @@ import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicaci
 })
 export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  contractType$ = new BehaviorSubject<string>('MOVIL');
+  contractType$ = new BehaviorSubject<string>('');
   authLogin: Login = null;
 
   cubicacionSeleccionada: Cubicacion = null;
@@ -169,15 +169,19 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
             if (this.cubicacionSeleccionada) {
               // TODO: checkear el tipo contrato de la cubicacion
-              const contractType = 'MOVIL';
+              console.log(
+                this.cubicacionSeleccionada.contrato_marco_tipo_nombre
+              );
+              const contractType =
+                this.cubicacionSeleccionada.contrato_marco_tipo_nombre;
 
               // TODO descomentar ésto cuando la obtención del tipo de contrato sea dinámica
-              //// if (contractType === 'FIJO' || contractType === 'ORDINARIO') {
-              ////   // TODO: se necesita obtener el listado de PMOs sin especificar un sitio
-              ////   this.otFacade.getPmosAction({
-              ////     sitio_codigo: 'NEW4PHW0003F10',
-              ////   });
-              //// }
+              if (contractType === 'Fijo' || contractType === 'Ordinario') {
+                // TODO: se necesita obtener el listado de PMOs sin especificar un sitio
+                this.otFacade.getPmosAction({
+                  sitio_codigo: '',
+                });
+              }
 
               this.contractType$.next(contractType);
             }
@@ -289,7 +293,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
   touch(): void {
     const contractType = this.contractType$.value;
 
-    if (contractType === 'MOVIL') {
+    if (contractType === 'Móvil') {
       if (
         this.generalForm &&
         this.planProyectoForm &&
@@ -301,7 +305,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         this.sustentoFinancieroForm.touch();
         this.extrasForm.touch();
       }
-    } else if (contractType === 'FIJO') {
+    } else if (contractType === 'Fijo') {
       if (
         this.generalForm &&
         this.numeroInternoForm &&
@@ -313,7 +317,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         this.sustentoFinancieroForm.touch();
         this.extrasForm.touch();
       }
-    } else if (contractType === 'ORDINARIO') {
+    } else if (contractType === 'Ordinario') {
       if (
         this.generalForm &&
         this.detalleAdjudicacionForm &&
@@ -331,7 +335,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
   get valid(): boolean {
     const contractType = this.contractType$.value;
 
-    if (contractType === 'MOVIL') {
+    if (contractType === 'Móvil') {
       if (
         this.generalForm &&
         this.planProyectoForm &&
@@ -345,7 +349,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
           this.extrasForm.valid
         );
       }
-    } else if (contractType === 'FIJO') {
+    } else if (contractType === 'Fijo') {
       if (
         this.generalForm &&
         this.numeroInternoForm &&
@@ -359,7 +363,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
           this.extrasForm.valid
         );
       }
-    } else if (contractType === 'ORDINARIO') {
+    } else if (contractType === 'Ordinario') {
       if (
         this.generalForm &&
         this.detalleAdjudicacionForm &&
@@ -383,11 +387,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
     if (this.valid) {
       const contractType = this.contractType$.value;
 
-      if (contractType === 'MOVIL') {
+      if (contractType === 'Móvil') {
         this.saveMovilForm();
-      } else if (contractType === 'FIJO') {
+      } else if (contractType === 'Fijo') {
         this.saveFijoForm();
-      } else if (contractType === 'ORDINARIO') {
+      } else if (contractType === 'Ordinario') {
         this.saveOrdinarioForm();
       }
     }
@@ -485,6 +489,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       fecha_inicio,
       fecha_fin,
       observaciones,
+      proyecto_id: +proyecto_id,
       sustento_financiero: {
         tipo_sustento: costos.toUpperCase(),
         capex_id: null,
@@ -493,7 +498,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         opex_provisorio: null,
       },
 
-      tipo_numero_interno_id,
+      tipo_numero_interno_id: +tipo_numero_interno_id,
       numero_interno,
     };
 
@@ -520,6 +525,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     }
 
     console.log('SAVE contrato fijo', request);
+    this.otFacade.postOt(request);
   }
 
   saveOrdinarioForm(): void {

@@ -25,7 +25,7 @@
                 <hr>
               </div>
 
-              <ng-container *ngIf="(contractType$ | async) === 'MOVIL'">
+              <ng-container *ngIf="(contractType$ | async) === 'Móvil'">
                 <app-plan-proyecto-form [form]="form.get('planProyecto')" [cubicacion]="cubicacionSeleccionada" #planProyectoForm></app-plan-proyecto-form>
 
                 <div class="col-12">
@@ -33,7 +33,7 @@
                 </div>
               </ng-container>
 
-              <ng-container *ngIf="(contractType$ | async) === 'FIJO'">
+              <ng-container *ngIf="(contractType$ | async) === 'Fijo'">
                 <app-numero-interno-form [form]="form.get('numeroInterno')" #numeroInternoForm></app-numero-interno-form>
 
                 <div class="col-12">
@@ -41,7 +41,7 @@
                 </div>
               </ng-container>
 
-              <ng-container *ngIf="(contractType$ | async) === 'ORDINARIO'">
+              <ng-container *ngIf="(contractType$ | async) === 'Ordinario'">
                 <app-detalle-adjudicacion-form [form]="form.get('detalleAdjudicacion')" #detalleAdjudicacionForm></app-detalle-adjudicacion-form>
 
                 <div class="col-12">
@@ -49,12 +49,15 @@
                 </div>
               </ng-container>
 
-              <app-sustento-financiero-form [form]="form.get('sustentoFinanciero')" #sustentoFinancieroForm></app-sustento-financiero-form>
+              <ng-container *ngIf="(contractType$ | async) !== ''">
+                <app-sustento-financiero-form [form]="form.get('sustentoFinanciero')" #sustentoFinancieroForm></app-sustento-financiero-form>
 
-              <div class="col-12">
-                <hr>
-              </div>
-              <app-extras-form [form]="form.get('extras')" #extrasForm></app-extras-form>
+                <div class="col-12">
+                  <hr>
+                </div>
+                <app-extras-form [form]="form.get('extras')" #extrasForm></app-extras-form>
+              </ng-container>
+
 
               <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
                 <button (click)="cancel();" class="btn btn-light mr-2">Cancelar</button>
@@ -63,7 +66,7 @@
             </div>
             <div class="col-xs-12 col-md-4">
               <app-cubicacion-detail [cubicacion]="cubicacionSeleccionada"></app-cubicacion-detail>
-              <ng-container *ngIf="(contractType$ | async) === 'MOVIL'">
+              <ng-container *ngIf="(contractType$ | async) === 'Móvil'">
                 <app-plan-proyecto-detail [nombrePlan]="nombre_plan_proyecto" [sitio]="sitioSeleccionado"></app-plan-proyecto-detail>
               </ng-container>
             </div>

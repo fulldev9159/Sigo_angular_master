@@ -4,6 +4,10 @@
     <table class="table table-borderless table-sm">
       <tbody>
         <tr>
+          <td><strong>Tipo Contrato</strong></td>
+          <td>{{ cubicacion ? ': ' + cubicacion.contrato_marco_tipo_nombre : ' ---' }}</td>
+        </tr>
+        <tr>
           <td><strong>Contrato</strong></td>
           <td>{{ cubicacion ? ': ' + cubicacion.contrato_marco_nombre : ' ---' }}</td>
         </tr>
