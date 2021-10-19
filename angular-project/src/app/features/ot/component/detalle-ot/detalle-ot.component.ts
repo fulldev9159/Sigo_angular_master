@@ -137,14 +137,14 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const docx = '.docx';
-    const jpg = '.jpeg';
-    const pdf = '.pdf';
-    const png = '.PNG';
-    const json = '.json';
-    const txt = '.txt';
-    const xls = '.xls';
-    const csv = '.csv';
+    const docx = 'docx';
+    const jpg = 'jpeg';
+    const pdf = 'pdf';
+    const png = 'PNG';
+    const json = 'json';
+    const txt = 'txt';
+    const xls = 'xls';
+    const csv = 'csv';
     this.icons[docx] = 'pi-file';
     this.icons[json] = 'pi-file';
     this.icons[txt] = 'pi-file';
@@ -187,6 +187,7 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   getIcon(type: string): void {
+    console.log();
     return this.icons[type];
   }
 
@@ -199,22 +200,18 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   getColor(extension: string): string {
-    if (extension === '.xls' || extension === '.csv') {
+    if (extension === 'xls' || extension === 'csv') {
       return '#047004';
     }
-    if (
-      extension === '.docx' ||
-      extension === '.txt' ||
-      extension === '.json'
-    ) {
+    if (extension === 'docx' || extension === 'txt' || extension === 'json') {
       return '#0d0d5a';
     }
 
-    if (extension === '.pdf') {
+    if (extension === 'pdf') {
       return '#ab0e0e';
     }
 
-    if (extension === '.jpeg' || extension === '.PNG') {
+    if (extension === 'jpeg' || extension === 'PNG') {
       return '#01a5a5';
     }
   }
