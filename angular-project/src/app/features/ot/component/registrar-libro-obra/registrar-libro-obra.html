@@ -5,9 +5,12 @@
     <app-textarea [control]="formControls.observaciones" label="*Observaciones" [rows]="2"></app-textarea>
     <br>
     <label>Adjuntar evidencias</label>
-    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" multiple="multiple" accept=".docx,.json,image/*,application/pdf,video/JPEG,application/gzip,application/zip,.zip,.rar,.7zip,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed,dwg,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-    text/plain" maxFileSize="50000000">
-
+    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" multiple="multiple" accept=".docx,.doc,.gif,.json,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,zip,.dwg,.csv,.xls,.ppt,.pptx,text/plain" maxFileSize="50000000">
     </p-fileUpload>
+
+    <label style="color: #464646;font-weight: 400;">
+      <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
+      <span style="word-spacing: 5px">.docx .doc .gif .json .jpeg .pjpeg .png .txt .pdf .gzip .zip .rar .7zip zip .dwg .csv .xls .ppt .pptx </span>
+    </label>
   </div>
 </form>

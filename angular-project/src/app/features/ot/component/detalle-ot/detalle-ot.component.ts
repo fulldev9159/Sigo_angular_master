@@ -138,7 +138,8 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const docx = 'docx';
-    const jpg = 'jpeg';
+    const jpg = 'jpg';
+    const jpeg = 'jpeg';
     const pdf = 'pdf';
     const png = 'PNG';
     const json = 'json';
@@ -149,6 +150,7 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
     this.icons[json] = 'pi-file';
     this.icons[txt] = 'pi-file';
     this.icons[jpg] = 'pi-image';
+    this.icons[jpeg] = 'pi-image';
     this.icons[png] = 'pi-image';
     this.icons[pdf] = 'pi-file-pdf';
     this.icons[xls] = 'pi-file-excel';
@@ -187,7 +189,6 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
   }
 
   getIcon(type: string): void {
-    console.log();
     return this.icons[type];
   }
 
@@ -211,7 +212,7 @@ export class DetalleOtComponent implements OnInit, OnDestroy {
       return '#ab0e0e';
     }
 
-    if (extension === 'jpeg' || extension === 'PNG') {
+    if (extension === 'jpeg' || extension === 'jpg' || extension === 'PNG') {
       return '#01a5a5';
     }
   }
