@@ -69,3 +69,17 @@ export interface PermissionsGroup {
   module: string;
   permissions: Permiso[];
 }
+
+export interface RolsResponse {
+  data: { items: Rols[] };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface Rols {
+  id: number;
+  nombre: string;
+}

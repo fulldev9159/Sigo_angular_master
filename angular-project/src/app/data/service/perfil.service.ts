@@ -89,4 +89,8 @@ export class PerfilService {
         })
       );
   }
+
+  getRols(): Observable<Data.RolsResponse> {
+    return this.http.post<Data.RolsResponse>(`${this.apiUrl}/rol/get_all`, {});
+  }
 }

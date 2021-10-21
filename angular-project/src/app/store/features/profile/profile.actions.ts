@@ -98,4 +98,15 @@ export const getProfileSelectedError = createAction(
   props<{ error: any }>()
 );
 
+export const getRols = createAction('[Profile getRols] Get Rols');
+
+export const getRolsSuccess = createAction(
+  '[Profile getRols] Get Rols Success',
+  props<{ rols: Data.Rols[] }>()
+);
+
+export const getRolsError = createAction(
+  '[Profile getRols] Get Rols Error',
+  props<{ error: any }>()
+);
 // PROFILE LIST

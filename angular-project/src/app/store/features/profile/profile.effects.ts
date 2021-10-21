@@ -201,4 +201,18 @@ export class ProfileEffects {
       ),
     { dispatch: false }
   );
+
+  getRolsEffect = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.getRols),
+      concatMap(() =>
+        this.perfilService.getRols().pipe(
+          map((response: Data.RolsResponse) =>
+            profileActions.getRolsSuccess({ rols: response.data.items })
+          ),
+          catchError(error => of(profileActions.getRolsError({ error })))
+        )
+      )
+    )
+  );
 }
