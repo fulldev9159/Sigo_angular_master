@@ -117,8 +117,12 @@
                 <span style="margin-top:5px;" *ngFor="let adjunto of registro.archivos_adjuntos">
                   <a [href]="getUrl(adjunto.url)" class="download-link">
                     <i class="pi" [ngClass]="getIcon(adjunto.extension)" [ngStyle]="{color:getColor(adjunto.extension)}"></i>
-                    {{adjunto.nombre_original}}{{adjunto.extension}} ({{adjunto.size}})
-                  </a></span>
+                    {{adjunto.nombre_original}}.{{adjunto.extension}} ({{adjunto.size}})
+                  </a>
+                </span>
+                <span *ngIf="registro.archivos_adjuntos.length>0">
+                  <p-message severity="info" text="Por seguridad los enlaces tienen un tiempo de caducidad. Actualice esta página si los enlaces caducan"></p-message>&nbsp;
+                </span>
               </div>
             </div>
           </ng-container>
@@ -129,6 +133,9 @@
   <app-tab label="Anexos" icon="pi pi-fw pi-paperclip">
     <div class="card" style="padding: 26px;">
       <h5>Archivos adjuntos a la OT</h5>
+      <span>
+        <p-message severity="info" text="Por seguridad los enlaces tienen un tiempo de caducidad. Actualice esta página si los enlaces caducan"></p-message>&nbsp;
+      </span>
       <p-table [value]="adjuntos" dataKey="code" responsiveLayout="scroll">
         <ng-template pTemplate="header">
           <tr>
