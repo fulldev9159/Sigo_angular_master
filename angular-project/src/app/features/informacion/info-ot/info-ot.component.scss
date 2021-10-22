@@ -1,0 +1,14 @@
+:host ::ng-deep {
+  .card {
+    margin-bottom: 5px;
+  }
+
+  .card-header-title {
+    width: 100% !important;
+  }
+
+  .card-body {
+    border-left: 4px solid #dde8ea;
+    border-bottom: 2px solid #dde8ea;
+  }
+}

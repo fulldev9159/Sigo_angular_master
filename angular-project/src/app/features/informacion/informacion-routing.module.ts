@@ -9,33 +9,33 @@ const routes: Routes = [
     component: InformacionComponent,
     children: [
       {
-        path: 'info-ot',
+        path: 'info-ot/:id',
         loadChildren: () =>
           import('./info-ot/info-ot.module').then(m => m.InfoOtModule),
       },
       {
-        path: 'costeo',
+        path: 'costeo/:id',
         loadChildren: () =>
           import('./info-costeo/info-costeo.module').then(
             m => m.InfoCosteoModule
           ),
       },
       {
-        path: 'informe-avance',
+        path: 'informe-avance/:id',
         loadChildren: () =>
           import('./informe-avance/informe-avance.module').then(
             m => m.InformeAvanceModule
           ),
       },
       {
-        path: 'libro-obras',
+        path: 'libro-obras/:id',
         loadChildren: () =>
           import('./libro-obras/libro-obras.module').then(
             m => m.LibroObrasModule
           ),
       },
       {
-        path: 'anexos',
+        path: 'anexos/:id',
         loadChildren: () =>
           import('./anexos/anexos.module').then(m => m.AnexosModule),
       },
