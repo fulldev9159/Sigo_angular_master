@@ -26,6 +26,21 @@
               <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
             </div>
           </div>
+          <div class="row">
+            <div class="col-12" id="nombre-perfil-input">
+              <app-select [control]="formControls.rol" label="* Rol" ID="perfil-rol">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione un rol</option>
+                  <ng-container *ngFor="let rol of rols$ | async">
+                    <option [value]="rol.id">
+                      {{ rol.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+          </div>
+          <br>
           <br>
           <div class="row">
             <div class="col-12" id="descripcion-perfil-input">
@@ -43,7 +58,7 @@
           </div>
         </div>
         <div class="col-md-9">
-          <div class="row">
+          <div class="row" *ngIf="formPerfil.get('rol').value!==null">
             <div *ngFor="let item of (permissions$ | async)" class="col-xs-12 col-md-4 pt-2" id="modulos-pefil-{{item.module}}">
               <p-listbox formControlName="permisos_{{item.module}}" [options]="item.permissions" optionValue="id" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="nombre_corto">
                 <ng-template pTemplate="header">

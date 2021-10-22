@@ -18,6 +18,7 @@ export class FormProComponent implements OnInit, OnDestroy {
 
   permissions$: Observable<any>;
   perfilSelected$: Observable<Data.Perfil>;
+  rols$: Observable<Data.Rols[]>;
 
   formControls = {
     id: new FormControl(null),
@@ -30,6 +31,7 @@ export class FormProComponent implements OnInit, OnDestroy {
       Validators.required,
       Validators.maxLength(200),
     ]),
+    rol: new FormControl(null, [Validators.required]),
     permisos_OT: new FormControl(null),
     permisos_CUBICACION: new FormControl(null),
     permisos_PERFIL: new FormControl(null),
@@ -84,7 +86,9 @@ export class FormProComponent implements OnInit, OnDestroy {
   }
 
   initData(): void {
+    this.profileFacade.getRols();
     this.profileFacade.getPermissions();
+    this.rols$ = this.profileFacade.getRols$();
     this.subscription.add(
       this.profileFacade.getProfileSelected$().subscribe(perfil => {
         if (perfil) {

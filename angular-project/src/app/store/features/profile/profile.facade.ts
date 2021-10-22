@@ -61,5 +61,12 @@ export class ProfileFacade {
     this.store.dispatch(profileActions.resetData());
   }
 
+  public getRols(): void {
+    this.store.dispatch(profileActions.getRols());
+  }
+
+  public getRols$(): Observable<Data.Rols[]> {
+    return this.store.select(profileSelectors.getRols);
+  }
   // PROFILE
 }

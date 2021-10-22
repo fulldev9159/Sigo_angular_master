@@ -8,12 +8,14 @@ export interface StateProfile {
   perfiles: Data.Perfil[];
   permisos: Data.Permiso[];
   perfil_selected: Data.Perfil;
+  rols: Data.Rols[];
 }
 
 export const initialStateProfile: StateProfile = {
   perfiles: [],
   permisos: [],
   perfil_selected: null,
+  rols: [],
 };
 
 export const reducerProfile = createReducer(
@@ -35,5 +37,9 @@ export const reducerProfile = createReducer(
   })),
   on(ProfileActions.resetData, (state, payload) => ({
     ...initialStateProfile,
+  })),
+  on(ProfileActions.getRolsSuccess, (state, payload) => ({
+    ...state,
+    rols: payload.rols,
   }))
 );
