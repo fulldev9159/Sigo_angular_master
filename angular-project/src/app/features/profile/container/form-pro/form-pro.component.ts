@@ -94,6 +94,7 @@ export class FormProComponent implements OnInit, OnDestroy {
         if (perfil) {
           this.formPerfil.get('nombre').setValue(perfil.nombre);
           this.formPerfil.get('descripcion').setValue(perfil.descripcion);
+          this.formControls.rol.setValue(perfil.rol_id);
           const PermissionsModules = this.getPermissionsGroup(perfil.permisos);
           if (PermissionsModules.find(module => module.module === 'OT')) {
             this.formPerfil
@@ -126,6 +127,14 @@ export class FormProComponent implements OnInit, OnDestroy {
                 ).permissions.map(permiso => permiso.id)
               );
           }
+
+          setTimeout(
+            () =>
+              this.formControls.rol.markAsTouched({
+                onlySelf: true,
+              }),
+            1000
+          );
         }
       })
     );
@@ -170,6 +179,7 @@ export class FormProComponent implements OnInit, OnDestroy {
         nombre: this.formPerfil.get('nombre').value,
         descripcion: this.formPerfil.get('descripcion').value,
         permisos,
+        rol_id: +this.formPerfil.get('rol').value,
       };
 
       console.log('CREATE', request);
