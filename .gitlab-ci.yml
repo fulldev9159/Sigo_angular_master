@@ -20,10 +20,10 @@ unit test and lint:
   image: trion/ng-cli-karma:${CLI_VERSION}
   script:
     - cd angular-project
-    - npm ci
+    - npm cis
     - ng lint
-    - ng test --code-coverage --progress false --watch false
-  coverage: '/^Statements\s*:\s*([^%]+)/'
+    # - ng test --code-coverage --progress false --watch false
+  # coverage: '/^Statements\s*:\s*([^%]+)/'
 
 # e2e robotframework:
 #   <<: *connect_gcr
