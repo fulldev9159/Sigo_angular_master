@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { AnexosRoutingModule } from './anexos-routing.module';
 import { AnexosComponent } from './anexos.component';
-
+import { UiModule } from '@uiOT/ui.module';
 
 @NgModule({
   declarations: [AnexosComponent],
-  imports: [
-    CommonModule,
-    AnexosRoutingModule
-  ]
+  imports: [CommonModule, AnexosRoutingModule, UiModule],
 })
-export class AnexosModule { }
+export class AnexosModule {}
