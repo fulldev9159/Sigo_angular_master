@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
@@ -8,7 +8,7 @@ import * as data from '@data';
   templateUrl: './informacion.component.html',
   styleUrls: ['./informacion.component.scss'],
 })
-export class InformacionComponent implements OnInit {
+export class InformacionComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   detalleOt$: Observable<data.DataRspDetalleOT>;
   ot_id: number;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
@@ -8,7 +8,7 @@ import * as Data from '@data';
   templateUrl: './anexos.component.html',
   styleUrls: ['./anexos.component.scss'],
 })
-export class AnexosComponent implements OnInit {
+export class AnexosComponent implements OnInit, OnDestroy {
   apiUrl = '';
   subscription: Subscription = new Subscription();
   registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;

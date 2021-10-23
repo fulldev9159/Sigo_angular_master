@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
@@ -12,7 +12,7 @@ interface Icon {
   templateUrl: './libro-obras.component.html',
   styleUrls: ['./libro-obras.component.scss'],
 })
-export class LibroObrasComponent implements OnInit {
+export class LibroObrasComponent implements OnInit, OnDestroy {
   apiUrl = '';
   subscription: Subscription = new Subscription();
   registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;

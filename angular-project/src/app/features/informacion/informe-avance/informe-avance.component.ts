@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   templateUrl: './informe-avance.component.html',
   styleUrls: ['./informe-avance.component.scss'],
 })
-export class InformeAvanceComponent implements OnInit {
+export class InformeAvanceComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   constructor(private rutaActiva: ActivatedRoute) {}
