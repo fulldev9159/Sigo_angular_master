@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormOtComponent } from './container/form-ot/form-ot.component';
 
-import { CDetalleOtComponent } from './container/c-detalle-ot/c-detalle-ot.component';
 import { ListOtComponent } from './container/list-ot/list-ot.component';
 import { OtComponent } from './ot.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
@@ -43,18 +42,6 @@ export const routes: Routes = [
       //   canActivate: [NgxPermissionsGuard],
       //   data: { state: 'form-ot' },
       // },
-      {
-        path: 'detalle-ot/:id',
-        component: CDetalleOtComponent,
-        canActivate: [NgxPermissionsGuard],
-        data: {
-          permissions: {
-            only: 'OT_LISTAR',
-            redirectTo: '/app/ot/list-ot',
-          },
-          state: 'detalle-ot',
-        },
-      },
     ],
   },
 ];
