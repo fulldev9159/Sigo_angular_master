@@ -1,1 +1,28 @@
-<p>info-costeo works!</p>
+<div class="row" style="padding: 15px;">
+  <div class="col-xs-12 col-md-6">
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Detalle de la Cubicación</ng-container>
+      <ng-container card-body>
+        <ul>
+          <!-- <li>Tipo contrato: <span style="margin-right:8em"></span>{{(detalleOt$| async) ? (detalleOt$| async).contrato_marco_tipo_nombre : ' ---'}}</li> -->
+          <li>Contrato: <span style="margin-right:8em"></span>{{(detalleOt$| async) ? (detalleOt$| async).contrato_marco_nombre : ' ---'}}</li>
+          <li>Proveedor: <span style="margin-right:7.3em"></span>{{(detalleOt$| async) ? (detalleOt$| async).proveedor_nombre : ' ---'}}</li>
+          <li>Región: <span style="margin-right:8.8em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sitio.region_nombre : ' ---'}}</li>
+          <ng-container *ngxPermissionsOnly="['OT_VER_VALOR_LPU']">
+            <li>Total: <span style="margin-right:9.8em"></span> {{(detalleOt$| async) ? ((detalleOt$| async).total|currency : (detalleOt$| async).total_tipo_moneda : (detalleOt$| async).total_tipo_moneda===''?'':(detalleOt$| async).total_tipo_moneda + ' $':'.0-2':'es-CL') : ' ---'}}</li>
+          </ng-container>
+          <button *ngIf="(detalleOt$ | async) as detalleOt" (click)="getlpus(detalleOt.cubicacion_id)" class="btn btn-primary" style="width: 83px;font-size: 12px;margin-top: 10px;margin-left: -19px;">Ver Lpus</button>
+        </ul>
+      </ng-container>
+    </app-card>
+  </div>
+</div>
+
+<app-modal [display]="DisplayModal" (CloseEvent)="Close()">
+  <ng-container modal-header-title>Detalle de las LPUs</ng-container>
+  <ng-container modal-content>
+    <app-table [config]="ConfigTableResumen" [items]="detalleCubicacion$|async"></app-table>
+    <!-- <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span> -->
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>
