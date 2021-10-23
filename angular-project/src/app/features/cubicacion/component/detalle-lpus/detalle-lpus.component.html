@@ -1,8 +1,0 @@
-  <app-modal [display]="DisplayModal" (CloseEvent)="DisplayModal=false">
-    <ng-container modal-header-title>Detalle de las LPUs</ng-container>
-    <ng-container modal-content>
-      <app-table [config]="ConfigTableResumen" [items]="detalleCubicacion"></app-table>
-      <!-- <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span> -->
-    </ng-container>
-    <ng-container modal-footer></ng-container>
-  </app-modal>

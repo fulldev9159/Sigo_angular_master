@@ -8,10 +8,7 @@ import { FormOtComponent } from './container/form-ot/form-ot.component';
 
 import { UiModule } from '@uiOT/ui.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CDetalleOtComponent } from './container/c-detalle-ot/c-detalle-ot.component';
-import { DetalleOtComponent } from './component/detalle-ot/detalle-ot.component';
 import { AssignCoordinatorFormComponent } from './component/assign-coordinator-form/assign-coordinator-form.component';
-import { DetalleLpusComponent } from '@featureOT/cubicacion/component/detalle-lpus/detalle-lpus.component';
 import { AssignTrabajadorFormComponent } from './component/assign-trabajador-form/assign-trabajador-form.component';
 import { GeneralFormComponent } from './forms/general-form/general-form.component';
 import { PlanProyectoFormComponent } from './forms/plan-proyecto-form/plan-proyecto-form.component';
@@ -28,10 +25,7 @@ import { RegistrarLibroObraComponent } from './component/registrar-libro-obra/re
     OtComponent,
     ListOtComponent,
     FormOtComponent,
-    CDetalleOtComponent,
-    DetalleOtComponent,
     AssignCoordinatorFormComponent,
-    DetalleLpusComponent,
     AssignTrabajadorFormComponent,
     GeneralFormComponent,
     PlanProyectoFormComponent,

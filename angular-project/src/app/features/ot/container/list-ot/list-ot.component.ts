@@ -151,7 +151,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             class: 'p-button-rounded p-button-info p-mr-2',
             label: 'Información',
             onClick: (event: Event, item) => {
-              this.router.navigate(['/app/ot/detalle-ot/', item.id]);
+              this.router.navigate(['/app/informacion/info-ot', item.id]);
             },
           },
           {
