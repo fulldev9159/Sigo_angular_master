@@ -1,3 +1,11 @@
+h1 {
+  background: white;
+  padding-left: 16px;
+  color: #655e5c;
+  font-weight: 700;
+  margin: 0px 27px 0px 4px;
+}
+
 ul {
   background: #ffffff;
   border: 0 none;
@@ -11,18 +19,24 @@ ul {
   text-decoration: none;
   font-size: 100%;
   list-style: none;
+  padding-top: 3px;
 }
 
 .is-active {
   background: #ffffff;
   border-bottom: solid 3px #00507a;
+  font-weight: 700;
+}
+
+li {
+  border-bottom: 1px solid;
 }
 
 a {
   //   border: solid #a19f9d;
   border-width: 0 0 2px 0;
   padding: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   border-top-right-radius: 2px;
   border-top-left-radius: 2px;
   transition: box-shadow 0.2s;
@@ -39,6 +53,7 @@ a {
 
 li:hover {
   background: #f3f2f1;
+
 }
 
 .icon {
