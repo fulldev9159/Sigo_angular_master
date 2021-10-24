@@ -1,1 +1,65 @@
-<p>informe-avance works!</p>
+<div style="padding: 17px;">
+  <p-card>
+    <ng-template pTemplate="header">
+      <div style="padding: 16px;">
+        <button class="btn btn-primary" style="margin-right: 10px;">
+          <!-- <em class="pi pi-save mr-1" id="guardar-ot"></em> -->
+          Agregar Mano de obras/LPUs adicionales
+        </button>
+        <button class="btn btn-primary">
+          <!-- <em class="pi pi-save mr-1" id="guardar-ot"></em> -->
+          Materiales
+        </button>
+      </div>
+    </ng-template>
+    <p-table [value]="data" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
+      <ng-template pTemplate="header">
+        <tr>
+          <th colspan="10" style="background: #00507a;
+          color: white;
+          text-align: center;">Mano de obra/Lpus</th>
+        </tr>
+        <tr>
+          <th rowspan="2">Cor</th>
+          <th rowspan="2">Plano</th>
+          <th rowspan="2">Direccion</th>
+          <th rowspan="2">Clave</th>
+          <th rowspan="2">Código</th>
+          <th rowspan="2">Descrición</th>
+          <th rowspan="2">U.M</th>
+          <th colspan="3" style="background: #dfdfdf;
+          text-align: center;">
+            Cantidad
+          </th>
+        </tr>
+        <tr>
+          <th rowspan="2">Cub.</th>
+          <th rowspan="2">Inf.</th>
+          <th rowspan="2">Apr.</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-car>
+        <tr>
+          <td>{{car.cor}}</td>
+          <td>1</td>
+          <td>{{car.direccion}}</td>
+          <td>{{car.clave}}</td>
+          <td>{{car.codigo}}</td>
+          <td>{{car.descripcion}}</td>
+          <td>CU</td>
+          <td>{{car.cub}}</td>
+          <td>
+            <input type="number" style="width: 37px;">
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <ng-template pTemplate="footer">
+      <div style="display: flex;
+      justify-content: space-evenly;">
+        <button class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar borrador</button>
+        <button class="btn btn-primary"><em class="pi pi-play mr-1" id="guardar-ot"></em>Enviar informe</button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
