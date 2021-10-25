@@ -12,7 +12,7 @@
         </button>
       </div>
     </ng-template>
-    <p-table [value]="data" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
+    <p-table [value]="detalleCubicacion$|async" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
       <ng-template pTemplate="header">
         <tr>
           <th colspan="10" style="background: #00507a;
@@ -40,16 +40,26 @@
       </ng-template>
       <ng-template pTemplate="body" let-car>
         <tr>
-          <td>{{car.cor}}</td>
-          <td>1</td>
-          <td>{{car.direccion}}</td>
-          <td>{{car.clave}}</td>
-          <td>{{car.codigo}}</td>
-          <td>{{car.descripcion}}</td>
-          <td>CU</td>
-          <td>{{car.cub}}</td>
-          <td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{car.lpu_nombre}}</td>
+          <td></td>
+          <td>{{car.lpu_cantidad}}</td>
+          <td *ngIf="(loginAuth$ |async).perfil==='Trabajador EECC'">
             <input type="number" style="width: 37px;">
+          </td>
+          <td *ngIf="(loginAuth$ |async).perfil==='Gestor/JP'">
+            {{car.lpu_cantidad}}
+          </td>
+
+          <td *ngIf="(loginAuth$ |async).perfil==='Gestor/JP'">
+            <input type="number" style="width: 37px;">
+          </td>
+          <td *ngIf="(loginAuth$ |async).perfil==='Trabajador EECC'">
+            --
           </td>
         </tr>
       </ng-template>
