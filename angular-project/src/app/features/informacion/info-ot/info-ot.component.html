@@ -34,7 +34,7 @@
     </app-card>
   </div>
   <div class="col-xs-12 col-md-6">
-    <app-card [classCardHeader]="'bg-info'">
+    <app-card [classCardHeader]="'bg-info'" *ngIf="(detalleOt$| async).plan_nombre">
       <ng-container card-header-title>Plan de proyecto</ng-container>
       <ng-container card-body>
         <ul>
