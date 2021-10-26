@@ -8,7 +8,7 @@
       <span class="tab-title">Información</span>
     </a>
   </li>
-  <li>
+  <li *ngIf="(loginAuth$ |async).perfil!=='Trabajador EECC'">
     <a href="" [routerLink]="['costeo',ot_id]" [routerLinkActive]="['is-active']">
       <span class="icon pi pi-fw pi-dollar"></span>
       <span class="tab-title">Costeo</span>
