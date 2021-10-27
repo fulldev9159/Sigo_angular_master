@@ -4,6 +4,7 @@
       <ng-container card-header-title>Información de sistema</ng-container>
       <ng-container card-body>
         <ul>
+          <li>Tipo Contrato: <span style="margin-right:9.8em"></span> {{(detalleOt$| async) ? (detalleOt$| async).tipo_contrato_marco_nombre : ' ---'}}</li>
           <li>SCE session: <span style="margin-right:6.6em"></span>{{(detalleOt$| async) ?(detalleOt$| async).sce_sesion : ' ---'}}</li>
           <li>Etapa: <span style="margin-right:9.3em"></span>{{(detalleOt$| async) ? (detalleOt$| async).tipo_etapa_ot.nombre : ' ---'}}</li>
           <li>Estado: <span style="margin-right:8.8em"></span>{{(detalleOt$| async) ? (detalleOt$| async).tipo_estado_ot.nombre : ' ---'}}</li>

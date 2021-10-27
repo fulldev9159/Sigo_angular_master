@@ -225,11 +225,11 @@ export class OtFacade {
     this.store.dispatch(otActions.getDetalleOt({ id }));
   }
 
-  public getDetalleOtSuccess(detalleot: OTmodel.DataRspDetalleOT): void {
+  public getDetalleOtSuccess(detalleot: Data.DataRspDetalleOT): void {
     this.store.dispatch(otActions.getDetalleOtSuccess({ detalleot }));
   }
 
-  public getDetalleOtSelector$(): Observable<OTmodel.DataRspDetalleOT> {
+  public getDetalleOtSelector$(): Observable<Data.DataRspDetalleOT> {
     return this.store.select(otSelectors.getDetalleOt);
   }
 

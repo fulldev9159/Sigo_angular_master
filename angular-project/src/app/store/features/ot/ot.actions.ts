@@ -271,7 +271,7 @@ export const getDetalleOt = createAction(
 
 export const getDetalleOtSuccess = createAction(
   '[OT Get Detalle OT] GET Detalle OT Success',
-  props<{ detalleot: OtModel.DataRspDetalleOT }>()
+  props<{ detalleot: Data.DataRspDetalleOT }>()
 );
 
 export const getDetalleOtError = createAction(

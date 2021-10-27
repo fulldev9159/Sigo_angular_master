@@ -264,4 +264,5 @@ export interface DataRspDetalleOT {
       ceco_codigo: string;
     };
   };
+  tipo_contrato_marco_nombre: string;
 }

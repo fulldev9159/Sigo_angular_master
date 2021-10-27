@@ -23,7 +23,7 @@ export interface StateOt {
   cuentas_sap: OTModel.CuentaSap[];
   cecos: OTModel.CECO[];
   proyectos: OTModel.Proyecto[];
-  detalleOt: OTModel.DataRspDetalleOT;
+  detalleOt: Data.DataRspDetalleOT;
 
   coordinators: Data.User[];
   trabajadores: Data.User[];
