@@ -19,7 +19,7 @@ import {
   ApproveOTMinutesGenerationResponse,
   RejectOTMinutesGenerationResponse,
   ApprovalPagoOTResponse,
-  requestGetOTs,
+  RequestGetOTs,
 } from '@data';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class OTService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getOTsEjecucion(request: requestGetOTs): Observable<OTsResponse> {
+  getOTsEjecucion(request: RequestGetOTs): Observable<OTsResponse> {
     return this.http.post<OTsResponse>(
       `${this.apiUrl}/ingreot/ot/get/abiertas`,
       request

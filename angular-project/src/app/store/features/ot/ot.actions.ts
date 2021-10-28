@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import * as OtModel from './ot.model';
 import * as Data from '@data';
-import { OT, requestGetOTs } from '@data';
+import { OT, RequestGetOTs } from '@data';
 
 // GET OTs EJECUCION init
 

@@ -25,7 +25,7 @@ import { environment } from '@environment';
 
 import { Response } from '@storeOT/model';
 import * as OtModel from './ot.model';
-import { requestGetOTs } from '@data';
+import { RequestGetOTs } from '@data';
 
 @Injectable()
 export class OtEffects {
@@ -45,7 +45,7 @@ export class OtEffects {
       ofType(otActions.getOtEjecucion),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
       concatMap(([{ filtro_tipo }, profile]) => {
-        const request: requestGetOTs = {
+        const request: RequestGetOTs = {
           perfil_id: profile.id,
           filtro_propietario: 'EJECUCION',
           filtro_tipo,
