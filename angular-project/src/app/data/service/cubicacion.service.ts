@@ -1,14 +1,16 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { Response } from '@storeOT/model';
+import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   CubicacionWithLpu,
   CubicacionesResponse,
   LpusResponse,
   RequestEditCubicacion,
   EditCubicacionResponse,
+  Cubicacion,
 } from '@data';
 
 @Injectable({
@@ -16,15 +18,28 @@ import {
 })
 export class CubicacionService {
   apiUrl = '';
-  constructor(@Inject('environment') environment, private http: HttpClient) {
+  constructor(
+    @Inject('environment') environment,
+    private http: HttpClient,
+    private snackService: SnackBarService
+  ) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getCubicaciones(): Observable<CubicacionesResponse> {
-    return this.http.post<CubicacionesResponse>(
-      `${this.apiUrl}/cubicacion/get`,
-      {}
-    );
+  getCubicaciones(): Observable<Cubicacion[]> {
+    return this.http
+      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(
+              `No existen cubicaciones - ${res.status.description}`,
+              ''
+            );
+          }
+          return res.data.items;
+        })
+      );
   }
 
   getCubicacion(cubicacion_id: number): Observable<CubicacionWithLpu> {

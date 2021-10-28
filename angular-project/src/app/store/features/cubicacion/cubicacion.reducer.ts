@@ -40,10 +40,10 @@ export const initialStateCubicacion: StateCubicacion = {
 export const reducerCubicacion = createReducer(
   initialStateCubicacion,
 
-  on(CubicacionActions.getCubicaciones, state => state),
-  on(CubicacionActions.getCubicacionesSuccess, (state, payload) => ({
+  on(CubicacionActions.getCubs, state => state),
+  on(CubicacionActions.getCubsSuccess, (state, payload) => ({
     ...state,
-    cubicaciones: payload.cubicaciones,
+    cubicaciones: payload.cubs,
   })),
 
   on(CubicacionActions.resetSingleCubicacion, state => ({

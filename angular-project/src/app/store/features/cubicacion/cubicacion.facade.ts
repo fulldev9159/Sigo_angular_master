@@ -14,7 +14,7 @@ export class CubicacionFacade {
 
   // CUBICACION
   public getCubicacionAction(): void {
-    this.store.dispatch(cubicacionActions.getCubicaciones());
+    this.store.dispatch(cubicacionActions.getCubs());
   }
 
   public getCubicacionSelector$(): Observable<Cubicacion[]> {

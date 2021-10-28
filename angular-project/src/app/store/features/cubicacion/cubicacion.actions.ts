@@ -5,12 +5,12 @@ import { Cubicacion, CubicacionWithLpu, RequestEditCubicacion } from '@data';
 export const reset = createAction('[Cubicacion] reset');
 
 // GET CUBICACIONES init
-export const getCubicaciones = createAction('[Cubicacion] GET Cubicaciones');
-export const getCubicacionesSuccess = createAction(
+export const getCubs = createAction('[Cubicacion] GET Cubicaciones');
+export const getCubsSuccess = createAction(
   '[Cubicacion] GET Cubicaciones Success',
-  props<{ cubicaciones: Cubicacion[] }>()
+  props<{ cubs: Cubicacion[] }>()
 );
-export const getCubicacionesError = createAction(
+export const getCubsError = createAction(
   '[Cubicacion] GET Cubicaciones Error',
   props<{ error: any }>()
 );
