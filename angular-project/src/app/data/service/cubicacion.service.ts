@@ -20,6 +20,13 @@ export class CubicacionService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
+  getCubicaciones(): Observable<CubicacionesResponse> {
+    return this.http.post<CubicacionesResponse>(
+      `${this.apiUrl}/cubicacion/get`,
+      {}
+    );
+  }
+
   getCubicacion(
     perfil_id: number,
     cubicacion_id: number

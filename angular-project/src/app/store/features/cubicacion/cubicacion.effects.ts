@@ -42,7 +42,7 @@ export class CubicacionEffects {
     this.actions$.pipe(
       ofType(cubicacionActions.getCubicaciones),
       concatMap(() =>
-        this.http.post(`${environment.api}/cubicacion/get`, {}).pipe(
+        this.cubicacionService.getCubicaciones().pipe(
           map((res: CubicacionesResponse) => {
             if (+res.status.responseCode !== 0) {
               this.snackService.showMessage(
