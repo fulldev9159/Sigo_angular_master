@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Subscription, BehaviorSubject, of, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -103,11 +103,12 @@ export class FormOtComponent implements OnInit, OnDestroy {
     }),
     numeroInterno: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
-      numero_interno: new FormControl(null, [
-        Validators.required,
-        this.noWhitespace,
-        Validators.maxLength(100),
-      ]),
+      numeros_internos: new FormArray([]),
+      // numero_interno: new FormControl(null, [
+      //   Validators.required,
+      //   this.noWhitespace,
+      //   Validators.maxLength(100),
+      // ]),
     }),
     detalleAdjudicacion: new FormGroup({
       fecha_adjudicacion: new FormControl(null, [Validators.required]),
@@ -477,7 +478,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         ceco_provisorio,
       },
       extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
-      numeroInterno: { tipo_numero_interno_id, numero_interno },
+      numeroInterno: { tipo_numero_interno_id, numeros_internos },
     } = this.form.getRawValue();
 
     const request = {
@@ -498,7 +499,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
       },
 
       tipo_numero_interno_id: +tipo_numero_interno_id,
-      numero_interno,
+      numero_interno: numeros_internos.map(
+        numero_interno => numero_interno.numero_interno
+      ),
     };
 
     if (costos.toUpperCase() === 'CAPEX') {
@@ -524,7 +527,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     }
 
     console.log('SAVE contrato fijo', request);
-    this.otFacade.postOt(request);
+    // this.otFacade.postOt(request);
   }
 
   saveOrdinarioForm(): void {
