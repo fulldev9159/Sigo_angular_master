@@ -13,8 +13,24 @@
     <br>
   </div>
 
-  <div class="col-xs-12 col-md-6" id="control_numero_interno">
+  <ng-container formArrayName="numeros_internos">
+    <button (click)="addNumeroInterno()">add</button>
+    <div *ngFor="let n of myFormArray().controls; let i = index">
+      <ng-container [formGroupName]="i">
+        <label for="">{{i}}</label>
+        <input type="text" formControlName="numero_interno">
+        <button (click)="deleteNumeroInterno(i)">x</button>
+      </ng-container>
+
+    </div>
+  </ng-container>
+
+  <!-- <div class="col-xs-12 col-md-6" id="control_numero_interno"  *ngFor="let control of form.get('numeros_internos');index as i">
+    <input type="text" [control]>
     <app-input [control]="form.get('numero_interno')" label="Número interno" ID="numero-interno"></app-input>
     <br>
-  </div>
+  </div> -->
+
+  {{form.valid|json}}
+  {{form.value|json}}
 </div>
