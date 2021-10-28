@@ -20,9 +20,9 @@ export const reducerAuth = createReducer(
   on(authActions.reset, () => ({
     ...initialStateAuth,
   })),
-  on(authActions.login, state => ({
-    ...state,
-  })),
+  // on(authActions.login, state => ({
+  //   ...state,
+  // })),
   on(authActions.loginSuccess, (state, { loginResponse }) => ({
     ...state,
     login: loginResponse,
