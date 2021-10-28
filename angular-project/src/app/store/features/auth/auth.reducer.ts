@@ -23,9 +23,9 @@ export const reducerAuth = createReducer(
   on(authActions.login, state => ({
     ...state,
   })),
-  on(authActions.loginSuccess, (state, { login }) => ({
+  on(authActions.loginSuccess, (state, { loginResponse }) => ({
     ...state,
-    login,
-    currentProfile: login.perfiles[0] || null,
+    login: loginResponse,
+    currentProfile: loginResponse.perfiles[0] || null,
   }))
 );

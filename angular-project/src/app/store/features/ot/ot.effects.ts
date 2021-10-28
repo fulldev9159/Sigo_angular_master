@@ -371,7 +371,7 @@ export class OtEffects {
             id: data.id,
           })
           .pipe(
-            map((res: Response<OtModel.DataRspDetalleOT>) => {
+            map((res: Response<Data.DataRspDetalleOT>) => {
               if (+res.status.responseCode !== 0) {
                 this.snackService.showMessage(res.status.description, 'error');
               }
