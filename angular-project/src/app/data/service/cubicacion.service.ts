@@ -69,10 +69,11 @@ export class CubicacionService {
   }
 
   deleteOT(cubicacion_id: number): Observable<Response<string>> {
-    return this.http
-      .post<Response<string>>(`${this.apiUrl}/cubicacion/delete`, {
+    return this.http.post<Response<string>>(
+      `${this.apiUrl}/cubicacion/delete`,
+      {
         cubicacion_id,
-      })
-      .pipe(map(res => res));
+      }
+    );
   }
 }

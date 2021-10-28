@@ -89,16 +89,15 @@ export interface LpusRequest {
   cantidad: number;
 }
 
+// EDIT Cubicacion init
 export interface RequestEditCubicacion {
   cubicacion_id: number;
   cubicacion_nombre: string;
   region_id: number;
-  // usuario_id: number;
   contrato_marco_id: number;
   proveedor_id: number;
   lpus: LpusRequest[];
 }
-
 export interface EditCubicacionResponse {
   data: {
     id: number;
@@ -109,7 +108,7 @@ export interface EditCubicacionResponse {
     responseCode: number;
   };
 }
-
+// EDIT Cubicacion end
 export interface ResponseDetalleCubicacion {
   lpu_id: number;
   servicio_id: number;
