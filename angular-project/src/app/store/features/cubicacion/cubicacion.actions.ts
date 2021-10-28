@@ -1,6 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 import * as cubModel from './cubicacion.model';
-import { Cubicacion, CubicacionWithLpu, RequestEditCubicacion } from '@data';
+import {
+  Cubicacion,
+  CubicacionWithLpu,
+  RequestEditCubicacion,
+  ContratoMarco,
+} from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
 
@@ -96,18 +101,19 @@ export const postCubicacionError = createAction(
 
 // CUBICACION LIST
 
-// CUBICACION FORM
-export const getContractMarco = createAction('[ContactMarco Get] GET Data');
-
-export const getContractMarcoSuccess = createAction(
-  '[ContactMarco Get] GET Data Success',
-  props<{ contractMarco: cubModel.ContractMarco[] }>()
+// GET CONTRATO init
+export const getContractMarco = createAction(
+  '[Cubicacion Contrato Marco] GET Data'
 );
-
+export const getContractMarcoSuccess = createAction(
+  '[Cubicacion Contrato Marco] GET Data Success',
+  props<{ contratosMarcos: ContratoMarco[] }>()
+);
 export const getContractMarcoError = createAction(
-  '[ContactMarco Get] GET Data Error',
+  '[Cubicacion Contrato Marco] GET Data Error',
   props<{ error: any }>()
 );
+// GET CONTRATO end
 
 export const getSubContractProviders = createAction(
   '[SubContractedProviders Get] GET Data',

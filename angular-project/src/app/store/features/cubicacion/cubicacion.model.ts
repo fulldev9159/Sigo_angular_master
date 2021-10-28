@@ -1,10 +1,3 @@
-export interface ContractMarco {
-  id: number;
-  nombre: string;
-  tipo_contrato_id: string;
-  tipo_contrato_nombre: string;
-}
-
 export interface Provider {
   id: number;
   nombre: string;

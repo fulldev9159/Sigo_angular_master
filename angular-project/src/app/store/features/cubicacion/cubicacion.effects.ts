@@ -78,30 +78,15 @@ export class CubicacionEffects {
   getContractMarco$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getContractMarco),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/contratos_marco/get`, {
-            token: data.token,
-            usuario_id: data.usuario_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(
-                  `No existen contratos asosiados - ${res.status.description}`,
-                  ''
-                );
-              }
-              return cubActions.getContractMarcoSuccess({
-                contractMarco: res.data.items.sort((a, b) =>
-                  a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-                ),
-              });
-            }),
-            catchError(err =>
-              of(cubActions.getContractMarcoError({ error: err }))
-            )
+      concatMap(() =>
+        this.cubService.getContratos().pipe(
+          map(contratosMarcos =>
+            cubActions.getContractMarcoSuccess({ contratosMarcos })
+          ),
+          catchError(err =>
+            of(cubActions.getContractMarcoError({ error: err }))
           )
+        )
       )
     )
   );

@@ -4,7 +4,12 @@ import { Observable } from 'rxjs';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
 import * as cubModel from './cubicacion.model';
-import { Cubicacion, CubicacionWithLpu, RequestEditCubicacion } from '@data';
+import {
+  ContratoMarco,
+  Cubicacion,
+  CubicacionWithLpu,
+  RequestEditCubicacion,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -68,15 +73,15 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getContractMarco());
   }
 
-  public getContractMarcoSuccess(
-    contractMarco: cubModel.ContractMarco[]
-  ): void {
+  public getContractMarcoSuccess(contractMarco: ContratoMarco[]): void {
     this.store.dispatch(
-      cubicacionActions.getContractMarcoSuccess({ contractMarco })
+      cubicacionActions.getContractMarcoSuccess({
+        contratosMarcos: contractMarco,
+      })
     );
   }
 
-  public getContractMarcoSelector$(): Observable<cubModel.ContractMarco[]> {
+  public getContractMarcoSelector$(): Observable<ContratoMarco[]> {
     return this.store.select(cubicacionSelectors.getConstractMarco);
   }
   // CONSTRACT MARCO
@@ -172,9 +177,11 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getAutoSuggest({ filter, cantidad }));
   }
 
-  public getAutoSuggestSuccess(contractMarco: cubModel.ContractMarco[]): void {
+  public getAutoSuggestSuccess(contractMarco: ContratoMarco[]): void {
     this.store.dispatch(
-      cubicacionActions.getContractMarcoSuccess({ contractMarco })
+      cubicacionActions.getContractMarcoSuccess({
+        contratosMarcos: contractMarco,
+      })
     );
   }
 
