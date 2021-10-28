@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { map, filter, withLatestFrom } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
-import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { Cubicacion } from '@data';
 
 @Component({
   selector: 'app-general-form',

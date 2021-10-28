@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu } from '@data';
+import { CubicacionesResponse, CubicacionWithLpu } from '@data';
 import { Router } from '@angular/router';
 
 import {
@@ -40,23 +40,22 @@ export class CubicacionEffects {
 
   getCubicaciones$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(cubicacionActions.getCubicacion),
-      concatMap((data: any) =>
+      ofType(cubicacionActions.getCubicaciones),
+      concatMap(() =>
         this.http.post(`${environment.api}/cubicacion/get`, {}).pipe(
-          map((res: any) => {
+          map((res: CubicacionesResponse) => {
             if (+res.status.responseCode !== 0) {
               this.snackService.showMessage(
                 `No existen cubicaciones - ${res.status.description}`,
                 ''
               );
             }
-            return cubicacionActions.getCubicacionSuccess({
-              cubicacion: res.data.items,
+            return cubicacionActions.getCubicacionesSuccess({
+              cubicaciones: res.data.items,
             });
           }),
           catchError(err => {
-            console.log(err);
-            return of(cubicacionActions.getCubicacionError({ error: err }));
+            return of(cubicacionActions.getCubicacionesError({ error: err }));
           })
         )
       )

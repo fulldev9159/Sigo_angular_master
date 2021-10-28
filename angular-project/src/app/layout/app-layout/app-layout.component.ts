@@ -13,7 +13,6 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { NotificacionesFacade } from '@storeOT/features/notificaciones/notificaciones.facade';
 
-import { LoginAuth } from '@storeOT/features/auth/auth.model';
 import { LoadingService } from '@utilsSIGO/service-progress';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { Observable, Subject, Subscription, of } from 'rxjs';

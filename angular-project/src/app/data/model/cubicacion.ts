@@ -1,23 +1,46 @@
+// Get cubicaciones init
+export interface CubicacionesResponse {
+  data: {
+    items: Cubicacion[];
+  };
+
+  pagination: {
+    total_pages: number;
+    items_per_page: number;
+    field_order: any[];
+    page: number;
+    total_items: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
 export interface Cubicacion {
-  id: number;
-  nombre: string;
-  fecha_creacion: Date;
-  creador_usuario_id: number;
-  creador_username: string;
-  creador_usuario_nombre: string;
-  region_id: number;
-  region_nombre: string;
+  asignado: boolean;
   contrato_marco_id: number;
   contrato_marco_nombre: string;
   contrato_marco_tipo_id: number;
   contrato_marco_tipo_nombre: string;
-  proveedor_id: number;
-  proveedor_nombre: string;
+  creador_username: string;
+  creador_usuario_id: number;
+  creador_usuario_nombre: string;
+  fecha_creacion: string;
+  id: number;
+  nombre: string;
   ot_id: number;
   ot_nombre: string;
-  asignado: boolean;
+  proveedor_id: number;
+  proveedor_nombre: string;
+  region_id: number;
+  region_nombre: string;
   total: number;
+  total_tipo_moneda: string;
 }
+
+// Get cubicaciones done
 
 export interface Lpu {
   lpu_cantidad: number;
@@ -41,25 +64,6 @@ export interface CubicacionWithLpu extends Cubicacion {
 // interface FieldOrder {
 //   cubicacion_id: string;
 // }
-
-export interface CubicacionesResponse {
-  data: {
-    items: Cubicacion[];
-  };
-
-  pagination: {
-    total_pages: number;
-    items_per_page: number;
-    field_order: any[];
-    page: number;
-    total_items: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
 
 export interface LpusResponse {
   data: {

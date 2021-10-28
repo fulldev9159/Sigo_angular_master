@@ -1,15 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
 import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu } from '@data';
+import { Cubicacion, CubicacionWithLpu } from '@data';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
-  items: cubModel.Cubicacion[];
+  items: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
   cubicacionError: Error;
-  selectedCubicacion: cubModel.Cubicacion;
+  selectedCubicacion: Cubicacion;
   contractMarco: cubModel.ContractMarco[];
   subContractedProviders: cubModel.Provider[];
   subContractedRegions: cubModel.Region[];
@@ -40,10 +40,10 @@ export const initialStateCubicacion: StateCubicacion = {
 export const reducerCubicacion = createReducer(
   initialStateCubicacion,
 
-  on(CubicacionActions.getCubicacion, state => state),
-  on(CubicacionActions.getCubicacionSuccess, (state, payload) => ({
+  on(CubicacionActions.getCubicaciones, state => state),
+  on(CubicacionActions.getCubicacionesSuccess, (state, payload) => ({
     ...state,
-    items: payload.cubicacion,
+    items: payload.cubicaciones,
   })),
 
   on(CubicacionActions.resetSingleCubicacion, state => ({

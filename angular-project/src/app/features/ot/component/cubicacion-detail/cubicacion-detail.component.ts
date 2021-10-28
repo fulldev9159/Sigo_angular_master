@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
+import { Cubicacion } from '@data';
 
 @Component({
   selector: 'app-cubicacion-detail',

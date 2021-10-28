@@ -1,21 +1,22 @@
 import { createAction, props } from '@ngrx/store';
 import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu, RequestEditCubicacion } from '@data';
+import { Cubicacion, CubicacionWithLpu, RequestEditCubicacion } from '@data';
 
-// CUBICACION LIST
 export const reset = createAction('[Cubicacion] reset');
 
-export const getCubicacion = createAction('[Cubicacion GetAll] GET Cubicacion');
+// GET CUBICACIONES init
+export const getCubicaciones = createAction('[Cubicacion] GET Cubicaciones');
 
-export const getCubicacionSuccess = createAction(
-  '[Cubicacion GetAll] GET Cubicacion Success',
-  props<{ cubicacion: cubModel.Cubicacion[] }>()
+export const getCubicacionesSuccess = createAction(
+  '[Cubicacion] GET Cubicaciones Success',
+  props<{ cubicaciones: Cubicacion[] }>()
 );
 
-export const getCubicacionError = createAction(
-  '[Cubicacion GetAll] GET Cubicacion Error',
+export const getCubicacionesError = createAction(
+  '[Cubicacion] GET Cubicaciones Error',
   props<{ error: any }>()
 );
+// GET CUBICACIONES done
 
 export const resetSingleCubicacion = createAction(
   '[Cubicacion] reset single Cubicacion'
@@ -67,12 +68,12 @@ export const editCubicacionError = createAction(
 
 export const replyCubicacion = createAction(
   '[Cubicacion Reply] POST Reply Cubicacion',
-  props<{ cubicacion: cubModel.Cubicacion }>()
+  props<{ cubicacion: Cubicacion }>()
 );
 
 export const replyCubicacionSuccess = createAction(
   '[Cubicacion Reply] POST Reply Cubicacion Success',
-  props<{ cubicacion: cubModel.Cubicacion }>()
+  props<{ cubicacion: Cubicacion }>()
 );
 
 export const replyCubicacionError = createAction(
@@ -87,7 +88,7 @@ export const postCubicacion = createAction(
 
 export const postCubicacionSuccess = createAction(
   '[Cubicacion Post] CREATE Cubicacion Success',
-  props<{ cubicacion: cubModel.Cubicacion }>()
+  props<{ cubicacion: Cubicacion }>()
 );
 
 export const postCubicacionError = createAction(
@@ -213,7 +214,7 @@ export const getDetalleCubicacionError = createAction(
 // Clonar cubicacion
 export const clonarCubicacion = createAction(
   '[Clonar cubicacion] SET clonar cubicacion',
-  props<{ cubicacion: cubModel.Cubicacion; cubicacion_id: number }>()
+  props<{ cubicacion: Cubicacion; cubicacion_id: number }>()
 );
 
 export const clonarCubicacionSuccess = createAction(
@@ -228,6 +229,6 @@ export const clonarCubicacionError = createAction(
 export const selectCubicacion = createAction(
   '[OT] select Cubicacion',
   props<{
-    cubicacion: cubModel.Cubicacion;
+    cubicacion: Cubicacion;
   }>()
 );
