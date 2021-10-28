@@ -21,9 +21,7 @@ export class AuthEffects {
       ofType(authActions.login),
       concatMap(({ login }) =>
         this.authService.login(login).pipe(
-          map(loginResponse =>
-            authActions.loginSuccess({ loginResponse: loginResponse.data })
-          ),
+          map(loginResponse => authActions.loginSuccess({ loginResponse })),
           catchError(error => of(authActions.loginError({ error })))
         )
       )

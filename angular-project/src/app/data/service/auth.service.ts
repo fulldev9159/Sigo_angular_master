@@ -1,7 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LoginRequest, LoginResponse } from '../model';
+import { Login, LoginRequest, LoginResponse } from '@data';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,9 @@ export class AuthService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  login(login: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login_new`, login);
+  login(login: LoginRequest): Observable<Login> {
+    return this.http
+      .post<LoginResponse>(`${this.apiUrl}/login_new`, login)
+      .pipe(map(response => response.data));
   }
 }
