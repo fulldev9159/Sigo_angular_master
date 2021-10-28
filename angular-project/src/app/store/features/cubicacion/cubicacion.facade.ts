@@ -26,7 +26,9 @@ export class CubicacionFacade {
   }
 
   public getSingleCubicacion(id: number): void {
-    this.store.dispatch(cubicacionActions.getSingleCubicacion({ id }));
+    this.store.dispatch(
+      cubicacionActions.getSingleCubicacion({ cubicacion_id: id })
+    );
   }
 
   public getSingleCubicacion$(): Observable<CubicacionWithLpu> {

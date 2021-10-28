@@ -9,7 +9,7 @@ import {
   LpusResponse,
   RequestEditCubicacion,
   EditCubicacionResponse,
-} from '../model';
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -27,14 +27,9 @@ export class CubicacionService {
     );
   }
 
-  getCubicacion(
-    perfil_id: number,
-    cubicacion_id: number
-  ): Observable<CubicacionWithLpu> {
+  getCubicacion(cubicacion_id: number): Observable<CubicacionWithLpu> {
     return this.http
-      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {
-        perfil_id,
-      })
+      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
       .pipe(
         concatMap((cubsRes: CubicacionesResponse) => {
           const cubFound = cubsRes.data.items.find(

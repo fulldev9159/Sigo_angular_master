@@ -18,5 +18,4 @@ export interface Login {
   usuario_id: number;
   perfiles: Perfil[];
 }
-
-// Login done
+// Login end

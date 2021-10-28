@@ -17,7 +17,6 @@ export interface CubicacionesResponse {
     responseCode: number;
   };
 }
-
 export interface Cubicacion {
   asignado: boolean;
   contrato_marco_id: number;
@@ -39,32 +38,9 @@ export interface Cubicacion {
   total: number;
   total_tipo_moneda: string;
 }
-
 // Get cubicaciones done
 
-export interface Lpu {
-  lpu_cantidad: number;
-  lpu_id: number;
-  lpu_nombre: string;
-  lpu_precio: number;
-  lpu_subtotal: number;
-  requiere_evidencia: boolean;
-  servicio_id: number;
-  tipo_moneda_cod: string;
-  tipo_moneda_id: number;
-  tipo_servicio_nombre: string;
-  tipo_unidad_codigo: number;
-  tipo_unidad_nombre: string;
-}
-
-export interface CubicacionWithLpu extends Cubicacion {
-  lpus: Lpu[];
-}
-
-// interface FieldOrder {
-//   cubicacion_id: string;
-// }
-
+// Get LPUs Cubicacion end
 export interface LpusResponse {
   data: {
     items: Lpu[];
@@ -83,7 +59,31 @@ export interface LpusResponse {
     responseCode: number;
   };
 }
-
+export interface Lpu {
+  lpu_cantidad: number;
+  lpu_id: number;
+  lpu_nombre: string;
+  lpu_precio: number;
+  lpu_subtotal: number;
+  requiere_evidencia: boolean;
+  servicio_id: number;
+  tipo_moneda_cod: string;
+  tipo_moneda_id: number;
+  tipo_servicio_nombre: string;
+  tipo_unidad_codigo: number;
+  tipo_unidad_nombre: string;
+  RowID: 2;
+  created_at: Date;
+  fecha_pagado: Date;
+  fecha_solicitado: Date;
+  original: boolean;
+  porcentaje_pagado: number;
+  porcentaje_solicitado: number;
+}
+// Get LPUs Cubicacion end
+export interface CubicacionWithLpu extends Cubicacion {
+  lpus: Lpu[];
+}
 export interface LpusRequest {
   lpu_id: number;
   cantidad: number;

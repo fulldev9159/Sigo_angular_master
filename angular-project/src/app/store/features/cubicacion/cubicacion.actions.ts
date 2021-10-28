@@ -6,36 +6,34 @@ export const reset = createAction('[Cubicacion] reset');
 
 // GET CUBICACIONES init
 export const getCubicaciones = createAction('[Cubicacion] GET Cubicaciones');
-
 export const getCubicacionesSuccess = createAction(
   '[Cubicacion] GET Cubicaciones Success',
   props<{ cubicaciones: Cubicacion[] }>()
 );
-
 export const getCubicacionesError = createAction(
   '[Cubicacion] GET Cubicaciones Error',
   props<{ error: any }>()
 );
-// GET CUBICACIONES done
+// GET CUBICACIONES end
 
 export const resetSingleCubicacion = createAction(
   '[Cubicacion] reset single Cubicacion'
 );
 
+// GET SINGLE CUBICACION DATA init
 export const getSingleCubicacion = createAction(
   '[Cubicacion] GET single Cubicacion',
-  props<{ id: number }>()
+  props<{ cubicacion_id: number }>()
 );
-
 export const getSingleCubicacionSuccess = createAction(
   '[Cubicacion] GET single Cubicacion Success',
   props<{ cubicacion: CubicacionWithLpu }>()
 );
-
 export const getSingleCubicacionError = createAction(
   '[Cubicacion] GET single Cubicacion Error',
   props<{ error: any }>()
 );
+// GET SINGLE CUBICACION DATA end
 
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',

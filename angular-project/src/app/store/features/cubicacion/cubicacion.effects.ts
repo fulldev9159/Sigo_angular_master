@@ -65,9 +65,8 @@ export class CubicacionEffects {
   getCubicacion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubicacionActions.getSingleCubicacion),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.cubicacionService.getCubicacion(profile.id, data.id).pipe(
+      concatMap(({ cubicacion_id }) =>
+        this.cubicacionService.getCubicacion(cubicacion_id).pipe(
           map((cubicacion: CubicacionWithLpu) =>
             cubicacionActions.getSingleCubicacionSuccess({
               cubicacion,

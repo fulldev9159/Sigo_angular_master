@@ -6,7 +6,7 @@ import { Cubicacion, CubicacionWithLpu } from '@data';
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
-  items: Cubicacion[];
+  cubicaciones: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
   cubicacionError: Error;
   selectedCubicacion: Cubicacion;
@@ -22,7 +22,7 @@ export interface StateCubicacion {
 }
 
 export const initialStateCubicacion: StateCubicacion = {
-  items: [],
+  cubicaciones: [],
   cubicacion: null,
   cubicacionError: null,
   selectedCubicacion: null,
@@ -43,14 +43,14 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.getCubicaciones, state => state),
   on(CubicacionActions.getCubicacionesSuccess, (state, payload) => ({
     ...state,
-    items: payload.cubicaciones,
+    cubicaciones: payload.cubicaciones,
   })),
 
   on(CubicacionActions.resetSingleCubicacion, state => ({
     ...state,
     cubicacion: null,
   })),
-  on(CubicacionActions.getSingleCubicacion, (state, { id }) => ({
+  on(CubicacionActions.getSingleCubicacion, (state, { cubicacion_id: id }) => ({
     ...state,
     cubicacion: null,
     cubicacionError: null,
@@ -64,16 +64,9 @@ export const reducerCubicacion = createReducer(
     ...state,
     cubicacionError: error,
   })),
-  // on(CubicacionActions.deleteCubicacion, (state, payload) => ({
-  //   ...state,
-  //   items: [
-  //     ...state.items.slice(0, payload.cubicacionPosition),
-  //     ...state.items.slice(payload.cubicacionPosition + 1),
-  //   ],
-  // })),
   on(CubicacionActions.replyCubicacion, (state, payload) => ({
     ...state,
-    items: [...state.items, payload.cubicacion],
+    cubicaciones: [...state.cubicaciones, payload.cubicacion],
   })),
 
   on(CubicacionActions.getContractMarco, state => state),
