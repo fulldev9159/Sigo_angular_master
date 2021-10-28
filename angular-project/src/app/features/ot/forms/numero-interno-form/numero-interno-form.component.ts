@@ -70,8 +70,9 @@ export class NumeroInternoFormComponent implements OnInit, OnDestroy {
     return this.form.valid;
   }
 
-  myFormArray() {
-    return this.form.controls['numeros_internos'] as FormArray;
+  myFormArray(): FormArray {
+    const index = 'numeros_internos';
+    return this.form.controls[index] as FormArray;
   }
 
   addNumeroInterno(): void {
