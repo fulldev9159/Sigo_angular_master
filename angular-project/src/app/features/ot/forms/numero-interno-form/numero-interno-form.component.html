@@ -14,23 +14,20 @@
   </div>
 
   <ng-container formArrayName="numeros_internos">
-    <button (click)="addNumeroInterno()">add</button>
-    <div *ngFor="let n of myFormArray().controls; let i = index">
-      <ng-container [formGroupName]="i">
-        <label for="">{{i}}</label>
-        <input type="text" formControlName="numero_interno">
-        <button (click)="deleteNumeroInterno(i)">x</button>
-      </ng-container>
-
+    <div class="col-xs-12 col-md-6" id="control_numero_interno" style="border-left:1px solid #e5e5e5">
+      <button (click)="addNumeroInterno();" class="btn btn-primary" style="margin-bottom: 10px;"><i class="pi pi-plus-circle"></i></button>
+      <div *ngFor="let n of myFormArray().controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <div class="row" style="margin-top:5px">
+            <div class="col-md-10">
+              <app-input [control]="myFormArray().controls[i].get('numero_interno')" label="N° interno" DisplayLabelMode="side"></app-input>
+            </div>
+            <div class="col-md-2">
+              <button *ngIf="i!==0" (click)="deleteNumeroInterno(i);" class="btn btn-danger"><i class="pi pi-trash"></i></button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </ng-container>
-
-  <!-- <div class="col-xs-12 col-md-6" id="control_numero_interno"  *ngFor="let control of form.get('numeros_internos');index as i">
-    <input type="text" [control]>
-    <app-input [control]="form.get('numero_interno')" label="Número interno" ID="numero-interno"></app-input>
-    <br>
-  </div> -->
-
-  {{form.valid|json}}
-  {{form.value|json}}
 </div>
