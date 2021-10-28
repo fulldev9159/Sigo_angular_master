@@ -1,16 +1,19 @@
 import { createAction, props } from '@ngrx/store';
 import * as OtModel from './ot.model';
 import * as Data from '@data';
+import { OT, requestGetOTs } from '@data';
 
-// OT LIST
+// GET OTs EJECUCION init
 
 export const getOtEjecucion = createAction(
   '[Ot Get Ejecucion] GET Ot Ejecucion',
-  props<{
-    filtro_propietario: string;
-    filtro_tipo: string;
-  }>()
+  props<{ filtro_tipo: string }>()
 );
+export const getOtSuccessEjecucion = createAction(
+  '[Ot GetAll] GET Ot Success Ejecucion',
+  props<{ ots: OT[] }>()
+);
+// GET OTs EJECUCION end
 
 export const getOtAbiertas = createAction(
   '[Ot Get Abiertas] GET Ot Abiertas',
@@ -28,10 +31,6 @@ export const getOtCerradas = createAction(
   }>()
 );
 
-export const getOtSuccessEjecucion = createAction(
-  '[Ot GetAll] GET Ot Success Ejecucion',
-  props<{ ot: Data.OT[] }>()
-);
 export const getOtSuccessAbiertas = createAction(
   '[Ot GetAll] GET Ot Success Abiertas',
   props<{ ot: Data.OT[] }>()

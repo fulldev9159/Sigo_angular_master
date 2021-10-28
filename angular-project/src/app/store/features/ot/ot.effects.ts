@@ -25,6 +25,7 @@ import { environment } from '@environment';
 
 import { Response } from '@storeOT/model';
 import * as OtModel from './ot.model';
+import { requestGetOTs } from '@data';
 
 @Injectable()
 export class OtEffects {
@@ -43,12 +44,27 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getOtEjecucion),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.otService.getOTsEjecucion(profile.id, data.filtro_tipo).pipe(
-          map((ots: Data.OT[]) => otActions.getOtSuccessEjecucion({ ot: ots })),
+      concatMap(([{ filtro_tipo }, profile]) => {
+        const request: requestGetOTs = {
+          perfil_id: profile.id,
+          filtro_propietario: 'EJECUCION',
+          filtro_tipo,
+        };
+        return this.otService.getOTsEjecucion(request).pipe(
+          map(respose => {
+            if (+respose.status.responseCode !== 0) {
+              if (respose.status.description !== 'Sin resultados') {
+                this.snackService.showMessage(
+                  `${respose.status.description}`,
+                  ''
+                );
+              }
+            }
+            return otActions.getOtSuccessEjecucion({ ots: respose.data.items });
+          }),
           catchError(error => of(otActions.getOtError({ error })))
-        )
-      )
+        );
+      })
     )
   );
 

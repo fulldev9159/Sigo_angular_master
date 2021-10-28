@@ -1,5 +1,13 @@
 import { Accion } from './accion';
 
+// GET OTs init
+export interface requestGetOTs {
+  perfil_id: number;
+  filtro_propietario: string;
+  filtro_tipo: string;
+}
+
+// GET OTS end
 export interface OT {
   id: number;
   nombre: string;
