@@ -19,16 +19,16 @@ export class AuthEffects {
   postLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.login),
-      concatMap((data: any) =>
-        this.authService.login(data.login.username, data.login.password).pipe(
-          map(login => authActions.loginSuccess({ login })),
+      concatMap(({ login }) =>
+        this.authService.login(login).pipe(
+          map(loginResponse => authActions.loginSuccess({ loginResponse })),
           catchError(error => of(authActions.loginError({ error })))
         )
       )
     )
   );
 
-  notifyAfterEditError = createEffect(
+  notifyAfterLoginError = createEffect(
     () =>
       this.actions$.pipe(
         ofType(authActions.loginError),

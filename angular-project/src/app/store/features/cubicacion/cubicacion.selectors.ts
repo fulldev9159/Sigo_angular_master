@@ -8,7 +8,7 @@ export const selectCubicacion =
 
 export const getCubicaciones = createSelector(
   selectCubicacion,
-  (state: fromCubicacion.StateCubicacion) => state.items
+  (state: fromCubicacion.StateCubicacion) => state.cubicaciones
 );
 
 export const getSingleCubicacion = createSelector(

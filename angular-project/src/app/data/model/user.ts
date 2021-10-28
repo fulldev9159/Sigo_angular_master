@@ -1,3 +1,5 @@
+import { ContratoMarco } from '@data';
+
 // GET USER
 export interface User {
   id: number;
@@ -128,14 +130,6 @@ export interface PerfilFormUser {
   perfil_id: number;
   persona_a_cargo_id: number;
 }
-
-export interface ContratoMarco {
-  id: number;
-  nombre: string;
-  tipo_codigo: number;
-  tipo_glosa: string;
-}
-
 export interface PerfilUser {
   id: number;
   descripcion: string;

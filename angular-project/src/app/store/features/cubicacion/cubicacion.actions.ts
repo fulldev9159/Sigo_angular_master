@@ -1,40 +1,44 @@
 import { createAction, props } from '@ngrx/store';
 import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu, RequestEditCubicacion } from '@data';
+import {
+  Cubicacion,
+  CubicacionWithLpu,
+  RequestEditCubicacion,
+  ContratoMarco,
+} from '@data';
 
-// CUBICACION LIST
 export const reset = createAction('[Cubicacion] reset');
 
-export const getCubicacion = createAction('[Cubicacion GetAll] GET Cubicacion');
-
-export const getCubicacionSuccess = createAction(
-  '[Cubicacion GetAll] GET Cubicacion Success',
-  props<{ cubicacion: cubModel.Cubicacion[] }>()
+// GET CUBICACIONES init
+export const getCubs = createAction('[Cubicacion] GET Cubicaciones');
+export const getCubsSuccess = createAction(
+  '[Cubicacion] GET Cubicaciones Success',
+  props<{ cubs: Cubicacion[] }>()
 );
-
-export const getCubicacionError = createAction(
-  '[Cubicacion GetAll] GET Cubicacion Error',
+export const getCubsError = createAction(
+  '[Cubicacion] GET Cubicaciones Error',
   props<{ error: any }>()
 );
+// GET CUBICACIONES end
 
 export const resetSingleCubicacion = createAction(
   '[Cubicacion] reset single Cubicacion'
 );
 
+// GET SINGLE CUBICACION DATA init
 export const getSingleCubicacion = createAction(
   '[Cubicacion] GET single Cubicacion',
-  props<{ id: number }>()
+  props<{ cubicacion_id: number }>()
 );
-
 export const getSingleCubicacionSuccess = createAction(
   '[Cubicacion] GET single Cubicacion Success',
   props<{ cubicacion: CubicacionWithLpu }>()
 );
-
 export const getSingleCubicacionError = createAction(
   '[Cubicacion] GET single Cubicacion Error',
   props<{ error: any }>()
 );
+// GET SINGLE CUBICACION DATA end
 
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',
@@ -67,12 +71,12 @@ export const editCubicacionError = createAction(
 
 export const replyCubicacion = createAction(
   '[Cubicacion Reply] POST Reply Cubicacion',
-  props<{ cubicacion: cubModel.Cubicacion }>()
+  props<{ cubicacion: Cubicacion }>()
 );
 
 export const replyCubicacionSuccess = createAction(
   '[Cubicacion Reply] POST Reply Cubicacion Success',
-  props<{ cubicacion: cubModel.Cubicacion }>()
+  props<{ cubicacion: Cubicacion }>()
 );
 
 export const replyCubicacionError = createAction(
@@ -87,7 +91,7 @@ export const postCubicacion = createAction(
 
 export const postCubicacionSuccess = createAction(
   '[Cubicacion Post] CREATE Cubicacion Success',
-  props<{ cubicacion: cubModel.Cubicacion }>()
+  props<{ cubicacion: Cubicacion }>()
 );
 
 export const postCubicacionError = createAction(
@@ -97,18 +101,19 @@ export const postCubicacionError = createAction(
 
 // CUBICACION LIST
 
-// CUBICACION FORM
-export const getContractMarco = createAction('[ContactMarco Get] GET Data');
-
-export const getContractMarcoSuccess = createAction(
-  '[ContactMarco Get] GET Data Success',
-  props<{ contractMarco: cubModel.ContractMarco[] }>()
+// GET CONTRATO init
+export const getContractMarco = createAction(
+  '[Cubicacion Contrato Marco] GET Data'
 );
-
+export const getContractMarcoSuccess = createAction(
+  '[Cubicacion Contrato Marco] GET Data Success',
+  props<{ contratosMarcos: ContratoMarco[] }>()
+);
 export const getContractMarcoError = createAction(
-  '[ContactMarco Get] GET Data Error',
+  '[Cubicacion Contrato Marco] GET Data Error',
   props<{ error: any }>()
 );
+// GET CONTRATO end
 
 export const getSubContractProviders = createAction(
   '[SubContractedProviders Get] GET Data',
@@ -213,7 +218,7 @@ export const getDetalleCubicacionError = createAction(
 // Clonar cubicacion
 export const clonarCubicacion = createAction(
   '[Clonar cubicacion] SET clonar cubicacion',
-  props<{ cubicacion: cubModel.Cubicacion; cubicacion_id: number }>()
+  props<{ cubicacion: Cubicacion; cubicacion_id: number }>()
 );
 
 export const clonarCubicacionSuccess = createAction(
@@ -228,6 +233,6 @@ export const clonarCubicacionError = createAction(
 export const selectCubicacion = createAction(
   '[OT] select Cubicacion',
   props<{
-    cubicacion: cubModel.Cubicacion;
+    cubicacion: Cubicacion;
   }>()
 );

@@ -1,12 +1,10 @@
 import { Perfil } from './perfil';
 
-export interface Login {
-  token: string;
-  usuario_nombre: string;
-  usuario_id: number;
-  perfiles: Perfil[];
+// Login init
+export interface LoginRequest {
+  username: string;
+  password: string;
 }
-
 export interface LoginResponse {
   status: {
     description: string;
@@ -14,3 +12,10 @@ export interface LoginResponse {
   };
   data: Login;
 }
+export interface Login {
+  token: string;
+  usuario_nombre: string;
+  usuario_id: number;
+  perfiles: Perfil[];
+}
+// Login end

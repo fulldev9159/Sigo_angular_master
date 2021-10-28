@@ -1,16 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
 import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu } from '@data';
+import { ContratoMarco, Cubicacion, CubicacionWithLpu } from '@data';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
-  items: cubModel.Cubicacion[];
+  cubicaciones: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
   cubicacionError: Error;
-  selectedCubicacion: cubModel.Cubicacion;
-  contractMarco: cubModel.ContractMarco[];
+  selectedCubicacion: Cubicacion;
+  contractMarco: ContratoMarco[];
   subContractedProviders: cubModel.Provider[];
   subContractedRegions: cubModel.Region[];
   subContractedTypeServices: cubModel.TypeService[];
@@ -22,7 +22,7 @@ export interface StateCubicacion {
 }
 
 export const initialStateCubicacion: StateCubicacion = {
-  items: [],
+  cubicaciones: [],
   cubicacion: null,
   cubicacionError: null,
   selectedCubicacion: null,
@@ -40,17 +40,17 @@ export const initialStateCubicacion: StateCubicacion = {
 export const reducerCubicacion = createReducer(
   initialStateCubicacion,
 
-  on(CubicacionActions.getCubicacion, state => state),
-  on(CubicacionActions.getCubicacionSuccess, (state, payload) => ({
+  on(CubicacionActions.getCubs, state => state),
+  on(CubicacionActions.getCubsSuccess, (state, payload) => ({
     ...state,
-    items: payload.cubicacion,
+    cubicaciones: payload.cubs,
   })),
 
   on(CubicacionActions.resetSingleCubicacion, state => ({
     ...state,
     cubicacion: null,
   })),
-  on(CubicacionActions.getSingleCubicacion, (state, { id }) => ({
+  on(CubicacionActions.getSingleCubicacion, (state, { cubicacion_id: id }) => ({
     ...state,
     cubicacion: null,
     cubicacionError: null,
@@ -64,22 +64,15 @@ export const reducerCubicacion = createReducer(
     ...state,
     cubicacionError: error,
   })),
-  // on(CubicacionActions.deleteCubicacion, (state, payload) => ({
-  //   ...state,
-  //   items: [
-  //     ...state.items.slice(0, payload.cubicacionPosition),
-  //     ...state.items.slice(payload.cubicacionPosition + 1),
-  //   ],
-  // })),
   on(CubicacionActions.replyCubicacion, (state, payload) => ({
     ...state,
-    items: [...state.items, payload.cubicacion],
+    cubicaciones: [...state.cubicaciones, payload.cubicacion],
   })),
 
   on(CubicacionActions.getContractMarco, state => state),
   on(CubicacionActions.getContractMarcoSuccess, (state, payload) => ({
     ...state,
-    contractMarco: payload.contractMarco,
+    contractMarco: payload.contratosMarcos,
   })),
 
   on(CubicacionActions.getSubContractProviders, state => state),

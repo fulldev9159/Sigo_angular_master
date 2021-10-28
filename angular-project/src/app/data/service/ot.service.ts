@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as Data from '@data';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
@@ -19,7 +19,8 @@ import {
   ApproveOTMinutesGenerationResponse,
   RejectOTMinutesGenerationResponse,
   ApprovalPagoOTResponse,
-} from '../model';
+  RequestGetOTs,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -29,29 +30,16 @@ export class OTService {
   constructor(
     @Inject('environment') environment,
     private http: HttpClient,
-    // private errMessage: Data.ErrMesaggesServices,
     private snackService: SnackBarService
   ) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getOTsEjecucion(perfil_id: number, filtro_tipo: string): Observable<OT[]> {
-    return this.http
-      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/abiertas`, {
-        perfil_id,
-        filtro_propietario: 'EJECUCION',
-        filtro_tipo,
-      })
-      .pipe(
-        map(res => {
-          if (+res.status.responseCode !== 0) {
-            if (res.status.description !== 'Sin resultados') {
-              this.snackService.showMessage(`${res.status.description}`, '');
-            }
-          }
-          return res.data.items;
-        })
-      );
+  getOTsEjecucion(request: RequestGetOTs): Observable<OTsResponse> {
+    return this.http.post<OTsResponse>(
+      `${this.apiUrl}/ingreot/ot/get/abiertas`,
+      request
+    );
   }
 
   getOTsAbiertas(

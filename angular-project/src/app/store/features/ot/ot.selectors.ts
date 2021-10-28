@@ -6,7 +6,7 @@ export const selectOt = createFeatureSelector<fromOt.StateOt>(
 );
 export const getOtEjecucion = createSelector(
   selectOt,
-  (state: fromOt.StateOt) => state.itemsEjecucion
+  (state: fromOt.StateOt) => state.otsEjecucion
 );
 
 export const getOtAbiertas = createSelector(

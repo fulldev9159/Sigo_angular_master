@@ -4,7 +4,7 @@ import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { Plan, Site } from '@storeOT/features/ot/ot.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
+import { Cubicacion } from '@data';
 
 @Component({
   selector: 'app-plan-proyecto-form',

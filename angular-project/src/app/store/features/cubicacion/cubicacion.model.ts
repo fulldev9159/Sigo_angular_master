@@ -1,10 +1,3 @@
-export interface ContractMarco {
-  id: number;
-  nombre: string;
-  tipo_contrato_id: string;
-  tipo_contrato_nombre: string;
-}
-
 export interface Provider {
   id: number;
   nombre: string;
@@ -65,28 +58,6 @@ export interface AutoSuggestResponseData {
 export interface AutoSuggestItem {
   id: number;
   name: string;
-}
-
-export interface Cubicacion {
-  asignado: boolean;
-  contrato_marco_id: number;
-  contrato_marco_nombre: string;
-  contrato_marco_tipo_id: number;
-  contrato_marco_tipo_nombre: string;
-  creador_username: string;
-  creador_usuario_id: number;
-  creador_usuario_nombre: string;
-  fecha_creacion: string;
-  id: number;
-  nombre: string;
-  ot_id: number;
-  ot_nombre: string;
-  proveedor_id: number;
-  proveedor_nombre: string;
-  region_id: number;
-  region_nombre: string;
-  total: number;
-  total_tipo_moneda: string;
 }
 
 export interface ResponseDetalleCubicacion {

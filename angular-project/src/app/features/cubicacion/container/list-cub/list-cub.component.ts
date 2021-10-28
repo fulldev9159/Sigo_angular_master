@@ -8,12 +8,11 @@ import {
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-import { Cubicacion } from '@storeOT/features/cubicacion/cubicacion.model';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map, filter, takeUntil } from 'rxjs/operators';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
-import { Login } from '@data';
+import { Cubicacion, Login } from '@data';
 import { MessageService } from 'primeng/api';
 import { CloneCubageFormComponent } from '../../component/clone-cubage-form/clone-cubage-form.component';
 import { NgxPermissionsService } from 'ngx-permissions';
@@ -114,14 +113,14 @@ export class ListCubComponent implements OnInit, OnDestroy {
         'total',
         'creador_usuario_nombre',
       ],
-      actions: (cub: cubModel.Cubicacion) => {
+      actions: (cub: Cubicacion) => {
         const actions = [
           {
             disabled: false,
             tooltipDisabled: '',
             icon: 'p-button-icon pi pi-copy',
             class: 'p-button p-button-help p-mr-2',
-            onClick: (event: Event, item: cubModel.Cubicacion) => {
+            onClick: (event: Event, item: Cubicacion) => {
               this.cloneCubageForm.reset();
               this.cubageFacade.selectCubicacion(item);
               this.displayClonatedCubageNameModal = true;
@@ -166,7 +165,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
             tooltipDisabled: tooltipTextDelete,
             icon: 'p-button-icon pi pi-trash',
             class: 'p-button p-button-danger',
-            onClick: (event: Event, item: cubModel.Cubicacion) => {
+            onClick: (event: Event, item: Cubicacion) => {
               this.confirmationService.confirm({
                 target: event.target as EventTarget,
                 message: '¿Está seguro que desea eliminar esta cubicación?',

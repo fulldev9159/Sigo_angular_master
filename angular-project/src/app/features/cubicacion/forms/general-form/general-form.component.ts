@@ -12,7 +12,7 @@ import { tap, map, withLatestFrom, takeUntil, filter } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
-import { CubicacionWithLpu } from '@data';
+import { ContratoMarco, CubicacionWithLpu } from '@data';
 
 @Component({
   selector: 'app-general-form',
@@ -29,7 +29,7 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
   incompleteCubicacionError$: Observable<Error> = of(null);
 
   autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of([]);
-  contratosMarcos$: Observable<CubModel.ContractMarco[]> = of([]);
+  contratosMarcos$: Observable<ContratoMarco[]> = of([]);
   proveedores$: Observable<CubModel.Provider[]> = of([]);
 
   controls = {

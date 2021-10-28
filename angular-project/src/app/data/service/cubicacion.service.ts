@@ -1,33 +1,52 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { Response } from '@storeOT/model';
+import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   CubicacionWithLpu,
   CubicacionesResponse,
   LpusResponse,
   RequestEditCubicacion,
   EditCubicacionResponse,
-} from '../model';
+  Cubicacion,
+  ResponseGetContrato,
+  ContratoMarco,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CubicacionService {
   apiUrl = '';
-  constructor(@Inject('environment') environment, private http: HttpClient) {
+  constructor(
+    @Inject('environment') environment,
+    private http: HttpClient,
+    private snackService: SnackBarService
+  ) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getCubicacion(
-    perfil_id: number,
-    cubicacion_id: number
-  ): Observable<CubicacionWithLpu> {
+  getCubicaciones(): Observable<Cubicacion[]> {
     return this.http
-      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {
-        perfil_id,
-      })
+      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(
+              `No existen cubicaciones - ${res.status.description}`,
+              ''
+            );
+          }
+          return res.data.items;
+        })
+      );
+  }
+
+  getCubicacion(cubicacion_id: number): Observable<CubicacionWithLpu> {
+    return this.http
+      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
       .pipe(
         concatMap((cubsRes: CubicacionesResponse) => {
           const cubFound = cubsRes.data.items.find(
@@ -57,6 +76,27 @@ export class CubicacionService {
       );
   }
 
+  getContratos(): Observable<ContratoMarco[]> {
+    return this.http
+      .post<ResponseGetContrato>(
+        `${this.apiUrl}/cubicacion/contratos_marco/get`,
+        {}
+      )
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(
+              `No existen contratos asosiados - ${res.status.description}`,
+              ''
+            );
+          }
+          return res.data.items.sort((a, b) =>
+            a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+          );
+        })
+      );
+  }
+
   updateCubicacion(
     request: RequestEditCubicacion
   ): Observable<EditCubicacionResponse> {
@@ -67,10 +107,11 @@ export class CubicacionService {
   }
 
   deleteOT(cubicacion_id: number): Observable<Response<string>> {
-    return this.http
-      .post<Response<string>>(`${this.apiUrl}/cubicacion/delete`, {
+    return this.http.post<Response<string>>(
+      `${this.apiUrl}/cubicacion/delete`,
+      {
         cubicacion_id,
-      })
-      .pipe(map(res => res));
+      }
+    );
   }
 }
