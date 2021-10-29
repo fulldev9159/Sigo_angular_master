@@ -13,7 +13,11 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponetType } from '@storeOT/model';
 import { TableComponent } from '@uiOT/table/table.component';
-import { ContratoMarco, SubcontratosProveedor } from '@data';
+import {
+  ContratoMarco4Cub,
+  RegionSubcontrato4Cub,
+  SubcontratosProveedor,
+} from '@data';
 
 @Component({
   selector: 'app-form',
@@ -30,9 +34,9 @@ export class FormComponent implements OnInit, OnDestroy {
   tableLpus: TableComponent;
 
   @Input() formCubicacion: FormGroup;
-  @Input() contratosMarcos: ContratoMarco[] = [];
+  @Input() contratosMarcos: ContratoMarco4Cub[] = [];
   @Input() Providers: SubcontratosProveedor[] = [];
-  @Input() Regions: CubModel.Region[] = [];
+  @Input() Regions: RegionSubcontrato4Cub[] = [];
   @Input() TypeServices: CubModel.TypeService[] = [];
   @Input() Services: CubModel.Service[] = [];
   @Input() autoSuggestInitialValue = '';

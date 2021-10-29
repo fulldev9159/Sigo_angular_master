@@ -4,9 +4,10 @@ import {
   Cubicacion,
   CubicacionWithLpu,
   RequestEditCubicacion,
-  ContratoMarco,
+  ContratoMarco4Cub,
   Proveedor,
   SubcontratosProveedor,
+  RegionSubcontrato4Cub,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
@@ -101,18 +102,16 @@ export const postCubicacionError = createAction(
   props<{ error: any }>()
 );
 
-// CUBICACION LIST
-
 // GET CONTRATO init
 export const getContractMarco = createAction(
-  '[Cubicacion Contrato Marco] GET Data'
+  '[Cubicacion Contratos Marco] GET Data'
 );
 export const getContractMarcoSuccess = createAction(
-  '[Cubicacion Contrato Marco] GET Data Success',
-  props<{ contratosMarcos: ContratoMarco[] }>()
+  '[Cubicacion Contratos Marco] GET Data Success',
+  props<{ contratosMarcos: ContratoMarco4Cub[] }>()
 );
 export const getContractMarcoError = createAction(
-  '[Cubicacion Contrato Marco] GET Data Error',
+  '[Cubicacion Contratos Marco] GET Data Error',
   props<{ error: any }>()
 );
 // GET CONTRATO end
@@ -130,22 +129,22 @@ export const getSubContractProvidersError = createAction(
   '[SubContractedProviders Get] GET Data Error',
   props<{ error: any }>()
 );
-// GET SUBCONTRATOS PROVEEDOR init
+// GET SUBCONTRATOS PROVEEDOR end
 
+// GET REGIONES SUBCONTRATO init
 export const getSubContractedRegions = createAction(
   '[SubContractedRegions Get] GET Data',
-  props<{ subcontrato_id: number }>()
+  props<{ subcontratos_id: number[] }>()
 );
-
 export const getSubContractedRegionsSuccess = createAction(
   '[SubContractedRegions Get] GET Data Success',
-  props<{ subContractedRegions: cubModel.Region[] }>()
+  props<{ regionesSubcontrato: RegionSubcontrato4Cub[] }>()
 );
-
 export const getSubContractedRegionsError = createAction(
   '[SubContractedRegions Get] GET Data Error',
   props<{ error: any }>()
 );
+// GET REGIONES SUBCONTRATO init
 
 export const getSubContractedTypeServices = createAction(
   '[SubContractedTypeServices Get] GET Data',

@@ -13,7 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
 import {
-  ContratoMarco,
+  ContratoMarco4Cub,
   CubicacionWithLpu,
   Proveedor,
   SubcontratosProveedor,
@@ -34,7 +34,7 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
   incompleteCubicacionError$: Observable<Error> = of(null);
 
   autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of([]);
-  contratosMarcos$: Observable<ContratoMarco[]> = of([]);
+  contratosMarcos$: Observable<ContratoMarco4Cub[]> = of([]);
   proveedores$: Observable<SubcontratosProveedor[]> = of([]);
 
   controls = {

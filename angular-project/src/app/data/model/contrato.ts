@@ -1,6 +1,6 @@
-export interface ResponseGetContrato {
+export interface ResponseGetContrato4Cub {
   data: {
-    items: ContratoMarco[];
+    items: ContratoMarco4Cub[];
   };
 
   pagination: {
@@ -17,7 +17,7 @@ export interface ResponseGetContrato {
   };
 }
 
-export interface ContratoMarco {
+export interface ContratoMarco4Cub {
   id: number;
   nombre: string;
   tipo_contrato_id: string;

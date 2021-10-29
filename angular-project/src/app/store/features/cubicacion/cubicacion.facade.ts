@@ -5,9 +5,10 @@ import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
 import * as cubModel from './cubicacion.model';
 import {
-  ContratoMarco,
+  ContratoMarco4Cub,
   Cubicacion,
   CubicacionWithLpu,
+  RegionSubcontrato4Cub,
   RequestEditCubicacion,
   SubcontratosProveedor,
 } from '@data';
@@ -74,7 +75,7 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getContractMarco());
   }
 
-  public getContractMarcoSuccess(contractMarco: ContratoMarco[]): void {
+  public getContractMarcoSuccess(contractMarco: ContratoMarco4Cub[]): void {
     this.store.dispatch(
       cubicacionActions.getContractMarcoSuccess({
         contratosMarcos: contractMarco,
@@ -82,7 +83,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getContractMarcoSelector$(): Observable<ContratoMarco[]> {
+  public getContractMarcoSelector$(): Observable<ContratoMarco4Cub[]> {
     return this.store.select(cubicacionSelectors.getConstractMarco);
   }
   // CONSTRACT MARCO
@@ -108,19 +109,23 @@ export class CubicacionFacade {
   // SUBCONTRACTPROVIDERS
 
   // SUBCONTRACTREGIONS
-  public getSubContractedRegionsAction(data): void {
-    this.store.dispatch(cubicacionActions.getSubContractedRegions(data));
-  }
-
-  public getSubContractedRegionsSuccess(
-    subContractedRegions: cubModel.Region[]
-  ): void {
+  public getSubContractedRegionsAction(subcontratos_id: number[]): void {
     this.store.dispatch(
-      cubicacionActions.getSubContractedRegionsSuccess({ subContractedRegions })
+      cubicacionActions.getSubContractedRegions({ subcontratos_id })
     );
   }
 
-  public getRegionsSelector$(): Observable<cubModel.Region[]> {
+  public getSubContractedRegionsSuccess(
+    subContractedRegions: RegionSubcontrato4Cub[]
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.getSubContractedRegionsSuccess({
+        regionesSubcontrato: subContractedRegions,
+      })
+    );
+  }
+
+  public getRegionsSelector$(): Observable<RegionSubcontrato4Cub[]> {
     return this.store.select(cubicacionSelectors.getSubContractedRegions);
   }
   // SUBCONTRACTREGIONS
@@ -178,7 +183,7 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getAutoSuggest({ filter, cantidad }));
   }
 
-  public getAutoSuggestSuccess(contractMarco: ContratoMarco[]): void {
+  public getAutoSuggestSuccess(contractMarco: ContratoMarco4Cub[]): void {
     this.store.dispatch(
       cubicacionActions.getContractMarcoSuccess({
         contratosMarcos: contractMarco,

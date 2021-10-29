@@ -11,8 +11,8 @@ import {
   RequestEditCubicacion,
   EditCubicacionResponse,
   Cubicacion,
-  ResponseGetContrato,
-  ContratoMarco,
+  ResponseGetContrato4Cub,
+  ContratoMarco4Cub,
 } from '@data';
 
 @Injectable({

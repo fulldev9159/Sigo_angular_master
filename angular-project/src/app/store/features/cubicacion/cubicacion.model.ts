@@ -1,9 +1,3 @@
-export interface Region {
-  id: number;
-  nombre: string;
-  codigo: string;
-}
-
 export interface TypeService {
   id: number;
   nombre: string;

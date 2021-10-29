@@ -37,6 +37,7 @@ export class CubicacionEffects {
     private cubService: Data.CubicacionService,
     private contratoService: Data.ContratosService,
     private proveedorService: Data.ProveedorService,
+    private regionService: Data.RegionService,
     private router: Router
   ) {}
 
@@ -81,7 +82,7 @@ export class CubicacionEffects {
     this.actions$.pipe(
       ofType(cubActions.getContractMarco),
       concatMap(() =>
-        this.contratoService.getContratos().pipe(
+        this.contratoService.getContratos4cub().pipe(
           map(contratosMarcos =>
             cubActions.getContractMarcoSuccess({ contratosMarcos })
           ),
@@ -112,26 +113,17 @@ export class CubicacionEffects {
   getRegionesSubcontrato$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getSubContractedRegions),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/regiones_subcontrato/get`, {
-            token: data.token,
-            subcontrato_id: data.subcontrato_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-
-              return cubActions.getSubContractedRegionsSuccess({
-                subContractedRegions: res.data.items,
-              });
-            }),
-            catchError(err =>
-              of(cubActions.getSubContractedRegionsError({ error: err }))
-            )
+      concatMap(({ subcontratos_id }) =>
+        this.regionService.getRegionesSubcontrato4Cub(subcontratos_id).pipe(
+          map(regionesSubcontrato =>
+            cubActions.getSubContractedRegionsSuccess({
+              regionesSubcontrato,
+            })
+          ),
+          catchError(err =>
+            of(cubActions.getSubContractedRegionsError({ error: err }))
           )
+        )
       )
     )
   );
