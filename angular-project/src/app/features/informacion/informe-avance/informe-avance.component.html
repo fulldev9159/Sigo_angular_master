@@ -18,7 +18,11 @@
           <th colspan="10" style="background: #00507a;
           color: white;
           text-align: center;">Mano de obra/Lpus</th>
+          <th colspan="10" style="background: #00507a;
+           color: white;
+           text-align: center;">Unidad de obras</th>
         </tr>
+
         <tr>
           <th rowspan="2">Cor</th>
           <th rowspan="2">Plano</th>
@@ -31,12 +35,28 @@
           text-align: center;">
             Cantidad
           </th>
+
+          <th rowspan="2">Cor.</th>
+          <th rowspan="2">Cod.</th>
+          <th rowspan="2">Descrición</th>
+          <th rowspan="2">U.M</th>
+          <th colspan="3" style="background: #dfdfdf;
+          text-align: center;">
+            Cantidad
+          </th>
         </tr>
         <tr>
           <th rowspan="2">Cub.</th>
           <th rowspan="2">Inf.</th>
           <th rowspan="2">Apr.</th>
+
+          <th rowspan="2">Cub.</th>
+          <th rowspan="2">Inf.</th>
+          <th rowspan="2">Apr.</th>
         </tr>
+
+
+
       </ng-template>
       <ng-template pTemplate="body" let-car>
         <tr>
@@ -61,6 +81,14 @@
           <td *ngIf="(loginAuth$ |async).perfil==='Trabajador EECC'">
             --
           </td>
+
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
       </ng-template>
     </p-table>
