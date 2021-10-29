@@ -177,11 +177,11 @@ export class UserService {
 
   getProveedores(interno: boolean): Observable<Data.Proveedor[]> {
     return this.http
-      .post<Data.ProveedorResponse>(`${this.apiUrl}/proveedores/get`, {
+      .post<Data.ProveedoresResponse>(`${this.apiUrl}/proveedores/get`, {
         interno,
       })
       .pipe(
-        map((res: Data.ProveedorResponse) => {
+        map((res: Data.ProveedoresResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }

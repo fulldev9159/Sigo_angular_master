@@ -5,6 +5,8 @@ import {
   CubicacionWithLpu,
   RequestEditCubicacion,
   ContratoMarco,
+  Proveedor,
+  SubcontratosProveedor,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
@@ -115,20 +117,20 @@ export const getContractMarcoError = createAction(
 );
 // GET CONTRATO end
 
+// GET SUBCONTRATOS PROVEEDOR init
 export const getSubContractProviders = createAction(
   '[SubContractedProviders Get] GET Data',
   props<{ contrato_marco_id: number }>()
 );
-
 export const getSubContractProvidersSuccess = createAction(
   '[SubContractedProviders Get] GET Data Success',
-  props<{ subContractedProviders: cubModel.Provider[] }>()
+  props<{ subcontratosProveedor: SubcontratosProveedor[] }>()
 );
-
 export const getSubContractProvidersError = createAction(
   '[SubContractedProviders Get] GET Data Error',
   props<{ error: any }>()
 );
+// GET SUBCONTRATOS PROVEEDOR init
 
 export const getSubContractedRegions = createAction(
   '[SubContractedRegions Get] GET Data',

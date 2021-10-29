@@ -76,27 +76,6 @@ export class CubicacionService {
       );
   }
 
-  getContratos(): Observable<ContratoMarco[]> {
-    return this.http
-      .post<ResponseGetContrato>(
-        `${this.apiUrl}/cubicacion/contratos_marco/get`,
-        {}
-      )
-      .pipe(
-        map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(
-              `No existen contratos asosiados - ${res.status.description}`,
-              ''
-            );
-          }
-          return res.data.items.sort((a, b) =>
-            a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-          );
-        })
-      );
-  }
-
   updateCubicacion(
     request: RequestEditCubicacion
   ): Observable<EditCubicacionResponse> {

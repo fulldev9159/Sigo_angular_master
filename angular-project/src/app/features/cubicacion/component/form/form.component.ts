@@ -13,7 +13,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponetType } from '@storeOT/model';
 import { TableComponent } from '@uiOT/table/table.component';
-import { ContratoMarco } from '@data';
+import { ContratoMarco, SubcontratosProveedor } from '@data';
 
 @Component({
   selector: 'app-form',
@@ -31,7 +31,7 @@ export class FormComponent implements OnInit, OnDestroy {
 
   @Input() formCubicacion: FormGroup;
   @Input() contratosMarcos: ContratoMarco[] = [];
-  @Input() Providers: CubModel.Provider[] = [];
+  @Input() Providers: SubcontratosProveedor[] = [];
   @Input() Regions: CubModel.Region[] = [];
   @Input() TypeServices: CubModel.TypeService[] = [];
   @Input() Services: CubModel.Service[] = [];

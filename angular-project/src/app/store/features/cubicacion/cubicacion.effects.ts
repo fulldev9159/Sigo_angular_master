@@ -35,6 +35,8 @@ export class CubicacionEffects {
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private cubService: Data.CubicacionService,
+    private contratoService: Data.ContratosService,
+    private proveedorService: Data.ProveedorService,
     private router: Router
   ) {}
 
@@ -79,7 +81,7 @@ export class CubicacionEffects {
     this.actions$.pipe(
       ofType(cubActions.getContractMarco),
       concatMap(() =>
-        this.cubService.getContratos().pipe(
+        this.contratoService.getContratos().pipe(
           map(contratosMarcos =>
             cubActions.getContractMarcoSuccess({ contratosMarcos })
           ),
@@ -94,28 +96,15 @@ export class CubicacionEffects {
   getProveedoresSubcontrato$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getSubContractProviders),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/proveedores_subcontrato/get`, {
-            token: data.token,
-            contrato_marco_id: data.contrato_marco_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-
-              return cubActions.getSubContractProvidersSuccess({
-                subContractedProviders: res.data.items.sort((a, b) =>
-                  a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-                ),
-              });
-            }),
-            catchError(err =>
-              of(cubActions.getSubContractProvidersError({ error: err }))
-            )
+      concatMap(({ contrato_marco_id }) =>
+        this.proveedorService.getSubcontratosProveedor(contrato_marco_id).pipe(
+          map(subcontratosProveedor =>
+            cubActions.getSubContractProvidersSuccess({ subcontratosProveedor })
+          ),
+          catchError(err =>
+            of(cubActions.getSubContractProvidersError({ error: err }))
           )
+        )
       )
     )
   );

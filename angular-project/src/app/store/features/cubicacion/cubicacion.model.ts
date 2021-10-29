@@ -1,9 +1,3 @@
-export interface Provider {
-  id: number;
-  nombre: string;
-  subcontrato_id: number[];
-}
-
 export interface Region {
   id: number;
   nombre: string;

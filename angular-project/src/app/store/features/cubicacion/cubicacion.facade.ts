@@ -9,6 +9,7 @@ import {
   Cubicacion,
   CubicacionWithLpu,
   RequestEditCubicacion,
+  SubcontratosProveedor,
 } from '@data';
 
 @Injectable({
@@ -92,16 +93,16 @@ export class CubicacionFacade {
   }
 
   public getSubContractedProvidersSuccess(
-    subContractedProviders: cubModel.Provider[]
+    subContractedProviders: SubcontratosProveedor[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractProvidersSuccess({
-        subContractedProviders,
+        subcontratosProveedor: subContractedProviders,
       })
     );
   }
 
-  public getProvidersSelector$(): Observable<cubModel.Provider[]> {
+  public getProvidersSelector$(): Observable<SubcontratosProveedor[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);
   }
   // SUBCONTRACTPROVIDERS

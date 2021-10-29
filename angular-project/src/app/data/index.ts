@@ -9,3 +9,5 @@ export * from './service/tipo-numero-interno.service';
 export * from './service/user.service';
 export * from './service/perfil.service';
 export * from './service/notificaciones.service';
+export * from './service/contratos.service';
+export * from './service/proveedores.service';
