@@ -527,7 +527,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     }
 
     console.log('SAVE contrato fijo', request);
-    // this.otFacade.postOt(request);
+    this.otFacade.postOt(request);
   }
 
   saveOrdinarioForm(): void {
