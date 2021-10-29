@@ -280,6 +280,24 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const otInformeAvance = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_GENERAR_INFORME_AVANCE'
+        );
+
+        if (otInformeAvance) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Generar Informa de Avance',
+            onClick: (event: Event, item) => {
+              this.router.navigate([
+                '/app/informacion/informe-avance',
+                item.id,
+              ]);
+            },
+          });
+        }
+
         const otGenerarActas = (ot.acciones || []).find(
           accion => accion.slug === 'OT_AUTORIZAR_ACTAS'
         );

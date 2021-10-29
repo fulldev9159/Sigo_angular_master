@@ -14,12 +14,26 @@ export class OtFacade {
 
   // OT
   public getOts({ filtro_propietario, filtro_tipo }): void {
-    this.store.dispatch(otActions.getOtEjecucion({ filtro_tipo }));
     this.store.dispatch(
-      otActions.getOtAbiertas({ filtro_propietario, filtro_tipo })
+      otActions.getOtEjecucion({
+        filtro_tipo,
+        filtro_propietario,
+        filtro_pestania: 'EN_EJECUCION',
+      })
     );
     this.store.dispatch(
-      otActions.getOtCerradas({ filtro_propietario, filtro_tipo })
+      otActions.getOtAbiertas({
+        filtro_propietario,
+        filtro_tipo,
+        filtro_pestania: 'ABIERTAS',
+      })
+    );
+    this.store.dispatch(
+      otActions.getOtCerradas({
+        filtro_propietario,
+        filtro_tipo,
+        filtro_pestania: 'CERRADAS',
+      })
     );
   }
 

@@ -9,6 +9,7 @@ import { map, filter } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import * as Data from '@data';
+import { OT } from '@data';
 
 @Component({
   selector: 'app-assign-coordinator-form',
@@ -17,7 +18,7 @@ import * as Data from '@data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
-  ot$: Observable<Data.OT>;
+  ot$: Observable<OT>;
   etapa = '';
   otID: number;
   coordinators$: Observable<Data.User[]>;
@@ -45,7 +46,7 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.ot$.subscribe(ot => {
         this.otID = ot.id;
-        this.etapa = ot.etapa_otdesc;
+        this.etapa = ot.etapa_slug;
         this.reset();
         this.otFacade.getCoordinators(ot.id);
       })
@@ -88,7 +89,7 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
     if (this.valid) {
       const { coordinatorID } = this.form.getRawValue();
       console.log(this.etapa);
-      if (this.etapa === 'Pendiente de Autorización por Adm. Contrato') {
+      if (this.etapa === 'OT_ET_AUTORIZACION_PROVEEDOR') {
         this.otFacade.approveOT(this.otID, coordinatorID);
       } else if (this.etapa === '') {
         this.otFacade.assignCoordinator(this.otID, coordinatorID);

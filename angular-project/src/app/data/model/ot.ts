@@ -2,7 +2,7 @@ import { Accion } from './accion';
 
 // GET OTs init
 export interface RequestGetOTs {
-  perfil_id: number;
+  filtro_pestania: string;
   filtro_propietario: string;
   filtro_tipo: string;
 }
@@ -21,6 +21,13 @@ export interface OT {
   estado_otdesc: string;
   etapa_otdesc: string;
   acciones: Accion[];
+  acciones_str: string;
+  delegacion: string;
+  estado_otid: number;
+  estado_slug: string;
+  etapa_otid: number;
+  etapa_slug: string;
+  proveedor_id: number;
 }
 
 interface FieldOrder {

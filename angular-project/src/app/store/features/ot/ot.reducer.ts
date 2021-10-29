@@ -112,11 +112,11 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.getOtSuccessAbiertas, (state, payload) => ({
     ...state,
-    itemsAbiertas: payload.ot,
+    itemsAbiertas: payload.ots,
   })),
   on(OtActions.getOtSuccessCerradas, (state, payload) => ({
     ...state,
-    itemsCerradas: payload.ot,
+    itemsCerradas: payload.ots,
   })),
   // on(OtActions.deleteOt, (state, payload) => ({
   //   ...state,
