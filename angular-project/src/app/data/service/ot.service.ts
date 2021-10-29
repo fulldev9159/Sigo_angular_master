@@ -35,55 +35,20 @@ export class OTService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getOTsEjecucion(request: RequestGetOTs): Observable<OTsResponse> {
-    return this.http.post<OTsResponse>(
-      `${this.apiUrl}/ingreot/ot/get/abiertas`,
-      request
-    );
-  }
-
-  getOTsAbiertas(
-    perfil_id: number,
-    filtro_propietario: string,
-    filtro_tipo: string
-  ): Observable<OT[]> {
+  getOTs(request: RequestGetOTs): Observable<OT[]> {
     return this.http
-      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/abiertas`, {
-        perfil_id,
-        filtro_propietario,
-        filtro_tipo,
-      })
+      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get`, request)
       .pipe(
-        map(res => {
-          if (+res.status.responseCode !== 0) {
-            if (res.status.description !== 'Sin resultados') {
-              this.snackService.showMessage(`${res.status.description}`, '');
+        map(response => {
+          if (+response.status.responseCode !== 0) {
+            if (response.status.description !== 'Sin resultados') {
+              this.snackService.showMessage(
+                `${response.status.description}`,
+                ''
+              );
             }
           }
-          return res.data.items;
-        })
-      );
-  }
-
-  getOTsCerradas(
-    perfil_id: number,
-    filtro_propietario: string,
-    filtro_tipo: string
-  ): Observable<OT[]> {
-    return this.http
-      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get/cerradas`, {
-        perfil_id,
-        filtro_propietario,
-        filtro_tipo,
-      })
-      .pipe(
-        map(res => {
-          if (+res.status.responseCode !== 0) {
-            if (res.status.description !== 'Sin resultados') {
-              this.snackService.showMessage(`${res.status.description}`, '');
-            }
-          }
-          return res.data.items;
+          return response.data.items;
         })
       );
   }

@@ -7,7 +7,11 @@ import { OT, RequestGetOTs } from '@data';
 
 export const getOtEjecucion = createAction(
   '[Ot Get Ejecucion] GET Ot Ejecucion',
-  props<{ filtro_tipo: string }>()
+  props<{
+    filtro_pestania: string;
+    filtro_propietario: string;
+    filtro_tipo: string;
+  }>()
 );
 export const getOtSuccessEjecucion = createAction(
   '[Ot GetAll] GET Ot Success Ejecucion',
@@ -18,6 +22,7 @@ export const getOtSuccessEjecucion = createAction(
 export const getOtAbiertas = createAction(
   '[Ot Get Abiertas] GET Ot Abiertas',
   props<{
+    filtro_pestania: string;
     filtro_propietario: string;
     filtro_tipo: string;
   }>()
@@ -26,6 +31,7 @@ export const getOtAbiertas = createAction(
 export const getOtCerradas = createAction(
   '[Ot Get Cerradas] GET Ot Cerradas',
   props<{
+    filtro_pestania: string;
     filtro_propietario: string;
     filtro_tipo: string;
   }>()
@@ -33,12 +39,12 @@ export const getOtCerradas = createAction(
 
 export const getOtSuccessAbiertas = createAction(
   '[Ot GetAll] GET Ot Success Abiertas',
-  props<{ ot: Data.OT[] }>()
+  props<{ ots: OT[] }>()
 );
 
 export const getOtSuccessCerradas = createAction(
   '[Ot GetAll] GET Ot Success Cerradas',
-  props<{ ot: Data.OT[] }>()
+  props<{ ots: OT[] }>()
 );
 export const getOtError = createAction(
   '[Ot GetAll] GET Ot Error',

@@ -43,25 +43,14 @@ export class OtEffects {
   getOTsEjecucion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getOtEjecucion),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ filtro_tipo }, profile]) => {
+      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
         const request: RequestGetOTs = {
-          perfil_id: profile.id,
-          filtro_propietario: 'EJECUCION',
+          filtro_pestania,
+          filtro_propietario,
           filtro_tipo,
         };
-        return this.otService.getOTsEjecucion(request).pipe(
-          map(respose => {
-            if (+respose.status.responseCode !== 0) {
-              if (respose.status.description !== 'Sin resultados') {
-                this.snackService.showMessage(
-                  `${respose.status.description}`,
-                  ''
-                );
-              }
-            }
-            return otActions.getOtSuccessEjecucion({ ots: respose.data.items });
-          }),
+        return this.otService.getOTs(request).pipe(
+          map(ots => otActions.getOtSuccessEjecucion({ ots })),
           catchError(error => of(otActions.getOtError({ error })))
         );
       })
@@ -71,36 +60,53 @@ export class OtEffects {
   getOTsAbiertas$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getOtAbiertas),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.otService
-          .getOTsAbiertas(profile.id, data.filtro_propietario, data.filtro_tipo)
-          .pipe(
-            map((ots: Data.OT[]) =>
-              otActions.getOtSuccessAbiertas({ ot: ots })
-            ),
-            catchError(error => of(otActions.getOtError({ error })))
-          )
-      )
+      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
+        const request: RequestGetOTs = {
+          filtro_pestania,
+          filtro_propietario,
+          filtro_tipo,
+        };
+        return this.otService.getOTs(request).pipe(
+          map(ots => otActions.getOtSuccessAbiertas({ ots })),
+          catchError(error => of(otActions.getOtError({ error })))
+        );
+      })
     )
   );
 
   getOTsCerradas$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getOtCerradas),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.otService
-          .getOTsCerradas(profile.id, data.filtro_propietario, data.filtro_tipo)
-          .pipe(
-            map((ots: Data.OT[]) =>
-              otActions.getOtSuccessCerradas({ ot: ots })
-            ),
-            catchError(error => of(otActions.getOtError({ error })))
-          )
-      )
+      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
+        const request: RequestGetOTs = {
+          filtro_pestania,
+          filtro_propietario,
+          filtro_tipo,
+        };
+        return this.otService.getOTs(request).pipe(
+          map(ots => otActions.getOtSuccessCerradas({ ots })),
+          catchError(error => of(otActions.getOtError({ error })))
+        );
+      })
     )
   );
+
+  // getOTsCerradas$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(otActions.getOtCerradas),
+  //     withLatestFrom(this.authFacade.getCurrentProfile$()),
+  //     concatMap(([data, profile]) =>
+  //       this.otService
+  //         .getOTsCerradas(profile.id, data.filtro_propietario, data.filtro_tipo)
+  //         .pipe(
+  //           map((ots: Data.OT[]) =>
+  //             otActions.getOtSuccessCerradas({ ots: ots })
+  //           ),
+  //           catchError(error => of(otActions.getOtError({ error })))
+  //         )
+  //     )
+  //   )
+  // );
 
   getPlans$ = createEffect(() =>
     this.actions$.pipe(
