@@ -17,6 +17,7 @@ import {
   ContratoMarco4Cub,
   RegionSubcontrato4Cub,
   SubcontratosProveedor,
+  TipoLpu,
 } from '@data';
 
 @Component({
@@ -37,7 +38,7 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input() contratosMarcos: ContratoMarco4Cub[] = [];
   @Input() Providers: SubcontratosProveedor[] = [];
   @Input() Regions: RegionSubcontrato4Cub[] = [];
-  @Input() TypeServices: CubModel.TypeService[] = [];
+  @Input() TypeServices: TipoLpu[] = [];
   @Input() Services: CubModel.Service[] = [];
   @Input() autoSuggestInitialValue = '';
   @Input() autoSuggestData: CubModel.AutoSuggestItem[] = [];

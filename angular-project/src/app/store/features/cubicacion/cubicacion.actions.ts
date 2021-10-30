@@ -8,6 +8,7 @@ import {
   Proveedor,
   SubcontratosProveedor,
   RegionSubcontrato4Cub,
+  TipoLpu,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
@@ -144,22 +145,22 @@ export const getSubContractedRegionsError = createAction(
   '[SubContractedRegions Get] GET Data Error',
   props<{ error: any }>()
 );
-// GET REGIONES SUBCONTRATO init
+// GET REGIONES SUBCONTRATO end
 
+// GET Tipo LPUs init
 export const getSubContractedTypeServices = createAction(
   '[SubContractedTypeServices Get] GET Data',
-  props<{ subcontrato_id: number; region_id: number }>()
+  props<{ subcontrato_id: number[]; region_id: number }>()
 );
-
 export const getSubContractedTypeServicesSuccess = createAction(
   '[SubContractedTypeServices Get] GET Data Success',
-  props<{ subContractedTypeServices: cubModel.TypeService[] }>()
+  props<{ subContractedTypeServices: TipoLpu[] }>()
 );
-
 export const getSubContractedTypeServicesError = createAction(
   '[SubContractedTypeServices Get] GET Data Error',
   props<{ error: any }>()
 );
+// GET Tipo LPUs end
 
 export const getSubContractedServices = createAction(
   '[SubContractedServices Get] GET Data',

@@ -11,6 +11,7 @@ import {
   RegionSubcontrato4Cub,
   RequestEditCubicacion,
   SubcontratosProveedor,
+  TipoLpu,
 } from '@data';
 
 @Injectable({
@@ -136,7 +137,7 @@ export class CubicacionFacade {
   }
 
   public getSubContractedTypeServicesSuccess(
-    subContractedTypeServices: cubModel.TypeService[]
+    subContractedTypeServices: TipoLpu[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedTypeServicesSuccess({
@@ -145,7 +146,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getTypeServicesSelector$(): Observable<cubModel.TypeService[]> {
+  public getTypeServicesSelector$(): Observable<TipoLpu[]> {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
   }
   // SUBCONTRACTTYPESERVICES

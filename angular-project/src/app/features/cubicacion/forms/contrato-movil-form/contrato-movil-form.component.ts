@@ -22,7 +22,7 @@ import { GeneralFormService } from '../../service/general-form.service';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { TableComponent } from '@uiOT/table/table.component';
 import { ContratoMovilLpusTableComponent } from '../../component/contrato-movil-lpus-table/contrato-movil-lpus-table.component';
-import { CubicacionWithLpu, RegionSubcontrato4Cub } from '@data';
+import { CubicacionWithLpu, RegionSubcontrato4Cub, TipoLpu } from '@data';
 
 // tslint:disable-next-line:no-empty-interface
 interface CartItem extends CubModel.Service {}
@@ -45,8 +45,8 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
 
   subcontratoID;
 
-  tiposServicio$: Observable<CubModel.TypeService[]> = of([]);
-  tiposServicio: CubModel.TypeService[] = []; // TODO: mejorar ésto
+  tiposServicio$: Observable<TipoLpu[]> = of([]);
+  tiposServicio: TipoLpu[] = []; // TODO: mejorar ésto
   regiones$: Observable<RegionSubcontrato4Cub[]> = of([]);
   regiones: RegionSubcontrato4Cub[] = []; // TODO: mejorar ésto
   servicios$: Observable<CubModel.Service[]> = of([]);
@@ -285,7 +285,7 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
     this.form.get('tipo_servicio_id').reset();
   }
 
-  checkTiposServicioAndEnable(tiposServicio: CubModel.TypeService[]): void {
+  checkTiposServicioAndEnable(tiposServicio: TipoLpu[]): void {
     if (tiposServicio.length > 0) {
       this.form.get('tipo_servicio_id').enable();
     } else {

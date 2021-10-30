@@ -7,6 +7,7 @@ import {
   CubicacionWithLpu,
   RegionSubcontrato4Cub,
   SubcontratosProveedor,
+  TipoLpu,
 } from '@data';
 
 export const CubicacionFeatureKey = 'cubicacion';
@@ -19,7 +20,7 @@ export interface StateCubicacion {
   contractMarco: ContratoMarco4Cub[];
   subContractedProviders: SubcontratosProveedor[];
   subContractedRegions: RegionSubcontrato4Cub[];
-  subContractedTypeServices: cubModel.TypeService[];
+  subContractedTypeServices: TipoLpu[];
   subContractedServices: cubModel.Service[];
   autoSuggest: cubModel.AutoSuggestItem[];
   detalleCubicacion: cubModel.ResponseDetalleCubicacion[];

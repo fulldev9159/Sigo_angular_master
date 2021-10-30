@@ -1,8 +1,3 @@
-export interface TypeService {
-  id: number;
-  nombre: string;
-}
-
 export interface Service {
   lpu_id: number;
   lpu_nombre: string;

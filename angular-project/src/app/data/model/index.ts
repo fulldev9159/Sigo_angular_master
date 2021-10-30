@@ -13,3 +13,4 @@ export * from './notificaciones';
 export * from './contrato';
 export * from './proveedor';
 export * from './region';
+export * from './lpus';

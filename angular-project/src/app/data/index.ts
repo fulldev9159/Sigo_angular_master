@@ -12,3 +12,4 @@ export * from './service/notificaciones.service';
 export * from './service/contratos.service';
 export * from './service/proveedores.service';
 export * from './service/region.service';
+export * from './service/lpus.service';
