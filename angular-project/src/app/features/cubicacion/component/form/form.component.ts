@@ -15,6 +15,8 @@ import { TableComponetType } from '@storeOT/model';
 import { TableComponent } from '@uiOT/table/table.component';
 import {
   ContratoMarco4Cub,
+  Lpu4Cub,
+  LpuCarrito4Cub,
   RegionSubcontrato4Cub,
   SubcontratosProveedor,
   TipoLpu,
@@ -39,7 +41,7 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input() Providers: SubcontratosProveedor[] = [];
   @Input() Regions: RegionSubcontrato4Cub[] = [];
   @Input() TypeServices: TipoLpu[] = [];
-  @Input() Services: CubModel.Service[] = [];
+  @Input() Services: Lpu4Cub[] = [];
   @Input() autoSuggestInitialValue = '';
   @Input() autoSuggestData: CubModel.AutoSuggestItem[] = [];
   // @Input() ConfigTableResumen: TableComponetType;
@@ -51,9 +53,9 @@ export class FormComponent implements OnInit, OnDestroy {
     },
   ];
   hasLPUWithZeroQuantity = false;
-  lpusCarrito: CubModel.Service[] = [];
+  lpusCarrito: LpuCarrito4Cub[] = [];
   @Input('lpusCarrito')
-  set lpusCarritoInput(lpusCarrito: CubModel.Service[]) {
+  set lpusCarritoInput(lpusCarrito: LpuCarrito4Cub[]) {
     this.lpusCarrito = lpusCarrito;
     const item = this.lpusCarrito.find(lpu => lpu.cantidad < 1);
     this.hasLPUWithZeroQuantity = item !== undefined;
@@ -108,7 +110,7 @@ export class FormComponent implements OnInit, OnDestroy {
           sort: 'cantidad',
           header: 'cantidad',
           editable: true,
-          onchange: (event: Event, item: CubModel.Service) => {
+          onchange: (event: Event, item: Lpu4Cub) => {
             this.tableValid = this.tableLpus.valid;
             this.CantidadSelected.emit({ event, item });
           },
@@ -171,7 +173,7 @@ export class FormComponent implements OnInit, OnDestroy {
         {
           icon: 'p-button-icon pi pi-trash',
           class: 'p-button-rounded p-button-danger',
-          onClick: (event: Event, item: CubModel.Service) => {
+          onClick: (event: Event, item: Lpu4Cub) => {
             this.tableValid = this.tableLpus.valid;
             this.BorrarLPUCarrito.emit({ event, item });
           },

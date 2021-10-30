@@ -5,6 +5,7 @@ import {
   ContratoMarco4Cub,
   Cubicacion,
   CubicacionWithLpu,
+  Lpu4Cub,
   RegionSubcontrato4Cub,
   SubcontratosProveedor,
   TipoLpu,
@@ -21,7 +22,7 @@ export interface StateCubicacion {
   subContractedProviders: SubcontratosProveedor[];
   subContractedRegions: RegionSubcontrato4Cub[];
   subContractedTypeServices: TipoLpu[];
-  subContractedServices: cubModel.Service[];
+  subContractedServices: Lpu4Cub[];
   autoSuggest: cubModel.AutoSuggestItem[];
   detalleCubicacion: cubModel.ResponseDetalleCubicacion[];
   saving: boolean;

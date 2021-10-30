@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { ResponseTipoLpu, TipoLpu } from '@data';
+import { Lpu4Cub, ResponseLpu4Cub, ResponseTipoLpu, TipoLpu } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +33,36 @@ export class LpusService {
             this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.items;
+        })
+      );
+  }
+
+  getLpus4Cub(
+    subcontrato_id: number,
+    region_id: number,
+    tipo_servicio_id: number
+  ): Observable<Lpu4Cub[]> {
+    return this.http
+      .post<ResponseLpu4Cub>(
+        `${this.apiUrl}/cubicacion/servicios_subcontrato/get`,
+        {
+          subcontrato_id,
+          region_id,
+          tipo_servicio_id,
+        }
+      )
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.items.sort((a, b) =>
+            a.lpu_nombre > b.lpu_nombre
+              ? 1
+              : b.lpu_nombre > a.lpu_nombre
+              ? -1
+              : 0
+          );
         })
       );
   }

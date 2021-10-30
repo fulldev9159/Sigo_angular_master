@@ -12,6 +12,8 @@ import {
   RequestEditCubicacion,
   SubcontratosProveedor,
   TipoLpu,
+  LpuCarrito4Cub,
+  Lpu4Cub,
 } from '@data';
 
 @Injectable({
@@ -157,7 +159,7 @@ export class CubicacionFacade {
   }
 
   public getSubContractedServicesSuccess(
-    subContractedServices: cubModel.Service[]
+    subContractedServices: LpuCarrito4Cub[]
   ): void {
     this.store.dispatch(
       cubicacionActions.getSubContractedServicesSuccess({
@@ -166,7 +168,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getServicesSelector$(): Observable<cubModel.Service[]> {
+  public getServicesSelector$(): Observable<Lpu4Cub[]> {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
   }
 

@@ -22,10 +22,16 @@ import { GeneralFormService } from '../../service/general-form.service';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { TableComponent } from '@uiOT/table/table.component';
 import { ContratoMovilLpusTableComponent } from '../../component/contrato-movil-lpus-table/contrato-movil-lpus-table.component';
-import { CubicacionWithLpu, RegionSubcontrato4Cub, TipoLpu } from '@data';
+import {
+  CubicacionWithLpu,
+  Lpu4Cub,
+  LpuCarrito4Cub,
+  RegionSubcontrato4Cub,
+  TipoLpu,
+} from '@data';
 
 // tslint:disable-next-line:no-empty-interface
-interface CartItem extends CubModel.Service {}
+interface CartItem extends LpuCarrito4Cub {}
 
 @Component({
   selector: 'app-contrato-movil-form',
@@ -49,8 +55,8 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
   tiposServicio: TipoLpu[] = []; // TODO: mejorar ésto
   regiones$: Observable<RegionSubcontrato4Cub[]> = of([]);
   regiones: RegionSubcontrato4Cub[] = []; // TODO: mejorar ésto
-  servicios$: Observable<CubModel.Service[]> = of([]);
-  servicios: CubModel.Service[] = []; // TODO: mejorar ésto
+  servicios$: Observable<Lpu4Cub[]> = of([]);
+  servicios: Lpu4Cub[] = []; // TODO: mejorar ésto
 
   lpusCarrito: CartItem[] = [];
 
@@ -293,7 +299,7 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  resetSelectedLpusFormControl(lpus: CubModel.Service[]): void {
+  resetSelectedLpusFormControl(lpus: LpuCarrito4Cub[]): void {
     this.form.get('lpus').reset();
     this.form.get('lpus').setValue([]);
   }
