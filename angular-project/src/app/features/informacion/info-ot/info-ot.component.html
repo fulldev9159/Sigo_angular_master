@@ -50,6 +50,21 @@
     </app-card>
 
 
+    <app-card [classCardHeader]="'bg-info'" *ngIf="(detalleOt$| async).numero_interno">
+      <ng-container card-header-title>Número Interno</ng-container>
+      <ng-container card-body>
+        <ul>
+          <li>Tipo:<span style="margin-right:10em"></span>{{(detalleOt$| async) ? (detalleOt$| async).tipo_numero_interno_nombre : ' ---' }}</li>
+          <li>Números:
+            <ul>
+              <li *ngFor="let numero of (detalleOt$| async).numero_interno">{{numero}}</li>
+            </ul>
+          </li>
+        </ul>
+      </ng-container>
+    </app-card>
+
+
     <app-card [classCardHeader]="'bg-info'">
       <ng-container card-header-title>Sustento Financiero</ng-container>
       <ng-container card-body>
