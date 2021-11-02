@@ -130,7 +130,13 @@
               <div class="col-5" style="border: solid 1px #ced4da;
               padding: 33px;">
                 <h5>Perfil</h5>
-                <p-multiSelect id="perfiles" name="perfiles" [style]="{'width':'100%'}" placeholder="Seleccionar perfiles a usar..." [options]="profiles$|async" formControlName="perfiles" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30"></p-multiSelect>
+                <p-multiSelect id="perfiles" [options]="perfiles" [style]="{'width':'100%'}" [group]="true" defaultLabel="Seleccione los perfiles del usuario" scrollHeight="300px" display="chip" formControlName="perfiles">
+                  <ng-template let-group pTemplate="group">
+                    <div class="p-d-flex p-ai-center">
+                      <span>{{group.label}}</span>
+                    </div>
+                  </ng-template>
+                </p-multiSelect>
                 <div *ngIf="formControls.perfiles.invalid && (formControls.perfiles.dirty || formControls.perfiles.touched)">
                   <p-message severity="error" text="Este campo es requerido"></p-message>
                 </div>

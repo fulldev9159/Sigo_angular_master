@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Data from '@data';
+import { PosiblesSuperiores } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -57,22 +58,6 @@ export class UserFacade {
     return this.store.select(userSelectors.getProviders);
   }
   // PROVIDERS
-
-  // HIGHERS
-  public getSameCompanyUsers(
-    proveedor_id: number,
-    area_id: number,
-    contratos_id: number[]
-  ): void {
-    this.store.dispatch(
-      userActions.getSameCompanyUsers({ proveedor_id, area_id, contratos_id })
-    );
-  }
-
-  public getSameCompanyUsers$(): Observable<Data.User[]> {
-    return this.store.select(userSelectors.getSameCompanyUsers);
-  }
-  // HIGHERS
 
   // CONTRACT
   public getContracts(proveedor_id: number): void {
@@ -130,5 +115,23 @@ export class UserFacade {
 
   public DisplayDetalleModal$(): Observable<boolean> {
     return this.store.select(userSelectors.getDisplayDetalleModal);
+  }
+
+  public getPosiblesSuperiores(
+    proveedor_id: number,
+    area_id: number,
+    contratos_marco_id: number[]
+  ): void {
+    this.store.dispatch(
+      userActions.getGetPosiblesSuperiores({
+        proveedor_id,
+        area_id,
+        contratos_marco_id,
+      })
+    );
+  }
+
+  public getPosiblesSuperiores$(): Observable<PosiblesSuperiores[]> {
+    return this.store.select(userSelectors.getPosiblesSuperiores);
   }
 }

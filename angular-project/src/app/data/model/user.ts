@@ -177,3 +177,21 @@ export interface Contrato {
   tipo_glosa: string;
   activo: boolean;
 }
+
+export interface ResponsePosiblesSuperiores {
+  data: {
+    items: PosiblesSuperiores[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+export interface PosiblesSuperiores {
+  id: number;
+  username: string;
+  rut: string;
+  nombres: string;
+  apellidos: string;
+}

@@ -9,6 +9,7 @@ export interface Perfil {
   permisos: Permiso[];
   updated_at: Date;
   rol_id: number;
+  rol_nombre: string;
 }
 
 export interface PerfilResponse {

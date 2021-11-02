@@ -25,7 +25,53 @@ export class PerfilService {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }
-          return res.data;
+          return res.data.map(perfil => {
+            let rol_nombre = '';
+            if (perfil.rol_id === 1) {
+              rol_nombre = 'Administrador del Sistema';
+            }
+            if (perfil.rol_id === 2) {
+              rol_nombre = 'Gestor/JP (Telefónica)';
+            }
+            if (perfil.rol_id === 3) {
+              rol_nombre = 'Administrador (EECC)';
+            }
+            if (perfil.rol_id === 4) {
+              rol_nombre = 'Coordinador (EECC)';
+            }
+            if (perfil.rol_id === 5) {
+              rol_nombre = 'Trabajador (EECC)';
+            }
+            if (perfil.rol_id === 6) {
+              rol_nombre = 'Supervisor (Telefónica)';
+            }
+            if (perfil.rol_id === 7) {
+              rol_nombre = 'Jefe de área (Telefónica)';
+            }
+            if (perfil.rol_id === 8) {
+              rol_nombre = 'Subgerente (Telefónica)';
+            }
+            if (perfil.rol_id === 9) {
+              rol_nombre = 'Gerente (Telefónica)';
+            }
+            if (perfil.rol_id === 10) {
+              rol_nombre = 'Auditor';
+            }
+            if (perfil.rol_id === 11) {
+              rol_nombre = 'Reportería';
+            }
+            if (perfil.rol_id === 12) {
+              rol_nombre = 'Operaciones (Telefónica)';
+            }
+            if (perfil.rol_id === 13) {
+              rol_nombre = 'Inventario';
+            }
+
+            return {
+              ...perfil,
+              rol_nombre,
+            };
+          });
         })
       );
   }

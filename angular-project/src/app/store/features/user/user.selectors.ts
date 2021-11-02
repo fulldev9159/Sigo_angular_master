@@ -25,11 +25,6 @@ export const getProviders = createSelector(
   (state: fromUser.StateUser) => state.proveedores
 );
 
-export const getSameCompanyUsers = createSelector(
-  selectUser,
-  (state: fromUser.StateUser) => state.samecompanyusers
-);
-
 export const getContracts = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.contratos
@@ -43,4 +38,9 @@ export const getAllDataUser = createSelector(
 export const getDisplayDetalleModal = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.displayDetalleModal
+);
+
+export const getPosiblesSuperiores = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.posiblesSuperiores
 );

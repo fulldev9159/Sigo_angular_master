@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Data from '@data';
+import { PosiblesSuperiores } from '@data';
 
 export const UserFeatureKey = 'user';
 
@@ -9,10 +10,10 @@ export interface StateUser {
   userDetail: Data.DetalleUsuario;
   areas: Data.Area[];
   proveedores: Data.Proveedor[];
-  samecompanyusers: Data.User[];
   contratos: Data.Contrato[];
   alldatauser: Data.UserWithDetail;
   displayDetalleModal: boolean;
+  posiblesSuperiores: PosiblesSuperiores[];
 }
 
 export const initialStateUser: StateUser = {
@@ -20,10 +21,10 @@ export const initialStateUser: StateUser = {
   userDetail: { perfiles: [], contratos_marco: [] },
   areas: [],
   proveedores: [],
-  samecompanyusers: [],
   contratos: [],
   alldatauser: null,
   displayDetalleModal: false,
+  posiblesSuperiores: [],
 };
 
 export const reducerUser = createReducer(
@@ -33,12 +34,6 @@ export const reducerUser = createReducer(
   on(UserActions.getAllUserSuccess, (state, payload) => ({
     ...state,
     users: payload.users,
-  })),
-
-  on(UserActions.getSameCompanyUsers, state => state),
-  on(UserActions.getSameCompanyUsersSuccess, (state, payload) => ({
-    ...state,
-    samecompanyusers: payload.users,
   })),
 
   on(UserActions.getUserDetail, state => state),
@@ -87,5 +82,10 @@ export const reducerUser = createReducer(
   on(UserActions.setDisplayDetalleModal, (state, payload) => ({
     ...state,
     displayDetalleModal: payload.value,
+  })),
+
+  on(UserActions.getGetPosiblesSuperioresSuccess, (state, payload) => ({
+    ...state,
+    posiblesSuperiores: payload.posiblesSuperiores,
   }))
 );
