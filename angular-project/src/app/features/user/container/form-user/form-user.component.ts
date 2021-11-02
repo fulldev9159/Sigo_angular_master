@@ -10,7 +10,7 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import * as Data from '@data';
 
 import * as _ from 'lodash';
-import { PosiblesSuperiores } from '@data';
+import { Perfil, PosiblesSuperiores } from '@data';
 
 @Component({
   selector: 'app-form-user',
@@ -68,6 +68,8 @@ export class FormUserComponent implements OnInit, OnDestroy {
   contracts$: Observable<Data.Contrato[]>;
   profiles$: Observable<Data.Perfil[]>;
   samecompanyusers$: Observable<PosiblesSuperiores[]>;
+  roles: any;
+  perfiles: any;
 
   constructor(
     private userFacade: UserFacade,
@@ -144,9 +146,30 @@ export class FormUserComponent implements OnInit, OnDestroy {
       map(areas => areas || []),
       tap(areas => this.checkAreaAndEnable(areas))
     );
-    this.profiles$ = this.profileFacade
-      .getProfile$()
-      .pipe(map(perfiles => perfiles || []));
+    this.profiles$ = this.profileFacade.getProfile$().pipe(
+      map(perfiles => {
+        return perfiles || [];
+      })
+    );
+    this.subscription.add(
+      this.profiles$.subscribe(perfiles => {
+        this.roles = perfiles.reduce((ac, perfil) => {
+          ac[perfil.rol_nombre] = [];
+          return ac;
+        }, {});
+        perfiles.forEach(perfil => this.roles[perfil.rol_nombre].push(perfil));
+        this.perfiles = Object.keys(this.roles).map(rol => {
+          return {
+            label: rol,
+            value: 'rol',
+            items: this.roles[rol].map((perfil: Perfil) => {
+              return { label: perfil.nombre, value: perfil.id };
+            }),
+          };
+        });
+        console.log(this.perfiles);
+      })
+    );
     this.contracts$ = this.userFacade.getContracts$().pipe(
       map(contratos => contratos || []),
       tap(contratos => this.checkContratosAndEnable(contratos))
