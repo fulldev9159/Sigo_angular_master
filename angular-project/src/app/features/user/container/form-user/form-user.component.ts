@@ -10,6 +10,7 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import * as Data from '@data';
 
 import * as _ from 'lodash';
+import { PosiblesSuperiores } from '@data';
 
 @Component({
   selector: 'app-form-user',
@@ -66,7 +67,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   areas$: Observable<Data.Area[]>;
   contracts$: Observable<Data.Contrato[]>;
   profiles$: Observable<Data.Perfil[]>;
-  samecompanyusers$: Observable<Data.User[]>;
+  samecompanyusers$: Observable<PosiblesSuperiores[]>;
 
   constructor(
     private userFacade: UserFacade,
@@ -150,7 +151,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       map(contratos => contratos || []),
       tap(contratos => this.checkContratosAndEnable(contratos))
     );
-    this.samecompanyusers$ = this.userFacade.getSameCompanyUsers$().pipe(
+    this.samecompanyusers$ = this.userFacade.getPosiblesSuperiores$().pipe(
       map(usuarios => usuarios || []),
       tap(usuarios => this.checkSuperioresAndEnable(usuarios))
     );
@@ -217,16 +218,25 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   initSuperiorFromControlEvent(): void {
     this.subscription.add(
-      this.formUser.get('contratos_marco').valueChanges.subscribe(contratos => {
-        this.resetSuperiorFormControl();
-        if (contratos !== null && contratos !== undefined) {
-          const providerID = this.formUser.get('proveedor_id').value;
-          const areaID = this.formUser.get('area_id').value;
-          this.userFacade.getSameCompanyUsers(1, 1, [1]);
-        } else {
-          this.disableSuperiorFormControl();
-        }
-      })
+      this.formUser
+        .get('contratos_marco')
+        .valueChanges.subscribe(contratos_marco_id => {
+          this.resetSuperiorFormControl();
+          if (contratos_marco_id !== null && contratos_marco_id !== undefined) {
+            const proveedor_id = this.formUser.get('proveedor_id').value;
+            const area_id = this.formUser.get('area_id').value;
+            console.log('Prov', proveedor_id);
+            console.log('Reg', area_id);
+            console.log('Contrat', contratos_marco_id);
+            this.userFacade.getPosiblesSuperiores(
+              +proveedor_id,
+              +area_id,
+              contratos_marco_id
+            );
+          } else {
+            this.disableSuperiorFormControl();
+          }
+        })
     );
   }
 
@@ -247,7 +257,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkSuperioresAndEnable(usuarios: Data.User[]): void {
+  checkSuperioresAndEnable(usuarios: PosiblesSuperiores[]): void {
     if (usuarios.length > 0) {
       this.formUser.get('superior').enable();
     } else {

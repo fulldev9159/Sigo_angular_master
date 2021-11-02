@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as Data from '@data';
+import { PosiblesSuperiores, ResponsePosiblesSuperiores } from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -43,66 +44,6 @@ export class UserService {
           return res.data;
         })
       );
-  }
-
-  getSameCompanyUsers(
-    proveedor_id: number,
-    area_id: number,
-    contratos_id: number[]
-  ): Observable<Data.User[]> {
-    return of([
-      {
-        id: 1,
-        username: 'string',
-        rut: 's',
-        nombres: 'Juanito',
-        apellidos: 'Perez',
-        celular: 'ss',
-        activo: true,
-        firma: 'string',
-        proveedor_id: 1,
-        area_id: 1,
-        email: 'ss',
-        created_at: 'string',
-        updated_at: 's',
-        proveedor_nombre: 's',
-        area_nombre: 's',
-      },
-      {
-        id: 2,
-        username: 'string',
-        rut: 's',
-        nombres: 'Juanita',
-        apellidos: 'Perez',
-        celular: 'ss',
-        activo: true,
-        firma: 'string',
-        proveedor_id: 1,
-        area_id: 1,
-        email: 'ss',
-        created_at: 'string',
-        updated_at: 's',
-        proveedor_nombre: 's',
-        area_nombre: 's',
-      },
-    ]);
-    // return this.http
-    //   .post<UsersResponse>(
-    //     `${this.apiUrl}/ingreot/ot/coordinador/get_candidatos`,
-    //     {
-    //       proveedor_id,
-    //       area_id,
-    //       contrato_id,
-    //     }
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       if (+res.status.responseCode !== 0) {
-    //         this.snackService.showMessage(res.status.description, 'error');
-    //       }
-    //       return res.data.items;
-    //     })
-    //   );
   }
 
   createUser(request: Data.CreateUserRequest): Observable<number> {
@@ -236,6 +177,30 @@ export class UserService {
               );
           }
           return throwError(new Error(`no user found`));
+        })
+      );
+  }
+
+  getPosiblesSuperiores(
+    proveedor_id: number,
+    area_id: number,
+    contratos_marco_id: number[]
+  ): Observable<PosiblesSuperiores[]> {
+    return this.http
+      .post<ResponsePosiblesSuperiores>(
+        `${this.apiUrl}/usuarios/posibles_superiores/get`,
+        {
+          proveedor_id,
+          area_id,
+          contratos_marco_id,
+        }
+      )
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.items;
         })
       );
   }

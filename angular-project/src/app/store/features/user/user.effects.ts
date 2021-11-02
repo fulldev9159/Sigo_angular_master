@@ -30,24 +30,6 @@ export class UserEffects {
     )
   );
 
-  getSameCompanyUsers$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.getSameCompanyUsers),
-      concatMap(({ proveedor_id, area_id, contratos_id }) =>
-        this.userService
-          .getSameCompanyUsers(proveedor_id, area_id, contratos_id)
-          .pipe(
-            map((users: Data.User[]) =>
-              userActions.getSameCompanyUsersSuccess({ users })
-            ),
-            catchError(error =>
-              of(userActions.getSameCompanyUsersError({ error }))
-            )
-          )
-      )
-    )
-  );
-
   // getUserById$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(userActions.getUserById),
@@ -275,6 +257,26 @@ export class UserEffects {
             return of(userActions.getAllDataUsuarioError({ error: err }));
           })
         )
+      )
+    )
+  );
+
+  getPosiblesSuperiores$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getGetPosiblesSuperiores),
+      concatMap(({ proveedor_id, area_id, contratos_marco_id }) =>
+        this.userService
+          .getPosiblesSuperiores(proveedor_id, area_id, contratos_marco_id)
+          .pipe(
+            map(posiblesSuperiores =>
+              userActions.getGetPosiblesSuperioresSuccess({
+                posiblesSuperiores,
+              })
+            ),
+            catchError(error =>
+              of(userActions.getGetPosiblesSuperioresError({ error }))
+            )
+          )
       )
     )
   );

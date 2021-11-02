@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
+import { PosiblesSuperiores } from '@data';
 
 // USER ACTIONS
 
@@ -13,22 +14,6 @@ export const getAllUserSuccess = createAction(
 
 export const getAllUserError = createAction(
   '[User GetAll] GET All User Error',
-  props<{ error: any }>()
-);
-
-// ::: Get Same Company Users
-export const getSameCompanyUsers = createAction(
-  '[Users] GET Same Company Users',
-  props<{ proveedor_id: number; area_id: number; contratos_id: number[] }>()
-);
-
-export const getSameCompanyUsersSuccess = createAction(
-  '[Users] GET Same Company Users Success',
-  props<{ users: Data.User[] }>()
-);
-
-export const getSameCompanyUsersError = createAction(
-  '[Users] GET Same Company Users Error',
   props<{ error: any }>()
 );
 
@@ -185,8 +170,27 @@ export const getAllDataUsuarioError = createAction(
 );
 
 export const setDisplayDetalleModal = createAction(
-  '[User Set DisplayDetalleModal] SET DisplayDetalleModal',
+  '[User Set DisplayDetalleModal] SET Usuario',
   props<{ value: boolean }>()
+);
+
+export const getGetPosiblesSuperiores = createAction(
+  '[User GetAll] GET All GetPosiblesSuperiores',
+  props<{
+    proveedor_id: number;
+    area_id: number;
+    contratos_marco_id: number[];
+  }>()
+);
+
+export const getGetPosiblesSuperioresSuccess = createAction(
+  '[User GetAll] GET All GetPosiblesSuperiores Success',
+  props<{ posiblesSuperiores: PosiblesSuperiores[] }>()
+);
+
+export const getGetPosiblesSuperioresError = createAction(
+  '[User GetAll] GET All GetPosiblesSuperiores Error',
+  props<{ error: any }>()
 );
 
 export const resetData = createAction('[ResetData] ResetData');
