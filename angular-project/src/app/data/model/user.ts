@@ -1,4 +1,4 @@
-import { ContratoMarco } from '@data';
+import { ContratoMarco4Cub } from '@data';
 
 // GET USER
 export interface User {
@@ -41,7 +41,7 @@ export interface UsersResponse {
 }
 
 export interface UserWithDetail extends User {
-  contratos_marco: ContratoMarco[];
+  contratos_marco: ContratoMarco4Cub[];
   perfiles: PerfilUser[];
 }
 
@@ -97,7 +97,7 @@ export interface DetalleUsuarioResponse {
 }
 
 export interface DetalleUsuario {
-  contratos_marco: ContratoMarco[];
+  contratos_marco: ContratoMarco4Cub[];
   perfiles: PerfilUser[];
 }
 
@@ -156,26 +156,6 @@ export interface Area {
   nombre: string;
   descripcion: string;
   interno: boolean;
-}
-
-export interface ProveedorResponse {
-  data: {
-    items: Proveedor[];
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-export interface Proveedor {
-  id: number;
-  nombre: string;
-  rut: number;
-  email: string;
-  telefono: string;
-  direccion: string;
-  activo: boolean;
 }
 
 export interface ContratoResponse {

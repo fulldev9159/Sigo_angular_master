@@ -11,3 +11,6 @@ export * from './tipo-numero-interno';
 export * from './libro_obra';
 export * from './notificaciones';
 export * from './contrato';
+export * from './proveedor';
+export * from './region';
+export * from './lpus';

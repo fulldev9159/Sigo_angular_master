@@ -12,7 +12,12 @@ import { tap, map, withLatestFrom, takeUntil, filter } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
-import { ContratoMarco, CubicacionWithLpu } from '@data';
+import {
+  ContratoMarco4Cub,
+  CubicacionWithLpu,
+  Proveedor,
+  SubcontratosProveedor,
+} from '@data';
 
 @Component({
   selector: 'app-general-form',
@@ -29,8 +34,8 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
   incompleteCubicacionError$: Observable<Error> = of(null);
 
   autoSuggestItems$: Observable<CubModel.AutoSuggestItem[]> = of([]);
-  contratosMarcos$: Observable<ContratoMarco[]> = of([]);
-  proveedores$: Observable<CubModel.Provider[]> = of([]);
+  contratosMarcos$: Observable<ContratoMarco4Cub[]> = of([]);
+  proveedores$: Observable<SubcontratosProveedor[]> = of([]);
 
   controls = {
     nombre: new FormControl('', [
@@ -227,7 +232,7 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  checkProveedoresAndEnable(proveedores: CubModel.Provider[]): void {
+  checkProveedoresAndEnable(proveedores: SubcontratosProveedor[]): void {
     if (proveedores.length > 0) {
       this.form.get('subcontrato_id').enable();
       this.form.get('proveedor_id').enable();
@@ -262,7 +267,7 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
     this.cubageFacade.getAutoSuggestAction('', 5);
   }
 
-  providerKey(provider: CubModel.Provider): string {
+  providerKey(provider: SubcontratosProveedor): string {
     return `${(provider.subcontrato_id || []).map(sID => sID + '').join(',')}-${
       provider.id
     }`;

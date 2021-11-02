@@ -14,22 +14,23 @@ import {
   Validators,
   ValidatorFn,
 } from '@angular/forms';
+import { LpuCarrito4Cub } from '@data';
 
-interface Service {
-  lpu_id: number;
-  lpu_nombre: string;
-  lpu_precio: number;
-  tipo_moneda_id: number;
-  tipo_moneda_cod: string;
-  lpu_numero_producto: string;
-  region: string;
-  lpu_subtotal: number;
-  tipo_servicio: string;
-  cantidad: number;
+// interface Service {
+//   lpu_id: number;
+//   lpu_nombre: string;
+//   lpu_precio: number;
+//   tipo_moneda_id: number;
+//   tipo_moneda_cod: string;
+//   lpu_numero_producto: string;
+//   region: string;
+//   lpu_subtotal: number;
+//   tipo_servicio: string;
+//   cantidad: number;
 
-  lpu_unidad_codigo?: number;
-  lpu_unidad_nombre?: string;
-}
+//   lpu_unidad_codigo?: number;
+//   lpu_unidad_nombre?: string;
+// }
 
 @Component({
   selector: 'app-contrato-movil-lpus-table',
@@ -48,7 +49,7 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
   ];
   total = 0;
   currency = '';
-  items: Service[] = [
+  items: LpuCarrito4Cub[] = [
     //// {
     ////   cantidad: 1,
     ////   lpu_id: 30265,
@@ -80,23 +81,23 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
   ];
 
   @Input('items')
-  set initItems(items: Service[]) {
+  set initItems(items: LpuCarrito4Cub[]) {
     this.initFormControls(items);
     this.items = items;
     this.updateTotal();
   }
 
   @Output() itemAdded = new EventEmitter<{
-    item: Service;
+    item: LpuCarrito4Cub;
   }>();
 
   @Output() itemDeleted = new EventEmitter<{
-    item: Service;
+    item: LpuCarrito4Cub;
   }>();
 
   @Output() cantidadChanged = new EventEmitter<{
     cantidad: number;
-    item: Service;
+    item: LpuCarrito4Cub;
   }>();
 
   form: FormGroup = new FormGroup({
@@ -150,11 +151,11 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
     return this.form.get('cantidades') as FormGroup;
   }
 
-  initFormControls(items: Service[]): void {
+  initFormControls(items: LpuCarrito4Cub[]): void {
     items.forEach(item => this.addItemControl(item));
   }
 
-  lpuKey(item: Service): string {
+  lpuKey(item: LpuCarrito4Cub): string {
     return `lpu_id__${item.lpu_id}`;
   }
 
@@ -185,7 +186,7 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
     });
   }
 
-  addItemControl(item: Service): void {
+  addItemControl(item: LpuCarrito4Cub): void {
     const key = this.lpuKey(item);
     this.cantidadesForm.addControl(
       key,
@@ -218,23 +219,23 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
     );
   }
 
-  removeItemControl(item: Service): void {
+  removeItemControl(item: LpuCarrito4Cub): void {
     const key = this.lpuKey(item);
     this.cantidadesForm.removeControl(key);
   }
 
-  addItem(item: Service): void {
+  addItem(item: LpuCarrito4Cub): void {
     this.items.push(item);
     this.addItemControl(item);
     this.updateTotal();
     this.itemAdded.emit({ item });
   }
 
-  addItems(items: Service[]): void {
+  addItems(items: LpuCarrito4Cub[]): void {
     items.forEach(item => this.addItem(item));
   }
 
-  deleteItem(item: Service): void {
+  deleteItem(item: LpuCarrito4Cub): void {
     const index = this.items.findIndex(i => i.lpu_id === item.lpu_id);
     if (index > -1) {
       this.items.splice(index, 1);
@@ -244,7 +245,7 @@ export class ContratoMovilLpusTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  get values(): Service[] {
+  get values(): LpuCarrito4Cub[] {
     return this.items;
   }
 

@@ -35,6 +35,10 @@ export class CubicacionEffects {
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private cubService: Data.CubicacionService,
+    private contratoService: Data.ContratosService,
+    private proveedorService: Data.ProveedorService,
+    private regionService: Data.RegionService,
+    private lpuService: Data.LpusService,
     private router: Router
   ) {}
 
@@ -79,7 +83,7 @@ export class CubicacionEffects {
     this.actions$.pipe(
       ofType(cubActions.getContractMarco),
       concatMap(() =>
-        this.cubService.getContratos().pipe(
+        this.contratoService.getContratos4cub().pipe(
           map(contratosMarcos =>
             cubActions.getContractMarcoSuccess({ contratosMarcos })
           ),
@@ -94,28 +98,15 @@ export class CubicacionEffects {
   getProveedoresSubcontrato$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getSubContractProviders),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/proveedores_subcontrato/get`, {
-            token: data.token,
-            contrato_marco_id: data.contrato_marco_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-
-              return cubActions.getSubContractProvidersSuccess({
-                subContractedProviders: res.data.items.sort((a, b) =>
-                  a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-                ),
-              });
-            }),
-            catchError(err =>
-              of(cubActions.getSubContractProvidersError({ error: err }))
-            )
+      concatMap(({ contrato_marco_id }) =>
+        this.proveedorService.getSubcontratosProveedor(contrato_marco_id).pipe(
+          map(subcontratosProveedor =>
+            cubActions.getSubContractProvidersSuccess({ subcontratosProveedor })
+          ),
+          catchError(err =>
+            of(cubActions.getSubContractProvidersError({ error: err }))
           )
+        )
       )
     )
   );
@@ -123,26 +114,17 @@ export class CubicacionEffects {
   getRegionesSubcontrato$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getSubContractedRegions),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/regiones_subcontrato/get`, {
-            token: data.token,
-            subcontrato_id: data.subcontrato_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-
-              return cubActions.getSubContractedRegionsSuccess({
-                subContractedRegions: res.data.items,
-              });
-            }),
-            catchError(err =>
-              of(cubActions.getSubContractedRegionsError({ error: err }))
-            )
+      concatMap(({ subcontratos_id }) =>
+        this.regionService.getRegionesSubcontrato4Cub(subcontratos_id).pipe(
+          map(regionesSubcontrato =>
+            cubActions.getSubContractedRegionsSuccess({
+              regionesSubcontrato,
+            })
+          ),
+          catchError(err =>
+            of(cubActions.getSubContractedRegionsError({ error: err }))
           )
+        )
       )
     )
   );
@@ -150,30 +132,21 @@ export class CubicacionEffects {
   getTipoSubcontrato$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getSubContractedTypeServices),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/tipos_servicios/get`, {
-            token: data.token,
-            subcontrato_id: data.subcontrato_id,
-            region_id: data.region_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return cubActions.getSubContractedTypeServicesSuccess({
-                subContractedTypeServices: res.data.items,
-              });
-            }),
-            catchError(err =>
-              of(
-                cubActions.getSubContractedTypeServicesError({
-                  error: err,
-                })
-              )
+      concatMap(({ subcontrato_id, region_id }) =>
+        this.lpuService.getTiposLpu(subcontrato_id, region_id).pipe(
+          map(subContractedTypeServices =>
+            cubActions.getSubContractedTypeServicesSuccess({
+              subContractedTypeServices,
+            })
+          ),
+          catchError(err =>
+            of(
+              cubActions.getSubContractedTypeServicesError({
+                error: err,
+              })
             )
           )
+        )
       )
     )
   );
@@ -181,29 +154,15 @@ export class CubicacionEffects {
   getServiciosSubcontrato$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getSubContractedServices),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/servicios_subcontrato/get`, {
-            token: data.token,
-            subcontrato_id: data.subcontrato_id,
-            region_id: data.region_id,
-            tipo_servicio_id: data.tipo_servicio_id,
-          })
+      concatMap(({ subcontrato_id, region_id, tipo_servicio_id }) =>
+        this.lpuService
+          .getLpus4Cub(subcontrato_id, region_id, tipo_servicio_id)
           .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return cubActions.getSubContractedServicesSuccess({
-                subContractedServices: res.data.items.sort((a, b) =>
-                  a.lpu_nombre > b.lpu_nombre
-                    ? 1
-                    : b.lpu_nombre > a.lpu_nombre
-                    ? -1
-                    : 0
-                ),
-              });
-            }),
+            map(subContractedServices =>
+              cubActions.getSubContractedServicesSuccess({
+                subContractedServices,
+              })
+            ),
             catchError(err =>
               of(cubActions.getSubContractedServicesError({ error: err }))
             )
