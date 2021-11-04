@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -58,7 +58,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     area_id: new FormControl(null, [Validators.required]),
     contratos_marco: new FormControl(null, [Validators.required]),
     perfiles: new FormControl(null, [Validators.required]),
-    superior: new FormControl(null, Validators.required),
+    superior: new FormControl(null, [Validators.required]),
   };
 
   formUser: FormGroup = new FormGroup(this.formControls);
@@ -75,7 +75,8 @@ export class FormUserComponent implements OnInit, OnDestroy {
     private userFacade: UserFacade,
     private router: Router,
     private profileFacade: ProfileFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private detector: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
     this.userFacade.resetData();
@@ -108,6 +109,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
             this.formUser.get('email').setValue(user.email);
             this.formUser.get('rut').setValue(user.rut);
             this.formUser.get('celular').setValue(user.celular);
+
             // ToDO: Que el endpoint de get proveedores retorne si este es interno o externo
             // const proveedor = proveedores.find(proveedor=>{proveedor.id===user.proveedor_id})
             if (user.proveedor_id === 1) {
@@ -115,20 +117,28 @@ export class FormUserComponent implements OnInit, OnDestroy {
             } else {
               this.formUser.get('provider').setValue('contratista');
             }
+            const delay = 700;
             setTimeout(() => {
               this.formUser.get('proveedor_id').setValue(user.proveedor_id);
-            }, 1000);
+            }, delay);
             setTimeout(() => {
               this.formUser.get('area_id').setValue(user.area_id);
-            }, 1000);
+            }, delay);
             setTimeout(() => {
               this.formUser
                 .get('contratos_marco')
                 .setValue(user.contratos_marco.map(contrato => contrato.id));
-            }, 1000);
+            }, delay);
+            setTimeout(() => {
+              this.formUser.get('superior').setValue(17);
+            }, 1500);
             this.formUser
               .get('perfiles')
               .setValue(user.perfiles.map(perfil => perfil.id));
+
+            setTimeout(() => {
+              this.detector.detectChanges();
+            }, 2000);
           }
         })
     );
@@ -167,7 +177,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
             }),
           };
         });
-        console.log(this.perfiles);
       })
     );
     this.contracts$ = this.userFacade.getContracts$().pipe(
@@ -248,9 +257,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
           if (contratos_marco_id !== null && contratos_marco_id !== undefined) {
             const proveedor_id = this.formUser.get('proveedor_id').value;
             const area_id = this.formUser.get('area_id').value;
-            console.log('Prov', proveedor_id);
-            console.log('Reg', area_id);
-            console.log('Contrat', contratos_marco_id);
             this.userFacade.getPosiblesSuperiores(
               +proveedor_id,
               +area_id,
