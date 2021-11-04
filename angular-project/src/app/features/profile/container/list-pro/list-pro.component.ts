@@ -28,6 +28,13 @@ export class ListProComponent implements OnInit, OnDestroy {
     body: {
       headers: [
         {
+          field: 'Rol',
+          type: 'TEXT',
+          sort: 'rol_nombre',
+          header: 'rol_nombre',
+          editable: false,
+        },
+        {
           field: 'Nombre Perfil',
           type: 'TEXT',
           sort: 'nombre',
@@ -42,13 +49,7 @@ export class ListProComponent implements OnInit, OnDestroy {
           editable: false,
           width: '41%',
         },
-        // {
-        //   field: 'Perfil Superior',
-        //   type: 'TEXT',
-        //   sort: 'superior_nombre',
-        //   header: 'superior_nombre',
-        //   editable: false,
-        // },
+
         {
           field: 'Fecha Creación',
           type: 'DATE',
