@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
@@ -44,7 +44,8 @@ export class FormProComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private profileFacade: ProfileFacade,
-    private router: Router
+    private router: Router,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -157,17 +158,13 @@ export class FormProComponent implements OnInit, OnDestroy {
                 ).permissions.map(permiso => permiso.id)
               );
           }
-
-          setTimeout(
-            () =>
-              this.formControls.rol.markAsTouched({
-                onlySelf: true,
-              }),
-            1000
-          );
         }
       })
     );
+
+    setTimeout(() => {
+      this.detector.detectChanges();
+    }, 1000);
   }
 
   getPermissionsGroup(permissions: Data.Permiso[]): Data.PermissionsGroup[] {
@@ -220,6 +217,7 @@ export class FormProComponent implements OnInit, OnDestroy {
         nombre: this.formPerfil.get('nombre').value,
         descripcion: this.formPerfil.get('descripcion').value,
         permisos,
+        rol_id: +this.formPerfil.get('rol').value,
       };
       console.log('EDIT', request);
       this.profileFacade.editProfile(request);

@@ -44,6 +44,7 @@ export interface EditPerfilRequest {
   nombre: string;
   descripcion: string;
   permisos: number[];
+  rol_id: number;
 }
 
 export interface EditPerfilResponse {
