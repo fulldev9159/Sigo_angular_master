@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import * as profileActions from './profile.actions';
 import * as profileSelectors from './profile.selectors';
 import * as Data from '@data';
+import { Permiso, RolWithPermisos } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,16 @@ export class ProfileFacade {
     return this.store.select(profileSelectors.getPermissions);
   }
   // PERMISSIONS
+
+  // ROL PERMISSIONS
+  public getRolPermissions(rol_id: number): void {
+    this.store.dispatch(profileActions.getRolPermisos({ rol_id }));
+  }
+
+  public getRolPermissions$(): Observable<Permiso[]> {
+    return this.store.select(profileSelectors.getRolPermissions);
+  }
+  // ROL PERMISSIONS
 
   // DELETE
   public deleteProfile(perfil_id: number): void {

@@ -20,6 +20,11 @@ export const getPermissions = createSelector(
   (state: fromProfile.StateProfile) => state.permisos
 );
 
+export const getRolPermissions = createSelector(
+  selectProfile,
+  (state: fromProfile.StateProfile) => state.rol_permisos
+);
+
 export const getRols = createSelector(
   selectProfile,
   (state: fromProfile.StateProfile) => state.rols

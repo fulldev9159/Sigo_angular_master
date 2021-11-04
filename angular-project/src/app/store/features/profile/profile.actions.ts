@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
+import { Permiso, RolWithPermisos } from '@data';
 
 // PROFILE LIST
 export const getProfile = createAction('[Profile GetAll] GET Profile');
@@ -30,6 +31,22 @@ export const getPermissionsError = createAction(
   props<{ error: any }>()
 );
 
+// GET ROL PERMISOS
+
+export const getRolPermisos = createAction(
+  '[Permissions GetAll] GET getRolPermisos',
+  props<{ rol_id: number }>()
+);
+
+export const getRolPermisosSuccess = createAction(
+  '[Permissions GetAll] GET getRolPermisos Success',
+  props<{ rol_permisos: Permiso[] }>()
+);
+
+export const getRolPermisosError = createAction(
+  '[Permissions GetAll] GET getRolPermisos Error',
+  props<{ error: any }>()
+);
 // CREATE PERFIL
 
 export const createPerfil = createAction(

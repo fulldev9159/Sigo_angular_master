@@ -65,6 +65,20 @@ export class ProfileEffects {
     )
   );
 
+  getRolPermissions$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.getRolPermisos),
+      concatMap(({ rol_id }) =>
+        this.perfilService.getPermisosRol(rol_id).pipe(
+          map(rol_permisos =>
+            profileActions.getRolPermisosSuccess({ rol_permisos })
+          ),
+          catchError(error => of(profileActions.getPermissionsError({ error })))
+        )
+      )
+    )
+  );
+
   postProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.createPerfil),

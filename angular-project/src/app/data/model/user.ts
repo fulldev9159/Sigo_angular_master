@@ -58,6 +58,7 @@ export interface CreateUserRequest {
   area_id: number;
   perfiles: PerfilFormUser[];
   contratos_marco: number[];
+  superior_id: any;
 }
 
 export interface EditUserRequest extends CreateUserRequest {

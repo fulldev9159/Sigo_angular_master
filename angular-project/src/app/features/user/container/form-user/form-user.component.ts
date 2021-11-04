@@ -376,6 +376,10 @@ export class FormUserComponent implements OnInit, OnDestroy {
         persona_a_cargo_id: 1,
       })),
       contratos_marco: this.formUser.get('contratos_marco').value,
+      superior_id:
+        this.formUser.get('superior').value === null
+          ? null
+          : +this.formUser.get('superior').value,
     };
     if (this.formUser.get('id').value !== null) {
       let request: Data.EditUserRequest;

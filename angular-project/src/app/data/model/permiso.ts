@@ -16,3 +16,18 @@ export interface PermisoResponse {
     responseCode: number;
   };
 }
+
+export interface ResponseGetRolWithPermisos {
+  data: { items: RolWithPermisos[] };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface RolWithPermisos {
+  id: number;
+  nombre: string;
+  permiso: Permiso[];
+}

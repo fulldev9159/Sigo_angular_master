@@ -56,6 +56,14 @@
             </div>
           </div>
         </div>
+        <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
+          <div class="card">
+            <h5 class="card-header">Superior</h5>
+            <div class="card-body">
+              {{(userDetail$|async)?.perfiles[0].persona_a_cargo_nombre}}
+            </div>
+          </div>
+        </div>
       </div>
     </ng-container>
     <ng-container modal-footer></ng-container>

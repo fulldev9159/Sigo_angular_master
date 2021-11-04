@@ -17,6 +17,8 @@ export class FormProComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   permissions$: Observable<any>;
+  RolPermissions$: Observable<any>;
+
   perfilSelected$: Observable<Data.Perfil>;
   rols$: Observable<Data.Rols[]>;
 
@@ -48,6 +50,7 @@ export class FormProComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.profileFacade.resetData();
     this.initObservables();
+    this.initFormControlsEvents();
     this.initData();
 
     this.subscription.add(
@@ -62,6 +65,10 @@ export class FormProComponent implements OnInit, OnDestroy {
     );
   }
 
+  initFormControlsEvents(): void {
+    this.initRolFromControlEvent();
+  }
+
   initObservables(): void {
     this.permissions$ = this.profileFacade
       .getPermissions$()
@@ -70,9 +77,32 @@ export class FormProComponent implements OnInit, OnDestroy {
           this.getPermissionsGroup(permissions)
         )
       );
+
+    this.RolPermissions$ = this.profileFacade
+      .getRolPermissions$()
+      .pipe(
+        map((permissions: Data.Permiso[]) =>
+          this.getPermissionsGroup(permissions)
+        )
+      );
   }
 
-  ngOnDestroy(): void {}
+  initRolFromControlEvent(): void {
+    this.subscription.add(
+      this.formPerfil.get('rol').valueChanges.subscribe(rol_id => {
+        this.formPerfil.get('permisos_OT').reset();
+        this.formPerfil.get('permisos_CUBICACION').reset();
+        this.formPerfil.get('permisos_PERFIL').reset();
+
+        if (rol_id !== null && rol_id !== undefined) {
+          this.profileFacade.getRolPermissions(+rol_id);
+        }
+      })
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   goBack(): void {
     this.profileFacade.resetData();

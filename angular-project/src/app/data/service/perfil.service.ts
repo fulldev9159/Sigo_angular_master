@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as Data from '@data';
+import { Permiso, ResponseGetRolWithPermisos, RolWithPermisos } from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -88,6 +89,24 @@ export class PerfilService {
             this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.items;
+        })
+      );
+  }
+
+  getPermisosRol(rol_id: number): Observable<Permiso[]> {
+    return this.http
+      .post<ResponseGetRolWithPermisos>(
+        `${this.apiUrl}/rol/get_with_permisos`,
+        {
+          rol_id,
+        }
+      )
+      .pipe(
+        map(res => {
+          if (+res.status.responseCode !== 0) {
+            this.snackService.showMessage(res.status.description, 'error');
+          }
+          return res.data.items.length > 0 ? res.data.items[0].permiso : [];
         })
       );
   }
