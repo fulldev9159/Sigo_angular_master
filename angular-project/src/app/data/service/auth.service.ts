@@ -16,6 +16,16 @@ export class AuthService {
   login(login: LoginRequest): Observable<Login> {
     return this.http
       .post<LoginResponse>(`${this.apiUrl}/login_new`, login)
-      .pipe(map(response => response.data));
+      .pipe(
+        map(response => {
+          return {
+            ...response.data,
+            status: {
+              description: response.status.description,
+              response_code: response.status.responseCode,
+            },
+          };
+        })
+      );
   }
 }

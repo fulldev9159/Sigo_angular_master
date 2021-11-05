@@ -7,7 +7,7 @@ declare let Snackbar: object | any;
 export class SnackBarService {
   constructor() {}
 
-  showMessage(message: string, type: string): void {
+  showMessage(message: string, type: string, dur?: number): void {
     Snackbar.show({
       pos: 'top-center',
       text: message,
@@ -19,7 +19,7 @@ export class SnackBarService {
         }
         return '#2185D0';
       })(type),
-      duration: 7000,
+      duration: dur ? dur : 7000,
     });
   }
 }

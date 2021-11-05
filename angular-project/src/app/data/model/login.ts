@@ -8,7 +8,7 @@ export interface LoginRequest {
 export interface LoginResponse {
   status: {
     description: string;
-    response_code: number;
+    responseCode: number;
   };
   data: Login;
 }
@@ -17,5 +17,9 @@ export interface Login {
   usuario_nombre: string;
   usuario_id: number;
   perfiles: Perfil[];
+  status: {
+    description: string;
+    response_code: number;
+  };
 }
 // Login end
