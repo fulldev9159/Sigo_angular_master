@@ -83,61 +83,25 @@ export class CubicacionEffects {
     )
   );
 
-  notifyAfterSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(cubActions.getCubsSuccess),
-        tap(({ status, action }) => {
-          if (+status.responseCode === 0) {
-            // this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
-          } else {
-            let message = '';
-            if (+status.responseCode === 1) {
-              if (action === '[Get Cubicaciones]') {
-                message = 'No existen cubicaciones';
-              }
-            }
-
-            this.snackService.showMessage(
-              `${message} - ${status.description}`,
-              'info',
-              2000
-            );
-          }
-        })
-      ),
-    { dispatch: false }
-  );
-
-  notifyAfterError = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(cubActions.getCubsError),
-        tap(({ error, action }) => {
-          let message = '';
-          if (action === '[Get Cubicaciones]') {
-            message = 'Falló la obtención de cubicaciones';
-          }
-          this.snackService.showMessage(
-            `${message} - ${error.message}`,
-            'error',
-            4000
-          );
-        })
-      ),
-    { dispatch: false }
-  );
-
-  getContractMarco$ = createEffect(() =>
+  getContractMarco4Cub$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(cubActions.getContractMarco),
+      ofType(cubActions.getContractMarco4Cub),
       concatMap(() =>
         this.contratoService.getContratos4cub().pipe(
-          map(contratosMarcos =>
-            cubActions.getContractMarcoSuccess({ contratosMarcos })
+          map(({ contratosMarcos4Cub, status }) =>
+            cubActions.getContractMarcoSuccess({
+              contratosMarcos4Cub,
+              status,
+              action: '[Get contratos for cub]',
+            })
           ),
-          catchError(err =>
-            of(cubActions.getContractMarcoError({ error: err }))
+          catchError(error =>
+            of(
+              cubActions.getContractMarcoError({
+                error,
+                action: '[Get contratos for cub]',
+              })
+            )
           )
         )
       )
@@ -158,6 +122,55 @@ export class CubicacionEffects {
         )
       )
     )
+  );
+
+  notifyAfterSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubActions.getCubsSuccess, cubActions.getContractMarcoSuccess),
+        tap(({ status, action }) => {
+          if (+status.responseCode === 0) {
+            // this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
+          } else {
+            let message = '';
+            if (+status.responseCode === 1) {
+              if (action === '[Get Cubicaciones]') {
+                message = 'No existen cubicaciones';
+              } else if (action === '[Get contratos for cub]') {
+                message = 'Usuario no tiene contratos asosiados';
+              }
+            }
+
+            this.snackService.showMessage(
+              `${message} - ${status.description}`,
+              'info',
+              2000
+            );
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubActions.getCubsError, cubActions.getContractMarcoError),
+        tap(({ error, action }) => {
+          let message = '';
+          if (action === '[Get Cubicaciones]') {
+            message = 'Falló la obtención de cubicaciones';
+          } else if (action === '[Get contratos for cub]') {
+            message = 'Falló la obtención de contratos para cubicar';
+          }
+          this.snackService.showMessage(
+            `${message} - ${error.message}`,
+            'error',
+            4000
+          );
+        })
+      ),
+    { dispatch: false }
   );
 
   getRegionesSubcontrato$ = createEffect(() =>

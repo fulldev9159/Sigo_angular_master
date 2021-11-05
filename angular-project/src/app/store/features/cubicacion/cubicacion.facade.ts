@@ -75,16 +75,16 @@ export class CubicacionFacade {
 
   // CONSTRACT MARCO
   public getContractMarcoAction(): void {
-    this.store.dispatch(cubicacionActions.getContractMarco());
+    this.store.dispatch(cubicacionActions.getContractMarco4Cub());
   }
 
-  public getContractMarcoSuccess(contractMarco: ContratoMarco4Cub[]): void {
-    this.store.dispatch(
-      cubicacionActions.getContractMarcoSuccess({
-        contratosMarcos: contractMarco,
-      })
-    );
-  }
+  // public getContractMarcoSuccess(contractMarco: ContratoMarco4Cub[]): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getContractMarcoSuccess({
+  //       contratosMarcos4Cub: contractMarco,
+  //     })
+  //   );
+  // }
 
   public getContractMarcoSelector$(): Observable<ContratoMarco4Cub[]> {
     return this.store.select(cubicacionSelectors.getConstractMarco);
@@ -186,13 +186,13 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getAutoSuggest({ filter, cantidad }));
   }
 
-  public getAutoSuggestSuccess(contractMarco: ContratoMarco4Cub[]): void {
-    this.store.dispatch(
-      cubicacionActions.getContractMarcoSuccess({
-        contratosMarcos: contractMarco,
-      })
-    );
-  }
+  // public getAutoSuggestSuccess(contractMarco: ContratoMarco4Cub[]): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getContractMarcoSuccess({
+  //       contratosMarcos4Cub: contractMarco,
+  //     })
+  //   );
+  // }
 
   public getAutoSuggestSelector$(): Observable<cubModel.AutoSuggestItem[]> {
     return this.store.select(cubicacionSelectors.getAutoSuggest);

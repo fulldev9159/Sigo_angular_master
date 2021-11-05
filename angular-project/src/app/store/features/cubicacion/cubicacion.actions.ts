@@ -47,6 +47,24 @@ export const getSingleCubicacionError = createAction(
 );
 // GET SINGLE CUBICACION DATA end
 
+// GET CONTRATO init
+export const getContractMarco4Cub = createAction(
+  '[Cubicacion Contratos Marco] GET Data'
+);
+export const getContractMarcoSuccess = createAction(
+  '[Cubicacion Contratos Marco] GET Data Success',
+  props<{
+    contratosMarcos4Cub: ContratoMarco4Cub[];
+    status: StatusResponse;
+    action: string;
+  }>()
+);
+export const getContractMarcoError = createAction(
+  '[Cubicacion Contratos Marco] GET Data Error',
+  props<{ error: any; action: string }>()
+);
+// GET CONTRATO end
+
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',
   props<{ cubicacion_id: number }>()
@@ -105,20 +123,6 @@ export const postCubicacionError = createAction(
   '[Cubicacion Post] CREATE Cubicacion Error',
   props<{ error: any }>()
 );
-
-// GET CONTRATO init
-export const getContractMarco = createAction(
-  '[Cubicacion Contratos Marco] GET Data'
-);
-export const getContractMarcoSuccess = createAction(
-  '[Cubicacion Contratos Marco] GET Data Success',
-  props<{ contratosMarcos: ContratoMarco4Cub[] }>()
-);
-export const getContractMarcoError = createAction(
-  '[Cubicacion Contratos Marco] GET Data Error',
-  props<{ error: any }>()
-);
-// GET CONTRATO end
 
 // GET SUBCONTRATOS PROVEEDOR init
 export const getSubContractProviders = createAction(

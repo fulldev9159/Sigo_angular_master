@@ -56,7 +56,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     provider: new FormControl('movistar'),
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),
-    contratos_marco: new FormControl(null, [Validators.required]),
+    contratos_marco: new FormControl(null),
     perfiles: new FormControl(null, [Validators.required]),
     superior: new FormControl(null, [Validators.required]),
   };
@@ -254,7 +254,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
         .get('contratos_marco')
         .valueChanges.subscribe(contratos_marco_id => {
           this.resetSuperiorFormControl();
-          if (contratos_marco_id !== null && contratos_marco_id !== undefined) {
+          if (
+            contratos_marco_id !== null &&
+            contratos_marco_id !== undefined &&
+            contratos_marco_id.length > 0
+          ) {
             const proveedor_id = this.formUser.get('proveedor_id').value;
             const area_id = this.formUser.get('area_id').value;
             this.userFacade.getPosiblesSuperiores(

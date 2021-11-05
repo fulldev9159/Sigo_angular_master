@@ -6,6 +6,7 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   ContratoMarco4Cub,
   ResponseGetContrato4Cub as ResponseGetContrato4Cub,
+  StatusResponse,
 } from '@data';
 
 @Injectable({
@@ -21,7 +22,10 @@ export class ContratosService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getContratos4cub(): Observable<ContratoMarco4Cub[]> {
+  getContratos4cub(): Observable<{
+    contratosMarcos4Cub: ContratoMarco4Cub[];
+    status: StatusResponse;
+  }> {
     return this.http
       .post<ResponseGetContrato4Cub>(
         `${this.apiUrl}/cubicacion/contratos_marco/get`,
@@ -29,15 +33,17 @@ export class ContratosService {
       )
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(
-              `No existen contratos asosiados - ${res.status.description}`,
-              ''
-            );
-          }
-          return res.data.items.sort((a, b) =>
-            a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-          );
+          return {
+            contratosMarcos4Cub: res.data.items
+              ? res.data.items.sort((a, b) =>
+                  a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+                )
+              : [],
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
         })
       );
   }

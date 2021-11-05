@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { Response } from '@storeOT/model';
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   CubicacionWithLpu,
   CubicacionesResponse,
@@ -21,11 +20,7 @@ import {
 })
 export class CubicacionService {
   apiUrl = '';
-  constructor(
-    @Inject('environment') environment,
-    private http: HttpClient,
-    private snackService: SnackBarService
-  ) {
+  constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
@@ -34,7 +29,7 @@ export class CubicacionService {
     status: StatusResponse;
   }> {
     return this.http
-      .post<CubicacionesResponse>(`${this.apiUrl}/cubicaciosn/get`, {})
+      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
       .pipe(
         map(res => {
           return {
