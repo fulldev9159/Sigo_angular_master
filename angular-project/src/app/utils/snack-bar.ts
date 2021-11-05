@@ -16,6 +16,10 @@ export class SnackBarService {
       actionTextColor: (color => {
         if (color === 'error') {
           return '#DB2828';
+        } else if (color === 'war') {
+          return '#e3f742';
+        } else if (color === 'info') {
+          return '#4c5fed';
         }
         return '#2185D0';
       })(type),

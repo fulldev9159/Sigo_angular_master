@@ -10,18 +10,20 @@ import {
   RegionSubcontrato4Cub,
   TipoLpu,
   Lpu4Cub,
+  StatusResponse,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
 
 // GET CUBICACIONES init
-export const getCubs = createAction('[Cubicacion] GET Cubicaciones');
+export const getCubsType = 'GET Cubicaciones';
+export const getCubs = createAction(`[Cubicacion] ${getCubsType}`);
 export const getCubsSuccess = createAction(
-  '[Cubicacion] GET Cubicaciones Success',
-  props<{ cubs: Cubicacion[] }>()
+  `[Cubicacion] ${getCubsType} Success`,
+  props<{ cubs: Cubicacion[]; status: StatusResponse; action: string }>()
 );
 export const getCubsError = createAction(
-  '[Cubicacion] GET Cubicaciones Error',
+  `[Cubicacion] ${getCubsType} Error`,
   props<{ error: any }>()
 );
 // GET CUBICACIONES end

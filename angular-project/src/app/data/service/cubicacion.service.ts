@@ -13,6 +13,7 @@ import {
   Cubicacion,
   ResponseGetContrato4Cub,
   ContratoMarco4Cub,
+  StatusResponse,
 } from '@data';
 
 @Injectable({
@@ -28,18 +29,21 @@ export class CubicacionService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getCubicaciones(): Observable<Cubicacion[]> {
+  getCubicaciones(): Observable<{
+    cubs: Cubicacion[];
+    status: StatusResponse;
+  }> {
     return this.http
       .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(
-              `No existen cubicaciones - ${res.status.description}`,
-              ''
-            );
-          }
-          return res.data.items;
+          return {
+            cubs: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
         })
       );
   }

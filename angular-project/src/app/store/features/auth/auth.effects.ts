@@ -35,8 +35,6 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(authActions.loginSuccess),
         tap(({ data }) => {
-          console.log(data);
-          console.log(data.status.response_code);
           if (+data.status.response_code === 0) {
             this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
           } else {

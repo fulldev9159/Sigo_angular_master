@@ -10,7 +10,7 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { map, filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Cubicacion, Login } from '@data';
 import { MessageService } from 'primeng/api';

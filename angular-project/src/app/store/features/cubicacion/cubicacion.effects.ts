@@ -47,9 +47,11 @@ export class CubicacionEffects {
       ofType(cubActions.getCubs),
       concatMap(() =>
         this.cubService.getCubicaciones().pipe(
-          map(cubs =>
+          map(({ cubs, status }) =>
             cubActions.getCubsSuccess({
               cubs,
+              status,
+              action: '[Get Cubicaciones]',
             })
           ),
           catchError(err => {
@@ -58,6 +60,32 @@ export class CubicacionEffects {
         )
       )
     )
+  );
+
+  notifySuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubActions.getCubsSuccess),
+        tap(({ status, action }) => {
+          if (+status.responseCode === 0) {
+            // this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
+          } else {
+            let message = '';
+            if (+status.responseCode === 1) {
+              if (action === '[Get Cubicaciones]') {
+                message = 'No existen cubicaciones';
+              }
+            }
+
+            this.snackService.showMessage(
+              `${message} - ${status.description}`,
+              'info',
+              2000
+            );
+          }
+        })
+      ),
+    { dispatch: false }
   );
 
   getCubicacion$ = createEffect(() =>
