@@ -83,10 +83,10 @@ export const reducerCubicacion = createReducer(
     contractMarco: payload.contratosMarcos4Cub,
   })),
 
-  on(CubicacionActions.getSubContractProviders, state => state),
-  on(CubicacionActions.getSubContractProvidersSuccess, (state, payload) => ({
+  on(CubicacionActions.getProveedores4Cub, state => state),
+  on(CubicacionActions.getProveedores4CubSuccess, (state, payload) => ({
     ...state,
-    subContractedProviders: payload.subcontratosProveedor,
+    subContractedProviders: payload.proveedores4Cub,
   })),
 
   on(CubicacionActions.getSubContractedRegions, state => state),

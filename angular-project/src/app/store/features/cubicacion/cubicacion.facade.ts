@@ -93,18 +93,18 @@ export class CubicacionFacade {
 
   // SUBCONTRACTPROVIDERS
   public getSubContractedProvidersAction(data): void {
-    this.store.dispatch(cubicacionActions.getSubContractProviders(data));
+    this.store.dispatch(cubicacionActions.getProveedores4Cub(data));
   }
 
-  public getSubContractedProvidersSuccess(
-    subContractedProviders: SubcontratosProveedor[]
-  ): void {
-    this.store.dispatch(
-      cubicacionActions.getSubContractProvidersSuccess({
-        subcontratosProveedor: subContractedProviders,
-      })
-    );
-  }
+  // public getSubContractedProvidersSuccess(
+  //   subContractedProviders: SubcontratosProveedor[]
+  // ): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getProveedores4CubSuccess({
+  //       proveedores4Cub: subContractedProviders,
+  //     })
+  //   );
+  // }
 
   public getProvidersSelector$(): Observable<SubcontratosProveedor[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);

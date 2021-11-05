@@ -65,6 +65,24 @@ export const getContractMarcoError = createAction(
 );
 // GET CONTRATO end
 
+// GET SUBCONTRATOS PROVEEDOR init
+export const getProveedores4Cub = createAction(
+  '[SubContractedProviders Get] GET Data',
+  props<{ contrato_marco_id: number }>()
+);
+export const getProveedores4CubSuccess = createAction(
+  '[SubContractedProviders Get] GET Data Success',
+  props<{
+    proveedores4Cub: SubcontratosProveedor[];
+    status: StatusResponse;
+    action: string;
+  }>()
+);
+export const getSubContractProvidersError = createAction(
+  '[SubContractedProviders Get] GET Data Error',
+  props<{ error: any; action: string }>()
+);
+// GET SUBCONTRATOS PROVEEDOR end
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',
   props<{ cubicacion_id: number }>()
@@ -123,21 +141,6 @@ export const postCubicacionError = createAction(
   '[Cubicacion Post] CREATE Cubicacion Error',
   props<{ error: any }>()
 );
-
-// GET SUBCONTRATOS PROVEEDOR init
-export const getSubContractProviders = createAction(
-  '[SubContractedProviders Get] GET Data',
-  props<{ contrato_marco_id: number }>()
-);
-export const getSubContractProvidersSuccess = createAction(
-  '[SubContractedProviders Get] GET Data Success',
-  props<{ subcontratosProveedor: SubcontratosProveedor[] }>()
-);
-export const getSubContractProvidersError = createAction(
-  '[SubContractedProviders Get] GET Data Error',
-  props<{ error: any }>()
-);
-// GET SUBCONTRATOS PROVEEDOR end
 
 // GET REGIONES SUBCONTRATO init
 export const getSubContractedRegions = createAction(

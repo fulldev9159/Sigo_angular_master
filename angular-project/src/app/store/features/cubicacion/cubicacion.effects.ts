@@ -110,14 +110,23 @@ export class CubicacionEffects {
 
   getProveedoresSubcontrato$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(cubActions.getSubContractProviders),
+      ofType(cubActions.getProveedores4Cub),
       concatMap(({ contrato_marco_id }) =>
-        this.proveedorService.getSubcontratosProveedor(contrato_marco_id).pipe(
-          map(subcontratosProveedor =>
-            cubActions.getSubContractProvidersSuccess({ subcontratosProveedor })
+        this.proveedorService.getProveedor4Cub(contrato_marco_id).pipe(
+          map(({ proveedores4Cub, status }) =>
+            cubActions.getProveedores4CubSuccess({
+              proveedores4Cub,
+              status,
+              action: '[Get proveedores for cub]',
+            })
           ),
-          catchError(err =>
-            of(cubActions.getSubContractProvidersError({ error: err }))
+          catchError(error =>
+            of(
+              cubActions.getSubContractProvidersError({
+                error,
+                action: '[Get proveedores for cub]',
+              })
+            )
           )
         )
       )
@@ -127,7 +136,11 @@ export class CubicacionEffects {
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(cubActions.getCubsSuccess, cubActions.getContractMarcoSuccess),
+        ofType(
+          cubActions.getCubsSuccess,
+          cubActions.getContractMarcoSuccess,
+          cubActions.getProveedores4CubSuccess
+        ),
         tap(({ status, action }) => {
           if (+status.responseCode === 0) {
             // this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
@@ -138,6 +151,9 @@ export class CubicacionEffects {
                 message = 'No existen cubicaciones';
               } else if (action === '[Get contratos for cub]') {
                 message = 'Usuario no tiene contratos asosiados';
+              } else if (action === '[Get proveedores for cub]') {
+                message =
+                  'No existen subcontratos con proveedores para el contrato seleccionado';
               }
             }
 
@@ -155,13 +171,19 @@ export class CubicacionEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(cubActions.getCubsError, cubActions.getContractMarcoError),
+        ofType(
+          cubActions.getCubsError,
+          cubActions.getContractMarcoError,
+          cubActions.getSubContractProvidersError
+        ),
         tap(({ error, action }) => {
           let message = '';
           if (action === '[Get Cubicaciones]') {
-            message = 'Falló la obtención de cubicaciones';
+            message = 'Error al obtener cubicaciones';
           } else if (action === '[Get contratos for cub]') {
-            message = 'Falló la obtención de contratos para cubicar';
+            message = 'Error al obtener contratos para cubicar';
+          } else if (action === '[Get proveedores for cub]') {
+            message = 'Error al obtener proveedores para cubicar';
           }
           this.snackService.showMessage(
             `${message} - ${error.message}`,
