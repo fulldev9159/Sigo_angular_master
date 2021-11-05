@@ -153,7 +153,7 @@ export class CubicacionEffects {
                 message = 'Usuario no tiene contratos asosiados';
               } else if (action === '[Get proveedores for cub]') {
                 message =
-                  'No existen subcontratos con proveedores para el contrato seleccionado';
+                  'No existen proveedores para el contrato seleccionado';
               }
             }
 
