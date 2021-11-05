@@ -28,7 +28,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     username: new FormControl(null, [
       Validators.required,
       this.noWhitespace,
-      Validators.maxLength(45),
+      Validators.maxLength(20),
     ]),
     nombres: new FormControl(null, [
       Validators.required,
