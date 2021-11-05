@@ -34,7 +34,7 @@ export class CubicacionService {
     status: StatusResponse;
   }> {
     return this.http
-      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
+      .post<CubicacionesResponse>(`${this.apiUrl}/cubicaciosn/get`, {})
       .pipe(
         map(res => {
           return {

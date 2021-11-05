@@ -24,7 +24,7 @@ export const getCubsSuccess = createAction(
 );
 export const getCubsError = createAction(
   `[Cubicacion] ${getCubsType} Error`,
-  props<{ error: any }>()
+  props<{ error: any; action: string }>()
 );
 // GET CUBICACIONES end
 

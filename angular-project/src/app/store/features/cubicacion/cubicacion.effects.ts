@@ -54,15 +54,36 @@ export class CubicacionEffects {
               action: '[Get Cubicaciones]',
             })
           ),
-          catchError(err => {
-            return of(cubActions.getCubsError({ error: err }));
+          catchError(error => {
+            return of(
+              cubActions.getCubsError({ error, action: '[Get Cubicaciones]' })
+            );
           })
         )
       )
     )
   );
 
-  notifySuccess$ = createEffect(
+  getCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getSingleCubicacion),
+      concatMap(({ cubicacion_id }) =>
+        this.cubService.getCubicacion(cubicacion_id).pipe(
+          map((cubicacion: CubicacionWithLpu) =>
+            cubActions.getSingleCubicacionSuccess({
+              cubicacion,
+            })
+          ),
+          catchError(err => {
+            console.error(`could not retrieve the cubage [${err.message}]`);
+            return of(cubActions.getSingleCubicacionError({ error: err }));
+          })
+        )
+      )
+    )
+  );
+
+  notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(cubActions.getCubsSuccess),
@@ -88,23 +109,23 @@ export class CubicacionEffects {
     { dispatch: false }
   );
 
-  getCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getSingleCubicacion),
-      concatMap(({ cubicacion_id }) =>
-        this.cubService.getCubicacion(cubicacion_id).pipe(
-          map((cubicacion: CubicacionWithLpu) =>
-            cubActions.getSingleCubicacionSuccess({
-              cubicacion,
-            })
-          ),
-          catchError(err => {
-            console.error(`could not retrieve the cubage [${err.message}]`);
-            return of(cubActions.getSingleCubicacionError({ error: err }));
-          })
-        )
-      )
-    )
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(cubActions.getCubsError),
+        tap(({ error, action }) => {
+          let message = '';
+          if (action === '[Get Cubicaciones]') {
+            message = 'Falló la obtención de cubicaciones';
+          }
+          this.snackService.showMessage(
+            `${message} - ${error.message}`,
+            'error',
+            4000
+          );
+        })
+      ),
+    { dispatch: false }
   );
 
   getContractMarco$ = createEffect(() =>
