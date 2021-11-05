@@ -14,11 +14,7 @@ import {
 })
 export class ContratosService {
   apiUrl = '';
-  constructor(
-    @Inject('environment') environment,
-    private http: HttpClient,
-    private snackService: SnackBarService
-  ) {
+  constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 

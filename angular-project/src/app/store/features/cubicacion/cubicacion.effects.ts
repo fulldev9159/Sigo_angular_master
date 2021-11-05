@@ -133,13 +133,39 @@ export class CubicacionEffects {
     )
   );
 
+  getRegionesSubcontrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getSubContractedRegions),
+      concatMap(({ subcontratos_id }) =>
+        this.regionService.getRegionesSubcontrato4Cub(subcontratos_id).pipe(
+          map(({ regionesSubcontrato, status }) =>
+            cubActions.getSubContractedRegionsSuccess({
+              regionesSubcontrato,
+              status,
+              action: '[Get regiones for cub]',
+            })
+          ),
+          catchError(error =>
+            of(
+              cubActions.getSubContractedRegionsError({
+                error,
+                action: '[Get regiones for cub]',
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           cubActions.getCubsSuccess,
           cubActions.getContractMarcoSuccess,
-          cubActions.getProveedores4CubSuccess
+          cubActions.getProveedores4CubSuccess,
+          cubActions.getSubContractedRegionsSuccess
         ),
         tap(({ status, action }) => {
           if (+status.responseCode === 0) {
@@ -154,6 +180,8 @@ export class CubicacionEffects {
               } else if (action === '[Get proveedores for cub]') {
                 message =
                   'No existen proveedores para el contrato seleccionado';
+              } else if (action === '[Get regiones for cub]') {
+                message = 'No existen regiones para el proveedor seleccionado';
               }
             }
 
@@ -174,7 +202,8 @@ export class CubicacionEffects {
         ofType(
           cubActions.getCubsError,
           cubActions.getContractMarcoError,
-          cubActions.getSubContractProvidersError
+          cubActions.getSubContractProvidersError,
+          cubActions.getSubContractedRegionsError
         ),
         tap(({ error, action }) => {
           let message = '';
@@ -184,7 +213,10 @@ export class CubicacionEffects {
             message = 'Error al obtener contratos para cubicar';
           } else if (action === '[Get proveedores for cub]') {
             message = 'Error al obtener proveedores para cubicar';
+          } else if (action === '[Get regiones for cub]') {
+            message = 'Error al obtener regiones para cubicar';
           }
+
           this.snackService.showMessage(
             `${message} - ${error.message}`,
             'error',
@@ -193,24 +225,6 @@ export class CubicacionEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  getRegionesSubcontrato$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getSubContractedRegions),
-      concatMap(({ subcontratos_id }) =>
-        this.regionService.getRegionesSubcontrato4Cub(subcontratos_id).pipe(
-          map(regionesSubcontrato =>
-            cubActions.getSubContractedRegionsSuccess({
-              regionesSubcontrato,
-            })
-          ),
-          catchError(err =>
-            of(cubActions.getSubContractedRegionsError({ error: err }))
-          )
-        )
-      )
-    )
   );
 
   getTipoSubcontrato$ = createEffect(() =>

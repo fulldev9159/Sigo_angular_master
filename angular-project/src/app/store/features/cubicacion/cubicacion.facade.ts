@@ -118,15 +118,15 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedRegionsSuccess(
-    subContractedRegions: RegionSubcontrato4Cub[]
-  ): void {
-    this.store.dispatch(
-      cubicacionActions.getSubContractedRegionsSuccess({
-        regionesSubcontrato: subContractedRegions,
-      })
-    );
-  }
+  // public getSubContractedRegionsSuccess(
+  //   subContractedRegions: RegionSubcontrato4Cub[]
+  // ): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getSubContractedRegionsSuccess({
+  //       regionesSubcontrato: subContractedRegions,
+  //     })
+  //   );
+  // }
 
   public getRegionsSelector$(): Observable<RegionSubcontrato4Cub[]> {
     return this.store.select(cubicacionSelectors.getSubContractedRegions);
