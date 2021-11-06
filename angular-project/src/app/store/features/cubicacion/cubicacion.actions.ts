@@ -122,6 +122,29 @@ export const getSubContractedTypeServicesError = createAction(
 );
 // GET Tipo LPUs end
 
+// GET LPUs Cubicacion init
+export const getSubContractedServices = createAction(
+  '[SubContractedServices Get] GET Data',
+  props<{
+    subcontrato_id: number;
+    region_id: number;
+    tipo_servicio_id: number;
+  }>()
+);
+export const getSubContractedServicesSuccess = createAction(
+  '[SubContractedServices Get] GET Data Success',
+  props<{
+    subContractedServices: Lpu4Cub[];
+    status: StatusResponse;
+    action: string;
+  }>()
+);
+export const getSubContractedServicesError = createAction(
+  '[SubContractedServices Get] GET Data Error',
+  props<{ error: any; action: string }>()
+);
+// GET LPUs Cubicacion end
+
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',
   props<{ cubicacion_id: number }>()
@@ -180,25 +203,6 @@ export const postCubicacionError = createAction(
   '[Cubicacion Post] CREATE Cubicacion Error',
   props<{ error: any }>()
 );
-
-// GET LPUs Cubicacion init
-export const getSubContractedServices = createAction(
-  '[SubContractedServices Get] GET Data',
-  props<{
-    subcontrato_id: number;
-    region_id: number;
-    tipo_servicio_id: number;
-  }>()
-);
-export const getSubContractedServicesSuccess = createAction(
-  '[SubContractedServices Get] GET Data Success',
-  props<{ subContractedServices: Lpu4Cub[] }>()
-);
-export const getSubContractedServicesError = createAction(
-  '[SubContractedServices Get] GET Data Error',
-  props<{ error: any }>()
-);
-// GET LPUs Cubicacion end
 
 // CUBICACION FORM
 

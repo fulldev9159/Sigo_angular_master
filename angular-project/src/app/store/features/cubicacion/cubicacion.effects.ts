@@ -183,6 +183,33 @@ export class CubicacionEffects {
     )
   );
 
+  getServiciosSubcontrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getSubContractedServices),
+      concatMap(({ subcontrato_id, region_id, tipo_servicio_id }) =>
+        this.lpuService
+          .getLpus4Cub(subcontrato_id, region_id, tipo_servicio_id)
+          .pipe(
+            map(({ subContractedServices, status }) =>
+              cubActions.getSubContractedServicesSuccess({
+                subContractedServices,
+                status,
+                action: '[Get LPUS for cub]',
+              })
+            ),
+            catchError(error =>
+              of(
+                cubActions.getSubContractedServicesError({
+                  error,
+                  action: '[Get LPUS for cub]',
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -191,7 +218,8 @@ export class CubicacionEffects {
           cubActions.getContractMarcoSuccess,
           cubActions.getProveedores4CubSuccess,
           cubActions.getSubContractedRegionsSuccess,
-          cubActions.getSubContractedTypeServicesSuccess
+          cubActions.getSubContractedTypeServicesSuccess,
+          cubActions.getSubContractedServicesSuccess
         ),
         tap(({ status, action }) => {
           if (+status.responseCode === 0) {
@@ -208,6 +236,8 @@ export class CubicacionEffects {
                   'No existen proveedores para el contrato seleccionado';
               } else if (action === '[Get regiones for cub]') {
                 message = 'No existen regiones para el proveedor seleccionado';
+              } else if (action === '[Get LPUS for cub]') {
+                message = 'No existen LPUs para el tipo seleccionado';
               }
             }
 
@@ -230,7 +260,8 @@ export class CubicacionEffects {
           cubActions.getContractMarcoError,
           cubActions.getSubContractProvidersError,
           cubActions.getSubContractedRegionsError,
-          cubActions.getSubContractedTypeServicesError
+          cubActions.getSubContractedTypeServicesError,
+          cubActions.getSubContractedServicesError
         ),
         tap(({ error, action }) => {
           let message = '';
@@ -244,6 +275,8 @@ export class CubicacionEffects {
             message = 'Error al obtener regiones para cubicar';
           } else if (action === '[Get Tipo Servicios for cub]') {
             message = 'Error al obtener Tipo Servicios para cubicar';
+          } else if (action === '[Get LPUS for cub]') {
+            message = 'Error al obtener LPUS para cubicar';
           }
 
           this.snackService.showMessage(
@@ -254,26 +287,6 @@ export class CubicacionEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  getServiciosSubcontrato$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getSubContractedServices),
-      concatMap(({ subcontrato_id, region_id, tipo_servicio_id }) =>
-        this.lpuService
-          .getLpus4Cub(subcontrato_id, region_id, tipo_servicio_id)
-          .pipe(
-            map(subContractedServices =>
-              cubActions.getSubContractedServicesSuccess({
-                subContractedServices,
-              })
-            ),
-            catchError(err =>
-              of(cubActions.getSubContractedServicesError({ error: err }))
-            )
-          )
-      )
-    )
   );
 
   postCubication$ = createEffect(() =>

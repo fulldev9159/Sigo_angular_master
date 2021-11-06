@@ -53,7 +53,7 @@ export class LpusService {
     subcontrato_id: number,
     region_id: number,
     tipo_servicio_id: number
-  ): Observable<Lpu4Cub[]> {
+  ): Observable<{ subContractedServices: Lpu4Cub[]; status: StatusResponse }> {
     return this.http
       .post<ResponseLpu4Cub>(
         `${this.apiUrl}/cubicacion/servicios_subcontrato/get`,
@@ -65,16 +65,21 @@ export class LpusService {
       )
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.items.sort((a, b) =>
-            a.lpu_nombre > b.lpu_nombre
-              ? 1
-              : b.lpu_nombre > a.lpu_nombre
-              ? -1
-              : 0
-          );
+          return {
+            subContractedServices: res.data.items
+              ? res.data.items.sort((a, b) =>
+                  a.lpu_nombre > b.lpu_nombre
+                    ? 1
+                    : b.lpu_nombre > a.lpu_nombre
+                    ? -1
+                    : 0
+                )
+              : [],
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
         })
       );
   }

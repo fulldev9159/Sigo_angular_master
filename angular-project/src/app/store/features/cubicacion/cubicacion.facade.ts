@@ -158,15 +158,15 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedServices(data));
   }
 
-  public getSubContractedServicesSuccess(
-    subContractedServices: LpuCarrito4Cub[]
-  ): void {
-    this.store.dispatch(
-      cubicacionActions.getSubContractedServicesSuccess({
-        subContractedServices,
-      })
-    );
-  }
+  // public getSubContractedServicesSuccess(
+  //   subContractedServices: LpuCarrito4Cub[]
+  // ): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getSubContractedServicesSuccess({
+  //       subContractedServices,
+  //     })
+  //   );
+  // }
 
   public getServicesSelector$(): Observable<Lpu4Cub[]> {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
