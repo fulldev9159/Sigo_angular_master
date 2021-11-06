@@ -138,15 +138,15 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedTypeServices(data));
   }
 
-  public getSubContractedTypeServicesSuccess(
-    subContractedTypeServices: TipoLpu[]
-  ): void {
-    this.store.dispatch(
-      cubicacionActions.getSubContractedTypeServicesSuccess({
-        subContractedTypeServices,
-      })
-    );
-  }
+  // public getSubContractedTypeServicesSuccess(
+  //   subContractedTypeServices: TipoLpu[]
+  // ): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getSubContractedTypeServicesSuccess({
+  //       subContractedTypeServices,
+  //     })
+  //   );
+  // }
 
   public getTypeServicesSelector$(): Observable<TipoLpu[]> {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);

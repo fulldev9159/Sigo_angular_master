@@ -3,7 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { Lpu4Cub, ResponseLpu4Cub, ResponseTipoLpu, TipoLpu } from '@data';
+import {
+  Lpu4Cub,
+  ResponseLpu4Cub,
+  ResponseTipoLpu,
+  StatusResponse,
+  TipoLpu,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +27,10 @@ export class LpusService {
   getTiposLpu(
     subcontrato_id: number[],
     region_id: number
-  ): Observable<TipoLpu[]> {
+  ): Observable<{
+    subContractedTypeServices: TipoLpu[];
+    status: StatusResponse;
+  }> {
     return this.http
       .post<ResponseTipoLpu>(`${this.apiUrl}/cubicacion/tipos_servicios/get`, {
         subcontrato_id,
@@ -29,10 +38,13 @@ export class LpusService {
       })
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.items;
+          return {
+            subContractedTypeServices: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
         })
       );
   }

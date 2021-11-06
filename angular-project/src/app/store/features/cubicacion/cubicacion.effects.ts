@@ -158,6 +158,31 @@ export class CubicacionEffects {
     )
   );
 
+  getTipoSubcontrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getSubContractedTypeServices),
+      concatMap(({ subcontrato_id, region_id }) =>
+        this.lpuService.getTiposLpu(subcontrato_id, region_id).pipe(
+          map(({ subContractedTypeServices, status }) =>
+            cubActions.getSubContractedTypeServicesSuccess({
+              subContractedTypeServices,
+              status,
+              action: '[Get tipo servicio for cub]',
+            })
+          ),
+          catchError(error =>
+            of(
+              cubActions.getSubContractedTypeServicesError({
+                error,
+                action: '[Get tipo servicio for cub]',
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -165,7 +190,8 @@ export class CubicacionEffects {
           cubActions.getCubsSuccess,
           cubActions.getContractMarcoSuccess,
           cubActions.getProveedores4CubSuccess,
-          cubActions.getSubContractedRegionsSuccess
+          cubActions.getSubContractedRegionsSuccess,
+          cubActions.getSubContractedTypeServicesSuccess
         ),
         tap(({ status, action }) => {
           if (+status.responseCode === 0) {
@@ -203,7 +229,8 @@ export class CubicacionEffects {
           cubActions.getCubsError,
           cubActions.getContractMarcoError,
           cubActions.getSubContractProvidersError,
-          cubActions.getSubContractedRegionsError
+          cubActions.getSubContractedRegionsError,
+          cubActions.getSubContractedTypeServicesError
         ),
         tap(({ error, action }) => {
           let message = '';
@@ -215,6 +242,8 @@ export class CubicacionEffects {
             message = 'Error al obtener proveedores para cubicar';
           } else if (action === '[Get regiones for cub]') {
             message = 'Error al obtener regiones para cubicar';
+          } else if (action === '[Get Tipo Servicios for cub]') {
+            message = 'Error al obtener Tipo Servicios para cubicar';
           }
 
           this.snackService.showMessage(
@@ -225,28 +254,6 @@ export class CubicacionEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  getTipoSubcontrato$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getSubContractedTypeServices),
-      concatMap(({ subcontrato_id, region_id }) =>
-        this.lpuService.getTiposLpu(subcontrato_id, region_id).pipe(
-          map(subContractedTypeServices =>
-            cubActions.getSubContractedTypeServicesSuccess({
-              subContractedTypeServices,
-            })
-          ),
-          catchError(err =>
-            of(
-              cubActions.getSubContractedTypeServicesError({
-                error: err,
-              })
-            )
-          )
-        )
-      )
-    )
   );
 
   getServiciosSubcontrato$ = createEffect(() =>
