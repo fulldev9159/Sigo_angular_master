@@ -134,17 +134,17 @@ export const reducerCubicacion = createReducer(
     subContractedServices: [],
   })),
 
-  on(CubicacionActions.postCubicacion, (state, { cubicacion }) => ({
+  on(CubicacionActions.createCub, (state, { cubicacion }) => ({
     ...state,
     saving: true,
     errorSaving: null,
   })),
-  on(CubicacionActions.postCubicacionSuccess, (state, { cubicacion }) => ({
+  on(CubicacionActions.createCubSuccess, (state, { response: cubicacion }) => ({
     ...state,
     saving: false,
     errorSaving: null,
   })),
-  on(CubicacionActions.postCubicacionError, (state, { error }) => ({
+  on(CubicacionActions.createCubError, (state, { error }) => ({
     ...state,
     saving: false,
     errorSaving: error,
@@ -155,7 +155,7 @@ export const reducerCubicacion = createReducer(
     saving: true,
     errorSaving: null,
   })),
-  on(CubicacionActions.editCubicacionSuccess, (state, { id }) => ({
+  on(CubicacionActions.editCubicacionSuccess, (state, { cub_id: id }) => ({
     ...state,
     saving: false,
     errorSaving: null,

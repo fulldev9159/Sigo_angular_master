@@ -75,13 +75,43 @@ export class CubicacionService {
       );
   }
 
+  createCubicacion(
+    cubicacion: any
+  ): Observable<{ response: any; status: StatusResponse }> {
+    return this.http
+      .post<EditCubicacionResponse>(
+        `${this.apiUrl}/cubicacion/create`,
+        cubicacion
+      )
+      .pipe(
+        map(res => {
+          return {
+            response: res.data.id,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
+  }
+
   updateCubicacion(
     request: RequestEditCubicacion
-  ): Observable<EditCubicacionResponse> {
-    return this.http.post<EditCubicacionResponse>(
-      `${this.apiUrl}/cubicacion/edit`,
-      request
-    );
+  ): Observable<{ cub_id: number; status: StatusResponse }> {
+    return this.http
+      .post<EditCubicacionResponse>(`${this.apiUrl}/cubicacion/edit`, request)
+      .pipe(
+        map(res => {
+          return {
+            cub_id: res.data.id,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 
   deleteOT(cubicacion_id: number): Observable<Response<string>> {

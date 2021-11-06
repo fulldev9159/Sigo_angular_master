@@ -63,7 +63,7 @@ export class CubicacionFacade {
 
   // POST
   public postCubicacion(cubicacion): void {
-    this.store.dispatch(cubicacionActions.postCubicacion({ cubicacion }));
+    this.store.dispatch(cubicacionActions.createCub({ cubicacion }));
   }
   // POST
 

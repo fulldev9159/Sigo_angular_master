@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as cubModel from './cubicacion.model';
-import { CubicacionesResponse, CubicacionWithLpu } from '@data';
+import { CubicacionWithLpu } from '@data';
 import { Router } from '@angular/router';
 
 import {
   catchError,
   concatMap,
   map,
-  mapTo,
   tap,
   withLatestFrom,
 } from 'rxjs/operators';
@@ -38,6 +37,7 @@ export class CubicacionEffects {
     private contratoService: Data.ContratosService,
     private proveedorService: Data.ProveedorService,
     private regionService: Data.RegionService,
+    private messageService: Data.NotifyAfter,
     private lpuService: Data.LpusService,
     private router: Router
   ) {}
@@ -51,13 +51,10 @@ export class CubicacionEffects {
             cubActions.getCubsSuccess({
               cubs,
               status,
-              action: '[Get Cubicaciones]',
             })
           ),
           catchError(error => {
-            return of(
-              cubActions.getCubsError({ error, action: '[Get Cubicaciones]' })
-            );
+            return of(cubActions.getCubsError({ error }));
           })
         )
       )
@@ -92,14 +89,12 @@ export class CubicacionEffects {
             cubActions.getContractMarcoSuccess({
               contratosMarcos4Cub,
               status,
-              action: '[Get contratos for cub]',
             })
           ),
           catchError(error =>
             of(
               cubActions.getContractMarcoError({
                 error,
-                action: '[Get contratos for cub]',
               })
             )
           )
@@ -117,14 +112,12 @@ export class CubicacionEffects {
             cubActions.getProveedores4CubSuccess({
               proveedores4Cub,
               status,
-              action: '[Get proveedores for cub]',
             })
           ),
           catchError(error =>
             of(
               cubActions.getSubContractProvidersError({
                 error,
-                action: '[Get proveedores for cub]',
               })
             )
           )
@@ -142,14 +135,12 @@ export class CubicacionEffects {
             cubActions.getSubContractedRegionsSuccess({
               regionesSubcontrato,
               status,
-              action: '[Get regiones for cub]',
             })
           ),
           catchError(error =>
             of(
               cubActions.getSubContractedRegionsError({
                 error,
-                action: '[Get regiones for cub]',
               })
             )
           )
@@ -167,14 +158,12 @@ export class CubicacionEffects {
             cubActions.getSubContractedTypeServicesSuccess({
               subContractedTypeServices,
               status,
-              action: '[Get tipo servicio for cub]',
             })
           ),
           catchError(error =>
             of(
               cubActions.getSubContractedTypeServicesError({
                 error,
-                action: '[Get tipo servicio for cub]',
               })
             )
           )
@@ -194,18 +183,50 @@ export class CubicacionEffects {
               cubActions.getSubContractedServicesSuccess({
                 subContractedServices,
                 status,
-                action: '[Get LPUS for cub]',
               })
             ),
             catchError(error =>
               of(
                 cubActions.getSubContractedServicesError({
                   error,
-                  action: '[Get LPUS for cub]',
                 })
               )
             )
           )
+      )
+    )
+  );
+
+  createCubication$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.createCub),
+      concatMap(({ cubicacion }) =>
+        this.cubService.createCubicacion(cubicacion).pipe(
+          map(({ response, status }) => {
+            return cubActions.createCubSuccess({
+              response,
+              status,
+            });
+          }),
+          catchError(error => of(cubActions.createCubError({ error })))
+        )
+      )
+    )
+  );
+
+  editCubication$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.editCubicacion),
+      concatMap(({ cubicacion }) =>
+        this.cubService.updateCubicacion(cubicacion).pipe(
+          map(({ cub_id, status }) => {
+            return cubActions.editCubicacionSuccess({
+              cub_id,
+              status,
+            });
+          }),
+          catchError(error => of(cubActions.editCubicacionError({ error })))
+        )
       )
     )
   );
@@ -218,31 +239,34 @@ export class CubicacionEffects {
           cubActions.getContractMarcoSuccess,
           cubActions.getProveedores4CubSuccess,
           cubActions.getSubContractedRegionsSuccess,
-          cubActions.getSubContractedTypeServicesSuccess,
-          cubActions.getSubContractedServicesSuccess
+          cubActions.getSubContractedServicesSuccess,
+          cubActions.createCubSuccess,
+          cubActions.editCubicacionSuccess
         ),
-        tap(({ status, action }) => {
-          if (+status.responseCode === 0) {
-            // this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
-          } else {
-            let message = '';
-            if (+status.responseCode === 1) {
-              if (action === '[Get Cubicaciones]') {
-                message = 'No existen cubicaciones';
-              } else if (action === '[Get contratos for cub]') {
-                message = 'Usuario no tiene contratos asosiados';
-              } else if (action === '[Get proveedores for cub]') {
-                message =
-                  'No existen proveedores para el contrato seleccionado';
-              } else if (action === '[Get regiones for cub]') {
-                message = 'No existen regiones para el proveedor seleccionado';
-              } else if (action === '[Get LPUS for cub]') {
-                message = 'No existen LPUs para el tipo seleccionado';
-              }
+        tap(action => {
+          if (+action.status.responseCode === 0) {
+            if (
+              action.type === cubActions.createCubSuccess.type ||
+              action.type === cubActions.editCubicacionSuccess.type
+            ) {
+              this.cubageFacade.getCubicacionAction();
+              this.router.navigate(['app/cubicacion/list-cub']);
             }
 
+            if (this.messageService.messageOk(action.type) !== undefined) {
+              this.snackService.showMessage(
+                `${this.messageService.messageOk(action.type)} - ${
+                  action.status.description
+                }`,
+                'ok',
+                3000
+              );
+            }
+          } else if (+action.status.responseCode === 1) {
             this.snackService.showMessage(
-              `${message} - ${status.description}`,
+              `${this.messageService.messageInfo(action.type)} - ${
+                action.status.description
+              }`,
               'info',
               2000
             );
@@ -261,136 +285,18 @@ export class CubicacionEffects {
           cubActions.getSubContractProvidersError,
           cubActions.getSubContractedRegionsError,
           cubActions.getSubContractedTypeServicesError,
-          cubActions.getSubContractedServicesError
+          cubActions.getSubContractedServicesError,
+          cubActions.createCubError,
+          cubActions.editCubicacionError
         ),
-        tap(({ error, action }) => {
-          let message = '';
-          if (action === '[Get Cubicaciones]') {
-            message = 'Error al obtener cubicaciones';
-          } else if (action === '[Get contratos for cub]') {
-            message = 'Error al obtener contratos para cubicar';
-          } else if (action === '[Get proveedores for cub]') {
-            message = 'Error al obtener proveedores para cubicar';
-          } else if (action === '[Get regiones for cub]') {
-            message = 'Error al obtener regiones para cubicar';
-          } else if (action === '[Get Tipo Servicios for cub]') {
-            message = 'Error al obtener Tipo Servicios para cubicar';
-          } else if (action === '[Get LPUS for cub]') {
-            message = 'Error al obtener LPUS para cubicar';
-          }
-
+        tap(action => {
           this.snackService.showMessage(
-            `${message} - ${error.message}`,
+            `${this.messageService.messageError(action.type)} - ${
+              action.error.message
+            }`,
             'error',
             4000
           );
-        })
-      ),
-    { dispatch: false }
-  );
-
-  postCubication$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.postCubicacion),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/create`, data.cubicacion)
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return cubActions.postCubicacionSuccess({
-                cubicacion: res.data.items,
-              });
-            }),
-            catchError(err =>
-              of(cubActions.postCubicacionError({ error: err }))
-            )
-          )
-      )
-    )
-  );
-
-  notifyAfterCubageCreated$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(cubActions.postCubicacionSuccess),
-        withLatestFrom(this.authFacade.getCurrentProfile$()),
-        tap(([data, profile]) => {
-          this.snackService.showMessage('Cubicación creada exitosamente', 'ok');
-
-          this.cubageFacade.getCubicacionAction();
-
-          this.router.navigate(['app/cubicacion/list-cub']);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  notifyAfterCreateCubageError = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(cubActions.postCubicacionError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            `No fue posible crear la cubicacion - ${error.error.status.description}`,
-            'error'
-          );
-          console.error(`could not create the cubage [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  editCubication$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.editCubicacion),
-      concatMap(({ cubicacion }) =>
-        this.cubService.updateCubicacion(cubicacion).pipe(
-          map((res: any) => {
-            if (+res.status.responseCode !== 0) {
-              this.snackService.showMessage(res.status.description, 'error');
-            }
-            return cubActions.editCubicacionSuccess({
-              id: cubicacion.cubicacion_id,
-            });
-          }),
-          catchError(error => of(cubActions.editCubicacionError({ error })))
-        )
-      )
-    )
-  );
-
-  notifyAfterCubageUpdated$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(cubActions.editCubicacionSuccess),
-        withLatestFrom(this.authFacade.getCurrentProfile$()),
-        tap(([data, profile]) => {
-          this.snackService.showMessage(
-            'Cubicación actualizada exitosamente',
-            'ok'
-          );
-
-          this.cubageFacade.getCubicacionAction();
-
-          this.router.navigate(['app/cubicacion/list-cub']);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  notifyAfterUpdateCubageError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(cubActions.editCubicacionError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            `No fue posible editar la cubicacion - ${error.error.status.description}`,
-            'error'
-          );
-          console.error(`could not update the cubage [${error.message}]`);
         })
       ),
     { dispatch: false }
@@ -474,7 +380,7 @@ export class CubicacionEffects {
               };
               // console.log(requestSave);
               // this.cubageFacade.postCubicacion(requestSave);
-              return cubActions.postCubicacion({
+              return cubActions.createCub({
                 cubicacion: requestSave,
               });
             }),
