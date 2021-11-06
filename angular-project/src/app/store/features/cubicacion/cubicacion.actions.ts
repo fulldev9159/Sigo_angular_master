@@ -10,18 +10,20 @@ import {
   RegionSubcontrato4Cub,
   TipoLpu,
   Lpu4Cub,
+  StatusResponse,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
 
 // GET CUBICACIONES init
-export const getCubs = createAction('[Cubicacion] GET Cubicaciones');
+export const getCubsType = 'GET Cubicaciones';
+export const getCubs = createAction(`[Cubicacion] ${getCubsType}`);
 export const getCubsSuccess = createAction(
-  '[Cubicacion] GET Cubicaciones Success',
-  props<{ cubs: Cubicacion[] }>()
+  `[Cubicacion] ${getCubsType} Success`,
+  props<{ cubs: Cubicacion[]; status: StatusResponse }>()
 );
 export const getCubsError = createAction(
-  '[Cubicacion] GET Cubicaciones Error',
+  `[Cubicacion] ${getCubsType} Error`,
   props<{ error: any }>()
 );
 // GET CUBICACIONES end
@@ -45,72 +47,16 @@ export const getSingleCubicacionError = createAction(
 );
 // GET SINGLE CUBICACION DATA end
 
-export const deleteCubicacion = createAction(
-  '[Cubicacion DeleteById] DELETE Cubicacion',
-  props<{ cubicacion_id: number }>()
-);
-
-export const deleteCubicacionSuccess = createAction(
-  '[Cubicacion DeleteById] DELETE Cubicacion Success'
-);
-
-export const deleteCubicacionError = createAction(
-  '[Cubicacion DeleteById] DELETE Cubicacion Error',
-  props<{ error: any }>()
-);
-
-export const editCubicacion = createAction(
-  '[Cubicacion EditById] EDIT Cubicacion',
-  props<{ cubicacion: RequestEditCubicacion }>()
-);
-
-export const editCubicacionSuccess = createAction(
-  '[Cubicacion EditById] EDIT Cubicacion Success',
-  props<{ id: number }>()
-);
-
-export const editCubicacionError = createAction(
-  '[Cubicacion EditById] EDIT Cubicacion Error',
-  props<{ error: any }>()
-);
-
-export const replyCubicacion = createAction(
-  '[Cubicacion Reply] POST Reply Cubicacion',
-  props<{ cubicacion: Cubicacion }>()
-);
-
-export const replyCubicacionSuccess = createAction(
-  '[Cubicacion Reply] POST Reply Cubicacion Success',
-  props<{ cubicacion: Cubicacion }>()
-);
-
-export const replyCubicacionError = createAction(
-  '[Cubicacion Reply] POST Reply Cubicacion Error',
-  props<{ error: any }>()
-);
-
-export const postCubicacion = createAction(
-  '[Cubicacion Post] CREATE Cubicacion',
-  props<{ cubicacion: any }>()
-);
-
-export const postCubicacionSuccess = createAction(
-  '[Cubicacion Post] CREATE Cubicacion Success',
-  props<{ cubicacion: Cubicacion }>()
-);
-
-export const postCubicacionError = createAction(
-  '[Cubicacion Post] CREATE Cubicacion Error',
-  props<{ error: any }>()
-);
-
 // GET CONTRATO init
-export const getContractMarco = createAction(
+export const getContractMarco4Cub = createAction(
   '[Cubicacion Contratos Marco] GET Data'
 );
 export const getContractMarcoSuccess = createAction(
   '[Cubicacion Contratos Marco] GET Data Success',
-  props<{ contratosMarcos: ContratoMarco4Cub[] }>()
+  props<{
+    contratosMarcos4Cub: ContratoMarco4Cub[];
+    status: StatusResponse;
+  }>()
 );
 export const getContractMarcoError = createAction(
   '[Cubicacion Contratos Marco] GET Data Error',
@@ -119,13 +65,16 @@ export const getContractMarcoError = createAction(
 // GET CONTRATO end
 
 // GET SUBCONTRATOS PROVEEDOR init
-export const getSubContractProviders = createAction(
+export const getProveedores4Cub = createAction(
   '[SubContractedProviders Get] GET Data',
   props<{ contrato_marco_id: number }>()
 );
-export const getSubContractProvidersSuccess = createAction(
+export const getProveedores4CubSuccess = createAction(
   '[SubContractedProviders Get] GET Data Success',
-  props<{ subcontratosProveedor: SubcontratosProveedor[] }>()
+  props<{
+    proveedores4Cub: SubcontratosProveedor[];
+    status: StatusResponse;
+  }>()
 );
 export const getSubContractProvidersError = createAction(
   '[SubContractedProviders Get] GET Data Error',
@@ -140,7 +89,10 @@ export const getSubContractedRegions = createAction(
 );
 export const getSubContractedRegionsSuccess = createAction(
   '[SubContractedRegions Get] GET Data Success',
-  props<{ regionesSubcontrato: RegionSubcontrato4Cub[] }>()
+  props<{
+    regionesSubcontrato: RegionSubcontrato4Cub[];
+    status: StatusResponse;
+  }>()
 );
 export const getSubContractedRegionsError = createAction(
   '[SubContractedRegions Get] GET Data Error',
@@ -155,7 +107,10 @@ export const getSubContractedTypeServices = createAction(
 );
 export const getSubContractedTypeServicesSuccess = createAction(
   '[SubContractedTypeServices Get] GET Data Success',
-  props<{ subContractedTypeServices: TipoLpu[] }>()
+  props<{
+    subContractedTypeServices: TipoLpu[];
+    status: StatusResponse;
+  }>()
 );
 export const getSubContractedTypeServicesError = createAction(
   '[SubContractedTypeServices Get] GET Data Error',
@@ -174,13 +129,77 @@ export const getSubContractedServices = createAction(
 );
 export const getSubContractedServicesSuccess = createAction(
   '[SubContractedServices Get] GET Data Success',
-  props<{ subContractedServices: Lpu4Cub[] }>()
+  props<{
+    subContractedServices: Lpu4Cub[];
+    status: StatusResponse;
+  }>()
 );
 export const getSubContractedServicesError = createAction(
   '[SubContractedServices Get] GET Data Error',
   props<{ error: any }>()
 );
 // GET LPUs Cubicacion end
+
+// POST CREATE CUBICACION init
+export const createCub = createAction(
+  '[Cubicacion Post] CREATE Cubicacion',
+  props<{ cubicacion: any }>()
+);
+
+export const createCubSuccess = createAction(
+  '[Cubicacion Post] CREATE Cubicacion Success',
+  props<{ response: any; status: StatusResponse }>()
+);
+
+export const createCubError = createAction(
+  '[Cubicacion Post] CREATE Cubicacion Error',
+  props<{ error: any }>()
+);
+// POST CREATE CUBICACION end
+
+// POST EDIT CUBICACION end
+export const editCubicacion = createAction(
+  '[Cubicacion EditById] EDIT Cubicacion',
+  props<{ cubicacion: RequestEditCubicacion }>()
+);
+export const editCubicacionSuccess = createAction(
+  '[Cubicacion EditById] EDIT Cubicacion Success',
+  props<{ cub_id: number; status: StatusResponse }>()
+);
+export const editCubicacionError = createAction(
+  '[Cubicacion EditById] EDIT Cubicacion Error',
+  props<{ error: any }>()
+);
+// POST EDIT CUBICACION end
+
+export const deleteCubicacion = createAction(
+  '[Cubicacion DeleteById] DELETE Cubicacion',
+  props<{ cubicacion_id: number }>()
+);
+
+export const deleteCubicacionSuccess = createAction(
+  '[Cubicacion DeleteById] DELETE Cubicacion Success'
+);
+
+export const deleteCubicacionError = createAction(
+  '[Cubicacion DeleteById] DELETE Cubicacion Error',
+  props<{ error: any }>()
+);
+
+export const replyCubicacion = createAction(
+  '[Cubicacion Reply] POST Reply Cubicacion',
+  props<{ cubicacion: Cubicacion }>()
+);
+
+export const replyCubicacionSuccess = createAction(
+  '[Cubicacion Reply] POST Reply Cubicacion Success',
+  props<{ cubicacion: Cubicacion }>()
+);
+
+export const replyCubicacionError = createAction(
+  '[Cubicacion Reply] POST Reply Cubicacion Error',
+  props<{ error: any }>()
+);
 
 // CUBICACION FORM
 

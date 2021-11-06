@@ -11,7 +11,7 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
   '[Auth Login] POST Login Success',
-  props<{ loginResponse: Login }>()
+  props<{ data: Login }>()
 );
 
 export const loginError = createAction(

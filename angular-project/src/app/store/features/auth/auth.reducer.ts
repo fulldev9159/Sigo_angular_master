@@ -20,12 +20,9 @@ export const reducerAuth = createReducer(
   on(authActions.reset, () => ({
     ...initialStateAuth,
   })),
-  // on(authActions.login, state => ({
-  //   ...state,
-  // })),
-  on(authActions.loginSuccess, (state, { loginResponse }) => ({
+  on(authActions.loginSuccess, (state, { data }) => ({
     ...state,
-    login: loginResponse,
-    currentProfile: loginResponse.perfiles[0] || null,
+    login: data,
+    currentProfile: data.perfiles[0] || null,
   }))
 );

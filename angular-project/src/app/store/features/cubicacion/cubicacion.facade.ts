@@ -63,7 +63,7 @@ export class CubicacionFacade {
 
   // POST
   public postCubicacion(cubicacion): void {
-    this.store.dispatch(cubicacionActions.postCubicacion({ cubicacion }));
+    this.store.dispatch(cubicacionActions.createCub({ cubicacion }));
   }
   // POST
 
@@ -75,16 +75,16 @@ export class CubicacionFacade {
 
   // CONSTRACT MARCO
   public getContractMarcoAction(): void {
-    this.store.dispatch(cubicacionActions.getContractMarco());
+    this.store.dispatch(cubicacionActions.getContractMarco4Cub());
   }
 
-  public getContractMarcoSuccess(contractMarco: ContratoMarco4Cub[]): void {
-    this.store.dispatch(
-      cubicacionActions.getContractMarcoSuccess({
-        contratosMarcos: contractMarco,
-      })
-    );
-  }
+  // public getContractMarcoSuccess(contractMarco: ContratoMarco4Cub[]): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getContractMarcoSuccess({
+  //       contratosMarcos4Cub: contractMarco,
+  //     })
+  //   );
+  // }
 
   public getContractMarcoSelector$(): Observable<ContratoMarco4Cub[]> {
     return this.store.select(cubicacionSelectors.getConstractMarco);
@@ -93,18 +93,18 @@ export class CubicacionFacade {
 
   // SUBCONTRACTPROVIDERS
   public getSubContractedProvidersAction(data): void {
-    this.store.dispatch(cubicacionActions.getSubContractProviders(data));
+    this.store.dispatch(cubicacionActions.getProveedores4Cub(data));
   }
 
-  public getSubContractedProvidersSuccess(
-    subContractedProviders: SubcontratosProveedor[]
-  ): void {
-    this.store.dispatch(
-      cubicacionActions.getSubContractProvidersSuccess({
-        subcontratosProveedor: subContractedProviders,
-      })
-    );
-  }
+  // public getSubContractedProvidersSuccess(
+  //   subContractedProviders: SubcontratosProveedor[]
+  // ): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getProveedores4CubSuccess({
+  //       proveedores4Cub: subContractedProviders,
+  //     })
+  //   );
+  // }
 
   public getProvidersSelector$(): Observable<SubcontratosProveedor[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);
@@ -118,15 +118,15 @@ export class CubicacionFacade {
     );
   }
 
-  public getSubContractedRegionsSuccess(
-    subContractedRegions: RegionSubcontrato4Cub[]
-  ): void {
-    this.store.dispatch(
-      cubicacionActions.getSubContractedRegionsSuccess({
-        regionesSubcontrato: subContractedRegions,
-      })
-    );
-  }
+  // public getSubContractedRegionsSuccess(
+  //   subContractedRegions: RegionSubcontrato4Cub[]
+  // ): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getSubContractedRegionsSuccess({
+  //       regionesSubcontrato: subContractedRegions,
+  //     })
+  //   );
+  // }
 
   public getRegionsSelector$(): Observable<RegionSubcontrato4Cub[]> {
     return this.store.select(cubicacionSelectors.getSubContractedRegions);
@@ -138,15 +138,15 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedTypeServices(data));
   }
 
-  public getSubContractedTypeServicesSuccess(
-    subContractedTypeServices: TipoLpu[]
-  ): void {
-    this.store.dispatch(
-      cubicacionActions.getSubContractedTypeServicesSuccess({
-        subContractedTypeServices,
-      })
-    );
-  }
+  // public getSubContractedTypeServicesSuccess(
+  //   subContractedTypeServices: TipoLpu[]
+  // ): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getSubContractedTypeServicesSuccess({
+  //       subContractedTypeServices,
+  //     })
+  //   );
+  // }
 
   public getTypeServicesSelector$(): Observable<TipoLpu[]> {
     return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
@@ -158,15 +158,15 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getSubContractedServices(data));
   }
 
-  public getSubContractedServicesSuccess(
-    subContractedServices: LpuCarrito4Cub[]
-  ): void {
-    this.store.dispatch(
-      cubicacionActions.getSubContractedServicesSuccess({
-        subContractedServices,
-      })
-    );
-  }
+  // public getSubContractedServicesSuccess(
+  //   subContractedServices: LpuCarrito4Cub[]
+  // ): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getSubContractedServicesSuccess({
+  //       subContractedServices,
+  //     })
+  //   );
+  // }
 
   public getServicesSelector$(): Observable<Lpu4Cub[]> {
     return this.store.select(cubicacionSelectors.getSubContractedServices);
@@ -186,13 +186,13 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getAutoSuggest({ filter, cantidad }));
   }
 
-  public getAutoSuggestSuccess(contractMarco: ContratoMarco4Cub[]): void {
-    this.store.dispatch(
-      cubicacionActions.getContractMarcoSuccess({
-        contratosMarcos: contractMarco,
-      })
-    );
-  }
+  // public getAutoSuggestSuccess(contractMarco: ContratoMarco4Cub[]): void {
+  //   this.store.dispatch(
+  //     cubicacionActions.getContractMarcoSuccess({
+  //       contratosMarcos4Cub: contractMarco,
+  //     })
+  //   );
+  // }
 
   public getAutoSuggestSelector$(): Observable<cubModel.AutoSuggestItem[]> {
     return this.store.select(cubicacionSelectors.getAutoSuggest);

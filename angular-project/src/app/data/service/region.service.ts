@@ -3,7 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { RegionSubcontrato4Cub, ResponseRegionSubContrato4Cub } from '@data';
+import {
+  RegionSubcontrato4Cub,
+  ResponseRegionSubContrato4Cub,
+  StatusResponse,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +22,10 @@ export class RegionService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getRegionesSubcontrato4Cub(
-    subcontrato_id: number[]
-  ): Observable<RegionSubcontrato4Cub[]> {
+  getRegionesSubcontrato4Cub(subcontrato_id: number[]): Observable<{
+    regionesSubcontrato: RegionSubcontrato4Cub[];
+    status: StatusResponse;
+  }> {
     return this.http
       .post<ResponseRegionSubContrato4Cub>(
         `${this.apiUrl}/cubicacion/regiones_subcontrato/get`,
@@ -28,11 +33,13 @@ export class RegionService {
       )
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-
-          return res.data.items;
+          return {
+            regionesSubcontrato: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
         })
       );
   }
