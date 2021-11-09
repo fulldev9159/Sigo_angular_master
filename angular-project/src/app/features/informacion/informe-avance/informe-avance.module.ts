@@ -6,9 +6,10 @@ import { InformeAvanceComponent } from './informe-avance.component';
 import { UiModule } from '@uiOT/ui.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InformeTrabajadorComponent } from './informe-trabajador/informe-trabajador.component';
+import { InformeAdmincontratoComponent } from './informe-admincontrato/informe-admincontrato.component';
 
 @NgModule({
-  declarations: [InformeAvanceComponent, InformeTrabajadorComponent],
+  declarations: [InformeAvanceComponent, InformeTrabajadorComponent, InformeAdmincontratoComponent],
   imports: [
     CommonModule,
     InformeAvanceRoutingModule,
