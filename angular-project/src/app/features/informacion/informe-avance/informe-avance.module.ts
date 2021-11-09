@@ -5,9 +5,10 @@ import { InformeAvanceRoutingModule } from './informe-avance-routing.module';
 import { InformeAvanceComponent } from './informe-avance.component';
 import { UiModule } from '@uiOT/ui.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InformeTrabajadorComponent } from './informe-trabajador/informe-trabajador.component';
 
 @NgModule({
-  declarations: [InformeAvanceComponent],
+  declarations: [InformeAvanceComponent, InformeTrabajadorComponent],
   imports: [
     CommonModule,
     InformeAvanceRoutingModule,

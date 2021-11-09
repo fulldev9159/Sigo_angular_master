@@ -1,17 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Observable, of } from 'rxjs';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import * as data from '@data';
-import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { map } from 'rxjs/operators';
-import {
-  FormArray,
-  FormGroup,
-  FormControl,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
 
 @Component({
   selector: 'app-informe-avance',
@@ -21,17 +11,8 @@ import {
 export class InformeAvanceComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
-  detalleOt$: Observable<data.DataRspDetalleOT>;
-  detalleCubicacion$: Observable<data.ResponseDetalleCubicacion[]> = of([]);
-  form: FormGroup = new FormGroup({
-    table: new FormArray([]),
-  });
 
-  constructor(
-    private otFacade: OtFacade,
-    private cubFacade: CubicacionFacade,
-    private authFacade: AuthFacade
-  ) {}
+  constructor(private authFacade: AuthFacade) {}
 
   ngOnInit(): void {
     this.loginAuth$ = this.authFacade.getLogin$().pipe(
@@ -50,44 +31,6 @@ export class InformeAvanceComponent implements OnInit, OnDestroy {
         }
         return auth;
       })
-    );
-    this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
-    this.subscription.add(
-      this.detalleOt$.subscribe(ot => {
-        if (ot) {
-          this.cubFacade.getDetallesCubicacionAction(ot.cubicacion_id);
-        }
-      })
-    );
-
-    this.subscription.add(
-      this.detalleCubicacion$.subscribe(cub => {
-        if (cub) {
-          cub.forEach(lpu => {
-            const group = new FormGroup({
-              lpu_id: new FormControl(lpu.lpu_id, [Validators.required]),
-              informado: new FormControl(0, [Validators.required]),
-            });
-
-            (this.form.get('table') as FormArray).push(group);
-          });
-        }
-      })
-    );
-  }
-
-  formCntl(index: number): AbstractControl {
-    const indext = 'table';
-    return (this.form.controls[indext] as FormArray).controls[index].get(
-      'informado'
-    );
-  }
-
-  formCntlLpuID(index: number): AbstractControl {
-    const indext = 'table';
-    return (this.form.controls[indext] as FormArray).controls[index].get(
-      'lpu_id'
     );
   }
 
