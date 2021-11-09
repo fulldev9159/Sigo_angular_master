@@ -14,3 +14,12 @@ export * from './contrato';
 export * from './proveedor';
 export * from './region';
 export * from './lpus';
+
+export interface StatusResponse {
+  description: string;
+  responseCode: number;
+}
+
+export interface MessageNotifyEffect {
+  [i: string]: string;
+}

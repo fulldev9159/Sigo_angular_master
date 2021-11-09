@@ -77,16 +77,16 @@ export const reducerCubicacion = createReducer(
     cubicaciones: [...state.cubicaciones, payload.cubicacion],
   })),
 
-  on(CubicacionActions.getContractMarco, state => state),
+  on(CubicacionActions.getContractMarco4Cub, state => state),
   on(CubicacionActions.getContractMarcoSuccess, (state, payload) => ({
     ...state,
-    contractMarco: payload.contratosMarcos,
+    contractMarco: payload.contratosMarcos4Cub,
   })),
 
-  on(CubicacionActions.getSubContractProviders, state => state),
-  on(CubicacionActions.getSubContractProvidersSuccess, (state, payload) => ({
+  on(CubicacionActions.getProveedores4Cub, state => state),
+  on(CubicacionActions.getProveedores4CubSuccess, (state, payload) => ({
     ...state,
-    subContractedProviders: payload.subcontratosProveedor,
+    subContractedProviders: payload.proveedores4Cub,
   })),
 
   on(CubicacionActions.getSubContractedRegions, state => state),
@@ -134,17 +134,17 @@ export const reducerCubicacion = createReducer(
     subContractedServices: [],
   })),
 
-  on(CubicacionActions.postCubicacion, (state, { cubicacion }) => ({
+  on(CubicacionActions.createCub, (state, { cubicacion }) => ({
     ...state,
     saving: true,
     errorSaving: null,
   })),
-  on(CubicacionActions.postCubicacionSuccess, (state, { cubicacion }) => ({
+  on(CubicacionActions.createCubSuccess, (state, { response: cubicacion }) => ({
     ...state,
     saving: false,
     errorSaving: null,
   })),
-  on(CubicacionActions.postCubicacionError, (state, { error }) => ({
+  on(CubicacionActions.createCubError, (state, { error }) => ({
     ...state,
     saving: false,
     errorSaving: error,
@@ -155,7 +155,7 @@ export const reducerCubicacion = createReducer(
     saving: true,
     errorSaving: null,
   })),
-  on(CubicacionActions.editCubicacionSuccess, (state, { id }) => ({
+  on(CubicacionActions.editCubicacionSuccess, (state, { cub_id: id }) => ({
     ...state,
     saving: false,
     errorSaving: null,

@@ -21,11 +21,28 @@ export class AuthEffects {
       ofType(authActions.login),
       concatMap(({ login }) =>
         this.authService.login(login).pipe(
-          map(loginResponse => authActions.loginSuccess({ loginResponse })),
+          map(loginResponse =>
+            authActions.loginSuccess({ data: loginResponse })
+          ),
           catchError(error => of(authActions.loginError({ error })))
         )
       )
     )
+  );
+
+  notifySuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authActions.loginSuccess),
+        tap(({ data }) => {
+          if (+data.status.response_code === 0) {
+            this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
+          } else {
+            this.snackService.showMessage(data.status.description, 'error');
+          }
+        })
+      ),
+    { dispatch: false }
   );
 
   notifyAfterLoginError = createEffect(

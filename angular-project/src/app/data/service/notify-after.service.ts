@@ -1,0 +1,67 @@
+import { Injectable } from '@angular/core';
+import { SnackBarService } from '@utilsSIGO/snack-bar';
+import * as cubActions from '@storeOT/features/cubicacion/cubicacion.actions';
+import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import { Router } from '@angular/router';
+
+interface Message {
+  [i: string]: string;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class NotifyAfter {
+  constructor(
+    private cubageFacade: CubicacionFacade,
+    private snackService: SnackBarService,
+    private router: Router
+  ) {}
+
+  messageOk(action: string): string {
+    const msg: Message = {};
+    msg[cubActions.createCubSuccess.type] = 'Cubicación creada exitosamente';
+    msg[cubActions.editCubicacionSuccess.type] =
+      'Cubicación actualizada exitosamente';
+
+    return msg[action];
+  }
+
+  messageInfo(action: string): string {
+    const msg: Message = {};
+    msg[cubActions.getCubsSuccess.type] = 'No existen cubicaciones';
+    msg[cubActions.getContractMarcoSuccess.type] =
+      'Usuario no tiene contratos asosiados';
+    msg[cubActions.getProveedores4CubSuccess.type] =
+      'No existen proveedores para el contrato seleccionado';
+    msg[cubActions.getSubContractedRegionsSuccess.type] =
+      'No existen regiones para el proveedor seleccionado';
+    msg[cubActions.getSubContractedServicesSuccess.type] =
+      'No existen LPUs para el tipo seleccionado';
+    msg[cubActions.createCubSuccess.type] = 'No se pudo crear la cubicación';
+    msg[cubActions.editCubicacionSuccess.type] =
+      'No se pudo editar la cubicación';
+
+    return msg[action];
+  }
+
+  messageError(action: string): string {
+    const msg: Message = {};
+    msg[cubActions.getCubsError.type] = 'Error al obtener cubicaciones';
+    msg[cubActions.getContractMarcoError.type] =
+      'Error al obtener contratos para cubicar';
+    msg[cubActions.getSubContractProvidersError.type] =
+      'Error al obtener proveedores para cubicar';
+    msg[cubActions.getSubContractedRegionsError.type] =
+      'Error al obtener regiones para cubicar';
+    msg[cubActions.getSubContractedTypeServicesError.type] =
+      'Error al obtener Tipo Servicios para cubicar';
+    msg[cubActions.createCubError.type] = 'No se pudo crear la cubicación';
+    msg[cubActions.getSubContractedServicesError.type] =
+      'Error al obtener LPUS para cubicar';
+    msg[cubActions.editCubicacionError.type] =
+      'No se pudo editar la cubicación';
+
+    return msg[action];
+  }
+}

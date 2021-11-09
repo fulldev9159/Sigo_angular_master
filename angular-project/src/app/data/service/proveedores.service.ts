@@ -3,7 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { ResponseSubcontratosProveedor, SubcontratosProveedor } from '@data';
+import {
+  ResponseSubcontratosProveedor,
+  StatusResponse,
+  SubcontratosProveedor,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +22,10 @@ export class ProveedorService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getSubcontratosProveedor(
-    contrato_marco_id: number
-  ): Observable<SubcontratosProveedor[]> {
+  getProveedor4Cub(contrato_marco_id: number): Observable<{
+    proveedores4Cub: SubcontratosProveedor[];
+    status: StatusResponse;
+  }> {
     return this.http
       .post<ResponseSubcontratosProveedor>(
         `${this.apiUrl}/cubicacion/proveedores_subcontrato/get`,
@@ -28,10 +33,17 @@ export class ProveedorService {
       )
       .pipe(
         map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.items;
+          return {
+            proveedores4Cub: res.data.items
+              ? res.data.items.sort((a, b) =>
+                  a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+                )
+              : [],
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
         })
       );
   }

@@ -97,7 +97,7 @@
             </div>
             <div class="row">
               <div class="col-md-6 col-xs-12">
-                <label for="">* Contratos con los que puede trabajar</label>
+                <label for="">Contratos con los que puede trabajar</label>
                 <div>
                   <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="contracts$|async" formControlName="contratos_marco" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30">
                   </p-multiSelect>
@@ -107,7 +107,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-xs-12">
-                <app-select [control]="formControls.superior" label="* Superior directo">
+                <app-select [control]="formControls.superior" label="Superior directo">
                   <ng-container options>
                     <option value="null" selected disabled>Seleccione persona</option>
                     <option value="null">No posee superior directo</option>

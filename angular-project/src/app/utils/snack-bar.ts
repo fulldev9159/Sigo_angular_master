@@ -7,7 +7,7 @@ declare let Snackbar: object | any;
 export class SnackBarService {
   constructor() {}
 
-  showMessage(message: string, type: string): void {
+  showMessage(message: string, type: string, dur?: number): void {
     Snackbar.show({
       pos: 'top-center',
       text: message,
@@ -16,10 +16,14 @@ export class SnackBarService {
       actionTextColor: (color => {
         if (color === 'error') {
           return '#DB2828';
+        } else if (color === 'war') {
+          return '#e3f742';
+        } else if (color === 'info') {
+          return '#4c5fed';
         }
         return '#2185D0';
       })(type),
-      duration: 7000,
+      duration: dur ? dur : 7000,
     });
   }
 }

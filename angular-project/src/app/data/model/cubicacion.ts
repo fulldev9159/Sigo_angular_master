@@ -37,6 +37,10 @@ export interface Cubicacion {
   region_nombre: string;
   total: number;
   total_tipo_moneda: string;
+  status: {
+    description: string;
+    response_code: number;
+  };
 }
 // Get cubicaciones done
 
