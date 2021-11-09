@@ -25,6 +25,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
   });
+  DisplayConfirmacionModal = false;
 
   constructor(
     private otFacade: OtFacade,
@@ -60,6 +61,18 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       })
     );
   }
+  errorMessageFn(errors: AbstractControl['errors']): string {
+    console.log(errors);
+    if (errors.required) {
+      return 'Este campo es requerido';
+    } else if (errors.whitespace) {
+      return 'Este campo es requerido';
+    } else if (errors.maxlength) {
+      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
+    } else if (errors.min) {
+      return `No puede ser negativo`;
+    }
+  }
 
   formCntl(index: number): AbstractControl {
     const indext = 'table';
@@ -79,16 +92,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  errorMessageFn(errors: AbstractControl['errors']): string {
-    console.log(errors);
-    if (errors.required) {
-      return 'Este campo es requerido';
-    } else if (errors.whitespace) {
-      return 'Este campo es requerido';
-    } else if (errors.maxlength) {
-      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
-    } else if (errors.min) {
-      return `No puede ser negativo`;
-    }
+  sendInformeConfirmacion(): void {
+    this.DisplayConfirmacionModal = true;
   }
 }

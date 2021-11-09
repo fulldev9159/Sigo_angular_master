@@ -98,8 +98,21 @@
       <div style="display: flex;
         justify-content: space-evenly;">
         <button class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar borrador</button>
-        <button class="btn btn-primary"><em class="pi pi-play mr-1" id="guardar-ot"></em>Enviar informe</button>
+        <button class="btn btn-primary" (click)="sendInformeConfirmacion()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Enviar informe</button>
       </div>
     </ng-template>
   </p-card>
 </div>
+
+<app-modal [display]="DisplayConfirmacionModal" (CloseEvent)="DisplayConfirmacionModal=false">
+  <ng-container modal-header-title>Confirmación envío de Informe de avances</ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      ¿Está seguro que desea envíar este informe de avances?
+    </div>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Cancelar</button>
+    <button class="btn btn-primary"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, Enviar informe</button>
+  </ng-container>
+</app-modal>
