@@ -115,7 +115,49 @@
     <p-tabPanel header="Materiales">
     </p-tabPanel>
   </p-tabView>
+
+  <h1>Resumen</h1>
+  <table>
+    <tbody>
+      <tr>
+        <td><strong>LPUs Total</strong></td>
+        <td>{{lpusTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+      <tr>
+        <td><strong>Unidades de obra Total</strong></td>
+        <td>{{unidadesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+      <tr>
+        <td><strong>Materiales Total</strong></td>
+        <td>{{materialesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>{{lpusTotal + unidadesTotal + materialesTotal | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <label for="">Observaciones</label>
+  <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
+  <br>
   <ng-template pTemplate="footer">
-    Footer content here
+    <button class="btn"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Rechazar</button>
+    <button class="btn btn-primary" (click)="sendActaConfirmacion()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Generar y enviar Acta</button>
   </ng-template>
 </p-card>
+
+
+<app-modal [display]="DisplayConfirmacionModal" (CloseEvent)="DisplayConfirmacionModal=false">
+  <ng-container modal-header-title>Confirmación generación y envio de Acta</ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      ¿Está seguro que desea enviar el acta?
+    </div>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Cancelar</button>
+    <button class="btn btn-primary"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, Enviar acta</button>
+  </ng-container>
+</app-modal>

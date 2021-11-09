@@ -28,6 +28,8 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   });
   DisplayConfirmacionModal = false;
   lpusTotal = 0;
+  unidadesTotal = 0;
+  materialesTotal = 0;
 
   constructor(
     private otFacade: OtFacade,
@@ -106,6 +108,10 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     return (this.form.controls[indext] as FormArray).controls[index].get(
       'lpu_id'
     );
+  }
+
+  sendActaConfirmacion(): void {
+    this.DisplayConfirmacionModal = true;
   }
 
   ngOnDestroy(): void {
