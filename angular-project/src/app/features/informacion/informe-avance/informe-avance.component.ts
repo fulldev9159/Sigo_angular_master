@@ -5,7 +5,13 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import * as data from '@data';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { map } from 'rxjs/operators';
-import { FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-informe-avance',
@@ -71,14 +77,16 @@ export class InformeAvanceComponent implements OnInit, OnDestroy {
     );
   }
 
-  formCntl(index: number) {
-    return (this.form.controls['table'] as FormArray).controls[index].get(
+  formCntl(index: number): AbstractControl {
+    const indext = 'table';
+    return (this.form.controls[indext] as FormArray).controls[index].get(
       'informado'
     );
   }
 
-  formCntlLpuID(index: number) {
-    return (this.form.controls['table'] as FormArray).controls[index].get(
+  formCntlLpuID(index: number): AbstractControl {
+    const indext = 'table';
+    return (this.form.controls[indext] as FormArray).controls[index].get(
       'lpu_id'
     );
   }
