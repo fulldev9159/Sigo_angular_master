@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
 import { DataRspDetalleOT, ResponseDetalleCubicacion } from '@data';
+import { withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-informe-admincontrato',
@@ -26,6 +27,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     table: new FormArray([]),
   });
   DisplayConfirmacionModal = false;
+  lpusTotal = 0;
 
   constructor(
     private otFacade: OtFacade,
@@ -59,6 +61,23 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
           });
         }
       })
+    );
+
+    this.subscription.add(
+      this.form
+        .get('table')
+        .valueChanges.pipe(withLatestFrom(this.detalleCubicacion$))
+        .subscribe(([informados, lpus]) => {
+          this.lpusTotal = 0;
+
+          informados.forEach(informado => {
+            const lpu = lpus.find(lpu => lpu.lpu_id === informado.lpu_id);
+            if (lpu) {
+              this.lpusTotal =
+                this.lpusTotal + lpu.lpu_precio * informado.informado;
+            }
+          });
+        })
     );
   }
 
