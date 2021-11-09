@@ -5,7 +5,7 @@
         <table>
           <thead>
             <tr>
-              <th colspan="11" style="background: #00507a;
+              <th colspan="13" style="background: #00507a;
                     color: white;
                     text-align: center;">Mano de obra/Lpus</th>
             </tr>
@@ -21,6 +21,10 @@
                     text-align: center;">
                 Cantidad
               </th>
+              <th colspan="2" style="background: #dfdfdf;
+              text-align: center;">
+                Costos
+              </th>
             </tr>
             <tr>
               <th rowspan="2">Cub.</th>
@@ -29,6 +33,9 @@
               </th>
               <th rowspan="2">Pend.</th>
               <th rowspan="2">Inf.</th>
+
+              <th>P. unidad</th>
+              <th>Subtotal</th>
             </tr>
           </thead>
           <tbody formArrayName="table">
@@ -53,6 +60,8 @@
                   <p-message severity="error" text="{{ errorMessageFn(formCntl(i).errors) }}"></p-message>
                 </div>
               </td>
+              <td style="text-align: right;">{{car.lpu_precio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              <td style="text-align: right;">{{car.lpu_precio * formCntl(i).value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
             </tr>
           </tbody>
         </table>
@@ -63,7 +72,7 @@
         <table>
           <thead>
             <tr>
-              <th colspan="11" style="background: #00507a;
+              <th colspan="13" style="background: #00507a;
                         color: white;
                         text-align: center;">Unidades de obra</th>
             </tr>
@@ -79,6 +88,10 @@
                         text-align: center;">
                 Cantidad
               </th>
+              <th colspan="2" style="background: #dfdfdf;
+              text-align: center;">
+                Costos
+              </th>
             </tr>
             <tr>
               <th rowspan="2">Cub.</th>
@@ -87,6 +100,9 @@
               </th>
               <th rowspan="2">Pend.</th>
               <th rowspan="2">Inf.</th>
+
+              <th>P. unidad</th>
+              <th>Subtotal</th>
             </tr>
           </thead>
           <tbody>
