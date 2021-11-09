@@ -35,8 +35,6 @@ export class NumeroInternoFormComponent implements OnInit, OnDestroy {
       numero_interno: new FormControl('', [Validators.required]),
     });
     (this.form.get('numeros_internos') as FormArray).push(group);
-    console.log(this.form);
-    console.log('contros get', this.form.get('numeros_internos'));
   }
 
   checkTipoNumeroInternoAndEnable(
