@@ -39,6 +39,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./anexos/anexos.module').then(m => m.AnexosModule),
       },
+      {
+        path: 'acta/:id',
+        loadChildren: () =>
+          import('./acta/acta.module').then(m => m.ActaModule),
+      },
     ],
   },
 ];

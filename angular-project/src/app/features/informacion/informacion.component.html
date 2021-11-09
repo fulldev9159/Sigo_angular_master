@@ -15,9 +15,15 @@
     </a>
   </li>
   <li>
-    <a href="" [routerLink]="['informe-avance',ot_id]" [routerLinkActive]="['is-active']">
+    <a href="" *ngIf="(loginAuth$ |async).perfil==='Trabajador EECC'||(loginAuth$ |async).perfil==='Administrador EECC'" [routerLink]="['informe-avance',ot_id]" [routerLinkActive]="['is-active']">
       <span class="icon pi pi-fw pi-file"></span>
       <span class="tab-title">Informe de Avances</span>
+    </a>
+  </li>
+  <li *ngIf="(loginAuth$ |async).perfil==='Gestor/JP'">
+    <a href="" [routerLink]="['acta',ot_id]" [routerLinkActive]="['is-active']">
+      <span class="icon pi pi-fw pi-file-o"></span>
+      <span class="tab-title">Acta</span>
     </a>
   </li>
   <li>
@@ -33,12 +39,6 @@
     </a>
   </li>
   <!-- <li>
-    <a href="">
-      <span class="icon pi pi-fw pi-file-o"></span>
-      <span class="tab-title">Acta</span>
-    </a>
-  </li>
-  <li>
     <a href="">
       <span class="icon pi pi-fw pi-briefcase"></span>
       <span class="tab-title">Bitácora</span>
