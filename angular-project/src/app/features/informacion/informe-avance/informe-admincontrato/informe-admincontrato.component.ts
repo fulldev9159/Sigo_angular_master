@@ -71,7 +71,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
           this.lpusTotal = 0;
 
           informados.forEach(informado => {
-            const lpu = lpus.find(lpu => lpu.lpu_id === informado.lpu_id);
+            const lpu = lpus.find(lpuf => lpuf.lpu_id === informado.lpu_id);
             if (lpu) {
               this.lpusTotal =
                 this.lpusTotal + lpu.lpu_precio * informado.informado;
