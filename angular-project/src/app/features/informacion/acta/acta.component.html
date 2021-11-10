@@ -155,8 +155,33 @@
 <app-modal [display]="DisplayConfirmacionModal" (CloseEvent)="DisplayConfirmacionModal=false">
   <ng-container modal-header-title>Confirmación de aceptación de Acta</ng-container>
   <ng-container modal-content>
+    <h1>Resumen</h1>
+    <table>
+      <tbody>
+        <tr>
+          <td><strong>LPUs Total</strong></td>
+          <td>{{lpusTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+        <tr>
+          <td><strong>Unidades de obra Total</strong></td>
+          <td>{{unidadesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+        <tr>
+          <td><strong>Materiales Total</strong></td>
+          <td>{{materialesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>{{lpusTotal + unidadesTotal + materialesTotal | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h5>Pagar el: {{val3}}%</h5>
+    <p-slider [(ngModel)]="val3" [step]="20" disabled="true"></p-slider>
+
     <div class="row">
-      ¿Está seguro que desea aceptar el acta?
+      ¿Está seguro que desea aceptar el acta y pagar el porcentaje esocogido?
     </div>
   </ng-container>
   <ng-container modal-footer>

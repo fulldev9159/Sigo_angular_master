@@ -30,6 +30,7 @@ export class ActaComponent implements OnInit, OnDestroy {
   lpusTotal = 0;
   unidadesTotal = 0;
   materialesTotal = 0;
+  val3 = 100;
 
   constructor(
     private otFacade: OtFacade,
