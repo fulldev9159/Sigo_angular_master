@@ -10,10 +10,10 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { DataRspDetalleOT, ResponseDetalleCubicacion } from '@data';
+import { DataRspDetalleOT, DetalleCubicacion } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 
-interface detalleAdmin extends ResponseDetalleCubicacion {
+interface detalleAdmin extends DetalleCubicacion {
   informado: number;
 }
 @Component({
@@ -25,7 +25,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRspDetalleOT>;
-  // detalleCubicacion$: Observable<ResponseDetalleCubicacion[]> = of([]);
+  // detalleCubicacion$: Observable<DetalleCubicacion[]> = of([]);
   detalleCubicacion$: Observable<detalleAdmin[]> = of([]);
   form: FormGroup = new FormGroup({
     table: new FormArray([]),

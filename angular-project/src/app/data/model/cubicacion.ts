@@ -114,6 +114,17 @@ export interface EditCubicacionResponse {
 }
 // EDIT Cubicacion end
 export interface ResponseDetalleCubicacion {
+  data: {
+    items: DetalleCubicacion[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface DetalleCubicacion {
   lpu_id: number;
   servicio_id: number;
   lpu_nombre: string;

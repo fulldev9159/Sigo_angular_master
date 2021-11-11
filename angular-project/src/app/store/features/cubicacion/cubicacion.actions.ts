@@ -12,6 +12,7 @@ import {
   Lpu4Cub,
   StatusResponse,
   AutoSuggestItem,
+  DetalleCubicacion,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
@@ -190,6 +191,23 @@ export const getAutoSuggestError = createAction(
 );
 // Auto Suggest end
 
+// Detalle Cubicacion init
+export const getDetalleCubicacion = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getDetalleCubicacionSuccess = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion Success',
+  props<{ detallecubicacion: DetalleCubicacion[]; status: StatusResponse }>()
+);
+
+export const getDetalleCubicacionError = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion Error',
+  props<{ error: any }>()
+);
+// Detalle Cubicacion end
+
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',
   props<{ cubicacion_id: number }>()
@@ -223,22 +241,6 @@ export const replyCubicacionError = createAction(
 
 export const resetData = createAction('[ResetData] ResetData');
 export const resetServices = createAction('[ResetData] Reset Services');
-
-// Detalle Cubicacion
-export const getDetalleCubicacion = createAction(
-  '[Detalle Cubicacion Get] GET Detalle Cubicacion',
-  props<{ cubicacion_id: number }>()
-);
-
-export const getDetalleCubicacionSuccess = createAction(
-  '[Detalle Cubicacion Get] GET Detalle Cubicacion Success',
-  props<{ detallecubicacion: cubModel.ResponseDetalleCubicacion[] }>()
-);
-
-export const getDetalleCubicacionError = createAction(
-  '[Detalle Cubicacion Get] GET Detalle Cubicacion Error',
-  props<{ error: any }>()
-);
 
 // Clonar cubicacion
 export const clonarCubicacion = createAction(

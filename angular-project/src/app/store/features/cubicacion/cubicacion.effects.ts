@@ -248,6 +248,25 @@ export class CubicacionEffects {
     )
   );
 
+  getDetalleCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getDetalleCubicacion),
+      concatMap(({ cubicacion_id }) =>
+        this.cubService.getDetalleCubicacion(cubicacion_id).pipe(
+          map(({ detallecubicacion, status }) =>
+            cubActions.getDetalleCubicacionSuccess({
+              detallecubicacion,
+              status,
+            })
+          ),
+          catchError(err =>
+            of(cubActions.getDetalleCubicacionError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -258,7 +277,9 @@ export class CubicacionEffects {
           cubActions.getSubContractedRegionsSuccess,
           cubActions.getSubContractedServicesSuccess,
           cubActions.createCubSuccess,
-          cubActions.editCubicacionSuccess
+          cubActions.editCubicacionSuccess,
+          cubActions.getAutoSuggestSuccess,
+          cubActions.getDetalleCubicacionSuccess
         ),
         tap(action => {
           if (+action.status.responseCode === 0) {
@@ -281,9 +302,15 @@ export class CubicacionEffects {
             }
           } else if (+action.status.responseCode === 1) {
             this.snackService.showMessage(
-              `${this.messageService.messageInfo(action.type)} - ${
+              `${this.messageService.messageInfoSinResultado(action.type)} - ${
                 action.status.description
               }`,
+              'info',
+              2000
+            );
+          } else {
+            this.snackService.showMessage(
+              `PROBLEM - ${action.status.description}`,
               'info',
               2000
             );
@@ -305,7 +332,8 @@ export class CubicacionEffects {
           cubActions.getSubContractedServicesError,
           cubActions.createCubError,
           cubActions.editCubicacionError,
-          cubActions.getAutoSuggestError
+          cubActions.getAutoSuggestError,
+          cubActions.getDetalleCubicacionError
         ),
         tap(action => {
           this.snackService.showMessage(
@@ -318,31 +346,6 @@ export class CubicacionEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  getDetalleCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getDetalleCubicacion),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/detalle/get`, {
-            cubicacion_id: data.cubicacion_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return cubActions.getDetalleCubicacionSuccess({
-                detallecubicacion: res.data.items,
-              });
-            }),
-            catchError(err =>
-              of(cubActions.getDetalleCubicacionError({ error: err }))
-            )
-          )
-      )
-    )
   );
 
   clonarCubicacion$ = createEffect(() =>

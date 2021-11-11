@@ -18,6 +18,24 @@ export class NotifyAfter {
     private router: Router
   ) {}
 
+  // StatusOK es el estado 'Ok'
+  //StatusOK = 0
+
+  // StatusEmpty es el estado cuando no hay items (zero rows)
+  //StatusEmpty = 1
+
+  // StatusError es el estado de error generico
+  //StatusError = 2
+
+  // StatusUnmarshalRequestFailed es el estado cuando no se puede hacer unmarshal del body del request
+  //StatusUnmarshalRequestFailed = 3
+
+  // StatusNoRowsAffected es el estado cuando no hay filas afectadas en un update
+  //StatusNoRowsAffected = 4
+
+  // StatusPermissionNotFound es el estado por falta de permisos
+  //StatusPermissionNotFound = 5
+
   messageOk(action: string): string {
     const msg: Message = {};
     msg[cubActions.createCubSuccess.type] = 'Cubicación creada exitosamente';
@@ -27,7 +45,7 @@ export class NotifyAfter {
     return msg[action];
   }
 
-  messageInfo(action: string): string {
+  messageInfoSinResultado(action: string): string {
     const msg: Message = {};
     msg[cubActions.getCubsSuccess.type] = 'No existen cubicaciones';
     msg[cubActions.getContractMarcoSuccess.type] =
@@ -39,8 +57,12 @@ export class NotifyAfter {
     msg[cubActions.getSubContractedServicesSuccess.type] =
       'No existen LPUs para el tipo seleccionado';
     msg[cubActions.createCubSuccess.type] = 'No se pudo crear la cubicación';
-    msg[cubActions.editCubicacionSuccess.type] =
-      'No se pudo editar la cubicación';
+    // msg[cubActions.editCubicacionSuccess.type] =
+    //   'No se pudo editar la cubicación';
+    msg[cubActions.getAutoSuggestError.type] =
+      'No existen sugerencias de nombre';
+    msg[cubActions.getDetalleCubicacionError.type] =
+      'No posee detalle de cubicación';
 
     return msg[action];
   }
@@ -63,6 +85,8 @@ export class NotifyAfter {
       'No se pudo editar la cubicación';
     msg[cubActions.getAutoSuggestError.type] =
       'No se pudo obtener sugerencias de nombre de cubicación';
+    msg[cubActions.getDetalleCubicacionError.type] =
+      'No se pudo obtener obtener el detalle de la cubicación';
 
     return msg[action];
   }

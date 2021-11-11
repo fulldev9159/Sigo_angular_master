@@ -15,6 +15,7 @@ import {
   LpuCarrito4Cub,
   Lpu4Cub,
   AutoSuggestItem,
+  DetalleCubicacion,
 } from '@data';
 
 @Injectable({
@@ -205,9 +206,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getDetallesCubicacionSelector$(): Observable<
-    cubModel.ResponseDetalleCubicacion[]
-  > {
+  public getDetallesCubicacionSelector$(): Observable<DetalleCubicacion[]> {
     return this.store.select(cubicacionSelectors.getDetalleCubicacion);
   }
 

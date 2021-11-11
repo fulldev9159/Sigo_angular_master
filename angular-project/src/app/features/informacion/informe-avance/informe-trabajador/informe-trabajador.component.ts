@@ -10,7 +10,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { DataRspDetalleOT, ResponseDetalleCubicacion } from '@data';
+import { DataRspDetalleOT, DetalleCubicacion } from '@data';
 
 @Component({
   selector: 'app-informe-trabajador',
@@ -21,7 +21,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRspDetalleOT>;
-  detalleCubicacion$: Observable<ResponseDetalleCubicacion[]> = of([]);
+  detalleCubicacion$: Observable<DetalleCubicacion[]> = of([]);
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
   });

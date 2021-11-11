@@ -28,21 +28,3 @@ export interface LpusRequest {
   lpu_id: number;
   cantidad: number;
 }
-
-export interface AutoSuggestRequest {
-  filter: string;
-  cantidad: number;
-}
-export interface ResponseDetalleCubicacion {
-  lpu_id: number;
-  servicio_id: number;
-  lpu_nombre: string;
-  lpu_precio: number;
-  tipo_moneda_id: number;
-  tipo_moneda_cod: string;
-  tipo_unidad_codigo: number;
-  tipo_unidad_nombre: string;
-  lpu_cantidad: number;
-  lpu_subtotal: number;
-  tipo_servicio_nombre: string;
-}

@@ -15,6 +15,8 @@ import {
   StatusResponse,
   AutoSuggestItem,
   ResponseAutoSuggest,
+  ResponseDetalleCubicacion,
+  DetalleCubicacion,
 } from '@data';
 
 @Injectable({
@@ -69,6 +71,30 @@ export class CubicacionService {
         map(res => {
           return {
             cubs: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
+  }
+
+  getDetalleCubicacion(cubicacion_id: number): Observable<{
+    detallecubicacion: DetalleCubicacion[];
+    status: StatusResponse;
+  }> {
+    return this.http
+      .post<ResponseDetalleCubicacion>(
+        `${this.apiUrl}/cubicacion/detalle/get`,
+        {
+          cubicacion_id,
+        }
+      )
+      .pipe(
+        map(res => {
+          return {
+            detallecubicacion: res.data.items,
             status: {
               description: res.status.description,
               responseCode: res.status.responseCode,
