@@ -1,10 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as cubModel from './cubicacion.model';
 import { CubicacionWithLpu, RequestSaveCubicacion } from '@data';
 import { Router } from '@angular/router';
-
 import {
   catchError,
   concatMap,
@@ -15,30 +12,25 @@ import {
 import { of } from 'rxjs';
 
 import * as cubActions from './cubicacion.actions';
-import * as cubicacionModel from '@storeOT/features/cubicacion/cubicacion.model';
-import { Response } from '@storeOT/model';
-import { environment } from '@environment';
-
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import * as Data from '@data';
+import * as Service from '@data';
+import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 @Injectable()
 export class CubicacionEffects {
   constructor(
     private actions$: Actions,
-    private http: HttpClient,
     private snackService: SnackBarService,
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
-    private cubService: Data.CubicacionService,
-    private contratoService: Data.ContratosService,
-    private proveedorService: Data.ProveedorService,
-    private regionService: Data.RegionService,
-    private messageService: Data.NotifyAfter,
-    private lpuService: Data.LpusService,
+    private cubService: Service.CubicacionService,
+    private contratoService: Service.ContratosService,
+    private proveedorService: Service.ProveedorService,
+    private regionService: Service.RegionService,
+    private messageService: Service.NotifyAfter,
+    private lpuService: Service.LpusService,
     private router: Router
   ) {}
 
@@ -301,6 +293,20 @@ export class CubicacionEffects {
     )
   );
 
+  deleteCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.deleteCubicacion),
+      concatMap(({ cubicacion_id }) =>
+        this.cubService.deleteOT(cubicacion_id).pipe(
+          map(({ status }) => {
+            return cubActions.deleteCubicacionSuccess({ status });
+          }),
+          catchError(error => of(cubActions.deleteCubicacionError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -382,19 +388,5 @@ export class CubicacionEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  deleteCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.deleteCubicacion),
-      concatMap(({ cubicacion_id }) =>
-        this.cubService.deleteOT(cubicacion_id).pipe(
-          map(({ status }) => {
-            return cubActions.deleteCubicacionSuccess({ status });
-          }),
-          catchError(error => of(cubActions.deleteCubicacionError({ error })))
-        )
-      )
-    )
   );
 }

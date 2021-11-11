@@ -1,6 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
-import * as cubModel from './cubicacion.model';
 import {
   AutoSuggestItem,
   ContratoMarco4Cub,

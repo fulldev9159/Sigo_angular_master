@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponetType } from '@storeOT/model';
 import { TableComponent } from '@uiOT/table/table.component';
 import {

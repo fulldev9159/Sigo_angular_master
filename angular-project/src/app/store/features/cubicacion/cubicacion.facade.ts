@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
-import * as cubModel from './cubicacion.model';
 import {
   ContratoMarco4Cub,
   Cubicacion,

@@ -19,22 +19,22 @@ export class NotifyAfter {
   ) {}
 
   // StatusOK es el estado 'Ok'
-  //StatusOK = 0
+  // StatusOK = 0
 
   // StatusEmpty es el estado cuando no hay items (zero rows)
-  //StatusEmpty = 1
+  // StatusEmpty = 1
 
   // StatusError es el estado de error generico
-  //StatusError = 2
+  // StatusError = 2
 
   // StatusUnmarshalRequestFailed es el estado cuando no se puede hacer unmarshal del body del request
-  //StatusUnmarshalRequestFailed = 3
+  // StatusUnmarshalRequestFailed = 3
 
   // StatusNoRowsAffected es el estado cuando no hay filas afectadas en un update
-  //StatusNoRowsAffected = 4
+  // StatusNoRowsAffected = 4
 
   // StatusPermissionNotFound es el estado por falta de permisos
-  //StatusPermissionNotFound = 5
+  // StatusPermissionNotFound = 5
 
   messageOk(action: string): string {
     const msg: Message = {};

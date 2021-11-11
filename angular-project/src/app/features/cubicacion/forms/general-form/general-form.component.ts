@@ -10,7 +10,6 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { Observable, Subscription, of, Subject } from 'rxjs';
 import { tap, map, withLatestFrom, takeUntil, filter } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
 import {
   AutoSuggestItem,

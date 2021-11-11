@@ -12,7 +12,7 @@ import {
 import { Subscription, Observable, of } from 'rxjs';
 import { DataRspDetalleOT, DetalleCubicacion } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
-interface detalleAdmin extends DetalleCubicacion {
+interface DetalleAdmin extends DetalleCubicacion {
   informado: number;
 }
 @Component({
@@ -25,7 +25,7 @@ export class ActaComponent implements OnInit, OnDestroy {
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRspDetalleOT>;
   // detalleCubicacion$: Observable<DetalleCubicacion[]> = of([]);
-  detalleCubicacion$: Observable<detalleAdmin[]> = of([]);
+  detalleCubicacion$: Observable<DetalleAdmin[]> = of([]);
 
   form: FormGroup = new FormGroup({
     table: new FormArray([]),

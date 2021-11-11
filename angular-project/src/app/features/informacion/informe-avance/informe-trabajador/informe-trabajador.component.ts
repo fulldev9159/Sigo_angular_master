@@ -129,9 +129,10 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     this.DisplayConfirmacionModal = true;
   }
 
-  sendInforme() {
-    (this.form.controls['table'] as FormArray).controls[0].disable();
-    (this.form.controls['table'] as FormArray).controls[1].disable();
+  sendInforme(): void {
+    const index = 'table';
+    (this.form.controls[index] as FormArray).controls[0].disable();
+    (this.form.controls[index] as FormArray).controls[1].disable();
 
     this.waitAP = true;
     this.DisplayConfirmacionModal = false;

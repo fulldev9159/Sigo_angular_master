@@ -11,7 +11,6 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { Cubicacion, DetalleCubicacion, Login } from '@data';
 import { MessageService } from 'primeng/api';
 import { CloneCubageFormComponent } from '../../component/clone-cubage-form/clone-cubage-form.component';

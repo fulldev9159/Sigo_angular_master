@@ -17,7 +17,6 @@ import {
   debounceTime,
   takeUntil,
 } from 'rxjs/operators';
-import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { GeneralFormService } from '../../service/general-form.service';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { TableComponent } from '@uiOT/table/table.component';

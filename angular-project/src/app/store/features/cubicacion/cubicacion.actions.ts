@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import * as cubModel from './cubicacion.model';
 import {
   Cubicacion,
   CubicacionWithLpu,
@@ -19,14 +18,13 @@ import {
 export const reset = createAction('[Cubicacion] reset');
 
 // GET CUBICACIONES init
-export const getCubsType = 'GET Cubicaciones';
-export const getCubs = createAction(`[Cubicacion] ${getCubsType}`);
+export const getCubs = createAction(`[Cubicacion] GET Cubicaciones`);
 export const getCubsSuccess = createAction(
-  `[Cubicacion] ${getCubsType} Success`,
+  `[Cubicacion] GET Cubicaciones Success`,
   props<{ cubs: Cubicacion[]; status: StatusResponse }>()
 );
 export const getCubsError = createAction(
-  `[Cubicacion] ${getCubsType} Error`,
+  `[Cubicacion] GET Cubicaciones Error`,
   props<{ error: any }>()
 );
 // GET CUBICACIONES end
