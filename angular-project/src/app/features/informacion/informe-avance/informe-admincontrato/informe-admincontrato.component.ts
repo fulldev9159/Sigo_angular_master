@@ -10,9 +10,12 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { DataRspDetalleOT, ResponseDetalleCubicacion } from '@data';
+import { DataRspDetalleOT, DetalleCubicacion } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 
+interface DetalleAdmin extends DetalleCubicacion {
+  informado: number;
+}
 @Component({
   selector: 'app-informe-admincontrato',
   templateUrl: './informe-admincontrato.component.html',
@@ -22,7 +25,8 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRspDetalleOT>;
-  detalleCubicacion$: Observable<ResponseDetalleCubicacion[]> = of([]);
+  // detalleCubicacion$: Observable<DetalleCubicacion[]> = of([]);
+  detalleCubicacion$: Observable<DetalleAdmin[]> = of([]);
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
   });
@@ -30,6 +34,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   lpusTotal = 0;
   unidadesTotal = 0;
   materialesTotal = 0;
+  waitAP = false;
 
   constructor(
     private otFacade: OtFacade,
@@ -38,7 +43,39 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
+    // this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
+    this.detalleCubicacion$ = of([
+      {
+        lpu_id: 1223,
+        servicio_id: 13123,
+        lpu_nombre:
+          'HABI Servicio Xeth punto a punto, con conversor en OC y cliente',
+        lpu_precio: 10000,
+        tipo_moneda_id: 1,
+        tipo_moneda_cod: 'string',
+        tipo_unidad_codigo: 1,
+        tipo_unidad_nombre: 'string',
+        lpu_cantidad: 5,
+        lpu_subtotal: 1,
+        tipo_servicio_nombre: 'string',
+        informado: 3,
+      },
+      {
+        lpu_id: 12223,
+        servicio_id: 45566,
+        lpu_nombre:
+          'Calculo Estructural, Memoria, Embarque, y Montaje SPECT-CIT-007',
+        lpu_precio: 70000,
+        tipo_moneda_id: 1,
+        tipo_moneda_cod: 'string',
+        tipo_unidad_codigo: 1,
+        tipo_unidad_nombre: 'string',
+        lpu_cantidad: 14,
+        lpu_subtotal: 1,
+        tipo_servicio_nombre: 'string',
+        informado: 2,
+      },
+    ]);
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
@@ -53,7 +90,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
           cub.forEach(lpu => {
             const group = new FormGroup({
               lpu_id: new FormControl(lpu.lpu_id, [Validators.required]),
-              informado: new FormControl(0, [
+              informado: new FormControl(lpu.informado, [
                 Validators.required,
                 Validators.min(0),
               ]),
@@ -112,6 +149,15 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
 
   sendActaConfirmacion(): void {
     this.DisplayConfirmacionModal = true;
+  }
+
+  sendInforme(): void {
+    const index = 'table';
+    (this.form.controls[index] as FormArray).controls[0].disable();
+    (this.form.controls[index] as FormArray).controls[1].disable();
+
+    this.waitAP = true;
+    this.DisplayConfirmacionModal = false;
   }
 
   ngOnDestroy(): void {

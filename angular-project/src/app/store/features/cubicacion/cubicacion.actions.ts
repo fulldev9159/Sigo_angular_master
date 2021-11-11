@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import * as cubModel from './cubicacion.model';
 import {
   Cubicacion,
   CubicacionWithLpu,
@@ -11,19 +10,21 @@ import {
   TipoLpu,
   Lpu4Cub,
   StatusResponse,
+  AutoSuggestItem,
+  DetalleCubicacion,
+  RequestSaveCubicacion,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
 
 // GET CUBICACIONES init
-export const getCubsType = 'GET Cubicaciones';
-export const getCubs = createAction(`[Cubicacion] ${getCubsType}`);
+export const getCubs = createAction(`[Cubicacion] GET Cubicaciones`);
 export const getCubsSuccess = createAction(
-  `[Cubicacion] ${getCubsType} Success`,
+  `[Cubicacion] GET Cubicaciones Success`,
   props<{ cubs: Cubicacion[]; status: StatusResponse }>()
 );
 export const getCubsError = createAction(
-  `[Cubicacion] ${getCubsType} Error`,
+  `[Cubicacion] GET Cubicaciones Error`,
   props<{ error: any }>()
 );
 // GET CUBICACIONES end
@@ -143,7 +144,7 @@ export const getSubContractedServicesError = createAction(
 // POST CREATE CUBICACION init
 export const createCub = createAction(
   '[Cubicacion Post] CREATE Cubicacion',
-  props<{ cubicacion: any }>()
+  props<{ cubicacion: RequestSaveCubicacion }>()
 );
 
 export const createCubSuccess = createAction(
@@ -172,13 +173,48 @@ export const editCubicacionError = createAction(
 );
 // POST EDIT CUBICACION end
 
+// Auto Suggest init
+export const getAutoSuggest = createAction(
+  '[Cubicacion Get] GET AutoSuggest',
+  props<{ filtro: string; cantidad: number }>()
+);
+
+export const getAutoSuggestSuccess = createAction(
+  '[Cubicacion Get] GET AutoSuggest Success',
+  props<{ autosuggests: AutoSuggestItem[]; status: StatusResponse }>()
+);
+
+export const getAutoSuggestError = createAction(
+  '[Cubicacion Get] GET AutoSuggest Error',
+  props<{ error: any }>()
+);
+// Auto Suggest end
+
+// Detalle Cubicacion init
+export const getDetalleCubicacion = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getDetalleCubicacionSuccess = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion Success',
+  props<{ detallecubicacion: DetalleCubicacion[]; status: StatusResponse }>()
+);
+
+export const getDetalleCubicacionError = createAction(
+  '[Detalle Cubicacion Get] GET Detalle Cubicacion Error',
+  props<{ error: any }>()
+);
+// Detalle Cubicacion end
+
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',
   props<{ cubicacion_id: number }>()
 );
 
 export const deleteCubicacionSuccess = createAction(
-  '[Cubicacion DeleteById] DELETE Cubicacion Success'
+  '[Cubicacion DeleteById] DELETE Cubicacion Success',
+  props<{ status: StatusResponse }>()
 );
 
 export const deleteCubicacionError = createAction(
@@ -205,38 +241,6 @@ export const replyCubicacionError = createAction(
 
 export const resetData = createAction('[ResetData] ResetData');
 export const resetServices = createAction('[ResetData] Reset Services');
-
-// Auto Suggest
-export const getAutoSuggest = createAction(
-  '[Cubicacion Get] GET AutoSuggest',
-  props<{ filter: string; cantidad: number }>()
-);
-
-export const getAutoSuggestSuccess = createAction(
-  '[Cubicacion Get] GET AutoSuggest Success',
-  props<{ autosuggests: cubModel.AutoSuggestItem[] }>()
-);
-
-export const getAutoSuggestError = createAction(
-  '[Cubicacion Get] GET AutoSuggest Error',
-  props<{ error: any }>()
-);
-
-// Detalle Cubicacion
-export const getDetalleCubicacion = createAction(
-  '[Detalle Cubicacion Get] GET Detalle Cubicacion',
-  props<{ cubicacion_id: number }>()
-);
-
-export const getDetalleCubicacionSuccess = createAction(
-  '[Detalle Cubicacion Get] GET Detalle Cubicacion Success',
-  props<{ detallecubicacion: cubModel.ResponseDetalleCubicacion[] }>()
-);
-
-export const getDetalleCubicacionError = createAction(
-  '[Detalle Cubicacion Get] GET Detalle Cubicacion Error',
-  props<{ error: any }>()
-);
 
 // Clonar cubicacion
 export const clonarCubicacion = createAction(

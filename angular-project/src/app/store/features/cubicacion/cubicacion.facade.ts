@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
-import * as cubModel from './cubicacion.model';
 import {
   ContratoMarco4Cub,
   Cubicacion,
@@ -14,6 +13,8 @@ import {
   TipoLpu,
   LpuCarrito4Cub,
   Lpu4Cub,
+  AutoSuggestItem,
+  DetalleCubicacion,
 } from '@data';
 
 @Injectable({
@@ -182,8 +183,8 @@ export class CubicacionFacade {
   // SUBCONTRACTSERVICES
   // CUBICACION
   // CONSTRACT MARCO
-  public getAutoSuggestAction(filter: string, cantidad: number): void {
-    this.store.dispatch(cubicacionActions.getAutoSuggest({ filter, cantidad }));
+  public getAutoSuggestAction(filtro: string, cantidad: number): void {
+    this.store.dispatch(cubicacionActions.getAutoSuggest({ filtro, cantidad }));
   }
 
   // public getAutoSuggestSuccess(contractMarco: ContratoMarco4Cub[]): void {
@@ -194,7 +195,7 @@ export class CubicacionFacade {
   //   );
   // }
 
-  public getAutoSuggestSelector$(): Observable<cubModel.AutoSuggestItem[]> {
+  public getAutoSuggestSelector$(): Observable<AutoSuggestItem[]> {
     return this.store.select(cubicacionSelectors.getAutoSuggest);
   }
 
@@ -204,9 +205,7 @@ export class CubicacionFacade {
     );
   }
 
-  public getDetallesCubicacionSelector$(): Observable<
-    cubModel.ResponseDetalleCubicacion[]
-  > {
+  public getDetallesCubicacionSelector$(): Observable<DetalleCubicacion[]> {
     return this.store.select(cubicacionSelectors.getDetalleCubicacion);
   }
 

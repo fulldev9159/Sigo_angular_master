@@ -114,6 +114,17 @@ export interface EditCubicacionResponse {
 }
 // EDIT Cubicacion end
 export interface ResponseDetalleCubicacion {
+  data: {
+    items: DetalleCubicacion[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface DetalleCubicacion {
   lpu_id: number;
   servicio_id: number;
   lpu_nombre: string;
@@ -126,3 +137,43 @@ export interface ResponseDetalleCubicacion {
   lpu_subtotal: number;
   tipo_servicio_nombre: string;
 }
+
+// Autosuggest
+export interface ResponseAutoSuggest {
+  data: {
+    items: string[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface AutoSuggestItem {
+  id: number;
+  name: string;
+}
+
+export interface RequestSaveCubicacion {
+  cubicacion_nombre: string;
+  region_id: number;
+  usuario_id: number;
+  contrato_marco_id: number;
+  proveedor_id: number;
+  // subcontrato_id: number[];
+  lpus: LpusRequest[];
+}
+
+// Delete Cubicacion init
+export interface ResponseDeleteCubicacion {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+// Delete Cubicacion end

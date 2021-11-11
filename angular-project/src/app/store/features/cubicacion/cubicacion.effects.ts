@@ -1,10 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu } from '@data';
+import { CubicacionWithLpu, RequestSaveCubicacion } from '@data';
 import { Router } from '@angular/router';
-
 import {
   catchError,
   concatMap,
@@ -15,30 +12,25 @@ import {
 import { of } from 'rxjs';
 
 import * as cubActions from './cubicacion.actions';
-import * as cubicacionModel from '@storeOT/features/cubicacion/cubicacion.model';
-import { Response } from '@storeOT/model';
-import { environment } from '@environment';
-
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import * as Data from '@data';
+import * as Service from '@data';
+import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 @Injectable()
 export class CubicacionEffects {
   constructor(
     private actions$: Actions,
-    private http: HttpClient,
     private snackService: SnackBarService,
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
-    private cubService: Data.CubicacionService,
-    private contratoService: Data.ContratosService,
-    private proveedorService: Data.ProveedorService,
-    private regionService: Data.RegionService,
-    private messageService: Data.NotifyAfter,
-    private lpuService: Data.LpusService,
+    private cubService: Service.CubicacionService,
+    private contratoService: Service.ContratosService,
+    private proveedorService: Service.ProveedorService,
+    private regionService: Service.RegionService,
+    private messageService: Service.NotifyAfter,
+    private lpuService: Service.LpusService,
     private router: Router
   ) {}
 
@@ -231,6 +223,90 @@ export class CubicacionEffects {
     )
   );
 
+  getAutoSuggest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getAutoSuggest),
+      concatMap(({ filtro, cantidad }) =>
+        this.cubService.getAutosuggestNameCubicacion(filtro, cantidad).pipe(
+          map(({ autosuggests, status }) =>
+            cubActions.getAutoSuggestSuccess({
+              autosuggests,
+              status,
+            })
+          ),
+          catchError(err => of(cubActions.getAutoSuggestError({ error: err })))
+        )
+      )
+    )
+  );
+
+  getDetalleCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getDetalleCubicacion),
+      concatMap(({ cubicacion_id }) =>
+        this.cubService.getDetalleCubicacion(cubicacion_id).pipe(
+          map(({ detallecubicacion, status }) =>
+            cubActions.getDetalleCubicacionSuccess({
+              detallecubicacion,
+              status,
+            })
+          ),
+          catchError(err =>
+            of(cubActions.getDetalleCubicacionError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  clonarCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.clonarCubicacion),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ cubicacion, cubicacion_id }, perfil]) =>
+        this.cubService.getDetalleCubicacion(cubicacion.id).pipe(
+          map(res => {
+            if (+res.status.responseCode !== 0) {
+              this.snackService.showMessage(res.status.description, 'error');
+            }
+            const requestSave: RequestSaveCubicacion = {
+              cubicacion_nombre: cubicacion.nombre,
+              region_id: cubicacion.region_id,
+              usuario_id: perfil.id,
+              contrato_marco_id: cubicacion.contrato_marco_id,
+              proveedor_id: cubicacion.proveedor_id,
+              lpus: res.detallecubicacion.map(x => ({
+                lpu_id: x.lpu_id,
+                cantidad: x.lpu_cantidad,
+              })),
+            };
+            return cubActions.createCub({
+              cubicacion: requestSave,
+            });
+          }),
+          catchError(err => {
+            console.log(err);
+            return of(cubActions.clonarCubicacionError({ error: err }));
+          })
+        )
+      )
+    )
+  );
+
+  deleteCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.deleteCubicacion),
+      concatMap(({ cubicacion_id }) =>
+        this.cubService.deleteOT(cubicacion_id).pipe(
+          map(({ status }) => {
+            return cubActions.deleteCubicacionSuccess({ status });
+          }),
+          catchError(error => of(cubActions.deleteCubicacionError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -241,7 +317,10 @@ export class CubicacionEffects {
           cubActions.getSubContractedRegionsSuccess,
           cubActions.getSubContractedServicesSuccess,
           cubActions.createCubSuccess,
-          cubActions.editCubicacionSuccess
+          cubActions.editCubicacionSuccess,
+          cubActions.getAutoSuggestSuccess,
+          cubActions.getDetalleCubicacionSuccess,
+          cubActions.deleteCubicacionSuccess
         ),
         tap(action => {
           if (+action.status.responseCode === 0) {
@@ -264,9 +343,15 @@ export class CubicacionEffects {
             }
           } else if (+action.status.responseCode === 1) {
             this.snackService.showMessage(
-              `${this.messageService.messageInfo(action.type)} - ${
+              `${this.messageService.messageInfoSinResultado(action.type)} - ${
                 action.status.description
               }`,
+              'info',
+              2000
+            );
+          } else {
+            this.snackService.showMessage(
+              `PROBLEM - ${action.status.description}`,
               'info',
               2000
             );
@@ -287,7 +372,10 @@ export class CubicacionEffects {
           cubActions.getSubContractedTypeServicesError,
           cubActions.getSubContractedServicesError,
           cubActions.createCubError,
-          cubActions.editCubicacionError
+          cubActions.editCubicacionError,
+          cubActions.getAutoSuggestError,
+          cubActions.getDetalleCubicacionError,
+          cubActions.deleteCubicacionError
         ),
         tap(action => {
           this.snackService.showMessage(
@@ -297,129 +385,6 @@ export class CubicacionEffects {
             'error',
             4000
           );
-        })
-      ),
-    { dispatch: false }
-  );
-
-  getAutoSuggest$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getAutoSuggest),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/autosuggest/nombre`, {
-            filtro: data.filter,
-            cantidad: data.cantidad,
-          })
-          .pipe(
-            map((res: Response<cubicacionModel.AutoSuggestResponseData>) =>
-              cubActions.getAutoSuggestSuccess({
-                autosuggests: res.data.items.map((x, i) => ({
-                  id: +i + 1,
-                  name: x,
-                })),
-              })
-            ),
-            catchError(err =>
-              of(cubActions.getAutoSuggestError({ error: err }))
-            )
-          )
-      )
-    )
-  );
-
-  getDetalleCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getDetalleCubicacion),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/detalle/get`, {
-            cubicacion_id: data.cubicacion_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return cubActions.getDetalleCubicacionSuccess({
-                detallecubicacion: res.data.items,
-              });
-            }),
-            catchError(err =>
-              of(cubActions.getDetalleCubicacionError({ error: err }))
-            )
-          )
-      )
-    )
-  );
-
-  clonarCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.clonarCubicacion),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.http
-          .post(`${environment.api}/cubicacion/detalle/get`, {
-            cubicacion_id: data.cubicacion_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const requestSave: cubModel.RequestSaveCubicacion = {
-                cubicacion_nombre: data.cubicacion.nombre,
-                region_id: data.cubicacion.region_id,
-                usuario_id: 1,
-                contrato_marco_id: data.cubicacion.contrato_marco_id,
-                proveedor_id: data.cubicacion.proveedor_id,
-                lpus: res.data.items.map(x => ({
-                  lpu_id: x.lpu_id,
-                  cantidad: x.lpu_cantidad,
-                })),
-              };
-              // console.log(requestSave);
-              // this.cubageFacade.postCubicacion(requestSave);
-              return cubActions.createCub({
-                cubicacion: requestSave,
-              });
-            }),
-            catchError(err => {
-              console.log(err);
-              return of(cubActions.clonarCubicacionError({ error: err }));
-            })
-          )
-      )
-    )
-  );
-
-  deleteCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.deleteCubicacion),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.cubService.deleteOT(data.cubicacion_id).pipe(
-          map(() => {
-            return cubActions.deleteCubicacionSuccess();
-          }),
-          catchError(error => of(cubActions.deleteCubicacionError({ error })))
-        )
-      )
-    )
-  );
-
-  notifyAfterCubageDelete$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(cubActions.deleteCubicacionSuccess),
-        withLatestFrom(this.authFacade.getCurrentProfile$()),
-        tap(([data, profile]) => {
-          this.snackService.showMessage(
-            'Cubicación eliminada exitosamente',
-            'ok'
-          );
-
-          this.cubageFacade.getCubicacionAction();
         })
       ),
     { dispatch: false }

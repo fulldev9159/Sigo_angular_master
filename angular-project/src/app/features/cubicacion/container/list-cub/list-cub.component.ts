@@ -11,8 +11,7 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
-import { Cubicacion, Login } from '@data';
+import { Cubicacion, DetalleCubicacion, Login } from '@data';
 import { MessageService } from 'primeng/api';
 import { CloneCubageFormComponent } from '../../component/clone-cubage-form/clone-cubage-form.component';
 import { NgxPermissionsService } from 'ngx-permissions';
@@ -29,7 +28,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   public displayClonatedCubageNameModal = false;
   public DisplayModal = false;
   private destroyInstance: Subject<boolean> = new Subject();
-  public detalleCubicacion$: Observable<cubModel.ResponseDetalleCubicacion[]>;
+  public detalleCubicacion$: Observable<DetalleCubicacion[]>;
   public authLogin: Login = null;
   public configTable = {
     header: true,

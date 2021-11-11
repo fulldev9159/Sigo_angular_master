@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-import * as cubModel from '@storeOT/features/cubicacion/cubicacion.model';
 
 @Component({
   selector: 'app-clone-cubage-form',

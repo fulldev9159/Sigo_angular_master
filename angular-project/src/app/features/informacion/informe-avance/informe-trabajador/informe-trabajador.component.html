@@ -11,6 +11,9 @@
         </button>
       </div>
     </ng-template>
+    <span *ngIf="waitAP">
+      <p-message severity="info" text="A la espera de aprobación por parte del gestor"></p-message>&nbsp;
+    </span>
     <form [formGroup]="form">
       <table>
         <thead>
@@ -109,6 +112,6 @@
   </ng-container>
   <ng-container modal-footer>
     <button class="btn"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Cancelar</button>
-    <button class="btn btn-primary"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, Enviar informe</button>
+    <button class="btn btn-primary" (click)="sendInforme()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, Enviar informe</button>
   </ng-container>
 </app-modal>
