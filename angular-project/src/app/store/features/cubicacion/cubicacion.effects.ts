@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as cubModel from './cubicacion.model';
-import { CubicacionWithLpu } from '@data';
+import { CubicacionWithLpu, RequestSaveCubicacion } from '@data';
 import { Router } from '@angular/router';
 
 import {
@@ -267,6 +267,40 @@ export class CubicacionEffects {
     )
   );
 
+  clonarCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.clonarCubicacion),
+      withLatestFrom(this.authFacade.getCurrentProfile$()),
+      concatMap(([{ cubicacion, cubicacion_id }, perfil]) =>
+        this.cubService.getDetalleCubicacion(cubicacion.id).pipe(
+          map(res => {
+            if (+res.status.responseCode !== 0) {
+              this.snackService.showMessage(res.status.description, 'error');
+            }
+            const requestSave: RequestSaveCubicacion = {
+              cubicacion_nombre: cubicacion.nombre,
+              region_id: cubicacion.region_id,
+              usuario_id: perfil.id,
+              contrato_marco_id: cubicacion.contrato_marco_id,
+              proveedor_id: cubicacion.proveedor_id,
+              lpus: res.detallecubicacion.map(x => ({
+                lpu_id: x.lpu_id,
+                cantidad: x.lpu_cantidad,
+              })),
+            };
+            return cubActions.createCub({
+              cubicacion: requestSave,
+            });
+          }),
+          catchError(err => {
+            console.log(err);
+            return of(cubActions.clonarCubicacionError({ error: err }));
+          })
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -279,7 +313,8 @@ export class CubicacionEffects {
           cubActions.createCubSuccess,
           cubActions.editCubicacionSuccess,
           cubActions.getAutoSuggestSuccess,
-          cubActions.getDetalleCubicacionSuccess
+          cubActions.getDetalleCubicacionSuccess,
+          cubActions.deleteCubicacionSuccess
         ),
         tap(action => {
           if (+action.status.responseCode === 0) {
@@ -333,7 +368,8 @@ export class CubicacionEffects {
           cubActions.createCubError,
           cubActions.editCubicacionError,
           cubActions.getAutoSuggestError,
-          cubActions.getDetalleCubicacionError
+          cubActions.getDetalleCubicacionError,
+          cubActions.deleteCubicacionError
         ),
         tap(action => {
           this.snackService.showMessage(
@@ -348,75 +384,17 @@ export class CubicacionEffects {
     { dispatch: false }
   );
 
-  clonarCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.clonarCubicacion),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.http
-          .post(`${environment.api}/cubicacion/detalle/get`, {
-            cubicacion_id: data.cubicacion_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const requestSave: cubModel.RequestSaveCubicacion = {
-                cubicacion_nombre: data.cubicacion.nombre,
-                region_id: data.cubicacion.region_id,
-                usuario_id: 1,
-                contrato_marco_id: data.cubicacion.contrato_marco_id,
-                proveedor_id: data.cubicacion.proveedor_id,
-                lpus: res.data.items.map(x => ({
-                  lpu_id: x.lpu_id,
-                  cantidad: x.lpu_cantidad,
-                })),
-              };
-              // console.log(requestSave);
-              // this.cubageFacade.postCubicacion(requestSave);
-              return cubActions.createCub({
-                cubicacion: requestSave,
-              });
-            }),
-            catchError(err => {
-              console.log(err);
-              return of(cubActions.clonarCubicacionError({ error: err }));
-            })
-          )
-      )
-    )
-  );
-
   deleteCubicacion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.deleteCubicacion),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([data, profile]) =>
-        this.cubService.deleteOT(data.cubicacion_id).pipe(
-          map(() => {
-            return cubActions.deleteCubicacionSuccess();
+      concatMap(({ cubicacion_id }) =>
+        this.cubService.deleteOT(cubicacion_id).pipe(
+          map(({ status }) => {
+            return cubActions.deleteCubicacionSuccess({ status });
           }),
           catchError(error => of(cubActions.deleteCubicacionError({ error })))
         )
       )
     )
-  );
-
-  notifyAfterCubageDelete$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(cubActions.deleteCubicacionSuccess),
-        withLatestFrom(this.authFacade.getCurrentProfile$()),
-        tap(([data, profile]) => {
-          this.snackService.showMessage(
-            'Cubicación eliminada exitosamente',
-            'ok'
-          );
-
-          this.cubageFacade.getCubicacionAction();
-        })
-      ),
-    { dispatch: false }
   );
 }

@@ -154,3 +154,26 @@ export interface AutoSuggestItem {
   id: number;
   name: string;
 }
+
+export interface RequestSaveCubicacion {
+  cubicacion_nombre: string;
+  region_id: number;
+  usuario_id: number;
+  contrato_marco_id: number;
+  proveedor_id: number;
+  // subcontrato_id: number[];
+  lpus: LpusRequest[];
+}
+
+// Delete Cubicacion init
+export interface ResponseDeleteCubicacion {
+  data: {
+    id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+// Delete Cubicacion end

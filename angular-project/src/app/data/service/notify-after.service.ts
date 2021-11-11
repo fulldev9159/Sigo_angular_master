@@ -41,6 +41,8 @@ export class NotifyAfter {
     msg[cubActions.createCubSuccess.type] = 'Cubicación creada exitosamente';
     msg[cubActions.editCubicacionSuccess.type] =
       'Cubicación actualizada exitosamente';
+    msg[cubActions.deleteCubicacionSuccess.type] =
+      'Cubicación eliminada exitosamente';
 
     return msg[action];
   }
@@ -87,6 +89,8 @@ export class NotifyAfter {
       'No se pudo obtener sugerencias de nombre de cubicación';
     msg[cubActions.getDetalleCubicacionError.type] =
       'No se pudo obtener obtener el detalle de la cubicación';
+    msg[cubActions.deleteCubicacionError.type] =
+      'No se pudo eliminar la cubicación';
 
     return msg[action];
   }

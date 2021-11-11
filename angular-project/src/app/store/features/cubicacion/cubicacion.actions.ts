@@ -13,6 +13,7 @@ import {
   StatusResponse,
   AutoSuggestItem,
   DetalleCubicacion,
+  RequestSaveCubicacion,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
@@ -145,7 +146,7 @@ export const getSubContractedServicesError = createAction(
 // POST CREATE CUBICACION init
 export const createCub = createAction(
   '[Cubicacion Post] CREATE Cubicacion',
-  props<{ cubicacion: any }>()
+  props<{ cubicacion: RequestSaveCubicacion }>()
 );
 
 export const createCubSuccess = createAction(
@@ -214,7 +215,8 @@ export const deleteCubicacion = createAction(
 );
 
 export const deleteCubicacionSuccess = createAction(
-  '[Cubicacion DeleteById] DELETE Cubicacion Success'
+  '[Cubicacion DeleteById] DELETE Cubicacion Success',
+  props<{ status: StatusResponse }>()
 );
 
 export const deleteCubicacionError = createAction(

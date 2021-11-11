@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
-import { Response } from '@storeOT/model';
 import {
   CubicacionWithLpu,
   CubicacionesResponse,
@@ -10,13 +9,12 @@ import {
   RequestEditCubicacion,
   EditCubicacionResponse,
   Cubicacion,
-  ResponseGetContrato4Cub,
-  ContratoMarco4Cub,
   StatusResponse,
   AutoSuggestItem,
   ResponseAutoSuggest,
   ResponseDetalleCubicacion,
   DetalleCubicacion,
+  ResponseDeleteCubicacion,
 } from '@data';
 
 @Injectable({
@@ -175,12 +173,23 @@ export class CubicacionService {
       );
   }
 
-  deleteOT(cubicacion_id: number): Observable<Response<string>> {
-    return this.http.post<Response<string>>(
-      `${this.apiUrl}/cubicacion/delete`,
-      {
+  deleteOT(
+    cubicacion_id: number
+  ): Observable<{ cub_id: number; status: StatusResponse }> {
+    return this.http
+      .post<ResponseDeleteCubicacion>(`${this.apiUrl}/cubicacion/delete`, {
         cubicacion_id,
-      }
-    );
+      })
+      .pipe(
+        map(res => {
+          return {
+            cub_id: res.data.id,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 }
