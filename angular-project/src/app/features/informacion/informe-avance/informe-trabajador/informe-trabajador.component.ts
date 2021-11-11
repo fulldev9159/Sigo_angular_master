@@ -26,6 +26,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     table: new FormArray([]),
   });
   DisplayConfirmacionModal = false;
+  waitAP = false;
 
   constructor(
     private otFacade: OtFacade,
@@ -34,7 +35,38 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
+    // this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
+    this.detalleCubicacion$ = of([
+      {
+        lpu_id: 1223,
+        servicio_id: 13123,
+        lpu_nombre:
+          'HABI Servicio Xeth punto a punto, con conversor en OC y cliente',
+        lpu_precio: 10000,
+        tipo_moneda_id: 1,
+        tipo_moneda_cod: 'string',
+        tipo_unidad_codigo: 1,
+        tipo_unidad_nombre: 'string',
+        lpu_cantidad: 5,
+        lpu_subtotal: 1,
+        tipo_servicio_nombre: 'string',
+      },
+      {
+        lpu_id: 12223,
+        servicio_id: 45566,
+        lpu_nombre:
+          'Calculo Estructural, Memoria, Embarque, y Montaje SPECT-CIT-007',
+        lpu_precio: 70000,
+        tipo_moneda_id: 1,
+        tipo_moneda_cod: 'string',
+        tipo_unidad_codigo: 1,
+        tipo_unidad_nombre: 'string',
+        lpu_cantidad: 14,
+        lpu_subtotal: 1,
+        tipo_servicio_nombre: 'string',
+      },
+    ]);
+
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
@@ -61,6 +93,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       })
     );
   }
+
   errorMessageFn(errors: AbstractControl['errors']): string {
     console.log(errors);
     if (errors.required) {
@@ -94,5 +127,13 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   sendInformeConfirmacion(): void {
     this.DisplayConfirmacionModal = true;
+  }
+
+  sendInforme() {
+    (this.form.controls['table'] as FormArray).controls[0].disable();
+    (this.form.controls['table'] as FormArray).controls[1].disable();
+
+    this.waitAP = true;
+    this.DisplayConfirmacionModal = false;
   }
 }
