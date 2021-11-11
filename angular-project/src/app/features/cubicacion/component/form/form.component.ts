@@ -14,6 +14,7 @@ import * as CubModel from '@storeOT/features/cubicacion/cubicacion.model';
 import { TableComponetType } from '@storeOT/model';
 import { TableComponent } from '@uiOT/table/table.component';
 import {
+  AutoSuggestItem,
   ContratoMarco4Cub,
   Lpu4Cub,
   LpuCarrito4Cub,
@@ -43,7 +44,7 @@ export class FormComponent implements OnInit, OnDestroy {
   @Input() TypeServices: TipoLpu[] = [];
   @Input() Services: Lpu4Cub[] = [];
   @Input() autoSuggestInitialValue = '';
-  @Input() autoSuggestData: CubModel.AutoSuggestItem[] = [];
+  @Input() autoSuggestData: AutoSuggestItem[] = [];
   // @Input() ConfigTableResumen: TableComponetType;
   msgsLPUQuantityZero = [
     {
@@ -202,7 +203,7 @@ export class FormComponent implements OnInit, OnDestroy {
     this.destroyInstance$.complete();
   }
 
-  NameSelectedDummy(item: CubModel.AutoSuggestItem): void {
+  NameSelectedDummy(item: AutoSuggestItem): void {
     this.NameSelected.emit(item.name);
   }
 

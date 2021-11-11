@@ -13,6 +13,8 @@ import {
   ResponseGetContrato4Cub,
   ContratoMarco4Cub,
   StatusResponse,
+  AutoSuggestItem,
+  ResponseAutoSuggest,
 } from '@data';
 
 @Injectable({
@@ -22,6 +24,39 @@ export class CubicacionService {
   apiUrl = '';
   constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
+  }
+
+  getAutosuggestNameCubicacion(
+    filtro: string,
+    cantidad: number
+  ): Observable<{
+    autosuggests: AutoSuggestItem[];
+    status: StatusResponse;
+  }> {
+    return this.http
+      .post<ResponseAutoSuggest>(
+        `${this.apiUrl}/cubicacion/autosuggest/nombre`,
+        {
+          filtro,
+          cantidad,
+        }
+      )
+      .pipe(
+        map(res => {
+          return {
+            autosuggests: res.data.items
+              ? res.data.items.map((x, i) => ({
+                  id: +i + 1,
+                  name: x,
+                }))
+              : [],
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 
   getCubicaciones(): Observable<{

@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
 import * as cubModel from './cubicacion.model';
 import {
+  AutoSuggestItem,
   ContratoMarco4Cub,
   Cubicacion,
   CubicacionWithLpu,
@@ -23,7 +24,7 @@ export interface StateCubicacion {
   subContractedRegions: RegionSubcontrato4Cub[];
   subContractedTypeServices: TipoLpu[];
   subContractedServices: Lpu4Cub[];
-  autoSuggest: cubModel.AutoSuggestItem[];
+  autoSuggest: AutoSuggestItem[];
   detalleCubicacion: cubModel.ResponseDetalleCubicacion[];
   saving: boolean;
   errorSaving: Error;

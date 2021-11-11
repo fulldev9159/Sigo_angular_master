@@ -126,3 +126,20 @@ export interface ResponseDetalleCubicacion {
   lpu_subtotal: number;
   tipo_servicio_nombre: string;
 }
+
+// Autosuggest
+export interface ResponseAutoSuggest {
+  data: {
+    items: string[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface AutoSuggestItem {
+  id: number;
+  name: string;
+}

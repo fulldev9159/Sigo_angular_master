@@ -33,16 +33,6 @@ export interface AutoSuggestRequest {
   filter: string;
   cantidad: number;
 }
-
-export interface AutoSuggestResponseData {
-  items: string[];
-}
-
-export interface AutoSuggestItem {
-  id: number;
-  name: string;
-}
-
 export interface ResponseDetalleCubicacion {
   lpu_id: number;
   servicio_id: number;

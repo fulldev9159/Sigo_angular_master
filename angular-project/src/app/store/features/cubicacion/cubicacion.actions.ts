@@ -11,6 +11,7 @@ import {
   TipoLpu,
   Lpu4Cub,
   StatusResponse,
+  AutoSuggestItem,
 } from '@data';
 
 export const reset = createAction('[Cubicacion] reset');
@@ -172,6 +173,23 @@ export const editCubicacionError = createAction(
 );
 // POST EDIT CUBICACION end
 
+// Auto Suggest init
+export const getAutoSuggest = createAction(
+  '[Cubicacion Get] GET AutoSuggest',
+  props<{ filtro: string; cantidad: number }>()
+);
+
+export const getAutoSuggestSuccess = createAction(
+  '[Cubicacion Get] GET AutoSuggest Success',
+  props<{ autosuggests: AutoSuggestItem[]; status: StatusResponse }>()
+);
+
+export const getAutoSuggestError = createAction(
+  '[Cubicacion Get] GET AutoSuggest Error',
+  props<{ error: any }>()
+);
+// Auto Suggest end
+
 export const deleteCubicacion = createAction(
   '[Cubicacion DeleteById] DELETE Cubicacion',
   props<{ cubicacion_id: number }>()
@@ -205,22 +223,6 @@ export const replyCubicacionError = createAction(
 
 export const resetData = createAction('[ResetData] ResetData');
 export const resetServices = createAction('[ResetData] Reset Services');
-
-// Auto Suggest
-export const getAutoSuggest = createAction(
-  '[Cubicacion Get] GET AutoSuggest',
-  props<{ filter: string; cantidad: number }>()
-);
-
-export const getAutoSuggestSuccess = createAction(
-  '[Cubicacion Get] GET AutoSuggest Success',
-  props<{ autosuggests: cubModel.AutoSuggestItem[] }>()
-);
-
-export const getAutoSuggestError = createAction(
-  '[Cubicacion Get] GET AutoSuggest Error',
-  props<{ error: any }>()
-);
 
 // Detalle Cubicacion
 export const getDetalleCubicacion = createAction(

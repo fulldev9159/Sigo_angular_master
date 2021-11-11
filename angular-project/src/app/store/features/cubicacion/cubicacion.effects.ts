@@ -231,6 +231,23 @@ export class CubicacionEffects {
     )
   );
 
+  getAutoSuggest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getAutoSuggest),
+      concatMap(({ filtro, cantidad }) =>
+        this.cubService.getAutosuggestNameCubicacion(filtro, cantidad).pipe(
+          map(({ autosuggests, status }) =>
+            cubActions.getAutoSuggestSuccess({
+              autosuggests,
+              status,
+            })
+          ),
+          catchError(err => of(cubActions.getAutoSuggestError({ error: err })))
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -287,7 +304,8 @@ export class CubicacionEffects {
           cubActions.getSubContractedTypeServicesError,
           cubActions.getSubContractedServicesError,
           cubActions.createCubError,
-          cubActions.editCubicacionError
+          cubActions.editCubicacionError,
+          cubActions.getAutoSuggestError
         ),
         tap(action => {
           this.snackService.showMessage(
@@ -300,32 +318,6 @@ export class CubicacionEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  getAutoSuggest$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getAutoSuggest),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/cubicacion/autosuggest/nombre`, {
-            filtro: data.filter,
-            cantidad: data.cantidad,
-          })
-          .pipe(
-            map((res: Response<cubicacionModel.AutoSuggestResponseData>) =>
-              cubActions.getAutoSuggestSuccess({
-                autosuggests: res.data.items.map((x, i) => ({
-                  id: +i + 1,
-                  name: x,
-                })),
-              })
-            ),
-            catchError(err =>
-              of(cubActions.getAutoSuggestError({ error: err }))
-            )
-          )
-      )
-    )
   );
 
   getDetalleCubicacion$ = createEffect(() =>

@@ -61,6 +61,8 @@ export class NotifyAfter {
       'Error al obtener LPUS para cubicar';
     msg[cubActions.editCubicacionError.type] =
       'No se pudo editar la cubicación';
+    msg[cubActions.getAutoSuggestError.type] =
+      'No se pudo obtener sugerencias de nombre de cubicación';
 
     return msg[action];
   }

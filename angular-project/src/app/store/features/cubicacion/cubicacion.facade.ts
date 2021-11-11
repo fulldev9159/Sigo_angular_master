@@ -14,6 +14,7 @@ import {
   TipoLpu,
   LpuCarrito4Cub,
   Lpu4Cub,
+  AutoSuggestItem,
 } from '@data';
 
 @Injectable({
@@ -182,8 +183,8 @@ export class CubicacionFacade {
   // SUBCONTRACTSERVICES
   // CUBICACION
   // CONSTRACT MARCO
-  public getAutoSuggestAction(filter: string, cantidad: number): void {
-    this.store.dispatch(cubicacionActions.getAutoSuggest({ filter, cantidad }));
+  public getAutoSuggestAction(filtro: string, cantidad: number): void {
+    this.store.dispatch(cubicacionActions.getAutoSuggest({ filtro, cantidad }));
   }
 
   // public getAutoSuggestSuccess(contractMarco: ContratoMarco4Cub[]): void {
@@ -194,7 +195,7 @@ export class CubicacionFacade {
   //   );
   // }
 
-  public getAutoSuggestSelector$(): Observable<cubModel.AutoSuggestItem[]> {
+  public getAutoSuggestSelector$(): Observable<AutoSuggestItem[]> {
     return this.store.select(cubicacionSelectors.getAutoSuggest);
   }
 
