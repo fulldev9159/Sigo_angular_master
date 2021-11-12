@@ -239,7 +239,7 @@ export const replyCubicacionError = createAction(
 
 // CUBICACION FORM
 
-export const resetData = createAction('[ResetData] ResetData');
+export const resetData = createAction('[Cubicacion] ResetData');
 export const resetServices = createAction('[ResetData] Reset Services');
 
 // Clonar cubicacion

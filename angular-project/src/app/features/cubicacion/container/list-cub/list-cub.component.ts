@@ -9,12 +9,9 @@ import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { ConfirmationService } from 'primeng/api';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Cubicacion, DetalleCubicacion, Login } from '@data';
-import { MessageService } from 'primeng/api';
-import { CloneCubageFormComponent } from '../../component/clone-cubage-form/clone-cubage-form.component';
-import { NgxPermissionsService } from 'ngx-permissions';
+import { Observable, Subscription } from 'rxjs';
+import { Cubicacion, Login } from '@data';
+import { CloneCubageFormComponent } from '../../forms/clone-cubage-form/clone-cubage-form.component';
 
 @Component({
   selector: 'app-list-cub',
@@ -23,12 +20,9 @@ import { NgxPermissionsService } from 'ngx-permissions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListCubComponent implements OnInit, OnDestroy {
-  // declarations
-  public items$: Observable<Cubicacion[]>;
+  public cubicaciones$: Observable<Cubicacion[]>;
   public displayClonatedCubageNameModal = false;
-  public DisplayModal = false;
-  private destroyInstance: Subject<boolean> = new Subject();
-  public detalleCubicacion$: Observable<DetalleCubicacion[]>;
+  public DisplayModalDetalleCubicacion = false;
   public authLogin: Login = null;
   public configTable = {
     header: true,
@@ -128,12 +122,13 @@ export class ListCubComponent implements OnInit, OnDestroy {
           {
             icon: 'p-button-icon pi pi-eye',
             class: 'p-button p-button-info p-mr-2',
-            onClick: (event: Event, item) => {
-              this.DisplayModal = true;
+            onClick: (event: Event, item: Cubicacion) => {
+              this.DisplayModalDetalleCubicacion = true;
               this.cubageFacade.getDetallesCubicacionAction(item.id);
             },
           },
         ];
+
         let disabled = false;
         let tooltipTextEdit = '';
         let tooltipTextDelete = '';
@@ -147,13 +142,14 @@ export class ListCubComponent implements OnInit, OnDestroy {
           tooltipTextEdit = 'No puede editar cubicaciones de otro usuario';
           tooltipTextDelete = 'No puede eliminar cubicaciones de otro usuario';
         }
+
         actions.push(
           {
             disabled,
             tooltipDisabled: tooltipTextEdit,
             icon: 'p-button-icon pi pi-pencil',
             class: 'p-button p-button-warning p-mr-2',
-            onClick: (event: Event, item) => {
+            onClick: (event: Event, item: Cubicacion) => {
               if (item) {
                 this.router.navigate(['/app/cubicacion/form-cub', item.id]);
               }
@@ -183,56 +179,6 @@ export class ListCubComponent implements OnInit, OnDestroy {
     },
   };
 
-  configHeaders = [
-    {
-      field: 'Servicio LPU',
-      type: 'TEXT',
-      sort: 'lpu_nombre',
-      header: 'lpu_nombre',
-      width: '33%',
-      editable: false,
-    },
-    {
-      field: 'Tipo Servicio',
-      type: 'TEXT-TITLECASE',
-      sort: 'tipo_servicio_nombre',
-      header: 'tipo_servicio_nombre',
-      width: '15%',
-      editable: false,
-    },
-    {
-      field: 'Cantidad	',
-      type: 'TEXT',
-      sort: 'lpu_cantidad',
-      header: 'lpu_cantidad',
-      editable: true,
-    },
-    {
-      field: 'Unidad	',
-      type: 'TEXT',
-      sort: 'tipo_unidad_nombre',
-      header: 'tipo_unidad_nombre',
-      editable: false,
-    },
-  ];
-
-  configSort = ['lpu_nombre', 'tipo_servicio'];
-
-  public ConfigTableResumen = {
-    header: true,
-    headerConfig: {
-      title: '',
-      searchText: 'buscar...',
-      paginator: false,
-      actionsType: 'Buttons',
-    },
-    body: {
-      headers: this.configHeaders,
-      sort: this.configSort,
-      actions: [],
-    },
-  };
-
   @ViewChild('cloneCubageForm', {
     read: CloneCubageFormComponent,
     static: false,
@@ -244,81 +190,24 @@ export class ListCubComponent implements OnInit, OnDestroy {
     private router: Router,
     private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService,
-    private permissionsService: NgxPermissionsService
-  ) {
-    this.subscription.add(
-      permissionsService.permissions$.subscribe(permissions => {
-        if (permissions.OT_VER_VALOR_LPU) {
-          this.ConfigTableResumen = {
-            ...this.ConfigTableResumen,
-            body: {
-              headers: [
-                ...this.configHeaders,
-                {
-                  field: 'Tipo Moneda	',
-                  type: 'TEXT',
-                  sort: 'tipo_moneda_cod',
-                  header: 'tipo_moneda_cod',
-                  editable: false,
-                },
-                {
-                  field: 'Precio',
-                  type: 'NUMBER',
-                  sort: 'lpu_precio',
-                  header: 'lpu_precio',
-                  editable: false,
-                },
-                {
-                  field: 'Subtotal	',
-                  type: 'NUMBER',
-                  sort: 'lpu_subtotal',
-                  header: 'lpu_subtotal',
-                  editable: false,
-                },
-              ],
-              sort: [...this.configSort, 'lpu_precio'],
-              actions: [],
-            },
-          };
-        }
-      })
-    );
-  }
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     this.cubageFacade.resetData();
-    this.authFacade
-      .getLogin$()
-      .pipe(takeUntil(this.destroyInstance))
-      .subscribe(authLogin => {
+    this.subscription.add(
+      this.authFacade.getLogin$().subscribe(authLogin => {
         if (authLogin) {
           this.authLogin = authLogin;
         }
-      });
-
-    this.authFacade
-      .getCurrentProfile$()
-      .pipe(takeUntil(this.destroyInstance))
-      .subscribe(profile => {
-        if (profile) {
-          this.cubageFacade.getCubicacionAction();
-        }
-      });
-
-    this.detalleCubicacion$ =
-      this.cubageFacade.getDetallesCubicacionSelector$();
-    this.items$ = this.cubageFacade.getCubicacionSelector$();
+      })
+    );
+    this.cubageFacade.getCubicacionAction();
+    this.cubicaciones$ = this.cubageFacade.getCubicacionSelector$();
   }
 
   ngOnDestroy(): void {
-    this.destroyInstance.next(true);
-    this.destroyInstance.complete();
-  }
-
-  closeClonatedCubageNameModal(): void {
-    this.displayClonatedCubageNameModal = false;
+    this.subscription.unsubscribe();
   }
 
   cloneCubabeFormSubmit(): void {

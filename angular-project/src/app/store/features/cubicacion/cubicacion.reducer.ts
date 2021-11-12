@@ -117,7 +117,7 @@ export const reducerCubicacion = createReducer(
     detalleCubicacion: payload.detallecubicacion,
   })),
 
-  on(CubicacionActions.resetData, (state, payload) => ({
+  on(CubicacionActions.resetData, () => ({
     ...initialStateCubicacion,
   })),
   on(CubicacionActions.getAutoSuggest, state => state),
