@@ -1,12 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { Login, LoginRequest } from '@data';
+import { Login, RequestLogin } from '@data';
 
 // LOGIN
 export const reset = createAction('[Auth Login] reset');
 
 export const login = createAction(
   '[Auth Login] POST Login',
-  props<{ login: LoginRequest }>()
+  props<{ login: RequestLogin }>()
 );
 
 export const loginSuccess = createAction(

@@ -4,10 +4,10 @@ import { Observable, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import {
   CubicacionWithLpu,
-  CubicacionesResponse,
-  LpusResponse,
+  ResponseGetCubicaciones,
+  ResponseGetLpus,
   RequestEditCubicacion,
-  EditCubicacionResponse,
+  ResponseEditCubicacion,
   Cubicacion,
   StatusResponse,
   AutoSuggestItem,
@@ -64,7 +64,7 @@ export class CubicacionService {
     status: StatusResponse;
   }> {
     return this.http
-      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
+      .post<ResponseGetCubicaciones>(`${this.apiUrl}/cubicacion/get`, {})
       .pipe(
         map(res => {
           return {
@@ -104,19 +104,19 @@ export class CubicacionService {
 
   getCubicacion(cubicacion_id: number): Observable<CubicacionWithLpu> {
     return this.http
-      .post<CubicacionesResponse>(`${this.apiUrl}/cubicacion/get`, {})
+      .post<ResponseGetCubicaciones>(`${this.apiUrl}/cubicacion/get`, {})
       .pipe(
-        concatMap((cubsRes: CubicacionesResponse) => {
+        concatMap((cubsRes: ResponseGetCubicaciones) => {
           const cubFound = cubsRes.data.items.find(
             cub => cub.id === cubicacion_id
           );
           if (cubFound) {
             return this.http
-              .post<LpusResponse>(`${this.apiUrl}/cubicacion/detalle/get`, {
+              .post<ResponseGetLpus>(`${this.apiUrl}/cubicacion/detalle/get`, {
                 cubicacion_id,
               })
               .pipe(
-                map((lpusRes: LpusResponse) => {
+                map((lpusRes: ResponseGetLpus) => {
                   const lpus = lpusRes.data.items;
 
                   const cubicacion: CubicacionWithLpu = {
@@ -138,7 +138,7 @@ export class CubicacionService {
     cubicacion: any
   ): Observable<{ response: any; status: StatusResponse }> {
     return this.http
-      .post<EditCubicacionResponse>(
+      .post<ResponseEditCubicacion>(
         `${this.apiUrl}/cubicacion/create`,
         cubicacion
       )
@@ -159,7 +159,7 @@ export class CubicacionService {
     request: RequestEditCubicacion
   ): Observable<{ cub_id: number; status: StatusResponse }> {
     return this.http
-      .post<EditCubicacionResponse>(`${this.apiUrl}/cubicacion/edit`, request)
+      .post<ResponseEditCubicacion>(`${this.apiUrl}/cubicacion/edit`, request)
       .pipe(
         map(res => {
           return {

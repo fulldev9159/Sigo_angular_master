@@ -1,11 +1,11 @@
 import { Perfil } from './perfil';
 
 // Login init
-export interface LoginRequest {
+export interface RequestLogin {
   username: string;
   password: string;
 }
-export interface LoginResponse {
+export interface ResponseLogin {
   status: {
     description: string;
     responseCode: number;

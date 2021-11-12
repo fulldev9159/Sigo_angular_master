@@ -7,7 +7,7 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import {
   OT,
-  OTsResponse,
+  ResponseOTs,
   User,
   UsersResponse,
   ApprovalOTResponse,
@@ -37,7 +37,7 @@ export class OTService {
 
   getOTs(request: RequestGetOTs): Observable<OT[]> {
     return this.http
-      .post<OTsResponse>(`${this.apiUrl}/ingreot/ot/get`, request)
+      .post<ResponseOTs>(`${this.apiUrl}/ingreot/ot/get`, request)
       .pipe(
         map(response => {
           if (+response.status.responseCode !== 0) {

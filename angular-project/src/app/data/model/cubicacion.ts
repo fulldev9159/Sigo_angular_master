@@ -1,5 +1,5 @@
 // Get cubicaciones init
-export interface CubicacionesResponse {
+export interface ResponseGetCubicaciones {
   data: {
     items: Cubicacion[];
   };
@@ -37,15 +37,11 @@ export interface Cubicacion {
   region_nombre: string;
   total: number;
   total_tipo_moneda: string;
-  status: {
-    description: string;
-    response_code: number;
-  };
 }
 // Get cubicaciones done
 
 // Get LPUs Cubicacion end
-export interface LpusResponse {
+export interface ResponseGetLpus {
   data: {
     items: Lpu[];
   };
@@ -85,34 +81,8 @@ export interface Lpu {
   porcentaje_solicitado: number;
 }
 // Get LPUs Cubicacion end
-export interface CubicacionWithLpu extends Cubicacion {
-  lpus: Lpu[];
-}
-export interface LpusRequest {
-  lpu_id: number;
-  cantidad: number;
-}
 
-// EDIT Cubicacion init
-export interface RequestEditCubicacion {
-  cubicacion_id: number;
-  cubicacion_nombre: string;
-  region_id: number;
-  contrato_marco_id: number;
-  proveedor_id: number;
-  lpus: LpusRequest[];
-}
-export interface EditCubicacionResponse {
-  data: {
-    id: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-// EDIT Cubicacion end
+// GET Detalle Cubicación init
 export interface ResponseDetalleCubicacion {
   data: {
     items: DetalleCubicacion[];
@@ -137,8 +107,9 @@ export interface DetalleCubicacion {
   lpu_subtotal: number;
   tipo_servicio_nombre: string;
 }
+// GET Detalle Cubicación end
 
-// Autosuggest
+// GET Autosuggest init
 export interface ResponseAutoSuggest {
   data: {
     items: string[];
@@ -149,21 +120,43 @@ export interface ResponseAutoSuggest {
     responseCode: number;
   };
 }
+// GET Autosuggest end
 
-export interface AutoSuggestItem {
-  id: number;
-  name: string;
+// EDIT Cubicacion init
+export interface LpusEditSave {
+  lpu_id: number;
+  cantidad: number;
 }
+export interface RequestEditCubicacion {
+  cubicacion_id: number;
+  cubicacion_nombre: string;
+  region_id: number;
+  contrato_marco_id: number;
+  proveedor_id: number;
+  lpus: LpusEditSave[];
+}
+export interface ResponseEditCubicacion {
+  data: {
+    id: number;
+  };
 
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+// EDIT Cubicacion end
+
+// SAVE cubicacion init
 export interface RequestSaveCubicacion {
   cubicacion_nombre: string;
   region_id: number;
   usuario_id: number;
   contrato_marco_id: number;
   proveedor_id: number;
-  // subcontrato_id: number[];
-  lpus: LpusRequest[];
+  lpus: LpusEditSave[];
 }
+// SAVE cubicacion end
 
 // Delete Cubicacion init
 export interface ResponseDeleteCubicacion {
@@ -177,3 +170,12 @@ export interface ResponseDeleteCubicacion {
   };
 }
 // Delete Cubicacion end
+
+export interface AutoSuggestItem {
+  id: number;
+  name: string;
+}
+
+export interface CubicacionWithLpu extends Cubicacion {
+  lpus: Lpu[];
+}

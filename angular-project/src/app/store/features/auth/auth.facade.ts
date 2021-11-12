@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as authActions from './auth.actions';
 import * as authSelectors from './auth.selectors';
-import { Login, LoginRequest, Perfil } from '@data';
+import { Login, RequestLogin, Perfil } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class AuthFacade {
     this.store.dispatch(authActions.reset());
   }
 
-  public postLogin(login: LoginRequest): void {
+  public postLogin(login: RequestLogin): void {
     this.store.dispatch(authActions.login({ login }));
   }
 

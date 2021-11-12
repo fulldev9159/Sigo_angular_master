@@ -34,7 +34,7 @@ interface FieldOrder {
   ot_id: string;
 }
 
-export interface OTsResponse {
+export interface ResponseOTs {
   data: {
     items: OT[];
   };
