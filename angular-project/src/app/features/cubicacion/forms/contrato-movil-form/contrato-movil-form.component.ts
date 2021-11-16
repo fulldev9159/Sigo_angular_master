@@ -303,10 +303,6 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
     this.form.get('lpus').setValue([]);
   }
 
-  lpuOnchange(event: any) {
-    console.log('Change', event);
-  }
-
   lpuServiceSelected(event: any): void {
     const { region_id, tipo_servicio_id } = this.form.getRawValue();
     const region = this.regiones.find(r => r.id === +region_id);
