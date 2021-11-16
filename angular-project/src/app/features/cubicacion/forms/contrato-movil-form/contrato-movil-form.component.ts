@@ -303,12 +303,62 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
     this.form.get('lpus').setValue([]);
   }
 
+  lpuOnchange(event: any) {
+    console.log('Change', event);
+  }
+
   lpuServiceSelected(event: any): void {
     const { region_id, tipo_servicio_id } = this.form.getRawValue();
     const region = this.regiones.find(r => r.id === +region_id);
     const tipoServicio = this.tiposServicio.find(
       t => t.id === +tipo_servicio_id
     );
+
+    const seleccionadosIndex = event.value.reduce((ac, servicio) => {
+      ac[servicio.lpu_id] = true;
+      return ac;
+    }, {});
+
+    const noSeleccionados = this.servicios.filter(
+      servicio => seleccionadosIndex[servicio.lpu_id] === undefined
+    );
+
+    noSeleccionados.forEach(servicio => {
+      const item = {
+        lpu_id: servicio.lpu_id,
+        lpu_nombre: '',
+        lpu_precio: 0,
+        tipo_moneda_id: 0,
+        tipo_moneda_cod: '',
+        lpu_numero_producto: '',
+        lpu_unidad_codigo: 0,
+        lpu_unidad_nombre: '',
+        lpu_subtotal: 0,
+        tipo_servicio: '',
+        cantidad: 0,
+      };
+
+      this.tableLpusDeleteItem(item);
+    });
+
+    const enCarritoIndex = this.tableLpusValues.reduce((ac, servicio) => {
+      ac[servicio.lpu_id] = true;
+      return ac;
+    }, {});
+
+    const serviciosPorAgregarCarrito = event.value.filter(
+      servicio => enCarritoIndex[servicio.lpu_id] === undefined
+    );
+
+    serviciosPorAgregarCarrito.forEach(servicio => {
+      this.tableLpusAddItem({
+        ...servicio,
+        region: region.codigo,
+        tipo_servicio: tipoServicio.nombre,
+        cantidad: 1,
+        lpu_subtotal: servicio.lpu_precio,
+      });
+    });
 
     //// {
     ////   lpu_id: 833
@@ -320,21 +370,21 @@ export class ContratoMovilFormComponent implements OnInit, OnDestroy {
     ////   tipo_moneda_cod: "CLP"
     ////   tipo_moneda_id: 2
     //// }
-    const target = event.option;
-    const items = this.tableLpusValues;
-    const item = items.find(i => i.lpu_id === target.lpu_id);
+    // const target = event.option;
+    // const items = this.tableLpusValues;
+    // const item = items.find(i => i.lpu_id === target.lpu_id);
 
-    if (item) {
-      this.tableLpusDeleteItem(item);
-    } else {
-      this.tableLpusAddItem({
-        ...target,
-        region: region.codigo,
-        tipo_servicio: tipoServicio.nombre,
-        cantidad: 1,
-        lpu_subtotal: target.lpu_precio,
-      });
-    }
+    // if (item) {
+    // this.tableLpusDeleteItem(item);
+    // } else {
+    //   this.tableLpusAddItem({
+    //     ...target,
+    //     region: region.codigo,
+    //     tipo_servicio: tipoServicio.nombre,
+    //     cantidad: 1,
+    //     lpu_subtotal: target.lpu_precio,
+    //   });
+    // }
   }
 
   resetLpusCarrito(): void {
