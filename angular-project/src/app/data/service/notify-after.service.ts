@@ -97,6 +97,9 @@ export class NotifyAfter {
       'No se pudo eliminar la cubicación';
     msg[otActions.saveBorradorInformeAvanceError.type] =
       'No se pudo guardar borrador';
+    msg[otActions.saveInformeAvanceError.type] =
+      'No se pudo enviar informe de avance';
+
     return msg[action];
   }
 }

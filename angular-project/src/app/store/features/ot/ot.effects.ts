@@ -1138,19 +1138,34 @@ export class OtEffects {
     )
   );
 
+  saveInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.saveInformeAvance),
+      concatMap(({ lpus }) =>
+        this.informeAvanceService.saveInformeAvance(lpus).pipe(
+          map(({ status }) =>
+            otActions.saveInformeAvanceSuccess({
+              status,
+            })
+          ),
+          catchError(error => of(otActions.saveInformeAvanceError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.saveBorradorInformeAvanceSuccess),
+        ofType(
+          otActions.saveBorradorInformeAvanceSuccess,
+          otActions.saveInformeAvanceSuccess
+        ),
         tap(action => {
           if (+action.status.responseCode === 0) {
-            // if (
-            //   action.type === cubActions.createCubSuccess.type ||
-            //   action.type === cubActions.editCubicacionSuccess.type
-            // ) {
-            //   this.cubageFacade.getCubicacionAction();
-            //   this.router.navigate(['app/cubicacion/list-cub']);
-            // }
+            if (action.type === otActions.saveInformeAvanceSuccess.type) {
+              window.location.reload();
+            }
 
             if (this.messageServiceInt.messageOk(action.type) !== undefined) {
               this.snackService.showMessage(
@@ -1184,7 +1199,10 @@ export class OtEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.saveBorradorInformeAvanceError),
+        ofType(
+          otActions.saveBorradorInformeAvanceError,
+          otActions.saveInformeAvanceError
+        ),
         tap(action => {
           this.snackService.showMessage(
             `${this.messageServiceInt.messageError(action.type)} - ${

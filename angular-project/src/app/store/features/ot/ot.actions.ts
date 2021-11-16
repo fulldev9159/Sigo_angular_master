@@ -560,3 +560,19 @@ export const saveBorradorInformeAvanceError = createAction(
   '[OT] SAVE borrador informe avance error',
   props<{ error: any }>()
 );
+
+// Save informe avance
+export const saveInformeAvance = createAction(
+  '[OT] SAVE informe avance',
+  props<{ lpus: LpuInformeAvance[] }>()
+);
+
+export const saveInformeAvanceSuccess = createAction(
+  '[OT] SAVE informe avance success',
+  props<{ status: StatusResponse }>()
+);
+
+export const saveInformeAvanceError = createAction(
+  '[OT] SAVE informe avance error',
+  props<{ error: any }>()
+);

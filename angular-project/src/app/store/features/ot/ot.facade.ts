@@ -360,4 +360,8 @@ export class OtFacade {
   public saveBorradorInformeAvance(lpus: LpuInformeAvance[]): void {
     this.store.dispatch(otActions.saveBorradorInformeAvance({ lpus }));
   }
+
+  public saveInformeAvance(lpus: LpuInformeAvance[]): void {
+    this.store.dispatch(otActions.saveInformeAvance({ lpus }));
+  }
 }

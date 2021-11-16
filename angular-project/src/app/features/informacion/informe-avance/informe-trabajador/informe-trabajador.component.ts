@@ -136,6 +136,14 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
     this.waitAP = true;
     this.DisplayConfirmacionModal = false;
+
+    const lpus: LpuInformeAvance[] = (
+      this.form.get('table') as FormArray
+    ).value.map(f => {
+      return { id_lpu: f.lpu_id, informado: f.informado };
+    });
+
+    this.otFacade.saveInformeAvance(lpus);
   }
 
   saveBorradorInformeAvance(): void {
