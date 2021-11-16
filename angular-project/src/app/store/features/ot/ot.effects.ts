@@ -1154,12 +1154,32 @@ export class OtEffects {
     )
   );
 
+  getDataInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDataInformeAvance),
+      concatMap(({ ot_id }) =>
+        this.informeAvanceService.getInformeAvance(ot_id).pipe(
+          map(({ dataInformeAvance: datoInformeAvance, status }) =>
+            otActions.getDataInformeAvanceSuccess({
+              dataInformeAvance: datoInformeAvance,
+              status,
+            })
+          ),
+          catchError(error =>
+            of(otActions.getDataInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           otActions.saveBorradorInformeAvanceSuccess,
-          otActions.saveInformeAvanceSuccess
+          otActions.saveInformeAvanceSuccess,
+          otActions.getDataInformeAvanceSuccess
         ),
         tap(action => {
           if (+action.status.responseCode === 0) {
@@ -1201,7 +1221,8 @@ export class OtEffects {
       this.actions$.pipe(
         ofType(
           otActions.saveBorradorInformeAvanceError,
-          otActions.saveInformeAvanceError
+          otActions.saveInformeAvanceError,
+          otActions.getDataInformeAvanceError
         ),
         tap(action => {
           this.snackService.showMessage(

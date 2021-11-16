@@ -69,6 +69,8 @@ export class NotifyAfter {
       'No existen sugerencias de nombre';
     msg[cubActions.getDetalleCubicacionError.type] =
       'No posee detalle de cubicación';
+    msg[otActions.getDataInformeAvanceError.type] =
+      'No posee información de informe de avance';
 
     return msg[action];
   }
@@ -99,6 +101,8 @@ export class NotifyAfter {
       'No se pudo guardar borrador';
     msg[otActions.saveInformeAvanceError.type] =
       'No se pudo enviar informe de avance';
+    msg[otActions.getDataInformeAvanceError.type] =
+      'No se pudo obtener datos del informe de avance';
 
     return msg[action];
   }

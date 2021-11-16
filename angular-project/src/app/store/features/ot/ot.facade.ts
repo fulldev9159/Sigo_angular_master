@@ -5,7 +5,7 @@ import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
 import * as OTmodel from './ot.model';
 import * as Data from '@data';
-import { LpuInformeAvance } from '@data';
+import { DataInformeAvance, LpuInformeAvance } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -363,5 +363,13 @@ export class OtFacade {
 
   public saveInformeAvance(lpus: LpuInformeAvance[]): void {
     this.store.dispatch(otActions.saveInformeAvance({ lpus }));
+  }
+
+  public getDataInformeAvance(ot_id: number): void {
+    this.store.dispatch(otActions.getDataInformeAvance({ ot_id }));
+  }
+
+  public getDataInformeAvance$(): Observable<DataInformeAvance[]> {
+    return this.store.select(otSelectors.getDataInformeAvance);
   }
 }

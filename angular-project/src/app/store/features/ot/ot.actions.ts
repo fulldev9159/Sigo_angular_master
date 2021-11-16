@@ -1,7 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 import * as OtModel from './ot.model';
 import * as Data from '@data';
-import { LpuInformeAvance, OT, RequestGetOTs, StatusResponse } from '@data';
+import {
+  DataInformeAvance,
+  LpuInformeAvance,
+  OT,
+  RequestGetOTs,
+  StatusResponse,
+} from '@data';
 
 // GET OTs EJECUCION init
 
@@ -574,5 +580,21 @@ export const saveInformeAvanceSuccess = createAction(
 
 export const saveInformeAvanceError = createAction(
   '[OT] SAVE informe avance error',
+  props<{ error: any }>()
+);
+
+// Get data informe avance
+export const getDataInformeAvance = createAction(
+  '[OT] GET data informe avance',
+  props<{ ot_id: number }>()
+);
+
+export const getDataInformeAvanceSuccess = createAction(
+  '[OT] GET data informe avance success',
+  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
+);
+
+export const getDataInformeAvanceError = createAction(
+  '[OT] GET data informe avance error',
   props<{ error: any }>()
 );

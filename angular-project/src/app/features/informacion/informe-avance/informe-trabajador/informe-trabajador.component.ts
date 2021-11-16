@@ -10,7 +10,12 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { DataRspDetalleOT, DetalleCubicacion, LpuInformeAvance } from '@data';
+import {
+  DataInformeAvance,
+  DataRspDetalleOT,
+  DetalleCubicacion,
+  LpuInformeAvance,
+} from '@data';
 
 @Component({
   selector: 'app-informe-trabajador',
@@ -21,7 +26,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRspDetalleOT>;
-  detalleCubicacion$: Observable<DetalleCubicacion[]> = of([]);
+  dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
   });
@@ -35,53 +40,24 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
-    // this.detalleCubicacion$ = of([
-    //   {
-    //     lpu_id: 1223,
-    //     servicio_id: 13123,
-    //     lpu_nombre:
-    //       'HABI Servicio Xeth punto a punto, con conversor en OC y cliente',
-    //     lpu_precio: 10000,
-    //     tipo_moneda_id: 1,
-    //     tipo_moneda_cod: 'string',
-    //     tipo_unidad_codigo: 1,
-    //     tipo_unidad_nombre: 'string',
-    //     lpu_cantidad: 5,
-    //     lpu_subtotal: 1,
-    //     tipo_servicio_nombre: 'string',
-    //   },
-    //   {
-    //     lpu_id: 12223,
-    //     servicio_id: 45566,
-    //     lpu_nombre:
-    //       'Calculo Estructural, Memoria, Embarque, y Montaje SPECT-CIT-007',
-    //     lpu_precio: 70000,
-    //     tipo_moneda_id: 1,
-    //     tipo_moneda_cod: 'string',
-    //     tipo_unidad_codigo: 1,
-    //     tipo_unidad_nombre: 'string',
-    //     lpu_cantidad: 14,
-    //     lpu_subtotal: 1,
-    //     tipo_servicio_nombre: 'string',
-    //   },
-    // ]);
-
+    this.dataInformeAvance$ = this.otFacade.getDataInformeAvance$();
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
-          this.cubFacade.getDetallesCubicacionAction(ot.cubicacion_id);
+          this.otFacade.getDataInformeAvance(ot.id);
         }
       })
     );
 
     this.subscription.add(
-      this.detalleCubicacion$.subscribe(cub => {
-        if (cub) {
-          cub.forEach(lpu => {
+      this.dataInformeAvance$.subscribe(lpu => {
+        if (lpu) {
+          lpu.forEach(lpu => {
             const group = new FormGroup({
-              lpu_id: new FormControl(lpu.lpu_id, [Validators.required]),
-              informado: new FormControl(0, [
+              lpu_id: new FormControl(lpu.detalle_lpu_id, [
+                Validators.required,
+              ]),
+              informado: new FormControl(lpu.cantidad_informada, [
                 Validators.required,
                 Validators.min(0),
               ]),

@@ -1,8 +1,34 @@
-export interface LpuInformeAvance {
-  id_lpu: number;
-  informado: number;
+// GET INFORME AVANCE init
+export interface ResponseGetInformeAvance {
+  data: {
+    items: DataInformeAvance[];
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
 }
 
+export interface DataInformeAvance {
+  detalle_id: number;
+  detalle_tipo: string;
+  ot_id: number;
+  informe_id: number;
+  detalle_lpu_id: number;
+  lpu_nombre: string;
+  lpu_numero_producto: string;
+  lpu_precio: number;
+  cantidad_cubicada: number;
+  cantidad_aprobada: number;
+  cantidad_pendiente: number;
+  cantidad_aprobada_historica: number;
+  cantidad_informada: number;
+}
+
+// GET INFORME AVANCE done
+
+// SEND INFORME/BORRADOR init
 export interface ResponseBorradorInformeAvance {
   data: {
     id: number;
@@ -23,4 +49,11 @@ export interface ResponseInformeAvance {
     description: string;
     responseCode: number;
   };
+}
+
+// SEND INFORME/BORRADOR done
+
+export interface LpuInformeAvance {
+  id_lpu: number;
+  informado: number;
 }
