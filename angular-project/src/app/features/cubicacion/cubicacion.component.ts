@@ -1,11 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import {
-  fromTopEasing,
-  fromBottomEasing,
-  scaleDownFromBottom,
-  scaleDownFromTop,
-} from 'ngx-router-animations';
+import { scaleDownFromBottom, scaleDownFromTop } from 'ngx-router-animations';
 
 @Component({
   selector: 'app-cubicacion',
