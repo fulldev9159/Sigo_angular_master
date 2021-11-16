@@ -34,9 +34,11 @@ export class OtEffects {
     private http: HttpClient,
     private snackService: SnackBarService,
     private otService: Data.OTService,
+    private informeAvanceService: Data.InformAvenceService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
     private messageService: MessageService,
+    private messageServiceInt: Data.NotifyAfter,
     private router: Router
   ) {}
 
@@ -90,23 +92,6 @@ export class OtEffects {
       })
     )
   );
-
-  // getOTsCerradas$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(otActions.getOtCerradas),
-  //     withLatestFrom(this.authFacade.getCurrentProfile$()),
-  //     concatMap(([data, profile]) =>
-  //       this.otService
-  //         .getOTsCerradas(profile.id, data.filtro_propietario, data.filtro_tipo)
-  //         .pipe(
-  //           map((ots: Data.OT[]) =>
-  //             otActions.getOtSuccessCerradas({ ots: ots })
-  //           ),
-  //           catchError(error => of(otActions.getOtError({ error })))
-  //         )
-  //     )
-  //   )
-  // );
 
   getPlans$ = createEffect(() =>
     this.actions$.pipe(
@@ -1130,6 +1115,84 @@ export class OtEffects {
             'error'
           );
           console.error(`can't get registers [${error.message}]`);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  saveBorradorInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.saveBorradorInformeAvance),
+      concatMap(({ lpus }) =>
+        this.informeAvanceService.saveBorradorInformeAvance(lpus).pipe(
+          map(({ status }) =>
+            otActions.saveBorradorInformeAvanceSuccess({
+              status,
+            })
+          ),
+          catchError(error =>
+            of(otActions.saveBorradorInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfterSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.saveBorradorInformeAvanceSuccess),
+        tap(action => {
+          if (+action.status.responseCode === 0) {
+            // if (
+            //   action.type === cubActions.createCubSuccess.type ||
+            //   action.type === cubActions.editCubicacionSuccess.type
+            // ) {
+            //   this.cubageFacade.getCubicacionAction();
+            //   this.router.navigate(['app/cubicacion/list-cub']);
+            // }
+
+            if (this.messageServiceInt.messageOk(action.type) !== undefined) {
+              this.snackService.showMessage(
+                `${this.messageServiceInt.messageOk(action.type)} - ${
+                  action.status.description
+                }`,
+                'ok',
+                3000
+              );
+            }
+          } else if (+action.status.responseCode === 1) {
+            this.snackService.showMessage(
+              `${this.messageServiceInt.messageInfoSinResultado(
+                action.type
+              )} - ${action.status.description}`,
+              'info',
+              2000
+            );
+          } else {
+            this.snackService.showMessage(
+              `PROBLEM - ${action.status.description}`,
+              'info',
+              2000
+            );
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.saveBorradorInformeAvanceError),
+        tap(action => {
+          this.snackService.showMessage(
+            `${this.messageServiceInt.messageError(action.type)} - ${
+              action.error.message
+            }`,
+            'error',
+            4000
+          );
         })
       ),
     { dispatch: false }

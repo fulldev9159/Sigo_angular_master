@@ -10,7 +10,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { DataRspDetalleOT, DetalleCubicacion } from '@data';
+import { DataRspDetalleOT, DetalleCubicacion, LpuInformeAvance } from '@data';
 
 @Component({
   selector: 'app-informe-trabajador',
@@ -35,37 +35,37 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    // this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
-    this.detalleCubicacion$ = of([
-      {
-        lpu_id: 1223,
-        servicio_id: 13123,
-        lpu_nombre:
-          'HABI Servicio Xeth punto a punto, con conversor en OC y cliente',
-        lpu_precio: 10000,
-        tipo_moneda_id: 1,
-        tipo_moneda_cod: 'string',
-        tipo_unidad_codigo: 1,
-        tipo_unidad_nombre: 'string',
-        lpu_cantidad: 5,
-        lpu_subtotal: 1,
-        tipo_servicio_nombre: 'string',
-      },
-      {
-        lpu_id: 12223,
-        servicio_id: 45566,
-        lpu_nombre:
-          'Calculo Estructural, Memoria, Embarque, y Montaje SPECT-CIT-007',
-        lpu_precio: 70000,
-        tipo_moneda_id: 1,
-        tipo_moneda_cod: 'string',
-        tipo_unidad_codigo: 1,
-        tipo_unidad_nombre: 'string',
-        lpu_cantidad: 14,
-        lpu_subtotal: 1,
-        tipo_servicio_nombre: 'string',
-      },
-    ]);
+    this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
+    // this.detalleCubicacion$ = of([
+    //   {
+    //     lpu_id: 1223,
+    //     servicio_id: 13123,
+    //     lpu_nombre:
+    //       'HABI Servicio Xeth punto a punto, con conversor en OC y cliente',
+    //     lpu_precio: 10000,
+    //     tipo_moneda_id: 1,
+    //     tipo_moneda_cod: 'string',
+    //     tipo_unidad_codigo: 1,
+    //     tipo_unidad_nombre: 'string',
+    //     lpu_cantidad: 5,
+    //     lpu_subtotal: 1,
+    //     tipo_servicio_nombre: 'string',
+    //   },
+    //   {
+    //     lpu_id: 12223,
+    //     servicio_id: 45566,
+    //     lpu_nombre:
+    //       'Calculo Estructural, Memoria, Embarque, y Montaje SPECT-CIT-007',
+    //     lpu_precio: 70000,
+    //     tipo_moneda_id: 1,
+    //     tipo_moneda_cod: 'string',
+    //     tipo_unidad_codigo: 1,
+    //     tipo_unidad_nombre: 'string',
+    //     lpu_cantidad: 14,
+    //     lpu_subtotal: 1,
+    //     tipo_servicio_nombre: 'string',
+    //   },
+    // ]);
 
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
@@ -136,5 +136,15 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
     this.waitAP = true;
     this.DisplayConfirmacionModal = false;
+  }
+
+  saveBorradorInformeAvance(): void {
+    const lpus: LpuInformeAvance[] = (
+      this.form.get('table') as FormArray
+    ).value.map(f => {
+      return { id_lpu: f.lpu_id, informado: f.informado };
+    });
+
+    this.otFacade.saveBorradorInformeAvance(lpus);
   }
 }

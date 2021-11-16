@@ -5,6 +5,7 @@ import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
 import * as OTmodel from './ot.model';
 import * as Data from '@data';
+import { LpuInformeAvance } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -354,5 +355,9 @@ export class OtFacade {
 
   public getSaveOTError$(): Observable<Error> {
     return this.store.select(otSelectors.getSaveOTError);
+  }
+
+  public saveBorradorInformeAvance(lpus: LpuInformeAvance[]): void {
+    this.store.dispatch(otActions.saveBorradorInformeAvance({ lpus }));
   }
 }

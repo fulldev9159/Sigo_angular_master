@@ -14,3 +14,4 @@ export * from './service/proveedores.service';
 export * from './service/region.service';
 export * from './service/lpus.service';
 export * from './service/notify-after.service';
+export * from './service/informe-avance.service';

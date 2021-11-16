@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as cubActions from '@storeOT/features/cubicacion/cubicacion.actions';
+import * as otActions from '@storeOT/features/ot/ot.actions';
+
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Router } from '@angular/router';
 
@@ -43,6 +45,8 @@ export class NotifyAfter {
       'Cubicación actualizada exitosamente';
     msg[cubActions.deleteCubicacionSuccess.type] =
       'Cubicación eliminada exitosamente';
+    msg[otActions.saveBorradorInformeAvanceSuccess.type] =
+      'Borrador guardado con exito';
 
     return msg[action];
   }
@@ -91,7 +95,8 @@ export class NotifyAfter {
       'No se pudo obtener obtener el detalle de la cubicación';
     msg[cubActions.deleteCubicacionError.type] =
       'No se pudo eliminar la cubicación';
-
+    msg[otActions.saveBorradorInformeAvanceError.type] =
+      'No se pudo guardar borrador';
     return msg[action];
   }
 }

@@ -14,7 +14,7 @@ export * from './contrato';
 export * from './proveedor';
 export * from './region';
 export * from './lpus';
-
+export * from './informe-avance';
 export interface StatusResponse {
   description: string;
   responseCode: number;
