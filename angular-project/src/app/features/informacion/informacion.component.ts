@@ -44,7 +44,6 @@ export class InformacionComponent implements OnInit, OnDestroy {
       this.rutaActiva.firstChild.params.subscribe((params: Params) => {
         if (params.id) {
           this.ot_id = params.id;
-          console.log('MAIN:', params.id);
           this.otFacade.getDetalleOtAction(+params.id);
         }
       })

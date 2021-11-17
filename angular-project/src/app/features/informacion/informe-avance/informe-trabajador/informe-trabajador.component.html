@@ -14,89 +14,115 @@
     <span *ngIf="waitAP">
       <p-message severity="info" text="A la espera de aprobación por parte del gestor"></p-message>&nbsp;
     </span>
-    <form [formGroup]="form">
-      <table>
-        <thead>
-          <tr>
-            <th colspan="11" style="background: #00507a;
-              color: white;
-              text-align: center;">Mano de obra/Lpus</th>
-            <th colspan="11" style="background: #00507a;
-               color: white;
-               text-align: center;">Unidad de obras</th>
-          </tr>
-          <tr>
-            <th rowspan="2">Cor</th>
-            <th rowspan="2">Plano</th>
-            <th rowspan="2">Direccion</th>
-            <th rowspan="2">Clave</th>
-            <th rowspan="2">Código</th>
-            <th rowspan="2">Descrición</th>
-            <th rowspan="2">U.M</th>
-            <th colspan="4" style="background: #dfdfdf;
-              text-align: center;">
-              Cantidad
-            </th>
+    <p-tabView>
+      <p-tabPanel header="LPUs">
+        <form [formGroup]="form">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="13" style="background: #00507a;
+                    color: white;
+                    text-align: center;">Mano de obra/Lpus</th>
+              </tr>
+              <tr>
+                <th rowspan="2">Cor</th>
+                <th rowspan="2">Plano</th>
+                <th rowspan="2">Direccion</th>
+                <th rowspan="2">Clave</th>
+                <th rowspan="2">Código</th>
+                <th rowspan="2">Descrición</th>
+                <th rowspan="2">U.M</th>
+                <th colspan="4" style="background: #dfdfdf;
+                    text-align: center;">
+                  Cantidad
+                </th>
+              </tr>
+              <tr>
+                <th rowspan="2">Cub.</th>
+                <th rowspan="2">
+                  <span>Apr</span>
+                </th>
+                <th rowspan="2">Pend.</th>
+                <th rowspan="2">Inf.</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="table">
+              <tr *ngFor="let car of dataInformeAvance$|async; let i = index" [formGroupName]="i">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{car.lpu_numero_producto}}</td>
+                <td>{{car.lpu_nombre}}</td>
+                <td></td>
+                <!-- Cub. -->
+                <td>{{car.cantidad_cubicada}}</td>
+                <!-- Apr. -->
+                <td>{{car.cantidad_aprobada}}</td>
+                <!-- Pend. -->
+                <td>{{car.cantidad_pendiente}}</td>
+                <!-- inf. -->
+                <td>
+                  <input [formControl]="formCntl(i)" min="0" type="number" style="width: 37px;">
+                  <div *ngIf="formCntl(i).invalid && (formCntl(i).dirty || formCntl(i).touched)">
+                    <p-message severity="error" text="{{ errorMessageFn(formCntl(i).errors) }}"></p-message>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </p-tabPanel>
+      <p-tabPanel header="Unidades de Obra">
+        <form>
+          <table>
+            <thead>
+              <tr>
+                <th colspan="13" style="background: #00507a;
+                          color: white;
+                          text-align: center;">Unidades de obra</th>
+              </tr>
+              <tr>
+                <th rowspan="2">Cor</th>
+                <th rowspan="2">Plano</th>
+                <th rowspan="2">Direccion</th>
+                <th rowspan="2">Clave</th>
+                <th rowspan="2">Código</th>
+                <th rowspan="2">Descrición</th>
+                <th rowspan="2">U.M</th>
+                <th colspan="4" style="background: #dfdfdf;
+                          text-align: center;">
+                  Cantidad
+                </th>
+                <th colspan="2" style="background: #dfdfdf;
+                text-align: center;">
+                  Costos
+                </th>
+              </tr>
+              <tr>
+                <th rowspan="2">Cub.</th>
+                <th rowspan="2">
+                  <span>Apr</span>
+                </th>
+                <th rowspan="2">Pend.</th>
+                <th rowspan="2">Inf.</th>
 
-            <th rowspan="2">Cor.</th>
-            <th rowspan="2">Cod.</th>
-            <th rowspan="2">Descrición</th>
-            <th rowspan="2">U.M</th>
-            <th colspan="4" style="background: #dfdfdf;
-              text-align: center;">
-              Cantidad
-            </th>
-          </tr>
-          <tr>
-            <th rowspan="2">Cub.</th>
-            <th rowspan="2">
-              <span>Apr</span>
-            </th>
-            <th rowspan="2">Pend.</th>
-            <th rowspan="2">Inf.</th>
+                <th>P. unidad</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
 
-            <th rowspan="2">Cub.</th>
-            <th rowspan="2">Apr</th>
-          </tr>
-        </thead>
-        <tbody formArrayName="table">
-          <tr *ngFor="let car of detalleCubicacion$|async; let i = index" [formGroupName]="i">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>{{car.lpu_id}}</td>
-            <td>{{car.lpu_nombre}}</td>
-            <td></td>
-            <!-- Cub. -->
-            <td>{{car.lpu_cantidad}}</td>
-            <!-- Apr. -->
-            <td>0</td>
-            <!-- Pend. -->
-            <td>{{car.lpu_cantidad}}</td>
-            <!-- inf. -->
-            <td>
-              <input [formControl]="formCntl(i)" min="0" type="number" style="width: 37px;">
-              <div *ngIf="formCntl(i).invalid && (formCntl(i).dirty || formCntl(i).touched)">
-                <p-message severity="error" text="{{ errorMessageFn(formCntl(i).errors) }}"></p-message>
-              </div>
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
+            </tbody>
+          </table>
+        </form>
+      </p-tabPanel>
+      <p-tabPanel header="Materiales"></p-tabPanel>
+    </p-tabView>
     <ng-template pTemplate="footer">
       <div style="display: flex;
         justify-content: space-evenly;">
-        <button class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar borrador</button>
+        <button class="btn btn-primary" (click)="saveBorradorInformeAvance()"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar borrador</button>
         <button class="btn btn-primary" (click)="sendInformeConfirmacion()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Enviar informe</button>
       </div>
     </ng-template>

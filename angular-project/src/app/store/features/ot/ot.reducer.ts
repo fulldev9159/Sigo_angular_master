@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
 import * as Data from '@data';
+import { DataInformeAvance } from '@data';
 
 export const otFeatureKey = 'ot';
 
@@ -32,6 +33,8 @@ export interface StateOt {
 
   saving: boolean;
   errorSaving: Error;
+
+  dataInformeAvance: DataInformeAvance[];
 }
 
 export const initialStateOt: StateOt = {
@@ -83,6 +86,8 @@ export const initialStateOt: StateOt = {
 
   saving: false,
   errorSaving: null,
+
+  dataInformeAvance: [],
 };
 
 export const reducerOt = createReducer(
@@ -393,5 +398,9 @@ export const reducerOt = createReducer(
       ...state,
       registroslibroobras,
     })
-  )
+  ),
+  on(OtActions.getDataInformeAvanceSuccess, (state, { dataInformeAvance }) => ({
+    ...state,
+    dataInformeAvance,
+  }))
 );

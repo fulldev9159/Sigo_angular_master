@@ -1,7 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 import * as OtModel from './ot.model';
 import * as Data from '@data';
-import { OT, RequestGetOTs } from '@data';
+import {
+  DataInformeAvance,
+  LpuInformeAvance,
+  OT,
+  RequestGetOTs,
+  StatusResponse,
+} from '@data';
 
 // GET OTs EJECUCION init
 
@@ -542,5 +548,53 @@ export const getRegistrosLibroObraSuccess = createAction(
 
 export const getRegistrosLibroObraError = createAction(
   '[OT] get registros libro de obra error',
+  props<{ error: any }>()
+);
+
+// Save borrador informe avance
+export const saveBorradorInformeAvance = createAction(
+  '[OT] SAVE borrador informe avance',
+  props<{ lpus: LpuInformeAvance[] }>()
+);
+
+export const saveBorradorInformeAvanceSuccess = createAction(
+  '[OT] SAVE borrador informe avance success',
+  props<{ status: StatusResponse }>()
+);
+
+export const saveBorradorInformeAvanceError = createAction(
+  '[OT] SAVE borrador informe avance error',
+  props<{ error: any }>()
+);
+
+// Save informe avance
+export const saveInformeAvance = createAction(
+  '[OT] SAVE informe avance',
+  props<{ lpus: LpuInformeAvance[] }>()
+);
+
+export const saveInformeAvanceSuccess = createAction(
+  '[OT] SAVE informe avance success',
+  props<{ status: StatusResponse }>()
+);
+
+export const saveInformeAvanceError = createAction(
+  '[OT] SAVE informe avance error',
+  props<{ error: any }>()
+);
+
+// Get data informe avance
+export const getDataInformeAvance = createAction(
+  '[OT] GET data informe avance',
+  props<{ ot_id: number }>()
+);
+
+export const getDataInformeAvanceSuccess = createAction(
+  '[OT] GET data informe avance success',
+  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
+);
+
+export const getDataInformeAvanceError = createAction(
+  '[OT] GET data informe avance error',
   props<{ error: any }>()
 );
