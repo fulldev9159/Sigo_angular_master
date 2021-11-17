@@ -52,12 +52,12 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.dataInformeAvance$.subscribe(lpu => {
         if (lpu) {
-          lpu.forEach(lpu => {
+          lpu.forEach(lpu_service => {
             const group = new FormGroup({
-              lpu_id: new FormControl(lpu.detalle_lpu_id, [
+              lpu_id: new FormControl(lpu_service.detalle_lpu_id, [
                 Validators.required,
               ]),
-              informado: new FormControl(lpu.cantidad_informada, [
+              informado: new FormControl(lpu_service.cantidad_informada, [
                 Validators.required,
                 Validators.min(0),
               ]),
