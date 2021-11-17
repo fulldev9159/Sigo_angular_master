@@ -17,7 +17,7 @@ export class InformAvenceService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getInformeAvance(ot_id: number): Observable<{
+  getInformeAvanceTrabajador(ot_id: number): Observable<{
     dataInformeAvance: DataInformeAvance[];
     status: StatusResponse;
   }> {
@@ -47,7 +47,52 @@ export class InformAvenceService {
           detalle_lpu_id: 8055,
           lpu_nombre: 'Buscar Ruta optica entre 2 salas',
           lpu_numero_producto: '8055',
-          lpu_precio: -1,
+          lpu_precio: 1000,
+          cantidad_cubicada: 11,
+          cantidad_aprobada: 0,
+          cantidad_pendiente: 11,
+          cantidad_aprobada_historica: 0,
+          cantidad_informada: 0,
+        },
+      ],
+      status: {
+        description: 'ok',
+        responseCode: 0,
+      },
+    });
+  }
+
+  getInformeAvanceAdministradorEC(ot_id: number): Observable<{
+    dataInformeAvance: DataInformeAvance[];
+    status: StatusResponse;
+  }> {
+    // return this.http
+    //   .post<ResponseGetInformeAvance>(
+    //     `${this.apiUrl}/infavan/get_admin_contrato`,
+    //     {lpus}
+    //   )
+    //   .pipe(
+    //     map(res => {
+    //       return {
+    //         status: {
+    // datoInformeAvance:res.data.items
+    //           description: res.status.description,
+    //           responseCode: res.status.responseCode,
+    //         },
+    //       };
+    //     })
+    //   );
+    return of({
+      dataInformeAvance: [
+        {
+          detalle_id: 1,
+          detalle_tipo: 'string',
+          ot_id: 1,
+          informe_id: 1,
+          detalle_lpu_id: 8055,
+          lpu_nombre: 'Buscar Ruta optica entre 2 salas',
+          lpu_numero_producto: '8055',
+          lpu_precio: 1000,
           cantidad_cubicada: 11,
           cantidad_aprobada: 0,
           cantidad_pendiente: 11,
@@ -88,7 +133,59 @@ export class InformAvenceService {
     });
   }
 
-  saveInformeAvance(lpus: LpuInformeAvance[]): Observable<{
+  saveInformeAvanceTrabajador(lpus: LpuInformeAvance[]): Observable<{
+    status: StatusResponse;
+  }> {
+    // return this.http
+    //   .post<ResponseBorradorInformeAvance>(
+    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
+    //     {lpus}
+    //   )
+    //   .pipe(
+    //     map(res => {
+    //       return {
+    //         status: {
+    //           description: res.status.description,
+    //           responseCode: res.status.responseCode,
+    //         },
+    //       };
+    //     })
+    //   );
+    return of({
+      status: {
+        description: 'ok',
+        responseCode: 0,
+      },
+    });
+  }
+
+  saveInformeAvanceAdministrador(lpus: LpuInformeAvance[]): Observable<{
+    status: StatusResponse;
+  }> {
+    // return this.http
+    //   .post<ResponseBorradorInformeAvance>(
+    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
+    //     {lpus}
+    //   )
+    //   .pipe(
+    //     map(res => {
+    //       return {
+    //         status: {
+    //           description: res.status.description,
+    //           responseCode: res.status.responseCode,
+    //         },
+    //       };
+    //     })
+    //   );
+    return of({
+      status: {
+        description: 'ok',
+        responseCode: 0,
+      },
+    });
+  }
+
+  rechazarInformeAvance(informe_id: number): Observable<{
     status: StatusResponse;
   }> {
     // return this.http

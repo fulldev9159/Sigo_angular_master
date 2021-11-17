@@ -46,8 +46,13 @@ export class NotifyAfter {
     msg[cubActions.deleteCubicacionSuccess.type] =
       'Cubicación eliminada exitosamente';
     msg[otActions.saveBorradorInformeAvanceSuccess.type] =
-      'Borrador guardado con exito';
-
+      'Borrador guardado con éxito';
+    msg[otActions.saveInformeAvanceTrabajadorSuccess.type] =
+      'Informe enviado con éxito';
+    msg[otActions.saveInformeAvanceAdminECSuccess.type] =
+      'Informe enviado con éxito';
+    msg[otActions.rechazarInformeAvanceSuccess.type] =
+      'Informe rechazado con éxito';
     return msg[action];
   }
 
@@ -103,6 +108,8 @@ export class NotifyAfter {
       'No se pudo enviar informe de avance';
     msg[otActions.getDataInformeAvanceError.type] =
       'No se pudo obtener datos del informe de avance';
+    msg[otActions.rechazarInformeAvanceError.type] =
+      'Falló la ejecución del rechazo';
 
     return msg[action];
   }

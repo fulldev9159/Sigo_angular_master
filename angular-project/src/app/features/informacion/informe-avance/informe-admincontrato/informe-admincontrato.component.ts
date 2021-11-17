@@ -10,7 +10,12 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { DataRspDetalleOT, DetalleCubicacion } from '@data';
+import {
+  DataInformeAvance,
+  DataRspDetalleOT,
+  DetalleCubicacion,
+  LpuInformeAvance,
+} from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 
 interface DetalleAdmin extends DetalleCubicacion {
@@ -25,8 +30,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRspDetalleOT>;
-  // detalleCubicacion$: Observable<DetalleCubicacion[]> = of([]);
-  detalleCubicacion$: Observable<DetalleAdmin[]> = of([]);
+  dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
   });
@@ -43,39 +47,15 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    // this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
-    this.detalleCubicacion$ = of([
-      {
-        lpu_id: 1223,
-        servicio_id: 13123,
-        lpu_nombre:
-          'HABI Servicio Xeth punto a punto, con conversor en OC y cliente',
-        lpu_precio: 10000,
-        tipo_moneda_id: 1,
-        tipo_moneda_cod: 'string',
-        tipo_unidad_codigo: 1,
-        tipo_unidad_nombre: 'string',
-        lpu_cantidad: 5,
-        lpu_subtotal: 1,
-        tipo_servicio_nombre: 'string',
-        informado: 3,
-      },
-      {
-        lpu_id: 12223,
-        servicio_id: 45566,
-        lpu_nombre:
-          'Calculo Estructural, Memoria, Embarque, y Montaje SPECT-CIT-007',
-        lpu_precio: 70000,
-        tipo_moneda_id: 1,
-        tipo_moneda_cod: 'string',
-        tipo_unidad_codigo: 1,
-        tipo_unidad_nombre: 'string',
-        lpu_cantidad: 14,
-        lpu_subtotal: 1,
-        tipo_servicio_nombre: 'string',
-        informado: 2,
-      },
-    ]);
+    this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
+    this.subscription.add(
+      this.detalleOt$.subscribe(ot => {
+        if (ot) {
+          this.otFacade.getDataInformeAvanceTrabajador(ot.id);
+        }
+      })
+    );
+
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
@@ -85,12 +65,14 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(
-      this.detalleCubicacion$.subscribe(cub => {
-        if (cub) {
-          cub.forEach(lpu => {
+      this.dataInformeAvance$.subscribe(lpu => {
+        if (lpu) {
+          lpu.forEach(lpu_service => {
             const group = new FormGroup({
-              lpu_id: new FormControl(lpu.lpu_id, [Validators.required]),
-              informado: new FormControl(lpu.informado, [
+              lpu_id: new FormControl(lpu_service.detalle_lpu_id, [
+                Validators.required,
+              ]),
+              informado: new FormControl(lpu_service.cantidad_informada, [
                 Validators.required,
                 Validators.min(0),
               ]),
@@ -105,12 +87,14 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.form
         .get('table')
-        .valueChanges.pipe(withLatestFrom(this.detalleCubicacion$))
+        .valueChanges.pipe(withLatestFrom(this.dataInformeAvance$))
         .subscribe(([informados, lpus]) => {
           this.lpusTotal = 0;
 
           informados.forEach(informado => {
-            const lpu = lpus.find(lpuf => lpuf.lpu_id === informado.lpu_id);
+            const lpu = lpus.find(
+              lpuf => lpuf.detalle_lpu_id === informado.lpu_id
+            );
             if (lpu) {
               this.lpusTotal =
                 this.lpusTotal + lpu.lpu_precio * informado.informado;
@@ -152,12 +136,24 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   }
 
   sendInforme(): void {
-    const index = 'table';
-    (this.form.controls[index] as FormArray).controls[0].disable();
-    (this.form.controls[index] as FormArray).controls[1].disable();
+    // const index = 'table';
+    // (this.form.controls[index] as FormArray).controls[0].disable();
+    // (this.form.controls[index] as FormArray).controls[1].disable();
 
     this.waitAP = true;
     this.DisplayConfirmacionModal = false;
+
+    const lpus: LpuInformeAvance[] = (
+      this.form.get('table') as FormArray
+    ).value.map(f => {
+      return { id_lpu: f.lpu_id, informado: f.informado };
+    });
+
+    this.otFacade.saveInformeAvanceTrabajador(lpus);
+  }
+
+  rechazarInforme(): void {
+    this.otFacade.rechazarInformeAvance(1);
   }
 
   ngOnDestroy(): void {

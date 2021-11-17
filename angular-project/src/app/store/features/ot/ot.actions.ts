@@ -568,13 +568,23 @@ export const saveBorradorInformeAvanceError = createAction(
 );
 
 // Save informe avance
-export const saveInformeAvance = createAction(
-  '[OT] SAVE informe avance',
+export const saveInformeAvanceTrabajador = createAction(
+  '[OT] SAVE informe avance trabajador',
   props<{ lpus: LpuInformeAvance[] }>()
 );
 
-export const saveInformeAvanceSuccess = createAction(
-  '[OT] SAVE informe avance success',
+export const saveInformeAvanceTrabajadorSuccess = createAction(
+  '[OT] SAVE informe avance trabajador success',
+  props<{ status: StatusResponse }>()
+);
+
+export const saveInformeAvanceAdminEC = createAction(
+  '[OT] SAVE informe avance Admin EC',
+  props<{ lpus: LpuInformeAvance[] }>()
+);
+
+export const saveInformeAvanceAdminECSuccess = createAction(
+  '[OT] SAVE informe avance Admin EC success',
   props<{ status: StatusResponse }>()
 );
 
@@ -584,17 +594,43 @@ export const saveInformeAvanceError = createAction(
 );
 
 // Get data informe avance
-export const getDataInformeAvance = createAction(
-  '[OT] GET data informe avance',
+export const getDataInformeAvanceTrabajador = createAction(
+  '[OT] GET data informe avance trabajador',
   props<{ ot_id: number }>()
 );
 
-export const getDataInformeAvanceSuccess = createAction(
-  '[OT] GET data informe avance success',
+export const getDataInformeAvanceTrabajadorSuccess = createAction(
+  '[OT] GET data informe avance trabajador success',
+  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
+);
+
+export const getDataInformeAvanceAdminEC = createAction(
+  '[OT] GET data informe avance Admin EC',
+  props<{ ot_id: number }>()
+);
+
+export const getDataInformeAvanceAdminECSuccess = createAction(
+  '[OT] GET data informe avance Admin EC success',
   props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
 );
 
 export const getDataInformeAvanceError = createAction(
   '[OT] GET data informe avance error',
+  props<{ error: any }>()
+);
+
+// Rechazar informe avance
+export const rechazarInformeAvance = createAction(
+  '[OT] rechazar informe avance',
+  props<{ informe_id: number }>()
+);
+
+export const rechazarInformeAvanceSuccess = createAction(
+  '[OT] rechazar informe avance success',
+  props<{ status: StatusResponse }>()
+);
+
+export const rechazarInformeAvanceError = createAction(
+  '[OT] rechazar informe avance error',
   props<{ error: any }>()
 );
