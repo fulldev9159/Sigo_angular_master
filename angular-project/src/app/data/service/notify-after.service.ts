@@ -55,6 +55,8 @@ export class NotifyAfter {
       'Informe rechazado con éxito';
     msg[otActions.saveInformeActaSuccess.type] =
       'El acta fue enviada correctamente';
+    msg[otActions.rechazarInformeActaSuccess.type] =
+      'El acta fue rechazada correctamente';
     return msg[action];
   }
 
@@ -119,6 +121,8 @@ export class NotifyAfter {
     msg[otActions.getDataInformeActaError.type] =
       'No se pudo obtener la información del acta';
     msg[otActions.saveInformeActaError.type] = 'No se pudo enviar el acta';
+    msg[otActions.rechazarInformeActaError.type] =
+      'Falló la ejecución del rechazo';
     return msg[action];
   }
 }

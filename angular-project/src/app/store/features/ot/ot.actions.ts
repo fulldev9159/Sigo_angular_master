@@ -666,3 +666,19 @@ export const saveInformeActaError = createAction(
   '[OT] SAVE informe acta error',
   props<{ error: any }>()
 );
+
+// Rechazar informe acta
+export const rechazarInformeActa = createAction(
+  '[OT] rechazar informe acta',
+  props<{ informe_id: number }>()
+);
+
+export const rechazarInformeActaSuccess = createAction(
+  '[OT] rechazar informe acta success',
+  props<{ status: StatusResponse }>()
+);
+
+export const rechazarInformeActaError = createAction(
+  '[OT] rechazar informe acta error',
+  props<{ error: any }>()
+);

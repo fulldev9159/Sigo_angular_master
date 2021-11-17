@@ -143,6 +143,10 @@ export class ActaComponent implements OnInit, OnDestroy {
     this.otFacade.saveInformeActa(lpus);
   }
 
+  rechazarActa(): void {
+    this.otFacade.rechazarInformeActa(1);
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

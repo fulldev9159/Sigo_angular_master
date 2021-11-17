@@ -397,4 +397,8 @@ export class OtFacade {
   public saveInformeActa(lpus: LpuInformeAvance[]): void {
     this.store.dispatch(otActions.saveInformeActa({ lpus }));
   }
+
+  public rechazarInformeActa(informe_id: number): void {
+    this.store.dispatch(otActions.rechazarInformeActa({ informe_id }));
+  }
 }
