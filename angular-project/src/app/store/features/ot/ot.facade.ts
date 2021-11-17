@@ -393,4 +393,8 @@ export class OtFacade {
   public getDataInformeActa$(): Observable<DataInformeAvance[]> {
     return this.store.select(otSelectors.getDataInformeActa);
   }
+
+  public saveInformeActa(lpus: LpuInformeAvance[]): void {
+    this.store.dispatch(otActions.saveInformeActa({ lpus }));
+  }
 }

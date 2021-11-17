@@ -61,4 +61,30 @@ export class ActaService {
       },
     });
   }
+
+  saveInformeActa(lpus: LpuInformeAvance[]): Observable<{
+    status: StatusResponse;
+  }> {
+    // return this.http
+    //   .post<ResponseBorradorInformeAvance>(
+    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
+    //     {lpus}
+    //   )
+    //   .pipe(
+    //     map(res => {
+    //       return {
+    //         status: {
+    //           description: res.status.description,
+    //           responseCode: res.status.responseCode,
+    //         },
+    //       };
+    //     })
+    //   );
+    return of({
+      status: {
+        description: 'ok',
+        responseCode: 0,
+      },
+    });
+  }
 }

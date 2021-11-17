@@ -10,7 +10,12 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { DataInformeAvance, DataRspDetalleOT, DetalleCubicacion } from '@data';
+import {
+  DataInformeAvance,
+  DataRspDetalleOT,
+  DetalleCubicacion,
+  LpuInformeAvance,
+} from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 
 @Component({
@@ -119,6 +124,23 @@ export class ActaComponent implements OnInit, OnDestroy {
 
   sendActaConfirmacion(): void {
     this.DisplayConfirmacionModal = true;
+  }
+
+  sendInformeActa(): void {
+    // const index = 'table';
+    // (this.form.controls[index] as FormArray).controls[0].disable();
+    // (this.form.controls[index] as FormArray).controls[1].disable();
+
+    // this.waitAP = true;
+    this.DisplayConfirmacionModal = false;
+
+    const lpus: LpuInformeAvance[] = (
+      this.form.get('table') as FormArray
+    ).value.map(f => {
+      return { id_lpu: f.lpu_id, informado: f.informado };
+    });
+
+    this.otFacade.saveInformeActa(lpus);
   }
 
   ngOnDestroy(): void {

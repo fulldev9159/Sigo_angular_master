@@ -642,11 +642,27 @@ export const getDataInformeActa = createAction(
 );
 
 export const getDataInformeActaSuccess = createAction(
-  '[OT] GETdata informe acta success',
+  '[OT] GET data informe acta success',
   props<{ dataInformeActa: DataInformeAvance[]; status: StatusResponse }>()
 );
 
 export const getDataInformeActaError = createAction(
   '[OT] GET data informe acta error',
+  props<{ error: any }>()
+);
+
+// SAVE informe acta
+export const saveInformeActa = createAction(
+  '[OT] SAVE informe acta',
+  props<{ lpus: LpuInformeAvance[] }>()
+);
+
+export const saveInformeActaSuccess = createAction(
+  '[OT] SAVE informe acta success',
+  props<{ status: StatusResponse }>()
+);
+
+export const saveInformeActaError = createAction(
+  '[OT] SAVE informe acta error',
   props<{ error: any }>()
 );
