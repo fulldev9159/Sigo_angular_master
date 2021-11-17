@@ -42,20 +42,20 @@
             </tr>
           </thead>
           <tbody formArrayName="table">
-            <tr *ngFor="let car of detalleCubicacion$|async; let i = index" [formGroupName]="i">
+            <tr *ngFor="let car of dataInformeAvance$|async; let i = index" [formGroupName]="i">
               <td></td>
               <td></td>
               <td></td>
               <td></td>
-              <td>{{car.lpu_id}}</td>
+              <td>{{car.lpu_numero_producto}}</td>
               <td>{{car.lpu_nombre}}</td>
               <td></td>
               <!-- Cub. -->
-              <td>{{car.lpu_cantidad}}</td>
+              <td>{{car.cantidad_cubicada}}</td>
               <!-- Apr. -->
-              <td>0</td>
+              <td>{{car.cantidad_aprobada}}</td>
               <!-- Pend. -->
-              <td>{{car.lpu_cantidad}}</td>
+              <td>{{car.cantidad_pendiente}}</td>
               <!-- inf. -->
               <td>
                 <input [formControl]="formCntl(i)" min="0" type="number" style="width: 37px;">
