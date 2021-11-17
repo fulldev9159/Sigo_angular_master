@@ -107,7 +107,12 @@ export const getRegistrosLibroObra = createSelector(
   (state: fromOt.StateOt) => state.registroslibroobras
 );
 
-export const getDataInformeAvance = createSelector(
+export const getDataInformeAvanceTrabajador = createSelector(
   selectOt,
-  (state: fromOt.StateOt) => state.dataInformeAvance
+  (state: fromOt.StateOt) => state.dataInformeAvanceTrabajador
+);
+
+export const getDataInformeAvanceAdminEC = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.dataInformeAvanceAdminEC
 );

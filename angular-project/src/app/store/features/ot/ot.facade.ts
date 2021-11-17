@@ -357,19 +357,32 @@ export class OtFacade {
     return this.store.select(otSelectors.getSaveOTError);
   }
 
+  public getDataInformeAvanceTrabajador(ot_id: number): void {
+    this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
+  }
+  public getDataInformeAvanceAdminEC(ot_id: number): void {
+    this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
+  }
+
+  public getDataInformeAvanceTrabajador$(): Observable<DataInformeAvance[]> {
+    return this.store.select(otSelectors.getDataInformeAvanceTrabajador);
+  }
+  public getDataInformeAvanceAdminEC$(): Observable<DataInformeAvance[]> {
+    return this.store.select(otSelectors.getDataInformeAvanceAdminEC);
+  }
+
+  public saveInformeAvanceTrabajador(lpus: LpuInformeAvance[]): void {
+    this.store.dispatch(otActions.saveInformeAvanceTrabajador({ lpus }));
+  }
+  public saveInformeAvanceAdminEC(lpus: LpuInformeAvance[]): void {
+    this.store.dispatch(otActions.saveInformeAvanceAdminEC({ lpus }));
+  }
+
   public saveBorradorInformeAvance(lpus: LpuInformeAvance[]): void {
     this.store.dispatch(otActions.saveBorradorInformeAvance({ lpus }));
   }
 
-  public saveInformeAvance(lpus: LpuInformeAvance[]): void {
-    this.store.dispatch(otActions.saveInformeAvance({ lpus }));
-  }
-
-  public getDataInformeAvance(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeAvance({ ot_id }));
-  }
-
-  public getDataInformeAvance$(): Observable<DataInformeAvance[]> {
-    return this.store.select(otSelectors.getDataInformeAvance);
+  public rechazarInformeAvance(informe_id: number) {
+    this.store.dispatch(otActions.rechazarInformeAvance({ informe_id }));
   }
 }

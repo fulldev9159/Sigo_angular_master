@@ -1120,6 +1120,76 @@ export class OtEffects {
     { dispatch: false }
   );
 
+  getDataInformeAvanceTrabajador$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDataInformeAvanceTrabajador),
+      concatMap(({ ot_id }) =>
+        this.informeAvanceService.getInformeAvanceTrabajador(ot_id).pipe(
+          map(({ dataInformeAvance: datoInformeAvance, status }) =>
+            otActions.getDataInformeAvanceTrabajadorSuccess({
+              dataInformeAvance: datoInformeAvance,
+              status,
+            })
+          ),
+          catchError(error =>
+            of(otActions.getDataInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getDataInformeAvanceAdminEC$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDataInformeAvanceAdminEC),
+      concatMap(({ ot_id }) =>
+        this.informeAvanceService.getInformeAvanceAdministradorEC(ot_id).pipe(
+          map(({ dataInformeAvance: datoInformeAvance, status }) =>
+            otActions.getDataInformeAvanceAdminECSuccess({
+              dataInformeAvance: datoInformeAvance,
+              status,
+            })
+          ),
+          catchError(error =>
+            of(otActions.getDataInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  saveInformeAvanceTrabajador$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.saveInformeAvanceTrabajador),
+      concatMap(({ lpus }) =>
+        this.informeAvanceService.saveInformeAvanceTrabajador(lpus).pipe(
+          map(({ status }) =>
+            otActions.saveInformeAvanceTrabajadorSuccess({
+              status,
+            })
+          ),
+          catchError(error => of(otActions.saveInformeAvanceError({ error })))
+        )
+      )
+    )
+  );
+
+  saveInformeAvanceAdminEC$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.saveInformeAvanceAdminEC),
+      concatMap(({ lpus }) =>
+        this.informeAvanceService.saveInformeAvanceAdministrador(lpus).pipe(
+          map(({ status }) =>
+            otActions.saveInformeAvanceAdminECSuccess({
+              status,
+            })
+          ),
+          catchError(error => of(otActions.saveInformeAvanceError({ error })))
+        )
+      )
+    )
+  );
+
   saveBorradorInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveBorradorInformeAvance),
@@ -1138,35 +1208,18 @@ export class OtEffects {
     )
   );
 
-  saveInformeAvance$ = createEffect(() =>
+  rechazarInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(otActions.saveInformeAvance),
-      concatMap(({ lpus }) =>
-        this.informeAvanceService.saveInformeAvance(lpus).pipe(
+      ofType(otActions.rechazarInformeAvance),
+      concatMap(({ informe_id }) =>
+        this.informeAvanceService.rechazarInformeAvance(informe_id).pipe(
           map(({ status }) =>
-            otActions.saveInformeAvanceSuccess({
-              status,
-            })
-          ),
-          catchError(error => of(otActions.saveInformeAvanceError({ error })))
-        )
-      )
-    )
-  );
-
-  getDataInformeAvance$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getDataInformeAvance),
-      concatMap(({ ot_id }) =>
-        this.informeAvanceService.getInformeAvance(ot_id).pipe(
-          map(({ dataInformeAvance: datoInformeAvance, status }) =>
-            otActions.getDataInformeAvanceSuccess({
-              dataInformeAvance: datoInformeAvance,
+            otActions.rechazarInformeAvanceSuccess({
               status,
             })
           ),
           catchError(error =>
-            of(otActions.getDataInformeAvanceError({ error }))
+            of(otActions.rechazarInformeAvanceError({ error }))
           )
         )
       )
@@ -1178,12 +1231,19 @@ export class OtEffects {
       this.actions$.pipe(
         ofType(
           otActions.saveBorradorInformeAvanceSuccess,
-          otActions.saveInformeAvanceSuccess,
-          otActions.getDataInformeAvanceSuccess
+          otActions.saveInformeAvanceTrabajadorSuccess,
+          otActions.saveInformeAvanceAdminECSuccess,
+          otActions.getDataInformeAvanceTrabajadorSuccess,
+          otActions.getDataInformeAvanceAdminECSuccess,
+          otActions.rechazarInformeAvanceSuccess
         ),
         tap(action => {
           if (+action.status.responseCode === 0) {
-            if (action.type === otActions.saveInformeAvanceSuccess.type) {
+            if (
+              action.type ===
+                otActions.saveInformeAvanceTrabajadorSuccess.type ||
+              action.type === otActions.saveInformeAvanceAdminECSuccess.type
+            ) {
               window.location.reload();
             }
 
@@ -1222,7 +1282,8 @@ export class OtEffects {
         ofType(
           otActions.saveBorradorInformeAvanceError,
           otActions.saveInformeAvanceError,
-          otActions.getDataInformeAvanceError
+          otActions.getDataInformeAvanceError,
+          otActions.rechazarInformeAvanceError
         ),
         tap(action => {
           this.snackService.showMessage(

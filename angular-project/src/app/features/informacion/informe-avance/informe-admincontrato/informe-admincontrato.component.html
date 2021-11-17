@@ -146,7 +146,7 @@
   <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
   <br>
   <ng-template pTemplate="footer">
-    <button class="btn"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Rechazar</button>
+    <button class="btn" (click)="rechazarInforme()"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Rechazar</button>
     <button class="btn btn-primary" (click)="sendActaConfirmacion()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Generar y enviar Acta</button>
   </ng-template>
 </p-card>

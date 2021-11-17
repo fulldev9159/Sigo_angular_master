@@ -10,7 +10,12 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import { DataInformeAvance, DataRspDetalleOT, DetalleCubicacion } from '@data';
+import {
+  DataInformeAvance,
+  DataRspDetalleOT,
+  DetalleCubicacion,
+  LpuInformeAvance,
+} from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 
 interface DetalleAdmin extends DetalleCubicacion {
@@ -42,11 +47,11 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.dataInformeAvance$ = this.otFacade.getDataInformeAvance$();
+    this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
-          this.otFacade.getDataInformeAvance(ot.id);
+          this.otFacade.getDataInformeAvanceTrabajador(ot.id);
         }
       })
     );
@@ -131,12 +136,24 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   }
 
   sendInforme(): void {
-    const index = 'table';
-    (this.form.controls[index] as FormArray).controls[0].disable();
-    (this.form.controls[index] as FormArray).controls[1].disable();
+    // const index = 'table';
+    // (this.form.controls[index] as FormArray).controls[0].disable();
+    // (this.form.controls[index] as FormArray).controls[1].disable();
 
     this.waitAP = true;
     this.DisplayConfirmacionModal = false;
+
+    const lpus: LpuInformeAvance[] = (
+      this.form.get('table') as FormArray
+    ).value.map(f => {
+      return { id_lpu: f.lpu_id, informado: f.informado };
+    });
+
+    this.otFacade.saveInformeAvanceTrabajador(lpus);
+  }
+
+  rechazarInforme(): void {
+    this.otFacade.rechazarInformeAvance(1);
   }
 
   ngOnDestroy(): void {

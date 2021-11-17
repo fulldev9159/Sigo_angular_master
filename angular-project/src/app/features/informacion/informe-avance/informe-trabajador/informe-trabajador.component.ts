@@ -40,11 +40,11 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.dataInformeAvance$ = this.otFacade.getDataInformeAvance$();
+    this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
-          this.otFacade.getDataInformeAvance(ot.id);
+          this.otFacade.getDataInformeAvanceTrabajador(ot.id);
         }
       })
     );
@@ -106,9 +106,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   }
 
   sendInforme(): void {
-    const index = 'table';
-    (this.form.controls[index] as FormArray).controls[0].disable();
-    (this.form.controls[index] as FormArray).controls[1].disable();
+    // const index = 'table';
+    // (this.form.controls[index] as FormArray).controls[0].disable();
+    // (this.form.controls[index] as FormArray).controls[1].disable();
 
     this.waitAP = true;
     this.DisplayConfirmacionModal = false;
@@ -119,7 +119,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       return { id_lpu: f.lpu_id, informado: f.informado };
     });
 
-    this.otFacade.saveInformeAvance(lpus);
+    this.otFacade.saveInformeAvanceTrabajador(lpus);
   }
 
   saveBorradorInformeAvance(): void {
