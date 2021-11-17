@@ -382,7 +382,7 @@ export class OtFacade {
     this.store.dispatch(otActions.saveBorradorInformeAvance({ lpus }));
   }
 
-  public rechazarInformeAvance(informe_id: number) {
+  public rechazarInformeAvance(informe_id: number): void {
     this.store.dispatch(otActions.rechazarInformeAvance({ informe_id }));
   }
 }
