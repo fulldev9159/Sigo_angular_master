@@ -551,6 +551,32 @@ export const getRegistrosLibroObraError = createAction(
   props<{ error: any }>()
 );
 
+// Get data informe avance
+export const getDataInformeAvanceTrabajador = createAction(
+  '[OT] GET data informe avance trabajador',
+  props<{ ot_id: number }>()
+);
+
+export const getDataInformeAvanceTrabajadorSuccess = createAction(
+  '[OT] GET data informe avance trabajador success',
+  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
+);
+
+export const getDataInformeAvanceAdminEC = createAction(
+  '[OT] GET data informe avance Admin EC',
+  props<{ ot_id: number }>()
+);
+
+export const getDataInformeAvanceAdminECSuccess = createAction(
+  '[OT] GET data informe avance Admin EC success',
+  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
+);
+
+export const getDataInformeAvanceError = createAction(
+  '[OT] GET data informe avance error',
+  props<{ error: any }>()
+);
+
 // Save borrador informe avance
 export const saveBorradorInformeAvance = createAction(
   '[OT] SAVE borrador informe avance',
@@ -593,32 +619,6 @@ export const saveInformeAvanceError = createAction(
   props<{ error: any }>()
 );
 
-// Get data informe avance
-export const getDataInformeAvanceTrabajador = createAction(
-  '[OT] GET data informe avance trabajador',
-  props<{ ot_id: number }>()
-);
-
-export const getDataInformeAvanceTrabajadorSuccess = createAction(
-  '[OT] GET data informe avance trabajador success',
-  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
-);
-
-export const getDataInformeAvanceAdminEC = createAction(
-  '[OT] GET data informe avance Admin EC',
-  props<{ ot_id: number }>()
-);
-
-export const getDataInformeAvanceAdminECSuccess = createAction(
-  '[OT] GET data informe avance Admin EC success',
-  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
-);
-
-export const getDataInformeAvanceError = createAction(
-  '[OT] GET data informe avance error',
-  props<{ error: any }>()
-);
-
 // Rechazar informe avance
 export const rechazarInformeAvance = createAction(
   '[OT] rechazar informe avance',
@@ -632,5 +632,21 @@ export const rechazarInformeAvanceSuccess = createAction(
 
 export const rechazarInformeAvanceError = createAction(
   '[OT] rechazar informe avance error',
+  props<{ error: any }>()
+);
+
+// GET información informe acta
+export const getDataInformeActa = createAction(
+  '[OT] GET data informe acta',
+  props<{ ot_id: number }>()
+);
+
+export const getDataInformeActaSuccess = createAction(
+  '[OT] GETdata informe acta success',
+  props<{ dataInformeActa: DataInformeAvance[]; status: StatusResponse }>()
+);
+
+export const getDataInformeActaError = createAction(
+  '[OT] GET data informe acta error',
   props<{ error: any }>()
 );

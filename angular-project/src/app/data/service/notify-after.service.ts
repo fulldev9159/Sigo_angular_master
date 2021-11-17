@@ -70,12 +70,16 @@ export class NotifyAfter {
     msg[cubActions.createCubSuccess.type] = 'No se pudo crear la cubicación';
     // msg[cubActions.editCubicacionSuccess.type] =
     //   'No se pudo editar la cubicación';
-    msg[cubActions.getAutoSuggestError.type] =
+    msg[cubActions.getAutoSuggestSuccess.type] =
       'No existen sugerencias de nombre';
-    msg[cubActions.getDetalleCubicacionError.type] =
+    msg[cubActions.getDetalleCubicacionSuccess.type] =
       'No posee detalle de cubicación';
-    msg[otActions.getDataInformeAvanceError.type] =
+    msg[otActions.getDataInformeAvanceTrabajadorSuccess.type] =
       'No posee información de informe de avance';
+    msg[otActions.getDataInformeAvanceAdminECSuccess.type] =
+      'No posee información de informe de avance';
+    msg[otActions.getDataInformeActaSuccess.type] =
+      'El acta no posee información';
 
     return msg[action];
   }
@@ -110,6 +114,8 @@ export class NotifyAfter {
       'No se pudo obtener datos del informe de avance';
     msg[otActions.rechazarInformeAvanceError.type] =
       'Falló la ejecución del rechazo';
+    msg[otActions.getDataInformeActaError.type] =
+      'No se pudo obtener la información del acta';
 
     return msg[action];
   }
