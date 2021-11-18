@@ -55,7 +55,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.dataInformeAvance$.subscribe(lpu => {
         if (lpu && lpu.length > 0) {
-          console.log(lpu);
           this.informe_id = lpu[0].informe_id;
           lpu.forEach(lpu_service => {
             const group = new FormGroup({
