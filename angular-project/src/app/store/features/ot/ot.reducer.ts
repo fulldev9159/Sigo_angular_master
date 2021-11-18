@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
 import * as Data from '@data';
-import { DataInformeAvance } from '@data';
+import { DataInformeAvance, Plan } from '@data';
 
 export const otFeatureKey = 'ot';
 
@@ -15,7 +15,7 @@ export interface StateOt {
   otsEjecucion: Data.OT[];
   itemsAbiertas: Data.OT[];
   itemsCerradas: Data.OT[];
-  planes: OTModel.Plan[];
+  planes: Plan[];
   sites: OTModel.Site[];
   pmos: OTModel.PMO[];
   budgetLines: OTModel.Lp[];
@@ -120,7 +120,7 @@ export const reducerOt = createReducer(
   on(OtActions.getPlans, state => state),
   on(OtActions.getPlansSuccess, (state, payload) => ({
     ...state,
-    planes: payload.plan,
+    planes: payload.plans,
   })),
 
   on(OtActions.getSite, state => state),

@@ -35,6 +35,7 @@ export class OtEffects {
     private snackService: SnackBarService,
     private otService: Data.OTService,
     private informeAvanceService: Data.InformAvenceService,
+    private planProyectoService: Data.PlanProyectoService,
     private actaService: Data.ActaService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
@@ -56,7 +57,6 @@ export class OtEffects {
             } else if (request.filtro_pestania === 'CERRADAS') {
               return otActions.getOtSuccessCerradas({ ots, status });
             }
-            // return otActions.getOtEjecucionSuccess({ ots, status });
           }),
           catchError(error => of(otActions.getOtsError({ error })))
         )
@@ -67,21 +67,13 @@ export class OtEffects {
   getPlans$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getPlans),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/plan/get_all`, {
-            token: data.token,
-            region_id: data.region_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return otActions.getPlansSuccess({ plan: res.data.items });
-            }),
-            catchError(err => of(otActions.getPlansError({ error: err })))
-          )
+      concatMap(({ region_id }) =>
+        this.planProyectoService.getPlans4OT(region_id).pipe(
+          map(({ plans, status }) =>
+            otActions.getPlansSuccess({ plans, status })
+          ),
+          catchError(error => of(otActions.getPlansError({ error })))
+        )
       )
     )
   );
@@ -1296,7 +1288,8 @@ export class OtEffects {
           otActions.getDataInformeActaSuccess,
           otActions.saveInformeActaSuccess,
           otActions.rechazarInformeActaSuccess,
-          otActions.inicializarInformeAvanceSuccess
+          otActions.inicializarInformeAvanceSuccess,
+          otActions.getPlansSuccess
         ),
         tap(action =>
           this.messageServiceInt.actions200(action.status, action.type)
@@ -1317,7 +1310,8 @@ export class OtEffects {
           otActions.getDataInformeActaError,
           otActions.saveInformeActaError,
           otActions.rechazarInformeActaError,
-          otActions.inicializarInformeAvanceError
+          otActions.inicializarInformeAvanceError,
+          otActions.getPlansError
         ),
         tap(action =>
           this.messageServiceInt.actionsErrors(

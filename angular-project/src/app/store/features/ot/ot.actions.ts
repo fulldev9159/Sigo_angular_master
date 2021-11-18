@@ -5,6 +5,7 @@ import {
   DataInformeAvance,
   LpuInformeAvanceDetalle,
   OT,
+  Plan,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
@@ -38,7 +39,24 @@ export const getOtsError = createAction(
   '[Ot GetAll] GET Ot Error',
   props<{ error: any }>()
 );
-// GET OTs init
+// GET OTs end
+
+// GET Planes init
+export const getPlans = createAction(
+  '[OT] GET Planes',
+  props<{ region_id: number }>()
+);
+
+export const getPlansSuccess = createAction(
+  '[OT] GET Planes Success',
+  props<{ plans: Plan[]; status: StatusResponse }>()
+);
+
+export const getPlansError = createAction(
+  '[OT] GET Planes Error',
+  props<{ error: any }>()
+);
+// GET Planes end
 
 export const deleteOt = createAction(
   '[Ot DeleteById] DELETE Ot',
@@ -129,20 +147,6 @@ export const postOtSCESuccess = createAction(
 // OT LIST
 
 // OT FORM
-export const getPlans = createAction(
-  '[Plans Get By Id Cobage] GET By Id Cobage',
-  props<{ token: string; region_id: number }>()
-);
-
-export const getPlansSuccess = createAction(
-  '[Plans Get By Id Cobage] GET By Id Cobage Success',
-  props<{ plan: OtModel.Plan[] }>()
-);
-
-export const getPlansError = createAction(
-  '[Plans Get By Id Cobage] GET By Id Cobage Error',
-  props<{ error: any }>()
-);
 
 export const getSite = createAction(
   '[Sites Get By Id Plan] GET By Id Plan',

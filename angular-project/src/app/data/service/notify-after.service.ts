@@ -104,6 +104,8 @@ export class NotifyAfter {
         'No posee información de informe de avance';
       msg[otActions.getDataInformeActaSuccess.type] =
         'El acta no posee información';
+      msg[otActions.getPlansSuccess.type] =
+        'No existen planes de proyectos en la región escogida';
       if (msg[action] !== undefined) {
         this.snackService.showMessage(
           `${msg[action]}- ${status.description}`,
@@ -154,6 +156,7 @@ export class NotifyAfter {
       'Falló la ejecución del rechazo';
     msg[otActions.inicializarInformeAvanceError.type] =
       'Falló la inicialización del informe';
+    msg[otActions.getPlansError.type] = 'No se pudo obtener los planes';
     msg[otActions.getOtsError.type] = 'Falló la obtención de OTs';
     this.snackService.showMessage(`${msg[action]} - ${message}`, 'error', 4000);
   }

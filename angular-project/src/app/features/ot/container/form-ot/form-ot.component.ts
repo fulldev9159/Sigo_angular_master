@@ -197,7 +197,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         .get('plan_proyecto_id')
         .valueChanges.pipe(
           withLatestFrom(
-            this.otFacade.getPlansSelector$().pipe(map(planes => planes || []))
+            this.otFacade.getPlans$().pipe(map(planes => planes || []))
           )
         )
         .subscribe(([plan_proyecto_id, planes]) => {

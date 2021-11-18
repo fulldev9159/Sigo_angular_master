@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
-import { Plan, Site } from '@storeOT/features/ot/ot.model';
+import { Site } from '@storeOT/features/ot/ot.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { Cubicacion } from '@data';
+import { Cubicacion, Plan } from '@data';
 
 @Component({
   selector: 'app-plan-proyecto-form',
@@ -25,9 +25,7 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
 
     this.cubicacion = cubicacion;
     if (cubicacion !== null && cubicacion !== undefined) {
-      this.otFacade.getPlansAction({
-        region_id: cubicacion.region_id,
-      });
+      this.otFacade.getPlans(+cubicacion.region_id);
     } else {
       this.form.get('plan_proyecto_id').disable();
     }
@@ -36,7 +34,7 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
   constructor(private otFacade: OtFacade) {}
 
   ngOnInit(): void {
-    this.planes$ = this.otFacade.getPlansSelector$().pipe(
+    this.planes$ = this.otFacade.getPlans$().pipe(
       map(proveedores => proveedores || []),
       tap(proveedores => this.checkPlanProyectoAndEnable(proveedores))
     );

@@ -15,6 +15,7 @@ export * from './proveedor';
 export * from './region';
 export * from './lpus';
 export * from './informe-avance';
+export * from './plan-proyecto';
 export interface StatusResponse {
   description: string;
   responseCode: number;

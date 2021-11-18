@@ -1,11 +1,3 @@
-export interface Plan {
-  id: number;
-  nombre: string;
-  metas: string;
-  vendor: string;
-  tipo: string;
-}
-
 export interface Site {
   id: number;
   codigo: string;

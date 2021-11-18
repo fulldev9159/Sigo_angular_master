@@ -8,6 +8,7 @@ import * as Data from '@data';
 import {
   DataInformeAvance,
   LpuInformeAvanceDetalle,
+  Plan,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
@@ -118,15 +119,11 @@ export class OtFacade {
   // OT
 
   // PLANS
-  public getPlansAction(data): void {
-    this.store.dispatch(otActions.getPlans(data));
+  public getPlans(region_id: number): void {
+    this.store.dispatch(otActions.getPlans({ region_id }));
   }
 
-  public getPlansSuccess(plan: OTmodel.Plan[]): void {
-    this.store.dispatch(otActions.getPlansSuccess({ plan }));
-  }
-
-  public getPlansSelector$(): Observable<OTmodel.Plan[]> {
+  public getPlans$(): Observable<Plan[]> {
     return this.store.select(otSelectors.getPlans);
   }
   // PLANS
