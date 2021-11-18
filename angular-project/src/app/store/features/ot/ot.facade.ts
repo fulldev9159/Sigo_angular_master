@@ -385,4 +385,20 @@ export class OtFacade {
   public rechazarInformeAvance(informe_id: number): void {
     this.store.dispatch(otActions.rechazarInformeAvance({ informe_id }));
   }
+
+  public getDataInformeActa(ot_id: number): void {
+    this.store.dispatch(otActions.getDataInformeActa({ ot_id }));
+  }
+
+  public getDataInformeActa$(): Observable<DataInformeAvance[]> {
+    return this.store.select(otSelectors.getDataInformeActa);
+  }
+
+  public saveInformeActa(lpus: LpuInformeAvance[]): void {
+    this.store.dispatch(otActions.saveInformeActa({ lpus }));
+  }
+
+  public rechazarInformeActa(informe_id: number): void {
+    this.store.dispatch(otActions.rechazarInformeActa({ informe_id }));
+  }
 }

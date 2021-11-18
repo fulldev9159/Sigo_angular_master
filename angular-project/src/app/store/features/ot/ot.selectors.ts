@@ -116,3 +116,8 @@ export const getDataInformeAvanceAdminEC = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.dataInformeAvanceAdminEC
 );
+
+export const getDataInformeActa = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.dataInformeActa
+);

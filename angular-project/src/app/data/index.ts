@@ -15,3 +15,4 @@ export * from './service/region.service';
 export * from './service/lpus.service';
 export * from './service/notify-after.service';
 export * from './service/informe-avance.service';
+export * from './service/acta.service';

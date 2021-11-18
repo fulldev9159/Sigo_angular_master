@@ -35,6 +35,7 @@ export class OtEffects {
     private snackService: SnackBarService,
     private otService: Data.OTService,
     private informeAvanceService: Data.InformAvenceService,
+    private actaService: Data.ActaService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
     private messageService: MessageService,
@@ -1226,6 +1227,55 @@ export class OtEffects {
     )
   );
 
+  getDataInformeActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDataInformeActa),
+      concatMap(({ ot_id }) =>
+        this.actaService.getInformeActa(ot_id).pipe(
+          map(({ dataInformeActa, status }) =>
+            otActions.getDataInformeActaSuccess({
+              dataInformeActa,
+              status,
+            })
+          ),
+          catchError(error => of(otActions.getDataInformeActaError({ error })))
+        )
+      )
+    )
+  );
+
+  saveInformeActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.saveInformeActa),
+      concatMap(({ lpus }) =>
+        this.actaService.saveInformeActa(lpus).pipe(
+          map(({ status }) =>
+            otActions.saveInformeActaSuccess({
+              status,
+            })
+          ),
+          catchError(error => of(otActions.saveInformeActaError({ error })))
+        )
+      )
+    )
+  );
+
+  rechazarInformeActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.rechazarInformeActa),
+      concatMap(({ informe_id }) =>
+        this.actaService.rechazarInformeActa(informe_id).pipe(
+          map(({ status }) =>
+            otActions.rechazarInformeActaSuccess({
+              status,
+            })
+          ),
+          catchError(error => of(otActions.rechazarInformeActaError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -1235,7 +1285,10 @@ export class OtEffects {
           otActions.saveInformeAvanceAdminECSuccess,
           otActions.getDataInformeAvanceTrabajadorSuccess,
           otActions.getDataInformeAvanceAdminECSuccess,
-          otActions.rechazarInformeAvanceSuccess
+          otActions.rechazarInformeAvanceSuccess,
+          otActions.getDataInformeActaSuccess,
+          otActions.saveInformeActaSuccess,
+          otActions.rechazarInformeActaSuccess
         ),
         tap(action => {
           if (+action.status.responseCode === 0) {
@@ -1283,7 +1336,10 @@ export class OtEffects {
           otActions.saveBorradorInformeAvanceError,
           otActions.saveInformeAvanceError,
           otActions.getDataInformeAvanceError,
-          otActions.rechazarInformeAvanceError
+          otActions.rechazarInformeAvanceError,
+          otActions.getDataInformeActaError,
+          otActions.saveInformeActaError,
+          otActions.rechazarInformeActaError
         ),
         tap(action => {
           this.snackService.showMessage(
