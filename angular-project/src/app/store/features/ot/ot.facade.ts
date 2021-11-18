@@ -9,6 +9,7 @@ import {
   DataInformeAvance,
   LpuInformeAvanceDetalle,
   RequestSaveBorradorInformeAvance,
+  RequestSaveInformeAvance,
 } from '@data';
 
 @Injectable({
@@ -379,8 +380,8 @@ export class OtFacade {
     return this.store.select(otSelectors.getDataInformeAvanceAdminEC);
   }
 
-  public saveInformeAvanceTrabajador(lpus: LpuInformeAvanceDetalle[]): void {
-    this.store.dispatch(otActions.saveInformeAvanceTrabajador({ lpus }));
+  public saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): void {
+    this.store.dispatch(otActions.saveInformeAvanceTrabajador({ request }));
   }
   public saveInformeAvanceAdminEC(lpus: LpuInformeAvanceDetalle[]): void {
     this.store.dispatch(otActions.saveInformeAvanceAdminEC({ lpus }));

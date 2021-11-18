@@ -149,7 +149,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
       return { id_lpu: f.lpu_id, informado: f.informado };
     });
 
-    this.otFacade.saveInformeAvanceTrabajador(lpus);
+    this.otFacade.saveInformeAvanceAdminEC(lpus);
   }
 
   rechazarInforme(): void {

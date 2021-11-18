@@ -16,6 +16,7 @@ import {
   DetalleCubicacion,
   LpuInformeAvanceDetalle,
   RequestSaveBorradorInformeAvance,
+  RequestSaveInformeAvance,
 } from '@data';
 
 @Component({
@@ -53,7 +54,8 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.dataInformeAvance$.subscribe(lpu => {
-        if (lpu) {
+        if (lpu && lpu.length > 0) {
+          console.log(lpu);
           this.informe_id = lpu[0].informe_id;
           lpu.forEach(lpu_service => {
             const group = new FormGroup({
@@ -122,7 +124,12 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       return { id_lpu: f.lpu_id, informado: f.informado };
     });
 
-    this.otFacade.saveInformeAvanceTrabajador(lpus);
+    const request: RequestSaveInformeAvance = {
+      informe_id: this.informe_id,
+      valores_detalles: lpus,
+    };
+    console.log(request);
+    this.otFacade.saveInformeAvanceTrabajador(request);
   }
 
   saveBorradorInformeAvance(): void {

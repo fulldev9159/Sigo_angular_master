@@ -1183,8 +1183,8 @@ export class OtEffects {
   saveInformeAvanceTrabajador$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveInformeAvanceTrabajador),
-      concatMap(({ lpus }) =>
-        this.informeAvanceService.saveInformeAvanceTrabajador(lpus).pipe(
+      concatMap(({ request }) =>
+        this.informeAvanceService.saveInformeAvanceTrabajador(request).pipe(
           map(({ status }) =>
             otActions.saveInformeAvanceTrabajadorSuccess({
               status,
