@@ -11,53 +11,34 @@ import {
   StatusResponse,
 } from '@data';
 
-// GET OTs EJECUCION init
+// GET OTs init
 
-export const getOtEjecucion = createAction(
-  '[Ot Get Ejecucion] GET Ot Ejecucion',
+export const getOts = createAction(
+  '[OT] Get Ots',
   props<{
-    filtro_pestania: string;
-    filtro_propietario: string;
-    filtro_tipo: string;
-  }>()
-);
-export const getOtSuccessEjecucion = createAction(
-  '[Ot GetAll] GET Ot Success Ejecucion',
-  props<{ ots: OT[] }>()
-);
-// GET OTs EJECUCION end
-
-export const getOtAbiertas = createAction(
-  '[Ot Get Abiertas] GET Ot Abiertas',
-  props<{
-    filtro_pestania: string;
-    filtro_propietario: string;
-    filtro_tipo: string;
+    request: RequestGetOTs;
   }>()
 );
 
-export const getOtCerradas = createAction(
-  '[Ot Get Cerradas] GET Ot Cerradas',
-  props<{
-    filtro_pestania: string;
-    filtro_propietario: string;
-    filtro_tipo: string;
-  }>()
+export const getOtEjecucionSuccess = createAction(
+  '[OT] GET Ot Success Ejecucion',
+  props<{ ots: OT[]; status: StatusResponse }>()
 );
 
-export const getOtSuccessAbiertas = createAction(
-  '[Ot GetAll] GET Ot Success Abiertas',
-  props<{ ots: OT[] }>()
+export const getOtAbiertasSuccess = createAction(
+  '[OT] GET Ot Success Abiertas',
+  props<{ ots: OT[]; status: StatusResponse }>()
 );
 
 export const getOtSuccessCerradas = createAction(
   '[Ot GetAll] GET Ot Success Cerradas',
-  props<{ ots: OT[] }>()
+  props<{ ots: OT[]; status: StatusResponse }>()
 );
-export const getOtError = createAction(
+export const getOtsError = createAction(
   '[Ot GetAll] GET Ot Error',
   props<{ error: any }>()
 );
+// GET OTs init
 
 export const deleteOt = createAction(
   '[Ot DeleteById] DELETE Ot',

@@ -81,6 +81,9 @@ export class NotifyAfter {
       }
     } else {
       // Sin resultados
+      // msg[otActions.getOtEjecucionSuccess.type] = 'No existen Ots en ejecución';
+      // msg[otActions.getOtAbiertasSuccess.type] = 'No existen Ots abiertas';
+      // msg[otActions.getOtSuccessCerradas.type] = 'No existen Ots cerradas';
       msg[cubActions.getCubsSuccess.type] = 'No existen cubicaciones';
       msg[cubActions.getContractMarcoSuccess.type] =
         'Usuario no tiene contratos asosiados';
@@ -101,11 +104,13 @@ export class NotifyAfter {
         'No posee información de informe de avance';
       msg[otActions.getDataInformeActaSuccess.type] =
         'El acta no posee información';
-      this.snackService.showMessage(
-        `${msg[action]}- ${status.description}`,
-        'info',
-        2000
-      );
+      if (msg[action] !== undefined) {
+        this.snackService.showMessage(
+          `${msg[action]}- ${status.description}`,
+          'info',
+          2000
+        );
+      }
     }
   }
 
@@ -149,6 +154,7 @@ export class NotifyAfter {
       'Falló la ejecución del rechazo';
     msg[otActions.inicializarInformeAvanceError.type] =
       'Falló la inicialización del informe';
+    msg[otActions.getOtsError.type] = 'Falló la obtención de OTs';
     this.snackService.showMessage(`${msg[action]} - ${message}`, 'error', 4000);
   }
 }

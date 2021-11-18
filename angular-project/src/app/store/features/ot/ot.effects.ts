@@ -43,54 +43,24 @@ export class OtEffects {
     private router: Router
   ) {}
 
-  getOTsEjecucion$ = createEffect(() =>
+  getOTs$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(otActions.getOtEjecucion),
-      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
-        const request: RequestGetOTs = {
-          filtro_pestania,
-          filtro_propietario,
-          filtro_tipo,
-        };
-        return this.otService.getOTs(request).pipe(
-          map(ots => otActions.getOtSuccessEjecucion({ ots })),
-          catchError(error => of(otActions.getOtError({ error })))
-        );
-      })
-    )
-  );
-
-  getOTsAbiertas$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getOtAbiertas),
-      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
-        const request: RequestGetOTs = {
-          filtro_pestania,
-          filtro_propietario,
-          filtro_tipo,
-        };
-        return this.otService.getOTs(request).pipe(
-          map(ots => otActions.getOtSuccessAbiertas({ ots })),
-          catchError(error => of(otActions.getOtError({ error })))
-        );
-      })
-    )
-  );
-
-  getOTsCerradas$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getOtCerradas),
-      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
-        const request: RequestGetOTs = {
-          filtro_pestania,
-          filtro_propietario,
-          filtro_tipo,
-        };
-        return this.otService.getOTs(request).pipe(
-          map(ots => otActions.getOtSuccessCerradas({ ots })),
-          catchError(error => of(otActions.getOtError({ error })))
-        );
-      })
+      ofType(otActions.getOts),
+      concatMap(({ request }) =>
+        this.otService.getOTs(request).pipe(
+          map(({ ots, status }) => {
+            if (request.filtro_pestania === 'EN_EJECUCION') {
+              return otActions.getOtEjecucionSuccess({ ots, status });
+            } else if (request.filtro_pestania === 'ABIERTAS') {
+              return otActions.getOtAbiertasSuccess({ ots, status });
+            } else if (request.filtro_pestania === 'CERRADAS') {
+              return otActions.getOtSuccessCerradas({ ots, status });
+            }
+            // return otActions.getOtEjecucionSuccess({ ots, status });
+          }),
+          catchError(error => of(otActions.getOtsError({ error })))
+        )
+      )
     )
   );
 
@@ -415,6 +385,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -460,6 +431,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -520,6 +492,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -581,6 +554,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -627,6 +601,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -676,6 +651,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -727,6 +703,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -780,6 +757,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -833,6 +811,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -886,6 +865,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -934,6 +914,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -980,6 +961,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -1026,6 +1008,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -1301,6 +1284,9 @@ export class OtEffects {
     () =>
       this.actions$.pipe(
         ofType(
+          otActions.getOtEjecucionSuccess,
+          otActions.getOtAbiertasSuccess,
+          otActions.getOtSuccessCerradas,
           otActions.saveBorradorInformeAvanceSuccess,
           otActions.saveInformeAvanceTrabajadorSuccess,
           otActions.saveInformeAvanceAdminECSuccess,
@@ -1323,6 +1309,7 @@ export class OtEffects {
     () =>
       this.actions$.pipe(
         ofType(
+          otActions.getOtsError,
           otActions.saveBorradorInformeAvanceError,
           otActions.saveInformeAvanceError,
           otActions.getDataInformeAvanceError,

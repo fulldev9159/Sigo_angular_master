@@ -8,6 +8,7 @@ import * as Data from '@data';
 import {
   DataInformeAvance,
   LpuInformeAvanceDetalle,
+  RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
 } from '@data';
@@ -19,26 +20,29 @@ export class OtFacade {
   constructor(private store: Store<Data.OT>) {}
 
   // OT
-  public getOts({ filtro_propietario, filtro_tipo }): void {
+  public getOts(request: RequestGetOTs): void {
     this.store.dispatch(
-      otActions.getOtEjecucion({
-        filtro_tipo,
-        filtro_propietario,
-        filtro_pestania: 'EN_EJECUCION',
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'EN_EJECUCION',
+        },
       })
     );
     this.store.dispatch(
-      otActions.getOtAbiertas({
-        filtro_propietario,
-        filtro_tipo,
-        filtro_pestania: 'ABIERTAS',
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'ABIERTAS',
+        },
       })
     );
     this.store.dispatch(
-      otActions.getOtCerradas({
-        filtro_propietario,
-        filtro_tipo,
-        filtro_pestania: 'CERRADAS',
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'CERRADAS',
+        },
       })
     );
   }

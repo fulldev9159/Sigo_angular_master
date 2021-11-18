@@ -75,10 +75,10 @@ export const initialStateOt: StateOt = {
 export const reducerOt = createReducer(
   initialStateOt,
 
-  on(OtActions.getOtAbiertas, (state, { filtro_propietario, filtro_tipo }) => ({
+  on(OtActions.getOts, (state, { request }) => ({
     ...state,
-    filtro_propietario,
-    filtro_tipo,
+    filtro_propietario: request.filtro_propietario,
+    filtro_tipo: request.filtro_tipo,
   })),
   // on(
   //   OtActions.getOtEjecucion,
@@ -93,11 +93,11 @@ export const reducerOt = createReducer(
   //   filtro_propietario,
   //   filtro_tipo,
   // })),
-  on(OtActions.getOtSuccessEjecucion, (state, payload) => ({
+  on(OtActions.getOtEjecucionSuccess, (state, payload) => ({
     ...state,
     otsEjecucion: payload.ots,
   })),
-  on(OtActions.getOtSuccessAbiertas, (state, payload) => ({
+  on(OtActions.getOtAbiertasSuccess, (state, payload) => ({
     ...state,
     itemsAbiertas: payload.ots,
   })),
