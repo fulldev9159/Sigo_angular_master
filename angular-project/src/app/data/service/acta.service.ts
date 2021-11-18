@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import {
   DataInformeAvance,
-  LpuInformeAvance,
+  LpuInformeAvanceDetalle,
   ResponseBorradorInformeAvance,
   StatusResponse,
 } from '@data';
@@ -62,7 +62,7 @@ export class ActaService {
     });
   }
 
-  saveInformeActa(lpus: LpuInformeAvance[]): Observable<{
+  saveInformeActa(lpus: LpuInformeAvanceDetalle[]): Observable<{
     status: StatusResponse;
   }> {
     // return this.http

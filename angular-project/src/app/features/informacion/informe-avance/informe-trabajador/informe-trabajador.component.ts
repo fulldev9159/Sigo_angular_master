@@ -14,7 +14,8 @@ import {
   DataInformeAvance,
   DataRspDetalleOT,
   DetalleCubicacion,
-  LpuInformeAvance,
+  LpuInformeAvanceDetalle,
+  RequestSaveBorradorInformeAvance,
 } from '@data';
 
 @Component({
@@ -32,6 +33,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   });
   DisplayConfirmacionModal = false;
   waitAP = false;
+  informe_id = 0;
 
   constructor(
     private otFacade: OtFacade,
@@ -52,9 +54,10 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.dataInformeAvance$.subscribe(lpu => {
         if (lpu) {
+          this.informe_id = lpu[0].informe_id;
           lpu.forEach(lpu_service => {
             const group = new FormGroup({
-              lpu_id: new FormControl(lpu_service.detalle_lpu_id, [
+              lpu_id: new FormControl(lpu_service.detalle_id, [
                 Validators.required,
               ]),
               informado: new FormControl(lpu_service.cantidad_informada, [
@@ -113,7 +116,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     this.waitAP = true;
     this.DisplayConfirmacionModal = false;
 
-    const lpus: LpuInformeAvance[] = (
+    const lpus: LpuInformeAvanceDetalle[] = (
       this.form.get('table') as FormArray
     ).value.map(f => {
       return { id_lpu: f.lpu_id, informado: f.informado };
@@ -123,12 +126,17 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   }
 
   saveBorradorInformeAvance(): void {
-    const lpus: LpuInformeAvance[] = (
+    const lpus: LpuInformeAvanceDetalle[] = (
       this.form.get('table') as FormArray
     ).value.map(f => {
-      return { id_lpu: f.lpu_id, informado: f.informado };
+      return { detalle_id: f.lpu_id, cantidad_informada: f.informado };
     });
 
-    this.otFacade.saveBorradorInformeAvance(lpus);
+    const request: RequestSaveBorradorInformeAvance = {
+      valores_detalles: lpus,
+    };
+
+    console.log(request);
+    this.otFacade.saveBorradorInformeAvance(request);
   }
 }

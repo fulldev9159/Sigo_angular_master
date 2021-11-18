@@ -5,7 +5,11 @@ import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
 import * as OTmodel from './ot.model';
 import * as Data from '@data';
-import { DataInformeAvance, LpuInformeAvance } from '@data';
+import {
+  DataInformeAvance,
+  LpuInformeAvanceDetalle,
+  RequestSaveBorradorInformeAvance,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -375,15 +379,17 @@ export class OtFacade {
     return this.store.select(otSelectors.getDataInformeAvanceAdminEC);
   }
 
-  public saveInformeAvanceTrabajador(lpus: LpuInformeAvance[]): void {
+  public saveInformeAvanceTrabajador(lpus: LpuInformeAvanceDetalle[]): void {
     this.store.dispatch(otActions.saveInformeAvanceTrabajador({ lpus }));
   }
-  public saveInformeAvanceAdminEC(lpus: LpuInformeAvance[]): void {
+  public saveInformeAvanceAdminEC(lpus: LpuInformeAvanceDetalle[]): void {
     this.store.dispatch(otActions.saveInformeAvanceAdminEC({ lpus }));
   }
 
-  public saveBorradorInformeAvance(lpus: LpuInformeAvance[]): void {
-    this.store.dispatch(otActions.saveBorradorInformeAvance({ lpus }));
+  public saveBorradorInformeAvance(
+    request: RequestSaveBorradorInformeAvance
+  ): void {
+    this.store.dispatch(otActions.saveBorradorInformeAvance({ request }));
   }
 
   public rechazarInformeAvance(informe_id: number): void {
@@ -398,7 +404,7 @@ export class OtFacade {
     return this.store.select(otSelectors.getDataInformeActa);
   }
 
-  public saveInformeActa(lpus: LpuInformeAvance[]): void {
+  public saveInformeActa(lpus: LpuInformeAvanceDetalle[]): void {
     this.store.dispatch(otActions.saveInformeActa({ lpus }));
   }
 

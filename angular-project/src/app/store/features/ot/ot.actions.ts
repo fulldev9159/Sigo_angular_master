@@ -3,9 +3,10 @@ import * as OtModel from './ot.model';
 import * as Data from '@data';
 import {
   DataInformeAvance,
-  LpuInformeAvance,
+  LpuInformeAvanceDetalle,
   OT,
   RequestGetOTs,
+  RequestSaveBorradorInformeAvance,
   StatusResponse,
 } from '@data';
 
@@ -596,7 +597,7 @@ export const getDataInformeAvanceError = createAction(
 // Save borrador informe avance
 export const saveBorradorInformeAvance = createAction(
   '[OT] SAVE borrador informe avance',
-  props<{ lpus: LpuInformeAvance[] }>()
+  props<{ request: RequestSaveBorradorInformeAvance }>()
 );
 
 export const saveBorradorInformeAvanceSuccess = createAction(
@@ -612,7 +613,7 @@ export const saveBorradorInformeAvanceError = createAction(
 // Save informe avance
 export const saveInformeAvanceTrabajador = createAction(
   '[OT] SAVE informe avance trabajador',
-  props<{ lpus: LpuInformeAvance[] }>()
+  props<{ lpus: LpuInformeAvanceDetalle[] }>()
 );
 
 export const saveInformeAvanceTrabajadorSuccess = createAction(
@@ -622,7 +623,7 @@ export const saveInformeAvanceTrabajadorSuccess = createAction(
 
 export const saveInformeAvanceAdminEC = createAction(
   '[OT] SAVE informe avance Admin EC',
-  props<{ lpus: LpuInformeAvance[] }>()
+  props<{ lpus: LpuInformeAvanceDetalle[] }>()
 );
 
 export const saveInformeAvanceAdminECSuccess = createAction(
@@ -670,7 +671,7 @@ export const getDataInformeActaError = createAction(
 // SAVE informe acta
 export const saveInformeActa = createAction(
   '[OT] SAVE informe acta',
-  props<{ lpus: LpuInformeAvance[] }>()
+  props<{ lpus: LpuInformeAvanceDetalle[] }>()
 );
 
 export const saveInformeActaSuccess = createAction(

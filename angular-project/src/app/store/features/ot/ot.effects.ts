@@ -1215,8 +1215,8 @@ export class OtEffects {
   saveBorradorInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveBorradorInformeAvance),
-      concatMap(({ lpus }) =>
-        this.informeAvanceService.saveBorradorInformeAvance(lpus).pipe(
+      concatMap(({ request }) =>
+        this.informeAvanceService.saveBorradorInformeAvance(request).pipe(
           map(({ status }) =>
             otActions.saveBorradorInformeAvanceSuccess({
               status,

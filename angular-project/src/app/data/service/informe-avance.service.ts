@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import {
   DataInformeAvance,
-  LpuInformeAvance,
+  LpuInformeAvanceDetalle,
+  RequestSaveBorradorInformeAvance,
+  RequestSaveInformeAvance,
   ResponseBorradorInformeAvance,
   StatusResponse,
 } from '@data';
@@ -134,11 +136,39 @@ export class InformAvenceService {
     });
   }
 
-  saveBorradorInformeAvance(lpus: LpuInformeAvance[]): Observable<{
+  saveBorradorInformeAvance(
+    request: RequestSaveBorradorInformeAvance
+  ): Observable<{
     status: StatusResponse;
   }> {
     // return this.http
     //   .post<ResponseBorradorInformeAvance>(
+    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
+    //     {request}
+    //   )
+    //   .pipe(
+    //     map(res => {
+    //       return {
+    //         status: {
+    //           description: res.status.description,
+    //           responseCode: res.status.responseCode,
+    //         },
+    //       };
+    //     })
+    //   );
+    return of({
+      status: {
+        description: 'ok',
+        responseCode: 0,
+      },
+    });
+  }
+
+  saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): Observable<{
+    status: StatusResponse;
+  }> {
+    // return this.http
+    //   .post<ResponseSendInformeAvance>(
     //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
     //     {lpus}
     //   )
@@ -160,33 +190,7 @@ export class InformAvenceService {
     });
   }
 
-  saveInformeAvanceTrabajador(lpus: LpuInformeAvance[]): Observable<{
-    status: StatusResponse;
-  }> {
-    // return this.http
-    //   .post<ResponseBorradorInformeAvance>(
-    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
-    //     {lpus}
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       return {
-    //         status: {
-    //           description: res.status.description,
-    //           responseCode: res.status.responseCode,
-    //         },
-    //       };
-    //     })
-    //   );
-    return of({
-      status: {
-        description: 'ok',
-        responseCode: 0,
-      },
-    });
-  }
-
-  saveInformeAvanceAdministrador(lpus: LpuInformeAvance[]): Observable<{
+  saveInformeAvanceAdministrador(lpus: LpuInformeAvanceDetalle[]): Observable<{
     status: StatusResponse;
   }> {
     // return this.http
