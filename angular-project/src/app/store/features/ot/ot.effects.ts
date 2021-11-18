@@ -1121,6 +1121,27 @@ export class OtEffects {
     { dispatch: false }
   );
 
+  inicializarInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.inicializarInformeAvance),
+      concatMap(({ ot_id }) =>
+        this.informeAvanceService.inicializaInforme(ot_id).pipe(
+          map(({ status }) => {
+            if (status.responseCode === 0) {
+              this.otFacade.getDataInformeAvanceTrabajador(ot_id);
+            }
+            return otActions.inicializarInformeAvanceSuccess({
+              status,
+            });
+          }),
+          catchError(error =>
+            of(otActions.inicializarInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   getDataInformeAvanceTrabajador$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getDataInformeAvanceTrabajador),
@@ -1288,7 +1309,8 @@ export class OtEffects {
           otActions.rechazarInformeAvanceSuccess,
           otActions.getDataInformeActaSuccess,
           otActions.saveInformeActaSuccess,
-          otActions.rechazarInformeActaSuccess
+          otActions.rechazarInformeActaSuccess,
+          otActions.inicializarInformeAvanceSuccess
         ),
         tap(action => {
           if (+action.status.responseCode === 0) {
@@ -1339,7 +1361,8 @@ export class OtEffects {
           otActions.rechazarInformeAvanceError,
           otActions.getDataInformeActaError,
           otActions.saveInformeActaError,
-          otActions.rechazarInformeActaError
+          otActions.rechazarInformeActaError,
+          otActions.inicializarInformeAvanceError
         ),
         tap(action => {
           this.snackService.showMessage(

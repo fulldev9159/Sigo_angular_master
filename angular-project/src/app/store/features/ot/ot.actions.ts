@@ -551,6 +551,22 @@ export const getRegistrosLibroObraError = createAction(
   props<{ error: any }>()
 );
 
+// Inicializar informe avance
+export const inicializarInformeAvance = createAction(
+  '[OT] inicializar informe avance',
+  props<{ ot_id: number }>()
+);
+
+export const inicializarInformeAvanceSuccess = createAction(
+  '[OT] inicializar informe avance success',
+  props<{ status: StatusResponse }>()
+);
+
+export const inicializarInformeAvanceError = createAction(
+  '[OT] inicializar informe avance error',
+  props<{ error: any }>()
+);
+
 // Get data informe avance
 export const getDataInformeAvanceTrabajador = createAction(
   '[OT] GET data informe avance trabajador',

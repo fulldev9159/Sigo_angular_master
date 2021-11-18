@@ -17,6 +17,33 @@ export class InformAvenceService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
+  inicializaInforme(ot_id: number): Observable<{
+    status: StatusResponse;
+  }> {
+    // return this.http
+    //   .post<ResponseGetInformeAvance>(
+    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
+    //     {lpus}
+    //   )
+    //   .pipe(
+    //     map(res => {
+    //       return {
+    //         status: {
+    // datoInformeAvance:res.data.items
+    //           description: res.status.description,
+    //           responseCode: res.status.responseCode,
+    //         },
+    //       };
+    //     })
+    //   );
+    return of({
+      status: {
+        description: 'ok',
+        responseCode: 0,
+      },
+    });
+  }
+
   getInformeAvanceTrabajador(ot_id: number): Observable<{
     dataInformeAvance: DataInformeAvance[];
     status: StatusResponse;
