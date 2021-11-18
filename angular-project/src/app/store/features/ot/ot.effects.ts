@@ -1312,41 +1312,9 @@ export class OtEffects {
           otActions.rechazarInformeActaSuccess,
           otActions.inicializarInformeAvanceSuccess
         ),
-        tap(action => {
-          if (+action.status.responseCode === 0) {
-            if (
-              action.type ===
-                otActions.saveInformeAvanceTrabajadorSuccess.type ||
-              action.type === otActions.saveInformeAvanceAdminECSuccess.type
-            ) {
-              window.location.reload();
-            }
-
-            if (this.messageServiceInt.messageOk(action.type) !== undefined) {
-              this.snackService.showMessage(
-                `${this.messageServiceInt.messageOk(action.type)} - ${
-                  action.status.description
-                }`,
-                'ok',
-                3000
-              );
-            }
-          } else if (+action.status.responseCode === 1) {
-            this.snackService.showMessage(
-              `${this.messageServiceInt.messageInfoSinResultado(
-                action.type
-              )} - ${action.status.description}`,
-              'info',
-              2000
-            );
-          } else {
-            this.snackService.showMessage(
-              `PROBLEM - ${action.status.description}`,
-              'info',
-              2000
-            );
-          }
-        })
+        tap(action =>
+          this.messageServiceInt.actions200(action.status, action.type)
+        )
       ),
     { dispatch: false }
   );
@@ -1364,15 +1332,12 @@ export class OtEffects {
           otActions.rechazarInformeActaError,
           otActions.inicializarInformeAvanceError
         ),
-        tap(action => {
-          this.snackService.showMessage(
-            `${this.messageServiceInt.messageError(action.type)} - ${
-              action.error.message
-            }`,
-            'error',
-            4000
-          );
-        })
+        tap(action =>
+          this.messageServiceInt.actionsErrors(
+            action.error.message,
+            action.type
+          )
+        )
       ),
     { dispatch: false }
   );

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CubicacionWithLpu, RequestSaveCubicacion } from '@data';
-import { Router } from '@angular/router';
+import * as Service from '@data';
 import {
   catchError,
   concatMap,
@@ -12,26 +12,19 @@ import {
 import { of } from 'rxjs';
 
 import * as cubActions from './cubicacion.actions';
-import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import * as Service from '@data';
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 @Injectable()
 export class CubicacionEffects {
   constructor(
     private actions$: Actions,
-    private snackService: SnackBarService,
-    private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private cubService: Service.CubicacionService,
     private contratoService: Service.ContratosService,
     private proveedorService: Service.ProveedorService,
     private regionService: Service.RegionService,
     private messageService: Service.NotifyAfter,
-    private lpuService: Service.LpusService,
-    private router: Router
+    private lpuService: Service.LpusService
   ) {}
 
   getCubs$ = createEffect(() =>
@@ -45,9 +38,7 @@ export class CubicacionEffects {
               status,
             })
           ),
-          catchError(error => {
-            return of(cubActions.getCubsError({ error }));
-          })
+          catchError(error => of(cubActions.getCubsError({ error })))
         )
       )
     )
@@ -63,10 +54,9 @@ export class CubicacionEffects {
               cubicacion,
             })
           ),
-          catchError(err => {
-            console.error(`could not retrieve the cubage [${err.message}]`);
-            return of(cubActions.getSingleCubicacionError({ error: err }));
-          })
+          catchError(err =>
+            of(cubActions.getSingleCubicacionError({ error: err }))
+          )
         )
       )
     )
@@ -194,12 +184,12 @@ export class CubicacionEffects {
       ofType(cubActions.createCub),
       concatMap(({ cubicacion }) =>
         this.cubService.createCubicacion(cubicacion).pipe(
-          map(({ response, status }) => {
-            return cubActions.createCubSuccess({
+          map(({ response, status }) =>
+            cubActions.createCubSuccess({
               response,
               status,
-            });
-          }),
+            })
+          ),
           catchError(error => of(cubActions.createCubError({ error })))
         )
       )
@@ -211,12 +201,12 @@ export class CubicacionEffects {
       ofType(cubActions.editCubicacion),
       concatMap(({ cubicacion }) =>
         this.cubService.updateCubicacion(cubicacion).pipe(
-          map(({ cub_id, status }) => {
-            return cubActions.editCubicacionSuccess({
+          map(({ cub_id, status }) =>
+            cubActions.editCubicacionSuccess({
               cub_id,
               status,
-            });
-          }),
+            })
+          ),
           catchError(error => of(cubActions.editCubicacionError({ error })))
         )
       )
@@ -263,12 +253,10 @@ export class CubicacionEffects {
     this.actions$.pipe(
       ofType(cubActions.clonarCubicacion),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ cubicacion, cubicacion_id }, perfil]) =>
+      concatMap(([{ cubicacion, type }, perfil]) =>
         this.cubService.getDetalleCubicacion(cubicacion.id).pipe(
           map(res => {
-            if (+res.status.responseCode !== 0) {
-              this.snackService.showMessage(res.status.description, 'error');
-            }
+            this.messageService.actions200(res.status, type);
             const requestSave: RequestSaveCubicacion = {
               cubicacion_nombre: cubicacion.nombre,
               region_id: cubicacion.region_id,
@@ -284,10 +272,7 @@ export class CubicacionEffects {
               cubicacion: requestSave,
             });
           }),
-          catchError(err => {
-            console.log(err);
-            return of(cubActions.clonarCubicacionError({ error: err }));
-          })
+          catchError(error => of(cubActions.clonarCubicacionError({ error })))
         )
       )
     )
@@ -298,9 +283,7 @@ export class CubicacionEffects {
       ofType(cubActions.deleteCubicacion),
       concatMap(({ cubicacion_id }) =>
         this.cubService.deleteOT(cubicacion_id).pipe(
-          map(({ status }) => {
-            return cubActions.deleteCubicacionSuccess({ status });
-          }),
+          map(({ status }) => cubActions.deleteCubicacionSuccess({ status })),
           catchError(error => of(cubActions.deleteCubicacionError({ error })))
         )
       )
@@ -323,39 +306,7 @@ export class CubicacionEffects {
           cubActions.deleteCubicacionSuccess
         ),
         tap(action => {
-          if (+action.status.responseCode === 0) {
-            if (
-              action.type === cubActions.createCubSuccess.type ||
-              action.type === cubActions.editCubicacionSuccess.type
-            ) {
-              this.cubageFacade.getCubicacionAction();
-              this.router.navigate(['app/cubicacion/list-cub']);
-            }
-
-            if (this.messageService.messageOk(action.type) !== undefined) {
-              this.snackService.showMessage(
-                `${this.messageService.messageOk(action.type)} - ${
-                  action.status.description
-                }`,
-                'ok',
-                3000
-              );
-            }
-          } else if (+action.status.responseCode === 1) {
-            this.snackService.showMessage(
-              `${this.messageService.messageInfoSinResultado(action.type)} - ${
-                action.status.description
-              }`,
-              'info',
-              2000
-            );
-          } else {
-            this.snackService.showMessage(
-              `PROBLEM - ${action.status.description}`,
-              'info',
-              2000
-            );
-          }
+          this.messageService.actions200(action.status, action.type);
         })
       ),
     { dispatch: false }
@@ -366,6 +317,7 @@ export class CubicacionEffects {
       this.actions$.pipe(
         ofType(
           cubActions.getCubsError,
+          cubActions.getSingleCubicacionError,
           cubActions.getContractMarcoError,
           cubActions.getSubContractProvidersError,
           cubActions.getSubContractedRegionsError,
@@ -377,15 +329,9 @@ export class CubicacionEffects {
           cubActions.getDetalleCubicacionError,
           cubActions.deleteCubicacionError
         ),
-        tap(action => {
-          this.snackService.showMessage(
-            `${this.messageService.messageError(action.type)} - ${
-              action.error.message
-            }`,
-            'error',
-            4000
-          );
-        })
+        tap(action =>
+          this.messageService.actionsErrors(action.error.message, action.type)
+        )
       ),
     { dispatch: false }
   );
