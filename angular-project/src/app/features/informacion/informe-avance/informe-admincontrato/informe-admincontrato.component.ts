@@ -14,7 +14,7 @@ import {
   DataInformeAvance,
   DataRspDetalleOT,
   DetalleCubicacion,
-  LpuInformeAvance,
+  LpuInformeAvanceDetalle,
 } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 
@@ -143,13 +143,13 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     this.waitAP = true;
     this.DisplayConfirmacionModal = false;
 
-    const lpus: LpuInformeAvance[] = (
+    const lpus: LpuInformeAvanceDetalle[] = (
       this.form.get('table') as FormArray
     ).value.map(f => {
       return { id_lpu: f.lpu_id, informado: f.informado };
     });
 
-    this.otFacade.saveInformeAvanceTrabajador(lpus);
+    this.otFacade.saveInformeAvanceAdminEC(lpus);
   }
 
   rechazarInforme(): void {

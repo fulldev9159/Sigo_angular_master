@@ -28,7 +28,15 @@ export interface DataInformeAvance {
 
 // GET INFORME AVANCE done
 
-// SEND INFORME/BORRADOR init
+export interface LpuInformeAvanceDetalle {
+  detalle_id: number;
+  cantidad_informada: number;
+}
+
+// SEND BORRADOR init
+export interface RequestSaveBorradorInformeAvance {
+  valores_detalles: LpuInformeAvanceDetalle[];
+}
 export interface ResponseBorradorInformeAvance {
   data: {
     id: number;
@@ -40,7 +48,14 @@ export interface ResponseBorradorInformeAvance {
   };
 }
 
-export interface ResponseInformeAvance {
+// SEND BORRADOR done
+
+// SEND INFORME init
+export interface RequestSaveInformeAvance {
+  informe_id: number;
+  valores_detalles: LpuInformeAvanceDetalle[];
+}
+export interface ResponseSendInformeAvance {
   data: {
     id: number;
   };
@@ -51,9 +66,4 @@ export interface ResponseInformeAvance {
   };
 }
 
-// SEND INFORME/BORRADOR done
-
-export interface LpuInformeAvance {
-  id_lpu: number;
-  informado: number;
-}
+// SEND INFORME done

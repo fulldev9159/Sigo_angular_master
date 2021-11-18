@@ -123,6 +123,8 @@ export class NotifyAfter {
     msg[otActions.saveInformeActaError.type] = 'No se pudo enviar el acta';
     msg[otActions.rechazarInformeActaError.type] =
       'Falló la ejecución del rechazo';
+    msg[otActions.inicializarInformeAvanceError.type] =
+      'Falló la inicialización del informe';
     return msg[action];
   }
 }

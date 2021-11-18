@@ -3,9 +3,11 @@ import * as OtModel from './ot.model';
 import * as Data from '@data';
 import {
   DataInformeAvance,
-  LpuInformeAvance,
+  LpuInformeAvanceDetalle,
   OT,
   RequestGetOTs,
+  RequestSaveBorradorInformeAvance,
+  RequestSaveInformeAvance,
   StatusResponse,
 } from '@data';
 
@@ -551,6 +553,22 @@ export const getRegistrosLibroObraError = createAction(
   props<{ error: any }>()
 );
 
+// Inicializar informe avance
+export const inicializarInformeAvance = createAction(
+  '[OT] inicializar informe avance',
+  props<{ ot_id: number }>()
+);
+
+export const inicializarInformeAvanceSuccess = createAction(
+  '[OT] inicializar informe avance success',
+  props<{ status: StatusResponse }>()
+);
+
+export const inicializarInformeAvanceError = createAction(
+  '[OT] inicializar informe avance error',
+  props<{ error: any }>()
+);
+
 // Get data informe avance
 export const getDataInformeAvanceTrabajador = createAction(
   '[OT] GET data informe avance trabajador',
@@ -580,7 +598,7 @@ export const getDataInformeAvanceError = createAction(
 // Save borrador informe avance
 export const saveBorradorInformeAvance = createAction(
   '[OT] SAVE borrador informe avance',
-  props<{ lpus: LpuInformeAvance[] }>()
+  props<{ request: RequestSaveBorradorInformeAvance }>()
 );
 
 export const saveBorradorInformeAvanceSuccess = createAction(
@@ -596,7 +614,7 @@ export const saveBorradorInformeAvanceError = createAction(
 // Save informe avance
 export const saveInformeAvanceTrabajador = createAction(
   '[OT] SAVE informe avance trabajador',
-  props<{ lpus: LpuInformeAvance[] }>()
+  props<{ request: RequestSaveInformeAvance }>()
 );
 
 export const saveInformeAvanceTrabajadorSuccess = createAction(
@@ -606,7 +624,7 @@ export const saveInformeAvanceTrabajadorSuccess = createAction(
 
 export const saveInformeAvanceAdminEC = createAction(
   '[OT] SAVE informe avance Admin EC',
-  props<{ lpus: LpuInformeAvance[] }>()
+  props<{ lpus: LpuInformeAvanceDetalle[] }>()
 );
 
 export const saveInformeAvanceAdminECSuccess = createAction(
@@ -654,7 +672,7 @@ export const getDataInformeActaError = createAction(
 // SAVE informe acta
 export const saveInformeActa = createAction(
   '[OT] SAVE informe acta',
-  props<{ lpus: LpuInformeAvance[] }>()
+  props<{ lpus: LpuInformeAvanceDetalle[] }>()
 );
 
 export const saveInformeActaSuccess = createAction(
