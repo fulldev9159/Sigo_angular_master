@@ -1,3 +1,17 @@
+// INICIALIZADOR INFORME AVANCE init
+export interface ResponseInicializarInformeAvance {
+  data: {
+    borrador_id: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+// INICIALIZADOR INFORME AVANCE end
+
 // GET INFORME AVANCE init
 export interface ResponseGetInformeAvance {
   data: {
@@ -18,7 +32,7 @@ export interface DataInformeAvance {
   detalle_lpu_id: number;
   lpu_nombre: string;
   lpu_numero_producto: string;
-  lpu_precio: number;
+  LpuPrecio: number;
   cantidad_cubicada: number;
   cantidad_aprobada: number;
   cantidad_pendiente: number;

@@ -1,14 +1,14 @@
-<div style="padding: 17px;">
-  {{form.value|json}}
+<div style="padding: 8px;">
+
   <p-card>
     <ng-template pTemplate="header">
       <div style="padding: 16px;">
-        <button class="btn btn-primary" style="margin-right: 10px;" disabled>
+        <!-- <button class="btn btn-primary" style="margin-right: 10px;" disabled>
           Agregar Mano de obras/LPUs adicionales
         </button>
         <button class="btn btn-primary" disabled>
           Materiales
-        </button>
+        </button> -->
       </div>
     </ng-template>
     <span *ngIf="waitAP">
@@ -141,3 +141,5 @@
     <button class="btn btn-primary" (click)="sendInforme()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, Enviar informe</button>
   </ng-container>
 </app-modal>
+
+{{form.value|json}}

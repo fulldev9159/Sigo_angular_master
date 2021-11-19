@@ -1,0 +1,30 @@
+:host ::ng-deep {
+  a {
+    border-width: 0 0 2 px 0;
+    padding: 1 rem;
+    font-weight: 400;
+    border-top-right-radius: 2 px;
+    border-top-left-radius: 2 px;
+    transition: box-shadow 0.2s;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    color: #605e5c !important;
+  }
+
+  .p-tabview-panels {
+    border: 2px solid #00507aa6;
+    margin-top: 2px;
+    text-align-last: center;
+  }
+
+  .p-tabview-panel {
+    display: flex;
+    justify-content: center;
+  }
+}

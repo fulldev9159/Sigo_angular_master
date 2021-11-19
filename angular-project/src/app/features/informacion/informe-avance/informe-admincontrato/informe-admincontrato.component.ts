@@ -97,7 +97,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
             );
             if (lpu) {
               this.lpusTotal =
-                this.lpusTotal + lpu.lpu_precio * informado.informado;
+                this.lpusTotal + lpu.LpuPrecio * informado.informado;
             }
           });
         })

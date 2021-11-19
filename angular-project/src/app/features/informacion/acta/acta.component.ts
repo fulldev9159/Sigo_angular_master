@@ -88,7 +88,7 @@ export class ActaComponent implements OnInit, OnDestroy {
             );
             if (lpu) {
               this.lpusTotal =
-                this.lpusTotal + lpu.lpu_precio * aprobado.aprobado;
+                this.lpusTotal + lpu.LpuPrecio * aprobado.aprobado;
             }
           });
         })
