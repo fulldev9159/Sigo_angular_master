@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
-import { Site } from '@storeOT/features/ot/ot.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { Cubicacion, Plan } from '@data';
+import { Cubicacion, Plan, Sitio } from '@data';
 
 @Component({
   selector: 'app-plan-proyecto-form',
@@ -14,7 +13,7 @@ import { Cubicacion, Plan } from '@data';
 export class PlanProyectoFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   planes$: Observable<Plan[]> = of([]);
-  sitios$: Observable<Site[]> = of([]);
+  sitios$: Observable<Sitio[]> = of([]);
 
   @Input() form: FormGroup;
 
@@ -53,10 +52,10 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
           if (plan_proyecto_id !== null && plan_proyecto_id !== undefined) {
             // const plan = planes.find(p => +p.id === +plan_proyecto_id);
             if (this.cubicacion) {
-              this.otFacade.getSitesAction({
-                plan_proyecto_id,
-                region_id: this.cubicacion.region_id,
-              });
+              this.otFacade.getSitesAction(
+                +plan_proyecto_id,
+                +this.cubicacion.region_id
+              );
             }
           } else {
             this.checkSitiosAndEnable([]);
@@ -87,7 +86,7 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkSitiosAndEnable(sitios: Site[]): void {
+  checkSitiosAndEnable(sitios: Sitio[]): void {
     if (sitios.length > 0) {
       this.form.get('sitio_id').enable();
     } else {

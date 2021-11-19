@@ -36,6 +36,7 @@ export class OtEffects {
     private otService: Data.OTService,
     private informeAvanceService: Data.InformAvenceService,
     private planProyectoService: Data.PlanProyectoService,
+    private sitioService: Data.SitioService,
     private actaService: Data.ActaService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
@@ -81,39 +82,17 @@ export class OtEffects {
   getSites$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getSite),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/sitio/get`, {
-            plan_proyecto_id: +data.plan_proyecto_id,
-            region_id: +data.region_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                if (res.status.description === 'Sin resultados') {
-                  this.snackService.showMessage(
-                    `No existen sitios para el proyecto seleccionado - ${res.status.description}`,
-                    'warning'
-                  );
-                } else {
-                  this.snackService.showMessage(
-                    res.status.description,
-                    'error'
-                  );
-                }
-              }
-              console.log();
-              const SortSites = res.data.items
-                ? res.data.items.sort((a: OtModel.Site, b: OtModel.Site) =>
-                    a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-                  )
-                : [];
-              return otActions.getSiteSuccess({
-                site: SortSites,
-              });
-            }),
+      concatMap(({ plan_proyecto_id, region_id }) =>
+        this.sitioService.getSitios4OT(plan_proyecto_id, region_id).pipe(
+          map(
+            ({ sitio, status }) =>
+              otActions.getSiteSuccess({
+                sitio,
+                status,
+              }),
             catchError(err => of(otActions.getSiteError({ error: err })))
           )
+        )
       )
     )
   );
@@ -1289,7 +1268,8 @@ export class OtEffects {
           otActions.saveInformeActaSuccess,
           otActions.rechazarInformeActaSuccess,
           otActions.inicializarInformeAvanceSuccess,
-          otActions.getPlansSuccess
+          otActions.getPlansSuccess,
+          otActions.getSiteSuccess
         ),
         tap(action =>
           this.messageServiceInt.actions200(action.status, action.type)
@@ -1311,7 +1291,8 @@ export class OtEffects {
           otActions.saveInformeActaError,
           otActions.rechazarInformeActaError,
           otActions.inicializarInformeAvanceError,
-          otActions.getPlansError
+          otActions.getPlansError,
+          otActions.getSiteError
         ),
         tap(action =>
           this.messageServiceInt.actionsErrors(

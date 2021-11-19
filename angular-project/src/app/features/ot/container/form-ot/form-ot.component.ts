@@ -6,8 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-import { Site, PMO, RequestCreateOT } from '@storeOT/features/ot/ot.model';
-import { Cubicacion, Login } from '@data';
+import { PMO, RequestCreateOT } from '@storeOT/features/ot/ot.model';
+import { Cubicacion, Login, Sitio } from '@data';
 import { GeneralFormComponent } from '../../forms/general-form/general-form.component';
 import { PlanProyectoFormComponent } from '../../forms/plan-proyecto-form/plan-proyecto-form.component';
 import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero-form/sustento-financiero-form.component';
@@ -26,7 +26,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
   authLogin: Login = null;
 
   cubicacionSeleccionada: Cubicacion = null;
-  sitioSeleccionado: Site = null;
+  sitioSeleccionado: Sitio = null;
   nombre_plan_proyecto: string;
 
   saving$: Observable<boolean> = of(false);

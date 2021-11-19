@@ -9,6 +9,7 @@ import {
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  Sitio,
   StatusResponse,
 } from '@data';
 
@@ -57,6 +58,23 @@ export const getPlansError = createAction(
   props<{ error: any }>()
 );
 // GET Planes end
+
+// GET Sitio init
+export const getSite = createAction(
+  '[Sites Get By Id Plan] GET By Id Plan',
+  props<{ plan_proyecto_id: number; region_id: number }>()
+);
+
+export const getSiteSuccess = createAction(
+  '[Sites Get By Id Plan] GET By Id Plan Success',
+  props<{ sitio: Sitio[]; status: StatusResponse }>()
+);
+
+export const getSiteError = createAction(
+  '[Sites Get By Id Plan] GET By Id Plan Error',
+  props<{ error: any }>()
+);
+// GET Sitio end
 
 export const deleteOt = createAction(
   '[Ot DeleteById] DELETE Ot',
@@ -147,21 +165,6 @@ export const postOtSCESuccess = createAction(
 // OT LIST
 
 // OT FORM
-
-export const getSite = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan',
-  props<{ plan_proyecto_id: number; region_id: number }>()
-);
-
-export const getSiteSuccess = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan Success',
-  props<{ site: OtModel.Site[] }>()
-);
-
-export const getSiteError = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan Error',
-  props<{ error: any }>()
-);
 
 export const getPmo = createAction(
   '[Pmo Get By Id Site] GET By Id Site',

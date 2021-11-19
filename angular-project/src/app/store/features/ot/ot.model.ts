@@ -1,12 +1,3 @@
-export interface Site {
-  id: number;
-  codigo: string;
-  nombre: string;
-  geo_lat: string;
-  geo_lon: string;
-  direccion: string;
-}
-
 export interface PMO {
   codigo: string;
 }

@@ -17,3 +17,4 @@ export * from './service/notify-after.service';
 export * from './service/informe-avance.service';
 export * from './service/acta.service';
 export * from './service/plan-proyecto.service';
+export * from './service/sitio.service';

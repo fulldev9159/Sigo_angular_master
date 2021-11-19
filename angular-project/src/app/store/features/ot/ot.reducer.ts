@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
 import * as Data from '@data';
-import { DataInformeAvance, Plan } from '@data';
+import { DataInformeAvance, Plan, Sitio } from '@data';
 
 export const otFeatureKey = 'ot';
 
@@ -16,7 +16,7 @@ export interface StateOt {
   itemsAbiertas: Data.OT[];
   itemsCerradas: Data.OT[];
   planes: Plan[];
-  sites: OTModel.Site[];
+  sitio: Sitio[];
   pmos: OTModel.PMO[];
   budgetLines: OTModel.Lp[];
   pep2s: OTModel.Pep2[];
@@ -49,7 +49,7 @@ export const initialStateOt: StateOt = {
   itemsAbiertas: [],
   itemsCerradas: [],
   planes: [],
-  sites: [],
+  sitio: [],
   pmos: [],
   budgetLines: [],
   pep2s: [],
@@ -123,10 +123,9 @@ export const reducerOt = createReducer(
     planes: payload.plans,
   })),
 
-  on(OtActions.getSite, state => state),
-  on(OtActions.getSiteSuccess, (state, payload) => ({
+  on(OtActions.getSiteSuccess, (state, { sitio }) => ({
     ...state,
-    sites: payload.site,
+    sitio,
   })),
 
   on(OtActions.getPmo, state => state),
@@ -320,7 +319,7 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.resetSitio, (state, payload) => ({
     ...state,
-    sites: [],
+    sitio: [],
   })),
   on(OtActions.resetPMO, (state, payload) => ({
     ...state,

@@ -12,6 +12,7 @@ import {
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  Sitio,
 } from '@data';
 
 @Injectable({
@@ -129,15 +130,11 @@ export class OtFacade {
   // PLANS
 
   // SITES
-  public getSitesAction(data): void {
-    this.store.dispatch(otActions.getSite(data));
+  public getSitesAction(plan_proyecto_id: number, region_id: number): void {
+    this.store.dispatch(otActions.getSite({ plan_proyecto_id, region_id }));
   }
 
-  public getSitesSuccess(site: OTmodel.Site[]): void {
-    this.store.dispatch(otActions.getSiteSuccess({ site }));
-  }
-
-  public getSitesSelector$(): Observable<OTmodel.Site[]> {
+  public getSitesSelector$(): Observable<Sitio[]> {
     return this.store.select(otSelectors.getSites);
   }
   // SITES
