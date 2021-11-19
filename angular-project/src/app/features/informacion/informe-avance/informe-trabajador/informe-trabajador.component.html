@@ -63,7 +63,7 @@
                 <td>{{car.cantidad_pendiente}}</td>
                 <!-- inf. -->
                 <td>
-                  <input [formControl]="formCntl(i)" min="0" type="number" style="width: 37px;">
+                  <input inputColor [formControl]="formCntl(i)" min="0" type="number" style="width: 37px;">
                   <div *ngIf="formCntl(i).invalid && (formCntl(i).dirty || formCntl(i).touched)">
                     <p-message severity="error" text="{{ errorMessageFn(formCntl(i).errors) }}"></p-message>
                   </div>
