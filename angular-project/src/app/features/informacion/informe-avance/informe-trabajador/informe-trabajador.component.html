@@ -37,6 +37,7 @@
                     text-align: center;">Mano de obra/Lpus</th>
               </tr>
               <tr>
+                <th rowspan="2">N°</th>
                 <th rowspan="2">Cor</th>
                 <th rowspan="2">Plano</th>
                 <th rowspan="2">Direccion</th>
@@ -60,6 +61,7 @@
             </thead>
             <tbody formArrayName="table">
               <tr *ngFor="let car of dataInformeAvance$|async; let i = index" [formGroupName]="i">
+                <td>{{i+1}}</td>
                 <td></td>
                 <td></td>
                 <td></td>
