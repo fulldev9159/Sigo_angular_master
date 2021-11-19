@@ -11,6 +11,10 @@
         </button> -->
       </div>
     </ng-template>
+    {{detalleTipo}}
+    <span *ngIf="detalleTipo==='BORRADOR_INFORME'">
+      <p-message severity="info" text="Está editando un borrador"></p-message>&nbsp;
+    </span>
     <span *ngIf="waitAP">
       <p-message severity="info" text="A la espera de aprobación por parte del gestor"></p-message>&nbsp;
     </span>
@@ -20,9 +24,14 @@
         INFO
       </span>
       <div class="data-info">
-        <div class="box"></div>
+        <div class="box box-1"></div>
         <span style="margin-left: 5px;">Cambios realizados en esta sesion</span>
       </div>
+      <div class="data-info">
+        <div class="box box-2"></div>
+        <span style="margin-left: 5px;">Valor informado es diferente al pendiente</span>
+      </div>
+
 
     </div>
 

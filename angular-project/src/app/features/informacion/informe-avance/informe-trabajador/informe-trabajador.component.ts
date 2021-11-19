@@ -33,6 +33,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     table: new FormArray([]),
   });
   DisplayConfirmacionModal = false;
+  detalleTipo = '';
   waitAP = false;
   informe_id = 0;
 
@@ -56,6 +57,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       this.dataInformeAvance$.subscribe(lpu => {
         if (lpu && lpu.length > 0) {
           this.informe_id = lpu[0].informe_id;
+          this.detalleTipo = lpu[0].detalle_tipo;
           lpu.forEach(lpu_service => {
             const group = new FormGroup({
               detalle_id: new FormControl(lpu_service.detalle_id, [
