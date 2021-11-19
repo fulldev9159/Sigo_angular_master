@@ -14,7 +14,6 @@ export class InputColorDirective {
   constructor(private elemetRef: ElementRef) {}
   @HostListener('input') logChange() {
     this.elemetRef.nativeElement.style.border = '2px solid #d3d309';
-    console.log(this.elemetRef.nativeElement.parentElement.parentElement);
     this.elemetRef.nativeElement.parentElement.parentElement.style.background =
       '#fdfd286b';
   }

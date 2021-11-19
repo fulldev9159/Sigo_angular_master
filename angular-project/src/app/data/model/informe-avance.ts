@@ -53,7 +53,7 @@ export interface RequestSaveBorradorInformeAvance {
 }
 export interface ResponseBorradorInformeAvance {
   data: {
-    id: number;
+    total_guardados: number;
   };
 
   status: {

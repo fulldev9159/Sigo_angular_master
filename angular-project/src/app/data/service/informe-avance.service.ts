@@ -110,29 +110,25 @@ export class InformAvenceService {
   saveBorradorInformeAvance(
     request: RequestSaveBorradorInformeAvance
   ): Observable<{
+    total_guardados: number;
     status: StatusResponse;
   }> {
-    // return this.http
-    //   .post<ResponseBorradorInformeAvance>(
-    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
-    //     {request}
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       return {
-    //         status: {
-    //           description: res.status.description,
-    //           responseCode: res.status.responseCode,
-    //         },
-    //       };
-    //     })
-    //   );
-    return of({
-      status: {
-        description: 'ok',
-        responseCode: 0,
-      },
-    });
+    return this.http
+      .post<ResponseBorradorInformeAvance>(
+        `${this.apiUrl}/infavan/informe/save`,
+        request
+      )
+      .pipe(
+        map(res => {
+          return {
+            total_guardados: res.data.total_guardados,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 
   saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): Observable<{
