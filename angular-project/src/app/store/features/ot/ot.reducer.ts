@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
 import * as Data from '@data';
-import { DataInformeAvance } from '@data';
+import { DataInformeAvance, Plan, PMO, Sitio } from '@data';
 
 export const otFeatureKey = 'ot';
 
@@ -15,9 +15,9 @@ export interface StateOt {
   otsEjecucion: Data.OT[];
   itemsAbiertas: Data.OT[];
   itemsCerradas: Data.OT[];
-  planes: OTModel.Plan[];
-  sites: OTModel.Site[];
-  pmos: OTModel.PMO[];
+  planes: Plan[];
+  sitio: Sitio[];
+  pmos: PMO[];
   budgetLines: OTModel.Lp[];
   pep2s: OTModel.Pep2[];
   ids_opex: OTModel.IDOpex[];
@@ -49,7 +49,7 @@ export const initialStateOt: StateOt = {
   itemsAbiertas: [],
   itemsCerradas: [],
   planes: [],
-  sites: [],
+  sitio: [],
   pmos: [],
   budgetLines: [],
   pep2s: [],
@@ -75,10 +75,10 @@ export const initialStateOt: StateOt = {
 export const reducerOt = createReducer(
   initialStateOt,
 
-  on(OtActions.getOtAbiertas, (state, { filtro_propietario, filtro_tipo }) => ({
+  on(OtActions.getOts, (state, { request }) => ({
     ...state,
-    filtro_propietario,
-    filtro_tipo,
+    filtro_propietario: request.filtro_propietario,
+    filtro_tipo: request.filtro_tipo,
   })),
   // on(
   //   OtActions.getOtEjecucion,
@@ -93,11 +93,11 @@ export const reducerOt = createReducer(
   //   filtro_propietario,
   //   filtro_tipo,
   // })),
-  on(OtActions.getOtSuccessEjecucion, (state, payload) => ({
+  on(OtActions.getOtEjecucionSuccess, (state, payload) => ({
     ...state,
     otsEjecucion: payload.ots,
   })),
-  on(OtActions.getOtSuccessAbiertas, (state, payload) => ({
+  on(OtActions.getOtAbiertasSuccess, (state, payload) => ({
     ...state,
     itemsAbiertas: payload.ots,
   })),
@@ -120,19 +120,18 @@ export const reducerOt = createReducer(
   on(OtActions.getPlans, state => state),
   on(OtActions.getPlansSuccess, (state, payload) => ({
     ...state,
-    planes: payload.plan,
+    planes: payload.plans,
   })),
 
-  on(OtActions.getSite, state => state),
-  on(OtActions.getSiteSuccess, (state, payload) => ({
+  on(OtActions.getSiteSuccess, (state, { sitio }) => ({
     ...state,
-    sites: payload.site,
+    sitio,
   })),
 
   on(OtActions.getPmo, state => state),
   on(OtActions.getPmoSuccess, (state, payload) => ({
     ...state,
-    pmos: payload.pmo,
+    pmos: payload.pmos,
   })),
 
   on(OtActions.getIDOpex, state => state),
@@ -320,7 +319,7 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.resetSitio, (state, payload) => ({
     ...state,
-    sites: [],
+    sitio: [],
   })),
   on(OtActions.resetPMO, (state, payload) => ({
     ...state,

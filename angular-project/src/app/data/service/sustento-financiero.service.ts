@@ -2,37 +2,37 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
-  ResponseSubcontratosProveedor,
+  PMO,
+  ResponseGetPMO4OT,
+  ResponseGetSitio4OT,
+  Sitio,
   StatusResponse,
-  SubcontratosProveedor,
 } from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProveedorService {
+export class SustentoFinancieroService {
   apiUrl = '';
   constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getProveedor4Cub(contrato_marco_id: number): Observable<{
-    proveedores4Cub: SubcontratosProveedor[];
+  getPMO4OT(sitio_codigo: string): Observable<{
+    pmos: PMO[];
     status: StatusResponse;
   }> {
     return this.http
-      .post<ResponseSubcontratosProveedor>(
-        `${this.apiUrl}/cubicacion/proveedores_subcontrato/get`,
-        { contrato_marco_id }
-      )
+      .post<ResponseGetPMO4OT>(`${this.apiUrl}/ingreot/pmo/get`, {
+        sitio_codigo,
+      })
       .pipe(
         map(res => {
           return {
-            proveedores4Cub: res.data.items
+            pmos: res.data.items
               ? res.data.items.sort((a, b) =>
-                  a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+                  a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
                 )
               : [],
             status: {

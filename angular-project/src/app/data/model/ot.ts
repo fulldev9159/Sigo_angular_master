@@ -7,7 +7,6 @@ export interface RequestGetOTs {
   filtro_tipo: string;
 }
 
-// GET OTS end
 export interface OT {
   id: number;
   nombre: string;
@@ -34,7 +33,7 @@ interface FieldOrder {
   ot_id: string;
 }
 
-export interface ResponseOTs {
+export interface ResponseGetOTs {
   data: {
     items: OT[];
   };
@@ -52,7 +51,7 @@ export interface ResponseOTs {
     responseCode: number;
   };
 }
-
+// GET OTS end
 export interface ApprovalOTResponse {
   data: {
     id: number;

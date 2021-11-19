@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Site } from '@storeOT/features/ot/ot.model';
+import { Sitio } from '@data';
 
 @Component({
   selector: 'app-plan-proyecto-detail',
@@ -8,7 +8,7 @@ import { Site } from '@storeOT/features/ot/ot.model';
 })
 export class PlanProyectoDetailComponent implements OnInit {
   @Input() nombrePlan: string;
-  @Input() sitio: Site;
+  @Input() sitio: Sitio;
 
   constructor() {}
 

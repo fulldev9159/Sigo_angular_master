@@ -1,24 +1,3 @@
-export interface Plan {
-  id: number;
-  nombre: string;
-  metas: string;
-  vendor: string;
-  tipo: string;
-}
-
-export interface Site {
-  id: number;
-  codigo: string;
-  nombre: string;
-  geo_lat: string;
-  geo_lon: string;
-  direccion: string;
-}
-
-export interface PMO {
-  codigo: string;
-}
-
 export interface Lp {
   lineas_presupuestarias: string[];
 }

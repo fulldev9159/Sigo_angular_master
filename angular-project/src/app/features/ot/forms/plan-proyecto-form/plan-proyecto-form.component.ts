@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
-import { Plan, Site } from '@storeOT/features/ot/ot.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { Cubicacion } from '@data';
+import { Cubicacion, Plan, Sitio } from '@data';
 
 @Component({
   selector: 'app-plan-proyecto-form',
@@ -14,7 +13,7 @@ import { Cubicacion } from '@data';
 export class PlanProyectoFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   planes$: Observable<Plan[]> = of([]);
-  sitios$: Observable<Site[]> = of([]);
+  sitios$: Observable<Sitio[]> = of([]);
 
   @Input() form: FormGroup;
 
@@ -25,9 +24,7 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
 
     this.cubicacion = cubicacion;
     if (cubicacion !== null && cubicacion !== undefined) {
-      this.otFacade.getPlansAction({
-        region_id: cubicacion.region_id,
-      });
+      this.otFacade.getPlans(+cubicacion.region_id);
     } else {
       this.form.get('plan_proyecto_id').disable();
     }
@@ -36,7 +33,7 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
   constructor(private otFacade: OtFacade) {}
 
   ngOnInit(): void {
-    this.planes$ = this.otFacade.getPlansSelector$().pipe(
+    this.planes$ = this.otFacade.getPlans$().pipe(
       map(proveedores => proveedores || []),
       tap(proveedores => this.checkPlanProyectoAndEnable(proveedores))
     );
@@ -55,10 +52,10 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
           if (plan_proyecto_id !== null && plan_proyecto_id !== undefined) {
             // const plan = planes.find(p => +p.id === +plan_proyecto_id);
             if (this.cubicacion) {
-              this.otFacade.getSitesAction({
-                plan_proyecto_id,
-                region_id: this.cubicacion.region_id,
-              });
+              this.otFacade.getSitesAction(
+                +plan_proyecto_id,
+                +this.cubicacion.region_id
+              );
             }
           } else {
             this.checkSitiosAndEnable([]);
@@ -89,7 +86,7 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkSitiosAndEnable(sitios: Site[]): void {
+  checkSitiosAndEnable(sitios: Sitio[]): void {
     if (sitios.length > 0) {
       this.form.get('sitio_id').enable();
     } else {

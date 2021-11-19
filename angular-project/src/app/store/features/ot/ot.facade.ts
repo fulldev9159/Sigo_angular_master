@@ -8,8 +8,12 @@ import * as Data from '@data';
 import {
   DataInformeAvance,
   LpuInformeAvanceDetalle,
+  Plan,
+  PMO,
+  RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  Sitio,
 } from '@data';
 
 @Injectable({
@@ -19,26 +23,29 @@ export class OtFacade {
   constructor(private store: Store<Data.OT>) {}
 
   // OT
-  public getOts({ filtro_propietario, filtro_tipo }): void {
+  public getOts(request: RequestGetOTs): void {
     this.store.dispatch(
-      otActions.getOtEjecucion({
-        filtro_tipo,
-        filtro_propietario,
-        filtro_pestania: 'EN_EJECUCION',
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'EN_EJECUCION',
+        },
       })
     );
     this.store.dispatch(
-      otActions.getOtAbiertas({
-        filtro_propietario,
-        filtro_tipo,
-        filtro_pestania: 'ABIERTAS',
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'ABIERTAS',
+        },
       })
     );
     this.store.dispatch(
-      otActions.getOtCerradas({
-        filtro_propietario,
-        filtro_tipo,
-        filtro_pestania: 'CERRADAS',
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'CERRADAS',
+        },
       })
     );
   }
@@ -114,43 +121,31 @@ export class OtFacade {
   // OT
 
   // PLANS
-  public getPlansAction(data): void {
-    this.store.dispatch(otActions.getPlans(data));
+  public getPlans(region_id: number): void {
+    this.store.dispatch(otActions.getPlans({ region_id }));
   }
 
-  public getPlansSuccess(plan: OTmodel.Plan[]): void {
-    this.store.dispatch(otActions.getPlansSuccess({ plan }));
-  }
-
-  public getPlansSelector$(): Observable<OTmodel.Plan[]> {
+  public getPlans$(): Observable<Plan[]> {
     return this.store.select(otSelectors.getPlans);
   }
   // PLANS
 
   // SITES
-  public getSitesAction(data): void {
-    this.store.dispatch(otActions.getSite(data));
+  public getSitesAction(plan_proyecto_id: number, region_id: number): void {
+    this.store.dispatch(otActions.getSite({ plan_proyecto_id, region_id }));
   }
 
-  public getSitesSuccess(site: OTmodel.Site[]): void {
-    this.store.dispatch(otActions.getSiteSuccess({ site }));
-  }
-
-  public getSitesSelector$(): Observable<OTmodel.Site[]> {
+  public getSitesSelector$(): Observable<Sitio[]> {
     return this.store.select(otSelectors.getSites);
   }
   // SITES
 
   // PMOS
-  public getPmosAction(data): void {
-    this.store.dispatch(otActions.getPmo(data));
+  public getPmosAction(sitio_codigo: string): void {
+    this.store.dispatch(otActions.getPmo({ sitio_codigo }));
   }
 
-  public getPmosSuccess(pmo: OTmodel.PMO[]): void {
-    this.store.dispatch(otActions.getPmoSuccess({ pmo }));
-  }
-
-  public getPmosSelector$(): Observable<OTmodel.PMO[]> {
+  public getPmosSelector$(): Observable<PMO[]> {
     return this.store.select(otSelectors.getPmos);
   }
   // PMOS

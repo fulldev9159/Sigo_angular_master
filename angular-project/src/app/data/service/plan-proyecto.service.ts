@@ -2,35 +2,29 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SnackBarService } from '@utilsSIGO/snack-bar';
-import {
-  ResponseSubcontratosProveedor,
-  StatusResponse,
-  SubcontratosProveedor,
-} from '@data';
+import { Plan, ResponseGetPlanes4OT, StatusResponse } from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProveedorService {
+export class PlanProyectoService {
   apiUrl = '';
   constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getProveedor4Cub(contrato_marco_id: number): Observable<{
-    proveedores4Cub: SubcontratosProveedor[];
+  getPlans4OT(region_id: number): Observable<{
+    plans: Plan[];
     status: StatusResponse;
   }> {
     return this.http
-      .post<ResponseSubcontratosProveedor>(
-        `${this.apiUrl}/cubicacion/proveedores_subcontrato/get`,
-        { contrato_marco_id }
-      )
+      .post<ResponseGetPlanes4OT>(`${this.apiUrl}/ingreot/plan/get_all`, {
+        region_id,
+      })
       .pipe(
         map(res => {
           return {
-            proveedores4Cub: res.data.items
+            plans: res.data.items
               ? res.data.items.sort((a, b) =>
                   a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
                 )

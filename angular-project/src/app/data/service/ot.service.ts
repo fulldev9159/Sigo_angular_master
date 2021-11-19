@@ -7,7 +7,7 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import {
   OT,
-  ResponseOTs,
+  ResponseGetOTs,
   User,
   UsersResponse,
   ApprovalOTResponse,
@@ -20,6 +20,7 @@ import {
   RejectOTMinutesGenerationResponse,
   ApprovalPagoOTResponse,
   RequestGetOTs,
+  StatusResponse,
 } from '@data';
 
 @Injectable({
@@ -35,20 +36,21 @@ export class OTService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getOTs(request: RequestGetOTs): Observable<OT[]> {
+  getOTs(request: RequestGetOTs): Observable<{
+    ots: OT[];
+    status: StatusResponse;
+  }> {
     return this.http
-      .post<ResponseOTs>(`${this.apiUrl}/ingreot/ot/get`, request)
+      .post<ResponseGetOTs>(`${this.apiUrl}/ingreot/ot/get`, request)
       .pipe(
-        map(response => {
-          if (+response.status.responseCode !== 0) {
-            if (response.status.description !== 'Sin resultados') {
-              this.snackService.showMessage(
-                `${response.status.description}`,
-                ''
-              );
-            }
-          }
-          return response.data.items;
+        map(res => {
+          return {
+            ots: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
         })
       );
   }

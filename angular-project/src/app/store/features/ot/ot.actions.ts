@@ -5,59 +5,95 @@ import {
   DataInformeAvance,
   LpuInformeAvanceDetalle,
   OT,
+  Plan,
+  PMO,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  Sitio,
   StatusResponse,
 } from '@data';
 
-// GET OTs EJECUCION init
+// GET OTs init
 
-export const getOtEjecucion = createAction(
-  '[Ot Get Ejecucion] GET Ot Ejecucion',
+export const getOts = createAction(
+  '[OT] Get Ots',
   props<{
-    filtro_pestania: string;
-    filtro_propietario: string;
-    filtro_tipo: string;
-  }>()
-);
-export const getOtSuccessEjecucion = createAction(
-  '[Ot GetAll] GET Ot Success Ejecucion',
-  props<{ ots: OT[] }>()
-);
-// GET OTs EJECUCION end
-
-export const getOtAbiertas = createAction(
-  '[Ot Get Abiertas] GET Ot Abiertas',
-  props<{
-    filtro_pestania: string;
-    filtro_propietario: string;
-    filtro_tipo: string;
+    request: RequestGetOTs;
   }>()
 );
 
-export const getOtCerradas = createAction(
-  '[Ot Get Cerradas] GET Ot Cerradas',
-  props<{
-    filtro_pestania: string;
-    filtro_propietario: string;
-    filtro_tipo: string;
-  }>()
+export const getOtEjecucionSuccess = createAction(
+  '[OT] GET Ot Success Ejecucion',
+  props<{ ots: OT[]; status: StatusResponse }>()
 );
 
-export const getOtSuccessAbiertas = createAction(
-  '[Ot GetAll] GET Ot Success Abiertas',
-  props<{ ots: OT[] }>()
+export const getOtAbiertasSuccess = createAction(
+  '[OT] GET Ot Success Abiertas',
+  props<{ ots: OT[]; status: StatusResponse }>()
 );
 
 export const getOtSuccessCerradas = createAction(
   '[Ot GetAll] GET Ot Success Cerradas',
-  props<{ ots: OT[] }>()
+  props<{ ots: OT[]; status: StatusResponse }>()
 );
-export const getOtError = createAction(
+export const getOtsError = createAction(
   '[Ot GetAll] GET Ot Error',
   props<{ error: any }>()
 );
+// GET OTs end
+
+// GET Planes init
+export const getPlans = createAction(
+  '[OT] GET Planes',
+  props<{ region_id: number }>()
+);
+
+export const getPlansSuccess = createAction(
+  '[OT] GET Planes Success',
+  props<{ plans: Plan[]; status: StatusResponse }>()
+);
+
+export const getPlansError = createAction(
+  '[OT] GET Planes Error',
+  props<{ error: any }>()
+);
+// GET Planes end
+
+// GET Sitio init
+export const getSite = createAction(
+  '[Sites Get By Id Plan] GET By Id Plan',
+  props<{ plan_proyecto_id: number; region_id: number }>()
+);
+
+export const getSiteSuccess = createAction(
+  '[Sites Get By Id Plan] GET By Id Plan Success',
+  props<{ sitio: Sitio[]; status: StatusResponse }>()
+);
+
+export const getSiteError = createAction(
+  '[Sites Get By Id Plan] GET By Id Plan Error',
+  props<{ error: any }>()
+);
+// GET Sitio end
+
+// GET PMO init
+export const getPmo = createAction(
+  '[OT] GET PMO',
+  props<{ sitio_codigo: string }>()
+);
+
+export const getPmoSuccess = createAction(
+  '[OT] GET PMO Success',
+  props<{ pmos: PMO[]; status: StatusResponse }>()
+);
+
+export const getPmoError = createAction(
+  '[OT] GET PMO Error',
+  props<{ error: any }>()
+);
+
+// GET PMO end
 
 export const deleteOt = createAction(
   '[Ot DeleteById] DELETE Ot',
@@ -148,50 +184,6 @@ export const postOtSCESuccess = createAction(
 // OT LIST
 
 // OT FORM
-export const getPlans = createAction(
-  '[Plans Get By Id Cobage] GET By Id Cobage',
-  props<{ token: string; region_id: number }>()
-);
-
-export const getPlansSuccess = createAction(
-  '[Plans Get By Id Cobage] GET By Id Cobage Success',
-  props<{ plan: OtModel.Plan[] }>()
-);
-
-export const getPlansError = createAction(
-  '[Plans Get By Id Cobage] GET By Id Cobage Error',
-  props<{ error: any }>()
-);
-
-export const getSite = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan',
-  props<{ plan_proyecto_id: number; region_id: number }>()
-);
-
-export const getSiteSuccess = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan Success',
-  props<{ site: OtModel.Site[] }>()
-);
-
-export const getSiteError = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan Error',
-  props<{ error: any }>()
-);
-
-export const getPmo = createAction(
-  '[Pmo Get By Id Site] GET By Id Site',
-  props<{ sitio_codigo: number }>()
-);
-
-export const getPmoSuccess = createAction(
-  '[Pmo Get By Id Site] GET By Id Site Success',
-  props<{ pmo: OtModel.PMO[] }>()
-);
-
-export const getPmoError = createAction(
-  '[Pmo Get By Id Site] GET By Id Site Error',
-  props<{ error: any }>()
-);
 
 export const getIDOpex = createAction('[IDOpex Get All] GET All');
 

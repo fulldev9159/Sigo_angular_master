@@ -472,6 +472,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.otFacade.getOts({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
+      filtro_pestania: '',
     });
   }
 
@@ -485,6 +486,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       this.otFacade.getOts({
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
+        filtro_pestania: '',
       });
     } else if (this.selectedIndex === 1) {
       // console.log(this.selectedIndex);
@@ -494,6 +496,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       this.otFacade.getOts({
         filtro_propietario: this.responsable,
         filtro_tipo: this.tipoOT,
+        filtro_pestania: '',
       });
     }
   }
@@ -510,6 +513,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.otFacade.getOts({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
+      filtro_pestania: '',
     });
   }
 
@@ -520,6 +524,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.otFacade.getOts({
       filtro_propietario: this.responsable,
       filtro_tipo: this.tipoOT,
+      filtro_pestania: '',
     });
   }
 

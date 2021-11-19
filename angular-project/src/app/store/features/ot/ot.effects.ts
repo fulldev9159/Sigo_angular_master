@@ -35,6 +35,9 @@ export class OtEffects {
     private snackService: SnackBarService,
     private otService: Data.OTService,
     private informeAvanceService: Data.InformAvenceService,
+    private planProyectoService: Data.PlanProyectoService,
+    private sitioService: Data.SitioService,
+    private sustentofinancieroService: Data.SustentoFinancieroService,
     private actaService: Data.ActaService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
@@ -43,75 +46,36 @@ export class OtEffects {
     private router: Router
   ) {}
 
-  getOTsEjecucion$ = createEffect(() =>
+  getOTs$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(otActions.getOtEjecucion),
-      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
-        const request: RequestGetOTs = {
-          filtro_pestania,
-          filtro_propietario,
-          filtro_tipo,
-        };
-        return this.otService.getOTs(request).pipe(
-          map(ots => otActions.getOtSuccessEjecucion({ ots })),
-          catchError(error => of(otActions.getOtError({ error })))
-        );
-      })
-    )
-  );
-
-  getOTsAbiertas$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getOtAbiertas),
-      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
-        const request: RequestGetOTs = {
-          filtro_pestania,
-          filtro_propietario,
-          filtro_tipo,
-        };
-        return this.otService.getOTs(request).pipe(
-          map(ots => otActions.getOtSuccessAbiertas({ ots })),
-          catchError(error => of(otActions.getOtError({ error })))
-        );
-      })
-    )
-  );
-
-  getOTsCerradas$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getOtCerradas),
-      concatMap(({ filtro_pestania, filtro_propietario, filtro_tipo }) => {
-        const request: RequestGetOTs = {
-          filtro_pestania,
-          filtro_propietario,
-          filtro_tipo,
-        };
-        return this.otService.getOTs(request).pipe(
-          map(ots => otActions.getOtSuccessCerradas({ ots })),
-          catchError(error => of(otActions.getOtError({ error })))
-        );
-      })
+      ofType(otActions.getOts),
+      concatMap(({ request }) =>
+        this.otService.getOTs(request).pipe(
+          map(({ ots, status }) => {
+            if (request.filtro_pestania === 'EN_EJECUCION') {
+              return otActions.getOtEjecucionSuccess({ ots, status });
+            } else if (request.filtro_pestania === 'ABIERTAS') {
+              return otActions.getOtAbiertasSuccess({ ots, status });
+            } else if (request.filtro_pestania === 'CERRADAS') {
+              return otActions.getOtSuccessCerradas({ ots, status });
+            }
+          }),
+          catchError(error => of(otActions.getOtsError({ error })))
+        )
+      )
     )
   );
 
   getPlans$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getPlans),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/plan/get_all`, {
-            token: data.token,
-            region_id: data.region_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return otActions.getPlansSuccess({ plan: res.data.items });
-            }),
-            catchError(err => of(otActions.getPlansError({ error: err })))
-          )
+      concatMap(({ region_id }) =>
+        this.planProyectoService.getPlans4OT(region_id).pipe(
+          map(({ plans, status }) =>
+            otActions.getPlansSuccess({ plans, status })
+          ),
+          catchError(error => of(otActions.getPlansError({ error })))
+        )
       )
     )
   );
@@ -119,39 +83,17 @@ export class OtEffects {
   getSites$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getSite),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/sitio/get`, {
-            plan_proyecto_id: +data.plan_proyecto_id,
-            region_id: +data.region_id,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                if (res.status.description === 'Sin resultados') {
-                  this.snackService.showMessage(
-                    `No existen sitios para el proyecto seleccionado - ${res.status.description}`,
-                    'warning'
-                  );
-                } else {
-                  this.snackService.showMessage(
-                    res.status.description,
-                    'error'
-                  );
-                }
-              }
-              console.log();
-              const SortSites = res.data.items
-                ? res.data.items.sort((a: OtModel.Site, b: OtModel.Site) =>
-                    a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-                  )
-                : [];
-              return otActions.getSiteSuccess({
-                site: SortSites,
-              });
-            }),
+      concatMap(({ plan_proyecto_id, region_id }) =>
+        this.sitioService.getSitios4OT(plan_proyecto_id, region_id).pipe(
+          map(
+            ({ sitio, status }) =>
+              otActions.getSiteSuccess({
+                sitio,
+                status,
+              }),
             catchError(err => of(otActions.getSiteError({ error: err })))
           )
+        )
       )
     )
   );
@@ -159,27 +101,16 @@ export class OtEffects {
   getPmo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getPmo),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/pmo/get`, {
-            sitio_codigo: data.sitio_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const SortPMOs = res.data.items
-                ? res.data.items.sort((a: OtModel.PMO, b: OtModel.PMO) =>
-                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                  )
-                : [];
-              return otActions.getPmoSuccess({
-                pmo: SortPMOs,
-              });
-            }),
-            catchError(err => of(otActions.getPmoError({ error: err })))
-          )
+      concatMap(({ sitio_codigo }) =>
+        this.sustentofinancieroService.getPMO4OT(sitio_codigo).pipe(
+          map(({ pmos, status }) =>
+            otActions.getPmoSuccess({
+              pmos,
+              status,
+            })
+          ),
+          catchError(error => of(otActions.getPmoError({ error })))
+        )
       )
     )
   );
@@ -415,6 +346,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -460,6 +392,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -520,6 +453,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -581,6 +515,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -627,6 +562,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -676,6 +612,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -727,6 +664,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -780,6 +718,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -833,6 +772,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -886,6 +826,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -934,6 +875,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -980,6 +922,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -1026,6 +969,7 @@ export class OtEffects {
           this.otFacade.getOts({
             filtro_propietario,
             filtro_tipo,
+            filtro_pestania: '',
           });
         })
       ),
@@ -1301,6 +1245,9 @@ export class OtEffects {
     () =>
       this.actions$.pipe(
         ofType(
+          otActions.getOtEjecucionSuccess,
+          otActions.getOtAbiertasSuccess,
+          otActions.getOtSuccessCerradas,
           otActions.saveBorradorInformeAvanceSuccess,
           otActions.saveInformeAvanceTrabajadorSuccess,
           otActions.saveInformeAvanceAdminECSuccess,
@@ -1310,43 +1257,14 @@ export class OtEffects {
           otActions.getDataInformeActaSuccess,
           otActions.saveInformeActaSuccess,
           otActions.rechazarInformeActaSuccess,
-          otActions.inicializarInformeAvanceSuccess
+          otActions.inicializarInformeAvanceSuccess,
+          otActions.getPlansSuccess,
+          otActions.getSiteSuccess,
+          otActions.getPmoSuccess
         ),
-        tap(action => {
-          if (+action.status.responseCode === 0) {
-            if (
-              action.type ===
-                otActions.saveInformeAvanceTrabajadorSuccess.type ||
-              action.type === otActions.saveInformeAvanceAdminECSuccess.type
-            ) {
-              window.location.reload();
-            }
-
-            if (this.messageServiceInt.messageOk(action.type) !== undefined) {
-              this.snackService.showMessage(
-                `${this.messageServiceInt.messageOk(action.type)} - ${
-                  action.status.description
-                }`,
-                'ok',
-                3000
-              );
-            }
-          } else if (+action.status.responseCode === 1) {
-            this.snackService.showMessage(
-              `${this.messageServiceInt.messageInfoSinResultado(
-                action.type
-              )} - ${action.status.description}`,
-              'info',
-              2000
-            );
-          } else {
-            this.snackService.showMessage(
-              `PROBLEM - ${action.status.description}`,
-              'info',
-              2000
-            );
-          }
-        })
+        tap(action =>
+          this.messageServiceInt.actions200(action.status, action.type)
+        )
       ),
     { dispatch: false }
   );
@@ -1355,6 +1273,7 @@ export class OtEffects {
     () =>
       this.actions$.pipe(
         ofType(
+          otActions.getOtsError,
           otActions.saveBorradorInformeAvanceError,
           otActions.saveInformeAvanceError,
           otActions.getDataInformeAvanceError,
@@ -1362,17 +1281,17 @@ export class OtEffects {
           otActions.getDataInformeActaError,
           otActions.saveInformeActaError,
           otActions.rechazarInformeActaError,
-          otActions.inicializarInformeAvanceError
+          otActions.inicializarInformeAvanceError,
+          otActions.getPlansError,
+          otActions.getSiteError,
+          otActions.getPmoError
         ),
-        tap(action => {
-          this.snackService.showMessage(
-            `${this.messageServiceInt.messageError(action.type)} - ${
-              action.error.message
-            }`,
-            'error',
-            4000
-          );
-        })
+        tap(action =>
+          this.messageServiceInt.actionsErrors(
+            action.error.message,
+            action.type
+          )
+        )
       ),
     { dispatch: false }
   );

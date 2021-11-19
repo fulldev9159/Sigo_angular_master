@@ -39,7 +39,7 @@ export const getPlans = createSelector(
 
 export const getSites = createSelector(
   selectOt,
-  (state: fromOt.StateOt) => state.sites
+  (state: fromOt.StateOt) => state.sitio
 );
 
 export const getPmos = createSelector(
