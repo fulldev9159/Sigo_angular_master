@@ -1,7 +1,3 @@
-export interface PMO {
-  codigo: string;
-}
-
 export interface Lp {
   lineas_presupuestarias: string[];
 }

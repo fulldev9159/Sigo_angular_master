@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-import { PMO, RequestCreateOT } from '@storeOT/features/ot/ot.model';
+import { RequestCreateOT } from '@storeOT/features/ot/ot.model';
 import { Cubicacion, Login, Sitio } from '@data';
 import { GeneralFormComponent } from '../../forms/general-form/general-form.component';
 import { PlanProyectoFormComponent } from '../../forms/plan-proyecto-form/plan-proyecto-form.component';
@@ -178,9 +178,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
               // TODO descomentar ésto cuando la obtención del tipo de contrato sea dinámica
               if (contractType === 'Fijo' || contractType === 'Ordinario') {
                 // TODO: se necesita obtener el listado de PMOs sin especificar un sitio
-                this.otFacade.getPmosAction({
-                  sitio_codigo: '',
-                });
+                this.otFacade.getPmosAction('');
               }
 
               this.contractType$.next(contractType);
@@ -226,9 +224,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
             this.sitioSeleccionado = sitios.find(s => +s.id === +sitio_id);
 
             if (this.sitioSeleccionado) {
-              this.otFacade.getPmosAction({
-                sitio_codigo: this.sitioSeleccionado.codigo,
-              });
+              this.otFacade.getPmosAction(this.sitioSeleccionado.codigo);
             }
           } else {
             this.disablePMOCodigoFormControl();

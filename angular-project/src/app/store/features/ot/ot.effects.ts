@@ -37,6 +37,7 @@ export class OtEffects {
     private informeAvanceService: Data.InformAvenceService,
     private planProyectoService: Data.PlanProyectoService,
     private sitioService: Data.SitioService,
+    private sustentofinancieroService: Data.SustentoFinancieroService,
     private actaService: Data.ActaService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
@@ -100,27 +101,16 @@ export class OtEffects {
   getPmo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getPmo),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/pmo/get`, {
-            sitio_codigo: data.sitio_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const SortPMOs = res.data.items
-                ? res.data.items.sort((a: OtModel.PMO, b: OtModel.PMO) =>
-                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                  )
-                : [];
-              return otActions.getPmoSuccess({
-                pmo: SortPMOs,
-              });
-            }),
-            catchError(err => of(otActions.getPmoError({ error: err })))
-          )
+      concatMap(({ sitio_codigo }) =>
+        this.sustentofinancieroService.getPMO4OT(sitio_codigo).pipe(
+          map(({ pmos, status }) =>
+            otActions.getPmoSuccess({
+              pmos,
+              status,
+            })
+          ),
+          catchError(error => of(otActions.getPmoError({ error })))
+        )
       )
     )
   );
@@ -1269,7 +1259,8 @@ export class OtEffects {
           otActions.rechazarInformeActaSuccess,
           otActions.inicializarInformeAvanceSuccess,
           otActions.getPlansSuccess,
-          otActions.getSiteSuccess
+          otActions.getSiteSuccess,
+          otActions.getPmoSuccess
         ),
         tap(action =>
           this.messageServiceInt.actions200(action.status, action.type)
@@ -1292,7 +1283,8 @@ export class OtEffects {
           otActions.rechazarInformeActaError,
           otActions.inicializarInformeAvanceError,
           otActions.getPlansError,
-          otActions.getSiteError
+          otActions.getSiteError,
+          otActions.getPmoError
         ),
         tap(action =>
           this.messageServiceInt.actionsErrors(

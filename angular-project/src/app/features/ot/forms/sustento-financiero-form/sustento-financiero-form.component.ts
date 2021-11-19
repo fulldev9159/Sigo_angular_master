@@ -8,7 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import {
-  PMO,
   IDOpex,
   CuentaSap,
   Lp,
@@ -16,6 +15,7 @@ import {
   CECO,
 } from '@storeOT/features/ot/ot.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
+import { PMO } from '@data';
 
 @Component({
   selector: 'app-sustento-financiero-form',

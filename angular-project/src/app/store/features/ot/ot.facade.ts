@@ -9,6 +9,7 @@ import {
   DataInformeAvance,
   LpuInformeAvanceDetalle,
   Plan,
+  PMO,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
@@ -140,15 +141,11 @@ export class OtFacade {
   // SITES
 
   // PMOS
-  public getPmosAction(data): void {
-    this.store.dispatch(otActions.getPmo(data));
+  public getPmosAction(sitio_codigo: string): void {
+    this.store.dispatch(otActions.getPmo({ sitio_codigo }));
   }
 
-  public getPmosSuccess(pmo: OTmodel.PMO[]): void {
-    this.store.dispatch(otActions.getPmoSuccess({ pmo }));
-  }
-
-  public getPmosSelector$(): Observable<OTmodel.PMO[]> {
+  public getPmosSelector$(): Observable<PMO[]> {
     return this.store.select(otSelectors.getPmos);
   }
   // PMOS

@@ -6,6 +6,7 @@ import {
   LpuInformeAvanceDetalle,
   OT,
   Plan,
+  PMO,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
@@ -75,6 +76,24 @@ export const getSiteError = createAction(
   props<{ error: any }>()
 );
 // GET Sitio end
+
+// GET PMO init
+export const getPmo = createAction(
+  '[OT] GET PMO',
+  props<{ sitio_codigo: string }>()
+);
+
+export const getPmoSuccess = createAction(
+  '[OT] GET PMO Success',
+  props<{ pmos: PMO[]; status: StatusResponse }>()
+);
+
+export const getPmoError = createAction(
+  '[OT] GET PMO Error',
+  props<{ error: any }>()
+);
+
+// GET PMO end
 
 export const deleteOt = createAction(
   '[Ot DeleteById] DELETE Ot',
@@ -165,21 +184,6 @@ export const postOtSCESuccess = createAction(
 // OT LIST
 
 // OT FORM
-
-export const getPmo = createAction(
-  '[Pmo Get By Id Site] GET By Id Site',
-  props<{ sitio_codigo: number }>()
-);
-
-export const getPmoSuccess = createAction(
-  '[Pmo Get By Id Site] GET By Id Site Success',
-  props<{ pmo: OtModel.PMO[] }>()
-);
-
-export const getPmoError = createAction(
-  '[Pmo Get By Id Site] GET By Id Site Error',
-  props<{ error: any }>()
-);
 
 export const getIDOpex = createAction('[IDOpex Get All] GET All');
 

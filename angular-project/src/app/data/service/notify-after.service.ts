@@ -107,6 +107,7 @@ export class NotifyAfter {
       msg[otActions.getPlansSuccess.type] = 'No existen planes de proyectos';
       msg[otActions.getSiteSuccess.type] =
         'No existen sitios para el proyecto escogido';
+      msg[otActions.getPmoSuccess.type] = 'No existen pmos';
       if (msg[action] !== undefined) {
         this.snackService.showMessage(
           `${msg[action]}- ${status.description}`,
@@ -160,6 +161,7 @@ export class NotifyAfter {
     msg[otActions.getPlansError.type] = 'No se pudo obtener los planes';
     msg[otActions.getOtsError.type] = 'Falló la obtención de OTs';
     msg[otActions.getSiteError.type] = 'Falló la obtención de Sitios';
+    msg[otActions.getPmoError.type] = 'Falló la obtención de PMOs';
 
     this.snackService.showMessage(`${msg[action]} - ${message}`, 'error', 4000);
   }
