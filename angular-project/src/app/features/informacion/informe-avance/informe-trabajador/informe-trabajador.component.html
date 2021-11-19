@@ -14,6 +14,18 @@
     <span *ngIf="waitAP">
       <p-message severity="info" text="A la espera de aprobación por parte del gestor"></p-message>&nbsp;
     </span>
+
+    <div class="info">
+      <span class="info-title">
+        INFO
+      </span>
+      <div class="data-info">
+        <div class="box"></div>
+        <span style="margin-left: 5px;">Cambios realizados en esta sesion</span>
+      </div>
+
+    </div>
+
     <p-tabView>
       <p-tabPanel header="LPUs">
         <form [formGroup]="form">

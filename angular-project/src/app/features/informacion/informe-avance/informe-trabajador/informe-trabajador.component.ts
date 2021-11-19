@@ -58,7 +58,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
           this.informe_id = lpu[0].informe_id;
           lpu.forEach(lpu_service => {
             const group = new FormGroup({
-              lpu_id: new FormControl(lpu_service.detalle_id, [
+              detalle_id: new FormControl(lpu_service.detalle_id, [
                 Validators.required,
               ]),
               informado: new FormControl(lpu_service.cantidad_informada, [
@@ -97,7 +97,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   formCntlLpuID(index: number): AbstractControl {
     const indext = 'table';
     return (this.form.controls[indext] as FormArray).controls[index].get(
-      'lpu_id'
+      'detalle_id'
     );
   }
 
@@ -120,7 +120,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     const lpus: LpuInformeAvanceDetalle[] = (
       this.form.get('table') as FormArray
     ).value.map(f => {
-      return { id_lpu: f.lpu_id, informado: f.informado };
+      return { id_lpu: f.detalle_id, informado: f.informado };
     });
 
     const request: RequestSaveInformeAvance = {
@@ -135,7 +135,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     const lpus: LpuInformeAvanceDetalle[] = (
       this.form.get('table') as FormArray
     ).value.map(f => {
-      return { detalle_id: f.lpu_id, cantidad_informada: f.informado };
+      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
     });
 
     const request: RequestSaveBorradorInformeAvance = {

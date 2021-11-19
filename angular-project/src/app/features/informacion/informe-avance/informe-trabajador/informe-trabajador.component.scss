@@ -27,4 +27,35 @@
     display: flex;
     justify-content: center;
   }
+
+  .box {
+    border: 1px solid #d3d309;
+    width: 17px;
+    height: 16px;
+    background: #fdfd286b;
+  }
+
+  .info {
+    border: 1px solid #00507a69;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 343px;
+  }
+
+  .info-title {
+    top: -13px;
+    left: 10px;
+    position: relative;
+    background: white;
+    font-weight: 700;
+    color: #655e5c;
+    font-size: 14px;
+  }
+
+  .data-info {
+    display: flex;
+    padding: 10px;
+    margin-top: -12px;
+    align-items: center;
+  }
 }
