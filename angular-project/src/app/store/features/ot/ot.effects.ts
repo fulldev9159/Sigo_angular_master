@@ -1159,10 +1159,12 @@ export class OtEffects {
   saveBorradorInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveBorradorInformeAvance),
-      concatMap(({ request }) =>
+      withLatestFrom(this.otFacade.getInfoOtId$()),
+      concatMap(([{ request }, ot_id]) =>
         this.informeAvanceService.saveBorradorInformeAvance(request).pipe(
           map(({ status }) =>
             otActions.saveBorradorInformeAvanceSuccess({
+              ot_id,
               status,
             })
           ),
@@ -1263,7 +1265,7 @@ export class OtEffects {
           otActions.getPmoSuccess
         ),
         tap(action =>
-          this.messageServiceInt.actions200(action.status, action.type)
+          this.messageServiceInt.actions200(action.status, action.type, action)
         )
       ),
     { dispatch: false }

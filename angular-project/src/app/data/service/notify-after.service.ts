@@ -4,6 +4,7 @@ import * as cubActions from '@storeOT/features/cubicacion/cubicacion.actions';
 import * as otActions from '@storeOT/features/ot/ot.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Router } from '@angular/router';
 import { StatusResponse } from '@data';
 
@@ -17,6 +18,7 @@ interface Message {
 export class NotifyAfter {
   constructor(
     private cubageFacade: CubicacionFacade,
+    private otFacade: OtFacade,
     private snackService: SnackBarService,
     private router: Router
   ) {}
@@ -39,7 +41,7 @@ export class NotifyAfter {
   // StatusPermissionNotFound es el estado por falta de permisos
   // StatusPermissionNotFound = 5
 
-  actions200(status: StatusResponse, action: string): void {
+  actions200(status: StatusResponse, action: string, data?: any): void {
     const msg: Message = {};
 
     if (+status.responseCode === 0) {
@@ -74,6 +76,10 @@ export class NotifyAfter {
         action === otActions.saveInformeAvanceAdminECSuccess.type
       ) {
         window.location.reload();
+      }
+
+      if (action === otActions.saveBorradorInformeAvanceSuccess.type) {
+        this.otFacade.getDataInformeAvanceTrabajador(+data.ot_id);
       }
 
       if (msg[action] !== undefined) {

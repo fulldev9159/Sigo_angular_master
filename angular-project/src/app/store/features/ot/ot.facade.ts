@@ -407,4 +407,8 @@ export class OtFacade {
   public rechazarInformeActa(informe_id: number): void {
     this.store.dispatch(otActions.rechazarInformeActa({ informe_id }));
   }
+
+  public getInfoOtId$(): Observable<number> {
+    return this.store.select(otSelectors.getInfoOtId);
+  }
 }

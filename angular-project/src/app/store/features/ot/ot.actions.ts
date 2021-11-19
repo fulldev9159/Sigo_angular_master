@@ -595,7 +595,7 @@ export const saveBorradorInformeAvance = createAction(
 
 export const saveBorradorInformeAvanceSuccess = createAction(
   '[OT] SAVE borrador informe avance success',
-  props<{ status: StatusResponse }>()
+  props<{ ot_id: number; status: StatusResponse }>()
 );
 
 export const saveBorradorInformeAvanceError = createAction(
