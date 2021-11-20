@@ -1127,10 +1127,12 @@ export class OtEffects {
   saveInformeAvanceTrabajador$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveInformeAvanceTrabajador),
-      concatMap(({ request }) =>
+      withLatestFrom(this.otFacade.getInfoOtId$()),
+      concatMap(([{ request }, ot_id]) =>
         this.informeAvanceService.saveInformeAvanceTrabajador(request).pipe(
           map(({ status }) =>
             otActions.saveInformeAvanceTrabajadorSuccess({
+              ot_id,
               status,
             })
           ),

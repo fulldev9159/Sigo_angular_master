@@ -8,6 +8,7 @@ import {
   RequestSaveInformeAvance,
   ResponseBorradorInformeAvance,
   ResponseInicializarInformeAvance,
+  ResponseSendInformeAvance,
   StatusResponse,
 } from '@data';
 import { map } from 'rxjs/operators';
@@ -132,29 +133,27 @@ export class InformAvenceService {
   }
 
   saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): Observable<{
+    informe_id: number;
+    total_guardados: number;
     status: StatusResponse;
   }> {
-    // return this.http
-    //   .post<ResponseSendInformeAvance>(
-    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
-    //     {lpus}
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       return {
-    //         status: {
-    //           description: res.status.description,
-    //           responseCode: res.status.responseCode,
-    //         },
-    //       };
-    //     })
-    //   );
-    return of({
-      status: {
-        description: 'ok',
-        responseCode: 0,
-      },
-    });
+    return this.http
+      .post<ResponseSendInformeAvance>(
+        `${this.apiUrl}/infavan/informe/send`,
+        request
+      )
+      .pipe(
+        map(res => {
+          return {
+            informe_id: res.data.informe_id,
+            total_guardados: res.data.total_guardados,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 
   saveInformeAvanceAdministrador(lpus: LpuInformeAvanceDetalle[]): Observable<{

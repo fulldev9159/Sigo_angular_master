@@ -611,7 +611,7 @@ export const saveInformeAvanceTrabajador = createAction(
 
 export const saveInformeAvanceTrabajadorSuccess = createAction(
   '[OT] SAVE informe avance trabajador success',
-  props<{ status: StatusResponse }>()
+  props<{ ot_id: number; status: StatusResponse }>()
 );
 
 export const saveInformeAvanceAdminEC = createAction(

@@ -122,7 +122,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     const lpus: LpuInformeAvanceDetalle[] = (
       this.form.get('table') as FormArray
     ).value.map(f => {
-      return { id_lpu: f.detalle_id, informado: f.informado };
+      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
     });
 
     const request: RequestSaveInformeAvance = {

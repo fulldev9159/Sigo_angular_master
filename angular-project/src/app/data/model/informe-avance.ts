@@ -71,7 +71,8 @@ export interface RequestSaveInformeAvance {
 }
 export interface ResponseSendInformeAvance {
   data: {
-    id: number;
+    informe_id: number;
+    total_guardados: number;
   };
 
   status: {

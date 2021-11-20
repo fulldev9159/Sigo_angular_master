@@ -16,12 +16,12 @@ export class InputColorDirective implements AfterViewInit {
   constructor(private elemetRef: ElementRef) {}
 
   ngAfterViewInit(): void {
-    console.log('inf', this.elemetRef.nativeElement.value);
-    console.log(
-      'pen',
-      +this.elemetRef.nativeElement.parentElement.parentElement.children[10]
-        .textContent
-    );
+    // console.log('inf', this.elemetRef.nativeElement.value);
+    // console.log(
+    //   'pen',
+    //   +this.elemetRef.nativeElement.parentElement.parentElement.children[10]
+    //     .textContent
+    // );
     const pendiente =
       +this.elemetRef.nativeElement.parentElement.parentElement.children[10]
         .textContent;
