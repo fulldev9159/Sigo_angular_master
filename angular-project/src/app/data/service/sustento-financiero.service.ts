@@ -2,13 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  PMO,
-  ResponseGetPMO4OT,
-  ResponseGetSitio4OT,
-  Sitio,
-  StatusResponse,
-} from '@data';
+import { PMO, ResponseGetPMO4OT, StatusResponse } from '@data';
 
 @Injectable({
   providedIn: 'root',

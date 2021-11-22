@@ -37,6 +37,7 @@ export interface StateOt {
   dataInformeAvanceTrabajador: DataInformeAvance[];
   dataInformeAvanceAdminEC: DataInformeAvance[];
   dataInformeActa: DataInformeAvance[];
+  info_ot_id: number;
 }
 
 export const initialStateOt: StateOt = {
@@ -70,6 +71,7 @@ export const initialStateOt: StateOt = {
   dataInformeAvanceTrabajador: [],
   dataInformeAvanceAdminEC: [],
   dataInformeActa: [],
+  info_ot_id: null,
 };
 
 export const reducerOt = createReducer(
@@ -397,5 +399,9 @@ export const reducerOt = createReducer(
   on(OtActions.getDataInformeActaSuccess, (state, { dataInformeActa }) => ({
     ...state,
     dataInformeActa,
+  })),
+  on(OtActions.inicializarInformeAvance, (state, { ot_id }) => ({
+    ...state,
+    info_ot_id: ot_id,
   }))
 );

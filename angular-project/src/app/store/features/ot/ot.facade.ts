@@ -365,7 +365,7 @@ export class OtFacade {
     this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
   }
   public getDataInformeAvanceAdminEC(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
+    this.store.dispatch(otActions.getDataInformeAvanceAdminEC({ ot_id }));
   }
 
   public getDataInformeAvanceTrabajador$(): Observable<DataInformeAvance[]> {
@@ -406,5 +406,9 @@ export class OtFacade {
 
   public rechazarInformeActa(informe_id: number): void {
     this.store.dispatch(otActions.rechazarInformeActa({ informe_id }));
+  }
+
+  public getInfoOtId$(): Observable<number> {
+    return this.store.select(otSelectors.getInfoOtId);
   }
 }

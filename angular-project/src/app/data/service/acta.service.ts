@@ -47,7 +47,7 @@ export class ActaService {
           detalle_lpu_id: 8055,
           lpu_nombre: 'Buscar Ruta optica entre 2 salas',
           lpu_numero_producto: '8055',
-          lpu_precio: 1000,
+          LpuPrecio: 1000,
           cantidad_cubicada: 11,
           cantidad_aprobada: 0,
           cantidad_pendiente: 11,
