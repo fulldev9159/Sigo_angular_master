@@ -34,7 +34,6 @@ export interface DataInformeAvance {
   lpu_numero_producto: string;
   LpuPrecio: number;
   cantidad_cubicada: number;
-  cantidad_aprobada: number;
   cantidad_pendiente: number;
   cantidad_aprobada_historica: number;
   cantidad_informada: number;

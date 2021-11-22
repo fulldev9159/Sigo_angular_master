@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  AfterContentInit,
+  AfterViewChecked,
+} from '@angular/core';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 
@@ -18,9 +25,6 @@ import {
 } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 
-interface DetalleAdmin extends DetalleCubicacion {
-  informado: number;
-}
 @Component({
   selector: 'app-informe-admincontrato',
   templateUrl: './informe-admincontrato.component.html',
@@ -39,6 +43,8 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   unidadesTotal = 0;
   materialesTotal = 0;
   waitAP = false;
+  detalleTipo = '';
+  informe_id = 0;
 
   constructor(
     private otFacade: OtFacade,
@@ -47,37 +53,34 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
+    this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceAdminEC$();
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
-          this.otFacade.getDataInformeAvanceTrabajador(ot.id);
-        }
-      })
-    );
-
-    this.subscription.add(
-      this.detalleOt$.subscribe(ot => {
-        if (ot) {
-          this.cubFacade.getDetallesCubicacionAction(ot.cubicacion_id);
+          this.otFacade.getDataInformeAvanceAdminEC(ot.id);
         }
       })
     );
 
     this.subscription.add(
       this.dataInformeAvance$.subscribe(lpu => {
-        if (lpu) {
+        if (lpu && lpu.length > 0) {
+          this.informe_id = lpu[0].informe_id;
+          this.detalleTipo = lpu[0].detalle_tipo;
           lpu.forEach(lpu_service => {
             const group = new FormGroup({
-              lpu_id: new FormControl(lpu_service.detalle_lpu_id, [
+              detalle_id: new FormControl(lpu_service.detalle_id, [
                 Validators.required,
               ]),
               informado: new FormControl(lpu_service.cantidad_informada, [
                 Validators.required,
                 Validators.min(0),
               ]),
+              precio: new FormControl(lpu_service.LpuPrecio),
             });
-
+            this.lpusTotal =
+              this.lpusTotal +
+              lpu_service.LpuPrecio * lpu_service.cantidad_informada;
             (this.form.get('table') as FormArray).push(group);
           });
         }
@@ -89,17 +92,17 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
         .get('table')
         .valueChanges.pipe(withLatestFrom(this.dataInformeAvance$))
         .subscribe(([informados, lpus]) => {
-          this.lpusTotal = 0;
-
-          informados.forEach(informado => {
-            const lpu = lpus.find(
-              lpuf => lpuf.detalle_lpu_id === informado.lpu_id
-            );
-            if (lpu) {
-              this.lpusTotal =
-                this.lpusTotal + lpu.LpuPrecio * informado.informado;
-            }
-          });
+          if (lpus.length === informados.length) {
+            this.lpusTotal = 0;
+            informados.forEach(informado => {
+              // console.log('precio', +informado.precio);
+              // console.log('informado', +informado.informado);
+              const subtotal = +informado.precio * +informado.informado;
+              // console.log('s', subtotal);
+              this.lpusTotal = this.lpusTotal + subtotal;
+              // console.log('t', this.lpusTotal);
+            });
+          }
         })
     );
   }
@@ -127,7 +130,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   formCntlLpuID(index: number): AbstractControl {
     const indext = 'table';
     return (this.form.controls[indext] as FormArray).controls[index].get(
-      'lpu_id'
+      'detalle_id'
     );
   }
 
@@ -146,7 +149,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     const lpus: LpuInformeAvanceDetalle[] = (
       this.form.get('table') as FormArray
     ).value.map(f => {
-      return { id_lpu: f.lpu_id, informado: f.informado };
+      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
     });
 
     this.otFacade.saveInformeAvanceAdminEC(lpus);

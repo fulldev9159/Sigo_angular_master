@@ -365,7 +365,7 @@ export class OtFacade {
     this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
   }
   public getDataInformeAvanceAdminEC(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
+    this.store.dispatch(otActions.getDataInformeAvanceAdminEC({ ot_id }));
   }
 
   public getDataInformeAvanceTrabajador$(): Observable<DataInformeAvance[]> {

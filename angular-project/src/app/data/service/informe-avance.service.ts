@@ -67,45 +67,19 @@ export class InformAvenceService {
     dataInformeAvance: DataInformeAvance[];
     status: StatusResponse;
   }> {
-    // return this.http
-    //   .post<ResponseGetInformeAvance>(
-    //     `${this.apiUrl}/infavan/get_admin_contrato`,
-    //     {lpus}
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       return {
-    //         status: {
-    // datoInformeAvance:res.data.items
-    //           description: res.status.description,
-    //           responseCode: res.status.responseCode,
-    //         },
-    //       };
-    //     })
-    //   );
-    return of({
-      dataInformeAvance: [
-        {
-          detalle_id: 1,
-          detalle_tipo: 'string',
-          ot_id: 1,
-          informe_id: 1,
-          detalle_lpu_id: 8055,
-          lpu_nombre: 'Buscar Ruta optica entre 2 salas',
-          lpu_numero_producto: '8055',
-          LpuPrecio: 1000,
-          cantidad_cubicada: 11,
-          cantidad_aprobada: 0,
-          cantidad_pendiente: 11,
-          cantidad_aprobada_historica: 0,
-          cantidad_informada: 0,
-        },
-      ],
-      status: {
-        description: 'ok',
-        responseCode: 0,
-      },
-    });
+    return this.http
+      .post<any>(`${this.apiUrl}/infavan/informe/get_admin_contrato`, { ot_id })
+      .pipe(
+        map(res => {
+          return {
+            dataInformeAvance: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 
   saveBorradorInformeAvance(

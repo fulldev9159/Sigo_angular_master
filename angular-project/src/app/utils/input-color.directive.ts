@@ -27,9 +27,9 @@ export class InputColorDirective implements AfterViewInit {
         .textContent;
     const informado = +this.elemetRef.nativeElement.value;
     if (pendiente !== informado) {
-      this.elemetRef.nativeElement.style.border = '2px solid #f36666';
+      this.elemetRef.nativeElement.style.border = '2px solid #667ef3';
       this.elemetRef.nativeElement.parentElement.parentElement.style.background =
-        '#f1606024';
+        '#738ff52e';
     }
   }
 
