@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[inputColor]',
+  selector: '[appInputColor]',
 })
 export class InputColorDirective implements AfterViewInit {
   constructor(private elemetRef: ElementRef) {}
@@ -33,7 +33,7 @@ export class InputColorDirective implements AfterViewInit {
     }
   }
 
-  @HostListener('input') logChange() {
+  @HostListener('input') logChange(): void {
     this.elemetRef.nativeElement.style.border = '2px solid #d3d309';
     this.elemetRef.nativeElement.parentElement.parentElement.style.background =
       '#fdfd286b';
