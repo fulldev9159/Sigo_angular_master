@@ -1,153 +1,155 @@
 <div style="padding: 8px;">
+  <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'">
+    <p-message severity="info" text="El informe enviado está a la espera de que el gestor lo apruebe"></p-message>&nbsp;
+  </span>
 
-  <p-card>
-    <ng-template pTemplate="header">
-      <div style="padding: 16px;">
-        <!-- <button class="btn btn-primary" style="margin-right: 10px;" disabled>
-          Agregar Mano de obras/LPUs adicionales
-        </button>
-        <button class="btn btn-primary" disabled>
-          Materiales
-        </button> -->
+  <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_GENERACION_ACTA'">
+    <p-message severity="info" text="El informe enviado está a la espera de que el administrador lo apruebe"></p-message>&nbsp;
+  </span>
+  <ng-container *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_INICIO_FLUJO'">
+    <p-card>
+      <ng-template pTemplate="header">
+        <div style="padding: 16px;">
+          <!-- <button class="btn btn-primary" style="margin-right: 10px;" disabled>
+            Agregar Mano de obras/LPUs adicionales
+          </button>
+          <button class="btn btn-primary" disabled>
+            Materiales
+          </button> -->
+        </div>
+      </ng-template>
+
+      <div class="info">
+        <span class="info-title">
+          INFO
+        </span>
+        <div class="data-info">
+          <div class="box box-1"></div>
+          <span style="margin-left: 5px;">Cambios realizados en esta sesión</span>
+        </div>
+        <div class="data-info">
+          <div class="box box-2"></div>
+          <span style="margin-left: 5px;">Valor informado es diferente al pendiente</span>
+        </div>
       </div>
-    </ng-template>
-    {{detalleTipo}}
-    <span *ngIf="detalleTipo==='BORRADOR_INFORME'">
-      <p-message severity="info" text="Está editando un borrador"></p-message>&nbsp;
-    </span>
-    <span *ngIf="waitAP">
-      <p-message severity="info" text="A la espera de aprobación por parte del gestor"></p-message>&nbsp;
-    </span>
 
-    <div class="info">
-      <span class="info-title">
-        INFO
-      </span>
-      <div class="data-info">
-        <div class="box box-1"></div>
-        <span style="margin-left: 5px;">Cambios realizados en esta sesion</span>
-      </div>
-      <div class="data-info">
-        <div class="box box-2"></div>
-        <span style="margin-left: 5px;">Valor informado es diferente al pendiente</span>
-      </div>
-    </div>
+      <p-tabView>
+        <p-tabPanel header="LPUs">
+          <form [formGroup]="form">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="13" style="background: #00507a;
+                      color: white;
+                      text-align: center;">Mano de obra/Lpus</th>
+                </tr>
+                <tr>
+                  <th rowspan="2">N°</th>
+                  <th rowspan="2">Cor</th>
+                  <th rowspan="2">Plano</th>
+                  <th rowspan="2">Direccion</th>
+                  <th rowspan="2">Clave</th>
+                  <th rowspan="2">Código</th>
+                  <th rowspan="2">Descrición</th>
+                  <th rowspan="2">U.M</th>
+                  <th colspan="4" style="background: #dfdfdf;
+                      text-align: center;">
+                    Cantidad
+                  </th>
+                </tr>
+                <tr>
+                  <th rowspan="2">Cub.</th>
+                  <th rowspan="2">
+                    <span>Apr</span>
+                  </th>
+                  <th rowspan="2">Pend.</th>
+                  <th rowspan="2">Inf.</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="table">
+                <tr *ngFor="let car of dataInformeAvance$|async; let i = index" [formGroupName]="i">
+                  <td>{{i+1}}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>{{car.lpu_numero_producto}}</td>
+                  <td>{{car.lpu_nombre}}</td>
+                  <td></td>
+                  <!-- Cub. -->
+                  <td>{{car.cantidad_cubicada}}</td>
+                  <!-- Apr. -->
+                  <td>{{car.cantidad_aprobada_historica}}</td>
+                  <!-- Pend. -->
+                  <td>{{car.cantidad_pendiente}}</td>
+                  <!-- inf. -->
+                  <td>
+                    <input appInputColor [formControl]="formCntl(i)" min="0" type="number" style="width: 37px;">
+                    <div *ngIf="formCntl(i).invalid && (formCntl(i).dirty || formCntl(i).touched)">
+                      <p-message severity="error" text="{{ errorMessageFn(formCntl(i).errors) }}"></p-message>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </p-tabPanel>
+        <p-tabPanel header="Unidades de Obra">
+          <form>
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="13" style="background: #00507a;
+                            color: white;
+                            text-align: center;">Unidades de obra</th>
+                </tr>
+                <tr>
+                  <th rowspan="2">Cor</th>
+                  <th rowspan="2">Plano</th>
+                  <th rowspan="2">Direccion</th>
+                  <th rowspan="2">Clave</th>
+                  <th rowspan="2">Código</th>
+                  <th rowspan="2">Descrición</th>
+                  <th rowspan="2">U.M</th>
+                  <th colspan="4" style="background: #dfdfdf;
+                            text-align: center;">
+                    Cantidad
+                  </th>
+                  <th colspan="2" style="background: #dfdfdf;
+                  text-align: center;">
+                    Costos
+                  </th>
+                </tr>
+                <tr>
+                  <th rowspan="2">Cub.</th>
+                  <th rowspan="2">
+                    <span>Apr</span>
+                  </th>
+                  <th rowspan="2">Pend.</th>
+                  <th rowspan="2">Inf.</th>
 
-    <p-tabView>
-      <p-tabPanel header="LPUs">
-        <form [formGroup]="form">
-          <table>
-            <thead>
-              <tr>
-                <th colspan="13" style="background: #00507a;
-                    color: white;
-                    text-align: center;">Mano de obra/Lpus</th>
-              </tr>
-              <tr>
-                <th rowspan="2">N°</th>
-                <th rowspan="2">Cor</th>
-                <th rowspan="2">Plano</th>
-                <th rowspan="2">Direccion</th>
-                <th rowspan="2">Clave</th>
-                <th rowspan="2">Código</th>
-                <th rowspan="2">Descrición</th>
-                <th rowspan="2">U.M</th>
-                <th colspan="4" style="background: #dfdfdf;
-                    text-align: center;">
-                  Cantidad
-                </th>
-              </tr>
-              <tr>
-                <th rowspan="2">Cub.</th>
-                <th rowspan="2">
-                  <span>Apr</span>
-                </th>
-                <th rowspan="2">Pend.</th>
-                <th rowspan="2">Inf.</th>
-              </tr>
-            </thead>
-            <tbody formArrayName="table">
-              <tr *ngFor="let car of dataInformeAvance$|async; let i = index" [formGroupName]="i">
-                <td>{{i+1}}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{car.lpu_numero_producto}}</td>
-                <td>{{car.lpu_nombre}}</td>
-                <td></td>
-                <!-- Cub. -->
-                <td>{{car.cantidad_cubicada}}</td>
-                <!-- Apr. -->
-                <td>{{car.cantidad_aprobada_historica}}</td>
-                <!-- Pend. -->
-                <td>{{car.cantidad_pendiente}}</td>
-                <!-- inf. -->
-                <td>
-                  <input appInputColor [formControl]="formCntl(i)" min="0" type="number" style="width: 37px;">
-                  <div *ngIf="formCntl(i).invalid && (formCntl(i).dirty || formCntl(i).touched)">
-                    <p-message severity="error" text="{{ errorMessageFn(formCntl(i).errors) }}"></p-message>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
-      </p-tabPanel>
-      <p-tabPanel header="Unidades de Obra">
-        <form>
-          <table>
-            <thead>
-              <tr>
-                <th colspan="13" style="background: #00507a;
-                          color: white;
-                          text-align: center;">Unidades de obra</th>
-              </tr>
-              <tr>
-                <th rowspan="2">Cor</th>
-                <th rowspan="2">Plano</th>
-                <th rowspan="2">Direccion</th>
-                <th rowspan="2">Clave</th>
-                <th rowspan="2">Código</th>
-                <th rowspan="2">Descrición</th>
-                <th rowspan="2">U.M</th>
-                <th colspan="4" style="background: #dfdfdf;
-                          text-align: center;">
-                  Cantidad
-                </th>
-                <th colspan="2" style="background: #dfdfdf;
-                text-align: center;">
-                  Costos
-                </th>
-              </tr>
-              <tr>
-                <th rowspan="2">Cub.</th>
-                <th rowspan="2">
-                  <span>Apr</span>
-                </th>
-                <th rowspan="2">Pend.</th>
-                <th rowspan="2">Inf.</th>
+                  <th>P. unidad</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
 
-                <th>P. unidad</th>
-                <th>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
+              </tbody>
+            </table>
+          </form>
+        </p-tabPanel>
+        <p-tabPanel header="Materiales"></p-tabPanel>
+      </p-tabView>
+      <ng-template pTemplate="footer">
+        <div style="display: flex;
+          justify-content: space-evenly;">
+          <button class="btn btn-primary" (click)="saveBorradorInformeAvance()"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar borrador</button>
+          <button class="btn btn-primary" (click)="sendInformeConfirmacion()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Enviar informe</button>
+        </div>
+      </ng-template>
+    </p-card>
+  </ng-container>
 
-            </tbody>
-          </table>
-        </form>
-      </p-tabPanel>
-      <p-tabPanel header="Materiales"></p-tabPanel>
-    </p-tabView>
-    <ng-template pTemplate="footer">
-      <div style="display: flex;
-        justify-content: space-evenly;">
-        <button class="btn btn-primary" (click)="saveBorradorInformeAvance()"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar borrador</button>
-        <button class="btn btn-primary" (click)="sendInformeConfirmacion()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Enviar informe</button>
-      </div>
-    </ng-template>
-  </p-card>
 </div>
 
 <app-modal [display]="DisplayConfirmacionModal" (CloseEvent)="DisplayConfirmacionModal=false">
@@ -162,5 +164,3 @@
     <button class="btn btn-primary" (click)="sendInforme()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, Enviar informe</button>
   </ng-container>
 </app-modal>
-
-{{form.value|json}}

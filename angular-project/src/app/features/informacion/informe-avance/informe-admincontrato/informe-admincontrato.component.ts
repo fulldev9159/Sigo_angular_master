@@ -57,7 +57,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceAdminEC$();
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
-        if (ot) {
+        if (ot && ot.tipo_subetapa_pago.slug === 'OT_ET_PAGO_GENERACION_ACTA') {
           this.otFacade.getDataInformeAvanceAdminEC(ot.id);
         }
       })

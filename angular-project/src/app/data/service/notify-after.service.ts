@@ -75,7 +75,8 @@ export class NotifyAfter {
         action === otActions.saveInformeAvanceTrabajadorSuccess.type ||
         action === otActions.saveInformeAvanceAdminECSuccess.type
       ) {
-        this.otFacade.getDataInformeAvanceTrabajador(+data.ot_id);
+        location.reload();
+        // this.otFacade.getDataInformeAvanceTrabajador(+data.ot_id);
       }
 
       if (action === otActions.saveBorradorInformeAvanceSuccess.type) {
