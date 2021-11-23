@@ -27,6 +27,7 @@ export interface OT {
   etapa_otid: number;
   etapa_slug: string;
   proveedor_id: number;
+  subetapa_otdesc: string;
 }
 
 interface FieldOrder {

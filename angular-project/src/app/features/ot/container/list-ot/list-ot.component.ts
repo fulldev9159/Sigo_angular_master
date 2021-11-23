@@ -93,6 +93,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
           editable: false,
         },
         {
+          field: 'Sub-Etapa',
+          type: 'TEXT',
+          sort: 'subetapa_otdesc',
+          header: 'subetapa_otdesc',
+          editable: false,
+        },
+        {
           field: 'Fecha inicio',
           type: 'DATE',
           sort: 'fecha_inicio',

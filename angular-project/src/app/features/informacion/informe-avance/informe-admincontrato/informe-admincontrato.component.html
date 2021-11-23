@@ -3,6 +3,9 @@
     <p-message severity="info" text="El trabajador aún no finaliza el informe"></p-message>&nbsp;
   </span>
 
+  <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'">
+    <p-message severity="info" text="El acta está a la espera de la aprobación por el gestor"></p-message>&nbsp;
+  </span>
   <ng-container *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_GENERACION_ACTA'">
     <p-card>
 
@@ -19,7 +22,6 @@
           <span style="margin-left: 5px;">Valor informado es diferente al pendiente</span>
         </div>
       </div>
-
 
       <p-tabView>
         <p-tabPanel header="LPUs">
@@ -183,8 +185,6 @@
         <br>
       </div>
 
-
-
       <ng-template pTemplate="footer">
         <!-- <button class="btn" (click)="rechazarInforme()"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Rechazar</button> -->
         <button class="btn btn-primary" (click)="sendActaConfirmacion()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Generar y enviar Acta</button>
@@ -194,14 +194,35 @@
 </div>
 
 
-
-
-
 <app-modal [display]="DisplayConfirmacionModal" (CloseEvent)="DisplayConfirmacionModal=false">
   <ng-container modal-header-title>Confirmación generación y envio de Acta</ng-container>
   <ng-container modal-content>
-    <div class="row">
-      ¿Está seguro que desea enviar el acta?
+    <div class="content-modal">
+      <div class="resumen">
+        <br>
+        <h1>Resumen</h1>
+        <table>
+          <tbody>
+            <tr>
+              <td>LPUs</td>
+              <td>{{lpusTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            </tr>
+            <tr>
+              <td>Unidades de obra</td>
+              <td>{{unidadesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            </tr>
+            <tr>
+              <td>Materiales</td>
+              <td>{{materialesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            </tr>
+            <tr>
+              <td style="text-align: right"><strong>Total</strong></td>
+              <td style="font-size: 14px;"> <strong>{{lpusTotal + unidadesTotal + materialesTotal | currency : 'CLP' : '$':'.0-2':'es-CL'}}</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 10px;">¿Está seguro que desea enviar el acta?</div>
     </div>
   </ng-container>
   <ng-container modal-footer>

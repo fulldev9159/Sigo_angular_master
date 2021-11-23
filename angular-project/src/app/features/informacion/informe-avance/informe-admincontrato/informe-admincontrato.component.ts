@@ -53,6 +53,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.lpusTotal = 0;
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
     this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceAdminEC$();
     this.subscription.add(
@@ -65,6 +66,14 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.dataInformeAvance$.subscribe(lpu => {
+        if (lpu) {
+          const totalCub = lpu.reduce(
+            (ac, cur) => ac + cur.cantidad_cubicada * cur.LpuPrecio,
+            0
+          );
+          console.log(totalCub);
+        }
+
         if (lpu && lpu.length > 0) {
           this.informe_id = lpu[0].informe_id;
           this.detalleTipo = lpu[0].detalle_tipo;
