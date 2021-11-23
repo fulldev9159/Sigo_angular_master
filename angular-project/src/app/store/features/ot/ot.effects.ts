@@ -1145,8 +1145,8 @@ export class OtEffects {
   saveInformeAvanceAdminEC$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveInformeAvanceAdminEC),
-      concatMap(({ lpus }) =>
-        this.informeAvanceService.saveInformeAvanceAdministrador(lpus).pipe(
+      concatMap(({ request }) =>
+        this.informeAvanceService.saveInformeAvanceAdministrador(request).pipe(
           map(({ status }) =>
             otActions.saveInformeAvanceAdminECSuccess({
               status,

@@ -13,6 +13,7 @@ import {
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  RequestSaveInformeAvanceAdmin,
   Sitio,
 } from '@data';
 
@@ -378,8 +379,10 @@ export class OtFacade {
   public saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): void {
     this.store.dispatch(otActions.saveInformeAvanceTrabajador({ request }));
   }
-  public saveInformeAvanceAdminEC(lpus: LpuInformeAvanceDetalle[]): void {
-    this.store.dispatch(otActions.saveInformeAvanceAdminEC({ lpus }));
+  public saveInformeAvanceAdminEC(
+    request: RequestSaveInformeAvanceAdmin
+  ): void {
+    this.store.dispatch(otActions.saveInformeAvanceAdminEC({ request }));
   }
 
   public saveBorradorInformeAvance(

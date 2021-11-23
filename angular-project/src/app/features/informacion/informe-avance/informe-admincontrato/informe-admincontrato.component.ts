@@ -22,6 +22,7 @@ import {
   DataRspDetalleOT,
   DetalleCubicacion,
   LpuInformeAvanceDetalle,
+  RequestSaveInformeAvanceAdmin,
 } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 
@@ -152,7 +153,13 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
       return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
     });
 
-    this.otFacade.saveInformeAvanceAdminEC(lpus);
+    const request: RequestSaveInformeAvanceAdmin = {
+      informe_id: this.informe_id,
+      observacion: null,
+      valores_detalles: lpus,
+    };
+    console.log(request);
+    this.otFacade.saveInformeAvanceAdminEC(request);
   }
 
   rechazarInforme(): void {

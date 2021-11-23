@@ -68,12 +68,30 @@ export interface RequestSaveInformeAvance {
   informe_id: number;
   valores_detalles: LpuInformeAvanceDetalle[];
 }
+
+export interface RequestSaveInformeAvanceAdmin {
+  informe_id: number;
+  observacion: string;
+  valores_detalles: LpuInformeAvanceDetalle[];
+}
 export interface ResponseSendInformeAvance {
   data: {
     informe_id: number;
     total_guardados: number;
   };
 
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface ResponseSendInformeAvanceAdminEC {
+  data: {
+    acta_id: number;
+    informe_id: number;
+    total_guardados: number;
+  };
   status: {
     description: string;
     responseCode: number;

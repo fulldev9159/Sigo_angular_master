@@ -10,6 +10,7 @@ import {
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  RequestSaveInformeAvanceAdmin,
   Sitio,
   StatusResponse,
 } from '@data';
@@ -616,7 +617,7 @@ export const saveInformeAvanceTrabajadorSuccess = createAction(
 
 export const saveInformeAvanceAdminEC = createAction(
   '[OT] SAVE informe avance Admin EC',
-  props<{ lpus: LpuInformeAvanceDetalle[] }>()
+  props<{ request: RequestSaveInformeAvanceAdmin }>()
 );
 
 export const saveInformeAvanceAdminECSuccess = createAction(

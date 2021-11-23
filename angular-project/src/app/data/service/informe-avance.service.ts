@@ -6,9 +6,12 @@ import {
   LpuInformeAvanceDetalle,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  RequestSaveInformeAvanceAdmin,
   ResponseBorradorInformeAvance,
+  ResponseGetInformeAvance,
   ResponseInicializarInformeAvance,
   ResponseSendInformeAvance,
+  ResponseSendInformeAvanceAdminEC,
   StatusResponse,
 } from '@data';
 import { map } from 'rxjs/operators';
@@ -49,7 +52,10 @@ export class InformAvenceService {
     status: StatusResponse;
   }> {
     return this.http
-      .post<any>(`${this.apiUrl}/infavan/informe/get_trabajador`, { ot_id })
+      .post<ResponseGetInformeAvance>(
+        `${this.apiUrl}/infavan/informe/get_trabajador`,
+        { ot_id }
+      )
       .pipe(
         map(res => {
           return {
@@ -68,11 +74,16 @@ export class InformAvenceService {
     status: StatusResponse;
   }> {
     return this.http
-      .post<any>(`${this.apiUrl}/infavan/informe/get_admin_contrato`, { ot_id })
+      .post<ResponseGetInformeAvance>(
+        `${this.apiUrl}/infavan/informe/get_admin_contrato`,
+        { ot_id }
+      )
       .pipe(
         map(res => {
           return {
-            dataInformeAvance: res.data.items,
+            dataInformeAvance: res.data.items.filter(
+              lpu => lpu.cantidad_informada !== 0
+            ),
             status: {
               description: res.status.description,
               responseCode: res.status.responseCode,
@@ -130,30 +141,26 @@ export class InformAvenceService {
       );
   }
 
-  saveInformeAvanceAdministrador(lpus: LpuInformeAvanceDetalle[]): Observable<{
+  saveInformeAvanceAdministrador(
+    request: RequestSaveInformeAvanceAdmin
+  ): Observable<{
     status: StatusResponse;
   }> {
-    // return this.http
-    //   .post<ResponseBorradorInformeAvance>(
-    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
-    //     {lpus}
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       return {
-    //         status: {
-    //           description: res.status.description,
-    //           responseCode: res.status.responseCode,
-    //         },
-    //       };
-    //     })
-    //   );
-    return of({
-      status: {
-        description: 'ok',
-        responseCode: 0,
-      },
-    });
+    return this.http
+      .post<ResponseSendInformeAvanceAdminEC>(
+        `${this.apiUrl}/infavan/informe/accept`,
+        request
+      )
+      .pipe(
+        map(res => {
+          return {
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 
   rechazarInformeAvance(informe_id: number): Observable<{
