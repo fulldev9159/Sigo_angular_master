@@ -298,11 +298,29 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
-        const otGenerarActas = (ot.acciones || []).find(
+        const otGenerarActa = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_GENERAR_ACTA'
+        );
+
+        if (otGenerarActa) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Generar Acta',
+            onClick: (event: Event, item) => {
+              this.router.navigate([
+                '/app/informacion/informe-avance',
+                item.id,
+              ]);
+            },
+          });
+        }
+
+        const otAutorizarActas = (ot.acciones || []).find(
           accion => accion.slug === 'OT_AUTORIZAR_ACTAS'
         );
 
-        if (otGenerarActas) {
+        if (otAutorizarActas) {
           actions.push({
             icon: 'p-button-icon pi pi-check',
             class: 'p-button-rounded p-button-success p-mr-2',
