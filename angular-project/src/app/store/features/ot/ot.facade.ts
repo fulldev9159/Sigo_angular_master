@@ -358,9 +358,9 @@ export class OtFacade {
     return this.store.select(otSelectors.getSaveOTError);
   }
 
-  public inicializarInformeAvanceTrabajador(ot_id: number): void {
-    this.store.dispatch(otActions.inicializarInformeAvance({ ot_id }));
-  }
+  // public inicializarInformeAvanceTrabajador(ot_id: number): void {
+  //   this.store.dispatch(otActions.inicializarInformeAvance({ ot_id }));
+  // }
 
   public getDataInformeAvanceTrabajador(ot_id: number): void {
     this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));

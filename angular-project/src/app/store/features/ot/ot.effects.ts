@@ -1065,26 +1065,26 @@ export class OtEffects {
     { dispatch: false }
   );
 
-  inicializarInformeAvance$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.inicializarInformeAvance),
-      concatMap(({ ot_id }) =>
-        this.informeAvanceService.inicializaInforme(ot_id).pipe(
-          map(({ status }) => {
-            if (status.responseCode === 0) {
-              this.otFacade.getDataInformeAvanceTrabajador(ot_id);
-            }
-            return otActions.inicializarInformeAvanceSuccess({
-              status,
-            });
-          }),
-          catchError(error =>
-            of(otActions.inicializarInformeAvanceError({ error }))
-          )
-        )
-      )
-    )
-  );
+  // inicializarInformeAvance$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(otActions.inicializarInformeAvance),
+  //     concatMap(({ ot_id }) =>
+  //       this.informeAvanceService.inicializaInforme(ot_id).pipe(
+  //         map(({ status }) => {
+  //           if (status.responseCode === 0) {
+  //             this.otFacade.getDataInformeAvanceTrabajador(ot_id);
+  //           }
+  //           return otActions.inicializarInformeAvanceSuccess({
+  //             status,
+  //           });
+  //         }),
+  //         catchError(error =>
+  //           of(otActions.inicializarInformeAvanceError({ error }))
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
   getDataInformeAvanceTrabajador$ = createEffect(() =>
     this.actions$.pipe(
@@ -1261,7 +1261,7 @@ export class OtEffects {
           otActions.getDataInformeActaSuccess,
           otActions.saveInformeActaSuccess,
           otActions.rechazarInformeActaSuccess,
-          otActions.inicializarInformeAvanceSuccess,
+          // otActions.inicializarInformeAvanceSuccess,
           otActions.getPlansSuccess,
           otActions.getSiteSuccess,
           otActions.getPmoSuccess
@@ -1285,7 +1285,7 @@ export class OtEffects {
           otActions.getDataInformeActaError,
           otActions.saveInformeActaError,
           otActions.rechazarInformeActaError,
-          otActions.inicializarInformeAvanceError,
+          // otActions.inicializarInformeAvanceError,
           otActions.getPlansError,
           otActions.getSiteError,
           otActions.getPmoError

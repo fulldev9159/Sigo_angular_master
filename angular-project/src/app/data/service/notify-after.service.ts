@@ -101,8 +101,8 @@ export class NotifyAfter {
       msg[cubActions.getSubContractedServicesSuccess.type] =
         'No existen LPUs para el tipo seleccionado';
       msg[cubActions.createCubSuccess.type] = 'No se pudo crear la cubicación';
-      msg[cubActions.getAutoSuggestSuccess.type] =
-        'No existen sugerencias de nombre';
+      // msg[cubActions.getAutoSuggestSuccess.type] =
+      //   'No existen sugerencias de nombre';
       msg[cubActions.getDetalleCubicacionSuccess.type] =
         'No posee detalle de cubicación';
       msg[otActions.getDataInformeAvanceTrabajadorSuccess.type] =
@@ -163,8 +163,8 @@ export class NotifyAfter {
     msg[otActions.saveInformeActaError.type] = 'No se pudo enviar el acta';
     msg[otActions.rechazarInformeActaError.type] =
       'Falló la ejecución del rechazo';
-    msg[otActions.inicializarInformeAvanceError.type] =
-      'Falló la inicialización del informe';
+    // msg[otActions.inicializarInformeAvanceError.type] =
+    //   'Falló la inicialización del informe';
     msg[otActions.getPlansError.type] = 'No se pudo obtener los planes';
     msg[otActions.getOtsError.type] = 'Falló la obtención de OTs';
     msg[otActions.getSiteError.type] = 'Falló la obtención de Sitios';

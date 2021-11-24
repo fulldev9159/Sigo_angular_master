@@ -48,7 +48,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
-          this.otFacade.inicializarInformeAvanceTrabajador(ot.id);
+          this.otFacade.getDataInformeAvanceTrabajador(ot.id);
         }
       })
     );
