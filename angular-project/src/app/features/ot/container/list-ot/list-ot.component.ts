@@ -323,44 +323,17 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
-        const otAutorizarActas = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_AUTORIZAR_ACTAS'
+        const otValidarActas = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_VALIDAR_ACTA'
         );
 
-        if (otAutorizarActas) {
+        if (otValidarActas) {
           actions.push({
             icon: 'p-button-icon pi pi-check',
             class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Aceptar la generación del acta',
+            label: 'Validar la generación del acta',
             onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea aceptar la generación del acta?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.approveOTMinutesGeneration(ot.id);
-                },
-              });
-            },
-          });
-
-          actions.push({
-            icon: 'p-button-icon pi pi-times',
-            class: 'p-button-rounded p-button-danger p-mr-2',
-            label: 'Rechazar la generación del acta',
-            onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea rechazar la generación del acta?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.rejectOTMinutesGeneration(ot.id);
-                },
-              });
+              this.router.navigate(['/app/informacion/acta/', item.id]);
             },
           });
         }

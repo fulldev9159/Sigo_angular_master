@@ -14,6 +14,7 @@ import {
   Sitio,
   StatusResponse,
 } from '@data';
+import { RequestSaveInformeActaGestor } from '@data/model/acta';
 
 // GET OTs init
 
@@ -665,7 +666,7 @@ export const getDataInformeActaError = createAction(
 // SAVE informe acta
 export const saveInformeActa = createAction(
   '[OT] SAVE informe acta',
-  props<{ lpus: LpuInformeAvanceDetalle[] }>()
+  props<{ request: RequestSaveInformeActaGestor }>()
 );
 
 export const saveInformeActaSuccess = createAction(

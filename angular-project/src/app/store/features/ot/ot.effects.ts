@@ -1216,8 +1216,8 @@ export class OtEffects {
   saveInformeActa$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveInformeActa),
-      concatMap(({ lpus }) =>
-        this.actaService.saveInformeActa(lpus).pipe(
+      concatMap(({ request }) =>
+        this.actaService.saveInformeActa(request).pipe(
           map(({ status }) =>
             otActions.saveInformeActaSuccess({
               status,

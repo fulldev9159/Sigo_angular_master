@@ -16,6 +16,7 @@ import {
   RequestSaveInformeAvanceAdmin,
   Sitio,
 } from '@data';
+import { RequestSaveInformeActaGestor } from '@data/model/acta';
 
 @Injectable({
   providedIn: 'root',
@@ -403,8 +404,8 @@ export class OtFacade {
     return this.store.select(otSelectors.getDataInformeActa);
   }
 
-  public saveInformeActa(lpus: LpuInformeAvanceDetalle[]): void {
-    this.store.dispatch(otActions.saveInformeActa({ lpus }));
+  public saveInformeActa(request: RequestSaveInformeActaGestor): void {
+    this.store.dispatch(otActions.saveInformeActa({ request }));
   }
 
   public rechazarInformeActa(informe_id: number): void {

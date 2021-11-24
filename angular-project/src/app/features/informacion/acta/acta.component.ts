@@ -15,8 +15,10 @@ import {
   DataRspDetalleOT,
   DetalleCubicacion,
   LpuInformeAvanceDetalle,
+  RequestSaveInformeAvanceAdmin,
 } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
+import { RequestSaveInformeActaGestor } from '@data/model/acta';
 
 @Component({
   selector: 'app-acta',
@@ -37,6 +39,7 @@ export class ActaComponent implements OnInit, OnDestroy {
   unidadesTotal = 0;
   materialesTotal = 0;
   val3 = 100;
+  informe_id = 0;
 
   constructor(
     private otFacade: OtFacade,
@@ -58,17 +61,30 @@ export class ActaComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.dataInformeActa$.subscribe(lpu => {
         if (lpu) {
+          const totalCub = lpu.reduce(
+            (ac, cur) => ac + cur.cantidad_cubicada * cur.LpuPrecio,
+            0
+          );
+          console.log(totalCub);
+        }
+
+        if (lpu && lpu.length > 0) {
+          this.informe_id = lpu[0].informe_id;
           lpu.forEach(lpu_service => {
             const group = new FormGroup({
-              lpu_id: new FormControl(lpu_service.detalle_lpu_id, [
+              detalle_id: new FormControl(lpu_service.detalle_id, [
                 Validators.required,
               ]),
-              aprobado: new FormControl(lpu_service.cantidad_informada, [
+              informado: new FormControl(lpu_service.cantidad_informada, [
                 Validators.required,
                 Validators.min(0),
+                Validators.max(lpu_service.cantidad_informada),
               ]),
+              precio: new FormControl(lpu_service.LpuPrecio),
             });
-
+            this.lpusTotal =
+              this.lpusTotal +
+              lpu_service.LpuPrecio * lpu_service.cantidad_informada;
             (this.form.get('table') as FormArray).push(group);
           });
         }
@@ -79,18 +95,18 @@ export class ActaComponent implements OnInit, OnDestroy {
       this.form
         .get('table')
         .valueChanges.pipe(withLatestFrom(this.dataInformeActa$))
-        .subscribe(([aprobados, lpus]) => {
-          this.lpusTotal = 0;
-
-          aprobados.forEach(aprobado => {
-            const lpu = lpus.find(
-              lpuf => lpuf.detalle_lpu_id === aprobado.lpu_id
-            );
-            if (lpu) {
-              this.lpusTotal =
-                this.lpusTotal + lpu.LpuPrecio * aprobado.aprobado;
-            }
-          });
+        .subscribe(([informados, lpus]) => {
+          if (lpus.length === informados.length) {
+            this.lpusTotal = 0;
+            informados.forEach(informado => {
+              // console.log('precio', +informado.precio);
+              // console.log('informado', +informado.informado);
+              const subtotal = +informado.precio * +informado.informado;
+              // console.log('s', subtotal);
+              this.lpusTotal = this.lpusTotal + subtotal;
+              // console.log('t', this.lpusTotal);
+            });
+          }
         })
     );
   }
@@ -105,20 +121,22 @@ export class ActaComponent implements OnInit, OnDestroy {
       return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
     } else if (errors.min) {
       return `No puede ser negativo`;
+    } else if (errors.max) {
+      return `No puede ser mayor a lo informado por la empresa contratista`;
     }
   }
 
   formCntl(index: number): AbstractControl {
     const indext = 'table';
     return (this.form.controls[indext] as FormArray).controls[index].get(
-      'aprobado'
+      'informado'
     );
   }
 
   formCntlLpuID(index: number): AbstractControl {
     const indext = 'table';
     return (this.form.controls[indext] as FormArray).controls[index].get(
-      'lpu_id'
+      'detalle_id'
     );
   }
 
@@ -127,20 +145,21 @@ export class ActaComponent implements OnInit, OnDestroy {
   }
 
   sendInformeActa(): void {
-    // const index = 'table';
-    // (this.form.controls[index] as FormArray).controls[0].disable();
-    // (this.form.controls[index] as FormArray).controls[1].disable();
-
-    // this.waitAP = true;
     this.DisplayConfirmacionModal = false;
 
     const lpus: LpuInformeAvanceDetalle[] = (
       this.form.get('table') as FormArray
     ).value.map(f => {
-      return { id_lpu: f.lpu_id, informado: f.informado };
+      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
     });
 
-    this.otFacade.saveInformeActa(lpus);
+    const request: RequestSaveInformeActaGestor = {
+      acta_id: this.informe_id,
+      observacion: null,
+      valores_detalles: lpus,
+    };
+    console.log(request);
+    this.otFacade.saveInformeActa(request);
   }
 
   rechazarActa(): void {
