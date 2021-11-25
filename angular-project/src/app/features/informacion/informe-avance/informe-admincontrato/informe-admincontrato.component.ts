@@ -46,6 +46,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   waitAP = false;
   detalleTipo = '';
   informe_id = 0;
+  totalCubicado = 0;
 
   constructor(
     private otFacade: OtFacade,
@@ -59,6 +60,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot && ot.tipo_subetapa_pago.slug === 'OT_ET_PAGO_GENERACION_ACTA') {
+          this.totalCubicado = ot.total;
           this.otFacade.getDataInformeAvanceAdminEC(ot.id);
         }
       })
@@ -71,7 +73,6 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
             (ac, cur) => ac + cur.cantidad_cubicada * cur.LpuPrecio,
             0
           );
-          console.log(totalCub);
         }
 
         if (lpu && lpu.length > 0) {

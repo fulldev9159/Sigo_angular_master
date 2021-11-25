@@ -26,6 +26,11 @@ import { environment } from '@environment';
 import { Response } from '@storeOT/model';
 import * as OtModel from './ot.model';
 import { RequestGetOTs } from '@data';
+import {
+  DetalleActa,
+  LpusPorcentajes,
+  RequestSolicitudPagoActa,
+} from '@data/model/acta';
 
 @Injectable()
 export class OtEffects {
@@ -1216,13 +1221,15 @@ export class OtEffects {
   saveInformeActa$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveInformeActa),
-      concatMap(({ request }) =>
+      withLatestFrom(this.otFacade.getInfoOtId$()),
+      concatMap(([{ request }, ot_id]) =>
         this.actaService.saveInformeActa(request).pipe(
-          map(({ status }) =>
-            otActions.saveInformeActaSuccess({
+          map(({ status }) => {
+            this.otFacade.getDetalleActa(ot_id);
+            return otActions.saveInformeActaSuccess({
               status,
-            })
-          ),
+            });
+          }),
           catchError(error => of(otActions.saveInformeActaError({ error })))
         )
       )
@@ -1245,6 +1252,53 @@ export class OtEffects {
     )
   );
 
+  getDetalleActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDetalleActa),
+      concatMap(({ ot_id }) =>
+        this.actaService.getActaDetalle(ot_id).pipe(
+          map(({ dataInformeActa, status }) => {
+            console.log(dataInformeActa);
+
+            const lpus: LpusPorcentajes[] = dataInformeActa.map(f => {
+              return { detalle_id: f.detalle_id, porcentaje_solicitado: 1.0 };
+            });
+
+            const request: RequestSolicitudPagoActa = {
+              acta_id: dataInformeActa[0].id,
+              porcentajes_detalles: lpus,
+            };
+            console.log(request);
+
+            this.otFacade.sendSolicitudPagoActa(request);
+            return otActions.getDetalleActaSuccess({
+              dataInformeActa,
+              status,
+            });
+          }),
+          catchError(error => of(otActions.getDetalleActaError({ error })))
+        )
+      )
+    )
+  );
+
+  sendSolicitudPagoActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.sendSolicitudPagoActa),
+      concatMap(({ request }) =>
+        this.actaService.solicitudPagoActa(request).pipe(
+          map(({ status }) =>
+            otActions.sendSolicitudPagoActaSuccess({
+              status,
+            })
+          ),
+          catchError(error =>
+            of(otActions.sendSolicitudPagoActaError({ error }))
+          )
+        )
+      )
+    )
+  );
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -1264,7 +1318,9 @@ export class OtEffects {
           // otActions.inicializarInformeAvanceSuccess,
           otActions.getPlansSuccess,
           otActions.getSiteSuccess,
-          otActions.getPmoSuccess
+          otActions.getPmoSuccess,
+          otActions.getDetalleActaSuccess,
+          otActions.sendSolicitudPagoActaSuccess
         ),
         tap(action =>
           this.messageServiceInt.actions200(action.status, action.type, action)
@@ -1288,7 +1344,8 @@ export class OtEffects {
           // otActions.inicializarInformeAvanceError,
           otActions.getPlansError,
           otActions.getSiteError,
-          otActions.getPmoError
+          otActions.getPmoError,
+          otActions.getDetalleActaError
         ),
         tap(action =>
           this.messageServiceInt.actionsErrors(

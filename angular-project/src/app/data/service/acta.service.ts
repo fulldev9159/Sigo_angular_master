@@ -10,7 +10,10 @@ import {
 } from '@data';
 import { map } from 'rxjs/operators';
 import {
+  DetalleActa,
   RequestSaveInformeActaGestor,
+  RequestSolicitudPagoActa,
+  ResponseGetDetalleActa,
   ResponseGetInformeActa,
 } from '@data/model/acta';
 
@@ -85,5 +88,46 @@ export class ActaService {
         responseCode: 0,
       },
     });
+  }
+
+  getActaDetalle(ot_id: number): Observable<{
+    dataInformeActa: DetalleActa[];
+    status: StatusResponse;
+  }> {
+    return this.http
+      .post<ResponseGetDetalleActa>(
+        `${this.apiUrl}/pagos/solicitud/acta/get_detalle`,
+        {
+          ot_id,
+        }
+      )
+      .pipe(
+        map(res => {
+          return {
+            dataInformeActa: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
+  }
+
+  solicitudPagoActa(request: RequestSolicitudPagoActa): Observable<{
+    status: StatusResponse;
+  }> {
+    return this.http
+      .post<any>(`${this.apiUrl}/pagos/solicitud/acta/send`, request)
+      .pipe(
+        map(res => {
+          return {
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 }

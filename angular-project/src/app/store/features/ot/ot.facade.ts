@@ -16,7 +16,10 @@ import {
   RequestSaveInformeAvanceAdmin,
   Sitio,
 } from '@data';
-import { RequestSaveInformeActaGestor } from '@data/model/acta';
+import {
+  RequestSaveInformeActaGestor,
+  RequestSolicitudPagoActa,
+} from '@data/model/acta';
 
 @Injectable({
   providedIn: 'root',
@@ -414,5 +417,13 @@ export class OtFacade {
 
   public getInfoOtId$(): Observable<number> {
     return this.store.select(otSelectors.getInfoOtId);
+  }
+
+  public getDetalleActa(ot_id: number): void {
+    this.store.dispatch(otActions.getDetalleActa({ ot_id }));
+  }
+
+  public sendSolicitudPagoActa(request: RequestSolicitudPagoActa): void {
+    this.store.dispatch(otActions.sendSolicitudPagoActa({ request }));
   }
 }

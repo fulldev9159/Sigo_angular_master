@@ -14,7 +14,11 @@ import {
   Sitio,
   StatusResponse,
 } from '@data';
-import { RequestSaveInformeActaGestor } from '@data/model/acta';
+import {
+  DetalleActa,
+  RequestSaveInformeActaGestor,
+  RequestSolicitudPagoActa,
+} from '@data/model/acta';
 
 // GET OTs init
 
@@ -692,5 +696,37 @@ export const rechazarInformeActaSuccess = createAction(
 
 export const rechazarInformeActaError = createAction(
   '[OT] rechazar informe acta error',
+  props<{ error: any }>()
+);
+
+// GET detalle acta
+export const getDetalleActa = createAction(
+  '[OT] GET detalle acta',
+  props<{ ot_id: number }>()
+);
+
+export const getDetalleActaSuccess = createAction(
+  '[OT] GET detalle acta success',
+  props<{ dataInformeActa: DetalleActa[]; status: StatusResponse }>()
+);
+
+export const getDetalleActaError = createAction(
+  '[OT] GET detalle acta error',
+  props<{ error: any }>()
+);
+
+// SEND solicitud pago acta
+export const sendSolicitudPagoActa = createAction(
+  '[OT] Send solicitud pago acta',
+  props<{ request: RequestSolicitudPagoActa }>()
+);
+
+export const sendSolicitudPagoActaSuccess = createAction(
+  '[OT] Send solicitud pago acta success',
+  props<{ status: StatusResponse }>()
+);
+
+export const sendSolicitudPagoActaError = createAction(
+  '[OT] Send solicitud pago acta error',
   props<{ error: any }>()
 );

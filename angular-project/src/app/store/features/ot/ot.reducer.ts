@@ -399,9 +399,9 @@ export const reducerOt = createReducer(
   on(OtActions.getDataInformeActaSuccess, (state, { dataInformeActa }) => ({
     ...state,
     dataInformeActa,
+  })),
+  on(OtActions.getDataInformeActa, (state, { ot_id }) => ({
+    ...state,
+    info_ot_id: ot_id,
   }))
-  // on(OtActions.inicializarInformeAvance, (state, { ot_id }) => ({
-  //   ...state,
-  //   info_ot_id: ot_id,
-  // }))
 );

@@ -63,6 +63,9 @@ export class NotifyAfter {
         'El acta fue enviada correctamente';
       msg[otActions.rechazarInformeActaSuccess.type] =
         'El acta fue rechazada correctamente';
+      msg[otActions.sendSolicitudPagoActaSuccess.type] =
+        'La solicitud de pago a sido enviada';
+
       if (
         action === cubActions.createCubSuccess.type ||
         action === cubActions.editCubicacionSuccess.type
@@ -73,7 +76,8 @@ export class NotifyAfter {
 
       if (
         action === otActions.saveInformeAvanceTrabajadorSuccess.type ||
-        action === otActions.saveInformeAvanceAdminECSuccess.type
+        action === otActions.saveInformeAvanceAdminECSuccess.type ||
+        action === otActions.sendSolicitudPagoActaSuccess.type
       ) {
         location.reload();
         // this.otFacade.getDataInformeAvanceTrabajador(+data.ot_id);
@@ -115,6 +119,8 @@ export class NotifyAfter {
       msg[otActions.getSiteSuccess.type] =
         'No existen sitios para el proyecto escogido';
       msg[otActions.getPmoSuccess.type] = 'No existen pmos';
+      msg[otActions.getDetalleActaSuccess.type] =
+        'No existen valores para el acta';
       if (msg[action] !== undefined) {
         this.snackService.showMessage(
           `${msg[action]}- ${status.description}`,
@@ -169,6 +175,8 @@ export class NotifyAfter {
     msg[otActions.getOtsError.type] = 'Falló la obtención de OTs';
     msg[otActions.getSiteError.type] = 'Falló la obtención de Sitios';
     msg[otActions.getPmoError.type] = 'Falló la obtención de PMOs';
+    msg[otActions.getDetalleActaError.type] =
+      'Falló la obtención de información del acta';
 
     this.snackService.showMessage(`${msg[action]} - ${message}`, 'error', 4000);
   }
