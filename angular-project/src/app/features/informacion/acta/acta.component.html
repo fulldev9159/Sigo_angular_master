@@ -185,26 +185,48 @@
   <ng-container modal-header-title>Confirmación de aceptación de Acta</ng-container>
   <ng-container modal-content>
     <h1>Resumen</h1>
+
     <table>
+      <tr>
+        <th colspan="2">
+          Cubicado
+        </th>
+      </tr>
       <tbody>
         <tr>
-          <td><strong>LPUs Total</strong></td>
-          <td>{{lpusTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-        </tr>
-        <tr>
-          <td><strong>Unidades de obra Total</strong></td>
-          <td>{{unidadesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-        </tr>
-        <tr>
-          <td><strong>Materiales Total</strong></td>
-          <td>{{materialesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>{{lpusTotal + unidadesTotal + materialesTotal | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+          <td>Total cubicado</td>
+          <td>{{totalCubicado | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
         </tr>
       </tbody>
     </table>
+    <br>
+    <table>
+      <tr>
+        <th colspan="2">
+          Aprobado
+        </th>
+      </tr>
+      <tbody>
+        <tr>
+          <td>LPUs</td>
+          <td>{{lpusTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+        <tr>
+          <td>Unidades de obra</td>
+          <td>{{unidadesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+        <tr>
+          <td>Materiales Total</td>
+          <td>{{materialesTotal| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+        </tr>
+        <tr>
+          <td style="text-align: right"><strong>Total aprobado</strong></td>
+          <td style="font-size: 14px;"> <strong>{{lpusTotal + unidadesTotal + materialesTotal | currency : 'CLP' : '$':'.0-2':'es-CL'}}</strong></td>
+        </tr>
+
+      </tbody>
+    </table>
+    <br>
     <div class="pago-box">
       <h5>Pagar el: {{val3}}%</h5>
       <p-slider [(ngModel)]="val3" [step]="20" disabled="true"></p-slider>

@@ -30,6 +30,7 @@ export class ActaComponent implements OnInit, OnDestroy {
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRspDetalleOT>;
   dataInformeActa$: Observable<DataInformeAvance[]> = of([]);
+  cubicacion$: Observable<DetalleCubicacion[]> = of([]);
 
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
@@ -40,6 +41,7 @@ export class ActaComponent implements OnInit, OnDestroy {
   materialesTotal = 0;
   val3 = 100;
   informe_id = 0;
+  totalCubicado = 0;
 
   constructor(
     private otFacade: OtFacade,
@@ -53,6 +55,7 @@ export class ActaComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
+          this.totalCubicado = ot.total;
           this.otFacade.getDataInformeActa(ot.id);
         }
       })
