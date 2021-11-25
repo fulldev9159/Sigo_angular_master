@@ -1225,7 +1225,7 @@ export class OtEffects {
       concatMap(([{ request }, ot_id]) =>
         this.actaService.saveInformeActa(request).pipe(
           map(({ status }) => {
-            this.otFacade.getDetalleActa(ot_id);
+            this.otFacade.getDetalleActaMezcla(ot_id);
             return otActions.saveInformeActaSuccess({
               status,
             });
@@ -1252,9 +1252,9 @@ export class OtEffects {
     )
   );
 
-  getDetalleActa$ = createEffect(() =>
+  getDetalleActaMezcla$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(otActions.getDetalleActa),
+      ofType(otActions.getDetalleActaMezcla),
       concatMap(({ ot_id }) =>
         this.actaService.getActaDetalle(ot_id).pipe(
           map(({ dataInformeActa, status }) => {
@@ -1299,6 +1299,24 @@ export class OtEffects {
       )
     )
   );
+
+  getDetalleActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDetalleActa),
+      concatMap(({ ot_id }) =>
+        this.actaService.getActaDetalle(ot_id).pipe(
+          map(({ dataInformeActa, status }) =>
+            otActions.getDetalleActaSuccess({
+              dataInformeActa,
+              status,
+            })
+          ),
+          catchError(error => of(otActions.getDetalleActaError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(

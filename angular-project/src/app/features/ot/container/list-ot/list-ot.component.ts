@@ -348,34 +348,17 @@ export class ListOtComponent implements OnInit, OnDestroy {
             class: 'p-button-rounded p-button-success p-mr-2',
             label: 'Autorizar Pago',
             onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea autorizar pago?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.authorizePayments(ot.id);
-                },
-              });
-            },
-          });
-
-          actions.push({
-            icon: 'p-button-icon pi pi-times',
-            class: 'p-button-rounded p-button-danger p-mr-2',
-            label: 'Rechazar pago',
-            onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea rechazar pago?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.rejectPayments(ot.id);
-                },
-              });
+              this.router.navigate(['/app/informacion/acta/', item.id]);
+              // this.confirmationService.confirm({
+              //   target: event.target as EventTarget,
+              //   message: `¿Desea autorizar pago?`,
+              //   icon: 'pi pi-exclamation-triangle',
+              //   acceptLabel: 'Confirmar',
+              //   rejectLabel: 'Cancelar',
+              //   accept: () => {
+              //     this.otFacade.authorizePayments(ot.id);
+              //   },
+              // });
             },
           });
         }

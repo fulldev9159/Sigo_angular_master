@@ -1,6 +1,6 @@
 <ng-container *ngIf="(loginAuth$ |async).perfil==='Gestor/JP'">
   <app-acta-gestor></app-acta-gestor>
 </ng-container>
-<!-- <ng-container *ngIf="(loginAuth$ |async).perfil==='Administrador EECC'">
-  <app-informe-admincontrato></app-informe-admincontrato>
-</ng-container> -->
+<ng-container *ngIf="(loginAuth$ |async).perfil==='Jefe de Área Telefónica'">
+  <app-acta-jerarquia></app-acta-jerarquia>
+</ng-container>

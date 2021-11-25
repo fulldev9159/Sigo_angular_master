@@ -11,7 +11,7 @@ const routes: Routes = [
     canActivate: [NgxPermissionsGuard],
     data: {
       permissions: {
-        only: 'OT_VALIDAR_ACTA',
+        only: ['OT_VALIDAR_ACTA', 'OT_AUTORIZAR_PAGOS'],
         redirectTo: '/app/ot/list-ot',
       },
       state: 'form-cub',

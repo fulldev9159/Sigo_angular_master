@@ -700,6 +700,11 @@ export const rechazarInformeActaError = createAction(
 );
 
 // GET detalle acta
+export const getDetalleActaMezcla = createAction(
+  '[OT] GET detalle acta mezcla',
+  props<{ ot_id: number }>()
+);
+
 export const getDetalleActa = createAction(
   '[OT] GET detalle acta',
   props<{ ot_id: number }>()

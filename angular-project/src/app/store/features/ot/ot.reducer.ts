@@ -3,6 +3,7 @@ import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
 import * as Data from '@data';
 import { DataInformeAvance, Plan, PMO, Sitio } from '@data';
+import { DetalleActa } from '@data/model/acta';
 
 export const otFeatureKey = 'ot';
 
@@ -37,6 +38,7 @@ export interface StateOt {
   dataInformeAvanceTrabajador: DataInformeAvance[];
   dataInformeAvanceAdminEC: DataInformeAvance[];
   dataInformeActa: DataInformeAvance[];
+  dataSolicitudPago: DetalleActa[];
   info_ot_id: number;
 }
 
@@ -71,6 +73,7 @@ export const initialStateOt: StateOt = {
   dataInformeAvanceTrabajador: [],
   dataInformeAvanceAdminEC: [],
   dataInformeActa: [],
+  dataSolicitudPago: [],
   info_ot_id: null,
 };
 
@@ -403,5 +406,9 @@ export const reducerOt = createReducer(
   on(OtActions.getDataInformeActa, (state, { ot_id }) => ({
     ...state,
     info_ot_id: ot_id,
+  })),
+  on(OtActions.getDetalleActaSuccess, (state, { dataInformeActa }) => ({
+    ...state,
+    dataSolicitudPago: dataInformeActa,
   }))
 );

@@ -126,3 +126,8 @@ export const getInfoOtId = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.info_ot_id
 );
+
+export const getDataSolicitudPago = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.dataSolicitudPago
+);

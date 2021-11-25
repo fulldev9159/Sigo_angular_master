@@ -17,6 +17,7 @@ import {
   Sitio,
 } from '@data';
 import {
+  DetalleActa,
   RequestSaveInformeActaGestor,
   RequestSolicitudPagoActa,
 } from '@data/model/acta';
@@ -419,10 +420,17 @@ export class OtFacade {
     return this.store.select(otSelectors.getInfoOtId);
   }
 
-  public getDetalleActa(ot_id: number): void {
+  public getDetalleActaMezcla(ot_id: number): void {
+    this.store.dispatch(otActions.getDetalleActaMezcla({ ot_id }));
+  }
+
+  public getDataSolicitudPago(ot_id: number): void {
     this.store.dispatch(otActions.getDetalleActa({ ot_id }));
   }
 
+  public getDataSolicitudPago$(): Observable<DetalleActa[]> {
+    return this.store.select(otSelectors.getDataSolicitudPago);
+  }
   public sendSolicitudPagoActa(request: RequestSolicitudPagoActa): void {
     this.store.dispatch(otActions.sendSolicitudPagoActa({ request }));
   }
