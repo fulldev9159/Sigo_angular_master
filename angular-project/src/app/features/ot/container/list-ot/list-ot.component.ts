@@ -364,7 +364,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
         }
 
         const otFinalizar = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_FINALIZAR_OT'
+          accion => accion.slug === 'OT_CERRAR'
         );
 
         if (otFinalizar) {

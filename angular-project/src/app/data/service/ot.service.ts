@@ -222,10 +222,12 @@ export class OTService {
   }
 
   finalizeOT(perfil_id: number, otID: number): Observable<any> {
-    console.log('finalizar ot. no implementado aun', {
-      ot_id: otID,
-    });
-    return of({});
+    return this.http.post<RejectOTMinutesGenerationResponse>(
+      `${this.apiUrl}/ingreot/ot/close`,
+      {
+        ot_id: otID,
+      }
+    );
   }
 
   registrarLibroObra(registro: Data.RegistroLibroObraRequest): Observable<any> {
