@@ -63,6 +63,9 @@ export class NotifyAfter {
         'El acta fue enviada correctamente';
       msg[otActions.rechazarInformeActaSuccess.type] =
         'El acta fue rechazada correctamente';
+      msg[otActions.sendSolicitudPagoActaSuccess.type] =
+        'La solicitud de pago a sido enviada';
+
       if (
         action === cubActions.createCubSuccess.type ||
         action === cubActions.editCubicacionSuccess.type
@@ -73,9 +76,11 @@ export class NotifyAfter {
 
       if (
         action === otActions.saveInformeAvanceTrabajadorSuccess.type ||
-        action === otActions.saveInformeAvanceAdminECSuccess.type
+        action === otActions.saveInformeAvanceAdminECSuccess.type ||
+        action === otActions.sendSolicitudPagoActaSuccess.type
       ) {
-        this.otFacade.getDataInformeAvanceTrabajador(+data.ot_id);
+        location.reload();
+        // this.otFacade.getDataInformeAvanceTrabajador(+data.ot_id);
       }
 
       if (action === otActions.saveBorradorInformeAvanceSuccess.type) {
@@ -100,8 +105,8 @@ export class NotifyAfter {
       msg[cubActions.getSubContractedServicesSuccess.type] =
         'No existen LPUs para el tipo seleccionado';
       msg[cubActions.createCubSuccess.type] = 'No se pudo crear la cubicación';
-      msg[cubActions.getAutoSuggestSuccess.type] =
-        'No existen sugerencias de nombre';
+      // msg[cubActions.getAutoSuggestSuccess.type] =
+      //   'No existen sugerencias de nombre';
       msg[cubActions.getDetalleCubicacionSuccess.type] =
         'No posee detalle de cubicación';
       msg[otActions.getDataInformeAvanceTrabajadorSuccess.type] =
@@ -114,6 +119,8 @@ export class NotifyAfter {
       msg[otActions.getSiteSuccess.type] =
         'No existen sitios para el proyecto escogido';
       msg[otActions.getPmoSuccess.type] = 'No existen pmos';
+      msg[otActions.getDetalleActaSuccess.type] =
+        'No existen valores para el acta';
       if (msg[action] !== undefined) {
         this.snackService.showMessage(
           `${msg[action]}- ${status.description}`,
@@ -162,12 +169,14 @@ export class NotifyAfter {
     msg[otActions.saveInformeActaError.type] = 'No se pudo enviar el acta';
     msg[otActions.rechazarInformeActaError.type] =
       'Falló la ejecución del rechazo';
-    msg[otActions.inicializarInformeAvanceError.type] =
-      'Falló la inicialización del informe';
+    // msg[otActions.inicializarInformeAvanceError.type] =
+    //   'Falló la inicialización del informe';
     msg[otActions.getPlansError.type] = 'No se pudo obtener los planes';
     msg[otActions.getOtsError.type] = 'Falló la obtención de OTs';
     msg[otActions.getSiteError.type] = 'Falló la obtención de Sitios';
     msg[otActions.getPmoError.type] = 'Falló la obtención de PMOs';
+    msg[otActions.getDetalleActaError.type] =
+      'Falló la obtención de información del acta';
 
     this.snackService.showMessage(`${msg[action]} - ${message}`, 'error', 4000);
   }

@@ -27,6 +27,7 @@ export interface OT {
   etapa_otid: number;
   etapa_slug: string;
   proveedor_id: number;
+  subetapa_otdesc: string;
 }
 
 interface FieldOrder {
@@ -279,4 +280,12 @@ export interface DataRspDetalleOT {
     };
   };
   tipo_contrato_marco_nombre: string;
+  tipo_contrato_marco_id: number;
+  tipo_numero_interno_id: number;
+  tipo_numero_interno_nombre: string;
+  tipo_subetapa_pago: {
+    id: number;
+    slug: string;
+    nombre: string;
+  };
 }

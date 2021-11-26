@@ -13,8 +13,14 @@ import {
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  RequestSaveInformeAvanceAdmin,
   Sitio,
 } from '@data';
+import {
+  DetalleActa,
+  RequestSaveInformeActaGestor,
+  RequestSolicitudPagoActa,
+} from '@data/model/acta';
 
 @Injectable({
   providedIn: 'root',
@@ -292,8 +298,8 @@ export class OtFacade {
   }
 
   // Pagos
-  public authorizePayments(otID: number): void {
-    this.store.dispatch(otActions.authorizePayments({ otID }));
+  public authorizePayments(otID: number, user_id: number): void {
+    this.store.dispatch(otActions.authorizePayments({ otID, user_id }));
   }
 
   public rejectPayments(otID: number): void {
@@ -357,9 +363,9 @@ export class OtFacade {
     return this.store.select(otSelectors.getSaveOTError);
   }
 
-  public inicializarInformeAvanceTrabajador(ot_id: number): void {
-    this.store.dispatch(otActions.inicializarInformeAvance({ ot_id }));
-  }
+  // public inicializarInformeAvanceTrabajador(ot_id: number): void {
+  //   this.store.dispatch(otActions.inicializarInformeAvance({ ot_id }));
+  // }
 
   public getDataInformeAvanceTrabajador(ot_id: number): void {
     this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
@@ -378,8 +384,10 @@ export class OtFacade {
   public saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): void {
     this.store.dispatch(otActions.saveInformeAvanceTrabajador({ request }));
   }
-  public saveInformeAvanceAdminEC(lpus: LpuInformeAvanceDetalle[]): void {
-    this.store.dispatch(otActions.saveInformeAvanceAdminEC({ lpus }));
+  public saveInformeAvanceAdminEC(
+    request: RequestSaveInformeAvanceAdmin
+  ): void {
+    this.store.dispatch(otActions.saveInformeAvanceAdminEC({ request }));
   }
 
   public saveBorradorInformeAvance(
@@ -400,8 +408,8 @@ export class OtFacade {
     return this.store.select(otSelectors.getDataInformeActa);
   }
 
-  public saveInformeActa(lpus: LpuInformeAvanceDetalle[]): void {
-    this.store.dispatch(otActions.saveInformeActa({ lpus }));
+  public saveInformeActa(request: RequestSaveInformeActaGestor): void {
+    this.store.dispatch(otActions.saveInformeActa({ request }));
   }
 
   public rechazarInformeActa(informe_id: number): void {
@@ -410,5 +418,20 @@ export class OtFacade {
 
   public getInfoOtId$(): Observable<number> {
     return this.store.select(otSelectors.getInfoOtId);
+  }
+
+  public getDetalleActaMezcla(ot_id: number): void {
+    this.store.dispatch(otActions.getDetalleActaMezcla({ ot_id }));
+  }
+
+  public getDataSolicitudPago(ot_id: number): void {
+    this.store.dispatch(otActions.getDetalleActa({ ot_id }));
+  }
+
+  public getDataSolicitudPago$(): Observable<DetalleActa[]> {
+    return this.store.select(otSelectors.getDataSolicitudPago);
+  }
+  public sendSolicitudPagoActa(request: RequestSolicitudPagoActa): void {
+    this.store.dispatch(otActions.sendSolicitudPagoActa({ request }));
   }
 }

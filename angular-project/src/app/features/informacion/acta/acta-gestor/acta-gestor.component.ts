@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  AfterViewInit,
-  AfterContentInit,
-  AfterViewChecked,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 
@@ -25,17 +18,20 @@ import {
   RequestSaveInformeAvanceAdmin,
 } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
+import { RequestSaveInformeActaGestor } from '@data/model/acta';
 
 @Component({
-  selector: 'app-informe-admincontrato',
-  templateUrl: './informe-admincontrato.component.html',
-  styleUrls: ['./informe-admincontrato.component.scss'],
+  selector: 'app-acta-gestor',
+  templateUrl: './acta-gestor.component.html',
+  styleUrls: ['./acta-gestor.component.scss'],
 })
-export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
+export class ActaGestorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRspDetalleOT>;
-  dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
+  dataInformeActa$: Observable<DataInformeAvance[]> = of([]);
+  cubicacion$: Observable<DetalleCubicacion[]> = of([]);
+
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
   });
@@ -43,8 +39,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   lpusTotal = 0;
   unidadesTotal = 0;
   materialesTotal = 0;
-  waitAP = false;
-  detalleTipo = '';
+  val3 = 100;
   informe_id = 0;
   totalCubicado = 0;
 
@@ -54,30 +49,30 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.lpusTotal = 0;
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceAdminEC$();
+    this.dataInformeActa$ = this.otFacade.getDataInformeActa$();
+
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
-        if (ot && ot.tipo_subetapa_pago.slug === 'OT_ET_PAGO_GENERACION_ACTA') {
+        if (ot) {
           this.totalCubicado = ot.total;
-          this.otFacade.getDataInformeAvanceAdminEC(ot.id);
+          this.otFacade.getDataInformeActa(ot.id);
         }
       })
     );
 
     this.subscription.add(
-      this.dataInformeAvance$.subscribe(lpu => {
+      this.dataInformeActa$.subscribe(lpu => {
         if (lpu) {
           const totalCub = lpu.reduce(
             (ac, cur) => ac + cur.cantidad_cubicada * cur.LpuPrecio,
             0
           );
+          console.log(totalCub);
         }
 
         if (lpu && lpu.length > 0) {
           this.informe_id = lpu[0].informe_id;
-          this.detalleTipo = lpu[0].detalle_tipo;
           lpu.forEach(lpu_service => {
             const group = new FormGroup({
               detalle_id: new FormControl(lpu_service.detalle_id, [
@@ -86,6 +81,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
               informado: new FormControl(lpu_service.cantidad_informada, [
                 Validators.required,
                 Validators.min(0),
+                Validators.max(lpu_service.cantidad_informada),
               ]),
               precio: new FormControl(lpu_service.LpuPrecio),
             });
@@ -101,7 +97,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.form
         .get('table')
-        .valueChanges.pipe(withLatestFrom(this.dataInformeAvance$))
+        .valueChanges.pipe(withLatestFrom(this.dataInformeActa$))
         .subscribe(([informados, lpus]) => {
           if (lpus.length === informados.length) {
             this.lpusTotal = 0;
@@ -128,6 +124,8 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
       return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
     } else if (errors.min) {
       return `No puede ser negativo`;
+    } else if (errors.max) {
+      return `No puede ser mayor a lo informado por la empresa contratista`;
     }
   }
 
@@ -149,12 +147,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     this.DisplayConfirmacionModal = true;
   }
 
-  sendInforme(): void {
-    // const index = 'table';
-    // (this.form.controls[index] as FormArray).controls[0].disable();
-    // (this.form.controls[index] as FormArray).controls[1].disable();
-
-    this.waitAP = true;
+  sendInformeActa(): void {
     this.DisplayConfirmacionModal = false;
 
     const lpus: LpuInformeAvanceDetalle[] = (
@@ -163,17 +156,17 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
       return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
     });
 
-    const request: RequestSaveInformeAvanceAdmin = {
-      informe_id: this.informe_id,
+    const request: RequestSaveInformeActaGestor = {
+      acta_id: this.informe_id,
       observacion: null,
       valores_detalles: lpus,
     };
     console.log(request);
-    this.otFacade.saveInformeAvanceAdminEC(request);
+    this.otFacade.saveInformeActa(request);
   }
 
-  rechazarInforme(): void {
-    this.otFacade.rechazarInformeAvance(1);
+  rechazarActa(): void {
+    this.otFacade.rechazarInformeActa(1);
   }
 
   ngOnDestroy(): void {

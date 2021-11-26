@@ -67,4 +67,27 @@
     margin-top: -12px;
     align-items: center;
   }
+
+  .resumen {
+    width: 50%;
+
+    h1 {
+      color: #00507a
+    }
+
+    td {
+      color: #598da8
+    }
+  }
+
+  div.p-dialog-header {
+    background: #5b8aa5;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .content-modal {
+    padding: 10px;
+  }
 }

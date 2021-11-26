@@ -10,9 +10,15 @@ import {
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  RequestSaveInformeAvanceAdmin,
   Sitio,
   StatusResponse,
 } from '@data';
+import {
+  DetalleActa,
+  RequestSaveInformeActaGestor,
+  RequestSolicitudPagoActa,
+} from '@data/model/acta';
 
 // GET OTs init
 
@@ -405,7 +411,7 @@ export const rejectOTMinutesValidationError = createAction(
 // Autorizar pagos
 export const authorizePayments = createAction(
   '[OT] Authorize payments',
-  props<{ otID: number }>()
+  props<{ user_id: number; otID: number }>()
 );
 
 export const authorizePaymentsSuccess = createAction(
@@ -545,21 +551,21 @@ export const getRegistrosLibroObraError = createAction(
   props<{ error: any }>()
 );
 
-// Inicializar informe avance
-export const inicializarInformeAvance = createAction(
-  '[OT] inicializar informe avance',
-  props<{ ot_id: number }>()
-);
+// // Inicializar informe avance
+// export const inicializarInformeAvance = createAction(
+//   '[OT] inicializar informe avance',
+//   props<{ ot_id: number }>()
+// );
 
-export const inicializarInformeAvanceSuccess = createAction(
-  '[OT] inicializar informe avance success',
-  props<{ status: StatusResponse }>()
-);
+// export const inicializarInformeAvanceSuccess = createAction(
+//   '[OT] inicializar informe avance success',
+//   props<{ status: StatusResponse }>()
+// );
 
-export const inicializarInformeAvanceError = createAction(
-  '[OT] inicializar informe avance error',
-  props<{ error: any }>()
-);
+// export const inicializarInformeAvanceError = createAction(
+//   '[OT] inicializar informe avance error',
+//   props<{ error: any }>()
+// );
 
 // Get data informe avance
 export const getDataInformeAvanceTrabajador = createAction(
@@ -616,7 +622,7 @@ export const saveInformeAvanceTrabajadorSuccess = createAction(
 
 export const saveInformeAvanceAdminEC = createAction(
   '[OT] SAVE informe avance Admin EC',
-  props<{ lpus: LpuInformeAvanceDetalle[] }>()
+  props<{ request: RequestSaveInformeAvanceAdmin }>()
 );
 
 export const saveInformeAvanceAdminECSuccess = createAction(
@@ -664,7 +670,7 @@ export const getDataInformeActaError = createAction(
 // SAVE informe acta
 export const saveInformeActa = createAction(
   '[OT] SAVE informe acta',
-  props<{ lpus: LpuInformeAvanceDetalle[] }>()
+  props<{ request: RequestSaveInformeActaGestor }>()
 );
 
 export const saveInformeActaSuccess = createAction(
@@ -690,5 +696,42 @@ export const rechazarInformeActaSuccess = createAction(
 
 export const rechazarInformeActaError = createAction(
   '[OT] rechazar informe acta error',
+  props<{ error: any }>()
+);
+
+// GET detalle acta
+export const getDetalleActaMezcla = createAction(
+  '[OT] GET detalle acta mezcla',
+  props<{ ot_id: number }>()
+);
+
+export const getDetalleActa = createAction(
+  '[OT] GET detalle acta',
+  props<{ ot_id: number }>()
+);
+
+export const getDetalleActaSuccess = createAction(
+  '[OT] GET detalle acta success',
+  props<{ dataInformeActa: DetalleActa[]; status: StatusResponse }>()
+);
+
+export const getDetalleActaError = createAction(
+  '[OT] GET detalle acta error',
+  props<{ error: any }>()
+);
+
+// SEND solicitud pago acta
+export const sendSolicitudPagoActa = createAction(
+  '[OT] Send solicitud pago acta',
+  props<{ request: RequestSolicitudPagoActa }>()
+);
+
+export const sendSolicitudPagoActaSuccess = createAction(
+  '[OT] Send solicitud pago acta success',
+  props<{ status: StatusResponse }>()
+);
+
+export const sendSolicitudPagoActaError = createAction(
+  '[OT] Send solicitud pago acta error',
   props<{ error: any }>()
 );

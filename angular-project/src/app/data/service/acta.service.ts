@@ -4,9 +4,18 @@ import { Observable, of } from 'rxjs';
 import {
   DataInformeAvance,
   LpuInformeAvanceDetalle,
+  RequestSaveInformeAvanceAdmin,
   ResponseBorradorInformeAvance,
   StatusResponse,
 } from '@data';
+import { map } from 'rxjs/operators';
+import {
+  DetalleActa,
+  RequestSaveInformeActaGestor,
+  RequestSolicitudPagoActa,
+  ResponseGetDetalleActa,
+  ResponseGetInformeActa,
+} from '@data/model/acta';
 
 @Injectable({
   providedIn: 'root',
@@ -21,71 +30,38 @@ export class ActaService {
     dataInformeActa: DataInformeAvance[];
     status: StatusResponse;
   }> {
-    // return this.http
-    //   .post<ResponseGetInformeAvance>(
-    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
-    //     {lpus}
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       return {
-    //         status: {
-    // datoInformeAvance:res.data.items
-    //           description: res.status.description,
-    //           responseCode: res.status.responseCode,
-    //         },
-    //       };
-    //     })
-    //   );
-    return of({
-      dataInformeActa: [
-        {
-          detalle_id: 1,
-          detalle_tipo: 'string',
-          ot_id: 1,
-          informe_id: 1,
-          detalle_lpu_id: 8055,
-          lpu_nombre: 'Buscar Ruta optica entre 2 salas',
-          lpu_numero_producto: '8055',
-          LpuPrecio: 1000,
-          cantidad_cubicada: 11,
-          cantidad_aprobada: 0,
-          cantidad_pendiente: 11,
-          cantidad_aprobada_historica: 0,
-          cantidad_informada: 0,
-        },
-      ],
-      status: {
-        description: 'ok',
-        responseCode: 0,
-      },
-    });
+    return this.http
+      .post<ResponseGetInformeActa>(`${this.apiUrl}/infavan/acta/get_gestor`, {
+        ot_id,
+      })
+      .pipe(
+        map(res => {
+          return {
+            dataInformeActa: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 
-  saveInformeActa(lpus: LpuInformeAvanceDetalle[]): Observable<{
+  saveInformeActa(request: RequestSaveInformeActaGestor): Observable<{
     status: StatusResponse;
   }> {
-    // return this.http
-    //   .post<ResponseBorradorInformeAvance>(
-    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
-    //     {lpus}
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       return {
-    //         status: {
-    //           description: res.status.description,
-    //           responseCode: res.status.responseCode,
-    //         },
-    //       };
-    //     })
-    //   );
-    return of({
-      status: {
-        description: 'ok',
-        responseCode: 0,
-      },
-    });
+    return this.http
+      .post<any>(`${this.apiUrl}/infavan/acta/accept`, request)
+      .pipe(
+        map(res => {
+          return {
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 
   rechazarInformeActa(informe_id: number): Observable<{
@@ -112,5 +88,46 @@ export class ActaService {
         responseCode: 0,
       },
     });
+  }
+
+  getActaDetalle(ot_id: number): Observable<{
+    dataInformeActa: DetalleActa[];
+    status: StatusResponse;
+  }> {
+    return this.http
+      .post<ResponseGetDetalleActa>(
+        `${this.apiUrl}/pagos/solicitud/acta/get_detalle`,
+        {
+          ot_id,
+        }
+      )
+      .pipe(
+        map(res => {
+          return {
+            dataInformeActa: res.data.items,
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
+  }
+
+  solicitudPagoActa(request: RequestSolicitudPagoActa): Observable<{
+    status: StatusResponse;
+  }> {
+    return this.http
+      .post<any>(`${this.apiUrl}/pagos/solicitud/acta/send`, request)
+      .pipe(
+        map(res => {
+          return {
+            status: {
+              description: res.status.description,
+              responseCode: res.status.responseCode,
+            },
+          };
+        })
+      );
   }
 }

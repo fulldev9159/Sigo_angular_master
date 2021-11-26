@@ -26,6 +26,11 @@ import { environment } from '@environment';
 import { Response } from '@storeOT/model';
 import * as OtModel from './ot.model';
 import { RequestGetOTs } from '@data';
+import {
+  DetalleActa,
+  LpusPorcentajes,
+  RequestSolicitudPagoActa,
+} from '@data/model/acta';
 
 @Injectable()
 export class OtEffects {
@@ -855,8 +860,8 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.authorizePayments),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.authorizePayments(profile.id, otID).pipe(
+      concatMap(([{ otID, user_id }, profile]) =>
+        this.otService.authorizePayments(user_id, otID).pipe(
           mapTo(otActions.authorizePaymentsSuccess()),
           catchError(error => of(otActions.authorizePaymentsError({ error })))
         )
@@ -1065,26 +1070,26 @@ export class OtEffects {
     { dispatch: false }
   );
 
-  inicializarInformeAvance$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.inicializarInformeAvance),
-      concatMap(({ ot_id }) =>
-        this.informeAvanceService.inicializaInforme(ot_id).pipe(
-          map(({ status }) => {
-            if (status.responseCode === 0) {
-              this.otFacade.getDataInformeAvanceTrabajador(ot_id);
-            }
-            return otActions.inicializarInformeAvanceSuccess({
-              status,
-            });
-          }),
-          catchError(error =>
-            of(otActions.inicializarInformeAvanceError({ error }))
-          )
-        )
-      )
-    )
-  );
+  // inicializarInformeAvance$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(otActions.inicializarInformeAvance),
+  //     concatMap(({ ot_id }) =>
+  //       this.informeAvanceService.inicializaInforme(ot_id).pipe(
+  //         map(({ status }) => {
+  //           if (status.responseCode === 0) {
+  //             this.otFacade.getDataInformeAvanceTrabajador(ot_id);
+  //           }
+  //           return otActions.inicializarInformeAvanceSuccess({
+  //             status,
+  //           });
+  //         }),
+  //         catchError(error =>
+  //           of(otActions.inicializarInformeAvanceError({ error }))
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
   getDataInformeAvanceTrabajador$ = createEffect(() =>
     this.actions$.pipe(
@@ -1145,8 +1150,8 @@ export class OtEffects {
   saveInformeAvanceAdminEC$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveInformeAvanceAdminEC),
-      concatMap(({ lpus }) =>
-        this.informeAvanceService.saveInformeAvanceAdministrador(lpus).pipe(
+      concatMap(({ request }) =>
+        this.informeAvanceService.saveInformeAvanceAdministrador(request).pipe(
           map(({ status }) =>
             otActions.saveInformeAvanceAdminECSuccess({
               status,
@@ -1216,13 +1221,15 @@ export class OtEffects {
   saveInformeActa$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.saveInformeActa),
-      concatMap(({ lpus }) =>
-        this.actaService.saveInformeActa(lpus).pipe(
-          map(({ status }) =>
-            otActions.saveInformeActaSuccess({
+      withLatestFrom(this.otFacade.getInfoOtId$()),
+      concatMap(([{ request }, ot_id]) =>
+        this.actaService.saveInformeActa(request).pipe(
+          map(({ status }) => {
+            this.otFacade.getDetalleActaMezcla(ot_id);
+            return otActions.saveInformeActaSuccess({
               status,
-            })
-          ),
+            });
+          }),
           catchError(error => of(otActions.saveInformeActaError({ error })))
         )
       )
@@ -1245,6 +1252,71 @@ export class OtEffects {
     )
   );
 
+  getDetalleActaMezcla$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDetalleActaMezcla),
+      concatMap(({ ot_id }) =>
+        this.actaService.getActaDetalle(ot_id).pipe(
+          map(({ dataInformeActa, status }) => {
+            console.log(dataInformeActa);
+
+            const lpus: LpusPorcentajes[] = dataInformeActa.map(f => {
+              return { detalle_id: f.detalle_id, porcentaje_solicitado: 1.0 };
+            });
+
+            const request: RequestSolicitudPagoActa = {
+              acta_id: dataInformeActa[0].id,
+              porcentajes_detalles: lpus,
+            };
+            console.log(request);
+
+            this.otFacade.sendSolicitudPagoActa(request);
+            return otActions.getDetalleActaSuccess({
+              dataInformeActa,
+              status,
+            });
+          }),
+          catchError(error => of(otActions.getDetalleActaError({ error })))
+        )
+      )
+    )
+  );
+
+  sendSolicitudPagoActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.sendSolicitudPagoActa),
+      concatMap(({ request }) =>
+        this.actaService.solicitudPagoActa(request).pipe(
+          map(({ status }) =>
+            otActions.sendSolicitudPagoActaSuccess({
+              status,
+            })
+          ),
+          catchError(error =>
+            of(otActions.sendSolicitudPagoActaError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getDetalleActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDetalleActa),
+      concatMap(({ ot_id }) =>
+        this.actaService.getActaDetalle(ot_id).pipe(
+          map(({ dataInformeActa, status }) =>
+            otActions.getDetalleActaSuccess({
+              dataInformeActa,
+              status,
+            })
+          ),
+          catchError(error => of(otActions.getDetalleActaError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfterSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -1261,10 +1333,12 @@ export class OtEffects {
           otActions.getDataInformeActaSuccess,
           otActions.saveInformeActaSuccess,
           otActions.rechazarInformeActaSuccess,
-          otActions.inicializarInformeAvanceSuccess,
+          // otActions.inicializarInformeAvanceSuccess,
           otActions.getPlansSuccess,
           otActions.getSiteSuccess,
-          otActions.getPmoSuccess
+          otActions.getPmoSuccess,
+          otActions.getDetalleActaSuccess,
+          otActions.sendSolicitudPagoActaSuccess
         ),
         tap(action =>
           this.messageServiceInt.actions200(action.status, action.type, action)
@@ -1285,10 +1359,11 @@ export class OtEffects {
           otActions.getDataInformeActaError,
           otActions.saveInformeActaError,
           otActions.rechazarInformeActaError,
-          otActions.inicializarInformeAvanceError,
+          // otActions.inicializarInformeAvanceError,
           otActions.getPlansError,
           otActions.getSiteError,
-          otActions.getPmoError
+          otActions.getPmoError,
+          otActions.getDetalleActaError
         ),
         tap(action =>
           this.messageServiceInt.actionsErrors(
