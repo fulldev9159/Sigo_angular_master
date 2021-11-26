@@ -411,7 +411,7 @@ export const rejectOTMinutesValidationError = createAction(
 // Autorizar pagos
 export const authorizePayments = createAction(
   '[OT] Authorize payments',
-  props<{ otID: number }>()
+  props<{ user_id: number; otID: number }>()
 );
 
 export const authorizePaymentsSuccess = createAction(

@@ -860,8 +860,8 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.authorizePayments),
       withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.authorizePayments(profile.id, otID).pipe(
+      concatMap(([{ otID, user_id }, profile]) =>
+        this.otService.authorizePayments(user_id, otID).pipe(
           mapTo(otActions.authorizePaymentsSuccess()),
           catchError(error => of(otActions.authorizePaymentsError({ error })))
         )

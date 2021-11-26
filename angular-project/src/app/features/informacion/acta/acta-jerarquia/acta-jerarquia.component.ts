@@ -17,8 +17,9 @@ import {
   LpuInformeAvanceDetalle,
   RequestSaveInformeAvanceAdmin,
 } from '@data';
-import { withLatestFrom } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 import { DetalleActa, RequestSaveInformeActaGestor } from '@data/model/acta';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 
 @Component({
   selector: 'app-acta-jerarquia',
@@ -43,22 +44,35 @@ export class ActaJerarquiaComponent implements OnInit, OnDestroy {
   informe_id = 0;
   totalCubicado = 0;
   ot_id = 0;
+  user_id = 0;
 
   constructor(
     private otFacade: OtFacade,
-    private cubFacade: CubicacionFacade
+    private cubFacade: CubicacionFacade,
+    private authFacade: AuthFacade
   ) {}
 
   ngOnInit(): void {
+    this.loginAuth$ = this.authFacade.getLogin$();
     this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
-    this.dataInformeActa$ = this.otFacade.getDataSolicitudPago$();
+    // this.dataInformeActa$ = this.otFacade.getDataSolicitudPago$();
+    this.dataInformeActa$ = of([]);
 
     this.subscription.add(
       this.detalleOt$.subscribe(ot => {
         if (ot) {
           this.ot_id = ot.id;
           this.totalCubicado = ot.total;
-          this.otFacade.getDataSolicitudPago(ot.id);
+          // this.otFacade.getDataSolicitudPago(ot.id);
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.loginAuth$.subscribe(loginAuth => {
+        if (loginAuth) {
+          console.log('ligib', loginAuth);
+          this.user_id = loginAuth.usuario_id;
         }
       })
     );
@@ -98,8 +112,9 @@ export class ActaJerarquiaComponent implements OnInit, OnDestroy {
   }
 
   sendInformeActa(): void {
+    console.log(this.user_id);
     this.DisplayConfirmacionModal = false;
-    this.otFacade.authorizePayments(this.ot_id);
+    this.otFacade.authorizePayments(this.ot_id, this.user_id);
   }
 
   rechazarActa(): void {

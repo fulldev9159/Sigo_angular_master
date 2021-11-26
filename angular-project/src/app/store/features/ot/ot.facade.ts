@@ -298,8 +298,8 @@ export class OtFacade {
   }
 
   // Pagos
-  public authorizePayments(otID: number): void {
-    this.store.dispatch(otActions.authorizePayments({ otID }));
+  public authorizePayments(otID: number, user_id: number): void {
+    this.store.dispatch(otActions.authorizePayments({ otID, user_id }));
   }
 
   public rejectPayments(otID: number): void {

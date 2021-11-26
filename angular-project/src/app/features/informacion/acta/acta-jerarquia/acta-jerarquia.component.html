@@ -1,13 +1,14 @@
 <div style="padding: 8px;">
-  <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_INICIO_FLUJO'">
+  <!-- <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_INICIO_FLUJO'">
     <p-message severity="info" text="El trabajador aún no finaliza el informe"></p-message>&nbsp;
   </span>
 
   <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_GENERACION_ACTA'">
     <p-message severity="info" text="A la espera de la aprobación del administrador EC para el informe enviado por el trabajador"></p-message>&nbsp;
-  </span>
+  </span> -->
 
-  <ng-container *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO'">
+  <!-- <ng-container *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO'"> -->
+  <ng-container>
     <p-card>
       <p-tabView>
         <p-tabPanel header="LPUs">

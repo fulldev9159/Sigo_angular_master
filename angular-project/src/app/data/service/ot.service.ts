@@ -190,15 +190,16 @@ export class OTService {
   // }
 
   authorizePayments(
-    perfil_id: number,
+    user_id: number,
     otID: number
   ): Observable<ApprovalPagoOTResponse> {
     console.log('autorizar pagos. no implementado aun', {
       ot_id: otID,
     });
     return this.http.post<ApprovalPagoOTResponse>(
-      `${this.apiUrl}/ingreot/ot/pago/accept`,
+      `${this.apiUrl}/ingreot/ot/pago/autorizar`,
       {
+        user_id,
         ot_id: otID,
       }
     );
