@@ -50,12 +50,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(authActions.loginError),
         tap(({ error }) => {
-          console.log('Usuario/Password incorrecto');
-          this.snackService.showMessage(
-            // `ERR: ${error.error.status.description}`,
-            'Usuario/Password incorrecto',
-            'error'
-          );
+          this.snackService.showMessage('Usuario/Password incorrecto', 'error');
         })
       ),
     { dispatch: false }

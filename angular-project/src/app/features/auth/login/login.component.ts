@@ -7,9 +7,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { Message } from 'primeng//api';
-import { MessageService } from 'primeng/api';
-import { Subscription, Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -25,8 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authFacade: AuthFacade,
-    private messageService: MessageService
+    private authFacade: AuthFacade
   ) {}
 
   ngOnInit(): void {

@@ -19,10 +19,6 @@ export class AuthFacade {
     this.store.dispatch(authActions.login({ login }));
   }
 
-  // public postLoginSuccess(login): void {
-  //   this.store.dispatch(authActions.loginSuccess({ login }));
-  // }
-
   public getLogin$(): Observable<Login> {
     return this.store.select(authSelectors.getLogin);
   }

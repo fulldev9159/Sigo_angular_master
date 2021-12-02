@@ -1,32 +1,18 @@
-# Project OTEC WEB
+# Project SIGO WEB 0.1.0
 
-## Robot e2e
-Documentación: https://robotframework.org/robotframework/
-### **command**
+Password: M0v15tar.
 
-> ``` robot --variable url:<url de la web a testear> --variable ambiente:ambiente en que se probará> <archivo o directorio de archivos de testing>```
->> ``` robot --variable url:http://localhost:4201 --variable ambiente:visual .```
+## Tecnologías
 
-### sintax
-- ```--variable url: ```
-- ```--variable ambiente:```: 
-    - **visual** = Para probar de manera local y poder ver la interfaz de chrome
-    - **testing** = Para que no ejecute una intefaz visual. Este ambiente es usado para la pipeline
+![Tecnologías](./readme_img/tecnologias.PNG)
 
-### Comandos internos robotframework
+## Ambiente actual
 
->`Open Browser To Page    <url>` - Permite abrir una url a la que se le ejecutarán los test. Esta usa la variable de ambiente dada al ejecutar el comando robot.
-
->`Element text should be    <element selector>   <texto>` - Permite verificar el texto de un elemento en la web.
->> `Element text should be    id:user-name    Jessica Castillo`
-
->`Login    <username>    <password>` - Permite logearse al sistema SIGO.
->> `Login    jcastill    Cualquierpassword`
-
+![Ambiente](./readme_img/ambiente.PNG)
 
 ## Objetivo
 
-El objetivo de es otorgar un administrador web que permita al cliente administrar las ordenes de trabajo que se realizan en Movistar.
+El objetivo de es otorgar un administrador web que permita al cliente gestionar las ordenes de trabajo que se realizan en Movistar.
 
 ## Funcionalidades
 
@@ -36,32 +22,28 @@ Permite:
 - Administración de cubicaciones
 - Administración de Ordenes de trabajo
 
-## Tecnologías
-
-- Angular Version:10.1.6 : <https://angular.io/>.
-Framework javascript que permite desarrollar grandes y complejas aplicaciones en entorno web. Grafana está desarrollado en angular.
-
-## Arquitectura
-
-![Diagrama](./images/Arquitectura.PNG)
-
-## Ambiente
-
-![Diagrama](./images/Ambiente.PNG)
-
 ## Links
 
 - Miro: <https://miro.com/app/board/o9J_lRnu24c=/>
-- Repo API-Otec: <http://gitserver.zweicom.com/cl-movistar/otec-cigpe/api-otec>
-- Repo Db: <http://gitserver.zweicom.com/database/databases/blob/master/docker-compose.yml>
-- Repo Env: <http://gitserver.zweicom.com/Products/SCE/demos-env/blob/develop/docker-compose.yml>
-- 
+- Repo API-sigo: <https://gitlab.com/zweicom/cl-movistar/sigo/api-sigo>
+- Repo Db: <https://gitlab.com/zweicom/databases/databases>
+- Repo Env: <https://gitlab.com/zweicom/cl-movistar/sigo/demos-sigo>
 
 ## Ejecución
 
-- cd ambiente-local
-- docker-compose up -d mcl_api_otec
 - cd ../angular-project
 - npm install
 - npm start
 
+<!-- ## Robot e2e
+Documentación: https://robotframework.org/robotframework/
+### **command**
+
+> ``` robot --variable url:<url de la web a testear> --variable ambiente:ambiente en que se probará> <archivo o directorio de archivos de testing>```
+>> ``` robot --variable url:http://localhost:4201 --variable ambiente:visual .```
+
+### sintax
+- ```--variable url: ```
+- ```--variable ambiente:```:
+    - **visual** = Para probar de manera local y poder ver la interfaz de chrome
+    - **testing** = Para que no ejecute una intefaz visual. Este ambiente es usado para la pipeline -->
