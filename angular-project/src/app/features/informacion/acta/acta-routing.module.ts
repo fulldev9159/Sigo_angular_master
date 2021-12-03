@@ -12,7 +12,7 @@ const routes: Routes = [
     data: {
       permissions: {
         only: ['OT_VALIDAR_ACTA', 'OT_AUTORIZAR_PAGOS'],
-        redirectTo: '/app/ot/list-ot',
+        redirectTo: '/app/dashboard',
       },
       state: 'form-cub',
     },

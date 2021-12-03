@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         )
         .subscribe(loggedIn => {
           if (loggedIn) {
-            this.router.navigate(['/app/ot']);
+            this.router.navigate(['/app/dashboard']);
           }
         })
     );
