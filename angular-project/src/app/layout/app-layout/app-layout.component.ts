@@ -120,7 +120,6 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     this.loadingS.loadingSub
       .pipe(delay(0)) // This prevents a ExpressionChangedAfterItHasBeenCheckedError for subsequent requests
       .subscribe(loading => {
-        console.log('dasdas');
         this.loading = loading;
       });
   }
