@@ -8,7 +8,7 @@ Password: M0v15tar.
 
 ## Ambiente actual
 
-![Ambiente](./readme_img/ambiente.PNG)
+![Ambiente](./readme_img/Ambiente.PNG)
 
 ## Objetivo
 
