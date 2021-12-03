@@ -31,7 +31,7 @@ export class AuthTokenGuard implements CanActivate {
       ),
       tap(loggetOut => {
         if (!loggetOut) {
-          this.router.navigate(['/app/ot']);
+          this.router.navigate(['/app/dashboard']);
         }
       })
     );

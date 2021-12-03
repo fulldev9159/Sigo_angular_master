@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppLayoutComponent } from 'src/app/layout/app-layout/app-layout.component';
+import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
   {
@@ -9,8 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'ot',
+        redirectTo: 'dashboard',
         pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
       },
       {
         path: 'cubicacion',

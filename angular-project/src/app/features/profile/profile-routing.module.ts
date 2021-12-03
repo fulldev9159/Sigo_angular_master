@@ -20,7 +20,7 @@ export const routes: Routes = [
         data: {
           permissions: {
             only: 'PERFIL_LISTAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'list-pro',
         },
@@ -32,7 +32,7 @@ export const routes: Routes = [
         data: {
           permissions: {
             only: 'PERFIL_CREAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'form-pro',
         },
@@ -44,7 +44,7 @@ export const routes: Routes = [
         data: {
           permissions: {
             only: 'PERFIL_EDITAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'form-pro',
         },

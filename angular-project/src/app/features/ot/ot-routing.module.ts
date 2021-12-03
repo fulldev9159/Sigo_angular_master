@@ -15,12 +15,12 @@ export const routes: Routes = [
       {
         path: 'list-ot',
         component: ListOtComponent,
-        // canActivate: [NgxPermissionsGuard],
+        canActivate: [NgxPermissionsGuard],
         data: {
-          // permissions: {
-          //   only: 'OT_LISTAR',
-          //   redirectTo: '/app/ot/list-ot',
-          // },
+          permissions: {
+            only: 'OT_LISTAR',
+            redirectTo: '/app/dashboard',
+          },
           state: 'list-ot',
         },
       },
@@ -31,7 +31,7 @@ export const routes: Routes = [
         data: {
           permissions: {
             only: 'OT_CREAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'form-ot',
         },

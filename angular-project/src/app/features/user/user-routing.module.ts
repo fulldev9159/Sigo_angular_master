@@ -19,7 +19,7 @@ const routes: Routes = [
         data: {
           permissions: {
             only: 'PERFIL_LISTAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'list-user',
         },
@@ -31,7 +31,7 @@ const routes: Routes = [
         data: {
           permissions: {
             only: 'PERFIL_EDITAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'form-user',
         },
@@ -43,7 +43,7 @@ const routes: Routes = [
         data: {
           permissions: {
             only: 'PERFIL_CREAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'form-user',
         },

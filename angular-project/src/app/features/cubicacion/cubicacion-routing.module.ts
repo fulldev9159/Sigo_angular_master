@@ -18,7 +18,7 @@ export const routes: Routes = [
         data: {
           permissions: {
             only: 'CUBICACION_LISTAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'list-cub',
         },
@@ -30,7 +30,7 @@ export const routes: Routes = [
         data: {
           permissions: {
             only: 'CUBICACION_CREAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'form-cub',
         },
@@ -42,7 +42,7 @@ export const routes: Routes = [
         data: {
           permissions: {
             only: 'CUBICACION_EDITAR',
-            redirectTo: '/app/ot/list-ot',
+            redirectTo: '/app/dashboard',
           },
           state: 'form-cub',
         },
