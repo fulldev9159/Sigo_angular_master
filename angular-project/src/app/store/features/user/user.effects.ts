@@ -92,7 +92,6 @@ export class UserEffects {
       concatMap(({ usuario_id, activacion }) =>
         this.userService.activateUser(usuario_id, activacion).pipe(
           map((usuario_id_res: number) => {
-            console.log('response', usuario_id_res);
             return userActions.activateUserSuccess({
               usuario_id: usuario_id_res,
               activo: activacion,
