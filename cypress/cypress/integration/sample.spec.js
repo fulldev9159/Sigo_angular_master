@@ -7,7 +7,7 @@ describe('My First Test', () => {
     cy.visit('http://localhost:4201/app/dashboard');
   });
   it('Does not do much!', () => {
-    cy.get('#text').type('mgestor1');
+    cy.get('#text').type('mgestor1s');
     cy.get('#password').type('M0v15tar.{enter}');
     expect(true).to.equal(true);
   });

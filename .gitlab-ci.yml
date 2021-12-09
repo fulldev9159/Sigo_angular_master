@@ -25,7 +25,7 @@ unit test and lint:
     # - ng test --code-coverage --progress false --watch false
   # coverage: '/^Statements\s*:\s*([^%]+)/'
 
-cypress test integrations:
+integrations test cypress:
   # <<: *connect_gcr
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: e2e test
