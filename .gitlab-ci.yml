@@ -32,7 +32,7 @@ cypress test integrations:
   script:
     - cd angular-project
     - npm ci
-    - npm start & wait-on http://localhost:4201
+    - npm start & ./node_modules/.bin/wait-on http://localhost:4201
     - cd ../cypress
     - npm ci
     - npx cypress run
