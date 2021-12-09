@@ -26,7 +26,7 @@ unit test and lint:
   # coverage: '/^Statements\s*:\s*([^%]+)/'
 
 cypress test integrations:
-  <<: *connect_gcr
+  # <<: *connect_gcr
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: e2e test
   script:
