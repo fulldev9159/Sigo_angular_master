@@ -1,5 +1,5 @@
 stages:
-  - ci
+  - linter
   - unit test
   - integrations test
   - acceptance test
@@ -16,18 +16,24 @@ variables:
     - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
     - docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
 
+linter:
+  stage: linter
+  image: trion/ng-cli-karma:${CLI_VERSION}
+  script:
+    - cd angular-project
+    - npm ci
+    - ng lint
+
 unit test and lint:
   stage: unit test
   image: trion/ng-cli-karma:${CLI_VERSION}
   script:
     - cd angular-project
     - npm ci
-    - ng lint
-    # - ng test --code-coverage --progress false --watch false
-  # coverage: '/^Statements\s*:\s*([^%]+)/'
+    - ng test --code-coverage --progress false --watch false
+  coverage: '/^Statements\s*:\s*([^%]+)/'
 
 integrations test cypress:
-  # <<: *connect_gcr
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: integrations test
   script:
