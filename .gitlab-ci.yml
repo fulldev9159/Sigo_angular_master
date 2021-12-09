@@ -30,7 +30,8 @@ cypress test integrations:
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: e2e test
   script:
-    - npm start &
+    - npm ci
+    - npm start & wait-on http://localhost:4201
     - cd cypress
     - npm ci
     - npx cypress run

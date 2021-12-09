@@ -4,7 +4,7 @@ describe('My First Test', () => {
     // so we must tell it to visit our website with the `cy.visit()` command.
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
-    cy.visit('http://34.122.92.38:4300/app/dashboard');
+    cy.visit('http://localhost:4201/app/dashboard');
   });
   it('Does not do much!', () => {
     cy.get('#text').type('mgestor1');
