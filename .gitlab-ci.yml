@@ -1,7 +1,8 @@
 stages:
   - ci
   - unit test
-  - e2e test
+  - integrations test
+  - acceptance test
   - deployment
   - triggers
 
@@ -28,7 +29,7 @@ unit test and lint:
 integrations test cypress:
   # <<: *connect_gcr
   image: cypress/browsers:node12.14.1-chrome85-ff81
-  stage: e2e test
+  stage: integrations test
   script:
     - cd angular-project
     - npm ci
@@ -39,7 +40,7 @@ integrations test cypress:
 
 acceptance test:
   <<: *connect_gcr
-  stage: e2e test
+  stage: acceptance test
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
     - if [ $(docker network ls |grep web-sigo_default|wc -l) == 0 ]; then  docker network create -d bridge web-sigo_default; fi
