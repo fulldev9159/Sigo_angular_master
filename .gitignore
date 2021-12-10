@@ -53,3 +53,5 @@ robot_e2e/selenium-screenshot*
 robot_e2e/report.html
 robot_e2e/output.xml
 robot_e2e/log.html
+
+cypress/node_modules
