@@ -7,8 +7,8 @@ export interface RequestLogin {
 }
 export interface ResponseLogin {
   status: {
-    description: string;
-    responseCode: number;
+    desc: string;
+    code: number;
   };
   data: Login;
 }
@@ -18,8 +18,8 @@ export interface Login {
   usuario_id: number;
   perfiles: Perfil[];
   status: {
-    description: string;
-    response_code: number;
+    desc: string;
+    code: number;
   };
 }
 // Login end

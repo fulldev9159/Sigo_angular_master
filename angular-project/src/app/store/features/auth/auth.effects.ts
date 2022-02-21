@@ -35,10 +35,10 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(authActions.loginSuccess),
         tap(({ data }) => {
-          if (+data.status.response_code === 0) {
+          if (+data.status.code === 0) {
             this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
           } else {
-            this.snackService.showMessage(data.status.description, 'error');
+            this.snackService.showMessage(data.status.desc, 'error');
           }
         })
       ),

@@ -15,14 +15,14 @@ export class AuthService {
 
   login(login: RequestLogin): Observable<Login> {
     return this.http
-      .post<ResponseLogin>(`${this.apiUrl}/login_new`, login)
+      .post<ResponseLogin>(`${this.apiUrl}/login/start`, login)
       .pipe(
         map(response => {
           return {
             ...response.data,
             status: {
-              description: response.status.description,
-              response_code: response.status.responseCode,
+              desc: response.status.desc,
+              code: response.status.code,
             },
           };
         })
