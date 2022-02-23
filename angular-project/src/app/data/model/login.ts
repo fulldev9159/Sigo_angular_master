@@ -15,6 +15,7 @@ export interface SessionData {
   usuario_nombre: string;
   usuario_id: number;
   perfiles: Perfil[];
+  proxy_id: number;
   status: {
     description: string;
     response_code: number;

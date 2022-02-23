@@ -13,7 +13,7 @@ import { map, tap, takeUntil } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthTokenGuard implements CanActivate {
+export class PerfilSelectGuard implements CanActivate {
   constructor(private router: Router, private authFacade: AuthFacade) {}
 
   canActivate(
@@ -28,15 +28,15 @@ export class AuthTokenGuard implements CanActivate {
       map(loginAuth => {
         if (
           loginAuth?.token !== undefined &&
-          loginAuth?.proxy_id !== undefined
-        ) {
-          this.router.navigate(['/app/dashboard']);
-          return false;
-        } else if (
-          loginAuth?.token === undefined ||
           loginAuth?.proxy_id === undefined
         ) {
           return true;
+        } else if (
+          loginAuth?.token === undefined &&
+          loginAuth?.proxy_id === undefined
+        ) {
+          this.router.navigate(['/auth/login']);
+          return false;
         }
       })
       // tap(loggetOut => {

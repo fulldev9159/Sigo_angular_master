@@ -30,17 +30,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.authFacade
         .getLogin$()
-        .pipe(
-          map(
-            loginAuth =>
-              loginAuth !== null &&
-              loginAuth.token &&
-              loginAuth.usuario_id !== 0
-          )
-        )
-        .subscribe(loggedIn => {
-          if (loggedIn) {
-            this.router.navigate(['/app/dashboard']);
+        // .pipe(
+        //   map(
+        //     loginAuth =>
+        //       loginAuth !== null &&
+        //       loginAuth.token &&
+        //       loginAuth.usuario_id !== 0
+        //   )
+        // )
+        .subscribe(loginAuth => {
+          if (
+            loginAuth?.token !== undefined &&
+            loginAuth?.proxy_id === undefined
+          ) {
+            console.log(loginAuth?.token);
+            console.log('auth token perfil select');
+            this.router.navigate(['/auth/perfil-select']);
           }
         })
     );

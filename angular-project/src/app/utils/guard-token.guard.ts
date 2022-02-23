@@ -37,14 +37,25 @@ export class GuardTokenGuard implements CanActivate {
       //   }
       // }),
       map(
-        loginAuth =>
-          loginAuth !== null && loginAuth.token && loginAuth.usuario_id !== 0
-      ),
-      tap(loggedIn => {
-        if (!loggedIn) {
-          this.router.navigate(['/auth']);
+        loginAuth => {
+          if (
+            loginAuth?.token !== undefined &&
+            loginAuth?.proxy_id !== undefined
+          ) {
+            return true;
+          } else {
+            this.router.navigate(['/auth']);
+            return false;
+          }
         }
-      })
+        // loginAuth !== null && loginAuth.token && loginAuth.usuario_id !== 0
+      )
+      // tap(loggedIn => {
+      //   console.log('dash guard', loggedIn);
+      //   if (!loggedIn) {
+      //     this.router.navigate(['/auth']);
+      //   }
+      // })
     );
   }
 }
