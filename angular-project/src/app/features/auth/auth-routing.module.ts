@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from 'src/app/layout/auth-layout/auth-layout.component';
 import { LoginComponent } from './login/login.component';
-import { RecoveryComponent } from './recovery/recovery.component';
+import { PerfilSelectComponent } from './perfil-select/perfil-select.component';
 
 const routes: Routes = [
   {
@@ -19,8 +19,8 @@ const routes: Routes = [
         component: LoginComponent,
       },
       {
-        path: 'recovery',
-        component: RecoveryComponent,
+        path: 'perfil-select',
+        component: PerfilSelectComponent,
       },
     ],
   },

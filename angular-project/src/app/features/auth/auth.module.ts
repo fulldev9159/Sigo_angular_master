@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
-import { RecoveryComponent } from './recovery/recovery.component';
+import { PerfilSelectComponent } from './perfil-select/perfil-select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UiModule } from '@uiOT/ui.module';
 
 @NgModule({
-  declarations: [LoginComponent, RecoveryComponent],
+  declarations: [LoginComponent, PerfilSelectComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
