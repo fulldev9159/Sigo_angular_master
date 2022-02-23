@@ -19,3 +19,4 @@ export * from './service/acta.service';
 export * from './service/plan-proyecto.service';
 export * from './service/sitio.service';
 export * from './service/sustento-financiero.service';
+export * from './service/alert-message.service';

@@ -6,7 +6,6 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   ContratoMarco4Cub,
   ResponseGetContrato4Cub as ResponseGetContrato4Cub,
-  StatusResponse,
 } from '@data';
 
 @Injectable({
@@ -20,7 +19,7 @@ export class ContratosService {
 
   getContratos4cub(): Observable<{
     contratosMarcos4Cub: ContratoMarco4Cub[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetContrato4Cub>(

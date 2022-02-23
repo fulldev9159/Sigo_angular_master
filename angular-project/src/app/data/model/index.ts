@@ -21,15 +21,12 @@ export * from './sustento-financiero';
 
 export interface Response<T> {
   data: T;
-  status: {
-    code: number;
-    desc: string;
-  };
+  status: StatusResponse;
 }
 
 export interface StatusResponse {
-  description: string;
-  responseCode: number;
+  desc: string;
+  code: number;
 }
 
 export interface MessageNotifyEffect {

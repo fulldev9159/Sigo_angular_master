@@ -24,6 +24,8 @@ export const reducerAuth = createReducer(
     let sessionData = {
       ...state.sessionData,
       token: response.data.token,
+      usuario_id: response.data.usuario_id,
+      usuario_nombre: response.data.usuario_nombre,
     };
     return {
       ...state,

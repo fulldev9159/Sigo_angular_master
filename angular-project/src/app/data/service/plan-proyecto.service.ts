@@ -15,7 +15,7 @@ export class PlanProyectoService {
 
   getPlans4OT(region_id: number): Observable<{
     plans: Plan[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetPlanes4OT>(`${this.apiUrl}/ingreot/plan/get_all`, {

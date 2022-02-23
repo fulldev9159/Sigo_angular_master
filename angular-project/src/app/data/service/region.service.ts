@@ -24,7 +24,7 @@ export class RegionService {
 
   getRegionesSubcontrato4Cub(subcontrato_id: number[]): Observable<{
     regionesSubcontrato: RegionSubcontrato4Cub[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseRegionSubContrato4Cub>(

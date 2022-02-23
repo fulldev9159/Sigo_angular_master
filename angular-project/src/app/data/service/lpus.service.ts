@@ -3,13 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import {
-  Lpu4Cub,
-  ResponseLpu4Cub,
-  ResponseTipoLpu,
-  StatusResponse,
-  TipoLpu,
-} from '@data';
+import { Lpu4Cub, ResponseLpu4Cub, ResponseTipoLpu, TipoLpu } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +23,7 @@ export class LpusService {
     region_id: number
   ): Observable<{
     subContractedTypeServices: TipoLpu[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseTipoLpu>(`${this.apiUrl}/cubicacion/tipos_servicios/get`, {
@@ -53,7 +47,7 @@ export class LpusService {
     subcontrato_id: number,
     region_id: number,
     tipo_servicio_id: number
-  ): Observable<{ subContractedServices: Lpu4Cub[]; status: StatusResponse }> {
+  ): Observable<{ subContractedServices: Lpu4Cub[]; status: any }> {
     return this.http
       .post<ResponseLpu4Cub>(
         `${this.apiUrl}/cubicacion/servicios_subcontrato/get`,

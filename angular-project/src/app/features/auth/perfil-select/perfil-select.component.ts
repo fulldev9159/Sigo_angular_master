@@ -25,6 +25,7 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
         //   )
         // )
         .subscribe(loginAuth => {
+          console.log(loginAuth);
           if (
             loginAuth?.token === undefined &&
             loginAuth?.proxy_id === undefined

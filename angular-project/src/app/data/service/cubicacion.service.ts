@@ -31,7 +31,7 @@ export class CubicacionService {
     cantidad: number
   ): Observable<{
     autosuggests: AutoSuggestItem[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseAutoSuggest>(
@@ -61,7 +61,7 @@ export class CubicacionService {
 
   getCubicaciones(): Observable<{
     cubs: Cubicacion[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetCubicaciones>(`${this.apiUrl}/cubicacion/get`, {})
@@ -80,7 +80,7 @@ export class CubicacionService {
 
   getDetalleCubicacion(cubicacion_id: number): Observable<{
     detallecubicacion: DetalleCubicacion[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseDetalleCubicacion>(
@@ -136,7 +136,7 @@ export class CubicacionService {
 
   createCubicacion(
     cubicacion: any
-  ): Observable<{ response: any; status: StatusResponse }> {
+  ): Observable<{ response: any; status: any }> {
     return this.http
       .post<ResponseEditCubicacion>(
         `${this.apiUrl}/cubicacion/create`,
@@ -157,7 +157,7 @@ export class CubicacionService {
 
   updateCubicacion(
     request: RequestEditCubicacion
-  ): Observable<{ cub_id: number; status: StatusResponse }> {
+  ): Observable<{ cub_id: number; status: any }> {
     return this.http
       .post<ResponseEditCubicacion>(`${this.apiUrl}/cubicacion/edit`, request)
       .pipe(
@@ -173,9 +173,7 @@ export class CubicacionService {
       );
   }
 
-  deleteOT(
-    cubicacion_id: number
-  ): Observable<{ cub_id: number; status: StatusResponse }> {
+  deleteOT(cubicacion_id: number): Observable<{ cub_id: number; status: any }> {
     return this.http
       .post<ResponseDeleteCubicacion>(`${this.apiUrl}/cubicacion/delete`, {
         cubicacion_id,

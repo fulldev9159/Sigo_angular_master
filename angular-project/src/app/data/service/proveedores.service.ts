@@ -3,11 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import {
-  ResponseSubcontratosProveedor,
-  StatusResponse,
-  SubcontratosProveedor,
-} from '@data';
+import { ResponseSubcontratosProveedor, SubcontratosProveedor } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +16,7 @@ export class ProveedorService {
 
   getProveedor4Cub(contrato_marco_id: number): Observable<{
     proveedores4Cub: SubcontratosProveedor[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseSubcontratosProveedor>(
