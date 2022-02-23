@@ -1,16 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import * as authActions from './auth.actions';
-import { Login, Perfil } from '@data';
+import { SessionData, Perfil } from '@data';
 
 export const authFeatureKey = 'auth';
 
 export interface StateAuth {
-  login: Login;
+  sessionData: SessionData;
   currentProfile: Perfil;
 }
 
 export const initialStateAuth: StateAuth = {
-  login: null,
+  sessionData: null,
   currentProfile: null,
 };
 
@@ -20,9 +20,14 @@ export const reducerAuth = createReducer(
   on(authActions.reset, () => ({
     ...initialStateAuth,
   })),
-  on(authActions.loginSuccess, (state, { data }) => ({
-    ...state,
-    login: data,
-    currentProfile: data.perfiles[0] || null,
-  }))
+  on(authActions.loginSuccess, (state, { response }) => {
+    let sessionData = {
+      ...state.sessionData,
+      token: response.data.token,
+    };
+    return {
+      ...state,
+      sessionData,
+    };
+  })
 );

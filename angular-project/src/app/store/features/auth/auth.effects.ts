@@ -21,9 +21,7 @@ export class AuthEffects {
       ofType(authActions.login),
       concatMap(({ login }) =>
         this.authService.login(login).pipe(
-          map(loginResponse =>
-            authActions.loginSuccess({ data: loginResponse })
-          ),
+          map(response => authActions.loginSuccess({ response })),
           catchError(error => of(authActions.loginError({ error })))
         )
       )
@@ -34,11 +32,11 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(authActions.loginSuccess),
-        tap(({ data }) => {
-          if (+data.status.code === 0) {
+        tap(({ response }) => {
+          if (+response.status.code === 0) {
             this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
           } else {
-            this.snackService.showMessage(data.status.desc, 'error');
+            this.snackService.showMessage(response.status.desc, 'error');
           }
         })
       ),

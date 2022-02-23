@@ -7,7 +7,7 @@ export const selectAuth = createFeatureSelector<fromAuth.StateAuth>(
 
 export const getLogin = createSelector(
   selectAuth,
-  (state: fromAuth.StateAuth) => state.login
+  (state: fromAuth.StateAuth) => state.sessionData
 );
 
 export const getCurrentProfile = createSelector(

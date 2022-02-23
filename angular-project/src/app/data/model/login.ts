@@ -5,21 +5,18 @@ export interface RequestLogin {
   username: string;
   password: string;
 }
-export interface ResponseLogin {
-  status: {
-    desc: string;
-    code: number;
-  };
-  data: Login;
+
+export interface DataRespLogin {
+  token: string;
 }
-export interface Login {
+// Login end
+export interface SessionData {
   token: string;
   usuario_nombre: string;
   usuario_id: number;
   perfiles: Perfil[];
   status: {
-    desc: string;
-    code: number;
+    description: string;
+    response_code: number;
   };
 }
-// Login end

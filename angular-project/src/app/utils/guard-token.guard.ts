@@ -30,12 +30,12 @@ export class GuardTokenGuard implements CanActivate {
     | boolean
     | UrlTree {
     return this.authFacade.getLogin$().pipe(
-      tap(loginAuth => {
-        if (loginAuth) {
-          const perm = loginAuth.perfiles[0].permisos.map(x => x.slug);
-          this.permissionsService.loadPermissions(perm);
-        }
-      }),
+      // tap(loginAuth => {
+      //   if (loginAuth) {
+      //     const perm = loginAuth.perfiles[0].permisos.map(x => x.slug);
+      //     this.permissionsService.loadPermissions(perm);
+      //   }
+      // }),
       map(
         loginAuth =>
           loginAuth !== null && loginAuth.token && loginAuth.usuario_id !== 0

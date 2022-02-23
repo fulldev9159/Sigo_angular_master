@@ -18,6 +18,15 @@ export * from './informe-avance';
 export * from './plan-proyecto';
 export * from './sitio';
 export * from './sustento-financiero';
+
+export interface Response<T> {
+  data: T;
+  status: {
+    code: number;
+    desc: string;
+  };
+}
+
 export interface StatusResponse {
   description: string;
   responseCode: number;
