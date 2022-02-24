@@ -1,10 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import {
-  SessionData,
   RequestLogin,
   Response,
   DataRespLogin,
-  perfil,
+  DataResGetPerfilesUser,
 } from '@data';
 
 // LOGIN
@@ -26,9 +25,15 @@ export const loginError = createAction(
 );
 // LOGIN
 
-export const perfiles = createAction('[Auth perf] POST Login');
+export const getPerfilesUser = createAction(
+  '[Auth perfiles] POST Get Perfiles usuario'
+);
 
-export const perfilesSuccess = createAction(
-  '[Auth perfs] POST Login',
-  props<{ response: Response<perfil> }>()
+export const getPerfilesUserSuccess = createAction(
+  '[Auth perfiles] POST Get Perfiles usuario Success',
+  props<{ response: Response<DataResGetPerfilesUser> }>()
+);
+export const getPerfilesUserError = createAction(
+  '[Auth perfiles] POST Get Perfiles usuario Error',
+  props<{ error: any }>()
 );

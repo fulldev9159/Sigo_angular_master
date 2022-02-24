@@ -14,3 +14,8 @@ export const getCurrentProfile = createSelector(
   selectAuth,
   (state: fromAuth.StateAuth) => state.currentProfile
 );
+
+export const getPerfilesUser = createSelector(
+  selectAuth,
+  (state: fromAuth.StateAuth) => state.perfilesUser
+);

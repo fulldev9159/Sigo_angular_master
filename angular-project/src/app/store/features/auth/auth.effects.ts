@@ -6,7 +6,6 @@ import { of } from 'rxjs';
 
 import * as authActions from './auth.actions';
 import { AuthService, AlertMessageActions } from '@data';
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 @Injectable()
 export class AuthEffects {
@@ -30,20 +29,20 @@ export class AuthEffects {
 
   getPerfil$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(authActions.perfiles),
+      ofType(authActions.getPerfilesUser),
       concatMap(() =>
-        this.authService.getPerfiles().pipe(
-          map(response => authActions.perfilesSuccess({ response })),
-          catchError(error => of(authActions.loginError({ error })))
+        this.authService.getPerfilesUser().pipe(
+          map(response => authActions.getPerfilesUserSuccess({ response })),
+          catchError(error => of(authActions.getPerfilesUserError({ error })))
         )
       )
     )
   );
 
-  notifyAfterSuccess$ = createEffect(
+  notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(authActions.loginSuccess, authActions.perfilesSuccess),
+        ofType(authActions.loginSuccess, authActions.getPerfilesUserSuccess),
         tap(action => {
           this.alertMessageAction.messageActions(
             action.response.status,
@@ -53,54 +52,4 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-
-  // notifyAfterError = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(
-  //         cubActions.getCubsError,
-  //         cubActions.getSingleCubicacionError,
-  //         cubActions.getContractMarcoError,
-  //         cubActions.getSubContractProvidersError,
-  //         cubActions.getSubContractedRegionsError,
-  //         cubActions.getSubContractedTypeServicesError,
-  //         cubActions.getSubContractedServicesError,
-  //         cubActions.createCubError,
-  //         cubActions.editCubicacionError,
-  //         cubActions.getAutoSuggestError,
-  //         cubActions.getDetalleCubicacionError,
-  //         cubActions.deleteCubicacionError
-  //       ),
-  //       tap(action =>
-  //         this.messageService.actionsErrors(action.error.message, action.type)
-  //       )
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  // notifySuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(),
-  //       tap(({ response }) => {
-  //         if (+response.status.code === 0) {
-  //           this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
-  //         } else {
-  //           this.snackService.showMessage(response.status.desc, 'error');
-  //         }
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  // notifyAfterLoginError = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(authActions.loginError),
-  //       tap(({ error }) => {
-  //         this.snackService.showMessage('Usuario/Password incorrecto', 'error');
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
 }

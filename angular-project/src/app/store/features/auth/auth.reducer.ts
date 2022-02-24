@@ -1,16 +1,23 @@
 import { createReducer, on } from '@ngrx/store';
 import * as authActions from './auth.actions';
-import { SessionData, Perfil } from '@data';
+import {
+  SessionData,
+  Perfil,
+  DataResGetPerfilesUser,
+  PerfilesUser,
+} from '@data';
 
 export const authFeatureKey = 'auth';
 
 export interface StateAuth {
   sessionData: SessionData;
+  perfilesUser: PerfilesUser[];
   currentProfile: Perfil;
 }
 
 export const initialStateAuth: StateAuth = {
   sessionData: null,
+  perfilesUser: null,
   currentProfile: null,
 };
 
@@ -31,5 +38,9 @@ export const reducerAuth = createReducer(
       ...state,
       sessionData,
     };
-  })
+  }),
+  on(authActions.getPerfilesUserSuccess, (state, { response }) => ({
+    ...state,
+    perfilesUser: response.data.perfiles,
+  }))
 );

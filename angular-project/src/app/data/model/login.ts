@@ -13,9 +13,35 @@ export interface DataRespLogin {
 }
 // Login end
 
-export interface perfil {
-  hola: string;
+// Get Perfiles User init
+export interface DataResGetPerfilesUser {
+  perfiles: PerfilesUser[];
 }
+
+export interface PerfilesUser {
+  model_perfil: ModelPerfil;
+  perfil_id: number;
+  proxy_id: number;
+}
+
+export interface ModelPerfil {
+  created_at: Date;
+  deleted_at: Date;
+  descripcion: string;
+  eliminable: boolean;
+  id: number;
+  model_rol: ModelRol;
+  nombre: string;
+  rol_id: number;
+  updated_at: Date;
+}
+
+export interface ModelRol {
+  id: number;
+  nombre: string;
+}
+
+// Get Perfiles User end
 export interface SessionData {
   token: string;
   usuario_nombre: string;

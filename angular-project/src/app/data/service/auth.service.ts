@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Response, SessionData, RequestLogin } from '@data';
-import { DataRespLogin, perfil } from '@data/model';
+import { DataRespLogin, DataResGetPerfilesUser } from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,10 @@ export class AuthService {
     );
   }
 
-  getPerfiles(): Observable<Response<perfil>> {
-    return this.http.post<Response<perfil>>(`${this.apiUrl}/login/start`, {});
+  getPerfilesUser(): Observable<Response<DataResGetPerfilesUser>> {
+    return this.http.post<Response<DataResGetPerfilesUser>>(
+      `${this.apiUrl}/usuario/perfiles/get`,
+      {}
+    );
   }
 }
