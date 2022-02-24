@@ -4,6 +4,7 @@ import {
   Response,
   DataRespLogin,
   DataResGetPerfilesUser,
+  DataRespGetPermisosPerfil,
 } from '@data';
 
 // LOGIN
@@ -42,12 +43,16 @@ export const getPerfilesUserError = createAction(
 // REFRESH
 export const refresh = createAction(
   '[Auth refresh] POST refresh',
-  props<{ proxy_id: number }>()
+  props<{ proxy_id: number; nombre_perfil_select: string }>()
 );
 
 export const refreshSuccess = createAction(
   '[Auth refresh] POST refresh Success',
-  props<{ proxy_id: number; response: Response<DataRespLogin> }>()
+  props<{
+    proxy_id: number;
+    nombre_perfil_select: string;
+    response: Response<DataRespLogin>;
+  }>()
 );
 
 export const refreshUserError = createAction(
@@ -57,7 +62,7 @@ export const refreshUserError = createAction(
 
 export const refreshProxyID = createAction(
   '[Auth refresh proxyID] POST refresh proxyID',
-  props<{ proxy_id: number }>()
+  props<{ proxy_id: number; nombre_perfil_select: string }>()
 );
 
 // GET PERMISOS PERFIL
@@ -67,7 +72,7 @@ export const getPerrmisoPerfil = createAction(
 
 export const getPerrmisoPerfilSuccess = createAction(
   '[Auth getPerrmisoPerfil] POST getPerrmisoPerfil Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<DataRespGetPermisosPerfil> }>()
 );
 
 export const getPerrmisoPerfilUserError = createAction(

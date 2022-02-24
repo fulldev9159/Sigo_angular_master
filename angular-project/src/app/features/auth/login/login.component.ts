@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           loginAuth?.token !== undefined &&
           loginAuth?.proxy_id === undefined
         ) {
-          console.log(loginAuth?.token);
-          console.log('auth token perfil select');
           this.router.navigate(['/auth/perfil-select']);
         }
       })

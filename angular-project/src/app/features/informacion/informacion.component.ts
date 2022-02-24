@@ -34,7 +34,7 @@ export class InformacionComponent implements OnInit, OnDestroy {
             ...loginAuth,
             // name: `${nameArray[0]} ${nameArray[2]}`,
             name: loginAuth.usuario_nombre,
-            perfil: loginAuth.perfiles[0].nombre,
+            perfil: loginAuth.nombre_perfil_select,
           };
         }
         return auth;

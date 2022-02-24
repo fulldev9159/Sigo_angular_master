@@ -1,3 +1,4 @@
+import { Accion } from './accion';
 import { Perfil } from './perfil';
 
 // Login init
@@ -42,10 +43,19 @@ export interface ModelRol {
 }
 
 // Get Perfiles User end
+
+// Get Permisos perfil init
+export interface DataRespGetPermisosPerfil {
+  permisos: Accion[];
+}
+
+// Get permisos perfil end
+
 export interface SessionData {
   token: string;
   usuario_nombre: string;
   usuario_id: number;
-  perfiles: Perfil[];
+  nombre_perfil_select: string;
+  permisos: string[];
   proxy_id: number;
 }

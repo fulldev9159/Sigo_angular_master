@@ -35,12 +35,16 @@ export class AuthFacade {
     return this.store.select(authSelectors.getPerfilesUser);
   }
 
-  public refreshLogin(proxy_id: number): void {
-    this.store.dispatch(authActions.refresh({ proxy_id }));
+  public refreshLogin(proxy_id: number, nombre_perfil_select: string): void {
+    this.store.dispatch(
+      authActions.refresh({ proxy_id, nombre_perfil_select })
+    );
   }
 
-  public refreshProxyID(proxy_id: number): void {
-    this.store.dispatch(authActions.refreshProxyID({ proxy_id }));
+  public refreshProxyID(proxy_id: number, nombre_perfil_select: string): void {
+    this.store.dispatch(
+      authActions.refreshProxyID({ proxy_id, nombre_perfil_select })
+    );
   }
 
   public getPermisosPerfil(): void {

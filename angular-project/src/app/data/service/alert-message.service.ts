@@ -10,6 +10,7 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Router } from '@angular/router';
 import { MessageNotifyEffect } from '@data';
+import { Accion } from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,7 @@ export class AlertMessageActions {
     private router: Router
   ) {
     // Status OK
-    this.msgOK[authActions.loginSuccess.type] = 'Login exitoso';
+    // this.msgOK[authActions.loginSuccess.type] = 'Login exitoso';
     this.msgOK[ca.createCubSuccess.type] = 'Cubicación creada exitosamente';
     this.msgOK[ca.editCubicacionSuccess.type] =
       'Cubicación actualizada exitosamente';
@@ -134,7 +135,9 @@ export class AlertMessageActions {
     data?: any
   ): void {
     if (code === 0) {
-      this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
+      if (this.msgOK[action]) {
+        this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
+      }
     } else if (code === 2) {
       this.snackService.showMessage(
         `${this.msgNegocio[action]}- ${message}`,
@@ -152,8 +155,19 @@ export class AlertMessageActions {
     // ACTIONS
     if (code === 0) {
       if (action === authActions.refreshSuccess.type) {
-        this.authFacade.refreshProxyID(data.proxy_id);
+        this.authFacade.refreshProxyID(
+          data.proxy_id,
+          data.nombre_perfil_select
+        );
         this.authFacade.getPermisosPerfil();
+      }
+
+      if (action === authActions.getPerrmisoPerfilSuccess.type) {
+        this.router.navigate(['app/dashboard']);
+        // console.log(data.response);
+        // const perm = data.response.data.permisos.map((x: Accion) => x.slug);
+        // console.log(perm);
+        // this.permissionsService.loadPermissions(perm);
       }
     }
   }

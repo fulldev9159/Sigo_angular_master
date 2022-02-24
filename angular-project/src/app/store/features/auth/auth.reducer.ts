@@ -5,6 +5,7 @@ import {
   Perfil,
   DataResGetPerfilesUser,
   PerfilesUser,
+  Accion,
 } from '@data';
 
 export const authFeatureKey = 'auth';
@@ -43,20 +44,34 @@ export const reducerAuth = createReducer(
     ...state,
     perfilesUser: response.data.perfiles,
   })),
-  on(authActions.refreshProxyID, (state, { proxy_id }) => {
+  on(
+    authActions.refreshProxyID,
+    (state, { proxy_id, nombre_perfil_select }) => {
+      let sessionData = {
+        ...state.sessionData,
+        proxy_id,
+        nombre_perfil_select,
+      };
+      return {
+        ...state,
+        sessionData,
+      };
+    }
+  ),
+  on(authActions.refreshSuccess, (state, { response }) => {
     let sessionData = {
       ...state.sessionData,
-      proxy_id,
+      token: response.data.token,
     };
     return {
       ...state,
       sessionData,
     };
   }),
-  on(authActions.refreshSuccess, (state, { response }) => {
+  on(authActions.getPerrmisoPerfilSuccess, (state, { response }) => {
     let sessionData = {
       ...state.sessionData,
-      token: response.data.token,
+      permisos: response.data.permisos.map((x: Accion) => x.slug),
     };
     return {
       ...state,

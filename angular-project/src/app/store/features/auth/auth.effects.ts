@@ -42,9 +42,15 @@ export class AuthEffects {
   refresh$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.refresh),
-      concatMap(({ proxy_id }) =>
+      concatMap(({ proxy_id, nombre_perfil_select }) =>
         this.authService.refesh(proxy_id).pipe(
-          map(response => authActions.refreshSuccess({ proxy_id, response })),
+          map(response =>
+            authActions.refreshSuccess({
+              proxy_id,
+              nombre_perfil_select,
+              response,
+            })
+          ),
           catchError(error => of(authActions.refreshUserError({ error })))
         )
       )
@@ -68,7 +74,11 @@ export class AuthEffects {
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(authActions.loginSuccess, authActions.refreshSuccess),
+        ofType(
+          authActions.loginSuccess,
+          authActions.refreshSuccess,
+          authActions.getPerrmisoPerfilSuccess
+        ),
         tap(action => {
           this.alertMessageAction.messageActions(
             action.response.status.code,
