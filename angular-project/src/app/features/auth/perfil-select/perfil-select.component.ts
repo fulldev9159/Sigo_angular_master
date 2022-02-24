@@ -40,4 +40,9 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  refreshLogin(): void {
+    console.log(this.formPerfil.get('proxyperfil').value);
+    this.authFacade.refreshLogin(+this.formPerfil.get('proxyperfil').value);
+  }
 }

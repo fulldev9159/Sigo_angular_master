@@ -42,5 +42,25 @@ export const reducerAuth = createReducer(
   on(authActions.getPerfilesUserSuccess, (state, { response }) => ({
     ...state,
     perfilesUser: response.data.perfiles,
-  }))
+  })),
+  on(authActions.refreshProxyID, (state, { proxy_id }) => {
+    let sessionData = {
+      ...state.sessionData,
+      proxy_id,
+    };
+    return {
+      ...state,
+      sessionData,
+    };
+  }),
+  on(authActions.refreshSuccess, (state, { response }) => {
+    let sessionData = {
+      ...state.sessionData,
+      token: response.data.token,
+    };
+    return {
+      ...state,
+      sessionData,
+    };
+  })
 );

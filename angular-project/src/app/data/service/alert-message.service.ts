@@ -5,9 +5,10 @@ import * as otActions from '@storeOT/features/ot/ot.actions';
 import * as authActions from '@storeOT/features/auth/auth.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Router } from '@angular/router';
-import { StatusResponse } from '@data';
 import { MessageNotifyEffect } from '@data';
 
 @Injectable({
@@ -21,6 +22,7 @@ export class AlertMessageActions {
   constructor(
     private cubageFacade: CubicacionFacade,
     private otFacade: OtFacade,
+    private authFacade: AuthFacade,
     private snackService: SnackBarService,
     private router: Router
   ) {
@@ -125,21 +127,34 @@ export class AlertMessageActions {
       'Falló la obtención de información del acta';
   }
 
-  messageActions(status: StatusResponse, action: string, data?: any): void {
-    if (+status.code === 0) {
+  messageActions(
+    code: number,
+    message: string,
+    action: string,
+    data?: any
+  ): void {
+    if (code === 0) {
       this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
-    } else if (+status.code === 2) {
+    } else if (code === 2) {
       this.snackService.showMessage(
-        `${this.msgNegocio[action]}- ${status.desc}`,
+        `${this.msgNegocio[action]}- ${message}`,
         'info',
         2000
       );
     } else {
       this.snackService.showMessage(
-        `${this.msgErr[action]}- ${status.desc}`,
+        `${this.msgErr[action]}- ${message}`,
         'error',
         4000
       );
+    }
+
+    // ACTIONS
+    if (code === 0) {
+      if (action === authActions.refreshSuccess.type) {
+        this.authFacade.refreshProxyID(data.proxy_id);
+        this.authFacade.getPermisosPerfil();
+      }
     }
   }
 }

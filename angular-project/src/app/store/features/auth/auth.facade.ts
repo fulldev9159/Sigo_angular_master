@@ -34,4 +34,16 @@ export class AuthFacade {
   public pefilesUsuario$(): Observable<PerfilesUser[]> {
     return this.store.select(authSelectors.getPerfilesUser);
   }
+
+  public refreshLogin(proxy_id: number): void {
+    this.store.dispatch(authActions.refresh({ proxy_id }));
+  }
+
+  public refreshProxyID(proxy_id: number): void {
+    this.store.dispatch(authActions.refreshProxyID({ proxy_id }));
+  }
+
+  public getPermisosPerfil(): void {
+    this.store.dispatch(authActions.getPerrmisoPerfil());
+  }
 }

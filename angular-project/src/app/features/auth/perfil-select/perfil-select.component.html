@@ -1,4 +1,4 @@
-<form [formGroup]="formPerfil">
+<form [formGroup]="formPerfil" (ngSubmit)="refreshLogin()">
   <div class="form-group">
     <app-select [control]="formControls.proxyperfil" label="">
       <ng-container options>

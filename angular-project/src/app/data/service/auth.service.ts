@@ -26,4 +26,20 @@ export class AuthService {
       {}
     );
   }
+
+  refesh(proxy_id: number): Observable<Response<DataRespLogin>> {
+    return this.http.post<Response<DataRespLogin>>(
+      `${this.apiUrl}/login/refresh`,
+      {
+        proxy_id,
+      }
+    );
+  }
+
+  getPermisosPerfil(): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/usuario/permisos/get`,
+      {}
+    );
+  }
 }

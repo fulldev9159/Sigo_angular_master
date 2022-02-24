@@ -39,16 +39,60 @@ export class AuthEffects {
     )
   );
 
+  refresh$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.refresh),
+      concatMap(({ proxy_id }) =>
+        this.authService.refesh(proxy_id).pipe(
+          map(response => authActions.refreshSuccess({ proxy_id, response })),
+          catchError(error => of(authActions.refreshUserError({ error })))
+        )
+      )
+    )
+  );
+
+  getPermisosPefil$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.getPerrmisoPerfil),
+      concatMap(() =>
+        this.authService.getPermisosPerfil().pipe(
+          map(response => authActions.getPerrmisoPerfilSuccess({ response })),
+          catchError(error =>
+            of(authActions.getPerrmisoPerfilUserError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(authActions.loginSuccess, authActions.getPerfilesUserSuccess),
+        ofType(authActions.loginSuccess, authActions.refreshSuccess),
         tap(action => {
           this.alertMessageAction.messageActions(
-            action.response.status,
-            action.type
+            action.response.status.code,
+            action.response.status.desc,
+            action.type,
+            action
           );
         })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authActions.loginError, authActions.getPerfilesUserError),
+        tap(action =>
+          this.alertMessageAction.messageActions(
+            action.error.error.status.code,
+            action.error.error.status.desc,
+            action.type,
+            action
+          )
+        )
       ),
     { dispatch: false }
   );
