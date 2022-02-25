@@ -41,13 +41,24 @@ export const reducerAuth = createReducer(
     };
   }),
   on(authActions.getPerfilesUserSuccess, (state, { response }) => {
+    const perfilesUser = response.data.perfiles.map(perfil => {
+      return {
+        ...perfil,
+        model_perfil: {
+          ...perfil.model_perfil,
+          nombre: perfil.perfil_propio
+            ? perfil.model_perfil.nombre
+            : `${perfil.model_perfil.nombre} (Replazo)`,
+        },
+      };
+    });
     const sessionData = {
       ...state.sessionData,
       multiperfiles: response.data.perfiles.length > 0 ? true : false,
     };
     return {
       ...state,
-      perfilesUser: response.data.perfiles,
+      perfilesUser,
       sessionData,
     };
   }),

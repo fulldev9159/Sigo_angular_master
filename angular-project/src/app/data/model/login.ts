@@ -22,6 +22,7 @@ export interface DataResGetPerfilesUser {
 export interface PerfilesUser {
   model_perfil: ModelPerfil;
   perfil_id: number;
+  perfil_propio: boolean;
   proxy_id: number;
 }
 
