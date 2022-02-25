@@ -164,10 +164,6 @@ export class AlertMessageActions {
 
       if (action === authActions.getPerrmisoPerfilSuccess.type) {
         this.router.navigate(['app/dashboard']);
-        // console.log(data.response);
-        // const perm = data.response.data.permisos.map((x: Accion) => x.slug);
-        // console.log(perm);
-        // this.permissionsService.loadPermissions(perm);
       }
     }
   }

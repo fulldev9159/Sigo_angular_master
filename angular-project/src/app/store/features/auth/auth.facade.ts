@@ -50,4 +50,8 @@ export class AuthFacade {
   public getPermisosPerfil(): void {
     this.store.dispatch(authActions.getPerrmisoPerfil());
   }
+
+  public resetPerfilEscogido(): void {
+    this.store.dispatch(authActions.reserPerfilEscogido());
+  }
 }

@@ -58,4 +58,5 @@ export interface SessionData {
   nombre_perfil_select: string;
   permisos: string[];
   proxy_id: number;
+  multiperfiles: boolean;
 }

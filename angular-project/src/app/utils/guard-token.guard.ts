@@ -39,7 +39,9 @@ export class GuardTokenGuard implements CanActivate {
         loginAuth => {
           if (
             loginAuth?.token !== undefined &&
-            loginAuth?.proxy_id !== undefined
+            loginAuth?.proxy_id !== undefined &&
+            loginAuth?.token !== null &&
+            loginAuth?.proxy_id !== null
           ) {
             return true;
           } else {

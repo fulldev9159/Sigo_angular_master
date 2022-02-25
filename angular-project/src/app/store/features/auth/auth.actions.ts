@@ -79,3 +79,8 @@ export const getPerrmisoPerfilUserError = createAction(
   '[Auth getPerrmisoPerfil] POST getPerrmisoPerfil Error',
   props<{ error: any }>()
 );
+
+// Reset perfil escogido
+export const reserPerfilEscogido = createAction(
+  '[Auth reserPerfilEscogido]  reserPerfilEscogido Error'
+);

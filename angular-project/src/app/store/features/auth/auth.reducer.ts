@@ -40,10 +40,17 @@ export const reducerAuth = createReducer(
       sessionData,
     };
   }),
-  on(authActions.getPerfilesUserSuccess, (state, { response }) => ({
-    ...state,
-    perfilesUser: response.data.perfiles,
-  })),
+  on(authActions.getPerfilesUserSuccess, (state, { response }) => {
+    let sessionData = {
+      ...state.sessionData,
+      multiperfiles: response.data.perfiles.length > 0 ? true : false,
+    };
+    return {
+      ...state,
+      perfilesUser: response.data.perfiles,
+      sessionData,
+    };
+  }),
   on(
     authActions.refreshProxyID,
     (state, { proxy_id, nombre_perfil_select }) => {
@@ -72,6 +79,16 @@ export const reducerAuth = createReducer(
     let sessionData = {
       ...state.sessionData,
       permisos: response.data.permisos.map((x: Accion) => x.slug),
+    };
+    return {
+      ...state,
+      sessionData,
+    };
+  }),
+  on(authActions.reserPerfilEscogido, (state, {}) => {
+    let sessionData = {
+      ...state.sessionData,
+      proxy_id: null,
     };
     return {
       ...state,
