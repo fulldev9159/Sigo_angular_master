@@ -7,7 +7,7 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { RequestCreateOT } from '@storeOT/features/ot/ot.model';
-import { Cubicacion, Login, Sitio } from '@data';
+import { Cubicacion, SessionData, Sitio } from '@data';
 import { GeneralFormComponent } from '../../forms/general-form/general-form.component';
 import { PlanProyectoFormComponent } from '../../forms/plan-proyecto-form/plan-proyecto-form.component';
 import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero-form/sustento-financiero-form.component';
@@ -23,7 +23,7 @@ import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicaci
 export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   contractType$ = new BehaviorSubject<string>('');
-  authLogin: Login = null;
+  authLogin: SessionData = null;
 
   cubicacionSeleccionada: Cubicacion = null;
   sitioSeleccionado: Sitio = null;

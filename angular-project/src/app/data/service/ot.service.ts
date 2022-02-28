@@ -38,7 +38,7 @@ export class OTService {
 
   getOTs(request: RequestGetOTs): Observable<{
     ots: OT[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetOTs>(`${this.apiUrl}/ingreot/ot/get`, request)

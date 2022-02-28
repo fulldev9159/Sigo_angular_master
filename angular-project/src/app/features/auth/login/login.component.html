@@ -1,39 +1,15 @@
-<main class="row-main d-flex align-items-center min-vh-100 py-3 py-md-0">
-  <div class="container" style="width: 736px;">
-    <div class="card login-card">
-      <div class="row no-gutters">
-        <div class="col-md-5" style="align-self:center">
-          <img src="https://logos-marcas.com/wp-content/uploads/2020/04/Movistar-Logo.png" alt="login" width="100%">
-        </div>
-        <div class="col-md-7">
-          <div class="card-body">
-            <div class="brand-wrapper">
-              <!-- <img src="../../../../assets/icon-app-mimovistar.svg" alt="logo" class="logo"> -->
-              <p class="login-card-description">Inicie sesión en su cuenta</p>
-            </div>
+<div class="brand-wrapper">
+  <p class="login-card-description">Inicie sesión en su cuenta</p>
+</div>
 
-            <form [formGroup]="formLogin" (ngSubmit)="login()">
-              <div class="form-group">
-                <label for="text" class="sr-only">Usuario</label>
-                <input type="text" formControlName="username" name="username" id="text" class="form-control" placeholder="Usuario">
-              </div>
-              <div class="form-group mb-4">
-                <label for="password" class="sr-only">Contraseña</label>
-                <input type="password" formControlName="password" name="password" id="password" class="form-control" placeholder="***********">
-              </div>
-              <input [disabled]="!formLogin.valid" name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Ingresar">
-            </form>
-            <!-- <a href="#!" class="forgot-password-link">Olvido su contraseña</a>
-            <p class="login-card-footer-text">¿No tienes una cuenta? <a href="#!" class="text-reset">Registrarse
-                aquí</a>
-            </p>
-            <nav class="login-card-footer-nav">
-              <a href="#!">Política de privacidad</a>
-            </nav> -->
-          </div>
-        </div>
-      </div>
-    </div>
+<form [formGroup]="formLogin" (ngSubmit)="login()">
+  <div class="form-group">
+    <label for="text" class="sr-only">Usuario</label>
+    <input type="text" formControlName="username" name="username" id="text" class="form-control" placeholder="Usuario">
   </div>
-</main>
-<p-toast></p-toast>
+  <div class="form-group mb-4">
+    <label for="password" class="sr-only">Contraseña</label>
+    <input type="password" formControlName="password" name="password" id="password" class="form-control" placeholder="***********">
+  </div>
+  <input [disabled]="!formLogin.valid" name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Ingresar">
+</form>

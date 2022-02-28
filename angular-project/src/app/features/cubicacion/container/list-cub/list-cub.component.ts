@@ -10,7 +10,7 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
-import { Cubicacion, Login } from '@data';
+import { Cubicacion, SessionData } from '@data';
 import { CloneCubageFormComponent } from '../../forms/clone-cubage-form/clone-cubage-form.component';
 
 @Component({
@@ -23,7 +23,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   public cubicaciones$: Observable<Cubicacion[]>;
   public displayClonatedCubageNameModal = false;
   public DisplayModalDetalleCubicacion = false;
-  public authLogin: Login = null;
+  public authLogin: SessionData = null;
   public configTable = {
     header: true,
     headerConfig: {

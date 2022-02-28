@@ -6,7 +6,6 @@ import {
   LpuInformeAvanceDetalle,
   RequestSaveInformeAvanceAdmin,
   ResponseBorradorInformeAvance,
-  StatusResponse,
 } from '@data';
 import { map } from 'rxjs/operators';
 import {
@@ -28,7 +27,7 @@ export class ActaService {
 
   getInformeActa(ot_id: number): Observable<{
     dataInformeActa: DataInformeAvance[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetInformeActa>(`${this.apiUrl}/infavan/acta/get_gestor`, {
@@ -48,7 +47,7 @@ export class ActaService {
   }
 
   saveInformeActa(request: RequestSaveInformeActaGestor): Observable<{
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<any>(`${this.apiUrl}/infavan/acta/accept`, request)
@@ -65,7 +64,7 @@ export class ActaService {
   }
 
   rechazarInformeActa(informe_id: number): Observable<{
-    status: StatusResponse;
+    status: any;
   }> {
     // return this.http
     //   .post<ResponseBorradorInformeAvance>(
@@ -92,7 +91,7 @@ export class ActaService {
 
   getActaDetalle(ot_id: number): Observable<{
     dataInformeActa: DetalleActa[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetDetalleActa>(
@@ -115,7 +114,7 @@ export class ActaService {
   }
 
   solicitudPagoActa(request: RequestSolicitudPagoActa): Observable<{
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<any>(`${this.apiUrl}/pagos/solicitud/acta/send`, request)

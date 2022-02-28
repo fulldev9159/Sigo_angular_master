@@ -24,7 +24,7 @@ export class SitioService {
     region_id: number
   ): Observable<{
     sitio: Sitio[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetSitio4OT>(`${this.apiUrl}/ingreot/sitio/get`, {

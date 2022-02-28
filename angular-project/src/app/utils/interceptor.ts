@@ -34,17 +34,27 @@ export class JwtAppInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (req.url.includes('/login')) {
+    // if (
+    //   req.url.includes('/login') ||
+    //   req.url.includes('/usuario/perfiles/get')
+    // )
+    if (req.url.includes('/login/start')) {
       req = req.clone({
         setHeaders: {},
       });
     } else {
       const headers = new HttpHeaders({
         Authorization: `Bearer ${this.token}`,
-        'X-SIGO-User-Profile': `${this.profileID}`,
       });
       req = req.clone({ headers });
     }
+    // else {
+    //   const headers = new HttpHeaders({
+    //     Authorization: `Bearer ${this.token}`,
+    //     'X-SIGO-User-Profile': `${this.profileID}`,
+    //   });
+    //   req = req.clone({ headers });
+    // }
 
     return next.handle(req).pipe(
       tap(
@@ -59,10 +69,6 @@ export class JwtAppInterceptor implements HttpInterceptor {
               this.router.navigate(['/auth']);
             }
             console.log(err);
-            // if (err.status.description === 'Sin resultados') {
-            //   message = 'El usuario no tiene contratos asignados';
-            // }
-            // this.snackService.showMessage(message, 'error');
           }
         }
       )

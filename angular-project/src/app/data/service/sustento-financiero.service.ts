@@ -15,7 +15,7 @@ export class SustentoFinancieroService {
 
   getPMO4OT(sitio_codigo: string): Observable<{
     pmos: PMO[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetPMO4OT>(`${this.apiUrl}/ingreot/pmo/get`, {

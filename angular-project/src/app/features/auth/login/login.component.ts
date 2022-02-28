@@ -28,21 +28,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.authFacade
-        .getLogin$()
-        .pipe(
-          map(
-            loginAuth =>
-              loginAuth !== null &&
-              loginAuth.token &&
-              loginAuth.usuario_id !== 0
-          )
-        )
-        .subscribe(loggedIn => {
-          if (loggedIn) {
-            this.router.navigate(['/app/dashboard']);
-          }
-        })
+      this.authFacade.getLogin$().subscribe(loginAuth => {
+        if (
+          loginAuth?.token !== undefined &&
+          loginAuth?.proxy_id === undefined
+        ) {
+          this.router.navigate(['/auth/perfil-select']);
+        }
+      })
     );
 
     this.initForm();

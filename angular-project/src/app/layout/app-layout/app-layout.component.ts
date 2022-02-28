@@ -38,6 +38,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   notificaciones_nuevas: Data.DataNotificaciones[] = [];
   total_nuevas_notificaciones$: Observable<Data.Notificaciones>;
+  multiperfiles = false;
 
   constructor(
     private router: Router,
@@ -76,12 +77,12 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
         if (loginAuth) {
           // const perm = loginAuth.perfiles[0].permisos.map(x => x.slug);
           // this.permissionsService.loadPermissions(perm);
+          this.multiperfiles = loginAuth.multiperfiles;
           const nameArray = loginAuth.usuario_nombre.split(' ');
           auth = {
             ...loginAuth,
-            // name: `${nameArray[0]} ${nameArray[2]}`,
             name: loginAuth.usuario_nombre,
-            perfil: loginAuth.perfiles[0].nombre,
+            perfil: loginAuth.nombre_perfil_select,
           };
         }
         return auth;
@@ -147,5 +148,10 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   closeNotificacionesModal(): void {
     this.displayNotificacionesModal = false;
     this.notificacioneFacade.getNotificacioes();
+  }
+
+  changePerfil(): void {
+    this.authFacade.resetPerfilEscogido();
+    this.router.navigate(['/auth/perfil-select']);
   }
 }

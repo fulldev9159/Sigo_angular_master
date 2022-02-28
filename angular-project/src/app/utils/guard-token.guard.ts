@@ -31,20 +31,32 @@ export class GuardTokenGuard implements CanActivate {
     | UrlTree {
     return this.authFacade.getLogin$().pipe(
       tap(loginAuth => {
-        if (loginAuth) {
-          const perm = loginAuth.perfiles[0].permisos.map(x => x.slug);
-          this.permissionsService.loadPermissions(perm);
+        if (loginAuth && loginAuth.permisos) {
+          this.permissionsService.loadPermissions(loginAuth.permisos);
         }
       }),
       map(
-        loginAuth =>
-          loginAuth !== null && loginAuth.token && loginAuth.usuario_id !== 0
-      ),
-      tap(loggedIn => {
-        if (!loggedIn) {
-          this.router.navigate(['/auth']);
+        loginAuth => {
+          if (
+            loginAuth?.token !== undefined &&
+            loginAuth?.proxy_id !== undefined &&
+            loginAuth?.token !== null &&
+            loginAuth?.proxy_id !== null
+          ) {
+            return true;
+          } else {
+            this.router.navigate(['/auth']);
+            return false;
+          }
         }
-      })
+        // loginAuth !== null && loginAuth.token && loginAuth.usuario_id !== 0
+      )
+      // tap(loggedIn => {
+      //   console.log('dash guard', loggedIn);
+      //   if (!loggedIn) {
+      //     this.router.navigate(['/auth']);
+      //   }
+      // })
     );
   }
 }

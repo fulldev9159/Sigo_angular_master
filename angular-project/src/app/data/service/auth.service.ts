@@ -1,8 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Login, RequestLogin, ResponseLogin } from '@data';
-import { map } from 'rxjs/operators';
+import { Response, SessionData, RequestLogin } from '@data';
+import {
+  DataRespLogin,
+  DataResGetPerfilesUser,
+  DataRespGetPermisosPerfil,
+} from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,19 +17,33 @@ export class AuthService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  login(login: RequestLogin): Observable<Login> {
-    return this.http
-      .post<ResponseLogin>(`${this.apiUrl}/login_new`, login)
-      .pipe(
-        map(response => {
-          return {
-            ...response.data,
-            status: {
-              description: response.status.description,
-              response_code: response.status.responseCode,
-            },
-          };
-        })
-      );
+  login(login: RequestLogin): Observable<Response<DataRespLogin>> {
+    return this.http.post<Response<DataRespLogin>>(
+      `${this.apiUrl}/login/start`,
+      login
+    );
+  }
+
+  getPerfilesUser(): Observable<Response<DataResGetPerfilesUser>> {
+    return this.http.post<Response<DataResGetPerfilesUser>>(
+      `${this.apiUrl}/usuario/perfiles/get`,
+      {}
+    );
+  }
+
+  refesh(proxy_id: number): Observable<Response<DataRespLogin>> {
+    return this.http.post<Response<DataRespLogin>>(
+      `${this.apiUrl}/login/refresh`,
+      {
+        proxy_id,
+      }
+    );
+  }
+
+  getPermisosPerfil(): Observable<Response<DataRespGetPermisosPerfil>> {
+    return this.http.post<Response<DataRespGetPermisosPerfil>>(
+      `${this.apiUrl}/usuario/permisos/get`,
+      {}
+    );
   }
 }

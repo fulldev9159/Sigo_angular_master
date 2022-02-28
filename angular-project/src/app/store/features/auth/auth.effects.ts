@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { act, Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as authActions from './auth.actions';
-import { AuthService } from '@data';
-import { SnackBarService } from '@utilsSIGO/snack-bar';
+import { AuthService, AlertMessageActions } from '@data';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private snackService: SnackBarService
+    private alertMessageAction: AlertMessageActions
   ) {}
 
   postLogin$ = createEffect(() =>
@@ -21,37 +20,89 @@ export class AuthEffects {
       ofType(authActions.login),
       concatMap(({ login }) =>
         this.authService.login(login).pipe(
-          map(loginResponse =>
-            authActions.loginSuccess({ data: loginResponse })
-          ),
+          map(response => authActions.loginSuccess({ response })),
           catchError(error => of(authActions.loginError({ error })))
         )
       )
     )
   );
 
-  notifySuccess$ = createEffect(
+  getPerfil$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.getPerfilesUser),
+      concatMap(() =>
+        this.authService.getPerfilesUser().pipe(
+          map(response => authActions.getPerfilesUserSuccess({ response })),
+          catchError(error => of(authActions.getPerfilesUserError({ error })))
+        )
+      )
+    )
+  );
+
+  refresh$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.refresh),
+      concatMap(({ proxy_id, nombre_perfil_select }) =>
+        this.authService.refesh(proxy_id).pipe(
+          map(response =>
+            authActions.refreshSuccess({
+              proxy_id,
+              nombre_perfil_select,
+              response,
+            })
+          ),
+          catchError(error => of(authActions.refreshUserError({ error })))
+        )
+      )
+    )
+  );
+
+  getPermisosPefil$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.getPerrmisoPerfil),
+      concatMap(() =>
+        this.authService.getPermisosPerfil().pipe(
+          map(response => authActions.getPerrmisoPerfilSuccess({ response })),
+          catchError(error =>
+            of(authActions.getPerrmisoPerfilUserError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(authActions.loginSuccess),
-        tap(({ data }) => {
-          if (+data.status.response_code === 0) {
-            this.snackService.showMessage(`Login Exitoso`, 'OK', 2000);
-          } else {
-            this.snackService.showMessage(data.status.description, 'error');
-          }
+        ofType(
+          authActions.loginSuccess,
+          authActions.refreshSuccess,
+          authActions.getPerrmisoPerfilSuccess
+        ),
+        tap(action => {
+          this.alertMessageAction.messageActions(
+            action.response.status.code,
+            action.response.status.desc,
+            action.type,
+            action
+          );
         })
       ),
     { dispatch: false }
   );
 
-  notifyAfterLoginError = createEffect(
+  notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(authActions.loginError),
-        tap(({ error }) => {
-          this.snackService.showMessage('Usuario/Password incorrecto', 'error');
-        })
+        ofType(authActions.loginError, authActions.getPerfilesUserError),
+        tap(action =>
+          this.alertMessageAction.messageActions(
+            action.error.error.status.code,
+            action.error.error.status.desc,
+            action.type,
+            action
+          )
+        )
       ),
     { dispatch: false }
   );

@@ -27,7 +27,7 @@ export class InformAvenceService {
 
   inicializaInforme(ot_id: number): Observable<{
     borrador_id: number;
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseInicializarInformeAvance>(
@@ -49,7 +49,7 @@ export class InformAvenceService {
 
   getInformeAvanceTrabajador(ot_id: number): Observable<{
     dataInformeAvance: DataInformeAvance[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetInformeAvance>(
@@ -71,7 +71,7 @@ export class InformAvenceService {
 
   getInformeAvanceAdministradorEC(ot_id: number): Observable<{
     dataInformeAvance: DataInformeAvance[];
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseGetInformeAvance>(
@@ -97,7 +97,7 @@ export class InformAvenceService {
     request: RequestSaveBorradorInformeAvance
   ): Observable<{
     total_guardados: number;
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseBorradorInformeAvance>(
@@ -120,7 +120,7 @@ export class InformAvenceService {
   saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): Observable<{
     informe_id: number;
     total_guardados: number;
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseSendInformeAvance>(
@@ -144,7 +144,7 @@ export class InformAvenceService {
   saveInformeAvanceAdministrador(
     request: RequestSaveInformeAvanceAdmin
   ): Observable<{
-    status: StatusResponse;
+    status: any;
   }> {
     return this.http
       .post<ResponseSendInformeAvanceAdminEC>(
@@ -164,7 +164,7 @@ export class InformAvenceService {
   }
 
   rechazarInformeAvance(informe_id: number): Observable<{
-    status: StatusResponse;
+    status: any;
   }> {
     // return this.http
     //   .post<ResponseBorradorInformeAvance>(

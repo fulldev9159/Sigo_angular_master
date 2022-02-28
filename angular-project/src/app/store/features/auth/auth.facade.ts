@@ -3,13 +3,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as authActions from './auth.actions';
 import * as authSelectors from './auth.selectors';
-import { Login, RequestLogin, Perfil } from '@data';
+import { SessionData, RequestLogin, Perfil, PerfilesUser } from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthFacade {
-  constructor(private store: Store<Login>) {}
+  constructor(private store: Store<SessionData>) {}
 
   public reset(): void {
     this.store.dispatch(authActions.reset());
@@ -19,11 +19,39 @@ export class AuthFacade {
     this.store.dispatch(authActions.login({ login }));
   }
 
-  public getLogin$(): Observable<Login> {
+  public getPerfilesUser(): void {
+    this.store.dispatch(authActions.getPerfilesUser());
+  }
+
+  public getLogin$(): Observable<SessionData> {
     return this.store.select(authSelectors.getLogin);
   }
 
   public getCurrentProfile$(): Observable<Perfil> {
     return this.store.select(authSelectors.getCurrentProfile);
+  }
+
+  public pefilesUsuario$(): Observable<PerfilesUser[]> {
+    return this.store.select(authSelectors.getPerfilesUser);
+  }
+
+  public refreshLogin(proxy_id: number, nombre_perfil_select: string): void {
+    this.store.dispatch(
+      authActions.refresh({ proxy_id, nombre_perfil_select })
+    );
+  }
+
+  public refreshProxyID(proxy_id: number, nombre_perfil_select: string): void {
+    this.store.dispatch(
+      authActions.refreshProxyID({ proxy_id, nombre_perfil_select })
+    );
+  }
+
+  public getPermisosPerfil(): void {
+    this.store.dispatch(authActions.getPerrmisoPerfil());
+  }
+
+  public resetPerfilEscogido(): void {
+    this.store.dispatch(authActions.reserPerfilEscogido());
   }
 }
