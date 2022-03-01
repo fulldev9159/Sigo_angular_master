@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Area </h1>
+      <span>formulario de ingreso</span>
+    </div>
+    <div class="col">
+      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-body>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <form [formGroup]="formArea">
+            <div class="row justify-content-center">
+              <div class="col-md-6 col-xs-12 ">
+                <app-input [control]="formControls.nombre" DisplayLabelMode="side" label="* Nombre:"></app-input>
+                <br>
+                <label for="">Descripcion</label>
+                <textarea formControlName="descripcion" class="form-control" placeholder="..." name="descripcion" id="descripcion" cols="30" rows="2"></textarea>
+                <br>
+
+                <div class="tipoArea">
+                  <label for="">Tipo de Área</label>
+                  <div class="row" style="margin-left: 19%;">
+                    <div class="col-xs-12 col-md-5">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton id="interno" name="interno" formControlName="interno" value="interno"></p-radioButton>
+                        <label for="movistar">Movistar</label>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-md-7">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton id="externo" name="interno" formControlName="interno" value="externo"></p-radioButton>
+                        <label for="proveedor">Contratista</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="tipoActivo">
+                  <!-- <label for="">Tipo de Area</label> -->
+                  <div class="row" style="margin-left: 19%;">
+                    <div class="col-xs-12 col-md-5">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton id="activo" name="activa" formControlName="activa" value="activa"></p-radioButton>
+                        <label for="movistar">Activo</label>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-md-7">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton id="inactivo" name="activa" formControlName="activa" value="inactiva"></p-radioButton>
+                        <label for="proveedor">Inactivo</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
+              <button id="submit-user" (click)="save()" type="submit" [disabled]="!formArea.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-container>
+
+  </app-card>
+</div>

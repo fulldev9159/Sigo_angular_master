@@ -3,6 +3,7 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as ca from '@storeOT/features/cubicacion/cubicacion.actions';
 import * as otActions from '@storeOT/features/ot/ot.actions';
 import * as authActions from '@storeOT/features/auth/auth.actions';
+import * as areaActions from '@storeOT/features/area/area.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -10,7 +11,6 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Router } from '@angular/router';
 import { MessageNotifyEffect } from '@data';
-import { Accion } from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +30,8 @@ export class AlertMessageActions {
     // Status OK
     // this.msgOK[authActions.loginSuccess.type] = 'Login exitoso';
     this.msgOK[ca.createCubSuccess.type] = 'Cubicación creada exitosamente';
+    this.msgOK[areaActions.updateAreaSuccess.type] =
+      'Se ha actualizado correctamente';
     this.msgOK[ca.editCubicacionSuccess.type] =
       'Cubicación actualizada exitosamente';
     this.msgOK[ca.deleteCubicacionSuccess.type] =
@@ -164,6 +166,10 @@ export class AlertMessageActions {
 
       if (action === authActions.getPerrmisoPerfilSuccess.type) {
         this.router.navigate(['app/dashboard']);
+      }
+
+      if (action === areaActions.updateAreaSuccess.type) {
+        this.router.navigate(['app/area']);
       }
     }
   }

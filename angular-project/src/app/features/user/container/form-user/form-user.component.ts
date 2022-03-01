@@ -10,7 +10,7 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import * as Data from '@data';
 
 import * as _ from 'lodash';
-import { Perfil, PosiblesSuperiores } from '@data';
+import { Perfil, PosiblesSuperiores, Area } from '@data';
 
 @Component({
   selector: 'app-form-user',
@@ -64,7 +64,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   formUser: FormGroup = new FormGroup(this.formControls);
 
   proveedores$: Observable<Data.Proveedor[]>;
-  areas$: Observable<Data.Area[]>;
+  areas$: Observable<Area[]>;
   contracts$: Observable<Data.Contrato[]>;
   profiles$: Observable<Data.Perfil[]>;
   samecompanyusers$: Observable<PosiblesSuperiores[]>;
@@ -100,7 +100,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
         .pipe(withLatestFrom(this.proveedores$))
         .subscribe(([user, proveedores]) => {
           if (user) {
-            console.log(user);
             this.formUser.get('id').setValue(user.id);
             this.formUser.get('username').setValue(user.username);
             this.formUser.get('username').disable();
@@ -347,7 +346,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.profiles$.pipe(take(1)).subscribe(x => {
         x.forEach(y => {
-          console.log('dsfs');
           if (y.id === perfil) {
             const data = y.permisos.map(permit => {
               let permitCustom;

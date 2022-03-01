@@ -45,6 +45,11 @@ const routes: Routes = [
             m => m.InformacionModule
           ),
       },
+      {
+        path: 'area',
+        loadChildren: () =>
+          import('../area/area.module').then(m => m.AreaModule),
+      },
     ],
   },
 ];

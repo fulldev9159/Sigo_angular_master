@@ -48,6 +48,11 @@ import { NotificacionesEffects } from './features/notificaciones/notificaciones.
 import * as formNotificacionesReduce from './features/notificaciones/notificaciones.reducer';
 // NOTIFICACIONES
 
+// AREA
+import { AreaEffects } from './features/area/area.effects';
+import * as areaReduce from './features/area/area.reducer';
+// AREA
+
 @NgModule({
   declarations: [],
   imports: [
@@ -120,6 +125,11 @@ import * as formNotificacionesReduce from './features/notificaciones/notificacio
       formNotificacionesReduce.NotificacionesFeatureKey,
       formNotificacionesReduce.reducerNotificaciones
     ),
+    // NOTIFICACIONES STORE
+
+    // NOTIFICACIONES STORE
+    EffectsModule.forFeature([AreaEffects]),
+    StoreModule.forFeature(areaReduce.FeatureKey, areaReduce.reducerArea),
     // NOTIFICACIONES STORE
   ],
 })
