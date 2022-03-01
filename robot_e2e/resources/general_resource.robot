@@ -24,6 +24,7 @@ _Open Browser To Page
 _Navegate to
     [Arguments]       ${menu}
     Run Keyword If    '${menu}' == 'Usuario'             Click Element            css:#menu-usuario>a>span
+    Run Keyword If    '${menu}' == 'Area'                Click Element            css:#menu-area>a>span
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    id:listarCubSubMenu
     Run Keyword If    '${menu}' == 'Perfil'              Click Visible Element    css:#menu-perfil>a>span
@@ -55,3 +56,19 @@ _Element exist in table
     ${cantidad de filas}=    get element count                                   css:.p-datatable-wrapper>table>tbody>tr
     ${status}=               Evaluate                                            ${cantidad de filas} > 0
     [return]                 ${status}
+
+_Go to Editar element
+    [Arguments]               ${nombre}                                           
+    _Wait visibility          css:app-table>div>p-table>div>div>div>span>input
+    input text                css:app-table>div>p-table>div>div>div>span>input    ${nombre} 
+    sleep                     0.5
+    # ${cantidad de filas}=    get element count                                   css:.p-datatable-wrapper>table>tbody>tr
+    # ${status}=               Evaluate                                            ${cantidad de filas} > 0
+    # [return]                 ${status}
+    _Click visible element    css:#action-buttons > div > div > button
+
+_Table should display data
+    _Wait visibility         css:.p-datatable-wrapper>table>tbody>tr
+    ${cantidad de filas}=    get element count                          css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=               Evaluate                                   ${cantidad de filas} > 0
+    Should Be True           ${status}

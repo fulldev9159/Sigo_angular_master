@@ -61,7 +61,7 @@ export class ListAreaComponent implements OnInit {
           editable: false,
         },
       ],
-      sort: [],
+      sort: ['nombre'],
       actions: [
         {
           icon: ' pi pi-pencil',
