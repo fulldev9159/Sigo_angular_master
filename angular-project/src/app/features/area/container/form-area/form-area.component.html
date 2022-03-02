@@ -19,7 +19,9 @@
           <form [formGroup]="formArea">
             <div class="row justify-content-center">
               <div class="col-md-6 col-xs-12 ">
-                <app-input [control]="formControls.nombre" DisplayLabelMode="up" label="* Nombre:"></app-input>
+                <div id="nombre-area">
+                  <app-input [control]="formControls.nombre" DisplayLabelMode="up" label="* Nombre:"></app-input>
+                </div>
                 <br>
                 <label for="">Descripcion</label>
                 <textarea formControlName="descripcion" class="form-control" placeholder="..." name="descripcion" id="descripcion" cols="30" rows="2"></textarea>
@@ -30,13 +32,13 @@
                   <div class="row" style="margin-top:10px;margin-left: 19%;">
                     <div class="col-xs-12 col-md-5">
                       <div class="p-field-radiobutton">
-                        <p-radioButton id="interno" name="interno" formControlName="interno" value="interno"></p-radioButton>
+                        <p-radioButton id="tipo-interno" name="interno" formControlName="interno" value="interno"></p-radioButton>
                         <label for="movistar">Movistar</label>
                       </div>
                     </div>
                     <div class="col-xs-12 col-md-7">
                       <div class="p-field-radiobutton">
-                        <p-radioButton id="externo" name="interno" formControlName="interno" value="externo"></p-radioButton>
+                        <p-radioButton id="tipo-externo" name="interno" formControlName="interno" value="externo"></p-radioButton>
                         <label for="proveedor">Contratista</label>
                       </div>
                     </div>
@@ -49,13 +51,13 @@
                   <div class="row" style="margin-left: 19%;">
                     <div class="col-xs-12 col-md-5">
                       <div class="p-field-radiobutton">
-                        <p-radioButton id="activo" name="activa" formControlName="activa" value="activa"></p-radioButton>
+                        <p-radioButton id="estado-activo" name="activa" formControlName="activa" value="activa"></p-radioButton>
                         <label for="movistar">Activo</label>
                       </div>
                     </div>
                     <div class="col-xs-12 col-md-7">
                       <div class="p-field-radiobutton">
-                        <p-radioButton id="inactivo" name="activa" formControlName="activa" value="inactiva"></p-radioButton>
+                        <p-radioButton id="estado-inactivo" name="activa" formControlName="activa" value="inactiva"></p-radioButton>
                         <label for="proveedor">Inactivo</label>
                       </div>
                     </div>
@@ -63,8 +65,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-xs-12 offset-md-7 col-md-5 text-right mb-4">
-              <button id="submit-user" (click)="save()" type="submit" [disabled]="!formArea.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
+            <div class="col-xs-12 offset-md-12 col-md-12 text-center mb-4">
+              <button id="submit-area" (click)="save()" type="submit" [disabled]="!formArea.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
             </div>
           </form>
         </div>

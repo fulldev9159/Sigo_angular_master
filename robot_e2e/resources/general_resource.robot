@@ -48,7 +48,7 @@ _Wait visibility and contain
     _Wait visibility               ${selector}
     Wait Until Element Contains    ${selector}    ${valor}
 
-_Element exist in table
+_Element should exist in table
     [Arguments]              ${nombre}                                           
     _Wait visibility         css:app-table>div>p-table>div>div>div>span>input
     input text               css:app-table>div>p-table>div>div>div>span>input    ${nombre} 
@@ -62,9 +62,6 @@ _Go to Editar element
     _Wait visibility          css:app-table>div>p-table>div>div>div>span>input
     input text                css:app-table>div>p-table>div>div>div>span>input    ${nombre} 
     sleep                     0.5
-    # ${cantidad de filas}=    get element count                                   css:.p-datatable-wrapper>table>tbody>tr
-    # ${status}=               Evaluate                                            ${cantidad de filas} > 0
-    # [return]                 ${status}
     _Click visible element    css:#action-buttons > div > div > button
 
 _Table should display data
@@ -72,3 +69,13 @@ _Table should display data
     ${cantidad de filas}=    get element count                          css:.p-datatable-wrapper>table>tbody>tr
     ${status}=               Evaluate                                   ${cantidad de filas} > 0
     Should Be True           ${status}
+
+_Set input text
+    [Arguments]                      ${selector}     ${value}
+    Wait Until Element Is Visible    ${selector} 
+    input text                       ${selector}     ${value}
+
+_Validate column data
+    [Arguments]                   ${columna}     ${value}
+    ${txt fila}=                  Get Text       css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(${columna})
+    Should Be Equal As Strings    ${txt fila}    ${value}
