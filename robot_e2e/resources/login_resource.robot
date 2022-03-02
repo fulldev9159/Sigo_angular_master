@@ -11,14 +11,15 @@ Resource    general_resource.robot
 
 *** Keywords ***
 _Login
-    [Arguments]                      ${username}          ${password}
+    [Arguments]                      ${username}                             ${password}    ${perfil}
     Open Browser To Page             ${url}
-    Location Should Be               ${url}/auth/login
-    input text                       name:username        ${username}
-    input password                   name:password        ${password}
-    element should be enabled        id:login
+    input text                       name:username                           ${username}
+    input password                   name:password                           ${password}
     _Click visible element           id:login
-    Wait Until Element Is Visible    id:user-name         timeout=15
+    _Wait visibility and contain     css:.perfil_select>app-select>select    ${perfil}
+    Select From List By Label        css:.perfil_select>app-select>select    ${perfil}
+    _Click visible element           id:login
+    Wait Until Element Is Visible    id:user-name                            timeout=15
 
 _Logout
     sleep                    5

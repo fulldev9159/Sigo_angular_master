@@ -1,4 +1,5 @@
 import { ContratoMarco4Cub } from '@data';
+import { Area } from './area';
 
 // GET USER
 export interface User {
@@ -150,13 +151,6 @@ export interface AreaResponse {
     description: string;
     responseCode: number;
   };
-}
-
-export interface Area {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  interno: boolean;
 }
 
 export interface ContratoResponse {

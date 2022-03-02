@@ -61,6 +61,12 @@
                 <span>Usuarios</span>
               </a>
             </li>
+            <li *ngxPermissionsOnly="['PERFIL_LISTAR']" routerLinkActive="active" id="menu-area">
+              <a [routerLink]="['/app/area']">
+                <i class="pi pi-users"></i>
+                <span>Area</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
