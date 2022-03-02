@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -10,7 +10,7 @@ import { AreaFacade } from '@storeOT/features/area/area.facade';
   templateUrl: './form-area.component.html',
   styleUrls: ['./form-area.component.scss'],
 })
-export class FormAreaComponent implements OnInit {
+export class FormAreaComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   areaSelected$: Observable<Area>;
 
