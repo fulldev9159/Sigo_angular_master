@@ -24,14 +24,14 @@ linter:
     - npm ci
     - ng lint
 
-unit test:
-  stage: unit test
-  image: trion/ng-cli-karma:${CLI_VERSION}
-  script:
-    - cd angular-project
-    - npm ci
-    - ng test --code-coverage --progress false --watch false
-  coverage: '/^Statements\s*:\s*([^%]+)/'
+# unit test:
+#   stage: unit test
+#   image: trion/ng-cli-karma:${CLI_VERSION}
+#   script:
+#     - cd angular-project
+#     - npm ci
+#     - ng test --code-coverage --progress false --watch false
+#   coverage: '/^Statements\s*:\s*([^%]+)/'
 
 integrations test cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
