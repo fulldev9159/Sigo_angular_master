@@ -3,7 +3,7 @@ import { ContratoFacade } from '@storeOT/features/contratos/contratos.facade';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { ContratoMarco } from '@data';
+import { ContratoMarco, TableListContratosMarcos } from '@data';
 
 @Component({
   selector: 'app-list-contratos',
@@ -11,7 +11,7 @@ import { ContratoMarco } from '@data';
   styleUrls: ['./list-contratos.component.scss'],
 })
 export class ListContratosComponent implements OnInit {
-  public contratos$: Observable<ContratoMarco[]>;
+  public contratos$: Observable<TableListContratosMarcos[]>;
   public configTable = {
     header: true,
     headerConfig: {
@@ -27,23 +27,7 @@ export class ListContratosComponent implements OnInit {
           type: 'TEXT',
           sort: 'nombre',
           header: 'nombre',
-          // width: '10%',
-          editable: false,
-        },
-        {
-          field: 'Costo Max',
-          type: 'NUMBER',
-          sort: 'costo_max',
-          header: 'costo_max',
-          // width: '10%',
-          editable: false,
-        },
-        {
-          field: 'Tipo_pago',
-          type: 'TEXT',
-          sort: 'tipo_pago',
-          header: 'tipo_pago',
-          // width: '10%',
+          width: '15%',
           editable: false,
         },
         {
@@ -63,7 +47,23 @@ export class ListContratosComponent implements OnInit {
           editable: false,
         },
         {
-          field: 'Aprob. Jerarquica',
+          field: 'Tipo Contrato',
+          type: 'TEXT',
+          sort: 'tipo_contrato',
+          header: 'tipo_contrato',
+          // width: '8%',
+          editable: false,
+        },
+        {
+          field: 'Tipo Moneda',
+          type: 'TEXT',
+          sort: 'tipo_moneda_id',
+          header: 'tipo_moneda_id',
+          // width: '8%',
+          editable: false,
+        },
+        {
+          field: 'Req. Aprob. Jerarquica',
           type: 'TEXT',
           sort: 'aprob_jerarq_inic',
           header: 'aprob_jerarq_inic',
@@ -71,23 +71,15 @@ export class ListContratosComponent implements OnInit {
           editable: false,
         },
         {
+          field: 'Req. validacion Oper.',
+          type: 'TEXT',
+          sort: 'validacion_operaciones',
+          header: 'validacion_operaciones',
+          // width: '8%',
+          editable: false,
+        },
+        {
           field: 'Tiene Encuesta',
-          type: 'TEXT',
-          sort: 'tiene_encuesta',
-          header: 'tiene_encuesta',
-          // width: '8%',
-          editable: false,
-        },
-        {
-          field: 'Tipo Contrato',
-          type: 'TEXT',
-          sort: 'tiene_encuesta',
-          header: 'tiene_encuesta',
-          // width: '8%',
-          editable: false,
-        },
-        {
-          field: 'Tipo Moneda',
           type: 'TEXT',
           sort: 'tiene_encuesta',
           header: 'tiene_encuesta',
@@ -103,18 +95,18 @@ export class ListContratosComponent implements OnInit {
           editable: false,
         },
         {
-          field: 'Validación de OP',
-          type: 'TEXT',
-          sort: 'validacion_operaciones',
-          header: 'validacion_operaciones',
-          // width: '8%',
+          field: 'Costo Max',
+          type: 'NUMBER',
+          sort: 'costo_max',
+          header: 'costo_max',
+          // width: '10%',
           editable: false,
         },
         {
           field: 'Estado',
           type: 'TEXT',
-          sort: 'activa',
-          header: 'activa',
+          sort: 'activo',
+          header: 'activo',
           // width: '8%',
           editable: false,
         },
@@ -168,7 +160,21 @@ export class ListContratosComponent implements OnInit {
   ngOnInit(): void {
     this.contratoFacade.reset();
     this.contratoFacade.getAllContratos();
-    this.contratos$ = this.contratoFacade.getAllContratos$();
+    this.contratos$ = this.contratoFacade.getAllContratos$().pipe(
+      map(contratos => {
+        if (contratos) {
+          return contratos.map(contrato => ({
+            ...contrato,
+            activo: contrato.activo ? 'Activo' : 'Inactivo',
+            aprob_jerarq_inic: contrato.aprob_jerarq_inic ? 'Si' : 'No',
+            tiene_encuesta: contrato.tiene_encuesta ? 'Si' : 'No',
+            validacion_operaciones: contrato.validacion_operaciones
+              ? 'Si'
+              : 'No',
+          }));
+        }
+      })
+    );
     // .pipe(
     //   map(areas => {
     //     if (areas) {

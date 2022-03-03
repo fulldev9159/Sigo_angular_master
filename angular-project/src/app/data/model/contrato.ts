@@ -47,3 +47,14 @@ export interface ContratoMarco {
   tipo_pago: string;
   validacion_operaciones: boolean;
 }
+
+export interface TableListContratosMarcos
+  extends Omit<
+    ContratoMarco,
+    'activo' | 'aprob_jerarq_inic' | 'tiene_encuesta' | 'validacion_operaciones'
+  > {
+  activo: string;
+  aprob_jerarq_inic: string;
+  tiene_encuesta: string;
+  validacion_operaciones: string;
+}
