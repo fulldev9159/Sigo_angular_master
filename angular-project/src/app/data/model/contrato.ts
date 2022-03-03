@@ -28,3 +28,22 @@ export interface ContratoMarco4Cub {
   tipo_codigo: number;
   tipo_glosa: string;
 }
+
+export interface DataRspGetAllContratos {
+  contrato_marcos: ContratoMarco[];
+}
+
+export interface ContratoMarco {
+  activo: boolean;
+  aprob_jerarq_inic: boolean;
+  costo_max: number;
+  fecha_fin: Date;
+  fecha_inicio: Date;
+  id: number;
+  nombre: string;
+  tiene_encuesta: boolean;
+  tipo_contrato: number;
+  tipo_moneda_id: number;
+  tipo_pago: string;
+  validacion_operaciones: boolean;
+}

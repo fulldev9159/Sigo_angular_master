@@ -53,6 +53,11 @@ import { AreaEffects } from './features/area/area.effects';
 import * as areaReduce from './features/area/area.reducer';
 // AREA
 
+// CONTRATOS
+import { ContratosEffects } from './features/contratos/contratos.effects';
+import * as contratosReduce from './features/contratos/contratos.reducer';
+// CONTRATOS
+
 @NgModule({
   declarations: [],
   imports: [
@@ -127,10 +132,18 @@ import * as areaReduce from './features/area/area.reducer';
     ),
     // NOTIFICACIONES STORE
 
-    // NOTIFICACIONES STORE
+    // AREA STORE
     EffectsModule.forFeature([AreaEffects]),
     StoreModule.forFeature(areaReduce.FeatureKey, areaReduce.reducerArea),
-    // NOTIFICACIONES STORE
+    // AREA STORE
+
+    // CONTRATOS STORE
+    EffectsModule.forFeature([ContratosEffects]),
+    StoreModule.forFeature(
+      contratosReduce.FeatureKey,
+      contratosReduce.reducerContrato
+    ),
+    // CONTRATOS STORE
   ],
 })
 export class StoreAllModule {}

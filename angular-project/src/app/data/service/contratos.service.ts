@@ -7,6 +7,7 @@ import {
   ContratoMarco4Cub,
   ResponseGetContrato4Cub as ResponseGetContrato4Cub,
 } from '@data';
+import { DataRspGetAllContratos, Response } from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,5 +42,12 @@ export class ContratosService {
           };
         })
       );
+  }
+
+  getAllContratos(): Observable<Response<DataRspGetAllContratos>> {
+    return this.http.post<Response<DataRspGetAllContratos>>(
+      `${this.apiUrl}/configuration/contrato_marcos/get`,
+      {}
+    );
   }
 }
