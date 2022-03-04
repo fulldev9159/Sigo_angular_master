@@ -126,7 +126,7 @@ export class ListContratosComponent implements OnInit {
           label: 'Editar',
           onClick: (event: Event, item: any) => {
             if (item) {
-              // this.router.navigate(['/app/area/form-area', item.id]);
+              this.router.navigate(['/app/contratos/form-contratos', item.id]);
             }
           },
         },

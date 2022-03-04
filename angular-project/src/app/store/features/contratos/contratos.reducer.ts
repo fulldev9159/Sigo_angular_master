@@ -6,12 +6,12 @@ export const FeatureKey = 'contratos';
 
 export interface StateContratos {
   contratos: ContratoMarco[];
-  // areaSelected: Area;
+  contratoSelected: ContratoMarco;
 }
 
 export const initialStateContratos: StateContratos = {
   contratos: null,
-  // areaSelected: null,
+  contratoSelected: null,
 };
 
 export const reducerContrato = createReducer(
@@ -23,9 +23,14 @@ export const reducerContrato = createReducer(
   on(contratosActions.getContratosSuccess, (state, { response }) => ({
     ...state,
     contratos: response.data.contrato_marcos,
-  }))
-  // on(contratosActions.getAreaSuccess, (state, { area_id, response }) => ({
-  //   ...state,
-  //   areaSelected: response.data.areas.find(area => area.id === area_id),
-  // }))
+  })),
+  on(
+    contratosActions.getSingleContratoSuccess,
+    (state, { contrato_id, response }) => ({
+      ...state,
+      contratoSelected: response.data.contrato_marcos.find(
+        contrato => contrato.id === contrato_id
+      ),
+    })
+  )
 );

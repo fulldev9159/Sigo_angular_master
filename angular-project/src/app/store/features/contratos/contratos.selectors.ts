@@ -10,7 +10,7 @@ export const getContratos = createSelector(
   (state: reducer.StateContratos) => state.contratos
 );
 
-// export const getAreaSelected = createSelector(
-//   selectArea,
-//   (state: reducer.StateArea) => state.areaSelected
-// );
+export const getContratoSelected = createSelector(
+  selectContratos,
+  (state: reducer.StateContratos) => state.contratoSelected
+);

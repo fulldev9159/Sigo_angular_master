@@ -1,15 +1,177 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable, of, Subscription } from 'rxjs';
 
+import { ContratoFacade } from '@storeOT/features/contratos/contratos.facade';
+import { ContratoMarco } from '@data';
 @Component({
   selector: 'app-form-contratos',
   templateUrl: './form-contratos.component.html',
-  styleUrls: ['./form-contratos.component.scss']
+  styleUrls: ['./form-contratos.component.scss'],
 })
-export class FormContratosComponent implements OnInit {
+export class FormContratosComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
+  contratoSelected$: Observable<ContratoMarco>;
+  tipoContrato$: Observable<any[]> = of([
+    {
+      nombre: 'Móvil',
+      id: 1,
+    },
+    {
+      nombre: 'Fijo',
+      id: 2,
+    },
+    {
+      nombre: 'Ordinario',
+      id: 3,
+    },
+    {
+      nombre: 'Bucle',
+      id: 4,
+    },
+  ]);
 
-  constructor() { }
+  tipoMoneda$: Observable<any[]> = of([
+    {
+      nombre: 'USD (Dolar Americano)',
+      id: 1,
+    },
+    {
+      nombre: 'CLP (Peso Chileno)',
+      id: 2,
+    },
+    {
+      nombre: 'CLF (Unidad de fomento Chilena)',
+      id: 3,
+    },
+    {
+      nombre: 'UTM (Unidad tributarioa mensual)',
+      id: 4,
+    },
+    {
+      nombre: 'GBP  (Libra esterlina)',
+      id: 5,
+    },
+    {
+      nombre: 'EUR (Euro)',
+      id: 6,
+    },
+  ]);
+
+  tipoPago$: Observable<any[]> = of([
+    {
+      nombre: 'TODOS',
+      id: 'TODOS',
+    },
+    {
+      nombre: 'TOTAL',
+      id: 'TOTAL',
+    },
+    {
+      nombre: 'PARCIAL',
+      id: 'PARCIAL',
+    },
+  ]);
+
+  formControls = {
+    id: new FormControl(null),
+    nombre: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      // Validators.maxLength(20),
+    ]),
+    fecha_inicio: new FormControl(null, [Validators.required]),
+    fecha_fin: new FormControl(null, [Validators.required]),
+    tipo_contrato_id: new FormControl(null, [Validators.required]),
+    tipo_moneda: new FormControl(null, [Validators.required]),
+    aprob_jerarq_inic: new FormControl(null, [Validators.required]),
+    validacion_operaciones: new FormControl(null, [Validators.required]),
+    tiene_encuesta: new FormControl(null, [Validators.required]),
+    tipo_pago: new FormControl(null, [Validators.required]),
+    costo_max: new FormControl(null, [Validators.required]),
+    activo: new FormControl(null, [
+      Validators.required,
+      // Validators.maxLength(20),
+    ]),
+  };
+
+  formContrato: FormGroup = new FormGroup(this.formControls);
+  constructor(
+    private contratoFacade: ContratoFacade,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.contratoFacade.reset();
+    this.subscription.add(
+      this.route.paramMap.subscribe(params => {
+        if (params.get('id') != null) {
+          this.contratoFacade.getSingleContratoSelected(+params.get('id'));
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.contratoFacade.getSingleContratoSelected$().subscribe(contrato => {
+        if (contrato) {
+          this.formContrato.get('id').setValue(contrato.id);
+          this.formContrato.get('nombre').setValue(contrato.nombre);
+          this.formContrato.get('fecha_inicio').setValue(contrato.fecha_inicio);
+          this.formContrato.get('fecha_fin').setValue(contrato.fecha_fin);
+          this.formContrato
+            .get('tipo_contrato_id')
+            .setValue(contrato.tipo_contrato);
+          this.formContrato
+            .get('tipo_moneda')
+            .setValue(contrato.tipo_moneda_id);
+          this.formContrato
+            .get('aprob_jerarq_inic')
+            .setValue(contrato.aprob_jerarq_inic);
+          this.formContrato
+            .get('validacion_operaciones')
+            .setValue(contrato.validacion_operaciones);
+          this.formContrato
+            .get('tiene_encuesta')
+            .setValue(contrato.tiene_encuesta);
+          this.formContrato.get('tipo_pago').setValue(contrato.tipo_pago);
+          this.formContrato.get('costo_max').setValue(contrato.costo_max);
+          this.formContrato
+            .get('activa')
+            .setValue(contrato.activo ? 'activa' : 'inactiva');
+        }
+      })
+    );
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+
+  goBack(): void {
+    this.contratoFacade.reset();
+    this.router.navigate(['/app/area/list-area']);
+  }
+
+  save(): void {
+    console.log(this.formContrato.value);
+    // const request: RequestEditArea = {
+    //   area_id: +this.formContrato.get('id').value,
+    //   values: {
+    //     nombre: this.formContrato.get('nombre').value,
+    //     descripcion: this.formContrato.get('descripcion').value,
+    //     interno:
+    //       this.formContrato.get('interno').value === 'interno' ? true : false,
+    //     activa: this.formContrato.get('activa').value === 'activa' ? true : false,
+    //   },
+    // };
+    // console.log(request);
+    // this.contratoFacade.updateArea(request);
+  }
 }

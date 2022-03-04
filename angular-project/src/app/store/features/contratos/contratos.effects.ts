@@ -15,7 +15,7 @@ export class ContratosEffects {
     private alertMessageAction: AlertMessageActions
   ) {}
 
-  getAreas$ = createEffect(() =>
+  getContratos$ = createEffect(() =>
     this.actions$.pipe(
       ofType(contratosActions.getContratos),
       concatMap(() =>
@@ -27,17 +27,19 @@ export class ContratosEffects {
     )
   );
 
-  // getArea$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(areaActions.getArea),
-  //     concatMap(({ area_id }) =>
-  //       this.areaService.getAreas().pipe(
-  //         map(response => areaActions.getAreaSuccess({ area_id, response })),
-  //         catchError(error => of(areaActions.getAreasError({ error })))
-  //       )
-  //     )
-  //   )
-  // );
+  getSingleContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratosActions.getSingleContrato),
+      concatMap(({ contrato_id }) =>
+        this.contratosService.getAllContratos().pipe(
+          map(response =>
+            contratosActions.getSingleContratoSuccess({ contrato_id, response })
+          ),
+          catchError(error => of(contratosActions.getContratosError({ error })))
+        )
+      )
+    )
+  );
 
   // updateArea$ = createEffect(() =>
   //   this.actions$.pipe(

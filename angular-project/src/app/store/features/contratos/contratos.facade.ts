@@ -3,7 +3,7 @@ import { ContratoMarco } from '@data';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as contratosActions from './contratos.actions';
-import * as areaSelectors from './contratos.selectors';
+import * as contratoSelectors from './contratos.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -20,16 +20,16 @@ export class ContratoFacade {
   }
 
   public getAllContratos$(): Observable<ContratoMarco[]> {
-    return this.store.select(areaSelectors.getContratos);
+    return this.store.select(contratoSelectors.getContratos);
   }
 
-  // public getAreaSelected(area_id: number): void {
-  //   this.store.dispatch(contratosActions.getArea({ area_id }));
-  // }
+  public getSingleContratoSelected(contrato_id: number): void {
+    this.store.dispatch(contratosActions.getSingleContrato({ contrato_id }));
+  }
 
-  // public getAreaSelected$(): Observable<Area> {
-  //   return this.store.select(areaSelectors.getAreaSelected);
-  // }
+  public getSingleContratoSelected$(): Observable<ContratoMarco> {
+    return this.store.select(contratoSelectors.getContratoSelected);
+  }
 
   // public updateArea(request: RequestEditArea): void {
   //   this.store.dispatch(contratosActions.updateArea({ request }));

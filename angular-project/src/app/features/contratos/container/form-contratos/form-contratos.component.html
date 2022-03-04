@@ -1,1 +1,133 @@
-<p>form-contratos works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Contratos </h1>
+      <span>formulario de ingreso</span>
+    </div>
+    <div class="col">
+      <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-body>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <form [formGroup]="formContrato">
+            <div class="row justify-content-center">
+              <div class="col-md-6 col-xs-12 ">
+                <div id="nombre-area">
+                  <app-input [control]="formControls.nombre" DisplayLabelMode="up" label="* Nombre:"></app-input>
+                </div>
+                <br>
+                <!-- <div class="col-xs-12 col-md-6" id="control_fecha_inicio"> -->
+                <label class="mr-1" for="">Fecha inicio</label>
+                <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot" name="fecha-inicio-ot" dateFormat="dd/mm/yy"></p-calendar>
+                <!-- </div> -->
+                <!-- <div class="col-xs-12 col-md-6" id="control_fecha_termino"> -->
+                <label for="">Fecha termino</label>
+                <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot" dateFormat="dd/mm/yy"></p-calendar>
+                <!-- </div> -->
+
+                <!-- <ng-container *ngIf="invalidDates">
+                    <div class="col-12">
+                      <p-messages [(value)]="msgsWrongDates" [closable]="false"></p-messages>
+                    </div>
+                  </ng-container> -->
+                <app-select [control]="formControls.tipo_contrato_id" label="Tipo Contrato">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un tipo de contrato marco</option>
+                    <ng-container *ngFor="let tipoContrato of tipoContrato$ | async">
+                      <option [value]="tipoContrato.id">
+                        {{ tipoContrato.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+
+                <br>
+
+                <app-select [control]="formControls.tipo_contrato_id" label="Tipo moneda">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un tipo moneda</option>
+                    <ng-container *ngFor="let tipoMoneda of tipoMoneda$ | async">
+                      <option [value]="tipoMoneda.id">
+                        {{ tipoMoneda.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+
+                <label for=""></label>
+                <div class="tipoArea">
+                  <div class="row" style="margin-top:10px;margin-left: 19%;">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="aprob_jerarq_inic">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Requiere Aprobación jerarquica
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="validacion_operaciones">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Requiere Valicación operaciones
+                      </label>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="tiene_encuesta">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Tiene encuesta
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+                <br>
+                <app-select [control]="formControls.tipo_pago" label="Tipo pago">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un tipo pago</option>
+                    <ng-container *ngFor="let tipoPago of tipoPago$ | async">
+                      <option [value]="tipoPago.id">
+                        {{ tipoPago.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+
+                <br>
+                <app-input [control]="formControls.costo_max" DisplayLabelMode="up" label="Costo máximo:" type="number"></app-input>
+
+                <div class="tipoActivo">
+                  <!-- <label for="">Tipo de Area</label> -->
+                  <div class="row" style="margin-left: 19%;">
+                    <div class="col-xs-12 col-md-5">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton id="estado-activo" name="activa" formControlName="activo" value="activo"></p-radioButton>
+                        <label for="movistar">Activo</label>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-md-7">
+                      <div class="p-field-radiobutton">
+                        <p-radioButton id="estado-inactivo" name="activa" formControlName="activo" value="inactivo"></p-radioButton>
+                        <label for="proveedor">Inactivo</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 offset-md-12 col-md-12 text-center mb-4">
+              <button id="submit-area" (click)="save()" type="submit" [disabled]="!formContrato.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-container>
+
+  </app-card>
+</div>

@@ -25,7 +25,7 @@ const routes: Routes = [
         },
       },
       {
-        path: 'form-contratos',
+        path: 'form-contratos/:id',
         component: FormContratosComponent,
         canActivate: [NgxPermissionsGuard],
         data: {
