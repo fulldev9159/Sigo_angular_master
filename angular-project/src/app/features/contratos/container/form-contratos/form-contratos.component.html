@@ -31,12 +31,13 @@
                 <label for="">Fecha termino</label>
                 <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot" name="fecha-termino-ot" dateFormat="dd/mm/yy"></p-calendar>
                 <!-- </div> -->
-
+                <br>
                 <!-- <ng-container *ngIf="invalidDates">
                     <div class="col-12">
                       <p-messages [(value)]="msgsWrongDates" [closable]="false"></p-messages>
                     </div>
                   </ng-container> -->
+                <br>
                 <app-select [control]="formControls.tipo_contrato_id" label="Tipo Contrato">
                   <ng-container options>
                     <option value="null" selected disabled>Seleccione un tipo de contrato marco</option>
@@ -50,7 +51,7 @@
 
                 <br>
 
-                <app-select [control]="formControls.tipo_contrato_id" label="Tipo moneda">
+                <app-select [control]="formControls.tipo_moneda_id" label="Tipo moneda">
                   <ng-container options>
                     <option value="null" selected disabled>Seleccione un tipo moneda</option>
                     <ng-container *ngFor="let tipoMoneda of tipoMoneda$ | async">
@@ -61,9 +62,30 @@
                   </ng-container>
                 </app-select>
 
-                <label for=""></label>
+
+                <br>
+                <app-select [control]="formControls.tipo_pago" label="Tipo pago">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un tipo pago</option>
+                    <ng-container *ngFor="let tipoPago of tipoPago$ | async">
+                      <option [value]="tipoPago.id">
+                        {{ tipoPago.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+
+                <br>
+                <app-input [control]="formControls.costo_max" DisplayLabelMode="up" label="Costo máximo:" type="number"></app-input>
+
+                <br>
+                <label for="">Validaciones</label>
                 <div class="tipoArea">
-                  <div class="row" style="margin-top:10px;margin-left: 19%;">
+                  <div class="row" style="
+                    text-align: left;
+                    display: flex;
+                    flex-direction: column">
+
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="aprob_jerarq_inic">
                       <label class="form-check-label" for="defaultCheck1">
@@ -87,20 +109,6 @@
 
                   </div>
                 </div>
-                <br>
-                <app-select [control]="formControls.tipo_pago" label="Tipo pago">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione un tipo pago</option>
-                    <ng-container *ngFor="let tipoPago of tipoPago$ | async">
-                      <option [value]="tipoPago.id">
-                        {{ tipoPago.nombre }}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
-
-                <br>
-                <app-input [control]="formControls.costo_max" DisplayLabelMode="up" label="Costo máximo:" type="number"></app-input>
 
                 <div class="tipoActivo">
                   <!-- <label for="">Tipo de Area</label> -->
@@ -119,10 +127,11 @@
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
             <div class="col-xs-12 offset-md-12 col-md-12 text-center mb-4">
-              <button id="submit-area" (click)="save()" type="submit" [disabled]="!formContrato.valid" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
+              <button id="submit-area" (click)="save()" type="submit" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
             </div>
           </form>
         </div>

@@ -84,7 +84,7 @@ export class FormContratosComponent implements OnInit, OnDestroy {
     fecha_inicio: new FormControl(null, [Validators.required]),
     fecha_fin: new FormControl(null, [Validators.required]),
     tipo_contrato_id: new FormControl(null, [Validators.required]),
-    tipo_moneda: new FormControl(null, [Validators.required]),
+    tipo_moneda_id: new FormControl(null, [Validators.required]),
     aprob_jerarq_inic: new FormControl(null, [Validators.required]),
     validacion_operaciones: new FormControl(null, [Validators.required]),
     tiene_encuesta: new FormControl(null, [Validators.required]),
@@ -126,7 +126,7 @@ export class FormContratosComponent implements OnInit, OnDestroy {
             .get('tipo_contrato_id')
             .setValue(contrato.tipo_contrato);
           this.formContrato
-            .get('tipo_moneda')
+            .get('tipo_moneda_id')
             .setValue(contrato.tipo_moneda_id);
           this.formContrato
             .get('aprob_jerarq_inic')
