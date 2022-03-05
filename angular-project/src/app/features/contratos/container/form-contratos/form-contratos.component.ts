@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of, Subscription } from 'rxjs';
@@ -100,7 +100,8 @@ export class FormContratosComponent implements OnInit, OnDestroy {
   constructor(
     private contratoFacade: ContratoFacade,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -116,9 +117,10 @@ export class FormContratosComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.contratoFacade.getSingleContratoSelected$().subscribe(contrato => {
         if (contrato) {
+          console.log(contrato);
           this.formContrato.get('id').setValue(contrato.id);
           this.formContrato.get('nombre').setValue(contrato.nombre);
-          this.formContrato.get('fecha_inicio').setValue(contrato.fecha_inicio);
+          this.formContrato.get('fecha_inicio').setValue(new Date());
           this.formContrato.get('fecha_fin').setValue(contrato.fecha_fin);
           this.formContrato
             .get('tipo_contrato_id')
@@ -143,6 +145,10 @@ export class FormContratosComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    setTimeout(() => {
+      this.detector.detectChanges();
+    }, 1000);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

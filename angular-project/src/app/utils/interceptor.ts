@@ -68,7 +68,6 @@ export class JwtAppInterceptor implements HttpInterceptor {
               this.authFacade.reset();
               this.router.navigate(['/auth']);
             }
-            console.log(err);
           }
         }
       )

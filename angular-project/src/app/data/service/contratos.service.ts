@@ -46,7 +46,7 @@ export class ContratosService {
 
   getAllContratos(): Observable<Response<DataRspGetAllContratos>> {
     return this.http.post<Response<DataRspGetAllContratos>>(
-      `${this.apiUrl}/configuration/contrato_marcos/get`,
+      `${this.apiUrl}/configuration/contrato_marco/getall`,
       {}
     );
   }
