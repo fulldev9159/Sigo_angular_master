@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, of, Subscription } from 'rxjs';
 
 import { ContratoFacade } from '@storeOT/features/contratos/contratos.facade';
-import { ContratoMarco } from '@data';
+import { ContratoMarco, ReqEditContrato } from '@data';
 @Component({
   selector: 'app-form-contratos',
   templateUrl: './form-contratos.component.html',
@@ -117,14 +117,17 @@ export class FormContratosComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.contratoFacade.getSingleContratoSelected$().subscribe(contrato => {
         if (contrato) {
-          console.log(contrato);
           this.formContrato.get('id').setValue(contrato.id);
           this.formContrato.get('nombre').setValue(contrato.nombre);
-          this.formContrato.get('fecha_inicio').setValue(new Date());
-          this.formContrato.get('fecha_fin').setValue(contrato.fecha_fin);
+          this.formContrato
+            .get('fecha_inicio')
+            .setValue(new Date(contrato.fecha_inicio));
+          this.formContrato
+            .get('fecha_fin')
+            .setValue(new Date(contrato.fecha_fin));
           this.formContrato
             .get('tipo_contrato_id')
-            .setValue(contrato.tipo_contrato);
+            .setValue(contrato.tipo_contrato_id);
           this.formContrato
             .get('tipo_moneda_id')
             .setValue(contrato.tipo_moneda_id);
@@ -140,8 +143,8 @@ export class FormContratosComponent implements OnInit, OnDestroy {
           this.formContrato.get('tipo_pago').setValue(contrato.tipo_pago);
           this.formContrato.get('costo_max').setValue(contrato.costo_max);
           this.formContrato
-            .get('activa')
-            .setValue(contrato.activo ? 'activa' : 'inactiva');
+            .get('activo')
+            .setValue(contrato.activo ? 'activo' : 'inactivo');
         }
       })
     );
@@ -162,22 +165,29 @@ export class FormContratosComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.contratoFacade.reset();
-    this.router.navigate(['/app/area/list-area']);
+    this.router.navigate(['/app/contratos/list-contratos']);
   }
 
   save(): void {
-    console.log(this.formContrato.value);
-    // const request: RequestEditArea = {
-    //   area_id: +this.formContrato.get('id').value,
-    //   values: {
-    //     nombre: this.formContrato.get('nombre').value,
-    //     descripcion: this.formContrato.get('descripcion').value,
-    //     interno:
-    //       this.formContrato.get('interno').value === 'interno' ? true : false,
-    //     activa: this.formContrato.get('activa').value === 'activa' ? true : false,
-    //   },
-    // };
-    // console.log(request);
-    // this.contratoFacade.updateArea(request);
+    const request: ReqEditContrato = {
+      contrato_marco_id: +this.formContrato.get('id').value,
+      values: {
+        nombre: this.formContrato.get('nombre').value,
+        // fecha_inicio: new Date(this.formContrato.get('fecha_inicio').value),
+        // fecha_fin: new Date(this.formContrato.get('fecha_fin').value),
+        tipo_contrato_id: +this.formContrato.get('tipo_contrato_id').value,
+        costo_max: +this.formContrato.get('costo_max').value,
+        tipo_moneda_id: +this.formContrato.get('tipo_moneda_id').value,
+        tipo_pago: this.formContrato.get('tipo_pago').value,
+        aprob_jerarq_inic: this.formContrato.get('aprob_jerarq_inic').value,
+        validacion_operaciones: this.formContrato.get('validacion_operaciones')
+          .value,
+        tiene_encuesta: this.formContrato.get('tiene_encuesta').value,
+        activo:
+          this.formContrato.get('activo').value === 'activo' ? true : false,
+      },
+    };
+    console.log('request', request);
+    this.contratoFacade.updateContrato(request);
   }
 }

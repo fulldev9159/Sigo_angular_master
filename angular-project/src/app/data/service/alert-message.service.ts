@@ -4,6 +4,7 @@ import * as ca from '@storeOT/features/cubicacion/cubicacion.actions';
 import * as otActions from '@storeOT/features/ot/ot.actions';
 import * as authActions from '@storeOT/features/auth/auth.actions';
 import * as areaActions from '@storeOT/features/area/area.actions';
+import * as contratoActions from '@storeOT/features/contratos/contratos.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -30,8 +31,8 @@ export class AlertMessageActions {
     // Status OK
     // this.msgOK[authActions.loginSuccess.type] = 'Login exitoso';
     this.msgOK[ca.createCubSuccess.type] = 'Cubicación creada exitosamente';
-    this.msgOK[areaActions.updateAreaSuccess.type] =
-      'Se ha actualizado correctamente';
+    // this.msgOK[areaActions.updateAreaSuccess.type] =
+    //   'Se ha actualizado correctamente';
     this.msgOK[ca.editCubicacionSuccess.type] =
       'Cubicación actualizada exitosamente';
     this.msgOK[ca.deleteCubicacionSuccess.type] =
@@ -137,7 +138,12 @@ export class AlertMessageActions {
     data?: any
   ): void {
     if (code === 0) {
-      if (this.msgOK[action]) {
+      if (
+        action === areaActions.updateAreaSuccess.type ||
+        action === contratoActions.updateContratoSuccess.type
+      ) {
+        this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
+      } else if (this.msgOK[action]) {
         this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
       }
     } else if (code === 2) {
@@ -170,6 +176,10 @@ export class AlertMessageActions {
 
       if (action === areaActions.updateAreaSuccess.type) {
         this.router.navigate(['app/area']);
+      }
+
+      if (action === contratoActions.updateContratoSuccess.type) {
+        this.router.navigate(['app/contratos']);
       }
     }
   }

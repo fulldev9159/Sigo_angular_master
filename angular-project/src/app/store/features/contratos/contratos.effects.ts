@@ -41,38 +41,43 @@ export class ContratosEffects {
     )
   );
 
-  // updateArea$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(areaActions.updateArea),
-  //     concatMap(({ request }) =>
-  //       this.areaService.updateArea(request).pipe(
-  //         map(response => areaActions.updateAreaSuccess({ response })),
-  //         catchError(error => of(areaActions.updateAreaError({ error })))
-  //       )
-  //     )
-  //   )
-  // );
+  updateContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratosActions.updateContrato),
+      concatMap(({ request }) =>
+        this.contratosService.updateContrato(request).pipe(
+          map(response => contratosActions.updateContratoSuccess({ response })),
+          catchError(error =>
+            of(contratosActions.updateContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
 
-  // notifyOK$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(contratosActions.updateAreaSuccess),
-  //       tap(action => {
-  //         this.alertMessageAction.messageActions(
-  //           action.response.status.code,
-  //           action.response.status.desc,
-  //           action.type,
-  //           action
-  //         );
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
+  notifyOK$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(contratosActions.updateContratoSuccess),
+        tap(action => {
+          this.alertMessageAction.messageActions(
+            action.response.status.code,
+            action.response.status.desc,
+            action.type,
+            action
+          );
+        })
+      ),
+    { dispatch: false }
+  );
 
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(contratosActions.getContratosError),
+        ofType(
+          contratosActions.getContratosError,
+          contratosActions.updateContratoError
+        ),
         tap(action =>
           this.alertMessageAction.messageActions(
             action.error.error.status.code,

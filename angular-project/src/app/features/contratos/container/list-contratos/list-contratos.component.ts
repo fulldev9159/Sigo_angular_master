@@ -57,8 +57,8 @@ export class ListContratosComponent implements OnInit {
         {
           field: 'Tipo Moneda',
           type: 'TEXT',
-          sort: 'tipo_moneda_id',
-          header: 'tipo_moneda_id',
+          sort: 'tipo_moneda',
+          header: 'tipo_moneda',
           // width: '8%',
           editable: false,
         },
@@ -171,6 +171,8 @@ export class ListContratosComponent implements OnInit {
             validacion_operaciones: contrato.validacion_operaciones
               ? 'Si'
               : 'No',
+            tipo_contrato: contrato.model_tipo_contrato_id.nombre,
+            tipo_moneda: contrato.model_tipo_moneda_id.nombre,
           }));
         }
       })

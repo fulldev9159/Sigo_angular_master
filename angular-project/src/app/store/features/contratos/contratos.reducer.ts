@@ -22,13 +22,13 @@ export const reducerContrato = createReducer(
   })),
   on(contratosActions.getContratosSuccess, (state, { response }) => ({
     ...state,
-    contratos: response.data.contrato_marcos,
+    contratos: response.data.contrato_marco_all,
   })),
   on(
     contratosActions.getSingleContratoSuccess,
     (state, { contrato_id, response }) => ({
       ...state,
-      contratoSelected: response.data.contrato_marcos.find(
+      contratoSelected: response.data.contrato_marco_all.find(
         contrato => contrato.id === contrato_id
       ),
     })
