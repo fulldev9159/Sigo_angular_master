@@ -19,7 +19,7 @@
           <form [formGroup]="formContrato">
             <div class="row justify-content-center">
               <div class="col-md-6 col-xs-12 ">
-                <div id="nombre-area">
+                <div id="nombre-contrato">
                   <app-input [control]="formControls.nombre" DisplayLabelMode="up" label="* Nombre:"></app-input>
                 </div>
                 <br>
@@ -38,45 +38,54 @@
                     </div>
                   </ng-container> -->
                 <br>
-                <app-select [control]="formControls.tipo_contrato_id" label="Tipo Contrato">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione un tipo de contrato marco</option>
-                    <ng-container *ngFor="let tipoContrato of tipoContrato$ | async">
-                      <option [value]="tipoContrato.id">
-                        {{ tipoContrato.nombre }}
-                      </option>
+                <div id="tipo-contrato-selector">
+                  <app-select [control]="formControls.tipo_contrato_id" label="Tipo Contrato">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione un tipo de contrato marco</option>
+                      <ng-container *ngFor="let tipoContrato of tipoContrato$ | async">
+                        <option [value]="tipoContrato.id">
+                          {{ tipoContrato.nombre }}
+                        </option>
+                      </ng-container>
                     </ng-container>
-                  </ng-container>
-                </app-select>
+                  </app-select>
+                </div>
 
                 <br>
 
-                <app-select [control]="formControls.tipo_moneda_id" label="Tipo moneda">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione un tipo moneda</option>
-                    <ng-container *ngFor="let tipoMoneda of tipoMoneda$ | async">
-                      <option [value]="tipoMoneda.id">
-                        {{ tipoMoneda.nombre }}
-                      </option>
+                <div id="tipo-moneda-selector">
+                  <app-select [control]="formControls.tipo_moneda_id" label="Tipo moneda">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione un tipo moneda</option>
+                      <ng-container *ngFor="let tipoMoneda of tipoMoneda$ | async">
+                        <option [value]="tipoMoneda.id">
+                          {{ tipoMoneda.nombre }}
+                        </option>
+                      </ng-container>
                     </ng-container>
-                  </ng-container>
-                </app-select>
+                  </app-select>
+                </div>
+
+                <br>
+
+                <div id="tipo-pago-selector">
+                  <app-select [control]="formControls.tipo_pago" label="Tipo pago">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione un tipo pago</option>
+                      <ng-container *ngFor="let tipoPago of tipoPago$ | async">
+                        <option [value]="tipoPago.id">
+                          {{ tipoPago.nombre }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
 
 
                 <br>
-                <app-select [control]="formControls.tipo_pago" label="Tipo pago">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione un tipo pago</option>
-                    <ng-container *ngFor="let tipoPago of tipoPago$ | async">
-                      <option [value]="tipoPago.id">
-                        {{ tipoPago.nombre }}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
-
-                <br>
-                <app-input [control]="formControls.costo_max" DisplayLabelMode="up" label="Costo máximo:" type="number"></app-input>
+                <div id="costo-max-input">
+                  <app-input [control]="formControls.costo_max" DisplayLabelMode="up" label="Costo máximo:" type="number"></app-input>
+                </div>
 
                 <br>
                 <label for="">Validaciones</label>
@@ -87,21 +96,21 @@
                     flex-direction: column">
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="aprob_jerarq_inic">
+                      <input class="form-check-input" type="checkbox" value="" id="check-req-apro-jera" formControlName="aprob_jerarq_inic">
                       <label class="form-check-label" for="defaultCheck1">
                         Requiere Aprobación jerarquica
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="validacion_operaciones">
+                      <input class="form-check-input" type="checkbox" value="" id="check-req-vali-oper" formControlName="validacion_operaciones">
                       <label class="form-check-label" for="defaultCheck1">
                         Requiere Valicación operaciones
                       </label>
                     </div>
 
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" formControlName="tiene_encuesta">
+                      <input class="form-check-input" type="checkbox" value="" id="check-tiene-encuesta" formControlName="tiene_encuesta">
                       <label class="form-check-label" for="defaultCheck1">
                         Tiene encuesta
                       </label>
@@ -131,7 +140,7 @@
               </div>
             </div>
             <div class="col-xs-12 offset-md-12 col-md-12 text-center mb-4">
-              <button id="submit-area" (click)="save()" type="submit" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
+              <button id="submit-contrato" (click)="save()" type="submit" class="btn btn-primary"><em class="pi pi-save mr-1"></em>Guardar</button>
             </div>
           </form>
         </div>
