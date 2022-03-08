@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ContratoMarco, ReqEditContrato } from '@data';
+import { ContratoMarco, ReqActivarContrato, ReqEditContrato } from '@data';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as contratosActions from './contratos.actions';
@@ -33,5 +33,9 @@ export class ContratoFacade {
 
   public updateContrato(request: ReqEditContrato): void {
     this.store.dispatch(contratosActions.updateContrato({ request }));
+  }
+
+  public ActivateContrato(request: ReqActivarContrato): void {
+    this.store.dispatch(contratosActions.activateContrato({ request }));
   }
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ContratoFacade } from '@storeOT/features/contratos/contratos.facade';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { ContratoMarco, TableListContratosMarcos } from '@data';
+import { ReqActivarContrato, TableListContratosMarcos } from '@data';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-list-contratos',
@@ -130,32 +131,41 @@ export class ListContratosComponent implements OnInit {
             }
           },
         },
-        // {
-        //   icon: ' pi pi-ban',
-        //   class: 'p-button-text p-button-danger p-button-sm',
-        //   labelVariable: true,
-        //   label: 'activo',
-        //   onClick: (event: Event, item: any) => {
-        //     // if (item.eliminable) {
-        //     // const txt = item.activo ? 'Bloquear' : 'Activar';
-        //     // this.confirmationService.confirm({
-        //     //   target: event.target as EventTarget,
-        //     //   message: `¿Está seguro que desea ${txt} este Usuario?`,
-        //     //   icon: 'pi pi-exclamation-triangle',
-        //     //   acceptLabel: 'Confirmar',
-        //     //   rejectLabel: 'Cancelar',
-        //     //   accept: () => {
-        //     //     this.userFacade.activateUser(+item.id, !item.activo);
-        //     //   },
-        //     // });
-        //     // }
-        //   },
-        // },
+        {
+          icon: ' pi pi-ban',
+          class: 'p-button-text p-button-danger p-button-sm',
+          labelVariable: true,
+          label: 'activo',
+          onClick: (event: Event, item: any) => {
+            const activo = item.activo === 'Activo' ? false : true;
+            const txt = activo ? 'Activar' : 'Desactivar';
+            this.confirmationService.confirm({
+              target: event.target as EventTarget,
+              message: `¿Está seguro que desea ${txt} este contrato?`,
+              icon: 'pi pi-exclamation-triangle',
+              acceptLabel: 'Confirmar',
+              rejectLabel: 'Cancelar',
+              accept: () => {
+                const request: ReqActivarContrato = {
+                  contrato_marco_id: +item.id,
+                  values: {
+                    activo,
+                  },
+                };
+                this.contratoFacade.ActivateContrato(request);
+              },
+            });
+          },
+        },
       ],
     },
   };
 
-  constructor(private contratoFacade: ContratoFacade, private router: Router) {}
+  constructor(
+    private contratoFacade: ContratoFacade,
+    private router: Router,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     this.contratoFacade.reset();

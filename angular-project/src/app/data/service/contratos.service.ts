@@ -7,7 +7,12 @@ import {
   ContratoMarco4Cub,
   ResponseGetContrato4Cub as ResponseGetContrato4Cub,
 } from '@data';
-import { DataRspGetAllContratos, ReqEditContrato, Response } from '@data/model';
+import {
+  DataRspGetAllContratos,
+  ReqActivarContrato,
+  ReqEditContrato,
+  Response,
+} from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -52,6 +57,13 @@ export class ContratosService {
   }
 
   updateContrato(request: ReqEditContrato): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/contrato_marco/update`,
+      request
+    );
+  }
+
+  activateContrato(request: ReqActivarContrato): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/configuration/contrato_marco/update`,
       request

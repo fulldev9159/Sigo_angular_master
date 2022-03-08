@@ -1,4 +1,9 @@
-import { DataRspGetAllContratos, ReqEditContrato, Response } from '@data';
+import {
+  DataRspGetAllContratos,
+  ReqActivarContrato,
+  ReqEditContrato,
+  Response,
+} from '@data';
 
 import { createAction, props } from '@ngrx/store';
 
@@ -47,6 +52,24 @@ export const updateContratoSuccess = createAction(
 
 export const updateContratoError = createAction(
   '[Contratos] POST updateContrato Error',
+  props<{ error: any }>()
+);
+// UPDATE CONTRATO
+
+// UPDATE CONTRATO
+
+export const activateContrato = createAction(
+  '[Contratos] POST activateContrato',
+  props<{ request: ReqActivarContrato }>()
+);
+
+export const activateContratoSuccess = createAction(
+  '[Contratos] POST activateContrato Success',
+  props<{ response: Response<any> }>()
+);
+
+export const activateContratoError = createAction(
+  '[Contratos] POST activateContrato Error',
   props<{ error: any }>()
 );
 // UPDATE CONTRATO

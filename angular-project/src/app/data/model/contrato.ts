@@ -87,3 +87,10 @@ export interface ValuesEditContrato {
   validacion_operaciones: boolean;
   tiene_encuesta: boolean;
 }
+
+export interface ReqActivarContrato {
+  contrato_marco_id: number;
+  values: {
+    activo: boolean;
+  };
+}

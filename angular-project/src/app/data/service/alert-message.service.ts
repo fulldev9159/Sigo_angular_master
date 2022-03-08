@@ -8,8 +8,9 @@ import * as contratoActions from '@storeOT/features/contratos/contratos.actions'
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-
+import { ContratoFacade } from '@storeOT/features/contratos/contratos.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
+
 import { Router } from '@angular/router';
 import { MessageNotifyEffect } from '@data';
 
@@ -25,6 +26,7 @@ export class AlertMessageActions {
     private cubageFacade: CubicacionFacade,
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
+    private contratoFacade: ContratoFacade,
     private snackService: SnackBarService,
     private router: Router
   ) {
@@ -143,6 +145,8 @@ export class AlertMessageActions {
         action === contratoActions.updateContratoSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
+      } else if (action === contratoActions.activateContratoSuccess.type) {
+        this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (this.msgOK[action]) {
         this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
       }
@@ -180,6 +184,9 @@ export class AlertMessageActions {
 
       if (action === contratoActions.updateContratoSuccess.type) {
         this.router.navigate(['app/contratos']);
+      }
+      if (action === contratoActions.activateContratoSuccess.type) {
+        this.contratoFacade.getAllContratos();
       }
     }
   }

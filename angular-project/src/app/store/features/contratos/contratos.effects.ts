@@ -55,10 +55,29 @@ export class ContratosEffects {
     )
   );
 
+  ActivateContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratosActions.activateContrato),
+      concatMap(({ request }) =>
+        this.contratosService.activateContrato(request).pipe(
+          map(response =>
+            contratosActions.activateContratoSuccess({ response })
+          ),
+          catchError(error =>
+            of(contratosActions.activateContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(contratosActions.updateContratoSuccess),
+        ofType(
+          contratosActions.updateContratoSuccess,
+          contratosActions.activateContratoSuccess
+        ),
         tap(action => {
           this.alertMessageAction.messageActions(
             action.response.status.code,
@@ -76,7 +95,8 @@ export class ContratosEffects {
       this.actions$.pipe(
         ofType(
           contratosActions.getContratosError,
-          contratosActions.updateContratoError
+          contratosActions.updateContratoError,
+          contratosActions.activateContratoError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(
