@@ -17,14 +17,14 @@ Editar Contratos
     _Set input text                   css:#nombre-contrato>app-input>input             PruebaRobot                        #prueba
     #Fecha inicio
     #Fecha fin
-    _Select visible item              css:#tipo-contrato-selector>app-select>select    Fijo                               # Móvil 
-    _Select visible item              css:#tipo-moneda-selector>app-select>select      CLF (Unidad de fomento Chilena)    #CLP (Peso Chileno) 
+    _Select visible item              css:#tipo-contrato-selector>app-select>select    Fijo                               # Móvil
+    _Select visible item              css:#tipo-moneda-selector>app-select>select      CLF (Unidad de fomento Chilena)    #CLP (Peso Chileno)
     _Select visible item              css:#tipo-pago-selector>app-select>select        PARCIAL                            #TOTAL
     _Set input text                   css:#costo-max-input>app-input>input             100                                #0
-    _Click visible element            css:#check-req-apro-jera                         
-    _Click visible element            css:#check-req-vali-oper                         
+    _Click visible element            css:#check-req-apro-jera
+    _Click visible element            css:#check-req-vali-oper
     _Click visible element            css:#check-tiene-encuesta
-    _Click visible element            css:#estado-activo                               
+    _Click visible element            css:#estado-activo
     _Click visible element            css:#submit-contrato
     _Element should exist in table    PruebaRobot
     _Validate column data             1                                                PruebaRobot
@@ -45,13 +45,27 @@ Editar Contratos
     _Set input text           css:#nombre-contrato>app-input>input             prueba                #prueba
     #Fecha inicio
     #Fecha fin
-    _Select visible item      css:#tipo-contrato-selector>app-select>select    Móvil                 # Móvil 
-    _Select visible item      css:#tipo-moneda-selector>app-select>select      CLP (Peso Chileno)    #CLP (Peso Chileno) 
+    _Select visible item      css:#tipo-contrato-selector>app-select>select    Móvil                 # Móvil
+    _Select visible item      css:#tipo-moneda-selector>app-select>select      CLP (Peso Chileno)    #CLP (Peso Chileno)
     _Select visible item      css:#tipo-pago-selector>app-select>select        TOTAL                 #TOTAL
     _Set input text           css:#costo-max-input>app-input>input             0                     #0
-    _Click visible element    css:#check-req-apro-jera                         
-    _Click visible element    css:#check-req-vali-oper                         
+    _Click visible element    css:#check-req-apro-jera
+    _Click visible element    css:#check-req-vali-oper
     _Click visible element    css:#check-tiene-encuesta
-    _Click visible element    css:#estado-inactivo                             
+    _Click visible element    css:#estado-inactivo
     _Click visible element    css:#submit-contrato
+    sleep                     0.5
+    close Browser
+
+Bloquear contrato
+    _Login                            admin                                                                                                                            pass      Admin
+    _Navegate to                      Contratos
+    _Table should display data
+    _Element should exist in table    prueba
+    _Click visible element            css:#action-buttons > div > div:nth-child(2) > button
+    _Click visible element            css:body > div > div.p-confirm-popup-footer > button.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
+    sleep                             2
+    _Validate column data             11                                                                                                                               Activo
+    _Click visible element            css:#action-buttons > div > div:nth-child(2) > button
+    _Click visible element            css:body > div > div.p-confirm-popup-footer > button.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
     close Browser
