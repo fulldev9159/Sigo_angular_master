@@ -54,4 +54,4 @@ Editar Contratos
     _Click visible element    css:#check-tiene-encuesta
     _Click visible element    css:#estado-inactivo                             
     _Click visible element    css:#submit-contrato
-    # close Browser
+    close Browser
