@@ -22,10 +22,10 @@ export const reducerArea = createReducer(
   })),
   on(areaActions.getAreasSuccess, (state, { response }) => ({
     ...state,
-    areas: response.data.areas,
+    areas: response.data.area_all,
   })),
   on(areaActions.getAreaSuccess, (state, { area_id, response }) => ({
     ...state,
-    areaSelected: response.data.areas.find(area => area.id === area_id),
+    areaSelected: response.data.area_all.find(area => area.id === area_id),
   }))
 );
