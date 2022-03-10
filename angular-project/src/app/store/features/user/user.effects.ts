@@ -23,7 +23,7 @@ export class UserEffects {
       ofType(userActions.getAllUser),
       concatMap(() =>
         this.userService.getAllUsers().pipe(
-          map((users: Data.User[]) => userActions.getAllUserSuccess({ users })),
+          map(response => userActions.getAllUserSuccess({ response })),
           catchError(err => of(userActions.getAllUserError({ error: err })))
         )
       )

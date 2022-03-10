@@ -1,24 +1,40 @@
 import { ContratoMarco4Cub } from '@data';
 import { Area } from './area';
 
-// GET USER
-export interface User {
-  id: number;
-  username: string;
-  rut: string;
-  nombres: string;
-  apellidos: string;
-  celular: string;
-  activo: boolean;
-  firma: string;
-  proveedor_id: number;
-  area_id: number;
-  email: string;
-  created_at: string;
-  updated_at: string;
-  proveedor_nombre: string;
-  area_nombre: string;
+//
+export interface DataResponseGetAllUser {
+  usuarios: User[];
 }
+export interface User {
+  apellidos: string;
+  area_id: number;
+  celular: string;
+  created_at: string;
+  deleted_at: null;
+  email: string;
+  estado: boolean;
+  id: number;
+  model_area_id: {
+    id: number;
+    nombre: string;
+  };
+  model_proveedor_id: {
+    id: number;
+    nombre: string;
+  };
+  nombres: string;
+  proveedor_id: number;
+  rut: string;
+  updated_at: string;
+  username: string;
+
+  // activo: boolean;
+  // firma: string;
+  // proveedor_nombre: string;
+  // area_nombre: string;
+}
+
+// GET USER
 
 export interface UsersResponse {
   data: {

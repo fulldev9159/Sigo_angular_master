@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Data from '@data';
-import { PosiblesSuperiores } from '@data';
+import { PosiblesSuperiores, User } from '@data';
 
 export const UserFeatureKey = 'user';
 
 export interface StateUser {
-  users: Data.User[];
+  users: User[];
   userDetail: Data.DetalleUsuario;
   areas: Data.Area[];
   proveedores: Data.Proveedor[];
@@ -31,9 +31,9 @@ export const reducerUser = createReducer(
   initialStateUser,
 
   on(UserActions.getAllUser, state => state),
-  on(UserActions.getAllUserSuccess, (state, payload) => ({
+  on(UserActions.getAllUserSuccess, (state, { response }) => ({
     ...state,
-    users: payload.users,
+    users: response.data.usuarios,
   })),
 
   on(UserActions.getUserDetail, state => state),

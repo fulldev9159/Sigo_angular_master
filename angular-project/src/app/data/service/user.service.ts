@@ -4,7 +4,12 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as Data from '@data';
-import { PosiblesSuperiores, ResponsePosiblesSuperiores } from '@data';
+import {
+  PosiblesSuperiores,
+  ResponsePosiblesSuperiores,
+  DataResponseGetAllUser,
+  Response,
+} from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -18,17 +23,11 @@ export class UserService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getAllUsers(): Observable<Data.User[]> {
-    return this.http
-      .post<Data.UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
-      .pipe(
-        map((res: Data.UsersResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.items;
-        })
-      );
+  getAllUsers(): Observable<Response<DataResponseGetAllUser>> {
+    return this.http.post<Response<DataResponseGetAllUser>>(
+      `${this.apiUrl}/usuario/get_all`,
+      {}
+    );
   }
 
   getUserDetail(usuario_id: number): Observable<Data.DetalleUsuario> {

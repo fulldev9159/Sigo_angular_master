@@ -75,8 +75,8 @@ export class ListUserComponent implements OnInit {
         {
           field: 'Estado',
           type: 'BOOLEANTEXT',
-          sort: 'activo',
-          header: 'activo',
+          sort: 'estado',
+          header: 'estado',
           booleantrue: 'Activo',
           booleanfalse: 'Bloqueado',
           width: '5%',
@@ -136,7 +136,7 @@ export class ListUserComponent implements OnInit {
           label: 'activo',
           onClick: (event: Event, item: Data.User) => {
             // if (item.eliminable) {
-            const txt = item.activo ? 'Bloquear' : 'Activar';
+            const txt = item.estado ? 'Bloquear' : 'Activar';
             this.confirmationService.confirm({
               target: event.target as EventTarget,
               message: `¿Está seguro que desea ${txt} este Usuario?`,
@@ -144,7 +144,7 @@ export class ListUserComponent implements OnInit {
               acceptLabel: 'Confirmar',
               rejectLabel: 'Cancelar',
               accept: () => {
-                this.userFacade.activateUser(+item.id, !item.activo);
+                this.userFacade.activateUser(+item.id, !item.estado);
               },
             });
             // }

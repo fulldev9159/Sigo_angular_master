@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
-import { PosiblesSuperiores } from '@data';
+import { PosiblesSuperiores, DataResponseGetAllUser, Response } from '@data';
 
 // USER ACTIONS
 
@@ -9,7 +9,7 @@ export const getAllUser = createAction('[User GetAll] GET All User');
 
 export const getAllUserSuccess = createAction(
   '[User GetAll] GET All User Success',
-  props<{ users: Data.User[] }>()
+  props<{ response: Response<DataResponseGetAllUser> }>()
 );
 
 export const getAllUserError = createAction(
