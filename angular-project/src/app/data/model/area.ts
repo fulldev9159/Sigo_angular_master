@@ -1,5 +1,5 @@
 export interface DataRspGetAreas {
-  areas: Area[];
+  area_all: Area[];
 }
 
 export interface Area {

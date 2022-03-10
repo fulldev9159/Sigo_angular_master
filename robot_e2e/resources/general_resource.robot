@@ -25,17 +25,13 @@ _Navegate to
     [Arguments]       ${menu}
     Run Keyword If    '${menu}' == 'Usuario'             Click Element            css:#menu-usuario>a>span
     Run Keyword If    '${menu}' == 'Area'                Click Element            css:#menu-area>a>span
+    Run Keyword If    '${menu}' == 'Contratos'           Click Element            css:#menu-contratos>a>span
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
     Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    id:listarCubSubMenu
     Run Keyword If    '${menu}' == 'Perfil'              Click Visible Element    css:#menu-perfil>a>span
     Run Keyword If    '${menu}' == 'Crear OT'            Click Visible Element    id:otSub
     Run Keyword If    '${menu}' == 'Crear OT'            Execute javascript       document.querySelector("#otSub>li:nth-child(2)>a").click()
 
-_Click visible element
-    [Arguments]                      ${element}
-    Wait Until Element Is Visible    ${element}    timeout=10
-    Scroll Element Into View         ${element}
-    Click Element                    ${element}
 
 _Wait visibility
     [Arguments]                      ${selector}
@@ -46,7 +42,12 @@ _Wait visibility
 _Wait visibility and contain
     [Arguments]                    ${selector}    ${valor}
     _Wait visibility               ${selector}
-    Wait Until Element Contains    ${selector}    ${valor}
+    Wait Until Element Contains    ${selector}    ${valor}    timeout=15
+
+_Click visible element
+    [Arguments]         ${selector}
+    _Wait visibility    ${selector}
+    Click Element       ${selector}
 
 _Element should exist in table
     [Arguments]              ${nombre}                                           
@@ -71,9 +72,15 @@ _Table should display data
     Should Be True           ${status}
 
 _Set input text
-    [Arguments]                      ${selector}     ${value}
-    Wait Until Element Is Visible    ${selector} 
-    input text                       ${selector}     ${value}
+    [Arguments]         ${selector}     ${value}
+    _Wait visibility    ${selector} 
+    input text          ${selector}     ${value}
+
+
+_Select visible item
+    [Arguments]                     ${selector}    ${value}    
+    _Wait visibility and contain    ${selector}    ${value}    
+    Select From List by label       ${selector}    ${value}
 
 _Validate column data
     [Arguments]                   ${columna}     ${value}

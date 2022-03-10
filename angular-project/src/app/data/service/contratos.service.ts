@@ -7,6 +7,12 @@ import {
   ContratoMarco4Cub,
   ResponseGetContrato4Cub as ResponseGetContrato4Cub,
 } from '@data';
+import {
+  DataRspGetAllContratos,
+  ReqActivarContrato,
+  ReqEditContrato,
+  Response,
+} from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,5 +47,26 @@ export class ContratosService {
           };
         })
       );
+  }
+
+  getAllContratos(): Observable<Response<DataRspGetAllContratos>> {
+    return this.http.post<Response<DataRspGetAllContratos>>(
+      `${this.apiUrl}/configuration/contrato_marco/getall`,
+      {}
+    );
+  }
+
+  updateContrato(request: ReqEditContrato): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/contrato_marco/update`,
+      request
+    );
+  }
+
+  activateContrato(request: ReqActivarContrato): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/contrato_marco/update`,
+      request
+    );
   }
 }

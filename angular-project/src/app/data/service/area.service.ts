@@ -19,7 +19,7 @@ export class AreaService {
 
   getAreas(): Observable<Response<DataRspGetAreas>> {
     return this.http.post<Response<DataRspGetAreas>>(
-      `${this.apiUrl}/configuration/areas/get`,
+      `${this.apiUrl}/configuration/area/getall`,
       {}
     );
   }
