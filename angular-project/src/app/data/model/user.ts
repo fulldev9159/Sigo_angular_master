@@ -63,8 +63,9 @@ export interface ListPerfilesUser {
   perfil_propio: boolean;
   proxy_id: number;
   descripcion: string;
-  // rol: skstring;
+  rol: string;
   nombre: string;
+  superior: string;
 }
 // GET USER
 

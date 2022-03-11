@@ -27,7 +27,6 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { FileUploadModule } from 'primeng/fileupload';
 import { BadgeModule } from 'primeng/badge';
 import { SliderModule } from 'primeng/slider';
-
 @NgModule({
   imports: [
     DropdownModule,

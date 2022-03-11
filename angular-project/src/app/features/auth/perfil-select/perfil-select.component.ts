@@ -63,10 +63,11 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
     const proxy_id = +this.formPerfil.get('proxyperfil').value;
     const nombre_perfil_select = this.perfiles.filter(
       perfil => perfil.proxy_id === proxy_id
-    )[0].model_perfil.nombre;
+    )[0].model_usuarioproxy_id.model_perfil_id.nombre;
 
     this.authFacade.refreshLogin(+proxy_id, nombre_perfil_select);
   }
+
   logout(): void {
     localStorage.removeItem('auth');
     this.authFacade.reset();

@@ -6,6 +6,8 @@ import { Observable, of } from 'rxjs';
 import * as Data from '@data';
 import { map } from 'rxjs/operators';
 import { ListPerfilesUser, TableUserData, User } from '@data';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
@@ -15,7 +17,17 @@ export class ListUserComponent implements OnInit {
   public DisplayModal$ = of();
   public usersTableData$: Observable<TableUserData[]>;
   perfilesUser$: Observable<ListPerfilesUser[]>;
+  allPerfiles$: Observable<any[]>;
   displayModalPerfilesUser$: Observable<boolean>;
+  nombreUsuario: string;
+
+  formAddControls = {
+    id: new FormControl(null),
+    perfil_id: new FormControl(null, [Validators.required]),
+    superior_id: new FormControl(null, [Validators.required]),
+  };
+
+  formAddPerfil: FormGroup = new FormGroup(this.formAddControls);
 
   public configTable = {
     header: true,
@@ -159,6 +171,7 @@ export class ListUserComponent implements OnInit {
           label: 'Agregar Perfil',
           onClick: (event: Event, item: User) => {
             this.userFacade.getPerfilesUser(item.id);
+            this.nombreUsuario = item.nombres + ' ' + item.apellidos;
           },
         },
       ],
@@ -196,9 +209,15 @@ export class ListUserComponent implements OnInit {
             id: perfil.perfil_id,
             perfil_propio: perfil.perfil_propio,
             proxy_id: perfil.proxy_id,
-            descripcion: perfil.model_perfil.descripcion,
-            // rol: perfil.model_perfil.model_rol.nombre,
-            nombre: perfil.model_perfil.nombre,
+            descripcion:
+              perfil.model_usuarioproxy_id.model_perfil_id.descripcion,
+            rol: perfil.model_usuarioproxy_id.model_perfil_id.model_rol_id
+              .nombre,
+            nombre: perfil.model_usuarioproxy_id.model_perfil_id.nombre,
+            superior:
+              perfil.model_usuarioproxy_id.model_superior_id.nombres +
+              ' ' +
+              perfil.model_usuarioproxy_id.model_superior_id.apellidos,
           }));
         }
       })

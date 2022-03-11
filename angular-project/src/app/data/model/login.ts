@@ -20,10 +20,23 @@ export interface DataResGetPerfilesUser {
 }
 
 export interface PerfilesUser {
-  model_perfil: ModelPerfil;
+  model_usuarioproxy_id: ModelUsuarioProxy;
   perfil_id: number;
   perfil_propio: boolean;
   proxy_id: number;
+}
+
+export interface ModelUsuarioProxy {
+  estado: boolean;
+  id: number;
+  model_perfil_id: ModelPerfil;
+  model_superior_id: ModelSuperir;
+  model_usuario_id: null;
+  model_usuario_orig: null;
+  perfil_id: number;
+  superior_id: number;
+  usuario_id: number;
+  usuario_orig: number;
 }
 
 export interface ModelPerfil {
@@ -32,7 +45,7 @@ export interface ModelPerfil {
   descripcion: string;
   eliminable: boolean;
   id: number;
-  model_rol: ModelRol;
+  model_rol_id: ModelRol;
   nombre: string;
   rol_id: number;
   updated_at: Date;
@@ -41,6 +54,24 @@ export interface ModelPerfil {
 export interface ModelRol {
   id: number;
   nombre: string;
+}
+
+export interface ModelSuperir {
+  apellidos: string;
+  area_id: number;
+  celular: string;
+  created_at: Date;
+  deleted_at: Date;
+  email: string;
+  estado: boolean;
+  id: number;
+  model_area_id: null;
+  model_proveedor_id: null;
+  nombres: string;
+  proveedor_id: number;
+  rut: string;
+  updated_at: Date;
+  username: string;
 }
 
 // Get Perfiles User end

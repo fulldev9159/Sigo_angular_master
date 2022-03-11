@@ -20,7 +20,10 @@ export class PerfilService {
 
   getPerfiles(): Observable<Data.Perfil[]> {
     return this.http
-      .post<Data.PerfilResponse>(`${this.apiUrl}/perfiles/get_all`, {})
+      .post<Data.PerfilResponse>(
+        `${this.apiUrl}/configuration/perfil/getall`,
+        {}
+      )
       .pipe(
         map((res: Data.PerfilResponse) => {
           if (+res.status.responseCode !== 0) {

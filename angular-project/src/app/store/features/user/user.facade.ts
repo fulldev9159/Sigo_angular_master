@@ -40,7 +40,7 @@ export class UserFacade {
     return this.store.select(userSelectors.displayModalPerfilesUser);
   }
 
-  ///////./////////////////
+  // ///// /////////////////
   // DELETE
   public deleteUser(usuario_id: number): void {
     this.store.dispatch(userActions.deleteUser({ usuario_id }));

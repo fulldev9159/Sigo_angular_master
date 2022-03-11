@@ -73,12 +73,72 @@
 
 
 <app-modal [display]="displayModalPerfilesUser$|async" (CloseEvent)="closeAddPerfil()" [style]="{width: '50vw'}">
-  <!-- <ng-container modal-header-title>Agregar un perfil a <strong>{{(userDetail$|async)?.username}}</strong> </ng-container> -->
+  <ng-container modal-header-title><strong>Agregar un perfil a {{nombreUsuario}}</strong></ng-container>
   <ng-container modal-content>
+    <div class="row">
+      <div class="col-md-3">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Perfiles actuales</p>
+        <p-listbox [options]="perfilesUser$|async" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}" [disabled]="true">
+          <ng-template let-perfil pTemplate="item">
+            <div class="perfil-item">
+              <div><strong>Perfil: </strong> {{perfil.nombre}}</div>
+              <div class="detalle-perfil" style="margin-left: 10px">
+                <table>
+                  <tr>
+                    <td><strong style="font-size: 11px">Rol:</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{{perfil.rol}}</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size: 5px;"><strong style="font-size: 11px">Superior:</strong> </td>
+                  </tr>
+                  <tr>
+                    <td> {{perfil.superior}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+      <div class="col-md-9">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Agregar un perfil</p>
+        <div style="display: flex;justify-content: center;
+        align-items: center;
+        height: 92%;">
+          <form [formGroup]="formAddPerfil">
+            <app-select [control]="formAddControls.perfil_id" label="Perfil">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione perfil a agregar al usuario</option>
+                <option value="null">No posee superior directo</option>
+                <ng-container *ngFor="let perfil of allPerfiles$ | async">
+                  <option [value]="perfil.id">
+                    {{ perfil.nombres}}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
 
-    <ul *ngFor="let perfil of perfilesUser$|async ">
-      <li>nombre: {{perfil.nombre}}</li>
-    </ul>
+            <br>
+
+            <app-select [control]="formAddControls.superior_id" label="Superior directo">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione persona</option>
+                <option value="null">No posee superior directo</option>
+                <ng-container *ngFor="let superior of allPerfiles$ | async">
+                  <option [value]="superior.id">
+                    {{ superior.nombres }} {{ superior.apellidos }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
   </ng-container>
   <ng-container modal-footer></ng-container>
 </app-modal>
