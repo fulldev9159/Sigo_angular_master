@@ -10,11 +10,17 @@ export const getUser = createSelector(
   (state: fromUser.StateUser) => state.users
 );
 
-export const getUserDetail = createSelector(
+export const getPerfilesUser = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.userDetail
+  (state: fromUser.StateUser) => state.perfilesUser
 );
 
+export const displayModalPerfilesUser = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.displayModalPerfilesUser
+);
+
+////////////
 export const getAreas = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.areas

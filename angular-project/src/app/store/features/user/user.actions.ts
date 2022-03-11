@@ -1,10 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
-import { PosiblesSuperiores, DataResponseGetAllUser, Response } from '@data';
+import {
+  PosiblesSuperiores,
+  DataResponseGetAllUser,
+  Response,
+  DataResGetPerfilesUser,
+} from '@data';
 
-// USER ACTIONS
-
-// ::: Get All User
+// GET ALL USER
 export const getAllUser = createAction('[User GetAll] GET All User');
 
 export const getAllUserSuccess = createAction(
@@ -16,6 +19,32 @@ export const getAllUserError = createAction(
   '[User GetAll] GET All User Error',
   props<{ error: any }>()
 );
+
+// GET PROFILE USER
+export const getPerfilesUser = createAction(
+  '[User] POST Get Perfiles usuario',
+  props<{
+    usuario_id: number;
+  }>()
+);
+
+export const getPerfilesUserSuccess = createAction(
+  '[User] POST Get Perfiles usuario Success',
+  props<{ response: Response<DataResGetPerfilesUser> }>()
+);
+
+export const getPerfilesUserError = createAction(
+  '[User] POST Get Perfiles usuario Error',
+  props<{ error: any }>()
+);
+
+// DISPLAY MODAL PERFILES USER
+export const displayModalPerfilesUser = createAction(
+  '[User] displayModalPerfilesUser',
+  props<{ value: boolean }>()
+);
+
+///////////////////////////////////////
 
 // ::: Get user by ID
 export const getUserById = createAction('[User GetUserById] GET User');
@@ -151,21 +180,6 @@ export const editUserSuccess = createAction('[User Post] EDIT User Success');
 
 export const editUserError = createAction(
   '[User Post] Edit User Error',
-  props<{ error: any }>()
-);
-
-// Single User
-export const getAllDataUsuario = createAction(
-  '[User Get] GET all data usuario',
-  props<{ id: number }>()
-);
-export const getAllDataUsuarioSuccess = createAction(
-  '[User Get] GET all Usuario Success',
-  props<{ user: Data.UserWithDetail }>()
-);
-
-export const getAllDataUsuarioError = createAction(
-  '[User Get] GET all Usuario Error',
   props<{ error: any }>()
 );
 

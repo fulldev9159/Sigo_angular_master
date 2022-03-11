@@ -30,8 +30,8 @@ export class AuthEffects {
   getPerfil$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.getPerfilesUser),
-      concatMap(() =>
-        this.authService.getPerfilesUser().pipe(
+      concatMap(({ usuario_id }) =>
+        this.authService.getPerfilesUser(usuario_id).pipe(
           map(response => authActions.getPerfilesUserSuccess({ response })),
           catchError(error => of(authActions.getPerfilesUserError({ error })))
         )

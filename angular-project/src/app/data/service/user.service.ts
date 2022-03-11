@@ -30,6 +30,41 @@ export class UserService {
     );
   }
 
+  getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
+    return this.http
+      .post<Response<DataResponseGetAllUser>>(
+        `${this.apiUrl}/usuario/get_all`,
+        {}
+      )
+      .pipe(
+        concatMap(users => {
+          const userFound = users.data.usuarios.find(
+            user => user.id === usuario_id
+          );
+          if (userFound) {
+            return this.http
+              .post<Data.DetalleUsuarioResponse>(
+                `${this.apiUrl}/usuario/detalle/get`,
+                {
+                  usuario_id,
+                }
+              )
+              .pipe(
+                map((detalleUserResponse: Data.DetalleUsuarioResponse) => {
+                  const detalle = detalleUserResponse.data;
+                  const response: Data.UserWithDetail = {
+                    ...userFound,
+                    ...detalle,
+                  };
+                  return response;
+                })
+              );
+          }
+          return throwError(new Error(`no user found`));
+        })
+      );
+  }
+
   getUserDetail(usuario_id: number): Observable<Data.DetalleUsuario> {
     return this.http
       .post<Data.DetalleUsuarioResponse>(`${this.apiUrl}/usuario/detalle/get`, {
@@ -144,38 +179,6 @@ export class UserService {
             this.snackService.showMessage(res.status.description, 'error');
           }
           return res.data.items;
-        })
-      );
-  }
-
-  getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
-    return this.http
-      .post<Data.UsersResponse>(`${this.apiUrl}/usuario/get_all`, {})
-      .pipe(
-        concatMap((users: Data.UsersResponse) => {
-          const userFound = users.data.items.find(
-            user => user.id === usuario_id
-          );
-          if (userFound) {
-            return this.http
-              .post<Data.DetalleUsuarioResponse>(
-                `${this.apiUrl}/usuario/detalle/get`,
-                {
-                  usuario_id,
-                }
-              )
-              .pipe(
-                map((detalleUserResponse: Data.DetalleUsuarioResponse) => {
-                  const detalle = detalleUserResponse.data;
-                  const response: Data.UserWithDetail = {
-                    ...userFound,
-                    ...detalle,
-                  };
-                  return response;
-                })
-              );
-          }
-          return throwError(new Error(`no user found`));
         })
       );
   }

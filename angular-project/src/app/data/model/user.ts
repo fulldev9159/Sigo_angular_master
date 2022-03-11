@@ -14,13 +14,26 @@ export interface User {
   email: string;
   estado: boolean;
   id: number;
-  model_area_id: {
-    id: number;
-    nombre: string;
-  };
+  model_area_id: Area;
   model_proveedor_id: {
+    created_at: Date;
+    deleted_at: Date;
+    direccion: string;
+    dv: string;
+    email: string;
+    estado: boolean;
     id: number;
+    interno: boolean;
+    model_tipo_proveedor_id: null;
     nombre: string;
+    numero_contrato: number;
+    razon_social: string;
+    representante_legal: string;
+    rut: number;
+    telefono: string;
+    tipo_proveedor_id: number;
+    updated_at: Date;
+    vigencia_garantia: number;
   };
   nombres: string;
   proveedor_id: number;
@@ -34,6 +47,25 @@ export interface User {
   // area_nombre: string;
 }
 
+export interface TableUserData {
+  id: number;
+  username: string;
+  rut: string;
+  nombres: string;
+  apellidos: string;
+  empresa: string;
+  area: string;
+  estado: boolean;
+}
+
+export interface ListPerfilesUser {
+  id: number;
+  perfil_propio: boolean;
+  proxy_id: number;
+  descripcion: string;
+  // rol: skstring;
+  nombre: string;
+}
 // GET USER
 
 export interface UsersResponse {

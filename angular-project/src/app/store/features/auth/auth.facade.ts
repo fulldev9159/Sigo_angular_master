@@ -19,8 +19,12 @@ export class AuthFacade {
     this.store.dispatch(authActions.login({ login }));
   }
 
-  public getPerfilesUser(): void {
-    this.store.dispatch(authActions.getPerfilesUser());
+  public getPerfilesUser(usuario_id: number): void {
+    this.store.dispatch(authActions.getPerfilesUser({ usuario_id }));
+  }
+
+  public pefilesUsuario$(): Observable<PerfilesUser[]> {
+    return this.store.select(authSelectors.getPerfilesUser);
   }
 
   public getLogin$(): Observable<SessionData> {
@@ -29,10 +33,6 @@ export class AuthFacade {
 
   public getCurrentProfile$(): Observable<Perfil> {
     return this.store.select(authSelectors.getCurrentProfile);
-  }
-
-  public pefilesUsuario$(): Observable<PerfilesUser[]> {
-    return this.store.select(authSelectors.getPerfilesUser);
   }
 
   public refreshLogin(proxy_id: number, nombre_perfil_select: string): void {

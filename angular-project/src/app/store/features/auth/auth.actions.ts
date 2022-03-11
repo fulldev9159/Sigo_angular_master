@@ -26,8 +26,12 @@ export const loginError = createAction(
 );
 // LOGIN
 
+// GET PROFILE USER
 export const getPerfilesUser = createAction(
-  '[Auth perfiles] POST Get Perfiles usuario'
+  '[Auth perfiles] POST Get Perfiles usuario',
+  props<{
+    usuario_id: number;
+  }>()
 );
 
 export const getPerfilesUserSuccess = createAction(
@@ -39,6 +43,7 @@ export const getPerfilesUserError = createAction(
   '[Auth perfiles] POST Get Perfiles usuario Error',
   props<{ error: any }>()
 );
+// GET PROFILE USER
 
 // REFRESH
 export const refresh = createAction(

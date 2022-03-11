@@ -4,6 +4,8 @@ import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of } from 'rxjs';
 import * as Data from '@data';
+import { map } from 'rxjs/operators';
+import { ListPerfilesUser, TableUserData, User } from '@data';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
@@ -11,8 +13,9 @@ import * as Data from '@data';
 })
 export class ListUserComponent implements OnInit {
   public DisplayModal$ = of();
-  public users$: Observable<Data.User[]>;
-  public userDetail$: Observable<Data.UserWithDetail>;
+  public usersTableData$: Observable<TableUserData[]>;
+  perfilesUser$: Observable<ListPerfilesUser[]>;
+  displayModalPerfilesUser$: Observable<boolean>;
 
   public configTable = {
     header: true,
@@ -20,7 +23,7 @@ export class ListUserComponent implements OnInit {
       title: '',
       searchText: 'buscar...',
       paginator: true,
-      actionsType: 'Buttons',
+      actionsType: 'Menu',
     },
     body: {
       headers: [
@@ -59,16 +62,16 @@ export class ListUserComponent implements OnInit {
         {
           field: 'Empresa',
           type: 'TEXT-TITLECASE',
-          sort: 'proveedor_nombre',
-          header: 'proveedor_nombre',
+          sort: 'empresa',
+          header: 'empresa',
           // width: '10%',
           editable: false,
         },
         {
           field: 'Area',
           type: 'TEXT-TITLECASE',
-          sort: 'area_nombre',
-          header: 'area_nombre',
+          sort: 'area',
+          header: 'area',
           // width: '10%',
           editable: false,
         },
@@ -107,7 +110,7 @@ export class ListUserComponent implements OnInit {
           class: 'p-button-text p-button-sm',
           label: 'Detalle',
           onClick: (event: Event, item: Data.User) => {
-            this.userFacade.getAllDataUsuario(item.id);
+            // this.userFacade.getAllDataUsuario(item.id);
           },
         },
         {
@@ -150,6 +153,14 @@ export class ListUserComponent implements OnInit {
             // }
           },
         },
+        {
+          icon: ' pi pi-plus',
+          class: 'p-button-text p-button-danger p-button-sm',
+          label: 'Agregar Perfil',
+          onClick: (event: Event, item: User) => {
+            this.userFacade.getPerfilesUser(item.id);
+          },
+        },
       ],
     },
   };
@@ -162,12 +173,46 @@ export class ListUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userFacade.getAllUsers();
-    this.users$ = this.userFacade.getAllUsers$();
-    this.userDetail$ = this.userFacade.getAllDataUsuario$();
+    this.usersTableData$ = this.userFacade.getAllUsers$().pipe(
+      map(usuarios => {
+        if (usuarios) {
+          return usuarios.map(usuario => ({
+            id: usuario.id,
+            username: usuario.username,
+            rut: usuario.rut,
+            nombres: usuario.nombres,
+            apellidos: usuario.apellidos,
+            empresa: usuario.model_proveedor_id.nombre,
+            area: usuario.model_area_id.nombre,
+            estado: usuario.estado,
+          }));
+        }
+      })
+    );
+    this.perfilesUser$ = this.userFacade.pefilesUsuario$().pipe(
+      map(perfiles => {
+        if (perfiles) {
+          return perfiles.map(perfil => ({
+            id: perfil.perfil_id,
+            perfil_propio: perfil.perfil_propio,
+            proxy_id: perfil.proxy_id,
+            descripcion: perfil.model_perfil.descripcion,
+            // rol: perfil.model_perfil.model_rol.nombre,
+            nombre: perfil.model_perfil.nombre,
+          }));
+        }
+      })
+    );
     this.DisplayModal$ = this.userFacade.DisplayDetalleModal$();
+    this.displayModalPerfilesUser$ =
+      this.userFacade.displayModalPerfilesUser$$();
   }
 
   cerrarDisplayModal(value: boolean): void {
     this.userFacade.SetDisplayDetalleModal(value);
+  }
+
+  closeAddPerfil(): void {
+    this.userFacade.displayModalPerfilesUser(false);
   }
 }

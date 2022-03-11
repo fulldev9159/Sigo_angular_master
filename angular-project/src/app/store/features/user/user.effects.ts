@@ -7,13 +7,17 @@ import { of } from 'rxjs';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import * as userActions from './user.actions';
 import * as Data from '@data';
+
 import { SnackBarService } from '@utilsSIGO/snack-bar';
+import { AuthService, AlertMessageActions } from '@data';
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
     private userService: Data.UserService,
+    private authService: AuthService,
     private snackService: SnackBarService,
+    private alertMessageAction: AlertMessageActions,
     private router: Router,
     private userFacade: UserFacade
   ) {}
@@ -30,22 +34,35 @@ export class UserEffects {
     )
   );
 
-  // getUserById$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(userActions.getUserById),
-  //     concatMap((data: any) =>
-  //       this.http
-  //         .post(`${environment.api}/usuario/get`, { usuario_id: data.id })
-  //         .pipe(
-  //           map((res: any) =>
-  //             userActions.getUserByIdSuccess({ user: res.data.items })
-  //           ),
-  //           catchError(err => of(userActions.getUserByIdError({ error: err })))
-  //         )
-  //     )
-  //   )
-  // );
+  getPerfiles$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getPerfilesUser),
+      concatMap(({ usuario_id }) =>
+        this.authService.getPerfilesUser(usuario_id).pipe(
+          map(response => userActions.getPerfilesUserSuccess({ response })),
+          catchError(error => of(userActions.getPerfilesUserError({ error })))
+        )
+      )
+    )
+  );
 
+  notifyOK$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(userActions.getPerfilesUserSuccess),
+        tap(action => {
+          this.alertMessageAction.messageActions(
+            action.response.status.code,
+            action.response.status.desc,
+            action.type,
+            action
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  //////////////////////////////
   getUserDetail$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getUserDetail),
@@ -239,25 +256,6 @@ export class UserEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  getAllDataUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.getAllDataUsuario),
-      concatMap(data =>
-        this.userService.getAllDataUsuario(data.id).pipe(
-          map((user: Data.UserWithDetail) =>
-            userActions.getAllDataUsuarioSuccess({
-              user,
-            })
-          ),
-          catchError(err => {
-            console.error(`could not retrieve the user [${err.message}]`);
-            return of(userActions.getAllDataUsuarioError({ error: err }));
-          })
-        )
-      )
-    )
   );
 
   getPosiblesSuperiores$ = createEffect(() =>

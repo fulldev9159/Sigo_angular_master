@@ -17,6 +17,7 @@ import { map } from 'rxjs/operators';
 })
 export class PerfilSelectComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  usuario_id = null;
   perfiles$: Observable<PerfilesUser[]>;
   perfiles: PerfilesUser[];
 
@@ -42,11 +43,13 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
           loginAuth?.proxy_id === undefined
         ) {
           this.router.navigate(['/auth/login']);
+        } else {
+          this.usuario_id = loginAuth.usuario_id;
         }
       })
     );
 
-    this.authFacade.getPerfilesUser();
+    this.authFacade.getPerfilesUser(this.usuario_id);
     this.perfiles$ = this.authFacade
       .pefilesUsuario$()
       .pipe(map(perfiles => (this.perfiles = perfiles)));

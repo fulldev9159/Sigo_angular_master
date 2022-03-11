@@ -89,7 +89,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
         const id = params.get('id');
         if (id !== null) {
           const userID = +params.get('id');
-          this.userFacade.getAllDataUsuario(userID);
+          // this.userFacade.getAllDataUsuario(userID);
         }
       })
     );

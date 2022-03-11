@@ -1,13 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Data from '@data';
-import { PosiblesSuperiores, User } from '@data';
+import { PerfilesUser, PosiblesSuperiores, User } from '@data';
 
 export const UserFeatureKey = 'user';
 
 export interface StateUser {
   users: User[];
-  userDetail: Data.DetalleUsuario;
+  perfilesUser: PerfilesUser[];
+  displayModalPerfilesUser: boolean;
   areas: Data.Area[];
   proveedores: Data.Proveedor[];
   contratos: Data.Contrato[];
@@ -18,7 +19,8 @@ export interface StateUser {
 
 export const initialStateUser: StateUser = {
   users: [],
-  userDetail: { perfiles: [], contratos_marco: [] },
+  perfilesUser: [],
+  displayModalPerfilesUser: false,
   areas: [],
   proveedores: [],
   contratos: [],
@@ -30,12 +32,31 @@ export const initialStateUser: StateUser = {
 export const reducerUser = createReducer(
   initialStateUser,
 
-  on(UserActions.getAllUser, state => state),
   on(UserActions.getAllUserSuccess, (state, { response }) => ({
     ...state,
     users: response.data.usuarios,
   })),
-
+  on(UserActions.getPerfilesUserSuccess, (state, { response }) => {
+    const perfilesUser = response.data.perfiles.map(perfil => {
+      return {
+        ...perfil,
+        model_perfil: {
+          ...perfil.model_perfil,
+          nombre: perfil.perfil_propio
+            ? perfil.model_perfil.nombre
+            : `${perfil.model_perfil.nombre} (Replazo)`,
+        },
+      };
+    });
+    return {
+      ...state,
+      perfilesUser,
+    };
+  }),
+  on(UserActions.displayModalPerfilesUser, (state, { value }) => ({
+    ...state,
+    displayModalPerfilesUser: value,
+  })),
   on(UserActions.getUserDetail, state => state),
   on(UserActions.getUserDetailSuccess, (state, payload) => ({
     ...state,
@@ -73,11 +94,6 @@ export const reducerUser = createReducer(
   on(UserActions.resetSuperiores, (state, payload) => ({
     ...state,
     samecompanyusers: [],
-  })),
-  on(UserActions.getAllDataUsuarioSuccess, (state, { user }) => ({
-    ...state,
-    alldatauser: user,
-    displayDetalleModal: true,
   })),
   on(UserActions.setDisplayDetalleModal, (state, payload) => ({
     ...state,

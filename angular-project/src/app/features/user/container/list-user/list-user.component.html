@@ -11,8 +11,8 @@
       <hr>
     </div>
   </div>
-  <app-table [config]="configTable" [items]="(users$ | async)"></app-table>
-  <app-modal [display]="DisplayModal$|async" (CloseEvent)="cerrarDisplayModal(false)" [style]="{width: '50vw'}">
+  <app-table [config]="configTable" [items]="(usersTableData$ | async)"></app-table>
+  <!-- <app-modal [display]="DisplayModal$|async" (CloseEvent)="cerrarDisplayModal(false)" [style]="{width: '50vw'}">
     <ng-container modal-header-title>Detalles del usuario <strong>{{(userDetail$|async)?.username}}</strong> </ng-container>
     <ng-container modal-content>
       <div class="row">
@@ -67,5 +67,18 @@
       </div>
     </ng-container>
     <ng-container modal-footer></ng-container>
-  </app-modal>
+  </app-modal> -->
 </div>
+
+
+
+<app-modal [display]="displayModalPerfilesUser$|async" (CloseEvent)="closeAddPerfil()" [style]="{width: '50vw'}">
+  <!-- <ng-container modal-header-title>Agregar un perfil a <strong>{{(userDetail$|async)?.username}}</strong> </ng-container> -->
+  <ng-container modal-content>
+
+    <ul *ngFor="let perfil of perfilesUser$|async ">
+      <li>nombre: {{perfil.nombre}}</li>
+    </ul>
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>

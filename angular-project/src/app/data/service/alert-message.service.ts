@@ -5,11 +5,13 @@ import * as otActions from '@storeOT/features/ot/ot.actions';
 import * as authActions from '@storeOT/features/auth/auth.actions';
 import * as areaActions from '@storeOT/features/area/area.actions';
 import * as contratoActions from '@storeOT/features/contratos/contratos.actions';
+import * as userActions from '@storeOT/features/user/user.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { ContratoFacade } from '@storeOT/features/contratos/contratos.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
+import { UserFacade } from '@storeOT/features/user/user.facade';
 
 import { Router } from '@angular/router';
 import { MessageNotifyEffect } from '@data';
@@ -26,6 +28,7 @@ export class AlertMessageActions {
     private cubageFacade: CubicacionFacade,
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
+    private userFacade: UserFacade,
     private contratoFacade: ContratoFacade,
     private snackService: SnackBarService,
     private router: Router
@@ -187,6 +190,9 @@ export class AlertMessageActions {
       }
       if (action === contratoActions.activateContratoSuccess.type) {
         this.contratoFacade.getAllContratos();
+      }
+      if (action === userActions.getPerfilesUserSuccess.type) {
+        this.userFacade.displayModalPerfilesUser(true);
       }
     }
   }
