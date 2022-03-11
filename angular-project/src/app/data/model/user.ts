@@ -67,6 +67,7 @@ export interface ListPerfilesUser {
   nombre: string;
   superior: string;
 }
+///
 // GET USER
 
 export interface UsersResponse {

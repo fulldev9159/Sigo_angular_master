@@ -15,7 +15,7 @@ export class ProfileFacade {
 
   // PROFILE
   public getProfile(): void {
-    this.store.dispatch(profileActions.getProfile());
+    this.store.dispatch(profileActions.getAllProfile());
   }
 
   public getProfile$(): Observable<Data.Perfil[]> {

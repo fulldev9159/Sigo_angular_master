@@ -21,14 +21,12 @@ export class ProfileEffects {
     private profileFacade: ProfileFacade
   ) {}
 
-  getProfile$ = createEffect(() =>
+  getAllProfile$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(profileActions.getProfile),
+      ofType(profileActions.getAllProfile),
       concatMap(() =>
-        this.perfilService.getPerfiles().pipe(
-          map((perfiles: Data.Perfil[]) =>
-            profileActions.getProfileSuccess({ perfiles })
-          ),
+        this.perfilService.getAllPerfiles().pipe(
+          map(response => profileActions.getProfileSuccess({ response })),
           catchError(error => of(profileActions.getProfileError({ error })))
         )
       )

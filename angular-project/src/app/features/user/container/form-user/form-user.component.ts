@@ -160,24 +160,24 @@ export class FormUserComponent implements OnInit, OnDestroy {
         return perfiles || [];
       })
     );
-    this.subscription.add(
-      this.profiles$.subscribe(perfiles => {
-        this.roles = perfiles.reduce((ac, perfil) => {
-          ac[perfil.rol_nombre] = [];
-          return ac;
-        }, {});
-        perfiles.forEach(perfil => this.roles[perfil.rol_nombre].push(perfil));
-        this.perfiles = Object.keys(this.roles).map(rol => {
-          return {
-            label: rol,
-            value: 'rol',
-            items: this.roles[rol].map((perfil: Perfil) => {
-              return { label: perfil.nombre, value: perfil.id };
-            }),
-          };
-        });
-      })
-    );
+    // this.subscription.add(
+    //   this.profiles$.subscribe(perfiles => {
+    //     this.roles = perfiles.reduce((ac, perfil) => {
+    //       ac[perfil.rol_nombre] = [];
+    //       return ac;
+    //     }, {});
+    //     perfiles.forEach(perfil => this.roles[perfil.rol_nombre].push(perfil));
+    //     this.perfiles = Object.keys(this.roles).map(rol => {
+    //       return {
+    //         label: rol,
+    //         value: 'rol',
+    //         items: this.roles[rol].map((perfil: Perfil) => {
+    //           return { label: perfil.nombre, value: perfil.id };
+    //         }),
+    //       };
+    //     });
+    //   })
+    // );
     this.contracts$ = this.userFacade.getContracts$().pipe(
       map(contratos => contratos || []),
       tap(contratos => this.checkContratosAndEnable(contratos))
@@ -343,27 +343,27 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   showPermisos(perfil: number): void {
-    this.subscription.add(
-      this.profiles$.pipe(take(1)).subscribe(x => {
-        x.forEach(y => {
-          if (y.id === perfil) {
-            const data = y.permisos.map(permit => {
-              let permitCustom;
-              if (permit && permit.slug) {
-                permitCustom = { ...permit, module: permit.slug.split('_')[0] };
-              }
-              return permitCustom;
-            });
-            // console.log(_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value())
-            this.ModalDataPermissions = _.chain(data)
-              .groupBy('module')
-              .map((value, key) => ({ module: key, permissions: value }))
-              .value();
-            this.DisplayPermisosModal = true;
-          }
-        });
-      })
-    );
+    // this.subscription.add(
+    //   this.profiles$.pipe(take(1)).subscribe(x => {
+    //     x.forEach(y => {
+    //       if (y.id === perfil) {
+    //         const data = y.permisos.map(permit => {
+    //           let permitCustom;
+    //           if (permit && permit.slug) {
+    //             permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+    //           }
+    //           return permitCustom;
+    //         });
+    //         // console.log(_.chain(data).groupBy('module').map((value, key) => ({ module: key, permissions: value })).value())
+    //         this.ModalDataPermissions = _.chain(data)
+    //           .groupBy('module')
+    //           .map((value, key) => ({ module: key, permissions: value }))
+    //           .value();
+    //         this.DisplayPermisosModal = true;
+    //       }
+    //     });
+    //   })
+    // );
   }
 
   save(): void {

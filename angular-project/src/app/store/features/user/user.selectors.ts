@@ -20,6 +20,11 @@ export const displayModalPerfilesUser = createSelector(
   (state: fromUser.StateUser) => state.displayModalPerfilesUser
 );
 
+export const getAllPerfiles = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.allPerfiles
+);
+
 ////////////
 export const getAreas = createSelector(
   selectUser,

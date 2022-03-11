@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ProfileActions from './profile.actions';
 import * as Data from '@data';
-import { Permiso, RolWithPermisos } from '@data';
+import { Permiso, RolWithPermisos, Perfil } from '@data';
 
 export const ProfileFeatureKey = 'profile';
 
 export interface StateProfile {
-  perfiles: Data.Perfil[];
+  perfiles: Perfil[];
   permisos: Data.Permiso[];
   perfil_selected: Data.Perfil;
   rols: Data.Rols[];
@@ -24,10 +24,10 @@ export const initialStateProfile: StateProfile = {
 export const reducerProfile = createReducer(
   initialStateProfile,
 
-  on(ProfileActions.getProfile, state => state),
-  on(ProfileActions.getProfileSuccess, (state, payload) => ({
+  on(ProfileActions.getAllProfile, state => state),
+  on(ProfileActions.getProfileSuccess, (state, { response }) => ({
     ...state,
-    perfiles: payload.perfiles,
+    perfiles: response.data.perfil_all,
   })),
   on(ProfileActions.getPermissions, state => state),
   on(ProfileActions.getPermissionsSuccess, (state, payload) => ({

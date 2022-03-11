@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Data from '@data';
-import { PerfilesUser, PosiblesSuperiores, User } from '@data';
+import { Perfil, PerfilesUser, PosiblesSuperiores, User } from '@data';
 
 export const UserFeatureKey = 'user';
 
@@ -9,6 +9,7 @@ export interface StateUser {
   users: User[];
   perfilesUser: PerfilesUser[];
   displayModalPerfilesUser: boolean;
+  allPerfiles: Perfil[];
   areas: Data.Area[];
   proveedores: Data.Proveedor[];
   contratos: Data.Contrato[];
@@ -21,6 +22,7 @@ export const initialStateUser: StateUser = {
   users: [],
   perfilesUser: [],
   displayModalPerfilesUser: false,
+  allPerfiles: [],
   areas: [],
   proveedores: [],
   contratos: [],
@@ -60,6 +62,11 @@ export const reducerUser = createReducer(
     ...state,
     displayModalPerfilesUser: value,
   })),
+  on(UserActions.getAllPerfilesSuccess, (state, { response }) => ({
+    ...state,
+    allPerfiles: response.data.perfil_all,
+  })),
+  //  ////
   on(UserActions.getUserDetail, state => state),
   on(UserActions.getUserDetailSuccess, (state, payload) => ({
     ...state,

@@ -139,13 +139,13 @@ export class ListProComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.profileFacade.getProfile();
     this.perfiles$ = this.profileFacade.getProfile$();
-    this.ModalDataPermissions$ = this.profileFacade
-      .getProfileSelected$()
-      .pipe(
-        map((perfil: Data.Perfil) =>
-          perfil ? this.getPermissionsGroup(perfil.permisos) : []
-        )
-      );
+    // this.ModalDataPermissions$ = this.profileFacade
+    //   .getProfileSelected$()
+    //   .pipe(
+    //     map((perfil: Data.Perfil) =>
+    //       perfil ? this.getPermissionsGroup(perfil.permisos) : []
+    //     )
+    //   );
   }
 
   getPermissionsGroup(permissions: Data.Permiso[]): Data.PermissionsGroup[] {

@@ -5,18 +5,19 @@ import {
   DataResponseGetAllUser,
   Response,
   DataResGetPerfilesUser,
+  DataRspGetAllPerfiles,
 } from '@data';
 
 // GET ALL USER
 export const getAllUser = createAction('[User GetAll] GET All User');
 
 export const getAllUserSuccess = createAction(
-  '[User GetAll] GET All User Success',
+  '[User ] GET All User Success',
   props<{ response: Response<DataResponseGetAllUser> }>()
 );
 
 export const getAllUserError = createAction(
-  '[User GetAll] GET All User Error',
+  '[User ] GET All User Error',
   props<{ error: any }>()
 );
 
@@ -42,6 +43,19 @@ export const getPerfilesUserError = createAction(
 export const displayModalPerfilesUser = createAction(
   '[User] displayModalPerfilesUser',
   props<{ value: boolean }>()
+);
+
+// GET ALL PERFILES
+export const getAllPerfiles = createAction('[User ] GET getAllPerfiles');
+
+export const getAllPerfilesSuccess = createAction(
+  '[User ] GET getAllPerfiles Success',
+  props<{ response: Response<DataRspGetAllPerfiles> }>()
+);
+
+export const getAllPerfilesError = createAction(
+  '[User ] GET getAllPerfiles Error',
+  props<{ error: any }>()
 );
 
 ///////////////////////////////////////

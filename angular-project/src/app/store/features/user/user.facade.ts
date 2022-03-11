@@ -5,20 +5,20 @@ import { Observable } from 'rxjs';
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Data from '@data';
-import { PerfilesUser, PosiblesSuperiores } from '@data';
+import { Perfil, PerfilesUser, PosiblesSuperiores, User } from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserFacade {
-  constructor(private store: Store<Data.User>) {}
+  constructor(private store: Store<User>) {}
 
   // GET USERS
   public getAllUsers(): void {
     this.store.dispatch(userActions.getAllUser());
   }
 
-  public getAllUsers$(): Observable<Data.User[]> {
+  public getAllUsers$(): Observable<User[]> {
     return this.store.select(userSelectors.getUser);
   }
 
@@ -36,8 +36,17 @@ export class UserFacade {
     this.store.dispatch(userActions.displayModalPerfilesUser({ value }));
   }
 
-  public displayModalPerfilesUser$$(): Observable<boolean> {
+  public displayModalPerfilesUser$(): Observable<boolean> {
     return this.store.select(userSelectors.displayModalPerfilesUser);
+  }
+
+  // ALL PERFILES
+  public getAllPerfiles(): void {
+    this.store.dispatch(userActions.getAllPerfiles());
+  }
+
+  public gelAllPerfiles$(): Observable<Perfil[]> {
+    return this.store.select(userSelectors.getAllPerfiles);
   }
 
   // ///// /////////////////

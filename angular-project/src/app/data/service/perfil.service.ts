@@ -4,7 +4,13 @@ import { Observable, of, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import * as Data from '@data';
-import { Permiso, ResponseGetRolWithPermisos, RolWithPermisos } from '@data';
+import {
+  Permiso,
+  ResponseGetRolWithPermisos,
+  RolWithPermisos,
+  Response,
+} from '@data';
+import { DataRspGetAllPerfiles } from '@data/model';
 @Injectable({
   providedIn: 'root',
 })
@@ -18,20 +24,11 @@ export class PerfilService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getPerfiles(): Observable<Data.Perfil[]> {
-    return this.http
-      .post<Data.PerfilResponse>(
-        `${this.apiUrl}/configuration/perfil/getall`,
-        {}
-      )
-      .pipe(
-        map((res: Data.PerfilResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data;
-        })
-      );
+  getAllPerfiles(): Observable<Response<DataRspGetAllPerfiles>> {
+    return this.http.post<Response<DataRspGetAllPerfiles>>(
+      `${this.apiUrl}/configuration/perfil/getall`,
+      {}
+    );
   }
 
   getPermisos(): Observable<Data.Permiso[]> {

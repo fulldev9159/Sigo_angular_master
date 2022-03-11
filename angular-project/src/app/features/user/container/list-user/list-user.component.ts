@@ -5,7 +5,7 @@ import { ConfirmationService } from 'primeng/api';
 import { Observable, of } from 'rxjs';
 import * as Data from '@data';
 import { map } from 'rxjs/operators';
-import { ListPerfilesUser, TableUserData, User } from '@data';
+import { ListPerfilesUser, Perfil, TableUserData, User } from '@data';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -17,7 +17,7 @@ export class ListUserComponent implements OnInit {
   public DisplayModal$ = of();
   public usersTableData$: Observable<TableUserData[]>;
   perfilesUser$: Observable<ListPerfilesUser[]>;
-  allPerfiles$: Observable<any[]>;
+  allPerfiles$: Observable<Perfil[]>;
   displayModalPerfilesUser$: Observable<boolean>;
   nombreUsuario: string;
 
@@ -172,6 +172,7 @@ export class ListUserComponent implements OnInit {
           onClick: (event: Event, item: User) => {
             this.userFacade.getPerfilesUser(item.id);
             this.nombreUsuario = item.nombres + ' ' + item.apellidos;
+            this.userFacade.getAllPerfiles();
           },
         },
       ],
@@ -222,9 +223,10 @@ export class ListUserComponent implements OnInit {
         }
       })
     );
+    this.allPerfiles$ = this.userFacade.gelAllPerfiles$();
     this.DisplayModal$ = this.userFacade.DisplayDetalleModal$();
     this.displayModalPerfilesUser$ =
-      this.userFacade.displayModalPerfilesUser$$();
+      this.userFacade.displayModalPerfilesUser$();
   }
 
   cerrarDisplayModal(value: boolean): void {

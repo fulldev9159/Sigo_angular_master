@@ -9,13 +9,14 @@ import * as userActions from './user.actions';
 import * as Data from '@data';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { AuthService, AlertMessageActions } from '@data';
+import { AuthService, PerfilService, AlertMessageActions } from '@data';
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
     private userService: Data.UserService,
     private authService: AuthService,
+    private perfilService: PerfilService,
     private snackService: SnackBarService,
     private alertMessageAction: AlertMessageActions,
     private router: Router,
@@ -41,6 +42,18 @@ export class UserEffects {
         this.authService.getPerfilesUser(usuario_id).pipe(
           map(response => userActions.getPerfilesUserSuccess({ response })),
           catchError(error => of(userActions.getPerfilesUserError({ error })))
+        )
+      )
+    )
+  );
+
+  getAllProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getAllPerfiles),
+      concatMap(() =>
+        this.perfilService.getAllPerfiles().pipe(
+          map(response => userActions.getAllPerfilesSuccess({ response })),
+          catchError(error => of(userActions.getAllPerfilesError({ error })))
         )
       )
     )

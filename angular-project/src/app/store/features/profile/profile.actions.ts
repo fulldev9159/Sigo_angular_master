@@ -1,13 +1,18 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
-import { Permiso, RolWithPermisos } from '@data';
+import {
+  DataRspGetAllPerfiles,
+  Permiso,
+  Response,
+  RolWithPermisos,
+} from '@data';
 
 // PROFILE LIST
-export const getProfile = createAction('[Profile GetAll] GET Profile');
+export const getAllProfile = createAction('[Profile] getAllProfile');
 
 export const getProfileSuccess = createAction(
-  '[Profile GetAll] GET Profile Success',
-  props<{ perfiles: Data.Perfil[] }>()
+  '[Profile] getAllProfile Success',
+  props<{ response: Response<DataRspGetAllPerfiles> }>()
 );
 
 export const getProfileError = createAction(
@@ -15,6 +20,7 @@ export const getProfileError = createAction(
   props<{ error: any }>()
 );
 
+// ////////
 // GET PERMISOS
 
 export const getPermissions = createAction(

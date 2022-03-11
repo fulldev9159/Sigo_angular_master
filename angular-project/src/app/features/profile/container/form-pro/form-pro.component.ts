@@ -126,38 +126,38 @@ export class FormProComponent implements OnInit, OnDestroy {
           this.formPerfil.get('nombre').setValue(perfil.nombre);
           this.formPerfil.get('descripcion').setValue(perfil.descripcion);
           this.formControls.rol.setValue(perfil.rol_id);
-          const PermissionsModules = this.getPermissionsGroup(perfil.permisos);
-          if (PermissionsModules.find(module => module.module === 'OT')) {
-            this.formPerfil
-              .get('permisos_OT')
-              .setValue(
-                PermissionsModules.find(
-                  module => module.module === 'OT'
-                ).permissions.map(permiso => permiso.id)
-              );
-          }
+          // const PermissionsModules = this.getPermissionsGroup(perfil.permisos);
+          // if (PermissionsModules.find(module => module.module === 'OT')) {
+          //   this.formPerfil
+          //     .get('permisos_OT')
+          //     .setValue(
+          //       PermissionsModules.find(
+          //         module => module.module === 'OT'
+          //       ).permissions.map(permiso => permiso.id)
+          //     );
+          // }
 
-          if (
-            PermissionsModules.find(module => module.module === 'CUBICACION')
-          ) {
-            this.formPerfil
-              .get('permisos_CUBICACION')
-              .setValue(
-                PermissionsModules.find(
-                  module => module.module === 'CUBICACION'
-                ).permissions.map(permiso => permiso.id)
-              );
-          }
+          // if (
+          //   PermissionsModules.find(module => module.module === 'CUBICACION')
+          // ) {
+          //   this.formPerfil
+          //     .get('permisos_CUBICACION')
+          //     .setValue(
+          //       PermissionsModules.find(
+          //         module => module.module === 'CUBICACION'
+          //       ).permissions.map(permiso => permiso.id)
+          //     );
+          // }
 
-          if (PermissionsModules.find(module => module.module === 'PERFIL')) {
-            this.formPerfil
-              .get('permisos_PERFIL')
-              .setValue(
-                PermissionsModules.find(
-                  module => module.module === 'PERFIL'
-                ).permissions.map(permiso => permiso.id)
-              );
-          }
+          // if (PermissionsModules.find(module => module.module === 'PERFIL')) {
+          //   this.formPerfil
+          //     .get('permisos_PERFIL')
+          //     .setValue(
+          //       PermissionsModules.find(
+          //         module => module.module === 'PERFIL'
+          //       ).permissions.map(permiso => permiso.id)
+          //     );
+          // }
         }
       })
     );

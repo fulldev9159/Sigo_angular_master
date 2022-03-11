@@ -104,37 +104,48 @@
       </div>
       <div class="col-md-9">
         <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Agregar un perfil</p>
-        <div style="display: flex;justify-content: center;
-        align-items: center;
-        height: 92%;">
-          <form [formGroup]="formAddPerfil">
-            <app-select [control]="formAddControls.perfil_id" label="Perfil">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione perfil a agregar al usuario</option>
-                <option value="null">No posee superior directo</option>
-                <ng-container *ngFor="let perfil of allPerfiles$ | async">
-                  <option [value]="perfil.id">
-                    {{ perfil.nombres}}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+              <form [formGroup]="formAddPerfil">
+                <app-select [control]="formAddControls.perfil_id" label="Perfil">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione perfil a agregar al usuario</option>
+                    <ng-container *ngFor="let perfil of allPerfiles$ | async">
+                      <option [value]="perfil.id">
+                        {{ perfil.nombre}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
 
-            <br>
+                <br>
 
-            <app-select [control]="formAddControls.superior_id" label="Superior directo">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione persona</option>
-                <option value="null">No posee superior directo</option>
-                <ng-container *ngFor="let superior of allPerfiles$ | async">
-                  <option [value]="superior.id">
-                    {{ superior.nombres }} {{ superior.apellidos }}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
-          </form>
+                <app-select [control]="formAddControls.superior_id" label="Superior directo">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione persona</option>
+                    <option value="null">No posee superior directo</option>
+                    <ng-container *ngFor="let superior of allPerfiles$ | async">
+                      <option [value]="superior.id">
+                        {{ superior.nombres }} {{ superior.apellidos }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </form>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col">
+
+              <button pButton type="button" label="Agregar Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-user-perfil-button"></button>
+
+            </div>
+          </div>
         </div>
+
+
 
       </div>
     </div>
