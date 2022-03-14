@@ -45,14 +45,14 @@ export const getPerfilesUserError = createAction(
 );
 // GET PROFILE USER
 
-// REFRESH
-export const refresh = createAction(
-  '[Auth refresh] POST refresh',
+// SET PERFIL SELECTED
+export const setPerfilSelected = createAction(
+  '[Auth] POST setPerfilSelected',
   props<{ proxy_id: number; nombre_perfil_select: string }>()
 );
 
-export const refreshSuccess = createAction(
-  '[Auth refresh] POST refresh Success',
+export const setPerfilSelectedSuccess = createAction(
+  '[Auth] POST refresh Success',
   props<{
     proxy_id: number;
     nombre_perfil_select: string;
@@ -60,14 +60,33 @@ export const refreshSuccess = createAction(
   }>()
 );
 
-export const refreshUserError = createAction(
-  '[Auth refresh] POST refresh Error',
+export const setPerfilSelectedError = createAction(
+  '[Auth] POST setPerfilSelected Error',
   props<{ error: any }>()
 );
 
 export const refreshProxyID = createAction(
   '[Auth refresh proxyID] POST refresh proxyID',
   props<{ proxy_id: number; nombre_perfil_select: string }>()
+);
+
+// REFRESH
+export const refresh = createAction(
+  '[Auth refresh] POST refresh',
+  props<{ proxy_id: number }>()
+);
+
+export const refreshSuccess = createAction(
+  '[Auth refresh] POST refresh Success',
+  props<{
+    proxy_id: number;
+    response: Response<DataRespLogin>;
+  }>()
+);
+
+export const refreshUserError = createAction(
+  '[Auth refresh] POST refresh Error',
+  props<{ error: any }>()
 );
 
 // GET PERMISOS PERFIL

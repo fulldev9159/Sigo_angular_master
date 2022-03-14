@@ -79,16 +79,20 @@ export const reducerAuth = createReducer(
       };
     }
   ),
-  on(authActions.refreshSuccess, (state, { response }) => {
-    const sessionData = {
-      ...state.sessionData,
-      token: response.data.token,
-    };
-    return {
-      ...state,
-      sessionData,
-    };
-  }),
+  on(
+    authActions.setPerfilSelectedSuccess,
+    authActions.refreshSuccess,
+    (state, { response }) => {
+      const sessionData = {
+        ...state.sessionData,
+        token: response.data.token,
+      };
+      return {
+        ...state,
+        sessionData,
+      };
+    }
+  ),
   on(authActions.getPerrmisoPerfilSuccess, (state, { response }) => {
     const sessionData = {
       ...state.sessionData,

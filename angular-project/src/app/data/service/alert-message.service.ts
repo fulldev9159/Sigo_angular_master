@@ -169,7 +169,7 @@ export class AlertMessageActions {
 
     // ACTIONS
     if (code === 0) {
-      if (action === authActions.refreshSuccess.type) {
+      if (action === authActions.setPerfilSelectedSuccess.type) {
         this.authFacade.refreshProxyID(
           data.proxy_id,
           data.nombre_perfil_select
