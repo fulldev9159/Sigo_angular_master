@@ -2,10 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ConfirmationService } from 'primeng/api';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import * as Data from '@data';
 import { map } from 'rxjs/operators';
-import { ListPerfilesUser, Perfil, TableUserData, User } from '@data';
+import {
+  ListPerfilesUser,
+  Perfil,
+  RequestAgregarPerfilUsusario,
+  TableUserData,
+  User,
+} from '@data';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -14,12 +20,24 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./list-user.component.scss'],
 })
 export class ListUserComponent implements OnInit {
+  subscription: Subscription = new Subscription();
   public DisplayModal$ = of();
   public usersTableData$: Observable<TableUserData[]>;
   perfilesUser$: Observable<ListPerfilesUser[]>;
   allPerfiles$: Observable<Perfil[]>;
+  posiblesSuperiores$: Observable<any[]> = of([
+    {
+      user_id: 1,
+      nombre: 'Juanito Perez (Administrador de sistema)',
+    },
+    {
+      user_id: 2,
+      nombre: 'Pepito los palotes (Gestor)',
+    },
+  ]);
   displayModalPerfilesUser$: Observable<boolean>;
   nombreUsuario: string;
+  usuario_id: number;
 
   formAddControls = {
     id: new FormControl(null),
@@ -172,6 +190,7 @@ export class ListUserComponent implements OnInit {
           onClick: (event: Event, item: User) => {
             this.userFacade.getPerfilesUser(item.id);
             this.nombreUsuario = item.nombres + ' ' + item.apellidos;
+            this.usuario_id = item.id;
             this.userFacade.getAllPerfiles();
           },
         },
@@ -187,6 +206,7 @@ export class ListUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userFacade.getAllUsers();
+    this.formAddPerfil.get('superior_id').disable({ emitEvent: false });
     this.usersTableData$ = this.userFacade.getAllUsers$().pipe(
       map(usuarios => {
         if (usuarios) {
@@ -224,16 +244,42 @@ export class ListUserComponent implements OnInit {
       })
     );
     this.allPerfiles$ = this.userFacade.gelAllPerfiles$();
+    // this.posiblesSuperiores$ = this.userFacade.getPosiblesSuperiores$();
     this.DisplayModal$ = this.userFacade.DisplayDetalleModal$();
     this.displayModalPerfilesUser$ =
       this.userFacade.displayModalPerfilesUser$();
+
+    this.subscription.add(
+      this.formAddPerfil.get('perfil_id').valueChanges.subscribe(perfil_id => {
+        if (perfil_id) {
+          this.formAddPerfil.get('superior_id').enable({ emitEvent: false });
+          console.log(perfil_id);
+          console.log(this.usuario_id);
+        }
+      })
+    );
   }
 
-  cerrarDisplayModal(value: boolean): void {
-    this.userFacade.SetDisplayDetalleModal(value);
-  }
+  // cerrarDisplayModal(value: boolean): void {
+  //   this.userFacade.SetDisplayDetalleModal(value);
+  // }
 
   closeAddPerfil(): void {
     this.userFacade.displayModalPerfilesUser(false);
+    this.formAddPerfil.reset();
+  }
+
+  AgregarPerfil(): void {
+    const request: RequestAgregarPerfilUsusario = {
+      perfil_id: +this.formAddPerfil.get('perfil_id').value,
+      usuario_id: this.usuario_id,
+      superior_id: +this.formAddPerfil.get('superior_id'),
+    };
+
+    console.log(request);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

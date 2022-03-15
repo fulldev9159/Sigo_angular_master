@@ -125,9 +125,9 @@
                   <ng-container options>
                     <option value="null" selected disabled>Seleccione persona</option>
                     <option value="null">No posee superior directo</option>
-                    <ng-container *ngFor="let superior of allPerfiles$ | async">
+                    <ng-container *ngFor="let superior of posiblesSuperiores$ | async">
                       <option [value]="superior.id">
-                        {{ superior.nombres }} {{ superior.apellidos }}
+                        {{ superior.nombre }} {{ superior.apellidos }}
                       </option>
                     </ng-container>
                   </ng-container>
@@ -137,7 +137,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <button pButton type="button" label="Agregar Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-user-perfil-button"></button>
+              <button pButton type="button" (click)="AgregarPerfil()" label="Agregar Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-user-perfil-button"></button>
             </div>
           </div>
         </div>

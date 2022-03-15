@@ -182,10 +182,10 @@ export class FormUserComponent implements OnInit, OnDestroy {
       map(contratos => contratos || []),
       tap(contratos => this.checkContratosAndEnable(contratos))
     );
-    this.samecompanyusers$ = this.userFacade.getPosiblesSuperiores$().pipe(
-      map(usuarios => usuarios || []),
-      tap(usuarios => this.checkSuperioresAndEnable(usuarios))
-    );
+    // this.samecompanyusers$ = this.userFacade.getPosiblesSuperiores$().pipe(
+    //   map(usuarios => usuarios || []),
+    //   tap(usuarios => this.checkSuperioresAndEnable(usuarios))
+    // );
   }
 
   initFormControlsEvents(): void {
@@ -260,11 +260,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
           ) {
             const proveedor_id = this.formUser.get('proveedor_id').value;
             const area_id = this.formUser.get('area_id').value;
-            this.userFacade.getPosiblesSuperiores(
-              +proveedor_id,
-              +area_id,
-              contratos_marco_id
-            );
+            // this.userFacade.getPosiblesSuperiores(
+            //   +proveedor_id,
+            //   +area_id,
+            //   contratos_marco_id
+            // );
           } else {
             this.disableSuperiorFormControl();
           }

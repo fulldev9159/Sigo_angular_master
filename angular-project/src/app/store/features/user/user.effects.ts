@@ -59,6 +59,38 @@ export class UserEffects {
     )
   );
 
+  getPosibleSuperior$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getPosiblesSuperiores),
+      concatMap(({ perfil_id }) =>
+        this.userService.getPosiblesSuperiores(perfil_id).pipe(
+          map(response =>
+            userActions.getPosiblesSuperioresSuccess({ response })
+          ),
+          catchError(error =>
+            of(userActions.getPosiblesSuperioresError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  agregarPerfilUsuario$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.agregarPerfilUsuario),
+      concatMap(({ request }) =>
+        this.userService.agregarPerfilUser(request).pipe(
+          map(response =>
+            userActions.agregarPerfilUsuarioSuccess({ response })
+          ),
+          catchError(error =>
+            of(userActions.agregarPerfilUsuarioError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -271,23 +303,23 @@ export class UserEffects {
     { dispatch: false }
   );
 
-  getPosiblesSuperiores$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.getGetPosiblesSuperiores),
-      concatMap(({ proveedor_id, area_id, contratos_marco_id }) =>
-        this.userService
-          .getPosiblesSuperiores(proveedor_id, area_id, contratos_marco_id)
-          .pipe(
-            map(posiblesSuperiores =>
-              userActions.getGetPosiblesSuperioresSuccess({
-                posiblesSuperiores,
-              })
-            ),
-            catchError(error =>
-              of(userActions.getGetPosiblesSuperioresError({ error }))
-            )
-          )
-      )
-    )
-  );
+  // getPosiblesSuperiores$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(userActions.getGetPosiblesSuperiores),
+  //     concatMap(({ proveedor_id, area_id, contratos_marco_id }) =>
+  //       this.userService
+  //         .getPosiblesSuperiores(proveedor_id, area_id, contratos_marco_id)
+  //         .pipe(
+  //           map(posiblesSuperiores =>
+  //             userActions.getGetPosiblesSuperioresSuccess({
+  //               posiblesSuperiores,
+  //             })
+  //           ),
+  //           catchError(error =>
+  //             of(userActions.getGetPosiblesSuperioresError({ error }))
+  //           )
+  //         )
+  //     )
+  //   )
+  // );
 }

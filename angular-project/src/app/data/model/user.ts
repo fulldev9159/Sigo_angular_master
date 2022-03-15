@@ -67,6 +67,13 @@ export interface ListPerfilesUser {
   nombre: string;
   superior: string;
 }
+
+export interface RequestAgregarPerfilUsusario {
+  perfil_id: number;
+  usuario_id: number;
+  superior_id: number;
+}
+
 ///
 // GET USER
 

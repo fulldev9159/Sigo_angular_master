@@ -5,7 +5,13 @@ import { Observable } from 'rxjs';
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Data from '@data';
-import { Perfil, PerfilesUser, PosiblesSuperiores, User } from '@data';
+import {
+  Perfil,
+  PerfilesUser,
+  PosiblesSuperiores,
+  RequestAgregarPerfilUsusario,
+  User,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +53,22 @@ export class UserFacade {
 
   public gelAllPerfiles$(): Observable<Perfil[]> {
     return this.store.select(userSelectors.getAllPerfiles);
+  }
+
+  // GET POSIBLES SUPERIORES
+  public getPosiblesSuperiores(usuario_id: number, perfil_id: number): void {
+    this.store.dispatch(
+      userActions.getPosiblesSuperiores({ usuario_id, perfil_id })
+    );
+  }
+
+  public getPosiblesSuperiores$(): Observable<Perfil[]> {
+    return this.store.select(userSelectors.getPosiblesSuperiores);
+  }
+
+  // AGREGAR PERFIL USUARIO
+  public agregarPerfilUsuario(request: RequestAgregarPerfilUsusario): void {
+    this.store.dispatch(userActions.agregarPerfilUsuario({ request }));
   }
 
   // ///// /////////////////
@@ -133,21 +155,17 @@ export class UserFacade {
     return this.store.select(userSelectors.getDisplayDetalleModal);
   }
 
-  public getPosiblesSuperiores(
-    proveedor_id: number,
-    area_id: number,
-    contratos_marco_id: number[]
-  ): void {
-    this.store.dispatch(
-      userActions.getGetPosiblesSuperiores({
-        proveedor_id,
-        area_id,
-        contratos_marco_id,
-      })
-    );
-  }
-
-  public getPosiblesSuperiores$(): Observable<PosiblesSuperiores[]> {
-    return this.store.select(userSelectors.getPosiblesSuperiores);
-  }
+  // public getPosiblesSuperiores(
+  //   proveedor_id: number,
+  //   area_id: number,
+  //   contratos_marco_id: number[]
+  // ): void {
+  //   this.store.dispatch(
+  //     userActions.getGetPosiblesSuperiores({
+  //       proveedor_id,
+  //       area_id,
+  //       contratos_marco_id,
+  //     })
+  //   );
+  // }
 }

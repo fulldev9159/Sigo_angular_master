@@ -6,6 +6,7 @@ import {
   Response,
   DataResGetPerfilesUser,
   DataRspGetAllPerfiles,
+  RequestAgregarPerfilUsusario,
 } from '@data';
 
 // GET ALL USER
@@ -46,7 +47,7 @@ export const displayModalPerfilesUser = createAction(
 );
 
 // GET ALL PERFILES
-export const getAllPerfiles = createAction('[User ] GET getAllPerfiles');
+export const getAllPerfiles = createAction('[User] GET getAllPerfiles');
 
 export const getAllPerfilesSuccess = createAction(
   '[User ] GET getAllPerfiles Success',
@@ -55,6 +56,43 @@ export const getAllPerfilesSuccess = createAction(
 
 export const getAllPerfilesError = createAction(
   '[User ] GET getAllPerfiles Error',
+  props<{ error: any }>()
+);
+
+// GET POSIBLES SUPERIORES DE UN PERFIL
+export const getPosiblesSuperiores = createAction(
+  '[User] GET getPosiblesSuperiores',
+  props<{
+    usuario_id: number;
+    perfil_id: number;
+  }>()
+);
+
+export const getPosiblesSuperioresSuccess = createAction(
+  '[User] GET getPosiblesSuperiores Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getPosiblesSuperioresError = createAction(
+  '[User] GET getPosiblesSuperiores Error',
+  props<{ error: any }>()
+);
+
+// AGREGAR PERFIL A USUARIO
+export const agregarPerfilUsuario = createAction(
+  '[User] GET agregarPerfilUsuario',
+  props<{
+    request: RequestAgregarPerfilUsusario;
+  }>()
+);
+
+export const agregarPerfilUsuarioSuccess = createAction(
+  '[User] GET agregarPerfilUsuarios Success',
+  props<{ response: Response<any> }>()
+);
+
+export const agregarPerfilUsuarioError = createAction(
+  '[User] GET agregarPerfilUsuario Error',
   props<{ error: any }>()
 );
 
@@ -202,24 +240,24 @@ export const setDisplayDetalleModal = createAction(
   props<{ value: boolean }>()
 );
 
-export const getGetPosiblesSuperiores = createAction(
-  '[User GetAll] GET All GetPosiblesSuperiores',
-  props<{
-    proveedor_id: number;
-    area_id: number;
-    contratos_marco_id: number[];
-  }>()
-);
+// export const getGetPosiblesSuperiores = createAction(
+//   '[User GetAll] GET All GetPosiblesSuperiores',
+//   props<{
+//     proveedor_id: number;
+//     area_id: number;
+//     contratos_marco_id: number[];
+//   }>()
+// );
 
-export const getGetPosiblesSuperioresSuccess = createAction(
-  '[User GetAll] GET All GetPosiblesSuperiores Success',
-  props<{ posiblesSuperiores: PosiblesSuperiores[] }>()
-);
+// export const getGetPosiblesSuperioresSuccess = createAction(
+//   '[User GetAll] GET All GetPosiblesSuperiores Success',
+//   props<{ posiblesSuperiores: PosiblesSuperiores[] }>()
+// );
 
-export const getGetPosiblesSuperioresError = createAction(
-  '[User GetAll] GET All GetPosiblesSuperiores Error',
-  props<{ error: any }>()
-);
+// export const getGetPosiblesSuperioresError = createAction(
+//   '[User GetAll] GET All GetPosiblesSuperiores Error',
+//   props<{ error: any }>()
+// );
 
 export const resetData = createAction('[ResetData] ResetData');
 export const resetArea = createAction('[User] Reset Area');

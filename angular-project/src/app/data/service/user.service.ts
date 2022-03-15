@@ -10,6 +10,7 @@ import {
   DataResponseGetAllUser,
   Response,
 } from '@data';
+import { RequestAgregarPerfilUsusario } from '@data/model';
 @Injectable({
   providedIn: 'root',
 })
@@ -29,6 +30,21 @@ export class UserService {
       {}
     );
   }
+
+  getPosiblesSuperiores(perfil_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}/usuario/get_all`, {
+      perfil_id,
+    });
+  }
+
+  agregarPerfilUser(
+    request: RequestAgregarPerfilUsusario
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}`, {
+      request,
+    });
+  }
+  //   ///
 
   getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
     return this.http
@@ -183,27 +199,27 @@ export class UserService {
       );
   }
 
-  getPosiblesSuperiores(
-    proveedor_id: number,
-    area_id: number,
-    contratos_marco_id: number[]
-  ): Observable<PosiblesSuperiores[]> {
-    return this.http
-      .post<ResponsePosiblesSuperiores>(
-        `${this.apiUrl}/usuarios/posibles_superiores/get`,
-        {
-          proveedor_id,
-          area_id,
-          contratos_marco_id,
-        }
-      )
-      .pipe(
-        map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.items;
-        })
-      );
-  }
+  // getPosiblesSuperiores(
+  //   proveedor_id: number,
+  //   area_id: number,
+  //   contratos_marco_id: number[]
+  // ): Observable<PosiblesSuperiores[]> {
+  //   return this.http
+  //     .post<ResponsePosiblesSuperiores>(
+  //       `${this.apiUrl}/usuarios/posibles_superiores/get`,
+  //       {
+  //         proveedor_id,
+  //         area_id,
+  //         contratos_marco_id,
+  //       }
+  //     )
+  //     .pipe(
+  //       map(res => {
+  //         if (+res.status.responseCode !== 0) {
+  //           this.snackService.showMessage(res.status.description, 'error');
+  //         }
+  //         return res.data.items;
+  //       })
+  //     );
+  // }
 }
