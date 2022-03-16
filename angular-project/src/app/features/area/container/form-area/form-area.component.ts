@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Area, RequestEditArea } from '@data';
+import { Area4createUser, RequestEditArea } from '@data';
 import { Observable, Subscription } from 'rxjs';
 import { AreaFacade } from '@storeOT/features/area/area.facade';
 @Component({
@@ -12,7 +12,7 @@ import { AreaFacade } from '@storeOT/features/area/area.facade';
 })
 export class FormAreaComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  areaSelected$: Observable<Area>;
+  areaSelected$: Observable<Area4createUser>;
 
   formControls = {
     id: new FormControl(null),

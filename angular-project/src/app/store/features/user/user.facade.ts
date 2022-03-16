@@ -6,6 +6,7 @@ import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Data from '@data';
 import {
+  Area4createUser,
   Perfil,
   PerfilesUser,
   PosiblesSuperiores,
@@ -84,6 +85,15 @@ export class UserFacade {
     return this.store.select(userSelectors.getAllProveedores4CreateUser);
   }
 
+  // GET ALL AREAS 4 CREATE USER
+  public getAllarea4createUser(interno: boolean): void {
+    this.store.dispatch(userActions.getAllAreas4CreateUser({ interno }));
+  }
+
+  public getAllarea4createUser$(): Observable<Area4createUser[]> {
+    return this.store.select(userSelectors.getallAreas4createUser);
+  }
+
   // ///// /////////////////
   // DELETE
   public deleteUser(usuario_id: number): void {
@@ -94,25 +104,6 @@ export class UserFacade {
   public activateUser(usuario_id: number, activacion: boolean): void {
     this.store.dispatch(userActions.activateUser({ usuario_id, activacion }));
   }
-  // AREAS
-  public getAreas(interno: boolean): void {
-    this.store.dispatch(userActions.getArea({ interno }));
-  }
-
-  public getAreas$(): Observable<Data.Area[]> {
-    return this.store.select(userSelectors.getAreas);
-  }
-  // AREAS
-
-  // PROVIDERS
-  // public getProviders(interno: boolean): void {
-  //   this.store.dispatch(userActions.getProvider({ interno }));
-  // }
-
-  // public getProviders$(): Observable<Data.Proveedor[]> {
-  //   return this.store.select(userSelectors.getProviders);
-  // }
-  // PROVIDERS
 
   // CONTRACT
   public getContracts(proveedor_id: number): void {

@@ -1,5 +1,5 @@
 import { ContratoMarco4Cub } from '@data';
-import { Area } from './area';
+import { Area4createUser } from './area';
 
 // REQ RESP GET ALL USERS
 export interface DataResponseGetAllUser {
@@ -14,7 +14,7 @@ export interface User {
   email: string;
   estado: boolean;
   id: number;
-  model_area_id: Area;
+  model_area_id: Area4createUser;
   model_proveedor_id: {
     created_at: Date;
     deleted_at: Date;
@@ -215,7 +215,7 @@ export interface PerfilUser {
 
 export interface AreaResponse {
   data: {
-    items: Area[];
+    items: Area4createUser[];
   };
 
   status: {

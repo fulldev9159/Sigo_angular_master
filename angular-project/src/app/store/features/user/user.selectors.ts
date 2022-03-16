@@ -37,11 +37,11 @@ export const getAllProveedores4CreateUser = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.proveedores4createUser
 );
-////////////
-export const getAreas = createSelector(
+export const getallAreas4createUser = createSelector(
   selectUser,
-  (state: fromUser.StateUser) => state.areas
+  (state: fromUser.StateUser) => state.areas4createUser
 );
+////////////
 
 export const getContracts = createSelector(
   selectUser,

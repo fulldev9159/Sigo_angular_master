@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Data from '@data';
 import {
+  Area4createUser,
   Perfil,
   PerfilesUser,
   PosiblesSuperiores,
@@ -18,7 +19,7 @@ export interface StateUser {
   allPerfiles: Perfil[];
   posiblesSuperiores: PosiblesSuperiores[];
   proveedores4createUser: Proveedores4CreateUser[];
-  areas: Data.Area[];
+  areas4createUser: Area4createUser[];
   contratos: Data.Contrato[];
   alldatauser: Data.UserWithDetail;
   displayDetalleModal: boolean;
@@ -31,7 +32,7 @@ export const initialStateUser: StateUser = {
   allPerfiles: [],
   posiblesSuperiores: [],
   proveedores4createUser: [],
-  areas: [],
+  areas4createUser: [],
   contratos: [],
   alldatauser: null,
   displayDetalleModal: false,
@@ -84,24 +85,12 @@ export const reducerUser = createReducer(
       proveedores4createUser: response.data.proveedor_array,
     })
   ),
+
+  on(UserActions.getAllAreas4CreateUserSuccess, (state, { response }) => ({
+    ...state,
+    areas4createUser: response.data.area_array,
+  })),
   //  ////
-  on(UserActions.getUserDetail, state => state),
-  on(UserActions.getUserDetailSuccess, (state, payload) => ({
-    ...state,
-    userDetail: payload.user_detail,
-  })),
-
-  on(UserActions.getArea, state => state),
-  on(UserActions.getAreaSuccess, (state, payload) => ({
-    ...state,
-    areas: payload.areas,
-  })),
-
-  // on(UserActions.getProvider, state => state),
-  // on(UserActions.getProviderSuccess, (state, payload) => ({
-  //   ...state,
-  //   proveedores: payload.proveedores,
-  // })),
 
   on(UserActions.getContracts, state => state),
   on(UserActions.getContractsSuccess, (state, payload) => ({
@@ -113,7 +102,7 @@ export const reducerUser = createReducer(
   })),
   on(UserActions.resetArea, (state, payload) => ({
     ...state,
-    areas: [],
+    areas4createUser: [],
   })),
   on(UserActions.resetContratos, (state, payload) => ({
     ...state,

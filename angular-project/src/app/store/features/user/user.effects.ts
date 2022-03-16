@@ -14,6 +14,7 @@ import {
   PerfilService,
   AlertMessageActions,
   ProveedorService,
+  AreaService,
 } from '@data';
 @Injectable()
 export class UserEffects {
@@ -23,6 +24,7 @@ export class UserEffects {
     private authService: AuthService,
     private perfilService: PerfilService,
     private proveedorService: ProveedorService,
+    private areaService: AreaService,
     private snackService: SnackBarService,
     private alertMessageAction: AlertMessageActions,
     private router: Router,
@@ -112,6 +114,23 @@ export class UserEffects {
       )
     )
   );
+
+  getArea$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getAllAreas4CreateUser),
+      concatMap(({ interno }) =>
+        this.areaService.getAllProveedores4CreateUser(interno).pipe(
+          map(response =>
+            userActions.getAllAreas4CreateUserSuccess({ response })
+          ),
+          catchError(error =>
+            of(userActions.getAllAreas4CreateUserError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -144,19 +163,6 @@ export class UserEffects {
     { dispatch: false }
   );
   //////////////////////////////
-  getUserDetail$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.getUserDetail),
-      concatMap(({ usuario_id }) =>
-        this.userService.getUserDetail(usuario_id).pipe(
-          map((user_detail: Data.DetalleUsuario) =>
-            userActions.getUserDetailSuccess({ user_detail })
-          ),
-          catchError(error => of(userActions.getUserDetailError({ error })))
-        )
-      )
-    )
-  );
 
   deleteUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -216,32 +222,6 @@ export class UserEffects {
       ),
     { dispatch: false }
   );
-
-  getArea$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.getArea),
-      concatMap(({ interno }) =>
-        this.userService.getAreas(interno).pipe(
-          map((areas: Data.Area[]) => userActions.getAreaSuccess({ areas })),
-          catchError(error => of(userActions.getAreaError({ error })))
-        )
-      )
-    )
-  );
-
-  // getProvider$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(userActions.getProvider),
-  //     concatMap(({ interno }) =>
-  //       this.userService.getProveedores(interno).pipe(
-  //         map((proveedores: Data.Proveedor[]) =>
-  //           userActions.getProviderSuccess({ proveedores })
-  //         ),
-  //         catchError(error => of(userActions.getProviderError({ error })))
-  //       )
-  //     )
-  //   )
-  // );
 
   getContracts$ = createEffect(() =>
     this.actions$.pipe(
@@ -338,24 +318,4 @@ export class UserEffects {
       ),
     { dispatch: false }
   );
-
-  // getPosiblesSuperiores$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(userActions.getGetPosiblesSuperiores),
-  //     concatMap(({ proveedor_id, area_id, contratos_marco_id }) =>
-  //       this.userService
-  //         .getPosiblesSuperiores(proveedor_id, area_id, contratos_marco_id)
-  //         .pipe(
-  //           map(posiblesSuperiores =>
-  //             userActions.getGetPosiblesSuperioresSuccess({
-  //               posiblesSuperiores,
-  //             })
-  //           ),
-  //           catchError(error =>
-  //             of(userActions.getGetPosiblesSuperioresError({ error }))
-  //           )
-  //         )
-  //     )
-  //   )
-  // );
 }

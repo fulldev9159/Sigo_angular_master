@@ -1,34 +1,3 @@
-export interface ResponseGetContrato4Cub {
-  data: {
-    items: ContratoMarco4Cub[];
-  };
-
-  pagination: {
-    total_pages: number;
-    items_per_page: number;
-    field_order: any[];
-    page: number;
-    total_items: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-
-export interface ContratoMarco4Cub {
-  id: number;
-  nombre: string;
-  tipo_contrato_id: string;
-  tipo_contrato_nombre: string;
-  activo: boolean;
-  fecha_inicio: Date;
-  fecha_termino: Date;
-  tipo_codigo: number;
-  tipo_glosa: string;
-}
-
 export interface DataRspGetAllContratos {
   contrato_marco_all: ContratoMarco[];
 }
@@ -69,6 +38,7 @@ export interface TableListContratosMarcos
   tipo_moneda: string;
 }
 
+/////
 export interface ReqEditContrato {
   contrato_marco_id: number;
   values: ValuesEditContrato;
@@ -93,4 +63,35 @@ export interface ReqActivarContrato {
   values: {
     activo: boolean;
   };
+}
+
+export interface ResponseGetContrato4Cub {
+  data: {
+    items: ContratoMarco4Cub[];
+  };
+
+  pagination: {
+    total_pages: number;
+    items_per_page: number;
+    field_order: any[];
+    page: number;
+    total_items: number;
+  };
+
+  status: {
+    description: string;
+    responseCode: number;
+  };
+}
+
+export interface ContratoMarco4Cub {
+  id: number;
+  nombre: string;
+  tipo_contrato_id: string;
+  tipo_contrato_nombre: string;
+  activo: boolean;
+  fecha_inicio: Date;
+  fecha_termino: Date;
+  tipo_codigo: number;
+  tipo_glosa: string;
 }

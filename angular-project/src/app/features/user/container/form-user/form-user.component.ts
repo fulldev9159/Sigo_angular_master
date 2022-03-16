@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 import {
   Perfil,
   PosiblesSuperiores,
-  Area,
+  Area4createUser,
   Proveedores4CreateUser,
 } from '@data';
 
@@ -69,7 +69,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   formUser: FormGroup = new FormGroup(this.formControls);
 
   proveedores4createUser$: Observable<Proveedores4CreateUser[]>;
-  areas$: Observable<Area[]>;
+  areas4createUser$: Observable<Area4createUser[]>;
   contracts$: Observable<Data.Contrato[]>;
   profiles$: Observable<Data.Perfil[]>;
   samecompanyusers$: Observable<PosiblesSuperiores[]>;
@@ -155,10 +155,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
   initObservables(): void {
     this.proveedores4createUser$ =
       this.userFacade.getAllProveedores4CreateUser$();
-    this.areas$ = this.userFacade.getAreas$().pipe(
-      map(areas => areas || []),
-      tap(areas => this.checkAreaAndEnable(areas))
-    );
+    this.areas4createUser$ = this.userFacade
+      .getAllarea4createUser$()
+      .pipe(tap(areas => this.checkAreaAndEnable(areas)));
     this.profiles$ = this.profileFacade.getProfile$().pipe(
       map(perfiles => {
         return perfiles || [];
@@ -226,9 +225,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
         if (proveedor_id !== null && proveedor_id !== undefined) {
           const radioProvider = this.formUser.get('provider').value;
           if (radioProvider === 'contratista') {
-            this.userFacade.getAreas(false);
+            this.userFacade.getAllarea4createUser(false);
           } else if (radioProvider === 'movistar') {
-            this.userFacade.getAreas(true);
+            this.userFacade.getAllarea4createUser(true);
           }
         } else {
           this.disableAreaFormControl();
@@ -281,7 +280,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   //  --- ENABLED ---
-  checkAreaAndEnable(areas: Data.Area[]): void {
+  checkAreaAndEnable(areas: Data.Area4createUser[]): void {
     if (areas.length > 0) {
       this.formUser.get('area_id').enable();
     } else {

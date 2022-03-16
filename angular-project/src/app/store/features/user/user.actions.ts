@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
 import {
-  PosiblesSuperiores,
   DataResponseGetAllUser,
   Response,
   DataResGetPerfilesUser,
@@ -9,6 +8,7 @@ import {
   RequestAgregarPerfilUsusario,
   DataGetPosiblesSuperiores,
   DataRspGetProveedores4CreateUser,
+  DataRspGetAllAreas4createUser,
 } from '@data';
 
 // GET ALL USER
@@ -114,36 +114,53 @@ export const getAllProveedores4CreateUserError = createAction(
   props<{ error: any }>()
 );
 
+// GET ALL AREAS 4 CREATE USER
+
+export const getAllAreas4CreateUser = createAction(
+  '[Area] getAllAreas4CreateUser',
+  props<{ interno: boolean }>()
+);
+
+export const getAllAreas4CreateUserSuccess = createAction(
+  '[Area] getAllAreas4CreateUser Success',
+  props<{ response: Response<DataRspGetAllAreas4createUser> }>()
+);
+
+export const getAllAreas4CreateUserError = createAction(
+  '[Area] getAllAreas4CreateUser Error',
+  props<{ error: any }>()
+);
+
 ///////////////////////////////////////
 
 // ::: Get user by ID
-export const getUserById = createAction('[User GetUserById] GET User');
+// export const getUserById = createAction('[User GetUserById] GET User');
 
-export const getUserByIdSuccess = createAction(
-  '[User GetUserById] GET User Success',
-  props<{ user: Data.User[] }>()
-);
+// export const getUserByIdSuccess = createAction(
+//   '[User GetUserById] GET User Success',
+//   props<{ user: Data.User[] }>()
+// );
 
-export const getUserByIdError = createAction(
-  '[User GetUserById] GET User Error',
-  props<{ error: any }>()
-);
+// export const getUserByIdError = createAction(
+//   '[User GetUserById] GET User Error',
+//   props<{ error: any }>()
+// );
 
-// ::: Get User Detail
-export const getUserDetail = createAction(
-  '[User getUserDetail] GET User Detail',
-  props<{ usuario_id: number }>()
-);
+// // ::: Get User Detail
+// export const getUserDetail = createAction(
+//   '[User getUserDetail] GET User Detail',
+//   props<{ usuario_id: number }>()
+// );
 
-export const getUserDetailSuccess = createAction(
-  '[User getUserDetailSuccess] GET User Detail Success',
-  props<{ user_detail: Data.DetalleUsuario }>()
-);
+// export const getUserDetailSuccess = createAction(
+//   '[User getUserDetailSuccess] GET User Detail Success',
+//   props<{ user_detail: Data.DetalleUsuario }>()
+// );
 
-export const getUserDetailError = createAction(
-  '[User getUserDetailError] GET User Detail Error',
-  props<{ error: any }>()
-);
+// export const getUserDetailError = createAction(
+//   '[User getUserDetailError] GET User Detail Error',
+//   props<{ error: any }>()
+// );
 
 // Delete User
 export const deleteUser = createAction(
@@ -176,38 +193,6 @@ export const activateUserError = createAction(
   '[User Activate ById] ACTIVATE User Error',
   props<{ error: any }>()
 );
-
-// Areas
-export const getArea = createAction(
-  '[Area GetAll] GET Area',
-  props<{ interno: boolean }>()
-);
-
-export const getAreaSuccess = createAction(
-  '[Area GetAll] GET Area Success',
-  props<{ areas: Data.Area[] }>()
-);
-
-export const getAreaError = createAction(
-  '[Area GetAll] GET Area Error',
-  props<{ error: any }>()
-);
-
-//  Proveedor
-// export const getProvider = createAction(
-//   '[Provider GetAll] GET Provider',
-//   props<{ interno: boolean }>()
-// );
-
-// export const getProviderSuccess = createAction(
-//   '[Provider GetAll] GET Provider Success',
-//   props<{ proveedores: Data.Proveedor[] }>()
-// );
-
-// export const getProviderError = createAction(
-//   '[Provider GetAll] GET Provider Error',
-//   props<{ error: any }>()
-// );
 
 // Contratos
 export const getContracts = createAction(
@@ -257,25 +242,6 @@ export const setDisplayDetalleModal = createAction(
   '[User Set DisplayDetalleModal] SET Usuario',
   props<{ value: boolean }>()
 );
-
-// export const getGetPosiblesSuperiores = createAction(
-//   '[User GetAll] GET All GetPosiblesSuperiores',
-//   props<{
-//     proveedor_id: number;
-//     area_id: number;
-//     contratos_marco_id: number[];
-//   }>()
-// );
-
-// export const getGetPosiblesSuperioresSuccess = createAction(
-//   '[User GetAll] GET All GetPosiblesSuperiores Success',
-//   props<{ posiblesSuperiores: PosiblesSuperiores[] }>()
-// );
-
-// export const getGetPosiblesSuperioresError = createAction(
-//   '[User GetAll] GET All GetPosiblesSuperiores Error',
-//   props<{ error: any }>()
-// );
 
 export const resetData = createAction('[ResetData] ResetData');
 export const resetArea = createAction('[User] Reset Area');

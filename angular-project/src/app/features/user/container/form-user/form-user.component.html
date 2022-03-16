@@ -77,7 +77,7 @@
                     <app-select [control]="formControls.area_id" label="* Área">
                       <ng-container options>
                         <option value="null" selected disabled>Seleccione área</option>
-                        <ng-container *ngFor="let area of areas$ | async">
+                        <ng-container *ngFor="let area of areas4createUser$ | async">
                           <option [value]="area.id">
                             {{ area.nombre }}
                           </option>

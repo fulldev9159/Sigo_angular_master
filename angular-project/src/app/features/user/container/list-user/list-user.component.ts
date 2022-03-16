@@ -22,8 +22,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ListUserComponent implements OnInit {
   subscription: Subscription = new Subscription();
-  public DisplayModal$ = of();
-  public usersTableData$: Observable<TableUserData[]>;
+  DisplayModal$ = of();
+  usersTableData$: Observable<TableUserData[]>;
   perfilesUser$: Observable<ListPerfilesUser[]>;
   allPerfiles$: Observable<Perfil[]>;
   posiblesSuperiores$: Observable<PosiblesSuperiores[]>;

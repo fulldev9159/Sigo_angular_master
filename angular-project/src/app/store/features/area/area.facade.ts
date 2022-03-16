@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Area, RequestEditArea } from '@data';
+import { Area4createUser, RequestEditArea } from '@data';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as areaActions from './area.actions';
@@ -19,7 +19,7 @@ export class AreaFacade {
     this.store.dispatch(areaActions.getAreas());
   }
 
-  public getAreas$(): Observable<Area[]> {
+  public getAreas$(): Observable<Area4createUser[]> {
     return this.store.select(areaSelectors.getAreas);
   }
 
@@ -27,7 +27,7 @@ export class AreaFacade {
     this.store.dispatch(areaActions.getArea({ area_id }));
   }
 
-  public getAreaSelected$(): Observable<Area> {
+  public getAreaSelected$(): Observable<Area4createUser> {
     return this.store.select(areaSelectors.getAreaSelected);
   }
 
