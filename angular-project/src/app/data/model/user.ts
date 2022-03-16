@@ -1,7 +1,7 @@
 import { ContratoMarco4Cub } from '@data';
 import { Area } from './area';
 
-//
+// REQ RESP GET ALL USERS
 export interface DataResponseGetAllUser {
   usuarios: User[];
 }
@@ -47,6 +47,7 @@ export interface User {
   // area_nombre: string;
 }
 
+// LIST USERS
 export interface TableUserData {
   id: number;
   username: string;
@@ -58,6 +59,7 @@ export interface TableUserData {
   estado: boolean;
 }
 
+// LIST PERFILES USER
 export interface ListPerfilesUser {
   id: number;
   perfil_propio: boolean;
@@ -68,9 +70,21 @@ export interface ListPerfilesUser {
   superior: string;
 }
 
-export interface RequestAgregarPerfilUsusario {
+// REQ RESP POSIBLES SUPERIORES
+export interface DataGetPosiblesSuperiores {
+  items: PosiblesSuperiores[];
+}
+
+export interface PosiblesSuperiores {
   perfil_id: number;
+  perfil_nombre: string;
+  proxy_id: number;
+  usuario_nombre: string;
+}
+
+export interface RequestAgregarPerfilUsusario {
   usuario_id: number;
+  perfil_id: number;
   superior_id: number;
 }
 

@@ -9,7 +9,12 @@ import * as userActions from './user.actions';
 import * as Data from '@data';
 
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import { AuthService, PerfilService, AlertMessageActions } from '@data';
+import {
+  AuthService,
+  PerfilService,
+  AlertMessageActions,
+  ProveedorService,
+} from '@data';
 @Injectable()
 export class UserEffects {
   constructor(
@@ -17,6 +22,7 @@ export class UserEffects {
     private userService: Data.UserService,
     private authService: AuthService,
     private perfilService: PerfilService,
+    private proveedorService: ProveedorService,
     private snackService: SnackBarService,
     private alertMessageAction: AlertMessageActions,
     private router: Router,
@@ -62,8 +68,8 @@ export class UserEffects {
   getPosibleSuperior$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getPosiblesSuperiores),
-      concatMap(({ perfil_id }) =>
-        this.userService.getPosiblesSuperiores(perfil_id).pipe(
+      concatMap(({ usuario_id, usuario_perfil }) =>
+        this.userService.getPosiblesSuperiores(usuario_id, usuario_perfil).pipe(
           map(response =>
             userActions.getPosiblesSuperioresSuccess({ response })
           ),
@@ -91,6 +97,21 @@ export class UserEffects {
     )
   );
 
+  getAllProveedores$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getAllProveedores4CreateUser),
+      concatMap(({ interno }) =>
+        this.proveedorService.getAllProveedores4CreateUser(interno).pipe(
+          map(response =>
+            userActions.getAllProveedores4CreateUserSuccess({ response })
+          ),
+          catchError(error =>
+            of(userActions.getAllProveedores4CreateUserError({ error }))
+          )
+        )
+      )
+    )
+  );
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -107,6 +128,21 @@ export class UserEffects {
     { dispatch: false }
   );
 
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(userActions.agregarPerfilUsuarioError),
+        tap(action =>
+          this.alertMessageAction.messageActions(
+            action.error.error.status.code,
+            action.error.error.status.desc,
+            action.type,
+            action
+          )
+        )
+      ),
+    { dispatch: false }
+  );
   //////////////////////////////
   getUserDetail$ = createEffect(() =>
     this.actions$.pipe(
@@ -193,19 +229,19 @@ export class UserEffects {
     )
   );
 
-  getProvider$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.getProvider),
-      concatMap(({ interno }) =>
-        this.userService.getProveedores(interno).pipe(
-          map((proveedores: Data.Proveedor[]) =>
-            userActions.getProviderSuccess({ proveedores })
-          ),
-          catchError(error => of(userActions.getProviderError({ error })))
-        )
-      )
-    )
-  );
+  // getProvider$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(userActions.getProvider),
+  //     concatMap(({ interno }) =>
+  //       this.userService.getProveedores(interno).pipe(
+  //         map((proveedores: Data.Proveedor[]) =>
+  //           userActions.getProviderSuccess({ proveedores })
+  //         ),
+  //         catchError(error => of(userActions.getProviderError({ error })))
+  //       )
+  //     )
+  //   )
+  // );
 
   getContracts$ = createEffect(() =>
     this.actions$.pipe(

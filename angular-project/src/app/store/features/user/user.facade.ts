@@ -9,6 +9,7 @@ import {
   Perfil,
   PerfilesUser,
   PosiblesSuperiores,
+  Proveedores4CreateUser,
   RequestAgregarPerfilUsusario,
   User,
 } from '@data';
@@ -56,19 +57,31 @@ export class UserFacade {
   }
 
   // GET POSIBLES SUPERIORES
-  public getPosiblesSuperiores(usuario_id: number, perfil_id: number): void {
+  public getPosiblesSuperiores(
+    usuario_id: number,
+    usuario_perfil: number
+  ): void {
     this.store.dispatch(
-      userActions.getPosiblesSuperiores({ usuario_id, perfil_id })
+      userActions.getPosiblesSuperiores({ usuario_id, usuario_perfil })
     );
   }
 
-  public getPosiblesSuperiores$(): Observable<Perfil[]> {
+  public getPosiblesSuperiores$(): Observable<PosiblesSuperiores[]> {
     return this.store.select(userSelectors.getPosiblesSuperiores);
   }
 
   // AGREGAR PERFIL USUARIO
   public agregarPerfilUsuario(request: RequestAgregarPerfilUsusario): void {
     this.store.dispatch(userActions.agregarPerfilUsuario({ request }));
+  }
+
+  // GET ALL PROVEEDORES 4 CREATE USER
+  public getAllProveedores4CreateUser(interno: boolean): void {
+    this.store.dispatch(userActions.getAllProveedores4CreateUser({ interno }));
+  }
+
+  public getAllProveedores4CreateUser$(): Observable<Proveedores4CreateUser[]> {
+    return this.store.select(userSelectors.getAllProveedores4CreateUser);
   }
 
   // ///// /////////////////
@@ -92,13 +105,13 @@ export class UserFacade {
   // AREAS
 
   // PROVIDERS
-  public getProviders(interno: boolean): void {
-    this.store.dispatch(userActions.getProvider({ interno }));
-  }
+  // public getProviders(interno: boolean): void {
+  //   this.store.dispatch(userActions.getProvider({ interno }));
+  // }
 
-  public getProviders$(): Observable<Data.Proveedor[]> {
-    return this.store.select(userSelectors.getProviders);
-  }
+  // public getProviders$(): Observable<Data.Proveedor[]> {
+  //   return this.store.select(userSelectors.getProviders);
+  // }
   // PROVIDERS
 
   // CONTRACT

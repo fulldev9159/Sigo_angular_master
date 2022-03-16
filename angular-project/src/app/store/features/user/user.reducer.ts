@@ -1,7 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Data from '@data';
-import { Perfil, PerfilesUser, PosiblesSuperiores, User } from '@data';
+import {
+  Perfil,
+  PerfilesUser,
+  PosiblesSuperiores,
+  Proveedores4CreateUser,
+  User,
+} from '@data';
 
 export const UserFeatureKey = 'user';
 
@@ -10,9 +16,9 @@ export interface StateUser {
   perfilesUser: PerfilesUser[];
   displayModalPerfilesUser: boolean;
   allPerfiles: Perfil[];
-  posiblesSuperiores: any[];
+  posiblesSuperiores: PosiblesSuperiores[];
+  proveedores4createUser: Proveedores4CreateUser[];
   areas: Data.Area[];
-  proveedores: Data.Proveedor[];
   contratos: Data.Contrato[];
   alldatauser: Data.UserWithDetail;
   displayDetalleModal: boolean;
@@ -24,8 +30,8 @@ export const initialStateUser: StateUser = {
   displayModalPerfilesUser: false,
   allPerfiles: [],
   posiblesSuperiores: [],
+  proveedores4createUser: [],
   areas: [],
-  proveedores: [],
   contratos: [],
   alldatauser: null,
   displayDetalleModal: false,
@@ -69,8 +75,15 @@ export const reducerUser = createReducer(
 
   on(UserActions.getPosiblesSuperioresSuccess, (state, { response }) => ({
     ...state,
-    posiblesSuperiores: response.data.posibles,
+    posiblesSuperiores: response.data.items,
   })),
+  on(
+    UserActions.getAllProveedores4CreateUserSuccess,
+    (state, { response }) => ({
+      ...state,
+      proveedores4createUser: response.data.proveedor_array,
+    })
+  ),
   //  ////
   on(UserActions.getUserDetail, state => state),
   on(UserActions.getUserDetailSuccess, (state, payload) => ({
@@ -84,11 +97,11 @@ export const reducerUser = createReducer(
     areas: payload.areas,
   })),
 
-  on(UserActions.getProvider, state => state),
-  on(UserActions.getProviderSuccess, (state, payload) => ({
-    ...state,
-    proveedores: payload.proveedores,
-  })),
+  // on(UserActions.getProvider, state => state),
+  // on(UserActions.getProviderSuccess, (state, payload) => ({
+  //   ...state,
+  //   proveedores: payload.proveedores,
+  // })),
 
   on(UserActions.getContracts, state => state),
   on(UserActions.getContractsSuccess, (state, payload) => ({

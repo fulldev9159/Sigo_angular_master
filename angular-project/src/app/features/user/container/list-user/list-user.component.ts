@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subscription } from 'rxjs';
-import * as Data from '@data';
-import { map } from 'rxjs/operators';
+// import * as Data from '@data';
+import { map, withLatestFrom } from 'rxjs/operators';
 import {
   ListPerfilesUser,
   Perfil,
+  PosiblesSuperiores,
   RequestAgregarPerfilUsusario,
   TableUserData,
   User,
@@ -25,16 +26,7 @@ export class ListUserComponent implements OnInit {
   public usersTableData$: Observable<TableUserData[]>;
   perfilesUser$: Observable<ListPerfilesUser[]>;
   allPerfiles$: Observable<Perfil[]>;
-  posiblesSuperiores$: Observable<any[]> = of([
-    {
-      user_id: 1,
-      nombre: 'Juanito Perez (Administrador de sistema)',
-    },
-    {
-      user_id: 2,
-      nombre: 'Pepito los palotes (Gestor)',
-    },
-  ]);
+  posiblesSuperiores$: Observable<PosiblesSuperiores[]>;
   displayModalPerfilesUser$: Observable<boolean>;
   nombreUsuario: string;
   usuario_id: number;
@@ -129,7 +121,7 @@ export class ListUserComponent implements OnInit {
           icon: ' pi pi-pencil',
           class: 'p-button-text p-button-sm',
           label: 'Editar',
-          onClick: (event: Event, item: Data.User) => {
+          onClick: (event: Event, item: User) => {
             if (item) {
               this.router.navigate(['/app/user/form-user', item.id]);
             }
@@ -139,7 +131,7 @@ export class ListUserComponent implements OnInit {
           icon: 'pi pi-eye',
           class: 'p-button-text p-button-sm',
           label: 'Detalle',
-          onClick: (event: Event, item: Data.User) => {
+          onClick: (event: Event, item: User) => {
             // this.userFacade.getAllDataUsuario(item.id);
           },
         },
@@ -147,7 +139,7 @@ export class ListUserComponent implements OnInit {
           icon: 'pi pi-trash',
           class: 'p-button-text p-button-danger p-button-sm',
           label: 'Eliminar',
-          onClick: (event: Event, item: Data.User) => {
+          onClick: (event: Event, item: User) => {
             // if (item.eliminable) {
             this.confirmationService.confirm({
               target: event.target as EventTarget,
@@ -167,7 +159,7 @@ export class ListUserComponent implements OnInit {
           class: 'p-button-text p-button-danger p-button-sm',
           labelVariable: true,
           label: 'activo',
-          onClick: (event: Event, item: Data.User) => {
+          onClick: (event: Event, item: User) => {
             // if (item.eliminable) {
             const txt = item.estado ? 'Bloquear' : 'Activar';
             this.confirmationService.confirm({
@@ -243,8 +235,25 @@ export class ListUserComponent implements OnInit {
         }
       })
     );
-    this.allPerfiles$ = this.userFacade.gelAllPerfiles$();
-    // this.posiblesSuperiores$ = this.userFacade.getPosiblesSuperiores$();
+    this.allPerfiles$ = this.userFacade.gelAllPerfiles$().pipe(
+      withLatestFrom(this.perfilesUser$),
+      map(([allperfiles, listPerfilesuser]) => {
+        if (allperfiles && listPerfilesuser) {
+          return allperfiles.filter(perfil => {
+            // console.log('listPerfilesuser', listPerfilesuser);
+            const perfilesUser: number[] = listPerfilesuser.map(
+              userperfil => userperfil.id
+            );
+            // console.log('IDSES USUARIO', perfilesUser);
+            // console.log('ID', perfil.id);
+            // console.log('INCLUDES', perfilesUser.includes(perfil.id));
+            // console.log('Return', !perfilesUser.includes(perfil.id));
+            return !perfilesUser.includes(perfil.id);
+          });
+        }
+      })
+    );
+    this.posiblesSuperiores$ = this.userFacade.getPosiblesSuperiores$();
     this.DisplayModal$ = this.userFacade.DisplayDetalleModal$();
     this.displayModalPerfilesUser$ =
       this.userFacade.displayModalPerfilesUser$();
@@ -253,8 +262,8 @@ export class ListUserComponent implements OnInit {
       this.formAddPerfil.get('perfil_id').valueChanges.subscribe(perfil_id => {
         if (perfil_id) {
           this.formAddPerfil.get('superior_id').enable({ emitEvent: false });
-          console.log(perfil_id);
-          console.log(this.usuario_id);
+          this.formAddPerfil.get('superior_id').setValue(null);
+          this.userFacade.getPosiblesSuperiores(+this.usuario_id, +perfil_id);
         }
       })
     );
@@ -273,10 +282,15 @@ export class ListUserComponent implements OnInit {
     const request: RequestAgregarPerfilUsusario = {
       perfil_id: +this.formAddPerfil.get('perfil_id').value,
       usuario_id: this.usuario_id,
-      superior_id: +this.formAddPerfil.get('superior_id'),
+      superior_id:
+        this.formAddPerfil.get('superior_id').value === 'NaN'
+          ? null
+          : +this.formAddPerfil.get('superior_id').value,
     };
 
     console.log(request);
+
+    this.userFacade.agregarPerfilUsuario(request);
   }
 
   ngOnDestroy(): void {

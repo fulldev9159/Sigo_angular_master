@@ -10,7 +10,10 @@ import {
   DataResponseGetAllUser,
   Response,
 } from '@data';
-import { RequestAgregarPerfilUsusario } from '@data/model';
+import {
+  DataGetPosiblesSuperiores,
+  RequestAgregarPerfilUsusario,
+} from '@data/model';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,19 +34,30 @@ export class UserService {
     );
   }
 
-  getPosiblesSuperiores(perfil_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.apiUrl}/usuario/get_all`, {
-      perfil_id,
-    });
+  getPosiblesSuperiores(
+    usuario_id: number,
+    usuario_perfil: number
+  ): Observable<Response<any>> {
+    return this.http.post<Response<DataGetPosiblesSuperiores>>(
+      `${this.apiUrl}/usuario/posibles_superiores/get`,
+      {
+        usuario_id,
+        usuario_perfil,
+      }
+    );
   }
 
   agregarPerfilUser(
     request: RequestAgregarPerfilUsusario
   ): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.apiUrl}`, {
-      request,
-    });
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/usuarioproxy/create`,
+      {
+        request,
+      }
+    );
   }
+
   //   ///
 
   getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {

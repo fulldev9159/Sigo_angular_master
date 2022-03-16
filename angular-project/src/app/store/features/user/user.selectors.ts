@@ -25,15 +25,22 @@ export const getAllPerfiles = createSelector(
   (state: fromUser.StateUser) => state.allPerfiles
 );
 
+export const getPosiblesSuperiores = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.posiblesSuperiores
+);
+export const getDisplayDetalleModal = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.displayDetalleModal
+);
+export const getAllProveedores4CreateUser = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.proveedores4createUser
+);
 ////////////
 export const getAreas = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.areas
-);
-
-export const getProviders = createSelector(
-  selectUser,
-  (state: fromUser.StateUser) => state.proveedores
 );
 
 export const getContracts = createSelector(
@@ -44,14 +51,4 @@ export const getContracts = createSelector(
 export const getAllDataUser = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.alldatauser
-);
-
-export const getDisplayDetalleModal = createSelector(
-  selectUser,
-  (state: fromUser.StateUser) => state.displayDetalleModal
-);
-
-export const getPosiblesSuperiores = createSelector(
-  selectUser,
-  (state: fromUser.StateUser) => state.posiblesSuperiores
 );

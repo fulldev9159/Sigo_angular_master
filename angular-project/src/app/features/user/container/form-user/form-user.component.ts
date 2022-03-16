@@ -10,7 +10,12 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import * as Data from '@data';
 
 import * as _ from 'lodash';
-import { Perfil, PosiblesSuperiores, Area } from '@data';
+import {
+  Perfil,
+  PosiblesSuperiores,
+  Area,
+  Proveedores4CreateUser,
+} from '@data';
 
 @Component({
   selector: 'app-form-user',
@@ -63,7 +68,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   formUser: FormGroup = new FormGroup(this.formControls);
 
-  proveedores$: Observable<Data.Proveedor[]>;
+  proveedores4createUser$: Observable<Proveedores4CreateUser[]>;
   areas$: Observable<Area[]>;
   contracts$: Observable<Data.Contrato[]>;
   profiles$: Observable<Data.Perfil[]>;
@@ -97,7 +102,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.userFacade
         .getAllDataUsuario$()
-        .pipe(withLatestFrom(this.proveedores$))
+        .pipe(withLatestFrom(this.proveedores4createUser$))
         .subscribe(([user, proveedores]) => {
           if (user) {
             this.formUser.get('id').setValue(user.id);
@@ -148,9 +153,8 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   initObservables(): void {
-    this.proveedores$ = this.userFacade
-      .getProviders$()
-      .pipe(map(perfiles => perfiles || []));
+    this.proveedores4createUser$ =
+      this.userFacade.getAllProveedores4CreateUser$();
     this.areas$ = this.userFacade.getAreas$().pipe(
       map(areas => areas || []),
       tap(areas => this.checkAreaAndEnable(areas))
@@ -182,6 +186,10 @@ export class FormUserComponent implements OnInit, OnDestroy {
       map(contratos => contratos || []),
       tap(contratos => this.checkContratosAndEnable(contratos))
     );
+
+    this.proveedores4createUser$.subscribe(perfiles => {
+      console.log(perfiles);
+    });
     // this.samecompanyusers$ = this.userFacade.getPosiblesSuperiores$().pipe(
     //   map(usuarios => usuarios || []),
     //   tap(usuarios => this.checkSuperioresAndEnable(usuarios))
@@ -202,9 +210,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
         this.resetAreaFormControl();
         this.userFacade.resetContratos();
         if (provider === 'movistar') {
-          this.userFacade.getProviders(true);
+          this.userFacade.getAllProveedores4CreateUser(true);
         } else if (provider === 'contratista') {
-          this.userFacade.getProviders(false);
+          this.userFacade.getAllProveedores4CreateUser(false);
         }
       })
     );
@@ -327,7 +335,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   // --- INIT DATA ---
   initData(): void {
-    this.userFacade.getProviders(true);
+    this.userFacade.getAllProveedores4CreateUser(true);
     this.profileFacade.getProfile();
   }
 

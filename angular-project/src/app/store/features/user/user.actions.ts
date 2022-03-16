@@ -7,6 +7,8 @@ import {
   DataResGetPerfilesUser,
   DataRspGetAllPerfiles,
   RequestAgregarPerfilUsusario,
+  DataGetPosiblesSuperiores,
+  DataRspGetProveedores4CreateUser,
 } from '@data';
 
 // GET ALL USER
@@ -64,13 +66,13 @@ export const getPosiblesSuperiores = createAction(
   '[User] GET getPosiblesSuperiores',
   props<{
     usuario_id: number;
-    perfil_id: number;
+    usuario_perfil: number;
   }>()
 );
 
 export const getPosiblesSuperioresSuccess = createAction(
   '[User] GET getPosiblesSuperiores Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<DataGetPosiblesSuperiores> }>()
 );
 
 export const getPosiblesSuperioresError = createAction(
@@ -93,6 +95,22 @@ export const agregarPerfilUsuarioSuccess = createAction(
 
 export const agregarPerfilUsuarioError = createAction(
   '[User] GET agregarPerfilUsuario Error',
+  props<{ error: any }>()
+);
+
+// GET ALL PROVEEDORES 4 CREATE USER
+export const getAllProveedores4CreateUser = createAction(
+  '[User] GET getAllProveedores4CreateUser',
+  props<{ interno: boolean }>()
+);
+
+export const getAllProveedores4CreateUserSuccess = createAction(
+  '[User] GET getAllProveedores4CreateUser Success',
+  props<{ response: Response<DataRspGetProveedores4CreateUser> }>()
+);
+
+export const getAllProveedores4CreateUserError = createAction(
+  '[User] GET getAllProveedores4CreateUser Error',
   props<{ error: any }>()
 );
 
@@ -176,20 +194,20 @@ export const getAreaError = createAction(
 );
 
 //  Proveedor
-export const getProvider = createAction(
-  '[Provider GetAll] GET Provider',
-  props<{ interno: boolean }>()
-);
+// export const getProvider = createAction(
+//   '[Provider GetAll] GET Provider',
+//   props<{ interno: boolean }>()
+// );
 
-export const getProviderSuccess = createAction(
-  '[Provider GetAll] GET Provider Success',
-  props<{ proveedores: Data.Proveedor[] }>()
-);
+// export const getProviderSuccess = createAction(
+//   '[Provider GetAll] GET Provider Success',
+//   props<{ proveedores: Data.Proveedor[] }>()
+// );
 
-export const getProviderError = createAction(
-  '[Provider GetAll] GET Provider Error',
-  props<{ error: any }>()
-);
+// export const getProviderError = createAction(
+//   '[Provider GetAll] GET Provider Error',
+//   props<{ error: any }>()
+// );
 
 // Contratos
 export const getContracts = createAction(
