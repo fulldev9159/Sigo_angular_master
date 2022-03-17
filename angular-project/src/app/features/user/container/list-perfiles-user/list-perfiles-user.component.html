@@ -22,7 +22,8 @@
   <ng-container modal-content>
     <div class="row">
       <div class="col">
-        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Nuevo perfil</p>
+        <p *ngIf="addMode" style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Nuevo perfil</p>
+        <p *ngIf="!addMode" style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Editar superior</p>
         <div style="padding: 0 9rem 0 9rem;">
           <div class="row">
             <div class="col">

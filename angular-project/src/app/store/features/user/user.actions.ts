@@ -11,6 +11,7 @@ import {
   DataRspGetAllAreas4createUser,
   User,
   DataRspAgregarPerfilUsuario,
+  ListPerfilesUserType,
 } from '@data';
 
 // GET ALL USER
@@ -153,8 +154,17 @@ export const SelectedUser4AddPerfilError = createAction(
   props<{ error: any }>()
 );
 
+//  STORE PERFIL SELECTED
+export const PerfilSelected = createAction(
+  '[User] PerfilSelected',
+  props<{ perfil: ListPerfilesUserType }>()
+);
+
 //  RESET DATA
 export const resetData = createAction('[ResetData] ResetData');
+export const resetPerfilSelected = createAction(
+  '[ResetData] resetPerfilSelected'
+);
 
 ///////////////////////////////////////
 

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
-import { User } from '@data';
+import { ListPerfilesUserType, User } from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +21,7 @@ export class ListPerfilesUserTableService {
         title: '',
         searchText: 'buscar...',
         paginator: true,
-        actionsType: 'Buttons',
+        actionsType: 'Menu',
       },
       body: {
         headers: [
@@ -70,10 +70,12 @@ export class ListPerfilesUserTableService {
           {
             icon: ' pi pi-pencil',
             class: 'p-button-text p-button-sm',
-            label: 'Editar',
-            onClick: (event: Event, item: User) => {
+            label: 'Editar superior',
+            onClick: (event: Event, item: ListPerfilesUserType) => {
               if (item) {
-                // this.router.navigate(['/app/user/form-user', item.id]);
+                this.userFacade.displayModalPerfilesUser(true);
+                this.userFacade.getAllPerfiles();
+                this.userFacade.perfilSelected(item);
               }
             },
           },

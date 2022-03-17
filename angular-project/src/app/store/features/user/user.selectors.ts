@@ -46,6 +46,11 @@ export const getSelectedUser4AddPerfil = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.selectedUser4AddPerfil
 );
+
+export const getPerfilSelected = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.perfilSelected
+);
 ////////////
 
 export const getContracts = createSelector(

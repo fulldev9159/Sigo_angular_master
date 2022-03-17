@@ -68,6 +68,7 @@ export interface ListPerfilesUserType {
   rol: string;
   nombre: string;
   superior: string;
+  superior_id: number;
 }
 
 // REQ RESP POSIBLES SUPERIORES

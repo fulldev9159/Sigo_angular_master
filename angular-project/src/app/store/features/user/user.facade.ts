@@ -7,6 +7,7 @@ import * as userSelectors from './user.selectors';
 import * as Data from '@data';
 import {
   Area,
+  ListPerfilesUserType,
   Perfil,
   PerfilesUser,
   PosiblesSuperiores,
@@ -99,6 +100,10 @@ export class UserFacade {
     this.store.dispatch(userActions.resetData());
   }
 
+  public resetPerfilSelected(): void {
+    this.store.dispatch(userActions.resetPerfilSelected());
+  }
+
   // GET SELECTED USER 4 ADD PERFIL
   public seletedUser4AddPerfil(usuario_id: number): void {
     this.store.dispatch(userActions.SelectedUser4AddPerfil({ usuario_id }));
@@ -106,6 +111,15 @@ export class UserFacade {
 
   public getseletedUser4AddPerfil$(): Observable<User> {
     return this.store.select(userSelectors.getSelectedUser4AddPerfil);
+  }
+
+  // PERFIL SELECTED
+  public perfilSelected(perfil: ListPerfilesUserType): void {
+    this.store.dispatch(userActions.PerfilSelected({ perfil }));
+  }
+
+  public perfilSelected$(): Observable<ListPerfilesUserType> {
+    return this.store.select(userSelectors.getPerfilSelected);
   }
 
   // ///// /////////////////
