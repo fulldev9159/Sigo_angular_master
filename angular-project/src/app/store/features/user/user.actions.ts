@@ -9,6 +9,7 @@ import {
   DataGetPosiblesSuperiores,
   DataRspGetProveedores4CreateUser,
   DataRspGetAllAreas4createUser,
+  User,
 } from '@data';
 
 // GET ALL USER
@@ -117,18 +118,24 @@ export const getAllProveedores4CreateUserError = createAction(
 // GET ALL AREAS 4 CREATE USER
 
 export const getAllAreas4CreateUser = createAction(
-  '[Area] getAllAreas4CreateUser',
+  '[User] getAllAreas4CreateUser',
   props<{ interno: boolean }>()
 );
 
 export const getAllAreas4CreateUserSuccess = createAction(
-  '[Area] getAllAreas4CreateUser Success',
+  '[User] getAllAreas4CreateUser Success',
   props<{ response: Response<DataRspGetAllAreas4createUser> }>()
 );
 
 export const getAllAreas4CreateUserError = createAction(
-  '[Area] getAllAreas4CreateUser Error',
+  '[User] getAllAreas4CreateUser Error',
   props<{ error: any }>()
+);
+
+//  STORE SELECTED USER 4 ADD PERFIL
+export const SelectedUser4AddPerfil = createAction(
+  '[User] SelectedUser4AddPerfil',
+  props<{ user: User }>()
 );
 
 ///////////////////////////////////////

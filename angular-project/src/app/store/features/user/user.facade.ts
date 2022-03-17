@@ -6,7 +6,7 @@ import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
 import * as Data from '@data';
 import {
-  Area4createUser,
+  Area,
   Perfil,
   PerfilesUser,
   PosiblesSuperiores,
@@ -90,8 +90,22 @@ export class UserFacade {
     this.store.dispatch(userActions.getAllAreas4CreateUser({ interno }));
   }
 
-  public getAllarea4createUser$(): Observable<Area4createUser[]> {
+  public getAllarea4createUser$(): Observable<Area[]> {
     return this.store.select(userSelectors.getallAreas4createUser);
+  }
+
+  // RESET ALL DATA
+  public resetData(): void {
+    this.store.dispatch(userActions.resetData());
+  }
+
+  // GET SELECTED USER 4 ADD PERFIL
+  public seletedUser4AddPerfil(user: User): void {
+    this.store.dispatch(userActions.SelectedUser4AddPerfil({ user }));
+  }
+
+  public getseletedUser4AddPerfil$(): Observable<User> {
+    return this.store.select(userSelectors.getSelectedUser4AddPerfil);
   }
 
   // ///// /////////////////
@@ -126,10 +140,6 @@ export class UserFacade {
     this.store.dispatch(userActions.editUser({ editUserRequest: request }));
   }
   // USER EDIT
-
-  public resetData(): void {
-    this.store.dispatch(userActions.resetData());
-  }
 
   public resetArea(): void {
     this.store.dispatch(userActions.resetArea());

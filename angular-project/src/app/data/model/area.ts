@@ -1,8 +1,12 @@
-export interface DataRspGetAllAreas4createUser {
-  area_array: Area4createUser[];
+export interface DataRspGetAreas {
+  area_all: Area[];
 }
 
-export interface Area4createUser {
+export interface DataRspGetAllAreas4createUser {
+  area_array: Area[];
+}
+
+export interface Area {
   activa: boolean;
   created_at: Date;
   deleted_at: Date;

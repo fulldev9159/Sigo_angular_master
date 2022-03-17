@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 import {
   Perfil,
   PosiblesSuperiores,
-  Area4createUser,
+  Area,
   Proveedores4CreateUser,
 } from '@data';
 
@@ -69,7 +69,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   formUser: FormGroup = new FormGroup(this.formControls);
 
   proveedores4createUser$: Observable<Proveedores4CreateUser[]>;
-  areas4createUser$: Observable<Area4createUser[]>;
+  areas4createUser$: Observable<Area[]>;
   contracts$: Observable<Data.Contrato[]>;
   profiles$: Observable<Data.Perfil[]>;
   samecompanyusers$: Observable<PosiblesSuperiores[]>;
@@ -280,7 +280,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   //  --- ENABLED ---
-  checkAreaAndEnable(areas: Data.Area4createUser[]): void {
+  checkAreaAndEnable(areas: Data.Area[]): void {
     if (areas.length > 0) {
       this.formUser.get('area_id').enable();
     } else {

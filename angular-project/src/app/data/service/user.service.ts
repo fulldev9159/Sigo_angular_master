@@ -167,7 +167,7 @@ export class UserService {
       );
   }
 
-  getAreas(interno: boolean): Observable<Data.Area4createUser[]> {
+  getAreas(interno: boolean): Observable<Data.Area[]> {
     return this.http
       .post<Data.AreaResponse>(`${this.apiUrl}/areas/get`, { interno })
       .pipe(

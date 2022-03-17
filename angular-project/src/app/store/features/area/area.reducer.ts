@@ -1,12 +1,12 @@
-import { Area4createUser } from '@data';
+import { Area } from '@data';
 import { createReducer, on } from '@ngrx/store';
 import * as areaActions from './area.actions';
 
 export const FeatureKey = 'area';
 
 export interface StateArea {
-  areas: Area4createUser[];
-  areaSelected: Area4createUser;
+  areas: Area[];
+  areaSelected: Area;
 }
 
 export const initialStateArea: StateArea = {

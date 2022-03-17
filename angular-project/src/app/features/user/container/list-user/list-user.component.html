@@ -12,68 +12,12 @@
     </div>
   </div>
   <app-table [config]="configTable" [items]="(usersTableData$ | async)"></app-table>
-  <!-- <app-modal [display]="DisplayModal$|async" (CloseEvent)="cerrarDisplayModal(false)" [style]="{width: '50vw'}">
-    <ng-container modal-header-title>Detalles del usuario <strong>{{(userDetail$|async)?.username}}</strong> </ng-container>
-    <ng-container modal-content>
-      <div class="row">
-        <div class="col-xs-12 col-md-6 pt-2" id="detalle_contrato_marco">
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <h5 class="card-header">Contratos</h5>
-                <div class="card-body">
-                  <p-listbox [options]="(userDetail$|async)?.contratos_marco" optionLabel="contratos_marco" optionDisabled="inactive" [disabled]="true">
-                    <ng-template let-contrato pTemplate="item">
-                      {{contrato.nombre}}
-                    </ng-template>
-                  </p-listbox>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <h5 class="card-header">Información adicional</h5>
-                <div class="card-body">
-                  <p><strong>Email:</strong> {{(userDetail$|async)?.email}}</p>
-                  <p><strong>Celular:</strong> {{(userDetail$|async)?.celular}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
-          <div class="card">
-            <h5 class="card-header">Periles</h5>
-            <div class="card-body">
-              <p-listbox [options]="(userDetail$|async)?.perfiles" optionLabel="perfil" optionDisabled="inactive" [disabled]="true">
-                <ng-template let-perfil pTemplate="item">
-                  <p> {{perfil.nombre}}</p>
-                </ng-template>
-              </p-listbox>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
-          <div class="card">
-            <h5 class="card-header">Superior</h5>
-            <div class="card-body">
-              {{(userDetail$|async)?.perfiles[0].persona_a_cargo_nombre}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <ng-container modal-footer></ng-container>
-  </app-modal> -->
 </div>
 
 
 
 <app-modal [display]="displayModalPerfilesUser$|async" (CloseEvent)="closeAddPerfil()" [style]="{width: '50vw'}">
-  <ng-container modal-header-title><strong>Agregar un perfil a {{nombreUsuario}}</strong></ng-container>
+  <ng-container modal-header-title><strong>Agregar un perfil a {{(userSelected4addPerfil$|async)?.nombres}}</strong></ng-container>
   <ng-container modal-content>
     <div class="row">
       <div class="col-md-3">

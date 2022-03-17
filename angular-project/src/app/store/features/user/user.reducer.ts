@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as UserActions from './user.actions';
 import * as Data from '@data';
 import {
-  Area4createUser,
+  Area,
   Perfil,
   PerfilesUser,
   PosiblesSuperiores,
@@ -14,12 +14,13 @@ export const UserFeatureKey = 'user';
 
 export interface StateUser {
   users: User[];
+  selectedUser4AddPerfil: User;
   perfilesUser: PerfilesUser[];
   displayModalPerfilesUser: boolean;
   allPerfiles: Perfil[];
   posiblesSuperiores: PosiblesSuperiores[];
   proveedores4createUser: Proveedores4CreateUser[];
-  areas4createUser: Area4createUser[];
+  areas4createUser: Area[];
   contratos: Data.Contrato[];
   alldatauser: Data.UserWithDetail;
   displayDetalleModal: boolean;
@@ -27,6 +28,7 @@ export interface StateUser {
 
 export const initialStateUser: StateUser = {
   users: [],
+  selectedUser4AddPerfil: null,
   perfilesUser: [],
   displayModalPerfilesUser: false,
   allPerfiles: [],
@@ -85,10 +87,16 @@ export const reducerUser = createReducer(
       proveedores4createUser: response.data.proveedor_array,
     })
   ),
-
   on(UserActions.getAllAreas4CreateUserSuccess, (state, { response }) => ({
     ...state,
     areas4createUser: response.data.area_array,
+  })),
+  on(UserActions.resetData, (state, payload) => ({
+    ...initialStateUser,
+  })),
+  on(UserActions.SelectedUser4AddPerfil, (state, { user }) => ({
+    ...state,
+    selectedUser4AddPerfil: user,
   })),
   //  ////
 
@@ -96,9 +104,6 @@ export const reducerUser = createReducer(
   on(UserActions.getContractsSuccess, (state, payload) => ({
     ...state,
     contratos: payload.contratos,
-  })),
-  on(UserActions.resetData, (state, payload) => ({
-    ...initialStateUser,
   })),
   on(UserActions.resetArea, (state, payload) => ({
     ...state,
