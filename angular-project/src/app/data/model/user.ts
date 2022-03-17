@@ -93,6 +93,14 @@ export interface DataRspAgregarPerfilUsuario {
   usuarioproxy_id: number;
 }
 
+// UPDATE SUPERIOR PERFIL USUARIO
+export interface RequestUpdatePerfilUsusario {
+  usuarioproxy_id: number;
+  values: ValuesReqUpdatePerfilUsuario;
+}
+export interface ValuesReqUpdatePerfilUsuario {
+  superior_id: number;
+}
 ///
 // GET USER
 

@@ -14,6 +14,7 @@ import {
   DataGetPosiblesSuperiores,
   DataRspAgregarPerfilUsuario,
   RequestAgregarPerfilUsusario,
+  RequestUpdatePerfilUsusario,
 } from '@data/model';
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,15 @@ export class UserService {
   ): Observable<Response<DataRspAgregarPerfilUsuario>> {
     return this.http.post<Response<DataRspAgregarPerfilUsuario>>(
       `${this.apiUrl}/configuration/usuarioproxy/create`,
+      request
+    );
+  }
+
+  editarSuperiorPerfilUser(
+    request: RequestUpdatePerfilUsusario
+  ): Observable<Response<DataRspAgregarPerfilUsuario>> {
+    return this.http.post<Response<DataRspAgregarPerfilUsuario>>(
+      `${this.apiUrl}/usuario/usuarioproxy/update`,
       request
     );
   }

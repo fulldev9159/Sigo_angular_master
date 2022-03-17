@@ -13,6 +13,7 @@ import {
   PosiblesSuperiores,
   Proveedores4CreateUser,
   RequestAgregarPerfilUsusario,
+  RequestUpdatePerfilUsusario,
   User,
 } from '@data';
 
@@ -77,6 +78,13 @@ export class UserFacade {
     this.store.dispatch(userActions.agregarPerfilUsuario({ request }));
   }
 
+  // EDITAR SUPERIOR PERFIL USUARIO
+  public editarSuperiorPerfilUsuario(
+    request: RequestUpdatePerfilUsusario
+  ): void {
+    this.store.dispatch(userActions.editarSuperiorPerfilUsuario({ request }));
+  }
+
   // GET ALL PROVEEDORES 4 CREATE USER
   public getAllProveedores4CreateUser(interno: boolean): void {
     this.store.dispatch(userActions.getAllProveedores4CreateUser({ interno }));
@@ -123,6 +131,7 @@ export class UserFacade {
   }
 
   // ///// /////////////////
+
   // DELETE
   public deleteUser(usuario_id: number): void {
     this.store.dispatch(userActions.deleteUser({ usuario_id }));

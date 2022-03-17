@@ -145,7 +145,8 @@ export class AlertMessageActions {
     if (code === 0) {
       if (
         action === areaActions.updateAreaSuccess.type ||
-        action === contratoActions.updateContratoSuccess.type
+        action === contratoActions.updateContratoSuccess.type ||
+        action === userActions.editarSuperiorPerfilUsuarioSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
       } else if (

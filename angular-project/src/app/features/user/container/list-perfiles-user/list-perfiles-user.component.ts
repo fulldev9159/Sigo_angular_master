@@ -193,6 +193,8 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
     this.addMode = false;
   }
 
+  EditarSuperiorPerfil(): void {}
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

@@ -12,6 +12,7 @@ import {
   User,
   DataRspAgregarPerfilUsuario,
   ListPerfilesUserType,
+  RequestUpdatePerfilUsusario,
 } from '@data';
 
 // GET ALL USER
@@ -98,6 +99,24 @@ export const agregarPerfilUsuarioSuccess = createAction(
 
 export const agregarPerfilUsuarioError = createAction(
   '[User] GET agregarPerfilUsuario Error',
+  props<{ error: any }>()
+);
+
+// EDITAR SUPERIOR PERFIL A USUARIO
+export const editarSuperiorPerfilUsuario = createAction(
+  '[User] GET editarSuperiorPerfilUsuario',
+  props<{
+    request: RequestUpdatePerfilUsusario;
+  }>()
+);
+
+export const editarSuperiorPerfilUsuarioSuccess = createAction(
+  '[User] GET editarSuperiorPerfilUsuario Success',
+  props<{ response: Response<DataRspAgregarPerfilUsuario> }>()
+);
+
+export const editarSuperiorPerfilUsuarioError = createAction(
+  '[User] GET editarSuperiorPerfilUsuario Error',
   props<{ error: any }>()
 );
 

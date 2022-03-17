@@ -99,6 +99,22 @@ export class UserEffects {
     )
   );
 
+  editarSuperiorPerfilUsuario$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.editarSuperiorPerfilUsuario),
+      concatMap(({ request }) =>
+        this.userService.editarSuperiorPerfilUser(request).pipe(
+          map(response =>
+            userActions.editarSuperiorPerfilUsuarioSuccess({ response })
+          ),
+          catchError(error =>
+            of(userActions.editarSuperiorPerfilUsuarioError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   getAllProveedores$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getAllProveedores4CreateUser),
@@ -153,7 +169,8 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(
           userActions.getPerfilesUserSuccess,
-          userActions.agregarPerfilUsuarioSuccess
+          userActions.agregarPerfilUsuarioSuccess,
+          userActions.editarSuperiorPerfilUsuarioSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -170,7 +187,10 @@ export class UserEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(userActions.agregarPerfilUsuarioError),
+        ofType(
+          userActions.agregarPerfilUsuarioError,
+          userActions.editarSuperiorPerfilUsuarioError
+        ),
         tap(action =>
           this.alertMessageAction.messageActions(
             action.error.error.status.code,
