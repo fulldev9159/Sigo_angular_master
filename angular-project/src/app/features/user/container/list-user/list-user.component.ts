@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import {
@@ -13,12 +13,13 @@ import {
   User,
 } from '@data';
 import { ListUserTableService } from './list-user-table.service';
+import { ListUserFormService } from './list-user-form.service';
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.scss'],
 })
-export class ListUserComponent implements OnInit {
+export class ListUserComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   usersTableData$: Observable<TableUserData[]>;
   perfilesUser$: Observable<ListPerfilesUser[]>;
@@ -27,20 +28,15 @@ export class ListUserComponent implements OnInit {
   displayModalPerfilesUser$: Observable<boolean>;
   userSelected4addPerfil$: Observable<User>;
   usuario_id: number;
-
-  formAddControls = {
-    id: new FormControl(null),
-    perfil_id: new FormControl(null, [Validators.required]),
-    superior_id: new FormControl(null, [Validators.required]),
-  };
-
-  formAddPerfil: FormGroup = new FormGroup(this.formAddControls);
+  formAddControls: any;
+  formAddPerfil: FormGroup;
 
   configTable = null;
 
   constructor(
     private userFacade: UserFacade,
-    private listUserTableService: ListUserTableService
+    private listUserTableService: ListUserTableService,
+    private listUserFormService: ListUserFormService
   ) {}
 
   ngOnInit(): void {
@@ -50,16 +46,18 @@ export class ListUserComponent implements OnInit {
     this.onInitAccionesInicialesAdicionales();
   }
 
-  onInitResetInicial() {
+  onInitResetInicial(): void {
     this.userFacade.resetData();
   }
 
-  onInitCargarDataInicial() {
+  onInitCargarDataInicial(): void {
+    this.formAddControls = this.listUserFormService.FormConfig();
+    this.formAddPerfil = new FormGroup(this.formAddControls);
     this.configTable = this.listUserTableService.getTableConfig();
     this.userFacade.getAllUsers();
   }
 
-  onInitInicializarDataASync() {
+  onInitInicializarDataASync(): void {
     this.userSelected4addPerfil$ = this.userFacade.getseletedUser4AddPerfil$();
     this.usersTableData$ = this.userFacade.getAllUsers$().pipe(
       map(usuarios => {
@@ -115,7 +113,7 @@ export class ListUserComponent implements OnInit {
       this.userFacade.displayModalPerfilesUser$();
   }
 
-  onInitAccionesInicialesAdicionales() {
+  onInitAccionesInicialesAdicionales(): void {
     this.formAddPerfil.get('superior_id').disable({ emitEvent: false });
     this.subscription.add(
       this.formAddPerfil

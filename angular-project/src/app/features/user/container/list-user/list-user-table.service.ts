@@ -14,7 +14,7 @@ export class ListUserTableService {
     private userFacade: UserFacade,
     private confirmationService: ConfirmationService
   ) {}
-  getTableConfig() {
+  getTableConfig(): any {
     return {
       header: true,
       headerConfig: {

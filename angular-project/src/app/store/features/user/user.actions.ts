@@ -138,6 +138,9 @@ export const SelectedUser4AddPerfil = createAction(
   props<{ user: User }>()
 );
 
+//  RESET DATA
+export const resetData = createAction('[ResetData] ResetData');
+
 ///////////////////////////////////////
 
 // ::: Get user by ID
@@ -250,7 +253,6 @@ export const setDisplayDetalleModal = createAction(
   props<{ value: boolean }>()
 );
 
-export const resetData = createAction('[ResetData] ResetData');
 export const resetArea = createAction('[User] Reset Area');
 export const resetContratos = createAction('[User] Reset Contrartos');
 export const resetSuperiores = createAction('[User] Reset Superiores');
