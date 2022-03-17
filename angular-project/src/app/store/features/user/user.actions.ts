@@ -10,6 +10,7 @@ import {
   DataRspGetProveedores4CreateUser,
   DataRspGetAllAreas4createUser,
   User,
+  DataRspAgregarPerfilUsuario,
 } from '@data';
 
 // GET ALL USER
@@ -91,7 +92,7 @@ export const agregarPerfilUsuario = createAction(
 
 export const agregarPerfilUsuarioSuccess = createAction(
   '[User] GET agregarPerfilUsuarios Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<DataRspAgregarPerfilUsuario> }>()
 );
 
 export const agregarPerfilUsuarioError = createAction(
@@ -133,9 +134,23 @@ export const getAllAreas4CreateUserError = createAction(
 );
 
 //  STORE SELECTED USER 4 ADD PERFIL
+// export const SelectedUser4AddPerfil = createAction(
+//   '[User] SelectedUser4AddPerfil',
+//   props<{ user: User }>()
+// );
 export const SelectedUser4AddPerfil = createAction(
   '[User] SelectedUser4AddPerfil',
-  props<{ user: User }>()
+  props<{ usuario_id: number }>()
+);
+
+export const SelectedUser4AddPerfilSuccess = createAction(
+  '[User] SelectedUser4AddPerfil Success',
+  props<{ usuario_id: number; response: Response<DataResponseGetAllUser> }>()
+);
+
+export const SelectedUser4AddPerfilError = createAction(
+  '[User] SelectedUser4AddPerfil Error',
+  props<{ error: any }>()
 );
 
 //  RESET DATA

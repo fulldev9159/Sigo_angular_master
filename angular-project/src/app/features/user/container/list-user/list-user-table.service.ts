@@ -154,13 +154,14 @@ export class ListUserTableService {
           {
             icon: ' pi pi-plus',
             class: 'p-button-text p-button-danger p-button-sm',
-            label: 'Agregar Perfil',
+            label: 'Administrar Perfiles',
             onClick: (event: Event, item: User) => {
-              this.userFacade.getPerfilesUser(item.id);
-              this.userFacade.seletedUser4AddPerfil(item);
-              // this.nombreUsuario = item.nombres + ' ' + item.apellidos;
-              // this.usuario_id = item.id;
-              this.userFacade.getAllPerfiles();
+              // this.userFacade.getPerfilesUser(item.id);
+              // this.userFacade.seletedUser4AddPerfil(item);
+              // this.userFacade.getAllPerfiles();
+              if (item) {
+                this.router.navigate(['/app/user/list-perfiles-user', item.id]);
+              }
             },
           },
         ],

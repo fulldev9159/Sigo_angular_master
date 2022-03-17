@@ -12,6 +12,7 @@ import {
 } from '@data';
 import {
   DataGetPosiblesSuperiores,
+  DataRspAgregarPerfilUsuario,
   RequestAgregarPerfilUsusario,
 } from '@data/model';
 @Injectable({
@@ -49,12 +50,10 @@ export class UserService {
 
   agregarPerfilUser(
     request: RequestAgregarPerfilUsusario
-  ): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
+  ): Observable<Response<DataRspAgregarPerfilUsuario>> {
+    return this.http.post<Response<DataRspAgregarPerfilUsuario>>(
       `${this.apiUrl}/configuration/usuarioproxy/create`,
-      {
-        request,
-      }
+      request
     );
   }
 

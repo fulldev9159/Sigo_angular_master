@@ -131,10 +131,30 @@ export class UserEffects {
     )
   );
 
+  getAllUser4addPerfil$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.SelectedUser4AddPerfil),
+      concatMap(({ usuario_id }) =>
+        this.userService.getAllUsers().pipe(
+          map(response =>
+            userActions.SelectedUser4AddPerfilSuccess({ usuario_id, response })
+          ),
+          catchError(err =>
+            of(userActions.SelectedUser4AddPerfilError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(userActions.getPerfilesUserSuccess),
+        ofType(
+          userActions.getPerfilesUserSuccess,
+          userActions.agregarPerfilUsuarioSuccess
+        ),
         tap(action => {
           this.alertMessageAction.messageActions(
             action.response.status.code,

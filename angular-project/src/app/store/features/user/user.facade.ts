@@ -100,8 +100,8 @@ export class UserFacade {
   }
 
   // GET SELECTED USER 4 ADD PERFIL
-  public seletedUser4AddPerfil(user: User): void {
-    this.store.dispatch(userActions.SelectedUser4AddPerfil({ user }));
+  public seletedUser4AddPerfil(usuario_id: number): void {
+    this.store.dispatch(userActions.SelectedUser4AddPerfil({ usuario_id }));
   }
 
   public getseletedUser4AddPerfil$(): Observable<User> {

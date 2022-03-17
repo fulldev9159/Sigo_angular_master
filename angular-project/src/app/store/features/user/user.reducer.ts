@@ -94,10 +94,15 @@ export const reducerUser = createReducer(
   on(UserActions.resetData, (state, payload) => ({
     ...initialStateUser,
   })),
-  on(UserActions.SelectedUser4AddPerfil, (state, { user }) => ({
-    ...state,
-    selectedUser4AddPerfil: user,
-  })),
+  on(
+    UserActions.SelectedUser4AddPerfilSuccess,
+    (state, { usuario_id, response }) => ({
+      ...state,
+      selectedUser4AddPerfil: response.data.usuarios.filter(
+        usuario => usuario.id === usuario_id
+      )[0],
+    })
+  ),
   //  ////
 
   on(UserActions.getContracts, state => state),

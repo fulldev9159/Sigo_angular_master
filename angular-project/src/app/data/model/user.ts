@@ -60,9 +60,9 @@ export interface TableUserData {
 }
 
 // LIST PERFILES USER
-export interface ListPerfilesUser {
+export interface ListPerfilesUserType {
   id: number;
-  perfil_propio: boolean;
+  perfil_propio: string;
   proxy_id: number;
   descripcion: string;
   rol: string;
@@ -86,6 +86,10 @@ export interface RequestAgregarPerfilUsusario {
   usuario_id: number;
   perfil_id: number;
   superior_id: number;
+}
+
+export interface DataRspAgregarPerfilUsuario {
+  usuarioproxy_id: number;
 }
 
 ///

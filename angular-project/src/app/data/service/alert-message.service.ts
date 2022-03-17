@@ -148,7 +148,10 @@ export class AlertMessageActions {
         action === contratoActions.updateContratoSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
-      } else if (action === contratoActions.activateContratoSuccess.type) {
+      } else if (
+        action === contratoActions.activateContratoSuccess.type ||
+        action === userActions.agregarPerfilUsuarioSuccess.type
+      ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (this.msgOK[action]) {
         this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
@@ -191,8 +194,8 @@ export class AlertMessageActions {
       if (action === contratoActions.activateContratoSuccess.type) {
         this.contratoFacade.getAllContratos();
       }
-      if (action === userActions.getPerfilesUserSuccess.type) {
-        this.userFacade.displayModalPerfilesUser(true);
+
+      if (action === userActions.agregarPerfilUsuarioSuccess.type) {
       }
     }
   }

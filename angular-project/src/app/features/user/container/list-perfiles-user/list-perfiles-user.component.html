@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Perfiles del usuario {{(userSelected4addPerfil$|async)?.nombres + " " + (userSelected4addPerfil$|async)?.apellidos }} </h1>
+      <span>listado de perfiles</span>
+    </div>
+    <div class="col">
+
+      <button pButton [routerLink]="['/app/user/list-user']" type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined"></button>
+      <button pButton (click)="openModalAddPerfilUser()" type="button" label="Nuevo Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-user-button"></button>
+
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+  <app-table [config]="configTable" [items]="(perfilesUser$ | async)"></app-table>
+</div>
+
+<app-modal [display]="displayModalPerfilesUser$|async" (CloseEvent)="closeAddPerfil()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Nuevo perfil</p>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+              <form [formGroup]="formAddPerfil">
+                <app-select [control]="formAddControls.perfil_id" label="Perfil">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione perfil a agregar al usuario</option>
+                    <ng-container *ngFor="let perfil of allPerfiles$ | async">
+                      <option [value]="perfil.id">
+                        {{ perfil.nombre}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+
+                <br>
+
+                <app-select [control]="formAddControls.superior_id" label="Superior directo">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione persona</option>
+                    <option value="null">No posee superior directo</option>
+                    <ng-container *ngFor="let superior of posiblesSuperiores$ | async">
+                      <option [value]="superior.proxy_id">
+                        {{ superior.usuario_nombre }} ({{ superior.perfil_nombre }})
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button pButton type="button" [disabled]="!formAddPerfil.valid" (click)="AgregarPerfil()" label="Agregar Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-user-perfil-button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>

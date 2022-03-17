@@ -3,8 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormUserComponent } from './container/form-user/form-user.component';
 
 import { ListUserComponent } from './container/list-user/list-user.component';
+
 import { UserComponent } from './user.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { ListPerfilesUserComponent } from './container/list-perfiles-user/list-perfiles-user.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,18 @@ const routes: Routes = [
             redirectTo: '/app/dashboard',
           },
           state: 'list-user',
+        },
+      },
+      {
+        path: 'list-perfiles-user/:id',
+        component: ListPerfilesUserComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: 'PERFIL_LISTAR',
+            redirectTo: '/app/dashboard',
+          },
+          state: 'list-perfiles-user',
         },
       },
       {

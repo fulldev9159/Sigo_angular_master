@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
-export class ListUserFormService {
+export class ListPerfilesUserFormService {
   constructor() {}
 
   FormConfig(): any {
