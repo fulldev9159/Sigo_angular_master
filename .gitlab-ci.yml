@@ -44,6 +44,14 @@ integrations test cypress:
     - npm ci
     - npx cypress run
 
+update-demos-sigo:
+  stage: triggers
+  variables:
+    ORIGIN: $ORIGIN
+    CI_PIPELINE_ID: $CI_PIPELINE_ID
+    PRECURSOR: $CI_PROJECT_NAME
+  trigger: zweicom/cl-movistar/sigo/demos-sigo
+
 acceptance test:
   <<: *connect_gcr
   stage: acceptance test

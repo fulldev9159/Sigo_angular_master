@@ -44,7 +44,7 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
 
   // EXTRAS
   usuario_id: number;
-  addMode: boolean = false;
+  addMode = false;
 
   constructor(
     private userFacade: UserFacade,
