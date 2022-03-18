@@ -413,4 +413,8 @@ export class FormUserComponent implements OnInit, OnDestroy {
       this.userFacade.createUser(request);
     }
   }
+
+  onUpload(event: any): void {}
+
+  onDeleteFile(event: any): void {}
 }
