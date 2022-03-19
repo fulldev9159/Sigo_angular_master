@@ -59,6 +59,8 @@ update test environment:
   script:
     #  - sudo docker exec -ti demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e "drop database  IF EXISTS OTEC"
     - ssh zweicom@34.122.92.38 "pwd"
+  tags:
+    - repo-machine
 
 acceptance test:
   <<: *connect_gcr
