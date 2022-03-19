@@ -2,6 +2,7 @@ stages:
   - linter
   - unit test
   - integrations test
+  - restart test environment
   - update test environment
   - acceptance test
   - deployment
@@ -17,13 +18,13 @@ variables:
     - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
     - docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
 
-linter:
-  stage: linter
-  image: trion/ng-cli-karma:${CLI_VERSION}
-  script:
-    - cd angular-project
-    - npm ci
-    - ng lint
+# linter:
+#   stage: linter
+#   image: trion/ng-cli-karma:${CLI_VERSION}
+#   script:
+#     - cd angular-project
+#     - npm ci
+#     - ng lint
 
 # unit test:
 #   stage: unit test
@@ -34,19 +35,19 @@ linter:
 #     - ng test --code-coverage --progress false --watch false
 #   coverage: '/^Statements\s*:\s*([^%]+)/'
 
-integrations test cypress:
-  image: cypress/browsers:node12.14.1-chrome85-ff81
-  stage: integrations test
-  script:
-    - cd angular-project
-    - npm ci
-    - npm start & ./node_modules/.bin/wait-on http://localhost:4201
-    - cd ../cypress
-    - npm ci
-    - npx cypress run
+# integrations test cypress:
+#   image: cypress/browsers:node12.14.1-chrome85-ff81
+#   stage: integrations test
+#   script:
+#     - cd angular-project
+#     - npm ci
+#     - npm start & ./node_modules/.bin/wait-on http://localhost:4201
+#     - cd ../cypress
+#     - npm ci
+#     - npx cypress run
 
 update-demos-sigo1:
-  stage: triggers
+  stage: restart test environment
   variables:
     ORIGIN: $ORIGIN
     CI_PIPELINE_ID: $CI_PIPELINE_ID
