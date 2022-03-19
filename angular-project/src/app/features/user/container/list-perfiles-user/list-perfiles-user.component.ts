@@ -88,20 +88,17 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
           return perfiles.map(perfil => ({
             id: perfil.perfil_id,
             perfil_propio: perfil.perfil_propio ? 'Propio' : 'Remplazo',
-            proxy_id: perfil.proxy_id,
-            descripcion:
-              perfil.model_usuarioproxy_id.model_perfil_id.descripcion,
-            rol: perfil.model_usuarioproxy_id.model_perfil_id.model_rol_id
-              .nombre,
-            nombre: perfil.model_usuarioproxy_id.model_perfil_id.nombre,
-            superior: perfil.model_usuarioproxy_id.model_superior_id
-              ? perfil.model_usuarioproxy_id.model_superior_id.nombres +
+            proxy_id: perfil.id,
+            descripcion: perfil.model_perfil_id.descripcion,
+            // rol: perfil.model_perfil_id.model_rol_id
+            //   .nombre,
+            nombre: perfil.model_perfil_id.nombre,
+            superior: perfil.model_superior_proxy_id
+              ? perfil.model_superior_proxy_id.model_usuario_id.nombres +
                 ' ' +
-                perfil.model_usuarioproxy_id.model_superior_id.apellidos
+                perfil.model_superior_proxy_id.model_usuario_id.apellidos
               : '',
-            superior_id: perfil.model_usuarioproxy_id.superior_id
-              ? perfil.model_usuarioproxy_id.superior_id
-              : null,
+            superior_id: perfil.superior_proxy_id,
           }));
         }
       })

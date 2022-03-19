@@ -44,15 +44,15 @@ export const reducerAuth = createReducer(
     const perfilesUser = response.data.perfiles.map(perfil => {
       return {
         ...perfil,
-        model_usuarioproxy_id: {
-          ...perfil.model_usuarioproxy_id,
-          model_perfil_id: {
-            ...perfil.model_usuarioproxy_id.model_perfil_id,
-            nombre: perfil.perfil_propio
-              ? perfil.model_usuarioproxy_id.model_perfil_id.nombre
-              : `${perfil.model_usuarioproxy_id.model_perfil_id.nombre} (Replazo)`,
-          },
-        },
+        // model_usuarioproxy_id: {
+        //   ...perfil.model_usuarioproxy_id,
+        //   model_perfil_id: {
+        //     ...perfil.model_usuarioproxy_id.model_perfil_id,
+        //     nombre: perfil.perfil_propio
+        //       ? perfil.model_usuarioproxy_id.model_perfil_id.nombre
+        //       : `${perfil.model_usuarioproxy_id.model_perfil_id.nombre} (Replazo)`,
+        //   },
+        // },
       };
     });
     const sessionData = {

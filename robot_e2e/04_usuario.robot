@@ -9,6 +9,6 @@ Resource    ./resources/login_resource.robot
 *** Test Cases ***
 
 Editar Usuario
-    _Login                        admin      pass    Admin
-    _Navegate to                  Usuario
-    _Table should display data
+    _Login          admin      pass    Admin
+    _Navegate to    Usuario
+    # _Table should display data

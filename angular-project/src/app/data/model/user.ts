@@ -65,7 +65,7 @@ export interface ListPerfilesUserType {
   perfil_propio: string;
   proxy_id: number;
   descripcion: string;
-  rol: string;
+  // rol: string;
   nombre: string;
   superior: string;
   superior_id: number;

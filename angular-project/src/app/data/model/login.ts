@@ -20,23 +20,20 @@ export interface DataResGetPerfilesUser {
 }
 
 export interface PerfilesUser {
-  model_usuarioproxy_id: ModelUsuarioProxy;
-  perfil_id: number;
-  perfil_propio: boolean;
-  proxy_id: number;
-}
-
-export interface ModelUsuarioProxy {
-  estado: boolean;
+  created_at: Date;
   id: number;
   model_perfil_id: ModelPerfil;
-  model_superior_id: ModelSuperir;
-  model_usuario_id: null;
-  model_usuario_orig: null;
-  perfil_id: number;
-  superior_id: number;
+  model_usuario_id: ModelUsuario;
+  model_usuario_orig: ModelUsuarioOrigen;
+
+  model_superior_proxy_id: ModelSuperir;
+  updated_at: Date;
   usuario_id: number;
   usuario_orig: number;
+
+  perfil_id: number;
+  perfil_propio: boolean;
+  superior_proxy_id: number;
 }
 
 export interface ModelPerfil {
@@ -45,23 +42,23 @@ export interface ModelPerfil {
   descripcion: string;
   eliminable: boolean;
   id: number;
-  model_rol_id: ModelRol;
+  // model_rol_id: ModelRol;
   nombre: string;
   rol_id: number;
   updated_at: Date;
 }
 
-export interface ModelRol {
-  id: number;
-  nombre: string;
-}
+// export interface ModelRol {
+//   id: number;
+//   nombre: string;
+// }
 
-export interface ModelSuperir {
+export interface ModelUsuario {
   apellidos: string;
   area_id: number;
   celular: string;
   created_at: Date;
-  deleted_at: Date;
+  deleted_at: null;
   email: string;
   estado: boolean;
   id: number;
@@ -73,7 +70,34 @@ export interface ModelSuperir {
   updated_at: Date;
   username: string;
 }
+export interface ModelSuperir {
+  created_at: Date;
+  id: 17;
+  model_usuario_id: ModelUsuario;
+  perfil_id: number;
+  superior_proxy_id: number;
+  updated_at: Date;
+  usuario_id: number;
+  usuario_orig: number;
+}
 
+export interface ModelUsuarioOrigen {
+  apellidos: string;
+  area_id: number;
+  celular: string;
+  created_at: Date;
+  deleted_at: null;
+  email: string;
+  estado: boolean;
+  id: number;
+  model_area_id: null;
+  model_proveedor_id: null;
+  nombres: string;
+  proveedor_id: number;
+  rut: string;
+  updated_at: Date;
+  username: string;
+}
 // Get Perfiles User end
 
 // Get Permisos perfil init
