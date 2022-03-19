@@ -44,7 +44,7 @@ integrations test cypress:
     - npm ci
     - npx cypress run
 
-update-demos-sigo:
+update-demos-sigo1:
   stage: triggers
   variables:
     ORIGIN: $ORIGIN
