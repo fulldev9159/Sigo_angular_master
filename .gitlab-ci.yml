@@ -1,10 +1,9 @@
 stages:
   - linter
   - unit test
-  - integrations test
   - restart test environment
   - reset testing database sigo
-  - update testing database sigo
+  - integrations test
   - acceptance test
   - deployment
   - triggers
@@ -35,6 +34,13 @@ linter:
 #     - npm ci
 #     - ng test --code-coverage --progress false --watch false
 #   coverage: '/^Statements\s*:\s*([^%]+)/'
+update-demos-sigo1:
+  stage: restart test environment
+  variables:
+    ORIGIN: $ORIGIN
+    CI_PIPELINE_ID: $CI_PIPELINE_ID
+    PRECURSOR: $CI_PROJECT_NAME
+  trigger: zweicom/cl-movistar/sigo/demos-sigo
 
 integrations test cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
@@ -46,14 +52,6 @@ integrations test cypress:
     - cd ../cypress
     - npm ci
     - npx cypress run
-
-update-demos-sigo1:
-  stage: restart test environment
-  variables:
-    ORIGIN: $ORIGIN
-    CI_PIPELINE_ID: $CI_PIPELINE_ID
-    PRECURSOR: $CI_PROJECT_NAME
-  trigger: zweicom/cl-movistar/sigo/demos-sigo
 
 update test environment:
   stage: reset testing database sigo
