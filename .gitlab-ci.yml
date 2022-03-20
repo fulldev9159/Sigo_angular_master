@@ -3,7 +3,8 @@ stages:
   - unit test
   - integrations test
   - restart test environment
-  - update test environment
+  - reset testing database sigo
+  - update testing database sigo
   - acceptance test
   - deployment
   - triggers
@@ -46,21 +47,28 @@ variables:
 #     - npm ci
 #     - npx cypress run
 
-# update-demos-sigo1:
-#   stage: restart test environment
-#   variables:
-#     ORIGIN: $ORIGIN
-#     CI_PIPELINE_ID: $CI_PIPELINE_ID
-#     PRECURSOR: $CI_PROJECT_NAME
-#   trigger: zweicom/cl-movistar/sigo/demos-sigo
+update-demos-sigo1:
+  stage: restart test environment
+  variables:
+    ORIGIN: $ORIGIN
+    CI_PIPELINE_ID: $CI_PIPELINE_ID
+    PRECURSOR: $CI_PROJECT_NAME
+  trigger: zweicom/cl-movistar/sigo/demos-sigo
 
 update test environment:
-  stage: update test environment
+  stage: reset testing database sigo
   script:
-    #  - sudo docker exec -ti demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e "drop database  IF EXISTS OTEC"
-    - ssh zweicom@34.122.92.38 "pwd"
+    - ssh zweicom@34.122.92.38 "sudo docker exec -ti demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
   tags:
     - repo-machine
+
+update database SIGO:
+  <<: *connect_gcr
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+  stage: update testing database sigo
+  script:
+    - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming="false" -url=jdbc:mysql://34.122.92.38:3311/OTEC -schemas=OTEC -user=root -password=pass info
+    - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway   -validateMigrationNaming="false"  -url=jdbc:mysql://34.122.92.38:3311/OTEC -schemas=OTEC -user=root -password=pass migrate
 
 # acceptance test:
 #   <<: *connect_gcr
