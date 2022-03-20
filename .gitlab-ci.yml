@@ -68,8 +68,8 @@ update database SIGO:
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   stage: update testing database sigo
   script:
-    - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming="false" -url=jdbc:mysql://34.122.92.38:3311  -user=root -password=pass info
-    - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway   -validateMigrationNaming="false"  -url=jdbc:mysql://34.122.92.38:3311  -user=root -password=pass migrate
+    - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming="false" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info
+    - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway   -validateMigrationNaming="false"  -url=jdbc:mysql://34.122.92.38:3311 -schemas=OTEC -user=root -password=pass migrate
 
 # acceptance test:
 #   <<: *connect_gcr
