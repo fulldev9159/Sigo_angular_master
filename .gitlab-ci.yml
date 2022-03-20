@@ -60,16 +60,17 @@ update test environment:
   script:
     - sleep 3m
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
+    - ssh zweicom@34.122.92.38 "cd databases && git pull && docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
   tags:
     - repo-machine
 
-update database SIGO:
-  <<: *connect_gcr
-  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
-  stage: update testing database sigo
-  script:
-    - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming="false" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info
-    - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway   -validateMigrationNaming="false"  -url=jdbc:mysql://34.122.92.38:3311 -schemas=OTEC -user=root -password=pass migrate
+# update database SIGO:
+#   <<: *connect_gcr
+#   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+#   stage: update testing database sigo
+#   script:
+#     - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming="false" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info
+#     - docker run --rm -v $(pwd)/OTEC/:/flyway/sql flyway/flyway   -validateMigrationNaming="false"  -url=jdbc:mysql://34.122.92.38:3311 -schemas=OTEC -user=root -password=pass migrate
 
 # acceptance test:
 #   <<: *connect_gcr
