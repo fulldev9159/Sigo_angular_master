@@ -66,7 +66,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   onInitSetInitialData(): void {
     this.configTable = this.listUserTableService.getTableConfig();
-    (this.configTable.body.actions as Array<Object>).push(
+    (this.configTable.body.actions as Array<any>).push(
       {
         icon: ' pi pi-pencil',
         class: 'p-button-text p-button-sm',
@@ -147,14 +147,14 @@ export class ListUserComponent implements OnInit, OnDestroy {
     this.displayModalActivarUser = false;
   }
 
-  DeleteUsuario() {
+  DeleteUsuario(): void {
     if (this.usuario_id) {
       this.userFacade.deleteUser(+this.usuario_id);
       this.closeModalDeleteUser();
     }
   }
 
-  ActivarUsuario() {
+  ActivarUsuario(): void {
     if (this.usuario_id) {
       // this.userFacade.activateUser(this.usuario_id, !this.estado_usuario);
       this.closeModalActivarUser();
