@@ -49,7 +49,7 @@ export const reducerUser = createReducer(
 
   on(UserActions.getAllUserSuccess, (state, { response }) => ({
     ...state,
-    users: response.data.usuarios,
+    users: response.data.usuario_all,
   })),
   on(UserActions.getPerfilesUserSuccess, (state, { response }) => {
     const perfilesUser = response.data.perfiles.map(perfil => {
@@ -106,7 +106,7 @@ export const reducerUser = createReducer(
     UserActions.SelectedUser4AddPerfilSuccess,
     (state, { usuario_id, response }) => ({
       ...state,
-      selectedUser4AddPerfil: response.data.usuarios.filter(
+      selectedUser4AddPerfil: response.data.usuario_all.filter(
         usuario => usuario.id === usuario_id
       )[0],
     })

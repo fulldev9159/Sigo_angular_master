@@ -18,8 +18,8 @@ import { map } from 'rxjs/operators';
 export class PerfilSelectComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   usuario_id = null;
-  perfiles$: Observable<PerfilesUser[]>;
-  perfiles: PerfilesUser[];
+  perfilesUsuario$: Observable<PerfilesUser[]>;
+  perfilesUsuario: PerfilesUser[];
 
   formControls = {
     proxyperfil: new FormControl(null, [Validators.required]),
@@ -36,8 +36,9 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.authFacade.getLogin$().subscribe(loginAuth => {
+    // this.subscription.add(
+    this.authFacade.getLogin$().pipe(
+      map(loginAuth => {
         if (
           loginAuth?.token === undefined &&
           loginAuth?.proxy_id === undefined
@@ -45,14 +46,15 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
           this.router.navigate(['/auth/login']);
         } else {
           this.usuario_id = loginAuth.usuario_id;
+          this.authFacade.getPerfilesUser(this.usuario_id);
         }
       })
     );
+    // );
 
-    this.authFacade.getPerfilesUser(this.usuario_id);
-    this.perfiles$ = this.authFacade
+    this.perfilesUsuario$ = this.authFacade
       .pefilesUsuario$()
-      .pipe(map(perfiles => (this.perfiles = perfiles)));
+      .pipe(map(perfiles => (this.perfilesUsuario = perfiles)));
   }
 
   ngOnDestroy(): void {
@@ -61,8 +63,7 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
 
   refreshLogin(): void {
     const proxy_id = +this.formPerfil.get('proxyperfil').value;
-    console.log(proxy_id);
-    const nombre_perfil_select = this.perfiles.filter(
+    const nombre_perfil_select = this.perfilesUsuario.filter(
       perfil => perfil.id === proxy_id
     )[0].model_perfil_id.nombre;
 

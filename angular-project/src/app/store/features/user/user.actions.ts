@@ -179,6 +179,38 @@ export const PerfilSelected = createAction(
   props<{ perfil: ListPerfilesUserType }>()
 );
 
+//  DELETE USER
+export const deleteUser = createAction(
+  '[User] DELETE User',
+  props<{ usuario_id: number }>()
+);
+
+export const deleteUserSuccess = createAction(
+  '[User] DELETE User Success',
+  props<{ response: Response<any> }>()
+);
+
+export const deleteUserError = createAction(
+  '[User] DELETE User Error',
+  props<{ error: any }>()
+);
+
+// ACTIVATE USER
+export const activateUser = createAction(
+  '[User] activateUser User',
+  props<{ usuario_id: number; activacion: boolean }>()
+);
+
+export const activateUserSuccess = createAction(
+  '[User] ACTIVATE User Success',
+  props<{ response: Response<any> }>()
+);
+
+export const activateUserError = createAction(
+  '[User] ACTIVATE User Error',
+  props<{ error: any }>()
+);
+
 //  RESET DATA
 export const resetData = createAction('[ResetData] ResetData');
 export const resetPerfilSelected = createAction(
@@ -215,38 +247,6 @@ export const resetPerfilSelected = createAction(
 //   '[User getUserDetailError] GET User Detail Error',
 //   props<{ error: any }>()
 // );
-
-// Delete User
-export const deleteUser = createAction(
-  '[User DeleteById] DELETE User',
-  props<{ usuario_id: number }>()
-);
-
-export const deleteUserSuccess = createAction(
-  '[User DeleteById] DELETE User Success',
-  props<{ usuario_id: number }>()
-);
-
-export const deleteUserError = createAction(
-  '[User DeleteById] DELETE User Error',
-  props<{ error: any }>()
-);
-
-// Activate User
-export const activateUser = createAction(
-  '[User Activate ById] ACTIVATE User',
-  props<{ usuario_id: number; activacion: boolean }>()
-);
-
-export const activateUserSuccess = createAction(
-  '[User Activate ById] ACTIVATE User Success',
-  props<{ usuario_id: number; activo: boolean }>()
-);
-
-export const activateUserError = createAction(
-  '[User Activate ById] ACTIVATE User Error',
-  props<{ error: any }>()
-);
 
 // Contratos
 export const getContracts = createAction(

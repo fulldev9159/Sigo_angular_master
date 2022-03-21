@@ -158,11 +158,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.areas4createUser$ = this.userFacade
       .getAllarea4createUser$()
       .pipe(tap(areas => this.checkAreaAndEnable(areas)));
-    this.profiles$ = this.profileFacade.getProfile$().pipe(
-      map(perfiles => {
-        return perfiles || [];
-      })
-    );
+    // this.profiles$ = this.profileFacade.getProfile$().pipe(
+    //   map(perfiles => {
+    //     return perfiles || [];
+    //   })
+    // );
     // this.subscription.add(
     //   this.profiles$.subscribe(perfiles => {
     //     this.roles = perfiles.reduce((ac, perfil) => {
@@ -186,9 +186,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
       tap(contratos => this.checkContratosAndEnable(contratos))
     );
 
-    this.proveedores4createUser$.subscribe(perfiles => {
-      console.log(perfiles);
-    });
+    // this.proveedores4createUser$.subscribe(perfiles => {
+    //   console.log(perfiles);
+    // });
     // this.samecompanyusers$ = this.userFacade.getPosiblesSuperiores$().pipe(
     //   map(usuarios => usuarios || []),
     //   tap(usuarios => this.checkSuperioresAndEnable(usuarios))
@@ -335,7 +335,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   // --- INIT DATA ---
   initData(): void {
     this.userFacade.getAllProveedores4CreateUser(true);
-    this.profileFacade.getProfile();
+    // this.profileFacade.getProfile();
   }
 
   goBack(): void {

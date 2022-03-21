@@ -119,8 +119,7 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
       })
     );
     this.posiblesSuperiores$ = this.userFacade.getPosiblesSuperiores$();
-    this.displayModalPerfilesUser$ =
-      this.userFacade.displayModalPerfilesUser$();
+
     this.subscription.add(
       this.userFacade.perfilSelected$().subscribe(perfil => {
         if (perfil) {
@@ -136,6 +135,10 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    // DISPLAYS MODAL
+    this.displayModalPerfilesUser$ =
+      this.userFacade.displayModalPerfilesUser$();
   }
 
   onInitAccionesInicialesAdicionales(): void {

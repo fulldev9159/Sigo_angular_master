@@ -31,7 +31,7 @@ export class UserService {
 
   getAllUsers(): Observable<Response<DataResponseGetAllUser>> {
     return this.http.post<Response<DataResponseGetAllUser>>(
-      `${this.apiUrl}/usuario/get_all`,
+      `${this.apiUrl}/usuario/usuario/getall`,
       {}
     );
   }
@@ -53,7 +53,7 @@ export class UserService {
     request: RequestAgregarPerfilUsusario
   ): Observable<Response<DataRspAgregarPerfilUsuario>> {
     return this.http.post<Response<DataRspAgregarPerfilUsuario>>(
-      `${this.apiUrl}/configuration/usuarioproxy/create`,
+      `${this.apiUrl}/usuario/usuarioproxy/create`,
       request
     );
   }
@@ -67,42 +67,61 @@ export class UserService {
     );
   }
 
+  deteleUser(usuario_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}/usuario/delete`, {
+      usuario_id,
+    });
+  }
+
+  activateUser(
+    usuario_id: number,
+    activacion: boolean
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/usuario/activacion/edit`,
+      {
+        usuario_id,
+        activacion,
+      }
+    );
+  }
+
   //   ///
 
-  getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
-    return this.http
-      .post<Response<DataResponseGetAllUser>>(
-        `${this.apiUrl}/usuario/get_all`,
-        {}
-      )
-      .pipe(
-        concatMap(users => {
-          const userFound = users.data.usuarios.find(
-            user => user.id === usuario_id
-          );
-          if (userFound) {
-            return this.http
-              .post<Data.DetalleUsuarioResponse>(
-                `${this.apiUrl}/usuario/detalle/get`,
-                {
-                  usuario_id,
-                }
-              )
-              .pipe(
-                map((detalleUserResponse: Data.DetalleUsuarioResponse) => {
-                  const detalle = detalleUserResponse.data;
-                  const response: Data.UserWithDetail = {
-                    ...userFound,
-                    ...detalle,
-                  };
-                  return response;
-                })
-              );
-          }
-          return throwError(new Error(`no user found`));
-        })
-      );
-  }
+  // getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
+  //   return this.http
+  //     .post<Response<DataResponseGetAllUser>>(
+  //       `${this.apiUrl}/usuario/get_all`,
+  //       {}
+  //     )
+  //     .pipe(
+  //       concatMap(users => {
+  //         const userFound = users.data.usuarios.find(
+  //           user => user.id === usuario_id
+  //         );
+  //         if (userFound) {
+  //           return this.http
+  //             .post<Data.DetalleUsuarioResponse>(
+  //               `${this.apiUrl}/usuario/detalle/get`,
+  //               {
+  //                 usuario_id,
+  //               }
+  //             )
+  //             .pipe(
+  //               map((detalleUserResponse: Data.DetalleUsuarioResponse) => {
+  //                 const detalle = detalleUserResponse.data;
+  //                 const response: Data.UserWithDetail = {
+  //                   ...userFound,
+  //                   ...detalle,
+  //                 };
+  //                 return response;
+  //               })
+  //             );
+  //         }
+  //         return throwError(new Error(`no user found`));
+  //       })
+  //     );
+  // }
 
   getUserDetail(usuario_id: number): Observable<Data.DetalleUsuario> {
     return this.http
@@ -137,37 +156,6 @@ export class UserService {
       .post<Data.EditUserResponse>(`${this.apiUrl}/usuario/edit`, request)
       .pipe(
         map((res: Data.EditUserResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.id;
-        })
-      );
-  }
-
-  deteleUser(usuario_id: number): Observable<number> {
-    return this.http
-      .post<Data.DeleteResponse>(`${this.apiUrl}/usuario/delete`, {
-        usuario_id,
-      })
-      .pipe(
-        map((res: Data.DeleteResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.id;
-        })
-      );
-  }
-
-  activateUser(usuario_id: number, activacion: boolean): Observable<number> {
-    return this.http
-      .post<Data.ActivacionResponse>(`${this.apiUrl}/usuario/activacion/edit`, {
-        usuario_id,
-        activacion,
-      })
-      .pipe(
-        map((res: Data.ActivacionResponse) => {
           if (+res.status.responseCode !== 0) {
             this.snackService.showMessage(res.status.description, 'error');
           }

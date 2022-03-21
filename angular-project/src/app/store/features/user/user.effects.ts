@@ -163,6 +163,34 @@ export class UserEffects {
     )
   );
 
+  deleteUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.deleteUser),
+      concatMap(({ usuario_id }) =>
+        this.userService.deteleUser(usuario_id).pipe(
+          map(response => userActions.deleteUserSuccess({ response })),
+          catchError(error => of(userActions.deleteUserError({ error })))
+        )
+      )
+    )
+  );
+
+  activateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.activateUser),
+      concatMap(({ usuario_id, activacion }) =>
+        this.userService.activateUser(usuario_id, activacion).pipe(
+          map(response => {
+            return userActions.activateUserSuccess({
+              response,
+            });
+          }),
+          catchError(error => of(userActions.activateUserError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -204,20 +232,6 @@ export class UserEffects {
   );
   //////////////////////////////
 
-  deleteUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.deleteUser),
-      concatMap(({ usuario_id }) =>
-        this.userService.deteleUser(usuario_id).pipe(
-          map((usuario_id_res: number) =>
-            userActions.deleteUserSuccess({ usuario_id: usuario_id_res })
-          ),
-          catchError(error => of(userActions.deleteUserError({ error })))
-        )
-      )
-    )
-  );
-
   notifyAfterdeleteUserSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -230,38 +244,21 @@ export class UserEffects {
     { dispatch: false }
   );
 
-  activateUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.activateUser),
-      concatMap(({ usuario_id, activacion }) =>
-        this.userService.activateUser(usuario_id, activacion).pipe(
-          map((usuario_id_res: number) => {
-            return userActions.activateUserSuccess({
-              usuario_id: usuario_id_res,
-              activo: activacion,
-            });
-          }),
-          catchError(error => of(userActions.activateUserError({ error })))
-        )
-      )
-    )
-  );
-
-  notifyAfterActivateUserSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(userActions.activateUserSuccess),
-        tap(({ usuario_id, activo }) => {
-          const summary = activo ? 'Activado' : 'Bloqueado';
-          this.snackService.showMessage(
-            `Usuario ${summary} exitosamente`,
-            'ok'
-          );
-          this.userFacade.getAllUsers();
-        })
-      ),
-    { dispatch: false }
-  );
+  // notifyAfterActivateUserSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(userActions.activateUserSuccess),
+  //       tap(({ usuario_id, activo }) => {
+  //         const summary = activo ? 'Activado' : 'Bloqueado';
+  //         this.snackService.showMessage(
+  //           `Usuario ${summary} exitosamente`,
+  //           'ok'
+  //         );
+  //         this.userFacade.getAllUsers();
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   getContracts$ = createEffect(() =>
     this.actions$.pipe(
