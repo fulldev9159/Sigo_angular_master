@@ -62,8 +62,8 @@ export class UserService {
 
   editarSuperiorPerfilUser(
     request: RequestUpdatePerfilUsusario
-  ): Observable<Response<DataRspAgregarPerfilUsuario>> {
-    return this.http.post<Response<DataRspAgregarPerfilUsuario>>(
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
       `${this.apiUrl}/usuario/usuarioproxy/update`,
       request
     );

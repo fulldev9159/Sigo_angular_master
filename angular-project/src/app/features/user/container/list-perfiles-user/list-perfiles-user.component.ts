@@ -8,6 +8,7 @@ import {
   Perfil,
   PosiblesSuperiores,
   RequestAgregarPerfilUsusario,
+  RequestUpdatePerfilUsusario,
   TableUserData,
   User,
 } from '@data';
@@ -44,7 +45,9 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
 
   // EXTRAS
   usuario_id: number;
+  usuarioproxy_id: number;
   addMode = false;
+  superior_proxy_id = -1;
 
   constructor(
     private userFacade: UserFacade,
@@ -98,7 +101,7 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
                 ' ' +
                 perfil.model_superior_proxy_id.model_usuario_id.apellidos
               : '',
-            superior_id: perfil.superior_proxy_id,
+            superior_proxy_id: perfil.superior_proxy_id,
             nombreUser:
               perfil.model_usuario_id.nombres +
               ' ' +
@@ -132,10 +135,8 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
             this.formAddPerfil.get('perfil_id').disable({ emitEvent: false });
           }, 700);
 
-          setTimeout(() => {
-            this.formAddPerfil.get('superior_id').enable({ emitEvent: false });
-            this.formAddPerfil.get('superior_id').setValue(+perfil.superior_id);
-          }, 700);
+          this.superior_proxy_id = +perfil.superior_proxy_id;
+          this.usuarioproxy_id = +perfil.proxy_id;
         }
       })
     );
@@ -146,16 +147,30 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
   }
 
   onInitAccionesInicialesAdicionales(): void {
-    this.formAddPerfil.get('superior_id').disable({ emitEvent: false });
+    this.formAddPerfil.get('superior_proxy_id').disable({ emitEvent: false });
     this.subscription.add(
       this.formAddPerfil
         .get('perfil_id')
         .valueChanges // .pipe(withLatestFrom(this.userSelected4addPerfil$))
-        .subscribe(([perfil_id, user]) => {
+        .subscribe(perfil_id => {
           if (perfil_id) {
-            this.formAddPerfil.get('superior_id').enable({ emitEvent: false });
-            this.formAddPerfil.get('superior_id').setValue(null);
+            console.log('Cambio');
+            this.formAddPerfil
+              .get('superior_proxy_id')
+              .enable({ emitEvent: false });
+            this.formAddPerfil.get('superior_proxy_id').setValue(null);
             this.userFacade.getPosiblesSuperiores(this.usuario_id, +perfil_id);
+            if (this.superior_proxy_id !== -1) {
+              setTimeout(() => {
+                this.formAddPerfil
+                  .get('superior_proxy_id')
+                  .enable({ emitEvent: false });
+                this.formAddPerfil
+                  .get('superior_proxy_id')
+                  .setValue(this.superior_proxy_id);
+              }, 700);
+            }
+
             // this.usuario_id = user.id;
           }
         })
@@ -173,16 +188,17 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
     this.formAddPerfil.reset();
     this.addMode = false;
     this.userFacade.resetPerfilSelected();
+    this.superior_proxy_id = -1;
   }
 
   AgregarPerfil(): void {
     const request: RequestAgregarPerfilUsusario = {
       perfil_id: +this.formAddPerfil.get('perfil_id').value,
       usuario_id: this.usuario_id,
-      superior_id:
-        this.formAddPerfil.get('superior_id').value === 'NaN'
+      superior_proxy_id:
+        this.formAddPerfil.get('superior_proxy_id').value === 'NaN'
           ? null
-          : +this.formAddPerfil.get('superior_id').value,
+          : +this.formAddPerfil.get('superior_proxy_id').value,
     };
 
     console.log(request);
@@ -195,12 +211,38 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
       this.userFacade.getPerfilesUser(this.usuario_id);
       this.userFacade.getAllPerfiles();
       this.formAddPerfil.reset();
-      this.formAddPerfil.get('superior_id').disable({ emitEvent: false });
+      this.formAddPerfil.get('superior_proxy_id').disable({ emitEvent: false });
+      this.superior_proxy_id = -1;
       this.addMode = false;
     }, 700);
   }
 
-  EditarSuperiorPerfil(): void {}
+  EditarSuperiorPerfil(): void {
+    const request: RequestUpdatePerfilUsusario = {
+      usuarioproxy_id: this.usuarioproxy_id,
+      values: {
+        superior_proxy_id:
+          this.formAddPerfil.get('superior_proxy_id').value === 'NaN'
+            ? null
+            : +this.formAddPerfil.get('superior_proxy_id').value,
+      },
+    };
+
+    console.log(request);
+
+    this.userFacade.editarSuperiorPerfilUsuario(request);
+
+    setTimeout(() => {
+      this.userFacade.displayModalPerfilesUser(false);
+      this.formAddPerfil.reset();
+      this.userFacade.getPerfilesUser(this.usuario_id);
+      this.userFacade.getAllPerfiles();
+      this.formAddPerfil.reset();
+      this.formAddPerfil.get('superior_proxy_id').disable({ emitEvent: false });
+      this.superior_proxy_id = -1;
+      this.addMode = false;
+    }, 700);
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

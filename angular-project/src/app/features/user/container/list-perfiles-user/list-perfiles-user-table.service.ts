@@ -34,14 +34,6 @@ export class ListPerfilesUserTableService {
             editable: false,
           },
           {
-            field: 'Rol',
-            type: 'TEXT',
-            sort: 'rol',
-            header: 'rol',
-            // width: '10%',
-            editable: false,
-          },
-          {
             field: 'Superior',
             type: 'TEXT-TITLECASE',
             sort: 'superior',

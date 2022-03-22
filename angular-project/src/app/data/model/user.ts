@@ -72,7 +72,7 @@ export interface ListPerfilesUserType {
   // rol: string;
   nombre: string;
   superior: string;
-  superior_id: number;
+  superior_proxy_id: number;
   nombreUser: string;
 }
 
@@ -88,10 +88,11 @@ export interface PosiblesSuperiores {
   usuario_nombre: string;
 }
 
+//  AGREGAR PERFIL USUARIO
 export interface RequestAgregarPerfilUsusario {
   usuario_id: number;
   perfil_id: number;
-  superior_id: number;
+  superior_proxy_id: number;
 }
 
 export interface DataRspAgregarPerfilUsuario {
@@ -104,7 +105,7 @@ export interface RequestUpdatePerfilUsusario {
   values: ValuesReqUpdatePerfilUsuario;
 }
 export interface ValuesReqUpdatePerfilUsuario {
-  superior_id: number;
+  superior_proxy_id: number;
 }
 
 export interface RequestActivateUser {

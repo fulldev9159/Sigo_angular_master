@@ -10,7 +10,7 @@ export class ListPerfilesUserFormService {
     return {
       id: new FormControl(null),
       perfil_id: new FormControl(null, [Validators.required]),
-      superior_id: new FormControl(null, [Validators.required]),
+      superior_proxy_id: new FormControl(null, [Validators.required]),
     };
   }
 }
