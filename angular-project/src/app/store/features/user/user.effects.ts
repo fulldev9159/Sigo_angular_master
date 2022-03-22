@@ -178,14 +178,30 @@ export class UserEffects {
   activateUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.activateUser),
-      concatMap(({ usuario_id, activacion }) =>
-        this.userService.activateUser(usuario_id, activacion).pipe(
+      concatMap(({ request }) =>
+        this.userService.activateUser(request).pipe(
           map(response => {
             return userActions.activateUserSuccess({
               response,
             });
           }),
           catchError(error => of(userActions.activateUserError({ error })))
+        )
+      )
+    )
+  );
+
+  getContratosUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getContratosUser),
+      concatMap(({ usuario_id }) =>
+        this.userService.GetContratosUser(usuario_id).pipe(
+          map(response => {
+            return userActions.getContratosUserSuccess({
+              response,
+            });
+          }),
+          catchError(error => of(userActions.getContratosUserError({ error })))
         )
       )
     )
@@ -217,7 +233,9 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(
           userActions.agregarPerfilUsuarioError,
-          userActions.editarSuperiorPerfilUsuarioError
+          userActions.editarSuperiorPerfilUsuarioError,
+          userActions.activateUserError,
+          userActions.getContratosUserError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

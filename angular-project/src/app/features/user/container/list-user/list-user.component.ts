@@ -9,6 +9,7 @@ import {
   ListPerfilesUserType,
   Perfil,
   PosiblesSuperiores,
+  RequestActivateUser,
   RequestAgregarPerfilUsusario,
   TableUserData,
   User,
@@ -26,10 +27,11 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   // DATOS A USAR
   usersTableData$: Observable<TableUserData[]>;
-
+  contratosUser$: Observable<any[]>;
   // DISPLAY MODALS
   displayModalDeleteUser = false;
   displayModalActivarUser = false;
+  displayModalVerContratos = false;
 
   // FORMULARIO
 
@@ -80,9 +82,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
       {
         icon: 'pi pi-eye',
         class: 'p-button-text p-button-sm',
-        label: 'Detalle',
+        label: 'Ver contratos',
         onClick: (event: Event, item: User) => {
-          // this.userFacade.getAllDataUsuario(item.id);
+          this.displayModalVerContratos = true;
+          this.userFacade.getContratosUser(item.id);
         },
       },
       {
@@ -98,7 +101,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
         icon: ' pi pi-ban',
         class: 'p-button-text p-button-danger p-button-sm',
         labelVariable: true,
-        label: 'activo',
+        label: 'estado',
         onClick: (event: Event, item: User) => {
           this.displayModalActivarUser = true;
           this.usuario_id = item.id;
@@ -130,11 +133,16 @@ export class ListUserComponent implements OnInit, OnDestroy {
               ? usuario.model_proveedor_id.nombre
               : '',
             area: usuario.model_area_id ? usuario.model_area_id.nombre : '',
+            celular: usuario.celular,
+            email: usuario.email,
+            create_at: new Date(usuario.created_at),
+            update_at: new Date(usuario.updated_at),
             estado: usuario.estado,
           }));
         }
       })
     );
+    this.contratosUser$ = this.userFacade.getContratosUser$();
   }
 
   onInitAccionesInicialesAdicionales(): void {}
@@ -147,6 +155,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
     this.displayModalActivarUser = false;
   }
 
+  closeModalVerContratos(): void {
+    this.displayModalVerContratos = false;
+  }
+
   DeleteUsuario(): void {
     if (this.usuario_id) {
       this.userFacade.deleteUser(+this.usuario_id);
@@ -156,8 +168,15 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   ActivarUsuario(): void {
     if (this.usuario_id) {
-      // this.userFacade.activateUser(this.usuario_id, !this.estado_usuario);
+      const request: RequestActivateUser = {
+        usuario_id: this.usuario_id,
+        values: {
+          estado: !this.estado_usuario,
+        },
+      };
+      this.userFacade.activateUser(request);
       this.closeModalActivarUser();
+      this.userFacade.getAllUsers();
     }
   }
 

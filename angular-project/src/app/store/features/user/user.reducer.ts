@@ -3,6 +3,7 @@ import * as UserActions from './user.actions';
 import * as Data from '@data';
 import {
   Area,
+  ContratosUser,
   ListPerfilesUserType,
   Perfil,
   PerfilesUser,
@@ -23,6 +24,7 @@ export interface StateUser {
   perfilSelected: ListPerfilesUserType;
   proveedores4createUser: Proveedores4CreateUser[];
   areas4createUser: Area[];
+  contratosUser: ContratosUser[];
 
   contratos: Data.Contrato[];
   alldatauser: Data.UserWithDetail;
@@ -39,6 +41,8 @@ export const initialStateUser: StateUser = {
   perfilSelected: null,
   proveedores4createUser: [],
   areas4createUser: [],
+  contratosUser: [],
+
   contratos: [],
   alldatauser: null,
   displayDetalleModal: false,
@@ -114,6 +118,10 @@ export const reducerUser = createReducer(
   on(UserActions.PerfilSelected, (state, { perfil }) => ({
     ...state,
     perfilSelected: perfil,
+  })),
+  on(UserActions.getContratosUserSuccess, (state, { response }) => ({
+    ...state,
+    contratosUser: response.data.usuario_has_contrato_array,
   })),
   //  ////
 

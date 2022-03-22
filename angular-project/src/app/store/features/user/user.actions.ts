@@ -13,6 +13,8 @@ import {
   DataRspAgregarPerfilUsuario,
   ListPerfilesUserType,
   RequestUpdatePerfilUsusario,
+  RequestActivateUser,
+  DataRespGetContratosUser,
 } from '@data';
 
 // GET ALL USER
@@ -198,7 +200,7 @@ export const deleteUserError = createAction(
 // ACTIVATE USER
 export const activateUser = createAction(
   '[User] activateUser User',
-  props<{ usuario_id: number; activacion: boolean }>()
+  props<{ request: RequestActivateUser }>()
 );
 
 export const activateUserSuccess = createAction(
@@ -208,6 +210,22 @@ export const activateUserSuccess = createAction(
 
 export const activateUserError = createAction(
   '[User] ACTIVATE User Error',
+  props<{ error: any }>()
+);
+
+// GET CONTRATOS USER
+export const getContratosUser = createAction(
+  '[User] getContratosUser User',
+  props<{ usuario_id: number }>()
+);
+
+export const getContratosUserSuccess = createAction(
+  '[User] getContratosUser Success',
+  props<{ response: Response<DataRespGetContratosUser> }>()
+);
+
+export const getContratosUserError = createAction(
+  '[User] getContratosUser Error',
   props<{ error: any }>()
 );
 

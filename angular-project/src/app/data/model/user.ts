@@ -56,6 +56,10 @@ export interface TableUserData {
   apellidos: string;
   empresa: string;
   area: string;
+  celular: string;
+  email: string;
+  create_at: Date;
+  update_at: Date;
   estado: boolean;
 }
 
@@ -69,6 +73,7 @@ export interface ListPerfilesUserType {
   nombre: string;
   superior: string;
   superior_id: number;
+  nombreUser: string;
 }
 
 // REQ RESP POSIBLES SUPERIORES
@@ -100,6 +105,57 @@ export interface RequestUpdatePerfilUsusario {
 }
 export interface ValuesReqUpdatePerfilUsuario {
   superior_id: number;
+}
+
+export interface RequestActivateUser {
+  usuario_id: number;
+  values: {
+    estado: boolean;
+  };
+}
+
+// GET CONTRATOS USER
+
+export interface DataRespGetContratosUser {
+  usuario_has_contrato_array;
+}
+
+export interface ContratosUser {
+  contrato_id: number;
+  model_contrato_id: {
+    activo: boolean;
+    aprob_jerarq_inic: boolean;
+    costo_max: number;
+    fecha_fin: Date;
+    fecha_inicio: Date;
+    id: number;
+    model_tipo_contrato_id: null;
+    model_tipo_moneda_id: null;
+    nombre: string;
+    tiene_encuesta: boolean;
+    tipo_contrato_id: number;
+    tipo_moneda_id: number;
+    tipo_pago: string;
+    validacion_operaciones: boolean;
+  };
+  model_usuario_id: {
+    apellidos: string;
+    area_id: number;
+    celular: string;
+    created_at: Date;
+    deleted_at: null;
+    email: string;
+    estado: boolean;
+    id: number;
+    model_area_id: null;
+    model_proveedor_id: null;
+    nombres: string;
+    proveedor_id: number;
+    rut: string;
+    updated_at: Date;
+    username: string;
+  };
+  usuario_id: number;
 }
 ///
 // GET USER

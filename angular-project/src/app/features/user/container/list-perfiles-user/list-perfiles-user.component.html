@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <h1 class="mt-4">Perfiles del usuario {{(userSelected4addPerfil$|async)?.nombres + " " + (userSelected4addPerfil$|async)?.apellidos }} </h1>
+      <h1 class="mt-4">Perfiles del usuario {{(perfilesUser$|async)[0]?.nombreUser}} </h1>
       <span>listado de perfiles</span>
     </div>
     <div class="col">

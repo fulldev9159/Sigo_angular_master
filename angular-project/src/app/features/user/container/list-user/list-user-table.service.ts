@@ -1,19 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
-
-import { UserFacade } from '@storeOT/features/user/user.facade';
-import { User } from '@data';
 @Injectable({
   providedIn: 'root',
 })
 export class ListUserTableService {
-  constructor(
-    private router: Router,
-    private userFacade: UserFacade,
-    private confirmationService: ConfirmationService
-  ) {}
+  constructor() {}
   getTableConfig(): any {
     return {
       header: true,
@@ -70,6 +60,38 @@ export class ListUserTableService {
             type: 'TEXT-TITLECASE',
             sort: 'area',
             header: 'area',
+            // width: '10%',
+            editable: false,
+          },
+          {
+            field: 'Celular',
+            type: 'TEXT',
+            sort: 'celular',
+            header: 'celular',
+            // width: '10%',
+            editable: false,
+          },
+          {
+            field: 'Email',
+            type: 'TEXT',
+            sort: 'email',
+            header: 'email',
+            // width: '10%',
+            editable: false,
+          },
+          {
+            field: 'Creado el ',
+            type: 'DATE',
+            sort: 'create_at',
+            header: 'create_at',
+            // width: '10%',
+            editable: false,
+          },
+          {
+            field: 'Actualizado el ',
+            type: 'DATE',
+            sort: 'update_at',
+            header: 'update_at',
             // width: '10%',
             editable: false,
           },

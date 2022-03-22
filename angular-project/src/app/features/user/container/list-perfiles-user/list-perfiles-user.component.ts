@@ -26,11 +26,11 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
 
   // DATOS A USAR
   allUsers$: Observable<User>;
-  userSelected4addPerfil$: Observable<User>;
+  // userSelected4addPerfil$: Observable<User>;
   perfilesUser$: Observable<ListPerfilesUserType[]>;
   allPerfiles$: Observable<Perfil[]>;
   posiblesSuperiores$: Observable<PosiblesSuperiores[]>;
-  perfilSelected$: Observable<ListPerfilesUserType>;
+  // perfilSelected$: Observable<ListPerfilesUserType>;
 
   // DISPLAY MODALS
   displayModalPerfilesUser$: Observable<boolean>;
@@ -70,7 +70,7 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
         const id = params.get('id');
         if (id !== null) {
           this.usuario_id = +id;
-          this.userFacade.seletedUser4AddPerfil(+id);
+          // this.userFacade.seletedUser4AddPerfil(+id);
           this.userFacade.getPerfilesUser(+id);
         }
       })
@@ -81,7 +81,7 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
     this.configTable = this.listPerfilesUserTableService.getTableConfig();
     this.formAddControls = this.listPerfilesUserFormService.FormConfig();
     this.formAddPerfil = new FormGroup(this.formAddControls);
-    this.userSelected4addPerfil$ = this.userFacade.getseletedUser4AddPerfil$();
+    // this.userSelected4addPerfil$ = this.userFacade.getseletedUser4AddPerfil$();
     this.perfilesUser$ = this.userFacade.pefilesUsuario$().pipe(
       map(perfiles => {
         if (perfiles) {
@@ -99,6 +99,10 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
                 perfil.model_superior_proxy_id.model_usuario_id.apellidos
               : '',
             superior_id: perfil.superior_proxy_id,
+            nombreUser:
+              perfil.model_usuario_id.nombres +
+              ' ' +
+              perfil.model_usuario_id.apellidos,
           }));
         }
       })
@@ -146,13 +150,13 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.formAddPerfil
         .get('perfil_id')
-        .valueChanges.pipe(withLatestFrom(this.userSelected4addPerfil$))
+        .valueChanges // .pipe(withLatestFrom(this.userSelected4addPerfil$))
         .subscribe(([perfil_id, user]) => {
           if (perfil_id) {
             this.formAddPerfil.get('superior_id').enable({ emitEvent: false });
             this.formAddPerfil.get('superior_id').setValue(null);
-            this.userFacade.getPosiblesSuperiores(+user.id, +perfil_id);
-            this.usuario_id = user.id;
+            this.userFacade.getPosiblesSuperiores(this.usuario_id, +perfil_id);
+            // this.usuario_id = user.id;
           }
         })
     );
@@ -184,13 +188,16 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
     console.log(request);
 
     this.userFacade.agregarPerfilUsuario(request);
-    this.userFacade.displayModalPerfilesUser(false);
-    this.formAddPerfil.reset();
-    this.userFacade.getPerfilesUser(this.usuario_id);
-    this.userFacade.getAllPerfiles();
-    this.formAddPerfil.reset();
-    this.formAddPerfil.get('superior_id').disable({ emitEvent: false });
-    this.addMode = false;
+
+    setTimeout(() => {
+      this.userFacade.displayModalPerfilesUser(false);
+      this.formAddPerfil.reset();
+      this.userFacade.getPerfilesUser(this.usuario_id);
+      this.userFacade.getAllPerfiles();
+      this.formAddPerfil.reset();
+      this.formAddPerfil.get('superior_id').disable({ emitEvent: false });
+      this.addMode = false;
+    }, 700);
   }
 
   EditarSuperiorPerfil(): void {}

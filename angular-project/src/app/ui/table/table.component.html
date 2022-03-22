@@ -44,7 +44,7 @@
     </ng-template>
 
     <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
-      <tr [ngClass]="item['activo']===false ? 'bloqueado' : ''">
+      <tr [ngClass]="item['estado']===false ? 'bloqueado' : ''">
         <ng-container *ngFor="let column of config.body.headers" [ngSwitch]="column.type">
           <td *ngSwitchCase="'CHECKBOX'">
             <p-tableCheckbox [value]="item"></p-tableCheckbox>

@@ -12,7 +12,9 @@ import {
 } from '@data';
 import {
   DataGetPosiblesSuperiores,
+  DataRespGetContratosUser,
   DataRspAgregarPerfilUsuario,
+  RequestActivateUser,
   RequestAgregarPerfilUsusario,
   RequestUpdatePerfilUsusario,
 } from '@data/model';
@@ -73,19 +75,21 @@ export class UserService {
     });
   }
 
-  activateUser(
-    usuario_id: number,
-    activacion: boolean
-  ): Observable<Response<any>> {
+  activateUser(request: RequestActivateUser): Observable<Response<any>> {
     return this.http.post<Response<any>>(
-      `${this.apiUrl}/usuario/activacion/edit`,
-      {
-        usuario_id,
-        activacion,
-      }
+      `${this.apiUrl}/usuario/update`,
+      request
     );
   }
 
+  GetContratosUser(
+    usuario_id: number
+  ): Observable<Response<DataRespGetContratosUser>> {
+    return this.http.post<Response<DataRespGetContratosUser>>(
+      `${this.apiUrl}/usuario/usuario_has_contrato/get`,
+      { usuario_id }
+    );
+  }
   //   ///
 
   // getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {

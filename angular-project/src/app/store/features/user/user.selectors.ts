@@ -52,6 +52,10 @@ export const getPerfilSelected = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.perfilSelected
 );
+export const getContratosUser = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.contratosUser
+);
 ////////////
 
 export const getContracts = createSelector(

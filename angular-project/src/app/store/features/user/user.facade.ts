@@ -12,6 +12,7 @@ import {
   PerfilesUser,
   PosiblesSuperiores,
   Proveedores4CreateUser,
+  RequestActivateUser,
   RequestAgregarPerfilUsusario,
   RequestUpdatePerfilUsusario,
   User,
@@ -130,6 +131,15 @@ export class UserFacade {
     return this.store.select(userSelectors.getPerfilSelected);
   }
 
+  // PERFIL SELECTED
+  public getContratosUser(usuario_id: number): void {
+    this.store.dispatch(userActions.getContratosUser({ usuario_id }));
+  }
+
+  public getContratosUser$(): Observable<any> {
+    return this.store.select(userSelectors.getContratosUser);
+  }
+
   // ///// /////////////////
 
   // DELETE
@@ -138,8 +148,8 @@ export class UserFacade {
   }
 
   // ACTIVACION
-  public activateUser(usuario_id: number, activacion: boolean): void {
-    this.store.dispatch(userActions.activateUser({ usuario_id, activacion }));
+  public activateUser(request: RequestActivateUser): void {
+    this.store.dispatch(userActions.activateUser({ request }));
   }
 
   // CONTRACT
