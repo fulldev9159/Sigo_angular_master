@@ -115,6 +115,18 @@ export class UserEffects {
     )
   );
 
+  deetePerfilUsuario$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.deletePerfilUser),
+      concatMap(({ usuarioproxy_id }) =>
+        this.userService.deletePerfilUser(usuarioproxy_id).pipe(
+          map(response => userActions.deletePerfilUserSuccess({ response })),
+          catchError(error => of(userActions.deletePerfilUserError({ error })))
+        )
+      )
+    )
+  );
+
   getAllProveedores$ = createEffect(() =>
     this.actions$.pipe(
       ofType(userActions.getAllProveedores4CreateUser),

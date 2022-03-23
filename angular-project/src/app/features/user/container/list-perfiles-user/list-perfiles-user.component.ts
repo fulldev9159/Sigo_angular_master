@@ -35,7 +35,7 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
 
   // DISPLAY MODALS
   displayModalPerfilesUser$: Observable<boolean>;
-
+  displayModalEliminarPerfilUsuario = false;
   // FORMULARIO
   formAddControls: any;
   formAddPerfil: FormGroup;
@@ -82,6 +82,30 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
 
   onInitSetInitialData(): void {
     this.configTable = this.listPerfilesUserTableService.getTableConfig();
+    this.configTable.body.actions.push(
+      {
+        icon: ' pi pi-pencil',
+        class: 'p-button-text p-button-sm',
+        label: 'Editar superior',
+        onClick: (event: Event, item: ListPerfilesUserType) => {
+          if (item) {
+            this.userFacade.displayModalPerfilesUser(true);
+            this.userFacade.getAllPerfiles();
+            this.userFacade.perfilSelected(item);
+          }
+        },
+      },
+      {
+        icon: 'pi pi-trash',
+        class: 'p-button-text p-button-danger p-button-sm',
+        label: 'Eliminar',
+        onClick: (event: Event, item: ListPerfilesUserType) => {
+          this.displayModalEliminarPerfilUsuario = true;
+          console.log(item);
+          this.usuarioproxy_id = item.proxy_id;
+        },
+      }
+    );
     this.formAddControls = this.listPerfilesUserFormService.FormConfig();
     this.formAddPerfil = new FormGroup(this.formAddControls);
     // this.userSelected4addPerfil$ = this.userFacade.getseletedUser4AddPerfil$();
@@ -189,6 +213,19 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
     this.addMode = false;
     this.userFacade.resetPerfilSelected();
     this.superior_proxy_id = -1;
+  }
+
+  closeModalEliminarPerfilUsuario(): void {
+    this.displayModalEliminarPerfilUsuario = false;
+    this.usuarioproxy_id = null;
+  }
+
+  EliminarPerfilUsuario(): void {
+    this.userFacade.deletePerfilUsuario(this.usuarioproxy_id);
+    setTimeout(() => {
+      this.closeModalEliminarPerfilUsuario();
+      this.userFacade.getPerfilesUser(this.usuario_id);
+    }, 700);
   }
 
   AgregarPerfil(): void {

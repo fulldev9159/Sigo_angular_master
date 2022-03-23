@@ -197,6 +197,22 @@ export const deleteUserError = createAction(
   props<{ error: any }>()
 );
 
+//  DELETE PERFILUSER
+export const deletePerfilUser = createAction(
+  '[User] deletePerfilUser User',
+  props<{ usuarioproxy_id: number }>()
+);
+
+export const deletePerfilUserSuccess = createAction(
+  '[User] deletePerfilUser Success',
+  props<{ response: Response<any> }>()
+);
+
+export const deletePerfilUserError = createAction(
+  '[User] deletePerfilUser Error',
+  props<{ error: any }>()
+);
+
 // ACTIVATE USER
 export const activateUser = createAction(
   '[User] activateUser User',

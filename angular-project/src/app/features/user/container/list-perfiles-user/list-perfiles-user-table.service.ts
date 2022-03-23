@@ -58,39 +58,7 @@ export class ListPerfilesUserTableService {
           },
         ],
         sort: ['username', 'rut', 'nombres', 'apellidos', 'proveedor_nombre'],
-        actions: [
-          {
-            icon: ' pi pi-pencil',
-            class: 'p-button-text p-button-sm',
-            label: 'Editar superior',
-            onClick: (event: Event, item: ListPerfilesUserType) => {
-              if (item) {
-                this.userFacade.displayModalPerfilesUser(true);
-                this.userFacade.getAllPerfiles();
-                this.userFacade.perfilSelected(item);
-              }
-            },
-          },
-          {
-            icon: 'pi pi-trash',
-            class: 'p-button-text p-button-danger p-button-sm',
-            label: 'Eliminar',
-            onClick: (event: Event, item: User) => {
-              // if (item.eliminable) {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Está seguro que desea eliminar este Usuario?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.userFacade.deleteUser(+item.id);
-                },
-              });
-              // }
-            },
-          },
-        ],
+        actions: [],
       },
     };
   }

@@ -69,6 +69,15 @@ export class UserService {
     );
   }
 
+  deletePerfilUser(usuarioproxy_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/usuario/usuarioproxy/delete`,
+      {
+        usuarioproxy_id,
+      }
+    );
+  }
+
   deteleUser(usuario_id: number): Observable<Response<any>> {
     return this.http.post<Response<any>>(`${this.apiUrl}/usuario/delete`, {
       usuario_id,

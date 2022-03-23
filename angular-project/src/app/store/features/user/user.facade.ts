@@ -86,6 +86,11 @@ export class UserFacade {
     this.store.dispatch(userActions.editarSuperiorPerfilUsuario({ request }));
   }
 
+  // DELETE PERFIL USUARIO
+  public deletePerfilUsuario(usuarioproxy_id: number): void {
+    this.store.dispatch(userActions.deletePerfilUser({ usuarioproxy_id }));
+  }
+
   // GET ALL PROVEEDORES 4 CREATE USER
   public getAllProveedores4CreateUser(interno: boolean): void {
     this.store.dispatch(userActions.getAllProveedores4CreateUser({ interno }));
