@@ -57,7 +57,7 @@ export class ListPerfilesUserTableService {
             editable: false,
           },
         ],
-        sort: ['username', 'rut', 'nombres', 'apellidos', 'proveedor_nombre'],
+        sort: ['nombre'],
         actions: [],
       },
     };

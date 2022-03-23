@@ -48,21 +48,25 @@ _Click visible element
     [Arguments]         ${selector}
     _Wait visibility    ${selector}
     Click Element       ${selector}
+    sleep               1
 
 _Element should exist in table
-    [Arguments]              ${nombre}                                           
-    _Wait visibility         css:app-table>div>p-table>div>div>div>span>input
-    input text               css:app-table>div>p-table>div>div>div>span>input    ${nombre} 
-    sleep                    0.5
-    ${cantidad de filas}=    get element count                                   css:.p-datatable-wrapper>table>tbody>tr
-    ${status}=               Evaluate                                            ${cantidad de filas} > 0
+    [Arguments]              ${nombre}            
+    _Search table            ${nombre}
+    ${cantidad de filas}=    get element count    css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=               Evaluate             ${cantidad de filas} > 0
+    [return]                 ${status}
+
+_Element should not exist in table
+    [Arguments]              ${nombre}            
+    _Search table            ${nombre}
+    ${cantidad de filas}=    get element count    css:.p-datatable-wrapper>table>tbody>tr
+    ${status}=               Evaluate             ${cantidad de filas} == 0
     [return]                 ${status}
 
 _Go to Editar element
-    [Arguments]               ${nombre}                                           
-    _Wait visibility          css:app-table>div>p-table>div>div>div>span>input
-    input text                css:app-table>div>p-table>div>div>div>span>input    ${nombre} 
-    sleep                     0.5
+    [Arguments]               ${nombre}                                   
+    _Search table             ${nombre}
     _Click visible element    css:#action-buttons > div > div > button
 
 _Table should display data
@@ -86,3 +90,25 @@ _Validate column data
     [Arguments]                   ${columna}     ${value}
     ${txt fila}=                  Get Text       css:.p-datatable-wrapper>table>tbody>tr:nth-child(1)>td:nth-child(${columna})
     Should Be Equal As Strings    ${txt fila}    ${value}
+
+_Search table
+    [Arguments]         ${value}                                            
+    _Wait visibility    css:app-table>div>p-table>div>div>div>span>input
+    input text          css:app-table>div>p-table>div>div>div>span>input    ${value} 
+    sleep               0.5
+
+_SubMenu
+    [Arguments]               ${accion}                                  ${nombre}
+    _Search table             ${nombre}
+    _Click visible element    css:#action-buttons > app-menu > button
+    ${items}=                 Get WebElements                            css:#action-buttons > app-menu > p-menu > div > ul>li
+    FOR                       ${item}                                    IN                                                       @{items}
+    ${txt} =                  Get Text                                   ${item}
+    Log To Console            ${txt}
+    ${areYouMyLine} =         Run Keyword and Return Status              Should Be Equal As Strings                               ${txt}      ${accion}
+    ${selector}               set variable                               ${item}
+    Set Suite Variable        ${selector}
+    Run Keyword If            ${areYouMyLine}                            Exit For Loop                                            
+    END
+
+    _Click visible element    ${selector}

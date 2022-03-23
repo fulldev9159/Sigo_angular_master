@@ -27,11 +27,9 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
 
   // DATOS A USAR
   allUsers$: Observable<User>;
-  // userSelected4addPerfil$: Observable<User>;
   perfilesUser$: Observable<ListPerfilesUserType[]>;
   allPerfiles$: Observable<Perfil[]>;
   posiblesSuperiores$: Observable<PosiblesSuperiores[]>;
-  // perfilSelected$: Observable<ListPerfilesUserType>;
 
   // DISPLAY MODALS
   displayModalPerfilesUser$: Observable<boolean>;
@@ -73,7 +71,6 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
         const id = params.get('id');
         if (id !== null) {
           this.usuario_id = +id;
-          // this.userFacade.seletedUser4AddPerfil(+id);
           this.userFacade.getPerfilesUser(+id);
         }
       })
@@ -108,7 +105,6 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
     );
     this.formAddControls = this.listPerfilesUserFormService.FormConfig();
     this.formAddPerfil = new FormGroup(this.formAddControls);
-    // this.userSelected4addPerfil$ = this.userFacade.getseletedUser4AddPerfil$();
     this.perfilesUser$ = this.userFacade.pefilesUsuario$().pipe(
       map(perfiles => {
         if (perfiles) {
@@ -117,8 +113,6 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
             perfil_propio: perfil.perfil_propio ? 'Propio' : 'Remplazo',
             proxy_id: perfil.id,
             descripcion: perfil.model_perfil_id.descripcion,
-            // rol: perfil.model_perfil_id.model_rol_id
-            //   .nombre,
             nombre: perfil.model_perfil_id.nombre,
             superior: perfil.model_superior_proxy_id
               ? perfil.model_superior_proxy_id.model_usuario_id.nombres +
@@ -173,31 +167,26 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
   onInitAccionesInicialesAdicionales(): void {
     this.formAddPerfil.get('superior_proxy_id').disable({ emitEvent: false });
     this.subscription.add(
-      this.formAddPerfil
-        .get('perfil_id')
-        .valueChanges // .pipe(withLatestFrom(this.userSelected4addPerfil$))
-        .subscribe(perfil_id => {
-          if (perfil_id) {
-            console.log('Cambio');
-            this.formAddPerfil
-              .get('superior_proxy_id')
-              .enable({ emitEvent: false });
-            this.formAddPerfil.get('superior_proxy_id').setValue(null);
-            this.userFacade.getPosiblesSuperiores(this.usuario_id, +perfil_id);
-            if (this.superior_proxy_id !== -1) {
-              setTimeout(() => {
-                this.formAddPerfil
-                  .get('superior_proxy_id')
-                  .enable({ emitEvent: false });
-                this.formAddPerfil
-                  .get('superior_proxy_id')
-                  .setValue(this.superior_proxy_id);
-              }, 700);
-            }
-
-            // this.usuario_id = user.id;
+      this.formAddPerfil.get('perfil_id').valueChanges.subscribe(perfil_id => {
+        if (perfil_id) {
+          console.log('Cambio');
+          this.formAddPerfil
+            .get('superior_proxy_id')
+            .enable({ emitEvent: false });
+          this.formAddPerfil.get('superior_proxy_id').setValue(null);
+          this.userFacade.getPosiblesSuperiores(this.usuario_id, +perfil_id);
+          if (this.superior_proxy_id !== -1) {
+            setTimeout(() => {
+              this.formAddPerfil
+                .get('superior_proxy_id')
+                .enable({ emitEvent: false });
+              this.formAddPerfil
+                .get('superior_proxy_id')
+                .setValue(this.superior_proxy_id);
+            }, 700);
           }
-        })
+        }
+      })
     );
   }
 
@@ -264,8 +253,6 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
             : +this.formAddPerfil.get('superior_proxy_id').value,
       },
     };
-
-    console.log(request);
 
     this.userFacade.editarSuperiorPerfilUsuario(request);
 
