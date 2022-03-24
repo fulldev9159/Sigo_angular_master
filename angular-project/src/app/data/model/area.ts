@@ -1,5 +1,5 @@
 export interface DataRspGetAreas {
-  area_all: Area[];
+  items: Area[];
 }
 
 export interface DataRspGetAllAreas4createUser {

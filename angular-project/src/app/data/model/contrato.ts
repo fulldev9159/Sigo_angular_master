@@ -1,5 +1,5 @@
 export interface DataRspGetAllContratos {
-  contrato_marco_all: ContratoMarco[];
+  items: ContratoMarco[];
 }
 
 export interface ContratoMarco {
