@@ -18,6 +18,8 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { Observable, Subject, Subscription, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
 import * as Data from '@data';
 
 @Component({
@@ -39,6 +41,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   notificaciones_nuevas: Data.DataNotificaciones[] = [];
   total_nuevas_notificaciones$: Observable<Data.Notificaciones>;
   multiperfiles = false;
+  circleUserIcon = faUserCircle;
 
   constructor(
     private router: Router,

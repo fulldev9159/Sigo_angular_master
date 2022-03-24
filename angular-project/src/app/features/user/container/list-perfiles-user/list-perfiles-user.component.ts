@@ -81,8 +81,9 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
     this.configTable = this.listPerfilesUserTableService.getTableConfig();
     this.configTable.body.actions.push(
       {
-        icon: ' pi pi-pencil',
-        class: 'p-button-text p-button-sm',
+        // icon: ' pi pi-pencil',
+        // class: 'p-button-text p-button-sm',
+        type: 'alldisplay',
         label: 'Editar superior',
         onClick: (event: Event, item: ListPerfilesUserType) => {
           if (item) {
@@ -93,9 +94,10 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
         },
       },
       {
-        icon: 'pi pi-trash',
-        class: 'p-button-text p-button-danger p-button-sm',
-        label: 'Eliminar',
+        // icon: 'pi pi-trash',
+        // class: 'p-button-text p-button-danger p-button-sm',
+        // label: 'Eliminar',
+        type: 'button-delete',
         onClick: (event: Event, item: ListPerfilesUserType) => {
           this.displayModalEliminarPerfilUsuario = true;
           console.log(item);
