@@ -3,7 +3,7 @@ import { Area } from './area';
 
 // REQ RESP GET ALL USERS
 export interface DataResponseGetAllUser {
-  usuario_all: User[];
+  items: User[];
 }
 export interface User {
   apellidos: string;

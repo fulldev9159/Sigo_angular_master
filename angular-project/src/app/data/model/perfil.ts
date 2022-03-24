@@ -1,7 +1,7 @@
 import { Permiso } from './permiso';
 
 export interface DataRspGetAllPerfiles {
-  perfil_all: Perfil[];
+  items: Perfil[];
 }
 
 export interface Perfil {

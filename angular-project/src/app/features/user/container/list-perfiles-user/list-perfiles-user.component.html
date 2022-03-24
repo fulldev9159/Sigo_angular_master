@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <h1 class="mt-4">Perfiles del usuario {{(perfilesUser$|async)[0]?.nombreUser}} </h1>
-      <span>listado de perfiles</span>
+      <h1 class="mt-4" style="color: rgba(0,0,0,.87);font-size: 1.71428571rem;">Perfiles del usuario {{(perfilesUser$|async)[0]?.nombreUser| titlecase}} </h1>
+      <!-- <span>listado de perfiles</span> -->
     </div>
     <div class="col">
 
@@ -74,7 +74,7 @@
   <ng-container modal-footer></ng-container>
 </app-modal>
 
-<app-modal [display]="displayModalEliminarPerfilUsuario" (CloseEvent)="closeModalEliminarPerfilUsuario()" [style]="{width: '50vw'}">
+<app-modal [display]="displayModalEliminarPerfilUsuario" (CloseEvent)="closeModalEliminarPerfilUsuario()" [style]="{width: '25vw !important'}">
   <ng-container modal-header-title></ng-container>
   <ng-container modal-content>
 
@@ -89,8 +89,12 @@
           </div>
           <div class="row">
             <div class="col">
-              <button pButton type="button" (click)="EliminarPerfilUsuario()" label="Si, confirmo" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="delete-perfil-user-button"></button>
-              <button pButton type="button" (click)="closeModalEliminarPerfilUsuario()" label="No" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="delete-user-button"></button>
+              <button pButton type="button" (click)="EliminarPerfilUsuario()" label="Si, confirmo" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-perfil-user-button" style="    background: #ffb6b6;
+              border: #b36161;
+              margin-left: 10px;
+              color: #412727;"></button>
+              <button pButton type="button" (click)="closeModalEliminarPerfilUsuario()" label="Cancelar" class="p-button-sm mt-5 float-right" id="delete-user-button" style="background: #b8b6b6;
+              border: gray;"></button>
             </div>
           </div>
         </div>

@@ -27,7 +27,7 @@ export const reducerProfile = createReducer(
   on(ProfileActions.getAllProfile, state => state),
   on(ProfileActions.getProfileSuccess, (state, { response }) => ({
     ...state,
-    perfiles: response.data.perfil_all,
+    perfiles: response.data.items,
   })),
   on(ProfileActions.getPermissions, state => state),
   on(ProfileActions.getPermissionsSuccess, (state, payload) => ({

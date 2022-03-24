@@ -53,7 +53,7 @@ export const reducerUser = createReducer(
 
   on(UserActions.getAllUserSuccess, (state, { response }) => ({
     ...state,
-    users: response.data.usuario_all,
+    users: response.data.items,
   })),
   on(UserActions.getPerfilesUserSuccess, (state, { response }) => {
     const perfilesUser = response.data.perfiles.map(perfil => {
@@ -81,7 +81,7 @@ export const reducerUser = createReducer(
   })),
   on(UserActions.getAllPerfilesSuccess, (state, { response }) => ({
     ...state,
-    allPerfiles: response.data.perfil_all,
+    allPerfiles: response.data.items,
   })),
 
   on(UserActions.getPosiblesSuperioresSuccess, (state, { response }) => ({
@@ -110,7 +110,7 @@ export const reducerUser = createReducer(
     UserActions.SelectedUser4AddPerfilSuccess,
     (state, { usuario_id, response }) => ({
       ...state,
-      selectedUser4AddPerfil: response.data.usuario_all.filter(
+      selectedUser4AddPerfil: response.data.items.filter(
         usuario => usuario.id === usuario_id
       )[0],
     })

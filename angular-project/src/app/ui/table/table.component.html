@@ -84,8 +84,8 @@
               <ng-container *ngIf="config.headerConfig.actionsType === 'ButtonsTest'">
                 <div class="ui icon buttons mini basic">
                   <ng-container *ngFor="let button of actions" [ngSwitch]="button.type">
-                    <button *ngSwitchCase="'alldisplay'" class="ui button generic-color"> {{button.label}} </button>
-                    <button *ngSwitchCase="'button-delete'" class="ui button eliminar-color">
+                    <button *ngSwitchCase="'alldisplay'" (click)="button.onClick($event, item, rowIndex)" class="ui button generic-color"> {{button.label}} </button>
+                    <button *ngSwitchCase="'button-delete'" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
                       <fa-icon [icon]="trashICon"></fa-icon>
                     </button>
                   </ng-container>

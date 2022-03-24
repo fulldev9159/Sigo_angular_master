@@ -54,19 +54,21 @@ Editar superior a un perfil
     # And Presione el botón editar
     # Then: En la tabla listar perfiles, para el perfil "Jefe de Área Telefónica" su superior debe ser "GEN MOVISTAR CASTILLO 1 (Gerente Telefónica)"
 
-    _Login                            admin                                          pass                                            Admin
+    _Login                            admin                                                         pass                                            Admin
     _Navegate to                      Usuario
     _Table should display data
     # Given
-    _SubMenu                          Administrar Perfiles                           gestor2
+    _SubMenu                          Administrar Perfiles                                          gestor2
     # When
-    _SubMenu                          Editar superior                                Jefe de Área Telefónica
+    # _SubMenu                          Editar superior                                Jefe de Área Telefónica
+    _Search table                     Jefe de Área Telefónica
+    _Click visible element            css:#action-buttons > div > button.ui.button.generic-color
     sleep                             1
-    _Select visible item              css:#superior-perfil-form>app-select>select    GEN MOVISTAR CASTILLO 1 (Gerente Telefónica)
+    _Select visible item              css:#superior-perfil-form>app-select>select                   GEN MOVISTAR CASTILLO 1 (Gerente Telefónica)
     _Click visible element            css:#add-user-perfil-button
     # Then
     _Element should exist in table    Jefe de Área Telefónica
-    _Validate column data             2                                              Gen Movistar Castillo 1
+    _Validate column data             2                                                             Gen Movistar Castillo 1
     close browser
 
 Eliminar perfil usuario
@@ -76,13 +78,15 @@ Eliminar perfil usuario
     # And presiona confirmar
     # Then: El perfil "Jefe de área" no debe aparecer en el listado
 
-    _Login                                admin                             pass                       Admin
+    _Login                                admin                                                          pass       Admin
     _Navegate to                          Usuario
     _Table should display data
     # Given
-    _SubMenu                              Administrar Perfiles              gestor2
+    _SubMenu                              Administrar Perfiles                                           gestor2
     # When
-    _SubMenu                              Eliminar                          Jefe de Área Telefónica
+    # _SubMenu                              Eliminar                          Jefe de Área Telefónica
+    _Search table                         Jefe de Área Telefónica
+    _Click visible element                css:#action-buttons > div > button.ui.button.eliminar-color
     _Click visible element                css:#delete-perfil-user-button
     sleep                                 1
     # Then
