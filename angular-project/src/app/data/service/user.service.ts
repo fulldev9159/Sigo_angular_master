@@ -86,7 +86,7 @@ export class UserService {
 
   activateUser(request: RequestActivateUser): Observable<Response<any>> {
     return this.http.post<Response<any>>(
-      `${this.apiUrl}/usuario/update`,
+      `${this.apiUrl}/usuario/usuario/update`,
       request
     );
   }

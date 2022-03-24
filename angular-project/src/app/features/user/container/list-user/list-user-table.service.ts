@@ -28,7 +28,7 @@ export class ListUserTableService {
             type: 'TEXT',
             sort: 'rut',
             header: 'rut',
-            width: '7rem',
+            width: '6rem',
             editable: false,
           },
           {
@@ -68,7 +68,7 @@ export class ListUserTableService {
             type: 'TEXT',
             sort: 'celular',
             header: 'celular',
-            width: '8.5rem',
+            width: '7rem',
             editable: false,
           },
           {
@@ -112,7 +112,7 @@ export class ListUserTableService {
             header: 'estado',
             booleantrue: 'Activo',
             booleanfalse: 'Bloqueado',
-            width: '4.4rem',
+            width: '6rem',
             editable: false,
           },
           {

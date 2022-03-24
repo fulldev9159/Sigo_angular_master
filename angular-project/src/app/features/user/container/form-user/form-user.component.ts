@@ -414,7 +414,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  onUpload(event: any): void {}
+  // onUpload(event: any): void {}
 
-  onDeleteFile(event: any): void {}
+  // onDeleteFile(event: any): void {}
 }

@@ -193,6 +193,9 @@ export class ListUserComponent implements OnInit, OnDestroy {
       this.userFacade.getAllUsers();
     }
   }
+  onUpload(event: any): void {}
+
+  onDeleteFile(event: any): void {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
