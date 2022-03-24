@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -11,6 +11,7 @@ import {
   PosiblesSuperiores,
   RequestActivateUser,
   RequestAgregarPerfilUsusario,
+  RequestUpFirmaUser,
   TableUserData,
   User,
 } from '@data';
@@ -23,6 +24,7 @@ import { ConfirmationService } from 'primeng/api';
   styleUrls: ['./list-user.component.scss'],
 })
 export class ListUserComponent implements OnInit, OnDestroy {
+  @ViewChild('filesform', { static: true }) filesform: any;
   subscription: Subscription = new Subscription();
 
   // DATOS A USAR
@@ -43,6 +45,11 @@ export class ListUserComponent implements OnInit, OnDestroy {
   usuario_id = null;
   txt_activar = null;
   estado_usuario = null;
+  uploadedFiles: any[] = [];
+  formControls = {
+    files: new FormControl([]),
+  };
+  form: FormGroup = new FormGroup(this.formControls);
 
   // CONSTRUCTOR
   constructor(
@@ -116,6 +123,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
         label: 'firma',
         onClick: (event: Event, item: User) => {
           this.displayModalFirma = true;
+          this.usuario_id = item.id;
         },
       },
       {
@@ -159,18 +167,23 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   closeModalDeleteUser(): void {
     this.displayModalDeleteUser = false;
+    this.usuario_id = null;
   }
 
   closeModalActivarUser(): void {
     this.displayModalActivarUser = false;
+    this.usuario_id = null;
   }
 
   closeModalVerContratos(): void {
     this.displayModalVerContratos = false;
+    this.usuario_id = null;
   }
 
   closeModalFirma(): void {
     this.displayModalFirma = false;
+    this.uploadedFiles = [];
+    this.filesform.clear();
   }
 
   DeleteUsuario(): void {
@@ -193,9 +206,27 @@ export class ListUserComponent implements OnInit, OnDestroy {
       this.userFacade.getAllUsers();
     }
   }
-  onUpload(event: any): void {}
+  onUpload(event: any): void {
+    console.log('ADD', event);
+    this.uploadedFiles = event;
+  }
 
   onDeleteFile(event: any): void {}
+
+  EnviarFirma(): void {
+    if (this.usuario_id) {
+      const index = 'files';
+      const request: RequestUpFirmaUser = {
+        files: this.uploadedFiles[index],
+      };
+
+      this.userFacade.upFirmaUser(this.usuario_id, request);
+      this.closeModalFirma();
+      setTimeout(() => {
+        this.userFacade.getAllUsers();
+      }, 700);
+    }
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

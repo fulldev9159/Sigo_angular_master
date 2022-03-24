@@ -102,7 +102,7 @@ export class ListUserTableService {
             header: 'firma',
             booleantrue: 'Con firma',
             booleanfalse: 'Sin firma',
-            width: '5.4rem',
+            width: '5.7rem',
             editable: false,
           },
           {

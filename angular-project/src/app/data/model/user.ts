@@ -112,6 +112,19 @@ export interface RequestActivateUser {
   };
 }
 
+export interface RequestUpFirmaUser {
+  files: any;
+}
+
+export interface ResponseUpFirmaUser {
+  repositorio_archivos_ids: number[];
+}
+export interface RequestAddFirmaUser {
+  usuario_id: number;
+  values: {
+    firma_archivo_id: number;
+  };
+}
 // GET CONTRATOS USER
 
 export interface DataRespGetContratosUser {

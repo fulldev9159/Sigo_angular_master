@@ -15,6 +15,8 @@ import {
   RequestUpdatePerfilUsusario,
   RequestActivateUser,
   DataRespGetContratosUser,
+  RequestUpFirmaUser,
+  RequestAddFirmaUser,
 } from '@data';
 
 // GET ALL USER
@@ -249,6 +251,38 @@ export const getContratosUserError = createAction(
 export const resetData = createAction('[ResetData] ResetData');
 export const resetPerfilSelected = createAction(
   '[ResetData] resetPerfilSelected'
+);
+
+// FIRMA USER
+export const upFirmaUser = createAction(
+  '[User] upFirmaUser User',
+  props<{ usuario_id: number; request: RequestUpFirmaUser }>()
+);
+
+export const upFirmaUserSuccess = createAction(
+  '[User] upFirmaUser Success',
+  props<{ response: Response<any> }>()
+);
+
+export const upFirmaUserError = createAction(
+  '[User] upFirmaUser Error',
+  props<{ error: any }>()
+);
+
+// FIRMA USER
+export const addFirmaUser = createAction(
+  '[User] addFirmaUser User',
+  props<{ request: RequestAddFirmaUser }>()
+);
+
+export const addFirmaUserSuccess = createAction(
+  '[User] addFirmaUser Success',
+  props<{ response: Response<any> }>()
+);
+
+export const addFirmaUserError = createAction(
+  '[User] addFirmaUser Error',
+  props<{ error: any }>()
 );
 
 ///////////////////////////////////////

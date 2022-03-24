@@ -151,7 +151,8 @@ export class AlertMessageActions {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
       } else if (
         action === contratoActions.activateContratoSuccess.type ||
-        action === userActions.agregarPerfilUsuarioSuccess.type
+        action === userActions.agregarPerfilUsuarioSuccess.type ||
+        action === userActions.addFirmaUserSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (this.msgOK[action]) {

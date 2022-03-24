@@ -15,8 +15,11 @@ import {
   DataRespGetContratosUser,
   DataRspAgregarPerfilUsuario,
   RequestActivateUser,
+  RequestAddFirmaUser,
   RequestAgregarPerfilUsusario,
   RequestUpdatePerfilUsusario,
+  RequestUpFirmaUser,
+  ResponseUpFirmaUser,
 } from '@data/model';
 @Injectable({
   providedIn: 'root',
@@ -85,6 +88,31 @@ export class UserService {
   }
 
   activateUser(request: RequestActivateUser): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/usuario/usuario/update`,
+      request
+    );
+  }
+
+  upFirmaUser(
+    request: RequestUpFirmaUser
+  ): Observable<Response<ResponseUpFirmaUser>> {
+    const formData = new FormData();
+    formData.append('concepto', 'FIRMA');
+    formData.append('categoria_id', '4');
+    if (request.files && request.files.length > 0) {
+      for (const file of request.files) {
+        formData.append('file', file, file.name);
+      }
+    }
+    console.log('FormData', formData);
+    return this.http.post<Response<ResponseUpFirmaUser>>(
+      `${this.apiUrl}/files/repositorio_archivos/create`,
+      formData
+    );
+  }
+
+  addFirmaUser(request: RequestAddFirmaUser): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/usuario/usuario/update`,
       request

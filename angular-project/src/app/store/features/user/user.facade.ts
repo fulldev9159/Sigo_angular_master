@@ -15,6 +15,7 @@ import {
   RequestActivateUser,
   RequestAgregarPerfilUsusario,
   RequestUpdatePerfilUsusario,
+  RequestUpFirmaUser,
   User,
 } from '@data';
 
@@ -145,16 +146,20 @@ export class UserFacade {
     return this.store.select(userSelectors.getContratosUser);
   }
 
+  // ACTIVACION
+  public activateUser(request: RequestActivateUser): void {
+    this.store.dispatch(userActions.activateUser({ request }));
+  }
+
+  // UP FIRMA
+  public upFirmaUser(usuario_id: number, request: RequestUpFirmaUser): void {
+    this.store.dispatch(userActions.upFirmaUser({ usuario_id, request }));
+  }
   // ///// /////////////////
 
   // DELETE
   public deleteUser(usuario_id: number): void {
     this.store.dispatch(userActions.deleteUser({ usuario_id }));
-  }
-
-  // ACTIVACION
-  public activateUser(request: RequestActivateUser): void {
-    this.store.dispatch(userActions.activateUser({ request }));
   }
 
   // CONTRACT

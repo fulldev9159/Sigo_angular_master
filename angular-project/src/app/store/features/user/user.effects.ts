@@ -15,6 +15,7 @@ import {
   AlertMessageActions,
   ProveedorService,
   AreaService,
+  RequestAddFirmaUser,
 } from '@data';
 @Injectable()
 export class UserEffects {
@@ -219,6 +220,44 @@ export class UserEffects {
     )
   );
 
+  upFirmaUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.upFirmaUser),
+      concatMap(({ usuario_id, request }) =>
+        this.userService.upFirmaUser(request).pipe(
+          map(response => {
+            const requestAdd: RequestAddFirmaUser = {
+              usuario_id,
+              values: {
+                firma_archivo_id: response.data.repositorio_archivos_ids[0],
+              },
+            };
+            return userActions.addFirmaUser({
+              request: requestAdd,
+            });
+          }),
+          catchError(error => of(userActions.upFirmaUserError({ error })))
+        )
+      )
+    )
+  );
+
+  addFirmaUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.addFirmaUser),
+      concatMap(({ request }) =>
+        this.userService.addFirmaUser(request).pipe(
+          map(response => {
+            return userActions.addFirmaUserSuccess({
+              response,
+            });
+          }),
+          catchError(error => of(userActions.addFirmaUserError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -226,7 +265,8 @@ export class UserEffects {
         ofType(
           userActions.getPerfilesUserSuccess,
           userActions.agregarPerfilUsuarioSuccess,
-          userActions.editarSuperiorPerfilUsuarioSuccess
+          userActions.editarSuperiorPerfilUsuarioSuccess,
+          userActions.addFirmaUserSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -247,7 +287,9 @@ export class UserEffects {
           userActions.agregarPerfilUsuarioError,
           userActions.editarSuperiorPerfilUsuarioError,
           userActions.activateUserError,
-          userActions.getContratosUserError
+          userActions.getContratosUserError,
+          userActions.addFirmaUserError,
+          userActions.upFirmaUserError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(
