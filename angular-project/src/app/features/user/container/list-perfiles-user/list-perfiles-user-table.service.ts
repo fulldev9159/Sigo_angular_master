@@ -21,13 +21,13 @@ export class ListPerfilesUserTableService {
         title: '',
         searchText: 'buscar...',
         paginator: true,
-        actionsType: 'Menu',
+        actionsType: 'ButtonsTest',
       },
       body: {
         headers: [
           {
             field: 'Perfil',
-            type: 'TEXT',
+            type: 'TEXT-MAIN',
             sort: 'nombre',
             header: 'nombre',
             // width: '10%',
@@ -50,10 +50,11 @@ export class ListPerfilesUserTableService {
             editable: false,
           },
           {
-            field: 'Acciones',
+            field: '',
             type: 'ACTIONS',
             sort: null,
             header: null,
+            width: '14rem',
             editable: false,
           },
         ],

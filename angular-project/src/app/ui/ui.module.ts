@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeNgModule } from './primeng/primeng.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Services
 
@@ -29,6 +30,7 @@ import { TabsComponent } from './tabs/tabs.component';
     ReactiveFormsModule,
     PrimeNgModule,
     NgxPermissionsModule,
+    FontAwesomeModule,
   ],
   declarations: [
     CardComponent,
@@ -61,6 +63,7 @@ import { TabsComponent } from './tabs/tabs.component';
     TextareaComponent,
     TabComponent,
     TabsComponent,
+    FontAwesomeModule,
   ],
   providers: [ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

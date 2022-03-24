@@ -1,5 +1,5 @@
 <div class="card" [formGroup]="form">
-  <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" [rowHover]="true" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
+  <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo p-datatable-striped ">
     <ng-template *ngIf="config.header" pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <h5 class="p-m-0">{{ config.headerConfig.title }}</h5>
@@ -20,24 +20,7 @@
             <th *ngSwitchDefault [pSortableColumn]="column.sort" [ngStyle]="{'width': column.width}">{{column.field}}
               <p-sortIcon *ngIf="column.sort" [field]="column.sort"></p-sortIcon>
             </th>
-            <!-- <th *ngSwitchCase="'BOOLEANTEXT'" [pSortableColumn]="column.sort" >{{column.field}} <p-sortIcon
-              [field]="column.sort">
-            </p-sortIcon>
-            </th>
-            <th *ngSwitchCase="'TEXT'" [pSortableColumn]="column.sort" [ngStyle]="{'width': column.width}">{{column.field}}
-              <p-sortIcon *ngIf="column.sort"
-                [field]="column.sort">
-              </p-sortIcon>
-            </th>
-            <th *ngSwitchCase="'DATE'" [pSortableColumn]="column.sort">{{column.field}} <p-sortIcon
-                [field]="column.sort">
-              </p-sortIcon>
-            </th>
-            <th *ngSwitchCase="'NUMBER'" [pSortableColumn]="column.sort">{{column.field}} <p-sortIcon
-                [field]="column.sort">
-              </p-sortIcon>
-            </th> -->
-            <th *ngSwitchCase="'ACTIONS'">{{column.field}}</th>
+            <th *ngSwitchCase="'ACTIONS'" [ngStyle]="{'width': column.width}">{{column.field}}</th>
           </ng-container>
         </ng-container>
       </tr>
@@ -50,6 +33,7 @@
             <p-tableCheckbox [value]="item"></p-tableCheckbox>
           </td>
           <td *ngSwitchCase="'TEXT-TITLECASE'">{{ item[column.header] | titlecase }}</td>
+          <td *ngSwitchCase="'TEXT-MAIN'"><strong>{{ item[column.header] }}</strong></td>
           <td *ngSwitchCase="'TEXT'">{{ item[column.header] }}</td>
           <td *ngSwitchCase="'INPUT'">
             <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="text" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
@@ -86,7 +70,6 @@
             </ng-container>
 
             <ng-template #menu let-actions="actions">
-              <!-- <ng-container *ngIf="(actions.length > 0 && actions.length <= 4)&&config.body.headers.length<=6"> -->
               <ng-container *ngIf="config.headerConfig.actionsType === 'Buttons'">
                 <div style="display: flex;">
                   <div *ngFor="let button of actions" class="p-buttonset">
@@ -98,7 +81,16 @@
                 </div>
               </ng-container>
 
-              <!-- <ng-container *ngIf="actions.length >4||config.body.headers.length>6"> -->
+              <ng-container *ngIf="config.headerConfig.actionsType === 'ButtonsTest'">
+                <div class="ui icon buttons mini basic">
+                  <button class="ui button generic-color"> Editar superior </button>
+                  <button class="ui button eliminar-color">
+                    <!-- <i class="pi pi-trash"></i> -->
+                    <!-- <i class="fa-solid fa-trash"></i> -->
+                    <fa-icon [icon]="trashICon"></fa-icon>
+                  </button>
+                </div>
+              </ng-container>
 
               <ng-container *ngIf="config.headerConfig.actionsType === 'Menu'">
                 <ng-container *ngIf="actions.length > 0">
