@@ -17,10 +17,10 @@ export class ListUserTableService {
         headers: [
           {
             field: 'username',
-            type: 'TEXT',
+            type: 'TEXT-MAIN',
             sort: 'username',
             header: 'username',
-            // width: '10%',
+            width: '9rem',
             editable: false,
           },
           {
@@ -28,7 +28,7 @@ export class ListUserTableService {
             type: 'TEXT',
             sort: 'rut',
             header: 'rut',
-            // width: '10%',
+            width: '7rem',
             editable: false,
           },
           {
@@ -68,7 +68,7 @@ export class ListUserTableService {
             type: 'TEXT',
             sort: 'celular',
             header: 'celular',
-            // width: '10%',
+            width: '8.5rem',
             editable: false,
           },
           {
@@ -84,7 +84,7 @@ export class ListUserTableService {
             type: 'DATE',
             sort: 'create_at',
             header: 'create_at',
-            // width: '10%',
+            width: '5.7rem',
             editable: false,
           },
           {
@@ -92,7 +92,17 @@ export class ListUserTableService {
             type: 'DATE',
             sort: 'update_at',
             header: 'update_at',
-            // width: '10%',
+            width: '5.7rem',
+            editable: false,
+          },
+          {
+            field: 'Firma',
+            type: 'BOOLEANTEXT',
+            sort: 'firma',
+            header: 'firma',
+            booleantrue: 'Con firma',
+            booleanfalse: 'Sin firma',
+            width: '5.4rem',
             editable: false,
           },
           {
@@ -102,14 +112,15 @@ export class ListUserTableService {
             header: 'estado',
             booleantrue: 'Activo',
             booleanfalse: 'Bloqueado',
-            width: '5%',
+            width: '4.4rem',
             editable: false,
           },
           {
-            field: 'Acciones',
+            field: '',
             type: 'ACTIONS',
             sort: null,
             header: null,
+            width: '4.4rem',
             editable: false,
           },
         ],

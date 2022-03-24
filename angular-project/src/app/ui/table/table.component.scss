@@ -223,6 +223,24 @@ div.p-datatable-header.ng-star-inserted>div>span>input {
   border-radius: 4px;
 }
 
+.label-table {
+  color: white;
+  font-size: 12px;
+  padding: 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  letter-spacing: 0.06rem;
+}
+
+.label-activo {
+  background: #00b5ad;
+}
+
+.label-inactivo {
+  background: #00b5ad75
+}
+
+
 // }
 
 @media screen and (max-width: 960px) {

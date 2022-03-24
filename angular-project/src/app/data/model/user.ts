@@ -14,6 +14,7 @@ export interface User {
   email: string;
   estado: boolean;
   id: number;
+  firma_archivo_id: any;
   model_area_id: Area;
   model_proveedor_id: {
     created_at: Date;
@@ -40,11 +41,6 @@ export interface User {
   rut: string;
   updated_at: string;
   username: string;
-
-  // activo: boolean;
-  // firma: string;
-  // proveedor_nombre: string;
-  // area_nombre: string;
 }
 
 // LIST USERS
@@ -61,6 +57,7 @@ export interface TableUserData {
   create_at: Date;
   update_at: Date;
   estado: boolean;
+  firma: boolean;
 }
 
 // LIST PERFILES USER

@@ -80,3 +80,18 @@
   </ng-container>
   <ng-container modal-footer></ng-container>
 </app-modal>
+
+<app-modal [display]="displayModalFirma" (CloseEvent)="closeModalVerContratos()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title>Contratos</ng-container>
+  <ng-container modal-content>
+
+    <p-listbox [options]="contratosUser$|async" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}" [disabled]="true">
+      <ng-template let-contrato pTemplate="item">
+        <div class="perfil-item">
+          <div> {{contrato.model_contrato_id.nombre}}</div>
+        </div>
+      </ng-template>
+    </p-listbox>
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>

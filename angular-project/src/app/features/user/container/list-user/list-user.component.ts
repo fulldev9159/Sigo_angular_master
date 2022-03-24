@@ -32,6 +32,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
   displayModalDeleteUser = false;
   displayModalActivarUser = false;
   displayModalVerContratos = false;
+  displayModalFirma = false;
 
   // FORMULARIO
 
@@ -110,6 +111,14 @@ export class ListUserComponent implements OnInit, OnDestroy {
         },
       },
       {
+        icon: ' pi pi-id-card',
+        labelVariable: true,
+        label: 'firma',
+        onClick: (event: Event, item: User) => {
+          this.displayModalFirma = true;
+        },
+      },
+      {
         icon: ' pi pi-plus',
         class: 'p-button-text p-button-danger p-button-sm',
         label: 'Administrar Perfiles',
@@ -138,6 +147,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
             create_at: new Date(usuario.created_at),
             update_at: new Date(usuario.updated_at),
             estado: usuario.estado,
+            firma: usuario.firma_archivo_id ? true : false,
           }));
         }
       })
@@ -157,6 +167,10 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   closeModalVerContratos(): void {
     this.displayModalVerContratos = false;
+  }
+
+  closeModalFirma(): void {
+    this.displayModalFirma = false;
   }
 
   DeleteUsuario(): void {
