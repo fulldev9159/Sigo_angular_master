@@ -19,6 +19,7 @@ import {
   Contrato,
   ContratosUser,
   RequestUpdateUser,
+  PosiblesContratosUser,
 } from '@data';
 
 @Component({
@@ -74,7 +75,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   proveedores4createUser$: Observable<Proveedores4CreateUser[]>;
   areas4createUser$: Observable<Area[]>;
-  contracts$: Observable<any[]>;
+  posiblesContractosUser$: Observable<PosiblesContratosUser[]>;
   contratosUser$: Observable<ContratosUser[]>;
   usuario_id = null;
   // profiles$: Observable<Data.Perfil[]>;
@@ -198,10 +199,12 @@ export class FormUserComponent implements OnInit, OnDestroy {
     //     });
     //   })
     // );
-    this.contracts$ = this.userFacade.getContratosUser$().pipe(
-      map(contratos => contratos || []),
-      tap(contratos => this.checkContratosAndEnable(contratos))
-    );
+    this.posiblesContractosUser$ = this.userFacade
+      .getPosiblesContratosUser4CreateEdit$()
+      .pipe(
+        map(contratos => contratos || []),
+        tap(contratos => this.checkContratosAndEnable(contratos))
+      );
 
     // this.proveedores4createUser$.subscribe(perfiles => {
     //   console.log(perfiles);
@@ -259,12 +262,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
         if (area_id !== null && area_id !== undefined) {
           const radioProvider = this.formUser.get('provider').value;
           const proveedor_id = this.formUser.get('proveedor_id').value;
-          this.userFacade.getContratosUser(+proveedor_id);
-          // if (radioProvider === 'contratista') {
-          //   this.userFacade.getContracts(+proveedor_id);
-          // } else if (radioProvider === 'movistar') {
-          //   this.userFacade.getContracts(null);
-          // }
+          if (radioProvider === 'contratista') {
+            this.userFacade.getPosiblesContratosUser4CreateEdit(+proveedor_id);
+          } else if (radioProvider === 'movistar') {
+            this.userFacade.getPosiblesContratosUser4CreateEdit(null);
+          }
         } else {
           this.disableContratosFormControl();
         }
@@ -306,7 +308,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkContratosAndEnable(contratos: Contrato[]): void {
+  checkContratosAndEnable(contratos: PosiblesContratosUser[]): void {
     if (contratos.length > 0) {
       this.formUser.get('contratos_marco').enable();
     } else {

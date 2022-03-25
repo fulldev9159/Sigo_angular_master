@@ -293,6 +293,24 @@ export class UserEffects {
     )
   );
 
+  getPosiblesContratosUser4createedit$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getPosiblesContratosUser4CreateEdit),
+      concatMap(({ proveedor_id }) =>
+        this.userService.getPosiblesContratosUser4CreateEdit(proveedor_id).pipe(
+          map(response => {
+            return userActions.getPosiblesContratosUser4CreateEditSuccess({
+              response,
+            });
+          }),
+          catchError(error =>
+            of(userActions.getPosiblesContratosUser4CreateEditError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

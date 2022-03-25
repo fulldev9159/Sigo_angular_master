@@ -128,46 +128,10 @@ export interface RequestAddFirmaUser {
 // GET CONTRATOS USER
 
 export interface DataRespGetContratosUser {
-  items: ContratosUser;
+  items: ContratosUser[];
 }
 
 export interface ContratosUser {
-  // contrato_id: number;
-  // model_contrato_id: {
-  //   activo: boolean;
-  //   aprob_jerarq_inic: boolean;
-  //   costo_max: number;
-  //   fecha_fin: Date;
-  //   fecha_inicio: Date;
-  //   id: number;
-  //   model_tipo_contrato_id: null;
-  //   model_tipo_moneda_id: null;
-  //   nombre: string;
-  //   tiene_encuesta: boolean;
-  //   tipo_contrato_id: number;
-  //   tipo_moneda_id: number;
-  //   tipo_pago: string;
-  //   validacion_operaciones: boolean;
-  // };
-  // model_usuario_id: {
-  //   apellidos: string;
-  //   area_id: number;
-  //   celular: string;
-  //   created_at: Date;
-  //   deleted_at: null;
-  //   email: string;
-  //   estado: boolean;
-  //   id: number;
-  //   model_area_id: null;
-  //   model_proveedor_id: null;
-  //   nombres: string;
-  //   proveedor_id: number;
-  //   rut: string;
-  //   updated_at: Date;
-  //   username: string;
-  // };
-  // usuario_id: number;
-
   aprob_jerarq_inic: boolean;
   costo_max: number;
   estado: boolean;
@@ -181,6 +145,53 @@ export interface ContratosUser {
   tipo_contrato_id: number;
   tipo_moneda_id: number;
   tipo_pago: string;
+}
+
+export interface DataRespGetPosiblesContratosUser {
+  items: PosiblesContratosUser[];
+}
+
+export interface PosiblesContratosUser {
+  codigo_acuerdo: string;
+  contrato_marco_id: number;
+  fecha_contable: Date;
+  fecha_fin: Date;
+  fecha_inicio: Date;
+  id: number;
+  model_contrato_marco_id: {
+    aprob_jerarq_inic: boolean;
+    costo_max: number;
+    estado: boolean;
+    fecha_fin: Date;
+    fecha_inicio: Date;
+    id: number;
+    nombre: string;
+    tiene_encuesta: boolean;
+    tipo_contrato_id: number;
+    tipo_moneda_id: number;
+    tipo_pago: string;
+    validacion_operaciones: boolean;
+  };
+  model_proveedor_id: {
+    created_at: Date;
+    direccion: string;
+    dv: string;
+    email: string;
+    estado: boolean;
+    id: number;
+    interno: boolean;
+    nombre: string;
+    numero_contrato: number;
+    razon_social: string;
+    representante_legal: string;
+    rut: number;
+    telefono: string;
+    tipo_proveedor_id: number;
+    updated_at: Date;
+    vigencia_garantia: number;
+  };
+  proveedor_id: number;
+  sociedad: string;
 }
 
 export interface RequestCreateUser {

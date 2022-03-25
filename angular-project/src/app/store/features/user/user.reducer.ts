@@ -7,6 +7,7 @@ import {
   ListPerfilesUserType,
   Perfil,
   PerfilesUser,
+  PosiblesContratosUser,
   PosiblesSuperiores,
   Proveedores4CreateUser,
   User,
@@ -25,7 +26,7 @@ export interface StateUser {
   proveedores4createUser: Proveedores4CreateUser[];
   areas4createUser: Area[];
   contratosUser: ContratosUser[];
-
+  posiblesContratosUSer: PosiblesContratosUser[];
   // contratos: Data.Contrato[];
   alldatauser: Data.UserWithDetail;
   displayDetalleModal: boolean;
@@ -42,7 +43,7 @@ export const initialStateUser: StateUser = {
   proveedores4createUser: [],
   areas4createUser: [],
   contratosUser: [],
-
+  posiblesContratosUSer: [],
   // contratos: [],
   alldatauser: null,
   displayDetalleModal: false,
@@ -124,6 +125,13 @@ export const reducerUser = createReducer(
     // contratosUser: response.data.usuario_has_contrato_array,
     contratosUser: response.data.items,
   })),
+  on(
+    UserActions.getPosiblesContratosUser4CreateEditSuccess,
+    (state, { response }) => ({
+      ...state,
+      posiblesContratosUSer: response.data.items,
+    })
+  ),
   //  ////
 
   on(UserActions.getContracts, state => state),

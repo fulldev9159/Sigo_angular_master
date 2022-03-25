@@ -11,6 +11,7 @@ import {
   ListPerfilesUserType,
   Perfil,
   PerfilesUser,
+  PosiblesContratosUser,
   PosiblesSuperiores,
   Proveedores4CreateUser,
   RequestActivateUser,
@@ -167,6 +168,19 @@ export class UserFacade {
   // UPDATE USER
   public updateUser(request: RequestUpdateUser): void {
     this.store.dispatch(userActions.updateUser({ request }));
+  }
+
+  // GET POSIBLES CONTRATOS USER 4 CREATE EDIT
+  public getPosiblesContratosUser4CreateEdit(proveedor_id: number): void {
+    this.store.dispatch(
+      userActions.getPosiblesContratosUser4CreateEdit({ proveedor_id })
+    );
+  }
+
+  public getPosiblesContratosUser4CreateEdit$(): Observable<
+    PosiblesContratosUser[]
+  > {
+    return this.store.select(userSelectors.getPosiblesContratosUser4CreateEdit);
   }
   // ///// /////////////////
 

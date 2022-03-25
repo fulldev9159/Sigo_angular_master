@@ -19,6 +19,7 @@ import {
   RequestAddFirmaUser,
   RequestCreateUser,
   RequestUpdateUser,
+  DataRespGetPosiblesContratosUser,
 } from '@data';
 
 // GET ALL USER
@@ -247,6 +248,22 @@ export const getContratosUserSuccess = createAction(
 
 export const getContratosUserError = createAction(
   '[User] getContratosUser Error',
+  props<{ error: any }>()
+);
+
+// GET POSIBLES CONTRATOS USER 4 CREATE EDIT
+export const getPosiblesContratosUser4CreateEdit = createAction(
+  '[User] getPosiblesContratosUser4CreateEdit User',
+  props<{ proveedor_id: number }>()
+);
+
+export const getPosiblesContratosUser4CreateEditSuccess = createAction(
+  '[User] getPosiblesContratosUser4CreateEdit Success',
+  props<{ response: Response<DataRespGetPosiblesContratosUser> }>()
+);
+
+export const getPosiblesContratosUser4CreateEditError = createAction(
+  '[User] getPosiblesContratosUser4CreateEdit Error',
   props<{ error: any }>()
 );
 

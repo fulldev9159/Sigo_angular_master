@@ -20,7 +20,10 @@ import {
   RequestUpFirmaUser,
   ResponseUpFirmaUser,
 } from '@data';
-import { RequestUpdateUser } from '@data/model';
+import {
+  DataRespGetPosiblesContratosUser,
+  RequestUpdateUser,
+} from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -126,6 +129,15 @@ export class UserService {
     return this.http.post<Response<DataRespGetContratosUser>>(
       `${this.apiUrl}/usuario/usuario_has_contrato/get`,
       { usuario_id }
+    );
+  }
+
+  getPosiblesContratosUser4CreateEdit(
+    proveedor_id: number
+  ): Observable<Response<DataRespGetPosiblesContratosUser>> {
+    return this.http.post<Response<DataRespGetPosiblesContratosUser>>(
+      `${this.apiUrl}/usuario/cmarco_has_proveedor_pvid/get`,
+      { proveedor_id }
     );
   }
 
