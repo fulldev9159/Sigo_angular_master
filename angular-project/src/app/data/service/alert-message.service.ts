@@ -146,7 +146,8 @@ export class AlertMessageActions {
       if (
         action === areaActions.updateAreaSuccess.type ||
         action === contratoActions.updateContratoSuccess.type ||
-        action === userActions.editarSuperiorPerfilUsuarioSuccess.type
+        action === userActions.editarSuperiorPerfilUsuarioSuccess.type ||
+        action === userActions.updateUserSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
       } else if (
@@ -199,7 +200,10 @@ export class AlertMessageActions {
         this.contratoFacade.getAllContratos();
       }
 
-      if (action === userActions.createUserSuccess.type) {
+      if (
+        action === userActions.createUserSuccess.type ||
+        action === userActions.updateUserSuccess.type
+      ) {
         this.router.navigate(['/app/user/list-user']);
       }
     }
