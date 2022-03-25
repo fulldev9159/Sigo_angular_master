@@ -242,8 +242,7 @@ export const getContratosUser = createAction(
 
 export const getContratosUserSuccess = createAction(
   '[User] getContratosUser Success',
-  // props<{ response: Response<DataRespGetContratosUser> }>()
-  props<{ response: Response<any> }>()
+  props<{ response: Response<DataRespGetContratosUser> }>()
 );
 
 export const getContratosUserError = createAction(

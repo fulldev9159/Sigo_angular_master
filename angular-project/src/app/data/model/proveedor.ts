@@ -1,5 +1,5 @@
 export interface DataRspGetProveedores4CreateUser {
-  proveedor_array: Proveedores4CreateUser[];
+  items: Proveedores4CreateUser[];
 }
 
 export interface Proveedores4CreateUser {

@@ -112,3 +112,8 @@ _SubMenu
     END
 
     _Click visible element    ${selector}
+
+_Element text should be
+    [Arguments]        ${element}    ${texto}
+    ${txt}=            Get Text      ${element}
+    Should Be Equal    ${txt}        ${texto}

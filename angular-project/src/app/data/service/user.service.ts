@@ -123,7 +123,7 @@ export class UserService {
     );
   }
 
-  GetContratosUser(
+  getContratosUser(
     usuario_id: number
   ): Observable<Response<DataRespGetContratosUser>> {
     return this.http.post<Response<DataRespGetContratosUser>>(

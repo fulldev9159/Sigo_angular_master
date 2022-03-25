@@ -93,12 +93,12 @@ export const reducerUser = createReducer(
     UserActions.getAllProveedores4CreateUserSuccess,
     (state, { response }) => ({
       ...state,
-      proveedores4createUser: response.data.proveedor_array,
+      proveedores4createUser: response.data.items,
     })
   ),
   on(UserActions.getAllAreas4CreateUserSuccess, (state, { response }) => ({
     ...state,
-    areas4createUser: response.data.area_array,
+    areas4createUser: response.data.items,
   })),
   on(UserActions.resetData, (state, payload) => ({
     ...initialStateUser,

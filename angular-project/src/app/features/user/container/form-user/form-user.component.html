@@ -19,22 +19,32 @@
           <form [formGroup]="formUser">
             <div class="row justify-content-center">
               <div class="col-md-6 col-xs-12 ">
-                <app-input [control]="formControls.username" DisplayLabelMode="side" label="* Usuario Guia:"></app-input>
+                <div id="guia-input">
+                  <app-input [control]="formControls.username" DisplayLabelMode="side" label="* Usuario Guia:"></app-input>
+                </div>
                 <br>
-                <app-input [control]="formControls.rut" label="*Documento identidad:" DisplayLabelMode="side"></app-input>
+                <div id="rut-input">
+                  <app-input [control]="formControls.rut" label="*Documento identidad:" DisplayLabelMode="side"></app-input>
+                </div>
                 <!-- <input id="documento-input" name="documento-input" formControlName="rut" maxlength="15" minlength="10" placeholder="xx.xxx.xxx-x" class="form-control" type="text">  -->
                 <br>
-                <app-input [control]="formControls.nombres" label="* Nombres:" DisplayLabelMode="side"></app-input>
+                <div id="nombres-input">
+                  <app-input [control]="formControls.nombres" label="* Nombres:" DisplayLabelMode="side"></app-input>
+                </div>
                 <br>
-                <app-input [control]="formControls.apellidos" label="* Apellidos:" DisplayLabelMode="side"></app-input>
+                <div id="apellidos-input">
+                  <app-input [control]="formControls.apellidos" label="* Apellidos:" DisplayLabelMode="side"></app-input>
+                </div>
                 <br>
-                <app-input [control]="formControls.email" label="* Email:" DisplayLabelMode="side"></app-input>
+                <div id="email-input">
+                  <app-input [control]="formControls.email" label="* Email:" DisplayLabelMode="side"></app-input>
+                </div>
                 <br>
                 <div class="row" style="text-align: end">
                   <div class="col-md-4 col-xs-12">
                     <label for="">Celular</label>
                   </div>
-                  <div class="col-md-8 col-xs-12">
+                  <div class="col-md-8 col-xs-12" id="celular-input">
                     <p-inputMask id="celular-input" name="celular-input" formControlName="celular" styleClass="form-control" mask="(99) 9 9999 9999" unmask="true">
                     </p-inputMask>
                   </div>
@@ -47,13 +57,13 @@
                       <label for="">Empresa</label>
                       <div class="row" style="margin-left: 19%;">
                         <div class="col-xs-12 col-md-5">
-                          <div class="p-field-radiobutton">
+                          <div class="p-field-radiobutton" id="movistar-radio-input">
                             <p-radioButton id="movistar" name="provider" formControlName="provider" value="movistar"></p-radioButton>
                             <label for="movistar">Movistar</label>
                           </div>
                         </div>
                         <div class="col-xs-12 col-md-7">
-                          <div class="p-field-radiobutton">
+                          <div class="p-field-radiobutton" id="contratista-radio-input">
                             <p-radioButton id="proveedor" name="provider" formControlName="provider" value="contratista"></p-radioButton>
                             <label for="proveedor">Contratista</label>
                           </div>
@@ -62,28 +72,33 @@
                     </div>
 
                     <br>
+                    <div id="proveedor-select">
+                      <app-select [control]="formControls.proveedor_id" label="* Proveedor">
+                        <ng-container options>
+                          <option value="null" selected disabled>Seleccione proveedor</option>
+                          <ng-container *ngFor="let proveedor of (proveedores4createUser$ | async)">
+                            <option [value]="proveedor.id">
+                              {{ proveedor.nombre }}
+                            </option>
+                          </ng-container>
+                        </ng-container>
+                      </app-select>
+                    </div>
 
-                    <app-select [control]="formControls.proveedor_id" label="* Proveedor">
-                      <ng-container options>
-                        <option value="null" selected disabled>Seleccione proveedor</option>
-                        <ng-container *ngFor="let proveedor of (proveedores4createUser$ | async)">
-                          <option [value]="proveedor.id">
-                            {{ proveedor.nombre }}
-                          </option>
-                        </ng-container>
-                      </ng-container>
-                    </app-select>
                     <br>
-                    <app-select [control]="formControls.area_id" label="* Área">
-                      <ng-container options>
-                        <option value="null" selected disabled>Seleccione área</option>
-                        <ng-container *ngFor="let area of areas4createUser$ | async">
-                          <option [value]="area.id">
-                            {{ area.nombre }}
-                          </option>
+                    <div id="area-select">
+                      <app-select [control]="formControls.area_id" label="* Área">
+                        <ng-container options>
+                          <option value="null" selected disabled>Seleccione área</option>
+                          <ng-container *ngFor="let area of areas4createUser$ | async">
+                            <option [value]="area.id">
+                              {{ area.nombre }}
+                            </option>
+                          </ng-container>
                         </ng-container>
-                      </ng-container>
-                    </app-select>
+                      </app-select>
+                    </div>
+
                   </div>
                 </div>
 
@@ -97,8 +112,8 @@
             <div class="row justify-content-center">
               <div class="col-md-6 col-xs-12">
                 <label for="">Contratos con los que puede trabajar</label>
-                <div>
-                  <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="posiblesContractosUser$|async" formControlName="contratos_marco" optionLabel="model_contrato_marco_id.nombre" optionValue="id" [virtualScroll]="true" itemSize="30">
+                <div id="contratos-select">
+                  <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="posiblesContractosUser$|async" formControlName="contratos_marco" optionLabel="model_contrato_marco_id.nombre" optionValue="contrato_marco_id" [virtualScroll]="true" itemSize="30">
                   </p-multiSelect>
                   <div *ngIf="formControls.contratos_marco.invalid && (formControls.contratos_marco.dirty || formControls.contratos_marco.touched)">
                     <p-message severity="error" text="Este campo es requerido"></p-message>

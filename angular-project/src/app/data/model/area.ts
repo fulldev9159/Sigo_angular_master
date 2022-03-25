@@ -3,7 +3,7 @@ export interface DataRspGetAreas {
 }
 
 export interface DataRspGetAllAreas4createUser {
-  area_array: Area[];
+  items: Area[];
 }
 
 export interface Area {

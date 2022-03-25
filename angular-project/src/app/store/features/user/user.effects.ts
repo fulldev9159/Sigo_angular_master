@@ -210,8 +210,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(userActions.getContratosUser),
       concatMap(({ usuario_id }) =>
-        this.contratoService.getAllContratos().pipe(
-          // this.userService.GetContratosUser(usuario_id).pipe(
+        this.userService.getContratosUser(usuario_id).pipe(
           map(response => {
             return userActions.getContratosUserSuccess({
               response,

@@ -144,11 +144,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
               this.formUser.get('area_id').setValue(userSelected.area_id);
             }, delay);
             console.log(contratos);
-            console.log(contratos.map(contrato => contrato.id));
+            console.log(contratos.map(contrato => contrato.contrato_id));
             setTimeout(() => {
               this.formUser
                 .get('contratos_marco')
-                .setValue(contratos.map(contrato => contrato.id));
+                .setValue(contratos.map(contrato => contrato.contrato_id));
             }, 700);
             // setTimeout(() => {
             //   this.formUser.get('superior').setValue(17);
@@ -265,7 +265,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
           if (radioProvider === 'contratista') {
             this.userFacade.getPosiblesContratosUser4CreateEdit(+proveedor_id);
           } else if (radioProvider === 'movistar') {
-            this.userFacade.getPosiblesContratosUser4CreateEdit(null);
+            this.userFacade.getPosiblesContratosUser4CreateEdit(-1);
           }
         } else {
           this.disableContratosFormControl();
