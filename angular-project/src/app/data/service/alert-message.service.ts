@@ -155,6 +155,8 @@ export class AlertMessageActions {
         action === userActions.addFirmaUserSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
+      } else if (action === userActions.createUserSuccess.type) {
+        this.snackService.showMessage(`Creación exitosa`, 'OK', 3000);
       } else if (this.msgOK[action]) {
         this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
       }
@@ -197,7 +199,8 @@ export class AlertMessageActions {
         this.contratoFacade.getAllContratos();
       }
 
-      if (action === userActions.agregarPerfilUsuarioSuccess.type) {
+      if (action === userActions.createUserSuccess.type) {
+        this.router.navigate(['/app/user/list-user']);
       }
     }
   }

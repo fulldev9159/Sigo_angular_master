@@ -7,7 +7,7 @@ import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-import * as Data from '@data';
+// import * as Data from '@data';
 
 import * as _ from 'lodash';
 import {
@@ -15,6 +15,10 @@ import {
   PosiblesSuperiores,
   Area,
   Proveedores4CreateUser,
+  RequestCreateUser,
+  Contrato,
+  ContratosUser,
+  RequestUpdateUser,
 } from '@data';
 
 @Component({
@@ -62,19 +66,21 @@ export class FormUserComponent implements OnInit, OnDestroy {
     proveedor_id: new FormControl(null, [Validators.required]),
     area_id: new FormControl(null, [Validators.required]),
     contratos_marco: new FormControl(null),
-    perfiles: new FormControl(null, [Validators.required]),
-    superior: new FormControl(null, [Validators.required]),
+    // perfiles: new FormControl(null, [Validators.required]),
+    // superior: new FormControl(null, [Validators.required]),
   };
 
   formUser: FormGroup = new FormGroup(this.formControls);
 
   proveedores4createUser$: Observable<Proveedores4CreateUser[]>;
   areas4createUser$: Observable<Area[]>;
-  contracts$: Observable<Data.Contrato[]>;
-  profiles$: Observable<Data.Perfil[]>;
-  samecompanyusers$: Observable<PosiblesSuperiores[]>;
-  roles: any;
-  perfiles: any;
+  contracts$: Observable<any[]>;
+  contratosUser$: Observable<ContratosUser[]>;
+  usuario_id = null;
+  // profiles$: Observable<Data.Perfil[]>;
+  // samecompanyusers$: Observable<PosiblesSuperiores[]>;
+  // roles: any;
+  // perfiles: any;
 
   constructor(
     private userFacade: UserFacade,
@@ -93,52 +99,62 @@ export class FormUserComponent implements OnInit, OnDestroy {
       this.route.paramMap.subscribe(params => {
         const id = params.get('id');
         if (id !== null) {
-          const userID = +params.get('id');
-          // this.userFacade.getAllDataUsuario(userID);
+          this.usuario_id = +params.get('id');
+          this.userFacade.getAllUsers();
+          this.userFacade.getContratosUser(+params.get('id'));
         }
       })
     );
 
     this.subscription.add(
       this.userFacade
-        .getAllDataUsuario$()
-        .pipe(withLatestFrom(this.proveedores4createUser$))
-        .subscribe(([user, proveedores]) => {
-          if (user) {
-            this.formUser.get('id').setValue(user.id);
-            this.formUser.get('username').setValue(user.username);
+        .getAllUsers$()
+        .pipe(withLatestFrom(this.contratosUser$))
+        .subscribe(([users, contratos]) => {
+          if (users && users.length > 0 && this.usuario_id) {
+            const userSelected = users.find(
+              user => user.id === this.usuario_id
+            );
+            console.log(this.usuario_id);
+            console.log(userSelected);
+            this.formUser.get('id').setValue(userSelected.id);
+            this.formUser.get('username').setValue(userSelected.username);
             this.formUser.get('username').disable();
-            this.formUser.get('nombres').setValue(user.nombres);
-            this.formUser.get('apellidos').setValue(user.apellidos);
-            this.formUser.get('email').setValue(user.email);
-            this.formUser.get('rut').setValue(user.rut);
-            this.formUser.get('celular').setValue(user.celular);
+            this.formUser.get('nombres').setValue(userSelected.nombres);
+            this.formUser.get('apellidos').setValue(userSelected.apellidos);
+            this.formUser.get('email').setValue(userSelected.email);
+            this.formUser.get('rut').setValue(userSelected.rut);
+            this.formUser.get('celular').setValue(userSelected.celular);
 
             // ToDO: Que el endpoint de get proveedores retorne si este es interno o externo
             // const proveedor = proveedores.find(proveedor=>{proveedor.id===user.proveedor_id})
-            if (user.proveedor_id === 1) {
+            if (userSelected.proveedor_id === 1) {
               this.formUser.get('provider').setValue('movistar');
             } else {
               this.formUser.get('provider').setValue('contratista');
             }
             const delay = 700;
             setTimeout(() => {
-              this.formUser.get('proveedor_id').setValue(user.proveedor_id);
+              this.formUser
+                .get('proveedor_id')
+                .setValue(userSelected.proveedor_id);
             }, delay);
             setTimeout(() => {
-              this.formUser.get('area_id').setValue(user.area_id);
+              this.formUser.get('area_id').setValue(userSelected.area_id);
             }, delay);
+            console.log(contratos);
+            console.log(contratos.map(contrato => contrato.id));
             setTimeout(() => {
               this.formUser
                 .get('contratos_marco')
-                .setValue(user.contratos_marco.map(contrato => contrato.id));
-            }, delay);
-            setTimeout(() => {
-              this.formUser.get('superior').setValue(17);
-            }, 1500);
-            this.formUser
-              .get('perfiles')
-              .setValue(user.perfiles.map(perfil => perfil.id));
+                .setValue(contratos.map(contrato => contrato.id));
+            }, 700);
+            // setTimeout(() => {
+            //   this.formUser.get('superior').setValue(17);
+            // }, 1500);
+            // this.formUser
+            //   .get('perfiles')
+            //   .setValue(user.perfiles.map(perfil => perfil.id));
 
             setTimeout(() => {
               this.detector.detectChanges();
@@ -158,6 +174,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.areas4createUser$ = this.userFacade
       .getAllarea4createUser$()
       .pipe(tap(areas => this.checkAreaAndEnable(areas)));
+    this.contratosUser$ = this.userFacade.getContratosUser$();
     // this.profiles$ = this.profileFacade.getProfile$().pipe(
     //   map(perfiles => {
     //     return perfiles || [];
@@ -181,7 +198,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     //     });
     //   })
     // );
-    this.contracts$ = this.userFacade.getContracts$().pipe(
+    this.contracts$ = this.userFacade.getContratosUser$().pipe(
       map(contratos => contratos || []),
       tap(contratos => this.checkContratosAndEnable(contratos))
     );
@@ -242,11 +259,12 @@ export class FormUserComponent implements OnInit, OnDestroy {
         if (area_id !== null && area_id !== undefined) {
           const radioProvider = this.formUser.get('provider').value;
           const proveedor_id = this.formUser.get('proveedor_id').value;
-          if (radioProvider === 'contratista') {
-            this.userFacade.getContracts(+proveedor_id);
-          } else if (radioProvider === 'movistar') {
-            this.userFacade.getContracts(null);
-          }
+          this.userFacade.getContratosUser(+proveedor_id);
+          // if (radioProvider === 'contratista') {
+          //   this.userFacade.getContracts(+proveedor_id);
+          // } else if (radioProvider === 'movistar') {
+          //   this.userFacade.getContracts(null);
+          // }
         } else {
           this.disableContratosFormControl();
         }
@@ -259,7 +277,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       this.formUser
         .get('contratos_marco')
         .valueChanges.subscribe(contratos_marco_id => {
-          this.resetSuperiorFormControl();
+          // this.resetSuperiorFormControl();
           if (
             contratos_marco_id !== null &&
             contratos_marco_id !== undefined &&
@@ -273,14 +291,14 @@ export class FormUserComponent implements OnInit, OnDestroy {
             //   contratos_marco_id
             // );
           } else {
-            this.disableSuperiorFormControl();
+            // this.disableSuperiorFormControl();
           }
         })
     );
   }
 
   //  --- ENABLED ---
-  checkAreaAndEnable(areas: Data.Area[]): void {
+  checkAreaAndEnable(areas: Area[]): void {
     if (areas.length > 0) {
       this.formUser.get('area_id').enable();
     } else {
@@ -288,7 +306,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkContratosAndEnable(contratos: Data.Contrato[]): void {
+  checkContratosAndEnable(contratos: Contrato[]): void {
     if (contratos.length > 0) {
       this.formUser.get('contratos_marco').enable();
     } else {
@@ -296,13 +314,13 @@ export class FormUserComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkSuperioresAndEnable(usuarios: PosiblesSuperiores[]): void {
-    if (usuarios.length > 0) {
-      this.formUser.get('superior').enable();
-    } else {
-      this.formUser.get('superior').disable();
-    }
-  }
+  // checkSuperioresAndEnable(usuarios: PosiblesSuperiores[]): void {
+  //   if (usuarios.length > 0) {
+  //     this.formUser.get('superior').enable();
+  //   } else {
+  //     this.formUser.get('superior').disable();
+  //   }
+  // }
   //  ---- DISABLED ---
   disableAreaFormControl(): void {
     this.formUser.get('area_id').disable({ emitEvent: false });
@@ -311,9 +329,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
   disableContratosFormControl(): void {
     this.formUser.get('contratos_marco').disable({ emitEvent: false });
   }
-  disableSuperiorFormControl(): void {
-    this.formUser.get('superior').disable({ emitEvent: false });
-  }
+  // disableSuperiorFormControl(): void {
+  //   this.formUser.get('superior').disable({ emitEvent: false });
+  // }
   //  --- RESET -----
   resetProveedorFormControl(): void {
     this.formUser.get('proveedor_id').reset();
@@ -327,10 +345,10 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.formUser.get('contratos_marco').reset();
   }
 
-  resetSuperiorFormControl(): void {
-    this.userFacade.resetSuperiores();
-    this.formUser.get('superior').reset();
-  }
+  // resetSuperiorFormControl(): void {
+  //   this.userFacade.resetSuperiores();
+  //   this.formUser.get('superior').reset();
+  // }
 
   // --- INIT DATA ---
   initData(): void {
@@ -374,42 +392,45 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    let data: Data.CreateUserRequest;
-    const perfiles = this.formUser.get('perfiles').value;
-    data = {
+    let request: RequestCreateUser = {
       username: this.formUser.get('username').value,
       nombres: this.formUser.get('nombres').value,
       apellidos: this.formUser.get('apellidos').value,
       rut: this.formUser.get('rut').value,
-      firma: null,
       celular: this.formUser.get('celular').value,
       email: this.formUser.get('email').value,
       proveedor_id: +this.formUser.get('proveedor_id').value,
       area_id: +this.formUser.get('area_id').value,
-      perfiles: perfiles.map(perfil_id => ({
-        perfil_id,
-        persona_a_cargo_id: 1,
-      })),
       contratos_marco: this.formUser.get('contratos_marco').value,
-      superior_id:
-        this.formUser.get('superior').value === null
-          ? null
-          : +this.formUser.get('superior').value,
+      estado: true,
     };
+
+    console.log(request);
     if (this.formUser.get('id').value !== null) {
-      let request: Data.EditUserRequest;
-      request = {
-        id: +this.formUser.get('id').value,
-        ...data,
+      let updateRequest: RequestUpdateUser = {
+        usuario_id: this.usuario_id,
+        values: {
+          nombres: this.formUser.get('nombres').value,
+          apellidos: this.formUser.get('apellidos').value,
+          rut: this.formUser.get('rut').value,
+          celular: this.formUser.get('celular').value,
+          email: this.formUser.get('email').value,
+          proveedor_id: +this.formUser.get('proveedor_id').value,
+          area_id: +this.formUser.get('area_id').value,
+        },
+        contratos_marco: this.formUser.get('contratos_marco').value,
       };
-      console.log('EDIT REQUEST', request);
-      this.userFacade.editUserNew(request);
-      // ToDo: Esto es un WA para que no se habra el modal
-      this.userFacade.SetDisplayDetalleModal(false);
+      this.userFacade.updateUser(updateRequest);
+      // let request: Data.EditUserRequest;
+      // request = {
+      //   id: +this.formUser.get('id').value,
+      //   ...data,
+      // };
+      // console.log('EDIT REQUEST', request);
+      // this.userFacade.editUserNew(request);
+      // // ToDo: Esto es un WA para que no se habra el modal
+      // this.userFacade.SetDisplayDetalleModal(false);
     } else {
-      let request: Data.CreateUserRequest;
-      request = data;
-      console.log('CREATE REQUEST', request);
       this.userFacade.createUser(request);
     }
   }

@@ -73,7 +73,7 @@
     <p-listbox [options]="contratosUser$|async" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}" [disabled]="true">
       <ng-template let-contrato pTemplate="item">
         <div class="perfil-item">
-          <div> {{contrato.model_contrato_id.nombre}}</div>
+          <div> {{contrato.nombre}}</div>
         </div>
       </ng-template>
     </p-listbox>

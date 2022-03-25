@@ -17,6 +17,8 @@ import {
   DataRespGetContratosUser,
   RequestUpFirmaUser,
   RequestAddFirmaUser,
+  RequestCreateUser,
+  RequestUpdateUser,
 } from '@data';
 
 // GET ALL USER
@@ -239,7 +241,8 @@ export const getContratosUser = createAction(
 
 export const getContratosUserSuccess = createAction(
   '[User] getContratosUser Success',
-  props<{ response: Response<DataRespGetContratosUser> }>()
+  // props<{ response: Response<DataRespGetContratosUser> }>()
+  props<{ response: Response<any> }>()
 );
 
 export const getContratosUserError = createAction(
@@ -285,6 +288,37 @@ export const addFirmaUserError = createAction(
   props<{ error: any }>()
 );
 
+// CREATE USER
+export const createUser = createAction(
+  '[User] createUser User',
+  props<{ request: RequestCreateUser }>()
+);
+
+export const createUserSuccess = createAction(
+  '[User] createUser Success',
+  props<{ response: Response<any> }>()
+);
+
+export const createUserError = createAction(
+  '[User] createUser Error',
+  props<{ error: any }>()
+);
+
+// UPDATE USER
+export const updateUser = createAction(
+  '[User] updateUser User',
+  props<{ request: RequestUpdateUser }>()
+);
+
+export const updateUserSuccess = createAction(
+  '[User] updateUser Success',
+  props<{ response: Response<any> }>()
+);
+
+export const updateUserError = createAction(
+  '[User] updateUser Error',
+  props<{ error: any }>()
+);
 ///////////////////////////////////////
 
 // ::: Get user by ID
@@ -333,19 +367,19 @@ export const getContractsError = createAction(
 );
 
 // Crear Usuario
-export const createUser = createAction(
-  '[User Post] CREATE User',
-  props<{ createUserRequest: Data.CreateUserRequest }>()
-);
+// export const createUser = createAction(
+//   '[User Post] CREATE User',
+//   props<{ createUserRequest: Data.CreateUserRequest }>()
+// );
 
-export const createUserSuccess = createAction(
-  '[User Post] CREATE User Success'
-);
+// export const createUserSuccess = createAction(
+//   '[User Post] CREATE User Success'
+// );
 
-export const createUserError = createAction(
-  '[User Post] CREATE User Error',
-  props<{ error: any }>()
-);
+// export const createUserError = createAction(
+//   '[User Post] CREATE User Error',
+//   props<{ error: any }>()
+// );
 
 // Editar Usuario
 export const editUser = createAction(

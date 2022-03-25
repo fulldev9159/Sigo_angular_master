@@ -26,7 +26,7 @@ export interface StateUser {
   areas4createUser: Area[];
   contratosUser: ContratosUser[];
 
-  contratos: Data.Contrato[];
+  // contratos: Data.Contrato[];
   alldatauser: Data.UserWithDetail;
   displayDetalleModal: boolean;
 }
@@ -43,7 +43,7 @@ export const initialStateUser: StateUser = {
   areas4createUser: [],
   contratosUser: [],
 
-  contratos: [],
+  // contratos: [],
   alldatauser: null,
   displayDetalleModal: false,
 };
@@ -121,7 +121,8 @@ export const reducerUser = createReducer(
   })),
   on(UserActions.getContratosUserSuccess, (state, { response }) => ({
     ...state,
-    contratosUser: response.data.usuario_has_contrato_array,
+    // contratosUser: response.data.usuario_has_contrato_array,
+    contratosUser: response.data.items,
   })),
   //  ////
 

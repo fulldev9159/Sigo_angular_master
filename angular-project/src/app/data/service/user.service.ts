@@ -9,18 +9,19 @@ import {
   ResponsePosiblesSuperiores,
   DataResponseGetAllUser,
   Response,
-} from '@data';
-import {
   DataGetPosiblesSuperiores,
   DataRespGetContratosUser,
   DataRspAgregarPerfilUsuario,
   RequestActivateUser,
   RequestAddFirmaUser,
   RequestAgregarPerfilUsusario,
+  RequestCreateUser,
   RequestUpdatePerfilUsusario,
   RequestUpFirmaUser,
   ResponseUpFirmaUser,
-} from '@data/model';
+} from '@data';
+import { RequestUpdateUser } from '@data/model';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -127,6 +128,20 @@ export class UserService {
       { usuario_id }
     );
   }
+
+  createUser(request: RequestCreateUser): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/usuario/usuario/create`,
+      request
+    );
+  }
+
+  updateUser(request: RequestUpdateUser): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/usuario/usuario/update`,
+      request
+    );
+  }
   //   ///
 
   // getAllDataUsuario(usuario_id: number): Observable<Data.UserWithDetail> {
@@ -179,18 +194,18 @@ export class UserService {
       );
   }
 
-  createUser(request: Data.CreateUserRequest): Observable<number> {
-    return this.http
-      .post<Data.CreateUserResponse>(`${this.apiUrl}/usuario/create`, request)
-      .pipe(
-        map((res: Data.CreateUserResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.id;
-        })
-      );
-  }
+  // createUser(request: Data.CreateUserRequest): Observable<number> {
+  //   return this.http
+  //     .post<Data.CreateUserResponse>(`${this.apiUrl}/usuario/create`, request)
+  //     .pipe(
+  //       map((res: Data.CreateUserResponse) => {
+  //         if (+res.status.responseCode !== 0) {
+  //           this.snackService.showMessage(res.status.description, 'error');
+  //         }
+  //         return res.data.id;
+  //       })
+  //     );
+  // }
 
   editUser(request: Data.CreateUserRequest): Observable<number> {
     return this.http

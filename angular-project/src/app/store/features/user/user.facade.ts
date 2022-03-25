@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 
 import * as userActions from './user.actions';
 import * as userSelectors from './user.selectors';
-import * as Data from '@data';
+// import * as Data from '@data';
 import {
   Area,
+  ContratosUser,
   ListPerfilesUserType,
   Perfil,
   PerfilesUser,
@@ -14,7 +15,9 @@ import {
   Proveedores4CreateUser,
   RequestActivateUser,
   RequestAgregarPerfilUsusario,
+  RequestCreateUser,
   RequestUpdatePerfilUsusario,
+  RequestUpdateUser,
   RequestUpFirmaUser,
   User,
 } from '@data';
@@ -142,7 +145,7 @@ export class UserFacade {
     this.store.dispatch(userActions.getContratosUser({ usuario_id }));
   }
 
-  public getContratosUser$(): Observable<any> {
+  public getContratosUser$(): Observable<ContratosUser[]> {
     return this.store.select(userSelectors.getContratosUser);
   }
 
@@ -155,6 +158,16 @@ export class UserFacade {
   public upFirmaUser(usuario_id: number, request: RequestUpFirmaUser): void {
     this.store.dispatch(userActions.upFirmaUser({ usuario_id, request }));
   }
+
+  // CREATE USER
+  public createUser(request: RequestCreateUser): void {
+    this.store.dispatch(userActions.createUser({ request }));
+  }
+
+  // UPDATE USER
+  public updateUser(request: RequestUpdateUser): void {
+    this.store.dispatch(userActions.updateUser({ request }));
+  }
   // ///// /////////////////
 
   // DELETE
@@ -163,25 +176,25 @@ export class UserFacade {
   }
 
   // CONTRACT
-  public getContracts(proveedor_id: number): void {
-    this.store.dispatch(userActions.getContracts({ proveedor_id }));
-  }
+  // public getContracts(proveedor_id: number): void {
+  //   this.store.dispatch(userActions.getContracts({ proveedor_id }));
+  // }
 
-  public getContracts$(): Observable<Data.Contrato[]> {
-    return this.store.select(userSelectors.getContracts);
-  }
+  // public getContracts$(): Observable<Data.Contrato[]> {
+  //   return this.store.select(userSelectors.getContracts);
+  // }
   // CONTRACT
 
   // USER POST
-  public createUser(request: Data.CreateUserRequest): void {
-    this.store.dispatch(userActions.createUser({ createUserRequest: request }));
-  }
+  // public createUser(request: Data.CreateUserRequest): void {
+  //   this.store.dispatch(userActions.createUser({ createUserRequest: request }));
+  // }
   // USER POST
 
   // USER EDIT
-  public editUserNew(request: Data.EditUserRequest): void {
-    this.store.dispatch(userActions.editUser({ editUserRequest: request }));
-  }
+  // public editUserNew(request: Data.EditUserRequest): void {
+  //   this.store.dispatch(userActions.editUser({ editUserRequest: request }));
+  // }
   // USER EDIT
 
   public resetArea(): void {
@@ -200,9 +213,9 @@ export class UserFacade {
     this.store.dispatch(userActions.resetSuperiores());
   }
 
-  public getAllDataUsuario$(): Observable<Data.UserWithDetail> {
-    return this.store.select(userSelectors.getAllDataUser);
-  }
+  // public getAllDataUsuario$(): Observable<Data.UserWithDetail> {
+  //   return this.store.select(userSelectors.getAllDataUser);
+  // }
 
   public SetDisplayDetalleModal(value: boolean): void {
     return this.store.dispatch(userActions.setDisplayDetalleModal({ value }));

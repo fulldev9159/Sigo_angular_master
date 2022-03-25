@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import {
+  ContratosUser,
   ListPerfilesUserType,
   Perfil,
   PosiblesSuperiores,
@@ -29,7 +30,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
 
   // DATOS A USAR
   usersTableData$: Observable<TableUserData[]>;
-  contratosUser$: Observable<any[]>;
+  contratosUser$: Observable<ContratosUser[]>;
   // DISPLAY MODALS
   displayModalDeleteUser = false;
   displayModalActivarUser = false;

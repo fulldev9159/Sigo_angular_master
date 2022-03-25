@@ -128,45 +128,86 @@ export interface RequestAddFirmaUser {
 // GET CONTRATOS USER
 
 export interface DataRespGetContratosUser {
-  usuario_has_contrato_array;
+  items: ContratosUser;
 }
 
 export interface ContratosUser {
-  contrato_id: number;
-  model_contrato_id: {
-    activo: boolean;
-    aprob_jerarq_inic: boolean;
-    costo_max: number;
-    fecha_fin: Date;
-    fecha_inicio: Date;
-    id: number;
-    model_tipo_contrato_id: null;
-    model_tipo_moneda_id: null;
-    nombre: string;
-    tiene_encuesta: boolean;
-    tipo_contrato_id: number;
-    tipo_moneda_id: number;
-    tipo_pago: string;
-    validacion_operaciones: boolean;
-  };
-  model_usuario_id: {
-    apellidos: string;
-    area_id: number;
-    celular: string;
-    created_at: Date;
-    deleted_at: null;
-    email: string;
-    estado: boolean;
-    id: number;
-    model_area_id: null;
-    model_proveedor_id: null;
-    nombres: string;
-    proveedor_id: number;
-    rut: string;
-    updated_at: Date;
-    username: string;
-  };
+  // contrato_id: number;
+  // model_contrato_id: {
+  //   activo: boolean;
+  //   aprob_jerarq_inic: boolean;
+  //   costo_max: number;
+  //   fecha_fin: Date;
+  //   fecha_inicio: Date;
+  //   id: number;
+  //   model_tipo_contrato_id: null;
+  //   model_tipo_moneda_id: null;
+  //   nombre: string;
+  //   tiene_encuesta: boolean;
+  //   tipo_contrato_id: number;
+  //   tipo_moneda_id: number;
+  //   tipo_pago: string;
+  //   validacion_operaciones: boolean;
+  // };
+  // model_usuario_id: {
+  //   apellidos: string;
+  //   area_id: number;
+  //   celular: string;
+  //   created_at: Date;
+  //   deleted_at: null;
+  //   email: string;
+  //   estado: boolean;
+  //   id: number;
+  //   model_area_id: null;
+  //   model_proveedor_id: null;
+  //   nombres: string;
+  //   proveedor_id: number;
+  //   rut: string;
+  //   updated_at: Date;
+  //   username: string;
+  // };
+  // usuario_id: number;
+
+  aprob_jerarq_inic: boolean;
+  costo_max: number;
+  estado: boolean;
+  fecha_fin: Date;
+  fecha_inicio: Date;
+  id: number;
+  model_tipo_contrato_id: { id: number; nombre: string };
+  model_tipo_moneda_id: { id: number; codigo: string; nombre: string };
+  nombre: string;
+  tiene_encuesta: boolean;
+  tipo_contrato_id: number;
+  tipo_moneda_id: number;
+  tipo_pago: string;
+}
+
+export interface RequestCreateUser {
+  username: string;
+  rut: string;
+  nombres: string;
+  apellidos: string;
+  celular: string;
+  proveedor_id: number;
+  area_id: number;
+  email: string;
+  estado: boolean;
+  contratos_marco: number[];
+}
+
+export interface RequestUpdateUser {
   usuario_id: number;
+  values: {
+    rut: string;
+    nombres: string;
+    apellidos: string;
+    celular: string;
+    proveedor_id: number;
+    area_id: number;
+    email: string;
+  };
+  contratos_marco: number[];
 }
 ///
 // GET USER

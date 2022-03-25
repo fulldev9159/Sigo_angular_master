@@ -16,6 +16,7 @@ import {
   ProveedorService,
   AreaService,
   RequestAddFirmaUser,
+  ContratosService,
 } from '@data';
 @Injectable()
 export class UserEffects {
@@ -26,6 +27,7 @@ export class UserEffects {
     private perfilService: PerfilService,
     private proveedorService: ProveedorService,
     private areaService: AreaService,
+    private contratoService: ContratosService,
     private snackService: SnackBarService,
     private alertMessageAction: AlertMessageActions,
     private router: Router,
@@ -208,7 +210,8 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(userActions.getContratosUser),
       concatMap(({ usuario_id }) =>
-        this.userService.GetContratosUser(usuario_id).pipe(
+        this.contratoService.getAllContratos().pipe(
+          // this.userService.GetContratosUser(usuario_id).pipe(
           map(response => {
             return userActions.getContratosUserSuccess({
               response,
@@ -258,6 +261,38 @@ export class UserEffects {
     )
   );
 
+  createUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.createUser),
+      concatMap(({ request }) =>
+        this.userService.createUser(request).pipe(
+          map(response => {
+            return userActions.createUserSuccess({
+              response,
+            });
+          }),
+          catchError(error => of(userActions.createUserError({ error })))
+        )
+      )
+    )
+  );
+
+  updateUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.updateUser),
+      concatMap(({ request }) =>
+        this.userService.updateUser(request).pipe(
+          map(response => {
+            return userActions.updateUserSuccess({
+              response,
+            });
+          }),
+          catchError(error => of(userActions.updateUserError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -266,7 +301,9 @@ export class UserEffects {
           userActions.getPerfilesUserSuccess,
           userActions.agregarPerfilUsuarioSuccess,
           userActions.editarSuperiorPerfilUsuarioSuccess,
-          userActions.addFirmaUserSuccess
+          userActions.addFirmaUserSuccess,
+          userActions.createUserSuccess,
+          userActions.updateUserSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -289,7 +326,9 @@ export class UserEffects {
           userActions.activateUserError,
           userActions.getContratosUserError,
           userActions.addFirmaUserError,
-          userActions.upFirmaUserError
+          userActions.upFirmaUserError,
+          userActions.createUserError,
+          userActions.updateUserError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(
@@ -346,17 +385,17 @@ export class UserEffects {
     )
   );
 
-  createUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(userActions.createUser),
-      concatMap(({ createUserRequest }) =>
-        this.userService.createUser(createUserRequest).pipe(
-          map((usuario_id: number) => userActions.createUserSuccess()),
-          catchError(err => of(userActions.createUserError({ error: err })))
-        )
-      )
-    )
-  );
+  // createUser$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(userActions.createUser),
+  //     concatMap(({ createUserRequest }) =>
+  //       this.userService.createUser(createUserRequest).pipe(
+  //         map((usuario_id: number) => userActions.createUserSuccess()),
+  //         catchError(err => of(userActions.createUserError({ error: err })))
+  //       )
+  //     )
+  //   )
+  // );
 
   notifyAfterCreateUserValidationSuccess$ = createEffect(
     () =>

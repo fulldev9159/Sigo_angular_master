@@ -58,10 +58,10 @@ export const getContratosUser = createSelector(
 );
 ////////////
 
-export const getContracts = createSelector(
-  selectUser,
-  (state: fromUser.StateUser) => state.contratos
-);
+// export const getContracts = createSelector(
+//   selectUser,
+//   (state: fromUser.StateUser) => state.contratos
+// );
 
 export const getAllDataUser = createSelector(
   selectUser,
