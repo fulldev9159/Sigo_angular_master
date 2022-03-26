@@ -204,7 +204,9 @@ export class ListUserComponent implements OnInit, OnDestroy {
       };
       this.userFacade.activateUser(request);
       this.closeModalActivarUser();
-      this.userFacade.getAllUsers();
+      setTimeout(() => {
+        this.userFacade.getAllUsers();
+      }, 700);
     }
   }
   onUpload(event: any): void {

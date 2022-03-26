@@ -170,46 +170,18 @@ export interface DataRespGetPosiblesContratosUser {
 }
 
 export interface PosiblesContratosUser {
-  codigo_acuerdo: string;
-  contrato_marco_id: number;
-  fecha_contable: Date;
-  fecha_fin: Date;
-  fecha_inicio: Date;
   id: number;
-  model_contrato_marco_id: {
-    aprob_jerarq_inic: boolean;
-    costo_max: number;
-    estado: boolean;
-    fecha_fin: Date;
-    fecha_inicio: Date;
-    id: number;
-    nombre: string;
-    tiene_encuesta: boolean;
-    tipo_contrato_id: number;
-    tipo_moneda_id: number;
-    tipo_pago: string;
-    validacion_operaciones: boolean;
-  };
-  model_proveedor_id: {
-    created_at: Date;
-    direccion: string;
-    dv: string;
-    email: string;
-    estado: boolean;
-    id: number;
-    interno: boolean;
-    nombre: string;
-    numero_contrato: number;
-    razon_social: string;
-    representante_legal: string;
-    rut: number;
-    telefono: string;
-    tipo_proveedor_id: number;
-    updated_at: Date;
-    vigencia_garantia: number;
-  };
-  proveedor_id: number;
-  sociedad: string;
+  nombre: string;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  estado: boolean;
+  tipo_contrato_id: number;
+  costo_max: number;
+  tipo_moneda_id: number;
+  tipo_pago: string;
+  aprob_jerarq_inic: boolean;
+  validacion_operaciones: boolean;
+  tiene_encuesta: boolean;
 }
 
 export interface RequestCreateUser {

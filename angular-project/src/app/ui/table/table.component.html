@@ -1,5 +1,5 @@
 <div class="card" [formGroup]="form">
-  <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" dataKey="id" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo  ">
+  <p-table #dt [columns]="config.body.sort" [value]="items" [rows]="10" [paginator]="config.headerConfig.paginator" dataKey="id" responsiveLayout="stack" currentPageReportTemplate="Mostrando {first} al {last} de {totalRecords} elementos" [showCurrentPageReport]="true" styleClass="p-datatable-sm p-datatable-responsive-demo">
     <ng-template *ngIf="config.header" pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <h5 class="p-m-0">{{ config.headerConfig.title }}</h5>

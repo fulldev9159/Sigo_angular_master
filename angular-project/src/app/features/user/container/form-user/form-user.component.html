@@ -113,7 +113,7 @@
               <div class="col-md-6 col-xs-12">
                 <label for="">Contratos con los que puede trabajar</label>
                 <div id="contratos-select">
-                  <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="posiblesContractosUser$|async" formControlName="contratos_marco" optionLabel="model_contrato_marco_id.nombre" optionValue="contrato_marco_id" [virtualScroll]="true" itemSize="30">
+                  <p-multiSelect id="contratos_marco_multi" name="contratos_marco_multi" [style]="{'width':'100%'}" placeholder="Seleccionar contratos..." [options]="posiblesContractosUser$|async" formControlName="contratos_marco" optionLabel="nombre" optionValue="id" [virtualScroll]="true" itemSize="30">
                   </p-multiSelect>
                   <div *ngIf="formControls.contratos_marco.invalid && (formControls.contratos_marco.dirty || formControls.contratos_marco.touched)">
                     <p-message severity="error" text="Este campo es requerido"></p-message>

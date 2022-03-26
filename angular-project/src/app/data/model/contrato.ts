@@ -3,7 +3,7 @@ export interface DataRspGetAllContratos {
 }
 
 export interface ContratoMarco {
-  activo: boolean;
+  estado: boolean;
   aprob_jerarq_inic: boolean;
   costo_max: number;
   fecha_fin: Date;
@@ -28,9 +28,9 @@ export interface ContratoMarco {
 export interface TableListContratosMarcos
   extends Omit<
     ContratoMarco,
-    'activo' | 'aprob_jerarq_inic' | 'tiene_encuesta' | 'validacion_operaciones'
+    'estado' | 'aprob_jerarq_inic' | 'tiene_encuesta' | 'validacion_operaciones'
   > {
-  activo: string;
+  estado: string;
   aprob_jerarq_inic: string;
   tiene_encuesta: string;
   validacion_operaciones: string;
@@ -61,7 +61,7 @@ export interface ValuesEditContrato {
 export interface ReqActivarContrato {
   contrato_marco_id: number;
   values: {
-    activo: boolean;
+    estado: boolean;
   };
 }
 

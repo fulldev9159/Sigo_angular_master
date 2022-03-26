@@ -37,7 +37,7 @@ Editar Contratos
     _Validate column data             8                                                Si
     _Validate column data             9                                                PARCIAL
     _Validate column data             10                                               $100
-    _Validate column data             11                                               Activo
+    _Validate column data             11                                               Inactivo
 
     #ROLLBACK
     _Go to Editar element     PruebaRobot

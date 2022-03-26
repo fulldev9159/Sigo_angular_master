@@ -106,8 +106,8 @@ export class ListContratosComponent implements OnInit {
         {
           field: 'Estado',
           type: 'TEXT',
-          sort: 'activo',
-          header: 'activo',
+          sort: 'estado',
+          header: 'estado',
           // width: '8%',
           editable: false,
         },
@@ -149,7 +149,7 @@ export class ListContratosComponent implements OnInit {
                 const request: ReqActivarContrato = {
                   contrato_marco_id: +item.id,
                   values: {
-                    activo,
+                    estado: activo,
                   },
                 };
                 this.contratoFacade.ActivateContrato(request);
@@ -175,7 +175,7 @@ export class ListContratosComponent implements OnInit {
         if (contratos) {
           return contratos.map(contrato => ({
             ...contrato,
-            activo: contrato.activo ? 'Activo' : 'Inactivo',
+            estado: contrato.estado ? 'Activo' : 'Inactivo',
             aprob_jerarq_inic: contrato.aprob_jerarq_inic ? 'Si' : 'No',
             tiene_encuesta: contrato.tiene_encuesta ? 'Si' : 'No',
             validacion_operaciones: contrato.validacion_operaciones

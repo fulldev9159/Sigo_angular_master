@@ -136,7 +136,7 @@ export class UserService {
     proveedor_id: number
   ): Observable<Response<DataRespGetPosiblesContratosUser>> {
     return this.http.post<Response<DataRespGetPosiblesContratosUser>>(
-      `${this.apiUrl}/usuario/cmarco_has_proveedor_pvid/get`,
+      `${this.apiUrl}/usuario/crud/cmarco/get`,
       { proveedor_id }
     );
   }

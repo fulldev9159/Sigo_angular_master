@@ -116,8 +116,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
             const userSelected = users.find(
               user => user.id === this.usuario_id
             );
-            console.log(this.usuario_id);
-            console.log(userSelected);
             this.formUser.get('id').setValue(userSelected.id);
             this.formUser.get('username').setValue(userSelected.username);
             this.formUser.get('username').disable();
@@ -262,11 +260,11 @@ export class FormUserComponent implements OnInit, OnDestroy {
         if (area_id !== null && area_id !== undefined) {
           const radioProvider = this.formUser.get('provider').value;
           const proveedor_id = this.formUser.get('proveedor_id').value;
-          if (radioProvider === 'contratista') {
-            this.userFacade.getPosiblesContratosUser4CreateEdit(+proveedor_id);
-          } else if (radioProvider === 'movistar') {
-            this.userFacade.getPosiblesContratosUser4CreateEdit(-1);
-          }
+          // if (radioProvider === 'contratista') {
+          this.userFacade.getPosiblesContratosUser4CreateEdit(+proveedor_id);
+          // } else if (radioProvider === 'movistar') {
+          //   this.userFacade.getPosiblesContratosUser4CreateEdit(-1);
+          // }
         } else {
           this.disableContratosFormControl();
         }
@@ -394,7 +392,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    let request: RequestCreateUser = {
+    const request: RequestCreateUser = {
       username: this.formUser.get('username').value,
       nombres: this.formUser.get('nombres').value,
       apellidos: this.formUser.get('apellidos').value,
@@ -409,7 +407,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
     console.log(request);
     if (this.formUser.get('id').value !== null) {
-      let updateRequest: RequestUpdateUser = {
+      const updateRequest: RequestUpdateUser = {
         usuario_id: this.usuario_id,
         values: {
           nombres: this.formUser.get('nombres').value,
