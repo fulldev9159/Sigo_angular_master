@@ -34,6 +34,7 @@ linter:
 #     - npm ci
 #     - ng test --code-coverage --progress false --watch false
 #   coverage: '/^Statements\s*:\s*([^%]+)/'
+
 update-demos-sigo1:
   stage: restart test environment
   variables:
@@ -68,9 +69,9 @@ integrations test cypress:
 
 acceptance test:
   <<: *connect_gcr
-  stage: integrations test cypress
+  stage: acceptance test
   needs:
-    - update test environment
+    - integrations test cypress
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
     - if [ $(docker network ls |grep web-sigo_default|wc -l) == 0 ]; then  docker network create -d bridge web-sigo_default; fi
