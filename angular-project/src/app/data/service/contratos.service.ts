@@ -2,17 +2,14 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   ContratoMarco4Cub,
   ResponseGetContrato4Cub as ResponseGetContrato4Cub,
-} from '@data';
-import {
   DataRspGetAllContratos,
   ReqActivarContrato,
   ReqEditContrato,
   Response,
-} from '@data/model';
+} from '@data';
 
 @Injectable({
   providedIn: 'root',

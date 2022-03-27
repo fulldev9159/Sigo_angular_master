@@ -5,11 +5,13 @@ import * as otActions from '@storeOT/features/ot/ot.actions';
 import * as authActions from '@storeOT/features/auth/auth.actions';
 import * as areaActions from '@storeOT/features/area/area.actions';
 import * as contratoActions from '@storeOT/features/contratos/contratos.actions';
+import * as userActions from '@storeOT/features/user/user.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { ContratoFacade } from '@storeOT/features/contratos/contratos.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
+import { UserFacade } from '@storeOT/features/user/user.facade';
 
 import { Router } from '@angular/router';
 import { MessageNotifyEffect } from '@data';
@@ -26,6 +28,7 @@ export class AlertMessageActions {
     private cubageFacade: CubicacionFacade,
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
+    private userFacade: UserFacade,
     private contratoFacade: ContratoFacade,
     private snackService: SnackBarService,
     private router: Router
@@ -142,11 +145,19 @@ export class AlertMessageActions {
     if (code === 0) {
       if (
         action === areaActions.updateAreaSuccess.type ||
-        action === contratoActions.updateContratoSuccess.type
+        action === contratoActions.updateContratoSuccess.type ||
+        action === userActions.editarSuperiorPerfilUsuarioSuccess.type ||
+        action === userActions.updateUserSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
-      } else if (action === contratoActions.activateContratoSuccess.type) {
+      } else if (
+        action === contratoActions.activateContratoSuccess.type ||
+        action === userActions.agregarPerfilUsuarioSuccess.type ||
+        action === userActions.addFirmaUserSuccess.type
+      ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
+      } else if (action === userActions.createUserSuccess.type) {
+        this.snackService.showMessage(`Creación exitosa`, 'OK', 3000);
       } else if (this.msgOK[action]) {
         this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
       }
@@ -166,7 +177,7 @@ export class AlertMessageActions {
 
     // ACTIONS
     if (code === 0) {
-      if (action === authActions.refreshSuccess.type) {
+      if (action === authActions.setPerfilSelectedSuccess.type) {
         this.authFacade.refreshProxyID(
           data.proxy_id,
           data.nombre_perfil_select
@@ -187,6 +198,13 @@ export class AlertMessageActions {
       }
       if (action === contratoActions.activateContratoSuccess.type) {
         this.contratoFacade.getAllContratos();
+      }
+
+      if (
+        action === userActions.createUserSuccess.type ||
+        action === userActions.updateUserSuccess.type
+      ) {
+        this.router.navigate(['/app/user/list-user']);
       }
     }
   }

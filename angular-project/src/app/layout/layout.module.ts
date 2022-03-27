@@ -5,7 +5,7 @@ import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { RouterModule } from '@angular/router';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { UiModule } from '@uiOT/ui.module';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [AppLayoutComponent, AuthLayoutComponent],
   exports: [AppLayoutComponent, AuthLayoutComponent],
@@ -14,6 +14,7 @@ import { UiModule } from '@uiOT/ui.module';
     RouterModule,
     UiModule,
     NgxPermissionsModule.forChild(),
+    FontAwesomeModule,
   ],
 })
 export class LayoutModule {}

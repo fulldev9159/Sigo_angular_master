@@ -17,27 +17,36 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 export class JwtAppInterceptor implements HttpInterceptor {
   public token = null;
   public profileID = null;
+  nombre_perfil = null;
 
   constructor(private router: Router, private authFacade: AuthFacade) {
     authFacade
       .getLogin$()
       .pipe(filter(login => login !== null))
-      .subscribe(login => (this.token = login.token));
+      .subscribe(login => {
+        this.profileID = login.proxy_id;
+        this.token = login.token;
+        this.nombre_perfil = login.nombre_perfil_select;
+      });
 
-    authFacade
-      .getCurrentProfile$()
-      .pipe(filter(profile => profile !== null))
-      .subscribe(profile => (this.profileID = profile.id));
+    // authFacade
+    //   .getCurrentProfile$()
+    //   .pipe(filter(profile => profile !== null))
+    //   .subscribe(profile => (this.profileID = profile.id));
   }
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // if (
-    //   req.url.includes('/login') ||
-    //   req.url.includes('/usuario/perfiles/get')
-    // )
+    if (
+      this.profileID &&
+      this.nombre_perfil &&
+      req.url.includes('/notification_tray/get')
+    ) {
+      this.authFacade.refeshSession(this.profileID);
+    }
+
     if (req.url.includes('/login/start')) {
       req = req.clone({
         setHeaders: {},

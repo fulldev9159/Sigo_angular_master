@@ -17,13 +17,13 @@ export class ListAreaComponent implements OnInit {
       title: '',
       searchText: 'buscar...',
       paginator: true,
-      actionsType: 'Buttons',
+      actionsType: 'ButtonsTest',
     },
     body: {
       headers: [
         {
           field: 'Nombre',
-          type: 'TEXT',
+          type: 'TEXT-MAIN',
           sort: 'nombre',
           header: 'nombre',
           // width: '10%',
@@ -39,7 +39,7 @@ export class ListAreaComponent implements OnInit {
         },
         {
           field: 'Tipo Área',
-          type: 'TEXT',
+          type: 'TEXT-LABEL',
           sort: 'interno',
           header: 'interno',
           // width: '10%',
@@ -47,25 +47,29 @@ export class ListAreaComponent implements OnInit {
         },
         {
           field: 'Estado',
-          type: 'TEXT',
-          sort: 'activa',
-          header: 'activa',
-          // width: '8%',
+          type: 'BOOLEANTEXT',
+          sort: 'estado',
+          header: 'estado',
+          booleantrue: 'Activo',
+          booleanfalse: 'Inactivo',
+          width: '6rem',
           editable: false,
         },
         {
-          field: 'Acciones',
+          field: '',
           type: 'ACTIONS',
           sort: null,
           header: null,
+          width: '4.4rem',
           editable: false,
         },
       ],
       sort: ['nombre'],
       actions: [
         {
-          icon: ' pi pi-pencil',
-          class: 'p-button-text p-button-sm',
+          // icon: ' pi pi-pencil',
+          // class: 'p-button-text p-button-sm',
+          type: 'alldisplay',
           label: 'Editar',
           onClick: (event: Event, item: any) => {
             if (item) {
@@ -108,7 +112,7 @@ export class ListAreaComponent implements OnInit {
           return areas.map(area => ({
             ...area,
             interno: area.interno ? 'Movistar' : 'Contratista',
-            activa: area.activa ? 'Activa' : 'Inactiva',
+            estado: area.activa,
           }));
         }
       })

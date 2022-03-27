@@ -1,5 +1,9 @@
 export interface DataRspGetAreas {
-  area_all: Area[];
+  items: Area[];
+}
+
+export interface DataRspGetAllAreas4createUser {
+  items: Area[];
 }
 
 export interface Area {
@@ -11,6 +15,7 @@ export interface Area {
   interno: boolean;
   nombre: string;
   updated_at: Date;
+  estado: boolean;
 }
 
 export interface RequestEditArea {

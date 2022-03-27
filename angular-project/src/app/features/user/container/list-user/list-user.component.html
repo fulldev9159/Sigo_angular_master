@@ -11,61 +11,109 @@
       <hr>
     </div>
   </div>
-  <app-table [config]="configTable" [items]="(users$ | async)"></app-table>
-  <app-modal [display]="DisplayModal$|async" (CloseEvent)="cerrarDisplayModal(false)" [style]="{width: '50vw'}">
-    <ng-container modal-header-title>Detalles del usuario <strong>{{(userDetail$|async)?.username}}</strong> </ng-container>
-    <ng-container modal-content>
-      <div class="row">
-        <div class="col-xs-12 col-md-6 pt-2" id="detalle_contrato_marco">
+  <app-table [config]="configTable" [items]="(usersTableData$ | async)"></app-table>
+</div>
+
+<app-modal [display]="displayModalDeleteUser" (CloseEvent)="closeModalDeleteUser()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este Usuario?</p>
+        <div style="padding: 0 9rem 0 9rem;">
           <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <h5 class="card-header">Contratos</h5>
-                <div class="card-body">
-                  <p-listbox [options]="(userDetail$|async)?.contratos_marco" optionLabel="contratos_marco" optionDisabled="inactive" [disabled]="true">
-                    <ng-template let-contrato pTemplate="item">
-                      {{contrato.nombre}}
-                    </ng-template>
-                  </p-listbox>
-                </div>
-              </div>
+            <div class="col">
+
             </div>
           </div>
-          <br>
           <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <h5 class="card-header">Información adicional</h5>
-                <div class="card-body">
-                  <p><strong>Email:</strong> {{(userDetail$|async)?.email}}</p>
-                  <p><strong>Celular:</strong> {{(userDetail$|async)?.celular}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
-          <div class="card">
-            <h5 class="card-header">Periles</h5>
-            <div class="card-body">
-              <p-listbox [options]="(userDetail$|async)?.perfiles" optionLabel="perfil" optionDisabled="inactive" [disabled]="true">
-                <ng-template let-perfil pTemplate="item">
-                  <p> {{perfil.nombre}}</p>
-                </ng-template>
-              </p-listbox>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-6 pt-2" id="detalle_perfil">
-          <div class="card">
-            <h5 class="card-header">Superior</h5>
-            <div class="card-body">
-              {{(userDetail$|async)?.perfiles[0].persona_a_cargo_nombre}}
+            <div class="col">
+              <button pButton type="button" (click)="DeleteUsuario()" label="Si, eliminar el usuario" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+              border: #b36161;
+              margin-left: 10px;
+              color: #412727;"></button>
+              <button pButton type="button" (click)="closeModalDeleteUser()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+              border: gray;"></button>
             </div>
           </div>
         </div>
       </div>
-    </ng-container>
-    <ng-container modal-footer></ng-container>
-  </app-modal>
-</div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>
+
+<app-modal [display]="displayModalActivarUser" (CloseEvent)="closeModalActivarUser()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea {{txt_activar}} este Usuario?</p>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button pButton *ngIf="txt_activar==='bloquear'" type="button" (click)="ActivarUsuario()" label="Si " icon="pi pi-ban" class="p-button-sm mt-5 float-right" id="activate-user-button" style="    background: #ffb6b6;
+              border: #b36161;
+              margin-left: 10px;
+              color: #412727;"></button>
+              <button pButton *ngIf="txt_activar==='activar'" type="button" (click)="ActivarUsuario()" label="Si " icon="pi pi-check" class="p-button-sm mt-5 float-right" id="activate-user-button" style="        background: #b6d6ff;
+              border: #6181b3;
+              margin-left: 10px;
+              color: #272b41;"></button>
+              <button pButton type="button" (click)="closeModalActivarUser()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+              border: gray;"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>
+
+<app-modal [display]="displayModalVerContratos" (CloseEvent)="closeModalVerContratos()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title>Contratos</ng-container>
+  <ng-container modal-content>
+
+    <p-listbox [options]="contratosUser$|async" [listStyle]="{'max-height':'250px'}" [style]="{'width':'100%'}">
+      <ng-template let-contrato pTemplate="item">
+        <div class="perfil-item">
+          <div> {{contrato.model_contrato_id.nombre}}</div>
+        </div>
+      </ng-template>
+    </p-listbox>
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>
+
+<app-modal [display]="displayModalFirma" (CloseEvent)="closeModalFirma()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title>Adjuntar Firma</ng-container>
+  <ng-container modal-content>
+    <form novalidate autocomplete="off" [formGroup]="form">
+      <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" accept=".jpeg,.pjpeg,.png" maxFileSize="50000000">
+      </p-fileUpload>
+
+      <label style="color: #464646;font-weight: 400;">
+        <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
+        <!-- <span style="word-spacing: 5px">.docx .doc .gif .json .jpeg .pjpeg .png .txt .pdf .gzip .zip .rar .7zip zip .dwg .csv .xls .ppt .pptx </span> -->
+        <span style="word-spacing: 5px">.jpeg,.pjpeg,.png</span>
+      </label>
+
+    </form>
+  </ng-container>
+  <ng-container modal-footer>
+    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="addFirma-button" style="        background: #b6d6ff;
+    border: #6181b3;
+    margin-left: 10px;
+    color: #272b41;"></button>
+    <button pButton type="button" (click)="closeModalFirma()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-addFirma-button" style="background: #b8b6b6;
+    border: gray;"></button>
+  </ng-container>
+</app-modal>

@@ -17,8 +17,9 @@ import { map } from 'rxjs/operators';
 })
 export class PerfilSelectComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  perfiles$: Observable<PerfilesUser[]>;
-  perfiles: PerfilesUser[];
+  usuario_id = null;
+  perfilesUsuario$: Observable<PerfilesUser[]>;
+  perfilesUsuario: PerfilesUser[];
 
   formControls = {
     proxyperfil: new FormControl(null, [Validators.required]),
@@ -42,14 +43,16 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
           loginAuth?.proxy_id === undefined
         ) {
           this.router.navigate(['/auth/login']);
+        } else {
+          this.usuario_id = loginAuth.usuario_id;
         }
       })
     );
 
-    this.authFacade.getPerfilesUser();
-    this.perfiles$ = this.authFacade
+    this.authFacade.getPerfilesUser(this.usuario_id);
+    this.perfilesUsuario$ = this.authFacade
       .pefilesUsuario$()
-      .pipe(map(perfiles => (this.perfiles = perfiles)));
+      .pipe(map(perfiles => (this.perfilesUsuario = perfiles)));
   }
 
   ngOnDestroy(): void {
@@ -58,12 +61,14 @@ export class PerfilSelectComponent implements OnInit, OnDestroy {
 
   refreshLogin(): void {
     const proxy_id = +this.formPerfil.get('proxyperfil').value;
-    const nombre_perfil_select = this.perfiles.filter(
-      perfil => perfil.proxy_id === proxy_id
-    )[0].model_perfil.nombre;
+    console.log(proxy_id);
+    const nombre_perfil_select = this.perfilesUsuario.filter(
+      perfil => perfil.id === proxy_id
+    )[0].model_perfil_id.nombre;
 
-    this.authFacade.refreshLogin(+proxy_id, nombre_perfil_select);
+    this.authFacade.setPerfilSelectedLogin(+proxy_id, nombre_perfil_select);
   }
+
   logout(): void {
     localStorage.removeItem('auth');
     this.authFacade.reset();

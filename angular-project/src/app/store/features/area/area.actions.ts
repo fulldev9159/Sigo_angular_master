@@ -7,6 +7,7 @@ import {
 import { createAction, props } from '@ngrx/store';
 
 export const reset = createAction('[Area] reset');
+
 // GET AREAS
 export const getAreas = createAction('[Area] GET getAreas');
 

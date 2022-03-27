@@ -1,15 +1,19 @@
 import { Permiso } from './permiso';
 
+export interface DataRspGetAllPerfiles {
+  items: Perfil[];
+}
+
 export interface Perfil {
   created_at: Date;
+  deleted_at: Date;
   descripcion: string;
   eliminable: boolean;
   id: number;
+  model_rol_id: { id: number; nombre: string };
   nombre: string;
-  permisos: Permiso[];
-  updated_at: Date;
   rol_id: number;
-  rol_nombre: string;
+  updated_at: Date;
 }
 
 export interface PerfilResponse {

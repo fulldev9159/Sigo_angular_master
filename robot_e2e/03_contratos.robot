@@ -11,6 +11,7 @@ Resource    ./resources/login_resource.robot
 Editar Contratos
     _Login                            admin                                            pass                               Admin
     _Navegate to                      Contratos
+    capture page screenshot           /opt/robotframework/reports/contratos.png
     _Table should display data
     _Go to Editar element             prueba
     sleep                             0.5
@@ -37,24 +38,8 @@ Editar Contratos
     _Validate column data             8                                                Si
     _Validate column data             9                                                PARCIAL
     _Validate column data             10                                               $100
-    _Validate column data             11                                               Activo
+    _Validate column data             11                                               Inactivo
 
-    #ROLLBACK
-    _Go to Editar element     PruebaRobot
-    sleep                     0.5
-    _Set input text           css:#nombre-contrato>app-input>input             prueba                #prueba
-    #Fecha inicio
-    #Fecha fin
-    _Select visible item      css:#tipo-contrato-selector>app-select>select    Móvil                 # Móvil
-    _Select visible item      css:#tipo-moneda-selector>app-select>select      CLP (Peso Chileno)    #CLP (Peso Chileno)
-    _Select visible item      css:#tipo-pago-selector>app-select>select        TOTAL                 #TOTAL
-    _Set input text           css:#costo-max-input>app-input>input             0                     #0
-    _Click visible element    css:#check-req-apro-jera
-    _Click visible element    css:#check-req-vali-oper
-    _Click visible element    css:#check-tiene-encuesta
-    _Click visible element    css:#estado-inactivo
-    _Click visible element    css:#submit-contrato
-    sleep                     0.5
     close Browser
 
 Bloquear contrato
@@ -66,6 +51,4 @@ Bloquear contrato
     _Click visible element            css:body > div > div.p-confirm-popup-footer > button.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
     sleep                             2
     _Validate column data             11                                                                                                                               Activo
-    _Click visible element            css:#action-buttons > div > div:nth-child(2) > button
-    _Click visible element            css:body > div > div.p-confirm-popup-footer > button.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
     close Browser

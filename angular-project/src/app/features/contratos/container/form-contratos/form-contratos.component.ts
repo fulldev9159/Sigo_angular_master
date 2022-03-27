@@ -146,7 +146,7 @@ export class FormContratosComponent implements OnInit, OnDestroy {
           this.formContrato.get('costo_max').setValue(contrato.costo_max);
           this.formContrato
             .get('activo')
-            .setValue(contrato.activo ? 'activo' : 'inactivo');
+            .setValue(contrato.estado ? 'activo' : 'inactivo');
         }
       })
     );

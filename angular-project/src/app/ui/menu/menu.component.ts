@@ -8,6 +8,7 @@ import {
 import { Subject } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -22,13 +23,20 @@ export class MenuComponent implements OnInit, OnDestroy {
   @Input() public actions: any[];
   private destroyInstance: Subject<boolean> = new Subject();
 
+  engranajeIcon = faCog;
   constructor() {}
 
   ngOnInit(): void {
     this.MenuItems = this.actions.map(x => {
       let label = '';
       if (x.labelVariable) {
-        label = this.item[x.label] ? 'Bloquear' : 'Activar';
+        if (x.label === 'estado') {
+          label = this.item[x.label] ? 'Bloquear' : 'Activar';
+        } else if (x.label === 'firma') {
+          label = this.item[x.label] ? 'Actualizar Firma' : 'Cargar Firma';
+        } else {
+          label = '';
+        }
       } else {
         label = x.label;
       }

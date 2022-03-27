@@ -4,9 +4,9 @@
       <app-select [control]="formControls.proxyperfil" label="">
         <ng-container options>
           <option value="null" selected disabled>Seleccione perfil</option>
-          <ng-container *ngFor="let perfil of perfiles$ | async">
-            <option [value]="perfil.proxy_id">
-              {{ perfil.model_perfil.nombre }}
+          <ng-container *ngFor="let perfil of perfilesUsuario$ | async">
+            <option [value]="perfil.id">
+              {{ perfil.model_perfil_id.nombre }}
             </option>
           </ng-container>
         </ng-container>

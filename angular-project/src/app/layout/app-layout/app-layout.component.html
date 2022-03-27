@@ -63,26 +63,32 @@
             </li>
             <li *ngxPermissionsOnly="['PERFIL_LISTAR']" routerLinkActive="active" id="menu-area">
               <a [routerLink]="['/app/area']">
-                <i class="pi pi-users"></i>
+                <i class="pi pi-globe"></i>
                 <span>Area</span>
               </a>
             </li>
 
             <li *ngxPermissionsOnly="['PERFIL_LISTAR']" routerLinkActive="active" id="menu-contratos">
               <a [routerLink]="['/app/contratos']">
-                <i class="pi pi-users"></i>
+                <i class="pi pi-briefcase"></i>
                 <span>Contratos</span>
               </a>
             </li>
           </ul>
+          <p style="margin-top: 2rem;
+          color: white;
+          text-align-last: center;">
+            Versión: 0.1.0
+          </p>
         </div>
       </div>
     </nav>
+
   </div>
   <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #5b94ba;">
 
-      <button class="btn" style="border-color: rgba(0, 0, 0, 0.1)" (click)="toggleState = !toggleState;toggleAction();">
+      <button class="btn" style="    border-color: #f3f3f394;color: white;" (click)="toggleState = !toggleState;toggleAction();">
         <i class="pi" [ngClass]="toggleIcon"></i>
       </button>
 
@@ -112,11 +118,12 @@
 
           <li class="nav-item dropdown desktop-size">
             <a class="nav-link dropdown-toggle text-white" style="margin-right: -14px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="pi pi-user" style="color: #444343;
+              <!-- <i class="pi pi-user" style="color: #444343;
               font-size: 20px;
               border: 1px solid gray;
               border-radius: 5px;
-              padding: 4px;"></i>
+              padding: 4px;"></i> -->
+              <fa-icon [icon]="circleUserIcon" style="font-size: 20px;"></fa-icon>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" *ngIf="multiperfiles" (click)="changePerfil()">Cambiar de perfil</a>
@@ -128,8 +135,10 @@
         </ul>
       </div>
 
+
+
     </nav>
-    <div class="container-fluid p-0" style="background:#5c9bbf21;height: 100%;">
+    <div class="container-fluid p-0" style="height: 100%;">
       <router-outlet></router-outlet>
     </div>
   </div>

@@ -44,12 +44,15 @@ export const reducerAuth = createReducer(
     const perfilesUser = response.data.perfiles.map(perfil => {
       return {
         ...perfil,
-        model_perfil: {
-          ...perfil.model_perfil,
-          nombre: perfil.perfil_propio
-            ? perfil.model_perfil.nombre
-            : `${perfil.model_perfil.nombre} (Replazo)`,
-        },
+        // model_usuarioproxy_id: {
+        //   ...perfil.model_usuarioproxy_id,
+        //   model_perfil_id: {
+        //     ...perfil.model_usuarioproxy_id.model_perfil_id,
+        //     nombre: perfil.perfil_propio
+        //       ? perfil.model_usuarioproxy_id.model_perfil_id.nombre
+        //       : `${perfil.model_usuarioproxy_id.model_perfil_id.nombre} (Replazo)`,
+        //   },
+        // },
       };
     });
     const sessionData = {
@@ -76,16 +79,20 @@ export const reducerAuth = createReducer(
       };
     }
   ),
-  on(authActions.refreshSuccess, (state, { response }) => {
-    const sessionData = {
-      ...state.sessionData,
-      token: response.data.token,
-    };
-    return {
-      ...state,
-      sessionData,
-    };
-  }),
+  on(
+    authActions.setPerfilSelectedSuccess,
+    authActions.refreshSuccess,
+    (state, { response }) => {
+      const sessionData = {
+        ...state.sessionData,
+        token: response.data.token,
+      };
+      return {
+        ...state,
+        sessionData,
+      };
+    }
+  ),
   on(authActions.getPerrmisoPerfilSuccess, (state, { response }) => {
     const sessionData = {
       ...state.sessionData,

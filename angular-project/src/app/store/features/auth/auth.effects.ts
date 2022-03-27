@@ -30,10 +30,28 @@ export class AuthEffects {
   getPerfil$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.getPerfilesUser),
-      concatMap(() =>
-        this.authService.getPerfilesUser().pipe(
+      concatMap(({ usuario_id }) =>
+        this.authService.getPerfilesUser(usuario_id).pipe(
           map(response => authActions.getPerfilesUserSuccess({ response })),
           catchError(error => of(authActions.getPerfilesUserError({ error })))
+        )
+      )
+    )
+  );
+
+  setPerfilSelected$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.setPerfilSelected),
+      concatMap(({ proxy_id, nombre_perfil_select }) =>
+        this.authService.refesh(proxy_id).pipe(
+          map(response =>
+            authActions.setPerfilSelectedSuccess({
+              proxy_id,
+              nombre_perfil_select,
+              response,
+            })
+          ),
+          catchError(error => of(authActions.setPerfilSelectedError({ error })))
         )
       )
     )
@@ -42,12 +60,11 @@ export class AuthEffects {
   refresh$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.refresh),
-      concatMap(({ proxy_id, nombre_perfil_select }) =>
+      concatMap(({ proxy_id }) =>
         this.authService.refesh(proxy_id).pipe(
           map(response =>
             authActions.refreshSuccess({
               proxy_id,
-              nombre_perfil_select,
               response,
             })
           ),
@@ -76,7 +93,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(
           authActions.loginSuccess,
-          authActions.refreshSuccess,
+          authActions.setPerfilSelectedSuccess,
           authActions.getPerrmisoPerfilSuccess
         ),
         tap(action => {

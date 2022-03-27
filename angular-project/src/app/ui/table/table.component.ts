@@ -4,6 +4,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -12,16 +13,21 @@ import { distinctUntilChanged } from 'rxjs/operators';
 
 import { Config } from './config';
 
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class TableComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   controls = {};
   form: FormGroup = new FormGroup(this.controls);
+
+  trashICon = faTrash;
 
   @Input() public config: Config;
 

@@ -24,10 +24,12 @@ export class AuthService {
     );
   }
 
-  getPerfilesUser(): Observable<Response<DataResGetPerfilesUser>> {
+  getPerfilesUser(
+    usuario_id: number
+  ): Observable<Response<DataResGetPerfilesUser>> {
     return this.http.post<Response<DataResGetPerfilesUser>>(
       `${this.apiUrl}/usuario/perfiles/get`,
-      {}
+      { usuario_id }
     );
   }
 

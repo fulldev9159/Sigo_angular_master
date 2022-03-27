@@ -19,13 +19,13 @@ export class ListContratosComponent implements OnInit {
       title: '',
       searchText: 'buscar...',
       paginator: true,
-      actionsType: 'Buttons',
+      actionsType: 'ButtonsTest',
     },
     body: {
       headers: [
         {
           field: 'Nombre',
-          type: 'TEXT',
+          type: 'TEXT-MAIN',
           sort: 'nombre',
           header: 'nombre',
           width: '15%',
@@ -49,7 +49,7 @@ export class ListContratosComponent implements OnInit {
         },
         {
           field: 'Tipo Contrato',
-          type: 'TEXT',
+          type: 'TEXT-LABEL',
           sort: 'tipo_contrato',
           header: 'tipo_contrato',
           // width: '8%',
@@ -57,7 +57,7 @@ export class ListContratosComponent implements OnInit {
         },
         {
           field: 'Tipo Moneda',
-          type: 'TEXT',
+          type: 'TEXT-LABEL',
           sort: 'tipo_moneda',
           header: 'tipo_moneda',
           // width: '8%',
@@ -65,7 +65,7 @@ export class ListContratosComponent implements OnInit {
         },
         {
           field: 'Req. Aprob. Jerarquica',
-          type: 'TEXT',
+          type: 'TEXT-LABEL',
           sort: 'aprob_jerarq_inic',
           header: 'aprob_jerarq_inic',
           // width: '8%',
@@ -73,7 +73,7 @@ export class ListContratosComponent implements OnInit {
         },
         {
           field: 'Req. validacion Oper.',
-          type: 'TEXT',
+          type: 'TEXT-LABEL',
           sort: 'validacion_operaciones',
           header: 'validacion_operaciones',
           // width: '8%',
@@ -81,7 +81,7 @@ export class ListContratosComponent implements OnInit {
         },
         {
           field: 'Tiene Encuesta',
-          type: 'TEXT',
+          type: 'TEXT-LABEL',
           sort: 'tiene_encuesta',
           header: 'tiene_encuesta',
           // width: '8%',
@@ -89,7 +89,7 @@ export class ListContratosComponent implements OnInit {
         },
         {
           field: 'Tipo Pago',
-          type: 'TEXT',
+          type: 'TEXT-LABEL',
           sort: 'tipo_pago',
           header: 'tipo_pago',
           // width: '8%',
@@ -105,25 +105,29 @@ export class ListContratosComponent implements OnInit {
         },
         {
           field: 'Estado',
-          type: 'TEXT',
-          sort: 'activo',
-          header: 'activo',
-          // width: '8%',
+          type: 'BOOLEANTEXT',
+          sort: 'estado',
+          header: 'estado',
+          booleantrue: 'Activo',
+          booleanfalse: 'Inactivo',
+          width: '6rem',
           editable: false,
         },
         {
-          field: 'Acciones',
+          field: '',
           type: 'ACTIONS',
           sort: null,
           header: null,
+          width: '10rem',
           editable: false,
         },
       ],
       sort: ['nombre'],
       actions: [
         {
-          icon: ' pi pi-pencil',
-          class: 'p-button-text p-button-sm',
+          // icon: ' pi pi-pencil',
+          // class: 'p-button-text p-button-sm',
+          type: 'alldisplay',
           label: 'Editar',
           onClick: (event: Event, item: any) => {
             if (item) {
@@ -132,13 +136,14 @@ export class ListContratosComponent implements OnInit {
           },
         },
         {
-          icon: ' pi pi-ban',
-          class: 'p-button-text p-button-danger p-button-sm',
-          labelVariable: true,
-          label: 'activo',
+          // icon: ' pi pi-ban',
+          // class: 'p-button-text p-button-danger p-button-sm',
+          type: 'alldisplay-activacion',
+          // labelVariable: true,
+          label: 'estado',
           onClick: (event: Event, item: any) => {
-            const activo = item.activo === 'Activo' ? false : true;
-            const txt = activo ? 'Activar' : 'Desactivar';
+            // const estado = item.estado === 'Activo' ? false : true;
+            const txt = !item.estado ? 'activar' : 'desactivar';
             this.confirmationService.confirm({
               target: event.target as EventTarget,
               message: `¿Está seguro que desea ${txt} este contrato?`,
@@ -149,7 +154,7 @@ export class ListContratosComponent implements OnInit {
                 const request: ReqActivarContrato = {
                   contrato_marco_id: +item.id,
                   values: {
-                    activo,
+                    estado: !item.estado,
                   },
                 };
                 this.contratoFacade.ActivateContrato(request);
@@ -175,14 +180,14 @@ export class ListContratosComponent implements OnInit {
         if (contratos) {
           return contratos.map(contrato => ({
             ...contrato,
-            activo: contrato.activo ? 'Activo' : 'Inactivo',
+            estado: contrato.estado,
             aprob_jerarq_inic: contrato.aprob_jerarq_inic ? 'Si' : 'No',
             tiene_encuesta: contrato.tiene_encuesta ? 'Si' : 'No',
             validacion_operaciones: contrato.validacion_operaciones
               ? 'Si'
               : 'No',
             tipo_contrato: contrato.model_tipo_contrato_id.nombre,
-            tipo_moneda: contrato.model_tipo_moneda_id.nombre,
+            tipo_moneda: contrato.model_tipo_moneda_id.codigo,
           }));
         }
       })

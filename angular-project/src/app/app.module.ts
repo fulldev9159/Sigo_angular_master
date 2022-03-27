@@ -32,6 +32,7 @@ import { LoadingService } from '@utilsSIGO/service-progress';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { ZweiconPermissionDirective } from './utils/zweicon-permission.directive';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // const reducers: ActionReducerMap<any> = { routerReducer };
 // // , rehydrate: true
@@ -76,6 +77,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     StoreAllModule,
     UiModule,
     NgxPermissionsModule.forRoot(),
+    FontAwesomeModule,
   ],
   providers: [
     {

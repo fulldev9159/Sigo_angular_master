@@ -8,9 +8,15 @@ import { FormUserComponent } from './container/form-user/form-user.component';
 
 import { UiModule } from '@uiOT/ui.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListPerfilesUserComponent } from './container/list-perfiles-user/list-perfiles-user.component';
 
 @NgModule({
-  declarations: [UserComponent, ListUserComponent, FormUserComponent],
+  declarations: [
+    UserComponent,
+    ListUserComponent,
+    FormUserComponent,
+    ListPerfilesUserComponent,
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,
