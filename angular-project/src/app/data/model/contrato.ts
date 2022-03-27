@@ -15,6 +15,7 @@ export interface ContratoMarco {
     nombre: string;
   };
   model_tipo_moneda_id: {
+    codigo: string;
     id: number;
     nombre: string;
   };
@@ -28,9 +29,8 @@ export interface ContratoMarco {
 export interface TableListContratosMarcos
   extends Omit<
     ContratoMarco,
-    'estado' | 'aprob_jerarq_inic' | 'tiene_encuesta' | 'validacion_operaciones'
+    'aprob_jerarq_inic' | 'tiene_encuesta' | 'validacion_operaciones'
   > {
-  estado: string;
   aprob_jerarq_inic: string;
   tiene_encuesta: string;
   validacion_operaciones: string;
