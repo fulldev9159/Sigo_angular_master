@@ -42,9 +42,22 @@ update-demos-sigo1:
     PRECURSOR: $CI_PROJECT_NAME
   trigger: zweicom/cl-movistar/sigo/demos-sigo
 
+update test environment:
+  stage: reset testing database sigo
+  when: manual
+  script:
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
+    # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
+    - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass clean"
+    - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate"
+  tags:
+    - repo-machine
+
 integrations test cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: integrations test
+  needs:
+    - update test environment
   script:
     - cd angular-project
     - npm ci
@@ -53,20 +66,9 @@ integrations test cypress:
     - npm ci
     - npx cypress run
 
-update test environment:
-  stage: reset testing database sigo
-  when: manual
-  script:
-    - ssh zweicom@34.122.92.38 "sudo docker esxec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
-    # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
-    - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass clean"
-    - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate"
-  tags:
-    - repo-machine
-
 acceptance test:
   <<: *connect_gcr
-  stage: acceptance test
+  stage: integrations test cypress
   needs:
     - update test environment
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
