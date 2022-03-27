@@ -29,8 +29,12 @@
           </div>
           <div class="row">
             <div class="col">
-              <button pButton type="button" (click)="DeleteUsuario()" label="Si, eliminar el usuario" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="delete-user-button"></button>
-              <button pButton type="button" (click)="closeModalDeleteUser()" label="No" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="close-delete-user-button"></button>
+              <button pButton type="button" (click)="DeleteUsuario()" label="Si, eliminar el usuario" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+              border: #b36161;
+              margin-left: 10px;
+              color: #412727;"></button>
+              <button pButton type="button" (click)="closeModalDeleteUser()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+              border: gray;"></button>
             </div>
           </div>
         </div>
@@ -55,8 +59,16 @@
           </div>
           <div class="row">
             <div class="col">
-              <button pButton type="button" (click)="ActivarUsuario()" label="Si" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="activate-user-button"></button>
-              <button pButton type="button" (click)="closeModalActivarUser()" label="No" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="close-delete-user-button"></button>
+              <button pButton *ngIf="txt_activar==='bloquear'" type="button" (click)="ActivarUsuario()" label="Si " icon="pi pi-ban" class="p-button-sm mt-5 float-right" id="activate-user-button" style="    background: #ffb6b6;
+              border: #b36161;
+              margin-left: 10px;
+              color: #412727;"></button>
+              <button pButton *ngIf="txt_activar==='activar'" type="button" (click)="ActivarUsuario()" label="Si " icon="pi pi-check" class="p-button-sm mt-5 float-right" id="activate-user-button" style="        background: #b6d6ff;
+              border: #6181b3;
+              margin-left: 10px;
+              color: #272b41;"></button>
+              <button pButton type="button" (click)="closeModalActivarUser()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+              border: gray;"></button>
             </div>
           </div>
         </div>
@@ -97,7 +109,11 @@
     </form>
   </ng-container>
   <ng-container modal-footer>
-    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="addFirma-button"></button>
-    <button pButton type="button" (click)="closeModalFirma()" label="No" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="close-addFirma-button"></button>
+    <button pButton type="button" (click)="EnviarFirma()" label="Guardar" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="addFirma-button" style="        background: #b6d6ff;
+    border: #6181b3;
+    margin-left: 10px;
+    color: #272b41;"></button>
+    <button pButton type="button" (click)="closeModalFirma()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-addFirma-button" style="background: #b8b6b6;
+    border: gray;"></button>
   </ng-container>
 </app-modal>

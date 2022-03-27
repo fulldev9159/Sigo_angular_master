@@ -114,7 +114,7 @@ export class ListUserComponent implements OnInit, OnDestroy {
         onClick: (event: Event, item: User) => {
           this.displayModalActivarUser = true;
           this.usuario_id = item.id;
-          this.txt_activar = item.estado ? 'Bloquear' : 'Activar';
+          this.txt_activar = item.estado ? 'bloquear' : 'activar';
           this.estado_usuario = item.estado;
         },
       },
