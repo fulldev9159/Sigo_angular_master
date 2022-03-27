@@ -277,7 +277,7 @@ Agregar un perfil a un usuario
     _Click visible element            css:#add-user-perfil-button
    # Then
     _Element should exist in table    Gestor/JP
-    _Validate column data             2                                              Gestor/JP
+    _Validate column data             2                                              Jef Movistar Castillo 2
     _Validate column data             3                                              Propio
     close browser
 

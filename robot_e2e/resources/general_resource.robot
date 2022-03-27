@@ -10,16 +10,17 @@ Library    SeleniumLibrary
 
 *** Keywords ***
 _Open Browser To Page
-    [Arguments]                ${page}
-    ${options}=                Evaluate                      sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    disable-web-security
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    allow-running-insecure-content
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    headless
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    disable-gpu
-    Run Keyword If             '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    no-sandbox
-    Create WebDriver           Chrome                        chrome_options=${options}
-    Maximize Browser Window
-    Go To                      ${page}
+    [Arguments]         ${page}
+    ${options}=         Evaluate                      sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    Run Keyword If      '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    disable-web-security
+    Run Keyword If      '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    allow-running-insecure-content
+    Run Keyword If      '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    headless
+    Run Keyword If      '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    disable-gpu
+    Run Keyword If      '${ambiente}' == 'testing'    Call Method                                          ${options}                 add_argument    no-sandbox
+    Create WebDriver    Chrome                        chrome_options=${options} 
+    Set Window Size     1920                          1080
+    # Maximize Browser Window
+    Go To               ${page}
 
 _Navegate to
     [Arguments]       ${menu}
@@ -100,11 +101,12 @@ _Search table
 _SubMenu
     [Arguments]               ${accion}                                  ${nombre}
     _Search table             ${nombre}
+    Execute javaScript        window.scrollBy(900, 900);
     _Click visible element    css:#action-buttons > app-menu > button
     ${items}=                 Get WebElements                            css:#action-buttons > app-menu > p-menu > div > ul>li
     FOR                       ${item}                                    IN                                                       @{items}
     ${txt} =                  Get Text                                   ${item}
-    Log To Console            ${txt}
+    # Log To Console            ${txt}
     ${areYouMyLine} =         Run Keyword and Return Status              Should Be Equal As Strings                               ${txt}      ${accion}
     ${selector}               set variable                               ${item}
     Set Suite Variable        ${selector}
@@ -117,3 +119,11 @@ _Element text should be
     [Arguments]        ${element}    ${texto}
     ${txt}=            Get Text      ${element}
     Should Be Equal    ${txt}        ${texto}
+
+
+#    ${height}    Execute Javascript    return window.screen.height
+
+#    ${width}    Execute Javascript    return window.screen.width
+
+#    Log To Console    ${height}
+#    Log To Console    ${width}
