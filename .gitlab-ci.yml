@@ -56,7 +56,7 @@ integrations test cypress:
 update test environment:
   stage: reset testing database sigo
   script:
-    - sleep 4m
+    - sleep 5m
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
     - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
     - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate"
@@ -81,14 +81,7 @@ acceptance test:
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_test_sigo_web
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_web
     - docker network connect web-sigo_default mcl_test_sigo_web
-    - docker run --name robot --shm-size=1gb --network="web-sigo_default" \
-      --user $(id -u):$(id -g) \
-      -e ROBOT_OPTIONS="--exclude automatizacion \
-      --variable url:http://mcl_test_sigo_web \
-      --variable ambiente:testing" \
-      -v /tmp/reports:/opt/robotframework/reports:Z \
-      -v /builds/cr4kQ2Xs/0/zweicom/cl-movistar/sigo/web-sigo/robot_e2e:/opt/robotframework/tests:Z \
-      ppodgorsek/robot-framework:latest
+    - docker run --name robot --shm-size=1gb --network="web-sigo_default" --user $(id -u):$(id -g) -e ROBOT_OPTIONS="--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing" -v /tmp/reports:/opt/robotframework/reports:Z -v /builds/cr4kQ2Xs/0/zweicom/cl-movistar/sigo/web-sigo/robot_e2e:/opt/robotframework/tests:Z ppodgorsek/robot-framework:latest
   after_script:
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
     - docker stop robot
