@@ -67,6 +67,7 @@ _Element should not exist in table
 
 _Go to Editar element
     [Arguments]               ${nombre}                                   
+    sleep                     1
     _Search table             ${nombre}
     _Click visible element    css:#action-buttons > div > div > button
 

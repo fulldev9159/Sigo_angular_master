@@ -11,6 +11,7 @@ Resource    ./resources/login_resource.robot
 Editar Contratos
     _Login                            admin                                            pass                               Admin
     _Navegate to                      Contratos
+    capture page screenshot           /opt/robotframework/reports/usuario.png
     _Table should display data
     _Go to Editar element             prueba
     sleep                             0.5

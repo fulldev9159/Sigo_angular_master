@@ -292,6 +292,7 @@ Editar superior a un perfil
     _Login                            admin                                                         pass                         Admin
     _Navegate to                      Usuario
     _Table should display data
+    capture page screenshot           /opt/robotframework/reports/usuario.png
    # Given
     _SubMenu                          Administrar Perfiles                                          UserTestMovistar
    # When
