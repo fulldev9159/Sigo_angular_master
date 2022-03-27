@@ -19,7 +19,7 @@ export class ListContratosComponent implements OnInit {
       title: '',
       searchText: 'buscar...',
       paginator: true,
-      actionsType: 'Buttons',
+      actionsType: 'ButtonsTest',
     },
     body: {
       headers: [
@@ -112,18 +112,20 @@ export class ListContratosComponent implements OnInit {
           editable: false,
         },
         {
-          field: 'Acciones',
+          field: '',
           type: 'ACTIONS',
           sort: null,
           header: null,
+          width: '14rem',
           editable: false,
         },
       ],
       sort: ['nombre'],
       actions: [
         {
-          icon: ' pi pi-pencil',
-          class: 'p-button-text p-button-sm',
+          // icon: ' pi pi-pencil',
+          // class: 'p-button-text p-button-sm',
+          type: 'alldisplay',
           label: 'Editar',
           onClick: (event: Event, item: any) => {
             if (item) {
@@ -132,8 +134,9 @@ export class ListContratosComponent implements OnInit {
           },
         },
         {
-          icon: ' pi pi-ban',
-          class: 'p-button-text p-button-danger p-button-sm',
+          // icon: ' pi pi-ban',
+          // class: 'p-button-text p-button-danger p-button-sm',
+          type: 'alldisplay',
           labelVariable: true,
           label: 'activo',
           onClick: (event: Event, item: any) => {
