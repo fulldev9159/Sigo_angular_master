@@ -30,10 +30,10 @@ Crear Usuario Contratista
     _Set input text              css:#email-input > app-input > div >div:nth-child(2)>input          test@test.com
    # _Set input text                                    css:#celular-input > input                                          77777777776
     _Click visible element       css:#proveedor > div > div.p-radiobutton-box
-    sleep                        1
+    sleep                        5
     capture page screenshot      /opt/robotframework/reports/usuarioAntesPro.png
     _Select visible item         css:#proveedor-select > app-select > select                         COASIN
-    sleep                        1
+    sleep                        5
     capture page screenshot      /opt/robotframework/reports/usuarioDespuesPro.png
     _Select visible item         css:#area-select > app-select > select                              Contratista
     _Click visible element       css:#contratos_marco_multi 
