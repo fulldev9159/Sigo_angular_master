@@ -18,7 +18,7 @@ Editar Area
     _Navegate to                      Area
     _Table should display data
     capture page screenshot           /opt/robotframework/reports/area.png
-    _Go to Editar element             Contratista
+    _Click visible element            css:#action-buttons > div > button
     sleep                             0.5
     _Set input text                   css:#nombre-area>app-input>input        TestAreaName           #Contratista
     _Set input text                   css:#descripcion                        TestAreaDescripcion    #Empresas colaboradoras de telefonica
@@ -29,5 +29,5 @@ Editar Area
     _Validate column data             1                                       TestAreaName
     _Validate column data             2                                       TestAreaDescripcion
     _Validate column data             3                                       Movistar
-    _Validate column data             4                                       Inactiva
+    _Validate column data             4                                       Inactivo
     close Browser

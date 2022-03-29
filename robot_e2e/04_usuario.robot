@@ -255,6 +255,7 @@ Eliminar Contratista
     _Click visible element    css:#delete-user-button
 
     _Element should not exist in table    UserTestContratista
+    close browser
 
 Agregar un perfil a un usuario
    # Scenario: El administrador necesita agregar el perfil "Gestor" al usuario "UserTestMovistar"
