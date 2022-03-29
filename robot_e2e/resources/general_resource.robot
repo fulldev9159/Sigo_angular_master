@@ -7,7 +7,7 @@ Documentation    A resource file with reusable keywords and variables for genera
 Library    SeleniumLibrary
 
 *** Variables ***
-
+${TIMEOUT}    30 
 *** Keywords ***
 _Open Browser To Page
     [Arguments]         ${page}
@@ -36,14 +36,14 @@ _Navegate to
 
 _Wait visibility
     [Arguments]                      ${selector}
-    Wait Until Element Is Visible    ${selector}    timeout=15
-    Wait Until Element Is enabled    ${selector}    timeout=15
+    Wait Until Element Is Visible    ${selector}    timeout=${TIMEOUT}
+    Wait Until Element Is enabled    ${selector}    timeout=${TIMEOUT}
     Scroll Element Into View         ${selector}
 
 _Wait visibility and contain
     [Arguments]                    ${selector}    ${valor}
     _Wait visibility               ${selector}
-    Wait Until Element Contains    ${selector}    ${valor}    timeout=15
+    Wait Until Element Contains    ${selector}    ${valor}    timeout=${TIMEOUT}
 
 _Click visible element
     [Arguments]         ${selector}

@@ -19,7 +19,7 @@ _Login
     _Wait visibility and contain     css:.perfil_select>app-select>select    ${perfil}
     Select From List By Label        css:.perfil_select>app-select>select    ${perfil}
     _Click visible element           id:login
-    Wait Until Element Is Visible    id:user-name                            timeout=15
+    Wait Until Element Is Visible    id:user-name                            timeout=20
 
 _Logout
     sleep                    5

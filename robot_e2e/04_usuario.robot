@@ -1,10 +1,11 @@
 *** Settings ***
 Documentation    Test de funcionanildad del módulo Usuarios.
 ...
-...         This test has a workflow that is created using keywords in
-...         the imported resource file.
-Resource    ./resources/general_resource.robot
-Resource    ./resources/login_resource.robot
+...          This test has a workflow that is created using keywords in
+...          the imported resource file.
+Resource     ./resources/general_resource.robot
+Resource     ./resources/login_resource.robot
+# Library    DependencyLibrary
 
 *** Test Cases ***
 
@@ -100,6 +101,8 @@ Crear Usuario Movistar
     close browser
 
 Ver los contratos
+   #  Depends on test               Crear Usuario Contratista
+   #  Depends on test               Crear Usuario Movistar
    # Scenario: El administrador necesita observar los contratos del usuario contratista
    # Given: El administrador llega a la página de listar usuarios
    # When: Abra el menú
