@@ -33,7 +33,6 @@ Crear Usuario Contratista
     sleep                        5
     capture page screenshot      /opt/robotframework/reports/usuarioAntesPro.png
     _Select visible item         css:#proveedor-select > app-select > select                         COASIN
-    sleep                        5
     capture page screenshot      /opt/robotframework/reports/usuarioDespuesPro.png
     _Select visible item         css:#area-select > app-select > select                              Contratista
     _Click visible element       css:#contratos_marco_multi 

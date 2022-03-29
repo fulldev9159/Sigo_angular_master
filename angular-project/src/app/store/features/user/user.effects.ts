@@ -151,9 +151,12 @@ export class UserEffects {
       ofType(userActions.getAllAreas4CreateUser),
       concatMap(({ interno }) =>
         this.areaService.getAllProveedores4CreateUser(interno).pipe(
-          map(response =>
-            userActions.getAllAreas4CreateUserSuccess({ response })
-          ),
+          map(response => {
+            // window.alert(JSON.stringify(response));
+            const div = document.querySelector('#test');
+            div.innerHTML = JSON.stringify(response);
+            return userActions.getAllAreas4CreateUserSuccess({ response });
+          }),
           catchError(error =>
             of(userActions.getAllAreas4CreateUserError({ error }))
           )
@@ -320,7 +323,8 @@ export class UserEffects {
           userActions.editarSuperiorPerfilUsuarioSuccess,
           userActions.addFirmaUserSuccess,
           userActions.createUserSuccess,
-          userActions.updateUserSuccess
+          userActions.updateUserSuccess,
+          userActions.getAllAreas4CreateUserSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

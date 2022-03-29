@@ -35,10 +35,11 @@ Editar Contratos
     # capture page screenshot    /opt/robotframework/reports/contratos4.png
     _Click visible element    css:#submit-contrato
 
-    sleep                             1
-    capture page screenshot           /opt/robotframework/reports/contratos5.png
+    sleep    1
+
     _Element should exist in table    PruebaRobot
     _Validate column data             1                                             PruebaRobot
+    capture page screenshot           /opt/robotframework/reports/contratos5.png
     #_Validate column data            2                                   Fecha inicio
     #_Validate column data            3                                   Fecha fin
     _Validate column data             4                                             Fijo
