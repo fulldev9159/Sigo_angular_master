@@ -12,28 +12,28 @@ Editar Contratos
     _Login          admin        pass    Admin
     _Navegate to    Contratos
 
-    capture page screenshot       /opt/robotframework/reports/contratos.png
+    # capture page screenshot       /opt/robotframework/reports/contratos.png
     _Table should display data
-    capture page screenshot       /opt/robotframework/reports/contratos2.png
+    # capture page screenshot       /opt/robotframework/reports/contratos2.png
 
-    _Search table              prueba
-    sleep                      1
-    capture page screenshot    /opt/robotframework/reports/contratos3.png
-    _Click visible element     css:#action-buttons > div > button:nth-child(1)
-    sleep                      0.5
-    _Set input text            css:#nombre-contrato>app-input>input               PruebaRobot                        #prueba
+    _Search table             prueba
+    sleep                     1
+    # capture page screenshot    /opt/robotframework/reports/contratos3.png
+    _Click visible element    css:#action-buttons > div > button:nth-child(1)
+    sleep                     0.5
+    _Set input text           css:#nombre-contrato>app-input>input               PruebaRobot                        #prueba
     #Fecha inicio
     #Fecha fin
-    _Select visible item       css:#tipo-contrato-selector>app-select>select      Fijo                               # Móvil
-    _Select visible item       css:#tipo-moneda-selector>app-select>select        CLF (Unidad de fomento Chilena)    #CLP (Peso Chileno)
-    _Select visible item       css:#tipo-pago-selector>app-select>select          PARCIAL                            #TOTAL
-    _Set input text            css:#costo-max-input>app-input>input               100                                #0
-    _Click visible element     css:#check-req-apro-jera
-    _Click visible element     css:#check-req-vali-oper
-    _Click visible element     css:#check-tiene-encuesta
-    _Click visible element     css:#estado-activo
-    capture page screenshot    /opt/robotframework/reports/contratos4.png
-    _Click visible element     css:#submit-contrato
+    _Select visible item      css:#tipo-contrato-selector>app-select>select      Fijo                               # Móvil
+    _Select visible item      css:#tipo-moneda-selector>app-select>select        CLF (Unidad de fomento Chilena)    #CLP (Peso Chileno)
+    _Select visible item      css:#tipo-pago-selector>app-select>select          PARCIAL                            #TOTAL
+    _Set input text           css:#costo-max-input>app-input>input               100                                #0
+    _Click visible element    css:#check-req-apro-jera
+    _Click visible element    css:#check-req-vali-oper
+    _Click visible element    css:#check-tiene-encuesta
+    _Click visible element    css:#estado-activo
+    # capture page screenshot    /opt/robotframework/reports/contratos4.png
+    _Click visible element    css:#submit-contrato
 
     sleep                             1
     capture page screenshot           /opt/robotframework/reports/contratos5.png
@@ -58,11 +58,11 @@ Bloquear contrato
     _Navegate to                      Contratos
     _Table should display data
     _Element should exist in table    prueba
-    capture page screenshot           /opt/robotframework/reports/bloqcontratos1.png
+    # capture page screenshot           /opt/robotframework/reports/bloqcontratos1.png
     _Click visible element            css:#action-buttons > div > button:nth-child(2)
-    capture page screenshot           /opt/robotframework/reports/contratos2.png
+    # capture page screenshot           /opt/robotframework/reports/contratos2.png
     _Click visible element            css:body > div > div.p-confirm-popup-footer > button.p-confirm-popup-accept.p-button-sm.p-button.p-component.ng-star-inserted
     sleep                             1
-    capture page screenshot           /opt/robotframework/reports/contratos3.png
+    # capture page screenshot           /opt/robotframework/reports/contratos3.png
     _Validate column data             11                                                                                                                               Activo
     close Browser
