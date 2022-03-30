@@ -146,9 +146,9 @@ Agregar firma a usuarios
     _Table should display data
 
    # When: Abra el menú
-    _SubMenu                  Cargar Firma                                                                                                                                                                                UserTestContratista
+    _SubMenu                  Cargar Firma                                                                                                                                                  UserTestContratista
    # And Carge una imagen de la firma
-    Choose File               css:app-list-user > app-modal:nth-child(5) > p-dialog > div > div > div.ng-tns-c32-7.p-dialog-content > form > p-fileupload > div > div.p-fileupload-buttonbar > span > input[type=file]    ${CURDIR}/images/Ambiente.PNG
+    Choose File               css:app-list-user > app-modal:nth-child(5) > p-dialog > div > div > div > form > p-fileupload > div > div.p-fileupload-buttonbar > span > input[type=file]    ${CURDIR}/images/Ambiente.PNG
    # And Presione en cargar
     _Click visible element    css:#addFirma-button
     sleep                     1
