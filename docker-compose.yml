@@ -19,7 +19,7 @@ services:
       dockerfile: docker/deploy/Dockerfile
     environment:
       WEBAPI_NAME: '34.122.92.38'
-      WEBAPI_PORT: '4040'
+      WEBAPI_PORT: '4041'
     expose:
       - 80
     container_name: mcl_test_sigo_web

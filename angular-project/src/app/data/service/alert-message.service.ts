@@ -143,9 +143,9 @@ export class AlertMessageActions {
     data?: any
   ): void {
     if (code === 0) {
-      if (action === userActions.getAllAreas4CreateUserSuccess.type) {
-        this.snackService.showMessage(`Test Message`, 'OK', 3000);
-      }
+      // if (action === userActions.getAllAreas4CreateUserSuccess.type) {
+      //   this.snackService.showMessage(`Test Message`, 'OK', 3000);
+      // }
       if (
         action === areaActions.updateAreaSuccess.type ||
         action === contratoActions.updateContratoSuccess.type ||
