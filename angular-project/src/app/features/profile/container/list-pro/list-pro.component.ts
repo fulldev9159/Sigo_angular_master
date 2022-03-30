@@ -29,6 +29,7 @@ export class ListProComponent implements OnInit, OnDestroy {
 
   // DISPLAY MODALS
   DisplayPermisosPerfilModal$: Observable<boolean> = of(false);
+  displayModalEliminarPerfil = false;
 
   // FORMULARIO
 
@@ -36,6 +37,7 @@ export class ListProComponent implements OnInit, OnDestroy {
   configTable = null;
 
   // EXTRAS
+  perfil_id = null;
 
   // CONSTRUCTOR
   constructor(
@@ -49,14 +51,6 @@ export class ListProComponent implements OnInit, OnDestroy {
     this.onInitGetInitialData();
     this.onInitSetInitialData();
     this.onInitAccionesInicialesAdicionales();
-
-    // this.ModalDataPermissions$ = this.profileFacade
-    //   .getProfileSelected$()
-    //   .pipe(
-    //     map((perfil: Data.Perfil) =>
-    //       perfil ? this.getPermissionsGroup(perfil.permisos) : []
-    //     )
-    //   );
   }
 
   onInitResetInicial(): void {
@@ -94,7 +88,8 @@ export class ListProComponent implements OnInit, OnDestroy {
         tooltipDisabled: 'No se puede eliminar',
         onClick: (event: Event, item: ListarPerfil) => {
           if (item) {
-            this.profileFacade.eliminarPerfil(item.id);
+            this.displayModalEliminarPerfil = true;
+            this.perfil_id = item.id;
           }
         },
       }
@@ -123,6 +118,19 @@ export class ListProComponent implements OnInit, OnDestroy {
 
   closeModalPermisosPerfil(): void {
     this.profileFacade.modalPermisosPerfil(false);
+  }
+
+  closeModalEliminarPerfil(): void {
+    this.displayModalEliminarPerfil = false;
+    this.perfil_id = null;
+  }
+
+  EliminarPerfil(): void {
+    if (this.perfil_id) {
+      this.profileFacade.eliminarPerfil(this.perfil_id);
+      this.closeModalEliminarPerfil();
+      this.profileFacade.getProfile();
+    }
   }
 
   getPermissionsGroup(permissions: PermisosPerfil[]): PermissionsGroup[] {
