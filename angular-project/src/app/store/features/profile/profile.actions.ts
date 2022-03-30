@@ -20,6 +20,22 @@ export const getProfileError = createAction(
   props<{ error: any }>()
 );
 
+// GET PERMISOS DE UN PERFIL
+export const getPermisosPerfil = createAction(
+  '[Perfil] getPermisosPerfil',
+  props<{ perfil_id: number }>()
+);
+
+export const getPermisosPerfilSuccess = createAction(
+  '[Perfil] getPermisosPerfil Success',
+  props<{ response: any }>()
+);
+
+export const getPermisosPerfilError = createAction(
+  '[Perfil] getPermisosPerfil',
+  props<{ error: any }>()
+);
+
 // ////////
 // GET PERMISOS
 

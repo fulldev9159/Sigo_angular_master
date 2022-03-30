@@ -33,6 +33,24 @@ export class ProfileEffects {
     )
   );
 
+  getPermisosPerfil$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.getPermisosPerfil),
+      concatMap(({ perfil_id }) =>
+        this.perfilService.getPermisosPerfil(perfil_id).pipe(
+          map(response =>
+            profileActions.getPermisosPerfilSuccess({ response })
+          ),
+          catchError(error =>
+            of(profileActions.getPermisosPerfilError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  ////
+
   getProfileSelected$ = createEffect(() =>
     this.actions$.pipe(
       ofType(profileActions.getProfileSelected),

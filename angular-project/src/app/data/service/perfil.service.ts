@@ -31,6 +31,15 @@ export class PerfilService {
     );
   }
 
+  getPermisosPerfil(perfil_id: number): Observable<any> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/perfil_has_permiso/get`,
+      { perfil_id }
+    );
+  }
+
+  //////
+
   getPermisos(): Observable<Data.Permiso[]> {
     return this.http
       .post<Data.PermisoResponse>(

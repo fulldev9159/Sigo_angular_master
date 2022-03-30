@@ -16,6 +16,10 @@ export interface Perfil {
   updated_at: Date;
 }
 
+export interface ListarPerfil extends Perfil {
+  rol: string;
+}
+
 export interface PerfilResponse {
   data: Perfil[];
 

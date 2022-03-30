@@ -22,6 +22,16 @@ export class ProfileFacade {
     return this.store.select(profileSelectors.getProfiles);
   }
 
+  // PERMISOS PERFIL
+  public getPermisosPerfil(perfil_id: number): void {
+    this.store.dispatch(profileActions.getPermisosPerfil({ perfil_id }));
+  }
+
+  // public getProfile$(): Observable<Data.Perfil[]> {
+  //   return this.store.select(profileSelectors.getProfiles);
+  // }
+
+  ///
   public getProfileSelected(perfil_id: number): void {
     this.store.dispatch(profileActions.getProfileSelected({ perfil_id }));
   }
