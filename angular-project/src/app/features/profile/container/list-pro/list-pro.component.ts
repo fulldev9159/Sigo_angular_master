@@ -1,11 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import * as _ from 'lodash';
-import { ListarPerfil, Perfil, Permiso, PermissionsGroup } from '@data';
+import {
+  ListarPerfil,
+  Perfil,
+  Permiso,
+  PermisosPerfil,
+  PermissionsGroup,
+} from '@data';
 import { ListProTableService } from './list-pro-table.service';
 
 @Component({
@@ -18,10 +24,11 @@ export class ListProComponent implements OnInit, OnDestroy {
 
   // DATOS A USAR
   perfiles$: Observable<ListarPerfil[]>;
+  PermisosPerfil$: Observable<PermissionsGroup[]>;
+  // PermisosPerfil$: Observable<any[]>;
 
   // DISPLAY MODALS
-  DisplayDetallesPerfilModal = false;
-  ModalDataPermissions$: Observable<PermissionsGroup[]>;
+  DisplayPermisosPerfilModal$: Observable<boolean> = of(false);
 
   // FORMULARIO
 
@@ -78,9 +85,16 @@ export class ListProComponent implements OnInit, OnDestroy {
         tooltipDisabled: 'No se puede editar',
         onClick: (event: Event, item: ListarPerfil) => {
           if (item) {
-            // this.userFacade.displayModalPerfilesUser(true);
-            // this.userFacade.getAllPerfiles();
-            // this.userFacade.perfilSelected(item);
+            // this.router.navigate(['/app/profile/form-pro', item.id]);
+          }
+        },
+      },
+      {
+        type: 'button-delete-eliminable',
+        tooltipDisabled: 'No se puede eliminar',
+        onClick: (event: Event, item: ListarPerfil) => {
+          if (item) {
+            this.profileFacade.eliminarPerfil(item.id);
           }
         },
       }
@@ -94,18 +108,40 @@ export class ListProComponent implements OnInit, OnDestroy {
         }))
       )
     );
+
+    this.DisplayPermisosPerfilModal$ =
+      this.profileFacade.modalPermisosPerfil$();
+
+    this.PermisosPerfil$ = this.profileFacade.getPermisosPerfil$().pipe(
+      map(perfiles => {
+        return this.getPermissionsGroup(perfiles);
+      })
+    );
   }
 
   onInitAccionesInicialesAdicionales(): void {}
 
-  getPermissionsGroup(permissions: Permiso[]): PermissionsGroup[] {
-    const data = permissions.map((permit: Permiso) => {
+  closeModalPermisosPerfil(): void {
+    this.profileFacade.modalPermisosPerfil(false);
+  }
+
+  getPermissionsGroup(permissions: PermisosPerfil[]): PermissionsGroup[] {
+    const data = permissions.map(permit => {
       let permitCustom: any;
-      if (permit && permit.slug) {
-        permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+      if (permit && permit.model_permiso_id.slug) {
+        permitCustom = {
+          ...permit,
+          module: permit.model_permiso_id.slug.split('_')[0],
+        };
       }
       return permitCustom;
     });
+    console.log(
+      _.chain(data)
+        .groupBy('module')
+        .map((value, key) => ({ module: key, permissions: value }))
+        .value()
+    );
     return _.chain(data)
       .groupBy('module')
       .map((value, key) => ({ module: key, permissions: value }))

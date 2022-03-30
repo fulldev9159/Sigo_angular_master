@@ -5,7 +5,7 @@ import { Response, SessionData, RequestLogin } from '@data';
 import {
   DataRespLogin,
   DataResGetPerfilesUser,
-  DataRespGetPermisosPerfil,
+  DataRespGetUsuarioPermisosPerfil,
 } from '@data/model';
 
 @Injectable({
@@ -42,8 +42,8 @@ export class AuthService {
     );
   }
 
-  getPermisosPerfil(): Observable<Response<DataRespGetPermisosPerfil>> {
-    return this.http.post<Response<DataRespGetPermisosPerfil>>(
+  getPermisosPerfil(): Observable<Response<DataRespGetUsuarioPermisosPerfil>> {
+    return this.http.post<Response<DataRespGetUsuarioPermisosPerfil>>(
       `${this.apiUrl}/usuario/permisos/get`,
       {}
     );

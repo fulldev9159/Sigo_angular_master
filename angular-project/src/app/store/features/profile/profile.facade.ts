@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import * as profileActions from './profile.actions';
 import * as profileSelectors from './profile.selectors';
 import * as Data from '@data';
-import { Permiso, RolWithPermisos } from '@data';
+import { Permiso, PermisosPerfil, RolWithPermisos } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -27,37 +27,50 @@ export class ProfileFacade {
     this.store.dispatch(profileActions.getPermisosPerfil({ perfil_id }));
   }
 
-  // public getProfile$(): Observable<Data.Perfil[]> {
-  //   return this.store.select(profileSelectors.getProfiles);
-  // }
+  public getPermisosPerfil$(): Observable<PermisosPerfil[]> {
+    return this.store.select(profileSelectors.getPermisosPerfil);
+  }
 
+  // ELIMINAR PERFIL
+  public eliminarPerfil(perfil_id: number): void {
+    this.store.dispatch(profileActions.eliminarPerfil({ perfil_id }));
+  }
+
+  // MODAL PERMISOS PERFIL
+  public modalPermisosPerfil(status: boolean): void {
+    this.store.dispatch(profileActions.modalPermisosPerfil({ status }));
+  }
+
+  public modalPermisosPerfil$(): Observable<boolean> {
+    return this.store.select(profileSelectors.modalPermisosPerfil);
+  }
   ///
   public getProfileSelected(perfil_id: number): void {
     this.store.dispatch(profileActions.getProfileSelected({ perfil_id }));
   }
 
-  public getProfileSelected$(): Observable<Data.Perfil> {
-    return this.store.select(profileSelectors.getProfileSelected);
-  }
+  // public getProfileSelected$(): Observable<Data.Perfil> {
+  //   return this.store.select(profileSelectors.getProfileSelected);
+  // }
 
-  // PERMISSIONS
-  public getPermissions(): void {
-    this.store.dispatch(profileActions.getPermissions());
-  }
+  // // PERMISSIONS
+  // public getPermissions(): void {
+  //   this.store.dispatch(profileActions.getPermissions());
+  // }
 
-  public getPermissions$(): Observable<Data.Permiso[]> {
-    return this.store.select(profileSelectors.getPermissions);
-  }
-  // PERMISSIONS
+  // public getPermissions$(): Observable<Data.Permiso[]> {
+  //   return this.store.select(profileSelectors.getPermissions);
+  // }
+  // // PERMISSIONS
 
-  // ROL PERMISSIONS
-  public getRolPermissions(rol_id: number): void {
-    this.store.dispatch(profileActions.getRolPermisos({ rol_id }));
-  }
+  // // ROL PERMISSIONS
+  // public getRolPermissions(rol_id: number): void {
+  //   this.store.dispatch(profileActions.getRolPermisos({ rol_id }));
+  // }
 
-  public getRolPermissions$(): Observable<Permiso[]> {
-    return this.store.select(profileSelectors.getRolPermissions);
-  }
+  // public getRolPermissions$(): Observable<Permiso[]> {
+  //   return this.store.select(profileSelectors.getRolPermissions);
+  // }
   // ROL PERMISSIONS
 
   // DELETE
@@ -86,8 +99,8 @@ export class ProfileFacade {
     this.store.dispatch(profileActions.getRols());
   }
 
-  public getRols$(): Observable<Data.Rols[]> {
-    return this.store.select(profileSelectors.getRols);
-  }
+  // public getRols$(): Observable<Data.Rols[]> {
+  //   return this.store.select(profileSelectors.getRols);
+  // }
   // PROFILE
 }

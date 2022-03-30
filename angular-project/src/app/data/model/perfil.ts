@@ -20,6 +20,33 @@ export interface ListarPerfil extends Perfil {
   rol: string;
 }
 
+// PERMISOS PERFIL
+export interface DataRespGetPermisosPerfil {
+  items: PermisosPerfil[];
+}
+
+export interface PermisosPerfil {
+  model_perfil_id: {
+    created_at: Date;
+    descripcion: string;
+    eliminable: boolean;
+    id: number;
+    nombre: string;
+    rol_id: number;
+    updated_at: Date;
+  };
+  model_permiso_id: {
+    id: number;
+    slug: string;
+    nombre_corto: string;
+    descripcion: string;
+  };
+  perfil_id: number;
+  permiso_id: number;
+}
+
+////
+
 export interface PerfilResponse {
   data: Perfil[];
 

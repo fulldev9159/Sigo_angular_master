@@ -100,7 +100,6 @@ export class ListPerfilesUserComponent implements OnInit, OnDestroy {
         type: 'button-delete',
         onClick: (event: Event, item: ListPerfilesUserType) => {
           this.displayModalEliminarPerfilUsuario = true;
-          console.log(item);
           this.usuarioproxy_id = item.proxy_id;
         },
       }

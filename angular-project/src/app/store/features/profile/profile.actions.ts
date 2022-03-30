@@ -5,6 +5,7 @@ import {
   Permiso,
   Response,
   RolWithPermisos,
+  DataRespGetPermisosPerfil,
 } from '@data';
 
 // PROFILE LIST
@@ -28,12 +29,34 @@ export const getPermisosPerfil = createAction(
 
 export const getPermisosPerfilSuccess = createAction(
   '[Perfil] getPermisosPerfil Success',
-  props<{ response: any }>()
+  props<{ response: Response<DataRespGetPermisosPerfil> }>()
 );
 
 export const getPermisosPerfilError = createAction(
   '[Perfil] getPermisosPerfil',
   props<{ error: any }>()
+);
+
+// ELIMINAR PERFIL
+export const eliminarPerfil = createAction(
+  '[Perfil] eliminarPerfil',
+  props<{ perfil_id: number }>()
+);
+
+export const eliminarPerfilSuccess = createAction(
+  '[Perfil] eliminarPerfil Success',
+  props<{ response: any }>()
+);
+
+export const eliminarPerfilError = createAction(
+  '[Perfil] eliminarPerfil',
+  props<{ error: any }>()
+);
+
+// MODAL PERMISOS PERFIL
+export const modalPermisosPerfil = createAction(
+  '[Perfil] modalPermisosPerfil',
+  props<{ status: boolean }>()
 );
 
 // ////////

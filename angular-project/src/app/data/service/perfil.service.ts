@@ -10,7 +10,7 @@ import {
   RolWithPermisos,
   Response,
 } from '@data';
-import { DataRspGetAllPerfiles } from '@data/model';
+import { DataRspGetAllPerfiles, DataRespGetPermisosPerfil } from '@data/model';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,9 +31,18 @@ export class PerfilService {
     );
   }
 
-  getPermisosPerfil(perfil_id: number): Observable<any> {
-    return this.http.post<Response<any>>(
+  getPermisosPerfil(
+    perfil_id: number
+  ): Observable<Response<DataRespGetPermisosPerfil>> {
+    return this.http.post<Response<DataRespGetPermisosPerfil>>(
       `${this.apiUrl}/configuration/perfil_has_permiso/get`,
+      { perfil_id }
+    );
+  }
+
+  eliminarPerfil(perfil_id: number): Observable<any> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/perfil/delete`,
       { perfil_id }
     );
   }

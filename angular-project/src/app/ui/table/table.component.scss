@@ -220,10 +220,15 @@ th>p-sorticon>i {
   border-bottom-left-radius: 0px !important;
   border-top-left-radius: 0px !important;
   border-left: 0.2rem solid #be7e7e !important;
-}
 
-.eliminar-color:hover {
-  background-color: #dc8383;
+  &:hover {
+    background-color: #dc8383;
+  }
+
+  &:disabled {
+    background-color: #e0c8c8;
+    pointer-events: none;
+  }
 }
 
 div.p-datatable-header.ng-star-inserted>div>span>input {

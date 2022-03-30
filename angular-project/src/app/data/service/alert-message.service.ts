@@ -6,6 +6,7 @@ import * as authActions from '@storeOT/features/auth/auth.actions';
 import * as areaActions from '@storeOT/features/area/area.actions';
 import * as contratoActions from '@storeOT/features/contratos/contratos.actions';
 import * as userActions from '@storeOT/features/user/user.actions';
+import * as profileActions from '@storeOT/features/profile/profile.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -156,7 +157,8 @@ export class AlertMessageActions {
       } else if (
         action === contratoActions.activateContratoSuccess.type ||
         action === userActions.agregarPerfilUsuarioSuccess.type ||
-        action === userActions.addFirmaUserSuccess.type
+        action === userActions.addFirmaUserSuccess.type ||
+        action === profileActions.eliminarPerfilSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (action === userActions.createUserSuccess.type) {

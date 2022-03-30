@@ -11,6 +11,7 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import * as Data from '@data';
+import { AlertMessageActions } from '@data';
 @Injectable()
 export class ProfileEffects {
   constructor(
@@ -18,7 +19,8 @@ export class ProfileEffects {
     private perfilService: Data.PerfilService,
     private snackService: SnackBarService,
     private router: Router,
-    private profileFacade: ProfileFacade
+    private profileFacade: ProfileFacade,
+    private alertMessageAction: AlertMessageActions
   ) {}
 
   getAllProfile$ = createEffect(() =>
@@ -48,7 +50,50 @@ export class ProfileEffects {
       )
     )
   );
+  eliminarPerfil$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.eliminarPerfil),
+      concatMap(({ perfil_id }) =>
+        this.perfilService.eliminarPerfil(perfil_id).pipe(
+          map(response => profileActions.eliminarPerfilSuccess({ response })),
+          catchError(error => of(profileActions.eliminarPerfilError({ error })))
+        )
+      )
+    )
+  );
 
+  // NOTIFICACIONES
+  notifyOK$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(profileActions.eliminarPerfilSuccess),
+        tap(action => {
+          this.alertMessageAction.messageActions(
+            action.response.status.code,
+            action.response.status.desc,
+            action.type,
+            action
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(profileActions.eliminarPerfilError),
+        tap(action =>
+          this.alertMessageAction.messageActions(
+            action.error.error.status.code,
+            action.error.error.status.desc,
+            action.type,
+            action
+          )
+        )
+      ),
+    { dispatch: false }
+  );
   ////
 
   getProfileSelected$ = createEffect(() =>

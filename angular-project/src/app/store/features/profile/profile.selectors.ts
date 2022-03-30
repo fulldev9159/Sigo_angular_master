@@ -10,22 +10,33 @@ export const getProfiles = createSelector(
   (state: fromProfile.StateProfile) => state.perfiles
 );
 
-export const getProfileSelected = createSelector(
+export const getPermisosPerfil = createSelector(
   selectProfile,
-  (state: fromProfile.StateProfile) => state.perfil_selected
+  (state: fromProfile.StateProfile) => state.permisosPerfil
 );
 
-export const getPermissions = createSelector(
+export const modalPermisosPerfil = createSelector(
   selectProfile,
-  (state: fromProfile.StateProfile) => state.permisos
+  (state: fromProfile.StateProfile) => state.modalPermisosPerfil
 );
 
-export const getRolPermissions = createSelector(
-  selectProfile,
-  (state: fromProfile.StateProfile) => state.rol_permisos
-);
+///
+// export const getProfileSelected = createSelector(
+//   selectProfile,
+//   (state: fromProfile.StateProfile) => state.perfil_selected
+// );
 
-export const getRols = createSelector(
-  selectProfile,
-  (state: fromProfile.StateProfile) => state.rols
-);
+// export const getPermissions = createSelector(
+//   selectProfile,
+//   (state: fromProfile.StateProfile) => state.permisos
+// );
+
+// export const getRolPermissions = createSelector(
+//   selectProfile,
+//   (state: fromProfile.StateProfile) => state.rol_permisos
+// );
+
+// export const getRols = createSelector(
+//   selectProfile,
+//   (state: fromProfile.StateProfile) => state.rols
+// );
