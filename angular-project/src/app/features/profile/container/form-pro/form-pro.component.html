@@ -31,7 +31,7 @@
               <app-select [control]="formControls.rol" label="* Rol" ID="perfil-rol">
                 <ng-container options>
                   <option value="null" selected disabled>Seleccione un rol</option>
-                  <ng-container *ngFor="let rol of rols$ | async">
+                  <ng-container *ngFor="let rol of allRoles$ | async">
                     <option [value]="rol.id">
                       {{ rol.nombre }}
                     </option>
@@ -57,7 +57,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-9">
+        <!-- <div class="col-md-9">
           <div class="row" *ngIf="formPerfil.get('rol').value!==null && (RolPermissions$ | async).length>0">
             <div *ngFor="let item of (RolPermissions$ | async)" class="col-xs-12 col-md-4 pt-2" id="modulos-pefil-{{item.module}}">
               <p-listbox formControlName="permisos_{{item.module}}" [options]="item.permissions" optionValue="id" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="nombre_corto">
@@ -67,7 +67,7 @@
               </p-listbox>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </ng-container>
   </app-card>

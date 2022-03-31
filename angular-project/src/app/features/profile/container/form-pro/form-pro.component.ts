@@ -6,7 +6,8 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
-import * as Data from '@data';
+import { Perfil, Roles } from '@data';
+import { FormProService } from './form-pro.service';
 
 @Component({
   selector: 'app-form-pro',
@@ -15,56 +16,75 @@ import * as Data from '@data';
 })
 export class FormProComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  // DATOS A USAR
+  perfilSelected$: Observable<Perfil>;
+  allRoles$: Observable<Roles[]>;
+  // DISPLAY MODALS
 
+  // FORMULARIO
+  formControls: any;
+  formPerfil: FormGroup;
+
+  // TABLE
+
+  // EXTRAS
+  perfil_id = null;
+
+  // PermisosPerfil$: Observable<any[]>;
   permissions$: Observable<any>;
   RolPermissions$: Observable<any>;
 
-  perfilSelected$: Observable<Data.Perfil>;
-  rols$: Observable<Data.Rols[]>;
-
-  formControls = {
-    id: new FormControl(null),
-    nombre: new FormControl(null, [
-      Validators.required,
-      this.noWhitespace,
-      Validators.maxLength(100),
-    ]),
-    descripcion: new FormControl(null, [
-      Validators.required,
-      Validators.maxLength(200),
-    ]),
-    rol: new FormControl(null, [Validators.required]),
-    permisos_OT: new FormControl(null),
-    permisos_CUBICACION: new FormControl(null),
-    permisos_PERFIL: new FormControl(null),
-  };
-
-  formPerfil: FormGroup = new FormGroup(this.formControls);
+  // rols$: Observable<Data.Rols[]>;
 
   constructor(
     private route: ActivatedRoute,
     private profileFacade: ProfileFacade,
     private router: Router,
-    private detector: ChangeDetectorRef
+    private detector: ChangeDetectorRef,
+    private formProService: FormProService
   ) {}
 
   ngOnInit(): void {
-    this.profileFacade.resetData();
-    this.initObservables();
-    this.initFormControlsEvents();
-    this.initData();
+    this.onInitResetInicial();
+    this.onInitGetInitialData();
+    this.onInitSetInitialData();
+    this.onInitAccionesInicialesAdicionales();
 
+    // this.initObservables();
+    // this.initFormControlsEvents();
+    // this.initData();
+  }
+
+  onInitResetInicial(): void {
+    this.profileFacade.resetData();
+  }
+
+  onInitGetInitialData(): void {
+    this.formControls = this.formProService.FormConfig();
+    this.formPerfil = new FormGroup(this.formControls);
     this.subscription.add(
       this.route.paramMap.subscribe(params => {
-        const id = params.get('id');
-        if (id !== null) {
-          const perfil_id = +params.get('id');
+        const perfil_id = params.get('id');
+        if (perfil_id !== null) {
           this.formPerfil.get('id').setValue(perfil_id);
-          this.profileFacade.getProfileSelected(perfil_id);
+          this.perfil_id = perfil_id;
+          this.profileFacade.getProfile();
         }
       })
     );
+    this.profileFacade.getAllRoles4createEditPerfil();
   }
+
+  onInitSetInitialData(): void {
+    this.perfilSelected$ = this.profileFacade.getProfile$().pipe(
+      map(perfiles => {
+        return perfiles.find(perfil => perfil.id === this.perfil_id);
+      })
+    );
+    this.allRoles$ = this.profileFacade.getAllRoles4createEditPerfil$();
+  }
+
+  onInitAccionesInicialesAdicionales(): void {}
 
   initFormControlsEvents(): void {
     this.initRolFromControlEvent();
@@ -100,6 +120,7 @@ export class FormProComponent implements OnInit, OnDestroy {
       })
     );
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -109,76 +130,70 @@ export class FormProComponent implements OnInit, OnDestroy {
     this.router.navigate(['/app/profile/list-pro']);
   }
 
-  noWhitespace(control: FormControl): any {
-    const isWhitespace = (control.value || '').trim().length === 0;
-    const isValid = !isWhitespace;
-    return isValid ? null : { whitespace: true };
-  }
-
   initData(): void {
-    this.profileFacade.getRols();
-    this.profileFacade.getPermissions();
-    this.rols$ = this.profileFacade.getRols$();
-    this.subscription.add(
-      this.profileFacade.getProfileSelected$().subscribe(perfil => {
-        if (perfil) {
-          this.formPerfil.get('nombre').setValue(perfil.nombre);
-          this.formPerfil.get('descripcion').setValue(perfil.descripcion);
-          this.formControls.rol.setValue(perfil.rol_id);
-          // const PermissionsModules = this.getPermissionsGroup(perfil.permisos);
-          // if (PermissionsModules.find(module => module.module === 'OT')) {
-          //   this.formPerfil
-          //     .get('permisos_OT')
-          //     .setValue(
-          //       PermissionsModules.find(
-          //         module => module.module === 'OT'
-          //       ).permissions.map(permiso => permiso.id)
-          //     );
-          // }
+    // this.profileFacade.getRols();
+    // this.profileFacade.getPermissions();
+    // this.rols$ = this.profileFacade.getRols$();
+    // this.subscription.add(
+    //   this.profileFacade.getProfileSelected$().subscribe(perfil => {
+    //     if (perfil) {
+    //       this.formPerfil.get('nombre').setValue(perfil.nombre);
+    //       this.formPerfil.get('descripcion').setValue(perfil.descripcion);
+    //       this.formControls.rol.setValue(perfil.rol_id);
+    //       // const PermissionsModules = this.getPermissionsGroup(perfil.permisos);
+    //       // if (PermissionsModules.find(module => module.module === 'OT')) {
+    //       //   this.formPerfil
+    //       //     .get('permisos_OT')
+    //       //     .setValue(
+    //       //       PermissionsModules.find(
+    //       //         module => module.module === 'OT'
+    //       //       ).permissions.map(permiso => permiso.id)
+    //       //     );
+    //       // }
 
-          // if (
-          //   PermissionsModules.find(module => module.module === 'CUBICACION')
-          // ) {
-          //   this.formPerfil
-          //     .get('permisos_CUBICACION')
-          //     .setValue(
-          //       PermissionsModules.find(
-          //         module => module.module === 'CUBICACION'
-          //       ).permissions.map(permiso => permiso.id)
-          //     );
-          // }
+    //       // if (
+    //       //   PermissionsModules.find(module => module.module === 'CUBICACION')
+    //       // ) {
+    //       //   this.formPerfil
+    //       //     .get('permisos_CUBICACION')
+    //       //     .setValue(
+    //       //       PermissionsModules.find(
+    //       //         module => module.module === 'CUBICACION'
+    //       //       ).permissions.map(permiso => permiso.id)
+    //       //     );
+    //       // }
 
-          // if (PermissionsModules.find(module => module.module === 'PERFIL')) {
-          //   this.formPerfil
-          //     .get('permisos_PERFIL')
-          //     .setValue(
-          //       PermissionsModules.find(
-          //         module => module.module === 'PERFIL'
-          //       ).permissions.map(permiso => permiso.id)
-          //     );
-          // }
-        }
-      })
-    );
+    //       // if (PermissionsModules.find(module => module.module === 'PERFIL')) {
+    //       //   this.formPerfil
+    //       //     .get('permisos_PERFIL')
+    //       //     .setValue(
+    //       //       PermissionsModules.find(
+    //       //         module => module.module === 'PERFIL'
+    //       //       ).permissions.map(permiso => permiso.id)
+    //       //     );
+    //       // }
+    //     }
+    //   })
+    // );
 
     setTimeout(() => {
       this.detector.detectChanges();
     }, 1000);
   }
 
-  getPermissionsGroup(permissions: Data.Permiso[]): Data.PermissionsGroup[] {
-    const data = permissions.map((permit: Data.Permiso) => {
-      let permitCustom: any;
-      if (permit && permit.slug) {
-        permitCustom = { ...permit, module: permit.slug.split('_')[0] };
-      }
-      return permitCustom;
-    });
-    return _.chain(data)
-      .groupBy('module')
-      .map((value, key) => ({ module: key, permissions: value }))
-      .value();
-  }
+  // getPermissionsGroup(permissions: Data.Permiso[]): Data.PermissionsGroup[] {
+  //   const data = permissions.map((permit: Data.Permiso) => {
+  //     let permitCustom: any;
+  //     if (permit && permit.slug) {
+  //       permitCustom = { ...permit, module: permit.slug.split('_')[0] };
+  //     }
+  //     return permitCustom;
+  //   });
+  //   return _.chain(data)
+  //     .groupBy('module')
+  //     .map((value, key) => ({ module: key, permissions: value }))
+  //     .value();
+  // }
 
   saveProfile(): void {
     const perfil_id = this.formPerfil.get('id').value;
@@ -200,26 +215,26 @@ export class FormProComponent implements OnInit, OnDestroy {
       ...permisosPerfil,
     ];
 
-    if (perfil_id === null) {
-      const request: Data.CreatePerfilRequest = {
-        nombre: this.formPerfil.get('nombre').value,
-        descripcion: this.formPerfil.get('descripcion').value,
-        permisos,
-        rol_id: +this.formPerfil.get('rol').value,
-      };
+    // if (perfil_id === null) {
+    //   const request: Data.CreatePerfilRequest = {
+    //     nombre: this.formPerfil.get('nombre').value,
+    //     descripcion: this.formPerfil.get('descripcion').value,
+    //     permisos,
+    //     rol_id: +this.formPerfil.get('rol').value,
+    //   };
 
-      console.log('CREATE', request);
-      this.profileFacade.createPerfil(request);
-    } else {
-      const request: Data.EditPerfilRequest = {
-        id: perfil_id,
-        nombre: this.formPerfil.get('nombre').value,
-        descripcion: this.formPerfil.get('descripcion').value,
-        permisos,
-        rol_id: +this.formPerfil.get('rol').value,
-      };
-      console.log('EDIT', request);
-      this.profileFacade.editProfile(request);
-    }
+    //   console.log('CREATE', request);
+    //   this.profileFacade.createPerfil(request);
+    // } else {
+    //   const request: Data.EditPerfilRequest = {
+    //     id: perfil_id,
+    //     nombre: this.formPerfil.get('nombre').value,
+    //     descripcion: this.formPerfil.get('descripcion').value,
+    //     permisos,
+    //     rol_id: +this.formPerfil.get('rol').value,
+    //   };
+    //   console.log('EDIT', request);
+    //   this.profileFacade.editProfile(request);
+    // }
   }
 }

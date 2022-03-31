@@ -62,6 +62,22 @@ export class ProfileEffects {
     )
   );
 
+  getAllRoles4CreateEdit$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.getAllRoles4CreateEditPerfil),
+      concatMap(() =>
+        this.perfilService.getAllRoles4CreateEditPerfil().pipe(
+          map(response =>
+            profileActions.getAllRoles4CreateEditPerfilSuccess({ response })
+          ),
+          catchError(error =>
+            of(profileActions.getAllRoles4CreateEditPerfilError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -82,7 +98,10 @@ export class ProfileEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(profileActions.eliminarPerfilError),
+        ofType(
+          profileActions.eliminarPerfilError,
+          profileActions.getAllRoles4CreateEditPerfilError
+        ),
         tap(action =>
           this.alertMessageAction.messageActions(
             action.error.error.status.code,

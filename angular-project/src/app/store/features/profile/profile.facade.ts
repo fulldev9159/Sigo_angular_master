@@ -4,21 +4,20 @@ import { Observable } from 'rxjs';
 
 import * as profileActions from './profile.actions';
 import * as profileSelectors from './profile.selectors';
-import * as Data from '@data';
-import { Permiso, PermisosPerfil, RolWithPermisos } from '@data';
+import { Perfil, Permiso, PermisosPerfil, Roles, RolWithPermisos } from '@data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileFacade {
-  constructor(private store: Store<Data.Perfil>) {}
+  constructor(private store: Store<Perfil>) {}
 
   // PROFILE
   public getProfile(): void {
     this.store.dispatch(profileActions.getAllProfile());
   }
 
-  public getProfile$(): Observable<Data.Perfil[]> {
+  public getProfile$(): Observable<Perfil[]> {
     return this.store.select(profileSelectors.getProfiles);
   }
 
@@ -44,6 +43,16 @@ export class ProfileFacade {
   public modalPermisosPerfil$(): Observable<boolean> {
     return this.store.select(profileSelectors.modalPermisosPerfil);
   }
+
+  // GET ALL ROLES 4 CREATE EDIT PERFIL
+  public getAllRoles4createEditPerfil(): void {
+    this.store.dispatch(profileActions.getAllRoles4CreateEditPerfil());
+  }
+
+  public getAllRoles4createEditPerfil$(): Observable<Roles[]> {
+    return this.store.select(profileSelectors.AllRoles4createEditPerfil);
+  }
+
   ///
   public getProfileSelected(perfil_id: number): void {
     this.store.dispatch(profileActions.getProfileSelected({ perfil_id }));
@@ -79,16 +88,16 @@ export class ProfileFacade {
   }
   // DELETE
 
-  // CREATE
-  public createPerfil(perfil: Data.CreatePerfilRequest): void {
-    this.store.dispatch(profileActions.createPerfil({ perfil }));
-  }
-  // CREATE
+  // // CREATE
+  // public createPerfil(perfil: Data.CreatePerfilRequest): void {
+  //   this.store.dispatch(profileActions.createPerfil({ perfil }));
+  // }
+  // // CREATE
 
-  // EDIT
-  public editProfile(perfil: Data.EditPerfilRequest): void {
-    this.store.dispatch(profileActions.editProfile({ perfil }));
-  }
+  // // EDIT
+  // public editProfile(perfil: Data.EditPerfilRequest): void {
+  //   this.store.dispatch(profileActions.editProfile({ perfil }));
+  // }
 
   // FORM
   public resetData(): void {

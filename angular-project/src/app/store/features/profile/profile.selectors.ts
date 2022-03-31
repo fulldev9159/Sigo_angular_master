@@ -20,6 +20,11 @@ export const modalPermisosPerfil = createSelector(
   (state: fromProfile.StateProfile) => state.modalPermisosPerfil
 );
 
+export const AllRoles4createEditPerfil = createSelector(
+  selectProfile,
+  (state: fromProfile.StateProfile) => state.allroles4createedit
+);
+
 ///
 // export const getProfileSelected = createSelector(
 //   selectProfile,

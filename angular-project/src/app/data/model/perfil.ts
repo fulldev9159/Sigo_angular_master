@@ -45,6 +45,15 @@ export interface PermisosPerfil {
   permiso_id: number;
 }
 
+export interface DataRespGetAllRoles {
+  items: Roles[];
+}
+
+export interface Roles {
+  id: number;
+  jerarquia: null;
+  nombre: string;
+}
 ////
 
 export interface PerfilResponse {

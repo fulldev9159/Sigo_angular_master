@@ -6,6 +6,7 @@ import {
   Response,
   RolWithPermisos,
   DataRespGetPermisosPerfil,
+  DataRespGetAllRoles,
 } from '@data';
 
 // PROFILE LIST
@@ -49,7 +50,7 @@ export const eliminarPerfilSuccess = createAction(
 );
 
 export const eliminarPerfilError = createAction(
-  '[Perfil] eliminarPerfil',
+  '[Perfil] eliminarPerfil Error',
   props<{ error: any }>()
 );
 
@@ -59,6 +60,20 @@ export const modalPermisosPerfil = createAction(
   props<{ status: boolean }>()
 );
 
+// GET ALL ROLES 4 CREATE EDIT PERFIL
+export const getAllRoles4CreateEditPerfil = createAction(
+  '[Perfil] getAllRoles4CreateEditPerfil'
+);
+
+export const getAllRoles4CreateEditPerfilSuccess = createAction(
+  '[Perfil] getAllRoles4CreateEditPerfil Success',
+  props<{ response: Response<DataRespGetAllRoles> }>()
+);
+
+export const getAllRoles4CreateEditPerfilError = createAction(
+  '[Perfil] getAllRoles4CreateEditPerfil Error',
+  props<{ error: any }>()
+);
 // ////////
 // GET PERMISOS
 

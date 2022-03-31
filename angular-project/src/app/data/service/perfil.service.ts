@@ -10,7 +10,11 @@ import {
   RolWithPermisos,
   Response,
 } from '@data';
-import { DataRspGetAllPerfiles, DataRespGetPermisosPerfil } from '@data/model';
+import {
+  DataRspGetAllPerfiles,
+  DataRespGetPermisosPerfil,
+  DataRespGetAllRoles,
+} from '@data/model';
 @Injectable({
   providedIn: 'root',
 })
@@ -47,6 +51,12 @@ export class PerfilService {
     );
   }
 
+  getAllRoles4CreateEditPerfil(): Observable<Response<DataRespGetAllRoles>> {
+    return this.http.post<Response<DataRespGetAllRoles>>(
+      `${this.apiUrl}/configuration/rol/getall`,
+      {}
+    );
+  }
   //////
 
   getPermisos(): Observable<Data.Permiso[]> {
