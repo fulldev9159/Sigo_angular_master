@@ -28,7 +28,7 @@
   <app-modal [display]="DisplayPermisosPerfilModal$|async" (CloseEvent)="closeModalPermisosPerfil()">
     <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>
     <ng-container modal-content>
-      <div class="row" style="width: 60rem;">
+      <div class="row" style="width: 87vw;">
         <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2" id="permisos-modulo-{{item.module}}">
           <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive" [disabled]="true">
             <ng-template pTemplate="header">

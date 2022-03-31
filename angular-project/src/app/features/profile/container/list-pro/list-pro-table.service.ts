@@ -35,7 +35,7 @@ export class ListProTableService {
             sort: 'descripcion',
             header: 'descripcion',
             editable: false,
-            width: '41%',
+            // width: '41%',
           },
           {
             field: 'Fecha Creación',
@@ -43,7 +43,7 @@ export class ListProTableService {
             sort: 'created_at',
             header: 'created_at',
             editable: false,
-            width: '10%',
+            // width: '10%',
           },
 
           {
@@ -52,7 +52,7 @@ export class ListProTableService {
             sort: 'updated_at',
             header: 'updated_at',
             editable: false,
-            width: '10%',
+            // width: '10%',
           },
           {
             field: null,
@@ -60,7 +60,7 @@ export class ListProTableService {
             sort: null,
             header: null,
             editable: false,
-            width: '10%',
+            width: '14rem',
           },
         ],
         sort: ['nombre', 'descripcion', 'created_at', 'superior'],
