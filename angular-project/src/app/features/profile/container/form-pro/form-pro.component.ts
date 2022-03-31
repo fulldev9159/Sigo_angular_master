@@ -71,21 +71,20 @@ export class FormProComponent implements OnInit, OnDestroy {
   }
 
   initObservables(): void {
-    this.permissions$ = this.profileFacade
-      .getPermissions$()
-      .pipe(
-        map((permissions: Data.Permiso[]) =>
-          this.getPermissionsGroup(permissions)
-        )
-      );
-
-    this.RolPermissions$ = this.profileFacade
-      .getRolPermissions$()
-      .pipe(
-        map((permissions: Data.Permiso[]) =>
-          this.getPermissionsGroup(permissions)
-        )
-      );
+    // this.permissions$ = this.profileFacade
+    //   .getPermissions$()
+    //   .pipe(
+    //     map((permissions: Data.Permiso[]) =>
+    //       this.getPermissionsGroup(permissions)
+    //     )
+    //   );
+    // this.RolPermissions$ = this.profileFacade
+    //   .getRolPermissions$()
+    //   .pipe(
+    //     map((permissions: Data.Permiso[]) =>
+    //       this.getPermissionsGroup(permissions)
+    //     )
+    //   );
   }
 
   initRolFromControlEvent(): void {
@@ -96,7 +95,7 @@ export class FormProComponent implements OnInit, OnDestroy {
         this.formPerfil.get('permisos_PERFIL').reset();
 
         if (rol_id !== null && rol_id !== undefined) {
-          this.profileFacade.getRolPermissions(+rol_id);
+          // this.profileFacade.getRolPermissions(+rol_id);
         }
       })
     );
