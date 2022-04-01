@@ -78,11 +78,41 @@ export class ProfileEffects {
     )
   );
 
+  getPermisosRol4CreateEdit$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.getPermisosRol4CreateEditPerfil),
+      concatMap(({ rol_id }) =>
+        this.perfilService.getPermisosRol4CreateEditPerfil(rol_id).pipe(
+          map(response =>
+            profileActions.getPermisosRol4CreateEditPerfilSuccess({ response })
+          ),
+          catchError(error =>
+            of(profileActions.getPermisosRol4CreateEditPerfilError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  createPerfil$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.createPerfil),
+      concatMap(({ request }) =>
+        this.perfilService.createPerfil(request).pipe(
+          map(response => profileActions.createPerfilSuccess({ response })),
+          catchError(error => of(profileActions.createPerfilError({ error })))
+        )
+      )
+    )
+  );
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(profileActions.eliminarPerfilSuccess),
+        ofType(
+          profileActions.eliminarPerfilSuccess,
+          profileActions.createPerfilSuccess
+        ),
         tap(action => {
           this.alertMessageAction.messageActions(
             action.response.status.code,
@@ -100,7 +130,8 @@ export class ProfileEffects {
       this.actions$.pipe(
         ofType(
           profileActions.eliminarPerfilError,
-          profileActions.getAllRoles4CreateEditPerfilError
+          profileActions.getAllRoles4CreateEditPerfilError,
+          profileActions.createPerfilError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(
@@ -159,19 +190,19 @@ export class ProfileEffects {
     )
   );
 
-  postProfile$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(profileActions.createPerfil),
-      concatMap(({ perfil }) =>
-        this.perfilService.creatPerfil(perfil).pipe(
-          map((perfil_id: number) =>
-            profileActions.createPerfilSuccess({ perfil_id })
-          ),
-          catchError(error => of(profileActions.createPerfilError({ error })))
-        )
-      )
-    )
-  );
+  // postProfile$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(profileActions.createPerfil),
+  //     concatMap(({ perfil }) =>
+  //       this.perfilService.creatPerfil(perfil).pipe(
+  //         map((perfil_id: number) =>
+  //           profileActions.createPerfilSuccess({ perfil_id })
+  //         ),
+  //         catchError(error => of(profileActions.createPerfilError({ error })))
+  //       )
+  //     )
+  //   )
+  // );
 
   notifyAfterCreatePerfilSuccess$ = createEffect(
     () =>

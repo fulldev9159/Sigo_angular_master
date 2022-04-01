@@ -4,7 +4,15 @@ import { Observable } from 'rxjs';
 
 import * as profileActions from './profile.actions';
 import * as profileSelectors from './profile.selectors';
-import { Perfil, Permiso, PermisosPerfil, Roles, RolWithPermisos } from '@data';
+import {
+  Perfil,
+  Permiso,
+  PermisoRol,
+  PermisosPerfil,
+  RequestCreatePerfil,
+  Roles,
+  RolWithPermisos,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -53,10 +61,26 @@ export class ProfileFacade {
     return this.store.select(profileSelectors.AllRoles4createEditPerfil);
   }
 
-  ///
-  public getProfileSelected(perfil_id: number): void {
-    this.store.dispatch(profileActions.getProfileSelected({ perfil_id }));
+  // GET PERMISOS ROL 4 CREATE EDIT PERFIL
+  public getPermisosRol4CreateEdit(rol_id: number): void {
+    this.store.dispatch(
+      profileActions.getPermisosRol4CreateEditPerfil({ rol_id })
+    );
   }
+
+  public getPermisosRol4CreateEdit$(): Observable<PermisoRol[]> {
+    return this.store.select(profileSelectors.PermisosRol4createEditPerfil);
+  }
+
+  // CREATE PERFIL
+  public createPerfil(request: RequestCreatePerfil): void {
+    this.store.dispatch(profileActions.createPerfil({ request }));
+  }
+
+  ///
+  // public getProfileSelected(perfil_id: number): void {
+  //   this.store.dispatch(profileActions.getProfileSelected({ perfil_id }));
+  // }
 
   // public getProfileSelected$(): Observable<Data.Perfil> {
   //   return this.store.select(profileSelectors.getProfileSelected);

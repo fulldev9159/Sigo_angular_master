@@ -25,6 +25,11 @@ export const AllRoles4createEditPerfil = createSelector(
   (state: fromProfile.StateProfile) => state.allroles4createedit
 );
 
+export const PermisosRol4createEditPerfil = createSelector(
+  selectProfile,
+  (state: fromProfile.StateProfile) => state.permisosRol
+);
+
 ///
 // export const getProfileSelected = createSelector(
 //   selectProfile,

@@ -45,6 +45,11 @@ export interface PermisosPerfil {
   permiso_id: number;
 }
 
+export interface PermissionsGroup {
+  module: string;
+  permissions: Permiso[];
+}
+
 export interface DataRespGetAllRoles {
   items: Roles[];
 }
@@ -54,6 +59,31 @@ export interface Roles {
   jerarquia: null;
   nombre: string;
 }
+
+export interface DataRespGetPermisosRol {
+  items: PermisoRol[];
+}
+
+export interface PermisoRol {
+  model_permiso_id: {
+    id: number;
+    slug: string;
+    nombre_corto: string;
+    descripcion: string;
+  };
+  model_rol_id: { id: number; nombre: string; jerarquia: null };
+  permiso_id: number;
+  rol_id: number;
+}
+
+export interface RequestCreatePerfil {
+  nombre: string;
+  descripcion: string;
+  permisos: number[];
+  eliminable: boolean;
+  rol_id: number;
+}
+
 ////
 
 export interface PerfilResponse {
@@ -63,13 +93,6 @@ export interface PerfilResponse {
     description: string;
     responseCode: number;
   };
-}
-
-export interface CreatePerfilRequest {
-  nombre: string;
-  descripcion: string;
-  permisos: number[];
-  rol_id: number;
 }
 
 export interface CreatePerfilResponse {
@@ -111,11 +134,6 @@ export interface DeletePerfilResponse {
     description: string;
     responseCode: number;
   };
-}
-
-export interface PermissionsGroup {
-  module: string;
-  permissions: Permiso[];
 }
 
 export interface RolsResponse {

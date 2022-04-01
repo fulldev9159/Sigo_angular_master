@@ -161,7 +161,10 @@ export class AlertMessageActions {
         action === profileActions.eliminarPerfilSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
-      } else if (action === userActions.createUserSuccess.type) {
+      } else if (
+        action === userActions.createUserSuccess.type ||
+        action === profileActions.createPerfilSuccess.type
+      ) {
         this.snackService.showMessage(`Creación exitosa`, 'OK', 3000);
       } else if (this.msgOK[action]) {
         this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
@@ -210,6 +213,10 @@ export class AlertMessageActions {
         action === userActions.updateUserSuccess.type
       ) {
         this.router.navigate(['/app/user/list-user']);
+      }
+
+      if (action === profileActions.createPerfilSuccess.type) {
+        this.router.navigate(['/app/user/list-profile']);
       }
     }
   }

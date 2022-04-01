@@ -7,6 +7,8 @@ import {
   RolWithPermisos,
   DataRespGetPermisosPerfil,
   DataRespGetAllRoles,
+  DataRespGetPermisosRol,
+  RequestCreatePerfil,
 } from '@data';
 
 // PROFILE LIST
@@ -74,6 +76,38 @@ export const getAllRoles4CreateEditPerfilError = createAction(
   '[Perfil] getAllRoles4CreateEditPerfil Error',
   props<{ error: any }>()
 );
+
+// GET PERMISOS ROL 4 CREATE EDIT PERFIL
+export const getPermisosRol4CreateEditPerfil = createAction(
+  '[Perfil] getPermisosRol4CreateEditPerfil',
+  props<{ rol_id: number }>()
+);
+
+export const getPermisosRol4CreateEditPerfilSuccess = createAction(
+  '[Perfil] getPermisosRol4CreateEditPerfil Success',
+  props<{ response: Response<DataRespGetPermisosRol> }>()
+);
+
+export const getPermisosRol4CreateEditPerfilError = createAction(
+  '[Perfil] getAllRoles4CreateEditPerfil Error',
+  props<{ error: any }>()
+);
+
+// CREATE PERFIL
+export const createPerfil = createAction(
+  '[Perfil] createPerfil',
+  props<{ request: RequestCreatePerfil }>()
+);
+
+export const createPerfilSuccess = createAction(
+  '[Perfil] createPerfil Success',
+  props<{ response: Response<any> }>()
+);
+
+export const createPerfilError = createAction(
+  '[Perfil] createPerfil Error',
+  props<{ error: any }>()
+);
 // ////////
 // GET PERMISOS
 
@@ -109,20 +143,20 @@ export const getRolPermisosError = createAction(
 );
 // CREATE PERFIL
 
-export const createPerfil = createAction(
-  '[Profile Post] CREATE Profile',
-  props<{ perfil: Data.CreatePerfilRequest }>()
-);
+// export const createPerfil = createAction(
+//   '[Profile Post] CREATE Profile',
+//   props<{ perfil: Data.CreatePerfilRequest }>()
+// );
 
-export const createPerfilSuccess = createAction(
-  '[Profile Post] CREATE Profile Success',
-  props<{ perfil_id: number }>()
-);
+// export const createPerfilSuccess = createAction(
+//   '[Profile Post] CREATE Profile Success',
+//   props<{ perfil_id: number }>()
+// );
 
-export const createPerfilError = createAction(
-  '[Profile Post] CREATE Profile Error',
-  props<{ error: any }>()
-);
+// export const createPerfilError = createAction(
+//   '[Profile Post] CREATE Profile Error',
+//   props<{ error: any }>()
+// );
 
 // EDIT
 

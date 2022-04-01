@@ -14,6 +14,8 @@ import {
   DataRspGetAllPerfiles,
   DataRespGetPermisosPerfil,
   DataRespGetAllRoles,
+  DataRespGetPermisosRol,
+  RequestCreatePerfil,
 } from '@data/model';
 @Injectable({
   providedIn: 'root',
@@ -57,6 +59,22 @@ export class PerfilService {
       {}
     );
   }
+
+  getPermisosRol4CreateEditPerfil(
+    rol_id: number
+  ): Observable<Response<DataRespGetPermisosRol>> {
+    return this.http.post<Response<DataRespGetPermisosRol>>(
+      `${this.apiUrl}/configuration/rol_template_permiso/get`,
+      { rol_id }
+    );
+  }
+
+  createPerfil(request: RequestCreatePerfil): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/perfil/create_ex`,
+      request
+    );
+  }
   //////
 
   getPermisos(): Observable<Data.Permiso[]> {
@@ -93,18 +111,18 @@ export class PerfilService {
       );
   }
 
-  creatPerfil(perfil: Data.CreatePerfilRequest): Observable<number> {
-    return this.http
-      .post<Data.CreatePerfilResponse>(`${this.apiUrl}/perfiles/create`, perfil)
-      .pipe(
-        map((res: Data.CreatePerfilResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.id;
-        })
-      );
-  }
+  // creatPerfil(perfil: Data.CreatePerfilRequest): Observable<number> {
+  //   return this.http
+  //     .post<Data.CreatePerfilResponse>(`${this.apiUrl}/perfiles/create`, perfil)
+  //     .pipe(
+  //       map((res: Data.CreatePerfilResponse) => {
+  //         if (+res.status.responseCode !== 0) {
+  //           this.snackService.showMessage(res.status.description, 'error');
+  //         }
+  //         return res.data.id;
+  //       })
+  //     );
+  // }
 
   editPerfil(
     perfil: Data.EditPerfilRequest

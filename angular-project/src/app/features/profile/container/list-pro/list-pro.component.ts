@@ -79,7 +79,7 @@ export class ListProComponent implements OnInit, OnDestroy {
         tooltipDisabled: 'No se puede editar',
         onClick: (event: Event, item: ListarPerfil) => {
           if (item) {
-            // this.router.navigate(['/app/profile/form-pro', item.id]);
+            this.router.navigate(['/app/profile/form-pro', item.id]);
           }
         },
       },
@@ -144,12 +144,6 @@ export class ListProComponent implements OnInit, OnDestroy {
       }
       return permitCustom;
     });
-    console.log(
-      _.chain(data)
-        .groupBy('module')
-        .map((value, key) => ({ module: key, permissions: value }))
-        .value()
-    );
     return _.chain(data)
       .groupBy('module')
       .map((value, key) => ({ module: key, permissions: value }))
