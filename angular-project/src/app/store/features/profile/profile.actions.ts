@@ -9,6 +9,7 @@ import {
   DataRespGetAllRoles,
   DataRespGetPermisosRol,
   RequestCreatePerfil,
+  RequestUpdatePerfil,
 } from '@data';
 
 // PROFILE LIST
@@ -106,6 +107,22 @@ export const createPerfilSuccess = createAction(
 
 export const createPerfilError = createAction(
   '[Perfil] createPerfil Error',
+  props<{ error: any }>()
+);
+
+// EDIT PERFIL
+export const updatePerfil = createAction(
+  '[Perfil] updatePerfil',
+  props<{ request: RequestUpdatePerfil }>()
+);
+
+export const updatePerfilSuccess = createAction(
+  '[Perfil] updatePerfil Success',
+  props<{ response: Response<any> }>()
+);
+
+export const updatePerfilError = createAction(
+  '[Perfil] updatePerfil Error',
   props<{ error: any }>()
 );
 // ////////

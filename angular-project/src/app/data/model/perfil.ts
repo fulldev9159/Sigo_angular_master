@@ -85,6 +85,10 @@ export interface RequestCreatePerfil {
   rol_id: number;
 }
 
+export interface RequestUpdatePerfil {
+  id: number;
+  values: RequestCreatePerfil;
+}
 ////
 
 export interface PerfilResponse {

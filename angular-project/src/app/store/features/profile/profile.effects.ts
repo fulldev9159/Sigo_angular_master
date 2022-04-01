@@ -105,13 +105,26 @@ export class ProfileEffects {
       )
     )
   );
+
+  updatePerfil$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(profileActions.updatePerfil),
+      concatMap(({ request }) =>
+        this.perfilService.updatePerfil(request).pipe(
+          map(response => profileActions.updatePerfilSuccess({ response })),
+          catchError(error => of(profileActions.updatePerfilError({ error })))
+        )
+      )
+    )
+  );
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           profileActions.eliminarPerfilSuccess,
-          profileActions.createPerfilSuccess
+          profileActions.createPerfilSuccess,
+          profileActions.updatePerfilSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -131,6 +144,7 @@ export class ProfileEffects {
         ofType(
           profileActions.eliminarPerfilError,
           profileActions.getAllRoles4CreateEditPerfilError,
+          profileActions.createPerfilError,
           profileActions.createPerfilError
         ),
         tap(action =>

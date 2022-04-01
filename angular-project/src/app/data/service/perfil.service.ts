@@ -16,6 +16,7 @@ import {
   DataRespGetAllRoles,
   DataRespGetPermisosRol,
   RequestCreatePerfil,
+  RequestUpdatePerfil,
 } from '@data/model';
 @Injectable({
   providedIn: 'root',
@@ -72,6 +73,13 @@ export class PerfilService {
   createPerfil(request: RequestCreatePerfil): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/configuration/perfil/create_ex`,
+      request
+    );
+  }
+
+  updatePerfil(request: RequestUpdatePerfil): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/perfil/update_ex`,
       request
     );
   }

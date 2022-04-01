@@ -12,6 +12,7 @@ import {
   PermisosPerfil,
   PermissionsGroup,
   RequestCreatePerfil,
+  RequestUpdatePerfil,
   Roles,
 } from '@data';
 import { FormProService } from './form-pro.service';
@@ -347,16 +348,21 @@ export class FormProComponent implements OnInit, OnDestroy {
 
       console.log('CREATE', request);
       this.profileFacade.createPerfil(request);
-      // } else {
-      //   const request: Data.EditPerfilRequest = {
-      //     id: perfil_id,
-      //     nombre: this.formPerfil.get('nombre').value,
-      //     descripcion: this.formPerfil.get('descripcion').value,
-      //     permisos,
-      //     rol_id: +this.formPerfil.get('rol').value,
-      //   };
-      //   console.log('EDIT', request);
-      //   this.profileFacade.editProfile(request);
+    } else {
+      const request: RequestUpdatePerfil = {
+        id: this.perfil_id,
+        values: {
+          nombre: this.formPerfil.get('nombre').value,
+          descripcion: this.formPerfil.get('descripcion').value,
+          permisos,
+          rol_id: +this.formPerfil.get('rol').value,
+          eliminable: true,
+        },
+      };
+      console.log('EDIT', request);
+      this.profileFacade.updatePerfil(request);
     }
+
+    this.profileFacade.modalPermisosPerfil(false);
   }
 }

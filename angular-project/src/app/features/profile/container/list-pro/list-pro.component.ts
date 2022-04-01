@@ -130,7 +130,9 @@ export class ListProComponent implements OnInit, OnDestroy {
     if (this.perfil_id) {
       this.profileFacade.eliminarPerfil(this.perfil_id);
       this.closeModalEliminarPerfil();
-      this.profileFacade.getProfile();
+      setTimeout(() => {
+        this.profileFacade.getProfile();
+      }, 700);
     }
   }
 

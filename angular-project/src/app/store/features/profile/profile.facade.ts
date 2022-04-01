@@ -10,6 +10,7 @@ import {
   PermisoRol,
   PermisosPerfil,
   RequestCreatePerfil,
+  RequestUpdatePerfil,
   Roles,
   RolWithPermisos,
 } from '@data';
@@ -75,6 +76,11 @@ export class ProfileFacade {
   // CREATE PERFIL
   public createPerfil(request: RequestCreatePerfil): void {
     this.store.dispatch(profileActions.createPerfil({ request }));
+  }
+
+  // EDIT PERFIL
+  public updatePerfil(request: RequestUpdatePerfil): void {
+    this.store.dispatch(profileActions.updatePerfil({ request }));
   }
 
   ///

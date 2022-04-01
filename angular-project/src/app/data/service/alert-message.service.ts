@@ -151,7 +151,8 @@ export class AlertMessageActions {
         action === areaActions.updateAreaSuccess.type ||
         action === contratoActions.updateContratoSuccess.type ||
         action === userActions.editarSuperiorPerfilUsuarioSuccess.type ||
-        action === userActions.updateUserSuccess.type
+        action === userActions.updateUserSuccess.type ||
+        action === profileActions.updatePerfilSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
       } else if (
@@ -215,8 +216,11 @@ export class AlertMessageActions {
         this.router.navigate(['/app/user/list-user']);
       }
 
-      if (action === profileActions.createPerfilSuccess.type) {
-        this.router.navigate(['/app/user/list-profile']);
+      if (
+        action === profileActions.createPerfilSuccess.type ||
+        action === profileActions.updatePerfilSuccess.type
+      ) {
+        this.router.navigate(['/app/profile/list-pro']);
       }
     }
   }
