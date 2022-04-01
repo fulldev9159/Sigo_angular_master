@@ -208,6 +208,7 @@ export class FormProComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.profileFacade.resetData();
+    this.profileFacade.modalPermisosPerfil(false);
     this.router.navigate(['/app/profile/list-pro']);
   }
 

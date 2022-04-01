@@ -86,7 +86,7 @@
                   <ng-container *ngFor="let button of actions" [ngSwitch]="button.type">
                     <ng-container *ngSwitchCase="'alldisplay-eliminable'">
                       <div *ngIf="!eliminable(item)" pTooltip="{{ button.tooltipDisabled }}">
-                        <button (click)="button.onClick($event, item, rowIndex)" [disabled]="true" class="ui button generic-color"> {{button.label}} </button>
+                        <button (click)="button.onClick($event, item, rowIndex)" style="height: 100%;" [disabled]="true" class="ui button generic-color"> {{button.label}} </button>
                       </div>
                       <button *ngIf="eliminable(item)" (click)="button.onClick($event, item, rowIndex)" class="ui button generic-color"> {{button.label}} </button>
                     </ng-container>
@@ -95,7 +95,7 @@
 
                     <ng-container *ngSwitchCase="'button-delete-eliminable'">
                       <div *ngIf="!eliminable(item)" pTooltip="{{ button.tooltipDisabled }}">
-                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color" style="height: 100%;">
                           <fa-icon [icon]="trashICon"></fa-icon>
                         </button>
                       </div>

@@ -100,6 +100,7 @@ export class ListProComponent implements OnInit, OnDestroy {
         perfiles.map(perfil => ({
           ...perfil,
           rol: perfil.model_rol_id.nombre,
+          estado: true,
         }))
       )
     );

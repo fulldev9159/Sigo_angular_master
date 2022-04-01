@@ -18,6 +18,7 @@ export interface Perfil {
 
 export interface ListarPerfil extends Perfil {
   rol: string;
+  estado: boolean;
 }
 
 // PERMISOS PERFIL
