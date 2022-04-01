@@ -24,7 +24,7 @@ export class ListProTableService {
           },
           {
             field: 'Rol',
-            type: 'TEXT',
+            type: 'TEXT-LABEL',
             sort: 'rol',
             header: 'rol',
             editable: false,
