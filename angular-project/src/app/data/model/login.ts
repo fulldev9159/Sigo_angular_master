@@ -101,7 +101,7 @@ export interface ModelUsuarioOrigen {
 // Get Perfiles User end
 
 // Get Permisos perfil init
-export interface DataRespGetPermisosPerfil {
+export interface DataRespGetUsuarioPermisosPerfil {
   permisos: Accion[];
 }
 

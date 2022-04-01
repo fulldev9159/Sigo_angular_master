@@ -4,7 +4,7 @@ import {
   Response,
   DataRespLogin,
   DataResGetPerfilesUser,
-  DataRespGetPermisosPerfil,
+  DataRespGetUsuarioPermisosPerfil,
 } from '@data';
 
 // LOGIN
@@ -96,7 +96,7 @@ export const getPerrmisoPerfil = createAction(
 
 export const getPerrmisoPerfilSuccess = createAction(
   '[Auth getPerrmisoPerfil] POST getPerrmisoPerfil Success',
-  props<{ response: Response<DataRespGetPermisosPerfil> }>()
+  props<{ response: Response<DataRespGetUsuarioPermisosPerfil> }>()
 );
 
 export const getPerrmisoPerfilUserError = createAction(

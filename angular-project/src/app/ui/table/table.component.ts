@@ -143,4 +143,10 @@ export class TableComponent implements OnInit, OnDestroy {
   get valid(): boolean {
     return this.form.valid;
   }
+
+  eliminable(item: any): boolean {
+    // console.log('eliminable' in item);
+    const index = 'eliminable';
+    return 'eliminable' in item ? item[index] : true;
+  }
 }

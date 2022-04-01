@@ -200,21 +200,35 @@ th>p-sorticon>i {
   background: #f6f6f621;
   border-bottom-right-radius: 0 !important;
   border-top-right-radius: 0 !important;
+
+  &:hover {
+    background: #dddddd;
+  }
+
+  &:disabled {
+    background: #e9e4e4;
+    pointer-events: none;
+  }
 }
 
-.generic-color:hover {
-  background: #dddddd;
-}
+// .generic-color:hover {
+//   background: #dddddd;
+// }
 
 .eliminar-color {
   background: #fba3a3;
   border-bottom-left-radius: 0px !important;
   border-top-left-radius: 0px !important;
   border-left: 0.2rem solid #be7e7e !important;
-}
 
-.eliminar-color:hover {
-  background-color: #dc8383;
+  &:hover {
+    background-color: #dc8383;
+  }
+
+  &:disabled {
+    background-color: #e0c8c8;
+    pointer-events: none;
+  }
 }
 
 div.p-datatable-header.ng-star-inserted>div>span>input {

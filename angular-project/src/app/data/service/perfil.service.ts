@@ -10,7 +10,14 @@ import {
   RolWithPermisos,
   Response,
 } from '@data';
-import { DataRspGetAllPerfiles } from '@data/model';
+import {
+  DataRspGetAllPerfiles,
+  DataRespGetPermisosPerfil,
+  DataRespGetAllRoles,
+  DataRespGetPermisosRol,
+  RequestCreatePerfil,
+  RequestUpdatePerfil,
+} from '@data/model';
 @Injectable({
   providedIn: 'root',
 })
@@ -30,6 +37,53 @@ export class PerfilService {
       {}
     );
   }
+
+  getPermisosPerfil(
+    perfil_id: number
+  ): Observable<Response<DataRespGetPermisosPerfil>> {
+    return this.http.post<Response<DataRespGetPermisosPerfil>>(
+      `${this.apiUrl}/configuration/perfil_has_permiso/get`,
+      { perfil_id }
+    );
+  }
+
+  eliminarPerfil(perfil_id: number): Observable<any> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/perfil/delete`,
+      { perfil_id }
+    );
+  }
+
+  getAllRoles4CreateEditPerfil(): Observable<Response<DataRespGetAllRoles>> {
+    return this.http.post<Response<DataRespGetAllRoles>>(
+      `${this.apiUrl}/configuration/rol/getall`,
+      {}
+    );
+  }
+
+  getPermisosRol4CreateEditPerfil(
+    rol_id: number
+  ): Observable<Response<DataRespGetPermisosRol>> {
+    return this.http.post<Response<DataRespGetPermisosRol>>(
+      `${this.apiUrl}/configuration/rol_template_permiso/get`,
+      { rol_id }
+    );
+  }
+
+  createPerfil(request: RequestCreatePerfil): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/perfil/create_ex`,
+      request
+    );
+  }
+
+  updatePerfil(request: RequestUpdatePerfil): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/configuration/perfil/update_ex`,
+      request
+    );
+  }
+  //////
 
   getPermisos(): Observable<Data.Permiso[]> {
     return this.http
@@ -65,18 +119,18 @@ export class PerfilService {
       );
   }
 
-  creatPerfil(perfil: Data.CreatePerfilRequest): Observable<number> {
-    return this.http
-      .post<Data.CreatePerfilResponse>(`${this.apiUrl}/perfiles/create`, perfil)
-      .pipe(
-        map((res: Data.CreatePerfilResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.id;
-        })
-      );
-  }
+  // creatPerfil(perfil: Data.CreatePerfilRequest): Observable<number> {
+  //   return this.http
+  //     .post<Data.CreatePerfilResponse>(`${this.apiUrl}/perfiles/create`, perfil)
+  //     .pipe(
+  //       map((res: Data.CreatePerfilResponse) => {
+  //         if (+res.status.responseCode !== 0) {
+  //           this.snackService.showMessage(res.status.description, 'error');
+  //         }
+  //         return res.data.id;
+  //       })
+  //     );
+  // }
 
   editPerfil(
     perfil: Data.EditPerfilRequest

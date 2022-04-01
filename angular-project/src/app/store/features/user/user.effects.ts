@@ -345,7 +345,8 @@ export class UserEffects {
           userActions.addFirmaUserError,
           userActions.upFirmaUserError,
           userActions.createUserError,
-          userActions.updateUserError
+          userActions.updateUserError,
+          userActions.getAllAreas4CreateUserError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

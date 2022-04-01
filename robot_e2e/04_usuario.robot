@@ -1,10 +1,11 @@
 *** Settings ***
 Documentation    Test de funcionanildad del módulo Usuarios.
 ...
-...         This test has a workflow that is created using keywords in
-...         the imported resource file.
-Resource    ./resources/general_resource.robot
-Resource    ./resources/login_resource.robot
+...          This test has a workflow that is created using keywords in
+...          the imported resource file.
+Resource     ./resources/general_resource.robot
+Resource     ./resources/login_resource.robot
+# Library    DependencyLibrary
 
 *** Test Cases ***
 
@@ -29,9 +30,9 @@ Crear Usuario Contratista
     _Set input text              css:#email-input > app-input > div >div:nth-child(2)>input          test@test.com
    # _Set input text                                    css:#celular-input > input                                          77777777776
     _Click visible element       css:#proveedor > div > div.p-radiobutton-box
-    sleep                        1
+    capture page screenshot      /opt/robotframework/reports/usuarioAntesPro.png
     _Select visible item         css:#proveedor-select > app-select > select                         COASIN
-    sleep                        1
+    capture page screenshot      /opt/robotframework/reports/usuarioDespuesPro.png
     _Select visible item         css:#area-select > app-select > select                              Contratista
     _Click visible element       css:#contratos_marco_multi 
     ${select multi contratos}    set variable                                                        contratos_marco_multi >div>div:nth-child(4)>div:nth-child(2)>ul>cdk-virtual-scroll-viewport>div:nth-child(1)    
@@ -100,6 +101,8 @@ Crear Usuario Movistar
     close browser
 
 Ver los contratos
+   #                                                                                       Depends on test    Crear Usuario Contratista
+   #                                                                                       Depends on test    Crear Usuario Movistar
    # Scenario: El administrador necesita observar los contratos del usuario contratista
    # Given: El administrador llega a la página de listar usuarios
    # When: Abra el menú
@@ -143,9 +146,9 @@ Agregar firma a usuarios
     _Table should display data
 
    # When: Abra el menú
-    _SubMenu                  Cargar Firma                                                                                                                                                                                UserTestContratista
+    _SubMenu                  Cargar Firma                                                                                                                                                  UserTestContratista
    # And Carge una imagen de la firma
-    Choose File               css:app-list-user > app-modal:nth-child(5) > p-dialog > div > div > div.ng-tns-c32-7.p-dialog-content > form > p-fileupload > div > div.p-fileupload-buttonbar > span > input[type=file]    ${CURDIR}/images/Ambiente.PNG
+    Choose File               css:app-list-user > app-modal:nth-child(5) > p-dialog > div > div > div > form > p-fileupload > div > div.p-fileupload-buttonbar > span > input[type=file]    ${CURDIR}/images/Ambiente.PNG
    # And Presione en cargar
     _Click visible element    css:#addFirma-button
     sleep                     1
@@ -255,6 +258,7 @@ Eliminar Contratista
     _Click visible element    css:#delete-user-button
 
     _Element should not exist in table    UserTestContratista
+    close browser
 
 Agregar un perfil a un usuario
    # Scenario: El administrador necesita agregar el perfil "Gestor" al usuario "UserTestMovistar"

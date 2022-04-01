@@ -6,6 +6,7 @@ import * as authActions from '@storeOT/features/auth/auth.actions';
 import * as areaActions from '@storeOT/features/area/area.actions';
 import * as contratoActions from '@storeOT/features/contratos/contratos.actions';
 import * as userActions from '@storeOT/features/user/user.actions';
+import * as profileActions from '@storeOT/features/profile/profile.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -143,20 +144,28 @@ export class AlertMessageActions {
     data?: any
   ): void {
     if (code === 0) {
+      // if (action === userActions.getAllAreas4CreateUserSuccess.type) {
+      //   this.snackService.showMessage(`Test Message`, 'OK', 3000);
+      // }
       if (
         action === areaActions.updateAreaSuccess.type ||
         action === contratoActions.updateContratoSuccess.type ||
         action === userActions.editarSuperiorPerfilUsuarioSuccess.type ||
-        action === userActions.updateUserSuccess.type
+        action === userActions.updateUserSuccess.type ||
+        action === profileActions.updatePerfilSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
       } else if (
         action === contratoActions.activateContratoSuccess.type ||
         action === userActions.agregarPerfilUsuarioSuccess.type ||
-        action === userActions.addFirmaUserSuccess.type
+        action === userActions.addFirmaUserSuccess.type ||
+        action === profileActions.eliminarPerfilSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
-      } else if (action === userActions.createUserSuccess.type) {
+      } else if (
+        action === userActions.createUserSuccess.type ||
+        action === profileActions.createPerfilSuccess.type
+      ) {
         this.snackService.showMessage(`Creación exitosa`, 'OK', 3000);
       } else if (this.msgOK[action]) {
         this.snackService.showMessage(`${this.msgOK[action]}`, 'OK', 3000);
@@ -205,6 +214,13 @@ export class AlertMessageActions {
         action === userActions.updateUserSuccess.type
       ) {
         this.router.navigate(['/app/user/list-user']);
+      }
+
+      if (
+        action === profileActions.createPerfilSuccess.type ||
+        action === profileActions.updatePerfilSuccess.type
+      ) {
+        this.router.navigate(['/app/profile/list-pro']);
       }
     }
   }
