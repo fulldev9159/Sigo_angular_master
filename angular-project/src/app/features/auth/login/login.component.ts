@@ -5,11 +5,17 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+// import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-login',
@@ -21,12 +27,13 @@ import { map } from 'rxjs/operators';
 export class LoginComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   public formLogin: FormGroup;
-
+  siteKey = '6LcLQEcfAAAAAD7GhJ0XQeoyoNg99u11XVrQyBta';
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authFacade: AuthFacade
-  ) {}
+  ) // private recaptchaV3Service: ReCaptchaV3Service
+  {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -51,8 +58,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.formLogin = this.fb.group({
       username: [null, Validators.required],
       password: [null, Validators.required],
+      // recaptchaReactive: new FormControl(null, Validators.required),
     });
   }
+
+  // public addTokenLog(message: string, token: string | null) {
+  //   console.log(`${message}: ${this.formatToken(token)}`);
+  // }
+
+  // public formatToken(token: string | null) {
+  //   return token !== null
+  //     ? `${token.substr(0, 7)}...${token.substr(-7)}`
+  //     : 'null';
+  // }
 
   login(): void {
     this.authFacade.postLogin(this.formLogin.value);
