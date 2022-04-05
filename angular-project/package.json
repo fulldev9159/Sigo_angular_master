@@ -38,6 +38,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "ngrx-store-localstorage": "^11.0.0",
+    "ngx-captcha": "^11.0.0",
     "ngx-permissions": "^8.1.1",
     "ngx-router-animations": "0.0.9",
     "node-snackbar": "^0.1.16",

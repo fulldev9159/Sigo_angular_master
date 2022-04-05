@@ -1,3 +1,12 @@
+img {
+
+  width: 23rem;
+}
+
+.logo-movistar-container {
+  align-self: center;
+}
+
 .row-main {
   background-color: #00a9e0;
   min-height: 100vh;
@@ -13,6 +22,7 @@
   border-radius: 27.5px;
   box-shadow: 0 10px 30px 0 rgba(172, 168, 168, 0.43);
   overflow: hidden;
+
 }
 
 .login-card-img {
@@ -28,11 +38,25 @@
   padding: 85px 60px 60px;
 }
 
-@media (max-width: 422px) {
+
+@media (max-width: 769px) {
   .login-card .card-body {
     padding: 35px 24px;
+    text-align: -webkit-center;
+  }
+
+  img {
+    width: 19rem;
+    height: 11rem;
+    margin-top: 1rem;
+  }
+
+  .body-auth-container {
+    text-align: center
   }
 }
+
+
 
 .login-card-description {
   font-family: Inter-Regular, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
