@@ -106,6 +106,7 @@ update-demos-sigo:
     ORIGIN: $ORIGIN
     CI_PIPELINE_ID: $CI_PIPELINE_ID
     PRECURSOR: $CI_PROJECT_NAME
+    CI_COMMIT_AUTHOR: $CI_COMMIT_AUTHOR
   trigger: zweicom/cl-movistar/sigo/demos-sigo
   only:
     - develop
