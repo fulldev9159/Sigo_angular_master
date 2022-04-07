@@ -21,12 +21,40 @@ export class CubicacionEffects {
     private authFacade: AuthFacade,
     private cubService: Service.CubicacionService,
     private contratoService: Service.ContratosService,
+    private userService: Service.UserService,
     private proveedorService: Service.ProveedorService,
     private regionService: Service.RegionService,
     private messageService: Service.NotifyAfter,
     private lpuService: Service.LpusService
   ) {}
 
+  getContratos4CreateEditCub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getContratosUser4Cub),
+      concatMap(({ usuario_id }) =>
+        this.userService.getContratosUser(usuario_id).pipe(
+          map(response => cubActions.getContratosUser4CubSuccess({ response })),
+          catchError(err =>
+            of(cubActions.getContratosUser4CubError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  getAgencia4CreateEditCub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getAgencia4Cub),
+      concatMap(({ contrato_id }) =>
+        this.cubService.getAgencia4Cub(contrato_id).pipe(
+          map(response => cubActions.getAgencia4CubSuccess({ response })),
+          catchError(err => of(cubActions.getAgencia4CubError({ error: err })))
+        )
+      )
+    )
+  );
+
+  // /////
   getCubs$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getCubs),

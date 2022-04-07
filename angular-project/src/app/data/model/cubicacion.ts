@@ -1,3 +1,12 @@
+export interface RespDataGetAgencias4Cub {
+  items: Agencias4Cub[];
+}
+
+export interface Agencias4Cub {
+  id: number;
+  nombre: string;
+}
+
 // Get cubicaciones init
 export interface ResponseGetCubicaciones {
   data: {

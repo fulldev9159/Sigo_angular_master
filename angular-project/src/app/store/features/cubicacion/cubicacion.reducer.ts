@@ -1,8 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
 import {
+  Agencias4Cub,
   AutoSuggestItem,
   ContratoMarco4Cub,
+  ContratosUser,
   Cubicacion,
   CubicacionWithLpu,
   DetalleCubicacion,
@@ -15,6 +17,9 @@ import {
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
+  contratosUser4Cub: ContratosUser[];
+  agencias4Cub: Agencias4Cub[];
+  //   ///
   cubicaciones: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
   cubicacionError: Error;
@@ -31,6 +36,9 @@ export interface StateCubicacion {
 }
 
 export const initialStateCubicacion: StateCubicacion = {
+  contratosUser4Cub: [],
+  agencias4Cub: [],
+  //////
   cubicaciones: [],
   cubicacion: null,
   cubicacionError: null,
@@ -48,7 +56,19 @@ export const initialStateCubicacion: StateCubicacion = {
 
 export const reducerCubicacion = createReducer(
   initialStateCubicacion,
+  on(CubicacionActions.resetData, () => ({
+    ...initialStateCubicacion,
+  })),
+  on(CubicacionActions.getContratosUser4CubSuccess, (state, { response }) => ({
+    ...state,
+    contratosUser4Cub: response.data.items,
+  })),
+  on(CubicacionActions.getAgencia4CubSuccess, (state, { response }) => ({
+    ...state,
+    agencias4Cub: response.data.items,
+  })),
 
+  //   ///
   on(CubicacionActions.getCubs, state => state),
   on(CubicacionActions.getCubsSuccess, (state, payload) => ({
     ...state,
@@ -117,9 +137,6 @@ export const reducerCubicacion = createReducer(
     detalleCubicacion: payload.detallecubicacion,
   })),
 
-  on(CubicacionActions.resetData, () => ({
-    ...initialStateCubicacion,
-  })),
   on(CubicacionActions.getAutoSuggest, state => state),
   on(CubicacionActions.getAutoSuggestSuccess, (state, payload) => ({
     ...state,

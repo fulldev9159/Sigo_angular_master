@@ -15,6 +15,8 @@ import {
   ResponseDetalleCubicacion,
   DetalleCubicacion,
   ResponseDeleteCubicacion,
+  Response,
+  RespDataGetAgencias4Cub,
 } from '@data';
 
 @Injectable({
@@ -25,6 +27,16 @@ export class CubicacionService {
   constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
+
+  getAgencia4Cub(
+    contrato_id: number
+  ): Observable<Response<RespDataGetAgencias4Cub>> {
+    return this.http.post<Response<RespDataGetAgencias4Cub>>(
+      `${this.apiUrl}/cubicacion/agencias_from_contrato/get`,
+      { contrato_id }
+    );
+  }
+  //   ///
 
   getAutosuggestNameCubicacion(
     filtro: string,

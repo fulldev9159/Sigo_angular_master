@@ -13,9 +13,45 @@ import {
   AutoSuggestItem,
   DetalleCubicacion,
   RequestSaveCubicacion,
+  DataRespGetContratosUser,
+  Response,
+  RespDataGetAgencias4Cub,
 } from '@data';
 
+// GET CONTRATOS USER 4 CUB
+export const getContratosUser4Cub = createAction(
+  '[Cubicacion] getContratosUser4Cub ',
+  props<{ usuario_id: number }>()
+);
+
+export const getContratosUser4CubSuccess = createAction(
+  '[Cubicacion] getContratosUser4Cub Success',
+  props<{ response: Response<DataRespGetContratosUser> }>()
+);
+export const getContratosUser4CubError = createAction(
+  '[Cubicacion] getContratosUser4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET AGENCIA CONTRATO 4 CUB
+export const getAgencia4Cub = createAction(
+  '[Cubicacion] getAgencia4Cub ',
+  props<{ contrato_id: number }>()
+);
+
+export const getAgencia4CubSuccess = createAction(
+  '[Cubicacion] getAgencia4Cub Success',
+  props<{ response: Response<RespDataGetAgencias4Cub> }>()
+);
+export const getAgencia4CubError = createAction(
+  '[Cubicacion] getAgencia4Cub Error',
+  props<{ error: any }>()
+);
+
+//  RESET
 export const reset = createAction('[Cubicacion] reset');
+
+// //////
 
 // GET CUBICACIONES init
 export const getCubs = createAction(`[Cubicacion] GET Cubicaciones`);

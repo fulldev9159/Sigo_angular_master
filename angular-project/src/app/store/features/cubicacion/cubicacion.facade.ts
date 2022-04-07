@@ -15,6 +15,8 @@ import {
   Lpu4Cub,
   AutoSuggestItem,
   DetalleCubicacion,
+  ContratosUser,
+  Agencias4Cub,
 } from '@data';
 
 @Injectable({
@@ -22,6 +24,27 @@ import {
 })
 export class CubicacionFacade {
   constructor(private store: Store<Cubicacion>) {}
+
+  //   GET CONTRATOS USER 4 CUB
+  public contratosUser4Cub(usuario_id: number): void {
+    this.store.dispatch(cubicacionActions.getContratosUser4Cub({ usuario_id }));
+  }
+
+  public contratosUser4Cub$(): Observable<ContratosUser[]> {
+    return this.store.select(cubicacionSelectors.contratosUser4Cub);
+  }
+
+  // GET AGENCIAS 4 CUB
+
+  public agencias4cub(contrato_id: number): void {
+    this.store.dispatch(cubicacionActions.getAgencia4Cub({ contrato_id }));
+  }
+
+  public agencias4cub$(): Observable<Agencias4Cub[]> {
+    return this.store.select(cubicacionSelectors.agencias4Cub);
+  }
+
+  // /////
 
   // CUBICACION
   public getCubicacionAction(): void {

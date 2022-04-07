@@ -1,76 +1,102 @@
-<div class="container-fluid" style="background: #f0f8fb">
-  <ng-container *ngIf="incompleteCubicacionError$ | async as error">
-    <div>
-      <p-messages [(value)]="msgsIncompleteCubicacionError" [closable]="true"></p-messages>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="selectedCubicacionError$ | async as error">
-    <div>
-      <p-messages [(value)]="msgsGetCubicacionError" [closable]="true"></p-messages>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="invalidCubicacionIDError$ | async as error">
-    <div>
-      <p-messages [(value)]="msgsInvalidCubicacionIDError" [closable]="true"></p-messages>
-    </div>
-  </ng-container>
-
+<div class="container-fluid">
   <div class="row">
-    <ng-container *ngIf="selectedCubicacion$ | async as cubicacion; else newCubage">
+    <!-- <ng-container *ngIf="selectedCubicacion$ | async as cubicacion; else newCubage">
       <div class="col">
         <h1 class="mt-4">Edición de Cubicación</h1>
         <span>{{ cubicacion.nombre }}</span>
       </div>
-    </ng-container>
+    </ng-container> -->
 
-    <ng-template #newCubage>
-      <div class="col">
-        <h1 class="mt-4">Ingreso de Cubicación</h1>
-        <span>Formulario de creación de una cubicación</span>
-      </div>
-    </ng-template>
+    <!-- <ng-template #newCubage> -->
+    <div class="col">
+      <h1 class="mt-4">Ingreso de Cubicación</h1>
+      <span>Formulario de creación de una cubicación</span>
+    </div>
+    <!-- </ng-template> -->
 
     <div class="col">
       <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
     </div>
-
-    <div class="col-12">
-      <hr>
-    </div>
-
-    <div class="col">
-      <app-card [classCardHeader]="'bg-secondary text-white'">
-        <ng-container card-header-title> </ng-container>
-        <ng-container card-body>
-          <app-general-form #generalForm></app-general-form>
-
-          <div class="col-12">
-            <hr>
-          </div>
-
-          <ng-container [ngSwitch]="contractType$ | async">
-            <ng-container *ngSwitchCase="'MOVIL'">
-              <app-contrato-movil-form #contratoMovilForm (valueChanges)="contratoMovilFormValueChanges($event)"></app-contrato-movil-form>
-            </ng-container>
-            <ng-container *ngSwitchCase="'FIJO'">
-              <app-contrato-movil-form #contratoMovilForm (valueChanges)="contratoMovilFormValueChanges($event)"></app-contrato-movil-form>
-            </ng-container>
-            <ng-container *ngSwitchCase="'ORDINARIO'">
-              <app-contrato-ordinario-form #contratoOrdinarioForm (valueChanges)="contratoOrdinarioFormValueChanges($event)"></app-contrato-ordinario-form>
-            </ng-container>
-            <ng-container *ngSwitchCase="'BUCLE'">
-              contrato bucle
-            </ng-container>
-          </ng-container>
-
-          <div class="col-xs-12 col-md-12 text-right button-guardar-cubicacion" id="submitButtonBox">
-            <button (click)="goBack()" class="btn btn-light mr-2">Cancelar</button>
-            <button (click)="submit()" [disabled]="!valid || (saving$ | async) === true" class="btn btn-primary"><em class="pi pi-save mr-1" id="submit-user"></em>Guardar</button>
-          </div>
-        </ng-container>
-      </app-card>
-    </div>
   </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-body>
+      <div class="row justify-content-center" style="margin-bottom: 4rem">
+        <div class="col-12">
+          <div id="nomnbreCub">
+            <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
+          </div>
+          <br>
+          <div id="tipoCub">
+            <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione un tipo</option>
+                <ng-container *ngFor="let rol of tipoCubicacion">
+                  <option [value]="rol.id">
+                    {{ rol.nombre }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
+          </div>
+
+          <br>
+          <div id="direccion">
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
+              </div>
+            </div>
+          </div>
+
+          <div id="descripcion">
+            <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
+            </app-textarea>
+          </div>
+
+
+          <div id="contratosUser">
+            <app-select [control]="formControls.contrato" label="* Contrato">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione un contrato</option>
+                <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
+                  <option [value]="contrato.contrato_id">
+                    {{ contrato.model_contrato_id.nombre }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
+          </div>
+
+          <br>
+          <div id="agencias">
+            <app-select [control]="formControls.agencia_id" label="* Agencia">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione una agencia</option>
+                <ng-container *ngFor="let agencia of agencias4Cub$|async">
+                  <option [value]="agencia.id">
+                    {{ agencia.nombre }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
+          </div>
+
+
+        </div>
+      </div>
+    </ng-container>
+
+  </app-card>
 </div>

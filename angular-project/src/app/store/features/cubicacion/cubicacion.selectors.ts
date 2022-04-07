@@ -6,6 +6,16 @@ export const selectCubicacion =
     fromCubicacion.CubicacionFeatureKey
   );
 
+export const contratosUser4Cub = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.contratosUser4Cub
+);
+
+export const agencias4Cub = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.agencias4Cub
+);
+//   ////
 export const getCubicaciones = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.cubicaciones
