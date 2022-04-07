@@ -19,6 +19,11 @@ import {
   RespDataGetAgencias4Cub,
   RespDataProveedor4Cub,
 } from '@data';
+import {
+  RespDataActividad4Cub,
+  RespDataTipoCubicacion4Cub,
+  RespDataTipoServicioEspecialidad4Cub,
+} from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +52,30 @@ export class CubicacionService {
       { agencia_id, contrato_id }
     );
   }
+
+  getTipoCubicacion(): Observable<Response<RespDataTipoCubicacion4Cub>> {
+    return this.http.post<Response<RespDataTipoCubicacion4Cub>>(
+      `${this.apiUrl}/configuration/tipo_cubicacion/getall`,
+      {}
+    );
+  }
+
+  getActividades4Cub(): Observable<Response<RespDataActividad4Cub>> {
+    return this.http.post<Response<RespDataActividad4Cub>>(
+      `${this.apiUrl}/configuration/actividad/getall`,
+      {}
+    );
+  }
+
+  getTipoServicioEspecialidad4Cub(): Observable<
+    Response<RespDataTipoServicioEspecialidad4Cub>
+  > {
+    return this.http.post<Response<RespDataTipoServicioEspecialidad4Cub>>(
+      `${this.apiUrl}/cubicacion/tipo_servicio/getall`,
+      {}
+    );
+  }
+
   //   ///
 
   getAutosuggestNameCubicacion(

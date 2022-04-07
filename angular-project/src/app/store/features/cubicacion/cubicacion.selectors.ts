@@ -20,6 +20,21 @@ export const proveedores4Cub = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.proveedores4Cub
 );
+
+export const tipoCubicacion4Cub = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.tipoCubicacion4Cub
+);
+
+export const actividad4Cub = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.actividad4Cub
+);
+
+export const tipoServicioEspecialidad4Cub = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.tipoServicioEspecialidad4Cub
+);
 //   ////
 export const getCubicaciones = createSelector(
   selectCubicacion,

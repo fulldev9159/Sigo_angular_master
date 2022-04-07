@@ -31,9 +31,9 @@
             <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
               <ng-container options>
                 <option value="null" selected disabled>Seleccione un tipo</option>
-                <ng-container *ngFor="let rol of tipoCubicacion">
-                  <option [value]="rol.id">
-                    {{ rol.nombre }}
+                <ng-container *ngFor="let tipoCub of tipoCubicacion4Cub$|async">
+                  <option [value]="tipoCub.id">
+                    {{ tipoCub.descripcion }}
                   </option>
                 </ng-container>
               </ng-container>
@@ -95,12 +95,40 @@
 
           <br>
           <div id="proveedores">
-            <app-select [control]="formControls.proveedor_id" label="* Proveedor">
+            <app-select [control]="formControls.cmarcoproveedor_id" label="* Proveedor">
               <ng-container options>
                 <option value="null" selected disabled>Seleccione un Proveedor</option>
                 <ng-container *ngFor="let prov of proveedores4Cub$|async">
-                  <option [value]="prov.id">
+                  <option [value]="prov.cmarco_has_proveedor_id">
                     {{prov.codigo_acuerdo}} - {{ prov.nombre }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
+          </div>
+
+          <br>
+          <div id="actividad">
+            <app-select [control]="formControls.actividad_id" label="* Actividad">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione un Actividad</option>
+                <ng-container *ngFor="let item of actividad4Cub$|async">
+                  <option [value]="item.id">
+                    {{item.descripcion}}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
+          </div>
+
+          <br>
+          <div id="tiposervicio">
+            <app-select [control]="formControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
+                <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
+                  <option [value]="item.id">
+                    {{item.descripcion}}
                   </option>
                 </ng-container>
               </ng-container>

@@ -68,6 +68,52 @@ export class CubicacionEffects {
     )
   );
 
+  getTipoCubicacion4Cub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getTipoCubicacion4Cub),
+      concatMap(() =>
+        this.cubService.getTipoCubicacion().pipe(
+          map(response =>
+            cubActions.getTipoCubicacion4CubSuccess({ response })
+          ),
+          catchError(err =>
+            of(cubActions.getTipoCubicacion4CubError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  getActividad4Cub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getActividades4Cub),
+      concatMap(() =>
+        this.cubService.getActividades4Cub().pipe(
+          map(response => cubActions.getActividades4CubSuccess({ response })),
+          catchError(err =>
+            of(cubActions.getActividades4CubError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  getTipoServicioEspecialidad$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getTipoServicioEspecialidad4Cub),
+      concatMap(() =>
+        this.cubService.getTipoServicioEspecialidad4Cub().pipe(
+          map(response =>
+            cubActions.getTipoServicioEspecialidad4CubSuccess({ response })
+          ),
+          catchError(err =>
+            of(cubActions.getTipoServicioEspecialidad4CubError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   // /////
   getCubs$ = createEffect(() =>
     this.actions$.pipe(

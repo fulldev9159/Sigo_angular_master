@@ -17,6 +17,51 @@ export interface Proveedores4Cub {
   id: number;
   nombre: string;
 }
+
+export interface RespDataTipoCubicacion4Cub {
+  items: TipoCubicacion4Cub[];
+}
+
+export interface TipoCubicacion4Cub {
+  descripcion: string;
+  id: number;
+}
+
+export interface RespDataActividad4Cub {
+  items: Actividad4Cub[];
+}
+
+export interface Actividad4Cub {
+  codigo: string;
+  descripcion: string;
+  id: number;
+}
+
+export interface RespDataTipoServicioEspecialidad4Cub {
+  items: TipoServicioEspecialidad4Cub[];
+}
+
+export interface TipoServicioEspecialidad4Cub {
+  codigo: string;
+  contrato_marco_id: number;
+  descripcion: string;
+  estado: boolean;
+  id: number;
+  model_contrato_marco_id: {
+    aprob_jerarq_inic: boolean;
+    costo_max: number;
+    estado: boolean;
+    fecha_fin: Date;
+    fecha_inicio: Date;
+    id: number;
+    nombre: string;
+    tiene_encuesta: boolean;
+    tipo_contrato_id: number;
+    tipo_moneda_id: number;
+    tipo_pago: string;
+    validacion_operaciones: boolean;
+  };
+}
 // Get cubicaciones init
 export interface ResponseGetCubicaciones {
   data: {

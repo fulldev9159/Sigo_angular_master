@@ -17,6 +17,9 @@ import {
   Response,
   RespDataGetAgencias4Cub,
   RespDataProveedor4Cub,
+  RespDataTipoCubicacion4Cub,
+  RespDataActividad4Cub,
+  RespDataTipoServicioEspecialidad4Cub,
 } from '@data';
 
 // GET CONTRATOS USER 4 CUB
@@ -61,6 +64,48 @@ export const getProveedores4CubSuccess = createAction(
 );
 export const getProveedores4CubError = createAction(
   '[Cubicacion] getProveedores4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO CUBICACION 4 CUB
+export const getTipoCubicacion4Cub = createAction(
+  '[Cubicacion] getTipoCubicacion4Cub '
+);
+
+export const getTipoCubicacion4CubSuccess = createAction(
+  '[Cubicacion] getTipoCubicacion4Cub Success',
+  props<{ response: Response<RespDataTipoCubicacion4Cub> }>()
+);
+export const getTipoCubicacion4CubError = createAction(
+  '[Cubicacion] getTipoCubicacion4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET ACTIVIDADES 4 CUB
+export const getActividades4Cub = createAction(
+  '[Cubicacion] getTipoCubicacion4Cub '
+);
+
+export const getActividades4CubSuccess = createAction(
+  '[Cubicacion] getActividades4Cub Success',
+  props<{ response: Response<RespDataActividad4Cub> }>()
+);
+export const getActividades4CubError = createAction(
+  '[Cubicacion] getActividades4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO SERVICIO ESPECIALIDAD 4 CUB
+export const getTipoServicioEspecialidad4Cub = createAction(
+  '[Cubicacion] getTipoServicioEspecialidad4Cub '
+);
+
+export const getTipoServicioEspecialidad4CubSuccess = createAction(
+  '[Cubicacion] getTipoServicioEspecialidad4Cub Success',
+  props<{ response: Response<RespDataTipoServicioEspecialidad4Cub> }>()
+);
+export const getTipoServicioEspecialidad4CubError = createAction(
+  '[Cubicacion] getTipoServicioEspecialidad4Cub Error',
   props<{ error: any }>()
 );
 

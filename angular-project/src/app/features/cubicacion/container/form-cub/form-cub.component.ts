@@ -7,7 +7,14 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Agencias4Cub, ContratosUser, Proveedores4Cub } from '@data';
+import {
+  Actividad4Cub,
+  Agencias4Cub,
+  ContratosUser,
+  Proveedores4Cub,
+  TipoCubicacion4Cub,
+  TipoServicioEspecialidad4Cub,
+} from '@data';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Observable, of, Subscription } from 'rxjs';
@@ -21,23 +28,13 @@ import { FormCubService } from './form-cub.service';
 export class FormCubContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
-  tipoCubicacion = [
-    {
-      id: 1,
-      nombre: 'Ingeniería',
-    },
-    {
-      id: 2,
-      nombre: 'Construcción',
-    },
-    {
-      id: 3,
-      nombre: 'Full',
-    },
-  ];
   contratosUser4Cub$: Observable<ContratosUser[]>;
   agencias4Cub$: Observable<Agencias4Cub[]> = of([]);
   proveedores4Cub$: Observable<Proveedores4Cub[]> = of([]);
+  tipoCubicacion4Cub$: Observable<TipoCubicacion4Cub[]> = of([]);
+  actividad4Cub$: Observable<Actividad4Cub[]> = of([]);
+  tipoServicioEspecialidad4Cub$: Observable<TipoServicioEspecialidad4Cub[]> =
+    of([]);
 
   // DISPLAY MODALS
 
@@ -82,6 +79,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    this.cubicacionFacade.tipoCubicacion4cub();
+    this.cubicacionFacade.actividad4cub();
+    this.cubicacionFacade.tipoServicioEspecialidad();
   }
 
   onInitSetInitialData(): void {
@@ -90,6 +91,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.contratosUser4Cub$ = this.cubicacionFacade.contratosUser4Cub$();
     this.agencias4Cub$ = this.cubicacionFacade.agencias4cub$();
     this.proveedores4Cub$ = this.cubicacionFacade.proveedores4Cub$();
+    this.tipoCubicacion4Cub$ = this.cubicacionFacade.tipoCubicacion4cub$();
+    this.actividad4Cub$ = this.cubicacionFacade.actividad4cub$();
+    this.tipoServicioEspecialidad4Cub$ =
+      this.cubicacionFacade.tipoServicioEspecialidad$();
   }
 
   onInitAccionesInicialesAdicionales(): void {

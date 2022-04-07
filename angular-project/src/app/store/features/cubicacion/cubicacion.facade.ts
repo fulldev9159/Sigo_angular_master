@@ -45,7 +45,6 @@ export class CubicacionFacade {
   }
 
   // GET PROVEEDORES4 CUB
-
   public proveedores4Cub(agencia_id: number, contrato_id: number): void {
     this.store.dispatch(
       cubicacionActions.getProveedores4Cub({ agencia_id, contrato_id })
@@ -54,6 +53,34 @@ export class CubicacionFacade {
 
   public proveedores4Cub$(): Observable<Proveedores4Cub[]> {
     return this.store.select(cubicacionSelectors.proveedores4Cub);
+  }
+
+  // GET TIPO CUBICACION 4 CUB
+  public tipoCubicacion4cub(): void {
+    this.store.dispatch(cubicacionActions.getTipoCubicacion4Cub());
+  }
+
+  public tipoCubicacion4cub$(): Observable<any[]> {
+    return this.store.select(cubicacionSelectors.tipoCubicacion4Cub);
+  }
+
+  // GET ACTIVIDAD 4 CUB
+  public actividad4cub(): void {
+    this.store.dispatch(cubicacionActions.getActividades4Cub());
+  }
+
+  public actividad4cub$(): Observable<any[]> {
+    return this.store.select(cubicacionSelectors.actividad4Cub);
+  }
+
+  // GET TIPO SERVICIO ESPECIALIDAD 4 CUB
+
+  public tipoServicioEspecialidad(): void {
+    this.store.dispatch(cubicacionActions.getTipoServicioEspecialidad4Cub());
+  }
+
+  public tipoServicioEspecialidad$(): Observable<any[]> {
+    return this.store.select(cubicacionSelectors.tipoServicioEspecialidad4Cub);
   }
   // /////
 
