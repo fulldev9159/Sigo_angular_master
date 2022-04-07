@@ -23,88 +23,97 @@
     <ng-container card-body>
       <div class="row justify-content-center" style="margin-bottom: 4rem">
         <div class="col-12">
-          <div id="nomnbreCub">
-            <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
-          </div>
-          <br>
-          <div id="tipoCub">
-            <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione un tipo</option>
-                <ng-container *ngFor="let tipoCub of tipoCubicacion4Cub$|async">
-                  <option [value]="tipoCub.id">
-                    {{ tipoCub.descripcion }}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
-          </div>
-
-          <br>
-          <div id="direccion">
-            <div class="row">
-              <div class="col-md-6 col-sm-6">
-                <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
+          <div class="row" style="border: 1px solid #c6c6c6;padding: 3px;padding-bottom: 14px;">
+            <div class="col-md-6 col-sm-12">
+              <div id="nomnbreCub">
+                <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6 col-sm-6">
-                <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
-              </div>
-              <div class="col-md-6 col-sm-6">
-                <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
+            <div class="col-md-6 col-sm-12">
+              <div id="tipoCub">
+                <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un tipo</option>
+                    <ng-container *ngFor="let tipoCub of tipoCubicacion4Cub$|async">
+                      <option [value]="tipoCub.id">
+                        {{ tipoCub.descripcion }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
               </div>
             </div>
           </div>
 
-          <div id="descripcion">
-            <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
-            </app-textarea>
-          </div>
+          <div class="row">
+            <div class="col-md-5 col-sm-12" style="border: 1px solid #c6c6c6;margin-top: 11px; padding: 14px;">
+              <div id="contratosUser">
+                <app-select [control]="formControls.contrato" label="* Contrato">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un contrato</option>
+                    <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
+                      <option [value]="contrato.contrato_id">
+                        {{ contrato.model_contrato_id.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
 
+              <br>
+              <div id="agencias">
+                <app-select [control]="formControls.agencia_id" label="* Agencia">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione una agencia</option>
+                    <ng-container *ngFor="let agencia of agencias4Cub$|async">
+                      <option [value]="agencia.id">
+                        {{ agencia.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
 
-          <div id="contratosUser">
-            <app-select [control]="formControls.contrato" label="* Contrato">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione un contrato</option>
-                <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
-                  <option [value]="contrato.contrato_id">
-                    {{ contrato.model_contrato_id.nombre }}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
-          </div>
+              <br>
+              <div id="proveedores">
+                <app-select [control]="formControls.cmarcoproveedor_id" label="* Proveedor">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un Proveedor</option>
+                    <ng-container *ngFor="let prov of proveedores4Cub$|async">
+                      <option [value]="prov.cmarco_has_proveedor_id">
+                        {{prov.codigo_acuerdo}} - {{ prov.nombre }}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
+            </div>
+            <div class="col-md-7 col-sm-12">
+              <br>
+              <div id="direccion">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
+                  </div>
+                </div>
+              </div>
 
-          <br>
-          <div id="agencias">
-            <app-select [control]="formControls.agencia_id" label="* Agencia">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione una agencia</option>
-                <ng-container *ngFor="let agencia of agencias4Cub$|async">
-                  <option [value]="agencia.id">
-                    {{ agencia.nombre }}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
-          </div>
-
-          <br>
-          <div id="proveedores">
-            <app-select [control]="formControls.cmarcoproveedor_id" label="* Proveedor">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione un Proveedor</option>
-                <ng-container *ngFor="let prov of proveedores4Cub$|async">
-                  <option [value]="prov.cmarco_has_proveedor_id">
-                    {{prov.codigo_acuerdo}} - {{ prov.nombre }}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
+              <div id="descripcion">
+                <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
+                </app-textarea>
+              </div>
+            </div>
           </div>
 
           <br>

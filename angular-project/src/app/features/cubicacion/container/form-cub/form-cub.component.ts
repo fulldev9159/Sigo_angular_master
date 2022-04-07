@@ -18,6 +18,7 @@ import {
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Observable, of, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { FormCubService } from './form-cub.service';
 
 @Component({
@@ -88,9 +89,19 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   onInitSetInitialData(): void {
     this.formControls = this.formcubService.FormConfig();
     this.formCub = new FormGroup(this.formControls);
+    this.formCub.get('agencia_id').disable({ emitEvent: false });
+    this.formCub.get('cmarcoproveedor_id').disable({ emitEvent: false });
     this.contratosUser4Cub$ = this.cubicacionFacade.contratosUser4Cub$();
-    this.agencias4Cub$ = this.cubicacionFacade.agencias4cub$();
-    this.proveedores4Cub$ = this.cubicacionFacade.proveedores4Cub$();
+    this.agencias4Cub$ = this.cubicacionFacade
+      .agencias4cub$()
+      .pipe(tap(agencias => this.checkAndEnable('agencia_id', agencias)));
+    this.proveedores4Cub$ = this.cubicacionFacade
+      .proveedores4Cub$()
+      .pipe(
+        tap(proveedores =>
+          this.checkAndEnable('cmarcoproveedor_id', proveedores)
+        )
+      );
     this.tipoCubicacion4Cub$ = this.cubicacionFacade.tipoCubicacion4cub$();
     this.actividad4Cub$ = this.cubicacionFacade.actividad4cub$();
     this.tipoServicioEspecialidad4Cub$ =
@@ -100,20 +111,35 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   onInitAccionesInicialesAdicionales(): void {
     this.subscription.add(
       this.formCub.get('contrato').valueChanges.subscribe(contrato_id => {
-        if (contrato_id) {
+        if (contrato_id !== null && contrato_id !== undefined) {
+          this.formCub.get('agencia_id').reset();
+          this.formCub.get('cmarcoproveedor_id').reset();
           this.cubicacionFacade.agencias4cub(+contrato_id);
+        } else {
+          this.checkAndEnable('agencia_id', []);
         }
       })
     );
 
     this.subscription.add(
       this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
-        if (agencia_id) {
+        if (agencia_id !== null && agencia_id !== undefined) {
+          this.formCub.get('cmarcoproveedor_id').reset();
           const contrato_id = this.formCub.get('contrato').value;
           this.cubicacionFacade.proveedores4Cub(+agencia_id, +contrato_id);
+        } else {
+          this.checkAndEnable('cmarcoproveedor_id', []);
         }
       })
     );
+  }
+
+  checkAndEnable(key: string, array: any[]): void {
+    if (array.length > 0) {
+      this.formCub.get(key).enable();
+    } else {
+      this.formCub.get(key).disable();
+    }
   }
 
   ngOnDestroy(): void {
