@@ -15,6 +15,11 @@ export const agencias4Cub = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.agencias4Cub
 );
+
+export const proveedores4Cub = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.proveedores4Cub
+);
 //   ////
 export const getCubicaciones = createSelector(
   selectCubicacion,

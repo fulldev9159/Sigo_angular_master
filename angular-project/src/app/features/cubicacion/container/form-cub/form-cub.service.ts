@@ -38,6 +38,7 @@ export class FormCubService {
       descripcion: new FormControl(null, [Validators.required]),
       contrato: new FormControl(null, [Validators.required]),
       agencia_id: new FormControl(null, [Validators.required]),
+      proveedor_id: new FormControl(null, [Validators.required]),
     };
   }
 

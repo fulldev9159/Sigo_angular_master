@@ -16,6 +16,7 @@ import {
   DataRespGetContratosUser,
   Response,
   RespDataGetAgencias4Cub,
+  RespDataProveedor4Cub,
 } from '@data';
 
 // GET CONTRATOS USER 4 CUB
@@ -45,6 +46,21 @@ export const getAgencia4CubSuccess = createAction(
 );
 export const getAgencia4CubError = createAction(
   '[Cubicacion] getAgencia4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET PROVEEDORES 4 CUB
+export const getProveedores4Cub = createAction(
+  '[Cubicacion] getProveedores4Cub ',
+  props<{ agencia_id: number; contrato_id: number }>()
+);
+
+export const getProveedores4CubSuccess = createAction(
+  '[Cubicacion] getProveedores4Cub Success',
+  props<{ response: Response<RespDataProveedor4Cub> }>()
+);
+export const getProveedores4CubError = createAction(
+  '[Cubicacion] getProveedores4Cub Error',
   props<{ error: any }>()
 );
 
@@ -102,17 +118,17 @@ export const getContractMarcoError = createAction(
 // GET CONTRATO end
 
 // GET SUBCONTRATOS PROVEEDOR init
-export const getProveedores4Cub = createAction(
-  '[SubContractedProviders Get] GET Data',
-  props<{ contrato_marco_id: number }>()
-);
-export const getProveedores4CubSuccess = createAction(
-  '[SubContractedProviders Get] GET Data Success',
-  props<{
-    proveedores4Cub: SubcontratosProveedor[];
-    status: StatusResponse;
-  }>()
-);
+// export const getProveedores4Cub = createAction(
+//   '[SubContractedProviders Get] GET Data',
+//   props<{ contrato_marco_id: number }>()
+// );
+// export const getProveedores4CubSuccess = createAction(
+//   '[SubContractedProviders Get] GET Data Success',
+//   props<{
+//     proveedores4Cub: SubcontratosProveedor[];
+//     status: StatusResponse;
+//   }>()
+// );
 export const getSubContractProvidersError = createAction(
   '[SubContractedProviders Get] GET Data Error',
   props<{ error: any }>()

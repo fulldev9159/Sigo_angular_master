@@ -93,6 +93,19 @@
             </app-select>
           </div>
 
+          <br>
+          <div id="proveedores">
+            <app-select [control]="formControls.proveedor_id" label="* Proveedor">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione un Proveedor</option>
+                <ng-container *ngFor="let prov of proveedores4Cub$|async">
+                  <option [value]="prov.id">
+                    {{prov.codigo_acuerdo}} - {{ prov.nombre }}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
+          </div>
 
         </div>
       </div>

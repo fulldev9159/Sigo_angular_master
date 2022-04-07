@@ -9,6 +9,7 @@ import {
   CubicacionWithLpu,
   DetalleCubicacion,
   Lpu4Cub,
+  Proveedores4Cub,
   RegionSubcontrato4Cub,
   SubcontratosProveedor,
   TipoLpu,
@@ -19,6 +20,7 @@ export const CubicacionFeatureKey = 'cubicacion';
 export interface StateCubicacion {
   contratosUser4Cub: ContratosUser[];
   agencias4Cub: Agencias4Cub[];
+  proveedores4Cub: Proveedores4Cub[];
   //   ///
   cubicaciones: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
@@ -38,6 +40,7 @@ export interface StateCubicacion {
 export const initialStateCubicacion: StateCubicacion = {
   contratosUser4Cub: [],
   agencias4Cub: [],
+  proveedores4Cub: [],
   //////
   cubicaciones: [],
   cubicacion: null,
@@ -67,7 +70,10 @@ export const reducerCubicacion = createReducer(
     ...state,
     agencias4Cub: response.data.items,
   })),
-
+  on(CubicacionActions.getProveedores4CubSuccess, (state, { response }) => ({
+    ...state,
+    proveedores4Cub: response.data.items,
+  })),
   //   ///
   on(CubicacionActions.getCubs, state => state),
   on(CubicacionActions.getCubsSuccess, (state, payload) => ({
@@ -104,11 +110,11 @@ export const reducerCubicacion = createReducer(
     contractMarco: payload.contratosMarcos4Cub,
   })),
 
-  on(CubicacionActions.getProveedores4Cub, state => state),
-  on(CubicacionActions.getProveedores4CubSuccess, (state, payload) => ({
-    ...state,
-    subContractedProviders: payload.proveedores4Cub,
-  })),
+  // on(CubicacionActions.getProveedores4Cub, state => state),
+  // on(CubicacionActions.getProveedores4CubSuccess, (state, payload) => ({
+  //   ...state,
+  //   subContractedProviders: payload.proveedores4Cub,
+  // })),
 
   on(CubicacionActions.getSubContractedRegions, state => state),
   on(CubicacionActions.getSubContractedRegionsSuccess, (state, payload) => ({

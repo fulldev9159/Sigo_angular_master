@@ -17,6 +17,7 @@ import {
   DetalleCubicacion,
   ContratosUser,
   Agencias4Cub,
+  Proveedores4Cub,
 } from '@data';
 
 @Injectable({
@@ -35,7 +36,6 @@ export class CubicacionFacade {
   }
 
   // GET AGENCIAS 4 CUB
-
   public agencias4cub(contrato_id: number): void {
     this.store.dispatch(cubicacionActions.getAgencia4Cub({ contrato_id }));
   }
@@ -44,6 +44,17 @@ export class CubicacionFacade {
     return this.store.select(cubicacionSelectors.agencias4Cub);
   }
 
+  // GET PROVEEDORES4 CUB
+
+  public proveedores4Cub(agencia_id: number, contrato_id: number): void {
+    this.store.dispatch(
+      cubicacionActions.getProveedores4Cub({ agencia_id, contrato_id })
+    );
+  }
+
+  public proveedores4Cub$(): Observable<Proveedores4Cub[]> {
+    return this.store.select(cubicacionSelectors.proveedores4Cub);
+  }
   // /////
 
   // CUBICACION

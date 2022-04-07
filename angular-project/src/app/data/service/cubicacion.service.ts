@@ -17,6 +17,7 @@ import {
   ResponseDeleteCubicacion,
   Response,
   RespDataGetAgencias4Cub,
+  RespDataProveedor4Cub,
 } from '@data';
 
 @Injectable({
@@ -34,6 +35,16 @@ export class CubicacionService {
     return this.http.post<Response<RespDataGetAgencias4Cub>>(
       `${this.apiUrl}/cubicacion/agencias_from_contrato/get`,
       { contrato_id }
+    );
+  }
+
+  getProveedores4Cub(
+    agencia_id: number,
+    contrato_id: number
+  ): Observable<Response<RespDataProveedor4Cub>> {
+    return this.http.post<Response<RespDataProveedor4Cub>>(
+      `${this.apiUrl}/cubicacion/proveedores_from_agencia_contrato/get`,
+      { agencia_id, contrato_id }
     );
   }
   //   ///

@@ -54,6 +54,20 @@ export class CubicacionEffects {
     )
   );
 
+  getProveerodres4Cub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getProveedores4Cub),
+      concatMap(({ agencia_id, contrato_id }) =>
+        this.cubService.getProveedores4Cub(agencia_id, contrato_id).pipe(
+          map(response => cubActions.getProveedores4CubSuccess({ response })),
+          catchError(err =>
+            of(cubActions.getProveedores4CubError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   // /////
   getCubs$ = createEffect(() =>
     this.actions$.pipe(
@@ -113,28 +127,28 @@ export class CubicacionEffects {
     )
   );
 
-  getProveedoresSubcontrato$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getProveedores4Cub),
-      concatMap(({ contrato_marco_id }) =>
-        this.proveedorService.getProveedor4Cub(contrato_marco_id).pipe(
-          map(({ proveedores4Cub, status }) =>
-            cubActions.getProveedores4CubSuccess({
-              proveedores4Cub,
-              status,
-            })
-          ),
-          catchError(error =>
-            of(
-              cubActions.getSubContractProvidersError({
-                error,
-              })
-            )
-          )
-        )
-      )
-    )
-  );
+  // getProveedoresSubcontrato$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(cubActions.getProveedores4Cub),
+  //     concatMap(({ contrato_marco_id }) =>
+  //       this.proveedorService.getProveedor4Cub(contrato_marco_id).pipe(
+  //         map(({ proveedores4Cub, status }) =>
+  //           cubActions.getProveedores4CubSuccess({
+  //             proveedores4Cub,
+  //             status,
+  //           })
+  //         ),
+  //         catchError(error =>
+  //           of(
+  //             cubActions.getSubContractProvidersError({
+  //               error,
+  //             })
+  //           )
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
   getRegionesSubcontrato$ = createEffect(() =>
     this.actions$.pipe(
@@ -318,49 +332,49 @@ export class CubicacionEffects {
     )
   );
 
-  notifyAfterSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(
-          cubActions.getCubsSuccess,
-          cubActions.getContractMarcoSuccess,
-          cubActions.getProveedores4CubSuccess,
-          cubActions.getSubContractedRegionsSuccess,
-          cubActions.getSubContractedServicesSuccess,
-          cubActions.createCubSuccess,
-          cubActions.editCubicacionSuccess,
-          cubActions.getAutoSuggestSuccess,
-          cubActions.getDetalleCubicacionSuccess,
-          cubActions.deleteCubicacionSuccess
-        ),
-        tap(action => {
-          this.messageService.actions200(action.status, action.type);
-        })
-      ),
-    { dispatch: false }
-  );
+  // notifyAfterSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(
+  //         cubActions.getCubsSuccess,
+  //         cubActions.getContractMarcoSuccess,
+  //         cubActions.getProveedores4CubSuccess,
+  //         cubActions.getSubContractedRegionsSuccess,
+  //         cubActions.getSubContractedServicesSuccess,
+  //         cubActions.createCubSuccess,
+  //         cubActions.editCubicacionSuccess,
+  //         cubActions.getAutoSuggestSuccess,
+  //         cubActions.getDetalleCubicacionSuccess,
+  //         cubActions.deleteCubicacionSuccess
+  //       ),
+  //       tap(action => {
+  //         this.messageService.actions200(action.status, action.type);
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
-  notifyAfterError = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(
-          cubActions.getCubsError,
-          cubActions.getSingleCubicacionError,
-          cubActions.getContractMarcoError,
-          cubActions.getSubContractProvidersError,
-          cubActions.getSubContractedRegionsError,
-          cubActions.getSubContractedTypeServicesError,
-          cubActions.getSubContractedServicesError,
-          cubActions.createCubError,
-          cubActions.editCubicacionError,
-          cubActions.getAutoSuggestError,
-          cubActions.getDetalleCubicacionError,
-          cubActions.deleteCubicacionError
-        ),
-        tap(action =>
-          this.messageService.actionsErrors(action.error.message, action.type)
-        )
-      ),
-    { dispatch: false }
-  );
+  // notifyAfterError = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(
+  //         cubActions.getCubsError,
+  //         cubActions.getSingleCubicacionError,
+  //         cubActions.getContractMarcoError,
+  //         cubActions.getSubContractProvidersError,
+  //         cubActions.getSubContractedRegionsError,
+  //         cubActions.getSubContractedTypeServicesError,
+  //         cubActions.getSubContractedServicesError,
+  //         cubActions.createCubError,
+  //         cubActions.editCubicacionError,
+  //         cubActions.getAutoSuggestError,
+  //         cubActions.getDetalleCubicacionError,
+  //         cubActions.deleteCubicacionError
+  //       ),
+  //       tap(action =>
+  //         this.messageService.actionsErrors(action.error.message, action.type)
+  //       )
+  //     ),
+  //   { dispatch: false }
+  // );
 }

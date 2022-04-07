@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Agencias4Cub, ContratosUser } from '@data';
+import { Agencias4Cub, ContratosUser, Proveedores4Cub } from '@data';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Observable, of, Subscription } from 'rxjs';
@@ -37,6 +37,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   ];
   contratosUser4Cub$: Observable<ContratosUser[]>;
   agencias4Cub$: Observable<Agencias4Cub[]> = of([]);
+  proveedores4Cub$: Observable<Proveedores4Cub[]> = of([]);
 
   // DISPLAY MODALS
 
@@ -88,6 +89,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.formCub = new FormGroup(this.formControls);
     this.contratosUser4Cub$ = this.cubicacionFacade.contratosUser4Cub$();
     this.agencias4Cub$ = this.cubicacionFacade.agencias4cub$();
+    this.proveedores4Cub$ = this.cubicacionFacade.proveedores4Cub$();
   }
 
   onInitAccionesInicialesAdicionales(): void {
@@ -95,6 +97,15 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       this.formCub.get('contrato').valueChanges.subscribe(contrato_id => {
         if (contrato_id) {
           this.cubicacionFacade.agencias4cub(+contrato_id);
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
+        if (agencia_id) {
+          const contrato_id = this.formCub.get('contrato').value;
+          this.cubicacionFacade.proveedores4Cub(+agencia_id, +contrato_id);
         }
       })
     );

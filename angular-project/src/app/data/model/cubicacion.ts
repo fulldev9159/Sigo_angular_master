@@ -7,6 +7,16 @@ export interface Agencias4Cub {
   nombre: string;
 }
 
+export interface RespDataProveedor4Cub {
+  items: Proveedores4Cub[];
+}
+
+export interface Proveedores4Cub {
+  cmarco_has_proveedor_id: number;
+  codigo_acuerdo: string;
+  id: number;
+  nombre: string;
+}
 // Get cubicaciones init
 export interface ResponseGetCubicaciones {
   data: {
