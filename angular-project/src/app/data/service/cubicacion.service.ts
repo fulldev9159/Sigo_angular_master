@@ -20,7 +20,11 @@ import {
   RespDataProveedor4Cub,
 } from '@data';
 import {
+  RequestGetServicios4Cub,
+  RequestGetUnidadObra4Cub,
   RespDataActividad4Cub,
+  RespDataGetServicios4Cub,
+  RespDataGetUnidadObra4Cub,
   RespDataTipoCubicacion4Cub,
   RespDataTipoServicioEspecialidad4Cub,
 } from '@data/model';
@@ -73,6 +77,24 @@ export class CubicacionService {
     return this.http.post<Response<RespDataTipoServicioEspecialidad4Cub>>(
       `${this.apiUrl}/cubicacion/tipo_servicio/getall`,
       {}
+    );
+  }
+
+  getServicios4Cub(
+    request: RequestGetServicios4Cub
+  ): Observable<Response<RespDataGetServicios4Cub>> {
+    return this.http.post<Response<RespDataGetServicios4Cub>>(
+      `${this.apiUrl}/cubicacion/combo_servicios/get`,
+      request
+    );
+  }
+
+  getUnidadObra4Cub(
+    request: RequestGetUnidadObra4Cub
+  ): Observable<Response<RespDataGetUnidadObra4Cub>> {
+    return this.http.post<Response<RespDataGetUnidadObra4Cub>>(
+      `${this.apiUrl}/cubicacion/combo_servicios/get`,
+      request
     );
   }
 

@@ -41,6 +41,41 @@ export interface RespDataTipoServicioEspecialidad4Cub {
   items: TipoServicioEspecialidad4Cub[];
 }
 
+//  GET SERVICIOS 4 CUB
+export interface RequestGetServicios4Cub {
+  agencia_id: number;
+  cmarco_has_prov_id: number;
+  tipo_servicio_id: number;
+}
+
+export interface RespDataGetServicios4Cub {
+  items: Servicios4Cub[];
+}
+
+export interface Servicios4Cub {
+  codigo: string;
+  descripcion: string;
+  id: number;
+  puntos_baremos: number;
+  requiere_evidencia: boolean;
+  unidad_codigo: string;
+  unidad_desripcion: string;
+  unidad_id: number;
+}
+
+//   GET UNIDADES DE OBREA 4 CUB
+export interface RequestGetUnidadObra4Cub {
+  servicio_cod: number;
+  actividad_id: number;
+}
+
+export interface RespDataGetUnidadObra4Cub {
+  items: UnidadObra4Cub[];
+}
+
+export interface UnidadObra4Cub {}
+
+//  ///
 export interface TipoServicioEspecialidad4Cub {
   codigo: string;
   contrato_marco_id: number;

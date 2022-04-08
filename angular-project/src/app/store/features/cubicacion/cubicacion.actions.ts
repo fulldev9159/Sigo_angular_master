@@ -20,6 +20,10 @@ import {
   RespDataTipoCubicacion4Cub,
   RespDataActividad4Cub,
   RespDataTipoServicioEspecialidad4Cub,
+  RequestGetServicios4Cub,
+  RespDataGetServicios4Cub,
+  RequestGetUnidadObra4Cub,
+  RespDataGetUnidadObra4Cub,
 } from '@data';
 
 // GET CONTRATOS USER 4 CUB
@@ -85,7 +89,6 @@ export const getTipoCubicacion4CubError = createAction(
 export const getActividades4Cub = createAction(
   '[Cubicacion] getTipoCubicacion4Cub '
 );
-
 export const getActividades4CubSuccess = createAction(
   '[Cubicacion] getActividades4Cub Success',
   props<{ response: Response<RespDataActividad4Cub> }>()
@@ -99,13 +102,40 @@ export const getActividades4CubError = createAction(
 export const getTipoServicioEspecialidad4Cub = createAction(
   '[Cubicacion] getTipoServicioEspecialidad4Cub '
 );
-
 export const getTipoServicioEspecialidad4CubSuccess = createAction(
   '[Cubicacion] getTipoServicioEspecialidad4Cub Success',
   props<{ response: Response<RespDataTipoServicioEspecialidad4Cub> }>()
 );
 export const getTipoServicioEspecialidad4CubError = createAction(
   '[Cubicacion] getTipoServicioEspecialidad4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET SERVICIOS 4 CUB
+export const getServicios4Cub = createAction(
+  '[Cubicacion] getServicios4Cub ',
+  props<{ request: RequestGetServicios4Cub }>()
+);
+export const getServicios4CubSuccess = createAction(
+  '[Cubicacion] getServicios4Cub Success',
+  props<{ response: Response<RespDataGetServicios4Cub> }>()
+);
+export const getServicios4CubError = createAction(
+  '[Cubicacion] getServicios4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET UNIDAD OBRA 4 CUB
+export const getUnidadObra4Cub = createAction(
+  '[Cubicacion] getUnidadObra4Cub ',
+  props<{ request: RequestGetUnidadObra4Cub }>()
+);
+export const getUnidadObra4CubSuccess = createAction(
+  '[Cubicacion] getUnidadObra4Cub Success',
+  props<{ response: Response<RespDataGetUnidadObra4Cub> }>()
+);
+export const getUnidadObra4CubError = createAction(
+  '[Cubicacion] getUnidadObra4Cub Error',
   props<{ error: any }>()
 );
 

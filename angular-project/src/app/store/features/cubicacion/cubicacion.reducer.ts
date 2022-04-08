@@ -12,10 +12,12 @@ import {
   Lpu4Cub,
   Proveedores4Cub,
   RegionSubcontrato4Cub,
+  Servicios4Cub,
   SubcontratosProveedor,
   TipoCubicacion4Cub,
   TipoLpu,
   TipoServicioEspecialidad4Cub,
+  UnidadObra4Cub,
 } from '@data';
 
 export const CubicacionFeatureKey = 'cubicacion';
@@ -27,6 +29,8 @@ export interface StateCubicacion {
   tipoCubicacion4Cub: TipoCubicacion4Cub[];
   actividad4Cub: Actividad4Cub[];
   tipoServicioEspecialidad4Cub: TipoServicioEspecialidad4Cub[];
+  servicios4cub: Servicios4Cub[];
+  unidadObras4cub: UnidadObra4Cub[];
   //   ///
   cubicaciones: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
@@ -50,6 +54,8 @@ export const initialStateCubicacion: StateCubicacion = {
   tipoCubicacion4Cub: [],
   actividad4Cub: [],
   tipoServicioEspecialidad4Cub: [],
+  servicios4cub: [],
+  unidadObras4cub: [],
   //////
   cubicaciones: [],
   cubicacion: null,
@@ -96,6 +102,20 @@ export const reducerCubicacion = createReducer(
     (state, { response }) => ({
       ...state,
       tipoServicioEspecialidad4Cub: response.data.items,
+    })
+  ),
+  on(
+    CubicacionActions.getServicios4CubSuccess,
+    (state, { response }) => ({
+      ...state,
+      servicios4cub: response.data.items,
+    })
+  ),
+  on(
+    CubicacionActions.getUnidadObra4CubSuccess,
+    (state, { response }) => ({
+      ...state,
+      unidadObras4cub: response.data.items,
     })
   ),
   //   ///

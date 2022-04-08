@@ -12,6 +12,8 @@ import {
   Agencias4Cub,
   ContratosUser,
   Proveedores4Cub,
+  RequestGetServicios4Cub,
+  Servicios4Cub,
   TipoCubicacion4Cub,
   TipoServicioEspecialidad4Cub,
 } from '@data';
@@ -36,6 +38,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   actividad4Cub$: Observable<Actividad4Cub[]> = of([]);
   tipoServicioEspecialidad4Cub$: Observable<TipoServicioEspecialidad4Cub[]> =
     of([]);
+  servicios4Cub$: Observable<Servicios4Cub[]> = of([]);
 
   // DISPLAY MODALS
 
@@ -106,6 +109,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.actividad4Cub$ = this.cubicacionFacade.actividad4cub$();
     this.tipoServicioEspecialidad4Cub$ =
       this.cubicacionFacade.tipoServicioEspecialidad$();
+    this.servicios4Cub$ = this.cubicacionFacade.servicios4Cub$();
   }
 
   onInitAccionesInicialesAdicionales(): void {
@@ -131,6 +135,28 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           this.checkAndEnable('cmarcoproveedor_id', []);
         }
       })
+    );
+
+    this.subscription.add(
+      this.formCub
+        .get('tipo_servicio_id')
+        .valueChanges.subscribe(tipo_servicio_id => {
+          if (tipo_servicio_id !== null && tipo_servicio_id !== undefined) {
+            // this.formCub.get('cmarcoproveedor_id').reset();
+            const cmarco_has_prov_id =
+              +this.formCub.get('cmarcoproveedor_id').value;
+            const agencia_id = +this.formCub.get('agencia_id').value;
+            const request: RequestGetServicios4Cub = {
+              agencia_id,
+              cmarco_has_prov_id,
+              tipo_servicio_id: +tipo_servicio_id,
+            };
+            console.log(request);
+            this.cubicacionFacade.servicios4Cub(request);
+          } else {
+            // this.checkAndEnable('cmarcoproveedor_id', []);
+          }
+        })
     );
   }
 

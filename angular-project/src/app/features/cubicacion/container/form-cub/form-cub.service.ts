@@ -41,6 +41,7 @@ export class FormCubService {
       cmarcoproveedor_id: new FormControl(null, [Validators.required]),
       actividad_id: new FormControl(null, [Validators.required]),
       tipo_servicio_id: new FormControl(null, [Validators.required]),
+      servicio_id: new FormControl(null, [Validators.required]),
     };
   }
 
