@@ -65,7 +65,7 @@ export interface Servicios4Cub {
 
 //   GET UNIDADES DE OBREA 4 CUB
 export interface RequestGetUnidadObra4Cub {
-  servicio_cod: number;
+  servicio_cod: string;
   actividad_id: number;
 }
 
@@ -73,7 +73,34 @@ export interface RespDataGetUnidadObra4Cub {
   items: UnidadObra4Cub[];
 }
 
-export interface UnidadObra4Cub {}
+export interface UnidadObra4Cub {
+  actividad_id: number;
+  clave: string;
+  id: number;
+  model_actividad_id: { id: number; codigo: string; descripcion: string };
+  model_servicio_cod: {
+    cantidad_default: number;
+    codigo: string;
+    codigo_alcance: string;
+    descripcion: string;
+    es_pack_basico: boolean;
+    estado: boolean;
+    fecha_fin: Date;
+    fecha_inicio: Date;
+    id: number;
+    puntos_baremos: number;
+    requiere_evidencia: boolean;
+    tipo_servicio_id: number;
+    unidad_id: number;
+  };
+  model_unidad_obra_cod: {
+    codigo: string;
+    descripcion: string;
+    unidad_id: number;
+  };
+  servicio_cod: string;
+  unidad_obra_cod: string;
+}
 
 //  ///
 export interface TipoServicioEspecialidad4Cub {

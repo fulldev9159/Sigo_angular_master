@@ -93,7 +93,7 @@ export class CubicacionService {
     request: RequestGetUnidadObra4Cub
   ): Observable<Response<RespDataGetUnidadObra4Cub>> {
     return this.http.post<Response<RespDataGetUnidadObra4Cub>>(
-      `${this.apiUrl}/cubicacion/combo_servicios/get`,
+      `${this.apiUrl}/cubicacion/unidades_obra_from_servicio/get`,
       request
     );
   }

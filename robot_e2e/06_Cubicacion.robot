@@ -32,3 +32,5 @@ Crear cubicación
     _Set input text         css:#descripcion > app-textarea > textarea    Cub descripción
     _Select visible item    css:#actividad > app-select > select          CANALIZACION
     _Select visible item    css:#tiposervicio > app-select > select       DTH
+
+    # Rancagua COASIN CANALIZACION

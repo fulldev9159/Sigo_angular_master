@@ -13,9 +13,11 @@ import {
   ContratosUser,
   Proveedores4Cub,
   RequestGetServicios4Cub,
+  RequestGetUnidadObra4Cub,
   Servicios4Cub,
   TipoCubicacion4Cub,
   TipoServicioEspecialidad4Cub,
+  UnidadObra4Cub,
 } from '@data';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
@@ -39,6 +41,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   tipoServicioEspecialidad4Cub$: Observable<TipoServicioEspecialidad4Cub[]> =
     of([]);
   servicios4Cub$: Observable<Servicios4Cub[]> = of([]);
+  unidadObra4Cub$: Observable<UnidadObra4Cub[]> = of([]);
 
   // DISPLAY MODALS
 
@@ -110,6 +113,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.tipoServicioEspecialidad4Cub$ =
       this.cubicacionFacade.tipoServicioEspecialidad$();
     this.servicios4Cub$ = this.cubicacionFacade.servicios4Cub$();
+    this.unidadObra4Cub$ = this.cubicacionFacade.unidadObras4Cub$();
   }
 
   onInitAccionesInicialesAdicionales(): void {
@@ -157,6 +161,48 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             // this.checkAndEnable('cmarcoproveedor_id', []);
           }
         })
+    );
+
+    this.subscription.add(
+      this.formCub.get('servicio_id').valueChanges.subscribe(servicio_cod => {
+        const actividad_id = +this.formCub.get('actividad_id').value;
+        if (
+          servicio_cod !== null &&
+          servicio_cod !== undefined &&
+          actividad_id !== null
+        ) {
+          // this.formCub.get('cmarcoproveedor_id').reset();
+          const request: RequestGetUnidadObra4Cub = {
+            servicio_cod,
+            actividad_id,
+          };
+          console.log(request);
+          this.cubicacionFacade.unidadObras4Cub(request);
+        } else {
+          // this.checkAndEnable('cmarcoproveedor_id', []);
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.formCub.get('actividad_id').valueChanges.subscribe(actividad_id => {
+        const servicio_cod = this.formCub.get('servicio_id').value;
+        if (
+          actividad_id !== null &&
+          actividad_id !== undefined &&
+          servicio_cod != null
+        ) {
+          // this.formCub.get('cmarcoproveedor_id').reset();
+          const request: RequestGetUnidadObra4Cub = {
+            servicio_cod,
+            actividad_id: +actividad_id,
+          };
+          console.log(request);
+          this.cubicacionFacade.unidadObras4Cub(request);
+        } else {
+          // this.checkAndEnable('cmarcoproveedor_id', []);
+        }
+      })
     );
   }
 

@@ -144,12 +144,13 @@
             </app-select>
           </div>
 
+          <br>
           <div id="servicios">
             <app-select [control]="formControls.servicio_id" label="* Código - Servicio">
               <ng-container options>
                 <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
                 <ng-container *ngFor="let item of servicios4Cub$|async">
-                  <option [value]="item.id">
+                  <option [value]="item.codigo">
                     {{item.codigo}} - {{item.descripcion}}
                   </option>
                 </ng-container>
@@ -157,6 +158,19 @@
             </app-select>
           </div>
 
+          <br>
+          <div id="unidad-obra">
+            <app-select [control]="formControls.servicio_id" label="* Código - Unidad de Obra">
+              <ng-container options>
+                <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
+                <ng-container *ngFor="let item of unidadObra4Cub$|async">
+                  <option [value]="item.model_unidad_obra_cod.codigo">
+                    {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
+                  </option>
+                </ng-container>
+              </ng-container>
+            </app-select>
+          </div>
         </div>
       </div>
     </ng-container>
