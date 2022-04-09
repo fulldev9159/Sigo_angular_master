@@ -4,6 +4,7 @@ import {
   Actividad4Cub,
   Agencias4Cub,
   AutoSuggestItem,
+  Carrito,
   ContratoMarco4Cub,
   ContratosUser,
   Cubicacion,
@@ -31,6 +32,7 @@ export interface StateCubicacion {
   tipoServicioEspecialidad4Cub: TipoServicioEspecialidad4Cub[];
   servicios4cub: Servicios4Cub[];
   unidadObras4cub: UnidadObra4Cub[];
+  carrito: Carrito[];
   //   ///
   cubicaciones: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
@@ -56,6 +58,7 @@ export const initialStateCubicacion: StateCubicacion = {
   tipoServicioEspecialidad4Cub: [],
   servicios4cub: [],
   unidadObras4cub: [],
+  carrito: [],
   //////
   cubicaciones: [],
   cubicacion: null,
@@ -104,19 +107,42 @@ export const reducerCubicacion = createReducer(
       tipoServicioEspecialidad4Cub: response.data.items,
     })
   ),
+  on(CubicacionActions.getServicios4CubSuccess, (state, { response }) => ({
+    ...state,
+    servicios4cub: response.data.items,
+  })),
+  on(CubicacionActions.getUnidadObra4CubSuccess, (state, { response }) => ({
+    ...state,
+    unidadObras4cub: response.data.items,
+  })),
   on(
-    CubicacionActions.getServicios4CubSuccess,
-    (state, { response }) => ({
-      ...state,
-      servicios4cub: response.data.items,
-    })
-  ),
-  on(
-    CubicacionActions.getUnidadObra4CubSuccess,
-    (state, { response }) => ({
-      ...state,
-      unidadObras4cub: response.data.items,
-    })
+    CubicacionActions.getDatosServicio4CubSuccess,
+    (state, { item_carrito }) => {
+      console.log('Item Carrito', item_carrito);
+      console.log(
+        state.carrito.findIndex(x => x.servicio_id === item_carrito.servicio_id)
+      );
+
+      const index = state.carrito.findIndex(
+        x => x.servicio_id === item_carrito.servicio_id
+      );
+      if (index >= 0) {
+        let temp = [...state.carrito];
+        temp[index].unidades_obras = [
+          ...state.carrito[index].unidades_obras,
+          item_carrito.unidades_obras[0],
+        ];
+        return {
+          ...state,
+          carrito: temp,
+        };
+      } else {
+        return {
+          ...state,
+          carrito: [...state.carrito, item_carrito],
+        };
+      }
+    }
   ),
   //   ///
   on(CubicacionActions.getCubs, state => state),

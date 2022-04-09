@@ -45,6 +45,11 @@ export const unidadObras4Cub = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.unidadObras4cub
 );
+
+export const carrito = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.carrito
+);
 //   ////
 export const getCubicaciones = createSelector(
   selectCubicacion,

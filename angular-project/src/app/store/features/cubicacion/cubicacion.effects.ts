@@ -142,6 +142,40 @@ export class CubicacionEffects {
     )
   );
 
+  getDatosServicio4Cub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getDatosServicio4Cub),
+      concatMap(({ request_servicio: request_servicios, request_uo }) =>
+        this.cubService
+          .getDatosServicio4Cub(request_servicios, request_uo)
+          .pipe(
+            map(item_carrito =>
+              cubActions.getDatosServicio4CubSuccess({ item_carrito })
+            ),
+            catchError(err =>
+              of(cubActions.getDatosServicio4CubError({ error: err }))
+            )
+          )
+      )
+    )
+  );
+
+  getDatosUnidadObra4Cub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getDatosUnidadObra4Cub),
+      concatMap(({ request }) =>
+        this.cubService.getDatosUnidadObra4Cub(request).pipe(
+          map(response =>
+            cubActions.getDatosUnidadObra4CubSuccess({ response })
+          ),
+          catchError(err =>
+            of(cubActions.getDatosServicio4CubError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   // /////
   getCubs$ = createEffect(() =>
     this.actions$.pipe(

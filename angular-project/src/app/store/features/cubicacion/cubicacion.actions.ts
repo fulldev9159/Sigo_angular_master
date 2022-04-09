@@ -24,6 +24,11 @@ import {
   RespDataGetServicios4Cub,
   RequestGetUnidadObra4Cub,
   RespDataGetUnidadObra4Cub,
+  RequestGetDatosServicio4Cub,
+  RespDataGetDatosServicio4Cub,
+  RequestGetDatosUnidadObra4Cub,
+  RespDataGetDatosUnidadObra4Cub,
+  Carrito,
 } from '@data';
 
 // GET CONTRATOS USER 4 CUB
@@ -136,6 +141,37 @@ export const getUnidadObra4CubSuccess = createAction(
 );
 export const getUnidadObra4CubError = createAction(
   '[Cubicacion] getUnidadObra4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET DATOS SERVICIO 4 CUB
+export const getDatosServicio4Cub = createAction(
+  '[Cubicacion] getDatosServicio4Cub ',
+  props<{
+    request_servicio: RequestGetDatosServicio4Cub;
+    request_uo: RequestGetDatosUnidadObra4Cub;
+  }>()
+);
+export const getDatosServicio4CubSuccess = createAction(
+  '[Cubicacion] getDatosServicio4Cub Success',
+  props<{ item_carrito: Carrito }>()
+);
+export const getDatosServicio4CubError = createAction(
+  '[Cubicacion] getDatosServicio4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET DATOS UNIDAD OBRA 4 CUB
+export const getDatosUnidadObra4Cub = createAction(
+  '[Cubicacion] getDatosUnidadObra4Cub ',
+  props<{ request: RequestGetDatosUnidadObra4Cub }>()
+);
+export const getDatosUnidadObra4CubSuccess = createAction(
+  '[Cubicacion] getDatosUnidadObra4Cub Success',
+  props<{ response: Response<RespDataGetDatosUnidadObra4Cub> }>()
+);
+export const getDatosUnidadObra4CubError = createAction(
+  '[Cubicacion] getDatosUnidadObra4Cub Error',
   props<{ error: any }>()
 );
 

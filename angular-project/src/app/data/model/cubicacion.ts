@@ -102,6 +102,72 @@ export interface UnidadObra4Cub {
   unidad_obra_cod: string;
 }
 
+//  GET DATOS SERVICIOS 4 CUB
+export interface RequestGetDatosServicio4Cub {
+  agencia_id: number;
+  cmarco_has_proveedor_id: number;
+  servicio_id: number;
+  tipo_servicio_id: number;
+}
+
+export interface RespDataGetDatosServicio4Cub {
+  items: DatosServicio4Cub[];
+}
+
+export interface DatosServicio4Cub {
+  precio_agencia: number;
+  precio_proveedor: number;
+  servicio_baremos: number;
+  servicio_codigo: string;
+  servicio_id: number;
+  servicio_nombre: string;
+  servicio_precio_final: number;
+  servicio_precio_final_clp: null;
+  servicio_tipo: number;
+  servicio_unidad_id: number;
+  tipo_moneda_id: number;
+}
+
+//  GET DATOS UNIDAD OBRA 4 CUB
+export interface RequestGetDatosUnidadObra4Cub {
+  cantidad: number;
+  uo_codigo: string;
+}
+
+export interface RespDataGetDatosUnidadObra4Cub {
+  items: DatosUnidadObra4Cub[];
+}
+
+export interface DatosUnidadObra4Cub {
+  material_cantidad: number;
+  material_codigo: string;
+  material_nombre: string;
+  material_origen: string;
+  material_tipo_moneda_id: number;
+  material_unidad_id: number;
+  material_valor: number;
+  precio_material: number;
+  precio_material_clp: null;
+  uo_codigo: string;
+  uo_nombre: string;
+  uo_precio_total_clp: number;
+  uo_unidad_id: number;
+}
+
+export interface Carrito {
+  precio_agencia: number;
+  precio_proveedor: number;
+  servicio_baremos: number;
+  servicio_codigo: string;
+  servicio_id: number;
+  servicio_nombre: string;
+  servicio_precio_final: number;
+  servicio_precio_final_clp: null;
+  servicio_tipo: number;
+  servicio_unidad_id: number;
+  tipo_moneda_id: number;
+  unidades_obras: DatosUnidadObra4Cub[];
+}
 //  ///
 export interface TipoServicioEspecialidad4Cub {
   codigo: string;

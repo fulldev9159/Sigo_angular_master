@@ -18,17 +18,20 @@ import {
   Response,
   RespDataGetAgencias4Cub,
   RespDataProveedor4Cub,
-} from '@data';
-import {
+  Carrito,
+  RequestGetDatosServicio4Cub,
+  RequestGetDatosUnidadObra4Cub,
   RequestGetServicios4Cub,
   RequestGetUnidadObra4Cub,
   RespDataActividad4Cub,
+  RespDataGetDatosServicio4Cub,
+  RespDataGetDatosUnidadObra4Cub,
   RespDataGetServicios4Cub,
   RespDataGetUnidadObra4Cub,
   RespDataTipoCubicacion4Cub,
   RespDataTipoServicioEspecialidad4Cub,
-} from '@data/model';
-
+} from '@data';
+import { DatosUnidadObra4Cub } from '@data/model';
 @Injectable({
   providedIn: 'root',
 })
@@ -94,6 +97,48 @@ export class CubicacionService {
   ): Observable<Response<RespDataGetUnidadObra4Cub>> {
     return this.http.post<Response<RespDataGetUnidadObra4Cub>>(
       `${this.apiUrl}/cubicacion/unidades_obra_from_servicio/get`,
+      request
+    );
+  }
+
+  getDatosServicio4Cub(
+    request_servicio: RequestGetDatosServicio4Cub,
+    request_uo: RequestGetDatosUnidadObra4Cub
+  ): Observable<Carrito> {
+    return this.http
+      .post<Response<RespDataGetDatosServicio4Cub>>(
+        `${this.apiUrl}/cubicacion/datos_servicio/get`,
+        request_servicio
+      )
+      .pipe(
+        concatMap(datosServicio => {
+          return this.http
+            .post<Response<RespDataGetDatosUnidadObra4Cub>>(
+              `${this.apiUrl}/cubicacion/datos_unidad_obra_material/get`,
+              request_uo
+            )
+            .pipe(
+              map(datosUO => {
+                const uos: DatosUnidadObra4Cub[] = [];
+                uos.push({
+                  ...datosUO.data.items[0],
+                });
+                const carrito: Carrito = {
+                  ...datosServicio.data.items[0],
+                  unidades_obras: uos,
+                };
+                return carrito;
+              })
+            );
+        })
+      );
+  }
+
+  getDatosUnidadObra4Cub(
+    request: RequestGetDatosUnidadObra4Cub
+  ): Observable<Response<RespDataGetDatosUnidadObra4Cub>> {
+    return this.http.post<Response<RespDataGetDatosUnidadObra4Cub>>(
+      `${this.apiUrl}/cubicacion/datos_unidad_obra_material/get`,
       request
     );
   }

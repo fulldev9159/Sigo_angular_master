@@ -134,7 +134,7 @@
               </div>
               <div class="col-md-7 col-sm-12">
                 <div id="servicios">
-                  <app-select [control]="formControls.servicio_id" label="* Código - Servicio">
+                  <app-select [control]="formControls.servicio_cod" label="* Código - Servicio">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione un Servicio/Especialidad</option>
                       <ng-container *ngFor="let item of servicios4Cub$|async">
@@ -169,7 +169,7 @@
               </div>
               <div class="col-md-7 col-sm-12">
                 <div id="unidad-obra">
-                  <app-select [control]="formControls.unidad_obra_id" label="* Código - Unidad de Obra">
+                  <app-select [control]="formControls.unidad_obra_cod" label="* Código - Unidad de Obra">
                     <ng-container options>
                       <option value="null" selected disabled>Seleccione una unidad de obra</option>
                       <ng-container *ngFor="let item of unidadObra4Cub$|async">
@@ -189,7 +189,7 @@
             <br>
             <div class="row">
               <div class="col-md-4"></div>
-              <div class="col-md-4"><button>Agregar</button></div>
+              <div class="col-md-4"><button (click)="agregar()">Agregar</button></div>
               <div class="col-md-4"></div>
             </div>
           </div>

@@ -25,6 +25,9 @@ import {
   Servicios4Cub,
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
+  RequestGetDatosServicio4Cub,
+  Carrito,
+  RequestGetDatosUnidadObra4Cub,
 } from '@data';
 
 @Injectable({
@@ -107,6 +110,24 @@ export class CubicacionFacade {
 
   public unidadObras4Cub$(): Observable<UnidadObra4Cub[]> {
     return this.store.select(cubicacionSelectors.unidadObras4Cub);
+  }
+
+  // GET DATOS SERVICIO UNIDAD OBRAS 4 CUB AND CARRITO
+  public datosServicio4Cub(
+    request_servicio: RequestGetDatosServicio4Cub,
+    request_uo: RequestGetDatosUnidadObra4Cub
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.getDatosServicio4Cub({ request_servicio, request_uo })
+    );
+  }
+
+  public datosUnidadObra4Cub(request: RequestGetDatosUnidadObra4Cub): void {
+    this.store.dispatch(cubicacionActions.getDatosUnidadObra4Cub({ request }));
+  }
+
+  public carrito$(): Observable<Carrito[]> {
+    return this.store.select(cubicacionSelectors.carrito);
   }
   // /////
 
