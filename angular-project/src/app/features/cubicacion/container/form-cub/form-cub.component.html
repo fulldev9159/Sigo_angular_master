@@ -116,60 +116,82 @@
             </div>
           </div>
 
-          <br>
-          <div id="actividad">
-            <app-select [control]="formControls.actividad_id" label="* Actividad">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione un Actividad</option>
-                <ng-container *ngFor="let item of actividad4Cub$|async">
-                  <option [value]="item.id">
-                    {{item.descripcion}}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
-          </div>
+          <div class="filtroservicios">
+            <div class="row">
+              <div class="col-md-3 col-sm-12">
+                <div id="tiposervicio">
+                  <app-select [control]="formControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
+                      <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
+                        <option [value]="item.id">
+                          {{item.descripcion}}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <div id="servicios">
+                  <app-select [control]="formControls.servicio_id" label="* Código - Servicio">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione un Servicio/Especialidad</option>
+                      <ng-container *ngFor="let item of servicios4Cub$|async">
+                        <option [value]="item.codigo">
+                          {{item.codigo}} - {{item.descripcion}}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+              </div>
+              <div class="col-md-1 col-sm-12">
+                <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
+              </div>
+            </div>
 
-          <br>
-          <div id="tiposervicio">
-            <app-select [control]="formControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
-                <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
-                  <option [value]="item.id">
-                    {{item.descripcion}}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
-          </div>
+            <br>
+            <div class="row">
+              <div class="col-md-3 col-sm-12">
+                <div id="actividad">
+                  <app-select [control]="formControls.actividad_id" label="* Actividad">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione una Actividad</option>
+                      <ng-container *ngFor="let item of actividad4Cub$|async">
+                        <option [value]="item.id">
+                          {{item.descripcion}}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <div id="unidad-obra">
+                  <app-select [control]="formControls.unidad_obra_id" label="* Código - Unidad de Obra">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione una unidad de obra</option>
+                      <ng-container *ngFor="let item of unidadObra4Cub$|async">
+                        <option [value]="item.model_unidad_obra_cod.codigo">
+                          {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+              </div>
+              <div class="col-md-1 col-sm-12">
+                <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
+              </div>
+            </div>
 
-          <br>
-          <div id="servicios">
-            <app-select [control]="formControls.servicio_id" label="* Código - Servicio">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
-                <ng-container *ngFor="let item of servicios4Cub$|async">
-                  <option [value]="item.codigo">
-                    {{item.codigo}} - {{item.descripcion}}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
-          </div>
-
-          <br>
-          <div id="unidad-obra">
-            <app-select [control]="formControls.servicio_id" label="* Código - Unidad de Obra">
-              <ng-container options>
-                <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
-                <ng-container *ngFor="let item of unidadObra4Cub$|async">
-                  <option [value]="item.model_unidad_obra_cod.codigo">
-                    {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
-                  </option>
-                </ng-container>
-              </ng-container>
-            </app-select>
+            <br>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4"><button>Agregar</button></div>
+              <div class="col-md-4"></div>
+            </div>
           </div>
         </div>
       </div>
