@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import {
   Actividad4Cub,
   Agencias4Cub,
+  Carrito,
   ContratosUser,
   Proveedores4Cub,
   RequestGetDatosServicio4Cub,
@@ -45,6 +46,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   servicios4Cub$: Observable<Servicios4Cub[]> = of([]);
   unidadObra4Cub$: Observable<UnidadObra4Cub[]> = of([]);
   servicios: Servicios4Cub[];
+  servicioUORepetidoAlert$: Observable<boolean> = of(false);
+  carrito$: Observable<Carrito[]>;
 
   // DISPLAY MODALS
 
@@ -131,6 +134,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .pipe(
         tap(unidadobras => this.checkAndEnable('unidad_obra_cod', unidadobras))
       );
+    this.servicioUORepetidoAlert$ =
+      this.cubicacionFacade.servicioUORepetidoAlert$();
+
+    this.carrito$ = this.cubicacionFacade.carrito$();
   }
 
   onInitAccionesInicialesAdicionales(): void {

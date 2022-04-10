@@ -129,6 +129,11 @@ export class CubicacionFacade {
   public carrito$(): Observable<Carrito[]> {
     return this.store.select(cubicacionSelectors.carrito);
   }
+
+  // SERVICIO UO REPETIDO ALERT
+  public servicioUORepetidoAlert$(): Observable<boolean> {
+    return this.store.select(cubicacionSelectors.servicioUORepetidoAlert);
+  }
   // /////
 
   // CUBICACION

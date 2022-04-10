@@ -132,7 +132,7 @@
                   </app-select>
                 </div>
               </div>
-              <div class="col-md-7 col-sm-12">
+              <div class="col-md-9 col-sm-12">
                 <div id="servicios">
                   <app-select [control]="formControls.servicio_cod" label="* Código - Servicio">
                     <ng-container options>
@@ -146,9 +146,9 @@
                   </app-select>
                 </div>
               </div>
-              <div class="col-md-1 col-sm-12">
+              <!-- <div class="col-md-1 col-sm-12">
                 <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
-              </div>
+              </div> -->
             </div>
 
             <br>
@@ -167,7 +167,7 @@
                   </app-select>
                 </div>
               </div>
-              <div class="col-md-7 col-sm-12">
+              <div class="col-md-9 col-sm-12">
                 <div id="unidad-obra">
                   <app-select [control]="formControls.unidad_obra_cod" label="* Código - Unidad de Obra">
                     <ng-container options>
@@ -181,18 +181,23 @@
                   </app-select>
                 </div>
               </div>
-              <div class="col-md-1 col-sm-12">
+              <!-- <div class="col-md-1 col-sm-12">
                 <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
-              </div>
+              </div> -->
             </div>
 
             <br>
             <div class="row">
               <div class="col-md-4"></div>
-              <div class="col-md-4"><button (click)="agregar()">Agregar</button></div>
+              <div class="col-md-4">
+                <button (click)="agregar()">Agregar</button>
+                <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;">Ya ha agregado este servico/Unidad Obra </p>
+              </div>
               <div class="col-md-4"></div>
             </div>
           </div>
+
+          {{carrito$|async|json}}
         </div>
       </div>
     </ng-container>

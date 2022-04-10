@@ -1,5 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
+import copy from 'fast-copy';
+
 import {
   Actividad4Cub,
   Agencias4Cub,
@@ -33,6 +35,7 @@ export interface StateCubicacion {
   servicios4cub: Servicios4Cub[];
   unidadObras4cub: UnidadObra4Cub[];
   carrito: Carrito[];
+  servciouo_repetido_alert: boolean;
   //   ///
   cubicaciones: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
@@ -59,6 +62,7 @@ export const initialStateCubicacion: StateCubicacion = {
   servicios4cub: [],
   unidadObras4cub: [],
   carrito: [],
+  servciouo_repetido_alert: false,
   //////
   cubicaciones: [],
   cubicacion: null,
@@ -118,28 +122,43 @@ export const reducerCubicacion = createReducer(
   on(
     CubicacionActions.getDatosServicio4CubSuccess,
     (state, { item_carrito }) => {
-      console.log('Item Carrito', item_carrito);
-      console.log(
-        state.carrito.findIndex(x => x.servicio_id === item_carrito.servicio_id)
-      );
-
       const index = state.carrito.findIndex(
         x => x.servicio_id === item_carrito.servicio_id
       );
       if (index >= 0) {
-        let temp = [...state.carrito];
-        temp[index].unidades_obras = [
-          ...state.carrito[index].unidades_obras,
-          item_carrito.unidades_obras[0],
-        ];
-        return {
-          ...state,
-          carrito: temp,
-        };
+        const temp = copy(item_carrito);
+        console.log(temp.unidades_obras);
+        temp.unidades_obras.push(...state.carrito[index].unidades_obras);
+        console.log(temp.unidades_obras);
+        const uo_repetido = state.carrito[index].unidades_obras.find(
+          uo => uo.uo_codigo === item_carrito.unidades_obras[0].uo_codigo
+        );
+        if (uo_repetido) {
+          return {
+            ...state,
+            servciouo_repetido_alert: true,
+          };
+        } else {
+          if (state.carrito.length === 1) {
+            return {
+              ...state,
+              carrito: [temp],
+              servciouo_repetido_alert: false,
+            };
+          } else {
+            const old_servicios = state.carrito.splice(index, 1);
+            return {
+              ...state,
+              carrito: [...old_servicios, temp],
+              servciouo_repetido_alert: false,
+            };
+          }
+        }
       } else {
         return {
           ...state,
           carrito: [...state.carrito, item_carrito],
+          servciouo_repetido_alert: false,
         };
       }
     }
