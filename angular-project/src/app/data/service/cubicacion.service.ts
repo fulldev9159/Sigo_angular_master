@@ -74,12 +74,12 @@ export class CubicacionService {
     );
   }
 
-  getTipoServicioEspecialidad4Cub(): Observable<
-    Response<RespDataTipoServicioEspecialidad4Cub>
-  > {
+  getTipoServicioEspecialidad4Cub(
+    actividad_id: number
+  ): Observable<Response<RespDataTipoServicioEspecialidad4Cub>> {
     return this.http.post<Response<RespDataTipoServicioEspecialidad4Cub>>(
-      `${this.apiUrl}/cubicacion/tipo_servicio/getall`,
-      {}
+      `${this.apiUrl}/cubicacion/tipo_servicio/get`,
+      { actividad_id }
     );
   }
 

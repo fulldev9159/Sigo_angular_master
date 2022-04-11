@@ -84,8 +84,10 @@ export class CubicacionFacade {
   }
 
   // GET TIPO SERVICIO ESPECIALIDAD 4 CUB
-  public tipoServicioEspecialidad(): void {
-    this.store.dispatch(cubicacionActions.getTipoServicioEspecialidad4Cub());
+  public tipoServicioEspecialidad(actividad_id: number): void {
+    this.store.dispatch(
+      cubicacionActions.getTipoServicioEspecialidad4Cub({ actividad_id })
+    );
   }
 
   public tipoServicioEspecialidad$(): Observable<

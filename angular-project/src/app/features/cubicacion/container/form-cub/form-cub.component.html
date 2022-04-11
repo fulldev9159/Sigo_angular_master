@@ -118,7 +118,20 @@
 
           <div class="filtroservicios">
             <div class="row">
-              <div class="col-md-3 col-sm-12">
+              <div class="col-md-12 col-sm-12">
+                <div id="actividad">
+                  <app-select [control]="formControls.actividad_id" label="* Actividad">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione una Actividad</option>
+                      <ng-container *ngFor="let item of actividad4Cub$|async">
+                        <option [value]="item.id">
+                          {{item.descripcion}}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+                <br>
                 <div id="tiposervicio">
                   <app-select [control]="formControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
                     <ng-container options>
@@ -132,7 +145,20 @@
                   </app-select>
                 </div>
               </div>
-              <div class="col-md-9 col-sm-12">
+              <!-- <div class="col-md-9 col-sm-12">
+               
+              </div> -->
+              <!-- <div class="col-md-1 col-sm-12">
+                <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
+              </div> -->
+            </div>
+
+            <br>
+            <div class="row">
+              <!-- <div class="col-md-3 col-sm-12">
+                
+              </div> -->
+              <div class="col-md-12 col-sm-12">
                 <div id="servicios">
                   <app-select [control]="formControls.servicio_cod" label="* Código - Servicio">
                     <ng-container options>
@@ -145,29 +171,7 @@
                     </ng-container>
                   </app-select>
                 </div>
-              </div>
-              <!-- <div class="col-md-1 col-sm-12">
-                <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
-              </div> -->
-            </div>
-
-            <br>
-            <div class="row">
-              <div class="col-md-3 col-sm-12">
-                <div id="actividad">
-                  <app-select [control]="formControls.actividad_id" label="* Actividad">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione una Actividad</option>
-                      <ng-container *ngFor="let item of actividad4Cub$|async">
-                        <option [value]="item.id">
-                          {{item.descripcion}}
-                        </option>
-                      </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
-              </div>
-              <div class="col-md-9 col-sm-12">
+                <br>
                 <div id="unidad-obra">
                   <app-select [control]="formControls.unidad_obra_cod" label="* Código - Unidad de Obra">
                     <ng-container options>
@@ -195,6 +199,75 @@
               </div>
               <div class="col-md-4"></div>
             </div>
+          </div>
+
+
+          <div class="table-carrito">
+            <table border="1">
+              <tr>
+                <th colspan="7">Servicios</th>
+                <th colspan="5">Unidad Obra</th>
+              </tr>
+              <tr>
+                <th>Cod</th>
+                <th>Descripción</th>
+                <th>Esp</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Factor</th>
+                <th>Total Servicio</th>
+
+                <th>Cód</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Tipo_moneda</th>
+                <th>Total UO</th>
+              </tr>
+
+              <tr>
+                <td rowspan="3">Serv1231</td>
+                <td rowspan="3">Ssdfadasdasdasdas</td>
+                <td rowspan="3">Inst</td>
+                <td rowspan="3">10</td>
+                <td rowspan="3">222000</td>
+                <td rowspan="3">1</td>
+                <td rowspan="3">20000</td>
+                <td>0</td>
+                <td>SIN UO</td>
+                <td>0</td>
+                <td>CLP</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>SIN UO</td>
+                <td>0</td>
+                <td>CLP</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>SIN UO</td>
+                <td>0</td>
+                <td>CLP</td>
+                <td>0</td>
+              </tr>
+
+              <tr>
+                <td rowspan="1">Serv1231</td>
+                <td rowspan="1">Ssdfadasdasdasdas</td>
+                <td rowspan="1">Inst</td>
+                <td rowspan="1">10</td>
+                <td rowspan="1">222000</td>
+                <td rowspan="1">1</td>
+                <td rowspan="1">20000</td>
+                <td>0</td>
+                <td>SIN UO</td>
+                <td>0</td>
+                <td>CLP</td>
+                <td>0</td>
+              </tr>
+            </table>
           </div>
 
           {{carrito$|async|json}}

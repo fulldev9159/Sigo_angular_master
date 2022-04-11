@@ -105,7 +105,8 @@ export const getActividades4CubError = createAction(
 
 // GET TIPO SERVICIO ESPECIALIDAD 4 CUB
 export const getTipoServicioEspecialidad4Cub = createAction(
-  '[Cubicacion] getTipoServicioEspecialidad4Cub '
+  '[Cubicacion] getTipoServicioEspecialidad4Cub ',
+  props<{ actividad_id: number }>()
 );
 export const getTipoServicioEspecialidad4CubSuccess = createAction(
   '[Cubicacion] getTipoServicioEspecialidad4Cub Success',

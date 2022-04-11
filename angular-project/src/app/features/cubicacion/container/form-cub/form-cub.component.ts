@@ -95,7 +95,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
     this.cubicacionFacade.tipoCubicacion4cub();
     this.cubicacionFacade.actividad4cub();
-    this.cubicacionFacade.tipoServicioEspecialidad();
   }
 
   onInitSetInitialData(): void {
@@ -120,8 +119,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       );
     this.tipoCubicacion4Cub$ = this.cubicacionFacade.tipoCubicacion4cub$();
     this.actividad4Cub$ = this.cubicacionFacade.actividad4cub$();
-    this.tipoServicioEspecialidad4Cub$ =
-      this.cubicacionFacade.tipoServicioEspecialidad$();
+    this.tipoServicioEspecialidad4Cub$ = this.cubicacionFacade
+      .tipoServicioEspecialidad$()
+      .pipe(
+        tap(tiposervicio =>
+          this.checkAndEnable('tipo_servicio_id', tiposervicio)
+        )
+      );
     this.servicios4Cub$ = this.cubicacionFacade.servicios4Cub$().pipe(
       map(servicios => {
         this.servicios = servicios;
@@ -179,14 +183,14 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         .get('cmarcoproveedor_id')
         .valueChanges.subscribe(cmarcoproveedor_id => {
           if (cmarcoproveedor_id !== null && cmarcoproveedor_id !== undefined) {
-            this.formCub.get('tipo_servicio_id').enable();
-            this.formCub.get('tipo_servicio_id').reset();
+            this.formCub.get('actividad_id').enable();
             this.formCub.get('actividad_id').reset();
+            this.formCub.get('tipo_servicio_id').reset();
             this.formCub.get('servicio_cod').reset();
             this.formCub.get('unidad_obra_cod').reset();
-            this.formCub.get('actividad_id').disable({ emitEvent: false });
+            this.formCub.get('tipo_servicio_id').disable({ emitEvent: false });
           } else {
-            this.checkAndEnable('tipo_servicio_id', []);
+            this.checkAndEnable('actividad_id', []);
           }
         })
     );
@@ -221,7 +225,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           servicio_cod !== undefined &&
           actividad_id !== null
         ) {
-          this.formCub.get('actividad_id').enable();
           this.formCub.get('unidad_obra_cod').reset();
           const request: RequestGetUnidadObra4Cub = {
             servicio_cod,
@@ -237,19 +240,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.formCub.get('actividad_id').valueChanges.subscribe(actividad_id => {
-        const servicio_cod = this.formCub.get('servicio_cod').value;
-        if (
-          actividad_id !== null &&
-          actividad_id !== undefined &&
-          servicio_cod != null
-        ) {
-          // this.formCub.get('cmarcoproveedor_id').reset();
-          const request: RequestGetUnidadObra4Cub = {
-            servicio_cod,
-            actividad_id: +actividad_id,
-          };
-          // console.log(request);
-          this.cubicacionFacade.unidadObras4Cub(request);
+        // const servicio_cod = this.formCub.get('servicio_cod').value;
+        if (actividad_id !== null && actividad_id !== undefined) {
+          this.cubicacionFacade.tipoServicioEspecialidad(+actividad_id);
+          // this.cubicacionFacade.unidadObras4Cub(request);
         } else {
           // this.checkAndEnable('cmarcoproveedor_id', []);
         }
