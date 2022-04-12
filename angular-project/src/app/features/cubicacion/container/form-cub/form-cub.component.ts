@@ -6,7 +6,13 @@ import {
   ChangeDetectorRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   Actividad4Cub,
@@ -67,7 +73,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     private cubicacionFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private router: Router,
-    private formcubService: FormCubService
+    private formcubService: FormCubService,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -255,6 +262,59 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    this.subscription.add(
+      this.carrito$.subscribe(carrito => {
+        carrito.forEach(servicio => {
+          console.log(
+            'Table Actual',
+            (this.formCub.get('table') as FormArray).value
+          );
+          // const existe = carrito.find(servicio => {
+          //   const buscando = (
+          //     (this.formCub.get('table') as FormArray).value as Array<{
+          //       servicio_cod: any;
+          //     }>
+          //   ).find(
+          //     tableServicio =>
+          //       tableServicio.servicio_cod === servicio.servicio_codigo
+          //   );
+          //   console.log('Encontrado en carrito', buscando);
+          //   return buscando === undefined ? false : true;
+          // });
+          // console.log(servicio.servicio_codigo);
+          // console.log(existe);
+          console.log('Servicio a agregar', servicio.servicio_codigo);
+
+          const existe = (
+            (this.formCub.get('table') as FormArray).value as Array<{
+              servicio_cod: any;
+            }>
+          ).find(
+            tableServicio =>
+              tableServicio.servicio_cod === servicio.servicio_codigo
+          );
+          console.log('Existe?', existe);
+          if (existe === undefined) {
+            const group = new FormGroup({
+              servicio_cod: new FormControl(servicio.servicio_codigo, [
+                Validators.required,
+              ]),
+              cantidad_servicio: new FormControl(1, [
+                Validators.required,
+                Validators.min(1),
+              ]),
+              precio: new FormControl(
+                +servicio.precio_agencia * +servicio.precio_proveedor
+              ),
+            });
+            // console.log(group);
+            (this.formCub.get('table') as FormArray).push(group);
+            this.detector.detectChanges();
+          }
+        });
+      })
+    );
   }
 
   checkAndEnable(key: string, array: any[]): void {
@@ -265,9 +325,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  // getRowSpan(unidades_obra:DatosUnidadObra4Cub[]){
-
-  // }
+  formCntl(index: number, control: string): AbstractControl {
+    const controlName = 'table';
+    return (this.formCub.controls[controlName] as FormArray).controls[
+      index
+    ].get(control);
+  }
 
   agregar(): void {
     const servicio_id: number = this.servicios.find(

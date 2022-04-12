@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormArray, FormControl, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
@@ -45,6 +45,7 @@ export class FormCubService {
       unidad_obra_cod: new FormControl(null, [Validators.required]),
       cantidad_servicio: new FormControl(1, [Validators.required]),
       cantidad_unidad_obra: new FormControl(1, [Validators.required]),
+      table: new FormArray([]),
     };
   }
 

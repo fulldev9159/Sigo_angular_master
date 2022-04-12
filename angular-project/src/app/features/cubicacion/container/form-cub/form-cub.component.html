@@ -18,268 +18,272 @@
       <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
     </div>
   </div>
-
-  <app-card [classCardHeader]="'bg-secondary text-white'">
-    <ng-container card-body>
-      <div class="row justify-content-center" style="margin-bottom: 4rem">
-        <div class="col-12">
-          <div class="row" style="border: 1px solid #c6c6c6;padding: 3px;padding-bottom: 14px;">
-            <div class="col-md-6 col-sm-12">
-              <div id="nomnbreCub">
-                <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-              <div id="tipoCub">
-                <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione un tipo</option>
-                    <ng-container *ngFor="let tipoCub of tipoCubicacion4Cub$|async">
-                      <option [value]="tipoCub.id">
-                        {{ tipoCub.descripcion }}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-5 col-sm-12" style="border: 1px solid #c6c6c6;margin-top: 11px; padding: 14px;">
-              <div id="contratosUser">
-                <app-select [control]="formControls.contrato" label="* Contrato">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione un contrato</option>
-                    <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
-                      <option [value]="contrato.contrato_id">
-                        {{ contrato.model_contrato_id.nombre }}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
-              </div>
-
-              <br>
-              <div id="agencias">
-                <app-select [control]="formControls.agencia_id" label="* Agencia">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione una agencia</option>
-                    <ng-container *ngFor="let agencia of agencias4Cub$|async">
-                      <option [value]="agencia.id">
-                        {{ agencia.nombre }}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
-              </div>
-
-              <br>
-              <div id="proveedores">
-                <app-select [control]="formControls.cmarcoproveedor_id" label="* Proveedor">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione un Proveedor</option>
-                    <ng-container *ngFor="let prov of proveedores4Cub$|async">
-                      <option [value]="prov.cmarco_has_proveedor_id">
-                        {{prov.codigo_acuerdo}} - {{ prov.nombre }}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select>
-              </div>
-            </div>
-            <div class="col-md-7 col-sm-12">
-              <br>
-              <div id="direccion">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6" id="direcciondesde">
-                    <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
-                  </div>
-                  <div class="col-md-6 col-sm-6" id="alturadesde">
-                    <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 col-sm-6" id="direccionhasta">
-                    <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
-                  </div>
-                  <div class="col-md-6 col-sm-6" id="alturahasta">
-                    <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
-                  </div>
+  <form [formGroup]="formCub">
+    <app-card [classCardHeader]="'bg-secondary text-white'">
+      <ng-container card-body>
+        <div class="row justify-content-center" style="margin-bottom: 4rem">
+          <div class="col-12">
+            <div class="row" style="border: 1px solid #c6c6c6;padding: 3px;padding-bottom: 14px;">
+              <div class="col-md-6 col-sm-12">
+                <div id="nomnbreCub">
+                  <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
                 </div>
               </div>
-
-              <div id="descripcion">
-                <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
-                </app-textarea>
+              <div class="col-md-6 col-sm-12">
+                <div id="tipoCub">
+                  <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione un tipo</option>
+                      <ng-container *ngFor="let tipoCub of tipoCubicacion4Cub$|async">
+                        <option [value]="tipoCub.id">
+                          {{ tipoCub.descripcion }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="filtroservicios">
             <div class="row">
-              <div class="col-md-12 col-sm-12">
-                <div id="actividad">
-                  <app-select [control]="formControls.actividad_id" label="* Actividad">
+              <div class="col-md-5 col-sm-12" style="border: 1px solid #c6c6c6;margin-top: 11px; padding: 14px;">
+                <div id="contratosUser">
+                  <app-select [control]="formControls.contrato" label="* Contrato">
                     <ng-container options>
-                      <option value="null" selected disabled>Seleccione una Actividad</option>
-                      <ng-container *ngFor="let item of actividad4Cub$|async">
-                        <option [value]="item.id">
-                          {{item.descripcion}}
+                      <option value="null" selected disabled>Seleccione un contrato</option>
+                      <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
+                        <option [value]="contrato.contrato_id">
+                          {{ contrato.model_contrato_id.nombre }}
                         </option>
                       </ng-container>
                     </ng-container>
                   </app-select>
                 </div>
+
                 <br>
-                <div id="tiposervicio">
-                  <app-select [control]="formControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
+                <div id="agencias">
+                  <app-select [control]="formControls.agencia_id" label="* Agencia">
                     <ng-container options>
-                      <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
-                      <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
-                        <option [value]="item.id">
-                          {{item.descripcion}}
+                      <option value="null" selected disabled>Seleccione una agencia</option>
+                      <ng-container *ngFor="let agencia of agencias4Cub$|async">
+                        <option [value]="agencia.id">
+                          {{ agencia.nombre }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+
+                <br>
+                <div id="proveedores">
+                  <app-select [control]="formControls.cmarcoproveedor_id" label="* Proveedor">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione un Proveedor</option>
+                      <ng-container *ngFor="let prov of proveedores4Cub$|async">
+                        <option [value]="prov.cmarco_has_proveedor_id">
+                          {{prov.codigo_acuerdo}} - {{ prov.nombre }}
                         </option>
                       </ng-container>
                     </ng-container>
                   </app-select>
                 </div>
               </div>
-              <!-- <div class="col-md-9 col-sm-12">
-               
-              </div> -->
-              <!-- <div class="col-md-1 col-sm-12">
-                <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
-              </div> -->
+              <div class="col-md-7 col-sm-12">
+                <br>
+                <div id="direccion">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6" id="direcciondesde">
+                      <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
+                    </div>
+                    <div class="col-md-6 col-sm-6" id="alturadesde">
+                      <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-6" id="direccionhasta">
+                      <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
+                    </div>
+                    <div class="col-md-6 col-sm-6" id="alturahasta">
+                      <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="descripcion">
+                  <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
+                  </app-textarea>
+                </div>
+              </div>
             </div>
+
+            <div class="filtroservicios">
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <div id="actividad">
+                    <app-select [control]="formControls.actividad_id" label="* Actividad">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione una Actividad</option>
+                        <ng-container *ngFor="let item of actividad4Cub$|async">
+                          <option [value]="item.id">
+                            {{item.descripcion}}
+                          </option>
+                        </ng-container>
+                      </ng-container>
+                    </app-select>
+                  </div>
+                  <br>
+                  <div id="tiposervicio">
+                    <app-select [control]="formControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
+                        <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
+                          <option [value]="item.id">
+                            {{item.descripcion}}
+                          </option>
+                        </ng-container>
+                      </ng-container>
+                    </app-select>
+                  </div>
+                </div>
+                <!-- <div class="col-md-9 col-sm-12">
+                 
+                </div> -->
+                <!-- <div class="col-md-1 col-sm-12">
+                  <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
+                </div> -->
+              </div>
+
+              <br>
+              <div class="row">
+                <!-- <div class="col-md-3 col-sm-12">
+                  
+                </div> -->
+                <div class="col-md-12 col-sm-12">
+                  <div id="servicios">
+                    <app-select [control]="formControls.servicio_cod" label="* Código - Servicio">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione un Servicio/Especialidad</option>
+                        <ng-container *ngFor="let item of servicios4Cub$|async">
+                          <option [value]="item.codigo">
+                            {{item.codigo}} - {{item.descripcion}}
+                          </option>
+                        </ng-container>
+                      </ng-container>
+                    </app-select>
+                  </div>
+                  <br>
+                  <div id="unidad-obra">
+                    <app-select [control]="formControls.unidad_obra_cod" label="* Código - Unidad de Obra">
+                      <ng-container options>
+                        <option value="null" selected disabled>Seleccione una unidad de obra</option>
+                        <ng-container *ngFor="let item of unidadObra4Cub$|async">
+                          <option [value]="item.model_unidad_obra_cod.codigo">
+                            {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
+                          </option>
+                        </ng-container>
+                      </ng-container>
+                    </app-select>
+                  </div>
+                </div>
+                <!-- <div class="col-md-1 col-sm-12">
+                  <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
+                </div> -->
+              </div>
+
+              <br>
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <button (click)="agregar()">Agregar</button>
+                  <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;">Ya ha agregado este servico/Unidad Obra </p>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+
 
             <br>
-            <div class="row">
-              <!-- <div class="col-md-3 col-sm-12">
-                
-              </div> -->
-              <div class="col-md-12 col-sm-12">
-                <div id="servicios">
-                  <app-select [control]="formControls.servicio_cod" label="* Código - Servicio">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione un Servicio/Especialidad</option>
-                      <ng-container *ngFor="let item of servicios4Cub$|async">
-                        <option [value]="item.codigo">
-                          {{item.codigo}} - {{item.descripcion}}
-                        </option>
-                      </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
-                <br>
-                <div id="unidad-obra">
-                  <app-select [control]="formControls.unidad_obra_cod" label="* Código - Unidad de Obra">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione una unidad de obra</option>
-                      <ng-container *ngFor="let item of unidadObra4Cub$|async">
-                        <option [value]="item.model_unidad_obra_cod.codigo">
-                          {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
-                        </option>
-                      </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
-              </div>
-              <!-- <div class="col-md-1 col-sm-12">
-                <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
-              </div> -->
-            </div>
-
-            <br>
-            <div class="row">
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <button (click)="agregar()">Agregar</button>
-                <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;">Ya ha agregado este servico/Unidad Obra </p>
-              </div>
-              <div class="col-md-4"></div>
-            </div>
-          </div>
-
-
-          <br>
-          <div class="table-carrito">
-            <table style="width:100%">
-              <thead>
-                <tr>
-                  <th colspan="7">Servicios</th>
-                  <th colspan="5">Unidad Obra</th>
-                </tr>
-                <tr>
-                  <th>Cod</th>
-                  <th>Descripción</th>
-                  <th>Esp</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Factor</th>
-                  <th>Total Servicio</th>
-
-                  <th>Cód</th>
-                  <th>Descripción</th>
-                  <th>Cantidad</th>
-                  <th>Tipo_moneda</th>
-                  <th>Total UO</th>
-                </tr>
-
-              </thead>
-              <tbody>
-                <ng-container *ngFor="let item of carrito$|async">
+            <div class="table-carrito">
+              <table style="width:100%">
+                <thead>
                   <tr>
-                    <ng-container *ngIf="item.unidades_obras.length===1">
-                      <td class="label-table">{{item.servicio_codigo}}</td>
-                      <td class="data-primaria">{{item.servicio_nombre}}</td>
-                      <td class="data-secundaria">Me falta obtenerlo</td>
-                      <td>1</td>
-                      <td class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                      <td class="data-secundaria">{{item.servicio_baremos}}</td>
-                      <td class="data-primaria">{{item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-
-                      <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
-                      <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
-                      <td>0</td>
-                      <td class="data-secundaria">????confirmar donde lo obtengo</td>
-                      <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                    </ng-container>
-
-                    <ng-container *ngIf="item.unidades_obras.length>1">
-                      <td [attr.rowspan]="+item.unidades_obras.length+1" class="label-table">{{item.servicio_codigo}}</td>
-                      <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-primaria">{{item.servicio_nombre}}</td>
-                      <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">Me falta obtenerlo</td>
-                      <td [attr.rowspan]="+item.unidades_obras.length+1">1</td>
-                      <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL'}}???</td>
-                      <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">{{item.servicio_baremos}}</td>
-                      <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-primaria">{{item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-
-                      <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
-                      <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
-                      <td>0</td>
-                      <td class="data-secundaria">????confirmar donde lo obtengo</td>
-                      <td class="data-primaria">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                    </ng-container>
+                    <th colspan="7">Servicios</th>
+                    <th colspan="5">Unidad Obra</th>
                   </tr>
-                  <ng-container *ngIf="item.unidades_obras.length>1">
-                    <tr *ngFor="let uo of item.unidades_obras| slice:1">
-                      <td class="label-table">{{uo.uo_codigo}}</td>
-                      <td class="data-primaria">{{uo.uo_nombre}}</td>
-                      <td>0</td>
-                      <td class="data-secundaria">????confirmar donde lo obtengo</td>
-                      <td class="data-primaria">{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                  <tr>
+                    <th>Cod</th>
+                    <th>Descripción</th>
+                    <th>Esp</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Factor</th>
+                    <th>Total Servicio</th>
+
+                    <th>Cód</th>
+                    <th>Descripción</th>
+                    <th>Cantidad</th>
+                    <th>Tipo_moneda</th>
+                    <th>Total UO</th>
+                  </tr>
+
+                </thead>
+                <tbody formArrayName="table">
+                  <ng-container *ngFor="let item of carrito$|async;let i = index" [formGroupName]="i">
+                    <tr>
+                      <ng-container *ngIf="item.unidades_obras.length===1">
+                        <td class="label-table">{{item.servicio_codigo}}</td>
+                        <td class="data-primaria">{{item.servicio_nombre}}</td>
+                        <td class="data-secundaria">Me falta obtenerlo</td>
+                        <td><input appInputColor [formControl]="formCntl(i,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
+                        <td class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                        <td class="data-secundaria">{{item.servicio_baremos}}</td>
+                        <td class="data-primaria">{{item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+
+                        <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+                        <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
+                        <td>1</td>
+                        <td class="data-secundaria">????confirmar donde lo obtengo</td>
+                        <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                      </ng-container>
+
+                      <ng-container *ngIf="item.unidades_obras.length>1">
+                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="label-table">{{item.servicio_codigo}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-primaria">{{item.servicio_nombre}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">Me falta obtenerlo</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length+1"><input appInputColor [formControl]="formCntl(i,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
+                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">{{item.servicio_baremos}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-primaria">{{item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+
+                        <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+                        <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
+                        <td>0</td>
+                        <td class="data-secundaria">????confirmar donde lo obtengo</td>
+                        <td class="data-primaria">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                      </ng-container>
                     </tr>
+                    <ng-container *ngIf="item.unidades_obras.length>1">
+                      <tr *ngFor="let uo of item.unidades_obras| slice:1">
+                        <td class="label-table">{{uo.uo_codigo}}</td>
+                        <td class="data-primaria">{{uo.uo_nombre}}</td>
+                        <td>0</td>
+                        <td class="data-secundaria">????confirmar donde lo obtengo</td>
+                        <td class="data-primaria">{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                      </tr>
+                    </ng-container>
                   </ng-container>
-                </ng-container>
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
+            <br>
+            <br>
+            <!-- {{carrito$|async|json}} -->
+
+            {{formCub.value|json}}
           </div>
-          <br>
-          <br>
-          {{carrito$|async|json}}
         </div>
-      </div>
-    </ng-container>
-  </app-card>
+      </ng-container>
+    </app-card>
+  </form>
+
 </div>

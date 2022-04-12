@@ -128,7 +128,7 @@ export const reducerCubicacion = createReducer(
       );
       if (index >= 0) {
         const temp = copy(item_carrito);
-        console.log('INDEX', index);
+        // console.log('INDEX', index);
 
         temp.unidades_obras.push(...state.carrito[index].unidades_obras);
         const uo_repetido = state.carrito[index].unidades_obras.find(
@@ -147,12 +147,12 @@ export const reducerCubicacion = createReducer(
               servciouo_repetido_alert: false,
             };
           } else {
-            console.log(state.carrito);
+            // console.log(state.carrito);
             // const old_temp = copy(state.carrito);
             const old_servicios = state.carrito.filter(
               oldcarrito => oldcarrito.servicio_id !== item_carrito.servicio_id
             );
-            console.log('NEW', old_servicios);
+            // console.log('NEW', old_servicios);
             return {
               ...state,
               carrito: [...old_servicios, temp],
