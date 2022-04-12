@@ -8,6 +8,13 @@ Resource    ./resources/login_resource.robot
 Resource    ./resources/perfil_resource.robot
 
 *** Test Cases ***
+# SQL
+# agregar un servicio
+# insert into proveedor_has_servicio(agencia_id,servicio_id,precio,tipo_moneda_id,numero_producto,cmarco_has_proveedor_id,estado) values (25,21,15000,2,"ZWC - Inventado",1,1);
+# agregar UO
+#mysql> insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,"D010","T383","DIBUJ");
+#mysql> insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,"D010","T382","DIBUJ");
+#mysql> insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,"D010","T376","DIBUJ");
 
 Crear cubicación
    # Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación

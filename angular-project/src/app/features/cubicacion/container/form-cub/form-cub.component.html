@@ -202,6 +202,7 @@
           </div>
 
 
+          <br>
           <div class="table-carrito">
             <table border="1">
               <tr>
@@ -222,6 +223,67 @@
                 <th>Cantidad</th>
                 <th>Tipo_moneda</th>
                 <th>Total UO</th>
+              </tr>
+
+              <ng-container *ngFor="let item of carrito$|async">
+                <tr>
+                  <ng-container *ngIf="item.unidades_obras.length===1">
+                    <td>{{item.servicio_codigo}}</td>
+                    <td>{{item.servicio_nombre}}</td>
+                    <td>Me falta obtenerlo</td>
+                    <td>1</td>
+                    <td>{{item.precio_proveedor}}???</td>
+                    <td>{{item.servicio_baremos}}</td>
+                    <td>{{item.servicio_precio_final_clp}}</td>
+
+                    <td>{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td>{{item.unidades_obras[0].uo_nombre}}</td>
+                    <td>0</td>
+                    <td>????confirmar donde lo obtengo</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp}}</td>
+                  </ng-container>
+
+                  <ng-container *ngIf="item.unidades_obras.length>1">
+                    <td [attr.rowspan]="+item.unidades_obras.length+1">{{item.servicio_codigo}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length+1">{{item.servicio_nombre}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length+1">Me falta obtenerlo</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length+1">1</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length+1">{{item.precio_proveedor}}???</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length+1">{{item.servicio_baremos}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length+1">{{item.servicio_precio_final_clp}}</td>
+
+                    <td>{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td>{{item.unidades_obras[0].uo_nombre}}</td>
+                    <td>0</td>
+                    <td>????confirmar donde lo obtengo</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp}}</td>
+                  </ng-container>
+                </tr>
+                <ng-container *ngIf="item.unidades_obras.length>1">
+                  <tr *ngFor="let uo of item.unidades_obras| slice:1">
+                    <td>{{uo.uo_codigo}}</td>
+                    <td>{{uo.uo_nombre}}</td>
+                    <td>0</td>
+                    <td>????confirmar donde lo obtengo</td>
+                    <td>{{uo.uo_precio_total_clp}}</td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+
+
+              <!-- <tr>
+                <td rowspan="1">Serv1231</td>
+                <td rowspan="1">Ssdfadasdasdasdas</td>
+                <td rowspan="1">Inst</td>
+                <td rowspan="1">10</td>
+                <td rowspan="1">222000</td>
+                <td rowspan="1">1</td>
+                <td rowspan="1">20000</td>
+                <td>0</td>
+                <td>SIN UO</td>
+                <td>0</td>
+                <td>CLP</td>
+                <td>0</td>
               </tr>
 
               <tr>
@@ -251,25 +313,12 @@
                 <td>0</td>
                 <td>CLP</td>
                 <td>0</td>
-              </tr>
+              </tr> -->
 
-              <tr>
-                <td rowspan="1">Serv1231</td>
-                <td rowspan="1">Ssdfadasdasdasdas</td>
-                <td rowspan="1">Inst</td>
-                <td rowspan="1">10</td>
-                <td rowspan="1">222000</td>
-                <td rowspan="1">1</td>
-                <td rowspan="1">20000</td>
-                <td>0</td>
-                <td>SIN UO</td>
-                <td>0</td>
-                <td>CLP</td>
-                <td>0</td>
-              </tr>
             </table>
           </div>
-
+          <br>
+          <br>
           {{carrito$|async|json}}
         </div>
       </div>

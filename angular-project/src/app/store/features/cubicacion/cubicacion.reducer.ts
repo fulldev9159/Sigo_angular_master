@@ -22,6 +22,7 @@ import {
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
 } from '@data';
+import { carrito } from './cubicacion.selectors';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
@@ -127,9 +128,9 @@ export const reducerCubicacion = createReducer(
       );
       if (index >= 0) {
         const temp = copy(item_carrito);
-        console.log(temp.unidades_obras);
+        console.log('INDEX', index);
+
         temp.unidades_obras.push(...state.carrito[index].unidades_obras);
-        console.log(temp.unidades_obras);
         const uo_repetido = state.carrito[index].unidades_obras.find(
           uo => uo.uo_codigo === item_carrito.unidades_obras[0].uo_codigo
         );
@@ -146,7 +147,12 @@ export const reducerCubicacion = createReducer(
               servciouo_repetido_alert: false,
             };
           } else {
-            const old_servicios = state.carrito.splice(index, 1);
+            console.log(state.carrito);
+            // const old_temp = copy(state.carrito);
+            const old_servicios = state.carrito.filter(
+              oldcarrito => oldcarrito.servicio_id !== item_carrito.servicio_id
+            );
+            console.log('NEW', old_servicios);
             return {
               ...state,
               carrito: [...old_servicios, temp],

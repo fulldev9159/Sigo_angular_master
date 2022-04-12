@@ -122,7 +122,7 @@ export interface DatosServicio4Cub {
   servicio_id: number;
   servicio_nombre: string;
   servicio_precio_final: number;
-  servicio_precio_final_clp: null;
+  servicio_precio_final_clp: number;
   servicio_tipo: number;
   servicio_unidad_id: number;
   tipo_moneda_id: number;
@@ -135,23 +135,32 @@ export interface RequestGetDatosUnidadObra4Cub {
 }
 
 export interface RespDataGetDatosUnidadObra4Cub {
-  items: DatosUnidadObra4Cub[];
-}
-
-export interface DatosUnidadObra4Cub {
-  material_cantidad: number;
-  material_codigo: string;
-  material_nombre: string;
-  material_origen: string;
-  material_tipo_moneda_id: number;
-  material_unidad_id: number;
-  material_valor: number;
-  precio_material: number;
-  precio_material_clp: null;
+  // items: DatosUnidadObra4Cub[];
+  material_arr: Materiales4Cub[];
   uo_codigo: string;
   uo_nombre: string;
   uo_precio_total_clp: number;
   uo_unidad_id: number;
+}
+
+export interface DatosUnidadObra4Cub {
+  material_arr: Materiales4Cub[];
+  uo_codigo: string;
+  uo_nombre: string;
+  uo_precio_total_clp: number;
+  uo_unidad_id: number;
+}
+
+export interface Materiales4Cub {
+  material_cantidad: number;
+  material_codigo: string;
+  material_nombre: string;
+  material_origen: string;
+  material_precio: number;
+  material_precio_clp: number;
+  material_tipo_moneda_id: number;
+  material_unidad_id: number;
+  material_valor: number;
 }
 
 export interface Carrito {
@@ -162,7 +171,7 @@ export interface Carrito {
   servicio_id: number;
   servicio_nombre: string;
   servicio_precio_final: number;
-  servicio_precio_final_clp: null;
+  servicio_precio_final_clp: number;
   servicio_tipo: number;
   servicio_unidad_id: number;
   tipo_moneda_id: number;

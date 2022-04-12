@@ -121,7 +121,7 @@ export class CubicacionService {
               map(datosUO => {
                 const uos: DatosUnidadObra4Cub[] = [];
                 uos.push({
-                  ...datosUO.data.items[0],
+                  ...datosUO.data,
                 });
                 const carrito: Carrito = {
                   ...datosServicio.data.items[0],

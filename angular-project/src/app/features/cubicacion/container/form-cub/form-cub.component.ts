@@ -4,6 +4,7 @@ import {
   OnDestroy,
   ViewChild,
   ChangeDetectorRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,6 +13,7 @@ import {
   Agencias4Cub,
   Carrito,
   ContratosUser,
+  DatosUnidadObra4Cub,
   Proveedores4Cub,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
@@ -32,6 +34,7 @@ import { FormCubService } from './form-cub.service';
   selector: 'app-form-cub',
   templateUrl: './form-cub.component.html',
   styleUrls: ['./form-cub.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class FormCubContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
@@ -242,6 +245,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       this.formCub.get('actividad_id').valueChanges.subscribe(actividad_id => {
         // const servicio_cod = this.formCub.get('servicio_cod').value;
         if (actividad_id !== null && actividad_id !== undefined) {
+          this.formCub.get('tipo_servicio_id').reset();
+          this.formCub.get('servicio_cod').reset();
+          this.formCub.get('unidad_obra_cod').reset();
           this.cubicacionFacade.tipoServicioEspecialidad(+actividad_id);
           // this.cubicacionFacade.unidadObras4Cub(request);
         } else {
@@ -259,6 +265,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     }
   }
 
+  // getRowSpan(unidades_obra:DatosUnidadObra4Cub[]){
+
+  // }
+
   agregar(): void {
     const servicio_id: number = this.servicios.find(
       servicio => servicio.codigo === this.formCub.get('servicio_cod').value
@@ -270,18 +280,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       tipo_servicio_id: +this.formCub.get('tipo_servicio_id').value,
     };
 
-    // console.log('Get Datos Servicio', request_servicio);
-
     const request_uo: RequestGetDatosUnidadObra4Cub = {
       cantidad: +this.formCub.get('cantidad_unidad_obra').value,
       uo_codigo: this.formCub.get('unidad_obra_cod').value,
     };
 
     this.cubicacionFacade.datosServicio4Cub(request_servicio, request_uo);
-
-    // console.log('Get Datos Unidad Obra', request_uo);
-
-    // this.cubicacionFacade.datosUnidadObra4Cub(request_uo);
   }
 
   ngOnDestroy(): void {
