@@ -16,6 +16,8 @@ Resource    ./resources/perfil_resource.robot
 #mysql> insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,"D010","T382","DIBUJ");
 #mysql> insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,"D010","T376","DIBUJ");
 
+# precio_agencia * precio_proveedor = Precio
+# precio_agencia * precio_proveedor * factor = Total
 Crear cubicación
    # Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación
    # Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
