@@ -237,7 +237,7 @@
                         <td><input appInputColor [formControl]="formCntl(i,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                         <td class="data-secundaria">{{item.servicio_baremos}}</td>
-                        <td class="data-primaria">{{item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(i,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
@@ -253,7 +253,7 @@
                         <td [attr.rowspan]="+item.unidades_obras.length+1"><input appInputColor [formControl]="formCntl(i,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
                         <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">{{item.servicio_baremos}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-primaria">{{item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(i,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>

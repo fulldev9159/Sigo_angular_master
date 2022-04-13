@@ -270,20 +270,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             'Table Actual',
             (this.formCub.get('table') as FormArray).value
           );
-          // const existe = carrito.find(servicio => {
-          //   const buscando = (
-          //     (this.formCub.get('table') as FormArray).value as Array<{
-          //       servicio_cod: any;
-          //     }>
-          //   ).find(
-          //     tableServicio =>
-          //       tableServicio.servicio_cod === servicio.servicio_codigo
-          //   );
-          //   console.log('Encontrado en carrito', buscando);
-          //   return buscando === undefined ? false : true;
-          // });
-          // console.log(servicio.servicio_codigo);
-          // console.log(existe);
           console.log('Servicio a agregar', servicio.servicio_codigo);
 
           const existe = (
@@ -304,9 +290,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 Validators.required,
                 Validators.min(1),
               ]),
-              precio: new FormControl(
-                +servicio.precio_agencia * +servicio.precio_proveedor
-              ),
+              // precio: new FormControl(
+              //   +servicio.precio_agencia * +servicio.precio_proveedor
+              // ),
             });
             // console.log(group);
             (this.formCub.get('table') as FormArray).push(group);
