@@ -241,7 +241,7 @@
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
-                        <td>1</td>
+                        <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                       </ng-container>
@@ -257,16 +257,16 @@
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
-                        <td>0</td>
+                        <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                       </ng-container>
                     </tr>
                     <ng-container *ngIf="item.unidades_obras.length>1">
-                      <tr *ngFor="let uo of item.unidades_obras| slice:1">
+                      <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
                         <td class="label-table">{{uo.uo_codigo}}</td>
                         <td class="data-primaria">{{uo.uo_nombre}}</td>
-                        <td>0</td>
+                        <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',uo.uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td class="data-primaria">{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                       </tr>
@@ -279,7 +279,7 @@
             <br>
             <!-- {{carrito$|async|json}} -->
 
-            {{formCub.value|json}}
+            {{formCub.get("table").value|json}}
           </div>
         </div>
       </ng-container>
