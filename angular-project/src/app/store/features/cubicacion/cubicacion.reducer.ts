@@ -175,14 +175,14 @@ export const reducerCubicacion = createReducer(
       console.log(
         'Eliminar el indice',
         ...state.carrito.filter(
-          servicios => servicios.servicio_codigo != servicio_cod
+          servicios => servicios.servicio_codigo !== servicio_cod
         )
       );
       return {
         ...state,
         carrito: [
           ...state.carrito.filter(
-            servicios => servicios.servicio_codigo != servicio_cod
+            servicios => servicios.servicio_codigo !== servicio_cod
           ),
         ],
       };

@@ -594,7 +594,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.detector.detectChanges();
   }
 
-  deleteServiceCarrito(servicio_codigo: string) {
+  deleteServiceCarrito(servicio_codigo: string): void {
     console.log('delete', servicio_codigo);
     this.cubicacionFacade.deleteServiceCarrito4CreateCub(servicio_codigo);
     (this.formCub.get('table') as FormArray).removeAt(
@@ -603,6 +603,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       ).findIndex(serviceTable => serviceTable.servicio_cod === servicio_codigo)
     );
   }
+
+  deleteUOCarrito(): void {}
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
