@@ -229,8 +229,8 @@
                 </thead>
                 <tbody formArrayName="table">
                   <ng-container *ngFor="let item of carrito$|async;let i = index" [formGroupName]="i">
-                    <tr>
-                      <ng-container *ngIf="item.unidades_obras.length===1">
+                    <ng-container *ngIf="item.unidades_obras.length===1">
+                      <tr>
                         <td class="label-table">{{item.servicio_codigo}}</td>
                         <td class="data-primaria">{{item.servicio_nombre}}</td>
                         <td class="data-secundaria">Me falta obtenerlo</td>
@@ -244,24 +244,28 @@
                         <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                      </ng-container>
+                      </tr>
+                    </ng-container>
 
-                      <ng-container *ngIf="item.unidades_obras.length>1">
-                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="label-table">{{item.servicio_codigo}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-primaria">{{item.servicio_nombre}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">Me falta obtenerlo</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length+1"><input appInputColor [formControl]="formCntl(i,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
-                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-secundaria">{{item.servicio_baremos}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length+1" class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(i,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+
+                    <ng-container *ngIf="item.unidades_obras.length>1">
+                      <tr>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{item.servicio_nombre}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">Me falta obtenerlo</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length"><input appInputColor [formControl]="formCntl(i,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(i,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
                         <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                      </ng-container>
-                    </tr>
+                      </tr>
+                    </ng-container>
+
                     <ng-container *ngIf="item.unidades_obras.length>1">
                       <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
                         <td class="label-table">{{uo.uo_codigo}}</td>

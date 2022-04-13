@@ -336,12 +336,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
             if (len > 0) {
               servicio.unidades_obras.forEach(uo => {
-                const existe = uo_form_actual.find(
+                const existeUO = uo_form_actual.find(
                   uoTable => uoTable.uo_codigo === uo.uo_codigo
                 );
 
                 // console.log('EXISTE UO', existe);
-                if (existe === undefined) {
+                if (existeUO === undefined) {
                   const uo_group = new FormGroup({
                     uo_codigo: new FormControl(uo.uo_codigo, [
                       Validators.required,
@@ -434,12 +434,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
             if (len > 0) {
               servicio.unidades_obras.forEach(uo => {
-                const existe = uo_form_actual.find(
+                const existe_UOD = uo_form_actual.find(
                   uoTable => uoTable.uo_codigo === uo.uo_codigo
                 );
 
                 // console.log('EXISTE UO', existe);
-                if (existe === undefined) {
+                if (existe_UOD === undefined) {
                   const uo_group = new FormGroup({
                     uo_codigo: new FormControl(uo.uo_codigo, [
                       Validators.required,
