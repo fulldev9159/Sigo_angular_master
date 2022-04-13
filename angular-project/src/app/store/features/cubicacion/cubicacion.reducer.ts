@@ -23,6 +23,7 @@ import {
   UnidadObra4Cub,
 } from '@data';
 import { carrito } from './cubicacion.selectors';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
@@ -172,12 +173,12 @@ export const reducerCubicacion = createReducer(
   on(
     CubicacionActions.delteServiceCarrito4CreateCub,
     (state, { servicio_cod }) => {
-      console.log(
-        'Eliminar el indice',
-        ...state.carrito.filter(
-          servicios => servicios.servicio_codigo !== servicio_cod
-        )
-      );
+      // console.log(
+      //   'Eliminar el indice',
+      //   ...state.carrito.filter(
+      //     servicios => servicios.servicio_codigo !== servicio_cod
+      //   )
+      // );
       return {
         ...state,
         carrito: [
@@ -185,6 +186,35 @@ export const reducerCubicacion = createReducer(
             servicios => servicios.servicio_codigo !== servicio_cod
           ),
         ],
+      };
+    }
+  ),
+  on(
+    CubicacionActions.delteUOCarrito4CreateCub,
+    (state, { servicio_cod, uo_cod }) => {
+      const index_service = state.carrito.findIndex(
+        x => x.servicio_codigo === servicio_cod
+      );
+      if (index_service >= 0) {
+        let temp = copy(state.carrito);
+        const temp_service = temp[index_service];
+        const temp_uo = temp[index_service].unidades_obras.filter(
+          uo => uo.uo_codigo !== uo_cod
+        );
+        temp_service.unidades_obras = temp_uo;
+        console.log('Temp UO', temp_uo);
+        temp = temp.filter(
+          servicios => servicios.servicio_codigo !== servicio_cod
+        );
+        console.log('tempTotal', temp);
+        return {
+          ...state,
+          carrito: [...temp, temp_service],
+        };
+      }
+
+      return {
+        ...state,
       };
     }
   ),

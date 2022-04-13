@@ -144,6 +144,13 @@ export class CubicacionFacade {
     );
   }
 
+  //  DELETE UO FROM CARRITO 4 CREATE CUB
+  public deleteUOCarrito4CreateCub(servicio_cod: string, uo_cod: string): void {
+    this.store.dispatch(
+      cubicacionActions.delteUOCarrito4CreateCub({ servicio_cod, uo_cod })
+    );
+  }
+
   // /////
 
   // CUBICACION

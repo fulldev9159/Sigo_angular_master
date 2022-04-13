@@ -604,7 +604,25 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     );
   }
 
-  deleteUOCarrito(): void {}
+  deleteUOCarrito(servicio_cod: string, uo_cod: string): void {
+    this.cubicacionFacade.deleteUOCarrito4CreateCub(servicio_cod, uo_cod);
+    const index_service = (
+      this.formCub.get('table').value as Array<{ servicio_cod: string }>
+    ).findIndex(serviceTable => serviceTable.servicio_cod === servicio_cod);
+    (
+      (
+        (this.formCub.get('table') as FormArray).at(index_service) as FormGroup
+      ).get('unidades_obra') as FormArray
+    ).removeAt(
+      (
+        (
+          (this.formCub.get('table') as FormArray).at(
+            index_service
+          ) as FormGroup
+        ).get('unidades_obra').value as Array<{ uo_codigo: string }>
+      ).findIndex(uo => uo.uo_codigo === uo_cod)
+    );
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
