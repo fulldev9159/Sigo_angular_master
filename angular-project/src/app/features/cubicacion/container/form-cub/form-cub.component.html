@@ -207,8 +207,8 @@
               <table style="width:100%">
                 <thead>
                   <tr>
-                    <th colspan="7">Servicios</th>
-                    <th colspan="5">Unidad Obra</th>
+                    <th colspan="8">Servicios</th>
+                    <th colspan="6">Unidad Obra</th>
                   </tr>
                   <tr>
                     <th>Cod</th>
@@ -218,12 +218,14 @@
                     <th>Precio</th>
                     <th>Factor</th>
                     <th>Total Servicio</th>
+                    <th></th>
 
                     <th>Cód</th>
                     <th>Descripción</th>
                     <th>Cantidad</th>
                     <th>Tipo_moneda</th>
                     <th>Total UO</th>
+                    <th></th>
                   </tr>
 
                 </thead>
@@ -234,16 +236,22 @@
                         <td class="label-table">{{item.servicio_codigo}}</td>
                         <td class="data-primaria">{{item.servicio_nombre}}</td>
                         <td class="data-secundaria">Me falta obtenerlo</td>
-                        <td><input appInputColor [formControl]="formCntl(i,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
+                        <td><input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                         <td class="data-secundaria">{{item.servicio_baremos}}</td>
-                        <td class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(i,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td>
+                          <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
                         <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td></td>
                       </tr>
                     </ng-container>
 
@@ -253,10 +261,10 @@
                         <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{item.servicio_nombre}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">Me falta obtenerlo</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length"><input appInputColor [formControl]="formCntl(i,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
+                        <td [attr.rowspan]="+item.unidades_obras.length"><input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(i,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
@@ -278,6 +286,26 @@
                   </ng-container>
                 </tbody>
               </table>
+
+              <div class="row">
+                <div class="col-9"></div>
+                <div class="col-3">
+                  <table border="1" style="width: 100%;">
+                    <tr>
+                      <td>Total Servicios</td>
+                      <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    </tr>
+                    <tr>
+                      <td>Total Unidades Obra</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Total Cubicación</td>
+                      <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
             </div>
             <br>
             <br>

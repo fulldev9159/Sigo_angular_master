@@ -46,3 +46,129 @@ td,
   letter-spacing: 0.06rem;
   background: #00b5ad;
 }
+
+.ui.basic.buttons {
+  box-shadow: none;
+  border: 1px solid rgba(34, 36, 38, .15);
+  border-radius: .28571429rem;
+}
+
+.ui.buttons {
+  display: inline-flex;
+  flex-direction: row;
+  font-size: 0;
+  vertical-align: baseline;
+  margin: 0 .25em 0 0;
+  height: 2.4rem;
+  margin: 0.3rem 0px 0.3rem 0px;
+}
+
+.ui.buttons>.ui.button:not(.basic):not(.inverted) {
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgb(34 36 38 / 15%) inset;
+}
+
+.ui.buttons .button:first-child {
+  border-left: none;
+  margin-left: 0;
+  border-top-left-radius: .28571429rem;
+  border-bottom-left-radius: .28571429rem;
+}
+
+.ui.basic.buttons .button {
+  // background: 0 0 !important;
+  color: rgba(0, 0, 0, .6) !important;
+  font-weight: 400;
+  border-radius: .28571429rem;
+  text-transform: none;
+  text-shadow: none !important;
+  box-shadow: 0 0 0 1px rgb(34 36 38 / 15%) inset;
+}
+
+.ui.icon.button,
+.ui.icon.buttons .button {
+  padding: .78571429em;
+}
+
+.ui.mini.button,
+.ui.mini.buttons .button,
+.ui.mini.buttons .or {
+  font-size: .78571429rem;
+}
+
+.ui.buttons .button {
+  flex: 1 0 auto;
+  margin: 0;
+  border-radius: 0;
+}
+
+.ui.button,
+.ui.buttons .button,
+.ui.buttons .or {
+  font-size: 1rem;
+}
+
+.ui.button {
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  vertical-align: baseline;
+  // backgsround: #e0e1e2;
+  color: rgba(0, 0, 0, .6);
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+  margin: 0 .25em 0 0;
+  padding: .78571429em 1.5em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 700;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: .28571429rem;
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgb(34 36 38 / 15%) inset;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: opacity .1s ease, background-color .1s ease, color .1s ease, box-shadow .1s ease, background .1s ease;
+  will-change: "";
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+.generic-color {
+  background: #f6f6f621;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+
+  &:hover {
+    background: #dddddd;
+  }
+
+  &:disabled {
+    background: #e9e4e4;
+    pointer-events: none;
+  }
+}
+
+// .generic-color:hover {
+//   background: #dddddd;
+// }
+
+.eliminar-color {
+  background: #fba3a3;
+  border-bottom-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-left: 0.2rem solid #be7e7e !important;
+
+  &:hover {
+    background-color: #dc8383;
+  }
+
+  &:disabled {
+    background-color: #e0c8c8;
+    pointer-events: none;
+  }
+}

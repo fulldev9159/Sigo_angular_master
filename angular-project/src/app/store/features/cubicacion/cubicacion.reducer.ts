@@ -169,6 +169,25 @@ export const reducerCubicacion = createReducer(
       }
     }
   ),
+  on(
+    CubicacionActions.delteServiceCarrito4CreateCub,
+    (state, { servicio_cod }) => {
+      console.log(
+        'Eliminar el indice',
+        ...state.carrito.filter(
+          servicios => servicios.servicio_codigo != servicio_cod
+        )
+      );
+      return {
+        ...state,
+        carrito: [
+          ...state.carrito.filter(
+            servicios => servicios.servicio_codigo != servicio_cod
+          ),
+        ],
+      };
+    }
+  ),
   //   ///
   on(CubicacionActions.getCubs, state => state),
   on(CubicacionActions.getCubsSuccess, (state, payload) => ({

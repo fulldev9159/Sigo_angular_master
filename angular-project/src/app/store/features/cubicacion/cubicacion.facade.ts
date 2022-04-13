@@ -136,6 +136,14 @@ export class CubicacionFacade {
   public servicioUORepetidoAlert$(): Observable<boolean> {
     return this.store.select(cubicacionSelectors.servicioUORepetidoAlert);
   }
+
+  //  DELETE SERVICE FROM CARRITO 4 CREATE CUB
+  public deleteServiceCarrito4CreateCub(servicio_cod: string): void {
+    this.store.dispatch(
+      cubicacionActions.delteServiceCarrito4CreateCub({ servicio_cod })
+    );
+  }
+
   // /////
 
   // CUBICACION

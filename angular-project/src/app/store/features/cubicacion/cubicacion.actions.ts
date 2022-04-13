@@ -176,6 +176,12 @@ export const getDatosUnidadObra4CubError = createAction(
   props<{ error: any }>()
 );
 
+//  DELETE SERVICE FROM CARRITO 4 CREATE CUB
+export const delteServiceCarrito4CreateCub = createAction(
+  '[Cubicacion] delteServiceCarrito4CreateCub ',
+  props<{ servicio_cod: string }>()
+);
+
 //  RESET
 export const reset = createAction('[Cubicacion] reset');
 

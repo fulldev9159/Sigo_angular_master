@@ -33,8 +33,9 @@ import {
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Observable, of, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { FormCubService } from './form-cub.service';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-form-cub',
@@ -68,6 +69,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   // EXTRAS
   usuario_id = null;
+  totalServicio = 0;
+  trashICon = faTrash;
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
@@ -108,6 +111,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   onInitSetInitialData(): void {
+    this.totalServicio = 0;
     this.formControls = this.formcubService.FormConfig();
     this.formCub = new FormGroup(this.formControls);
     this.formCub.get('agencia_id').disable({ emitEvent: false });
@@ -290,6 +294,15 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               cantidad_servicio: new FormControl(1, [
                 Validators.required,
                 Validators.min(1),
+              ]),
+              precio_proveedor: new FormControl(servicio.precio_proveedor, [
+                Validators.required,
+              ]),
+              precio_agencia: new FormControl(servicio.precio_agencia, [
+                Validators.required,
+              ]),
+              servicio_baremos: new FormControl(servicio.servicio_baremos, [
+                Validators.required,
               ]),
               unidades_obra: new FormArray([]),
             });
@@ -495,6 +508,25 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         });
       })
     );
+
+    this.subscription.add(
+      this.formCub
+        .get('table')
+        .valueChanges.pipe(withLatestFrom(this.carrito$))
+        .subscribe(([cantidadesForm, carrito]) => {
+          // console.log('table exec', cantidadesForm);
+          if (cantidadesForm.length > 0) {
+            cantidadesForm.forEach(cantidadServicio => {
+              // console.log('CantidadServicios', cantidadServicio);
+              const subtotal =
+                +cantidadServicio.precio_proveedor *
+                +cantidadServicio.precio_agencia *
+                +cantidadServicio.cantidad_servicio;
+              this.totalServicio = this.totalServicio + subtotal;
+            });
+          }
+        })
+    );
   }
 
   checkAndEnable(key: string, array: any[]): void {
@@ -505,8 +537,11 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     }
   }
 
-  formCntl(index: number, control: string): AbstractControl {
+  formCntl(service_code: string, control: string): AbstractControl {
     const controlName = 'table';
+    const index = (
+      this.formCub.get('table').value as Array<{ servicio_cod: string }>
+    ).findIndex(serviceTable => serviceTable.servicio_cod === service_code);
     return (this.formCub.controls[controlName] as FormArray).controls[
       index
     ].get(control);
@@ -525,13 +560,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     const index_uo = uo_form_actual.findIndex(
       uoTable => uoTable.uo_codigo === uo_codigo
     );
-    console.log(
-      (
-        (this.formCub.controls[controlName] as FormArray).controls[
-          index_service
-        ].get('unidades_obra') as FormArray
-      ).controls[index_uo].get(control)
-    );
+    // console.log(
+    //   (
+    //     (this.formCub.controls[controlName] as FormArray).controls[
+    //       index_service
+    //     ].get('unidades_obra') as FormArray
+    //   ).controls[index_uo].get(control)
+    // );
     return (
       (this.formCub.controls[controlName] as FormArray).controls[
         index_service
@@ -556,8 +591,18 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     };
 
     this.cubicacionFacade.datosServicio4Cub(request_servicio, request_uo);
+    this.detector.detectChanges();
   }
 
+  deleteServiceCarrito(servicio_codigo: string) {
+    console.log('delete', servicio_codigo);
+    this.cubicacionFacade.deleteServiceCarrito4CreateCub(servicio_codigo);
+    (this.formCub.get('table') as FormArray).removeAt(
+      (
+        this.formCub.get('table').value as Array<{ servicio_cod: string }>
+      ).findIndex(serviceTable => serviceTable.servicio_cod === servicio_codigo)
+    );
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
