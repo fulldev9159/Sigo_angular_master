@@ -177,6 +177,44 @@ export interface Carrito {
   tipo_moneda_id: number;
   unidades_obras: DatosUnidadObra4Cub[];
 }
+
+export interface RequestCreateCubicacion {
+  cubicacion_datos: {
+    nombre: string;
+    tipo_cubicacion_id: number;
+    contrato_id: number;
+    agencia_id: number;
+    proveedor_id: number;
+    codigo_acuerdo: string;
+    cmarco_has_proveedor_id: number;
+    usuario_creador_id: number;
+    direccion_desde: string;
+    altura_desde: string;
+    direccion_hasta: string;
+    altura_hasta: string;
+    descripcion: string;
+  };
+  cubicacion_detalle: {
+    nuevo: NuevoServicio[];
+  };
+}
+
+export interface NuevoServicio {
+  servicio_id: number;
+  actividad_id: number; // Necesito este dato
+  tipo_servicio_id: number; // Necesito este dato
+  cantidad: number;
+  unidad_obra: NuevoUO[];
+}
+
+export interface NuevoUO {
+  uob_codigo: string;
+  cantidad: number;
+}
+
+export interface DataRespCreateCubicacion {
+  response: any;
+}
 //  ///
 export interface TipoServicioEspecialidad4Cub {
   codigo: string;

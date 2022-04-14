@@ -31,7 +31,11 @@ import {
   RespDataTipoCubicacion4Cub,
   RespDataTipoServicioEspecialidad4Cub,
 } from '@data';
-import { DatosUnidadObra4Cub } from '@data/model';
+import {
+  DataRespCreateCubicacion,
+  DatosUnidadObra4Cub,
+  RequestCreateCubicacion,
+} from '@data/model';
 @Injectable({
   providedIn: 'root',
 })
@@ -143,6 +147,14 @@ export class CubicacionService {
     );
   }
 
+  createCubicacion(
+    request: RequestCreateCubicacion
+  ): Observable<Response<DataRespCreateCubicacion>> {
+    return this.http.post<Response<DataRespCreateCubicacion>>(
+      `${this.apiUrl}/cubicacion/cubicacion/save`,
+      request
+    );
+  }
   //   ///
 
   getAutosuggestNameCubicacion(
@@ -253,26 +265,26 @@ export class CubicacionService {
       );
   }
 
-  createCubicacion(
-    cubicacion: any
-  ): Observable<{ response: any; status: any }> {
-    return this.http
-      .post<ResponseEditCubicacion>(
-        `${this.apiUrl}/cubicacion/create`,
-        cubicacion
-      )
-      .pipe(
-        map(res => {
-          return {
-            response: res.data.id,
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
-  }
+  // createCubicacion(
+  //   cubicacion: any
+  // ): Observable<{ response: any; status: any }> {
+  //   return this.http
+  //     .post<ResponseEditCubicacion>(
+  //       `${this.apiUrl}/cubicacion/create`,
+  //       cubicacion
+  //     )
+  //     .pipe(
+  //       map(res => {
+  //         return {
+  //           response: res.data.id,
+  //           status: {
+  //             description: res.status.description,
+  //             responseCode: res.status.responseCode,
+  //           },
+  //         };
+  //       })
+  //     );
+  // }
 
   updateCubicacion(
     request: RequestEditCubicacion

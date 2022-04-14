@@ -302,11 +302,11 @@ export const reducerCubicacion = createReducer(
     subContractedServices: [],
   })),
 
-  on(CubicacionActions.createCub, (state, { cubicacion }) => ({
-    ...state,
-    saving: true,
-    errorSaving: null,
-  })),
+  // on(CubicacionActions.createCub, (state, { cubicacion }) => ({
+  //   ...state,
+  //   saving: true,
+  //   errorSaving: null,
+  // })),
   on(CubicacionActions.createCubSuccess, (state, { response: cubicacion }) => ({
     ...state,
     saving: false,

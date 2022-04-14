@@ -29,6 +29,8 @@ import {
   RequestGetDatosUnidadObra4Cub,
   RespDataGetDatosUnidadObra4Cub,
   Carrito,
+  RequestCreateCubicacion,
+  DataRespCreateCubicacion,
 } from '@data';
 
 // GET CONTRATOS USER 4 CUB
@@ -188,6 +190,20 @@ export const delteUOCarrito4CreateCub = createAction(
   props<{ servicio_cod: string; uo_cod: string }>()
 );
 
+// CREATE CUB
+export const createCub = createAction(
+  '[Cubicacion] createCub ',
+  props<{ request: RequestCreateCubicacion }>()
+);
+export const createCubSuccess = createAction(
+  '[Cubicacion] createCub Success',
+  props<{ response: Response<DataRespCreateCubicacion> }>()
+);
+export const createCubError = createAction(
+  '[Cubicacion] createCub Error',
+  props<{ error: any }>()
+);
+
 //  RESET
 export const reset = createAction('[Cubicacion] reset');
 
@@ -317,21 +333,21 @@ export const getSubContractedServicesError = createAction(
 );
 // GET LPUs Cubicacion end
 
-// POST CREATE CUBICACION init
-export const createCub = createAction(
-  '[Cubicacion Post] CREATE Cubicacion',
-  props<{ cubicacion: RequestSaveCubicacion }>()
-);
+// // POST CREATE CUBICACION init
+// export const createCub = createAction(
+//   '[Cubicacion Post] CREATE Cubicacion',
+//   props<{ cubicacion: RequestSaveCubicacion }>()
+// );
 
-export const createCubSuccess = createAction(
-  '[Cubicacion Post] CREATE Cubicacion Success',
-  props<{ response: any; status: StatusResponse }>()
-);
+// export const createCubSuccess = createAction(
+//   '[Cubicacion Post] CREATE Cubicacion Success',
+//   props<{ response: any; status: StatusResponse }>()
+// );
 
-export const createCubError = createAction(
-  '[Cubicacion Post] CREATE Cubicacion Error',
-  props<{ error: any }>()
-);
+// export const createCubError = createAction(
+//   '[Cubicacion Post] CREATE Cubicacion Error',
+//   props<{ error: any }>()
+// );
 // POST CREATE CUBICACION end
 
 // POST EDIT CUBICACION end

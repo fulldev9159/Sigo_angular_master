@@ -28,6 +28,7 @@ import {
   RequestGetDatosServicio4Cub,
   Carrito,
   RequestGetDatosUnidadObra4Cub,
+  RequestCreateCubicacion,
 } from '@data';
 
 @Injectable({
@@ -151,6 +152,10 @@ export class CubicacionFacade {
     );
   }
 
+  // CREATE  CUB
+  public createCub(request: RequestCreateCubicacion): void {
+    this.store.dispatch(cubicacionActions.createCub({ request }));
+  }
   // /////
 
   // CUBICACION
@@ -193,9 +198,9 @@ export class CubicacionFacade {
   // REPLY
 
   // POST
-  public postCubicacion(cubicacion): void {
-    this.store.dispatch(cubicacionActions.createCub({ cubicacion }));
-  }
+  // public postCubicacion(cubicacion): void {
+  //   this.store.dispatch(cubicacionActions.createCub({ cubicacion }));
+  // }
   // POST
 
   // POST

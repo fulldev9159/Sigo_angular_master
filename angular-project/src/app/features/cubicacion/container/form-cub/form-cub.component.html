@@ -227,7 +227,6 @@
                     <th>Total UO</th>
                     <th></th>
                   </tr>
-
                 </thead>
                 <tbody formArrayName="table">
                   <ng-container *ngFor="let item of carrito$|async;let i = index" [formGroupName]="i">
@@ -251,7 +250,9 @@
                         <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td></td>
+                        <td>
+                          <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                        </td>
                       </tr>
                     </ng-container>
 
@@ -266,9 +267,11 @@
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length">
-                          <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
-                            <fa-icon [icon]="trashICon"></fa-icon>
-                          </button>
+                          <div class="ui icon buttons mini basic">
+                            <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                              <fa-icon [icon]="trashICon"></fa-icon>
+                            </button>
+                          </div>
                         </td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
@@ -277,9 +280,12 @@
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td>
-                          <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
-                            <fa-icon [icon]="trashICon"></fa-icon>
-                          </button>
+                          <div class="ui icon buttons mini basic">
+                            <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                            <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
+                              <fa-icon [icon]="trashICon"></fa-icon>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     </ng-container>
@@ -292,9 +298,12 @@
                         <td class="data-secundaria">????confirmar donde lo obtengo</td>
                         <td class="data-primaria">{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td>
-                          <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
-                            <fa-icon [icon]="trashICon"></fa-icon>
-                          </button>
+                          <div class="ui icon buttons mini basic">
+                            <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>
+                            <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
+                              <fa-icon [icon]="trashICon"></fa-icon>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     </ng-container>
@@ -324,9 +333,10 @@
             </div>
             <br>
             <br>
+            <button (click)="CreateCub()">Crear Cubicación</button>
             <!-- {{carrito$|async|json}} -->
-
-            {{formCub.get("table").value|json}}
+            {{formCub.value|json}}
+            <!-- {{formCub.get("table").value|json}} -->
           </div>
         </div>
       </ng-container>
@@ -334,3 +344,31 @@
   </form>
 
 </div>
+
+
+<app-modal [display]="displayModalMateriales" (CloseEvent)="closeModalMateriales()">
+  <ng-container modal-header-title>Lista de Materiales</ng-container>
+  <ng-container modal-content>
+    <div class="row" style="width: 87vw;">
+      <table style=" width: 100%;">
+        <thead>
+          <tr>
+            <th>Cod</th>
+            <th>Nombre</th>
+            <th>Origen</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of materialesSelected">
+            <td class="label-table">{{item.material_codigo}}</td>
+            <td class="data-primaria">{{item.material_nombre}}</td>
+            <td class="label-table">{{item.material_origen}}</td>
+            <td class="data-primaria">{{item.material_precio_clp}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  <ng-container modal-footer></ng-container>
+</app-modal>

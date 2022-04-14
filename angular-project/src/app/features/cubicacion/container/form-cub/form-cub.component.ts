@@ -20,7 +20,11 @@ import {
   Carrito,
   ContratosUser,
   DatosUnidadObra4Cub,
+  Materiales4Cub,
+  NuevoServicio,
+  NuevoUO,
   Proveedores4Cub,
+  RequestCreateCubicacion,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
   RequestGetServicios4Cub,
@@ -60,17 +64,18 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   carrito$: Observable<Carrito[]>;
 
   // DISPLAY MODALS
-
+  displayModalMateriales = false;
   // FORMULARIO
   formControls: any;
   formCub: FormGroup;
-
+  materialesSelected: Materiales4Cub[] = [];
   // TABLE
 
   // EXTRAS
   usuario_id = null;
   totalServicio = 0;
   trashICon = faTrash;
+  proveedores: Proveedores4Cub[] = [];
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
@@ -124,13 +129,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.agencias4Cub$ = this.cubicacionFacade
       .agencias4cub$()
       .pipe(tap(agencias => this.checkAndEnable('agencia_id', agencias)));
-    this.proveedores4Cub$ = this.cubicacionFacade
-      .proveedores4Cub$()
-      .pipe(
-        tap(proveedores =>
-          this.checkAndEnable('cmarcoproveedor_id', proveedores)
-        )
-      );
+    this.proveedores4Cub$ = this.cubicacionFacade.proveedores4Cub$().pipe(
+      map(proveedores => {
+        this.proveedores = proveedores;
+        return proveedores;
+      }),
+      tap(proveedores => this.checkAndEnable('cmarcoproveedor_id', proveedores))
+    );
     this.tipoCubicacion4Cub$ = this.cubicacionFacade.tipoCubicacion4cub$();
     this.actividad4Cub$ = this.cubicacionFacade.actividad4cub$();
     this.tipoServicioEspecialidad4Cub$ = this.cubicacionFacade
@@ -288,6 +293,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           // console.log('Existe?', existe);
           if (existe === undefined) {
             const group = new FormGroup({
+              servicio_id: new FormControl(servicio.servicio_id, [
+                Validators.required,
+              ]),
+              // actividad_id: new FormControl(servicio.a, [
+              //   Validators.required,
+              // ]),
               servicio_cod: new FormControl(servicio.servicio_codigo, [
                 Validators.required,
               ]),
@@ -623,6 +634,78 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       ).findIndex(uo => uo.uo_codigo === uo_cod)
     );
   }
+
+  showMateriales(materiales: Materiales4Cub[]): void {
+    console.log(materiales);
+    this.materialesSelected = materiales;
+    this.displayModalMateriales = true;
+  }
+
+  closeModalMateriales(): void {
+    this.materialesSelected = [];
+    this.displayModalMateriales = false;
+  }
+
+  CreateCub(): void {
+    const proveedor_id = this.proveedores.find(
+      proveedor =>
+        proveedor.cmarco_has_proveedor_id ===
+        +this.formCub.get('cmarcoproveedor_id').value
+    ).id;
+    const codigo_acuerdo = this.proveedores.find(
+      proveedor =>
+        proveedor.cmarco_has_proveedor_id ===
+        +this.formCub.get('cmarcoproveedor_id').value
+    ).codigo_acuerdo;
+
+    const cubicacion_detalle: NuevoServicio[] = (
+      this.formCub.get('table').value as Array<{
+        servicio_id: number;
+        servicio_cod: string;
+        cantidad_servicio: number;
+        unidades_obra: Array<{ cantidad_uo: number; uo_codigo: string }>;
+      }>
+    ).map(servicio => {
+      let unidad_obra: NuevoUO[] = [];
+      console.log(servicio.unidades_obra);
+      unidad_obra = servicio.unidades_obra.map(uo => ({
+        uob_codigo: uo.uo_codigo,
+        cantidad: uo.cantidad_uo,
+      }));
+      return {
+        servicio_id: servicio.servicio_id,
+        actividad_id: 1,
+        tipo_servicio_id: 1,
+        cantidad: servicio.cantidad_servicio,
+        unidad_obra,
+      };
+    });
+
+    const request: RequestCreateCubicacion = {
+      cubicacion_datos: {
+        nombre: this.formCub.get('nombre').value,
+        tipo_cubicacion_id: +this.formCub.get('tipocubicacion').value,
+        contrato_id: +this.formCub.get('contrato').value,
+        agencia_id: +this.formCub.get('agencia_id').value,
+        proveedor_id,
+        codigo_acuerdo,
+        cmarco_has_proveedor_id: +this.formCub.get('cmarcoproveedor_id').value,
+        usuario_creador_id: this.usuario_id,
+        direccion_desde: this.formCub.get('direcciondesde').value,
+        altura_desde: this.formCub.get('direcciondesdealtura').value,
+        direccion_hasta: this.formCub.get('direccionhasta').value,
+        altura_hasta: this.formCub.get('direccionhastaaltura').value,
+        descripcion: this.formCub.get('descripcion').value,
+      },
+      cubicacion_detalle: {
+        nuevo: cubicacion_detalle,
+      },
+    };
+
+    console.log(request);
+    this.cubicacionFacade.createCub(request);
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
