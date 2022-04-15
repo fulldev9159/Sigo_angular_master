@@ -54,7 +54,7 @@ update test environment:
    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"insert into proveedor_has_servicio(agencia_id,servicio_id,precio,tipo_moneda_id,numero_producto,cmarco_has_proveedor_id,estado) values (25,21,15000,2,\"ZWC - Inventado\",1,1)\""
    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,\"D010\",\"T383\",\"DIBUJ\")\""
    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,\"D010\",\"T382\",\"DIBUJ\")\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,\"D010\",\"T376\",\"DIBUJ\")\""
+   - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,\"D010\",\"T376\",\"DIBUJ\")\""
   tags:
     - repo-machine
 
