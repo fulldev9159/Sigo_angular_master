@@ -29,6 +29,8 @@ import {
   Carrito,
   RequestGetDatosUnidadObra4Cub,
   RequestCreateCubicacion,
+  AllCubs,
+  DetalleCub,
 } from '@data';
 
 @Injectable({
@@ -36,6 +38,24 @@ import {
 })
 export class CubicacionFacade {
   constructor(private store: Store<Cubicacion>) {}
+
+  //   GET ALL CUBS
+  public AllCubs(): void {
+    this.store.dispatch(cubicacionActions.getAllCubs());
+  }
+
+  public AllCubs$(): Observable<AllCubs[]> {
+    return this.store.select(cubicacionSelectors.allCubs);
+  }
+
+  //   GET DETALLE CUB
+  public DetalleCub(cubicacion_id: number): void {
+    this.store.dispatch(cubicacionActions.getDetalleCubs({ cubicacion_id }));
+  }
+
+  public DetalleCub$(): Observable<DetalleCub[]> {
+    return this.store.select(cubicacionSelectors.detalleCub);
+  }
 
   //   GET CONTRATOS USER 4 CUB
   public contratosUser4Cub(usuario_id: number): void {
@@ -155,6 +175,11 @@ export class CubicacionFacade {
   // CREATE  CUB
   public createCub(request: RequestCreateCubicacion): void {
     this.store.dispatch(cubicacionActions.createCub({ request }));
+  }
+
+  // EDIT  CUB
+  public editCub(request: RequestEditCubicacion): void {
+    this.store.dispatch(cubicacionActions.editCub({ request }));
   }
   // /////
 

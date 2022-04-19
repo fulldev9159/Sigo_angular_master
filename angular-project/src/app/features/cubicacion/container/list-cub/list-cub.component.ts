@@ -52,16 +52,19 @@ export class ListCubComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.cubageFacade.resetData();
-    this.subscription.add(
-      this.authFacade.getLogin$().subscribe(authLogin => {
-        if (authLogin) {
-          this.authLogin = authLogin;
-        }
-      })
-    );
-    this.cubageFacade.getCubicacionAction();
-    this.cubicaciones$ = this.cubageFacade.getCubicacionSelector$();
+    console.log('asdasd');
+    this.cubageFacade.AllCubs();
+    this.cubageFacade.DetalleCub(2);
+    // this.cubageFacade.resetData();
+    // this.subscription.add(
+    //   this.authFacade.getLogin$().subscribe(authLogin => {
+    //     if (authLogin) {
+    //       this.authLogin = authLogin;
+    //     }
+    //   })
+    // );
+    // this.cubageFacade.getCubicacionAction();
+    // this.cubicaciones$ = this.cubageFacade.getCubicacionSelector$();
   }
 
   ngOnDestroy(): void {

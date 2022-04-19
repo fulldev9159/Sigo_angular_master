@@ -33,8 +33,11 @@ import {
 } from '@data';
 import {
   DataRespCreateCubicacion,
+  DataRespEditCubicacion,
   DatosUnidadObra4Cub,
   RequestCreateCubicacion,
+  RespDataGetAllCubs,
+  RespDataGetDetalleCubs,
 } from '@data/model';
 @Injectable({
   providedIn: 'root',
@@ -43,6 +46,21 @@ export class CubicacionService {
   apiUrl = '';
   constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
+  }
+  getAllCubs(): Observable<Response<RespDataGetAllCubs>> {
+    return this.http.post<Response<RespDataGetAllCubs>>(
+      `${this.apiUrl}/cubicacion/table_cubicaciones/get`,
+      {}
+    );
+  }
+
+  getDetalleCub(
+    cubicacion_id: number
+  ): Observable<Response<RespDataGetDetalleCubs>> {
+    return this.http.post<Response<RespDataGetDetalleCubs>>(
+      `${this.apiUrl}/cubicacion/detalle/get`,
+      { cubicacion_id }
+    );
   }
 
   getAgencia4Cub(
@@ -155,6 +173,17 @@ export class CubicacionService {
       request
     );
   }
+
+  editCubicacion(
+    request: RequestEditCubicacion
+  ): Observable<Response<DataRespEditCubicacion>> {
+    return this.http.post<Response<DataRespEditCubicacion>>(
+      `${this.apiUrl}/cubicacion/cubicacion/save`,
+      request
+    );
+  }
+
+  deleteServicioUOCarrito(servicio: number[], unidad_obra: number[]) {}
   //   ///
 
   getAutosuggestNameCubicacion(

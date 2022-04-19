@@ -31,7 +31,39 @@ import {
   Carrito,
   RequestCreateCubicacion,
   DataRespCreateCubicacion,
+  RespDataGetAllCubs,
+  RespDataGetDetalleCubs,
+  DataRespEditCubicacion,
 } from '@data';
+
+// GET ALL CUBS
+export const getAllCubs = createAction('[Cubicacion] getAllCubs ');
+
+export const getAllCubsSuccess = createAction(
+  '[Cubicacion] getAllCubs Success',
+  props<{ response: Response<RespDataGetAllCubs> }>()
+);
+
+export const getAllCubsError = createAction(
+  '[Cubicacion] getAllCubs Error',
+  props<{ error: any }>()
+);
+
+// GET DETALLE CUB
+export const getDetalleCubs = createAction(
+  '[Cubicacion] getDetalleCubs',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getDetalleCubsSuccess = createAction(
+  '[Cubicacion] getDetalleCubs Success',
+  props<{ response: Response<RespDataGetDetalleCubs> }>()
+);
+
+export const getDetalleCubsError = createAction(
+  '[Cubicacion] getDetalleCubs Error',
+  props<{ error: any }>()
+);
 
 // GET CONTRATOS USER 4 CUB
 export const getContratosUser4Cub = createAction(
@@ -201,6 +233,20 @@ export const createCubSuccess = createAction(
 );
 export const createCubError = createAction(
   '[Cubicacion] createCub Error',
+  props<{ error: any }>()
+);
+
+// EDIT CUB
+export const editCub = createAction(
+  '[Cubicacion] editCub ',
+  props<{ request: RequestEditCubicacion }>()
+);
+export const editCubSuccess = createAction(
+  '[Cubicacion] editCub Success',
+  props<{ response: Response<DataRespEditCubicacion> }>()
+);
+export const editCubError = createAction(
+  '[Cubicacion] editCub Error',
   props<{ error: any }>()
 );
 

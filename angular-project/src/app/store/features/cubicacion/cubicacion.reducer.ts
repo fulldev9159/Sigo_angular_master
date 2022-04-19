@@ -5,12 +5,14 @@ import copy from 'fast-copy';
 import {
   Actividad4Cub,
   Agencias4Cub,
+  AllCubs,
   AutoSuggestItem,
   Carrito,
   ContratoMarco4Cub,
   ContratosUser,
   Cubicacion,
   CubicacionWithLpu,
+  DetalleCub,
   DetalleCubicacion,
   Lpu4Cub,
   Proveedores4Cub,
@@ -28,6 +30,8 @@ import { map, tap, withLatestFrom } from 'rxjs/operators';
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
+  allCubs: AllCubs[];
+  detalleCub: DetalleCub[];
   contratosUser4Cub: ContratosUser[];
   agencias4Cub: Agencias4Cub[];
   proveedores4Cub: Proveedores4Cub[];
@@ -55,6 +59,8 @@ export interface StateCubicacion {
 }
 
 export const initialStateCubicacion: StateCubicacion = {
+  allCubs: [],
+  detalleCub: [],
   contratosUser4Cub: [],
   agencias4Cub: [],
   proveedores4Cub: [],
@@ -218,6 +224,14 @@ export const reducerCubicacion = createReducer(
       };
     }
   ),
+  on(CubicacionActions.getAllCubsSuccess, (state, { response }) => ({
+    ...state,
+    allCubs: response.data.items,
+  })),
+  on(CubicacionActions.getDetalleCubsSuccess, (state, { response }) => ({
+    ...state,
+    detalleCub: response.data.items,
+  })),
   //   ///
   on(CubicacionActions.getCubs, state => state),
   on(CubicacionActions.getCubsSuccess, (state, payload) => ({

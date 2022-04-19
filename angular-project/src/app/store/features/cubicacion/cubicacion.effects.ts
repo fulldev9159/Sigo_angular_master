@@ -28,6 +28,30 @@ export class CubicacionEffects {
     private lpuService: Service.LpusService
   ) {}
 
+  getAllCubs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getAllCubs),
+      concatMap(() =>
+        this.cubService.getAllCubs().pipe(
+          map(response => cubActions.getAllCubsSuccess({ response })),
+          catchError(err => of(cubActions.getAllCubsError({ error: err })))
+        )
+      )
+    )
+  );
+
+  getDetalleCubs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getDetalleCubs),
+      concatMap(({ cubicacion_id }) =>
+        this.cubService.getDetalleCub(cubicacion_id).pipe(
+          map(response => cubActions.getDetalleCubsSuccess({ response })),
+          catchError(err => of(cubActions.getDetalleCubsError({ error: err })))
+        )
+      )
+    )
+  );
+
   getContratos4CreateEditCub$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getContratosUser4Cub),
@@ -183,6 +207,18 @@ export class CubicacionEffects {
         this.cubService.createCubicacion(request).pipe(
           map(response => cubActions.createCubSuccess({ response })),
           catchError(err => of(cubActions.createCubError({ error: err })))
+        )
+      )
+    )
+  );
+
+  editCub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.editCub),
+      concatMap(({ request }) =>
+        this.cubService.editCubicacion(request).pipe(
+          map(response => cubActions.editCubSuccess({ response })),
+          catchError(err => of(cubActions.editCubError({ error: err })))
         )
       )
     )

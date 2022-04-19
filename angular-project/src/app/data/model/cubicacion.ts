@@ -1,3 +1,126 @@
+export interface RespDataGetAllCubs {
+  items: AllCubs[];
+}
+
+export interface AllCubs {
+  agencia_cidigo: string;
+  agencia_estado: boolean;
+  agencia_id: number;
+  agencia_nombre: string;
+  agencia_region_id: number;
+  agencia_region_nombre: string;
+  altura_desde: string;
+  altura_hasta: string;
+  asignado: number;
+  cmarco_has_proveedor_id: number;
+  codigo_acuerdo: string;
+  contrato_id: number;
+  contrato_marco_nombre: string;
+  contrato_marco_tipo_id: number;
+  contrato_marco_tipo_nombre: string;
+  creador_username: string;
+  creador_usuario_id: number;
+  creador_usuario_nombre: string;
+  cubicacion_descripcion: string;
+  cubicacion_fecha_creacion: string;
+  cubicacion_id: number;
+  cubicacion_nombre: string;
+  direccion_desde: string;
+  direccion_hasta: string;
+  ot_id: number;
+  ot_nombre: string;
+  proveedor_id: number;
+  proveedor_nombre: string;
+  tipo_cubicacion_descripcion: string;
+  tipo_cubicacion_id: number;
+  total: number;
+  total_tipo_moneda: string;
+}
+
+export interface RespDataGetDetalleCubs {
+  items: DetalleCub[];
+}
+
+export interface DetalleCub {
+  data_cubicacion: DataDetalleCubicacion[];
+  servicios: ServiciosDetalle[];
+}
+
+export interface DataDetalleCubicacion {
+  agencia_id: number;
+  altura_desde: string;
+  altura_hasta: string;
+  cmarco_has_proveedor_id: number;
+  codigo_acuerdo: string;
+  contrato_id: number;
+  created_at: Date;
+  descripcion: string;
+  direccion_desde: string;
+  direccion_hasta: string;
+  id: number;
+  nombre: string;
+  proveedor_id: number;
+  tipo_cubicacion_id: number;
+  updated_at: Date;
+  usuario_creador_id: number;
+}
+
+export interface ServiciosDetalle {
+  data_servicios: {
+    actividad_desc: string;
+    actividad_id: number;
+    agencia_preciario_monto: number;
+    cub_has_srv_id: number;
+    factor_conversion_monto: number;
+    factor_conversion_precio: number;
+    monto_tipo_moneda_cod: string;
+    monto_tipo_moneda_id: number;
+    precio_tipo_moneda_cod: string;
+    precio_tipo_moneda_id: number;
+    prov_has_serv_precio: number;
+    puntos_baremos: number;
+    servicio_cantidad: number;
+    servicio_cod: string;
+    servicio_desc: string;
+    servicio_id: number;
+    servicio_precio_final: number;
+    servicio_precio_final_clp: number;
+    tipo_servicio_desc: string;
+    tipo_servicio_id: number;
+    unidad_medida_cod: string;
+    unidad_medida_id: number;
+  };
+  unidades_obra: {
+    materiales: Materiales4Detalle[];
+    unidades_obra: {
+      clave: string;
+      cub_has_uob_id: number;
+      unidad_obra_cod: string;
+      unidad_obra_desc: string;
+      uo_precio_total_clp: number;
+      uob_cantidad: number;
+      uob_unidad_medida_cod: string;
+      uob_unidad_medida_id: number;
+    };
+  };
+}
+
+export interface Materiales4Detalle {
+  codigo_sap: string;
+  cub_has_material_id: number;
+  factor_conversion: number;
+  material_cantidad: number;
+  material_cod: string;
+  material_desc: string;
+  material_unidad_medida_cod: string;
+  material_unidad_medida_id: number;
+  material_valor_clp: number;
+  origen: string;
+  tipo_moneda_cod: string;
+  tipo_moneda_id: number;
+  valor: number;
+}
+
 export interface RespDataGetAgencias4Cub {
   items: Agencias4Cub[];
 }
@@ -212,6 +335,43 @@ export interface RequestCreateCubicacion {
   };
 }
 
+export interface RequestEditCubicacion {
+  cubicacion_datos?: {
+    id: number;
+    nombre?: string;
+    tipo_cubicacion_id?: number;
+    contrato_id?: number;
+    agencia_id?: number;
+    proveedor_id?: number;
+    codigo_acuerdo?: string;
+    cmarco_has_proveedor_id?: number;
+    usuario_creador_id?: number;
+    direccion_desde?: string;
+    altura_desde?: string;
+    direccion_hasta?: string;
+    altura_hasta?: string;
+    descripcion?: string;
+  };
+  cubicacion_detalle: {
+    nuevo?: NuevoServicio[];
+    actualizar: {
+      servicio?: ServicioUOActualizar[];
+      unidad_obra?: ServicioUOActualizar[];
+      agregar_uob_a_servicio: UOAgregar[];
+    };
+  };
+}
+
+export interface ServicioUOActualizar {
+  rowid: number;
+  cantidad: number;
+}
+
+export interface UOAgregar {
+  servicio_rowid: number;
+  uob_codigo: string;
+  uob_cantidad: number;
+}
 export interface NuevoServicio {
   servicio_id: number;
   actividad_id: number;
@@ -226,6 +386,10 @@ export interface NuevoUO {
 }
 
 export interface DataRespCreateCubicacion {
+  response: any;
+}
+
+export interface DataRespEditCubicacion {
   response: any;
 }
 //  ///
