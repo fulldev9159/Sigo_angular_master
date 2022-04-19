@@ -183,7 +183,8 @@ export class CubicacionService {
     );
   }
 
-  deleteServicioUOCarrito(servicio: number[], unidad_obra: number[]) {}
+  // deleteServicioUOCarrito(servicio: number[], unidad_obra: number[]) {}
+
   //   ///
 
   getAutosuggestNameCubicacion(
