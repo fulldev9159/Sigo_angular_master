@@ -12,11 +12,11 @@ import {
   ContratosUser,
   Cubicacion,
   CubicacionWithLpu,
-  DetalleCub,
   DetalleCubicacion,
   Lpu4Cub,
   Proveedores4Cub,
   RegionSubcontrato4Cub,
+  RespDataGetDetalleCubs,
   Servicios4Cub,
   SubcontratosProveedor,
   TipoCubicacion4Cub,
@@ -31,7 +31,7 @@ export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
   allCubs: AllCubs[];
-  detalleCub: DetalleCub[];
+  detalleCub: RespDataGetDetalleCubs;
   contratosUser4Cub: ContratosUser[];
   agencias4Cub: Agencias4Cub[];
   proveedores4Cub: Proveedores4Cub[];
@@ -60,7 +60,7 @@ export interface StateCubicacion {
 
 export const initialStateCubicacion: StateCubicacion = {
   allCubs: [],
-  detalleCub: [],
+  detalleCub: null,
   contratosUser4Cub: [],
   agencias4Cub: [],
   proveedores4Cub: [],
@@ -230,7 +230,7 @@ export const reducerCubicacion = createReducer(
   })),
   on(CubicacionActions.getDetalleCubsSuccess, (state, { response }) => ({
     ...state,
-    detalleCub: response.data.items,
+    detalleCub: response.data,
   })),
   //   ///
   on(CubicacionActions.getCubs, state => state),

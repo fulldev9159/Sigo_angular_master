@@ -30,7 +30,7 @@ import {
   RequestGetDatosUnidadObra4Cub,
   RequestCreateCubicacion,
   AllCubs,
-  DetalleCub,
+  RespDataGetDetalleCubs,
 } from '@data';
 
 @Injectable({
@@ -53,7 +53,7 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getDetalleCubs({ cubicacion_id }));
   }
 
-  public DetalleCub$(): Observable<DetalleCub[]> {
+  public DetalleCub$(): Observable<RespDataGetDetalleCubs> {
     return this.store.select(cubicacionSelectors.detalleCub);
   }
 
