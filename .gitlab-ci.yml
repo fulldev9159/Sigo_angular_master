@@ -106,6 +106,8 @@ docker:
 
 update-demos-sigo:
   stage: triggers
+  needs:
+    - docker
   variables:
     ORIGIN: $ORIGIN
     CI_PIPELINE_ID: $CI_PIPELINE_ID
