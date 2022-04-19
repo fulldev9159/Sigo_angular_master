@@ -34,6 +34,7 @@
     "@popperjs/core": "^2.9.1",
     "angular-ng-autocomplete": "^2.0.5",
     "bootstrap": "^4.6.0",
+    "fast-copy": "^2.1.2",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

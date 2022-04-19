@@ -1,20 +1,48 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CubicacionActions from './cubicacion.actions';
+import copy from 'fast-copy';
+
 import {
+  Actividad4Cub,
+  Agencias4Cub,
+  AllCubs,
   AutoSuggestItem,
+  Carrito,
   ContratoMarco4Cub,
+  ContratosUser,
   Cubicacion,
   CubicacionWithLpu,
+  DetalleCub,
   DetalleCubicacion,
   Lpu4Cub,
+  Proveedores4Cub,
   RegionSubcontrato4Cub,
+  Servicios4Cub,
   SubcontratosProveedor,
+  TipoCubicacion4Cub,
   TipoLpu,
+  TipoServicioEspecialidad4Cub,
+  UnidadObra4Cub,
 } from '@data';
+import { carrito } from './cubicacion.selectors';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
+  allCubs: AllCubs[];
+  detalleCub: DetalleCub[];
+  contratosUser4Cub: ContratosUser[];
+  agencias4Cub: Agencias4Cub[];
+  proveedores4Cub: Proveedores4Cub[];
+  tipoCubicacion4Cub: TipoCubicacion4Cub[];
+  actividad4Cub: Actividad4Cub[];
+  tipoServicioEspecialidad4Cub: TipoServicioEspecialidad4Cub[];
+  servicios4cub: Servicios4Cub[];
+  unidadObras4cub: UnidadObra4Cub[];
+  carrito: Carrito[];
+  servciouo_repetido_alert: boolean;
+  //   ///
   cubicaciones: Cubicacion[];
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
   cubicacionError: Error;
@@ -31,6 +59,19 @@ export interface StateCubicacion {
 }
 
 export const initialStateCubicacion: StateCubicacion = {
+  allCubs: [],
+  detalleCub: [],
+  contratosUser4Cub: [],
+  agencias4Cub: [],
+  proveedores4Cub: [],
+  tipoCubicacion4Cub: [],
+  actividad4Cub: [],
+  tipoServicioEspecialidad4Cub: [],
+  servicios4cub: [],
+  unidadObras4cub: [],
+  carrito: [],
+  servciouo_repetido_alert: false,
+  //////
   cubicaciones: [],
   cubicacion: null,
   cubicacionError: null,
@@ -48,7 +89,150 @@ export const initialStateCubicacion: StateCubicacion = {
 
 export const reducerCubicacion = createReducer(
   initialStateCubicacion,
+  on(CubicacionActions.resetData, () => ({
+    ...initialStateCubicacion,
+  })),
+  on(CubicacionActions.getContratosUser4CubSuccess, (state, { response }) => ({
+    ...state,
+    contratosUser4Cub: response.data.items,
+  })),
+  on(CubicacionActions.getAgencia4CubSuccess, (state, { response }) => ({
+    ...state,
+    agencias4Cub: response.data.items,
+  })),
+  on(CubicacionActions.getProveedores4CubSuccess, (state, { response }) => ({
+    ...state,
+    proveedores4Cub: response.data.items,
+  })),
+  on(CubicacionActions.getTipoCubicacion4CubSuccess, (state, { response }) => ({
+    ...state,
+    tipoCubicacion4Cub: response.data.items,
+  })),
+  on(CubicacionActions.getActividades4CubSuccess, (state, { response }) => ({
+    ...state,
+    actividad4Cub: response.data.items,
+  })),
+  on(
+    CubicacionActions.getTipoServicioEspecialidad4CubSuccess,
+    (state, { response }) => ({
+      ...state,
+      tipoServicioEspecialidad4Cub: response.data.items,
+    })
+  ),
+  on(CubicacionActions.getServicios4CubSuccess, (state, { response }) => ({
+    ...state,
+    servicios4cub: response.data.items,
+  })),
+  on(CubicacionActions.getUnidadObra4CubSuccess, (state, { response }) => ({
+    ...state,
+    unidadObras4cub: response.data.items,
+  })),
+  on(
+    CubicacionActions.getDatosServicio4CubSuccess,
+    (state, { item_carrito }) => {
+      const index = state.carrito.findIndex(
+        x => x.servicio_id === item_carrito.servicio_id
+      );
+      if (index >= 0) {
+        const temp = copy(item_carrito);
+        // console.log('INDEX', index);
 
+        temp.unidades_obras.push(...state.carrito[index].unidades_obras);
+        const uo_repetido = state.carrito[index].unidades_obras.find(
+          uo => uo.uo_codigo === item_carrito.unidades_obras[0].uo_codigo
+        );
+        if (uo_repetido) {
+          return {
+            ...state,
+            servciouo_repetido_alert: true,
+          };
+        } else {
+          if (state.carrito.length === 1) {
+            return {
+              ...state,
+              carrito: [temp],
+              servciouo_repetido_alert: false,
+            };
+          } else {
+            // console.log(state.carrito);
+            // const old_temp = copy(state.carrito);
+            const old_servicios = state.carrito.filter(
+              oldcarrito => oldcarrito.servicio_id !== item_carrito.servicio_id
+            );
+            // console.log('NEW', old_servicios);
+            return {
+              ...state,
+              carrito: [...old_servicios, temp],
+              servciouo_repetido_alert: false,
+            };
+          }
+        }
+      } else {
+        return {
+          ...state,
+          carrito: [...state.carrito, item_carrito],
+          servciouo_repetido_alert: false,
+        };
+      }
+    }
+  ),
+  on(
+    CubicacionActions.delteServiceCarrito4CreateCub,
+    (state, { servicio_cod }) => {
+      // console.log(
+      //   'Eliminar el indice',
+      //   ...state.carrito.filter(
+      //     servicios => servicios.servicio_codigo !== servicio_cod
+      //   )
+      // );
+      return {
+        ...state,
+        carrito: [
+          ...state.carrito.filter(
+            servicios => servicios.servicio_codigo !== servicio_cod
+          ),
+        ],
+      };
+    }
+  ),
+  on(
+    CubicacionActions.delteUOCarrito4CreateCub,
+    (state, { servicio_cod, uo_cod }) => {
+      const index_service = state.carrito.findIndex(
+        x => x.servicio_codigo === servicio_cod
+      );
+      if (index_service >= 0) {
+        let temp = copy(state.carrito);
+        const temp_service = temp[index_service];
+        const temp_uo = temp[index_service].unidades_obras.filter(
+          uo => uo.uo_codigo !== uo_cod
+        );
+        temp_service.unidades_obras = temp_uo;
+        console.log('Temp UO', temp_uo);
+        temp = temp.filter(
+          servicios => servicios.servicio_codigo !== servicio_cod
+        );
+        console.log('tempTotal', temp);
+        return {
+          ...state,
+          carrito: [...temp, temp_service],
+        };
+      }
+
+      return {
+        ...state,
+      };
+    }
+  ),
+  on(CubicacionActions.getAllCubsSuccess, (state, { response }) => ({
+    ...state,
+    allCubs: response.data.items,
+  })),
+  on(CubicacionActions.getDetalleCubsSuccess, (state, { response }) => ({
+    ...state,
+    detalleCub: response.data.items,
+  })),
+  //   ///
   on(CubicacionActions.getCubs, state => state),
   on(CubicacionActions.getCubsSuccess, (state, payload) => ({
     ...state,
@@ -84,11 +268,11 @@ export const reducerCubicacion = createReducer(
     contractMarco: payload.contratosMarcos4Cub,
   })),
 
-  on(CubicacionActions.getProveedores4Cub, state => state),
-  on(CubicacionActions.getProveedores4CubSuccess, (state, payload) => ({
-    ...state,
-    subContractedProviders: payload.proveedores4Cub,
-  })),
+  // on(CubicacionActions.getProveedores4Cub, state => state),
+  // on(CubicacionActions.getProveedores4CubSuccess, (state, payload) => ({
+  //   ...state,
+  //   subContractedProviders: payload.proveedores4Cub,
+  // })),
 
   on(CubicacionActions.getSubContractedRegions, state => state),
   on(CubicacionActions.getSubContractedRegionsSuccess, (state, payload) => ({
@@ -117,9 +301,6 @@ export const reducerCubicacion = createReducer(
     detalleCubicacion: payload.detallecubicacion,
   })),
 
-  on(CubicacionActions.resetData, () => ({
-    ...initialStateCubicacion,
-  })),
   on(CubicacionActions.getAutoSuggest, state => state),
   on(CubicacionActions.getAutoSuggestSuccess, (state, payload) => ({
     ...state,
@@ -135,11 +316,11 @@ export const reducerCubicacion = createReducer(
     subContractedServices: [],
   })),
 
-  on(CubicacionActions.createCub, (state, { cubicacion }) => ({
-    ...state,
-    saving: true,
-    errorSaving: null,
-  })),
+  // on(CubicacionActions.createCub, (state, { cubicacion }) => ({
+  //   ...state,
+  //   saving: true,
+  //   errorSaving: null,
+  // })),
   on(CubicacionActions.createCubSuccess, (state, { response: cubicacion }) => ({
     ...state,
     saving: false,

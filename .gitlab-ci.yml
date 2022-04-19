@@ -51,6 +51,10 @@ update test environment:
     # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
     # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass clean"
     - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate"
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into proveedor_has_servicio(agencia_id,servicio_id,precio,tipo_moneda_id,numero_producto,cmarco_has_proveedor_id,estado) values (25,21,15000,2,'ZWC - Inventado',1,1)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,'D010','T383','DIBUJ')\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,'D010','T382','DIBUJ')\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,'D010','T376','DIBUJ')\""
   tags:
     - repo-machine
 
@@ -79,7 +83,7 @@ acceptance test:
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_test_sigo_web
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_web
     - docker network connect web-sigo_default mcl_test_sigo_web
-    - docker run --name robot --shm-size=1gb --network="web-sigo_default" --user $(id -u):$(id -g) -e ROBOT_OPTIONS="--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing" -v /tmp/reports:/opt/robotframework/reports:Z -v /builds/cr4kQ2Xs/0/zweicom/cl-movistar/sigo/web-sigo/robot_e2e:/opt/robotframework/tests:Z ppodgorsek/robot-framework:latest
+    - docker run --name robot --shm-size=1gb --network="web-sigo_default" --user $(id -u):$(id -g) -e ROBOT_OPTIONS="--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing" -v /tmp/reports:/opt/robotframework/reports:Z -v /builds/cr4kQ2Xs/0/zweicom/cl-movistar/sigo/web-sigo/robot_e2e:/opt/robotframework/tests:Z ppodgorsek/robot-framework:3.8.0
   after_script:
     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
     - docker stop robot
@@ -106,6 +110,11 @@ update-demos-sigo:
     ORIGIN: $ORIGIN
     CI_PIPELINE_ID: $CI_PIPELINE_ID
     PRECURSOR: $CI_PROJECT_NAME
+    CI_COMMIT_AUTHOR: $CI_COMMIT_AUTHOR
+    CI_COMMIT_MESSAGE: $CI_COMMIT_MESSAGE
+    CI_COMMIT_DESCRIPTION: $CI_COMMIT_DESCRIPTION
+    CI_COMMIT_TITLE: $CI_COMMIT_TITLE
+    GITLAB_USER_NAME: $GITLAB_USER_NAME
   trigger: zweicom/cl-movistar/sigo/demos-sigo
   only:
     - develop

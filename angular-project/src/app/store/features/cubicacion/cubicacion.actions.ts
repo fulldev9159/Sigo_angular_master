@@ -13,9 +13,247 @@ import {
   AutoSuggestItem,
   DetalleCubicacion,
   RequestSaveCubicacion,
+  DataRespGetContratosUser,
+  Response,
+  RespDataGetAgencias4Cub,
+  RespDataProveedor4Cub,
+  RespDataTipoCubicacion4Cub,
+  RespDataActividad4Cub,
+  RespDataTipoServicioEspecialidad4Cub,
+  RequestGetServicios4Cub,
+  RespDataGetServicios4Cub,
+  RequestGetUnidadObra4Cub,
+  RespDataGetUnidadObra4Cub,
+  RequestGetDatosServicio4Cub,
+  RespDataGetDatosServicio4Cub,
+  RequestGetDatosUnidadObra4Cub,
+  RespDataGetDatosUnidadObra4Cub,
+  Carrito,
+  RequestCreateCubicacion,
+  DataRespCreateCubicacion,
+  RespDataGetAllCubs,
+  RespDataGetDetalleCubs,
+  DataRespEditCubicacion,
 } from '@data';
 
+// GET ALL CUBS
+export const getAllCubs = createAction('[Cubicacion] getAllCubs ');
+
+export const getAllCubsSuccess = createAction(
+  '[Cubicacion] getAllCubs Success',
+  props<{ response: Response<RespDataGetAllCubs> }>()
+);
+
+export const getAllCubsError = createAction(
+  '[Cubicacion] getAllCubs Error',
+  props<{ error: any }>()
+);
+
+// GET DETALLE CUB
+export const getDetalleCubs = createAction(
+  '[Cubicacion] getDetalleCubs',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getDetalleCubsSuccess = createAction(
+  '[Cubicacion] getDetalleCubs Success',
+  props<{ response: Response<RespDataGetDetalleCubs> }>()
+);
+
+export const getDetalleCubsError = createAction(
+  '[Cubicacion] getDetalleCubs Error',
+  props<{ error: any }>()
+);
+
+// GET CONTRATOS USER 4 CUB
+export const getContratosUser4Cub = createAction(
+  '[Cubicacion] getContratosUser4Cub ',
+  props<{ usuario_id: number }>()
+);
+
+export const getContratosUser4CubSuccess = createAction(
+  '[Cubicacion] getContratosUser4Cub Success',
+  props<{ response: Response<DataRespGetContratosUser> }>()
+);
+export const getContratosUser4CubError = createAction(
+  '[Cubicacion] getContratosUser4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET AGENCIA CONTRATO 4 CUB
+export const getAgencia4Cub = createAction(
+  '[Cubicacion] getAgencia4Cub ',
+  props<{ contrato_id: number }>()
+);
+
+export const getAgencia4CubSuccess = createAction(
+  '[Cubicacion] getAgencia4Cub Success',
+  props<{ response: Response<RespDataGetAgencias4Cub> }>()
+);
+export const getAgencia4CubError = createAction(
+  '[Cubicacion] getAgencia4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET PROVEEDORES 4 CUB
+export const getProveedores4Cub = createAction(
+  '[Cubicacion] getProveedores4Cub ',
+  props<{ agencia_id: number; contrato_id: number }>()
+);
+
+export const getProveedores4CubSuccess = createAction(
+  '[Cubicacion] getProveedores4Cub Success',
+  props<{ response: Response<RespDataProveedor4Cub> }>()
+);
+export const getProveedores4CubError = createAction(
+  '[Cubicacion] getProveedores4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO CUBICACION 4 CUB
+export const getTipoCubicacion4Cub = createAction(
+  '[Cubicacion] getTipoCubicacion4Cub '
+);
+
+export const getTipoCubicacion4CubSuccess = createAction(
+  '[Cubicacion] getTipoCubicacion4Cub Success',
+  props<{ response: Response<RespDataTipoCubicacion4Cub> }>()
+);
+export const getTipoCubicacion4CubError = createAction(
+  '[Cubicacion] getTipoCubicacion4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET ACTIVIDADES 4 CUB
+export const getActividades4Cub = createAction(
+  '[Cubicacion] getTipoCubicacion4Cub '
+);
+export const getActividades4CubSuccess = createAction(
+  '[Cubicacion] getActividades4Cub Success',
+  props<{ response: Response<RespDataActividad4Cub> }>()
+);
+export const getActividades4CubError = createAction(
+  '[Cubicacion] getActividades4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO SERVICIO ESPECIALIDAD 4 CUB
+export const getTipoServicioEspecialidad4Cub = createAction(
+  '[Cubicacion] getTipoServicioEspecialidad4Cub ',
+  props<{ actividad_id: number }>()
+);
+export const getTipoServicioEspecialidad4CubSuccess = createAction(
+  '[Cubicacion] getTipoServicioEspecialidad4Cub Success',
+  props<{ response: Response<RespDataTipoServicioEspecialidad4Cub> }>()
+);
+export const getTipoServicioEspecialidad4CubError = createAction(
+  '[Cubicacion] getTipoServicioEspecialidad4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET SERVICIOS 4 CUB
+export const getServicios4Cub = createAction(
+  '[Cubicacion] getServicios4Cub ',
+  props<{ request: RequestGetServicios4Cub }>()
+);
+export const getServicios4CubSuccess = createAction(
+  '[Cubicacion] getServicios4Cub Success',
+  props<{ response: Response<RespDataGetServicios4Cub> }>()
+);
+export const getServicios4CubError = createAction(
+  '[Cubicacion] getServicios4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET UNIDAD OBRA 4 CUB
+export const getUnidadObra4Cub = createAction(
+  '[Cubicacion] getUnidadObra4Cub ',
+  props<{ request: RequestGetUnidadObra4Cub }>()
+);
+export const getUnidadObra4CubSuccess = createAction(
+  '[Cubicacion] getUnidadObra4Cub Success',
+  props<{ response: Response<RespDataGetUnidadObra4Cub> }>()
+);
+export const getUnidadObra4CubError = createAction(
+  '[Cubicacion] getUnidadObra4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET DATOS SERVICIO 4 CUB
+export const getDatosServicio4Cub = createAction(
+  '[Cubicacion] getDatosServicio4Cub ',
+  props<{
+    request_servicio: RequestGetDatosServicio4Cub;
+    request_uo: RequestGetDatosUnidadObra4Cub;
+  }>()
+);
+export const getDatosServicio4CubSuccess = createAction(
+  '[Cubicacion] getDatosServicio4Cub Success',
+  props<{ item_carrito: Carrito }>()
+);
+export const getDatosServicio4CubError = createAction(
+  '[Cubicacion] getDatosServicio4Cub Error',
+  props<{ error: any }>()
+);
+
+// GET DATOS UNIDAD OBRA 4 CUB
+export const getDatosUnidadObra4Cub = createAction(
+  '[Cubicacion] getDatosUnidadObra4Cub ',
+  props<{ request: RequestGetDatosUnidadObra4Cub }>()
+);
+export const getDatosUnidadObra4CubSuccess = createAction(
+  '[Cubicacion] getDatosUnidadObra4Cub Success',
+  props<{ response: Response<RespDataGetDatosUnidadObra4Cub> }>()
+);
+export const getDatosUnidadObra4CubError = createAction(
+  '[Cubicacion] getDatosUnidadObra4Cub Error',
+  props<{ error: any }>()
+);
+
+//  DELETE SERVICE FROM CARRITO 4 CREATE CUB
+export const delteServiceCarrito4CreateCub = createAction(
+  '[Cubicacion] delteServiceCarrito4CreateCub ',
+  props<{ servicio_cod: string }>()
+);
+
+//  DELETE UO FROM CARRITO 4 CREATE CUB
+export const delteUOCarrito4CreateCub = createAction(
+  '[Cubicacion] delteUOCarrito4CreateCub ',
+  props<{ servicio_cod: string; uo_cod: string }>()
+);
+
+// CREATE CUB
+export const createCub = createAction(
+  '[Cubicacion] createCub ',
+  props<{ request: RequestCreateCubicacion }>()
+);
+export const createCubSuccess = createAction(
+  '[Cubicacion] createCub Success',
+  props<{ response: Response<DataRespCreateCubicacion> }>()
+);
+export const createCubError = createAction(
+  '[Cubicacion] createCub Error',
+  props<{ error: any }>()
+);
+
+// EDIT CUB
+export const editCub = createAction(
+  '[Cubicacion] editCub ',
+  props<{ request: RequestEditCubicacion }>()
+);
+export const editCubSuccess = createAction(
+  '[Cubicacion] editCub Success',
+  props<{ response: Response<DataRespEditCubicacion> }>()
+);
+export const editCubError = createAction(
+  '[Cubicacion] editCub Error',
+  props<{ error: any }>()
+);
+
+//  RESET
 export const reset = createAction('[Cubicacion] reset');
+
+// //////
 
 // GET CUBICACIONES init
 export const getCubs = createAction(`[Cubicacion] GET Cubicaciones`);
@@ -66,17 +304,17 @@ export const getContractMarcoError = createAction(
 // GET CONTRATO end
 
 // GET SUBCONTRATOS PROVEEDOR init
-export const getProveedores4Cub = createAction(
-  '[SubContractedProviders Get] GET Data',
-  props<{ contrato_marco_id: number }>()
-);
-export const getProveedores4CubSuccess = createAction(
-  '[SubContractedProviders Get] GET Data Success',
-  props<{
-    proveedores4Cub: SubcontratosProveedor[];
-    status: StatusResponse;
-  }>()
-);
+// export const getProveedores4Cub = createAction(
+//   '[SubContractedProviders Get] GET Data',
+//   props<{ contrato_marco_id: number }>()
+// );
+// export const getProveedores4CubSuccess = createAction(
+//   '[SubContractedProviders Get] GET Data Success',
+//   props<{
+//     proveedores4Cub: SubcontratosProveedor[];
+//     status: StatusResponse;
+//   }>()
+// );
 export const getSubContractProvidersError = createAction(
   '[SubContractedProviders Get] GET Data Error',
   props<{ error: any }>()
@@ -141,21 +379,21 @@ export const getSubContractedServicesError = createAction(
 );
 // GET LPUs Cubicacion end
 
-// POST CREATE CUBICACION init
-export const createCub = createAction(
-  '[Cubicacion Post] CREATE Cubicacion',
-  props<{ cubicacion: RequestSaveCubicacion }>()
-);
+// // POST CREATE CUBICACION init
+// export const createCub = createAction(
+//   '[Cubicacion Post] CREATE Cubicacion',
+//   props<{ cubicacion: RequestSaveCubicacion }>()
+// );
 
-export const createCubSuccess = createAction(
-  '[Cubicacion Post] CREATE Cubicacion Success',
-  props<{ response: any; status: StatusResponse }>()
-);
+// export const createCubSuccess = createAction(
+//   '[Cubicacion Post] CREATE Cubicacion Success',
+//   props<{ response: any; status: StatusResponse }>()
+// );
 
-export const createCubError = createAction(
-  '[Cubicacion Post] CREATE Cubicacion Error',
-  props<{ error: any }>()
-);
+// export const createCubError = createAction(
+//   '[Cubicacion Post] CREATE Cubicacion Error',
+//   props<{ error: any }>()
+// );
 // POST CREATE CUBICACION end
 
 // POST EDIT CUBICACION end

@@ -10,13 +10,14 @@ Resource    general_resource.robot
 *** Variables ***
 
 *** Keywords ***
-_Get avaliable cubicacion name
-    Go To                 ${url}/app/cubicacion/list-cub
-    FOR                   ${i}                              IN RANGE                            201    299
-    ${cub existe}=        _Element exist in table           CUBICACION ${i} HAPPY PATH ROBOT
-    ${numero}             set variable                      ${i - 1}
-    Set Suite Variable    ${numero}
-    Exit For Loop If      '${cub existe}' == 'False' 
-    END
 
-    [return]    ${numero}
+# _Get avaliable cubicacion name
+#    Go To                 ${url}/app/cubicacion/list-cub
+#    FOR                   ${i}                              IN RANGE                            201    299
+#    ${cub existe}=        _Element exist in table           CUBICACION ${i} HAPPY PATH ROBOT
+#    ${numero}             set variable                      ${i - 1}
+#    Set Suite Variable    ${numero}
+#    Exit For Loop If      '${cub existe}' == 'False' 
+#    END
+
+#    [return]    ${numero}

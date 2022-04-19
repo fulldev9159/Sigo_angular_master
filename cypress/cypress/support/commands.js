@@ -10,7 +10,15 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', (username, password, perfil) => {
+  cy.visit('http://localhost:4201/auth/login');
+  cy.get('#text').type(username);
+  cy.get('#password').type(password);
+  cy.get('#login').click();
+
+  cy.get(' app-select > select').select(perfil);
+  cy.get('#login').click();
+});
 //
 //
 // -- This is a child command --
