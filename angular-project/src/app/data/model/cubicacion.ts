@@ -108,6 +108,7 @@ export interface RequestGetDatosServicio4Cub {
   cmarco_has_proveedor_id: number;
   servicio_id: number;
   tipo_servicio_id: number;
+  actividad_id: number;
 }
 
 export interface RespDataGetDatosServicio4Cub {
@@ -126,6 +127,13 @@ export interface DatosServicio4Cub {
   servicio_tipo: number;
   servicio_unidad_id: number;
   tipo_moneda_id: number;
+
+  actividad_descripcion: string;
+  actividad_id: string;
+
+  servicio_tipo_moneda_codigo: string;
+  servicio_tipo_moneda_id: number;
+  tipo_servicio_descripcion: string;
 }
 
 //  GET DATOS UNIDAD OBRA 4 CUB
@@ -175,6 +183,11 @@ export interface Carrito {
   servicio_tipo: number;
   servicio_unidad_id: number;
   tipo_moneda_id: number;
+  actividad_descripcion: string;
+  actividad_id: string;
+  servicio_tipo_moneda_codigo: string;
+  servicio_tipo_moneda_id: number;
+  tipo_servicio_descripcion: string;
   unidades_obras: DatosUnidadObra4Cub[];
 }
 
@@ -201,8 +214,8 @@ export interface RequestCreateCubicacion {
 
 export interface NuevoServicio {
   servicio_id: number;
-  actividad_id: number; // Necesito este dato
-  tipo_servicio_id: number; // Necesito este dato
+  actividad_id: number;
+  tipo_servicio_id: number;
   cantidad: number;
   unidad_obra: NuevoUO[];
 }

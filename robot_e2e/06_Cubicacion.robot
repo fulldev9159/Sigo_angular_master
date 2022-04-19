@@ -26,8 +26,9 @@ Crear cubicación
    # Then: La cubicación debe aparecer en el listado con los datos correctos
 
     # Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
-    _Login                  mgestor1                                    asda                 Gestor/JP
-    _Navegate to            Crear Cubicacion
+    _Login          mgestor1            asda    Gestor/JP
+    _Navegate to    Crear Cubicacion
+
       # When: Registre todos los datos necesarios
     _Set input text         css:#nomnbreCub > app-input > input         CubTest
     _Select visible item    css:#tipoCub > app-select > select          Full

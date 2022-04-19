@@ -207,8 +207,8 @@
               <table style="width:100%">
                 <thead>
                   <tr>
-                    <th colspan="8">Servicios</th>
-                    <th colspan="6">Unidad Obra</th>
+                    <th colspan="7">Servicios</th>
+                    <th colspan="8">Unidad Obra</th>
                   </tr>
                   <tr>
                     <th>Cod</th>
@@ -216,14 +216,16 @@
                     <th>Esp</th>
                     <th>Cantidad</th>
                     <th>Precio</th>
-                    <th>Factor</th>
+                    <!-- <th>Factor</th> -->
                     <th>Total Servicio</th>
                     <th></th>
 
                     <th>Cód</th>
                     <th>Descripción</th>
+                    <th>Actividad</th>
                     <th>Cantidad</th>
-                    <th>Tipo_moneda</th>
+                    <th>Tipo Moneda</th>
+                    <th>Precio</th>
                     <th>Total UO</th>
                     <th></th>
                   </tr>
@@ -234,24 +236,41 @@
                       <tr>
                         <td class="label-table">{{item.servicio_codigo}}</td>
                         <td class="data-primaria">{{item.servicio_nombre}}</td>
-                        <td class="data-secundaria">Me falta obtenerlo</td>
-                        <td><input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
-                        <td class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                        <td class="data-secundaria">{{item.servicio_baremos}}</td>
-                        <td class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td class="data-secundaria">{{item.tipo_servicio_descripcion|titlecase}}</td>
                         <td>
-                          <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
-                            <fa-icon [icon]="trashICon"></fa-icon>
-                          </button>
+                          <input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="1" type="number" style="width: 37px;">
+                          <div *ngIf="formCntl(item.servicio_codigo,'cantidad_servicio').invalid && (formCntl(item.servicio_codigo,'cantidad_servicio').dirty || formCntl(item.servicio_codigo,'cantidad_servicio').touched)">
+                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                          </div>
+                        </td>
+                        <td class="data-secundaria">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                        <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
+                        <td class="data-secundaria">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td>
+                          <div class="ui icon buttons mini basic">
+                            <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                              <fa-icon [icon]="trashICon"></fa-icon>
+                            </button>
+                          </div>
+
                         </td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
-                        <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
-                        <td class="data-secundaria">????confirmar donde lo obtengo</td>
+                        <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+                        <td class="data-secundaria">
+                          <input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="1" type="number" style="width: 37px;">
+                          <div *ngIf="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).dirty || formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).touched)">
+                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                          </div>
+                        </td>
+                        <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
                         <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td>{{item.unidades_obras[0].uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td>
-                          <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                          <div class="ui icon buttons mini basic">
+                            <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                          </div>
                         </td>
                       </tr>
                     </ng-container>
@@ -261,11 +280,16 @@
                       <tr>
                         <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{item.servicio_nombre}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">Me falta obtenerlo</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length"><input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="'1'" type="number" style="width: 37px;"></td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.precio_proveedor* +item.precio_agencia| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{(+item.precio_proveedor* +item.precio_agencia)*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.tipo_servicio_descripcion|titlecase}}</td>
+                        <td [attr.rowspan]="+item.unidades_obras.length">
+                          <input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="1" type="number" style="width: 37px;">
+                          <div *ngIf="formCntl(item.servicio_codigo,'cantidad_servicio').invalid && (formCntl(item.servicio_codigo,'cantidad_servicio').dirty || formCntl(item.servicio_codigo,'cantidad_servicio').touched)">
+                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                          </div>
+                        </td>
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
+                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length">
                           <div class="ui icon buttons mini basic">
                             <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
@@ -276,9 +300,16 @@
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
                         <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
-                        <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
-                        <td class="data-secundaria">????confirmar donde lo obtengo</td>
-                        <td class="data-primaria">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+                        <td>
+                          <input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="1" type="number" style="width: 37px;">
+                          <div *ngIf="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).dirty || formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).touched)">
+                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                          </div>
+                        </td>
+                        <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
+                        <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td>{{item.unidades_obras[0].uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td>
                           <div class="ui icon buttons mini basic">
                             <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
@@ -294,9 +325,16 @@
                       <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
                         <td class="label-table">{{uo.uo_codigo}}</td>
                         <td class="data-primaria">{{uo.uo_nombre}}</td>
-                        <td><input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',uo.uo_codigo)" min="'1'" type="number" style="width: 37px;"></td>
-                        <td class="data-secundaria">????confirmar donde lo obtengo</td>
-                        <td class="data-primaria">{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+                        <td>
+                          <input appInputColor min="1" [formControl]="formCntlUO(i,'cantidad_uo',uo.uo_codigo)" min="1" type="number" style="width: 37px;">
+                          <div *ngIf="formCntlUO(i,'cantidad_uo',uo.uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',uo.uo_codigo).dirty || formCntlUO(i,'cantidad_uo',uo.uo_codigo).touched)">
+                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                          </div>
+                        </td>
+                        <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
+                        <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <td>{{uo.uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td>
                           <div class="ui icon buttons mini basic">
                             <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>
@@ -310,33 +348,40 @@
                   </ng-container>
                 </tbody>
               </table>
-
-              <div class="row">
-                <div class="col-9"></div>
-                <div class="col-3">
-                  <table border="1" style="width: 100%;">
-                    <tr>
-                      <td>Total Servicios</td>
-                      <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                    </tr>
-                    <tr>
-                      <td>Total Unidades Obra</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Total Cubicación</td>
-                      <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                    </tr>
-                  </table>
-                </div>
+            </div>
+            <div class="row" id="table-totales">
+              <div class="col-9"></div>
+              <div class="col-3">
+                <table style="width: 100%;">
+                  <tr>
+                    <td>Total Servicios</td>
+                    <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total Unidades Obra</td>
+                    <td>{{totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                  </tr>
+                  <tr>
+                    <td style="background: #cccccc;
+                    font-size: 15px;">Total Cubicación</td>
+                    <td>{{totalServicio + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                  </tr>
+                </table>
               </div>
             </div>
             <br>
             <br>
-            <button (click)="CreateCub()">Crear Cubicación</button>
+            <div class="row">
+              <div class="col-5"></div>
+              <div class="col-2">
+                <button (click)="CreateCub()" [disabled]="!formCub.valid" id="create-button">Crear Cubicación</button>
+              </div>
+              <div class="col-5"></div>
+            </div>
             <!-- {{carrito$|async|json}} -->
-            {{formCub.value|json}}
             <!-- {{formCub.get("table").value|json}} -->
+            <!-- {{formCub.get("table").value|json}} -->
+            <!-- <button (click)="show()"></button> -->
           </div>
         </div>
       </ng-container>
@@ -364,7 +409,7 @@
             <td class="label-table">{{item.material_codigo}}</td>
             <td class="data-primaria">{{item.material_nombre}}</td>
             <td class="label-table">{{item.material_origen}}</td>
-            <td class="data-primaria">{{item.material_precio_clp}}</td>
+            <td class="data-primaria">{{item.material_precio_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
           </tr>
         </tbody>
       </table>

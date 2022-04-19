@@ -74,8 +74,22 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   // EXTRAS
   usuario_id = null;
   totalServicio = 0;
+  totalUO = 0;
   trashICon = faTrash;
   proveedores: Proveedores4Cub[] = [];
+
+  errorMessageFn = errors => {
+    console.log(errors);
+    if (errors.required) {
+      return 'Este campo es requerido';
+    } else if (errors.whitespace) {
+      return 'Este campo es requerido';
+    } else if (errors.maxlength) {
+      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
+    } else if (errors.min) {
+      return 'El valor debe ser mayor o igual a 1';
+    }
+  };
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
@@ -306,13 +320,22 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 Validators.required,
                 Validators.min(1),
               ]),
-              precio_proveedor: new FormControl(servicio.precio_proveedor, [
+              // precio_proveedor: new FormControl(servicio.precio_proveedor, [
+              //   Validators.required,
+              // ]),
+              // precio_agencia: new FormControl(servicio.precio_agencia, [
+              //   Validators.required,
+              // ]),
+              // servicio_baremos: new FormControl(servicio.servicio_baremos, [
+              //   Validators.required,
+              // ]),
+              precio_clp: new FormControl(servicio.servicio_precio_final_clp, [
                 Validators.required,
               ]),
-              precio_agencia: new FormControl(servicio.precio_agencia, [
+              actividad_id: new FormControl(+servicio.actividad_id, [
                 Validators.required,
               ]),
-              servicio_baremos: new FormControl(servicio.servicio_baremos, [
+              servicio_tipo: new FormControl(servicio.servicio_tipo, [
                 Validators.required,
               ]),
               unidades_obra: new FormArray([]),
@@ -374,6 +397,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                       Validators.required,
                       Validators.min(1),
                     ]),
+                    precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
+                      Validators.required,
+                    ]),
                   });
                   (
                     (
@@ -406,6 +432,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                   cantidad_uo: new FormControl(1, [
                     Validators.required,
                     Validators.min(1),
+                  ]),
+                  precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
+                    Validators.required,
                   ]),
                 });
                 (
@@ -472,6 +501,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                       Validators.required,
                       Validators.min(1),
                     ]),
+                    precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
+                      Validators.required,
+                    ]),
                   });
                   (
                     (
@@ -505,6 +537,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                     Validators.required,
                     Validators.min(1),
                   ]),
+                  precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
+                    Validators.required,
+                  ]),
                 });
                 (
                   (
@@ -526,14 +561,23 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         .valueChanges.pipe(withLatestFrom(this.carrito$))
         .subscribe(([cantidadesForm, carrito]) => {
           // console.log('table exec', cantidadesForm);
+          this.totalServicio = 0;
+          this.totalUO = 0;
           if (cantidadesForm.length > 0) {
             cantidadesForm.forEach(cantidadServicio => {
               // console.log('CantidadServicios', cantidadServicio);
               const subtotal =
-                +cantidadServicio.precio_proveedor *
-                +cantidadServicio.precio_agencia *
+                +cantidadServicio.precio_clp *
                 +cantidadServicio.cantidad_servicio;
               this.totalServicio = this.totalServicio + subtotal;
+              console.log(cantidadServicio);
+              cantidadServicio.unidades_obra.forEach(cantidadUO => {
+                this.totalUO =
+                  this.totalUO +
+                  +cantidadUO.precio_clp_uo * +cantidadUO.cantidad_uo;
+
+                console.log(this.totalUO);
+              });
             });
           }
         })
@@ -594,6 +638,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       cmarco_has_proveedor_id: +this.formCub.get('cmarcoproveedor_id').value,
       servicio_id,
       tipo_servicio_id: +this.formCub.get('tipo_servicio_id').value,
+      actividad_id: +this.formCub.get('actividad_id').value,
     };
 
     const request_uo: RequestGetDatosUnidadObra4Cub = {
@@ -636,7 +681,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   showMateriales(materiales: Materiales4Cub[]): void {
-    console.log(materiales);
     this.materialesSelected = materiales;
     this.displayModalMateriales = true;
   }
@@ -663,20 +707,21 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         servicio_id: number;
         servicio_cod: string;
         cantidad_servicio: number;
+        servicio_tipo: number;
+        actividad_id: number;
         unidades_obra: Array<{ cantidad_uo: number; uo_codigo: string }>;
       }>
     ).map(servicio => {
       let unidad_obra: NuevoUO[] = [];
-      console.log(servicio.unidades_obra);
       unidad_obra = servicio.unidades_obra.map(uo => ({
         uob_codigo: uo.uo_codigo,
         cantidad: uo.cantidad_uo,
       }));
       return {
-        servicio_id: servicio.servicio_id,
-        actividad_id: 1,
-        tipo_servicio_id: 1,
-        cantidad: servicio.cantidad_servicio,
+        servicio_id: +servicio.servicio_id,
+        actividad_id: +servicio.actividad_id,
+        tipo_servicio_id: +servicio.servicio_tipo,
+        cantidad: +servicio.cantidad_servicio,
         unidad_obra,
       };
     });
@@ -706,6 +751,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.cubicacionFacade.createCub(request);
   }
 
+  // show() {
+  //   console.log(this.formCub);
+  // }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

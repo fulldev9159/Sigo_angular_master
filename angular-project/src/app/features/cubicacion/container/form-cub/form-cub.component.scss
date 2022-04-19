@@ -172,3 +172,36 @@ td,
     pointer-events: none;
   }
 }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+.table-carrito {
+  overflow-y: scroll;
+}
+
+#create-button {
+  background: #00507a;
+  color: white;
+  border: 0.1rem solid #2155e6;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 0.6rem;
+
+  &:hover {
+    background: #1883bd;
+  }
+
+  &:disabled {
+    background: #d7f1ff;
+    color: #787676;
+  }
+}
