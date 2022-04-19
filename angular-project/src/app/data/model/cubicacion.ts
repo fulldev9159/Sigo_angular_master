@@ -38,10 +38,6 @@ export interface AllCubs {
 }
 
 export interface RespDataGetDetalleCubs {
-  items: DetalleCub[];
-}
-
-export interface DetalleCub {
   data_cubicacion: DataDetalleCubicacion[];
   servicios: ServiciosDetalle[];
 }
