@@ -10,8 +10,9 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
-import { Cubicacion, SessionData } from '@data';
+import { AllCubs, Cubicacion, SessionData } from '@data';
 import { CloneCubageFormComponent } from '../../forms/clone-cubage-form/clone-cubage-form.component';
+import { ListCubTableService } from './list-cub-table.service';
 
 @Component({
   selector: 'app-list-cub',
@@ -23,7 +24,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   // DATOS A USAR
-  cubicaciones$: Observable<Cubicacion[]>;
+  cubicaciones$: Observable<AllCubs[]>;
 
   // DISPLAY MODALS
   displayClonatedCubageNameModal = false;
@@ -48,13 +49,17 @@ export class ListCubComponent implements OnInit, OnDestroy {
     private router: Router,
     private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private listCubTableService: ListCubTableService
   ) {}
 
   ngOnInit(): void {
-    console.log('asdasd');
-    this.cubageFacade.AllCubs();
-    this.cubageFacade.DetalleCub(2);
+    this.onInitReset();
+    this.onInitGetData();
+    this.onInitSetData();
+    this.onInitAccionesAdicionales();
+    // this.cubageFacade.AllCubs();
+    // this.cubageFacade.DetalleCub(2);
     // this.cubageFacade.resetData();
     // this.subscription.add(
     //   this.authFacade.getLogin$().subscribe(authLogin => {
@@ -67,14 +72,26 @@ export class ListCubComponent implements OnInit, OnDestroy {
     // this.cubicaciones$ = this.cubageFacade.getCubicacionSelector$();
   }
 
+  onInitReset(): void {
+    this.cubageFacade.resetData();
+  }
+  onInitGetData(): void {
+    this.cubageFacade.AllCubs();
+  }
+  onInitSetData(): void {
+    this.configTable = this.listCubTableService.getTableConfig();
+    this.cubicaciones$ = this.cubageFacade.AllCubs$();
+  }
+  onInitAccionesAdicionales(): void {}
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  cloneCubabeFormSubmit(): void {
-    this.cloneCubageForm.submit();
-    this.displayClonatedCubageNameModal = false;
-  }
+  // cloneCubabeFormSubmit(): void {
+  //   this.cloneCubageForm.submit();
+  //   this.displayClonatedCubageNameModal = false;
+  // }
 }
 
 // public configTable = {

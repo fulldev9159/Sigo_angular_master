@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <!-- <app-table [config]="configTable" [items]="(cubicaciones$ | async)"></app-table> -->
+  <app-table [config]="configTable" [items]="(cubicaciones$ | async)"></app-table>
 
   <app-modal [display]="DisplayModalDetalleCubicacion" (CloseEvent)="DisplayModalDetalleCubicacion=false">
     <ng-container modal-header-title>Detalles de a cubicación</ng-container>
@@ -29,10 +29,10 @@
   <ng-container modal-content>
     <app-clone-cubage-form #cloneCubageForm></app-clone-cubage-form>
   </ng-container>
-  <ng-container modal-footer>
+  <!-- <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="displayClonatedCubageNameModal=false">Cancelar</button>
     <button class="btn btn-primary" (click)="cloneCubabeFormSubmit()">
       <em class="pi pi-save mr-1"></em>Guardar
     </button>
-  </ng-container>
+  </ng-container> -->
 </app-modal>

@@ -22,7 +22,7 @@ export interface AllCubs {
   creador_usuario_id: number;
   creador_usuario_nombre: string;
   cubicacion_descripcion: string;
-  cubicacion_fecha_creacion: string;
+  cubicacion_fecha_creacion: Date;
   cubicacion_id: number;
   cubicacion_nombre: string;
   direccion_desde: string;
