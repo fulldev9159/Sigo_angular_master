@@ -127,6 +127,11 @@ export const reducerCubicacion = createReducer(
     ...state,
     unidadObras4cub: response.data.items,
   })),
+  on(CubicacionActions.loadCarritoDatosServicio4Cub, (state, { carrito }) => ({
+    ...state,
+    carrito,
+    servciouo_repetido_alert: false, // TODO revisar
+  })),
   on(
     CubicacionActions.getDatosServicio4CubSuccess,
     (state, { item_carrito }) => {

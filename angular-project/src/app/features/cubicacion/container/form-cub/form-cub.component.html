@@ -9,8 +9,15 @@
 
     <!-- <ng-template #newCubage> -->
     <div class="col">
-      <h1 class="mt-4">Ingreso de Cubicación</h1>
-      <span>Formulario de creación de una cubicación</span>
+      <ng-container *ngIf="mode === 'add'">
+        <h1 class="mt-4">Ingreso de Cubicación</h1>
+        <span>Formulario de creación de una cubicación</span>
+      </ng-container>
+
+      <ng-container *ngIf="mode === 'edit'">
+        <h1 class="mt-4">Edición de Cubicación</h1>
+        <span>Formulario de edición de una cubicación</span>
+      </ng-container>
     </div>
     <!-- </ng-template> -->
 
@@ -375,7 +382,13 @@
             <div class="row">
               <div class="col-5"></div>
               <div class="col-2">
-                <button (click)="CreateCub()" [disabled]="!formCub.valid" id="create-button">Crear Cubicación</button>
+                <ng-container *ngIf="mode === 'add'">
+                  <button (click)="CreateCub()" [disabled]="!formCub.valid" id="create-button">Crear Cubicación</button>
+                </ng-container>
+
+                <ng-container *ngIf="mode === 'edit'">
+                  <button (click)="EditCub()" [disabled]="!formCub.valid" id="create-button">Actualizar Cubicación</button>
+                </ng-container>
               </div>
               <div class="col-5"></div>
             </div>

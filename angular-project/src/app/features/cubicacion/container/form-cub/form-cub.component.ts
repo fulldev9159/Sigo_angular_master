@@ -49,6 +49,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormCubContainerComponent implements OnInit, OnDestroy {
+  mode = 'add';
+
   subscription: Subscription = new Subscription();
   // DATOS A USAR
   contratosUser4Cub$: Observable<ContratosUser[]>;
@@ -111,6 +113,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       this.route.data.subscribe(({ edit }) => {
         const detalle = edit?.cubicacion;
         if (detalle) {
+          this.mode = 'edit';
           this.onInitEditionData(detalle);
         }
       })
@@ -604,7 +607,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       const cubicacion = detalle.data_cubicacion[0];
       const servicios = detalle.servicios ?? [];
 
-      const payload = {
+      const formData = {
         id: `${cubicacion.id}`,
 
         nombre: cubicacion.nombre,
@@ -651,244 +654,57 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         +cubicacion.contrato_id
       );
 
-      // TODO está obligado a esperar a que se refresque el formulario con los datos de los combobox
-      setTimeout(
-        () => this.formCub.patchValue(payload, { emitEvent: false }),
-        2000
+      const carrito: Carrito[] = servicios.map(
+        ({ data_servicio, unidades_obra }) => ({
+          precio_agencia: data_servicio.agencia_preciario_monto,
+          precio_proveedor: data_servicio.prov_has_serv_precio,
+          servicio_baremos: data_servicio.puntos_baremos, // TODO ?
+          servicio_codigo: data_servicio.servicio_cod,
+          servicio_id: data_servicio.servicio_id,
+          servicio_nombre: data_servicio.servicio_desc,
+          servicio_precio_final: data_servicio.servicio_precio_final,
+          servicio_precio_final_clp: data_servicio.servicio_precio_final_clp,
+          servicio_tipo: data_servicio.tipo_servicio_id,
+          servicio_unidad_id: data_servicio.unidad_medida_id,
+          tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
+          actividad_descripcion: data_servicio.actividad_desc,
+          actividad_id: `${data_servicio.actividad_id}`,
+          servicio_tipo_moneda_codigo: data_servicio.precio_tipo_moneda_cod, // TODO o monto_tipo_moneda_cod?
+          servicio_tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
+          tipo_servicio_descripcion: data_servicio.tipo_servicio_desc,
+
+          unidades_obras: unidades_obra.map(
+            ({ data_unidad_obra, data_materiales }) => ({
+              material_arr: data_materiales.map(material => ({
+                material_cantidad: material.material_cantidad,
+                material_codigo: material.material_cod,
+                material_nombre: material.material_desc,
+                material_origen: material.origen,
+                material_precio: material.material_cantidad,
+                material_precio_clp: material.material_valor_clp,
+                material_tipo_moneda_id: material.tipo_moneda_id,
+                material_unidad_id: material.material_unidad_medida_id,
+                material_valor: material.valor,
+              })),
+              uo_codigo: data_unidad_obra.unidad_obra_cod,
+              uo_nombre: data_unidad_obra.unidad_obra_desc,
+              uo_precio_total_clp: data_unidad_obra.uo_precio_total_clp,
+              uo_unidad_id: data_unidad_obra.uob_unidad_medida_id,
+            })
+          ),
+        })
       );
+
+      // TODO se está obligado a esperar a que se refresque el formulario con los datos de los combobox
+      setTimeout(() => {
+        this.formCub.get('agencia_id').enable();
+        this.formCub.get('cmarcoproveedor_id').enable();
+        this.formCub.get('actividad_id').enable();
+        this.cubicacionFacade.loadDatosServicio4Cub(carrito);
+        this.formCub.patchValue(formData, { emitEvent: false });
+        this.formCub.get('table').updateValueAndValidity({ emitEvent: true });
+      }, 2000);
     }
-
-    /* CUBICACION
-{
-	"data_cubicacion": [{
-		"id": 3,
-		"nombre": "Cubicación creada por Agustín",
-		"descripcion": "prueba",
-		"direccion_desde": "aqui",
-		"altura_desde": "10",
-		"direccion_hasta": "aca",
-		"altura_hasta": "11",
-		"tipo_cubicacion_id": 1,
-		"contrato_id": 1,
-		"proveedor_id": 2,
-		"codigo_acuerdo": "12121212",
-		"cmarco_has_proveedor_id": 1,
-		"agencia_id": 25,
-		"usuario_creador_id": 2,
-		"created_at": "2022-04-21T14:22:42.542Z",
-		"updated_at": "2022-04-21T14:22:42.542Z"
-	}],
-	"servicios": [{
-		"data_servicio": {
-			"cub_has_srv_id": 6,
-			"servicio_id": 25,
-			"servicio_desc": "DISEÑO DE RED INTERIOR RED DE COBRE (DITICU)",
-			"servicio_cod": "D020",
-			"unidad_medida_id": 4,
-			"unidad_medida_cod": "CU",
-			"actividad_id": 6,
-			"actividad_desc": "DISEÑO",
-			"tipo_servicio_id": 1,
-			"tipo_servicio_desc": "CANALIZACION",
-			"servicio_cantidad": 10,
-			"puntos_baremos": 15,
-			"agencia_preciario_monto": 9956,
-			"monto_tipo_moneda_id": 2,
-			"monto_tipo_moneda_cod": "CLP",
-			"factor_conversion_monto": 1,
-			"prov_has_serv_precio": 12240,
-			"precio_tipo_moneda_id": 2,
-			"precio_tipo_moneda_cod": "CLP",
-			"factor_conversion_precio": 1,
-			"servicio_precio_final": 122400,
-			"servicio_precio_final_clp": 122400
-		},
-		"unidades_obra": [{
-			"data_unidad_obra": {
-				"cub_has_uob_id": 8,
-				"unidad_obra_cod": "0",
-				"unidad_obra_desc": "SIN UO",
-				"uob_cantidad": 1,
-				"uob_unidad_medida_id": 19,
-				"uob_unidad_medida_cod": "NN",
-				"clave": "DIBUJ",
-				"uo_precio_total_clp": 0
-			},
-			"data_materiales": [{
-				"cub_has_material_id": 8,
-				"material_cod": "0",
-				"material_desc": "SIN MATERIAL",
-				"material_cantidad": 0,
-				"material_unidad_medida_id": 19,
-				"material_unidad_medida_cod": "NN",
-				"tipo_moneda_id": 2,
-				"tipo_moneda_cod": "CLP",
-				"valor": 0,
-				"codigo_sap": "",
-				"origen": "TELEFONICA",
-				"factor_conversion": 1,
-				"material_valor_clp": 0
-			}]
-		}]
-	}, {
-		"data_servicio": {
-			"cub_has_srv_id": 7,
-			"servicio_id": 21,
-			"servicio_desc": "DISEÑO P2P EN RED DE COBRE PARA TELEALIMENTACION (AEREO O SUBTERRANEO)",
-			"servicio_cod": "D010",
-			"unidad_medida_id": 4,
-			"unidad_medida_cod": "CU",
-			"actividad_id": 6,
-			"actividad_desc": "DISEÑO",
-			"tipo_servicio_id": 1,
-			"tipo_servicio_desc": "CANALIZACION",
-			"servicio_cantidad": 1,
-			"puntos_baremos": 45,
-			"agencia_preciario_monto": 9956,
-			"monto_tipo_moneda_id": 2,
-			"monto_tipo_moneda_cod": "CLP",
-			"factor_conversion_monto": 1,
-			"prov_has_serv_precio": 15000,
-			"precio_tipo_moneda_id": 2,
-			"precio_tipo_moneda_cod": "CLP",
-			"factor_conversion_precio": 1,
-			"servicio_precio_final": 15000,
-			"servicio_precio_final_clp": 15000
-		},
-		"unidades_obra": [{
-			"data_unidad_obra": {
-				"cub_has_uob_id": 9,
-				"unidad_obra_cod": "T383",
-				"unidad_obra_desc": "TERMINAL OPTICO MULTIOPERADOR EDIFICIO",
-				"uob_cantidad": 2,
-				"uob_unidad_medida_id": 4,
-				"uob_unidad_medida_cod": "CU",
-				"clave": "DIBUJ",
-				"uo_precio_total_clp": 0
-			},
-			"data_materiales": [{
-				"cub_has_material_id": 9,
-				"material_cod": "530345",
-				"material_desc": "TERMINAL OPTICO MULTIOPERADOR EDIFICIO",
-				"material_cantidad": 1,
-				"material_unidad_medida_id": 4,
-				"material_unidad_medida_cod": "CU",
-				"tipo_moneda_id": 1,
-				"tipo_moneda_cod": "USD",
-				"valor": 113.12,
-				"codigo_sap": "10302530345",
-				"origen": "TELEFONICA",
-				"factor_conversion": 800,
-				"material_valor_clp": 90496
-			}]
-		}]
-	}]
-}
-*/
-
-    /* REQUEST
-{
-	"cubicacion_datos": {
-		"nombre": "Cubicacion Nueva",
-		"tipo_cubicacion_id": 1,
-		"contrato_id": 1,
-		"agencia_id": 25,
-		"proveedor_id": 2,
-		"codigo_acuerdo": "12121212",
-		"cmarco_has_proveedor_id": 1,
-		"usuario_creador_id": 2,
-		"direccion_desde": "aqui",
-		"altura_desde": "1",
-		"direccion_hasta": "aca",
-		"altura_hasta": "2",
-		"descripcion": "test"
-	},
-	"cubicacion_detalle": {
-		"nuevo": [{
-			"servicio_id": 25,
-			"actividad_id": 6,
-			"tipo_servicio_id": 1,
-			"cantidad": 12,
-			"unidad_obra": [{
-				"uob_codigo": "0",
-				"cantidad": 15
-			}]
-		}, {
-			"servicio_id": 21,
-			"actividad_id": 6,
-			"tipo_servicio_id": 1,
-			"cantidad": 2,
-			"unidad_obra": [{
-				"uob_codigo": "0",
-				"cantidad": 17
-			}, {
-				"uob_codigo": "T383",
-				"cantidad": 1
-			}]
-		}]
-	}
-}*/
-
-    /*
-FORMULARIO
-{
-  "id": null,
-  "nombre": "Cubicacion Nueva",
-  "tipocubicacion": "1",
-  "direcciondesde": "aqui",
-  "direcciondesdealtura": "1",
-  "direccionhasta": "aca",
-  "direccionhastaaltura": "2",
-  "descripcion": "test",
-  "contrato": "1",
-  "agencia_id": "25",
-  "cmarcoproveedor_id": "1",
-
-  "actividad_id": "6",
-  "tipo_servicio_id": "1",
-  "servicio_cod": "D010",
-  "unidad_obra_cod": "T382",
-
-  "cantidad_servicio": 1,
-  "cantidad_unidad_obra": 1,
-  "table": [
-    {
-      "servicio_id": 25,
-      "servicio_cod": "D020",
-      "cantidad_servicio": 15,
-      "precio_clp": 12240,
-      "actividad_id": 6,
-      "servicio_tipo": 1,
-      "unidades_obra": [
-        {
-          "uo_codigo": "0",
-          "cantidad_uo": 12,
-          "precio_clp_uo": 0
-        }
-      ]
-    },
-    {
-      "servicio_id": 21,
-      "servicio_cod": "D010",
-      "cantidad_servicio": 1,
-      "precio_clp": 15000,
-      "actividad_id": 6,
-      "servicio_tipo": 1,
-      "unidades_obra": [
-        {
-          "uo_codigo": "T383",
-          "cantidad_uo": 17,
-          "precio_clp_uo": 0
-        },
-        {
-          "uo_codigo": "T382",
-          "cantidad_uo": 1,
-          "precio_clp_uo": 0
-        }
-      ]
-    }
-  ]
-}*/
   }
 
   checkAndEnable(key: string, array: any[]): void {
@@ -1054,9 +870,10 @@ FORMULARIO
       },
     };
 
-    console.log(request);
-    //// this.cubicacionFacade.createCub(request);
+    this.cubicacionFacade.createCub(request);
   }
+
+  EditCub(): void {}
 
   // show() {
   //   console.log(this.formCub);
@@ -1075,188 +892,48 @@ FORMULARIO
   }
 }
 
-/*
-         * Antes de agregar un servicio
-           "id": null,
-  "nombre": "Cubicacion Nueva",
-  "tipocubicacion": "1",
-  "direcciondesde": "aqui",
-  "direcciondesdealtura": "1",
-  "direccionhasta": "aca",
-  "direccionhastaaltura": "2",
-  "descripcion": "test",
-  "contrato": "1",
-  "agencia_id": "25",
-  "cmarcoproveedor_id": "1",
-
-// Estos 4 datos al parecer no tienen relevancia
-  "actividad_id": null,
-  "tipo_servicio_id": null,
-  "servicio_cod": null,
-  "unidad_obra_cod": null,
-
-  "cantidad_servicio": 1,
-  "cantidad_unidad_obra": 1,
-  "table": []
-}
-*/
-/*
-Despues de agregar
+/* REQUEST
 {
-  "id": null,
-  "nombre": "Cubicacion Nueva",
-  "tipocubicacion": "1",
-  "direcciondesde": "aqui",
-  "direcciondesdealtura": "1",
-  "direccionhasta": "aca",
-  "direccionhastaaltura": "2",
-  "descripcion": "test",
-  "contrato": "1",
-  "agencia_id": "25",
-  "cmarcoproveedor_id": "1",
-
-  "actividad_id": "6",
-  "tipo_servicio_id": "1",
-  "servicio_cod": "D020",
-  "unidad_obra_cod": "0",
-
-  "cantidad_servicio": 1,
-  "cantidad_unidad_obra": 1,
-
-  "table": [
-    {
-      "servicio_id": 25,
-      "servicio_cod": "D020",
-
-      "cantidad_servicio": 15,
-      "precio_clp": 12240,
-
-      "actividad_id": 6,
-      "servicio_tipo": 1, // tipo_servicio_id
-
-      "unidades_obra": [
-        {
-          "uo_codigo": "0", // unidad_obra_cod
-          "cantidad_uo": 12,
-          "precio_clp_uo": 0
-        }
-      ]
-    }
-  ]
-}*/
-/*
-Despues de agregar un segundo servicio
-{
-  "id": null,
-  "nombre": "Cubicacion Nueva",
-  "tipocubicacion": "1",
-  "direcciondesde": "aqui",
-  "direcciondesdealtura": "1",
-  "direccionhasta": "aca",
-  "direccionhastaaltura": "2",
-  "descripcion": "test",
-  "contrato": "1",
-  "agencia_id": "25",
-  "cmarcoproveedor_id": "1",
-
-  "actividad_id": "6",
-  "tipo_servicio_id": "1",
-  "servicio_cod": "D010",
-  "unidad_obra_cod": "T383",
-
-  "cantidad_servicio": 1,
-  "cantidad_unidad_obra": 1,
-
-  "table": [
-    {
-      "servicio_id": 25,
-      "servicio_cod": "D020",
-      "cantidad_servicio": 15,
-      "precio_clp": 12240,
-      "actividad_id": 6,
-      "servicio_tipo": 1,
-      "unidades_obra": [
-        {
-          "uo_codigo": "0",
-          "cantidad_uo": 12,
-          "precio_clp_uo": 0
-        }
-      ]
-    },
-    {
-      "servicio_id": 21,
-      "servicio_cod": "D010",
-      "cantidad_servicio": 1,
-      "precio_clp": 15000,
-      "actividad_id": 6,
-      "servicio_tipo": 1,
-      "unidades_obra": [
-        {
-          "uo_codigo": "T383",
-          "cantidad_uo": 1,
-          "precio_clp_uo": 0
-        }
-      ]
-    }
-  ]
-}*/
-/*
-Despues de agregar una unidad de obra para el servicio anterior
-{
-  "id": null,
-  "nombre": "Cubicacion Nueva",
-  "tipocubicacion": "1",
-  "direcciondesde": "aqui",
-  "direcciondesdealtura": "1",
-  "direccionhasta": "aca",
-  "direccionhastaaltura": "2",
-  "descripcion": "test",
-  "contrato": "1",
-  "agencia_id": "25",
-  "cmarcoproveedor_id": "1",
-
-  "actividad_id": "6",
-  "tipo_servicio_id": "1",
-  "servicio_cod": "D010",
-  "unidad_obra_cod": "T382",
-
-  "cantidad_servicio": 1,
-  "cantidad_unidad_obra": 1,
-  "table": [
-    {
-      "servicio_id": 25,
-      "servicio_cod": "D020",
-      "cantidad_servicio": 15,
-      "precio_clp": 12240,
-      "actividad_id": 6,
-      "servicio_tipo": 1,
-      "unidades_obra": [
-        {
-          "uo_codigo": "0",
-          "cantidad_uo": 12,
-          "precio_clp_uo": 0
-        }
-      ]
-    },
-    {
-      "servicio_id": 21,
-      "servicio_cod": "D010",
-      "cantidad_servicio": 1,
-      "precio_clp": 15000,
-      "actividad_id": 6,
-      "servicio_tipo": 1,
-      "unidades_obra": [
-        {
-          "uo_codigo": "T383",
-          "cantidad_uo": 17,
-          "precio_clp_uo": 0
-        },
-        {
-          "uo_codigo": "T382",
-          "cantidad_uo": 1,
-          "precio_clp_uo": 0
-        }
-      ]
-    }
-  ]
+	"cubicacion_datos": {
+		"nombre": "Cubicacion agustin 3",
+		"tipo_cubicacion_id": 1,
+		"contrato_id": 1,
+		"agencia_id": 25,
+		"proveedor_id": 2,
+		"codigo_acuerdo": "12121212",
+		"cmarco_has_proveedor_id": 1,
+		"usuario_creador_id": 2,
+		"direccion_desde": "aqui",
+		"altura_desde": "12",
+		"direccion_hasta": "aca",
+		"altura_hasta": "13",
+		"descripcion": "test"
+	},
+	"cubicacion_detalle": {
+		"nuevo": [{
+			"servicio_id": 25,
+			"actividad_id": 6,
+			"tipo_servicio_id": 1,
+			"cantidad": 1,
+			"unidad_obra": [{
+				"uob_codigo": "0",
+				"cantidad": 2
+			}]
+		}, {
+			"servicio_id": 21,
+			"actividad_id": 6,
+			"tipo_servicio_id": 1,
+			"cantidad": 4,
+			"unidad_obra": [{
+				"uob_codigo": "T383",
+				"cantidad": 6
+			}, {
+				"uob_codigo": "T382",
+				"cantidad": 5
+			}, {
+				"uob_codigo": "T376",
+				"cantidad": 3
+			}]
+		}]
+	}
 }*/
