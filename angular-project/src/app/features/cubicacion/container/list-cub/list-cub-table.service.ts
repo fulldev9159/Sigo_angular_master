@@ -10,7 +10,7 @@ export class ListCubTableService {
         title: '',
         searchText: 'buscar...',
         paginator: true,
-        actionsType: 'Buttons',
+        actionsType: 'ButtonsTest',
       },
       body: {
         headers: [
@@ -28,7 +28,7 @@ export class ListCubTableService {
             sort: 'tipo_cubicacion_descripcion',
             header: 'tipo_cubicacion_descripcion',
             editable: false,
-            width: '7%',
+            //width: '7%',
           },
           {
             field: 'Tipo Contrato',

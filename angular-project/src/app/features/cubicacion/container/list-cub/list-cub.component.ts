@@ -58,9 +58,6 @@ export class ListCubComponent implements OnInit, OnDestroy {
     this.onInitGetData();
     this.onInitSetData();
     this.onInitAccionesAdicionales();
-    // this.cubageFacade.AllCubs();
-    // this.cubageFacade.DetalleCub(2);
-    // this.cubageFacade.resetData();
     // this.subscription.add(
     //   this.authFacade.getLogin$().subscribe(authLogin => {
     //     if (authLogin) {
@@ -80,9 +77,23 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
   onInitSetData(): void {
     this.configTable = this.listCubTableService.getTableConfig();
+    (this.configTable.body.actions as Array<any>).push({
+      type: 'alldisplay',
+      label: 'Detalles',
+      onClick: (event: Event, item: AllCubs) => {
+        if (item) {
+          this.DisplayModalDetalleCubicacion = true;
+          this.cubageFacade.DetalleCub(item.cubicacion_id);
+        }
+      },
+    });
     this.cubicaciones$ = this.cubageFacade.AllCubs$();
   }
   onInitAccionesAdicionales(): void {}
+
+  closeModalDetalles() {
+    this.DisplayModalDetalleCubicacion = false;
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

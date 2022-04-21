@@ -14,7 +14,7 @@
 
   <app-table [config]="configTable" [items]="(cubicaciones$ | async)"></app-table>
 
-  <app-modal [display]="DisplayModalDetalleCubicacion" (CloseEvent)="DisplayModalDetalleCubicacion=false">
+  <app-modal [display]="DisplayModalDetalleCubicacion" (CloseEvent)="closeModalDetalles()">
     <ng-container modal-header-title>Detalles de a cubicación</ng-container>
     <ng-container modal-content>
       <app-detalle-cubicacion-table></app-detalle-cubicacion-table>
