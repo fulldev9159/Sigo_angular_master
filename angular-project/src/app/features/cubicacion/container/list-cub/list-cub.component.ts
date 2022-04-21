@@ -116,11 +116,11 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
   onInitAccionesAdicionales(): void {}
 
-  closeModalDetalles() {
+  closeModalDetalles(): void {
     this.DisplayModalDetalleCubicacion = false;
   }
 
-  closeModalClonar() {
+  closeModalClonar(): void {
     this.displayClonatedCubageNameModal = false;
   }
   ngOnDestroy(): void {
