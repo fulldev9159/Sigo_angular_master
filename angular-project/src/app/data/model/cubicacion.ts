@@ -286,6 +286,8 @@ export interface RespDataGetDatosUnidadObra4Cub {
 }
 
 export interface DatosUnidadObra4Cub {
+  precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
+
   material_arr: Materiales4Cub[];
   uo_codigo: string;
   uo_nombre: string;
@@ -306,6 +308,8 @@ export interface Materiales4Cub {
 }
 
 export interface Carrito {
+  precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
+
   precio_agencia: number;
   precio_proveedor: number;
   servicio_baremos: number;

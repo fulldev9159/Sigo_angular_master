@@ -656,6 +656,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
       const carrito: Carrito[] = servicios.map(
         ({ data_servicio, unidades_obra }) => ({
+          precargado: true,
+
           precio_agencia: data_servicio.agencia_preciario_monto,
           precio_proveedor: data_servicio.prov_has_serv_precio,
           servicio_baremos: data_servicio.puntos_baremos, // TODO ?
@@ -675,6 +677,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
           unidades_obras: unidades_obra.map(
             ({ data_unidad_obra, data_materiales }) => ({
+              precargado: true,
+
               material_arr: data_materiales.map(material => ({
                 material_cantidad: material.material_cantidad,
                 material_codigo: material.material_cod,
@@ -888,7 +892,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   get values(): any {
-    return this.formCub.getRawValue();
+    return this.formCub ? this.formCub.getRawValue() : null;
   }
 }
 
