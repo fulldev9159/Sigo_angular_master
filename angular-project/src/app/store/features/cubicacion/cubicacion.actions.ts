@@ -180,6 +180,12 @@ export const getUnidadObra4CubError = createAction(
 );
 
 // GET DATOS SERVICIO 4 CUB
+export const loadCarritoDatosServicio4Cub = createAction(
+  '[Cubicacion] loadCarritoDatosServicio4Cub ',
+  props<{
+    carrito: Carrito[];
+  }>()
+);
 export const getDatosServicio4Cub = createAction(
   '[Cubicacion] getDatosServicio4Cub ',
   props<{

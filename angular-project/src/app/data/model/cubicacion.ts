@@ -62,7 +62,7 @@ export interface DataDetalleCubicacion {
 }
 
 export interface ServiciosDetalle {
-  data_servicios: {
+  data_servicio: {
     actividad_desc: string;
     actividad_id: number;
     agencia_preciario_monto: number;
@@ -86,19 +86,34 @@ export interface ServiciosDetalle {
     unidad_medida_cod: string;
     unidad_medida_id: number;
   };
-  unidades_obra: {
-    materiales: Materiales4Detalle[];
-    unidades_obra: {
-      clave: string;
-      cub_has_uob_id: number;
-      unidad_obra_cod: string;
-      unidad_obra_desc: string;
-      uo_precio_total_clp: number;
-      uob_cantidad: number;
-      uob_unidad_medida_cod: string;
-      uob_unidad_medida_id: number;
-    };
-  };
+  unidades_obra: [
+    {
+      data_unidad_obra: {
+        clave: string;
+        cub_has_uob_id: number;
+        unidad_obra_cod: string;
+        unidad_obra_desc: string;
+        uo_precio_total_clp: number;
+        uob_cantidad: number;
+        uob_unidad_medida_cod: string;
+        uob_unidad_medida_id: number;
+      };
+      data_materiales: Materiales4Detalle[];
+    }
+  ];
+  //// unidades_obra: {
+  ////   materiales: Materiales4Detalle[];
+  ////   unidades_obra: {
+  ////     clave: string;
+  ////     cub_has_uob_id: number;
+  ////     unidad_obra_cod: string;
+  ////     unidad_obra_desc: string;
+  ////     uo_precio_total_clp: number;
+  ////     uob_cantidad: number;
+  ////     uob_unidad_medida_cod: string;
+  ////     uob_unidad_medida_id: number;
+  ////   };
+  //// };
 }
 
 export interface Materiales4Detalle {
@@ -271,6 +286,9 @@ export interface RespDataGetDatosUnidadObra4Cub {
 }
 
 export interface DatosUnidadObra4Cub {
+  precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
+  uo_rowid?: number;
+
   material_arr: Materiales4Cub[];
   uo_codigo: string;
   uo_nombre: string;
@@ -291,6 +309,9 @@ export interface Materiales4Cub {
 }
 
 export interface Carrito {
+  precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
+  servicio_rowid?: number;
+
   precio_agencia: number;
   precio_proveedor: number;
   servicio_baremos: number;
@@ -539,14 +560,14 @@ export interface LpusEditSave {
   lpu_id: number;
   cantidad: number;
 }
-export interface RequestEditCubicacion {
-  cubicacion_id: number;
-  cubicacion_nombre: string;
-  region_id: number;
-  contrato_marco_id: number;
-  proveedor_id: number;
-  lpus: LpusEditSave[];
-}
+//// export interface RequestEditCubicacion {
+////   cubicacion_id: number;
+////   cubicacion_nombre: string;
+////   region_id: number;
+////   contrato_marco_id: number;
+////   proveedor_id: number;
+////   lpus: LpusEditSave[];
+//// }
 export interface ResponseEditCubicacion {
   data: {
     id: number;

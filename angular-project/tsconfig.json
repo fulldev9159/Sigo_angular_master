@@ -22,7 +22,8 @@
       "@featureOT/*": ["src/app/features/*"],
       "@uiOT/*": ["src/app/ui/*"],
       "@storeOT/*": ["src/app/store/*"],
-      "@utilsSIGO/*": ["src/app/utils/*"]
+      "@utilsSIGO/*": ["src/app/utils/*"],
+      "@pages/*": ["src/app/pages/*"]
     },
     "lib": ["es2018", "dom", "es2019"]
   }

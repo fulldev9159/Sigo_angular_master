@@ -24,7 +24,7 @@ import {
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
 } from '@data';
-import { carrito } from './cubicacion.selectors';
+// import { carrito } from './cubicacion.selectors';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 
 export const CubicacionFeatureKey = 'cubicacion';
@@ -127,6 +127,11 @@ export const reducerCubicacion = createReducer(
     ...state,
     unidadObras4cub: response.data.items,
   })),
+  on(CubicacionActions.loadCarritoDatosServicio4Cub, (state, { carrito }) => ({
+    ...state,
+    carrito,
+    servciouo_repetido_alert: false, // TODO revisar
+  })),
   on(
     CubicacionActions.getDatosServicio4CubSuccess,
     (state, { item_carrito }) => {
@@ -137,10 +142,12 @@ export const reducerCubicacion = createReducer(
         const temp = copy(item_carrito);
         // console.log('INDEX', index);
 
+        temp.precargado = state.carrito[index].precargado;
         temp.unidades_obras.push(...state.carrito[index].unidades_obras);
         const uo_repetido = state.carrito[index].unidades_obras.find(
           uo => uo.uo_codigo === item_carrito.unidades_obras[0].uo_codigo
         );
+
         if (uo_repetido) {
           return {
             ...state,

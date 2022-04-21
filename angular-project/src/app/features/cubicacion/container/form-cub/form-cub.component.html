@@ -9,8 +9,15 @@
 
     <!-- <ng-template #newCubage> -->
     <div class="col">
-      <h1 class="mt-4">Ingreso de Cubicación</h1>
-      <span>Formulario de creación de una cubicación</span>
+      <ng-container *ngIf="mode === 'add'">
+        <h1 class="mt-4">Ingreso de Cubicación</h1>
+        <span>Formulario de creación de una cubicación</span>
+      </ng-container>
+
+      <ng-container *ngIf="mode === 'edit'">
+        <h1 class="mt-4">Edición de Cubicación</h1>
+        <span>Formulario de edición de una cubicación</span>
+      </ng-container>
     </div>
     <!-- </ng-template> -->
 
@@ -18,6 +25,9 @@
       <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
     </div>
   </div>
+  <!--
+  <pre>{{ values | json }}</pre>
+  -->
   <form [formGroup]="formCub">
     <app-card [classCardHeader]="'bg-secondary text-white'">
       <ng-container card-body>
@@ -247,12 +257,13 @@
                         <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
                         <td class="data-secundaria">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td>
-                          <div class="ui icon buttons mini basic">
-                            <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
-                              <fa-icon [icon]="trashICon"></fa-icon>
-                            </button>
-                          </div>
-
+                          <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
+                            <div class="ui icon buttons mini basic">
+                              <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                                <fa-icon [icon]="trashICon"></fa-icon>
+                              </button>
+                            </div>
+                          </ng-container>
                         </td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
@@ -291,11 +302,13 @@
                         <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length">
-                          <div class="ui icon buttons mini basic">
-                            <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
-                              <fa-icon [icon]="trashICon"></fa-icon>
-                            </button>
-                          </div>
+                          <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
+                            <div class="ui icon buttons mini basic">
+                              <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                                <fa-icon [icon]="trashICon"></fa-icon>
+                              </button>
+                            </div>
+                          </ng-container>
                         </td>
 
                         <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
@@ -313,9 +326,11 @@
                         <td>
                           <div class="ui icon buttons mini basic">
                             <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
-                            <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
-                              <fa-icon [icon]="trashICon"></fa-icon>
-                            </button>
+                            <ng-container *ngIf="item.unidades_obras[0].precargado === undefined || item.unidades_obras[0].precargado === false">
+                              <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
+                                <fa-icon [icon]="trashICon"></fa-icon>
+                              </button>
+                            </ng-container>
                           </div>
                         </td>
                       </tr>
@@ -338,9 +353,11 @@
                         <td>
                           <div class="ui icon buttons mini basic">
                             <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>
-                            <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
-                              <fa-icon [icon]="trashICon"></fa-icon>
-                            </button>
+                            <ng-container *ngIf="uo.precargado === undefined || uo.precargado === false">
+                              <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
+                                <fa-icon [icon]="trashICon"></fa-icon>
+                              </button>
+                            </ng-container>
                           </div>
                         </td>
                       </tr>
@@ -374,7 +391,13 @@
             <div class="row">
               <div class="col-5"></div>
               <div class="col-2">
-                <button (click)="CreateCub()" [disabled]="!formCub.valid" id="create-button">Crear Cubicación</button>
+                <ng-container *ngIf="mode === 'add'">
+                  <button (click)="CreateCub()" [disabled]="!formCub.valid" id="create-button">Crear Cubicación</button>
+                </ng-container>
+
+                <ng-container *ngIf="mode === 'edit'">
+                  <button (click)="EditCub()" [disabled]="!formCub.valid" id="create-button">Actualizar Cubicación</button>
+                </ng-container>
               </div>
               <div class="col-5"></div>
             </div>

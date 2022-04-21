@@ -13,6 +13,7 @@
   </div>
 
   <!-- <app-table [config]="configTable" [items]="(cubicaciones$ | async)"></app-table> -->
+  <pre>{{ cubicaciones$ | async | json }}</pre>
 
   <app-modal [display]="DisplayModalDetalleCubicacion" (CloseEvent)="DisplayModalDetalleCubicacion=false">
     <ng-container modal-header-title>Detalles de a cubicación</ng-container>
