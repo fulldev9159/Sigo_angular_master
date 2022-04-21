@@ -62,7 +62,7 @@ export interface DataDetalleCubicacion {
 }
 
 export interface ServiciosDetalle {
-  data_servicios: {
+  data_servicio: {
     actividad_desc: string;
     actividad_id: number;
     agencia_preciario_monto: number;
@@ -86,19 +86,34 @@ export interface ServiciosDetalle {
     unidad_medida_cod: string;
     unidad_medida_id: number;
   };
-  unidades_obra: {
-    materiales: Materiales4Detalle[];
-    unidades_obra: {
-      clave: string;
-      cub_has_uob_id: number;
-      unidad_obra_cod: string;
-      unidad_obra_desc: string;
-      uo_precio_total_clp: number;
-      uob_cantidad: number;
-      uob_unidad_medida_cod: string;
-      uob_unidad_medida_id: number;
-    };
-  };
+  unidades_obra: [
+    {
+      data_unidad_obra: {
+        clave: string;
+        cub_has_uob_id: number;
+        unidad_obra_cod: string;
+        unidad_obra_desc: string;
+        uo_precio_total_clp: number;
+        uob_cantidad: number;
+        uob_unidad_medida_cod: string;
+        uob_unidad_medida_id: number;
+      };
+      data_materiales: Materiales4Detalle[];
+    }
+  ];
+  //// unidades_obra: {
+  ////   materiales: Materiales4Detalle[];
+  ////   unidades_obra: {
+  ////     clave: string;
+  ////     cub_has_uob_id: number;
+  ////     unidad_obra_cod: string;
+  ////     unidad_obra_desc: string;
+  ////     uo_precio_total_clp: number;
+  ////     uob_cantidad: number;
+  ////     uob_unidad_medida_cod: string;
+  ////     uob_unidad_medida_id: number;
+  ////   };
+  //// };
 }
 
 export interface Materiales4Detalle {

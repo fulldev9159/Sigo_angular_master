@@ -41,7 +41,7 @@ export const routes: Routes = [
         component: FormCubContainerComponent,
         canActivate: [NgxPermissionsGuard],
         resolve: {
-          detalleCubicacion: GetCubicacionResolver,
+          edit: GetCubicacionResolver,
         },
         data: {
           permissions: {
