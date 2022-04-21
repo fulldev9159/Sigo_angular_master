@@ -24,15 +24,15 @@
   </app-modal>
 </div>
 
-<app-modal [display]="displayClonatedCubageNameModal" (CloseEvent)="displayClonatedCubageNameModal=false" [style]="{ width: '50vw' }">
+<app-modal [display]="displayClonatedCubageNameModal" (CloseEvent)="closeModalClonar()" [style]="{ width: '50vw' }">
   <ng-container modal-header-title>Clonar Cubicación</ng-container>
   <ng-container modal-content>
     <app-clone-cubage-form #cloneCubageForm></app-clone-cubage-form>
   </ng-container>
-  <!-- <ng-container modal-footer>
-    <button class="btn btn-light mr-2" (click)="displayClonatedCubageNameModal=false">Cancelar</button>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeModalClonar()">Cancelar</button>
     <button class="btn btn-primary" (click)="cloneCubabeFormSubmit()">
       <em class="pi pi-save mr-1"></em>Guardar
     </button>
-  </ng-container> -->
+  </ng-container>
 </app-modal>

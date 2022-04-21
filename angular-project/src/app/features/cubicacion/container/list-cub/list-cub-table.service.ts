@@ -10,7 +10,7 @@ export class ListCubTableService {
         title: '',
         searchText: 'buscar...',
         paginator: true,
-        actionsType: 'ButtonsTest',
+        actionsType: 'Menu',
       },
       body: {
         headers: [

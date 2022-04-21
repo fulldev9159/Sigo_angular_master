@@ -89,6 +89,16 @@ export class ListCubComponent implements OnInit, OnDestroy {
         },
       },
       {
+        type: 'alldisplay',
+        label: 'Clonar',
+        onClick: (event: Event, item: AllCubs) => {
+          if (item) {
+            this.displayClonatedCubageNameModal = true;
+            this.cubageFacade.DetalleCub(item.cubicacion_id);
+          }
+        },
+      },
+      {
         type: 'button-edit-asginado',
         label: 'Editar',
         tooltipDisabled: 'Ya está asignada a una OT',
@@ -110,14 +120,17 @@ export class ListCubComponent implements OnInit, OnDestroy {
     this.DisplayModalDetalleCubicacion = false;
   }
 
+  closeModalClonar() {
+    this.displayClonatedCubageNameModal = false;
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  // cloneCubabeFormSubmit(): void {
-  //   this.cloneCubageForm.submit();
-  //   this.displayClonatedCubageNameModal = false;
-  // }
+  cloneCubabeFormSubmit(): void {
+    this.cloneCubageForm.submit();
+    this.closeModalClonar();
+  }
 }
 
 // public configTable = {
