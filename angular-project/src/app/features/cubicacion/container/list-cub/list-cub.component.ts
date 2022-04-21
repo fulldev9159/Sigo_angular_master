@@ -77,16 +77,31 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
   onInitSetData(): void {
     this.configTable = this.listCubTableService.getTableConfig();
-    (this.configTable.body.actions as Array<any>).push({
-      type: 'alldisplay',
-      label: 'Detalles',
-      onClick: (event: Event, item: AllCubs) => {
-        if (item) {
-          this.DisplayModalDetalleCubicacion = true;
-          this.cubageFacade.DetalleCub(item.cubicacion_id);
-        }
+    (this.configTable.body.actions as Array<any>).push(
+      {
+        type: 'alldisplay',
+        label: 'Detalles',
+        onClick: (event: Event, item: AllCubs) => {
+          if (item) {
+            this.DisplayModalDetalleCubicacion = true;
+            this.cubageFacade.DetalleCub(item.cubicacion_id);
+          }
+        },
       },
-    });
+      {
+        type: 'button-edit-asginado',
+        label: 'Editar',
+        tooltipDisabled: 'Ya está asignada a una OT',
+        onClick: (event: Event, item: AllCubs) => {
+          if (item) {
+            this.router.navigate([
+              '/app/cubicacion/form-cub',
+              item.cubicacion_id,
+            ]);
+          }
+        },
+      }
+    );
     this.cubicaciones$ = this.cubageFacade.AllCubs$();
   }
   onInitAccionesAdicionales(): void {}

@@ -107,6 +107,17 @@
                     <button *ngSwitchCase="'button-delete'" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
                       <fa-icon [icon]="trashICon"></fa-icon>
                     </button>
+
+                    <ng-container *ngSwitchCase="'button-edit-asginado'">
+                      <div *ngIf="item['asignado']!==0" pTooltip="{{ button.tooltipDisabled }}">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button generic-color" style="height: 100%;">
+                          {{button.label}}
+                        </button>
+                      </div>
+                      <button *ngIf="item['asignado']===0" (click)="button.onClick($event, item, rowIndex)" class="ui button generic-color">
+                        {{button.label}}
+                      </button>
+                    </ng-container>
                   </ng-container>
                 </div>
               </ng-container>

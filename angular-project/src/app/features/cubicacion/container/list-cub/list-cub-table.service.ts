@@ -20,7 +20,7 @@ export class ListCubTableService {
             sort: 'cubicacion_nombre',
             header: 'cubicacion_nombre',
             editable: false,
-            width: '20%',
+            // width: '20%',
           },
           {
             field: 'Tipo Cubicación',
@@ -36,7 +36,7 @@ export class ListCubTableService {
             sort: 'contrato_marco_tipo_nombre',
             header: 'contrato_marco_tipo_nombre',
             editable: false,
-            width: '7%',
+            // width: '7%',
           },
           {
             field: 'Código Acuerdo',
@@ -44,7 +44,7 @@ export class ListCubTableService {
             sort: 'codigo_acuerdo',
             header: 'codigo_acuerdo',
             editable: false,
-            width: '8%',
+            // width: '8%',
           },
           {
             field: 'Contrato marco',
@@ -101,6 +101,7 @@ export class ListCubTableService {
             sort: null,
             header: null,
             editable: false,
+            width: '10%',
           },
         ],
         sort: [
