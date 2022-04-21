@@ -119,6 +119,20 @@
                       </button>
                     </ng-container>
                   </ng-container>
+
+                  <ng-container *ngSwitchCase="'button-delete-asginado'">
+                    <div *ngIf="item['asignado']!==0" pTooltip="{{ button.tooltipDisabled }}">
+                      <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color" style="height: 100%;">
+                        <fa-icon [icon]="trashICon"></fa-icon>
+                      </button>
+                    </div>
+                    <button *ngIf="item['asignado']===0" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
+                      <fa-icon [icon]="trashICon"></fa-icon>
+                    </button>
+                  </ng-container>
+                  <button *ngSwitchCase="'button-delete'" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
+                    <fa-icon [icon]="trashICon"></fa-icon>
+                  </button>
                 </div>
               </ng-container>
 

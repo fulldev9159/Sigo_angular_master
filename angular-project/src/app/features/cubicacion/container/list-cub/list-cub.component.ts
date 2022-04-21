@@ -29,6 +29,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   // DISPLAY MODALS
   displayClonatedCubageNameModal = false;
   DisplayModalDetalleCubicacion = false;
+  displayModalDeleteCub = false;
 
   // FORMULARIO
 
@@ -36,7 +37,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   configTable = null;
 
   // EXTRAS
-
+  cubicacion_id = null;
   authLogin: SessionData = null;
 
   @ViewChild('cloneCubageForm', {
@@ -110,6 +111,17 @@ export class ListCubComponent implements OnInit, OnDestroy {
             ]);
           }
         },
+      },
+      {
+        type: 'button-eliminar-asginado',
+        tooltipDisabled: 'Ya está asignada a una OT',
+        label: 'Eliminar',
+        onClick: (event: Event, item: AllCubs) => {
+          if (item) {
+            this.displayModalDeleteCub = true;
+            this.cubicacion_id = item.cubicacion_id;
+          }
+        },
       }
     );
     this.cubicaciones$ = this.cubageFacade.AllCubs$();
@@ -123,13 +135,22 @@ export class ListCubComponent implements OnInit, OnDestroy {
   closeModalClonar(): void {
     this.displayClonatedCubageNameModal = false;
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
+  closeModalDeleteCub(): void {
+    this.displayModalDeleteCub = false;
+    this.cubicacion_id = null;
+  }
   cloneCubabeFormSubmit(): void {
     this.cloneCubageForm.submit();
     this.closeModalClonar();
+  }
+
+  DeleteCub(): void {
+    this.cubageFacade.deleteCub(this.cubicacion_id);
+    this.displayModalDeleteCub = false;
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
 

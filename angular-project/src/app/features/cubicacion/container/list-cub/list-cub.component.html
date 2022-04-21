@@ -36,3 +36,45 @@
     </button>
   </ng-container>
 </app-modal>
+
+<app-modal [display]="displayModalDeleteCub" (CloseEvent)="closeModalDeleteCub()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar esta cubicación?</p>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="col">
+              <button pButton type="button" (click)="DeleteUsuario()" label="Si, eliminar el usuario" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+              border: #b36161;
+              margin-left: 10px;
+              color: #412727;"></button>
+              <button pButton type="button" (click)="closeModalDeleteCub()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+              border: gray;"></button>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer>
+    <div class="row">
+      <div class="col">
+        <button pButton type="button" (click)="DeleteCub()" label="Si, eliminar la cubicación" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+        border: #b36161;
+        margin-left: 10px;
+        color: #412727;"></button>
+        <button pButton type="button" (click)="closeModalDeleteCub()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+        border: gray;"></button>
+      </div>
+    </div>
+
+  </ng-container>
+</app-modal>

@@ -250,6 +250,19 @@ export const editCubError = createAction(
   props<{ error: any }>()
 );
 
+// DELETE  CUB
+export const deleteCub = createAction(
+  '[Cubicacion] deleteCub ',
+  props<{ cubicacion_id: number }>()
+);
+export const deleteCubSuccess = createAction(
+  '[Cubicacion] deleteCub Success',
+  props<{ response: Response<any> }>()
+);
+export const deleteCubError = createAction(
+  '[Cubicacion] deleteCub Error',
+  props<{ error: any }>()
+);
 //  RESET
 export const reset = createAction('[Cubicacion] reset');
 
