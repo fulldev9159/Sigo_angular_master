@@ -4,6 +4,7 @@ import { FormCubContainerComponent } from './container/form-cub/form-cub.compone
 import { ListCubComponent } from './container/list-cub/list-cub.component';
 import { CubicacionComponent } from './cubicacion.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { GetCubicacionResolver } from './resolver/get-cubicacion.resolver';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,9 @@ export const routes: Routes = [
         path: 'form-cub/:id',
         component: FormCubContainerComponent,
         canActivate: [NgxPermissionsGuard],
+        resolve: {
+          detalleCubicacion: GetCubicacionResolver,
+        },
         data: {
           permissions: {
             only: 'CUBICACION_EDITAR',

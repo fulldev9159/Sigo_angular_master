@@ -13,7 +13,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   Actividad4Cub,
   Agencias4Cub,
@@ -95,11 +95,18 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     private cubicacionFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private router: Router,
+    private route: ActivatedRoute,
     private formcubService: FormCubService,
     private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    this.subscription.add(
+      this.route.data.subscribe(({ detalleCubicacion: { cubicacion } }) => {
+        console.log('detalle', cubicacion);
+      })
+    );
+
     this.onInitResetInicial();
     this.onInitGetInitialData();
     this.onInitSetInitialData();
