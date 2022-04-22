@@ -67,7 +67,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
     //   })
     // );
     // this.cubageFacade.getCubicacionAction();
-    // this.cubicaciones$ = this.cubageFacade.getCubicacionSelector$();
+    this.cubicaciones$ = this.cubageFacade.AllCubs$();
   }
 
   onInitReset(): void {

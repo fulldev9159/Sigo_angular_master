@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterContentChecked } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent implements OnInit, AfterContentChecked {
   @Input() control: FormControl;
   @Input() label = '';
   @Input() ID = '';
@@ -24,4 +24,11 @@ export class SelectComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  ngAfterContentChecked(): void {
+    if (this.control) {
+      this.control.setValue(this.control.value, { emitEvent: false });
+      this.control.updateValueAndValidity({ emitEvent: false });
+    }
+  }
 }

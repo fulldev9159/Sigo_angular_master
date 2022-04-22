@@ -136,6 +136,12 @@ export class CubicacionFacade {
   }
 
   // GET DATOS SERVICIO UNIDAD OBRAS 4 CUB AND CARRITO
+  public loadDatosServicio4Cub(carrito: Carrito[]): void {
+    this.store.dispatch(
+      cubicacionActions.loadCarritoDatosServicio4Cub({ carrito })
+    );
+  }
+
   public datosServicio4Cub(
     request_servicio: RequestGetDatosServicio4Cub,
     request_uo: RequestGetDatosUnidadObra4Cub

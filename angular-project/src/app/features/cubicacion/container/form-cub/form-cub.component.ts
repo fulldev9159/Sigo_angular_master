@@ -13,7 +13,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   Actividad4Cub,
   Agencias4Cub,
@@ -25,6 +25,7 @@ import {
   NuevoUO,
   Proveedores4Cub,
   RequestCreateCubicacion,
+  RequestEditCubicacion,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
   RequestGetServicios4Cub,
@@ -34,6 +35,11 @@ import {
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
 } from '@data';
+import {
+  RespDataGetDetalleCubs,
+  ServicioUOActualizar,
+  UOAgregar,
+} from '@data/model';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { Observable, of, Subscription } from 'rxjs';
@@ -48,6 +54,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormCubContainerComponent implements OnInit, OnDestroy {
+  mode = 'add';
+
   subscription: Subscription = new Subscription();
   // DATOS A USAR
   contratosUser4Cub$: Observable<ContratosUser[]>;
@@ -95,6 +103,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     private cubicacionFacade: CubicacionFacade,
     private authFacade: AuthFacade,
     private router: Router,
+    private route: ActivatedRoute,
     private formcubService: FormCubService,
     private detector: ChangeDetectorRef
   ) {}
@@ -104,6 +113,16 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.onInitGetInitialData();
     this.onInitSetInitialData();
     this.onInitAccionesInicialesAdicionales();
+
+    this.subscription.add(
+      this.route.data.subscribe(({ edit }) => {
+        const detalle = edit?.cubicacion;
+        if (detalle) {
+          this.mode = 'edit';
+          this.onInitEditionData(detalle);
+        }
+      })
+    );
   }
 
   onInitResetInicial(): void {
@@ -307,6 +326,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           // console.log('Existe?', existe);
           if (existe === undefined) {
             const group = new FormGroup({
+              precargado: new FormControl(servicio.precargado ?? false, []),
+              servicio_rowid: new FormControl(
+                servicio.servicio_rowid ?? null,
+                []
+              ),
+
               servicio_id: new FormControl(servicio.servicio_id, [
                 Validators.required,
               ]),
@@ -390,6 +415,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 // console.log('EXISTE UO', existe);
                 if (existeUO === undefined) {
                   const uo_group = new FormGroup({
+                    precargado: new FormControl(uo.precargado ?? false, []),
+                    uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
+
                     uo_codigo: new FormControl(uo.uo_codigo, [
                       Validators.required,
                     ]),
@@ -426,6 +454,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             if (len === 0) {
               servicio.unidades_obras.forEach(uo => {
                 const uo_group = new FormGroup({
+                  precargado: new FormControl(uo.precargado ?? false, []),
+                  uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
+
                   uo_codigo: new FormControl(uo.uo_codigo, [
                     Validators.required,
                   ]),
@@ -494,6 +525,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 // console.log('EXISTE UO', existe);
                 if (existe_UOD === undefined) {
                   const uo_group = new FormGroup({
+                    precargado: new FormControl(uo.precargado ?? false, []),
+                    uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
+
                     uo_codigo: new FormControl(uo.uo_codigo, [
                       Validators.required,
                     ]),
@@ -530,6 +564,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             if (len === 0) {
               servicio.unidades_obras.forEach(uo => {
                 const uo_group = new FormGroup({
+                  precargado: new FormControl(uo.precargado ?? false, []),
+                  uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
+
                   uo_codigo: new FormControl(uo.uo_codigo, [
                     Validators.required,
                   ]),
@@ -582,6 +619,127 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           }
         })
     );
+  }
+
+  onInitEditionData(detalle: RespDataGetDetalleCubs): void {
+    if (this.formCub && detalle) {
+      if (detalle.data_cubicacion.length === 0) {
+        return;
+      }
+
+      const cubicacion = detalle.data_cubicacion[0];
+      const servicios = detalle.servicios ?? [];
+
+      //// this.formCub.get('id').addValidators([Validators.required]);
+
+      const formData = {
+        id: `${cubicacion.id}`,
+
+        nombre: cubicacion.nombre,
+        tipocubicacion: `${cubicacion.tipo_cubicacion_id}`,
+
+        direcciondesde: cubicacion.direccion_desde,
+        direcciondesdealtura: cubicacion.altura_desde,
+        direccionhasta: cubicacion.direccion_hasta,
+        direccionhastaaltura: cubicacion.altura_hasta,
+        descripcion: cubicacion.descripcion,
+
+        contrato: cubicacion.contrato_id,
+        agencia_id: cubicacion.agencia_id,
+        cmarcoproveedor_id: cubicacion.cmarco_has_proveedor_id,
+
+        //// actividad_id: '6',
+        //// tipo_servicio_id: '1',
+        //// servicio_cod: 'D010',
+        //// unidad_obra_cod: 'T382',
+
+        cantidad_servicio: 1,
+        cantidad_unidad_obra: 1,
+        table: servicios.map(({ data_servicio, unidades_obra }) => ({
+          precargado: true,
+          servicio_rowid: data_servicio.cub_has_srv_id,
+
+          servicio_id: data_servicio.servicio_id,
+          servicio_cod: data_servicio.servicio_cod,
+          cantidad_servicio: data_servicio.servicio_cantidad,
+          precio_clp: data_servicio.servicio_precio_final_clp,
+          actividad_id: data_servicio.actividad_id,
+          servicio_tipo: data_servicio.tipo_servicio_id,
+
+          unidades_obra: unidades_obra.map(
+            ({ data_unidad_obra, data_materiales }) => ({
+              precargado: true,
+              uo_rowid: data_unidad_obra.cub_has_uob_id,
+
+              uo_codigo: data_unidad_obra.unidad_obra_cod,
+              cantidad_uo: data_unidad_obra.uob_cantidad,
+              precio_clp_uo: data_unidad_obra.uo_precio_total_clp,
+            })
+          ),
+        })),
+      };
+
+      this.cubicacionFacade.agencias4cub(+cubicacion.contrato_id);
+      this.cubicacionFacade.proveedores4Cub(
+        +cubicacion.agencia_id,
+        +cubicacion.contrato_id
+      );
+
+      const carrito: Carrito[] = servicios.map(
+        ({ data_servicio, unidades_obra }) => ({
+          precargado: true,
+
+          precio_agencia: data_servicio.agencia_preciario_monto,
+          precio_proveedor: data_servicio.prov_has_serv_precio,
+          servicio_baremos: data_servicio.puntos_baremos, // TODO ?
+          servicio_codigo: data_servicio.servicio_cod,
+          servicio_id: data_servicio.servicio_id,
+          servicio_nombre: data_servicio.servicio_desc,
+          servicio_precio_final: data_servicio.servicio_precio_final,
+          servicio_precio_final_clp: data_servicio.servicio_precio_final_clp,
+          servicio_tipo: data_servicio.tipo_servicio_id,
+          servicio_unidad_id: data_servicio.unidad_medida_id,
+          tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
+          actividad_descripcion: data_servicio.actividad_desc,
+          actividad_id: `${data_servicio.actividad_id}`,
+          servicio_tipo_moneda_codigo: data_servicio.precio_tipo_moneda_cod, // TODO o monto_tipo_moneda_cod?
+          servicio_tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
+          tipo_servicio_descripcion: data_servicio.tipo_servicio_desc,
+
+          unidades_obras: unidades_obra.map(
+            ({ data_unidad_obra, data_materiales }) => ({
+              precargado: true,
+
+              material_arr: data_materiales.map(material => ({
+                material_cantidad: material.material_cantidad,
+                material_codigo: material.material_cod,
+                material_nombre: material.material_desc,
+                material_origen: material.origen,
+                material_precio: material.material_cantidad,
+                material_precio_clp: material.material_valor_clp,
+                material_tipo_moneda_id: material.tipo_moneda_id,
+                material_unidad_id: material.material_unidad_medida_id,
+                material_valor: material.valor,
+              })),
+              uo_codigo: data_unidad_obra.unidad_obra_cod,
+              uo_nombre: data_unidad_obra.unidad_obra_desc,
+              uo_precio_total_clp: data_unidad_obra.uo_precio_total_clp,
+              uo_unidad_id: data_unidad_obra.uob_unidad_medida_id,
+            })
+          ),
+        })
+      );
+
+      // TODO se está obligado a esperar a que se refresque el formulario con los datos de los combobox
+      setTimeout(() => {
+        this.formCub.get('agencia_id').enable();
+        this.formCub.get('cmarcoproveedor_id').enable();
+        this.formCub.get('actividad_id').enable();
+        this.cubicacionFacade.loadDatosServicio4Cub(carrito);
+        this.formCub.patchValue(formData, { emitEvent: false });
+        this.formCub.get('table').updateValueAndValidity({ emitEvent: true });
+      }, 2000);
+    }
   }
 
   checkAndEnable(key: string, array: any[]): void {
@@ -747,8 +905,189 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       },
     };
 
-    console.log(request);
     this.cubicacionFacade.createCub(request);
+  }
+
+  EditCub(): void {
+    const proveedor_id = this.proveedores.find(
+      proveedor =>
+        proveedor.cmarco_has_proveedor_id ===
+        +this.formCub.get('cmarcoproveedor_id').value
+    ).id;
+    const codigo_acuerdo = this.proveedores.find(
+      proveedor =>
+        proveedor.cmarco_has_proveedor_id ===
+        +this.formCub.get('cmarcoproveedor_id').value
+    ).codigo_acuerdo;
+
+    const {
+      id,
+      nombre,
+      tipocubicacion,
+      direcciondesde,
+      direcciondesdealtura,
+      direccionhasta,
+      direccionhastaaltura,
+      descripcion,
+      contrato,
+      agencia_id,
+      cmarcoproveedor_id,
+      //// "actividad_id": null,
+      //// "tipo_servicio_id": null,
+      //// "servicio_cod": null,
+      //// "unidad_obra_cod": null,
+      //// "cantidad_servicio": 1,
+      //// "cantidad_unidad_obra": 1,
+      //// "table": [
+      ////   {
+      ////     "servicio_id": 25,
+      ////     "servicio_cod": "D020",
+      ////     "cantidad_servicio": 1,
+      ////     "precio_clp": 12240,
+      ////     "actividad_id": 6,
+      ////     "servicio_tipo": 1,
+      ////     "unidades_obra": [
+      ////       {
+      ////         "uo_codigo": "0",
+      ////         "cantidad_uo": 2,
+      ////         "precio_clp_uo": 0
+      ////       }
+      ////     ]
+      ////   },
+      ////   {
+      ////     "servicio_id": 21,
+      ////     "servicio_cod": "D010",
+      ////     "cantidad_servicio": 4,
+      ////     "precio_clp": 60000,
+      ////     "actividad_id": 6,
+      ////     "servicio_tipo": 1,
+      ////     "unidades_obra": [
+      ////       {
+      ////         "uo_codigo": "T383",
+      ////         "cantidad_uo": 6,
+      ////         "precio_clp_uo": 0
+      ////       }
+      ////     ]
+      ////   }
+      //// ]
+    } = this.values;
+
+    const isLocal = (item: { precargado?: boolean }) =>
+      item.precargado === undefined || item.precargado === false;
+
+    const notLocal = (item: { precargado?: boolean }) => !isLocal(item);
+
+    const servicios: {
+      precargado?: boolean;
+      servicio_rowid?: number;
+
+      servicio_id: number;
+      servicio_cod: string;
+      cantidad_servicio: number;
+      servicio_tipo: number;
+      actividad_id: number;
+      unidades_obra: {
+        precargado?: boolean;
+        uo_rowid?: number;
+
+        cantidad_uo: number;
+        uo_codigo: string;
+      }[];
+    }[] = this.formCub.get('table').value as Array<{
+      precargado?: boolean;
+      servicio_rowid?: number;
+
+      servicio_id: number;
+      servicio_cod: string;
+      cantidad_servicio: number;
+      servicio_tipo: number;
+      actividad_id: number;
+      unidades_obra: Array<{
+        precargado?: boolean;
+        uo_rowid?: number;
+
+        cantidad_uo: number;
+        uo_codigo: string;
+      }>;
+    }>;
+
+    const nuevos_servicios: NuevoServicio[] = servicios
+      .filter(isLocal)
+      .map(servicio => {
+        let unidad_obra: NuevoUO[] = [];
+        unidad_obra = servicio.unidades_obra.map(uo => ({
+          uob_codigo: uo.uo_codigo,
+          cantidad: uo.cantidad_uo,
+        }));
+        return {
+          servicio_id: +servicio.servicio_id,
+          actividad_id: +servicio.actividad_id,
+          tipo_servicio_id: +servicio.servicio_tipo,
+          cantidad: +servicio.cantidad_servicio,
+          unidad_obra,
+        };
+      });
+
+    const servicios_actualizar: ServicioUOActualizar[] = servicios
+      .filter(notLocal)
+      .map(servicio => ({
+        rowid: servicio.servicio_rowid,
+        cantidad: servicio.cantidad_servicio,
+      }));
+
+    const unidades_obra_actualizar: ServicioUOActualizar[] = servicios
+      .filter(notLocal)
+      .reduce((ac, servicio) => {
+        const unidades_obra = servicio.unidades_obra
+          .filter(notLocal)
+          .map(uo => ({
+            rowid: uo.uo_rowid,
+            cantidad: uo.cantidad_uo,
+          }));
+        return ac.concat(unidades_obra);
+      }, []);
+
+    const nuevas_unidades_obra: UOAgregar[] = servicios
+      .filter(notLocal)
+      .reduce((ac, servicio) => {
+        const unidades_obra = servicio.unidades_obra
+          .filter(isLocal)
+          .map(uo => ({
+            servicio_rowid: servicio.servicio_rowid,
+            uob_codigo: uo.uo_codigo,
+            uob_cantidad: uo.cantidad_uo,
+          }));
+        return ac.concat(unidades_obra);
+      }, []);
+
+    const request: RequestEditCubicacion = {
+      cubicacion_datos: {
+        id: +id,
+        nombre,
+        tipo_cubicacion_id: +tipocubicacion,
+        contrato_id: contrato,
+        agencia_id,
+        proveedor_id,
+        codigo_acuerdo,
+        cmarco_has_proveedor_id: cmarcoproveedor_id,
+        usuario_creador_id: this.usuario_id,
+        direccion_desde: direcciondesde,
+        altura_desde: direcciondesdealtura,
+        direccion_hasta: direccionhasta,
+        altura_hasta: direccionhastaaltura,
+        descripcion,
+      },
+      cubicacion_detalle: {
+        nuevo: nuevos_servicios,
+        actualizar: {
+          servicio: servicios_actualizar,
+          unidad_obra: unidades_obra_actualizar,
+          agregar_uob_a_servicio: nuevas_unidades_obra,
+        },
+      },
+    };
+
+    this.cubicacionFacade.editCub(request);
   }
 
   // show() {
@@ -761,5 +1100,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   goBack(): void {
     this.cubicacionFacade.resetData();
     this.router.navigate(['/app/cubicacion/list-cub']);
+  }
+
+  get values(): any {
+    return this.formCub ? this.formCub.getRawValue() : null;
   }
 }
