@@ -46,6 +46,7 @@ import { Observable, of, Subscription } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { FormCubService } from './form-cub.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { BaseFacade } from '@storeOT/features/base/base.facade';
 
 @Component({
   selector: 'app-form-cub',
@@ -58,6 +59,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   subscription: Subscription = new Subscription();
   // DATOS A USAR
+  loading$: Observable<boolean>;
   contratosUser4Cub$: Observable<ContratosUser[]>;
   agencias4Cub$: Observable<Agencias4Cub[]> = of([]);
   proveedores4Cub$: Observable<Proveedores4Cub[]> = of([]);
@@ -87,7 +89,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   proveedores: Proveedores4Cub[] = [];
 
   errorMessageFn = errors => {
-    console.log(errors);
+    // console.log(errors);
     if (errors.required) {
       return 'Este campo es requerido';
     } else if (errors.whitespace) {
@@ -105,7 +107,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private formcubService: FormCubService,
-    private detector: ChangeDetectorRef
+    private detector: ChangeDetectorRef,
+    private baseFacade: BaseFacade
   ) {}
 
   ngOnInit(): void {
@@ -194,6 +197,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       this.cubicacionFacade.servicioUORepetidoAlert$();
 
     this.carrito$ = this.cubicacionFacade.carrito$();
+    this.loading$ = this.baseFacade.loading$();
   }
 
   onInitAccionesInicialesAdicionales(): void {
@@ -607,13 +611,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 +cantidadServicio.precio_clp *
                 +cantidadServicio.cantidad_servicio;
               this.totalServicio = this.totalServicio + subtotal;
-              console.log(cantidadServicio);
+              // console.log(cantidadServicio);
               cantidadServicio.unidades_obra.forEach(cantidadUO => {
                 this.totalUO =
                   this.totalUO +
                   +cantidadUO.precio_clp_uo * +cantidadUO.cantidad_uo;
 
-                console.log(this.totalUO);
+                // console.log(this.totalUO);
               });
             });
           }
@@ -732,6 +736,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
       // TODO se está obligado a esperar a que se refresque el formulario con los datos de los combobox
       setTimeout(() => {
+        this.baseFacade.loading(false);
         this.formCub.get('agencia_id').enable();
         this.formCub.get('cmarcoproveedor_id').enable();
         this.formCub.get('actividad_id').enable();
@@ -809,7 +814,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   deleteServiceCarrito(servicio_codigo: string): void {
-    console.log('delete', servicio_codigo);
+    // console.log('delete', servicio_codigo);
     this.cubicacionFacade.deleteServiceCarrito4CreateCub(servicio_codigo);
     (this.formCub.get('table') as FormArray).removeAt(
       (

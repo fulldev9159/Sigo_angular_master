@@ -1,3 +1,11 @@
+<div class="pantalla" *ngIf="(loading$|async)!==false" style="position: absolute;
+width: 100%;
+background: #d0d0d0a6;
+height: 100%;
+z-index: 1;">
+
+</div>
+<!--  -->
 <div class="container-fluid">
   <div class="row">
     <!-- <ng-container *ngIf="selectedCubicacion$ | async as cubicacion; else newCubage">

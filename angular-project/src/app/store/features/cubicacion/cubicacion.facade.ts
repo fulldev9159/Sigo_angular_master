@@ -256,11 +256,6 @@ export class CubicacionFacade {
   }
   // CONSTRACT MARCO
 
-  // SUBCONTRACTPROVIDERS
-  public getSubContractedProvidersAction(data): void {
-    this.store.dispatch(cubicacionActions.getProveedores4Cub(data));
-  }
-
   public getProvidersSelector$(): Observable<SubcontratosProveedor[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);
   }

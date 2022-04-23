@@ -111,9 +111,9 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
                 ),
               },
             });
-            this.cubageFacade.getSubContractedProvidersAction({
-              contrato_marco_id: +contrato_marco_id,
-            });
+            // this.cubageFacade.getSubContractedProvidersAction({
+            //   contrato_marco_id: +contrato_marco_id,
+            // });
           } else {
             this.generalFormService.setValueChanges({
               controlName: 'contrato_marco_id',
