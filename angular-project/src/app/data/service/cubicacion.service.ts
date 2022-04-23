@@ -191,7 +191,9 @@ export class CubicacionService {
     );
   }
 
-  deleteServicioUOCarrito(request: RequestDeleteDetallesCubicacion) {
+  deleteServicioUOCarrito(
+    request: RequestDeleteDetallesCubicacion
+  ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/cubicacion/detalles_cubicacion/delete`,
       request
