@@ -85,6 +85,7 @@
               <ng-container *ngIf="config.headerConfig.actionsType === 'ButtonsTest'">
                 <div class="ui icon buttons mini basic">
                   <ng-container *ngFor="let button of actions" [ngSwitch]="button.type">
+
                     <ng-container *ngSwitchCase="'alldisplay-eliminable'">
                       <div *ngIf="!eliminable(item)" pTooltip="{{ button.tooltipDisabled }}">
                         <button (click)="button.onClick($event, item, rowIndex)" style="height: 100%;" [disabled]="true" class="ui button generic-color"> {{button.label}} </button>
@@ -118,21 +119,43 @@
                         {{button.label}}
                       </button>
                     </ng-container>
-                  </ng-container>
-
-                  <ng-container *ngSwitchCase="'button-delete-asginado'">
-                    <div *ngIf="item['asignado']!==0" pTooltip="{{ button.tooltipDisabled }}">
-                      <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color" style="height: 100%;">
+                    <ng-container *ngSwitchCase="'button-delete-asignado'">
+                      <div *ngIf="item['asignado']!==0" pTooltip="{{ button.tooltipDisabled }}">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color" style="height: 100%;">
+                          <fa-icon [icon]="trashICon"></fa-icon>
+                        </button>
+                      </div>
+                      <button *ngIf="item['asignado']===0" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
                         <fa-icon [icon]="trashICon"></fa-icon>
                       </button>
-                    </div>
-                    <button *ngIf="item['asignado']===0" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'button-icon-condicional'">
+                      <div *ngIf="!button.condicion" pTooltip="{{ button.tooltipDisabled }}">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color" style="height: 100%;">
+                          <fa-icon [icon]="iconArray(button.icon)"></fa-icon>
+                        </button>
+                      </div>
+                      <button *ngIf="button.condicion" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
+                        <fa-icon [icon]="iconArray(button.icon)"></fa-icon>
+                      </button>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'button-condicional'">
+                      <div *ngIf="!button.condicion" pTooltip="{{ button.tooltipDisabled }}">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui generic-color" style="height: 100%;">
+                          {{button.label}}
+                        </button>
+                      </div>
+                      <button *ngIf="button.condicion" (click)="button.onClick($event, item, rowIndex)" class="ui button generic-color">
+                        {{button.label}}
+                      </button>
+                    </ng-container>
+
+                    <button *ngSwitchCase="'button-delete'" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
                       <fa-icon [icon]="trashICon"></fa-icon>
                     </button>
                   </ng-container>
-                  <button *ngSwitchCase="'button-delete'" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
-                    <fa-icon [icon]="trashICon"></fa-icon>
-                  </button>
                 </div>
               </ng-container>
 

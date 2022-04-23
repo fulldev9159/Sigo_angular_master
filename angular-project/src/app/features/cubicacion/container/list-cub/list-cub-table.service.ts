@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AllCubs } from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,7 +11,7 @@ export class ListCubTableService {
         title: '',
         searchText: 'buscar...',
         paginator: true,
-        actionsType: 'Menu',
+        actionsType: 'ButtonsTest',
       },
       body: {
         headers: [
@@ -101,7 +102,7 @@ export class ListCubTableService {
             sort: null,
             header: null,
             editable: false,
-            width: '10%',
+            width: '14rem',
           },
         ],
         sort: [
@@ -113,7 +114,7 @@ export class ListCubTableService {
           'total',
           'creador_usuario_nombre',
         ],
-        actions: [],
+        actions: (ot: AllCubs) => {},
       },
     };
   }

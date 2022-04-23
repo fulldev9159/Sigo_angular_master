@@ -14,6 +14,7 @@ import { AllCubs, Cubicacion, SessionData } from '@data';
 import { CloneCubageFormComponent } from '../../forms/clone-cubage-form/clone-cubage-form.component';
 import { ListCubTableService } from './list-cub-table.service';
 import { BaseFacade } from '@storeOT/features/base/base.facade';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list-cub',
@@ -39,8 +40,10 @@ export class ListCubComponent implements OnInit, OnDestroy {
   configTable = null;
 
   // EXTRAS
+  usuario_id = null;
   cubicacion_id = null;
   authLogin: SessionData = null;
+  trashICon = faTrash;
 
   @ViewChild('cloneCubageForm', {
     read: CloneCubageFormComponent,
@@ -69,34 +72,59 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
   onInitGetData(): void {
     this.cubageFacade.AllCubs();
+    this.subscription.add(
+      this.authFacade.getLogin$().subscribe(loginAuth => {
+        if (
+          loginAuth?.token === undefined &&
+          loginAuth?.proxy_id === undefined
+        ) {
+          this.router.navigate(['/auth/login']);
+        } else {
+          this.usuario_id = loginAuth.usuario_id;
+        }
+      })
+    );
   }
   onInitSetData(): void {
     this.configTable = this.listCubTableService.getTableConfig();
-    (this.configTable.body.actions as Array<any>).push(
-      {
-        type: 'alldisplay',
-        label: 'Detalles',
-        onClick: (event: Event, item: AllCubs) => {
-          if (item) {
-            this.DisplayModalDetalleCubicacion = true;
-            this.cubageFacade.DetalleCub(item.cubicacion_id);
-          }
+    this.configTable.body.actions = (cub: AllCubs) => {
+      const actions: any[] = [
+        {
+          type: 'alldisplay',
+          label: 'Detalles',
+          onClick: (event: Event, item: AllCubs) => {
+            if (item) {
+              this.DisplayModalDetalleCubicacion = true;
+              this.cubageFacade.DetalleCub(item.cubicacion_id);
+            }
+          },
         },
-      },
-      {
-        type: 'alldisplay',
-        label: 'Clonar',
-        onClick: (event: Event, item: AllCubs) => {
-          if (item) {
-            this.displayClonatedCubageNameModal = true;
-            this.cubageFacade.DetalleCub(item.cubicacion_id);
-          }
+        {
+          type: 'alldisplay',
+          label: 'Clonar',
+          onClick: (event: Event, item: AllCubs) => {
+            if (item) {
+              this.displayClonatedCubageNameModal = true;
+              this.cubageFacade.DetalleCub(item.cubicacion_id);
+            }
+          },
         },
-      },
-      {
-        type: 'button-edit-asginado',
+      ];
+
+      let msg = '';
+      if (cub.asignado !== 0) {
+        msg = 'No puede editar una cubicación asignada a una OT';
+      }
+      if (cub.creador_usuario_id !== this.usuario_id) {
+        msg = 'No puede editar cubicaciones de sus colegas';
+      }
+
+      actions.push({
+        type: 'button-condicional',
         label: 'Editar',
-        tooltipDisabled: 'Ya está asignada a una OT',
+        condicion:
+          cub.asignado === 0 && cub.creador_usuario_id === this.usuario_id,
+        tooltipDisabled: msg,
         onClick: (event: Event, item: AllCubs) => {
           if (item) {
             this.router.navigate([
@@ -105,10 +133,21 @@ export class ListCubComponent implements OnInit, OnDestroy {
             ]);
           }
         },
-      },
-      {
-        type: 'button-eliminar-asginado',
-        tooltipDisabled: 'Ya está asignada a una OT',
+      });
+
+      if (cub.asignado !== 0) {
+        msg = 'No puede eliminar una cubicación asignada a una OT';
+      }
+      if (cub.creador_usuario_id !== this.usuario_id) {
+        msg = 'No puede eliminar cubicaciones de sus colegas';
+      }
+
+      actions.push({
+        type: 'button-icon-condicional',
+        icon: 'trashICon',
+        tooltipDisabled: msg,
+        condicion:
+          cub.asignado === 0 && cub.creador_usuario_id === this.usuario_id,
         label: 'Eliminar',
         onClick: (event: Event, item: AllCubs) => {
           if (item) {
@@ -116,8 +155,11 @@ export class ListCubComponent implements OnInit, OnDestroy {
             this.cubicacion_id = item.cubicacion_id;
           }
         },
-      }
-    );
+      });
+
+      return actions;
+    };
+
     this.cubicaciones$ = this.cubageFacade.AllCubs$();
     this.loading$ = this.baseFacade.loading$();
   }
