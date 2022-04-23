@@ -1,4 +1,4 @@
-<div class="pantalla" *ngIf="(loading$|async)!==false" style="position: absolute;
+<div class="pantalla" *ngIf="(loading$|async)!==false && !loading_interno" style="position: absolute;
 width: 100%;
 background: #d0d0d0a6;
 height: 100%;
@@ -219,7 +219,20 @@ z-index: 1;">
               </div>
             </div>
 
-
+            <br>
+            <div class="info">
+              <span class="info-title">
+                INFO
+              </span>
+              <div class="data-info">
+                <div class="box box-1"></div>
+                <span style="margin-left: 5px;">Servicio/UO nuevos</span>
+              </div>
+              <div class="data-info">
+                <div class="box box-2"></div>
+                <span style="margin-left: 5px;">Servicio/UO existente en la cubicación original</span>
+              </div>
+            </div>
             <br>
             <div class="table-carrito">
               <table style="width:100%">
@@ -251,12 +264,12 @@ z-index: 1;">
                 <tbody formArrayName="table">
                   <ng-container *ngFor="let item of carrito$|async;let i = index" [formGroupName]="i">
                     <ng-container *ngIf="item.unidades_obras.length===1">
-                      <tr>
+                      <tr [ngClass]="item.precargado?'existente':'noexistente'">
                         <td class="label-table">{{item.servicio_codigo}}</td>
                         <td class="data-primaria">{{item.servicio_nombre}}</td>
                         <td class="data-secundaria">{{item.tipo_servicio_descripcion|titlecase}}</td>
                         <td>
-                          <input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="1" type="number" style="width: 37px;">
+                          <input [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="1" type="number" style="width: 37px;">
                           <div *ngIf="formCntl(item.servicio_codigo,'cantidad_servicio').invalid && (formCntl(item.servicio_codigo,'cantidad_servicio').dirty || formCntl(item.servicio_codigo,'cantidad_servicio').touched)">
                             <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
                           </div>
@@ -268,6 +281,14 @@ z-index: 1;">
                           <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
                             <div class="ui icon buttons mini basic">
                               <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                                <fa-icon [icon]="trashICon"></fa-icon>
+                              </button>
+                            </div>
+                          </ng-container>
+
+                          <ng-container *ngIf="item.precargado">
+                            <div class="ui icon buttons mini basic">
+                              <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_rowid)" class="ui button eliminar-color">
                                 <fa-icon [icon]="trashICon"></fa-icon>
                               </button>
                             </div>
@@ -447,4 +468,35 @@ z-index: 1;">
     </div>
   </ng-container>
   <ng-container modal-footer></ng-container>
+</app-modal>
+
+<app-modal [display]="displayDeleteConfirmServicio" (CloseEvent)="closeModalDeleteConfirmServicio()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Este servicio será eliminado definitivamente de la cubicación ¿Está seguro que desea eliminar este servicio?</p>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer>
+    <div class="row">
+      <div class="col">
+        <button pButton type="button" (click)="DeleteServicioCarritoDefinitivo()" label="Si, eliminar" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+        border: #b36161;
+        margin-left: 10px;
+        color: #412727;"></button>
+        <button pButton type="button" (click)="closeModalDeleteConfirmServicio()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+        border: gray;"></button>
+      </div>
+    </div>
+
+  </ng-container>
 </app-modal>

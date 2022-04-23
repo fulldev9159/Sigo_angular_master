@@ -72,7 +72,7 @@ export class JwtAppInterceptor implements HttpInterceptor {
         const url = window.location.href;
         const expresion = /http.*\/app\/cubicacion\/form-cub\/\d+/g;
         const hallado = url.match(expresion);
-        console.log(req.url);
+        // console.log(req.url);
         if (hallado === null) {
           this.baseFacade.loading(false);
         }

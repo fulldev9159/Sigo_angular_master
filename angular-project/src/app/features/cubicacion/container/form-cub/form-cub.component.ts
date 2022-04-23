@@ -75,6 +75,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   // DISPLAY MODALS
   displayModalMateriales = false;
+  displayDeleteConfirmServicio = false;
+  displayDeleteConfirmUO = false;
+
   // FORMULARIO
   formControls: any;
   formCub: FormGroup;
@@ -87,6 +90,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   totalUO = 0;
   trashICon = faTrash;
   proveedores: Proveedores4Cub[] = [];
+  servicio_rowid = null;
+  loading_interno = false;
 
   errorMessageFn = errors => {
     // console.log(errors);
@@ -693,6 +698,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         ({ data_servicio, unidades_obra }) => ({
           precargado: true,
 
+          servicio_rowid: data_servicio.cub_has_srv_id,
           precio_agencia: data_servicio.agencia_preciario_monto,
           precio_proveedor: data_servicio.prov_has_serv_precio,
           servicio_baremos: data_servicio.puntos_baremos, // TODO ?
@@ -737,6 +743,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       // TODO se está obligado a esperar a que se refresque el formulario con los datos de los combobox
       setTimeout(() => {
         this.baseFacade.loading(false);
+        this.loading_interno = true;
         this.formCub.get('agencia_id').enable();
         this.formCub.get('cmarcoproveedor_id').enable();
         this.formCub.get('actividad_id').enable();
@@ -1095,9 +1102,17 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.cubicacionFacade.editCub(request);
   }
 
-  // show() {
-  //   console.log(this.formCub);
-  // }
+  closeModalDeleteConfirmServicio(): void {
+    this.displayDeleteConfirmServicio = false;
+  }
+
+  DisplayDeleteServicioCarritoDefinitivo(servicio_rowid: number): void {
+    this.displayDeleteConfirmServicio = true;
+    this.servicio_rowid = servicio_rowid;
+    console.log(servicio_rowid);
+  }
+
+  DeleteServicioCarritoDefinitivo(): void {}
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
