@@ -146,7 +146,6 @@ export class CloneCubageFormComponent implements OnInit, OnDestroy {
                 nuevo: cubicacion_detalle,
               },
             };
-            console.log(request);
             this.cubageFacade.createCub(request);
           }
         })

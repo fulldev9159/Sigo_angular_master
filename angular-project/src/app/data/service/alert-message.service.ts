@@ -235,6 +235,7 @@ export class AlertMessageActions {
         action === ca.editCubSuccess.type
       ) {
         this.router.navigate(['/app/cubicacion/list-cub']);
+        this.cubageFacade.AllCubs();
       }
     }
   }
