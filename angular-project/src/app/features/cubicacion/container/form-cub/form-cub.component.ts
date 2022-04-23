@@ -91,6 +91,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   trashICon = faTrash;
   proveedores: Proveedores4Cub[] = [];
   servicio_rowid = null;
+  uo_rowid = null;
   loading_interno = false;
 
   errorMessageFn = errors => {
@@ -731,6 +732,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 material_unidad_id: material.material_unidad_medida_id,
                 material_valor: material.valor,
               })),
+              uo_rowid: data_unidad_obra.cub_has_uob_id,
               uo_codigo: data_unidad_obra.unidad_obra_cod,
               uo_nombre: data_unidad_obra.unidad_obra_desc,
               uo_precio_total_clp: data_unidad_obra.uo_precio_total_clp,
@@ -1113,6 +1115,19 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   DeleteServicioCarritoDefinitivo(): void {}
+
+  closeModalDeleteConfirmUO(): void {
+    this.displayDeleteConfirmUO = false;
+  }
+
+  DisplayDeleteUOCarritoDefinitivo(uo_rowid: number): void {
+    this.displayDeleteConfirmUO = true;
+    this.uo_rowid = uo_rowid;
+    console.log(uo_rowid);
+  }
+
+  DeleteUOCarritoDefinitivo(): void {}
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
