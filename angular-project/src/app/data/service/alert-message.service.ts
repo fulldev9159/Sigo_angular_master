@@ -161,7 +161,8 @@ export class AlertMessageActions {
         action === userActions.agregarPerfilUsuarioSuccess.type ||
         action === userActions.addFirmaUserSuccess.type ||
         action === profileActions.eliminarPerfilSuccess.type ||
-        action === ca.deleteCubSuccess.type
+        action === ca.deleteCubSuccess.type ||
+        action === ca.deleteDetalleCubSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (

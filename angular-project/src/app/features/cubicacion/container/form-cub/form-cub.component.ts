@@ -34,6 +34,7 @@ import {
   TipoCubicacion4Cub,
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
+  RequestDeleteDetallesCubicacion,
 } from '@data';
 import {
   RespDataGetDetalleCubs,
@@ -1114,7 +1115,14 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     console.log(servicio_rowid);
   }
 
-  DeleteServicioCarritoDefinitivo(): void {}
+  DeleteServicioCarritoDefinitivo(): void {
+    const request: RequestDeleteDetallesCubicacion = {
+      servicio: [this.servicio_rowid],
+    };
+
+    this.cubicacionFacade.deleteDetalleCub(request);
+    this.closeModalDeleteConfirmServicio();
+  }
 
   closeModalDeleteConfirmUO(): void {
     this.displayDeleteConfirmUO = false;

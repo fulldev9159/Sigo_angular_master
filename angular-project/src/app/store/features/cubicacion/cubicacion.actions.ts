@@ -34,6 +34,7 @@ import {
   RespDataGetAllCubs,
   RespDataGetDetalleCubs,
   DataRespEditCubicacion,
+  RequestDeleteDetallesCubicacion,
 } from '@data';
 
 // GET ALL CUBS
@@ -269,6 +270,21 @@ export const deleteCubError = createAction(
   '[Cubicacion] deleteCub Error',
   props<{ error: any }>()
 );
+
+// DELETE DETALLE CUB
+export const deleteDetalleCub = createAction(
+  '[Cubicacion] deleteDetalleCub ',
+  props<{ request: RequestDeleteDetallesCubicacion }>()
+);
+export const deleteDetalleCubSuccess = createAction(
+  '[Cubicacion] deleteDetalleCub Success',
+  props<{ response: Response<any> }>()
+);
+export const deleteDetalleCubError = createAction(
+  '[Cubicacion] deleteDetalleCub Error',
+  props<{ error: any }>()
+);
+
 //  RESET
 export const reset = createAction('[Cubicacion] reset');
 export const resetDetalleCub = createAction('[Cubicacion] reset');

@@ -31,6 +31,7 @@ import {
   RequestCreateCubicacion,
   AllCubs,
   RespDataGetDetalleCubs,
+  RequestDeleteDetallesCubicacion,
 } from '@data';
 
 @Injectable({
@@ -191,6 +192,11 @@ export class CubicacionFacade {
   // DELETE  CUB
   public deleteCub(cubicacion_id: number): void {
     this.store.dispatch(cubicacionActions.deleteCub({ cubicacion_id }));
+  }
+
+  // DELETE  CUB
+  public deleteDetalleCub(request: RequestDeleteDetallesCubicacion): void {
+    this.store.dispatch(cubicacionActions.deleteDetalleCub({ request }));
   }
 
   // /////

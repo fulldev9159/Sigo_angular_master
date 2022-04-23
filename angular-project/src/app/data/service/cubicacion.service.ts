@@ -36,6 +36,7 @@ import {
   DataRespEditCubicacion,
   DatosUnidadObra4Cub,
   RequestCreateCubicacion,
+  RequestDeleteDetallesCubicacion,
   RespDataGetAllCubs,
   RespDataGetDetalleCubs,
 } from '@data/model';
@@ -189,7 +190,13 @@ export class CubicacionService {
       { cubicacion_id }
     );
   }
-  // deleteServicioUOCarrito(servicio: number[], unidad_obra: number[]) {}
+
+  deleteServicioUOCarrito(request: RequestDeleteDetallesCubicacion) {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/cubicacion/detalles_cubicacion/delete`,
+      request
+    );
+  }
 
   //   ///
 

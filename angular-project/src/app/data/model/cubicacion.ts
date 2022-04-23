@@ -398,6 +398,11 @@ export interface DataRespCreateCubicacion {
 export interface DataRespEditCubicacion {
   response: any;
 }
+
+export interface RequestDeleteDetallesCubicacion {
+  servicio?: number[];
+  unidad_obra?: number[];
+}
 //  ///
 export interface TipoServicioEspecialidad4Cub {
   codigo: string;
