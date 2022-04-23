@@ -139,6 +139,9 @@
 
     </nav>
     <div class="container-fluid p-0" style="height: 100%;">
+      <div *ngIf="this.loading$|async" class="loading-container">
+        <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+      </div>
       <router-outlet></router-outlet>
     </div>
   </div>

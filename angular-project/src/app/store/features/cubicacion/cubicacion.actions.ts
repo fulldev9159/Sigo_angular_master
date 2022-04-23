@@ -271,6 +271,7 @@ export const deleteCubError = createAction(
 );
 //  RESET
 export const reset = createAction('[Cubicacion] reset');
+export const resetDetalleCub = createAction('[Cubicacion] reset');
 
 // //////
 

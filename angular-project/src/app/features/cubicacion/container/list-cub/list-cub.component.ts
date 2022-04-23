@@ -13,6 +13,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AllCubs, Cubicacion, SessionData } from '@data';
 import { CloneCubageFormComponent } from '../../forms/clone-cubage-form/clone-cubage-form.component';
 import { ListCubTableService } from './list-cub-table.service';
+import { BaseFacade } from '@storeOT/features/base/base.facade';
 
 @Component({
   selector: 'app-list-cub',
@@ -25,6 +26,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   // DATOS A USAR
   cubicaciones$: Observable<AllCubs[]>;
+  loading$: Observable<boolean>;
 
   // DISPLAY MODALS
   displayClonatedCubageNameModal = false;
@@ -51,7 +53,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
     private authFacade: AuthFacade,
     private cubageFacade: CubicacionFacade,
     private confirmationService: ConfirmationService,
-    private listCubTableService: ListCubTableService
+    private listCubTableService: ListCubTableService,
+    private baseFacade: BaseFacade
   ) {}
 
   ngOnInit(): void {
@@ -59,15 +62,6 @@ export class ListCubComponent implements OnInit, OnDestroy {
     this.onInitGetData();
     this.onInitSetData();
     this.onInitAccionesAdicionales();
-    // this.subscription.add(
-    //   this.authFacade.getLogin$().subscribe(authLogin => {
-    //     if (authLogin) {
-    //       this.authLogin = authLogin;
-    //     }
-    //   })
-    // );
-    // this.cubageFacade.getCubicacionAction();
-    this.cubicaciones$ = this.cubageFacade.AllCubs$();
   }
 
   onInitReset(): void {
@@ -125,6 +119,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
       }
     );
     this.cubicaciones$ = this.cubageFacade.AllCubs$();
+    this.loading$ = this.baseFacade.loading$();
   }
   onInitAccionesAdicionales(): void {}
 

@@ -192,6 +192,7 @@ export class CubicacionFacade {
   public deleteCub(cubicacion_id: number): void {
     this.store.dispatch(cubicacionActions.deleteCub({ cubicacion_id }));
   }
+
   // /////
 
   // CUBICACION
