@@ -134,11 +134,11 @@ z-index: 1;">
               </div>
             </div>
 
-            <div class="filtroservicios">
+            <div class="filtroservicios" [formGroup]="formFiltros">
               <div class="row">
                 <div class="col-md-12 col-sm-12">
                   <div id="actividad">
-                    <app-select [control]="formControls.actividad_id" label="* Actividad">
+                    <app-select [control]="formFiltrosControls.actividad_id" label="* Actividad">
                       <ng-container options>
                         <option value="null" selected disabled>Seleccione una Actividad</option>
                         <ng-container *ngFor="let item of actividad4Cub$|async">
@@ -151,7 +151,7 @@ z-index: 1;">
                   </div>
                   <br>
                   <div id="tiposervicio">
-                    <app-select [control]="formControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
+                    <app-select [control]="formFiltrosControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
                       <ng-container options>
                         <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
                         <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
@@ -178,7 +178,7 @@ z-index: 1;">
                 </div> -->
                 <div class="col-md-12 col-sm-12">
                   <div id="servicios">
-                    <app-select [control]="formControls.servicio_cod" label="* Código - Servicio">
+                    <app-select [control]="formFiltrosControls.servicio_cod" label="* Código - Servicio">
                       <ng-container options>
                         <option value="null" selected disabled>Seleccione un Servicio/Especialidad</option>
                         <ng-container *ngFor="let item of servicios4Cub$|async">
@@ -191,7 +191,7 @@ z-index: 1;">
                   </div>
                   <br>
                   <div id="unidad-obra">
-                    <app-select [control]="formControls.unidad_obra_cod" label="* Código - Unidad de Obra">
+                    <app-select [control]="formFiltrosControls.unidad_obra_cod" label="* Código - Unidad de Obra">
                       <ng-container options>
                         <option value="null" selected disabled>Seleccione una unidad de obra</option>
                         <ng-container *ngFor="let item of unidadObra4Cub$|async">
