@@ -73,6 +73,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   servicios: Servicios4Cub[];
   servicioUORepetidoAlert$: Observable<boolean> = of(false);
   carrito$: Observable<Carrito[]>;
+  materialesSelected: Materiales4Cub[] = [];
+  proveedores: Proveedores4Cub[] = [];
 
   // DISPLAY MODALS
   displayModalMateriales = false;
@@ -84,7 +86,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   formCub: FormGroup;
   formFiltrosControls: any;
   formFiltros: FormGroup;
-  materialesSelected: Materiales4Cub[] = [];
+
   // TABLE
 
   // EXTRAS
@@ -92,7 +94,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   totalServicio = 0;
   totalUO = 0;
   trashICon = faTrash;
-  proveedores: Proveedores4Cub[] = [];
   servicio_rowid = null;
   uo_rowid = null;
   loading_interno = false;

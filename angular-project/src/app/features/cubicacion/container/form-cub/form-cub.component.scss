@@ -2,7 +2,7 @@
   margin-top: 12px;
   border: 1px solid #c6c6c6;
   padding: 20px;
-  padding-bottom: 30px;
+  // padding-bottom: 30px;
   background: #e3dfdf;
 }
 
@@ -201,8 +201,9 @@ input[type=number] {
   }
 
   &:disabled {
-    background: #d7f1ff;
-    color: #787676;
+    background: #dbd5d5;
+    color: #9b9b9b;
+    border: 1px solid;
   }
 }
 

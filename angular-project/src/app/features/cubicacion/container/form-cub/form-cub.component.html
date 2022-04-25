@@ -37,436 +37,427 @@ z-index: 1;">
   <pre>{{ values | json }}</pre>
   -->
   <form [formGroup]="formCub">
-    <app-card [classCardHeader]="'bg-secondary text-white'">
-      <ng-container card-body>
-        <div class="row justify-content-center" style="margin-bottom: 4rem">
-          <div class="col-12">
-            <div class="row" style="border: 1px solid #c6c6c6;padding: 3px;padding-bottom: 14px;">
-              <div class="col-md-6 col-sm-12">
-                <div id="nomnbreCub">
-                  <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div id="tipoCub">
-                  <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione un tipo</option>
-                      <ng-container *ngFor="let tipoCub of tipoCubicacion4Cub$|async">
-                        <option [value]="tipoCub.id">
-                          {{ tipoCub.descripcion }}
-                        </option>
-                      </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
-              </div>
+    <!-- <app-card [classCardHeader]="'bg-secondary text-white'"> -->
+    <!-- <ng-container card-body> -->
+    <div class="row justify-content-center" style="margin-bottom: 4rem;padding: 10px;">
+      <div class="col-12">
+        <div class="row" style="border: 1px solid #c6c6c6;padding: 3px;padding-bottom: 14px;">
+          <div class="col-md-6 col-sm-12">
+            <div id="nomnbreCub">
+              <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
             </div>
-
-            <div class="row">
-              <div class="col-md-5 col-sm-12" style="border: 1px solid #c6c6c6;margin-top: 11px; padding: 14px;">
-                <div id="contratosUser">
-                  <app-select [control]="formControls.contrato" label="* Contrato">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione un contrato</option>
-                      <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
-                        <option [value]="contrato.contrato_id">
-                          {{ contrato.model_contrato_id.nombre }}
-                        </option>
-                      </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
-
-                <br>
-                <div id="agencias">
-                  <app-select [control]="formControls.agencia_id" label="* Agencia">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione una agencia</option>
-                      <ng-container *ngFor="let agencia of agencias4Cub$|async">
-                        <option [value]="agencia.id">
-                          {{ agencia.nombre }}
-                        </option>
-                      </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
-
-                <br>
-                <div id="proveedores">
-                  <app-select [control]="formControls.cmarcoproveedor_id" label="* Proveedor">
-                    <ng-container options>
-                      <option value="null" selected disabled>Seleccione un Proveedor</option>
-                      <ng-container *ngFor="let prov of proveedores4Cub$|async">
-                        <option [value]="prov.cmarco_has_proveedor_id">
-                          {{prov.codigo_acuerdo}} - {{ prov.nombre }}
-                        </option>
-                      </ng-container>
-                    </ng-container>
-                  </app-select>
-                </div>
-              </div>
-              <div class="col-md-7 col-sm-12">
-                <br>
-                <div id="direccion">
-                  <div class="row">
-                    <div class="col-md-6 col-sm-6" id="direcciondesde">
-                      <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
-                    </div>
-                    <div class="col-md-6 col-sm-6" id="alturadesde">
-                      <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 col-sm-6" id="direccionhasta">
-                      <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
-                    </div>
-                    <div class="col-md-6 col-sm-6" id="alturahasta">
-                      <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
-                    </div>
-                  </div>
-                </div>
-
-                <div id="descripcion">
-                  <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
-                  </app-textarea>
-                </div>
-              </div>
-            </div>
-
-            <div class="filtroservicios" [formGroup]="formFiltros">
-              <div class="row">
-                <div class="col-md-12 col-sm-12">
-                  <div id="actividad">
-                    <app-select [control]="formFiltrosControls.actividad_id" label="* Actividad">
-                      <ng-container options>
-                        <option value="null" selected disabled>Seleccione una Actividad</option>
-                        <ng-container *ngFor="let item of actividad4Cub$|async">
-                          <option [value]="item.id">
-                            {{item.descripcion}}
-                          </option>
-                        </ng-container>
-                      </ng-container>
-                    </app-select>
-                  </div>
-                  <br>
-                  <div id="tiposervicio">
-                    <app-select [control]="formFiltrosControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
-                      <ng-container options>
-                        <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
-                        <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
-                          <option [value]="item.id">
-                            {{item.descripcion}}
-                          </option>
-                        </ng-container>
-                      </ng-container>
-                    </app-select>
-                  </div>
-                </div>
-                <!-- <div class="col-md-9 col-sm-12">
-                 
-                </div> -->
-                <!-- <div class="col-md-1 col-sm-12">
-                  <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
-                </div> -->
-              </div>
-
-              <br>
-              <div class="row">
-                <!-- <div class="col-md-3 col-sm-12">
-                  
-                </div> -->
-                <div class="col-md-12 col-sm-12">
-                  <div id="servicios">
-                    <app-select [control]="formFiltrosControls.servicio_cod" label="* Código - Servicio">
-                      <ng-container options>
-                        <option value="null" selected disabled>Seleccione un Servicio/Especialidad</option>
-                        <ng-container *ngFor="let item of servicios4Cub$|async">
-                          <option [value]="item.codigo">
-                            {{item.codigo}} - {{item.descripcion}}
-                          </option>
-                        </ng-container>
-                      </ng-container>
-                    </app-select>
-                  </div>
-                  <br>
-                  <div id="unidad-obra">
-                    <app-select [control]="formFiltrosControls.unidad_obra_cod" label="* Código - Unidad de Obra">
-                      <ng-container options>
-                        <option value="null" selected disabled>Seleccione una unidad de obra</option>
-                        <ng-container *ngFor="let item of unidadObra4Cub$|async">
-                          <option [value]="item.model_unidad_obra_cod.codigo">
-                            {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
-                          </option>
-                        </ng-container>
-                      </ng-container>
-                    </app-select>
-                  </div>
-                </div>
-                <!-- <div class="col-md-1 col-sm-12">
-                  <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
-                </div> -->
-              </div>
-
-              <br>
-              <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                  <button (click)="agregar()">Agregar</button>
-                  <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;">Ya ha agregado este servico/Unidad Obra </p>
-                </div>
-                <div class="col-md-4"></div>
-              </div>
-            </div>
-
-            <br>
-            <div class="info">
-              <span class="info-title">
-                INFO
-              </span>
-              <div class="data-info">
-                <div class="box box-1"></div>
-                <span style="margin-left: 5px;">Servicio/UO nuevos</span>
-              </div>
-              <div class="data-info">
-                <div class="box box-2"></div>
-                <span style="margin-left: 5px;">Servicio/UO existente en la cubicación original</span>
-              </div>
-            </div>
-            <br>
-            <div class="table-carrito">
-              <table style="width:100%">
-                <thead>
-                  <tr>
-                    <th colspan="7">Servicios</th>
-                    <th colspan="8">Unidad Obra</th>
-                  </tr>
-                  <tr>
-                    <th>Cod</th>
-                    <th>Descripción</th>
-                    <th>Esp</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <!-- <th>Factor</th> -->
-                    <th>Total Servicio</th>
-                    <th></th>
-
-                    <th>Cód</th>
-                    <th>Descripción</th>
-                    <th>Actividad</th>
-                    <th>Cantidad</th>
-                    <th>Tipo Moneda</th>
-                    <th>Precio</th>
-                    <th>Total UO</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody formArrayName="table">
-                  <ng-container *ngFor="let item of carrito$|async;let i = index" [formGroupName]="i">
-                    <ng-container *ngIf="item.unidades_obras.length===1">
-                      <tr>
-                        <td class="label-table">{{item.servicio_codigo}}</td>
-                        <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
-                        <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
-                        <td [ngClass]="item.precargado?'existente':'noexistente'">
-                          <input [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="1" type="number" style="width: 37px;">
-                          <div *ngIf="formCntl(item.servicio_codigo,'cantidad_servicio').invalid && (formCntl(item.servicio_codigo,'cantidad_servicio').dirty || formCntl(item.servicio_codigo,'cantidad_servicio').touched)">
-                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
-                          </div>
-                        </td>
-                        <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                        <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
-                        <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [ngClass]="item.precargado?'existente':'noexistente'">
-                          <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
-                            <div class="ui icon buttons mini basic">
-                              <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
-                                <fa-icon [icon]="trashICon"></fa-icon>
-                              </button>
-                            </div>
-                          </ng-container>
-
-                          <ng-container *ngIf="item.precargado">
-                            <div class="ui icon buttons mini basic">
-                              <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_rowid)" class="ui button eliminar-color">
-                                <fa-icon [icon]="trashICon"></fa-icon>
-                              </button>
-                            </div>
-                          </ng-container>
-                        </td>
-
-                        <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
-                        <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
-                        <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
-                        <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
-                          <input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="1" type="number" style="width: 37px;">
-                          <div *ngIf="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).dirty || formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).touched)">
-                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
-                          </div>
-                        </td>
-                        <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
-                        <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
-                          <div class="ui icon buttons mini basic">
-                            <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
-                          </div>
-                        </td>
-                      </tr>
-                    </ng-container>
-
-
-                    <ng-container *ngIf="item.unidades_obras.length>1">
-                      <tr>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
-                          <input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="1" type="number" style="width: 37px;">
-                          <div *ngIf="formCntl(item.servicio_codigo,'cantidad_servicio').invalid && (formCntl(item.servicio_codigo,'cantidad_servicio').dirty || formCntl(item.servicio_codigo,'cantidad_servicio').touched)">
-                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
-                          </div>
-                        </td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
-                        <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
-                          <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
-                            <div class="ui icon buttons mini basic">
-                              <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
-                                <fa-icon [icon]="trashICon"></fa-icon>
-                              </button>
-                            </div>
-                          </ng-container>
-                          <ng-container *ngIf="item.precargado">
-                            <div class="ui icon buttons mini basic">
-                              <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_rowid)" class="ui button eliminar-color">
-                                <fa-icon [icon]="trashICon"></fa-icon>
-                              </button>
-                            </div>
-                          </ng-container>
-                        </td>
-
-                        <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
-                        <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
-                        <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
-                        <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
-                          <input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="1" type="number" style="width: 37px;">
-                          <div *ngIf="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).dirty || formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).touched)">
-                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
-                          </div>
-                        </td>
-                        <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
-                        <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
-                          <div class="ui icon buttons mini basic">
-                            <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
-                            <ng-container *ngIf="item.unidades_obras[0].precargado === undefined || item.unidades_obras[0].precargado === false">
-                              <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
-                                <fa-icon [icon]="trashICon"></fa-icon>
-                              </button>
-                            </ng-container>
-                            <ng-container *ngIf="item.unidades_obras[0].precargado">
-                              <div class="ui icon buttons mini basic">
-                                <button (click)="DisplayDeleteUOCarritoDefinitivo(item.servicio_codigo,item.unidades_obras[0].uo_rowid)" class="ui button eliminar-color">
-                                  <fa-icon [icon]="trashICon"></fa-icon>
-                                </button>
-                              </div>
-                            </ng-container>
-                          </div>
-                        </td>
-                      </tr>
-                    </ng-container>
-
-                    <ng-container *ngIf="item.unidades_obras.length>1">
-                      <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index" [ngClass]="item.precargado?'existente':'noexistente'">
-                        <td class="label-table">{{uo.uo_codigo}}</td>
-                        <td class="data-primaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_nombre}}</td>
-                        <td class="data-secundaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
-                        <td [ngClass]="uo.precargado?'existente':'noexistente'">
-                          <input appInputColor min="1" [formControl]="formCntlUO(i,'cantidad_uo',uo.uo_codigo)" min="1" type="number" style="width: 37px;">
-                          <div *ngIf="formCntlUO(i,'cantidad_uo',uo.uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',uo.uo_codigo).dirty || formCntlUO(i,'cantidad_uo',uo.uo_codigo).touched)">
-                            <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
-                          </div>
-                        </td>
-                        <td class="data-secundaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
-                        <td [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td [ngClass]="uo.precargado?'existente':'noexistente'">
-                          <div class="ui icon buttons mini basic">
-                            <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>
-                            <ng-container *ngIf="uo.precargado === undefined || uo.precargado === false">
-                              <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
-                                <fa-icon [icon]="trashICon"></fa-icon>
-                              </button>
-                            </ng-container>
-                            <ng-container *ngIf="uo.precargado">
-                              <div class="ui icon buttons mini basic">
-                                <button (click)="DisplayDeleteUOCarritoDefinitivo(uo.uo_rowid)" class="ui button eliminar-color">
-                                  <fa-icon [icon]="trashICon"></fa-icon>
-                                </button>
-                              </div>
-                            </ng-container>
-                          </div>
-                        </td>
-                      </tr>
-                    </ng-container>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div id="tipoCub">
+              <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione un tipo</option>
+                  <ng-container *ngFor="let tipoCub of tipoCubicacion4Cub$|async">
+                    <option [value]="tipoCub.id">
+                      {{ tipoCub.descripcion }}
+                    </option>
                   </ng-container>
-                </tbody>
-              </table>
-            </div>
-
-
-            <ng-container *ngIf="(carrito$|async).length === 0">
-              <div class="text-right">
-                <p>Al menos 1 servicio debe ser ingresado </p>
-              </div>
-            </ng-container>
-
-            <div class="row" id="table-totales">
-              <div class="col-9"></div>
-              <div class="col-3">
-                <table style="width: 100%;">
-                  <tr>
-                    <td>Total Servicios</td>
-                    <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                  </tr>
-                  <tr>
-                    <td>Total Unidades Obra</td>
-                    <td>{{totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                  </tr>
-                  <tr>
-                    <td style="background: #cccccc;
-                    font-size: 15px;">Total Cubicación</td>
-                    <td>{{totalServicio + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            <br>
-            <br>
-            <div class="row">
-              <div class="col-5"></div>
-              <div class="col-2">
-                <ng-container *ngIf="mode === 'add'">
-                  <button (click)="CreateCub()" [disabled]="!formCub.valid" id="create-button">Crear Cubicación</button>
                 </ng-container>
-
-                <ng-container *ngIf="mode === 'edit'">
-                  <button (click)="EditCub()" [disabled]="!formCub.valid" id="create-button">Actualizar Cubicación</button>
-                </ng-container>
-              </div>
-              <div class="col-5"></div>
+              </app-select>
             </div>
-            <!-- {{carrito$|async|json}} -->
-            <!-- {{formCub.get("table").value|json}} -->
-            <!-- {{formCub.get("table").value|json}} -->
-            <!-- <button (click)="show()"></button> -->
           </div>
         </div>
-      </ng-container>
-    </app-card>
+
+        <div class="row">
+          <div class="col-md-5 col-sm-12" style="border: 1px solid #c6c6c6;margin-top: 11px; padding: 14px;">
+            <div id="contratosUser">
+              <app-select [control]="formControls.contrato" label="* Contrato">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione un contrato</option>
+                  <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
+                    <option [value]="contrato.contrato_id">
+                      {{ contrato.model_contrato_id.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+
+            <br>
+            <div id="agencias">
+              <app-select [control]="formControls.agencia_id" label="* Agencia">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione una agencia</option>
+                  <ng-container *ngFor="let agencia of agencias4Cub$|async">
+                    <option [value]="agencia.id">
+                      {{ agencia.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+
+            <br>
+            <div id="proveedores">
+              <app-select [control]="formControls.cmarcoproveedor_id" label="* Proveedor">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione un Proveedor</option>
+                  <ng-container *ngFor="let prov of proveedores4Cub$|async">
+                    <option [value]="prov.cmarco_has_proveedor_id">
+                      {{prov.codigo_acuerdo}} - {{ prov.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-12">
+            <br>
+            <div id="direccion">
+              <div class="row">
+                <div class="col-md-6 col-sm-6" id="direcciondesde">
+                  <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
+                </div>
+                <div class="col-md-6 col-sm-6" id="alturadesde">
+                  <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6" id="direccionhasta">
+                  <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
+                </div>
+                <div class="col-md-6 col-sm-6" id="alturahasta">
+                  <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
+                </div>
+              </div>
+            </div>
+
+            <div id="descripcion">
+              <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
+              </app-textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="filtroservicios" [formGroup]="formFiltros">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div id="actividad">
+                <app-select [control]="formFiltrosControls.actividad_id" label="* Actividad">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione una Actividad</option>
+                    <ng-container *ngFor="let item of actividad4Cub$|async">
+                      <option [value]="item.id">
+                        {{item.descripcion}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
+              <!-- <br> -->
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div id="tiposervicio">
+                <app-select [control]="formFiltrosControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
+                    <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
+                      <option [value]="item.id">
+                        {{item.descripcion}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
+            </div>
+            <!-- <div class="col-md-1 col-sm-12">
+                  <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
+                </div> -->
+          </div>
+
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div id="servicios">
+                <app-select [control]="formFiltrosControls.servicio_cod" label="* Código - Servicio">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un Servicio/Especialidad</option>
+                    <ng-container *ngFor="let item of servicios4Cub$|async">
+                      <option [value]="item.codigo">
+                        {{item.codigo}} - {{item.descripcion}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div id="unidad-obra">
+                <app-select [control]="formFiltrosControls.unidad_obra_cod" label="* Código - Unidad de Obra">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione una unidad de obra</option>
+                    <ng-container *ngFor="let item of unidadObra4Cub$|async">
+                      <option [value]="item.model_unidad_obra_cod.codigo">
+                        {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
+            </div>
+            <!-- <div class="col-md-1 col-sm-12">
+                  <app-input [control]="formControls.cantidad_servicio" type="number" label="* Cantidad:"></app-input>
+                </div> -->
+          </div>
+
+          <br>
+          <div style="display:flex;align-items: center;justify-content: center;">
+            <button (click)="agregar()">Agregar</button>
+            <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;">Ya ha agregado este servico/Unidad Obra </p>
+          </div>
+        </div>
+
+        <br>
+        <div class="info" *ngIf=" mode === 'edit'">
+          <span class="info-title">
+            INFO
+          </span>
+          <div class="data-info">
+            <div class="box box-1"></div>
+            <span style="margin-left: 5px;">Servicio/UO nuevos</span>
+          </div>
+          <div class="data-info">
+            <div class="box box-2"></div>
+            <span style="margin-left: 5px;">Servicio/UO existente en la cubicación original</span>
+          </div>
+        </div>
+        <br>
+        <div class="table-carrito">
+          <table style="width:100%">
+            <thead>
+              <tr>
+                <th colspan="7">Servicios</th>
+                <th colspan="8">Unidad Obra</th>
+              </tr>
+              <tr>
+                <th>Cod</th>
+                <th>Descripción</th>
+                <th>Esp</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <!-- <th>Factor</th> -->
+                <th>Total Servicio</th>
+                <th></th>
+
+                <th>Cód</th>
+                <th>Descripción</th>
+                <th>Actividad</th>
+                <th>Cantidad</th>
+                <th>Tipo Moneda</th>
+                <th>Precio</th>
+                <th>Total UO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody formArrayName="table">
+              <ng-container *ngFor="let item of carrito$|async;let i = index" [formGroupName]="i">
+                <ng-container *ngIf="item.unidades_obras.length===1">
+                  <tr>
+                    <td class="label-table">{{item.servicio_codigo}}</td>
+                    <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
+                    <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
+                    <td [ngClass]="item.precargado?'existente':'noexistente'">
+                      <input [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="1" type="number" style="width: 37px;">
+                      <div *ngIf="formCntl(item.servicio_codigo,'cantidad_servicio').invalid && (formCntl(item.servicio_codigo,'cantidad_servicio').dirty || formCntl(item.servicio_codigo,'cantidad_servicio').touched)">
+                        <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                      </div>
+                    </td>
+                    <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
+                    <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [ngClass]="item.precargado?'existente':'noexistente'">
+                      <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
+                        <div class="ui icon buttons mini basic">
+                          <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </div>
+                      </ng-container>
+
+                      <ng-container *ngIf="item.precargado">
+                        <div class="ui icon buttons mini basic">
+                          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_rowid)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </div>
+                      </ng-container>
+                    </td>
+
+                    <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
+                    <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
+                    <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
+                      <input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="1" type="number" style="width: 37px;">
+                      <div *ngIf="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).dirty || formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).touched)">
+                        <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                      </div>
+                    </td>
+                    <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
+                    <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
+                      <div class="ui icon buttons mini basic">
+                        <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+
+
+                <ng-container *ngIf="item.unidades_obras.length>1">
+                  <tr>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
+                      <input appInputColor [formControl]="formCntl(item.servicio_codigo,'cantidad_servicio')" min="1" type="number" style="width: 37px;">
+                      <div *ngIf="formCntl(item.servicio_codigo,'cantidad_servicio').invalid && (formCntl(item.servicio_codigo,'cantidad_servicio').dirty || formCntl(item.servicio_codigo,'cantidad_servicio').touched)">
+                        <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                      </div>
+                    </td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_codigo,'cantidad_servicio').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
+                      <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
+                        <div class="ui icon buttons mini basic">
+                          <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="item.precargado">
+                        <div class="ui icon buttons mini basic">
+                          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_rowid)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </div>
+                      </ng-container>
+                    </td>
+
+                    <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
+                    <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
+                    <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
+                      <input appInputColor [formControl]="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo)" min="1" type="number" style="width: 37px;">
+                      <div *ngIf="formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).dirty || formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).touched)">
+                        <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                      </div>
+                    </td>
+                    <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
+                    <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
+                      <div class="ui icon buttons mini basic">
+                        <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                        <ng-container *ngIf="item.unidades_obras[0].precargado === undefined || item.unidades_obras[0].precargado === false">
+                          <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </ng-container>
+                        <ng-container *ngIf="item.unidades_obras[0].precargado">
+                          <div class="ui icon buttons mini basic">
+                            <button (click)="DisplayDeleteUOCarritoDefinitivo(item.servicio_codigo,item.unidades_obras[0].uo_rowid)" class="ui button eliminar-color">
+                              <fa-icon [icon]="trashICon"></fa-icon>
+                            </button>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+
+                <ng-container *ngIf="item.unidades_obras.length>1">
+                  <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index" [ngClass]="item.precargado?'existente':'noexistente'">
+                    <td class="label-table">{{uo.uo_codigo}}</td>
+                    <td class="data-primaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_nombre}}</td>
+                    <td class="data-secundaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
+                    <td [ngClass]="uo.precargado?'existente':'noexistente'">
+                      <input appInputColor min="1" [formControl]="formCntlUO(i,'cantidad_uo',uo.uo_codigo)" min="1" type="number" style="width: 37px;">
+                      <div *ngIf="formCntlUO(i,'cantidad_uo',uo.uo_codigo).invalid && (formCntlUO(i,'cantidad_uo',uo.uo_codigo).dirty || formCntlUO(i,'cantidad_uo',uo.uo_codigo).touched)">
+                        <p-message severity="error" text="{{ errorMessageFn(formCntl(item.servicio_codigo,'cantidad_servicio').errors) }}"></p-message>
+                      </div>
+                    </td>
+                    <td class="data-secundaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
+                    <td [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_precio_total_clp*+formCntlUO(i,'cantidad_uo',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [ngClass]="uo.precargado?'existente':'noexistente'">
+                      <div class="ui icon buttons mini basic">
+                        <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>
+                        <ng-container *ngIf="uo.precargado === undefined || uo.precargado === false">
+                          <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </ng-container>
+                        <ng-container *ngIf="uo.precargado">
+                          <div class="ui icon buttons mini basic">
+                            <button (click)="DisplayDeleteUOCarritoDefinitivo(uo.uo_rowid)" class="ui button eliminar-color">
+                              <fa-icon [icon]="trashICon"></fa-icon>
+                            </button>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+
+
+        <ng-container *ngIf="(carrito$|async).length === 0">
+          <div class="text-left">
+            <p style="color: #e61717;
+            letter-spacing: 1px;
+            font-weight: 700;">Al menos 1 servicio debe ser ingresado </p>
+          </div>
+        </ng-container>
+
+        <div class="row" id="table-totales">
+          <div class="col-9"></div>
+          <div class="col-3">
+            <table style="width: 100%;">
+              <tr>
+                <td>Total Servicios</td>
+                <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+              <tr>
+                <td>Total Unidades Obra</td>
+                <td>{{totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+              <tr>
+                <td style="background: #cccccc;
+                    font-size: 15px;">Total Cubicación</td>
+                <td>{{totalServicio + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div style="display:flex;align-items: center;justify-content: center;">
+          <ng-container *ngIf="mode === 'add'">
+            <button (click)="CreateCub()" [disabled]="!formCub.valid || (carrito$|async).length === 0" id="create-button">Crear Cubicación</button>
+          </ng-container>
+
+          <ng-container *ngIf="mode === 'edit'">
+            <button (click)="EditCub()" [disabled]="!formCub.valid || (carrito$|async).length === 0" id="create-button">Actualizar Cubicación</button>
+          </ng-container>
+        </div>
+        <!-- {{carrito$|async|json}} -->
+        <!-- {{formCub.get("table").value|json}} -->
+        <!-- {{formCub.get("table").value|json}} -->
+        <!-- <button (click)="show()"></button> -->
+      </div>
+    </div>
+    <!-- </ng-container> -->
+    <!-- </app-card> -->
   </form>
 
 </div>
