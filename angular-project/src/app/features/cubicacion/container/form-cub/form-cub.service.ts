@@ -12,7 +12,7 @@ export class FormCubService {
       nombre: new FormControl(null, [
         Validators.required,
         this.noWhitespace,
-        Validators.maxLength(100),
+        Validators.maxLength(300),
       ]),
       tipocubicacion: new FormControl(null, [Validators.required]),
       direcciondesde: new FormControl(null, [

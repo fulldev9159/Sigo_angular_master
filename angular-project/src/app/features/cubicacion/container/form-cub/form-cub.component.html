@@ -416,6 +416,14 @@ z-index: 1;">
                 </tbody>
               </table>
             </div>
+
+
+            <ng-container *ngIf="(carrito$|async).length === 0">
+              <div class="text-right">
+                <p>Al menos 1 servicio debe ser ingresado </p>
+              </div>
+            </ng-container>
+
             <div class="row" id="table-totales">
               <div class="col-9"></div>
               <div class="col-3">
