@@ -140,6 +140,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   onInitGetInitialData(): void {
+    this.baseFacade.loading(true);
     this.subscription.add(
       this.authFacade.getLogin$().subscribe(loginAuth => {
         if (

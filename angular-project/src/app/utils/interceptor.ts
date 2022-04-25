@@ -39,7 +39,13 @@ export class JwtAppInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.baseFacade.loading(true);
+    const url = window.location.href;
+    const expresion = /http.*\/app\/cubicacion\/form-cub\/\d+/g;
+    const hallado = url.match(expresion);
+
+    if (hallado === null) {
+      this.baseFacade.loading(true);
+    }
 
     if (
       this.profileID &&
@@ -69,9 +75,6 @@ export class JwtAppInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(
       finalize(() => {
-        const url = window.location.href;
-        const expresion = /http.*\/app\/cubicacion\/form-cub\/\d+/g;
-        const hallado = url.match(expresion);
         // console.log(req.url);
         if (hallado === null) {
           this.baseFacade.loading(false);
