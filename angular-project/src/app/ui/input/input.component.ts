@@ -14,6 +14,8 @@ export class InputComponent implements OnInit {
   @Input() ID = '';
   // tslint:disable-next-line:no-input-rename
   @Input('type') inputType = 'text';
+  // tslint:disable-next-line:no-input-rename
+  @Input('min') min = '';
   @Input() errorMessageFn = errors => {
     if (errors.required) {
       return 'Este campo es requerido';
@@ -21,6 +23,8 @@ export class InputComponent implements OnInit {
       return 'Este campo es requerido';
     } else if (errors.maxlength) {
       return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
+    } else if (errors.min) {
+      return 'El valor debe ser mayor o igual a 1';
     }
   };
 

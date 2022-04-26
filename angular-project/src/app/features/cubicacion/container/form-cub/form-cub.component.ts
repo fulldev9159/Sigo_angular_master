@@ -49,6 +49,25 @@ import { FormCubService } from './form-cub.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BaseFacade } from '@storeOT/features/base/base.facade';
 
+interface FormServiceType {
+  actividad_id: number;
+  cantidad_servicio: number;
+  precargado: boolean;
+  precio_clp: number;
+  servicio_cod: string;
+  servicio_id: number;
+  servicio_rowid: number;
+  servicio_tipo: number;
+  unidades_obra: FormUOtype[];
+}
+interface FormUOtype {
+  cantidad_uo: number;
+  precargado: boolean;
+  precio_clp_uo: number;
+  uo_codigo: string;
+  uo_rowid: number;
+}
+
 @Component({
   selector: 'app-form-cub',
   templateUrl: './form-cub.component.html',
@@ -333,23 +352,16 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.carrito$.subscribe(carrito => {
         carrito.forEach(servicio => {
-          // console.log(
-          //   'Table Actual',
-          //   (this.formCub.get('table') as FormArray).value
-          // );
-          // console.log('Servicio a agregar', servicio.servicio_codigo);
-
-          const existe = (
-            (this.formCub.get('table') as FormArray).value as Array<{
-              servicio_cod: any;
-            }>
-          ).find(
+          const tableForm = this.formCub.get('table') as FormArray;
+          const tableValue: FormServiceType[] = tableForm.value;
+          const index_table_servicio = tableValue.findIndex(
             tableServicio =>
               tableServicio.servicio_cod === servicio.servicio_codigo
           );
 
-          // console.log('Existe?', existe);
-          if (existe === undefined) {
+          //  ES UN SERVICIO QUE NO ESTÁ EN EL FORMULARIO Y SE DEBE AGREGAR
+          if (index_table_servicio === -1) {
+            console.log('Es nuevo');
             const group = new FormGroup({
               precargado: new FormControl(servicio.precargado ?? false, []),
               servicio_rowid: new FormControl(
@@ -360,9 +372,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               servicio_id: new FormControl(servicio.servicio_id, [
                 Validators.required,
               ]),
-              // actividad_id: new FormControl(servicio.a, [
-              //   Validators.required,
-              // ]),
               servicio_cod: new FormControl(servicio.servicio_codigo, [
                 Validators.required,
               ]),
@@ -370,15 +379,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 Validators.required,
                 Validators.min(1),
               ]),
-              // precio_proveedor: new FormControl(servicio.precio_proveedor, [
-              //   Validators.required,
-              // ]),
-              // precio_agencia: new FormControl(servicio.precio_agencia, [
-              //   Validators.required,
-              // ]),
-              // servicio_baremos: new FormControl(servicio.servicio_baremos, [
-              //   Validators.required,
-              // ]),
               precio_clp: new FormControl(servicio.servicio_precio_final_clp, [
                 Validators.required,
               ]),
@@ -388,232 +388,45 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               servicio_tipo: new FormControl(servicio.servicio_tipo, [
                 Validators.required,
               ]),
-              unidades_obra: new FormArray([]),
+              unidades_obra: new FormArray(
+                servicio.unidades_obras.map(uo => {
+                  return this.makeUOForm(uo);
+                })
+              ),
             });
-            (this.formCub.get('table') as FormArray).push(group);
-            this.detector.detectChanges();
-
-            // console.log(
-            //   'INDEX',
-            //   (
-            //     (this.formCub.get('table') as FormArray).value as Array<{
-            //       servicio_cod: any;
-            //     }>
-            //   ).findIndex(
-            //     tableServicio =>
-            //       tableServicio.servicio_cod === servicio.servicio_codigo
-            //   )
-            // );
-
-            const index = (
-              (this.formCub.get('table') as FormArray).value as Array<{
-                servicio_cod: any;
-              }>
-            ).findIndex(
-              tableServicio =>
-                tableServicio.servicio_cod === servicio.servicio_codigo
-            );
-
-            // console.log(
-            //   'DATA INDEX',
-            //   (
-            //     (this.formCub.get('table') as FormArray).at(index) as FormGroup
-            //   ).get('unidades_obra')
-            // );
-
-            const len = (
-              (
-                (this.formCub.get('table') as FormArray).at(index) as FormGroup
-              ).get('unidades_obra').value as Array<{ uo_codigo: string }>
-            ).length;
-
-            const uo_form_actual = (
-              (this.formCub.get('table') as FormArray).at(index) as FormGroup
-            ).get('unidades_obra').value as Array<{ uo_codigo: string }>;
-
-            if (len > 0) {
-              servicio.unidades_obras.forEach(uo => {
-                const existeUO = uo_form_actual.find(
-                  uoTable => uoTable.uo_codigo === uo.uo_codigo
-                );
-
-                // console.log('EXISTE UO', existe);
-                if (existeUO === undefined) {
-                  const uo_group = new FormGroup({
-                    precargado: new FormControl(uo.precargado ?? false, []),
-                    uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
-
-                    uo_codigo: new FormControl(uo.uo_codigo, [
-                      Validators.required,
-                    ]),
-                    cantidad_uo: new FormControl(1, [
-                      Validators.required,
-                      Validators.min(1),
-                    ]),
-                    precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
-                      Validators.required,
-                    ]),
-                  });
-                  (
-                    (
-                      (this.formCub.get('table') as FormArray).at(
-                        index
-                      ) as FormGroup
-                    ).get('unidades_obra') as FormArray
-                  ).push(uo_group);
-                }
-                this.detector.detectChanges();
-              });
-            }
-            // console.log(
-            //   'lenght',
-            //   (
-            //     (
-            //       (this.formCub.get('table') as FormArray).at(
-            //         index
-            //       ) as FormGroup
-            //     ).get('unidades_obra').value as Array<{ uo_codigo }>
-            //   ).length
-            // );
-
-            if (len === 0) {
-              servicio.unidades_obras.forEach(uo => {
-                const uo_group = new FormGroup({
-                  precargado: new FormControl(uo.precargado ?? false, []),
-                  uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
-
-                  uo_codigo: new FormControl(uo.uo_codigo, [
-                    Validators.required,
-                  ]),
-                  cantidad_uo: new FormControl(1, [
-                    Validators.required,
-                    Validators.min(1),
-                  ]),
-                  precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
-                    Validators.required,
-                  ]),
-                });
-                (
-                  (
-                    (this.formCub.get('table') as FormArray).at(
-                      index
-                    ) as FormGroup
-                  ).get('unidades_obra') as FormArray
-                ).push(uo_group);
-              });
-            }
+            // console.log(group);
+            tableForm.push(group);
+            // this.detector.detectChanges();
           } else {
             // console.log(
-            //   'INDEX',
-            //   (
-            //     (this.formCub.get('table') as FormArray).value as Array<{
-            //       servicio_cod: any;
-            //     }>
-            //   ).findIndex(
-            //     tableServicio =>
-            //       tableServicio.servicio_cod === servicio.servicio_codigo
-            //   )
+            //   'ES UN SERVICIO QUE YA EXISTE EN EL FORMULARIO Y SE LE QUIERE AGREGAR UNA UO NUEVA'
             // );
-
-            const index = (
-              (this.formCub.get('table') as FormArray).value as Array<{
-                servicio_cod: any;
-              }>
-            ).findIndex(
-              tableServicio =>
-                tableServicio.servicio_cod === servicio.servicio_codigo
-            );
-
-            // console.log(
-            //   'DATA INDEX',
-            //   (
-            //     (this.formCub.get('table') as FormArray).at(index) as FormGroup
-            //   ).get('unidades_obra')
-            // );
-
-            const len = (
-              (
-                (this.formCub.get('table') as FormArray).at(index) as FormGroup
-              ).get('unidades_obra').value as Array<{ uo_codigo: string }>
-            ).length;
-
-            const uo_form_actual = (
-              (this.formCub.get('table') as FormArray).at(index) as FormGroup
-            ).get('unidades_obra').value as Array<{ uo_codigo: string }>;
-
-            if (len > 0) {
-              servicio.unidades_obras.forEach(uo => {
-                const existe_UOD = uo_form_actual.find(
-                  uoTable => uoTable.uo_codigo === uo.uo_codigo
-                );
-
-                // console.log('EXISTE UO', existe);
-                if (existe_UOD === undefined) {
-                  const uo_group = new FormGroup({
-                    precargado: new FormControl(uo.precargado ?? false, []),
-                    uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
-
-                    uo_codigo: new FormControl(uo.uo_codigo, [
-                      Validators.required,
-                    ]),
-                    cantidad_uo: new FormControl(1, [
-                      Validators.required,
-                      Validators.min(1),
-                    ]),
-                    precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
-                      Validators.required,
-                    ]),
-                  });
-                  (
-                    (
-                      (this.formCub.get('table') as FormArray).at(
-                        index
-                      ) as FormGroup
-                    ).get('unidades_obra') as FormArray
-                  ).push(uo_group);
-                }
-                this.detector.detectChanges();
-              });
-            }
-            // console.log(
-            //   'lenght',
-            //   (
-            //     (
-            //       (this.formCub.get('table') as FormArray).at(
-            //         index
-            //       ) as FormGroup
-            //     ).get('unidades_obra').value as Array<{ uo_codigo }>
-            //   ).length
-            // );
-
-            if (len === 0) {
-              servicio.unidades_obras.forEach(uo => {
-                const uo_group = new FormGroup({
-                  precargado: new FormControl(uo.precargado ?? false, []),
-                  uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
-
-                  uo_codigo: new FormControl(uo.uo_codigo, [
-                    Validators.required,
-                  ]),
-                  cantidad_uo: new FormControl(1, [
-                    Validators.required,
-                    Validators.min(1),
-                  ]),
-                  precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
-                    Validators.required,
-                  ]),
+            const UOTableForm = tableForm
+              .at(index_table_servicio)
+              .get('unidades_obra') as FormArray;
+            console.log('Form', UOTableForm.value);
+            const uosForm: FormUOtype[] = UOTableForm.value;
+            const uosCarrito = servicio.unidades_obras;
+            console.log('Carrito', servicio.unidades_obras);
+            const getUosNuevas = (
+              carritoActual: DatosUnidadObra4Cub[],
+              form: FormUOtype[]
+            ) => {
+              return carritoActual.filter(object1 => {
+                return !form.some(object2 => {
+                  return object1.uo_codigo === object2.uo_codigo;
                 });
-                (
-                  (
-                    (this.formCub.get('table') as FormArray).at(
-                      index
-                    ) as FormGroup
-                  ).get('unidades_obra') as FormArray
-                ).push(uo_group);
               });
-            }
+            };
+            const uosNuevas = getUosNuevas(uosCarrito, uosForm);
+            console.log('UOs Nuevas', getUosNuevas(uosCarrito, uosForm));
+            uosNuevas.forEach(uo => {
+              UOTableForm.push(this.makeUOForm(uo));
+            });
+            // this.detector.detectChanges();
           }
         });
+        // this.detector.detectChanges();
       })
     );
 
@@ -798,30 +611,59 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   formCntlUO(
-    index_service: number,
+    servicio_codigo: string,
     // index_uo: number,
     control: string,
     uo_codigo: string
   ): AbstractControl {
+    const tableForm = this.formCub.get('table') as FormArray;
+    const tableValue: FormServiceType[] = tableForm.value;
+    const index_service = tableValue.findIndex(
+      tableServicio => tableServicio.servicio_cod === servicio_codigo
+    );
+    const serviceFrom = tableForm.at(index_service);
+
+    console.log('CNTRL Serviceform', serviceFrom);
+
+    const UOForm: FormUOtype[] = serviceFrom.get('unidades_obra').value;
+
+    console.log('CNTRL UOForm', UOForm);
+
     const controlName = 'table';
-    const uo_form_actual = (
-      (this.formCub.get('table') as FormArray).at(index_service) as FormGroup
-    ).get('unidades_obra').value as Array<{ uo_codigo: string }>;
-    const index_uo = uo_form_actual.findIndex(
+    // const uo_form_actual = (
+    //   (this.formCub.get('table') as FormArray).at(index_service) as FormGroup
+    // ).get('unidades_obra').value as Array<{ uo_codigo: string }>;
+
+    console.log(
+      `Buscando ${uo_codigo} en UOFORM Servicio index ${index_service} ${servicio_codigo}`
+    );
+    const index_uo = UOForm.findIndex(
       uoTable => uoTable.uo_codigo === uo_codigo
     );
-    // console.log(
-    //   (
-    //     (this.formCub.controls[controlName] as FormArray).controls[
-    //       index_service
-    //     ].get('unidades_obra') as FormArray
-    //   ).controls[index_uo].get(control)
-    // );
+
+    console.log(
+      index_uo !== -1
+        ? `UO ${index_uo} encontrado`
+        : 'UO codigo no encontrado en el formulario'
+    );
     return (
       (this.formCub.controls[controlName] as FormArray).controls[
         index_service
       ].get('unidades_obra') as FormArray
     ).controls[index_uo].get(control);
+  }
+
+  makeUOForm(uo: DatosUnidadObra4Cub): FormGroup {
+    return new FormGroup({
+      precargado: new FormControl(uo.precargado ?? false, []),
+      uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
+
+      uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
+      cantidad_uo: new FormControl(1, [Validators.required, Validators.min(1)]),
+      precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
+        Validators.required,
+      ]),
+    });
   }
 
   agregar(): void {
@@ -842,7 +684,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     };
 
     this.cubicacionFacade.datosServicio4Cub(request_servicio, request_uo);
-    this.detector.detectChanges();
+    // this.detector.detectChanges();
   }
 
   deleteServiceCarrito(servicio_codigo: string): void {
@@ -969,44 +811,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       contrato,
       agencia_id,
       cmarcoproveedor_id,
-      //// "actividad_id": null,
-      //// "tipo_servicio_id": null,
-      //// "servicio_cod": null,
-      //// "unidad_obra_cod": null,
-      //// "cantidad_servicio": 1,
-      //// "cantidad_unidad_obra": 1,
-      //// "table": [
-      ////   {
-      ////     "servicio_id": 25,
-      ////     "servicio_cod": "D020",
-      ////     "cantidad_servicio": 1,
-      ////     "precio_clp": 12240,
-      ////     "actividad_id": 6,
-      ////     "servicio_tipo": 1,
-      ////     "unidades_obra": [
-      ////       {
-      ////         "uo_codigo": "0",
-      ////         "cantidad_uo": 2,
-      ////         "precio_clp_uo": 0
-      ////       }
-      ////     ]
-      ////   },
-      ////   {
-      ////     "servicio_id": 21,
-      ////     "servicio_cod": "D010",
-      ////     "cantidad_servicio": 4,
-      ////     "precio_clp": 60000,
-      ////     "actividad_id": 6,
-      ////     "servicio_tipo": 1,
-      ////     "unidades_obra": [
-      ////       {
-      ////         "uo_codigo": "T383",
-      ////         "cantidad_uo": 6,
-      ////         "precio_clp_uo": 0
-      ////       }
-      ////     ]
-      ////   }
-      //// ]
     } = this.values;
 
     const isLocal = (item: { precargado?: boolean }) =>

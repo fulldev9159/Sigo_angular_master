@@ -21,7 +21,18 @@
   <ng-container *ngIf="control !== undefined">
     <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
     <div *ngIf="control.invalid && (control.dirty || control.touched)">
-      <p-message severity="error" text="{{ errorMessageFn(control.errors) }}"></p-message>
+      <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="DisplayLabelMode==='none'">
+  <ng-container *ngIf="control !== undefined">
+    <input [formControl]="control" class="form-control" type="{{ inputType }}" min="{{min}}" placeholder="{{placeholder }}" style="    width: 51px;
+    font-size: 13px;
+    padding: 5px;">
+    <div *ngIf="control.invalid && (control.dirty || control.touched)">
+      <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
     </div>
   </ng-container>
 </ng-container>
