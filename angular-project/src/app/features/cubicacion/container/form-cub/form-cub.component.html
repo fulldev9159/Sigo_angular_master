@@ -273,7 +273,7 @@ z-index: 1;">
 
                       <ng-container *ngIf="item.precargado">
                         <div class="ui icon buttons mini basic">
-                          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_rowid)" class="ui button eliminar-color">
+                          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_codigo,item.servicio_rowid)" class="ui button eliminar-color">
                             <fa-icon [icon]="trashICon"></fa-icon>
                           </button>
                         </div>
@@ -327,7 +327,7 @@ z-index: 1;">
                       </ng-container>
                       <ng-container *ngIf="item.precargado">
                         <div class="ui icon buttons mini basic">
-                          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_rowid)" class="ui button eliminar-color">
+                          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_codigo,item.servicio_rowid)" class="ui button eliminar-color">
                             <fa-icon [icon]="trashICon"></fa-icon>
                           </button>
                         </div>
@@ -357,7 +357,7 @@ z-index: 1;">
                         </ng-container>
                         <ng-container *ngIf="item.unidades_obras[0].precargado">
                           <div class="ui icon buttons mini basic">
-                            <button (click)="DisplayDeleteUOCarritoDefinitivo(item.servicio_codigo,item.unidades_obras[0].uo_rowid)" class="ui button eliminar-color">
+                            <button (click)="DisplayDeleteUOCarritoDefinitivo(item.servicio_codigo,item.unidades_obras[0].uo_codigo,item.unidades_obras[0].uo_rowid)" class="ui button eliminar-color">
                               <fa-icon [icon]="trashICon"></fa-icon>
                             </button>
                           </div>
@@ -392,7 +392,7 @@ z-index: 1;">
                         </ng-container>
                         <ng-container *ngIf="uo.precargado">
                           <div class="ui icon buttons mini basic">
-                            <button (click)="DisplayDeleteUOCarritoDefinitivo(uo.uo_rowid)" class="ui button eliminar-color">
+                            <button (click)="DisplayDeleteUOCarritoDefinitivo(item.servicio_codigo,uo.uo_codigo,uo.uo_rowid)" class="ui button eliminar-color">
                               <fa-icon [icon]="trashICon"></fa-icon>
                             </button>
                           </div>

@@ -114,11 +114,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   totalUO = 0;
   trashICon = faTrash;
   servicio_rowid = null;
+  servicio_cod_del = null;
   uo_rowid = null;
+  uo_cod_del = null;
   loading_interno = false;
 
   errorMessageFn = errors => {
-    // console.log(errors);
     if (errors.required) {
       return 'Este campo es requerido';
     } else if (errors.whitespace) {
@@ -530,7 +531,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           servicio_rowid: data_servicio.cub_has_srv_id,
           precio_agencia: data_servicio.agencia_preciario_monto,
           precio_proveedor: data_servicio.prov_has_serv_precio,
-          servicio_baremos: data_servicio.puntos_baremos, // TODO ?
+          servicio_baremos: data_servicio.puntos_baremos,
           servicio_codigo: data_servicio.servicio_cod,
           servicio_id: data_servicio.servicio_id,
           servicio_nombre: data_servicio.servicio_desc,
@@ -538,7 +539,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           servicio_precio_final_clp: data_servicio.servicio_precio_final_clp,
           servicio_tipo: data_servicio.tipo_servicio_id,
           servicio_unidad_id: data_servicio.unidad_medida_id,
-          tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
+          tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id? a la espera de lo que diga Braulio
           actividad_descripcion: data_servicio.actividad_desc,
           actividad_id: `${data_servicio.actividad_id}`,
           servicio_tipo_moneda_codigo: data_servicio.precio_tipo_moneda_cod, // TODO o monto_tipo_moneda_cod?
@@ -612,7 +613,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   formCntlUO(
     servicio_codigo: string,
-    // index_uo: number,
     control: string,
     uo_codigo: string
   ): AbstractControl {
@@ -622,29 +622,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       tableServicio => tableServicio.servicio_cod === servicio_codigo
     );
     const serviceFrom = tableForm.at(index_service);
-
-    console.log('CNTRL Serviceform', serviceFrom);
-
     const UOForm: FormUOtype[] = serviceFrom.get('unidades_obra').value;
-
-    console.log('CNTRL UOForm', UOForm);
-
     const controlName = 'table';
-    // const uo_form_actual = (
-    //   (this.formCub.get('table') as FormArray).at(index_service) as FormGroup
-    // ).get('unidades_obra').value as Array<{ uo_codigo: string }>;
-
-    console.log(
-      `Buscando ${uo_codigo} en UOFORM Servicio index ${index_service} ${servicio_codigo}`
-    );
     const index_uo = UOForm.findIndex(
       uoTable => uoTable.uo_codigo === uo_codigo
-    );
-
-    console.log(
-      index_uo !== -1
-        ? `UO ${index_uo} encontrado`
-        : 'UO codigo no encontrado en el formulario'
     );
     return (
       (this.formCub.controls[controlName] as FormArray).controls[
@@ -688,7 +669,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   deleteServiceCarrito(servicio_codigo: string): void {
-    // console.log('delete', servicio_codigo);
     this.cubicacionFacade.deleteServiceCarrito4CreateCub(servicio_codigo);
     (this.formCub.get('table') as FormArray).removeAt(
       (
@@ -935,32 +915,50 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.displayDeleteConfirmServicio = false;
   }
 
-  DisplayDeleteServicioCarritoDefinitivo(servicio_rowid: number): void {
+  DisplayDeleteServicioCarritoDefinitivo(
+    servicio_cod: string,
+    servicio_rowid: number
+  ): void {
     this.displayDeleteConfirmServicio = true;
     this.servicio_rowid = servicio_rowid;
-    console.log(servicio_rowid);
+    this.servicio_cod_del = servicio_cod;
   }
 
   DeleteServicioCarritoDefinitivo(): void {
     const request: RequestDeleteDetallesCubicacion = {
       servicio: [this.servicio_rowid],
     };
-
     this.cubicacionFacade.deleteDetalleCub(request);
     this.closeModalDeleteConfirmServicio();
+    this.cubicacionFacade.deleteServiceCarrito4CreateCub(this.servicio_cod_del);
   }
 
   closeModalDeleteConfirmUO(): void {
     this.displayDeleteConfirmUO = false;
   }
 
-  DisplayDeleteUOCarritoDefinitivo(uo_rowid: number): void {
+  DisplayDeleteUOCarritoDefinitivo(
+    servicio_cod: string,
+    uo_cod: string,
+    uo_rowid: number
+  ): void {
     this.displayDeleteConfirmUO = true;
     this.uo_rowid = uo_rowid;
-    console.log(uo_rowid);
+    this.uo_cod_del = uo_cod;
+    this.servicio_cod_del = servicio_cod;
   }
 
-  DeleteUOCarritoDefinitivo(): void {}
+  DeleteUOCarritoDefinitivo(): void {
+    const request: RequestDeleteDetallesCubicacion = {
+      unidad_obra: [this.uo_rowid],
+    };
+    this.cubicacionFacade.deleteDetalleCub(request);
+    this.closeModalDeleteConfirmUO();
+    this.cubicacionFacade.deleteUOCarrito4CreateCub(
+      this.servicio_cod_del,
+      this.uo_cod_del
+    );
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
