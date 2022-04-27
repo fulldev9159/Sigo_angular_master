@@ -913,6 +913,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   closeModalDeleteConfirmServicio(): void {
     this.displayDeleteConfirmServicio = false;
+    this.servicio_rowid = null;
+    this.servicio_cod_del = null;
   }
 
   DisplayDeleteServicioCarritoDefinitivo(
@@ -922,6 +924,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.displayDeleteConfirmServicio = true;
     this.servicio_rowid = servicio_rowid;
     this.servicio_cod_del = servicio_cod;
+    console.log(this.servicio_rowid);
   }
 
   DeleteServicioCarritoDefinitivo(): void {
@@ -935,6 +938,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   closeModalDeleteConfirmUO(): void {
     this.displayDeleteConfirmUO = false;
+    this.uo_rowid = null;
+    this.uo_cod_del = null;
+    this.servicio_cod_del = null;
   }
 
   DisplayDeleteUOCarritoDefinitivo(

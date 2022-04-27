@@ -213,6 +213,18 @@ export class CubicacionEffects {
     )
   );
 
+  clonCub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.clonCub),
+      concatMap(({ request }) =>
+        this.cubService.createCubicacion(request).pipe(
+          map(response => cubActions.clonCubSuccess({ response })),
+          catchError(err => of(cubActions.clonCubError({ error: err })))
+        )
+      )
+    )
+  );
+
   editCub$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.editCub),
@@ -259,7 +271,8 @@ export class CubicacionEffects {
           cubActions.editCubSuccess,
           cubActions.deleteCubSuccess,
           cubActions.createCubSuccess,
-          cubActions.deleteDetalleCubSuccess
+          cubActions.deleteDetalleCubSuccess,
+          cubActions.clonCubSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

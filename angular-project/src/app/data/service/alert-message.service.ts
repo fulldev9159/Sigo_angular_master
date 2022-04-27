@@ -238,6 +238,10 @@ export class AlertMessageActions {
         this.router.navigate(['/app/cubicacion/list-cub']);
         this.cubageFacade.AllCubs();
       }
+
+      if (action === ca.clonCubSuccess.type) {
+        location.reload();
+      }
     }
   }
 }

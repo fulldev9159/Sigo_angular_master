@@ -243,6 +243,20 @@ export const createCubError = createAction(
   props<{ error: any }>()
 );
 
+// CLONATE CUB
+export const clonCub = createAction(
+  '[Cubicacion] clonCub ',
+  props<{ request: RequestCreateCubicacion }>()
+);
+export const clonCubSuccess = createAction(
+  '[Cubicacion] createCub Success',
+  props<{ response: Response<DataRespCreateCubicacion> }>()
+);
+export const clonCubError = createAction(
+  '[Cubicacion] createCub Error',
+  props<{ error: any }>()
+);
+
 // EDIT CUB
 export const editCub = createAction(
   '[Cubicacion] editCub ',

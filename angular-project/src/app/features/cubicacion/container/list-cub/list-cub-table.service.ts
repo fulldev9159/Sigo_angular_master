@@ -7,6 +7,7 @@ export class ListCubTableService {
   constructor() {}
   getTableConfig(): any {
     return {
+      header: true,
       headerConfig: {
         title: '',
         searchText: 'buscar...',

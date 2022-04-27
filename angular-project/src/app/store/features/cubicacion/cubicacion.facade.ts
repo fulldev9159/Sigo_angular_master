@@ -184,6 +184,11 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.createCub({ request }));
   }
 
+  // CLON  CUB
+  public clonCub(request: RequestCreateCubicacion): void {
+    this.store.dispatch(cubicacionActions.clonCub({ request }));
+  }
+
   // EDIT  CUB
   public editCub(request: RequestEditCubicacion): void {
     this.store.dispatch(cubicacionActions.editCub({ request }));
