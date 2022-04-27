@@ -422,4 +422,62 @@ describe('My First Test', () => {
       '#table-totales>div.col-3 > table > tr:nth-child(3) > td:nth-child(2)'
     ).contains('$63.960');
   });
+
+  it('Revisar que no permita agregar el mismo servicio/uo', () => {
+    cy.get('#contratosUser > app-select > select').select('SBE');
+    cy.get('#agencias > app-select > select').select('RANCAGUA');
+    cy.get('#proveedores > app-select > select').select(1);
+    cy.get('#actividad > app-select > select').select('DISEÑO');
+    cy.get('#tiposervicio > app-select > select').select('CANALIZACION');
+
+    cy.get('#servicios > app-select > select ').select(
+      `${servicio2_cod} - ${servicio2}`
+    );
+    cy.get('#unidad-obra > app-select > select').select(
+      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
+    );
+    cy.contains('Agregar').click();
+    cy.wait(500);
+
+    cy.get('#unidad-obra > app-select > select').select(
+      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
+    );
+    cy.contains('Agregar').click();
+    cy.wait(500);
+
+    cy.get('#mensaje-repetido').contains(
+      'Ya ha agregado este servico/Unidad Obra'
+    );
+  });
+
+  it('Revisar que no permita agregar el mismo servicio/uo', () => {
+    cy.get('#contratosUser > app-select > select').select('SBE');
+    cy.get('#agencias > app-select > select').select('RANCAGUA');
+    cy.get('#proveedores > app-select > select').select(1);
+    cy.get('#actividad > app-select > select').select('DISEÑO');
+    cy.get('#tiposervicio > app-select > select').select('CANALIZACION');
+
+    cy.get('#servicios > app-select > select ').select(
+      `${servicio2_cod} - ${servicio2}`
+    );
+    cy.get('#unidad-obra > app-select > select').select(
+      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
+    );
+    cy.contains('Agregar').click();
+    cy.wait(500);
+
+    cy.get(':nth-child(15) > .icon > .ui').click();
+    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(1)').contains(
+      '530345'
+    );
+    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(2)').contains(
+      'TERMINAL OPTICO MULTIOPERADOR EDIFICIO'
+    );
+    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(3)').contains(
+      'TELEFONICA'
+    );
+    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
+      '$90.496'
+    );
+  });
 });

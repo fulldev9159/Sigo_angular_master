@@ -197,9 +197,9 @@ z-index: 1;">
           </div>
 
           <br>
-          <div style="display:flex;align-items: center;justify-content: center;">
+          <div style="display:flex;align-items: center;justify-content: center;flex-direction: column;">
             <button (click)="agregar()">Agregar</button>
-            <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;">Ya ha agregado este servico/Unidad Obra </p>
+            <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra </p>
           </div>
         </div>
 

@@ -42,19 +42,22 @@ Crear cubicación
     _Set input text    css:#alturahasta > app-input > input          1817
     _Set input text    css:#descripcion > app-textarea > textarea    Cub descripción
 
-    _Select visible item      css:#actividad > app-select > select                                      DISEÑO
-    _Select visible item      css:#tiposervicio > app-select > select                                   CANALIZACION
-    _Select visible item      css:#servicios > app-select > select                                      D020 - DISEÑO DE RED INTERIOR RED DE COBRE (DITICU)
-    _Select visible item      css:#unidad-obra > app-select > select                                    0 - SIN UO
-    _Click visible element    css:div.filtroservicios > div:nth-child(5) > div:nth-child(2) > button
+    _Select visible item      css:#actividad > app-select > select                  DISEÑO
+    _Select visible item      css:#tiposervicio > app-select > select               CANALIZACION
+    _Select visible item      css:#servicios > app-select > select                  D020 - DISEÑO DE RED INTERIOR RED DE COBRE (DITICU)
+    _Select visible item      css:#unidad-obra > app-select > select                0 - SIN UO
+    _Click visible element    css:div.filtroservicios> div:nth-child(5) > button
 
     sleep                     1
-    _Select visible item      css:#servicios > app-select > select                                      D010 - DISEÑO P2P EN RED DE COBRE PARA TELEALIMENTACION (AEREO O SUBTERRANEO)
-    _Select visible item      css:#unidad-obra > app-select > select                                    T382 - CAJA TERMINAL OPT.C/SPLITTER Y CONEC.TEL IP68
-    _Click visible element    css:div.filtroservicios > div:nth-child(5) > div:nth-child(2) > button
+    _Select visible item      css:#servicios > app-select > select                   D010 - DISEÑO P2P EN RED DE COBRE PARA TELEALIMENTACION (AEREO O SUBTERRANEO)
+    _Select visible item      css:#unidad-obra > app-select > select                 T382 - CAJA TERMINAL OPT.C/SPLITTER Y CONEC.TEL IP68
+    _Click visible element    css:div.filtroservicios > div:nth-child(5) > button
     sleep                     1
-    _Select visible item      css:#servicios > app-select > select                                      D010 - DISEÑO P2P EN RED DE COBRE PARA TELEALIMENTACION (AEREO O SUBTERRANEO)
-    _Select visible item      css:#unidad-obra > app-select > select                                    T383 - TERMINAL OPTICO MULTIOPERADOR EDIFICIO
-    _Click visible element    css:div.filtroservicios > div:nth-child(5) > div:nth-child(2) > button
+    _Select visible item      css:#servicios > app-select > select                   D010 - DISEÑO P2P EN RED DE COBRE PARA TELEALIMENTACION (AEREO O SUBTERRANEO)
+    _Select visible item      css:#unidad-obra > app-select > select                 T383 - TERMINAL OPTICO MULTIOPERADOR EDIFICIO
+    _Click visible element    css:div.filtroservicios > div:nth-child(5) > button
     sleep                     1
+    _Click visible element    css:#create-button
+    close browser
+
 
