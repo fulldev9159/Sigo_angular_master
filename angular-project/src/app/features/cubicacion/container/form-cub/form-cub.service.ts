@@ -12,7 +12,7 @@ export class FormCubService {
       nombre: new FormControl(null, [
         Validators.required,
         this.noWhitespace,
-        Validators.maxLength(100),
+        Validators.maxLength(300),
       ]),
       tipocubicacion: new FormControl(null, [Validators.required]),
       direcciondesde: new FormControl(null, [
@@ -39,13 +39,18 @@ export class FormCubService {
       contrato: new FormControl(null, [Validators.required]),
       agencia_id: new FormControl(null, [Validators.required]),
       cmarcoproveedor_id: new FormControl(null, [Validators.required]),
+      table: new FormArray([]),
+    };
+  }
+
+  FormFilterConfig(): any {
+    return {
       actividad_id: new FormControl(null, [Validators.required]),
       tipo_servicio_id: new FormControl(null, [Validators.required]),
       servicio_cod: new FormControl(null, [Validators.required]),
       unidad_obra_cod: new FormControl(null, [Validators.required]),
       cantidad_servicio: new FormControl(1, [Validators.required]),
       cantidad_unidad_obra: new FormControl(1, [Validators.required]),
-      table: new FormArray([]),
     };
   }
 

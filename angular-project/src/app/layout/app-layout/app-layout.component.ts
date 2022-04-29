@@ -21,6 +21,7 @@ import { delay, map } from 'rxjs/operators';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 import * as Data from '@data';
+import { BaseFacade } from '@storeOT/features/base/base.facade';
 
 @Component({
   selector: 'app-app-layout',
@@ -30,6 +31,7 @@ import * as Data from '@data';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppLayoutComponent implements OnInit, OnDestroy {
+  loading$: Observable<boolean>;
   public loading;
   public toggleState = false;
   toggleIcon = '';
@@ -52,7 +54,8 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     private userFacade: UserFacade,
     private notificacioneFacade: NotificacionesFacade,
     private loadingS: LoadingService,
-    private permissionsService: NgxPermissionsService
+    private permissionsService: NgxPermissionsService,
+    private baseFacade: BaseFacade
   ) {}
 
   ngOnInit(): void {
@@ -91,6 +94,8 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
         return auth;
       })
     );
+
+    this.loading$ = this.baseFacade.loading$();
   }
 
   ngOnDestroy(): void {

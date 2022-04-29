@@ -152,19 +152,23 @@ export class AlertMessageActions {
         action === contratoActions.updateContratoSuccess.type ||
         action === userActions.editarSuperiorPerfilUsuarioSuccess.type ||
         action === userActions.updateUserSuccess.type ||
-        action === profileActions.updatePerfilSuccess.type
+        action === profileActions.updatePerfilSuccess.type ||
+        action === ca.editCubSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
       } else if (
         action === contratoActions.activateContratoSuccess.type ||
         action === userActions.agregarPerfilUsuarioSuccess.type ||
         action === userActions.addFirmaUserSuccess.type ||
-        action === profileActions.eliminarPerfilSuccess.type
+        action === profileActions.eliminarPerfilSuccess.type ||
+        action === ca.deleteCubSuccess.type ||
+        action === ca.deleteDetalleCubSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (
         action === userActions.createUserSuccess.type ||
-        action === profileActions.createPerfilSuccess.type
+        action === profileActions.createPerfilSuccess.type ||
+        action === ca.createCubSuccess.type
       ) {
         this.snackService.showMessage(`Creación exitosa`, 'OK', 3000);
       } else if (this.msgOK[action]) {
@@ -209,6 +213,10 @@ export class AlertMessageActions {
         this.contratoFacade.getAllContratos();
       }
 
+      if (action === ca.deleteCubSuccess.type) {
+        this.cubageFacade.AllCubs();
+      }
+
       if (
         action === userActions.createUserSuccess.type ||
         action === userActions.updateUserSuccess.type
@@ -221,6 +229,18 @@ export class AlertMessageActions {
         action === profileActions.updatePerfilSuccess.type
       ) {
         this.router.navigate(['/app/profile/list-pro']);
+      }
+
+      if (
+        action === ca.createCubSuccess.type ||
+        action === ca.editCubSuccess.type
+      ) {
+        this.router.navigate(['/app/cubicacion/list-cub']);
+        this.cubageFacade.AllCubs();
+      }
+
+      if (action === ca.clonCubSuccess.type) {
+        location.reload();
       }
     }
   }

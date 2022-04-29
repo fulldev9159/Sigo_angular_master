@@ -1,7 +1,7 @@
 <ng-container *ngIf="label !== ''">
   <label>{{ label }}</label>
 </ng-container>
-<select [formControl]="control" class="form-control" name="" id="{{ID}}">
+<select [formControl]="control" class="form-control" name="">
   <ng-content select="[options]"></ng-content>
 </select>
 <div *ngIf="control.invalid && (control.dirty || control.touched)">

@@ -58,6 +58,11 @@ import { ContratosEffects } from './features/contratos/contratos.effects';
 import * as contratosReduce from './features/contratos/contratos.reducer';
 // CONTRATOS
 
+// BASE
+import { BaseEffects } from './features/base/base.effects';
+import * as baseReduce from './features/base/base.reducer';
+// CONTRATOS
+
 @NgModule({
   declarations: [],
   imports: [
@@ -143,7 +148,10 @@ import * as contratosReduce from './features/contratos/contratos.reducer';
       contratosReduce.FeatureKey,
       contratosReduce.reducerContrato
     ),
-    // CONTRATOS STORE
+    // CONTRATOS STORE// AUTH STORE
+    EffectsModule.forFeature([BaseEffects]),
+    StoreModule.forFeature(baseReduce.FeatureKey, baseReduce.reducerBase),
+    // AUTH STORE
   ],
 })
 export class StoreAllModule {}

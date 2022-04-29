@@ -31,6 +31,7 @@ import {
   RequestCreateCubicacion,
   AllCubs,
   RespDataGetDetalleCubs,
+  RequestDeleteDetallesCubicacion,
 } from '@data';
 
 @Injectable({
@@ -183,10 +184,26 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.createCub({ request }));
   }
 
+  // CLON  CUB
+  public clonCub(request: RequestCreateCubicacion): void {
+    this.store.dispatch(cubicacionActions.clonCub({ request }));
+  }
+
   // EDIT  CUB
   public editCub(request: RequestEditCubicacion): void {
     this.store.dispatch(cubicacionActions.editCub({ request }));
   }
+
+  // DELETE  CUB
+  public deleteCub(cubicacion_id: number): void {
+    this.store.dispatch(cubicacionActions.deleteCub({ cubicacion_id }));
+  }
+
+  // DELETE  CUB
+  public deleteDetalleCub(request: RequestDeleteDetallesCubicacion): void {
+    this.store.dispatch(cubicacionActions.deleteDetalleCub({ request }));
+  }
+
   // /////
 
   // CUBICACION
@@ -249,11 +266,6 @@ export class CubicacionFacade {
     return this.store.select(cubicacionSelectors.getConstractMarco);
   }
   // CONSTRACT MARCO
-
-  // SUBCONTRACTPROVIDERS
-  public getSubContractedProvidersAction(data): void {
-    this.store.dispatch(cubicacionActions.getProveedores4Cub(data));
-  }
 
   public getProvidersSelector$(): Observable<SubcontratosProveedor[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);

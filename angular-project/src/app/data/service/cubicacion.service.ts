@@ -36,6 +36,7 @@ import {
   DataRespEditCubicacion,
   DatosUnidadObra4Cub,
   RequestCreateCubicacion,
+  RequestDeleteDetallesCubicacion,
   RespDataGetAllCubs,
   RespDataGetDetalleCubs,
 } from '@data/model';
@@ -183,7 +184,21 @@ export class CubicacionService {
     );
   }
 
-  // deleteServicioUOCarrito(servicio: number[], unidad_obra: number[]) {}
+  deleteCubicacion(cubicacion_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/cubicacion/cubicacion/delete`,
+      { cubicacion_id }
+    );
+  }
+
+  deleteServicioUOCarrito(
+    request: RequestDeleteDetallesCubicacion
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/cubicacion/detalles_cubicacion/delete`,
+      request
+    );
+  }
 
   //   ///
 
@@ -334,21 +349,21 @@ export class CubicacionService {
       );
   }
 
-  deleteOT(cubicacion_id: number): Observable<{ cub_id: number; status: any }> {
-    return this.http
-      .post<ResponseDeleteCubicacion>(`${this.apiUrl}/cubicacion/delete`, {
-        cubicacion_id,
-      })
-      .pipe(
-        map(res => {
-          return {
-            cub_id: res.data.id,
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
-  }
+  // deleteOT(cubicacion_id: number): Observable<{ cub_id: number; status: any }> {
+  //   return this.http
+  //     .post<ResponseDeleteCubicacion>(`${this.apiUrl}/cubicacion/delete`, {
+  //       cubicacion_id,
+  //     })
+  //     .pipe(
+  //       map(res => {
+  //         return {
+  //           cub_id: res.data.id,
+  //           status: {
+  //             description: res.status.description,
+  //             responseCode: res.status.responseCode,
+  //           },
+  //         };
+  //       })
+  //     );
+  // }
 }

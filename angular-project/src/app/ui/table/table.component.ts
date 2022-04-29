@@ -93,6 +93,12 @@ export class TableComponent implements OnInit, OnDestroy {
 
   errorMessageFn = errors => 'Este campo es inválido';
 
+  iconArray = (icon: string) => {
+    if (icon === 'trashICon') {
+      return this.trashICon;
+    }
+  };
+
   constructor() {}
 
   ngOnInit(): void {}

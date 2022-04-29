@@ -22,7 +22,7 @@ export interface AllCubs {
   creador_usuario_id: number;
   creador_usuario_nombre: string;
   cubicacion_descripcion: string;
-  cubicacion_fecha_creacion: string;
+  cubicacion_fecha_creacion: Date;
   cubicacion_id: number;
   cubicacion_nombre: string;
   direccion_desde: string;
@@ -95,25 +95,12 @@ export interface ServiciosDetalle {
         unidad_obra_desc: string;
         uo_precio_total_clp: number;
         uob_cantidad: number;
-        uob_unidad_medida_cod: string;
+        uniob_udad_medida_cod: string;
         uob_unidad_medida_id: number;
       };
       data_materiales: Materiales4Detalle[];
     }
   ];
-  //// unidades_obra: {
-  ////   materiales: Materiales4Detalle[];
-  ////   unidades_obra: {
-  ////     clave: string;
-  ////     cub_has_uob_id: number;
-  ////     unidad_obra_cod: string;
-  ////     unidad_obra_desc: string;
-  ////     uo_precio_total_clp: number;
-  ////     uob_cantidad: number;
-  ////     uob_unidad_medida_cod: string;
-  ////     uob_unidad_medida_id: number;
-  ////   };
-  //// };
 }
 
 export interface Materiales4Detalle {
@@ -294,6 +281,7 @@ export interface DatosUnidadObra4Cub {
   uo_nombre: string;
   uo_precio_total_clp: number;
   uo_unidad_id: number;
+  uo_cantidad?: number;
 }
 
 export interface Materiales4Cub {
@@ -328,6 +316,7 @@ export interface Carrito {
   servicio_tipo_moneda_codigo: string;
   servicio_tipo_moneda_id: number;
   tipo_servicio_descripcion: string;
+  servicio_cantidad?: number;
   unidades_obras: DatosUnidadObra4Cub[];
 }
 
@@ -408,6 +397,11 @@ export interface DataRespCreateCubicacion {
 
 export interface DataRespEditCubicacion {
   response: any;
+}
+
+export interface RequestDeleteDetallesCubicacion {
+  servicio?: number[];
+  unidad_obra?: number[];
 }
 //  ///
 export interface TipoServicioEspecialidad4Cub {

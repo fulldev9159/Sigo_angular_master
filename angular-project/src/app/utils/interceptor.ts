@@ -10,8 +10,9 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, finalize, tap } from 'rxjs/operators';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { BaseFacade } from '@storeOT/features/base/base.facade';
 
 @Injectable()
 export class JwtAppInterceptor implements HttpInterceptor {
@@ -19,7 +20,11 @@ export class JwtAppInterceptor implements HttpInterceptor {
   public profileID = null;
   nombre_perfil = null;
 
-  constructor(private router: Router, private authFacade: AuthFacade) {
+  constructor(
+    private router: Router,
+    private authFacade: AuthFacade,
+    private baseFacade: BaseFacade
+  ) {
     authFacade
       .getLogin$()
       .pipe(filter(login => login !== null))
@@ -28,17 +33,20 @@ export class JwtAppInterceptor implements HttpInterceptor {
         this.token = login.token;
         this.nombre_perfil = login.nombre_perfil_select;
       });
-
-    // authFacade
-    //   .getCurrentProfile$()
-    //   .pipe(filter(profile => profile !== null))
-    //   .subscribe(profile => (this.profileID = profile.id));
   }
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    const url = window.location.href;
+    const expresion = /http.*\/app\/cubicacion\/form-cub\/\d+/g;
+    const hallado = url.match(expresion);
+
+    if (hallado === null) {
+      this.baseFacade.loading(true);
+    }
+
     if (
       this.profileID &&
       this.nombre_perfil &&
@@ -66,6 +74,12 @@ export class JwtAppInterceptor implements HttpInterceptor {
     // }
 
     return next.handle(req).pipe(
+      finalize(() => {
+        // console.log(req.url);
+        if (hallado === null) {
+          this.baseFacade.loading(false);
+        }
+      }),
       tap(
         (event: any) => {
           // if (event instanceof HttpResponse) { }

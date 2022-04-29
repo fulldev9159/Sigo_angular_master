@@ -36,6 +36,7 @@
           <td *ngSwitchCase="'TEXT-MAIN'"><strong style=" font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;">{{ item[column.header] }}</strong></td>
           <td *ngSwitchCase="'TEXT'" style="font-size: 0.9em;">{{ item[column.header] }}</td>
           <td *ngSwitchCase="'TEXT-LABEL'"><span class="label-table " [ngClass]="item['estado']?'label-activo':'label-inactivo'" style="font-size: 0.8em;">{{ item[column.header] }}</span></td>
+          <td *ngSwitchCase="'TEXT-LABEL-CUB'"><span class="label-table " [ngClass]="item['asignado']===0?'label-activo':'label-inactivo'" style="font-size: 0.8em;">{{ item[column.header] }}</span></td>
           <td *ngSwitchCase="'INPUT'">
             <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="text" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
           </td>
@@ -55,7 +56,7 @@
             </app-select>
           </td>
           <td *ngSwitchCase="'NUMBER'">{{ item[column.header] | currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-          <td *ngSwitchCase="'MONEY'" style="font-size: 0.9em;">{{ item[column.header] | currency : item[column.currency] : item[column.currency]===''?'':item[column.currency] + ' $':'.0-2':'es-CL' }}</td>
+          <td *ngSwitchCase="'MONEY'" style="font-size: 0.9em;"><strong>{{ item[column.header] | currency : item[column.currency] : item[column.currency]===''?'':item[column.currency] + ' $':'.0-2':'es-CL' }}</strong></td>
           <td *ngSwitchCase="'DATE'" style="font-size: 0.9em;">{{ item[column.header] | date:'dd-MM-yyyy' }}</td>
           <td *ngSwitchCase="'BOOLEANTEXT'">
             <span *ngIf="item[column.header]" class="label-table label-activo" style="font-size: 0.8em;">{{ column.booleantrue }}</span>
@@ -84,6 +85,7 @@
               <ng-container *ngIf="config.headerConfig.actionsType === 'ButtonsTest'">
                 <div class="ui icon buttons mini basic">
                   <ng-container *ngFor="let button of actions" [ngSwitch]="button.type">
+
                     <ng-container *ngSwitchCase="'alldisplay-eliminable'">
                       <div *ngIf="!eliminable(item)" pTooltip="{{ button.tooltipDisabled }}">
                         <button (click)="button.onClick($event, item, rowIndex)" style="height: 100%;" [disabled]="true" class="ui button generic-color"> {{button.label}} </button>
@@ -103,6 +105,53 @@
                         <fa-icon [icon]="trashICon"></fa-icon>
                       </button>
                     </ng-container>
+                    <button *ngSwitchCase="'button-delete'" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
+                      <fa-icon [icon]="trashICon"></fa-icon>
+                    </button>
+
+                    <ng-container *ngSwitchCase="'button-edit-asginado'">
+                      <div *ngIf="item['asignado']!==0" pTooltip="{{ button.tooltipDisabled }}">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button generic-color" style="height: 100%;">
+                          {{button.label}}
+                        </button>
+                      </div>
+                      <button *ngIf="item['asignado']===0" (click)="button.onClick($event, item, rowIndex)" class="ui button generic-color">
+                        {{button.label}}
+                      </button>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'button-delete-asignado'">
+                      <div *ngIf="item['asignado']!==0" pTooltip="{{ button.tooltipDisabled }}">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color" style="height: 100%;">
+                          <fa-icon [icon]="trashICon"></fa-icon>
+                        </button>
+                      </div>
+                      <button *ngIf="item['asignado']===0" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
+                        <fa-icon [icon]="trashICon"></fa-icon>
+                      </button>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'button-icon-condicional'">
+                      <div *ngIf="!button.condicion" pTooltip="{{ button.tooltipDisabled }}">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color" style="height: 100%;">
+                          <fa-icon [icon]="iconArray(button.icon)"></fa-icon>
+                        </button>
+                      </div>
+                      <button *ngIf="button.condicion" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
+                        <fa-icon [icon]="iconArray(button.icon)"></fa-icon>
+                      </button>
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'button-condicional'">
+                      <div *ngIf="!button.condicion" pTooltip="{{ button.tooltipDisabled }}">
+                        <button [disabled]="true" (click)="button.onClick($event, item, rowIndex)" class="ui generic-color" style="height: 100%;">
+                          {{button.label}}
+                        </button>
+                      </div>
+                      <button *ngIf="button.condicion" (click)="button.onClick($event, item, rowIndex)" class="ui button generic-color">
+                        {{button.label}}
+                      </button>
+                    </ng-container>
+
                     <button *ngSwitchCase="'button-delete'" (click)="button.onClick($event, item, rowIndex)" class="ui button eliminar-color">
                       <fa-icon [icon]="trashICon"></fa-icon>
                     </button>

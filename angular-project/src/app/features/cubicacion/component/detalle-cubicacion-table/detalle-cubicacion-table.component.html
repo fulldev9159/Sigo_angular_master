@@ -1,1 +1,176 @@
-<app-table [config]="ConfigTableResumen" [items]="detalleCubicacion$|async"></app-table>
+<table>
+  <tr>
+    <td><strong>Direccion desde</strong></td>
+    <td>{{(detalleCubicacion$|async)?.data_cubicacion[0].direccion_desde}}</td>
+    <td><strong>Altura</strong> </td>
+    <td>{{(detalleCubicacion$|async)?.data_cubicacion[0].altura_desde}}</td>
+  </tr>
+  <tr>
+    <td><strong>Direccion Hasta</strong> </td>
+    <td>{{(detalleCubicacion$|async)?.data_cubicacion[0].direccion_hasta}}</td>
+    <td><strong>Altura</strong> </td>
+    <td>{{(detalleCubicacion$|async)?.data_cubicacion[0].altura_hasta}}</td>
+  </tr>
+</table>
+<br>
+<table>
+  <tr>
+    <td><strong>Descripción</strong></td>
+  </tr>
+  <tr>
+    <td>{{(detalleCubicacion$|async)?.data_cubicacion[0].descripcion}}</td>
+  </tr>
+</table>
+
+<br>
+<div class="table-carrito">
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th colspan="7">Servicios</th>
+        <th colspan="8">Unidad Obra</th>
+      </tr>
+      <tr>
+        <th>Cod</th>
+        <th>Descripción</th>
+        <th>Esp</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <!-- <th>Factor</th> -->
+        <th>Total Servicio</th>
+        <th></th>
+
+        <th>Cód</th>
+        <th>Descripción</th>
+        <th>Actividad</th>
+        <th>Cantidad</th>
+        <th>Tipo Moneda</th>
+        <th>Precio</th>
+        <th>Total UO</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of carrito$|async;let i = index">
+        <ng-container *ngIf="item.unidades_obras.length===1">
+          <tr>
+            <td class="label-table">{{item.servicio_codigo}}</td>
+            <td class="data-primaria">{{item.servicio_nombre}}</td>
+            <td class="data-secundaria">{{item.tipo_servicio_descripcion|titlecase}}</td>
+            <td>
+              {{item.servicio_cantidad}}
+            </td>
+            <td class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+            <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
+            <td class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>
+              <!-- <div class="ui icon buttons mini basic">
+                  <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                    <fa-icon [icon]="trashICon"></fa-icon>
+                  </button>
+                </div> -->
+
+            </td>
+
+            <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+            <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
+            <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+            <td class="data-secundaria">
+              {{item.unidades_obras[0].uo_cantidad}}
+            </td>
+            <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>
+              <!-- <div class="ui icon buttons mini basic">
+                  <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                </div> -->
+            </td>
+          </tr>
+        </ng-container>
+
+
+        <ng-container *ngIf="item.unidades_obras.length>1">
+          <tr>
+            <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
+            <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{item.servicio_nombre}}</td>
+            <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.tipo_servicio_descripcion|titlecase}}</td>
+            <td [attr.rowspan]="+item.unidades_obras.length">
+              {{item.servicio_cantidad}}
+            </td>
+            <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
+            <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td [attr.rowspan]="+item.unidades_obras.length">
+              <!-- <div class="ui icon buttons mini basic">
+                  <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                    <fa-icon [icon]="trashICon"></fa-icon>
+                  </button>
+                </div> -->
+            </td>
+
+            <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+            <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
+            <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+            <td>
+              {{item.unidades_obras[0].uo_cantidad}}
+            </td>
+            <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>
+              <!-- <div class="ui icon buttons mini basic">
+                  <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                  <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
+                    <fa-icon [icon]="trashICon"></fa-icon>
+                  </button>
+                </div> -->
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-container *ngIf="item.unidades_obras.length>1">
+          <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
+            <td class="label-table">{{uo.uo_codigo}}</td>
+            <td class="data-primaria">{{uo.uo_nombre}}</td>
+            <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+            <td>
+              {{uo.uo_cantidad}}
+            </td>
+            <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
+            <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>
+              <!-- <div class="ui icon buttons mini basic">
+                  <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>
+                  <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
+                    <fa-icon [icon]="trashICon"></fa-icon>
+                  </button>
+                </div> -->
+            </td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+<!-- <div class="row" id="table-totales">
+  <div class="col-9"></div>
+  <div class="col-3">
+    <table style="width: 100%;">
+      <tr>
+        <td>Total Servicios</td>
+        <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+      <tr>
+        <td>Total Unidades Obra</td>
+        <td>{{totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+      <tr>
+        <td style="background: #cccccc;
+          font-size: 15px;">Total Cubicación</td>
+        <td>{{totalServicio + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+    </table>
+  </div>
+</div> -->

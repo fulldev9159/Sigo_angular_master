@@ -25,7 +25,8 @@ export class CubicacionEffects {
     private proveedorService: Service.ProveedorService,
     private regionService: Service.RegionService,
     private messageService: Service.NotifyAfter,
-    private lpuService: Service.LpusService
+    private lpuService: Service.LpusService,
+    private alertMessageAction: Service.AlertMessageActions
   ) {}
 
   getAllCubs$ = createEffect(() =>
@@ -212,6 +213,18 @@ export class CubicacionEffects {
     )
   );
 
+  clonCub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.clonCub),
+      concatMap(({ request }) =>
+        this.cubService.createCubicacion(request).pipe(
+          map(response => cubActions.clonCubSuccess({ response })),
+          catchError(err => of(cubActions.clonCubError({ error: err })))
+        )
+      )
+    )
+  );
+
   editCub$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.editCub),
@@ -222,6 +235,76 @@ export class CubicacionEffects {
         )
       )
     )
+  );
+
+  deleteCub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.deleteCub),
+      concatMap(({ cubicacion_id }) =>
+        this.cubService.deleteCubicacion(cubicacion_id).pipe(
+          map(response => cubActions.deleteCubSuccess({ response })),
+          catchError(err => of(cubActions.deleteCubError({ error: err })))
+        )
+      )
+    )
+  );
+
+  deleteDetalleCub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.deleteDetalleCub),
+      concatMap(({ request }) =>
+        this.cubService.deleteServicioUOCarrito(request).pipe(
+          map(response => cubActions.deleteDetalleCubSuccess({ response })),
+          catchError(err =>
+            of(cubActions.deleteDetalleCubError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  // NOTIFICACIONES
+  notifyOK$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          cubActions.editCubSuccess,
+          cubActions.deleteCubSuccess,
+          cubActions.createCubSuccess,
+          cubActions.deleteDetalleCubSuccess,
+          cubActions.clonCubSuccess
+        ),
+        tap(action => {
+          this.alertMessageAction.messageActions(
+            action.response.status.code,
+            action.response.status.desc,
+            action.type,
+            action
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(
+          cubActions.deleteCubError,
+          cubActions.editCubError,
+          cubActions.createCubError,
+          cubActions.deleteDetalleCubError
+        ),
+        tap(action =>
+          this.alertMessageAction.messageActions(
+            action.error.error.status.code,
+            action.error.error.status.desc,
+            action.type,
+            action
+          )
+        )
+      ),
+    { dispatch: false }
   );
 
   // /////
@@ -476,17 +559,17 @@ export class CubicacionEffects {
   //   )
   // );
 
-  deleteCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.deleteCubicacion),
-      concatMap(({ cubicacion_id }) =>
-        this.cubService.deleteOT(cubicacion_id).pipe(
-          map(({ status }) => cubActions.deleteCubicacionSuccess({ status })),
-          catchError(error => of(cubActions.deleteCubicacionError({ error })))
-        )
-      )
-    )
-  );
+  // deleteCubicacion$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(cubActions.deleteCubicacion),
+  //     concatMap(({ cubicacion_id }) =>
+  //       this.cubService.deleteOT(cubicacion_id).pipe(
+  //         map(({ status }) => cubActions.deleteCubicacionSuccess({ status })),
+  //         catchError(error => of(cubActions.deleteCubicacionError({ error })))
+  //       )
+  //     )
+  //   )
+  // );
 
   // notifyAfterSuccess$ = createEffect(
   //   () =>

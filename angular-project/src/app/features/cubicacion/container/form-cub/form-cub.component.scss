@@ -2,7 +2,7 @@
   margin-top: 12px;
   border: 1px solid #c6c6c6;
   padding: 20px;
-  padding-bottom: 30px;
+  // padding-bottom: 30px;
   background: #e3dfdf;
 }
 
@@ -201,7 +201,52 @@ input[type=number] {
   }
 
   &:disabled {
-    background: #d7f1ff;
-    color: #787676;
+    background: #dbd5d5;
+    color: #9b9b9b;
+    border: 1px solid;
   }
+}
+
+.existente {
+  background: #738ff52e;
+}
+
+.box {
+  width: 17px;
+  height: 16px;
+}
+
+.box-1 {
+  border: 1px solid rgb(161, 159, 159);
+  background: #fff;
+}
+
+.box-2 {
+  border: 1px solid #667ef3;
+  background: #738ff52e;
+}
+
+.info {
+  border: 1px solid #00507a69;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 343px;
+}
+
+.info-title {
+  top: -13px;
+  left: 10px;
+  position: relative;
+  background: white;
+  font-weight: 700;
+  color: #655e5c;
+  font-size: 14px;
+}
+
+.data-info {
+  display: flex;
+  padding: 10px;
+  margin-top: -12px;
+  align-items: center;
 }

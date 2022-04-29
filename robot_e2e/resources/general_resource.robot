@@ -24,14 +24,16 @@ _Open Browser To Page
 
 _Navegate to
     [Arguments]       ${menu}
-    Run Keyword If    '${menu}' == 'Usuario'             Click Element            css:#menu-usuario>a>span
-    Run Keyword If    '${menu}' == 'Area'                Click Element            css:#menu-area>a>span
-    Run Keyword If    '${menu}' == 'Contratos'           Click Element            css:#menu-contratos>a>span
-    Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
-    Run Keyword If    '${menu}' == 'Crear Cubicacion'    Click Visible Element    id:listarCubSubMenu
-    Run Keyword If    '${menu}' == 'Perfil'              Click Visible Element    css:#menu-perfil>a>span
-    Run Keyword If    '${menu}' == 'Crear OT'            Click Visible Element    id:otSub
-    Run Keyword If    '${menu}' == 'Crear OT'            Execute javascript       document.querySelector("#otSub>li:nth-child(2)>a").click()
+    Run Keyword If    '${menu}' == 'Usuario'              Click Element            css:#menu-usuario>a>span
+    Run Keyword If    '${menu}' == 'Area'                 Click Element            css:#menu-area>a>span
+    Run Keyword If    '${menu}' == 'Contratos'            Click Element            css:#menu-contratos>a>span
+    Run Keyword If    '${menu}' == 'Crear Cubicacion'     Click Visible Element    css:#menu-cubicacion > a > span
+    Run Keyword If    '${menu}' == 'Crear Cubicacion'     Click Visible Element    id:listarCubSubMenu
+    Run Keyword If    '${menu}' == 'Listar Cubicacion'    Click Visible Element    css:#menu-cubicacion > a > span
+    Run Keyword If    '${menu}' == 'Listar Cubicacion'    Click Visible Element    css:#cubSub > li:nth-child(1) > a
+    Run Keyword If    '${menu}' == 'Perfil'               Click Visible Element    css:#menu-perfil>a>span
+    Run Keyword If    '${menu}' == 'Crear OT'             Click Visible Element    id:otSub
+    Run Keyword If    '${menu}' == 'Crear OT'             Execute javascript       document.querySelector("#otSub>li:nth-child(2)>a").click()
 
 
 _Wait visibility
@@ -117,10 +119,16 @@ _SubMenu
     _Click visible element    ${selector}
 
 _Element text should be
-    [Arguments]        ${element}    ${texto}
-    ${txt}=            Get Text      ${element}
-    Should Be Equal    ${txt}        ${texto}
+    [Arguments]                   ${element}    ${texto}
+    _Wait visibility              ${element}
+    ${txt}=                       Get Text      ${element}
+    Should Be Equal As Strings    ${txt}        ${texto}
 
+_Element input text should be
+    [Arguments]                   ${element}               ${texto}
+    _Wait visibility              ${element}
+    ${txt}=                       get element attribute    ${element}    value
+    Should Be Equal As Strings    ${txt}                   ${texto}
 
 #    ${height}    Execute Javascript    return window.screen.height
 

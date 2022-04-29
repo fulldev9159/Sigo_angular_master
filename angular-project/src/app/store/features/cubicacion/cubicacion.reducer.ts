@@ -92,6 +92,10 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.resetData, () => ({
     ...initialStateCubicacion,
   })),
+  on(CubicacionActions.resetDetalleCub, state => ({
+    ...state,
+    detalleCub: null,
+  })),
   on(CubicacionActions.getContratosUser4CubSuccess, (state, { response }) => ({
     ...state,
     contratosUser4Cub: response.data.items,

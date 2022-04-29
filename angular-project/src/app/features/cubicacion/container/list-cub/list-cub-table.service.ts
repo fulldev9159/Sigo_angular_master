@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AllCubs } from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -6,37 +7,46 @@ export class ListCubTableService {
   constructor() {}
   getTableConfig(): any {
     return {
+      header: true,
       headerConfig: {
         title: '',
         searchText: 'buscar...',
         paginator: true,
-        actionsType: 'Buttons',
+        actionsType: 'ButtonsTest',
       },
       body: {
         headers: [
           {
             field: 'Nombre',
-            type: 'TEXT',
-            sort: 'nombre',
-            header: 'nombre',
+            type: 'TEXT-MAIN',
+            sort: 'cubicacion_nombre',
+            header: 'cubicacion_nombre',
             editable: false,
-            width: '20%',
+            // width: '20%',
           },
           {
-            field: 'Fecha creación',
-            type: 'DATE',
-            sort: 'fecha_creacion',
-            header: 'fecha_creacion',
-            width: '8%',
+            field: 'Tipo Cubicación',
+            type: 'TEXT-LABEL-CUB',
+            sort: 'tipo_cubicacion_descripcion',
+            header: 'tipo_cubicacion_descripcion',
             editable: false,
+            // width: '7%',
           },
           {
-            field: 'Región',
-            type: 'TEXT',
-            sort: 'region_nombre',
-            header: 'region_nombre',
-            width: '10%',
+            field: 'Tipo Contrato',
+            type: 'TEXT-LABEL-CUB',
+            sort: 'contrato_marco_tipo_nombre',
+            header: 'contrato_marco_tipo_nombre',
             editable: false,
+            // width: '7%',
+          },
+          {
+            field: 'Código Acuerdo',
+            type: 'TEXT',
+            sort: 'codigo_acuerdo',
+            header: 'codigo_acuerdo',
+            editable: false,
+            // width: '8%',
           },
           {
             field: 'Contrato marco',
@@ -44,7 +54,15 @@ export class ListCubTableService {
             sort: 'contrato_marco_nombre',
             header: 'contrato_marco_nombre',
             editable: false,
-            width: '8%',
+            // width: '8%',
+          },
+          {
+            field: 'Agencia',
+            type: 'TEXT',
+            sort: 'agencia_nombre',
+            header: 'agencia_nombre',
+            // width: '10%',
+            editable: false,
           },
           {
             field: 'Proveedor',
@@ -52,7 +70,23 @@ export class ListCubTableService {
             sort: 'proveedor_nombre',
             header: 'proveedor_nombre',
             editable: false,
-            width: '10%',
+            // width: '10%',
+          },
+
+          {
+            field: 'Creado Por',
+            type: 'TEXT',
+            sort: 'creador_usuario_nombre',
+            header: 'creador_usuario_nombre',
+            editable: false,
+          },
+          {
+            field: 'Fecha creación',
+            type: 'DATE',
+            sort: 'cubicacion_fecha_creacion',
+            header: 'cubicacion_fecha_creacion',
+            width: '8%',
+            editable: false,
           },
           {
             field: 'Total',
@@ -64,29 +98,24 @@ export class ListCubTableService {
             editable: false,
           },
           {
-            field: 'Creado Por',
-            type: 'TEXT',
-            sort: 'creador_usuario_nombre',
-            header: 'creador_usuario_nombre',
-            editable: false,
-          },
-          {
             field: null,
             type: 'ACTIONS',
             sort: null,
             header: null,
             editable: false,
+            width: '14rem',
           },
         ],
         sort: [
-          'nombre',
-          'fecha',
-          'region_nombre',
+          'cubicacion_nombre',
+          'cubicacion_fecha_creacion',
+          'tipo_cubicacion_descripcion',
+          'agencia_nombre',
           'contrato_marco_nombre',
           'total',
           'creador_usuario_nombre',
         ],
-        actions: [],
+        actions: (ot: AllCubs) => {},
       },
     };
   }
