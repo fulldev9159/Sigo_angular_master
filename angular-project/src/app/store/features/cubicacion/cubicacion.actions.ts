@@ -249,11 +249,11 @@ export const clonCub = createAction(
   props<{ request: RequestCreateCubicacion }>()
 );
 export const clonCubSuccess = createAction(
-  '[Cubicacion] createCub Success',
+  '[Cubicacion] clonCub Success',
   props<{ response: Response<DataRespCreateCubicacion> }>()
 );
 export const clonCubError = createAction(
-  '[Cubicacion] createCub Error',
+  '[Cubicacion] clonCub Error',
   props<{ error: any }>()
 );
 

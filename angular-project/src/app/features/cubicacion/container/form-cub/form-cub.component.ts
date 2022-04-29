@@ -362,7 +362,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
           //  ES UN SERVICIO QUE NO ESTÁ EN EL FORMULARIO Y SE DEBE AGREGAR
           if (index_table_servicio === -1) {
-            console.log('Es nuevo');
+            // console.log('Es nuevo');
             const group = new FormGroup({
               precargado: new FormControl(servicio.precargado ?? false, []),
               servicio_rowid: new FormControl(
@@ -405,10 +405,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             const UOTableForm = tableForm
               .at(index_table_servicio)
               .get('unidades_obra') as FormArray;
-            console.log('Form', UOTableForm.value);
+            // console.log('Form', UOTableForm.value);
             const uosForm: FormUOtype[] = UOTableForm.value;
             const uosCarrito = servicio.unidades_obras;
-            console.log('Carrito', servicio.unidades_obras);
+            // console.log('Carrito', servicio.unidades_obras);
             const getUosNuevas = (
               carritoActual: DatosUnidadObra4Cub[],
               form: FormUOtype[]
@@ -420,7 +420,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               });
             };
             const uosNuevas = getUosNuevas(uosCarrito, uosForm);
-            console.log('UOs Nuevas', getUosNuevas(uosCarrito, uosForm));
+            // console.log('UOs Nuevas', getUosNuevas(uosCarrito, uosForm));
             uosNuevas.forEach(uo => {
               UOTableForm.push(this.makeUOForm(uo));
             });
@@ -838,7 +838,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         let unidad_obra: NuevoUO[] = [];
         unidad_obra = servicio.unidades_obra.map(uo => ({
           uob_codigo: uo.uo_codigo,
-          cantidad: uo.cantidad_uo,
+          cantidad: +uo.cantidad_uo,
         }));
         return {
           servicio_id: +servicio.servicio_id,
@@ -853,7 +853,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .filter(notLocal)
       .map(servicio => ({
         rowid: servicio.servicio_rowid,
-        cantidad: servicio.cantidad_servicio,
+        cantidad: +servicio.cantidad_servicio,
       }));
 
     const unidades_obra_actualizar: ServicioUOActualizar[] = servicios
@@ -863,7 +863,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           .filter(notLocal)
           .map(uo => ({
             rowid: uo.uo_rowid,
-            cantidad: uo.cantidad_uo,
+            cantidad: +uo.cantidad_uo,
           }));
         return ac.concat(unidades_obra);
       }, []);
@@ -908,6 +908,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       },
     };
 
+    console.log(request);
     this.cubicacionFacade.editCub(request);
   }
 
@@ -924,7 +925,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.displayDeleteConfirmServicio = true;
     this.servicio_rowid = servicio_rowid;
     this.servicio_cod_del = servicio_cod;
-    console.log(this.servicio_rowid);
+    // console.log(this.servicio_rowid);
   }
 
   DeleteServicioCarritoDefinitivo(): void {
@@ -932,8 +933,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       servicio: [this.servicio_rowid],
     };
     this.cubicacionFacade.deleteDetalleCub(request);
-    this.closeModalDeleteConfirmServicio();
     this.cubicacionFacade.deleteServiceCarrito4CreateCub(this.servicio_cod_del);
+    this.deleteServiceCarrito(this.servicio_cod_del);
+    this.closeModalDeleteConfirmServicio();
   }
 
   closeModalDeleteConfirmUO(): void {
@@ -959,11 +961,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       unidad_obra: [this.uo_rowid],
     };
     this.cubicacionFacade.deleteDetalleCub(request);
-    this.closeModalDeleteConfirmUO();
     this.cubicacionFacade.deleteUOCarrito4CreateCub(
       this.servicio_cod_del,
       this.uo_cod_del
     );
+    this.deleteUOCarrito(this.servicio_cod_del, this.uo_cod_del);
+    this.closeModalDeleteConfirmUO();
   }
 
   ngOnDestroy(): void {

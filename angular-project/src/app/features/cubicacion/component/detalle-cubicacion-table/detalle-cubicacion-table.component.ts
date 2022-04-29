@@ -89,7 +89,7 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                 servicio_id: servicios.data_servicio.servicio_id,
                 servicio_nombre: servicios.data_servicio.servicio_desc,
                 servicio_precio_final:
-                  servicios.data_servicio.servicio_precio_final,
+                  servicios.data_servicio.prov_has_serv_precio,
                 servicio_precio_final_clp:
                   servicios.data_servicio.servicio_precio_final_clp,
                 servicio_tipo: servicios.data_servicio.tipo_servicio_id,
