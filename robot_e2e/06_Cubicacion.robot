@@ -375,7 +375,7 @@ Editar
     _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(4) > td:nth-child(13)    $0
     _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(4) > td:nth-child(14)    $0
 
-
+    close browser
 
 
 
