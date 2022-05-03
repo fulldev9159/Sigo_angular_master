@@ -2,12 +2,14 @@ import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
 import * as Data from '@data';
-import { DataInformeAvance, Plan, PMO, Sitio } from '@data';
+import { DataInformeAvance, Plan, PMO, Sitio, ContratosUser } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
 export const otFeatureKey = 'ot';
 
 export interface StateOt {
+  contratosUser4OT: ContratosUser[];
+  // ////
   filtro_propietario: string;
   filtro_tipo: string;
 
@@ -43,6 +45,9 @@ export interface StateOt {
 }
 
 export const initialStateOt: StateOt = {
+  contratosUser4OT: [],
+
+  // ////
   filtro_propietario: '',
   filtro_tipo: '',
 
@@ -79,7 +84,10 @@ export const initialStateOt: StateOt = {
 
 export const reducerOt = createReducer(
   initialStateOt,
-
+  on(OtActions.getContratosUser4OTSuccess, (state, { response }) => ({
+    ...state,
+    contratosUser4OT: response.data.items,
+  })),
   on(OtActions.getOts, (state, { request }) => ({
     ...state,
     filtro_propietario: request.filtro_propietario,

@@ -44,12 +44,29 @@ export class OtEffects {
     private sitioService: Data.SitioService,
     private sustentofinancieroService: Data.SustentoFinancieroService,
     private actaService: Data.ActaService,
+    private userService: Data.UserService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
     private messageService: MessageService,
     private messageServiceInt: Data.NotifyAfter,
     private router: Router
   ) {}
+
+  getContratos4OT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getContratosUser4OT),
+      concatMap(({ usuario_id }) =>
+        this.userService.getContratosUser(usuario_id).pipe(
+          map(response => otActions.getContratosUser4OTSuccess({ response })),
+          catchError(err =>
+            of(otActions.getContratosUser4OTError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  // ////
 
   getOTs$ = createEffect(() =>
     this.actions$.pipe(

@@ -6,6 +6,7 @@ import * as otSelectors from './ot.selectors';
 import * as OTmodel from './ot.model';
 import * as Data from '@data';
 import {
+  ContratosUser,
   DataInformeAvance,
   LpuInformeAvanceDetalle,
   Plan,
@@ -28,6 +29,15 @@ import {
 export class OtFacade {
   constructor(private store: Store<Data.OT>) {}
 
+  //   GET CONTRATOS USER 4 CUB
+  public contratosUser4OT(usuario_id: number): void {
+    this.store.dispatch(otActions.getContratosUser4OT({ usuario_id }));
+  }
+
+  public contratosUser4OT$(): Observable<ContratosUser[]> {
+    return this.store.select(otSelectors.contratosUser4OT);
+  }
+  // ////
   // OT
   public getOts(request: RequestGetOTs): void {
     this.store.dispatch(

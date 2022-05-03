@@ -36,6 +36,8 @@ export class OTService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
+  ////
+
   getOTs(request: RequestGetOTs): Observable<{
     ots: OT[];
     status: any;

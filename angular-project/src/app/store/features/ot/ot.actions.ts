@@ -3,6 +3,7 @@ import * as OtModel from './ot.model';
 import * as Data from '@data';
 import {
   DataInformeAvance,
+  DataRespGetContratosUser,
   LpuInformeAvanceDetalle,
   OT,
   Plan,
@@ -13,6 +14,7 @@ import {
   RequestSaveInformeAvanceAdmin,
   Sitio,
   StatusResponse,
+  Response,
 } from '@data';
 import {
   DetalleActa,
@@ -20,6 +22,22 @@ import {
   RequestSolicitudPagoActa,
 } from '@data/model/acta';
 
+// GET CONTRATOS USER 4 OT
+export const getContratosUser4OT = createAction(
+  '[OT] getContratosUser4OT ',
+  props<{ usuario_id: number }>()
+);
+
+export const getContratosUser4OTSuccess = createAction(
+  '[OT] getContratosUser4OT Success',
+  props<{ response: Response<DataRespGetContratosUser> }>()
+);
+export const getContratosUser4OTError = createAction(
+  '[OT] getContratosUser4OT Error',
+  props<{ error: any }>()
+);
+
+//  //////
 // GET OTs init
 
 export const getOts = createAction(

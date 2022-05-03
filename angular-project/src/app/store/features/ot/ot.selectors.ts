@@ -4,6 +4,11 @@ import * as fromOt from './ot.reducer';
 export const selectOt = createFeatureSelector<fromOt.StateOt>(
   fromOt.otFeatureKey
 );
+export const contratosUser4OT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.contratosUser4OT
+);
+//  ////
 export const getOtEjecucion = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.otsEjecucion

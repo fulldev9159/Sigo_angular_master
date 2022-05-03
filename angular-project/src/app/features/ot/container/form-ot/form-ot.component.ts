@@ -22,6 +22,15 @@ import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicaci
 })
 export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  // DATOS A USAR
+
+  // DISPLAY MODALS
+
+  // FORMULARIO
+
+  // TABLE
+
+  // EXTRAS
   contractType$ = new BehaviorSubject<string>('');
   authLogin: SessionData = null;
 
@@ -75,7 +84,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         this.noWhitespace,
         Validators.maxLength(100),
       ]),
-      tipo: new FormControl(null, [Validators.required]),
+      contrato: new FormControl(null, [Validators.required]),
       cubicacion_id: new FormControl(null, [Validators.required]),
     }),
     planProyecto: new FormGroup({
