@@ -30,8 +30,6 @@ import {
   RespDataGetUnidadObra4Cub,
   RespDataTipoCubicacion4Cub,
   RespDataTipoServicioEspecialidad4Cub,
-} from '@data';
-import {
   DataRespCreateCubicacion,
   DataRespEditCubicacion,
   DatosUnidadObra4Cub,
@@ -39,7 +37,7 @@ import {
   RequestDeleteDetallesCubicacion,
   RespDataGetAllCubs,
   RespDataGetDetalleCubs,
-} from '@data/model';
+} from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -278,37 +276,37 @@ export class CubicacionService {
       );
   }
 
-  getCubicacion(cubicacion_id: number): Observable<CubicacionWithLpu> {
-    return this.http
-      .post<ResponseGetCubicaciones>(`${this.apiUrl}/cubicacion/get`, {})
-      .pipe(
-        concatMap((cubsRes: ResponseGetCubicaciones) => {
-          const cubFound = cubsRes.data.items.find(
-            cub => cub.id === cubicacion_id
-          );
-          if (cubFound) {
-            return this.http
-              .post<ResponseGetLpus>(`${this.apiUrl}/cubicacion/detalle/get`, {
-                cubicacion_id,
-              })
-              .pipe(
-                map((lpusRes: ResponseGetLpus) => {
-                  const lpus = lpusRes.data.items;
+  // getCubicacion(cubicacion_id: number): Observable<CubicacionWithLpu> {
+  //   return this.http
+  //     .post<ResponseGetCubicaciones>(`${this.apiUrl}/cubicacion/get`, {})
+  //     .pipe(
+  //       concatMap((cubsRes: ResponseGetCubicaciones) => {
+  //         const cubFound = cubsRes.data.items.find(
+  //           cub => cub.id === cubicacion_id
+  //         );
+  //         if (cubFound) {
+  //           return this.http
+  //             .post<ResponseGetLpus>(`${this.apiUrl}/cubicacion/detalle/get`, {
+  //               cubicacion_id,
+  //             })
+  //             .pipe(
+  //               map((lpusRes: ResponseGetLpus) => {
+  //                 const lpus = lpusRes.data.items;
 
-                  const cubicacion: CubicacionWithLpu = {
-                    ...cubFound,
-                    lpus,
-                  };
+  //                 const cubicacion: CubicacionWithLpu = {
+  //                   ...cubFound,
+  //                   lpus,
+  //                 };
 
-                  return cubicacion;
-                })
-              );
-          }
+  //                 return cubicacion;
+  //               })
+  //             );
+  //         }
 
-          return throwError(new Error(`no cubages found`));
-        })
-      );
-  }
+  //         return throwError(new Error(`no cubages found`));
+  //       })
+  //     );
+  // }
 
   // createCubicacion(
   //   cubicacion: any

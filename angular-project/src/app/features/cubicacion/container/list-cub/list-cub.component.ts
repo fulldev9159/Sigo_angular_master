@@ -10,7 +10,7 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, Subscription } from 'rxjs';
-import { AllCubs, Cubicacion, SessionData } from '@data';
+import { Cubicacion, SessionData } from '@data';
 import { CloneCubageFormComponent } from '../../forms/clone-cubage-form/clone-cubage-form.component';
 import { ListCubTableService } from './list-cub-table.service';
 import { BaseFacade } from '@storeOT/features/base/base.facade';
@@ -26,7 +26,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   // DATOS A USAR
-  cubicaciones$: Observable<AllCubs[]>;
+  cubicaciones$: Observable<Cubicacion[]>;
   loading$: Observable<boolean>;
 
   // DISPLAY MODALS
@@ -87,12 +87,12 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
   onInitSetData(): void {
     this.configTable = this.listCubTableService.getTableConfig();
-    this.configTable.body.actions = (cub: AllCubs) => {
+    this.configTable.body.actions = (cub: Cubicacion) => {
       const actions: any[] = [
         {
           type: 'alldisplay',
           label: 'Detalles',
-          onClick: (event: Event, item: AllCubs) => {
+          onClick: (event: Event, item: Cubicacion) => {
             if (item) {
               this.DisplayModalDetalleCubicacion = true;
               this.cubageFacade.DetalleCub(item.cubicacion_id);
@@ -102,7 +102,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
         {
           type: 'alldisplay',
           label: 'Clonar',
-          onClick: (event: Event, item: AllCubs) => {
+          onClick: (event: Event, item: Cubicacion) => {
             if (item) {
               this.displayClonatedCubageNameModal = true;
               this.cubageFacade.DetalleCub(item.cubicacion_id);
@@ -125,7 +125,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
         condicion:
           cub.asignado === 0 && cub.creador_usuario_id === this.usuario_id,
         tooltipDisabled: msg,
-        onClick: (event: Event, item: AllCubs) => {
+        onClick: (event: Event, item: Cubicacion) => {
           if (item) {
             this.router.navigate([
               '/app/cubicacion/form-cub',
@@ -149,7 +149,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
         condicion:
           cub.asignado === 0 && cub.creador_usuario_id === this.usuario_id,
         label: 'Eliminar',
-        onClick: (event: Event, item: AllCubs) => {
+        onClick: (event: Event, item: Cubicacion) => {
           if (item) {
             this.displayModalDeleteCub = true;
             this.cubicacion_id = item.cubicacion_id;

@@ -1,9 +1,9 @@
 export interface RespDataGetAllCubs {
-  items: AllCubs[];
+  items: Cubicacion[];
 }
 
-export interface AllCubs {
-  agencia_cidigo: string;
+export interface Cubicacion {
+  agencia_codigo: string;
   agencia_estado: boolean;
   agencia_id: number;
   agencia_nombre: string;
@@ -444,27 +444,27 @@ export interface ResponseGetCubicaciones {
     responseCode: number;
   };
 }
-export interface Cubicacion {
-  asignado: boolean;
-  contrato_marco_id: number;
-  contrato_marco_nombre: string;
-  contrato_marco_tipo_id: number;
-  contrato_marco_tipo_nombre: string;
-  creador_username: string;
-  creador_usuario_id: number;
-  creador_usuario_nombre: string;
-  fecha_creacion: string;
-  id: number;
-  nombre: string;
-  ot_id: number;
-  ot_nombre: string;
-  proveedor_id: number;
-  proveedor_nombre: string;
-  region_id: number;
-  region_nombre: string;
-  total: number;
-  total_tipo_moneda: string;
-}
+// export interface Cubicacion {
+//   asignado: boolean;
+//   contrato_marco_id: number;
+//   contrato_marco_nombre: string;
+//   contrato_marco_tipo_id: number;
+//   contrato_marco_tipo_nombre: string;
+//   creador_username: string;
+//   creador_usuario_id: number;
+//   creador_usuario_nombre: string;
+//   fecha_creacion: string;
+//   id: number;
+//   nombre: string;
+//   ot_id: number;
+//   ot_nombre: string;
+//   proveedor_id: number;
+//   proveedor_nombre: string;
+//   region_id: number;
+//   region_nombre: string;
+//   total: number;
+//   total_tipo_moneda: string;
+// }
 // Get cubicaciones done
 
 // Get LPUs Cubicacion end

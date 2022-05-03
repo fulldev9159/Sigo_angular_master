@@ -5,7 +5,6 @@ import copy from 'fast-copy';
 import {
   Actividad4Cub,
   Agencias4Cub,
-  AllCubs,
   AutoSuggestItem,
   Carrito,
   ContratoMarco4Cub,
@@ -30,7 +29,7 @@ import { map, tap, withLatestFrom } from 'rxjs/operators';
 export const CubicacionFeatureKey = 'cubicacion';
 
 export interface StateCubicacion {
-  allCubs: AllCubs[];
+  allCubs: Cubicacion[];
   detalleCub: RespDataGetDetalleCubs;
   contratosUser4Cub: ContratosUser[];
   agencias4Cub: Agencias4Cub[];

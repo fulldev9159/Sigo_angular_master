@@ -24,7 +24,7 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
 
     this.cubicacion = cubicacion;
     if (cubicacion !== null && cubicacion !== undefined) {
-      this.otFacade.getPlans(+cubicacion.region_id);
+      // this.otFacade.getPlans(+cubicacion.region_id);
     } else {
       this.form.get('plan_proyecto_id').disable();
     }
@@ -52,10 +52,10 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
           if (plan_proyecto_id !== null && plan_proyecto_id !== undefined) {
             // const plan = planes.find(p => +p.id === +plan_proyecto_id);
             if (this.cubicacion) {
-              this.otFacade.getSitesAction(
-                +plan_proyecto_id,
-                +this.cubicacion.region_id
-              );
+              // this.otFacade.getSitesAction(
+              //   +plan_proyecto_id,
+              //   +this.cubicacion.region_id
+              // );
             }
           } else {
             this.checkSitiosAndEnable([]);

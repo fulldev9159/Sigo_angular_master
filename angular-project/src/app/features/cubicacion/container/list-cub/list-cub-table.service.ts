@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AllCubs } from '@data';
+import { Cubicacion } from '@data';
 @Injectable({
   providedIn: 'root',
 })
@@ -115,7 +115,7 @@ export class ListCubTableService {
           'total',
           'creador_usuario_nombre',
         ],
-        actions: (ot: AllCubs) => {},
+        actions: (ot: Cubicacion) => {},
       },
     };
   }

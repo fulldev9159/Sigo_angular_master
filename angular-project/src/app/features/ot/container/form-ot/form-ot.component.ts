@@ -7,13 +7,13 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { RequestCreateOT } from '@storeOT/features/ot/ot.model';
-import { Cubicacion, SessionData, Sitio } from '@data';
 import { GeneralFormComponent } from '../../forms/general-form/general-form.component';
 import { PlanProyectoFormComponent } from '../../forms/plan-proyecto-form/plan-proyecto-form.component';
 import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero-form/sustento-financiero-form.component';
 import { ExtrasFormComponent } from '../../forms/extras-form/extras-form.component';
 import { NumeroInternoFormComponent } from '../../forms/numero-interno-form/numero-interno-form.component';
 import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicacion-form/detalle-adjudicacion-form.component';
+import { Cubicacion, SessionData, Sitio } from '@data';
 
 @Component({
   selector: 'app-form-ot',
@@ -23,6 +23,8 @@ import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicaci
 export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
+  contractType$ = new BehaviorSubject<string>('');
+  cubicacionSeleccionada: Cubicacion = null;
 
   // DISPLAY MODALS
 
@@ -31,10 +33,148 @@ export class FormOtComponent implements OnInit, OnDestroy {
   // TABLE
 
   // EXTRAS
-  contractType$ = new BehaviorSubject<string>('');
+  cubicaciones$: Observable<Cubicacion[]> = of([
+    {
+      agencia_codigo: '25',
+      agencia_estado: true,
+      agencia_id: 25,
+      agencia_nombre: 'RANCAGUA',
+      agencia_region_id: 6,
+      agencia_region_nombre: 'Región del Libertador General Bernardo O’Higg',
+      altura_desde: 'Edit 1714',
+      altura_hasta: 'Edit 1817',
+      asignado: 0,
+      cmarco_has_proveedor_id: 1,
+      codigo_acuerdo: '12121212',
+      contrato_id: 1,
+      contrato_marco_nombre: 'SBE',
+      contrato_marco_tipo_id: 1,
+      contrato_marco_tipo_nombre: 'Móvil',
+      creador_username: 'mgestor1',
+      creador_usuario_id: 2,
+      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+      cubicacion_descripcion: 'Edit Cub descripción',
+      cubicacion_fecha_creacion: null,
+      cubicacion_id: 1,
+      cubicacion_nombre: 'CubMovil',
+      direccion_desde: 'Edit las casas norte',
+      direccion_hasta: 'Edit las casas sur',
+      ot_id: -1,
+      ot_nombre: '',
+      proveedor_id: 2,
+      proveedor_nombre: 'COASIN',
+      tipo_cubicacion_descripcion: 'Construcción',
+      tipo_cubicacion_id: 1,
+      total: 72240,
+      total_tipo_moneda: 'CLP',
+    },
+
+    {
+      agencia_codigo: '25',
+      agencia_estado: true,
+      agencia_id: 25,
+      agencia_nombre: 'RANCAGUA',
+      agencia_region_id: 6,
+      agencia_region_nombre: 'Región del Libertador General Bernardo O’Higg',
+      altura_desde: 'Edit 1714',
+      altura_hasta: 'Edit 1817',
+      asignado: 0,
+      cmarco_has_proveedor_id: 1,
+      codigo_acuerdo: '12121212',
+      contrato_id: 2,
+      contrato_marco_nombre: 'SBE',
+      contrato_marco_tipo_id: 1,
+      contrato_marco_tipo_nombre: 'Ordinario',
+      creador_username: 'mgestor1',
+      creador_usuario_id: 2,
+      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+      cubicacion_descripcion: 'Edit Cub descripción',
+      cubicacion_fecha_creacion: null,
+      cubicacion_id: 2,
+      cubicacion_nombre: 'CubOrdinario',
+      direccion_desde: 'Edit las casas norte',
+      direccion_hasta: 'Edit las casas sur',
+      ot_id: -1,
+      ot_nombre: '',
+      proveedor_id: 2,
+      proveedor_nombre: 'COASIN',
+      tipo_cubicacion_descripcion: 'Construcción',
+      tipo_cubicacion_id: 1,
+      total: 72240,
+      total_tipo_moneda: 'CLP',
+    },
+    {
+      agencia_codigo: '25',
+      agencia_estado: true,
+      agencia_id: 25,
+      agencia_nombre: 'RANCAGUA',
+      agencia_region_id: 6,
+      agencia_region_nombre: 'Región del Libertador General Bernardo O’Higg',
+      altura_desde: 'Edit 1714',
+      altura_hasta: 'Edit 1817',
+      asignado: 0,
+      cmarco_has_proveedor_id: 1,
+      codigo_acuerdo: '12121212',
+      contrato_id: 3,
+      contrato_marco_nombre: 'SBE',
+      contrato_marco_tipo_id: 1,
+      contrato_marco_tipo_nombre: 'Fijo',
+      creador_username: 'mgestor1',
+      creador_usuario_id: 2,
+      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+      cubicacion_descripcion: 'Edit Cub descripción',
+      cubicacion_fecha_creacion: null,
+      cubicacion_id: 3,
+      cubicacion_nombre: 'CubFijo',
+      direccion_desde: 'Edit las casas norte',
+      direccion_hasta: 'Edit las casas sur',
+      ot_id: -1,
+      ot_nombre: '',
+      proveedor_id: 2,
+      proveedor_nombre: 'COASIN',
+      tipo_cubicacion_descripcion: 'Construcción',
+      tipo_cubicacion_id: 1,
+      total: 72240,
+      total_tipo_moneda: 'CLP',
+    },
+    {
+      agencia_codigo: '25',
+      agencia_estado: true,
+      agencia_id: 25,
+      agencia_nombre: 'RANCAGUA',
+      agencia_region_id: 6,
+      agencia_region_nombre: 'Región del Libertador General Bernardo O’Higg',
+      altura_desde: 'Edit 1714',
+      altura_hasta: 'Edit 1817',
+      asignado: 0,
+      cmarco_has_proveedor_id: 1,
+      codigo_acuerdo: '12121212',
+      contrato_id: 4,
+      contrato_marco_nombre: 'SBE',
+      contrato_marco_tipo_id: 1,
+      contrato_marco_tipo_nombre: 'Bucle',
+      creador_username: 'mgestor1',
+      creador_usuario_id: 2,
+      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+      cubicacion_descripcion: 'Edit Cub descripción',
+      cubicacion_fecha_creacion: null,
+      cubicacion_id: 4,
+      cubicacion_nombre: 'CubBucle',
+      direccion_desde: 'Edit las casas norte',
+      direccion_hasta: 'Edit las casas sur',
+      ot_id: -1,
+      ot_nombre: '',
+      proveedor_id: 2,
+      proveedor_nombre: 'COASIN',
+      tipo_cubicacion_descripcion: 'Construcción',
+      tipo_cubicacion_id: 1,
+      total: 72240,
+      total_tipo_moneda: 'CLP',
+    },
+  ]);
+
   authLogin: SessionData = null;
 
-  cubicacionSeleccionada: Cubicacion = null;
   sitioSeleccionado: Sitio = null;
   nombre_plan_proyecto: string;
 
@@ -162,9 +302,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
         .get('cubicacion_id')
         .valueChanges.pipe(
           withLatestFrom(
-            this.cubageFacade
-              .getCubicacionSelector$()
-              .pipe(map(cubicaciones => cubicaciones || []))
+            this.cubicaciones$
+            // this.cubageFacade.AllCubs$()
           )
         )
         .subscribe(([cubicacion_id, cubicaciones]) => {
@@ -173,7 +312,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
           this.cubicacionSeleccionada = null;
           if (cubicacion_id !== null && cubicacion_id !== undefined) {
             this.cubicacionSeleccionada = cubicaciones.find(
-              cubicacion => +cubicacion.id === +cubicacion_id
+              cubicacion => +cubicacion.cubicacion_id === +cubicacion_id
             );
 
             if (this.cubicacionSeleccionada) {
@@ -605,5 +744,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
     }
 
     console.log('SAVE contrato fijo', request);
+  }
+
+  get values(): any {
+    return this.form ? this.form.getRawValue() : null;
   }
 }
