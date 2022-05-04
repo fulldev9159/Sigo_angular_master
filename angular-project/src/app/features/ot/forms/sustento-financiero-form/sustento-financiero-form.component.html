@@ -24,8 +24,8 @@
         <ng-container options>
           <option value="null" selected disabled>Seleccione PMO</option>
           <ng-container *ngFor="let pmo of pmos$ | async">
-            <option [value]="pmo.codigo">
-              {{ pmo.codigo }}
+            <option [value]="pmo.pmo_codigo">
+              {{ pmo.pmo_codigo }}
             </option>
           </ng-container>
         </ng-container>

@@ -1,14 +1,8 @@
-export interface PMO {
-  codigo: string;
+// GET PMO
+export interface DataRespGetPMO {
+  items: PMO[];
 }
 
-export interface ResponseGetPMO4OT {
-  data: {
-    items: PMO[];
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
+export interface PMO {
+  pmo_codigo: number;
 }

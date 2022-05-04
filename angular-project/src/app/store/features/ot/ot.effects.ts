@@ -66,6 +66,18 @@ export class OtEffects {
     )
   );
 
+  getPMO$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getPMO),
+      concatMap(({ sitio_codigo }) =>
+        this.sustentofinancieroService.getPMO4OT(sitio_codigo).pipe(
+          map(response => otActions.getPMOSuccess({ response })),
+          catchError(error => of(otActions.getPmoError({ error })))
+        )
+      )
+    )
+  );
+
   // ////
 
   getOTs$ = createEffect(() =>
@@ -115,23 +127,6 @@ export class OtEffects {
               }),
             catchError(err => of(otActions.getSiteError({ error: err })))
           )
-        )
-      )
-    )
-  );
-
-  getPmo$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getPmo),
-      concatMap(({ sitio_codigo }) =>
-        this.sustentofinancieroService.getPMO4OT(sitio_codigo).pipe(
-          map(({ pmos, status }) =>
-            otActions.getPmoSuccess({
-              pmos,
-              status,
-            })
-          ),
-          catchError(error => of(otActions.getPmoError({ error })))
         )
       )
     )
@@ -1334,35 +1329,35 @@ export class OtEffects {
     )
   );
 
-  notifyAfterSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(
-          otActions.getOtEjecucionSuccess,
-          otActions.getOtAbiertasSuccess,
-          otActions.getOtSuccessCerradas,
-          otActions.saveBorradorInformeAvanceSuccess,
-          otActions.saveInformeAvanceTrabajadorSuccess,
-          otActions.saveInformeAvanceAdminECSuccess,
-          otActions.getDataInformeAvanceTrabajadorSuccess,
-          otActions.getDataInformeAvanceAdminECSuccess,
-          otActions.rechazarInformeAvanceSuccess,
-          otActions.getDataInformeActaSuccess,
-          otActions.saveInformeActaSuccess,
-          otActions.rechazarInformeActaSuccess,
-          // otActions.inicializarInformeAvanceSuccess,
-          otActions.getPlansSuccess,
-          otActions.getSiteSuccess,
-          otActions.getPmoSuccess,
-          otActions.getDetalleActaSuccess,
-          otActions.sendSolicitudPagoActaSuccess
-        ),
-        tap(action =>
-          this.messageServiceInt.actions200(action.status, action.type, action)
-        )
-      ),
-    { dispatch: false }
-  );
+  // notifyAfterSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(
+  //         otActions.getOtEjecucionSuccess,
+  //         otActions.getOtAbiertasSuccess,
+  //         otActions.getOtSuccessCerradas,
+  //         otActions.saveBorradorInformeAvanceSuccess,
+  //         otActions.saveInformeAvanceTrabajadorSuccess,
+  //         otActions.saveInformeAvanceAdminECSuccess,
+  //         otActions.getDataInformeAvanceTrabajadorSuccess,
+  //         otActions.getDataInformeAvanceAdminECSuccess,
+  //         otActions.rechazarInformeAvanceSuccess,
+  //         otActions.getDataInformeActaSuccess,
+  //         otActions.saveInformeActaSuccess,
+  //         otActions.rechazarInformeActaSuccess,
+  //         // otActions.inicializarInformeAvanceSuccess,
+  //         otActions.getPlansSuccess,
+  //         otActions.getSiteSuccess,
+  //         otActions.getPMOSuccess,
+  //         otActions.getDetalleActaSuccess,
+  //         otActions.sendSolicitudPagoActaSuccess
+  //       ),
+  //       tap(action =>
+  //         this.messageServiceInt.actions200(action.status, action.type, action)
+  //       )
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterError = createEffect(
     () =>

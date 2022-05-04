@@ -9,6 +9,8 @@ export const otFeatureKey = 'ot';
 
 export interface StateOt {
   contratosUser4OT: ContratosUser[];
+  pmos: PMO[];
+
   // ////
   filtro_propietario: string;
   filtro_tipo: string;
@@ -20,7 +22,6 @@ export interface StateOt {
   itemsCerradas: Data.OT[];
   planes: Plan[];
   sitio: Sitio[];
-  pmos: PMO[];
   budgetLines: OTModel.Lp[];
   pep2s: OTModel.Pep2[];
   ids_opex: OTModel.IDOpex[];
@@ -46,6 +47,7 @@ export interface StateOt {
 
 export const initialStateOt: StateOt = {
   contratosUser4OT: [],
+  pmos: [],
 
   // ////
   filtro_propietario: '',
@@ -58,7 +60,6 @@ export const initialStateOt: StateOt = {
   itemsCerradas: [],
   planes: [],
   sitio: [],
-  pmos: [],
   budgetLines: [],
   pep2s: [],
   ids_opex: [],
@@ -88,6 +89,11 @@ export const reducerOt = createReducer(
     ...state,
     contratosUser4OT: response.data.items,
   })),
+  on(OtActions.getPMOSuccess, (state, { response }) => ({
+    ...state,
+    pmos: response.data.items,
+  })),
+
   on(OtActions.getOts, (state, { request }) => ({
     ...state,
     filtro_propietario: request.filtro_propietario,
@@ -139,12 +145,6 @@ export const reducerOt = createReducer(
   on(OtActions.getSiteSuccess, (state, { sitio }) => ({
     ...state,
     sitio,
-  })),
-
-  on(OtActions.getPmo, state => state),
-  on(OtActions.getPmoSuccess, (state, payload) => ({
-    ...state,
-    pmos: payload.pmos,
   })),
 
   on(OtActions.getIDOpex, state => state),

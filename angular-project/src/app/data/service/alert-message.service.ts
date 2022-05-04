@@ -86,7 +86,7 @@ export class AlertMessageActions {
       'No existen planes de proyectos';
     this.msgNegocio[otActions.getSiteSuccess.type] =
       'No existen sitios para el proyecto escogido';
-    this.msgNegocio[otActions.getPmoSuccess.type] = 'No existen pmos';
+    this.msgNegocio[otActions.getPMOSuccess.type] = 'No existen pmos';
     this.msgNegocio[otActions.getDetalleActaSuccess.type] =
       'No existen valores para el acta';
 

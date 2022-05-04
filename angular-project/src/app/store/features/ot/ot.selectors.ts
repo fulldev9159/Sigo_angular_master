@@ -4,9 +4,15 @@ import * as fromOt from './ot.reducer';
 export const selectOt = createFeatureSelector<fromOt.StateOt>(
   fromOt.otFeatureKey
 );
+
 export const contratosUser4OT = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.contratosUser4OT
+);
+
+export const getPMO = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.pmos
 );
 //  ////
 export const getOtEjecucion = createSelector(
@@ -45,11 +51,6 @@ export const getPlans = createSelector(
 export const getSites = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.sitio
-);
-
-export const getPmos = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.pmos
 );
 
 export const getIDsOpex = createSelector(

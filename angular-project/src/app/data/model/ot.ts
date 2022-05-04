@@ -1,6 +1,9 @@
 import { Accion } from './accion';
 
+// ////
+
 // GET OTs init
+
 export interface RequestGetOTs {
   filtro_pestania: string;
   filtro_propietario: string;

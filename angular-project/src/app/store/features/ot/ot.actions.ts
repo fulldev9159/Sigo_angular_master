@@ -15,6 +15,7 @@ import {
   Sitio,
   StatusResponse,
   Response,
+  DataRespGetPMO,
 } from '@data';
 import {
   DetalleActa,
@@ -34,6 +35,22 @@ export const getContratosUser4OTSuccess = createAction(
 );
 export const getContratosUser4OTError = createAction(
   '[OT] getContratosUser4OT Error',
+  props<{ error: any }>()
+);
+
+// GET PMO
+export const getPMO = createAction(
+  '[OT] GET PMO',
+  props<{ sitio_codigo: string }>()
+);
+
+export const getPMOSuccess = createAction(
+  '[OT] GET PMO Success',
+  props<{ response: Response<DataRespGetPMO> }>()
+);
+
+export const getPmoError = createAction(
+  '[OT] GET PMO Error',
   props<{ error: any }>()
 );
 
@@ -100,22 +117,6 @@ export const getSiteError = createAction(
   props<{ error: any }>()
 );
 // GET Sitio end
-
-// GET PMO init
-export const getPmo = createAction(
-  '[OT] GET PMO',
-  props<{ sitio_codigo: string }>()
-);
-
-export const getPmoSuccess = createAction(
-  '[OT] GET PMO Success',
-  props<{ pmos: PMO[]; status: StatusResponse }>()
-);
-
-export const getPmoError = createAction(
-  '[OT] GET PMO Error',
-  props<{ error: any }>()
-);
 
 // GET PMO end
 

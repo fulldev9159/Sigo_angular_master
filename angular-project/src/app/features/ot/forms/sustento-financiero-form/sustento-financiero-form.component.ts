@@ -45,7 +45,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.otFacade.getIDsOpex();
 
-    this.pmos$ = this.otFacade.getPmosSelector$().pipe(
+    this.pmos$ = this.otFacade.getPMO$().pipe(
       map(pmos => pmos || []),
       tap(pmos => this.checkPMOsAndEnable(pmos))
     );

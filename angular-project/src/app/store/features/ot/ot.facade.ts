@@ -37,6 +37,16 @@ export class OtFacade {
   public contratosUser4OT$(): Observable<ContratosUser[]> {
     return this.store.select(otSelectors.contratosUser4OT);
   }
+
+  // PMOS
+  public getPMO(sitio_codigo: string): void {
+    this.store.dispatch(otActions.getPMO({ sitio_codigo }));
+  }
+
+  public getPMO$(): Observable<PMO[]> {
+    return this.store.select(otSelectors.getPMO);
+  }
+
   // ////
   // OT
   public getOts(request: RequestGetOTs): void {
@@ -156,14 +166,6 @@ export class OtFacade {
   }
   // SITES
 
-  // PMOS
-  public getPmosAction(sitio_codigo: string): void {
-    this.store.dispatch(otActions.getPmo({ sitio_codigo }));
-  }
-
-  public getPmosSelector$(): Observable<PMO[]> {
-    return this.store.select(otSelectors.getPmos);
-  }
   // PMOS
 
   public getIDsOpex(): void {

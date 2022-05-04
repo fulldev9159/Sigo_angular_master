@@ -326,9 +326,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
               // TODO descomentar ésto cuando la obtención del tipo de contrato sea dinámica
               if (contractType === 'Fijo' || contractType === 'Ordinario') {
                 // TODO: se necesita obtener el listado de PMOs sin especificar un sitio
-                this.otFacade.getPmosAction('');
+                this.otFacade.getPMO(
+                  this.cubicacionSeleccionada.agencia_codigo
+                );
               }
-
+              this.otFacade.getPMO(this.cubicacionSeleccionada.agencia_codigo);
               this.contractType$.next(contractType);
             }
           } else {
@@ -372,7 +374,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
             this.sitioSeleccionado = sitios.find(s => +s.id === +sitio_id);
 
             if (this.sitioSeleccionado) {
-              this.otFacade.getPmosAction(this.sitioSeleccionado.codigo);
+              this.otFacade.getPMO(this.sitioSeleccionado.codigo);
             }
           } else {
             this.disablePMOCodigoFormControl();
