@@ -78,6 +78,22 @@ export class OtEffects {
     )
   );
 
+  getLineaPresupuestaria$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getLineaPresupuestaria),
+      concatMap(({ pmo_id }) =>
+        this.sustentofinancieroService.getLineaPresupuestaria(pmo_id).pipe(
+          map(response =>
+            otActions.getLineaPresupuestariaSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.getLineaPresupuestariaError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // ////
 
   getOTs$ = createEffect(() =>
@@ -212,39 +228,6 @@ export class OtEffects {
               });
             }),
             catchError(err => of(otActions.getCECOError({ error: err })))
-          )
-      )
-    )
-  );
-
-  getLineaPresupuestaria$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getBudgetLine),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/lp/get`, {
-            token: data.token,
-            pmo_codigo: +data.pmo_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const SortLPs = res.data.items
-                ? res.data.items.sort((a: OtModel.Lp, b: OtModel.Lp) =>
-                    a.lineas_presupuestarias > b.lineas_presupuestarias
-                      ? 1
-                      : b.lineas_presupuestarias > a.lineas_presupuestarias
-                      ? -1
-                      : 0
-                  )
-                : [];
-              return otActions.getBudgetLineSuccess({
-                lp: SortLPs,
-              });
-            }),
-            catchError(err => of(otActions.getBudgetLineError({ error: err })))
           )
       )
     )

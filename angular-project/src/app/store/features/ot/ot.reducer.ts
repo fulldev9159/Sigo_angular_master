@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
 import * as Data from '@data';
-import { DataInformeAvance, Plan, PMO, Sitio, ContratosUser } from '@data';
+import { DataInformeAvance, Plan, PMO, Sitio, ContratosUser, LP } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
 export const otFeatureKey = 'ot';
@@ -10,7 +10,7 @@ export const otFeatureKey = 'ot';
 export interface StateOt {
   contratosUser4OT: ContratosUser[];
   pmos: PMO[];
-
+  lineaPresupuestaria: LP[];
   // ////
   filtro_propietario: string;
   filtro_tipo: string;
@@ -22,7 +22,7 @@ export interface StateOt {
   itemsCerradas: Data.OT[];
   planes: Plan[];
   sitio: Sitio[];
-  budgetLines: OTModel.Lp[];
+
   pep2s: OTModel.Pep2[];
   ids_opex: OTModel.IDOpex[];
   cuentas_sap: OTModel.CuentaSap[];
@@ -48,6 +48,7 @@ export interface StateOt {
 export const initialStateOt: StateOt = {
   contratosUser4OT: [],
   pmos: [],
+  lineaPresupuestaria: [],
 
   // ////
   filtro_propietario: '',
@@ -60,7 +61,6 @@ export const initialStateOt: StateOt = {
   itemsCerradas: [],
   planes: [],
   sitio: [],
-  budgetLines: [],
   pep2s: [],
   ids_opex: [],
   cuentas_sap: [],
@@ -93,7 +93,12 @@ export const reducerOt = createReducer(
     ...state,
     pmos: response.data.items,
   })),
+  on(OtActions.getLineaPresupuestariaSuccess, (state, { response }) => ({
+    ...state,
+    lineaPresupuestaria: response.data.items,
+  })),
 
+  //  ////
   on(OtActions.getOts, (state, { request }) => ({
     ...state,
     filtro_propietario: request.filtro_propietario,
@@ -163,12 +168,6 @@ export const reducerOt = createReducer(
   on(OtActions.getCECOSuccess, (state, payload) => ({
     ...state,
     cecos: payload.cecos,
-  })),
-
-  on(OtActions.getBudgetLine, state => state),
-  on(OtActions.getBudgetLineSuccess, (state, payload) => ({
-    ...state,
-    budgetLines: payload.lp,
   })),
 
   on(OtActions.getPep2, state => state),
@@ -344,7 +343,7 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.resetLPs, (state, payload) => ({
     ...state,
-    budgetLines: [],
+    lineaPresupuestaria: [],
   })),
   on(OtActions.resetPEP2, (state, payload) => ({
     ...state,

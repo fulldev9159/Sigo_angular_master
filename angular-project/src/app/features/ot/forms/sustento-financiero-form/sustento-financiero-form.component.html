@@ -38,8 +38,8 @@
         <ng-container options>
           <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
           <ng-container *ngFor="let lp of lps$ | async">
-            <option [value]="lp.codigo">
-              {{ lp.codigo }}
+            <option [value]="lp.linea_presupuestaria_codigo">
+              {{ lp.linea_presupuestaria_codigo }}
             </option>
           </ng-container>
         </ng-container>

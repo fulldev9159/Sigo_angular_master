@@ -16,6 +16,7 @@ import {
   RequestSaveInformeAvance,
   RequestSaveInformeAvanceAdmin,
   Sitio,
+  LP,
 } from '@data';
 import {
   DetalleActa,
@@ -46,6 +47,16 @@ export class OtFacade {
   public getPMO$(): Observable<PMO[]> {
     return this.store.select(otSelectors.getPMO);
   }
+
+  // LPS
+  public getLP(pmo_id: number): void {
+    this.store.dispatch(otActions.getLineaPresupuestaria({ pmo_id }));
+  }
+
+  public getLP$(): Observable<LP[]> {
+    return this.store.select(otSelectors.getLps);
+  }
+  // LPS
 
   // ////
   // OT
@@ -208,20 +219,6 @@ export class OtFacade {
     return this.store.select(otSelectors.getCECOs);
   }
   // CECOs
-
-  // LPS
-  public getLpsAction(data): void {
-    this.store.dispatch(otActions.getBudgetLine(data));
-  }
-
-  public getLpsSuccess(lp: OTmodel.Lp[]): void {
-    this.store.dispatch(otActions.getBudgetLineSuccess({ lp }));
-  }
-
-  public getLpsSelector$(): Observable<OTmodel.Lp[]> {
-    return this.store.select(otSelectors.getLps);
-  }
-  // LPS
 
   // PEP2
   public getPep2sAction(data): void {

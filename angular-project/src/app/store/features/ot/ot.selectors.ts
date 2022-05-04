@@ -14,6 +14,11 @@ export const getPMO = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.pmos
 );
+
+export const getLps = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.lineaPresupuestaria
+);
 //  ////
 export const getOtEjecucion = createSelector(
   selectOt,
@@ -66,11 +71,6 @@ export const getCuentasSAP = createSelector(
 export const getCECOs = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.cecos
-);
-
-export const getLps = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.budgetLines
 );
 
 export const getPeps2 = createSelector(

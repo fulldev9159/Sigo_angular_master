@@ -1,7 +1,3 @@
-export interface Lp {
-  lineas_presupuestarias: string[];
-}
-
 export interface Pep2 {
   linea_presupuestaria_id: number;
   pep2_codigo: string;

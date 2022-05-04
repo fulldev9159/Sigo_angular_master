@@ -7,15 +7,9 @@ import {
   AbstractControl,
   Validators,
 } from '@angular/forms';
-import {
-  IDOpex,
-  CuentaSap,
-  Lp,
-  Pep2,
-  CECO,
-} from '@storeOT/features/ot/ot.model';
+import { IDOpex, CuentaSap, Pep2, CECO } from '@storeOT/features/ot/ot.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { PMO } from '@data';
+import { PMO, LP } from '@data';
 
 @Component({
   selector: 'app-sustento-financiero-form',
@@ -26,7 +20,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   pmos$: Observable<PMO[]> = of([]);
-  lps$: Observable<Lp[]> = of([]);
+  lps$: Observable<LP[]> = of([]);
   pep2s$: Observable<Pep2[]> = of([]);
   ids_opex$: Observable<IDOpex[]> = of([]);
   cuentas_sap$: Observable<CuentaSap[]> = of([]);
@@ -50,7 +44,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
       tap(pmos => this.checkPMOsAndEnable(pmos))
     );
 
-    this.lps$ = this.otFacade.getLpsSelector$().pipe(
+    this.lps$ = this.otFacade.getLP$().pipe(
       map(lps => lps || []),
       tap(lps => this.checkLPsAndEnable(lps))
     );
@@ -124,7 +118,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
       this.form.get('pmo_codigo').valueChanges.subscribe(pmo_codigo => {
         this.resetLPFormControl();
         if (pmo_codigo !== null && pmo_codigo !== undefined) {
-          this.otFacade.getLpsAction({ pmo_codigo });
+          this.otFacade.getLP(+pmo_codigo);
         } else {
           this.checkLPsAndEnable([]);
         }
@@ -231,7 +225,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkLPsAndEnable(lps: Lp[]): void {
+  checkLPsAndEnable(lps: LP[]): void {
     if (lps.length > 0) {
       this.form.get('lp_codigo').enable();
     } else {

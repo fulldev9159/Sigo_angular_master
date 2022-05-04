@@ -16,6 +16,7 @@ import {
   StatusResponse,
   Response,
   DataRespGetPMO,
+  DataRespGetLP,
 } from '@data';
 import {
   DetalleActa,
@@ -51,6 +52,22 @@ export const getPMOSuccess = createAction(
 
 export const getPmoError = createAction(
   '[OT] GET PMO Error',
+  props<{ error: any }>()
+);
+
+// LP
+export const getLineaPresupuestaria = createAction(
+  '[OT] GET getLineaPresupuestaria',
+  props<{ pmo_id: number }>()
+);
+
+export const getLineaPresupuestariaSuccess = createAction(
+  '[OT] GET getLineaPresupuestaria Success',
+  props<{ response: Response<DataRespGetLP> }>()
+);
+
+export const getLineaPresupuestariaError = createAction(
+  '[OT] GET getLineaPresupuestaria Error',
   props<{ error: any }>()
 );
 
@@ -249,21 +266,6 @@ export const getCECOSuccess = createAction(
 
 export const getCECOError = createAction(
   '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP Error',
-  props<{ error: any }>()
-);
-
-export const getBudgetLine = createAction(
-  '[BudgetLine Get By Id Pmo] GET By Id Pmo',
-  props<{ token: string; pmo_id: number }>()
-);
-
-export const getBudgetLineSuccess = createAction(
-  '[BudgetLine Get By Id Pmo] GET By Id Pmo Success',
-  props<{ lp: OtModel.Lp[] }>()
-);
-
-export const getBudgetLineError = createAction(
-  '[BudgetLine Get By Id Pmo] GET By Id Pmo Error',
   props<{ error: any }>()
 );
 
