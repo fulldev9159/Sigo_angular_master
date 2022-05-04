@@ -1,16 +1,3 @@
-export interface IDOpex {
-  codigo: string;
-}
-
-export interface CuentaSap {
-  codigo: string;
-}
-
-export interface CECO {
-  opex_id: number;
-  codigo: string;
-}
-
 export interface Proyecto {
   usuario_creador_username: string;
   descripcion: string;

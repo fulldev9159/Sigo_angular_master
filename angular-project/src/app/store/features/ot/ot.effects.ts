@@ -107,6 +107,43 @@ export class OtEffects {
       )
     )
   );
+
+  getIDOpex$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getIDOpex),
+      concatMap(() =>
+        this.sustentofinancieroService.getOPEX().pipe(
+          map(response => otActions.getIDOpexSuccess({ response })),
+          catchError(error => of(otActions.getIDOpexError({ error })))
+        )
+      )
+    )
+  );
+
+  getCuentasSAP$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCuentaSAP),
+      concatMap(({ id_opex }) =>
+        this.sustentofinancieroService.getSAP(id_opex).pipe(
+          map(response => otActions.getCuentaSAPSuccess({ response })),
+          catchError(error => of(otActions.getCuentaSAPError({ error })))
+        )
+      )
+    )
+  );
+
+  getCECO$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCECO),
+      concatMap(({ id_opex, cuenta_sap }) =>
+        this.sustentofinancieroService.getCECO(id_opex, cuenta_sap).pipe(
+          map(response => otActions.getCECOSuccess({ response })),
+          catchError(error => of(otActions.getCECOError({ error })))
+        )
+      )
+    )
+  );
+
   // ////
 
   getOTs$ = createEffect(() =>
@@ -157,91 +194,6 @@ export class OtEffects {
             catchError(err => of(otActions.getSiteError({ error: err })))
           )
         )
-      )
-    )
-  );
-
-  getIDOpex$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getIDOpex),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/opex/id_opex/get_all`, {})
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-
-              const SortOPEXs = res.data.items
-                ? res.data.items.sort((a: OtModel.IDOpex, b: OtModel.IDOpex) =>
-                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                  )
-                : [];
-              return otActions.getIDOpexSuccess({
-                ids_opex: SortOPEXs,
-              });
-            }),
-            catchError(err => of(otActions.getIDOpexError({ error: err })))
-          )
-      )
-    )
-  );
-
-  getCuentasSAP$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getCuentaSAP),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/opex/cuenta_sap/get`, {
-            id_opex: data.id_opex_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const SortCuentasSOAP = res.data.items
-                ? res.data.items.sort(
-                    (a: OtModel.CuentaSap, b: OtModel.CuentaSap) =>
-                      a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                  )
-                : [];
-              return otActions.getCuentaSAPSuccess({
-                cuentas_sap: SortCuentasSOAP,
-              });
-            }),
-            catchError(err => of(otActions.getCuentaSAPError({ error: err })))
-          )
-      )
-    )
-  );
-
-  getCECO$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getCECO),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/opex/ceco/get`, {
-            id_opex: data.id_opex_codigo,
-            cuenta_sap: data.cuenta_sap_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const SortCECOs = res.data.items
-                ? res.data.items.sort((a: OtModel.CECO, b: OtModel.CECO) =>
-                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                  )
-                : [];
-              return otActions.getCECOSuccess({
-                cecos: SortCECOs,
-              });
-            }),
-            catchError(err => of(otActions.getCECOError({ error: err })))
-          )
       )
     )
   );

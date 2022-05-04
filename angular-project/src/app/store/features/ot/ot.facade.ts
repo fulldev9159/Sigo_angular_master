@@ -18,6 +18,9 @@ import {
   Sitio,
   LP,
   PEP2,
+  OPEX,
+  SAP,
+  CECO,
 } from '@data';
 import {
   DetalleActa,
@@ -70,6 +73,34 @@ export class OtFacade {
 
   public getPEP2$(): Observable<PEP2[]> {
     return this.store.select(otSelectors.getPeps2);
+  }
+
+  // OPEX
+
+  public getIDsOpex(): void {
+    this.store.dispatch(otActions.getIDOpex());
+  }
+
+  public getIDsOpex$(): Observable<OPEX[]> {
+    return this.store.select(otSelectors.getIDsOpex);
+  }
+
+  // Cuentas SAP
+  public getCuentaSAP(id_opex: string): void {
+    this.store.dispatch(otActions.getCuentaSAP({ id_opex }));
+  }
+
+  public getCuentaSAP$(): Observable<SAP[]> {
+    return this.store.select(otSelectors.getCuentasSAP);
+  }
+
+  // CECOs
+  public getCECO(id_opex: string, cuenta_sap: number): void {
+    this.store.dispatch(otActions.getCECO({ id_opex, cuenta_sap }));
+  }
+
+  public getCECO$(): Observable<CECO[]> {
+    return this.store.select(otSelectors.getCECOs);
   }
 
   // ////
@@ -190,49 +221,6 @@ export class OtFacade {
     return this.store.select(otSelectors.getSites);
   }
   // SITES
-
-  // PMOS
-
-  public getIDsOpex(): void {
-    this.store.dispatch(otActions.getIDOpex());
-  }
-
-  public getIDsOpexSuccess(ids_opex: OTmodel.IDOpex[]): void {
-    this.store.dispatch(otActions.getIDOpexSuccess({ ids_opex }));
-  }
-
-  public getIDsOpexSelector$(): Observable<OTmodel.IDOpex[]> {
-    return this.store.select(otSelectors.getIDsOpex);
-  }
-  // IDOpex
-
-  // Cuentas SAP
-  public getCuentaSAPAction(data): void {
-    this.store.dispatch(otActions.getCuentaSAP(data));
-  }
-
-  public getCuentaSAPSuccess(cuentas_sap: OTmodel.CuentaSap[]): void {
-    this.store.dispatch(otActions.getCuentaSAPSuccess({ cuentas_sap }));
-  }
-
-  public getCuentaSAPSelector$(): Observable<OTmodel.CuentaSap[]> {
-    return this.store.select(otSelectors.getCuentasSAP);
-  }
-  // Cuentas SAP
-
-  // CECOs
-  public getCECOAction(data): void {
-    this.store.dispatch(otActions.getCECO(data));
-  }
-
-  public getCECOSuccess(cecos: OTmodel.CECO[]): void {
-    this.store.dispatch(otActions.getCECOSuccess({ cecos }));
-  }
-
-  public getCECOSelector$(): Observable<OTmodel.CECO[]> {
-    return this.store.select(otSelectors.getCECOs);
-  }
-  // CECOs
 
   // Proyectos
   public getProyectoAction(): void {

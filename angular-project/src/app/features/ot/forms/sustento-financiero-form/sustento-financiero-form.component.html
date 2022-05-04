@@ -71,8 +71,8 @@
         <ng-container options>
           <option value="null" selected disabled>Seleccione ID OPEX</option>
           <ng-container *ngFor="let opex of ids_opex$ | async">
-            <option [value]="opex.codigo">
-              {{ opex.codigo }}
+            <option [value]="opex.id_opex">
+              {{ opex.id_opex }}
             </option>
           </ng-container>
         </ng-container>
@@ -85,8 +85,8 @@
         <ng-container options>
           <option value="null" selected disabled>Seleccione Cuenta SAP</option>
           <ng-container *ngFor="let sap of cuentas_sap$ | async">
-            <option [value]="sap.codigo">
-              {{ sap.codigo }}
+            <option [value]="sap.cuenta_sap">
+              {{ sap.cuenta_sap }}
             </option>
           </ng-container>
         </ng-container>
@@ -100,7 +100,7 @@
           <option value="null" selected disabled>Seleccione CECO</option>
           <option value="ceco_provisorio">CECO provisorio</option>
           <ng-container *ngFor="let ceco of cecos$ | async">
-            <option [value]="ceco.id">
+            <option [value]="ceco.ceco">
               {{ ceco.ceco }}
             </option>
           </ng-container>

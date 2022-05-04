@@ -18,6 +18,9 @@ import {
   DataRespGetPMO,
   DataRespGetLP,
   DataRespGetPEP2,
+  DataRespGetOPEX,
+  DataRespGetSAP,
+  DataRespGetCECO,
 } from '@data';
 import {
   DetalleActa,
@@ -85,6 +88,51 @@ export const getPEP2Success = createAction(
 
 export const getPEP2Error = createAction(
   '[OT] GET getPEP2 Error',
+  props<{ error: any }>()
+);
+
+// OPEX
+export const getIDOpex = createAction('[OT] GET getIDOpex');
+
+export const getIDOpexSuccess = createAction(
+  '[OT] GET getIDOpex Success',
+  props<{ response: Response<DataRespGetOPEX> }>()
+);
+
+export const getIDOpexError = createAction(
+  '[OT] getIDOpex Error',
+  props<{ error: any }>()
+);
+
+// SAP
+export const getCuentaSAP = createAction(
+  '[OT] GET getCuentaSAP',
+  props<{ id_opex: string }>()
+);
+
+export const getCuentaSAPSuccess = createAction(
+  '[OT] GET getCuentaSAP Success',
+  props<{ response: Response<DataRespGetSAP> }>()
+);
+
+export const getCuentaSAPError = createAction(
+  '[OT] GET getCuentaSAP Error',
+  props<{ error: any }>()
+);
+
+// CECO
+export const getCECO = createAction(
+  '[OT] GET getCECO',
+  props<{ id_opex: string; cuenta_sap: number }>()
+);
+
+export const getCECOSuccess = createAction(
+  '[OT] GET getCECO Success',
+  props<{ response: Response<DataRespGetCECO> }>()
+);
+
+export const getCECOError = createAction(
+  '[OT] GET getCECO Error',
   props<{ error: any }>()
 );
 
@@ -243,48 +291,6 @@ export const postOtSCESuccess = createAction(
 // OT LIST
 
 // OT FORM
-
-export const getIDOpex = createAction('[IDOpex Get All] GET All');
-
-export const getIDOpexSuccess = createAction(
-  '[IDOpex Get All] GET All Success',
-  props<{ ids_opex: OtModel.IDOpex[] }>()
-);
-
-export const getIDOpexError = createAction(
-  '[IDOpex Get Al] GET All Error',
-  props<{ error: any }>()
-);
-
-export const getCuentaSAP = createAction(
-  '[CuentaSAP Get By Id IDOpex] GET By Id IDOpex',
-  props<{ id_opex_codigo: string }>()
-);
-
-export const getCuentaSAPSuccess = createAction(
-  '[CuentaSAP Get By Id IDOpex] GET By Id IDOpex Success',
-  props<{ cuentas_sap: OtModel.CuentaSap[] }>()
-);
-
-export const getCuentaSAPError = createAction(
-  '[CuentaSAP Get By Id IDOpex] GET By Id IDOpex Error',
-  props<{ error: any }>()
-);
-
-export const getCECO = createAction(
-  '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP',
-  props<{ id_opex_codigo: string; cuenta_sap_codigo: string }>()
-);
-
-export const getCECOSuccess = createAction(
-  '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP Success',
-  props<{ cecos: OtModel.CECO[] }>()
-);
-
-export const getCECOError = createAction(
-  '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP Error',
-  props<{ error: any }>()
-);
 
 export const getProyecto = createAction('[Proyecto Get All] GET All');
 

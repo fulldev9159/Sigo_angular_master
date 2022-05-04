@@ -42,3 +42,45 @@ export interface PEP2 {
   pmo_codigo: number;
   tipo_contrato: number;
 }
+
+// GET OPEX
+export interface DataRespGetOPEX {
+  items: OPEX[];
+}
+
+export interface OPEX {
+  ano: number;
+  ceco: string;
+  created_at: Date;
+  cuenta_sap: number;
+  id: number;
+  id_opex: string;
+}
+
+// GET SAP
+export interface DataRespGetSAP {
+  items: SAP[];
+}
+
+export interface SAP {
+  ano: number;
+  ceco: string;
+  created_at: Date;
+  cuenta_sap: number;
+  id: number;
+  id_opex: string;
+}
+
+// GET CECO
+export interface DataRespGetCECO {
+  items: CECO[];
+}
+
+export interface CECO {
+  ano: number;
+  ceco: string;
+  created_at: Date;
+  cuenta_sap: number;
+  id: number;
+  id_opex: string;
+}

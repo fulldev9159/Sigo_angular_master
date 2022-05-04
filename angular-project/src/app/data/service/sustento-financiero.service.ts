@@ -7,6 +7,9 @@ import {
   DataRespGetPMO,
   DataRespGetLP,
   DataRespGetPEP2,
+  DataRespGetOPEX,
+  DataRespGetSAP,
+  DataRespGetCECO,
 } from '@data';
 
 @Injectable({
@@ -44,6 +47,29 @@ export class SustentoFinancieroService {
     );
   }
 
+  getOPEX(): Observable<Response<DataRespGetOPEX>> {
+    return this.http.post<Response<DataRespGetOPEX>>(
+      `${this.apiUrl}/configuration/sustento_financiero_opex/getall`,
+      {}
+    );
+  }
+
+  getSAP(id_opex: string): Observable<Response<DataRespGetSAP>> {
+    return this.http.post<Response<DataRespGetSAP>>(
+      `${this.apiUrl}/ot/sustento_financiero_opex_idopx/get`,
+      { id_opex }
+    );
+  }
+
+  getCECO(
+    id_opex: string,
+    cuenta_sap: number
+  ): Observable<Response<DataRespGetCECO>> {
+    return this.http.post<Response<DataRespGetCECO>>(
+      `${this.apiUrl}/ot/sustento_financiero_opex_opxsap/get`,
+      { id_opex, cuenta_sap }
+    );
+  }
   // getPMO4OT(sitio_codigo: string): Observable<{
   //   pmos: PMO[];
   //   status: any;

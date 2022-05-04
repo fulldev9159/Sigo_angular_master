@@ -10,6 +10,9 @@ import {
   ContratosUser,
   LP,
   PEP2,
+  OPEX,
+  SAP,
+  CECO,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -20,6 +23,9 @@ export interface StateOt {
   pmos: PMO[];
   lineaPresupuestaria: LP[];
   pep2s: PEP2[];
+  ids_opex: OPEX[];
+  cuentas_sap: SAP[];
+  cecos: CECO[];
 
   // ////
   filtro_propietario: string;
@@ -33,9 +39,6 @@ export interface StateOt {
   planes: Plan[];
   sitio: Sitio[];
 
-  ids_opex: OTModel.IDOpex[];
-  cuentas_sap: OTModel.CuentaSap[];
-  cecos: OTModel.CECO[];
   proyectos: OTModel.Proyecto[];
   detalleOt: Data.DataRspDetalleOT;
 
@@ -59,6 +62,9 @@ export const initialStateOt: StateOt = {
   pmos: [],
   lineaPresupuestaria: [],
   pep2s: [],
+  ids_opex: [],
+  cuentas_sap: [],
+  cecos: [],
 
   // ////
   filtro_propietario: '',
@@ -71,9 +77,7 @@ export const initialStateOt: StateOt = {
   itemsCerradas: [],
   planes: [],
   sitio: [],
-  ids_opex: [],
-  cuentas_sap: [],
-  cecos: [],
+
   proyectos: [],
   detalleOt: null,
 
@@ -109,6 +113,20 @@ export const reducerOt = createReducer(
   on(OtActions.getPEP2Success, (state, { response }) => ({
     ...state,
     pep2s: response.data.items,
+  })),
+  on(OtActions.getIDOpexSuccess, (state, { response }) => ({
+    ...state,
+    ids_opex: response.data.items,
+  })),
+
+  on(OtActions.getCuentaSAPSuccess, (state, { response }) => ({
+    ...state,
+    cuentas_sap: response.data.items,
+  })),
+
+  on(OtActions.getCECOSuccess, (state, { response }) => ({
+    ...state,
+    cecos: response.data.items,
   })),
   //  ////
   on(OtActions.getOts, (state, { request }) => ({
@@ -162,24 +180,6 @@ export const reducerOt = createReducer(
   on(OtActions.getSiteSuccess, (state, { sitio }) => ({
     ...state,
     sitio,
-  })),
-
-  on(OtActions.getIDOpex, state => state),
-  on(OtActions.getIDOpexSuccess, (state, payload) => ({
-    ...state,
-    ids_opex: payload.ids_opex,
-  })),
-
-  on(OtActions.getCuentaSAP, state => state),
-  on(OtActions.getCuentaSAPSuccess, (state, payload) => ({
-    ...state,
-    cuentas_sap: payload.cuentas_sap,
-  })),
-
-  on(OtActions.getCECO, state => state),
-  on(OtActions.getCECOSuccess, (state, payload) => ({
-    ...state,
-    cecos: payload.cecos,
   })),
 
   on(OtActions.getProyecto, state => state),
