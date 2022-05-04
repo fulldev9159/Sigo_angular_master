@@ -13,6 +13,9 @@ import {
   OPEX,
   SAP,
   CECO,
+  Cubs4OT,
+  Proyectos,
+  AdminContrato4OT,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -20,12 +23,16 @@ export const otFeatureKey = 'ot';
 
 export interface StateOt {
   contratosUser4OT: ContratosUser[];
+  cubicaciones: Cubs4OT[];
+  cubicacionSeleccionada: Cubs4OT;
   pmos: PMO[];
   lineaPresupuestaria: LP[];
   pep2s: PEP2[];
   ids_opex: OPEX[];
   cuentas_sap: SAP[];
   cecos: CECO[];
+  proyectos: Proyectos[];
+  adminContrato: AdminContrato4OT[];
 
   // ////
   filtro_propietario: string;
@@ -39,7 +46,6 @@ export interface StateOt {
   planes: Plan[];
   sitio: Sitio[];
 
-  proyectos: OTModel.Proyecto[];
   detalleOt: Data.DataRspDetalleOT;
 
   coordinators: Data.User[];
@@ -59,13 +65,16 @@ export interface StateOt {
 
 export const initialStateOt: StateOt = {
   contratosUser4OT: [],
+  cubicaciones: [],
+  cubicacionSeleccionada: null,
   pmos: [],
   lineaPresupuestaria: [],
   pep2s: [],
   ids_opex: [],
   cuentas_sap: [],
   cecos: [],
-
+  proyectos: [],
+  adminContrato: [],
   // ////
   filtro_propietario: '',
   filtro_tipo: '',
@@ -78,7 +87,6 @@ export const initialStateOt: StateOt = {
   planes: [],
   sitio: [],
 
-  proyectos: [],
   detalleOt: null,
 
   coordinators: [],
@@ -102,6 +110,14 @@ export const reducerOt = createReducer(
     ...state,
     contratosUser4OT: response.data.items,
   })),
+  on(OtActions.getCubicaciones4OTSuccess, (state, { response }) => ({
+    ...state,
+    cubicaciones: response.data.items,
+  })),
+  on(OtActions.cubicacionSeleccionada, (state, { cubicacion }) => ({
+    ...state,
+    cubicacionSeleccionada: cubicacion,
+  })),
   on(OtActions.getPMOSuccess, (state, { response }) => ({
     ...state,
     pmos: response.data.items,
@@ -118,15 +134,21 @@ export const reducerOt = createReducer(
     ...state,
     ids_opex: response.data.items,
   })),
-
   on(OtActions.getCuentaSAPSuccess, (state, { response }) => ({
     ...state,
     cuentas_sap: response.data.items,
   })),
-
   on(OtActions.getCECOSuccess, (state, { response }) => ({
     ...state,
     cecos: response.data.items,
+  })),
+  on(OtActions.getProyectoSuccess, (state, { response }) => ({
+    ...state,
+    proyectos: response.data.items,
+  })),
+  on(OtActions.getAdminContratoSuccess, (state, { response }) => ({
+    ...state,
+    adminContrato: response.data.items,
   })),
   //  ////
   on(OtActions.getOts, (state, { request }) => ({
@@ -180,12 +202,6 @@ export const reducerOt = createReducer(
   on(OtActions.getSiteSuccess, (state, { sitio }) => ({
     ...state,
     sitio,
-  })),
-
-  on(OtActions.getProyecto, state => state),
-  on(OtActions.getProyectoSuccess, (state, payload) => ({
-    ...state,
-    proyectos: payload.proyectos,
   })),
 
   on(OtActions.getDetalleOt, state => state),

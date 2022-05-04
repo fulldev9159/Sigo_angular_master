@@ -21,6 +21,10 @@ import {
   DataRespGetOPEX,
   DataRespGetSAP,
   DataRespGetCECO,
+  DataRespGetCubicaciones,
+  DataRespGetProyectos,
+  DataRespGetAdminContrato,
+  Cubs4OT,
 } from '@data';
 import {
   DetalleActa,
@@ -41,6 +45,28 @@ export const getContratosUser4OTSuccess = createAction(
 export const getContratosUser4OTError = createAction(
   '[OT] getContratosUser4OT Error',
   props<{ error: any }>()
+);
+
+// GET CUBICACIONES
+export const getCubicaciones4OT = createAction(
+  '[OT] GET getCubicaciones4OT',
+  props<{ contrato_id: number }>()
+);
+
+export const getCubicaciones4OTSuccess = createAction(
+  '[OT] GET getCubicaciones4OT Success',
+  props<{ response: Response<DataRespGetCubicaciones> }>()
+);
+
+export const getCubicaciones4OTError = createAction(
+  '[OT] GET getCubicaciones4OT Error',
+  props<{ error: any }>()
+);
+
+// CUBICACION SELECCIONADA
+export const cubicacionSeleccionada = createAction(
+  '[OT] GET cubicacionSeleccionada',
+  props<{ cubicacion: Cubs4OT }>()
 );
 
 // GET PMO
@@ -133,6 +159,35 @@ export const getCECOSuccess = createAction(
 
 export const getCECOError = createAction(
   '[OT] GET getCECO Error',
+  props<{ error: any }>()
+);
+
+// GET PROYECTOS
+export const getProyecto = createAction('[OT] GET getProyecto');
+
+export const getProyectoSuccess = createAction(
+  '[OT] GET getProyecto Success',
+  props<{ response: Response<DataRespGetProyectos> }>()
+);
+
+export const getProyectoError = createAction(
+  '[OT] GET getProyecto Error',
+  props<{ error: any }>()
+);
+
+// GET ADMIN CONTRATO
+export const getAdminContrato = createAction(
+  '[OT] GET getAdminContrato',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getAdminContratoSuccess = createAction(
+  '[OT] GET getAdminContrato Success',
+  props<{ response: Response<DataRespGetAdminContrato> }>()
+);
+
+export const getAdminContratoError = createAction(
+  '[OT] GET getAdminContrato Error',
   props<{ error: any }>()
 );
 
@@ -291,18 +346,6 @@ export const postOtSCESuccess = createAction(
 // OT LIST
 
 // OT FORM
-
-export const getProyecto = createAction('[Proyecto Get All] GET All');
-
-export const getProyectoSuccess = createAction(
-  '[Proyecto Get All] GET All Success',
-  props<{ proyectos: OtModel.Proyecto[] }>()
-);
-
-export const getProyectoError = createAction(
-  '[Proyecto Get All] GET All Error',
-  props<{ error: any }>()
-);
 
 export const getDetalleOt = createAction(
   '[OT Get Detalle OT] GET Detalle OT',

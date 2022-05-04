@@ -21,6 +21,9 @@ import {
   OPEX,
   SAP,
   CECO,
+  Cubs4OT,
+  Proyectos,
+  AdminContrato4OT,
 } from '@data';
 import {
   DetalleActa,
@@ -41,6 +44,23 @@ export class OtFacade {
 
   public contratosUser4OT$(): Observable<ContratosUser[]> {
     return this.store.select(otSelectors.contratosUser4OT);
+  }
+
+  //   GET CUBICACIONES 4 CUB
+  public cubicaciones4OT(contrato_id: number): void {
+    this.store.dispatch(otActions.getCubicaciones4OT({ contrato_id }));
+  }
+
+  public cubicaciones4OT$(): Observable<Cubs4OT[]> {
+    return this.store.select(otSelectors.cubicaciones4OT);
+  }
+
+  //    CUBICACIONES SELECCIONADA
+  public cubicacionSeleccionada(cubicacion: Cubs4OT): void {
+    this.store.dispatch(otActions.cubicacionSeleccionada({ cubicacion }));
+  }
+  public cubicacionSeleccionada$(): Observable<Cubs4OT> {
+    return this.store.select(otSelectors.cubicacionSeleccionada);
   }
 
   // PMOS
@@ -76,7 +96,6 @@ export class OtFacade {
   }
 
   // OPEX
-
   public getIDsOpex(): void {
     this.store.dispatch(otActions.getIDOpex());
   }
@@ -101,6 +120,24 @@ export class OtFacade {
 
   public getCECO$(): Observable<CECO[]> {
     return this.store.select(otSelectors.getCECOs);
+  }
+
+  // PROYECTOS
+  public getProyecto(): void {
+    this.store.dispatch(otActions.getProyecto());
+  }
+
+  public getProyecto$(): Observable<Proyectos[]> {
+    return this.store.select(otSelectors.getProyectos);
+  }
+
+  // ADMIN CONTRATO
+  public getAdminContrato(cubicacion_id: number): void {
+    this.store.dispatch(otActions.getAdminContrato({ cubicacion_id }));
+  }
+
+  public getAdminContrato$(): Observable<AdminContrato4OT[]> {
+    return this.store.select(otSelectors.getAdminContrato);
   }
 
   // ////
@@ -221,20 +258,6 @@ export class OtFacade {
     return this.store.select(otSelectors.getSites);
   }
   // SITES
-
-  // Proyectos
-  public getProyectoAction(): void {
-    this.store.dispatch(otActions.getProyecto());
-  }
-
-  public getProyectoSuccess(proyectos: OTmodel.Proyecto[]): void {
-    this.store.dispatch(otActions.getProyectoSuccess({ proyectos }));
-  }
-
-  public getProyectoSelector$(): Observable<OTmodel.Proyecto[]> {
-    return this.store.select(otSelectors.getProyectos);
-  }
-  // Proyectos
 
   // Detalle OT
   public getDetalleOtAction(id: number): void {

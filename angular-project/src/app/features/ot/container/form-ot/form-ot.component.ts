@@ -13,7 +13,7 @@ import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero
 import { ExtrasFormComponent } from '../../forms/extras-form/extras-form.component';
 import { NumeroInternoFormComponent } from '../../forms/numero-interno-form/numero-interno-form.component';
 import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicacion-form/detalle-adjudicacion-form.component';
-import { Cubicacion, SessionData, Sitio } from '@data';
+import { Cubicacion, Cubs4OT, SessionData, Sitio } from '@data';
 
 @Component({
   selector: 'app-form-ot',
@@ -24,7 +24,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
   contractType$ = new BehaviorSubject<string>('');
-  cubicacionSeleccionada: Cubicacion = null;
+  cubicacionSeleccionada: Cubs4OT = null;
 
   // DISPLAY MODALS
 
@@ -249,6 +249,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       fecha_fin: new FormControl(null, [Validators.required]),
       proyecto_id: new FormControl(null, [Validators.required]),
       observaciones: new FormControl(null, []),
+      admin_contrato_id: new FormControl(null, []),
     }),
     numeroInterno: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
@@ -303,18 +304,20 @@ export class FormOtComponent implements OnInit, OnDestroy {
         .valueChanges.pipe(
           withLatestFrom(
             this.cubicaciones$
-            // this.cubageFacade.AllCubs$()
+            // this.otFacade.cubicaciones4OT$()
           )
         )
         .subscribe(([cubicacion_id, cubicaciones]) => {
           this.resetPlanProyectoFormControl();
 
           this.cubicacionSeleccionada = null;
+          this.otFacade.cubicacionSeleccionada(null);
           if (cubicacion_id !== null && cubicacion_id !== undefined) {
             this.cubicacionSeleccionada = cubicaciones.find(
               cubicacion => +cubicacion.cubicacion_id === +cubicacion_id
             );
-
+            this.otFacade.cubicacionSeleccionada(this.cubicacionSeleccionada);
+            this.otFacade.getAdminContrato(+cubicacion_id);
             if (this.cubicacionSeleccionada) {
               // TODO: checkear el tipo contrato de la cubicacion
               console.log(

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { Proyecto } from '@storeOT/features/ot/ot.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
+import { AdminContrato4OT, Proyectos } from '@data';
 
 @Component({
   selector: 'app-extras-form',
@@ -11,7 +11,8 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 })
 export class ExtrasFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  proyectos$: Observable<Proyecto[]> = of([]);
+  proyectos$: Observable<Proyectos[]> = of([]);
+  adminContrato$: Observable<AdminContrato4OT[]> = of([]);
 
   msgsWrongDates = [
     {
@@ -26,9 +27,9 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
   constructor(private otFacade: OtFacade) {}
 
   ngOnInit(): void {
-    this.otFacade.getProyectoAction();
-
-    this.proyectos$ = this.otFacade.getProyectoSelector$();
+    this.otFacade.getProyecto();
+    this.proyectos$ = this.otFacade.getProyecto$();
+    this.adminContrato$ = this.otFacade.getAdminContrato$();
   }
 
   ngOnDestroy(): void {

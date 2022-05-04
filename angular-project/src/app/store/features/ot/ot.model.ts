@@ -1,11 +1,3 @@
-export interface Proyecto {
-  usuario_creador_username: string;
-  descripcion: string;
-  nombre: string;
-  id: number;
-  usuario_creador_id: number;
-}
-
 export interface RequestCreateOT {
   nombre: string;
   tipo: string;

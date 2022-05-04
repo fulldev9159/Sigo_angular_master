@@ -66,6 +66,18 @@ export class OtEffects {
     )
   );
 
+  getCubicaciones4OT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCubicaciones4OT),
+      concatMap(({ contrato_id }) =>
+        this.otService.getCubicaciones(contrato_id).pipe(
+          map(response => otActions.getCubicaciones4OTSuccess({ response })),
+          catchError(error => of(otActions.getCubicaciones4OTError({ error })))
+        )
+      )
+    )
+  );
+
   getPMO$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getPMO),
@@ -144,6 +156,30 @@ export class OtEffects {
     )
   );
 
+  getProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getProyecto),
+      concatMap(() =>
+        this.otService.getProyectos().pipe(
+          map(response => otActions.getProyectoSuccess({ response })),
+          catchError(error => of(otActions.getProyectoError({ error })))
+        )
+      )
+    )
+  );
+
+  getAdminContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getAdminContrato),
+      concatMap(({ cubicacion_id }) =>
+        this.otService.getAdminContrato(cubicacion_id).pipe(
+          map(response => otActions.getAdminContratoSuccess({ response })),
+          catchError(error => of(otActions.getAdminContratoError({ error })))
+        )
+      )
+    )
+  );
+
   // ////
 
   getOTs$ = createEffect(() =>
@@ -193,26 +229,6 @@ export class OtEffects {
               }),
             catchError(err => of(otActions.getSiteError({ error: err })))
           )
-        )
-      )
-    )
-  );
-
-  getProyecto$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getProyecto),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}/proyectos/get_all`, {}).pipe(
-          map((res: any) => {
-            if (+res.status.responseCode !== 0) {
-              this.snackService.showMessage(
-                `No existen proyectos - ${res.status.description}`,
-                'error'
-              );
-            }
-            return otActions.getProyectoSuccess({ proyectos: res.data.items });
-          }),
-          catchError(err => of(otActions.getProyectoError({ error: err })))
         )
       )
     )

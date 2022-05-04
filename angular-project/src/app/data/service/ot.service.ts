@@ -20,7 +20,10 @@ import {
   RejectOTMinutesGenerationResponse,
   ApprovalPagoOTResponse,
   RequestGetOTs,
-  StatusResponse,
+  Response,
+  DataRespGetCubicaciones,
+  DataRespGetProyectos,
+  DataRespGetAdminContrato,
 } from '@data';
 
 @Injectable({
@@ -36,6 +39,30 @@ export class OTService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
+  getCubicaciones(
+    contrato_id: number
+  ): Observable<Response<DataRespGetCubicaciones>> {
+    return this.http.post<Response<DataRespGetCubicaciones>>(
+      `${this.apiUrl}/ot/cubicaciones_from_contrato/get`,
+      { contrato_id }
+    );
+  }
+
+  getProyectos(): Observable<Response<DataRespGetProyectos>> {
+    return this.http.post<Response<DataRespGetProyectos>>(
+      `${this.apiUrl}/ot/proyecto_uid/get`,
+      {}
+    );
+  }
+
+  getAdminContrato(
+    cubicacion_id: number
+  ): Observable<Response<DataRespGetAdminContrato>> {
+    return this.http.post<Response<DataRespGetAdminContrato>>(
+      `${this.apiUrl}/ot/posibles_administradores/get`,
+      { cubicacion_id }
+    );
+  }
   ////
 
   getOTs(request: RequestGetOTs): Observable<{

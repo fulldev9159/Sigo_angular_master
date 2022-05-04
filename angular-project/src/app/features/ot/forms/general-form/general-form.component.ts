@@ -4,7 +4,7 @@ import { map, filter, withLatestFrom, tap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { Cubicacion, ContratosUser } from '@data';
+import { Cubicacion, ContratosUser, Cubs4OT } from '@data';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 
 @Component({
@@ -17,6 +17,7 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
 
   // DATOS A USAR
   contratosUser4OT$: Observable<ContratosUser[]>;
+  // cubicaciones$: Observable<Cubs4OT[]>;
   cubicaciones$: Observable<Cubicacion[]> = of([
     {
       agencia_codigo: '25',
@@ -156,6 +157,7 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
       total_tipo_moneda: 'CLP',
     },
   ]);
+
   // DISPLAY MODALS
 
   // FORMULARIO
@@ -191,9 +193,9 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
 
   onInitSetData(): void {
     this.contratosUser4OT$ = this.otFacade.contratosUser4OT$();
-    // this.cubicaciones$ = this.cubicacionFacade
-    //   .AllCubs$()
-    //   .pipe(tap(data => this.checkAndEnable('cubicacion_id', data)));
+    this.cubicaciones$ = this.otFacade
+      .cubicaciones4OT$()
+      .pipe(tap(data => this.checkAndEnable('cubicacion_id', data)));
   }
 
   onInitAccionesInicialesAdicionales(): void {
@@ -201,7 +203,7 @@ export class GeneralFormComponent implements OnInit, OnDestroy {
       this.form.get('contrato').valueChanges.subscribe(contrato_id => {
         if (contrato_id !== null && contrato_id !== undefined) {
           this.form.get('cubicacion_id').enable();
-          this.cubicacionFacade.AllCubs();
+          this.otFacade.cubicaciones4OT(+contrato_id);
         } else {
           // this.checkAndEnable('agencia_id', []);
         }
