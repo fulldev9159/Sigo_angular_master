@@ -2,7 +2,15 @@ import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
 import * as OTModel from './ot.model';
 import * as Data from '@data';
-import { DataInformeAvance, Plan, PMO, Sitio, ContratosUser, LP } from '@data';
+import {
+  DataInformeAvance,
+  Plan,
+  PMO,
+  Sitio,
+  ContratosUser,
+  LP,
+  PEP2,
+} from '@data';
 import { DetalleActa } from '@data/model/acta';
 
 export const otFeatureKey = 'ot';
@@ -11,6 +19,8 @@ export interface StateOt {
   contratosUser4OT: ContratosUser[];
   pmos: PMO[];
   lineaPresupuestaria: LP[];
+  pep2s: PEP2[];
+
   // ////
   filtro_propietario: string;
   filtro_tipo: string;
@@ -23,7 +33,6 @@ export interface StateOt {
   planes: Plan[];
   sitio: Sitio[];
 
-  pep2s: OTModel.Pep2[];
   ids_opex: OTModel.IDOpex[];
   cuentas_sap: OTModel.CuentaSap[];
   cecos: OTModel.CECO[];
@@ -49,6 +58,7 @@ export const initialStateOt: StateOt = {
   contratosUser4OT: [],
   pmos: [],
   lineaPresupuestaria: [],
+  pep2s: [],
 
   // ////
   filtro_propietario: '',
@@ -61,7 +71,6 @@ export const initialStateOt: StateOt = {
   itemsCerradas: [],
   planes: [],
   sitio: [],
-  pep2s: [],
   ids_opex: [],
   cuentas_sap: [],
   cecos: [],
@@ -97,7 +106,10 @@ export const reducerOt = createReducer(
     ...state,
     lineaPresupuestaria: response.data.items,
   })),
-
+  on(OtActions.getPEP2Success, (state, { response }) => ({
+    ...state,
+    pep2s: response.data.items,
+  })),
   //  ////
   on(OtActions.getOts, (state, { request }) => ({
     ...state,
@@ -168,12 +180,6 @@ export const reducerOt = createReducer(
   on(OtActions.getCECOSuccess, (state, payload) => ({
     ...state,
     cecos: payload.cecos,
-  })),
-
-  on(OtActions.getPep2, state => state),
-  on(OtActions.getPep2Success, (state, payload) => ({
-    ...state,
-    pep2s: payload.pep2,
   })),
 
   on(OtActions.getProyecto, state => state),

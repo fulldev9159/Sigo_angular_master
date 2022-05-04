@@ -1,8 +1,3 @@
-export interface Pep2 {
-  linea_presupuestaria_id: number;
-  pep2_codigo: string;
-}
-
 export interface IDOpex {
   codigo: string;
 }

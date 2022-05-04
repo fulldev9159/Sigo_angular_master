@@ -2,7 +2,12 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Response, DataRespGetPMO, PMO, DataRespGetLP } from '@data';
+import {
+  Response,
+  DataRespGetPMO,
+  DataRespGetLP,
+  DataRespGetPEP2,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +33,17 @@ export class SustentoFinancieroService {
       { pmo_codigo }
     );
   }
+
+  getPEP2(
+    pmo_codigo: number,
+    linea_presupuestaria_codigo: string
+  ): Observable<Response<DataRespGetPEP2>> {
+    return this.http.post<Response<DataRespGetPEP2>>(
+      `${this.apiUrl}/ot/sustento_financiero_capex_pmolp/get`,
+      { pmo_codigo, linea_presupuestaria_codigo }
+    );
+  }
+
   // getPMO4OT(sitio_codigo: string): Observable<{
   //   pmos: PMO[];
   //   status: any;

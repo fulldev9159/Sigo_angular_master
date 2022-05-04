@@ -17,6 +17,7 @@ import {
   RequestSaveInformeAvanceAdmin,
   Sitio,
   LP,
+  PEP2,
 } from '@data';
 import {
   DetalleActa,
@@ -56,7 +57,20 @@ export class OtFacade {
   public getLP$(): Observable<LP[]> {
     return this.store.select(otSelectors.getLps);
   }
-  // LPS
+
+  // PEP2
+  public getPEP2(
+    pmo_codigo: number,
+    linea_presupuestaria_codigo: string
+  ): void {
+    this.store.dispatch(
+      otActions.getPEP2({ pmo_codigo, linea_presupuestaria_codigo })
+    );
+  }
+
+  public getPEP2$(): Observable<PEP2[]> {
+    return this.store.select(otSelectors.getPeps2);
+  }
 
   // ////
   // OT
@@ -219,20 +233,6 @@ export class OtFacade {
     return this.store.select(otSelectors.getCECOs);
   }
   // CECOs
-
-  // PEP2
-  public getPep2sAction(data): void {
-    this.store.dispatch(otActions.getPep2(data));
-  }
-
-  public getPep2sSuccess(pep2: OTmodel.Pep2[]): void {
-    this.store.dispatch(otActions.getPep2Success({ pep2 }));
-  }
-
-  public getPep2sSelector$(): Observable<OTmodel.Pep2[]> {
-    return this.store.select(otSelectors.getPeps2);
-  }
-  // PEP2
 
   // Proyectos
   public getProyectoAction(): void {

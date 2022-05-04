@@ -94,6 +94,19 @@ export class OtEffects {
     )
   );
 
+  getPep2$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getPEP2),
+      concatMap(({ pmo_codigo, linea_presupuestaria_codigo }) =>
+        this.sustentofinancieroService
+          .getPEP2(pmo_codigo, linea_presupuestaria_codigo)
+          .pipe(
+            map(response => otActions.getPEP2Success({ response })),
+            catchError(error => of(otActions.getPEP2Error({ error })))
+          )
+      )
+    )
+  );
   // ////
 
   getOTs$ = createEffect(() =>
@@ -228,29 +241,6 @@ export class OtEffects {
               });
             }),
             catchError(err => of(otActions.getCECOError({ error: err })))
-          )
-      )
-    )
-  );
-
-  getPep2$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getPep2),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/pep2/get`, {
-            token: data.token,
-            pmo_codigo: +data.pmo_codigo,
-            lp_codigo: data.lp_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return otActions.getPep2Success({ pep2: res.data.items });
-            }),
-            catchError(err => of(otActions.getPep2Error({ error: err })))
           )
       )
     )

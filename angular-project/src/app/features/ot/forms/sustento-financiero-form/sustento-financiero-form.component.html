@@ -53,8 +53,8 @@
           <option value="null" selected disabled>Seleccione Pep2</option>
           <option value="capex_provisorio">PEP2 provisorio</option>
           <ng-container *ngFor="let pep2 of pep2s$ | async">
-            <option [value]="pep2.linea_presupuestaria_id">
-              {{ pep2.pep2_codigo }}
+            <option [value]="pep2.pep2">
+              {{ pep2.pep2 }}
             </option>
           </ng-container>
         </ng-container>

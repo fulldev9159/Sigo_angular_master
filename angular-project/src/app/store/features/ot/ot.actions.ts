@@ -17,6 +17,7 @@ import {
   Response,
   DataRespGetPMO,
   DataRespGetLP,
+  DataRespGetPEP2,
 } from '@data';
 import {
   DetalleActa,
@@ -68,6 +69,22 @@ export const getLineaPresupuestariaSuccess = createAction(
 
 export const getLineaPresupuestariaError = createAction(
   '[OT] GET getLineaPresupuestaria Error',
+  props<{ error: any }>()
+);
+
+// PEP2
+export const getPEP2 = createAction(
+  '[OT] GET getPEP2',
+  props<{ pmo_codigo: number; linea_presupuestaria_codigo: string }>()
+);
+
+export const getPEP2Success = createAction(
+  '[OT] GET getPEP2 Success',
+  props<{ response: Response<DataRespGetPEP2> }>()
+);
+
+export const getPEP2Error = createAction(
+  '[OT] GET getPEP2 Error',
   props<{ error: any }>()
 );
 
@@ -266,21 +283,6 @@ export const getCECOSuccess = createAction(
 
 export const getCECOError = createAction(
   '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP Error',
-  props<{ error: any }>()
-);
-
-export const getPep2 = createAction(
-  '[getPep2 Get By Id BudgetLine] GET By Id BudgetLine',
-  props<{ token: string; pmo_codigo: number; lp_codigo: string }>()
-);
-
-export const getPep2Success = createAction(
-  '[getPep2 Get By Id BudgetLine] GET By Id BudgetLine Success',
-  props<{ pep2: OtModel.Pep2[] }>()
-);
-
-export const getPep2Error = createAction(
-  '[getPep2 Get By Id BudgetLine] GET By Id BudgetLine Error',
   props<{ error: any }>()
 );
 
