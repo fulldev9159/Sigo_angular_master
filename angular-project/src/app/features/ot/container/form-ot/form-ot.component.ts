@@ -14,6 +14,7 @@ import { ExtrasFormComponent } from '../../forms/extras-form/extras-form.compone
 import { NumeroInternoFormComponent } from '../../forms/numero-interno-form/numero-interno-form.component';
 import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicacion-form/detalle-adjudicacion-form.component';
 import { Cubicacion, Cubs4OT, SessionData, Sitio } from '@data';
+import { BucleFormComponent } from '@featureOT/ot/forms/bucle-form/bucle-form.component';
 
 @Component({
   selector: 'app-form-ot',
@@ -78,12 +79,18 @@ export class FormOtComponent implements OnInit, OnDestroy {
   })
   detalleAdjudicacionForm: DetalleAdjudicacionFormComponent;
 
+  @ViewChild('bucleForm', {
+    read: BucleFormComponent,
+    static: false,
+  })
+  bucleForm: BucleFormComponent;
+
   form: FormGroup = new FormGroup({
     general: new FormGroup({
       nombre: new FormControl('', [
         Validators.required,
         this.noWhitespace,
-        Validators.maxLength(100),
+        Validators.maxLength(255),
       ]),
       contrato: new FormControl(null, [Validators.required]),
       cubicacion_id: new FormControl(null, [Validators.required]),
@@ -125,18 +132,57 @@ export class FormOtComponent implements OnInit, OnDestroy {
       carta_adjudicacion: new FormControl(null, [
         Validators.required,
         this.noWhitespace,
-        Validators.maxLength(100),
+        Validators.maxLength(255),
       ]),
       fecha_adjudicacion: new FormControl(null, [Validators.required]),
       numero_pedido: new FormControl(null, [
         Validators.required,
         this.noWhitespace,
-        Validators.maxLength(100),
+        Validators.maxLength(255),
       ]),
       materia: new FormControl(null, [
         Validators.required,
         this.noWhitespace,
-        Validators.maxLength(100),
+        Validators.maxLength(255),
+      ]),
+    }),
+    bucle: new FormGroup({
+      oficina_central_id: new FormControl(null, [Validators.required]),
+      solicitante_id: new FormControl(null, [Validators.required]),
+      direccion: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      altura: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      piso: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      departamento: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      comuna_id: new FormControl(null, [Validators.required]),
+      tipo_red_id: new FormControl(null, [Validators.required]),
+      tipo_trabajo_id: new FormControl(null, [Validators.required]),
+      tiene_boleta_garantia: new FormControl(false, [Validators.required]),
+      tiene_permisos: new FormControl(false, [Validators.required]),
+      area_negocio: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      nombre_proyectista: new FormControl(null, [
+        Validators.required,
+        this.noWhitespace,
+        Validators.maxLength(255),
       ]),
     }),
   });
