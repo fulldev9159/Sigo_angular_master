@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
-import * as OTModel from './ot.model';
 import * as Data from '@data';
+import copy from 'fast-copy';
+
 import {
   DataInformeAvance,
   Plan,
@@ -106,46 +107,138 @@ export const initialStateOt: StateOt = {
 
 export const reducerOt = createReducer(
   initialStateOt,
-  on(OtActions.getContratosUser4OTSuccess, (state, { response }) => ({
-    ...state,
-    contratosUser4OT: response.data.items,
-  })),
-  on(OtActions.getCubicaciones4OTSuccess, (state, { response }) => ({
-    ...state,
-    cubicaciones: response.data.items,
-  })),
+  on(OtActions.getContratosUser4OTSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      contratosUser4OT:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.model_contrato_id.nombre > b.model_contrato_id.nombre
+                ? 1
+                : b.model_contrato_id.nombre > a.model_contrato_id.nombre
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getCubicaciones4OTSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      cubicaciones:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.cubicacion_nombre > b.cubicacion_nombre
+                ? 1
+                : b.cubicacion_nombre > a.cubicacion_nombre
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
   on(OtActions.cubicacionSeleccionada, (state, { cubicacion }) => ({
     ...state,
     cubicacionSeleccionada: cubicacion,
   })),
-  on(OtActions.getPMOSuccess, (state, { response }) => ({
-    ...state,
-    pmos: response.data.items,
-  })),
-  on(OtActions.getLineaPresupuestariaSuccess, (state, { response }) => ({
-    ...state,
-    lineaPresupuestaria: response.data.items,
-  })),
-  on(OtActions.getPEP2Success, (state, { response }) => ({
-    ...state,
-    pep2s: response.data.items,
-  })),
-  on(OtActions.getIDOpexSuccess, (state, { response }) => ({
-    ...state,
-    ids_opex: response.data.items,
-  })),
-  on(OtActions.getCuentaSAPSuccess, (state, { response }) => ({
-    ...state,
-    cuentas_sap: response.data.items,
-  })),
-  on(OtActions.getCECOSuccess, (state, { response }) => ({
-    ...state,
-    cecos: response.data.items,
-  })),
-  on(OtActions.getProyectoSuccess, (state, { response }) => ({
-    ...state,
-    proyectos: response.data.items,
-  })),
+  on(OtActions.getPMOSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      pmos:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.pmo_codigo > b.pmo_codigo
+                ? 1
+                : b.pmo_codigo > a.pmo_codigo
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getLineaPresupuestariaSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      lineaPresupuestaria:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.linea_presupuestaria_codigo > b.linea_presupuestaria_codigo
+                ? 1
+                : b.linea_presupuestaria_codigo > a.linea_presupuestaria_codigo
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getPEP2Success, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      pep2s:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.pep2 > b.pep2 ? 1 : b.pep2 > a.pep2 ? -1 : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getIDOpexSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      ids_opex:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.id_opex > b.id_opex ? 1 : b.id_opex > a.id_opex ? -1 : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getCuentaSAPSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      cuentas_sap:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.cuenta_sap > b.cuenta_sap
+                ? 1
+                : b.cuenta_sap > a.cuenta_sap
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getCECOSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      cecos:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.ceco > b.ceco ? 1 : b.ceco > a.ceco ? -1 : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getProyectoSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      proyectos:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+            )
+          : [],
+    };
+  }),
   on(OtActions.getAdminContratoSuccess, (state, { response }) => ({
     ...state,
     adminContrato: response.data.items,

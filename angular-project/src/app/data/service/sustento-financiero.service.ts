@@ -32,7 +32,7 @@ export class SustentoFinancieroService {
     pmo_codigo: number
   ): Observable<Response<DataRespGetLP>> {
     return this.http.post<Response<DataRespGetLP>>(
-      `${this.apiUrl}/ot/sustento_financiero_capex_pmoc/get`,
+      `${this.apiUrl}/ot/lps/get`,
       { pmo_codigo }
     );
   }

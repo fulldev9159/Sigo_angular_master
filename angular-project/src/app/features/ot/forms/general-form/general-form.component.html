@@ -3,7 +3,7 @@
     <app-input ID="nombre-ot" [control]="form.get('nombre')" [label]="'Nombre de la orden de trabajo'"></app-input>
   </div>
 
-  <div id="contratosUser">
+  <div class="col-xs-12 col-md-6" id="contratosUser">
     <app-select [control]="form.get('contrato')" label="* Contrato">
       <ng-container options>
         <option value="null" selected disabled>Seleccione un contrato</option>

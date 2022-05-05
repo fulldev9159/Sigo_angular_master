@@ -15,7 +15,7 @@
         <ng-container card-header-title> </ng-container>
         <ng-container card-body> -->
   <div class="row justify-content-center" style="margin-bottom: 4rem;padding: 10px;">
-    <div class="col-xs-12 col-md-8">
+    <div class="col-xs-12 col-md-12">
       <app-general-form [form]="form.get('general')" #generalForm></app-general-form>
 
       <div class="col-12">
@@ -61,12 +61,12 @@
         <button (click)="save();" [disabled]="!valid || (saving$ | async) === true" class="btn btn-primary"><em class="pi pi-save mr-1" id="guardar-ot"></em>Guardar</button>
       </div>
     </div>
-    <div class="col-xs-12 col-md-4">
+    <!-- <div class="col-xs-12 col-md-4">
       <app-cubicacion-detail [cubicacion]="cubicacionSeleccionada"></app-cubicacion-detail>
       <ng-container *ngIf="(contractType$ | async) === 'Móvil'">
         <app-plan-proyecto-detail [nombrePlan]="nombre_plan_proyecto" [sitio]="sitioSeleccionado"></app-plan-proyecto-detail>
       </ng-container>
-    </div>
+    </div> -->
   </div>
   <!-- </ng-container>
       </app-card> -->

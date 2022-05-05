@@ -33,145 +33,6 @@ export class FormOtComponent implements OnInit, OnDestroy {
   // TABLE
 
   // EXTRAS
-  cubicaciones$: Observable<Cubicacion[]> = of([
-    {
-      agencia_codigo: '25',
-      agencia_estado: true,
-      agencia_id: 25,
-      agencia_nombre: 'RANCAGUA',
-      agencia_region_id: 6,
-      agencia_region_nombre: 'Región del Libertador General Bernardo O’Higg',
-      altura_desde: 'Edit 1714',
-      altura_hasta: 'Edit 1817',
-      asignado: 0,
-      cmarco_has_proveedor_id: 1,
-      codigo_acuerdo: '12121212',
-      contrato_id: 1,
-      contrato_marco_nombre: 'SBE',
-      contrato_marco_tipo_id: 1,
-      contrato_marco_tipo_nombre: 'Móvil',
-      creador_username: 'mgestor1',
-      creador_usuario_id: 2,
-      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
-      cubicacion_descripcion: 'Edit Cub descripción',
-      cubicacion_fecha_creacion: null,
-      cubicacion_id: 1,
-      cubicacion_nombre: 'CubMovil',
-      direccion_desde: 'Edit las casas norte',
-      direccion_hasta: 'Edit las casas sur',
-      ot_id: -1,
-      ot_nombre: '',
-      proveedor_id: 2,
-      proveedor_nombre: 'COASIN',
-      tipo_cubicacion_descripcion: 'Construcción',
-      tipo_cubicacion_id: 1,
-      total: 72240,
-      total_tipo_moneda: 'CLP',
-    },
-
-    {
-      agencia_codigo: '25',
-      agencia_estado: true,
-      agencia_id: 25,
-      agencia_nombre: 'RANCAGUA',
-      agencia_region_id: 6,
-      agencia_region_nombre: 'Región del Libertador General Bernardo O’Higg',
-      altura_desde: 'Edit 1714',
-      altura_hasta: 'Edit 1817',
-      asignado: 0,
-      cmarco_has_proveedor_id: 1,
-      codigo_acuerdo: '12121212',
-      contrato_id: 2,
-      contrato_marco_nombre: 'SBE',
-      contrato_marco_tipo_id: 1,
-      contrato_marco_tipo_nombre: 'Ordinario',
-      creador_username: 'mgestor1',
-      creador_usuario_id: 2,
-      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
-      cubicacion_descripcion: 'Edit Cub descripción',
-      cubicacion_fecha_creacion: null,
-      cubicacion_id: 2,
-      cubicacion_nombre: 'CubOrdinario',
-      direccion_desde: 'Edit las casas norte',
-      direccion_hasta: 'Edit las casas sur',
-      ot_id: -1,
-      ot_nombre: '',
-      proveedor_id: 2,
-      proveedor_nombre: 'COASIN',
-      tipo_cubicacion_descripcion: 'Construcción',
-      tipo_cubicacion_id: 1,
-      total: 72240,
-      total_tipo_moneda: 'CLP',
-    },
-    {
-      agencia_codigo: '25',
-      agencia_estado: true,
-      agencia_id: 25,
-      agencia_nombre: 'RANCAGUA',
-      agencia_region_id: 6,
-      agencia_region_nombre: 'Región del Libertador General Bernardo O’Higg',
-      altura_desde: 'Edit 1714',
-      altura_hasta: 'Edit 1817',
-      asignado: 0,
-      cmarco_has_proveedor_id: 1,
-      codigo_acuerdo: '12121212',
-      contrato_id: 3,
-      contrato_marco_nombre: 'SBE',
-      contrato_marco_tipo_id: 1,
-      contrato_marco_tipo_nombre: 'Fijo',
-      creador_username: 'mgestor1',
-      creador_usuario_id: 2,
-      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
-      cubicacion_descripcion: 'Edit Cub descripción',
-      cubicacion_fecha_creacion: null,
-      cubicacion_id: 3,
-      cubicacion_nombre: 'CubFijo',
-      direccion_desde: 'Edit las casas norte',
-      direccion_hasta: 'Edit las casas sur',
-      ot_id: -1,
-      ot_nombre: '',
-      proveedor_id: 2,
-      proveedor_nombre: 'COASIN',
-      tipo_cubicacion_descripcion: 'Construcción',
-      tipo_cubicacion_id: 1,
-      total: 72240,
-      total_tipo_moneda: 'CLP',
-    },
-    {
-      agencia_codigo: '25',
-      agencia_estado: true,
-      agencia_id: 25,
-      agencia_nombre: 'RANCAGUA',
-      agencia_region_id: 6,
-      agencia_region_nombre: 'Región del Libertador General Bernardo O’Higg',
-      altura_desde: 'Edit 1714',
-      altura_hasta: 'Edit 1817',
-      asignado: 0,
-      cmarco_has_proveedor_id: 1,
-      codigo_acuerdo: '12121212',
-      contrato_id: 4,
-      contrato_marco_nombre: 'SBE',
-      contrato_marco_tipo_id: 1,
-      contrato_marco_tipo_nombre: 'Bucle',
-      creador_username: 'mgestor1',
-      creador_usuario_id: 2,
-      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
-      cubicacion_descripcion: 'Edit Cub descripción',
-      cubicacion_fecha_creacion: null,
-      cubicacion_id: 4,
-      cubicacion_nombre: 'CubBucle',
-      direccion_desde: 'Edit las casas norte',
-      direccion_hasta: 'Edit las casas sur',
-      ot_id: -1,
-      ot_nombre: '',
-      proveedor_id: 2,
-      proveedor_nombre: 'COASIN',
-      tipo_cubicacion_descripcion: 'Construcción',
-      tipo_cubicacion_id: 1,
-      total: 72240,
-      total_tipo_moneda: 'CLP',
-    },
-  ]);
 
   authLogin: SessionData = null;
 
@@ -301,12 +162,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       this.form
         .get('general')
         .get('cubicacion_id')
-        .valueChanges.pipe(
-          withLatestFrom(
-            this.cubicaciones$
-            // this.otFacade.cubicaciones4OT$()
-          )
-        )
+        .valueChanges.pipe(withLatestFrom(this.otFacade.cubicaciones4OT$()))
         .subscribe(([cubicacion_id, cubicaciones]) => {
           this.resetPlanProyectoFormControl();
 
@@ -321,19 +177,16 @@ export class FormOtComponent implements OnInit, OnDestroy {
             if (this.cubicacionSeleccionada) {
               // TODO: checkear el tipo contrato de la cubicacion
               console.log(
-                this.cubicacionSeleccionada.contrato_marco_tipo_nombre
+                this.cubicacionSeleccionada.tipo_contrato_marco_nombre
               );
               const contractType =
-                this.cubicacionSeleccionada.contrato_marco_tipo_nombre;
+                this.cubicacionSeleccionada.tipo_contrato_marco_nombre;
 
               // TODO descomentar ésto cuando la obtención del tipo de contrato sea dinámica
               if (contractType === 'Fijo' || contractType === 'Ordinario') {
                 // TODO: se necesita obtener el listado de PMOs sin especificar un sitio
-                this.otFacade.getPMO(
-                  this.cubicacionSeleccionada.agencia_codigo
-                );
+                this.otFacade.getPMO('');
               }
-              this.otFacade.getPMO(this.cubicacionSeleccionada.agencia_codigo);
               this.contractType$.next(contractType);
             }
           } else {

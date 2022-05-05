@@ -5,38 +5,11 @@ export interface DataRespGetCubicaciones {
 }
 
 export interface Cubs4OT {
-  agencia_codigo: string;
-  agencia_estado: boolean;
-  agencia_id: number;
-  agencia_nombre: string;
-  agencia_region_id: number;
-  agencia_region_nombre: string;
-  altura_desde: string;
-  altura_hasta: string;
-  asignado: number;
-  cmarco_has_proveedor_id: number;
-  codigo_acuerdo: string;
-  contrato_id: number;
-  contrato_marco_nombre: string;
-  contrato_marco_tipo_id: number;
-  contrato_marco_tipo_nombre: string;
-  creador_username: string;
-  creador_usuario_id: number;
   creador_usuario_nombre: string;
   cubicacion_descripcion: string;
-  cubicacion_fecha_creacion: Date;
   cubicacion_id: number;
   cubicacion_nombre: string;
-  direccion_desde: string;
-  direccion_hasta: string;
-  ot_id: number;
-  ot_nombre: string;
-  proveedor_id: number;
-  proveedor_nombre: string;
-  tipo_cubicacion_descripcion: string;
-  tipo_cubicacion_id: number;
-  total: number;
-  total_tipo_moneda: string;
+  tipo_contrato_marco_nombre: string;
 }
 
 // GET PROYECTOS
