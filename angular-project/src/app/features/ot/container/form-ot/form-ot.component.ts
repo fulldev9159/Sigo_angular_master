@@ -122,12 +122,12 @@ export class FormOtComponent implements OnInit, OnDestroy {
       // ]),
     }),
     detalleAdjudicacion: new FormGroup({
-      fecha_adjudicacion: new FormControl(null, [Validators.required]),
-      numero_carta: new FormControl(null, [
+      carta_adjudicacion: new FormControl(null, [
         Validators.required,
         this.noWhitespace,
         Validators.maxLength(100),
       ]),
+      fecha_adjudicacion: new FormControl(null, [Validators.required]),
       numero_pedido: new FormControl(null, [
         Validators.required,
         this.noWhitespace,
@@ -533,6 +533,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
   }
 
   saveOrdinarioForm(): void {
+    // Trimpear los textos
     const {
       general: { nombre, tipo, cubicacion_id },
       sustentoFinanciero: {
@@ -551,7 +552,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
       detalleAdjudicacion: {
         fecha_adjudicacion,
-        numero_carta,
+        carta_adjudicacion,
         numero_pedido,
         materia,
       },
@@ -574,7 +575,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       },
 
       fecha_adjudicacion,
-      numero_carta,
+      carta_adjudicacion,
       numero_pedido,
       materia,
     };
