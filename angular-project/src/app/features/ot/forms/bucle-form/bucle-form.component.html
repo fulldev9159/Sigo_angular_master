@@ -1,32 +1,114 @@
 <div class="row" [formGroup]="form">
-  <!-- <div class="col-xs-12 col-md-6" id="control_nombre">
-    <app-input ID="nombre-ot" [control]="form.get('nombre')" [label]="'Nombre de la orden de trabajo'"></app-input>
-  </div>
 
-  <div class="col-xs-12 col-md-6" id="contratosUser">
-    <app-select [control]="form.get('contrato')" label="* Contrato">
+  <div class="col-xs-12 col-md-6" id="control-oficina-central">
+    <app-select [control]="form.get('oficina_central_id')" label="* Oficina Central:">
       <ng-container options>
-        <option value="null" selected disabled>Seleccione un contrato</option>
-        <ng-container *ngFor="let contrato of contratosUser4OT$|async">
+        <option value="null" selected disabled>Seleccione una oficina central</option>
+        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
           <option [value]="contrato.contrato_id">
             {{ contrato.model_contrato_id.nombre }}
           </option>
-        </ng-container>
+        </ng-container> -->
       </ng-container>
     </app-select>
   </div>
 
-  <div class="col-xs-12 col-md-6" id="control_cubicacion_id">
-    <app-select [control]="form.get('cubicacion_id')" label="Cubicación" ID="cubicacion-de-ot">
+  <div class="col-xs-12 col-md-6" id="control-solicitado-por">
+    <app-select [control]="form.get('solicitante_id')" label="* Solicitado por:">
       <ng-container options>
-        <option value="null" selected disabled>Seleccione cubicación</option>
-        <ng-container *ngFor="let cubicacion of cubicaciones$ | async">
-          <option [value]="cubicacion.cubicacion_id">
-            {{ cubicacion.cubicacion_nombre }}
+        <option value="null" selected disabled>Seleccione una persona</option>
+        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
+          <option [value]="contrato.contrato_id">
+            {{ contrato.model_contrato_id.nombre }}
           </option>
-        </ng-container>
+        </ng-container> -->
       </ng-container>
     </app-select>
-    <br>
-  </div> -->
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control_direccion">
+    <app-input [control]="form.get('direccion')" [label]="'Dirección'"></app-input>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control_altura">
+    <app-input [control]="form.get('altura')" [label]="'Altura'"></app-input>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control_piso">
+    <app-input [control]="form.get('piso')" [label]="'Piso'"></app-input>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control_departamento">
+    <app-input [control]="form.get('departamento')" [label]="'Departamento'"></app-input>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control-comuna">
+    <app-select [control]="form.get('comuna_id')" label="* Comuna:">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione una comuna</option>
+        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
+          <option [value]="contrato.contrato_id">
+            {{ contrato.model_contrato_id.nombre }}
+          </option>
+        </ng-container> -->
+      </ng-container>
+    </app-select>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control-tipo-red">
+    <app-select [control]="form.get('tipo_red_id')" label="* Tipo de Red:">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione un tipo de red</option>
+        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
+          <option [value]="contrato.contrato_id">
+            {{ contrato.model_contrato_id.nombre }}
+          </option>
+        </ng-container> -->
+      </ng-container>
+    </app-select>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control-tipo-trabajo">
+    <app-select [control]="form.get('tipo_trabajo_id')" label="* Tipo de trabajo:">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione un tipo de trabajo</option>
+        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
+          <option [value]="contrato.contrato_id">
+            {{ contrato.model_contrato_id.nombre }}
+          </option>
+        </ng-container> -->
+      </ng-container>
+    </app-select>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="control-tiene-boleta" formControlName="tiene_boleta_garantia">
+    <label class="form-check-label" for="defaultCheck1">
+      Tiene boleta de garantía?
+    </label>
+  </div>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="control-tiene-permiso" formControlName="tiene_permisos">
+    <label class="form-check-label" for="defaultCheck1">
+      Tiene permisos?
+    </label>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control-area-negocio">
+    <app-select [control]="form.get('area_negocio')" label="* Área de negocio:">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione área de negocio</option>
+        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
+          <option [value]="contrato.contrato_id">
+            {{ contrato.model_contrato_id.nombre }}
+          </option>
+        </ng-container> -->
+      </ng-container>
+    </app-select>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control_proyectista">
+    <app-input [control]="form.get('nombre_proyectista')" [label]="'Nombre de proyectista'"></app-input>
+  </div>
 </div>

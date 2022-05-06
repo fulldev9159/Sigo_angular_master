@@ -39,7 +39,7 @@
       </ng-container>
 
       <ng-container *ngIf="(contractType$ | async) === 'Ordinario'">
-        <app-detalle-adjudicacion-form [form]="form.get('bucle')" #bucleForm></app-detalle-adjudicacion-form>
+        <app-detalle-adjudicacion-form [form]="form.get('detalleAdjudicacion')" #detalleAdjudicacionForm></app-detalle-adjudicacion-form>
 
         <div class="col-12">
           <hr>
@@ -47,7 +47,7 @@
       </ng-container>
 
       <ng-container *ngIf="(contractType$ | async) === 'Bucle'">
-        <app-bucle-form [form]="form.get('general')" #generalForm></app-bucle-form>
+        <app-bucle-form [form]="form.get('bucle')" #bucleForm></app-bucle-form>
 
         <div class="col-12">
           <hr>
