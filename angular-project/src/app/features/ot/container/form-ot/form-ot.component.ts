@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
-import { RequestCreateOT } from '@storeOT/features/ot/ot.model';
 import { GeneralFormComponent } from '../../forms/general-form/general-form.component';
 import { PlanProyectoFormComponent } from '../../forms/plan-proyecto-form/plan-proyecto-form.component';
 import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero-form/sustento-financiero-form.component';
@@ -465,25 +464,25 @@ export class FormOtComponent implements OnInit, OnDestroy {
       extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
     } = this.form.getRawValue();
 
-    const request: RequestCreateOT = {
-      nombre,
-      tipo,
-      proyecto_id: +proyecto_id,
-      cubicacion_id: +cubicacion_id,
-      sitio_id: +sitio_id,
-      propietario_id: +this.authLogin.usuario_id,
-      fecha_inicio,
-      fecha_fin,
-      observaciones,
-      sustento_financiero: {
-        tipo_sustento: costos.toUpperCase(),
-        capex_id: null,
-        opex_id: null,
-        capex_provisorio: null,
-        opex_provisorio: null,
-      },
-    };
-
+    // const request: RequestCreateOT = {
+    //   nombre,
+    //   tipo,
+    //   proyecto_id: +proyecto_id,
+    //   cubicacion_id: +cubicacion_id,
+    //   sitio_id: +sitio_id,
+    //   propietario_id: +this.authLogin.usuario_id,
+    //   fecha_inicio,
+    //   fecha_fin,
+    //   observaciones,
+    //   sustento_financiero: {
+    //     tipo_sustento: costos.toUpperCase(),
+    //     capex_id: null,
+    //     opex_id: null,
+    //     capex_provisorio: null,
+    //     opex_provisorio: null,
+    //   },
+    // };
+    const request = null;
     if (costos.toUpperCase() === 'CAPEX') {
       if (pep2_capex_id === 'capex_provisorio') {
         request.sustento_financiero.capex_provisorio = {
@@ -506,7 +505,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.otFacade.postOt(request);
+    // this.otFacade.postOt(request);
   }
 
   saveFijoForm(): void {
@@ -575,7 +574,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     }
 
     console.log('SAVE contrato fijo', request);
-    this.otFacade.postOt(request);
+    // this.otFacade.postOt(request);
   }
 
   saveOrdinarioForm(): void {

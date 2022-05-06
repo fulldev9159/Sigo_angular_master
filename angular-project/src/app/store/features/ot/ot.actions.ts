@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import * as OtModel from './ot.model';
 import * as Data from '@data';
 import {
   DataInformeAvance,
@@ -25,6 +24,12 @@ import {
   DataRespGetProyectos,
   DataRespGetAdminContrato,
   Cubs4OT,
+  DataRespGetOficinaCentral,
+  DataRespGetSolicitadoPor,
+  DataRespGetComuna,
+  DataRespGetTipoDeRed,
+  DataRespGetTipoDeTrabajo,
+  DataRespGetAreaDeNegocio,
 } from '@data';
 import {
   DetalleActa,
@@ -191,6 +196,92 @@ export const getAdminContratoError = createAction(
   props<{ error: any }>()
 );
 
+// GET OFICINA CENTRAL
+export const getOficinaCentral = createAction(
+  '[OT] GET getOficinaCentral',
+  props<{ agencia_id: number }>()
+);
+
+export const getOficinaCentralSuccess = createAction(
+  '[OT] GET getOficinaCentral Success',
+  props<{ response: Response<DataRespGetOficinaCentral> }>()
+);
+
+export const getOficinaCentralError = createAction(
+  '[OT] GET getOficinaCentral Error',
+  props<{ error: any }>()
+);
+
+// GET SOLICITADO POR
+export const getSolicitadoPor = createAction('[OT] GET getSolicitadoPor');
+
+export const getSolicitadoPorSuccess = createAction(
+  '[OT] GET getSolicitadoPor Success',
+  props<{ response: Response<DataRespGetSolicitadoPor> }>()
+);
+
+export const getSolicitadoPorError = createAction(
+  '[OT] GET getSolicitadoPor Error',
+  props<{ error: any }>()
+);
+
+// GET COMUNA
+export const getComuna = createAction(
+  '[OT] GET getComuna',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getComunaSuccess = createAction(
+  '[OT] GET getComuna Success',
+  props<{ response: Response<DataRespGetComuna> }>()
+);
+
+export const getComunaError = createAction(
+  '[OT] GET getComuna Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO DE RED
+export const getTipoDeRed = createAction('[OT] GET getTipoDeRed');
+
+export const getTipoDeRedSuccess = createAction(
+  '[OT] GET getTipoDeRed Success',
+  props<{ response: Response<DataRespGetTipoDeRed> }>()
+);
+
+export const getTipoDeRedError = createAction(
+  '[OT] GET getComuna Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO DE TRABAJO
+export const getTipoDeTrabajo = createAction(
+  '[OT] GET getTipoDeTrabajo',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getTipoDeTrabajoSuccess = createAction(
+  '[OT] GET getTipoDeTrabajo Success',
+  props<{ response: Response<DataRespGetTipoDeTrabajo> }>()
+);
+
+export const getTipoDeTrabajoError = createAction(
+  '[OT] GET getTipoDeTrabajo Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO DE NEGOCIO
+export const getAreaDeNegocio = createAction('[OT] GET getAreaDeNegocio');
+
+export const getAreaDeNegocioSuccess = createAction(
+  '[OT] GET getAreaDeNegocio Success',
+  props<{ response: Response<DataRespGetAreaDeNegocio> }>()
+);
+
+export const getAreaDeNegocioError = createAction(
+  '[OT] GET getAreaDeNegocio Error',
+  props<{ error: any }>()
+);
 //  //////
 // GET OTs init
 
@@ -287,11 +378,6 @@ export const editOtError = createAction(
   props<{ error: any }>()
 );
 
-export const replyOt = createAction(
-  '[Ot Reply] POST Reply Ot',
-  props<{ ot: OtModel.RequestCreateOT }>()
-);
-
 export const replyOtSuccess = createAction(
   '[Ot Reply] POST Reply Ot Success',
   props<{ ot: Data.OT }>()
@@ -317,11 +403,6 @@ export const stateOtError = createAction(
   props<{ error: any }>()
 );
 
-export const postOt = createAction(
-  '[Ot Post] CREATE Ot',
-  props<{ ot: OtModel.RequestCreateOT | OtModel.RequestCreateOTFijo }>()
-);
-
 export const postOtSuccess = createAction(
   '[Ot Post] CREATE Ot Success',
   props<{ ot: Data.OT }>()
@@ -330,12 +411,6 @@ export const postOtSuccess = createAction(
 export const postOtError = createAction(
   '[Ot Post] CREATE Ot Error',
   props<{ error: any }>()
-);
-
-// IngreOT con SCE **
-export const postOtSCE = createAction(
-  '[Ot Post] CREATE Ot SCE',
-  props<{ ot: OtModel.RequestCreateOT }>()
 );
 
 export const postOtSCESuccess = createAction(

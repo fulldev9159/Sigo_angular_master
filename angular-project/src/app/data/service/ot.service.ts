@@ -24,6 +24,12 @@ import {
   DataRespGetCubicaciones,
   DataRespGetProyectos,
   DataRespGetAdminContrato,
+  DataRespGetOficinaCentral,
+  DataRespGetSolicitadoPor,
+  DataRespGetComuna,
+  DataRespGetTipoDeRed,
+  DataRespGetTipoDeTrabajo,
+  DataRespGetAreaDeNegocio,
 } from '@data';
 
 @Injectable({
@@ -51,6 +57,7 @@ export class OTService {
       data: {
         items: [
           {
+            agencia_id: 25,
             cubicacion_id: 1,
             cubicacion_nombre: 'OT Móvil',
             cubicacion_descripcion: 'asd',
@@ -58,6 +65,7 @@ export class OTService {
             tipo_contrato_marco_nombre: 'Móvil',
           },
           {
+            agencia_id: 25,
             creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
             cubicacion_descripcion: 'asd',
             cubicacion_id: 2,
@@ -65,6 +73,7 @@ export class OTService {
             tipo_contrato_marco_nombre: 'Fijo',
           },
           {
+            agencia_id: 25,
             creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
             cubicacion_descripcion: 'asd',
             cubicacion_id: 3,
@@ -72,9 +81,10 @@ export class OTService {
             tipo_contrato_marco_nombre: 'Ordinario',
           },
           {
+            agencia_id: 25,
             creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
             cubicacion_descripcion: 'asd',
-            cubicacion_id: 4,
+            cubicacion_id: 1,
             cubicacion_nombre: 'OT Bucle',
             tipo_contrato_marco_nombre: 'Bucle',
           },
@@ -98,6 +108,57 @@ export class OTService {
       { cubicacion_id }
     );
   }
+
+  // BUCLE
+
+  getOficinaCentral(
+    agencia_id: number
+  ): Observable<Response<DataRespGetOficinaCentral>> {
+    return this.http.post<Response<DataRespGetOficinaCentral>>(
+      `${this.apiUrl}/ot/centrales_agid/get`,
+      { agencia_id }
+    );
+  }
+
+  getSolicitadoPor(): Observable<Response<DataRespGetSolicitadoPor>> {
+    return this.http.post<Response<DataRespGetSolicitadoPor>>(
+      `${this.apiUrl}/ot/solicitantes/getall`,
+      {}
+    );
+  }
+
+  getComuna(cubicacion_id: number): Observable<Response<DataRespGetComuna>> {
+    return this.http.post<Response<DataRespGetComuna>>(
+      `${this.apiUrl}/ot/get_comunas_from_cubicacion/get`,
+      { cubicacion_id }
+    );
+  }
+
+  getTipoRed(): Observable<Response<DataRespGetTipoDeRed>> {
+    return this.http.post<Response<DataRespGetTipoDeRed>>(
+      `${this.apiUrl}/ot/tipo_red/getall`,
+      {}
+    );
+  }
+
+  getTipoTrabajo(
+    cubicacion_id: number
+  ): Observable<Response<DataRespGetTipoDeTrabajo>> {
+    return this.http.post<Response<DataRespGetTipoDeTrabajo>>(
+      `${this.apiUrl}/ot/get_tipo_trabajo_from_tipo_cubicacion/get`,
+      { cubicacion_id }
+    );
+  }
+
+  getAreaNegocio(): Observable<Response<DataRespGetAreaDeNegocio>> {
+    return this.http.post<Response<DataRespGetAreaDeNegocio>>(
+      `${this.apiUrl}/ot/ot_area_negocio/getall`,
+      {}
+    );
+  }
+
+  //
+  //
   ////
 
   getOTs(request: RequestGetOTs): Observable<{

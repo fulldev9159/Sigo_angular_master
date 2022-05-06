@@ -58,6 +58,32 @@ export const getAdminContrato = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.adminContrato
 );
+
+// BUCLE
+export const getOficinaCentral = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.oficinaCentral
+);
+export const getSolicitadoPor = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.solicitadoPor
+);
+export const getComuna = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.comuna
+);
+export const getTipoDeRed = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.tipoDeRed
+);
+export const getTipoDeTrabajo = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.tipoDeTrabajo
+);
+export const getAreaDeNegocio = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.areaDeNegocio
+);
 //  ////
 export const getOtEjecucion = createSelector(
   selectOt,

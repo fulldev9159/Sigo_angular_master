@@ -5,6 +5,7 @@ export interface DataRespGetCubicaciones {
 }
 
 export interface Cubs4OT {
+  agencia_id: number;
   creador_usuario_nombre: string;
   cubicacion_descripcion: string;
   cubicacion_id: number;
@@ -33,6 +34,72 @@ export interface AdminContrato4OT {
   id: number;
   nombre: string;
   cantidad_de_trabajo: number;
+}
+
+// BUCLE
+
+// GET OFICINA CENTRAL
+export interface DataRespGetOficinaCentral {
+  items: OficinaCentral[];
+}
+
+export interface OficinaCentral {
+  agencia_id: number;
+  descripcion: string;
+  id: number;
+  idafac: string;
+}
+
+// GET SOLICITAPO POR
+export interface DataRespGetSolicitadoPor {
+  items: SolicitadoPor[];
+}
+
+export interface SolicitadoPor {
+  descripcion: string;
+  id: number;
+}
+
+// GET COMUNA
+export interface DataRespGetComuna {
+  items: Comuna[];
+}
+
+export interface Comuna {
+  comuna_id: number;
+  comuna_nombre: string;
+}
+
+// GET TIPO DE RED
+export interface DataRespGetTipoDeRed {
+  items: TipoDeRed[];
+}
+
+export interface TipoDeRed {
+  descripcion: string;
+  estado: boolean;
+  id: number;
+}
+
+// GET TIPO DE TRABAJO
+export interface DataRespGetTipoDeTrabajo {
+  items: TipoDeTrabajo[];
+}
+
+export interface TipoDeTrabajo {
+  tipo_trabajo_codigo: string;
+  tipo_trabajo_descripcion: string;
+  tipo_trabajo_id: number;
+}
+
+// GET AREA DE NEGOCIO
+export interface DataRespGetAreaDeNegocio {
+  items: AreaDeNegocio[];
+}
+
+export interface AreaDeNegocio {
+  descripcion: string;
+  id: number;
 }
 // ////
 

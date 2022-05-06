@@ -17,6 +17,12 @@ import {
   Cubs4OT,
   Proyectos,
   AdminContrato4OT,
+  OficinaCentral,
+  SolicitadoPor,
+  Comuna,
+  TipoDeRed,
+  TipoDeTrabajo,
+  AreaDeNegocio,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -34,6 +40,14 @@ export interface StateOt {
   cecos: CECO[];
   proyectos: Proyectos[];
   adminContrato: AdminContrato4OT[];
+
+  // BUCLE
+  oficinaCentral: OficinaCentral[];
+  solicitadoPor: SolicitadoPor[];
+  comuna: Comuna[];
+  tipoDeRed: TipoDeRed[];
+  tipoDeTrabajo: TipoDeTrabajo[];
+  areaDeNegocio: AreaDeNegocio[];
 
   // ////
   filtro_propietario: string;
@@ -76,6 +90,15 @@ export const initialStateOt: StateOt = {
   cecos: [],
   proyectos: [],
   adminContrato: [],
+
+  // BUCLE
+  oficinaCentral: [],
+  solicitadoPor: [],
+  comuna: [],
+  tipoDeRed: [],
+  tipoDeTrabajo: [],
+  areaDeNegocio: [],
+
   // ////
   filtro_propietario: '',
   filtro_tipo: '',
@@ -243,6 +266,81 @@ export const reducerOt = createReducer(
     ...state,
     adminContrato: response.data.items,
   })),
+
+  // BUCLE
+  on(OtActions.getOficinaCentralSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      oficinaCentral: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+  on(OtActions.getSolicitadoPorSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      solicitadoPor: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+  on(OtActions.getComunaSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      comuna: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+  on(OtActions.getTipoDeRedSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      tipoDeRed: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+  on(OtActions.getTipoDeTrabajoSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      tipoDeTrabajo: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+  on(OtActions.getAreaDeNegocioSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      areaDeNegocio: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+
   //  ////
   on(OtActions.getOts, (state, { request }) => ({
     ...state,
@@ -469,11 +567,11 @@ export const reducerOt = createReducer(
     cecos: [],
   })),
 
-  on(OtActions.postOt, (state, { ot }) => ({
-    ...state,
-    saving: true,
-    errorSaving: null,
-  })),
+  // on(OtActions.postOt, (state, { ot }) => ({
+  //   ...state,
+  //   saving: true,
+  //   errorSaving: null,
+  // })),
   on(OtActions.postOtSuccess, (state, { ot }) => ({
     ...state,
     saving: false,

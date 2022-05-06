@@ -24,8 +24,6 @@ import * as otActions from './ot.actions';
 import { environment } from '@environment';
 
 import { Response } from '@storeOT/model';
-import * as OtModel from './ot.model';
-import { RequestGetOTs } from '@data';
 import {
   DetalleActa,
   LpusPorcentajes,
@@ -180,6 +178,78 @@ export class OtEffects {
     )
   );
 
+  getOficinaCentral$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getOficinaCentral),
+      concatMap(({ agencia_id }) =>
+        this.otService.getOficinaCentral(agencia_id).pipe(
+          map(response => otActions.getOficinaCentralSuccess({ response })),
+          catchError(error => of(otActions.getOficinaCentralError({ error })))
+        )
+      )
+    )
+  );
+
+  getSolicitadoPor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getSolicitadoPor),
+      concatMap(() =>
+        this.otService.getSolicitadoPor().pipe(
+          map(response => otActions.getSolicitadoPorSuccess({ response })),
+          catchError(error => of(otActions.getSolicitadoPorError({ error })))
+        )
+      )
+    )
+  );
+
+  getComuna$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getComuna),
+      concatMap(({ cubicacion_id }) =>
+        this.otService.getComuna(cubicacion_id).pipe(
+          map(response => otActions.getComunaSuccess({ response })),
+          catchError(error => of(otActions.getComunaError({ error })))
+        )
+      )
+    )
+  );
+
+  getTipoDeRed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeRed),
+      concatMap(() =>
+        this.otService.getTipoRed().pipe(
+          map(response => otActions.getTipoDeRedSuccess({ response })),
+          catchError(error => of(otActions.getTipoDeRedError({ error })))
+        )
+      )
+    )
+  );
+
+  getTipoDeTrabajo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeTrabajo),
+      concatMap(({ cubicacion_id }) =>
+        this.otService.getTipoTrabajo(cubicacion_id).pipe(
+          map(response => otActions.getTipoDeTrabajoSuccess({ response })),
+          catchError(error => of(otActions.getTipoDeTrabajoError({ error })))
+        )
+      )
+    )
+  );
+
+  getAreaDeNegocio$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getAreaDeNegocio),
+      concatMap(() =>
+        this.otService.getAreaNegocio().pipe(
+          map(response => otActions.getAreaDeNegocioSuccess({ response })),
+          catchError(error => of(otActions.getAreaDeNegocioError({ error })))
+        )
+      )
+    )
+  );
+
   // ////
 
   getOTs$ = createEffect(() =>
@@ -234,30 +304,30 @@ export class OtEffects {
     )
   );
 
-  postOt$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.postOt),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
-          tap(res => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Registro guardado',
-              detail: 'Registro se ha generado con Éxito!',
-            });
-            this.router.navigate(['app/ot/list-ot']);
-          }),
-          map((res: any) => {
-            if (+res.status.responseCode !== 0) {
-              this.snackService.showMessage(res.status.description, 'error');
-            }
-            return otActions.postOtSuccess({ ot: res.data.items });
-          }),
-          catchError(err => of(otActions.postOtError({ error: err })))
-        )
-      )
-    )
-  );
+  // postOt$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(otActions.postOt),
+  //     concatMap((data: any) =>
+  //       this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
+  //         tap(res => {
+  //           this.messageService.add({
+  //             severity: 'success',
+  //             summary: 'Registro guardado',
+  //             detail: 'Registro se ha generado con Éxito!',
+  //           });
+  //           this.router.navigate(['app/ot/list-ot']);
+  //         }),
+  //         map((res: any) => {
+  //           if (+res.status.responseCode !== 0) {
+  //             this.snackService.showMessage(res.status.description, 'error');
+  //           }
+  //           return otActions.postOtSuccess({ ot: res.data.items });
+  //         }),
+  //         catchError(err => of(otActions.postOtError({ error: err })))
+  //       )
+  //     )
+  //   )
+  // );
 
   getDetalleOt$ = createEffect(() =>
     this.actions$.pipe(

@@ -4,11 +4,11 @@
     <app-select [control]="form.get('oficina_central_id')" label="* Oficina Central:">
       <ng-container options>
         <option value="null" selected disabled>Seleccione una oficina central</option>
-        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
-          <option [value]="contrato.contrato_id">
-            {{ contrato.model_contrato_id.nombre }}
+        <ng-container *ngFor="let item of oficinaCentral$|async">
+          <option [value]="item.id">
+            {{ item.idafac }} - {{item.descripcion}}
           </option>
-        </ng-container> -->
+        </ng-container>
       </ng-container>
     </app-select>
   </div>
@@ -17,14 +17,16 @@
     <app-select [control]="form.get('solicitante_id')" label="* Solicitado por:">
       <ng-container options>
         <option value="null" selected disabled>Seleccione una persona</option>
-        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
-          <option [value]="contrato.contrato_id">
-            {{ contrato.model_contrato_id.nombre }}
+        <ng-container *ngFor="let item of solicitadoPor$|async">
+          <option [value]="item.id">
+            {{ item.descripcion }}
           </option>
-        </ng-container> -->
+        </ng-container>
       </ng-container>
     </app-select>
   </div>
+
+  <div class="col-xs-12 col-md-12" style="height: 31px;"></div>
 
   <div class="col-xs-12 col-md-6" id="control_direccion">
     <app-input [control]="form.get('direccion')" [label]="'Dirección'"></app-input>
@@ -46,24 +48,25 @@
     <app-select [control]="form.get('comuna_id')" label="* Comuna:">
       <ng-container options>
         <option value="null" selected disabled>Seleccione una comuna</option>
-        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
-          <option [value]="contrato.contrato_id">
-            {{ contrato.model_contrato_id.nombre }}
+        <ng-container *ngFor="let item of comuna$|async">
+          <option [value]="item.comuna_id">
+            {{ item.comuna_nombre }}
           </option>
-        </ng-container> -->
+        </ng-container>
       </ng-container>
     </app-select>
   </div>
-
+  <div class="col-xs-12 col-md-6"></div>
+  <div class="col-xs-12 col-md-12" style="height: 31px;"></div>
   <div class="col-xs-12 col-md-6" id="control-tipo-red">
     <app-select [control]="form.get('tipo_red_id')" label="* Tipo de Red:">
       <ng-container options>
         <option value="null" selected disabled>Seleccione un tipo de red</option>
-        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
-          <option [value]="contrato.contrato_id">
-            {{ contrato.model_contrato_id.nombre }}
+        <ng-container *ngFor="let item of tipoDeRed$|async">
+          <option [value]="item.id">
+            {{ item.descripcion }}
           </option>
-        </ng-container> -->
+        </ng-container>
       </ng-container>
     </app-select>
   </div>
@@ -72,38 +75,42 @@
     <app-select [control]="form.get('tipo_trabajo_id')" label="* Tipo de trabajo:">
       <ng-container options>
         <option value="null" selected disabled>Seleccione un tipo de trabajo</option>
-        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
-          <option [value]="contrato.contrato_id">
-            {{ contrato.model_contrato_id.nombre }}
+        <ng-container *ngFor="let item of tipoDeTrabajo$|async">
+          <option [value]="item.tipo_trabajo_id">
+            {{ item.tipo_trabajo_codigo }} - {{ item.tipo_trabajo_descripcion }}
           </option>
-        </ng-container> -->
+        </ng-container>
       </ng-container>
     </app-select>
   </div>
 
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="control-tiene-boleta" formControlName="tiene_boleta_garantia">
-    <label class="form-check-label" for="defaultCheck1">
-      Tiene boleta de garantía?
-    </label>
+  <div class="col-xs-12 col-md-12" style="height: 31px;"></div>
+  <div class="col-xs-12 col-md-12" id="control-check">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="control-tiene-boleta" formControlName="tiene_boleta_garantia">
+      <label class="form-check-label" for="defaultCheck1">
+        Tiene boleta de garantía?
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="control-tiene-permiso" formControlName="tiene_permisos">
+      <label class="form-check-label" for="defaultCheck1">
+        Tiene permisos?
+      </label>
+    </div>
   </div>
 
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="control-tiene-permiso" formControlName="tiene_permisos">
-    <label class="form-check-label" for="defaultCheck1">
-      Tiene permisos?
-    </label>
-  </div>
-
+  <div class="col-xs-12 col-md-12" style="height: 31px;"></div>
   <div class="col-xs-12 col-md-6" id="control-area-negocio">
     <app-select [control]="form.get('area_negocio')" label="* Área de negocio:">
       <ng-container options>
         <option value="null" selected disabled>Seleccione área de negocio</option>
-        <!-- <ng-container *ngFor="let contrato of oficinaCentral$|async">
-          <option [value]="contrato.contrato_id">
-            {{ contrato.model_contrato_id.nombre }}
+        <ng-container *ngFor="let item of areaDeNegocio$|async">
+          <option [value]="item.id">
+            {{ item.descripcion }}
           </option>
-        </ng-container> -->
+        </ng-container>
       </ng-container>
     </app-select>
   </div>

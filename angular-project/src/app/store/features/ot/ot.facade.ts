@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
-import * as OTmodel from './ot.model';
 import * as Data from '@data';
 import {
   ContratosUser,
@@ -24,6 +23,12 @@ import {
   Cubs4OT,
   Proyectos,
   AdminContrato4OT,
+  OficinaCentral,
+  SolicitadoPor,
+  Comuna,
+  TipoDeRed,
+  TipoDeTrabajo,
+  AreaDeNegocio,
 } from '@data';
 import {
   DetalleActa,
@@ -140,6 +145,55 @@ export class OtFacade {
     return this.store.select(otSelectors.getAdminContrato);
   }
 
+  // BUCLE
+  public getOficinaCentral(agencia_id: number): void {
+    this.store.dispatch(otActions.getOficinaCentral({ agencia_id }));
+  }
+
+  public getOficinaCentral$(): Observable<OficinaCentral[]> {
+    return this.store.select(otSelectors.getOficinaCentral);
+  }
+
+  public getSolicitadoPor(): void {
+    this.store.dispatch(otActions.getSolicitadoPor());
+  }
+
+  public getSolicitadoPor$(): Observable<SolicitadoPor[]> {
+    return this.store.select(otSelectors.getSolicitadoPor);
+  }
+
+  public getComuna(cubicacion_id: number): void {
+    this.store.dispatch(otActions.getComuna({ cubicacion_id }));
+  }
+
+  public getComuna$(): Observable<Comuna[]> {
+    return this.store.select(otSelectors.getComuna);
+  }
+
+  public getTipoDeRed(): void {
+    this.store.dispatch(otActions.getTipoDeRed());
+  }
+
+  public getTipoDeRed$(): Observable<TipoDeRed[]> {
+    return this.store.select(otSelectors.getTipoDeRed);
+  }
+
+  public getTipoDeTrabajo(cubicacion_id: number): void {
+    this.store.dispatch(otActions.getTipoDeTrabajo({ cubicacion_id }));
+  }
+
+  public getTipoDeTrabajo$(): Observable<TipoDeTrabajo[]> {
+    return this.store.select(otSelectors.getTipoDeTrabajo);
+  }
+
+  public getAreaDeNegocio(): void {
+    this.store.dispatch(otActions.getAreaDeNegocio());
+  }
+
+  public getAreaDeNegocio$(): Observable<AreaDeNegocio[]> {
+    return this.store.select(otSelectors.getAreaDeNegocio);
+  }
+
   // ////
   // OT
   public getOts(request: RequestGetOTs): void {
@@ -219,25 +273,25 @@ export class OtFacade {
   }
   // DELETE
 
-  // REPLY
-  public replyOt(ot: OTmodel.RequestCreateOT): void {
-    this.store.dispatch(otActions.replyOt({ ot }));
-  }
-  // REPLY
+  // // REPLY
+  // public replyOt(ot: OTmodel.RequestCreateOT): void {
+  //   this.store.dispatch(otActions.replyOt({ ot }));
+  // }
+  // // REPLY
 
-  // POST
-  public postOt(
-    ot: OTmodel.RequestCreateOT | OTmodel.RequestCreateOTFijo
-  ): void {
-    this.store.dispatch(otActions.postOt({ ot }));
-  }
+  // // POST
+  // public postOt(
+  //   ot: OTmodel.RequestCreateOT | OTmodel.RequestCreateOTFijo
+  // ): void {
+  //   this.store.dispatch(otActions.postOt({ ot }));
+  // }
 
-  // IngreOT con SCE ***
-  public postOtSCE(ot: OTmodel.RequestCreateOT): void {
-    this.store.dispatch(otActions.postOtSCE({ ot }));
-  }
-  // POST
-  // OT
+  // // IngreOT con SCE ***
+  // public postOtSCE(ot: OTmodel.RequestCreateOT): void {
+  //   this.store.dispatch(otActions.postOtSCE({ ot }));
+  // }
+  // // POST
+  // // OT
 
   // PLANS
   public getPlans(region_id: number): void {
