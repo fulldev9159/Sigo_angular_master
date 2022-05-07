@@ -16,7 +16,7 @@
 
 <ng-container *ngIf="DisplayLabelMode==='up'">
   <ng-container *ngIf="label !== ''">
-    <label>{{ label }}</label>
+    <label style=" margin-top: 1rem">{{ label }}</label>
   </ng-container>
   <ng-container *ngIf="control !== undefined">
     <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">

@@ -228,7 +228,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
                 this.cubicacionSeleccionada.tipo_contrato_marco_nombre;
 
               // TODO descomentar ésto cuando la obtención del tipo de contrato sea dinámica
-              if (contractType === 'Fijo' || contractType === 'Ordinario') {
+              if (
+                contractType === 'Fijo' ||
+                contractType === 'Ordinario' ||
+                contractType === 'Bucle'
+              ) {
                 // TODO: se necesita obtener el listado de PMOs sin especificar un sitio
                 this.otFacade.getPMO('');
               }

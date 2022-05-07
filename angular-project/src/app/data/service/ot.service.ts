@@ -48,49 +48,49 @@ export class OTService {
   getCubicaciones(
     contrato_id: number
   ): Observable<Response<DataRespGetCubicaciones>> {
-    // return this.http.post<Response<DataRespGetCubicaciones>>(
-    //   `${this.apiUrl}/ot/cubicaciones_from_contrato/get`,
-    //   { contrato_id }
-    // );
-    return of({
-      status: { code: 0, desc: 'OK' },
-      data: {
-        items: [
-          {
-            agencia_id: 25,
-            cubicacion_id: 1,
-            cubicacion_nombre: 'OT Móvil',
-            cubicacion_descripcion: 'asd',
-            creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
-            tipo_contrato_marco_nombre: 'Móvil',
-          },
-          {
-            agencia_id: 25,
-            creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
-            cubicacion_descripcion: 'asd',
-            cubicacion_id: 2,
-            cubicacion_nombre: 'OT Fijo',
-            tipo_contrato_marco_nombre: 'Fijo',
-          },
-          {
-            agencia_id: 25,
-            creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
-            cubicacion_descripcion: 'asd',
-            cubicacion_id: 3,
-            cubicacion_nombre: 'OT Ordinario',
-            tipo_contrato_marco_nombre: 'Ordinario',
-          },
-          {
-            agencia_id: 25,
-            creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
-            cubicacion_descripcion: 'asd',
-            cubicacion_id: 1,
-            cubicacion_nombre: 'OT Bucle',
-            tipo_contrato_marco_nombre: 'Bucle',
-          },
-        ],
-      },
-    });
+    return this.http.post<Response<DataRespGetCubicaciones>>(
+      `${this.apiUrl}/ot/cubicaciones_from_contrato/get`,
+      { contrato_id }
+    );
+    //   return of({
+    //     status: { code: 0, desc: 'OK' },
+    //     data: {
+    //       items: [
+    //         {
+    //           agencia_id: 25,
+    //           cubicacion_id: 1,
+    //           cubicacion_nombre: 'OT Móvil',
+    //           cubicacion_descripcion: 'asd',
+    //           creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+    //           tipo_contrato_marco_nombre: 'Móvil',
+    //         },
+    //         {
+    //           agencia_id: 25,
+    //           creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+    //           cubicacion_descripcion: 'asd',
+    //           cubicacion_id: 2,
+    //           cubicacion_nombre: 'OT Fijo',
+    //           tipo_contrato_marco_nombre: 'Fijo',
+    //         },
+    //         {
+    //           agencia_id: 25,
+    //           creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+    //           cubicacion_descripcion: 'asd',
+    //           cubicacion_id: 3,
+    //           cubicacion_nombre: 'OT Ordinario',
+    //           tipo_contrato_marco_nombre: 'Ordinario',
+    //         },
+    //         {
+    //           agencia_id: 25,
+    //           creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+    //           cubicacion_descripcion: 'asd',
+    //           cubicacion_id: 1,
+    //           cubicacion_nombre: 'OT Bucle',
+    //           tipo_contrato_marco_nombre: 'Bucle',
+    //         },
+    //       ],
+    //     },
+    //   });
   }
 
   getProyectos(): Observable<Response<DataRespGetProyectos>> {

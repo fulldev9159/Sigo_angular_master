@@ -55,6 +55,8 @@ update test environment:
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,'D010','T383','DIBUJ')\""
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,'D010','T382','DIBUJ')\""
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,'D010','T376','DIBUJ')\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,9)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set estado=1 where nombre='BUCLE'\""
   tags:
     - repo-machine
 
