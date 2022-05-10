@@ -166,6 +166,70 @@ export interface NumeroInternoHasOT {
   numero_interno: string;
   tipo_numero_interno_id: number;
 }
+
+export interface CreateOTBase {
+  adm_contrato_proxy_id: number;
+  proyecto_id: number;
+  nombre: string;
+  cubicacion_id: number;
+  observaciones: string;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  tipo_sustento: string;
+  es_sustento_provisorio: boolean;
+  pmo_codigo: number;
+  id_opex: string;
+  lp: string;
+  cuenta_sap: number;
+  pep2: string;
+  ceco: string;
+}
+
+export interface CreateOTOrdinario extends CreateOTBase {
+  carta_adjudicacion: string;
+  fecha_adjudicacion: Date;
+  numero_pedido: string;
+  materia: string;
+}
+export interface CreateOTMovil extends CreateOTBase {
+  plan_id: number;
+  sitio_plan_id: number;
+}
+
+export interface CreateOTBucle extends CreateOTBase {
+  oficina_central_id: number;
+  solicitante_id: number;
+  direccion: string;
+  altura: string;
+  piso: string;
+  departamento: string;
+  comuna_id: number;
+  tipo_red_id: number;
+  tipo_trabajo_id: number;
+  tiene_boleta_garantia: boolean;
+  tiene_permisos: boolean;
+  area_negocio: string;
+  nombre_proyectista: string;
+}
+
+export interface RequestCreateOTOrdinario {
+  ot_datos: CreateOTOrdinario;
+}
+export interface RequestCreateOTMovil {
+  ot_datos: CreateOTMovil;
+}
+
+export interface RequestCreateOTBucle {
+  ot_datos: CreateOTBucle;
+}
+
+export interface RequestCreateOTFijo {
+  ot_datos: CreateOTBase;
+  ot_numero_interno: {
+    tipo_numero_interno_id: number;
+    numero_interno: string[];
+  };
+}
 // ////
 
 // GET OTs init

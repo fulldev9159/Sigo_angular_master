@@ -19,7 +19,16 @@ import { SustentoFinancieroFormComponent } from '../../forms/sustento-financiero
 import { ExtrasFormComponent } from '../../forms/extras-form/extras-form.component';
 import { NumeroInternoFormComponent } from '../../forms/numero-interno-form/numero-interno-form.component';
 import { DetalleAdjudicacionFormComponent } from '../../forms/detalle-adjudicacion-form/detalle-adjudicacion-form.component';
-import { Cubicacion, Cubs4OT, SessionData, Sitio } from '@data';
+import {
+  Cubicacion,
+  Cubs4OT,
+  SessionData,
+  Sitio,
+  RequestCreateOTMovil,
+  RequestCreateOTBucle,
+  RequestCreateOTOrdinario,
+  RequestCreateOTFijo,
+} from '@data';
 import { BucleFormComponent } from '@featureOT/ot/forms/bucle-form/bucle-form.component';
 
 @Component({
@@ -109,9 +118,9 @@ export class FormOtComponent implements OnInit, OnDestroy {
     sustentoFinanciero: new FormGroup({
       costos: new FormControl('capex', []),
 
-      pmo_codigo: new FormControl(null, [Validators.required]),
-      lp_codigo: new FormControl(null, [Validators.required]),
-      pep2_capex_id: new FormControl(null, [Validators.required]),
+      pmo_codigo: new FormControl(null, []),
+      lp_codigo: new FormControl(null, []),
+      pep2_capex_id: new FormControl(null, []),
       pep2_provisorio: new FormControl(null, []),
 
       id_opex_codigo: new FormControl(null, []),
@@ -122,7 +131,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
     extras: new FormGroup({
       fecha_inicio: new FormControl(null, [Validators.required]),
       fecha_fin: new FormControl(null, [Validators.required]),
-      proyecto_id: new FormControl(null, [Validators.required]),
+      proyecto_id: new FormControl(null, []),
       observaciones: new FormControl(null, []),
       admin_contrato_id: new FormControl(null, []),
     }),
@@ -390,6 +399,18 @@ export class FormOtComponent implements OnInit, OnDestroy {
         this.sustentoFinancieroForm.touch();
         this.extrasForm.touch();
       }
+    } else if (contractType === 'Bucle') {
+      if (
+        this.generalForm &&
+        this.bucleForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        this.generalForm.touch();
+        this.bucleForm.touch();
+        this.sustentoFinancieroForm.touch();
+        this.extrasForm.touch();
+      }
     }
   }
 
@@ -438,6 +459,20 @@ export class FormOtComponent implements OnInit, OnDestroy {
           this.extrasForm.valid
         );
       }
+    } else if (contractType === 'Bucle') {
+      if (
+        this.generalForm &&
+        this.bucleForm &&
+        this.sustentoFinancieroForm &&
+        this.extrasForm
+      ) {
+        return (
+          this.generalForm.valid &&
+          this.bucleForm &&
+          this.sustentoFinancieroForm.valid &&
+          this.extrasForm.valid
+        );
+      }
     }
 
     return false;
@@ -454,6 +489,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
         this.saveFijoForm();
       } else if (contractType === 'Ordinario') {
         this.saveOrdinarioForm();
+      } else if (contractType === 'Bucle') {
+        this.saveBucleForm();
       }
     }
   }
@@ -475,49 +512,65 @@ export class FormOtComponent implements OnInit, OnDestroy {
         ceco_codigo,
         ceco_provisorio,
       },
-      extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
+      extras: {
+        fecha_inicio,
+        fecha_fin,
+        proyecto_id,
+        observaciones,
+        admin_contrato_id,
+      },
     } = this.form.getRawValue();
 
-    // const request: RequestCreateOT = {
-    //   nombre,
-    //   tipo,
-    //   proyecto_id: +proyecto_id,
-    //   cubicacion_id: +cubicacion_id,
-    //   sitio_id: +sitio_id,
-    //   propietario_id: +this.authLogin.usuario_id,
-    //   fecha_inicio,
-    //   fecha_fin,
-    //   observaciones,
-    //   sustento_financiero: {
-    //     tipo_sustento: costos.toUpperCase(),
-    //     capex_id: null,
-    //     opex_id: null,
-    //     capex_provisorio: null,
-    //     opex_provisorio: null,
-    //   },
-    // };
-    const request = null;
-    if (costos.toUpperCase() === 'CAPEX') {
-      if (pep2_capex_id === 'capex_provisorio') {
-        request.sustento_financiero.capex_provisorio = {
-          pmo_codigo: +pmo_codigo,
-          lp_codigo,
-          pep2_codigo: pep2_provisorio,
-        };
-      } else {
-        request.sustento_financiero.capex_id = +pep2_capex_id;
-      }
-    } else if (costos.toUpperCase() === 'OPEX') {
-      if (ceco_codigo === 'ceco_provisorio') {
-        request.sustento_financiero.opex_provisorio = {
-          id_opex: id_opex_codigo,
-          cuenta_sap: cuenta_sap_codigo,
-          ceco_codigo: ceco_provisorio,
-        };
-      } else {
-        request.sustento_financiero.opex_id = +ceco_codigo;
-      }
-    }
+    const request: RequestCreateOTMovil = {
+      ot_datos: {
+        adm_contrato_proxy_id: +admin_contrato_id,
+        proyecto_id: +proyecto_id,
+        nombre: nombre.trim(),
+        cubicacion_id: +cubicacion_id,
+        observaciones: observaciones.trim(),
+        fecha_inicio,
+        fecha_fin,
+        tipo_sustento: costos.toUpperCase(),
+        es_sustento_provisorio:
+          costos.toUpperCase() === 'CAPEX' ? pep2_provisorio : ceco_provisorio,
+        pmo_codigo: costos.toUpperCase() === 'CAPEX' ? +pmo_codigo : pmo_codigo,
+        id_opex: id_opex_codigo,
+        lp: lp_codigo,
+        cuenta_sap:
+          costos.toUpperCase() === 'CAPEX'
+            ? cuenta_sap_codigo
+            : +cuenta_sap_codigo,
+        pep2: pep2_capex_id,
+        ceco: ceco_codigo,
+
+        plan_id: +plan_proyecto_id,
+        sitio_plan_id: +sitio_id,
+      },
+    };
+    console.log('OT MOVIL', request);
+
+    // const request = null;
+    // if (costos.toUpperCase() === 'CAPEX') {
+    //   if (pep2_capex_id === 'capex_provisorio') {
+    //     request.sustento_financiero.capex_provisorio = {
+    //       pmo_codigo: +pmo_codigo,
+    //       lp_codigo,
+    //       pep2_codigo: pep2_provisorio,
+    //     };
+    //   } else {
+    //     request.sustento_financiero.capex_id = +pep2_capex_id;
+    //   }
+    // } else if (costos.toUpperCase() === 'OPEX') {
+    //   if (ceco_codigo === 'ceco_provisorio') {
+    //     request.sustento_financiero.opex_provisorio = {
+    //       id_opex: id_opex_codigo,
+    //       cuenta_sap: cuenta_sap_codigo,
+    //       ceco_codigo: ceco_provisorio,
+    //     };
+    //   } else {
+    //     request.sustento_financiero.opex_id = +ceco_codigo;
+    //   }
+    // }
 
     // this.otFacade.postOt(request);
   }
@@ -663,6 +716,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
 
     console.log('SAVE contrato fijo', request);
   }
+
+  saveBucleForm(): void {}
 
   get values(): any {
     return this.form ? this.form.getRawValue() : null;
