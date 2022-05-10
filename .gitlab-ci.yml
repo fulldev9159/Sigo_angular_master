@@ -57,6 +57,13 @@ update test environment:
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob(actividad_id,servicio_cod,unidad_obra_cod,clave) values (6,'D010','T376','DIBUJ')\""
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,9)\""
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set estado=1 where nombre='BUCLE'\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,24)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set tipo_contrato_id=3 where nombre="Contrato Ordinario"\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,2)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into cmarco_has_proveedor select 9,24,proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable from cmarco_has_proveedor where id in (7)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into cmarco_has_proveedor select 10,24,proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable from cmarco_has_proveedor where id in (8)\""
+      - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into proveedor_has_servicio(agencia_id,servicio_id,precio,tipo_moneda_id,numero_producto,cmarco_has_proveedor_id,estado) values(8,2,12070,2,"ZWC - NUMERO PRODUCTO 8",9,1)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (8,6,123123,2,"2022-03-28 16:16:07.867369","2027-05-06 20:02:29.000000",1)\""
   tags:
     - repo-machine
 
