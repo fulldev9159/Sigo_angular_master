@@ -84,6 +84,18 @@ export const getAreaDeNegocio = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.areaDeNegocio
 );
+
+// MOVIL
+export const getPlans = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.planes
+);
+
+export const getSitio = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.sitio
+);
+
 //  ////
 export const getOtEjecucion = createSelector(
   selectOt,
@@ -111,16 +123,6 @@ export const getOtFilters = createSelector(
     filtro_propietario: state.filtro_propietario,
     filtro_tipo: state.filtro_tipo,
   })
-);
-
-export const getPlans = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.planes
-);
-
-export const getSites = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.sitio
 );
 
 export const getDetalleOt = createSelector(

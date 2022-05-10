@@ -5,7 +5,6 @@ import {
   DataRespGetContratosUser,
   LpuInformeAvanceDetalle,
   OT,
-  Plan,
   PMO,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
@@ -30,6 +29,8 @@ import {
   DataRespGetTipoDeRed,
   DataRespGetTipoDeTrabajo,
   DataRespGetAreaDeNegocio,
+  DataRespGetPlanDeProyecto,
+  DataRespGetSitio,
 } from '@data';
 import {
   DetalleActa,
@@ -282,6 +283,35 @@ export const getAreaDeNegocioError = createAction(
   '[OT] GET getAreaDeNegocio Error',
   props<{ error: any }>()
 );
+
+// GET PLAN DE PROYECTO
+export const getPlanDeProyecto = createAction('[OT] GET getPlanDeProyecto');
+
+export const getPlanDeProyectoSuccess = createAction(
+  '[OT] GET getPlanDeProyecto Success',
+  props<{ response: Response<DataRespGetPlanDeProyecto> }>()
+);
+
+export const getPlanDeProyectoError = createAction(
+  '[OT] GET getPlanDeProyecto Error',
+  props<{ error: any }>()
+);
+
+// GET SITIO
+export const getSitio = createAction(
+  '[OT] GET getSitio',
+  props<{ plan_id: number }>()
+);
+
+export const getSitioSuccess = createAction(
+  '[OT] GET getSitio Success',
+  props<{ response: Response<DataRespGetSitio> }>()
+);
+
+export const getSitioError = createAction(
+  '[OT] GET getSitio Error',
+  props<{ error: any }>()
+);
 //  //////
 // GET OTs init
 
@@ -311,40 +341,6 @@ export const getOtsError = createAction(
   props<{ error: any }>()
 );
 // GET OTs end
-
-// GET Planes init
-export const getPlans = createAction(
-  '[OT] GET Planes',
-  props<{ region_id: number }>()
-);
-
-export const getPlansSuccess = createAction(
-  '[OT] GET Planes Success',
-  props<{ plans: Plan[]; status: StatusResponse }>()
-);
-
-export const getPlansError = createAction(
-  '[OT] GET Planes Error',
-  props<{ error: any }>()
-);
-// GET Planes end
-
-// GET Sitio init
-export const getSite = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan',
-  props<{ plan_proyecto_id: number; region_id: number }>()
-);
-
-export const getSiteSuccess = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan Success',
-  props<{ sitio: Sitio[]; status: StatusResponse }>()
-);
-
-export const getSiteError = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan Error',
-  props<{ error: any }>()
-);
-// GET Sitio end
 
 // GET PMO end
 

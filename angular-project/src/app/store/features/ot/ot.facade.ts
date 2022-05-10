@@ -8,13 +8,11 @@ import {
   ContratosUser,
   DataInformeAvance,
   LpuInformeAvanceDetalle,
-  Plan,
   PMO,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
   RequestSaveInformeAvanceAdmin,
-  Sitio,
   LP,
   PEP2,
   OPEX,
@@ -29,6 +27,8 @@ import {
   TipoDeRed,
   TipoDeTrabajo,
   AreaDeNegocio,
+  PlanDeProyecto,
+  Sitio,
 } from '@data';
 import {
   DetalleActa,
@@ -194,6 +194,24 @@ export class OtFacade {
     return this.store.select(otSelectors.getAreaDeNegocio);
   }
 
+  // MOVIL
+
+  public getPlanDeProyecto(): void {
+    this.store.dispatch(otActions.getPlanDeProyecto());
+  }
+
+  public getPlanDeProyecto$(): Observable<PlanDeProyecto[]> {
+    return this.store.select(otSelectors.getPlans);
+  }
+
+  public getSitio(plan_id: number): void {
+    this.store.dispatch(otActions.getSitio({ plan_id }));
+  }
+
+  public getSitio$(): Observable<Sitio[]> {
+    return this.store.select(otSelectors.getSitio);
+  }
+
   // ////
   // OT
   public getOts(request: RequestGetOTs): void {
@@ -292,26 +310,6 @@ export class OtFacade {
   // }
   // // POST
   // // OT
-
-  // PLANS
-  public getPlans(region_id: number): void {
-    this.store.dispatch(otActions.getPlans({ region_id }));
-  }
-
-  public getPlans$(): Observable<Plan[]> {
-    return this.store.select(otSelectors.getPlans);
-  }
-  // PLANS
-
-  // SITES
-  public getSitesAction(plan_proyecto_id: number, region_id: number): void {
-    this.store.dispatch(otActions.getSite({ plan_proyecto_id, region_id }));
-  }
-
-  public getSitesSelector$(): Observable<Sitio[]> {
-    return this.store.select(otSelectors.getSites);
-  }
-  // SITES
 
   // Detalle OT
   public getDetalleOtAction(id: number): void {

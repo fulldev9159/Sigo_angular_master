@@ -16,8 +16,6 @@ export * from './service/lpus.service';
 export * from './service/notify-after.service';
 export * from './service/informe-avance.service';
 export * from './service/acta.service';
-export * from './service/plan-proyecto.service';
-export * from './service/sitio.service';
 export * from './service/sustento-financiero.service';
 export * from './service/alert-message.service';
 export * from './service/area.service';

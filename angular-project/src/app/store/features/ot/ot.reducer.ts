@@ -5,9 +5,7 @@ import copy from 'fast-copy';
 
 import {
   DataInformeAvance,
-  Plan,
   PMO,
-  Sitio,
   ContratosUser,
   LP,
   PEP2,
@@ -23,6 +21,8 @@ import {
   TipoDeRed,
   TipoDeTrabajo,
   AreaDeNegocio,
+  Sitio,
+  PlanDeProyecto,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -49,6 +49,10 @@ export interface StateOt {
   tipoDeTrabajo: TipoDeTrabajo[];
   areaDeNegocio: AreaDeNegocio[];
 
+  // MOVIL
+  planes: PlanDeProyecto[];
+  sitio: Sitio[];
+
   // ////
   filtro_propietario: string;
   filtro_tipo: string;
@@ -58,8 +62,6 @@ export interface StateOt {
   otsEjecucion: Data.OT[];
   itemsAbiertas: Data.OT[];
   itemsCerradas: Data.OT[];
-  planes: Plan[];
-  sitio: Sitio[];
 
   detalleOt: Data.DataRspDetalleOT;
 
@@ -99,6 +101,10 @@ export const initialStateOt: StateOt = {
   tipoDeTrabajo: [],
   areaDeNegocio: [],
 
+  // MOVIL
+  planes: [],
+  sitio: [],
+
   // ////
   filtro_propietario: '',
   filtro_tipo: '',
@@ -108,8 +114,6 @@ export const initialStateOt: StateOt = {
   otsEjecucion: [],
   itemsAbiertas: [],
   itemsCerradas: [],
-  planes: [],
-  sitio: [],
 
   detalleOt: null,
 
@@ -272,70 +276,116 @@ export const reducerOt = createReducer(
     const temp = copy(response.data.items);
     return {
       ...state,
-      oficinaCentral: temp,
-      // .length > 0
-      //   ? temp.sort((a, b) =>
-      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-      //     )
-      //   : [],
+      oficinaCentral:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.idafac > b.idafac ? 1 : b.idafac > a.idafac ? -1 : 0
+            )
+          : [],
     };
   }),
   on(OtActions.getSolicitadoPorSuccess, (state, { response }) => {
     const temp = copy(response.data.items);
     return {
       ...state,
-      solicitadoPor: temp,
-      // .length > 0
-      //   ? temp.sort((a, b) =>
-      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-      //     )
-      //   : [],
+      solicitadoPor:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [],
     };
   }),
   on(OtActions.getComunaSuccess, (state, { response }) => {
     const temp = copy(response.data.items);
     return {
       ...state,
-      comuna: temp,
-      // .length > 0
-      //   ? temp.sort((a, b) =>
-      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-      //     )
-      //   : [],
+      comuna:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.comuna_nombre > b.comuna_nombre
+                ? 1
+                : b.comuna_nombre > a.comuna_nombre
+                ? -1
+                : 0
+            )
+          : [],
     };
   }),
   on(OtActions.getTipoDeRedSuccess, (state, { response }) => {
     const temp = copy(response.data.items);
     return {
       ...state,
-      tipoDeRed: temp,
-      // .length > 0
-      //   ? temp.sort((a, b) =>
-      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-      //     )
-      //   : [],
+      tipoDeRed:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [],
     };
   }),
   on(OtActions.getTipoDeTrabajoSuccess, (state, { response }) => {
     const temp = copy(response.data.items);
     return {
       ...state,
-      tipoDeTrabajo: temp,
-      // .length > 0
-      //   ? temp.sort((a, b) =>
-      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-      //     )
-      //   : [],
+      tipoDeTrabajo:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.tipo_trabajo_descripcion > b.tipo_trabajo_descripcion
+                ? 1
+                : b.tipo_trabajo_descripcion > a.tipo_trabajo_descripcion
+                ? -1
+                : 0
+            )
+          : [],
     };
   }),
   on(OtActions.getAreaDeNegocioSuccess, (state, { response }) => {
     const temp = copy(response.data.items);
     return {
       ...state,
-      areaDeNegocio: temp,
+      areaDeNegocio:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+
+  on(OtActions.getPlanDeProyectoSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      planes:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+            )
+          : [],
+    };
+  }),
+
+  on(OtActions.getSitioSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      sitio: temp,
       // .length > 0
       //   ? temp.sort((a, b) =>
-      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //       a.descripcion > b.descripcion ? 1 : b.descripcion > a.descripcion ? -1 : 0
       //     )
       //   : [],
     };
@@ -383,17 +433,6 @@ export const reducerOt = createReducer(
   //   ...state,
   //   items: [...state.items, payload.ot],
   // })),
-
-  on(OtActions.getPlans, state => state),
-  on(OtActions.getPlansSuccess, (state, payload) => ({
-    ...state,
-    planes: payload.plans,
-  })),
-
-  on(OtActions.getSiteSuccess, (state, { sitio }) => ({
-    ...state,
-    sitio,
-  })),
 
   on(OtActions.getDetalleOt, state => state),
   on(OtActions.getDetalleOtSuccess, (state, payload) => ({

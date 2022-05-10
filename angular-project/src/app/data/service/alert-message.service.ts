@@ -82,10 +82,10 @@ export class AlertMessageActions {
       'No posee información de informe de avance';
     this.msgNegocio[otActions.getDataInformeActaSuccess.type] =
       'El acta no posee información';
-    this.msgNegocio[otActions.getPlansSuccess.type] =
-      'No existen planes de proyectos';
-    this.msgNegocio[otActions.getSiteSuccess.type] =
-      'No existen sitios para el proyecto escogido';
+    // this.msgNegocio[otActions.getPlansSuccess.type] =
+    //   'No existen planes de proyectos';
+    // this.msgNegocio[otActions.getSiteSuccess.type] =
+    //   'No existen sitios para el proyecto escogido';
     this.msgNegocio[otActions.getPMOSuccess.type] = 'No existen pmos';
     this.msgNegocio[otActions.getDetalleActaSuccess.type] =
       'No existen valores para el acta';
@@ -129,9 +129,9 @@ export class AlertMessageActions {
       'Falló la ejecución del rechazo';
     // msg[otActions.inicializarInformeAvanceError.type] =
     //   'Falló la inicialización del informe';
-    this.msgErr[otActions.getPlansError.type] = 'No se pudo obtener los planes';
-    this.msgErr[otActions.getOtsError.type] = 'Falló la obtención de OTs';
-    this.msgErr[otActions.getSiteError.type] = 'Falló la obtención de Sitios';
+    // this.msgErr[otActions.getPlansError.type] = 'No se pudo obtener los planes';
+    // this.msgErr[otActions.getOtsError.type] = 'Falló la obtención de OTs';
+    // this.msgErr[otActions.getSiteError.type] = 'Falló la obtención de Sitios';
     this.msgErr[otActions.getPmoError.type] = 'Falló la obtención de PMOs';
     this.msgErr[otActions.getDetalleActaError.type] =
       'Falló la obtención de información del acta';

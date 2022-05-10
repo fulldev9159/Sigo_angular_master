@@ -30,6 +30,8 @@ import {
   DataRespGetTipoDeRed,
   DataRespGetTipoDeTrabajo,
   DataRespGetAreaDeNegocio,
+  DataRespGetPlanDeProyecto,
+  DataRespGetSitio,
 } from '@data';
 
 @Injectable({
@@ -154,6 +156,21 @@ export class OTService {
     return this.http.post<Response<DataRespGetAreaDeNegocio>>(
       `${this.apiUrl}/ot/ot_area_negocio/getall`,
       {}
+    );
+  }
+
+  // MOVIL
+  getPlanDeProyecto(): Observable<Response<DataRespGetPlanDeProyecto>> {
+    return this.http.post<Response<DataRespGetPlanDeProyecto>>(
+      `${this.apiUrl}/ot/plan/getall`,
+      {}
+    );
+  }
+
+  getSitio(plan_id: number): Observable<Response<DataRespGetSitio>> {
+    return this.http.post<Response<DataRespGetSitio>>(
+      `${this.apiUrl}/ot/sitio_plan_plid/get`,
+      { plan_id }
     );
   }
 

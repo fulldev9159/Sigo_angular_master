@@ -38,8 +38,6 @@ export class OtEffects {
     private snackService: SnackBarService,
     private otService: Data.OTService,
     private informeAvanceService: Data.InformAvenceService,
-    private planProyectoService: Data.PlanProyectoService,
-    private sitioService: Data.SitioService,
     private sustentofinancieroService: Data.SustentoFinancieroService,
     private actaService: Data.ActaService,
     private userService: Data.UserService,
@@ -250,6 +248,30 @@ export class OtEffects {
     )
   );
 
+  getPlanDeProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getPlanDeProyecto),
+      concatMap(() =>
+        this.otService.getPlanDeProyecto().pipe(
+          map(response => otActions.getPlanDeProyectoSuccess({ response })),
+          catchError(error => of(otActions.getPlanDeProyectoError({ error })))
+        )
+      )
+    )
+  );
+
+  getSitio$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getSitio),
+      concatMap(({ plan_id }) =>
+        this.otService.getSitio(plan_id).pipe(
+          map(response => otActions.getSitioSuccess({ response })),
+          catchError(error => of(otActions.getSitioError({ error })))
+        )
+      )
+    )
+  );
+
   // ////
 
   getOTs$ = createEffect(() =>
@@ -267,38 +289,6 @@ export class OtEffects {
             }
           }),
           catchError(error => of(otActions.getOtsError({ error })))
-        )
-      )
-    )
-  );
-
-  getPlans$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getPlans),
-      concatMap(({ region_id }) =>
-        this.planProyectoService.getPlans4OT(region_id).pipe(
-          map(({ plans, status }) =>
-            otActions.getPlansSuccess({ plans, status })
-          ),
-          catchError(error => of(otActions.getPlansError({ error })))
-        )
-      )
-    )
-  );
-
-  getSites$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getSite),
-      concatMap(({ plan_proyecto_id, region_id }) =>
-        this.sitioService.getSitios4OT(plan_proyecto_id, region_id).pipe(
-          map(
-            ({ sitio, status }) =>
-              otActions.getSiteSuccess({
-                sitio,
-                status,
-              }),
-            catchError(err => of(otActions.getSiteError({ error: err })))
-          )
         )
       )
     )
@@ -1383,8 +1373,6 @@ export class OtEffects {
           otActions.saveInformeActaError,
           otActions.rechazarInformeActaError,
           // otActions.inicializarInformeAvanceError,
-          otActions.getPlansError,
-          otActions.getSiteError,
           otActions.getPmoError,
           otActions.getDetalleActaError
         ),

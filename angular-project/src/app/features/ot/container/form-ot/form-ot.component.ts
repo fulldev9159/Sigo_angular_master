@@ -244,25 +244,25 @@ export class FormOtComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.subscription.add(
-      this.form
-        .get('planProyecto')
-        .get('plan_proyecto_id')
-        .valueChanges.pipe(
-          withLatestFrom(
-            this.otFacade.getPlans$().pipe(map(planes => planes || []))
-          )
-        )
-        .subscribe(([plan_proyecto_id, planes]) => {
-          this.nombre_plan_proyecto = null;
-          if (plan_proyecto_id !== null && plan_proyecto_id !== undefined) {
-            const plan = planes.find(p => +p.id === +plan_proyecto_id);
-            if (plan) {
-              this.nombre_plan_proyecto = plan.nombre;
-            }
-          }
-        })
-    );
+    // this.subscription.add(
+    //   this.form
+    //     .get('planProyecto')
+    //     .get('plan_proyecto_id')
+    //     .valueChanges.pipe(
+    //       withLatestFrom(
+    //         this.otFacade.getPlans$().pipe(map(planes => planes || []))
+    //       )
+    //     )
+    //     .subscribe(([plan_proyecto_id, planes]) => {
+    //       this.nombre_plan_proyecto = null;
+    //       if (plan_proyecto_id !== null && plan_proyecto_id !== undefined) {
+    //         const plan = planes.find(p => +p.id === +plan_proyecto_id);
+    //         if (plan) {
+    //           this.nombre_plan_proyecto = plan.nombre;
+    //         }
+    //       }
+    //     })
+    // );
 
     this.subscription.add(
       this.form
@@ -270,7 +270,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
         .get('sitio_id')
         .valueChanges.pipe(
           withLatestFrom(
-            this.otFacade.getSitesSelector$().pipe(map(sitios => sitios || []))
+            this.otFacade.getSitio$().pipe(map(sitios => sitios || []))
           )
         )
         .subscribe(([sitio_id, sitios]) => {
