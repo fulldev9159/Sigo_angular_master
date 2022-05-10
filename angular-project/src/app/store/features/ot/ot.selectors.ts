@@ -96,6 +96,16 @@ export const getSitio = createSelector(
   (state: fromOt.StateOt) => state.sitio
 );
 
+// FIJO
+export const getTipoNumeroInterno = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.tipoNumeroInterno
+);
+
+export const getNumeroInternoHasOT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.numeroInternoHasOT
+);
 //  ////
 export const getOtEjecucion = createSelector(
   selectOt,

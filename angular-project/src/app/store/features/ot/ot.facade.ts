@@ -29,6 +29,8 @@ import {
   AreaDeNegocio,
   PlanDeProyecto,
   Sitio,
+  TipoNumeroInterno,
+  NumeroInternoHasOT,
 } from '@data';
 import {
   DetalleActa,
@@ -210,6 +212,25 @@ export class OtFacade {
 
   public getSitio$(): Observable<Sitio[]> {
     return this.store.select(otSelectors.getSitio);
+  }
+
+  // FIJO
+  // TIPO NUMERO INTERNO
+  public getTipoNumeroInterno(): void {
+    this.store.dispatch(otActions.getTipoNumeroInterno());
+  }
+
+  public getTipoNumeroInterno$(): Observable<TipoNumeroInterno[]> {
+    return this.store.select(otSelectors.getTipoNumeroInterno);
+  }
+
+  // NUMERO INTERNO HAS OT
+  public getNumeroInternoHasOT(numero_interno: string): void {
+    this.store.dispatch(otActions.getNumeroInternoHasOT({ numero_interno }));
+  }
+
+  public getNumeroInternoHasOT$(): Observable<NumeroInternoHasOT[]> {
+    return this.store.select(otSelectors.getNumeroInternoHasOT);
   }
 
   // ////

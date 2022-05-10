@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Subscription, BehaviorSubject, of, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
@@ -19,6 +26,7 @@ import { BucleFormComponent } from '@featureOT/ot/forms/bucle-form/bucle-form.co
   selector: 'app-form-ot',
   templateUrl: './form-ot.component.html',
   styleUrls: ['./form-ot.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
@@ -120,12 +128,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
     }),
     numeroInterno: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
-      numeros_internos: new FormArray([]),
-      // numero_interno: new FormControl(null, [
-      //   Validators.required,
-      //   this.noWhitespace,
-      //   Validators.maxLength(100),
-      // ]),
+      // numeros_internos: new FormArray([]),
+      numero_interno: new FormControl([]),
     }),
     detalleAdjudicacion: new FormGroup({
       carta_adjudicacion: new FormControl(null, [
@@ -197,11 +201,17 @@ export class FormOtComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private otFacade: OtFacade,
     private cubageFacade: CubicacionFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.otFacade.resetData();
+    // this.subscription.add(
+    //   this.otFacade.getNumeroInternoHasOT$().subscribe(() => {
+    //     this.detector.detectChanges();
+    //   })
+    // );
 
     this.subscription.add(
       this.form

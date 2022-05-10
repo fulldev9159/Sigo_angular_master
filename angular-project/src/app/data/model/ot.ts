@@ -142,6 +142,30 @@ export interface Sitio {
   tipo: string;
   vendor: string;
 }
+
+// FIJO
+
+// NUMERO INTERNO
+export interface DataRespGetTipoNumeroInterno {
+  items: TipoNumeroInterno[];
+}
+
+export interface TipoNumeroInterno {
+  id: number;
+  nombre: string;
+}
+
+// NUMERO INTERNO HAS OT
+export interface DataRespGetNumeroInternoHasOT {
+  items: NumeroInternoHasOT[];
+}
+
+export interface NumeroInternoHasOT {
+  id: number;
+  ot_id: number;
+  numero_interno: string;
+  tipo_numero_interno_id: number;
+}
 // ////
 
 // GET OTs init

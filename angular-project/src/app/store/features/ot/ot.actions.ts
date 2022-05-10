@@ -31,6 +31,8 @@ import {
   DataRespGetAreaDeNegocio,
   DataRespGetPlanDeProyecto,
   DataRespGetSitio,
+  DataRespGetTipoNumeroInterno,
+  DataRespGetNumeroInternoHasOT,
 } from '@data';
 import {
   DetalleActa,
@@ -310,6 +312,38 @@ export const getSitioSuccess = createAction(
 
 export const getSitioError = createAction(
   '[OT] GET getSitio Error',
+  props<{ error: any }>()
+);
+
+// FIJO
+// TIPO NUMERO INTERNO
+export const getTipoNumeroInterno = createAction(
+  '[OT] GET getTipoNumeroInterno'
+);
+
+export const getTipoNumeroInternoSuccess = createAction(
+  '[OT] GET getTipoNumeroInterno Success',
+  props<{ response: Response<DataRespGetTipoNumeroInterno> }>()
+);
+
+export const getTipoNumeroInternoError = createAction(
+  '[OT] GET getTipoNumeroInterno Error',
+  props<{ error: any }>()
+);
+
+// NUMERO INTERNO HAS OT
+export const getNumeroInternoHasOT = createAction(
+  '[OT] GET getNumeroInternoHasOT',
+  props<{ numero_interno: string }>()
+);
+
+export const getNumeroInternoHasOTSuccess = createAction(
+  '[OT] GET getNumeroInternoHasOT Success',
+  props<{ response: Response<DataRespGetNumeroInternoHasOT> }>()
+);
+
+export const getNumeroInternoHasOTError = createAction(
+  '[OT] GET getNumeroInternoHasOT Error',
   props<{ error: any }>()
 );
 //  //////

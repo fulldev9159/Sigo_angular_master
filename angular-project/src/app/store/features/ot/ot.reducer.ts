@@ -23,6 +23,8 @@ import {
   AreaDeNegocio,
   Sitio,
   PlanDeProyecto,
+  TipoNumeroInterno,
+  NumeroInternoHasOT,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -52,6 +54,10 @@ export interface StateOt {
   // MOVIL
   planes: PlanDeProyecto[];
   sitio: Sitio[];
+
+  // FIJO
+  tipoNumeroInterno: TipoNumeroInterno[];
+  numeroInternoHasOT: NumeroInternoHasOT[];
 
   // ////
   filtro_propietario: string;
@@ -104,6 +110,10 @@ export const initialStateOt: StateOt = {
   // MOVIL
   planes: [],
   sitio: [],
+
+  // FIJO
+  tipoNumeroInterno: [],
+  numeroInternoHasOT: [],
 
   // ////
   filtro_propietario: '',
@@ -382,10 +392,36 @@ export const reducerOt = createReducer(
     const temp = copy(response.data.items);
     return {
       ...state,
-      sitio: temp,
+      sitio:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+            )
+          : [],
+    };
+  }),
+
+  on(OtActions.getTipoNumeroInternoSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      tipoNumeroInterno: temp,
       // .length > 0
       //   ? temp.sort((a, b) =>
-      //       a.descripcion > b.descripcion ? 1 : b.descripcion > a.descripcion ? -1 : 0
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+
+  on(OtActions.getNumeroInternoHasOTSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      numeroInternoHasOT: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
       //     )
       //   : [],
     };

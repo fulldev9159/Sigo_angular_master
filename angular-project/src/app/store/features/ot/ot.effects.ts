@@ -272,6 +272,36 @@ export class OtEffects {
     )
   );
 
+  // FIJO
+  // TIPO NUMERO INTERNO
+  getTipoNumeroInterno$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTipoNumeroInterno),
+      concatMap(() =>
+        this.otService.getTipoNumeroInterno().pipe(
+          map(response => otActions.getTipoNumeroInternoSuccess({ response })),
+          catchError(error =>
+            of(otActions.getTipoNumeroInternoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // NUMERO INTERNO HAS OT
+  getNumeroInternoHasOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getNumeroInternoHasOT),
+      concatMap(({ numero_interno }) =>
+        this.otService.getNumeroInternoHasOT(numero_interno).pipe(
+          map(response => otActions.getNumeroInternoHasOTSuccess({ response })),
+          catchError(error =>
+            of(otActions.getNumeroInternoHasOTError({ error }))
+          )
+        )
+      )
+    )
+  );
   // ////
 
   getOTs$ = createEffect(() =>

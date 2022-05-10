@@ -32,6 +32,8 @@ import {
   DataRespGetAreaDeNegocio,
   DataRespGetPlanDeProyecto,
   DataRespGetSitio,
+  DataRespGetTipoNumeroInterno,
+  DataRespGetNumeroInternoHasOT,
 } from '@data';
 
 @Injectable({
@@ -171,6 +173,23 @@ export class OTService {
     return this.http.post<Response<DataRespGetSitio>>(
       `${this.apiUrl}/ot/sitio_plan_plid/get`,
       { plan_id }
+    );
+  }
+
+  // FIJO
+  getTipoNumeroInterno(): Observable<Response<DataRespGetTipoNumeroInterno>> {
+    return this.http.post<Response<DataRespGetTipoNumeroInterno>>(
+      `${this.apiUrl}/configuration/tipo_numero_interno/getall`,
+      {}
+    );
+  }
+
+  getNumeroInternoHasOT(
+    numero_interno: string
+  ): Observable<Response<DataRespGetNumeroInternoHasOT>> {
+    return this.http.post<Response<DataRespGetNumeroInternoHasOT>>(
+      `${this.apiUrl}/ot/ot_has_numero_interno_niid/get`,
+      { numero_interno }
     );
   }
 
