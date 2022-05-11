@@ -606,34 +606,11 @@ export class FormOtComponent implements OnInit, OnDestroy {
       },
     };
 
-    // if (costos.toUpperCase() === 'CAPEX') {
-    //   if (pep2_capex_id === 'capex_provisorio') {
-    //     request.sustento_financiero.capex_provisorio = {
-    //       pmo_codigo: +pmo_codigo,
-    //       lp_codigo,
-    //       pep2_codigo: pep2_provisorio,
-    //     };
-    //   } else {
-    //     request.sustento_financiero.capex_id = +pep2_capex_id;
-    //   }
-    // } else if (costos.toUpperCase() === 'OPEX') {
-    //   if (ceco_codigo === 'ceco_provisorio') {
-    //     request.sustento_financiero.opex_provisorio = {
-    //       id_opex: id_opex_codigo,
-    //       cuenta_sap: cuenta_sap_codigo,
-    //       ceco_codigo: ceco_provisorio,
-    //     };
-    //   } else {
-    //     request.sustento_financiero.opex_id = +ceco_codigo;
-    //   }
-    // }
-
     console.log('SAVE contrato fijo', request);
-    // this.otFacade.postOt(request);
+    this.otFacade.createOT(request);
   }
 
   saveOrdinarioForm(): void {
-    // Trimpear los textos
     const {
       general: { nombre, tipo, cubicacion_id },
       sustentoFinanciero: {
@@ -696,7 +673,86 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.otFacade.createOT(request);
   }
 
-  saveBucleForm(): void {}
+  saveBucleForm(): void {
+    const {
+      general: { nombre, tipo, cubicacion_id },
+      sustentoFinanciero: {
+        costos,
+
+        pmo_codigo,
+        lp_codigo,
+        pep2_capex_id,
+        pep2_provisorio,
+
+        id_opex_codigo,
+        cuenta_sap_codigo,
+        ceco_codigo,
+        ceco_provisorio,
+      },
+      extras: {
+        fecha_inicio,
+        fecha_fin,
+        proyecto_id,
+        observaciones,
+        admin_contrato_id,
+      },
+      bucle: {
+        oficina_central_id,
+        solicitante_id,
+        direccion,
+        altura,
+        piso,
+        departamento,
+        comuna_id,
+        tipo_red_id,
+        tipo_trabajo_id,
+        tiene_boleta_garantia,
+        tiene_permisos,
+        area_negocio,
+        nombre_proyectista,
+      },
+    } = this.form.getRawValue();
+
+    const request: RequestCreateOTBucle = {
+      ot_datos: {
+        adm_contrato_proxy_id: +admin_contrato_id,
+        proyecto_id: proyecto_id === null ? null : +proyecto_id,
+        nombre: nombre.trim(),
+        cubicacion_id: +cubicacion_id,
+        observaciones: observaciones.trim(),
+        fecha_inicio,
+        fecha_fin,
+        tipo_sustento: costos.toUpperCase(),
+        es_sustento_provisorio:
+          costos.toUpperCase() === 'CAPEX' ? pep2_provisorio : ceco_provisorio,
+        pmo_codigo: costos.toUpperCase() === 'CAPEX' ? +pmo_codigo : pmo_codigo,
+        id_opex: id_opex_codigo,
+        lp: lp_codigo,
+        cuenta_sap:
+          costos.toUpperCase() === 'CAPEX'
+            ? cuenta_sap_codigo
+            : +cuenta_sap_codigo,
+        pep2: pep2_capex_id,
+        ceco: ceco_codigo,
+
+        oficina_central_id: +oficina_central_id,
+        solicitante_id: +solicitante_id,
+        direccion: direccion.trim(),
+        altura: altura.trim(),
+        piso: piso.trim(),
+        departamento: departamento.trim(),
+        comuna_id: +comuna_id,
+        tipo_red_id: +tipo_red_id,
+        tipo_trabajo_id: +tipo_trabajo_id,
+        tiene_boleta_garantia,
+        tiene_permisos,
+        area_negocio: area_negocio.trim(),
+        nombre_proyectista: nombre_proyectista.trim(),
+      },
+    };
+    console.log('SAVE contrato BUCLE', request);
+    this.otFacade.createOT(request);
+  }
 
   get values(): any {
     return this.form ? this.form.getRawValue() : null;

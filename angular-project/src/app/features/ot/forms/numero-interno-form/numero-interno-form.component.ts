@@ -84,10 +84,10 @@ export class NumeroInternoFormComponent implements OnInit, OnDestroy {
       })
     );
 
-    const group = new FormGroup({
-      numero_interno: new FormControl('', [Validators.required]),
-    });
-    (this.form.get('numeros_internos') as FormArray).push(group);
+    // const group = new FormGroup({
+    //   numero_interno: new FormControl('', [Validators.required]),
+    // });
+    // (this.form.get('numeros_internos') as FormArray).push(group);
   }
 
   checkTipoNumeroInternoAndEnable(
