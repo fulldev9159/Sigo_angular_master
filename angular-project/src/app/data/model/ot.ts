@@ -213,17 +213,21 @@ export interface CreateOTBucle extends CreateOTBase {
 }
 
 export interface RequestCreateOTOrdinario {
+  id: number;
   ot_datos: CreateOTOrdinario;
 }
 export interface RequestCreateOTMovil {
+  id: number;
   ot_datos: CreateOTMovil;
 }
 
 export interface RequestCreateOTBucle {
+  id: number;
   ot_datos: CreateOTBucle;
 }
 
 export interface RequestCreateOTFijo {
+  id: number;
   ot_datos: CreateOTBase;
   ot_numero_interno: {
     tipo_numero_interno_id: number;

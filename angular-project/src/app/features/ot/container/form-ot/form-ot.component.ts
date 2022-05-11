@@ -520,11 +520,12 @@ export class FormOtComponent implements OnInit, OnDestroy {
         admin_contrato_id,
       },
     } = this.form.getRawValue();
-
+    console.log(plan_proyecto_id);
     const request: RequestCreateOTMovil = {
+      id: null,
       ot_datos: {
         adm_contrato_proxy_id: +admin_contrato_id,
-        proyecto_id: +proyecto_id,
+        proyecto_id: proyecto_id === null ? null : +proyecto_id,
         nombre: nombre.trim(),
         cubicacion_id: +cubicacion_id,
         observaciones: observaciones.trim(),
@@ -548,7 +549,7 @@ export class FormOtComponent implements OnInit, OnDestroy {
       },
     };
     console.log('OT MOVIL', request);
-
+    this.otFacade.createOT(request);
     // const request = null;
     // if (costos.toUpperCase() === 'CAPEX') {
     //   if (pep2_capex_id === 'capex_provisorio') {

@@ -302,6 +302,20 @@ export class OtEffects {
       )
     )
   );
+
+  // CREATE OT
+  createOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.createOT),
+      concatMap(({ request }) =>
+        this.otService.createOT(request).pipe(
+          map(response => otActions.createOTSuccess({ response })),
+          catchError(error => of(otActions.createOTError({ error })))
+        )
+      )
+    )
+  );
+
   // ////
 
   getOTs$ = createEffect(() =>

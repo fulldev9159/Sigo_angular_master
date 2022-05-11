@@ -34,6 +34,10 @@ import {
   DataRespGetSitio,
   DataRespGetTipoNumeroInterno,
   DataRespGetNumeroInternoHasOT,
+  RequestCreateOTMovil,
+  RequestCreateOTFijo,
+  RequestCreateOTOrdinario,
+  RequestCreateOTBucle,
 } from '@data';
 
 @Injectable({
@@ -193,6 +197,17 @@ export class OTService {
     );
   }
 
+  // CREATE OT
+
+  createOT(
+    request:
+      | RequestCreateOTBucle
+      | RequestCreateOTFijo
+      | RequestCreateOTMovil
+      | RequestCreateOTOrdinario
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}/ot/ot/save`, request);
+  }
   //
   //
   ////

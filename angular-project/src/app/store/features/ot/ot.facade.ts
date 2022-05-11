@@ -31,6 +31,10 @@ import {
   Sitio,
   TipoNumeroInterno,
   NumeroInternoHasOT,
+  RequestCreateOTMovil,
+  RequestCreateOTFijo,
+  RequestCreateOTOrdinario,
+  RequestCreateOTBucle,
 } from '@data';
 import {
   DetalleActa,
@@ -231,6 +235,17 @@ export class OtFacade {
 
   public getNumeroInternoHasOT$(): Observable<NumeroInternoHasOT[]> {
     return this.store.select(otSelectors.getNumeroInternoHasOT);
+  }
+
+  // CREATE OT
+  public createOT(
+    request:
+      | RequestCreateOTBucle
+      | RequestCreateOTFijo
+      | RequestCreateOTMovil
+      | RequestCreateOTOrdinario
+  ): void {
+    this.store.dispatch(otActions.createOT({ request }));
   }
 
   // ////

@@ -33,6 +33,10 @@ import {
   DataRespGetSitio,
   DataRespGetTipoNumeroInterno,
   DataRespGetNumeroInternoHasOT,
+  RequestCreateOTMovil,
+  RequestCreateOTFijo,
+  RequestCreateOTOrdinario,
+  RequestCreateOTBucle,
 } from '@data';
 import {
   DetalleActa,
@@ -346,6 +350,29 @@ export const getNumeroInternoHasOTError = createAction(
   '[OT] GET getNumeroInternoHasOT Error',
   props<{ error: any }>()
 );
+
+// CREATE OT
+export const createOT = createAction(
+  '[OT] GET createOT',
+  props<{
+    request:
+      | RequestCreateOTBucle
+      | RequestCreateOTFijo
+      | RequestCreateOTMovil
+      | RequestCreateOTOrdinario;
+  }>()
+);
+
+export const createOTSuccess = createAction(
+  '[OT] GET createOT Success',
+  props<{ response: Response<any> }>()
+);
+
+export const createOTError = createAction(
+  '[OT] GET createOT Error',
+  props<{ error: any }>()
+);
+
 //  //////
 // GET OTs init
 
