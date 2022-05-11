@@ -520,9 +520,8 @@ export class FormOtComponent implements OnInit, OnDestroy {
         admin_contrato_id,
       },
     } = this.form.getRawValue();
-    console.log(plan_proyecto_id);
+
     const request: RequestCreateOTMovil = {
-      id: null,
       ot_datos: {
         adm_contrato_proxy_id: +admin_contrato_id,
         proyecto_id: proyecto_id === null ? null : +proyecto_id,
@@ -550,7 +549,63 @@ export class FormOtComponent implements OnInit, OnDestroy {
     };
     console.log('OT MOVIL', request);
     this.otFacade.createOT(request);
-    // const request = null;
+  }
+
+  saveFijoForm(): void {
+    const {
+      general: { nombre, tipo, cubicacion_id },
+      sustentoFinanciero: {
+        costos,
+
+        pmo_codigo,
+        lp_codigo,
+        pep2_capex_id,
+        pep2_provisorio,
+
+        id_opex_codigo,
+        cuenta_sap_codigo,
+        ceco_codigo,
+        ceco_provisorio,
+      },
+      extras: {
+        fecha_inicio,
+        fecha_fin,
+        proyecto_id,
+        observaciones,
+        admin_contrato_id,
+      },
+      numeroInterno: { tipo_numero_interno_id, numero_interno },
+    } = this.form.getRawValue();
+
+    const request: RequestCreateOTFijo = {
+      ot_datos: {
+        adm_contrato_proxy_id: +admin_contrato_id,
+        proyecto_id: proyecto_id === null ? null : +proyecto_id,
+        nombre: nombre.trim(),
+        cubicacion_id: +cubicacion_id,
+        observaciones: observaciones.trim(),
+        fecha_inicio,
+        fecha_fin,
+        tipo_sustento: costos.toUpperCase(),
+        es_sustento_provisorio:
+          costos.toUpperCase() === 'CAPEX' ? pep2_provisorio : ceco_provisorio,
+        pmo_codigo: costos.toUpperCase() === 'CAPEX' ? +pmo_codigo : pmo_codigo,
+        id_opex: id_opex_codigo,
+        lp: lp_codigo,
+        cuenta_sap:
+          costos.toUpperCase() === 'CAPEX'
+            ? cuenta_sap_codigo
+            : +cuenta_sap_codigo,
+        pep2: pep2_capex_id,
+        ceco: ceco_codigo,
+      },
+
+      ot_numero_interno: {
+        tipo_numero_interno_id: +tipo_numero_interno_id,
+        numero_interno,
+      },
+    };
+
     // if (costos.toUpperCase() === 'CAPEX') {
     //   if (pep2_capex_id === 'capex_provisorio') {
     //     request.sustento_financiero.capex_provisorio = {
@@ -573,74 +628,6 @@ export class FormOtComponent implements OnInit, OnDestroy {
     //   }
     // }
 
-    // this.otFacade.postOt(request);
-  }
-
-  saveFijoForm(): void {
-    const {
-      general: { nombre, tipo, cubicacion_id },
-      sustentoFinanciero: {
-        costos,
-
-        pmo_codigo,
-        lp_codigo,
-        pep2_capex_id,
-        pep2_provisorio,
-
-        id_opex_codigo,
-        cuenta_sap_codigo,
-        ceco_codigo,
-        ceco_provisorio,
-      },
-      extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
-      numeroInterno: { tipo_numero_interno_id, numeros_internos },
-    } = this.form.getRawValue();
-
-    const request = {
-      nombre,
-      tipo,
-      cubicacion_id: +cubicacion_id,
-      propietario_id: +this.authLogin.usuario_id,
-      fecha_inicio,
-      fecha_fin,
-      observaciones,
-      proyecto_id: +proyecto_id,
-      sustento_financiero: {
-        tipo_sustento: costos.toUpperCase(),
-        capex_id: null,
-        opex_id: null,
-        capex_provisorio: null,
-        opex_provisorio: null,
-      },
-
-      tipo_numero_interno_id: +tipo_numero_interno_id,
-      numero_interno: numeros_internos.map(
-        numero_interno => numero_interno.numero_interno
-      ),
-    };
-
-    if (costos.toUpperCase() === 'CAPEX') {
-      if (pep2_capex_id === 'capex_provisorio') {
-        request.sustento_financiero.capex_provisorio = {
-          pmo_codigo: +pmo_codigo,
-          lp_codigo,
-          pep2_codigo: pep2_provisorio,
-        };
-      } else {
-        request.sustento_financiero.capex_id = +pep2_capex_id;
-      }
-    } else if (costos.toUpperCase() === 'OPEX') {
-      if (ceco_codigo === 'ceco_provisorio') {
-        request.sustento_financiero.opex_provisorio = {
-          id_opex: id_opex_codigo,
-          cuenta_sap: cuenta_sap_codigo,
-          ceco_codigo: ceco_provisorio,
-        };
-      } else {
-        request.sustento_financiero.opex_id = +ceco_codigo;
-      }
-    }
-
     console.log('SAVE contrato fijo', request);
     // this.otFacade.postOt(request);
   }
@@ -662,60 +649,51 @@ export class FormOtComponent implements OnInit, OnDestroy {
         ceco_codigo,
         ceco_provisorio,
       },
-      extras: { fecha_inicio, fecha_fin, proyecto_id, observaciones },
+      extras: {
+        fecha_inicio,
+        fecha_fin,
+        proyecto_id,
+        observaciones,
+        admin_contrato_id,
+      },
       detalleAdjudicacion: {
-        fecha_adjudicacion,
         carta_adjudicacion,
+        fecha_adjudicacion,
         numero_pedido,
         materia,
       },
     } = this.form.getRawValue();
 
-    const request = {
-      nombre,
-      tipo,
-      cubicacion_id: +cubicacion_id,
-      propietario_id: +this.authLogin.usuario_id,
-      fecha_inicio,
-      fecha_fin,
-      observaciones,
-      sustento_financiero: {
+    const request: RequestCreateOTOrdinario = {
+      ot_datos: {
+        adm_contrato_proxy_id: +admin_contrato_id,
+        proyecto_id: proyecto_id === null ? null : +proyecto_id,
+        nombre: nombre.trim(),
+        cubicacion_id: +cubicacion_id,
+        observaciones: observaciones.trim(),
+        fecha_inicio,
+        fecha_fin,
         tipo_sustento: costos.toUpperCase(),
-        capex_id: null,
-        opex_id: null,
-        capex_provisorio: null,
-        opex_provisorio: null,
+        es_sustento_provisorio:
+          costos.toUpperCase() === 'CAPEX' ? pep2_provisorio : ceco_provisorio,
+        pmo_codigo: costos.toUpperCase() === 'CAPEX' ? +pmo_codigo : pmo_codigo,
+        id_opex: id_opex_codigo,
+        lp: lp_codigo,
+        cuenta_sap:
+          costos.toUpperCase() === 'CAPEX'
+            ? cuenta_sap_codigo
+            : +cuenta_sap_codigo,
+        pep2: pep2_capex_id,
+        ceco: ceco_codigo,
+
+        carta_adjudicacion: carta_adjudicacion.trim(),
+        fecha_adjudicacion,
+        numero_pedido: numero_pedido.trim(),
+        materia: materia.trim(),
       },
-
-      fecha_adjudicacion,
-      carta_adjudicacion,
-      numero_pedido,
-      materia,
     };
-
-    if (costos.toUpperCase() === 'CAPEX') {
-      if (pep2_capex_id === 'capex_provisorio') {
-        request.sustento_financiero.capex_provisorio = {
-          pmo_codigo: +pmo_codigo,
-          lp_codigo,
-          pep2_codigo: pep2_provisorio,
-        };
-      } else {
-        request.sustento_financiero.capex_id = +pep2_capex_id;
-      }
-    } else if (costos.toUpperCase() === 'OPEX') {
-      if (ceco_codigo === 'ceco_provisorio') {
-        request.sustento_financiero.opex_provisorio = {
-          id_opex: id_opex_codigo,
-          cuenta_sap: cuenta_sap_codigo,
-          ceco_codigo: ceco_provisorio,
-        };
-      } else {
-        request.sustento_financiero.opex_id = +ceco_codigo;
-      }
-    }
-
     console.log('SAVE contrato fijo', request);
+    this.otFacade.createOT(request);
   }
 
   saveBucleForm(): void {}
