@@ -427,6 +427,65 @@ export const reducerOt = createReducer(
     };
   }),
 
+  on(OtActions.resetData, (state, payload) => ({
+    ...initialStateOt,
+  })),
+  on(OtActions.resetContrato, (state, payload) => ({
+    ...state,
+    cubicacionSeleccionada: null,
+    pmos: [],
+    lineaPresupuestaria: [],
+    pep2s: [],
+    ids_opex: [],
+    cuentas_sap: [],
+    cecos: [],
+    proyectos: [],
+    adminContrato: [],
+
+    // BUCLE
+    oficinaCentral: [],
+    solicitadoPor: [],
+    comuna: [],
+    tipoDeRed: [],
+    tipoDeTrabajo: [],
+    areaDeNegocio: [],
+
+    // MOVIL
+    planes: [],
+    sitio: [],
+
+    // FIJO
+    tipoNumeroInterno: [],
+    numeroInternoHasOT: [],
+  })),
+  on(OtActions.resetPlan, (state, payload) => ({
+    ...state,
+    planes: [],
+  })),
+  on(OtActions.resetSitio, (state, payload) => ({
+    ...state,
+    sitio: [],
+  })),
+  on(OtActions.resetPMO, (state, payload) => ({
+    ...state,
+    pmos: [],
+  })),
+  on(OtActions.resetSAP, (state, payload) => ({
+    ...state,
+    cuentas_sap: [],
+  })),
+  on(OtActions.resetLPs, (state, payload) => ({
+    ...state,
+    lineaPresupuestaria: [],
+  })),
+  on(OtActions.resetPEP2, (state, payload) => ({
+    ...state,
+    pep2s: [],
+  })),
+  on(OtActions.resetCECO, (state, payload) => ({
+    ...state,
+    cecos: [],
+  })),
   //  ////
   on(OtActions.getOts, (state, { request }) => ({
     ...state,
@@ -608,38 +667,6 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.finalizeOTError, state => ({
     ...state,
-  })),
-
-  on(OtActions.resetData, (state, payload) => ({
-    ...initialStateOt,
-  })),
-  on(OtActions.resetPlan, (state, payload) => ({
-    ...state,
-    planes: [],
-  })),
-  on(OtActions.resetSitio, (state, payload) => ({
-    ...state,
-    sitio: [],
-  })),
-  on(OtActions.resetPMO, (state, payload) => ({
-    ...state,
-    pmos: [],
-  })),
-  on(OtActions.resetSAP, (state, payload) => ({
-    ...state,
-    cuentas_sap: [],
-  })),
-  on(OtActions.resetLPs, (state, payload) => ({
-    ...state,
-    lineaPresupuestaria: [],
-  })),
-  on(OtActions.resetPEP2, (state, payload) => ({
-    ...state,
-    pep2s: [],
-  })),
-  on(OtActions.resetCECO, (state, payload) => ({
-    ...state,
-    cecos: [],
   })),
 
   // on(OtActions.postOt, (state, { ot }) => ({

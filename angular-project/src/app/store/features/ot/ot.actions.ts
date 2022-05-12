@@ -373,6 +373,15 @@ export const createOTError = createAction(
   props<{ error: any }>()
 );
 
+export const resetData = createAction('[ResetData] ResetData');
+export const resetContrato = createAction('[ResetData] Reset Contrato');
+export const resetPlan = createAction('[ResetData] ResetPlan');
+export const resetSitio = createAction('[ResetData] ResetSitio');
+export const resetPMO = createAction('[ResetData] ResetPMO');
+export const resetSAP = createAction('[ResetData] ResetSAP');
+export const resetLPs = createAction('[ResetData] ResetLPs');
+export const resetPEP2 = createAction('[ResetData] ResetPEP2');
+export const resetCECO = createAction('[ResetData] ResetCECO');
 //  //////
 // GET OTs init
 
@@ -729,15 +738,6 @@ export const registrarLibroObraError = createAction(
   '[OT] Registrar en el libro de obras error',
   props<{ error: any }>()
 );
-
-export const resetData = createAction('[ResetData] ResetData');
-export const resetPlan = createAction('[ResetData] ResetPlan');
-export const resetSitio = createAction('[ResetData] ResetSitio');
-export const resetPMO = createAction('[ResetData] ResetPMO');
-export const resetSAP = createAction('[ResetData] ResetSAP');
-export const resetLPs = createAction('[ResetData] ResetLPs');
-export const resetPEP2 = createAction('[ResetData] ResetPEP2');
-export const resetCECO = createAction('[ResetData] ResetCECO');
 
 // Registros libro de obra
 export const getRegistrosLibroObra = createAction(

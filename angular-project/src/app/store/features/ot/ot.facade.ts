@@ -248,6 +248,40 @@ export class OtFacade {
     this.store.dispatch(otActions.createOT({ request }));
   }
 
+  // Resets
+  public resetData(): void {
+    this.store.dispatch(otActions.resetData());
+  }
+  public resetContrato(): void {
+    this.store.dispatch(otActions.resetContrato());
+  }
+
+  public resetPlanProyecto(): void {
+    this.store.dispatch(otActions.resetPlan());
+  }
+  public resetSitio(): void {
+    this.store.dispatch(otActions.resetSitio());
+  }
+
+  public resetPMO(): void {
+    this.store.dispatch(otActions.resetPMO());
+  }
+  public resetLPs(): void {
+    this.store.dispatch(otActions.resetLPs());
+  }
+
+  public resetSAP(): void {
+    this.store.dispatch(otActions.resetSAP());
+  }
+
+  public resetPEP2(): void {
+    this.store.dispatch(otActions.resetPEP2());
+  }
+
+  public resetCECO(): void {
+    this.store.dispatch(otActions.resetCECO());
+  }
+
   // ////
   // OT
   public getOts(request: RequestGetOTs): void {
@@ -430,37 +464,6 @@ export class OtFacade {
 
   public getRegistrosLibroObras$(): Observable<Data.RegistroLibroObra[]> {
     return this.store.select(otSelectors.getRegistrosLibroObra);
-  }
-
-  // Resets
-  public resetData(): void {
-    this.store.dispatch(otActions.resetData());
-  }
-
-  public resetPlanProyecto(): void {
-    this.store.dispatch(otActions.resetPlan());
-  }
-  public resetSitio(): void {
-    this.store.dispatch(otActions.resetSitio());
-  }
-
-  public resetPMO(): void {
-    this.store.dispatch(otActions.resetPMO());
-  }
-  public resetLPs(): void {
-    this.store.dispatch(otActions.resetLPs());
-  }
-
-  public resetSAP(): void {
-    this.store.dispatch(otActions.resetSAP());
-  }
-
-  public resetPEP2(): void {
-    this.store.dispatch(otActions.resetPEP2());
-  }
-
-  public resetCECO(): void {
-    this.store.dispatch(otActions.resetCECO());
   }
 
   public getSavingOT$(): Observable<boolean> {

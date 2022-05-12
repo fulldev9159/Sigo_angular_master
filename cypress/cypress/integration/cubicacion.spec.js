@@ -1,4 +1,4 @@
-describe('My First Test', () => {
+describe('Cubicacion Test', () => {
   const servicio1_cod = 'D020';
   const servicio1 = 'DISEÑO DE RED INTERIOR RED DE COBRE (DITICU)';
   const servicio_1_uo_1_cod = '0';
@@ -478,6 +478,59 @@ describe('My First Test', () => {
     );
     cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
       '$90.496'
+    );
+  });
+
+  it('Crear cubicaciones', () => {
+    cy.createCub(
+      'Cub Movil',
+      'Full',
+      'SBE',
+      'RANCAGUA',
+      '12121212 - COASIN',
+      'DISEÑO',
+      'CANALIZACION',
+      'D020 - DISEÑO DE RED INTERIOR RED DE COBRE (DITICU)',
+      '0 - SIN UO'
+    );
+
+    cy.contains('Nueva Cubicación').click();
+    cy.createCub(
+      'Cub Ordinario',
+      'Full',
+      'Contrato Ordinario',
+      'ANTOFAGASTA',
+      '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
+      'DISEÑO',
+      'PROYECTOS',
+      'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
+      '0 - SIN UO'
+    );
+
+    cy.contains('Nueva Cubicación').click();
+    cy.createCub(
+      'Cub Bucle',
+      'Full',
+      'BUCLE',
+      'SAN BERNARDO',
+      '94949494 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
+      'DISEÑO',
+      'CANALIZACION',
+      'D013 - DISEÑO P2P EN RED DE F.O. PARA SERVICIOS PRIVADOS (EMPRESAS, NEGOCIOS Y MAYORISTAS)',
+      '0 - SIN UO'
+    );
+
+    cy.contains('Nueva Cubicación').click();
+    cy.createCub(
+      'Cub Fijo',
+      'Full',
+      'UNIFICADO-2019-FIJA',
+      'VALPARAISO',
+      '92929292 - COASIN',
+      'DISEÑO',
+      'PROYECTOS',
+      'D001 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE COBRE (CU)',
+      '0 - SIN UO'
     );
   });
 });

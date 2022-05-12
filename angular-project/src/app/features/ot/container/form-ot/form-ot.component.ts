@@ -225,6 +225,22 @@ export class FormOtComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.form
         .get('general')
+        .get('contrato')
+        .valueChanges.subscribe(() => {
+          this.form.get('general').get('cubicacion_id').reset();
+          this.form.get('planProyecto').reset();
+          // this.form.get('sustentoFinanciero').reset();
+          this.form.get('numeroInterno').reset();
+          this.form.get('detalleAdjudicacion').reset();
+          this.form.get('bucle').reset();
+          this.contractType$.next('');
+          this.otFacade.resetContrato();
+        })
+    );
+
+    this.subscription.add(
+      this.form
+        .get('general')
         .get('cubicacion_id')
         .valueChanges.pipe(withLatestFrom(this.otFacade.cubicaciones4OT$()))
         .subscribe(([cubicacion_id, cubicaciones]) => {
