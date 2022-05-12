@@ -126,7 +126,7 @@ describe('OT Test', () => {
     );
     cy.get('#observaciones').should('be.enabled');
 
-    // ::::: REVISION CONTRATO ORDINARIO
+    // ::::: REVISION CONTRATO BUCLE
     cy.get('#contratosUser > app-select > .form-control').select('BUCLE');
 
     // NO DEBEN EXISTIR AÚN
@@ -150,7 +150,7 @@ describe('OT Test', () => {
     cy.get('#cubicacion-de-ot > .form-control').select('Cub Bucle');
 
     // DEBEN APARECER
-    // ORDINARIO
+    // BUCLE
     cy.get('#control-oficina-central > app-select > .form-control').should(
       'be.enabled'
     );
@@ -185,6 +185,56 @@ describe('OT Test', () => {
     cy.get('#linea-presupuestaria > .form-control').should('be.disabled');
     cy.get('#pep2 > .form-control').should('be.disabled');
 
+    // EXTRAS
+    cy.get('#fecha-inicio-ot > span > input').should('be.enabled');
+    cy.get('#fecha-termino-ot > span > input').should('be.enabled');
+    cy.get('#proyecto-ot > .form-control').should('be.exist');
+    cy.get('#control_admin_contrato > app-select > .form-control').should(
+      'be.enabled'
+    );
+    cy.get('#observaciones').should('be.enabled');
+
+    // ::::: REVISION CONTRATO BUCLE
+    cy.get('#contratosUser > app-select > .form-control').select(
+      'Contrato Ordinario'
+    );
+
+    // NO DEBEN EXISTIR AÚN
+    // MOVIL
+    cy.get('#plan-proyecto > .form-control').should('not.exist');
+    cy.get('#sitio > .form-control').should('not.exist');
+
+    // SUSTENTO
+    cy.get('#pmo > .form-control').should('not.exist');
+    cy.get('#linea-presupuestaria > .form-control').should('not.exist');
+    cy.get('#pep2 > .form-control').should('not.exist');
+
+    // EXTRAS
+    cy.get('#fecha-inicio-ot > span > input').should('not.exist');
+    cy.get('#fecha-termino-ot > span > input').should('not.exist');
+    cy.get('#proyecto-ot > .form-control').should('not.exist');
+    cy.get('#control_admin_contrato > app-select > .form-control').should(
+      'not.exist'
+    );
+    cy.get('#observaciones').should('not.exist');
+    cy.get('#cubicacion-de-ot > .form-control').select('Cub Ordinario');
+
+    // DEBEN APARECER
+    // ORDINARIO
+    cy.get('#control_carta_adjudicacion > app-input > .form-control').should(
+      'be.enabled'
+    );
+    cy.get('.p-calendar ').should('be.enabled');
+    cy.get('#control_numero_pedido > app-input > .form-control').should(
+      'be.enabled'
+    );
+    cy.get('#control_materia > app-input > .form-control').should('be.enabled');
+
+    // SUSTENTO
+    cy.get('#pmo > .form-control').should('be.enabled');
+    cy.get('#linea-presupuestaria > .form-control').should('be.disabled');
+    cy.get('#pep2 > .form-control').should('be.disabled');
+    cy.get('#control_materia > app-input > .form-control');
     // EXTRAS
     cy.get('#fecha-inicio-ot > span > input').should('be.enabled');
     cy.get('#fecha-termino-ot > span > input').should('be.enabled');
