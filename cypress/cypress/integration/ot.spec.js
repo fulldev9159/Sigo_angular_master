@@ -224,7 +224,7 @@ describe('OT Test', () => {
     cy.get('#control_carta_adjudicacion > app-input > .form-control').should(
       'be.enabled'
     );
-    cy.get('.p-calendar ').should('be.enabled');
+    cy.get('#control_fecha_adjudicacion>p-calendar').should('be.exist');
     cy.get('#control_numero_pedido > app-input > .form-control').should(
       'be.enabled'
     );
