@@ -25,7 +25,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
   cuentas_sap$: Observable<SAP[]> = of([]);
   cecos$: Observable<CECO[]> = of([]);
 
-  moneyIcon = faMoneyBill
+  moneyIcon = faMoneyBill;
 
   @Input() form: FormGroup;
 
