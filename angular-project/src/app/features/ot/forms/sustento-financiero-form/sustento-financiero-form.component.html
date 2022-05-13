@@ -1,5 +1,7 @@
 <app-card [classCardHeader]="'bg-secondary text-white'">
-  <ng-container card-header-title>Sustento Financiero</ng-container>
+  <ng-container card-header-title>
+    <fa-icon [icon]="moneyIcon" style="font-size: 20px;"></fa-icon> Sustento Financiero
+  </ng-container>
   <ng-container card-body>
     <div class="row" [formGroup]="form">
       <div class="col-xs-12 col-md-6">
@@ -22,7 +24,7 @@
       </div>
 
       <div *ngIf="form.value.costos === 'capex'" class="col-12">
-        <div class="col-7" id="control_pmo_codigo">
+        <div class="" id="control_pmo_codigo">
           <app-select [control]="form.get('pmo_codigo')" label="PMO" ID="pmo">
             <ng-container options>
               <option value="null" selected disabled>Seleccione PMO</option>
@@ -36,7 +38,7 @@
           <br>
         </div>
 
-        <div class="col-7" id="control_lp_codigo">
+        <div class="" id="control_lp_codigo">
           <app-select [control]="form.get('lp_codigo')" label="Linea Presupuestaria" ID="linea-presupuestaria">
             <ng-container options>
               <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
@@ -50,7 +52,7 @@
           <br>
         </div>
 
-        <div class="col-7" id="control_pep2_capex_id">
+        <div class="" id="control_pep2_capex_id">
           <app-select [control]="form.get('pep2_capex_id')" label="PEP2" ID="pep2">
             <ng-container options>
               <option value="null" selected disabled>Seleccione Pep2</option>
@@ -69,7 +71,7 @@
       </div>
 
       <div *ngIf="form.value.costos === 'opex'" class="col-12">
-        <div class="col-7" id="control_id_opex_codigo">
+        <div class="" id="control_id_opex_codigo">
           <app-select [control]="form.get('id_opex_codigo')" label="ID OPEX" ID="id-opex">
             <ng-container options>
               <option value="null" selected disabled>Seleccione ID OPEX</option>
@@ -83,7 +85,7 @@
           <br>
         </div>
 
-        <div class="col-7" id="control_cuenta_sap_codigo">
+        <div class="" id="control_cuenta_sap_codigo">
           <app-select [control]="form.get('cuenta_sap_codigo')" label="Cuenta SAP" ID="cuenta-sap">
             <ng-container options>
               <option value="null" selected disabled>Seleccione Cuenta SAP</option>
@@ -97,7 +99,7 @@
           <br>
         </div>
 
-        <div class="col-7" id="control_ceco_codigo">
+        <div class="" id="control_ceco_codigo">
           <app-select [control]="form.get('ceco_codigo')" label="CECO" ID="ceco">
             <ng-container options>
               <option value="null" selected disabled>Seleccione CECO</option>

@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { PMO, LP, PEP2, OPEX, SAP, CECO } from '@data';
-
+import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-sustento-financiero-form',
   templateUrl: './sustento-financiero-form.component.html',
@@ -24,6 +24,8 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
   ids_opex$: Observable<OPEX[]> = of([]);
   cuentas_sap$: Observable<SAP[]> = of([]);
   cecos$: Observable<CECO[]> = of([]);
+
+  moneyIcon = faMoneyBill
 
   @Input() form: FormGroup;
 

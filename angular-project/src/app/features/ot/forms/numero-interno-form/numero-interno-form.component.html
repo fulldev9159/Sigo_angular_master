@@ -20,26 +20,39 @@
       </div>
       <div class="col-xs-12 col-md-2" id="button-agregar" style="    align-self: center;
       margin-top: 14px;">
-        <button (click)="addNumeroInterno()">Agregar</button>
+        <button [disabled]="!formInterno.valid" (click)="addNumeroInterno()">Agregar</button>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div *ngFor="let item of arrNumerosInternos; let i = index">
-          <div class="row" style="margin-top:5px">
-            <div class="col-md-10">
-              {{item.numero_interno}}
-              :
-              <span *ngIf="item.ot.length>0">OT asociadas: {{item.ot|json}}</span>
-              <span *ngIf="item.ot.length===0">OT asociadas: No utilizada</span>
-            </div>
-            <div class="col-md-2">
-              <button (click)="deleteNumeroInterno(i);" class="btn btn-danger"><i class="pi pi-trash"></i></button>
-            </div>
-          </div>
-        </div>
+    <table style="margin-top:10px;width: 100%;">
+      <tr>
+        <th>Número interno</th>
+        <th>OT asociada</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let item of arrNumerosInternos; let i = index">
+        <td>{{item.numero_interno}}</td>
+        <td> <span *ngIf="item.ot.length>0"> {{item.ot|json}}</span>
+          <span *ngIf="item.ot.length===0">No utilizado</span></td>
+        <td><button (click)="deleteNumeroInterno(i);" class="btn btn-danger"><i class="pi pi-trash"></i></button></td>
+      </tr>
+    </table>
+
+    <!-- <div class="row" *ngFor="let item of arrNumerosInternos; let i = index" style="border: 0.1rem solid #b5b2b2;
+    border-radius: 5px;
+    padding: 11px;
+    margin-top: 13px;">
+      <div class="col-sm-10 col-md-10">
+
+        <span>{{item.numero_interno}}</span>
+
+        <span *ngIf="item.ot.length>0">OT asociadas: {{item.ot|json}}</span>
+        <span *ngIf="item.ot.length===0">OT asociadas: No utilizada</span>
       </div>
-    </div>
+      <div class="col-sm-2 col-md-2">
+        <button (click)="deleteNumeroInterno(i);" class="btn btn-danger"><i class="pi pi-trash"></i></button>
+      </div>
+    </div> -->
+
   </ng-container>
 </app-card>
 
