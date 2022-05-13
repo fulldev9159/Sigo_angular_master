@@ -4,7 +4,6 @@ export * from './features/auth/auth.facade';
 
 // OT
 export * from './features/ot/ot.facade';
-export * from './features/ot/ot.model';
 // OT
 
 // CUBICACION

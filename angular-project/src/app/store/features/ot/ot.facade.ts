@@ -3,18 +3,38 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
-import * as OTmodel from './ot.model';
 import * as Data from '@data';
 import {
+  ContratosUser,
   DataInformeAvance,
   LpuInformeAvanceDetalle,
-  Plan,
   PMO,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
   RequestSaveInformeAvanceAdmin,
+  LP,
+  PEP2,
+  OPEX,
+  SAP,
+  CECO,
+  Cubs4OT,
+  Proyectos,
+  AdminContrato4OT,
+  OficinaCentral,
+  SolicitadoPor,
+  Comuna,
+  TipoDeRed,
+  TipoDeTrabajo,
+  AreaDeNegocio,
+  PlanDeProyecto,
   Sitio,
+  TipoNumeroInterno,
+  NumeroInternoHasOT,
+  RequestCreateOTMovil,
+  RequestCreateOTFijo,
+  RequestCreateOTOrdinario,
+  RequestCreateOTBucle,
 } from '@data';
 import {
   DetalleActa,
@@ -28,6 +48,241 @@ import {
 export class OtFacade {
   constructor(private store: Store<Data.OT>) {}
 
+  //   GET CONTRATOS USER 4 CUB
+  public contratosUser4OT(usuario_id: number): void {
+    this.store.dispatch(otActions.getContratosUser4OT({ usuario_id }));
+  }
+
+  public contratosUser4OT$(): Observable<ContratosUser[]> {
+    return this.store.select(otSelectors.contratosUser4OT);
+  }
+
+  //   GET CUBICACIONES 4 CUB
+  public cubicaciones4OT(contrato_id: number): void {
+    this.store.dispatch(otActions.getCubicaciones4OT({ contrato_id }));
+  }
+
+  public cubicaciones4OT$(): Observable<Cubs4OT[]> {
+    return this.store.select(otSelectors.cubicaciones4OT);
+  }
+
+  //    CUBICACIONES SELECCIONADA
+  public cubicacionSeleccionada(cubicacion: Cubs4OT): void {
+    this.store.dispatch(otActions.cubicacionSeleccionada({ cubicacion }));
+  }
+  public cubicacionSeleccionada$(): Observable<Cubs4OT> {
+    return this.store.select(otSelectors.cubicacionSeleccionada);
+  }
+
+  // PMOS
+  public getPMO(sitio_codigo: string): void {
+    this.store.dispatch(otActions.getPMO({ sitio_codigo }));
+  }
+
+  public getPMO$(): Observable<PMO[]> {
+    return this.store.select(otSelectors.getPMO);
+  }
+
+  // LPS
+  public getLP(pmo_id: number): void {
+    this.store.dispatch(otActions.getLineaPresupuestaria({ pmo_id }));
+  }
+
+  public getLP$(): Observable<LP[]> {
+    return this.store.select(otSelectors.getLps);
+  }
+
+  // PEP2
+  public getPEP2(
+    pmo_codigo: number,
+    linea_presupuestaria_codigo: string
+  ): void {
+    this.store.dispatch(
+      otActions.getPEP2({ pmo_codigo, linea_presupuestaria_codigo })
+    );
+  }
+
+  public getPEP2$(): Observable<PEP2[]> {
+    return this.store.select(otSelectors.getPeps2);
+  }
+
+  // OPEX
+  public getIDsOpex(): void {
+    this.store.dispatch(otActions.getIDOpex());
+  }
+
+  public getIDsOpex$(): Observable<OPEX[]> {
+    return this.store.select(otSelectors.getIDsOpex);
+  }
+
+  // Cuentas SAP
+  public getCuentaSAP(id_opex: string): void {
+    this.store.dispatch(otActions.getCuentaSAP({ id_opex }));
+  }
+
+  public getCuentaSAP$(): Observable<SAP[]> {
+    return this.store.select(otSelectors.getCuentasSAP);
+  }
+
+  // CECOs
+  public getCECO(id_opex: string, cuenta_sap: number): void {
+    this.store.dispatch(otActions.getCECO({ id_opex, cuenta_sap }));
+  }
+
+  public getCECO$(): Observable<CECO[]> {
+    return this.store.select(otSelectors.getCECOs);
+  }
+
+  // PROYECTOS
+  public getProyecto(): void {
+    this.store.dispatch(otActions.getProyecto());
+  }
+
+  public getProyecto$(): Observable<Proyectos[]> {
+    return this.store.select(otSelectors.getProyectos);
+  }
+
+  // ADMIN CONTRATO
+  public getAdminContrato(cubicacion_id: number): void {
+    this.store.dispatch(otActions.getAdminContrato({ cubicacion_id }));
+  }
+
+  public getAdminContrato$(): Observable<AdminContrato4OT[]> {
+    return this.store.select(otSelectors.getAdminContrato);
+  }
+
+  // BUCLE
+  public getOficinaCentral(agencia_id: number): void {
+    this.store.dispatch(otActions.getOficinaCentral({ agencia_id }));
+  }
+
+  public getOficinaCentral$(): Observable<OficinaCentral[]> {
+    return this.store.select(otSelectors.getOficinaCentral);
+  }
+
+  public getSolicitadoPor(): void {
+    this.store.dispatch(otActions.getSolicitadoPor());
+  }
+
+  public getSolicitadoPor$(): Observable<SolicitadoPor[]> {
+    return this.store.select(otSelectors.getSolicitadoPor);
+  }
+
+  public getComuna(cubicacion_id: number): void {
+    this.store.dispatch(otActions.getComuna({ cubicacion_id }));
+  }
+
+  public getComuna$(): Observable<Comuna[]> {
+    return this.store.select(otSelectors.getComuna);
+  }
+
+  public getTipoDeRed(): void {
+    this.store.dispatch(otActions.getTipoDeRed());
+  }
+
+  public getTipoDeRed$(): Observable<TipoDeRed[]> {
+    return this.store.select(otSelectors.getTipoDeRed);
+  }
+
+  public getTipoDeTrabajo(cubicacion_id: number): void {
+    this.store.dispatch(otActions.getTipoDeTrabajo({ cubicacion_id }));
+  }
+
+  public getTipoDeTrabajo$(): Observable<TipoDeTrabajo[]> {
+    return this.store.select(otSelectors.getTipoDeTrabajo);
+  }
+
+  public getAreaDeNegocio(): void {
+    this.store.dispatch(otActions.getAreaDeNegocio());
+  }
+
+  public getAreaDeNegocio$(): Observable<AreaDeNegocio[]> {
+    return this.store.select(otSelectors.getAreaDeNegocio);
+  }
+
+  // MOVIL
+
+  public getPlanDeProyecto(): void {
+    this.store.dispatch(otActions.getPlanDeProyecto());
+  }
+
+  public getPlanDeProyecto$(): Observable<PlanDeProyecto[]> {
+    return this.store.select(otSelectors.getPlans);
+  }
+
+  public getSitio(plan_id: number): void {
+    this.store.dispatch(otActions.getSitio({ plan_id }));
+  }
+
+  public getSitio$(): Observable<Sitio[]> {
+    return this.store.select(otSelectors.getSitio);
+  }
+
+  // FIJO
+  // TIPO NUMERO INTERNO
+  public getTipoNumeroInterno(): void {
+    this.store.dispatch(otActions.getTipoNumeroInterno());
+  }
+
+  public getTipoNumeroInterno$(): Observable<TipoNumeroInterno[]> {
+    return this.store.select(otSelectors.getTipoNumeroInterno);
+  }
+
+  // NUMERO INTERNO HAS OT
+  public getNumeroInternoHasOT(numero_interno: string): void {
+    this.store.dispatch(otActions.getNumeroInternoHasOT({ numero_interno }));
+  }
+
+  public getNumeroInternoHasOT$(): Observable<NumeroInternoHasOT[]> {
+    return this.store.select(otSelectors.getNumeroInternoHasOT);
+  }
+
+  // CREATE OT
+  public createOT(
+    request:
+      | RequestCreateOTBucle
+      | RequestCreateOTFijo
+      | RequestCreateOTMovil
+      | RequestCreateOTOrdinario
+  ): void {
+    this.store.dispatch(otActions.createOT({ request }));
+  }
+
+  // Resets
+  public resetData(): void {
+    this.store.dispatch(otActions.resetData());
+  }
+  public resetContrato(): void {
+    this.store.dispatch(otActions.resetContrato());
+  }
+
+  public resetPlanProyecto(): void {
+    this.store.dispatch(otActions.resetPlan());
+  }
+  public resetSitio(): void {
+    this.store.dispatch(otActions.resetSitio());
+  }
+
+  public resetPMO(): void {
+    this.store.dispatch(otActions.resetPMO());
+  }
+  public resetLPs(): void {
+    this.store.dispatch(otActions.resetLPs());
+  }
+
+  public resetSAP(): void {
+    this.store.dispatch(otActions.resetSAP());
+  }
+
+  public resetPEP2(): void {
+    this.store.dispatch(otActions.resetPEP2());
+  }
+
+  public resetCECO(): void {
+    this.store.dispatch(otActions.resetCECO());
+  }
+
+  // ////
   // OT
   public getOts(request: RequestGetOTs): void {
     this.store.dispatch(
@@ -106,138 +361,25 @@ export class OtFacade {
   }
   // DELETE
 
-  // REPLY
-  public replyOt(ot: OTmodel.RequestCreateOT): void {
-    this.store.dispatch(otActions.replyOt({ ot }));
-  }
-  // REPLY
+  // // REPLY
+  // public replyOt(ot: OTmodel.RequestCreateOT): void {
+  //   this.store.dispatch(otActions.replyOt({ ot }));
+  // }
+  // // REPLY
 
-  // POST
-  public postOt(
-    ot: OTmodel.RequestCreateOT | OTmodel.RequestCreateOTFijo
-  ): void {
-    this.store.dispatch(otActions.postOt({ ot }));
-  }
+  // // POST
+  // public postOt(
+  //   ot: OTmodel.RequestCreateOT | OTmodel.RequestCreateOTFijo
+  // ): void {
+  //   this.store.dispatch(otActions.postOt({ ot }));
+  // }
 
-  // IngreOT con SCE ***
-  public postOtSCE(ot: OTmodel.RequestCreateOT): void {
-    this.store.dispatch(otActions.postOtSCE({ ot }));
-  }
-  // POST
-  // OT
-
-  // PLANS
-  public getPlans(region_id: number): void {
-    this.store.dispatch(otActions.getPlans({ region_id }));
-  }
-
-  public getPlans$(): Observable<Plan[]> {
-    return this.store.select(otSelectors.getPlans);
-  }
-  // PLANS
-
-  // SITES
-  public getSitesAction(plan_proyecto_id: number, region_id: number): void {
-    this.store.dispatch(otActions.getSite({ plan_proyecto_id, region_id }));
-  }
-
-  public getSitesSelector$(): Observable<Sitio[]> {
-    return this.store.select(otSelectors.getSites);
-  }
-  // SITES
-
-  // PMOS
-  public getPmosAction(sitio_codigo: string): void {
-    this.store.dispatch(otActions.getPmo({ sitio_codigo }));
-  }
-
-  public getPmosSelector$(): Observable<PMO[]> {
-    return this.store.select(otSelectors.getPmos);
-  }
-  // PMOS
-
-  public getIDsOpex(): void {
-    this.store.dispatch(otActions.getIDOpex());
-  }
-
-  public getIDsOpexSuccess(ids_opex: OTmodel.IDOpex[]): void {
-    this.store.dispatch(otActions.getIDOpexSuccess({ ids_opex }));
-  }
-
-  public getIDsOpexSelector$(): Observable<OTmodel.IDOpex[]> {
-    return this.store.select(otSelectors.getIDsOpex);
-  }
-  // IDOpex
-
-  // Cuentas SAP
-  public getCuentaSAPAction(data): void {
-    this.store.dispatch(otActions.getCuentaSAP(data));
-  }
-
-  public getCuentaSAPSuccess(cuentas_sap: OTmodel.CuentaSap[]): void {
-    this.store.dispatch(otActions.getCuentaSAPSuccess({ cuentas_sap }));
-  }
-
-  public getCuentaSAPSelector$(): Observable<OTmodel.CuentaSap[]> {
-    return this.store.select(otSelectors.getCuentasSAP);
-  }
-  // Cuentas SAP
-
-  // CECOs
-  public getCECOAction(data): void {
-    this.store.dispatch(otActions.getCECO(data));
-  }
-
-  public getCECOSuccess(cecos: OTmodel.CECO[]): void {
-    this.store.dispatch(otActions.getCECOSuccess({ cecos }));
-  }
-
-  public getCECOSelector$(): Observable<OTmodel.CECO[]> {
-    return this.store.select(otSelectors.getCECOs);
-  }
-  // CECOs
-
-  // LPS
-  public getLpsAction(data): void {
-    this.store.dispatch(otActions.getBudgetLine(data));
-  }
-
-  public getLpsSuccess(lp: OTmodel.Lp[]): void {
-    this.store.dispatch(otActions.getBudgetLineSuccess({ lp }));
-  }
-
-  public getLpsSelector$(): Observable<OTmodel.Lp[]> {
-    return this.store.select(otSelectors.getLps);
-  }
-  // LPS
-
-  // PEP2
-  public getPep2sAction(data): void {
-    this.store.dispatch(otActions.getPep2(data));
-  }
-
-  public getPep2sSuccess(pep2: OTmodel.Pep2[]): void {
-    this.store.dispatch(otActions.getPep2Success({ pep2 }));
-  }
-
-  public getPep2sSelector$(): Observable<OTmodel.Pep2[]> {
-    return this.store.select(otSelectors.getPeps2);
-  }
-  // PEP2
-
-  // Proyectos
-  public getProyectoAction(): void {
-    this.store.dispatch(otActions.getProyecto());
-  }
-
-  public getProyectoSuccess(proyectos: OTmodel.Proyecto[]): void {
-    this.store.dispatch(otActions.getProyectoSuccess({ proyectos }));
-  }
-
-  public getProyectoSelector$(): Observable<OTmodel.Proyecto[]> {
-    return this.store.select(otSelectors.getProyectos);
-  }
-  // Proyectos
+  // // IngreOT con SCE ***
+  // public postOtSCE(ot: OTmodel.RequestCreateOT): void {
+  //   this.store.dispatch(otActions.postOtSCE({ ot }));
+  // }
+  // // POST
+  // // OT
 
   // Detalle OT
   public getDetalleOtAction(id: number): void {
@@ -322,37 +464,6 @@ export class OtFacade {
 
   public getRegistrosLibroObras$(): Observable<Data.RegistroLibroObra[]> {
     return this.store.select(otSelectors.getRegistrosLibroObra);
-  }
-
-  // Resets
-  public resetData(): void {
-    this.store.dispatch(otActions.resetData());
-  }
-
-  public resetPlanProyecto(): void {
-    this.store.dispatch(otActions.resetPlan());
-  }
-  public resetSitio(): void {
-    this.store.dispatch(otActions.resetSitio());
-  }
-
-  public resetPMO(): void {
-    this.store.dispatch(otActions.resetPMO());
-  }
-  public resetLPs(): void {
-    this.store.dispatch(otActions.resetLPs());
-  }
-
-  public resetSAP(): void {
-    this.store.dispatch(otActions.resetSAP());
-  }
-
-  public resetPEP2(): void {
-    this.store.dispatch(otActions.resetPEP2());
-  }
-
-  public resetCECO(): void {
-    this.store.dispatch(otActions.resetCECO());
   }
 
   public getSavingOT$(): Observable<boolean> {

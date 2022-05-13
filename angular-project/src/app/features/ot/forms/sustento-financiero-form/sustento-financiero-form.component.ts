@@ -7,16 +7,9 @@ import {
   AbstractControl,
   Validators,
 } from '@angular/forms';
-import {
-  IDOpex,
-  CuentaSap,
-  Lp,
-  Pep2,
-  CECO,
-} from '@storeOT/features/ot/ot.model';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { PMO } from '@data';
-
+import { PMO, LP, PEP2, OPEX, SAP, CECO } from '@data';
+import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-sustento-financiero-form',
   templateUrl: './sustento-financiero-form.component.html',
@@ -26,11 +19,13 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   pmos$: Observable<PMO[]> = of([]);
-  lps$: Observable<Lp[]> = of([]);
-  pep2s$: Observable<Pep2[]> = of([]);
-  ids_opex$: Observable<IDOpex[]> = of([]);
-  cuentas_sap$: Observable<CuentaSap[]> = of([]);
+  lps$: Observable<LP[]> = of([]);
+  pep2s$: Observable<PEP2[]> = of([]);
+  ids_opex$: Observable<OPEX[]> = of([]);
+  cuentas_sap$: Observable<SAP[]> = of([]);
   cecos$: Observable<CECO[]> = of([]);
+
+  moneyIcon = faMoneyBill
 
   @Input() form: FormGroup;
 
@@ -45,32 +40,32 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.otFacade.getIDsOpex();
 
-    this.pmos$ = this.otFacade.getPmosSelector$().pipe(
+    this.pmos$ = this.otFacade.getPMO$().pipe(
       map(pmos => pmos || []),
       tap(pmos => this.checkPMOsAndEnable(pmos))
     );
 
-    this.lps$ = this.otFacade.getLpsSelector$().pipe(
+    this.lps$ = this.otFacade.getLP$().pipe(
       map(lps => lps || []),
       tap(lps => this.checkLPsAndEnable(lps))
     );
 
-    this.pep2s$ = this.otFacade.getPep2sSelector$().pipe(
+    this.pep2s$ = this.otFacade.getPEP2$().pipe(
       map(pep2s => pep2s || []),
       tap(pep2s => this.checkPep2sAndEnable(pep2s))
     );
 
-    this.ids_opex$ = this.otFacade.getIDsOpexSelector$().pipe(
+    this.ids_opex$ = this.otFacade.getIDsOpex$().pipe(
       map(opexs => opexs || []),
       tap(opexs => this.checkOPEXsAndEnable(opexs))
     );
 
-    this.cuentas_sap$ = this.otFacade.getCuentaSAPSelector$().pipe(
+    this.cuentas_sap$ = this.otFacade.getCuentaSAP$().pipe(
       map(saps => saps || []),
       tap(saps => this.checkSAPsAndEnable(saps))
     );
 
-    this.cecos$ = this.otFacade.getCECOSelector$().pipe(
+    this.cecos$ = this.otFacade.getCECO$().pipe(
       map(cecos => cecos || []),
       tap(cecos => this.checkCECOsAndEnable(cecos))
     );
@@ -124,7 +119,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
       this.form.get('pmo_codigo').valueChanges.subscribe(pmo_codigo => {
         this.resetLPFormControl();
         if (pmo_codigo !== null && pmo_codigo !== undefined) {
-          this.otFacade.getLpsAction({ pmo_codigo });
+          this.otFacade.getLP(+pmo_codigo);
         } else {
           this.checkLPsAndEnable([]);
         }
@@ -137,10 +132,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
       this.form.get('lp_codigo').valueChanges.subscribe(lp_codigo => {
         this.resetPep2FormControl();
         if (lp_codigo !== null && lp_codigo !== undefined) {
-          this.otFacade.getPep2sAction({
-            pmo_codigo: this.form.value.pmo_codigo,
-            lp_codigo,
-          });
+          this.otFacade.getPEP2(+this.form.value.pmo_codigo, lp_codigo);
         } else {
           this.checkPep2sAndEnable([]);
         }
@@ -176,7 +168,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
       this.form.get('id_opex_codigo').valueChanges.subscribe(id_opex_codigo => {
         this.resetSAPsFormControl();
         if (id_opex_codigo !== null && id_opex_codigo !== undefined) {
-          this.otFacade.getCuentaSAPAction({ id_opex_codigo });
+          this.otFacade.getCuentaSAP(id_opex_codigo);
         } else {
           this.checkSAPsAndEnable([]);
         }
@@ -191,10 +183,10 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
         .valueChanges.subscribe(cuenta_sap_codigo => {
           this.resetCECOFormControl();
           if (cuenta_sap_codigo !== null && cuenta_sap_codigo !== undefined) {
-            this.otFacade.getCECOAction({
-              id_opex_codigo: this.form.value.id_opex_codigo,
-              cuenta_sap_codigo,
-            });
+            this.otFacade.getCECO(
+              this.form.value.id_opex_codigo,
+              +cuenta_sap_codigo
+            );
           }
         })
     );
@@ -231,7 +223,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkLPsAndEnable(lps: Lp[]): void {
+  checkLPsAndEnable(lps: LP[]): void {
     if (lps.length > 0) {
       this.form.get('lp_codigo').enable();
     } else {
@@ -239,7 +231,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkPep2sAndEnable(pep2s: Pep2[]): void {
+  checkPep2sAndEnable(pep2s: PEP2[]): void {
     if (pep2s.length > 0) {
       this.form.get('pep2_capex_id').enable();
     } else {
@@ -247,7 +239,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkOPEXsAndEnable(opexs: IDOpex[]): void {
+  checkOPEXsAndEnable(opexs: OPEX[]): void {
     if (opexs.length > 0) {
       this.form.get('id_opex_codigo').enable();
     } else {
@@ -255,7 +247,7 @@ export class SustentoFinancieroFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  checkSAPsAndEnable(saps: CuentaSap[]): void {
+  checkSAPsAndEnable(saps: SAP[]): void {
     if (saps.length > 0) {
       this.form.get('cuenta_sap_codigo').enable();
     } else {

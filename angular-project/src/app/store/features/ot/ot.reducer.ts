@@ -1,13 +1,65 @@
 import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
-import * as OTModel from './ot.model';
 import * as Data from '@data';
-import { DataInformeAvance, Plan, PMO, Sitio } from '@data';
+import copy from 'fast-copy';
+
+import {
+  DataInformeAvance,
+  PMO,
+  ContratosUser,
+  LP,
+  PEP2,
+  OPEX,
+  SAP,
+  CECO,
+  Cubs4OT,
+  Proyectos,
+  AdminContrato4OT,
+  OficinaCentral,
+  SolicitadoPor,
+  Comuna,
+  TipoDeRed,
+  TipoDeTrabajo,
+  AreaDeNegocio,
+  Sitio,
+  PlanDeProyecto,
+  TipoNumeroInterno,
+  NumeroInternoHasOT,
+} from '@data';
 import { DetalleActa } from '@data/model/acta';
 
 export const otFeatureKey = 'ot';
 
 export interface StateOt {
+  contratosUser4OT: ContratosUser[];
+  cubicaciones: Cubs4OT[];
+  cubicacionSeleccionada: Cubs4OT;
+  pmos: PMO[];
+  lineaPresupuestaria: LP[];
+  pep2s: PEP2[];
+  ids_opex: OPEX[];
+  cuentas_sap: SAP[];
+  cecos: CECO[];
+  proyectos: Proyectos[];
+  adminContrato: AdminContrato4OT[];
+
+  // BUCLE
+  oficinaCentral: OficinaCentral[];
+  solicitadoPor: SolicitadoPor[];
+  comuna: Comuna[];
+  tipoDeRed: TipoDeRed[];
+  tipoDeTrabajo: TipoDeTrabajo[];
+  areaDeNegocio: AreaDeNegocio[];
+
+  // MOVIL
+  planes: PlanDeProyecto[];
+  sitio: Sitio[];
+
+  // FIJO
+  tipoNumeroInterno: TipoNumeroInterno[];
+  numeroInternoHasOT: NumeroInternoHasOT[];
+
+  // ////
   filtro_propietario: string;
   filtro_tipo: string;
 
@@ -16,15 +68,7 @@ export interface StateOt {
   otsEjecucion: Data.OT[];
   itemsAbiertas: Data.OT[];
   itemsCerradas: Data.OT[];
-  planes: Plan[];
-  sitio: Sitio[];
-  pmos: PMO[];
-  budgetLines: OTModel.Lp[];
-  pep2s: OTModel.Pep2[];
-  ids_opex: OTModel.IDOpex[];
-  cuentas_sap: OTModel.CuentaSap[];
-  cecos: OTModel.CECO[];
-  proyectos: OTModel.Proyecto[];
+
   detalleOt: Data.DataRspDetalleOT;
 
   coordinators: Data.User[];
@@ -43,6 +87,35 @@ export interface StateOt {
 }
 
 export const initialStateOt: StateOt = {
+  contratosUser4OT: [],
+  cubicaciones: [],
+  cubicacionSeleccionada: null,
+  pmos: [],
+  lineaPresupuestaria: [],
+  pep2s: [],
+  ids_opex: [],
+  cuentas_sap: [],
+  cecos: [],
+  proyectos: [],
+  adminContrato: [],
+
+  // BUCLE
+  oficinaCentral: [],
+  solicitadoPor: [],
+  comuna: [],
+  tipoDeRed: [],
+  tipoDeTrabajo: [],
+  areaDeNegocio: [],
+
+  // MOVIL
+  planes: [],
+  sitio: [],
+
+  // FIJO
+  tipoNumeroInterno: [],
+  numeroInternoHasOT: [],
+
+  // ////
   filtro_propietario: '',
   filtro_tipo: '',
 
@@ -51,15 +124,7 @@ export const initialStateOt: StateOt = {
   otsEjecucion: [],
   itemsAbiertas: [],
   itemsCerradas: [],
-  planes: [],
-  sitio: [],
-  pmos: [],
-  budgetLines: [],
-  pep2s: [],
-  ids_opex: [],
-  cuentas_sap: [],
-  cecos: [],
-  proyectos: [],
+
   detalleOt: null,
 
   coordinators: [],
@@ -79,7 +144,349 @@ export const initialStateOt: StateOt = {
 
 export const reducerOt = createReducer(
   initialStateOt,
+  on(OtActions.getContratosUser4OTSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      contratosUser4OT:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.model_contrato_id.nombre > b.model_contrato_id.nombre
+                ? 1
+                : b.model_contrato_id.nombre > a.model_contrato_id.nombre
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getCubicaciones4OTSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      cubicaciones:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.cubicacion_nombre > b.cubicacion_nombre
+                ? 1
+                : b.cubicacion_nombre > a.cubicacion_nombre
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.cubicacionSeleccionada, (state, { cubicacion }) => ({
+    ...state,
+    cubicacionSeleccionada: cubicacion,
+  })),
+  on(OtActions.getPMOSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      pmos:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.pmo_codigo > b.pmo_codigo
+                ? 1
+                : b.pmo_codigo > a.pmo_codigo
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getLineaPresupuestariaSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      lineaPresupuestaria:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.linea_presupuestaria_codigo > b.linea_presupuestaria_codigo
+                ? 1
+                : b.linea_presupuestaria_codigo > a.linea_presupuestaria_codigo
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getPEP2Success, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      pep2s:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.pep2 > b.pep2 ? 1 : b.pep2 > a.pep2 ? -1 : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getIDOpexSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      ids_opex:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.id_opex > b.id_opex ? 1 : b.id_opex > a.id_opex ? -1 : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getCuentaSAPSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      cuentas_sap:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.cuenta_sap > b.cuenta_sap
+                ? 1
+                : b.cuenta_sap > a.cuenta_sap
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getCECOSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      cecos:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.ceco > b.ceco ? 1 : b.ceco > a.ceco ? -1 : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getProyectoSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      proyectos:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getAdminContratoSuccess, (state, { response }) => ({
+    ...state,
+    adminContrato: response.data.items,
+  })),
 
+  // BUCLE
+  on(OtActions.getOficinaCentralSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      oficinaCentral:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.idafac > b.idafac ? 1 : b.idafac > a.idafac ? -1 : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getSolicitadoPorSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      solicitadoPor:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getComunaSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      comuna:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.comuna_nombre > b.comuna_nombre
+                ? 1
+                : b.comuna_nombre > a.comuna_nombre
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getTipoDeRedSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      tipoDeRed:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getTipoDeTrabajoSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      tipoDeTrabajo:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.tipo_trabajo_descripcion > b.tipo_trabajo_descripcion
+                ? 1
+                : b.tipo_trabajo_descripcion > a.tipo_trabajo_descripcion
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+  on(OtActions.getAreaDeNegocioSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      areaDeNegocio:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [],
+    };
+  }),
+
+  on(OtActions.getPlanDeProyectoSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      planes:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+            )
+          : [],
+    };
+  }),
+
+  on(OtActions.getSitioSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      sitio:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+            )
+          : [],
+    };
+  }),
+
+  on(OtActions.getTipoNumeroInternoSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      tipoNumeroInterno: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+
+  on(OtActions.getNumeroInternoHasOTSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      numeroInternoHasOT: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+
+  on(OtActions.resetData, (state, payload) => ({
+    ...initialStateOt,
+  })),
+  on(OtActions.resetContrato, (state, payload) => ({
+    ...state,
+    cubicacionSeleccionada: null,
+    pmos: [],
+    lineaPresupuestaria: [],
+    pep2s: [],
+    ids_opex: [],
+    cuentas_sap: [],
+    cecos: [],
+    proyectos: [],
+    adminContrato: [],
+
+    // BUCLE
+    oficinaCentral: [],
+    solicitadoPor: [],
+    comuna: [],
+    tipoDeRed: [],
+    tipoDeTrabajo: [],
+    areaDeNegocio: [],
+
+    // MOVIL
+    planes: [],
+    sitio: [],
+
+    // FIJO
+    tipoNumeroInterno: [],
+    numeroInternoHasOT: [],
+  })),
+  on(OtActions.resetPlan, (state, payload) => ({
+    ...state,
+    planes: [],
+  })),
+  on(OtActions.resetSitio, (state, payload) => ({
+    ...state,
+    sitio: [],
+  })),
+  on(OtActions.resetPMO, (state, payload) => ({
+    ...state,
+    pmos: [],
+  })),
+  on(OtActions.resetSAP, (state, payload) => ({
+    ...state,
+    cuentas_sap: [],
+  })),
+  on(OtActions.resetLPs, (state, payload) => ({
+    ...state,
+    lineaPresupuestaria: [],
+  })),
+  on(OtActions.resetPEP2, (state, payload) => ({
+    ...state,
+    pep2s: [],
+  })),
+  on(OtActions.resetCECO, (state, payload) => ({
+    ...state,
+    cecos: [],
+  })),
+  //  ////
   on(OtActions.getOts, (state, { request }) => ({
     ...state,
     filtro_propietario: request.filtro_propietario,
@@ -121,59 +528,6 @@ export const reducerOt = createReducer(
   //   ...state,
   //   items: [...state.items, payload.ot],
   // })),
-
-  on(OtActions.getPlans, state => state),
-  on(OtActions.getPlansSuccess, (state, payload) => ({
-    ...state,
-    planes: payload.plans,
-  })),
-
-  on(OtActions.getSiteSuccess, (state, { sitio }) => ({
-    ...state,
-    sitio,
-  })),
-
-  on(OtActions.getPmo, state => state),
-  on(OtActions.getPmoSuccess, (state, payload) => ({
-    ...state,
-    pmos: payload.pmos,
-  })),
-
-  on(OtActions.getIDOpex, state => state),
-  on(OtActions.getIDOpexSuccess, (state, payload) => ({
-    ...state,
-    ids_opex: payload.ids_opex,
-  })),
-
-  on(OtActions.getCuentaSAP, state => state),
-  on(OtActions.getCuentaSAPSuccess, (state, payload) => ({
-    ...state,
-    cuentas_sap: payload.cuentas_sap,
-  })),
-
-  on(OtActions.getCECO, state => state),
-  on(OtActions.getCECOSuccess, (state, payload) => ({
-    ...state,
-    cecos: payload.cecos,
-  })),
-
-  on(OtActions.getBudgetLine, state => state),
-  on(OtActions.getBudgetLineSuccess, (state, payload) => ({
-    ...state,
-    budgetLines: payload.lp,
-  })),
-
-  on(OtActions.getPep2, state => state),
-  on(OtActions.getPep2Success, (state, payload) => ({
-    ...state,
-    pep2s: payload.pep2,
-  })),
-
-  on(OtActions.getProyecto, state => state),
-  on(OtActions.getProyectoSuccess, (state, payload) => ({
-    ...state,
-    proyectos: payload.proyectos,
-  })),
 
   on(OtActions.getDetalleOt, state => state),
   on(OtActions.getDetalleOtSuccess, (state, payload) => ({
@@ -315,43 +669,11 @@ export const reducerOt = createReducer(
     ...state,
   })),
 
-  on(OtActions.resetData, (state, payload) => ({
-    ...initialStateOt,
-  })),
-  on(OtActions.resetPlan, (state, payload) => ({
-    ...state,
-    planes: [],
-  })),
-  on(OtActions.resetSitio, (state, payload) => ({
-    ...state,
-    sitio: [],
-  })),
-  on(OtActions.resetPMO, (state, payload) => ({
-    ...state,
-    pmos: [],
-  })),
-  on(OtActions.resetSAP, (state, payload) => ({
-    ...state,
-    cuentas_sap: [],
-  })),
-  on(OtActions.resetLPs, (state, payload) => ({
-    ...state,
-    budgetLines: [],
-  })),
-  on(OtActions.resetPEP2, (state, payload) => ({
-    ...state,
-    pep2s: [],
-  })),
-  on(OtActions.resetCECO, (state, payload) => ({
-    ...state,
-    cecos: [],
-  })),
-
-  on(OtActions.postOt, (state, { ot }) => ({
-    ...state,
-    saving: true,
-    errorSaving: null,
-  })),
+  // on(OtActions.postOt, (state, { ot }) => ({
+  //   ...state,
+  //   saving: true,
+  //   errorSaving: null,
+  // })),
   on(OtActions.postOtSuccess, (state, { ot }) => ({
     ...state,
     saving: false,

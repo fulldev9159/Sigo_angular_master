@@ -3,7 +3,7 @@ import { Observable, Subscription, of } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { Cubicacion, Plan, Sitio } from '@data';
+import { Cubicacion, PlanDeProyecto, Sitio } from '@data';
 
 @Component({
   selector: 'app-plan-proyecto-form',
@@ -12,33 +12,34 @@ import { Cubicacion, Plan, Sitio } from '@data';
 })
 export class PlanProyectoFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  planes$: Observable<Plan[]> = of([]);
+  planes$: Observable<PlanDeProyecto[]> = of([]);
   sitios$: Observable<Sitio[]> = of([]);
 
   @Input() form: FormGroup;
 
-  cubicacion: Cubicacion;
-  @Input('cubicacion')
-  set cubicacionInput(cubicacion: Cubicacion) {
-    this.resetPlanProyectoFormControl();
+  // cubicacion: Cubicacion;
+  // @Input('cubicacion')
+  // set cubicacionInput(cubicacion: Cubicacion) {
+  //   this.resetPlanProyectoFormControl();
 
-    this.cubicacion = cubicacion;
-    if (cubicacion !== null && cubicacion !== undefined) {
-      this.otFacade.getPlans(+cubicacion.region_id);
-    } else {
-      this.form.get('plan_proyecto_id').disable();
-    }
-  }
+  //   this.cubicacion = cubicacion;
+  //   if (cubicacion !== null && cubicacion !== undefined) {
+  //     this.otFacade.getPlanDeProyecto();
+  //   } else {
+  //     this.form.get('plan_proyecto_id').disable();
+  //   }
+  // }
 
   constructor(private otFacade: OtFacade) {}
 
   ngOnInit(): void {
-    this.planes$ = this.otFacade.getPlans$().pipe(
+    this.otFacade.getPlanDeProyecto();
+    this.planes$ = this.otFacade.getPlanDeProyecto$().pipe(
       map(proveedores => proveedores || []),
       tap(proveedores => this.checkPlanProyectoAndEnable(proveedores))
     );
 
-    this.sitios$ = this.otFacade.getSitesSelector$().pipe(
+    this.sitios$ = this.otFacade.getSitio$().pipe(
       map(sitios => sitios || []),
       tap(sitios => this.checkSitiosAndEnable(sitios))
     );
@@ -51,12 +52,9 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
           this.resetSitioFormControl();
           if (plan_proyecto_id !== null && plan_proyecto_id !== undefined) {
             // const plan = planes.find(p => +p.id === +plan_proyecto_id);
-            if (this.cubicacion) {
-              this.otFacade.getSitesAction(
-                +plan_proyecto_id,
-                +this.cubicacion.region_id
-              );
-            }
+            // if (this.cubicacion) {
+            this.otFacade.getSitio(+plan_proyecto_id);
+            // }
           } else {
             this.checkSitiosAndEnable([]);
           }
@@ -78,7 +76,7 @@ export class PlanProyectoFormComponent implements OnInit, OnDestroy {
     this.otFacade.resetSitio();
   }
 
-  checkPlanProyectoAndEnable(planes: Plan[]): void {
+  checkPlanProyectoAndEnable(planes: PlanDeProyecto[]): void {
     if (planes.length > 0) {
       this.form.get('plan_proyecto_id').enable();
     } else {

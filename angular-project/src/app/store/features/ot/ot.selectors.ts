@@ -4,6 +4,109 @@ import * as fromOt from './ot.reducer';
 export const selectOt = createFeatureSelector<fromOt.StateOt>(
   fromOt.otFeatureKey
 );
+
+export const contratosUser4OT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.contratosUser4OT
+);
+
+export const cubicaciones4OT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.cubicaciones
+);
+
+export const cubicacionSeleccionada = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.cubicacionSeleccionada
+);
+
+export const getPMO = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.pmos
+);
+
+export const getLps = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.lineaPresupuestaria
+);
+export const getIDsOpex = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.ids_opex
+);
+
+export const getCuentasSAP = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.cuentas_sap
+);
+
+export const getCECOs = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.cecos
+);
+
+export const getPeps2 = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.pep2s
+);
+
+export const getProyectos = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.proyectos
+);
+
+export const getAdminContrato = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.adminContrato
+);
+
+// BUCLE
+export const getOficinaCentral = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.oficinaCentral
+);
+export const getSolicitadoPor = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.solicitadoPor
+);
+export const getComuna = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.comuna
+);
+export const getTipoDeRed = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.tipoDeRed
+);
+export const getTipoDeTrabajo = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.tipoDeTrabajo
+);
+export const getAreaDeNegocio = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.areaDeNegocio
+);
+
+// MOVIL
+export const getPlans = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.planes
+);
+
+export const getSitio = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.sitio
+);
+
+// FIJO
+export const getTipoNumeroInterno = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.tipoNumeroInterno
+);
+
+export const getNumeroInternoHasOT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.numeroInternoHasOT
+);
+//  ////
 export const getOtEjecucion = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.otsEjecucion
@@ -30,51 +133,6 @@ export const getOtFilters = createSelector(
     filtro_propietario: state.filtro_propietario,
     filtro_tipo: state.filtro_tipo,
   })
-);
-
-export const getPlans = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.planes
-);
-
-export const getSites = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.sitio
-);
-
-export const getPmos = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.pmos
-);
-
-export const getIDsOpex = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.ids_opex
-);
-
-export const getCuentasSAP = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.cuentas_sap
-);
-
-export const getCECOs = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.cecos
-);
-
-export const getLps = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.budgetLines
-);
-
-export const getPeps2 = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.pep2s
-);
-
-export const getProyectos = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.proyectos
 );
 
 export const getDetalleOt = createSelector(

@@ -3,15 +3,17 @@
     <app-input ID="nombre-ot" [control]="form.get('nombre')" [label]="'Nombre de la orden de trabajo'"></app-input>
   </div>
 
-  <div class="col-xs-12 col-md-6" id="control_tipo_ot">
-    <app-select [control]="form.get('tipo')" label="Tipo OT" ID="tipo-ot">
+  <div class="col-xs-12 col-md-6" id="contratosUser">
+    <app-select [control]="form.get('contrato')" label="* Contrato">
       <ng-container options>
-        <option value="null" selected disabled>Seleccione tipo OT</option>
-        <option value="OT">OT</option>
-        <option value="AP">AP</option>
+        <option value="null" selected disabled>Seleccione un contrato</option>
+        <ng-container *ngFor="let contrato of contratosUser4OT$|async">
+          <option [value]="contrato.contrato_id">
+            {{ contrato.model_contrato_id.nombre }}
+          </option>
+        </ng-container>
       </ng-container>
     </app-select>
-    <br>
   </div>
 
   <div class="col-xs-12 col-md-6" id="control_cubicacion_id">
@@ -19,8 +21,8 @@
       <ng-container options>
         <option value="null" selected disabled>Seleccione cubicación</option>
         <ng-container *ngFor="let cubicacion of cubicaciones$ | async">
-          <option [value]="cubicacion.id">
-            {{ cubicacion.nombre }}
+          <option [value]="cubicacion.cubicacion_id">
+            {{ cubicacion.cubicacion_nombre }}
           </option>
         </ng-container>
       </ng-container>

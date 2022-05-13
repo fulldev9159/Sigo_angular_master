@@ -24,8 +24,6 @@ import * as otActions from './ot.actions';
 import { environment } from '@environment';
 
 import { Response } from '@storeOT/model';
-import * as OtModel from './ot.model';
-import { RequestGetOTs } from '@data';
 import {
   DetalleActa,
   LpusPorcentajes,
@@ -40,16 +38,285 @@ export class OtEffects {
     private snackService: SnackBarService,
     private otService: Data.OTService,
     private informeAvanceService: Data.InformAvenceService,
-    private planProyectoService: Data.PlanProyectoService,
-    private sitioService: Data.SitioService,
     private sustentofinancieroService: Data.SustentoFinancieroService,
     private actaService: Data.ActaService,
+    private userService: Data.UserService,
     private authFacade: AuthFacade,
     private otFacade: OtFacade,
     private messageService: MessageService,
     private messageServiceInt: Data.NotifyAfter,
     private router: Router
   ) {}
+
+  getContratos4OT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getContratosUser4OT),
+      concatMap(({ usuario_id }) =>
+        this.userService.getContratosUser(usuario_id).pipe(
+          map(response => otActions.getContratosUser4OTSuccess({ response })),
+          catchError(err =>
+            of(otActions.getContratosUser4OTError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  getCubicaciones4OT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCubicaciones4OT),
+      concatMap(({ contrato_id }) =>
+        this.otService.getCubicaciones(contrato_id).pipe(
+          map(response => otActions.getCubicaciones4OTSuccess({ response })),
+          catchError(error => of(otActions.getCubicaciones4OTError({ error })))
+        )
+      )
+    )
+  );
+
+  getPMO$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getPMO),
+      concatMap(({ sitio_codigo }) =>
+        this.sustentofinancieroService.getPMO4OT(sitio_codigo).pipe(
+          map(response => otActions.getPMOSuccess({ response })),
+          catchError(error => of(otActions.getPmoError({ error })))
+        )
+      )
+    )
+  );
+
+  getLineaPresupuestaria$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getLineaPresupuestaria),
+      concatMap(({ pmo_id }) =>
+        this.sustentofinancieroService.getLineaPresupuestaria(pmo_id).pipe(
+          map(response =>
+            otActions.getLineaPresupuestariaSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.getLineaPresupuestariaError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getPep2$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getPEP2),
+      concatMap(({ pmo_codigo, linea_presupuestaria_codigo }) =>
+        this.sustentofinancieroService
+          .getPEP2(pmo_codigo, linea_presupuestaria_codigo)
+          .pipe(
+            map(response => otActions.getPEP2Success({ response })),
+            catchError(error => of(otActions.getPEP2Error({ error })))
+          )
+      )
+    )
+  );
+
+  getIDOpex$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getIDOpex),
+      concatMap(() =>
+        this.sustentofinancieroService.getOPEX().pipe(
+          map(response => otActions.getIDOpexSuccess({ response })),
+          catchError(error => of(otActions.getIDOpexError({ error })))
+        )
+      )
+    )
+  );
+
+  getCuentasSAP$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCuentaSAP),
+      concatMap(({ id_opex }) =>
+        this.sustentofinancieroService.getSAP(id_opex).pipe(
+          map(response => otActions.getCuentaSAPSuccess({ response })),
+          catchError(error => of(otActions.getCuentaSAPError({ error })))
+        )
+      )
+    )
+  );
+
+  getCECO$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCECO),
+      concatMap(({ id_opex, cuenta_sap }) =>
+        this.sustentofinancieroService.getCECO(id_opex, cuenta_sap).pipe(
+          map(response => otActions.getCECOSuccess({ response })),
+          catchError(error => of(otActions.getCECOError({ error })))
+        )
+      )
+    )
+  );
+
+  getProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getProyecto),
+      concatMap(() =>
+        this.otService.getProyectos().pipe(
+          map(response => otActions.getProyectoSuccess({ response })),
+          catchError(error => of(otActions.getProyectoError({ error })))
+        )
+      )
+    )
+  );
+
+  getAdminContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getAdminContrato),
+      concatMap(({ cubicacion_id }) =>
+        this.otService.getAdminContrato(cubicacion_id).pipe(
+          map(response => otActions.getAdminContratoSuccess({ response })),
+          catchError(error => of(otActions.getAdminContratoError({ error })))
+        )
+      )
+    )
+  );
+
+  getOficinaCentral$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getOficinaCentral),
+      concatMap(({ agencia_id }) =>
+        this.otService.getOficinaCentral(agencia_id).pipe(
+          map(response => otActions.getOficinaCentralSuccess({ response })),
+          catchError(error => of(otActions.getOficinaCentralError({ error })))
+        )
+      )
+    )
+  );
+
+  getSolicitadoPor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getSolicitadoPor),
+      concatMap(() =>
+        this.otService.getSolicitadoPor().pipe(
+          map(response => otActions.getSolicitadoPorSuccess({ response })),
+          catchError(error => of(otActions.getSolicitadoPorError({ error })))
+        )
+      )
+    )
+  );
+
+  getComuna$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getComuna),
+      concatMap(({ cubicacion_id }) =>
+        this.otService.getComuna(cubicacion_id).pipe(
+          map(response => otActions.getComunaSuccess({ response })),
+          catchError(error => of(otActions.getComunaError({ error })))
+        )
+      )
+    )
+  );
+
+  getTipoDeRed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeRed),
+      concatMap(() =>
+        this.otService.getTipoRed().pipe(
+          map(response => otActions.getTipoDeRedSuccess({ response })),
+          catchError(error => of(otActions.getTipoDeRedError({ error })))
+        )
+      )
+    )
+  );
+
+  getTipoDeTrabajo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeTrabajo),
+      concatMap(({ cubicacion_id }) =>
+        this.otService.getTipoTrabajo(cubicacion_id).pipe(
+          map(response => otActions.getTipoDeTrabajoSuccess({ response })),
+          catchError(error => of(otActions.getTipoDeTrabajoError({ error })))
+        )
+      )
+    )
+  );
+
+  getAreaDeNegocio$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getAreaDeNegocio),
+      concatMap(() =>
+        this.otService.getAreaNegocio().pipe(
+          map(response => otActions.getAreaDeNegocioSuccess({ response })),
+          catchError(error => of(otActions.getAreaDeNegocioError({ error })))
+        )
+      )
+    )
+  );
+
+  getPlanDeProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getPlanDeProyecto),
+      concatMap(() =>
+        this.otService.getPlanDeProyecto().pipe(
+          map(response => otActions.getPlanDeProyectoSuccess({ response })),
+          catchError(error => of(otActions.getPlanDeProyectoError({ error })))
+        )
+      )
+    )
+  );
+
+  getSitio$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getSitio),
+      concatMap(({ plan_id }) =>
+        this.otService.getSitio(plan_id).pipe(
+          map(response => otActions.getSitioSuccess({ response })),
+          catchError(error => of(otActions.getSitioError({ error })))
+        )
+      )
+    )
+  );
+
+  // FIJO
+  // TIPO NUMERO INTERNO
+  getTipoNumeroInterno$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTipoNumeroInterno),
+      concatMap(() =>
+        this.otService.getTipoNumeroInterno().pipe(
+          map(response => otActions.getTipoNumeroInternoSuccess({ response })),
+          catchError(error =>
+            of(otActions.getTipoNumeroInternoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // NUMERO INTERNO HAS OT
+  getNumeroInternoHasOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getNumeroInternoHasOT),
+      concatMap(({ numero_interno }) =>
+        this.otService.getNumeroInternoHasOT(numero_interno).pipe(
+          map(response => otActions.getNumeroInternoHasOTSuccess({ response })),
+          catchError(error =>
+            of(otActions.getNumeroInternoHasOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // CREATE OT
+  createOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.createOT),
+      concatMap(({ request }) =>
+        this.otService.createOT(request).pipe(
+          map(response => otActions.createOTSuccess({ response })),
+          catchError(error => of(otActions.createOTError({ error })))
+        )
+      )
+    )
+  );
+
+  // ////
 
   getOTs$ = createEffect(() =>
     this.actions$.pipe(
@@ -71,240 +338,30 @@ export class OtEffects {
     )
   );
 
-  getPlans$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getPlans),
-      concatMap(({ region_id }) =>
-        this.planProyectoService.getPlans4OT(region_id).pipe(
-          map(({ plans, status }) =>
-            otActions.getPlansSuccess({ plans, status })
-          ),
-          catchError(error => of(otActions.getPlansError({ error })))
-        )
-      )
-    )
-  );
-
-  getSites$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getSite),
-      concatMap(({ plan_proyecto_id, region_id }) =>
-        this.sitioService.getSitios4OT(plan_proyecto_id, region_id).pipe(
-          map(
-            ({ sitio, status }) =>
-              otActions.getSiteSuccess({
-                sitio,
-                status,
-              }),
-            catchError(err => of(otActions.getSiteError({ error: err })))
-          )
-        )
-      )
-    )
-  );
-
-  getPmo$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getPmo),
-      concatMap(({ sitio_codigo }) =>
-        this.sustentofinancieroService.getPMO4OT(sitio_codigo).pipe(
-          map(({ pmos, status }) =>
-            otActions.getPmoSuccess({
-              pmos,
-              status,
-            })
-          ),
-          catchError(error => of(otActions.getPmoError({ error })))
-        )
-      )
-    )
-  );
-
-  getIDOpex$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getIDOpex),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/opex/id_opex/get_all`, {})
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-
-              const SortOPEXs = res.data.items
-                ? res.data.items.sort((a: OtModel.IDOpex, b: OtModel.IDOpex) =>
-                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                  )
-                : [];
-              return otActions.getIDOpexSuccess({
-                ids_opex: SortOPEXs,
-              });
-            }),
-            catchError(err => of(otActions.getIDOpexError({ error: err })))
-          )
-      )
-    )
-  );
-
-  getCuentasSAP$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getCuentaSAP),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/opex/cuenta_sap/get`, {
-            id_opex: data.id_opex_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const SortCuentasSOAP = res.data.items
-                ? res.data.items.sort(
-                    (a: OtModel.CuentaSap, b: OtModel.CuentaSap) =>
-                      a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                  )
-                : [];
-              return otActions.getCuentaSAPSuccess({
-                cuentas_sap: SortCuentasSOAP,
-              });
-            }),
-            catchError(err => of(otActions.getCuentaSAPError({ error: err })))
-          )
-      )
-    )
-  );
-
-  getCECO$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getCECO),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/opex/ceco/get`, {
-            id_opex: data.id_opex_codigo,
-            cuenta_sap: data.cuenta_sap_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const SortCECOs = res.data.items
-                ? res.data.items.sort((a: OtModel.CECO, b: OtModel.CECO) =>
-                    a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                  )
-                : [];
-              return otActions.getCECOSuccess({
-                cecos: SortCECOs,
-              });
-            }),
-            catchError(err => of(otActions.getCECOError({ error: err })))
-          )
-      )
-    )
-  );
-
-  getLineaPresupuestaria$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getBudgetLine),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/lp/get`, {
-            token: data.token,
-            pmo_codigo: +data.pmo_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              const SortLPs = res.data.items
-                ? res.data.items.sort((a: OtModel.Lp, b: OtModel.Lp) =>
-                    a.lineas_presupuestarias > b.lineas_presupuestarias
-                      ? 1
-                      : b.lineas_presupuestarias > a.lineas_presupuestarias
-                      ? -1
-                      : 0
-                  )
-                : [];
-              return otActions.getBudgetLineSuccess({
-                lp: SortLPs,
-              });
-            }),
-            catchError(err => of(otActions.getBudgetLineError({ error: err })))
-          )
-      )
-    )
-  );
-
-  getPep2$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getPep2),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/pep2/get`, {
-            token: data.token,
-            pmo_codigo: +data.pmo_codigo,
-            lp_codigo: data.lp_codigo,
-          })
-          .pipe(
-            map((res: any) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return otActions.getPep2Success({ pep2: res.data.items });
-            }),
-            catchError(err => of(otActions.getPep2Error({ error: err })))
-          )
-      )
-    )
-  );
-
-  getProyecto$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getProyecto),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}/proyectos/get_all`, {}).pipe(
-          map((res: any) => {
-            if (+res.status.responseCode !== 0) {
-              this.snackService.showMessage(
-                `No existen proyectos - ${res.status.description}`,
-                'error'
-              );
-            }
-            return otActions.getProyectoSuccess({ proyectos: res.data.items });
-          }),
-          catchError(err => of(otActions.getProyectoError({ error: err })))
-        )
-      )
-    )
-  );
-
-  postOt$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.postOt),
-      concatMap((data: any) =>
-        this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
-          tap(res => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Registro guardado',
-              detail: 'Registro se ha generado con Éxito!',
-            });
-            this.router.navigate(['app/ot/list-ot']);
-          }),
-          map((res: any) => {
-            if (+res.status.responseCode !== 0) {
-              this.snackService.showMessage(res.status.description, 'error');
-            }
-            return otActions.postOtSuccess({ ot: res.data.items });
-          }),
-          catchError(err => of(otActions.postOtError({ error: err })))
-        )
-      )
-    )
-  );
+  // postOt$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(otActions.postOt),
+  //     concatMap((data: any) =>
+  //       this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
+  //         tap(res => {
+  //           this.messageService.add({
+  //             severity: 'success',
+  //             summary: 'Registro guardado',
+  //             detail: 'Registro se ha generado con Éxito!',
+  //           });
+  //           this.router.navigate(['app/ot/list-ot']);
+  //         }),
+  //         map((res: any) => {
+  //           if (+res.status.responseCode !== 0) {
+  //             this.snackService.showMessage(res.status.description, 'error');
+  //           }
+  //           return otActions.postOtSuccess({ ot: res.data.items });
+  //         }),
+  //         catchError(err => of(otActions.postOtError({ error: err })))
+  //       )
+  //     )
+  //   )
+  // );
 
   getDetalleOt$ = createEffect(() =>
     this.actions$.pipe(
@@ -1317,35 +1374,35 @@ export class OtEffects {
     )
   );
 
-  notifyAfterSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(
-          otActions.getOtEjecucionSuccess,
-          otActions.getOtAbiertasSuccess,
-          otActions.getOtSuccessCerradas,
-          otActions.saveBorradorInformeAvanceSuccess,
-          otActions.saveInformeAvanceTrabajadorSuccess,
-          otActions.saveInformeAvanceAdminECSuccess,
-          otActions.getDataInformeAvanceTrabajadorSuccess,
-          otActions.getDataInformeAvanceAdminECSuccess,
-          otActions.rechazarInformeAvanceSuccess,
-          otActions.getDataInformeActaSuccess,
-          otActions.saveInformeActaSuccess,
-          otActions.rechazarInformeActaSuccess,
-          // otActions.inicializarInformeAvanceSuccess,
-          otActions.getPlansSuccess,
-          otActions.getSiteSuccess,
-          otActions.getPmoSuccess,
-          otActions.getDetalleActaSuccess,
-          otActions.sendSolicitudPagoActaSuccess
-        ),
-        tap(action =>
-          this.messageServiceInt.actions200(action.status, action.type, action)
-        )
-      ),
-    { dispatch: false }
-  );
+  // notifyAfterSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(
+  //         otActions.getOtEjecucionSuccess,
+  //         otActions.getOtAbiertasSuccess,
+  //         otActions.getOtSuccessCerradas,
+  //         otActions.saveBorradorInformeAvanceSuccess,
+  //         otActions.saveInformeAvanceTrabajadorSuccess,
+  //         otActions.saveInformeAvanceAdminECSuccess,
+  //         otActions.getDataInformeAvanceTrabajadorSuccess,
+  //         otActions.getDataInformeAvanceAdminECSuccess,
+  //         otActions.rechazarInformeAvanceSuccess,
+  //         otActions.getDataInformeActaSuccess,
+  //         otActions.saveInformeActaSuccess,
+  //         otActions.rechazarInformeActaSuccess,
+  //         // otActions.inicializarInformeAvanceSuccess,
+  //         otActions.getPlansSuccess,
+  //         otActions.getSiteSuccess,
+  //         otActions.getPMOSuccess,
+  //         otActions.getDetalleActaSuccess,
+  //         otActions.sendSolicitudPagoActaSuccess
+  //       ),
+  //       tap(action =>
+  //         this.messageServiceInt.actions200(action.status, action.type, action)
+  //       )
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterError = createEffect(
     () =>
@@ -1360,8 +1417,6 @@ export class OtEffects {
           otActions.saveInformeActaError,
           otActions.rechazarInformeActaError,
           // otActions.inicializarInformeAvanceError,
-          otActions.getPlansError,
-          otActions.getSiteError,
           otActions.getPmoError,
           otActions.getDetalleActaError
         ),

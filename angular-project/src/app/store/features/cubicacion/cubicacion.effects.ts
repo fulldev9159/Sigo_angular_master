@@ -325,23 +325,23 @@ export class CubicacionEffects {
     )
   );
 
-  getCubicacion$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getSingleCubicacion),
-      concatMap(({ cubicacion_id }) =>
-        this.cubService.getCubicacion(cubicacion_id).pipe(
-          map((cubicacion: CubicacionWithLpu) =>
-            cubActions.getSingleCubicacionSuccess({
-              cubicacion,
-            })
-          ),
-          catchError(err =>
-            of(cubActions.getSingleCubicacionError({ error: err }))
-          )
-        )
-      )
-    )
-  );
+  // getCubicacion$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(cubActions.getSingleCubicacion),
+  //     concatMap(({ cubicacion_id }) =>
+  //       this.cubService.getCubicacion(cubicacion_id).pipe(
+  //         map((cubicacion: CubicacionWithLpu) =>
+  //           cubActions.getSingleCubicacionSuccess({
+  //             cubicacion,
+  //           })
+  //         ),
+  //         catchError(err =>
+  //           of(cubActions.getSingleCubicacionError({ error: err }))
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
   getContractMarco4Cub$ = createEffect(() =>
     this.actions$.pipe(

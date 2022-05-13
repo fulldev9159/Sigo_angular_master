@@ -1,6 +1,243 @@
 import { Accion } from './accion';
+// GET CUBS
+export interface DataRespGetCubicaciones {
+  items: Cubs4OT[];
+}
+
+export interface Cubs4OT {
+  agencia_id: number;
+  creador_usuario_nombre: string;
+  cubicacion_descripcion: string;
+  cubicacion_id: number;
+  cubicacion_nombre: string;
+  tipo_contrato_marco_nombre: string;
+}
+
+// GET PROYECTOS
+export interface DataRespGetProyectos {
+  items: Proyectos[];
+}
+
+export interface Proyectos {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  usuario_creador_id: number;
+}
+
+// GET ADM CONTRATOS
+export interface DataRespGetAdminContrato {
+  items: AdminContrato4OT[];
+}
+
+export interface AdminContrato4OT {
+  id: number;
+  nombre: string;
+  cantidad_de_trabajo: number;
+}
+
+// BUCLE
+
+// GET OFICINA CENTRAL
+export interface DataRespGetOficinaCentral {
+  items: OficinaCentral[];
+}
+
+export interface OficinaCentral {
+  agencia_id: number;
+  descripcion: string;
+  id: number;
+  idafac: string;
+}
+
+// GET SOLICITAPO POR
+export interface DataRespGetSolicitadoPor {
+  items: SolicitadoPor[];
+}
+
+export interface SolicitadoPor {
+  descripcion: string;
+  id: number;
+}
+
+// GET COMUNA
+export interface DataRespGetComuna {
+  items: Comuna[];
+}
+
+export interface Comuna {
+  comuna_id: number;
+  comuna_nombre: string;
+}
+
+// GET TIPO DE RED
+export interface DataRespGetTipoDeRed {
+  items: TipoDeRed[];
+}
+
+export interface TipoDeRed {
+  descripcion: string;
+  estado: boolean;
+  id: number;
+}
+
+// GET TIPO DE TRABAJO
+export interface DataRespGetTipoDeTrabajo {
+  items: TipoDeTrabajo[];
+}
+
+export interface TipoDeTrabajo {
+  tipo_trabajo_codigo: string;
+  tipo_trabajo_descripcion: string;
+  tipo_trabajo_id: number;
+}
+
+// GET AREA DE NEGOCIO
+export interface DataRespGetAreaDeNegocio {
+  items: AreaDeNegocio[];
+}
+
+export interface AreaDeNegocio {
+  descripcion: string;
+  id: number;
+}
+
+// MOVIL
+
+// GET PLAN DE PROYECTO
+export interface DataRespGetPlanDeProyecto {
+  items: PlanDeProyecto[];
+}
+
+export interface PlanDeProyecto {
+  created_at: Date;
+  estado: boolean;
+  id: number;
+  nombre: string;
+}
+
+// GET SITIO
+export interface DataRespGetSitio {
+  items: Sitio[];
+}
+
+export interface Sitio {
+  codigo: string;
+  comuna: string;
+  created_at: Date;
+  direccion: string;
+  duenno_estructura: string;
+  fecha_liberacion: Date;
+  fecha_termino: Date;
+  geo_lat: number;
+  geo_lon: number;
+  id: number;
+  metas: string;
+  model_plan_id: { id: number; nombre: string; estado: true; created_at: Date };
+  model_region_id: { id: number; nombre: string; codigo: string };
+  nemonico: string;
+  nombre: string;
+  plan_id: number;
+  region_id: number;
+  tipo: string;
+  vendor: string;
+}
+
+// FIJO
+
+// NUMERO INTERNO
+export interface DataRespGetTipoNumeroInterno {
+  items: TipoNumeroInterno[];
+}
+
+export interface TipoNumeroInterno {
+  id: number;
+  nombre: string;
+}
+
+// NUMERO INTERNO HAS OT
+export interface DataRespGetNumeroInternoHasOT {
+  items: NumeroInternoHasOT[];
+}
+
+export interface NumeroInternoHasOT {
+  id: number;
+  ot_id: number;
+  numero_interno: string;
+  tipo_numero_interno_id: number;
+}
+
+export interface CreateOTBase {
+  adm_contrato_proxy_id: number;
+  proyecto_id: number;
+  nombre: string;
+  cubicacion_id: number;
+  observaciones: string;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  tipo_sustento: string;
+  es_sustento_provisorio: boolean;
+  pmo_codigo: number;
+  id_opex: string;
+  lp: string;
+  cuenta_sap: number;
+  pep2: string;
+  ceco: string;
+}
+
+export interface CreateOTOrdinario extends CreateOTBase {
+  carta_adjudicacion: string;
+  fecha_adjudicacion: Date;
+  numero_pedido: string;
+  materia: string;
+}
+export interface CreateOTMovil extends CreateOTBase {
+  plan_id: number;
+  sitio_plan_id: number;
+}
+
+export interface CreateOTBucle extends CreateOTBase {
+  oficina_central_id: number;
+  solicitante_id: number;
+  direccion: string;
+  altura: string;
+  piso: string;
+  departamento: string;
+  comuna_id: number;
+  tipo_red_id: number;
+  tipo_trabajo_id: number;
+  tiene_boleta_garantia: boolean;
+  tiene_permisos: boolean;
+  area_negocio: string;
+  nombre_proyectista: string;
+}
+
+export interface RequestCreateOTOrdinario {
+  // id: number;
+  ot_datos: CreateOTOrdinario;
+}
+export interface RequestCreateOTMovil {
+  // id: number;
+  ot_datos: CreateOTMovil;
+}
+
+export interface RequestCreateOTBucle {
+  // id: number;
+  ot_datos: CreateOTBucle;
+}
+
+export interface RequestCreateOTFijo {
+  // id: number;
+  ot_datos: CreateOTBase;
+  ot_numero_interno: {
+    tipo_numero_interno_id: number;
+    numero_interno: string[];
+  };
+}
+// ////
 
 // GET OTs init
+
 export interface RequestGetOTs {
   filtro_pestania: string;
   filtro_propietario: string;

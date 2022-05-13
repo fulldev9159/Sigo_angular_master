@@ -15,10 +15,10 @@
           <td><strong>Proveedor</strong></td>
           <td>{{ cubicacion ? ': ' + cubicacion.proveedor_nombre : ' ---' }}</td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td><strong>Región</strong></td>
-          <td>{{ cubicacion ? ': ' + cubicacion.region_nombre : ' ---' }}</td>
-        </tr>
+          <td>{{ cubicacion ? ': ' + cubicacion : ' ---' }}</td>
+        </tr> -->
         <tr *ngxPermissionsOnly="['OT_VER_VALOR_LPU']">
           <td><strong>Total</strong></td>
           <td>{{ cubicacion ? ': ' + (cubicacion.total|currency : cubicacion.total_tipo_moneda : cubicacion.total_tipo_moneda===''?'':cubicacion.total_tipo_moneda + ' $':'.0-2':'es-CL') : ' ---' }}</td>

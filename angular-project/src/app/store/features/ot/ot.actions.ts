@@ -1,11 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import * as OtModel from './ot.model';
 import * as Data from '@data';
 import {
   DataInformeAvance,
+  DataRespGetContratosUser,
   LpuInformeAvanceDetalle,
   OT,
-  Plan,
   PMO,
   RequestGetOTs,
   RequestSaveBorradorInformeAvance,
@@ -13,6 +12,31 @@ import {
   RequestSaveInformeAvanceAdmin,
   Sitio,
   StatusResponse,
+  Response,
+  DataRespGetPMO,
+  DataRespGetLP,
+  DataRespGetPEP2,
+  DataRespGetOPEX,
+  DataRespGetSAP,
+  DataRespGetCECO,
+  DataRespGetCubicaciones,
+  DataRespGetProyectos,
+  DataRespGetAdminContrato,
+  Cubs4OT,
+  DataRespGetOficinaCentral,
+  DataRespGetSolicitadoPor,
+  DataRespGetComuna,
+  DataRespGetTipoDeRed,
+  DataRespGetTipoDeTrabajo,
+  DataRespGetAreaDeNegocio,
+  DataRespGetPlanDeProyecto,
+  DataRespGetSitio,
+  DataRespGetTipoNumeroInterno,
+  DataRespGetNumeroInternoHasOT,
+  RequestCreateOTMovil,
+  RequestCreateOTFijo,
+  RequestCreateOTOrdinario,
+  RequestCreateOTBucle,
 } from '@data';
 import {
   DetalleActa,
@@ -20,6 +44,345 @@ import {
   RequestSolicitudPagoActa,
 } from '@data/model/acta';
 
+// GET CONTRATOS USER 4 OT
+export const getContratosUser4OT = createAction(
+  '[OT] getContratosUser4OT ',
+  props<{ usuario_id: number }>()
+);
+
+export const getContratosUser4OTSuccess = createAction(
+  '[OT] getContratosUser4OT Success',
+  props<{ response: Response<DataRespGetContratosUser> }>()
+);
+export const getContratosUser4OTError = createAction(
+  '[OT] getContratosUser4OT Error',
+  props<{ error: any }>()
+);
+
+// GET CUBICACIONES
+export const getCubicaciones4OT = createAction(
+  '[OT] GET getCubicaciones4OT',
+  props<{ contrato_id: number }>()
+);
+
+export const getCubicaciones4OTSuccess = createAction(
+  '[OT] GET getCubicaciones4OT Success',
+  props<{ response: Response<DataRespGetCubicaciones> }>()
+);
+
+export const getCubicaciones4OTError = createAction(
+  '[OT] GET getCubicaciones4OT Error',
+  props<{ error: any }>()
+);
+
+// CUBICACION SELECCIONADA
+export const cubicacionSeleccionada = createAction(
+  '[OT] GET cubicacionSeleccionada',
+  props<{ cubicacion: Cubs4OT }>()
+);
+
+// GET PMO
+export const getPMO = createAction(
+  '[OT] GET PMO',
+  props<{ sitio_codigo: string }>()
+);
+
+export const getPMOSuccess = createAction(
+  '[OT] GET PMO Success',
+  props<{ response: Response<DataRespGetPMO> }>()
+);
+
+export const getPmoError = createAction(
+  '[OT] GET PMO Error',
+  props<{ error: any }>()
+);
+
+// LP
+export const getLineaPresupuestaria = createAction(
+  '[OT] GET getLineaPresupuestaria',
+  props<{ pmo_id: number }>()
+);
+
+export const getLineaPresupuestariaSuccess = createAction(
+  '[OT] GET getLineaPresupuestaria Success',
+  props<{ response: Response<DataRespGetLP> }>()
+);
+
+export const getLineaPresupuestariaError = createAction(
+  '[OT] GET getLineaPresupuestaria Error',
+  props<{ error: any }>()
+);
+
+// PEP2
+export const getPEP2 = createAction(
+  '[OT] GET getPEP2',
+  props<{ pmo_codigo: number; linea_presupuestaria_codigo: string }>()
+);
+
+export const getPEP2Success = createAction(
+  '[OT] GET getPEP2 Success',
+  props<{ response: Response<DataRespGetPEP2> }>()
+);
+
+export const getPEP2Error = createAction(
+  '[OT] GET getPEP2 Error',
+  props<{ error: any }>()
+);
+
+// OPEX
+export const getIDOpex = createAction('[OT] GET getIDOpex');
+
+export const getIDOpexSuccess = createAction(
+  '[OT] GET getIDOpex Success',
+  props<{ response: Response<DataRespGetOPEX> }>()
+);
+
+export const getIDOpexError = createAction(
+  '[OT] getIDOpex Error',
+  props<{ error: any }>()
+);
+
+// SAP
+export const getCuentaSAP = createAction(
+  '[OT] GET getCuentaSAP',
+  props<{ id_opex: string }>()
+);
+
+export const getCuentaSAPSuccess = createAction(
+  '[OT] GET getCuentaSAP Success',
+  props<{ response: Response<DataRespGetSAP> }>()
+);
+
+export const getCuentaSAPError = createAction(
+  '[OT] GET getCuentaSAP Error',
+  props<{ error: any }>()
+);
+
+// CECO
+export const getCECO = createAction(
+  '[OT] GET getCECO',
+  props<{ id_opex: string; cuenta_sap: number }>()
+);
+
+export const getCECOSuccess = createAction(
+  '[OT] GET getCECO Success',
+  props<{ response: Response<DataRespGetCECO> }>()
+);
+
+export const getCECOError = createAction(
+  '[OT] GET getCECO Error',
+  props<{ error: any }>()
+);
+
+// GET PROYECTOS
+export const getProyecto = createAction('[OT] GET getProyecto');
+
+export const getProyectoSuccess = createAction(
+  '[OT] GET getProyecto Success',
+  props<{ response: Response<DataRespGetProyectos> }>()
+);
+
+export const getProyectoError = createAction(
+  '[OT] GET getProyecto Error',
+  props<{ error: any }>()
+);
+
+// GET ADMIN CONTRATO
+export const getAdminContrato = createAction(
+  '[OT] GET getAdminContrato',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getAdminContratoSuccess = createAction(
+  '[OT] GET getAdminContrato Success',
+  props<{ response: Response<DataRespGetAdminContrato> }>()
+);
+
+export const getAdminContratoError = createAction(
+  '[OT] GET getAdminContrato Error',
+  props<{ error: any }>()
+);
+
+// GET OFICINA CENTRAL
+export const getOficinaCentral = createAction(
+  '[OT] GET getOficinaCentral',
+  props<{ agencia_id: number }>()
+);
+
+export const getOficinaCentralSuccess = createAction(
+  '[OT] GET getOficinaCentral Success',
+  props<{ response: Response<DataRespGetOficinaCentral> }>()
+);
+
+export const getOficinaCentralError = createAction(
+  '[OT] GET getOficinaCentral Error',
+  props<{ error: any }>()
+);
+
+// GET SOLICITADO POR
+export const getSolicitadoPor = createAction('[OT] GET getSolicitadoPor');
+
+export const getSolicitadoPorSuccess = createAction(
+  '[OT] GET getSolicitadoPor Success',
+  props<{ response: Response<DataRespGetSolicitadoPor> }>()
+);
+
+export const getSolicitadoPorError = createAction(
+  '[OT] GET getSolicitadoPor Error',
+  props<{ error: any }>()
+);
+
+// GET COMUNA
+export const getComuna = createAction(
+  '[OT] GET getComuna',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getComunaSuccess = createAction(
+  '[OT] GET getComuna Success',
+  props<{ response: Response<DataRespGetComuna> }>()
+);
+
+export const getComunaError = createAction(
+  '[OT] GET getComuna Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO DE RED
+export const getTipoDeRed = createAction('[OT] GET getTipoDeRed');
+
+export const getTipoDeRedSuccess = createAction(
+  '[OT] GET getTipoDeRed Success',
+  props<{ response: Response<DataRespGetTipoDeRed> }>()
+);
+
+export const getTipoDeRedError = createAction(
+  '[OT] GET getComuna Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO DE TRABAJO
+export const getTipoDeTrabajo = createAction(
+  '[OT] GET getTipoDeTrabajo',
+  props<{ cubicacion_id: number }>()
+);
+
+export const getTipoDeTrabajoSuccess = createAction(
+  '[OT] GET getTipoDeTrabajo Success',
+  props<{ response: Response<DataRespGetTipoDeTrabajo> }>()
+);
+
+export const getTipoDeTrabajoError = createAction(
+  '[OT] GET getTipoDeTrabajo Error',
+  props<{ error: any }>()
+);
+
+// GET TIPO DE NEGOCIO
+export const getAreaDeNegocio = createAction('[OT] GET getAreaDeNegocio');
+
+export const getAreaDeNegocioSuccess = createAction(
+  '[OT] GET getAreaDeNegocio Success',
+  props<{ response: Response<DataRespGetAreaDeNegocio> }>()
+);
+
+export const getAreaDeNegocioError = createAction(
+  '[OT] GET getAreaDeNegocio Error',
+  props<{ error: any }>()
+);
+
+// GET PLAN DE PROYECTO
+export const getPlanDeProyecto = createAction('[OT] GET getPlanDeProyecto');
+
+export const getPlanDeProyectoSuccess = createAction(
+  '[OT] GET getPlanDeProyecto Success',
+  props<{ response: Response<DataRespGetPlanDeProyecto> }>()
+);
+
+export const getPlanDeProyectoError = createAction(
+  '[OT] GET getPlanDeProyecto Error',
+  props<{ error: any }>()
+);
+
+// GET SITIO
+export const getSitio = createAction(
+  '[OT] GET getSitio',
+  props<{ plan_id: number }>()
+);
+
+export const getSitioSuccess = createAction(
+  '[OT] GET getSitio Success',
+  props<{ response: Response<DataRespGetSitio> }>()
+);
+
+export const getSitioError = createAction(
+  '[OT] GET getSitio Error',
+  props<{ error: any }>()
+);
+
+// FIJO
+// TIPO NUMERO INTERNO
+export const getTipoNumeroInterno = createAction(
+  '[OT] GET getTipoNumeroInterno'
+);
+
+export const getTipoNumeroInternoSuccess = createAction(
+  '[OT] GET getTipoNumeroInterno Success',
+  props<{ response: Response<DataRespGetTipoNumeroInterno> }>()
+);
+
+export const getTipoNumeroInternoError = createAction(
+  '[OT] GET getTipoNumeroInterno Error',
+  props<{ error: any }>()
+);
+
+// NUMERO INTERNO HAS OT
+export const getNumeroInternoHasOT = createAction(
+  '[OT] GET getNumeroInternoHasOT',
+  props<{ numero_interno: string }>()
+);
+
+export const getNumeroInternoHasOTSuccess = createAction(
+  '[OT] GET getNumeroInternoHasOT Success',
+  props<{ response: Response<DataRespGetNumeroInternoHasOT> }>()
+);
+
+export const getNumeroInternoHasOTError = createAction(
+  '[OT] GET getNumeroInternoHasOT Error',
+  props<{ error: any }>()
+);
+
+// CREATE OT
+export const createOT = createAction(
+  '[OT] GET createOT',
+  props<{
+    request:
+      | RequestCreateOTBucle
+      | RequestCreateOTFijo
+      | RequestCreateOTMovil
+      | RequestCreateOTOrdinario;
+  }>()
+);
+
+export const createOTSuccess = createAction(
+  '[OT] GET createOT Success',
+  props<{ response: Response<any> }>()
+);
+
+export const createOTError = createAction(
+  '[OT] GET createOT Error',
+  props<{ error: any }>()
+);
+
+export const resetData = createAction('[ResetData] ResetData');
+export const resetContrato = createAction('[ResetData] Reset Contrato');
+export const resetPlan = createAction('[ResetData] ResetPlan');
+export const resetSitio = createAction('[ResetData] ResetSitio');
+export const resetPMO = createAction('[ResetData] ResetPMO');
+export const resetSAP = createAction('[ResetData] ResetSAP');
+export const resetLPs = createAction('[ResetData] ResetLPs');
+export const resetPEP2 = createAction('[ResetData] ResetPEP2');
+export const resetCECO = createAction('[ResetData] ResetCECO');
+//  //////
 // GET OTs init
 
 export const getOts = createAction(
@@ -48,56 +411,6 @@ export const getOtsError = createAction(
   props<{ error: any }>()
 );
 // GET OTs end
-
-// GET Planes init
-export const getPlans = createAction(
-  '[OT] GET Planes',
-  props<{ region_id: number }>()
-);
-
-export const getPlansSuccess = createAction(
-  '[OT] GET Planes Success',
-  props<{ plans: Plan[]; status: StatusResponse }>()
-);
-
-export const getPlansError = createAction(
-  '[OT] GET Planes Error',
-  props<{ error: any }>()
-);
-// GET Planes end
-
-// GET Sitio init
-export const getSite = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan',
-  props<{ plan_proyecto_id: number; region_id: number }>()
-);
-
-export const getSiteSuccess = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan Success',
-  props<{ sitio: Sitio[]; status: StatusResponse }>()
-);
-
-export const getSiteError = createAction(
-  '[Sites Get By Id Plan] GET By Id Plan Error',
-  props<{ error: any }>()
-);
-// GET Sitio end
-
-// GET PMO init
-export const getPmo = createAction(
-  '[OT] GET PMO',
-  props<{ sitio_codigo: string }>()
-);
-
-export const getPmoSuccess = createAction(
-  '[OT] GET PMO Success',
-  props<{ pmos: PMO[]; status: StatusResponse }>()
-);
-
-export const getPmoError = createAction(
-  '[OT] GET PMO Error',
-  props<{ error: any }>()
-);
 
 // GET PMO end
 
@@ -131,11 +444,6 @@ export const editOtError = createAction(
   props<{ error: any }>()
 );
 
-export const replyOt = createAction(
-  '[Ot Reply] POST Reply Ot',
-  props<{ ot: OtModel.RequestCreateOT }>()
-);
-
 export const replyOtSuccess = createAction(
   '[Ot Reply] POST Reply Ot Success',
   props<{ ot: Data.OT }>()
@@ -161,11 +469,6 @@ export const stateOtError = createAction(
   props<{ error: any }>()
 );
 
-export const postOt = createAction(
-  '[Ot Post] CREATE Ot',
-  props<{ ot: OtModel.RequestCreateOT | OtModel.RequestCreateOTFijo }>()
-);
-
 export const postOtSuccess = createAction(
   '[Ot Post] CREATE Ot Success',
   props<{ ot: Data.OT }>()
@@ -176,12 +479,6 @@ export const postOtError = createAction(
   props<{ error: any }>()
 );
 
-// IngreOT con SCE **
-export const postOtSCE = createAction(
-  '[Ot Post] CREATE Ot SCE',
-  props<{ ot: OtModel.RequestCreateOT }>()
-);
-
 export const postOtSCESuccess = createAction(
   '[Ot Post] CREATE Ot SCE Success',
   props<{ ot: Data.OT }>()
@@ -190,90 +487,6 @@ export const postOtSCESuccess = createAction(
 // OT LIST
 
 // OT FORM
-
-export const getIDOpex = createAction('[IDOpex Get All] GET All');
-
-export const getIDOpexSuccess = createAction(
-  '[IDOpex Get All] GET All Success',
-  props<{ ids_opex: OtModel.IDOpex[] }>()
-);
-
-export const getIDOpexError = createAction(
-  '[IDOpex Get Al] GET All Error',
-  props<{ error: any }>()
-);
-
-export const getCuentaSAP = createAction(
-  '[CuentaSAP Get By Id IDOpex] GET By Id IDOpex',
-  props<{ id_opex_codigo: string }>()
-);
-
-export const getCuentaSAPSuccess = createAction(
-  '[CuentaSAP Get By Id IDOpex] GET By Id IDOpex Success',
-  props<{ cuentas_sap: OtModel.CuentaSap[] }>()
-);
-
-export const getCuentaSAPError = createAction(
-  '[CuentaSAP Get By Id IDOpex] GET By Id IDOpex Error',
-  props<{ error: any }>()
-);
-
-export const getCECO = createAction(
-  '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP',
-  props<{ id_opex_codigo: string; cuenta_sap_codigo: string }>()
-);
-
-export const getCECOSuccess = createAction(
-  '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP Success',
-  props<{ cecos: OtModel.CECO[] }>()
-);
-
-export const getCECOError = createAction(
-  '[CECO Get By Id CuentaSAP] GET By Id CuentaSAP Error',
-  props<{ error: any }>()
-);
-
-export const getBudgetLine = createAction(
-  '[BudgetLine Get By Id Pmo] GET By Id Pmo',
-  props<{ token: string; pmo_id: number }>()
-);
-
-export const getBudgetLineSuccess = createAction(
-  '[BudgetLine Get By Id Pmo] GET By Id Pmo Success',
-  props<{ lp: OtModel.Lp[] }>()
-);
-
-export const getBudgetLineError = createAction(
-  '[BudgetLine Get By Id Pmo] GET By Id Pmo Error',
-  props<{ error: any }>()
-);
-
-export const getPep2 = createAction(
-  '[getPep2 Get By Id BudgetLine] GET By Id BudgetLine',
-  props<{ token: string; pmo_codigo: number; lp_codigo: string }>()
-);
-
-export const getPep2Success = createAction(
-  '[getPep2 Get By Id BudgetLine] GET By Id BudgetLine Success',
-  props<{ pep2: OtModel.Pep2[] }>()
-);
-
-export const getPep2Error = createAction(
-  '[getPep2 Get By Id BudgetLine] GET By Id BudgetLine Error',
-  props<{ error: any }>()
-);
-
-export const getProyecto = createAction('[Proyecto Get All] GET All');
-
-export const getProyectoSuccess = createAction(
-  '[Proyecto Get All] GET All Success',
-  props<{ proyectos: OtModel.Proyecto[] }>()
-);
-
-export const getProyectoError = createAction(
-  '[Proyecto Get All] GET All Error',
-  props<{ error: any }>()
-);
 
 export const getDetalleOt = createAction(
   '[OT Get Detalle OT] GET Detalle OT',
@@ -525,15 +738,6 @@ export const registrarLibroObraError = createAction(
   '[OT] Registrar en el libro de obras error',
   props<{ error: any }>()
 );
-
-export const resetData = createAction('[ResetData] ResetData');
-export const resetPlan = createAction('[ResetData] ResetPlan');
-export const resetSitio = createAction('[ResetData] ResetSitio');
-export const resetPMO = createAction('[ResetData] ResetPMO');
-export const resetSAP = createAction('[ResetData] ResetSAP');
-export const resetLPs = createAction('[ResetData] ResetLPs');
-export const resetPEP2 = createAction('[ResetData] ResetPEP2');
-export const resetCECO = createAction('[ResetData] ResetCECO');
 
 // Registros libro de obra
 export const getRegistrosLibroObra = createAction(

@@ -19,6 +19,7 @@ import { CubicacionDetailComponent } from './component/cubicacion-detail/cubicac
 import { PlanProyectoDetailComponent } from './component/plan-proyecto-detail/plan-proyecto-detail.component';
 import { DetalleAdjudicacionFormComponent } from './forms/detalle-adjudicacion-form/detalle-adjudicacion-form.component';
 import { RegistrarLibroObraComponent } from './component/registrar-libro-obra/registrar-libro-obra';
+import { BucleFormComponent } from './forms/bucle-form/bucle-form.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { RegistrarLibroObraComponent } from './component/registrar-libro-obra/re
     PlanProyectoDetailComponent,
     DetalleAdjudicacionFormComponent,
     RegistrarLibroObraComponent,
+    BucleFormComponent,
   ],
   imports: [
     CommonModule,

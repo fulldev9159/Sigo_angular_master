@@ -1,18 +1,23 @@
-<div class="row" [formGroup]="form">
-  <div class="col-xs-12 col-md-12" id="control_fecha_adjudicacion">
-    <label class="mr-1" for="">Fecha adjudicación</label>
-    <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_adjudicacion" id="fecha-adjudicacion" name="fecha-adjudicacion" dateFormat="dd/mm/yy"></p-calendar>
-  </div>
+<app-card [classCardHeader]="'bg-secondary text-white'">
+  <ng-container card-header-title>Datos contrato Ordinario</ng-container>
+  <ng-container card-body>
+    <div class="row" [formGroup]="form">
+      <div class="col-xs-12 col-md-12" id="control_carta_adjudicacion">
+        <app-input [control]="form.get('carta_adjudicacion')" [label]="'Número carta'"></app-input>
+      </div>
 
-  <div class="col-xs-12 col-md-12" id="control_numero_carta">
-    <app-input ID="numero-carta" [control]="form.get('numero_carta')" [label]="'Número carta'"></app-input>
-  </div>
+      <div class="col-xs-12 col-md-12" id="control_fecha_adjudicacion">
+        <label class="mr-1" for="">Fecha adjudicación</label>
+        <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" inputStyleClass="form-control d-block" formControlName="fecha_adjudicacion" id="fecha-adjudicacion" name="fecha-adjudicacion" dateFormat="dd/mm/yy"></p-calendar>
+      </div>
 
-  <div class="col-xs-12 col-md-12" id="control_numero_pedido">
-    <app-input ID="numero-pedido" [control]="form.get('numero_pedido')" [label]="'Número pedido'"></app-input>
-  </div>
+      <div class="col-xs-12 col-md-12" id="control_numero_pedido">
+        <app-input [control]="form.get('numero_pedido')" [label]="'Número pedido'"></app-input>
+      </div>
 
-  <div class="col-xs-12 col-md-12" id="control_materia">
-    <app-input ID="materia" [control]="form.get('materia')" [label]="'Materia'"></app-input>
-  </div>
-</div>
+      <div class="col-xs-12 col-md-12" id="control_materia">
+        <app-input [control]="form.get('materia')" [label]="'Materia'"></app-input>
+      </div>
+    </div>
+  </ng-container>
+</app-card>

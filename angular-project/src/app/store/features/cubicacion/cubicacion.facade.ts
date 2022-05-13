@@ -29,7 +29,6 @@ import {
   Carrito,
   RequestGetDatosUnidadObra4Cub,
   RequestCreateCubicacion,
-  AllCubs,
   RespDataGetDetalleCubs,
   RequestDeleteDetallesCubicacion,
 } from '@data';
@@ -45,7 +44,7 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.getAllCubs());
   }
 
-  public AllCubs$(): Observable<AllCubs[]> {
+  public AllCubs$(): Observable<Cubicacion[]> {
     return this.store.select(cubicacionSelectors.allCubs);
   }
 

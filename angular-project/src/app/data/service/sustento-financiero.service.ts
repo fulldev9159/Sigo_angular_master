@@ -2,7 +2,15 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PMO, ResponseGetPMO4OT, StatusResponse } from '@data';
+import {
+  Response,
+  DataRespGetPMO,
+  DataRespGetLP,
+  DataRespGetPEP2,
+  DataRespGetOPEX,
+  DataRespGetSAP,
+  DataRespGetCECO,
+} from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -13,28 +21,77 @@ export class SustentoFinancieroService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getPMO4OT(sitio_codigo: string): Observable<{
-    pmos: PMO[];
-    status: any;
-  }> {
-    return this.http
-      .post<ResponseGetPMO4OT>(`${this.apiUrl}/ingreot/pmo/get`, {
-        sitio_codigo,
-      })
-      .pipe(
-        map(res => {
-          return {
-            pmos: res.data.items
-              ? res.data.items.sort((a, b) =>
-                  a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
-                )
-              : [],
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
+  getPMO4OT(emplazamiento_cod: string): Observable<Response<DataRespGetPMO>> {
+    return this.http.post<Response<DataRespGetPMO>>(
+      `${this.apiUrl}/cubicacion/pmos/get`,
+      { emplazamiento_cod }
+    );
   }
+
+  getLineaPresupuestaria(
+    pmo_codigo: number
+  ): Observable<Response<DataRespGetLP>> {
+    return this.http.post<Response<DataRespGetLP>>(
+      `${this.apiUrl}/ot/lps/get`,
+      { pmo_codigo }
+    );
+  }
+
+  getPEP2(
+    pmo_codigo: number,
+    linea_presupuestaria_codigo: string
+  ): Observable<Response<DataRespGetPEP2>> {
+    return this.http.post<Response<DataRespGetPEP2>>(
+      `${this.apiUrl}/ot/sustento_financiero_capex_pmolp/get`,
+      { pmo_codigo, linea_presupuestaria_codigo }
+    );
+  }
+
+  getOPEX(): Observable<Response<DataRespGetOPEX>> {
+    return this.http.post<Response<DataRespGetOPEX>>(
+      `${this.apiUrl}/configuration/sustento_financiero_opex/getall`,
+      {}
+    );
+  }
+
+  getSAP(id_opex: string): Observable<Response<DataRespGetSAP>> {
+    return this.http.post<Response<DataRespGetSAP>>(
+      `${this.apiUrl}/ot/sustento_financiero_opex_idopx/get`,
+      { id_opex }
+    );
+  }
+
+  getCECO(
+    id_opex: string,
+    cuenta_sap: number
+  ): Observable<Response<DataRespGetCECO>> {
+    return this.http.post<Response<DataRespGetCECO>>(
+      `${this.apiUrl}/ot/sustento_financiero_opex_opxsap/get`,
+      { id_opex, cuenta_sap }
+    );
+  }
+  // getPMO4OT(sitio_codigo: string): Observable<{
+  //   pmos: PMO[];
+  //   status: any;
+  // }> {
+  //   return this.http
+  //     .post<ResponseGetPMO4OT>(`${this.apiUrl}/ingreot/pmo/get`, {
+  //       sitio_codigo,
+  //     })
+  //     .pipe(
+  //       map(res => {
+  //         return {
+  //           pmos: res.data.items
+  //             ? res.data.items.sort((a, b) =>
+  //                 a.codigo > b.codigo ? 1 : b.codigo > a.codigo ? -1 : 0
+  //               )
+  //             : [],
+  //           status: {
+  //             description: res.status.description,
+  //             responseCode: res.status.responseCode,
+  //           },
+  //         };
+  //       })
+  //     );
+  // }
 }

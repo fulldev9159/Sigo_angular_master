@@ -1,114 +1,121 @@
-<div class="row" [formGroup]="form">
-  <div class="col-xs-12 col-md-6">
-    <label for="">Sustento Financiero</label>
-    <div class="row">
-      <div class="col-xs-12 col-md-5">
-        <div class="p-field-radiobutton">
-          <p-radioButton id="option_capex" name="costos" formControlName="costos" value="capex"></p-radioButton>
-          <label for="capex">Capex</label>
+<app-card [classCardHeader]="'bg-secondary text-white'">
+  <ng-container card-header-title>
+    <fa-icon [icon]="moneyIcon" style="font-size: 20px;"></fa-icon> Sustento Financiero
+  </ng-container>
+  <ng-container card-body>
+    <div class="row" [formGroup]="form">
+      <div class="col-xs-12 col-md-6">
+        <!-- <label for="">Sustento Financiero</label> -->
+        <div class="row">
+          <div class="col-xs-12 col-md-5">
+            <div class="p-field-radiobutton">
+              <p-radioButton id="option_capex" name="costos" formControlName="costos" value="capex"></p-radioButton>
+              <label for="capex">Capex</label>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-5">
+            <div class="p-field-radiobutton">
+              <p-radioButton id="option_opex" name="costos" formControlName="costos" value="opex"></p-radioButton>
+              <label for="opex">Opex</label>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      <div *ngIf="form.value.costos === 'capex'" class="col-12">
+        <div class="" id="control_pmo_codigo">
+          <app-select [control]="form.get('pmo_codigo')" label="PMO" ID="pmo">
+            <ng-container options>
+              <option value="null" selected disabled>Seleccione PMO</option>
+              <ng-container *ngFor="let pmo of pmos$ | async">
+                <option [value]="pmo.pmo_codigo">
+                  {{ pmo.pmo_codigo }}
+                </option>
+              </ng-container>
+            </ng-container>
+          </app-select>
+          <br>
+        </div>
+
+        <div class="" id="control_lp_codigo">
+          <app-select [control]="form.get('lp_codigo')" label="Linea Presupuestaria" ID="linea-presupuestaria">
+            <ng-container options>
+              <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
+              <ng-container *ngFor="let lp of lps$ | async">
+                <option [value]="lp.linea_presupuestaria_codigo">
+                  {{ lp.linea_presupuestaria_codigo }}
+                </option>
+              </ng-container>
+            </ng-container>
+          </app-select>
+          <br>
+        </div>
+
+        <div class="" id="control_pep2_capex_id">
+          <app-select [control]="form.get('pep2_capex_id')" label="PEP2" ID="pep2">
+            <ng-container options>
+              <option value="null" selected disabled>Seleccione Pep2</option>
+              <option value="capex_provisorio">PEP2 provisorio</option>
+              <ng-container *ngFor="let pep2 of pep2s$ | async">
+                <option [value]="pep2.pep2">
+                  {{ pep2.pep2 }}
+                </option>
+              </ng-container>
+            </ng-container>
+          </app-select>
+          <br>
+          <app-input ID="pep2-provisorio" *ngIf="form.value.pep2_capex_id==='capex_provisorio'" [control]="form.get('pep2_provisorio')" [label]="'PEP2 provisorio'"></app-input>
+          <br>
         </div>
       </div>
-      <div class="col-xs-12 col-md-5">
-        <div class="p-field-radiobutton">
-          <p-radioButton id="option_opex" name="costos" formControlName="costos" value="opex"></p-radioButton>
-          <label for="opex">Opex</label>
+
+      <div *ngIf="form.value.costos === 'opex'" class="col-12">
+        <div class="" id="control_id_opex_codigo">
+          <app-select [control]="form.get('id_opex_codigo')" label="ID OPEX" ID="id-opex">
+            <ng-container options>
+              <option value="null" selected disabled>Seleccione ID OPEX</option>
+              <ng-container *ngFor="let opex of ids_opex$ | async">
+                <option [value]="opex.id_opex">
+                  {{ opex.id_opex }}
+                </option>
+              </ng-container>
+            </ng-container>
+          </app-select>
+          <br>
+        </div>
+
+        <div class="" id="control_cuenta_sap_codigo">
+          <app-select [control]="form.get('cuenta_sap_codigo')" label="Cuenta SAP" ID="cuenta-sap">
+            <ng-container options>
+              <option value="null" selected disabled>Seleccione Cuenta SAP</option>
+              <ng-container *ngFor="let sap of cuentas_sap$ | async">
+                <option [value]="sap.cuenta_sap">
+                  {{ sap.cuenta_sap }}
+                </option>
+              </ng-container>
+            </ng-container>
+          </app-select>
+          <br>
+        </div>
+
+        <div class="" id="control_ceco_codigo">
+          <app-select [control]="form.get('ceco_codigo')" label="CECO" ID="ceco">
+            <ng-container options>
+              <option value="null" selected disabled>Seleccione CECO</option>
+              <option value="ceco_provisorio">CECO provisorio</option>
+              <ng-container *ngFor="let ceco of cecos$ | async">
+                <option [value]="ceco.ceco">
+                  {{ ceco.ceco }}
+                </option>
+              </ng-container>
+            </ng-container>
+          </app-select>
+          <br>
+          <app-input ID="ceco" *ngIf="form.value.ceco_codigo==='ceco_provisorio'" [control]="form.get('ceco_provisorio')" [label]="'CECO provisorio'" id="ceco-provisorio"></app-input>
+          <br>
         </div>
       </div>
     </div>
-    <br>
-  </div>
-
-  <div *ngIf="form.value.costos === 'capex'" class="col-12">
-    <div class="col-7" id="control_pmo_codigo">
-      <app-select [control]="form.get('pmo_codigo')" label="PMO" ID="pmo">
-        <ng-container options>
-          <option value="null" selected disabled>Seleccione PMO</option>
-          <ng-container *ngFor="let pmo of pmos$ | async">
-            <option [value]="pmo.codigo">
-              {{ pmo.codigo }}
-            </option>
-          </ng-container>
-        </ng-container>
-      </app-select>
-      <br>
-    </div>
-
-    <div class="col-7" id="control_lp_codigo">
-      <app-select [control]="form.get('lp_codigo')" label="Linea Presupuestaria" ID="linea-presupuestaria">
-        <ng-container options>
-          <option value="null" selected disabled>Seleccione Linea presupuestaria</option>
-          <ng-container *ngFor="let lp of lps$ | async">
-            <option [value]="lp.codigo">
-              {{ lp.codigo }}
-            </option>
-          </ng-container>
-        </ng-container>
-      </app-select>
-      <br>
-    </div>
-
-    <div class="col-7" id="control_pep2_capex_id">
-      <app-select [control]="form.get('pep2_capex_id')" label="PEP2" ID="pep2">
-        <ng-container options>
-          <option value="null" selected disabled>Seleccione Pep2</option>
-          <option value="capex_provisorio">PEP2 provisorio</option>
-          <ng-container *ngFor="let pep2 of pep2s$ | async">
-            <option [value]="pep2.linea_presupuestaria_id">
-              {{ pep2.pep2_codigo }}
-            </option>
-          </ng-container>
-        </ng-container>
-      </app-select>
-      <br>
-      <app-input ID="pep2-provisorio" *ngIf="form.value.pep2_capex_id==='capex_provisorio'" [control]="form.get('pep2_provisorio')" [label]="'PEP2 provisorio'"></app-input>
-      <br>
-    </div>
-  </div>
-
-  <div *ngIf="form.value.costos === 'opex'" class="col-12">
-    <div class="col-7" id="control_id_opex_codigo">
-      <app-select [control]="form.get('id_opex_codigo')" label="ID OPEX" ID="id-opex">
-        <ng-container options>
-          <option value="null" selected disabled>Seleccione ID OPEX</option>
-          <ng-container *ngFor="let opex of ids_opex$ | async">
-            <option [value]="opex.codigo">
-              {{ opex.codigo }}
-            </option>
-          </ng-container>
-        </ng-container>
-      </app-select>
-      <br>
-    </div>
-
-    <div class="col-7" id="control_cuenta_sap_codigo">
-      <app-select [control]="form.get('cuenta_sap_codigo')" label="Cuenta SAP" ID="cuenta-sap">
-        <ng-container options>
-          <option value="null" selected disabled>Seleccione Cuenta SAP</option>
-          <ng-container *ngFor="let sap of cuentas_sap$ | async">
-            <option [value]="sap.codigo">
-              {{ sap.codigo }}
-            </option>
-          </ng-container>
-        </ng-container>
-      </app-select>
-      <br>
-    </div>
-
-    <div class="col-7" id="control_ceco_codigo">
-      <app-select [control]="form.get('ceco_codigo')" label="CECO" ID="ceco">
-        <ng-container options>
-          <option value="null" selected disabled>Seleccione CECO</option>
-          <option value="ceco_provisorio">CECO provisorio</option>
-          <ng-container *ngFor="let ceco of cecos$ | async">
-            <option [value]="ceco.id">
-              {{ ceco.ceco }}
-            </option>
-          </ng-container>
-        </ng-container>
-      </app-select>
-      <br>
-      <app-input ID="ceco" *ngIf="form.value.ceco_codigo==='ceco_provisorio'" [control]="form.get('ceco_provisorio')" [label]="'CECO provisorio'" id="ceco-provisorio"></app-input>
-      <br>
-    </div>
-  </div>
-</div>
+  </ng-container>
+</app-card>

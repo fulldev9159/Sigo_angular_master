@@ -28,6 +28,19 @@
     <br>
   </div>
 
+  <div class="col-xs-12 col-md-6" id="control_admin_contrato">
+    <br>
+    <app-select [control]="form.get('admin_contrato_id')" label="Administrador EC">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione un Administrador de contrato</option>
+        <ng-container *ngFor="let item of adminContrato$|async">
+          <option [value]="item.id">{{item.nombre}}</option>
+        </ng-container>
+      </ng-container>
+    </app-select>
+    <br>
+  </div>
+
   <div class="col-12" id="control_observaciones">
     <br>
     <label for="">Observaciones</label>
