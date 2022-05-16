@@ -48,6 +48,26 @@ export class OtEffects {
     private router: Router
   ) {}
 
+  getOTs$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getOts),
+      concatMap(({ request }) =>
+        this.otService.getOTs(request).pipe(
+          map(response => {
+            if (request.filtro_pestania === 'EN_EJECUCION') {
+              return otActions.getOtEjecucionSuccess({ response });
+            } else if (request.filtro_pestania === 'ABIERTAS') {
+              return otActions.getOtAbiertasSuccess({ response });
+            } else if (request.filtro_pestania === 'CERRADAS') {
+              return otActions.getOtSuccessCerradas({ response });
+            }
+          }),
+          catchError(error => of(otActions.getOtsError({ error })))
+        )
+      )
+    )
+  );
+
   getContratos4OT$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getContratosUser4OT),
@@ -318,26 +338,6 @@ export class OtEffects {
 
   // ////
 
-  getOTs$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getOts),
-      concatMap(({ request }) =>
-        this.otService.getOTs(request).pipe(
-          map(({ ots, status }) => {
-            if (request.filtro_pestania === 'EN_EJECUCION') {
-              return otActions.getOtEjecucionSuccess({ ots, status });
-            } else if (request.filtro_pestania === 'ABIERTAS') {
-              return otActions.getOtAbiertasSuccess({ ots, status });
-            } else if (request.filtro_pestania === 'CERRADAS') {
-              return otActions.getOtSuccessCerradas({ ots, status });
-            }
-          }),
-          catchError(error => of(otActions.getOtsError({ error })))
-        )
-      )
-    )
-  );
-
   // postOt$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(otActions.postOt),
@@ -397,23 +397,23 @@ export class OtEffects {
     )
   );
 
-  notifyAfterApproveOTSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.approveOTSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Orden de trabajo aceptada', 'ok');
+  // notifyAfterApproveOTSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.approveOTSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage('Orden de trabajo aceptada', 'ok');
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterApproveOTError$ = createEffect(
     () =>
@@ -443,23 +443,23 @@ export class OtEffects {
     )
   );
 
-  notifyAfterRejectOTSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.rejectOTSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Orden de trabajo rechazada', 'ok');
+  // notifyAfterRejectOTSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.rejectOTSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage('Orden de trabajo rechazada', 'ok');
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterRejectOTError$ = createEffect(
     () =>
@@ -504,23 +504,23 @@ export class OtEffects {
     )
   );
 
-  notifyAfterAssignCoordinatorSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.assignCoordinatorSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Coordinador asignado', 'ok');
+  // notifyAfterAssignCoordinatorSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.assignCoordinatorSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage('Coordinador asignado', 'ok');
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterAssignCoordinatorError$ = createEffect(
     () =>
@@ -566,23 +566,23 @@ export class OtEffects {
     )
   );
 
-  notifyAfterAssignTrabajadorSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.assignTrabajadorSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Trabajador asignado', 'ok');
+  // notifyAfterAssignTrabajadorSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.assignTrabajadorSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage('Trabajador asignado', 'ok');
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterAssignTrabajadorError$ = createEffect(
     () =>
@@ -613,23 +613,23 @@ export class OtEffects {
     )
   );
 
-  notifyAfterCancelOTSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.cancelOTSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Orden de trabajo anulada', 'ok');
+  // notifyAfterCancelOTSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.cancelOTSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage('Orden de trabajo anulada', 'ok');
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterCancelOTError$ = createEffect(
     () =>
@@ -660,26 +660,26 @@ export class OtEffects {
     )
   );
 
-  notifyAfterFinalizeOTJobsSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.finalizeOTJobsSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage(
-            'Trabajos de esta orden finalizados',
-            'ok'
-          );
+  // notifyAfterFinalizeOTJobsSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.finalizeOTJobsSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage(
+  //           'Trabajos de esta orden finalizados',
+  //           'ok'
+  //         );
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterFinalizeOTJobsError$ = createEffect(
     () =>
@@ -712,26 +712,26 @@ export class OtEffects {
     )
   );
 
-  notifyAfterApproveOTMinutesGenerationSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.approveOTMinutesGenerationSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage(
-            'Aceptada la generación del acta',
-            'ok'
-          );
+  // notifyAfterApproveOTMinutesGenerationSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.approveOTMinutesGenerationSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage(
+  //           'Aceptada la generación del acta',
+  //           'ok'
+  //         );
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterApproveOTMinutesGenerationError$ = createEffect(
     () =>
@@ -766,26 +766,26 @@ export class OtEffects {
     )
   );
 
-  notifyAfterRejectOTMinutesGenerationSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.rejectOTMinutesGenerationSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage(
-            'Rechazada la generación del acta',
-            'ok'
-          );
+  // notifyAfterRejectOTMinutesGenerationSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.rejectOTMinutesGenerationSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage(
+  //           'Rechazada la generación del acta',
+  //           'ok'
+  //         );
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterRejectOTMinutesGenerationError$ = createEffect(
     () =>
@@ -820,26 +820,26 @@ export class OtEffects {
   //   )
   // );
 
-  notifyAfterApproveOTMinutesValidationSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.approveOTMinutesValidationSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage(
-            'Aceptada la validación del acta',
-            'ok'
-          );
+  // notifyAfterApproveOTMinutesValidationSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.approveOTMinutesValidationSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage(
+  //           'Aceptada la validación del acta',
+  //           'ok'
+  //         );
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterApproveOTMinutesValidationError$ = createEffect(
     () =>
@@ -874,26 +874,26 @@ export class OtEffects {
   //   )
   // );
 
-  notifyAfterRejectOTMinutesValidationSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.rejectOTMinutesValidationSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage(
-            'Rechazada la validación del acta',
-            'ok'
-          );
+  // notifyAfterRejectOTMinutesValidationSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.rejectOTMinutesValidationSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage(
+  //           'Rechazada la validación del acta',
+  //           'ok'
+  //         );
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterRejectOTMinutesValidationError$ = createEffect(
     () =>
@@ -926,23 +926,23 @@ export class OtEffects {
     )
   );
 
-  notifyAfterAuthorizePaymentsSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.authorizePaymentsSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Pago autorizado', 'ok');
+  // notifyAfterAuthorizePaymentsSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.authorizePaymentsSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage('Pago autorizado', 'ok');
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterAuthorizePaymentsError$ = createEffect(
     () =>
@@ -973,23 +973,23 @@ export class OtEffects {
     )
   );
 
-  notifyAfterRejectPaymentsSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.rejectPaymentsSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Pago rechazado', 'ok');
+  // notifyAfterRejectPaymentsSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.rejectPaymentsSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage('Pago rechazado', 'ok');
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterRejectPaymentsError$ = createEffect(
     () =>
@@ -1020,23 +1020,23 @@ export class OtEffects {
     )
   );
 
-  notifyAfterFinalizeOTSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.finalizeOTSuccess),
-        withLatestFrom(this.otFacade.getOtFilters$()),
-        tap(([data, { filtro_propietario, filtro_tipo }]) => {
-          this.snackService.showMessage('Orden de trabajo finalizada', 'ok');
+  // notifyAfterFinalizeOTSuccess$ = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(otActions.finalizeOTSuccess),
+  //       withLatestFrom(this.otFacade.getOtFilters$()),
+  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
+  //         this.snackService.showMessage('Orden de trabajo finalizada', 'ok');
 
-          this.otFacade.getOts({
-            filtro_propietario,
-            filtro_tipo,
-            filtro_pestania: '',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
+  //         this.otFacade.getOts({
+  //           filtro_propietario,
+  //           filtro_tipo,
+  //           filtro_pestania: '',
+  //         });
+  //       })
+  //     ),
+  //   { dispatch: false }
+  // );
 
   notifyAfterFinalizeOTError$ = createEffect(
     () =>

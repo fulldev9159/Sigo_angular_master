@@ -37,6 +37,7 @@ import {
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
+  DataRespGetOTs,
 } from '@data';
 import {
   DetalleActa,
@@ -44,6 +45,31 @@ import {
   RequestSolicitudPagoActa,
 } from '@data/model/acta';
 
+export const getOts = createAction(
+  '[OT] Get Ots',
+  props<{
+    request: RequestGetOTs;
+  }>()
+);
+
+export const getOtEjecucionSuccess = createAction(
+  '[OT] GET Ot Success Ejecucion',
+  props<{ response: Response<DataRespGetOTs> }>()
+);
+
+export const getOtAbiertasSuccess = createAction(
+  '[OT] GET Ot Success Abiertas',
+  props<{ response: Response<DataRespGetOTs> }>()
+);
+
+export const getOtSuccessCerradas = createAction(
+  '[Ot GetAll] GET Ot Success Cerradas',
+  props<{ response: Response<DataRespGetOTs> }>()
+);
+export const getOtsError = createAction(
+  '[Ot GetAll] GET Ot Error',
+  props<{ error: any }>()
+);
 // GET CONTRATOS USER 4 OT
 export const getContratosUser4OT = createAction(
   '[OT] getContratosUser4OT ',
@@ -383,36 +409,6 @@ export const resetLPs = createAction('[ResetData] ResetLPs');
 export const resetPEP2 = createAction('[ResetData] ResetPEP2');
 export const resetCECO = createAction('[ResetData] ResetCECO');
 //  //////
-// GET OTs init
-
-export const getOts = createAction(
-  '[OT] Get Ots',
-  props<{
-    request: RequestGetOTs;
-  }>()
-);
-
-export const getOtEjecucionSuccess = createAction(
-  '[OT] GET Ot Success Ejecucion',
-  props<{ ots: OT[]; status: StatusResponse }>()
-);
-
-export const getOtAbiertasSuccess = createAction(
-  '[OT] GET Ot Success Abiertas',
-  props<{ ots: OT[]; status: StatusResponse }>()
-);
-
-export const getOtSuccessCerradas = createAction(
-  '[Ot GetAll] GET Ot Success Cerradas',
-  props<{ ots: OT[]; status: StatusResponse }>()
-);
-export const getOtsError = createAction(
-  '[Ot GetAll] GET Ot Error',
-  props<{ error: any }>()
-);
-// GET OTs end
-
-// GET PMO end
 
 export const deleteOt = createAction(
   '[Ot DeleteById] DELETE Ot',

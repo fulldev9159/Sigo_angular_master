@@ -36,17 +36,22 @@
     <p-card header="Tipo de OT" [style]="{'width': '28rem' , 'height': '7rem'}" class="col-xs-12 col-md-6">
       <div class="row">
         <div class="p-field-radiobutton col-xs-12 col-md-3">
-          <p-radioButton id="OT" name="tipoOT" value="OT" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
+          <p-radioButton id="OT" name="tipoOT" value="1" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
           </p-radioButton>
           <label for="OT">OT</label>
         </div>
         <div class="p-field-radiobutton col-xs-12 col-md-3">
-          <p-radioButton id="AP" name="tipoOT" value="AP" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
+          <p-radioButton id="AP" name="tipoOT" value="2" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
           </p-radioButton>
           <label for="AP">AP</label>
         </div>
         <div class="p-field-radiobutton col-xs-12 col-md-4">
-          <p-radioButton id="TODAS" name="tipoOT" value="TODAS" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
+          <p-radioButton id="FULL" name="tipoOT" value="3" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
+          </p-radioButton>
+          <label for="FULL">FULL</label>
+        </div>
+        <div class="p-field-radiobutton col-xs-12 col-md-4">
+          <p-radioButton id="TODAS" name="tipoOT" value="0" [(ngModel)]="tipoOT" (onClick)="onClickTipo($event)">
           </p-radioButton>
           <label for="TODAS">Todas</label>
         </div>

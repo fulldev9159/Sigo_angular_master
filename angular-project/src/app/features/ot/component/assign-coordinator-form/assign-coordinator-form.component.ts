@@ -46,7 +46,7 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.ot$.subscribe(ot => {
         this.otID = ot.id;
-        this.etapa = ot.etapa_slug;
+        // this.etapa = ot.etapa_slug;
         this.reset();
         this.otFacade.getCoordinators(ot.id);
       })

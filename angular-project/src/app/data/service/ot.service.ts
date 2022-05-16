@@ -38,6 +38,7 @@ import {
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
+  DataRespGetOTs,
 } from '@data';
 
 @Injectable({
@@ -51,6 +52,13 @@ export class OTService {
     private snackService: SnackBarService
   ) {
     this.apiUrl = environment.api || 'http://localhost:4040';
+  }
+
+  getOTs(request: RequestGetOTs): Observable<Response<DataRespGetOTs>> {
+    return this.http.post<Response<DataRespGetOTs>>(
+      `${this.apiUrl}/ot/bandeja/get`,
+      request
+    );
   }
 
   getCubicaciones(
@@ -211,25 +219,6 @@ export class OTService {
   //
   //
   ////
-
-  getOTs(request: RequestGetOTs): Observable<{
-    ots: OT[];
-    status: any;
-  }> {
-    return this.http
-      .post<ResponseGetOTs>(`${this.apiUrl}/ingreot/ot/get`, request)
-      .pipe(
-        map(res => {
-          return {
-            ots: res.data.items,
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
-  }
 
   approveOT(perfil_id: number, otID: number): Observable<any> {
     return this.http.post<ApprovalOTResponse>(

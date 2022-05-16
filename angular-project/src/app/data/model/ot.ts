@@ -1,4 +1,26 @@
 import { Accion } from './accion';
+
+// GET OTS
+export interface RequestGetOTs {
+  filtro_pestania: string;
+  filtro_propietario: string;
+  filtro_tipo: number;
+}
+export interface DataRespGetOTs {
+  items: OT[];
+}
+
+export interface OT {
+  id: number;
+  agencia_id: number;
+  creador_usuario_nombre: string;
+  cubicacion_descripcion: string;
+  cubicacion_id: number;
+  cubicacion_nombre: string;
+  tipo_contrato_marco_nombre: string;
+  acciones: Accion[];
+}
+
 // GET CUBS
 export interface DataRespGetCubicaciones {
   items: Cubs4OT[];
@@ -236,36 +258,29 @@ export interface RequestCreateOTFijo {
 }
 // ////
 
-// GET OTs init
-
-export interface RequestGetOTs {
-  filtro_pestania: string;
-  filtro_propietario: string;
-  filtro_tipo: string;
-}
-
-export interface OT {
-  id: number;
-  nombre: string;
-  tipo: string;
-  fecha_inicio: string;
-  fecha_termino: string;
-  contrato_marco_nombre: string;
-  proveedor_nombre: string;
-  usuario_nombre: string;
-  sesion_sce: string;
-  estado_otdesc: string;
-  etapa_otdesc: string;
-  acciones: Accion[];
-  acciones_str: string;
-  delegacion: string;
-  estado_otid: number;
-  estado_slug: string;
-  etapa_otid: number;
-  etapa_slug: string;
-  proveedor_id: number;
-  subetapa_otdesc: string;
-}
+// // GET OTs init
+// export interface OT {
+//   id: number;
+//   nombre: string;
+//   tipo: string;
+//   fecha_inicio: string;
+//   fecha_termino: string;
+//   contrato_marco_nombre: string;
+//   proveedor_nombre: string;
+//   usuario_nombre: string;
+//   sesion_sce: string;
+//   estado_otdesc: string;
+//   etapa_otdesc: string;
+//   acciones: Accion[];
+//   acciones_str: string;
+//   delegacion: string;
+//   estado_otid: number;
+//   estado_slug: string;
+//   etapa_otid: number;
+//   etapa_slug: string;
+//   proveedor_id: number;
+//   subetapa_otdesc: string;
+// }
 
 interface FieldOrder {
   ot_id: string;

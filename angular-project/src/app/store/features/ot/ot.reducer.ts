@@ -25,6 +25,7 @@ import {
   PlanDeProyecto,
   TipoNumeroInterno,
   NumeroInternoHasOT,
+  OT,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -63,11 +64,11 @@ export interface StateOt {
   filtro_propietario: string;
   filtro_tipo: string;
 
-  selectedOT: Data.OT;
+  selectedOT: OT;
 
-  otsEjecucion: Data.OT[];
-  itemsAbiertas: Data.OT[];
-  itemsCerradas: Data.OT[];
+  otsEjecucion: OT[];
+  itemsAbiertas: OT[];
+  itemsCerradas: OT[];
 
   detalleOt: Data.DataRspDetalleOT;
 
@@ -144,6 +145,18 @@ export const initialStateOt: StateOt = {
 
 export const reducerOt = createReducer(
   initialStateOt,
+  on(OtActions.getOtEjecucionSuccess, (state, { response }) => ({
+    ...state,
+    otsEjecucion: response.data.items,
+  })),
+  on(OtActions.getOtAbiertasSuccess, (state, { response }) => ({
+    ...state,
+    itemsAbiertas: response.data.items,
+  })),
+  on(OtActions.getOtSuccessCerradas, (state, { response }) => ({
+    ...state,
+    itemsCerradas: response.data.items,
+  })),
   on(OtActions.getContratosUser4OTSuccess, (state, { response }) => {
     const temp = copy(response.data.items);
     return {
@@ -487,11 +500,11 @@ export const reducerOt = createReducer(
     cecos: [],
   })),
   //  ////
-  on(OtActions.getOts, (state, { request }) => ({
-    ...state,
-    filtro_propietario: request.filtro_propietario,
-    filtro_tipo: request.filtro_tipo,
-  })),
+  // on(OtActions.getOts, (state, { request }) => ({
+  //   ...state,
+  //   filtro_propietario: request.filtro_propietario,
+  //   filtro_tipo: request.filtro_tipo,
+  // })),
   // on(
   //   OtActions.getOtEjecucion,
   //   (state, { filtro_propietario, filtro_tipo }) => ({
@@ -505,18 +518,7 @@ export const reducerOt = createReducer(
   //   filtro_propietario,
   //   filtro_tipo,
   // })),
-  on(OtActions.getOtEjecucionSuccess, (state, payload) => ({
-    ...state,
-    otsEjecucion: payload.ots,
-  })),
-  on(OtActions.getOtAbiertasSuccess, (state, payload) => ({
-    ...state,
-    itemsAbiertas: payload.ots,
-  })),
-  on(OtActions.getOtSuccessCerradas, (state, payload) => ({
-    ...state,
-    itemsCerradas: payload.ots,
-  })),
+
   // on(OtActions.deleteOt, (state, payload) => ({
   //   ...state,
   //   items: [

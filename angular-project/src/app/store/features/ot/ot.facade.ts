@@ -48,6 +48,34 @@ import {
 export class OtFacade {
   constructor(private store: Store<Data.OT>) {}
 
+  // GET OT
+  public getOts(request: RequestGetOTs): void {
+    this.store.dispatch(
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'EN_EJECUCION',
+        },
+      })
+    );
+    this.store.dispatch(
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'ABIERTAS',
+        },
+      })
+    );
+    this.store.dispatch(
+      otActions.getOts({
+        request: {
+          ...request,
+          filtro_pestania: 'CERRADAS',
+        },
+      })
+    );
+  }
+
   //   GET CONTRATOS USER 4 CUB
   public contratosUser4OT(usuario_id: number): void {
     this.store.dispatch(otActions.getContratosUser4OT({ usuario_id }));
@@ -283,33 +311,6 @@ export class OtFacade {
   }
 
   // ////
-  // OT
-  public getOts(request: RequestGetOTs): void {
-    this.store.dispatch(
-      otActions.getOts({
-        request: {
-          ...request,
-          filtro_pestania: 'EN_EJECUCION',
-        },
-      })
-    );
-    this.store.dispatch(
-      otActions.getOts({
-        request: {
-          ...request,
-          filtro_pestania: 'ABIERTAS',
-        },
-      })
-    );
-    this.store.dispatch(
-      otActions.getOts({
-        request: {
-          ...request,
-          filtro_pestania: 'CERRADAS',
-        },
-      })
-    );
-  }
 
   public getOtEjecucion$(): Observable<Data.OT[]> {
     return this.store.select(otSelectors.getOtEjecucion);

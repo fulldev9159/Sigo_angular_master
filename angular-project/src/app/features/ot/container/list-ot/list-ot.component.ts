@@ -28,7 +28,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   public itemsCerradas$: Observable<OT[]>;
 
   public responsable: 'MIAS';
-  public tipoOT: 'OT';
+  public tipoOT: 1;
   public selectedIndex = 0;
   public selectedOTs: string;
   public idOtSelected: number;
@@ -422,7 +422,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.otFacade.resetData();
     this.responsable = 'MIAS';
-    this.tipoOT = 'OT';
+    this.tipoOT = 1;
     this.selectedIndex = 0;
     this.selectedOTs = 'ABIERTAS';
 
@@ -452,7 +452,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
     this.otFacade.getOts({
       filtro_propietario: this.responsable,
-      filtro_tipo: this.tipoOT,
+      filtro_tipo: +this.tipoOT,
       filtro_pestania: '',
     });
   }
@@ -466,7 +466,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       this.selectedOTs = 'CERRADAS';
       this.otFacade.getOts({
         filtro_propietario: this.responsable,
-        filtro_tipo: this.tipoOT,
+        filtro_tipo: +this.tipoOT,
         filtro_pestania: '',
       });
     } else if (this.selectedIndex === 1) {
@@ -476,7 +476,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       this.selectedOTs = 'ABIERTAS';
       this.otFacade.getOts({
         filtro_propietario: this.responsable,
-        filtro_tipo: this.tipoOT,
+        filtro_tipo: +this.tipoOT,
         filtro_pestania: '',
       });
     }
@@ -493,7 +493,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     // console.log(this.tipoOT);
     this.otFacade.getOts({
       filtro_propietario: this.responsable,
-      filtro_tipo: this.tipoOT,
+      filtro_tipo: +this.tipoOT,
       filtro_pestania: '',
     });
   }
@@ -504,7 +504,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     // console.log(this.tipoOT);
     this.otFacade.getOts({
       filtro_propietario: this.responsable,
-      filtro_tipo: this.tipoOT,
+      filtro_tipo: +this.tipoOT,
       filtro_pestania: '',
     });
   }
