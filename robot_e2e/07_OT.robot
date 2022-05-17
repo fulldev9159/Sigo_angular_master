@@ -7,6 +7,7 @@ Resource    ./resources/general_resource.robot
 Resource    ./resources/login_resource.robot
 Resource    ./resources/perfil_resource.robot
 Resource    ./resources/cubicacion_resource.robot
+Resource    ./resources/ot_resource.robot
 
 
 #
@@ -20,9 +21,9 @@ Resource    ./resources/cubicacion_resource.robot
 
 *** Test Cases ***
 Crear OT BUCLE
-    _Login    mgestor1    asda    Gestor/JP
-   # _Navegate to         Crear Cubicacion
-   # _Crear Cubicacion
+    _Login               mgestor1            asda    Gestor/JP
+    _Navegate to         Crear Cubicacion
+    _Crear Cubicacion
 
     _Navegate to    Crear OT
 
@@ -61,6 +62,15 @@ Crear OT BUCLE
 
     _Click visible element    css:#create-button
 
+    _Have to exist in table/tab       Abiertas     OT BUCLE
+    _Validate column data             3            OT BUCLE
+    _Validate column data             4            Autorizar OT por Proveedor
+    # _Validate column data             8            BUCLE
+    _Validate column data             9            NOKIA SOLUTIONS AND NETWORKS CHILE LTDA
+    _Validate column data             10           JESSICA MOVISTAR CASTILLO 1
+    _Have No to exist in table/tab    Cerradas     OT BUCLE
+    _Have No to exist in table/tab    Ejecucion    OT BUCLE
+
     close browser
 
 Crear OT MOVIL
@@ -90,7 +100,17 @@ Crear OT MOVIL
     _Select visible item      css:#control_admin_contrato > app-select > select                                                                  Carlos COASIN Campos Jaraquemada
     _Set input text           css:#observaciones                                                                                                 Descripcion de algo Movil
 
-    _Click visible element    css:#create-button
+    _Click visible element            css:#create-button
+    # _Navegate to                      Listar OT
+    _Have to exist in table/tab       Abiertas              OT MOVIL
+    _Validate column data             3                     OT MOVIL
+    _Validate column data             4                     Autorizar OT por Proveedor
+    # _Validate column data             8            SBE
+    _Validate column data             9                     COASIN
+    _Validate column data             10                    JESSICA MOVISTAR CASTILLO 1
+    _Have No to exist in table/tab    Cerradas              OT MOVIL
+    _Have No to exist in table/tab    Ejecucion             OT MOVIL
+
     close browser
 
 Crear OT ORDINARIO
@@ -124,6 +144,16 @@ Crear OT ORDINARIO
     _Set input text           css:#observaciones                                                                                                 Descripcion de algo Ordinario
 
     _Click visible element    css:#create-button
+    #  _Navegate to              Listar OT
+
+    _Have to exist in table/tab       Abiertas     OT ORDINARIO
+    _Validate column data             3            OT ORDINARIO
+    _Validate column data             4            Autorizar OT por Proveedor
+    #  _Validate column data             8            Contrato Ordinario
+    _Validate column data             9            NOKIA SOLUTIONS AND NETWORKS CHILE LTDA
+    _Validate column data             10           JESSICA MOVISTAR CASTILLO 1
+    _Have No to exist in table/tab    Cerradas     OT ORDINARIO
+    _Have No to exist in table/tab    Ejecucion    OT ORDINARIO
     close browser
 
 Crear OT FIJO
@@ -131,12 +161,12 @@ Crear OT FIJO
 
     _Navegate to    Crear OT
 
-    # BASE
+   # BASE
     _Set input text         css:#control_nombre > app-input > input             OT FIJO
     _Select visible item    css:#contratosUser > app-select > select            UNIFICADO-2019-FIJA
     _Select visible item    css:#control_cubicacion_id > app-select > select    Cub Fijo
 
-    # FIJO
+   # FIJO
     _Select visible item      css:#control_tipo_numero_interno_id > app-select > select    @TIEMPOS
     _Set input text           css:#control_numero_interno > app-input > input              3123123
     _Click visible element    css:#button-agregar > button
@@ -155,4 +185,15 @@ Crear OT FIJO
     _Set input text           css:#observaciones                                                                                                 Descripcion de algo FIJO
 
     _Click visible element    css:#create-button
+
+    # _Navegate to    Listar OT
+
+    _Have to exist in table/tab       Abiertas     OT FIJO
+    _Validate column data             3            OT FIJO
+    _Validate column data             4            Autorizar OT por Proveedor
+    #  _Validate column data             8            UNIFICADO-2019-FIJA
+    _Validate column data             9            COASIN
+    _Validate column data             10           JESSICA MOVISTAR CASTILLO 1
+    _Have No to exist in table/tab    Cerradas     OT FIJO
+    _Have No to exist in table/tab    Ejecucion    OT FIJO
     close browser

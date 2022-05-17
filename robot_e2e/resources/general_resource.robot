@@ -34,6 +34,7 @@ _Navegate to
     Run Keyword If    '${menu}' == 'Perfil'               Click Visible Element    css:#menu-perfil>a>span
     Run Keyword If    '${menu}' == 'Crear OT'             Click Visible Element    id:otSub
     Run Keyword If    '${menu}' == 'Crear OT'             Execute javascript       document.querySelector("#otSub>li:nth-child(2)>a").click()
+    Run Keyword If    '${menu}' == 'Listar OT'            Click Visible Element    css:#otSub > li:nth-child(1) > a
 
 
 _Wait visibility

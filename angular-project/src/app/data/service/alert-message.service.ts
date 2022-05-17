@@ -239,6 +239,10 @@ export class AlertMessageActions {
         this.cubageFacade.AllCubs();
       }
 
+      if (action === otActions.createOTSuccess.type) {
+        this.router.navigate(['/app/ot/list-ot']);
+      }
+
       if (action === ca.clonCubSuccess.type) {
         location.reload();
       }

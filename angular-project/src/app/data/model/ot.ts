@@ -11,13 +11,23 @@ export interface DataRespGetOTs {
 }
 
 export interface OT {
+  contrato_marco_nombre: string;
+  delegacion: string;
+  estado_otdesc: string;
+  estado_otid: number;
+  estado_slug: string;
+  etapa_otdesc: string;
+  etapa_otid: number;
+  etapa_slug: string;
+  fecha_inicio: string;
+  fecha_termino: string;
   id: number;
-  agencia_id: number;
-  creador_usuario_nombre: string;
-  cubicacion_descripcion: string;
-  cubicacion_id: number;
-  cubicacion_nombre: string;
-  tipo_contrato_marco_nombre: string;
+  nombre: string;
+  proveedor_id: number;
+  proveedor_nombre: string;
+  sce_session: string;
+  tipo_cubicacion_id: number;
+  usuario_nombre: string;
   acciones: Accion[];
 }
 

@@ -45,7 +45,8 @@ export class OtEffects {
     private otFacade: OtFacade,
     private messageService: MessageService,
     private messageServiceInt: Data.NotifyAfter,
-    private router: Router
+    private router: Router,
+    private alertMessageAction: Data.AlertMessageActions
   ) {}
 
   getOTs$ = createEffect(() =>
@@ -334,6 +335,39 @@ export class OtEffects {
         )
       )
     )
+  );
+
+  // NOTIFICACIONES
+  notifyOK$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.createOTSuccess),
+        tap(action => {
+          this.alertMessageAction.messageActions(
+            action.response.status.code,
+            action.response.status.desc,
+            action.type,
+            action
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(otActions.createOTError),
+        tap(action =>
+          this.alertMessageAction.messageActions(
+            action.error.error.status.code,
+            action.error.error.status.desc,
+            action.type,
+            action
+          )
+        )
+      ),
+    { dispatch: false }
   );
 
   // ////
@@ -1404,29 +1438,29 @@ export class OtEffects {
   //   { dispatch: false }
   // );
 
-  notifyAfterError = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(
-          otActions.getOtsError,
-          otActions.saveBorradorInformeAvanceError,
-          otActions.saveInformeAvanceError,
-          otActions.getDataInformeAvanceError,
-          otActions.rechazarInformeAvanceError,
-          otActions.getDataInformeActaError,
-          otActions.saveInformeActaError,
-          otActions.rechazarInformeActaError,
-          // otActions.inicializarInformeAvanceError,
-          otActions.getPmoError,
-          otActions.getDetalleActaError
-        ),
-        tap(action =>
-          this.messageServiceInt.actionsErrors(
-            action.error.message,
-            action.type
-          )
-        )
-      ),
-    { dispatch: false }
-  );
+  // notifyAfterError = createEffect(
+  //   () =>
+  //     this.actions$.pipe(
+  //       ofType(
+  //         otActions.getOtsError,
+  //         otActions.saveBorradorInformeAvanceError,
+  //         otActions.saveInformeAvanceError,
+  //         otActions.getDataInformeAvanceError,
+  //         otActions.rechazarInformeAvanceError,
+  //         otActions.getDataInformeActaError,
+  //         otActions.saveInformeActaError,
+  //         otActions.rechazarInformeActaError,
+  //         // otActions.inicializarInformeAvanceError,
+  //         otActions.getPmoError,
+  //         otActions.getDetalleActaError
+  //       ),
+  //       tap(action =>
+  //         this.messageServiceInt.actionsErrors(
+  //           action.error.message,
+  //           action.type
+  //         )
+  //       )
+  //     ),
+  //   { dispatch: false }
+  // );
 }
