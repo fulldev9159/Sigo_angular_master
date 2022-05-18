@@ -449,6 +449,7 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.resetContrato, (state, payload) => ({
     ...state,
+    cubicaciones: [],
     cubicacionSeleccionada: null,
     pmos: [],
     lineaPresupuestaria: [],

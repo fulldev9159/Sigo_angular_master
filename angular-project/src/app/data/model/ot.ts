@@ -34,6 +34,7 @@ export interface OT {
 // DETALLE OT
 export interface DataRespGetDetalleOT {
   numeros_interno: {
+    // FIJO
     id: number;
     model_tipo_numero_interno_id: { id: number; nombre: string };
     numero_interno: string;
@@ -41,33 +42,11 @@ export interface DataRespGetDetalleOT {
     tipo_numero_interno_id: number;
   }[];
   ot: {
-    aceptacion_inicial_id: number;
-    altura: string;
-    area_negocio: string;
-    carta_adjudicacion: string;
-    ceco: null;
-    comuna_id: number;
-    contrato_marco_id: number;
-    created_at: Date;
-    cubicacion_id: number;
-    cuenta_sap: null;
-    departamento: string;
-    direccion: string;
-    es_sustento_provisorio: boolean;
-    fecha_adjudicacion: Date;
-    fecha_fin: Date;
-    fecha_inicio: Date;
-    id: number;
-    id_opex: null;
-    lp: string;
-    materia: null;
-    model_comuna_id: {
-      id: number;
-      region_id: number;
-      codigo: number;
-      nombre: string;
-    };
+    id: number; // BASE
+    nombre: string; // BASE
+    contrato_marco_id: number; // BASE
     model_contrato_marco_id: {
+      // BASE
       aprob_jerarq_inic: boolean;
       costo_max: number;
       estado: boolean;
@@ -81,7 +60,9 @@ export interface DataRespGetDetalleOT {
       tipo_pago: string;
       validacion_operaciones: boolean;
     };
+    cubicacion_id: number; // BASE
     model_cubicacion_id: {
+      // BASE
       agencia_id: number;
       altura_desde: string;
       altura_hasta: string;
@@ -99,13 +80,13 @@ export interface DataRespGetDetalleOT {
       updated_at: Date;
       usuario_creador_id: number;
     };
-    model_oficina_central_id: {
-      id: number;
-      descripcion: string;
-      agencia_id: number;
-      idafac: string;
-    };
+    fecha_fin: Date; // BASE
+    fecha_inicio: Date; // BASE
+    proyecto_id: number; // BASE
+    observaciones: string; // BASE
+    created_at: Date; // BASE
     model_propietario_usuario_id: {
+      // BASE
       apellidos: string;
       area_id: number;
       celular: string;
@@ -121,6 +102,7 @@ export interface DataRespGetDetalleOT {
       username: string;
     };
     model_responsable_proxy_id: {
+      // BASE
       created_at: Date;
       id: number;
       model_usuario_id: {
@@ -144,41 +126,76 @@ export interface DataRespGetDetalleOT {
       usuario_id: number;
       usuario_orig: number;
     };
-    model_solicitante_id: { id: number; descripcion: string };
-    model_tipo_estado_ot_id: { id: number; slug: string; nombre: string };
-    model_tipo_etapa_ot_id: { id: number; slug: string; nombre: string };
-    model_tipo_red_id: { id: number; descripcion: string; estado: boolean };
+    model_tipo_estado_ot_id: { id: number; slug: string; nombre: string }; // BASE
+    model_tipo_etapa_ot_id: { id: number; slug: string; nombre: string }; // BASE
+    propietario_usuario_id: number; // BASE
+    responsable_proxy_id: number; // BASE
+    sce_session: string; // BASE
+    tipo_estado_ot_id: number; // BASE
+    tipo_etapa_ot_id: number; // BASE
+    aceptacion_inicial_id: number;
+
+    // BUCLE
+    oficina_central_id: number; // BUCLE
+    model_oficina_central_id: {
+      // BUCLE
+      id: number;
+      descripcion: string;
+      agencia_id: number;
+      idafac: string;
+    };
+    solicitante_id: number; // BUCLE
+    model_solicitante_id: { id: number; descripcion: string }; // BUCLE
+    direccion: string; // BUCLE
+    altura: string; // BUCLE
+    piso: string; // BUCLE
+    departamento: string; // BUCLE
+    comuna_id: number; // BUCLE
+    model_comuna_id: {
+      // BUCLE
+      id: number;
+      region_id: number;
+      codigo: number;
+      nombre: string;
+    };
+    tipo_red_id: number; // BUCLE
+    model_tipo_red_id: { id: number; descripcion: string; estado: boolean }; // BUCLE
+    tipo_trabajo_id: number; // BUCLE
     model_tipo_trabajo_id: {
+      // BUCLE
       id: number;
       codigo: string;
       descripcion: string;
       estado: boolean;
       tipo_cubicacion_id: number;
     };
-    nombre: string;
-    nombre_proyectista: string;
-    numero_pedido: string;
-    observaciones: string;
-    oficina_central_id: number;
-    pep2: string;
-    piso: string;
-    plan_id: number;
-    pmo_codigo: number;
-    propietario_usuario_id: number;
-    proyecto_id: number;
-    responsable_proxy_id: number;
-    sce_session: string;
-    sitio_plan_id: number;
-    solicitante_id: number;
-    tiene_boleta_garantia: boolean;
-    tiene_permisos: boolean;
-    tipo_estado_ot_id: number;
-    tipo_etapa_ot_id: number;
-    tipo_red_id: number;
-    tipo_sustento: string;
-    tipo_trabajo_id: number;
+    tiene_boleta_garantia: boolean; // BUCLE
+    tiene_permisos: boolean; // BUCLE
+    area_negocio: string; // BUCLE
+    nombre_proyectista: string; // BUCLE
+
+    // ORDINARIO
+    carta_adjudicacion: string; // ORDINARIO
+    fecha_adjudicacion: Date; // ORDINARIO
+    numero_pedido: string; // ORDINARIO
+    materia: null; // ORDINARIO
+
+    // MOVIL
+    plan_id: number; // MOVIL
+    sitio_plan_id: number; // MOVIL
+
+    // SUSTENTO FINANCIERO
+    tipo_sustento: string; // SUSTENTO FINANCIERO
+    pmo_codigo: number; // SUSTENTO FINANCIERO
+    lp: string; // SUSTENTO FINANCIERO
+    pep2: string; // SUSTENTO FINANCIERO
+    id_opex: null; // SUSTENTO FINANCIERO
+    ceco: null; // SUSTENTO FINANCIERO
+    cuenta_sap: null; // SUSTENTO FINANCIERO
+    es_sustento_provisorio: boolean; // SUSTENTO FINANCIERO
   };
   usuarios_involucrados: {
+    // EXTRA
     concepto: string;
     id: number;
     model_proxy_id: {

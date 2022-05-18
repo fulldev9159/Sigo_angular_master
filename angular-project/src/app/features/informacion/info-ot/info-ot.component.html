@@ -7,7 +7,7 @@
         <table border="1" style="width: 100%;">
           <tr>
             <td>Tipo Contrato</td>
-            <td>{{(detalleOT$| async) ? tipo_contrato_nombre[(detalleOT$| async).ot.model_contrato_marco_id.tipo_contrato_id +1 ] : ' ---'}}</td>
+            <td>{{(detalleOT$| async) ? tipo_contrato_nombre[(detalleOT$| async).ot.model_contrato_marco_id.tipo_contrato_id -1 ] : ' ---'}}</td>
           <tr>
             <td>SCE session</td>
             <td>{{(detalleOT$| async) ?(detalleOT$| async).ot.sce_session : ' ---'}}</td>
