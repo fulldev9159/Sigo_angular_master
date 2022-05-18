@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import * as data from '@data';
+import { DataRespGetDetalleOT } from '@data';
 
 @Component({
   selector: 'app-info-ot',
@@ -9,11 +9,12 @@ import * as data from '@data';
   styleUrls: ['./info-ot.component.scss'],
 })
 export class InfoOtComponent implements OnInit {
-  detalleOt$: Observable<data.DataRspDetalleOT>;
+  detalleOT$: Observable<DataRespGetDetalleOT>;
+  tipo_contrato_nombre = ['Móvil', 'Fijo', 'Ordinario', 'Bucle'];
 
   constructor(private otFacade: OtFacade) {}
 
   ngOnInit(): void {
-    this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
+    this.detalleOT$ = this.otFacade.getDetalleOT$();
   }
 }

@@ -4,7 +4,7 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import * as data from '@data';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { NgxPermissionsService } from 'ngx-permissions';
-import { DetalleCubicacion } from '@data';
+import { DetalleCubicacion, DataRespGetDetalleOT } from '@data';
 
 @Component({
   selector: 'app-info-costeo',
@@ -13,7 +13,7 @@ import { DetalleCubicacion } from '@data';
 })
 export class InfoCosteoComponent implements OnInit {
   subscription: Subscription = new Subscription();
-  detalleOt$: Observable<data.DataRspDetalleOT>;
+  detalleOt$: Observable<DataRespGetDetalleOT>;
   DisplayModal = false;
   detalleCubicacion$: Observable<DetalleCubicacion[]> = of([]);
 
@@ -112,7 +112,7 @@ export class InfoCosteoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
+    this.detalleOt$ = this.otFacade.getDetalleOT$();
     this.detalleCubicacion$ = this.cubFacade.getDetallesCubicacionSelector$();
   }
 

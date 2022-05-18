@@ -12,7 +12,7 @@ import {
 import { Subscription, Observable, of } from 'rxjs';
 import {
   DataInformeAvance,
-  DataRspDetalleOT,
+  DataRespGetDetalleOT,
   DetalleCubicacion,
   LpuInformeAvanceDetalle,
   RequestSaveInformeAvanceAdmin,
@@ -28,7 +28,7 @@ import { RequestSaveInformeActaGestor } from '@data/model/acta';
 export class ActaGestorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
-  detalleOt$: Observable<DataRspDetalleOT>;
+  detalleOt$: Observable<DataRespGetDetalleOT>;
   dataInformeActa$: Observable<DataInformeAvance[]> = of([]);
   cubicacion$: Observable<DetalleCubicacion[]> = of([]);
 
@@ -49,17 +49,17 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
+    this.detalleOt$ = this.otFacade.getDetalleOT$();
     this.dataInformeActa$ = this.otFacade.getDataInformeActa$();
 
-    this.subscription.add(
-      this.detalleOt$.subscribe(ot => {
-        if (ot) {
-          this.totalCubicado = ot.total;
-          this.otFacade.getDataInformeActa(ot.id);
-        }
-      })
-    );
+    // this.subscription.add(
+    //   this.detalleOt$.subscribe(ot => {
+    //     if (ot) {
+    //       this.totalCubicado = ot.total;
+    //       this.otFacade.getDataInformeActa(ot.id);
+    //     }
+    //   })
+    // );
 
     this.subscription.add(
       this.dataInformeActa$.subscribe(lpu => {

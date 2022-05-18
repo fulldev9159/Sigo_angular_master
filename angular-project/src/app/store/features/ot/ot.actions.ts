@@ -38,6 +38,7 @@ import {
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
   DataRespGetOTs,
+  DataRespGetDetalleOT,
 } from '@data';
 import {
   DetalleActa,
@@ -68,6 +69,22 @@ export const getOtSuccessCerradas = createAction(
 );
 export const getOtsError = createAction(
   '[Ot GetAll] GET Ot Error',
+  props<{ error: any }>()
+);
+
+// GET DETALLE OT
+export const getDetalleOT = createAction(
+  '[OT] GET Detalle OT',
+  props<{ id: number }>()
+);
+
+export const getDetalleOTSuccess = createAction(
+  '[OT] GET Detalle OT Success',
+  props<{ response: Response<DataRespGetDetalleOT> }>()
+);
+
+export const getDetalleOTError = createAction(
+  '[OT] GET Detalle OT  Error',
   props<{ error: any }>()
 );
 // GET CONTRATOS USER 4 OT
@@ -483,21 +500,6 @@ export const postOtSCESuccess = createAction(
 // OT LIST
 
 // OT FORM
-
-export const getDetalleOt = createAction(
-  '[OT Get Detalle OT] GET Detalle OT',
-  props<{ id: number }>()
-);
-
-export const getDetalleOtSuccess = createAction(
-  '[OT Get Detalle OT] GET Detalle OT Success',
-  props<{ detalleot: Data.DataRspDetalleOT }>()
-);
-
-export const getDetalleOtError = createAction(
-  '[OT Get Detalle OT] GET Detalle OT  Error',
-  props<{ error: any }>()
-);
 
 export const selectOT = createAction(
   '[OT] select OT',

@@ -12,7 +12,7 @@ import {
 import { Subscription, Observable, of } from 'rxjs';
 import {
   DataInformeAvance,
-  DataRspDetalleOT,
+  DataRespGetDetalleOT,
   DetalleCubicacion,
   LpuInformeAvanceDetalle,
   RequestSaveBorradorInformeAvance,
@@ -27,7 +27,7 @@ import {
 export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
-  detalleOt$: Observable<DataRspDetalleOT>;
+  detalleOt$: Observable<DataRespGetDetalleOT>;
   dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
@@ -43,15 +43,15 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
+    this.detalleOt$ = this.otFacade.getDetalleOT$();
     this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
-    this.subscription.add(
-      this.detalleOt$.subscribe(ot => {
-        if (ot) {
-          this.otFacade.getDataInformeAvanceTrabajador(ot.id);
-        }
-      })
-    );
+    // this.subscription.add(
+    //   this.detalleOt$.subscribe(ot => {
+    //     if (ot) {
+    //       this.otFacade.getDataInformeAvanceTrabajador(ot.id);
+    //     }
+    //   })
+    // );
 
     this.subscription.add(
       this.dataInformeAvance$.subscribe(lpu => {

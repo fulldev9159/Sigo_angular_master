@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { map } from 'rxjs/operators';
-import * as data from '@data';
+import { DataRespGetDetalleOT } from '@data';
 
 @Component({
   selector: 'app-informacion',
@@ -13,7 +13,7 @@ import * as data from '@data';
 })
 export class InformacionComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  detalleOt$: Observable<data.DataRspDetalleOT>;
+  detalleOt$: Observable<DataRespGetDetalleOT>;
   loginAuth$: Observable<any>;
   ot_id: number;
   constructor(
@@ -44,11 +44,11 @@ export class InformacionComponent implements OnInit, OnDestroy {
       this.rutaActiva.firstChild.params.subscribe((params: Params) => {
         if (params.id) {
           this.ot_id = params.id;
-          this.otFacade.getDetalleOtAction(+params.id);
+          this.otFacade.getDetalleOT(+params.id);
         }
       })
     );
-    this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
+    this.detalleOt$ = this.otFacade.getDetalleOT$();
   }
 
   ngOnDestroy(): void {

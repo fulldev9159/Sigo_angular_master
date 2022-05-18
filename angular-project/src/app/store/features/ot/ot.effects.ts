@@ -69,6 +69,18 @@ export class OtEffects {
     )
   );
 
+  getDetalleOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getDetalleOT),
+      concatMap(({ id }) =>
+        this.otService.getDetalleOT(id).pipe(
+          map(response => otActions.getDetalleOTSuccess({ response })),
+          catchError(err => of(otActions.getDetalleOTError({ error: err })))
+        )
+      )
+    )
+  );
+
   getContratos4OT$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getContratosUser4OT),
@@ -396,27 +408,6 @@ export class OtEffects {
   //     )
   //   )
   // );
-
-  getDetalleOt$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getDetalleOt),
-      concatMap((data: any) =>
-        this.http
-          .post(`${environment.api}/ingreot/ot/detalle/get`, {
-            id: data.id,
-          })
-          .pipe(
-            map((res: Response<Data.DataRspDetalleOT>) => {
-              if (+res.status.responseCode !== 0) {
-                this.snackService.showMessage(res.status.description, 'error');
-              }
-              return otActions.getDetalleOtSuccess({ detalleot: res.data });
-            }),
-            catchError(err => of(otActions.postOtError({ error: err })))
-          )
-      )
-    )
-  );
 
   approveOT$ = createEffect(() =>
     this.actions$.pipe(

@@ -3,21 +3,33 @@
     <app-card [classCardHeader]="'bg-info'">
       <ng-container card-header-title>Información de sistema</ng-container>
       <ng-container card-body>
-        <ul>
-          <li>Tipo Contrato: <span style="margin-right:9.8em"></span> {{(detalleOt$| async) ? (detalleOt$| async).tipo_contrato_marco_nombre : ' ---'}}</li>
-          <li>SCE session: <span style="margin-right:6.6em"></span>{{(detalleOt$| async) ?(detalleOt$| async).sce_sesion : ' ---'}}</li>
-          <li>Etapa: <span style="margin-right:9.3em"></span>{{(detalleOt$| async) ? (detalleOt$| async).tipo_etapa_ot.nombre : ' ---'}}</li>
-          <li>Estado: <span style="margin-right:8.8em"></span>{{(detalleOt$| async) ? (detalleOt$| async).tipo_estado_ot.nombre : ' ---'}}</li>
-          <li>Tipo: <span style="margin-right:9.8em"></span> {{(detalleOt$| async) ? (detalleOt$| async).tipo : ' ---'}}</li>
-        </ul>
+        <!-- <pre>{{detalleOT$| async|json}}</pre> -->
+        <table border="1" style="width: 100%;">
+          <tr>
+            <td>Tipo Contrato</td>
+            <td>{{(detalleOT$| async) ? tipo_contrato_nombre[(detalleOT$| async).ot.model_contrato_marco_id.tipo_contrato_id +1 ] : ' ---'}}</td>
+          <tr>
+            <td>SCE session</td>
+            <td>{{(detalleOT$| async) ?(detalleOT$| async).ot.sce_session : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Etapa</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Estado</td>
+            <td></td>
+          </tr>
+
+        </table>
       </ng-container>
     </app-card>
-    <app-card [classCardHeader]="'bg-info'">
+    <!-- <app-card [classCardHeader]="'bg-info'">
       <ng-container card-header-title>Fechas</ng-container>
       <ng-container card-body>
         <ul>
-          <li>Fecha Inicio OT: <span style="margin-right:5em"></span>{{(detalleOt$| async) ? ((detalleOt$| async).fecha_inicio|date:"dd/MM/yyyy"): "---"}}</li>
-          <li>Fecha Fin OT: <span style="margin-right:6.1em"></span>{{(detalleOt$| async) ? ((detalleOt$| async).fecha_fin|date:"dd/MM/yyyy") : ' ---'}}</li>
+          <li>Fecha Inicio OT: <span style="margin-right:5em"></span>{{(detalleOT$| async) ? ((detalleOT$| async).fecha_inicio|date:"dd/MM/yyyy"): "---"}}</li>
+          <li>Fecha Fin OT: <span style="margin-right:6.1em"></span>{{(detalleOT$| async) ? ((detalleOT$| async).fecha_fin|date:"dd/MM/yyyy") : ' ---'}}</li>
         </ul>
       </ng-container>
     </app-card>
@@ -25,39 +37,39 @@
       <ng-container card-header-title>Información adicional</ng-container>
       <ng-container card-body>
         <ul>
-          <li>Propietario: <span style="margin-right:7em"></span>{{(detalleOt$| async) ?(detalleOt$| async).propietario_nombre : ' ---'}}</li>
-          <li>Responsable: <span style="margin-right:6.4em"></span>{{(detalleOt$| async) ? (detalleOt$| async).responsable_nombre : ' ---'}}</li>
-          <li>Fecha de creación: <span style="margin-right:4em"></span>{{(detalleOt$| async) ? ((detalleOt$| async).created_at|date:"dd/MM/yyyy") : ' ---'}}</li>
-          <li>Proyecto: <span style="margin-right:8.1em"></span> {{(detalleOt$| async) ? (detalleOt$| async).proyecto_nombre : ' ---'}}</li>
-          <li>Observaciones: <span style="margin-right:5.6em"></span> {{(detalleOt$| async) ?(detalleOt$| async).observaciones : ' ---'}}</li>
+          <li>Propietario: <span style="margin-right:7em"></span>{{(detalleOT$| async) ?(detalleOT$| async).propietario_nombre : ' ---'}}</li>
+          <li>Responsable: <span style="margin-right:6.4em"></span>{{(detalleOT$| async) ? (detalleOT$| async).responsable_nombre : ' ---'}}</li>
+          <li>Fecha de creación: <span style="margin-right:4em"></span>{{(detalleOT$| async) ? ((detalleOT$| async).created_at|date:"dd/MM/yyyy") : ' ---'}}</li>
+          <li>Proyecto: <span style="margin-right:8.1em"></span> {{(detalleOT$| async) ? (detalleOT$| async).proyecto_nombre : ' ---'}}</li>
+          <li>Observaciones: <span style="margin-right:5.6em"></span> {{(detalleOT$| async) ?(detalleOT$| async).observaciones : ' ---'}}</li>
         </ul>
       </ng-container>
-    </app-card>
+    </app-card> -->
   </div>
-  <div class="col-xs-12 col-md-6">
-    <app-card [classCardHeader]="'bg-info'" *ngIf="(detalleOt$| async).plan_nombre">
+  <!-- <div class="col-xs-12 col-md-6">
+    <app-card [classCardHeader]="'bg-info'" *ngIf="(detalleOT$| async).plan_nombre">
       <ng-container card-header-title>Plan de proyecto</ng-container>
       <ng-container card-body>
         <ul>
-          <li>Plan:<span style="margin-right:10em"></span>{{(detalleOt$| async) ? (detalleOt$| async).plan_nombre : ' ---' }}</li>
-          <li>Código:<span style="margin-right:8.7em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sitio.codigo : ' ---'}}</li>
-          <li>Nombre sitio:<span style="margin-right:6.01em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sitio.nombre : ' ---'}}</li>
-          <li>Dirección:<span style="margin-right:7.7em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sitio.direccion: ' ---' }} </li>
-          <li>Latitud: <span style="margin-right:8.5em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sitio.geo_lat : ' ---' }}</li>
-          <li>Longitud:<span style="margin-right:7.9em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sitio.geo_lon : ' ---' }} </li>
+          <li>Plan:<span style="margin-right:10em"></span>{{(detalleOT$| async) ? (detalleOT$| async).plan_nombre : ' ---' }}</li>
+          <li>Código:<span style="margin-right:8.7em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sitio.codigo : ' ---'}}</li>
+          <li>Nombre sitio:<span style="margin-right:6.01em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sitio.nombre : ' ---'}}</li>
+          <li>Dirección:<span style="margin-right:7.7em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sitio.direccion: ' ---' }} </li>
+          <li>Latitud: <span style="margin-right:8.5em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sitio.geo_lat : ' ---' }}</li>
+          <li>Longitud:<span style="margin-right:7.9em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sitio.geo_lon : ' ---' }} </li>
         </ul>
       </ng-container>
     </app-card>
 
 
-    <app-card [classCardHeader]="'bg-info'" *ngIf="(detalleOt$| async).numero_interno">
+    <app-card [classCardHeader]="'bg-info'" *ngIf="(detalleOT$| async).numero_interno">
       <ng-container card-header-title>Número Interno</ng-container>
       <ng-container card-body>
         <ul>
-          <li>Tipo:<span style="margin-right:10em"></span>{{(detalleOt$| async) ? (detalleOt$| async).tipo_numero_interno_nombre : ' ---' }}</li>
+          <li>Tipo:<span style="margin-right:10em"></span>{{(detalleOT$| async) ? (detalleOT$| async).tipo_numero_interno_nombre : ' ---' }}</li>
           <li>Números:
             <ul>
-              <li *ngFor="let numero of (detalleOt$| async).numero_interno">{{numero}}</li>
+              <li *ngFor="let numero of (detalleOT$| async).numero_interno">{{numero}}</li>
             </ul>
           </li>
         </ul>
@@ -69,22 +81,22 @@
       <ng-container card-header-title>Sustento Financiero</ng-container>
       <ng-container card-body>
         <ul>
-          <li>Tipo:<span style="margin-right:10em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.tipo_sustento : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.capex!==null">PMO:<span style="margin-right:9.7em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.capex.pmo_codigo : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.capex!==null">Línea presupuestaria:<span style="margin-right:2.61em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.capex.lp_codigo : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.capex!==null">PEP2:<span style="margin-right:9.72em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.capex.pep2_codigo : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.capex_provisorio!==null">PMO:<span style="margin-right:9.7em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.capex_provisorio.pmo_codigo : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.capex_provisorio!==null">Línea presupuestaria:<span style="margin-right:2.8em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.capex_provisorio.lp_codigo : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.capex_provisorio!==null">PEP2 Provisorio*:<span style="margin-right:15em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.capex_provisorio.pep2_codigo : ' ---' }}</li>
+          <li>Tipo:<span style="margin-right:10em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.tipo_sustento : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.capex!==null">PMO:<span style="margin-right:9.7em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.capex.pmo_codigo : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.capex!==null">Línea presupuestaria:<span style="margin-right:2.61em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.capex.lp_codigo : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.capex!==null">PEP2:<span style="margin-right:9.72em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.capex.pep2_codigo : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.capex_provisorio!==null">PMO:<span style="margin-right:9.7em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.capex_provisorio.pmo_codigo : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.capex_provisorio!==null">Línea presupuestaria:<span style="margin-right:2.8em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.capex_provisorio.lp_codigo : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.capex_provisorio!==null">PEP2 Provisorio*:<span style="margin-right:15em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.capex_provisorio.pep2_codigo : ' ---' }}</li>
 
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.opex!==null">ID Opex:<span style="margin-right:9.7em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.opex.id_opex : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.opex!==null">Cuenta SAP:<span style="margin-right:2.8em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.opex.cuenta_sap : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.opex!==null">CECO:<span style="margin-right:10em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.opex.ceco_codigo : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.opex_provisorio!==null">ID Opex:<span style="margin-right:9.7em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.opex_provisorio.id_opex : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.opex_provisorio!==null">Cuenta SAP:<span style="margin-right:2.8em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.opex_provisorio.cuenta_sap : ' ---' }}</li>
-          <li *ngIf="(detalleOt$| async) && (detalleOt$| async).sustento_financiero.opex_provisorio!==null">CECO Provisorio*:<span style="margin-right:15em"></span>{{(detalleOt$| async) ? (detalleOt$| async).sustento_financiero.opex_provisorio.ceco_codigo : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.opex!==null">ID Opex:<span style="margin-right:9.7em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.opex.id_opex : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.opex!==null">Cuenta SAP:<span style="margin-right:2.8em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.opex.cuenta_sap : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.opex!==null">CECO:<span style="margin-right:10em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.opex.ceco_codigo : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.opex_provisorio!==null">ID Opex:<span style="margin-right:9.7em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.opex_provisorio.id_opex : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.opex_provisorio!==null">Cuenta SAP:<span style="margin-right:2.8em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.opex_provisorio.cuenta_sap : ' ---' }}</li>
+          <li *ngIf="(detalleOT$| async) && (detalleOT$| async).sustento_financiero.opex_provisorio!==null">CECO Provisorio*:<span style="margin-right:15em"></span>{{(detalleOT$| async) ? (detalleOT$| async).sustento_financiero.opex_provisorio.ceco_codigo : ' ---' }}</li>
         </ul>
       </ng-container>
     </app-card>
-  </div>
+  </div> -->
 </div>

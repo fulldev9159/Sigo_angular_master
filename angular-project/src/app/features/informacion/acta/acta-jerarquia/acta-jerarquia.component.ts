@@ -12,7 +12,7 @@ import {
 import { Subscription, Observable, of } from 'rxjs';
 import {
   DataInformeAvance,
-  DataRspDetalleOT,
+  DataRespGetDetalleOT,
   DetalleCubicacion,
   LpuInformeAvanceDetalle,
   RequestSaveInformeAvanceAdmin,
@@ -29,7 +29,7 @@ import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 export class ActaJerarquiaComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
-  detalleOt$: Observable<DataRspDetalleOT>;
+  detalleOt$: Observable<DataRespGetDetalleOT>;
   dataInformeActa$: Observable<DetalleActa[]> = of([]);
   cubicacion$: Observable<DetalleCubicacion[]> = of([]);
 
@@ -54,19 +54,19 @@ export class ActaJerarquiaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loginAuth$ = this.authFacade.getLogin$();
-    this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
+    this.detalleOt$ = this.otFacade.getDetalleOT$();
     // this.dataInformeActa$ = this.otFacade.getDataSolicitudPago$();
     this.dataInformeActa$ = of([]);
 
-    this.subscription.add(
-      this.detalleOt$.subscribe(ot => {
-        if (ot) {
-          this.ot_id = ot.id;
-          this.totalCubicado = ot.total;
-          // this.otFacade.getDataSolicitudPago(ot.id);
-        }
-      })
-    );
+    // this.subscription.add(
+    //   this.detalleOt$.subscribe(ot => {
+    //     if (ot) {
+    //       this.ot_id = ot.id;
+    //       this.totalCubicado = ot.total;
+    //       // this.otFacade.getDataSolicitudPago(ot.id);
+    //     }
+    //   })
+    // );
 
     this.subscription.add(
       this.loginAuth$.subscribe(loginAuth => {
