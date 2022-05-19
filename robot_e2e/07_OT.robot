@@ -103,6 +103,9 @@ Crear OT BUCLE
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    P-0077-21-0102-40050-601
 
 
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(3) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    Jose NOKIA Campos Jaraquemada
+
     close browser
 
 Crear OT MOVIL
@@ -137,7 +140,7 @@ Crear OT MOVIL
     _Have to exist in table/tab       Abiertas              OT MOVIL
     _Validate column data             3                     OT MOVIL
     _Validate column data             4                     Autorizar OT por Proveedor
-   # _Validate column data           8                     SBE
+    _Validate column data             8                     SBE
     _Validate column data             9                     COASIN
     _Validate column data             10                    JESSICA MOVISTAR CASTILLO 1
     _Have No to exist in table/tab    Cerradas              OT MOVIL
@@ -166,6 +169,8 @@ Crear OT MOVIL
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)    10952
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    P-0077-21-0102-40050-601
 
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(3) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    Carlos COASIN Campos Jaraquemada
 
     close browser
 
@@ -205,7 +210,7 @@ Crear OT ORDINARIO
     _Have to exist in table/tab       Abiertas     OT ORDINARIO
     _Validate column data             3            OT ORDINARIO
     _Validate column data             4            Autorizar OT por Proveedor
-   #                                 _Validate column data    8                                          Contrato Ordinario
+    _Validate column data             8            Contrato Ordinario
     _Validate column data             9            NOKIA SOLUTIONS AND NETWORKS CHILE LTDA
     _Validate column data             10           JESSICA MOVISTAR CASTILLO 1
     _Have No to exist in table/tab    Cerradas     OT ORDINARIO
@@ -234,6 +239,10 @@ Crear OT ORDINARIO
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    31
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)    10952
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    P-0077-21-0102-40050-601
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(3) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    Jose NOKIA Campos Jaraquemada
+
     close browser
 
 Crear OT FIJO
@@ -271,7 +280,7 @@ Crear OT FIJO
     _Have to exist in table/tab       Abiertas     OT FIJO
     _Validate column data             3            OT FIJO
     _Validate column data             4            Autorizar OT por Proveedor
-   #                                 _Validate column data    8                              UNIFICADO-2019-FIJA
+    _Validate column data             8            UNIFICADO-2019-FIJA
     _Validate column data             9            COASIN
     _Validate column data             10           JESSICA MOVISTAR CASTILLO 1
     _Have No to exist in table/tab    Cerradas     OT FIJO
@@ -299,4 +308,8 @@ Crear OT FIJO
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    31
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)    10952
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    P-0077-21-0102-40050-601
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(3) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    Carlos COASIN Campos Jaraquemada
+
     close browser

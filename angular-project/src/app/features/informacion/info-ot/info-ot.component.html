@@ -4,7 +4,7 @@
       <ng-container card-header-title>Información de sistema</ng-container>
       <ng-container card-body>
         <!-- <pre>{{detalleOT$| async|json}}</pre> -->
-        <table border="1" style="width: 100%;">
+        <table style="width: 100%;" class="table-info">
           <tr>
             <td>Tipo Contrato</td>
             <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre : ' ---'}}</td>
@@ -47,7 +47,7 @@
     <app-card [classCardHeader]="'bg-info'">
       <ng-container card-header-title>Fechas</ng-container>
       <ng-container card-body>
-        <table border="1" style="width: 100%;">
+        <table class="table-info" style="width: 100%;">
           <tr>
             <td>Fecha Inicio OT</td>
             <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.fecha_inicio : ' ---'}}</td>
@@ -62,7 +62,7 @@
     <app-card [classCardHeader]="'bg-info'">
       <ng-container card-header-title>Información adicional</ng-container>
       <ng-container card-body>
-        <table border="1" style="width: 100%;">
+        <table class="table-info" style="width: 100%;">
           <tr>
             <td>Propietario</td>
             <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_propietario_usuario_id.nombres + ' ' + (detalleOT$| async).ot.model_propietario_usuario_id.apellidos : ' ---'}}</td>
@@ -84,7 +84,7 @@
       <ng-container card-header-title>Información Contrato {{(detalleOT$| async) ? (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre : ' ---'}}</ng-container>
       <ng-container card-body>
         <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Móvil'">
-          <table border="1" style="width: 100%;">
+          <table class="table-info" style="width: 100%;">
             <tr>
               <td>Plan de proyecto</td>
               <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_plan_id.nombre : ' ---'}}</td>
@@ -97,7 +97,7 @@
         </ng-container>
 
         <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Bucle'">
-          <table border="1" style="width: 100%;">
+          <table class="table-info" style="width: 100%;">
             <tr>
               <td>Oficina Central</td>
               <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.model_oficina_central_id.idafac : ' ---'}}</td>
@@ -109,14 +109,32 @@
             <tr>
               <td>Dirección</td>
               <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.direccion : ' ---'}}</td>
-              <td>Altura</td>
-              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.altura : ' ---'}}</td>
+              <td style="border: 0;
+              border-width: 0;
+              padding: 0.275rem;
+              background-color: #efefef;
+              font-weight: 600;
+              text-align: right;
+              padding-right: 10px;
+              width: 28%;
+              border-right: 1px solid #bdbbbb">Altura</td>
+              <td style="font-weight: 400;
+              padding-left: 5px;">{{(detalleOT$| async) ? (detalleOT$| async).ot.altura : ' ---'}}</td>
             </tr>
             <tr>
               <td>Piso</td>
               <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.piso : ' ---'}}</td>
-              <td>Departamento</td>
-              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.departamento : ' ---'}}</td>
+              <td style="border: 0;
+              border-width: 0;
+              padding: 0.275rem;
+              background-color: #efefef;
+              font-weight: 600;
+              text-align: right;
+              padding-right: 10px;
+              width: 28%;
+              border-right: 1px solid #bdbbbb">Departamento</td>
+              <td style="font-weight: 400;
+              padding-left: 5px;">{{(detalleOT$| async) ? (detalleOT$| async).ot.departamento : ' ---'}}</td>
             </tr>
             <tr>
               <td>Comuna</td>
@@ -150,7 +168,7 @@
         </ng-container>
 
         <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Ordinario'">
-          <table border="1" style="width: 100%;">
+          <table class="table-info" style="width: 100%;">
             <tr>
               <td>Carta de adjudicación</td>
               <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.carta_adjudicacion : ' ---'}}</td>
@@ -171,14 +189,14 @@
         </ng-container>
 
         <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Fijo'">
-          <table border="1" style="width: 100%;">
+          <table class="table-info" style="width: 100%;">
             <tr>
               <td>Tipo Número Interno</td>
               <td>{{(detalleOT$| async) ? (detalleOT$| async).numeros_interno[0].model_tipo_numero_interno_id.nombre : ' ---'}}</td>
             </tr>
           </table>
           <br>
-          <table border="1" style="width: 100%;">
+          <table style="width: 100%;">
             <tr>
               <th>Números Internos</th>
             </tr>
@@ -189,6 +207,26 @@
         </ng-container>
       </ng-container>
 
+    </app-card>
+
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Usuarios Involucrados</ng-container>
+      <ng-container card-body>
+        <table style="width: 100%;">
+          <tr>
+            <th>
+              Concepto
+            </th>
+            <th>
+              Usuario
+            </th>
+          </tr>
+          <tr *ngFor="let item of (detalleOT$| async) ? (detalleOT$| async).usuarios_involucrados : []">
+            <td>{{item.concepto}}</td>
+            <td>{{item.model_proxy_id.model_usuario_id.nombres}} {{item.model_proxy_id.model_usuario_id.apellidos}}</td>
+          </tr>
+        </table>
+      </ng-container>
     </app-card>
 
   </div>
@@ -343,7 +381,7 @@
       <app-card [classCardHeader]="'bg-info'">
         <ng-container card-header-title>Sustento Financiero</ng-container>
         <ng-container card-body>
-          <table border="1" style="width: 100%;">
+          <table class="table-info" style="width: 100%;">
             <tr>
               <td>Tipo de sustento financiero</td>
               <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.tipo_sustento : ' ---'}}</td>
