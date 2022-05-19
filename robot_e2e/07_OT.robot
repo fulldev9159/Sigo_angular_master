@@ -104,7 +104,7 @@ Crear OT BUCLE
 
 
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
-    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(3) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    Jose NOKIA Campos Jaraquemada
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(2)    Jose NOKIA Campos Jaraquemada
 
     close browser
 
@@ -170,7 +170,7 @@ Crear OT MOVIL
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    P-0077-21-0102-40050-601
 
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
-    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(3) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    Carlos COASIN Campos Jaraquemada
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(2)    Carlos COASIN Campos Jaraquemada
 
     close browser
 
@@ -241,7 +241,7 @@ Crear OT ORDINARIO
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    P-0077-21-0102-40050-601
 
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
-    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(3) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    Jose NOKIA Campos Jaraquemada
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(2)    Jose NOKIA Campos Jaraquemada
 
     close browser
 
@@ -310,6 +310,6 @@ Crear OT FIJO
     _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    P-0077-21-0102-40050-601
 
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
-    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(3) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    Carlos COASIN Campos Jaraquemada
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(2)    Carlos COASIN Campos Jaraquemada
 
     close browser
