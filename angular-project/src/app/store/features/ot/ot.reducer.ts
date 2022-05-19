@@ -1,6 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import * as OtActions from './ot.actions';
-import * as Data from '@data';
 import copy from 'fast-copy';
 
 import {
@@ -26,6 +25,7 @@ import {
   TipoNumeroInterno,
   NumeroInternoHasOT,
   OT,
+  DataRespGetDetalleOT,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -70,12 +70,12 @@ export interface StateOt {
   itemsAbiertas: OT[];
   itemsCerradas: OT[];
 
-  detalleOt: Data.DataRspDetalleOT;
+  detalleOT: DataRespGetDetalleOT;
 
-  coordinators: Data.User[];
-  trabajadores: Data.User[];
+  // coordinators: Data.User[];
+  // trabajadores: Data.User[];
 
-  registroslibroobras: Data.RegistroLibroObra[];
+  // registroslibroobras: Data.RegistroLibroObra[];
 
   saving: boolean;
   errorSaving: Error;
@@ -126,12 +126,12 @@ export const initialStateOt: StateOt = {
   itemsAbiertas: [],
   itemsCerradas: [],
 
-  detalleOt: null,
+  detalleOT: null,
 
-  coordinators: [],
-  trabajadores: [],
+  // coordinators: [],
+  // trabajadores: [],
 
-  registroslibroobras: [],
+  // registroslibroobras: [],
 
   saving: false,
   errorSaving: null,
@@ -156,6 +156,10 @@ export const reducerOt = createReducer(
   on(OtActions.getOtSuccessCerradas, (state, { response }) => ({
     ...state,
     itemsCerradas: response.data.items,
+  })),
+  on(OtActions.getDetalleOTSuccess, (state, { response }) => ({
+    ...state,
+    detalleOT: response.data,
   })),
   on(OtActions.getContratosUser4OTSuccess, (state, { response }) => {
     const temp = copy(response.data.items);
@@ -445,6 +449,7 @@ export const reducerOt = createReducer(
   })),
   on(OtActions.resetContrato, (state, payload) => ({
     ...state,
+    cubicaciones: [],
     cubicacionSeleccionada: null,
     pmos: [],
     lineaPresupuestaria: [],
@@ -530,12 +535,6 @@ export const reducerOt = createReducer(
   //   ...state,
   //   items: [...state.items, payload.ot],
   // })),
-
-  on(OtActions.getDetalleOt, state => state),
-  on(OtActions.getDetalleOtSuccess, (state, payload) => ({
-    ...state,
-    detalleOt: payload.detalleot,
-  })),
 
   on(OtActions.selectOT, (state, { ot }) => ({
     ...state,

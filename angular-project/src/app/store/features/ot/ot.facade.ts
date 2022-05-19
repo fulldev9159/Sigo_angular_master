@@ -35,6 +35,7 @@ import {
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
+  DataRespGetDetalleOT,
 } from '@data';
 import {
   DetalleActa,
@@ -383,16 +384,12 @@ export class OtFacade {
   // // OT
 
   // Detalle OT
-  public getDetalleOtAction(id: number): void {
-    this.store.dispatch(otActions.getDetalleOt({ id }));
+  public getDetalleOT(id: number): void {
+    this.store.dispatch(otActions.getDetalleOT({ id }));
   }
 
-  public getDetalleOtSuccess(detalleot: Data.DataRspDetalleOT): void {
-    this.store.dispatch(otActions.getDetalleOtSuccess({ detalleot }));
-  }
-
-  public getDetalleOtSelector$(): Observable<Data.DataRspDetalleOT> {
-    return this.store.select(otSelectors.getDetalleOt);
+  public getDetalleOT$(): Observable<DataRespGetDetalleOT> {
+    return this.store.select(otSelectors.getDetalleOT);
   }
 
   // Coordinadores OT
@@ -400,9 +397,9 @@ export class OtFacade {
     this.store.dispatch(otActions.getCoordinators({ otID }));
   }
 
-  public getCoordinators$(): Observable<Data.User[]> {
-    return this.store.select(otSelectors.getCoordinators);
-  }
+  // public getCoordinators$(): Observable<Data.User[]> {
+  //   return this.store.select(otSelectors.getCoordinators);
+  // }
 
   public assignCoordinator(otID: number, coordinatorID: number): void {
     this.store.dispatch(
@@ -415,9 +412,9 @@ export class OtFacade {
     this.store.dispatch(otActions.getTrabajadores({ otID }));
   }
 
-  public getTrabajadores$(): Observable<Data.User[]> {
-    return this.store.select(otSelectors.getTrabajadores);
-  }
+  // public getTrabajadores$(): Observable<Data.User[]> {
+  //   return this.store.select(otSelectors.getTrabajadores);
+  // }
 
   public assignTrabajador(otID: number, trabajadorID: number): void {
     this.store.dispatch(otActions.assignTrabajador({ otID, trabajadorID }));
@@ -463,9 +460,9 @@ export class OtFacade {
     this.store.dispatch(otActions.getRegistrosLibroObra({ ot_id }));
   }
 
-  public getRegistrosLibroObras$(): Observable<Data.RegistroLibroObra[]> {
-    return this.store.select(otSelectors.getRegistrosLibroObra);
-  }
+  // public getRegistrosLibroObras$(): Observable<Data.RegistroLibroObra[]> {
+  //   return this.store.select(otSelectors.getRegistrosLibroObra);
+  // }
 
   public getSavingOT$(): Observable<boolean> {
     return this.store.select(otSelectors.getSavingOT);

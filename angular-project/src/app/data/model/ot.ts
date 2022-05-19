@@ -11,14 +11,248 @@ export interface DataRespGetOTs {
 }
 
 export interface OT {
+  contrato_marco_nombre: string;
+  delegacion: string;
+  estado_otdesc: string;
+  estado_otid: number;
+  estado_slug: string;
+  etapa_otdesc: string;
+  etapa_otid: number;
+  etapa_slug: string;
+  fecha_inicio: string;
+  fecha_termino: string;
   id: number;
-  agencia_id: number;
-  creador_usuario_nombre: string;
-  cubicacion_descripcion: string;
-  cubicacion_id: number;
-  cubicacion_nombre: string;
-  tipo_contrato_marco_nombre: string;
+  nombre: string;
+  proveedor_id: number;
+  proveedor_nombre: string;
+  sce_session: string;
+  tipo_cubicacion_id: number;
+  usuario_nombre: string;
   acciones: Accion[];
+}
+
+// DETALLE OT
+export interface DataRespGetDetalleOT {
+  numeros_interno: {
+    // FIJO
+    id: number;
+    model_tipo_numero_interno_id: { id: number; nombre: string };
+    numero_interno: string;
+    ot_id: number;
+    tipo_numero_interno_id: number;
+  }[];
+  ot: {
+    id: number; // BASE
+    nombre: string; // BASE
+    contrato_marco_id: number; // BASE
+    model_contrato_marco_id: {
+      // BASE
+      aprob_jerarq_inic: boolean;
+      costo_max: number;
+      estado: boolean;
+      fecha_fin: Date;
+      fecha_inicio: Date;
+      id: number;
+      nombre: string;
+      tiene_encuesta: boolean;
+      tipo_contrato_id: number;
+      tipo_moneda_id: number;
+      tipo_pago: string;
+      validacion_operaciones: boolean;
+      model_tipo_contrato_id: {
+        id: number;
+        nombre: string;
+      };
+    };
+    cubicacion_id: number; // BASE
+    model_cubicacion_id: {
+      // BASE
+      agencia_id: number;
+      altura_desde: string;
+      altura_hasta: string;
+      cmarco_has_proveedor_id: number;
+      codigo_acuerdo: string;
+      contrato_id: number;
+      created_at: Date;
+      descripcion: string;
+      direccion_desde: string;
+      direccion_hasta: string;
+      id: number;
+      nombre: string;
+      proveedor_id: number;
+      tipo_cubicacion_id: number;
+      updated_at: Date;
+      usuario_creador_id: number;
+    };
+    fecha_fin: Date; // BASE
+    fecha_inicio: Date; // BASE
+    proyecto_id: number; // BASE
+    observaciones: string; // BASE
+    created_at: Date; // BASE
+    model_propietario_usuario_id: {
+      // BASE
+      apellidos: string;
+      area_id: number;
+      celular: string;
+      created_at: Date;
+      email: string;
+      estado: boolean;
+      firma_archivo_id: number;
+      id: number;
+      nombres: string;
+      proveedor_id: number;
+      rut: string;
+      updated_at: Date;
+      username: string;
+    };
+    model_responsable_proxy_id: {
+      // BASE
+      created_at: Date;
+      id: number;
+      model_usuario_id: {
+        apellidos: string;
+        area_id: number;
+        celular: string;
+        created_at: Date;
+        email: string;
+        estado: true;
+        firma_archivo_id: null;
+        id: number;
+        nombres: string;
+        proveedor_id: number;
+        rut: string;
+        updated_at: Date;
+        username: string;
+      };
+      perfil_id: number;
+      superior_proxy_id: number;
+      updated_at: Date;
+      usuario_id: number;
+      usuario_orig: number;
+    };
+    model_tipo_estado_ot_id: { id: number; slug: string; nombre: string }; // BASE
+    model_tipo_etapa_ot_id: { id: number; slug: string; nombre: string }; // BASE
+    propietario_usuario_id: number; // BASE
+    responsable_proxy_id: number; // BASE
+    sce_session: string; // BASE
+    tipo_estado_ot_id: number; // BASE
+    tipo_etapa_ot_id: number; // BASE
+    aceptacion_inicial_id: number;
+
+    // BUCLE
+    oficina_central_id: number; // BUCLE
+    model_oficina_central_id: {
+      // BUCLE
+      id: number;
+      descripcion: string;
+      agencia_id: number;
+      idafac: string;
+    };
+    solicitante_id: number; // BUCLE
+    model_solicitante_id: { id: number; descripcion: string }; // BUCLE
+    direccion: string; // BUCLE
+    altura: string; // BUCLE
+    piso: string; // BUCLE
+    departamento: string; // BUCLE
+    comuna_id: number; // BUCLE
+    model_comuna_id: {
+      // BUCLE
+      id: number;
+      region_id: number;
+      codigo: number;
+      nombre: string;
+    };
+    tipo_red_id: number; // BUCLE
+    model_tipo_red_id: { id: number; descripcion: string; estado: boolean }; // BUCLE
+    tipo_trabajo_id: number; // BUCLE
+    model_tipo_trabajo_id: {
+      // BUCLE
+      id: number;
+      codigo: string;
+      descripcion: string;
+      estado: boolean;
+      tipo_cubicacion_id: number;
+    };
+    tiene_boleta_garantia: boolean; // BUCLE
+    tiene_permisos: boolean; // BUCLE
+    area_negocio: string; // BUCLE
+    nombre_proyectista: string; // BUCLE
+
+    // ORDINARIO
+    carta_adjudicacion: string; // ORDINARIO
+    fecha_adjudicacion: Date; // ORDINARIO
+    numero_pedido: string; // ORDINARIO
+    materia: null; // ORDINARIO
+
+    // MOVIL
+    plan_id: number; // MOVIL
+    model_plan_id: {
+      id: number;
+      nombre: string;
+      estado: boolean;
+      created_at: Date;
+    };
+    sitio_plan_id: number; // MOVIL
+    model_sitio_plan_id: {
+      codigo: string;
+      comuna: string;
+      created_at: Date;
+      direccion: string;
+      duenno_estructura: string;
+      fecha_liberacion: Date;
+      fecha_termino: Date;
+      geo_lat: number;
+      geo_lon: number;
+      id: number;
+      metas: string;
+      nemonico: string;
+      nombre: string;
+      plan_id: number;
+      region_id: number;
+      tipo: string;
+      vendor: string;
+    };
+    // SUSTENTO FINANCIERO
+    tipo_sustento: string; // SUSTENTO FINANCIERO
+    pmo_codigo: number; // SUSTENTO FINANCIERO
+    lp: string; // SUSTENTO FINANCIERO
+    pep2: string; // SUSTENTO FINANCIERO
+    id_opex: string; // SUSTENTO FINANCIERO
+    ceco: string; // SUSTENTO FINANCIERO
+    cuenta_sap: string; // SUSTENTO FINANCIERO
+    es_sustento_provisorio: boolean; // SUSTENTO FINANCIERO
+  };
+  usuarios_involucrados: {
+    // EXTRA
+    concepto: string;
+    id: number;
+    model_proxy_id: {
+      created_at: Date;
+      id: number;
+      model_usuario_id: {
+        apellidos: string;
+        area_id: number;
+        celular: string;
+        created_at: Date;
+        email: string;
+        estado: boolean;
+        firma_archivo_id: number;
+        id: number;
+        nombres: string;
+        proveedor_id: number;
+        rut: string;
+        updated_at: Date;
+        username: string;
+      };
+      perfil_id: number;
+      superior_proxy_id: number;
+      updated_at: Date;
+      usuario_id: number;
+      usuario_orig: number;
+    };
+    ot_id: number;
+    proxy_id: number;
+  }[];
 }
 
 // GET CUBS
@@ -450,94 +684,94 @@ export interface RejectPaymentsResponse {
   };
 }
 
-export interface DataRspDetalleOT {
-  id: number;
-  nombre: string;
-  tipo: string; // OT/AP
-  proyecto_id: number; // o -1, si no aplica
-  proyecto_nombre: string; // o vacio, si no aplica
-  cubicacion_id: number;
-  cubicacion_nombre: string;
-  contrato_marco_id: number;
-  contrato_marco_nombre: string;
-  proveedor_id: number;
-  proveedor_nombre: string;
-  region_id: number;
-  region_nombre: string;
-  total: number;
-  plan_id: number;
-  plan_nombre: string;
-  propietario_id: number;
-  propietario_nombre: string;
-  responsable_id: number;
-  responsable_nombre: string;
-  fecha_inicio: Date;
-  fecha_fin: Date;
-  observaciones: string;
-  sce_sesion: string;
-  created_at: Date;
-  total_tipo_moneda: string;
-  tipo_estado_ot: {
-    id: number;
-    slug: string;
-    nombre: string;
-  };
-  tipo_etapa_ot: {
-    id: number;
-    slug: string;
-    nombre: string;
-  };
-  sitio: {
-    id: number;
-    codigo: string;
-    metas: string;
-    nombre: string;
-    nemonico: string;
-    region_id: number;
-    region_nombre: string;
-    comuna: string;
-    geo_lat: number;
-    geo_lon: number;
-    direccion: string;
-  };
-  sustento_financiero: {
-    tipo_sustento: string; // CAPEX/OPEX
-    capex: {
-      // o null, si no aplica o si viene CAPEX provisorio
-      id: number;
-      pmo_codigo: number;
-      lp_codigo: string;
-      pep2_codigo: string;
-    };
-    opex: {
-      // o null, si no aplica o si viene OPEX provisorio
-      id: number;
-      id_opex: string;
-      cuenta_sap: number;
-      ceco_codigo: string;
-    };
-    capex_provisorio: {
-      // o null, si no aplica o si viene CAPEX real
-      id: number;
-      pmo_codigo: number;
-      lp_codigo: string;
-      pep2_codigo: string;
-    };
-    opex_provisorio: {
-      // o null, si no aplica o si viene OPEX real
-      id: number;
-      id_opex: string;
-      cuenta_sap: number;
-      ceco_codigo: string;
-    };
-  };
-  tipo_contrato_marco_nombre: string;
-  tipo_contrato_marco_id: number;
-  tipo_numero_interno_id: number;
-  tipo_numero_interno_nombre: string;
-  tipo_subetapa_pago: {
-    id: number;
-    slug: string;
-    nombre: string;
-  };
-}
+// export interface DataRspDetalleOT {
+//   id: number;
+//   nombre: string;
+//   tipo: string; // OT/AP
+//   proyecto_id: number; // o -1, si no aplica
+//   proyecto_nombre: string; // o vacio, si no aplica
+//   cubicacion_id: number;
+//   cubicacion_nombre: string;
+//   contrato_marco_id: number;
+//   contrato_marco_nombre: string;
+//   proveedor_id: number;
+//   proveedor_nombre: string;
+//   region_id: number;
+//   region_nombre: string;
+//   total: number;
+//   plan_id: number;
+//   plan_nombre: string;
+//   propietario_id: number;
+//   propietario_nombre: string;
+//   responsable_id: number;
+//   responsable_nombre: string;
+//   fecha_inicio: Date;
+//   fecha_fin: Date;
+//   observaciones: string;
+//   sce_sesion: string;
+//   created_at: Date;
+//   total_tipo_moneda: string;
+//   tipo_estado_ot: {
+//     id: number;
+//     slug: string;
+//     nombre: string;
+//   };
+//   tipo_etapa_ot: {
+//     id: number;
+//     slug: string;
+//     nombre: string;
+//   };
+//   sitio: {
+//     id: number;
+//     codigo: string;
+//     metas: string;
+//     nombre: string;
+//     nemonico: string;
+//     region_id: number;
+//     region_nombre: string;
+//     comuna: string;
+//     geo_lat: number;
+//     geo_lon: number;
+//     direccion: string;
+//   };
+//   sustento_financiero: {
+//     tipo_sustento: string; // CAPEX/OPEX
+//     capex: {
+//       // o null, si no aplica o si viene CAPEX provisorio
+//       id: number;
+//       pmo_codigo: number;
+//       lp_codigo: string;
+//       pep2_codigo: string;
+//     };
+//     opex: {
+//       // o null, si no aplica o si viene OPEX provisorio
+//       id: number;
+//       id_opex: string;
+//       cuenta_sap: number;
+//       ceco_codigo: string;
+//     };
+//     capex_provisorio: {
+//       // o null, si no aplica o si viene CAPEX real
+//       id: number;
+//       pmo_codigo: number;
+//       lp_codigo: string;
+//       pep2_codigo: string;
+//     };
+//     opex_provisorio: {
+//       // o null, si no aplica o si viene OPEX real
+//       id: number;
+//       id_opex: string;
+//       cuenta_sap: number;
+//       ceco_codigo: string;
+//     };
+//   };
+//   tipo_contrato_marco_nombre: string;
+//   tipo_contrato_marco_id: number;
+//   tipo_numero_interno_id: number;
+//   tipo_numero_interno_nombre: string;
+//   tipo_subetapa_pago: {
+//     id: number;
+//     slug: string;
+//     nombre: string;
+//   };
+// }

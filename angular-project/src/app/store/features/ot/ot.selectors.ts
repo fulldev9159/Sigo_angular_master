@@ -135,20 +135,20 @@ export const getOtFilters = createSelector(
   })
 );
 
-export const getDetalleOt = createSelector(
+export const getDetalleOT = createSelector(
   selectOt,
-  (state: fromOt.StateOt) => state.detalleOt
+  (state: fromOt.StateOt) => state.detalleOT
 );
 
-export const getCoordinators = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.coordinators
-);
+// export const getCoordinators = createSelector(
+//   selectOt,
+//   (state: fromOt.StateOt) => state.coordinators
+// );
 
-export const getTrabajadores = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.trabajadores
-);
+// export const getTrabajadores = createSelector(
+//   selectOt,
+//   (state: fromOt.StateOt) => state.trabajadores
+// );
 
 export const getSavingOT = createSelector(
   selectOt,
@@ -160,10 +160,10 @@ export const getSaveOTError = createSelector(
   (state: fromOt.StateOt) => state.errorSaving
 );
 
-export const getRegistrosLibroObra = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.registroslibroobras
-);
+// export const getRegistrosLibroObra = createSelector(
+//   selectOt,
+//   (state: fromOt.StateOt) => state.registroslibroobras
+// );
 
 export const getDataInformeAvanceTrabajador = createSelector(
   selectOt,

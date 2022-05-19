@@ -19,7 +19,7 @@ import {
 import { Subscription, Observable, of } from 'rxjs';
 import {
   DataInformeAvance,
-  DataRspDetalleOT,
+  DataRespGetDetalleOT,
   DetalleCubicacion,
   LpuInformeAvanceDetalle,
   RequestSaveInformeAvanceAdmin,
@@ -34,7 +34,7 @@ import { withLatestFrom } from 'rxjs/operators';
 export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
-  detalleOt$: Observable<DataRspDetalleOT>;
+  detalleOt$: Observable<DataRespGetDetalleOT>;
   dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
@@ -55,16 +55,16 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.lpusTotal = 0;
-    this.detalleOt$ = this.otFacade.getDetalleOtSelector$();
+    this.detalleOt$ = this.otFacade.getDetalleOT$();
     this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceAdminEC$();
-    this.subscription.add(
-      this.detalleOt$.subscribe(ot => {
-        if (ot && ot.tipo_subetapa_pago.slug === 'OT_ET_PAGO_GENERACION_ACTA') {
-          this.totalCubicado = ot.total;
-          this.otFacade.getDataInformeAvanceAdminEC(ot.id);
-        }
-      })
-    );
+    // this.subscription.add(
+    //   this.detalleOt$.subscribe(ot => {
+    //     if (ot && ot.tipo_subetapa_pago.slug === 'OT_ET_PAGO_GENERACION_ACTA') {
+    //       this.totalCubicado = ot.total;
+    //       this.otFacade.getDataInformeAvanceAdminEC(ot.id);
+    //     }
+    //   })
+    // );
 
     this.subscription.add(
       this.dataInformeAvance$.subscribe(lpu => {

@@ -39,9 +39,9 @@ export class AssignCoordinatorFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.ot$ = this.otFacade.getSelectedOT$().pipe(filter(ot => ot !== null));
-    this.coordinators$ = this.otFacade
-      .getCoordinators$()
-      .pipe(map(coordinators => coordinators || []));
+    // this.coordinators$ = this.otFacade
+    //   .getCoordinators$()
+    //   .pipe(map(coordinators => coordinators || []));
 
     this.subscription.add(
       this.ot$.subscribe(ot => {

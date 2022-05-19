@@ -1,5 +1,5 @@
 <div style="background-color: white;">
-  <h1><b>OT</b> ID: {{(detalleOt$|async) && (detalleOt$|async).id}} &nbsp; <b>nombre:</b> {{(detalleOt$|async) && (detalleOt$|async).nombre}}</h1>
+  <h1><b>OT</b> ID: {{(detalleOt$|async) && (detalleOt$|async).ot.id}} &nbsp; <b>nombre:</b> {{(detalleOt$|async) && (detalleOt$|async).ot.nombre}}</h1>
 </div>
 <ul>
   <li>
@@ -8,12 +8,12 @@
       <span class="tab-title">Información</span>
     </a>
   </li>
-  <li *ngIf="(loginAuth$ |async).perfil!=='Trabajador EECC'">
+  <!-- <li *ngIf="(loginAuth$ |async).perfil!=='Trabajador EECC'">
     <a href="" [routerLink]="['costeo',ot_id]" [routerLinkActive]="['is-active']">
       <span class="icon pi pi-fw pi-dollar"></span>
       <span class="tab-title">Costeo</span>
     </a>
-  </li>
+  </li> -->
   <li>
     <a href="" *ngIf="(loginAuth$ |async).perfil==='Trabajador EECC'||(loginAuth$ |async).perfil==='Administrador EECC'" [routerLink]="['informe-avance',ot_id]" [routerLinkActive]="['is-active']">
       <span class="icon pi pi-fw pi-file"></span>

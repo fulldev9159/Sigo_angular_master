@@ -39,6 +39,7 @@ import {
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
   DataRespGetOTs,
+  DataRespGetDetalleOT,
 } from '@data';
 
 @Injectable({
@@ -58,6 +59,13 @@ export class OTService {
     return this.http.post<Response<DataRespGetOTs>>(
       `${this.apiUrl}/ot/bandeja/get`,
       request
+    );
+  }
+
+  getDetalleOT(id: number): Observable<Response<DataRespGetDetalleOT>> {
+    return this.http.post<Response<DataRespGetDetalleOT>>(
+      `${this.apiUrl}/ot/ot_otid/get`,
+      { id }
     );
   }
 

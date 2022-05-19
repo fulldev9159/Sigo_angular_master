@@ -31,7 +31,7 @@ export class AnexosComponent implements OnInit, OnDestroy {
         }
       })
     );
-    this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
+    // this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
     this.subscription.add(
       this.registosLibroDeObras$.subscribe(registros => {
         registros.forEach(registro => {

@@ -52,7 +52,7 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
         }
       })
     );
-    this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
+    // this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
   }
 
   getIcon(type: string): void {

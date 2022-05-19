@@ -37,9 +37,9 @@ export class AssignTrabajadorFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.ot$ = this.otFacade.getSelectedOT$().pipe(filter(ot => ot !== null));
-    this.trabajadores$ = this.otFacade
-      .getTrabajadores$()
-      .pipe(map(trabajadores => trabajadores || []));
+    // this.trabajadores$ = this.otFacade
+    //   .getTrabajadores$()
+    //   .pipe(map(trabajadores => trabajadores || []));
 
     this.subscription.add(
       this.ot$.subscribe(ot => {

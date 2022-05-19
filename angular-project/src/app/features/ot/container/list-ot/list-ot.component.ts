@@ -27,8 +27,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
   public itemsAbiertas$: Observable<OT[]>;
   public itemsCerradas$: Observable<OT[]>;
 
-  public responsable: 'MIAS';
-  public tipoOT: 1;
+  public responsable: 'TODAS';
+  public tipoOT: 0;
   public selectedIndex = 0;
   public selectedOTs: string;
   public idOtSelected: number;
@@ -60,8 +60,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
         {
           field: 'Sesión SCE',
           type: 'TEXT',
-          sort: 'sesion_sce',
-          header: 'sesion_sce',
+          sort: 'sce_session',
+          header: 'sce_session',
           editable: false,
         },
         {
@@ -421,8 +421,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.otFacade.resetData();
-    this.responsable = 'MIAS';
-    this.tipoOT = 1;
+    this.responsable = 'TODAS';
+    this.tipoOT = 0;
     this.selectedIndex = 0;
     this.selectedOTs = 'ABIERTAS';
 
