@@ -59,6 +59,10 @@ export interface DataRespGetDetalleOT {
       tipo_moneda_id: number;
       tipo_pago: string;
       validacion_operaciones: boolean;
+      model_tipo_contrato_id: {
+        id: number;
+        nombre: string;
+      };
     };
     cubicacion_id: number; // BASE
     model_cubicacion_id: {
@@ -182,16 +186,40 @@ export interface DataRespGetDetalleOT {
 
     // MOVIL
     plan_id: number; // MOVIL
+    model_plan_id: {
+      id: number;
+      nombre: string;
+      estado: boolean;
+      created_at: Date;
+    };
     sitio_plan_id: number; // MOVIL
-
+    model_sitio_plan_id: {
+      codigo: string;
+      comuna: string;
+      created_at: Date;
+      direccion: string;
+      duenno_estructura: string;
+      fecha_liberacion: Date;
+      fecha_termino: Date;
+      geo_lat: number;
+      geo_lon: number;
+      id: number;
+      metas: string;
+      nemonico: string;
+      nombre: string;
+      plan_id: number;
+      region_id: number;
+      tipo: string;
+      vendor: string;
+    };
     // SUSTENTO FINANCIERO
     tipo_sustento: string; // SUSTENTO FINANCIERO
     pmo_codigo: number; // SUSTENTO FINANCIERO
     lp: string; // SUSTENTO FINANCIERO
     pep2: string; // SUSTENTO FINANCIERO
-    id_opex: null; // SUSTENTO FINANCIERO
-    ceco: null; // SUSTENTO FINANCIERO
-    cuenta_sap: null; // SUSTENTO FINANCIERO
+    id_opex: string; // SUSTENTO FINANCIERO
+    ceco: string; // SUSTENTO FINANCIERO
+    cuenta_sap: string; // SUSTENTO FINANCIERO
     es_sustento_provisorio: boolean; // SUSTENTO FINANCIERO
   };
   usuarios_involucrados: {
