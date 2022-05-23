@@ -154,7 +154,7 @@ Crear OT MOVIL
     _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    Móvil
     _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    SBE
     _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    Cub Movil
-    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(8) > td:nth-child(2)    Autorizar OT por Proveedor
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(8) > td:nth-child(2)    Autorizar inicialmente la OT
     _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(9) > td:nth-child(2)    Abierta
 
     _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(3) > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    JESSICA MOVISTAR CASTILLO 1
