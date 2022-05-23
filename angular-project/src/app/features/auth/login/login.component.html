@@ -2,9 +2,11 @@
   <p class="login-card-description">Inicie con su cuenta GUIA</p>
 </div>
 
+<pre>{{this.formLogin.value|json}}</pre>
+
 <div id="form-login">
   <ng-container *ngIf="formLogin">
-    <form [formGroup]="formLogin" (ngSubmit)="login()">
+    <form [formGroup]="formLogin" (ngSubmit)="login()" autocomplete="off">
       <div class="form-group">
         <label for="text" class="sr-only">Usuario</label>
         <input type="text" formControlName="username" name="username" id="text" class="form-control" placeholder="Usuario">
@@ -14,7 +16,8 @@
         <input type="password" formControlName="password" name="password" id="password" class="form-control" placeholder="***********">
       </div>
 
-      <div class="form-group mb-4">
+
+      <div class="form-group mb-4" *ngIf="produccion">
         <ngx-recaptcha2 #captchaElem [siteKey]="siteKey" (reset)="handleReset()" (expire)="handleExpire()" (error)="handleError()" (load)="handleLoad()" (success)="handleSuccess($event)" [useGlobalDomain]="false" size="normal" hl="es" theme="light" type="image" formControlName="recaptcha">
         </ngx-recaptcha2>
       </div>
@@ -23,8 +26,6 @@
 
       <a href="https://guia.telefonicachile.cl/login.jsf">Recuperar clave GUIA</a>
 
-      <!-- <re-captcha formControlName="recaptchaReactive" (resolved)="addTokenLog('Reactive form mode resolved', $event)">
-    </re-captcha> -->
     </form>
   </ng-container>
 </div>

@@ -23,3 +23,8 @@
   background-color: transparent;
   color: #000;
 }
+
+.login-btn:disabled {
+  cursor: not-allowed;
+  background: #00a9e0;
+}
