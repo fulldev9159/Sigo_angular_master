@@ -16,7 +16,7 @@ services:
   mcl_test_sigo_web:
     build:
       context: .
-      dockerfile: docker/deploy/Dockerfile
+      dockerfile: docker/deploy_testing/Dockerfile
     environment:
       WEBAPI_NAME: '34.122.92.38'
       WEBAPI_PORT: '4041'
