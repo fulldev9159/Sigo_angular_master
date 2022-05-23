@@ -27,13 +27,15 @@ import { map } from 'rxjs/operators';
 export class LoginComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   public formLogin: FormGroup;
-  siteKey = '6LcLQEcfAAAAAD7GhJ0XQeoyoNg99u11XVrQyBta';
+
+  siteKey = '6LdRuREgAAAAAIfMrVUFg9ZI4rt2nSenIu9jd0Zj';
+  // '6LcLQEcfAAAAAD7GhJ0XQeoyoNg99u11XVrQyBta';
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authFacade: AuthFacade
-  ) // private recaptchaV3Service: ReCaptchaV3Service
-  {}
+    private authFacade: AuthFacade // private recaptchaV3Service: ReCaptchaV3Service
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -58,6 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.formLogin = this.fb.group({
       username: [null, Validators.required],
       password: [null, Validators.required],
+      recaptcha: [null, Validators.required],
       // recaptchaReactive: new FormControl(null, Validators.required),
     });
   }
@@ -75,4 +78,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   login(): void {
     this.authFacade.postLogin(this.formLogin.value);
   }
+
+  handleReset(): void {}
+  handleExpire(): void {}
+  handleError(): void {}
+  handleLoad(): void {}
+  handleSuccess(event: any): void {}
 }
