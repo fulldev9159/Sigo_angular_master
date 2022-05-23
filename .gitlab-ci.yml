@@ -65,6 +65,7 @@ update test environment:
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into proveedor_has_servicio(agencia_id,servicio_id,precio,tipo_moneda_id,numero_producto,cmarco_has_proveedor_id,estado) values(8,2,12070,2,'ZWC - NUMERO PRODUCTO 8',9,1)\""
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (8,6,123123,2,'2022-03-28 16:16:07.867369','2027-05-06 20:02:29.000000',1)\""
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (4,6,123123,2,'2022-03-28 16:16:07.867369','2027-05-06 20:02:29.000000',1)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set aprob_jerarq_inic=1 where id=1;\""
   tags:
     - repo-machine
 
