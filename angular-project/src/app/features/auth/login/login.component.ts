@@ -1,6 +1,8 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  Inject,
   OnDestroy,
   OnInit,
   ViewEncapsulation,
@@ -14,7 +16,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, timeout } from 'rxjs/operators';
 // import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
@@ -27,6 +29,7 @@ import { map } from 'rxjs/operators';
 export class LoginComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   public formLogin: FormGroup;
+  produccion: boolean;
 
   siteKey = '6LdRuREgAAAAAIfMrVUFg9ZI4rt2nSenIu9jd0Zj';
   // '6LcLQEcfAAAAAD7GhJ0XQeoyoNg99u11XVrQyBta';
@@ -34,8 +37,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authFacade: AuthFacade // private recaptchaV3Service: ReCaptchaV3Service
-  ) {}
+    private authFacade: AuthFacade,
+    @Inject('environment') environment,
+    private detector: ChangeDetectorRef
+  ) {
+    this.produccion = environment.production;
+  }
 
   ngOnInit(): void {
     this.subscription.add(
@@ -50,6 +57,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
 
     this.initForm();
+    if (this.produccion) {
+      this.formLogin.get('recaptcha').setValidators([Validators.required]);
+    }
+
+    setTimeout(() => {
+      this.detector.detectChanges();
+    }, 700);
   }
 
   ngOnDestroy(): void {
@@ -60,20 +74,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.formLogin = this.fb.group({
       username: [null, Validators.required],
       password: [null, Validators.required],
-      recaptcha: [null, Validators.required],
-      // recaptchaReactive: new FormControl(null, Validators.required),
+      recaptcha: [null],
     });
   }
-
-  // public addTokenLog(message: string, token: string | null) {
-  //   console.log(`${message}: ${this.formatToken(token)}`);
-  // }
-
-  // public formatToken(token: string | null) {
-  //   return token !== null
-  //     ? `${token.substr(0, 7)}...${token.substr(-7)}`
-  //     : 'null';
-  // }
 
   login(): void {
     this.authFacade.postLogin(this.formLogin.value);
