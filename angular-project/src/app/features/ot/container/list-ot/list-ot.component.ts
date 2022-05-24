@@ -198,6 +198,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             label: 'Aceptar OT',
             onClick: (event: Event, item) => {
               this.otFacade.selectOT(ot);
+              this.idOtSelected = item.id;
               this.displayAceptacionIncialModal = true;
             },
           });
@@ -518,10 +519,26 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   closeAceptacionInicialModal(): void {
     this.otFacade.selectOT(null); // workaround for subscribing the same ot multiple times
+    this.idOtSelected = null;
     this.displayAceptacionIncialModal = false;
   }
 
-  AceptacionInicialSubmit(): void {}
+  AceptacionInicialSubmit(): void {
+    const request: RequestAceptarRechazarInicialOT = {
+      ot_id: this.idOtSelected,
+      values: {
+        estado: 'ACEPTADO',
+      },
+    };
+
+    // console.log(request);
+    this.otFacade.AceptarRechazarIncialOT(request);
+    this.responsable = 'TODAS';
+    this.tipoOT = 0;
+    this.selectedIndex = 0;
+    this.selectedOTs = 'ABIERTAS';
+    this.closeAceptacionInicialModal();
+  }
 
   closeRechazoInicialModal(): void {
     this.idOtSelected = null;
@@ -539,7 +556,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       },
     };
 
-    console.log(request);
+    // console.log(request);
     this.otFacade.AceptarRechazarIncialOT(request);
     this.responsable = 'TODAS';
     this.tipoOT = 0;
