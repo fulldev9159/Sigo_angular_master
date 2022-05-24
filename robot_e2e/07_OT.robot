@@ -9,16 +9,6 @@ Resource    ./resources/perfil_resource.robot
 Resource    ./resources/cubicacion_resource.robot
 Resource    ./resources/ot_resource.robot
 
-
-#
-#ORDINARIO 2
-#Antofagasta 4
-#Nokia 4
-#Diseno 6
-#Proyectos 6
-#Inmobiliario
-#Sin UO
-
 *** Test Cases ***
 Crear OT BUCLE
     _Login          mgestor1    asda    Gestor/JP
@@ -139,7 +129,7 @@ Crear OT MOVIL
    # _Navegate to                    Listar OT
     _Have to exist in table/tab       Abiertas              OT MOVIL
     _Validate column data             3                     OT MOVIL
-    _Validate column data             4                     Autorizar OT por Proveedor
+    _Validate column data             4                     Autorizar inicialmente la OT
     _Validate column data             8                     SBE
     _Validate column data             9                     COASIN
     _Validate column data             10                    JESSICA MOVISTAR CASTILLO 1

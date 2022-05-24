@@ -7,14 +7,15 @@ import {
 } from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { OT } from '@data';
+import { MotivoRechazo, OT, RequestAceptarRechazarInicialOT } from '@data';
 import { ConfirmationService } from 'primeng/api';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
 import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador-form/assign-trabajador-form.component';
 import { RegistrarLibroObraComponent } from '@featureOT/ot/component/registrar-libro-obra/registrar-libro-obra';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list-ot',
@@ -23,24 +24,38 @@ import { RegistrarLibroObraComponent } from '@featureOT/ot/component/registrar-l
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListOtComponent implements OnInit, OnDestroy {
-  public itemsEjecucion$: Observable<OT[]>;
-  public itemsAbiertas$: Observable<OT[]>;
-  public itemsCerradas$: Observable<OT[]>;
+  subscription: Subscription = new Subscription();
 
-  public responsable: 'TODAS';
-  public tipoOT: 0;
-  public selectedIndex = 0;
-  public selectedOTs: string;
-  public idOtSelected: number;
-  public razonrechazo: string;
-  private destroyInstance: Subject<boolean> = new Subject();
+  itemsEjecucion$: Observable<OT[]>;
+  itemsAbiertas$: Observable<OT[]>;
+  itemsCerradas$: Observable<OT[]>;
 
-  displayAssignCoordinatorModal = false;
+  tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
+
+  responsable: 'TODAS';
+  tipoOT: 0;
+  selectedIndex = 0;
+  selectedOTs: string;
+  idOtSelected: number;
+  razonrechazo: string;
+
+  displayAceptacionIncialModal = false;
+  displayRechazoIncialModal = false;
   displayAssignTrabajadorModal = false;
   displayLibroObra = false;
   displayAuthOTModal = false;
 
-  public configTable = {
+  formRechazoInicialControls = {
+    tipo_id: new FormControl(null, [Validators.required]),
+    motivo: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      Validators.maxLength(200),
+    ]),
+  };
+  formRechazoIncial: FormGroup = new FormGroup(this.formRechazoInicialControls);
+
+  configTable = {
     header: true,
     headerConfig: {
       title: '',
@@ -172,28 +187,18 @@ export class ListOtComponent implements OnInit, OnDestroy {
           },
         ];
 
-        const otAutorizar = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_AUTORIZAR'
+        const otAutorizarInicial = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ACEPTAR_INICIAL'
         );
 
-        if (otAutorizar) {
+        if (otAutorizarInicial) {
           actions.push({
             icon: 'p-button-icon pi pi-check',
             class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Asignar coordinador',
+            label: 'Aceptar OT',
             onClick: (event: Event, item) => {
               this.otFacade.selectOT(ot);
-              this.displayAssignCoordinatorModal = true;
-              // this.confirmationService.confirm({
-              //   target: event.target as EventTarget,
-              //   message: `¿Desea aceptar Orden de trabajo?`,
-              //   icon: 'pi pi-exclamation-triangle',
-              //   acceptLabel: 'Confirmar',
-              //   rejectLabel: 'Cancelar',
-              //   accept: () => {
-              //     this.otFacade.approveOT(ot.id);
-              //   },
-              // });
+              this.displayAceptacionIncialModal = true;
             },
           });
 
@@ -203,7 +208,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
             label: 'Rechazar OT',
             onClick: (event: Event, item) => {
               this.idOtSelected = item.id;
-              this.displayAuthOTModal = true;
+              this.displayRechazoIncialModal = true;
+              this.otFacade.getAllMotivoRechazoOT();
             },
           });
         }
@@ -219,7 +225,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             label: otAsignarCoordinador.nombre_corto,
             onClick: (event: Event, item) => {
               this.otFacade.selectOT(ot);
-              this.displayAssignCoordinatorModal = true;
+              this.displayAceptacionIncialModal = true;
             },
           });
         }
@@ -428,7 +434,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
     this.itemsEjecucion$ = this.otFacade.getOtEjecucion$().pipe(
       tap(ots => {
-        this.closeAssignCoordinatorModal();
+        this.closeAceptacionInicialModal();
         this.closeAssignTrabajadorModal();
         this.closeRegistrarLibroObraModal();
       })
@@ -436,7 +442,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
     this.itemsAbiertas$ = this.otFacade.getOtAbiertas$().pipe(
       tap(ots => {
-        this.closeAssignCoordinatorModal();
+        this.closeAceptacionInicialModal();
         this.closeAssignTrabajadorModal();
         this.closeRegistrarLibroObraModal();
       })
@@ -444,7 +450,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
     this.itemsCerradas$ = this.otFacade.getOtCerradas$().pipe(
       tap(ots => {
-        this.closeAssignCoordinatorModal();
+        this.closeAceptacionInicialModal();
         this.closeAssignTrabajadorModal();
         this.closeRegistrarLibroObraModal();
       })
@@ -455,6 +461,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
       filtro_tipo: +this.tipoOT,
       filtro_pestania: '',
     });
+
+    this.tipoRechazo$ = this.otFacade.getAllMotivoRechazoOT$();
   }
 
   onChange($event): void {
@@ -483,8 +491,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroyInstance.next(true);
-    this.destroyInstance.complete();
+    this.subscription.unsubscribe();
   }
 
   onClick(event): void {
@@ -509,14 +516,37 @@ export class ListOtComponent implements OnInit, OnDestroy {
     });
   }
 
-  closeAssignCoordinatorModal(): void {
+  closeAceptacionInicialModal(): void {
     this.otFacade.selectOT(null); // workaround for subscribing the same ot multiple times
-    this.displayAssignCoordinatorModal = false;
+    this.displayAceptacionIncialModal = false;
   }
 
-  assignCoordinatorFormSubmit(): void {
-    console.log(this.assignCoordinatorForm);
-    this.assignCoordinatorForm.submit();
+  AceptacionInicialSubmit(): void {}
+
+  closeRechazoInicialModal(): void {
+    this.idOtSelected = null;
+    this.displayRechazoIncialModal = false;
+    this.formRechazoIncial.reset();
+  }
+
+  rechazoInicialSubmit(): void {
+    const request: RequestAceptarRechazarInicialOT = {
+      ot_id: this.idOtSelected,
+      values: {
+        estado: 'RECHAZADO',
+        observacion: this.formRechazoIncial.get('motivo').value,
+        tipo: +this.formRechazoIncial.get('tipo_id').value,
+      },
+    };
+
+    console.log(request);
+    this.otFacade.AceptarRechazarIncialOT(request);
+    this.responsable = 'TODAS';
+    this.tipoOT = 0;
+    this.selectedIndex = 0;
+    this.selectedOTs = 'ABIERTAS';
+
+    this.closeRechazoInicialModal();
   }
 
   closeAssignTrabajadorModal(): void {
@@ -548,5 +578,11 @@ export class ListOtComponent implements OnInit, OnDestroy {
     console.log(this.razonrechazo);
     this.otFacade.rejectOT(otId, this.razonrechazo);
     this.closeAuthOTModal();
+  }
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
   }
 }

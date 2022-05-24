@@ -40,6 +40,8 @@ import {
   RequestCreateOTBucle,
   DataRespGetOTs,
   DataRespGetDetalleOT,
+  DataRespGetMotivoRechazo,
+  RequestAceptarRechazarInicialOT,
 } from '@data';
 
 @Injectable({
@@ -224,8 +226,25 @@ export class OTService {
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(`${this.apiUrl}/ot/ot/save`, request);
   }
-  //
-  //
+
+  // GET ALL MOTIVO RECHAZO OT
+  getAllMotivoRechazoOT(): Observable<Response<DataRespGetMotivoRechazo>> {
+    return this.http.post<Response<DataRespGetMotivoRechazo>>(
+      `${this.apiUrl}/configuration/causas_rechazo_tipo/getall`,
+      {}
+    );
+  }
+
+  // ACEPTAR O RECHAZAR
+  AceptarRechazarIncialOT(
+    request: RequestAceptarRechazarInicialOT
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/ot_aceptacion_inicial/update`,
+      request
+    );
+  }
+
   ////
 
   approveOT(perfil_id: number, otID: number): Observable<any> {

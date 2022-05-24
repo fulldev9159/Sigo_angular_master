@@ -74,15 +74,57 @@
   </p-tabView>
 
 </div>
-<app-modal [display]="displayAssignCoordinatorModal" (CloseEvent)="closeAssignCoordinatorModal()" [style]="{ width: '50vw' }">
-  <ng-container modal-header-title>Asignación de Coordinador</ng-container>
+<app-modal [display]="displayAceptacionIncialModal" (CloseEvent)="closeAceptacionInicialModal()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title>Confirmar</ng-container>
   <ng-container modal-content>
-    <app-assign-coordinator-form #assignCoordinatorForm></app-assign-coordinator-form>
+    ¿Está seguro que desea aceptar esta OT?
   </ng-container>
   <ng-container modal-footer>
-    <button class="btn btn-light mr-2" (click)="closeAssignCoordinatorModal()">Cancelar</button>
-    <button class="btn btn-primary" [disabled]="!assignCoordinatorForm.form.valid" (click)="assignCoordinatorFormSubmit()">
+    <button class="btn btn-light mr-2" (click)="closeAceptacionInicialModal()">Cancelar</button>
+    <button class="btn btn-primary" (click)="AceptacionInicialSubmit()">
       <em class="pi pi-save mr-1"></em>Aceptar
+    </button>
+  </ng-container>
+</app-modal>
+
+<app-modal [display]="displayRechazoIncialModal" (CloseEvent)="closeRechazoInicialModal()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title style="text-align: center;">Motivo del rechazo</ng-container>
+  <ng-container modal-content>
+    <!-- <pre>{{formRechazoIncial.value|json}}</pre> -->
+    <form [formGroup]="formRechazoIncial">
+      <br>
+      <app-select [control]="formRechazoIncial.get('tipo_id')" label="* Tipo de Rechazo:">
+        <ng-container options>
+          <option value="null" selected disabled>Seleccione un tipo de rechazo</option>
+          <ng-container *ngFor="let item of tipoRechazo$|async">
+            <option [value]="item.id">
+              {{item.descripcion}}
+            </option>
+          </ng-container>
+        </ng-container>
+      </app-select>
+      <br>
+      <textarea formControlName="motivo" class="form-control" placeholder="" name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
+    </form>
+
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeRechazoInicialModal()">Cancelar</button>
+    <button class="btn btn-primary" [disabled]="!formRechazoIncial.valid" (click)="rechazoInicialSubmit()">
+      <em class="pi pi-save mr-1"></em>Enviar
+    </button>
+  </ng-container>
+</app-modal>
+
+<app-modal [display]="displayAuthOTModal" (CloseEvent)="closeAuthOTModal()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title style="text-align: center;">Motivo del rechazo</ng-container>
+  <ng-container modal-content>
+    <textarea [(ngModel)]="razonrechazo" class="form-control" placeholder="..." name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="this.closeAuthOTModal()">Cancelar</button>
+    <button class="btn btn-primary" (click)="rechazarOT(idOtSelected)">
+      <em class="pi pi-save mr-1"></em>Enviar
     </button>
   </ng-container>
 </app-modal>
