@@ -9,7 +9,7 @@ Resource    ./resources/login_resource.robot
 *** Test Cases ***
 
 Editar Contratos
-    _Login          admin        pass    Admin
+    _Login          admin        M0v15tar.    Admin
     _Navegate to    Contratos
 
     _Table should display data
@@ -51,7 +51,7 @@ Editar Contratos
     close Browser
 
 Bloquear contrato
-    _Login                            admin                                                                                                                            pass      Admin
+    _Login                            admin                                                                                                                            M0v15tar.    Admin
     _Navegate to                      Contratos
     _Table should display data
     _Element should exist in table    prueba

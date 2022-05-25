@@ -16,7 +16,7 @@ Crear Usuario Contratista
    # And presione el botón crear usuario
    # Then: El usuario nuevo debe aparecer en el listar usuario
 
-    _Login                        admin                   pass    Admin
+    _Login                        admin                   M0v15tar.    Admin
     _Navegate to                  Usuario
     _Table should display data
    # Given: El administrador llega a la página para crear usuarios
@@ -63,7 +63,7 @@ Crear Usuario Movistar
    # And presione el botón crear usuario
    # Then: El usuario nuevo debe aparecer en el listar usuario
 
-    _Login                        admin                   pass    Admin
+    _Login                        admin                   M0v15tar.    Admin
     _Navegate to                  Usuario
     _Table should display data
    # Given: El administrador llega a la página para crear usuarios
@@ -108,7 +108,7 @@ Ver los contratos
    # When: Abra el menú
    # And Presione Ver Contratos
    # Then: Al usuario debe poder visuarlizar los contratos del usuario
-    _Login                        admin            pass                   Admin
+    _Login                        admin            M0v15tar.              Admin
     _Navegate to                  Usuario
    # Given: El administrador llega a la página de listar usuarios
     _Table should display data
@@ -140,7 +140,7 @@ Agregar firma a usuarios
    # And Presione en cargar
    # Then: Al usuario debe aparecer como con firma el listar usuarios
 
-    _Login                        admin      pass    Admin
+    _Login                        admin      M0v15tar.    Admin
     _Navegate to                  Usuario
    # Given: El administrador llega a la página de listar usuarios
     _Table should display data
@@ -165,7 +165,7 @@ Editar usuario Contratista
    # When: Edite los campos
    # And presione el botón guardar
    # Then: El cambio se debe ver reflejado en el listar usuarios
-    _Login                        admin      pass    Admin
+    _Login                        admin      M0v15tar.    Admin
     _Navegate to                  Usuario
     _Table should display data
 
@@ -216,7 +216,7 @@ Bloquear y activar Contratista
    # And Presione Bloquear
    # And Confirmar
    # Then: El usuario debe aparecer como bloqueado en el sistema
-    _Login                        admin      pass    Admin
+    _Login                        admin      M0v15tar.    Admin
     _Navegate to                  Usuario
     _Table should display data
 
@@ -246,7 +246,7 @@ Eliminar Contratista
    # And Confirmar
    # Then: El usuario ya no debe aparecer en el listar usuarios
 
-    _Login                        admin      pass    Admin
+    _Login                        admin      M0v15tar.    Admin
     _Navegate to                  Usuario
     _Table should display data
 
@@ -269,7 +269,7 @@ Agregar un perfil a un usuario
    # And Presione el botón agregar
    # Then: El perfil "Gestor" debe aparecer en el listado
 
-    _Login                            admin                                          pass                                                 Admin
+    _Login                            admin                                          M0v15tar.                                            Admin
     _Navegate to                      Usuario
     _Table should display data
    # Given
@@ -293,7 +293,7 @@ Editar superior a un perfil
    # And Presione el botón editar
    # Then: En la tabla listar perfiles, para el perfil "Gestor/JP" su superior debe ser ""
 
-    _Login                            admin                                                         pass                         Admin
+    _Login                            admin                                                         M0v15tar.                    Admin
     _Navegate to                      Usuario
     _Table should display data
     capture page screenshot           /opt/robotframework/reports/usuario.png
@@ -317,7 +317,7 @@ Eliminar perfil usuario
    # And presiona confirmar
    # Then: El perfil "Gestor/JP" no debe aparecer en el listado
 
-    _Login                                admin                                                          pass                Admin
+    _Login                                admin                                                          M0v15tar.           Admin
     _Navegate to                          Usuario
     _Table should display data
    # Given
