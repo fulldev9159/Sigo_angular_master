@@ -82,7 +82,7 @@ Editar un perfil Gestor
    # And presione el botón guardar perfil
    # Then: El usuario nuevo debe aparecer en el listar perfiles con los cambios realizados
 
-    Login                         admin                                              pass    Admin
+    Login                         admin                                              M0v15tar.    Admin
     _Navegate to                  Perfil
     _Table should display data
     # Given: El administrador llega a la página para editar perfil TestGestor

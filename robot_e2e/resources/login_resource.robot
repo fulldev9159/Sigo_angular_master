@@ -22,7 +22,8 @@ _Login
     Wait Until Element Is Visible    id:user-name                            timeout=20
 
 _Logout
-    sleep                    5
-    Execute javascript       document.querySelector('#page-content-wrapper > nav > button.navbar-toggler').click()
-    Click Visible Element    css:#logout
+
+    _Click visible element    css:#navbarDropdown
+    sleep                     1
+    Execute javascript        document.querySelector('#logout').click()
 

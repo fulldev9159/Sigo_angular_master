@@ -73,23 +73,22 @@ _Exist in table OT
 
 _Press action
     [Arguments]               ${action}
-    sleep                     0.5
-    ${menu actions}=          set variable       css:#action-buttons > app-menu > button > span.p-button-icon.pi.pi-ellipsis-v
-    _Click visible element    ${menu actions}
-    ${items}=                 Get WebElements    css:#action-buttons > app-menu > p-menu > div > ul>li
+    _Click visible element    css:#action-buttons > app-menu > button
+    ${items}=                 Get WebElements                            css:#action-buttons > app-menu > p-menu > div > ul>li
 
     ${index}=           Set Variable               1
     FOR                 ${item}                    IN                    @{items}
     ${txt} =            Get Text                   ${item}
-    # Log To Console      ${txt}
-    # Log To Console      ${index}
+    Log To Console      ${txt}
+    Log To Console      ${index}
     Run Keyword If      '${txt}' == '${action}'    Set Suite Variable    ${index}
     Exit For Loop If    '${txt}' == '${action}'
     ${index}=           Evaluate                   ${index} + 1
     END
 
-    # Log To Console        ${index}
-    Execute javascript    document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(${index})>a").click()
+    Log To Console            ${index}
+    _Click visible element    css:#action-buttons > app-menu > p-menu > div > ul>li:nth-child(${index})>a
+    # Execute javascript    document.querySelector("#action-buttons > app-menu > p-menu > div > ul>li:nth-child(${index})>a").click()
 
 
     # Acciones PEND AUTH ADMIN Contrato
@@ -106,3 +105,27 @@ _Press action
     # Element text should be    ${items}[1]                                                                      Agregar al libro de obras
     # Element text should be    ${items}[2]                                                                      Aceptar
     # Element text should be    ${items}[3]                                                                      Rechazar
+
+_Reglas de visualizacion para no accionarios
+    [Arguments]                       ${OT}        
+    _Have No to exist in table/tab    Cerradas     ${OT} 
+    _Have No to exist in table/tab    Ejecucion    ${OT} 
+    _Have to exist in table/tab       Abiertas     ${OT} 
+
+_Reglas de visualizacion para accionario
+    [Arguments]                       ${OT}        
+    _Have No to exist in table/tab    Cerradas     ${OT} 
+    _Have No to exist in table/tab    Abiertas     ${OT} 
+    _Have to exist in table/tab       Ejecucion    ${OT} 
+
+_Reglas de visualizacion gerencial
+    [Arguments]                       ${OT}        
+    _Have No to exist in table/tab    Abiertas     ${OT} 
+    _Have No to exist in table/tab    Cerradas     ${OT} 
+    _Have No to exist in table/tab    Ejecucion    ${OT}
+
+_Reglas de visualizacion otra area
+    [Arguments]                       ${OT}        
+    _Have No to exist in table/tab    Abiertas     ${OT} 
+    _Have No to exist in table/tab    Cerradas     ${OT} 
+    _Have No to exist in table/tab    Ejecucion    ${OT}
