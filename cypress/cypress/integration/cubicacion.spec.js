@@ -1,19 +1,44 @@
 describe('Cubicacion Test', () => {
-  const servicio1_cod = 'D020';
-  const servicio1 = 'DISEÑO DE RED INTERIOR RED DE COBRE (DITICU)';
-  const servicio_1_uo_1_cod = '0';
-  const servicio_1_uo_1 = 'SIN UO';
-  const servicio2_cod = 'D010';
-  const servicio2 =
-    'DISEÑO P2P EN RED DE COBRE PARA TELEALIMENTACION (AEREO O SUBTERRANEO)';
-  const servicio_2_uo_1_cod = 'T383';
-  const servicio_2_uo_1 = 'TERMINAL OPTICO MULTIOPERADOR EDIFICIO';
-  const servicio_2_uo_2_cod = 'T382';
-  const servicio_2_uo_2 = 'CAJA TERMINAL OPT.C/SPLITTER Y CONEC.TEL IP68';
-  const servicio_2_uo_3_cod = 'T376';
-  const servicio_2_uo_3 = 'CAJA TERMINAL OPT.C/SPLITTER Y CONEC.TEL';
-  const servicio_2_uo_4_cod = '0';
-  const servicio_2_uo_4 = 'SIN UO';
+  // TESTING
+  const contrato_test = 'BUCLE';
+  const agencia_test = 'APOQUINDO';
+  const proveedor_test = '330000659 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA';
+  const actividad_test = 'Fibra Optica';
+  const tipo_servicio_test = 'Fibra Optica';
+
+  const serv_1_test = 'J757 - DESMONTAR CABLE DE FIBRA OPTICA EN AEREO';
+  const serv_1_precio_test = 266.67;
+  const serv_1_uo_1_test = 'D351 - KIT RETENCION FIBRA 14 MM';
+  const serv_1_uo_1_precio_test = 57000;
+
+  const serv_2_test = 'J756 - INSTALAR CABLE DE FIBRA OPTICA AEREO';
+  const serv_2_precio_test = 711.12;
+  const serv_2_uo_1_test =
+    'H089 - CABLE AEREO 32 FO/PKP (CON LASHING RECUBIERTO)';
+  const serv_2_uo_2_test =
+    'H088 - CABLE AEREO 24 FO/PKP (CON LASHING RECUBIERTO)';
+  const serv_2_uo_3_test =
+    'H093 - CABLE AEREO 64 FO/PKP (CON LASHING RECUBIERTO)';
+  const serv_2_uo_4_test =
+    'H095 - CABLE AEREO 96 FO/PKP (CON LASHING RECUBIERTO)';
+
+  // DATOS REALES
+  const contrato_movil = 'UNIFICADO-2019-MOVIL';
+  const agencia_movil = 'Región Metropolitana de Santiago';
+  const proveedor_movil = '3300213678 - 2021-2023 GENERATEL SPA';
+  const actividad_movil = 'ABANDONOS';
+  const tipo_servicio_movil = 3;
+  const serv_1_movil =
+    '2210 - INST Cables opticos (32 Fibras) de Interiores con DOF';
+  const serv_1_uo_1_movil = '0 - SIN UO';
+
+  const contrato_bucle = 'BUCLE';
+  const agencia_bucle = 'APOQUINDO';
+  const proveedor_bucle = '330000659 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA';
+  const actividad_bucle = 'Fibra Optica';
+  const tipo_servicio_bucle = 'Fibra Optica';
+  const serv_1_bucle = 'J757 - DESMONTAR CABLE DE FIBRA OPTICA EN AEREO';
+  const serv_1_uo_1_bucle = 'D351 - KIT RETENCION FIBRA 14 MM';
 
   beforeEach(() => {
     cy.login('mgestor1', '123', 'Gestor/JP');
@@ -23,224 +48,90 @@ describe('Cubicacion Test', () => {
     cy.get('#create-button').should('be.disabled');
   });
   it('Revisasr que se agreguen correctamente los items al carrito', () => {
-    cy.get('#nomnbreCub>app-input>input').type('CubTest');
-    cy.get('#tipoCub > app-select > select').select('Full');
-    cy.get('#contratosUser > app-select > select').select('SBE');
-    cy.get('#agencias > app-select > select').select('RANCAGUA');
-    cy.get('#proveedores > app-select > select').select(1);
-    cy.get('#direcciondesde > app-input > input').type('las casas norte');
-    cy.get('#alturadesde > app-input > input').type('1714');
-    cy.get('#direccionhasta > app-input > input').type('las casas sur');
-    cy.get('#alturahasta > app-input > input').type('1817');
-    cy.get('#descripcion > app-textarea > textarea').type('Cub descripción');
-    cy.get('#actividad > app-select > select').select('DISEÑO');
-    cy.get('#tiposervicio > app-select > select').select('CANALIZACION');
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio1_cod} - ${servicio1}`
+    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+    cy.cubFiltros(
+      actividad_test.toUpperCase(),
+      tipo_servicio_test.toUpperCase()
     );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_1_uo_1_cod} - ${servicio_1_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
 
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio2_cod} - ${servicio2}`
-    );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
-
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_2_cod} - ${servicio_2_uo_2}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(1000);
+    // Agregar un servicio y un UO
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    // Agregar otro servicio con 2 UO
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddUOB(serv_2_uo_2_test);
 
     // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
-    const fila1 = '.table-carrito > table > tbody > tr:nth-child(1) > td';
-    const fila2 = '.table-carrito > table > tbody > tr:nth-child(2) > td';
-    const fila3 = '.table-carrito > table > tbody > tr:nth-child(3) > td';
-    cy.get(fila1).eq(0).contains(servicio1_cod);
-    cy.get(fila1).eq(1).contains(servicio1);
-    cy.get(fila1).eq(2).contains('Canalizacion');
-    cy.get(fila1 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila1).eq(4).contains('$12.240');
-    cy.get(fila1).eq(5).contains('$12.240');
+    // SERVICIO 1
+    cy.cubCheckTableDataServUO(
+      1,
+      serv_1_test,
+      tipo_servicio_test,
+      1,
+      serv_1_precio_test,
+      serv_1_uo_1_test,
+      actividad_test,
+      1,
+      serv_1_uo_1_precio_test
+    );
 
-    cy.get(fila1).eq(7).contains(servicio_1_uo_1_cod);
-    cy.get(fila1).eq(8).contains(servicio_1_uo_1);
-    cy.get(fila1).eq(9).contains('Diseño');
-    cy.get(fila1 + ':nth-child(11)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila1).eq(11).contains('CLP');
-    cy.get(fila1).eq(12).contains('$0');
-    cy.get(fila1).eq(13).contains('$0');
-
-    // FILA 2 SERVICIO
-    cy.get(fila2).eq(0).contains(servicio2_cod);
-    cy.get(fila2).eq(1).contains(servicio2);
-    cy.get(fila2).eq(2).contains('Canalizacion');
-    cy.get(fila2 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila2).eq(4).contains('$15.000');
-    cy.get(fila2).eq(5).contains('$15.000');
-
-    cy.get(fila2).eq(7).contains(servicio_2_uo_2_cod);
-    cy.get(fila2).eq(8).contains(servicio_2_uo_2);
-    cy.get(fila2).eq(9).contains('Diseño');
-    cy.get(fila2 + ':nth-child(11)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila2).eq(11).contains('CLP');
-    cy.get(fila2).eq(12).contains('$0');
-    cy.get(fila2).eq(13).contains('$0');
-
-    // FILA 3
-    cy.get(fila3).eq(0).contains(servicio_2_uo_1_cod);
-    cy.get(fila3).eq(1).contains(servicio_2_uo_1);
-    cy.get(fila3).eq(2).contains('Diseño');
-    cy.get(fila3 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila3).eq(4).contains('CLP');
-    cy.get(fila3).eq(5).contains('$0');
-    cy.get(fila3).eq(6).contains('$0');
+    // SERVICIO 2
+    cy.cubCheckTableDataServUO(
+      2,
+      serv_2_test,
+      tipo_servicio_test,
+      1,
+      serv_2_precio_test,
+      serv_2_uo_2_test,
+      actividad_test,
+      1,
+      0
+    );
+    cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, 0);
 
     // REVISAR TOTALES
-    cy.get(
-      '#table-totales>div.col-3 > table > tr:nth-child(1) > td:nth-child(2)'
-    ).contains('$27.240');
-    cy.get(
-      '#table-totales>div.col-3 > table > tr:nth-child(2) > td:nth-child(2)'
-    ).contains('$0');
-    cy.get(
-      '#table-totales>div.col-3 > table > tr:nth-child(3) > td:nth-child(2)'
-    ).contains('$27.240');
+    cy.cubTablaTotales(
+      [
+        { precio: serv_1_precio_test, cantidad: 1 },
+        { precio: serv_2_precio_test, cantidad: 1 },
+      ],
+      [{ precio: serv_1_uo_1_precio_test, cantidad: 1 }]
+    );
 
-    // ELIMINAR UNO AGREGAR TODO Y ELIMINAR TODO
+    // ELIMINAR UNO, AGREGAR TODO Y ELIMINAR TODO
     cy.get(':nth-child(8) > .icon > .eliminar-color').click();
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
+
+    cy.cubAddUOB(serv_2_uo_1_test);
+    cy.cubAddUOB(serv_2_uo_3_test);
+    cy.cubAddUOB(serv_2_uo_4_test);
+
+    // SERVICIO 1
+    cy.cubCheckTableDataServUO(
+      1,
+      serv_1_test,
+      tipo_servicio_test,
+      1,
+      serv_1_precio_test,
+      serv_1_uo_1_test,
+      actividad_test,
+      1,
+      serv_1_uo_1_precio_test
     );
-    cy.contains('Agregar').click();
-    cy.wait(500);
 
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_3_cod} - ${servicio_2_uo_3}`
+    // SERVICIO 2
+    cy.cubCheckTableDataServUO(
+      2,
+      serv_2_test,
+      tipo_servicio_test,
+      1,
+      serv_2_precio_test,
+      serv_2_uo_4_test,
+      actividad_test,
+      1,
+      0
     );
-    cy.contains('Agregar').click();
-    cy.wait(700);
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_4_cod} - ${servicio_2_uo_4}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(1000);
-
-    // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
-    const fila4 = '.table-carrito > table > tbody > tr:nth-child(4) > td';
-    const fila5 = '.table-carrito > table > tbody > tr:nth-child(5) > td';
-    cy.get(fila1).eq(0).contains(servicio1_cod);
-    cy.get(fila1).eq(1).contains(servicio1);
-    cy.get(fila1).eq(2).contains('Canalizacion');
-    cy.get(fila1 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila1).eq(4).contains('$12.240');
-    cy.get(fila1).eq(5).contains('$12.240');
-
-    cy.get(fila1).eq(7).contains(servicio_1_uo_1_cod);
-    cy.get(fila1).eq(8).contains(servicio_1_uo_1);
-    cy.get(fila1).eq(9).contains('Diseño');
-    cy.get(fila1 + ':nth-child(11)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila1).eq(11).contains('CLP');
-    cy.get(fila1).eq(12).contains('$0');
-    cy.get(fila1).eq(13).contains('$0');
-
-    // FILA 2 SERVICIO
-    cy.get(fila2).eq(0).contains(servicio2_cod);
-    cy.get(fila2).eq(1).contains(servicio2);
-    cy.get(fila2).eq(2).contains('Canalizacion');
-    cy.get(fila2 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila2).eq(4).contains('$15.000');
-    cy.get(fila2).eq(5).contains('$15.000');
-
-    cy.get(fila2).eq(7).contains(servicio_2_uo_4_cod);
-    cy.get(fila2).eq(8).contains(servicio_2_uo_4);
-    cy.get(fila2).eq(9).contains('Diseño');
-    cy.get(fila2 + ':nth-child(11)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila2).eq(11).contains('CLP');
-    cy.get(fila2).eq(12).contains('$0');
-    cy.get(fila2).eq(13).contains('$0');
-
-    // FILA 3
-    cy.get(fila3).eq(0).contains(servicio_2_uo_3_cod);
-    cy.get(fila3).eq(1).contains(servicio_2_uo_3);
-    cy.get(fila3).eq(2).contains('Diseño');
-    cy.get(fila3 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila3).eq(4).contains('CLP');
-    cy.get(fila3).eq(5).contains('$0');
-    cy.get(fila3).eq(6).contains('$0');
-
-    // FILA 4
-    cy.get(fila4).eq(0).contains(servicio_2_uo_1_cod);
-    cy.get(fila4).eq(1).contains(servicio_2_uo_1);
-    cy.get(fila4).eq(2).contains('Diseño');
-    cy.get(fila4 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila4).eq(4).contains('CLP');
-    cy.get(fila4).eq(5).contains('$0');
-    cy.get(fila4).eq(6).contains('$0');
-
-    // FILA 5
-    cy.get(fila5).eq(0).contains(servicio_2_uo_2_cod);
-    cy.get(fila5).eq(1).contains(servicio_2_uo_2);
-    cy.get(fila5).eq(2).contains('Diseño');
-    cy.get(fila5 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila5).eq(4).contains('CLP');
-    cy.get(fila5).eq(5).contains('$0');
-    cy.get(fila5).eq(6).contains('$0');
+    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, 0);
 
     // ELIMINAR TODO
     cy.get(':nth-child(2) > :nth-child(7) > .icon > .ui ').click();
@@ -250,200 +141,95 @@ describe('Cubicacion Test', () => {
     cy.get('#create-button').should('be.disabled');
 
     // CASO ESPECIAL
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio2_cod} - ${servicio2}`
-    );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
-
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_2_cod} - ${servicio_2_uo_2}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(1000);
-
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio1_cod} - ${servicio1}`
-    );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_1_uo_1_cod} - ${servicio_1_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
-
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio2_cod} - ${servicio2}`
-    );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_3_cod} - ${servicio_2_uo_3}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(700);
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_4_cod} - ${servicio_2_uo_4}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(1000);
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddUOB(serv_2_uo_2_test);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_3_test);
+    cy.cubAddUOB(serv_2_uo_4_test);
 
     // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
-    cy.get(fila1).eq(0).contains(servicio1_cod);
-    cy.get(fila1).eq(1).contains(servicio1);
-    cy.get(fila1).eq(2).contains('Canalizacion');
-    cy.get(fila1 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila1).eq(4).contains('$12.240');
-    cy.get(fila1).eq(5).contains('$12.240');
+    // SERVICIO 1
+    cy.cubCheckTableDataServUO(
+      1,
+      serv_1_test,
+      tipo_servicio_test,
+      1,
+      serv_1_precio_test,
+      serv_1_uo_1_test,
+      actividad_test,
+      1,
+      serv_1_uo_1_precio_test
+    );
 
-    cy.get(fila1).eq(7).contains(servicio_1_uo_1_cod);
-    cy.get(fila1).eq(8).contains(servicio_1_uo_1);
-    cy.get(fila1).eq(9).contains('Diseño');
-    cy.get(fila1 + ':nth-child(11)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila1).eq(11).contains('CLP');
-    cy.get(fila1).eq(12).contains('$0');
-    cy.get(fila1).eq(13).contains('$0');
-
-    // FILA 2 SERVICIO
-    cy.get(fila2).eq(0).contains(servicio2_cod);
-    cy.get(fila2).eq(1).contains(servicio2);
-    cy.get(fila2).eq(2).contains('Canalizacion');
-    cy.get(fila2 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila2).eq(4).contains('$15.000');
-    cy.get(fila2).eq(5).contains('$15.000');
-
-    cy.get(fila2).eq(7).contains(servicio_2_uo_4_cod);
-    cy.get(fila2).eq(8).contains(servicio_2_uo_4);
-    cy.get(fila2).eq(9).contains('Diseño');
-    cy.get(fila2 + ':nth-child(11)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila2).eq(11).contains('CLP');
-    cy.get(fila2).eq(12).contains('$0');
-    cy.get(fila2).eq(13).contains('$0');
-
-    // FILA 3
-    cy.get(fila3).eq(0).contains(servicio_2_uo_3_cod);
-    cy.get(fila3).eq(1).contains(servicio_2_uo_3);
-    cy.get(fila3).eq(2).contains('Diseño');
-    cy.get(fila3 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila3).eq(4).contains('CLP');
-    cy.get(fila3).eq(5).contains('$0');
-    cy.get(fila3).eq(6).contains('$0');
-
-    // FILA 4
-    cy.get(fila4).eq(0).contains(servicio_2_uo_2_cod);
-    cy.get(fila4).eq(1).contains(servicio_2_uo_2);
-    cy.get(fila4).eq(2).contains('Diseño');
-    cy.get(fila4 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila4).eq(4).contains('CLP');
-    cy.get(fila4).eq(5).contains('$0');
-    cy.get(fila4).eq(6).contains('$0');
-
-    // FILA 5
-    cy.get(fila5).eq(0).contains(servicio_2_uo_1_cod);
-    cy.get(fila5).eq(1).contains(servicio_2_uo_1);
-    cy.get(fila5).eq(2).contains('Diseño');
-    cy.get(fila5 + ':nth-child(4)>app-input>input')
-      .invoke('val')
-      .then(val => {
-        expect(parseInt(val)).to.eql(1);
-      });
-    cy.get(fila5).eq(4).contains('CLP');
-    cy.get(fila5).eq(5).contains('$0');
-    cy.get(fila5).eq(6).contains('$0');
+    // SERVICIO 2
+    cy.cubCheckTableDataServUO(
+      2,
+      serv_2_test,
+      tipo_servicio_test,
+      1,
+      serv_2_precio_test,
+      serv_2_uo_4_test,
+      actividad_test,
+      1,
+      0
+    );
+    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, 0);
   });
 
   it('Revisar cambios de cantidades', () => {
-    cy.get('#contratosUser > app-select > select').select('SBE');
-    cy.get('#agencias > app-select > select').select('RANCAGUA');
-    cy.get('#proveedores > app-select > select').select(1);
-    cy.get('#actividad > app-select > select').select('DISEÑO');
-    cy.get('#tiposervicio > app-select > select').select('CANALIZACION');
+    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+    cy.cubFiltros(
+      actividad_test.toUpperCase(),
+      tipo_servicio_test.toUpperCase()
+    );
 
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio2_cod} - ${servicio2}`
-    );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
-
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio1_cod} - ${servicio1}`
-    );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_1_uo_1_cod} - ${servicio_1_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
 
     // AUMENTAR LA CANTIDAD SERVICIO
-    const fila1 = '.table-carrito > table > tbody > tr:nth-child(1) > td';
     const fila2 = '.table-carrito > table > tbody > tr:nth-child(2) > td';
-
     cy.get(fila2 + ':nth-child(4)>app-input>input')
       .clear()
       .type('{del}4');
-    cy.get(fila1).eq(5).contains('$15.000');
-    cy.get(fila1).eq(4).contains('$15.000');
-    cy.get(fila2).eq(5).contains('$48.960');
-    cy.get(fila2).eq(4).contains('$12.240');
-    cy.get(
-      '#table-totales>div.col-3 > table > tr:nth-child(1) > td:nth-child(2)'
-    ).contains('$63.960');
-    cy.get(
-      '#table-totales>div.col-3 > table > tr:nth-child(2) > td:nth-child(2)'
-    ).contains('$0');
-    cy.get(
-      '#table-totales>div.col-3 > table > tr:nth-child(3) > td:nth-child(2)'
-    ).contains('$63.960');
+
+    // REVISAR VALORES
+    // SERVICIO 1
+    // cy.cubCheckTableDataServUO(
+    //   1,
+    //   serv_1_test,
+    //   tipo_servicio_test,
+    //   1,
+    //   serv_1_precio_test,
+    //   serv_1_uo_1_test,
+    //   actividad_test,
+    //   1,
+    //   serv_1_uo_1_precio_test
+    // );
+    // // SERVICIO 2
+    // cy.cubCheckTableDataServUO(
+    //   2,
+    //   serv_2_test,
+    //   tipo_servicio_test,
+    //   4,
+    //   serv_2_precio_test,
+    //   serv_2_uo_4_test,
+    //   actividad_test,
+    //   1,
+    //   0
+    // );
   });
 
   it('Revisar que no permita agregar el mismo servicio/uo', () => {
-    cy.get('#contratosUser > app-select > select').select('SBE');
-    cy.get('#agencias > app-select > select').select('RANCAGUA');
-    cy.get('#proveedores > app-select > select').select(1);
-    cy.get('#actividad > app-select > select').select('DISEÑO');
-    cy.get('#tiposervicio > app-select > select').select('CANALIZACION');
+    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+    cy.cubFiltros(
+      actividad_test.toUpperCase(),
+      tipo_servicio_test.toUpperCase()
+    );
 
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio2_cod} - ${servicio2}`
-    );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
-
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
 
     cy.get('#mensaje-repetido').contains(
       'Ya ha agregado este servico/Unidad Obra'
@@ -451,86 +237,81 @@ describe('Cubicacion Test', () => {
   });
 
   it('Revisar que no permita agregar el mismo servicio/uo', () => {
-    cy.get('#contratosUser > app-select > select').select('SBE');
-    cy.get('#agencias > app-select > select').select('RANCAGUA');
-    cy.get('#proveedores > app-select > select').select(1);
-    cy.get('#actividad > app-select > select').select('DISEÑO');
-    cy.get('#tiposervicio > app-select > select').select('CANALIZACION');
+    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+    cy.cubFiltros(
+      actividad_test.toUpperCase(),
+      tipo_servicio_test.toUpperCase()
+    );
 
-    cy.get('#servicios > app-select > select ').select(
-      `${servicio2_cod} - ${servicio2}`
-    );
-    cy.get('#unidad-obra > app-select > select').select(
-      `${servicio_2_uo_1_cod} - ${servicio_2_uo_1}`
-    );
-    cy.contains('Agregar').click();
-    cy.wait(500);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
 
     cy.get(':nth-child(15) > .icon > .ui').click();
     cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(1)').contains(
-      '530345'
+      '165211'
     );
     cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(2)').contains(
-      'TERMINAL OPTICO MULTIOPERADOR EDIFICIO'
+      'KIT RETENCION FIBRA 14 MM'
     );
     cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(3)').contains(
-      'TELEFONICA'
+      'PROVEEDOR'
     );
     cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
-      '$90.496'
+      '$57.000'
     );
   });
 
-  it('Crear cubicaciones', () => {
-    cy.createCub(
-      'Cub Movil',
-      'Full',
-      'SBE',
-      'RANCAGUA',
-      '12121212 - COASIN',
-      'DISEÑO',
-      'CANALIZACION',
-      'D020 - DISEÑO DE RED INTERIOR RED DE COBRE (DITICU)',
-      '0 - SIN UO'
-    );
+  it.only('Crear cubicaciones', () => {
+    // cy.createCub(
+    //   'Cub Movil',
+    //   'Full',
+    //   contrato_movil,
+    //   agencia_movil,
+    //   proveedor_movil,
+    //   actividad_movil,
+    //   tipo_servicio_movil
+    //   // serv_1_movil,
+    //   // serv_1_uo_1_movil
+    // );
+    // cy.wait(500);
+    // cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
 
-    cy.contains('Nueva Cubicación').click();
-    cy.createCub(
-      'Cub Ordinario',
-      'Full',
-      'Contrato Ordinario',
-      'ANTOFAGASTA',
-      '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
-      'DISEÑO',
-      'PROYECTOS',
-      'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
-      '0 - SIN UO'
-    );
+    // cy.contains('Nueva Cubicación').click();
+    // cy.createCub(
+    //   'Cub Ordinario',
+    //   'Full',
+    //   'Contrato Ordinario',
+    //   'ANTOFAGASTA',
+    //   '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
+    //   'DISEÑO',
+    //   'PROYECTOS',
+    //   'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
+    //   '0 - SIN UO'
+    // );
 
-    cy.contains('Nueva Cubicación').click();
+    // cy.contains('Nueva Cubicación').click();
     cy.createCub(
       'Cub Bucle',
       'Full',
-      'BUCLE',
-      'SAN BERNARDO',
-      '94949494 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
-      'DISEÑO',
-      'CANALIZACION',
-      'D013 - DISEÑO P2P EN RED DE F.O. PARA SERVICIOS PRIVADOS (EMPRESAS, NEGOCIOS Y MAYORISTAS)',
-      '0 - SIN UO'
+      contrato_bucle,
+      agencia_bucle,
+      proveedor_bucle,
+      actividad_bucle.toUpperCase(),
+      tipo_servicio_bucle.toLocaleUpperCase(),
+      serv_1_bucle,
+      serv_1_uo_1_bucle
     );
 
-    cy.contains('Nueva Cubicación').click();
-    cy.createCub(
-      'Cub Fijo',
-      'Full',
-      'UNIFICADO-2019-FIJA',
-      'VALPARAISO',
-      '92929292 - COASIN',
-      'DISEÑO',
-      'PROYECTOS',
-      'D001 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE COBRE (CU)',
-      '0 - SIN UO'
-    );
+    // cy.contains('Nueva Cubicación').click();
+    // cy.createCub(
+    //   'Cub Fijo',
+    //   'Full',
+    //   'UNIFICADO-2019-FIJA',
+    //   'VALPARAISO',
+    //   '92929292 - COASIN',
+    //   'DISEÑO',
+    //   'PROYECTOS',
+    //   'D001 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE COBRE (CU)',
+    //   '0 - SIN UO'
+    // );
   });
 });
