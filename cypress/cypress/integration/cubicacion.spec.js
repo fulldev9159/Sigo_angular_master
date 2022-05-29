@@ -45,7 +45,7 @@ describe('Cubicacion Test', () => {
   // FIJO
   const contrato_fijo = 'UNIFICADO-2019-FIJA';
   const agencia_fijo = 'Región Metropolitana de Santiago';
-  const proveedor_fijo = '3300213678 - 2021-2023 GENERATEL SPA';
+  const proveedor_fijo = '3300213682 - 2021-2023 GENERATEL SPA';
   const actividad_fijo = 'ABANDONOS';
   const tipo_servicio_fijo = 2;
   const serv_1_fijo =
