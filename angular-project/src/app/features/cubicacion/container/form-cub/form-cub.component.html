@@ -165,11 +165,12 @@ z-index: 1;">
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div id="servicios">
-                <app-select [control]="formFiltrosControls.servicio_cod" label="* Código - Servicio">
+                <app-select [control]="formFiltrosControls.servicio_id" label="* Código - Servicio">
                   <ng-container options>
                     <option value="null" selected disabled>Seleccione un Servicio/Especialidad</option>
                     <ng-container *ngFor="let item of servicios4Cub$|async">
-                      <option [value]="item.codigo">
+                      <!-- <option [value]="item.codigo"> -->
+                      <option [value]="item.id">
                         {{item.codigo}} - {{item.descripcion}}
                       </option>
                     </ng-container>
@@ -197,7 +198,7 @@ z-index: 1;">
           </div>
 
           <br>
-          <div style="display:flex;align-items: center;justify-content: center;flex-direction: column;">
+          <div id="button-agregar">
             <button (click)="agregar()">Agregar</button>
             <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra </p>
           </div>

@@ -29,7 +29,7 @@ describe('Cubicacion Test', () => {
   const actividad_movil = 'ABANDONOS';
   const tipo_servicio_movil = 3;
   const serv_1_movil =
-    '2210 - INST Cables opticos (32 Fibras) de Interiores con DOF';
+    '2210 - Ingenieria de detalles con Estudio de factilidad de un MO';
   const serv_1_uo_1_movil = '0 - SIN UO';
 
   const contrato_bucle = 'BUCLE';
@@ -261,6 +261,16 @@ describe('Cubicacion Test', () => {
   });
 
   it.only('Crear cubicaciones', () => {
+    // MOVIL
+    cy.cubBase(
+      'Cub Movil',
+      'Full',
+      contrato_movil,
+      agencia_movil,
+      proveedor_movil
+    );
+    cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
+    cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
     // cy.createCub(
     //   'Cub Movil',
     //   'Full',
@@ -289,17 +299,17 @@ describe('Cubicacion Test', () => {
     // );
 
     // cy.contains('Nueva Cubicación').click();
-    cy.createCub(
-      'Cub Bucle',
-      'Full',
-      contrato_bucle,
-      agencia_bucle,
-      proveedor_bucle,
-      actividad_bucle.toUpperCase(),
-      tipo_servicio_bucle.toLocaleUpperCase(),
-      serv_1_bucle,
-      serv_1_uo_1_bucle
-    );
+    // cy.createCub(
+    //   'Cub Bucle',
+    //   'Full',
+    //   contrato_bucle,
+    //   agencia_bucle,
+    //   proveedor_bucle,
+    //   actividad_bucle.toUpperCase(),
+    //   tipo_servicio_bucle.toLocaleUpperCase(),
+    //   serv_1_bucle,
+    //   serv_1_uo_1_bucle
+    // );
 
     // cy.contains('Nueva Cubicación').click();
     // cy.createCub(

@@ -1,3 +1,17 @@
+#button-agregar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  button {
+    // margin-top: 88px;
+    border: 0.1rem solid gray;
+    width: 5rem;
+    height: 2rem;
+  }
+}
+
 .filtroservicios {
   margin-top: 12px;
   border: 1px solid #c6c6c6;

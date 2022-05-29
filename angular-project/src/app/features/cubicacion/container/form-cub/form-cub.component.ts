@@ -193,6 +193,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     this.formFiltros.get('tipo_servicio_id').disable({ emitEvent: false });
     this.formFiltros.get('actividad_id').disable({ emitEvent: false });
     this.formFiltros.get('servicio_cod').disable({ emitEvent: false });
+    this.formFiltros.get('servicio_id').disable({ emitEvent: false });
     this.formFiltros.get('unidad_obra_cod').disable({ emitEvent: false });
     this.contratosUser4Cub$ = this.cubicacionFacade.contratosUser4Cub$();
     this.agencias4Cub$ = this.cubicacionFacade
@@ -219,7 +220,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         this.servicios = servicios;
         return servicios;
       }),
-      tap(servicios => this.checkAndEnableFilter('servicio_cod', servicios))
+      // tap(servicios => this.checkAndEnableFilter('servicio_cod', servicios))
+      tap(servicios => this.checkAndEnableFilter('servicio_id', servicios))
     );
     this.unidadObra4Cub$ = this.cubicacionFacade
       .unidadObras4Cub$()
@@ -244,6 +246,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           this.formFiltros.get('tipo_servicio_id').reset();
           this.formFiltros.get('actividad_id').reset();
           this.formFiltros.get('servicio_cod').reset();
+          this.formFiltros.get('servicio_id').reset();
           this.formFiltros.get('unidad_obra_cod').reset();
           this.cubicacionFacade.agencias4cub(+contrato_id);
         } else {
@@ -259,6 +262,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           this.formFiltros.get('tipo_servicio_id').reset();
           this.formFiltros.get('actividad_id').reset();
           this.formFiltros.get('servicio_cod').reset();
+          this.formFiltros.get('servicio_id').reset();
           this.formFiltros.get('unidad_obra_cod').reset();
           this.formFiltros.get('actividad_id').disable({ emitEvent: false });
           const contrato_id = this.formCub.get('contrato').value;
@@ -278,6 +282,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             this.formFiltros.get('actividad_id').reset();
             this.formFiltros.get('tipo_servicio_id').reset();
             this.formFiltros.get('servicio_cod').reset();
+            this.formFiltros.get('servicio_id').reset();
             this.formFiltros.get('unidad_obra_cod').reset();
             this.formFiltros
               .get('tipo_servicio_id')
@@ -294,6 +299,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         .valueChanges.subscribe(tipo_servicio_id => {
           if (tipo_servicio_id !== null && tipo_servicio_id !== undefined) {
             this.formFiltros.get('servicio_cod').reset();
+            this.formFiltros.get('servicio_id').reset();
             const cmarco_has_prov_id =
               +this.formCub.get('cmarcoproveedor_id').value;
             const agencia_id = +this.formCub.get('agencia_id').value;
@@ -312,14 +318,22 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.formFiltros
-        .get('servicio_cod')
-        .valueChanges.subscribe(servicio_cod => {
+        // .get('servicio_cod')
+        // .valueChanges.subscribe(servicio_cod => {
+        .get('servicio_id')
+        .valueChanges.subscribe(servicio_id => {
           const actividad_id = +this.formFiltros.get('actividad_id').value;
+
           if (
-            servicio_cod !== null &&
-            servicio_cod !== undefined &&
+            servicio_id !== null &&
+            servicio_id !== undefined &&
             actividad_id !== null
           ) {
+            const servicio_cod = this.servicios.find(
+              servicio =>
+                servicio.id === +this.formFiltros.get('servicio_id').value
+            ).codigo;
+            this.formFiltros.get('servicio_cod').setValue(servicio_cod);
             this.formFiltros.get('unidad_obra_cod').reset();
             const request: RequestGetUnidadObra4Cub = {
               servicio_cod,
@@ -341,6 +355,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           if (actividad_id !== null && actividad_id !== undefined) {
             this.formFiltros.get('tipo_servicio_id').reset();
             this.formFiltros.get('servicio_cod').reset();
+            this.formFiltros.get('servicio_id').reset();
             this.formFiltros.get('unidad_obra_cod').reset();
             this.cubicacionFacade.tipoServicioEspecialidad(+actividad_id);
             // this.cubicacionFacade.unidadObras4Cub(request);

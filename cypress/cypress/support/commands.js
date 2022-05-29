@@ -16,38 +16,6 @@ const formatter = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 0,
 });
 
-Cypress.Commands.add(
-  'createCub',
-  (
-    nombre,
-    tipo_cub,
-    contrato,
-    agencia,
-    proveedor,
-    actividad,
-    tipo_servicio,
-    servicio,
-    uo
-  ) => {
-    cy.get('#nomnbreCub>app-input>input').type(nombre);
-    cy.get('#tipoCub > app-select > select').select(tipo_cub);
-    cy.get('#contratosUser > app-select > select').select(contrato);
-    cy.get('#agencias > app-select > select').select(agencia);
-    cy.get('#proveedores > app-select > select').select(proveedor);
-    cy.get('#direcciondesde > app-input > input').type('las casas norte');
-    cy.get('#alturadesde > app-input > input').type('1714');
-    cy.get('#direccionhasta > app-input > input').type('las casas sur');
-    cy.get('#alturahasta > app-input > input').type('1817');
-    cy.get('#descripcion > app-textarea > textarea').type('Cub descripción');
-    cy.get('#actividad > app-select > select').select(actividad);
-    cy.get('#tiposervicio > app-select > select').select(tipo_servicio);
-    cy.get('#servicios > app-select > select ').select(servicio);
-    cy.get('#unidad-obra > app-select > select').select(uo);
-    cy.contains('Agregar').click();
-    cy.get('#create-button').click();
-  }
-);
-
 Cypress.Commands.add('login', (username, password, perfil) => {
   cy.visit('http://localhost:4201/auth/login');
   cy.get('#text').type(username);
@@ -79,9 +47,10 @@ Cypress.Commands.add('cubFiltros', (actividad, tipo_servicio) => {
 });
 
 Cypress.Commands.add('cubAddService', (servicio, uob) => {
-  cy.get('#servicios > app-select > select ').select(servicio);
+  cy.get('#servicios > app-select > select ').select(servicio, { force: true });
   cy.get('#unidad-obra > app-select > select').select(uob);
-  cy.contains('Agregar').click();
+  // cy.contains('Agregar').click();
+  cy.get('#button-agregar>button').click();
   cy.wait(500);
 });
 
