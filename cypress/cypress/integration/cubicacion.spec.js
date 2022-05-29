@@ -272,7 +272,7 @@ describe('Cubicacion Test', () => {
     );
   });
 
-  it.only('Crear cubicaciones', () => {
+  it('Crear cubicaciones', () => {
     // MOVIL
     cy.cubBase(
       'Cub Movil',
