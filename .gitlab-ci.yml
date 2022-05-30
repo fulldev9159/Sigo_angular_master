@@ -67,13 +67,13 @@ update test environment:
     # agencia_id:347  Santiago
     # proveedor_id:10097   cmarco_has_proveedor_id:4   GENERALTEL
     # actividad:1 ABANDONOS
-    # - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob values(9999,1,'2210',0,'C 012')\""
-    # #ORDINARIO No hay contrato ordinario
-    # - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set tipo_contrato_id=3 where nombre='RAN'\""
-    # - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into cmarco_has_proveedor(contrato_marco_id, proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable) select 3,proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable from cmarco_has_proveedor where id=4\""
-    # #BUCLE ALGUNOS NO TIENEN UO ASOCIADO
-    # - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,76,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
-    # - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,33,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob values(9999,1,'2210',0,'C 012')\""
+    #ORDINARIO No hay contrato ordinario
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set tipo_contrato_id=3 where nombre='RAN'\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into cmarco_has_proveedor(contrato_marco_id, proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable) select 3,proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable from cmarco_has_proveedor where id=4\""
+    #BUCLE ALGUNOS NO TIENEN UO ASOCIADO
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,76,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,33,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
   tags:
     - repo-machine
 
