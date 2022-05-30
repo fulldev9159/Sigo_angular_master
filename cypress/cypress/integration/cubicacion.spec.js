@@ -274,16 +274,16 @@ describe('Cubicacion Test', () => {
 
   it('Crear cubicaciones', () => {
     // MOVIL
-    cy.cubBase(
-      'Cub Movil',
-      'Full',
-      contrato_movil,
-      agencia_movil,
-      proveedor_movil
-    );
-    cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
-    cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
-    cy.get('#create-button').click();
+    // cy.cubBase(
+    //   'Cub Movil',
+    //   'Full',
+    //   contrato_movil,
+    //   agencia_movil,
+    //   proveedor_movil
+    // );
+    // cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
+    // cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
+    // cy.get('#create-button').click();
 
     // ORDINARIO
     // cy.contains('Nueva Cubicación').click();
@@ -316,10 +316,10 @@ describe('Cubicacion Test', () => {
     cy.get('#create-button').click();
 
     // FIJO
-    cy.contains('Nueva Cubicación').click();
-    cy.cubBase('Cub Fijo', 'Full', contrato_fijo, agencia_fijo, proveedor_fijo);
-    cy.cubFiltros(actividad_fijo.toUpperCase(), tipo_servicio_fijo);
-    cy.cubAddService(serv_1_fijo, serv_1_uo_1_fijo);
-    cy.get('#create-button').click();
+    // cy.contains('Nueva Cubicación').click();
+    // cy.cubBase('Cub Fijo', 'Full', contrato_fijo, agencia_fijo, proveedor_fijo);
+    // cy.cubFiltros(actividad_fijo.toUpperCase(), tipo_servicio_fijo);
+    // cy.cubAddService(serv_1_fijo, serv_1_uo_1_fijo);
+    // cy.get('#create-button').click();
   });
 });
