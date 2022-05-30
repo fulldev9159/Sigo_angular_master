@@ -104,7 +104,17 @@ _CubCheckTableCarritoServicioUOB
     #  _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(8)     ${uob_cod}
     #  _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(9)     ${uob}
      _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(10)    ${actividad}
-     _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(11)    1
+    #  _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(11)    1
      _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(12)    CLP
 #    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(13)    $0
 #    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(14)    $0
+
+_CubCheckTableCarritoUOB
+    [Arguments]                ${fila}                                                                                             ${uob_cod}      ${uob}    ${actividad}
+    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(1)    ${uob_cod}
+    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(2)    ${uob}
+    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(3)    ${actividad}
+    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(4)    1
+    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(5)    CLP
+    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(6)    $0
+    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(${fila}) > td:nth-child(7)    $0

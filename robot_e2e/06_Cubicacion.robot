@@ -59,36 +59,17 @@ Crear cubicación
 #    _CubValidateList    ${nombre_test}       Full    ${tipo_contrato_test}    ${codigo_acurdo_test}    ${contrato_test}    ${agencia_test}    ${nombre_proveedor}    ${creado_por}
 #    close browser
 
-Detalle
-    [Documentation]                     Revisar si se visualizan los detalles de la cubicació correctamente
-    _Login                              mgestor1                                                               asda                                    Gestor/JP
-    _Navegate to                        Listar Cubicacion
-    _Element should exist in table      CubTest
-    _Click visible element              css:#action-buttons > div > button:nth-child(1)
-    _CubCheckDetallesBase
-    _CubCheckTableCarritoServicioUOB    1                                                                      ${serv_1_test.split("-")[0].strip()}    ${serv_1_test.split("-")[1].strip()}    ${tipo_servicio_test}    uob_cod    uob    ${actividad_test}
+# Detalle
+#    [Documentation]                     Revisar si se visualizan los detalles de la cubicació correctamente
+#    _Login                              mgestor1                                                               asda                                    Gestor/JP
+#    _Navegate to                        Listar Cubicacion
+#    _Element should exist in table      CubTest
+#    _Click visible element              css:#action-buttons > div > button:nth-child(1)
+#    _CubCheckDetallesBase
+#    _CubCheckTableCarritoServicioUOB    1                                                                      ${serv_1_test.split("-")[0].strip()}    ${serv_1_test.split("-")[1].strip()}    ${tipo_servicio_test}    uob_cod      uob    ${actividad_test}
+#    _CubCheckTableCarritoServicioUOB    2                                                                      ${serv_2_test.split("-")[0].strip()}    ${serv_2_test.split("-")[1].strip()}    ${tipo_servicio_test}    uob_cod      uob    ${actividad_test}
+#    #                                   _CubCheckTableCarritoUOB                                               fila                                    uob_cod                                 uob                      actividad
 
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(1)     D010
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(2)     DISEÑO P2P EN RED DE COBRE PARA TELEALIMENTACION (AEREO O SUBTERRANEO)
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(3)     Canalizacion
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(4)     1
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(5)     $15.000
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(6)     $15.000
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(8)     T382
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(9)     CAJA TERMINAL OPT.C/SPLITTER Y CONEC.TEL IP68
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(10)    Diseño
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(11)    1
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(12)    CLP
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(13)    $0
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(2) > td:nth-child(14)    $0
-
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(3) > td:nth-child(1)    T383
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(3) > td:nth-child(2)    TERMINAL OPTICO MULTIOPERADOR EDIFICIO
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(3) > td:nth-child(3)    Diseño
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(3) > td:nth-child(4)    1
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(3) > td:nth-child(5)    CLP
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(3) > td:nth-child(6)    $0
-#    _Element text should be    css:app-detalle-cubicacion-table > div > table > tbody > tr:nth-child(3) > td:nth-child(7)    $0
 #    close browser
 
 
@@ -102,6 +83,7 @@ Detalle
 #    _Click visible element            css:p-dialog > div > div > div> p-footer > button.btn.btn-primary
 
 
+#    _CubValidateList                  Clonado    Full                           ${tipo_contrato_test}    ${codigo_acurdo_test}    ${contrato_test}    ${agencia_test}    ${nombre_proveedor}    ${creado_por}
 #    _Element should exist in table    Clonado
 #    _Validate column data             2          Full
 #    _Validate column data             3          Móvil
