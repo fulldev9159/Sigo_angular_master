@@ -9,68 +9,73 @@ Resource    ./resources/perfil_resource.robot
 Resource    ./resources/cubicacion_resource.robot
 
 *** Variables ***
-${tipo_contrato_test}=          Bucle
-${codigo_acurdo_test}=          330000659
-${creado_por}=                  JESSICA MOVISTAR CASTILLO 1
-${nombre_test}=                 CubTest
-${contrato_test} =              BUCLE
-${agencia_test} =               APOQUINDO
-${proveedor_test} =             330000659 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA
-${nombre_proveedor} =           NOKIA SOLUTIONS AND NETWORKS CHILE LTDA
-${actividad_test} =             Fibra Optica
-${tipo_servicio_test} =         Fibra Optica                                              
+${tipo_contrato_test}=     Bucle
+${codigo_acurdo_test}=     330000659
+${creado_por}=             JESSICA MOVISTAR CASTILLO 1
+${nombre_test}=            CubTest
+${contrato_test} =         BUCLE
+${agencia_test} =          APOQUINDO
+${proveedor_test} =        330000659 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA
+${nombre_proveedor} =      NOKIA SOLUTIONS AND NETWORKS CHILE LTDA
+${actividad_test} =        Fibra Optica
+${tipo_servicio_test} =    Fibra Optica                                           
+
 ${serv_1_test} =                J757 - DESMONTAR CABLE DE FIBRA OPTICA EN AEREO
-${serv_1_precio_test} =         266.67
+${serv_1_precio_test} =         266,67
 ${serv_1_uo_1_test} =           D351 - KIT RETENCION FIBRA 14 MM
 ${serv_1_uo_1_precio_test} =    57000
+
 ${serv_2_test} =                J756 - INSTALAR CABLE DE FIBRA OPTICA AEREO
-${serv_2_precio_test} =         711.12
+${serv_2_precio_test} =         711,12
 ${serv_2_uo_1_test} =           H093 - CABLE AEREO 64 FO/PKP (CON LASHING RECUBIERTO)
+${serv_2_uo_1_precio_test} =    0
 ${serv_2_uo_2_test} =           H095 - CABLE AEREO 96 FO/PKP (CON LASHING RECUBIERTO) 
+${serv_2_uo_2_precio_test} =    0
 
 *** Test Cases ***
-Crear cubicación
-    [Documentation]    Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación.
-   # ...                                                                                          Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
-   # Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación
-   # Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
-   # When: Registre todos los datos necesarios
-   # And presione el botón crear cubicación
-   # Then: La cubicación debe aparecer en el listado con los datos correctos
+# Crear cubicación
+#    [Documentation]                                                                                Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación.
+#    # ...                                                                                          Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
+#    # Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación
+#    # Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
+#    # When: Registre todos los datos necesarios
+#    # And presione el botón crear cubicación
+#    # Then: La cubicación debe aparecer en el listado con los datos correctos
 
-#    Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
-     _Login                                                                                       mgestor1            asda    Gestor/JP
-     _Navegate to                                                                                 Crear Cubicacion
+# #    Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
+#      _Login                                                                                       mgestor1            asda    Gestor/JP
+#      _Navegate to                                                                                 Crear Cubicacion
 
-   # When: Registre todos los datos necesarios
-    _CubFormBase         ${nombre_test}         Full                     ${contrato_test}    ${agencia_test}    ${proveedor_test}    Cub descripcion
-    _CubFiltros          ${actividad_test}      ${tipo_servicio_test}
-    _CubAddServicioUO    ${serv_1_test}         ${serv_1_uo_1_test}
-    _CubAddServicioUO    ${serv_2_test}         ${serv_2_uo_1_test}
-    _CubAddUO            ${serv_2_uo_2_test}
+#    # When: Registre todos los datos necesarios
+#    _CubFormBase                                   ${nombre_test}         Full                     ${contrato_test}    ${agencia_test}    ${proveedor_test}    Cub descripcion
+#    _CubFiltros                                    ${actividad_test}      ${tipo_servicio_test}
+#    _CubAddServicioUO                              ${serv_1_test}         ${serv_1_uo_1_test}
+#    _CubAddServicioUO                              ${serv_2_test}         ${serv_2_uo_1_test}
+#    _CubAddUO                                      ${serv_2_uo_2_test}
 
-    sleep                     1
-    _Click visible element    css:#create-button
-    close browser
-
-Listar Cubicaciones
-    _Login              mgestor1             asda    Gestor/JP
-    _Navegate to        Listar Cubicacion
-    _CubValidateList    ${nombre_test}       Full    ${tipo_contrato_test}    ${codigo_acurdo_test}    ${contrato_test}    ${agencia_test}    ${nombre_proveedor}    ${creado_por}
-    close browser
-
-# Detalle
-#    [Documentation]                     Revisar si se visualizan los detalles de la cubicació correctamente
-#    _Login                              mgestor1                                                               asda                                    Gestor/JP
-#    _Navegate to                        Listar Cubicacion
-#    _Element should exist in table      CubTest
-#    _Click visible element              css:#action-buttons > div > button:nth-child(1)
-#    _CubCheckDetallesBase
-#    _CubCheckTableCarritoServicioUOB    1                                                                      ${serv_1_test.split("-")[0].strip()}    ${serv_1_test.split("-")[1].strip()}    ${tipo_servicio_test}    uob_cod      uob    ${actividad_test}
-#    _CubCheckTableCarritoServicioUOB    2                                                                      ${serv_2_test.split("-")[0].strip()}    ${serv_2_test.split("-")[1].strip()}    ${tipo_servicio_test}    uob_cod      uob    ${actividad_test}
-#    #                                   _CubCheckTableCarritoUOB                                               fila                                    uob_cod                                 uob                      actividad
-
+#    sleep                     1
+#    _Click visible element    css:#create-button
 #    close browser
+
+# Listar Cubicaciones
+#    _Login              mgestor1             asda    Gestor/JP
+#    _Navegate to        Listar Cubicacion
+#    _CubValidateList    ${nombre_test}       Full    ${tipo_contrato_test}    ${codigo_acurdo_test}    ${contrato_test}    ${agencia_test}    ${nombre_proveedor}    ${creado_por}
+#    close browser
+
+Detalle
+    [Documentation]                     Revisar si se visualizan los detalles de la cubicació correctamente
+    _Login                              mgestor1                                                               asda                                         Gestor/JP
+    _Navegate to                        Listar Cubicacion
+    _Element should exist in table      CubTest
+    _Click visible element              css:#action-buttons > div > button:nth-child(1)
+    _CubCheckDetallesBase
+    _CubCheckTableCarritoServicioUOB    1                                                                      ${serv_1_test.split("-")[0].strip()}         ${serv_1_test.split("-")[1].strip()}         ${tipo_servicio_test}    ${serv_1_uo_1_test.split("-")[0].strip()}    ${serv_1_uo_1_test.split("-")[1].strip()}    ${actividad_test}
+    _CubCheckTableCarritoServicioUOB    2                                                                      ${serv_2_test.split("-")[0].strip()}         ${serv_2_test.split("-")[1].strip()}         ${tipo_servicio_test}    ${serv_2_uo_1_test.split("-")[0].strip()}    ${serv_2_uo_1_test.split("-")[1].strip()}    ${actividad_test}
+    _CubCheckTableCarritoUOB            3                                                                      ${serv_2_uo_2_test.split("-")[0].strip()}    ${serv_2_uo_2_test.split("-")[1].strip()}    ${actividad_test}
+   #                                   _CubCheckTableCarritoUOB                                               fila                                    uob_cod                                 uob                      actividad
+
+    # close browser
 
 
 # Clonar
