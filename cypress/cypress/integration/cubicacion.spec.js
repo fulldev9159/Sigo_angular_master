@@ -300,7 +300,7 @@ describe('Cubicacion Test', () => {
     // );
 
     // BUCLE
-    cy.contains('Nueva Cubicación').click();
+    // cy.contains('Nuseva Cubicación').click();
     cy.cubBase(
       'Cub Bucle',
       'Full',

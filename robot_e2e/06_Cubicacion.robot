@@ -39,25 +39,25 @@ Crear cubicación
    # Then: La cubicación debe aparecer en el listado con los datos correctos
 
 #    Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
-#    _Login                                                                                       mgestor1            asda    Gestor/JP
-#    _Navegate to                                                                                 Crear Cubicacion
+     _Login                                                                                       mgestor1            asda    Gestor/JP
+     _Navegate to                                                                                 Crear Cubicacion
 
-#    # When: Registre todos los datos necesarios
-#    _CubFormBase                                   ${nombre_test}         Full                     ${contrato_test}    ${agencia_test}    ${proveedor_test}    Cub descripcion
-#    _CubFiltros                                    ${actividad_test}      ${tipo_servicio_test}
-#    _CubAddServicioUO                              ${serv_1_test}         ${serv_1_uo_1_test}
-#    _CubAddServicioUO                              ${serv_2_test}         ${serv_2_uo_1_test}
-#    _CubAddUO                                      ${serv_2_uo_2_test}
+   # When: Registre todos los datos necesarios
+    _CubFormBase         ${nombre_test}         Full                     ${contrato_test}    ${agencia_test}    ${proveedor_test}    Cub descripcion
+    _CubFiltros          ${actividad_test}      ${tipo_servicio_test}
+    _CubAddServicioUO    ${serv_1_test}         ${serv_1_uo_1_test}
+    _CubAddServicioUO    ${serv_2_test}         ${serv_2_uo_1_test}
+    _CubAddUO            ${serv_2_uo_2_test}
 
-#    sleep                     1
-#    _Click visible element    css:#create-button
-#    close browser
+    sleep                     1
+    _Click visible element    css:#create-button
+    close browser
 
-# Listar Cubicaciones
-#    _Login              mgestor1             asda    Gestor/JP
-#    _Navegate to        Listar Cubicacion
-#    _CubValidateList    ${nombre_test}       Full    ${tipo_contrato_test}    ${codigo_acurdo_test}    ${contrato_test}    ${agencia_test}    ${nombre_proveedor}    ${creado_por}
-#    close browser
+Listar Cubicaciones
+    _Login              mgestor1             asda    Gestor/JP
+    _Navegate to        Listar Cubicacion
+    _CubValidateList    ${nombre_test}       Full    ${tipo_contrato_test}    ${codigo_acurdo_test}    ${contrato_test}    ${agencia_test}    ${nombre_proveedor}    ${creado_por}
+    close browser
 
 # Detalle
 #    [Documentation]                     Revisar si se visualizan los detalles de la cubicació correctamente
