@@ -197,6 +197,24 @@ Cypress.Commands.add('cubTablaTotales', (servicios, uobs) => {
       .replace('-', ',')}`
   );
 });
+
+Cypress.Commands.add('_shoul_be_enabled', form => {
+  for (let i = 0; i < form.length; i++) {
+    cy.get(form[i]).should('be.enabled');
+  }
+});
+
+Cypress.Commands.add('_shoul_be_disabled', form => {
+  for (let i = 0; i < form.length; i++) {
+    cy.get(form[i]).should('be.disabled');
+  }
+});
+
+Cypress.Commands.add('_shoul_not_exist', form => {
+  for (let i = 0; i < form.length; i++) {
+    cy.get(form[i]).should('not.exist');
+  }
+});
 //
 //
 // -- This is a child command --
