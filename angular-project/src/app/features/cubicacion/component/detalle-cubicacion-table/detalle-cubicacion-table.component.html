@@ -27,26 +27,28 @@
   <table style="width:100%">
     <thead>
       <tr>
-        <th colspan="7">Servicios</th>
-        <th colspan="8">Unidad Obra</th>
+        <th colspan="9">Servicios</th>
+        <th colspan="9">Unidad Obra</th>
       </tr>
       <tr>
         <th>Cod</th>
         <th>Descripción</th>
-        <th>Esp</th>
+        <th>Esp.</th>
         <th>Cantidad</th>
+        <th>Unidad</th>
         <th>Precio</th>
-        <!-- <th>Factor</th> -->
         <th>Total Servicio</th>
+        <th>Tipo Moneda</th>
         <th></th>
 
         <th>Cód</th>
         <th>Descripción</th>
         <th>Actividad</th>
         <th>Cantidad</th>
-        <th>Tipo Moneda</th>
+        <th>Unidad</th>
         <th>Precio</th>
         <th>Total UO</th>
+        <th>Tipo Moneda</th>
         <th></th>
       </tr>
     </thead>
@@ -60,16 +62,11 @@
             <td>
               {{item.servicio_cantidad}}
             </td>
+            <td>{{item.servicio_unidad_cod}}</td>
             <td class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-            <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
             <td class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
             <td>
-              <!-- <div class="ui icon buttons mini basic">
-                  <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
-                    <fa-icon [icon]="trashICon"></fa-icon>
-                  </button>
-                </div> -->
-
             </td>
 
             <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
@@ -78,13 +75,11 @@
             <td class="data-secundaria">
               {{item.unidades_obras[0].uo_cantidad}}
             </td>
+            <td>{{item.unidades_obras[0].uob_unidad_medida_cod}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td>
-              <!-- <div class="ui icon buttons mini basic">
-                  <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
-                </div> -->
             </td>
           </tr>
         </ng-container>
@@ -98,15 +93,12 @@
             <td [attr.rowspan]="+item.unidades_obras.length">
               {{item.servicio_cantidad}}
             </td>
+            <td [attr.rowspan]="+item.unidades_obras.length">{{item.servicio_unidad_cod}}</td>
             <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-            <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
             <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td [attr.rowspan]="+item.unidades_obras.length">{{item.servicio_tipo_moneda_codigo}}
+            </td>
             <td [attr.rowspan]="+item.unidades_obras.length">
-              <!-- <div class="ui icon buttons mini basic">
-                  <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
-                    <fa-icon [icon]="trashICon"></fa-icon>
-                  </button>
-                </div> -->
             </td>
 
             <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
@@ -115,16 +107,13 @@
             <td>
               {{item.unidades_obras[0].uo_cantidad}}
             </td>
+            <td>{{item.unidades_obras[0].uob_unidad_medida_cod}}
+
+            </td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td>
-              <!-- <div class="ui icon buttons mini basic">
-                  <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
-                  <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
-                    <fa-icon [icon]="trashICon"></fa-icon>
-                  </button>
-                </div> -->
             </td>
           </tr>
         </ng-container>
@@ -137,16 +126,11 @@
             <td>
               {{uo.uo_cantidad}}
             </td>
+            <td>{{uo.uob_unidad_medida_cod}}</td>
+            <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-            <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-            <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td>
-              <!-- <div class="ui icon buttons mini basic">
-                  <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>
-                  <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
-                    <fa-icon [icon]="trashICon"></fa-icon>
-                  </button>
-                </div> -->
             </td>
           </tr>
         </ng-container>
