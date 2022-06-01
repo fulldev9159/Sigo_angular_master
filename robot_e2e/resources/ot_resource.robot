@@ -41,6 +41,63 @@ _Have No to exist in table/tab
     ${status}=            _Exist in table OT    ${nombre}    ${pestaña}
     Should Not Be True    ${status}
 
+_OTFormBase
+    [Arguments]             ${nombre}                                           ${contrato}      ${cubicacion}    
+    _Set input text         css:#control_nombre > app-input > input             ${nombre}
+    _Select visible item    css:#contratosUser > app-select > select            ${contrato}      
+    _Select visible item    css:#control_cubicacion_id > app-select > select    ${cubicacion}    
+
+_OTFormBucle
+    [Arguments]               ${oficina}
+    ...                       ${solicitado_por}
+    ...                       ${direccion}
+    ...                       ${altura}
+    ...                       ${piso}
+    ...                       ${departamento}
+    ...                       ${comuna}
+    ...                       ${tipo_red}
+    ...                       ${tipo_trabajo}
+    # ...            ${tiene_boleta}
+    # ...            ${tiene_permiso}
+    ...                       ${area_negocio}
+    ...                       ${proyectista}
+    _Select visible item      css:#control-oficina-central > app-select > select    ${oficina}
+    _Select visible item      css:#control-solicitado-por > app-select > select     ${solicitado_por}
+    _Set input text           css:#control-direccion > app-input > input            ${direccion}
+    _Set input text           css:#control-altura > app-input > input               ${altura}
+    _Set input text           css:#control-piso > app-input > input                 ${piso}
+    _Set input text           css:#control-departamento > app-input > input         ${departamento}
+    _Select visible item      css:#control-comuna > app-select > select             ${comuna}
+    _Select visible item      css:#control-tipo-red > app-select > select           ${tipo_red}          
+    _Select visible item      css:#control-tipo-trabajo > app-select > select       ${tipo_trabajo}
+    _Click visible element    css:#control-tiene-boleta                             
+    _Click visible element    css:#control-tiene-permiso
+    _Select visible item      css:#control-area-negocio > app-select > select       ${area_negocio} 
+    _Set input text           css:#control-proyectista > app-input > input          ${proyectista}
+
+_OTFormSustento
+    [Arguments]             ${primero}                                          ${segundo}     ${tercero}
+    _Select visible item    css:#control_pmo_codigo > app-select > select       ${primero} 
+    _Select visible item    css:#control_lp_codigo > app-select > select        ${segundo}
+    _Select visible item    css:#control_pep2_capex_id > app-select > select    ${tercero}
+
+_OTFormExtra
+    [Arguments]               ${admin_ec}                                                                                                        ${observaciones}    
+    _Click visible element    css:#fecha-inicio-ot > span > input
+    _Click visible element    css:#fecha-inicio-ot > span > div > div > div > div > table > tbody > tr:nth-child(3) > td> span
+    _Click visible element    css:#fecha-termino-ot > span > input
+    _Click visible element    css:#fecha-termino-ot > span > div > div > div > div > table > tbody > tr:nth-child(3) > td:nth-child(7) > span
+    _Select visible item      css:#control_admin_contrato > app-select > select                                                                  ${admin_ec} 
+    _Set input text           css:#observaciones                                                                                                 ${observaciones}    
+
+_OTCheckList
+    [Arguments]              ${nombre}    ${etapa}        ${contrato}    ${proveedor}    ${autor}    
+    _Validate column data    3            ${nombre}
+    _Validate column data    4            ${etapa}
+    _Validate column data    8            ${contrato} 
+    _Validate column data    9            ${proveedor}
+    _Validate column data    10           ${autor}
+
 _Click tab
     [Arguments]                      ${tab}
     ${number}=                       Run Keyword If                                                                        '${tab}' == 'Ejecucion'

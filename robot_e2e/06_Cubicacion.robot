@@ -92,6 +92,8 @@ Clonar
     _Set input text                   css:app-clone-cubage-form > form > app-input > input                 Clonado
     _Click visible element            css:p-dialog > div > div > div> p-footer > button.btn.btn-primary
 
+    sleep    1
+
 
     _CubValidateList    Clonado    Full    ${tipo_contrato_test}    ${codigo_acurdo_test}    ${contrato_test}    ${agencia_test}    ${nombre_proveedor}    ${creado_por}
 
@@ -129,7 +131,7 @@ Editar
     _Click visible element            css:#action-buttons > div > button:nth-child(3)
 
    # REVISAR QUE LOS DATOS HAYAN SIDO CORRECTAMENTE CARGADO
-    sleep                            2
+    sleep                            3
     _Element input text should be    css:#nomnbreCub > app-input > input         CubTest
     _Element input text should be    css:#tipoCub > app-select > select          3          # Full
     _Element input text should be    css:#contratosUser > app-select > select    9          
@@ -197,13 +199,13 @@ Editar
      _CubValidateList     CubTestEditado    Construcción    ${tipo_contrato_test}    ${codigo_acurdo_test}    ${contrato_test}    ${agencia_test}    ${nombre_proveedor}    ${creado_por}
 #    # REVISAR DETALLE
 
-    _Click visible element     css:#action-buttons > div > button:nth-child(1)
-    _CubCheckDetallesBase
-    _Element text should be    css:table:nth-child(1) > tr:nth-child(1) > td:nth-child(2)                                   Edit las casas norte
-    _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(1) > tr:nth-child(1) > td:nth-child(4)    Edit 1714
-    _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(1) > tr:nth-child(2) > td:nth-child(2)    Edit las casas sur
-    _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(1) > tr:nth-child(2) > td:nth-child(4)    Edit 1817
-    _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(3) > tr:nth-child(2) > td                 Edit Cub descripción
+     _Click visible element     css:#action-buttons > div > button:nth-child(1)
+#    _CubCheckDetallesBase
+     _Element text should be    css:table:nth-child(1) > tr:nth-child(1) > td:nth-child(2)                                   Edit las casas norte
+     _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(1) > tr:nth-child(1) > td:nth-child(4)    Edit 1714
+     _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(1) > tr:nth-child(2) > td:nth-child(2)    Edit las casas sur
+     _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(1) > tr:nth-child(2) > td:nth-child(4)    Edit 1817
+     _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(3) > tr:nth-child(2) > td                 Edit Cub descripción
 
     _CubCheckTableCarritoServicioUOB    1                                            
     ...                                 ${serv_2_test.split("-")[0].strip()}         ${serv_2_test.split("-")[1].strip()}         ${tipo_servicio_test}    1    MT    $711,12    CLP
