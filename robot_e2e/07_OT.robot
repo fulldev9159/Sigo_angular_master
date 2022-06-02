@@ -34,48 +34,32 @@ Crear OT BUCLE
 
     _Click visible element    css:#create-button
 
-    _Have to exist in table/tab       Abiertas     OT BUCLE
-    _OTCheckList                      OT BUCLE     Autorizar OT por Proveedor    BUCLE    NOKIA SOLUTIONS AND NETWORKS CHILE LTDA    JESSICA MOVISTAR CASTILLO 1
+
     _Have No to exist in table/tab    Cerradas     OT BUCLE
     _Have No to exist in table/tab    Ejecucion    OT BUCLE
 
-    # # _Navegate to                   Listar OT
-    # _Have to exist in table/tab    Abiertas                                                                    OT BUCLE
-    # _Click visible element         css:#action-buttons > app-menu > button
-    # _Click visible element         css:#action-buttons > app-menu > p-menu > div > ul > li:nth-child(1) > a
+    _Navegate to                   Listar OT
+    _Have to exist in table/tab    Abiertas                                                                    OT BUCLE
+    _OTCheckList                   OT BUCLE                                                                    Autorizar inicialmente la OT    BUCLE    NOKIA SOLUTIONS AND NETWORKS CHILE LTDA    JESSICA MOVISTAR CASTILLO 1
+    _Click visible element         css:#action-buttons > app-menu > button
+    _Click visible element         css:#action-buttons > app-menu > p-menu > div > ul > li:nth-child(1) > a
 
-    # _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    Bucle
-    # _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    BUCLE
-    # _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    Cub Bucle
-    # _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(8) > td:nth-child(2)    Autorizar OT por Proveedor
-    # _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(9) > td:nth-child(2)    Abierta
+    sleep                1
+    _OTCheckInfoBase     Bucle                   BUCLE    Cub Bucle    Autorizar inicialmente la OT    Abierta        JESSICA MOVISTAR CASTILLO 1    JESSICA MOVISTAR CASTILLO 1    Descripcion de algo bucle
+    _OTCheckInfoBucle    0189                    
+    ...                  MARKETING               
+    ...                  Direccion cualquiera    150      1            2131                            Cerro Navia    
+    ...                  ATP                     
+    ...                  @TIEMPO 
+    ...                  Si                      Si       
+    ...                  NORMAL 
+    ...                  Juan
 
-    # _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(3) > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    JESSICA MOVISTAR CASTILLO 1
-    # _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(3) > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    JESSICA MOVISTAR CASTILLO 1
-    # _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(3) > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)    Descripcion de algo bucle
-
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)     0269
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)     Telefonica Empresa
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)     Direccion cualquiera
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(4)     150
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)     1
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(4)     2131
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(5) > td:nth-child(2)     Cerro Navia
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(6) > td:nth-child(2)     Cobre
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(7) > td:nth-child(2)     FO Empresa
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(8) > td:nth-child(2)     Si
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(9) > td:nth-child(2)     Si
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(10) > td:nth-child(2)    NORMAL
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(11) > td:nth-child(2)    Juan
-
-    # _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    CAPEX
-    # _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    31
-    # _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)    10952
-    # _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    P-0077-21-0102-40050-601
+    _OTCheckInfoSustento    CAPEX    31    10952    P-0077-21-0102-40050-601
 
 
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
-    # _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(2)    Jose NOKIA Campos Jaraquemada
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(2)    Jose NOKIA Campos Jaraquemada
 
     # close browser
 

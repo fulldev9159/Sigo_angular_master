@@ -98,6 +98,68 @@ _OTCheckList
     _Validate column data    9            ${proveedor}
     _Validate column data    10           ${autor}
 
+_OTCheckInfoBase
+    [Arguments]    ${tipo_contrato}    ${contrato}    ${cubicacion}    ${etapa}    ${estado}    ${propietario}    ${responsable}    ${observaciones} 
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    ${tipo_contrato}
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    ${contrato}
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    ${cubicacion} 
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(8) > td:nth-child(2)    ${etapa}
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(1) > div > div.card-body > table > tr:nth-child(9) > td:nth-child(2)    ${estado}
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(3) > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    ${propietario}
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(3) > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    ${responsable} 
+    _Element text should be    css:app-info-ot > div > div:nth-child(1) > app-card:nth-child(3) > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)    ${observaciones}
+
+_OTCheckInfoBucle
+    [Arguments]    ${oficina}
+    ...            ${solicitado_por}
+    ...            ${direccion}
+    ...            ${altura}
+    ...            ${piso}
+    ...            ${departamento}
+    ...            ${comuna}
+    ...            ${tipo_red}
+    ...            ${tipo_trabajo}
+    ...            ${tiene_boleta}
+    ...            ${tiene_permiso}
+    ...            ${area_negocio}
+    ...            ${proyectista}
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)     ${oficina}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)     ${solicitado_por}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)     ${direccion}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(4)     ${altura}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)     ${piso}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(4)     ${departamento}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(5) > td:nth-child(2)     ${comuna}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(6) > td:nth-child(2)     ${tipo_red}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(7) > td:nth-child(2)     ${tipo_trabajo}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(8) > td:nth-child(2)     ${tiene_boleta}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(9) > td:nth-child(2)     ${tiene_permiso}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(10) > td:nth-child(2)    ${area_negocio}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(11) > td:nth-child(2)    ${proyectista}
+
+
+_OTCheckInfoSustento
+    [Arguments]                ${tipo}                                                                                                                               ${primero}    ${segundo}    ${tercero}
+    _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    ${tipo}
+    _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    ${primero}
+    _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(3) > td:nth-child(2)    ${segundo}
+    _Element text should be    css:app-info-ot > div > div.col-xs-12.col-md-12 > div > app-card > div > div.card-body > table > tr:nth-child(4) > td:nth-child(2)    ${tercero}
+
+
+_OTActionUser
+    [Arguments]     ${usuario}    ${perfil}    ${accion}    ${OT}
+    _Login          ${usuario}    asda         ${perfil}
+    _Navegate to    Listar OT
+
+    Run Keyword If    '${accion}' == 'VER'             _CheckPestaniaAbiertos      ${OT}
+    Run Keyword If    '${accion}' == 'NO PUEDE VER'    _CheckPestaniaNoPuedeVer    ${OT}
+    Run Keyword If    '${accion}' == 'EJECUTAR'        _CheckPestaniaEjecucion     ${OT}
+
+    close browser
+
 _Click tab
     [Arguments]                      ${tab}
     ${number}=                       Run Keyword If                                                                        '${tab}' == 'Ejecucion'
@@ -163,23 +225,33 @@ _Press action
     # Element text should be    ${items}[2]                                                                      Aceptar
     # Element text should be    ${items}[3]                                                                      Rechazar
 
+_CheckPestaniaAbiertos
+    [Arguments]                       ${OT}        
+    _Have No to exist in table/tab    Cerradas     ${OT} 
+    _Have No to exist in table/tab    Ejecucion    ${OT} 
+    _Have to exist in table/tab       Abiertas     ${OT} 
+
+_CheckPestaniaNoPuedeVer
+    [Arguments]                       ${OT}        
+    _Have No to exist in table/tab    Abiertas     ${OT} 
+    _Have No to exist in table/tab    Cerradas     ${OT} 
+    _Have No to exist in table/tab    Ejecucion    ${OT}
+
+
+_CheckPestaniaEjecucion
+    [Arguments]                       ${OT}        
+    _Have No to exist in table/tab    Cerradas     ${OT} 
+    _Have No to exist in table/tab    Abiertas     ${OT} 
+    _Have to exist in table/tab       Ejecucion    ${OT} 
+
 _Reglas de visualizacion para no accionarios
     [Arguments]                       ${OT}        
     _Have No to exist in table/tab    Cerradas     ${OT} 
     _Have No to exist in table/tab    Ejecucion    ${OT} 
     _Have to exist in table/tab       Abiertas     ${OT} 
 
-_Reglas de visualizacion para accionario
-    [Arguments]                       ${OT}        
-    _Have No to exist in table/tab    Cerradas     ${OT} 
-    _Have No to exist in table/tab    Abiertas     ${OT} 
-    _Have to exist in table/tab       Ejecucion    ${OT} 
 
-_Reglas de visualizacion gerencial
-    [Arguments]                       ${OT}        
-    _Have No to exist in table/tab    Abiertas     ${OT} 
-    _Have No to exist in table/tab    Cerradas     ${OT} 
-    _Have No to exist in table/tab    Ejecucion    ${OT}
+
 
 _Reglas de visualizacion otra area
     [Arguments]                       ${OT}        
