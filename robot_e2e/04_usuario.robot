@@ -31,22 +31,23 @@ Crear Usuario Contratista
    # _Set input text                                    css:#celular-input > input                                          77777777776
     _Click visible element       css:#proveedor > div > div.p-radiobutton-box
     capture page screenshot      /opt/robotframework/reports/usuarioAntesPro.png
-    _Select visible item         css:#proveedor-select > app-select > select                         COASIN
+    _Select visible item         css:#proveedor-select > app-select > select                         NOKIA SOLUTIONS AND NETWORKS CHILE LTDA 
     capture page screenshot      /opt/robotframework/reports/usuarioDespuesPro.png
     _Select visible item         css:#area-select > app-select > select                              Contratista
     _Click visible element       css:#contratos_marco_multi 
     ${select multi contratos}    set variable                                                        contratos_marco_multi >div>div:nth-child(4)>div:nth-child(2)>ul>cdk-virtual-scroll-viewport>div:nth-child(1)    
     _Click visible element       css:#${select multi contratos}>p-multiselectitem:nth-child(1)>li
-    _Click visible element       css:#${select multi contratos}>p-multiselectitem:nth-child(2)>li
+   #  _Click visible element       css:#${select multi contratos}>p-multiselectitem:nth-child(2)>li
    # And presione el botón crear usuario
     _Click visible element       css:#submit-user
 
+    sleep                             0.5
    #Then: El usuario nuevo debe aparecer en el listar usuario
     _Element should exist in table    UserTestContratista
     _Validate column data             2                      123456222-9
     _Validate column data             3                      Test Name Contratista
     _Validate column data             4                      Test Apellido Contratista
-    _Validate column data             5                      Coasin
+    _Validate column data             5                      Nokia Solutions And Networks Chile Ltda
     _Validate column data             6                      Contratista
    # _Validate column data                                       7                      77777777776
     _Validate column data             8                      test@test.com

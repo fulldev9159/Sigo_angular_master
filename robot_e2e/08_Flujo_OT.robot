@@ -36,12 +36,12 @@ Flujo Movil Aprob Jerarquica
     ##### REGLAS DE VISUALIZACION  #########
 
     # Autorización del supervisor
-    _Login                         msupervisor1    asda                            Supervisor (Telefónica)
+    _Login                         msupervisor1                                                                          asda                            Supervisor (Telefónica)
     _Navegate to                   Listar OT
-    # _Press action             Aceptar OT
-    # _Click visible element    css:p-dialog > div > div > div.p-dialog-footer > p-footer > button.btn.btn-primary
-    _Have to exist in table/tab    Abiertas        OT BUCLE
-    _Validate column data          4               Autorizar inicialmente la OT
+    _Press action                  Aceptar OT
+    _Click visible element         css:p-dialog > div > div > div.p-dialog-footer > p-footer > button.btn.btn-primary
+    _Have to exist in table/tab    Abiertas                                                                              OT BUCLE
+    _Validate column data          4                                                                                     Autorizar inicialmente la OT
     close browser
 
     ##### REGLAS DE VISUALIZACION  #########
