@@ -243,18 +243,3 @@ _CheckPestaniaEjecucion
     _Have No to exist in table/tab    Cerradas     ${OT} 
     _Have No to exist in table/tab    Abiertas     ${OT} 
     _Have to exist in table/tab       Ejecucion    ${OT} 
-
-_Reglas de visualizacion para no accionarios
-    [Arguments]                       ${OT}        
-    _Have No to exist in table/tab    Cerradas     ${OT} 
-    _Have No to exist in table/tab    Ejecucion    ${OT} 
-    _Have to exist in table/tab       Abiertas     ${OT} 
-
-
-
-
-_Reglas de visualizacion otra area
-    [Arguments]                       ${OT}        
-    _Have No to exist in table/tab    Abiertas     ${OT} 
-    _Have No to exist in table/tab    Cerradas     ${OT} 
-    _Have No to exist in table/tab    Ejecucion    ${OT}
