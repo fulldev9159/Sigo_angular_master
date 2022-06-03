@@ -349,11 +349,46 @@ export class OtEffects {
     )
   );
 
+  // GET ALL MOTIVO RECHAZO
+  getAllMotivoRechazoOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getAllMotivoRechazoOT),
+      concatMap(() =>
+        this.otService.getAllMotivoRechazoOT().pipe(
+          map(response => otActions.getAllMotivoRechazoOTSuccess({ response })),
+          catchError(error =>
+            of(otActions.getAllMotivoRechazoOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // ACEPTAR O RECHAZAR INCIAL
+  AceptarRechazarIncialOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AceptarRechazarIncialOT),
+      concatMap(({ request }) =>
+        this.otService.AceptarRechazarIncialOT(request).pipe(
+          map(response =>
+            otActions.AceptarRechazarIncialOTSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.AceptarRechazarIncialOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.createOTSuccess),
+        ofType(
+          otActions.createOTSuccess,
+          otActions.AceptarRechazarIncialOTSuccess
+        ),
         tap(action => {
           this.alertMessageAction.messageActions(
             action.response.status.code,
@@ -369,7 +404,7 @@ export class OtEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.createOTError),
+        ofType(otActions.createOTError, otActions.AceptarRechazarIncialOTError),
         tap(action =>
           this.alertMessageAction.messageActions(
             action.error.error.status.code,

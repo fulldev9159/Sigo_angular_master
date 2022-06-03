@@ -35,6 +35,7 @@ services:
   mcl_local_sigo_api:
     image: gcr.io/zwcsce/api-sigo:develop
     environment:
+      LDAP_SKIP: '1'
       TZ: America/Santiago
       LOG_LEVEL: DEBUG
       SERVICE_PORT: 4040

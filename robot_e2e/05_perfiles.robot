@@ -30,7 +30,7 @@ Crear un perfil Gestor
    # And presione el botón crear perfil
    # Then: El usuario nuevo debe aparecer en el listar perfiles
 
-    _Login                        admin                                                                                                               pass                      Admin
+    _Login                        admin                                                                                                               M0v15tar.                 Admin
     _Navegate to                  Perfil
     _Table should display data
    # Given: El administrador llega a la página para crear perfiles
@@ -57,7 +57,7 @@ Ver permisos del perfil creado
    # When: Presione Ver Permisos
    # Then: Al administrador debe poder visuarlizar los permisos del perfil
 
-    _Login                        admin                                              pass    Admin
+    _Login                        admin                                              M0v15tar.    Admin
     _Navegate to                  Perfil
     _Table should display data
     # When: Presione Ver Permisos
@@ -82,7 +82,7 @@ Editar un perfil Gestor
    # And presione el botón guardar perfil
    # Then: El usuario nuevo debe aparecer en el listar perfiles con los cambios realizados
 
-    Login                         admin                                              pass    Admin
+    Login                         admin                                              M0v15tar.    Admin
     _Navegate to                  Perfil
     _Table should display data
     # Given: El administrador llega a la página para editar perfil TestGestor
@@ -112,7 +112,7 @@ Elimiar Perfil
    # And presiona confirmar
    # Then: El perfil "EditTest" no debe aparecer en el listado
 
-    _Login                                admin                                                pass    Admin
+    _Login                                admin                                                M0v15tar.    Admin
     _Navegate to                          Perfil
     _Table should display data
     # When: Presione el botón de eliminar del perfil EditTest

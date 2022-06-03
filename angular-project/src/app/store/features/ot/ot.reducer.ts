@@ -26,6 +26,7 @@ import {
   NumeroInternoHasOT,
   OT,
   DataRespGetDetalleOT,
+  MotivoRechazo,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -60,6 +61,11 @@ export interface StateOt {
   tipoNumeroInterno: TipoNumeroInterno[];
   numeroInternoHasOT: NumeroInternoHasOT[];
 
+  detalleOT: DataRespGetDetalleOT;
+
+  // MOTIVO RECHAZO
+  allMotivoRechazo: MotivoRechazo[];
+
   // ////
   filtro_propietario: string;
   filtro_tipo: string;
@@ -69,8 +75,6 @@ export interface StateOt {
   otsEjecucion: OT[];
   itemsAbiertas: OT[];
   itemsCerradas: OT[];
-
-  detalleOT: DataRespGetDetalleOT;
 
   // coordinators: Data.User[];
   // trabajadores: Data.User[];
@@ -116,6 +120,11 @@ export const initialStateOt: StateOt = {
   tipoNumeroInterno: [],
   numeroInternoHasOT: [],
 
+  detalleOT: null,
+
+  // MOTIVO RECHAZO
+  allMotivoRechazo: [],
+
   // ////
   filtro_propietario: '',
   filtro_tipo: '',
@@ -125,8 +134,6 @@ export const initialStateOt: StateOt = {
   otsEjecucion: [],
   itemsAbiertas: [],
   itemsCerradas: [],
-
-  detalleOT: null,
 
   // coordinators: [],
   // trabajadores: [],
@@ -441,6 +448,23 @@ export const reducerOt = createReducer(
       //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
       //     )
       //   : [],
+    };
+  }),
+
+  on(OtActions.getAllMotivoRechazoOTSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      allMotivoRechazo:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [],
     };
   }),
 

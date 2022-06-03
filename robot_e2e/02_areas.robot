@@ -14,7 +14,7 @@ Resource    ./resources/login_resource.robot
 #    close Browser
 
 Editar Area
-    _Login                            admin                                 pass                   Admin
+    _Login                            admin                                 M0v15tar.              Admin
     _Navegate to                      Area
     _Table should display data
     # capture page screenshot           /opt/robotframework/reports/area.png

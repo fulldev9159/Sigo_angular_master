@@ -47,13 +47,11 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
         if (detalles) {
           return detalles.servicios.map(servicios => {
             if (servicios) {
-              console.log(servicios);
               const uos: DatosUnidadObra4Cub[] = servicios.unidades_obra.map(
                 uo => {
                   if (uo) {
                     const materiales: Materiales4Cub[] = uo.data_materiales.map(
                       material => {
-                        // console.log(material);
                         return {
                           material_cantidad: material.material_cantidad,
                           material_codigo: material.material_cod,
@@ -64,11 +62,12 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                           material_tipo_moneda_id: material.tipo_moneda_id,
                           material_unidad_id:
                             material.material_unidad_medida_id,
+                          material_unidad_medida_cod:
+                            material.material_unidad_medida_cod,
                           material_valor: material.valor,
                         };
                       }
                     );
-                    // console.log(uo);
                     return {
                       material_arr: materiales,
                       uo_codigo: uo.data_unidad_obra.unidad_obra_cod,
@@ -76,6 +75,8 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                       uo_precio_total_clp:
                         uo.data_unidad_obra.uo_precio_total_clp,
                       uo_unidad_id: uo.data_unidad_obra.cub_has_uob_id,
+                      uob_unidad_medida_cod:
+                        uo.data_unidad_obra.uob_unidad_medida_cod,
                       uo_cantidad: uo.data_unidad_obra.uob_cantidad,
                     };
                   }
@@ -89,11 +90,12 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                 servicio_id: servicios.data_servicio.servicio_id,
                 servicio_nombre: servicios.data_servicio.servicio_desc,
                 servicio_precio_final:
-                  servicios.data_servicio.prov_has_serv_precio,
+                  servicios.data_servicio.servicio_precio_final,
                 servicio_precio_final_clp:
                   servicios.data_servicio.servicio_precio_final_clp,
                 servicio_tipo: servicios.data_servicio.tipo_servicio_id,
                 servicio_unidad_id: servicios.data_servicio.unidad_medida_id,
+                servicio_unidad_cod: servicios.data_servicio.unidad_medida_cod,
                 tipo_moneda_id: servicios.data_servicio.precio_tipo_moneda_id,
                 actividad_descripcion: servicios.data_servicio.actividad_desc,
                 actividad_id: servicios.data_servicio.actividad_id.toString(),

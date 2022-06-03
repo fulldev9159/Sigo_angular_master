@@ -36,6 +36,8 @@ import {
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
   DataRespGetDetalleOT,
+  RequestAceptarRechazarInicialOT,
+  MotivoRechazo,
 } from '@data';
 import {
   DetalleActa,
@@ -275,6 +277,22 @@ export class OtFacade {
       | RequestCreateOTOrdinario
   ): void {
     this.store.dispatch(otActions.createOT({ request }));
+  }
+
+  // GET ALL MOTIVO RECHAZO
+  public getAllMotivoRechazoOT(): void {
+    this.store.dispatch(otActions.getAllMotivoRechazoOT());
+  }
+
+  public getAllMotivoRechazoOT$(): Observable<MotivoRechazo[]> {
+    return this.store.select(otSelectors.getAllMotivoRechazoOT);
+  }
+
+  // ACEPTAR O RECHAZAR INCIAL
+  public AceptarRechazarIncialOT(
+    request: RequestAceptarRechazarInicialOT
+  ): void {
+    this.store.dispatch(otActions.AceptarRechazarIncialOT({ request }));
   }
 
   // Resets

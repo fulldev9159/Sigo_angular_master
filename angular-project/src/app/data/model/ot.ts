@@ -490,32 +490,28 @@ export interface RequestCreateOTFijo {
     numero_interno: string[];
   };
 }
+
+// GET MOTIVOS DE RECHAZO
+export interface DataRespGetMotivoRechazo {
+  items: MotivoRechazo[];
+}
+
+export interface MotivoRechazo {
+  descripcion: string;
+  id: number;
+}
+
+// ACEPTAR O RECHAZAR
+export interface RequestAceptarRechazarInicialOT {
+  ot_id: number;
+  values: {
+    estado: string; // ACEPTADO O RECHAZADO
+    observacion?: string;
+    tipo?: number;
+  };
+}
+
 // ////
-
-// // GET OTs init
-// export interface OT {
-//   id: number;
-//   nombre: string;
-//   tipo: string;
-//   fecha_inicio: string;
-//   fecha_termino: string;
-//   contrato_marco_nombre: string;
-//   proveedor_nombre: string;
-//   usuario_nombre: string;
-//   sesion_sce: string;
-//   estado_otdesc: string;
-//   etapa_otdesc: string;
-//   acciones: Accion[];
-//   acciones_str: string;
-//   delegacion: string;
-//   estado_otid: number;
-//   estado_slug: string;
-//   etapa_otid: number;
-//   etapa_slug: string;
-//   proveedor_id: number;
-//   subetapa_otdesc: string;
-// }
-
 interface FieldOrder {
   ot_id: string;
 }

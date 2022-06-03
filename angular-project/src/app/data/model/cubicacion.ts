@@ -95,7 +95,7 @@ export interface ServiciosDetalle {
         unidad_obra_desc: string;
         uo_precio_total_clp: number;
         uob_cantidad: number;
-        uniob_udad_medida_cod: string;
+        uob_unidad_medida_cod: string;
         uob_unidad_medida_id: number;
       };
       data_materiales: Materiales4Detalle[];
@@ -282,6 +282,7 @@ export interface DatosUnidadObra4Cub {
   uo_precio_total_clp: number;
   uo_unidad_id: number;
   uo_cantidad?: number;
+  uob_unidad_medida_cod?: string;
 }
 
 export interface Materiales4Cub {
@@ -293,6 +294,7 @@ export interface Materiales4Cub {
   material_precio_clp: number;
   material_tipo_moneda_id: number;
   material_unidad_id: number;
+  material_unidad_medida_cod?: string;
   material_valor: number;
 }
 
@@ -310,6 +312,7 @@ export interface Carrito {
   servicio_precio_final_clp: number;
   servicio_tipo: number;
   servicio_unidad_id: number;
+  servicio_unidad_cod?: string;
   tipo_moneda_id: number;
   actividad_descripcion: string;
   actividad_id: string;

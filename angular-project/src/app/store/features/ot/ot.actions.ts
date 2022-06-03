@@ -39,7 +39,10 @@ import {
   RequestCreateOTBucle,
   DataRespGetOTs,
   DataRespGetDetalleOT,
+  DataRespGetMotivoRechazo,
+  RequestAceptarRechazarInicialOT,
 } from '@data';
+
 import {
   DetalleActa,
   RequestSaveInformeActaGestor,
@@ -413,6 +416,37 @@ export const createOTSuccess = createAction(
 
 export const createOTError = createAction(
   '[OT] GET createOT Error',
+  props<{ error: any }>()
+);
+
+// GET ALL MOTIVO RECHAZO
+export const getAllMotivoRechazoOT = createAction(
+  '[OT] GET getAllMotivoRechazoOT'
+);
+
+export const getAllMotivoRechazoOTSuccess = createAction(
+  '[OT] GET getAllMotivoRechazoOT Success',
+  props<{ response: Response<DataRespGetMotivoRechazo> }>()
+);
+
+export const getAllMotivoRechazoOTError = createAction(
+  '[OT] GET getAllMotivoRechazoOT Error',
+  props<{ error: any }>()
+);
+
+// ACEPTAR O RECHAZAR INCIAL
+export const AceptarRechazarIncialOT = createAction(
+  '[OT] GET AceptarRechazarIncialOT',
+  props<{ request: RequestAceptarRechazarInicialOT }>()
+);
+
+export const AceptarRechazarIncialOTSuccess = createAction(
+  '[OT] GET AceptarRechazarIncialOT Success',
+  props<{ response: Response<any> }>()
+);
+
+export const AceptarRechazarIncialOTError = createAction(
+  '[OT] GET AceptarRechazarIncialOT Error',
   props<{ error: any }>()
 );
 

@@ -106,6 +106,13 @@ export const getNumeroInternoHasOT = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.numeroInternoHasOT
 );
+
+// ALL MOTIVO RECHAZO
+export const getAllMotivoRechazoOT = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.allMotivoRechazo
+);
+
 //  ////
 export const getOtEjecucion = createSelector(
   selectOt,

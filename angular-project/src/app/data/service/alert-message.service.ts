@@ -162,7 +162,8 @@ export class AlertMessageActions {
         action === userActions.addFirmaUserSuccess.type ||
         action === profileActions.eliminarPerfilSuccess.type ||
         action === ca.deleteCubSuccess.type ||
-        action === ca.deleteDetalleCubSuccess.type
+        action === ca.deleteDetalleCubSuccess.type ||
+        action === otActions.AceptarRechazarIncialOTSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (
@@ -245,6 +246,14 @@ export class AlertMessageActions {
 
       if (action === ca.clonCubSuccess.type) {
         location.reload();
+      }
+
+      if (action === otActions.AceptarRechazarIncialOTSuccess.type) {
+        this.otFacade.getOts({
+          filtro_propietario: 'TODAS',
+          filtro_tipo: 0,
+          filtro_pestania: '',
+        });
       }
     }
   }
