@@ -120,7 +120,7 @@ Ver los contratos
 
    # Then: Al usuario debe poder visuarlizar los contratos del usuario UserTestContratista
     ${items}=                  Get WebElements                                                          css:p-dialog > div > div > div > p-listbox > div > div > ul > li
-    _Element text should be    ${items}[0]                                                              SBE
+    _Element text should be    ${items}[0]                                                              BUCLE
     _Element text should be    ${items}[1]                                                              Contrato Ordinario
     _Click visible element     css:app-modal:nth-child(4) > p-dialog > div > div > div> div > button
 
