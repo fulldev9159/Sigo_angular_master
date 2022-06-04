@@ -75,6 +75,11 @@ _OTFormBucle
     _Select visible item      css:#control-area-negocio > app-select > select       ${area_negocio} 
     _Set input text           css:#control-proyectista > app-input > input          ${proyectista}
 
+_OTFormMovil
+    [Arguments]             ${plan_proyecto}               ${sitio}
+    _Select visible item    css:#plan-proyecto > select    ${plan_proyecto}
+    _Select visible item    css:#sitio > select            ${sitio}
+
 _OTFormSustento
     [Arguments]             ${primero}                                          ${segundo}     ${tercero}
     _Select visible item    css:#control_pmo_codigo > app-select > select       ${primero} 
