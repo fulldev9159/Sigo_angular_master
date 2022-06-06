@@ -82,8 +82,8 @@ Flujo Movil Aprob Jerarquica
     _OTActionUser    mgestor1           Gestor/JP                  VER             OT BUCLE
     _OTActionUser    mgestor2           Gestor/JP                  NO PUEDE VER    OT BUCLE    # --- Debido a que no tiene asociado el contrato BUCLE
     _OTActionUser    mgestor3           Gestor/JP                  NO PUEDE VER    OT BUCLE    # --- No pertenece a la misma área
-    _OTActionUser    msupervisor1       Supervisor (Telefónica)    VER             OT BUCLE
-    _OTActionUser    mjefearea1         Jefe de Área Telefónica    VER             OT BUCLE
+    # _OTActionUser    msupervisor1       Supervisor (Telefónica)    VER             OT BUCLE
+    # _OTActionUser    mjefearea1         Jefe de Área Telefónica    VER             OT BUCLE
     _OTActionUser    mjefearea2         Jefe de Área Telefónica    NO PUEDE VER    OT BUCLE
     _OTActionUser    msubgerente1       SubGerente Telefónica      NO PUEDE VER    OT BUCLE
     _OTActionUser    msubgerente2       SubGerente Telefónica      NO PUEDE VER    OT BUCLE

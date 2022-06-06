@@ -65,6 +65,11 @@ update test environment:
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=7\""
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=8\""
     - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(9,(select id from contrato_marco where nombre='BUCLE'))\""
+
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('gadmincontrato1','12312312312','Luk GENERATEL SPA','Antonella',22222222222,1,10097,1,'asdasdas@asdasd.com',now(),now())\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gadmincontrato1'),(select id from usuario where username='gadmincontrato1'),2,NULL,now(),now())\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec demos-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gadmincontrato1'),(select id from contrato_marco where nombre='UNIFICADO-2019-MOVIL'))\""
+
   #MOVIL FIJO FALTA SIN UO
   # Contrato_id:25  Unificado_2019_movil
   # agencia_id:347  Santiago

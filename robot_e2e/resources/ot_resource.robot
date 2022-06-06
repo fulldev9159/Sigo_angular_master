@@ -75,6 +75,17 @@ _OTFormBucle
     _Select visible item      css:#control-area-negocio > app-select > select       ${area_negocio} 
     _Set input text           css:#control-proyectista > app-input > input          ${proyectista}
 
+_OTFormMovil
+    [Arguments]             ${plan_proyecto}               ${sitio}
+    _Select visible item    css:#plan-proyecto > select    ${plan_proyecto}
+    _Select visible item    css:#sitio > select            ${sitio}
+
+_OTFormFijo
+    [Arguments]               ${tipo}                                                      ${numero}
+    _Select visible item      css:#control_tipo_numero_interno_id > app-select > select    ${tipo}
+    _Set input text           css:#control_numero_interno > app-input > input              ${numero}
+    _Click visible element    css:#button-agregar > button
+
 _OTFormSustento
     [Arguments]             ${primero}                                          ${segundo}     ${tercero}
     _Select visible item    css:#control_pmo_codigo > app-select > select       ${primero} 
@@ -140,6 +151,19 @@ _OTCheckInfoBucle
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(10) > td:nth-child(2)    ${area_negocio}
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(11) > td:nth-child(2)    ${proyectista}
 
+_OTCheckInfoMovil
+    [Arguments]    ${plan_proyecto}
+    ...            ${sitio}
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    ${plan_proyecto}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    ${sitio}
+
+_OTCheckInfoFijo
+    [Arguments]    ${Tipo_numero_interno}
+    ...            ${numero_1}
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)                 ${Tipo_numero_interno}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(1) > div > div.card-body > table:nth-child(3) > tr:nth-child(2) > td    ${numero_1}
 
 _OTCheckInfoSustento
     [Arguments]                ${tipo}                                                                                                                               ${primero}    ${segundo}    ${tercero}

@@ -27,8 +27,8 @@ describe('Cubicacion Test', () => {
   const contrato_movil = 'UNIFICADO-2019-MOVIL';
   const agencia_movil = 'Región Metropolitana de Santiago';
   const proveedor_movil = '3300213678 - 2021-2023 GENERATEL SPA';
-  const actividad_movil = 'ABANDONOS';
-  const tipo_servicio_movil = 3;
+  const actividad_movil = 'INSTALACIONES EN EDIFICIO';
+  const tipo_servicio_movil = 2;
   const serv_1_movil =
     '2210 - Ingenieria de detalles con Estudio de factilidad de un MO';
   const serv_1_uo_1_movil = '0 - SIN UO';
@@ -46,8 +46,8 @@ describe('Cubicacion Test', () => {
   const contrato_fijo = 'UNIFICADO-2019-FIJA';
   const agencia_fijo = 'Región Metropolitana de Santiago';
   const proveedor_fijo = '3300213682 - 2021-2023 GENERATEL SPA';
-  const actividad_fijo = 'ABANDONOS';
-  const tipo_servicio_fijo = 2;
+  const actividad_fijo = 'INSTALACIONES EN EDIFICIO';
+  const tipo_servicio_fijo = 1;
   const serv_1_fijo =
     '2210 - Ingenieria de detalles con Estudio de factilidad de un MO';
   const serv_1_uo_1_fijo = '0 - SIN UO';
@@ -273,34 +273,20 @@ describe('Cubicacion Test', () => {
   });
 
   it('Crear cubicaciones', () => {
-    // MOVIL
-    // cy.cubBase(
-    //   'Cub Movil',
-    //   'Full',
-    //   contrato_movil,
-    //   agencia_movil,
-    //   proveedor_movil
-    // );
-    // cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
-    // cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
-    // cy.get('#create-button').click();
-
-    // ORDINARIO
-    // cy.contains('Nueva Cubicación').click();
-    // cy.createCub(
-    //   'Cub Ordinario',
-    //   'Full',
-    //   'Contrato Ordinario',
-    //   'ANTOFAGASTA',
-    //   '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
-    //   'DISEÑO',
-    //   'PROYECTOS',
-    //   'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
-    //   '0 - SIN UO'
-    // );
+    // MOVIL;
+    cy.cubBase(
+      'Cub Movil',
+      'Full',
+      contrato_movil,
+      agencia_movil,
+      proveedor_movil
+    );
+    cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
+    cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
+    cy.get('#create-button').click();
 
     // BUCLE
-    // cy.contains('Nuseva Cubicación').click();
+    cy.contains('Nueva Cubicación').click();
     cy.cubBase(
       'Cub Bucle',
       'Full',
@@ -316,10 +302,24 @@ describe('Cubicacion Test', () => {
     cy.get('#create-button').click();
 
     // FIJO
+    cy.contains('Nueva Cubicación').click();
+    cy.cubBase('Cub Fijo', 'Full', contrato_fijo, agencia_fijo, proveedor_fijo);
+    cy.cubFiltros(actividad_fijo.toUpperCase(), tipo_servicio_fijo);
+    cy.cubAddService(serv_1_fijo, serv_1_uo_1_fijo);
+    cy.get('#create-button').click();
+
+    // ORDINARIO
     // cy.contains('Nueva Cubicación').click();
-    // cy.cubBase('Cub Fijo', 'Full', contrato_fijo, agencia_fijo, proveedor_fijo);
-    // cy.cubFiltros(actividad_fijo.toUpperCase(), tipo_servicio_fijo);
-    // cy.cubAddService(serv_1_fijo, serv_1_uo_1_fijo);
-    // cy.get('#create-button').click();
+    // cy.createCub(
+    //   'Cub Ordinario',
+    //   'Full',
+    //   'Contrato Ordinario',
+    //   'ANTOFAGASTA',
+    //   '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
+    //   'DISEÑO',
+    //   'PROYECTOS',
+    //   'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
+    //   '0 - SIN UO'
+    // );
   });
 });
