@@ -80,6 +80,12 @@ _OTFormMovil
     _Select visible item    css:#plan-proyecto > select    ${plan_proyecto}
     _Select visible item    css:#sitio > select            ${sitio}
 
+_OTFormFijo
+    [Arguments]               ${tipo}                                                      ${numero}
+    _Select visible item      css:#control_tipo_numero_interno_id > app-select > select    ${tipo}
+    _Set input text           css:#control_numero_interno > app-input > input              ${numero}
+    _Click visible element    css:#button-agregar > button
+
 _OTFormSustento
     [Arguments]             ${primero}                                          ${segundo}     ${tercero}
     _Select visible item    css:#control_pmo_codigo > app-select > select       ${primero} 
