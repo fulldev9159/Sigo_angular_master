@@ -151,6 +151,19 @@ _OTCheckInfoBucle
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(10) > td:nth-child(2)    ${area_negocio}
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(11) > td:nth-child(2)    ${proyectista}
 
+_OTCheckInfoMovil
+    [Arguments]    ${plan_proyecto}
+    ...            ${sitio}
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)    ${plan_proyecto}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(2) > td:nth-child(2)    ${sitio}
+
+_OTCheckInfoFijo
+    [Arguments]    ${Tipo_numero_interno}
+    ...            ${numero_1}
+
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card > div > div.card-body > table > tr:nth-child(1) > td:nth-child(2)                 ${Tipo_numero_interno}
+    _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(1) > div > div.card-body > table:nth-child(3) > tr:nth-child(2) > td    ${numero_1}
 
 _OTCheckInfoSustento
     [Arguments]                ${tipo}                                                                                                                               ${primero}    ${segundo}    ${tercero}

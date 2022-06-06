@@ -93,8 +93,7 @@ Crear OT MOVIL
 
     sleep                1
     _OTCheckInfoBase     Móvil    UNIFICADO-2019-MOVIL    Cub Movil    Autorizar OT por Proveedor    Abierta    JESSICA MOVISTAR CASTILLO 1    JESSICA MOVISTAR CASTILLO 1    Descripcion de algo movil
-    _OTCheckInfoBucle    0189     
-
+    _OTCheckInfoMovil    3G       ANGOL - ALEMANIA 
 
     _OTCheckInfoSustento    CAPEX    31    10952    P-0077-21-0102-40050-601
 
@@ -102,8 +101,6 @@ Crear OT MOVIL
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(2)    Luk GENERATEL SPA Antonella
 
     close browser
-
-
 
 
 Crear OT FIJO
@@ -124,7 +121,7 @@ Crear OT FIJO
 
     _Click visible element    css:#create-button
 
-    # REVISION
+   # REVISION
     _Have No to exist in table/tab    Cerradas     OT FIJO
     _Have No to exist in table/tab    Ejecucion    OT FIJO
 
@@ -134,13 +131,11 @@ Crear OT FIJO
     _Click visible element         css:#action-buttons > app-menu > button
     _Click visible element         css:#action-buttons > app-menu > p-menu > div > ul > li:nth-child(1) > a
 
-    sleep                1
-    _OTCheckInfoBase     Fijo    UNIFICADO-2019-FIJA    Cub Fijo    Autorizar OT por Proveedor    Abierta    JESSICA MOVISTAR CASTILLO 1    JESSICA MOVISTAR CASTILLO 1    Descripcion de algo fijo
-    _OTCheckInfoBucle    0189    
-
+    sleep               1
+    _OTCheckInfoBase    Fijo        UNIFICADO-2019-FIJA    Cub Fijo    Autorizar OT por Proveedor    Abierta    JESSICA MOVISTAR CASTILLO 1    JESSICA MOVISTAR CASTILLO 1    Descripcion de algo fijo
+    _OTCheckInfoFijo    @TIEMPOS    123456                 
 
     _OTCheckInfoSustento    CAPEX    31    10952    P-0077-21-0102-40050-601
-
 
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(1)    ADM_CONTRATO
     _Element text should be    css:app-info-ot > div > div:nth-child(2) > app-card:nth-child(2) > div > div.card-body > table > tr.ng-star-inserted > td:nth-child(2)    Luk GENERATEL SPA Antonella
