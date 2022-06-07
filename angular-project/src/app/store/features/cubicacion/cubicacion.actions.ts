@@ -127,7 +127,7 @@ export const getTipoCubicacion4CubError = createAction(
 
 // GET ACTIVIDADES 4 CUB
 export const getActividades4Cub = createAction(
-  '[Cubicacion] getTipoCubicacion4Cub '
+  '[Cubicacion] getActividades4Cub '
 );
 export const getActividades4CubSuccess = createAction(
   '[Cubicacion] getActividades4Cub Success',
