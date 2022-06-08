@@ -18,6 +18,7 @@
       <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
     </div>
   </div>
+  <!-- <pre>{{ values | json }}</pre> -->
 
   <form [formGroup]="formCub">
     <div class="row justify-content-center container-formulario-principal">
@@ -29,10 +30,161 @@
             </div>
           </div>
 
+          <div class="col-md-6 col-sm-12">
+            <div id="tipoCub">
+              <app-select [control]="formControls.tipocubicacion" label="* Tipo Cubicación">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione un tipo</option>
+                  <ng-container *ngFor="let item of tipoCubicacion4Cub$|async">
+                    <option [value]="item.id">
+                      {{ item.descripcion }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+          </div>
 
         </div>
-      </div>
+        <div class="row">
+          <div class="col-md-5 col-sm-12" style="border: 1px solid #c6c6c6;margin-top: 11px; padding: 14px;">
+            <div id="contratosUser">
+              <app-select [control]="formControls.contrato" label="* Contrato">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione un contrato</option>
+                  <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
+                    <option [value]="contrato.contrato_id">
+                      {{ contrato.model_contrato_id.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
 
+            <br>
+            <div id="agencias">
+              <app-select [control]="formControls.agencia_id" label="* Agencia">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione una agencia</option>
+                  <ng-container *ngFor="let agencia of agencias4Cub$|async">
+                    <option [value]="agencia.id">
+                      {{ agencia.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+
+            <br>
+            <div id="proveedores">
+              <app-select [control]="formControls.cmarcoproveedor_id" label="* Proveedor">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione un Proveedor</option>
+                  <ng-container *ngFor="let prov of proveedores4Cub$|async">
+                    <option [value]="prov.cmarco_has_proveedor_id">
+                      {{prov.codigo_acuerdo}} - {{ prov.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-12">
+            <br>
+            <div id="direccion">
+              <div class="row">
+                <div class="col-md-6 col-sm-6" id="direcciondesde">
+                  <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
+                </div>
+                <div class="col-md-6 col-sm-6" id="alturadesde">
+                  <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6" id="direccionhasta">
+                  <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
+                </div>
+                <div class="col-md-6 col-sm-6" id="alturahasta">
+                  <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
+                </div>
+              </div>
+            </div>
+
+            <div id="descripcion">
+              <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
+              </app-textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="filtroservicios" [formGroup]="formFiltros">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div id="actividad">
+                <app-select [control]="formFiltrosControls.actividad_id" label="* Actividad">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione una Actividad</option>
+                    <ng-container *ngFor="let item of actividad4Cub$|async">
+                      <option [value]="item.id">
+                        {{item.descripcion}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
+              <!-- <br> -->
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div id="tiposervicio">
+                <app-select [control]="formFiltrosControls.tipo_servicio_id" label="* Tipo Servicio / Especialidad">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
+                    <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
+                      <option [value]="item.id">
+                        {{item.descripcion}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div id="servicios">
+                <label>Nro Prod. - Servicio: </label>
+                <p-dropdown [options]="servicios4Cub$|async" formControlName="servicio_id" optionLabel="name" placeholder="Seleccione.." [filter]="true" filterBy="name" [showClear]="true" styleClass="dropdown-service"></p-dropdown>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div id="unidad-obra">
+                <label>Código - Unidad de Obra: </label>
+                <p-dropdown [options]="unidadObra4Cub$|async" formControlName="unidad_obra_cod" optionLabel="name" placeholder="Seleccione.." [filter]="true" filterBy="name" [showClear]="true" styleClass="dropdown-service"></p-dropdown>
+
+                <!-- <app-select [control]="formFiltrosControls.unidad_obra_cod" label="* Código - Unidad de Obra">
+                  <ng-container options>
+                    <option value="null" selected disabled>Seleccione una unidad de obra</option>
+                    <ng-container *ngFor="let item of unidadObra4Cub$|async">
+                      <option [value]="item.model_unidad_obra_cod.codigo">
+                        {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
+                      </option>
+                    </ng-container>
+                  </ng-container>
+                </app-select> -->
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <pre>{{formFiltros.value|json}}</pre>
+          <!-- <div id="button-agregar">
+            <button (click)="agregar()">Agregar</button>
+            <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra </p>
+          </div> -->
+        </div>
+      </div>
     </div>
   </form>
 </div>

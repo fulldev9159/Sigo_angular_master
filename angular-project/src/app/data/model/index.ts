@@ -30,3 +30,8 @@ export interface StatusResponse {
 export interface MessageNotifyEffect {
   [i: string]: string;
 }
+
+export interface SelectType {
+  name: string;
+  code: string;
+}

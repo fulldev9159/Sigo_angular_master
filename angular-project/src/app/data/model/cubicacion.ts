@@ -182,6 +182,7 @@ export interface Servicios4Cub {
   unidad_codigo: string;
   unidad_desripcion: string;
   unidad_id: number;
+  numero_producto: string;
 }
 
 //   GET UNIDADES DE OBREA 4 CUB
