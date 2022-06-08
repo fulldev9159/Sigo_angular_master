@@ -56,6 +56,26 @@
       }
     }
   }
+
+
+  #create-button {
+    background: #00507a;
+    color: white;
+    border: 0.1rem solid #2155e6;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: 0.6rem;
+
+    &:hover {
+      background: #1883bd;
+    }
+
+    &:disabled {
+      background: #dbd5d5;
+      color: #9b9b9b;
+      border: 1px solid;
+    }
+  }
 }
 
 table {
@@ -201,6 +221,6 @@ input[type=number] {
 
 
 .dropdown-service {
-  width: 36.3rem;
-  max-width: 36.3rem;
+  width: 100%;
+  max-width: 100%;
 }

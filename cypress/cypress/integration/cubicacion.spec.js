@@ -59,7 +59,7 @@ describe('Cubicacion Test', () => {
 
     cy.get('#create-button').should('be.disabled');
   });
-  it('Revisasr que se agreguen correctamente los items al carrito', () => {
+  it.only('Revisasr que se agreguen correctamente los items al carrito', () => {
     cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
     cy.cubFiltros(
       actividad_test.toUpperCase(),

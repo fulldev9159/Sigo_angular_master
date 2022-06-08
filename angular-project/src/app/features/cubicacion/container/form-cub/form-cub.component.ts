@@ -263,31 +263,28 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(
-      this.formCub
-        .get('table')
-        .valueChanges.pipe(withLatestFrom(this.carrito$))
-        .subscribe(([cantidadesForm, carrito]) => {
-          // console.log('table exec', cantidadesForm);
-          this.totalServicio = 0;
-          this.totalUO = 0;
-          if (cantidadesForm.length > 0) {
-            cantidadesForm.forEach((cantidadServicio: Carrito) => {
-              // console.log('CantidadServicios', cantidadServicio);
-              const subtotal =
-                +cantidadServicio.servicio_precio_final_clp *
-                +cantidadServicio.servicio_cantidad;
-              this.totalServicio = this.totalServicio + subtotal;
-              // console.log(cantidadServicio);
-              cantidadServicio.unidades_obras.forEach(cantidadUO => {
-                this.totalUO =
-                  this.totalUO +
-                  +cantidadUO.uo_precio_total_clp * +cantidadUO.uo_cantidad;
+      this.formCub.get('table').valueChanges.subscribe(([cantidadesForm]) => {
+        // console.log('table exec', cantidadesForm);
+        this.totalServicio = 0;
+        this.totalUO = 0;
+        if (cantidadesForm.length > 0) {
+          cantidadesForm.forEach((cantidadServicio: Carrito) => {
+            // console.log('CantidadServicios', cantidadServicio);
+            const subtotal =
+              +cantidadServicio.servicio_precio_final_clp *
+              +cantidadServicio.servicio_cantidad;
+            this.totalServicio = this.totalServicio + subtotal;
+            // console.log(cantidadServicio);
+            cantidadServicio.unidades_obras.forEach(cantidadUO => {
+              this.totalUO =
+                this.totalUO +
+                +cantidadUO.uo_precio_total_clp * +cantidadUO.uo_cantidad;
 
-                // console.log(this.totalUO);
-              });
+              // console.log(this.totalUO);
             });
-          }
-        })
+          });
+        }
+      })
     );
   }
 

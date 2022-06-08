@@ -47,11 +47,38 @@ Cypress.Commands.add('cubFiltros', (actividad, tipo_servicio) => {
 });
 
 Cypress.Commands.add('cubAddService', (servicio, uob) => {
-  cy.get('#servicios > app-select > select ').select(servicio, { force: true });
-  cy.get('#unidad-obra > app-select > select').select(uob);
-  // cy.contains('Agregar').click();
-  cy.get('#button-agregar>button').click();
-  cy.wait(500);
+  cy.get('#servicios > p-dropdown>div').scrollIntoView();
+  cy.get('#servicios > p-dropdown>div').trigger('click');
+  cy.get(
+    '#servicios > p-dropdown>div>.p-dropdown-panel >div>.p-dropdown-panel >input'
+  ).scrollIntoView();
+  cy.get(
+    '#servicios > p-dropdown>div>.p-dropdown-panel >div>.p-dropdown-panel >input'
+  ).type(servicio);
+  cy.get(
+    '#servicios> p-dropdown>div>.p-dropdown-panel>.p-dropdown-items-wrapper'
+  ).scrollIntoView();
+  cy.get(
+    '#servicios > p-dropdown>div>.p-dropdown-panel>.p-dropdown-items-wrapper'
+  ).trigger('click');
+
+  cy.get('#unidad-obra > p-dropdown>div').scrollIntoView();
+  cy.get('#unidad-obra > p-dropdown>div').trigger('click');
+  cy.get(
+    '#unidad-obra > p-dropdown>div>.p-dropdown-panel >div>.p-dropdown-panel >input'
+  ).scrollIntoView();
+  cy.get(
+    '#unidad-obra > p-dropdown>div>.p-dropdown-panel >div>.p-dropdown-panel >input'
+  ).type(uob);
+  cy.get(
+    '#unidad-obra > p-dropdown>div>.p-dropdown-panel>.p-dropdown-items-wrapper'
+  ).scrollIntoView();
+  cy.get(
+    '#unidad-obra > p-dropdown>div>.p-dropdown-panel>.p-dropdown-items-wrapper'
+  ).trigger('click');
+
+  // cy.get('#button-agregar>button').click();
+  // cy.wait(500);
 });
 
 Cypress.Commands.add('cubAddUOB', uob => {

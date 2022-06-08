@@ -18,7 +18,7 @@
       <button pButton type="button" label="Volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined" (click)="goBack()"></button>
     </div>
   </div>
-  <pre>{{ values | json }}</pre>
+  <!-- <pre>{{ values | json }}</pre> -->
 
   <form [formGroup]="formCub">
     <div class="row justify-content-center container-formulario-principal">
@@ -353,6 +353,49 @@
             </tbody>
           </table>
         </div>
+
+        <ng-container *ngIf="(carrito$|async).length === 0">
+          <div class="text-left">
+            <p style="color: #e61717;
+            letter-spacing: 1px;
+            font-weight: 700;">Al menos 1 servicio debe ser ingresado </p>
+          </div>
+        </ng-container>
+
+        <div class="row" id="table-totales">
+          <div class="col-9"></div>
+          <div class="col-3">
+            <table style="width: 100%;">
+              <tr>
+                <td>Total Servicios</td>
+                <td>{{totalServicio| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+              <tr>
+                <td>Total Unidades Obra</td>
+                <td>{{totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+              <tr>
+                <td style="background: #cccccc;
+                    font-size: 15px;">Total Cubicación</td>
+                <td>{{totalServicio + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <br>
+        <br>
+        <div style="display:flex;align-items: center;justify-content: center;">
+          <ng-container *ngIf="mode === 'add'">
+            <!-- <button (click)="CreateCub()" [disabled]="!formCub.valid || (carrito$|async).length === 0" id="create-button">Crear Cubicación</button> -->
+            <button [disabled]="true" id="create-button">Crear Cubicación</button>
+          </ng-container>
+
+          <ng-container *ngIf="mode === 'edit'">
+            <!-- <button (click)="EditCub()" [disabled]="!formCub.valid || (carrito$|async).length === 0" id="create-button">Actualizar Cubicación</button> -->
+          </ng-container>
+        </div>
+
+
       </div>
     </div>
   </form>
