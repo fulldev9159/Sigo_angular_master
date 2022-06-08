@@ -260,7 +260,7 @@ export interface DatosServicio4Cub {
 
 //  GET DATOS UNIDAD OBRA 4 CUB
 export interface RequestGetDatosUnidadObra4Cub {
-  cantidad: number;
+  cantidad?: number;
   uo_codigo: string;
 }
 

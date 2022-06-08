@@ -132,7 +132,6 @@
                   </ng-container>
                 </app-select>
               </div>
-              <!-- <br> -->
             </div>
             <div class="col-md-6 col-sm-6">
               <div id="tiposervicio">
@@ -162,27 +161,16 @@
               <div id="unidad-obra">
                 <label>Código - Unidad de Obra: </label>
                 <p-dropdown [options]="unidadObra4Cub$|async" formControlName="unidad_obra_cod" optionLabel="name" placeholder="Seleccione.." [filter]="true" filterBy="name" [showClear]="true" styleClass="dropdown-service"></p-dropdown>
-
-                <!-- <app-select [control]="formFiltrosControls.unidad_obra_cod" label="* Código - Unidad de Obra">
-                  <ng-container options>
-                    <option value="null" selected disabled>Seleccione una unidad de obra</option>
-                    <ng-container *ngFor="let item of unidadObra4Cub$|async">
-                      <option [value]="item.model_unidad_obra_cod.codigo">
-                        {{item.model_unidad_obra_cod.codigo}} - {{item.model_unidad_obra_cod.descripcion}}
-                      </option>
-                    </ng-container>
-                  </ng-container>
-                </app-select> -->
               </div>
             </div>
           </div>
 
           <br>
           <pre>{{formFiltros.value|json}}</pre>
-          <!-- <div id="button-agregar">
+          <div id="button-agregar">
             <button (click)="agregar()">Agregar</button>
-            <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra </p>
-          </div> -->
+            <!-- <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra </p> -->
+          </div>
         </div>
       </div>
     </div>

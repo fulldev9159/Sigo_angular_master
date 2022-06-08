@@ -21,6 +21,8 @@ import {
   Agencias4Cub,
   ContratosUser,
   Proveedores4Cub,
+  RequestGetDatosServicio4Cub,
+  RequestGetDatosUnidadObra4Cub,
   RequestGetServicios4Cub,
   RequestGetUnidadObra4Cub,
   SelectType,
@@ -238,15 +240,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   onInitSetData(): void {
     this.tipoCubicacion4Cub$ = this.cubicacionFacade.tipoCubicacion4cub$();
-
-    // .pipe(
-    //   map(tipos_cub => {
-    //     return tipos_cub.map(tipo_cub => ({
-    //       name: tipo_cub.descripcion,
-    //       code: tipo_cub.id.toString(),
-    //     }));
-    //   })
-    // );
     this.contratosUser4Cub$ = this.cubicacionFacade.contratosUser4Cub$();
     this.agencias4Cub$ = this.cubicacionFacade
       .agencias4cub$()
@@ -309,6 +302,28 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     } else {
       form.get(key).disable({ emitEvent: false });
     }
+  }
+
+  agregar(): void {
+    const servicio_form = this.formFiltros.get('servicio_id').value;
+    const servicio_id = +servicio_form.code;
+    const uob_form = this.formFiltros.get('unidad_obra_cod').value;
+    const uob_cod = this.uobs.find(
+      uob => uob.id === +uob_form.code
+    ).unidad_obra_cod;
+
+    const request_servicio: RequestGetDatosServicio4Cub = {
+      agencia_id: +this.formCub.get('agencia_id').value,
+      cmarco_has_proveedor_id: +this.formCub.get('cmarcoproveedor_id').value,
+      servicio_id,
+      tipo_servicio_id: +this.formFiltros.get('tipo_servicio_id').value,
+      actividad_id: +this.formFiltros.get('actividad_id').value,
+    };
+    const request_uo: RequestGetDatosUnidadObra4Cub = {
+      uo_codigo: uob_cod,
+    };
+    this.cubicacionFacade.datosServicio4Cub(request_servicio, request_uo);
+    // this.detector.detectChanges();
   }
 
   goBack(): void {
