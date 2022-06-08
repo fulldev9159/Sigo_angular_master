@@ -19,7 +19,9 @@ import { FormCubService } from './form-cub.service';
 import {
   Actividad4Cub,
   Agencias4Cub,
+  Carrito,
   ContratosUser,
+  DatosUnidadObra4Cub,
   Proveedores4Cub,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
@@ -32,7 +34,7 @@ import {
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
 } from '@data';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-cub',
@@ -58,6 +60,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   servicios: Servicios4Cub[];
   unidadObra4Cub$: Observable<SelectType[]> = of([]);
   uobs: UnidadObra4Cub[];
+  servicioUORepetidoAlert$: Observable<boolean> = of(false);
+
+  carrito$: Observable<Carrito[]>;
 
   // FORMULARIO
   formControls: any;
@@ -239,6 +244,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   onInitSetData(): void {
+    this.loading$ = this.baseFacade.loading$();
     this.tipoCubicacion4Cub$ = this.cubicacionFacade.tipoCubicacion4cub$();
     this.contratosUser4Cub$ = this.cubicacionFacade.contratosUser4Cub$();
     this.agencias4Cub$ = this.cubicacionFacade
@@ -294,6 +300,94 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         this.checkAndEnable(this.formFiltros, 'unidad_obra_cod', unidadobras)
       )
     );
+
+    this.servicioUORepetidoAlert$ =
+      this.cubicacionFacade.servicioUORepetidoAlert$();
+
+    this.carrito$ = this.cubicacionFacade.carrito$();
+
+    this.subscription.add(
+      this.carrito$.subscribe(carrito => {
+        carrito.forEach(servicio => {
+          const tableValue: Carrito[] = (this.formCub.get('table') as FormArray)
+            .value;
+          const index_table_servicio = tableValue.findIndex(
+            x => x.servicio_id === servicio.servicio_id
+          );
+
+          if (index_table_servicio === -1) {
+            // console.log(
+            //   'NUEVO SERVICIO'
+            // );
+            const group = new FormGroup({
+              precargado: new FormControl(servicio.precargado ?? false, []),
+              servicio_rowid: new FormControl(
+                servicio.servicio_rowid ?? null,
+                []
+              ),
+              servicio_id: new FormControl(servicio.servicio_id, [
+                Validators.required,
+              ]),
+              servicio_cantidad: new FormControl(1, [
+                Validators.required,
+                Validators.min(1),
+              ]),
+              // servicio_precio_final_clp: new FormControl(servicio.servicio_precio_final_clp, [
+              //   Validators.required,
+              // ]),
+              // actividad_descripcion: new FormControl(actividad_descripcion, [
+              //   Validators.required,
+              // ]),
+              // servicio_tipo: new FormControl(servicio.servicio_tipo, [
+              //   Validators.required,
+              // ]),
+              unidades_obra: new FormArray(
+                servicio.unidades_obras.map(uo => {
+                  return this.makeUOForm(uo);
+                })
+              ),
+            });
+            (this.formCub.get('table') as FormArray).push(group);
+          } else {
+            // console.log(
+            //   'SERVICIO EXISTENTE'
+            // );
+            const UOTableForm = (this.formCub.get('table') as FormArray)
+              .at(index_table_servicio)
+              .get('unidades_obra') as FormArray;
+            const uosForm: DatosUnidadObra4Cub[] = UOTableForm.value;
+            const uosCarrito = servicio.unidades_obras;
+            const getUosNuevas = (
+              carritoActual: DatosUnidadObra4Cub[],
+              form: DatosUnidadObra4Cub[]
+            ) => {
+              return carritoActual.filter(object1 => {
+                return !form.some(object2 => {
+                  return object1.uo_codigo === object2.uo_codigo;
+                });
+              });
+            };
+            const uosNuevas = getUosNuevas(uosCarrito, uosForm);
+            uosNuevas.forEach(uo => {
+              UOTableForm.push(this.makeUOForm(uo));
+            });
+          }
+        });
+      })
+    );
+  }
+
+  makeUOForm(uo: DatosUnidadObra4Cub): FormGroup {
+    return new FormGroup({
+      precargado: new FormControl(uo.precargado ?? false, []),
+      uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
+
+      uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
+      cantidad_uo: new FormControl(1, [Validators.required, Validators.min(1)]),
+      // precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
+      //   Validators.required,
+      // ]),
+    });
   }
 
   checkAndEnable(form: FormGroup, key: string, array: any[]): void {

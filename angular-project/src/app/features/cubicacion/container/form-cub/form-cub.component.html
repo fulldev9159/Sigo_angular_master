@@ -166,11 +166,59 @@
           </div>
 
           <br>
-          <pre>{{formFiltros.value|json}}</pre>
+          <!-- <pre>{{formFiltros.value|json}}</pre> -->
           <div id="button-agregar">
             <button (click)="agregar()">Agregar</button>
-            <!-- <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra </p> -->
+            <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra </p>
           </div>
+        </div>
+
+        <br>
+        <div class="info" *ngIf=" mode === 'edit'">
+          <span class="info-title">
+            INFO
+          </span>
+          <div class="data-info">
+            <div class="box box-1"></div>
+            <span style="margin-left: 5px;">Servicio/UO nuevos</span>
+          </div>
+          <div class="data-info">
+            <div class="box box-2"></div>
+            <span style="margin-left: 5px;">Servicio/UO existente en la cubicación original</span>
+          </div>
+        </div>
+
+        <br>
+        <div class="table-carrito">
+          <table style="width:100%">
+            <thead>
+              <tr>
+                <th colspan="7">Servicios</th>
+                <th colspan="8">Unidad Obra</th>
+              </tr>
+              <tr>
+                <th>Cod</th>
+                <th>Descripción</th>
+                <th>Esp.</th>
+                <th>Cantidad</th>
+                <!-- <th>Unidad</th> -->
+                <th>Precio</th>
+                <th>Total Servicio</th>
+                <th></th>
+
+                <th>Cód</th>
+                <th>Descripción</th>
+                <th>Actividad</th>
+                <th>Cantidad</th>
+                <th>Tipo Moneda</th>
+                <th>Precio</th>
+                <th>Total UO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody formArrayName="table">
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
