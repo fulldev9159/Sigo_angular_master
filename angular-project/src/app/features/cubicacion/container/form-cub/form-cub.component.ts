@@ -1,14 +1,7 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ChangeDetectorRef,
-  ViewEncapsulation,
-} from '@angular/core';
-import { observable, Observable, of, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Observable, of, Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
-import { map, take, tap } from 'rxjs/operators';
+import { map, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -22,6 +15,7 @@ import {
   Carrito,
   ContratosUser,
   DatosUnidadObra4Cub,
+  Materiales4Cub,
   Proveedores4Cub,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
@@ -34,7 +28,15 @@ import {
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
 } from '@data';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-form-cub',
@@ -63,6 +65,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   servicioUORepetidoAlert$: Observable<boolean> = of(false);
 
   carrito$: Observable<Carrito[]>;
+  materialesSelected: Materiales4Cub[] = [];
+
+  // DISPLAY MODALS
+  displayModalMateriales = false;
 
   // FORMULARIO
   formControls: any;
@@ -80,6 +86,20 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   totalServicio = 0;
   totalUO = 0;
+
+  trashICon = faTrash;
+
+  errorMessageFn = errors => {
+    if (errors.required) {
+      return 'Este campo es requerido';
+    } else if (errors.whitespace) {
+      return 'Este campo es requerido';
+    } else if (errors.maxlength) {
+      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
+    } else if (errors.min) {
+      return 'El valor debe ser mayor o igual a 1';
+    }
+  };
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
@@ -241,6 +261,34 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           }
         })
     );
+
+    this.subscription.add(
+      this.formCub
+        .get('table')
+        .valueChanges.pipe(withLatestFrom(this.carrito$))
+        .subscribe(([cantidadesForm, carrito]) => {
+          // console.log('table exec', cantidadesForm);
+          this.totalServicio = 0;
+          this.totalUO = 0;
+          if (cantidadesForm.length > 0) {
+            cantidadesForm.forEach((cantidadServicio: Carrito) => {
+              // console.log('CantidadServicios', cantidadServicio);
+              const subtotal =
+                +cantidadServicio.servicio_precio_final_clp *
+                +cantidadServicio.servicio_cantidad;
+              this.totalServicio = this.totalServicio + subtotal;
+              // console.log(cantidadServicio);
+              cantidadServicio.unidades_obras.forEach(cantidadUO => {
+                this.totalUO =
+                  this.totalUO +
+                  +cantidadUO.uo_precio_total_clp * +cantidadUO.uo_cantidad;
+
+                // console.log(this.totalUO);
+              });
+            });
+          }
+        })
+    );
   }
 
   onInitSetData(): void {
@@ -390,6 +438,71 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     });
   }
 
+  formCntl(servicio_id: string, control: string): AbstractControl {
+    console.log('control a buscar', servicio_id);
+    const controlName = 'table';
+    const index = (
+      this.formCub.get('table').value as Array<{ servicio_id: string }>
+    ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id);
+    console.log('index encontrado', index);
+    return (this.formCub.controls[controlName] as FormArray).controls[
+      index
+    ].get(control);
+  }
+
+  formCntlUO(
+    servicio_id: string,
+    control: string,
+    uo_codigo: string
+  ): AbstractControl {
+    const tableForm = this.formCub.get('table') as FormArray;
+    const tableValue: Carrito[] = tableForm.value;
+    const index_service = tableValue.findIndex(
+      tableServicio => tableServicio.servicio_id === +servicio_id
+    );
+    const serviceFrom = tableForm.at(index_service);
+    const UOForm: DatosUnidadObra4Cub[] =
+      serviceFrom.get('unidades_obra').value;
+    const controlName = 'table';
+    const index_uo = UOForm.findIndex(
+      uoTable => uoTable.uo_codigo === uo_codigo
+    );
+    return (
+      (this.formCub.controls[controlName] as FormArray).controls[
+        index_service
+      ].get('unidades_obra') as FormArray
+    ).controls[index_uo].get(control);
+  }
+
+  deleteServiceCarrito(servicio_id: string): void {
+    this.cubicacionFacade.deleteServiceCarrito4CreateCub(+servicio_id);
+    (this.formCub.get('table') as FormArray).removeAt(
+      (
+        this.formCub.get('table').value as Array<{ servicio_id: string }>
+      ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id)
+    );
+  }
+
+  deleteUOCarrito(servicio_id: string, uo_cod: string): void {
+    this.cubicacionFacade.deleteUOCarrito4CreateCub(+servicio_id, uo_cod);
+    const index_service = (
+      this.formCub.get('table').value as Array<{ servicio_id: string }>
+    ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id);
+    (
+      (
+        (this.formCub.get('table') as FormArray).at(index_service) as FormGroup
+      ).get('unidades_obra') as FormArray
+    ).removeAt(
+      (
+        (
+          (this.formCub.get('table') as FormArray).at(
+            index_service
+          ) as FormGroup
+        ).get('unidades_obra').value as Array<{ uo_codigo: string }>
+      ).findIndex(uo => uo.uo_codigo === uo_cod)
+    );
+  }
+
   checkAndEnable(form: FormGroup, key: string, array: any[]): void {
     if (array.length > 0) {
       form.get(key).enable({ emitEvent: false });
@@ -418,6 +531,16 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     };
     this.cubicacionFacade.datosServicio4Cub(request_servicio, request_uo);
     // this.detector.detectChanges();
+  }
+
+  showMateriales(materiales: Materiales4Cub[]): void {
+    this.materialesSelected = materiales;
+    this.displayModalMateriales = true;
+  }
+
+  closeModalMateriales(): void {
+    this.materialesSelected = [];
+    this.displayModalMateriales = false;
   }
 
   goBack(): void {

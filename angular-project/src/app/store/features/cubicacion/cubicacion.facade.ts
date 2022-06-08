@@ -165,16 +165,16 @@ export class CubicacionFacade {
   }
 
   //  DELETE SERVICE FROM CARRITO 4 CREATE CUB
-  public deleteServiceCarrito4CreateCub(servicio_cod: string): void {
+  public deleteServiceCarrito4CreateCub(servicio_id: number): void {
     this.store.dispatch(
-      cubicacionActions.delteServiceCarrito4CreateCub({ servicio_cod })
+      cubicacionActions.delteServiceCarrito4CreateCub({ servicio_id })
     );
   }
 
   //  DELETE UO FROM CARRITO 4 CREATE CUB
-  public deleteUOCarrito4CreateCub(servicio_cod: string, uo_cod: string): void {
+  public deleteUOCarrito4CreateCub(servicio_id: number, uo_cod: string): void {
     this.store.dispatch(
-      cubicacionActions.delteUOCarrito4CreateCub({ servicio_cod, uo_cod })
+      cubicacionActions.delteUOCarrito4CreateCub({ servicio_id, uo_cod })
     );
   }
 

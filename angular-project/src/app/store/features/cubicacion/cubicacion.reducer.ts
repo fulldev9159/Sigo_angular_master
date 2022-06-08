@@ -188,7 +188,7 @@ export const reducerCubicacion = createReducer(
   ),
   on(
     CubicacionActions.delteServiceCarrito4CreateCub,
-    (state, { servicio_cod }) => {
+    (state, { servicio_id }) => {
       // console.log(
       //   'Eliminar el indice',
       //   ...state.carrito.filter(
@@ -199,7 +199,7 @@ export const reducerCubicacion = createReducer(
         ...state,
         carrito: [
           ...state.carrito.filter(
-            servicios => servicios.servicio_codigo !== servicio_cod
+            servicios => servicios.servicio_id !== servicio_id
           ),
         ],
       };
@@ -207,9 +207,9 @@ export const reducerCubicacion = createReducer(
   ),
   on(
     CubicacionActions.delteUOCarrito4CreateCub,
-    (state, { servicio_cod, uo_cod }) => {
+    (state, { servicio_id, uo_cod }) => {
       const index_service = state.carrito.findIndex(
-        x => x.servicio_codigo === servicio_cod
+        x => x.servicio_id === servicio_id
       );
       if (index_service >= 0) {
         let temp = copy(state.carrito);
@@ -219,9 +219,7 @@ export const reducerCubicacion = createReducer(
         );
         temp_service.unidades_obras = temp_uo;
         console.log('Temp UO', temp_uo);
-        temp = temp.filter(
-          servicios => servicios.servicio_codigo !== servicio_cod
-        );
+        temp = temp.filter(servicios => servicios.servicio_id !== servicio_id);
         console.log('tempTotal', temp);
         return {
           ...state,
