@@ -53,6 +53,7 @@ describe('Cubicacion Test', () => {
   const serv_1_uo_1_fijo = '0 - SIN UO';
 
   beforeEach(() => {
+    cy.viewport(1000, 1700);
     cy.login('mgestor1', '123', 'Gestor/JP');
     cy.contains('Cubicación').click();
     cy.contains('Crear Cubicación').click();
@@ -70,7 +71,7 @@ describe('Cubicacion Test', () => {
     cy.cubAddService(serv_1_test, serv_1_uo_1_test);
     // Agregar otro servicio con 2 UO
     cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-    cy.cubAddUOB(serv_2_uo_2_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
 
     // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
     // SERVICIO 1
@@ -112,9 +113,9 @@ describe('Cubicacion Test', () => {
     // ELIMINAR UNO, AGREGAR TODO Y ELIMINAR TODO
     cy.get(':nth-child(8) > .icon > .eliminar-color').click();
 
-    cy.cubAddUOB(serv_2_uo_1_test);
-    cy.cubAddUOB(serv_2_uo_3_test);
-    cy.cubAddUOB(serv_2_uo_4_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_3_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_4_test);
 
     // SERVICIO 1
     cy.cubCheckTableDataServUO(
@@ -154,10 +155,10 @@ describe('Cubicacion Test', () => {
 
     // CASO ESPECIAL
     cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-    cy.cubAddUOB(serv_2_uo_2_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
     cy.cubAddService(serv_1_test, serv_1_uo_1_test);
     cy.cubAddService(serv_2_test, serv_2_uo_3_test);
-    cy.cubAddUOB(serv_2_uo_4_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_4_test);
 
     // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
     // SERVICIO 1

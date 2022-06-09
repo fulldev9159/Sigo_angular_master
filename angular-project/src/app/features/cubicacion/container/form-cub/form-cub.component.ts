@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewEncapsulation,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map, take, tap, withLatestFrom } from 'rxjs/operators';
@@ -106,7 +112,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     private authFacade: AuthFacade,
     private baseFacade: BaseFacade,
     private router: Router,
-    private formcubService: FormCubService
+    private formcubService: FormCubService,
+    private detector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -263,24 +270,24 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(
-      this.formCub.get('table').valueChanges.subscribe(([cantidadesForm]) => {
-        // console.log('table exec', cantidadesForm);
+      this.formCub.get('table').valueChanges.subscribe(table => {
+        console.log('table exec', table);
         this.totalServicio = 0;
         this.totalUO = 0;
-        if (cantidadesForm.length > 0) {
-          cantidadesForm.forEach((cantidadServicio: Carrito) => {
-            // console.log('CantidadServicios', cantidadServicio);
+        if (table.length > 0) {
+          table.forEach((cantidadServicio: Carrito) => {
+            console.log('CantidadServicios', cantidadServicio);
             const subtotal =
               +cantidadServicio.servicio_precio_final_clp *
               +cantidadServicio.servicio_cantidad;
             this.totalServicio = this.totalServicio + subtotal;
-            // console.log(cantidadServicio);
+            console.log('Total Servicio', this.totalServicio);
             cantidadServicio.unidades_obras.forEach(cantidadUO => {
               this.totalUO =
                 this.totalUO +
                 +cantidadUO.uo_precio_total_clp * +cantidadUO.uo_cantidad;
 
-              // console.log(this.totalUO);
+              console.log('Total UOB', this.totalUO);
             });
           });
         }
@@ -377,16 +384,11 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 Validators.required,
                 Validators.min(1),
               ]),
-              // servicio_precio_final_clp: new FormControl(servicio.servicio_precio_final_clp, [
-              //   Validators.required,
-              // ]),
-              // actividad_descripcion: new FormControl(actividad_descripcion, [
-              //   Validators.required,
-              // ]),
-              // servicio_tipo: new FormControl(servicio.servicio_tipo, [
-              //   Validators.required,
-              // ]),
-              unidades_obra: new FormArray(
+              servicio_precio_final_clp: new FormControl(
+                servicio.servicio_precio_final_clp,
+                [Validators.required]
+              ),
+              unidades_obras: new FormArray(
                 servicio.unidades_obras.map(uo => {
                   return this.makeUOForm(uo);
                 })
@@ -399,7 +401,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             // );
             const UOTableForm = (this.formCub.get('table') as FormArray)
               .at(index_table_servicio)
-              .get('unidades_obra') as FormArray;
+              .get('unidades_obras') as FormArray;
             const uosForm: DatosUnidadObra4Cub[] = UOTableForm.value;
             const uosCarrito = servicio.unidades_obras;
             const getUosNuevas = (
@@ -428,20 +430,20 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
 
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
-      cantidad_uo: new FormControl(1, [Validators.required, Validators.min(1)]),
-      // precio_clp_uo: new FormControl(uo.uo_precio_total_clp, [
-      //   Validators.required,
-      // ]),
+      uo_cantidad: new FormControl(1, [Validators.required, Validators.min(1)]),
+      uo_precio_total_clp: new FormControl(uo.uo_precio_total_clp, [
+        Validators.required,
+      ]),
     });
   }
 
   formCntl(servicio_id: string, control: string): AbstractControl {
-    console.log('control a buscar', servicio_id);
+    // console.log('control a buscar', servicio_id);
     const controlName = 'table';
     const index = (
       this.formCub.get('table').value as Array<{ servicio_id: string }>
     ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id);
-    console.log('index encontrado', index);
+    // console.log('index encontrado', index);
     return (this.formCub.controls[controlName] as FormArray).controls[
       index
     ].get(control);
@@ -452,14 +454,20 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     control: string,
     uo_codigo: string
   ): AbstractControl {
+    // console.log('Datos');
+    // console.log(
+    //   `servicio: ${servicio_id} - control ${control} - uo_codigo: ${uo_codigo}`
+    // );
     const tableForm = this.formCub.get('table') as FormArray;
     const tableValue: Carrito[] = tableForm.value;
     const index_service = tableValue.findIndex(
       tableServicio => tableServicio.servicio_id === +servicio_id
     );
+    // console.log('index service UOB', index_service);
     const serviceFrom = tableForm.at(index_service);
     const UOForm: DatosUnidadObra4Cub[] =
-      serviceFrom.get('unidades_obra').value;
+      serviceFrom.get('unidades_obras').value;
+    // console.log('UOForm', UOForm);
     const controlName = 'table';
     const index_uo = UOForm.findIndex(
       uoTable => uoTable.uo_codigo === uo_codigo
@@ -467,7 +475,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     return (
       (this.formCub.controls[controlName] as FormArray).controls[
         index_service
-      ].get('unidades_obra') as FormArray
+      ].get('unidades_obras') as FormArray
     ).controls[index_uo].get(control);
   }
 
@@ -488,14 +496,14 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     (
       (
         (this.formCub.get('table') as FormArray).at(index_service) as FormGroup
-      ).get('unidades_obra') as FormArray
+      ).get('unidades_obras') as FormArray
     ).removeAt(
       (
         (
           (this.formCub.get('table') as FormArray).at(
             index_service
           ) as FormGroup
-        ).get('unidades_obra').value as Array<{ uo_codigo: string }>
+        ).get('unidades_obras').value as Array<{ uo_codigo: string }>
       ).findIndex(uo => uo.uo_codigo === uo_cod)
     );
   }
@@ -527,7 +535,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       uo_codigo: uob_cod,
     };
     this.cubicacionFacade.datosServicio4Cub(request_servicio, request_uo);
-    // this.detector.detectChanges();
+    this.detector.detectChanges();
   }
 
   showMateriales(materiales: Materiales4Cub[]): void {
