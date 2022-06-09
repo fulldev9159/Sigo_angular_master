@@ -53,7 +53,7 @@ describe('Cubicacion Test', () => {
   const serv_1_uo_1_fijo = '0 - SIN UO';
 
   beforeEach(() => {
-    cy.viewport(1000, 1700);
+    cy.viewport(1500, 1700);
     cy.login('mgestor1', '123', 'Gestor/JP');
     cy.contains('Cubicación').click();
     cy.contains('Crear Cubicación').click();
@@ -191,136 +191,136 @@ describe('Cubicacion Test', () => {
     cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, 0);
   });
 
-  it('Revisar cambios de cantidades', () => {
-    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-    cy.cubFiltros(
-      actividad_test.toUpperCase(),
-      tipo_servicio_test.toUpperCase()
-    );
+  // it('Revisar cambios de cantidades', () => {
+  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+  //   cy.cubFiltros(
+  //     actividad_test.toUpperCase(),
+  //     tipo_servicio_test.toUpperCase()
+  //   );
 
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
 
-    // AUMENTAR LA CANTIDAD SERVICIO
-    const fila2 = '.table-carrito > table > tbody > tr:nth-child(2) > td';
-    cy.get(fila2 + ':nth-child(4)>app-input>input')
-      .clear()
-      .type('{del}4');
+  //   // AUMENTAR LA CANTIDAD SERVICIO
+  //   const fila2 = '.table-carrito > table > tbody > tr:nth-child(2) > td';
+  //   cy.get(fila2 + ':nth-child(4)>app-input>input')
+  //     .clear()
+  //     .type('{del}4');
 
-    // REVISAR VALORES
-    // SERVICIO 1
-    // cy.cubCheckTableDataServUO(
-    //   1,
-    //   serv_1_test,
-    //   tipo_servicio_test,
-    //   1,
-    //   serv_1_precio_test,
-    //   serv_1_uo_1_test,
-    //   actividad_test,
-    //   1,
-    //   serv_1_uo_1_precio_test
-    // );
-    // // SERVICIO 2
-    // cy.cubCheckTableDataServUO(
-    //   2,
-    //   serv_2_test,
-    //   tipo_servicio_test,
-    //   4,
-    //   serv_2_precio_test,
-    //   serv_2_uo_4_test,
-    //   actividad_test,
-    //   1,
-    //   0
-    // );
-  });
+  //   // REVISAR VALORES
+  //   // SERVICIO 1
+  //   // cy.cubCheckTableDataServUO(
+  //   //   1,
+  //   //   serv_1_test,
+  //   //   tipo_servicio_test,
+  //   //   1,
+  //   //   serv_1_precio_test,
+  //   //   serv_1_uo_1_test,
+  //   //   actividad_test,
+  //   //   1,
+  //   //   serv_1_uo_1_precio_test
+  //   // );
+  //   // // SERVICIO 2
+  //   // cy.cubCheckTableDataServUO(
+  //   //   2,
+  //   //   serv_2_test,
+  //   //   tipo_servicio_test,
+  //   //   4,
+  //   //   serv_2_precio_test,
+  //   //   serv_2_uo_4_test,
+  //   //   actividad_test,
+  //   //   1,
+  //   //   0
+  //   // );
+  // });
 
-  it('Revisar que no permita agregar el mismo servicio/uo', () => {
-    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-    cy.cubFiltros(
-      actividad_test.toUpperCase(),
-      tipo_servicio_test.toUpperCase()
-    );
+  // it('Revisar que no permita agregar el mismo servicio/uo', () => {
+  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+  //   cy.cubFiltros(
+  //     actividad_test.toUpperCase(),
+  //     tipo_servicio_test.toUpperCase()
+  //   );
 
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
 
-    cy.get('#mensaje-repetido').contains(
-      'Ya ha agregado este servico/Unidad Obra'
-    );
-  });
+  //   cy.get('#mensaje-repetido').contains(
+  //     'Ya ha agregado este servico/Unidad Obra'
+  //   );
+  // });
 
-  it('Revisar que no permita agregar el mismo servicio/uo', () => {
-    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-    cy.cubFiltros(
-      actividad_test.toUpperCase(),
-      tipo_servicio_test.toUpperCase()
-    );
+  // it('Revisar que no permita agregar el mismo servicio/uo', () => {
+  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+  //   cy.cubFiltros(
+  //     actividad_test.toUpperCase(),
+  //     tipo_servicio_test.toUpperCase()
+  //   );
 
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
 
-    cy.get(':nth-child(15) > .icon > .ui').click();
-    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(1)').contains(
-      '165211'
-    );
-    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(2)').contains(
-      'KIT RETENCION FIBRA 14 MM'
-    );
-    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(3)').contains(
-      'PROVEEDOR'
-    );
-    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
-      '$57.000'
-    );
-  });
+  //   cy.get(':nth-child(15) > .icon > .ui').click();
+  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(1)').contains(
+  //     '165211'
+  //   );
+  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(2)').contains(
+  //     'KIT RETENCION FIBRA 14 MM'
+  //   );
+  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(3)').contains(
+  //     'PROVEEDOR'
+  //   );
+  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
+  //     '$57.000'
+  //   );
+  // });
 
-  it('Crear cubicaciones', () => {
-    // MOVIL;
-    cy.cubBase(
-      'Cub Movil',
-      'Full',
-      contrato_movil,
-      agencia_movil,
-      proveedor_movil
-    );
-    cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
-    cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
-    cy.get('#create-button').click();
+  // it('Crear cubicaciones', () => {
+  //   // MOVIL;
+  //   cy.cubBase(
+  //     'Cub Movil',
+  //     'Full',
+  //     contrato_movil,
+  //     agencia_movil,
+  //     proveedor_movil
+  //   );
+  //   cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
+  //   cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
+  //   cy.get('#create-button').click();
 
-    // BUCLE
-    cy.contains('Nueva Cubicación').click();
-    cy.cubBase(
-      'Cub Bucle',
-      'Full',
-      contrato_bucle,
-      agencia_bucle,
-      proveedor_bucle
-    );
-    cy.cubFiltros(
-      actividad_bucle.toUpperCase(),
-      tipo_servicio_bucle.toUpperCase()
-    );
-    cy.cubAddService(serv_1_bucle, serv_1_uo_1_bucle);
-    cy.get('#create-button').click();
+  //   // BUCLE
+  //   cy.contains('Nueva Cubicación').click();
+  //   cy.cubBase(
+  //     'Cub Bucle',
+  //     'Full',
+  //     contrato_bucle,
+  //     agencia_bucle,
+  //     proveedor_bucle
+  //   );
+  //   cy.cubFiltros(
+  //     actividad_bucle.toUpperCase(),
+  //     tipo_servicio_bucle.toUpperCase()
+  //   );
+  //   cy.cubAddService(serv_1_bucle, serv_1_uo_1_bucle);
+  //   cy.get('#create-button').click();
 
-    // FIJO
-    cy.contains('Nueva Cubicación').click();
-    cy.cubBase('Cub Fijo', 'Full', contrato_fijo, agencia_fijo, proveedor_fijo);
-    cy.cubFiltros(actividad_fijo.toUpperCase(), tipo_servicio_fijo);
-    cy.cubAddService(serv_1_fijo, serv_1_uo_1_fijo);
-    cy.get('#create-button').click();
+  //   // FIJO
+  //   cy.contains('Nueva Cubicación').click();
+  //   cy.cubBase('Cub Fijo', 'Full', contrato_fijo, agencia_fijo, proveedor_fijo);
+  //   cy.cubFiltros(actividad_fijo.toUpperCase(), tipo_servicio_fijo);
+  //   cy.cubAddService(serv_1_fijo, serv_1_uo_1_fijo);
+  //   cy.get('#create-button').click();
 
-    // ORDINARIO
-    // cy.contains('Nueva Cubicación').click();
-    // cy.createCub(
-    //   'Cub Ordinario',
-    //   'Full',
-    //   'Contrato Ordinario',
-    //   'ANTOFAGASTA',
-    //   '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
-    //   'DISEÑO',
-    //   'PROYECTOS',
-    //   'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
-    //   '0 - SIN UO'
-    // );
-  });
+  //   // ORDINARIO
+  //   // cy.contains('Nueva Cubicación').click();
+  //   // cy.createCub(
+  //   //   'Cub Ordinario',
+  //   //   'Full',
+  //   //   'Contrato Ordinario',
+  //   //   'ANTOFAGASTA',
+  //   //   '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
+  //   //   'DISEÑO',
+  //   //   'PROYECTOS',
+  //   //   'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
+  //   //   '0 - SIN UO'
+  //   // );
+  // });
 });
