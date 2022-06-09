@@ -90,10 +90,12 @@ Cypress.Commands.add(
     tipo_servicio,
     cantidad_servicio,
     serv_precio,
+    serv_precio_total,
     uo,
     actividad,
     uo_cantidad,
-    uo_precio
+    uo_precio,
+    uo_precio_total
   ) => {
     const fila = `.table-carrito > table > tbody > tr:nth-child(${num_fila}) > td`;
     cy.get(fila).eq(0).contains(servicio.split('-')[0].trim());
@@ -104,16 +106,18 @@ Cypress.Commands.add(
       .then(val => {
         expect(parseInt(val)).to.eql(cantidad_servicio);
       });
-    cy.get(fila)
-      .eq(4)
-      .contains(
-        `${formatter.format(serv_precio).toString().replace('.', ',')}`
-      );
-    cy.get(fila)
-      .eq(5)
-      .contains(
-        `$${(serv_precio * cantidad_servicio).toString().replace('.', ',')}`
-      );
+    cy.get(fila).eq(4).contains(serv_precio);
+    // cy.get(fila)
+    // .eq(4)
+    // .contains(
+    //   `${formatter.format(serv_precio).toString().replace('.', ',')}`
+    // );
+    cy.get(fila).eq(5).contains(serv_precio_total);
+    // cy.get(fila)
+    //   .eq(5)
+    //   .contains(
+    //     `$${(serv_precio * cantidad_servicio).toString().replace('.', ',')}`
+    //   );
 
     cy.get(fila).eq(7).contains(uo.split('-')[0].trim());
     cy.get(fila).eq(8).contains(uo.split('-')[1].trim());
@@ -124,30 +128,32 @@ Cypress.Commands.add(
         expect(parseInt(val)).to.eql(uo_cantidad);
       });
     cy.get(fila).eq(11).contains('CLP');
-    cy.get(fila)
-      .eq(12)
-      .contains(
-        `${formatter
-          .format(uo_precio)
-          .toString()
-          .replace('.', ',')
-          .replace(',', '.')}`
-      );
-    cy.get(fila)
-      .eq(13)
-      .contains(
-        `${formatter
-          .format(uo_precio * uo_cantidad)
-          .toString()
-          .replace('.', ',')
-          .replace(',', '.')}`
-      );
+    cy.get(fila).eq(12).contains(uo_precio);
+    // cy.get(fila)
+    //   .eq(12)
+    //   .contains(
+    //     `${formatter
+    //       .format(uo_precio)
+    //       .toString()
+    //       .replace('.', ',')
+    //       .replace(',', '.')}`
+    //   );
+    cy.get(fila).eq(13).contains(uo_precio_total);
+    // cy.get(fila)
+    //   .eq(13)
+    //   .contains(
+    //     `${formatter
+    //       .format(uo_precio * uo_cantidad)
+    //       .toString()
+    //       .replace('.', ',')
+    //       .replace(',', '.')}`
+    //   );
   }
 );
 
 Cypress.Commands.add(
   'cubCheckTableDataUOB',
-  (num_fila, uo, actividad, uo_cantidad, uo_precio) => {
+  (num_fila, uo, actividad, uo_cantidad, uo_precio, uo_precio_total) => {
     const fila = `.table-carrito > table > tbody > tr:nth-child(${num_fila}) > td`;
 
     cy.get(fila).eq(0).contains(uo.split('-')[0].trim());
@@ -159,24 +165,26 @@ Cypress.Commands.add(
         expect(parseInt(val)).to.eql(uo_cantidad);
       });
     cy.get(fila).eq(4).contains('CLP');
-    cy.get(fila)
-      .eq(5)
-      .contains(
-        `${formatter
-          .format(uo_precio)
-          .toString()
-          .replace('.', ',')
-          .replace(',', '.')}`
-      );
-    cy.get(fila)
-      .eq(6)
-      .contains(
-        `${formatter
-          .format(uo_precio * uo_cantidad)
-          .toString()
-          .replace('.', ',')
-          .replace(',', '.')}`
-      );
+    cy.get(fila).eq(5).contains(uo_precio);
+    // cy.get(fila)
+    //   .eq(5)
+    //   .contains(
+    //     `${formatter
+    //       .format(uo_precio)
+    //       .toString()
+    //       .replace('.', ',')
+    //       .replace(',', '.')}`
+    //   );
+    cy.get(fila).eq(6).contains(uo_precio_total);
+    // cy.get(fila)
+    //   .eq(6)
+    //   .contains(
+    //     `${formatter
+    //       .format(uo_precio * uo_cantidad)
+    //       .toString()
+    //       .replace('.', ',')
+    //       .replace(',', '.')}`
+    //   );
   }
 );
 
