@@ -81,11 +81,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      serv_1_precio_test,
+      '$266,67',
+      '$266,67',
       serv_1_uo_1_test,
       actividad_test,
       1,
-      serv_1_uo_1_precio_test
+      '$57.000',
+      '$57.000'
     );
 
     // SERVICIO 2
@@ -94,13 +96,15 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      serv_2_precio_test,
+      '$711,12',
+      '$711,12',
       serv_2_uo_2_test,
       actividad_test,
       1,
-      0
+      '$0',
+      '$0'
     );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
 
     // REVISAR TOTALES
     cy.cubTablaTotales(
@@ -124,11 +128,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      serv_1_precio_test,
+      '$266,67',
+      '$266,67',
       serv_1_uo_1_test,
       actividad_test,
       1,
-      serv_1_uo_1_precio_test
+      '$57.000',
+      '$57.000'
     );
 
     // SERVICIO 2
@@ -137,15 +143,17 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      serv_2_precio_test,
+      '$711,12',
+      '$711,12',
       serv_2_uo_4_test,
       actividad_test,
       1,
-      0
+      '$0',
+      '$0'
     );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, 0);
-    cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, 0);
-    cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
 
     // ELIMINAR TODO
     cy.get(':nth-child(2) > :nth-child(7) > .icon > .ui ').click();
@@ -168,11 +176,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      serv_1_precio_test,
+      '$266,67',
+      '$266,67',
       serv_1_uo_1_test,
       actividad_test,
       1,
-      serv_1_uo_1_precio_test
+      '$57.000',
+      '$57.000'
     );
 
     // SERVICIO 2
@@ -181,15 +191,17 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      serv_2_precio_test,
+      '$711,12',
+      '$711,12',
       serv_2_uo_4_test,
       actividad_test,
       1,
-      0
+      '$0',
+      '$0'
     );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, 0);
-    cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, 0);
-    cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
   });
 
   it('Revisar cambios de cantidades', () => {
