@@ -36,12 +36,12 @@ Flujo Movil Aprob Jerarquica
     ##### REGLAS DE VISUALIZACION  #########
 
     # Autorización del supervisor
-    _Login                         msupervisor1                                                                          asda                            Supervisor (Telefónica)
-    _Navegate to                   Listar OT
-    _Press action                  Aceptar OT
-    _Click visible element         css:p-dialog > div > div > div.p-dialog-footer > p-footer > button.btn.btn-primary
-    _Have to exist in table/tab    Abiertas                                                                              OT BUCLE
-    _Validate column data          4                                                                                     Autorizar inicialmente la OT
+    _Login                    msupervisor1                                                                          asda    Supervisor (Telefónica)
+    _Navegate to              Listar OT
+    _Press action             Aceptar OT
+    _Click visible element    css:p-dialog > div > div > div.p-dialog-footer > p-footer > button.btn.btn-primary
+    # _Have to exist in table/tab    Abiertas                                                                              OT BUCLE
+    # _Validate column data          4                                                                                     Autorizar inicialmente la OT
     close browser
 
     ##### REGLAS DE VISUALIZACION  #########
@@ -49,7 +49,7 @@ Flujo Movil Aprob Jerarquica
     _OTActionUser    mgestor1           Gestor/JP                  VER             OT BUCLE
     _OTActionUser    mgestor2           Gestor/JP                  NO PUEDE VER    OT BUCLE    # --- Debido a que no tiene asociado el contrato BUCLE
     _OTActionUser    mgestor3           Gestor/JP                  NO PUEDE VER    OT BUCLE    # --- No pertenece a la misma área
-    _OTActionUser    msupervisor1       Supervisor (Telefónica)    VER             OT BUCLE
+    # _OTActionUser    msupervisor1       Supervisor (Telefónica)    VER             OT BUCLE
     _OTActionUser    mjefearea1         Jefe de Área Telefónica    EJECUTAR        OT BUCLE
     _OTActionUser    mjefearea2         Jefe de Área Telefónica    NO PUEDE VER    OT BUCLE
     _OTActionUser    msubgerente1       SubGerente Telefónica      NO PUEDE VER    OT BUCLE
@@ -68,12 +68,12 @@ Flujo Movil Aprob Jerarquica
     ##### REGLAS DE VISUALIZACION  #########
 
      # Autorización del jefe area
-    _Login                         mjefearea1                                                                            asda                          Jefe de Área Telefónica
-    _Navegate to                   Listar OT
-    _Press action                  Aceptar OT
-    _Click visible element         css:p-dialog > div > div > div.p-dialog-footer > p-footer > button.btn.btn-primary
-    _Have to exist in table/tab    Abiertas                                                                              OT BUCLE
-    _Validate column data          4                                                                                     Autorizar OT por Proveedor
+    _Login                    mjefearea1                                                                            asda    Jefe de Área Telefónica
+    _Navegate to              Listar OT
+    _Press action             Aceptar OT
+    _Click visible element    css:p-dialog > div > div > div.p-dialog-footer > p-footer > button.btn.btn-primary
+    # _Have to exist in table/tab    Abiertas                                                                              OT BUCLE
+    # _Validate column data          4                                                                                     Autorizar OT por Proveedor
     close browser
 
 
