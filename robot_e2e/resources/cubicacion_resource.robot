@@ -68,7 +68,7 @@ _CubAddServicioUO
     Clear Element Text        css:#servicios > p-dropdown>div>.p-dropdown-panel>.p-dropdown-header>div>input
     _Set input text           css:#servicios > p-dropdown>div>.p-dropdown-panel>.p-dropdown-header>div>input                        ${servicio} 
     _Click visible element    css:#servicios > p-dropdown>div>.p-dropdown-panel>.p-dropdown-items-wrapper>ul>p-dropdownitem>li
-    sleep                     1
+    sleep                     3
     _Click visible element    css:#unidad-obra > p-dropdown>div
     Clear Element Text        css:#unidad-obra > p-dropdown>div>.p-dropdown-panel>.p-dropdown-header>div>input
     _Set input text           css:#unidad-obra > p-dropdown>div>.p-dropdown-panel>.p-dropdown-header>div>input                      ${uob} 
@@ -174,7 +174,7 @@ _CubCheckTableCarritoServicioUOBCREATE
     ...            ${tipo_moneda_uob}
 
 
-    _Element text should be    css:table > tbody > tr:nth-child(${fila}) > td:nth-child(1)    ${servicio_cod}
+    # _Element text should be    css:table > tbody > tr:nth-child(${fila}) > td:nth-child(1)    ${servicio_cod}
     _Element text should be    css:table > tbody > tr:nth-child(${fila}) > td:nth-child(2)    ${servicio}
     _Element text should be    css:table > tbody > tr:nth-child(${fila}) > td:nth-child(3)    ${tipo_servicio}
     # _Element text should be    css:table > tbody > tr:nth-child(${fila}) > td:nth-child(4)    ${canstidad_servicio}

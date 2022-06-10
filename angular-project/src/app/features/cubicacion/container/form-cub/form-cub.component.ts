@@ -888,7 +888,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       servicio_cantidad: number;
       servicio_tipo: number;
       actividad_id: number;
-      unidades_obra: {
+      unidades_obras: {
         precargado?: boolean;
         uo_rowid?: number;
 
@@ -904,7 +904,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       servicio_cantidad: number;
       servicio_tipo: number;
       actividad_id: number;
-      unidades_obra: Array<{
+      unidades_obras: Array<{
         precargado?: boolean;
         uo_rowid?: number;
 
@@ -917,7 +917,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       .filter(isLocal)
       .map(servicio => {
         let unidad_obra: NuevoUO[] = [];
-        unidad_obra = servicio.unidades_obra.map(uo => ({
+        unidad_obra = servicio.unidades_obras.map(uo => ({
           uob_codigo: uo.uo_codigo,
           cantidad: +uo.uo_cantidad,
         }));
@@ -940,7 +940,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     const unidades_obra_actualizar: ServicioUOActualizar[] = servicios
       .filter(notLocal)
       .reduce((ac, servicio) => {
-        const unidades_obra = servicio.unidades_obra
+        const unidades_obra = servicio.unidades_obras
           .filter(notLocal)
           .map(uo => ({
             rowid: uo.uo_rowid,
@@ -952,7 +952,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     const nuevas_unidades_obra: UOAgregar[] = servicios
       .filter(notLocal)
       .reduce((ac, servicio) => {
-        const unidades_obra = servicio.unidades_obra
+        const unidades_obra = servicio.unidades_obras
           .filter(isLocal)
           .map(uo => ({
             servicio_rowid: servicio.servicio_rowid,
