@@ -9,7 +9,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // Components
 import { CardComponent } from './card/card.component';
 import { TableComponent } from './table/table.component';
-import { SeleccionComponent } from './seleccion/seleccion.component';
 import { ModalComponent } from './modal/modal.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { ToastComponent } from './toast/toast.component';
@@ -35,7 +34,6 @@ import { TabsComponent } from './tabs/tabs.component';
   declarations: [
     CardComponent,
     TableComponent,
-    SeleccionComponent,
     ModalComponent,
     DatepickerComponent,
     ToastComponent,
@@ -50,7 +48,6 @@ import { TabsComponent } from './tabs/tabs.component';
   exports: [
     CardComponent,
     PrimeNgModule,
-    SeleccionComponent,
     TableComponent,
     ModalComponent,
     DatepickerComponent,

@@ -65,6 +65,8 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                           material_unidad_medida_cod:
                             material.material_unidad_medida_cod,
                           material_valor: material.valor,
+                          material_unidad_codigo: material.material_unidad_medida_cod,
+                          material_unidad_descripcion: 'TODO',
                         };
                       }
                     );
@@ -78,6 +80,8 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                       uob_unidad_medida_cod:
                         uo.data_unidad_obra.uob_unidad_medida_cod,
                       uo_cantidad: uo.data_unidad_obra.uob_cantidad,
+                      uo_unidad_codigo: uo.data_unidad_obra.uob_unidad_medida_cod,
+              uo_unidad_descripcion: 'TODO',
                     };
                   }
                 }
@@ -106,6 +110,9 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                 tipo_servicio_descripcion:
                   servicios.data_servicio.tipo_servicio_desc,
                 servicio_cantidad: servicios.data_servicio.servicio_cantidad,
+                numero_producto: 'TODO',
+          servicio_unidad_codigo: servicios.data_servicio.unidad_medida_cod,
+          servicio_unidad_descripcion: 'TODO',
                 unidades_obras: uos,
               };
             }

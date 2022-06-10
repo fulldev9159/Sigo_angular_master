@@ -127,7 +127,7 @@ export const getTipoCubicacion4CubError = createAction(
 
 // GET ACTIVIDADES 4 CUB
 export const getActividades4Cub = createAction(
-  '[Cubicacion] getTipoCubicacion4Cub '
+  '[Cubicacion] getActividades4Cub '
 );
 export const getActividades4CubSuccess = createAction(
   '[Cubicacion] getActividades4Cub Success',
@@ -220,13 +220,13 @@ export const getDatosUnidadObra4CubError = createAction(
 //  DELETE SERVICE FROM CARRITO 4 CREATE CUB
 export const delteServiceCarrito4CreateCub = createAction(
   '[Cubicacion] delteServiceCarrito4CreateCub ',
-  props<{ servicio_cod: string }>()
+  props<{ servicio_id: number }>()
 );
 
 //  DELETE UO FROM CARRITO 4 CREATE CUB
 export const delteUOCarrito4CreateCub = createAction(
   '[Cubicacion] delteUOCarrito4CreateCub ',
-  props<{ servicio_cod: string; uo_cod: string }>()
+  props<{ servicio_id: number; uo_cod: string }>()
 );
 
 // CREATE CUB

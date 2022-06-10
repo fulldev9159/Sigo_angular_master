@@ -182,6 +182,7 @@ export interface Servicios4Cub {
   unidad_codigo: string;
   unidad_desripcion: string;
   unidad_id: number;
+  numero_producto: string;
 }
 
 //   GET UNIDADES DE OBREA 4 CUB
@@ -247,7 +248,6 @@ export interface DatosServicio4Cub {
   servicio_precio_final_clp: number;
   servicio_tipo: number;
   servicio_unidad_id: number;
-  tipo_moneda_id: number;
 
   actividad_descripcion: string;
   actividad_id: string;
@@ -255,32 +255,31 @@ export interface DatosServicio4Cub {
   servicio_tipo_moneda_codigo: string;
   servicio_tipo_moneda_id: number;
   tipo_servicio_descripcion: string;
+
+  numero_producto: string;
+
+  servicio_unidad_codigo: string;
+  servicio_unidad_descripcion: string;
 }
 
 //  GET DATOS UNIDAD OBRA 4 CUB
 export interface RequestGetDatosUnidadObra4Cub {
-  cantidad: number;
   uo_codigo: string;
 }
 
 export interface RespDataGetDatosUnidadObra4Cub {
-  // items: DatosUnidadObra4Cub[];
   material_arr: Materiales4Cub[];
   uo_codigo: string;
   uo_nombre: string;
   uo_precio_total_clp: number;
   uo_unidad_id: number;
+  uo_unidad_codigo: string;
+  uo_unidad_descripcion: string;
 }
 
-export interface DatosUnidadObra4Cub {
+export interface DatosUnidadObra4Cub extends RespDataGetDatosUnidadObra4Cub {
   precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
   uo_rowid?: number;
-
-  material_arr: Materiales4Cub[];
-  uo_codigo: string;
-  uo_nombre: string;
-  uo_precio_total_clp: number;
-  uo_unidad_id: number;
   uo_cantidad?: number;
   uob_unidad_medida_cod?: string;
 }
@@ -296,30 +295,17 @@ export interface Materiales4Cub {
   material_unidad_id: number;
   material_unidad_medida_cod?: string;
   material_valor: number;
+
+  material_unidad_codigo: string;
+  material_unidad_descripcion: string;
 }
 
-export interface Carrito {
+export interface Carrito extends DatosServicio4Cub {
   precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
   servicio_rowid?: number;
-
-  precio_agencia: number;
-  precio_proveedor: number;
-  servicio_baremos: number;
-  servicio_codigo: string;
-  servicio_id: number;
-  servicio_nombre: string;
-  servicio_precio_final: number;
-  servicio_precio_final_clp: number;
-  servicio_tipo: number;
-  servicio_unidad_id: number;
-  servicio_unidad_cod?: string;
-  tipo_moneda_id: number;
-  actividad_descripcion: string;
-  actividad_id: string;
-  servicio_tipo_moneda_codigo: string;
-  servicio_tipo_moneda_id: number;
-  tipo_servicio_descripcion: string;
   servicio_cantidad?: number;
+  servicio_unidad_cod?: string;
+
   unidades_obras: DatosUnidadObra4Cub[];
 }
 

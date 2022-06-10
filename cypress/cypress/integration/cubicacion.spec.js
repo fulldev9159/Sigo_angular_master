@@ -30,7 +30,7 @@ describe('Cubicacion Test', () => {
   const actividad_movil = 'INSTALACIONES EN EDIFICIO';
   const tipo_servicio_movil = 2;
   const serv_1_movil =
-    '2210 - Ingenieria de detalles con Estudio de factilidad de un MO';
+    'ServGeneratel82 - Ingenieria de detalles con Estudio de factilidad de un MO';
   const serv_1_uo_1_movil = '0 - SIN UO';
 
   // BUCLE
@@ -49,16 +49,18 @@ describe('Cubicacion Test', () => {
   const actividad_fijo = 'INSTALACIONES EN EDIFICIO';
   const tipo_servicio_fijo = 1;
   const serv_1_fijo =
-    '2210 - Ingenieria de detalles con Estudio de factilidad de un MO';
+    'ServGeneratel82 - Ingenieria de detalles con Estudio de factilidad de un MO';
   const serv_1_uo_1_fijo = '0 - SIN UO';
 
   beforeEach(() => {
+    cy.viewport(1500, 1700);
     cy.login('mgestor1', '123', 'Gestor/JP');
     cy.contains('Cubicación').click();
     cy.contains('Crear Cubicación').click();
 
     cy.get('#create-button').should('be.disabled');
   });
+
   it('Revisasr que se agreguen correctamente los items al carrito', () => {
     cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
     cy.cubFiltros(
@@ -70,7 +72,7 @@ describe('Cubicacion Test', () => {
     cy.cubAddService(serv_1_test, serv_1_uo_1_test);
     // Agregar otro servicio con 2 UO
     cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-    cy.cubAddUOB(serv_2_uo_2_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
 
     // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
     // SERVICIO 1
@@ -79,11 +81,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      serv_1_precio_test,
+      '$266,67',
+      '$266,67',
       serv_1_uo_1_test,
       actividad_test,
       1,
-      serv_1_uo_1_precio_test
+      '$57.000',
+      '$57.000'
     );
 
     // SERVICIO 2
@@ -92,13 +96,15 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      serv_2_precio_test,
+      '$711,12',
+      '$711,12',
       serv_2_uo_2_test,
       actividad_test,
       1,
-      0
+      '$0',
+      '$0'
     );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
 
     // REVISAR TOTALES
     cy.cubTablaTotales(
@@ -112,9 +118,9 @@ describe('Cubicacion Test', () => {
     // ELIMINAR UNO, AGREGAR TODO Y ELIMINAR TODO
     cy.get(':nth-child(8) > .icon > .eliminar-color').click();
 
-    cy.cubAddUOB(serv_2_uo_1_test);
-    cy.cubAddUOB(serv_2_uo_3_test);
-    cy.cubAddUOB(serv_2_uo_4_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_3_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_4_test);
 
     // SERVICIO 1
     cy.cubCheckTableDataServUO(
@@ -122,11 +128,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      serv_1_precio_test,
+      '$266,67',
+      '$266,67',
       serv_1_uo_1_test,
       actividad_test,
       1,
-      serv_1_uo_1_precio_test
+      '$57.000',
+      '$57.000'
     );
 
     // SERVICIO 2
@@ -135,15 +143,17 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      serv_2_precio_test,
+      '$711,12',
+      '$711,12',
       serv_2_uo_4_test,
       actividad_test,
       1,
-      0
+      '$0',
+      '$0'
     );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, 0);
-    cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, 0);
-    cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
 
     // ELIMINAR TODO
     cy.get(':nth-child(2) > :nth-child(7) > .icon > .ui ').click();
@@ -154,10 +164,10 @@ describe('Cubicacion Test', () => {
 
     // CASO ESPECIAL
     cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-    cy.cubAddUOB(serv_2_uo_2_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
     cy.cubAddService(serv_1_test, serv_1_uo_1_test);
     cy.cubAddService(serv_2_test, serv_2_uo_3_test);
-    cy.cubAddUOB(serv_2_uo_4_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_4_test);
 
     // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
     // SERVICIO 1
@@ -166,11 +176,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      serv_1_precio_test,
+      '$266,67',
+      '$266,67',
       serv_1_uo_1_test,
       actividad_test,
       1,
-      serv_1_uo_1_precio_test
+      '$57.000',
+      '$57.000'
     );
 
     // SERVICIO 2
@@ -179,15 +191,17 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      serv_2_precio_test,
+      '$711,12',
+      '$711,12',
       serv_2_uo_4_test,
       actividad_test,
       1,
-      0
+      '$0',
+      '$0'
     );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, 0);
-    cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, 0);
-    cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, 0);
+    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
   });
 
   it('Revisar cambios de cantidades', () => {
@@ -208,29 +222,33 @@ describe('Cubicacion Test', () => {
 
     // REVISAR VALORES
     // SERVICIO 1
-    // cy.cubCheckTableDataServUO(
-    //   1,
-    //   serv_1_test,
-    //   tipo_servicio_test,
-    //   1,
-    //   serv_1_precio_test,
-    //   serv_1_uo_1_test,
-    //   actividad_test,
-    //   1,
-    //   serv_1_uo_1_precio_test
-    // );
-    // // SERVICIO 2
-    // cy.cubCheckTableDataServUO(
-    //   2,
-    //   serv_2_test,
-    //   tipo_servicio_test,
-    //   4,
-    //   serv_2_precio_test,
-    //   serv_2_uo_4_test,
-    //   actividad_test,
-    //   1,
-    //   0
-    // );
+    cy.cubCheckTableDataServUO(
+      1,
+      serv_1_test,
+      tipo_servicio_test,
+      1,
+      '$266,67',
+      '$266,67',
+      serv_1_uo_1_test,
+      actividad_test,
+      1,
+      '$57.000',
+      '$57.000'
+    );
+    // SERVICIO 2
+    cy.cubCheckTableDataServUO(
+      2,
+      serv_2_test,
+      tipo_servicio_test,
+      4,
+      '$711,12',
+      '$2.844,48',
+      serv_2_uo_1_test,
+      actividad_test,
+      1,
+      '$0',
+      '$0'
+    );
   });
 
   it('Revisar que no permita agregar el mismo servicio/uo', () => {

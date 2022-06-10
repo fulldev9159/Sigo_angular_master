@@ -47,11 +47,11 @@ export class FormCubService {
     return {
       actividad_id: new FormControl(null, [Validators.required]),
       tipo_servicio_id: new FormControl(null, [Validators.required]),
-      servicio_id: new FormControl(null, [Validators.required]),
-      servicio_cod: new FormControl(null, [Validators.required]),
+      servicio_id: new FormControl('', [Validators.required]),
+      // servicio_cod: new FormControl(null, [Validators.required]),
       unidad_obra_cod: new FormControl(null, [Validators.required]),
-      cantidad_servicio: new FormControl(1, [Validators.required]),
-      cantidad_unidad_obra: new FormControl(1, [Validators.required]),
+      // cantidad_servicio: new FormControl(1, [Validators.required]),
+      // cantidad_unidad_obra: new FormControl(1, [Validators.required]),
     };
   }
 

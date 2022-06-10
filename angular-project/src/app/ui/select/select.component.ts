@@ -9,7 +9,6 @@ import { FormControl } from '@angular/forms';
 export class SelectComponent implements OnInit, AfterContentChecked {
   @Input() control: FormControl;
   @Input() label = '';
-  @Input() ID = '';
   @Input() errorMessageFn = errors => {
     if (errors.required) {
       return 'Este campo es requerido';
