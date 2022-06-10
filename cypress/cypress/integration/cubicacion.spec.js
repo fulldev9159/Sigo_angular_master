@@ -30,7 +30,7 @@ describe('Cubicacion Test', () => {
   const actividad_movil = 'INSTALACIONES EN EDIFICIO';
   const tipo_servicio_movil = 2;
   const serv_1_movil =
-    '2210 - Ingenieria de detalles con Estudio de factilidad de un MO';
+    'ServGeneratel82 - Ingenieria de detalles con Estudio de factilidad de un MO';
   const serv_1_uo_1_movil = '0 - SIN UO';
 
   // BUCLE
@@ -49,7 +49,7 @@ describe('Cubicacion Test', () => {
   const actividad_fijo = 'INSTALACIONES EN EDIFICIO';
   const tipo_servicio_fijo = 1;
   const serv_1_fijo =
-    '2210 - Ingenieria de detalles con Estudio de factilidad de un MO';
+    'ServGeneratel82 - Ingenieria de detalles con Estudio de factilidad de un MO';
   const serv_1_uo_1_fijo = '0 - SIN UO';
 
   beforeEach(() => {
@@ -61,283 +61,283 @@ describe('Cubicacion Test', () => {
     cy.get('#create-button').should('be.disabled');
   });
 
-  it('Revisasr que se agreguen correctamente los items al carrito', () => {
-    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-    cy.cubFiltros(
-      actividad_test.toUpperCase(),
-      tipo_servicio_test.toUpperCase()
-    );
-
-    // Agregar un servicio y un UO
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-    // Agregar otro servicio con 2 UO
-    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
-
-    // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
-    // SERVICIO 1
-    cy.cubCheckTableDataServUO(
-      1,
-      serv_1_test,
-      tipo_servicio_test,
-      1,
-      '$266,67',
-      '$266,67',
-      serv_1_uo_1_test,
-      actividad_test,
-      1,
-      '$57.000',
-      '$57.000'
-    );
-
-    // SERVICIO 2
-    cy.cubCheckTableDataServUO(
-      2,
-      serv_2_test,
-      tipo_servicio_test,
-      1,
-      '$711,12',
-      '$711,12',
-      serv_2_uo_2_test,
-      actividad_test,
-      1,
-      '$0',
-      '$0'
-    );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
-
-    // REVISAR TOTALES
-    cy.cubTablaTotales(
-      [
-        { precio: serv_1_precio_test, cantidad: 1 },
-        { precio: serv_2_precio_test, cantidad: 1 },
-      ],
-      [{ precio: serv_1_uo_1_precio_test, cantidad: 1 }]
-    );
-
-    // ELIMINAR UNO, AGREGAR TODO Y ELIMINAR TODO
-    cy.get(':nth-child(8) > .icon > .eliminar-color').click();
-
-    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-    cy.cubAddService(serv_2_test, serv_2_uo_3_test);
-    cy.cubAddService(serv_2_test, serv_2_uo_4_test);
-
-    // SERVICIO 1
-    cy.cubCheckTableDataServUO(
-      1,
-      serv_1_test,
-      tipo_servicio_test,
-      1,
-      '$266,67',
-      '$266,67',
-      serv_1_uo_1_test,
-      actividad_test,
-      1,
-      '$57.000',
-      '$57.000'
-    );
-
-    // SERVICIO 2
-    cy.cubCheckTableDataServUO(
-      2,
-      serv_2_test,
-      tipo_servicio_test,
-      1,
-      '$711,12',
-      '$711,12',
-      serv_2_uo_4_test,
-      actividad_test,
-      1,
-      '$0',
-      '$0'
-    );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
-    cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
-    cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
-
-    // ELIMINAR TODO
-    cy.get(':nth-child(2) > :nth-child(7) > .icon > .ui ').click();
-    cy.get(':nth-child(1) > :nth-child(7) > .icon > .ui').click();
-
-    cy.get('.text-left > p').contains('Al menos 1 servicio debe ser ingresado');
-    cy.get('#create-button').should('be.disabled');
-
-    // CASO ESPECIAL
-    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-    cy.cubAddService(serv_2_test, serv_2_uo_3_test);
-    cy.cubAddService(serv_2_test, serv_2_uo_4_test);
-
-    // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
-    // SERVICIO 1
-    cy.cubCheckTableDataServUO(
-      1,
-      serv_1_test,
-      tipo_servicio_test,
-      1,
-      '$266,67',
-      '$266,67',
-      serv_1_uo_1_test,
-      actividad_test,
-      1,
-      '$57.000',
-      '$57.000'
-    );
-
-    // SERVICIO 2
-    cy.cubCheckTableDataServUO(
-      2,
-      serv_2_test,
-      tipo_servicio_test,
-      1,
-      '$711,12',
-      '$711,12',
-      serv_2_uo_4_test,
-      actividad_test,
-      1,
-      '$0',
-      '$0'
-    );
-    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
-    cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
-    cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
-  });
-
-  it('Revisar cambios de cantidades', () => {
-    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-    cy.cubFiltros(
-      actividad_test.toUpperCase(),
-      tipo_servicio_test.toUpperCase()
-    );
-
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-
-    // AUMENTAR LA CANTIDAD SERVICIO
-    const fila2 = '.table-carrito > table > tbody > tr:nth-child(2) > td';
-    cy.get(fila2 + ':nth-child(4)>app-input>input')
-      .clear()
-      .type('{del}4');
-
-    // REVISAR VALORES
-    // SERVICIO 1
-    cy.cubCheckTableDataServUO(
-      1,
-      serv_1_test,
-      tipo_servicio_test,
-      1,
-      '$266,67',
-      '$266,67',
-      serv_1_uo_1_test,
-      actividad_test,
-      1,
-      '$57.000',
-      '$57.000'
-    );
-    // SERVICIO 2
-    cy.cubCheckTableDataServUO(
-      2,
-      serv_2_test,
-      tipo_servicio_test,
-      4,
-      '$711,12',
-      '$2.844,48',
-      serv_2_uo_1_test,
-      actividad_test,
-      1,
-      '$0',
-      '$0'
-    );
-  });
-
-  it('Revisar que no permita agregar el mismo servicio/uo', () => {
-    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-    cy.cubFiltros(
-      actividad_test.toUpperCase(),
-      tipo_servicio_test.toUpperCase()
-    );
-
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-
-    cy.get('#mensaje-repetido').contains(
-      'Ya ha agregado este servico/Unidad Obra'
-    );
-  });
-
-  it('Revisar que no permita agregar el mismo servicio/uo', () => {
-    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-    cy.cubFiltros(
-      actividad_test.toUpperCase(),
-      tipo_servicio_test.toUpperCase()
-    );
-
-    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-
-    cy.get(':nth-child(15) > .icon > .ui').click();
-    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(1)').contains(
-      '165211'
-    );
-    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(2)').contains(
-      'KIT RETENCION FIBRA 14 MM'
-    );
-    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(3)').contains(
-      'PROVEEDOR'
-    );
-    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
-      '$57.000'
-    );
-  });
-
-  // it('Crear cubicaciones', () => {
-  //   // MOVIL;
-  //   cy.cubBase(
-  //     'Cub Movil',
-  //     'Full',
-  //     contrato_movil,
-  //     agencia_movil,
-  //     proveedor_movil
-  //   );
-  //   cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
-  //   cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
-  //   cy.get('#create-button').click();
-
-  //   // BUCLE
-  //   cy.contains('Nueva Cubicación').click();
-  //   cy.cubBase(
-  //     'Cub Bucle',
-  //     'Full',
-  //     contrato_bucle,
-  //     agencia_bucle,
-  //     proveedor_bucle
-  //   );
+  // it('Revisasr que se agreguen correctamente los items al carrito', () => {
+  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
   //   cy.cubFiltros(
-  //     actividad_bucle.toUpperCase(),
-  //     tipo_servicio_bucle.toUpperCase()
+  //     actividad_test.toUpperCase(),
+  //     tipo_servicio_test.toUpperCase()
   //   );
-  //   cy.cubAddService(serv_1_bucle, serv_1_uo_1_bucle);
-  //   cy.get('#create-button').click();
 
-  //   // FIJO
-  //   cy.contains('Nueva Cubicación').click();
-  //   cy.cubBase('Cub Fijo', 'Full', contrato_fijo, agencia_fijo, proveedor_fijo);
-  //   cy.cubFiltros(actividad_fijo.toUpperCase(), tipo_servicio_fijo);
-  //   cy.cubAddService(serv_1_fijo, serv_1_uo_1_fijo);
-  //   cy.get('#create-button').click();
+  //   // Agregar un servicio y un UO
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+  //   // Agregar otro servicio con 2 UO
+  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+  //   cy.cubAddService(serv_2_test, serv_2_uo_2_test);
 
-  //   // ORDINARIO
-  //   // cy.contains('Nueva Cubicación').click();
-  //   // cy.createCub(
-  //   //   'Cub Ordinario',
-  //   //   'Full',
-  //   //   'Contrato Ordinario',
-  //   //   'ANTOFAGASTA',
-  //   //   '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
-  //   //   'DISEÑO',
-  //   //   'PROYECTOS',
-  //   //   'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
-  //   //   '0 - SIN UO'
-  //   // );
+  //   // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
+  //   // SERVICIO 1
+  //   cy.cubCheckTableDataServUO(
+  //     1,
+  //     serv_1_test,
+  //     tipo_servicio_test,
+  //     1,
+  //     '$266,67',
+  //     '$266,67',
+  //     serv_1_uo_1_test,
+  //     actividad_test,
+  //     1,
+  //     '$57.000',
+  //     '$57.000'
+  //   );
+
+  //   // SERVICIO 2
+  //   cy.cubCheckTableDataServUO(
+  //     2,
+  //     serv_2_test,
+  //     tipo_servicio_test,
+  //     1,
+  //     '$711,12',
+  //     '$711,12',
+  //     serv_2_uo_2_test,
+  //     actividad_test,
+  //     1,
+  //     '$0',
+  //     '$0'
+  //   );
+  //   cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
+
+  //   // REVISAR TOTALES
+  //   cy.cubTablaTotales(
+  //     [
+  //       { precio: serv_1_precio_test, cantidad: 1 },
+  //       { precio: serv_2_precio_test, cantidad: 1 },
+  //     ],
+  //     [{ precio: serv_1_uo_1_precio_test, cantidad: 1 }]
+  //   );
+
+  //   // ELIMINAR UNO, AGREGAR TODO Y ELIMINAR TODO
+  //   cy.get(':nth-child(8) > .icon > .eliminar-color').click();
+
+  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+  //   cy.cubAddService(serv_2_test, serv_2_uo_3_test);
+  //   cy.cubAddService(serv_2_test, serv_2_uo_4_test);
+
+  //   // SERVICIO 1
+  //   cy.cubCheckTableDataServUO(
+  //     1,
+  //     serv_1_test,
+  //     tipo_servicio_test,
+  //     1,
+  //     '$266,67',
+  //     '$266,67',
+  //     serv_1_uo_1_test,
+  //     actividad_test,
+  //     1,
+  //     '$57.000',
+  //     '$57.000'
+  //   );
+
+  //   // SERVICIO 2
+  //   cy.cubCheckTableDataServUO(
+  //     2,
+  //     serv_2_test,
+  //     tipo_servicio_test,
+  //     1,
+  //     '$711,12',
+  //     '$711,12',
+  //     serv_2_uo_4_test,
+  //     actividad_test,
+  //     1,
+  //     '$0',
+  //     '$0'
+  //   );
+  //   cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
+  //   cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
+  //   cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
+
+  //   // ELIMINAR TODO
+  //   cy.get(':nth-child(2) > :nth-child(7) > .icon > .ui ').click();
+  //   cy.get(':nth-child(1) > :nth-child(7) > .icon > .ui').click();
+
+  //   cy.get('.text-left > p').contains('Al menos 1 servicio debe ser ingresado');
+  //   cy.get('#create-button').should('be.disabled');
+
+  //   // CASO ESPECIAL
+  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+  //   cy.cubAddService(serv_2_test, serv_2_uo_2_test);
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+  //   cy.cubAddService(serv_2_test, serv_2_uo_3_test);
+  //   cy.cubAddService(serv_2_test, serv_2_uo_4_test);
+
+  //   // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
+  //   // SERVICIO 1
+  //   cy.cubCheckTableDataServUO(
+  //     1,
+  //     serv_1_test,
+  //     tipo_servicio_test,
+  //     1,
+  //     '$266,67',
+  //     '$266,67',
+  //     serv_1_uo_1_test,
+  //     actividad_test,
+  //     1,
+  //     '$57.000',
+  //     '$57.000'
+  //   );
+
+  //   // SERVICIO 2
+  //   cy.cubCheckTableDataServUO(
+  //     2,
+  //     serv_2_test,
+  //     tipo_servicio_test,
+  //     1,
+  //     '$711,12',
+  //     '$711,12',
+  //     serv_2_uo_4_test,
+  //     actividad_test,
+  //     1,
+  //     '$0',
+  //     '$0'
+  //   );
+  //   cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
+  //   cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
+  //   cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
   // });
+
+  // it('Revisar cambios de cantidades', () => {
+  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+  //   cy.cubFiltros(
+  //     actividad_test.toUpperCase(),
+  //     tipo_servicio_test.toUpperCase()
+  //   );
+
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+
+  //   // AUMENTAR LA CANTIDAD SERVICIO
+  //   const fila2 = '.table-carrito > table > tbody > tr:nth-child(2) > td';
+  //   cy.get(fila2 + ':nth-child(4)>app-input>input')
+  //     .clear()
+  //     .type('{del}4');
+
+  //   // REVISAR VALORES
+  //   // SERVICIO 1
+  //   cy.cubCheckTableDataServUO(
+  //     1,
+  //     serv_1_test,
+  //     tipo_servicio_test,
+  //     1,
+  //     '$266,67',
+  //     '$266,67',
+  //     serv_1_uo_1_test,
+  //     actividad_test,
+  //     1,
+  //     '$57.000',
+  //     '$57.000'
+  //   );
+  //   // SERVICIO 2
+  //   cy.cubCheckTableDataServUO(
+  //     2,
+  //     serv_2_test,
+  //     tipo_servicio_test,
+  //     4,
+  //     '$711,12',
+  //     '$2.844,48',
+  //     serv_2_uo_1_test,
+  //     actividad_test,
+  //     1,
+  //     '$0',
+  //     '$0'
+  //   );
+  // });
+
+  // it('Revisar que no permita agregar el mismo servicio/uo', () => {
+  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+  //   cy.cubFiltros(
+  //     actividad_test.toUpperCase(),
+  //     tipo_servicio_test.toUpperCase()
+  //   );
+
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+
+  //   cy.get('#mensaje-repetido').contains(
+  //     'Ya ha agregado este servico/Unidad Obra'
+  //   );
+  // });
+
+  // it('Revisar que no permita agregar el mismo servicio/uo', () => {
+  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+  //   cy.cubFiltros(
+  //     actividad_test.toUpperCase(),
+  //     tipo_servicio_test.toUpperCase()
+  //   );
+
+  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+
+  //   cy.get(':nth-child(15) > .icon > .ui').click();
+  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(1)').contains(
+  //     '165211'
+  //   );
+  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(2)').contains(
+  //     'KIT RETENCION FIBRA 14 MM'
+  //   );
+  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(3)').contains(
+  //     'PROVEEDOR'
+  //   );
+  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
+  //     '$57.000'
+  //   );
+  // });
+
+  it('Crear cubicaciones', () => {
+    // MOVIL;
+    cy.cubBase(
+      'Cub Movil',
+      'Full',
+      contrato_movil,
+      agencia_movil,
+      proveedor_movil
+    );
+    cy.cubFiltros(actividad_movil.toUpperCase(), tipo_servicio_movil);
+    cy.cubAddService(serv_1_movil, serv_1_uo_1_movil);
+    cy.get('#create-button').click();
+
+    // BUCLE
+    cy.contains('Nueva Cubicación').click();
+    cy.cubBase(
+      'Cub Bucle',
+      'Full',
+      contrato_bucle,
+      agencia_bucle,
+      proveedor_bucle
+    );
+    cy.cubFiltros(
+      actividad_bucle.toUpperCase(),
+      tipo_servicio_bucle.toUpperCase()
+    );
+    cy.cubAddService(serv_1_bucle, serv_1_uo_1_bucle);
+    cy.get('#create-button').click();
+
+    // FIJO
+    cy.contains('Nueva Cubicación').click();
+    cy.cubBase('Cub Fijo', 'Full', contrato_fijo, agencia_fijo, proveedor_fijo);
+    cy.cubFiltros(actividad_fijo.toUpperCase(), tipo_servicio_fijo);
+    cy.cubAddService(serv_1_fijo, serv_1_uo_1_fijo);
+    cy.get('#create-button').click();
+
+    // ORDINARIO
+    // cy.contains('Nueva Cubicación').click();
+    // cy.createCub(
+    //   'Cub Ordinario',
+    //   'Full',
+    //   'Contrato Ordinario',
+    //   'ANTOFAGASTA',
+    //   '24242424 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA',
+    //   'DISEÑO',
+    //   'PROYECTOS',
+    //   'D003 - DISEÑO DE PROYECTO INMOBILIARIO EN RED DE FO-COBRE (VDSL)',
+    //   '0 - SIN UO'
+    // );
+  });
 });

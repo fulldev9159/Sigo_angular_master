@@ -237,13 +237,13 @@
                         </div>
                       </ng-container>
 
-                      <!-- <ng-container *ngIf="item.precargado">
+                      <ng-container *ngIf="item.precargado">
                         <div class="ui icon buttons mini basic">
                           <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">
                             <fa-icon [icon]="trashICon"></fa-icon>
                           </button>
                         </div>
-                      </ng-container> -->
+                      </ng-container>
                     </td>
                     <td class="label-table uo">{{item.unidades_obras[0].uo_codigo}}</td>
                     <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
@@ -283,9 +283,9 @@
                       </ng-container>
                       <ng-container *ngIf="item.precargado">
                         <div class="ui icon buttons mini basic">
-                          <!-- <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">
+                          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">
                             <fa-icon [icon]="trashICon"></fa-icon>
-                          </button> -->
+                          </button>
                         </div>
                       </ng-container>
                     </td>
@@ -309,9 +309,9 @@
                         </ng-container>
                         <ng-container *ngIf="item.unidades_obras[0].precargado">
                           <div class="ui icon buttons mini basic">
-                            <!-- <button (click)="DisplayDeleteUOCarritoDefinitivo(item.servicio_id,item.unidades_obras[0].uo_codigo,item.unidades_obras[0].uo_rowid)" class="ui button eliminar-color">
+                            <button (click)="DisplayDeleteUOCarritoDefinitivo(item.servicio_id,item.unidades_obras[0].uo_codigo,item.unidades_obras[0].uo_rowid)" class="ui button eliminar-color">
                               <fa-icon [icon]="trashICon"></fa-icon>
-                            </button> -->
+                            </button>
                           </div>
                         </ng-container>
                       </div>
@@ -338,13 +338,13 @@
                             <fa-icon [icon]="trashICon"></fa-icon>
                           </button>
                         </ng-container>
-                        <!-- <ng-container *ngIf="uo.precargado">
+                        <ng-container *ngIf="uo.precargado">
                           <div class="ui icon buttons mini basic">
                             <button (click)="DisplayDeleteUOCarritoDefinitivo(item.servicio_id,uo.uo_codigo,uo.uo_rowid)" class="ui button eliminar-color">
                               <fa-icon [icon]="trashICon"></fa-icon>
                             </button>
                           </div>
-                        </ng-container> -->
+                        </ng-container>
                       </div>
                     </td>
                   </tr>
@@ -386,12 +386,12 @@
         <br>
         <div style="display:flex;align-items: center;justify-content: center;">
           <ng-container *ngIf="mode === 'add'">
-            <!-- <button (click)="CreateCub()" [disabled]="!formCub.valid || (carrito$|async).length === 0" id="create-button">Crear Cubicación</button> -->
-            <button [disabled]="true" id="create-button">Crear Cubicación</button>
+            <button (click)="CreateCub()" [disabled]="!formCub.valid || (carrito$|async).length === 0" id="create-button">Crear Cubicación</button>
+            <!-- <button [disabled]="true" id="create-button">Crear Cubicación</button> -->
           </ng-container>
 
           <ng-container *ngIf="mode === 'edit'">
-            <!-- <button (click)="EditCub()" [disabled]="!formCub.valid || (carrito$|async).length === 0" id="create-button">Actualizar Cubicación</button> -->
+            <button (click)="EditCub()" [disabled]="!formCub.valid || (carrito$|async).length === 0" id="create-button">Actualizar Cubicación</button>
           </ng-container>
         </div>
 
@@ -426,4 +426,64 @@
     </div>
   </ng-container>
   <ng-container modal-footer></ng-container>
+</app-modal>
+
+<app-modal [display]="displayDeleteConfirmServicio" (CloseEvent)="closeModalDeleteConfirmServicio()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Este servicio será eliminado definitivamente de la cubicación ¿Está seguro que desea eliminar este servicio?</p>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer>
+    <div class="row">
+      <div class="col">
+        <button pButton type="button" (click)="DeleteServicioCarritoDefinitivo()" label="Si, eliminar" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+        border: #b36161;
+        margin-left: 10px;
+        color: #412727;"></button>
+        <button pButton type="button" (click)="closeModalDeleteConfirmServicio()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+        border: gray;"></button>
+      </div>
+    </div>
+  </ng-container>
+</app-modal>
+
+<app-modal [display]="displayDeleteConfirmUO" (CloseEvent)="closeModalDeleteConfirmUO()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Esta Unidad de obra será eliminada definitivamente de la cubicación ¿Está seguro que desea eliminar esta unidad de obra?</p>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer>
+    <div class="row">
+      <div class="col">
+        <button pButton type="button" (click)="DeleteUOCarritoDefinitivo()" label="Si, eliminar" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+        border: #b36161;
+        margin-left: 10px;
+        color: #412727;"></button>
+        <button pButton type="button" (click)="closeModalDeleteConfirmUO()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+        border: gray;"></button>
+      </div>
+    </div>
+  </ng-container>
 </app-modal>
