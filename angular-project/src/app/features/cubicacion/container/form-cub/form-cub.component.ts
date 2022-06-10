@@ -741,7 +741,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           servicio_tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
           tipo_servicio_descripcion: data_servicio.tipo_servicio_desc,
           numero_producto: 'TODO',
-          servicio_unidad_codigo: 'TODO',
+          servicio_unidad_codigo: data_servicio.unidad_medida_cod,
           servicio_unidad_descripcion: 'TODO',
 
           unidades_obras: unidades_obra.map(
@@ -758,7 +758,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
                 material_tipo_moneda_id: material.tipo_moneda_id,
                 material_unidad_id: material.material_unidad_medida_id,
                 material_valor: material.valor,
-                material_unidad_codigo: 'TODO',
+                material_unidad_codigo: material.material_unidad_medida_cod,
                 material_unidad_descripcion: 'TODO',
               })),
               uo_rowid: data_unidad_obra.cub_has_uob_id,
@@ -766,7 +766,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               uo_nombre: data_unidad_obra.unidad_obra_desc,
               uo_precio_total_clp: data_unidad_obra.uo_precio_total_clp,
               uo_unidad_id: data_unidad_obra.uob_unidad_medida_id,
-              uo_unidad_codigo: 'TODO',
+              uo_unidad_codigo: data_unidad_obra.uob_unidad_medida_cod,
               uo_unidad_descripcion: 'TODO',
             })
           ),
@@ -990,6 +990,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     };
 
     console.log(request);
-    // this.cubicacionFacade.editCub(request);
+    this.cubicacionFacade.editCub(request);
   }
 }

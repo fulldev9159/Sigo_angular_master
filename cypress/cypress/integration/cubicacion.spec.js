@@ -61,234 +61,234 @@ describe('Cubicacion Test', () => {
     cy.get('#create-button').should('be.disabled');
   });
 
-  // it('Revisasr que se agreguen correctamente los items al carrito', () => {
-  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-  //   cy.cubFiltros(
-  //     actividad_test.toUpperCase(),
-  //     tipo_servicio_test.toUpperCase()
-  //   );
+  it('Revisasr que se agreguen correctamente los items al carrito', () => {
+    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+    cy.cubFiltros(
+      actividad_test.toUpperCase(),
+      tipo_servicio_test.toUpperCase()
+    );
 
-  //   // Agregar un servicio y un UO
-  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-  //   // Agregar otro servicio con 2 UO
-  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-  //   cy.cubAddService(serv_2_test, serv_2_uo_2_test);
+    // Agregar un servicio y un UO
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    // Agregar otro servicio con 2 UO
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
 
-  //   // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
-  //   // SERVICIO 1
-  //   cy.cubCheckTableDataServUO(
-  //     1,
-  //     serv_1_test,
-  //     tipo_servicio_test,
-  //     1,
-  //     '$266,67',
-  //     '$266,67',
-  //     serv_1_uo_1_test,
-  //     actividad_test,
-  //     1,
-  //     '$57.000',
-  //     '$57.000'
-  //   );
+    // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
+    // SERVICIO 1
+    cy.cubCheckTableDataServUO(
+      1,
+      serv_1_test,
+      tipo_servicio_test,
+      1,
+      '$266,67',
+      '$266,67',
+      serv_1_uo_1_test,
+      actividad_test,
+      1,
+      '$57.000',
+      '$57.000'
+    );
 
-  //   // SERVICIO 2
-  //   cy.cubCheckTableDataServUO(
-  //     2,
-  //     serv_2_test,
-  //     tipo_servicio_test,
-  //     1,
-  //     '$711,12',
-  //     '$711,12',
-  //     serv_2_uo_2_test,
-  //     actividad_test,
-  //     1,
-  //     '$0',
-  //     '$0'
-  //   );
-  //   cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
+    // SERVICIO 2
+    cy.cubCheckTableDataServUO(
+      2,
+      serv_2_test,
+      tipo_servicio_test,
+      1,
+      '$711,12',
+      '$711,12',
+      serv_2_uo_2_test,
+      actividad_test,
+      1,
+      '$0',
+      '$0'
+    );
+    cy.cubCheckTableDataUOB(3, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
 
-  //   // REVISAR TOTALES
-  //   cy.cubTablaTotales(
-  //     [
-  //       { precio: serv_1_precio_test, cantidad: 1 },
-  //       { precio: serv_2_precio_test, cantidad: 1 },
-  //     ],
-  //     [{ precio: serv_1_uo_1_precio_test, cantidad: 1 }]
-  //   );
+    // REVISAR TOTALES
+    cy.cubTablaTotales(
+      [
+        { precio: serv_1_precio_test, cantidad: 1 },
+        { precio: serv_2_precio_test, cantidad: 1 },
+      ],
+      [{ precio: serv_1_uo_1_precio_test, cantidad: 1 }]
+    );
 
-  //   // ELIMINAR UNO, AGREGAR TODO Y ELIMINAR TODO
-  //   cy.get(':nth-child(8) > .icon > .eliminar-color').click();
+    // ELIMINAR UNO, AGREGAR TODO Y ELIMINAR TODO
+    cy.get(':nth-child(8) > .icon > .eliminar-color').click();
 
-  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-  //   cy.cubAddService(serv_2_test, serv_2_uo_3_test);
-  //   cy.cubAddService(serv_2_test, serv_2_uo_4_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_3_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_4_test);
 
-  //   // SERVICIO 1
-  //   cy.cubCheckTableDataServUO(
-  //     1,
-  //     serv_1_test,
-  //     tipo_servicio_test,
-  //     1,
-  //     '$266,67',
-  //     '$266,67',
-  //     serv_1_uo_1_test,
-  //     actividad_test,
-  //     1,
-  //     '$57.000',
-  //     '$57.000'
-  //   );
+    // SERVICIO 1
+    cy.cubCheckTableDataServUO(
+      1,
+      serv_1_test,
+      tipo_servicio_test,
+      1,
+      '$266,67',
+      '$266,67',
+      serv_1_uo_1_test,
+      actividad_test,
+      1,
+      '$57.000',
+      '$57.000'
+    );
 
-  //   // SERVICIO 2
-  //   cy.cubCheckTableDataServUO(
-  //     2,
-  //     serv_2_test,
-  //     tipo_servicio_test,
-  //     1,
-  //     '$711,12',
-  //     '$711,12',
-  //     serv_2_uo_4_test,
-  //     actividad_test,
-  //     1,
-  //     '$0',
-  //     '$0'
-  //   );
-  //   cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
-  //   cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
-  //   cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
+    // SERVICIO 2
+    cy.cubCheckTableDataServUO(
+      2,
+      serv_2_test,
+      tipo_servicio_test,
+      1,
+      '$711,12',
+      '$711,12',
+      serv_2_uo_4_test,
+      actividad_test,
+      1,
+      '$0',
+      '$0'
+    );
+    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(4, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(5, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
 
-  //   // ELIMINAR TODO
-  //   cy.get(':nth-child(2) > :nth-child(7) > .icon > .ui ').click();
-  //   cy.get(':nth-child(1) > :nth-child(7) > .icon > .ui').click();
+    // ELIMINAR TODO
+    cy.get(':nth-child(2) > :nth-child(7) > .icon > .ui ').click();
+    cy.get(':nth-child(1) > :nth-child(7) > .icon > .ui').click();
 
-  //   cy.get('.text-left > p').contains('Al menos 1 servicio debe ser ingresado');
-  //   cy.get('#create-button').should('be.disabled');
+    cy.get('.text-left > p').contains('Al menos 1 servicio debe ser ingresado');
+    cy.get('#create-button').should('be.disabled');
 
-  //   // CASO ESPECIAL
-  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
-  //   cy.cubAddService(serv_2_test, serv_2_uo_2_test);
-  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-  //   cy.cubAddService(serv_2_test, serv_2_uo_3_test);
-  //   cy.cubAddService(serv_2_test, serv_2_uo_4_test);
+    // CASO ESPECIAL
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_3_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_4_test);
 
-  //   // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
-  //   // SERVICIO 1
-  //   cy.cubCheckTableDataServUO(
-  //     1,
-  //     serv_1_test,
-  //     tipo_servicio_test,
-  //     1,
-  //     '$266,67',
-  //     '$266,67',
-  //     serv_1_uo_1_test,
-  //     actividad_test,
-  //     1,
-  //     '$57.000',
-  //     '$57.000'
-  //   );
+    // REVISAR SI LA TABLA CONTIENE TODOS LOS DATOS CORRESPONDIENTES
+    // SERVICIO 1
+    cy.cubCheckTableDataServUO(
+      1,
+      serv_1_test,
+      tipo_servicio_test,
+      1,
+      '$266,67',
+      '$266,67',
+      serv_1_uo_1_test,
+      actividad_test,
+      1,
+      '$57.000',
+      '$57.000'
+    );
 
-  //   // SERVICIO 2
-  //   cy.cubCheckTableDataServUO(
-  //     2,
-  //     serv_2_test,
-  //     tipo_servicio_test,
-  //     1,
-  //     '$711,12',
-  //     '$711,12',
-  //     serv_2_uo_4_test,
-  //     actividad_test,
-  //     1,
-  //     '$0',
-  //     '$0'
-  //   );
-  //   cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
-  //   cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
-  //   cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
-  // });
+    // SERVICIO 2
+    cy.cubCheckTableDataServUO(
+      2,
+      serv_2_test,
+      tipo_servicio_test,
+      1,
+      '$711,12',
+      '$711,12',
+      serv_2_uo_4_test,
+      actividad_test,
+      1,
+      '$0',
+      '$0'
+    );
+    cy.cubCheckTableDataUOB(3, serv_2_uo_3_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(4, serv_2_uo_2_test, actividad_test, 1, '$0', '$0');
+    cy.cubCheckTableDataUOB(5, serv_2_uo_1_test, actividad_test, 1, '$0', '$0');
+  });
 
-  // it('Revisar cambios de cantidades', () => {
-  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-  //   cy.cubFiltros(
-  //     actividad_test.toUpperCase(),
-  //     tipo_servicio_test.toUpperCase()
-  //   );
+  it('Revisar cambios de cantidades', () => {
+    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+    cy.cubFiltros(
+      actividad_test.toUpperCase(),
+      tipo_servicio_test.toUpperCase()
+    );
 
-  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-  //   cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
 
-  //   // AUMENTAR LA CANTIDAD SERVICIO
-  //   const fila2 = '.table-carrito > table > tbody > tr:nth-child(2) > td';
-  //   cy.get(fila2 + ':nth-child(4)>app-input>input')
-  //     .clear()
-  //     .type('{del}4');
+    // AUMENTAR LA CANTIDAD SERVICIO
+    const fila2 = '.table-carrito > table > tbody > tr:nth-child(2) > td';
+    cy.get(fila2 + ':nth-child(4)>app-input>input')
+      .clear()
+      .type('{del}4');
 
-  //   // REVISAR VALORES
-  //   // SERVICIO 1
-  //   cy.cubCheckTableDataServUO(
-  //     1,
-  //     serv_1_test,
-  //     tipo_servicio_test,
-  //     1,
-  //     '$266,67',
-  //     '$266,67',
-  //     serv_1_uo_1_test,
-  //     actividad_test,
-  //     1,
-  //     '$57.000',
-  //     '$57.000'
-  //   );
-  //   // SERVICIO 2
-  //   cy.cubCheckTableDataServUO(
-  //     2,
-  //     serv_2_test,
-  //     tipo_servicio_test,
-  //     4,
-  //     '$711,12',
-  //     '$2.844,48',
-  //     serv_2_uo_1_test,
-  //     actividad_test,
-  //     1,
-  //     '$0',
-  //     '$0'
-  //   );
-  // });
+    // REVISAR VALORES
+    // SERVICIO 1
+    cy.cubCheckTableDataServUO(
+      1,
+      serv_1_test,
+      tipo_servicio_test,
+      1,
+      '$266,67',
+      '$266,67',
+      serv_1_uo_1_test,
+      actividad_test,
+      1,
+      '$57.000',
+      '$57.000'
+    );
+    // SERVICIO 2
+    cy.cubCheckTableDataServUO(
+      2,
+      serv_2_test,
+      tipo_servicio_test,
+      4,
+      '$711,12',
+      '$2.844,48',
+      serv_2_uo_1_test,
+      actividad_test,
+      1,
+      '$0',
+      '$0'
+    );
+  });
 
-  // it('Revisar que no permita agregar el mismo servicio/uo', () => {
-  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-  //   cy.cubFiltros(
-  //     actividad_test.toUpperCase(),
-  //     tipo_servicio_test.toUpperCase()
-  //   );
+  it('Revisar que no permita agregar el mismo servicio/uo', () => {
+    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+    cy.cubFiltros(
+      actividad_test.toUpperCase(),
+      tipo_servicio_test.toUpperCase()
+    );
 
-  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
-  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
 
-  //   cy.get('#mensaje-repetido').contains(
-  //     'Ya ha agregado este servico/Unidad Obra'
-  //   );
-  // });
+    cy.get('#mensaje-repetido').contains(
+      'Ya ha agregado este servico/Unidad Obra'
+    );
+  });
 
-  // it('Revisar que no permita agregar el mismo servicio/uo', () => {
-  //   cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
-  //   cy.cubFiltros(
-  //     actividad_test.toUpperCase(),
-  //     tipo_servicio_test.toUpperCase()
-  //   );
+  it('Revisar que no permita agregar el mismo servicio/uo', () => {
+    cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
+    cy.cubFiltros(
+      actividad_test.toUpperCase(),
+      tipo_servicio_test.toUpperCase()
+    );
 
-  //   cy.cubAddService(serv_1_test, serv_1_uo_1_test);
+    cy.cubAddService(serv_1_test, serv_1_uo_1_test);
 
-  //   cy.get(':nth-child(15) > .icon > .ui').click();
-  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(1)').contains(
-  //     '165211'
-  //   );
-  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(2)').contains(
-  //     'KIT RETENCION FIBRA 14 MM'
-  //   );
-  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(3)').contains(
-  //     'PROVEEDOR'
-  //   );
-  //   cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
-  //     '$57.000'
-  //   );
-  // });
+    cy.get(':nth-child(15) > .icon > .ui').click();
+    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(1)').contains(
+      '165211'
+    );
+    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(2)').contains(
+      'KIT RETENCION FIBRA 14 MM'
+    );
+    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(3)').contains(
+      'PROVEEDOR'
+    );
+    cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
+      '$57.000'
+    );
+  });
 
   it('Crear cubicaciones', () => {
     // MOVIL;
