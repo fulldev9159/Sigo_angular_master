@@ -295,6 +295,15 @@ export class OtFacade {
     this.store.dispatch(otActions.AceptarRechazarIncialOT({ request }));
   }
 
+  // Trabajador Supervisor OT
+  public getPosibleTrabajador(ot_id: number): void {
+    this.store.dispatch(otActions.getPosibleTrabajador({ ot_id }));
+  }
+
+  public getPosibleTrabajador$(): Observable<any[]> {
+    return this.store.select(otSelectors.getPosibleTrabajador);
+  }
+
   // Resets
   public resetData(): void {
     this.store.dispatch(otActions.resetData());
@@ -424,15 +433,6 @@ export class OtFacade {
       otActions.assignCoordinator({ otID, coordinador_id: coordinatorID })
     );
   }
-
-  // Trabajador Supervisor OT
-  public getTrabajadores(otID: number): void {
-    this.store.dispatch(otActions.getTrabajadores({ otID }));
-  }
-
-  // public getTrabajadores$(): Observable<Data.User[]> {
-  //   return this.store.select(otSelectors.getTrabajadores);
-  // }
 
   public assignTrabajador(otID: number, trabajadorID: number): void {
     this.store.dispatch(otActions.assignTrabajador({ otID, trabajadorID }));

@@ -511,6 +511,10 @@ export interface RequestAceptarRechazarInicialOT {
   };
 }
 
+export interface DataRespPosiblesTrabajadores {
+  items: string;
+}
+
 // ////
 interface FieldOrder {
   ot_id: string;

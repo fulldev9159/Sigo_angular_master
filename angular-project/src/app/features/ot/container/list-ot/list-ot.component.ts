@@ -197,8 +197,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
             class: 'p-button-rounded p-button-success p-mr-2',
             label: 'Asignar Supervisor de trabajos',
             onClick: (event: Event, item) => {
-              // this.otFacade.selectOT(ot);
-              // this.idOtSelected = item.id;
+              this.otFacade.selectOT(ot);
+              this.idOtSelected = item.id;
+              this.otFacade.getPosibleTrabajador(item.id);
               // this.displayAceptacionIncialModal = true;
             },
           });

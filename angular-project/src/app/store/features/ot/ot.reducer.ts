@@ -76,8 +76,7 @@ export interface StateOt {
   itemsAbiertas: OT[];
   itemsCerradas: OT[];
 
-  // coordinators: Data.User[];
-  // trabajadores: Data.User[];
+  trabajadores: any[];
 
   // registroslibroobras: Data.RegistroLibroObra[];
 
@@ -135,8 +134,7 @@ export const initialStateOt: StateOt = {
   itemsAbiertas: [],
   itemsCerradas: [],
 
-  // coordinators: [],
-  // trabajadores: [],
+  trabajadores: [],
 
   // registroslibroobras: [],
 
@@ -463,6 +461,19 @@ export const reducerOt = createReducer(
                 : b.descripcion > a.descripcion
                 ? -1
                 : 0
+            )
+          : [],
+    };
+  }),
+
+  on(OtActions.getPosibleTrabajadorSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      sitio:
+        temp.length > 0
+          ? temp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
             )
           : [],
     };

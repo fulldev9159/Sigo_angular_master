@@ -245,6 +245,14 @@ export class OTService {
     );
   }
 
+  // POSIBLE TRABAJADOR
+  getPosibleTrabajador(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/poisbles_trabajadores/get`,
+      { ot_id }
+    );
+  }
+
   ////
 
   approveOT(perfil_id: number, otID: number): Observable<any> {

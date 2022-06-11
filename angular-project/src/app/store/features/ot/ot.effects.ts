@@ -381,6 +381,21 @@ export class OtEffects {
     )
   );
 
+  // ACEPTAR O RECHAZAR INCIAL
+  getPosibleTrabajador$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getPosibleTrabajador),
+      concatMap(({ ot_id }) =>
+        this.otService.getPosibleTrabajador(ot_id).pipe(
+          map(response => otActions.getPosibleTrabajadorSuccess({ response })),
+          catchError(error =>
+            of(otActions.getPosibleTrabajadorError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

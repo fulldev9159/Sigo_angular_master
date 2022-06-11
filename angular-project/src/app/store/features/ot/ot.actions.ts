@@ -450,6 +450,22 @@ export const AceptarRechazarIncialOTError = createAction(
   props<{ error: any }>()
 );
 
+// POSIBLES TRABAJADORES
+export const getPosibleTrabajador = createAction(
+  '[OT] GET getPosibleTrabajador',
+  props<{ ot_id: number }>()
+);
+
+export const getPosibleTrabajadorSuccess = createAction(
+  '[OT] GET getPosibleTrabajador Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getPosibleTrabajadorError = createAction(
+  '[OT] GET getPosibleTrabajador Error',
+  props<{ error: any }>()
+);
+
 export const resetData = createAction('[ResetData] ResetData');
 export const resetContrato = createAction('[ResetData] Reset Contrato');
 export const resetPlan = createAction('[ResetData] ResetPlan');

@@ -113,6 +113,11 @@ export const getAllMotivoRechazoOT = createSelector(
   (state: fromOt.StateOt) => state.allMotivoRechazo
 );
 
+export const getPosibleTrabajador = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.trabajadores
+);
+
 //  ////
 export const getOtEjecucion = createSelector(
   selectOt,
@@ -150,11 +155,6 @@ export const getDetalleOT = createSelector(
 // export const getCoordinators = createSelector(
 //   selectOt,
 //   (state: fromOt.StateOt) => state.coordinators
-// );
-
-// export const getTrabajadores = createSelector(
-//   selectOt,
-//   (state: fromOt.StateOt) => state.trabajadores
 // );
 
 export const getSavingOT = createSelector(
