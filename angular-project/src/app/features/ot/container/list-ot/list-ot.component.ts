@@ -187,6 +187,34 @@ export class ListOtComponent implements OnInit, OnDestroy {
           },
         ];
 
+        const otAutorizarProveedor = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ACEPTAR_PROVEEDOR'
+        );
+
+        if (otAutorizarProveedor) {
+          actions.push({
+            icon: 'p-button-icon pi pi-check',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Asignar Supervisor de trabajos',
+            onClick: (event: Event, item) => {
+              // this.otFacade.selectOT(ot);
+              // this.idOtSelected = item.id;
+              // this.displayAceptacionIncialModal = true;
+            },
+          });
+
+          actions.push({
+            icon: 'p-button-icon pi pi-times red',
+            class: 'p-button-rounded p-button-danger p-mr-2',
+            label: 'Rechazar OT',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.displayRechazoIncialModal = true;
+              this.otFacade.getAllMotivoRechazoOT();
+            },
+          });
+        }
+
         const otAutorizarInicial = (ot.acciones || []).find(
           accion => accion.slug === 'OT_ACEPTAR_INICIAL'
         );
