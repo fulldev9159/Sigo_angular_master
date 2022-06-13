@@ -199,8 +199,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             onClick: (event: Event, item) => {
               this.otFacade.selectOT(ot);
               this.idOtSelected = item.id;
-              this.otFacade.getPosibleTrabajador(item.id);
-              // this.displayAceptacionIncialModal = true;
+              this.displayAssignTrabajadorModal = true;
             },
           });
 
@@ -211,7 +210,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             onClick: (event: Event, item) => {
               this.idOtSelected = item.id;
               this.displayRechazoIncialModal = true;
-              this.otFacade.getAllMotivoRechazoOT();
+              this.otFacade.getAllMotivoRechazoOT('ACEPTACION_OT_EECC');
             },
           });
         }
@@ -239,7 +238,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             onClick: (event: Event, item) => {
               this.idOtSelected = item.id;
               this.displayRechazoIncialModal = true;
-              this.otFacade.getAllMotivoRechazoOT();
+              this.otFacade.getAllMotivoRechazoOT('ACEPTACION_JERARQUICA');
             },
           });
         }

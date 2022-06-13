@@ -421,7 +421,8 @@ export const createOTError = createAction(
 
 // GET ALL MOTIVO RECHAZO
 export const getAllMotivoRechazoOT = createAction(
-  '[OT] GET getAllMotivoRechazoOT'
+  '[OT] GET getAllMotivoRechazoOT',
+  props<{ tipo: string }>()
 );
 
 export const getAllMotivoRechazoOTSuccess = createAction(

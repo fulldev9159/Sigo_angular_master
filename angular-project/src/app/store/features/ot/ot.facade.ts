@@ -280,8 +280,8 @@ export class OtFacade {
   }
 
   // GET ALL MOTIVO RECHAZO
-  public getAllMotivoRechazoOT(): void {
-    this.store.dispatch(otActions.getAllMotivoRechazoOT());
+  public getAllMotivoRechazoOT(tipo: string): void {
+    this.store.dispatch(otActions.getAllMotivoRechazoOT({ tipo }));
   }
 
   public getAllMotivoRechazoOT$(): Observable<MotivoRechazo[]> {

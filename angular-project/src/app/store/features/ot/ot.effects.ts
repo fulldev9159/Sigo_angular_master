@@ -353,8 +353,8 @@ export class OtEffects {
   getAllMotivoRechazoOT$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getAllMotivoRechazoOT),
-      concatMap(() =>
-        this.otService.getAllMotivoRechazoOT().pipe(
+      concatMap(({ tipo }) =>
+        this.otService.getAllMotivoRechazoOT(tipo).pipe(
           map(response => otActions.getAllMotivoRechazoOTSuccess({ response })),
           catchError(error =>
             of(otActions.getAllMotivoRechazoOTError({ error }))

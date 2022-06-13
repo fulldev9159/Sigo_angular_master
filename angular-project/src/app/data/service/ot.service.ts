@@ -228,10 +228,12 @@ export class OTService {
   }
 
   // GET ALL MOTIVO RECHAZO OT
-  getAllMotivoRechazoOT(): Observable<Response<DataRespGetMotivoRechazo>> {
+  getAllMotivoRechazoOT(
+    tipo: string
+  ): Observable<Response<DataRespGetMotivoRechazo>> {
     return this.http.post<Response<DataRespGetMotivoRechazo>>(
-      `${this.apiUrl}/configuration/causas_rechazo_tipo/getall`,
-      {}
+      `${this.apiUrl}/configuration/causas_rechazo_tipo/get`,
+      { tipo }
     );
   }
 
@@ -248,7 +250,7 @@ export class OTService {
   // POSIBLE TRABAJADOR
   getPosibleTrabajador(ot_id: number): Observable<Response<any>> {
     return this.http.post<Response<any>>(
-      `${this.apiUrl}/ot/poisbles_trabajadores/get`,
+      `${this.apiUrl}/ot/posibles_trabajadores/get`,
       { ot_id }
     );
   }

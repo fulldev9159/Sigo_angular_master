@@ -45,7 +45,7 @@ export class AssignTrabajadorFormComponent implements OnInit, OnDestroy {
       this.ot$.subscribe(ot => {
         this.otID = ot.id;
         this.reset();
-        this.otFacade.getTrabajadores(ot.id);
+        this.otFacade.getPosibleTrabajador(ot.id);
       })
     );
   }

@@ -497,8 +497,9 @@ export interface DataRespGetMotivoRechazo {
 }
 
 export interface MotivoRechazo {
-  descripcion: string;
   id: number;
+  motivo: string;
+  tipo: string;
 }
 
 // ACEPTAR O RECHAZAR
