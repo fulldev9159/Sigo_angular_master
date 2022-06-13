@@ -381,7 +381,7 @@ export class OtEffects {
     )
   );
 
-  // ACEPTAR O RECHAZAR INCIAL
+  // GET POSIBLE TRABAJADOR
   getPosibleTrabajador$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getPosibleTrabajador),
@@ -396,13 +396,59 @@ export class OtEffects {
     )
   );
 
+  // ACEPTAR PROVEEDOR
+  AceptarProveedorOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AceptarProveedorOT),
+      concatMap(({ request, ot_id, proxy_id, concepto }) =>
+        this.otService.AceptarRechazarIncialOT(request).pipe(
+          map(response =>
+            otActions.AsignarSupervisorTrabajosOT({ ot_id, proxy_id, concepto })
+          ),
+          catchError(error => of(otActions.AceptarProveedorOTError({ error })))
+        )
+      )
+    )
+  );
+
+  // GET POSIBLE TRABAJADOR
+  AsignarSupervisorTrabajosOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AsignarSupervisorTrabajosOT),
+      concatMap(({ ot_id, proxy_id, concepto }) =>
+        this.otService.updateUsuarioInvolucrado(ot_id, proxy_id, concepto).pipe(
+          map(response =>
+            otActions.AsignarSupervisorTrabajosOTSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.AsignarSupervisorTrabajosOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // RECHAZAR PROVEEDOR
+  RechazarProveedorOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.RechazarProveedorOT),
+      concatMap(({ request }) =>
+        this.otService.AceptarRechazarIncialOT(request).pipe(
+          map(response => otActions.RechazarProveedorOTSuccess({ response })),
+          catchError(error => of(otActions.RechazarProveedorOTError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           otActions.createOTSuccess,
-          otActions.AceptarRechazarIncialOTSuccess
+          otActions.AceptarRechazarIncialOTSuccess,
+          otActions.AsignarSupervisorTrabajosOTSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -419,7 +465,11 @@ export class OtEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.createOTError, otActions.AceptarRechazarIncialOTError),
+        ofType(
+          otActions.createOTError,
+          otActions.AceptarRechazarIncialOTError,
+          otActions.AceptarProveedorOTError
+        ),
         tap(action =>
           this.alertMessageAction.messageActions(
             action.error.error.status.code,

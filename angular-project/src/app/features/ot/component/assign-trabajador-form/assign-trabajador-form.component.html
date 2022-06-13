@@ -4,7 +4,7 @@
       <option value="" selected disabled>Seleccione..</option>
       <ng-container *ngFor="let trabajador of trabajadores$ | async">
         <option value="{{trabajador.id }}">
-          {{ trabajador.nombres }} {{ trabajador.apellidos }}
+          {{ trabajador.nombre }}
         </option>
       </ng-container>
     </ng-container>

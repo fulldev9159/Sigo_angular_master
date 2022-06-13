@@ -36,8 +36,9 @@ import {
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
   DataRespGetDetalleOT,
-  RequestAceptarRechazarInicialOT,
+  RequestAceptarRechazarOT,
   MotivoRechazo,
+  PosibleTrabajador,
 } from '@data';
 import {
   DetalleActa,
@@ -289,9 +290,7 @@ export class OtFacade {
   }
 
   // ACEPTAR O RECHAZAR INCIAL
-  public AceptarRechazarIncialOT(
-    request: RequestAceptarRechazarInicialOT
-  ): void {
+  public AceptarRechazarIncialOT(request: RequestAceptarRechazarOT): void {
     this.store.dispatch(otActions.AceptarRechazarIncialOT({ request }));
   }
 
@@ -300,8 +299,35 @@ export class OtFacade {
     this.store.dispatch(otActions.getPosibleTrabajador({ ot_id }));
   }
 
-  public getPosibleTrabajador$(): Observable<any[]> {
+  public getPosibleTrabajador$(): Observable<PosibleTrabajador[]> {
     return this.store.select(otSelectors.getPosibleTrabajador);
+  }
+
+  // ACEPTAR PROVEDOR
+  public AceptarProveedorOT(
+    request: RequestAceptarRechazarOT,
+    ot_id: number,
+    proxy_id: number,
+    concepto: string
+  ): void {
+    this.store.dispatch(
+      otActions.AceptarProveedorOT({ request, ot_id, proxy_id, concepto })
+    );
+  }
+
+  // ASIGNAR SUPERVISOR DE TRABAJOS
+  public AsignarSupervisorTrabajos(
+    ot_id: number,
+    proxy_id: number,
+    concepto: string
+  ): void {
+    this.store.dispatch(
+      otActions.AsignarSupervisorTrabajosOT({ ot_id, proxy_id, concepto })
+    );
+  }
+  // RECHAZAR PROVEEDOR
+  public RechazarProveedorOT(request: RequestAceptarRechazarOT): void {
+    this.store.dispatch(otActions.RechazarProveedorOT({ request }));
   }
 
   // Resets

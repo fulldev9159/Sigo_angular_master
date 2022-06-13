@@ -27,6 +27,7 @@ import {
   OT,
   DataRespGetDetalleOT,
   MotivoRechazo,
+  PosibleTrabajador,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -76,7 +77,7 @@ export interface StateOt {
   itemsAbiertas: OT[];
   itemsCerradas: OT[];
 
-  trabajadores: any[];
+  trabajadores: PosibleTrabajador[];
 
   // registroslibroobras: Data.RegistroLibroObra[];
 
@@ -456,11 +457,7 @@ export const reducerOt = createReducer(
       allMotivoRechazo:
         temp.length > 0
           ? temp.sort((a, b) =>
-              a.descripcion > b.descripcion
-                ? 1
-                : b.descripcion > a.descripcion
-                ? -1
-                : 0
+              a.motivo > b.motivo ? 1 : b.motivo > a.motivo ? -1 : 0
             )
           : [],
     };
@@ -470,7 +467,7 @@ export const reducerOt = createReducer(
     const temp = copy(response.data.items);
     return {
       ...state,
-      sitio:
+      trabajadores:
         temp.length > 0
           ? temp.sort((a, b) =>
               a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
@@ -606,11 +603,6 @@ export const reducerOt = createReducer(
     coordinators: [],
   })),
 
-  on(OtActions.getTrabajadores, state => state),
-  on(OtActions.getTrabajadoresSuccess, (state, { trabajadores }) => ({
-    ...state,
-    trabajadores,
-  })),
   on(OtActions.getTrabajadoresError, (state, { error }) => ({
     ...state,
     trabajadores: [],

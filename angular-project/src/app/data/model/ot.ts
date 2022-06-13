@@ -503,7 +503,7 @@ export interface MotivoRechazo {
 }
 
 // ACEPTAR O RECHAZAR
-export interface RequestAceptarRechazarInicialOT {
+export interface RequestAceptarRechazarOT {
   ot_id: number;
   values: {
     estado: string; // ACEPTADO O RECHAZADO
@@ -513,7 +513,12 @@ export interface RequestAceptarRechazarInicialOT {
 }
 
 export interface DataRespPosiblesTrabajadores {
-  items: string;
+  items: PosibleTrabajador[];
+}
+
+export interface PosibleTrabajador {
+  id: number;
+  nombre: string;
 }
 
 // ////
