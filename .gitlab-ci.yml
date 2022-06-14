@@ -99,6 +99,7 @@ integrations test cypress:
     - npm start & ./node_modules/.bin/wait-on http://localhost:4201
     - cd ../cypress
     - npm ci
+    - cd cypress
     - npx cypress run
 
 acceptance test:
