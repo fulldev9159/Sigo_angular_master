@@ -401,7 +401,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.AceptarProveedorOT),
       concatMap(({ request, ot_id, proxy_id, concepto }) =>
-        this.otService.AceptarRechazarIncialOT(request).pipe(
+        this.otService.AceptarRechazarProveedorOT(request).pipe(
           map(response =>
             otActions.AsignarSupervisorTrabajosOT({ ot_id, proxy_id, concepto })
           ),
@@ -433,7 +433,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.RechazarProveedorOT),
       concatMap(({ request }) =>
-        this.otService.AceptarRechazarIncialOT(request).pipe(
+        this.otService.AceptarRechazarProveedorOT(request).pipe(
           map(response => otActions.RechazarProveedorOTSuccess({ response })),
           catchError(error => of(otActions.RechazarProveedorOTError({ error })))
         )

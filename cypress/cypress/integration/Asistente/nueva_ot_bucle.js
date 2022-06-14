@@ -1,4 +1,4 @@
-describe.skip('Cubicacion Test', () => {
+describe('Cubicacion Test', () => {
   // DATOS REALES
 
   // BUCLE
@@ -81,7 +81,7 @@ describe.skip('Cubicacion Test', () => {
     observaciones_form,
   ];
 
-  const nombre = 'rechazo jerarquico 2';
+  const nombre = 'rechazo proveedor 1';
 
   beforeEach(() => {
     cy.viewport(1500, 1700);

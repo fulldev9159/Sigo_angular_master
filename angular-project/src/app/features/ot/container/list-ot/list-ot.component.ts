@@ -572,6 +572,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
         tipo: +this.formRechazoIncial.get('tipo_id').value,
       },
     };
+    console.log(this.etapa);
     if (this.etapa === 'OT_ET_AUTORIZACION_PROVEEDOR') {
       this.otFacade.RechazarProveedorOT(request);
     } else if (this.etapa === 'OT_ET_AUTORIZACION_INICIAL') {
