@@ -476,7 +476,7 @@ export const AceptarProveedorOT = createAction(
     ot_id: number;
     proxy_id: number;
     concepto: string;
-  }>() //ADM_CONTRATO','COORDINADOR','SUPERVISOR_DE_TRABAJOS')
+  }>() // ADM_CONTRATO','COORDINADOR','SUPERVISOR_DE_TRABAJOS')
 );
 
 export const AceptarProveedorOTError = createAction(
