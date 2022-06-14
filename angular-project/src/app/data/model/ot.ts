@@ -497,18 +497,28 @@ export interface DataRespGetMotivoRechazo {
 }
 
 export interface MotivoRechazo {
-  descripcion: string;
   id: number;
+  motivo: string;
+  tipo: string;
 }
 
 // ACEPTAR O RECHAZAR
-export interface RequestAceptarRechazarInicialOT {
+export interface RequestAceptarRechazarOT {
   ot_id: number;
   values: {
     estado: string; // ACEPTADO O RECHAZADO
     observacion?: string;
     tipo?: number;
   };
+}
+
+export interface DataRespPosiblesTrabajadores {
+  items: PosibleTrabajador[];
+}
+
+export interface PosibleTrabajador {
+  id: number;
+  nombre: string;
 }
 
 // ////

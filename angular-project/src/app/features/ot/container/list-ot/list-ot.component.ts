@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { MotivoRechazo, OT, RequestAceptarRechazarInicialOT } from '@data';
+import { MotivoRechazo, OT, RequestAceptarRechazarOT } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
@@ -39,6 +39,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   idOtSelected: number;
   razonrechazo: string;
 
+  etapa: string;
   displayAceptacionIncialModal = false;
   displayRechazoIncialModal = false;
   displayAssignTrabajadorModal = false;
@@ -199,6 +200,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             onClick: (event: Event, item) => {
               this.otFacade.selectOT(ot);
               this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
               this.displayAceptacionIncialModal = true;
             },
           });
@@ -209,51 +211,81 @@ export class ListOtComponent implements OnInit, OnDestroy {
             label: 'Rechazar OT',
             onClick: (event: Event, item) => {
               this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
               this.displayRechazoIncialModal = true;
-              this.otFacade.getAllMotivoRechazoOT();
+              this.otFacade.getAllMotivoRechazoOT('ACEPTACION_JERARQUICA');
             },
           });
         }
 
-        const otAsignarCoordinador = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_ASIGNAR_COORDINADOR'
+        const otAutorizarProveedor = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ACEPTAR_PROVEEDOR'
         );
 
-        if (otAsignarCoordinador) {
+        if (otAutorizarProveedor) {
+          actions.push({
+            icon: 'p-button-icon pi pi-check',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Asignar Supervisor de trabajos',
+            onClick: (event: Event, item) => {
+              this.otFacade.selectOT(ot);
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.displayAssignTrabajadorModal = true;
+            },
+          });
+
+          actions.push({
+            icon: 'p-button-icon pi pi-times red',
+            class: 'p-button-rounded p-button-danger p-mr-2',
+            label: 'Rechazar OT',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.displayRechazoIncialModal = true;
+              this.otFacade.getAllMotivoRechazoOT('ACEPTACION_OT_EECC');
+            },
+          });
+        }
+
+        const otAsignarTranbajador = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ASIGNAR_TRABAJADOR'
+        );
+
+        if (otAsignarTranbajador) {
           actions.push({
             icon: 'p-button-icon pi pi-user',
             class: 'p-button-rounded p-button-success p-mr-2',
-            label: otAsignarCoordinador.nombre_corto,
+            label: otAsignarTranbajador.nombre_corto,
             onClick: (event: Event, item) => {
               this.otFacade.selectOT(ot);
-              this.displayAceptacionIncialModal = true;
+              this.displayAssignTrabajadorModal = true;
             },
           });
         }
+        // const otAnular = (ot.acciones || []).find(
+        //   accion => accion.slug === 'OT_ANULAR'
+        // );
 
-        const otAnular = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_ANULAR'
-        );
-
-        if (otAnular) {
-          actions.push({
-            icon: 'p-button-icon pi pi-times-circle',
-            class: 'p-button-rounded p-button-success p-mr-2',
-            label: otAnular.nombre_corto,
-            onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea anular Orden de trabajo?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.cancelOT(ot.id);
-                },
-              });
-            },
-          });
-        }
+        // if (otAnular) {
+        //   actions.push({
+        //     icon: 'p-button-icon pi pi-times-circle',
+        //     class: 'p-button-rounded p-button-success p-mr-2',
+        //     label: otAnular.nombre_corto,
+        //     onClick: (event: Event, item) => {
+        //       this.confirmationService.confirm({
+        //         target: event.target as EventTarget,
+        //         message: `¿Desea anular Orden de trabajo?`,
+        //         icon: 'pi pi-exclamation-triangle',
+        //         acceptLabel: 'Confirmar',
+        //         rejectLabel: 'Cancelar',
+        //         accept: () => {
+        //           this.otFacade.cancelOT(ot.id);
+        //         },
+        //       });
+        //     },
+        //   });
+        // }
 
         const otFinalizarTrabajos = (ot.acciones || []).find(
           accion => accion.slug === 'OT_FINALIZAR_TRABAJOS'
@@ -275,21 +307,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
                   this.otFacade.finalizeOTJobs(ot.id);
                 },
               });
-            },
-          });
-        }
-        const otAsignarTranbajador = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_ASIGNAR_TRABAJADOR'
-        );
-
-        if (otAsignarTranbajador) {
-          actions.push({
-            icon: 'p-button-icon pi pi-user',
-            class: 'p-button-rounded p-button-success p-mr-2',
-            label: otAsignarTranbajador.nombre_corto,
-            onClick: (event: Event, item) => {
-              this.otFacade.selectOT(ot);
-              this.displayAssignTrabajadorModal = true;
             },
           });
         }
@@ -524,7 +541,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   AceptacionInicialSubmit(): void {
-    const request: RequestAceptarRechazarInicialOT = {
+    const request: RequestAceptarRechazarOT = {
       ot_id: this.idOtSelected,
       values: {
         estado: 'ACEPTADO',
@@ -547,7 +564,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   rechazoInicialSubmit(): void {
-    const request: RequestAceptarRechazarInicialOT = {
+    const request: RequestAceptarRechazarOT = {
       ot_id: this.idOtSelected,
       values: {
         estado: 'RECHAZADO',
@@ -555,9 +572,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
         tipo: +this.formRechazoIncial.get('tipo_id').value,
       },
     };
-
-    // console.log(request);
-    this.otFacade.AceptarRechazarIncialOT(request);
+    console.log(this.etapa);
+    if (this.etapa === 'OT_ET_AUTORIZACION_PROVEEDOR') {
+      this.otFacade.RechazarProveedorOT(request);
+    } else if (this.etapa === 'OT_ET_AUTORIZACION_INICIAL') {
+      this.otFacade.AceptarRechazarIncialOT(request);
+    }
     this.responsable = 'TODAS';
     this.tipoOT = 0;
     this.selectedIndex = 0;
@@ -569,6 +589,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   closeAssignTrabajadorModal(): void {
     this.otFacade.selectOT(null); // workaround for subscribing the same ot multiple times
     this.displayAssignTrabajadorModal = false;
+    this.idOtSelected = null;
   }
 
   closeRegistrarLibroObraModal(): void {
@@ -577,8 +598,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   assignTrabajadorFormSubmit(): void {
-    console.log(this.assignTrabajadorForm);
     this.assignTrabajadorForm.submit();
+    this.responsable = 'TODAS';
+    this.tipoOT = 0;
+    this.selectedIndex = 0;
+    this.selectedOTs = 'ABIERTAS';
+    this.closeAssignTrabajadorModal();
   }
 
   registrarLibroObraFormSubmit(): void {

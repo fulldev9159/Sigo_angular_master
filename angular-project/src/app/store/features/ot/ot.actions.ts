@@ -40,7 +40,8 @@ import {
   DataRespGetOTs,
   DataRespGetDetalleOT,
   DataRespGetMotivoRechazo,
-  RequestAceptarRechazarInicialOT,
+  RequestAceptarRechazarOT,
+  DataRespPosiblesTrabajadores,
 } from '@data';
 
 import {
@@ -421,7 +422,8 @@ export const createOTError = createAction(
 
 // GET ALL MOTIVO RECHAZO
 export const getAllMotivoRechazoOT = createAction(
-  '[OT] GET getAllMotivoRechazoOT'
+  '[OT] GET getAllMotivoRechazoOT',
+  props<{ tipo: string }>()
 );
 
 export const getAllMotivoRechazoOTSuccess = createAction(
@@ -437,7 +439,7 @@ export const getAllMotivoRechazoOTError = createAction(
 // ACEPTAR O RECHAZAR INCIAL
 export const AceptarRechazarIncialOT = createAction(
   '[OT] GET AceptarRechazarIncialOT',
-  props<{ request: RequestAceptarRechazarInicialOT }>()
+  props<{ request: RequestAceptarRechazarOT }>()
 );
 
 export const AceptarRechazarIncialOTSuccess = createAction(
@@ -447,6 +449,70 @@ export const AceptarRechazarIncialOTSuccess = createAction(
 
 export const AceptarRechazarIncialOTError = createAction(
   '[OT] GET AceptarRechazarIncialOT Error',
+  props<{ error: any }>()
+);
+
+// POSIBLES TRABAJADORES
+export const getPosibleTrabajador = createAction(
+  '[OT] GET getPosibleTrabajador',
+  props<{ ot_id: number }>()
+);
+
+export const getPosibleTrabajadorSuccess = createAction(
+  '[OT] GET getPosibleTrabajador Success',
+  props<{ response: Response<DataRespPosiblesTrabajadores> }>()
+);
+
+export const getPosibleTrabajadorError = createAction(
+  '[OT] GET getPosibleTrabajador Error',
+  props<{ error: any }>()
+);
+
+// ACEPTAR PROVEEDOR
+export const AceptarProveedorOT = createAction(
+  '[OT] GET AceptarProveedorOT',
+  props<{
+    request: RequestAceptarRechazarOT;
+    ot_id: number;
+    proxy_id: number;
+    concepto: string;
+  }>() // ADM_CONTRATO','COORDINADOR','SUPERVISOR_DE_TRABAJOS')
+);
+
+export const AceptarProveedorOTError = createAction(
+  '[OT] GET AceptarProveedorOT Error',
+  props<{ error: any }>()
+);
+
+//  RECHAZAR PROVEEDOR
+export const RechazarProveedorOT = createAction(
+  '[OT] GET RechazarProveedorOT',
+  props<{ request: RequestAceptarRechazarOT }>()
+);
+
+export const RechazarProveedorOTSuccess = createAction(
+  '[OT] GET RechazarProveedorOT Success',
+  props<{ response: Response<any> }>()
+);
+
+export const RechazarProveedorOTError = createAction(
+  '[OT] GET RechazarProveedorOT Error',
+  props<{ error: any }>()
+);
+
+//  ASIGNAR SUPERVISOR DE TRABAJOS
+export const AsignarSupervisorTrabajosOT = createAction(
+  '[OT] GET AsignarSupervisorTrabajosOT',
+  props<{ ot_id: number; proxy_id: number; concepto: string }>()
+);
+
+export const AsignarSupervisorTrabajosOTSuccess = createAction(
+  '[OT] GET AsignarSupervisorTrabajosOT Success',
+  props<{ response: Response<any> }>()
+);
+
+export const AsignarSupervisorTrabajosOTError = createAction(
+  '[OT] GET AsignarSupervisorTrabajosOT Error',
   props<{ error: any }>()
 );
 

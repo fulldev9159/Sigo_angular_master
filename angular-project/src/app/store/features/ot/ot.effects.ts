@@ -353,8 +353,8 @@ export class OtEffects {
   getAllMotivoRechazoOT$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getAllMotivoRechazoOT),
-      concatMap(() =>
-        this.otService.getAllMotivoRechazoOT().pipe(
+      concatMap(({ tipo }) =>
+        this.otService.getAllMotivoRechazoOT(tipo).pipe(
           map(response => otActions.getAllMotivoRechazoOTSuccess({ response })),
           catchError(error =>
             of(otActions.getAllMotivoRechazoOTError({ error }))
@@ -381,13 +381,74 @@ export class OtEffects {
     )
   );
 
+  // GET POSIBLE TRABAJADOR
+  getPosibleTrabajador$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getPosibleTrabajador),
+      concatMap(({ ot_id }) =>
+        this.otService.getPosibleTrabajador(ot_id).pipe(
+          map(response => otActions.getPosibleTrabajadorSuccess({ response })),
+          catchError(error =>
+            of(otActions.getPosibleTrabajadorError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // ACEPTAR PROVEEDOR
+  AceptarProveedorOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AceptarProveedorOT),
+      concatMap(({ request, ot_id, proxy_id, concepto }) =>
+        this.otService.AceptarRechazarProveedorOT(request).pipe(
+          map(response =>
+            otActions.AsignarSupervisorTrabajosOT({ ot_id, proxy_id, concepto })
+          ),
+          catchError(error => of(otActions.AceptarProveedorOTError({ error })))
+        )
+      )
+    )
+  );
+
+  // GET POSIBLE TRABAJADOR
+  AsignarSupervisorTrabajosOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AsignarSupervisorTrabajosOT),
+      concatMap(({ ot_id, proxy_id, concepto }) =>
+        this.otService.updateUsuarioInvolucrado(ot_id, proxy_id, concepto).pipe(
+          map(response =>
+            otActions.AsignarSupervisorTrabajosOTSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.AsignarSupervisorTrabajosOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // RECHAZAR PROVEEDOR
+  RechazarProveedorOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.RechazarProveedorOT),
+      concatMap(({ request }) =>
+        this.otService.AceptarRechazarProveedorOT(request).pipe(
+          map(response => otActions.RechazarProveedorOTSuccess({ response })),
+          catchError(error => of(otActions.RechazarProveedorOTError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           otActions.createOTSuccess,
-          otActions.AceptarRechazarIncialOTSuccess
+          otActions.AceptarRechazarIncialOTSuccess,
+          otActions.AsignarSupervisorTrabajosOTSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -404,7 +465,11 @@ export class OtEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.createOTError, otActions.AceptarRechazarIncialOTError),
+        ofType(
+          otActions.createOTError,
+          otActions.AceptarRechazarIncialOTError,
+          otActions.AceptarProveedorOTError
+        ),
         tap(action =>
           this.alertMessageAction.messageActions(
             action.error.error.status.code,

@@ -99,7 +99,7 @@
           <option value="null" selected disabled>Seleccione un tipo de rechazo</option>
           <ng-container *ngFor="let item of tipoRechazo$|async">
             <option [value]="item.id">
-              {{item.descripcion}}
+              {{item.motivo}}
             </option>
           </ng-container>
         </ng-container>
@@ -145,7 +145,7 @@
 </app-modal>
 
 <app-modal [display]="displayAssignTrabajadorModal" (CloseEvent)="closeAssignTrabajadorModal()" [style]="{ width: '50vw' }">
-  <ng-container modal-header-title>Asignación de trabajador supervisor </ng-container>
+  <ng-container modal-header-title>Asignación de supervisor de trabajos </ng-container>
   <ng-container modal-content>
     <app-assign-trabajador-form #assignTrabajadorForm></app-assign-trabajador-form>
   </ng-container>

@@ -36,8 +36,9 @@ import {
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
   DataRespGetDetalleOT,
-  RequestAceptarRechazarInicialOT,
+  RequestAceptarRechazarOT,
   MotivoRechazo,
+  PosibleTrabajador,
 } from '@data';
 import {
   DetalleActa,
@@ -280,8 +281,8 @@ export class OtFacade {
   }
 
   // GET ALL MOTIVO RECHAZO
-  public getAllMotivoRechazoOT(): void {
-    this.store.dispatch(otActions.getAllMotivoRechazoOT());
+  public getAllMotivoRechazoOT(tipo: string): void {
+    this.store.dispatch(otActions.getAllMotivoRechazoOT({ tipo }));
   }
 
   public getAllMotivoRechazoOT$(): Observable<MotivoRechazo[]> {
@@ -289,10 +290,44 @@ export class OtFacade {
   }
 
   // ACEPTAR O RECHAZAR INCIAL
-  public AceptarRechazarIncialOT(
-    request: RequestAceptarRechazarInicialOT
-  ): void {
+  public AceptarRechazarIncialOT(request: RequestAceptarRechazarOT): void {
     this.store.dispatch(otActions.AceptarRechazarIncialOT({ request }));
+  }
+
+  // Trabajador Supervisor OT
+  public getPosibleTrabajador(ot_id: number): void {
+    this.store.dispatch(otActions.getPosibleTrabajador({ ot_id }));
+  }
+
+  public getPosibleTrabajador$(): Observable<PosibleTrabajador[]> {
+    return this.store.select(otSelectors.getPosibleTrabajador);
+  }
+
+  // ACEPTAR PROVEDOR
+  public AceptarProveedorOT(
+    request: RequestAceptarRechazarOT,
+    ot_id: number,
+    proxy_id: number,
+    concepto: string
+  ): void {
+    this.store.dispatch(
+      otActions.AceptarProveedorOT({ request, ot_id, proxy_id, concepto })
+    );
+  }
+
+  // ASIGNAR SUPERVISOR DE TRABAJOS
+  public AsignarSupervisorTrabajos(
+    ot_id: number,
+    proxy_id: number,
+    concepto: string
+  ): void {
+    this.store.dispatch(
+      otActions.AsignarSupervisorTrabajosOT({ ot_id, proxy_id, concepto })
+    );
+  }
+  // RECHAZAR PROVEEDOR
+  public RechazarProveedorOT(request: RequestAceptarRechazarOT): void {
+    this.store.dispatch(otActions.RechazarProveedorOT({ request }));
   }
 
   // Resets
@@ -424,15 +459,6 @@ export class OtFacade {
       otActions.assignCoordinator({ otID, coordinador_id: coordinatorID })
     );
   }
-
-  // Trabajador Supervisor OT
-  public getTrabajadores(otID: number): void {
-    this.store.dispatch(otActions.getTrabajadores({ otID }));
-  }
-
-  // public getTrabajadores$(): Observable<Data.User[]> {
-  //   return this.store.select(otSelectors.getTrabajadores);
-  // }
 
   public assignTrabajador(otID: number, trabajadorID: number): void {
     this.store.dispatch(otActions.assignTrabajador({ otID, trabajadorID }));

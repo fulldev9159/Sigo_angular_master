@@ -1,10 +1,10 @@
 <form novalidate autocomplete="off" [formGroup]="form">
   <app-select [control]="formControls.trabajadorID" label="Trabajador Supervisor" [errorMessageFn]="errorMessageFn">
     <ng-container options>
-      <option value="" selected disabled>Seleccione tipo</option>
+      <option value="" selected disabled>Seleccione..</option>
       <ng-container *ngFor="let trabajador of trabajadores$ | async">
         <option value="{{trabajador.id }}">
-          {{ trabajador.nombres }} {{ trabajador.apellidos }}
+          {{ trabajador.nombre }}
         </option>
       </ng-container>
     </ng-container>

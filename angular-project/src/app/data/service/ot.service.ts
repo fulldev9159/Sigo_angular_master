@@ -41,7 +41,8 @@ import {
   DataRespGetOTs,
   DataRespGetDetalleOT,
   DataRespGetMotivoRechazo,
-  RequestAceptarRechazarInicialOT,
+  RequestAceptarRechazarOT,
+  DataRespPosiblesTrabajadores,
 } from '@data';
 
 @Injectable({
@@ -228,20 +229,58 @@ export class OTService {
   }
 
   // GET ALL MOTIVO RECHAZO OT
-  getAllMotivoRechazoOT(): Observable<Response<DataRespGetMotivoRechazo>> {
+  getAllMotivoRechazoOT(
+    tipo: string
+  ): Observable<Response<DataRespGetMotivoRechazo>> {
     return this.http.post<Response<DataRespGetMotivoRechazo>>(
-      `${this.apiUrl}/configuration/causas_rechazo_tipo/getall`,
-      {}
+      `${this.apiUrl}/configuration/causas_rechazo_tipo/get`,
+      { tipo }
     );
   }
 
-  // ACEPTAR O RECHAZAR
+  // ACEPTAR O RECHAZAR INICIAL
   AceptarRechazarIncialOT(
-    request: RequestAceptarRechazarInicialOT
+    request: RequestAceptarRechazarOT
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/ot_aceptacion_inicial/update`,
       request
+    );
+  }
+
+  // POSIBLE TRABAJADOR
+  getPosibleTrabajador(
+    ot_id: number
+  ): Observable<Response<DataRespPosiblesTrabajadores>> {
+    return this.http.post<Response<DataRespPosiblesTrabajadores>>(
+      `${this.apiUrl}/ot/posibles_trabajadores/get`,
+      { ot_id }
+    );
+  }
+
+  // ACEPTAR O RECHAZAR PROVEEDOR
+  AceptarRechazarProveedorOT(
+    request: RequestAceptarRechazarOT
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/ot_aceptacion_eecc/update`,
+      request
+    );
+  }
+
+  // ACTUALIZAR USUARIO INVOLUCRADO
+  updateUsuarioInvolucrado(
+    ot_id: number,
+    proxy_id: number,
+    concepto: string
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}  /ot/usuario_involucrado_ot/create`,
+      {
+        ot_id,
+        proxy_id,
+        concepto,
+      }
     );
   }
 

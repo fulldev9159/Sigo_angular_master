@@ -9,6 +9,7 @@ import { map, filter } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import * as Data from '@data';
+import { PosibleTrabajador, RequestAceptarRechazarOT } from '@data';
 
 @Component({
   selector: 'app-assign-trabajador-form',
@@ -19,7 +20,8 @@ import * as Data from '@data';
 export class AssignTrabajadorFormComponent implements OnInit, OnDestroy {
   ot$: Observable<Data.OT>;
   otID: number;
-  trabajadores$: Observable<Data.User[]>;
+  etapa: string;
+  trabajadores$: Observable<PosibleTrabajador[]>;
   subscription: Subscription = new Subscription();
   formControls = {
     trabajadorID: new FormControl('', [Validators.required]),
@@ -37,15 +39,16 @@ export class AssignTrabajadorFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.ot$ = this.otFacade.getSelectedOT$().pipe(filter(ot => ot !== null));
-    // this.trabajadores$ = this.otFacade
-    //   .getTrabajadores$()
-    //   .pipe(map(trabajadores => trabajadores || []));
+    this.trabajadores$ = this.otFacade
+      .getPosibleTrabajador$()
+      .pipe(map(trabajadores => trabajadores || []));
 
     this.subscription.add(
       this.ot$.subscribe(ot => {
         this.otID = ot.id;
+        this.etapa = ot.etapa_slug;
         this.reset();
-        this.otFacade.getTrabajadores(ot.id);
+        this.otFacade.getPosibleTrabajador(ot.id);
       })
     );
   }
@@ -85,7 +88,26 @@ export class AssignTrabajadorFormComponent implements OnInit, OnDestroy {
     this.touch();
     if (this.valid) {
       const { trabajadorID } = this.form.getRawValue();
-      this.otFacade.assignTrabajador(this.otID, trabajadorID);
+      if (this.etapa === 'OT_ET_AUTORIZACION_PROVEEDOR') {
+        const request: RequestAceptarRechazarOT = {
+          ot_id: this.otID,
+          values: {
+            estado: 'ACEPTADO',
+          },
+        };
+        this.otFacade.AceptarProveedorOT(
+          request,
+          this.otID,
+          trabajadorID,
+          'SUPERVISOR_DE_TRABAJOS'
+        );
+      } else if (this.etapa === 'OT_ET_ASIGNACION_TRABAJADOR') {
+        this.otFacade.AsignarSupervisorTrabajos(
+          this.otID,
+          trabajadorID,
+          'SUPERVISOR_DE_TRABAJOS'
+        );
+      }
     } else {
       console.error('invalid form');
     }
