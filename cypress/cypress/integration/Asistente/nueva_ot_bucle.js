@@ -1,4 +1,4 @@
-describe('Cubicacion Test', () => {
+describe.skip('Cubicacion Test', () => {
   // DATOS REALES
 
   // BUCLE
