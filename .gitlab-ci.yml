@@ -55,8 +55,8 @@ update-demos-sigo1:
     - sudo docker-compose ps
     - sudo docker-compose stop mcl_otec_db_testing mcl_api_otec_test
     - sudo docker-compose rm -f mcl_otec_db_testing mcl_api_otec_test
-    - sudo docker rmi $(sudo docker images gcr.io/zwcsce/mcl-otec-db -a -q)
-    - sudo docker rmi $(sudo docker images gcr.io/zwcsce/api-sigo -a -q)
+    # - sudo docker rmi $(sudo docker images gcr.io/zwcsce/mcl-otec-db -a -q)
+    # - sudo docker rmi $(sudo docker images gcr.io/zwcsce/api-sigo -a -q)
     - sudo docker-compose up -d mcl_otec_db_testing mcl_api_otec_test
     - sudo docker-compose ps
   tags:
