@@ -48,7 +48,7 @@ update-demos-sigo1:
   when: manual
   image: tmaier/docker-compose:latest
   script:
-    - sudo docker-compose pull --no-parallel
+    - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
     - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
     - echo "deploying to google cloud"
     - sudo systemctl status docker
