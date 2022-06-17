@@ -32,7 +32,7 @@ services:
       -wait tcp://mcl_test_sigo_db:3306
 
     # OTEC TEST
-    mcl_otec_db_testing:
+   mcl_otec_db_testing:
       image: gcr.io/zwcsce/mcl-otec-db:latest
       restart: always
       environment:
@@ -54,7 +54,7 @@ services:
       volumes:
         - volume_db_sigo_test:/var/lib/mysql
 
-    mcl_api_otec_test:
+  mcl_api_otec_test:
       image: gcr.io/zwcsce/api-sigo:develop
       environment:
         LDAP_SKIP: '1'
