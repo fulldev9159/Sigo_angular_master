@@ -33,52 +33,52 @@ services:
 
     # OTEC TEST
    mcl_otec_db_testing:
-      image: gcr.io/zwcsce/mcl-otec-db:latest
-      restart: always
-      environment:
-        TZ: America/Santiago
-        MYSQL_DATABASE: OTEC
-        MYSQL_ROOT_PASSWORD: pass
-        MYSQL_USER: otec_user
-        MYSQL_PASSWORD: otec_pass
-      # volumes:
-      #     - otec_db:/var/lib/mysql
-      command:
-        [
-          'mysqld',
-          '--character-set-server=utf8mb4',
-          '--collation-server=utf8mb4_unicode_ci',
-        ]
-      ports:
-        - 3311:3306
-      volumes:
-        - volume_db_sigo_test:/var/lib/mysql
+    image: gcr.io/zwcsce/mcl-otec-db:latest
+    restart: always
+    environment:
+      TZ: America/Santiago
+      MYSQL_DATABASE: OTEC
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_USER: otec_user
+      MYSQL_PASSWORD: otec_pass
+    # volumes:
+    #     - otec_db:/var/lib/mysql
+    command:
+      [
+        'mysqld',
+        '--character-set-server=utf8mb4',
+        '--collation-server=utf8mb4_unicode_ci',
+      ]
+    ports:
+      - 3311:3306
+    volumes:
+      - volume_db_sigo_test:/var/lib/mysql
 
   mcl_api_otec_test:
-      image: gcr.io/zwcsce/api-sigo:develop
-      environment:
-        LDAP_SKIP: '1'
-        TZ: America/Santiago
-        LOG_LEVEL: DEBUG
-        SERVICE_PORT: 4040
-        OTEC_DB: root:pass@tcp(mcl_otec_db_testing:3306)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true
-        DB_MAXOPENCONNECTIONS: 10
-        DB_MAXIDLECONNECTIONS: 5
-        DB_PINGINTERVAL: 30
-        DB_MAXLIFETIMECONNECTION: 300
-        API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
-        LDAP_GUIA_ADDRESS: ldap://openldap:1389
-        MOCKUP_PATH: /go/bin/mockups/
-        TREEOT: mcl_OT_testing
-        DEPLOY: test
-      restart: always
-      ports:
-        - 4041:4040
-      volumes:
-        - /tmp:/tmp
-      depends_on:
-        - mcl_otec_db
-        - openldap
+    image: gcr.io/zwcsce/api-sigo:develop
+    environment:
+      LDAP_SKIP: '1'
+      TZ: America/Santiago
+      LOG_LEVEL: DEBUG
+      SERVICE_PORT: 4040
+      OTEC_DB: root:pass@tcp(mcl_otec_db_testing:3306)/OTEC?charset=utf8&collation=utf8mb4_general_ci&timeout=2s&parseTime=true
+      DB_MAXOPENCONNECTIONS: 10
+      DB_MAXIDLECONNECTIONS: 5
+      DB_PINGINTERVAL: 30
+      DB_MAXLIFETIMECONNECTION: 300
+      API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
+      LDAP_GUIA_ADDRESS: ldap://openldap:1389
+      MOCKUP_PATH: /go/bin/mockups/
+      TREEOT: mcl_OT_testing
+      DEPLOY: test
+    restart: always
+    ports:
+      - 4041:4040
+    volumes:
+      - /tmp:/tmp
+    depends_on:
+      - mcl_otec_db
+      - openldap
 
   # LOCAL
   # mcl_local_sigo_api:
