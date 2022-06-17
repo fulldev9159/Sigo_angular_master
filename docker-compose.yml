@@ -78,7 +78,6 @@ services:
       - /tmp:/tmp
     depends_on:
       - mcl_otec_db_testing
-      - openldap
 
   # LOCAL
   # mcl_local_sigo_api:
