@@ -35,13 +35,33 @@ linter:
 #     - ng test --code-coverage --progress false --watch false
 #   coverage: '/^Statements\s*:\s*([^%]+)/'
 
+# update-demos-sigo1:
+#   stage: restart test environment
+#   variables:
+#     ORIGIN: $ORIGIN
+#     CI_PIPELINE_ID: $CI_PIPELINE_ID
+#     PRECURSOR: $CI_PROJECT_NAME
+#   trigger: zweicom/cl-movistar/sigo/demos-sigo
+
 update-demos-sigo1:
   stage: restart test environment
-  variables:
-    ORIGIN: $ORIGIN
-    CI_PIPELINE_ID: $CI_PIPELINE_ID
-    PRECURSOR: $CI_PROJECT_NAME
-  trigger: zweicom/cl-movistar/sigo/demos-sigo
+  when: manual
+  image: tmaier/docker-compose:latest
+  script:
+    - sudo docker-compose pull --no-parallel
+    - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
+    - echo "deploying to google cloud"
+    - sudo systemctl status docker
+    - sudo docker-compose ps
+    - sudo docker-compose stop mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker-compose rm -f mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker rmi $(sudo docker images gcr.io/zwcsce/mcl-otec-db -a -q)
+    - sudo docker rmi $(sudo docker images gcr.io/zwcsce/api-sigo -a -q)
+    - sudo docker-compose up -d mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker-compose ps
+  tags:
+    - gcloud_tpb
+  environment: google cloud tpb
 
 update test environment:
   stage: reset testing database sigo
