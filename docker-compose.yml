@@ -77,7 +77,7 @@ services:
     volumes:
       - /tmp:/tmp
     depends_on:
-      - mcl_otec_db
+      - mcl_otec_db_testing
       - openldap
 
   # LOCAL
