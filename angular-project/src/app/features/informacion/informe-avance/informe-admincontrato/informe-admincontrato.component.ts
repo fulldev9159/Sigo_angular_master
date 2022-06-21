@@ -25,6 +25,7 @@ import {
   RequestSaveInformeAvanceAdmin,
 } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-informe-admincontrato',
@@ -50,72 +51,81 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
 
   constructor(
     private otFacade: OtFacade,
-    private cubFacade: CubicacionFacade
+    private cubFacade: CubicacionFacade,
+    private rutaActiva: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.lpusTotal = 0;
-    this.detalleOt$ = this.otFacade.getDetalleOT$();
-    this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceAdminEC$();
+    this.subscription.add(
+      this.rutaActiva.params.subscribe(params => {
+        if (params.id) {
+          console.log('Params', params);
+          this.otFacade.getDetalleInformeAvance(+params.id);
+        }
+      })
+    );
+    // this.lpusTotal = 0;
+    // this.detalleOt$ = this.otFacade.getDetalleOT$();
+    // this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceAdminEC$();
+    // // this.subscription.add(
+    // //   this.detalleOt$.subscribe(ot => {
+    // //     if (ot && ot.tipo_subetapa_pago.slug === 'OT_ET_PAGO_GENERACION_ACTA') {
+    // //       this.totalCubicado = ot.total;
+    // //       this.otFacade.getDataInformeAvanceAdminEC(ot.id);
+    // //     }
+    // //   })
+    // // );
+
     // this.subscription.add(
-    //   this.detalleOt$.subscribe(ot => {
-    //     if (ot && ot.tipo_subetapa_pago.slug === 'OT_ET_PAGO_GENERACION_ACTA') {
-    //       this.totalCubicado = ot.total;
-    //       this.otFacade.getDataInformeAvanceAdminEC(ot.id);
+    //   this.dataInformeAvance$.subscribe(lpu => {
+    //     if (lpu) {
+    //       const totalCub = lpu.reduce(
+    //         (ac, cur) => ac + cur.cantidad_cubicada * cur.LpuPrecio,
+    //         0
+    //       );
+    //     }
+
+    //     if (lpu && lpu.length > 0) {
+    //       this.informe_id = lpu[0].informe_id;
+    //       this.detalleTipo = lpu[0].detalle_tipo;
+    //       lpu.forEach(lpu_service => {
+    //         const group = new FormGroup({
+    //           detalle_id: new FormControl(lpu_service.detalle_id, [
+    //             Validators.required,
+    //           ]),
+    //           informado: new FormControl(lpu_service.cantidad_informada, [
+    //             Validators.required,
+    //             Validators.min(0),
+    //           ]),
+    //           precio: new FormControl(lpu_service.LpuPrecio),
+    //         });
+    //         this.lpusTotal =
+    //           this.lpusTotal +
+    //           lpu_service.LpuPrecio * lpu_service.cantidad_informada;
+    //         (this.form.get('table') as FormArray).push(group);
+    //       });
     //     }
     //   })
     // );
 
-    this.subscription.add(
-      this.dataInformeAvance$.subscribe(lpu => {
-        if (lpu) {
-          const totalCub = lpu.reduce(
-            (ac, cur) => ac + cur.cantidad_cubicada * cur.LpuPrecio,
-            0
-          );
-        }
-
-        if (lpu && lpu.length > 0) {
-          this.informe_id = lpu[0].informe_id;
-          this.detalleTipo = lpu[0].detalle_tipo;
-          lpu.forEach(lpu_service => {
-            const group = new FormGroup({
-              detalle_id: new FormControl(lpu_service.detalle_id, [
-                Validators.required,
-              ]),
-              informado: new FormControl(lpu_service.cantidad_informada, [
-                Validators.required,
-                Validators.min(0),
-              ]),
-              precio: new FormControl(lpu_service.LpuPrecio),
-            });
-            this.lpusTotal =
-              this.lpusTotal +
-              lpu_service.LpuPrecio * lpu_service.cantidad_informada;
-            (this.form.get('table') as FormArray).push(group);
-          });
-        }
-      })
-    );
-
-    this.subscription.add(
-      this.form
-        .get('table')
-        .valueChanges.pipe(withLatestFrom(this.dataInformeAvance$))
-        .subscribe(([informados, lpus]) => {
-          if (lpus.length === informados.length) {
-            this.lpusTotal = 0;
-            informados.forEach(informado => {
-              // console.log('precio', +informado.precio);
-              // console.log('informado', +informado.informado);
-              const subtotal = +informado.precio * +informado.informado;
-              // console.log('s', subtotal);
-              this.lpusTotal = this.lpusTotal + subtotal;
-              // console.log('t', this.lpusTotal);
-            });
-          }
-        })
-    );
+    // this.subscription.add(
+    //   this.form
+    //     .get('table')
+    //     .valueChanges.pipe(withLatestFrom(this.dataInformeAvance$))
+    //     .subscribe(([informados, lpus]) => {
+    //       if (lpus.length === informados.length) {
+    //         this.lpusTotal = 0;
+    //         informados.forEach(informado => {
+    //           // console.log('precio', +informado.precio);
+    //           // console.log('informado', +informado.informado);
+    //           const subtotal = +informado.precio * +informado.informado;
+    //           // console.log('s', subtotal);
+    //           this.lpusTotal = this.lpusTotal + subtotal;
+    //           // console.log('t', this.lpusTotal);
+    //         });
+    //       }
+    //     })
+    // );
   }
 
   errorMessageFn(errors: AbstractControl['errors']): string {

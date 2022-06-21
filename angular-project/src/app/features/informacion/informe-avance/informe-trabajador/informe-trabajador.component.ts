@@ -18,6 +18,7 @@ import {
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
 } from '@data';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-informe-trabajador',
@@ -39,41 +40,51 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   constructor(
     private otFacade: OtFacade,
-    private cubFacade: CubicacionFacade
+    private cubFacade: CubicacionFacade,
+    private rutaActiva: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.detalleOt$ = this.otFacade.getDetalleOT$();
-    this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
-    // this.subscription.add(
-    //   this.detalleOt$.subscribe(ot => {
-    //     if (ot) {
-    //       this.otFacade.getDataInformeAvanceTrabajador(ot.id);
-    //     }
-    //   })
-    // );
-
     this.subscription.add(
-      this.dataInformeAvance$.subscribe(lpu => {
-        if (lpu && lpu.length > 0) {
-          this.informe_id = lpu[0].informe_id;
-          this.detalleTipo = lpu[0].detalle_tipo;
-          lpu.forEach(lpu_service => {
-            const group = new FormGroup({
-              detalle_id: new FormControl(lpu_service.detalle_id, [
-                Validators.required,
-              ]),
-              informado: new FormControl(lpu_service.cantidad_informada, [
-                Validators.required,
-                Validators.min(0),
-              ]),
-            });
-
-            (this.form.get('table') as FormArray).push(group);
-          });
+      this.rutaActiva.params.subscribe(params => {
+        if (params.id) {
+          console.log('Params', params);
+          this.otFacade.getDetalleInformeAvance(+params.id);
         }
       })
     );
+
+    // this.detalleOt$ = this.otFacade.getDetalleOT$();
+    // this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
+    // // this.subscription.add(
+    // //   this.detalleOt$.subscribe(ot => {
+    // //     if (ot) {
+    // //       this.otFacade.getDataInformeAvanceTrabajador(ot.id);
+    // //     }
+    // //   })
+    // // );
+
+    // this.subscription.add(
+    //   this.dataInformeAvance$.subscribe(lpu => {
+    //     if (lpu && lpu.length > 0) {
+    //       this.informe_id = lpu[0].informe_id;
+    //       this.detalleTipo = lpu[0].detalle_tipo;
+    //       lpu.forEach(lpu_service => {
+    //         const group = new FormGroup({
+    //           detalle_id: new FormControl(lpu_service.detalle_id, [
+    //             Validators.required,
+    //           ]),
+    //           informado: new FormControl(lpu_service.cantidad_informada, [
+    //             Validators.required,
+    //             Validators.min(0),
+    //           ]),
+    //         });
+
+    //         (this.form.get('table') as FormArray).push(group);
+    //       });
+    //     }
+    //   })
+    // );
   }
 
   errorMessageFn(errors: AbstractControl['errors']): string {

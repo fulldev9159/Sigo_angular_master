@@ -1,4 +1,4 @@
-<div style="padding: 8px;">
+<!-- <div style="padding: 8px;">
   <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'">
     <p-message severity="info" text="El informe enviado está a la espera de que el gestor lo apruebe"></p-message>&nbsp;
   </span>
@@ -10,12 +10,6 @@
     <p-card>
       <ng-template pTemplate="header">
         <div style="padding: 16px;">
-          <!-- <button class="btn btn-primary" style="margin-right: 10px;" disabled>
-            Agregar Mano de obras/LPUs adicionales
-          </button>
-          <button class="btn btn-primary" disabled>
-            Materiales
-          </button> -->
         </div>
       </ng-template>
 
@@ -76,13 +70,9 @@
                   <td>{{car.lpu_numero_producto}}</td>
                   <td>{{car.lpu_nombre}}</td>
                   <td></td>
-                  <!-- Cub. -->
                   <td>{{car.cantidad_cubicada}}</td>
-                  <!-- Apr. -->
                   <td>{{car.cantidad_aprobada_historica}}</td>
-                  <!-- Pend. -->
                   <td>{{car.cantidad_pendiente}}</td>
-                  <!-- inf. -->
                   <td>
                     <input appInputColor [formControl]="formCntl(i)" min="0" type="number" style="width: 37px;">
                     <div *ngIf="formCntl(i).invalid && (formCntl(i).dirty || formCntl(i).touched)">
@@ -163,4 +153,4 @@
     <button class="btn" (click)="DisplayConfirmacionModal=false"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Cancelar</button>
     <button class="btn btn-primary" (click)="sendInforme()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, Enviar informe</button>
   </ng-container>
-</app-modal>
+</app-modal> -->

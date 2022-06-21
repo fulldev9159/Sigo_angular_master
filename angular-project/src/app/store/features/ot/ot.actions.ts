@@ -516,6 +516,22 @@ export const AsignarSupervisorTrabajosOTError = createAction(
   props<{ error: any }>()
 );
 
+//  GET DETALLE INFORME DE AVANCE
+export const getDetalleInformeAvance = createAction(
+  '[OT] GET getDetalleInformeAvance',
+  props<{ ot_id: number }>()
+);
+
+export const getDetalleInformeAvanceSuccess = createAction(
+  '[OT] GET getDetalleInformeAvance Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getDetalleInformeAvanceError = createAction(
+  '[OT] GET getDetalleInformeAvance Error',
+  props<{ error: any }>()
+);
+
 export const resetData = createAction('[ResetData] ResetData');
 export const resetContrato = createAction('[ResetData] Reset Contrato');
 export const resetPlan = createAction('[ResetData] ResetPlan');

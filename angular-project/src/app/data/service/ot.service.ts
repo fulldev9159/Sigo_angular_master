@@ -43,6 +43,7 @@ import {
   DataRespGetMotivoRechazo,
   RequestAceptarRechazarOT,
   DataRespPosiblesTrabajadores,
+  DetalleInformeAvance,
 } from '@data';
 
 @Injectable({
@@ -281,6 +282,14 @@ export class OTService {
         proxy_id,
         concepto,
       }
+    );
+  }
+
+  // GET DETALLE INFORME AVANCE
+  getDetalleInformeAvance(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<DetalleInformeAvance>>(
+      `${this.apiUrl}/ot/informe_avance/detalle/get`,
+      { ot_id }
     );
   }
 

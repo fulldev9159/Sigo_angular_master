@@ -325,10 +325,20 @@ export class OtFacade {
       otActions.AsignarSupervisorTrabajosOT({ ot_id, proxy_id, concepto })
     );
   }
+
   // RECHAZAR PROVEEDOR
   public RechazarProveedorOT(request: RequestAceptarRechazarOT): void {
     this.store.dispatch(otActions.RechazarProveedorOT({ request }));
   }
+
+  // GET DETALE INFORME DE AVANCE
+  public getDetalleInformeAvance(ot_id: number): void {
+    this.store.dispatch(otActions.getDetalleInformeAvance({ ot_id }));
+  }
+
+  // public getDetalleInformeAvance$(): Observable<PosibleTrabajador[]> {
+  //   return this.store.select(otSelectors.getDetalleInformeAvance);
+  // }
 
   // Resets
   public resetData(): void {
