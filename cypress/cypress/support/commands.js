@@ -188,6 +188,13 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add('cambioCantidadServicio', (numfila, cantidad) => {
+  const fila = `.table-carrito > table > tbody > tr:nth-child(${numfila}) > td`;
+  cy.get(fila + ':nth-child(4)>app-input>input')
+    .clear()
+    .type(`{del}${cantidad}`);
+});
+
 Cypress.Commands.add('cubTablaTotales', (servicios, uobs) => {
   let total_servicos = 0;
   let total_uobs = 0;

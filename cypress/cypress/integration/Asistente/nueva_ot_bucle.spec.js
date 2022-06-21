@@ -1,4 +1,4 @@
-describe.skip('Cubicacion Test', () => {
+describe.skip('Creacion de cub y ot', () => {
   // DATOS REALES
 
   // BUCLE
@@ -9,6 +9,15 @@ describe.skip('Cubicacion Test', () => {
   const tipo_servicio_bucle = 'Fibra Optica';
   const serv_1_bucle = 'J757 - DESMONTAR CABLE DE FIBRA OPTICA EN AEREO';
   const serv_1_uo_1_bucle = 'D351 - KIT RETENCION FIBRA 14 MM';
+  const serv_2_test = 'J756 - INSTALAR CABLE DE FIBRA OPTICA AEREO';
+  const serv_2_uo_1_test =
+    'H089 - CABLE AEREO 32 FO/PKP (CON LASHING RECUBIERTO)';
+  const serv_2_uo_2_test =
+    'H088 - CABLE AEREO 24 FO/PKP (CON LASHING RECUBIERTO)';
+  const serv_2_uo_3_test =
+    'H093 - CABLE AEREO 64 FO/PKP (CON LASHING RECUBIERTO)';
+  const serv_2_uo_4_test =
+    'H095 - CABLE AEREO 96 FO/PKP (CON LASHING RECUBIERTO)';
 
   // BASE
   const nombre_form = 'app-input > #nombre-ot';
@@ -81,7 +90,7 @@ describe.skip('Cubicacion Test', () => {
     observaciones_form,
   ];
 
-  const nombre = 'rechazo proveedor 1';
+  const nombre = 'informe avance 1';
 
   beforeEach(() => {
     cy.viewport(1500, 1700);
@@ -105,6 +114,16 @@ describe.skip('Cubicacion Test', () => {
       tipo_servicio_bucle.toUpperCase()
     );
     cy.cubAddService(serv_1_bucle, serv_1_uo_1_bucle);
+    cy.cambioCantidadServicio(1, 24);
+    cy.get(
+      '.table-carrito > table > tbody > tr:nth-child(1) > :nth-child(11) > app-input > input'
+    )
+      .clear()
+      .type(`{del}15`);
+    cy.cubAddService(serv_2_test, serv_2_uo_1_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_2_test);
+    cy.cubAddService(serv_2_test, serv_2_uo_3_test);
+    cy.cambioCantidadServicio(2, 10);
     cy.get('#create-button').click();
   });
 

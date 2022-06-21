@@ -812,7 +812,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       let unidad_obra: NuevoUO[] = [];
       unidad_obra = servicio.unidades_obras.map(uo => ({
         uob_codigo: uo.uo_codigo,
-        cantidad: uo.uo_cantidad,
+        cantidad: +uo.uo_cantidad,
       }));
       return {
         servicio_id: +servicio.servicio_id,
@@ -957,7 +957,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           .map(uo => ({
             servicio_rowid: servicio.servicio_rowid,
             uob_codigo: uo.uo_codigo,
-            uob_cantidad: uo.uo_cantidad,
+            uob_cantidad: +uo.uo_cantidad,
           }));
         return ac.concat(unidades_obra);
       }, []);
