@@ -112,7 +112,7 @@ integrations test cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: integrations test
   needs:
-    - update test environment
+    - update test database
   script:
     - cd angular-project
     - npm ci
