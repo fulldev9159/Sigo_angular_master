@@ -112,6 +112,7 @@ update test database:
 integrations test cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: integrations test
+  when: manual
   needs:
     - update test database
   script:
