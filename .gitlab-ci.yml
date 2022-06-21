@@ -43,7 +43,7 @@ linter:
 #     PRECURSOR: $CI_PROJECT_NAME
 #   trigger: zweicom/cl-movistar/sigo/demos-sigo
 
-update-demos-sigo:
+restart test environment:
   stage: restart test environment
   when: manual
   image: tmaier/docker-compose:latest
@@ -63,7 +63,7 @@ update-demos-sigo:
     - gcloud_tpb
   environment: google cloud tpb
 
-update test environment:
+update test database:
   stage: reset testing database sigo
   when: manual
   script:
