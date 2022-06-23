@@ -126,15 +126,19 @@ export class CubicacionEffects {
   getTipoServicioEspecialidad$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getTipoServicioEspecialidad4Cub),
-      concatMap(({ actividad_id }) =>
-        this.cubService.getTipoServicioEspecialidad4Cub(actividad_id).pipe(
-          map(response =>
-            cubActions.getTipoServicioEspecialidad4CubSuccess({ response })
-          ),
-          catchError(err =>
-            of(cubActions.getTipoServicioEspecialidad4CubError({ error: err }))
+      concatMap(({ actividad_id, contrato_marco_id }) =>
+        this.cubService
+          .getTipoServicioEspecialidad4Cub(actividad_id, contrato_marco_id)
+          .pipe(
+            map(response =>
+              cubActions.getTipoServicioEspecialidad4CubSuccess({ response })
+            ),
+            catchError(err =>
+              of(
+                cubActions.getTipoServicioEspecialidad4CubError({ error: err })
+              )
+            )
           )
-        )
       )
     )
   );
