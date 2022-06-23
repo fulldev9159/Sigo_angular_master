@@ -522,6 +522,54 @@ export interface PosibleTrabajador {
 }
 
 // GET DETALLE INFORME DE AVANCE
+export interface DetalleInformeAvanceMaterial {
+  cantidad: number;
+  codigo_sap: string;
+  factor_conversion: number;
+  id: number;
+  informe_has_uob_id: number;
+  material_cod: string;
+  origen: string;
+  tipo_moneda_id: number;
+  unidad_id: number;
+  valor: number;
+}
+
+export interface DetalleInformeAvanceUob {
+  cantidad: number;
+  clave: string;
+  id: number;
+  informe_has_servicio_id: number;
+  unidad_id: number;
+  unidad_obra_cod: string;
+  many_informe_has_material: DetalleInformeAvanceMaterial[];
+}
+
+export interface DetalleInformeAvanceServicio {
+  actividad_id: number;
+  adicional_aceptacion_estado: string;
+  adicional_aceptacion_fecha: Date;
+  adicional_aceptacion_usuario_id: number;
+  adicional_causas_rechazo_id: number;
+  adicional_rechazo_observacion: string;
+  cantidad: number; // USAR
+  evidencia_id: number;
+  factor_conversion_monto: number;
+  factor_conversion_precio: number;
+  id: number;
+  informe_avance_id: number;
+  monto_tipo_moneda_id: number;
+  precio_tipo_moneda_id: number;
+  prov_has_serv_monto: number;
+  prov_has_serv_precio: number;
+  puntos_baremos: number;
+  requiere_evidencia: boolean;
+  servicio_id: number;
+  tipo_servicio_id: number;
+  unidad_id: number;
+  many_informe_has_uob: DetalleInformeAvanceUob[];
+}
+
 export interface DetalleInformeAvance {
   aprobacion_estado: string;
   aprobacion_fecha: Date;
@@ -532,49 +580,7 @@ export interface DetalleInformeAvance {
   id: number;
   observacion: string;
   ot_id: number;
-  many_informe_has_servicio: {
-    actividad_id: number;
-    adicional_aceptacion_estado: string;
-    adicional_aceptacion_fecha: Date;
-    adicional_aceptacion_usuario_id: number;
-    adicional_causas_rechazo_id: number;
-    adicional_rechazo_observacion: string;
-    cantidad: number; // USAR
-    evidencia_id: number;
-    factor_conversion_monto: number;
-    factor_conversion_precio: number;
-    id: number;
-    informe_avance_id: number;
-    monto_tipo_moneda_id: number;
-    precio_tipo_moneda_id: number;
-    prov_has_serv_monto: number;
-    prov_has_serv_precio: number;
-    puntos_baremos: number;
-    requiere_evidencia: boolean;
-    servicio_id: number;
-    tipo_servicio_id: number;
-    unidad_id: number;
-    many_informe_has_uob: {
-      cantidad: number;
-      clave: string;
-      id: number;
-      informe_has_servicio_id: number;
-      unidad_id: number;
-      unidad_obra_cod: string;
-      many_informe_has_material: {
-        cantidad: number;
-        codigo_sap: string;
-        factor_conversion: number;
-        id: number;
-        informe_has_uob_id: number;
-        material_cod: string;
-        origen: string;
-        tipo_moneda_id: number;
-        unidad_id: number;
-        valor: number;
-      }[];
-    }[];
-  }[];
+  many_informe_has_servicio: DetalleInformeAvanceServicio[];
 }
 
 // ////

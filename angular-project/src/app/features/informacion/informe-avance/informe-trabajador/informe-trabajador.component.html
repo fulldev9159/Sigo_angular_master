@@ -1,6 +1,102 @@
-<ng-container *ngIf="detalleInformeAvance$ | async as detalle">
-  <pre>{{ detalle | json }}</pre>
-</ng-container>
+<div class="row" style="padding: 15px">
+  <ng-container *ngIf="detalleInformeAvance$ | async as detalle">
+    <div class="col-xs-12 col-md-12">
+      <app-card [classCardHeader]="'bg-info'">
+        <ng-container card-header-title>Detalle informe de avance</ng-container>
+        <ng-container card-body>
+          <div class="table-carrito">
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th colspan="5">Servicios</th>
+                  <th colspan="6">Unidad Obra</th>
+                </tr>
+                <tr>
+                  <th>Cod</th>
+                  <th>Descripción</th>
+                  <!-- <th>Esp.</th> -->
+                  <th>Cantidad</th>
+                  <th>Unidad</th>
+                  <!-- <th>Precio</th> -->
+                  <!-- <th>Total Servicio</th> -->
+                  <!-- <th>Tipo Moneda</th> -->
+                  <th></th>
+
+                  <th>Cód</th>
+                  <th>Descripción</th>
+                  <th>Actividad</th>
+                  <th>Cantidad</th>
+                  <th>Unidad</th>
+                  <!-- <th>Precio</th> -->
+                  <!-- <th>Total UO</th> -->
+                  <!-- <th>Tipo Moneda</th> -->
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngIf="detalle.many_informe_has_servicio.length > 0; else noData">
+                  <ng-container *ngFor="let servicio of detalle.many_informe_has_servicio; let servicioIndex = index">
+                    <ng-container *ngIf="servicio.many_informe_has_uob.length === 1">
+                      <tr>
+                        <td class="label-table"> -- </td>
+                        <td class="data-primaria"> -- </td>
+                        <td>{{ servicio.cantidad }}</td>
+                        <td>{{ servicio.unidad_id }}</td>
+                        <td></td>
+
+                        <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
+                        <td class="data-primaria"> -- </td>
+                        <td class="data-secundaria"> -- </td>
+                        <td class="data-secundaria">{{ servicio.many_informe_has_uob[0].cantidad }}</td>
+                        <td>{{ servicio.many_informe_has_uob[0].unidad_id }}</td>
+                        <td></td>
+                      </tr>
+                    </ng-container>
+
+                    <ng-container *ngIf="servicio.many_informe_has_uob.length > 1">
+                      <tr>
+                        <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="label-table"> -- </td>
+                        <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="data-primaria"> -- </td>
+                        <td [attr.rowspan]="+servicio.many_informe_has_uob.length">{{ servicio.cantidad }}</td>
+                        <td [attr.rowspan]="+servicio.many_informe_has_uob.length">{{ servicio.unidad_id }}</td>
+                        <td [attr.rowspan]="+servicio.many_informe_has_uob.length"></td>
+
+                        <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
+                        <td class="data-primaria"> -- </td>
+                        <td class="data-secundaria"> -- </td>
+                        <td class="data-secundaria">{{ servicio.many_informe_has_uob[0].cantidad }}</td>
+                        <td>{{ servicio.many_informe_has_uob[0].unidad_id }}</td>
+                        <td></td>
+                      </tr>
+                    </ng-container>
+
+                    <ng-container *ngIf="servicio.many_informe_has_uob.length > 1">
+                      <ng-container *ngFor="let uo of servicio.many_informe_has_uob | slice:1; let uoIndex = index">
+                        <tr>
+                          <td class="label-table">{{ uo.unidad_obra_cod }}</td>
+                          <td class="data-primaria"> -- </td>
+                          <td class="data-secundaria"> -- </td>
+                          <td class="data-secundaria">{{ uo.cantidad }}</td>
+                          <td>{{ uo.unidad_id }}</td>
+                          <td></td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+                <ng-template #noData>
+                  <tr colspan="11">No hay datos</tr>
+                </ng-template>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+      </app-card>
+    </div>
+
+    <pre>{{ detalle | json }}</pre>
+  </ng-container>
+</div>
 
 <!-- <div style="padding: 8px;">
   <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'">
