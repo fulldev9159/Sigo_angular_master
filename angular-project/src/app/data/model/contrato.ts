@@ -46,8 +46,8 @@ export interface ReqEditContrato {
 
 export interface ValuesEditContrato {
   nombre: string;
-  fecha_inicio: string;
-  fecha_fin: string;
+  fecha_inicio: Date;
+  fecha_fin: Date;
   activo: boolean;
   tipo_contrato_id: number;
   costo_max: number;

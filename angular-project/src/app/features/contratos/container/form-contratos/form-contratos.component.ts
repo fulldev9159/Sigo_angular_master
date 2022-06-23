@@ -171,18 +171,12 @@ export class FormContratosComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    const fecha_inicio = moment(
-      this.formContrato.get('fecha_inicio').value
-    ).utcOffset('+0300');
-    const fecha_fin = moment(
-      this.formContrato.get('fecha_fin').value
-    ).utcOffset('+0300');
     const request: ReqEditContrato = {
       contrato_marco_id: +this.formContrato.get('id').value,
       values: {
         nombre: this.formContrato.get('nombre').value,
-        fecha_inicio: fecha_inicio.format(),
-        fecha_fin: fecha_fin.format(),
+        fecha_inicio: new Date(this.formContrato.get('fecha_inicio').value),
+        fecha_fin: new Date(this.formContrato.get('fecha_fin').value),
         tipo_contrato_id: +this.formContrato.get('tipo_contrato_id').value,
         costo_max: +this.formContrato.get('costo_max').value,
         tipo_moneda_id: +this.formContrato.get('tipo_moneda_id').value,
@@ -195,7 +189,6 @@ export class FormContratosComponent implements OnInit, OnDestroy {
           this.formContrato.get('activo').value === 'activo' ? true : false,
       },
     };
-    console.log('request', request);
     this.contratoFacade.updateContrato(request);
   }
 }
