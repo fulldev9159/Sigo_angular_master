@@ -12,5 +12,16 @@
       <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
       <span style="word-spacing: 5px">.docx .doc .gif .json .jpeg .pjpeg .png .txt .pdf .gzip .zip .rar .7zip zip .dwg .csv .xls .ppt .pptx </span>
     </label>
+    <br>
+    <app-select [control]="formControls.categoria" label="* Categoria del archivo:">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione ...</option>
+        <ng-container *ngFor="let item of categorias$|async">
+          <option [value]="item.nombre">
+            {{ item.nombre }}
+          </option>
+        </ng-container>
+      </ng-container>
+    </app-select>
   </div>
 </form>

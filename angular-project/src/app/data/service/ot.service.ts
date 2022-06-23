@@ -44,6 +44,9 @@ import {
   RequestAceptarRechazarOT,
   DataRespPosiblesTrabajadores,
   DetalleInformeAvance,
+  DataRespSubirArchivo,
+  ReqCreateRegistroLibroObra,
+  DataRespGetCategoriaArchivo,
 } from '@data';
 
 @Injectable({
@@ -290,6 +293,45 @@ export class OTService {
     return this.http.post<Response<DetalleInformeAvance>>(
       `${this.apiUrl}/ot/informe_avance/detalle/get`,
       { ot_id }
+    );
+  }
+
+  // GET CATEGORIAS ARCHIVOS
+  getCategoriasArchivos(): Observable<Response<DataRespGetCategoriaArchivo>> {
+    return this.http.post<Response<DataRespGetCategoriaArchivo>>(
+      `${this.apiUrl}/files/categoria_archivo/getall`,
+      {}
+    );
+  }
+
+  // SUBIR ARCHIVO
+  subirArchivo(
+    nombre_original: string,
+    tipo: string,
+    files: any
+  ): Observable<Response<DataRespSubirArchivo>> {
+    const formData = new FormData();
+    formData.append('nombre_original', nombre_original);
+    formData.append('tipo', tipo);
+    if (files && files.length > 0) {
+      for (const file of files) {
+        formData.append('file', file, file.name);
+      }
+    }
+    console.log('FormData', formData);
+    return this.http.post<Response<DataRespSubirArchivo>>(
+      `${this.apiUrl}/files/repositorio_archivos/create`,
+      formData
+    );
+  }
+
+  // CREATE LIBRO DE OBRAS
+  createRegistriLibroObras(
+    request: ReqCreateRegistroLibroObra
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/libro_obras/create`,
+      request
     );
   }
 

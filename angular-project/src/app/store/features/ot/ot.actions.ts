@@ -42,6 +42,9 @@ import {
   DataRespGetMotivoRechazo,
   RequestAceptarRechazarOT,
   DataRespPosiblesTrabajadores,
+  DataRespGetCategoriaArchivo,
+  DataRespSubirArchivo,
+  ReqCreateRegistroLibroObra,
 } from '@data';
 
 import {
@@ -529,6 +532,53 @@ export const getDetalleInformeAvanceSuccess = createAction(
 
 export const getDetalleInformeAvanceError = createAction(
   '[OT] GET getDetalleInformeAvance Error',
+  props<{ error: any }>()
+);
+
+//  GET CATEGORIAS DE ARCHIVOS
+export const getCategoriasArchivos = createAction(
+  '[OT] GET getCategoriasArchivos'
+);
+
+export const getCategoriasArchivosSuccess = createAction(
+  '[OT] GET getCategoriasArchivos Success',
+  props<{ response: Response<DataRespGetCategoriaArchivo> }>()
+);
+
+export const getCategoriasArchivosError = createAction(
+  '[OT] GET getCategoriasArchivos Error',
+  props<{ error: any }>()
+);
+
+//  SUBIR ARCHIVO
+export const subirArchivo = createAction(
+  '[OT] GET subirArchivo',
+  props<{ nombre_original: string; tipo: string; files: any }>()
+);
+
+export const subirArchivoSuccess = createAction(
+  '[OT] GET subirArchivo Success',
+  props<{ response: Response<DataRespSubirArchivo> }>()
+);
+
+export const subirArchivoError = createAction(
+  '[OT] GET subirArchivo Error',
+  props<{ error: any }>()
+);
+
+//  CREATE LIBRO DE OBRAS
+export const createRegistroLibroObras = createAction(
+  '[OT] GET createRegistroLibroObras',
+  props<{ request: ReqCreateRegistroLibroObra }>()
+);
+
+export const createRegistroLibroObrasSuccess = createAction(
+  '[OT] GET createRegistroLibroObras Success',
+  props<{ response: Response<any> }>()
+);
+
+export const createRegistroLibroObrasError = createAction(
+  '[OT] GET createRegistroLibroObras Error',
   props<{ error: any }>()
 );
 

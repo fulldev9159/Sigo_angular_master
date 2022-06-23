@@ -27,10 +27,12 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
   ot$: Observable<Data.OT>;
   otID: number;
   uploadedFiles: any[] = [];
+  categorias$: Observable<any[]>;
   subscription: Subscription = new Subscription();
 
   formControls = {
     observaciones: new FormControl('', [Validators.required]),
+    categoria: new FormControl('', [Validators.required]),
     files: new FormControl([]),
   };
 
@@ -53,6 +55,9 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
         this.reset();
       })
     );
+    this.otFacade.getCategoriasArchivos();
+
+    this.categorias$ = this.otFacade.getCategoriasArchivos$();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

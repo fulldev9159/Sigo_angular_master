@@ -458,6 +458,21 @@ export class OtEffects {
     )
   );
 
+  // GET CATEGORIA ARCHIVOS
+  getCategoriasArchivos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCategoriasArchivos),
+      concatMap(() =>
+        this.otService.getCategoriasArchivos().pipe(
+          map(response => otActions.getCategoriasArchivosSuccess({ response })),
+          catchError(error =>
+            of(otActions.getCategoriasArchivosError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

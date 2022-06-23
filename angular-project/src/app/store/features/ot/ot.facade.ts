@@ -340,6 +340,15 @@ export class OtFacade {
   //   return this.store.select(otSelectors.getDetalleInformeAvance);
   // }
 
+  // GET CATEGORIA ARCHIVO
+  public getCategoriasArchivos(): void {
+    this.store.dispatch(otActions.getCategoriasArchivos());
+  }
+
+  public getCategoriasArchivos$(): Observable<any[]> {
+    return this.store.select(otSelectors.getCategoriasArchivos);
+  }
+
   // Resets
   public resetData(): void {
     this.store.dispatch(otActions.resetData());

@@ -577,6 +577,27 @@ export interface DetalleInformeAvance {
   }[];
 }
 
+// CATEGORIAS ARCHIVO
+export interface DataRespGetCategoriaArchivo {
+  items: {
+    id: number;
+    nombre: string;
+  }[];
+}
+
+// LIBRO DE OBRAS
+export interface ReqCreateRegistroLibroObra {
+  ot_id: number;
+  usuario_id: number;
+  observacioens: string;
+  archivos: number[];
+}
+
+// ARCHIVO
+export interface DataRespSubirArchivo {
+  repositorio_archivos_ids: number[];
+}
+
 // ////
 interface FieldOrder {
   ot_id: string;
