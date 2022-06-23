@@ -532,6 +532,22 @@ export const getDetalleInformeAvanceError = createAction(
   props<{ error: any }>()
 );
 
+//  UPDATE DETALLE INFORME DE AVANCE
+export const updateDetalleInformeAvance = createAction(
+  '[OT] GET updateDetalleInformeAvance',
+  props<{ ot_id: number; data: any }>()
+);
+
+export const updateDetalleInformeAvanceSuccess = createAction(
+  '[OT] GET updateDetalleInformeAvance Success',
+  props<{ response: Response<any> }>()
+);
+
+export const updateDetalleInformeAvanceError = createAction(
+  '[OT] GET updateDetalleInformeAvance Error',
+  props<{ error: any }>()
+);
+
 export const resetData = createAction('[ResetData] ResetData');
 export const resetContrato = createAction('[ResetData] Reset Contrato');
 export const resetPlan = createAction('[ResetData] ResetPlan');

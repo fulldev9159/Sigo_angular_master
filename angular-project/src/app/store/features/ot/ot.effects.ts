@@ -458,6 +458,23 @@ export class OtEffects {
     )
   );
 
+  // UPDATE DETALLE INFORME DE AVANCE
+  UpdateDetalleInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.updateDetalleInformeAvance),
+      concatMap(({ ot_id, data }) =>
+        this.otService.updateDetalleInformeAvance(ot_id, data).pipe(
+          map(response =>
+            otActions.updateDetalleInformeAvanceSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.updateDetalleInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -465,7 +482,8 @@ export class OtEffects {
         ofType(
           otActions.createOTSuccess,
           otActions.AceptarRechazarIncialOTSuccess,
-          otActions.AsignarSupervisorTrabajosOTSuccess
+          otActions.AsignarSupervisorTrabajosOTSuccess,
+          otActions.updateDetalleInformeAvanceSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

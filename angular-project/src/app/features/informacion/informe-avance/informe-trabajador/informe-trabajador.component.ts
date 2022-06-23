@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+//// import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-
 import {
   FormArray,
   FormGroup,
@@ -10,6 +9,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {
   DataInformeAvance,
   DataRespGetDetalleOT,
@@ -17,8 +17,9 @@ import {
   LpuInformeAvanceDetalle,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  DetalleInformeAvance,
 } from '@data';
-import { ActivatedRoute } from '@angular/router';
+//// import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-informe-trabajador',
@@ -27,33 +28,92 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  loginAuth$: Observable<any>;
-  detalleOt$: Observable<DataRespGetDetalleOT>;
-  dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
-  form: FormGroup = new FormGroup({
-    table: new FormArray([]),
-  });
-  DisplayConfirmacionModal = false;
-  detalleTipo = '';
-  waitAP = false;
-  informe_id = 0;
+  detalleInformeAvance$: Observable<DetalleInformeAvance> =
+    this.otFacade.getDetalleInformeAvance$();
+  updating$: Observable<boolean> =
+    this.otFacade.updatingDetalleInformeAvance$();
+  otId$: Observable<number> = this.detalleInformeAvance$.pipe(
+    map(detalle => detalle.ot_id)
+  );
+
+  form: FormArray;
+
+  //// loginAuth$: Observable<any>;
+  //// detalleOt$: Observable<DataRespGetDetalleOT>;
+  //// dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
+  //// form: FormGroup = new FormGroup({
+  ////   table: new FormArray([]),
+  //// });
+  //// DisplayConfirmacionModal = false;
+  //// detalleTipo = '';
+  //// waitAP = false;
+  //// informe_id = 0;
+
+  mustBeANumber(control: FormControl): any {
+    const result = /^\d+$/.test(control.value);
+    return result ? null : { benumber: true };
+  }
+
+  nonZero(control: FormControl): any {
+    const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
+    return value < 1 ? { nonzero: true } : null;
+  }
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
 
   constructor(
-    private otFacade: OtFacade,
-    private cubFacade: CubicacionFacade,
-    private rutaActiva: ActivatedRoute
+    private otFacade: OtFacade //// private cubFacade: CubicacionFacade, //// private rutaActiva: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.subscription.add(
-      this.rutaActiva.params.subscribe(params => {
-        if (params.id) {
-          console.log('Params', params);
-          this.otFacade.getDetalleInformeAvance(+params.id);
-        }
+      this.detalleInformeAvance$.subscribe(detalle => {
+        this.form = new FormArray(
+          detalle?.many_informe_has_servicio.map(
+            servicio =>
+              new FormGroup({
+                id: new FormControl(servicio.id, []),
+                servicio_id: new FormControl(servicio.servicio_id, []),
+                cantidad: new FormControl(`${servicio.cantidad}`, [
+                  Validators.required,
+                  this.noWhitespace,
+                  this.mustBeANumber,
+                  this.nonZero,
+                  Validators.min(0),
+                ]),
+                unidades_obras: new FormArray(
+                  servicio.many_informe_has_uob.map(
+                    uo =>
+                      new FormGroup({
+                        id: new FormControl(uo.id, []),
+                        cantidad: new FormControl(`${uo.cantidad}`, [
+                          Validators.required,
+                          this.noWhitespace,
+                          this.mustBeANumber,
+                          this.nonZero,
+                          Validators.min(0),
+                        ]),
+                      })
+                  )
+                ),
+              })
+          )
+        );
       })
     );
 
+    //// this.subscription.add(
+    ////   this.rutaActiva.params.subscribe(params => {
+    ////     if (params.id) {
+    ////       console.log('Params', params);
+    ////       this.otFacade.getDetalleInformeAvance(+params.id);
+    ////     }
+    ////   })
+    //// );
     // this.detalleOt$ = this.otFacade.getDetalleOT$();
     // this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
     // // this.subscription.add(
@@ -63,7 +123,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     // //     }
     // //   })
     // // );
-
     // this.subscription.add(
     //   this.dataInformeAvance$.subscribe(lpu => {
     //     if (lpu && lpu.length > 0) {
@@ -79,7 +138,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     //             Validators.min(0),
     //           ]),
     //         });
-
     //         (this.form.get('table') as FormArray).push(group);
     //       });
     //     }
@@ -88,11 +146,14 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   }
 
   errorMessageFn(errors: AbstractControl['errors']): string {
-    console.log(errors);
     if (errors.required) {
       return 'Este campo es requerido';
     } else if (errors.whitespace) {
       return 'Este campo es requerido';
+    } else if (errors.benumber) {
+      return 'Debe ser un número';
+    } else if (errors.nonzero) {
+      return 'No son permitidos valores inferiores a 1';
     } else if (errors.maxlength) {
       return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
     } else if (errors.min) {
@@ -100,62 +161,74 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     }
   }
 
-  formCntl(index: number): AbstractControl {
-    const indext = 'table';
-    return (this.form.controls[indext] as FormArray).controls[index].get(
-      'informado'
-    );
-  }
+  //// formCntl(index: number): AbstractControl {
+  ////   const indext = 'table';
+  ////   return (this.form.controls[indext] as FormArray).controls[index].get(
+  ////     'informado'
+  ////   );
+  //// }
 
-  formCntlLpuID(index: number): AbstractControl {
-    const indext = 'table';
-    return (this.form.controls[indext] as FormArray).controls[index].get(
-      'detalle_id'
-    );
-  }
+  //// formCntlLpuID(index: number): AbstractControl {
+  ////   const indext = 'table';
+  ////   return (this.form.controls[indext] as FormArray).controls[index].get(
+  ////     'detalle_id'
+  ////   );
+  //// }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  sendInformeConfirmacion(): void {
-    this.DisplayConfirmacionModal = true;
+  get values(): any {
+    return this.form ? this.form.getRawValue() : null;
   }
 
-  sendInforme(): void {
-    // const index = 'table';
-    // (this.form.controls[index] as FormArray).controls[0].disable();
-    // (this.form.controls[index] as FormArray).controls[1].disable();
-
-    this.waitAP = true;
-    this.DisplayConfirmacionModal = false;
-
-    const lpus: LpuInformeAvanceDetalle[] = (
-      this.form.get('table') as FormArray
-    ).value.map(f => {
-      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
-    });
-
-    const request: RequestSaveInformeAvance = {
-      informe_id: this.informe_id,
-      valores_detalles: lpus,
-    };
-    console.log(request);
-    this.otFacade.saveInformeAvanceTrabajador(request);
+  get valid(): boolean {
+    return this.form?.valid ?? false;
   }
 
-  saveBorradorInformeAvance(): void {
-    const lpus: LpuInformeAvanceDetalle[] = (
-      this.form.get('table') as FormArray
-    ).value.map(f => {
-      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
-    });
+  //// sendInformeConfirmacion(): void {
+  ////   this.DisplayConfirmacionModal = true;
+  //// }
 
-    const request: RequestSaveBorradorInformeAvance = {
-      valores_detalles: lpus,
-    };
+  //// sendInforme(): void {
+  ////   // const index = 'table';
+  ////   // (this.form.controls[index] as FormArray).controls[0].disable();
+  ////   // (this.form.controls[index] as FormArray).controls[1].disable();
 
-    console.log(request);
-    this.otFacade.saveBorradorInformeAvance(request);
+  ////   this.waitAP = true;
+  ////   this.DisplayConfirmacionModal = false;
+
+  ////   const lpus: LpuInformeAvanceDetalle[] = (
+  ////     this.form.get('table') as FormArray
+  ////   ).value.map(f => {
+  ////     return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
+  ////   });
+
+  ////   const request: RequestSaveInformeAvance = {
+  ////     informe_id: this.informe_id,
+  ////     valores_detalles: lpus,
+  ////   };
+  ////   console.log(request);
+  ////   this.otFacade.saveInformeAvanceTrabajador(request);
+  //// }
+
+  saveBorradorInformeAvance(ot_id: number): void {
+    ////   const lpus: LpuInformeAvanceDetalle[] = (
+    ////     this.form.get('table') as FormArray
+    ////   ).value.map(f => {
+    ////     return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
+    ////   });
+
+    ////   const request: RequestSaveBorradorInformeAvance = {
+    ////     valores_detalles: lpus,
+    ////   };
+
+    ////   console.log(request);
+    ////   this.otFacade.saveBorradorInformeAvance(request);
+
+    if (this.valid) {
+      this.otFacade.updateDetalleInformeAvance(ot_id, this.values);
+    }
   }
 }
