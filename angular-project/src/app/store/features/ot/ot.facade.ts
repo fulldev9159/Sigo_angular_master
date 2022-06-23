@@ -336,6 +336,10 @@ export class OtFacade {
     this.store.dispatch(otActions.getDetalleInformeAvance({ ot_id }));
   }
 
+  public getDetalleInformeAvanceSuccess(response: any): void {
+    this.store.dispatch(otActions.getDetalleInformeAvanceSuccess({ response }));
+  }
+
   // public getDetalleInformeAvance$(): Observable<PosibleTrabajador[]> {
   //   return this.store.select(otSelectors.getDetalleInformeAvance);
   // }

@@ -28,6 +28,7 @@ import {
   DataRespGetDetalleOT,
   MotivoRechazo,
   PosibleTrabajador,
+  DetalleInformeAvance,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -89,6 +90,8 @@ export interface StateOt {
   dataInformeActa: DataInformeAvance[];
   dataSolicitudPago: DetalleActa[];
   info_ot_id: number;
+
+  detalleInformeAvance: DetalleInformeAvance;
 }
 
 export const initialStateOt: StateOt = {
@@ -760,5 +763,11 @@ export const reducerOt = createReducer(
   on(OtActions.getDetalleActaSuccess, (state, { dataInformeActa }) => ({
     ...state,
     dataSolicitudPago: dataInformeActa,
-  }))
+  })),
+  on(OtActions.getDetalleInformeAvanceSuccess, (state, { response }) => {
+    return {
+      ...state,
+      detalleInformeAvance: copy(response.data),
+    };
+  })
 );

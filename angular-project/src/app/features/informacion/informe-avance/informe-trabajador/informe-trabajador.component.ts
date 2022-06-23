@@ -27,16 +27,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  loginAuth$: Observable<any>;
-  detalleOt$: Observable<DataRespGetDetalleOT>;
-  dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
-  form: FormGroup = new FormGroup({
-    table: new FormArray([]),
-  });
-  DisplayConfirmacionModal = false;
-  detalleTipo = '';
-  waitAP = false;
-  informe_id = 0;
+  //// loginAuth$: Observable<any>;
+  //// detalleOt$: Observable<DataRespGetDetalleOT>;
+  //// dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
+  //// form: FormGroup = new FormGroup({
+  ////   table: new FormArray([]),
+  //// });
+  //// DisplayConfirmacionModal = false;
+  //// detalleTipo = '';
+  //// waitAP = false;
+  //// informe_id = 0;
 
   constructor(
     private otFacade: OtFacade,
@@ -45,15 +45,14 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.rutaActiva.params.subscribe(params => {
-        if (params.id) {
-          console.log('Params', params);
-          this.otFacade.getDetalleInformeAvance(+params.id);
-        }
-      })
-    );
-
+    //// this.subscription.add(
+    ////   this.rutaActiva.params.subscribe(params => {
+    ////     if (params.id) {
+    ////       console.log('Params', params);
+    ////       this.otFacade.getDetalleInformeAvance(+params.id);
+    ////     }
+    ////   })
+    //// );
     // this.detalleOt$ = this.otFacade.getDetalleOT$();
     // this.dataInformeAvance$ = this.otFacade.getDataInformeAvanceTrabajador$();
     // // this.subscription.add(
@@ -63,7 +62,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     // //     }
     // //   })
     // // );
-
     // this.subscription.add(
     //   this.dataInformeAvance$.subscribe(lpu => {
     //     if (lpu && lpu.length > 0) {
@@ -79,7 +77,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     //             Validators.min(0),
     //           ]),
     //         });
-
     //         (this.form.get('table') as FormArray).push(group);
     //       });
     //     }
@@ -87,75 +84,75 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     // );
   }
 
-  errorMessageFn(errors: AbstractControl['errors']): string {
-    console.log(errors);
-    if (errors.required) {
-      return 'Este campo es requerido';
-    } else if (errors.whitespace) {
-      return 'Este campo es requerido';
-    } else if (errors.maxlength) {
-      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
-    } else if (errors.min) {
-      return `No puede ser negativo`;
-    }
-  }
+  //// errorMessageFn(errors: AbstractControl['errors']): string {
+  ////   console.log(errors);
+  ////   if (errors.required) {
+  ////     return 'Este campo es requerido';
+  ////   } else if (errors.whitespace) {
+  ////     return 'Este campo es requerido';
+  ////   } else if (errors.maxlength) {
+  ////     return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
+  ////   } else if (errors.min) {
+  ////     return `No puede ser negativo`;
+  ////   }
+  //// }
 
-  formCntl(index: number): AbstractControl {
-    const indext = 'table';
-    return (this.form.controls[indext] as FormArray).controls[index].get(
-      'informado'
-    );
-  }
+  //// formCntl(index: number): AbstractControl {
+  ////   const indext = 'table';
+  ////   return (this.form.controls[indext] as FormArray).controls[index].get(
+  ////     'informado'
+  ////   );
+  //// }
 
-  formCntlLpuID(index: number): AbstractControl {
-    const indext = 'table';
-    return (this.form.controls[indext] as FormArray).controls[index].get(
-      'detalle_id'
-    );
-  }
+  //// formCntlLpuID(index: number): AbstractControl {
+  ////   const indext = 'table';
+  ////   return (this.form.controls[indext] as FormArray).controls[index].get(
+  ////     'detalle_id'
+  ////   );
+  //// }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  sendInformeConfirmacion(): void {
-    this.DisplayConfirmacionModal = true;
-  }
+  //// sendInformeConfirmacion(): void {
+  ////   this.DisplayConfirmacionModal = true;
+  //// }
 
-  sendInforme(): void {
-    // const index = 'table';
-    // (this.form.controls[index] as FormArray).controls[0].disable();
-    // (this.form.controls[index] as FormArray).controls[1].disable();
+  //// sendInforme(): void {
+  ////   // const index = 'table';
+  ////   // (this.form.controls[index] as FormArray).controls[0].disable();
+  ////   // (this.form.controls[index] as FormArray).controls[1].disable();
 
-    this.waitAP = true;
-    this.DisplayConfirmacionModal = false;
+  ////   this.waitAP = true;
+  ////   this.DisplayConfirmacionModal = false;
 
-    const lpus: LpuInformeAvanceDetalle[] = (
-      this.form.get('table') as FormArray
-    ).value.map(f => {
-      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
-    });
+  ////   const lpus: LpuInformeAvanceDetalle[] = (
+  ////     this.form.get('table') as FormArray
+  ////   ).value.map(f => {
+  ////     return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
+  ////   });
 
-    const request: RequestSaveInformeAvance = {
-      informe_id: this.informe_id,
-      valores_detalles: lpus,
-    };
-    console.log(request);
-    this.otFacade.saveInformeAvanceTrabajador(request);
-  }
+  ////   const request: RequestSaveInformeAvance = {
+  ////     informe_id: this.informe_id,
+  ////     valores_detalles: lpus,
+  ////   };
+  ////   console.log(request);
+  ////   this.otFacade.saveInformeAvanceTrabajador(request);
+  //// }
 
-  saveBorradorInformeAvance(): void {
-    const lpus: LpuInformeAvanceDetalle[] = (
-      this.form.get('table') as FormArray
-    ).value.map(f => {
-      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
-    });
+  //// saveBorradorInformeAvance(): void {
+  ////   const lpus: LpuInformeAvanceDetalle[] = (
+  ////     this.form.get('table') as FormArray
+  ////   ).value.map(f => {
+  ////     return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
+  ////   });
 
-    const request: RequestSaveBorradorInformeAvance = {
-      valores_detalles: lpus,
-    };
+  ////   const request: RequestSaveBorradorInformeAvance = {
+  ////     valores_detalles: lpus,
+  ////   };
 
-    console.log(request);
-    this.otFacade.saveBorradorInformeAvance(request);
-  }
+  ////   console.log(request);
+  ////   this.otFacade.saveBorradorInformeAvance(request);
+  //// }
 }
