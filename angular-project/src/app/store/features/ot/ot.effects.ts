@@ -465,7 +465,7 @@ export class OtEffects {
       concatMap(({ ot_id, data }) =>
         this.otService.updateDetalleInformeAvance(ot_id, data).pipe(
           map(response =>
-            otActions.updateDetalleInformeAvanceSuccess({ ot_id })
+            otActions.updateDetalleInformeAvanceSuccess({ response })
           ),
           catchError(error =>
             of(otActions.updateDetalleInformeAvanceError({ error }))
@@ -482,7 +482,8 @@ export class OtEffects {
         ofType(
           otActions.createOTSuccess,
           otActions.AceptarRechazarIncialOTSuccess,
-          otActions.AsignarSupervisorTrabajosOTSuccess
+          otActions.AsignarSupervisorTrabajosOTSuccess,
+          otActions.updateDetalleInformeAvanceSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

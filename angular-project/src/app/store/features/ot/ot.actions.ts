@@ -540,7 +540,7 @@ export const updateDetalleInformeAvance = createAction(
 
 export const updateDetalleInformeAvanceSuccess = createAction(
   '[OT] GET updateDetalleInformeAvance Success',
-  props<{ ot_id: number }>()
+  props<{ response: Response<any> }>()
 );
 
 export const updateDetalleInformeAvanceError = createAction(
