@@ -21,6 +21,8 @@ import { DetalleAdjudicacionFormComponent } from './forms/detalle-adjudicacion-f
 import { RegistrarLibroObraComponent } from './component/registrar-libro-obra/registrar-libro-obra';
 import { BucleFormComponent } from './forms/bucle-form/bucle-form.component';
 
+import { DetalleInformeAvanceTableComponent } from './component/detalle-informe-avance-table/detalle-informe-avance-table.component';
+
 @NgModule({
   declarations: [
     OtComponent,
@@ -38,6 +40,7 @@ import { BucleFormComponent } from './forms/bucle-form/bucle-form.component';
     DetalleAdjudicacionFormComponent,
     RegistrarLibroObraComponent,
     BucleFormComponent,
+    DetalleInformeAvanceTableComponent,
   ],
   imports: [
     CommonModule,

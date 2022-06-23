@@ -202,6 +202,11 @@ export const getDetalleInformeAvance = createSelector(
   (state: fromOt.StateOt) => state.detalleInformeAvance
 );
 
+export const getDetalleInformeAvanceError = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.detalleInformeAvanceError
+);
+
 export const updatingDetalleInformeAvance = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.updatingDetalleInformeAvance

@@ -475,6 +475,23 @@ export class OtEffects {
     )
   );
 
+  // SEND DETALLE INFORME DE AVANCE
+  SendDetalleInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.sendDetalleInformeAvance),
+      concatMap(({ ot_id, data }) =>
+        this.otService.sendDetalleInformeAvance(ot_id, data).pipe(
+          map(response =>
+            otActions.sendDetalleInformeAvanceSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.sendDetalleInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -483,7 +500,8 @@ export class OtEffects {
           otActions.createOTSuccess,
           otActions.AceptarRechazarIncialOTSuccess,
           otActions.AsignarSupervisorTrabajosOTSuccess,
-          otActions.updateDetalleInformeAvanceSuccess
+          otActions.updateDetalleInformeAvanceSuccess,
+          otActions.sendDetalleInformeAvanceSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

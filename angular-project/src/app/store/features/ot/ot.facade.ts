@@ -345,6 +345,10 @@ export class OtFacade {
     return this.store.select(otSelectors.getDetalleInformeAvance);
   }
 
+  public getDetalleInformeAvanceError$(): Observable<any> {
+    return this.store.select(otSelectors.getDetalleInformeAvanceError);
+  }
+
   // UPDATE DETALE INFORME DE AVANCE
   public updateDetalleInformeAvance(ot_id: number, data: any): void {
     this.store.dispatch(otActions.updateDetalleInformeAvance({ ot_id, data }));

@@ -7,7 +7,12 @@ import {
 } from '@angular/core';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { MotivoRechazo, OT, RequestAceptarRechazarOT } from '@data';
+import {
+  MotivoRechazo,
+  OT,
+  RequestAceptarRechazarOT,
+  DetalleInformeAvance,
+} from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
@@ -25,6 +30,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ListOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+
+  detalleInformeAvance$: Observable<DetalleInformeAvance> =
+    this.otFacade.getDetalleInformeAvance$();
+  detalleInformeAvanceError$: Observable<any> =
+    this.otFacade.getDetalleInformeAvanceError$();
 
   itemsEjecucion$: Observable<OT[]>;
   itemsAbiertas$: Observable<OT[]>;
@@ -45,6 +55,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displayAssignTrabajadorModal = false;
   displayLibroObra = false;
   displayAuthOTModal = false;
+  displayInformeAvanceModal = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -626,5 +637,15 @@ export class ListOtComponent implements OnInit, OnDestroy {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
+  }
+
+  showInformeAvanceModal(ot_id: number): void {
+    this.otFacade.getDetalleInformeAvance(ot_id);
+    this.displayInformeAvanceModal = true;
+  }
+
+  closeInformeAvanceModal(): void {
+    //// this.otFacade.getDetalleInformeAvance(null); // TODO
+    this.displayInformeAvanceModal = false;
   }
 }

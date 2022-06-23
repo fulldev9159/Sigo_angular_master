@@ -91,6 +91,8 @@ export class AlertMessageActions {
       'No existen valores para el acta';
     this.msgNegocio[otActions.updateDetalleInformeAvanceSuccess.type] =
       'Borrador actualizado';
+    this.msgNegocio[otActions.sendDetalleInformeAvanceSuccess.type] =
+      'Informe enviado';
 
     // Statur ERROR
     this.msgErr[ca.getCubsError.type] = 'Error al obtener cubicaciones';
@@ -158,7 +160,8 @@ export class AlertMessageActions {
         action === userActions.updateUserSuccess.type ||
         action === profileActions.updatePerfilSuccess.type ||
         action === ca.editCubSuccess.type ||
-        action === otActions.updateDetalleInformeAvanceSuccess.type
+        action === otActions.updateDetalleInformeAvanceSuccess.type ||
+        action === otActions.sendDetalleInformeAvanceSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
       } else if (

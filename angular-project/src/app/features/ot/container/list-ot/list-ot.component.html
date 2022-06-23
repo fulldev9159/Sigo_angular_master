@@ -1,3 +1,4 @@
+<button (click)="showInformeAvanceModal(1)">Mostrar informe ot 1</button>
 <div class="container-fluid" style="padding: 0px 15px 100px 15px;">
   <div class="row">
     <div class="col-xs-12 col-md-6">
@@ -167,5 +168,20 @@
     <button class="btn btn-primary" [disabled]="!registrarLibroObraForm.valid" (click)="registrarLibroObraFormSubmit()">
       <em class="pi pi-save mr-1"></em>Guardar
     </button>
+  </ng-container>
+</app-modal>
+
+<app-modal [display]="displayInformeAvanceModal" (CloseEvent)="closeInformeAvanceModal()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title><i class="pi pi-book"></i>&nbsp;Informe de avance</ng-container>
+  <ng-container modal-content>
+    <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async"></app-detalle-informe-avance-table>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeInformeAvanceModal()">Cancelar</button>
+    <!--
+    <button class="btn btn-primary" [disabled]="!registrarLibroObraForm.valid" (click)="registrarLibroObraFormSubmit()">
+      <em class="pi pi-save mr-1"></em>Guardar
+    </button>
+    -->
   </ng-container>
 </app-modal>

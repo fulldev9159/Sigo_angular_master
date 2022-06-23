@@ -319,6 +319,30 @@ export class OTService {
     //// return throwError(new Error()).pipe(delay(3000));
   }
 
+  sendDetalleInformeAvance(
+    ot_id: number,
+    data: any
+  ): Observable<Response<any>> {
+    console.log(`${this.apiUrl}/ot/informe_avance/send`, {
+      ot_id,
+      data,
+    });
+    //// return this.http.post<Response<DetalleInformeAvance>>(
+    ////   `${this.apiUrl}/ot/informe_avance_detalle/update`,
+    ////   { ot_id }
+    //// );
+
+    return of({
+      data: {},
+      status: {
+        desc: '',
+        code: 0,
+      },
+    }).pipe(delay(1500));
+
+    //// return throwError(new Error()).pipe(delay(3000));
+  }
+
   ////
 
   approveOT(perfil_id: number, otID: number): Observable<any> {
