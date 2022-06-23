@@ -34,20 +34,26 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngIf="detalle.many_informe_has_servicio.length > 0; else noData">
+                <ng-container *ngIf="detalle.many_informe_has_servicio.length > 0 && form; else noData">
                   <ng-container *ngFor="let servicio of detalle.many_informe_has_servicio; let servicioIndex = index">
                     <ng-container *ngIf="servicio.many_informe_has_uob.length === 1">
-                      <tr>
+                      <tr [formArray]="form">
                         <td class="label-table"> -- </td>
                         <td class="data-primaria"> -- </td>
-                        <td>{{ servicio.cantidad }}</td>
+                        <td>
+                          <!-- {{ servicio.cantidad }} -->
+                          <app-input [control]="form.at(servicioIndex).get('cantidad')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                        </td>
                         <td>{{ servicio.unidad_id }}</td>
                         <td></td>
 
                         <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                         <td class="data-primaria"> -- </td>
                         <td class="data-secundaria"> -- </td>
-                        <td class="data-secundaria">{{ servicio.many_informe_has_uob[0].cantidad }}</td>
+                        <td class="data-secundaria">
+                          <!-- {{ servicio.many_informe_has_uob[0].cantidad }} -->
+                          <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                        </td>
                         <td>{{ servicio.many_informe_has_uob[0].unidad_id }}</td>
                         <td></td>
                       </tr>
@@ -57,14 +63,20 @@
                       <tr>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="label-table"> -- </td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="data-primaria"> -- </td>
-                        <td [attr.rowspan]="+servicio.many_informe_has_uob.length">{{ servicio.cantidad }}</td>
+                        <td [attr.rowspan]="+servicio.many_informe_has_uob.length">
+                          <!-- {{ servicio.cantidad }} -->
+                          <app-input [control]="form.at(servicioIndex).get('cantidad')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                        </td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length">{{ servicio.unidad_id }}</td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length"></td>
 
                         <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                         <td class="data-primaria"> -- </td>
                         <td class="data-secundaria"> -- </td>
-                        <td class="data-secundaria">{{ servicio.many_informe_has_uob[0].cantidad }}</td>
+                        <td class="data-secundaria">
+                          <!-- {{ servicio.many_informe_has_uob[0].cantidad }} -->
+                          <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                        </td>
                         <td>{{ servicio.many_informe_has_uob[0].unidad_id }}</td>
                         <td></td>
                       </tr>
@@ -76,7 +88,10 @@
                           <td class="label-table">{{ uo.unidad_obra_cod }}</td>
                           <td class="data-primaria"> -- </td>
                           <td class="data-secundaria"> -- </td>
-                          <td class="data-secundaria">{{ uo.cantidad }}</td>
+                          <td class="data-secundaria">
+                            <!-- {{ uo.cantidad }} -->
+                            <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(uoIndex+1).get('cantidad')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                          </td>
                           <td>{{ uo.unidad_id }}</td>
                           <td></td>
                         </tr>
@@ -94,7 +109,11 @@
       </app-card>
     </div>
 
+    <!--
+    <pre>{{ valid }}</pre>
+    <pre>{{ values | json }}</pre>
     <pre>{{ detalle | json }}</pre>
+    -->
   </ng-container>
 </div>
 

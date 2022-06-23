@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
+//// import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-
 import {
   FormArray,
   FormGroup,
@@ -19,7 +18,7 @@ import {
   RequestSaveInformeAvance,
   DetalleInformeAvance,
 } from '@data';
-import { ActivatedRoute } from '@angular/router';
+//// import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-informe-trabajador',
@@ -30,6 +29,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   detalleInformeAvance$: Observable<DetalleInformeAvance> =
     this.otFacade.getDetalleInformeAvance$();
+
+  form: FormArray;
+
   //// loginAuth$: Observable<any>;
   //// detalleOt$: Observable<DataRespGetDetalleOT>;
   //// dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
@@ -41,13 +43,63 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   //// waitAP = false;
   //// informe_id = 0;
 
+  mustBeANumber(control: FormControl): any {
+    const result = /^\d+$/.test(control.value);
+    return result ? null : { benumber: true };
+  }
+
+  nonZero(control: FormControl): any {
+    const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
+    return value < 1 ? { nonzero: true } : null;
+  }
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+
   constructor(
-    private otFacade: OtFacade,
-    private cubFacade: CubicacionFacade,
-    private rutaActiva: ActivatedRoute
+    private otFacade: OtFacade //// private cubFacade: CubicacionFacade, //// private rutaActiva: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.subscription.add(
+      this.detalleInformeAvance$.subscribe(detalle => {
+        this.form = new FormArray(
+          detalle?.many_informe_has_servicio.map(
+            servicio =>
+              new FormGroup({
+                id: new FormControl(servicio.id, []),
+                servicio_id: new FormControl(servicio.servicio_id, []),
+                cantidad: new FormControl(`${servicio.cantidad}`, [
+                  Validators.required,
+                  this.noWhitespace,
+                  this.mustBeANumber,
+                  this.nonZero,
+                  Validators.min(0),
+                ]),
+                unidades_obras: new FormArray(
+                  servicio.many_informe_has_uob.map(
+                    uo =>
+                      new FormGroup({
+                        id: new FormControl(uo.id, []),
+                        cantidad: new FormControl(`${uo.cantidad}`, [
+                          Validators.required,
+                          this.noWhitespace,
+                          this.mustBeANumber,
+                          this.nonZero,
+                          Validators.min(0),
+                        ]),
+                      })
+                  )
+                ),
+              })
+          )
+        );
+      })
+    );
+
     //// this.subscription.add(
     ////   this.rutaActiva.params.subscribe(params => {
     ////     if (params.id) {
@@ -87,18 +139,22 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     // );
   }
 
-  //// errorMessageFn(errors: AbstractControl['errors']): string {
-  ////   console.log(errors);
-  ////   if (errors.required) {
-  ////     return 'Este campo es requerido';
-  ////   } else if (errors.whitespace) {
-  ////     return 'Este campo es requerido';
-  ////   } else if (errors.maxlength) {
-  ////     return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
-  ////   } else if (errors.min) {
-  ////     return `No puede ser negativo`;
-  ////   }
-  //// }
+  errorMessageFn(errors: AbstractControl['errors']): string {
+    console.log(errors);
+    if (errors.required) {
+      return 'Este campo es requerido';
+    } else if (errors.whitespace) {
+      return 'Este campo es requerido';
+    } else if (errors.benumber) {
+      return 'Debe ser un número';
+    } else if (errors.nonzero) {
+      return 'No son permitidos valores inferiores a 1';
+    } else if (errors.maxlength) {
+      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
+    } else if (errors.min) {
+      return `No puede ser negativo`;
+    }
+  }
 
   //// formCntl(index: number): AbstractControl {
   ////   const indext = 'table';
@@ -116,6 +172,14 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  get values(): any {
+    return this.form ? this.form.getRawValue() : null;
+  }
+
+  get valid(): boolean {
+    return this.form?.valid ?? false;
   }
 
   //// sendInformeConfirmacion(): void {
