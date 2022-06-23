@@ -9,6 +9,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {
   DataInformeAvance,
   DataRespGetDetalleOT,
@@ -29,6 +30,11 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   detalleInformeAvance$: Observable<DetalleInformeAvance> =
     this.otFacade.getDetalleInformeAvance$();
+  updating$: Observable<boolean> =
+    this.otFacade.updatingDetalleInformeAvance$();
+  otId$: Observable<number> = this.detalleInformeAvance$.pipe(
+    map(detalle => detalle.ot_id)
+  );
 
   form: FormArray;
 
@@ -207,7 +213,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   ////   this.otFacade.saveInformeAvanceTrabajador(request);
   //// }
 
-  saveBorradorInformeAvance(): void {
+  saveBorradorInformeAvance(ot_id: number): void {
     ////   const lpus: LpuInformeAvanceDetalle[] = (
     ////     this.form.get('table') as FormArray
     ////   ).value.map(f => {
@@ -220,8 +226,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
     ////   console.log(request);
     ////   this.otFacade.saveBorradorInformeAvance(request);
+
     if (this.valid) {
-      console.log('submit', this.values);
+      this.otFacade.updateDetalleInformeAvance(ot_id, this.values);
     }
   }
 }

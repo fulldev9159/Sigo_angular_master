@@ -92,6 +92,7 @@ export interface StateOt {
   info_ot_id: number;
 
   detalleInformeAvance: DetalleInformeAvance;
+  updatingDetalleInformeAvance: boolean;
 }
 
 export const initialStateOt: StateOt = {
@@ -152,6 +153,7 @@ export const initialStateOt: StateOt = {
   info_ot_id: null,
 
   detalleInformeAvance: null,
+  updatingDetalleInformeAvance: false,
 };
 
 export const reducerOt = createReducer(
@@ -771,5 +773,21 @@ export const reducerOt = createReducer(
       ...state,
       detalleInformeAvance: copy(response.data),
     };
-  })
+  }),
+  on(OtActions.updateDetalleInformeAvance, state => {
+    return {
+      ...state,
+      updatingDetalleInformeAvance: true,
+    };
+  }),
+  on(
+    OtActions.updateDetalleInformeAvanceSuccess,
+    OtActions.updateDetalleInformeAvanceError,
+    state => {
+      return {
+        ...state,
+        updatingDetalleInformeAvance: false,
+      };
+    }
+  )
 );

@@ -458,6 +458,23 @@ export class OtEffects {
     )
   );
 
+  // UPDATE DETALLE INFORME DE AVANCE
+  UpdateDetalleInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.updateDetalleInformeAvance),
+      concatMap(({ ot_id, data }) =>
+        this.otService.updateDetalleInformeAvance(ot_id, data).pipe(
+          map(response =>
+            otActions.updateDetalleInformeAvanceSuccess({ ot_id })
+          ),
+          catchError(error =>
+            of(otActions.updateDetalleInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

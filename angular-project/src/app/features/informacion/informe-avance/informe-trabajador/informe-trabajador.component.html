@@ -110,11 +110,13 @@
 
       <br>
 
-      <div style="text-align: right">
-        <button class="btn btn-primary" (click)="saveBorradorInformeAvance()" [class.disabled]="!valid">
-          <em class="pi pi-save mr-1" id="guardar-borrador-informe-avance"></em>Guardar borrador
-        </button>
-      </div>
+      <ng-container *ngIf="otId$ | async as otId">
+        <div style="text-align: right">
+          <button class="btn btn-primary" (click)="saveBorradorInformeAvance(otId)" [class.disabled]="!valid || (updating$ | async) === true">
+            <em class="pi pi-save mr-1" id="guardar-borrador-informe-avance"></em>Guardar borrador
+          </button>
+        </div>
+      </ng-container>
     </div>
 
     <!--

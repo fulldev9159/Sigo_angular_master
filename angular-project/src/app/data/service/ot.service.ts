@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import * as Data from '@data';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 
@@ -293,6 +293,15 @@ export class OTService {
       `${this.apiUrl}/ot/informe_avance/detalle/get`,
       { ot_id }
     );
+  }
+
+  updateDetalleInformeAvance(ot_id: number, data: any): Observable<any> {
+    console.log(`${this.apiUrl}/ot/informe_avance_detalle/update`, ot_id, data);
+    //// return this.http.post<Response<DetalleInformeAvance>>(
+    ////   `${this.apiUrl}/ot/informe_avance_detalle/update`,
+    ////   { ot_id }
+    //// );
+    return of({}).pipe(delay(3000));
   }
 
   ////
