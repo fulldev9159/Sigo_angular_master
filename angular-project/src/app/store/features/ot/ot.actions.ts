@@ -551,9 +551,13 @@ export const getCategoriasArchivosError = createAction(
 );
 
 //  SUBIR ARCHIVO
-export const subirArchivo = createAction(
+export const subirArchivoLibroObras = createAction(
   '[OT] GET subirArchivo',
-  props<{ nombre_original: string; tipo: string; files: any }>()
+  props<{
+    categoria_id: number;
+    files: any;
+    request_libroobras: ReqCreateRegistroLibroObra;
+  }>()
 );
 
 export const subirArchivoSuccess = createAction(

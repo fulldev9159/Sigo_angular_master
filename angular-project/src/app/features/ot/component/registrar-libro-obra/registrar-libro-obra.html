@@ -17,7 +17,7 @@
       <ng-container options>
         <option value="null" selected disabled>Seleccione ...</option>
         <ng-container *ngFor="let item of categorias$|async">
-          <option [value]="item.nombre">
+          <option [value]="item.id">
             {{ item.nombre }}
           </option>
         </ng-container>

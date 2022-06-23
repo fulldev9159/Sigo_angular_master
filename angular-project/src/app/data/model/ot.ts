@@ -589,8 +589,8 @@ export interface DataRespGetCategoriaArchivo {
 export interface ReqCreateRegistroLibroObra {
   ot_id: number;
   usuario_id: number;
-  observacioens: string;
-  archivos: number[];
+  observaciones: string;
+  archivos?: number[];
 }
 
 // ARCHIVO

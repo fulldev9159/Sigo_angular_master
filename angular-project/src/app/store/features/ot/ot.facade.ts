@@ -39,6 +39,7 @@ import {
   RequestAceptarRechazarOT,
   MotivoRechazo,
   PosibleTrabajador,
+  ReqCreateRegistroLibroObra,
 } from '@data';
 import {
   DetalleActa,
@@ -347,6 +348,26 @@ export class OtFacade {
 
   public getCategoriasArchivos$(): Observable<any[]> {
     return this.store.select(otSelectors.getCategoriasArchivos);
+  }
+
+  // SUBIR ARCHIVO/REGISTRO LIBRO OBRAS
+  public subirArchivoRegistroLibroObras(
+    tipo: number,
+    files: any,
+    request_libroobras: ReqCreateRegistroLibroObra
+  ): void {
+    this.store.dispatch(
+      otActions.subirArchivoLibroObras({
+        categoria_id: tipo,
+        files,
+        request_libroobras,
+      })
+    );
+  }
+
+  // CREATE REGISTRO LIBRO OBRAS
+  public createRegistroLibroObras(request: ReqCreateRegistroLibroObra): void {
+    this.store.dispatch(otActions.createRegistroLibroObras({ request }));
   }
 
   // Resets

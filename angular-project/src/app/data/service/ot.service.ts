@@ -306,19 +306,21 @@ export class OTService {
 
   // SUBIR ARCHIVO
   subirArchivo(
-    nombre_original: string,
-    tipo: string,
+    // nombre_original: string,
+    categoria_id: number,
+    concepto: string,
     files: any
   ): Observable<Response<DataRespSubirArchivo>> {
     const formData = new FormData();
-    formData.append('nombre_original', nombre_original);
-    formData.append('tipo', tipo);
+    formData.append('categoria_id', categoria_id.toString());
+    formData.append('concepto', concepto);
     if (files && files.length > 0) {
       for (const file of files) {
+        // console.log('file',file)
         formData.append('file', file, file.name);
       }
     }
-    console.log('FormData', formData);
+    // console.log('FormData', formData);
     return this.http.post<Response<DataRespSubirArchivo>>(
       `${this.apiUrl}/files/repositorio_archivos/create`,
       formData
@@ -326,9 +328,10 @@ export class OTService {
   }
 
   // CREATE LIBRO DE OBRAS
-  createRegistriLibroObras(
+  createRegistroLibroObras(
     request: ReqCreateRegistroLibroObra
   ): Observable<Response<any>> {
+    console.log('Create registro LO', request);
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/libro_obras/create`,
       request
