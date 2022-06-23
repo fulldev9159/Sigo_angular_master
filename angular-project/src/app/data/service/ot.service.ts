@@ -286,7 +286,9 @@ export class OTService {
   }
 
   // GET DETALLE INFORME AVANCE
-  getDetalleInformeAvance(ot_id: number): Observable<Response<any>> {
+  getDetalleInformeAvance(
+    ot_id: number
+  ): Observable<Response<DetalleInformeAvance>> {
     return this.http.post<Response<DetalleInformeAvance>>(
       `${this.apiUrl}/ot/informe_avance/detalle/get`,
       { ot_id }
