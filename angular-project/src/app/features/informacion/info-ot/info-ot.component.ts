@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import {
   Carrito,
@@ -8,7 +8,7 @@ import {
   Materiales4Cub,
   RespDataGetDetalleCubs,
 } from '@data';
-import { map } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 
 @Component({
@@ -16,8 +16,10 @@ import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade
   templateUrl: './info-ot.component.html',
   styleUrls: ['./info-ot.component.scss'],
 })
-export class InfoOtComponent implements OnInit {
-  detalleOT$: Observable<DataRespGetDetalleOT>;
+export class InfoOtComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
+
+  detalleOT$: Observable<DataRespGetDetalleOT> = this.otFacade.getDetalleOT$();
   // detalleCubicacion$: Observable<RespDataGetDetalleCubs>;
   carrito$: Observable<Carrito[]>;
 
@@ -27,13 +29,14 @@ export class InfoOtComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.detalleOT$ = this.otFacade.getDetalleOT$().pipe(
-      map(detalleot => {
-        if (detalleot) {
-          this.cubageFacade.DetalleCub(detalleot.ot.cubicacion_id);
-        }
-        return detalleot;
-      })
+    this.subscription.add(
+      this.detalleOT$
+        .pipe(
+          filter(detalleot => detalleot !== null && detalleot !== undefined)
+        )
+        .subscribe(detalleot =>
+          this.cubageFacade.DetalleCub(detalleot.ot.cubicacion_id)
+        )
     );
 
     // this.detalleCubicacion$ = this.cu/bageFacade.DetalleCub$();
@@ -106,5 +109,9 @@ export class InfoOtComponent implements OnInit {
     //     }
     //   })
     // );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
