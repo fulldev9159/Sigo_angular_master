@@ -60,7 +60,7 @@
                     </ng-container>
 
                     <ng-container *ngIf="servicio.many_informe_has_uob.length > 1">
-                      <tr>
+                      <tr [formArray]="form">
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="label-table"> -- </td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="data-primaria"> -- </td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length">
@@ -84,7 +84,7 @@
 
                     <ng-container *ngIf="servicio.many_informe_has_uob.length > 1">
                       <ng-container *ngFor="let uo of servicio.many_informe_has_uob | slice:1; let uoIndex = index">
-                        <tr>
+                        <tr [formArray]="form">
                           <td class="label-table">{{ uo.unidad_obra_cod }}</td>
                           <td class="data-primaria"> -- </td>
                           <td class="data-secundaria"> -- </td>
@@ -107,6 +107,14 @@
           </div>
         </ng-container>
       </app-card>
+
+      <br>
+
+      <div style="text-align: right">
+        <button class="btn btn-primary" (click)="saveBorradorInformeAvance()" [class.disabled]="!valid">
+          <em class="pi pi-save mr-1" id="guardar-borrador-informe-avance"></em>Guardar borrador
+        </button>
+      </div>
     </div>
 
     <!--

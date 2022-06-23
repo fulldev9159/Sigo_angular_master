@@ -140,7 +140,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   }
 
   errorMessageFn(errors: AbstractControl['errors']): string {
-    console.log(errors);
     if (errors.required) {
       return 'Este campo es requerido';
     } else if (errors.whitespace) {
@@ -208,18 +207,21 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   ////   this.otFacade.saveInformeAvanceTrabajador(request);
   //// }
 
-  //// saveBorradorInformeAvance(): void {
-  ////   const lpus: LpuInformeAvanceDetalle[] = (
-  ////     this.form.get('table') as FormArray
-  ////   ).value.map(f => {
-  ////     return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
-  ////   });
+  saveBorradorInformeAvance(): void {
+    ////   const lpus: LpuInformeAvanceDetalle[] = (
+    ////     this.form.get('table') as FormArray
+    ////   ).value.map(f => {
+    ////     return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
+    ////   });
 
-  ////   const request: RequestSaveBorradorInformeAvance = {
-  ////     valores_detalles: lpus,
-  ////   };
+    ////   const request: RequestSaveBorradorInformeAvance = {
+    ////     valores_detalles: lpus,
+    ////   };
 
-  ////   console.log(request);
-  ////   this.otFacade.saveBorradorInformeAvance(request);
-  //// }
+    ////   console.log(request);
+    ////   this.otFacade.saveBorradorInformeAvance(request);
+    if (this.valid) {
+      console.log('submit', this.values);
+    }
+  }
 }
