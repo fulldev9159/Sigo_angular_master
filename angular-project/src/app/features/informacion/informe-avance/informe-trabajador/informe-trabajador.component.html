@@ -1,3 +1,7 @@
+<ng-container *ngIf="detalleInformeAvance$ | async as detalle">
+  <pre>{{ detalle | json }}</pre>
+</ng-container>
+
 <!-- <div style="padding: 8px;">
   <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'">
     <p-message severity="info" text="El informe enviado está a la espera de que el gestor lo apruebe"></p-message>&nbsp;

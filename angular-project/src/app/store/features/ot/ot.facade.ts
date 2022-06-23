@@ -39,6 +39,7 @@ import {
   RequestAceptarRechazarOT,
   MotivoRechazo,
   PosibleTrabajador,
+  DetalleInformeAvance,
 } from '@data';
 import {
   DetalleActa,
@@ -340,9 +341,9 @@ export class OtFacade {
     this.store.dispatch(otActions.getDetalleInformeAvanceSuccess({ response }));
   }
 
-  // public getDetalleInformeAvance$(): Observable<PosibleTrabajador[]> {
-  //   return this.store.select(otSelectors.getDetalleInformeAvance);
-  // }
+  public getDetalleInformeAvance$(): Observable<DetalleInformeAvance> {
+    return this.store.select(otSelectors.getDetalleInformeAvance);
+  }
 
   // Resets
   public resetData(): void {

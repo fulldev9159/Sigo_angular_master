@@ -17,6 +17,7 @@ import {
   LpuInformeAvanceDetalle,
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
+  DetalleInformeAvance,
 } from '@data';
 import { ActivatedRoute } from '@angular/router';
 
@@ -27,6 +28,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  detalleInformeAvance$: Observable<DetalleInformeAvance> =
+    this.otFacade.getDetalleInformeAvance$();
   //// loginAuth$: Observable<any>;
   //// detalleOt$: Observable<DataRespGetDetalleOT>;
   //// dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);

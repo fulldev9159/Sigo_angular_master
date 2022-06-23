@@ -150,6 +150,8 @@ export const initialStateOt: StateOt = {
   dataInformeActa: [],
   dataSolicitudPago: [],
   info_ot_id: null,
+
+  detalleInformeAvance: null,
 };
 
 export const reducerOt = createReducer(
