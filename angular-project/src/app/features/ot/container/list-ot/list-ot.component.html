@@ -178,10 +178,17 @@
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeInformeAvanceModal()">Cancelar</button>
-    <!--
-    <button class="btn btn-primary" [disabled]="!registrarLibroObraForm.valid" (click)="registrarLibroObraFormSubmit()">
-      <em class="pi pi-save mr-1"></em>Guardar
-    </button>
-    -->
+    <ng-container *ngIf="detalleInformeAvance$ | async as detalle">
+      <ng-container *ngIf="sendingDetalleInformeAvance$ | async as sending; else noSending">
+        <button class="btn btn-primary disabled">
+          <em class="pi pi-spinner pi-spin mr-1"></em>Enviar
+        </button>
+      </ng-container>
+      <ng-template #noSending>
+        <button class="btn btn-primary" (click)="sendDetalleInformeAvance(detalle)">
+          <em class="pi pi-send mr-1"></em>Enviar
+        </button>
+      </ng-template>
+    </ng-container>
   </ng-container>
 </app-modal>

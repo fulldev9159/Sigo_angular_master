@@ -94,6 +94,7 @@ export interface StateOt {
   detalleInformeAvance: DetalleInformeAvance;
   detalleInformeAvanceError: any;
   updatingDetalleInformeAvance: boolean;
+  sendingDetalleInformeAvance: boolean;
 }
 
 export const initialStateOt: StateOt = {
@@ -156,6 +157,7 @@ export const initialStateOt: StateOt = {
   detalleInformeAvance: null,
   detalleInformeAvanceError: null,
   updatingDetalleInformeAvance: false,
+  sendingDetalleInformeAvance: false,
 };
 
 export const reducerOt = createReducer(
@@ -803,6 +805,22 @@ export const reducerOt = createReducer(
       return {
         ...state,
         updatingDetalleInformeAvance: false,
+      };
+    }
+  ),
+  on(OtActions.sendDetalleInformeAvance, state => {
+    return {
+      ...state,
+      sendingDetalleInformeAvance: true,
+    };
+  }),
+  on(
+    OtActions.sendDetalleInformeAvanceSuccess,
+    OtActions.sendDetalleInformeAvanceError,
+    state => {
+      return {
+        ...state,
+        sendingDetalleInformeAvance: false,
       };
     }
   )

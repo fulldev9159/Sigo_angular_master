@@ -35,6 +35,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.otFacade.getDetalleInformeAvance$();
   detalleInformeAvanceError$: Observable<any> =
     this.otFacade.getDetalleInformeAvanceError$();
+  sendingDetalleInformeAvance$: Observable<boolean> =
+    this.otFacade.sendingDetalleInformeAvance$();
 
   itemsEjecucion$: Observable<OT[]>;
   itemsAbiertas$: Observable<OT[]>;
@@ -645,7 +647,10 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   closeInformeAvanceModal(): void {
-    //// this.otFacade.getDetalleInformeAvance(null); // TODO
     this.displayInformeAvanceModal = false;
+  }
+
+  sendDetalleInformeAvance(detalle: DetalleInformeAvance): void {
+    this.otFacade.sendDetalleInformeAvance(detalle.ot_id, detalle);
   }
 }

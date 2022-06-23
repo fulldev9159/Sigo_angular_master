@@ -358,6 +358,15 @@ export class OtFacade {
     return this.store.select(otSelectors.updatingDetalleInformeAvance);
   }
 
+  // SEND DETALE INFORME DE AVANCE
+  public sendDetalleInformeAvance(ot_id: number, data: any): void {
+    this.store.dispatch(otActions.sendDetalleInformeAvance({ ot_id, data }));
+  }
+
+  public sendingDetalleInformeAvance$(): Observable<boolean> {
+    return this.store.select(otSelectors.sendingDetalleInformeAvance);
+  }
+
   // Resets
   public resetData(): void {
     this.store.dispatch(otActions.resetData());

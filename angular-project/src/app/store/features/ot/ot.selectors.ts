@@ -211,3 +211,8 @@ export const updatingDetalleInformeAvance = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.updatingDetalleInformeAvance
 );
+
+export const sendingDetalleInformeAvance = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.sendingDetalleInformeAvance
+);
