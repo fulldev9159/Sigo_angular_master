@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import * as baseActions from './base.actions';
 import * as baseSelectors from './base.selectors';
 import { Observable } from 'rxjs';
-import { databaseVersion } from '@data';
+import { DatabaseVersion } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class BaseFacade {
     this.store.dispatch(baseActions.getDatabaseVersion());
   }
 
-  public getDatabaseVersion$(): Observable<databaseVersion> {
+  public getDatabaseVersion$(): Observable<DatabaseVersion> {
     return this.store.select(baseSelectors.getDatabaseVersion);
   }
 }

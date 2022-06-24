@@ -118,7 +118,7 @@ export interface SessionData {
 }
 
 // GET DATABASE VERSION
-export interface databaseVersion {
+export interface DatabaseVersion {
   checksum: number;
   description: string;
   execution_time: number;

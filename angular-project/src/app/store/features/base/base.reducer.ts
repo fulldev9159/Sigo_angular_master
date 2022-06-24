@@ -1,4 +1,4 @@
-import { databaseVersion } from '@data';
+import { DatabaseVersion } from '@data';
 import { createReducer, on } from '@ngrx/store';
 import * as baseActions from './base.actions';
 
@@ -6,7 +6,7 @@ export const FeatureKey = 'base';
 
 export interface StateBase {
   loading: boolean;
-  databaseVersion: databaseVersion;
+  databaseVersion: DatabaseVersion;
 }
 
 export const initialStateBase: StateBase = {

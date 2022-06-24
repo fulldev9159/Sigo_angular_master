@@ -6,7 +6,7 @@ import {
   DataRespLogin,
   DataResGetPerfilesUser,
   DataRespGetUsuarioPermisosPerfil,
-  databaseVersion,
+  DatabaseVersion,
 } from '@data/model';
 
 @Injectable({
@@ -50,8 +50,8 @@ export class AuthService {
     );
   }
 
-  getDatabaseVersion(): Observable<Response<databaseVersion>> {
-    return this.http.post<Response<databaseVersion>>(
+  getDatabaseVersion(): Observable<Response<DatabaseVersion>> {
+    return this.http.post<Response<DatabaseVersion>>(
       `${this.apiUrl}/configuration/flyway_schema_history/getlast`,
       {}
     );

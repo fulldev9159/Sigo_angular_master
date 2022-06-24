@@ -1,4 +1,4 @@
-import { databaseVersion, Response } from '@data';
+import { DatabaseVersion, Response } from '@data';
 import { createAction, props } from '@ngrx/store';
 
 export const loading = createAction(
@@ -11,7 +11,7 @@ export const getDatabaseVersion = createAction('[BASE] getDatabaseVersion');
 
 export const getDatabaseVersionSuccess = createAction(
   '[BASE]  getDatabaseVersion Success',
-  props<{ response: Response<databaseVersion> }>()
+  props<{ response: Response<DatabaseVersion> }>()
 );
 
 export const getDatabaseVersionError = createAction(
