@@ -370,6 +370,13 @@ export class OtFacade {
     this.store.dispatch(otActions.createRegistroLibroObras({ request }));
   }
 
+  // GET LIBRO OBRAS
+  public getLibroObras(ot_id: number): void {
+    this.store.dispatch(otActions.getLibroObras({ ot_id }));
+  }
+  public getLibroObras$(): Observable<any[]> {
+    return this.store.select(otSelectors.getLibroObras);
+  }
   // Resets
   public resetData(): void {
     this.store.dispatch(otActions.resetData());

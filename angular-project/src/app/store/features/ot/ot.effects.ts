@@ -512,6 +512,19 @@ export class OtEffects {
     )
   );
 
+  // GET LIBRO OBRAS
+  getLibroObras$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getLibroObras),
+      concatMap(({ ot_id }) =>
+        this.otService.getLibroObras(ot_id).pipe(
+          map(response => otActions.getLibroObrasSuccess({ response })),
+          catchError(error => of(otActions.getLibroObrasError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

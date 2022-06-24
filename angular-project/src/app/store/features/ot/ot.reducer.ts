@@ -69,6 +69,7 @@ export interface StateOt {
 
   // CATEGORIA ARCHIVO
   categoriaArchivo: any[];
+  libroObras: any[];
 
   // ////
   filtro_propietario: string;
@@ -130,6 +131,9 @@ export const initialStateOt: StateOt = {
 
   // CATEGORIA ARCHIVO
   categoriaArchivo: [],
+
+  // LIBRO OBRAS
+  libroObras: [],
 
   // ////
   filtro_propietario: '',
@@ -487,6 +491,18 @@ export const reducerOt = createReducer(
     return {
       ...state,
       categoriaArchivo: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+  on(OtActions.getLibroObrasSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      libroObras: temp,
       // .length > 0
       //   ? temp.sort((a, b) =>
       //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0

@@ -47,6 +47,7 @@ import {
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
   DataRespGetCategoriaArchivo,
+  DataRespGetLibroDeObras,
 } from '@data';
 
 @Injectable({
@@ -279,7 +280,7 @@ export class OTService {
     concepto: string
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
-      `${this.apiUrl}  /ot/usuario_involucrado_ot/create`,
+      `${this.apiUrl}/ot/usuario_involucrado_ot/create`,
       {
         ot_id,
         proxy_id,
@@ -335,6 +336,14 @@ export class OTService {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/libro_obras/create`,
       request
+    );
+  }
+
+  // GET LIBRO DE OBRAS
+  getLibroObras(ot_id: number): Observable<Response<DataRespGetLibroDeObras>> {
+    return this.http.post<Response<DataRespGetLibroDeObras>>(
+      `${this.apiUrl}/libro_obra/get_libro_obras/get`,
+      { ot_id }
     );
   }
 

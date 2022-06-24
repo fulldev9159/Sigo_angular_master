@@ -598,6 +598,10 @@ export interface DataRespSubirArchivo {
   repositorio_archivos_ids: number[];
 }
 
+export interface DataRespGetLibroDeObras {
+  items: any[];
+}
+
 // ////
 interface FieldOrder {
   ot_id: string;

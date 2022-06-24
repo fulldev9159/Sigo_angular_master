@@ -586,6 +586,22 @@ export const createRegistroLibroObrasError = createAction(
   props<{ error: any }>()
 );
 
+//  GET LIBRO DE OBRAS
+export const getLibroObras = createAction(
+  '[OT] GET getLibroObras',
+  props<{ ot_id: number }>()
+);
+
+export const getLibroObrasSuccess = createAction(
+  '[OT] GET getLibroObras Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getLibroObrasError = createAction(
+  '[OT] GET getLibroObras Error',
+  props<{ error: any }>()
+);
+
 export const resetData = createAction('[ResetData] ResetData');
 export const resetContrato = createAction('[ResetData] Reset Contrato');
 export const resetPlan = createAction('[ResetData] ResetPlan');
