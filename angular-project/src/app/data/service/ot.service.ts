@@ -299,10 +299,17 @@ export class OTService {
     ot_id: number,
     data: any
   ): Observable<Response<any>> {
-    console.log(`${this.apiUrl}/ot/informe_avance_detalle/update`, {
-      ot_id,
-      data,
-    });
+    //// console.log(`${this.apiUrl}/ot/informe_avance_detalle/update`, {
+    ////   servicio: [{
+    ////     row_id: 1,
+    ////     cantidad: 1321321
+    ////   }],
+    ////   unidad_obra: [{
+    ////     row_id: 1,
+    ////     cantidad: 1321321
+    ////   }],
+    //// });
+
     //// return this.http.post<Response<DetalleInformeAvance>>(
     ////   `${this.apiUrl}/ot/informe_avance_detalle/update`,
     ////   { ot_id }
@@ -325,8 +332,8 @@ export class OTService {
   ): Observable<Response<any>> {
     console.log(`${this.apiUrl}/ot/informe_avance/send`, {
       ot_id,
-      data,
     });
+
     //// return this.http.post<Response<DetalleInformeAvance>>(
     ////   `${this.apiUrl}/ot/informe_avance_detalle/update`,
     ////   { ot_id }
