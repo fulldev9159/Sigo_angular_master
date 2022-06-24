@@ -39,6 +39,7 @@ import {
   RequestAceptarRechazarOT,
   MotivoRechazo,
   PosibleTrabajador,
+  ReqCreateRegistroLibroObra,
 } from '@data';
 import {
   DetalleActa,
@@ -340,6 +341,42 @@ export class OtFacade {
   //   return this.store.select(otSelectors.getDetalleInformeAvance);
   // }
 
+  // GET CATEGORIA ARCHIVO
+  public getCategoriasArchivos(): void {
+    this.store.dispatch(otActions.getCategoriasArchivos());
+  }
+
+  public getCategoriasArchivos$(): Observable<any[]> {
+    return this.store.select(otSelectors.getCategoriasArchivos);
+  }
+
+  // SUBIR ARCHIVO/REGISTRO LIBRO OBRAS
+  public subirArchivoRegistroLibroObras(
+    tipo: number,
+    files: any,
+    request_libroobras: ReqCreateRegistroLibroObra
+  ): void {
+    this.store.dispatch(
+      otActions.subirArchivoLibroObras({
+        categoria_id: tipo,
+        files,
+        request_libroobras,
+      })
+    );
+  }
+
+  // CREATE REGISTRO LIBRO OBRAS
+  public createRegistroLibroObras(request: ReqCreateRegistroLibroObra): void {
+    this.store.dispatch(otActions.createRegistroLibroObras({ request }));
+  }
+
+  // GET LIBRO OBRAS
+  public getLibroObras(ot_id: number): void {
+    this.store.dispatch(otActions.getLibroObras({ ot_id }));
+  }
+  public getLibroObras$(): Observable<any[]> {
+    return this.store.select(otSelectors.getLibroObras);
+  }
   // Resets
   public resetData(): void {
     this.store.dispatch(otActions.resetData());

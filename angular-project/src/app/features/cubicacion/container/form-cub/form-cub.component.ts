@@ -240,7 +240,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               'servicio_id',
               'unidad_obra_cod',
             ]);
-            this.cubicacionFacade.tipoServicioEspecialidad(+actividad_id);
+            this.cubicacionFacade.tipoServicioEspecialidad(
+              +actividad_id,
+              +this.formCub.get('contrato').value
+            );
           } else {
             // this.checkAndEnable('cmarcoproveedor_id', []);
           }

@@ -458,6 +458,73 @@ export class OtEffects {
     )
   );
 
+  // GET CATEGORIA ARCHIVOS
+  getCategoriasArchivos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getCategoriasArchivos),
+      concatMap(() =>
+        this.otService.getCategoriasArchivos().pipe(
+          map(response => otActions.getCategoriasArchivosSuccess({ response })),
+          catchError(error =>
+            of(otActions.getCategoriasArchivosError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // SUBIR ARCHIVO/REGISTRO LIBRO DE OBRAS
+  subirArchivoRegistroLibroObras$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.subirArchivoLibroObras),
+      concatMap(({ categoria_id, files, request_libroobras }) =>
+        this.otService.subirArchivo(categoria_id, 'LIBRO_OBRAS', files).pipe(
+          map(response => {
+            console.log('wweqw response', response);
+            console.log(request_libroobras);
+            return otActions.createRegistroLibroObras({
+              request: {
+                ...request_libroobras,
+                archivos: response.data.repositorio_archivos_ids,
+              },
+            });
+          }),
+          catchError(error => of(otActions.subirArchivoError({ error })))
+        )
+      )
+    )
+  );
+
+  // CREATE REGISTRO LIBRO DE OBRAS
+  createRegistroLibroObras$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.createRegistroLibroObras),
+      concatMap(({ request }) =>
+        this.otService.createRegistroLibroObras(request).pipe(
+          map(response =>
+            otActions.createRegistroLibroObrasSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.createRegistroLibroObrasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // GET LIBRO OBRAS
+  getLibroObras$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getLibroObras),
+      concatMap(({ ot_id }) =>
+        this.otService.getLibroObras(ot_id).pipe(
+          map(response => otActions.getLibroObrasSuccess({ response })),
+          catchError(error => of(otActions.getLibroObrasError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -465,7 +532,8 @@ export class OtEffects {
         ofType(
           otActions.createOTSuccess,
           otActions.AceptarRechazarIncialOTSuccess,
-          otActions.AsignarSupervisorTrabajosOTSuccess
+          otActions.AsignarSupervisorTrabajosOTSuccess,
+          otActions.createRegistroLibroObrasSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

@@ -118,6 +118,17 @@ export const getPosibleTrabajador = createSelector(
   (state: fromOt.StateOt) => state.trabajadores
 );
 
+// CATEGORIA ARCHIVO
+export const getCategoriasArchivos = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.categoriaArchivo
+);
+
+// LIBRO OBRAS
+export const getLibroObras = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.libroObras
+);
 //  ////
 export const getOtEjecucion = createSelector(
   selectOt,
