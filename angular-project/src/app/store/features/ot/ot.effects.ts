@@ -479,8 +479,8 @@ export class OtEffects {
   SendDetalleInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.sendDetalleInformeAvance),
-      concatMap(({ ot_id, data }) =>
-        this.otService.sendDetalleInformeAvance(ot_id, data).pipe(
+      concatMap(({ ot_id }) =>
+        this.otService.sendDetalleInformeAvance(ot_id).pipe(
           map(response =>
             otActions.sendDetalleInformeAvanceSuccess({ response })
           ),

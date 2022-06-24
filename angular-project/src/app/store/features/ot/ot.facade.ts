@@ -374,8 +374,8 @@ export class OtFacade {
   }
 
   // SEND DETALE INFORME DE AVANCE
-  public sendDetalleInformeAvance(ot_id: number, data: any): void {
-    this.store.dispatch(otActions.sendDetalleInformeAvance({ ot_id, data }));
+  public sendDetalleInformeAvance(ot_id: number): void {
+    this.store.dispatch(otActions.sendDetalleInformeAvance({ ot_id }));
   }
 
   public sendingDetalleInformeAvance$(): Observable<boolean> {

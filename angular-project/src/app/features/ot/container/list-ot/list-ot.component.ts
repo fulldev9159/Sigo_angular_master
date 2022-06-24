@@ -651,6 +651,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   sendDetalleInformeAvance(detalle: DetalleInformeAvance): void {
-    this.otFacade.sendDetalleInformeAvance(detalle.ot_id, detalle);
+    this.otFacade.sendDetalleInformeAvance(detalle.ot_id);
   }
 }
