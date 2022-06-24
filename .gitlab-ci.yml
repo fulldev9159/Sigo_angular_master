@@ -43,105 +43,105 @@ linter:
 #     PRECURSOR: $CI_PROJECT_NAME
 #   trigger: zweicom/cl-movistar/sigo/demos-sigo
 
-restart test environment:
-  stage: restart test environment
-  when: manual
-  image: tmaier/docker-compose:latest
-  script:
-    - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
-    - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
-    - echo "deploying to google cloud"
-    - sudo systemctl status docker
-    - sudo docker-compose ps
-    - sudo docker-compose stop mcl_otec_db_testing mcl_api_otec_test
-    - sudo docker-compose rm -f mcl_otec_db_testing mcl_api_otec_test
-    # - sudo docker rmi $(sudo docker images gcr.io/zwcsce/mcl-otec-db -a -q)
-    # - sudo docker rmi $(sudo docker images gcr.io/zwcsce/api-sigo -a -q)
-    - sudo docker-compose up -d mcl_otec_db_testing mcl_api_otec_test
-    - sudo docker-compose ps
-  tags:
-    - gcloud_tpb
-  environment: google cloud tpb
+# restart test environment:
+#   stage: restart test environment
+#   when: manual
+#   image: tmaier/docker-compose:latest
+#   script:
+#     - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
+#     - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
+#     - echo "deploying to google cloud"
+#     - sudo systemctl status docker
+#     - sudo docker-compose ps
+#     - sudo docker-compose stop mcl_otec_db_testing mcl_api_otec_test
+#     - sudo docker-compose rm -f mcl_otec_db_testing mcl_api_otec_test
+#     # - sudo docker rmi $(sudo docker images gcr.io/zwcsce/mcl-otec-db -a -q)
+#     # - sudo docker rmi $(sudo docker images gcr.io/zwcsce/api-sigo -a -q)
+#     - sudo docker-compose up -d mcl_otec_db_testing mcl_api_otec_test
+#     - sudo docker-compose ps
+#   tags:
+#     - gcloud_tpb
+#   environment: google cloud tpb
 
-update test database:
-  stage: reset testing database sigo
-  when: manual
-  script:
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'pass'\""
-    # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
-    # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass clean"
-    - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && sudo docker run --rm -v /home/zweicom/sigo_database/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate && cd OTEC && ./Z001.sh"
-    # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set estado=1 where nombre='BUCLE'\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,(select id from contrato_marco where nombre='BUCLE'))\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,(select id from contrato_marco where nombre='UNIFICADO-2019-FIJA'))\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,(select id from contrato_marco where nombre='UNIFICADO-2019-MOVIL'))\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set tipo_contrato_id=3 where nombre='Contrato Ordinario'\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,(select id from contrato_marco where nombre='Contrato Ordinario'))\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set aprob_jerarq_inic=1 where nombre='BUCLE'\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('msupervisor1','12312312312','Supervisora Josefa','Antonella',22222222222,1,1,1,'asdasdas@asdasd.com',now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id)values((select id from usuario where username='msupervisor1'),1)\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='msupervisor1'),(select id from usuario where username='msupervisor1'),9,17,now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update usuarioproxy set superior_proxy_id = 23 where id=2\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=7\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=8\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(9,(select id from contrato_marco where nombre='BUCLE'))\""
+# update test database:
+#   stage: reset testing database sigo
+#   when: manual
+#   script:
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'pass'\""
+#     # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
+#     # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass clean"
+#     - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && sudo docker run --rm -v /home/zweicom/sigo_database/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate && cd OTEC && ./Z001.sh"
+#     # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set estado=1 where nombre='BUCLE'\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,(select id from contrato_marco where nombre='BUCLE'))\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,(select id from contrato_marco where nombre='UNIFICADO-2019-FIJA'))\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,(select id from contrato_marco where nombre='UNIFICADO-2019-MOVIL'))\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set tipo_contrato_id=3 where nombre='Contrato Ordinario'\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(2,(select id from contrato_marco where nombre='Contrato Ordinario'))\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set aprob_jerarq_inic=1 where nombre='BUCLE'\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('msupervisor1','12312312312','Supervisora Josefa','Antonella',22222222222,1,1,1,'asdasdas@asdasd.com',now(),now())\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id)values((select id from usuario where username='msupervisor1'),1)\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='msupervisor1'),(select id from usuario where username='msupervisor1'),9,17,now(),now())\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update usuarioproxy set superior_proxy_id = 23 where id=2\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=7\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=8\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values(9,(select id from contrato_marco where nombre='BUCLE'))\""
 
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('gadmincontrato1','12312312312','Luk GENERATEL SPA','Antonella',22222222222,1,10097,1,'asdasdas@asdasd.com',now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gadmincontrato1'),(select id from usuario where username='gadmincontrato1'),2,NULL,now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gadmincontrato1'),(select id from contrato_marco where nombre='UNIFICADO-2019-MOVIL'))\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('gtrabajador1','12312312312','Ana GENERATEL SPA','Antonella',22222222222,1,10097,1,'asdasdas@asdasd.com',now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gtrabajador1'),(select id from usuario where username='gtrabajador1'),4,(select id from usuario where username='gadmincontrato1'),now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gtrabajador1'),(select id from contrato_marco where nombre='BUCLE'));\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('gadmincontrato1','12312312312','Luk GENERATEL SPA','Antonella',22222222222,1,10097,1,'asdasdas@asdasd.com',now(),now())\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gadmincontrato1'),(select id from usuario where username='gadmincontrato1'),2,NULL,now(),now())\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gadmincontrato1'),(select id from contrato_marco where nombre='UNIFICADO-2019-MOVIL'))\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('gtrabajador1','12312312312','Ana GENERATEL SPA','Antonella',22222222222,1,10097,1,'asdasdas@asdasd.com',now(),now())\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gtrabajador1'),(select id from usuario where username='gtrabajador1'),4,(select id from usuario where username='gadmincontrato1'),now(),now())\""
+#     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gtrabajador1'),(select id from contrato_marco where nombre='BUCLE'));\""
 
-  #MOVIL FIJO FALTA SIN UO
-  # Contrato_id:25  Unificado_2019_movil
-  # agencia_id:347  Santiago
-  # proveedor_id:10097   cmarco_has_proveedor_id:4   GENERALTEL
-  # actividad:1 ABANDONOS
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob values(9999,1,'2210',0,'C 012')\""
-  # #ORDINARIO No hay contrato ordinario
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set tipo_contrato_id=3 where nombre='RAN'\""
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into cmarco_has_proveedor(contrato_marco_id, proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable) select 3,proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable from cmarco_has_proveedor where id=4\""
-  # #BUCLE ALGUNOS NO TIENEN UO ASOCIADO
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,76,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,33,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
-  tags:
-    - repo-machine
+#   #MOVIL FIJO FALTA SIN UO
+#   # Contrato_id:25  Unificado_2019_movil
+#   # agencia_id:347  Santiago
+#   # proveedor_id:10097   cmarco_has_proveedor_id:4   GENERALTEL
+#   # actividad:1 ABANDONOS
+#   # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob values(9999,1,'2210',0,'C 012')\""
+#   # #ORDINARIO No hay contrato ordinario
+#   # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set tipo_contrato_id=3 where nombre='RAN'\""
+#   # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into cmarco_has_proveedor(contrato_marco_id, proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable) select 3,proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable from cmarco_has_proveedor where id=4\""
+#   # #BUCLE ALGUNOS NO TIENEN UO ASOCIADO
+#   # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,76,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
+#   # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,33,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
+#   tags:
+#     - repo-machine
 
-integrations test cypress:
-  image: cypress/browsers:node12.14.1-chrome85-ff81
-  stage: integrations test
-  when: manual
-  needs:
-    - update test database
-  script:
-    - cd angular-project
-    - npm ci
-    - npm start & ./node_modules/.bin/wait-on http://localhost:4201
-    - cd ../cypress
-    - npm ci
-    - npx cypress run
+# integrations test cypress:
+#   image: cypress/browsers:node12.14.1-chrome85-ff81
+#   stage: integrations test
+#   when: manual
+#   needs:
+#     - update test database
+#   script:
+#     - cd angular-project
+#     - npm ci
+#     - npm start & ./node_modules/.bin/wait-on http://localhost:4201
+#     - cd ../cypress
+#     - npm ci
+#     - npx cypress run
 
-acceptance test:
-  <<: *connect_gcr
-  stage: acceptance test
-  needs:
-    - integrations test cypress
-  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
-  script:
-    - if [ $(docker network ls |grep web-sigo_default|wc -l) == 0 ]; then  docker network create -d bridge web-sigo_default; fi
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_test_sigo_web
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_web
-    - docker network connect web-sigo_default mcl_test_sigo_web
-    - docker run --name robot --shm-size=1gb --network="web-sigo_default" --user $(id -u):$(id -g) -e ROBOT_OPTIONS="--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing" -v /tmp/reports:/opt/robotframework/reports:Z -v /builds/cr4kQ2Xs/0/zweicom/cl-movistar/sigo/web-sigo/robot_e2e:/opt/robotframework/tests:Z ppodgorsek/robot-framework:3.8.0
-  after_script:
-    - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
-    - docker stop robot
-    - docker rm robot
-  tags:
-    - docker_sigo
+# acceptance test:
+#   <<: *connect_gcr
+#   stage: acceptance test
+#   needs:
+#     - integrations test cypress
+#   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+#   script:
+#     - if [ $(docker network ls |grep web-sigo_default|wc -l) == 0 ]; then  docker network create -d bridge web-sigo_default; fi
+#     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
+#     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml build --no-cache mcl_test_sigo_web
+#     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml up -d --build mcl_test_sigo_web
+#     - docker network connect web-sigo_default mcl_test_sigo_web
+#     - docker run --name robot --shm-size=1gb --network="web-sigo_default" --user $(id -u):$(id -g) -e ROBOT_OPTIONS="--exclude automatizacion --variable url:http://mcl_test_sigo_web --variable ambiente:testing" -v /tmp/reports:/opt/robotframework/reports:Z -v /builds/cr4kQ2Xs/0/zweicom/cl-movistar/sigo/web-sigo/robot_e2e:/opt/robotframework/tests:Z ppodgorsek/robot-framework:3.8.0
+#   after_script:
+#     - docker-compose -p ${CI_PIPELINE_ID} -f docker-compose.yml down -v
+#     - docker stop robot
+#     - docker rm robot
+#   tags:
+#     - docker_sigo
 
 docker:
   <<: *connect_gcr
