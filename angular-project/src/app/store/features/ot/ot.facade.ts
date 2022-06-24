@@ -350,8 +350,23 @@ export class OtFacade {
   }
 
   // UPDATE DETALE INFORME DE AVANCE
-  public updateDetalleInformeAvance(ot_id: number, data: any): void {
-    this.store.dispatch(otActions.updateDetalleInformeAvance({ ot_id, data }));
+  public updateDetalleInformeAvance(
+    ot_id: number,
+    id: number,
+    data: {
+      servicio: {
+        row_id: number;
+        cantidad: number;
+      }[];
+      unidad_obra: {
+        row_id: number;
+        cantidad: number;
+      }[];
+    }
+  ): void {
+    this.store.dispatch(
+      otActions.updateDetalleInformeAvance({ ot_id, id, data })
+    );
   }
 
   public updatingDetalleInformeAvance$(): Observable<boolean> {

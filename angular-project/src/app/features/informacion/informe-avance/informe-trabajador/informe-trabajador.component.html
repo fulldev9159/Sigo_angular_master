@@ -111,18 +111,20 @@
       <br>
 
       <ng-container *ngIf="otId$ | async as otId">
-        <div style="text-align: right">
-          <ng-container *ngIf="updating$ | async as updating; else noUpdating">
-            <button class="btn btn-primary disabled">
-              <em class="pi pi-spin pi-spinner mr-1"></em>Guardar borrador
-            </button>
-          </ng-container>
-          <ng-template #noUpdating>
-            <button class="btn btn-primary" (click)="saveBorradorInformeAvance(otId)" [class.disabled]="!valid">
-              <em class="pi pi-save mr-1"></em>Guardar borrador
-            </button>
-          </ng-template>
-        </div>
+        <ng-container *ngIf="id$ | async as id">
+          <div style="text-align: right">
+            <ng-container *ngIf="updating$ | async as updating; else noUpdating">
+              <button class="btn btn-primary disabled">
+                <em class="pi pi-spin pi-spinner mr-1"></em>Guardar borrador
+              </button>
+            </ng-container>
+            <ng-template #noUpdating>
+              <button class="btn btn-primary" (click)="saveBorradorInformeAvance(otId, id)" [class.disabled]="!valid">
+                <em class="pi pi-save mr-1"></em>Guardar borrador
+              </button>
+            </ng-template>
+          </div>
+        </ng-container>
       </ng-container>
     </div>
 

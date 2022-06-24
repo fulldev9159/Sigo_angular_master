@@ -35,6 +35,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   otId$: Observable<number> = this.detalleInformeAvance$.pipe(
     map(detalle => detalle.ot_id)
   );
+  id$: Observable<number> = this.detalleInformeAvance$.pipe(
+    map(detalle => detalle.id)
+  );
 
   form: FormArray;
 
@@ -77,7 +80,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
             servicio =>
               new FormGroup({
                 id: new FormControl(servicio.id, []),
-                servicio_id: new FormControl(servicio.servicio_id, []),
                 cantidad: new FormControl(`${servicio.cantidad}`, [
                   Validators.required,
                   this.noWhitespace,
@@ -179,8 +181,34 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  get values(): any {
-    return this.form ? this.form.getRawValue() : null;
+  get values(): {
+    servicio: {
+      row_id: number;
+      cantidad: number;
+    }[];
+    unidad_obra: {
+      row_id: number;
+      cantidad: number;
+    }[];
+  } {
+    const servicios = this.form ? this.form.getRawValue() : [];
+
+    return {
+      servicio: servicios.map(servicio => ({
+        row_id: +servicio.id,
+        cantidad: +servicio.cantidad,
+      })),
+      unidad_obra: servicios.reduce(
+        (ac, servicio) =>
+          ac.concat(
+            ...servicio.unidades_obras.map(uo => ({
+              row_id: +uo.id,
+              cantidad: +uo.cantidad,
+            }))
+          ),
+        []
+      ),
+    };
   }
 
   get valid(): boolean {
@@ -213,7 +241,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   ////   this.otFacade.saveInformeAvanceTrabajador(request);
   //// }
 
-  saveBorradorInformeAvance(ot_id: number): void {
+  saveBorradorInformeAvance(ot_id: number, id: number): void {
     ////   const lpus: LpuInformeAvanceDetalle[] = (
     ////     this.form.get('table') as FormArray
     ////   ).value.map(f => {
@@ -228,7 +256,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     ////   this.otFacade.saveBorradorInformeAvance(request);
 
     if (this.valid) {
-      this.otFacade.updateDetalleInformeAvance(ot_id, this.values);
+      this.otFacade.updateDetalleInformeAvance(ot_id, id, this.values);
     }
   }
 }

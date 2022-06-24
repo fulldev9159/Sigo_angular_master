@@ -535,7 +535,20 @@ export const getDetalleInformeAvanceError = createAction(
 //  UPDATE DETALLE INFORME DE AVANCE
 export const updateDetalleInformeAvance = createAction(
   '[OT] GET updateDetalleInformeAvance',
-  props<{ ot_id: number; data: any }>()
+  props<{
+    ot_id: number;
+    id: number;
+    data: {
+      servicio: {
+        row_id: number;
+        cantidad: number;
+      }[];
+      unidad_obra: {
+        row_id: number;
+        cantidad: number;
+      }[];
+    };
+  }>()
 );
 
 export const updateDetalleInformeAvanceSuccess = createAction(

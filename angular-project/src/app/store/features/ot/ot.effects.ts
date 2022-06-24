@@ -462,8 +462,8 @@ export class OtEffects {
   UpdateDetalleInformeAvance$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.updateDetalleInformeAvance),
-      concatMap(({ ot_id, data }) =>
-        this.otService.updateDetalleInformeAvance(ot_id, data).pipe(
+      concatMap(({ ot_id, id, data }) =>
+        this.otService.updateDetalleInformeAvance(ot_id, id, data).pipe(
           map(response =>
             otActions.updateDetalleInformeAvanceSuccess({ response })
           ),

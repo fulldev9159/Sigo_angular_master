@@ -297,33 +297,25 @@ export class OTService {
 
   updateDetalleInformeAvance(
     ot_id: number,
-    data: any
+    id: number,
+    {
+      servicio,
+      unidad_obra,
+    }: {
+      servicio: {
+        row_id: number;
+        cantidad: number;
+      }[];
+      unidad_obra: {
+        row_id: number;
+        cantidad: number;
+      }[];
+    }
   ): Observable<Response<any>> {
-    //// console.log(`${this.apiUrl}/ot/informe_avance_detalle/update`, {
-    ////   servicio: [{
-    ////     row_id: 1,
-    ////     cantidad: 1321321
-    ////   }],
-    ////   unidad_obra: [{
-    ////     row_id: 1,
-    ////     cantidad: 1321321
-    ////   }],
-    //// });
-
-    //// return this.http.post<Response<DetalleInformeAvance>>(
-    ////   `${this.apiUrl}/ot/informe_avance_detalle/update`,
-    ////   { ot_id }
-    //// );
-
-    return of({
-      data: {},
-      status: {
-        desc: '',
-        code: 0,
-      },
-    }).pipe(delay(1500));
-
-    //// return throwError(new Error()).pipe(delay(3000));
+    return this.http.post<Response<DetalleInformeAvance>>(
+      `${this.apiUrl}/ot/informe_avance_detalle/update`,
+      { servicio, unidad_obra }
+    );
   }
 
   sendDetalleInformeAvance(
