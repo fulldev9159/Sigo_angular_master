@@ -9,3 +9,8 @@ export const getLoading = createSelector(
   selectBase,
   (state: reducer.StateBase) => state.loading
 );
+
+export const getDatabaseVersion = createSelector(
+  selectBase,
+  (state: reducer.StateBase) => state.databaseVersion
+);

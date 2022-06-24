@@ -22,6 +22,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 import * as Data from '@data';
 import { BaseFacade } from '@storeOT/features/base/base.facade';
+import { databaseVersion } from '@data';
 
 @Component({
   selector: 'app-app-layout',
@@ -44,6 +45,8 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   total_nuevas_notificaciones$: Observable<Data.Notificaciones>;
   multiperfiles = false;
   circleUserIcon = faUserCircle;
+  databaseVersion$: Observable<databaseVersion> =
+    this.baseFacade.getDatabaseVersion$();
 
   constructor(
     private router: Router,
@@ -96,6 +99,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     );
 
     this.loading$ = this.baseFacade.loading$();
+    this.baseFacade.getDatabaseVersion();
   }
 
   ngOnDestroy(): void {
