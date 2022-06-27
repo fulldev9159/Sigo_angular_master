@@ -96,11 +96,12 @@ export class CubicacionService {
   }
 
   getTipoServicioEspecialidad4Cub(
-    actividad_id: number
+    actividad_id: number,
+    contrato_marco_id: number
   ): Observable<Response<RespDataTipoServicioEspecialidad4Cub>> {
     return this.http.post<Response<RespDataTipoServicioEspecialidad4Cub>>(
       `${this.apiUrl}/cubicacion/tipo_servicio/get`,
-      { actividad_id }
+      { actividad_id, contrato_marco_id }
     );
   }
 

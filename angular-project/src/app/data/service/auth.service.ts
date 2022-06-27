@@ -6,6 +6,7 @@ import {
   DataRespLogin,
   DataResGetPerfilesUser,
   DataRespGetUsuarioPermisosPerfil,
+  DatabaseVersion,
 } from '@data/model';
 
 @Injectable({
@@ -45,6 +46,13 @@ export class AuthService {
   getPermisosPerfil(): Observable<Response<DataRespGetUsuarioPermisosPerfil>> {
     return this.http.post<Response<DataRespGetUsuarioPermisosPerfil>>(
       `${this.apiUrl}/usuario/permisos/get`,
+      {}
+    );
+  }
+
+  getDatabaseVersion(): Observable<Response<DatabaseVersion>> {
+    return this.http.post<Response<DatabaseVersion>>(
+      `${this.apiUrl}/configuration/flyway_schema_history/getlast`,
       {}
     );
   }

@@ -68,6 +68,10 @@ export interface StateOt {
   // MOTIVO RECHAZO
   allMotivoRechazo: MotivoRechazo[];
 
+  // CATEGORIA ARCHIVO
+  categoriaArchivo: any[];
+  libroObras: any[];
+
   // ////
   filtro_propietario: string;
   filtro_tipo: string;
@@ -130,6 +134,12 @@ export const initialStateOt: StateOt = {
 
   // MOTIVO RECHAZO
   allMotivoRechazo: [],
+
+  // CATEGORIA ARCHIVO
+  categoriaArchivo: [],
+
+  // LIBRO OBRAS
+  libroObras: [],
 
   // ////
   filtro_propietario: '',
@@ -484,6 +494,31 @@ export const reducerOt = createReducer(
               a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
             )
           : [],
+    };
+  }),
+
+  on(OtActions.getCategoriasArchivosSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      categoriaArchivo: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
+    };
+  }),
+  on(OtActions.getLibroObrasSuccess, (state, { response }) => {
+    const temp = copy(response.data.items);
+    return {
+      ...state,
+      libroObras: temp,
+      // .length > 0
+      //   ? temp.sort((a, b) =>
+      //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+      //     )
+      //   : [],
     };
   }),
 

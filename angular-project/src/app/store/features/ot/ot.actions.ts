@@ -42,6 +42,9 @@ import {
   DataRespGetMotivoRechazo,
   RequestAceptarRechazarOT,
   DataRespPosiblesTrabajadores,
+  DataRespGetCategoriaArchivo,
+  DataRespSubirArchivo,
+  ReqCreateRegistroLibroObra,
 } from '@data';
 
 import {
@@ -574,6 +577,73 @@ export const sendDetalleInformeAvanceSuccess = createAction(
 
 export const sendDetalleInformeAvanceError = createAction(
   '[OT] GET sendDetalleInformeAvance Error',
+  props<{ error: any }>()
+);
+
+//  GET CATEGORIAS DE ARCHIVOS
+export const getCategoriasArchivos = createAction(
+  '[OT] GET getCategoriasArchivos'
+);
+
+export const getCategoriasArchivosSuccess = createAction(
+  '[OT] GET getCategoriasArchivos Success',
+  props<{ response: Response<DataRespGetCategoriaArchivo> }>()
+);
+
+export const getCategoriasArchivosError = createAction(
+  '[OT] GET getCategoriasArchivos Error',
+  props<{ error: any }>()
+);
+
+//  SUBIR ARCHIVO
+export const subirArchivoLibroObras = createAction(
+  '[OT] GET subirArchivo',
+  props<{
+    categoria_id: number;
+    files: any;
+    request_libroobras: ReqCreateRegistroLibroObra;
+  }>()
+);
+
+export const subirArchivoSuccess = createAction(
+  '[OT] GET subirArchivo Success',
+  props<{ response: Response<DataRespSubirArchivo> }>()
+);
+
+export const subirArchivoError = createAction(
+  '[OT] GET subirArchivo Error',
+  props<{ error: any }>()
+);
+
+//  CREATE LIBRO DE OBRAS
+export const createRegistroLibroObras = createAction(
+  '[OT] GET createRegistroLibroObras',
+  props<{ request: ReqCreateRegistroLibroObra }>()
+);
+
+export const createRegistroLibroObrasSuccess = createAction(
+  '[OT] GET createRegistroLibroObras Success',
+  props<{ response: Response<any> }>()
+);
+
+export const createRegistroLibroObrasError = createAction(
+  '[OT] GET createRegistroLibroObras Error',
+  props<{ error: any }>()
+);
+
+//  GET LIBRO DE OBRAS
+export const getLibroObras = createAction(
+  '[OT] GET getLibroObras',
+  props<{ ot_id: number }>()
+);
+
+export const getLibroObrasSuccess = createAction(
+  '[OT] GET getLibroObras Success',
+  props<{ response: Response<any> }>()
+);
+
+export const getLibroObrasError = createAction(
+  '[OT] GET getLibroObras Error',
   props<{ error: any }>()
 );
 

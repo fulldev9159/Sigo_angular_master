@@ -15,7 +15,9 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import * as Data from '@data';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, take } from 'rxjs/operators';
+import { ReqCreateRegistroLibroObra, SessionData } from '@data';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 
 @Component({
   selector: 'app-registrar-libro-obra',
@@ -27,10 +29,14 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
   ot$: Observable<Data.OT>;
   otID: number;
   uploadedFiles: any[] = [];
+  categorias$: Observable<any[]>;
+  usuario_id: number;
+  loginData$: Observable<SessionData>;
   subscription: Subscription = new Subscription();
 
   formControls = {
     observaciones: new FormControl('', [Validators.required]),
+    categoria: new FormControl('', [Validators.required]),
     files: new FormControl([]),
   };
 
@@ -43,7 +49,7 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
     return 'Este campo es inválido';
   }; // tslint:disable-line
 
-  constructor(private otFacade: OtFacade) {}
+  constructor(private otFacade: OtFacade, private authFacade: AuthFacade) {}
   ngOnInit(): void {
     this.ot$ = this.otFacade.getSelectedOT$().pipe(filter(ot => ot !== null));
     this.subscription.add(
@@ -53,6 +59,21 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
         this.reset();
       })
     );
+    this.loginData$ = this.authFacade.getLogin$().pipe(take(1));
+    this.subscription.add(
+      this.loginData$.subscribe(loginAuth => {
+        if (
+          loginAuth?.token === undefined &&
+          loginAuth?.proxy_id === undefined
+        ) {
+        } else {
+          this.usuario_id = loginAuth.usuario_id;
+        }
+      })
+    );
+
+    this.otFacade.getCategoriasArchivos();
+    this.categorias$ = this.otFacade.getCategoriasArchivos$();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -96,15 +117,19 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
     this.touch();
     if (this.valid) {
       const index = 'files';
-      const request: Data.RegistroLibroObraRequest = {
+      const request: ReqCreateRegistroLibroObra = {
         ot_id: this.otID,
+        usuario_id: this.usuario_id,
         observaciones: this.form.get('observaciones').value,
-        files: this.uploadedFiles[index],
       };
       this.filesform.clear();
       console.log(request);
 
-      this.otFacade.registrarLibroObras(request);
+      this.otFacade.subirArchivoRegistroLibroObras(
+        +this.form.get('categoria').value,
+        this.uploadedFiles[index],
+        request
+      );
     } else {
       console.error('invalid form');
     }

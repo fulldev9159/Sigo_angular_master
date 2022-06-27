@@ -44,6 +44,10 @@ import {
   RequestAceptarRechazarOT,
   DataRespPosiblesTrabajadores,
   DetalleInformeAvance,
+  DataRespSubirArchivo,
+  ReqCreateRegistroLibroObra,
+  DataRespGetCategoriaArchivo,
+  DataRespGetLibroDeObras,
 } from '@data';
 
 @Injectable({
@@ -276,7 +280,7 @@ export class OTService {
     concepto: string
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
-      `${this.apiUrl}  /ot/usuario_involucrado_ot/create`,
+      `${this.apiUrl}/ot/usuario_involucrado_ot/create`,
       {
         ot_id,
         proxy_id,
@@ -321,6 +325,56 @@ export class OTService {
   sendDetalleInformeAvance(ot_id: number): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/informe_avance/send`,
+      { ot_id }
+    );
+  }
+
+  // GET CATEGORIAS ARCHIVOS
+  getCategoriasArchivos(): Observable<Response<DataRespGetCategoriaArchivo>> {
+    return this.http.post<Response<DataRespGetCategoriaArchivo>>(
+      `${this.apiUrl}/files/categoria_archivo/getall`,
+      {}
+    );
+  }
+
+  // SUBIR ARCHIVO
+  subirArchivo(
+    // nombre_original: string,
+    categoria_id: number,
+    concepto: string,
+    files: any
+  ): Observable<Response<DataRespSubirArchivo>> {
+    const formData = new FormData();
+    formData.append('categoria_id', categoria_id.toString());
+    formData.append('concepto', concepto);
+    if (files && files.length > 0) {
+      for (const file of files) {
+        // console.log('file',file)
+        formData.append('file', file, file.name);
+      }
+    }
+    // console.log('FormData', formData);
+    return this.http.post<Response<DataRespSubirArchivo>>(
+      `${this.apiUrl}/files/repositorio_archivos/create`,
+      formData
+    );
+  }
+
+  // CREATE LIBRO DE OBRAS
+  createRegistroLibroObras(
+    request: ReqCreateRegistroLibroObra
+  ): Observable<Response<any>> {
+    console.log('Create registro LO', request);
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/libro_obras/create`,
+      request
+    );
+  }
+
+  // GET LIBRO DE OBRAS
+  getLibroObras(ot_id: number): Observable<Response<DataRespGetLibroDeObras>> {
+    return this.http.post<Response<DataRespGetLibroDeObras>>(
+      `${this.apiUrl}/libro_obra/get_libro_obras/get`,
       { ot_id }
     );
   }

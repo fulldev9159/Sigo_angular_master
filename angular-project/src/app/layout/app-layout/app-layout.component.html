@@ -75,11 +75,28 @@
               </a>
             </li>
           </ul>
-          <p style="margin-top: 2rem;
+          <div style="margin-top: 2rem;
           color: white;
-          text-align-last: center;">
-            Versión: Beta 0.8.0
-          </p>
+          text-align-last: center;
+          display: flex;
+    flex-direction: column;
+          ">
+            <p>Versionado</p>
+            <table>
+              <tr>
+                <td>Web</td>
+                <td>0.8.0</td>
+              </tr>
+              <tr>
+                <td>
+                  DB
+                </td>
+                <td style="font-size: 0.73rem;">
+                  {{(databaseVersion$|async)?.version}}
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </nav>

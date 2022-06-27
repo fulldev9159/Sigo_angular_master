@@ -48,7 +48,7 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
       this.rutaActiva.params.subscribe((params: Params) => {
         if (params.id) {
           console.log('LIBRO OBRAS:', params.id);
-          this.otFacade.getRegistrosLibroObras(+params.id);
+          this.otFacade.getLibroObras(+params.id);
         }
       })
     );

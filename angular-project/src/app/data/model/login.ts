@@ -116,3 +116,17 @@ export interface SessionData {
   proxy_id: number;
   multiperfiles: boolean;
 }
+
+// GET DATABASE VERSION
+export interface DatabaseVersion {
+  checksum: number;
+  description: string;
+  execution_time: number;
+  installed_by: string;
+  installed_on: Date;
+  installed_rank: number;
+  script: string;
+  success: boolean;
+  type: string;
+  version: string;
+}

@@ -172,7 +172,8 @@ export class AlertMessageActions {
         action === ca.deleteCubSuccess.type ||
         action === ca.deleteDetalleCubSuccess.type ||
         action === otActions.AceptarRechazarIncialOTSuccess.type ||
-        action === otActions.AsignarSupervisorTrabajosOTSuccess.type
+        action === otActions.AsignarSupervisorTrabajosOTSuccess.type ||
+        action === otActions.createRegistroLibroObrasSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (
