@@ -207,3 +207,23 @@ export const getDataSolicitudPago = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.dataSolicitudPago
 );
+
+export const getDetalleInformeAvance = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.detalleInformeAvance
+);
+
+export const getDetalleInformeAvanceError = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.detalleInformeAvanceError
+);
+
+export const updatingDetalleInformeAvance = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.updatingDetalleInformeAvance
+);
+
+export const sendingDetalleInformeAvance = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.sendingDetalleInformeAvance
+);

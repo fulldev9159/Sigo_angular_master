@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, of } from 'rxjs';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { map } from 'rxjs/operators';
+import { OtFacade } from '@storeOT/features/ot/ot.facade';
 
 @Component({
   selector: 'app-informe-avance',
@@ -12,7 +14,11 @@ export class InformeAvanceComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
 
-  constructor(private authFacade: AuthFacade) {}
+  constructor(
+    private route: ActivatedRoute,
+    private authFacade: AuthFacade,
+    private otFacade: OtFacade
+  ) {}
 
   ngOnInit(): void {
     this.loginAuth$ = this.authFacade.getLogin$().pipe(
@@ -31,6 +37,12 @@ export class InformeAvanceComponent implements OnInit, OnDestroy {
         }
         return auth;
       })
+    );
+
+    this.subscription.add(
+      this.route.data.subscribe(({ detalle }) =>
+        this.otFacade.getDetalleInformeAvanceSuccess(detalle.response)
+      )
     );
   }
 

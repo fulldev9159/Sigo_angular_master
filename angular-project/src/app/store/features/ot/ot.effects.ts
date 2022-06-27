@@ -458,6 +458,23 @@ export class OtEffects {
     )
   );
 
+  // UPDATE DETALLE INFORME DE AVANCE
+  UpdateDetalleInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.updateDetalleInformeAvance),
+      concatMap(({ ot_id, id, data }) =>
+        this.otService.updateDetalleInformeAvance(ot_id, id, data).pipe(
+          map(response =>
+            otActions.updateDetalleInformeAvanceSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.updateDetalleInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // GET CATEGORIA ARCHIVOS
   getCategoriasArchivos$ = createEffect(() =>
     this.actions$.pipe(
@@ -467,6 +484,23 @@ export class OtEffects {
           map(response => otActions.getCategoriasArchivosSuccess({ response })),
           catchError(error =>
             of(otActions.getCategoriasArchivosError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // SEND DETALLE INFORME DE AVANCE
+  SendDetalleInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.sendDetalleInformeAvance),
+      concatMap(({ ot_id }) =>
+        this.otService.sendDetalleInformeAvance(ot_id).pipe(
+          map(response =>
+            otActions.sendDetalleInformeAvanceSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.sendDetalleInformeAvanceError({ error }))
           )
         )
       )
@@ -533,6 +567,8 @@ export class OtEffects {
           otActions.createOTSuccess,
           otActions.AceptarRechazarIncialOTSuccess,
           otActions.AsignarSupervisorTrabajosOTSuccess,
+          otActions.updateDetalleInformeAvanceSuccess,
+          otActions.sendDetalleInformeAvanceSuccess,
           otActions.createRegistroLibroObrasSuccess
         ),
         tap(action => {

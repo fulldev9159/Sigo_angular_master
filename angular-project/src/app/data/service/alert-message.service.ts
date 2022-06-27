@@ -89,6 +89,10 @@ export class AlertMessageActions {
     this.msgNegocio[otActions.getPMOSuccess.type] = 'No existen pmos';
     this.msgNegocio[otActions.getDetalleActaSuccess.type] =
       'No existen valores para el acta';
+    this.msgNegocio[otActions.updateDetalleInformeAvanceSuccess.type] =
+      'Borrador actualizado';
+    this.msgNegocio[otActions.sendDetalleInformeAvanceSuccess.type] =
+      'Informe enviado';
 
     // Statur ERROR
     this.msgErr[ca.getCubsError.type] = 'Error al obtener cubicaciones';
@@ -135,6 +139,8 @@ export class AlertMessageActions {
     this.msgErr[otActions.getPmoError.type] = 'Falló la obtención de PMOs';
     this.msgErr[otActions.getDetalleActaError.type] =
       'Falló la obtención de información del acta';
+    this.msgErr[otActions.updateDetalleInformeAvanceError.type] =
+      'Fallo la actualización del borrador';
   }
 
   messageActions(
@@ -153,7 +159,9 @@ export class AlertMessageActions {
         action === userActions.editarSuperiorPerfilUsuarioSuccess.type ||
         action === userActions.updateUserSuccess.type ||
         action === profileActions.updatePerfilSuccess.type ||
-        action === ca.editCubSuccess.type
+        action === ca.editCubSuccess.type ||
+        action === otActions.updateDetalleInformeAvanceSuccess.type ||
+        action === otActions.sendDetalleInformeAvanceSuccess.type
       ) {
         this.snackService.showMessage(`Actualización exitosa`, 'OK', 3000);
       } else if (

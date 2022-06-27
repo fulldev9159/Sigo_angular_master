@@ -39,6 +39,7 @@ import {
   RequestAceptarRechazarOT,
   MotivoRechazo,
   PosibleTrabajador,
+  DetalleInformeAvance,
   ReqCreateRegistroLibroObra,
 } from '@data';
 import {
@@ -337,9 +338,50 @@ export class OtFacade {
     this.store.dispatch(otActions.getDetalleInformeAvance({ ot_id }));
   }
 
-  // public getDetalleInformeAvance$(): Observable<PosibleTrabajador[]> {
-  //   return this.store.select(otSelectors.getDetalleInformeAvance);
-  // }
+  public getDetalleInformeAvanceSuccess(response: any): void {
+    this.store.dispatch(otActions.getDetalleInformeAvanceSuccess({ response }));
+  }
+
+  public getDetalleInformeAvance$(): Observable<DetalleInformeAvance> {
+    return this.store.select(otSelectors.getDetalleInformeAvance);
+  }
+
+  public getDetalleInformeAvanceError$(): Observable<any> {
+    return this.store.select(otSelectors.getDetalleInformeAvanceError);
+  }
+
+  // UPDATE DETALE INFORME DE AVANCE
+  public updateDetalleInformeAvance(
+    ot_id: number,
+    id: number,
+    data: {
+      servicio: {
+        row_id: number;
+        cantidad: number;
+      }[];
+      unidad_obra: {
+        row_id: number;
+        cantidad: number;
+      }[];
+    }
+  ): void {
+    this.store.dispatch(
+      otActions.updateDetalleInformeAvance({ ot_id, id, data })
+    );
+  }
+
+  public updatingDetalleInformeAvance$(): Observable<boolean> {
+    return this.store.select(otSelectors.updatingDetalleInformeAvance);
+  }
+
+  // SEND DETALE INFORME DE AVANCE
+  public sendDetalleInformeAvance(ot_id: number): void {
+    this.store.dispatch(otActions.sendDetalleInformeAvance({ ot_id }));
+  }
+
+  public sendingDetalleInformeAvance$(): Observable<boolean> {
+    return this.store.select(otSelectors.sendingDetalleInformeAvance);
+  }
 
   // GET CATEGORIA ARCHIVO
   public getCategoriasArchivos(): void {

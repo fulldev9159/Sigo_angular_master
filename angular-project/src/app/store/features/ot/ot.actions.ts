@@ -535,6 +535,51 @@ export const getDetalleInformeAvanceError = createAction(
   props<{ error: any }>()
 );
 
+//  UPDATE DETALLE INFORME DE AVANCE
+export const updateDetalleInformeAvance = createAction(
+  '[OT] GET updateDetalleInformeAvance',
+  props<{
+    ot_id: number;
+    id: number;
+    data: {
+      servicio: {
+        row_id: number;
+        cantidad: number;
+      }[];
+      unidad_obra: {
+        row_id: number;
+        cantidad: number;
+      }[];
+    };
+  }>()
+);
+
+export const updateDetalleInformeAvanceSuccess = createAction(
+  '[OT] GET updateDetalleInformeAvance Success',
+  props<{ response: Response<any> }>()
+);
+
+export const updateDetalleInformeAvanceError = createAction(
+  '[OT] GET updateDetalleInformeAvance Error',
+  props<{ error: any }>()
+);
+
+//  SEND DETALLE INFORME DE AVANCE
+export const sendDetalleInformeAvance = createAction(
+  '[OT] GET sendDetalleInformeAvance',
+  props<{ ot_id: number }>()
+);
+
+export const sendDetalleInformeAvanceSuccess = createAction(
+  '[OT] GET sendDetalleInformeAvance Success',
+  props<{ response: Response<any> }>()
+);
+
+export const sendDetalleInformeAvanceError = createAction(
+  '[OT] GET sendDetalleInformeAvance Error',
+  props<{ error: any }>()
+);
+
 //  GET CATEGORIAS DE ARCHIVOS
 export const getCategoriasArchivos = createAction(
   '[OT] GET getCategoriasArchivos'

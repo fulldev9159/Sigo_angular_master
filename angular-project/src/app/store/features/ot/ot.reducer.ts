@@ -28,6 +28,7 @@ import {
   DataRespGetDetalleOT,
   MotivoRechazo,
   PosibleTrabajador,
+  DetalleInformeAvance,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -93,6 +94,11 @@ export interface StateOt {
   dataInformeActa: DataInformeAvance[];
   dataSolicitudPago: DetalleActa[];
   info_ot_id: number;
+
+  detalleInformeAvance: DetalleInformeAvance;
+  detalleInformeAvanceError: any;
+  updatingDetalleInformeAvance: boolean;
+  sendingDetalleInformeAvance: boolean;
 }
 
 export const initialStateOt: StateOt = {
@@ -157,6 +163,11 @@ export const initialStateOt: StateOt = {
   dataInformeActa: [],
   dataSolicitudPago: [],
   info_ot_id: null,
+
+  detalleInformeAvance: null,
+  detalleInformeAvanceError: null,
+  updatingDetalleInformeAvance: false,
+  sendingDetalleInformeAvance: false,
 };
 
 export const reducerOt = createReducer(
@@ -795,5 +806,57 @@ export const reducerOt = createReducer(
   on(OtActions.getDetalleActaSuccess, (state, { dataInformeActa }) => ({
     ...state,
     dataSolicitudPago: dataInformeActa,
-  }))
+  })),
+  on(OtActions.getDetalleInformeAvance, state => {
+    return {
+      ...state,
+      detalleInformeAvance: null,
+    };
+  }),
+  on(OtActions.getDetalleInformeAvanceSuccess, (state, { response }) => {
+    return {
+      ...state,
+      detalleInformeAvance: copy(response.data),
+      detalleInformeAvanceError: null,
+    };
+  }),
+  on(OtActions.getDetalleInformeAvanceError, (state, { error }) => {
+    return {
+      ...state,
+      detalleInformeAvance: null,
+      detalleInformeAvanceError: error,
+    };
+  }),
+  on(OtActions.updateDetalleInformeAvance, state => {
+    return {
+      ...state,
+      updatingDetalleInformeAvance: true,
+    };
+  }),
+  on(
+    OtActions.updateDetalleInformeAvanceSuccess,
+    OtActions.updateDetalleInformeAvanceError,
+    state => {
+      return {
+        ...state,
+        updatingDetalleInformeAvance: false,
+      };
+    }
+  ),
+  on(OtActions.sendDetalleInformeAvance, state => {
+    return {
+      ...state,
+      sendingDetalleInformeAvance: true,
+    };
+  }),
+  on(
+    OtActions.sendDetalleInformeAvanceSuccess,
+    OtActions.sendDetalleInformeAvanceError,
+    state => {
+      return {
+        ...state,
+        sendingDetalleInformeAvance: false,
+      };
+    }
+  )
 );
