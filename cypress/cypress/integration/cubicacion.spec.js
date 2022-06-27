@@ -28,7 +28,7 @@ describe('Cubicacion Test', () => {
   const agencia_movil = 'Región Metropolitana de Santiago';
   const proveedor_movil = '3300213678 - 2021-2023 GENERATEL SPA';
   const actividad_movil = 'INSTALACIONES EN EDIFICIO';
-  const tipo_servicio_movil = 2;
+  const tipo_servicio_movil = 'Instalaciones en edificios de red';
   const serv_1_movil =
     'ServGeneratel82 - Ingenieria de detalles con Estudio de factilidad de un MO';
   const serv_1_uo_1_movil = '0 - SIN UO';
