@@ -26,7 +26,6 @@ linter:
     - npm ci
     - ng lint
   except:
-    - develop
     - master
 
 restart test environment:
@@ -49,7 +48,6 @@ restart test environment:
     - gcloud_tpb
   environment: google cloud tpb
   except:
-    - develop
     - master
 
 update test database:
@@ -98,7 +96,6 @@ update test database:
   tags:
     - repo-machine
   except:
-    - develop
     - master
 
 integrations test cypress:
