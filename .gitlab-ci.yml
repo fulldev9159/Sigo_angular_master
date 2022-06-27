@@ -25,23 +25,9 @@ linter:
     - cd angular-project
     - npm ci
     - ng lint
-
-# unit test:
-#   stage: unit test
-#   image: trion/ng-cli-karma:${CLI_VERSION}
-#   script:
-#     - cd angular-project
-#     - npm ci
-#     - ng test --code-coverage --progress false --watch false
-#   coverage: '/^Statements\s*:\s*([^%]+)/'
-
-update-demos-sigo1:
-  stage: restart test environment
-  variables:
-    ORIGIN: $ORIGIN
-    CI_PIPELINE_ID: $CI_PIPELINE_ID
-    PRECURSOR: $CI_PROJECT_NAME
-  trigger: zweicom/cl-movistar/sigo/demos-sigo
+  except:
+    - develop
+    - master
 
 restart test environment:
   stage: restart test environment
@@ -62,6 +48,9 @@ restart test environment:
   tags:
     - gcloud_tpb
   environment: google cloud tpb
+  except:
+    - develop
+    - master
 
 update test database:
   stage: reset testing database sigo
@@ -108,6 +97,9 @@ update test database:
   # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,33,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
   tags:
     - repo-machine
+  except:
+    - develop
+    - master
 
 integrations test cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
@@ -122,6 +114,8 @@ integrations test cypress:
     - cd ../cypress
     - npm ci
     - npx cypress run
+  only:
+    - develop
 
 acceptance test:
   <<: *connect_gcr
@@ -142,6 +136,8 @@ acceptance test:
     - docker rm robot
   tags:
     - docker_sigo
+  only:
+    - develop
 
 docker:
   <<: *connect_gcr
@@ -154,7 +150,6 @@ docker:
     - docker-compose -f docker-compose.yml push deploy
   only:
     - tags
-    - develop
 
 update-demos-sigo:
   stage: triggers
@@ -171,4 +166,4 @@ update-demos-sigo:
     GITLAB_USER_NAME: $GITLAB_USER_NAME
   trigger: zweicom/cl-movistar/sigo/demos-sigo
   only:
-    - develop
+    - tags
