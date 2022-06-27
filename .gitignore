@@ -9,8 +9,6 @@
 
 # dependencies
 /angular-project/node_modules
-/angular-project/package-lock.json
-package-lock.json
 
 # profiling files
 /angular-project/chrome-profiler-events*.json
