@@ -276,6 +276,40 @@ export class ListOtComponent implements OnInit, OnDestroy {
             },
           });
         }
+
+        const otEnviarInformeAvance = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ENVIAR_INFORME_AVANCE'
+        );
+
+        if (otEnviarInformeAvance) {
+          actions.push({
+            icon: 'p-button-icon pi pi-book',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otEnviarInformeAvance.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.otFacade.getDetalleInformeAvance(item.id);
+              this.displayInformeAvanceModal = true;
+            },
+          });
+        }
+
+        const otEditarInformeAvance = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_EDITAR_INFORME_AVANCE'
+        );
+
+        if (otEditarInformeAvance) {
+          actions.push({
+            icon: 'p-button-icon pi pi-pencil',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otEditarInformeAvance.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.router.navigate([
+                '/app/informacion/informe-avance',
+                item.id,
+              ]);
+            },
+          });
+        }
         // const otAnular = (ot.acciones || []).find(
         //   accion => accion.slug === 'OT_ANULAR'
         // );
