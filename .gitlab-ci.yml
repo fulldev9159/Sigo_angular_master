@@ -139,8 +139,8 @@ acceptance test:
 docker:
   <<: *connect_gcr
   stage: deployment
-  needs:
-    - acceptance test
+  # needs:
+  #   - acceptance test
   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
   script:
     - docker-compose -f docker-compose.yml build --no-cache deploy
