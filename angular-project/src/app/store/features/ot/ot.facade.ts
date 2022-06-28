@@ -5,6 +5,7 @@ import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
 import * as Data from '@data';
 import {
+  Response,
   ContratosUser,
   DataInformeAvance,
   LpuInformeAvanceDetalle,
@@ -41,6 +42,7 @@ import {
   PosibleTrabajador,
   DetalleInformeAvance,
   ReqCreateRegistroLibroObra,
+  ActaTipoPago,
 } from '@data';
 import {
   DetalleActa,
@@ -381,6 +383,17 @@ export class OtFacade {
 
   public sendingDetalleInformeAvance$(): Observable<boolean> {
     return this.store.select(otSelectors.sendingDetalleInformeAvance);
+  }
+
+  // GET ACTA TIPOS PAGO
+  public getActaTiposPagoSuccess(
+    response: Response<{ items: ActaTipoPago[] }>
+  ): void {
+    this.store.dispatch(otActions.getActaTiposPagoSuccess({ response }));
+  }
+
+  public getActaTiposPago$(): Observable<ActaTipoPago[]> {
+    return this.store.select(otSelectors.getActaTiposPago);
   }
 
   // GET CATEGORIA ARCHIVO

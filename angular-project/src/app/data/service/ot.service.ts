@@ -48,6 +48,7 @@ import {
   ReqCreateRegistroLibroObra,
   DataRespGetCategoriaArchivo,
   DataRespGetLibroDeObras,
+  ActaTipoPago,
 } from '@data';
 
 @Injectable({
@@ -326,6 +327,14 @@ export class OTService {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/informe_avance/send`,
       { ot_id }
+    );
+  }
+
+  // GET ACTA TIPOS PAGO
+  getActaTiposPago(): Observable<Response<{ items: ActaTipoPago[] }>> {
+    return this.http.post<Response<{ items: ActaTipoPago[] }>>(
+      `${this.apiUrl}/ot/acta_tipo_pago/getall`,
+      {}
     );
   }
 

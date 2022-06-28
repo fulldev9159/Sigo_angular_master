@@ -45,6 +45,7 @@ import {
   DataRespGetCategoriaArchivo,
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
+  ActaTipoPago,
 } from '@data';
 
 import {
@@ -578,6 +579,12 @@ export const sendDetalleInformeAvanceSuccess = createAction(
 export const sendDetalleInformeAvanceError = createAction(
   '[OT] GET sendDetalleInformeAvance Error',
   props<{ error: any }>()
+);
+
+//  GET TIPOS ACTA
+export const getActaTiposPagoSuccess = createAction(
+  '[OT] GET getActaTiposPago Success',
+  props<{ response: Response<{ items: ActaTipoPago[] }> }>()
 );
 
 //  GET CATEGORIAS DE ARCHIVOS

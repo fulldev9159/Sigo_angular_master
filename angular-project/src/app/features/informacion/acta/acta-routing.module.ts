@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 
 import { ActaComponent } from './acta.component';
+import { TiposPagoResolver } from './resolvers/tipos-pago.resolver';
 
 const routes: Routes = [
   {
@@ -15,6 +16,9 @@ const routes: Routes = [
         redirectTo: '/app/dashboard',
       },
       state: 'form-cub',
+    },
+    resolve: {
+      tiposPago: TiposPagoResolver,
     },
   },
 ];

@@ -641,6 +641,12 @@ export interface DetalleInformeAvance {
   many_informe_has_servicio: DetalleInformeAvanceServicio[];
 }
 
+// ACTA
+export interface ActaTipoPago {
+  id: number;
+  descripcion: string;
+}
+
 // CATEGORIAS ARCHIVO
 export interface DataRespGetCategoriaArchivo {
   items: {

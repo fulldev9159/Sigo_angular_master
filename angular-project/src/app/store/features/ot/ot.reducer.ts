@@ -29,6 +29,7 @@ import {
   MotivoRechazo,
   PosibleTrabajador,
   DetalleInformeAvance,
+  ActaTipoPago,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -99,6 +100,8 @@ export interface StateOt {
   detalleInformeAvanceError: any;
   updatingDetalleInformeAvance: boolean;
   sendingDetalleInformeAvance: boolean;
+
+  actaTiposPago: ActaTipoPago[];
 }
 
 export const initialStateOt: StateOt = {
@@ -168,6 +171,8 @@ export const initialStateOt: StateOt = {
   detalleInformeAvanceError: null,
   updatingDetalleInformeAvance: false,
   sendingDetalleInformeAvance: false,
+
+  actaTiposPago: [],
 };
 
 export const reducerOt = createReducer(
@@ -858,5 +863,11 @@ export const reducerOt = createReducer(
         sendingDetalleInformeAvance: false,
       };
     }
-  )
+  ),
+  on(OtActions.getActaTiposPagoSuccess, (state, { response }) => {
+    return {
+      ...state,
+      actaTiposPago: copy(response.data.items),
+    };
+  })
 );

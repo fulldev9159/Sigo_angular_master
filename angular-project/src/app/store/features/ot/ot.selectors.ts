@@ -227,3 +227,8 @@ export const sendingDetalleInformeAvance = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.sendingDetalleInformeAvance
 );
+
+export const getActaTiposPago = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.actaTiposPago
+);
