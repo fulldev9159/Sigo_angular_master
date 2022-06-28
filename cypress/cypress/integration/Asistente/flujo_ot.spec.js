@@ -1,5 +1,5 @@
 describe.skip('Flujo OT', () => {
-  const nombre = 'OT BUCLE informe avance 1';
+  const nombre = 'OT BUCLE informe avance 2';
 
   beforeEach(() => {
     cy.viewport(1500, 1700);
@@ -27,13 +27,16 @@ describe.skip('Flujo OT', () => {
     cy.get('.btn-primary').click();
   });
 
-  it.only('Aceptar OT Contratista', () => {
+  it.skip('Aceptar OT Contratista', () => {
     cy.login('nadmincontrato1', '123', 'Administrador EECC');
     cy.contains('Listar OTs').click();
     cy.get(
       '#p-tabpanel-0 > app-table > .card > p-table > .p-datatable-sm > .p-datatable-header > .p-d-flex > .p-input-icon-left > .p-inputtext'
     ).type(nombre);
-    cy.get('.p-button-text').click();
+    cy.wait(2000);
+    cy.get(
+      '#p-tabpanel-0 > app-table > .card > p-table > .p-datatable-sm > .p-datatable-wrapper > table > .p-datatable-tbody > tr.ng-star-inserted > #action-buttons > .ng-star-inserted > .p-button-text'
+    ).click();
     cy.contains('Asignar Supervisor de trabajos').click();
     cy.get('.form-control').select('Gustavo NOKIA Contreras Cortes');
     cy.get('.btn-primary').click();
