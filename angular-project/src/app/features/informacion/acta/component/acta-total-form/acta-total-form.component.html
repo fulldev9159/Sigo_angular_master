@@ -1,0 +1,49 @@
+<div class="row">
+  <ng-container *ngIf="servicios">
+    <div class="col-xs-6 col-md-6">
+      <app-card [classCardHeader]="'bg-info'">
+        <ng-container card-header-title>Detalle servicios</ng-container>
+        <ng-container card-body>
+          <table style="width:100%">
+            <thead>
+              <tr>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let servicio of servicios.controls">
+                <td>{{ servicio.get('descripcion').value }}</td>
+                <td>{{ servicio.get('cantidad').value }}</td>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-container>
+      </app-card>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="unidadesObra">
+    <div class="col-xs-6 col-md-6">
+      <app-card [classCardHeader]="'bg-info'">
+        <ng-container card-header-title>Detalle Unidades Obra</ng-container>
+        <ng-container card-body>
+          <table style="width:100%">
+            <thead>
+              <tr>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let uo of unidadesObra.controls">
+                <td>{{ uo.get('descripcion').value }}</td>
+                <td>{{ uo.get('cantidad').value }}</td>
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-container>
+      </app-card>
+    </div>
+  </ng-container>
+</div>

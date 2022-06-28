@@ -1,7 +1,6 @@
-<div class="row" style="padding: 15px">
-  <ng-container *ngIf="form">
+<ng-container *ngIf="form">
+  <div class="row" style="padding: 15px">
     <div class="col-xs-12 col-md-12">
-      {{ values | json }}
       <form [formGroup]="form">
         <app-select [control]="form.get('tipo_pago')" label="Tipo de pago">
           <ng-container options>
@@ -13,5 +12,28 @@
         </app-select>
       </form>
     </div>
-  </ng-container>
-</div>
+  </div>
+
+  <div class="row" style="padding: 15px">
+    <div class="col-xs-12 col-md-12">
+      <form [formGroup]="form">
+        <ng-container [ngSwitch]="form.get('tipo_pago').value">
+          <ng-container *ngSwitchCase="'TOTAL'">
+            <app-acta-total-form [servicios]="form.get('total').get('servicios')" [unidadesObra]="form.get('total').get('unidades_obra')"></app-acta-total-form>
+          </ng-container>
+          <ng-container *ngSwitchCase="'PORCENTAJE'">
+            <app-acta-total-form [servicios]="form.get('total').get('servicios')" [unidadesObra]="form.get('total').get('unidades_obra')"></app-acta-total-form>
+          </ng-container>
+          <ng-container *ngSwitchCase="'POR_SERVICIO'">
+            <app-acta-servicio-form [servicios]="form.get('por_servicio').get('servicios')" [unidadesObra]="form.get('por_servicio').get('unidades_obra')"></app-acta-servicio-form>
+          </ng-container>
+          <!--<ng-container *ngSwitchDefault>...</ng-container>-->
+        </ng-container>
+      </form>
+    </div>
+  </div>
+
+  <!--
+  <pre>{{ values | json }}</pre>
+  -->
+</ng-container>

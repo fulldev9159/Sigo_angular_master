@@ -51,8 +51,15 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl('', Validators.required, this.noWhitespace),
-    servicios: new FormArray([]),
-    unidades_obra: new FormArray([]),
+    total: new FormGroup({
+      servicios: new FormArray([]),
+      unidades_obra: new FormArray([]),
+    }),
+    porcentaje: new FormControl('100', []),
+    por_servicio: new FormGroup({
+      servicios: new FormArray([]),
+      unidades_obra: new FormArray([]),
+    }),
   });
 
   //// loginAuth$: Observable<any>;
@@ -71,6 +78,16 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   //// informe_id = 0;
   //// totalCubicado = 0;
 
+  mustBeANumber(control: FormControl): any {
+    const result = /^\d+$/.test(control.value);
+    return result ? null : { benumber: true };
+  }
+
+  nonZero(control: FormControl): any {
+    const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
+    return value < 1 ? { nonzero: true } : null;
+  }
+
   noWhitespace(control: FormControl): any {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
@@ -84,28 +101,8 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.detalleActa$.subscribe(({ servicios, unidades_obra }) => {
-        (this.form.get('servicios') as FormArray).clear();
-        (this.form.get('unidades_obra') as FormArray).clear();
-
-        (servicios ?? []).forEach(servicio =>
-          (this.form.get('servicios') as FormArray).push(
-            new FormGroup({
-              id: new FormControl(`${servicio.id}`, []),
-              cantidad: new FormControl(`${servicio.cantidad_total}`, []),
-              selected: new FormControl(false, []),
-            })
-          )
-        );
-
-        (unidades_obra ?? []).forEach(uo =>
-          (this.form.get('unidades_obra') as FormArray).push(
-            new FormGroup({
-              id: new FormControl(`${uo.id}`, []),
-              cantidad: new FormControl(`${uo.cantidad_total}`, []),
-              selected: new FormControl(false, []),
-            })
-          )
-        );
+        this.loadTotalForm(servicios, unidades_obra);
+        this.loadServicioForm(servicios, unidades_obra);
       })
     );
 
@@ -168,6 +165,90 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
     ////       }
     ////     })
     //// );
+  }
+
+  loadTotalForm(
+    servicios: DetalleActaServicio[],
+    unidades_obra: DetalleActaUob[]
+  ): void {
+    if (this.form) {
+      (this.form.get('total').get('servicios') as FormArray).clear();
+      (this.form.get('total').get('unidades_obra') as FormArray).clear();
+
+      (servicios ?? []).forEach(servicio =>
+        (this.form.get('total').get('servicios') as FormArray).push(
+          new FormGroup({
+            id: new FormControl(`${servicio.id}`, []),
+            descripcion: new FormControl(`${servicio.servicio_id}`, []), // TODO
+            cantidad: new FormControl(`${servicio.faltante_cantidad}`, []),
+            porcentaje_faltante: new FormControl(
+              `${servicio.faltante_porcentaje}`,
+              []
+            ),
+          })
+        )
+      );
+
+      (unidades_obra ?? []).forEach(uo =>
+        (this.form.get('total').get('unidades_obra') as FormArray).push(
+          new FormGroup({
+            id: new FormControl(`${uo.id}`, []),
+            descripcion: new FormControl(`${uo.unidad_obra_cod}`, []), // TODO
+            cantidad: new FormControl(`${uo.faltante_cantidad}`, []),
+            porcentaje_faltante: new FormControl(
+              `${uo.faltante_porcentaje}`,
+              []
+            ),
+          })
+        )
+      );
+    }
+  }
+
+  loadServicioForm(
+    servicios: DetalleActaServicio[],
+    unidades_obra: DetalleActaUob[]
+  ): void {
+    if (this.form) {
+      (this.form.get('por_servicio').get('servicios') as FormArray).clear();
+      (this.form.get('por_servicio').get('unidades_obra') as FormArray).clear();
+
+      (servicios ?? []).forEach(servicio =>
+        (this.form.get('por_servicio').get('servicios') as FormArray).push(
+          new FormGroup({
+            id: new FormControl(`${servicio.id}`, []),
+            descripcion: new FormControl(`${servicio.servicio_id}`, []), // TODO
+            cantidad: new FormControl(`${servicio.faltante_cantidad}`, [
+              Validators.required,
+              this.noWhitespace,
+              this.mustBeANumber,
+              this.nonZero,
+              Validators.min(0),
+              Validators.max(servicio.faltante_cantidad),
+            ]),
+            selected: new FormControl(false, []),
+          })
+        )
+      );
+
+      (unidades_obra ?? []).forEach(uo =>
+        (this.form.get('por_servicio').get('unidades_obra') as FormArray).push(
+          new FormGroup({
+            id: new FormControl(`${uo.id}`, []),
+            descripcion: new FormControl(`${uo.unidad_obra_cod}`, []), // TODO
+            cantidad: new FormControl(`${uo.faltante_cantidad}`, [
+              Validators.required,
+              this.noWhitespace,
+              this.mustBeANumber,
+              this.nonZero,
+              Validators.min(0),
+              Validators.max(uo.faltante_cantidad),
+            ]),
+            selected: new FormControl(false, []),
+          })
+        )
+      );
+    }
   }
 
   //// errorMessageFn(errors: AbstractControl['errors']): string {
@@ -243,22 +324,23 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   ////   this.otFacade.rechazarInformeActa(1);
   //// }
 
-  get values(): FormValues {
+  get values(): any {
     if (this.form) {
-      const { tipo_pago, servicios, unidades_obra } = this.form.getRawValue();
-      return {
-        tipo_pago,
-        servicios: servicios.map(servicio => ({
-          id: servicio.id,
-          selected: servicio.selected,
-          cantidad: +servicio.cantidad,
-        })),
-        unidades_obra: unidades_obra.map(uo => ({
-          id: uo.id,
-          selected: uo.selected,
-          cantidad: +uo.cantidad,
-        })),
-      };
+      return this.form.getRawValue();
+      //// const { tipo_pago, servicios, unidades_obra } = this.form.getRawValue();
+      //// return {
+      ////   tipo_pago,
+      ////   servicios: servicios.map(servicio => ({
+      ////     id: servicio.id,
+      ////     selected: servicio.selected,
+      ////     cantidad: +servicio.cantidad,
+      ////   })),
+      ////   unidades_obra: unidades_obra.map(uo => ({
+      ////     id: uo.id,
+      ////     selected: uo.selected,
+      ////     cantidad: +uo.cantidad,
+      ////   })),
+      //// };
     }
     return null;
   }
