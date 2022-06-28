@@ -115,8 +115,8 @@ export interface DataRespGetDetalleOT {
         celular: string;
         created_at: Date;
         email: string;
-        estado: true;
-        firma_archivo_id: null;
+        estado: boolean;
+        firma_archivo_id: any;
         id: number;
         nombres: string;
         proveedor_id: number;
@@ -182,7 +182,7 @@ export interface DataRespGetDetalleOT {
     carta_adjudicacion: string; // ORDINARIO
     fecha_adjudicacion: Date; // ORDINARIO
     numero_pedido: string; // ORDINARIO
-    materia: null; // ORDINARIO
+    materia: any; // ORDINARIO
 
     // MOVIL
     plan_id: number; // MOVIL
@@ -389,7 +389,12 @@ export interface Sitio {
   geo_lon: number;
   id: number;
   metas: string;
-  model_plan_id: { id: number; nombre: string; estado: true; created_at: Date };
+  model_plan_id: {
+    id: number;
+    nombre: string;
+    estado: boolean;
+    created_at: Date;
+  };
   model_region_id: { id: number; nombre: string; codigo: string };
   nemonico: string;
   nombre: string;
@@ -645,6 +650,50 @@ export interface DetalleInformeAvance {
 export interface ActaTipoPago {
   id: number;
   descripcion: string;
+}
+
+export interface DetalleActaServicio {
+  adicional_aceptacion_estado: string;
+  cantidad_total: number;
+  evidencia_id: any;
+  factor_conversion_monto: number;
+  factor_conversion_precio: number;
+  faltante_cantidad: number;
+  faltante_porcentaje: number;
+  id: number;
+  informe_avance_id: number;
+  monto_tipo_moneda_codigo: string;
+  monto_tipo_moneda_id: number;
+  monto_tipo_moneda_nombre: string;
+  ot_id: number;
+  precio_tipo_moneda_codigo: string;
+  precio_tipo_moneda_id: number;
+  precio_tipo_moneda_nombre: string;
+  prov_has_serv_monto: number;
+  prov_has_serv_precio: number;
+  puntos_baremos: number;
+  requiere_evidencia: boolean;
+  servicio_id: number;
+  tipo_contrato_id: number;
+  unidad_codigo: string;
+  unidad_descripcion: string;
+  unidad_id: number;
+  valor_clp: number;
+}
+
+export interface DetalleActaUob {
+  cantidad_total: number;
+  faltante_cantidad: number;
+  faltante_porcentaje: number;
+  id: number;
+  informe_avance_id: number;
+  ot_id: number;
+  tipo_contrato_id: number;
+  unidad_codigo: string;
+  unidad_descripcion: string;
+  unidad_id: number;
+  unidad_obra_cod: string;
+  valor_clp: number;
 }
 
 // CATEGORIAS ARCHIVO

@@ -43,6 +43,8 @@ import {
   DetalleInformeAvance,
   ReqCreateRegistroLibroObra,
   ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
 } from '@data';
 import {
   DetalleActa,
@@ -394,6 +396,38 @@ export class OtFacade {
 
   public getActaTiposPago$(): Observable<ActaTipoPago[]> {
     return this.store.select(otSelectors.getActaTiposPago);
+  }
+
+  // GET DETALLE ACTA
+  public getDetalleActa$(): Observable<{
+    servicios: DetalleActaServicio[];
+    unidades_obra: DetalleActaUob[];
+  }> {
+    return this.store.select(otSelectors.getDetalleActa);
+  }
+
+  // GET DETALLE SERVICIO POR ACTA
+  public getDetalleServicioPorActaSuccess(
+    response: Response<{ items: DetalleActaServicio[] }>
+  ): void {
+    this.store.dispatch(
+      otActions.getDetalleServicioPorActaSuccess({ response })
+    );
+  }
+
+  public getDetalleActaServicio$(): Observable<DetalleActaServicio[]> {
+    return this.store.select(otSelectors.getDetalleActaServicio);
+  }
+
+  // GET DETALLE UOB POR ACTA
+  public getDetalleUobPorActaSuccess(
+    response: Response<{ items: DetalleActaUob[] }>
+  ): void {
+    this.store.dispatch(otActions.getDetalleUobPorActaSuccess({ response }));
+  }
+
+  public getDetalleActaUob$(): Observable<DetalleActaUob[]> {
+    return this.store.select(otSelectors.getDetalleActaUob);
   }
 
   // GET CATEGORIA ARCHIVO

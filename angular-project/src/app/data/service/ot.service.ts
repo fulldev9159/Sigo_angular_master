@@ -49,6 +49,8 @@ import {
   DataRespGetCategoriaArchivo,
   DataRespGetLibroDeObras,
   ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
 } from '@data';
 
 @Injectable({
@@ -335,6 +337,30 @@ export class OTService {
     return this.http.post<Response<{ items: ActaTipoPago[] }>>(
       `${this.apiUrl}/ot/acta_tipo_pago/getall`,
       {}
+    );
+  }
+
+  // GET DETALLE SERVICIO POR ACTA
+  getDetalleServicioPorActa(
+    ot_id: number
+  ): Observable<Response<{ items: DetalleActaServicio[] }>> {
+    return this.http.post<Response<{ items: DetalleActaServicio[] }>>(
+      `${this.apiUrl}/ot/get_detalle_servicio_for_acta/get`,
+      {
+        ot_id,
+      }
+    );
+  }
+
+  // GET DETALLE UOB POR ACTA
+  getDetalleUobPorActa(
+    ot_id: number
+  ): Observable<Response<{ items: DetalleActaUob[] }>> {
+    return this.http.post<Response<{ items: DetalleActaUob[] }>>(
+      `${this.apiUrl}/ot/get_detalle_uob_for_acta/get`,
+      {
+        ot_id,
+      }
     );
   }
 

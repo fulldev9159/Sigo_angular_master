@@ -40,8 +40,14 @@ export class ActaComponent implements OnInit, OnDestroy {
     );
 
     this.subscription.add(
-      this.route.data.subscribe(({ tiposPago }) =>
-        this.otFacade.getActaTiposPagoSuccess(tiposPago.response)
+      this.route.data.subscribe(
+        ({ tiposPago, detalleServicio, detalleUob }) => {
+          this.otFacade.getActaTiposPagoSuccess(tiposPago.response);
+          this.otFacade.getDetalleServicioPorActaSuccess(
+            detalleServicio.response
+          );
+          this.otFacade.getDetalleUobPorActaSuccess(detalleUob.response);
+        }
       )
     );
   }

@@ -46,6 +46,8 @@ import {
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
   ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
 } from '@data';
 
 import {
@@ -585,6 +587,18 @@ export const sendDetalleInformeAvanceError = createAction(
 export const getActaTiposPagoSuccess = createAction(
   '[OT] GET getActaTiposPago Success',
   props<{ response: Response<{ items: ActaTipoPago[] }> }>()
+);
+
+//  GET DETALLE SERVICIO POR ACTA
+export const getDetalleServicioPorActaSuccess = createAction(
+  '[OT] GET getDetalleServicioPorActa Success',
+  props<{ response: Response<{ items: DetalleActaServicio[] }> }>()
+);
+
+//  GET DETALLE UOB POR ACTA
+export const getDetalleUobPorActaSuccess = createAction(
+  '[OT] GET getDetalleUobPorActa Success',
+  props<{ response: Response<{ items: DetalleActaUob[] }> }>()
 );
 
 //  GET CATEGORIAS DE ARCHIVOS

@@ -232,3 +232,22 @@ export const getActaTiposPago = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.actaTiposPago
 );
+
+export const getDetalleActaServicio = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.detalleActaServicio
+);
+
+export const getDetalleActaUob = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.detalleActaUob
+);
+
+export const getDetalleActa = createSelector(
+  getDetalleActaServicio,
+  getDetalleActaUob,
+  (servicios, unidades_obra) => ({
+    servicios,
+    unidades_obra,
+  })
+);

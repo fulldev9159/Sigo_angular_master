@@ -11,6 +11,8 @@ import {
 import { Subscription, Observable, of } from 'rxjs';
 import {
   ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
   ////   DataInformeAvance,
   ////   DataRespGetDetalleOT,
   ////   DetalleCubicacion,
@@ -22,6 +24,16 @@ import {
 
 interface FormValues {
   tipo_pago: string;
+  servicios: {
+    id: number;
+    selected: boolean;
+    cantidad: number;
+  }[];
+  unidades_obra: {
+    id: number;
+    selected: boolean;
+    cantidad: number;
+  }[];
 }
 
 @Component({
@@ -32,9 +44,15 @@ interface FormValues {
 export class ActaGestorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   tiposPago$: Observable<ActaTipoPago[]> = this.otFacade.getActaTiposPago$();
+  detalleActa$: Observable<{
+    servicios: DetalleActaServicio[];
+    unidades_obra: DetalleActaUob[];
+  }> = this.otFacade.getDetalleActa$();
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl('', Validators.required, this.noWhitespace),
+    servicios: new FormArray([]),
+    unidades_obra: new FormArray([]),
   });
 
   //// loginAuth$: Observable<any>;
@@ -64,6 +82,33 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.subscription.add(
+      this.detalleActa$.subscribe(({ servicios, unidades_obra }) => {
+        (this.form.get('servicios') as FormArray).clear();
+        (this.form.get('unidades_obra') as FormArray).clear();
+
+        (servicios ?? []).forEach(servicio =>
+          (this.form.get('servicios') as FormArray).push(
+            new FormGroup({
+              id: new FormControl(`${servicio.id}`, []),
+              cantidad: new FormControl(`${servicio.cantidad_total}`, []),
+              selected: new FormControl(false, []),
+            })
+          )
+        );
+
+        (unidades_obra ?? []).forEach(uo =>
+          (this.form.get('unidades_obra') as FormArray).push(
+            new FormGroup({
+              id: new FormControl(`${uo.id}`, []),
+              cantidad: new FormControl(`${uo.cantidad_total}`, []),
+              selected: new FormControl(false, []),
+            })
+          )
+        );
+      })
+    );
+
     //// this.detalleOt$ = this.otFacade.getDetalleOT$();
     //// this.dataInformeActa$ = this.otFacade.getDataInformeActa$();
     //// // this.subscription.add(
@@ -200,9 +245,19 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
 
   get values(): FormValues {
     if (this.form) {
-      const { tipo_pago } = this.form.getRawValue();
+      const { tipo_pago, servicios, unidades_obra } = this.form.getRawValue();
       return {
         tipo_pago,
+        servicios: servicios.map(servicio => ({
+          id: servicio.id,
+          selected: servicio.selected,
+          cantidad: +servicio.cantidad,
+        })),
+        unidades_obra: unidades_obra.map(uo => ({
+          id: uo.id,
+          selected: uo.selected,
+          cantidad: +uo.cantidad,
+        })),
       };
     }
     return null;
