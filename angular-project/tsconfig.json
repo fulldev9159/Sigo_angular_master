@@ -4,50 +4,27 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "noImplicitAny": false,
     "target": "es2015",
     "module": "es2020",
+    "allowSyntheticDefaultImports": true,
     "paths": {
-      "@environment": [
-        "projects/otec/src/environments/environment"
-      ],
-      "@core": [
-        "projects/otec/src/app/core"
-      ],
-      "@core/*": [
-        "projects/otec/src/app/core/*"
-      ],
-      "@features": [
-        "projects/otec/src/app/features"
-      ],
-      "@features/*": [
-        "projects/otec/src/app/features/*"
-      ],
-      "@shared": [
-        "projects/otec/src/app/shared"
-      ],
-      "@shared/*": [
-        "projects/otec/src/app/shared/*"
-      ]
+      "@environment": ["src/environments/environment"],
+      "@data": ["src/app/data"],
+      "@data/*": ["src/app/data/*"],
+      "@layoytOT": ["src/app/layout/layout.module"],
+      "@layoytOT/*": ["src/app/layout/*"],
+      "@featureOT/*": ["src/app/features/*"],
+      "@uiOT/*": ["src/app/ui/*"],
+      "@storeOT/*": ["src/app/store/*"],
+      "@utilsSIGO/*": ["src/app/utils/*"],
+      "@pages/*": ["src/app/pages/*"]
     },
-    "lib": [
-      "es2018",
-      "dom"
-    ]
-  },
-  "angularCompilerOptions": {
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "lib": ["es2018", "dom", "es2019"]
   }
 }

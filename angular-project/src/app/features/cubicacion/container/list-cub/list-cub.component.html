@@ -1,0 +1,70 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col">
+      <h1 class="mt-4">Cubicaciones </h1>
+      <span>listado de cubicaciones en sistema</span>
+    </div>
+    <div class="col">
+      <button *ngxPermissionsOnly="['CUBICACION_CREAR']" [routerLink]="['/app/cubicacion/form-cub']" pButton type="button" label="Nueva Cubicación" icon="pi pi-plus" class="p-button-sm mt-5 float-right"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-table [config]="configTable" [items]="(cubicaciones$ | async)"></app-table>
+
+  <app-modal [display]="DisplayModalDetalleCubicacion && (loading$|async)===false" (CloseEvent)="closeModalDetalles()">
+    <ng-container modal-header-title>Detalles de a cubicación</ng-container>
+    <ng-container modal-content>
+      <app-detalle-cubicacion-table></app-detalle-cubicacion-table>
+      <!-- <span id="total"> <strong>Total:</strong> {{ total| currency : 'CLP' : '$':'.0-2':'es-CL' }}</span> -->
+    </ng-container>
+    <ng-container modal-footer></ng-container>
+  </app-modal>
+</div>
+
+<app-modal [display]="displayClonatedCubageNameModal && (loading$|async)===false" (CloseEvent)="closeModalClonar()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title>Clonar Cubicación</ng-container>
+  <ng-container modal-content>
+    <app-clone-cubage-form #cloneCubageForm></app-clone-cubage-form>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeModalClonar()">Cancelar</button>
+    <button class="btn btn-primary" (click)="cloneCubabeFormSubmit()">
+      <em class="pi pi-save mr-1"></em>Guardar
+    </button>
+  </ng-container>
+</app-modal>
+
+<app-modal [display]="displayModalDeleteCub" (CloseEvent)="closeModalDeleteCub()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar esta cubicación?</p>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer>
+    <div class="row">
+      <div class="col">
+        <button pButton type="button" (click)="DeleteCub()" label="Si, eliminar la cubicación" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+        border: #b36161;
+        margin-left: 10px;
+        color: #412727;"></button>
+        <button pButton type="button" (click)="closeModalDeleteCub()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+        border: gray;"></button>
+      </div>
+    </div>
+
+  </ng-container>
+</app-modal>

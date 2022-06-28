@@ -1,0 +1,425 @@
+<div class="row" style="padding: 15px">
+  <div class="col-xs-12 col-md-6">
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Información de sistema</ng-container>
+      <ng-container card-body>
+        <!-- <pre>{{detalleOT$| async|json}}</pre> -->
+        <table style="width: 100%;" class="table-info">
+          <tr>
+            <td>Tipo Contrato</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Nombre Contrato</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_contrato_marco_id.nombre : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Cubicación ID</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.cubicacion_id : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Cubicación Nombre</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_cubicacion_id.nombre : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>SCE session</td>
+            <td>{{(detalleOT$| async) ?(detalleOT$| async).ot.sce_session : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Proyecto ID</td>
+            <td>{{(detalleOT$| async) ?(detalleOT$| async).ot.proyecto_id : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Creado el</td>
+            <td>{{(detalleOT$| async) ?(detalleOT$| async).ot.created_at : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Etapa</td>
+            <td>{{(detalleOT$| async) ?(detalleOT$| async).ot.model_tipo_etapa_ot_id.nombre : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Estado</td>
+            <td>{{(detalleOT$| async) ?(detalleOT$| async).ot.model_tipo_estado_ot_id.nombre : ' ---'}}</td>
+          </tr>
+        </table>
+      </ng-container>
+    </app-card>
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Fechas</ng-container>
+      <ng-container card-body>
+        <table class="table-info" style="width: 100%;">
+          <tr>
+            <td>Fecha Inicio OT</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.fecha_inicio : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Fecha Fin OT</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.fecha_fin : ' ---'}}</td>
+          </tr>
+        </table>
+      </ng-container>
+    </app-card>
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Información adicional</ng-container>
+      <ng-container card-body>
+        <table class="table-info" style="width: 100%;">
+          <tr>
+            <td>Propietario</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_propietario_usuario_id.nombres + ' ' + (detalleOT$| async).ot.model_propietario_usuario_id.apellidos : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Responsable</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_responsable_proxy_id.model_usuario_id.nombres + ' ' + (detalleOT$| async).ot.model_responsable_proxy_id.model_usuario_id.apellidos : ' ---'}}</td>
+          </tr>
+          <tr>
+            <td>Observaciones</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.observaciones : ' ---'}}</td>
+          </tr>
+        </table>
+      </ng-container>
+    </app-card>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Información Contrato {{(detalleOT$| async) ? (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre : ' ---'}}</ng-container>
+      <ng-container card-body>
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Móvil'">
+          <table class="table-info" style="width: 100%;">
+            <tr>
+              <td>Plan de proyecto</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_plan_id.nombre : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Sitio</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_sitio_plan_id.nombre : ' ---'}}</td>
+            </tr>
+          </table>
+        </ng-container>
+
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Bucle'">
+          <table class="table-info" style="width: 100%;">
+            <tr>
+              <td>Oficina Central</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.model_oficina_central_id.idafac : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Solicitado Por</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.model_solicitante_id.descripcion : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Dirección</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.direccion : ' ---'}}</td>
+              <td style="border: 0;
+              border-width: 0;
+              padding: 0.275rem;
+              background-color: #efefef;
+              font-weight: 600;
+              text-align: right;
+              padding-right: 10px;
+              width: 28%;
+              border-right: 1px solid #bdbbbb">Altura</td>
+              <td style="font-weight: 400;
+              padding-left: 5px;">{{(detalleOT$| async) ? (detalleOT$| async).ot.altura : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Piso</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.piso : ' ---'}}</td>
+              <td style="border: 0;
+              border-width: 0;
+              padding: 0.275rem;
+              background-color: #efefef;
+              font-weight: 600;
+              text-align: right;
+              padding-right: 10px;
+              width: 28%;
+              border-right: 1px solid #bdbbbb">Departamento</td>
+              <td style="font-weight: 400;
+              padding-left: 5px;">{{(detalleOT$| async) ? (detalleOT$| async).ot.departamento : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Comuna</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.model_comuna_id.nombre : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Tipo Red</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.model_tipo_red_id.descripcion : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Tipo Trabajo</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.model_tipo_trabajo_id.descripcion : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Tiene Boleta garantía</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.tiene_boleta_garantia?'Si':'No' : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Tiene Permisos</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.tiene_permisos?'Si':'No' : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Área de negocio</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.area_negocio : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Nombre Proyectista</td>
+              <td colspan="3">{{(detalleOT$| async) ? (detalleOT$| async).ot.nombre_proyectista : ' ---'}}</td>
+            </tr>
+          </table>
+        </ng-container>
+
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Ordinario'">
+          <table class="table-info" style="width: 100%;">
+            <tr>
+              <td>Carta de adjudicación</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.carta_adjudicacion : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Fecha de adjudicación</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.fecha_adjudicacion : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Número pedido</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.numero_pedido : ' ---'}}</td>
+            </tr>
+            <tr>
+              <td>Materia</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.materia : ' ---'}}</td>
+            </tr>
+          </table>
+        </ng-container>
+
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Fijo'">
+          <table class="table-info" style="width: 100%;">
+            <tr>
+              <td>Tipo Número Interno</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).numeros_interno[0].model_tipo_numero_interno_id.nombre : ' ---'}}</td>
+            </tr>
+          </table>
+          <br>
+          <table style="width: 100%;">
+            <tr>
+              <th>Números Internos</th>
+            </tr>
+            <tr>
+              <td *ngFor="let item of (detalleOT$| async) ? (detalleOT$| async).numeros_interno : []">{{item.numero_interno}}</td>
+            </tr>
+          </table>
+        </ng-container>
+      </ng-container>
+
+    </app-card>
+
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Usuarios Involucrados</ng-container>
+      <ng-container card-body>
+        <table style="width: 100%;">
+          <tr>
+            <th>
+              Concepto
+            </th>
+            <th>
+              Usuario
+            </th>
+          </tr>
+          <tr *ngFor="let item of (detalleOT$| async) ? (detalleOT$| async).usuarios_involucrados : []">
+            <td>{{item.concepto}}</td>
+            <td>{{item.model_proxy_id.model_usuario_id.nombres}} {{item.model_proxy_id.model_usuario_id.apellidos}}</td>
+          </tr>
+        </table>
+      </ng-container>
+    </app-card>
+
+  </div>
+
+  <div class="col-12">
+    <hr>
+  </div>
+
+  <div class="col-12">
+    <h2>Costeo</h2>
+  </div>
+
+  <div class="col-xs-12 col-md-12">
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Cubicación</ng-container>
+      <ng-container card-body>
+        <div class="table-carrito">
+          <table style="width:100%">
+            <thead>
+              <tr>
+                <th colspan="7">Servicios</th>
+                <th colspan="8">Unidad Obra</th>
+              </tr>
+              <tr>
+                <th>Cod</th>
+                <th>Descripción</th>
+                <th>Esp</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <!-- <th>Factor</th> -->
+                <th>Total Servicio</th>
+                <th></th>
+
+                <th>Cód</th>
+                <th>Descripción</th>
+                <th>Actividad</th>
+                <th>Cantidad</th>
+                <th>Tipo Moneda</th>
+                <th>Precio</th>
+                <th>Total UO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let item of carrito$|async;let i = index">
+                <ng-container *ngIf="item.unidades_obras.length===1">
+                  <tr>
+                    <td class="label-table">{{item.servicio_codigo}}</td>
+                    <td class="data-primaria">{{item.servicio_nombre}}</td>
+                    <td class="data-secundaria">{{item.tipo_servicio_descripcion|titlecase}}</td>
+                    <td>
+                      {{item.servicio_cantidad}}
+                    </td>
+                    <td class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
+                    <td class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>
+                      <!-- <div class="ui icon buttons mini basic">
+                          <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </div> -->
+
+                    </td>
+
+                    <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
+                    <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+                    <td class="data-secundaria">
+                      {{item.unidades_obras[0].uo_cantidad}}
+                    </td>
+                    <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>
+                      <!-- <div class="ui icon buttons mini basic">
+                          <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                        </div> -->
+                    </td>
+                  </tr>
+                </ng-container>
+
+
+                <ng-container *ngIf="item.unidades_obras.length>1">
+                  <tr>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria">{{item.servicio_nombre}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.tipo_servicio_descripcion|titlecase}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length">
+                      {{item.servicio_cantidad}}
+                    </td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length">
+                      <!-- <div class="ui icon buttons mini basic">
+                          <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </div> -->
+                    </td>
+
+                    <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
+                    <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+                    <td>
+                      {{item.unidades_obras[0].uo_cantidad}}
+                    </td>
+                    <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>
+                      <!-- <div class="ui icon buttons mini basic">
+                          <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                          <button (click)="deleteUOCarrito(item.servicio_codigo,item.unidades_obras[0].uo_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </div> -->
+                    </td>
+                  </tr>
+                </ng-container>
+
+                <ng-container *ngIf="item.unidades_obras.length>1">
+                  <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
+                    <td class="label-table">{{uo.uo_codigo}}</td>
+                    <td class="data-primaria">{{uo.uo_nombre}}</td>
+                    <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
+                    <td>
+                      {{uo.uo_cantidad}}
+                    </td>
+                    <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
+                    <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>
+                      <!-- <div class="ui icon buttons mini basic">
+                          <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>
+                          <button (click)="deleteUOCarrito(item.servicio_codigo,uo.uo_codigo)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button>
+                        </div> -->
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </ng-container>
+    </app-card>
+
+    <div class="col-xs-12 col-md-12">
+      <app-card [classCardHeader]="'bg-info'">
+        <ng-container card-header-title>Sustento Financiero</ng-container>
+        <ng-container card-body>
+          <table class="table-info" style="width: 100%;">
+            <tr>
+              <td>Tipo de sustento financiero</td>
+              <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.tipo_sustento : ' ---'}}</td>
+            </tr>
+            <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.tipo_sustento==='CAPEX'">
+              <tr>
+                <td>PMO Código</td>
+                <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.pmo_codigo : ' ---'}}</td>
+              </tr>
+              <tr>
+                <td>Línea Presupuestaria</td>
+                <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.lp : ' ---'}}</td>
+              </tr>
+              <tr>
+                <td>PEP2</td>
+                <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.pep2 : ' ---'}}</td>
+              </tr>
+            </ng-container>
+
+            <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.tipo_sustento==='OPEX'">
+              <tr>
+                <td>ID Opex</td>
+                <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.id_opex : ' ---'}}</td>
+              </tr>
+              <tr>
+                <td>CECO</td>
+                <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.ceco : ' ---'}}</td>
+              </tr>
+              <tr>
+                <td>Cuenta SAP</td>
+                <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.cuenta_sap : ' ---'}}</td>
+              </tr>
+            </ng-container>
+
+          </table>
+        </ng-container>
+      </app-card>
+    </div>
+
+  </div>
+</div>

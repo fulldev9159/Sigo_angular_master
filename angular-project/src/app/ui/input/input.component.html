@@ -1,0 +1,38 @@
+<div class="row" style="text-align: end;" *ngIf="DisplayLabelMode==='side'">
+  <div class="col-md-4 col-xs-12 ">
+    <ng-container *ngIf="label !== ''">
+      <label style="text-align: end;">{{ label }}</label>
+    </ng-container>
+  </div>
+  <div class="col-md-8 col-xs-12 ">
+    <ng-container *ngIf="control !== undefined">
+      <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
+      <div *ngIf="control.invalid && (control.dirty || control.touched)">
+        <p-message severity="error" text="{{ errorMessageFn(control.errors) }}"></p-message>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-container *ngIf="DisplayLabelMode==='up'">
+  <ng-container *ngIf="label !== ''">
+    <label style=" margin-top: 1rem">{{ label }}</label>
+  </ng-container>
+  <ng-container *ngIf="control !== undefined">
+    <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
+    <div *ngIf="control.invalid && (control.dirty || control.touched)">
+      <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="DisplayLabelMode==='none'">
+  <ng-container *ngIf="control !== undefined">
+    <input [formControl]="control" class="form-control" type="{{ inputType }}" min="{{min}}" placeholder="{{placeholder }}" style="    width: 51px;
+    font-size: 13px;
+    padding: 5px;">
+    <div *ngIf="control.invalid && (control.dirty || control.touched)">
+      <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
+    </div>
+  </ng-container>
+</ng-container>

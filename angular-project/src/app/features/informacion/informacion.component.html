@@ -1,0 +1,49 @@
+<div style="background-color: white;">
+  <h1><b>OT</b> ID: {{(detalleOt$|async) && (detalleOt$|async).ot.id}} &nbsp; <b>nombre:</b> {{(detalleOt$|async) && (detalleOt$|async).ot.nombre}}</h1>
+</div>
+<ul>
+  <li>
+    <a href="" [routerLink]="['info-ot',ot_id]" [routerLinkActive]="['is-active']">
+      <span class="icon pi pi-fw pi-info-circle"></span>
+      <span class="tab-title">Información</span>
+    </a>
+  </li>
+  <!-- <li *ngIf="(loginAuth$ |async).perfil!=='Trabajador EECC'">
+    <a href="" [routerLink]="['costeo',ot_id]" [routerLinkActive]="['is-active']">
+      <span class="icon pi pi-fw pi-dollar"></span>
+      <span class="tab-title">Costeo</span>
+    </a>
+  </li> -->
+  <li>
+    <a href="" *ngIf="(loginAuth$ |async).perfil==='Trabajador EECC'||(loginAuth$ |async).perfil==='Administrador EECC'" [routerLink]="['informe-avance',ot_id]" [routerLinkActive]="['is-active']">
+      <span class="icon pi pi-fw pi-file"></span>
+      <span class="tab-title">Informe de Avances</span>
+    </a>
+  </li>
+  <li *ngIf="(loginAuth$ |async).perfil==='Gestor/JP'">
+    <a href="" [routerLink]="['acta',ot_id]" [routerLinkActive]="['is-active']">
+      <span class="icon pi pi-fw pi-file-o"></span>
+      <span class="tab-title">Acta</span>
+    </a>
+  </li>
+  <li>
+    <a href="" [routerLink]="['libro-obras',ot_id]" [routerLinkActive]="['is-active']">
+      <span class="icon pi pi-fw pi-book"></span>
+      <span class="tab-title">Libro de obras</span>
+    </a>
+  </li>
+  <li>
+    <a href="" [routerLink]="['anexos',ot_id]" [routerLinkActive]="['is-active']">
+      <span class="icon pi pi-fw pi-paperclip"></span>
+      <span class="tab-title">Anexos</span>
+    </a>
+  </li>
+  <!-- <li>
+    <a href="">
+      <span class="icon pi pi-fw pi-briefcase"></span>
+      <span class="tab-title">Bitácora</span>
+    </a>
+  </li> -->
+</ul>
+
+<router-outlet></router-outlet>

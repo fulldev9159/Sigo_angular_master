@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" id="title-list-profile">
+      <h1 class="mt-4">Perfiles </h1>
+      <span>listado de perfiles en sistema</span>
+    </div>
+    <div class="col">
+      <button [routerLink]="['/app/profile/form-pro']" pButton type="button" label="Nuevo Perfil" icon="pi pi-plus" class="p-button-sm mt-5 float-right" id="add-profile-button"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-header-title>
+    </ng-container>
+    <ng-container card-header-actions>
+
+    </ng-container>
+    <ng-container card-body>
+
+      <app-table [config]="configTable" [items]="(perfiles$ | async)"></app-table>
+    </ng-container>
+  </app-card>
+
+
+  <app-modal [display]="DisplayPermisosPerfilModal$|async" (CloseEvent)="closeModalPermisosPerfil()">
+    <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>
+    <ng-container modal-content>
+      <div class="row" style="width: 87vw;">
+        <div *ngFor="let item of PermisosPerfil$|async" class="col-xs-12 col-md-4 pt-2" id="permisos-modulo-{{item.module}}">
+          <p-listbox [options]="item.permissions" optionLabel="model_permiso_id.nombre_corto" optionDisabled="inactive" [disabled]="true">
+            <ng-template pTemplate="header">
+              {{item.module}}
+            </ng-template>
+          </p-listbox>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container modal-footer></ng-container>
+  </app-modal>
+
+
+  <app-modal [display]="displayModalEliminarPerfil" (CloseEvent)="closeModalEliminarPerfil()" [style]="{width: '25vw !important'}">
+    <ng-container modal-header-title></ng-container>
+    <ng-container modal-content>
+
+      <div class="row">
+        <div class="col">
+          <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">¿Está seguro que desea eliminar este perfil?</p>
+          <div style="padding: 0 9rem 0 9rem;">
+            <div class="row">
+              <div class="col">
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button pButton type="button" (click)="EliminarPerfil()" label="Si, confirmo" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-perfil-user-button" style="    background: #ffb6b6;
+                border: #b36161;
+                margin-left: 10px;
+                color: #412727;"></button>
+                <button pButton type="button" (click)="closeModalEliminarPerfil()" label="Cancelar" class="p-button-sm mt-5 float-right" id="delete-user-button" style="background: #b8b6b6;
+                border: gray;"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container modal-footer></ng-container>
+  </app-modal>
+</div>

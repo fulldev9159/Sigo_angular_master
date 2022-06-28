@@ -1,0 +1,15 @@
+<div class="card {{classCard}}">
+  <div class="card-header-tab card-header {{classCardHeader}}">
+    <div class="card-header-title">
+      <ng-content select="[card-header-title]"></ng-content>
+    </div>
+    <div class="btn-actions-pane-right actions-icon-btn">
+      <ng-content select="[card-header-actions]"></ng-content>
+    </div>
+  </div>
+  <div class="card-body">
+    <ng-content select="[card-body]"></ng-content>
+  </div>
+
+  <ng-content select="[card-footer]"></ng-content>
+</div>

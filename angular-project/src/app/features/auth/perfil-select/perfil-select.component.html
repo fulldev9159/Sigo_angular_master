@@ -1,0 +1,26 @@
+<form [formGroup]="formPerfil" (ngSubmit)="refreshLogin()">
+  <div class="form-group">
+    <div class="perfil_select">
+      <app-select [control]="formControls.proxyperfil" label="">
+        <ng-container options>
+          <option value="null" selected disabled>Seleccione perfil</option>
+          <ng-container *ngFor="let perfil of perfilesUsuario$ | async">
+            <option [value]="perfil.id">
+              {{ perfil.model_perfil_id.nombre }}
+            </option>
+          </ng-container>
+        </ng-container>
+      </app-select>
+    </div>
+  </div>
+
+  <input [disabled]="!formPerfil.valid" name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Seleccionar">
+
+
+  <button style="color: #8b8787;
+  font-size: 16px;
+  border: 0;
+  background: white;
+  font-weight: 400;
+  margin-left: 36%;" (click)="logout()">Logout</button>
+</form>

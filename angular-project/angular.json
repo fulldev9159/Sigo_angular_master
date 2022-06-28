@@ -3,40 +3,48 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "otec": {
+    "app-ot": {
       "projectType": "application",
-      "schematics": {},
-      "root": "projects/otec",
-      "sourceRoot": "projects/otec/src",
-      "prefix": "otec",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/otec",
-            "index": "projects/otec/src/index.html",
-            "main": "projects/otec/src/main.ts",
-            "polyfills": "projects/otec/src/polyfills.ts",
-            "tsConfig": "projects/otec/tsconfig.app.json",
+            "outputPath": "dist/app-ot",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "projects/otec/src/favicon.ico",
-              "projects/otec/src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "projects/otec/src/styles.css",
-              "node_modules/semantic-ui-css/components/button.min.css",
-              "node_modules/semantic-ui-css/components/input.min.css",
-              "node_modules/semantic-ui-css/components/icon.min.css"
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/themes/fluent-light/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeflex/primeflex.css",
+              "./node_modules/node-snackbar/dist/snackbar.min.css",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/node-snackbar/dist/snackbar.min.js"
+            ]
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/otec/src/environments/environment.ts",
-                  "with": "projects/otec/src/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -55,8 +63,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "20kb",
+                  "maximumError": "40kb"
                 }
               ]
             }
@@ -65,66 +73,72 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "otec:build"
+            "browserTarget": "app-ot:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "otec:build:production"
+              "browserTarget": "app-ot:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "otec:build"
+            "browserTarget": "app-ot:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/otec/src/test.ts",
-            "polyfills": "projects/otec/src/polyfills.ts",
-            "tsConfig": "projects/otec/tsconfig.spec.json",
-            "karmaConfig": "projects/otec/karma.conf.js",
-            "assets": [
-              "projects/otec/src/favicon.ico",
-              "projects/otec/src/assets"
-            ],
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "projects/otec/src/styles.css"
+              "./node_modules/primeicons/primeicons.css",
+              "./node_modules/primeng/resources/themes/fluent-light/theme.css",
+              "./node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/primeflex/primeflex.css",
+              "node_modules/node-snackbar/dist/snackbar.min.css",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/node-snackbar/dist/snackbar.min.js"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/otec/tsconfig.app.json",
-              "projects/otec/tsconfig.spec.json",
-              "projects/otec/e2e/tsconfig.json"
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/otec/e2e/protractor.conf.js",
-            "devServerTarget": "otec:serve"
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "app-ot:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "otec:serve:production"
+              "devServerTarget": "app-ot:serve:production"
             }
           }
         }
       }
-    }},
+    }
+  },
+  "defaultProject": "app-ot",
   "cli": {
     "analytics": false
-  },
-  "defaultProject": "otec"
+  }
 }

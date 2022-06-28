@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" id="title-create-profile">
+      <h1 class="mt-4">Creación de Perfil </h1>
+      <span>formulario para crear un nuevo perfil</span>
+    </div>
+    <div class="col">
+      <button (click)="goBack()" pButton type="button" label="volver" icon="pi pi-arrow-left" class="p-button-sm mt-5 float-right p-button-outlined " id="volver-button"></button>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <app-card [classCardHeader]="'bg-secondary text-white'">
+    <ng-container card-header-title>
+    </ng-container>
+    <ng-container card-header-actions>
+
+    </ng-container>
+    <ng-container card-body>
+      <div class="row" [formGroup]="formPerfil">
+        <div class="col-md-3">
+          <div class="row">
+            <div class="col-12" id="nombre-perfil-input">
+              <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" id="rol-perfil-select">
+              <app-select [control]="formControls.rol" label="* Rol" ID="perfil-rol">
+                <ng-container options>
+                  <option value="null" selected disabled>Seleccione un rol</option>
+                  <ng-container *ngFor="let rol of allRoles$ | async">
+                    <option [value]="rol.id">
+                      {{ rol.nombre }}
+                    </option>
+                  </ng-container>
+                </ng-container>
+              </app-select>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="row">
+            <div class="col-12" id="descripcion-perfil-input">
+              <app-textarea [control]="formControls.descripcion" label="Descripción" [rows]="4">
+              </app-textarea>
+              <!-- <label class="mb-1" for="">Descripción perfil</label>
+              <textarea formControlName="descripcion" name="" id="" class="form-control" cols="30" rows="5"></textarea> -->
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-12 text-center mt-2 p-0">
+              <p-button label="Guardar" (click)="saveProfile()" [disabled]="!formPerfil.valid" slyle="font-size: 0.83rem;" icon="pi pi-save" styleClass="p-button-raised p-button-sm"></p-button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="row" *ngIf="formPerfil.get('rol').value!==null && permisosRol.length>0">
+            <div *ngFor="let item of permisosRol" class="col-xs-12 col-md-4 pt-2" id="modulos-pefil-{{item.module}}">
+              <p-listbox formControlName="permisos_{{item.module}}" [options]="item.permissions" optionValue="model_permiso_id.id" checkbox="checkbox" [multiple]="true" [filter]="true" optionLabel="model_permiso_id.nombre_corto">
+                <ng-template pTemplate="header">
+                  {{item.module}}
+                </ng-template>
+              </p-listbox>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </app-card>
+</div>

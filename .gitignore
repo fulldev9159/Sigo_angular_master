@@ -24,11 +24,11 @@
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
 .history/*
 
 # misc
@@ -46,3 +46,12 @@ testem.log
 Thumbs.db
 
 **/*.swp
+
+/angular-project/debug.log
+
+robot_e2e/selenium-screenshot*
+robot_e2e/report.html
+robot_e2e/output.xml
+robot_e2e/log.html
+
+cypress/node_modules

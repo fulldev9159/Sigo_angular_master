@@ -1,0 +1,32 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xs-12 col-md-6" id="control_nombre">
+    <app-input ID="nombre-ot" [control]="form.get('nombre')" [label]="'Nombre de la orden de trabajo'"></app-input>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="contratosUser">
+    <app-select [control]="form.get('contrato')" label="* Contrato">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione un contrato</option>
+        <ng-container *ngFor="let contrato of contratosUser4OT$|async">
+          <option [value]="contrato.contrato_id">
+            {{ contrato.model_contrato_id.nombre }}
+          </option>
+        </ng-container>
+      </ng-container>
+    </app-select>
+  </div>
+
+  <div class="col-xs-12 col-md-6" id="control_cubicacion_id">
+    <app-select [control]="form.get('cubicacion_id')" label="Cubicación" ID="cubicacion-de-ot">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione cubicación</option>
+        <ng-container *ngFor="let cubicacion of cubicaciones$ | async">
+          <option [value]="cubicacion.cubicacion_id">
+            {{ cubicacion.cubicacion_nombre }}
+          </option>
+        </ng-container>
+      </ng-container>
+    </app-select>
+    <br>
+  </div>
+</div>

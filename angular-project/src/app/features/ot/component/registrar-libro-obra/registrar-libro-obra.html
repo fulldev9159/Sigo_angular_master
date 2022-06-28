@@ -1,0 +1,27 @@
+<form novalidate autocomplete="off" [formGroup]="form">
+  <div style="margin-top: 10px;">
+    <!-- <label for="">Observaciones</label> -->
+    <!-- <textarea formControlName="observaciones" class="form-control" name="observaciones" id="observaciones" cols="30" rows="2"></textarea> -->
+    <app-textarea [control]="formControls.observaciones" label="*Observaciones" [rows]="2"></app-textarea>
+    <br>
+    <label>Adjuntar evidencias</label>
+    <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true" (uploadHandler)="onUpload($event)" (onRemove)="onDeleteFile($event)" customUpload="true" multiple="multiple" accept=".docx,.doc,.gif,.json,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,zip,.dwg,.csv,.xls,.ppt,.pptx,text/plain" maxFileSize="50000000">
+    </p-fileUpload>
+
+    <label style="color: #464646;font-weight: 400;">
+      <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
+      <span style="word-spacing: 5px">.docx .doc .gif .json .jpeg .pjpeg .png .txt .pdf .gzip .zip .rar .7zip zip .dwg .csv .xls .ppt .pptx </span>
+    </label>
+    <br>
+    <app-select [control]="formControls.categoria" label="* Categoria del archivo:">
+      <ng-container options>
+        <option value="null" selected disabled>Seleccione ...</option>
+        <ng-container *ngFor="let item of categorias$|async">
+          <option [value]="item.id">
+            {{ item.nombre }}
+          </option>
+        </ng-container>
+      </ng-container>
+    </app-select>
+  </div>
+</form>
