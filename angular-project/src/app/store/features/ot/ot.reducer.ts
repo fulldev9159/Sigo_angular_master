@@ -28,6 +28,7 @@ import {
   MotivoRechazo,
   PosibleTrabajador,
   DetalleInformeAvance,
+  CategoriaArchivo,
 } from '@data';
 
 export const otFeatureKey = 'ot';
@@ -73,7 +74,7 @@ export interface StateOt {
   allMotivoRechazo: MotivoRechazo[];
 
   // CATEGORIA ARCHIVO
-  categoriaArchivo: any[];
+  categoriaArchivo: CategoriaArchivo[];
   libroObras: any[];
 
   // ////

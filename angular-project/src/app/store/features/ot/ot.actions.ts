@@ -35,7 +35,7 @@ import {
   MotivoRechazo,
   RequestAceptarRechazarOT,
   PosibleTrabajador,
-  DataRespGetCategoriaArchivo,
+  CategoriaArchivo,
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
 } from '@data';
@@ -574,7 +574,7 @@ export const getCategoriasArchivos = createAction(
 
 export const getCategoriasArchivosSuccess = createAction(
   '[OT] GET getCategoriasArchivos Success',
-  props<{ response: Response<DataRespGetCategoriaArchivo> }>()
+  props<{ response: ResponseItems<CategoriaArchivo[]> }>()
 );
 
 export const getCategoriasArchivosError = createAction(

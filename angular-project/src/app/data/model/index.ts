@@ -25,6 +25,7 @@ export * from './proyecto';
 export * from './servicio';
 export * from './unidad-obra';
 export * from './materiales';
+export * from './archivo';
 export interface Response<T> {
   data: T;
   status: StatusResponse;

@@ -45,7 +45,7 @@ import {
   DetalleInformeAvance,
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
-  DataRespGetCategoriaArchivo,
+  CategoriaArchivo,
   DataRespGetLibroDeObras,
 } from '@data';
 
@@ -288,8 +288,8 @@ export class OTService {
   }
 
   // GET CATEGORIAS ARCHIVOS
-  getCategoriasArchivos(): Observable<Response<DataRespGetCategoriaArchivo>> {
-    return this.http.post<Response<DataRespGetCategoriaArchivo>>(
+  getCategoriasArchivos(): Observable<ResponseItems<CategoriaArchivo[]>> {
+    return this.http.post<ResponseItems<CategoriaArchivo[]>>(
       `${this.apiUrl}/files/categoria_archivo/getall`,
       {}
     );
