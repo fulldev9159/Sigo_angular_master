@@ -242,6 +242,16 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
           })
         )
       );
+
+      unidadesObraForm.controls.forEach((group, index) =>
+        this.subscription.add(
+          (group as FormGroup)
+            .get('selected')
+            .valueChanges.subscribe(selected =>
+              this.updateCantidadEnviar(unidadesObraForm, index, selected)
+            )
+        )
+      );
     }
   }
 
