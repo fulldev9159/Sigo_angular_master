@@ -117,7 +117,7 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
       const items = [...servicios, ...unidades_obra];
 
       const porcentajeFaltanteMax =
-        items.length > 0 ? items[0].faltante_porcentaje : 0;
+        items.length > 0 ? items[0].faltante_porcentaje : 0; // TODO multiplicar por 100?
 
       // Toma el porcentaje faltante de alguno de los items, y ése será el
       // tope para la siguiente iteración
