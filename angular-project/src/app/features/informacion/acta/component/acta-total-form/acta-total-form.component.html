@@ -64,6 +64,27 @@
       </div>
     </ng-container>
   </ng-container>
+</div>
 
+<br>
+
+<!--
   <pre>{{ values | json }}</pre>
+-->
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div style="text-align: right">
+      <ng-container *ngIf="saving; else noSaving">
+        <button class="btn btn-primary disabled">
+          <em class="pi pi-spin pi-spinner mr-1"></em>Enviar
+        </button>
+      </ng-container>
+      <ng-template #noSaving>
+        <button class="btn btn-primary" (click)="submit()" [class.disabled]="!valid">
+          <em class="pi pi-send mr-1"></em>Enviar
+        </button>
+      </ng-template>
+    </div>
+  </div>
 </div>

@@ -381,6 +381,40 @@ export class OTService {
       );
   }
 
+  sendGeneracionActa(
+    ot_id: number,
+    tipo_pago: string,
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    }
+  ): Observable<Response<any>> {
+    //// return this.http.post<Response<any>>(`${this.apiUrl}/ot/acta/create`, {
+    ////   ot_id,
+    ////   tipo_pago,
+    ////   detalle,
+    //// });
+
+    console.log(`${this.apiUrl}/ot/acta/create`, {
+      ot_id,
+      tipo_pago,
+      detalle,
+    });
+
+    return of({
+      status: { code: 0, desc: 'OK' },
+      data: {},
+    }).pipe(delay(3000));
+  }
+
   // GET CATEGORIAS ARCHIVOS
   getCategoriasArchivos(): Observable<Response<DataRespGetCategoriaArchivo>> {
     return this.http.post<Response<DataRespGetCategoriaArchivo>>(

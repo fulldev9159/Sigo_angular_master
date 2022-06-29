@@ -258,3 +258,8 @@ export const getDetalleActa = createSelector(
     unidades_obra,
   })
 );
+
+export const sendingGeneracionActa = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.sendingGeneracionActa
+);

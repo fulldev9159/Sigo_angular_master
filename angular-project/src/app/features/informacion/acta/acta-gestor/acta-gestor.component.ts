@@ -8,7 +8,21 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ActaTipoPago, DetalleActaServicio, DetalleActaUob } from '@data';
+
+interface Detalle {
+  servicio: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+  unidad_obra: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+}
 
 @Component({
   selector: 'app-acta-gestor',
@@ -23,6 +37,8 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
     servicios: DetalleActaServicio[];
     unidades_obra: DetalleActaUob[];
   }> = this.otFacade.getDetalleActa$();
+  ot$: Observable<any> = this.otFacade.getDetalleOT$();
+  saving$: Observable<boolean> = this.otFacade.sendingGeneracionActa$();
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl(
@@ -366,5 +382,9 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  formSubmitted(ot_id: number, tipo_pago: string, detalle: Detalle): void {
+    this.otFacade.sendGeneracionActa(ot_id, tipo_pago, detalle);
   }
 }

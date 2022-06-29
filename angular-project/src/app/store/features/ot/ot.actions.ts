@@ -607,6 +607,37 @@ export const getUltimoTipoPagoActaSuccess = createAction(
   props<{ tipoPago: string }>()
 );
 
+//  ENVIAR GENERACION ACTA
+export const sendGeneracionActa = createAction(
+  '[OT] GET sendGeneracionActa',
+  props<{
+    ot_id: number;
+    tipo_pago: string;
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    };
+  }>()
+);
+
+export const sendGeneracionActaSuccess = createAction(
+  '[OT] GET sendGeneracionActa Success',
+  props<{ response: Response<any> }>()
+);
+
+export const sendGeneracionActaError = createAction(
+  '[OT] GET sendGeneracionActa Error',
+  props<{ error: any }>()
+);
+
 //  GET CATEGORIAS DE ARCHIVOS
 export const getCategoriasArchivos = createAction(
   '[OT] GET getCategoriasArchivos'

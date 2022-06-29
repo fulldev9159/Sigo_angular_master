@@ -107,6 +107,7 @@ export interface StateOt {
   detalleActaServicio: DetalleActaServicio[];
   detalleActaUob: DetalleActaUob[];
   ultimoTipoPagoActa: string;
+  sendingGeneracionActa: boolean;
 }
 
 export const initialStateOt: StateOt = {
@@ -181,6 +182,7 @@ export const initialStateOt: StateOt = {
   detalleActaServicio: [],
   detalleActaUob: [],
   ultimoTipoPagoActa: '',
+  sendingGeneracionActa: false,
 };
 
 export const reducerOt = createReducer(
@@ -895,5 +897,21 @@ export const reducerOt = createReducer(
       ...state,
       ultimoTipoPagoActa: tipoPago,
     };
-  })
+  }),
+  on(OtActions.sendGeneracionActa, state => {
+    return {
+      ...state,
+      sendingGeneracionActa: true,
+    };
+  }),
+  on(
+    OtActions.sendGeneracionActaSuccess,
+    OtActions.sendGeneracionActaError,
+    state => {
+      return {
+        ...state,
+        sendingGeneracionActa: false,
+      };
+    }
+  )
 );

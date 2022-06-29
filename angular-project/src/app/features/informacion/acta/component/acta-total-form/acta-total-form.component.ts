@@ -1,19 +1,24 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-interface FormValues {
-  detalle: {
-    servicio: {
-      rowid: number;
-      cantidad: number;
-      porcentaje: number;
-    }[];
-    unidad_obra: {
-      rowid: number;
-      cantidad: number;
-      porcentaje: number;
-    }[];
-  };
+interface Detalle {
+  servicio: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+  unidad_obra: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
 }
 
 @Component({
@@ -23,6 +28,8 @@ interface FormValues {
 })
 export class ActaTotalFormComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
+  @Input() saving: boolean;
+  @Output() submitted = new EventEmitter<Detalle>();
 
   constructor() {}
 
@@ -30,25 +37,36 @@ export class ActaTotalFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  get values(): FormValues {
+  get valid(): boolean {
+    if (this.form) {
+      return this.form.valid;
+    }
+    return false;
+  }
+
+  get values(): Detalle {
     if (this.form) {
       const { servicios, unidades_obra } = this.form.getRawValue();
 
       return {
-        detalle: {
-          servicio: servicios.map(servicio => ({
-            rowid: +servicio.id,
-            cantidad: +servicio.cantidad_a_enviar,
-            porcentaje: 100,
-          })),
-          unidad_obra: unidades_obra.map(uo => ({
-            rowid: +uo.id,
-            cantidad: +uo.cantidad_a_enviar,
-            porcentaje: 100,
-          })),
-        },
+        servicio: servicios.map(servicio => ({
+          rowid: +servicio.id,
+          cantidad: +servicio.cantidad_a_enviar,
+          porcentaje: 100,
+        })),
+        unidad_obra: unidades_obra.map(uo => ({
+          rowid: +uo.id,
+          cantidad: +uo.cantidad_a_enviar,
+          porcentaje: 100,
+        })),
       };
     }
     return null;
+  }
+
+  submit(): void {
+    if (this.valid) {
+      this.submitted.emit(this.values);
+    }
   }
 }

@@ -1,19 +1,24 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 
-interface FormValues {
-  detalle: {
-    servicio: {
-      rowid: number;
-      cantidad: number;
-      porcentaje: number;
-    }[];
-    unidad_obra: {
-      rowid: number;
-      cantidad: number;
-      porcentaje: number;
-    }[];
-  };
+interface Detalle {
+  servicio: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
+  unidad_obra: {
+    rowid: number;
+    cantidad: number;
+    porcentaje: number;
+  }[];
 }
 
 @Component({
@@ -23,6 +28,8 @@ interface FormValues {
 })
 export class ActaServicioFormComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
+  @Input() saving: boolean;
+  @Output() submitted = new EventEmitter<Detalle>();
 
   constructor() {}
 
@@ -48,6 +55,18 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
+  get selected(): number {
+    const values = this.values;
+    return values.servicio.length + values.unidad_obra.length;
+  }
+
+  get valid(): boolean {
+    if (this.form) {
+      return this.form.valid && this.selected > 0;
+    }
+    return false;
+  }
+
   get valuesRaw(): any {
     if (this.form) {
       return this.form.getRawValue();
@@ -55,29 +74,33 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  get values(): FormValues {
+  get values(): Detalle {
     if (this.form) {
       const { servicios, unidades_obra } = this.form.getRawValue();
 
       return {
-        detalle: {
-          servicio: servicios
-            .filter(({ selected }) => selected)
-            .map(servicio => ({
-              rowid: +servicio.id,
-              cantidad: +servicio.cantidad_a_enviar,
-              porcentaje: 100,
-            })),
-          unidad_obra: unidades_obra
-            .filter(({ selected }) => selected)
-            .map(uo => ({
-              rowid: +uo.id,
-              cantidad: +uo.cantidad_a_enviar,
-              porcentaje: 100,
-            })),
-        },
+        servicio: servicios
+          .filter(({ selected }) => selected)
+          .map(servicio => ({
+            rowid: +servicio.id,
+            cantidad: +servicio.cantidad_a_enviar,
+            porcentaje: 100,
+          })),
+        unidad_obra: unidades_obra
+          .filter(({ selected }) => selected)
+          .map(uo => ({
+            rowid: +uo.id,
+            cantidad: +uo.cantidad_a_enviar,
+            porcentaje: 100,
+          })),
       };
     }
     return null;
+  }
+
+  submit(): void {
+    if (this.valid) {
+      this.submitted.emit(this.values);
+    }
   }
 }

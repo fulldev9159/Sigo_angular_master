@@ -440,6 +440,32 @@ export class OtFacade {
     return this.store.select(otSelectors.getUltimoTipoPagoActa);
   }
 
+  // SEND GENERACION ACTA
+  public sendGeneracionActa(
+    ot_id: number,
+    tipo_pago: string,
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    }
+  ): void {
+    this.store.dispatch(
+      otActions.sendGeneracionActa({ ot_id, tipo_pago, detalle })
+    );
+  }
+
+  public sendingGeneracionActa$(): Observable<boolean> {
+    return this.store.select(otSelectors.sendingGeneracionActa);
+  }
+
   // GET CATEGORIA ARCHIVO
   public getCategoriasArchivos(): void {
     this.store.dispatch(otActions.getCategoriasArchivos());
