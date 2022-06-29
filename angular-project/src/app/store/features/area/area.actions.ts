@@ -1,7 +1,8 @@
 import {
   Response,
+  ResponseItems,
   RequestEditArea,
-  DataRspGetAreas,
+  Area,
   DataRspEditArea,
 } from '@data';
 import { createAction, props } from '@ngrx/store';
@@ -13,16 +14,15 @@ export const getAreas = createAction('[Area] GET getAreas');
 
 export const getAreasSuccess = createAction(
   '[Area] GET getAreas Success',
-  props<{ response: Response<DataRspGetAreas> }>()
+  props<{ response: ResponseItems<Area[]> }>()
 );
 
 export const getAreasError = createAction(
   '[Area] GET getAreas Error',
   props<{ error: any }>()
 );
-// GET AREAS
 
-// GET AREA
+// GET ONE AREA
 export const getArea = createAction(
   '[Area] GET getArea',
   props<{
@@ -32,7 +32,7 @@ export const getArea = createAction(
 
 export const getAreaSuccess = createAction(
   '[Area] GET getArea Success',
-  props<{ area_id: number; response: Response<DataRspGetAreas> }>()
+  props<{ area_id: number; response: ResponseItems<Area[]> }>()
 );
 
 // GET AREA

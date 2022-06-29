@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {
   Response,
+  ResponseItems,
   RequestEditArea,
   DataRspEditArea,
-  DataRspGetAllAreas4createUser,
+  Area,
 } from '@data';
-import { DataRspGetAreas } from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +18,8 @@ export class AreaService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getAreas(): Observable<Response<DataRspGetAreas>> {
-    return this.http.post<Response<DataRspGetAreas>>(
+  getAreas(): Observable<ResponseItems<Area[]>> {
+    return this.http.post<ResponseItems<Area[]>>(
       `${this.apiUrl}/configuration/area/getall`,
       {}
     );
@@ -27,16 +27,14 @@ export class AreaService {
 
   getAllProveedores4CreateUser(
     interno: boolean
-  ): Observable<Response<DataRspGetAllAreas4createUser>> {
-    return this.http.post<Response<DataRspGetAllAreas4createUser>>(
+  ): Observable<ResponseItems<Area[]>> {
+    return this.http.post<ResponseItems<Area[]>>(
       `${this.apiUrl}/usuario/area/get`,
       {
         interno,
       }
     );
   }
-
-  ////
 
   updateArea(request: RequestEditArea): Observable<Response<DataRspEditArea>> {
     return this.http.post<Response<DataRspEditArea>>(
