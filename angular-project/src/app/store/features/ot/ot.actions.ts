@@ -1,15 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
 import {
-  DataInformeAvance,
   DataRespGetContratosUser,
-  LpuInformeAvanceDetalle,
   OT,
   PMO,
   RequestGetOTs,
-  RequestSaveBorradorInformeAvance,
-  RequestSaveInformeAvance,
-  RequestSaveInformeAvanceAdmin,
   StatusResponse,
   Response,
   ResponseItems,
@@ -37,15 +32,12 @@ import {
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
   DataRespGetDetalleOT,
-  DataRespGetMotivoRechazo,
+  MotivoRechazo,
   RequestAceptarRechazarOT,
-  DataRespPosiblesTrabajadores,
+  PosibleTrabajador,
   DataRespGetCategoriaArchivo,
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
-  DetalleActa,
-  RequestSaveInformeActaGestor,
-  RequestSolicitudPagoActa,
 } from '@data';
 
 // GET OTS
@@ -426,7 +418,7 @@ export const getAllMotivoRechazoOT = createAction(
 
 export const getAllMotivoRechazoOTSuccess = createAction(
   '[OT] GET getAllMotivoRechazoOT Success',
-  props<{ response: Response<DataRespGetMotivoRechazo> }>()
+  props<{ response: ResponseItems<MotivoRechazo[]> }>()
 );
 
 export const getAllMotivoRechazoOTError = createAction(
@@ -458,7 +450,7 @@ export const getPosibleTrabajador = createAction(
 
 export const getPosibleTrabajadorSuccess = createAction(
   '[OT] GET getPosibleTrabajador Success',
-  props<{ response: Response<DataRespPosiblesTrabajadores> }>()
+  props<{ response: ResponseItems<PosibleTrabajador[]> }>()
 );
 
 export const getPosibleTrabajadorError = createAction(
@@ -999,167 +991,4 @@ export const getRegistrosLibroObraError = createAction(
 export const getDataInformeAvanceTrabajador = createAction(
   '[OT] GET data informe avance trabajador',
   props<{ ot_id: number }>()
-);
-
-export const getDataInformeAvanceTrabajadorSuccess = createAction(
-  '[OT] GET data informe avance trabajador success',
-  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
-);
-
-export const getDataInformeAvanceAdminEC = createAction(
-  '[OT] GET data informe avance Admin EC',
-  props<{ ot_id: number }>()
-);
-
-export const getDataInformeAvanceAdminECSuccess = createAction(
-  '[OT] GET data informe avance Admin EC success',
-  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
-);
-
-export const getDataInformeAvanceError = createAction(
-  '[OT] GET data informe avance error',
-  props<{ error: any }>()
-);
-
-// Save borrador informe avance
-export const saveBorradorInformeAvance = createAction(
-  '[OT] SAVE borrador informe avance',
-  props<{ request: RequestSaveBorradorInformeAvance }>()
-);
-
-export const saveBorradorInformeAvanceSuccess = createAction(
-  '[OT] SAVE borrador informe avance success',
-  props<{ ot_id: number; status: StatusResponse }>()
-);
-
-export const saveBorradorInformeAvanceError = createAction(
-  '[OT] SAVE borrador informe avance error',
-  props<{ error: any }>()
-);
-
-// Save informe avance
-export const saveInformeAvanceTrabajador = createAction(
-  '[OT] SAVE informe avance trabajador',
-  props<{ request: RequestSaveInformeAvance }>()
-);
-
-export const saveInformeAvanceTrabajadorSuccess = createAction(
-  '[OT] SAVE informe avance trabajador success',
-  props<{ ot_id: number; status: StatusResponse }>()
-);
-
-export const saveInformeAvanceAdminEC = createAction(
-  '[OT] SAVE informe avance Admin EC',
-  props<{ request: RequestSaveInformeAvanceAdmin }>()
-);
-
-export const saveInformeAvanceAdminECSuccess = createAction(
-  '[OT] SAVE informe avance Admin EC success',
-  props<{ status: StatusResponse }>()
-);
-
-export const saveInformeAvanceError = createAction(
-  '[OT] SAVE informe avance error',
-  props<{ error: any }>()
-);
-
-// Rechazar informe avance
-export const rechazarInformeAvance = createAction(
-  '[OT] rechazar informe avance',
-  props<{ informe_id: number }>()
-);
-
-export const rechazarInformeAvanceSuccess = createAction(
-  '[OT] rechazar informe avance success',
-  props<{ status: StatusResponse }>()
-);
-
-export const rechazarInformeAvanceError = createAction(
-  '[OT] rechazar informe avance error',
-  props<{ error: any }>()
-);
-
-// GET información informe acta
-export const getDataInformeActa = createAction(
-  '[OT] GET data informe acta',
-  props<{ ot_id: number }>()
-);
-
-export const getDataInformeActaSuccess = createAction(
-  '[OT] GET data informe acta success',
-  props<{ dataInformeActa: DataInformeAvance[]; status: StatusResponse }>()
-);
-
-export const getDataInformeActaError = createAction(
-  '[OT] GET data informe acta error',
-  props<{ error: any }>()
-);
-
-// SAVE informe acta
-export const saveInformeActa = createAction(
-  '[OT] SAVE informe acta',
-  props<{ request: RequestSaveInformeActaGestor }>()
-);
-
-export const saveInformeActaSuccess = createAction(
-  '[OT] SAVE informe acta success',
-  props<{ status: StatusResponse }>()
-);
-
-export const saveInformeActaError = createAction(
-  '[OT] SAVE informe acta error',
-  props<{ error: any }>()
-);
-
-// Rechazar informe acta
-export const rechazarInformeActa = createAction(
-  '[OT] rechazar informe acta',
-  props<{ informe_id: number }>()
-);
-
-export const rechazarInformeActaSuccess = createAction(
-  '[OT] rechazar informe acta success',
-  props<{ status: StatusResponse }>()
-);
-
-export const rechazarInformeActaError = createAction(
-  '[OT] rechazar informe acta error',
-  props<{ error: any }>()
-);
-
-// GET detalle acta
-export const getDetalleActaMezcla = createAction(
-  '[OT] GET detalle acta mezcla',
-  props<{ ot_id: number }>()
-);
-
-export const getDetalleActa = createAction(
-  '[OT] GET detalle acta',
-  props<{ ot_id: number }>()
-);
-
-export const getDetalleActaSuccess = createAction(
-  '[OT] GET detalle acta success',
-  props<{ dataInformeActa: DetalleActa[]; status: StatusResponse }>()
-);
-
-export const getDetalleActaError = createAction(
-  '[OT] GET detalle acta error',
-  props<{ error: any }>()
-);
-
-// SEND solicitud pago acta
-export const sendSolicitudPagoActa = createAction(
-  '[OT] Send solicitud pago acta',
-  props<{ request: RequestSolicitudPagoActa }>()
-);
-
-export const sendSolicitudPagoActaSuccess = createAction(
-  '[OT] Send solicitud pago acta success',
-  props<{ status: StatusResponse }>()
-);
-
-export const sendSolicitudPagoActaError = createAction(
-  '[OT] Send solicitud pago acta error',
-  props<{ error: any }>()
 );

@@ -1,6 +1,6 @@
 export interface Unidad {
   id: number;
-  nombre: string;
+  codigo: string;
   descripcion: string;
   estado: string;
 }

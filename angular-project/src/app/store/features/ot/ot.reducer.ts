@@ -3,7 +3,6 @@ import * as OtActions from './ot.actions';
 import copy from 'fast-copy';
 
 import {
-  DataInformeAvance,
   PMO,
   ContratosUser,
   LP,
@@ -30,7 +29,6 @@ import {
   PosibleTrabajador,
   DetalleInformeAvance,
 } from '@data';
-import { DetalleActa } from '@data/model/acta';
 
 export const otFeatureKey = 'ot';
 
@@ -91,10 +89,6 @@ export interface StateOt {
   saving: boolean;
   errorSaving: Error;
 
-  dataInformeAvanceTrabajador: DataInformeAvance[];
-  dataInformeAvanceAdminEC: DataInformeAvance[];
-  dataInformeActa: DataInformeAvance[];
-  dataSolicitudPago: DetalleActa[];
   info_ot_id: number;
 
   detalleInformeAvance: DetalleInformeAvance;
@@ -160,10 +154,6 @@ export const initialStateOt: StateOt = {
   saving: false,
   errorSaving: null,
 
-  dataInformeAvanceTrabajador: [],
-  dataInformeAvanceAdminEC: [],
-  dataInformeActa: [],
-  dataSolicitudPago: [],
   info_ot_id: null,
 
   detalleInformeAvance: null,
@@ -784,32 +774,6 @@ export const reducerOt = createReducer(
       registroslibroobras,
     })
   ),
-  on(
-    OtActions.getDataInformeAvanceTrabajadorSuccess,
-    (state, { dataInformeAvance }) => ({
-      ...state,
-      dataInformeAvanceTrabajador: dataInformeAvance,
-    })
-  ),
-  on(
-    OtActions.getDataInformeAvanceAdminECSuccess,
-    (state, { dataInformeAvance }) => ({
-      ...state,
-      dataInformeAvanceAdminEC: dataInformeAvance,
-    })
-  ),
-  on(OtActions.getDataInformeActaSuccess, (state, { dataInformeActa }) => ({
-    ...state,
-    dataInformeActa,
-  })),
-  on(OtActions.getDataInformeActa, (state, { ot_id }) => ({
-    ...state,
-    info_ot_id: ot_id,
-  })),
-  on(OtActions.getDetalleActaSuccess, (state, { dataInformeActa }) => ({
-    ...state,
-    dataSolicitudPago: dataInformeActa,
-  })),
   on(OtActions.getDetalleInformeAvance, state => {
     return {
       ...state,

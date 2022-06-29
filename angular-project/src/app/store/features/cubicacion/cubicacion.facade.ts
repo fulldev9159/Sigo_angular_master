@@ -10,9 +10,6 @@ import {
   RegionSubcontrato4Cub,
   RequestEditCubicacion,
   SubcontratosProveedor,
-  TipoLpu,
-  LpuCarrito4Cub,
-  Lpu4Cub,
   AutoSuggestItem,
   DetalleCubicacion,
   ContratosUser,
@@ -292,21 +289,6 @@ export class CubicacionFacade {
   public getSubContractedTypeServicesAction(data): void {
     this.store.dispatch(cubicacionActions.getSubContractedTypeServices(data));
   }
-
-  public getTypeServicesSelector$(): Observable<TipoLpu[]> {
-    return this.store.select(cubicacionSelectors.getSubContractedTypeServices);
-  }
-  // SUBCONTRACTTYPESERVICES
-
-  // SUBCONTRACTSERVICES
-  public getSubContractedServicesAction(data): void {
-    this.store.dispatch(cubicacionActions.getSubContractedServices(data));
-  }
-
-  public getServicesSelector$(): Observable<Lpu4Cub[]> {
-    return this.store.select(cubicacionSelectors.getSubContractedServices);
-  }
-
   public resetData(): void {
     this.store.dispatch(cubicacionActions.resetData());
   }

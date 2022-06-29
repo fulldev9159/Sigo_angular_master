@@ -12,14 +12,12 @@ import {
   Cubicacion,
   CubicacionWithLpu,
   DetalleCubicacion,
-  Lpu4Cub,
   Proveedores4Cub,
   RegionSubcontrato4Cub,
   RespDataGetDetalleCubs,
   Servicios4Cub,
   SubcontratosProveedor,
   TipoCubicacion4Cub,
-  TipoLpu,
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
 } from '@data';
@@ -49,8 +47,6 @@ export interface StateCubicacion {
   contractMarco: ContratoMarco4Cub[];
   subContractedProviders: SubcontratosProveedor[];
   subContractedRegions: RegionSubcontrato4Cub[];
-  subContractedTypeServices: TipoLpu[];
-  subContractedServices: Lpu4Cub[];
   autoSuggest: AutoSuggestItem[];
   detalleCubicacion: DetalleCubicacion[];
   saving: boolean;
@@ -78,8 +74,6 @@ export const initialStateCubicacion: StateCubicacion = {
   contractMarco: [],
   subContractedProviders: [],
   subContractedRegions: [],
-  subContractedTypeServices: [],
-  subContractedServices: [],
   autoSuggest: [],
   detalleCubicacion: [],
   saving: false,
@@ -286,21 +280,6 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.getSubContractedRegionsSuccess, (state, payload) => ({
     ...state,
     subContractedRegions: payload.regionesSubcontrato,
-  })),
-
-  on(CubicacionActions.getSubContractedTypeServices, state => state),
-  on(
-    CubicacionActions.getSubContractedTypeServicesSuccess,
-    (state, payload) => ({
-      ...state,
-      subContractedTypeServices: payload.subContractedTypeServices,
-    })
-  ),
-
-  on(CubicacionActions.getSubContractedServices, state => state),
-  on(CubicacionActions.getSubContractedServicesSuccess, (state, payload) => ({
-    ...state,
-    subContractedServices: payload.subContractedServices,
   })),
 
   on(CubicacionActions.getDetalleCubicacion, state => state),

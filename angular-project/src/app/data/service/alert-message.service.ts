@@ -43,21 +43,6 @@ export class AlertMessageActions {
       'Cubicación actualizada exitosamente';
     this.msgOK[ca.deleteCubicacionSuccess.type] =
       'Cubicación eliminada exitosamente';
-    this.msgOK[otActions.saveBorradorInformeAvanceSuccess.type] =
-      'Borrador guardado con éxito';
-    this.msgOK[otActions.saveInformeAvanceTrabajadorSuccess.type] =
-      'Informe enviado con éxito';
-    this.msgOK[otActions.saveInformeAvanceAdminECSuccess.type] =
-      'Informe enviado con éxito';
-    this.msgOK[otActions.rechazarInformeAvanceSuccess.type] =
-      'Informe rechazado con éxito';
-    this.msgOK[otActions.saveInformeActaSuccess.type] =
-      'El acta fue enviada correctamente';
-    this.msgOK[otActions.rechazarInformeActaSuccess.type] =
-      'El acta fue rechazada correctamente';
-    this.msgOK[otActions.sendSolicitudPagoActaSuccess.type] =
-      'La solicitud de pago a sido enviada';
-
     // errores de negocio
     this.msgNegocio[authActions.loginSuccess.type] =
       'Usuario/Password incorrecto';
@@ -67,8 +52,6 @@ export class AlertMessageActions {
     this.msgNegocio[ca.getProveedores4CubSuccess.type] =
       'No existen proveedores para el contrato seleccionado';
     this.msgNegocio[ca.getSubContractedRegionsSuccess.type] =
-      'No existen regiones para el proveedor seleccionado';
-    this.msgNegocio[ca.getSubContractedServicesSuccess.type] =
       'No existen LPUs para el tipo seleccionado';
     this.msgNegocio[ca.createCubSuccess.type] =
       'No se pudo crear la cubicación';
@@ -76,19 +59,11 @@ export class AlertMessageActions {
     //   'No existen sugerencias de nombre';
     this.msgNegocio[ca.getDetalleCubicacionSuccess.type] =
       'No posee detalle de cubicación';
-    this.msgNegocio[otActions.getDataInformeAvanceTrabajadorSuccess.type] =
-      'No posee información de informe de avance';
-    this.msgNegocio[otActions.getDataInformeAvanceAdminECSuccess.type] =
-      'No posee información de informe de avance';
-    this.msgNegocio[otActions.getDataInformeActaSuccess.type] =
-      'El acta no posee información';
     // this.msgNegocio[otActions.getPlansSuccess.type] =
     //   'No existen planes de proyectos';
     // this.msgNegocio[otActions.getSiteSuccess.type] =
     //   'No existen sitios para el proyecto escogido';
     this.msgNegocio[otActions.getPMOSuccess.type] = 'No existen pmos';
-    this.msgNegocio[otActions.getDetalleActaSuccess.type] =
-      'No existen valores para el acta';
     this.msgNegocio[otActions.updateDetalleInformeAvanceSuccess.type] =
       'Borrador actualizado';
     this.msgNegocio[otActions.sendDetalleInformeAvanceSuccess.type] =
@@ -117,28 +92,12 @@ export class AlertMessageActions {
       'No se pudo obtener obtener el detalle de la cubicación';
     this.msgErr[ca.deleteCubicacionError.type] =
       'No se pudo eliminar la cubicación';
-    this.msgErr[otActions.saveBorradorInformeAvanceError.type] =
-      'No se pudo guardar borrador';
-    this.msgErr[otActions.saveInformeAvanceError.type] =
-      'No se pudo enviar informe de avance';
-    this.msgErr[otActions.getDataInformeAvanceError.type] =
-      'No se pudo obtener datos del informe de avance';
-    this.msgErr[otActions.rechazarInformeAvanceError.type] =
-      'Falló la ejecución del rechazo';
-    this.msgErr[otActions.getDataInformeActaError.type] =
-      'No se pudo obtener la información del acta';
-    this.msgErr[otActions.saveInformeActaError.type] =
-      'No se pudo enviar el acta';
-    this.msgErr[otActions.rechazarInformeActaError.type] =
-      'Falló la ejecución del rechazo';
     // msg[otActions.inicializarInformeAvanceError.type] =
     //   'Falló la inicialización del informe';
     // this.msgErr[otActions.getPlansError.type] = 'No se pudo obtener los planes';
     // this.msgErr[otActions.getOtsError.type] = 'Falló la obtención de OTs';
     // this.msgErr[otActions.getSiteError.type] = 'Falló la obtención de Sitios';
     this.msgErr[otActions.getPmoError.type] = 'Falló la obtención de PMOs';
-    this.msgErr[otActions.getDetalleActaError.type] =
-      'Falló la obtención de información del acta';
     this.msgErr[otActions.updateDetalleInformeAvanceError.type] =
       'Fallo la actualización del borrador';
   }

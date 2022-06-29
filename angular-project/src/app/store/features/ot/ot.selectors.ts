@@ -183,29 +183,9 @@ export const getSaveOTError = createSelector(
 //   (state: fromOt.StateOt) => state.registroslibroobras
 // );
 
-export const getDataInformeAvanceTrabajador = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.dataInformeAvanceTrabajador
-);
-
-export const getDataInformeAvanceAdminEC = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.dataInformeAvanceAdminEC
-);
-
-export const getDataInformeActa = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.dataInformeActa
-);
-
 export const getInfoOtId = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.info_ot_id
-);
-
-export const getDataSolicitudPago = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.dataSolicitudPago
 );
 
 export const getDetalleInformeAvance = createSelector(

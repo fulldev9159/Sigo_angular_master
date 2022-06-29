@@ -25,7 +25,6 @@ export class CubicacionEffects {
     private proveedorService: Service.ProveedorService,
     private regionService: Service.RegionService,
     private messageService: Service.NotifyAfter,
-    private lpuService: Service.LpusService,
     private alertMessageAction: Service.AlertMessageActions
   ) {}
 
@@ -412,54 +411,6 @@ export class CubicacionEffects {
             )
           )
         )
-      )
-    )
-  );
-
-  getTipoSubcontrato$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getSubContractedTypeServices),
-      concatMap(({ subcontrato_id, region_id }) =>
-        this.lpuService.getTiposLpu(subcontrato_id, region_id).pipe(
-          map(({ subContractedTypeServices, status }) =>
-            cubActions.getSubContractedTypeServicesSuccess({
-              subContractedTypeServices,
-              status,
-            })
-          ),
-          catchError(error =>
-            of(
-              cubActions.getSubContractedTypeServicesError({
-                error,
-              })
-            )
-          )
-        )
-      )
-    )
-  );
-
-  getServiciosSubcontrato$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cubActions.getSubContractedServices),
-      concatMap(({ subcontrato_id, region_id, tipo_servicio_id }) =>
-        this.lpuService
-          .getLpus4Cub(subcontrato_id, region_id, tipo_servicio_id)
-          .pipe(
-            map(({ subContractedServices, status }) =>
-              cubActions.getSubContractedServicesSuccess({
-                subContractedServices,
-                status,
-              })
-            ),
-            catchError(error =>
-              of(
-                cubActions.getSubContractedServicesError({
-                  error,
-                })
-              )
-            )
-          )
       )
     )
   );

@@ -39,9 +39,9 @@ import {
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
   DataRespGetDetalleOT,
-  DataRespGetMotivoRechazo,
+  MotivoRechazo,
   RequestAceptarRechazarOT,
-  DataRespPosiblesTrabajadores,
+  PosibleTrabajador,
   DetalleInformeAvance,
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
@@ -194,8 +194,8 @@ export class OTService {
   // GET ALL MOTIVO RECHAZO OT
   getAllMotivoRechazoOT(
     tipo: string
-  ): Observable<Response<DataRespGetMotivoRechazo>> {
-    return this.http.post<Response<DataRespGetMotivoRechazo>>(
+  ): Observable<ResponseItems<MotivoRechazo[]>> {
+    return this.http.post<ResponseItems<MotivoRechazo[]>>(
       `${this.apiUrl}/configuration/causas_rechazo_tipo/get`,
       { tipo }
     );
@@ -214,8 +214,8 @@ export class OTService {
   // POSIBLE TRABAJADOR
   getPosibleTrabajador(
     ot_id: number
-  ): Observable<Response<DataRespPosiblesTrabajadores>> {
-    return this.http.post<Response<DataRespPosiblesTrabajadores>>(
+  ): Observable<ResponseItems<PosibleTrabajador[]>> {
+    return this.http.post<ResponseItems<PosibleTrabajador[]>>(
       `${this.apiUrl}/ot/posibles_trabajadores/get`,
       { ot_id }
     );

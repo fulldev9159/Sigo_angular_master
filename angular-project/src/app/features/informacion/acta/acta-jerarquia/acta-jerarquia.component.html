@@ -1,13 +1,4 @@
-<div style="padding: 8px;">
-  <!-- <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_INICIO_FLUJO'">
-    <p-message severity="info" text="El trabajador aún no finaliza el informe"></p-message>&nbsp;
-  </span>
-
-  <span *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_GENERACION_ACTA'">
-    <p-message severity="info" text="A la espera de la aprobación del administrador EC para el informe enviado por el trabajador"></p-message>&nbsp;
-  </span> -->
-
-  <!-- <ng-container *ngIf="(detalleOt$|async).tipo_subetapa_pago.slug==='OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO'"> -->
+<!-- <div style="padding: 8px;">
   <ng-container>
     <p-card>
       <p-tabView>
@@ -61,15 +52,10 @@
                       <td>{{car.lpu_codigo}}</td>
                       <td>{{car.lpu_descripcion}}</td>
                       <td></td>
-                      <!-- Cub. -->
                       <td>{{car.cantidad_cubicada}}</td>
-                      <!-- Apr. hist -->
                       <td>{{car.cantidad_aprobada_historica}}</td>
-                      <!-- Pend. -->
                       <td>{{car.cantidad_pendiente}}</td>
-                      <!-- inf. -->
                       <td>{{car.cantidad_informada}}</td>
-                      <!-- Apr. -->
                       <td>
 
                       </td>
@@ -170,7 +156,6 @@
         <br>
       </div>
       <ng-template pTemplate="footer">
-        <!-- <button class="btn" (click)="rechazarActa()"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Rechazar</button> -->
         <button class="btn btn-primary" (click)="sendActaConfirmacion()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Aceptar solicitud de pago</button>
       </ng-template>
     </p-card>
@@ -238,4 +223,4 @@
     <button class="btn" (click)="DisplayConfirmacionModal=false"><em class="pi pi-times-circle mr-1" id="guardar-ot"></em>Cancelar</button>
     <button class="btn btn-primary" (click)="sendInformeActa()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, acptar solicitud de pago</button>
   </ng-container>
-</app-modal>
+</app-modal> -->

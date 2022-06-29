@@ -7,8 +7,6 @@ import {
   Proveedor,
   SubcontratosProveedor,
   RegionSubcontrato4Cub,
-  TipoLpu,
-  Lpu4Cub,
   StatusResponse,
   AutoSuggestItem,
   DetalleCubicacion,
@@ -394,13 +392,7 @@ export const getSubContractedTypeServices = createAction(
   '[SubContractedTypeServices Get] GET Data',
   props<{ subcontrato_id: number[]; region_id: number }>()
 );
-export const getSubContractedTypeServicesSuccess = createAction(
-  '[SubContractedTypeServices Get] GET Data Success',
-  props<{
-    subContractedTypeServices: TipoLpu[];
-    status: StatusResponse;
-  }>()
-);
+
 export const getSubContractedTypeServicesError = createAction(
   '[SubContractedTypeServices Get] GET Data Error',
   props<{ error: any }>()
@@ -416,13 +408,7 @@ export const getSubContractedServices = createAction(
     tipo_servicio_id: number;
   }>()
 );
-export const getSubContractedServicesSuccess = createAction(
-  '[SubContractedServices Get] GET Data Success',
-  props<{
-    subContractedServices: Lpu4Cub[];
-    status: StatusResponse;
-  }>()
-);
+
 export const getSubContractedServicesError = createAction(
   '[SubContractedServices Get] GET Data Error',
   props<{ error: any }>()

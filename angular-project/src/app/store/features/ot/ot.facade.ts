@@ -6,13 +6,8 @@ import * as otSelectors from './ot.selectors';
 import * as Data from '@data';
 import {
   ContratosUser,
-  DataInformeAvance,
-  LpuInformeAvanceDetalle,
   PMO,
   RequestGetOTs,
-  RequestSaveBorradorInformeAvance,
-  RequestSaveInformeAvance,
-  RequestSaveInformeAvanceAdmin,
   LP,
   PEP2,
   OPEX,
@@ -42,12 +37,6 @@ import {
   DetalleInformeAvance,
   ReqCreateRegistroLibroObra,
 } from '@data';
-import {
-  DetalleActa,
-  RequestSaveInformeActaGestor,
-  RequestSolicitudPagoActa,
-} from '@data/model/acta';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -608,72 +597,4 @@ export class OtFacade {
   // public inicializarInformeAvanceTrabajador(ot_id: number): void {
   //   this.store.dispatch(otActions.inicializarInformeAvance({ ot_id }));
   // }
-
-  public getDataInformeAvanceTrabajador(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
-  }
-  public getDataInformeAvanceAdminEC(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeAvanceAdminEC({ ot_id }));
-  }
-
-  public getDataInformeAvanceTrabajador$(): Observable<DataInformeAvance[]> {
-    return this.store.select(otSelectors.getDataInformeAvanceTrabajador);
-  }
-  public getDataInformeAvanceAdminEC$(): Observable<DataInformeAvance[]> {
-    return this.store.select(otSelectors.getDataInformeAvanceAdminEC);
-  }
-
-  public saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): void {
-    this.store.dispatch(otActions.saveInformeAvanceTrabajador({ request }));
-  }
-  public saveInformeAvanceAdminEC(
-    request: RequestSaveInformeAvanceAdmin
-  ): void {
-    this.store.dispatch(otActions.saveInformeAvanceAdminEC({ request }));
-  }
-
-  public saveBorradorInformeAvance(
-    request: RequestSaveBorradorInformeAvance
-  ): void {
-    this.store.dispatch(otActions.saveBorradorInformeAvance({ request }));
-  }
-
-  public rechazarInformeAvance(informe_id: number): void {
-    this.store.dispatch(otActions.rechazarInformeAvance({ informe_id }));
-  }
-
-  public getDataInformeActa(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeActa({ ot_id }));
-  }
-
-  public getDataInformeActa$(): Observable<DataInformeAvance[]> {
-    return this.store.select(otSelectors.getDataInformeActa);
-  }
-
-  public saveInformeActa(request: RequestSaveInformeActaGestor): void {
-    this.store.dispatch(otActions.saveInformeActa({ request }));
-  }
-
-  public rechazarInformeActa(informe_id: number): void {
-    this.store.dispatch(otActions.rechazarInformeActa({ informe_id }));
-  }
-
-  public getInfoOtId$(): Observable<number> {
-    return this.store.select(otSelectors.getInfoOtId);
-  }
-
-  public getDetalleActaMezcla(ot_id: number): void {
-    this.store.dispatch(otActions.getDetalleActaMezcla({ ot_id }));
-  }
-
-  public getDataSolicitudPago(ot_id: number): void {
-    this.store.dispatch(otActions.getDetalleActa({ ot_id }));
-  }
-
-  public getDataSolicitudPago$(): Observable<DetalleActa[]> {
-    return this.store.select(otSelectors.getDataSolicitudPago);
-  }
-  public sendSolicitudPagoActa(request: RequestSolicitudPagoActa): void {
-    this.store.dispatch(otActions.sendSolicitudPagoActa({ request }));
-  }
 }

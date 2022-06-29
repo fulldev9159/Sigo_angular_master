@@ -17,13 +17,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
-import {
-  DataInformeAvance,
-  DataRespGetDetalleOT,
-  DetalleCubicacion,
-  LpuInformeAvanceDetalle,
-  RequestSaveInformeAvanceAdmin,
-} from '@data';
+import { DataRespGetDetalleOT, DetalleCubicacion } from '@data';
 import { withLatestFrom } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
@@ -36,7 +30,7 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   loginAuth$: Observable<any>;
   detalleOt$: Observable<DataRespGetDetalleOT>;
-  dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
+  // dataInformeAvance$: Observable<DataInformeAvance[]> = of([]);
   form: FormGroup = new FormGroup({
     table: new FormArray([]),
   });
@@ -159,32 +153,32 @@ export class InformeAdmincontratoComponent implements OnInit, OnDestroy {
     this.DisplayConfirmacionModal = true;
   }
 
-  sendInforme(): void {
-    // const index = 'table';
-    // (this.form.controls[index] as FormArray).controls[0].disable();
-    // (this.form.controls[index] as FormArray).controls[1].disable();
+  // sendInforme(): void {
+  //   // const index = 'table';
+  //   // (this.form.controls[index] as FormArray).controls[0].disable();
+  //   // (this.form.controls[index] as FormArray).controls[1].disable();
 
-    this.waitAP = true;
-    this.DisplayConfirmacionModal = false;
+  //   this.waitAP = true;
+  //   this.DisplayConfirmacionModal = false;
 
-    const lpus: LpuInformeAvanceDetalle[] = (
-      this.form.get('table') as FormArray
-    ).value.map(f => {
-      return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
-    });
+  //   const lpus: LpuInformeAvanceDetalle[] = (
+  //     this.form.get('table') as FormArray
+  //   ).value.map(f => {
+  //     return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
+  //   });
 
-    const request: RequestSaveInformeAvanceAdmin = {
-      informe_id: this.informe_id,
-      observacion: null,
-      valores_detalles: lpus,
-    };
-    console.log(request);
-    this.otFacade.saveInformeAvanceAdminEC(request);
-  }
+  //   const request: RequestSaveInformeAvanceAdmin = {
+  //     informe_id: this.informe_id,
+  //     observacion: null,
+  //     valores_detalles: lpus,
+  //   };
+  //   console.log(request);
+  //   this.otFacade.saveInformeAvanceAdminEC(request);
+  // }
 
-  rechazarInforme(): void {
-    this.otFacade.rechazarInformeAvance(1);
-  }
+  // rechazarInforme(): void {
+  //   this.otFacade.rechazarInformeAvance(1);
+  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

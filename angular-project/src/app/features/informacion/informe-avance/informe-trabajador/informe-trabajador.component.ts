@@ -10,15 +10,7 @@ import {
 } from '@angular/forms';
 import { Subscription, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  DataInformeAvance,
-  DataRespGetDetalleOT,
-  DetalleCubicacion,
-  LpuInformeAvanceDetalle,
-  RequestSaveBorradorInformeAvance,
-  RequestSaveInformeAvance,
-  DetalleInformeAvance,
-} from '@data';
+import { DetalleInformeAvance } from '@data';
 //// import { ActivatedRoute } from '@angular/router';
 
 @Component({
