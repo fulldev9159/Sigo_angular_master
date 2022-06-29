@@ -229,23 +229,6 @@ export interface RequestAceptarRechazarOT {
 // tslint:disable-next-line
 export interface PosibleTrabajador extends IdNombreType {}
 
-// LIBRO DE OBRAS
-export interface ReqCreateRegistroLibroObra {
-  ot_id: number;
-  usuario_id: number;
-  observaciones: string;
-  archivos?: number[];
-}
-
-// ARCHIVO
-export interface DataRespSubirArchivo {
-  repositorio_archivos_ids: number[];
-}
-
-export interface DataRespGetLibroDeObras {
-  items: any[];
-}
-
 // ////
 interface FieldOrder {
   ot_id: string;

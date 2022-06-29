@@ -768,13 +768,6 @@ export const reducerOt = createReducer(
     saving: false,
     errorSaving: error,
   })),
-  on(
-    OtActions.getRegistrosLibroObraSuccess,
-    (state, { registroslibroobras }) => ({
-      ...state,
-      registroslibroobras,
-    })
-  ),
   on(OtActions.getDetalleInformeAvance, state => {
     return {
       ...state,

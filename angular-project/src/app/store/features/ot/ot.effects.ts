@@ -1293,18 +1293,6 @@ export class OtEffects {
     { dispatch: false }
   );
 
-  registrarLibroObras$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.registrarLibroObra),
-      concatMap(({ registro }) =>
-        this.otService.registrarLibroObra(registro).pipe(
-          mapTo(otActions.registrarLibroObraSuccess()),
-          catchError(error => of(otActions.registrarLibroObraError({ error })))
-        )
-      )
-    )
-  );
-
   registrarLibroObrasSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -1332,24 +1320,6 @@ export class OtEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  getRegistrarLibroObras$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getRegistrosLibroObra),
-      concatMap(({ ot_id }) =>
-        this.otService.getRegistrosLibroObra(ot_id).pipe(
-          map((registroslibroobras: Data.GetLibroObrasResponse) =>
-            otActions.getRegistrosLibroObraSuccess({
-              registroslibroobras: registroslibroobras.data.items,
-            })
-          ),
-          catchError(error =>
-            of(otActions.getRegistrosLibroObraError({ error }))
-          )
-        )
-      )
-    )
   );
 
   getRegistrarLibroObrasError$ = createEffect(

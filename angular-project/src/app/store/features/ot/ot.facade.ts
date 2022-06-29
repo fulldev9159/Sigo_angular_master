@@ -573,11 +573,6 @@ export class OtFacade {
     this.store.dispatch(otActions.finalizeOT({ otID }));
   }
 
-  // Libro Obras
-  public registrarLibroObras(registro: Data.RegistroLibroObraRequest): void {
-    this.store.dispatch(otActions.registrarLibroObra({ registro }));
-  }
-
   public getRegistrosLibroObras(ot_id: number): void {
     this.store.dispatch(otActions.getRegistrosLibroObra({ ot_id }));
   }

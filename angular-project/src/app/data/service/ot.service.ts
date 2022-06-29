@@ -513,32 +513,4 @@ export class OTService {
       }
     );
   }
-
-  registrarLibroObra(registro: Data.RegistroLibroObraRequest): Observable<any> {
-    const formData = new FormData();
-    formData.append('ot_id', registro.ot_id.toString());
-    formData.append('comment', registro.observaciones);
-    if (registro.files && registro.files.length > 0) {
-      for (const file of registro.files) {
-        formData.append('file', file, file.name);
-      }
-    }
-    console.log('FormData', formData);
-    return this.http.post<any>(`${this.apiUrl}/ot/libro_obra/upload`, formData);
-  }
-
-  getRegistrosLibroObra(ot_id: number): Observable<Data.GetLibroObrasResponse> {
-    console.log('Registros del libro de obra');
-    return this.http.post<Data.GetLibroObrasResponse>(
-      `${this.apiUrl}/ot/libro_obra/get`,
-      {
-        pagination: {
-          page: 1,
-          items_per_page: 100,
-          field_order: [{ created_at: 'DESC' }],
-        },
-        ot_id,
-      }
-    );
-  }
 }

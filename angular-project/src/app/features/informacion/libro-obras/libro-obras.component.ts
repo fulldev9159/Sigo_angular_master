@@ -15,7 +15,7 @@ interface Icon {
 export class LibroObrasComponent implements OnInit, OnDestroy {
   apiUrl = '';
   subscription: Subscription = new Subscription();
-  registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;
+  // registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;
   icons: Icon[] = [];
   constructor(
     @Inject('environment') environment,

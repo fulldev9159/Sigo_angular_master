@@ -940,12 +940,6 @@ export const finalizeOTError = createAction(
   props<{ error: any }>()
 );
 
-// Registrar en el libro de obras
-export const registrarLibroObra = createAction(
-  '[OT] Registrar en el libro de obras',
-  props<{ registro: Data.RegistroLibroObraRequest }>()
-);
-
 export const registrarLibroObraSuccess = createAction(
   '[OT] Registrar en el libro de obras success'
 );
@@ -959,11 +953,6 @@ export const registrarLibroObraError = createAction(
 export const getRegistrosLibroObra = createAction(
   '[OT] get registros libro de obra',
   props<{ ot_id: number }>()
-);
-
-export const getRegistrosLibroObraSuccess = createAction(
-  '[OT] get registros libro de obra success',
-  props<{ registroslibroobras: Data.RegistroLibroObra[] }>()
 );
 
 export const getRegistrosLibroObraError = createAction(
