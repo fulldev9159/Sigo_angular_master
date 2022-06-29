@@ -226,6 +226,7 @@ export interface RequestAceptarRechazarOT {
 }
 
 // GET POSIBLE SUPERVISOR DE TRABAJOS
+// tslint:disable-next-line
 export interface PosibleTrabajador extends IdNombreType {}
 
 // CATEGORIAS ARCHIVO

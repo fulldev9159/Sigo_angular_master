@@ -5,4 +5,5 @@ export interface ModelOficinaCentral {
   idafac: string;
 }
 
+// tslint:disable-next-line
 export interface OficinaCentral extends ModelOficinaCentral {}

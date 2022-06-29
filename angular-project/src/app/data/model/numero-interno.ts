@@ -8,8 +8,7 @@ export interface NumeroInterno {
   tipo_numero_interno_id: number;
 }
 
-// FIJO
-// NUMERO INTERNO
+// tslint:disable-next-line
 export interface TipoNumeroInterno extends IdNombreType {}
 
 // NUMERO INTERNO HAS OT

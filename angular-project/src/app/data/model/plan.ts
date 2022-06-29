@@ -5,4 +5,5 @@ export interface ModelPlan {
   created_at: Date;
 }
 
+// tslint:disable-next-line
 export interface PlanDeProyecto extends ModelPlan {}
