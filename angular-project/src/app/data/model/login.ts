@@ -23,7 +23,7 @@ export interface PerfilesUser {
   created_at: Date;
   id: number;
   model_perfil_id: ModelPerfil;
-  model_usuario_id: ModelUsuario;
+  model_usuario_id: ModelUsuarioLogin;
   model_usuario_orig: ModelUsuarioOrigen;
 
   model_superior_proxy_id: ModelSuperir;
@@ -53,7 +53,7 @@ export interface ModelPerfil {
 //   nombre: string;
 // }
 
-export interface ModelUsuario {
+export interface ModelUsuarioLogin {
   apellidos: string;
   area_id: number;
   celular: string;
@@ -73,7 +73,7 @@ export interface ModelUsuario {
 export interface ModelSuperir {
   created_at: Date;
   id: 17;
-  model_usuario_id: ModelUsuario;
+  model_usuario_id: ModelUsuarioLogin;
   perfil_id: number;
   superior_proxy_id: number;
   updated_at: Date;

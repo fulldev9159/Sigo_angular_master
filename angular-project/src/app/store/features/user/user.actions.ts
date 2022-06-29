@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
 import {
-  DataResponseGetAllUser,
   Response,
+  ResponseItems,
   DataResGetPerfilesUser,
   DataRspGetAllPerfiles,
   RequestAgregarPerfilUsusario,
@@ -27,7 +27,7 @@ export const getAllUser = createAction('[User GetAll] GET All User');
 
 export const getAllUserSuccess = createAction(
   '[User ] GET All User Success',
-  props<{ response: Response<DataResponseGetAllUser> }>()
+  props<{ response: ResponseItems<User[]> }>()
 );
 
 export const getAllUserError = createAction(
@@ -172,7 +172,7 @@ export const SelectedUser4AddPerfil = createAction(
 
 export const SelectedUser4AddPerfilSuccess = createAction(
   '[User] SelectedUser4AddPerfil Success',
-  props<{ usuario_id: number; response: Response<DataResponseGetAllUser> }>()
+  props<{ usuario_id: number; response: ResponseItems<User[]> }>()
 );
 
 export const SelectedUser4AddPerfilError = createAction(

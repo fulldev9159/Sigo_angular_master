@@ -38,11 +38,11 @@ export interface Cubicacion {
 }
 
 export interface RespDataGetDetalleCubs {
-  data_cubicacion: DataDetalleCubicacion[];
+  data_cubicacion: DetalleCubicacion[];
   servicios: ServiciosDetalle[];
 }
 
-export interface DataDetalleCubicacion {
+export interface DetalleCubicacion {
   agencia_id: number;
   altura_desde: string;
   altura_hasta: string;

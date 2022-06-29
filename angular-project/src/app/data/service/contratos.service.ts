@@ -5,10 +5,11 @@ import { map } from 'rxjs/operators';
 import {
   ContratoMarco4Cub,
   ResponseGetContrato4Cub as ResponseGetContrato4Cub,
-  DataRspGetAllContratos,
+  ContratoMarco,
   ReqActivarContrato,
   ReqEditContrato,
   Response,
+  ResponseItems,
 } from '@data';
 
 @Injectable({
@@ -46,8 +47,8 @@ export class ContratosService {
       );
   }
 
-  getAllContratos(): Observable<Response<DataRspGetAllContratos>> {
-    return this.http.post<Response<DataRspGetAllContratos>>(
+  getAllContratos(): Observable<ResponseItems<ContratoMarco[]>> {
+    return this.http.post<ResponseItems<ContratoMarco[]>>(
       `${this.apiUrl}/configuration/contrato_marco/getall`,
       {}
     );

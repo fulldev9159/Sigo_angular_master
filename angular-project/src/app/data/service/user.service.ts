@@ -7,8 +7,8 @@ import * as Data from '@data';
 import {
   PosiblesSuperiores,
   ResponsePosiblesSuperiores,
-  DataResponseGetAllUser,
   Response,
+  ResponseItems,
   DataGetPosiblesSuperiores,
   DataRespGetContratosUser,
   DataRspAgregarPerfilUsuario,
@@ -23,6 +23,7 @@ import {
 import {
   DataRespGetPosiblesContratosUser,
   RequestUpdateUser,
+  User,
 } from '@data/model';
 
 @Injectable({
@@ -38,8 +39,8 @@ export class UserService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getAllUsers(): Observable<Response<DataResponseGetAllUser>> {
-    return this.http.post<Response<DataResponseGetAllUser>>(
+  getAllUsers(): Observable<ResponseItems<User[]>> {
+    return this.http.post<ResponseItems<User[]>>(
       `${this.apiUrl}/usuario/usuario/getall`,
       {}
     );

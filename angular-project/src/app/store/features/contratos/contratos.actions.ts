@@ -1,8 +1,9 @@
 import {
-  DataRspGetAllContratos,
+  ContratoMarco,
   ReqActivarContrato,
   ReqEditContrato,
   Response,
+  ResponseItems,
 } from '@data';
 
 import { createAction, props } from '@ngrx/store';
@@ -14,7 +15,7 @@ export const getContratos = createAction('[Contratos] GET getContratos');
 
 export const getContratosSuccess = createAction(
   '[Contratos] GET getContratos Success',
-  props<{ response: Response<DataRspGetAllContratos> }>()
+  props<{ response: ResponseItems<ContratoMarco[]> }>()
 );
 
 export const getContratosError = createAction(
@@ -33,7 +34,7 @@ export const getSingleContrato = createAction(
 
 export const getSingleContratoSuccess = createAction(
   '[Contratos] GET getSingleContrato Success',
-  props<{ contrato_id: number; response: Response<DataRspGetAllContratos> }>()
+  props<{ contrato_id: number; response: ResponseItems<ContratoMarco[]> }>()
 );
 
 // GET SINGLE CONTRATO

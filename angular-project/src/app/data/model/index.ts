@@ -17,6 +17,12 @@ export * from './informe-avance';
 export * from './sustento-financiero';
 export * from './area';
 export * from './acta';
+export * from './numero_interno';
+export * from './oficina';
+export * from './comuna';
+export * from './tipo_trabajo';
+export * from './plan';
+export * from './sitio';
 
 export interface Response<T> {
   data: T;
