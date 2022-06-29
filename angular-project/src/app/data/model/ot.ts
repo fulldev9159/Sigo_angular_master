@@ -8,6 +8,7 @@ import { ModelComuna } from './comuna';
 import { ModelTipoTrabajo } from './tipo_trabajo';
 import { ModelPlan } from './plan';
 import { ModelSitio } from './sitio';
+
 // GET OTS
 export interface RequestGetOTs {
   filtro_pestania: string;
@@ -107,11 +108,7 @@ export interface DataRespGetDetalleOT {
   usuarios_involucrados: UsuarioInvolucrado[];
 }
 
-// GET CUBS
-export interface DataRespGetCubicaciones {
-  items: Cubs4OT[];
-}
-
+// GET CUBS 4 CREATE OT
 export interface Cubs4OT {
   agencia_id: number;
   creador_usuario_nombre: string;
@@ -122,10 +119,6 @@ export interface Cubs4OT {
 }
 
 // GET PROYECTOS
-export interface DataRespGetProyectos {
-  items: Proyectos[];
-}
-
 export interface Proyectos {
   id: number;
   nombre: string;
@@ -134,10 +127,6 @@ export interface Proyectos {
 }
 
 // GET ADM CONTRATOS
-export interface DataRespGetAdminContrato {
-  items: AdminContrato4OT[];
-}
-
 export interface AdminContrato4OT {
   id: number;
   nombre: string;
@@ -145,7 +134,6 @@ export interface AdminContrato4OT {
 }
 
 // BUCLE
-
 // GET OFICINA CENTRAL
 export interface DataRespGetOficinaCentral {
   items: OficinaCentral[];

@@ -20,9 +20,8 @@ import {
   DataRespGetOPEX,
   DataRespGetSAP,
   DataRespGetCECO,
-  DataRespGetCubicaciones,
-  DataRespGetProyectos,
-  DataRespGetAdminContrato,
+  Proyectos,
+  AdminContrato4OT,
   Cubs4OT,
   DataRespGetOficinaCentral,
   DataRespGetSolicitadoPor,
@@ -38,7 +37,6 @@ import {
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
-  // DataRespGetOTs,
   DataRespGetDetalleOT,
   DataRespGetMotivoRechazo,
   RequestAceptarRechazarOT,
@@ -115,7 +113,7 @@ export const getCubicaciones4OT = createAction(
 
 export const getCubicaciones4OTSuccess = createAction(
   '[OT] GET getCubicaciones4OT Success',
-  props<{ response: Response<DataRespGetCubicaciones> }>()
+  props<{ response: ResponseItems<Cubs4OT[]> }>()
 );
 
 export const getCubicaciones4OTError = createAction(
@@ -227,7 +225,7 @@ export const getProyecto = createAction('[OT] GET getProyecto');
 
 export const getProyectoSuccess = createAction(
   '[OT] GET getProyecto Success',
-  props<{ response: Response<DataRespGetProyectos> }>()
+  props<{ response: ResponseItems<Proyectos[]> }>()
 );
 
 export const getProyectoError = createAction(
@@ -243,7 +241,7 @@ export const getAdminContrato = createAction(
 
 export const getAdminContratoSuccess = createAction(
   '[OT] GET getAdminContrato Success',
-  props<{ response: Response<DataRespGetAdminContrato> }>()
+  props<{ response: ResponseItems<AdminContrato4OT[]> }>()
 );
 
 export const getAdminContratoError = createAction(
