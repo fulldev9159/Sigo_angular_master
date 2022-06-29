@@ -28,7 +28,6 @@ export interface StateUser {
   contratosUser: ContratosUser[];
   posiblesContratosUSer: PosiblesContratosUser[];
   // contratos: Data.Contrato[];
-  alldatauser: Data.UserWithDetail;
   displayDetalleModal: boolean;
 }
 
@@ -45,7 +44,6 @@ export const initialStateUser: StateUser = {
   contratosUser: [],
   posiblesContratosUSer: [],
   // contratos: [],
-  alldatauser: null,
   displayDetalleModal: false,
 };
 

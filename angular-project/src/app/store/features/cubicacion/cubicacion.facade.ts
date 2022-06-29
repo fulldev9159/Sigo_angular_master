@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
 import {
-  ContratoMarco4Cub,
   Cubicacion,
   CubicacionWithLpu,
   RegionSubcontrato4Cub,
@@ -258,16 +257,6 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.editCubicacion({ cubicacion }));
   }
   // POST
-
-  // CONSTRACT MARCO
-  public getContractMarcoAction(): void {
-    this.store.dispatch(cubicacionActions.getContractMarco4Cub());
-  }
-
-  public getContractMarcoSelector$(): Observable<ContratoMarco4Cub[]> {
-    return this.store.select(cubicacionSelectors.getConstractMarco);
-  }
-  // CONSTRACT MARCO
 
   public getProvidersSelector$(): Observable<SubcontratosProveedor[]> {
     return this.store.select(cubicacionSelectors.getSubContractedProviders);

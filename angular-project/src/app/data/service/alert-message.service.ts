@@ -47,8 +47,6 @@ export class AlertMessageActions {
     this.msgNegocio[authActions.loginSuccess.type] =
       'Usuario/Password incorrecto';
     this.msgNegocio[ca.getCubsSuccess.type] = 'No existen cubicaciones';
-    this.msgNegocio[ca.getContractMarcoSuccess.type] =
-      'Usuario no tiene contratos asosiados';
     this.msgNegocio[ca.getProveedores4CubSuccess.type] =
       'No existen proveedores para el contrato seleccionado';
     this.msgNegocio[ca.getSubContractedRegionsSuccess.type] =
@@ -73,8 +71,6 @@ export class AlertMessageActions {
     this.msgErr[ca.getCubsError.type] = 'Error al obtener cubicaciones';
     this.msgErr[ca.getSingleCubicacionError.type] =
       'No se pudo obtener datos de la cubicación';
-    this.msgErr[ca.getContractMarcoError.type] =
-      'Error al obtener contratos para cubicar';
     this.msgErr[ca.getSubContractProvidersError.type] =
       'Error al obtener proveedores para cubicar';
     this.msgErr[ca.getSubContractedRegionsError.type] =

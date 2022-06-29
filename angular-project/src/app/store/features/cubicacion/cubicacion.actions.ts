@@ -3,7 +3,6 @@ import {
   Cubicacion,
   CubicacionWithLpu,
   RequestEditCubicacion,
-  ContratoMarco4Cub,
   Proveedor,
   SubcontratosProveedor,
   RegionSubcontrato4Cub,
@@ -333,23 +332,6 @@ export const getSingleCubicacionError = createAction(
   props<{ error: any }>()
 );
 // GET SINGLE CUBICACION DATA end
-
-// GET CONTRATO init
-export const getContractMarco4Cub = createAction(
-  '[Cubicacion Contratos Marco] GET Data'
-);
-export const getContractMarcoSuccess = createAction(
-  '[Cubicacion Contratos Marco] GET Data Success',
-  props<{
-    contratosMarcos4Cub: ContratoMarco4Cub[];
-    status: StatusResponse;
-  }>()
-);
-export const getContractMarcoError = createAction(
-  '[Cubicacion Contratos Marco] GET Data Error',
-  props<{ error: any }>()
-);
-// GET CONTRATO end
 
 // GET SUBCONTRATOS PROVEEDOR init
 // export const getProveedores4Cub = createAction(

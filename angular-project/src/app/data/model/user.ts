@@ -1,4 +1,4 @@
-import { ContratoMarco4Cub } from '@data';
+import {} from '@data';
 import { Area } from './area';
 
 export interface ModelUsuario {
@@ -250,11 +250,6 @@ export interface UsersResponse {
   };
 }
 
-export interface UserWithDetail extends User {
-  contratos_marco: ContratoMarco4Cub[];
-  perfiles: PerfilUser[];
-}
-
 // CREATE/ EDIT
 export interface CreateUserRequest {
   username: string;
@@ -298,20 +293,6 @@ export interface EditUserResponse {
 }
 
 // DETALLE USUARIO
-export interface DetalleUsuarioResponse {
-  data: DetalleUsuario;
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-
-export interface DetalleUsuario {
-  contratos_marco: ContratoMarco4Cub[];
-  perfiles: PerfilUser[];
-}
-
 // DELETE
 export interface DeleteResponse {
   data: {

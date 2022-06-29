@@ -7,7 +7,6 @@ import {
   Agencias4Cub,
   AutoSuggestItem,
   Carrito,
-  ContratoMarco4Cub,
   ContratosUser,
   Cubicacion,
   CubicacionWithLpu,
@@ -44,7 +43,6 @@ export interface StateCubicacion {
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
   cubicacionError: Error;
   selectedCubicacion: Cubicacion;
-  contractMarco: ContratoMarco4Cub[];
   subContractedProviders: SubcontratosProveedor[];
   subContractedRegions: RegionSubcontrato4Cub[];
   autoSuggest: AutoSuggestItem[];
@@ -71,7 +69,6 @@ export const initialStateCubicacion: StateCubicacion = {
   cubicacion: null,
   cubicacionError: null,
   selectedCubicacion: null,
-  contractMarco: [],
   subContractedProviders: [],
   subContractedRegions: [],
   autoSuggest: [],
@@ -263,18 +260,6 @@ export const reducerCubicacion = createReducer(
     ...state,
     cubicaciones: [...state.cubicaciones, payload.cubicacion],
   })),
-
-  on(CubicacionActions.getContractMarco4Cub, state => state),
-  on(CubicacionActions.getContractMarcoSuccess, (state, payload) => ({
-    ...state,
-    contractMarco: payload.contratosMarcos4Cub,
-  })),
-
-  // on(CubicacionActions.getProveedores4Cub, state => state),
-  // on(CubicacionActions.getProveedores4CubSuccess, (state, payload) => ({
-  //   ...state,
-  //   subContractedProviders: payload.proveedores4Cub,
-  // })),
 
   on(CubicacionActions.getSubContractedRegions, state => state),
   on(CubicacionActions.getSubContractedRegionsSuccess, (state, payload) => ({

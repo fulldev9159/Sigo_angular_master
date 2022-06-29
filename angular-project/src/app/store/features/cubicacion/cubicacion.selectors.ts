@@ -81,11 +81,6 @@ export const getCubicacionError = createSelector(
   (state: fromCubicacion.StateCubicacion) => state.cubicacionError
 );
 
-export const getConstractMarco = createSelector(
-  selectCubicacion,
-  (state: fromCubicacion.StateCubicacion) => state.contractMarco
-);
-
 export const getSubContractedProviders = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.subContractedProviders
