@@ -13,6 +13,7 @@ import {
   Sitio,
   StatusResponse,
   Response,
+  ResponseItems,
   DataRespGetPMO,
   DataRespGetLP,
   DataRespGetPEP2,
@@ -37,7 +38,7 @@ import {
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
-  DataRespGetOTs,
+  // DataRespGetOTs,
   DataRespGetDetalleOT,
   DataRespGetMotivoRechazo,
   RequestAceptarRechazarOT,
@@ -45,35 +46,32 @@ import {
   DataRespGetCategoriaArchivo,
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
-} from '@data';
-
-import {
   DetalleActa,
   RequestSaveInformeActaGestor,
   RequestSolicitudPagoActa,
-} from '@data/model/acta';
+} from '@data';
 
-export const getOts = createAction(
-  '[OT] Get Ots',
-  props<{
-    request: RequestGetOTs;
-  }>()
+// GET OTS
+export const getOTs = createAction(
+  '[OT] Get OTs',
+  props<{ request: RequestGetOTs }>()
 );
 
 export const getOtEjecucionSuccess = createAction(
-  '[OT] GET Ot Success Ejecucion',
-  props<{ response: Response<DataRespGetOTs> }>()
+  '[OT] GET OT Success Ejecucion',
+  props<{ response: ResponseItems<OT[]> }>()
 );
 
 export const getOtAbiertasSuccess = createAction(
-  '[OT] GET Ot Success Abiertas',
-  props<{ response: Response<DataRespGetOTs> }>()
+  '[OT] GET OT Success Abiertas',
+  props<{ response: ResponseItems<OT[]> }>()
 );
 
 export const getOtSuccessCerradas = createAction(
   '[Ot GetAll] GET Ot Success Cerradas',
-  props<{ response: Response<DataRespGetOTs> }>()
+  props<{ response: ResponseItems<OT[]> }>()
 );
+
 export const getOtsError = createAction(
   '[Ot GetAll] GET Ot Error',
   props<{ error: any }>()

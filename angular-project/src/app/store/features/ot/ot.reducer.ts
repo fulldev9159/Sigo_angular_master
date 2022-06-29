@@ -35,6 +35,12 @@ import { DetalleActa } from '@data/model/acta';
 export const otFeatureKey = 'ot';
 
 export interface StateOt {
+  // OTs
+  otsEjecucion: OT[];
+  itemsAbiertas: OT[];
+  itemsCerradas: OT[];
+
+  // CREATE OT
   contratosUser4OT: ContratosUser[];
   cubicaciones: Cubs4OT[];
   cubicacionSeleccionada: Cubs4OT;
@@ -78,10 +84,6 @@ export interface StateOt {
 
   selectedOT: OT;
 
-  otsEjecucion: OT[];
-  itemsAbiertas: OT[];
-  itemsCerradas: OT[];
-
   trabajadores: PosibleTrabajador[];
 
   // registroslibroobras: Data.RegistroLibroObra[];
@@ -102,6 +104,10 @@ export interface StateOt {
 }
 
 export const initialStateOt: StateOt = {
+  otsEjecucion: [],
+  itemsAbiertas: [],
+  itemsCerradas: [],
+
   contratosUser4OT: [],
   cubicaciones: [],
   cubicacionSeleccionada: null,
@@ -147,10 +153,6 @@ export const initialStateOt: StateOt = {
 
   selectedOT: null,
 
-  otsEjecucion: [],
-  itemsAbiertas: [],
-  itemsCerradas: [],
-
   trabajadores: [],
 
   // registroslibroobras: [],
@@ -172,6 +174,7 @@ export const initialStateOt: StateOt = {
 
 export const reducerOt = createReducer(
   initialStateOt,
+  // GET OTs
   on(OtActions.getOtEjecucionSuccess, (state, { response }) => ({
     ...state,
     otsEjecucion: response.data.items,

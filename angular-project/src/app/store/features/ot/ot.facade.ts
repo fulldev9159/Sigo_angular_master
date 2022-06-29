@@ -57,7 +57,7 @@ export class OtFacade {
   // GET OT
   public getOts(request: RequestGetOTs): void {
     this.store.dispatch(
-      otActions.getOts({
+      otActions.getOTs({
         request: {
           ...request,
           filtro_pestania: 'EN_EJECUCION',
@@ -65,7 +65,7 @@ export class OtFacade {
       })
     );
     this.store.dispatch(
-      otActions.getOts({
+      otActions.getOTs({
         request: {
           ...request,
           filtro_pestania: 'ABIERTAS',
@@ -73,7 +73,7 @@ export class OtFacade {
       })
     );
     this.store.dispatch(
-      otActions.getOts({
+      otActions.getOTs({
         request: {
           ...request,
           filtro_pestania: 'CERRADAS',

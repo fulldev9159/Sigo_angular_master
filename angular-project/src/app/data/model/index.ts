@@ -16,9 +16,17 @@ export * from './lpus';
 export * from './informe-avance';
 export * from './sustento-financiero';
 export * from './area';
+export * from './acta';
 
 export interface Response<T> {
   data: T;
+  status: StatusResponse;
+}
+
+export interface ResponseItems<T> {
+  data: {
+    items: T;
+  };
   status: StatusResponse;
 }
 

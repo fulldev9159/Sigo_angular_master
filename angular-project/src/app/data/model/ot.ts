@@ -6,9 +6,6 @@ export interface RequestGetOTs {
   filtro_propietario: string;
   filtro_tipo: number;
 }
-export interface DataRespGetOTs {
-  items: OT[];
-}
 
 export interface OT {
   contrato_marco_nombre: string;

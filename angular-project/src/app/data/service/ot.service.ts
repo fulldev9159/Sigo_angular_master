@@ -21,6 +21,7 @@ import {
   ApprovalPagoOTResponse,
   RequestGetOTs,
   Response,
+  ResponseItems,
   DataRespGetCubicaciones,
   DataRespGetProyectos,
   DataRespGetAdminContrato,
@@ -38,7 +39,7 @@ import {
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
-  DataRespGetOTs,
+  // DataRespGetOTs,
   DataRespGetDetalleOT,
   DataRespGetMotivoRechazo,
   RequestAceptarRechazarOT,
@@ -63,8 +64,8 @@ export class OTService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getOTs(request: RequestGetOTs): Observable<Response<DataRespGetOTs>> {
-    return this.http.post<Response<DataRespGetOTs>>(
+  getOTs(request: RequestGetOTs): Observable<ResponseItems<OT[]>> {
+    return this.http.post<ResponseItems<OT[]>>(
       `${this.apiUrl}/ot/bandeja/get`,
       request
     );

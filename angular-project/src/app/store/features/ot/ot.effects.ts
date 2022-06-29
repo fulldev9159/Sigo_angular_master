@@ -51,7 +51,7 @@ export class OtEffects {
 
   getOTs$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(otActions.getOts),
+      ofType(otActions.getOTs),
       concatMap(({ request }) =>
         this.otService.getOTs(request).pipe(
           map(response => {
