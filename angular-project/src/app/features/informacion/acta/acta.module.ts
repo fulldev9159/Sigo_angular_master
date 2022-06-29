@@ -9,6 +9,7 @@ import { ActaGestorComponent } from './acta-gestor/acta-gestor.component';
 import { ActaJerarquiaComponent } from './acta-jerarquia/acta-jerarquia.component';
 
 import { ActaTotalFormComponent } from './component/acta-total-form/acta-total-form.component';
+import { ActaPorcentajeFormComponent } from './component/acta-porcentaje-form/acta-porcentaje-form.component';
 import { ActaServicioFormComponent } from './component/acta-servicio-form/acta-servicio-form.component';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ActaServicioFormComponent } from './component/acta-servicio-form/acta-s
     ActaGestorComponent,
     ActaJerarquiaComponent,
     ActaTotalFormComponent,
+    ActaPorcentajeFormComponent,
     ActaServicioFormComponent,
   ],
   imports: [

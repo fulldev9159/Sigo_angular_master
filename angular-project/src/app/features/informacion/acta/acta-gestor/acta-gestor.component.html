@@ -19,13 +19,13 @@
       <form [formGroup]="form">
         <ng-container [ngSwitch]="form.get('tipo_pago').value">
           <ng-container *ngSwitchCase="'TOTAL'">
-            <app-acta-total-form [servicios]="form.get('total').get('servicios')" [unidadesObra]="form.get('total').get('unidades_obra')"></app-acta-total-form>
+            <app-acta-total-form [form]="form.get('total_porcentaje')"></app-acta-total-form>
           </ng-container>
           <ng-container *ngSwitchCase="'PORCENTAJE'">
-            <app-acta-total-form [servicios]="form.get('total').get('servicios')" [unidadesObra]="form.get('total').get('unidades_obra')"></app-acta-total-form>
+            <app-acta-porcentaje-form [porcentaje]="form.get('porcentaje')" [form]="form.get('total_porcentaje')"></app-acta-porcentaje-form>
           </ng-container>
           <ng-container *ngSwitchCase="'POR_SERVICIO'">
-            <app-acta-servicio-form [servicios]="form.get('por_servicio').get('servicios')" [unidadesObra]="form.get('por_servicio').get('unidades_obra')"></app-acta-servicio-form>
+            <app-acta-servicio-form [form]="form.get('por_servicio')"></app-acta-servicio-form>
           </ng-container>
           <!--<ng-container *ngSwitchDefault>...</ng-container>-->
         </ng-container>

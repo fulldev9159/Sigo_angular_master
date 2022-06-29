@@ -1,5 +1,5 @@
 <div class="row">
-  <ng-container *ngIf="form">
+  <ng-container *ngIf="form && porcentaje">
     <ng-container *ngIf="form.get('servicios') as servicios">
       <div class="col-xs-6 col-md-6">
         <app-card [classCardHeader]="'bg-info'">
@@ -8,28 +8,23 @@
             <table style="width:100%">
               <thead>
                 <tr>
-                  <th></th>
-                  <th></th>
-                  <th colspan="2">Cantidad</th>
+                  <th>Servicios</th>
+                  <th colspan="3">Cantidad</th>
                 </tr>
                 <tr>
-                  <th></th>
                   <th>Descripción</th>
                   <th style="text-align: right">Total</th>
-                  <th>A Enviar</th>
+                  <th style="text-align: right">Enviada</th>
+                  <th style="text-align: right">A Enviar</th>
                 </tr>
               </thead>
               <tbody>
                 <ng-container *ngFor="let servicio of servicios.controls">
                   <tr>
-                    <td>
-                      <input type="checkbox" [formControl]="servicio.get('selected')">
-                    </td>
                     <td>{{ servicio.get('descripcion').value }}</td>
                     <td style="text-align: right">{{ servicio.get('cantidad_total').value }}</td>
-                    <td>
-                      <app-input [control]="servicio.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
-                    </td>
+                    <td style="text-align: right">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_a_enviar').value }}</td>
+                    <td style="text-align: right">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
                   </tr>
                 </ng-container>
               </tbody>
@@ -47,28 +42,23 @@
             <table style="width:100%">
               <thead>
                 <tr>
-                  <th></th>
-                  <th></th>
-                  <th colspan="2">Cantidad</th>
+                  <th>Servicios</th>
+                  <th colspan="3">Cantidad</th>
                 </tr>
                 <tr>
-                  <th></th>
                   <th>Descripción</th>
                   <th style="text-align: right">Total</th>
-                  <th>A Enviar</th>
+                  <th style="text-align: right">Enviada</th>
+                  <th style="text-align: right">A Enviar</th>
                 </tr>
               </thead>
               <tbody>
                 <ng-container *ngFor="let uo of unidadesObra.controls">
                   <tr>
-                    <td>
-                      <input type="checkbox" [formControl]="uo.get('selected')">
-                    </td>
                     <td>{{ uo.get('descripcion').value }}</td>
                     <td style="text-align: right">{{ uo.get('cantidad_total').value }}</td>
-                    <td>
-                      <app-input [control]="uo.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
-                    </td>
+                    <td style="text-align: right">{{ uo.get('cantidad_total').value - uo.get('cantidad_a_enviar').value }}</td>
+                    <td style="text-align: right">{{ (uo.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
                   </tr>
                 </ng-container>
               </tbody>
@@ -77,6 +67,10 @@
         </app-card>
       </div>
     </ng-container>
+
+    <div class="col-xs-12 col-md-12">
+      <app-input [control]="porcentaje" label="Porcentaje" placeholder="Porcentaje" [errorMessageFn]="errorMessageFn"></app-input>
+    </div>
   </ng-container>
 
   <pre>{{ values | json }}</pre>

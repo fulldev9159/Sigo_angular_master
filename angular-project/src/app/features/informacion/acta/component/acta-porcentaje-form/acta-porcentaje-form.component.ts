@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
 
 interface FormValues {
   detalle: {
@@ -17,14 +17,19 @@ interface FormValues {
 }
 
 @Component({
-  selector: 'app-acta-servicio-form',
-  templateUrl: './acta-servicio-form.component.html',
-  styleUrls: ['./acta-servicio-form.component.scss'],
+  selector: 'app-acta-porcentaje-form',
+  templateUrl: './acta-porcentaje-form.component.html',
+  styleUrls: ['./acta-porcentaje-form.component.scss'],
 })
-export class ActaServicioFormComponent implements OnInit, OnDestroy {
+export class ActaPorcentajeFormComponent implements OnInit, OnDestroy {
+  @Input() porcentaje: FormControl;
   @Input() form: FormGroup;
 
   constructor() {}
+
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {}
 
   errorMessageFn(errors: AbstractControl['errors']): string {
     if (errors.required) {
@@ -44,37 +49,23 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
     return '';
   }
 
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {}
-
-  get valuesRaw(): any {
-    if (this.form) {
-      return this.form.getRawValue();
-    }
-    return null;
-  }
-
   get values(): FormValues {
-    if (this.form) {
+    if (this.form && this.porcentaje) {
+      const porcentaje = this.porcentaje.value;
       const { servicios, unidades_obra } = this.form.getRawValue();
 
       return {
         detalle: {
-          servicio: servicios
-            .filter(({ selected }) => selected)
-            .map(servicio => ({
-              rowid: +servicio.id,
-              cantidad: +servicio.cantidad_a_enviar,
-              porcentaje: 100,
-            })),
-          unidad_obra: unidades_obra
-            .filter(({ selected }) => selected)
-            .map(uo => ({
-              rowid: +uo.id,
-              cantidad: +uo.cantidad_a_enviar,
-              porcentaje: 100,
-            })),
+          servicio: servicios.map(servicio => ({
+            rowid: +servicio.id,
+            cantidad: +servicio.cantidad_a_enviar,
+            porcentaje,
+          })),
+          unidad_obra: unidades_obra.map(uo => ({
+            rowid: +uo.id,
+            cantidad: +uo.cantidad_a_enviar,
+            porcentaje,
+          })),
         },
       };
     }
