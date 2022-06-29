@@ -19,6 +19,7 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   tiposPago$: Observable<ActaTipoPago[]> = this.otFacade.getActaTiposPago$();
   detalleActa$: Observable<{
+    ultimo_tipo_pago: string;
     servicios: DetalleActaServicio[];
     unidades_obra: DetalleActaUob[];
   }> = this.otFacade.getDetalleActa$();
@@ -64,11 +65,11 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       combineLatest([this.tiposPago$, this.detalleActa$]).subscribe(
-        ([tiposPago, { servicios, unidades_obra }]) => {
+        ([tiposPago, { ultimo_tipo_pago, servicios, unidades_obra }]) => {
           this.setMaxPorcentage(servicios, unidades_obra);
           this.loadTotalPorcentajeForm(servicios, unidades_obra);
           this.loadServicioForm(servicios, unidades_obra);
-          this.checkAndFixTipoPago('');
+          this.checkAndFixTipoPago(ultimo_tipo_pago);
         }
       )
     );
@@ -78,6 +79,7 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       try {
         if (this.form) {
+          // Si no hay un tipo de pago anterior, habilita el combobox para seleccionar un tipo de pago
           if (tipoPago !== '' && tipoPago !== undefined && tipoPago !== null) {
             this.form.get('tipo_pago').setValue(tipoPago);
             //// this.form.get('tipo_pago').disable();

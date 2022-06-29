@@ -400,6 +400,7 @@ export class OtFacade {
 
   // GET DETALLE ACTA
   public getDetalleActa$(): Observable<{
+    ultimo_tipo_pago: string;
     servicios: DetalleActaServicio[];
     unidades_obra: DetalleActaUob[];
   }> {
@@ -428,6 +429,15 @@ export class OtFacade {
 
   public getDetalleActaUob$(): Observable<DetalleActaUob[]> {
     return this.store.select(otSelectors.getDetalleActaUob);
+  }
+
+  // GET ULTIMO TIPO PAGO ACTA
+  public getUltimoTipoPagoActaSuccess(tipoPago: string): void {
+    this.store.dispatch(otActions.getUltimoTipoPagoActaSuccess({ tipoPago }));
+  }
+
+  public getUltimoTipoPagoActa$(): Observable<string> {
+    return this.store.select(otSelectors.getUltimoTipoPagoActa);
   }
 
   // GET CATEGORIA ARCHIVO

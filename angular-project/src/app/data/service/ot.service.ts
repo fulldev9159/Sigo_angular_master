@@ -364,6 +364,23 @@ export class OTService {
     );
   }
 
+  // GET ULTIMO TIPO PAGO ACTA
+  getUltimoTipoPagoActa(ot_id: number): Observable<string> {
+    return this.http
+      .post<Response<{ tipo_pago: string }>>(
+        `${this.apiUrl}/ot/acta/detalle/get_last`,
+        {
+          ot_id,
+        }
+      )
+      .pipe(
+        map(
+          (response: { data: { tipo_pago: string } }) =>
+            response?.data?.tipo_pago ?? ''
+        )
+      );
+  }
+
   // GET CATEGORIAS ARCHIVOS
   getCategoriasArchivos(): Observable<Response<DataRespGetCategoriaArchivo>> {
     return this.http.post<Response<DataRespGetCategoriaArchivo>>(

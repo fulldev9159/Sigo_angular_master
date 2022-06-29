@@ -601,6 +601,12 @@ export const getDetalleUobPorActaSuccess = createAction(
   props<{ response: Response<{ items: DetalleActaUob[] }> }>()
 );
 
+//  GET ULTIMO TIPO PAGO ACTA
+export const getUltimoTipoPagoActaSuccess = createAction(
+  '[OT] GET getUltimoTipoPagoActa Success',
+  props<{ tipoPago: string }>()
+);
+
 //  GET CATEGORIAS DE ARCHIVOS
 export const getCategoriasArchivos = createAction(
   '[OT] GET getCategoriasArchivos'

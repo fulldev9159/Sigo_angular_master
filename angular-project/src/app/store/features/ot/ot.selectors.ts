@@ -243,10 +243,17 @@ export const getDetalleActaUob = createSelector(
   (state: fromOt.StateOt) => state.detalleActaUob
 );
 
+export const getUltimoTipoPagoActa = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.ultimoTipoPagoActa
+);
+
 export const getDetalleActa = createSelector(
+  getUltimoTipoPagoActa,
   getDetalleActaServicio,
   getDetalleActaUob,
-  (servicios, unidades_obra) => ({
+  (ultimo_tipo_pago, servicios, unidades_obra) => ({
+    ultimo_tipo_pago,
     servicios,
     unidades_obra,
   })

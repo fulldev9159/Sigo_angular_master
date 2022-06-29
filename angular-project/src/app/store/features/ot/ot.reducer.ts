@@ -106,6 +106,7 @@ export interface StateOt {
   actaTiposPago: ActaTipoPago[];
   detalleActaServicio: DetalleActaServicio[];
   detalleActaUob: DetalleActaUob[];
+  ultimoTipoPagoActa: string;
 }
 
 export const initialStateOt: StateOt = {
@@ -179,6 +180,7 @@ export const initialStateOt: StateOt = {
   actaTiposPago: [],
   detalleActaServicio: [],
   detalleActaUob: [],
+  ultimoTipoPagoActa: '',
 };
 
 export const reducerOt = createReducer(
@@ -886,6 +888,12 @@ export const reducerOt = createReducer(
     return {
       ...state,
       detalleActaUob: copy(response.data.items),
+    };
+  }),
+  on(OtActions.getUltimoTipoPagoActaSuccess, (state, { tipoPago }) => {
+    return {
+      ...state,
+      ultimoTipoPagoActa: tipoPago,
     };
   })
 );
