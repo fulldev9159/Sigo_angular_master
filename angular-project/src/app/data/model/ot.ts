@@ -41,26 +41,27 @@ export interface OT {
 export interface DataRespGetDetalleOT {
   numeros_interno: NumeroInterno[]; // FIJO;
   ot: {
-    id: number; // BASE
-    nombre: string; // BASE
-    contrato_marco_id: number; // BASE
-    model_contrato_marco_id: ModelContratoMarco; // BASE
-    cubicacion_id: number; // BASE
-    model_cubicacion_id: DetalleCubicacion; // BASE
-    fecha_fin: Date; // BASE
-    fecha_inicio: Date; // BASE
-    proyecto_id: number; // BASE
-    observaciones: string; // BASE
-    created_at: Date; // BASE
-    model_propietario_usuario_id: ModelUsuario; // BASE
-    model_responsable_proxy_id: ModelProxy; // BASE
-    model_tipo_estado_ot_id: { id: number; slug: string; nombre: string }; // BASE
-    model_tipo_etapa_ot_id: { id: number; slug: string; nombre: string }; // BASE
-    propietario_usuario_id: number; // BASE
-    responsable_proxy_id: number; // BASE
-    sce_session: string; // BASE
-    tipo_estado_ot_id: number; // BASE
-    tipo_etapa_ot_id: number; // BASE
+    // BASE
+    id: number;
+    nombre: string;
+    contrato_marco_id: number;
+    model_contrato_marco_id: ModelContratoMarco;
+    cubicacion_id: number;
+    model_cubicacion_id: DetalleCubicacion;
+    fecha_fin: Date;
+    fecha_inicio: Date;
+    proyecto_id: number;
+    observaciones: string;
+    created_at: Date;
+    model_propietario_usuario_id: ModelUsuario;
+    model_responsable_proxy_id: ModelProxy;
+    model_tipo_estado_ot_id: { id: number; slug: string; nombre: string };
+    model_tipo_etapa_ot_id: { id: number; slug: string; nombre: string };
+    propietario_usuario_id: number;
+    responsable_proxy_id: number;
+    sce_session: string;
+    tipo_estado_ot_id: number;
+    tipo_etapa_ot_id: number;
     aceptacion_inicial_id: number;
 
     // BUCLE
@@ -108,24 +109,6 @@ export interface DataRespGetDetalleOT {
   usuarios_involucrados: UsuarioInvolucrado[];
 }
 
-// GET CUBS 4 CREATE OT
-export interface Cubs4OT {
-  agencia_id: number;
-  creador_usuario_nombre: string;
-  cubicacion_descripcion: string;
-  cubicacion_id: number;
-  cubicacion_nombre: string;
-  tipo_contrato_marco_nombre: string;
-}
-
-// GET PROYECTOS
-export interface Proyectos {
-  id: number;
-  nombre: string;
-  descripcion: string;
-  usuario_creador_id: number;
-}
-
 // GET ADM CONTRATOS
 export interface AdminContrato4OT {
   id: number;
@@ -133,44 +116,13 @@ export interface AdminContrato4OT {
   cantidad_de_trabajo: number;
 }
 
-// BUCLE
-// GET OFICINA CENTRAL
-export interface DataRespGetOficinaCentral {
-  items: OficinaCentral[];
-}
-
-export interface OficinaCentral {
-  agencia_id: number;
-  descripcion: string;
-  id: number;
-  idafac: string;
-}
-
 // GET SOLICITAPO POR
-export interface DataRespGetSolicitadoPor {
-  items: SolicitadoPor[];
-}
-
 export interface SolicitadoPor {
   descripcion: string;
   id: number;
 }
 
-// GET COMUNA
-export interface DataRespGetComuna {
-  items: Comuna[];
-}
-
-export interface Comuna {
-  comuna_id: number;
-  comuna_nombre: string;
-}
-
 // GET TIPO DE RED
-export interface DataRespGetTipoDeRed {
-  items: TipoDeRed[];
-}
-
 export interface TipoDeRed {
   descripcion: string;
   estado: boolean;
@@ -178,10 +130,6 @@ export interface TipoDeRed {
 }
 
 // GET TIPO DE TRABAJO
-export interface DataRespGetTipoDeTrabajo {
-  items: TipoDeTrabajo[];
-}
-
 export interface TipoDeTrabajo {
   tipo_trabajo_codigo: string;
   tipo_trabajo_descripcion: string;
@@ -189,80 +137,12 @@ export interface TipoDeTrabajo {
 }
 
 // GET AREA DE NEGOCIO
-export interface DataRespGetAreaDeNegocio {
-  items: AreaDeNegocio[];
-}
-
 export interface AreaDeNegocio {
   descripcion: string;
   id: number;
 }
 
-// MOVIL
-
-// GET PLAN DE PROYECTO
-export interface DataRespGetPlanDeProyecto {
-  items: PlanDeProyecto[];
-}
-
-export interface PlanDeProyecto {
-  created_at: Date;
-  estado: boolean;
-  id: number;
-  nombre: string;
-}
-
-// GET SITIO
-export interface DataRespGetSitio {
-  items: Sitio[];
-}
-
-export interface Sitio {
-  codigo: string;
-  comuna: string;
-  created_at: Date;
-  direccion: string;
-  duenno_estructura: string;
-  fecha_liberacion: Date;
-  fecha_termino: Date;
-  geo_lat: number;
-  geo_lon: number;
-  id: number;
-  metas: string;
-  model_plan_id: { id: number; nombre: string; estado: true; created_at: Date };
-  model_region_id: { id: number; nombre: string; codigo: string };
-  nemonico: string;
-  nombre: string;
-  plan_id: number;
-  region_id: number;
-  tipo: string;
-  vendor: string;
-}
-
-// FIJO
-
-// NUMERO INTERNO
-export interface DataRespGetTipoNumeroInterno {
-  items: TipoNumeroInterno[];
-}
-
-export interface TipoNumeroInterno {
-  id: number;
-  nombre: string;
-}
-
-// NUMERO INTERNO HAS OT
-export interface DataRespGetNumeroInternoHasOT {
-  items: NumeroInternoHasOT[];
-}
-
-export interface NumeroInternoHasOT {
-  id: number;
-  ot_id: number;
-  numero_interno: string;
-  tipo_numero_interno_id: number;
-}
-
+// CREATE OT
 export interface CreateOTBase {
   adm_contrato_proxy_id: number;
   proyecto_id: number;

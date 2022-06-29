@@ -4,3 +4,5 @@ export interface ModelOficinaCentral {
   agencia_id: number;
   idafac: string;
 }
+
+export interface OficinaCentral extends ModelOficinaCentral {}

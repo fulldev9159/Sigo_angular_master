@@ -392,6 +392,17 @@ export interface RequestDeleteDetallesCubicacion {
   servicio?: number[];
   unidad_obra?: number[];
 }
+
+// GET CUBS 4 CREATE OT
+export interface Cubs4OT {
+  agencia_id: number;
+  creador_usuario_nombre: string;
+  cubicacion_descripcion: string;
+  cubicacion_id: number;
+  cubicacion_nombre: string;
+  tipo_contrato_marco_nombre: string;
+}
+
 //  ///
 export interface TipoServicioEspecialidad4Cub {
   codigo: string;

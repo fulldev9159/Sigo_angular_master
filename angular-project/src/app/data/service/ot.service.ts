@@ -24,16 +24,16 @@ import {
   ResponseItems,
   Proyectos,
   AdminContrato4OT,
-  DataRespGetOficinaCentral,
-  DataRespGetSolicitadoPor,
-  DataRespGetComuna,
-  DataRespGetTipoDeRed,
-  DataRespGetTipoDeTrabajo,
-  DataRespGetAreaDeNegocio,
-  DataRespGetPlanDeProyecto,
-  DataRespGetSitio,
-  DataRespGetTipoNumeroInterno,
-  DataRespGetNumeroInternoHasOT,
+  OficinaCentral,
+  SolicitadoPor,
+  Comuna,
+  TipoDeRed,
+  TipoDeTrabajo,
+  AreaDeNegocio,
+  PlanDeProyecto,
+  Sitio,
+  TipoNumeroInterno,
+  NumeroInternoHasOT,
   RequestCreateOTMovil,
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
@@ -103,29 +103,29 @@ export class OTService {
 
   getOficinaCentral(
     agencia_id: number
-  ): Observable<Response<DataRespGetOficinaCentral>> {
-    return this.http.post<Response<DataRespGetOficinaCentral>>(
+  ): Observable<ResponseItems<OficinaCentral[]>> {
+    return this.http.post<ResponseItems<OficinaCentral[]>>(
       `${this.apiUrl}/ot/centrales_agid/get`,
       { agencia_id }
     );
   }
 
-  getSolicitadoPor(): Observable<Response<DataRespGetSolicitadoPor>> {
-    return this.http.post<Response<DataRespGetSolicitadoPor>>(
+  getSolicitadoPor(): Observable<ResponseItems<SolicitadoPor[]>> {
+    return this.http.post<ResponseItems<SolicitadoPor[]>>(
       `${this.apiUrl}/ot/solicitantes/getall`,
       {}
     );
   }
 
-  getComuna(cubicacion_id: number): Observable<Response<DataRespGetComuna>> {
-    return this.http.post<Response<DataRespGetComuna>>(
+  getComuna(cubicacion_id: number): Observable<ResponseItems<Comuna[]>> {
+    return this.http.post<ResponseItems<Comuna[]>>(
       `${this.apiUrl}/ot/get_comunas_from_cubicacion/get`,
       { cubicacion_id }
     );
   }
 
-  getTipoRed(): Observable<Response<DataRespGetTipoDeRed>> {
-    return this.http.post<Response<DataRespGetTipoDeRed>>(
+  getTipoRed(): Observable<ResponseItems<TipoDeRed[]>> {
+    return this.http.post<ResponseItems<TipoDeRed[]>>(
       `${this.apiUrl}/ot/tipo_red/getall`,
       {}
     );
@@ -133,38 +133,38 @@ export class OTService {
 
   getTipoTrabajo(
     cubicacion_id: number
-  ): Observable<Response<DataRespGetTipoDeTrabajo>> {
-    return this.http.post<Response<DataRespGetTipoDeTrabajo>>(
+  ): Observable<ResponseItems<TipoDeTrabajo[]>> {
+    return this.http.post<ResponseItems<TipoDeTrabajo[]>>(
       `${this.apiUrl}/ot/get_tipo_trabajo_from_tipo_cubicacion/get`,
       { cubicacion_id }
     );
   }
 
-  getAreaNegocio(): Observable<Response<DataRespGetAreaDeNegocio>> {
-    return this.http.post<Response<DataRespGetAreaDeNegocio>>(
+  getAreaNegocio(): Observable<ResponseItems<AreaDeNegocio[]>> {
+    return this.http.post<ResponseItems<AreaDeNegocio[]>>(
       `${this.apiUrl}/ot/ot_area_negocio/getall`,
       {}
     );
   }
 
   // MOVIL
-  getPlanDeProyecto(): Observable<Response<DataRespGetPlanDeProyecto>> {
-    return this.http.post<Response<DataRespGetPlanDeProyecto>>(
+  getPlanDeProyecto(): Observable<ResponseItems<PlanDeProyecto[]>> {
+    return this.http.post<ResponseItems<PlanDeProyecto[]>>(
       `${this.apiUrl}/ot/plan/getall`,
       {}
     );
   }
 
-  getSitio(plan_id: number): Observable<Response<DataRespGetSitio>> {
-    return this.http.post<Response<DataRespGetSitio>>(
+  getSitio(plan_id: number): Observable<ResponseItems<Sitio[]>> {
+    return this.http.post<ResponseItems<Sitio[]>>(
       `${this.apiUrl}/ot/sitio_plan_plid/get`,
       { plan_id }
     );
   }
 
   // FIJO
-  getTipoNumeroInterno(): Observable<Response<DataRespGetTipoNumeroInterno>> {
-    return this.http.post<Response<DataRespGetTipoNumeroInterno>>(
+  getTipoNumeroInterno(): Observable<ResponseItems<TipoNumeroInterno[]>> {
+    return this.http.post<ResponseItems<TipoNumeroInterno[]>>(
       `${this.apiUrl}/configuration/tipo_numero_interno/getall`,
       {}
     );
@@ -172,8 +172,8 @@ export class OTService {
 
   getNumeroInternoHasOT(
     numero_interno: string
-  ): Observable<Response<DataRespGetNumeroInternoHasOT>> {
-    return this.http.post<Response<DataRespGetNumeroInternoHasOT>>(
+  ): Observable<ResponseItems<NumeroInternoHasOT[]>> {
+    return this.http.post<ResponseItems<NumeroInternoHasOT[]>>(
       `${this.apiUrl}/ot/ot_has_numero_interno_niid/get`,
       { numero_interno }
     );

@@ -17,3 +17,8 @@ export interface ModelSitio {
   tipo: string;
   vendor: string;
 }
+
+export interface Sitio extends ModelSitio {
+  model_plan_id: { id: number; nombre: string; estado: true; created_at: Date };
+  model_region_id: { id: number; nombre: string; codigo: string };
+}

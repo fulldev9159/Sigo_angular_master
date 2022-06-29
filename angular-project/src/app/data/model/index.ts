@@ -23,6 +23,7 @@ export * from './comuna';
 export * from './tipo_trabajo';
 export * from './plan';
 export * from './sitio';
+export * from './proyecto';
 
 export interface Response<T> {
   data: T;
@@ -39,6 +40,11 @@ export interface ResponseItems<T> {
 export interface StatusResponse {
   desc: string;
   code: number;
+}
+
+export interface IdNombreType {
+  id: number;
+  nombre: string;
 }
 
 export interface MessageNotifyEffect {

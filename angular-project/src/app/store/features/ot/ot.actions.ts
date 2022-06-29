@@ -10,7 +10,6 @@ import {
   RequestSaveBorradorInformeAvance,
   RequestSaveInformeAvance,
   RequestSaveInformeAvanceAdmin,
-  Sitio,
   StatusResponse,
   Response,
   ResponseItems,
@@ -23,16 +22,16 @@ import {
   Proyectos,
   AdminContrato4OT,
   Cubs4OT,
-  DataRespGetOficinaCentral,
-  DataRespGetSolicitadoPor,
-  DataRespGetComuna,
-  DataRespGetTipoDeRed,
-  DataRespGetTipoDeTrabajo,
-  DataRespGetAreaDeNegocio,
-  DataRespGetPlanDeProyecto,
-  DataRespGetSitio,
-  DataRespGetTipoNumeroInterno,
-  DataRespGetNumeroInternoHasOT,
+  OficinaCentral,
+  SolicitadoPor,
+  Comuna,
+  TipoDeRed,
+  TipoDeTrabajo,
+  AreaDeNegocio,
+  ModelPlan,
+  Sitio,
+  TipoNumeroInterno,
+  NumeroInternoHasOT,
   RequestCreateOTMovil,
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
@@ -257,7 +256,7 @@ export const getOficinaCentral = createAction(
 
 export const getOficinaCentralSuccess = createAction(
   '[OT] GET getOficinaCentral Success',
-  props<{ response: Response<DataRespGetOficinaCentral> }>()
+  props<{ response: ResponseItems<OficinaCentral[]> }>()
 );
 
 export const getOficinaCentralError = createAction(
@@ -270,7 +269,7 @@ export const getSolicitadoPor = createAction('[OT] GET getSolicitadoPor');
 
 export const getSolicitadoPorSuccess = createAction(
   '[OT] GET getSolicitadoPor Success',
-  props<{ response: Response<DataRespGetSolicitadoPor> }>()
+  props<{ response: ResponseItems<SolicitadoPor[]> }>()
 );
 
 export const getSolicitadoPorError = createAction(
@@ -286,7 +285,7 @@ export const getComuna = createAction(
 
 export const getComunaSuccess = createAction(
   '[OT] GET getComuna Success',
-  props<{ response: Response<DataRespGetComuna> }>()
+  props<{ response: ResponseItems<Comuna[]> }>()
 );
 
 export const getComunaError = createAction(
@@ -299,7 +298,7 @@ export const getTipoDeRed = createAction('[OT] GET getTipoDeRed');
 
 export const getTipoDeRedSuccess = createAction(
   '[OT] GET getTipoDeRed Success',
-  props<{ response: Response<DataRespGetTipoDeRed> }>()
+  props<{ response: ResponseItems<TipoDeRed[]> }>()
 );
 
 export const getTipoDeRedError = createAction(
@@ -315,7 +314,7 @@ export const getTipoDeTrabajo = createAction(
 
 export const getTipoDeTrabajoSuccess = createAction(
   '[OT] GET getTipoDeTrabajo Success',
-  props<{ response: Response<DataRespGetTipoDeTrabajo> }>()
+  props<{ response: ResponseItems<TipoDeTrabajo[]> }>()
 );
 
 export const getTipoDeTrabajoError = createAction(
@@ -328,7 +327,7 @@ export const getAreaDeNegocio = createAction('[OT] GET getAreaDeNegocio');
 
 export const getAreaDeNegocioSuccess = createAction(
   '[OT] GET getAreaDeNegocio Success',
-  props<{ response: Response<DataRespGetAreaDeNegocio> }>()
+  props<{ response: ResponseItems<AreaDeNegocio[]> }>()
 );
 
 export const getAreaDeNegocioError = createAction(
@@ -341,7 +340,7 @@ export const getPlanDeProyecto = createAction('[OT] GET getPlanDeProyecto');
 
 export const getPlanDeProyectoSuccess = createAction(
   '[OT] GET getPlanDeProyecto Success',
-  props<{ response: Response<DataRespGetPlanDeProyecto> }>()
+  props<{ response: ResponseItems<ModelPlan[]> }>()
 );
 
 export const getPlanDeProyectoError = createAction(
@@ -357,7 +356,7 @@ export const getSitio = createAction(
 
 export const getSitioSuccess = createAction(
   '[OT] GET getSitio Success',
-  props<{ response: Response<DataRespGetSitio> }>()
+  props<{ response: ResponseItems<Sitio[]> }>()
 );
 
 export const getSitioError = createAction(
@@ -373,7 +372,7 @@ export const getTipoNumeroInterno = createAction(
 
 export const getTipoNumeroInternoSuccess = createAction(
   '[OT] GET getTipoNumeroInterno Success',
-  props<{ response: Response<DataRespGetTipoNumeroInterno> }>()
+  props<{ response: ResponseItems<TipoNumeroInterno[]> }>()
 );
 
 export const getTipoNumeroInternoError = createAction(
@@ -389,7 +388,7 @@ export const getNumeroInternoHasOT = createAction(
 
 export const getNumeroInternoHasOTSuccess = createAction(
   '[OT] GET getNumeroInternoHasOT Success',
-  props<{ response: Response<DataRespGetNumeroInternoHasOT> }>()
+  props<{ response: ResponseItems<NumeroInternoHasOT[]> }>()
 );
 
 export const getNumeroInternoHasOTError = createAction(

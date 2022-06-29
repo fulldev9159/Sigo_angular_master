@@ -4,3 +4,5 @@ export interface ModelPlan {
   estado: boolean;
   created_at: Date;
 }
+
+export interface PlanDeProyecto extends ModelPlan {}
