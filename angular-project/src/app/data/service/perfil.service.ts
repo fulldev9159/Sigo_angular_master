@@ -1,15 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { map, concatMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
-import * as Data from '@data';
-import {
-  Permiso,
-  ResponseGetRolWithPermisos,
-  RolWithPermisos,
-  Response,
-} from '@data';
 import {
   Perfil,
   PermisosPerfil,
@@ -18,17 +10,14 @@ import {
   RequestCreatePerfil,
   RequestUpdatePerfil,
   ResponseItems,
-} from '@data/model';
+  Response,
+} from '@data';
 @Injectable({
   providedIn: 'root',
 })
 export class PerfilService {
   apiUrl = '';
-  constructor(
-    @Inject('environment') environment,
-    private http: HttpClient,
-    private snackService: SnackBarService
-  ) {
+  constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 

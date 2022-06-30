@@ -11,7 +11,6 @@ export * from './libro-obra';
 export * from './notificaciones';
 export * from './contrato';
 export * from './proveedor';
-export * from './region';
 export * from './informe-avance';
 export * from './sustento-financiero';
 export * from './area';

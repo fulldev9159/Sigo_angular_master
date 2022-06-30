@@ -10,7 +10,6 @@ import {
   Cubicacion,
   DetalleCubicacion,
   Proveedores4Cub,
-  RegionSubcontrato4Cub,
   RespDataGetDetalleCubs,
   Servicios4Cub,
   TipoCubicacion4Cub,
@@ -37,7 +36,6 @@ export interface StateCubicacion {
   cubicaciones: Cubicacion[];
   cubicacionError: Error;
   selectedCubicacion: Cubicacion;
-  subContractedRegions: RegionSubcontrato4Cub[];
   detalleCubicacion: DetalleCubicacion[];
   saving: boolean;
   errorSaving: Error;
@@ -60,7 +58,6 @@ export const initialStateCubicacion: StateCubicacion = {
   cubicaciones: [],
   cubicacionError: null,
   selectedCubicacion: null,
-  subContractedRegions: [],
   detalleCubicacion: [],
   saving: false,
   errorSaving: null,

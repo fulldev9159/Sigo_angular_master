@@ -1,10 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import * as Data from '@data';
 import {
   Perfil,
-  Permiso,
   Response,
-  RolWithPermisos,
   PermisosPerfil,
   Rol,
   PermisoRol,

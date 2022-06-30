@@ -76,11 +76,6 @@ export const getCubicacionError = createSelector(
   (state: fromCubicacion.StateCubicacion) => state.cubicacionError
 );
 
-export const getSubContractedRegions = createSelector(
-  selectCubicacion,
-  (state: fromCubicacion.StateCubicacion) => state.subContractedRegions
-);
-
 export const getDetalleCubicacion = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.detalleCubicacion

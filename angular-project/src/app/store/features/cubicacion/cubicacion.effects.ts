@@ -5,19 +5,13 @@ import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as cubActions from './cubicacion.actions';
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 
 @Injectable()
 export class CubicacionEffects {
   constructor(
     private actions$: Actions,
-    private authFacade: AuthFacade,
     private cubService: Service.CubicacionService,
-    private contratoService: Service.ContratosService,
     private userService: Service.UserService,
-    private proveedorService: Service.ProveedorService,
-    private regionService: Service.RegionService,
-    private messageService: Service.NotifyAfter,
     private alertMessageAction: Service.AlertMessageActions
   ) {}
 

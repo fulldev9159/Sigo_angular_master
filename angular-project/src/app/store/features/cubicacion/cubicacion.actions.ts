@@ -2,9 +2,6 @@ import { createAction, props } from '@ngrx/store';
 import {
   Cubicacion,
   RequestEditCubicacion,
-  RegionSubcontrato4Cub,
-  StatusResponse,
-  DetalleCubicacion,
   DataRespGetContratosUser,
   Response,
   Agencias4Cub,

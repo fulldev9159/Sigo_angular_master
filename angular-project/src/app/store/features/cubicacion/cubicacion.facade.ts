@@ -5,9 +5,7 @@ import * as cubicacionActions from './cubicacion.actions';
 import * as cubicacionSelectors from './cubicacion.selectors';
 import {
   Cubicacion,
-  RegionSubcontrato4Cub,
   RequestEditCubicacion,
-  DetalleCubicacion,
   ContratosUser,
   Agencias4Cub,
   Proveedores4Cub,

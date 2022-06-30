@@ -1,13 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ProfileActions from './profile.actions';
-import {
-  Permiso,
-  RolWithPermisos,
-  Perfil,
-  PermisosPerfil,
-  Rol,
-  PermisoRol,
-} from '@data';
+import { Perfil, PermisosPerfil, Rol, PermisoRol } from '@data';
 
 export const ProfileFeatureKey = 'profile';
 
@@ -17,11 +10,6 @@ export interface StateProfile {
   permisosPerfil: PermisosPerfil[];
   allroles4createedit: Rol[];
   permisosRol: PermisoRol[];
-  ///
-  // permisos: Data.Permiso[];
-  // perfil_selected: Data.Perfil;
-  // rols: Data.Rols[];
-  // rol_permisos: Permiso[];
 }
 
 export const initialStateProfile: StateProfile = {
@@ -30,11 +18,6 @@ export const initialStateProfile: StateProfile = {
   permisosPerfil: [],
   allroles4createedit: [],
   permisosRol: [],
-  //
-  // permisos: [],
-  // perfil_selected: null,
-  // rols: [],
-  // rol_permisos: [],
 };
 
 export const reducerProfile = createReducer(
@@ -67,26 +50,4 @@ export const reducerProfile = createReducer(
       permisosRol: response.data.items,
     })
   )
-  // on(ProfileActions.getPermissions, state => state),
-  // on(ProfileActions.getPermissionsSuccess, (state, payload) => ({
-  //   ...state,
-  //   permisos: payload.permisos,
-  // })),
-
-  //
-  // on(ProfileActions.getProfileSelectedSuccess, (state, payload) => ({
-  //   ...state,
-  //   perfil_selected: payload.perfil,
-  // })),
-  // on(ProfileActions.resetData, (state, payload) => ({
-  //   ...initialStateProfile,
-  // })),
-  // on(ProfileActions.getRolsSuccess, (state, payload) => ({
-  //   ...state,
-  //   rols: payload.rols,
-  // })),
-  // on(ProfileActions.getRolPermisosSuccess, (state, payload) => ({
-  //   ...state,
-  //   rol_permisos: payload.rol_permisos,
-  // }))
 );
