@@ -11,12 +11,13 @@ import {
   Response,
 } from '@data';
 import {
-  DataRspGetAllPerfiles,
-  DataRespGetPermisosPerfil,
-  DataRespGetAllRoles,
-  DataRespGetPermisosRol,
+  Perfil,
+  PermisosPerfil,
+  Rol,
+  PermisoRol,
   RequestCreatePerfil,
   RequestUpdatePerfil,
+  ResponseItems,
 } from '@data/model';
 @Injectable({
   providedIn: 'root',
@@ -31,8 +32,8 @@ export class PerfilService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getAllPerfiles(): Observable<Response<DataRspGetAllPerfiles>> {
-    return this.http.post<Response<DataRspGetAllPerfiles>>(
+  getAllPerfiles(): Observable<ResponseItems<Perfil[]>> {
+    return this.http.post<ResponseItems<Perfil[]>>(
       `${this.apiUrl}/configuration/perfil/getall`,
       {}
     );
@@ -40,8 +41,8 @@ export class PerfilService {
 
   getPermisosPerfil(
     perfil_id: number
-  ): Observable<Response<DataRespGetPermisosPerfil>> {
-    return this.http.post<Response<DataRespGetPermisosPerfil>>(
+  ): Observable<ResponseItems<PermisosPerfil[]>> {
+    return this.http.post<ResponseItems<PermisosPerfil[]>>(
       `${this.apiUrl}/configuration/perfil_has_permiso/get`,
       { perfil_id }
     );
@@ -54,8 +55,8 @@ export class PerfilService {
     );
   }
 
-  getAllRoles4CreateEditPerfil(): Observable<Response<DataRespGetAllRoles>> {
-    return this.http.post<Response<DataRespGetAllRoles>>(
+  getAllRoles4CreateEditPerfil(): Observable<ResponseItems<Rol[]>> {
+    return this.http.post<ResponseItems<Rol[]>>(
       `${this.apiUrl}/configuration/rol/getall`,
       {}
     );
@@ -63,8 +64,8 @@ export class PerfilService {
 
   getPermisosRol4CreateEditPerfil(
     rol_id: number
-  ): Observable<Response<DataRespGetPermisosRol>> {
-    return this.http.post<Response<DataRespGetPermisosRol>>(
+  ): Observable<ResponseItems<PermisoRol[]>> {
+    return this.http.post<ResponseItems<PermisoRol[]>>(
       `${this.apiUrl}/configuration/rol_template_permiso/get`,
       { rol_id }
     );
@@ -82,88 +83,5 @@ export class PerfilService {
       `${this.apiUrl}/configuration/perfil/update_ex`,
       request
     );
-  }
-  //////
-
-  getPermisos(): Observable<Data.Permiso[]> {
-    return this.http
-      .post<Data.PermisoResponse>(
-        `${this.apiUrl}/perfiles/permisos/get_all`,
-        {}
-      )
-      .pipe(
-        map((res: Data.PermisoResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.items;
-        })
-      );
-  }
-
-  getPermisosRol(rol_id: number): Observable<Permiso[]> {
-    return this.http
-      .post<ResponseGetRolWithPermisos>(
-        `${this.apiUrl}/rol/get_with_permisos`,
-        {
-          rol_id,
-        }
-      )
-      .pipe(
-        map(res => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.items.length > 0 ? res.data.items[0].permiso : [];
-        })
-      );
-  }
-
-  // creatPerfil(perfil: Data.CreatePerfilRequest): Observable<number> {
-  //   return this.http
-  //     .post<Data.CreatePerfilResponse>(`${this.apiUrl}/perfiles/create`, perfil)
-  //     .pipe(
-  //       map((res: Data.CreatePerfilResponse) => {
-  //         if (+res.status.responseCode !== 0) {
-  //           this.snackService.showMessage(res.status.description, 'error');
-  //         }
-  //         return res.data.id;
-  //       })
-  //     );
-  // }
-
-  editPerfil(
-    perfil: Data.EditPerfilRequest
-  ): Observable<Data.EditPerfilResponse> {
-    return this.http.post<Data.EditPerfilResponse>(
-      `${this.apiUrl}/perfiles/edit`,
-      perfil
-    );
-  }
-
-  deletePerfil(perfil_id: number): Observable<Data.DeletePerfilResponse> {
-    return this.http.post<Data.DeletePerfilResponse>(
-      `${this.apiUrl}/perfiles/delete`,
-      {
-        perfil_id,
-      }
-    );
-  }
-
-  getPerfilSelected(perfil_id: number): Observable<Data.Perfil> {
-    return this.http
-      .post<Data.PerfilResponse>(`${this.apiUrl}/perfiles/get_all`, {})
-      .pipe(
-        map((res: Data.PerfilResponse) => {
-          if (+res.status.responseCode !== 0) {
-            this.snackService.showMessage(res.status.description, 'error');
-          }
-          return res.data.find(perfil => perfil.id === perfil_id);
-        })
-      );
-  }
-
-  getRols(): Observable<Data.RolsResponse> {
-    return this.http.post<Data.RolsResponse>(`${this.apiUrl}/rol/get_all`, {});
   }
 }

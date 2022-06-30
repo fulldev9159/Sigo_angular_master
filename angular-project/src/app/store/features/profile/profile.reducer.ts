@@ -5,7 +5,7 @@ import {
   RolWithPermisos,
   Perfil,
   PermisosPerfil,
-  Roles,
+  Rol,
   PermisoRol,
 } from '@data';
 
@@ -15,7 +15,7 @@ export interface StateProfile {
   perfiles: Perfil[];
   modalPermisosPerfil: boolean;
   permisosPerfil: PermisosPerfil[];
-  allroles4createedit: Roles[];
+  allroles4createedit: Rol[];
   permisosRol: PermisoRol[];
   ///
   // permisos: Data.Permiso[];

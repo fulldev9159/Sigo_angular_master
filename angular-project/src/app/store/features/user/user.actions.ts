@@ -4,7 +4,7 @@ import {
   Response,
   ResponseItems,
   DataResGetPerfilesUser,
-  DataRspGetAllPerfiles,
+  Perfil,
   RequestAgregarPerfilUsusario,
   DataGetPosiblesSuperiores,
   Area,
@@ -64,7 +64,7 @@ export const getAllPerfiles = createAction('[User] GET getAllPerfiles');
 
 export const getAllPerfilesSuccess = createAction(
   '[User ] GET getAllPerfiles Success',
-  props<{ response: Response<DataRspGetAllPerfiles> }>()
+  props<{ response: ResponseItems<Perfil[]> }>()
 );
 
 export const getAllPerfilesError = createAction(
