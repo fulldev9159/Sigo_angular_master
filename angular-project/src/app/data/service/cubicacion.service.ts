@@ -3,34 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import {
-  CubicacionWithLpu,
-  ResponseGetCubicaciones,
-  ResponseGetLpus,
-  RequestEditCubicacion,
-  ResponseEditCubicacion,
   Cubicacion,
-  StatusResponse,
-  AutoSuggestItem,
-  ResponseAutoSuggest,
-  ResponseDetalleCubicacion,
-  DetalleCubicacion,
-  ResponseDeleteCubicacion,
   Response,
   ResponseItems,
   Agencias4Cub,
   Proveedores4Cub,
   Carrito,
+  RequestEditCubicacion,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
   RequestGetServicios4Cub,
   RequestGetUnidadObra4Cub,
-  RespDataActividad4Cub,
-  RespDataGetDatosServicio4Cub,
-  RespDataGetDatosUnidadObra4Cub,
-  RespDataGetServicios4Cub,
-  RespDataGetUnidadObra4Cub,
-  RespDataTipoCubicacion4Cub,
-  RespDataTipoServicioEspecialidad4Cub,
+  Actividad4Cub,
+  DetallesServicio4Cub,
+  DetallesUnidadObra4Cub,
+  Servicios4Cub,
+  UnidadObra4Cub,
+  TipoCubicacion4Cub,
+  TipoServicioEspecialidad4Cub,
   DataRespCreateCubicacion,
   DataRespEditCubicacion,
   DatosUnidadObra4Cub,
@@ -81,15 +71,15 @@ export class CubicacionService {
     );
   }
 
-  getTipoCubicacion(): Observable<Response<RespDataTipoCubicacion4Cub>> {
-    return this.http.post<Response<RespDataTipoCubicacion4Cub>>(
+  getTipoCubicacion(): Observable<ResponseItems<TipoCubicacion4Cub[]>> {
+    return this.http.post<ResponseItems<TipoCubicacion4Cub[]>>(
       `${this.apiUrl}/configuration/tipo_cubicacion/getall`,
       {}
     );
   }
 
-  getActividades4Cub(): Observable<Response<RespDataActividad4Cub>> {
-    return this.http.post<Response<RespDataActividad4Cub>>(
+  getActividades4Cub(): Observable<ResponseItems<Actividad4Cub[]>> {
+    return this.http.post<ResponseItems<Actividad4Cub[]>>(
       `${this.apiUrl}/configuration/actividad/getall`,
       {}
     );
@@ -98,8 +88,8 @@ export class CubicacionService {
   getTipoServicioEspecialidad4Cub(
     actividad_id: number,
     contrato_marco_id: number
-  ): Observable<Response<RespDataTipoServicioEspecialidad4Cub>> {
-    return this.http.post<Response<RespDataTipoServicioEspecialidad4Cub>>(
+  ): Observable<ResponseItems<TipoServicioEspecialidad4Cub[]>> {
+    return this.http.post<ResponseItems<TipoServicioEspecialidad4Cub[]>>(
       `${this.apiUrl}/cubicacion/tipo_servicio/get`,
       { actividad_id, contrato_marco_id }
     );
@@ -107,8 +97,8 @@ export class CubicacionService {
 
   getServicios4Cub(
     request: RequestGetServicios4Cub
-  ): Observable<Response<RespDataGetServicios4Cub>> {
-    return this.http.post<Response<RespDataGetServicios4Cub>>(
+  ): Observable<ResponseItems<Servicios4Cub[]>> {
+    return this.http.post<ResponseItems<Servicios4Cub[]>>(
       `${this.apiUrl}/cubicacion/combo_servicios/get`,
       request
     );
@@ -116,8 +106,8 @@ export class CubicacionService {
 
   getUnidadObra4Cub(
     request: RequestGetUnidadObra4Cub
-  ): Observable<Response<RespDataGetUnidadObra4Cub>> {
-    return this.http.post<Response<RespDataGetUnidadObra4Cub>>(
+  ): Observable<ResponseItems<UnidadObra4Cub[]>> {
+    return this.http.post<ResponseItems<UnidadObra4Cub[]>>(
       `${this.apiUrl}/cubicacion/unidades_obra_from_servicio/get`,
       request
     );
@@ -128,14 +118,14 @@ export class CubicacionService {
     request_uo: RequestGetDatosUnidadObra4Cub
   ): Observable<Carrito> {
     return this.http
-      .post<Response<RespDataGetDatosServicio4Cub>>(
+      .post<ResponseItems<DetallesServicio4Cub[]>>(
         `${this.apiUrl}/cubicacion/datos_servicio/get`,
         request_servicio
       )
       .pipe(
         concatMap(datosServicio => {
           return this.http
-            .post<Response<RespDataGetDatosUnidadObra4Cub>>(
+            .post<Response<DetallesUnidadObra4Cub>>(
               `${this.apiUrl}/cubicacion/datos_unidad_obra_material/get`,
               request_uo
             )
@@ -158,8 +148,8 @@ export class CubicacionService {
 
   getDatosUnidadObra4Cub(
     request: RequestGetDatosUnidadObra4Cub
-  ): Observable<Response<RespDataGetDatosUnidadObra4Cub>> {
-    return this.http.post<Response<RespDataGetDatosUnidadObra4Cub>>(
+  ): Observable<Response<DetallesUnidadObra4Cub>> {
+    return this.http.post<Response<DetallesUnidadObra4Cub>>(
       `${this.apiUrl}/cubicacion/datos_unidad_obra_material/get`,
       request
     );
@@ -198,171 +188,4 @@ export class CubicacionService {
       request
     );
   }
-
-  //   ///
-
-  getAutosuggestNameCubicacion(
-    filtro: string,
-    cantidad: number
-  ): Observable<{
-    autosuggests: AutoSuggestItem[];
-    status: any;
-  }> {
-    return this.http
-      .post<ResponseAutoSuggest>(
-        `${this.apiUrl}/cubicacion/autosuggest/nombre`,
-        {
-          filtro,
-          cantidad,
-        }
-      )
-      .pipe(
-        map(res => {
-          return {
-            autosuggests: res.data.items
-              ? res.data.items.map((x, i) => ({
-                  id: +i + 1,
-                  name: x,
-                }))
-              : [],
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
-  }
-
-  getCubicaciones(): Observable<{
-    cubs: Cubicacion[];
-    status: any;
-  }> {
-    return this.http
-      .post<ResponseGetCubicaciones>(`${this.apiUrl}/cubicacion/get`, {})
-      .pipe(
-        map(res => {
-          return {
-            cubs: res.data.items,
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
-  }
-
-  getDetalleCubicacion(cubicacion_id: number): Observable<{
-    detallecubicacion: DetalleCubicacion[];
-    status: any;
-  }> {
-    return this.http
-      .post<ResponseDetalleCubicacion>(
-        `${this.apiUrl}/cubicacion/detalle/get`,
-        {
-          cubicacion_id,
-        }
-      )
-      .pipe(
-        map(res => {
-          return {
-            detallecubicacion: res.data.items,
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
-  }
-
-  // getCubicacion(cubicacion_id: number): Observable<CubicacionWithLpu> {
-  //   return this.http
-  //     .post<ResponseGetCubicaciones>(`${this.apiUrl}/cubicacion/get`, {})
-  //     .pipe(
-  //       concatMap((cubsRes: ResponseGetCubicaciones) => {
-  //         const cubFound = cubsRes.data.items.find(
-  //           cub => cub.id === cubicacion_id
-  //         );
-  //         if (cubFound) {
-  //           return this.http
-  //             .post<ResponseGetLpus>(`${this.apiUrl}/cubicacion/detalle/get`, {
-  //               cubicacion_id,
-  //             })
-  //             .pipe(
-  //               map((lpusRes: ResponseGetLpus) => {
-  //                 const lpus = lpusRes.data.items;
-
-  //                 const cubicacion: CubicacionWithLpu = {
-  //                   ...cubFound,
-  //                   lpus,
-  //                 };
-
-  //                 return cubicacion;
-  //               })
-  //             );
-  //         }
-
-  //         return throwError(new Error(`no cubages found`));
-  //       })
-  //     );
-  // }
-
-  // createCubicacion(
-  //   cubicacion: any
-  // ): Observable<{ response: any; status: any }> {
-  //   return this.http
-  //     .post<ResponseEditCubicacion>(
-  //       `${this.apiUrl}/cubicacion/create`,
-  //       cubicacion
-  //     )
-  //     .pipe(
-  //       map(res => {
-  //         return {
-  //           response: res.data.id,
-  //           status: {
-  //             description: res.status.description,
-  //             responseCode: res.status.responseCode,
-  //           },
-  //         };
-  //       })
-  //     );
-  // }
-
-  updateCubicacion(
-    request: RequestEditCubicacion
-  ): Observable<{ cub_id: number; status: any }> {
-    return this.http
-      .post<ResponseEditCubicacion>(`${this.apiUrl}/cubicacion/edit`, request)
-      .pipe(
-        map(res => {
-          return {
-            cub_id: res.data.id,
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
-  }
-
-  // deleteOT(cubicacion_id: number): Observable<{ cub_id: number; status: any }> {
-  //   return this.http
-  //     .post<ResponseDeleteCubicacion>(`${this.apiUrl}/cubicacion/delete`, {
-  //       cubicacion_id,
-  //     })
-  //     .pipe(
-  //       map(res => {
-  //         return {
-  //           cub_id: res.data.id,
-  //           status: {
-  //             description: res.status.description,
-  //             responseCode: res.status.responseCode,
-  //           },
-  //         };
-  //       })
-  //     );
-  // }
 }

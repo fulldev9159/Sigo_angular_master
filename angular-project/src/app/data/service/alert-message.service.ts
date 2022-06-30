@@ -35,28 +35,15 @@ export class AlertMessageActions {
     private router: Router
   ) {
     // Status OK
-    // this.msgOK[authActions.loginSuccess.type] = 'Login exitoso';
     this.msgOK[ca.createCubSuccess.type] = 'Cubicación creada exitosamente';
-    // this.msgOK[areaActions.updateAreaSuccess.type] =
-    //   'Se ha actualizado correctamente';
-    this.msgOK[ca.editCubicacionSuccess.type] =
-      'Cubicación actualizada exitosamente';
-    this.msgOK[ca.deleteCubicacionSuccess.type] =
-      'Cubicación eliminada exitosamente';
+
     // errores de negocio
     this.msgNegocio[authActions.loginSuccess.type] =
       'Usuario/Password incorrecto';
-    this.msgNegocio[ca.getCubsSuccess.type] = 'No existen cubicaciones';
     this.msgNegocio[ca.getProveedores4CubSuccess.type] =
       'No existen proveedores para el contrato seleccionado';
-    this.msgNegocio[ca.getSubContractedRegionsSuccess.type] =
-      'No existen LPUs para el tipo seleccionado';
     this.msgNegocio[ca.createCubSuccess.type] =
       'No se pudo crear la cubicación';
-    // msg[cubActions.getAutoSuggestSuccess.type] =
-    //   'No existen sugerencias de nombre';
-    this.msgNegocio[ca.getDetalleCubicacionSuccess.type] =
-      'No posee detalle de cubicación';
     // this.msgNegocio[otActions.getPlansSuccess.type] =
     //   'No existen planes de proyectos';
     // this.msgNegocio[otActions.getSiteSuccess.type] =
@@ -68,26 +55,6 @@ export class AlertMessageActions {
       'Informe enviado';
 
     // Statur ERROR
-    this.msgErr[ca.getCubsError.type] = 'Error al obtener cubicaciones';
-    this.msgErr[ca.getSingleCubicacionError.type] =
-      'No se pudo obtener datos de la cubicación';
-    this.msgErr[ca.getSubContractProvidersError.type] =
-      'Error al obtener proveedores para cubicar';
-    this.msgErr[ca.getSubContractedRegionsError.type] =
-      'Error al obtener regiones para cubicar';
-    this.msgErr[ca.getSubContractedTypeServicesError.type] =
-      'Error al obtener Tipo Servicios para cubicar';
-    this.msgErr[ca.createCubError.type] = 'No se pudo crear la cubicación';
-    this.msgErr[ca.getSubContractedServicesError.type] =
-      'Error al obtener LPUS para cubicar';
-    this.msgErr[ca.editCubicacionError.type] =
-      'No se pudo editar la cubicación';
-    this.msgErr[ca.getAutoSuggestError.type] =
-      'No se pudo obtener sugerencias de nombre de cubicación';
-    this.msgErr[ca.getDetalleCubicacionError.type] =
-      'No se pudo obtener obtener el detalle de la cubicación';
-    this.msgErr[ca.deleteCubicacionError.type] =
-      'No se pudo eliminar la cubicación';
     // msg[otActions.inicializarInformeAvanceError.type] =
     //   'Falló la inicialización del informe';
     // this.msgErr[otActions.getPlansError.type] = 'No se pudo obtener los planes';

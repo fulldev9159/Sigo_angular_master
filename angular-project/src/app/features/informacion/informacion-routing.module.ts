@@ -14,13 +14,6 @@ const routes: Routes = [
           import('./info-ot/info-ot.module').then(m => m.InfoOtModule),
       },
       {
-        path: 'costeo/:id',
-        loadChildren: () =>
-          import('./info-costeo/info-costeo.module').then(
-            m => m.InfoCosteoModule
-          ),
-      },
-      {
         path: 'informe-avance/:id',
         loadChildren: () =>
           import('./informe-avance/informe-avance.module').then(

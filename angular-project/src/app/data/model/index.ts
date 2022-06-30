@@ -27,6 +27,7 @@ export * from './unidad-obra';
 export * from './materiales';
 export * from './archivo';
 export * from './agencia';
+export * from './actividad';
 
 export interface Response<T> {
   data: T;

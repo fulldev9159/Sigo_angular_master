@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CubicacionWithLpu, RequestSaveCubicacion } from '@data';
 import * as Service from '@data';
-import {
-  catchError,
-  concatMap,
-  map,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import * as cubActions from './cubicacion.actions';

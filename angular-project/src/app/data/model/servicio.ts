@@ -1,3 +1,4 @@
+import { ModelContratoMarco } from './contrato';
 import { TipoMoneda } from './tipo-moneda';
 import { Unidad } from './unidad';
 import {
@@ -77,4 +78,66 @@ export interface ServiciosDetalle {
     unidad_medida_id: number;
   };
   unidades_obra: UnidadObraFromDetalle[];
+}
+
+export interface TipoServicioEspecialidad4Cub {
+  codigo: string;
+  contrato_marco_id: number;
+  descripcion: string;
+  estado: boolean;
+  id: number;
+  model_contrato_marco_id: ModelContratoMarco;
+}
+
+//  GET SERVICIOS 4 CUB
+export interface RequestGetServicios4Cub {
+  agencia_id: number;
+  cmarco_has_prov_id: number;
+  tipo_servicio_id: number;
+}
+
+export interface Servicios4Cub {
+  codigo: string;
+  descripcion: string;
+  id: number;
+  puntos_baremos: number;
+  requiere_evidencia: boolean;
+  unidad_codigo: string;
+  unidad_desripcion: string;
+  unidad_id: number;
+  numero_producto: string;
+}
+
+//  GET DATOS SERVICIOS 4 CUB
+export interface RequestGetDatosServicio4Cub {
+  agencia_id: number;
+  cmarco_has_proveedor_id: number;
+  servicio_id: number;
+  tipo_servicio_id: number;
+  actividad_id: number;
+}
+
+export interface DetallesServicio4Cub {
+  precio_agencia: number;
+  precio_proveedor: number;
+  servicio_baremos: number;
+  servicio_codigo: string;
+  servicio_id: number;
+  servicio_nombre: string;
+  servicio_precio_final: number;
+  servicio_precio_final_clp: number;
+  servicio_tipo: number;
+  servicio_unidad_id: number;
+
+  actividad_descripcion: string;
+  actividad_id: string;
+
+  servicio_tipo_moneda_codigo: string;
+  servicio_tipo_moneda_id: number;
+  tipo_servicio_descripcion: string;
+
+  numero_producto: string;
+
+  servicio_unidad_codigo: string;
+  servicio_unidad_descripcion: string;
 }

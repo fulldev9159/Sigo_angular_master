@@ -1,7 +1,7 @@
-export interface ModelTipoContrato {
-  id: number;
-  nombre: string;
-}
+import { IdNombreType } from '.';
+
+// tslint:disable-next-line
+export interface ModelTipoContrato extends IdNombreType {}
 
 export interface ModelContratoMarco {
   aprob_jerarq_inic: boolean;
@@ -16,9 +16,13 @@ export interface ModelContratoMarco {
   tipo_moneda_id: number;
   tipo_pago: string;
   validacion_operaciones: boolean;
+}
+
+export interface ContratoWithTipo extends ModelContratoMarco {
   model_tipo_contrato_id: ModelTipoContrato;
 }
 export interface ContratoMarco extends ModelContratoMarco {
+  model_tipo_contrato_id: ModelTipoContrato;
   model_tipo_moneda_id: {
     codigo: string;
     id: number;

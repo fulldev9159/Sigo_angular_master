@@ -1,4 +1,9 @@
-import { MaterialesFromDetalle, MaterialFromInformeAvance } from './materiales';
+import {
+  MaterialesFromDetalle,
+  MaterialFromInformeAvance,
+  Materiales4Cub,
+} from './materiales';
+import { ModelServicio } from './servicio';
 import { Unidad } from './unidad';
 
 export interface UnidadObraFromInformeAvance {
@@ -32,4 +37,36 @@ export interface UnidadObraFromDetalle {
     uob_unidad_medida_id: number;
   };
   data_materiales: MaterialesFromDetalle[];
+}
+
+//   GET UNIDADES DE OBREA 4 CUB
+export interface RequestGetUnidadObra4Cub {
+  servicio_cod: string;
+  actividad_id: number;
+}
+
+export interface UnidadObra4Cub {
+  actividad_id: number;
+  clave: string;
+  id: number;
+  model_actividad_id: { id: number; codigo: string; descripcion: string };
+  model_servicio_cod: ModelServicio;
+  model_unidad_obra_cod: ModelUnidadObra;
+  servicio_cod: string;
+  unidad_obra_cod: string;
+}
+
+//  GET DATOS UNIDAD OBRA 4 CUB
+export interface RequestGetDatosUnidadObra4Cub {
+  uo_codigo: string;
+}
+
+export interface DetallesUnidadObra4Cub {
+  material_arr: Materiales4Cub[];
+  uo_codigo: string;
+  uo_nombre: string;
+  uo_precio_total_clp: number;
+  uo_unidad_id: number;
+  uo_unidad_codigo: string;
+  uo_unidad_descripcion: string;
 }

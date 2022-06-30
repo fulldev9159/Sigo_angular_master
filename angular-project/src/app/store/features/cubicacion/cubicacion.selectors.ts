@@ -71,11 +71,6 @@ export const getCubicaciones = createSelector(
   (state: fromCubicacion.StateCubicacion) => state.cubicaciones
 );
 
-export const getSingleCubicacion = createSelector(
-  selectCubicacion,
-  (state: fromCubicacion.StateCubicacion) => state.cubicacion
-);
-
 export const getCubicacionError = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.cubicacionError
@@ -84,11 +79,6 @@ export const getCubicacionError = createSelector(
 export const getSubContractedRegions = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.subContractedRegions
-);
-
-export const getAutoSuggest = createSelector(
-  selectCubicacion,
-  (state: fromCubicacion.StateCubicacion) => state.autoSuggest
 );
 
 export const getDetalleCubicacion = createSelector(
