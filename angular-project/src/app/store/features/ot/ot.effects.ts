@@ -501,6 +501,19 @@ export class OtEffects {
     )
   );
 
+  // SEND GENERACION ACTA
+  SendGeneracionActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.sendGeneracionActa),
+      concatMap(({ ot_id, tipo_pago, detalle }) =>
+        this.otService.sendGeneracionActa(ot_id, tipo_pago, detalle).pipe(
+          map(response => otActions.sendGeneracionActaSuccess({ response })),
+          catchError(error => of(otActions.sendGeneracionActaError({ error })))
+        )
+      )
+    )
+  );
+
   // SUBIR ARCHIVO/REGISTRO LIBRO DE OBRAS
   subirArchivoRegistroLibroObras$ = createEffect(() =>
     this.actions$.pipe(

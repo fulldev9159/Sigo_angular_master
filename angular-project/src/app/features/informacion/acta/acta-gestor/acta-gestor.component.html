@@ -1,0 +1,41 @@
+<ng-container *ngIf="ot$ | async as ot">
+  <ng-container *ngIf="form">
+    <div class="row" style="padding: 15px">
+      <div class="col-xs-12 col-md-12">
+        <form [formGroup]="form">
+          <app-select [control]="form.get('tipo_pago')" label="Tipo de pago">
+            <ng-container options>
+              <option value="" selected disabled>Seleccione</option>
+              <ng-container *ngFor="let tipoPago of tiposPago$ | async">
+                <option [value]="tipoPago.descripcion">{{ tipoPago.descripcion }}</option>
+              </ng-container>
+            </ng-container>
+          </app-select>
+        </form>
+      </div>
+    </div>
+
+    <div class="row" style="padding: 15px">
+      <div class="col-xs-12 col-md-12">
+        <form [formGroup]="form">
+          <ng-container [ngSwitch]="form.get('tipo_pago').value">
+            <ng-container *ngSwitchCase="'TOTAL'">
+              <app-acta-total-form [saving]="saving$ | async" [form]="form.get('total_porcentaje')" (submitted)="formSubmitted(ot.ot.id, form.get('tipo_pago').value, $event)"></app-acta-total-form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'PORCENTAJE'">
+              <app-acta-porcentaje-form [saving]="saving$ | async" [porcentaje]="form.get('porcentaje')" [form]="form.get('total_porcentaje')" (submitted)="formSubmitted(ot.ot.id, form.get('tipo_pago').value, $event)"></app-acta-porcentaje-form>
+            </ng-container>
+            <ng-container *ngSwitchCase="'POR_SERVICIO'">
+              <app-acta-servicio-form [saving]="saving$ | async" [form]="form.get('por_servicio')" (submitted)="formSubmitted(ot.ot.id, form.get('tipo_pago').value, $event)"></app-acta-servicio-form>
+            </ng-container>
+            <!--<ng-container *ngSwitchDefault>...</ng-container>-->
+          </ng-container>
+        </form>
+      </div>
+    </div>
+
+    <!--
+  <pre>{{ values | json }}</pre>
+  -->
+  </ng-container>
+</ng-container>

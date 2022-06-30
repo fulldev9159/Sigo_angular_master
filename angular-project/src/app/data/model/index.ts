@@ -28,6 +28,7 @@ export * from './archivo';
 export * from './agencia';
 export * from './actividad';
 export * from './rol';
+export * from './acta';
 
 export interface Response<T> {
   data: T;

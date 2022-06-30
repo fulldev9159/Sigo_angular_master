@@ -153,6 +153,8 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     } else if (errors.min) {
       return `No puede ser negativo`;
     }
+
+    return '';
   }
 
   //// formCntl(index: number): AbstractControl {

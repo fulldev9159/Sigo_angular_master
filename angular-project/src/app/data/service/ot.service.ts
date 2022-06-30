@@ -36,6 +36,9 @@ import {
   ReqCreateRegistroLibroObra,
   CategoriaArchivo,
   DataRespGetLibroDeObras,
+  ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
 } from '@data';
 
 @Injectable({
@@ -274,6 +277,89 @@ export class OTService {
       `${this.apiUrl}/ot/informe_avance/send`,
       { ot_id }
     );
+  }
+
+  // GET ACTA TIPOS PAGO
+  getActaTiposPago(): Observable<Response<{ items: ActaTipoPago[] }>> {
+    return this.http.post<Response<{ items: ActaTipoPago[] }>>(
+      `${this.apiUrl}/ot/acta_tipo_pago/getall`,
+      {}
+    );
+  }
+
+  // GET DETALLE SERVICIO POR ACTA
+  getDetalleServicioPorActa(
+    ot_id: number
+  ): Observable<Response<{ items: DetalleActaServicio[] }>> {
+    return this.http.post<Response<{ items: DetalleActaServicio[] }>>(
+      `${this.apiUrl}/ot/get_detalle_servicio_for_acta/get`,
+      {
+        ot_id,
+      }
+    );
+  }
+
+  // GET DETALLE UOB POR ACTA
+  getDetalleUobPorActa(
+    ot_id: number
+  ): Observable<Response<{ items: DetalleActaUob[] }>> {
+    return this.http.post<Response<{ items: DetalleActaUob[] }>>(
+      `${this.apiUrl}/ot/get_detalle_uob_for_acta/get`,
+      {
+        ot_id,
+      }
+    );
+  }
+
+  // GET ULTIMO TIPO PAGO ACTA
+  getUltimoTipoPagoActa(ot_id: number): Observable<string> {
+    return this.http
+      .post<Response<{ tipo_pago: string }>>(
+        `${this.apiUrl}/ot/acta/detalle/get_last`,
+        {
+          ot_id,
+        }
+      )
+      .pipe(
+        map(
+          (response: { data: { tipo_pago: string } }) =>
+            response?.data?.tipo_pago ?? ''
+        )
+      );
+  }
+
+  sendGeneracionActa(
+    ot_id: number,
+    tipo_pago: string,
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    }
+  ): Observable<Response<any>> {
+    //// return this.http.post<Response<any>>(`${this.apiUrl}/ot/acta/create`, {
+    ////   ot_id,
+    ////   tipo_pago,
+    ////   detalle,
+    //// });
+
+    console.log(`${this.apiUrl}/ot/acta/create`, {
+      ot_id,
+      tipo_pago,
+      detalle,
+    });
+
+    return of({
+      status: { code: 0, desc: 'OK' },
+      data: {},
+    }).pipe(delay(3000));
   }
 
   // GET CATEGORIAS ARCHIVOS
