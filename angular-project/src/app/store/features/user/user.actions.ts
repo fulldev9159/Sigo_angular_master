@@ -7,7 +7,6 @@ import {
   DataRspGetAllPerfiles,
   RequestAgregarPerfilUsusario,
   DataGetPosiblesSuperiores,
-  DataRspGetProveedores4CreateUser,
   Area,
   User,
   DataRspAgregarPerfilUsuario,
@@ -20,6 +19,7 @@ import {
   RequestCreateUser,
   RequestUpdateUser,
   DataRespGetPosiblesContratosUser,
+  Proveedores4CreateUser,
 } from '@data';
 
 // GET ALL USER
@@ -135,7 +135,7 @@ export const getAllProveedores4CreateUser = createAction(
 
 export const getAllProveedores4CreateUserSuccess = createAction(
   '[User] GET getAllProveedores4CreateUser Success',
-  props<{ response: Response<DataRspGetProveedores4CreateUser> }>()
+  props<{ response: ResponseItems<Proveedores4CreateUser[]> }>()
 );
 
 export const getAllProveedores4CreateUserError = createAction(

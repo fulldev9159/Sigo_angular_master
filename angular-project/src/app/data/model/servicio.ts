@@ -1,6 +1,9 @@
 import { TipoMoneda } from './tipo-moneda';
 import { Unidad } from './unidad';
-import { UnidadObraFromInformeAvance } from './unidad-obra';
+import {
+  UnidadObraFromDetalle,
+  UnidadObraFromInformeAvance,
+} from './unidad-obra';
 
 export interface ServicioFromInfomeAvance {
   id: number;
@@ -46,4 +49,32 @@ export interface ModelServicio {
   fecha_inicio: string;
   fecha_fin: string;
   requiere_evidencia: boolean;
+}
+
+export interface ServiciosDetalle {
+  data_servicio: {
+    actividad_desc: string;
+    actividad_id: number;
+    agencia_preciario_monto: number;
+    cub_has_srv_id: number;
+    factor_conversion_monto: number;
+    factor_conversion_precio: number;
+    monto_tipo_moneda_cod: string;
+    monto_tipo_moneda_id: number;
+    precio_tipo_moneda_cod: string;
+    precio_tipo_moneda_id: number;
+    prov_has_serv_precio: number;
+    puntos_baremos: number;
+    servicio_cantidad: number;
+    servicio_cod: string;
+    servicio_desc: string;
+    servicio_id: number;
+    servicio_precio_final: number;
+    servicio_precio_final_clp: number;
+    tipo_servicio_desc: string;
+    tipo_servicio_id: number;
+    unidad_medida_cod: string;
+    unidad_medida_id: number;
+  };
+  unidades_obra: UnidadObraFromDetalle[];
 }

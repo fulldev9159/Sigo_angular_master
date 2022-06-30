@@ -3,8 +3,6 @@ import {
   Cubicacion,
   CubicacionWithLpu,
   RequestEditCubicacion,
-  Proveedor,
-  SubcontratosProveedor,
   RegionSubcontrato4Cub,
   StatusResponse,
   AutoSuggestItem,
@@ -12,8 +10,8 @@ import {
   RequestSaveCubicacion,
   DataRespGetContratosUser,
   Response,
-  RespDataGetAgencias4Cub,
-  RespDataProveedor4Cub,
+  Agencias4Cub,
+  Proveedores4Cub,
   RespDataTipoCubicacion4Cub,
   RespDataActividad4Cub,
   RespDataTipoServicioEspecialidad4Cub,
@@ -28,10 +26,10 @@ import {
   Carrito,
   RequestCreateCubicacion,
   DataRespCreateCubicacion,
-  RespDataGetAllCubs,
   RespDataGetDetalleCubs,
   DataRespEditCubicacion,
   RequestDeleteDetallesCubicacion,
+  ResponseItems,
 } from '@data';
 
 // GET ALL CUBS
@@ -39,7 +37,7 @@ export const getAllCubs = createAction('[Cubicacion] getAllCubs ');
 
 export const getAllCubsSuccess = createAction(
   '[Cubicacion] getAllCubs Success',
-  props<{ response: Response<RespDataGetAllCubs> }>()
+  props<{ response: ResponseItems<Cubicacion[]> }>()
 );
 
 export const getAllCubsError = createAction(
@@ -86,7 +84,7 @@ export const getAgencia4Cub = createAction(
 
 export const getAgencia4CubSuccess = createAction(
   '[Cubicacion] getAgencia4Cub Success',
-  props<{ response: Response<RespDataGetAgencias4Cub> }>()
+  props<{ response: ResponseItems<Agencias4Cub[]> }>()
 );
 export const getAgencia4CubError = createAction(
   '[Cubicacion] getAgencia4Cub Error',
@@ -101,7 +99,7 @@ export const getProveedores4Cub = createAction(
 
 export const getProveedores4CubSuccess = createAction(
   '[Cubicacion] getProveedores4Cub Success',
-  props<{ response: Response<RespDataProveedor4Cub> }>()
+  props<{ response: ResponseItems<Proveedores4Cub[]> }>()
 );
 export const getProveedores4CubError = createAction(
   '[Cubicacion] getProveedores4Cub Error',

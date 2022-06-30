@@ -1,6 +1,4 @@
-export interface RespDataGetAllCubs {
-  items: Cubicacion[];
-}
+import { ServiciosDetalle } from './servicio';
 
 export interface Cubicacion {
   agencia_codigo: string;
@@ -37,6 +35,7 @@ export interface Cubicacion {
   total_tipo_moneda: string;
 }
 
+// DETALLE CUBICACION
 export interface RespDataGetDetalleCubs {
   data_cubicacion: DetalleCubicacion[];
   servicios: ServiciosDetalle[];
@@ -59,84 +58,6 @@ export interface DetalleCubicacion {
   tipo_cubicacion_id: number;
   updated_at: Date;
   usuario_creador_id: number;
-}
-
-export interface ServiciosDetalle {
-  data_servicio: {
-    actividad_desc: string;
-    actividad_id: number;
-    agencia_preciario_monto: number;
-    cub_has_srv_id: number;
-    factor_conversion_monto: number;
-    factor_conversion_precio: number;
-    monto_tipo_moneda_cod: string;
-    monto_tipo_moneda_id: number;
-    precio_tipo_moneda_cod: string;
-    precio_tipo_moneda_id: number;
-    prov_has_serv_precio: number;
-    puntos_baremos: number;
-    servicio_cantidad: number;
-    servicio_cod: string;
-    servicio_desc: string;
-    servicio_id: number;
-    servicio_precio_final: number;
-    servicio_precio_final_clp: number;
-    tipo_servicio_desc: string;
-    tipo_servicio_id: number;
-    unidad_medida_cod: string;
-    unidad_medida_id: number;
-  };
-  unidades_obra: [
-    {
-      data_unidad_obra: {
-        clave: string;
-        cub_has_uob_id: number;
-        unidad_obra_cod: string;
-        unidad_obra_desc: string;
-        uo_precio_total_clp: number;
-        uob_cantidad: number;
-        uob_unidad_medida_cod: string;
-        uob_unidad_medida_id: number;
-      };
-      data_materiales: Materiales4Detalle[];
-    }
-  ];
-}
-
-export interface Materiales4Detalle {
-  codigo_sap: string;
-  cub_has_material_id: number;
-  factor_conversion: number;
-  material_cantidad: number;
-  material_cod: string;
-  material_desc: string;
-  material_unidad_medida_cod: string;
-  material_unidad_medida_id: number;
-  material_valor_clp: number;
-  origen: string;
-  tipo_moneda_cod: string;
-  tipo_moneda_id: number;
-  valor: number;
-}
-
-export interface RespDataGetAgencias4Cub {
-  items: Agencias4Cub[];
-}
-
-export interface Agencias4Cub {
-  id: number;
-  nombre: string;
-}
-
-export interface RespDataProveedor4Cub {
-  items: Proveedores4Cub[];
-}
-
-export interface Proveedores4Cub {
-  cmarco_has_proveedor_id: number;
-  codigo_acuerdo: string;
-  id: number;
-  nombre: string;
 }
 
 export interface RespDataTipoCubicacion4Cub {

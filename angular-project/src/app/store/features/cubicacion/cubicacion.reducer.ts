@@ -15,7 +15,6 @@ import {
   RegionSubcontrato4Cub,
   RespDataGetDetalleCubs,
   Servicios4Cub,
-  SubcontratosProveedor,
   TipoCubicacion4Cub,
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
@@ -43,7 +42,6 @@ export interface StateCubicacion {
   cubicacion: CubicacionWithLpu; // TODO revisar si se puede mezclar con la variable selectedCubicacion
   cubicacionError: Error;
   selectedCubicacion: Cubicacion;
-  subContractedProviders: SubcontratosProveedor[];
   subContractedRegions: RegionSubcontrato4Cub[];
   autoSuggest: AutoSuggestItem[];
   detalleCubicacion: DetalleCubicacion[];
@@ -69,7 +67,6 @@ export const initialStateCubicacion: StateCubicacion = {
   cubicacion: null,
   cubicacionError: null,
   selectedCubicacion: null,
-  subContractedProviders: [],
   subContractedRegions: [],
   autoSuggest: [],
   detalleCubicacion: [],

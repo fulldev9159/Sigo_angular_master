@@ -1,4 +1,4 @@
-import { MaterialFromInformeAvance } from './materiales';
+import { MaterialesFromDetalle, MaterialFromInformeAvance } from './materiales';
 import { Unidad } from './unidad';
 
 export interface UnidadObraFromInformeAvance {
@@ -18,4 +18,18 @@ export interface ModelUnidadObra {
   codigo: string;
   descripcion: string;
   unidad_id: number;
+}
+
+export interface UnidadObraFromDetalle {
+  data_unidad_obra: {
+    clave: string;
+    cub_has_uob_id: number;
+    unidad_obra_cod: string;
+    unidad_obra_desc: string;
+    uo_precio_total_clp: number;
+    uob_cantidad: number;
+    uob_unidad_medida_cod: string;
+    uob_unidad_medida_id: number;
+  };
+  data_materiales: MaterialesFromDetalle[];
 }

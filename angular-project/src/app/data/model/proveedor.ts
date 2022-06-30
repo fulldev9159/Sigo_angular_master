@@ -1,7 +1,3 @@
-export interface DataRspGetProveedores4CreateUser {
-  items: Proveedores4CreateUser[];
-}
-
 export interface Proveedores4CreateUser {
   created_at: Date;
   deleted_at: Date;
@@ -23,40 +19,9 @@ export interface Proveedores4CreateUser {
   vigencia_garantia: number;
 }
 
-/////
-export interface ProveedoresResponse {
-  data: {
-    items: Proveedor[];
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-export interface Proveedor {
+export interface Proveedores4Cub {
+  cmarco_has_proveedor_id: number;
+  codigo_acuerdo: string;
   id: number;
   nombre: string;
-  rut: number;
-  email: string;
-  telefono: string;
-  direccion: string;
-  activo: boolean;
-}
-
-export interface ResponseSubcontratosProveedor {
-  data: {
-    items: SubcontratosProveedor[];
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
-}
-
-export interface SubcontratosProveedor {
-  id: number;
-  nombre: string;
-  subcontrato_id: number[];
 }

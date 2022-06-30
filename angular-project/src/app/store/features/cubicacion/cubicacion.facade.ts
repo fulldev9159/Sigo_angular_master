@@ -8,7 +8,6 @@ import {
   CubicacionWithLpu,
   RegionSubcontrato4Cub,
   RequestEditCubicacion,
-  SubcontratosProveedor,
   AutoSuggestItem,
   DetalleCubicacion,
   ContratosUser,
@@ -257,11 +256,6 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.editCubicacion({ cubicacion }));
   }
   // POST
-
-  public getProvidersSelector$(): Observable<SubcontratosProveedor[]> {
-    return this.store.select(cubicacionSelectors.getSubContractedProviders);
-  }
-  // SUBCONTRACTPROVIDERS
 
   // SUBCONTRACTREGIONS
   public getSubContractedRegionsAction(subcontratos_id: number[]): void {

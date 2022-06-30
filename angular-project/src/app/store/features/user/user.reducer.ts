@@ -43,7 +43,6 @@ export const initialStateUser: StateUser = {
   areas4createUser: [],
   contratosUser: [],
   posiblesContratosUSer: [],
-  // contratos: [],
   displayDetalleModal: false,
 };
 

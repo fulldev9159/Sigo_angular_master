@@ -16,8 +16,9 @@ import {
   DetalleCubicacion,
   ResponseDeleteCubicacion,
   Response,
-  RespDataGetAgencias4Cub,
-  RespDataProveedor4Cub,
+  ResponseItems,
+  Agencias4Cub,
+  Proveedores4Cub,
   Carrito,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
@@ -35,7 +36,6 @@ import {
   DatosUnidadObra4Cub,
   RequestCreateCubicacion,
   RequestDeleteDetallesCubicacion,
-  RespDataGetAllCubs,
   RespDataGetDetalleCubs,
 } from '@data';
 @Injectable({
@@ -46,8 +46,8 @@ export class CubicacionService {
   constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
-  getAllCubs(): Observable<Response<RespDataGetAllCubs>> {
-    return this.http.post<Response<RespDataGetAllCubs>>(
+  getAllCubs(): Observable<ResponseItems<Cubicacion[]>> {
+    return this.http.post<ResponseItems<Cubicacion[]>>(
       `${this.apiUrl}/cubicacion/table_cubicaciones/get`,
       {}
     );
@@ -64,8 +64,8 @@ export class CubicacionService {
 
   getAgencia4Cub(
     contrato_id: number
-  ): Observable<Response<RespDataGetAgencias4Cub>> {
-    return this.http.post<Response<RespDataGetAgencias4Cub>>(
+  ): Observable<ResponseItems<Agencias4Cub[]>> {
+    return this.http.post<ResponseItems<Agencias4Cub[]>>(
       `${this.apiUrl}/cubicacion/agencias_from_contrato/get`,
       { contrato_id }
     );
@@ -74,8 +74,8 @@ export class CubicacionService {
   getProveedores4Cub(
     agencia_id: number,
     contrato_id: number
-  ): Observable<Response<RespDataProveedor4Cub>> {
-    return this.http.post<Response<RespDataProveedor4Cub>>(
+  ): Observable<ResponseItems<Proveedores4Cub[]>> {
+    return this.http.post<ResponseItems<Proveedores4Cub[]>>(
       `${this.apiUrl}/cubicacion/proveedores_from_agencia_contrato/get`,
       { agencia_id, contrato_id }
     );

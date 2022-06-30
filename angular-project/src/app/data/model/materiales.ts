@@ -27,3 +27,19 @@ export interface ModelMaterial {
   valor: number;
   codigo_sap: any;
 }
+
+export interface MaterialesFromDetalle {
+  codigo_sap: string;
+  cub_has_material_id: number;
+  factor_conversion: number;
+  material_cantidad: number;
+  material_cod: string;
+  material_desc: string;
+  material_unidad_medida_cod: string;
+  material_unidad_medida_id: number;
+  material_valor_clp: number;
+  origen: string;
+  tipo_moneda_cod: string;
+  tipo_moneda_id: number;
+  valor: number;
+}
