@@ -226,6 +226,52 @@ export interface RequestUpdateUser {
   };
   contratos_marco: number[];
 }
+
+export interface ModelUsuarioLogin {
+  apellidos: string;
+  area_id: number;
+  celular: string;
+  created_at: Date;
+  deleted_at: null;
+  email: string;
+  estado: boolean;
+  id: number;
+  model_area_id: null;
+  model_proveedor_id: null;
+  nombres: string;
+  proveedor_id: number;
+  rut: string;
+  updated_at: Date;
+  username: string;
+}
+export interface ModelSuperir {
+  created_at: Date;
+  id: 17;
+  model_usuario_id: ModelUsuarioLogin;
+  perfil_id: number;
+  superior_proxy_id: number;
+  updated_at: Date;
+  usuario_id: number;
+  usuario_orig: number;
+}
+
+export interface ModelUsuarioOrigen {
+  apellidos: string;
+  area_id: number;
+  celular: string;
+  created_at: Date;
+  deleted_at: null;
+  email: string;
+  estado: boolean;
+  id: number;
+  model_area_id: null;
+  model_proveedor_id: null;
+  nombres: string;
+  proveedor_id: number;
+  rut: string;
+  updated_at: Date;
+  username: string;
+}
 ///
 // GET USER
 

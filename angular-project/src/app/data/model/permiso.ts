@@ -1,3 +1,5 @@
+import { Accion } from './accion';
+
 export interface Permiso {
   permiso_id: number;
   slug: string;
@@ -5,9 +7,14 @@ export interface Permiso {
   descripcion: string;
 }
 
+export interface DataRespGetUsuarioPermisosPerfil {
+  permisos: Accion[];
+}
+
 export interface PermissionModule extends Permiso {
   module: string;
 }
+
 export interface PermisoResponse {
   data: { items: Permiso[] };
 

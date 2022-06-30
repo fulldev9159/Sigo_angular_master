@@ -1,4 +1,44 @@
 import { Permiso } from './permiso';
+import {
+  ModelSuperir,
+  ModelUsuario,
+  ModelUsuarioLogin,
+  ModelUsuarioOrigen,
+} from './user';
+
+export interface DataResGetPerfilesUser {
+  perfiles: PerfilesUser[];
+}
+
+export interface PerfilesUser {
+  created_at: Date;
+  id: number;
+  model_perfil_id: ModelPerfil;
+  model_usuario_id: ModelUsuarioLogin;
+  model_usuario_orig: ModelUsuarioOrigen;
+
+  model_superior_proxy_id: ModelSuperir;
+  updated_at: Date;
+  usuario_id: number;
+  usuario_orig: number;
+
+  perfil_id: number;
+  perfil_propio: boolean;
+  superior_proxy_id: number;
+}
+
+export interface ModelPerfil {
+  created_at: Date;
+  deleted_at: Date;
+  descripcion: string;
+  eliminable: boolean;
+  id: number;
+  // model_rol_id: ModelRol;
+  nombre: string;
+  rol_id: number;
+  updated_at: Date;
+}
+// ...
 
 export interface DataRspGetAllPerfiles {
   items: Perfil[];
