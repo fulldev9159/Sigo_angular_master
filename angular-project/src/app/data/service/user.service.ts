@@ -5,8 +5,8 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   Response,
   ResponseItems,
-  DataGetPosiblesSuperiores,
-  DataRespGetContratosUser,
+  PosiblesSuperiores,
+  ContratosUser,
   DataRspAgregarPerfilUsuario,
   RequestActivateUser,
   RequestAddFirmaUser,
@@ -15,7 +15,7 @@ import {
   RequestUpdatePerfilUsusario,
   RequestUpFirmaUser,
   ResponseUpFirmaUser,
-  DataRespGetPosiblesContratosUser,
+  PosiblesContratosUser,
   RequestUpdateUser,
   User,
 } from '@data';
@@ -24,11 +24,7 @@ import {
 })
 export class UserService {
   apiUrl = '';
-  constructor(
-    @Inject('environment') environment,
-    private http: HttpClient,
-    private snackService: SnackBarService
-  ) {
+  constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
@@ -43,7 +39,7 @@ export class UserService {
     usuario_id: number,
     usuario_perfil: number
   ): Observable<Response<any>> {
-    return this.http.post<Response<DataGetPosiblesSuperiores>>(
+    return this.http.post<ResponseItems<PosiblesSuperiores[]>>(
       `${this.apiUrl}/usuario/posibles_superiores/get`,
       {
         usuario_id,
@@ -119,8 +115,8 @@ export class UserService {
 
   getContratosUser(
     usuario_id: number
-  ): Observable<Response<DataRespGetContratosUser>> {
-    return this.http.post<Response<DataRespGetContratosUser>>(
+  ): Observable<ResponseItems<ContratosUser[]>> {
+    return this.http.post<ResponseItems<ContratosUser[]>>(
       `${this.apiUrl}/usuario/usuario_has_contrato/get`,
       { usuario_id }
     );
@@ -128,8 +124,8 @@ export class UserService {
 
   getPosiblesContratosUser4CreateEdit(
     proveedor_id: number
-  ): Observable<Response<DataRespGetPosiblesContratosUser>> {
-    return this.http.post<Response<DataRespGetPosiblesContratosUser>>(
+  ): Observable<ResponseItems<PosiblesContratosUser[]>> {
+    return this.http.post<ResponseItems<PosiblesContratosUser[]>>(
       `${this.apiUrl}/usuario/crud/cmarco/get`,
       { proveedor_id }
     );

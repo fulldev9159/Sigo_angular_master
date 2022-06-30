@@ -1,4 +1,4 @@
-export interface Proveedores4CreateUser {
+export interface ModelProveedor {
   created_at: Date;
   deleted_at: Date;
   direccion: string;

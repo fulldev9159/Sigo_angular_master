@@ -6,20 +6,20 @@ import {
   DataResGetPerfilesUser,
   Perfil,
   RequestAgregarPerfilUsusario,
-  DataGetPosiblesSuperiores,
+  PosiblesSuperiores,
   Area,
   User,
   DataRspAgregarPerfilUsuario,
   ListPerfilesUserType,
   RequestUpdatePerfilUsusario,
   RequestActivateUser,
-  DataRespGetContratosUser,
+  ContratosUser,
   RequestUpFirmaUser,
   RequestAddFirmaUser,
   RequestCreateUser,
   RequestUpdateUser,
-  DataRespGetPosiblesContratosUser,
-  Proveedores4CreateUser,
+  PosiblesContratosUser,
+  ModelProveedor,
 } from '@data';
 
 // GET ALL USER
@@ -83,7 +83,7 @@ export const getPosiblesSuperiores = createAction(
 
 export const getPosiblesSuperioresSuccess = createAction(
   '[User] GET getPosiblesSuperiores Success',
-  props<{ response: Response<DataGetPosiblesSuperiores> }>()
+  props<{ response: ResponseItems<PosiblesSuperiores[]> }>()
 );
 
 export const getPosiblesSuperioresError = createAction(
@@ -135,7 +135,7 @@ export const getAllProveedores4CreateUser = createAction(
 
 export const getAllProveedores4CreateUserSuccess = createAction(
   '[User] GET getAllProveedores4CreateUser Success',
-  props<{ response: ResponseItems<Proveedores4CreateUser[]> }>()
+  props<{ response: ResponseItems<ModelProveedor[]> }>()
 );
 
 export const getAllProveedores4CreateUserError = createAction(
@@ -242,7 +242,7 @@ export const getContratosUser = createAction(
 
 export const getContratosUserSuccess = createAction(
   '[User] getContratosUser Success',
-  props<{ response: Response<DataRespGetContratosUser> }>()
+  props<{ response: ResponseItems<ContratosUser[]> }>()
 );
 
 export const getContratosUserError = createAction(
@@ -258,7 +258,7 @@ export const getPosiblesContratosUser4CreateEdit = createAction(
 
 export const getPosiblesContratosUser4CreateEditSuccess = createAction(
   '[User] getPosiblesContratosUser4CreateEdit Success',
-  props<{ response: Response<DataRespGetPosiblesContratosUser> }>()
+  props<{ response: ResponseItems<PosiblesContratosUser[]> }>()
 );
 
 export const getPosiblesContratosUser4CreateEditError = createAction(
@@ -335,90 +335,8 @@ export const updateUserError = createAction(
   '[User] updateUser Error',
   props<{ error: any }>()
 );
-///////////////////////////////////////
-
-// ::: Get user by ID
-// export const getUserById = createAction('[User GetUserById] GET User');
-
-// export const getUserByIdSuccess = createAction(
-//   '[User GetUserById] GET User Success',
-//   props<{ user: Data.User[] }>()
-// );
-
-// export const getUserByIdError = createAction(
-//   '[User GetUserById] GET User Error',
-//   props<{ error: any }>()
-// );
-
-// // ::: Get User Detail
-// export const getUserDetail = createAction(
-//   '[User getUserDetail] GET User Detail',
-//   props<{ usuario_id: number }>()
-// );
-
-// export const getUserDetailSuccess = createAction(
-//   '[User getUserDetailSuccess] GET User Detail Success',
-//   props<{ user_detail: Data.DetalleUsuario }>()
-// );
-
-// export const getUserDetailError = createAction(
-//   '[User getUserDetailError] GET User Detail Error',
-//   props<{ error: any }>()
-// );
-
-// Contratos
-export const getContracts = createAction(
-  '[Contract GetAll] GET Contract',
-  props<{ proveedor_id: number }>()
-);
-
-export const getContractsSuccess = createAction(
-  '[Contract GetAll] GET Contract Success',
-  props<{ contratos: Data.Contrato[] }>()
-);
-
-export const getContractsError = createAction(
-  '[Contract GetAll] GET Contract Error',
-  props<{ error: any }>()
-);
-
-// Crear Usuario
-// export const createUser = createAction(
-//   '[User Post] CREATE User',
-//   props<{ createUserRequest: Data.CreateUserRequest }>()
-// );
-
-// export const createUserSuccess = createAction(
-//   '[User Post] CREATE User Success'
-// );
-
-// export const createUserError = createAction(
-//   '[User Post] CREATE User Error',
-//   props<{ error: any }>()
-// );
-
-// Editar Usuario
-export const editUser = createAction(
-  '[User Post] EDIT User',
-  props<{ editUserRequest: Data.EditUserRequest }>()
-);
-
-export const editUserSuccess = createAction('[User Post] EDIT User Success');
-
-export const editUserError = createAction(
-  '[User Post] Edit User Error',
-  props<{ error: any }>()
-);
-
-export const setDisplayDetalleModal = createAction(
-  '[User Set DisplayDetalleModal] SET Usuario',
-  props<{ value: boolean }>()
-);
 
 export const resetArea = createAction('[User] Reset Area');
 export const resetContratos = createAction('[User] Reset Contrartos');
 export const resetSuperiores = createAction('[User] Reset Superiores');
 export const resetUsuarioEdit = createAction('[User] Reset Usuario Edit');
-// ::::::::::::::::::::::
-
-// USER ACTIONS

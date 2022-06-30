@@ -8,8 +8,6 @@ import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   OT,
   Cubs4OT,
-  User,
-  UsersResponse,
   RequestGetOTs,
   Response,
   ResponseItems,

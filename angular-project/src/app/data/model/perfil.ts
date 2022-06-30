@@ -1,5 +1,4 @@
-import { ModelPermiso, Permiso } from './permiso';
-import { ModelSuperir, ModelUsuarioLogin, ModelUsuarioOrigen } from './user';
+import { ModelSuperir, ModelUsuarioLogin } from './user';
 
 export interface ModelPerfil {
   created_at: Date;
@@ -21,7 +20,7 @@ export interface PerfilesUser {
   id: number;
   model_perfil_id: ModelPerfil;
   model_usuario_id: ModelUsuarioLogin;
-  model_usuario_orig: ModelUsuarioOrigen;
+  model_usuario_orig: ModelUsuarioLogin;
 
   model_superior_proxy_id: ModelSuperir;
   updated_at: Date;

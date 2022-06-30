@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ResponseItems, Proveedores4CreateUser } from '@data';
+import { ResponseItems, ModelProveedor } from '@data';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +14,8 @@ export class ProveedorService {
 
   getAllProveedores4CreateUser(
     interno: boolean
-  ): Observable<ResponseItems<Proveedores4CreateUser[]>> {
-    return this.http.post<ResponseItems<Proveedores4CreateUser[]>>(
+  ): Observable<ResponseItems<ModelProveedor[]>> {
+    return this.http.post<ResponseItems<ModelProveedor[]>>(
       `${this.apiUrl}/usuario/proveedor/get`,
       { interno }
     );

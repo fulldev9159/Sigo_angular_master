@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import {
   Cubicacion,
   RequestEditCubicacion,
-  DataRespGetContratosUser,
+  ContratosUser,
   Response,
   Agencias4Cub,
   Proveedores4Cub,
@@ -62,7 +62,7 @@ export const getContratosUser4Cub = createAction(
 
 export const getContratosUser4CubSuccess = createAction(
   '[Cubicacion] getContratosUser4Cub Success',
-  props<{ response: Response<DataRespGetContratosUser> }>()
+  props<{ response: ResponseItems<ContratosUser[]> }>()
 );
 export const getContratosUser4CubError = createAction(
   '[Cubicacion] getContratosUser4Cub Error',

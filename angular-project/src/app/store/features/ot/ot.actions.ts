@@ -1,19 +1,17 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
 import {
-  DataRespGetContratosUser,
+  ContratosUser,
   OT,
   PMO,
   RequestGetOTs,
-  StatusResponse,
   Response,
   ResponseItems,
-  DataRespGetPMO,
-  DataRespGetLP,
-  DataRespGetPEP2,
-  DataRespGetOPEX,
-  DataRespGetSAP,
-  DataRespGetCECO,
+  LP,
+  PEP2,
+  OPEX,
+  SAP,
+  CECO,
   Proyectos,
   AdminContrato4OT,
   Cubs4OT,
@@ -89,7 +87,7 @@ export const getContratosUser4OT = createAction(
 
 export const getContratosUser4OTSuccess = createAction(
   '[OT] getContratosUser4OT Success',
-  props<{ response: Response<DataRespGetContratosUser> }>()
+  props<{ response: ResponseItems<ContratosUser[]> }>()
 );
 export const getContratosUser4OTError = createAction(
   '[OT] getContratosUser4OT Error',
@@ -126,7 +124,7 @@ export const getPMO = createAction(
 
 export const getPMOSuccess = createAction(
   '[OT] GET PMO Success',
-  props<{ response: Response<DataRespGetPMO> }>()
+  props<{ response: ResponseItems<PMO[]> }>()
 );
 
 export const getPmoError = createAction(
@@ -142,7 +140,7 @@ export const getLineaPresupuestaria = createAction(
 
 export const getLineaPresupuestariaSuccess = createAction(
   '[OT] GET getLineaPresupuestaria Success',
-  props<{ response: Response<DataRespGetLP> }>()
+  props<{ response: ResponseItems<LP[]> }>()
 );
 
 export const getLineaPresupuestariaError = createAction(
@@ -158,7 +156,7 @@ export const getPEP2 = createAction(
 
 export const getPEP2Success = createAction(
   '[OT] GET getPEP2 Success',
-  props<{ response: Response<DataRespGetPEP2> }>()
+  props<{ response: ResponseItems<PEP2[]> }>()
 );
 
 export const getPEP2Error = createAction(
@@ -171,7 +169,7 @@ export const getIDOpex = createAction('[OT] GET getIDOpex');
 
 export const getIDOpexSuccess = createAction(
   '[OT] GET getIDOpex Success',
-  props<{ response: Response<DataRespGetOPEX> }>()
+  props<{ response: ResponseItems<OPEX[]> }>()
 );
 
 export const getIDOpexError = createAction(
@@ -187,7 +185,7 @@ export const getCuentaSAP = createAction(
 
 export const getCuentaSAPSuccess = createAction(
   '[OT] GET getCuentaSAP Success',
-  props<{ response: Response<DataRespGetSAP> }>()
+  props<{ response: ResponseItems<SAP[]> }>()
 );
 
 export const getCuentaSAPError = createAction(
@@ -203,7 +201,7 @@ export const getCECO = createAction(
 
 export const getCECOSuccess = createAction(
   '[OT] GET getCECO Success',
-  props<{ response: Response<DataRespGetCECO> }>()
+  props<{ response: ResponseItems<CECO[]> }>()
 );
 
 export const getCECOError = createAction(

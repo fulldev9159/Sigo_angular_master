@@ -1,4 +1,5 @@
-import { IdNombreType } from '.';
+import { IdNombreType } from './index';
+import { ModelUsuario } from './user';
 
 // tslint:disable-next-line
 export interface ModelTipoContrato extends IdNombreType {}
@@ -67,3 +68,15 @@ export interface ReqActivarContrato {
     estado: boolean;
   };
 }
+
+// GET CONTRATOS USER
+export interface ContratosUser {
+  contrato_id: 3;
+  model_contrato_id: ModelContratoMarco;
+  model_usuario_id: ModelUsuario;
+  usuario_id: 24;
+}
+
+// GET POSIBLES CONTRATOS USER
+// tslint:disable-next-line
+export interface PosiblesContratosUser extends ModelContratoMarco {}
