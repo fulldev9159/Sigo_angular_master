@@ -5,6 +5,7 @@ import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
 import * as Data from '@data';
 import {
+  Response,
   ContratosUser,
   DataInformeAvance,
   LpuInformeAvanceDetalle,
@@ -41,6 +42,9 @@ import {
   PosibleTrabajador,
   DetalleInformeAvance,
   ReqCreateRegistroLibroObra,
+  ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
 } from '@data';
 import {
   DetalleActa,
@@ -381,6 +385,85 @@ export class OtFacade {
 
   public sendingDetalleInformeAvance$(): Observable<boolean> {
     return this.store.select(otSelectors.sendingDetalleInformeAvance);
+  }
+
+  // GET ACTA TIPOS PAGO
+  public getActaTiposPagoSuccess(
+    response: Response<{ items: ActaTipoPago[] }>
+  ): void {
+    this.store.dispatch(otActions.getActaTiposPagoSuccess({ response }));
+  }
+
+  public getActaTiposPago$(): Observable<ActaTipoPago[]> {
+    return this.store.select(otSelectors.getActaTiposPago);
+  }
+
+  // GET DETALLE ACTA
+  public getDetalleActa$(): Observable<{
+    ultimo_tipo_pago: string;
+    servicios: DetalleActaServicio[];
+    unidades_obra: DetalleActaUob[];
+  }> {
+    return this.store.select(otSelectors.getDetalleActa);
+  }
+
+  // GET DETALLE SERVICIO POR ACTA
+  public getDetalleServicioPorActaSuccess(
+    response: Response<{ items: DetalleActaServicio[] }>
+  ): void {
+    this.store.dispatch(
+      otActions.getDetalleServicioPorActaSuccess({ response })
+    );
+  }
+
+  public getDetalleActaServicio$(): Observable<DetalleActaServicio[]> {
+    return this.store.select(otSelectors.getDetalleActaServicio);
+  }
+
+  // GET DETALLE UOB POR ACTA
+  public getDetalleUobPorActaSuccess(
+    response: Response<{ items: DetalleActaUob[] }>
+  ): void {
+    this.store.dispatch(otActions.getDetalleUobPorActaSuccess({ response }));
+  }
+
+  public getDetalleActaUob$(): Observable<DetalleActaUob[]> {
+    return this.store.select(otSelectors.getDetalleActaUob);
+  }
+
+  // GET ULTIMO TIPO PAGO ACTA
+  public getUltimoTipoPagoActaSuccess(tipoPago: string): void {
+    this.store.dispatch(otActions.getUltimoTipoPagoActaSuccess({ tipoPago }));
+  }
+
+  public getUltimoTipoPagoActa$(): Observable<string> {
+    return this.store.select(otSelectors.getUltimoTipoPagoActa);
+  }
+
+  // SEND GENERACION ACTA
+  public sendGeneracionActa(
+    ot_id: number,
+    tipo_pago: string,
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    }
+  ): void {
+    this.store.dispatch(
+      otActions.sendGeneracionActa({ ot_id, tipo_pago, detalle })
+    );
+  }
+
+  public sendingGeneracionActa$(): Observable<boolean> {
+    return this.store.select(otSelectors.sendingGeneracionActa);
   }
 
   // GET CATEGORIA ARCHIVO

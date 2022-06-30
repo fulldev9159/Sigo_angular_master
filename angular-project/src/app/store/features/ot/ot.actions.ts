@@ -45,6 +45,9 @@ import {
   DataRespGetCategoriaArchivo,
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
+  ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
 } from '@data';
 
 import {
@@ -577,6 +580,61 @@ export const sendDetalleInformeAvanceSuccess = createAction(
 
 export const sendDetalleInformeAvanceError = createAction(
   '[OT] GET sendDetalleInformeAvance Error',
+  props<{ error: any }>()
+);
+
+//  GET TIPOS ACTA
+export const getActaTiposPagoSuccess = createAction(
+  '[OT] GET getActaTiposPago Success',
+  props<{ response: Response<{ items: ActaTipoPago[] }> }>()
+);
+
+//  GET DETALLE SERVICIO POR ACTA
+export const getDetalleServicioPorActaSuccess = createAction(
+  '[OT] GET getDetalleServicioPorActa Success',
+  props<{ response: Response<{ items: DetalleActaServicio[] }> }>()
+);
+
+//  GET DETALLE UOB POR ACTA
+export const getDetalleUobPorActaSuccess = createAction(
+  '[OT] GET getDetalleUobPorActa Success',
+  props<{ response: Response<{ items: DetalleActaUob[] }> }>()
+);
+
+//  GET ULTIMO TIPO PAGO ACTA
+export const getUltimoTipoPagoActaSuccess = createAction(
+  '[OT] GET getUltimoTipoPagoActa Success',
+  props<{ tipoPago: string }>()
+);
+
+//  ENVIAR GENERACION ACTA
+export const sendGeneracionActa = createAction(
+  '[OT] GET sendGeneracionActa',
+  props<{
+    ot_id: number;
+    tipo_pago: string;
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    };
+  }>()
+);
+
+export const sendGeneracionActaSuccess = createAction(
+  '[OT] GET sendGeneracionActa Success',
+  props<{ response: Response<any> }>()
+);
+
+export const sendGeneracionActaError = createAction(
+  '[OT] GET sendGeneracionActa Error',
   props<{ error: any }>()
 );
 

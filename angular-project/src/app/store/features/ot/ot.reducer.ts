@@ -29,6 +29,9 @@ import {
   MotivoRechazo,
   PosibleTrabajador,
   DetalleInformeAvance,
+  ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
 } from '@data';
 import { DetalleActa } from '@data/model/acta';
 
@@ -99,6 +102,12 @@ export interface StateOt {
   detalleInformeAvanceError: any;
   updatingDetalleInformeAvance: boolean;
   sendingDetalleInformeAvance: boolean;
+
+  actaTiposPago: ActaTipoPago[];
+  detalleActaServicio: DetalleActaServicio[];
+  detalleActaUob: DetalleActaUob[];
+  ultimoTipoPagoActa: string;
+  sendingGeneracionActa: boolean;
 }
 
 export const initialStateOt: StateOt = {
@@ -168,6 +177,12 @@ export const initialStateOt: StateOt = {
   detalleInformeAvanceError: null,
   updatingDetalleInformeAvance: false,
   sendingDetalleInformeAvance: false,
+
+  actaTiposPago: [],
+  detalleActaServicio: [],
+  detalleActaUob: [],
+  ultimoTipoPagoActa: '',
+  sendingGeneracionActa: false,
 };
 
 export const reducerOt = createReducer(
@@ -856,6 +871,46 @@ export const reducerOt = createReducer(
       return {
         ...state,
         sendingDetalleInformeAvance: false,
+      };
+    }
+  ),
+  on(OtActions.getActaTiposPagoSuccess, (state, { response }) => {
+    return {
+      ...state,
+      actaTiposPago: copy(response.data.items),
+    };
+  }),
+  on(OtActions.getDetalleServicioPorActaSuccess, (state, { response }) => {
+    return {
+      ...state,
+      detalleActaServicio: copy(response.data.items),
+    };
+  }),
+  on(OtActions.getDetalleUobPorActaSuccess, (state, { response }) => {
+    return {
+      ...state,
+      detalleActaUob: copy(response.data.items),
+    };
+  }),
+  on(OtActions.getUltimoTipoPagoActaSuccess, (state, { tipoPago }) => {
+    return {
+      ...state,
+      ultimoTipoPagoActa: tipoPago,
+    };
+  }),
+  on(OtActions.sendGeneracionActa, state => {
+    return {
+      ...state,
+      sendingGeneracionActa: true,
+    };
+  }),
+  on(
+    OtActions.sendGeneracionActaSuccess,
+    OtActions.sendGeneracionActaError,
+    state => {
+      return {
+        ...state,
+        sendingGeneracionActa: false,
       };
     }
   )

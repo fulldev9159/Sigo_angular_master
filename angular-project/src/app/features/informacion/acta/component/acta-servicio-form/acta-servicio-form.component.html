@@ -1,0 +1,108 @@
+<div class="row">
+  <ng-container *ngIf="form">
+    <ng-container *ngIf="form.get('servicios') as servicios">
+      <div class="col-xs-6 col-md-6">
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Detalle servicios</ng-container>
+          <ng-container card-body>
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th colspan="3">Cantidad</th>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th>Descripción</th>
+                  <th style="text-align: right">Total</th>
+                  <th style="text-align: right">Enviada</th>
+                  <th>A Enviar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let servicio of servicios.controls">
+                  <tr>
+                    <td>
+                      <input type="checkbox" [formControl]="servicio.get('selected')">
+                    </td>
+                    <td>{{ servicio.get('descripcion').value }}</td>
+                    <td style="text-align: right">{{ servicio.get('cantidad_total').value }}</td>
+                    <td style="text-align: right">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_max_a_enviar').value }}</td>
+                    <td>
+                      <app-input [control]="servicio.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </ng-container>
+        </app-card>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
+      <div class="col-xs-6 col-md-6">
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Detalle Unidades Obra</ng-container>
+          <ng-container card-body>
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th colspan="3">Cantidad</th>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th>Descripción</th>
+                  <th style="text-align: right">Total</th>
+                  <th style="text-align: right">Enviada</th>
+                  <th>A Enviar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let uo of unidadesObra.controls">
+                  <tr>
+                    <td>
+                      <input type="checkbox" [formControl]="uo.get('selected')">
+                    </td>
+                    <td>{{ uo.get('descripcion').value }}</td>
+                    <td style="text-align: right">{{ uo.get('cantidad_total').value }}</td>
+                    <td style="text-align: right">{{ uo.get('cantidad_total').value - uo.get('cantidad_max_a_enviar').value }}</td>
+                    <td>
+                      <app-input [control]="uo.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </ng-container>
+        </app-card>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<br>
+
+<!--
+  <pre>{{ values | json }}</pre>
+-->
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div style="text-align: right">
+      <ng-container *ngIf="saving; else noSaving">
+        <button class="btn btn-primary disabled">
+          <em class="pi pi-spin pi-spinner mr-1"></em>Enviar
+        </button>
+      </ng-container>
+      <ng-template #noSaving>
+        <button class="btn btn-primary" (click)="submit()" [class.disabled]="!valid">
+          <em class="pi pi-send mr-1"></em>Enviar
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

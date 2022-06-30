@@ -1,0 +1,98 @@
+<div class="row">
+  <ng-container *ngIf="form && porcentaje">
+    <ng-container *ngIf="form.get('servicios') as servicios">
+      <div class="col-xs-6 col-md-6">
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Detalle servicios</ng-container>
+          <ng-container card-body>
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th>Servicios</th>
+                  <th colspan="3">Cantidad</th>
+                </tr>
+                <tr>
+                  <th>Descripción</th>
+                  <th style="text-align: right">Total</th>
+                  <th style="text-align: right">Enviada</th>
+                  <th style="text-align: right">A Enviar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let servicio of servicios.controls">
+                  <tr>
+                    <td>{{ servicio.get('descripcion').value }}</td>
+                    <td style="text-align: right">{{ servicio.get('cantidad_total').value }}</td>
+                    <td style="text-align: right">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_a_enviar').value }}</td>
+                    <td style="text-align: right">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </ng-container>
+        </app-card>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
+      <div class="col-xs-6 col-md-6">
+        <app-card [classCardHeader]="'bg-info'">
+          <ng-container card-header-title>Detalle Unidades Obra</ng-container>
+          <ng-container card-body>
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th>Servicios</th>
+                  <th colspan="3">Cantidad</th>
+                </tr>
+                <tr>
+                  <th>Descripción</th>
+                  <th style="text-align: right">Total</th>
+                  <th style="text-align: right">Enviada</th>
+                  <th style="text-align: right">A Enviar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let uo of unidadesObra.controls">
+                  <tr>
+                    <td>{{ uo.get('descripcion').value }}</td>
+                    <td style="text-align: right">{{ uo.get('cantidad_total').value }}</td>
+                    <td style="text-align: right">{{ uo.get('cantidad_total').value - uo.get('cantidad_a_enviar').value }}</td>
+                    <td style="text-align: right">{{ (uo.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </ng-container>
+        </app-card>
+      </div>
+    </ng-container>
+
+    <div class="col-xs-12 col-md-12">
+      <app-input [control]="porcentaje" label="Porcentaje" placeholder="Porcentaje" [errorMessageFn]="errorMessageFn"></app-input>
+    </div>
+  </ng-container>
+</div>
+
+<br>
+
+<!--
+<pre>{{ values | json }}</pre>
+-->
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div style="text-align: right">
+      <ng-container *ngIf="saving; else noSaving">
+        <button class="btn btn-primary disabled">
+          <em class="pi pi-spin pi-spinner mr-1"></em>Enviar
+        </button>
+      </ng-container>
+      <ng-template #noSaving>
+        <button class="btn btn-primary" (click)="submit()" [class.disabled]="!valid">
+          <em class="pi pi-send mr-1"></em>Enviar
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
