@@ -15,7 +15,7 @@ interface ResolverResponse {
 
 @Injectable({ providedIn: 'root' })
 export class UltimoTipoPagoResolver implements Resolve<ResolverResponse> {
-  constructor(private router: Router, private service: Data.OTService) {}
+  constructor(private router: Router, private service: Data.ActaService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,

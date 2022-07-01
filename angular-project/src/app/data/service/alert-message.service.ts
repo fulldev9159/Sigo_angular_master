@@ -44,10 +44,6 @@ export class AlertMessageActions {
       'No existen proveedores para el contrato seleccionado';
     this.msgNegocio[ca.createCubSuccess.type] =
       'No se pudo crear la cubicación';
-    // this.msgNegocio[otActions.getPlansSuccess.type] =
-    //   'No existen planes de proyectos';
-    // this.msgNegocio[otActions.getSiteSuccess.type] =
-    //   'No existen sitios para el proyecto escogido';
     this.msgNegocio[otActions.getPMOSuccess.type] = 'No existen pmos';
     this.msgNegocio[otActions.updateDetalleInformeAvanceSuccess.type] =
       'Borrador actualizado';
@@ -55,11 +51,6 @@ export class AlertMessageActions {
       'Informe enviado';
 
     // Statur ERROR
-    // msg[otActions.inicializarInformeAvanceError.type] =
-    //   'Falló la inicialización del informe';
-    // this.msgErr[otActions.getPlansError.type] = 'No se pudo obtener los planes';
-    // this.msgErr[otActions.getOtsError.type] = 'Falló la obtención de OTs';
-    // this.msgErr[otActions.getSiteError.type] = 'Falló la obtención de Sitios';
     this.msgErr[otActions.getPmoError.type] = 'Falló la obtención de PMOs';
     this.msgErr[otActions.updateDetalleInformeAvanceError.type] =
       'Fallo la actualización del borrador';

@@ -1,9 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
-import * as Data from '@data';
-import { SnackBarService } from '@utilsSIGO/snack-bar';
 
 import {
   OT,
@@ -11,7 +9,6 @@ import {
   RequestGetOTs,
   Response,
   ResponseItems,
-  Proyectos,
   AdminContrato4OT,
   OficinaCentral,
   SolicitadoPor,
@@ -38,7 +35,6 @@ import {
   DataRespGetLibroDeObras,
   ActaTipoPago,
   DetalleActaServicio,
-  DetalleActaUob,
 } from '@data';
 
 @Injectable({
@@ -46,11 +42,7 @@ import {
 })
 export class OTService {
   apiUrl = '';
-  constructor(
-    @Inject('environment') environment,
-    private http: HttpClient,
-    private snackService: SnackBarService
-  ) {
+  constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
@@ -75,13 +67,6 @@ export class OTService {
     );
   }
 
-  getProyectos(): Observable<ResponseItems<Proyectos[]>> {
-    return this.http.post<ResponseItems<Proyectos[]>>(
-      `${this.apiUrl}/ot/proyecto_uid/get`,
-      {}
-    );
-  }
-
   getAdminContrato(
     cubicacion_id: number
   ): Observable<ResponseItems<AdminContrato4OT[]>> {
@@ -92,7 +77,6 @@ export class OTService {
   }
 
   // BUCLE
-
   getOficinaCentral(
     agencia_id: number
   ): Observable<ResponseItems<OficinaCentral[]>> {
@@ -239,46 +223,6 @@ export class OTService {
     );
   }
 
-  // GET DETALLE INFORME AVANCE
-  getDetalleInformeAvance(
-    ot_id: number
-  ): Observable<Response<DetalleInformeAvance>> {
-    return this.http.post<Response<DetalleInformeAvance>>(
-      `${this.apiUrl}/ot/informe_avance/detalle/get`,
-      { ot_id }
-    );
-  }
-
-  updateDetalleInformeAvance(
-    ot_id: number,
-    id: number,
-    {
-      servicio,
-      unidad_obra,
-    }: {
-      servicio: {
-        row_id: number;
-        cantidad: number;
-      }[];
-      unidad_obra: {
-        row_id: number;
-        cantidad: number;
-      }[];
-    }
-  ): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
-      `${this.apiUrl}/ot/informe_avance_detalle/update`,
-      { servicio, unidad_obra }
-    );
-  }
-
-  sendDetalleInformeAvance(ot_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
-      `${this.apiUrl}/ot/informe_avance/send`,
-      { ot_id }
-    );
-  }
-
   // GET ACTA TIPOS PAGO
   getActaTiposPago(): Observable<Response<{ items: ActaTipoPago[] }>> {
     return this.http.post<Response<{ items: ActaTipoPago[] }>>(
@@ -297,69 +241,6 @@ export class OTService {
         ot_id,
       }
     );
-  }
-
-  // GET DETALLE UOB POR ACTA
-  getDetalleUobPorActa(
-    ot_id: number
-  ): Observable<Response<{ items: DetalleActaUob[] }>> {
-    return this.http.post<Response<{ items: DetalleActaUob[] }>>(
-      `${this.apiUrl}/ot/get_detalle_uob_for_acta/get`,
-      {
-        ot_id,
-      }
-    );
-  }
-
-  // GET ULTIMO TIPO PAGO ACTA
-  getUltimoTipoPagoActa(ot_id: number): Observable<string> {
-    return this.http
-      .post<Response<{ tipo_pago: string }>>(
-        `${this.apiUrl}/ot/acta/detalle/get_last`,
-        {
-          ot_id,
-        }
-      )
-      .pipe(
-        map(
-          (response: { data: { tipo_pago: string } }) =>
-            response?.data?.tipo_pago ?? ''
-        )
-      );
-  }
-
-  sendGeneracionActa(
-    ot_id: number,
-    tipo_pago: string,
-    detalle: {
-      servicio: {
-        rowid: number;
-        cantidad: number;
-        porcentaje: number;
-      }[];
-      unidad_obra: {
-        rowid: number;
-        cantidad: number;
-        porcentaje: number;
-      }[];
-    }
-  ): Observable<Response<any>> {
-    //// return this.http.post<Response<any>>(`${this.apiUrl}/ot/acta/create`, {
-    ////   ot_id,
-    ////   tipo_pago,
-    ////   detalle,
-    //// });
-
-    console.log(`${this.apiUrl}/ot/acta/create`, {
-      ot_id,
-      tipo_pago,
-      detalle,
-    });
-
-    return of({
-      status: { code: 0, desc: 'OK' },
-      data: {},
-    }).pipe(delay(3000));
   }
 
   // GET CATEGORIAS ARCHIVOS
@@ -390,25 +271,6 @@ export class OTService {
     return this.http.post<Response<DataRespSubirArchivo>>(
       `${this.apiUrl}/files/repositorio_archivos/create`,
       formData
-    );
-  }
-
-  // CREATE LIBRO DE OBRAS
-  createRegistroLibroObras(
-    request: ReqCreateRegistroLibroObra
-  ): Observable<Response<any>> {
-    console.log('Create registro LO', request);
-    return this.http.post<Response<any>>(
-      `${this.apiUrl}/ot/libro_obras/create`,
-      request
-    );
-  }
-
-  // GET LIBRO DE OBRAS
-  getLibroObras(ot_id: number): Observable<Response<DataRespGetLibroDeObras>> {
-    return this.http.post<Response<DataRespGetLibroDeObras>>(
-      `${this.apiUrl}/libro_obra/get_libro_obras/get`,
-      { ot_id }
     );
   }
 }

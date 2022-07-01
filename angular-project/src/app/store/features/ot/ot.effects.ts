@@ -1,46 +1,33 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
 
-import {
-  catchError,
-  concatMap,
-  map,
-  mapTo,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { SnackBarService } from '@utilsSIGO/snack-bar';
-
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import * as Data from '@data';
+import {
+  ProyectoService,
+  UserService,
+  OTService,
+  SustentoFinancieroService,
+  AlertMessageActions,
+  InformeAvanceService,
+  ActaService,
+  LibroObraService,
+} from '@data';
 import * as otActions from './ot.actions';
 
-import { environment } from '@environment';
-
-import { Response } from '@storeOT/model';
 @Injectable()
 export class OtEffects {
   constructor(
     private actions$: Actions,
-    private http: HttpClient,
-    private snackService: SnackBarService,
-    private otService: Data.OTService,
-    private informeAvanceService: Data.InformAvenceService,
-    private sustentofinancieroService: Data.SustentoFinancieroService,
-    private actaService: Data.ActaService,
-    private userService: Data.UserService,
-    private authFacade: AuthFacade,
-    private otFacade: OtFacade,
-    private messageService: MessageService,
-    private messageServiceInt: Data.NotifyAfter,
-    private router: Router,
-    private alertMessageAction: Data.AlertMessageActions
+    private alertMessageAction: AlertMessageActions,
+    private otService: OTService,
+    private sustentofinancieroService: SustentoFinancieroService,
+    private userService: UserService,
+    private proyectoService: ProyectoService,
+    private informeAvanceService: InformeAvanceService,
+    private actaService: ActaService,
+    private libroObraService: LibroObraService
   ) {}
 
   getOTs$ = createEffect(() =>
@@ -183,7 +170,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getProyecto),
       concatMap(() =>
-        this.otService.getProyectos().pipe(
+        this.proyectoService.getProyectos().pipe(
           map(response => otActions.getProyectoSuccess({ response })),
           catchError(error => of(otActions.getProyectoError({ error })))
         )
@@ -440,7 +427,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getDetalleInformeAvance),
       concatMap(({ ot_id }) =>
-        this.otService.getDetalleInformeAvance(ot_id).pipe(
+        this.informeAvanceService.getDetalleInformeAvance(ot_id).pipe(
           map(response =>
             otActions.getDetalleInformeAvanceSuccess({ response })
           ),
@@ -457,14 +444,16 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.updateDetalleInformeAvance),
       concatMap(({ ot_id, id, data }) =>
-        this.otService.updateDetalleInformeAvance(ot_id, id, data).pipe(
-          map(response =>
-            otActions.updateDetalleInformeAvanceSuccess({ response })
-          ),
-          catchError(error =>
-            of(otActions.updateDetalleInformeAvanceError({ error }))
+        this.informeAvanceService
+          .updateDetalleInformeAvance(ot_id, id, data)
+          .pipe(
+            map(response =>
+              otActions.updateDetalleInformeAvanceSuccess({ response })
+            ),
+            catchError(error =>
+              of(otActions.updateDetalleInformeAvanceError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -489,7 +478,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.sendDetalleInformeAvance),
       concatMap(({ ot_id }) =>
-        this.otService.sendDetalleInformeAvance(ot_id).pipe(
+        this.informeAvanceService.sendDetalleInformeAvance(ot_id).pipe(
           map(response =>
             otActions.sendDetalleInformeAvanceSuccess({ response })
           ),
@@ -506,7 +495,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.sendGeneracionActa),
       concatMap(({ ot_id, tipo_pago, detalle }) =>
-        this.otService.sendGeneracionActa(ot_id, tipo_pago, detalle).pipe(
+        this.actaService.sendGeneracionActa(ot_id, tipo_pago, detalle).pipe(
           map(response => otActions.sendGeneracionActaSuccess({ response })),
           catchError(error => of(otActions.sendGeneracionActaError({ error })))
         )
@@ -541,7 +530,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.createRegistroLibroObras),
       concatMap(({ request }) =>
-        this.otService.createRegistroLibroObras(request).pipe(
+        this.libroObraService.createRegistroLibroObras(request).pipe(
           map(response =>
             otActions.createRegistroLibroObrasSuccess({ response })
           ),
@@ -558,7 +547,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getLibroObras),
       concatMap(({ ot_id }) =>
-        this.otService.getLibroObras(ot_id).pipe(
+        this.libroObraService.getLibroObras(ot_id).pipe(
           map(response => otActions.getLibroObrasSuccess({ response })),
           catchError(error => of(otActions.getLibroObrasError({ error })))
         )

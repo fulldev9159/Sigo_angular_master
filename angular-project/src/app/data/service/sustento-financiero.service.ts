@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Response, PMO, LP, PEP2, OPEX, SAP, CECO, ResponseItems } from '@data';
+import { PMO, LP, PEP2, OPEX, SAP, CECO, ResponseItems } from '@data';
 
 @Injectable({
   providedIn: 'root',
