@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
-import * as Data from '@data';
 import {
   Response,
   ContratosUser,
@@ -40,12 +39,13 @@ import {
   ActaTipoPago,
   DetalleActaServicio,
   DetalleActaUob,
+  OT,
 } from '@data';
 @Injectable({
   providedIn: 'root',
 })
 export class OtFacade {
-  constructor(private store: Store<Data.OT>) {}
+  constructor(private store: Store<OT>) {}
 
   // GET OT
   public getOts(request: RequestGetOTs): void {
@@ -525,78 +525,6 @@ export class OtFacade {
     this.store.dispatch(otActions.resetCECO());
   }
 
-  // ////
-
-  public getOtEjecucion$(): Observable<Data.OT[]> {
-    return this.store.select(otSelectors.getOtEjecucion);
-  }
-
-  public getOtAbiertas$(): Observable<Data.OT[]> {
-    return this.store.select(otSelectors.getOtAbiertas);
-  }
-
-  public getOtCerradas$(): Observable<Data.OT[]> {
-    return this.store.select(otSelectors.getOtCerradas);
-  }
-  public getOtFilters$(): Observable<{
-    filtro_propietario: string;
-    filtro_tipo: string;
-  }> {
-    return this.store.select(otSelectors.getOtFilters);
-  }
-
-  public selectOT(ot: Data.OT): void {
-    this.store.dispatch(otActions.selectOT({ ot }));
-  }
-
-  public getSelectedOT$(): Observable<Data.OT> {
-    return this.store.select(otSelectors.getSelectedOT);
-  }
-
-  // ESTADOS DE OT
-  public approveOT(otID: number, coordinador_id: number): void {
-    this.store.dispatch(otActions.approveOT({ otID, coordinador_id }));
-  }
-
-  public rejectOT(otID: number, motivo: string): void {
-    this.store.dispatch(otActions.rejectOT({ otID, motivo }));
-  }
-
-  public cancelOT(otID: number): void {
-    this.store.dispatch(otActions.cancelOT({ otID }));
-  }
-
-  public finalizeOTJobs(otID: number): void {
-    this.store.dispatch(otActions.finalizeOTJobs({ otID }));
-  }
-  // ESTADOS DE OT
-
-  // DELETE
-  public deleteOt(position: number): void {
-    this.store.dispatch(otActions.deleteOt({ otPosition: position }));
-  }
-  // DELETE
-
-  // // REPLY
-  // public replyOt(ot: OTmodel.RequestCreateOT): void {
-  //   this.store.dispatch(otActions.replyOt({ ot }));
-  // }
-  // // REPLY
-
-  // // POST
-  // public postOt(
-  //   ot: OTmodel.RequestCreateOT | OTmodel.RequestCreateOTFijo
-  // ): void {
-  //   this.store.dispatch(otActions.postOt({ ot }));
-  // }
-
-  // // IngreOT con SCE ***
-  // public postOtSCE(ot: OTmodel.RequestCreateOT): void {
-  //   this.store.dispatch(otActions.postOtSCE({ ot }));
-  // }
-  // // POST
-  // // OT
-
   // Detalle OT
   public getDetalleOT(id: number): void {
     this.store.dispatch(otActions.getDetalleOT({ id }));
@@ -606,64 +534,6 @@ export class OtFacade {
     return this.store.select(otSelectors.getDetalleOT);
   }
 
-  // Coordinadores OT
-  public getCoordinators(otID: number): void {
-    this.store.dispatch(otActions.getCoordinators({ otID }));
-  }
-
-  // public getCoordinators$(): Observable<Data.User[]> {
-  //   return this.store.select(otSelectors.getCoordinators);
-  // }
-
-  public assignCoordinator(otID: number, coordinatorID: number): void {
-    this.store.dispatch(
-      otActions.assignCoordinator({ otID, coordinador_id: coordinatorID })
-    );
-  }
-
-  public assignTrabajador(otID: number, trabajadorID: number): void {
-    this.store.dispatch(otActions.assignTrabajador({ otID, trabajadorID }));
-  }
-
-  // Actas
-  public approveOTMinutesGeneration(otID: number): void {
-    this.store.dispatch(otActions.approveOTMinutesGeneration({ otID }));
-  }
-
-  public rejectOTMinutesGeneration(otID: number): void {
-    this.store.dispatch(otActions.rejectOTMinutesGeneration({ otID }));
-  }
-
-  public approveOTMinutesValidation(otID: number): void {
-    this.store.dispatch(otActions.approveOTMinutesValidation({ otID }));
-  }
-
-  public rejectOTMinutesValidation(otID: number): void {
-    this.store.dispatch(otActions.rejectOTMinutesValidation({ otID }));
-  }
-
-  // Pagos
-  public authorizePayments(otID: number, user_id: number): void {
-    this.store.dispatch(otActions.authorizePayments({ otID, user_id }));
-  }
-
-  public rejectPayments(otID: number): void {
-    this.store.dispatch(otActions.rejectPayments({ otID }));
-  }
-
-  // Pagos
-  public finalizeOT(otID: number): void {
-    this.store.dispatch(otActions.finalizeOT({ otID }));
-  }
-
-  public getRegistrosLibroObras(ot_id: number): void {
-    this.store.dispatch(otActions.getRegistrosLibroObra({ ot_id }));
-  }
-
-  // public getRegistrosLibroObras$(): Observable<Data.RegistroLibroObra[]> {
-  //   return this.store.select(otSelectors.getRegistrosLibroObra);
-  // }
-
   public getSavingOT$(): Observable<boolean> {
     return this.store.select(otSelectors.getSavingOT);
   }
@@ -672,7 +542,26 @@ export class OtFacade {
     return this.store.select(otSelectors.getSaveOTError);
   }
 
-  // public inicializarInformeAvanceTrabajador(ot_id: number): void {
-  //   this.store.dispatch(otActions.inicializarInformeAvance({ ot_id }));
-  // }
+  public selectOT(ot: OT): void {
+    this.store.dispatch(otActions.selectOT({ ot }));
+  }
+
+  public getSelectedOT$(): Observable<OT> {
+    return this.store.select(otSelectors.getSelectedOT);
+  }
+  public getOtEjecucion$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getOtEjecucion);
+  }
+
+  public getOtAbiertas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getOtAbiertas);
+  }
+
+  public getOtCerradas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getOtCerradas);
+  }
+
+  public rejectOT(otID: number, motivo: string): void {
+    this.store.dispatch(otActions.rejectOT({ otID, motivo }));
+  }
 }

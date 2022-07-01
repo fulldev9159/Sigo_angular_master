@@ -17,7 +17,6 @@ import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
 import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador-form/assign-trabajador-form.component';
 import { RegistrarLibroObraComponent } from '@featureOT/ot/component/registrar-libro-obra/registrar-libro-obra';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -351,7 +350,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
                 acceptLabel: 'Confirmar',
                 rejectLabel: 'Cancelar',
                 accept: () => {
-                  this.otFacade.finalizeOTJobs(ot.id);
+                  // this.otFacade.finalizeOTJobs(ot.id);
                 },
               });
             },
@@ -451,7 +450,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
                 acceptLabel: 'Confirmar',
                 rejectLabel: 'Cancelar',
                 accept: () => {
-                  this.otFacade.finalizeOT(ot.id);
+                  // this.otFacade.finalizeOT(ot.id);
                 },
               });
             },
@@ -464,12 +463,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
   };
 
   public data = [];
-
-  @ViewChild('assignCoordinatorForm', {
-    read: AssignCoordinatorFormComponent,
-    static: false,
-  })
-  assignCoordinatorForm: AssignCoordinatorFormComponent;
 
   @ViewChild('assignTrabajadorForm', {
     read: AssignTrabajadorFormComponent,

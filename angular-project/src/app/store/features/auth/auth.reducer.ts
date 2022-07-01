@@ -1,12 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as authActions from './auth.actions';
-import {
-  SessionData,
-  Perfil,
-  DataResGetPerfilesUser,
-  PerfilesUser,
-  Accion,
-} from '@data';
+import { SessionData, Perfil, PerfilesUser, Accion } from '@data';
 
 export const authFeatureKey = 'auth';
 
