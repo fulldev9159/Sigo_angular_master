@@ -13,7 +13,7 @@
             <span style="margin-top:5px;" *ngFor="let adjunto of registro.archivos">
               <a [href]="getUrl(adjunto.url)" class="download-link">
                 <i class="pi" [ngClass]="getIcon(adjunto.extension)" [ngStyle]="{color:getColor(adjunto.extension)}"></i>
-                {{adjunto.nombre_original}}.{{adjunto.extension}} ({{adjunto.human_size}}) (Tipo: <strong>{{adjunto.categoria_nombre}}</strong> )
+                {{adjunto.nombre_original}} ({{adjunto.human_size}}) (Tipo: <strong>{{adjunto.categoria_nombre}}</strong> )
               </a>
             </span>
             <span *ngIf="registro.archivos.length>0">
