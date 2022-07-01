@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import {
   ContratoMarco,
   Response,
-  ResponseItems,
   ReqEditContrato,
   ReqActivarContrato,
 } from '@data';
@@ -18,8 +17,8 @@ export class ContratosService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getAllContratos(): Observable<ResponseItems<ContratoMarco[]>> {
-    return this.http.post<ResponseItems<ContratoMarco[]>>(
+  getAllContratos(): Observable<Response<{ items: ContratoMarco[] }>> {
+    return this.http.post<Response<{ items: ContratoMarco[] }>>(
       `${this.apiUrl}/configuration/contrato_marco/getall`,
       {}
     );

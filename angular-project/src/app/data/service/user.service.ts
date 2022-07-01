@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { SnackBarService } from '@utilsSIGO/snack-bar';
 import {
   Response,
-  ResponseItems,
   PosiblesSuperiores,
   ContratosUser,
   DataRspAgregarPerfilUsuario,
@@ -28,8 +27,8 @@ export class UserService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getAllUsers(): Observable<ResponseItems<User[]>> {
-    return this.http.post<ResponseItems<User[]>>(
+  getAllUsers(): Observable<Response<{ items: User[] }>> {
+    return this.http.post<Response<{ items: User[] }>>(
       `${this.apiUrl}/usuario/usuario/getall`,
       {}
     );
@@ -39,7 +38,7 @@ export class UserService {
     usuario_id: number,
     usuario_perfil: number
   ): Observable<Response<any>> {
-    return this.http.post<ResponseItems<PosiblesSuperiores[]>>(
+    return this.http.post<Response<{ items: PosiblesSuperiores[] }>>(
       `${this.apiUrl}/usuario/posibles_superiores/get`,
       {
         usuario_id,
@@ -115,8 +114,8 @@ export class UserService {
 
   getContratosUser(
     usuario_id: number
-  ): Observable<ResponseItems<ContratosUser[]>> {
-    return this.http.post<ResponseItems<ContratosUser[]>>(
+  ): Observable<Response<{ items: ContratosUser[] }>> {
+    return this.http.post<Response<{ items: ContratosUser[] }>>(
       `${this.apiUrl}/usuario/usuario_has_contrato/get`,
       { usuario_id }
     );
@@ -124,8 +123,8 @@ export class UserService {
 
   getPosiblesContratosUser4CreateEdit(
     proveedor_id: number
-  ): Observable<ResponseItems<PosiblesContratosUser[]>> {
-    return this.http.post<ResponseItems<PosiblesContratosUser[]>>(
+  ): Observable<Response<{ items: PosiblesContratosUser[] }>> {
+    return this.http.post<Response<{ items: PosiblesContratosUser[] }>>(
       `${this.apiUrl}/usuario/crud/cmarco/get`,
       { proveedor_id }
     );

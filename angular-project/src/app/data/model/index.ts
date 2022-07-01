@@ -35,13 +35,6 @@ export interface Response<T> {
   status: StatusResponse;
 }
 
-export interface ResponseItems<T> {
-  data: {
-    items: T;
-  };
-  status: StatusResponse;
-}
-
 export interface StatusResponse {
   desc: string;
   code: number;

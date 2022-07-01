@@ -3,7 +3,6 @@ import {
   ReqActivarContrato,
   ReqEditContrato,
   Response,
-  ResponseItems,
 } from '@data';
 
 import { createAction, props } from '@ngrx/store';
@@ -15,7 +14,7 @@ export const getContratos = createAction('[Contratos] GET getContratos');
 
 export const getContratosSuccess = createAction(
   '[Contratos] GET getContratos Success',
-  props<{ response: ResponseItems<ContratoMarco[]> }>()
+  props<{ response: Response<{ items: ContratoMarco[] }> }>()
 );
 
 export const getContratosError = createAction(
@@ -34,7 +33,10 @@ export const getSingleContrato = createAction(
 
 export const getSingleContratoSuccess = createAction(
   '[Contratos] GET getSingleContrato Success',
-  props<{ contrato_id: number; response: ResponseItems<ContratoMarco[]> }>()
+  props<{
+    contrato_id: number;
+    response: Response<{ items: ContratoMarco[] }>;
+  }>()
 );
 
 // GET SINGLE CONTRATO

@@ -22,7 +22,6 @@ import {
   RespDataGetDetalleCubs,
   DataRespEditCubicacion,
   RequestDeleteDetallesCubicacion,
-  ResponseItems,
 } from '@data';
 
 // GET ALL CUBS
@@ -30,7 +29,7 @@ export const getAllCubs = createAction('[Cubicacion] getAllCubs ');
 
 export const getAllCubsSuccess = createAction(
   '[Cubicacion] getAllCubs Success',
-  props<{ response: ResponseItems<Cubicacion[]> }>()
+  props<{ response: Response<{ items: Cubicacion[] }> }>()
 );
 
 export const getAllCubsError = createAction(
@@ -62,7 +61,7 @@ export const getContratosUser4Cub = createAction(
 
 export const getContratosUser4CubSuccess = createAction(
   '[Cubicacion] getContratosUser4Cub Success',
-  props<{ response: ResponseItems<ContratosUser[]> }>()
+  props<{ response: Response<{ items: ContratosUser[] }> }>()
 );
 export const getContratosUser4CubError = createAction(
   '[Cubicacion] getContratosUser4Cub Error',
@@ -77,7 +76,7 @@ export const getAgencia4Cub = createAction(
 
 export const getAgencia4CubSuccess = createAction(
   '[Cubicacion] getAgencia4Cub Success',
-  props<{ response: ResponseItems<Agencias4Cub[]> }>()
+  props<{ response: Response<{ items: Agencias4Cub[] }> }>()
 );
 export const getAgencia4CubError = createAction(
   '[Cubicacion] getAgencia4Cub Error',
@@ -92,7 +91,7 @@ export const getProveedores4Cub = createAction(
 
 export const getProveedores4CubSuccess = createAction(
   '[Cubicacion] getProveedores4Cub Success',
-  props<{ response: ResponseItems<Proveedores4Cub[]> }>()
+  props<{ response: Response<{ items: Proveedores4Cub[] }> }>()
 );
 export const getProveedores4CubError = createAction(
   '[Cubicacion] getProveedores4Cub Error',
@@ -106,7 +105,7 @@ export const getTipoCubicacion4Cub = createAction(
 
 export const getTipoCubicacion4CubSuccess = createAction(
   '[Cubicacion] getTipoCubicacion4Cub Success',
-  props<{ response: ResponseItems<TipoCubicacion4Cub[]> }>()
+  props<{ response: Response<{ items: TipoCubicacion4Cub[] }> }>()
 );
 export const getTipoCubicacion4CubError = createAction(
   '[Cubicacion] getTipoCubicacion4Cub Error',
@@ -119,7 +118,7 @@ export const getActividades4Cub = createAction(
 );
 export const getActividades4CubSuccess = createAction(
   '[Cubicacion] getActividades4Cub Success',
-  props<{ response: ResponseItems<Actividad4Cub[]> }>()
+  props<{ response: Response<{ items: Actividad4Cub[] }> }>()
 );
 export const getActividades4CubError = createAction(
   '[Cubicacion] getActividades4Cub Error',
@@ -133,7 +132,7 @@ export const getTipoServicioEspecialidad4Cub = createAction(
 );
 export const getTipoServicioEspecialidad4CubSuccess = createAction(
   '[Cubicacion] getTipoServicioEspecialidad4Cub Success',
-  props<{ response: ResponseItems<TipoServicioEspecialidad4Cub[]> }>()
+  props<{ response: Response<{ items: TipoServicioEspecialidad4Cub[] }> }>()
 );
 export const getTipoServicioEspecialidad4CubError = createAction(
   '[Cubicacion] getTipoServicioEspecialidad4Cub Error',
@@ -147,7 +146,7 @@ export const getServicios4Cub = createAction(
 );
 export const getServicios4CubSuccess = createAction(
   '[Cubicacion] getServicios4Cub Success',
-  props<{ response: ResponseItems<Servicios4Cub[]> }>()
+  props<{ response: Response<{ items: Servicios4Cub[] }> }>()
 );
 export const getServicios4CubError = createAction(
   '[Cubicacion] getServicios4Cub Error',
@@ -161,7 +160,7 @@ export const getUnidadObra4Cub = createAction(
 );
 export const getUnidadObra4CubSuccess = createAction(
   '[Cubicacion] getUnidadObra4Cub Success',
-  props<{ response: ResponseItems<UnidadObra4Cub[]> }>()
+  props<{ response: Response<{ items: UnidadObra4Cub[] }> }>()
 );
 export const getUnidadObra4CubError = createAction(
   '[Cubicacion] getUnidadObra4Cub Error',

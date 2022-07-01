@@ -9,7 +9,6 @@ import {
   PermisoRol,
   RequestCreatePerfil,
   RequestUpdatePerfil,
-  ResponseItems,
   Response,
 } from '@data';
 @Injectable({
@@ -21,8 +20,8 @@ export class PerfilService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getAllPerfiles(): Observable<ResponseItems<Perfil[]>> {
-    return this.http.post<ResponseItems<Perfil[]>>(
+  getAllPerfiles(): Observable<Response<{ items: Perfil[] }>> {
+    return this.http.post<Response<{ items: Perfil[] }>>(
       `${this.apiUrl}/configuration/perfil/getall`,
       {}
     );
@@ -30,8 +29,8 @@ export class PerfilService {
 
   getPermisosPerfil(
     perfil_id: number
-  ): Observable<ResponseItems<PermisosPerfil[]>> {
-    return this.http.post<ResponseItems<PermisosPerfil[]>>(
+  ): Observable<Response<{ items: PermisosPerfil[] }>> {
+    return this.http.post<Response<{ items: PermisosPerfil[] }>>(
       `${this.apiUrl}/configuration/perfil_has_permiso/get`,
       { perfil_id }
     );
@@ -44,8 +43,8 @@ export class PerfilService {
     );
   }
 
-  getAllRoles4CreateEditPerfil(): Observable<ResponseItems<Rol[]>> {
-    return this.http.post<ResponseItems<Rol[]>>(
+  getAllRoles4CreateEditPerfil(): Observable<Response<{ items: Rol[] }>> {
+    return this.http.post<Response<{ items: Rol[] }>>(
       `${this.apiUrl}/configuration/rol/getall`,
       {}
     );
@@ -53,8 +52,8 @@ export class PerfilService {
 
   getPermisosRol4CreateEditPerfil(
     rol_id: number
-  ): Observable<ResponseItems<PermisoRol[]>> {
-    return this.http.post<ResponseItems<PermisoRol[]>>(
+  ): Observable<Response<{ items: PermisoRol[] }>> {
+    return this.http.post<Response<{ items: PermisoRol[] }>>(
       `${this.apiUrl}/configuration/rol_template_permiso/get`,
       { rol_id }
     );

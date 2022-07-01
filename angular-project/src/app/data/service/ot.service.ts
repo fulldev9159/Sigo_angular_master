@@ -1,14 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map, delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import {
   OT,
   Cubs4OT,
   RequestGetOTs,
   Response,
-  ResponseItems,
   AdminContrato4OT,
   OficinaCentral,
   SolicitadoPor,
@@ -28,11 +26,8 @@ import {
   MotivoRechazo,
   RequestAceptarRechazarOT,
   PosibleTrabajador,
-  DetalleInformeAvance,
   DataRespSubirArchivo,
-  ReqCreateRegistroLibroObra,
   CategoriaArchivo,
-  DataRespGetLibroDeObras,
   ActaTipoPago,
   DetalleActaServicio,
 } from '@data';
@@ -46,8 +41,8 @@ export class OTService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getOTs(request: RequestGetOTs): Observable<ResponseItems<OT[]>> {
-    return this.http.post<ResponseItems<OT[]>>(
+  getOTs(request: RequestGetOTs): Observable<Response<{ items: OT[] }>> {
+    return this.http.post<Response<{ items: OT[] }>>(
       `${this.apiUrl}/ot/bandeja/get`,
       request
     );
@@ -60,8 +55,10 @@ export class OTService {
     );
   }
 
-  getCubicaciones(contrato_id: number): Observable<ResponseItems<Cubs4OT[]>> {
-    return this.http.post<ResponseItems<Cubs4OT[]>>(
+  getCubicaciones(
+    contrato_id: number
+  ): Observable<Response<{ items: Cubs4OT[] }>> {
+    return this.http.post<Response<{ items: Cubs4OT[] }>>(
       `${this.apiUrl}/ot/cubicaciones_from_contrato/get`,
       { contrato_id }
     );
@@ -69,8 +66,8 @@ export class OTService {
 
   getAdminContrato(
     cubicacion_id: number
-  ): Observable<ResponseItems<AdminContrato4OT[]>> {
-    return this.http.post<ResponseItems<AdminContrato4OT[]>>(
+  ): Observable<Response<{ items: AdminContrato4OT[] }>> {
+    return this.http.post<Response<{ items: AdminContrato4OT[] }>>(
       `${this.apiUrl}/ot/posibles_administradores/get`,
       { cubicacion_id }
     );
@@ -79,29 +76,29 @@ export class OTService {
   // BUCLE
   getOficinaCentral(
     agencia_id: number
-  ): Observable<ResponseItems<OficinaCentral[]>> {
-    return this.http.post<ResponseItems<OficinaCentral[]>>(
+  ): Observable<Response<{ items: OficinaCentral[] }>> {
+    return this.http.post<Response<{ items: OficinaCentral[] }>>(
       `${this.apiUrl}/ot/centrales_agid/get`,
       { agencia_id }
     );
   }
 
-  getSolicitadoPor(): Observable<ResponseItems<SolicitadoPor[]>> {
-    return this.http.post<ResponseItems<SolicitadoPor[]>>(
+  getSolicitadoPor(): Observable<Response<{ items: SolicitadoPor[] }>> {
+    return this.http.post<Response<{ items: SolicitadoPor[] }>>(
       `${this.apiUrl}/ot/solicitantes/getall`,
       {}
     );
   }
 
-  getComuna(cubicacion_id: number): Observable<ResponseItems<Comuna[]>> {
-    return this.http.post<ResponseItems<Comuna[]>>(
+  getComuna(cubicacion_id: number): Observable<Response<{ items: Comuna[] }>> {
+    return this.http.post<Response<{ items: Comuna[] }>>(
       `${this.apiUrl}/ot/get_comunas_from_cubicacion/get`,
       { cubicacion_id }
     );
   }
 
-  getTipoRed(): Observable<ResponseItems<TipoDeRed[]>> {
-    return this.http.post<ResponseItems<TipoDeRed[]>>(
+  getTipoRed(): Observable<Response<{ items: TipoDeRed[] }>> {
+    return this.http.post<Response<{ items: TipoDeRed[] }>>(
       `${this.apiUrl}/ot/tipo_red/getall`,
       {}
     );
@@ -109,38 +106,38 @@ export class OTService {
 
   getTipoTrabajo(
     cubicacion_id: number
-  ): Observable<ResponseItems<TipoDeTrabajo[]>> {
-    return this.http.post<ResponseItems<TipoDeTrabajo[]>>(
+  ): Observable<Response<{ items: TipoDeTrabajo[] }>> {
+    return this.http.post<Response<{ items: TipoDeTrabajo[] }>>(
       `${this.apiUrl}/ot/get_tipo_trabajo_from_tipo_cubicacion/get`,
       { cubicacion_id }
     );
   }
 
-  getAreaNegocio(): Observable<ResponseItems<AreaDeNegocio[]>> {
-    return this.http.post<ResponseItems<AreaDeNegocio[]>>(
+  getAreaNegocio(): Observable<Response<{ items: AreaDeNegocio[] }>> {
+    return this.http.post<Response<{ items: AreaDeNegocio[] }>>(
       `${this.apiUrl}/ot/ot_area_negocio/getall`,
       {}
     );
   }
 
   // MOVIL
-  getPlanDeProyecto(): Observable<ResponseItems<PlanDeProyecto[]>> {
-    return this.http.post<ResponseItems<PlanDeProyecto[]>>(
+  getPlanDeProyecto(): Observable<Response<{ items: PlanDeProyecto[] }>> {
+    return this.http.post<Response<{ items: PlanDeProyecto[] }>>(
       `${this.apiUrl}/ot/plan/getall`,
       {}
     );
   }
 
-  getSitio(plan_id: number): Observable<ResponseItems<Sitio[]>> {
-    return this.http.post<ResponseItems<Sitio[]>>(
+  getSitio(plan_id: number): Observable<Response<{ items: Sitio[] }>> {
+    return this.http.post<Response<{ items: Sitio[] }>>(
       `${this.apiUrl}/ot/sitio_plan_plid/get`,
       { plan_id }
     );
   }
 
   // FIJO
-  getTipoNumeroInterno(): Observable<ResponseItems<TipoNumeroInterno[]>> {
-    return this.http.post<ResponseItems<TipoNumeroInterno[]>>(
+  getTipoNumeroInterno(): Observable<Response<{ items: TipoNumeroInterno[] }>> {
+    return this.http.post<Response<{ items: TipoNumeroInterno[] }>>(
       `${this.apiUrl}/configuration/tipo_numero_interno/getall`,
       {}
     );
@@ -148,8 +145,8 @@ export class OTService {
 
   getNumeroInternoHasOT(
     numero_interno: string
-  ): Observable<ResponseItems<NumeroInternoHasOT[]>> {
-    return this.http.post<ResponseItems<NumeroInternoHasOT[]>>(
+  ): Observable<Response<{ items: NumeroInternoHasOT[] }>> {
+    return this.http.post<Response<{ items: NumeroInternoHasOT[] }>>(
       `${this.apiUrl}/ot/ot_has_numero_interno_niid/get`,
       { numero_interno }
     );
@@ -170,8 +167,8 @@ export class OTService {
   // GET ALL MOTIVO RECHAZO OT
   getAllMotivoRechazoOT(
     tipo: string
-  ): Observable<ResponseItems<MotivoRechazo[]>> {
-    return this.http.post<ResponseItems<MotivoRechazo[]>>(
+  ): Observable<Response<{ items: MotivoRechazo[] }>> {
+    return this.http.post<Response<{ items: MotivoRechazo[] }>>(
       `${this.apiUrl}/configuration/causas_rechazo_tipo/get`,
       { tipo }
     );
@@ -190,8 +187,8 @@ export class OTService {
   // POSIBLE TRABAJADOR
   getPosibleTrabajador(
     ot_id: number
-  ): Observable<ResponseItems<PosibleTrabajador[]>> {
-    return this.http.post<ResponseItems<PosibleTrabajador[]>>(
+  ): Observable<Response<{ items: PosibleTrabajador[] }>> {
+    return this.http.post<Response<{ items: PosibleTrabajador[] }>>(
       `${this.apiUrl}/ot/posibles_trabajadores/get`,
       { ot_id }
     );
@@ -244,8 +241,8 @@ export class OTService {
   }
 
   // GET CATEGORIAS ARCHIVOS
-  getCategoriasArchivos(): Observable<ResponseItems<CategoriaArchivo[]>> {
-    return this.http.post<ResponseItems<CategoriaArchivo[]>>(
+  getCategoriasArchivos(): Observable<Response<{ items: CategoriaArchivo[] }>> {
+    return this.http.post<Response<{ items: CategoriaArchivo[] }>>(
       `${this.apiUrl}/files/categoria_archivo/getall`,
       {}
     );

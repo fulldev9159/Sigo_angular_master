@@ -1,10 +1,4 @@
-import {
-  Response,
-  ResponseItems,
-  RequestEditArea,
-  Area,
-  DataRspEditArea,
-} from '@data';
+import { Response, RequestEditArea, Area, DataRspEditArea } from '@data';
 import { createAction, props } from '@ngrx/store';
 
 export const reset = createAction('[Area] reset');
@@ -14,7 +8,7 @@ export const getAreas = createAction('[Area] GET getAreas');
 
 export const getAreasSuccess = createAction(
   '[Area] GET getAreas Success',
-  props<{ response: ResponseItems<Area[]> }>()
+  props<{ response: Response<{ items: Area[] }> }>()
 );
 
 export const getAreasError = createAction(
@@ -32,7 +26,7 @@ export const getArea = createAction(
 
 export const getAreaSuccess = createAction(
   '[Area] GET getArea Success',
-  props<{ area_id: number; response: ResponseItems<Area[]> }>()
+  props<{ area_id: number; response: Response<{ items: Area[] }> }>()
 );
 
 // GET AREA

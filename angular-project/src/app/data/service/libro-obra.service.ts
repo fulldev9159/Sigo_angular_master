@@ -6,7 +6,6 @@ import {
   DataRespGetLibroDeObras,
   ReqCreateRegistroLibroObra,
   Response,
-  ResponseItems,
 } from '@data/model';
 
 @Injectable({

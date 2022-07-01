@@ -1,8 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map, delay } from 'rxjs/operators';
-import { Proyectos, ResponseItems } from '@data/model';
+import { Observable } from 'rxjs';
+import { Proyectos, Response } from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +12,8 @@ export class ProyectoService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getProyectos(): Observable<ResponseItems<Proyectos[]>> {
-    return this.http.post<ResponseItems<Proyectos[]>>(
+  getProyectos(): Observable<Response<{ items: Proyectos[] }>> {
+    return this.http.post<Response<{ items: Proyectos[] }>>(
       `${this.apiUrl}/ot/proyecto_uid/get`,
       {}
     );

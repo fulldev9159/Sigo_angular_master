@@ -5,7 +5,6 @@ import { map, concatMap } from 'rxjs/operators';
 import {
   Cubicacion,
   Response,
-  ResponseItems,
   Agencias4Cub,
   Proveedores4Cub,
   Carrito,
@@ -36,8 +35,8 @@ export class CubicacionService {
   constructor(@Inject('environment') environment, private http: HttpClient) {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
-  getAllCubs(): Observable<ResponseItems<Cubicacion[]>> {
-    return this.http.post<ResponseItems<Cubicacion[]>>(
+  getAllCubs(): Observable<Response<{ items: Cubicacion[] }>> {
+    return this.http.post<Response<{ items: Cubicacion[] }>>(
       `${this.apiUrl}/cubicacion/table_cubicaciones/get`,
       {}
     );
@@ -54,8 +53,8 @@ export class CubicacionService {
 
   getAgencia4Cub(
     contrato_id: number
-  ): Observable<ResponseItems<Agencias4Cub[]>> {
-    return this.http.post<ResponseItems<Agencias4Cub[]>>(
+  ): Observable<Response<{ items: Agencias4Cub[] }>> {
+    return this.http.post<Response<{ items: Agencias4Cub[] }>>(
       `${this.apiUrl}/cubicacion/agencias_from_contrato/get`,
       { contrato_id }
     );
@@ -64,22 +63,22 @@ export class CubicacionService {
   getProveedores4Cub(
     agencia_id: number,
     contrato_id: number
-  ): Observable<ResponseItems<Proveedores4Cub[]>> {
-    return this.http.post<ResponseItems<Proveedores4Cub[]>>(
+  ): Observable<Response<{ items: Proveedores4Cub[] }>> {
+    return this.http.post<Response<{ items: Proveedores4Cub[] }>>(
       `${this.apiUrl}/cubicacion/proveedores_from_agencia_contrato/get`,
       { agencia_id, contrato_id }
     );
   }
 
-  getTipoCubicacion(): Observable<ResponseItems<TipoCubicacion4Cub[]>> {
-    return this.http.post<ResponseItems<TipoCubicacion4Cub[]>>(
+  getTipoCubicacion(): Observable<Response<{ items: TipoCubicacion4Cub[] }>> {
+    return this.http.post<Response<{ items: TipoCubicacion4Cub[] }>>(
       `${this.apiUrl}/configuration/tipo_cubicacion/getall`,
       {}
     );
   }
 
-  getActividades4Cub(): Observable<ResponseItems<Actividad4Cub[]>> {
-    return this.http.post<ResponseItems<Actividad4Cub[]>>(
+  getActividades4Cub(): Observable<Response<{ items: Actividad4Cub[] }>> {
+    return this.http.post<Response<{ items: Actividad4Cub[] }>>(
       `${this.apiUrl}/configuration/actividad/getall`,
       {}
     );
@@ -88,8 +87,8 @@ export class CubicacionService {
   getTipoServicioEspecialidad4Cub(
     actividad_id: number,
     contrato_marco_id: number
-  ): Observable<ResponseItems<TipoServicioEspecialidad4Cub[]>> {
-    return this.http.post<ResponseItems<TipoServicioEspecialidad4Cub[]>>(
+  ): Observable<Response<{ items: TipoServicioEspecialidad4Cub[] }>> {
+    return this.http.post<Response<{ items: TipoServicioEspecialidad4Cub[] }>>(
       `${this.apiUrl}/cubicacion/tipo_servicio/get`,
       { actividad_id, contrato_marco_id }
     );
@@ -97,8 +96,8 @@ export class CubicacionService {
 
   getServicios4Cub(
     request: RequestGetServicios4Cub
-  ): Observable<ResponseItems<Servicios4Cub[]>> {
-    return this.http.post<ResponseItems<Servicios4Cub[]>>(
+  ): Observable<Response<{ items: Servicios4Cub[] }>> {
+    return this.http.post<Response<{ items: Servicios4Cub[] }>>(
       `${this.apiUrl}/cubicacion/combo_servicios/get`,
       request
     );
@@ -106,8 +105,8 @@ export class CubicacionService {
 
   getUnidadObra4Cub(
     request: RequestGetUnidadObra4Cub
-  ): Observable<ResponseItems<UnidadObra4Cub[]>> {
-    return this.http.post<ResponseItems<UnidadObra4Cub[]>>(
+  ): Observable<Response<{ items: UnidadObra4Cub[] }>> {
+    return this.http.post<Response<{ items: UnidadObra4Cub[] }>>(
       `${this.apiUrl}/cubicacion/unidades_obra_from_servicio/get`,
       request
     );
@@ -118,7 +117,7 @@ export class CubicacionService {
     request_uo: RequestGetDatosUnidadObra4Cub
   ): Observable<Carrito> {
     return this.http
-      .post<ResponseItems<DetallesServicio4Cub[]>>(
+      .post<Response<{ items: DetallesServicio4Cub[] }>>(
         `${this.apiUrl}/cubicacion/datos_servicio/get`,
         request_servicio
       )

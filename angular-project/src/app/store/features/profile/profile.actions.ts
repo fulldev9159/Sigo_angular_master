@@ -7,7 +7,6 @@ import {
   PermisoRol,
   RequestCreatePerfil,
   RequestUpdatePerfil,
-  ResponseItems,
 } from '@data';
 
 // PROFILE LIST
@@ -15,7 +14,7 @@ export const getAllProfile = createAction('[Profile] getAllProfile');
 
 export const getProfileSuccess = createAction(
   '[Profile] getAllProfile Success',
-  props<{ response: ResponseItems<Perfil[]> }>()
+  props<{ response: Response<{ items: Perfil[] }> }>()
 );
 
 export const getProfileError = createAction(
@@ -31,7 +30,7 @@ export const getPermisosPerfil = createAction(
 
 export const getPermisosPerfilSuccess = createAction(
   '[Perfil] getPermisosPerfil Success',
-  props<{ response: ResponseItems<PermisosPerfil[]> }>()
+  props<{ response: Response<{ items: PermisosPerfil[] }> }>()
 );
 
 export const getPermisosPerfilError = createAction(
@@ -68,7 +67,7 @@ export const getAllRoles4CreateEditPerfil = createAction(
 
 export const getAllRoles4CreateEditPerfilSuccess = createAction(
   '[Perfil] getAllRoles4CreateEditPerfil Success',
-  props<{ response: ResponseItems<Rol[]> }>()
+  props<{ response: Response<{ items: Rol[] }> }>()
 );
 
 export const getAllRoles4CreateEditPerfilError = createAction(
@@ -84,7 +83,7 @@ export const getPermisosRol4CreateEditPerfil = createAction(
 
 export const getPermisosRol4CreateEditPerfilSuccess = createAction(
   '[Perfil] getPermisosRol4CreateEditPerfil Success',
-  props<{ response: ResponseItems<PermisoRol[]> }>()
+  props<{ response: Response<{ items: PermisoRol[] }> }>()
 );
 
 export const getPermisosRol4CreateEditPerfilError = createAction(

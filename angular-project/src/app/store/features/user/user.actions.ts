@@ -2,7 +2,6 @@ import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
 import {
   Response,
-  ResponseItems,
   DataResGetPerfilesUser,
   Perfil,
   RequestAgregarPerfilUsusario,
@@ -27,7 +26,7 @@ export const getAllUser = createAction('[User GetAll] GET All User');
 
 export const getAllUserSuccess = createAction(
   '[User ] GET All User Success',
-  props<{ response: ResponseItems<User[]> }>()
+  props<{ response: Response<{ items: User[] }> }>()
 );
 
 export const getAllUserError = createAction(
@@ -64,7 +63,7 @@ export const getAllPerfiles = createAction('[User] GET getAllPerfiles');
 
 export const getAllPerfilesSuccess = createAction(
   '[User ] GET getAllPerfiles Success',
-  props<{ response: ResponseItems<Perfil[]> }>()
+  props<{ response: Response<{ items: Perfil[] }> }>()
 );
 
 export const getAllPerfilesError = createAction(
@@ -83,7 +82,7 @@ export const getPosiblesSuperiores = createAction(
 
 export const getPosiblesSuperioresSuccess = createAction(
   '[User] GET getPosiblesSuperiores Success',
-  props<{ response: ResponseItems<PosiblesSuperiores[]> }>()
+  props<{ response: Response<{ items: PosiblesSuperiores[] }> }>()
 );
 
 export const getPosiblesSuperioresError = createAction(
@@ -135,7 +134,7 @@ export const getAllProveedores4CreateUser = createAction(
 
 export const getAllProveedores4CreateUserSuccess = createAction(
   '[User] GET getAllProveedores4CreateUser Success',
-  props<{ response: ResponseItems<ModelProveedor[]> }>()
+  props<{ response: Response<{ items: ModelProveedor[] }> }>()
 );
 
 export const getAllProveedores4CreateUserError = createAction(
@@ -152,7 +151,7 @@ export const getAllAreas4CreateUser = createAction(
 
 export const getAllAreas4CreateUserSuccess = createAction(
   '[User] getAllAreas4CreateUser Success',
-  props<{ response: ResponseItems<Area[]> }>()
+  props<{ response: Response<{ items: Area[] }> }>()
 );
 
 export const getAllAreas4CreateUserError = createAction(
@@ -172,7 +171,7 @@ export const SelectedUser4AddPerfil = createAction(
 
 export const SelectedUser4AddPerfilSuccess = createAction(
   '[User] SelectedUser4AddPerfil Success',
-  props<{ usuario_id: number; response: ResponseItems<User[]> }>()
+  props<{ usuario_id: number; response: Response<{ items: User[] }> }>()
 );
 
 export const SelectedUser4AddPerfilError = createAction(
@@ -242,7 +241,7 @@ export const getContratosUser = createAction(
 
 export const getContratosUserSuccess = createAction(
   '[User] getContratosUser Success',
-  props<{ response: ResponseItems<ContratosUser[]> }>()
+  props<{ response: Response<{ items: ContratosUser[] }> }>()
 );
 
 export const getContratosUserError = createAction(
@@ -258,7 +257,7 @@ export const getPosiblesContratosUser4CreateEdit = createAction(
 
 export const getPosiblesContratosUser4CreateEditSuccess = createAction(
   '[User] getPosiblesContratosUser4CreateEdit Success',
-  props<{ response: ResponseItems<PosiblesContratosUser[]> }>()
+  props<{ response: Response<{ items: PosiblesContratosUser[] }> }>()
 );
 
 export const getPosiblesContratosUser4CreateEditError = createAction(
