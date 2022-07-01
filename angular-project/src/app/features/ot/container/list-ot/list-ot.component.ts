@@ -620,7 +620,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.displayAuthInformeModal = false;
   }
 
-  DesplegarRechazoInformeAvance() {
+  DesplegarRechazoInformeAvance(): void {
     this.displayAuthInformeModal = true;
     this.otFacade.getAllMotivoRechazoOT('ACEPTACION_OT_EECC');
   }
