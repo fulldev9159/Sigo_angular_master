@@ -127,7 +127,7 @@ export const getCategoriasArchivos = createSelector(
 // LIBRO OBRAS
 export const getLibroObras = createSelector(
   selectOt,
-  (state: fromOt.StateOt) => state.libroObras
+  (state: fromOt.StateOt) => state.registroLibroObras
 );
 //  ////
 export const getOtEjecucion = createSelector(

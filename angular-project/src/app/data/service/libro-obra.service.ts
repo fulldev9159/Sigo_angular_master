@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 import {
-  DataRespGetLibroDeObras,
+  RegistroLibroDeObras,
   ReqCreateRegistroLibroObra,
   Response,
 } from '@data/model';
@@ -29,9 +29,9 @@ export class LibroObraService {
   }
 
   // GET LIBRO DE OBRAS
-  getLibroObras(ot_id: number): Observable<Response<DataRespGetLibroDeObras>> {
-    return this.http.post<Response<DataRespGetLibroDeObras>>(
-      `${this.apiUrl}/libro_obra/get_libro_obras/get`,
+  getLibroObras(ot_id: number): Observable<Response<RegistroLibroDeObras[]>> {
+    return this.http.post<Response<RegistroLibroDeObras[]>>(
+      `${this.apiUrl}/ot/libro_obras/get`,
       { ot_id }
     );
   }

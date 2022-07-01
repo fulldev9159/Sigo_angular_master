@@ -555,6 +555,23 @@ export class OtEffects {
     )
   );
 
+  // ACEPTAR INFORME AVANCE
+  aceptarRechazarInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AceptarRechazarInformeAvanceOT),
+      concatMap(({ request }) =>
+        this.informeAvanceService.autorizarInformeAvance(request).pipe(
+          map(response =>
+            otActions.AceptarRechazarInformeAvanceOTSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.AceptarRechazarInformeAvanceOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

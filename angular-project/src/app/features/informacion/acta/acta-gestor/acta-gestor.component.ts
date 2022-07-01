@@ -117,7 +117,7 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
       const items = [...servicios, ...unidades_obra];
 
       const porcentajeFaltanteMax =
-        items.length > 0 ? items[0].faltante_porcentaje : 0; // TODO multiplicar por 100?
+        items.length > 0 ? items[0].faltante_porcentaje_entero : 0; // TODO multiplicar por 100?
 
       // Toma el porcentaje faltante de alguno de los items, y ése será el
       // tope para la siguiente iteración
@@ -161,7 +161,10 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         serviciosForm.push(
           new FormGroup({
             id: new FormControl(`${servicio.id}`, []),
-            descripcion: new FormControl(`${servicio.servicio_id}`, []), // TODO
+            descripcion: new FormControl(
+              `${servicio.servicio_descripcion}`,
+              []
+            ), // TODO
             cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
             cantidad_a_enviar: new FormControl(
               `${servicio.faltante_cantidad}`,
@@ -175,7 +178,7 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         unidadesObraForm.push(
           new FormGroup({
             id: new FormControl(`${uo.id}`, []),
-            descripcion: new FormControl(`${uo.unidad_obra_cod}`, []), // TODO
+            descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
             cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
             cantidad_a_enviar: new FormControl(`${uo.faltante_cantidad}`, []),
           })
@@ -203,7 +206,10 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         serviciosForm.push(
           new FormGroup({
             id: new FormControl(`${servicio.id}`, []),
-            descripcion: new FormControl(`${servicio.servicio_id}`, []), // TODO
+            descripcion: new FormControl(
+              `${servicio.servicio_descripcion}`,
+              []
+            ), // TODO
             cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
             cantidad_max_a_enviar: new FormControl(
               `${servicio.faltante_cantidad}`,
@@ -239,7 +245,7 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         unidadesObraForm.push(
           new FormGroup({
             id: new FormControl(`${uo.id}`, []),
-            descripcion: new FormControl(`${uo.unidad_obra_cod}`, []), // TODO
+            descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
             cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
             cantidad_max_a_enviar: new FormControl(
               `${uo.faltante_cantidad}`,

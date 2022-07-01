@@ -10,7 +10,6 @@ export interface DetalleActaServicio {
   factor_conversion_monto: number;
   factor_conversion_precio: number;
   faltante_cantidad: number;
-  faltante_porcentaje: number;
   id: number;
   informe_avance_id: number;
   monto_tipo_moneda_codigo: string;
@@ -30,12 +29,17 @@ export interface DetalleActaServicio {
   unidad_descripcion: string;
   unidad_id: number;
   valor_clp: number;
+
+  faltante_porcentaje_entero: number;
+  faltante_porcentaje_fraccion: number;
+
+  servicio_codigo: string;
+  servicio_descripcion: string;
 }
 
 export interface DetalleActaUob {
   cantidad_total: number;
   faltante_cantidad: number;
-  faltante_porcentaje: number;
   id: number;
   informe_avance_id: number;
   ot_id: number;
@@ -45,4 +49,7 @@ export interface DetalleActaUob {
   unidad_id: number;
   unidad_obra_cod: string;
   valor_clp: number;
+  faltante_porcentaje_entero: number;
+  faltante_porcentaje_fraccion: number;
+  unidad_obra_desc: string;
 }

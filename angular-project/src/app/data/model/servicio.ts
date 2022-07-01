@@ -28,6 +28,7 @@ export interface ServicioFromInfomeAvance {
   adicional_rechazo_observacion: string;
   requiere_evidencia: boolean;
   evidencia_id: number;
+  valor_unitario_clp: number;
 
   model_servicio_id: ModelServicio;
   model_unidad_id: Unidad;

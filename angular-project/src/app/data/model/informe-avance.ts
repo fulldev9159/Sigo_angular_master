@@ -10,6 +10,14 @@ export interface DetalleInformeAvance {
   aprobacion_estado: string;
   aprobacion_fecha: Date;
   created_at: Date;
-
+  valor_total_clp: number;
   many_informe_has_servicio: ServicioFromInfomeAvance[];
+}
+
+// AUTORIZAR INFORME DE AVANCE
+export interface RequestAutorizarInformeAvance {
+  ot_id: number;
+  estado: string; // APROBADO, RECHAZADO
+  observacion?: string;
+  tipo?: number;
 }

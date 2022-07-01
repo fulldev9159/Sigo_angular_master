@@ -38,6 +38,8 @@ import {
   ActaTipoPago,
   DetalleActaServicio,
   DetalleActaUob,
+  RegistroLibroDeObras,
+  RequestAutorizarInformeAvance,
 } from '@data';
 
 // GET OTS
@@ -681,7 +683,7 @@ export const getLibroObras = createAction(
 
 export const getLibroObrasSuccess = createAction(
   '[OT] GET getLibroObras Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<RegistroLibroDeObras[]> }>()
 );
 
 export const getLibroObrasError = createAction(
@@ -731,4 +733,20 @@ export const postOtError = createAction(
 export const postOtSCESuccess = createAction(
   '[Ot Post] CREATE Ot SCE Success',
   props<{ ot: Data.OT }>()
+);
+
+//  ACEPTAR/RECHAZAR INFORME DE AVANCE
+export const AceptarRechazarInformeAvanceOT = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT',
+  props<{ request: RequestAutorizarInformeAvance }>()
+);
+
+export const AceptarRechazarInformeAvanceOTSuccess = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT Success',
+  props<{ response: Response<any> }>()
+);
+
+export const AceptarRechazarInformeAvanceOTError = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT Error',
+  props<{ error: any }>()
 );

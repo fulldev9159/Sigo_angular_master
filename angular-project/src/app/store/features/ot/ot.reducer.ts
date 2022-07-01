@@ -32,6 +32,7 @@ import {
   ActaTipoPago,
   DetalleActaServicio,
   DetalleActaUob,
+  RegistroLibroDeObras,
 } from '@data';
 
 export const otFeatureKey = 'ot';
@@ -78,7 +79,7 @@ export interface StateOt {
 
   // CATEGORIA ARCHIVO
   categoriaArchivo: CategoriaArchivo[];
-  libroObras: any[];
+  registroLibroObras: RegistroLibroDeObras[];
 
   // ////
   filtro_propietario: string;
@@ -149,7 +150,7 @@ export const initialStateOt: StateOt = {
   categoriaArchivo: [],
 
   // LIBRO OBRAS
-  libroObras: [],
+  registroLibroObras: [],
 
   // ////
   filtro_propietario: '',
@@ -519,10 +520,10 @@ export const reducerOt = createReducer(
     };
   }),
   on(OtActions.getLibroObrasSuccess, (state, { response }) => {
-    const temp = copy(response.data.items);
+    const temp = copy(response.data);
     return {
       ...state,
-      libroObras: temp,
+      registroLibroObras: temp,
       // .length > 0
       //   ? temp.sort((a, b) =>
       //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0

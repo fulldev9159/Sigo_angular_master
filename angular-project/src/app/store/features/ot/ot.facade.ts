@@ -40,6 +40,7 @@ import {
   DetalleActaServicio,
   DetalleActaUob,
   OT,
+  RequestAutorizarInformeAvance,
 } from '@data';
 @Injectable({
   providedIn: 'root',
@@ -563,5 +564,12 @@ export class OtFacade {
 
   public rejectOT(otID: number, motivo: string): void {
     this.store.dispatch(otActions.rejectOT({ otID, motivo }));
+  }
+
+  // ACEPTAR O RECHAZAR INCIAL
+  public AceptarRechazarInformeAvanceOT(
+    request: RequestAutorizarInformeAvance
+  ): void {
+    this.store.dispatch(otActions.AceptarRechazarInformeAvanceOT({ request }));
   }
 }
