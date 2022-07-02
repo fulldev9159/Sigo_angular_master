@@ -12,12 +12,12 @@ import {
   OT,
   RequestAceptarRechazarOT,
   DetalleInformeAvance,
+  RequestAutorizarInformeAvance,
 } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { map, tap, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { AssignCoordinatorFormComponent } from '../../component/assign-coordinator-form/assign-coordinator-form.component';
 import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador-form/assign-trabajador-form.component';
 import { RegistrarLibroObraComponent } from '@featureOT/ot/component/registrar-libro-obra/registrar-libro-obra';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -58,6 +58,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displayLibroObra = false;
   displayAuthOTModal = false;
   displayInformeAvanceModal = false;
+  displayAprobarInformeAvanceModal = false;
+  displayRechazoInformeAcvanceModal = false;
+  displayAuthInformeModal = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -276,50 +279,68 @@ export class ListOtComponent implements OnInit, OnDestroy {
             },
           });
         }
-        // const otAnular = (ot.acciones || []).find(
-        //   accion => accion.slug === 'OT_ANULAR'
-        // );
 
-        // if (otAnular) {
-        //   actions.push({
-        //     icon: 'p-button-icon pi pi-times-circle',
-        //     class: 'p-button-rounded p-button-success p-mr-2',
-        //     label: otAnular.nombre_corto,
-        //     onClick: (event: Event, item) => {
-        //       this.confirmationService.confirm({
-        //         target: event.target as EventTarget,
-        //         message: `¿Desea anular Orden de trabajo?`,
-        //         icon: 'pi pi-exclamation-triangle',
-        //         acceptLabel: 'Confirmar',
-        //         rejectLabel: 'Cancelar',
-        //         accept: () => {
-        //           this.otFacade.cancelOT(ot.id);
-        //         },
-        //       });
-        //     },
-        //   });
-        // }
-
-        const otFinalizarTrabajos = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_FINALIZAR_TRABAJOS'
+        const otEnviarInformeAvance = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ENVIAR_INFORME_AVANCE'
         );
 
-        if (otFinalizarTrabajos) {
+        if (otEnviarInformeAvance) {
           actions.push({
-            icon: 'p-button-icon pi pi-check-square',
+            icon: 'p-button-icon pi pi-book',
             class: 'p-button-rounded p-button-success p-mr-2',
-            label: otFinalizarTrabajos.nombre_corto,
+            label: otEnviarInformeAvance.nombre_corto,
             onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea finalizar trabajos?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.finalizeOTJobs(ot.id);
-                },
-              });
+              this.otFacade.getDetalleInformeAvance(item.id);
+              this.displayInformeAvanceModal = true;
+            },
+          });
+        }
+
+        const otAceptarInformeAvance = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_AUTORIZAR_INFORME_AVANCE'
+        );
+
+        if (otAceptarInformeAvance) {
+          actions.push({
+            icon: 'p-button-icon pi pi-check',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otAceptarInformeAvance.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.otFacade.getDetalleInformeAvance(item.id);
+              this.displayAprobarInformeAvanceModal = true;
+            },
+          });
+
+          // actions.push({
+          //   icon: 'p-button-icon pi pi-times red',
+          //   class: 'p-button-rounded p-button-danger p-mr-2',
+          //   label: 'Rechazar Informe de Avance',
+          //   onClick: (event: Event, item) => {
+          //     this.idOtSelected = item.id;
+          //     this.etapa = item.etapa_slug;
+          //     this.displayRechazoInformeAcvanceModal = true;
+          //     this.otFacade.getDetalleInformeAvance(item.id);
+          //     this.otFacade.getAllMotivoRechazoOT('ACEPTACION_OT_EECC');
+          //   },
+          // });
+        }
+
+        const otEditarInformeAvance = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_EDITAR_INFORME_AVANCE'
+        );
+
+        if (otEditarInformeAvance) {
+          actions.push({
+            icon: 'p-button-icon pi pi-pencil',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: otEditarInformeAvance.nombre_corto,
+            onClick: (event: Event, item) => {
+              this.router.navigate([
+                '/app/informacion/informe-avance',
+                item.id,
+              ]);
             },
           });
         }
@@ -352,74 +373,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             class: 'p-button-rounded p-button-success p-mr-2',
             label: 'Generar Acta',
             onClick: (event: Event, item) => {
-              this.router.navigate([
-                '/app/informacion/informe-avance',
-                item.id,
-              ]);
-            },
-          });
-        }
-
-        const otValidarActas = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_VALIDAR_ACTA'
-        );
-
-        if (otValidarActas) {
-          actions.push({
-            icon: 'p-button-icon pi pi-check',
-            class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Validar la generación del acta',
-            onClick: (event: Event, item) => {
-              this.router.navigate(['/app/informacion/acta/', item.id]);
-            },
-          });
-        }
-
-        const otAutorizarPagos = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_AUTORIZAR_PAGOS'
-        );
-
-        if (otAutorizarPagos) {
-          actions.push({
-            icon: 'p-button-icon pi pi-money-bill',
-            class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Autorizar Pago',
-            onClick: (event: Event, item) => {
-              this.router.navigate(['/app/informacion/acta/', item.id]);
-              // this.confirmationService.confirm({
-              //   target: event.target as EventTarget,
-              //   message: `¿Desea autorizar pago?`,
-              //   icon: 'pi pi-exclamation-triangle',
-              //   acceptLabel: 'Confirmar',
-              //   rejectLabel: 'Cancelar',
-              //   accept: () => {
-              //     this.otFacade.authorizePayments(ot.id);
-              //   },
-              // });
-            },
-          });
-        }
-
-        const otFinalizar = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_CERRAR'
-        );
-
-        if (otFinalizar) {
-          actions.push({
-            icon: 'p-button-icon pi pi-check-circle',
-            class: 'p-button-rounded p-button-success p-mr-2',
-            label: otFinalizar.nombre_corto,
-            onClick: (event: Event, item) => {
-              this.confirmationService.confirm({
-                target: event.target as EventTarget,
-                message: `¿Desea finalizar la Orden de Trabajo?`,
-                icon: 'pi pi-exclamation-triangle',
-                acceptLabel: 'Confirmar',
-                rejectLabel: 'Cancelar',
-                accept: () => {
-                  this.otFacade.finalizeOT(ot.id);
-                },
-              });
+              this.router.navigate(['/app/informacion/acta', item.id]);
             },
           });
         }
@@ -430,12 +384,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
   };
 
   public data = [];
-
-  @ViewChild('assignCoordinatorForm', {
-    read: AssignCoordinatorFormComponent,
-    static: false,
-  })
-  assignCoordinatorForm: AssignCoordinatorFormComponent;
 
   @ViewChild('assignTrabajadorForm', {
     read: AssignTrabajadorFormComponent,
@@ -648,6 +596,42 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   closeInformeAvanceModal(): void {
     this.displayInformeAvanceModal = false;
+  }
+
+  closeAprobarInformeAvanceModal(): void {
+    this.displayAprobarInformeAvanceModal = false;
+  }
+
+  AceptarInformeAvance(): void {
+    const request: RequestAutorizarInformeAvance = {
+      ot_id: this.idOtSelected,
+      estado: 'APROBADO',
+    };
+
+    // console.log(request);
+    this.otFacade.AceptarRechazarInformeAvanceOT(request);
+    this.responsable = 'TODAS';
+    this.tipoOT = 0;
+    this.selectedIndex = 0;
+    this.selectedOTs = 'ABIERTAS';
+    this.closeAprobarInformeAvanceModal();
+  }
+  closeAuthInformeModal(): void {
+    this.displayAuthInformeModal = false;
+  }
+
+  DesplegarRechazoInformeAvance(): void {
+    this.displayAuthInformeModal = true;
+    this.otFacade.getAllMotivoRechazoOT('ACEPTACION_OT_EECC');
+  }
+
+  RechazarInformeAvance(): void {
+    const request: RequestAutorizarInformeAvance = {
+      ot_id: this.idOtSelected,
+      estado: 'RECHAZADO',
+      observacion: this.formRechazoIncial.get('motivo').value,
+      tipo: +this.formRechazoIncial.get('tipo_id').value,
+    };
   }
 
   sendDetalleInformeAvance(detalle: DetalleInformeAvance): void {

@@ -3,7 +3,6 @@ import * as OtActions from './ot.actions';
 import copy from 'fast-copy';
 
 import {
-  DataInformeAvance,
   PMO,
   ContratosUser,
   LP,
@@ -29,12 +28,22 @@ import {
   MotivoRechazo,
   PosibleTrabajador,
   DetalleInformeAvance,
+  CategoriaArchivo,
+  ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
+  RegistroLibroDeObras,
 } from '@data';
-import { DetalleActa } from '@data/model/acta';
 
 export const otFeatureKey = 'ot';
 
 export interface StateOt {
+  // OTs
+  otsEjecucion: OT[];
+  itemsAbiertas: OT[];
+  itemsCerradas: OT[];
+
+  // CREATE OT
   contratosUser4OT: ContratosUser[];
   cubicaciones: Cubs4OT[];
   cubicacionSeleccionada: Cubs4OT;
@@ -69,18 +78,14 @@ export interface StateOt {
   allMotivoRechazo: MotivoRechazo[];
 
   // CATEGORIA ARCHIVO
-  categoriaArchivo: any[];
-  libroObras: any[];
+  categoriaArchivo: CategoriaArchivo[];
+  registroLibroObras: RegistroLibroDeObras[];
 
   // ////
   filtro_propietario: string;
   filtro_tipo: string;
 
   selectedOT: OT;
-
-  otsEjecucion: OT[];
-  itemsAbiertas: OT[];
-  itemsCerradas: OT[];
 
   trabajadores: PosibleTrabajador[];
 
@@ -89,19 +94,25 @@ export interface StateOt {
   saving: boolean;
   errorSaving: Error;
 
-  dataInformeAvanceTrabajador: DataInformeAvance[];
-  dataInformeAvanceAdminEC: DataInformeAvance[];
-  dataInformeActa: DataInformeAvance[];
-  dataSolicitudPago: DetalleActa[];
   info_ot_id: number;
 
   detalleInformeAvance: DetalleInformeAvance;
   detalleInformeAvanceError: any;
   updatingDetalleInformeAvance: boolean;
   sendingDetalleInformeAvance: boolean;
+
+  actaTiposPago: ActaTipoPago[];
+  detalleActaServicio: DetalleActaServicio[];
+  detalleActaUob: DetalleActaUob[];
+  ultimoTipoPagoActa: string;
+  sendingGeneracionActa: boolean;
 }
 
 export const initialStateOt: StateOt = {
+  otsEjecucion: [],
+  itemsAbiertas: [],
+  itemsCerradas: [],
+
   contratosUser4OT: [],
   cubicaciones: [],
   cubicacionSeleccionada: null,
@@ -139,17 +150,13 @@ export const initialStateOt: StateOt = {
   categoriaArchivo: [],
 
   // LIBRO OBRAS
-  libroObras: [],
+  registroLibroObras: [],
 
   // ////
   filtro_propietario: '',
   filtro_tipo: '',
 
   selectedOT: null,
-
-  otsEjecucion: [],
-  itemsAbiertas: [],
-  itemsCerradas: [],
 
   trabajadores: [],
 
@@ -158,20 +165,23 @@ export const initialStateOt: StateOt = {
   saving: false,
   errorSaving: null,
 
-  dataInformeAvanceTrabajador: [],
-  dataInformeAvanceAdminEC: [],
-  dataInformeActa: [],
-  dataSolicitudPago: [],
   info_ot_id: null,
 
   detalleInformeAvance: null,
   detalleInformeAvanceError: null,
   updatingDetalleInformeAvance: false,
   sendingDetalleInformeAvance: false,
+
+  actaTiposPago: [],
+  detalleActaServicio: [],
+  detalleActaUob: [],
+  ultimoTipoPagoActa: '',
+  sendingGeneracionActa: false,
 };
 
 export const reducerOt = createReducer(
   initialStateOt,
+  // GET OTs
   on(OtActions.getOtEjecucionSuccess, (state, { response }) => ({
     ...state,
     otsEjecucion: response.data.items,
@@ -510,10 +520,10 @@ export const reducerOt = createReducer(
     };
   }),
   on(OtActions.getLibroObrasSuccess, (state, { response }) => {
-    const temp = copy(response.data.items);
+    const temp = copy(response.data);
     return {
       ...state,
-      libroObras: temp,
+      registroLibroObras: temp,
       // .length > 0
       //   ? temp.sort((a, b) =>
       //       a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
@@ -582,172 +592,11 @@ export const reducerOt = createReducer(
     ...state,
     cecos: [],
   })),
-  //  ////
-  // on(OtActions.getOts, (state, { request }) => ({
-  //   ...state,
-  //   filtro_propietario: request.filtro_propietario,
-  //   filtro_tipo: request.filtro_tipo,
-  // })),
-  // on(
-  //   OtActions.getOtEjecucion,
-  //   (state, { filtro_propietario, filtro_tipo }) => ({
-  //     ...state,
-  //     filtro_propietario,
-  //     filtro_tipo,
-  //   })
-  // ),
-  // on(OtActions.getOtCerradas, (state, { filtro_propietario, filtro_tipo }) => ({
-  //   ...state,
-  //   filtro_propietario,
-  //   filtro_tipo,
-  // })),
-
-  // on(OtActions.deleteOt, (state, payload) => ({
-  //   ...state,
-  //   items: [
-  //     ...state.items.slice(0, payload.otPosition),
-  //     ...state.items.slice(payload.otPosition + 1),
-  //   ],
-  // })),
-  // on(OtActions.replyOt, (state, payload) => ({
-  //   ...state,
-  //   items: [...state.items, payload.ot],
-  // })),
-
   on(OtActions.selectOT, (state, { ot }) => ({
     ...state,
     selectedOT: ot,
   })),
 
-  on(OtActions.approveOT, state => ({
-    ...state,
-  })),
-  on(OtActions.approveOTSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.approveOTError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.rejectOT, state => ({
-    ...state,
-  })),
-  on(OtActions.rejectOTSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.rejectOTError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.getCoordinators, state => state),
-  on(OtActions.getCoordinatorsSuccess, (state, { coordinators }) => ({
-    ...state,
-    coordinators,
-  })),
-  on(OtActions.getCoordinatorsError, (state, { error }) => ({
-    ...state,
-    coordinators: [],
-  })),
-
-  on(OtActions.getTrabajadoresError, (state, { error }) => ({
-    ...state,
-    trabajadores: [],
-  })),
-  on(OtActions.cancelOT, state => ({
-    ...state,
-  })),
-  on(OtActions.cancelOTSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.cancelOTError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.finalizeOTJobs, state => ({
-    ...state,
-  })),
-  on(OtActions.finalizeOTJobsSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.finalizeOTJobsError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.approveOTMinutesGeneration, state => ({
-    ...state,
-  })),
-  on(OtActions.approveOTMinutesGenerationSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.approveOTMinutesGenerationError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.rejectOTMinutesGeneration, state => ({
-    ...state,
-  })),
-  on(OtActions.rejectOTMinutesGenerationSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.rejectOTMinutesGenerationError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.approveOTMinutesValidation, state => ({
-    ...state,
-  })),
-  on(OtActions.approveOTMinutesValidationSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.approveOTMinutesValidationError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.rejectOTMinutesValidation, state => ({
-    ...state,
-  })),
-  on(OtActions.rejectOTMinutesValidationSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.rejectOTMinutesValidationError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.authorizePayments, state => ({
-    ...state,
-  })),
-  on(OtActions.authorizePaymentsSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.authorizePaymentsError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.rejectPayments, state => ({
-    ...state,
-  })),
-  on(OtActions.rejectPaymentsSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.rejectPaymentsError, state => ({
-    ...state,
-  })),
-
-  on(OtActions.finalizeOT, state => ({
-    ...state,
-  })),
-  on(OtActions.finalizeOTSuccess, state => ({
-    ...state,
-  })),
-  on(OtActions.finalizeOTError, state => ({
-    ...state,
-  })),
-
-  // on(OtActions.postOt, (state, { ot }) => ({
-  //   ...state,
-  //   saving: true,
-  //   errorSaving: null,
-  // })),
   on(OtActions.postOtSuccess, (state, { ot }) => ({
     ...state,
     saving: false,
@@ -759,54 +608,6 @@ export const reducerOt = createReducer(
     errorSaving: error,
   })),
 
-  on(OtActions.editOt, (state, { ot }) => ({
-    ...state,
-    saving: true,
-    errorSaving: null,
-  })),
-  on(OtActions.editOtSuccess, (state, { OtId, Ot }) => ({
-    ...state,
-    saving: false,
-    errorSaving: null,
-  })),
-  on(OtActions.editOtError, (state, { error }) => ({
-    ...state,
-    saving: false,
-    errorSaving: error,
-  })),
-  on(
-    OtActions.getRegistrosLibroObraSuccess,
-    (state, { registroslibroobras }) => ({
-      ...state,
-      registroslibroobras,
-    })
-  ),
-  on(
-    OtActions.getDataInformeAvanceTrabajadorSuccess,
-    (state, { dataInformeAvance }) => ({
-      ...state,
-      dataInformeAvanceTrabajador: dataInformeAvance,
-    })
-  ),
-  on(
-    OtActions.getDataInformeAvanceAdminECSuccess,
-    (state, { dataInformeAvance }) => ({
-      ...state,
-      dataInformeAvanceAdminEC: dataInformeAvance,
-    })
-  ),
-  on(OtActions.getDataInformeActaSuccess, (state, { dataInformeActa }) => ({
-    ...state,
-    dataInformeActa,
-  })),
-  on(OtActions.getDataInformeActa, (state, { ot_id }) => ({
-    ...state,
-    info_ot_id: ot_id,
-  })),
-  on(OtActions.getDetalleActaSuccess, (state, { dataInformeActa }) => ({
-    ...state,
-    dataSolicitudPago: dataInformeActa,
-  })),
   on(OtActions.getDetalleInformeAvance, state => {
     return {
       ...state,
@@ -856,6 +657,46 @@ export const reducerOt = createReducer(
       return {
         ...state,
         sendingDetalleInformeAvance: false,
+      };
+    }
+  ),
+  on(OtActions.getActaTiposPagoSuccess, (state, { response }) => {
+    return {
+      ...state,
+      actaTiposPago: copy(response.data.items),
+    };
+  }),
+  on(OtActions.getDetalleServicioPorActaSuccess, (state, { response }) => {
+    return {
+      ...state,
+      detalleActaServicio: copy(response.data.items),
+    };
+  }),
+  on(OtActions.getDetalleUobPorActaSuccess, (state, { response }) => {
+    return {
+      ...state,
+      detalleActaUob: copy(response.data.items),
+    };
+  }),
+  on(OtActions.getUltimoTipoPagoActaSuccess, (state, { tipoPago }) => {
+    return {
+      ...state,
+      ultimoTipoPagoActa: tipoPago,
+    };
+  }),
+  on(OtActions.sendGeneracionActa, state => {
+    return {
+      ...state,
+      sendingGeneracionActa: true,
+    };
+  }),
+  on(
+    OtActions.sendGeneracionActaSuccess,
+    OtActions.sendGeneracionActaError,
+    state => {
+      return {
+        ...state,
+        sendingGeneracionActa: false,
       };
     }
   )

@@ -2,21 +2,16 @@ import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { map, take, tap, withLatestFrom } from 'rxjs/operators';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
 
 import { UserFacade } from '@storeOT/features/user/user.facade';
 import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 
-// import * as Data from '@data';
-
 import * as _ from 'lodash';
 import {
-  Perfil,
-  PosiblesSuperiores,
   Area,
-  Proveedores4CreateUser,
+  ModelProveedor,
   RequestCreateUser,
-  Contrato,
   ContratosUser,
   RequestUpdateUser,
   PosiblesContratosUser,
@@ -73,7 +68,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   formUser: FormGroup = new FormGroup(this.formControls);
 
-  proveedores4createUser$: Observable<Proveedores4CreateUser[]>;
+  proveedores4createUser$: Observable<ModelProveedor[]>;
   areas4createUser$: Observable<Area[]>;
   posiblesContractosUser$: Observable<PosiblesContratosUser[]>;
   contratosUser$: Observable<ContratosUser[]>;

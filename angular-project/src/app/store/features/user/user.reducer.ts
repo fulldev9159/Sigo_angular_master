@@ -9,7 +9,7 @@ import {
   PerfilesUser,
   PosiblesContratosUser,
   PosiblesSuperiores,
-  Proveedores4CreateUser,
+  ModelProveedor,
   User,
 } from '@data';
 
@@ -23,12 +23,11 @@ export interface StateUser {
   allPerfiles: Perfil[];
   posiblesSuperiores: PosiblesSuperiores[];
   perfilSelected: ListPerfilesUserType;
-  proveedores4createUser: Proveedores4CreateUser[];
+  proveedores4createUser: ModelProveedor[];
   areas4createUser: Area[];
   contratosUser: ContratosUser[];
   posiblesContratosUSer: PosiblesContratosUser[];
   // contratos: Data.Contrato[];
-  alldatauser: Data.UserWithDetail;
   displayDetalleModal: boolean;
 }
 
@@ -44,8 +43,6 @@ export const initialStateUser: StateUser = {
   areas4createUser: [],
   contratosUser: [],
   posiblesContratosUSer: [],
-  // contratos: [],
-  alldatauser: null,
   displayDetalleModal: false,
 };
 
@@ -131,28 +128,5 @@ export const reducerUser = createReducer(
       ...state,
       posiblesContratosUSer: response.data.items,
     })
-  ),
-  //  ////
-
-  on(UserActions.getContracts, state => state),
-  on(UserActions.getContractsSuccess, (state, payload) => ({
-    ...state,
-    contratos: payload.contratos,
-  })),
-  on(UserActions.resetArea, (state, payload) => ({
-    ...state,
-    areas4createUser: [],
-  })),
-  on(UserActions.resetContratos, (state, payload) => ({
-    ...state,
-    contratos: [],
-  })),
-  on(UserActions.resetSuperiores, (state, payload) => ({
-    ...state,
-    samecompanyusers: [],
-  })),
-  on(UserActions.setDisplayDetalleModal, (state, payload) => ({
-    ...state,
-    displayDetalleModal: payload.value,
-  }))
+  )
 );

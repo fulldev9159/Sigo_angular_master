@@ -3,16 +3,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as otActions from './ot.actions';
 import * as otSelectors from './ot.selectors';
-import * as Data from '@data';
 import {
+  Response,
   ContratosUser,
-  DataInformeAvance,
-  LpuInformeAvanceDetalle,
   PMO,
   RequestGetOTs,
-  RequestSaveBorradorInformeAvance,
-  RequestSaveInformeAvance,
-  RequestSaveInformeAvanceAdmin,
   LP,
   PEP2,
   OPEX,
@@ -41,23 +36,22 @@ import {
   PosibleTrabajador,
   DetalleInformeAvance,
   ReqCreateRegistroLibroObra,
+  ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
+  OT,
+  RequestAutorizarInformeAvance,
 } from '@data';
-import {
-  DetalleActa,
-  RequestSaveInformeActaGestor,
-  RequestSolicitudPagoActa,
-} from '@data/model/acta';
-
 @Injectable({
   providedIn: 'root',
 })
 export class OtFacade {
-  constructor(private store: Store<Data.OT>) {}
+  constructor(private store: Store<OT>) {}
 
   // GET OT
   public getOts(request: RequestGetOTs): void {
     this.store.dispatch(
-      otActions.getOts({
+      otActions.getOTs({
         request: {
           ...request,
           filtro_pestania: 'EN_EJECUCION',
@@ -65,7 +59,7 @@ export class OtFacade {
       })
     );
     this.store.dispatch(
-      otActions.getOts({
+      otActions.getOTs({
         request: {
           ...request,
           filtro_pestania: 'ABIERTAS',
@@ -73,7 +67,7 @@ export class OtFacade {
       })
     );
     this.store.dispatch(
-      otActions.getOts({
+      otActions.getOTs({
         request: {
           ...request,
           filtro_pestania: 'CERRADAS',
@@ -383,6 +377,85 @@ export class OtFacade {
     return this.store.select(otSelectors.sendingDetalleInformeAvance);
   }
 
+  // GET ACTA TIPOS PAGO
+  public getActaTiposPagoSuccess(
+    response: Response<{ items: ActaTipoPago[] }>
+  ): void {
+    this.store.dispatch(otActions.getActaTiposPagoSuccess({ response }));
+  }
+
+  public getActaTiposPago$(): Observable<ActaTipoPago[]> {
+    return this.store.select(otSelectors.getActaTiposPago);
+  }
+
+  // GET DETALLE ACTA
+  public getDetalleActa$(): Observable<{
+    ultimo_tipo_pago: string;
+    servicios: DetalleActaServicio[];
+    unidades_obra: DetalleActaUob[];
+  }> {
+    return this.store.select(otSelectors.getDetalleActa);
+  }
+
+  // GET DETALLE SERVICIO POR ACTA
+  public getDetalleServicioPorActaSuccess(
+    response: Response<{ items: DetalleActaServicio[] }>
+  ): void {
+    this.store.dispatch(
+      otActions.getDetalleServicioPorActaSuccess({ response })
+    );
+  }
+
+  public getDetalleActaServicio$(): Observable<DetalleActaServicio[]> {
+    return this.store.select(otSelectors.getDetalleActaServicio);
+  }
+
+  // GET DETALLE UOB POR ACTA
+  public getDetalleUobPorActaSuccess(
+    response: Response<{ items: DetalleActaUob[] }>
+  ): void {
+    this.store.dispatch(otActions.getDetalleUobPorActaSuccess({ response }));
+  }
+
+  public getDetalleActaUob$(): Observable<DetalleActaUob[]> {
+    return this.store.select(otSelectors.getDetalleActaUob);
+  }
+
+  // GET ULTIMO TIPO PAGO ACTA
+  public getUltimoTipoPagoActaSuccess(tipoPago: string): void {
+    this.store.dispatch(otActions.getUltimoTipoPagoActaSuccess({ tipoPago }));
+  }
+
+  public getUltimoTipoPagoActa$(): Observable<string> {
+    return this.store.select(otSelectors.getUltimoTipoPagoActa);
+  }
+
+  // SEND GENERACION ACTA
+  public sendGeneracionActa(
+    ot_id: number,
+    tipo_pago: string,
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    }
+  ): void {
+    this.store.dispatch(
+      otActions.sendGeneracionActa({ ot_id, tipo_pago, detalle })
+    );
+  }
+
+  public sendingGeneracionActa$(): Observable<boolean> {
+    return this.store.select(otSelectors.sendingGeneracionActa);
+  }
+
   // GET CATEGORIA ARCHIVO
   public getCategoriasArchivos(): void {
     this.store.dispatch(otActions.getCategoriasArchivos());
@@ -453,78 +526,6 @@ export class OtFacade {
     this.store.dispatch(otActions.resetCECO());
   }
 
-  // ////
-
-  public getOtEjecucion$(): Observable<Data.OT[]> {
-    return this.store.select(otSelectors.getOtEjecucion);
-  }
-
-  public getOtAbiertas$(): Observable<Data.OT[]> {
-    return this.store.select(otSelectors.getOtAbiertas);
-  }
-
-  public getOtCerradas$(): Observable<Data.OT[]> {
-    return this.store.select(otSelectors.getOtCerradas);
-  }
-  public getOtFilters$(): Observable<{
-    filtro_propietario: string;
-    filtro_tipo: string;
-  }> {
-    return this.store.select(otSelectors.getOtFilters);
-  }
-
-  public selectOT(ot: Data.OT): void {
-    this.store.dispatch(otActions.selectOT({ ot }));
-  }
-
-  public getSelectedOT$(): Observable<Data.OT> {
-    return this.store.select(otSelectors.getSelectedOT);
-  }
-
-  // ESTADOS DE OT
-  public approveOT(otID: number, coordinador_id: number): void {
-    this.store.dispatch(otActions.approveOT({ otID, coordinador_id }));
-  }
-
-  public rejectOT(otID: number, motivo: string): void {
-    this.store.dispatch(otActions.rejectOT({ otID, motivo }));
-  }
-
-  public cancelOT(otID: number): void {
-    this.store.dispatch(otActions.cancelOT({ otID }));
-  }
-
-  public finalizeOTJobs(otID: number): void {
-    this.store.dispatch(otActions.finalizeOTJobs({ otID }));
-  }
-  // ESTADOS DE OT
-
-  // DELETE
-  public deleteOt(position: number): void {
-    this.store.dispatch(otActions.deleteOt({ otPosition: position }));
-  }
-  // DELETE
-
-  // // REPLY
-  // public replyOt(ot: OTmodel.RequestCreateOT): void {
-  //   this.store.dispatch(otActions.replyOt({ ot }));
-  // }
-  // // REPLY
-
-  // // POST
-  // public postOt(
-  //   ot: OTmodel.RequestCreateOT | OTmodel.RequestCreateOTFijo
-  // ): void {
-  //   this.store.dispatch(otActions.postOt({ ot }));
-  // }
-
-  // // IngreOT con SCE ***
-  // public postOtSCE(ot: OTmodel.RequestCreateOT): void {
-  //   this.store.dispatch(otActions.postOtSCE({ ot }));
-  // }
-  // // POST
-  // // OT
-
   // Detalle OT
   public getDetalleOT(id: number): void {
     this.store.dispatch(otActions.getDetalleOT({ id }));
@@ -534,69 +535,6 @@ export class OtFacade {
     return this.store.select(otSelectors.getDetalleOT);
   }
 
-  // Coordinadores OT
-  public getCoordinators(otID: number): void {
-    this.store.dispatch(otActions.getCoordinators({ otID }));
-  }
-
-  // public getCoordinators$(): Observable<Data.User[]> {
-  //   return this.store.select(otSelectors.getCoordinators);
-  // }
-
-  public assignCoordinator(otID: number, coordinatorID: number): void {
-    this.store.dispatch(
-      otActions.assignCoordinator({ otID, coordinador_id: coordinatorID })
-    );
-  }
-
-  public assignTrabajador(otID: number, trabajadorID: number): void {
-    this.store.dispatch(otActions.assignTrabajador({ otID, trabajadorID }));
-  }
-
-  // Actas
-  public approveOTMinutesGeneration(otID: number): void {
-    this.store.dispatch(otActions.approveOTMinutesGeneration({ otID }));
-  }
-
-  public rejectOTMinutesGeneration(otID: number): void {
-    this.store.dispatch(otActions.rejectOTMinutesGeneration({ otID }));
-  }
-
-  public approveOTMinutesValidation(otID: number): void {
-    this.store.dispatch(otActions.approveOTMinutesValidation({ otID }));
-  }
-
-  public rejectOTMinutesValidation(otID: number): void {
-    this.store.dispatch(otActions.rejectOTMinutesValidation({ otID }));
-  }
-
-  // Pagos
-  public authorizePayments(otID: number, user_id: number): void {
-    this.store.dispatch(otActions.authorizePayments({ otID, user_id }));
-  }
-
-  public rejectPayments(otID: number): void {
-    this.store.dispatch(otActions.rejectPayments({ otID }));
-  }
-
-  // Pagos
-  public finalizeOT(otID: number): void {
-    this.store.dispatch(otActions.finalizeOT({ otID }));
-  }
-
-  // Libro Obras
-  public registrarLibroObras(registro: Data.RegistroLibroObraRequest): void {
-    this.store.dispatch(otActions.registrarLibroObra({ registro }));
-  }
-
-  public getRegistrosLibroObras(ot_id: number): void {
-    this.store.dispatch(otActions.getRegistrosLibroObra({ ot_id }));
-  }
-
-  // public getRegistrosLibroObras$(): Observable<Data.RegistroLibroObra[]> {
-  //   return this.store.select(otSelectors.getRegistrosLibroObra);
-  // }
-
   public getSavingOT$(): Observable<boolean> {
     return this.store.select(otSelectors.getSavingOT);
   }
@@ -605,75 +543,33 @@ export class OtFacade {
     return this.store.select(otSelectors.getSaveOTError);
   }
 
-  // public inicializarInformeAvanceTrabajador(ot_id: number): void {
-  //   this.store.dispatch(otActions.inicializarInformeAvance({ ot_id }));
-  // }
-
-  public getDataInformeAvanceTrabajador(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeAvanceTrabajador({ ot_id }));
-  }
-  public getDataInformeAvanceAdminEC(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeAvanceAdminEC({ ot_id }));
+  public selectOT(ot: OT): void {
+    this.store.dispatch(otActions.selectOT({ ot }));
   }
 
-  public getDataInformeAvanceTrabajador$(): Observable<DataInformeAvance[]> {
-    return this.store.select(otSelectors.getDataInformeAvanceTrabajador);
+  public getSelectedOT$(): Observable<OT> {
+    return this.store.select(otSelectors.getSelectedOT);
   }
-  public getDataInformeAvanceAdminEC$(): Observable<DataInformeAvance[]> {
-    return this.store.select(otSelectors.getDataInformeAvanceAdminEC);
+  public getOtEjecucion$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getOtEjecucion);
   }
 
-  public saveInformeAvanceTrabajador(request: RequestSaveInformeAvance): void {
-    this.store.dispatch(otActions.saveInformeAvanceTrabajador({ request }));
+  public getOtAbiertas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getOtAbiertas);
   }
-  public saveInformeAvanceAdminEC(
-    request: RequestSaveInformeAvanceAdmin
+
+  public getOtCerradas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getOtCerradas);
+  }
+
+  public rejectOT(otID: number, motivo: string): void {
+    this.store.dispatch(otActions.rejectOT({ otID, motivo }));
+  }
+
+  // ACEPTAR O RECHAZAR INCIAL
+  public AceptarRechazarInformeAvanceOT(
+    request: RequestAutorizarInformeAvance
   ): void {
-    this.store.dispatch(otActions.saveInformeAvanceAdminEC({ request }));
-  }
-
-  public saveBorradorInformeAvance(
-    request: RequestSaveBorradorInformeAvance
-  ): void {
-    this.store.dispatch(otActions.saveBorradorInformeAvance({ request }));
-  }
-
-  public rechazarInformeAvance(informe_id: number): void {
-    this.store.dispatch(otActions.rechazarInformeAvance({ informe_id }));
-  }
-
-  public getDataInformeActa(ot_id: number): void {
-    this.store.dispatch(otActions.getDataInformeActa({ ot_id }));
-  }
-
-  public getDataInformeActa$(): Observable<DataInformeAvance[]> {
-    return this.store.select(otSelectors.getDataInformeActa);
-  }
-
-  public saveInformeActa(request: RequestSaveInformeActaGestor): void {
-    this.store.dispatch(otActions.saveInformeActa({ request }));
-  }
-
-  public rechazarInformeActa(informe_id: number): void {
-    this.store.dispatch(otActions.rechazarInformeActa({ informe_id }));
-  }
-
-  public getInfoOtId$(): Observable<number> {
-    return this.store.select(otSelectors.getInfoOtId);
-  }
-
-  public getDetalleActaMezcla(ot_id: number): void {
-    this.store.dispatch(otActions.getDetalleActaMezcla({ ot_id }));
-  }
-
-  public getDataSolicitudPago(ot_id: number): void {
-    this.store.dispatch(otActions.getDetalleActa({ ot_id }));
-  }
-
-  public getDataSolicitudPago$(): Observable<DetalleActa[]> {
-    return this.store.select(otSelectors.getDataSolicitudPago);
-  }
-  public sendSolicitudPagoActa(request: RequestSolicitudPagoActa): void {
-    this.store.dispatch(otActions.sendSolicitudPagoActa({ request }));
+    this.store.dispatch(otActions.AceptarRechazarInformeAvanceOT({ request }));
   }
 }

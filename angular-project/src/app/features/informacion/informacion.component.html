@@ -20,7 +20,7 @@
       <span class="tab-title">Informe de Avances</span>
     </a>
   </li>
-  <li *ngIf="(loginAuth$ |async).perfil==='Gestor/JP'">
+  <li >
     <a href="" [routerLink]="['acta',ot_id]" [routerLinkActive]="['is-active']">
       <span class="icon pi pi-fw pi-file-o"></span>
       <span class="tab-title">Acta</span>

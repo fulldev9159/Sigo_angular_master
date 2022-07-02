@@ -3,6 +3,7 @@ import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import * as Data from '@data';
+import { RegistroLibroDeObras } from '@data';
 
 interface Icon {
   [st: string]: string;
@@ -15,7 +16,7 @@ interface Icon {
 export class LibroObrasComponent implements OnInit, OnDestroy {
   apiUrl = '';
   subscription: Subscription = new Subscription();
-  registosLibroDeObras$: Observable<Data.RegistroLibroObra[]>;
+  registosLibroDeObras$: Observable<RegistroLibroDeObras[]>;
   icons: Icon[] = [];
   constructor(
     @Inject('environment') environment,
@@ -26,15 +27,15 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const docx = 'docx';
-    const jpg = 'jpg';
-    const jpeg = 'jpeg';
-    const pdf = 'pdf';
-    const png = 'PNG';
-    const json = 'json';
-    const txt = 'txt';
-    const xls = 'xls';
-    const csv = 'csv';
+    const docx = '.docx';
+    const jpg = '.jpg';
+    const jpeg = '.jpeg';
+    const pdf = '.pdf';
+    const png = '.PNG';
+    const json = '.json';
+    const txt = '.txt';
+    const xls = '.xls';
+    const csv = '.csv';
     this.icons[docx] = 'pi-file';
     this.icons[json] = 'pi-file';
     this.icons[txt] = 'pi-file';
@@ -52,10 +53,11 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
         }
       })
     );
-    // this.registosLibroDeObras$ = this.otFacade.getRegistrosLibroObras$();
+    this.registosLibroDeObras$ = this.otFacade.getLibroObras$();
   }
 
   getIcon(type: string): void {
+    console.log(type);
     return this.icons[type];
   }
 
@@ -64,18 +66,22 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
   }
 
   getColor(extension: string): string {
-    if (extension === 'xls' || extension === 'csv') {
+    if (extension === '.xls' || extension === '.csv') {
       return '#047004';
     }
-    if (extension === 'docx' || extension === 'txt' || extension === 'json') {
+    if (
+      extension === '.docx' ||
+      extension === '.txt' ||
+      extension === '.json'
+    ) {
       return '#0d0d5a';
     }
 
-    if (extension === 'pdf') {
+    if (extension === '.pdf') {
       return '#ab0e0e';
     }
 
-    if (extension === 'jpeg' || extension === 'jpg' || extension === 'PNG') {
+    if (extension === '.jpeg' || extension === '.jpg' || extension === '.PNG') {
       return '#01a5a5';
     }
   }

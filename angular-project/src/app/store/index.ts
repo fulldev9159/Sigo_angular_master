@@ -13,13 +13,3 @@ export * from './features/cubicacion/cubicacion.facade';
 // USER
 export * from './features/user/user.facade';
 // USER
-
-// TIPO MONEDA
-export * from './features/tipo-moneda/tipo-moneda.facade';
-// export * from './features/tipo-moneda/tipo-moneda.model';
-// TIPO MONEDA
-
-// UNIDAD
-export * from './features/unidad/unidad.facade';
-// export * from './features/unidad/unidad.model';
-// UNIDAD

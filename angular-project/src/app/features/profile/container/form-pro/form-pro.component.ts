@@ -13,7 +13,7 @@ import {
   PermissionsGroup,
   RequestCreatePerfil,
   RequestUpdatePerfil,
-  Roles,
+  Rol,
 } from '@data';
 import { FormProService } from './form-pro.service';
 
@@ -26,7 +26,7 @@ export class FormProComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
   // perfilSelected$: Observable<Perfil>;
-  allRoles$: Observable<Roles[]>;
+  allRoles$: Observable<Rol[]>;
   // permisosRol$: Observable<PermissionsGroup[]>;
   permisosRol: PermissionsGroup[] = [];
   // permisosPerfil$: Observable<PermisosPerfil[]> = of([]);

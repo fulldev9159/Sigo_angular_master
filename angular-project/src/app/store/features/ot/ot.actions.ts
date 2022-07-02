@@ -1,79 +1,68 @@
 import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
 import {
-  DataInformeAvance,
-  DataRespGetContratosUser,
-  LpuInformeAvanceDetalle,
+  ContratosUser,
   OT,
   PMO,
   RequestGetOTs,
-  RequestSaveBorradorInformeAvance,
-  RequestSaveInformeAvance,
-  RequestSaveInformeAvanceAdmin,
-  Sitio,
-  StatusResponse,
   Response,
-  DataRespGetPMO,
-  DataRespGetLP,
-  DataRespGetPEP2,
-  DataRespGetOPEX,
-  DataRespGetSAP,
-  DataRespGetCECO,
-  DataRespGetCubicaciones,
-  DataRespGetProyectos,
-  DataRespGetAdminContrato,
+  LP,
+  PEP2,
+  OPEX,
+  SAP,
+  CECO,
+  Proyectos,
+  AdminContrato4OT,
   Cubs4OT,
-  DataRespGetOficinaCentral,
-  DataRespGetSolicitadoPor,
-  DataRespGetComuna,
-  DataRespGetTipoDeRed,
-  DataRespGetTipoDeTrabajo,
-  DataRespGetAreaDeNegocio,
-  DataRespGetPlanDeProyecto,
-  DataRespGetSitio,
-  DataRespGetTipoNumeroInterno,
-  DataRespGetNumeroInternoHasOT,
+  OficinaCentral,
+  SolicitadoPor,
+  Comuna,
+  TipoDeRed,
+  TipoDeTrabajo,
+  AreaDeNegocio,
+  ModelPlan,
+  Sitio,
+  TipoNumeroInterno,
+  NumeroInternoHasOT,
   RequestCreateOTMovil,
   RequestCreateOTFijo,
   RequestCreateOTOrdinario,
   RequestCreateOTBucle,
-  DataRespGetOTs,
   DataRespGetDetalleOT,
-  DataRespGetMotivoRechazo,
+  MotivoRechazo,
   RequestAceptarRechazarOT,
-  DataRespPosiblesTrabajadores,
-  DataRespGetCategoriaArchivo,
+  PosibleTrabajador,
+  CategoriaArchivo,
   DataRespSubirArchivo,
   ReqCreateRegistroLibroObra,
+  ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
+  RegistroLibroDeObras,
+  RequestAutorizarInformeAvance,
 } from '@data';
 
-import {
-  DetalleActa,
-  RequestSaveInformeActaGestor,
-  RequestSolicitudPagoActa,
-} from '@data/model/acta';
-
-export const getOts = createAction(
-  '[OT] Get Ots',
-  props<{
-    request: RequestGetOTs;
-  }>()
+// GET OTS
+export const getOTs = createAction(
+  '[OT] Get OTs',
+  props<{ request: RequestGetOTs }>()
 );
 
 export const getOtEjecucionSuccess = createAction(
-  '[OT] GET Ot Success Ejecucion',
-  props<{ response: Response<DataRespGetOTs> }>()
+  '[OT] GET OT Success Ejecucion',
+  props<{ response: Response<{ items: OT[] }> }>()
 );
 
 export const getOtAbiertasSuccess = createAction(
-  '[OT] GET Ot Success Abiertas',
-  props<{ response: Response<DataRespGetOTs> }>()
+  '[OT] GET OT Success Abiertas',
+  props<{ response: Response<{ items: OT[] }> }>()
 );
 
 export const getOtSuccessCerradas = createAction(
   '[Ot GetAll] GET Ot Success Cerradas',
-  props<{ response: Response<DataRespGetOTs> }>()
+  props<{ response: Response<{ items: OT[] }> }>()
 );
+
 export const getOtsError = createAction(
   '[Ot GetAll] GET Ot Error',
   props<{ error: any }>()
@@ -102,7 +91,7 @@ export const getContratosUser4OT = createAction(
 
 export const getContratosUser4OTSuccess = createAction(
   '[OT] getContratosUser4OT Success',
-  props<{ response: Response<DataRespGetContratosUser> }>()
+  props<{ response: Response<{ items: ContratosUser[] }> }>()
 );
 export const getContratosUser4OTError = createAction(
   '[OT] getContratosUser4OT Error',
@@ -117,7 +106,7 @@ export const getCubicaciones4OT = createAction(
 
 export const getCubicaciones4OTSuccess = createAction(
   '[OT] GET getCubicaciones4OT Success',
-  props<{ response: Response<DataRespGetCubicaciones> }>()
+  props<{ response: Response<{ items: Cubs4OT[] }> }>()
 );
 
 export const getCubicaciones4OTError = createAction(
@@ -139,7 +128,7 @@ export const getPMO = createAction(
 
 export const getPMOSuccess = createAction(
   '[OT] GET PMO Success',
-  props<{ response: Response<DataRespGetPMO> }>()
+  props<{ response: Response<{ items: PMO[] }> }>()
 );
 
 export const getPmoError = createAction(
@@ -155,7 +144,7 @@ export const getLineaPresupuestaria = createAction(
 
 export const getLineaPresupuestariaSuccess = createAction(
   '[OT] GET getLineaPresupuestaria Success',
-  props<{ response: Response<DataRespGetLP> }>()
+  props<{ response: Response<{ items: LP[] }> }>()
 );
 
 export const getLineaPresupuestariaError = createAction(
@@ -171,7 +160,7 @@ export const getPEP2 = createAction(
 
 export const getPEP2Success = createAction(
   '[OT] GET getPEP2 Success',
-  props<{ response: Response<DataRespGetPEP2> }>()
+  props<{ response: Response<{ items: PEP2[] }> }>()
 );
 
 export const getPEP2Error = createAction(
@@ -184,7 +173,7 @@ export const getIDOpex = createAction('[OT] GET getIDOpex');
 
 export const getIDOpexSuccess = createAction(
   '[OT] GET getIDOpex Success',
-  props<{ response: Response<DataRespGetOPEX> }>()
+  props<{ response: Response<{ items: OPEX[] }> }>()
 );
 
 export const getIDOpexError = createAction(
@@ -200,7 +189,7 @@ export const getCuentaSAP = createAction(
 
 export const getCuentaSAPSuccess = createAction(
   '[OT] GET getCuentaSAP Success',
-  props<{ response: Response<DataRespGetSAP> }>()
+  props<{ response: Response<{ items: SAP[] }> }>()
 );
 
 export const getCuentaSAPError = createAction(
@@ -216,7 +205,7 @@ export const getCECO = createAction(
 
 export const getCECOSuccess = createAction(
   '[OT] GET getCECO Success',
-  props<{ response: Response<DataRespGetCECO> }>()
+  props<{ response: Response<{ items: CECO[] }> }>()
 );
 
 export const getCECOError = createAction(
@@ -229,7 +218,7 @@ export const getProyecto = createAction('[OT] GET getProyecto');
 
 export const getProyectoSuccess = createAction(
   '[OT] GET getProyecto Success',
-  props<{ response: Response<DataRespGetProyectos> }>()
+  props<{ response: Response<{ items: Proyectos[] }> }>()
 );
 
 export const getProyectoError = createAction(
@@ -245,7 +234,7 @@ export const getAdminContrato = createAction(
 
 export const getAdminContratoSuccess = createAction(
   '[OT] GET getAdminContrato Success',
-  props<{ response: Response<DataRespGetAdminContrato> }>()
+  props<{ response: Response<{ items: AdminContrato4OT[] }> }>()
 );
 
 export const getAdminContratoError = createAction(
@@ -261,7 +250,7 @@ export const getOficinaCentral = createAction(
 
 export const getOficinaCentralSuccess = createAction(
   '[OT] GET getOficinaCentral Success',
-  props<{ response: Response<DataRespGetOficinaCentral> }>()
+  props<{ response: Response<{ items: OficinaCentral[] }> }>()
 );
 
 export const getOficinaCentralError = createAction(
@@ -274,7 +263,7 @@ export const getSolicitadoPor = createAction('[OT] GET getSolicitadoPor');
 
 export const getSolicitadoPorSuccess = createAction(
   '[OT] GET getSolicitadoPor Success',
-  props<{ response: Response<DataRespGetSolicitadoPor> }>()
+  props<{ response: Response<{ items: SolicitadoPor[] }> }>()
 );
 
 export const getSolicitadoPorError = createAction(
@@ -290,7 +279,7 @@ export const getComuna = createAction(
 
 export const getComunaSuccess = createAction(
   '[OT] GET getComuna Success',
-  props<{ response: Response<DataRespGetComuna> }>()
+  props<{ response: Response<{ items: Comuna[] }> }>()
 );
 
 export const getComunaError = createAction(
@@ -303,7 +292,7 @@ export const getTipoDeRed = createAction('[OT] GET getTipoDeRed');
 
 export const getTipoDeRedSuccess = createAction(
   '[OT] GET getTipoDeRed Success',
-  props<{ response: Response<DataRespGetTipoDeRed> }>()
+  props<{ response: Response<{ items: TipoDeRed[] }> }>()
 );
 
 export const getTipoDeRedError = createAction(
@@ -319,7 +308,7 @@ export const getTipoDeTrabajo = createAction(
 
 export const getTipoDeTrabajoSuccess = createAction(
   '[OT] GET getTipoDeTrabajo Success',
-  props<{ response: Response<DataRespGetTipoDeTrabajo> }>()
+  props<{ response: Response<{ items: TipoDeTrabajo[] }> }>()
 );
 
 export const getTipoDeTrabajoError = createAction(
@@ -332,7 +321,7 @@ export const getAreaDeNegocio = createAction('[OT] GET getAreaDeNegocio');
 
 export const getAreaDeNegocioSuccess = createAction(
   '[OT] GET getAreaDeNegocio Success',
-  props<{ response: Response<DataRespGetAreaDeNegocio> }>()
+  props<{ response: Response<{ items: AreaDeNegocio[] }> }>()
 );
 
 export const getAreaDeNegocioError = createAction(
@@ -345,7 +334,7 @@ export const getPlanDeProyecto = createAction('[OT] GET getPlanDeProyecto');
 
 export const getPlanDeProyectoSuccess = createAction(
   '[OT] GET getPlanDeProyecto Success',
-  props<{ response: Response<DataRespGetPlanDeProyecto> }>()
+  props<{ response: Response<{ items: ModelPlan[] }> }>()
 );
 
 export const getPlanDeProyectoError = createAction(
@@ -361,7 +350,7 @@ export const getSitio = createAction(
 
 export const getSitioSuccess = createAction(
   '[OT] GET getSitio Success',
-  props<{ response: Response<DataRespGetSitio> }>()
+  props<{ response: Response<{ items: Sitio[] }> }>()
 );
 
 export const getSitioError = createAction(
@@ -377,7 +366,7 @@ export const getTipoNumeroInterno = createAction(
 
 export const getTipoNumeroInternoSuccess = createAction(
   '[OT] GET getTipoNumeroInterno Success',
-  props<{ response: Response<DataRespGetTipoNumeroInterno> }>()
+  props<{ response: Response<{ items: TipoNumeroInterno[] }> }>()
 );
 
 export const getTipoNumeroInternoError = createAction(
@@ -393,7 +382,7 @@ export const getNumeroInternoHasOT = createAction(
 
 export const getNumeroInternoHasOTSuccess = createAction(
   '[OT] GET getNumeroInternoHasOT Success',
-  props<{ response: Response<DataRespGetNumeroInternoHasOT> }>()
+  props<{ response: Response<{ items: NumeroInternoHasOT[] }> }>()
 );
 
 export const getNumeroInternoHasOTError = createAction(
@@ -431,7 +420,7 @@ export const getAllMotivoRechazoOT = createAction(
 
 export const getAllMotivoRechazoOTSuccess = createAction(
   '[OT] GET getAllMotivoRechazoOT Success',
-  props<{ response: Response<DataRespGetMotivoRechazo> }>()
+  props<{ response: Response<{ items: MotivoRechazo[] }> }>()
 );
 
 export const getAllMotivoRechazoOTError = createAction(
@@ -463,7 +452,7 @@ export const getPosibleTrabajador = createAction(
 
 export const getPosibleTrabajadorSuccess = createAction(
   '[OT] GET getPosibleTrabajador Success',
-  props<{ response: Response<DataRespPosiblesTrabajadores> }>()
+  props<{ response: Response<{ items: PosibleTrabajador[] }> }>()
 );
 
 export const getPosibleTrabajadorError = createAction(
@@ -580,6 +569,61 @@ export const sendDetalleInformeAvanceError = createAction(
   props<{ error: any }>()
 );
 
+//  GET TIPOS ACTA
+export const getActaTiposPagoSuccess = createAction(
+  '[OT] GET getActaTiposPago Success',
+  props<{ response: Response<{ items: ActaTipoPago[] }> }>()
+);
+
+//  GET DETALLE SERVICIO POR ACTA
+export const getDetalleServicioPorActaSuccess = createAction(
+  '[OT] GET getDetalleServicioPorActa Success',
+  props<{ response: Response<{ items: DetalleActaServicio[] }> }>()
+);
+
+//  GET DETALLE UOB POR ACTA
+export const getDetalleUobPorActaSuccess = createAction(
+  '[OT] GET getDetalleUobPorActa Success',
+  props<{ response: Response<{ items: DetalleActaUob[] }> }>()
+);
+
+//  GET ULTIMO TIPO PAGO ACTA
+export const getUltimoTipoPagoActaSuccess = createAction(
+  '[OT] GET getUltimoTipoPagoActa Success',
+  props<{ tipoPago: string }>()
+);
+
+//  ENVIAR GENERACION ACTA
+export const sendGeneracionActa = createAction(
+  '[OT] GET sendGeneracionActa',
+  props<{
+    ot_id: number;
+    tipo_pago: string;
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    };
+  }>()
+);
+
+export const sendGeneracionActaSuccess = createAction(
+  '[OT] GET sendGeneracionActa Success',
+  props<{ response: Response<any> }>()
+);
+
+export const sendGeneracionActaError = createAction(
+  '[OT] GET sendGeneracionActa Error',
+  props<{ error: any }>()
+);
+
 //  GET CATEGORIAS DE ARCHIVOS
 export const getCategoriasArchivos = createAction(
   '[OT] GET getCategoriasArchivos'
@@ -587,7 +631,7 @@ export const getCategoriasArchivos = createAction(
 
 export const getCategoriasArchivosSuccess = createAction(
   '[OT] GET getCategoriasArchivos Success',
-  props<{ response: Response<DataRespGetCategoriaArchivo> }>()
+  props<{ response: Response<{ items: CategoriaArchivo[] }> }>()
 );
 
 export const getCategoriasArchivosError = createAction(
@@ -639,7 +683,7 @@ export const getLibroObras = createAction(
 
 export const getLibroObrasSuccess = createAction(
   '[OT] GET getLibroObras Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<RegistroLibroDeObras[]> }>()
 );
 
 export const getLibroObrasError = createAction(
@@ -656,60 +700,23 @@ export const resetSAP = createAction('[ResetData] ResetSAP');
 export const resetLPs = createAction('[ResetData] ResetLPs');
 export const resetPEP2 = createAction('[ResetData] ResetPEP2');
 export const resetCECO = createAction('[ResetData] ResetCECO');
-//  //////
 
-export const deleteOt = createAction(
-  '[Ot DeleteById] DELETE Ot',
-  props<{ otPosition: number }>()
+export const selectOT = createAction(
+  '[OT] select OT',
+  props<{
+    ot: Data.OT;
+  }>()
 );
 
-export const deleteOtSuccess = createAction(
-  '[Ot DeleteById] DELETE Ot Success',
-  props<{ otId: string }>()
+export const rejectOT = createAction(
+  '[OT] Reject OT',
+  props<{ otID: number; motivo: string }>()
 );
 
-export const deleteOtError = createAction(
-  '[Ot DeleteById] DELETE Ot Error',
-  props<{ error: any }>()
-);
+export const rejectOTSuccess = createAction('[OT] Reject OT success');
 
-export const editOt = createAction(
-  '[Ot EditById] EDIT Ot',
-  props<{ ot: Data.OT }>()
-);
-
-export const editOtSuccess = createAction(
-  '[Ot EditById] EDIT Ot Success',
-  props<{ OtId: string; Ot: Data.OT }>()
-);
-
-export const editOtError = createAction(
-  '[Ot EditById] EDIT Ot Error',
-  props<{ error: any }>()
-);
-
-export const replyOtSuccess = createAction(
-  '[Ot Reply] POST Reply Ot Success',
-  props<{ ot: Data.OT }>()
-);
-
-export const replyOtError = createAction(
-  '[Ot Reply] POST Reply Ot Error',
-  props<{ error: any }>()
-);
-
-export const stateOt = createAction(
-  '[Ot State] POST State Ot',
-  props<{ ot: Data.OT }>()
-);
-
-export const stateOtSuccess = createAction(
-  '[Ot State] POST State Ot Success',
-  props<{ ot: Data.OT }>()
-);
-
-export const stateOtError = createAction(
-  '[Ot State] POST State Ot Error',
+export const rejectOTError = createAction(
+  '[OT] Reject OT error',
   props<{ error: any }>()
 );
 
@@ -728,443 +735,18 @@ export const postOtSCESuccess = createAction(
   props<{ ot: Data.OT }>()
 );
 
-// OT LIST
-
-// OT FORM
-
-export const selectOT = createAction(
-  '[OT] select OT',
-  props<{
-    ot: Data.OT;
-  }>()
-);
-
-// Estados de la OT
-export const approveOT = createAction(
-  '[OT] Approve OT',
-  props<{ otID: number; coordinador_id: number }>()
-);
-
-export const approveOTSuccess = createAction('[OT] Approve OT success');
-
-export const approveOTError = createAction(
-  '[OT] Approve OT error',
-  props<{ error: any }>()
-);
-
-export const rejectOT = createAction(
-  '[OT] Reject OT',
-  props<{ otID: number; motivo: string }>()
-);
-
-export const rejectOTSuccess = createAction('[OT] Reject OT success');
-
-export const rejectOTError = createAction(
-  '[OT] Reject OT error',
-  props<{ error: any }>()
-);
-
-export const cancelOT = createAction(
-  '[OT] Cancel OT',
-  props<{ otID: number }>()
-);
-
-export const cancelOTSuccess = createAction('[OT] Cancel OT success');
-
-export const cancelOTError = createAction(
-  '[OT] Cancel OT error',
-  props<{ error: any }>()
-);
-
-export const finalizeOTJobs = createAction(
-  '[OT] Finalize OT Jobs',
-  props<{ otID: number }>()
-);
-
-export const finalizeOTJobsSuccess = createAction(
-  '[OT] Finalize OT Jobs success'
-);
-
-export const finalizeOTJobsError = createAction(
-  '[OT] Finalize OT Jobs error',
-  props<{ error: any }>()
-);
-
-// Aprobar la generación del acta
-export const approveOTMinutesGeneration = createAction(
-  '[OT] Approve OT minutes generation',
-  props<{ otID: number }>()
-);
-
-export const approveOTMinutesGenerationSuccess = createAction(
-  '[OT] Approve OT minutes generation success'
-);
-
-export const approveOTMinutesGenerationError = createAction(
-  '[OT] Approve OT minutes generation error',
-  props<{ error: any }>()
-);
-
-// Rechazar la generación del acta
-export const rejectOTMinutesGeneration = createAction(
-  '[OT] Reject OT minutes generation',
-  props<{ otID: number }>()
-);
-
-export const rejectOTMinutesGenerationSuccess = createAction(
-  '[OT] Reject OT minutes generation success'
-);
-
-export const rejectOTMinutesGenerationError = createAction(
-  '[OT] Reject OT minutes generation error',
-  props<{ error: any }>()
-);
-
-// Aprobar la validación del acta
-export const approveOTMinutesValidation = createAction(
-  '[OT] Approve OT minutes validation',
-  props<{ otID: number }>()
-);
-
-export const approveOTMinutesValidationSuccess = createAction(
-  '[OT] Approve OT minutes validation success'
-);
-
-export const approveOTMinutesValidationError = createAction(
-  '[OT] Approve OT minutes validation error',
-  props<{ error: any }>()
-);
-
-// Rechazar la validación del acta
-export const rejectOTMinutesValidation = createAction(
-  '[OT] Reject OT minutes validation',
-  props<{ otID: number }>()
-);
-
-export const rejectOTMinutesValidationSuccess = createAction(
-  '[OT] Reject OT minutes validation success'
-);
-
-export const rejectOTMinutesValidationError = createAction(
-  '[OT] Reject OT minutes validation error',
-  props<{ error: any }>()
-);
-
-// Autorizar pagos
-export const authorizePayments = createAction(
-  '[OT] Authorize payments',
-  props<{ user_id: number; otID: number }>()
-);
-
-export const authorizePaymentsSuccess = createAction(
-  '[OT] Authorize payments success'
-);
-
-export const authorizePaymentsError = createAction(
-  '[OT] Authorize payments error',
-  props<{ error: any }>()
-);
-
-// Rechazar pagos
-export const rejectPayments = createAction(
-  '[OT] Reject payments',
-  props<{ otID: number }>()
-);
-
-export const rejectPaymentsSuccess = createAction(
-  '[OT] Reject payments success'
-);
-
-export const rejectPaymentsError = createAction(
-  '[OT] Reject payments error',
-  props<{ error: any }>()
-);
-
-// Coordinadores
-export const getCoordinators = createAction(
-  '[OT] get coordinators',
-  props<{ otID: number }>()
-);
-
-export const getCoordinatorsSuccess = createAction(
-  '[OT] get coordinators success',
-  props<{ coordinators: Data.User[] }>()
-);
-
-export const getCoordinatorsError = createAction(
-  '[OT] get coordinators error',
-  props<{ error: any }>()
-);
-
-export const assignCoordinator = createAction(
-  '[OT] assign coordinator',
-  props<{ otID: number; coordinador_id: number }>()
-);
-
-export const assignCoordinatorSuccess = createAction(
-  '[OT] assign coordinator success'
-);
-
-export const assignCoordinatorError = createAction(
-  '[OT] assign coordinator error',
-  props<{ error: any }>()
-);
-
-// Trabajadores
-export const getTrabajadores = createAction(
-  '[OT] get trabajadores',
-  props<{ otID: number }>()
-);
-
-export const getTrabajadoresSuccess = createAction(
-  '[OT] get trabajadores success',
-  props<{ trabajadores: Data.User[] }>()
-);
-
-export const getTrabajadoresError = createAction(
-  '[OT] get trabajadores error',
-  props<{ error: any }>()
-);
-
-export const assignTrabajador = createAction(
-  '[OT] assign trabajador',
-  props<{ otID: number; trabajadorID: number }>()
-);
-
-export const assignTrabajadorSuccess = createAction(
-  '[OT] assign trabajador success'
-);
-
-export const assignTrabajadorError = createAction(
-  '[OT] assign trabajador error',
-  props<{ error: any }>()
-);
-
-// finalizar OT
-export const finalizeOT = createAction(
-  '[OT] finalize OT',
-  props<{ otID: number }>()
-);
-
-export const finalizeOTSuccess = createAction('[OT] finalize OT success');
-
-export const finalizeOTError = createAction(
-  '[OT] finalize OT error',
-  props<{ error: any }>()
-);
-
-// Registrar en el libro de obras
-export const registrarLibroObra = createAction(
-  '[OT] Registrar en el libro de obras',
-  props<{ registro: Data.RegistroLibroObraRequest }>()
-);
-
-export const registrarLibroObraSuccess = createAction(
-  '[OT] Registrar en el libro de obras success'
-);
-
-export const registrarLibroObraError = createAction(
-  '[OT] Registrar en el libro de obras error',
-  props<{ error: any }>()
-);
-
-// Registros libro de obra
-export const getRegistrosLibroObra = createAction(
-  '[OT] get registros libro de obra',
-  props<{ ot_id: number }>()
-);
-
-export const getRegistrosLibroObraSuccess = createAction(
-  '[OT] get registros libro de obra success',
-  props<{ registroslibroobras: Data.RegistroLibroObra[] }>()
-);
-
-export const getRegistrosLibroObraError = createAction(
-  '[OT] get registros libro de obra error',
-  props<{ error: any }>()
-);
-
-// // Inicializar informe avance
-// export const inicializarInformeAvance = createAction(
-//   '[OT] inicializar informe avance',
-//   props<{ ot_id: number }>()
-// );
-
-// export const inicializarInformeAvanceSuccess = createAction(
-//   '[OT] inicializar informe avance success',
-//   props<{ status: StatusResponse }>()
-// );
-
-// export const inicializarInformeAvanceError = createAction(
-//   '[OT] inicializar informe avance error',
-//   props<{ error: any }>()
-// );
-
-// Get data informe avance
-export const getDataInformeAvanceTrabajador = createAction(
-  '[OT] GET data informe avance trabajador',
-  props<{ ot_id: number }>()
-);
-
-export const getDataInformeAvanceTrabajadorSuccess = createAction(
-  '[OT] GET data informe avance trabajador success',
-  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
-);
-
-export const getDataInformeAvanceAdminEC = createAction(
-  '[OT] GET data informe avance Admin EC',
-  props<{ ot_id: number }>()
-);
-
-export const getDataInformeAvanceAdminECSuccess = createAction(
-  '[OT] GET data informe avance Admin EC success',
-  props<{ dataInformeAvance: DataInformeAvance[]; status: StatusResponse }>()
-);
-
-export const getDataInformeAvanceError = createAction(
-  '[OT] GET data informe avance error',
-  props<{ error: any }>()
-);
-
-// Save borrador informe avance
-export const saveBorradorInformeAvance = createAction(
-  '[OT] SAVE borrador informe avance',
-  props<{ request: RequestSaveBorradorInformeAvance }>()
-);
-
-export const saveBorradorInformeAvanceSuccess = createAction(
-  '[OT] SAVE borrador informe avance success',
-  props<{ ot_id: number; status: StatusResponse }>()
-);
-
-export const saveBorradorInformeAvanceError = createAction(
-  '[OT] SAVE borrador informe avance error',
-  props<{ error: any }>()
-);
-
-// Save informe avance
-export const saveInformeAvanceTrabajador = createAction(
-  '[OT] SAVE informe avance trabajador',
-  props<{ request: RequestSaveInformeAvance }>()
-);
-
-export const saveInformeAvanceTrabajadorSuccess = createAction(
-  '[OT] SAVE informe avance trabajador success',
-  props<{ ot_id: number; status: StatusResponse }>()
-);
-
-export const saveInformeAvanceAdminEC = createAction(
-  '[OT] SAVE informe avance Admin EC',
-  props<{ request: RequestSaveInformeAvanceAdmin }>()
-);
-
-export const saveInformeAvanceAdminECSuccess = createAction(
-  '[OT] SAVE informe avance Admin EC success',
-  props<{ status: StatusResponse }>()
-);
-
-export const saveInformeAvanceError = createAction(
-  '[OT] SAVE informe avance error',
-  props<{ error: any }>()
-);
-
-// Rechazar informe avance
-export const rechazarInformeAvance = createAction(
-  '[OT] rechazar informe avance',
-  props<{ informe_id: number }>()
-);
-
-export const rechazarInformeAvanceSuccess = createAction(
-  '[OT] rechazar informe avance success',
-  props<{ status: StatusResponse }>()
-);
-
-export const rechazarInformeAvanceError = createAction(
-  '[OT] rechazar informe avance error',
-  props<{ error: any }>()
-);
-
-// GET información informe acta
-export const getDataInformeActa = createAction(
-  '[OT] GET data informe acta',
-  props<{ ot_id: number }>()
-);
-
-export const getDataInformeActaSuccess = createAction(
-  '[OT] GET data informe acta success',
-  props<{ dataInformeActa: DataInformeAvance[]; status: StatusResponse }>()
-);
-
-export const getDataInformeActaError = createAction(
-  '[OT] GET data informe acta error',
-  props<{ error: any }>()
-);
-
-// SAVE informe acta
-export const saveInformeActa = createAction(
-  '[OT] SAVE informe acta',
-  props<{ request: RequestSaveInformeActaGestor }>()
-);
-
-export const saveInformeActaSuccess = createAction(
-  '[OT] SAVE informe acta success',
-  props<{ status: StatusResponse }>()
-);
-
-export const saveInformeActaError = createAction(
-  '[OT] SAVE informe acta error',
-  props<{ error: any }>()
-);
-
-// Rechazar informe acta
-export const rechazarInformeActa = createAction(
-  '[OT] rechazar informe acta',
-  props<{ informe_id: number }>()
-);
-
-export const rechazarInformeActaSuccess = createAction(
-  '[OT] rechazar informe acta success',
-  props<{ status: StatusResponse }>()
-);
-
-export const rechazarInformeActaError = createAction(
-  '[OT] rechazar informe acta error',
-  props<{ error: any }>()
-);
-
-// GET detalle acta
-export const getDetalleActaMezcla = createAction(
-  '[OT] GET detalle acta mezcla',
-  props<{ ot_id: number }>()
-);
-
-export const getDetalleActa = createAction(
-  '[OT] GET detalle acta',
-  props<{ ot_id: number }>()
-);
-
-export const getDetalleActaSuccess = createAction(
-  '[OT] GET detalle acta success',
-  props<{ dataInformeActa: DetalleActa[]; status: StatusResponse }>()
-);
-
-export const getDetalleActaError = createAction(
-  '[OT] GET detalle acta error',
-  props<{ error: any }>()
-);
-
-// SEND solicitud pago acta
-export const sendSolicitudPagoActa = createAction(
-  '[OT] Send solicitud pago acta',
-  props<{ request: RequestSolicitudPagoActa }>()
+//  ACEPTAR/RECHAZAR INFORME DE AVANCE
+export const AceptarRechazarInformeAvanceOT = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT',
+  props<{ request: RequestAutorizarInformeAvance }>()
 );
 
-export const sendSolicitudPagoActaSuccess = createAction(
-  '[OT] Send solicitud pago acta success',
-  props<{ status: StatusResponse }>()
+export const AceptarRechazarInformeAvanceOTSuccess = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT Success',
+  props<{ response: Response<any> }>()
 );
 
-export const sendSolicitudPagoActaError = createAction(
-  '[OT] Send solicitud pago acta error',
+export const AceptarRechazarInformeAvanceOTError = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT Error',
   props<{ error: any }>()
 );

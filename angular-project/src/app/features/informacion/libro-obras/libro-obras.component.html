@@ -1,6 +1,6 @@
 <div class="row" style="padding: 15px;">
   <div class="col-12" *ngFor="let registro of registosLibroDeObras$|async ">
-    <app-card [classCardHeader]="'bg-info'">
+    <app-card [classCardHeader]="'bg-info'" *ngIf="registro.tipo_item==='ENTRADA_LIBRO_OBRA'">
       <ng-container card-header-title><strong>Autor:</strong> {{registro.usuario_nombre}} <strong style="margin-left: 10px;">Perfil: </strong> {{registro.perfil_nombre}} <strong style="margin-left: 10px;">Fecha:</strong> {{registro.created_at| date:'medium'}}</ng-container>
       <ng-container card-body>
         <div class="row">
@@ -9,19 +9,28 @@
           </div>
           <div class="col-md-5" style="display: flex;flex-direction: column;">
             <u>Adjuntos</u>
-            <span *ngIf="registro.archivos_adjuntos.length===0" class="download-link">No existen adjuntos</span>
-            <span style="margin-top:5px;" *ngFor="let adjunto of registro.archivos_adjuntos">
+            <span *ngIf="registro.archivos.length===0" class="download-link">No existen adjuntos</span>
+            <span style="margin-top:5px;" *ngFor="let adjunto of registro.archivos">
               <a [href]="getUrl(adjunto.url)" class="download-link">
                 <i class="pi" [ngClass]="getIcon(adjunto.extension)" [ngStyle]="{color:getColor(adjunto.extension)}"></i>
-                {{adjunto.nombre_original}}.{{adjunto.extension}} ({{adjunto.size}})
+                {{adjunto.nombre_original}} ({{adjunto.human_size}}) (Tipo: <strong>{{adjunto.categoria_nombre}}</strong> )
               </a>
             </span>
-            <span *ngIf="registro.archivos_adjuntos.length>0">
+            <span *ngIf="registro.archivos.length>0">
               <p-message severity="info" text="Por seguridad los enlaces tienen un tiempo de caducidad. Actualice esta página si los enlaces caducan"></p-message>&nbsp;
             </span>
           </div>
         </div>
       </ng-container>
     </app-card>
+
+
+    <div  *ngIf="registro.tipo_item==='BITACORA'" style="padding: 11px;
+    background: #eaeaea;
+    border-radius: 13px;
+    font-size: 10px;
+    margin-bottom:10px">
+      {{registro.created_at| date:'medium'}} - <strong>Status:</strong> {{registro.nivel}} <strong style="margin-left: 10px;">Evento: </strong> {{registro.evento}} <strong style="margin-left: 10px;">mensaje:</strong> {{registro.mensaje}}
+    </div>
   </div>
 </div>

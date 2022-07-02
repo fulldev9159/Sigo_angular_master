@@ -60,14 +60,3 @@ export const getPosiblesContratosUser4CreateEdit = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.posiblesContratosUSer
 );
-////////////
-
-// export const getContracts = createSelector(
-//   selectUser,
-//   (state: fromUser.StateUser) => state.contratos
-// );
-
-export const getAllDataUser = createSelector(
-  selectUser,
-  (state: fromUser.StateUser) => state.alldatauser
-);

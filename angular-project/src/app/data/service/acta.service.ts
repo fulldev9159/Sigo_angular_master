@@ -1,20 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import {
-  DataInformeAvance,
-  LpuInformeAvanceDetalle,
-  RequestSaveInformeAvanceAdmin,
-  ResponseBorradorInformeAvance,
-} from '@data';
-import { map } from 'rxjs/operators';
-import {
-  DetalleActa,
-  RequestSaveInformeActaGestor,
-  RequestSolicitudPagoActa,
-  ResponseGetDetalleActa,
-  ResponseGetInformeActa,
-} from '@data/model/acta';
+
+import { delay, map } from 'rxjs/operators';
+import { DetalleActaUob, Response } from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,108 +14,66 @@ export class ActaService {
     this.apiUrl = environment.api || 'http://localhost:4040';
   }
 
-  getInformeActa(ot_id: number): Observable<{
-    dataInformeActa: DataInformeAvance[];
-    status: any;
-  }> {
-    return this.http
-      .post<ResponseGetInformeActa>(`${this.apiUrl}/infavan/acta/get_gestor`, {
+  // GET DETALLE UOB POR ACTA
+  getDetalleUobPorActa(
+    ot_id: number
+  ): Observable<Response<{ items: DetalleActaUob[] }>> {
+    return this.http.post<Response<{ items: DetalleActaUob[] }>>(
+      `${this.apiUrl}/ot/get_detalle_uob_for_acta/get`,
+      {
         ot_id,
-      })
-      .pipe(
-        map(res => {
-          return {
-            dataInformeActa: res.data.items,
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
+      }
+    );
   }
 
-  saveInformeActa(request: RequestSaveInformeActaGestor): Observable<{
-    status: any;
-  }> {
+  // GET ULTIMO TIPO PAGO ACTA
+  getUltimoTipoPagoActa(ot_id: number): Observable<string> {
     return this.http
-      .post<any>(`${this.apiUrl}/infavan/acta/accept`, request)
-      .pipe(
-        map(res => {
-          return {
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
-  }
-
-  rechazarInformeActa(informe_id: number): Observable<{
-    status: any;
-  }> {
-    // return this.http
-    //   .post<ResponseBorradorInformeAvance>(
-    //     `${this.apiUrl}/cubicacion/contratos_marco/get`,
-    //     {lpus}
-    //   )
-    //   .pipe(
-    //     map(res => {
-    //       return {
-    //         status: {
-    //           description: res.status.description,
-    //           responseCode: res.status.responseCode,
-    //         },
-    //       };
-    //     })
-    //   );
-    return of({
-      status: {
-        description: 'ok',
-        responseCode: 0,
-      },
-    });
-  }
-
-  getActaDetalle(ot_id: number): Observable<{
-    dataInformeActa: DetalleActa[];
-    status: any;
-  }> {
-    return this.http
-      .post<ResponseGetDetalleActa>(
-        `${this.apiUrl}/pagos/solicitud/acta/get_detalle`,
+      .post<Response<{ tipo_pago: string }>>(
+        `${this.apiUrl}/ot/acta/detalle/get_last`,
         {
           ot_id,
         }
       )
       .pipe(
-        map(res => {
-          return {
-            dataInformeActa: res.data.items,
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
+        map(
+          (response: { data: { tipo_pago: string } }) =>
+            response?.data?.tipo_pago ?? ''
+        )
       );
   }
 
-  solicitudPagoActa(request: RequestSolicitudPagoActa): Observable<{
-    status: any;
-  }> {
-    return this.http
-      .post<any>(`${this.apiUrl}/pagos/solicitud/acta/send`, request)
-      .pipe(
-        map(res => {
-          return {
-            status: {
-              description: res.status.description,
-              responseCode: res.status.responseCode,
-            },
-          };
-        })
-      );
+  sendGeneracionActa(
+    ot_id: number,
+    tipo_pago: string,
+    detalle: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+        porcentaje: number;
+      }[];
+    }
+  ): Observable<Response<any>> {
+    //// return this.http.post<Response<any>>(`${this.apiUrl}/ot/acta/create`, {
+    ////   ot_id,
+    ////   tipo_pago,
+    ////   detalle,
+    //// });
+
+    console.log(`${this.apiUrl}/ot/acta/create`, {
+      ot_id,
+      tipo_pago,
+      detalle,
+    });
+
+    return of({
+      status: { code: 0, desc: 'OK' },
+      data: {},
+    }).pipe(delay(3000));
   }
 }

@@ -1,29 +1,34 @@
-export interface DataRspGetAllContratos {
-  items: ContratoMarco[];
-}
+import { IdNombreType } from './index';
+import { ModelUsuario } from './user';
 
-export interface ContratoMarco {
-  estado: boolean;
+// tslint:disable-next-line
+export interface ModelTipoContrato extends IdNombreType {}
+
+export interface ModelContratoMarco {
   aprob_jerarq_inic: boolean;
   costo_max: number;
+  estado: boolean;
   fecha_fin: Date;
   fecha_inicio: Date;
   id: number;
   nombre: string;
-  model_tipo_contrato_id: {
-    id: number;
-    nombre: string;
-  };
-  model_tipo_moneda_id: {
-    codigo: string;
-    id: number;
-    nombre: string;
-  };
   tiene_encuesta: boolean;
   tipo_contrato_id: number;
   tipo_moneda_id: number;
   tipo_pago: string;
   validacion_operaciones: boolean;
+}
+
+export interface ContratoWithTipo extends ModelContratoMarco {
+  model_tipo_contrato_id: ModelTipoContrato;
+}
+export interface ContratoMarco extends ModelContratoMarco {
+  model_tipo_contrato_id: ModelTipoContrato;
+  model_tipo_moneda_id: {
+    codigo: string;
+    id: number;
+    nombre: string;
+  };
 }
 
 export interface TableListContratosMarcos
@@ -38,7 +43,6 @@ export interface TableListContratosMarcos
   tipo_moneda: string;
 }
 
-/////
 export interface ReqEditContrato {
   contrato_marco_id: number;
   values: ValuesEditContrato;
@@ -65,33 +69,14 @@ export interface ReqActivarContrato {
   };
 }
 
-export interface ResponseGetContrato4Cub {
-  data: {
-    items: ContratoMarco4Cub[];
-  };
-
-  pagination: {
-    total_pages: number;
-    items_per_page: number;
-    field_order: any[];
-    page: number;
-    total_items: number;
-  };
-
-  status: {
-    description: string;
-    responseCode: number;
-  };
+// GET CONTRATOS USER
+export interface ContratosUser {
+  contrato_id: 3;
+  model_contrato_id: ModelContratoMarco;
+  model_usuario_id: ModelUsuario;
+  usuario_id: 24;
 }
 
-export interface ContratoMarco4Cub {
-  id: number;
-  nombre: string;
-  tipo_contrato_id: string;
-  tipo_contrato_nombre: string;
-  activo: boolean;
-  fecha_inicio: Date;
-  fecha_termino: Date;
-  tipo_codigo: number;
-  tipo_glosa: string;
-}
+// GET POSIBLES CONTRATOS USER
+// tslint:disable-next-line
+export interface PosiblesContratosUser extends ModelContratoMarco {}

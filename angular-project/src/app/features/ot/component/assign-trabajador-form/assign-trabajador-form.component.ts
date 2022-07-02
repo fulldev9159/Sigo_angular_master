@@ -98,13 +98,13 @@ export class AssignTrabajadorFormComponent implements OnInit, OnDestroy {
         this.otFacade.AceptarProveedorOT(
           request,
           this.otID,
-          trabajadorID,
+          +trabajadorID,
           'SUPERVISOR_DE_TRABAJOS'
         );
       } else if (this.etapa === 'OT_ET_ASIGNACION_TRABAJADOR') {
         this.otFacade.AsignarSupervisorTrabajos(
           this.otID,
-          trabajadorID,
+          +trabajadorID,
           'SUPERVISOR_DE_TRABAJOS'
         );
       }

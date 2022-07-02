@@ -13,7 +13,7 @@ import {
   PerfilesUser,
   PosiblesContratosUser,
   PosiblesSuperiores,
-  Proveedores4CreateUser,
+  ModelProveedor,
   RequestActivateUser,
   RequestAgregarPerfilUsusario,
   RequestCreateUser,
@@ -101,7 +101,7 @@ export class UserFacade {
     this.store.dispatch(userActions.getAllProveedores4CreateUser({ interno }));
   }
 
-  public getAllProveedores4CreateUser$(): Observable<Proveedores4CreateUser[]> {
+  public getAllProveedores4CreateUser$(): Observable<ModelProveedor[]> {
     return this.store.select(userSelectors.getAllProveedores4CreateUser);
   }
 
@@ -182,34 +182,6 @@ export class UserFacade {
   > {
     return this.store.select(userSelectors.getPosiblesContratosUser4CreateEdit);
   }
-  // ///// /////////////////
-
-  // DELETE
-  public deleteUser(usuario_id: number): void {
-    this.store.dispatch(userActions.deleteUser({ usuario_id }));
-  }
-
-  // CONTRACT
-  // public getContracts(proveedor_id: number): void {
-  //   this.store.dispatch(userActions.getContracts({ proveedor_id }));
-  // }
-
-  // public getContracts$(): Observable<Data.Contrato[]> {
-  //   return this.store.select(userSelectors.getContracts);
-  // }
-  // CONTRACT
-
-  // USER POST
-  // public createUser(request: Data.CreateUserRequest): void {
-  //   this.store.dispatch(userActions.createUser({ createUserRequest: request }));
-  // }
-  // USER POST
-
-  // USER EDIT
-  // public editUserNew(request: Data.EditUserRequest): void {
-  //   this.store.dispatch(userActions.editUser({ editUserRequest: request }));
-  // }
-  // USER EDIT
 
   public resetArea(): void {
     this.store.dispatch(userActions.resetArea());
@@ -226,30 +198,8 @@ export class UserFacade {
   public resetSuperiores(): void {
     this.store.dispatch(userActions.resetSuperiores());
   }
-
-  // public getAllDataUsuario$(): Observable<Data.UserWithDetail> {
-  //   return this.store.select(userSelectors.getAllDataUser);
-  // }
-
-  public SetDisplayDetalleModal(value: boolean): void {
-    return this.store.dispatch(userActions.setDisplayDetalleModal({ value }));
+  // DELETE
+  public deleteUser(usuario_id: number): void {
+    this.store.dispatch(userActions.deleteUser({ usuario_id }));
   }
-
-  public DisplayDetalleModal$(): Observable<boolean> {
-    return this.store.select(userSelectors.getDisplayDetalleModal);
-  }
-
-  // public getPosiblesSuperiores(
-  //   proveedor_id: number,
-  //   area_id: number,
-  //   contratos_marco_id: number[]
-  // ): void {
-  //   this.store.dispatch(
-  //     userActions.getGetPosiblesSuperiores({
-  //       proveedor_id,
-  //       area_id,
-  //       contratos_marco_id,
-  //     })
-  //   );
-  // }
 }

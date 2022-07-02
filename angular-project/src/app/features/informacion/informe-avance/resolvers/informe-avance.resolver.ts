@@ -15,7 +15,10 @@ interface ResolverResponse {
 
 @Injectable({ providedIn: 'root' })
 export class InformeAvanceResolver implements Resolve<ResolverResponse> {
-  constructor(private router: Router, private service: Data.OTService) {}
+  constructor(
+    private router: Router,
+    private service: Data.InformeAvanceService
+  ) {}
 
   resolve(
     route: ActivatedRouteSnapshot,

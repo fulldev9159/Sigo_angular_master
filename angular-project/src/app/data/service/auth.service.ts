@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Response, SessionData, RequestLogin } from '@data';
+import { Response, RequestLogin } from '@data';
 import {
   DataRespLogin,
   DataResGetPerfilesUser,

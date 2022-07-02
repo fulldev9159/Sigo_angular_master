@@ -90,7 +90,7 @@ describe.skip('Creacion de cub y ot', () => {
     observaciones_form,
   ];
 
-  const nombre = 'informe avance 1';
+  const nombre = 'Presentación equipo 2';
 
   beforeEach(() => {
     cy.viewport(1500, 1700);

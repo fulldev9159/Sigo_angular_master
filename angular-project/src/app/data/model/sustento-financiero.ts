@@ -1,17 +1,9 @@
 // GET PMO
-export interface DataRespGetPMO {
-  items: PMO[];
-}
-
 export interface PMO {
   pmo_codigo: number;
 }
 
 // GET LINEA PRESUPUESTARIA
-export interface DataRespGetLP {
-  items: LP[];
-}
-
 export interface LP {
   ano: number;
   created_at: Date;
@@ -25,11 +17,7 @@ export interface LP {
   tipo_contrato: number;
 }
 
-// GET PMO
-export interface DataRespGetPEP2 {
-  items: PEP2[];
-}
-
+// GET PEP2
 export interface PEP2 {
   ano: number;
   created_at: Date;
@@ -44,10 +32,6 @@ export interface PEP2 {
 }
 
 // GET OPEX
-export interface DataRespGetOPEX {
-  items: OPEX[];
-}
-
 export interface OPEX {
   ano: number;
   ceco: string;
@@ -58,10 +42,6 @@ export interface OPEX {
 }
 
 // GET SAP
-export interface DataRespGetSAP {
-  items: SAP[];
-}
-
 export interface SAP {
   ano: number;
   ceco: string;
@@ -72,9 +52,6 @@ export interface SAP {
 }
 
 // GET CECO
-export interface DataRespGetCECO {
-  items: CECO[];
-}
 
 export interface CECO {
   ano: number;

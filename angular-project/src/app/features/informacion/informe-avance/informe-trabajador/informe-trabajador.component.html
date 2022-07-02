@@ -24,7 +24,7 @@
 
                   <th>Cód</th>
                   <th>Descripción</th>
-                  <th>Actividad</th>
+                  <!-- <th>Actividad</th> -->
                   <th>Cantidad</th>
                   <th>Unidad</th>
                   <!-- <th>Precio</th> -->
@@ -49,7 +49,7 @@
 
                         <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                         <td class="data-primaria">{{ servicio.many_informe_has_uob[0].model_unidad_obra_cod.descripcion }}</td>
-                        <td class="data-secundaria"> -- </td>
+                        <!-- <td class="data-secundaria"> -- </td> -->
                         <td class="data-secundaria">
                           <!-- {{ servicio.many_informe_has_uob[0].cantidad }} -->
                           <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
@@ -72,7 +72,7 @@
 
                         <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                         <td class="data-primaria">{{ servicio.many_informe_has_uob[0].model_unidad_obra_cod.descripcion }}</td>
-                        <td class="data-secundaria"> -- </td>
+                        <!-- <td class="data-secundaria"> -- </td> -->
                         <td class="data-secundaria">
                           <!-- {{ servicio.many_informe_has_uob[0].cantidad }} -->
                           <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
@@ -87,7 +87,7 @@
                         <tr [formArray]="form">
                           <td class="label-table">{{ uo.unidad_obra_cod }}</td>
                           <td class="data-primaria">{{ uo.model_unidad_obra_cod.descripcion }}</td>
-                          <td class="data-secundaria"> -- </td>
+                          <!-- <td class="data-secundaria"> -- </td> -->
                           <td class="data-secundaria">
                             <!-- {{ uo.cantidad }} -->
                             <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(uoIndex+1).get('cantidad')" type="text" [errorMessageFn]="errorMessageFn"></app-input>

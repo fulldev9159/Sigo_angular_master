@@ -245,7 +245,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               +this.formCub.get('contrato').value
             );
           } else {
-            // this.checkAndEnable('cmarcoproveedor_id', []);
+            this.checkAndEnable(this.formFiltros, 'tipo_servicio_id', []);
           }
         })
     );
@@ -544,8 +544,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   checkAndEnable(form: FormGroup, key: string, array: any[]): void {
-    if (array.length > 0) {
-      form.get(key).enable({ emitEvent: false });
+    if (array) {
+      if (array.length > 0) {
+        form.get(key).enable({ emitEvent: false });
+      } else {
+        form.get(key).disable({ emitEvent: false });
+      }
     } else {
       form.get(key).disable({ emitEvent: false });
     }

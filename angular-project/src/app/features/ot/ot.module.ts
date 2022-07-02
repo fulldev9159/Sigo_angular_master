@@ -8,7 +8,6 @@ import { FormOtComponent } from './container/form-ot/form-ot.component';
 
 import { UiModule } from '@uiOT/ui.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AssignCoordinatorFormComponent } from './component/assign-coordinator-form/assign-coordinator-form.component';
 import { AssignTrabajadorFormComponent } from './component/assign-trabajador-form/assign-trabajador-form.component';
 import { GeneralFormComponent } from './forms/general-form/general-form.component';
 import { PlanProyectoFormComponent } from './forms/plan-proyecto-form/plan-proyecto-form.component';
@@ -28,7 +27,6 @@ import { DetalleInformeAvanceTableComponent } from './component/detalle-informe-
     OtComponent,
     ListOtComponent,
     FormOtComponent,
-    AssignCoordinatorFormComponent,
     AssignTrabajadorFormComponent,
     GeneralFormComponent,
     PlanProyectoFormComponent,

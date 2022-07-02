@@ -1,57 +1,38 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
 
-import {
-  catchError,
-  concatMap,
-  map,
-  mapTo,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { SnackBarService } from '@utilsSIGO/snack-bar';
-
-import { AuthFacade } from '@storeOT/features/auth/auth.facade';
-import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import * as Data from '@data';
-import * as otActions from './ot.actions';
-
-import { environment } from '@environment';
-
-import { Response } from '@storeOT/model';
 import {
-  DetalleActa,
-  LpusPorcentajes,
-  RequestSolicitudPagoActa,
-} from '@data/model/acta';
+  ProyectoService,
+  UserService,
+  OTService,
+  SustentoFinancieroService,
+  AlertMessageActions,
+  InformeAvanceService,
+  ActaService,
+  LibroObraService,
+} from '@data';
+import * as otActions from './ot.actions';
 
 @Injectable()
 export class OtEffects {
   constructor(
     private actions$: Actions,
-    private http: HttpClient,
-    private snackService: SnackBarService,
-    private otService: Data.OTService,
-    private informeAvanceService: Data.InformAvenceService,
-    private sustentofinancieroService: Data.SustentoFinancieroService,
-    private actaService: Data.ActaService,
-    private userService: Data.UserService,
-    private authFacade: AuthFacade,
-    private otFacade: OtFacade,
-    private messageService: MessageService,
-    private messageServiceInt: Data.NotifyAfter,
-    private router: Router,
-    private alertMessageAction: Data.AlertMessageActions
+    private alertMessageAction: AlertMessageActions,
+    private otService: OTService,
+    private sustentofinancieroService: SustentoFinancieroService,
+    private userService: UserService,
+    private proyectoService: ProyectoService,
+    private informeAvanceService: InformeAvanceService,
+    private actaService: ActaService,
+    private libroObraService: LibroObraService
   ) {}
 
   getOTs$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(otActions.getOts),
+      ofType(otActions.getOTs),
       concatMap(({ request }) =>
         this.otService.getOTs(request).pipe(
           map(response => {
@@ -189,7 +170,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getProyecto),
       concatMap(() =>
-        this.otService.getProyectos().pipe(
+        this.proyectoService.getProyectos().pipe(
           map(response => otActions.getProyectoSuccess({ response })),
           catchError(error => of(otActions.getProyectoError({ error })))
         )
@@ -446,7 +427,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getDetalleInformeAvance),
       concatMap(({ ot_id }) =>
-        this.otService.getDetalleInformeAvance(ot_id).pipe(
+        this.informeAvanceService.getDetalleInformeAvance(ot_id).pipe(
           map(response =>
             otActions.getDetalleInformeAvanceSuccess({ response })
           ),
@@ -463,14 +444,16 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.updateDetalleInformeAvance),
       concatMap(({ ot_id, id, data }) =>
-        this.otService.updateDetalleInformeAvance(ot_id, id, data).pipe(
-          map(response =>
-            otActions.updateDetalleInformeAvanceSuccess({ response })
-          ),
-          catchError(error =>
-            of(otActions.updateDetalleInformeAvanceError({ error }))
+        this.informeAvanceService
+          .updateDetalleInformeAvance(ot_id, id, data)
+          .pipe(
+            map(response =>
+              otActions.updateDetalleInformeAvanceSuccess({ response })
+            ),
+            catchError(error =>
+              of(otActions.updateDetalleInformeAvanceError({ error }))
+            )
           )
-        )
       )
     )
   );
@@ -495,13 +478,26 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.sendDetalleInformeAvance),
       concatMap(({ ot_id }) =>
-        this.otService.sendDetalleInformeAvance(ot_id).pipe(
+        this.informeAvanceService.sendDetalleInformeAvance(ot_id).pipe(
           map(response =>
             otActions.sendDetalleInformeAvanceSuccess({ response })
           ),
           catchError(error =>
             of(otActions.sendDetalleInformeAvanceError({ error }))
           )
+        )
+      )
+    )
+  );
+
+  // SEND GENERACION ACTA
+  SendGeneracionActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.sendGeneracionActa),
+      concatMap(({ ot_id, tipo_pago, detalle }) =>
+        this.actaService.sendGeneracionActa(ot_id, tipo_pago, detalle).pipe(
+          map(response => otActions.sendGeneracionActaSuccess({ response })),
+          catchError(error => of(otActions.sendGeneracionActaError({ error })))
         )
       )
     )
@@ -534,7 +530,7 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.createRegistroLibroObras),
       concatMap(({ request }) =>
-        this.otService.createRegistroLibroObras(request).pipe(
+        this.libroObraService.createRegistroLibroObras(request).pipe(
           map(response =>
             otActions.createRegistroLibroObrasSuccess({ response })
           ),
@@ -551,9 +547,26 @@ export class OtEffects {
     this.actions$.pipe(
       ofType(otActions.getLibroObras),
       concatMap(({ ot_id }) =>
-        this.otService.getLibroObras(ot_id).pipe(
+        this.libroObraService.getLibroObras(ot_id).pipe(
           map(response => otActions.getLibroObrasSuccess({ response })),
           catchError(error => of(otActions.getLibroObrasError({ error })))
+        )
+      )
+    )
+  );
+
+  // ACEPTAR INFORME AVANCE
+  aceptarRechazarInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AceptarRechazarInformeAvanceOT),
+      concatMap(({ request }) =>
+        this.informeAvanceService.autorizarInformeAvance(request).pipe(
+          map(response =>
+            otActions.AceptarRechazarInformeAvanceOTSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.AceptarRechazarInformeAvanceOTError({ error }))
+          )
         )
       )
     )
@@ -602,1077 +615,4 @@ export class OtEffects {
       ),
     { dispatch: false }
   );
-
-  // ////
-
-  // postOt$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(otActions.postOt),
-  //     concatMap((data: any) =>
-  //       this.http.post(`${environment.api}/ingreot/ot/create`, data.ot).pipe(
-  //         tap(res => {
-  //           this.messageService.add({
-  //             severity: 'success',
-  //             summary: 'Registro guardado',
-  //             detail: 'Registro se ha generado con Éxito!',
-  //           });
-  //           this.router.navigate(['app/ot/list-ot']);
-  //         }),
-  //         map((res: any) => {
-  //           if (+res.status.responseCode !== 0) {
-  //             this.snackService.showMessage(res.status.description, 'error');
-  //           }
-  //           return otActions.postOtSuccess({ ot: res.data.items });
-  //         }),
-  //         catchError(err => of(otActions.postOtError({ error: err })))
-  //       )
-  //     )
-  //   )
-  // );
-
-  approveOT$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.approveOT),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID, coordinador_id }, profile]) =>
-        this.otService.approveOT(profile.id, otID).pipe(
-          map(() => otActions.assignCoordinator({ otID, coordinador_id })),
-          catchError(error => of(otActions.approveOTError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterApproveOTSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.approveOTSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage('Orden de trabajo aceptada', 'ok');
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterApproveOTError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.approveOTError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible aceptar la orden de trabajo',
-            'error'
-          );
-          console.error(`could not approve the ot [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  rejectOT$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.rejectOT),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID, motivo }, profile]) =>
-        this.otService.rejectOT(profile.id, otID, motivo).pipe(
-          mapTo(otActions.rejectOTSuccess()),
-          catchError(error => of(otActions.rejectOTError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterRejectOTSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.rejectOTSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage('Orden de trabajo rechazada', 'ok');
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterRejectOTError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.rejectOTError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible rechazar la orden de trabajo',
-            'error'
-          );
-          console.error(`could not reject the ot [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  getCoordinators$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getCoordinators),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.getCoordinators(profile.id, otID).pipe(
-          map((coordinators: Data.User[]) =>
-            otActions.getCoordinatorsSuccess({ coordinators })
-          ),
-          catchError(error => of(otActions.getCoordinatorsError({ error })))
-        )
-      )
-    )
-  );
-
-  assignCoordinator$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.assignCoordinator),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID, coordinador_id }, profile]) =>
-        this.otService.assignCoordinator(profile.id, otID, coordinador_id).pipe(
-          mapTo(otActions.assignCoordinatorSuccess()),
-          catchError(error => of(otActions.assignCoordinatorError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterAssignCoordinatorSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.assignCoordinatorSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage('Coordinador asignado', 'ok');
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterAssignCoordinatorError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.assignCoordinatorError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible asignar el coordinador',
-            'error'
-          );
-          console.error(`could not assign the coordinator [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Trabajadores
-  getTrabajador$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getTrabajadores),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.getTrabajadores(profile.id, otID).pipe(
-          map((trabajadores: Data.User[]) =>
-            otActions.getTrabajadoresSuccess({ trabajadores })
-          ),
-          catchError(error => of(otActions.getTrabajadoresError({ error })))
-        )
-      )
-    )
-  );
-
-  assignTrabajador$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.assignTrabajador),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID, trabajadorID }, profile]) =>
-        this.otService.assignTrabajador(profile.id, otID, trabajadorID).pipe(
-          mapTo(otActions.assignTrabajadorSuccess()),
-          catchError(error => of(otActions.assignTrabajadorError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterAssignTrabajadorSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.assignTrabajadorSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage('Trabajador asignado', 'ok');
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterAssignTrabajadorError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.assignTrabajadorError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible asignar el trabajador',
-            'error'
-          );
-          console.error(`could not assign the trabajador [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Cancelar
-  cancelOT$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.cancelOT),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.cancelOT(profile.id, otID).pipe(
-          mapTo(otActions.cancelOTSuccess()),
-          catchError(error => of(otActions.cancelOTError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterCancelOTSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.cancelOTSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage('Orden de trabajo anulada', 'ok');
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterCancelOTError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.cancelOTError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible anular orden de trabajo',
-            'error'
-          );
-          console.error(`could not cancel the ot [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Finalizar trabajados
-  finalizeOTJobs$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.finalizeOTJobs),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.finalizeOTJobs(profile.id, otID).pipe(
-          mapTo(otActions.finalizeOTJobsSuccess()),
-          catchError(error => of(otActions.finalizeOTJobsError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterFinalizeOTJobsSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.finalizeOTJobsSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage(
-  //           'Trabajos de esta orden finalizados',
-  //           'ok'
-  //         );
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterFinalizeOTJobsError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.finalizeOTJobsError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible finalizar los trabajos para esta orden',
-            'error'
-          );
-          console.error(`could not finalize the ot jobs [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Aprobar la generación del acta
-  approveOTMinutesGeneration$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.approveOTMinutesGeneration),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.approveOTMinutesGeneration(profile.id, otID).pipe(
-          mapTo(otActions.approveOTMinutesGenerationSuccess()),
-          catchError(error =>
-            of(otActions.approveOTMinutesGenerationError({ error }))
-          )
-        )
-      )
-    )
-  );
-
-  // notifyAfterApproveOTMinutesGenerationSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.approveOTMinutesGenerationSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage(
-  //           'Aceptada la generación del acta',
-  //           'ok'
-  //         );
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterApproveOTMinutesGenerationError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.approveOTMinutesGenerationError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible aceptar la generación del acta',
-            'error'
-          );
-          console.error(
-            `could not approve the ot minutes generation [${error.message}]`
-          );
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Rechazar la generación del acta
-  rejectOTMinutesGeneration$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.rejectOTMinutesGeneration),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.rejectOTMinutesGeneration(profile.id, otID).pipe(
-          mapTo(otActions.rejectOTMinutesGenerationSuccess()),
-          catchError(error =>
-            of(otActions.rejectOTMinutesGenerationError({ error }))
-          )
-        )
-      )
-    )
-  );
-
-  // notifyAfterRejectOTMinutesGenerationSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.rejectOTMinutesGenerationSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage(
-  //           'Rechazada la generación del acta',
-  //           'ok'
-  //         );
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterRejectOTMinutesGenerationError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.rejectOTMinutesGenerationError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible rechazar la generación del acta',
-            'error'
-          );
-          console.error(
-            `could not reject the ot minutes generation [${error.message}]`
-          );
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // // Aprobar la validación del acta
-  // approveOTMinutesValidation$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(otActions.approveOTMinutesValidation),
-  //     withLatestFrom(this.authFacade.getCurrentProfile$()),
-  //     concatMap(([{ otID }, profile]) =>
-  //       this.otService.approveOTMinutesValidation(profile.id, otID).pipe(
-  //         mapTo(otActions.approveOTMinutesValidationSuccess()),
-  //         catchError(error =>
-  //           of(otActions.approveOTMinutesValidationError({ error }))
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
-
-  // notifyAfterApproveOTMinutesValidationSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.approveOTMinutesValidationSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage(
-  //           'Aceptada la validación del acta',
-  //           'ok'
-  //         );
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterApproveOTMinutesValidationError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.approveOTMinutesValidationError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible aceptar la validación del acta',
-            'error'
-          );
-          console.error(
-            `could not approve the ot minutes validation [${error.message}]`
-          );
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Rechazar la validación del acta
-  // rejectOTMinutesValidation$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(otActions.rejectOTMinutesValidation),
-  //     withLatestFrom(this.authFacade.getCurrentProfile$()),
-  //     concatMap(([{ otID }, profile]) =>
-  //       this.otService.rejectOTMinutesValidation(profile.id, otID).pipe(
-  //         mapTo(otActions.rejectOTMinutesValidationSuccess()),
-  //         catchError(error =>
-  //           of(otActions.rejectOTMinutesValidationError({ error }))
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
-
-  // notifyAfterRejectOTMinutesValidationSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.rejectOTMinutesValidationSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage(
-  //           'Rechazada la validación del acta',
-  //           'ok'
-  //         );
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterRejectOTMinutesValidationError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.rejectOTMinutesValidationError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible rechazar la validación del acta',
-            'error'
-          );
-          console.error(
-            `could not reject the ot minutes validation [${error.message}]`
-          );
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Autorizar pagos
-  authorizePayments$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.authorizePayments),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID, user_id }, profile]) =>
-        this.otService.authorizePayments(user_id, otID).pipe(
-          mapTo(otActions.authorizePaymentsSuccess()),
-          catchError(error => of(otActions.authorizePaymentsError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterAuthorizePaymentsSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.authorizePaymentsSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage('Pago autorizado', 'ok');
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterAuthorizePaymentsError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.authorizePaymentsError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible autorizar el pago',
-            'error'
-          );
-          console.error(`could not authorize the payments [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Rechazar pagos
-  rejectPayments$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.rejectPayments),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.rejectPayments(profile.id, otID).pipe(
-          mapTo(otActions.rejectPaymentsSuccess()),
-          catchError(error => of(otActions.rejectPaymentsError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterRejectPaymentsSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.rejectPaymentsSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage('Pago rechazado', 'ok');
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterRejectPaymentsError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.rejectPaymentsError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible rechazar el pago',
-            'error'
-          );
-          console.error(`could not reject the payments [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // Cerrar OT
-  finalizeOT$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.finalizeOT),
-      withLatestFrom(this.authFacade.getCurrentProfile$()),
-      concatMap(([{ otID }, profile]) =>
-        this.otService.finalizeOT(profile.id, otID).pipe(
-          mapTo(otActions.finalizeOTSuccess()),
-          catchError(error => of(otActions.finalizeOTError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterFinalizeOTSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(otActions.finalizeOTSuccess),
-  //       withLatestFrom(this.otFacade.getOtFilters$()),
-  //       tap(([data, { filtro_propietario, filtro_tipo }]) => {
-  //         this.snackService.showMessage('Orden de trabajo finalizada', 'ok');
-
-  //         this.otFacade.getOts({
-  //           filtro_propietario,
-  //           filtro_tipo,
-  //           filtro_pestania: '',
-  //         });
-  //       })
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  notifyAfterFinalizeOTError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.finalizeOTError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible finalizar la Orden de Trabajo',
-            'error'
-          );
-          console.error(`could not finalize ot [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  registrarLibroObras$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.registrarLibroObra),
-      concatMap(({ registro }) =>
-        this.otService.registrarLibroObra(registro).pipe(
-          mapTo(otActions.registrarLibroObraSuccess()),
-          catchError(error => of(otActions.registrarLibroObraError({ error })))
-        )
-      )
-    )
-  );
-
-  registrarLibroObrasSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.registrarLibroObraSuccess),
-        tap(() => {
-          this.snackService.showMessage(
-            'Registro agregado exitosamente al libro de obras',
-            'ok'
-          );
-        })
-      ),
-    { dispatch: false }
-  );
-
-  registrarLibroObrasError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.registrarLibroObraError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No fue posible registrar en el libro de obras',
-            'error'
-          );
-          console.error(`could not assign the coordinator [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  getRegistrarLibroObras$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getRegistrosLibroObra),
-      concatMap(({ ot_id }) =>
-        this.otService.getRegistrosLibroObra(ot_id).pipe(
-          map((registroslibroobras: Data.GetLibroObrasResponse) =>
-            otActions.getRegistrosLibroObraSuccess({
-              registroslibroobras: registroslibroobras.data.items,
-            })
-          ),
-          catchError(error =>
-            of(otActions.getRegistrosLibroObraError({ error }))
-          )
-        )
-      )
-    )
-  );
-
-  getRegistrarLibroObrasError$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(otActions.registrarLibroObraError),
-        tap(({ error }) => {
-          this.snackService.showMessage(
-            'No se pudieron obtner los registros del libro de obras',
-            'error'
-          );
-          console.error(`can't get registers [${error.message}]`);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  // inicializarInformeAvance$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(otActions.inicializarInformeAvance),
-  //     concatMap(({ ot_id }) =>
-  //       this.informeAvanceService.inicializaInforme(ot_id).pipe(
-  //         map(({ status }) => {
-  //           if (status.responseCode === 0) {
-  //             this.otFacade.getDataInformeAvanceTrabajador(ot_id);
-  //           }
-  //           return otActions.inicializarInformeAvanceSuccess({
-  //             status,
-  //           });
-  //         }),
-  //         catchError(error =>
-  //           of(otActions.inicializarInformeAvanceError({ error }))
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
-
-  getDataInformeAvanceTrabajador$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getDataInformeAvanceTrabajador),
-      concatMap(({ ot_id }) =>
-        this.informeAvanceService.getInformeAvanceTrabajador(ot_id).pipe(
-          map(({ dataInformeAvance: datoInformeAvance, status }) =>
-            otActions.getDataInformeAvanceTrabajadorSuccess({
-              dataInformeAvance: datoInformeAvance,
-              status,
-            })
-          ),
-          catchError(error =>
-            of(otActions.getDataInformeAvanceError({ error }))
-          )
-        )
-      )
-    )
-  );
-
-  getDataInformeAvanceAdminEC$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getDataInformeAvanceAdminEC),
-      concatMap(({ ot_id }) =>
-        this.informeAvanceService.getInformeAvanceAdministradorEC(ot_id).pipe(
-          map(({ dataInformeAvance: datoInformeAvance, status }) =>
-            otActions.getDataInformeAvanceAdminECSuccess({
-              dataInformeAvance: datoInformeAvance,
-              status,
-            })
-          ),
-          catchError(error =>
-            of(otActions.getDataInformeAvanceError({ error }))
-          )
-        )
-      )
-    )
-  );
-
-  saveInformeAvanceTrabajador$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.saveInformeAvanceTrabajador),
-      withLatestFrom(this.otFacade.getInfoOtId$()),
-      concatMap(([{ request }, ot_id]) =>
-        this.informeAvanceService.saveInformeAvanceTrabajador(request).pipe(
-          map(({ status }) =>
-            otActions.saveInformeAvanceTrabajadorSuccess({
-              ot_id,
-              status,
-            })
-          ),
-          catchError(error => of(otActions.saveInformeAvanceError({ error })))
-        )
-      )
-    )
-  );
-
-  saveInformeAvanceAdminEC$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.saveInformeAvanceAdminEC),
-      concatMap(({ request }) =>
-        this.informeAvanceService.saveInformeAvanceAdministrador(request).pipe(
-          map(({ status }) =>
-            otActions.saveInformeAvanceAdminECSuccess({
-              status,
-            })
-          ),
-          catchError(error => of(otActions.saveInformeAvanceError({ error })))
-        )
-      )
-    )
-  );
-
-  saveBorradorInformeAvance$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.saveBorradorInformeAvance),
-      withLatestFrom(this.otFacade.getInfoOtId$()),
-      concatMap(([{ request }, ot_id]) =>
-        this.informeAvanceService.saveBorradorInformeAvance(request).pipe(
-          map(({ status }) =>
-            otActions.saveBorradorInformeAvanceSuccess({
-              ot_id,
-              status,
-            })
-          ),
-          catchError(error =>
-            of(otActions.saveBorradorInformeAvanceError({ error }))
-          )
-        )
-      )
-    )
-  );
-
-  rechazarInformeAvance$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.rechazarInformeAvance),
-      concatMap(({ informe_id }) =>
-        this.informeAvanceService.rechazarInformeAvance(informe_id).pipe(
-          map(({ status }) =>
-            otActions.rechazarInformeAvanceSuccess({
-              status,
-            })
-          ),
-          catchError(error =>
-            of(otActions.rechazarInformeAvanceError({ error }))
-          )
-        )
-      )
-    )
-  );
-
-  getDataInformeActa$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getDataInformeActa),
-      concatMap(({ ot_id }) =>
-        this.actaService.getInformeActa(ot_id).pipe(
-          map(({ dataInformeActa, status }) =>
-            otActions.getDataInformeActaSuccess({
-              dataInformeActa,
-              status,
-            })
-          ),
-          catchError(error => of(otActions.getDataInformeActaError({ error })))
-        )
-      )
-    )
-  );
-
-  saveInformeActa$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.saveInformeActa),
-      withLatestFrom(this.otFacade.getInfoOtId$()),
-      concatMap(([{ request }, ot_id]) =>
-        this.actaService.saveInformeActa(request).pipe(
-          map(({ status }) => {
-            this.otFacade.getDetalleActaMezcla(ot_id);
-            return otActions.saveInformeActaSuccess({
-              status,
-            });
-          }),
-          catchError(error => of(otActions.saveInformeActaError({ error })))
-        )
-      )
-    )
-  );
-
-  rechazarInformeActa$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.rechazarInformeActa),
-      concatMap(({ informe_id }) =>
-        this.actaService.rechazarInformeActa(informe_id).pipe(
-          map(({ status }) =>
-            otActions.rechazarInformeActaSuccess({
-              status,
-            })
-          ),
-          catchError(error => of(otActions.rechazarInformeActaError({ error })))
-        )
-      )
-    )
-  );
-
-  getDetalleActaMezcla$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getDetalleActaMezcla),
-      concatMap(({ ot_id }) =>
-        this.actaService.getActaDetalle(ot_id).pipe(
-          map(({ dataInformeActa, status }) => {
-            console.log(dataInformeActa);
-
-            const lpus: LpusPorcentajes[] = dataInformeActa.map(f => {
-              return { detalle_id: f.detalle_id, porcentaje_solicitado: 1.0 };
-            });
-
-            const request: RequestSolicitudPagoActa = {
-              acta_id: dataInformeActa[0].id,
-              porcentajes_detalles: lpus,
-            };
-            console.log(request);
-
-            this.otFacade.sendSolicitudPagoActa(request);
-            return otActions.getDetalleActaSuccess({
-              dataInformeActa,
-              status,
-            });
-          }),
-          catchError(error => of(otActions.getDetalleActaError({ error })))
-        )
-      )
-    )
-  );
-
-  sendSolicitudPagoActa$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.sendSolicitudPagoActa),
-      concatMap(({ request }) =>
-        this.actaService.solicitudPagoActa(request).pipe(
-          map(({ status }) =>
-            otActions.sendSolicitudPagoActaSuccess({
-              status,
-            })
-          ),
-          catchError(error =>
-            of(otActions.sendSolicitudPagoActaError({ error }))
-          )
-        )
-      )
-    )
-  );
-
-  getDetalleActa$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(otActions.getDetalleActa),
-      concatMap(({ ot_id }) =>
-        this.actaService.getActaDetalle(ot_id).pipe(
-          map(({ dataInformeActa, status }) =>
-            otActions.getDetalleActaSuccess({
-              dataInformeActa,
-              status,
-            })
-          ),
-          catchError(error => of(otActions.getDetalleActaError({ error })))
-        )
-      )
-    )
-  );
-
-  // notifyAfterSuccess$ = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(
-  //         otActions.getOtEjecucionSuccess,
-  //         otActions.getOtAbiertasSuccess,
-  //         otActions.getOtSuccessCerradas,
-  //         otActions.saveBorradorInformeAvanceSuccess,
-  //         otActions.saveInformeAvanceTrabajadorSuccess,
-  //         otActions.saveInformeAvanceAdminECSuccess,
-  //         otActions.getDataInformeAvanceTrabajadorSuccess,
-  //         otActions.getDataInformeAvanceAdminECSuccess,
-  //         otActions.rechazarInformeAvanceSuccess,
-  //         otActions.getDataInformeActaSuccess,
-  //         otActions.saveInformeActaSuccess,
-  //         otActions.rechazarInformeActaSuccess,
-  //         // otActions.inicializarInformeAvanceSuccess,
-  //         otActions.getPlansSuccess,
-  //         otActions.getSiteSuccess,
-  //         otActions.getPMOSuccess,
-  //         otActions.getDetalleActaSuccess,
-  //         otActions.sendSolicitudPagoActaSuccess
-  //       ),
-  //       tap(action =>
-  //         this.messageServiceInt.actions200(action.status, action.type, action)
-  //       )
-  //     ),
-  //   { dispatch: false }
-  // );
-
-  // notifyAfterError = createEffect(
-  //   () =>
-  //     this.actions$.pipe(
-  //       ofType(
-  //         otActions.getOtsError,
-  //         otActions.saveBorradorInformeAvanceError,
-  //         otActions.saveInformeAvanceError,
-  //         otActions.getDataInformeAvanceError,
-  //         otActions.rechazarInformeAvanceError,
-  //         otActions.getDataInformeActaError,
-  //         otActions.saveInformeActaError,
-  //         otActions.rechazarInformeActaError,
-  //         // otActions.inicializarInformeAvanceError,
-  //         otActions.getPmoError,
-  //         otActions.getDetalleActaError
-  //       ),
-  //       tap(action =>
-  //         this.messageServiceInt.actionsErrors(
-  //           action.error.message,
-  //           action.type
-  //         )
-  //       )
-  //     ),
-  //   { dispatch: false }
-  // );
 }

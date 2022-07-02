@@ -127,7 +127,7 @@ export const getCategoriasArchivos = createSelector(
 // LIBRO OBRAS
 export const getLibroObras = createSelector(
   selectOt,
-  (state: fromOt.StateOt) => state.libroObras
+  (state: fromOt.StateOt) => state.registroLibroObras
 );
 //  ////
 export const getOtEjecucion = createSelector(
@@ -183,29 +183,9 @@ export const getSaveOTError = createSelector(
 //   (state: fromOt.StateOt) => state.registroslibroobras
 // );
 
-export const getDataInformeAvanceTrabajador = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.dataInformeAvanceTrabajador
-);
-
-export const getDataInformeAvanceAdminEC = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.dataInformeAvanceAdminEC
-);
-
-export const getDataInformeActa = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.dataInformeActa
-);
-
 export const getInfoOtId = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.info_ot_id
-);
-
-export const getDataSolicitudPago = createSelector(
-  selectOt,
-  (state: fromOt.StateOt) => state.dataSolicitudPago
 );
 
 export const getDetalleInformeAvance = createSelector(
@@ -226,4 +206,40 @@ export const updatingDetalleInformeAvance = createSelector(
 export const sendingDetalleInformeAvance = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.sendingDetalleInformeAvance
+);
+
+export const getActaTiposPago = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.actaTiposPago
+);
+
+export const getDetalleActaServicio = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.detalleActaServicio
+);
+
+export const getDetalleActaUob = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.detalleActaUob
+);
+
+export const getUltimoTipoPagoActa = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.ultimoTipoPagoActa
+);
+
+export const getDetalleActa = createSelector(
+  getUltimoTipoPagoActa,
+  getDetalleActaServicio,
+  getDetalleActaUob,
+  (ultimo_tipo_pago, servicios, unidades_obra) => ({
+    ultimo_tipo_pago,
+    servicios,
+    unidades_obra,
+  })
+);
+
+export const sendingGeneracionActa = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.sendingGeneracionActa
 );
