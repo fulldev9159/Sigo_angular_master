@@ -27,10 +27,11 @@ linter:
     - ng lint
   except:
     - master
+    - tags
 
 restart test environment:
   stage: restart test environment
-  # when: manual
+  when: manual
   image: tmaier/docker-compose:latest
   script:
     - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
@@ -49,12 +50,13 @@ restart test environment:
   environment: google cloud tpb
   except:
     - master
+    - tags
 
 update test database:
   stage: reset testing database sigo
-  # when: manual
-  # needs:
-  #   - restart test environment
+  when: manual
+  needs:
+    - restart test environment
   script:
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'pass'\""
@@ -106,7 +108,7 @@ update test database:
 integrations test cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: integrations test
-  # when: manual
+  when: manual
   needs:
     - update test database
   script:
@@ -118,6 +120,7 @@ integrations test cypress:
     - npx cypress run
   only:
     - develop
+    - tags
 
 acceptance test:
   <<: *connect_gcr
