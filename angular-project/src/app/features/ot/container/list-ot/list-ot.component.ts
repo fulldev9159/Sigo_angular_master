@@ -30,6 +30,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ListOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
+  totalServicios: number = 0;
+  totalUO: number = 0;
 
   detalleInformeAvance$: Observable<DetalleInformeAvance> =
     this.otFacade.getDetalleInformeAvance$();
@@ -442,6 +444,21 @@ export class ListOtComponent implements OnInit, OnDestroy {
     });
 
     this.tipoRechazo$ = this.otFacade.getAllMotivoRechazoOT$();
+
+    this.subscription.add(
+      this.detalleInformeAvance$.subscribe(detalle => {
+        if (detalle) {
+          detalle.many_informe_has_servicio.forEach(x => {
+            this.totalServicios =
+              this.totalServicios + +x.valor_unitario_clp * +x.cantidad;
+            console.log(this.totalServicios);
+            x.many_informe_has_uob.forEach(y => {
+              this.totalUO = this.totalUO + +y.valor_unitario_clp * +y.cantidad;
+            });
+          });
+        }
+      })
+    );
   }
 
   onChange($event): void {

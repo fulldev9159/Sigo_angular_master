@@ -17,6 +17,7 @@ export interface UnidadObraFromInformeAvance {
   model_unidad_obra_cod: ModelUnidadObra;
   model_unidad_id: Unidad;
   many_informe_has_material: MaterialFromInformeAvance[];
+  valor_unitario_clp: number;
 }
 
 export interface ModelUnidadObra {
