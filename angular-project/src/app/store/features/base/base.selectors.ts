@@ -14,3 +14,8 @@ export const getDatabaseVersion = createSelector(
   selectBase,
   (state: reducer.StateBase) => state.databaseVersion
 );
+
+export const getAPIVersion = createSelector(
+  selectBase,
+  (state: reducer.StateBase) => state.apiVersion
+);

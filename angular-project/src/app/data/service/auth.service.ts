@@ -56,4 +56,10 @@ export class AuthService {
       {}
     );
   }
+
+  getAPIVersion(): Observable<Response<{ api_version: string }>> {
+    return this.http.get<Response<{ api_version: string }>>(
+      `${this.apiUrl}/configuration/api/version/get`
+    );
+  }
 }

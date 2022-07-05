@@ -47,6 +47,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
   circleUserIcon = faUserCircle;
   databaseVersion$: Observable<DatabaseVersion> =
     this.baseFacade.getDatabaseVersion$();
+  apiVersion$: Observable<string> = this.baseFacade.getAPIVersion$();
 
   constructor(
     private router: Router,
@@ -100,6 +101,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
 
     this.loading$ = this.baseFacade.loading$();
     this.baseFacade.getDatabaseVersion();
+    this.baseFacade.getAPIVersion();
   }
 
   ngOnDestroy(): void {

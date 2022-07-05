@@ -27,4 +27,13 @@ export class BaseFacade {
   public getDatabaseVersion$(): Observable<DatabaseVersion> {
     return this.store.select(baseSelectors.getDatabaseVersion);
   }
+
+  // GET API VERSION
+  public getAPIVersion(): void {
+    this.store.dispatch(baseActions.getAPIVersion());
+  }
+
+  public getAPIVersion$(): Observable<string> {
+    return this.store.select(baseSelectors.getAPIVersion);
+  }
 }

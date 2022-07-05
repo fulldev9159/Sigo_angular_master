@@ -119,7 +119,7 @@ export class RegistrarLibroObraComponent implements OnInit, OnDestroy {
       const index = 'files';
       const request: ReqCreateRegistroLibroObra = {
         ot_id: this.otID,
-        usuario_id: this.usuario_id,
+        // usuario_id: this.usuario_id,
         observaciones: this.form.get('observaciones').value,
       };
       this.filesform.clear();
