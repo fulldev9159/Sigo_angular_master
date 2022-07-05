@@ -173,7 +173,8 @@ export class AlertMessageActions {
 
       if (
         action === otActions.AceptarRechazarIncialOTSuccess.type ||
-        action === otActions.sendDetalleInformeAvanceSuccess.type
+        action === otActions.sendDetalleInformeAvanceSuccess.type ||
+        action === otActions.AceptarRechazarInformeAvanceOTSuccess.type
       ) {
         this.otFacade.getOts({
           filtro_propietario: 'TODAS',
