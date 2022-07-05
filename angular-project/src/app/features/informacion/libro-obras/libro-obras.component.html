@@ -1,10 +1,10 @@
 <div class="row" style="padding: 15px;">
   <div class="col-12" *ngFor="let registro of registosLibroDeObras$|async ">
     <app-card [classCardHeader]="'bg-info'" *ngIf="registro.tipo_item==='ENTRADA_LIBRO_OBRA'">
-      <ng-container card-header-title><strong>Autor:</strong> {{registro.usuario_nombre}} <strong style="margin-left: 10px;">Perfil: </strong> {{registro.perfil_nombre}} <strong style="margin-left: 10px;">Fecha:</strong> {{registro.created_at| date:'medium'}}</ng-container>
+      <ng-container card-header-title><strong>Autor:</strong> <span class="nombre-usuario-registro">{{registro.usuario_nombre}}</span> <strong style="margin-left: 10px;">Perfil: </strong> <span class="perfil-registro">{{registro.perfil_nombre}}</span> <strong style="margin-left: 10px;">Fecha:</strong> {{registro.created_at| date:'medium'}}</ng-container>
       <ng-container card-body>
         <div class="row">
-          <div class="col-md-7" style="border-right: 3px solid #dde8ea;color: #666565;white-space: pre-line;">
+          <div class="col-md-7   obervacion-registro" style="border-right: 3px solid #dde8ea;color: #666565;white-space: pre-line;">
             {{registro.observaciones}}
           </div>
           <div class="col-md-5" style="display: flex;flex-direction: column;">
@@ -30,7 +30,7 @@
     border-radius: 13px;
     font-size: 10px;
     margin-bottom:10px">
-      {{registro.created_at| date:'medium'}} - <strong>Status:</strong> {{registro.nivel}} <strong style="margin-left: 10px;">Evento: </strong> {{registro.evento}} <strong style="margin-left: 10px;">mensaje:</strong> {{registro.mensaje}}
+      {{registro.created_at| date:'medium'}} - <strong>Status:</strong> <span class="nivel-registro">{{registro.nivel}}</span>  <strong style="margin-left: 10px;">Evento: </strong> <span class="evento-registro">{{registro.evento}}</span> <strong style="margin-left: 10px;">mensaje:</strong> <span class="mensaje-registro">{{getMetadata(registro.evento,registro.metadata)}}</span> 
     </div>
   </div>
 </div>

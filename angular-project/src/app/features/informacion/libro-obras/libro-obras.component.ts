@@ -86,6 +86,16 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
     }
   }
 
+  getMetadata(evento: string, metadata: string): string {
+    console.log(JSON.parse(metadata));
+    const objMeta = JSON.parse(metadata);
+    if (evento === 'CAMBIO_ESTADO') {
+      return `desde ${objMeta.from.tipo_etapa.nombre} a ${objMeta.to.tipo_etapa.nombre}`;
+    }
+
+    return '';
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
