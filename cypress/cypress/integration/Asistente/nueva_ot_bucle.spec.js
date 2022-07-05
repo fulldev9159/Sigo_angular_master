@@ -1,5 +1,5 @@
 describe.skip('Creacion de cub y ot', () => {
-  // DATOS REALES
+  const nombre = 'Continuar Informe Avance';
 
   // BUCLE
   const contrato_bucle = 'BUCLE';
@@ -89,8 +89,6 @@ describe.skip('Creacion de cub y ot', () => {
     admin_ec_form,
     observaciones_form,
   ];
-
-  const nombre = 'Presentación equipo 2';
 
   beforeEach(() => {
     cy.viewport(1500, 1700);

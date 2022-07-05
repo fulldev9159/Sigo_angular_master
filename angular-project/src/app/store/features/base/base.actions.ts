@@ -18,3 +18,16 @@ export const getDatabaseVersionError = createAction(
   '[BASE]  getDatabaseVersion Error',
   props<{ error: any }>()
 );
+
+// VERSION DATABASE
+export const getAPIVersion = createAction('[BASE] getAPIVersion');
+
+export const getAPIVersionSuccess = createAction(
+  '[BASE]  getAPIVersion Success',
+  props<{ response: Response<{ api_version: string }> }>()
+);
+
+export const getAPIVersionError = createAction(
+  '[BASE]  getAPIVersion Error',
+  props<{ error: any }>()
+);
