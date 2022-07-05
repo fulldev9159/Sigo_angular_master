@@ -286,7 +286,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
         if (otEnviarInformeAvance) {
           actions.push({
-            icon: 'p-button-icon pi pi-book',
+            icon: 'p-button-icon pi pi-send',
             class: 'p-button-rounded p-button-success p-mr-2',
             label: otEnviarInformeAvance.nombre_corto,
             onClick: (event: Event, item) => {
@@ -636,5 +636,6 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   sendDetalleInformeAvance(detalle: DetalleInformeAvance): void {
     this.otFacade.sendDetalleInformeAvance(detalle.ot_id);
+    this.closeInformeAvanceModal();
   }
 }
