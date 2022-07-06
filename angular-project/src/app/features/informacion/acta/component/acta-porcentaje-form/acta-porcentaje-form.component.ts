@@ -30,6 +30,8 @@ export class ActaPorcentajeFormComponent implements OnInit, OnDestroy {
   @Input() porcentaje: FormControl;
   @Input() form: FormGroup;
   @Input() saving: boolean;
+  @Input() totalServicios: number;
+  @Input() totalUO: number;
   @Output() submitted = new EventEmitter<Detalle>();
 
   constructor() {}

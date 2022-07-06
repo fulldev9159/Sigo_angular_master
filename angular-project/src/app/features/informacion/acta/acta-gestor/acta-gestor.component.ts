@@ -43,11 +43,10 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   totalUO: number;
 
   form: FormGroup = new FormGroup({
-    tipo_pago: new FormControl(
-      { value: '', disabled: true },
-      [Validators.required],
-      this.noWhitespace
-    ),
+    tipo_pago: new FormControl({ value: '', disabled: true }, [
+      Validators.required,
+      this.noWhitespace,
+    ]),
 
     porcentaje: new FormControl('0', []),
 
@@ -143,7 +142,7 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
       }
 
       this.subscription.add(
-        this.form.get('porcentaje').valueChanges.subscribe(x => {
+        this.form.get('porcentaje').valueChanges.subscribe(porcentaje => {
           const serviciosForm = this.form
             .get('total_porcentaje')
             .get('servicios') as FormArray;
@@ -154,7 +153,19 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
           this.totalServicios = 0;
           this.totalUO = 0;
 
-          serviciosForm.value().forEach(servicio => console.log(servicio));
+          serviciosForm.value.forEach(servicio => {
+            this.totalServicios =
+              this.totalServicios +
+              +servicio.precio_unitario *
+                (+servicio.cantidad_total * (+porcentaje / 100));
+          });
+
+          unidadesObraForm.value.forEach(uo => {
+            console.log(uo);
+            this.totalUO =
+              this.totalUO +
+              +uo.precio_unitario * (+uo.cantidad_total * (+porcentaje / 100));
+          });
         })
       );
     }
