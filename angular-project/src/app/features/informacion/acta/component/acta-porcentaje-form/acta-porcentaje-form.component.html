@@ -30,12 +30,12 @@
                 <ng-container *ngFor="let servicio of servicios.controls">
                   <tr>
                     <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
-                    <td>{{ servicio.get('descripcion').value }}</td>
-                    <td style="text-align: right">{{ servicio.get('cantidad_total').value }}</td>
-                    <td style="text-align: right">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_a_enviar').value }}</td>
-                    <td style="text-align: right">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
-                    <td>{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                    <td>{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) * +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td class="data-secundaria">{{ servicio.get('descripcion').value|titlecase }}</td>
+                    <td class="data-secundaria" style="text-align: right">{{ servicio.get('cantidad_total').value }}</td>
+                    <td class="data-secundaria" style="text-align: right">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_a_enviar').value }}</td>
+                    <td class="data-secundaria"style="text-align: right">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
+                    <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td class="data-secundaria">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) * +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                   </tr>
                 </ng-container>
               </tbody>
@@ -70,12 +70,12 @@
                 <ng-container *ngFor="let uo of unidadesObra.controls">
                   <tr>
                     <td class="label-table">{{ uo.get('uo_codigo').value }}</td>
-                    <td>{{ uo.get('descripcion').value }}</td>
-                    <td style="text-align: right">{{ uo.get('cantidad_total').value }}</td>
-                    <td style="text-align: right">{{ uo.get('cantidad_total').value - uo.get('cantidad_a_enviar').value }}</td>
-                    <td style="text-align: right">{{ (uo.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
-                    <td>{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                    <td>{{ (uo.get('cantidad_total').value * (porcentaje.value / 100))* +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td class="data-secundaria">{{ uo.get('descripcion').value |titlecase}}</td>
+                    <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}</td>
+                    <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value - uo.get('cantidad_a_enviar').value }}</td>
+                    <td style="text-align: right" class="data-secundaria">{{ (uo.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
+                    <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td class="data-secundaria"> {{ (uo.get('cantidad_total').value * (porcentaje.value / 100))* +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                   </tr>
                 </ng-container>
               </tbody>
@@ -96,8 +96,8 @@
 -->
 
 <div class="row" id="table-totales">
-  <div class="col-9"></div>
-  <div class="col-3">
+  <div class="col-md-4 col-xs-12"></div>
+  <div class="col-md-4 col-xs-12">
     <table style="width: 100%;">
       <tr>
         <td>Total Servicios</td>
@@ -109,6 +109,7 @@
       </tr>
     </table>
   </div>
+  <div class="col-md-4 col-xs-12"></div>
 </div>
 
 <div class="row" id="table-totales">
@@ -117,7 +118,7 @@
     <app-card [classCardHeader]="'bg-info'">
       <ng-container card-header-title>Total a Pagar</ng-container>
       <ng-container card-body>
-        {{totalServicios + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}
+        <span class="total-pagar"> {{totalServicios + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}} </span>
       </ng-container>
     </app-card>
   </div>
