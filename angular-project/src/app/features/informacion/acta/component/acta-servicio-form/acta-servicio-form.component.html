@@ -7,17 +7,20 @@
           <ng-container card-body>
             <table style="width:100%">
               <thead>
-                <tr>
+                <!-- <tr>
                   <th></th>
                   <th></th>
                   <th colspan="3">Cantidad</th>
-                </tr>
+                </tr> -->
                 <tr>
                   <th></th>
+                  <th>Cod.</th>
                   <th>Descripción</th>
-                  <th style="text-align: right">Total</th>
-                  <th style="text-align: right">Enviada</th>
-                  <th>A Enviar</th>
+                  <th style="text-align: right">Cant. informe av.</th>
+                  <th style="text-align: right">Cant. Pagada</th>
+                  <th style="text-align: right">Cant. a Enviar</th>
+                  <th>Precio Un.</th>
+                  <th>Total a pagar</th>
                 </tr>
               </thead>
               <tbody>
@@ -26,12 +29,15 @@
                     <td>
                       <input type="checkbox" [formControl]="servicio.get('selected')">
                     </td>
+                    <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
                     <td>{{ servicio.get('descripcion').value }}</td>
                     <td style="text-align: right">{{ servicio.get('cantidad_total').value }}</td>
                     <td style="text-align: right">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_max_a_enviar').value }}</td>
                     <td>
                       <app-input [control]="servicio.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
                     </td>
+                    <td>{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td>{{ +servicio.get('cantidad_a_enviar').value * +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                   </tr>
                 </ng-container>
               </tbody>
@@ -48,17 +54,20 @@
           <ng-container card-body>
             <table style="width:100%">
               <thead>
-                <tr>
+                <!-- <tr>
                   <th></th>
                   <th></th>
                   <th colspan="3">Cantidad</th>
-                </tr>
+                </tr> -->
                 <tr>
                   <th></th>
+                  <th>Cod.</th>
                   <th>Descripción</th>
-                  <th style="text-align: right">Total</th>
-                  <th style="text-align: right">Enviada</th>
-                  <th>A Enviar</th>
+                  <th style="text-align: right">Cant. informe av.</th>
+                  <th style="text-align: right">Cant. Pagada</th>
+                  <th style="text-align: right">Cant. a Enviar</th>
+                  <th>Precio Un.</th>
+                  <th>Total a pagar</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,12 +76,15 @@
                     <td>
                       <input type="checkbox" [formControl]="uo.get('selected')">
                     </td>
+                    <td class="label-table">{{ uo.get('uo_codigo').value }}</td>
                     <td>{{ uo.get('descripcion').value }}</td>
                     <td style="text-align: right">{{ uo.get('cantidad_total').value }}</td>
                     <td style="text-align: right">{{ uo.get('cantidad_total').value - uo.get('cantidad_max_a_enviar').value }}</td>
                     <td>
                       <app-input [control]="uo.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
                     </td>
+                    <td>{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td>{{+uo.get('cantidad_a_enviar').value *  +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                   </tr>
                 </ng-container>
               </tbody>

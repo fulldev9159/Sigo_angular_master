@@ -1,7 +1,7 @@
 <ng-container *ngIf="ot$ | async as ot">
   <ng-container *ngIf="form">
     <div class="row" style="padding: 15px">
-      <div class="col-xs-12 col-md-12">
+      <div class="col-xs-12 col-md-6">
         <form [formGroup]="form">
           <app-select [control]="form.get('tipo_pago')" label="Tipo de pago">
             <ng-container options>

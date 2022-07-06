@@ -161,11 +161,17 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         serviciosForm.push(
           new FormGroup({
             id: new FormControl(`${servicio.id}`, []),
+            servicio_codigo: new FormControl(`${servicio.servicio_codigo}`, []),
             descripcion: new FormControl(
               `${servicio.servicio_descripcion}`,
               []
             ), // TODO
             cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
+            precio_unitario: new FormControl(servicio.valor_unitario_clp, []),
+            precio_total_servicio: new FormControl(
+              +servicio.valor_unitario_clp * +servicio.cantidad_total,
+              []
+            ),
             cantidad_a_enviar: new FormControl(
               `${servicio.faltante_cantidad}`,
               []
@@ -179,7 +185,13 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
           new FormGroup({
             id: new FormControl(`${uo.id}`, []),
             descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
+            uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
             cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
+            precio_unitario: new FormControl(uo.valor_unitario_clp, []),
+            precio_total_servicio: new FormControl(
+              +uo.valor_unitario_clp * +uo.cantidad_total,
+              []
+            ),
             cantidad_a_enviar: new FormControl(`${uo.faltante_cantidad}`, []),
           })
         )
@@ -206,11 +218,17 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         serviciosForm.push(
           new FormGroup({
             id: new FormControl(`${servicio.id}`, []),
+            servicio_codigo: new FormControl(`${servicio.servicio_codigo}`, []),
             descripcion: new FormControl(
               `${servicio.servicio_descripcion}`,
               []
             ), // TODO
             cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
+            precio_unitario: new FormControl(servicio.valor_unitario_clp, []),
+            precio_total_servicio: new FormControl(
+              +servicio.valor_unitario_clp * +servicio.cantidad_total,
+              []
+            ),
             cantidad_max_a_enviar: new FormControl(
               `${servicio.faltante_cantidad}`,
               []
@@ -246,9 +264,15 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
           new FormGroup({
             id: new FormControl(`${uo.id}`, []),
             descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
+            uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
             cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
             cantidad_max_a_enviar: new FormControl(
               `${uo.faltante_cantidad}`,
+              []
+            ),
+            precio_unitario: new FormControl(uo.valor_unitario_clp, []),
+            precio_total_servicio: new FormControl(
+              +uo.valor_unitario_clp * +uo.cantidad_total,
               []
             ),
             cantidad_a_enviar: new FormControl(

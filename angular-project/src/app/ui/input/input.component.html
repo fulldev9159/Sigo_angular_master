@@ -19,7 +19,15 @@
     <label style=" margin-top: 1rem">{{ label }}</label>
   </ng-container>
   <ng-container *ngIf="control !== undefined">
-    <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
+    <ng-container *ngIf="placeholder!=='Porcentaje'">
+      <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
+    </ng-container>
+    <ng-container  *ngIf="placeholder==='Porcentaje'">
+      <div style="display: flex;    align-items: center;">
+        <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
+        <span>%</span></div>
+    </ng-container>
+    
     <div *ngIf="control.invalid && (control.dirty || control.touched)">
       <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
     </div>
