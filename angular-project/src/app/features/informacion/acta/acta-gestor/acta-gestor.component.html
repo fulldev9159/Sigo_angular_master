@@ -26,7 +26,7 @@
               <app-acta-porcentaje-form [saving]="saving$ | async" [porcentaje]="form.get('porcentaje')" [form]="form.get('total_porcentaje')" (submitted)="formSubmitted(ot.ot.id, form.get('tipo_pago').value, $event)" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-acta-porcentaje-form>
             </ng-container>
             <ng-container *ngSwitchCase="'POR_SERVICIO'">
-              <app-acta-servicio-form [saving]="saving$ | async" [form]="form.get('por_servicio')" (submitted)="formSubmitted(ot.ot.id, form.get('tipo_pago').value, $event)"></app-acta-servicio-form>
+              <app-acta-servicio-form [saving]="saving$ | async" [form]="form.get('por_servicio')" (submitted)="formSubmitted(ot.ot.id, form.get('tipo_pago').value, $event)" [totalServicios]="totalServicios_servicio" [totalUO]="totalUO_servicio"></app-acta-servicio-form>
             </ng-container>
             <!--<ng-container *ngSwitchDefault>...</ng-container>-->
           </ng-container>

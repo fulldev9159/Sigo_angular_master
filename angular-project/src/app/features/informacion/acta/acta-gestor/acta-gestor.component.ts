@@ -41,6 +41,8 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   saving$: Observable<boolean> = this.otFacade.sendingGeneracionActa$();
   totalServicios: number;
   totalUO: number;
+  totalServicios_servicio: number;
+  totalUO_servicio: number;
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl({ value: '', disabled: true }, [
@@ -90,6 +92,8 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         }
       )
     );
+    this.totalServicios_servicio = 0;
+    this.totalUO_servicio = 0;
   }
 
   checkAndFixTipoPago(tipoPago: string): void {
@@ -293,9 +297,10 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         this.subscription.add(
           (group as FormGroup)
             .get('selected')
-            .valueChanges.subscribe(selected =>
-              this.updateCantidadEnviar(serviciosForm, index, selected)
-            )
+            .valueChanges.subscribe(selected => {
+              this.updateCantidadEnviar(serviciosForm, index, selected);
+              this.updateTotalServicios();
+            })
         )
       );
 
@@ -335,10 +340,23 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
         this.subscription.add(
           (group as FormGroup)
             .get('selected')
-            .valueChanges.subscribe(selected =>
-              this.updateCantidadEnviar(unidadesObraForm, index, selected)
-            )
+            .valueChanges.subscribe(selected => {
+              this.updateCantidadEnviar(unidadesObraForm, index, selected);
+              this.updateTotalUO();
+            })
         )
+      );
+
+      this.subscription.add(
+        serviciosForm.valueChanges.subscribe(servicio => {
+          this.updateTotalServicios();
+        })
+      );
+
+      this.subscription.add(
+        unidadesObraForm.valueChanges.subscribe(uo => {
+          this.updateTotalUO();
+        })
       );
     }
   }
@@ -367,6 +385,37 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
       //// form.at(index).get('cantidad_a_enviar').clearValidators();
       form.at(index).get('cantidad_a_enviar').disable();
     }
+  }
+
+  updateTotalServicios(): void {
+    const serviciosForm = this.form
+      .get('por_servicio')
+      .get('servicios') as FormArray;
+
+    this.totalServicios_servicio = 0;
+
+    serviciosForm.value.forEach(servicio => {
+      if (servicio.selected) {
+        this.totalServicios_servicio =
+          this.totalServicios_servicio +
+          +servicio.precio_unitario * +servicio.cantidad_a_enviar;
+      }
+    });
+  }
+
+  updateTotalUO(): void {
+    const unidadesObraForm = this.form
+      .get('por_servicio')
+      .get('unidades_obra') as FormArray;
+
+    this.totalUO_servicio = 0;
+
+    unidadesObraForm.value.forEach(uo => {
+      if (uo.selected) {
+        this.totalUO_servicio =
+          this.totalUO_servicio + +uo.precio_unitario * +uo.cantidad_a_enviar;
+      }
+    });
   }
 
   //// updateSelectedServicios(
