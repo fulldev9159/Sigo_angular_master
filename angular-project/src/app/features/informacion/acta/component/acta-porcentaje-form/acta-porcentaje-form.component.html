@@ -95,6 +95,35 @@
 <pre>{{ values | json }}</pre>
 -->
 
+<div class="row" id="table-totales">
+  <div class="col-9"></div>
+  <div class="col-3">
+    <table style="width: 100%;">
+      <tr>
+        <td>Total Servicios</td>
+        <td>{{totalServicios| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+      <tr>
+        <td>Total Unidades Obra</td>
+        <td>{{totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row" id="table-totales">
+  <div class="col-md-4 col-xs-12"></div>
+  <div class="col-md-4 col-xs-12">
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Total a Pagar</ng-container>
+      <ng-container card-body>
+        {{totalServicios + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}
+      </ng-container>
+    </app-card>
+  </div>
+  <div class="ccol-md-4 col-xs-12"></div>
+</div>
+
 <div class="row">
   <div class="col-xs-12 col-md-12">
     <div style="text-align: right">
