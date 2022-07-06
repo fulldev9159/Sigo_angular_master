@@ -30,8 +30,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ListOtComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  totalServicios: number = 0;
-  totalUO: number = 0;
+  totalServicios: number;
+  totalUO: number;
 
   detalleInformeAvance$: Observable<DetalleInformeAvance> =
     this.otFacade.getDetalleInformeAvance$();
