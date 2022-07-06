@@ -39,11 +39,13 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
   }> = this.otFacade.getDetalleActa$();
   ot$: Observable<any> = this.otFacade.getDetalleOT$();
   saving$: Observable<boolean> = this.otFacade.sendingGeneracionActa$();
+  totalServicios: number;
+  totalUO: number;
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl(
       { value: '', disabled: true },
-      Validators.required,
+      [Validators.required],
       this.noWhitespace
     ),
 
@@ -139,6 +141,22 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
       if (items.length === 0) {
         this.form.get('porcentaje').disable();
       }
+
+      this.subscription.add(
+        this.form.get('porcentaje').valueChanges.subscribe(x => {
+          const serviciosForm = this.form
+            .get('total_porcentaje')
+            .get('servicios') as FormArray;
+          const unidadesObraForm = this.form
+            .get('total_porcentaje')
+            .get('unidades_obra') as FormArray;
+
+          this.totalServicios = 0;
+          this.totalUO = 0;
+
+          serviciosForm.value().forEach(servicio => console.log(servicio));
+        })
+      );
     }
   }
 
@@ -156,8 +174,14 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
 
       serviciosForm.clear();
       unidadesObraForm.clear();
+      this.totalServicios = 0;
+      this.totalUO = 0;
 
-      (servicios ?? []).forEach(servicio =>
+      (servicios ?? []).forEach(servicio => {
+        this.totalServicios =
+          this.totalServicios +
+          +servicio.valor_unitario_clp * +servicio.cantidad_total;
+
         serviciosForm.push(
           new FormGroup({
             id: new FormControl(`${servicio.id}`, []),
@@ -167,9 +191,12 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
               []
             ), // TODO
             cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
-            precio_unitario: new FormControl(servicio.valor_unitario_clp, []),
+            precio_unitario: new FormControl(
+              `${servicio.valor_unitario_clp}`,
+              []
+            ),
             precio_total_servicio: new FormControl(
-              +servicio.valor_unitario_clp * +servicio.cantidad_total,
+              `${+servicio.valor_unitario_clp * +servicio.cantidad_total}`,
               []
             ),
             cantidad_a_enviar: new FormControl(
@@ -177,25 +204,27 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
               []
             ),
           })
-        )
-      );
+        );
+      });
 
-      (unidades_obra ?? []).forEach(uo =>
+      (unidades_obra ?? []).forEach(uo => {
+        this.totalUO =
+          this.totalUO + +uo.valor_unitario_clp * +uo.cantidad_total;
         unidadesObraForm.push(
           new FormGroup({
             id: new FormControl(`${uo.id}`, []),
             descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
             uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
             cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
-            precio_unitario: new FormControl(uo.valor_unitario_clp, []),
+            precio_unitario: new FormControl(`${uo.valor_unitario_clp}`, []),
             precio_total_servicio: new FormControl(
-              +uo.valor_unitario_clp * +uo.cantidad_total,
+              `${+uo.valor_unitario_clp * +uo.cantidad_total}`,
               []
             ),
             cantidad_a_enviar: new FormControl(`${uo.faltante_cantidad}`, []),
           })
-        )
-      );
+        );
+      });
     }
   }
 

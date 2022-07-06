@@ -29,6 +29,8 @@ interface Detalle {
 export class ActaTotalFormComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
   @Input() saving: boolean;
+  @Input() totalServicios: number;
+  @Input() totalUO: number;
   @Output() submitted = new EventEmitter<Detalle>();
 
   constructor() {}
