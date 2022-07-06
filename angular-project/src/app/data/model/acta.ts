@@ -35,6 +35,8 @@ export interface DetalleActaServicio {
 
   servicio_codigo: string;
   servicio_descripcion: string;
+
+  valor_unitario_clp: number;
 }
 
 export interface DetalleActaUob {
@@ -52,4 +54,5 @@ export interface DetalleActaUob {
   faltante_porcentaje_entero: number;
   faltante_porcentaje_fraccion: number;
   unidad_obra_desc: string;
+  valor_unitario_clp: number;
 }
