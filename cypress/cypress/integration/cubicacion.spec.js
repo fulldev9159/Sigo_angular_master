@@ -8,14 +8,14 @@ describe('Cubicacion Test', () => {
 
   const serv_1_test = 'J757 - DESMONTAR CABLE DE FIBRA OPTICA EN AEREO';
   const serv_1_precio_test = 171.57;
-  const serv_1_precio_test_text = `$${serv_1_precio_test}`;
+  const serv_1_precio_test_text = `$${serv_1_precio_test.replace('.', ',')}`;
   const serv_1_uo_1_test = 'D351 - KIT RETENCION FIBRA 14 MM';
   const serv_1_uo_1_precio_test = 57000;
   const serv_1_uo_1_precio_test_text = `$${serv_1_uo_1_precio_test}`;
 
   const serv_2_test = 'J756 - INSTALAR CABLE DE FIBRA OPTICA AEREO';
   const serv_2_precio_test = 457.52;
-  const serv_2_precio_test_text = `$${serv_2_precio_test}`;
+  const serv_2_precio_test_text = `$${serv_2_precio_test.replace('.', ',')}`;
   const serv_2_uo_1_test =
     'H089 - CABLE AEREO 32 FO/PKP (CON LASHING RECUBIERTO)';
   const serv_2_uo_2_test =
