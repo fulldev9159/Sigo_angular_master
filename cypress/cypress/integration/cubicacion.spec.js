@@ -8,11 +8,14 @@ describe('Cubicacion Test', () => {
 
   const serv_1_test = 'J757 - DESMONTAR CABLE DE FIBRA OPTICA EN AEREO';
   const serv_1_precio_test = 171.57;
+  const serv_1_precio_test_text = `$${serv_1_precio_test}`;
   const serv_1_uo_1_test = 'D351 - KIT RETENCION FIBRA 14 MM';
   const serv_1_uo_1_precio_test = 57000;
+  const serv_1_uo_1_precio_test_text = `$${serv_1_uo_1_precio_test}`;
 
   const serv_2_test = 'J756 - INSTALAR CABLE DE FIBRA OPTICA AEREO';
   const serv_2_precio_test = 457.52;
+  const serv_2_precio_test_text = `$${serv_2_precio_test}`;
   const serv_2_uo_1_test =
     'H089 - CABLE AEREO 32 FO/PKP (CON LASHING RECUBIERTO)';
   const serv_2_uo_2_test =
@@ -61,7 +64,7 @@ describe('Cubicacion Test', () => {
     cy.get('#create-button').should('be.disabled');
   });
 
-  it('Revisasr que se agreguen correctamente los items al carrito', () => {
+  it('Revisar que se agreguen correctamente los items al carrito', () => {
     cy.cubBase('CubTest', 'Full', contrato_test, agencia_test, proveedor_test);
     cy.cubFiltros(
       actividad_test.toUpperCase(),
@@ -81,13 +84,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      '$266,67',
-      '$266,67',
+      serv_1_precio_test_text,
+      serv_1_precio_test_text,
       serv_1_uo_1_test,
       actividad_test,
       1,
-      '$57.000',
-      '$57.000'
+      serv_1_uo_1_precio_test_text,
+      serv_1_uo_1_precio_test_text
     );
 
     // SERVICIO 2
@@ -96,8 +99,8 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      '$711,12',
-      '$711,12',
+      serv_2_precio_test_text,
+      serv_2_precio_test_text,
       serv_2_uo_2_test,
       actividad_test,
       1,
@@ -128,13 +131,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      '$266,67',
-      '$266,67',
+      serv_1_precio_test_text,
+      serv_1_precio_test_text,
       serv_1_uo_1_test,
       actividad_test,
       1,
-      '$57.000',
-      '$57.000'
+      serv_1_uo_1_precio_test_text,
+      serv_1_uo_1_precio_test_text
     );
 
     // SERVICIO 2
@@ -143,8 +146,8 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      '$711,12',
-      '$711,12',
+      serv_2_precio_test_text,
+      serv_2_precio_test_text,
       serv_2_uo_4_test,
       actividad_test,
       1,
@@ -176,13 +179,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      '$266,67',
-      '$266,67',
+      serv_1_precio_test_text,
+      serv_1_precio_test_text,
       serv_1_uo_1_test,
       actividad_test,
       1,
-      '$57.000',
-      '$57.000'
+      serv_1_uo_1_precio_test_text,
+      serv_1_uo_1_precio_test_text
     );
 
     // SERVICIO 2
@@ -191,8 +194,8 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       1,
-      '$711,12',
-      '$711,12',
+      serv_2_precio_test_text,
+      serv_2_precio_test_text,
       serv_2_uo_4_test,
       actividad_test,
       1,
@@ -227,13 +230,13 @@ describe('Cubicacion Test', () => {
       serv_1_test,
       tipo_servicio_test,
       1,
-      '$266,67',
-      '$266,67',
+      serv_1_precio_test_text,
+      serv_1_precio_test_text,
       serv_1_uo_1_test,
       actividad_test,
       1,
-      '$57.000',
-      '$57.000'
+      serv_1_uo_1_precio_test_text,
+      serv_1_uo_1_precio_test_text
     );
     // SERVICIO 2
     cy.cubCheckTableDataServUO(
@@ -241,7 +244,7 @@ describe('Cubicacion Test', () => {
       serv_2_test,
       tipo_servicio_test,
       4,
-      '$711,12',
+      serv_2_precio_test_text,
       '$2.844,48',
       serv_2_uo_1_test,
       actividad_test,
@@ -286,7 +289,7 @@ describe('Cubicacion Test', () => {
       'PROVEEDOR'
     );
     cy.get('.row > table > tbody > .ng-star-inserted > :nth-child(4)').contains(
-      '$57.000'
+      serv_1_uo_1_precio_test_text
     );
   });
 

@@ -112,7 +112,7 @@ Cypress.Commands.add(
     // .contains(
     //   `${formatter.format(serv_precio).toString().replace('.', ',')}`
     // );
-    cy.get(fila).eq(5).contains(serv_precio_total);
+    // cy.get(fila).eq(5).contains(serv_precio_total);
     // cy.get(fila)
     //   .eq(5)
     //   .contains(
