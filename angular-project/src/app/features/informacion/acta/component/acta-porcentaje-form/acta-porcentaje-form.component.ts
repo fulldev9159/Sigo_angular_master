@@ -7,6 +7,9 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { SessionData } from '@data';
+import { AuthFacade } from '@storeOT/features/auth/auth.facade';
+import { Observable } from 'rxjs';
 
 interface Detalle {
   servicio: {
@@ -33,8 +36,9 @@ export class ActaPorcentajeFormComponent implements OnInit, OnDestroy {
   @Input() totalServicios: number;
   @Input() totalUO: number;
   @Output() submitted = new EventEmitter<Detalle>();
+  sessionData$: Observable<SessionData> = this.authFacade.getLogin$();
 
-  constructor() {}
+  constructor(private authFacade: AuthFacade) {}
 
   ngOnInit(): void {}
 
