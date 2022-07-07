@@ -21,12 +21,14 @@ ${actividad_test} =        Fibra Optica
 ${tipo_servicio_test} =    Fibra Optica                                           
 
 ${serv_1_test} =                J757 - DESMONTAR CABLE DE FIBRA OPTICA EN AEREO
-${serv_1_precio_test} =         266,67
+${serv_1_precio_test} =         171,57
+${serv_1_precio_test_text} =    $171,57
 ${serv_1_uo_1_test} =           D351 - KIT RETENCION FIBRA 14 MM
 ${serv_1_uo_1_precio_test} =    57000
 
 ${serv_2_test} =                J756 - INSTALAR CABLE DE FIBRA OPTICA AEREO
-${serv_2_precio_test} =         711,12
+${serv_2_precio_test} =         457,52
+${serv_2_precio_test_text} =    $457,52
 ${serv_2_uo_1_test} =           H093 - CABLE AEREO 64 FO/PKP (CON LASHING RECUBIERTO)
 ${serv_2_uo_1_precio_test} =    0
 ${serv_2_uo_2_test} =           H095 - CABLE AEREO 96 FO/PKP (CON LASHING RECUBIERTO) 
@@ -146,13 +148,13 @@ Editar
     _Element input text should be    css:#descripcion > app-textarea > textarea    Cub descripcion
 
     _CubCheckTableCarritoServicioUOBCREATE    1
-    ...                                       ${serv_1_test.split("-")[0].strip()}         ${serv_1_test.split("-")[1].strip()}         ${tipo_servicio_test}    1    MT    $266,67    CLP
-    ...                                       ${serv_1_uo_1_test.split("-")[0].strip()}    ${serv_1_uo_1_test.split("-")[1].strip()}    ${actividad_test}        1    CU    $57.000    CLP
+    ...                                       ${serv_1_test.split("-")[0].strip()}         ${serv_1_test.split("-")[1].strip()}         ${tipo_servicio_test}    1    MT    ${serv_1_precio_test_text}    CLP
+    ...                                       ${serv_1_uo_1_test.split("-")[0].strip()}    ${serv_1_uo_1_test.split("-")[1].strip()}    ${actividad_test}        1    CU    $57.000                       CLP
     _CubCheckTableCarritoServicioUOBCREATE    2
-    ...                                       ${serv_2_test.split("-")[0].strip()}         ${serv_2_test.split("-")[1].strip()}         ${tipo_servicio_test}    1    MT    $711,12    CLP
-    ...                                       ${serv_2_uo_1_test.split("-")[0].strip()}    ${serv_2_uo_1_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0         CLP
+    ...                                       ${serv_2_test.split("-")[0].strip()}         ${serv_2_test.split("-")[1].strip()}         ${tipo_servicio_test}    1    MT    ${serv_2_precio_test_text}    CLP
+    ...                                       ${serv_2_uo_1_test.split("-")[0].strip()}    ${serv_2_uo_1_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0                            CLP
     _CubCheckTableCarritoUOBCREATE            3
-    ...                                       ${serv_2_uo_2_test.split("-")[0].strip()}    ${serv_2_uo_2_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0         CLP
+    ...                                       ${serv_2_uo_2_test.split("-")[0].strip()}    ${serv_2_uo_2_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0                            CLP
 
 
 #    # PENDIENTE: Para cuando existan datos reales en db se debe revisar los cambios de los demás parámetros
