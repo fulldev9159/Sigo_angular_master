@@ -63,7 +63,7 @@
               {{item.servicio_cantidad}}
             </td>
             <td>{{item.servicio_unidad_cod}}</td>
-            <td class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+            <td class="data-secundaria">{{+item.servicio_precio_final/item.servicio_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
             <td class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
             <td>
@@ -76,7 +76,7 @@
               {{item.unidades_obras[0].uo_cantidad}}
             </td>
             <td>{{item.unidades_obras[0].uob_unidad_medida_cod}}</td>
-            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp/+item.unidades_obras[0].uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
             <td>
@@ -94,7 +94,7 @@
               {{item.servicio_cantidad}}
             </td>
             <td [attr.rowspan]="+item.unidades_obras.length">{{item.servicio_unidad_cod}}</td>
-            <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final/+item.servicio_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td [attr.rowspan]="+item.unidades_obras.length">{{item.servicio_tipo_moneda_codigo}}
             </td>
@@ -110,7 +110,7 @@
             <td>{{item.unidades_obras[0].uob_unidad_medida_cod}}
 
             </td>
-            <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{item.unidades_obras[0].uo_precio_total_clp/+item.unidades_obras[0].uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
             <td>
@@ -127,7 +127,7 @@
               {{uo.uo_cantidad}}
             </td>
             <td>{{uo.uob_unidad_medida_cod}}</td>
-            <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+            <td>{{uo.uo_precio_total_clp/uo.uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
             <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
             <td>
