@@ -280,7 +280,7 @@
                     <td>
                       {{item.servicio_cantidad}}
                     </td>
-                    <td class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td class="data-secundaria">{{+item.servicio_precio_final/item.servicio_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                     <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
                     <td class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>
@@ -299,7 +299,7 @@
                       {{item.unidades_obras[0].uo_cantidad}}
                     </td>
                     <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-                    <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp/item.unidades_obras[0].uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>
                       <!-- <div class="ui icon buttons mini basic">
@@ -318,7 +318,7 @@
                     <td [attr.rowspan]="+item.unidades_obras.length">
                       {{item.servicio_cantidad}}
                     </td>
-                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final/item.servicio_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
                     <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td [attr.rowspan]="+item.unidades_obras.length">
@@ -336,7 +336,7 @@
                       {{item.unidades_obras[0].uo_cantidad}}
                     </td>
                     <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-                    <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp/item.unidades_obras[0].uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>
                       <!-- <div class="ui icon buttons mini basic">
@@ -358,7 +358,7 @@
                       {{uo.uo_cantidad}}
                     </td>
                     <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-                    <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{uo.uo_precio_total_clp/uo.uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>
                       <!-- <div class="ui icon buttons mini basic">
@@ -374,7 +374,30 @@
             </tbody>
           </table>
         </div>
+        <div class="row" id="table-totales">
+          <div class="col-md-4 col-xs-12"></div>
+          <div class="col-md-4 col-xs-12">
+            <table style="width: 100%;">
+              <tr>
+                <td>Total Servicios</td>
+                <td>{{totalServicios| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+              <tr>
+                <td>Total Unidades Obra</td>
+                <td>{{totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+              <tr>
+                <td style="background: #cccccc;
+                    font-size: 15px;">Total Cubicación</td>
+                <td>{{totalServicios + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-4 col-xs-12"></div>
+        </div>
       </ng-container>
+
+     
     </app-card>
 
     <div class="col-xs-12 col-md-12">

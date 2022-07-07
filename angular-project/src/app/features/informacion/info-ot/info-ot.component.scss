@@ -12,6 +12,24 @@
     border-bottom: 2px solid #dde8ea;
   }
 }
+.label-table {
+  color: white;
+  font-size: 12px;
+  padding: 6px;
+  // border-radius: 4px;
+  font-weight: 500;
+  letter-spacing: 0.06rem;
+  background: #00b5ad;
+}
+
+.data-secundaria {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.data-primaria {
+  font-size: 0.8rem;
+}
 
 // .table-carrito {
 //   overflow-y: scroll;

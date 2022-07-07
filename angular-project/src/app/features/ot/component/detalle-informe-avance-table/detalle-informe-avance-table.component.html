@@ -25,8 +25,8 @@
             <th>Actividad</th>
             <th>Cantidad</th>
             <!-- <th>Unidad</th> -->
-            <th>Precio Un.</th>
-            <th>Total UO</th>
+            <th *ngIf="(sessionData$|async)?.nombre_perfil_select==='Administrador EECC'">Precio Un.</th>
+            <th *ngIf="(sessionData$|async)?.nombre_perfil_select==='Administrador EECC'">Total UO</th>
             <!-- <th>Tipo Moneda</th> -->
             <th></th>
           </tr>
@@ -97,7 +97,7 @@
       </table>
     </div>
 
-    <div class="row" id="table-totales">
+    <div class="row" id="table-totales" *ngIf="(sessionData$|async)?.nombre_perfil_select==='Administrador EECC'">
       <div class="col-9"></div>
       <div class="col-3">
         <table style="width: 100%;">
