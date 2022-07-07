@@ -13,7 +13,7 @@ describe('Cubicacion Test', () => {
     .replace('.', ',')}`;
   const serv_1_uo_1_test = 'D351 - KIT RETENCION FIBRA 14 MM';
   const serv_1_uo_1_precio_test = 57000;
-  const serv_1_uo_1_precio_test_text = `$${serv_1_uo_1_precio_test}`;
+  const serv_1_uo_1_precio_test_text = `$57.000`;
 
   const serv_2_test = 'J756 - INSTALAR CABLE DE FIBRA OPTICA AEREO';
   const serv_2_precio_test = 457.52;
