@@ -582,7 +582,8 @@ export class OtEffects {
           otActions.AsignarSupervisorTrabajosOTSuccess,
           otActions.updateDetalleInformeAvanceSuccess,
           otActions.sendDetalleInformeAvanceSuccess,
-          otActions.createRegistroLibroObrasSuccess
+          otActions.createRegistroLibroObrasSuccess,
+          otActions.sendGeneracionActaSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

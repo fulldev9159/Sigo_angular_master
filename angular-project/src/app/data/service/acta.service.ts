@@ -59,21 +59,20 @@ export class ActaService {
       }[];
     }
   ): Observable<Response<any>> {
-    //// return this.http.post<Response<any>>(`${this.apiUrl}/ot/acta/create`, {
-    ////   ot_id,
-    ////   tipo_pago,
-    ////   detalle,
-    //// });
-
     console.log(`${this.apiUrl}/ot/acta/create`, {
       ot_id,
       tipo_pago,
       detalle,
     });
+    return this.http.post<Response<any>>(`${this.apiUrl}/ot/acta/create`, {
+      ot_id,
+      tipo_pago,
+      detalle,
+    });
 
-    return of({
-      status: { code: 0, desc: 'OK' },
-      data: {},
-    }).pipe(delay(3000));
+    // return of({
+    //   status: { code: 0, desc: 'OK' },
+    //   data: {},
+    // }).pipe(delay(3000));
   }
 }
