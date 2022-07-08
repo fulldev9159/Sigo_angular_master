@@ -731,7 +731,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           precargado: true,
 
           servicio_rowid: data_servicio.cub_has_srv_id,
-          precio_agencia: data_servicio.agencia_preciario_monto,
+          precio_agencia: 0,
           precio_proveedor: data_servicio.prov_has_serv_precio,
           servicio_baremos: data_servicio.puntos_baremos,
           servicio_codigo: data_servicio.servicio_cod,

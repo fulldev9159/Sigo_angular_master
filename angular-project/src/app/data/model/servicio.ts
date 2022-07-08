@@ -57,12 +57,8 @@ export interface ServiciosDetalle {
   data_servicio: {
     actividad_desc: string;
     actividad_id: number;
-    agencia_preciario_monto: number;
     cub_has_srv_id: number;
-    factor_conversion_monto: number;
     factor_conversion_precio: number;
-    monto_tipo_moneda_cod: string;
-    monto_tipo_moneda_id: number;
     precio_tipo_moneda_cod: string;
     precio_tipo_moneda_id: number;
     prov_has_serv_precio: number;
@@ -77,6 +73,7 @@ export interface ServiciosDetalle {
     tipo_servicio_id: number;
     unidad_medida_cod: string;
     unidad_medida_id: number;
+    numero_producto: string;
   };
   unidades_obra: UnidadObraFromDetalle[];
 }

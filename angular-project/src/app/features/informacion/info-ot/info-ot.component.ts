@@ -94,7 +94,7 @@ export class InfoOtComponent implements OnInit, OnDestroy {
                 }
               );
               return {
-                precio_agencia: servicios.data_servicio.agencia_preciario_monto,
+                precio_agencia: 0,
                 precio_proveedor: servicios.data_servicio.prov_has_serv_precio,
                 servicio_baremos: servicios.data_servicio.puntos_baremos,
                 servicio_codigo: servicios.data_servicio.servicio_cod,
@@ -110,10 +110,8 @@ export class InfoOtComponent implements OnInit, OnDestroy {
                 tipo_moneda_id: servicios.data_servicio.precio_tipo_moneda_id,
                 actividad_descripcion: servicios.data_servicio.actividad_desc,
                 actividad_id: servicios.data_servicio.actividad_id.toString(),
-                servicio_tipo_moneda_codigo:
-                  servicios.data_servicio.monto_tipo_moneda_cod,
-                servicio_tipo_moneda_id:
-                  servicios.data_servicio.monto_tipo_moneda_id,
+                servicio_tipo_moneda_codigo: '', // TODO: UNIFICAR EL TIPO DE DATO DE CARRITO Y SERVICIOS
+                servicio_tipo_moneda_id: 1,
                 tipo_servicio_descripcion:
                   servicios.data_servicio.tipo_servicio_desc,
                 servicio_cantidad: servicios.data_servicio.servicio_cantidad,

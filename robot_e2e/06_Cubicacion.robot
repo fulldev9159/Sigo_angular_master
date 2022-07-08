@@ -37,7 +37,7 @@ ${serv_2_uo_3_test} =           H088 - CABLE AEREO 24 FO/PKP (CON LASHING RECUBI
 
 
 *** Test Cases ***
-Crear cubicación
+# Crear cubicación
     [Documentation]    Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación.
    # ...                                                                                          Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
    # Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación
@@ -138,7 +138,7 @@ Editar
     _Element input text should be    css:#nomnbreCub > app-input > input         CubTest
     _Element input text should be    css:#tipoCub > app-select > select          3          # Full
     _Element input text should be    css:#contratosUser > app-select > select    9
-    _Element input text should be    css:#agencias > app-select > select         20
+    _Element input text should be    css:#agencias > app-select > select         19
     _Element input text should be    css:#proveedores > app-select > select      7
 
     _Element input text should be    css:#direcciondesde > app-input > input       las casas norte
