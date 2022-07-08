@@ -87,6 +87,17 @@ export const reducerAuth = createReducer(
       };
     }
   ),
+
+  on(authActions.setPerfilSelectedSuccess, (state, { nombre_rol_select }) => {
+    const sessionData = {
+      ...state.sessionData,
+      rol: nombre_rol_select,
+    };
+    return {
+      ...state,
+      sessionData,
+    };
+  }),
   on(authActions.getPerrmisoPerfilSuccess, (state, { response }) => {
     const sessionData = {
       ...state.sessionData,

@@ -2,7 +2,6 @@ import { createAction, props } from '@ngrx/store';
 import * as Data from '@data';
 import {
   Response,
-  DataResGetPerfilesUser,
   Perfil,
   RequestAgregarPerfilUsusario,
   PosiblesSuperiores,
@@ -19,6 +18,7 @@ import {
   RequestUpdateUser,
   PosiblesContratosUser,
   ModelProveedor,
+  PerfilesUser,
 } from '@data';
 
 // GET ALL USER
@@ -44,7 +44,7 @@ export const getPerfilesUser = createAction(
 
 export const getPerfilesUserSuccess = createAction(
   '[User] POST Get Perfiles usuario Success',
-  props<{ response: Response<DataResGetPerfilesUser> }>()
+  props<{ response: Response<{ perfiles: PerfilesUser[] }> }>()
 );
 
 export const getPerfilesUserError = createAction(

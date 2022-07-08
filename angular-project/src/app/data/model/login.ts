@@ -20,6 +20,7 @@ export interface SessionData {
   permisos: string[];
   proxy_id: number;
   multiperfiles: boolean;
+  rol: string;
 }
 
 // GET DATABASE VERSION

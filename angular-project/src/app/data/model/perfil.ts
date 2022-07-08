@@ -1,3 +1,4 @@
+import { Rol } from './rol';
 import { ModelSuperir, ModelUsuarioLogin } from './user';
 
 export interface ModelPerfil {
@@ -11,14 +12,14 @@ export interface ModelPerfil {
   updated_at: Date;
 }
 
-export interface DataResGetPerfilesUser {
-  perfiles: PerfilesUser[];
+export interface ModelPerfilUser extends ModelPerfil {
+  model_rol_id: Rol;
 }
 
 export interface PerfilesUser {
   created_at: Date;
   id: number;
-  model_perfil_id: ModelPerfil;
+  model_perfil_id: ModelPerfilUser;
   model_usuario_id: ModelUsuarioLogin;
   model_usuario_orig: ModelUsuarioLogin;
 

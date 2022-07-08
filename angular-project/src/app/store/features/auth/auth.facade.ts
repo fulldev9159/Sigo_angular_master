@@ -37,10 +37,15 @@ export class AuthFacade {
 
   public setPerfilSelectedLogin(
     proxy_id: number,
-    nombre_perfil_select: string
+    nombre_perfil_select: string,
+    nombre_rol_select: string
   ): void {
     this.store.dispatch(
-      authActions.setPerfilSelected({ proxy_id, nombre_perfil_select })
+      authActions.setPerfilSelected({
+        proxy_id,
+        nombre_perfil_select,
+        nombre_rol_select,
+      })
     );
   }
 

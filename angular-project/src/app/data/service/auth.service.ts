@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { Response, RequestLogin } from '@data';
 import {
   DataRespLogin,
-  DataResGetPerfilesUser,
   DataRespGetUsuarioPermisosPerfil,
   DatabaseVersion,
+  PerfilesUser,
 } from '@data/model';
 
 @Injectable({
@@ -27,8 +27,8 @@ export class AuthService {
 
   getPerfilesUser(
     usuario_id: number
-  ): Observable<Response<DataResGetPerfilesUser>> {
-    return this.http.post<Response<DataResGetPerfilesUser>>(
+  ): Observable<Response<{ perfiles: PerfilesUser[] }>> {
+    return this.http.post<Response<{ perfiles: PerfilesUser[] }>>(
       `${this.apiUrl}/usuario/perfiles/get`,
       { usuario_id }
     );

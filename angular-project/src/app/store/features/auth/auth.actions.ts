@@ -3,8 +3,8 @@ import {
   RequestLogin,
   Response,
   DataRespLogin,
-  DataResGetPerfilesUser,
   DataRespGetUsuarioPermisosPerfil,
+  PerfilesUser,
 } from '@data';
 
 // LOGIN
@@ -36,7 +36,7 @@ export const getPerfilesUser = createAction(
 
 export const getPerfilesUserSuccess = createAction(
   '[Auth perfiles] POST Get Perfiles usuario Success',
-  props<{ response: Response<DataResGetPerfilesUser> }>()
+  props<{ response: Response<{ perfiles: PerfilesUser[] }> }>()
 );
 
 export const getPerfilesUserError = createAction(
@@ -48,7 +48,11 @@ export const getPerfilesUserError = createAction(
 // SET PERFIL SELECTED
 export const setPerfilSelected = createAction(
   '[Auth] POST setPerfilSelected',
-  props<{ proxy_id: number; nombre_perfil_select: string }>()
+  props<{
+    proxy_id: number;
+    nombre_perfil_select: string;
+    nombre_rol_select: string;
+  }>()
 );
 
 export const setPerfilSelectedSuccess = createAction(
@@ -56,6 +60,7 @@ export const setPerfilSelectedSuccess = createAction(
   props<{
     proxy_id: number;
     nombre_perfil_select: string;
+    nombre_rol_select: string;
     response: Response<DataRespLogin>;
   }>()
 );
