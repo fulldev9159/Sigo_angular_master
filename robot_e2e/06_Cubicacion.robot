@@ -212,12 +212,12 @@ Editar
      _Element text should be    css:app-detalle-cubicacion-table > table:nth-child(3) > tr:nth-child(2) > td                 Edit Cub descripción
 
     _CubCheckTableCarritoServicioUOB    1                                            
-    ...                                 ${serv_2_test.split("-")[0].strip()}         ${serv_2_test.split("-")[1].strip()}         ${tipo_servicio_test}    1    MT    $711,12    CLP
-    ...                                 ${serv_2_uo_1_test.split("-")[0].strip()}    ${serv_2_uo_1_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0         CLP
+    ...                                 ${serv_2_test.split("-")[0].strip()}         ${serv_2_test.split("-")[1].strip()}         ${tipo_servicio_test}    1    MT    ${serv_2_precio_test_text}    CLP
+    ...                                 ${serv_2_uo_1_test.split("-")[0].strip()}    ${serv_2_uo_1_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0                            CLP
     _CubCheckTableCarritoUOB            2                                            
-    ...                                 ${serv_2_uo_2_test.split("-")[0].strip()}    ${serv_2_uo_2_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0         CLP
+    ...                                 ${serv_2_uo_2_test.split("-")[0].strip()}    ${serv_2_uo_2_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0                            CLP
     _CubCheckTableCarritoUOB            3                                            
-    ...                                 ${serv_2_uo_3_test.split("-")[0].strip()}    ${serv_2_uo_3_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0         CLP
+    ...                                 ${serv_2_uo_3_test.split("-")[0].strip()}    ${serv_2_uo_3_test.split("-")[1].strip()}    ${actividad_test}        1    MT    $0                            CLP
     close browser
 
 
