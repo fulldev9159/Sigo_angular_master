@@ -37,7 +37,7 @@ ${serv_2_uo_3_test} =           H088 - CABLE AEREO 24 FO/PKP (CON LASHING RECUBI
 
 
 *** Test Cases ***
-# Crear cubicación
+Crear cubicación
     [Documentation]    Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación.
    # ...                                                                                          Given: El usuario mgestor 1 con perfil Gestor/JP entra en la página para crear cubicación
    # Scenario: El usuario mgestor 1 con perfil Gestor/JP va a crear una nueva cubicación
