@@ -1,4 +1,4 @@
-describe('Creacion de cub y ot', () => {
+describe.skip('Creacion de cub y ot', () => {
   const nombre = 'plan  2';
 
   // BUCLE
