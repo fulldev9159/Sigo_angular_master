@@ -1,9 +1,9 @@
-describe.skip('Creacion de cub y ot', () => {
-  const nombre = 'Continuar Informe Avance';
+describe('Creacion de cub y ot', () => {
+  const nombre = 'plan  2';
 
   // BUCLE
   const contrato_bucle = 'BUCLE';
-  const agencia_bucle = 'APOQUINDO';
+  const agencia_bucle = 'PROVIDENCIA';
   const proveedor_bucle = '330000659 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA';
   const actividad_bucle = 'Fibra Optica';
   const tipo_servicio_bucle = 'Fibra Optica';
