@@ -125,13 +125,13 @@ describe.skip('Creacion de cub y ot', () => {
     cy.get('#create-button').click();
   });
 
-  it('Crear OT', () => {
+  it.only('Crear OT', () => {
     cy.contains('Crear OT').click();
     cy.get(nombre_form).type('OT BUCLE ' + nombre);
     cy.get('#contratosUser > app-select > .form-control').select('BUCLE');
     cy.get('#cubicacion-de-ot > .form-control').select('Cub Bucle ' + nombre);
 
-    cy.get(oficina_form).select('0189 - S.FCO LAS CONDES');
+    cy.get(oficina_form).select('0619 - PROVIDENCIA');
     cy.get(solicitado_por_form).select('MARKETING');
     cy.get(direccion_form).type('Direccion cualquiera');
     cy.get(altura_form).type('150');

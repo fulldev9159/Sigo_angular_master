@@ -603,7 +603,8 @@ export class OtEffects {
         ofType(
           otActions.createOTError,
           otActions.AceptarRechazarIncialOTError,
-          otActions.AceptarProveedorOTError
+          otActions.AceptarProveedorOTError,
+          otActions.AceptarRechazarInformeAvanceOTError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(
