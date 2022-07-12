@@ -54,7 +54,7 @@
                   <option value="null" selected disabled>Seleccione un contrato</option>
                   <ng-container *ngFor="let contrato of contratosUser4Cub$|async">
                     <option [value]="contrato.contrato_id">
-                      {{ contrato.model_contrato_id.nombre }}
+                      {{ contrato.model_contrato_id.nombre  }} - id:{{contrato.contrato_id}}
                     </option>
                   </ng-container>
                 </ng-container>
@@ -68,7 +68,7 @@
                   <option value="null" selected disabled>Seleccione una agencia</option>
                   <ng-container *ngFor="let agencia of agencias4Cub$|async">
                     <option [value]="agencia.id">
-                      {{ agencia.nombre }}
+                      {{ agencia.nombre }} - id:{{ agencia.id}}
                     </option>
                   </ng-container>
                 </ng-container>
@@ -82,7 +82,7 @@
                   <option value="null" selected disabled>Seleccione un Proveedor</option>
                   <ng-container *ngFor="let prov of proveedores4Cub$|async">
                     <option [value]="prov.cmarco_has_proveedor_id">
-                      {{prov.codigo_acuerdo}} - {{ prov.nombre }}
+                      {{prov.codigo_acuerdo}} - {{ prov.nombre }} - id:{{prov.id}} - sub:{{prov.cmarco_has_proveedor_id}}
                     </option>
                   </ng-container>
                 </ng-container>
@@ -126,7 +126,7 @@
                     <option value="null" selected disabled>Seleccione una Actividad</option>
                     <ng-container *ngFor="let item of actividad4Cub$|async">
                       <option [value]="item.id">
-                        {{item.descripcion}}
+                        {{item.descripcion}} - id:{{item.id}}
                       </option>
                     </ng-container>
                   </ng-container>
@@ -140,7 +140,7 @@
                     <option value="null" selected disabled>Seleccione un Tipo Servicio Especialidad</option>
                     <ng-container *ngFor="let item of tipoServicioEspecialidad4Cub$|async">
                       <option [value]="item.id">
-                        {{item.descripcion}}
+                        {{item.descripcion}} - id: {{item.id}}
                       </option>
                     </ng-container>
                   </ng-container>

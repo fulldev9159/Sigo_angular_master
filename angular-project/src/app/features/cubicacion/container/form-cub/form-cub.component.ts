@@ -64,7 +64,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   // DATOS A USAR
   loginData$: Observable<SessionData>;
   tipoCubicacion4Cub$: Observable<TipoCubicacion4Cub[]> = of([]);
-  contratosUser4Cub$: Observable<ContratosUser[]>;
+  contratosUser4Cub$: Observable<ContratosUser[]> =
+    this.cubicacionFacade.contratosUser4Cub$();
   agencias4Cub$: Observable<Agencias4Cub[]> = of([]);
   proveedores4Cub$: Observable<Proveedores4Cub[]> = of([]);
   proveedores: Proveedores4Cub[] = [];
@@ -327,7 +328,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   onInitSetData(): void {
     this.loading$ = this.baseFacade.loading$();
     this.tipoCubicacion4Cub$ = this.cubicacionFacade.tipoCubicacion4cub$();
-    this.contratosUser4Cub$ = this.cubicacionFacade.contratosUser4Cub$();
     this.agencias4Cub$ = this.cubicacionFacade
       .agencias4cub$()
       .pipe(
