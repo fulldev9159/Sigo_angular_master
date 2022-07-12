@@ -31,7 +31,7 @@ describe('Cubicacion Test', () => {
 
   // DATOS REALES
   // MOVIL
-  const contrato_movil = 'UNIFICADO-2019-MOVIL';
+  const contrato_movil = 'SBE_2018';
   const agencia_movil = 'Región Metropolitana de Santiago';
   const proveedor_movil = '3300213678 - 2021-2023 GENERATEL SPA';
   const actividad_movil = 'INSTALACIONES EN EDIFICIO';
