@@ -38,6 +38,7 @@
         </ng-container>
       </ng-container>
     </app-select>
+    <span class="Alert" *ngIf="(adminContrato$|async).length ===0" style="color: #dc3545;"><fa-icon [icon]="alertIcon" style="font-size: 15px;color: #dc3545;"></fa-icon> No se han encontrado administradores de contrato asociados al proveedor. Favor contactar con el administrador de sistemas</span>
     <br>
   </div>
 
