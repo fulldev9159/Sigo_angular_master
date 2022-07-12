@@ -2,7 +2,7 @@ describe('Cubicacion Test', () => {
   // TESTING
   const contrato_test = 'BUCLE';
   const agencia_test = 'PROVIDENCIA';
-  const proveedor_test = '330000659 - NOKIA SOLUTIONS AND NETWORKS CHILE LTDA';
+  const proveedor_test = '330000659 - COBRA CHILE SERVICIOS S.A';
   const actividad_test = 'Fibra Optica';
   const tipo_servicio_test = 'Fibra Optica';
 
