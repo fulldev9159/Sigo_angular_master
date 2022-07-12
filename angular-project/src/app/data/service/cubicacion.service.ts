@@ -77,10 +77,12 @@ export class CubicacionService {
     );
   }
 
-  getActividades4Cub(): Observable<Response<{ items: Actividad4Cub[] }>> {
+  getActividades4Cub(
+    cmarco_has_proveedor: number
+  ): Observable<Response<{ items: Actividad4Cub[] }>> {
     return this.http.post<Response<{ items: Actividad4Cub[] }>>(
-      `${this.apiUrl}/configuration/actividad/getall`,
-      {}
+      `${this.apiUrl}/cubicacion/actividad_from_cmarco_has_proveedor/get`,
+      { cmarco_has_proveedor }
     );
   }
 

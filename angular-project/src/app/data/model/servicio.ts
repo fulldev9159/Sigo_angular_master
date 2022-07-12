@@ -92,6 +92,7 @@ export interface RequestGetServicios4Cub {
   agencia_id: number;
   cmarco_has_prov_id: number;
   tipo_servicio_id: number;
+  actividad_id: number;
 }
 
 export interface Servicios4Cub {

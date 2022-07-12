@@ -98,8 +98,8 @@ export class CubicacionEffects {
   getActividad4Cub$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getActividades4Cub),
-      concatMap(() =>
-        this.cubService.getActividades4Cub().pipe(
+      concatMap(({ cmarco_has_proveedor }) =>
+        this.cubService.getActividades4Cub(cmarco_has_proveedor).pipe(
           map(response => cubActions.getActividades4CubSuccess({ response })),
           catchError(err =>
             of(cubActions.getActividades4CubError({ error: err }))

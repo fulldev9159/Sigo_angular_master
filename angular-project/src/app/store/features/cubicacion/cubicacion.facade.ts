@@ -87,8 +87,10 @@ export class CubicacionFacade {
   }
 
   // GET ACTIVIDAD 4 CUB
-  public actividad4cub(): void {
-    this.store.dispatch(cubicacionActions.getActividades4Cub());
+  public actividad4cub(cmarco_has_proveedor: number): void {
+    this.store.dispatch(
+      cubicacionActions.getActividades4Cub({ cmarco_has_proveedor })
+    );
   }
 
   public actividad4cub$(): Observable<Actividad4Cub[]> {
