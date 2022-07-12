@@ -260,7 +260,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             const cmarco_has_prov_id =
               +this.formCub.get('cmarcoproveedor_id').value;
             const agencia_id = +this.formCub.get('agencia_id').value;
-            const actividad_id = +this.formFiltros.get('actividad_id');
+            const actividad_id = +this.formFiltros.get('actividad_id').value;
             const request: RequestGetServicios4Cub = {
               agencia_id,
               cmarco_has_prov_id,
