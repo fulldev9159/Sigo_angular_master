@@ -1,7 +1,7 @@
 <div class="row">
   <ng-container *ngIf="form">
     <ng-container *ngIf="form.get('servicios') as servicios">
-      <div class="col-xs-6 col-md-6">
+      <div class="col-xs-12 col-md-12">
         <app-card [classCardHeader]="'bg-info'">
           <ng-container card-header-title>Detalle servicios</ng-container>
           <ng-container card-body>
@@ -16,15 +16,29 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngFor="let servicio of servicios.controls">
-                  <tr>
-                    <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
-                    <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
-                    <td style="text-align: right">{{ servicio.get('cantidad_a_enviar').value }}</td>
-                    <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                    <td class="data-secundaria">{{ +servicio.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                  </tr>
+                <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
+                  <ng-container *ngFor="let servicio of servicios.controls">
+                    <tr>
+                      <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
+                      <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
+                      <td style="text-align: right">{{ servicio.get('cantidad_a_enviar').value }}</td>
+                      <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                      <td class="data-secundaria">{{ +servicio.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    </tr>
+                    <ng-container *ngFor="let uo of unidadesObra.controls">
+                      <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value" >
+                        <td class="label-table" style="background-color:#ff8e4e ;
+                        padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
+                        <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
+                        <td style="text-align: right">{{ uo.get('cantidad_a_enviar').value }}</td>
+                        <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                        <td class="data-secundaria">{{ +uo.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                      </tr>
+                    </ng-container>
+                  </ng-container>
                 </ng-container>
+                
+                
               </tbody>
             </table>
           </ng-container>
@@ -32,7 +46,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
+    <!-- <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
       <div class="col-xs-6 col-md-6">
         <app-card [classCardHeader]="'bg-info'">
           <ng-container card-header-title>Detalle Unidades Obra</ng-container>
@@ -62,7 +76,7 @@
           </ng-container>
         </app-card>
       </div>
-    </ng-container>
+    </ng-container> -->
   </ng-container>
 </div>
 

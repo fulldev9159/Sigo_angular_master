@@ -55,4 +55,8 @@ export interface DetalleActaUob {
   faltante_porcentaje_fraccion: number;
   unidad_obra_desc: string;
   valor_unitario_clp: number;
+
+  informe_has_servicio_id: number;
+  servicio_codigo: string;
+  servicio_descripcion: string;
 }

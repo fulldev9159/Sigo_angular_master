@@ -63,42 +63,60 @@ update test database:
     # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
     # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass clean"
     - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && sudo docker run --rm -v /home/zweicom/sigo_database/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate && cd OTEC && ./Z001.sh"
+    # MGESTOR CONTRATOS
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set tipo_contrato_id=3 where nombre='CONTRATO_ORDINARIO'\""
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='mgestor1'),(select id from contrato_marco where nombre='BUCLE'))\""
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='mgestor1'),(select id from contrato_marco where nombre='UNIFICADO_FIJA'))\""
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='mgestor1'),(select id from contrato_marco where nombre='UNIFICADO_MOVIL'))\""
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='mgestor1'),(select id from contrato_marco where nombre='CONTRATO_ORDINARIO'))\""
-
+    # CONFIGURAR BUCLE
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update contrato_marco set aprob_jerarq_inic=1 where nombre='BUCLE'\""
+    # CREAR MSUPERVISOR1
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('msupervisor1','12312312312','Supervisora Josefa','Antonella',22222222222,1,1,1,'asdasdas@asdasd.com',now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id)values((select id from usuario where username='msupervisor1'),(select id from contrato_marco where nombre='SBE_2018'))\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='msupervisor1'),(select id from usuario where username='msupervisor1'),9,17,now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update usuarioproxy set superior_proxy_id = (select id from usuario where username='msupervisor1') where id=2\""
-    # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=7\""
-    # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=8\""
+    # MSUPERVISOR1 CONTRATOS
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='msupervisor1'),(select id from contrato_marco where nombre='SBE_2018'))\""
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='msupervisor1'),(select id from contrato_marco where nombre='BUCLE'))\""
+    # AGREGAR PERGIL SUPERVIOR Y JEJFE MJEFEAREA1 AL USUARIO MSUPERVISOR1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='msupervisor1'),(select id from usuario where username='msupervisor1'),(select id from perfil where nombre='Supervisor (Telefónica)'),(select id from usuarioproxy where usuario_id=(select id from usuario where username='mjefearea1')),now(),now())\""
+    # ASOCIAR MSUPERVISOR1 con MGESTOR1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update usuarioproxy set superior_proxy_id = (select id from usuario where username='msupervisor1') where id=2\""
+    # AGREGAR CONTRATOS a NTRABAJADOR1
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='ntrabajador1'),(select id from contrato_marco where nombre='BUCLE'))\""
 
+    # CREAR ADMIN CONTRATO PARA GENERATEL SPA
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('gadmincontrato1','12312312312','Luk GENERATEL SPA','Antonella',22222222222,1,10097,1,'asdasdas@asdasd.com',now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gadmincontrato1'),(select id from usuario where username='gadmincontrato1'),2,NULL,now(),now())\""
+    # AGREGAR PERFIL ADMIN EECC A GADMINCONTRATO1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gadmincontrato1'),(select id from usuario where username='gadmincontrato1'),(select id from perfil where nombre='Administrador EECC'),NULL,now(),now())\""
+    # AGREGAR CONTRATOS A GADMINCONTRATO1
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gadmincontrato1'),(select id from contrato_marco where nombre='SBE_2018'))\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('gtrabajador1','12312312312','Ana GENERATEL SPA','Antonella',22222222222,1,10097,1,'asdasdas@asdasd.com',now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gtrabajador1'),(select id from usuario where username='gtrabajador1'),4,(select id from usuario where username='gadmincontrato1'),now(),now())\""
-    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gtrabajador1'),(select id from contrato_marco where nombre='BUCLE'));\""
     - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gadmincontrato1'),(select id from contrato_marco where nombre='UNIFICADO_FIJA'))\""
-    # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gadmincontrato1'),(select id from contrato_marco where nombre='SBE_2018'))\""
 
-  #MOVIL FIJO FALTA SIN UO
-  # Contrato_id:25  Unificado_2019_movil
-  # agencia_id:347  Santiago
-  # proveedor_id:10097   cmarco_has_proveedor_id:4   GENERALTEL
-  # actividad:1 ABANDONOS
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into servicio_has_uob values(9999,1,'2210',0,'C 012')\""
-  # #ORDINARIO No hay contrato ordinario
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into cmarco_has_proveedor(contrato_marco_id, proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable) select 3,proveedor_id,codigo_acuerdo,sociedad_cod,fecha_inicio,fecha_fin,fecha_contable from cmarco_has_proveedor where id=4\""
-  # #BUCLE ALGUNOS NO TIENEN UO ASOCIADO
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,76,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
-  # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into agencia_preciario(agencia_id,tipo_servicio_id,monto,tipo_moneda_id,fecha_inicio,fecha_fin,estado) values (347,33,5043,2,'2022-03-28 16:16:05.643772','2027-05-28 22:11:31.000000',1)\""
+    # CREAR SUPERVISOR DE TRABAJOS PARA GENERATEL SPA
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('gtrabajador1','12312312312','Ana GENERATEL SPA','Antonella',22222222222,1,10097,1,'asdasdas@asdasd.com',now(),now())\""
+    # AGREGAR PERFIL A GTRABAJADOR1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='gtrabajador1'),(select id from usuario where username='gtrabajador1'),(select id from perfil where nombre='Trabajador EECC'),(select id from usuario where username='gadmincontrato1'),now(),now())\""
+    # AGREGAR CONTRATOS A GTRABAJADOR1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='gtrabajador1'),(select id from contrato_marco where nombre='BUCLE'));\""
+
+    # CREAR ADMIN CONTRATO PARA COBRA CHILE
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('ccadmincontrato1','12312312312','Luk COBRA CHILE','Antonella',22222222222,1,15,1,'asdasdas@asdasd.com',now(),now())\""
+    # AGREGAR PERFIL ADMIN EECC A GADMINCONTRATO1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='ccadmincontrato1'),(select id from usuario where username='ccadmincontrato1'),(select id from perfil where nombre='Administrador EECC'),NULL,now(),now())\""
+    # AGREGAR CONTRATOS A GADMINCONTRATO1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='ccadmincontrato1'),(select id from contrato_marco where nombre='SBE_2018'))\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='ccadmincontrato1'),(select id from contrato_marco where nombre='UNIFICADO_FIJA'))\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='ccadmincontrato1'),(select id from contrato_marco where nombre='BUCLE'))\""
+
+    # CREAR SUPERVISOR DE TRABAJOS PARA COBRA CHILE
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario(username,rut,nombres,apellidos,celular,estado,proveedor_id,area_id,email,created_at,updated_at)values('cctrabajador1','12312312312','Ana COBRA CHILE','Antonella',22222222222,1,15,1,'asdasdas@asdasd.com',now(),now())\""
+    # AGREGAR PERFIL A GTRABAJADOR1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuarioproxy(usuario_orig,usuario_id,perfil_id,superior_proxy_id,created_at,updated_at)values((select id from usuario where username='cctrabajador1'),(select id from usuario where username='cctrabajador1'),(select id from perfil where nombre='Trabajador EECC'),(select id from usuario where username='ccadmincontrato1'),now(),now())\""
+    # AGREGAR CONTRATOS A GTRABAJADOR1
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"insert into usuario_has_contrato(usuario_id,contrato_id) values((select id from usuario where username='cctrabajador1'),(select id from contrato_marco where nombre='BUCLE'));\""
+
+    # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=7\""
+    # - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass OTEC -e \"update moneda_factor_conversion set factor=1 where id=8\""
+
   tags:
     - repo-machine
   except:

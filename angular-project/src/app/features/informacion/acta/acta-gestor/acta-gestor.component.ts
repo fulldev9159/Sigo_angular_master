@@ -237,6 +237,10 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
               []
             ),
             cantidad_a_enviar: new FormControl(`${uo.faltante_cantidad}`, []),
+            informe_has_servicio_id: new FormControl(
+              `${uo.informe_has_servicio_id}`,
+              []
+            ),
           })
         );
       });
@@ -330,6 +334,10 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
                 Validators.min(0),
                 Validators.max(uo.faltante_cantidad),
               ]
+            ),
+            informe_has_servicio_id: new FormControl(
+              `${uo.informe_has_servicio_id}`,
+              []
             ),
             selected: new FormControl(false, []),
           })
