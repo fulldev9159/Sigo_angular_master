@@ -17,13 +17,19 @@
   <li>
     <a href="" *ngIf="(loginAuth$ |async).perfil==='Trabajador EECC'||(loginAuth$ |async).perfil==='Administrador EECC'" [routerLink]="['informe-avance',ot_id]" [routerLinkActive]="['is-active']">
       <span class="icon pi pi-fw pi-file"></span>
-      <span class="tab-title">Informe de Avances</span>
+      <span class="tab-title">Informe de Avance</span>
     </a>
   </li>
   <li >
-    <a href="" [routerLink]="['acta',ot_id]" [routerLinkActive]="['is-active']">
-      <span class="icon pi pi-fw pi-file-o"></span>
-      <span class="tab-title">Acta</span>
+    <a href="" [routerLink]="['generar-acta',ot_id]" [routerLinkActive]="['is-active']" *ngIf="(loginAuth$ |async).rol==='ADM_EECC'">
+      <span class="icon pi pi-fw pi-cog"></span>
+      <span class="tab-title">Generar Acta</span>
+    </a>
+  </li>
+  <li >
+    <a href="" [routerLink]="['validar-acta',ot_id]" [routerLinkActive]="['is-active']" *ngIf="(loginAuth$ |async).rol==='GESTOR'">
+      <span class="icon pi pi-fw pi-file"></span>
+      <span class="tab-title">Validar Acta</span>
     </a>
   </li>
   <li>

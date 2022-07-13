@@ -21,11 +21,11 @@ import { map, withLatestFrom } from 'rxjs/operators';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 
 @Component({
-  selector: 'app-acta-jerarquia',
-  templateUrl: './acta-jerarquia.component.html',
-  styleUrls: ['./acta-jerarquia.component.scss'],
+  selector: 'app-validar-acta',
+  templateUrl: './validar-acta.component.html',
+  styleUrls: ['./validar-acta.component.scss'],
 })
-export class ActaJerarquiaComponent implements OnInit, OnDestroy {
+export class ValidarActaComponent implements OnInit, OnDestroy {
   // subscription: Subscription = new Subscription();
   // loginAuth$: Observable<any>;
   // detalleOt$: Observable<DataRespGetDetalleOT>;

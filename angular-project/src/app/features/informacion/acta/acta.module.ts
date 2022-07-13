@@ -5,8 +5,8 @@ import { ActaRoutingModule } from './acta-routing.module';
 import { ActaComponent } from './acta.component';
 import { UiModule } from '@uiOT/ui.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActaGestorComponent } from './acta-gestor/acta-gestor.component';
-import { ActaJerarquiaComponent } from './acta-jerarquia/acta-jerarquia.component';
+import { GenararActaComponent } from './generar-acta/generar-acta.component';
+import { ValidarActaComponent } from './validar-acta/validar-acta.component';
 
 import { ActaTotalFormComponent } from './component/acta-total-form/acta-total-form.component';
 import { ActaPorcentajeFormComponent } from './component/acta-porcentaje-form/acta-porcentaje-form.component';
@@ -15,8 +15,8 @@ import { ActaServicioFormComponent } from './component/acta-servicio-form/acta-s
 @NgModule({
   declarations: [
     ActaComponent,
-    ActaGestorComponent,
-    ActaJerarquiaComponent,
+    GenararActaComponent,
+    ValidarActaComponent,
     ActaTotalFormComponent,
     ActaPorcentajeFormComponent,
     ActaServicioFormComponent,

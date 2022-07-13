@@ -375,7 +375,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
             class: 'p-button-rounded p-button-success p-mr-2',
             label: 'Generar Acta',
             onClick: (event: Event, item) => {
-              this.router.navigate(['/app/informacion/acta', item.id]);
+              this.router.navigate(['/app/informacion/generar-acta', item.id]);
             },
           });
         }

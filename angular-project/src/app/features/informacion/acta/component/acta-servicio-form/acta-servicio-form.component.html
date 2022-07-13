@@ -37,7 +37,7 @@
 
                   <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
                     <ng-container *ngFor="let uo of unidadesObra.controls"> 
-                      <tr>
+                      <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value">
                         <td  style="background-color:#ff8e4e ;
                         padding-left: 22px !important;">
                           <input type="checkbox" [formControl]="uo.get('selected')">
