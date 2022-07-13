@@ -20,9 +20,9 @@
                   <tr>
                     <th>Cod.</th>
                     <th>Descripción</th>
-                    <th style="text-align: right">Cant. informe av.</th>
-                    <th style="text-align: right">Cant. Pagada</th>
-                    <th style="text-align: right">Cant. a Enviar</th>
+                    <!-- <th style="text-align: right">Cant. informe av.</th>
+                    <th style="text-align: right">Cant. Pagada</th> -->
+                    <th style="text-align: right">Cant. a Pagar</th>
                     <th>Precio Un.</th>
                     <th>Total a pagar</th>
                   </tr>
@@ -34,8 +34,8 @@
                     <tr *ngIf="servicio.tipo==='PAGO'">
                       <td class="label-table">{{servicio.codigo}}</td>
                       <td class="data-secundaria">{{ servicio.descripcion |titlecase}}</td>
-                      <td style="text-align: right" class="data-secundaria">---</td>
-                      <td style="text-align: right"class="data-secundaria">---</td>
+                      <!-- <td style="text-align: right" class="data-secundaria">---</td>
+                      <td style="text-align: right"class="data-secundaria">---</td> -->
                       <td>
                         {{servicio.pago_cantidad}}
                       </td>
@@ -45,8 +45,8 @@
                     <tr *ngIf="servicio.tipo==='REFERENCIAL'" style="background-color: #d6d6d6;">
                       <td style="font-size: 11px !important;">{{servicio.codigo}}</td>
                       <td class="data-secundaria" style="font-size: 11px !important;">{{ servicio.descripcion |titlecase}}</td>
-                      <td style="text-align: right" class="data-secundaria"></td>
-                      <td style="text-align: right"class="data-secundaria"></td>
+                      <!-- <td style="text-align: right" class="data-secundaria"></td>
+                      <td style="text-align: right"class="data-secundaria"></td> -->
                       <td>
                       </td>
                       <td class="data-secundaria"></td>
@@ -57,8 +57,8 @@
                       <td class="label-table" style="background-color:#ff8e4e ;
                       padding-left: 22px !important;">{{uo.codigo}}</td>
                       <td class="data-secundaria">{{ uo.descripcion |titlecase}}</td>
-                      <td style="text-align: right" class="data-secundaria">---</td>
-                      <td style="text-align: right"class="data-secundaria">---</td>
+                      <!-- <td style="text-align: right" class="data-secundaria">---</td>
+                      <td style="text-align: right"class="data-secundaria">---</td> -->
                       <td>
                         {{uo.pago_cantidad}}
                       </td>
