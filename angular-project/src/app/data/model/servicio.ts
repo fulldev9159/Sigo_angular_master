@@ -140,3 +140,54 @@ export interface DetallesServicio4Cub {
   servicio_unidad_codigo: string;
   servicio_unidad_descripcion: string;
 }
+
+export interface DetalleServicioLastActa {
+  acta_id: number;
+  id: number;
+  informe_has_servicio_id: number;
+  model_informe_has_servicio_id: {
+    actividad_id: number;
+    adicional_aceptacion_estado: string;
+    adicional_aceptacion_fecha: Date;
+    adicional_aceptacion_usuario_id: number;
+    adicional_causas_rechazo_id: number;
+    adicional_rechazo_observacion: string;
+    cantidad: number;
+    evidencia_id: number;
+    factor_conversion_precio: number;
+    id: number;
+    informe_avance_id: number;
+    model_servicio_id: ModelServicio;
+    precio_tipo_moneda_id: number;
+    prov_has_serv_precio: number;
+    puntos_baremos: number;
+    requiere_evidencia: boolean;
+    servicio_id: number;
+    tipo_servicio_id: number;
+    unidad_id: number;
+  };
+  pago_cantidad: number;
+  pago_porcentaje: number;
+}
+
+export interface ModelInformeHasServicio {
+  id: number;
+  informe_avance_id: number;
+  servicio_id: number;
+  actividad_id: number;
+  tipo_servicio_id: number;
+  cantidad: number;
+  unidad_id: number;
+  puntos_baremos: number;
+  prov_has_serv_precio: number;
+  precio_tipo_moneda_id: number;
+  factor_conversion_precio: number;
+  adicional_aceptacion_estado: string;
+  adicional_aceptacion_usuario_id?: any;
+  adicional_aceptacion_fecha?: any;
+  adicional_causas_rechazo_id?: any;
+  adicional_rechazo_observacion?: any;
+  requiere_evidencia: boolean;
+  evidencia_id?: any;
+  model_servicio_id: ModelServicio;
+}

@@ -212,6 +212,10 @@ export const getActaTiposPago = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.actaTiposPago
 );
+export const getLastActa = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.lastActa
+);
 
 export const getDetalleActaServicio = createSelector(
   selectOt,

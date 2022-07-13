@@ -7,6 +7,7 @@ import { UltimoTipoPagoResolver } from './resolvers/ultimo-tipo-pago.resolver';
 import { TiposPagoResolver } from './resolvers/tipos-pago.resolver';
 import { DetalleServicioResolver } from './resolvers/detalle-servicio.resolver';
 import { DetalleUobResolver } from './resolvers/detalle-uob.resolver';
+import { LastActaResolver } from './resolvers/last-acta.resolver';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       tiposPago: TiposPagoResolver,
       detalleServicio: DetalleServicioResolver,
       detalleUob: DetalleUobResolver,
+      lastActa: LastActaResolver,
     },
   },
 ];

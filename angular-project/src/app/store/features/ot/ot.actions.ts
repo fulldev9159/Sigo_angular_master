@@ -40,6 +40,7 @@ import {
   DetalleActaUob,
   RegistroLibroDeObras,
   RequestAutorizarInformeAvance,
+  LastActa,
 } from '@data';
 
 // GET OTS
@@ -689,6 +690,12 @@ export const getLibroObrasSuccess = createAction(
 export const getLibroObrasError = createAction(
   '[OT] GET getLibroObras Error',
   props<{ error: any }>()
+);
+
+//  GET LAST ACTA
+export const getLastActaSuccess = createAction(
+  '[OT] GET getLastActa Success',
+  props<{ response: Response<LastActa> }>()
 );
 
 export const resetData = createAction('[ResetData] ResetData');

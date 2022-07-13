@@ -41,6 +41,7 @@ import {
   DetalleActaUob,
   OT,
   RequestAutorizarInformeAvance,
+  LastActa,
 } from '@data';
 @Injectable({
   providedIn: 'root',
@@ -571,5 +572,14 @@ export class OtFacade {
     request: RequestAutorizarInformeAvance
   ): void {
     this.store.dispatch(otActions.AceptarRechazarInformeAvanceOT({ request }));
+  }
+
+  // GET LAST ACTA
+  public getLastActaSuccess(response: Response<LastActa>): void {
+    this.store.dispatch(otActions.getLastActaSuccess({ response }));
+  }
+
+  public getLastActa$(): Observable<LastActa> {
+    return this.store.select(otSelectors.getLastActa);
   }
 }
