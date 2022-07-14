@@ -25,11 +25,11 @@ interface Detalle {
 }
 
 @Component({
-  selector: 'app-acta-gestor',
-  templateUrl: './acta-gestor.component.html',
-  styleUrls: ['./acta-gestor.component.scss'],
+  selector: 'app-generar-acta',
+  templateUrl: './generar-acta.component.html',
+  styleUrls: ['./generar-acta.component.scss'],
 })
-export class ActaGestorComponent implements OnInit, OnDestroy {
+export class GenararActaComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   tiposPago$: Observable<ActaTipoPago[]> = this.otFacade.getActaTiposPago$();
   detalleActa$: Observable<{
@@ -237,6 +237,10 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
               []
             ),
             cantidad_a_enviar: new FormControl(`${uo.faltante_cantidad}`, []),
+            informe_has_servicio_id: new FormControl(
+              `${uo.informe_has_servicio_id}`,
+              []
+            ),
           })
         );
       });
@@ -330,6 +334,10 @@ export class ActaGestorComponent implements OnInit, OnDestroy {
                 Validators.min(0),
                 Validators.max(uo.faltante_cantidad),
               ]
+            ),
+            informe_has_servicio_id: new FormControl(
+              `${uo.informe_has_servicio_id}`,
+              []
             ),
             selected: new FormControl(false, []),
           })

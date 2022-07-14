@@ -30,10 +30,7 @@ export class BaseEffects {
       ofType(baseActions.getAPIVersion),
       concatMap(() =>
         this.authService.getAPIVersion().pipe(
-          map(response => {
-            console.log('HOLA', response);
-            return baseActions.getAPIVersionSuccess({ response });
-          }),
+          map(response => baseActions.getAPIVersionSuccess({ response })),
           catchError(error => {
             console.log('ERR', error);
             return of(baseActions.getAPIVersionError({ error }));

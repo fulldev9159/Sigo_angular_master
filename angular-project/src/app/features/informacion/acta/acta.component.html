@@ -1,6 +1,6 @@
-<ng-container *ngIf="(loginAuth$ |async).perfil==='Administrador EECC'||(loginAuth$ |async).perfil==='Gestor/JP'">
-  <app-acta-gestor></app-acta-gestor>
+<ng-container *ngIf="(loginAuth$ |async).rol==='ADM_EECC'">
+  <app-generar-acta></app-generar-acta>
 </ng-container>
-<ng-container *ngIf="(loginAuth$ |async).perfil==='Jefe de Área Telefónica'|| (loginAuth$ |async).perfil==='SubGerente Telefónica'|| (loginAuth$ |async).perfil==='Gerente Telefónica'">
-  <app-acta-jerarquia></app-acta-jerarquia>
+<ng-container *ngIf="(loginAuth$ |async).rol==='GESTOR'">
+  <app-validar-acta></app-validar-acta>
 </ng-container>

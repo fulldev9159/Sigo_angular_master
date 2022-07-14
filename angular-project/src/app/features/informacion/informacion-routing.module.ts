@@ -33,7 +33,12 @@ const routes: Routes = [
           import('./anexos/anexos.module').then(m => m.AnexosModule),
       },
       {
-        path: 'acta/:id',
+        path: 'generar-acta/:id',
+        loadChildren: () =>
+          import('./acta/acta.module').then(m => m.ActaModule),
+      },
+      {
+        path: 'validar-acta/:id',
         loadChildren: () =>
           import('./acta/acta.module').then(m => m.ActaModule),
       },

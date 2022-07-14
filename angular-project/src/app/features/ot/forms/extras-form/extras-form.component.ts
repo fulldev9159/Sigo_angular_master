@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { AdminContrato4OT, Proyectos } from '@data';
 
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-extras-form',
   templateUrl: './extras-form.component.html',
@@ -13,6 +14,7 @@ export class ExtrasFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   proyectos$: Observable<Proyectos[]> = of([]);
   adminContrato$: Observable<AdminContrato4OT[]> = of([]);
+  alertIcon = faExclamationTriangle;
 
   msgsWrongDates = [
     {

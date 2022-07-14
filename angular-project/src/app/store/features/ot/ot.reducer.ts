@@ -33,6 +33,7 @@ import {
   DetalleActaServicio,
   DetalleActaUob,
   RegistroLibroDeObras,
+  LastActa,
 } from '@data';
 
 export const otFeatureKey = 'ot';
@@ -80,6 +81,9 @@ export interface StateOt {
   // CATEGORIA ARCHIVO
   categoriaArchivo: CategoriaArchivo[];
   registroLibroObras: RegistroLibroDeObras[];
+
+  // LAST ACTA
+  lastActa: LastActa;
 
   // ////
   filtro_propietario: string;
@@ -151,6 +155,9 @@ export const initialStateOt: StateOt = {
 
   // LIBRO OBRAS
   registroLibroObras: [],
+
+  // LAST ACTA
+  lastActa: null,
 
   // ////
   filtro_propietario: '',
@@ -531,6 +538,10 @@ export const reducerOt = createReducer(
       //   : [],
     };
   }),
+  on(OtActions.getLastActaSuccess, (state, { response }) => ({
+    ...state,
+    lastActa: response.data,
+  })),
 
   on(OtActions.resetData, (state, payload) => ({
     ...initialStateOt,

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { delay, map } from 'rxjs/operators';
-import { DetalleActaUob, Response } from '@data/model';
+import { DetalleActaUob, LastActa, Response } from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +43,16 @@ export class ActaService {
       );
   }
 
+  // GET LAST ACTA
+  getLastActa(ot_id: number): Observable<Response<LastActa>> {
+    return this.http.post<Response<LastActa>>(
+      `${this.apiUrl}/ot/acta/detalle/get_last`,
+      {
+        ot_id,
+      }
+    );
+  }
+
   sendGeneracionActa(
     ot_id: number,
     tipo_pago: string,
@@ -69,10 +79,5 @@ export class ActaService {
       tipo_pago,
       detalle,
     });
-
-    // return of({
-    //   status: { code: 0, desc: 'OK' },
-    //   data: {},
-    // }).pipe(delay(3000));
   }
 }

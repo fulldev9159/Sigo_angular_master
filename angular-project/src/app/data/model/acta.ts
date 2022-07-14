@@ -1,3 +1,6 @@
+import { DetalleServicioLastActa } from './servicio';
+import { DetalleUnidadObraLastActa } from './unidad-obra';
+
 export interface ActaTipoPago {
   id: number;
   descripcion: string;
@@ -55,4 +58,23 @@ export interface DetalleActaUob {
   faltante_porcentaje_fraccion: number;
   unidad_obra_desc: string;
   valor_unitario_clp: number;
+
+  informe_has_servicio_id: number;
+  servicio_codigo: string;
+  servicio_descripcion: string;
+}
+
+export interface LastActa {
+  created_at: Date;
+  flg_pagado: boolean;
+  id: number;
+  informe_avance_id: number;
+  many_acta_detalle_servicio?: DetalleServicioLastActa[];
+  many_acta_detalle_uob?: DetalleUnidadObraLastActa[];
+  observacion: string;
+  ot_id: number;
+  tipo_pago: string;
+  validacion_estado: string;
+  validacion_fecha: Date;
+  validacion_usuario_id: Date;
 }

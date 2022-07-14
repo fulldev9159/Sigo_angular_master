@@ -59,3 +59,17 @@ export interface Materiales4Cub {
   material_unidad_codigo: string;
   material_unidad_descripcion: string;
 }
+
+export interface MaterialesLastActa {
+  id: number;
+  material_cod: string;
+  informe_has_uob_id: number;
+  cantidad: number;
+  unidad_id: number;
+  tipo_moneda_id: number;
+  valor: number;
+  codigo_sap: string;
+  origen: string;
+  factor_conversion: number;
+  model_material_cod: ModelMaterial;
+}

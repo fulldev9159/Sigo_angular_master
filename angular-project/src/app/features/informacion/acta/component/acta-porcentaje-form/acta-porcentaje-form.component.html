@@ -6,16 +6,12 @@
     </div>
     <div class="col-xs-12 col-md-5"></div>
     <ng-container *ngIf="form.get('servicios') as servicios">
-      <div class="col-xs-6 col-md-6" style="margin-top: 10px">
+      <div class="col-xs-12 col-md-12" style="margin-top: 10px">
         <app-card [classCardHeader]="'bg-info'">
           <ng-container card-header-title>Detalle servicios</ng-container>
           <ng-container card-body>
             <table style="width:100%">
               <thead>
-                <!-- <tr>
-                  <th>Servicios</th>
-                  <th colspan="3">Cantidad</th>
-                </tr> -->
                 <tr>
                   <th>Cod.</th>
                   <th>Descripción</th>
@@ -37,6 +33,20 @@
                     <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                     <td class="data-secundaria">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) * +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                   </tr>
+                  <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
+                    <ng-container *ngFor="let uo of unidadesObra.controls"> 
+                      <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value">
+                        <td class="label-table" style="background-color:#ff8e4e ;
+                        padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
+                        <td class="data-secundaria">{{ uo.get('descripcion').value |titlecase}}</td>
+                        <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}</td>
+                        <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value - uo.get('cantidad_a_enviar').value }}</td>
+                        <td style="text-align: right" class="data-secundaria">{{ (uo.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
+                        <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                        <td class="data-secundaria"> {{ (uo.get('cantidad_total').value * (porcentaje.value / 100))* +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                      </tr>
+                    </ng-container>
+                  </ng-container>
                 </ng-container>
               </tbody>
             </table>
@@ -45,17 +55,13 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
+    <!-- <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
       <div class="col-xs-6 col-md-6" style="margin-top: 10px">
         <app-card [classCardHeader]="'bg-info'">
           <ng-container card-header-title>Detalle Unidades Obra</ng-container>
           <ng-container card-body>
             <table style="width:100%">
               <thead>
-                <!-- <tr>
-                  <th>Servicios</th>
-                  <th colspan="3">Cantidad</th>
-                </tr> -->
                 <tr>
                   <th>Cod.</th>
                   <th>Descripción</th>
@@ -83,7 +89,7 @@
           </ng-container>
         </app-card>
       </div>
-    </ng-container>
+    </ng-container> -->
 
     
   </ng-container>
