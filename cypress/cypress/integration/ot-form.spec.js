@@ -1,4 +1,5 @@
 describe('OT Test', () => {
+  let data;
   // BASE
   const nombre_form = 'app-input > #nombre-ot';
   const contrato_form = '#contratosUser > app-select > .form-control';
@@ -34,7 +35,7 @@ describe('OT Test', () => {
   // ORDINARIO
   const carta_adj_form =
     '#control_carta_adjudicacion > app-input > .form-control';
-  const fecha_adj_form = '#control_fecha_adjudicacion>p-calendar';
+  // const fecha_adj_form = '#control_fecha_adjudicacion>p-calendar';
   const numero_pedido_form =
     '#control_numero_pedido > app-input > .form-control';
   const materia_form = '#control_materia > app-input > .form-control';
@@ -82,7 +83,7 @@ describe('OT Test', () => {
 
   const ordinario_form = [
     carta_adj_form,
-    fecha_adj_form,
+    // fecha_adj_form,
     numero_pedido_form,
     materia_form,
   ];
@@ -100,6 +101,10 @@ describe('OT Test', () => {
     cy.contains('Crear OT').click();
 
     cy.get('#create-button').should('be.disabled');
+
+    cy.fixture('data').then(fData => {
+      data = fData;
+    });
   });
 
   it('Revisar cambio de formulario entre tipos de contrato', () => {
@@ -112,7 +117,9 @@ describe('OT Test', () => {
     cy._shoul_not_exist(extras_form);
 
     // ::::: REVISION CONTRATO BUCLE
-    cy.get('#contratosUser > app-select > .form-control').select('BUCLE');
+    cy.get('#contratosUser > app-select > .form-control').select(
+      data.bucle.cub.nombre_contrato
+    );
     cy.get('#cubicacion-de-ot > .form-control').select('Cub Bucle');
 
     cy._shoul_not_exist(movil_form);
@@ -125,52 +132,57 @@ describe('OT Test', () => {
     cy._shoul_be_enabled(extras_form);
 
     // :::::: REVISION FORMULARIO MOVIL
-    // cy.get('#contratosUser > app-select > .form-control').select('SBE');
-    // cy.get('#cubicacion-de-ot > .form-control').select('Cub Movil');
+    cy.get('#contratosUser > app-select > .form-control').select(
+      data.movil.cub.nombre_contrato
+    );
+    cy.get('#cubicacion-de-ot > .form-control').select('Cub Movil');
 
-    // cy._shoul_not_exist(bucle_form);
-    // cy._shoul_not_exist(fijo_form);
-    // cy._shoul_not_exist(ordinario_form);
+    cy._shoul_not_exist(bucle_form);
+    cy._shoul_not_exist(fijo_form);
+    cy._shoul_not_exist(ordinario_form);
 
-    // cy._shoul_be_enabled(movil_form);
-    // cy._shoul_be_enabled([pmo_form]);
-    // cy._shoul_be_disabled([linea_presupuestaria_form, pep2_form]);
-    // cy._shoul_be_enabled(extras_form);
+    cy._shoul_be_enabled([plan_proyecto_form]);
+    cy._shoul_be_disabled([sitio_form]);
+    cy._shoul_be_disabled(sustento_form);
+    cy._shoul_be_enabled(extras_form);
 
     // ::::: REVISION CONTRATO ORDINARIO
-    // cy.get('#contratosUser > app-select > .form-control').select(
-    //   'Contrato Ordinario'
-    // );
-    // cy.get('#cubicacion-de-ot > .form-control').select('Cub Ordinario');
+    cy.get('#contratosUser > app-select > .form-control').select(
+      data.ordinario.cub.nombre_contrato
+    );
+    cy.get('#cubicacion-de-ot > .form-control').select('Cub Ordinario');
 
-    // cy._shoul_not_exist(bucle_form);
-    // cy._shoul_not_exist(fijo_form);
-    // cy._shoul_not_exist(movil_form);
+    cy._shoul_not_exist(bucle_form);
+    cy._shoul_not_exist(fijo_form);
+    cy._shoul_not_exist(movil_form);
 
-    // cy._shoul_be_enabled(ordinario_form);
-    // cy._shoul_be_enabled([pmo_form]);
-    // cy._shoul_be_disabled([linea_presupuestaria_form, pep2_form]);
-    // cy._shoul_be_enabled(extras_form);
+    cy._shoul_be_enabled(ordinario_form);
+    cy._shoul_be_enabled([pmo_form]);
+    cy._shoul_be_disabled([linea_presupuestaria_form, pep2_form]);
+    cy._shoul_be_enabled(extras_form);
 
     // ::::: REVISION CONTRATO FIJO
-    // cy.get('#contratosUser > app-select > .form-control').select(
-    //   'UNIFICADO-2019-FIJA'
-    // );
-    // cy.get('#cubicacion-de-ot > .form-control').select('Cub Fijo');
+    cy.get('#contratosUser > app-select > .form-control').select(
+      data.fijo.cub.nombre_contrato
+    );
+    cy.get('#cubicacion-de-ot > .form-control').select('Cub Fijo');
 
-    // cy._shoul_not_exist(bucle_form);
-    // cy._shoul_not_exist(ordinario_form);
-    // cy._shoul_not_exist(movil_form);
+    cy._shoul_not_exist(bucle_form);
+    cy._shoul_not_exist(ordinario_form);
+    cy._shoul_not_exist(movil_form);
 
-    // cy._shoul_be_enabled(fijo_form);
-    // cy._shoul_be_enabled([pmo_form]);
-    // cy._shoul_be_disabled([linea_presupuestaria_form, pep2_form]);
-    // cy._shoul_be_enabled(extras_form);
+    cy._shoul_be_enabled([tipo_numpero_form]);
+    cy._shoul_be_disabled([numero_interno]);
+    cy._shoul_be_enabled([pmo_form]);
+    cy._shoul_be_disabled([linea_presupuestaria_form, pep2_form]);
+    cy._shoul_be_enabled(extras_form);
   });
 
-  it.only('Revisar sustento financiero', () => {
+  it('Revisar sustento financiero', () => {
     // ::::: REVISION USANDO CONTRATO BUCLE
-    cy.get('#contratosUser > app-select > .form-control').select('BUCLE');
+    cy.get('#contratosUser > app-select > .form-control').select(
+      data.bucle.cub.nombre_contrato
+    );
     cy.get('#cubicacion-de-ot > .form-control').select('Cub Bucle');
 
     cy._shoul_be_enabled([pmo_form]);
