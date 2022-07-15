@@ -72,7 +72,7 @@ integrations test cypress:
   stage: integrations test
   # when: manual
   needs:
-    - update test database
+    - reset database testing
   script:
     - cd angular-project
     - npm ci
