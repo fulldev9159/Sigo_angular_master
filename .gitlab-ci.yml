@@ -67,22 +67,25 @@ reset database testing:
   except:
     - master
 
-# integrations test cypress:
-#   image: cypress/browsers:node12.14.1-chrome85-ff81
-#   stage: integrations test
-#   when: manual
-#   needs:
-#     - update test database
-#   script:
-#     - cd angular-project
-#     - npm ci
-#     - npm start & ./node_modules/.bin/wait-on http://localhost:4201
-#     - cd ../cypress
-#     - npm ci
-#     - npx cypress run
-#   only:
-#     - develop
+integrations test cypress:
+  image: cypress/browsers:node12.14.1-chrome85-ff81
+  stage: integrations test
+  # when: manual
+  needs:
+    - update test database
+  script:
+    - cd angular-project
+    - npm ci
+    - npm start & ./node_modules/.bin/wait-on http://localhost:4201
+    - cd ../cypress
+    - npm ci
+    - npx cypress run
+  only:
+    - develop
 
+## JR: POR MOTIVOS DE TIEMPO NO PUEDO MANTENER DOS PLATAFORMAS DE TESTING, LOS TEST DE ACEPTACION FUERON MIGRADOS A CYPRESS.
+## SI BIEN ROBOTFRAMEWORK ES UNA HERRAMIENTA ENFOCADA A TEST DE ACEPTACIÖN Y DEBERÏA USARSE ESTA PARA ESO.
+## LA IDEA DE USAR ROBOTFRAMEWORK ERA SU FACILIDAD EN EL LENGUAJE PARA QUE CUALQUIERA PUDIERA CREAR LOS TEST, PERO COMO NO HAY TIEMPO NI GENTE ESTA VENTAJA NO SE HA USADO
 # acceptance test:
 #   <<: *connect_gcr
 #   stage: acceptance test

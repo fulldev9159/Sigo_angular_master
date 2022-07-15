@@ -1,0 +1,140 @@
+{
+  "bucle": {
+    "cub": {
+      "nombre_contrato": "BUCLE",
+      "agencia": "PROVIDENCIA",
+      "proveedor": "330000659 - COBRA CHILE SERVICIOS S.A.",
+      "actividad_1": "Fibra Optica",
+      "tipo_srv_1": "Fibra Optica",
+      "srv_1": {
+        "nombre": "J757 - DESMONTAR CABLE DE FIBRA OPTICA EN AEREO",
+        "precio_num": 171.57,
+        "precio_text": "$171,57",
+        "codigo": "J757",
+        "uob_1": {
+          "nombre": "D351 - KIT RETENCION FIBRA 14 MM",
+          "precio_num": 57000,
+          "precio_text": "$57.000",
+          "codigo": "D351"
+        },
+        "uob_2": {
+          "nombre": "D353 - GRILLETE",
+          "precio_num": 950,
+          "precio_text": "$950",
+          "codigo": "D353"
+        }
+      },
+      "srv_2": {
+        "nombre": "J756 - INSTALAR CABLE DE FIBRA OPTICA AEREO",
+        "precio_num": 457.52,
+        "precio_text": "$457,52",
+        "codigo": "J756",
+        "uob_1": {
+          "nombre": "H089 - CABLE AEREO 32 FO/PKP (CON LASHING RECUBIERTO)",
+          "precio_num": 0,
+          "precio_text": "$0",
+          "codigo": "H089"
+        },
+        "uob_2": {
+          "nombre": "H299 - CABLE AEREO 24FO PKP-250",
+          "precio_num": 0,
+          "precio_text": "$0",
+          "codigo": "H299"
+        },
+        "uob_3": {
+          "nombre": "G027 - LASHING ACERO INOXIDABLE",
+          "precio_num": 0,
+          "precio_text": "$0",
+          "codigo": "G027"
+        },
+        "uob_4": {
+          "nombre": "H100 - TARJETA IDENTIFICACION F.O.",
+          "precio_num": 650,
+          "precio_text": "$650",
+          "codigo": "H100"
+        }
+      },
+      "srv_3": {
+        "nombre": "F023 - FUSION DE F.O. PARA FTTX",
+        "precio_num": 2287.6,
+        "precio_text": "$2.287,6",
+        "codigo": "F023",
+        "uob_1": {
+          "nombre": "E027 - JUMPER F.O. E2000-APC/FC-UPC - 10M",
+          "precio_num": 0,
+          "precio_text": "$0",
+          "codigo": "E027"
+        },
+        "uob_2": {
+          "nombre": "E037 - JUMPER F.O. FC/APC - 15M",
+          "precio_num": 0,
+          "precio_text": "$0",
+          "codigo": "E037"
+        }
+      }
+    }
+  },
+  "movil": {
+    "cub": {
+      "nombre_contrato": "UNIFICADO_MOVIL",
+      "agencia": "Región Metropolitana de Santiago",
+      "proveedor": "3300213678 - 2021-2023 GENERATEL SPA",
+      "actividad_1": "Instalaciones en edificio",
+      "tipo_srv_1": "Instalaciones en edificios de red",
+      "srv_1": {
+        "nombre": "ServGeneratel2 - INST Cables opticos (32 Fibras) de Interiores con DOF",
+        "precio_num": 855821,
+        "precio_text": "$855.821",
+        "codigo": "ServGeneratel2",
+        "uob_1": {
+          "nombre": "0 - SIN UO",
+          "precio_num": 0,
+          "precio_text": "$0",
+          "codigo": "0"
+        }
+      }
+    }
+  },
+  "fijo": {
+    "cub": {
+      "nombre_contrato": "UNIFICADO_FIJA",
+      "agencia": "Región Metropolitana de Santiago",
+      "proveedor": "3300213682 - 2021-2023 GENERATEL SPA",
+      "actividad_1": "Instalaciones en edificio",
+      "tipo_srv_1": "Instalaciones en edificios de red",
+      "srv_1": {
+        "nombre": "ServGeneratel2 - INST Cables opticos (32 Fibras) de Interiores con DOF",
+        "precio_num": 855821,
+        "precio_text": "$855.821",
+        "codigo": "ServGeneratel2",
+        "uob_1": {
+          "nombre": "0 - SIN UO",
+          "precio_num": 0,
+          "precio_text": "$0",
+          "codigo": "0"
+        }
+      }
+    }
+  },
+  "ordinario": {
+    "cub": {
+      "nombre_contrato": "CONTRATO_ORDINARIO",
+      "agencia": "Pais Chile",
+      "proveedor": "3300209195 - ZWEICOM S.A.",
+      "actividad_1": "general",
+      "tipo_srv_1": "Contrato General",
+      "srv_1": {
+        "nombre": "ServZweicom2 - Desarrollo Plataforma de Servicios",
+        "precio_num": 10000000,
+        "precio_text": "$10.000.000",
+        "codigo": "ServZweicom2",
+        "uob_1": {
+          "nombre": "0 - SIN UO",
+          "precio_num": 0,
+          "precio_text": "$0",
+          "codigo": "0"
+        }
+      }
+    }
+  }
+}
