@@ -61,7 +61,7 @@ reset database testing:
     # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass info"
     # - ssh zweicom@34.122.92.38 "cd databases && git pull && sudo docker run --rm -v /home/zweicom/databases/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass clean"
     - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && sudo docker run --rm -v /home/zweicom/sigo_database/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate && cd OTEC && ./Z001.sh"
-    # - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && mysql -uroot -ppass -h127.0.0.1 -P3311 OTEC < testing_script/data_testing.sql"
+    - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && mysql -uroot -ppass -h127.0.0.1 -P3311 OTEC -e 'source testing_script/data_testing.sql'"
   tags:
     - repo-machine
   except:
