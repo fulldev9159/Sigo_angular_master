@@ -276,7 +276,10 @@ describe('Cubicacion Test', () => {
       bucle.agencia,
       bucle.proveedor
     );
-    cy.cubFiltros(bucle.actividad_1.toUpperCase(), bucle.tipo_srv_1);
+    cy.cubFiltros(
+      bucle.actividad_1.toUpperCase(),
+      bucle.tipo_srv_1.toUpperCase()
+    );
 
     cy.cubAddService(bucle.srv_1.nombre, bucle.srv_1.uob_1.nombre);
     cy.cubAddService(bucle.srv_1.nombre, bucle.srv_1.uob_1.nombre);
