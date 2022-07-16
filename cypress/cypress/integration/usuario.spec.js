@@ -1,4 +1,4 @@
-describe('Area Test', () => {
+describe('Usuario Test', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
     cy.login('admin', 'M0v15tar.', 'Admin');

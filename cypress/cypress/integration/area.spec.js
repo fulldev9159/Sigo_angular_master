@@ -25,6 +25,7 @@ describe('Area Test', () => {
     cy.get('#estado-inactivo > .p-radiobutton > .p-radiobutton-box').click();
 
     cy.get('#submit-area').click();
+    cy.wait(700);
 
     cy.get('.p-inputtext').type('AreaTest');
 
