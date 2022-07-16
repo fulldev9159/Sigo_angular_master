@@ -7,12 +7,6 @@ Resource    ./resources/general_resource.robot
 Resource    ./resources/login_resource.robot
 
 *** Test Cases ***
-# List Area
-#    _Login                        admin    pass    Admin
-#    _Navegate to                  Area
-#    _Table should display data
-#    close Browser
-
 Editar Area
     _Login                            admin                                 M0v15tar.              Admin
     _Navegate to                      Area

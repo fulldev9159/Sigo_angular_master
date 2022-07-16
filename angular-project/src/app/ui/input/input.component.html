@@ -6,7 +6,7 @@
   </div>
   <div class="col-md-8 col-xs-12 ">
     <ng-container *ngIf="control !== undefined">
-      <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
+      <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}" name="{{name_input}}">
       <div *ngIf="control.invalid && (control.dirty || control.touched)">
         <p-message severity="error" text="{{ errorMessageFn(control.errors) }}"></p-message>
       </div>
@@ -20,11 +20,11 @@
   </ng-container>
   <ng-container *ngIf="control !== undefined">
     <ng-container *ngIf="placeholder!=='Porcentaje'">
-      <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
+      <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}" name="{{name_input}}">
     </ng-container>
     <ng-container  *ngIf="placeholder==='Porcentaje'">
       <div style="display: flex;    align-items: center;">
-        <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}">
+        <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}" name="{{name_input}}">
         <span>%</span></div>
     </ng-container>
     
@@ -38,7 +38,7 @@
   <ng-container *ngIf="control !== undefined">
     <input [formControl]="control" class="form-control" type="{{ inputType }}" min="{{min}}" placeholder="{{placeholder }}" style="    width: 51px;
     font-size: 13px;
-    padding: 5px;">
+    padding: 5px;" name="{{name_input}}">
     <div *ngIf="control.invalid && (control.dirty || control.touched)">
       <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
     </div>

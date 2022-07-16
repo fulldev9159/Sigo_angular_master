@@ -10,6 +10,8 @@
 //
 //
 // -- This is a parent command --
+import 'cypress-file-upload';
+
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
@@ -251,6 +253,11 @@ Cypress.Commands.add('_shoul_not_exist', form => {
   for (let i = 0; i < form.length; i++) {
     cy.get(form[i]).should('not.exist');
   }
+});
+
+Cypress.Commands.add('_checkList', (numcolumn, value) => {
+  const column = `.p-datatable-tbody > tr > :nth-child(${numcolumn})`;
+  cy.get(column).contains(value);
 });
 //
 //

@@ -1,3 +1,9 @@
 {
-  "testFiles": ["login.spec.js", "cubicacion.spec.js", "ot-form.spec.js"]
+  "testFiles": [
+    "login.spec.js",
+    "area.spec.js",
+    "usuario.spec.js",
+    "cubicacion.spec.js",
+    "ot-form.spec.js"
+  ]
 }

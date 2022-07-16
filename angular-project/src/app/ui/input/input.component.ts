@@ -12,6 +12,7 @@ export class InputComponent implements OnInit {
   @Input() label = '';
   @Input() placeholder = '';
   @Input() ID = '';
+  @Input() name_input = '';
   // tslint:disable-next-line:no-input-rename
   @Input('type') inputType = 'text';
   // tslint:disable-next-line:no-input-rename
