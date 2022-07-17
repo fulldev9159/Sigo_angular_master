@@ -22,7 +22,7 @@ describe('Usuario Test', () => {
     cy.wait(700);
 
     // Validar
-    cy.get('.p-inputtext').clear().type('UserTestContratista');
+    cy._search('UserTestContratista');
     cy._checkList(1, 'UserTestContratista');
     cy._checkList(2, '123456222-9');
     cy._checkList(3, 'Test Name Contratista');
@@ -56,7 +56,7 @@ describe('Usuario Test', () => {
     cy.wait(700);
 
     // Validar
-    cy.get('.p-inputtext').type('UserTestMovistar');
+    cy._search('UserTestMovistar');
     cy._checkList(1, 'UserTestMovistar');
     cy._checkList(2, '123456222-9');
     cy._checkList(3, 'Test Name Movistar');
@@ -69,7 +69,7 @@ describe('Usuario Test', () => {
   });
 
   it('Ver contratos Contratista', () => {
-    cy.get('.p-inputtext').type('UserTestMovistar');
+    cy._search('UserTestMovistar');
     cy.get('.p-button-text').click();
     cy.get(':nth-child(2) > .p-menuitem-link > .p-menuitem-text').click();
     cy.get(':nth-child(1) > .perfil-item > div').contains('CONTRATO_ORDINARIO');
@@ -80,7 +80,7 @@ describe('Usuario Test', () => {
   });
 
   it('Cargar Firma', () => {
-    cy.get('.p-inputtext').type('UserTestMovistar');
+    cy._search('UserTestMovistar');
     cy.get('.p-button-text').click();
     cy.get(':nth-child(5) > .p-menuitem-link > .p-menuitem-text').click();
     cy.get(
@@ -88,7 +88,7 @@ describe('Usuario Test', () => {
     ).attachFile('Ambiente.PNG');
     cy.get('#addFirma-button').click();
 
-    cy.get('.p-inputtext').clear().type('UserTestMovistar');
+    cy._search('UserTestMovistar');
     cy._checkList(11, 'Con firma');
   });
 });

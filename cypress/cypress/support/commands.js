@@ -259,6 +259,12 @@ Cypress.Commands.add('_checkList', (numcolumn, value) => {
   const column = `.p-datatable-tbody > tr > :nth-child(${numcolumn})`;
   cy.get(column).contains(value);
 });
+
+Cypress.Commands.add('_search', value => {
+  cy.wait(500);
+  cy.get('.p-inputtext').clear().type(value);
+  cy.wait(700);
+});
 //
 //
 // -- This is a child command --
