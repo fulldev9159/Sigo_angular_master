@@ -51,7 +51,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   nonZero(control: FormControl): any {
     const value = (val => (isNaN(val) ? 0 : val))(parseInt(control.value, 10));
-    return value < 1 ? { nonzero: true } : null;
+    return value === 0 ? { nonzero: true } : null;
   }
 
   noWhitespace(control: FormControl): any {
@@ -75,7 +75,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
                 cantidad: new FormControl(`${servicio.cantidad}`, [
                   Validators.required,
                   this.noWhitespace,
-                  this.mustBeANumber,
+                  // this.mustBeANumber,
                   this.nonZero,
                   Validators.min(0),
                 ]),
