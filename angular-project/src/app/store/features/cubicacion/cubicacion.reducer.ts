@@ -72,6 +72,10 @@ export const reducerCubicacion = createReducer(
     ...state,
     detalleCub: null,
   })),
+  on(CubicacionActions.resetCarrito, state => ({
+    ...state,
+    carrito: [],
+  })),
   on(CubicacionActions.getContratosUser4CubSuccess, (state, { response }) => ({
     ...state,
     contratosUser4Cub: response.data.items,

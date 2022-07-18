@@ -1,7 +1,7 @@
 <ng-container *ngIf="Type==='text'">
   <input [formControl]="control" class="form-control" type="{{ Type }}" name="{{Name}}">
 </ng-container>
-<ng-container *ngIf="Type==='number'">
+<ng-container *ngIf="Type==='number-currency'">
   <p-inputNumber [formControl]="control" mode="currency" currency="CLP" locale="es-CL"></p-inputNumber>
 </ng-container>
 

@@ -289,7 +289,7 @@ export const deleteDetalleCubError = createAction(
 
 //  RESET
 export const reset = createAction('[Cubicacion] reset');
-export const resetDetalleCub = createAction('[Cubicacion] reset');
-
+export const resetDetalleCub = createAction('[Cubicacion] reset detalle');
 export const resetData = createAction('[Cubicacion] ResetData');
 export const resetServices = createAction('[ResetData] Reset Services');
+export const resetCarrito = createAction('[ResetData] Reset Carrito');

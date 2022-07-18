@@ -209,4 +209,8 @@ export class CubicacionFacade {
   public resetServices(): void {
     this.store.dispatch(cubicacionActions.resetServices());
   }
+
+  public resetCarrito(): void {
+    this.store.dispatch(cubicacionActions.resetCarrito());
+  }
 }

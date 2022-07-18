@@ -26,7 +26,7 @@
         <div class="row subcontainer-nombre-tipo">
           <div class="col-md-6 col-sm-12">
             <div id="nomnbreCub">
-              <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
+              <app-input [control]="formControls.nombre" label="* Nombre:" Name="nombre-cub"></app-input>
             </div>
           </div>
 
@@ -91,21 +91,21 @@
           </div>
           <div class="col-md-7 col-sm-12">
             <br>
-            <div id="direccion">
+            <div id="direccion" *ngIf="contratoSelected && contratoSelected.model_contrato_id.tipo_contrato_id===4">
               <div class="row">
                 <div class="col-md-6 col-sm-6" id="direcciondesde">
-                  <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
+                  <app-input [control]="formControls.direcciondesde" label=" Dirección desde:" Name="direccion-desde"></app-input>
                 </div>
                 <div class="col-md-6 col-sm-6" id="alturadesde">
-                  <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
+                  <app-input [control]="formControls.direcciondesdealtura" label=" Altura:" Name="altura-desde"></app-input>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 col-sm-6" id="direccionhasta">
-                  <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
+                  <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:" Name="direccion-hasta"></app-input>
                 </div>
                 <div class="col-md-6 col-sm-6" id="alturahasta">
-                  <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
+                  <app-input [control]="formControls.direccionhastaaltura" label=" Altura:" Name="altura-hasta"></app-input>
                 </div>
               </div>
             </div>
