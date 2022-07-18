@@ -1,40 +1,24 @@
 <div class="row" style="text-align: end;" *ngIf="DisplayLabelMode==='side'">
   <div class="col-md-4 col-xs-12 ">
-    <ng-container *ngIf="label !== ''">
-      <label style="text-align: end;">{{ label }}</label>
-    </ng-container>
+    <label style="text-align: end;">{{ label }}</label>
   </div>
   <div class="col-md-8 col-xs-12 ">
     <ng-container *ngIf="control !== undefined">
-      <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}" name="{{name_input}}">
-      <div *ngIf="control.invalid && (control.dirty || control.touched)">
-        <p-message severity="error" text="{{ errorMessageFn(control.errors) }}"></p-message>
-      </div>
+      <!-- <input     placeholder="{{ placeholder }}" name="{{name_input}}"> -->
+      <app-input-builder [control]="control" type="{{ Type }}" name="{{Name}}" [errorMessageFn]="errorMessageFn"> </app-input-builder>
     </ng-container>
   </div>
 </div>
 
-<ng-container *ngIf="DisplayLabelMode==='up'">
-  <ng-container *ngIf="label !== ''">
-    <label style=" margin-top: 1rem">{{ label }}</label>
-  </ng-container>
+<ng-container *ngIf="DisplayLabelMode==='up'||DisplayLabelMode==='none' || label===''">
+  <label *ngIf="DisplayLabelMode==='up'" style=" margin-top: 1rem">{{ label }}</label>
   <ng-container *ngIf="control !== undefined">
-    <ng-container *ngIf="placeholder!=='Porcentaje'">
-      <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}" name="{{name_input}}" step="0.01">
-    </ng-container>
-    <ng-container *ngIf="placeholder==='Porcentaje'">
-      <div style="display: flex;    align-items: center;">
-        <input [formControl]="control" class="form-control" type="{{ inputType }}" id="{{ID}}" placeholder="{{ placeholder }}" name="{{name_input}}">
-        <span>%</span></div>
-    </ng-container>
-
-    <div *ngIf="control.invalid && (control.dirty || control.touched)">
-      <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
-    </div>
+    <!-- <input [formControl]="control" class="form-control" type="{{ inputType }}" placeholder="{{ placeholder }}" name="{{name_input}}" step="0.01"> -->
+    <app-input-builder [control]="control" type="{{ Type }}" name="{{Name}}" [errorMessageFn]="errorMessageFn"> </app-input-builder>
   </ng-container>
 </ng-container>
 
-<ng-container *ngIf="DisplayLabelMode==='none'">
+<!-- <ng-container *ngIf="DisplayLabelMode==='none'">
   <ng-container *ngIf="control !== undefined">
     <input [formControl]="control" class="form-control" type="{{ inputType }}" min="{{min}}" step="0.01" pattern="\d+((\.|,)\d+)?" placeholder="{{placeholder }}" style="    width: 51px;
     font-size: 13px;
@@ -43,4 +27,4 @@
       <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
     </div>
   </ng-container>
-</ng-container>
+</ng-container> -->

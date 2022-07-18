@@ -21,6 +21,7 @@ import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { TabComponent } from './tabs/tab.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { InputBuildComponent } from './input/component/input-build.component';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { TabsComponent } from './tabs/tabs.component';
     TextareaComponent,
     TabComponent,
     TabsComponent,
+    InputBuildComponent,
   ],
   exports: [
     CardComponent,
@@ -60,6 +62,7 @@ import { TabsComponent } from './tabs/tabs.component';
     TextareaComponent,
     TabComponent,
     TabsComponent,
+    InputBuildComponent,
     FontAwesomeModule,
   ],
   providers: [ConfirmationService],

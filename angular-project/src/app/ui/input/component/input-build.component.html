@@ -1,0 +1,7 @@
+<ng-container *ngIf="Type==='text'">
+  <input [formControl]="control" class="form-control" type="{{ Type }}" name="{{Name}}">
+</ng-container>
+
+<div *ngIf="control.invalid && (control.dirty || control.touched)">
+  <p-message severity="error" text="{{errorMessageFn(control.errors)}}"></p-message>
+</div>
