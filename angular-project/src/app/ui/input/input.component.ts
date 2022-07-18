@@ -22,7 +22,7 @@ export class InputComponent implements OnInit {
     } else if (errors.maxlength) {
       return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
     } else if (errors.min) {
-      return 'El valor debe ser mayor o igual a 1';
+      return `El valor debe ser mayor o igual a ${errors.min.min}`;
     }
   };
 

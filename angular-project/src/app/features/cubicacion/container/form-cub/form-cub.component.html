@@ -224,8 +224,7 @@
                     <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
                     <td [ngClass]="item.precargado?'existente':'noexistente'">
-                      <!-- <app-input DisplayLabelMode="none" [control]="formCntl(item.servicio_id,'servicio_cantidad')" min="1" type="number"></app-input> -->
-                      <p-inputNumber [formControl]="formCntl(item.servicio_id,'servicio_cantidad')" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+                      <app-input [control]="formCntl(item.servicio_id,'servicio_cantidad')" Type="number"></app-input>
                     </td>
                     <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                     <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_id,'servicio_cantidad').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>

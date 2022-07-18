@@ -113,18 +113,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   uo_rowid = null;
   uo_cod_del = null;
 
-  errorMessageFn = errors => {
-    if (errors.required) {
-      return 'Este campo es requerido';
-    } else if (errors.whitespace) {
-      return 'Este campo es requerido';
-    } else if (errors.maxlength) {
-      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
-    } else if (errors.min) {
-      return 'El valor debe ser mayor o igual a 1';
-    }
-  };
-
   constructor(
     private cubicacionFacade: CubicacionFacade,
     private authFacade: AuthFacade,
@@ -429,7 +417,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               ]),
               servicio_cantidad: new FormControl(1, [
                 Validators.required,
-                Validators.min(1),
+                Validators.min(0.01),
               ]),
               servicio_precio_final_clp: new FormControl(
                 servicio.servicio_precio_final_clp,
@@ -483,7 +471,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
 
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
-      uo_cantidad: new FormControl(1, [Validators.required, Validators.min(1)]),
+      uo_cantidad: new FormControl(1, [
+        Validators.required,
+        Validators.min(0.01),
+      ]),
       uo_precio_total_clp: new FormControl(uo.uo_precio_total_clp, [
         Validators.required,
       ]),
