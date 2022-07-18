@@ -245,7 +245,7 @@
                         </div>
                       </ng-container>
                     </td>
-                    <td class="label-table uo">{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td class="label-table uo" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
                     <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
                     <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
@@ -290,7 +290,7 @@
                       </ng-container>
                     </td>
 
-                    <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td class="label-table uo" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
                     <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
                     <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
@@ -321,7 +321,7 @@
 
                 <ng-container *ngIf="item.unidades_obras.length>1">
                   <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
-                    <td class="label-table">{{uo.uo_codigo}}</td>
+                    <td class="label-table uo" style="background-color: #ff8e4e;">{{uo.uo_codigo}}</td>
                     <td class="data-primaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
                     <td [ngClass]="uo.precargado?'existente':'noexistente'">
