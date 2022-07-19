@@ -169,7 +169,10 @@ export class AlertMessageActions {
         this.router.navigate(['/app/ot/list-ot']);
       }
 
-      if (action === ca.clonCubSuccess.type) {
+      if (
+        action === ca.clonCubSuccess.type ||
+        action === otActions.sendGeneracionActaSuccess.type
+      ) {
         location.reload();
       }
 
