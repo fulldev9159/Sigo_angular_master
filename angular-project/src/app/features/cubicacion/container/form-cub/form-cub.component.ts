@@ -80,6 +80,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   unidadObra4Cub$: Observable<SelectType[]> = of([]);
   uobs: UnidadObra4Cub[];
   servicioUORepetidoAlert$: Observable<boolean> = of(false);
+  UOSinMaterialesAlert$: Observable<boolean> = of(false);
 
   carrito$: Observable<Carrito[]>;
   materialesSelected: Materiales4Cub[] = [];
@@ -438,6 +439,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
     this.servicioUORepetidoAlert$ =
       this.cubicacionFacade.servicioUORepetidoAlert$();
+
+    this.UOSinMaterialesAlert$ = this.cubicacionFacade.UOSinMaterialesAlert$();
 
     this.carrito$ = this.cubicacionFacade.carrito$();
 

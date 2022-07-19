@@ -169,7 +169,8 @@
           <!-- <pre>{{formFiltros.value|json}}</pre> -->
           <div id="button-agregar">
             <button (click)="agregar()">Agregar</button>
-            <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra </p>
+            <p *ngIf="servicioUORepetidoAlert$|async" style="color: red;" id="mensaje-repetido">Ya ha agregado este servico/Unidad Obra</p>
+            <p *ngIf="UOSinMaterialesAlert$|async" style="color: red;" id="mensaje-sin-material">Unidad de obra sin Materiales asociados. Favor contactar con su administrador</p>
           </div>
         </div>
 

@@ -65,6 +65,11 @@ export const servicioUORepetidoAlert = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.servciouo_repetido_alert
 );
+
+export const UOSinMaterialesAlert = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.uo_sin_materiales_alert
+);
 //   ////
 export const getCubicaciones = createSelector(
   selectCubicacion,

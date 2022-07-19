@@ -163,6 +163,11 @@ export class CubicacionFacade {
     return this.store.select(cubicacionSelectors.servicioUORepetidoAlert);
   }
 
+  // UO SIN MATERIALES ALERT
+  public UOSinMaterialesAlert$(): Observable<boolean> {
+    return this.store.select(cubicacionSelectors.UOSinMaterialesAlert);
+  }
+
   //  DELETE SERVICE FROM CARRITO 4 CREATE CUB
   public deleteServiceCarrito4CreateCub(servicio_id: number): void {
     this.store.dispatch(

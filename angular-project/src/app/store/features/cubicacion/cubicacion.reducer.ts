@@ -32,6 +32,7 @@ export interface StateCubicacion {
   unidadObras4cub: UnidadObra4Cub[];
   carrito: Carrito[];
   servciouo_repetido_alert: boolean;
+  uo_sin_materiales_alert: boolean;
   //   ///
   cubicaciones: Cubicacion[];
   cubicacionError: Error;
@@ -54,6 +55,7 @@ export const initialStateCubicacion: StateCubicacion = {
   unidadObras4cub: [],
   carrito: [],
   servciouo_repetido_alert: false,
+  uo_sin_materiales_alert: false,
   //////
   cubicaciones: [],
   cubicacionError: null,
@@ -122,9 +124,20 @@ export const reducerCubicacion = createReducer(
       const index = state.carrito.findIndex(
         x => x.servicio_id === item_carrito.servicio_id
       );
+      let uo_sin_material = false;
+      if (item_carrito.unidades_obras[0].material_arr.length === 0) {
+        uo_sin_material = true;
+      }
+
+      if (uo_sin_material) {
+        return {
+          ...state,
+          uo_sin_materiales_alert: uo_sin_material,
+        };
+      }
+
       if (index >= 0) {
         const temp = copy(item_carrito);
-        // console.log('INDEX', index);
 
         temp.precargado = state.carrito[index].precargado;
         temp.unidades_obras.push(...state.carrito[index].unidades_obras);
@@ -136,6 +149,7 @@ export const reducerCubicacion = createReducer(
           return {
             ...state,
             servciouo_repetido_alert: true,
+            uo_sin_materiales_alert: uo_sin_material,
           };
         } else {
           if (state.carrito.length === 1) {
@@ -143,6 +157,7 @@ export const reducerCubicacion = createReducer(
               ...state,
               carrito: [temp],
               servciouo_repetido_alert: false,
+              uo_sin_materiales_alert: uo_sin_material,
             };
           } else {
             // console.log(state.carrito);
@@ -155,6 +170,7 @@ export const reducerCubicacion = createReducer(
               ...state,
               carrito: [...old_servicios, temp],
               servciouo_repetido_alert: false,
+              uo_sin_materiales_alert: uo_sin_material,
             };
           }
         }
@@ -163,6 +179,7 @@ export const reducerCubicacion = createReducer(
           ...state,
           carrito: [...state.carrito, item_carrito],
           servciouo_repetido_alert: false,
+          uo_sin_materiales_alert: uo_sin_material,
         };
       }
     }
