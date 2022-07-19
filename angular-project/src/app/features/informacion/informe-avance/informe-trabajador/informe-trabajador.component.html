@@ -14,22 +14,14 @@
                 <tr>
                   <th>Cod</th>
                   <th>Descripción</th>
-                  <!-- <th>Esp.</th> -->
                   <th>Cantidad</th>
                   <th>Unidad</th>
-                  <!-- <th>Precio</th> -->
-                  <!-- <th>Total Servicio</th> -->
-                  <!-- <th>Tipo Moneda</th> -->
                   <th></th>
 
                   <th>Cód</th>
                   <th>Descripción</th>
-                  <!-- <th>Actividad</th> -->
                   <th>Cantidad</th>
                   <th>Unidad</th>
-                  <!-- <th>Precio</th> -->
-                  <!-- <th>Total UO</th> -->
-                  <!-- <th>Tipo Moneda</th> -->
                   <th></th>
                 </tr>
               </thead>
@@ -41,18 +33,15 @@
                         <td class="label-table">{{ servicio.model_servicio_id.codigo }}</td>
                         <td class="data-primaria">{{ servicio.model_servicio_id.descripcion }}</td>
                         <td>
-                          <!-- {{ servicio.cantidad }} -->
-                          <app-input [control]="form.at(servicioIndex).get('cantidad')" type="number" [errorMessageFn]="errorMessageFn"></app-input>
+                          <app-input [control]="form.at(servicioIndex).get('cantidad')" Type="number" [errorMessageFn]="errorMessageFn"></app-input>
                         </td>
                         <td>{{ servicio.model_unidad_id.codigo }}</td>
                         <td></td>
 
                         <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                         <td class="data-primaria">{{ servicio.many_informe_has_uob[0].model_unidad_obra_cod.descripcion }}</td>
-                        <!-- <td class="data-secundaria"> -- </td> -->
                         <td class="data-secundaria">
-                          <!-- {{ servicio.many_informe_has_uob[0].cantidad }} -->
-                          <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" type="number" [errorMessageFn]="errorMessageFn"></app-input>
+                          <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" Type="number" [errorMessageFn]="errorMessageFn"></app-input>
                         </td>
                         <td>{{ servicio.many_informe_has_uob[0].model_unidad_id.codigo }}</td>
                         <td></td>
@@ -64,18 +53,15 @@
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="label-table">{{ servicio.model_servicio_id.codigo }}</td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="data-primaria">{{ servicio.model_servicio_id.descripcion }}</td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length">
-                          <!-- {{ servicio.cantidad }} -->
-                          <app-input [control]="form.at(servicioIndex).get('cantidad')" type="number" [errorMessageFn]="errorMessageFn"></app-input>
+                          <app-input [control]="form.at(servicioIndex).get('cantidad')" Type="number" [errorMessageFn]="errorMessageFn"></app-input>
                         </td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length">{{ servicio.model_unidad_id.codigo }}</td>
                         <td [attr.rowspan]="+servicio.many_informe_has_uob.length"></td>
 
                         <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                         <td class="data-primaria">{{ servicio.many_informe_has_uob[0].model_unidad_obra_cod.descripcion }}</td>
-                        <!-- <td class="data-secundaria"> -- </td> -->
                         <td class="data-secundaria">
-                          <!-- {{ servicio.many_informe_has_uob[0].cantidad }} -->
-                          <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" type="number" [errorMessageFn]="errorMessageFn"></app-input>
+                          <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" Type="number" [errorMessageFn]="errorMessageFn"></app-input>
                         </td>
                         <td>{{ servicio.many_informe_has_uob[0].model_unidad_id.codigo }}</td>
                         <td></td>
@@ -90,7 +76,7 @@
                           <!-- <td class="data-secundaria"> -- </td> -->
                           <td class="data-secundaria">
                             <!-- {{ uo.cantidad }} -->
-                            <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(uoIndex+1).get('cantidad')" type="number" [errorMessageFn]="errorMessageFn"></app-input>
+                            <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(uoIndex+1).get('cantidad')" Type="number" [errorMessageFn]="errorMessageFn"></app-input>
                           </td>
                           <td>{{ uo.model_unidad_id.codigo }}</td>
                           <td></td>

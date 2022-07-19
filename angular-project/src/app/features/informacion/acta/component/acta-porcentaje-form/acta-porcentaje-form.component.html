@@ -2,7 +2,7 @@
   <ng-container *ngIf="form && porcentaje">
     <div class="col-xs-12 col-md-5"></div>
     <div class="col-xs-12 col-md-2">
-      <app-input [control]="porcentaje" label="Porcentaje" placeholder="Porcentaje" [errorMessageFn]="errorMessageFn"></app-input>
+      <app-input [control]="porcentaje" label="Porcentaje" Name="porcentaje-acta" Type="porcentaje" [errorMessageFn]="errorMessageFn"></app-input>
     </div>
     <div class="col-xs-12 col-md-5"></div>
     <ng-container *ngIf="form.get('servicios') as servicios">
@@ -29,12 +29,12 @@
                     <td class="data-secundaria">{{ servicio.get('descripcion').value|titlecase }}</td>
                     <td class="data-secundaria" style="text-align: right">{{ servicio.get('cantidad_total').value }}</td>
                     <td class="data-secundaria" style="text-align: right">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_a_enviar').value }}</td>
-                    <td class="data-secundaria"style="text-align: right">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
+                    <td class="data-secundaria" style="text-align: right">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) | number : '1.2-2' }}</td>
                     <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                     <td class="data-secundaria">{{ (servicio.get('cantidad_total').value * (porcentaje.value / 100)) * +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                   </tr>
                   <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
-                    <ng-container *ngFor="let uo of unidadesObra.controls"> 
+                    <ng-container *ngFor="let uo of unidadesObra.controls">
                       <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value">
                         <td class="label-table" style="background-color:#ff8e4e ;
                         padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
@@ -91,7 +91,7 @@
       </div>
     </ng-container> -->
 
-    
+
   </ng-container>
 </div>
 

@@ -20,7 +20,7 @@
             <div class="row justify-content-center">
               <div class="col-md-6 col-xs-12 ">
                 <div id="nombre-contrato">
-                  <app-input [control]="formControls.nombre" DisplayLabelMode="up" label="* Nombre:"></app-input>
+                  <app-input [control]="formControls.nombre" DisplayLabelMode="up" label="* Nombre:" Name="nombre-contrato"></app-input>
                 </div>
                 <br>
                 <!-- <div class="col-xs-12 col-md-6" id="control_fecha_inicio"> -->
@@ -84,7 +84,7 @@
 
                 <br>
                 <div id="costo-max-input">
-                  <app-input [control]="formControls.costo_max" DisplayLabelMode="up" label="Costo máximo:" type="number"></app-input>
+                  <app-input [control]="formControls.costo_max" DisplayLabelMode="up" label="Costo máximo:" Type="number-currency"></app-input>
                 </div>
 
                 <br>

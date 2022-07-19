@@ -26,7 +26,7 @@
         <div class="row subcontainer-nombre-tipo">
           <div class="col-md-6 col-sm-12">
             <div id="nomnbreCub">
-              <app-input [control]="formControls.nombre" label="* Nombre:"></app-input>
+              <app-input [control]="formControls.nombre" label="* Nombre:" Name="nombre-cub"></app-input>
             </div>
           </div>
 
@@ -91,21 +91,21 @@
           </div>
           <div class="col-md-7 col-sm-12">
             <br>
-            <div id="direccion">
+            <div id="direccion" *ngIf="contratoSelected && contratoSelected.model_contrato_id.tipo_contrato_id===4">
               <div class="row">
                 <div class="col-md-6 col-sm-6" id="direcciondesde">
-                  <app-input [control]="formControls.direcciondesde" label=" Dirección desde:"></app-input>
+                  <app-input [control]="formControls.direcciondesde" label=" Dirección desde:" Name="direccion-desde"></app-input>
                 </div>
                 <div class="col-md-6 col-sm-6" id="alturadesde">
-                  <app-input [control]="formControls.direcciondesdealtura" label=" Altura:"></app-input>
+                  <app-input [control]="formControls.direcciondesdealtura" label=" Altura:" Name="altura-desde"></app-input>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6 col-sm-6" id="direccionhasta">
-                  <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:"></app-input>
+                  <app-input [control]="formControls.direccionhasta" label=" Dirección hasta:" Name="direccion-hasta"></app-input>
                 </div>
                 <div class="col-md-6 col-sm-6" id="alturahasta">
-                  <app-input [control]="formControls.direccionhastaaltura" label=" Altura:"></app-input>
+                  <app-input [control]="formControls.direccionhastaaltura" label=" Altura:" Name="altura-hasta"></app-input>
                 </div>
               </div>
             </div>
@@ -224,7 +224,7 @@
                     <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
                     <td [ngClass]="item.precargado?'existente':'noexistente'">
-                      <app-input DisplayLabelMode="none" [control]="formCntl(item.servicio_id,'servicio_cantidad')" min="1" type="number"></app-input>
+                      <app-input [control]="formCntl(item.servicio_id,'servicio_cantidad')" Type="number"></app-input>
                     </td>
                     <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                     <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_id,'servicio_cantidad').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
@@ -245,11 +245,11 @@
                         </div>
                       </ng-container>
                     </td>
-                    <td class="label-table uo">{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td class="label-table uo" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
                     <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
                     <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
-                      <app-input DisplayLabelMode="none" [control]="formCntlUO(item.servicio_id,'uo_cantidad',item.unidades_obras[0].uo_codigo)" min="1" type="number"></app-input>
+                      <app-input [control]="formCntlUO(item.servicio_id,'uo_cantidad',item.unidades_obras[0].uo_codigo)" Type="number"></app-input>
                     </td>
                     <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
                     <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
@@ -269,7 +269,7 @@
                     <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                     <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
                     <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
-                      <app-input DisplayLabelMode="none" [control]="formCntl(item.servicio_id,'servicio_cantidad')" min="1" type="number"></app-input>
+                      <app-input [control]="formCntl(item.servicio_id,'servicio_cantidad')" Type="number"></app-input>
                     </td>
                     <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{+item.servicio_precio_final_clp*+formCntl(item.servicio_id,'servicio_cantidad').value | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
@@ -290,11 +290,11 @@
                       </ng-container>
                     </td>
 
-                    <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+                    <td class="label-table uo" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
                     <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
                     <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
-                      <app-input DisplayLabelMode="none" [control]="formCntlUO(item.servicio_id,'uo_cantidad',item.unidades_obras[0].uo_codigo)" min="1" type="number"></app-input>
+                      <app-input [control]="formCntlUO(item.servicio_id,'uo_cantidad',item.unidades_obras[0].uo_codigo)" Type="number"></app-input>
                     </td>
                     <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
                     <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
@@ -321,11 +321,11 @@
 
                 <ng-container *ngIf="item.unidades_obras.length>1">
                   <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
-                    <td class="label-table">{{uo.uo_codigo}}</td>
+                    <td class="label-table uo" style="background-color: #ff8e4e;">{{uo.uo_codigo}}</td>
                     <td class="data-primaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{item.actividad_descripcion|titlecase}}</td>
                     <td [ngClass]="uo.precargado?'existente':'noexistente'">
-                      <app-input DisplayLabelMode="none" [control]="formCntlUO(item.servicio_id,'uo_cantidad',uo.uo_codigo)" min="1" type="number"></app-input>
+                      <app-input [control]="formCntlUO(item.servicio_id,'uo_cantidad',uo.uo_codigo)" Type="number"></app-input>
                     </td>
                     <td class="data-secundaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{item.servicio_tipo_moneda_codigo}}</td>
                     <td [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>

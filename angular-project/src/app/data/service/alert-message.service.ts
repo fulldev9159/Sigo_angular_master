@@ -87,7 +87,8 @@ export class AlertMessageActions {
         action === otActions.AceptarRechazarIncialOTSuccess.type ||
         action === otActions.AsignarSupervisorTrabajosOTSuccess.type ||
         action === otActions.createRegistroLibroObrasSuccess.type ||
-        action === otActions.sendGeneracionActaSuccess.type
+        action === otActions.sendGeneracionActaSuccess.type ||
+        action === otActions.AceptarRechazarInformeAvanceOTSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (
@@ -175,6 +176,8 @@ export class AlertMessageActions {
       if (
         action === otActions.AceptarRechazarIncialOTSuccess.type ||
         action === otActions.sendDetalleInformeAvanceSuccess.type ||
+        action === otActions.AceptarRechazarInformeAvanceOTSuccess.type ||
+        action === otActions.AsignarSupervisorTrabajosOTSuccess.type ||
         action === otActions.AceptarRechazarInformeAvanceOTSuccess.type
       ) {
         this.otFacade.getOts({

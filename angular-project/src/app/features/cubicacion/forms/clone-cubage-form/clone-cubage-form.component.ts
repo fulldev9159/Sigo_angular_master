@@ -30,17 +30,6 @@ export class CloneCubageFormComponent implements OnInit, OnDestroy {
     return isValid ? null : { whitespace: true };
   }
 
-  errorMessageFn = errors => {
-    if (errors.required) {
-      return 'Este campo es requerido';
-    } else if (errors.whitespace) {
-      return 'Este campo es requerido';
-    } else if (errors.maxlength) {
-      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres`;
-    }
-    return 'Este campo es inválido';
-  }; // tslint:disable-line
-
   constructor(
     private cubageFacade: CubicacionFacade,
     private authFacade: AuthFacade

@@ -66,6 +66,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   tipoCubicacion4Cub$: Observable<TipoCubicacion4Cub[]> = of([]);
   contratosUser4Cub$: Observable<ContratosUser[]> =
     this.cubicacionFacade.contratosUser4Cub$();
+  contratos: ContratosUser[] = [];
+  contratoSelected: ContratosUser;
   agencias4Cub$: Observable<Agencias4Cub[]> = of([]);
   proveedores4Cub$: Observable<Proveedores4Cub[]> = of([]);
   proveedores: Proveedores4Cub[] = [];
@@ -110,18 +112,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   servicio_id_del = null;
   uo_rowid = null;
   uo_cod_del = null;
-
-  errorMessageFn = errors => {
-    if (errors.required) {
-      return 'Este campo es requerido';
-    } else if (errors.whitespace) {
-      return 'Este campo es requerido';
-    } else if (errors.maxlength) {
-      return `Debe tener a lo más ${errors.maxlength.requiredLength} caracteres de largo`;
-    } else if (errors.min) {
-      return 'El valor debe ser mayor o igual a 1';
-    }
-  };
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
@@ -193,6 +183,11 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         if (contrato_id !== null && contrato_id !== undefined) {
           this.formReset(this.formCub, ['agencia_id', 'cmarcoproveedor_id']);
           this.resetFiltrosServicio();
+          this.cubicacionFacade.resetCarrito();
+          this.formCub.get('table').reset();
+          this.contratoSelected = this.contratos.find(
+            x => x.contrato_id === +contrato_id
+          );
           this.cubicacionFacade.agencias4cub(+contrato_id);
         } else {
           this.checkAndEnable(this.formCub, 'agencia_id', []);
@@ -205,6 +200,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         if (agencia_id !== null && agencia_id !== undefined) {
           this.formCub.get('cmarcoproveedor_id').reset();
           this.resetFiltrosServicio();
+          this.cubicacionFacade.resetCarrito();
+          this.formCub.get('table').reset();
           this.cubicacionFacade.proveedores4Cub(
             +agencia_id,
             +this.formCub.get('contrato').value
@@ -221,6 +218,8 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         .valueChanges.subscribe(cmarcoproveedor_id => {
           if (cmarcoproveedor_id !== null && cmarcoproveedor_id !== undefined) {
             this.resetFiltrosServicio();
+            this.cubicacionFacade.resetCarrito();
+            this.formCub.get('table').reset();
             this.cubicacionFacade.actividad4cub(+cmarcoproveedor_id);
             this.formFiltros.get('actividad_id').enable();
           } else {
@@ -330,6 +329,11 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   onInitSetData(): void {
     this.loading$ = this.baseFacade.loading$();
     this.tipoCubicacion4Cub$ = this.cubicacionFacade.tipoCubicacion4cub$();
+    this.subscription.add(
+      this.contratosUser4Cub$.subscribe(
+        contratos => (this.contratos = contratos)
+      )
+    );
     this.agencias4Cub$ = this.cubicacionFacade
       .agencias4cub$()
       .pipe(
@@ -413,7 +417,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
               ]),
               servicio_cantidad: new FormControl(1, [
                 Validators.required,
-                Validators.min(1),
+                Validators.min(0.01),
               ]),
               servicio_precio_final_clp: new FormControl(
                 servicio.servicio_precio_final_clp,
@@ -467,7 +471,10 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
 
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
-      uo_cantidad: new FormControl(1, [Validators.required, Validators.min(1)]),
+      uo_cantidad: new FormControl(1, [
+        Validators.required,
+        Validators.min(0.01),
+      ]),
       uo_precio_total_clp: new FormControl(uo.uo_precio_total_clp, [
         Validators.required,
       ]),

@@ -69,7 +69,7 @@
             <td>
             </td>
 
-            <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+            <td class="label-table" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
             <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
             <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
             <td class="data-secundaria">
@@ -101,7 +101,7 @@
             <td [attr.rowspan]="+item.unidades_obras.length">
             </td>
 
-            <td class="label-table">{{item.unidades_obras[0].uo_codigo}}</td>
+            <td class="label-table" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
             <td class="data-primaria">{{item.unidades_obras[0].uo_nombre}}</td>
             <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
             <td>
@@ -120,7 +120,7 @@
 
         <ng-container *ngIf="item.unidades_obras.length>1">
           <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
-            <td class="label-table">{{uo.uo_codigo}}</td>
+            <td class="label-table" style="background-color: #ff8e4e;">{{uo.uo_codigo}}</td>
             <td class="data-primaria">{{uo.uo_nombre}}</td>
             <td class="data-secundaria">{{item.actividad_descripcion|titlecase}}</td>
             <td>

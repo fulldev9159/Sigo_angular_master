@@ -30,7 +30,7 @@ export class ListCubTableService {
             sort: 'tipo_cubicacion_descripcion',
             header: 'tipo_cubicacion_descripcion',
             editable: false,
-            // width: '7%',
+            width: '9%',
           },
           {
             field: 'Tipo Contrato',
