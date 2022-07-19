@@ -227,10 +227,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
             this.formCub.updateValueAndValidity();
           } else {
             this.formCub.get('direcciondesde').clearValidators();
+            this.formCub.get('direcciondesde').updateValueAndValidity();
             this.formCub.get('direcciondesdealtura').clearValidators();
+            this.formCub.get('direcciondesdealtura').updateValueAndValidity();
             this.formCub.get('direccionhasta').clearValidators();
+            this.formCub.get('direccionhasta').updateValueAndValidity();
             this.formCub.get('direccionhastaaltura').clearValidators();
-            this.formCub.updateValueAndValidity();
+            this.formCub.get('direccionhastaaltura').updateValueAndValidity();
           }
           this.cubicacionFacade.agencias4cub(+contrato_id);
         } else {
@@ -1065,5 +1068,9 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
+  }
+
+  getform(): void {
+    console.log(this.formCub);
   }
 }
