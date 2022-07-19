@@ -184,10 +184,53 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           this.formReset(this.formCub, ['agencia_id', 'cmarcoproveedor_id']);
           this.resetFiltrosServicio();
           this.cubicacionFacade.resetCarrito();
-          this.formCub.get('table').reset();
+          const clearFormArray = (formArray: FormArray) => {
+            while (formArray.length !== 0) {
+              formArray.removeAt(0);
+            }
+          };
+          clearFormArray(this.formCub.get('table') as FormArray);
           this.contratoSelected = this.contratos.find(
             x => x.contrato_id === +contrato_id
           );
+          if (this.contratoSelected.model_contrato_id.tipo_contrato_id === 4) {
+            this.formCub
+              .get('direcciondesde')
+              .setValidators([
+                Validators.required,
+                this.noWhitespace,
+                Validators.maxLength(100),
+              ]);
+
+            this.formCub
+              .get('direcciondesdealtura')
+              .setValidators([
+                Validators.required,
+                this.noWhitespace,
+                Validators.maxLength(100),
+              ]);
+            this.formCub
+              .get('direccionhasta')
+              .setValidators([
+                Validators.required,
+                this.noWhitespace,
+                Validators.maxLength(100),
+              ]);
+            this.formCub
+              .get('direccionhastaaltura')
+              .setValidators([
+                Validators.required,
+                this.noWhitespace,
+                Validators.maxLength(100),
+              ]);
+            this.formCub.updateValueAndValidity();
+          } else {
+            this.formCub.get('direcciondesde').clearValidators();
+            this.formCub.get('direcciondesdealtura').clearValidators();
+            this.formCub.get('direccionhasta').clearValidators();
+            this.formCub.get('direccionhastaaltura').clearValidators();
+            this.formCub.updateValueAndValidity();
+          }
           this.cubicacionFacade.agencias4cub(+contrato_id);
         } else {
           this.checkAndEnable(this.formCub, 'agencia_id', []);
@@ -201,7 +244,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           this.formCub.get('cmarcoproveedor_id').reset();
           this.resetFiltrosServicio();
           this.cubicacionFacade.resetCarrito();
-          this.formCub.get('table').reset();
+          const clearFormArray = (formArray: FormArray) => {
+            while (formArray.length !== 0) {
+              formArray.removeAt(0);
+            }
+          };
+          clearFormArray(this.formCub.get('table') as FormArray);
           this.cubicacionFacade.proveedores4Cub(
             +agencia_id,
             +this.formCub.get('contrato').value
@@ -219,7 +267,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
           if (cmarcoproveedor_id !== null && cmarcoproveedor_id !== undefined) {
             this.resetFiltrosServicio();
             this.cubicacionFacade.resetCarrito();
-            this.formCub.get('table').reset();
+            const clearFormArray = (formArray: FormArray) => {
+              while (formArray.length !== 0) {
+                formArray.removeAt(0);
+              }
+            };
+            clearFormArray(this.formCub.get('table') as FormArray);
             this.cubicacionFacade.actividad4cub(+cmarcoproveedor_id);
             this.formFiltros.get('actividad_id').enable();
           } else {
@@ -302,23 +355,18 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.formCub.get('table').valueChanges.subscribe(table => {
-        console.log('table exec', table);
         this.totalServicio = 0;
         this.totalUO = 0;
         if (table.length > 0) {
           table.forEach((cantidadServicio: Carrito) => {
-            console.log('CantidadServicios', cantidadServicio);
             const subtotal =
               +cantidadServicio.servicio_precio_final_clp *
               +cantidadServicio.servicio_cantidad;
             this.totalServicio = this.totalServicio + subtotal;
-            console.log('Total Servicio', this.totalServicio);
             cantidadServicio.unidades_obras.forEach(cantidadUO => {
               this.totalUO =
                 this.totalUO +
                 +cantidadUO.uo_precio_total_clp * +cantidadUO.uo_cantidad;
-
-              console.log('Total UOB', this.totalUO);
             });
           });
         }
@@ -589,6 +637,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   showMateriales(materiales: Materiales4Cub[]): void {
     this.materialesSelected = materiales;
     this.displayModalMateriales = true;
+    console.log(this.formCub);
   }
 
   closeModalMateriales(): void {
@@ -1007,5 +1056,11 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
     console.log(request);
     this.cubicacionFacade.editCub(request);
+  }
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
   }
 }
