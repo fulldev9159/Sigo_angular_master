@@ -7,6 +7,9 @@
 <ng-container *ngIf="Type==='number'">
   <p-inputNumber [formControl]="control" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
 </ng-container>
+<ng-container *ngIf="Type==='porcentaje'">
+  <p-inputNumber [formControl]="control" suffix="%" [min]="0" [max]="100"></p-inputNumber>
+</ng-container>
 
 <div *ngIf="control.invalid && (control.dirty || control.touched)">
   <p-message severity="error" text="{{errorMessageFn(control.errors)}}"></p-message>

@@ -582,6 +582,7 @@ export class OtEffects {
           otActions.AsignarSupervisorTrabajosOTSuccess,
           otActions.updateDetalleInformeAvanceSuccess,
           otActions.sendDetalleInformeAvanceSuccess,
+          otActions.AceptarRechazarInformeAvanceOTSuccess,
           otActions.createRegistroLibroObrasSuccess,
           otActions.sendGeneracionActaSuccess
         ),

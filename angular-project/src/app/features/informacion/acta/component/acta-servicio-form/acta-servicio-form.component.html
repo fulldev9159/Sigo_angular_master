@@ -27,36 +27,34 @@
                     <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
                     <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
                     <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value }}</td>
-                    <td style="text-align: right"class="data-secundaria">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_max_a_enviar').value }}</td>
+                    <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_max_a_enviar').value }}</td>
                     <td>
-                      <app-input [control]="servicio.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                      <app-input [control]="servicio.get('cantidad_a_enviar')" Type="number" [errorMessageFn]="errorMessageFn"></app-input>
                     </td>
                     <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                     <td class="data-secundaria">{{ +servicio.get('cantidad_a_enviar').value * +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                   </tr>
 
                   <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
-                    <ng-container *ngFor="let uo of unidadesObra.controls"> 
+                    <ng-container *ngFor="let uo of unidadesObra.controls">
                       <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value">
-                        <td  style="background-color:#ff8e4e ;
+                        <td style="background-color:#ff8e4e ;
                         padding-left: 22px !important;">
                           <input type="checkbox" [formControl]="uo.get('selected')">
                         </td>
-                        <td class="label-table"  style="background-color:#ff8e4e ;
+                        <td class="label-table" style="background-color:#ff8e4e ;
                         padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
-                        <td class="data-secundaria" >{{ uo.get('descripcion').value|titlecase }}</td>
+                        <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
                         <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}</td>
                         <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value - uo.get('cantidad_max_a_enviar').value }}</td>
                         <td>
-                          <app-input [control]="uo.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
+                          <app-input [control]="uo.get('cantidad_a_enviar')" Type="number" [errorMessageFn]="errorMessageFn"></app-input>
                         </td>
                         <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                         <td class="data-secundaria">{{+uo.get('cantidad_a_enviar').value *  +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                       </tr>
                     </ng-container>
                   </ng-container>
-
-                  
                 </ng-container>
               </tbody>
             </table>
@@ -64,48 +62,6 @@
         </app-card>
       </div>
     </ng-container>
-
-    <!-- <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
-      <div class="col-xs-6 col-md-6">
-        <app-card [classCardHeader]="'bg-info'">
-          <ng-container card-header-title>Detalle Unidades Obra</ng-container>
-          <ng-container card-body>
-            <table style="width:100%">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Cod.</th>
-                  <th>Descripción</th>
-                  <th style="text-align: right">Cant. informe av.</th>
-                  <th style="text-align: right">Cant. Pagada</th>
-                  <th style="text-align: right">Cant. a Enviar</th>
-                  <th>Precio Un.</th>
-                  <th>Total a pagar</th>
-                </tr>
-              </thead>
-              <tbody>
-                <ng-container *ngFor="let uo of unidadesObra.controls"> 
-                  <tr>
-                    <td>
-                      <input type="checkbox" [formControl]="uo.get('selected')">
-                    </td>
-                    <td class="label-table">{{ uo.get('uo_codigo').value }}</td>
-                    <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
-                    <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}</td>
-                    <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value - uo.get('cantidad_max_a_enviar').value }}</td>
-                    <td>
-                      <app-input [control]="uo.get('cantidad_a_enviar')" type="text" [errorMessageFn]="errorMessageFn"></app-input>
-                    </td>
-                    <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                    <td class="data-secundaria">{{+uo.get('cantidad_a_enviar').value *  +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                  </tr>
-                </ng-container>
-              </tbody>
-            </table>
-          </ng-container>
-        </app-card>
-      </div>
-    </ng-container> -->
   </ng-container>
 </div>
 
