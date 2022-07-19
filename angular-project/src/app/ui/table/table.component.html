@@ -38,10 +38,10 @@
           <td *ngSwitchCase="'TEXT-LABEL'"><span class="label-table " [ngClass]="item['estado']?'label-activo':'label-inactivo'" style="font-size: 0.8em;">{{ item[column.header] }}</span></td>
           <td *ngSwitchCase="'TEXT-LABEL-CUB'"><span class="label-table " [ngClass]="item['asignado']===0?'label-activo':'label-inactivo'" style="font-size: 0.8em;">{{ item[column.header] }}</span></td>
           <td *ngSwitchCase="'INPUT'">
-            <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="text" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
+            <app-input [control]="controls[getControlName(rowIndex, column.header)]" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
           </td>
           <td *ngSwitchCase="'INPUTNUMBER'">
-            <app-input [control]="controls[getControlName(rowIndex, column.header)]" type="number" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
+            <app-input [control]="controls[getControlName(rowIndex, column.header)]" Type="number" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn"></app-input>
           </td>
           <td *ngSwitchCase="'SELECT'">
             <app-select [control]="controls[getControlName(rowIndex, column.header)]" [errorMessageFn]="column.errorMessageFn ? column.errorMessageFn : errorMessageFn">

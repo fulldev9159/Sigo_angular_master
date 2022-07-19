@@ -4,7 +4,6 @@
   </div>
   <div class="col-md-8 col-xs-12 ">
     <ng-container *ngIf="control !== undefined">
-      <!-- <input     placeholder="{{ placeholder }}" name="{{name_input}}"> -->
       <app-input-builder [control]="control" Type="{{ Type }}" Name="{{Name}}" [errorMessageFn]="errorMessageFn"> </app-input-builder>
     </ng-container>
   </div>
@@ -13,18 +12,6 @@
 <ng-container *ngIf="DisplayLabelMode==='up'||DisplayLabelMode==='none' || label===''">
   <label *ngIf="DisplayLabelMode==='up'" style=" margin-top: 1rem">{{ label }}</label>
   <ng-container *ngIf="control !== undefined">
-    <!-- <input [formControl]="control" class="form-control" type="{{ inputType }}" placeholder="{{ placeholder }}" name="{{name_input}}" step="0.01"> -->
     <app-input-builder [control]="control" Type="{{ Type }}" Name="{{Name}}" [errorMessageFn]="errorMessageFn"> </app-input-builder>
   </ng-container>
 </ng-container>
-
-<!-- <ng-container *ngIf="DisplayLabelMode==='none'">
-  <ng-container *ngIf="control !== undefined">
-    <input [formControl]="control" class="form-control" type="{{ inputType }}" min="{{min}}" step="0.01" pattern="\d+((\.|,)\d+)?" placeholder="{{placeholder }}" style="    width: 51px;
-    font-size: 13px;
-    padding: 5px;" name="{{name_input}}">
-    <div *ngIf="control.invalid && (control.dirty || control.touched)">
-      <p-message severity="error" text="{{errorMessageFn(control.errors) }}"></p-message>
-    </div>
-  </ng-container>
-</ng-container> -->
