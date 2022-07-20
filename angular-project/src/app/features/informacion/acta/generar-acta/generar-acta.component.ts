@@ -74,7 +74,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   }
 
   noWhitespace(control: FormControl): any {
-    const isWhitespace = (control.value || '').trim().length === 0;
+    const isWhitespace = (control.value.toString() || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
@@ -163,6 +163,8 @@ export class GenararActaComponent implements OnInit, OnDestroy {
               +servicio.precio_unitario *
                 (+servicio.cantidad_total * (+porcentaje / 100));
           });
+
+          console.log(porcentaje);
 
           unidadesObraForm.value.forEach(uo => {
             console.log(uo);
@@ -286,9 +288,9 @@ export class GenararActaComponent implements OnInit, OnDestroy {
               [
                 Validators.required,
                 this.noWhitespace,
-                this.mustBeANumber,
+                // this.mustBeANumber,
                 this.nonZero,
-                Validators.min(0),
+                Validators.min(0.1),
                 Validators.max(servicio.faltante_cantidad),
               ]
             ),
