@@ -734,12 +734,12 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
   onInitEditionData(detalle: RespDataGetDetalleCubs): void {
     if (this.formCub && detalle) {
-      if (detalle.data_cubicacion.length === 0) {
-        return;
-      }
+      // if (detalle.data_cubicacion.length === 0) {
+      //   return;
+      // }
 
-      const cubicacion = detalle.data_cubicacion[0];
-      const servicios = detalle.servicios ?? [];
+      const cubicacion = detalle;
+      const servicios = detalle.many_cubicacion_has_servicio ?? [];
 
       //// this.formCub.get('id').addValidators([Validators.required]);
 
@@ -761,24 +761,24 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
 
         servicio_cantidad: 1,
         cantidad_unidad_obra: 1,
-        table: servicios.map(({ data_servicio, unidades_obra }) => ({
+        table: servicios.map(data_servicio => ({
           precargado: true,
-          servicio_rowid: data_servicio.cub_has_srv_id,
+          servicio_rowid: data_servicio.id,
 
           servicio_id: data_servicio.servicio_id,
-          servicio_cantidad: data_servicio.servicio_cantidad,
-          servicio_precio_final_clp: data_servicio.servicio_precio_final_clp,
+          servicio_cantidad: data_servicio.cantidad,
+          servicio_precio_final_clp: data_servicio.valor_unitario_clp,
           actividad_id: data_servicio.actividad_id,
           servicio_tipo: data_servicio.tipo_servicio_id,
 
-          unidades_obras: unidades_obra.map(
-            ({ data_unidad_obra, data_materiales }) => ({
+          unidades_obras: data_servicio.many_cubicacion_has_uob.map(
+            data_unidad_obra => ({
               precargado: true,
-              uo_rowid: data_unidad_obra.cub_has_uob_id,
+              uo_rowid: data_unidad_obra.id,
 
               uo_codigo: data_unidad_obra.unidad_obra_cod,
-              uo_cantidad: data_unidad_obra.uob_cantidad,
-              uo_precio_total_clp: data_unidad_obra.uo_precio_total_clp,
+              uo_cantidad: data_unidad_obra.cantidad,
+              uo_precio_total_clp: data_unidad_obra.valor_unitario_clp,
             })
           ),
         })),
@@ -790,59 +790,60 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         +cubicacion.contrato_id
       );
 
-      const carrito: Carrito[] = servicios.map(
-        ({ data_servicio, unidades_obra }) => ({
-          precargado: true,
+      const carrito: Carrito[] = servicios.map(data_servicio => ({
+        precargado: true,
 
-          servicio_rowid: data_servicio.cub_has_srv_id,
-          precio_agencia: 0,
-          precio_proveedor: data_servicio.prov_has_serv_precio,
-          servicio_baremos: data_servicio.puntos_baremos,
-          servicio_codigo: data_servicio.servicio_cod,
-          servicio_id: data_servicio.servicio_id,
-          servicio_nombre: data_servicio.servicio_desc,
-          servicio_precio_final: data_servicio.servicio_precio_final,
-          servicio_precio_final_clp: data_servicio.servicio_precio_final_clp,
-          servicio_tipo: data_servicio.tipo_servicio_id,
-          servicio_unidad_id: data_servicio.unidad_medida_id,
-          tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id? a la espera de lo que diga Braulio
-          actividad_descripcion: data_servicio.actividad_desc,
-          actividad_id: `${data_servicio.actividad_id}`,
-          servicio_tipo_moneda_codigo: data_servicio.precio_tipo_moneda_cod, // TODO o monto_tipo_moneda_cod?
-          servicio_tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
-          tipo_servicio_descripcion: data_servicio.tipo_servicio_desc,
-          numero_producto: 'TODO',
-          servicio_unidad_codigo: data_servicio.unidad_medida_cod,
-          servicio_unidad_descripcion: 'TODO',
+        servicio_rowid: data_servicio.id,
+        precio_agencia: 0,
+        precio_proveedor: data_servicio.prov_has_serv_precio,
+        servicio_baremos: data_servicio.puntos_baremos,
+        servicio_codigo: data_servicio.model_servicio_id.codigo,
+        servicio_id: data_servicio.servicio_id,
+        servicio_nombre: data_servicio.model_servicio_id.descripcion,
+        servicio_precio_final: data_servicio.valor_unitario_clp,
+        servicio_precio_final_clp: data_servicio.valor_unitario_clp,
+        servicio_tipo: data_servicio.tipo_servicio_id,
+        servicio_unidad_id: data_servicio.unidad_id,
+        tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id? a la espera de lo que diga Braulio
+        actividad_descripcion: 'TODO',
+        actividad_id: `${data_servicio.actividad_id}`,
+        servicio_tipo_moneda_codigo:
+          data_servicio.model_precio_tipo_moneda_id.codigo, // TODO o monto_tipo_moneda_cod?
+        servicio_tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
+        tipo_servicio_descripcion: 'TODO',
+        numero_producto: 'TODO',
+        servicio_unidad_codigo: data_servicio.model_unidad_id.codigo,
+        servicio_unidad_descripcion: 'TODO',
 
-          unidades_obras: unidades_obra.map(
-            ({ data_unidad_obra, data_materiales }) => ({
-              precargado: true,
+        unidades_obras: data_servicio.many_cubicacion_has_uob.map(
+          data_unidad_obra => ({
+            precargado: true,
 
-              material_arr: data_materiales.map(material => ({
-                material_cantidad: material.material_cantidad,
+            material_arr: data_unidad_obra.many_cubicacion_has_material.map(
+              material => ({
+                material_cantidad: material.cantidad,
                 material_codigo: material.material_cod,
-                material_nombre: material.material_desc,
+                material_nombre: material.model_material_cod.descripcion,
                 material_origen: material.origen,
-                material_precio: material.material_cantidad,
-                material_precio_clp: material.material_valor_clp,
+                material_precio: material.valor_unitario_clp,
+                material_precio_clp: material.valor_unitario_clp,
                 material_tipo_moneda_id: material.tipo_moneda_id,
-                material_unidad_id: material.material_unidad_medida_id,
+                material_unidad_id: material.model_unidad_id.id,
                 material_valor: material.valor,
-                material_unidad_codigo: material.material_unidad_medida_cod,
+                material_unidad_codigo: material.model_unidad_id.codigo,
                 material_unidad_descripcion: 'TODO',
-              })),
-              uo_rowid: data_unidad_obra.cub_has_uob_id,
-              uo_codigo: data_unidad_obra.unidad_obra_cod,
-              uo_nombre: data_unidad_obra.unidad_obra_desc,
-              uo_precio_total_clp: data_unidad_obra.uo_precio_total_clp,
-              uo_unidad_id: data_unidad_obra.uob_unidad_medida_id,
-              uo_unidad_codigo: data_unidad_obra.uob_unidad_medida_cod,
-              uo_unidad_descripcion: 'TODO',
-            })
-          ),
-        })
-      );
+              })
+            ),
+            uo_rowid: data_unidad_obra.id,
+            uo_codigo: data_unidad_obra.unidad_obra_cod,
+            uo_nombre: data_unidad_obra.model_unidad_obra_cod.descripcion,
+            uo_precio_total_clp: data_unidad_obra.valor_unitario_clp,
+            uo_unidad_id: data_unidad_obra.model_unidad_id.id,
+            uo_unidad_codigo: data_unidad_obra.model_unidad_id.codigo,
+            uo_unidad_descripcion: 'TODO',
+          })
+        ),
+      }));
 
       // TODO se está obligado a esperar a que se refresque el formulario con los datos de los combobox
       setTimeout(() => {

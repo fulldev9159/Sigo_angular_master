@@ -67,24 +67,24 @@ export interface RespDataGetDetalleCubs {
 //   servicios: ServiciosDetalle[];
 // }
 
-// export interface DetalleCubicacion {
-//   agencia_id: number;
-//   altura_desde: string;
-//   altura_hasta: string;
-//   cmarco_has_proveedor_id: number;
-//   codigo_acuerdo: string;
-//   contrato_id: number;
-//   created_at: Date;
-//   descripcion: string;
-//   direccion_desde: string;
-//   direccion_hasta: string;
-//   id: number;
-//   nombre: string;
-//   proveedor_id: number;
-//   tipo_cubicacion_id: number;
-//   updated_at: Date;
-//   usuario_creador_id: number;
-// }
+export interface DetalleCubicacion {
+  agencia_id: number;
+  altura_desde: string;
+  altura_hasta: string;
+  cmarco_has_proveedor_id: number;
+  codigo_acuerdo: string;
+  contrato_id: number;
+  created_at: Date;
+  descripcion: string;
+  direccion_desde: string;
+  direccion_hasta: string;
+  id: number;
+  nombre: string;
+  proveedor_id: number;
+  tipo_cubicacion_id: number;
+  updated_at: Date;
+  usuario_creador_id: number;
+}
 
 // TIPO CUBICACION 4 CUB
 export interface TipoCubicacion4Cub {
