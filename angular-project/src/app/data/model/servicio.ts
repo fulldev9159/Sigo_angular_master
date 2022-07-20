@@ -4,6 +4,7 @@ import { Unidad } from './unidad';
 import {
   UnidadObraFromDetalle,
   UnidadObraFromInformeAvance,
+  UODetalleCubicacion,
 } from './unidad-obra';
 
 export interface ServicioFromInfomeAvance {
@@ -190,4 +191,28 @@ export interface ModelInformeHasServicio {
   requiere_evidencia: boolean;
   evidencia_id?: any;
   model_servicio_id: ModelServicio;
+}
+
+export interface ServiciosGetDetalle {
+  id: number;
+  cubicacion_id: number;
+  servicio_id: number;
+  actividad_id: number;
+  tipo_servicio_id: number;
+  cantidad: number;
+  unidad_id: number;
+  puntos_baremos: number;
+  prov_has_serv_precio: number;
+  precio_tipo_moneda_id: number;
+  factor_conversion_precio: number;
+  requiere_evidencia: boolean;
+  valor_unitario_clp: number;
+  model_servicio_id: ModelServicio;
+  model_unidad_id: Unidad;
+  model_precio_tipo_moneda_id: {
+    id: number;
+    codigo: string;
+    nombre: string;
+  };
+  many_cubicacion_has_uob: UODetalleCubicacion[];
 }

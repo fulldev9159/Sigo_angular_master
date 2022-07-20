@@ -3,6 +3,7 @@ import {
   MaterialFromInformeAvance,
   Materiales4Cub,
   MaterialesLastActa,
+  MaterialesDetalleCubicacion,
 } from './materiales';
 import { ModelInformeHasServicio, ModelServicio } from './servicio';
 import { Unidad } from './unidad';
@@ -90,4 +91,17 @@ export interface DetalleUnidadObraLastActa {
     model_unidad_obra_cod: ModelUnidadObra;
     many_informe_has_material: MaterialesLastActa[];
   };
+}
+
+export interface UODetalleCubicacion {
+  id: number;
+  cubicacion_has_servicio_id: number;
+  unidad_obra_cod: string;
+  cantidad: number;
+  unidad_id: number;
+  clave: string;
+  valor_unitario_clp: number;
+  model_unidad_obra_cod: ModelUnidadObra;
+  model_unidad_id: Unidad;
+  many_cubicacion_has_material: MaterialesDetalleCubicacion[];
 }

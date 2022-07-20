@@ -1,4 +1,8 @@
-import { DetallesServicio4Cub, ServiciosDetalle } from './servicio';
+import {
+  DetallesServicio4Cub,
+  ServiciosDetalle,
+  ServiciosGetDetalle,
+} from './servicio';
 import { DetallesUnidadObra4Cub } from './unidad-obra';
 
 export interface Cubicacion {
@@ -36,30 +40,51 @@ export interface Cubicacion {
   total_tipo_moneda: string;
 }
 
-// DETALLE CUBICACION
 export interface RespDataGetDetalleCubs {
-  data_cubicacion: DetalleCubicacion[];
-  servicios: ServiciosDetalle[];
-}
-
-export interface DetalleCubicacion {
-  agencia_id: number;
-  altura_desde: string;
-  altura_hasta: string;
-  cmarco_has_proveedor_id: number;
-  codigo_acuerdo: string;
-  contrato_id: number;
-  created_at: Date;
-  descripcion: string;
-  direccion_desde: string;
-  direccion_hasta: string;
   id: number;
   nombre: string;
-  proveedor_id: number;
+  descripcion: string;
+  direccion_desde: string;
+  altura_desde: string;
+  direccion_hasta: string;
+  altura_hasta: string;
   tipo_cubicacion_id: number;
-  updated_at: Date;
+  contrato_id: number;
+  proveedor_id: number;
+  codigo_acuerdo: string;
+  cmarco_has_proveedor_id: number;
+  agencia_id: number;
   usuario_creador_id: number;
+  created_at: Date;
+  updated_at: Date;
+  valor_total_clp: number;
+  many_cubicacion_has_servicio: ServiciosGetDetalle[];
 }
+
+// DETALLE CUBICACION
+// export interface RespDataGetDetalleCubs {
+//   data_cubicacion: DetalleCubicacion[];
+//   servicios: ServiciosDetalle[];
+// }
+
+// export interface DetalleCubicacion {
+//   agencia_id: number;
+//   altura_desde: string;
+//   altura_hasta: string;
+//   cmarco_has_proveedor_id: number;
+//   codigo_acuerdo: string;
+//   contrato_id: number;
+//   created_at: Date;
+//   descripcion: string;
+//   direccion_desde: string;
+//   direccion_hasta: string;
+//   id: number;
+//   nombre: string;
+//   proveedor_id: number;
+//   tipo_cubicacion_id: number;
+//   updated_at: Date;
+//   usuario_creador_id: number;
+// }
 
 // TIPO CUBICACION 4 CUB
 export interface TipoCubicacion4Cub {
