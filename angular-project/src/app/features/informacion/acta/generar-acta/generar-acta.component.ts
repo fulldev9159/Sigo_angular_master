@@ -199,52 +199,59 @@ export class GenararActaComponent implements OnInit, OnDestroy {
           this.totalServicios +
           +servicio.valor_unitario_clp * +servicio.cantidad_total;
 
-        serviciosForm.push(
-          new FormGroup({
-            id: new FormControl(`${servicio.id}`, []),
-            servicio_codigo: new FormControl(`${servicio.servicio_codigo}`, []),
-            descripcion: new FormControl(
-              `${servicio.servicio_descripcion}`,
-              []
-            ), // TODO
-            cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
-            precio_unitario: new FormControl(
-              `${servicio.valor_unitario_clp}`,
-              []
-            ),
-            precio_total_servicio: new FormControl(
-              `${+servicio.valor_unitario_clp * +servicio.cantidad_total}`,
-              []
-            ),
-            cantidad_a_enviar: new FormControl(
-              `${servicio.faltante_cantidad}`,
-              []
-            ),
-          })
-        );
+        if (+servicio.cantidad_total > 0) {
+          serviciosForm.push(
+            new FormGroup({
+              id: new FormControl(`${servicio.id}`, []),
+              servicio_codigo: new FormControl(
+                `${servicio.servicio_codigo}`,
+                []
+              ),
+              descripcion: new FormControl(
+                `${servicio.servicio_descripcion}`,
+                []
+              ),
+              cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
+              precio_unitario: new FormControl(
+                `${servicio.valor_unitario_clp}`,
+                []
+              ),
+              precio_total_servicio: new FormControl(
+                `${+servicio.valor_unitario_clp * +servicio.cantidad_total}`,
+                []
+              ),
+              cantidad_a_enviar: new FormControl(
+                `${servicio.faltante_cantidad}`,
+                []
+              ),
+            })
+          );
+        }
       });
 
       (unidades_obra ?? []).forEach(uo => {
         this.totalUO =
           this.totalUO + +uo.valor_unitario_clp * +uo.cantidad_total;
-        unidadesObraForm.push(
-          new FormGroup({
-            id: new FormControl(`${uo.id}`, []),
-            descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
-            uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
-            cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
-            precio_unitario: new FormControl(`${uo.valor_unitario_clp}`, []),
-            precio_total_servicio: new FormControl(
-              `${+uo.valor_unitario_clp * +uo.cantidad_total}`,
-              []
-            ),
-            cantidad_a_enviar: new FormControl(`${uo.faltante_cantidad}`, []),
-            informe_has_servicio_id: new FormControl(
-              `${uo.informe_has_servicio_id}`,
-              []
-            ),
-          })
-        );
+        if (+uo.cantidad_total > 0) {
+          unidadesObraForm.push(
+            new FormGroup({
+              id: new FormControl(`${uo.id}`, []),
+              descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
+              uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
+              cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
+              precio_unitario: new FormControl(`${uo.valor_unitario_clp}`, []),
+              precio_total_servicio: new FormControl(
+                `${+uo.valor_unitario_clp * +uo.cantidad_total}`,
+                []
+              ),
+              cantidad_a_enviar: new FormControl(`${uo.faltante_cantidad}`, []),
+              informe_has_servicio_id: new FormControl(
+                `${uo.informe_has_servicio_id}`,
+                []
+              ),
+            })
+          );
+        }
       });
     }
   }
@@ -264,40 +271,45 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       serviciosForm.clear();
       unidadesObraForm.clear();
 
-      (servicios ?? []).forEach(servicio =>
-        serviciosForm.push(
-          new FormGroup({
-            id: new FormControl(`${servicio.id}`, []),
-            servicio_codigo: new FormControl(`${servicio.servicio_codigo}`, []),
-            descripcion: new FormControl(
-              `${servicio.servicio_descripcion}`,
-              []
-            ), // TODO
-            cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
-            precio_unitario: new FormControl(servicio.valor_unitario_clp, []),
-            precio_total_servicio: new FormControl(
-              +servicio.valor_unitario_clp * +servicio.cantidad_total,
-              []
-            ),
-            cantidad_max_a_enviar: new FormControl(
-              `${servicio.faltante_cantidad}`,
-              []
-            ),
-            cantidad_a_enviar: new FormControl(
-              { value: `${servicio.faltante_cantidad}`, disabled: true },
-              [
-                Validators.required,
-                this.noWhitespace,
-                // this.mustBeANumber,
-                this.nonZero,
-                Validators.min(0.1),
-                Validators.max(servicio.faltante_cantidad),
-              ]
-            ),
-            selected: new FormControl(false, []),
-          })
-        )
-      );
+      (servicios ?? []).forEach(servicio => {
+        if (+servicio.cantidad_total > 0) {
+          serviciosForm.push(
+            new FormGroup({
+              id: new FormControl(`${servicio.id}`, []),
+              servicio_codigo: new FormControl(
+                `${servicio.servicio_codigo}`,
+                []
+              ),
+              descripcion: new FormControl(
+                `${servicio.servicio_descripcion}`,
+                []
+              ),
+              cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
+              precio_unitario: new FormControl(servicio.valor_unitario_clp, []),
+              precio_total_servicio: new FormControl(
+                +servicio.valor_unitario_clp * +servicio.cantidad_total,
+                []
+              ),
+              cantidad_max_a_enviar: new FormControl(
+                `${servicio.faltante_cantidad}`,
+                []
+              ),
+              cantidad_a_enviar: new FormControl(
+                { value: `${servicio.faltante_cantidad}`, disabled: true },
+                [
+                  Validators.required,
+                  this.noWhitespace,
+                  // this.mustBeANumber,
+                  this.nonZero,
+                  Validators.min(0.1),
+                  Validators.max(servicio.faltante_cantidad),
+                ]
+              ),
+              selected: new FormControl(false, []),
+            })
+          );
+        }
+      });
 
       serviciosForm.controls.forEach((group, index) =>
         this.subscription.add(
@@ -310,41 +322,43 @@ export class GenararActaComponent implements OnInit, OnDestroy {
         )
       );
 
-      (unidades_obra ?? []).forEach(uo =>
-        unidadesObraForm.push(
-          new FormGroup({
-            id: new FormControl(`${uo.id}`, []),
-            descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
-            uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
-            cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
-            cantidad_max_a_enviar: new FormControl(
-              `${uo.faltante_cantidad}`,
-              []
-            ),
-            precio_unitario: new FormControl(uo.valor_unitario_clp, []),
-            precio_total_servicio: new FormControl(
-              +uo.valor_unitario_clp * +uo.cantidad_total,
-              []
-            ),
-            cantidad_a_enviar: new FormControl(
-              { value: `${uo.faltante_cantidad}`, disabled: true },
-              [
-                Validators.required,
-                this.noWhitespace,
-                this.mustBeANumber,
-                this.nonZero,
-                Validators.min(0),
-                Validators.max(uo.faltante_cantidad),
-              ]
-            ),
-            informe_has_servicio_id: new FormControl(
-              `${uo.informe_has_servicio_id}`,
-              []
-            ),
-            selected: new FormControl(false, []),
-          })
-        )
-      );
+      (unidades_obra ?? []).forEach(uo => {
+        if (+uo.cantidad_total > 0) {
+          unidadesObraForm.push(
+            new FormGroup({
+              id: new FormControl(`${uo.id}`, []),
+              descripcion: new FormControl(`${uo.unidad_obra_desc}`, []),
+              uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
+              cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
+              cantidad_max_a_enviar: new FormControl(
+                `${uo.faltante_cantidad}`,
+                []
+              ),
+              precio_unitario: new FormControl(uo.valor_unitario_clp, []),
+              precio_total_servicio: new FormControl(
+                +uo.valor_unitario_clp * +uo.cantidad_total,
+                []
+              ),
+              cantidad_a_enviar: new FormControl(
+                { value: `${uo.faltante_cantidad}`, disabled: true },
+                [
+                  Validators.required,
+                  this.noWhitespace,
+                  this.mustBeANumber,
+                  this.nonZero,
+                  Validators.min(0),
+                  Validators.max(uo.faltante_cantidad),
+                ]
+              ),
+              informe_has_servicio_id: new FormControl(
+                `${uo.informe_has_servicio_id}`,
+                []
+              ),
+              selected: new FormControl(false, []),
+            })
+          );
+        }
+      });
 
       unidadesObraForm.controls.forEach((group, index) =>
         this.subscription.add(
