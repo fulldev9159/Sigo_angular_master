@@ -1,8 +1,8 @@
-<ng-container *ngIf="(ot$|async).ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'">
+<ng-container *ngIf="(ot$|async) && (ot$|async).ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_VALIDACION_ACTA_GESTOR'">
   <br>
   <p-message severity="info" text="Está pendiente que el acta enviada sea autirizada por el gestor"></p-message>&nbsp;
 </ng-container>
-<ng-container *ngIf="(ot$|async).ot.model_tipo_etapa_ot_id.slug==='OT_ET_GENERACION_ACTA'">
+<ng-container *ngIf="(ot$|async) && (ot$|async).ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_GENERACION_ACTA'">
   <ng-container *ngIf="ot$ | async as ot">
     <ng-container *ngIf="form">
       <div class="row" style="padding: 15px">

@@ -1,4 +1,8 @@
-import { DetallesServicio4Cub, ServiciosDetalle } from './servicio';
+import {
+  DetallesServicio4Cub,
+  ServiciosDetalle,
+  ServiciosGetDetalle,
+} from './servicio';
 import { DetallesUnidadObra4Cub } from './unidad-obra';
 
 export interface Cubicacion {
@@ -36,11 +40,32 @@ export interface Cubicacion {
   total_tipo_moneda: string;
 }
 
-// DETALLE CUBICACION
 export interface RespDataGetDetalleCubs {
-  data_cubicacion: DetalleCubicacion[];
-  servicios: ServiciosDetalle[];
+  id: number;
+  nombre: string;
+  descripcion: string;
+  direccion_desde: string;
+  altura_desde: string;
+  direccion_hasta: string;
+  altura_hasta: string;
+  tipo_cubicacion_id: number;
+  contrato_id: number;
+  proveedor_id: number;
+  codigo_acuerdo: string;
+  cmarco_has_proveedor_id: number;
+  agencia_id: number;
+  usuario_creador_id: number;
+  created_at: Date;
+  updated_at: Date;
+  valor_total_clp: number;
+  many_cubicacion_has_servicio: ServiciosGetDetalle[];
 }
+
+// DETALLE CUBICACION
+// export interface RespDataGetDetalleCubs {
+//   data_cubicacion: DetalleCubicacion[];
+//   servicios: ServiciosDetalle[];
+// }
 
 export interface DetalleCubicacion {
   agencia_id: number;

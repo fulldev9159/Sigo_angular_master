@@ -46,7 +46,7 @@ export class CubicacionService {
     cubicacion_id: number
   ): Observable<Response<RespDataGetDetalleCubs>> {
     return this.http.post<Response<RespDataGetDetalleCubs>>(
-      `${this.apiUrl}/cubicacion/detalle/get`,
+      `${this.apiUrl}/cubicacion/detalle/get2`,
       { cubicacion_id }
     );
   }

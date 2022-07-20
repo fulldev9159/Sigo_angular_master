@@ -51,9 +51,7 @@ export class CloneCubageFormComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.cubageFacade.DetalleCub$().subscribe(cubicacion => {
         if (cubicacion !== null) {
-          this.form
-            .get('nombre')
-            .setValue(cubicacion.data_cubicacion[0].nombre);
+          this.form.get('nombre').setValue(cubicacion.nombre);
         }
       })
     );
@@ -100,36 +98,36 @@ export class CloneCubageFormComponent implements OnInit, OnDestroy {
         this.cubageFacade.DetalleCub$().subscribe(cubicacion => {
           if (cubicacion !== null) {
             const cubicacion_detalle: NuevoServicio[] =
-              cubicacion.servicios.map(servicios => {
-                const uo: NuevoUO[] = servicios.unidades_obra.map(uos => ({
-                  uob_codigo: uos.data_unidad_obra.unidad_obra_cod,
-                  cantidad: uos.data_unidad_obra.uob_cantidad,
-                }));
+              cubicacion.many_cubicacion_has_servicio.map(servicios => {
+                const uo: NuevoUO[] = servicios.many_cubicacion_has_uob.map(
+                  uos => ({
+                    uob_codigo: uos.unidad_obra_cod,
+                    cantidad: uos.cantidad,
+                  })
+                );
                 return {
-                  servicio_id: servicios.data_servicio.servicio_id,
-                  actividad_id: servicios.data_servicio.actividad_id,
-                  tipo_servicio_id: servicios.data_servicio.tipo_servicio_id,
-                  cantidad: servicios.data_servicio.servicio_cantidad,
+                  servicio_id: servicios.servicio_id,
+                  actividad_id: servicios.actividad_id,
+                  tipo_servicio_id: servicios.tipo_servicio_id,
+                  cantidad: servicios.cantidad,
                   unidad_obra: uo,
                 };
               });
             const request: RequestCreateCubicacion = {
               cubicacion_datos: {
                 nombre: nombre.trim(),
-                tipo_cubicacion_id:
-                  +cubicacion.data_cubicacion[0].tipo_cubicacion_id,
-                contrato_id: +cubicacion.data_cubicacion[0].contrato_id,
-                agencia_id: +cubicacion.data_cubicacion[0].agencia_id,
-                proveedor_id: +cubicacion.data_cubicacion[0].proveedor_id,
-                codigo_acuerdo: cubicacion.data_cubicacion[0].codigo_acuerdo,
-                cmarco_has_proveedor_id:
-                  +cubicacion.data_cubicacion[0].cmarco_has_proveedor_id,
+                tipo_cubicacion_id: +cubicacion.tipo_cubicacion_id,
+                contrato_id: +cubicacion.contrato_id,
+                agencia_id: +cubicacion.agencia_id,
+                proveedor_id: +cubicacion.proveedor_id,
+                codigo_acuerdo: cubicacion.codigo_acuerdo,
+                cmarco_has_proveedor_id: +cubicacion.cmarco_has_proveedor_id,
                 usuario_creador_id: this.usuario_id,
-                direccion_desde: cubicacion.data_cubicacion[0].direccion_desde,
-                altura_desde: cubicacion.data_cubicacion[0].altura_desde,
-                direccion_hasta: cubicacion.data_cubicacion[0].direccion_hasta,
-                altura_hasta: cubicacion.data_cubicacion[0].altura_hasta,
-                descripcion: cubicacion.data_cubicacion[0].descripcion,
+                direccion_desde: cubicacion.direccion_desde,
+                altura_desde: cubicacion.altura_desde,
+                direccion_hasta: cubicacion.direccion_hasta,
+                altura_hasta: cubicacion.altura_hasta,
+                descripcion: cubicacion.descripcion,
               },
               cubicacion_detalle: {
                 nuevo: cubicacion_detalle,

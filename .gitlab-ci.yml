@@ -31,7 +31,7 @@ linter:
 
 restart test environment:
   stage: restart test environment
-  # when: manual
+  when: manual
   image: tmaier/docker-compose:latest
   script:
     - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
@@ -52,7 +52,7 @@ restart test environment:
 
 reset database testing:
   stage: reset testing database sigo
-  # when: manual
+  when: manual
   needs:
     - restart test environment
   script:
@@ -70,7 +70,7 @@ reset database testing:
 integrations test cypress:
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: integrations test
-  # when: manual
+  when: manual
   needs:
     - reset database testing
   script:

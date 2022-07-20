@@ -43,10 +43,7 @@ export class GetCubicacionResolver implements Resolve<Response> {
 
         const cubicacion = response.data;
 
-        if (
-          cubicacion.servicios === null &&
-          cubicacion.data_cubicacion.length === 0
-        ) {
+        if (cubicacion.many_cubicacion_has_servicio === null && cubicacion) {
           throw new Error(`cubicacion no existe`);
         }
 
