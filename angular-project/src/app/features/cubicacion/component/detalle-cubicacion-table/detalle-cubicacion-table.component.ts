@@ -56,7 +56,7 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                           material_cantidad: material.cantidad,
                           material_codigo: material.material_cod,
                           material_nombre:
-                            material.model_material_cod.descripcion, //TODO
+                            material.model_material_cod.descripcion, // TODO
                           material_origen: material.origen,
                           material_precio: material.valor_unitario_clp,
                           material_precio_clp: material.valor_unitario_clp,
