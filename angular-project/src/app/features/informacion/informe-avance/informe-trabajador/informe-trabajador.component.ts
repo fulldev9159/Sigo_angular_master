@@ -74,9 +74,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
                 id: new FormControl(servicio.id, []),
                 cantidad: new FormControl(`${servicio.cantidad}`, [
                   Validators.required,
-                  this.noWhitespace,
+                  // this.noWhitespace,
                   // this.mustBeANumber,
-                  this.nonZero,
+                  // this.nonZero,
                   Validators.min(0),
                 ]),
                 unidades_obras: new FormArray(
@@ -86,9 +86,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
                         id: new FormControl(uo.id, []),
                         cantidad: new FormControl(`${uo.cantidad}`, [
                           Validators.required,
-                          this.noWhitespace,
-                          this.mustBeANumber,
-                          this.nonZero,
+                          // this.noWhitespace,
+                          // this.mustBeANumber,
+                          // this.nonZero,
                           Validators.min(0),
                         ]),
                       })
