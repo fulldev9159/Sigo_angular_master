@@ -520,14 +520,20 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   makeUOForm(uo: DatosUnidadObra4Cub): FormGroup {
+    let cantidad = 1;
+    let min = 0.01;
+    if (uo.uo_codigo === '0') {
+      (cantidad = 0), (min = 0);
+    }
+
     return new FormGroup({
       precargado: new FormControl(uo.precargado ?? false, []),
       uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
 
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
-      uo_cantidad: new FormControl(1, [
+      uo_cantidad: new FormControl(cantidad, [
         Validators.required,
-        Validators.min(0.01),
+        Validators.min(min),
       ]),
       uo_precio_total_clp: new FormControl(uo.uo_precio_total_clp, [
         Validators.required,
