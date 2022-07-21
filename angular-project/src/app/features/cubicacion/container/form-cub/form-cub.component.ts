@@ -811,12 +811,13 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
         servicio_tipo: data_servicio.tipo_servicio_id,
         servicio_unidad_id: data_servicio.unidad_id,
         tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id? a la espera de lo que diga Braulio
-        actividad_descripcion: 'TODO',
+        actividad_descripcion: data_servicio.model_actividad_id.descripcion,
         actividad_id: `${data_servicio.actividad_id}`,
         servicio_tipo_moneda_codigo:
           data_servicio.model_precio_tipo_moneda_id.codigo, // TODO o monto_tipo_moneda_cod?
         servicio_tipo_moneda_id: data_servicio.precio_tipo_moneda_id, // TODO o monto_tipo_moneda_id?
-        tipo_servicio_descripcion: 'TODO',
+        tipo_servicio_descripcion:
+          data_servicio.model_tipo_servicio_id.descripcion,
         numero_producto: 'TODO',
         servicio_unidad_codigo: data_servicio.model_unidad_id.codigo,
         servicio_unidad_descripcion: 'TODO',

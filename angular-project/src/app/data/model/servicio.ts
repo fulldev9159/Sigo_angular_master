@@ -1,3 +1,4 @@
+import { Actividad4Cub } from './actividad';
 import { ModelContratoMarco } from './contrato';
 import { TipoMoneda } from './tipo-moneda';
 import { Unidad } from './unidad';
@@ -215,4 +216,13 @@ export interface ServiciosGetDetalle {
     nombre: string;
   };
   many_cubicacion_has_uob: UODetalleCubicacion[];
+
+  model_actividad_id: Actividad4Cub;
+  model_tipo_servicio_id: {
+    id: number;
+    codigo: string;
+    descripcion: string;
+    estado: boolean;
+    contrato_marco_id: number;
+  };
 }

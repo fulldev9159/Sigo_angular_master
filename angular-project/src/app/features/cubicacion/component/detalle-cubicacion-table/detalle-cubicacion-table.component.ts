@@ -96,13 +96,14 @@ export class DetalleCubicacionTableComponent implements OnInit, OnDestroy {
                 servicio_unidad_id: servicios.unidad_id,
                 servicio_unidad_cod: servicios.model_unidad_id.codigo,
                 tipo_moneda_id: servicios.model_precio_tipo_moneda_id.id,
-                actividad_descripcion: 'TODO',
+                actividad_descripcion: servicios.model_actividad_id.descripcion,
                 actividad_id: servicios.actividad_id.toString(),
                 servicio_tipo_moneda_codigo:
                   servicios.model_precio_tipo_moneda_id.codigo,
                 servicio_tipo_moneda_id:
                   servicios.model_precio_tipo_moneda_id.id,
-                tipo_servicio_descripcion: 'TODO',
+                tipo_servicio_descripcion:
+                  servicios.model_tipo_servicio_id.descripcion,
                 servicio_cantidad: servicios.cantidad,
                 numero_producto: 'TODO',
                 servicio_unidad_codigo: servicios.model_unidad_id.codigo,
