@@ -1,49 +1,27 @@
-# Project SIGO WEB 0.1.0
+# WebSigo
 
-Password: M0v15tar.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
 
-## Tecnologías
+## Development server
 
-![Tecnologías](./readme_img/tecnologias.PNG)
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Ambiente actual
+## Code scaffolding
 
-![Ambiente](./readme_img/Ambiente.PNG)
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Objetivo
+## Build
 
-El objetivo de es otorgar un administrador web que permita al cliente gestionar las ordenes de trabajo que se realizan en Movistar.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Funcionalidades
+## Running unit tests
 
-Permite:
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-- Administración de usuarios
-- Administración de cubicaciones
-- Administración de Ordenes de trabajo
+## Running end-to-end tests
 
-## Links
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-- Miro: <https://miro.com/app/board/o9J_lRnu24c=/>
-- Repo API-sigo: <https://gitlab.com/zweicom/cl-movistar/sigo/api-sigo>
-- Repo Db: <https://gitlab.com/zweicom/databases/databases>
-- Repo Env: <https://gitlab.com/zweicom/cl-movistar/sigo/demos-sigo>
+## Further help
 
-## Ejecución
-
-- cd ../angular-project
-- npm install
-- npm start
-
-<!-- ## Robot e2e
-Documentación: https://robotframework.org/robotframework/
-### **command**
-
-> ``` robot --variable url:<url de la web a testear> --variable ambiente:ambiente en que se probará> <archivo o directorio de archivos de testing>```
->> ``` robot --variable url:http://localhost:4201 --variable ambiente:visual .```
-
-### sintax
-- ```--variable url: ```
-- ```--variable ambiente:```:
-    - **visual** = Para probar de manera local y poder ver la interfaz de chrome
-    - **testing** = Para que no ejecute una intefaz visual. Este ambiente es usado para la pipeline -->
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
