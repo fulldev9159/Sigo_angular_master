@@ -18,9 +18,10 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
+    "strictNullChecks": false,
     "paths": {
-      "@environment": ["src/environments/environment"]
-      // "@data": ["src/app/data"],
+      "@environment": ["src/environments/environment"],
+      "@model": ["src/app/core/model"]
       // "@data/*": ["src/app/data/*"],
       // "@layoytOT": ["src/app/layout/layout.module"],
       // "@layoytOT/*": ["src/app/layout/*"],
