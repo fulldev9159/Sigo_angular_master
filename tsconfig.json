@@ -18,10 +18,19 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "paths": {
+      "@environment": ["src/environments/environment"]
+      // "@data": ["src/app/data"],
+      // "@data/*": ["src/app/data/*"],
+      // "@layoytOT": ["src/app/layout/layout.module"],
+      // "@layoytOT/*": ["src/app/layout/*"],
+      // "@featureOT/*": ["src/app/features/*"],
+      // "@uiOT/*": ["src/app/ui/*"],
+      // "@storeOT/*": ["src/app/store/*"],
+      // "@utilsSIGO/*": ["src/app/utils/*"],
+      // "@pages/*": ["src/app/pages/*"]
+    },
+    "lib": ["es2020", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
