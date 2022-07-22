@@ -20,4 +20,4 @@ import * as formAuthReduce from './auth/auth.reducers';
     ),
   ],
 })
-export class StoreAllModule {}
+export class StoreSIGOModule {}

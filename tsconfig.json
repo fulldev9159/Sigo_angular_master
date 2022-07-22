@@ -21,13 +21,13 @@
     "strictNullChecks": false,
     "paths": {
       "@environment": ["src/environments/environment"],
-      "@model": ["src/app/core/model"]
-      // "@data/*": ["src/app/data/*"],
+      "@model": ["src/app/core/model"],
+      "@coreOT": ["src/app/core"],
       // "@layoytOT": ["src/app/layout/layout.module"],
       // "@layoytOT/*": ["src/app/layout/*"],
       // "@featureOT/*": ["src/app/features/*"],
       // "@uiOT/*": ["src/app/ui/*"],
-      // "@storeOT/*": ["src/app/store/*"],
+      "@storeOT/*": ["src/app/store/*"]
       // "@utilsSIGO/*": ["src/app/utils/*"],
       // "@pages/*": ["src/app/pages/*"]
     },
