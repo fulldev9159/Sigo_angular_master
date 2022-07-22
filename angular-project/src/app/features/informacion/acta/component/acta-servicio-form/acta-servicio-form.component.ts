@@ -109,4 +109,8 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
       this.submitted.emit(this.values);
     }
   }
+
+  getFormObject(): void {
+    console.log(this.form);
+  }
 }

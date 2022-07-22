@@ -130,16 +130,14 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       // se moverá entre 0 a 75
       // Si no hay items, se deja en 0 y se deshabilita
 
-      this.form
-        .get('porcentaje')
-        .setValidators([
-          Validators.required,
-          this.noWhitespace,
-          this.mustBeANumber,
-          this.nonZero,
-          Validators.min(0),
-          Validators.max(porcentajeFaltanteMax),
-        ]);
+      this.form.get('porcentaje').setValidators([
+        Validators.required,
+        this.noWhitespace,
+        // this.mustBeANumber,
+        this.nonZero,
+        Validators.min(0),
+        Validators.max(porcentajeFaltanteMax),
+      ]);
       this.form.get('porcentaje').setValue(`${porcentajeFaltanteMax}`);
       if (items.length === 0) {
         this.form.get('porcentaje').disable();
@@ -344,9 +342,9 @@ export class GenararActaComponent implements OnInit, OnDestroy {
                 [
                   Validators.required,
                   this.noWhitespace,
-                  this.mustBeANumber,
+                  // this.mustBeANumber,
                   this.nonZero,
-                  Validators.min(0),
+                  Validators.min(0.01),
                   Validators.max(uo.faltante_cantidad),
                 ]
               ),

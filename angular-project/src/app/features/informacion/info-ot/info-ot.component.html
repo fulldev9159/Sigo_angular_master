@@ -280,9 +280,9 @@
                     <td>
                       {{item.servicio_cantidad}}
                     </td>
-                    <td class="data-secundaria">{{+item.servicio_precio_final/item.servicio_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                    <td class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                     <!-- <td class="data-secundaria">{{item.servicio_baremos}}</td> -->
-                    <td class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td class="data-secundaria">{{+item.servicio_precio_final_clp * +item.servicio_cantidad | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>
                       <!-- <div class="ui icon buttons mini basic">
                           <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
@@ -299,8 +299,8 @@
                       {{item.unidades_obras[0].uo_cantidad}}
                     </td>
                     <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-                    <td>{{item.unidades_obras[0].uo_precio_total_clp/item.unidades_obras[0].uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp * +item.unidades_obras[0].uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>
                       <!-- <div class="ui icon buttons mini basic">
                           <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
@@ -318,9 +318,9 @@
                     <td [attr.rowspan]="+item.unidades_obras.length">
                       {{item.servicio_cantidad}}
                     </td>
-                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final/item.servicio_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <!-- <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{item.servicio_baremos}}</td> -->
-                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria">{{+item.servicio_precio_final_clp * +item.servicio_cantidad | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td [attr.rowspan]="+item.unidades_obras.length">
                       <!-- <div class="ui icon buttons mini basic">
                           <button (click)="deleteServiceCarrito(item.servicio_codigo)" class="ui button eliminar-color">
@@ -336,8 +336,8 @@
                       {{item.unidades_obras[0].uo_cantidad}}
                     </td>
                     <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-                    <td>{{item.unidades_obras[0].uo_precio_total_clp/item.unidades_obras[0].uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>{{item.unidades_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{item.unidades_obras[0].uo_precio_total_clp * +item.unidades_obras[0].uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>
                       <!-- <div class="ui icon buttons mini basic">
                           <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
@@ -358,8 +358,8 @@
                       {{uo.uo_cantidad}}
                     </td>
                     <td class="data-secundaria">{{item.servicio_tipo_moneda_codigo}}</td>
-                    <td>{{uo.uo_precio_total_clp/uo.uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>{{uo.uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    <td>{{uo.uo_precio_total_clp * +uo.uo_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     <td>
                       <!-- <div class="ui icon buttons mini basic">
                           <button *ngIf="uo.uo_codigo!==0" (click)="showMateriales(uo.material_arr)" class="ui button generic-color">Detalles </button>

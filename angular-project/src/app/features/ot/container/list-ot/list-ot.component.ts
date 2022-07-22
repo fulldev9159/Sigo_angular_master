@@ -380,6 +380,21 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const otValidarActa = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_VALIDAR_ACTA'
+        );
+
+        if (otValidarActa) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Validar Acta',
+            onClick: (event: Event, item) => {
+              this.router.navigate(['/app/informacion/validar-acta', item.id]);
+            },
+          });
+        }
+
         return actions;
       },
     },
