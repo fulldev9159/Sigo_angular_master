@@ -1,1 +1,1 @@
-export * from './guard/home.guard';
+export * from './guard/sigo.guard';

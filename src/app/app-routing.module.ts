@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeGuard } from '@coreOT';
+import { SigoGuard } from '@coreOT';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -8,7 +8,7 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./features/home/home.module').then(m => m.HomeModule),
-    canActivate: [HomeGuard],
+    canLoad: [SigoGuard],
   },
   {
     path: 'login',
