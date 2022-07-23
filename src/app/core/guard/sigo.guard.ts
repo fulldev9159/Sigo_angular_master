@@ -62,7 +62,13 @@ export class SigoGuard implements CanActivate, CanLoad {
     return this.authFacade.getSessionData$().pipe(
       map(sessionData => {
         if (sessionData) {
-          return sessionData.token !== undefined && sessionData.token !== null;
+          if (sessionData.token === undefined || sessionData.token === null) {
+            return false;
+          } else {
+            return true;
+          }
+          // return true;
+          // sessionData.token !== undefined && sessionData.token !== null;
         } else {
           this.router.navigate(['/login']);
           return false;

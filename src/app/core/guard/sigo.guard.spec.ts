@@ -23,36 +23,54 @@ describe('Sigo Guard Test', () => {
   let facade: AuthFacade;
   const dummyRoute = {} as ActivatedRouteSnapshot;
   let routerSpy: jasmine.SpyObj<Router>;
-  let router: Router;
+  let fakeRoute: Route = { path: 'home' };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({}), RouterTestingModule],
     });
-    // guard = TestBed.inject(HomeGuard)
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     facade = TestBed.inject(AuthFacade);
+    // guard = TestBed.inject(SigoGuard);
     guard = new SigoGuard(routerSpy, facade);
-    router = TestBed.inject(Router);
   });
 
   it('should be created', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('CanLoad should return false if sessionData in null and redirect to login', () => {
-    const fakeRoute: Route = { path: 'Home' };
+  it('should return false if sessionData doesnt exists', () => {
     spyOn(facade, 'getSessionData$').and.returnValue(of(null));
-    spyOn(router, 'navigate');
     const canLoad = guard.canLoad(fakeRoute);
-    canLoad.subscribe(val => {
-      expect(val).toBeFalse();
-      expect(router.navigate).toHaveBeenCalledWith(['/login']);
-    });
+    canLoad.subscribe(val => expect(val).toBeFalse());
   });
 
-  it('CanLoad should return false if token is null', () => {
-    const fakeRoute: Route = { path: 'Home' };
+  it('should redirect to login if sessionData doest exist', () => {
+    spyOn(facade, 'getSessionData$').and.returnValue(of(null));
+    const canLoad = guard.canLoad(fakeRoute);
+    canLoad.subscribe(val =>
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/login'])
+    );
+  });
+
+  // it('should return true if sessionData exists', () => {
+  //   spyOn(facade, 'getSessionData$').and.returnValue(
+  //     of({
+  //       token: null,
+  //       usuario_nombre: null,
+  //       usuario_id: null,
+  //       nombre_perfil_select: null,
+  //       permisos: [],
+  //       perfil_proxy_id: null,
+  //       multiperfiles: null,
+  //       rol: null,
+  //     })
+  //   );
+  //   const canLoad = guard.canLoad(fakeRoute);
+  //   canLoad.subscribe(val => expect(val).toBeTrue());
+  // });
+
+  it('should return false if sessionData exists and token is null or undefined', () => {
     spyOn(facade, 'getSessionData$').and.returnValue(
       of({
         token: null,
@@ -69,26 +87,48 @@ describe('Sigo Guard Test', () => {
     canLoad.subscribe(val => expect(val).toBeFalse());
   });
 
-  it('CanLoad should return true if token exist', () => {
-    const fakeRoute: Route = { path: 'Home' };
-    spyOn(facade, 'getSessionData$').and.returnValue(
-      of({
-        token: '123141215',
-        usuario_nombre: null,
-        usuario_id: null,
-        nombre_perfil_select: null,
-        permisos: [],
-        perfil_proxy_id: null,
-        multiperfiles: null,
-        rol: null,
-      })
-    );
-    const canLoad = guard.canLoad(fakeRoute);
-    canLoad.subscribe(val => expect(val).toBeTrue());
-  });
+  // it('CanLoad should return false if token is null', () => {
+  //   const fakeRoute: Route = { path: 'Home' };
+  //   spyOn(facade, 'getSessionData$').and.returnValue(
+  //     of({
+  //       token: null,
+  //       usuario_nombre: null,
+  //       usuario_id: null,
+  //       nombre_perfil_select: null,
+  //       permisos: [],
+  //       perfil_proxy_id: null,
+  //       multiperfiles: null,
+  //       rol: null,
+  //     })
+  //   );
+  //   const canLoad = guard.canLoad(fakeRoute);
+  //   const navigateSpy = spyOn(router, 'navigate');
+  //   canLoad.subscribe(val => {
+  //     expect(val).toBeFalse();
+  //     expect(router.navigate).toHaveBeenCalledWith(['/login']);
+  //   });
+  // });
 
-  it('CanActivate should return false if token doesnt exist', () => {
-    const canActivate = guard.canActivate(dummyRoute, fakeRouterState('/'));
-    expect(canActivate).toBeTrue();
-  });
+  // it('CanLoad should return true if token exist', () => {
+  //   const fakeRoute: Route = { path: 'Home' };
+  //   spyOn(facade, 'getSessionData$').and.returnValue(
+  //     of({
+  //       token: '123141215',
+  //       usuario_nombre: null,
+  //       usuario_id: null,
+  //       nombre_perfil_select: null,
+  //       permisos: [],
+  //       perfil_proxy_id: null,
+  //       multiperfiles: null,
+  //       rol: null,
+  //     })
+  //   );
+  //   const canLoad = guard.canLoad(fakeRoute);
+  //   canLoad.subscribe(val => expect(val).toBeTrue());
+  // });
+
+  // it('CanActivate should return false if token doesnt exist', () => {
+  //   const canActivate = guard.canActivate(dummyRoute, fakeRouterState('/'));
+  //   expect(canActivate).toBeTrue();
+  // });
 });
