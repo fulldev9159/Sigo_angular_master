@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthTokenGuard } from 'src/app/core/guard/auth.guard';
 import { AuthComponent } from './auth.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 
@@ -16,6 +17,7 @@ const routes: Routes = [
       {
         path: 'auth',
         component: LoginFormComponent,
+        canActivate: [AuthTokenGuard],
       },
     ],
   },
