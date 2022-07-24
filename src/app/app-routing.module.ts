@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SigoGuard } from '@coreOT';
+import { AuthTokenGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./features/auth/auth.module').then(m => m.AuthModule),
+    canLoad: [AuthTokenGuard],
   },
 ];
 
