@@ -7,8 +7,9 @@ import {
 } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
-import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { Observable } from 'rxjs';
 import { of } from 'rxjs';
+import { AuthService } from '../service/auth.service';
 
 import { SigoGuard } from './sigo.guard';
 
@@ -18,9 +19,9 @@ function fakeRouterState(url: string): RouterStateSnapshot {
   } as RouterStateSnapshot;
 }
 
-describe('Sigo Guard Test', () => {
+describe('Guard SIGO Test', () => {
   let guard: SigoGuard;
-  let facade: AuthFacade;
+  let authService: AuthService;
   const dummyRoute = {} as ActivatedRouteSnapshot;
   let routerSpy: jasmine.SpyObj<Router>;
   let fakeRoute: Route = { path: 'home' };
@@ -30,105 +31,56 @@ describe('Sigo Guard Test', () => {
       imports: [StoreModule.forRoot({}), RouterTestingModule],
     });
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
-    facade = TestBed.inject(AuthFacade);
+    authService = TestBed.inject(AuthService);
     // guard = TestBed.inject(SigoGuard);
-    guard = new SigoGuard(routerSpy, facade);
+    guard = new SigoGuard(routerSpy, authService);
   });
 
   it('should be created', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should return false if sessionData doesnt exists', () => {
-    spyOn(facade, 'getSessionData$').and.returnValue(of(null));
+  it('canLoad should return false if isLoggin return false', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(false));
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val => expect(val).toBeFalse());
   });
 
-  it('should redirect to login if sessionData doest exist', () => {
-    spyOn(facade, 'getSessionData$').and.returnValue(of(null));
+  it('canLoad should redirect to login page if isLoggin return false', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(false));
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val =>
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/login'])
     );
   });
 
-  // it('should return true if sessionData exists', () => {
-  //   spyOn(facade, 'getSessionData$').and.returnValue(
-  //     of({
-  //       token: null,
-  //       usuario_nombre: null,
-  //       usuario_id: null,
-  //       nombre_perfil_select: null,
-  //       permisos: [],
-  //       perfil_proxy_id: null,
-  //       multiperfiles: null,
-  //       rol: null,
-  //     })
-  //   );
-  //   const canLoad = guard.canLoad(fakeRoute);
-  //   canLoad.subscribe(val => expect(val).toBeTrue());
-  // });
-
-  it('should return false if sessionData exists and token is null or undefined', () => {
-    spyOn(facade, 'getSessionData$').and.returnValue(
-      of({
-        token: null,
-        usuario_nombre: null,
-        usuario_id: null,
-        nombre_perfil_select: null,
-        permisos: [],
-        perfil_proxy_id: null,
-        multiperfiles: null,
-        rol: null,
-      })
-    );
+  it('canLoad should return true if isLoggin return true', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(true));
     const canLoad = guard.canLoad(fakeRoute);
-    canLoad.subscribe(val => expect(val).toBeFalse());
+    canLoad.subscribe(val => expect(val).toBeTrue());
   });
 
-  // it('CanLoad should return false if token is null', () => {
-  //   const fakeRoute: Route = { path: 'Home' };
-  //   spyOn(facade, 'getSessionData$').and.returnValue(
-  //     of({
-  //       token: null,
-  //       usuario_nombre: null,
-  //       usuario_id: null,
-  //       nombre_perfil_select: null,
-  //       permisos: [],
-  //       perfil_proxy_id: null,
-  //       multiperfiles: null,
-  //       rol: null,
-  //     })
-  //   );
-  //   const canLoad = guard.canLoad(fakeRoute);
-  //   const navigateSpy = spyOn(router, 'navigate');
-  //   canLoad.subscribe(val => {
-  //     expect(val).toBeFalse();
-  //     expect(router.navigate).toHaveBeenCalledWith(['/login']);
-  //   });
-  // });
+  it('canLoad should return false if isLoggin return false', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+    const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
+    (canActivate as Observable<boolean>).subscribe(val =>
+      expect(val).toBeFalse()
+    );
+  });
 
-  // it('CanLoad should return true if token exist', () => {
-  //   const fakeRoute: Route = { path: 'Home' };
-  //   spyOn(facade, 'getSessionData$').and.returnValue(
-  //     of({
-  //       token: '123141215',
-  //       usuario_nombre: null,
-  //       usuario_id: null,
-  //       nombre_perfil_select: null,
-  //       permisos: [],
-  //       perfil_proxy_id: null,
-  //       multiperfiles: null,
-  //       rol: null,
-  //     })
-  //   );
-  //   const canLoad = guard.canLoad(fakeRoute);
-  //   canLoad.subscribe(val => expect(val).toBeTrue());
-  // });
+  it('canLoad should redirect to login page if isLoggin return false', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+    const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
+    (canActivate as Observable<boolean>).subscribe(val =>
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/login'])
+    );
+  });
 
-  // it('CanActivate should return false if token doesnt exist', () => {
-  //   const canActivate = guard.canActivate(dummyRoute, fakeRouterState('/'));
-  //   expect(canActivate).toBeTrue();
-  // });
+  it('canLoad should return true if isLoggin return true', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+    const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
+    (canActivate as Observable<boolean>).subscribe(val =>
+      expect(val).toBeTrue()
+    );
+  });
 });
