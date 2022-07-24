@@ -5,16 +5,18 @@ import {
   RouterStateSnapshot,
   UrlTree,
   Router,
+  CanLoad,
+  Route,
 } from '@angular/router';
-import { AuthFacade } from '@storeOT/auth/auth.facades';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../service/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthTokenGuard implements CanActivate {
-  constructor(private router: Router, private authFacade: AuthFacade) {}
+export class AuthTokenGuard implements CanActivate, CanLoad {
+  constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -24,25 +26,23 @@ export class AuthTokenGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authFacade.getSessionData$().pipe(
-      map(sessionData => {
-        if (
-          sessionData &&
-          sessionData.token !== undefined &&
-          sessionData.perfil_proxy_id !== undefined &&
-          sessionData.token !== null &&
-          sessionData.perfil_proxy_id !== null
-        ) {
-          this.router.navigate(['/app/dashboard']);
-          return false;
-        } else if (
-          (sessionData && sessionData.token === undefined) ||
-          sessionData.perfil_proxy_id === undefined ||
-          sessionData.token === null ||
-          sessionData.perfil_proxy_id === null
-        ) {
-          return true;
+    return this.authService.isLoggin().pipe(
+      map(val => {
+        if (val) {
+          this.router.navigate(['/home']);
         }
+        return !val;
+      })
+    );
+  }
+
+  canLoad(route: Route): Observable<boolean> {
+    return this.authService.isLoggin().pipe(
+      map(val => {
+        if (val) {
+          this.router.navigate(['/home']);
+        }
+        return !val;
       })
     );
   }

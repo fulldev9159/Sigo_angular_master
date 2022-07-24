@@ -10,8 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { AuthService } from '../service/auth.service';
-
-import { SigoGuard } from './sigo.guard';
+import { AuthTokenGuard } from './auth.guard';
 
 function fakeRouterState(url: string): RouterStateSnapshot {
   return {
@@ -19,65 +18,63 @@ function fakeRouterState(url: string): RouterStateSnapshot {
   } as RouterStateSnapshot;
 }
 
-describe('Guard SIGO Test', () => {
-  let guard: SigoGuard;
+describe('Guard Login', () => {
+  let guard: AuthTokenGuard;
   let authService: AuthService;
   const dummyRoute = {} as ActivatedRouteSnapshot;
   let routerSpy: jasmine.SpyObj<Router>;
   let fakeRoute: Route = { path: 'home' };
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({}), RouterTestingModule],
     });
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     authService = TestBed.inject(AuthService);
-    // guard = TestBed.inject(SigoGuard);
-    guard = new SigoGuard(routerSpy, authService);
+    guard = new AuthTokenGuard(routerSpy, authService);
   });
 
   it('should be created', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('canLoad should return false if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+  it('canLoad should return false if isLoggin return true', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(true));
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val => expect(val).toBeFalse());
   });
 
-  it('canLoad should redirect to login page if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+  it('canLoad should redirect to home page if isLoggin return true', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(true));
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val =>
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/login'])
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/home'])
     );
   });
 
-  it('canLoad should return true if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+  it('canLoad should return true if isLoggin return false', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(false));
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val => expect(val).toBeTrue());
   });
 
-  it('canActivate should return false if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+  it('canActivate should return false if isLoggin return true', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(true));
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
       expect(val).toBeFalse()
     );
   });
 
-  it('canActivate should redirect to login page if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+  it('canActivate should redirect to home page if isLoggin return true', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(true));
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/login'])
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/home'])
     );
   });
 
-  it('canActivate should return true if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+  it('canActivate should return true if isLoggin return false', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(of(false));
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
       expect(val).toBeTrue()
