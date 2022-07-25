@@ -94,7 +94,7 @@ describe('LoginFormComponent', () => {
     component.formLogin.get('username').setValue('asdasdasdasdas');
     component.formLogin.get('password').setValue('asdasdasdasdas');
     const compiled = fixture.nativeElement;
-    // expect(compiled.querySelector('#login-button').disabled).toBeFalsy();
+    fixture.detectChanges();
     console.log(compiled.querySelector('#login-button').disabled);
     expect(component.formLogin.valid).toBeTrue();
     expect(compiled.querySelector('#login-button').disabled).toBeFalsy();
