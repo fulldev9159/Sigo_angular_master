@@ -3,7 +3,7 @@
 <form [formGroup]="formLogin">
     <input type="text" pInputText name="username" placeholder="Nombre usuario" [formControl]="formLoginControls.username"/>
     <input type="text" pInputText name="password" placeholder="Password" [formControl]="formLoginControls.password"/>
-    <button disabled id="login-button">Login</button>
+    <button [disabled]="!formLogin.valid" id="login-button">Login</button>
 </form>
 
 <a href="https://guia.telefonicachile.cl/login.jsf" id="recuperar-guia">Recuperar clave GUIA</a>

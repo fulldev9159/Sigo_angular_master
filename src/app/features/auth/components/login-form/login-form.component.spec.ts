@@ -1,4 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 import { LoginFormComponent } from './login-form.component';
 
@@ -8,6 +14,7 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FormsModule, ReactiveFormsModule],
       declarations: [LoginFormComponent],
     }).compileComponents();
 
@@ -80,13 +87,16 @@ describe('LoginFormComponent', () => {
 
   it('form password control should be invalid if insert a password of less 5 letters', () => {
     component.formLogin.get('password').setValue('1121');
-    expect(component.formLogin.get('password').valid).toBeTrue();
+    expect(component.formLogin.get('password').valid).toBeFalse();
   });
 
   it('button login should be enabled if form is valid', () => {
     component.formLogin.get('username').setValue('asdasdasdasdas');
     component.formLogin.get('password').setValue('asdasdasdasdas');
     const compiled = fixture.nativeElement;
+    // expect(compiled.querySelector('#login-button').disabled).toBeFalsy();
+    console.log(compiled.querySelector('#login-button').disabled);
+    expect(component.formLogin.valid).toBeTrue();
     expect(compiled.querySelector('#login-button').disabled).toBeFalsy();
   });
 });
