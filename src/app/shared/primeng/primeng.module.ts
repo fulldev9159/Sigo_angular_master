@@ -1,4 +1,4 @@
 import { NgModule } from '@angular/core';
-
-@NgModule({ imports: [] })
+import { InputTextModule } from 'primeng/inputtext';
+@NgModule({ imports: [InputTextModule], exports: [InputTextModule] })
 export class PrimeNgModule {}

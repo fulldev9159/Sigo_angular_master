@@ -16,6 +16,13 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
+  it('ripple should be true', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    app.ngOnInit();
+    expect(app['primeConfig'].ripple).toBeTrue();
+  });
+
   // it(`should have as title 'web-sigo'`, () => {
   //   const fixture = TestBed.createComponent(AppComponent);
   //   const app = fixture.componentInstance;
