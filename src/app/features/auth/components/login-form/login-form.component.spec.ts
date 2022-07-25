@@ -30,14 +30,14 @@ describe('LoginFormComponent', () => {
   it('should display a input name username as enabled ', () => {
     const compiled = fixture.nativeElement;
     expect(
-      compiled.querySelector('input.get(name="username")').disabled
+      compiled.querySelector('input[name="username"]').disabled
     ).toBeFalsy();
   });
 
   it('should display a input name password as enabled ', () => {
     const compiled = fixture.nativeElement;
     expect(
-      compiled.querySelector('input.get(name="password")').disabled
+      compiled.querySelector('input[name="password"]').disabled
     ).toBeFalsy();
   });
 
