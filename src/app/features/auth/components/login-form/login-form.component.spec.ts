@@ -9,7 +9,6 @@ describe('LoginFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginFormComponent],
-      providers: [{ provide: Location }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginFormComponent);
@@ -31,14 +30,14 @@ describe('LoginFormComponent', () => {
   it('should display a input name username as enabled ', () => {
     const compiled = fixture.nativeElement;
     expect(
-      compiled.querySelector('input[name="username"]').disabled
+      compiled.querySelector('input.get(name="username")').disabled
     ).toBeFalsy();
   });
 
   it('should display a input name password as enabled ', () => {
     const compiled = fixture.nativeElement;
     expect(
-      compiled.querySelector('input[name="password"]').disabled
+      compiled.querySelector('input.get(name="password")').disabled
     ).toBeFalsy();
   });
 
@@ -52,5 +51,42 @@ describe('LoginFormComponent', () => {
     expect(compiled.querySelector('#recuperar-guia').href).toContain(
       'https://guia.telefonicachile.cl/login.jsf'
     );
+  });
+
+  it('form username control should be valid if insert a correct username', () => {
+    component.formLogin.get('username').setValue('asdasdasdasdas');
+    expect(component.formLogin.get('username').valid).toBeTrue();
+  });
+
+  it('form username control should be invalid if insert a empty username', () => {
+    component.formLogin.get('username').setValue('');
+    expect(component.formLogin.get('username').valid).toBeFalse();
+  });
+
+  it('form username control should be invalid if insert a username of less 5 letters', () => {
+    component.formLogin.get('username').setValue('da');
+    expect(component.formLogin.get('username').valid).toBeFalse();
+  });
+
+  it('form password control should be valid if insert a correct password', () => {
+    component.formLogin.get('password').setValue('asdasdasdasdas');
+    expect(component.formLogin.get('password').valid).toBeTrue();
+  });
+
+  it('form password control should be invalid if insert a empty password', () => {
+    component.formLogin.get('password').setValue('');
+    expect(component.formLogin.get('password').valid).toBeFalse();
+  });
+
+  it('form password control should be invalid if insert a password of less 5 letters', () => {
+    component.formLogin.get('password').setValue('1121');
+    expect(component.formLogin.get('password').valid).toBeTrue();
+  });
+
+  it('button login should be enabled if form is valid', () => {
+    component.formLogin.get('username').setValue('asdasdasdasdas');
+    component.formLogin.get('password').setValue('asdasdasdasdas');
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('#login-button').disabled).toBeFalsy();
   });
 });
