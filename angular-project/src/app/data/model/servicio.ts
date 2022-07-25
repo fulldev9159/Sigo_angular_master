@@ -170,6 +170,8 @@ export interface DetalleServicioLastActa {
   };
   pago_cantidad: number;
   pago_porcentaje: number;
+
+  valor_detalle_clp: number;
 }
 
 export interface ModelInformeHasServicio {

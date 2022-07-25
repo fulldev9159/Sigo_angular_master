@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Subscription, Observable, of } from 'rxjs';
 
-import { LastActa } from '@data';
+import { LastActa, MotivoRechazo } from '@data';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface Acta {
   informe_has_servicio_id: number;
@@ -14,7 +15,9 @@ interface Acta {
     codigo: string;
     descripcion: string;
     pago_cantidad: number;
+    valor_detalle_clp: number;
   }[];
+  valor_detalle_clp?: number;
 }
 
 @Component({
@@ -27,12 +30,35 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
   tipoPago$: Observable<string> = this.otFacade.getUltimoTipoPagoActa$();
   lastActa$: Observable<LastActa> = this.otFacade.getLastActa$();
   acta: Acta[] = [];
+  totalPago = 0;
+  displaAprobarActa = false;
+  displaRechazarActa = false;
+
+  tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
+
+  formRechazoInicialControls = {
+    tipo_id: new FormControl(null, [Validators.required]),
+    motivo: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+      Validators.maxLength(200),
+    ]),
+  };
+  formRechazoIncial: FormGroup = new FormGroup(this.formRechazoInicialControls);
+
+  formAprobarActaControls = {
+    detalle: new FormControl(null, []),
+  };
+
+  formAprobarActa: FormGroup = new FormGroup(this.formAprobarActaControls);
 
   constructor(private otFacade: OtFacade) {}
 
   ngOnInit(): void {
+    this.tipoRechazo$ = this.otFacade.getAllMotivoRechazoOT$();
     this.subscription.add(
       this.lastActa$.subscribe(lacta => {
+        this.totalPago = lacta.valor_total_clp;
         if (lacta.many_acta_detalle_servicio) {
           this.acta = lacta.many_acta_detalle_servicio.map(servicio => ({
             informe_has_servicio_id: servicio.informe_has_servicio_id,
@@ -43,6 +69,7 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
                 .descripcion,
             pago_cantidad: servicio.pago_cantidad,
             tipo: 'PAGO',
+            valor_detalle_clp: servicio.valor_detalle_clp,
           }));
           if (lacta.many_acta_detalle_uob) {
             const uos_sin_servicios = lacta.many_acta_detalle_uob.filter(
@@ -95,6 +122,7 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
                       uob.model_informe_has_uob_id.model_unidad_obra_cod
                         .descripcion,
                     pago_cantidad: uob.pago_cantidad,
+                    valor_detalle_clp: uob.valor_detalle_clp,
                   }));
                 }
               });
@@ -114,6 +142,7 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
                       uob.model_informe_has_uob_id.model_unidad_obra_cod
                         .descripcion,
                     pago_cantidad: uob.pago_cantidad,
+                    valor_detalle_clp: uob.valor_detalle_clp,
                   }));
                 }
               });
@@ -149,6 +178,7 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
                   uob.model_informe_has_uob_id.model_unidad_obra_cod
                     .descripcion,
                 pago_cantidad: uob.pago_cantidad,
+                valor_detalle_clp: uob.valor_detalle_clp,
               }));
             });
           }
@@ -159,5 +189,39 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  DesplegarRechazoActa(): void {
+    this.displaRechazarActa = true;
+    this.otFacade.getAllMotivoRechazoOT('ACTA');
+  }
+
+  DisplayAceptarActas(): void {
+    this.displaAprobarActa = true;
+  }
+
+  AceptarActas(): void {}
+
+  closeAprobarActaModal(): void {
+    this.displaAprobarActa = false;
+  }
+
+  closeRechazoActaModal(): void {
+    this.displaRechazarActa = false;
+  }
+
+  RechazarActaAvance(): void {
+    // const request: RequestAutorizarInformeAvance = {
+    //   ot_id: this.idOtSelected,
+    //   estado: 'RECHAZADO',
+    //   observacion: this.formRechazoIncial.get('motivo').value,
+    //   tipo: +this.formRechazoIncial.get('tipo_id').value,
+    // };
+  }
+
+  noWhitespace(control: FormControl): any {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
   }
 }

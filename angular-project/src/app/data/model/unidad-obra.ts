@@ -91,6 +91,7 @@ export interface DetalleUnidadObraLastActa {
     model_unidad_obra_cod: ModelUnidadObra;
     many_informe_has_material: MaterialesLastActa[];
   };
+  valor_detalle_clp: number;
 }
 
 export interface UODetalleCubicacion {

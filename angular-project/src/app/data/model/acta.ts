@@ -77,4 +77,14 @@ export interface LastActa {
   validacion_estado: string;
   validacion_fecha: Date;
   validacion_usuario_id: Date;
+  autorizacion_estado: string;
+  autorizacion_fecha?: any;
+  tipo_sustento: string;
+  pmo_codigo: number;
+  id_opex?: any;
+  lp: string;
+  cuenta_sap?: any;
+  pep2: string;
+  ceco?: any;
+  valor_total_clp: number;
 }

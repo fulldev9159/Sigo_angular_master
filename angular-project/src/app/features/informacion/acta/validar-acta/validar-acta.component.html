@@ -39,8 +39,8 @@
                       <td>
                         {{servicio.pago_cantidad}}
                       </td>
-                      <td class="data-secundaria">??</td>
-                      <td class="data-secundaria">---</td>
+                      <td class="data-secundaria">{{servicio.valor_detalle_clp/servicio.pago_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                      <td class="data-secundaria">{{servicio.valor_detalle_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     </tr>
                     <tr *ngIf="servicio.tipo==='REFERENCIAL'" style="background-color: #d6d6d6;">
                       <td style="font-size: 11px !important;">{{servicio.codigo}}</td>
@@ -59,8 +59,8 @@
                       <td>
                         {{uo.pago_cantidad}}
                       </td>
-                      <td class="data-secundaria">??</td>
-                      <td class="data-secundaria">---</td>
+                      <td class="data-secundaria">{{uo.valor_detalle_clp/uo.pago_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                      <td class="data-secundaria">{{uo.valor_detalle_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
                     </ng-container>
                   </ng-container>
 
@@ -74,3 +74,74 @@
     </div>
   </div>
 </div>
+
+<div class="row" id="table-totales">
+  <div class="col-md-4 col-xs-12"></div>
+  <div class="col-md-4 col-xs-12">
+    <app-card [classCardHeader]="'bg-info'">
+      <ng-container card-header-title>Total a Pagar</ng-container>
+      <ng-container card-body>
+       <span class="total-pagar"> {{ totalPago| currency : 'CLP' : '$':'.0-2':'es-CL'}} </span>
+      </ng-container>
+    </app-card>
+  </div>
+  <div class="ccol-md-4 col-xs-12"></div>
+</div>
+
+<div style="display: flex;justify-content:space-evenly;margin-top: 30px;">
+  <button class="btn btn-secundary" (click)="DesplegarRechazoActa()">
+    <em class="pi pi-send mr-1"></em>Rechazar
+  </button>
+  <button class="btn btn-primary" (click)="DisplayAceptarActas()">
+    <em class="pi pi-send mr-1"></em>Aceptar
+  </button>
+</div>
+
+
+<app-modal [display]="displaRechazarActa" (CloseEvent)="closeRechazoActaModal()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title style="text-align: center;">Motivo del rechazo</ng-container>
+  <ng-container modal-content>
+    <!-- <pre>{{formRechazoIncial.value|json}}</pre> -->
+    <form [formGroup]="formRechazoIncial">
+      <br>
+      <app-select [control]="formRechazoIncial.get('tipo_id')" label="* Tipo de Rechazo:">
+        <ng-container options>
+          <option value="null" selected disabled>Seleccione un tipo de rechazo</option>
+          <ng-container *ngFor="let item of tipoRechazo$|async">
+            <option [value]="item.id">
+              {{item.motivo}}
+            </option>
+          </ng-container>
+        </ng-container>
+      </app-select>
+      <br>
+      <label for="">* Motivo</label>
+      <textarea formControlName="motivo" class="form-control" placeholder="" name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
+    </form>
+
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeRechazoActaModal()">Cancelar</button>
+    <button class="btn btn-primary" [disabled]="!formRechazoIncial.valid" (click)="RechazarActaAvance()">
+      <em class="pi pi-save mr-1"></em>Enviar
+    </button>
+  </ng-container>
+</app-modal>
+
+<app-modal [display]="displaAprobarActa" (CloseEvent)="closeAprobarActaModal()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title style="text-align: center;">Detalles de la aprobación</ng-container>
+  <ng-container modal-content>
+    <!-- <pre>{{formRechazoIncial.value|json}}</pre> -->
+    <form [formGroup]="formAprobarActa">
+      <label for="">Comentario</label>
+      <textarea formControlName="detalle" class="form-control" placeholder="" name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
+    </form>
+
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeAprobarActaModal()">Cancelar</button>
+    <button class="btn btn-primary" (click)="AceptarActas()">
+      <em class="pi pi-save mr-1"></em>Enviar
+    </button>
+  </ng-container>
+</app-modal>
