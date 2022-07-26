@@ -1,16 +1,18 @@
-<p>Acceda utilizando su cuenta GUIA</p>
+<div class="flex flex-column align-items-center justify-content-evenly" style="height:220px">
+    <p>Acceda utilizando su cuenta GUIA</p>
 
-<form [formGroup]="formLogin">
-    <input type="text" pInputText name="username" placeholder="Nombre usuario" [formControl]="formLoginControls.username"/>
-    <input type="text" pInputText name="password" placeholder="Password" [formControl]="formLoginControls.password"/>
+    <form [formGroup]="formLogin" class="flex flex-column align-items-center justify-content-evenly" style="height: 127px;">
+        <input type="text" pInputText name="username" placeholder="Nombre usuario" [formControl]="formLoginControls.username"/>
+        <input type="text" pInputText name="password" placeholder="Password" [formControl]="formLoginControls.password"/>
+        
+        <ng-container *ngIf="production">
+            <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [formControl]="formLoginControls.recaptcha"></re-captcha>
+        </ng-container>
     
-    <ng-container *ngIf="production">
-        <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [formControl]="formLoginControls.recaptcha"></re-captcha>
-    </ng-container>
-
-    <button [disabled]="!formLogin.valid" id="login-button">Login</button>
-</form>
-
-
-<a href="https://guia.telefonicachile.cl/login.jsf" id="recuperar-guia">Recuperar clave GUIA</a>
+        <button [disabled]="!formLogin.valid" id="login-button">Login</button>
+    </form>
+    
+    
+    <a href="https://guia.telefonicachile.cl/login.jsf" id="recuperar-guia">Recuperar clave GUIA</a>    
+</div>
 
