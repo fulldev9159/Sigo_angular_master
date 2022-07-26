@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
 import { Subscription, Observable, of } from 'rxjs';
 
-import { LastActa, MotivoRechazo } from '@data';
+import { LastActa, MotivoRechazo, RequestAceptarRechazarOT } from '@data';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 interface Acta {
   informe_has_servicio_id: number;
@@ -52,10 +53,19 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
 
   formAprobarActa: FormGroup = new FormGroup(this.formAprobarActaControls);
 
-  constructor(private otFacade: OtFacade) {}
+  ot_id = -1;
+
+  constructor(private otFacade: OtFacade, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.tipoRechazo$ = this.otFacade.getAllMotivoRechazoOT$();
+    this.subscription.add(
+      this.route.paramMap.subscribe(params => {
+        if (params.get('id') != null) {
+          this.ot_id = +params.get('id');
+        }
+      })
+    );
     this.subscription.add(
       this.lastActa$.subscribe(lacta => {
         this.totalPago = lacta.valor_total_clp;
@@ -200,7 +210,18 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
     this.displaAprobarActa = true;
   }
 
-  AceptarActas(): void {}
+  AceptarActas(): void {
+    const request: RequestAceptarRechazarOT = {
+      ot_id: this.ot_id,
+      values: {
+        estado: 'VALIDADO',
+        observacion: this.formAprobarActa.get('detalle').value,
+      },
+    };
+
+    this.otFacade.AceptarRechazarActaOT(request);
+    this.displaAprobarActa = false;
+  }
 
   closeAprobarActaModal(): void {
     this.displaAprobarActa = false;
@@ -211,12 +232,17 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
   }
 
   RechazarActaAvance(): void {
-    // const request: RequestAutorizarInformeAvance = {
-    //   ot_id: this.idOtSelected,
-    //   estado: 'RECHAZADO',
-    //   observacion: this.formRechazoIncial.get('motivo').value,
-    //   tipo: +this.formRechazoIncial.get('tipo_id').value,
-    // };
+    const request: RequestAceptarRechazarOT = {
+      ot_id: this.ot_id,
+      values: {
+        estado: 'INVALIDADO',
+        observacion: this.formRechazoIncial.get('motivo').value,
+        tipo: +this.formRechazoIncial.get('tipo_id').value,
+      },
+    };
+
+    this.otFacade.AceptarRechazarActaOT(request);
+    this.closeRechazoActaModal();
   }
 
   noWhitespace(control: FormControl): any {

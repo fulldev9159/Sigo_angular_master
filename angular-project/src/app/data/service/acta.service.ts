@@ -3,7 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { delay, map } from 'rxjs/operators';
-import { DetalleActaUob, LastActa, Response } from '@data/model';
+import {
+  DetalleActaUob,
+  LastActa,
+  RequestAceptarRechazarOT,
+  Response,
+} from '@data/model';
 
 @Injectable({
   providedIn: 'root',
@@ -79,5 +84,15 @@ export class ActaService {
       tipo_pago,
       detalle,
     });
+  }
+
+  // ACEPTAR O RECHAZAR ACTA
+  AceptarRechazarActaOT(
+    request: RequestAceptarRechazarOT
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/acta/validacion/update`,
+      request
+    );
   }
 }

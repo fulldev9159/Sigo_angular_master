@@ -757,3 +757,18 @@ export const AceptarRechazarInformeAvanceOTError = createAction(
   '[OT] GET AceptarRechazarInformeAvanceOT Error',
   props<{ error: any }>()
 );
+
+//  RECHAZAR ACTA
+export const AprobarRechazarActaOT = createAction(
+  '[OT] GET AprobarRechazarActaOT',
+  props<{ request: RequestAceptarRechazarOT }>()
+);
+
+export const AprobarRechazarActaOTSuccess = createAction(
+  '[OT] GET AprobarRechazarActaOT Success',
+  props<{ response: Response<any> }>()
+);
+export const AprobarRechazarActaOTError = createAction(
+  '[OT] GET AprobarRechazarActaOT Error',
+  props<{ error: any }>()
+);

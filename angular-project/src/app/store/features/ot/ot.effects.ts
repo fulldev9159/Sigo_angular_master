@@ -572,6 +572,21 @@ export class OtEffects {
     )
   );
 
+  // APROBAR RECHAZAR ACTA
+  aprobarRechazarActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AprobarRechazarActaOT),
+      concatMap(({ request }) =>
+        this.actaService.AceptarRechazarActaOT(request).pipe(
+          map(response => otActions.AprobarRechazarActaOTSuccess({ response })),
+          catchError(error =>
+            of(otActions.AprobarRechazarActaOTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

@@ -582,4 +582,9 @@ export class OtFacade {
   public getLastActa$(): Observable<LastActa> {
     return this.store.select(otSelectors.getLastActa);
   }
+
+  // ACEPTAR O RECHAZAR ACTA
+  public AceptarRechazarActaOT(request: RequestAceptarRechazarOT): void {
+    this.store.dispatch(otActions.AprobarRechazarActaOT({ request }));
+  }
 }
