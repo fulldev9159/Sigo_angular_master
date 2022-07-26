@@ -3,7 +3,14 @@
 <form [formGroup]="formLogin">
     <input type="text" pInputText name="username" placeholder="Nombre usuario" [formControl]="formLoginControls.username"/>
     <input type="text" pInputText name="password" placeholder="Password" [formControl]="formLoginControls.password"/>
+    
+    <ng-container *ngIf="production">
+        <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [formControl]="formLoginControls.recaptcha"></re-captcha>
+    </ng-container>
+
     <button [disabled]="!formLogin.valid" id="login-button">Login</button>
 </form>
 
+
 <a href="https://guia.telefonicachile.cl/login.jsf" id="recuperar-guia">Recuperar clave GUIA</a>
+

@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '@environment';
+import { SharedModule } from '@sharedOT/shared.module';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 import { LoginFormComponent } from './login-form.component';
 
@@ -13,8 +11,15 @@ describe('LoginFormComponent', () => {
   let fixture: ComponentFixture<LoginFormComponent>;
 
   beforeEach(async () => {
+    const env = { production: true, api: '' };
     await TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RecaptchaFormsModule,
+        RecaptchaModule,
+        SharedModule.forRoot(env),
+      ],
       declarations: [LoginFormComponent],
     }).compileComponents();
 
@@ -90,13 +95,22 @@ describe('LoginFormComponent', () => {
     expect(component.formLogin.get('password').valid).toBeFalse();
   });
 
-  it('button login should be enabled if form is valid', () => {
+  it('in production mode recaptcha should be required and button should be disabled', () => {
     component.formLogin.get('username').setValue('asdasdasdasdas');
     component.formLogin.get('password').setValue('asdasdasdasdas');
     const compiled = fixture.nativeElement;
     fixture.detectChanges();
-    console.log(compiled.querySelector('#login-button').disabled);
-    expect(component.formLogin.valid).toBeTrue();
+    expect(component.formLogin.valid).toBeFalse();
+    expect(compiled.querySelector('#login-button').disabled).toBeTruthy();
+  });
+
+  it('in production mode form to be valid if all form include recaptcha have data ', () => {
+    component.formLogin.get('username').setValue('asdasdasdasdas');
+    component.formLogin.get('password').setValue('asdasdasdasdas');
+    component.formLogin.get('recaptcha').setValue('asdasdasdasdas');
+    const compiled = fixture.nativeElement;
+    fixture.detectChanges();
+    expect(component.formLogin.valid).toBeTruthy();
     expect(compiled.querySelector('#login-button').disabled).toBeFalsy();
   });
 });

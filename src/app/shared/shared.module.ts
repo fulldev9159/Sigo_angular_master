@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from './primeng/primeng.module';
 
@@ -7,4 +7,11 @@ import { PrimeNgModule } from './primeng/primeng.module';
   imports: [CommonModule, PrimeNgModule],
   exports: [PrimeNgModule],
 })
-export class SharedModule {}
+export class SharedModule {
+  static forRoot(environment: any): ModuleWithProviders<any> {
+    return {
+      ngModule: SharedModule,
+      providers: [{ provide: 'environment', useValue: environment }],
+    };
+  }
+}

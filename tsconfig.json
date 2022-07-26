@@ -24,8 +24,6 @@
       "@model": ["src/app/core/model"],
       "@coreOT": ["src/app/core"],
       "@sharedOT/*": ["src/app/shared/*"],
-      // "@layoytOT": ["src/app/layout/layout.module"],
-      // "@layoytOT/*": ["src/app/layout/*"],
       // "@featureOT/*": ["src/app/features/*"],
       // "@uiOT/*": ["src/app/ui/*"],
       "@storeOT/*": ["src/app/store/*"]
