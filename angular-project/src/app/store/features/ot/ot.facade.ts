@@ -587,4 +587,9 @@ export class OtFacade {
   public AceptarRechazarActaOT(request: RequestAceptarRechazarOT): void {
     this.store.dispatch(otActions.AprobarRechazarActaOT({ request }));
   }
+
+  // SOLICITAR PAGO
+  public solicitarPago(ot_id: number): void {
+    this.store.dispatch(otActions.solicitarPago({ ot_id }));
+  }
 }

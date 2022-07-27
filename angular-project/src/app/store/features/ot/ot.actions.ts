@@ -772,3 +772,19 @@ export const AprobarRechazarActaOTError = createAction(
   '[OT] GET AprobarRechazarActaOT Error',
   props<{ error: any }>()
 );
+
+//  SOLICITAR PAGO
+export const solicitarPago = createAction(
+  '[OT] GET solicitarPago',
+  props<{ ot_id: number }>()
+);
+
+export const solicitarPagoSuccess = createAction(
+  '[OT] GET  solicitarPago Success',
+  props<{ response: Response<any> }>()
+);
+
+export const solicitarPagoError = createAction(
+  '[OT] GET  solicitarPago Error',
+  props<{ error: any }>()
+);

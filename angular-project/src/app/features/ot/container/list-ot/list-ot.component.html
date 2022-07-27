@@ -251,3 +251,17 @@
     </button>
   </ng-container>
 </app-modal>
+
+<app-modal [display]="displaySoliciarPago" (CloseEvent)="closeSolicitarPago()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title><i class="pi pi-book"></i>&nbsp;Socitar Pago</ng-container>
+  <ng-container modal-content>
+    ¿Desea solicitar el pago?
+    <!-- <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-detalle-informe-avance-table> -->
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeSolicitarPago()">Cancelar</button>
+        <button class="btn btn-primary" (click)="solicitarPago()">
+          <em class="pi mr-1" ></em>Enviar
+        </button>
+  </ng-container>
+</app-modal>

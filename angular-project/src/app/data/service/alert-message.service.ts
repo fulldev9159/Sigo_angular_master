@@ -184,7 +184,8 @@ export class AlertMessageActions {
         action === otActions.sendDetalleInformeAvanceSuccess.type ||
         action === otActions.AceptarRechazarInformeAvanceOTSuccess.type ||
         action === otActions.AsignarSupervisorTrabajosOTSuccess.type ||
-        action === otActions.AceptarRechazarInformeAvanceOTSuccess.type
+        action === otActions.AceptarRechazarInformeAvanceOTSuccess.type ||
+        action === otActions.solicitarPagoSuccess.type
       ) {
         this.otFacade.getOts({
           filtro_propietario: 'TODAS',

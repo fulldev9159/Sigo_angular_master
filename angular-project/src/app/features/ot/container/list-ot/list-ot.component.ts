@@ -13,6 +13,7 @@ import {
   RequestAceptarRechazarOT,
   DetalleInformeAvance,
   RequestAutorizarInformeAvance,
+  OTService,
 } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subject, Subscription } from 'rxjs';
@@ -63,6 +64,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displayAprobarInformeAvanceModal = false;
   displayRechazoInformeAcvanceModal = false;
   displayAuthInformeModal = false;
+  displaySoliciarPago = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -395,6 +397,23 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const otSilicitarPago = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_SOLICITAR_PAGO'
+        );
+
+        if (otSilicitarPago) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Solicitar Pago',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.displaySoliciarPago = true;
+            },
+          });
+        }
+
         return actions;
       },
     },
@@ -418,7 +437,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
     private otFacade: OtFacade,
     private authFacade: AuthFacade,
     private confirmationService: ConfirmationService,
-    private router: Router
+    private router: Router,
+    private otService: OTService
   ) {}
 
   ngOnInit(): void {
@@ -669,5 +689,15 @@ export class ListOtComponent implements OnInit, OnDestroy {
   sendDetalleInformeAvance(detalle: DetalleInformeAvance): void {
     this.otFacade.sendDetalleInformeAvance(detalle.ot_id);
     this.closeInformeAvanceModal();
+  }
+
+  closeSolicitarPago(): void {
+    this.otFacade.selectOT(null);
+    this.displaySoliciarPago = false;
+  }
+
+  solicitarPago(): void {
+    this.displaySoliciarPago = false;
+    this.otFacade.solicitarPago(this.idOtSelected);
   }
 }
