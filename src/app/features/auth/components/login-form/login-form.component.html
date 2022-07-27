@@ -6,19 +6,21 @@
             <i class="pi pi-user"></i>
             <input type="text" pInputText name="username" class="p-inputtext-sm" [formControl]="formLoginControls.username"/>            
             <label for="float-input">Nombre Usuario</label>
+            <zwc-input-alert [control]="formLoginControls.username"> </zwc-input-alert>
         </span>
         
         <span class="p-float-label p-input-icon-right mt-3">
             <i class="pi pi-key"></i>
-            <input type="text" pInputText name="password" class="p-inputtext-sm" [formControl]="formLoginControls.password"/>
+            <input type="password" pInputText name="password" class="p-inputtext-sm" [formControl]="formLoginControls.password"/>
             <label for="float-input">Password</label>
+            <zwc-input-alert [control]="formLoginControls.password"> </zwc-input-alert>
         </span>
         
-        <!-- <ng-container *ngIf="production"> -->
+        <ng-container *ngIf="production">
             <div id="container-recaptcha" style="transform:scale(0.7);transform-origin:0;margin-left: 6rem;">
                 <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [formControl]="formLoginControls.recaptcha"></re-captcha>
             </div>
-        <!-- </ng-container> -->
+        </ng-container>
     
         <button [disabled]="!formLogin.valid" id="login-button" pButton type="button" label="Login" class="p-button-info p-button-sm"></button>
     </form>

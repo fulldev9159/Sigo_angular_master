@@ -75,11 +75,6 @@ describe('LoginFormComponent', () => {
     expect(component.formLogin.get('username').valid).toBeFalse();
   });
 
-  it('form username control should be invalid if insert a username of less 5 letters', () => {
-    component.formLogin.get('username').setValue('da');
-    expect(component.formLogin.get('username').valid).toBeFalse();
-  });
-
   it('form password control should be valid if insert a correct password', () => {
     component.formLogin.get('password').setValue('asdasdasdasdas');
     expect(component.formLogin.get('password').valid).toBeTrue();
@@ -87,11 +82,6 @@ describe('LoginFormComponent', () => {
 
   it('form password control should be invalid if insert a empty password', () => {
     component.formLogin.get('password').setValue('');
-    expect(component.formLogin.get('password').valid).toBeFalse();
-  });
-
-  it('form password control should be invalid if insert a password of less 5 letters', () => {
-    component.formLogin.get('password').setValue('1121');
     expect(component.formLogin.get('password').valid).toBeFalse();
   });
 

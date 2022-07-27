@@ -13,14 +13,8 @@ export class LoginFormComponent implements OnInit {
   faUser = faUser;
 
   formLoginControls = {
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
     recaptcha: new FormControl(null),
   };
   formLogin: FormGroup = new FormGroup(this.formLoginControls);
