@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'zwc-login-form',
@@ -9,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginFormComponent implements OnInit {
   siteKey = '6LdRuREgAAAAAIfMrVUFg9ZI4rt2nSenIu9jd0Zj';
   production: boolean;
+  faUser = faUser;
 
   formLoginControls = {
     username: new FormControl('', [
