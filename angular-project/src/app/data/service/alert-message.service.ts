@@ -165,7 +165,10 @@ export class AlertMessageActions {
         this.cubageFacade.AllCubs();
       }
 
-      if (action === otActions.createOTSuccess.type) {
+      if (
+        action === otActions.createOTSuccess.type ||
+        otActions.AprobarRechazarActaOTSuccess.type
+      ) {
         this.router.navigate(['/app/ot/list-ot']);
       }
 
