@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { LoginService } from './login.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
-import { LoginMock } from '@mocksOT';
+import { LoginMock200OK } from '@mocksOT';
 import { of } from 'rxjs';
 
 describe('LoginService', () => {
@@ -23,10 +23,10 @@ describe('LoginService', () => {
   });
 
   it('should call login and return and login Data', (done: DoneFn) => {
-    httpClientSpy.post.and.returnValue(of(LoginMock));
+    httpClientSpy.post.and.returnValue(of(LoginMock200OK));
     service.logIn('mgestor1', 'asdasd').subscribe({
       next: response => {
-        expect(response).toEqual(LoginMock);
+        expect(response).toEqual(LoginMock200OK);
         done();
       },
       error: done.fail,

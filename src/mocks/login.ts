@@ -1,5 +1,6 @@
 import { Response, Login } from '@model';
-export let LoginMock: Response<Login> = {
+
+export let LoginMock200OK: Response<Login> = {
   status: { code: 0, desc: 'OK' },
   data: {
     token:
