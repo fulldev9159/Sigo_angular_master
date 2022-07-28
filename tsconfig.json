@@ -25,7 +25,8 @@
       "@coreOT": ["src/app/core"],
       "@sharedOT/*": ["src/app/shared/*"],
       "@mocksOT": ["src/mocks"],
-      "@storeOT/*": ["src/app/store/*"]
+      "@storeOT/*": ["src/app/store/*"],
+      "@services": ["src/app/core/service"]
       // "@utilsSIGO/*": ["src/app/utils/*"],
       // "@pages/*": ["src/app/pages/*"]
     },
