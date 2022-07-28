@@ -9,12 +9,14 @@ describe('Auth Service', () => {
   let service: AuthService;
   let utilsService: UtilsService;
   let facade: AuthFacade;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
     });
     facade = TestBed.inject(AuthFacade);
     utilsService = TestBed.inject(UtilsService);
+
     service = new AuthService(facade, utilsService);
   });
 
