@@ -29,5 +29,9 @@ export class LoginFormComponent implements OnInit {
     }
   }
 
+  login(): void {
+    const { username, password } = this.formLogin.getRawValue();
+  }
+
   resolved(event: any): void {}
 }

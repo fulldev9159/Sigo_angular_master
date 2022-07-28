@@ -22,7 +22,10 @@
             </div>
         </ng-container>
     
-        <button [disabled]="!formLogin.valid" id="login-button" pButton type="button" label="Login" class="p-button-info p-button-sm mt-4"> 
+        <button [disabled]="!formLogin.valid" id="login-button" pButton type="button" 
+           label="Login" 
+           class="p-button-info p-button-sm mt-4"
+           (click)="login()"> 
             <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
         </button>
     </form>
