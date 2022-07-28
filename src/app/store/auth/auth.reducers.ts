@@ -1,14 +1,23 @@
 import { createReducer, on } from '@ngrx/store';
-import { SessionData } from '@model';
+import { SessionData, Login } from '@model';
+import * as authActions from './auth.actions';
 
 export const Featurekey = 'auth';
 
 export interface StateAuth {
-  sessionData: SessionData;
+  loginData: Login;
 }
 
 export const initialState: StateAuth = {
-  sessionData: null,
+  loginData: null,
 };
 
-export const reducerAuth = createReducer(initialState);
+export const reducerAuth = createReducer(
+  initialState,
+  on(authActions.loginSuccess, (state, { response }) => {
+    return {
+      ...state,
+      loginData: response.data,
+    };
+  })
+);

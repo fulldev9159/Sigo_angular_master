@@ -7,5 +7,5 @@ export const selectAuth = createFeatureSelector<reducer.StateAuth>(
 
 export const getSessionData = createSelector(
   selectAuth,
-  (state: reducer.StateAuth) => state.sessionData
+  (state: reducer.StateAuth) => state.loginData
 );
