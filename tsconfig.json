@@ -24,8 +24,7 @@
       "@model": ["src/app/core/model"],
       "@coreOT": ["src/app/core"],
       "@sharedOT/*": ["src/app/shared/*"],
-      // "@featureOT/*": ["src/app/features/*"],
-      // "@uiOT/*": ["src/app/ui/*"],
+      "@mocksOT": ["src/mocks"],
       "@storeOT/*": ["src/app/store/*"]
       // "@utilsSIGO/*": ["src/app/utils/*"],
       // "@pages/*": ["src/app/pages/*"]
