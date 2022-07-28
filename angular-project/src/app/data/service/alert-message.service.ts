@@ -16,6 +16,9 @@ import { UserFacade } from '@storeOT/features/user/user.facade';
 
 import { Router } from '@angular/router';
 import { MessageNotifyEffect } from '@data';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { tap } from 'lodash';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +35,8 @@ export class AlertMessageActions {
     private userFacade: UserFacade,
     private contratoFacade: ContratoFacade,
     private snackService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private permissionsService: NgxPermissionsService
   ) {
     // Status OK
     this.msgOK[ca.createCubSuccess.type] = 'Cubicación creada exitosamente';
@@ -125,6 +129,13 @@ export class AlertMessageActions {
       }
 
       if (action === authActions.getPerrmisoPerfilSuccess.type) {
+        this.authFacade.getLogin$().subscribe(loginAuth => {
+          console.log(loginAuth);
+          if (loginAuth && loginAuth.permisos) {
+            this.permissionsService.loadPermissions(loginAuth.permisos);
+          }
+        });
+
         this.router.navigate(['app/dashboard']);
       }
 
@@ -174,7 +185,8 @@ export class AlertMessageActions {
 
       if (
         action === ca.clonCubSuccess.type ||
-        action === otActions.sendGeneracionActaSuccess.type
+        action === otActions.sendGeneracionActaSuccess.type ||
+        action === authActions.loginSuccess.type
       ) {
         location.reload();
       }
