@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '@sharedOT/shared.module';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
+// import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 import { LoginFormComponent } from './login-form.component';
@@ -11,6 +12,7 @@ describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
   let facade: AuthFacade;
+  // let loadingFacade: LoadingsFacade;
 
   beforeEach(async () => {
     const env = { production: true, api: '' };
@@ -29,6 +31,7 @@ describe('LoginFormComponent', () => {
     fixture = TestBed.createComponent(LoginFormComponent);
     component = fixture.componentInstance;
     facade = TestBed.inject(AuthFacade);
+    // loadingFacade = TestBed.inject(LoadingsFacade);
     fixture.detectChanges();
   });
 

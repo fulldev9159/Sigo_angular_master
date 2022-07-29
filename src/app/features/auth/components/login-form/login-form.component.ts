@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'zwc-login-form',
@@ -20,9 +22,12 @@ export class LoginFormComponent implements OnInit {
   };
   formLogin: FormGroup = new FormGroup(this.formLoginControls);
 
+  sendingLogin$: Observable<boolean> = this.loadingFacade.sendigLoading$();
+
   constructor(
     @Inject('environment') environment: any,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private loadingFacade: LoadingsFacade
   ) {
     this.production = environment.production;
   }

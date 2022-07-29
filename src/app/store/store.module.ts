@@ -8,6 +8,10 @@ import { AuthEffects } from './auth/auth.effects';
 import * as formAuthReduce from './auth/auth.reducers';
 // AUTH STORE
 
+// LOADINGS STORE
+import * as loadingReducer from './loadings/loadings.reducers';
+// LOADINGS STORE
+
 @NgModule({
   declarations: [],
   imports: [
@@ -17,6 +21,12 @@ import * as formAuthReduce from './auth/auth.reducers';
     StoreModule.forFeature(
       formAuthReduce.Featurekey,
       formAuthReduce.reducerAuth
+    ),
+
+    // LOADINGS STORE
+    StoreModule.forFeature(
+      loadingReducer.FeatureKey,
+      loadingReducer.reducerLoadings
     ),
   ],
 })
