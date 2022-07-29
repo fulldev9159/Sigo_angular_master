@@ -1,9 +1,14 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { SnackMessageService } from './snack-message.service';
+import * as authActions from '@storeOT/auth/auth.actions';
 
-interface Action {
+interface ActionErr {
   error?: any;
+  type: string;
+}
+
+interface ActionSuccess {
   response?: {
     data: any;
     status: {
@@ -18,39 +23,23 @@ interface Action {
   providedIn: 'root',
 })
 export class AfterHttpService {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private snackMessage: SnackMessageService
+  ) {}
 
-  afterHttpAction(action: Action): void {
-    if (action.error) {
-      this.errorHandler(action);
-    } else if (action.response) {
-      this.successHandler(action);
-    } else {
-      throw new Error('Formato incorrecto');
-    }
+  errorHandler(action: ActionErr): void {
+    this.snackMessage.showMessage(
+      action.error.error.status.desc,
+      'error',
+      7000
+    );
   }
 
-  errorHandler(action: Action): void {}
-
-  successHandler(action: Action): void {}
-
-  // console.log(action.type);
-  //   if (action && action.type) {
-  //     if (action.type === 'loginSuccess') {
-  //       this.router.navigate(['/perfil-select']);
-  //     }
-  //   } else {
-  //     throw new Error('No se proporcionó ngrx action type definido');
-  //   }
-  // afterHttpMessage(action: any): void {
-  //   if (action.error) {
-  //     this.errMessages(action);
-  //   } else {
-  //     this.okMessages(action);
-  //   }
-  // }
-
-  // errMessages(action: any) {}
-
-  // okMessages(action: any) {}
+  successHandler(action: ActionSuccess): void {
+    console.log('TYPE', action.type);
+    if (action.type === authActions.loginSuccess.type) {
+      this.router.navigate(['/perfil-select']);
+    }
+  }
 }

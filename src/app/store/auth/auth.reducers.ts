@@ -6,10 +6,12 @@ export const Featurekey = 'auth';
 
 export interface StateAuth {
   loginData: Login;
+  nombre_perfil_select: any;
 }
 
 export const initialState: StateAuth = {
   loginData: null,
+  nombre_perfil_select: null,
 };
 
 export const reducerAuth = createReducer(

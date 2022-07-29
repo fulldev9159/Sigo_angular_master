@@ -10,6 +10,7 @@ import * as formAuthReduce from './auth/auth.reducers';
 
 // LOADINGS STORE
 import * as loadingReducer from './loadings/loadings.reducers';
+import { SharedModule } from '@sharedOT/shared.module';
 // LOADINGS STORE
 
 @NgModule({
@@ -28,6 +29,7 @@ import * as loadingReducer from './loadings/loadings.reducers';
       loadingReducer.FeatureKey,
       loadingReducer.reducerLoadings
     ),
+    SharedModule,
   ],
 })
 export class StoreSIGOModule {}

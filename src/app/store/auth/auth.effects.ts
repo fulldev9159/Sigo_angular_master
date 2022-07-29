@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoginService } from '@services';
+import { AfterHttpService, LoginService } from '@services';
 import * as authActions from './auth.actions';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private loginService: LoginService) {}
+  constructor(
+    private actions$: Actions,
+    private loginService: LoginService,
+    private afterHttp: AfterHttpService
+  ) {}
 
   Login$ = createEffect(() =>
     this.actions$.pipe(
@@ -25,15 +29,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(authActions.loginSuccess),
-        tap(action => {
-          console.log(action);
-          // this.alertMessageAction.messageActions(
-          //   action.response.status.code,
-          //   action.response.status.desc,
-          //   action.type,
-          //   action
-          // );
-        })
+        tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
   );
@@ -42,15 +38,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(authActions.loginError),
-        tap(
-          action => console.log(action)
-          // this.alertMessageAction.messageActions(
-          //   action.error.error.status.code,
-          //   action.error.error.status.desc,
-          //   action.type,
-          //   action
-          // )
-        )
+        tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }
   );
