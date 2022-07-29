@@ -24,11 +24,7 @@ export class SigoGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  ): Observable<boolean> | Promise<boolean> | boolean | UrlTree {
     return this.authService.isLoggin().pipe(
       map(val => {
         if (!val) {

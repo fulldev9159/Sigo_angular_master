@@ -22,20 +22,14 @@
             </div>
         </ng-container>
     
-        <ng-container *ngIf="sendingLogin$ | async as sending; else noSending">
-            <button disabled id="login-button" pButton type="button" 
-            label="Login" 
-            class="p-button-info p-button-sm mt-4"> 
-             <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
-            </button>
-        </ng-container>
-        <ng-template #noSending>
-            <button [disabled]="!formLogin.valid" id="login-button" pButton type="button" 
-            label="Login" 
-            class="p-button-info p-button-sm mt-4"
-            (click)="login()"> 
-            </button>
-        </ng-template>      
+        <zwc-pbutton-sending 
+        Pid="login-button"
+        content="Login"
+        Pclass="p-button-info p-button-sm mt-4"
+        [sending]="sendingLogin$ | async"
+        [Pdisabled]="!formLogin.valid"
+        (call)="login()"
+        ></zwc-pbutton-sending>
     </form>
     
     <span class=" mt-7 sigo-color-dark-light text-xs" >¿No conoces GUIA? <a  href="https://guia.telefonicachile.cl/login.jsf" id="recuperar-guia"> Ingrese a aquí</a> </span>   

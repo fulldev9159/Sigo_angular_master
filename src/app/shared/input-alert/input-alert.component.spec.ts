@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { InputAlertComponent } from './input-alert.component';
 
@@ -83,7 +77,7 @@ describe('InputAlertComponent', () => {
   });
 
   @Component({
-    selector: `host-component`,
+    selector: `zwc-host-component`,
     template: `<zwc-input-alert
       [control]="formLoginControls.username"
     ></zwc-input-alert>`,
@@ -99,7 +93,7 @@ describe('InputAlertComponent', () => {
   }
 
   @Component({
-    selector: `host-component2`,
+    selector: `zwc-host-component2`,
     template: `<zwc-input-alert
       [control]="formLoginControls.username"
     ></zwc-input-alert>`,

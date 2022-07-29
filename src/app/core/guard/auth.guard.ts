@@ -21,11 +21,7 @@ export class AuthTokenGuard implements CanActivate, CanLoad {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  ): Observable<boolean | UrlTree> | Promise<boolean> | boolean | UrlTree {
     return this.authService.isLoggin().pipe(
       map(val => {
         if (val) {

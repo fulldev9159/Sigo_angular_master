@@ -2,17 +2,17 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from './primeng/primeng.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ButtonModule } from 'primeng/button';
 import { InputAlertComponent } from './input-alert/input-alert.component';
+import { PbuttonSendingComponent } from './pbutton-sending/pbutton-sending.component';
 
 @NgModule({
-  declarations: [InputAlertComponent],
-  imports: [CommonModule, PrimeNgModule, FontAwesomeModule, ButtonModule],
+  declarations: [InputAlertComponent, PbuttonSendingComponent],
+  imports: [CommonModule, PrimeNgModule, FontAwesomeModule],
   exports: [
     PrimeNgModule,
     FontAwesomeModule,
-    ButtonModule,
     InputAlertComponent,
+    PbuttonSendingComponent,
   ],
 })
 export class SharedModule {
