@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { environment } from '@environment';
+import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '@sharedOT/shared.module';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 import { LoginFormComponent } from './login-form.component';
@@ -9,6 +10,7 @@ import { LoginFormComponent } from './login-form.component';
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
+  let facade: AuthFacade;
 
   beforeEach(async () => {
     const env = { production: true, api: '' };
@@ -19,12 +21,14 @@ describe('LoginFormComponent', () => {
         RecaptchaFormsModule,
         RecaptchaModule,
         SharedModule.forRoot(env),
+        StoreModule.forRoot({}),
       ],
       declarations: [LoginFormComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginFormComponent);
     component = fixture.componentInstance;
+    facade = TestBed.inject(AuthFacade);
     fixture.detectChanges();
   });
 
@@ -102,5 +106,22 @@ describe('LoginFormComponent', () => {
     fixture.detectChanges();
     expect(component.formLogin.valid).toBeTruthy();
     expect(compiled.querySelector('#login-button').disabled).toBeFalsy();
+  });
+
+  it('should call login method if press login buttton', () => {
+    spyOn(component, 'login');
+    component.formLogin.get('username').setValue('asdasdasdasdas');
+    component.formLogin.get('password').setValue('asdasdasdasdas');
+    component.formLogin.get('recaptcha').setValue('asdasdasdasdas');
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    compiled.querySelector('#login-button').click();
+    expect(component.login).toHaveBeenCalled();
+  });
+
+  it('should call login facade if method login is invoke', () => {
+    let spyFacade = spyOn(facade, 'Login');
+    component.login();
+    expect(spyFacade).toHaveBeenCalled();
   });
 });
