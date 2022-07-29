@@ -62,7 +62,6 @@ describe('LoginFormComponent', () => {
 
   it('should display a button Login as disabled ', () => {
     const compiled = fixture.nativeElement;
-    console.log(compiled.querySelector('#login-button'));
     expect(compiled.querySelector('#login-button').disabled).toBeTruthy();
   });
 

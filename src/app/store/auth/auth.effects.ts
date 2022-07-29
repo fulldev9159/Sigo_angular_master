@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LoginService } from '@services';
 import * as authActions from './auth.actions';
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable()
@@ -19,5 +19,39 @@ export class AuthEffects {
         )
       )
     )
+  );
+
+  notifyAfte$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authActions.loginSuccess),
+        tap(action => {
+          console.log(action);
+          // this.alertMessageAction.messageActions(
+          //   action.response.status.code,
+          //   action.response.status.desc,
+          //   action.type,
+          //   action
+          // );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authActions.loginError),
+        tap(
+          action => console.log(action)
+          // this.alertMessageAction.messageActions(
+          //   action.error.error.status.code,
+          //   action.error.error.status.desc,
+          //   action.type,
+          //   action
+          // )
+        )
+      ),
+    { dispatch: false }
   );
 }
