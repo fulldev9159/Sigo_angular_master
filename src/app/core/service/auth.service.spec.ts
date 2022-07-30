@@ -25,14 +25,15 @@ describe('Auth Service', () => {
   });
 
   it('isLoggin should return false if sessionData doest exist', () => {
-    spyOn(facade, 'getSessionData$').and.returnValue(of(null));
-    service.isLoggin().subscribe(val => expect(val).toBeFalse());
+    localStorage.setItem('sessionData', JSON.stringify(null));
+    expect(service.isLoggin()).toBeFalse();
   });
 
   it('isLoggin should return true if sessionData exist and all data is complete', () => {
-    spyOn(facade, 'getSessionData$').and.returnValue(
-      of({
-        token: '12231',
+    localStorage.setItem(
+      'sessionData',
+      JSON.stringify({
+        token: 'sas',
         usuario_nombre: '1',
         usuario_id: 1,
         nombre_perfil_select: 'asda',
@@ -42,14 +43,14 @@ describe('Auth Service', () => {
         rol: 'asdas',
       })
     );
-
-    service.isLoggin().subscribe(val => expect(val).toBeTrue());
+    expect(service.isLoggin()).toBeTrue();
   });
 
   it('isLoggin should return false if sessionData does have usuario_id null', () => {
-    spyOn(facade, 'getSessionData$').and.returnValue(
-      of({
-        token: '12231',
+    localStorage.setItem(
+      'sessionData',
+      JSON.stringify({
+        token: 'sas',
         usuario_nombre: '1',
         usuario_id: null,
         nombre_perfil_select: 'asda',
@@ -59,14 +60,14 @@ describe('Auth Service', () => {
         rol: 'asdas',
       })
     );
-
-    service.isLoggin().subscribe(val => expect(val).toBeFalse());
+    expect(service.isLoggin()).toBeFalse();
   });
 
   it('isLoggin should return false if sessionData does have rol empty', () => {
-    spyOn(facade, 'getSessionData$').and.returnValue(
-      of({
-        token: '12231',
+    localStorage.setItem(
+      'sessionData',
+      JSON.stringify({
+        token: 'sas',
         usuario_nombre: '1',
         usuario_id: 1,
         nombre_perfil_select: 'asda',
@@ -76,7 +77,84 @@ describe('Auth Service', () => {
         rol: '',
       })
     );
+    expect(service.isLoggin()).toBeFalse();
+  });
 
-    service.isLoggin().subscribe(val => expect(val).toBeFalse());
+  it('isAuth should return true if login data not null', () => {
+    localStorage.setItem(
+      'sessionData',
+      JSON.stringify({
+        token: 'sas',
+        usuario_nombre: '1',
+        usuario_id: 1,
+        nombre_perfil_select: '',
+        permisos: [],
+        perfil_proxy_id: 1,
+        multiperfiles: false,
+        rol: '',
+      })
+    );
+    expect(service.isAuth()).toBeTrue();
+  });
+
+  it('isAuth should return false if login data is null', () => {
+    localStorage.setItem(
+      'sessionData',
+      JSON.stringify({
+        token: null,
+        usuario_nombre: null,
+        usuario_id: null,
+        nombre_perfil_select: 'asda',
+        permisos: [],
+        perfil_proxy_id: 1,
+        multiperfiles: false,
+        rol: 'asdas',
+      })
+    );
+    expect(service.isAuth()).toBeFalse();
+  });
+
+  it('isAuth should return false if sessionData is null', () => {
+    localStorage.setItem('sessionData', JSON.stringify(null));
+    expect(service.isAuth()).toBeFalse();
+  });
+
+  it('isPerfiled should return true if permisos have data', () => {
+    localStorage.setItem(
+      'sessionData',
+      JSON.stringify({
+        token: '',
+        usuario_nombre: null,
+        usuario_id: null,
+        nombre_perfil_select: 'asda',
+        permisos: [1, 2],
+        perfil_proxy_id: 1,
+        multiperfiles: false,
+        rol: 'asdas',
+      })
+    );
+    expect(service.isPerfiled()).toBeTrue();
+  });
+
+  it('isPerfiled should return false if permisos is empty', () => {
+    localStorage.setItem(
+      'sessionData',
+      JSON.stringify({
+        token: '',
+        usuario_nombre: null,
+        usuario_id: null,
+        nombre_perfil_select: 'asda',
+        permisos: [],
+        perfil_proxy_id: 1,
+        multiperfiles: false,
+        rol: 'asdas',
+      })
+    );
+    expect(service.isPerfiled()).toBeFalse();
+  });
+
+  it('isPerfiled should return false if sessionData is null', () => {
+    localStorage.setItem('sessionData', JSON.stringify(null));
+    expect(service.isPerfiled()).toBeFalse();
   });
 });

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthTokenGuard } from 'src/app/core/guard/auth.guard';
 import { AuthComponent } from './auth.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { PerfilSelectComponent } from './components/perfil-select/perfil-select.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,10 @@ const routes: Routes = [
       {
         path: 'auth',
         component: LoginFormComponent,
-        canActivate: [AuthTokenGuard],
+      },
+      {
+        path: 'perfil-select',
+        component: PerfilSelectComponent,
       },
     ],
   },

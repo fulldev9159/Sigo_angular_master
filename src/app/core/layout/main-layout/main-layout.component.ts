@@ -8,11 +8,10 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./main-layout.component.scss'],
 })
 export class MainLayoutComponent implements OnInit {
+  isLoggin: boolean;
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
-
-  isLoggin(): Observable<boolean> {
-    return this.authService.isLoggin();
+  ngOnInit(): void {
+    this.isLoggin = this.authService.isLoggin();
   }
 }

@@ -12,14 +12,36 @@ export class AuthService {
     private utilsService: UtilsService
   ) {}
 
-  isLoggin(): Observable<boolean> {
-    return this.authFacade.getSessionData$().pipe(
-      map(sessionData =>
-        sessionData
-          ? !this.utilsService.thereAreNullUndefEmptyStr(sessionData)
-          : false
-      ),
-      take(1)
-    );
+  isLoggin(): boolean {
+    const sessionData = JSON.parse(localStorage.getItem('sessionData'));
+    return sessionData
+      ? !this.utilsService.thereAreNullUndefEmptyStr(sessionData)
+      : false;
+  }
+
+  isAuth(): boolean {
+    const sessionData = JSON.parse(localStorage.getItem('sessionData'));
+    if (sessionData) {
+      if (sessionData.token !== undefined && sessionData.token !== null) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  isPerfiled(): boolean {
+    const sessionData = JSON.parse(localStorage.getItem('sessionData'));
+    if (sessionData) {
+      if (sessionData.permisos.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 }

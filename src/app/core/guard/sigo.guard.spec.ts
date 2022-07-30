@@ -41,13 +41,13 @@ describe('Guard SIGO Test', () => {
   });
 
   it('canLoad should return false if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+    spyOn(authService, 'isLoggin').and.returnValue(false);
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val => expect(val).toBeFalse());
   });
 
   it('canLoad should redirect to login page if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+    spyOn(authService, 'isLoggin').and.returnValue(false);
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val =>
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/login'])
@@ -55,13 +55,13 @@ describe('Guard SIGO Test', () => {
   });
 
   it('canLoad should return true if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+    spyOn(authService, 'isLoggin').and.returnValue(true);
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val => expect(val).toBeTrue());
   });
 
   it('canActivate should return false if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+    spyOn(authService, 'isLoggin').and.returnValue(false);
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
       expect(val).toBeFalse()
@@ -69,7 +69,7 @@ describe('Guard SIGO Test', () => {
   });
 
   it('canActivate should redirect to login page if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+    spyOn(authService, 'isLoggin').and.returnValue(false);
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/login'])
@@ -77,7 +77,7 @@ describe('Guard SIGO Test', () => {
   });
 
   it('canActivate should return true if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+    spyOn(authService, 'isLoggin').and.returnValue(true);
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
       expect(val).toBeTrue()

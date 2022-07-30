@@ -61,6 +61,6 @@ describe('AfterHttpService', () => {
       type: authActions.loginSuccess.type,
     };
     service.successHandler(action);
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/perfil-select']);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/login/perfil-select']);
   });
 });

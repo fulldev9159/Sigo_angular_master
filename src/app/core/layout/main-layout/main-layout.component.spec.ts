@@ -28,13 +28,13 @@ describe('MainLayoutComponent', () => {
   });
 
   it('main layout text doesnt show if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+    spyOn(authService, 'isLoggin').and.returnValue(false);
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('p')).toBeNull();
   });
 
   it('main layout text did show if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+    spyOn(authService, 'isLoggin').and.returnValue(true);
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('p')).toBeDefined();
   });

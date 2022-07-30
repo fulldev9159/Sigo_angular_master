@@ -8,7 +8,7 @@ import {
   CanLoad,
   Route,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 
@@ -25,24 +25,18 @@ export class SigoGuard implements CanActivate, CanLoad {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean | UrlTree {
-    return this.authService.isLoggin().pipe(
-      map(val => {
-        if (!val) {
-          this.router.navigate(['/login']);
-        }
-        return val;
-      })
-    );
+    const isLoggin = this.authService.isLoggin();
+    if (!isLoggin) {
+      this.router.navigate(['/login']);
+    }
+    return of(isLoggin);
   }
 
   canLoad(route: Route): Observable<boolean> {
-    return this.authService.isLoggin().pipe(
-      map(val => {
-        if (!val) {
-          this.router.navigate(['/login']);
-        }
-        return val;
-      })
-    );
+    const isLoggin = this.authService.isLoggin();
+    if (!isLoggin) {
+      this.router.navigate(['/login']);
+    }
+    return of(isLoggin);
   }
 }

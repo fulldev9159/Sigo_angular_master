@@ -10,9 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 import { SharedModule } from '@sharedOT/shared.module';
 import { environment } from '@environment';
+import { PerfilSelectComponent } from './components/perfil-select/perfil-select.component';
 
 @NgModule({
-  declarations: [AuthComponent, LoginFormComponent],
+  declarations: [AuthComponent, LoginFormComponent, PerfilSelectComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

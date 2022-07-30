@@ -37,9 +37,8 @@ export class AfterHttpService {
   }
 
   successHandler(action: ActionSuccess): void {
-    console.log('TYPE', action.type);
     if (action.type === authActions.loginSuccess.type) {
-      this.router.navigate(['/perfil-select']);
+      this.router.navigate(['/login/perfil-select']);
     }
   }
 }

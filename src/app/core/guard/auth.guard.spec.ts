@@ -37,28 +37,36 @@ describe('Guard Login', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('canLoad should return false if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+  it('canLoad should return false if isAuth return true', () => {
+    spyOn(authService, 'isAuth').and.returnValue(true);
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val => expect(val).toBeFalse());
   });
 
   it('canLoad should redirect to home page if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+    spyOn(authService, 'isLoggin').and.returnValue(true);
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val =>
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/home'])
     );
   });
 
-  it('canLoad should return true if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+  it('canLoad should redirect to perfil select page if isAuth return true', () => {
+    spyOn(authService, 'isAuth').and.returnValue(true);
+    const canLoad = guard.canLoad(fakeRoute);
+    canLoad.subscribe(val =>
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/login/perfil-select'])
+    );
+  });
+
+  it('canLoad should return true if isAuth return false', () => {
+    spyOn(authService, 'isAuth').and.returnValue(false);
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val => expect(val).toBeTrue());
   });
 
-  it('canActivate should return false if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+  it('canActivate should return false if isAuth return true', () => {
+    spyOn(authService, 'isAuth').and.returnValue(true);
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
       expect(val).toBeFalse()
@@ -66,15 +74,23 @@ describe('Guard Login', () => {
   });
 
   it('canActivate should redirect to home page if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(true));
+    spyOn(authService, 'isLoggin').and.returnValue(true);
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/home'])
     );
   });
 
-  it('canActivate should return true if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(of(false));
+  it('canActivate should redirect to perfil select page if isAuth return true', () => {
+    spyOn(authService, 'isAuth').and.returnValue(true);
+    const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
+    (canActivate as Observable<boolean>).subscribe(val =>
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/login/perfil-select'])
+    );
+  });
+
+  it('canActivate should return true if isAuth return false', () => {
+    spyOn(authService, 'isAuth').and.returnValue(false);
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>
       expect(val).toBeTrue()

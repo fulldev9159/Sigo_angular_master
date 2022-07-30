@@ -8,8 +8,8 @@ import {
   CanLoad,
   Route,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 
 @Injectable({
@@ -22,24 +22,34 @@ export class AuthTokenGuard implements CanActivate, CanLoad {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean> | boolean | UrlTree {
-    return this.authService.isLoggin().pipe(
-      map(val => {
-        if (val) {
-          this.router.navigate(['/home']);
-        }
-        return !val;
-      })
-    );
+    const isLoggin = this.authService.isLoggin();
+    const isAuth = this.authService.isAuth();
+    if (isLoggin) {
+      this.router.navigate(['/home']);
+      return of(false);
+    } else {
+      if (isAuth) {
+        this.router.navigate(['/login/perfil-select']);
+        return of(false);
+      } else {
+        return of(true);
+      }
+    }
   }
 
   canLoad(route: Route): Observable<boolean> {
-    return this.authService.isLoggin().pipe(
-      map(val => {
-        if (val) {
-          this.router.navigate(['/home']);
-        }
-        return !val;
-      })
-    );
+    const isLoggin = this.authService.isLoggin();
+    const isAuth = this.authService.isAuth();
+    if (isLoggin) {
+      this.router.navigate(['/home']);
+      return of(false);
+    } else {
+      if (isAuth) {
+        this.router.navigate(['/login/perfil-select']);
+        return of(false);
+      } else {
+        return of(true);
+      }
+    }
   }
 }
