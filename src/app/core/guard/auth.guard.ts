@@ -8,8 +8,7 @@ import {
   CanLoad,
   Route,
 } from '@angular/router';
-import { forkJoin, Observable, of } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { AuthService } from '../service/auth.service';
 
 @Injectable({
