@@ -8,7 +8,6 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { of } from 'rxjs';
 import { AuthService } from '../service/auth.service';
 
 import { SigoGuard } from './sigo.guard';
