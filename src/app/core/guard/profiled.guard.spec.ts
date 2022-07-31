@@ -33,13 +33,20 @@ describe('Profiled Test', () => {
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     authService = TestBed.inject(AuthService);
     guard = new ProfiledGuard(routerSpy, authService);
+    localStorage.setItem(
+      'auth',
+      JSON.stringify({
+        sessionData: null,
+      })
+    );
   });
 
   it('should be created', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('canLoad should return false and redirect to home if isProfiled return true', () => {
+  it('canLoad should return false and redirect to home if isProfiled and isAuth return true', () => {
+    spyOn(authService, 'isAuth').and.returnValue(true);
     spyOn(authService, 'isProfiled').and.returnValue(true);
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val => {
@@ -65,7 +72,8 @@ describe('Profiled Test', () => {
     });
   });
 
-  it('canActive should return false and redirect to home if isProfiled return true', () => {
+  it('canActive should return false and redirect to home if isProfiled and isAuth return true', () => {
+    spyOn(authService, 'isAuth').and.returnValue(true);
     spyOn(authService, 'isProfiled').and.returnValue(true);
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val => {

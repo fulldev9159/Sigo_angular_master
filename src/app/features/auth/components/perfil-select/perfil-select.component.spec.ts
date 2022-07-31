@@ -8,9 +8,8 @@ describe('PerfilSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PerfilSelectComponent ]
-    })
-    .compileComponents();
+      declarations: [PerfilSelectComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PerfilSelectComponent);
     component = fixture.componentInstance;
@@ -20,4 +19,6 @@ describe('PerfilSelectComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display select perfil', () => {});
 });

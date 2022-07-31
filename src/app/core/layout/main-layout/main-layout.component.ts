@@ -12,6 +12,7 @@ export class MainLayoutComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    console.log(this.authService.isLoggin());
     this.isLoggin = this.authService.isLoggin();
   }
 }

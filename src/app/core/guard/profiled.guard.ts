@@ -23,9 +23,6 @@ export class ProfiledGuard implements CanActivate, CanLoad {
   ): Observable<boolean | UrlTree> | Promise<boolean> | boolean | UrlTree {
     const isProfiled = this.authService.isProfiled();
     const isAuth = this.authService.isAuth();
-    console.log('prof isprofiled', isProfiled);
-    console.log('prof isauth', isAuth);
-
     if (isProfiled && isAuth) {
       this.router.navigate(['/home']);
       return of(false);
