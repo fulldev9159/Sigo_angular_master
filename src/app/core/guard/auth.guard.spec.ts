@@ -17,7 +17,7 @@ function fakeRouterState(url: string): RouterStateSnapshot {
   } as RouterStateSnapshot;
 }
 
-describe('Guard Login', () => {
+describe('Auth Login', () => {
   let guard: AuthTokenGuard;
   let authService: AuthService;
   const dummyRoute = {} as ActivatedRouteSnapshot;
@@ -51,6 +51,7 @@ describe('Guard Login', () => {
   });
 
   it('canLoad should redirect to perfil select page if isAuth return true', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(false);
     spyOn(authService, 'isAuth').and.returnValue(true);
     const canLoad = guard.canLoad(fakeRoute);
     canLoad.subscribe(val =>
@@ -81,6 +82,7 @@ describe('Guard Login', () => {
   });
 
   it('canActivate should redirect to perfil select page if isAuth return true', () => {
+    spyOn(authService, 'isLoggin').and.returnValue(false);
     spyOn(authService, 'isAuth').and.returnValue(true);
     const canActivate = guard.canActivate(dummyRoute, fakeRouterState('home'));
     (canActivate as Observable<boolean>).subscribe(val =>

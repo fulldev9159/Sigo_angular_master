@@ -2,12 +2,13 @@ import { testedViewports } from 'cypress/fixtures/testedViewports';
 
 describe('login spec', () => {
   it('Home page should redirect to login', () => {
-    cy.visit('http://localhost:4201/home');
+    cy.visit('http://localhost:4206/home');
     cy.location('pathname').should('eq', '/login/auth');
   });
 
   it('perfil select page should redirect to login', () => {
-    cy.visit('http://localhost:4201/login/perfil-select');
+    localStorage.clear();
+    cy.visit('http://localhost:4206/login/perfil-select');
     cy.location('pathname').should('eq', '/login/auth');
   });
 
@@ -15,7 +16,7 @@ describe('login spec', () => {
     describe(`on ${vieport}`, () => {
       beforeEach(() => {
         cy.viewport(vieport);
-        cy.visit('http://localhost:4201/login/auth');
+        cy.visit('http://localhost:4206/login/auth');
       });
 
       it('should display sigo titulo', () => {
@@ -67,8 +68,14 @@ describe('login spec', () => {
     cy.location('pathname').should('eq', '/login/perfil-select');
   });
 
-  it('should redirecto to perfil select if user access to login page again after success login', () => {
-    cy.visit('http://localhost:4201/login/auth');
+  it('should redirect to perfil select if user access to login page again after success login', () => {
+    localStorage.clear();
+    cy.visit('http://localhost:4206/login/auth');
+    cy.get('input[name="username"]').clear().type('mgestor1');
+    cy.get('input[name="password"]').clear().type('sdasd');
+    cy.get('#login-button').click();
+    cy.wait(1000);
+    cy.visit('http://localhost:4206/login/auth');
     cy.location('pathname').should('eq', '/login/perfil-select');
   });
 });

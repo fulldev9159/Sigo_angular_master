@@ -25,56 +25,48 @@ describe('Auth Service', () => {
   });
 
   it('isLoggin should return false if sessionData doest exist', () => {
-    localStorage.setItem('sessionData', JSON.stringify(null));
+    localStorage.setItem(
+      'auth',
+      JSON.stringify({
+        sessionData: null,
+      })
+    );
     expect(service.isLoggin()).toBeFalse();
   });
 
   it('isLoggin should return true if sessionData exist and all data is complete', () => {
     localStorage.setItem(
-      'sessionData',
+      'auth',
       JSON.stringify({
-        token: 'sas',
-        usuario_nombre: '1',
-        usuario_id: 1,
-        nombre_perfil_select: 'asda',
-        permisos: [],
-        perfil_proxy_id: 1,
-        multiperfiles: false,
-        rol: 'asdas',
+        sessionData: {
+          token: 'sas',
+          usuario_nombre: '1',
+          usuario_id: 1,
+          nombre_perfil_select: 'asda',
+          permisos: [1, 2],
+          perfil_proxy_id: 1,
+          multiperfiles: false,
+          rol: 'asdas',
+        },
       })
     );
     expect(service.isLoggin()).toBeTrue();
   });
 
-  it('isLoggin should return false if sessionData does have usuario_id null', () => {
+  it('isLoggin should return false if sessionData does have token null', () => {
     localStorage.setItem(
-      'sessionData',
+      'auth',
       JSON.stringify({
-        token: 'sas',
-        usuario_nombre: '1',
-        usuario_id: null,
-        nombre_perfil_select: 'asda',
-        permisos: [],
-        perfil_proxy_id: 1,
-        multiperfiles: false,
-        rol: 'asdas',
-      })
-    );
-    expect(service.isLoggin()).toBeFalse();
-  });
-
-  it('isLoggin should return false if sessionData does have rol empty', () => {
-    localStorage.setItem(
-      'sessionData',
-      JSON.stringify({
-        token: 'sas',
-        usuario_nombre: '1',
-        usuario_id: 1,
-        nombre_perfil_select: 'asda',
-        permisos: [],
-        perfil_proxy_id: 1,
-        multiperfiles: false,
-        rol: '',
+        sessionData: {
+          token: null,
+          usuario_nombre: '1',
+          usuario_id: null,
+          nombre_perfil_select: 'asda',
+          permisos: [],
+          perfil_proxy_id: 1,
+          multiperfiles: false,
+          rol: 'asdas',
+        },
       })
     );
     expect(service.isLoggin()).toBeFalse();
@@ -82,16 +74,18 @@ describe('Auth Service', () => {
 
   it('isAuth should return true if login data not null', () => {
     localStorage.setItem(
-      'sessionData',
+      'auth',
       JSON.stringify({
-        token: 'sas',
-        usuario_nombre: '1',
-        usuario_id: 1,
-        nombre_perfil_select: '',
-        permisos: [],
-        perfil_proxy_id: 1,
-        multiperfiles: false,
-        rol: '',
+        sessionData: {
+          token: 'sas',
+          usuario_nombre: '1',
+          usuario_id: 1,
+          nombre_perfil_select: '',
+          permisos: [],
+          perfil_proxy_id: 1,
+          multiperfiles: false,
+          rol: '',
+        },
       })
     );
     expect(service.isAuth()).toBeTrue();
@@ -99,62 +93,78 @@ describe('Auth Service', () => {
 
   it('isAuth should return false if login data is null', () => {
     localStorage.setItem(
-      'sessionData',
+      'auth',
       JSON.stringify({
-        token: null,
-        usuario_nombre: null,
-        usuario_id: null,
-        nombre_perfil_select: 'asda',
-        permisos: [],
-        perfil_proxy_id: 1,
-        multiperfiles: false,
-        rol: 'asdas',
+        sessionData: {
+          token: null,
+          usuario_nombre: null,
+          usuario_id: null,
+          nombre_perfil_select: 'asda',
+          permisos: [],
+          perfil_proxy_id: 1,
+          multiperfiles: false,
+          rol: 'asdas',
+        },
       })
     );
     expect(service.isAuth()).toBeFalse();
   });
 
   it('isAuth should return false if sessionData is null', () => {
-    localStorage.setItem('sessionData', JSON.stringify(null));
+    localStorage.setItem(
+      'auth',
+      JSON.stringify({
+        sessionData: null,
+      })
+    );
     expect(service.isAuth()).toBeFalse();
   });
 
   it('isPerfiled should return true if permisos have data', () => {
     localStorage.setItem(
-      'sessionData',
+      'auth',
       JSON.stringify({
-        token: '',
-        usuario_nombre: null,
-        usuario_id: null,
-        nombre_perfil_select: 'asda',
-        permisos: [1, 2],
-        perfil_proxy_id: 1,
-        multiperfiles: false,
-        rol: 'asdas',
+        sessionData: {
+          token: '',
+          usuario_nombre: null,
+          usuario_id: null,
+          nombre_perfil_select: 'asda',
+          permisos: [1, 2],
+          perfil_proxy_id: 1,
+          multiperfiles: false,
+          rol: 'asdas',
+        },
       })
     );
-    expect(service.isPerfiled()).toBeTrue();
+    expect(service.isProfiled()).toBeTrue();
   });
 
   it('isPerfiled should return false if permisos is empty', () => {
     localStorage.setItem(
-      'sessionData',
+      'auth',
       JSON.stringify({
-        token: '',
-        usuario_nombre: null,
-        usuario_id: null,
-        nombre_perfil_select: 'asda',
-        permisos: [],
-        perfil_proxy_id: 1,
-        multiperfiles: false,
-        rol: 'asdas',
+        sessionData: {
+          token: '',
+          usuario_nombre: null,
+          usuario_id: null,
+          nombre_perfil_select: 'asda',
+          permisos: [],
+          perfil_proxy_id: 1,
+          multiperfiles: false,
+          rol: 'asdas',
+        },
       })
     );
-    expect(service.isPerfiled()).toBeFalse();
+    expect(service.isProfiled()).toBeFalse();
   });
 
   it('isPerfiled should return false if sessionData is null', () => {
-    localStorage.setItem('sessionData', JSON.stringify(null));
-    expect(service.isPerfiled()).toBeFalse();
+    localStorage.setItem(
+      'auth',
+      JSON.stringify({
+        sessionData: null,
+      })
+    );
+    expect(service.isProfiled()).toBeFalse();
   });
 });

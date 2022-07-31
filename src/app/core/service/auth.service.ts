@@ -13,14 +13,11 @@ export class AuthService {
   ) {}
 
   isLoggin(): boolean {
-    const sessionData = JSON.parse(localStorage.getItem('sessionData'));
-    return sessionData
-      ? !this.utilsService.thereAreNullUndefEmptyStr(sessionData)
-      : false;
+    return this.isAuth() && this.isProfiled();
   }
 
   isAuth(): boolean {
-    const sessionData = JSON.parse(localStorage.getItem('sessionData'));
+    const sessionData = JSON.parse(localStorage.getItem('auth')).sessionData;
     if (sessionData) {
       if (sessionData.token !== undefined && sessionData.token !== null) {
         return true;
@@ -32,10 +29,10 @@ export class AuthService {
     }
   }
 
-  isPerfiled(): boolean {
-    const sessionData = JSON.parse(localStorage.getItem('sessionData'));
+  isProfiled(): boolean {
+    const sessionData = JSON.parse(localStorage.getItem('auth')).sessionData;
     if (sessionData) {
-      if (sessionData.permisos.length > 0) {
+      if (sessionData.permisos && sessionData?.permisos?.length > 0) {
         return true;
       } else {
         return false;
