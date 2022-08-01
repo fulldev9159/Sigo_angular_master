@@ -10,6 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './core/interceptors/token-interceptor';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -40,7 +42,13 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     }),
     StoreRouterConnectingModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

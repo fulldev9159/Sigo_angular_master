@@ -1,5 +1,7 @@
 export * from './auth';
-export * from './login';
+export * from './perfil';
+export * from './rol';
+export * from './usuario';
 
 export interface Response<T> {
   data: T;

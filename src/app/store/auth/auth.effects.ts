@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AfterHttpService, LoginService } from '@services';
+import { AfterHttpService, AuthHttpService } from '@services';
 import * as authActions from './auth.actions';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -9,7 +9,7 @@ import { of } from 'rxjs';
 export class AuthEffects {
   constructor(
     private actions$: Actions,
-    private loginService: LoginService,
+    private loginService: AuthHttpService,
     private afterHttp: AfterHttpService
   ) {}
 

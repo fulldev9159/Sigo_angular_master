@@ -6,7 +6,7 @@ import { Response, Login } from '@model';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class AuthHttpService {
   API_URL = '';
 
   constructor(private http: HttpClient) {

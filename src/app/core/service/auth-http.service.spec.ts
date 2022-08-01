@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LoginService } from './login.service';
+import { AuthHttpService } from './auth-http.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { LoginMock200OK } from '@mocksOT';
 import { of } from 'rxjs';
 
-describe('LoginService', () => {
-  let service: LoginService;
+describe('AuthHttpService', () => {
+  let service: AuthHttpService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe('LoginService', () => {
       imports: [HttpClientTestingModule],
     });
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['post']);
-    service = new LoginService(httpClientSpy);
+    service = new AuthHttpService(httpClientSpy);
   });
 
   it('should be created', () => {

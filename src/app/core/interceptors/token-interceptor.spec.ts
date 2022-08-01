@@ -6,23 +6,23 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { environment } from '@environment';
 import { Observable } from 'rxjs';
-import { LoginService } from '../service/login.service';
+import { AuthHttpService } from '../service/auth-http.service';
 import { TokenInterceptor } from './token-interceptor';
 
 describe('TOKEN Interceptor', () => {
   let httpMock: HttpTestingController;
-  let service: LoginService;
+  let service: AuthHttpService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        LoginService,
+        AuthHttpService,
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
       ],
     });
 
     httpMock = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(LoginService);
+    service = TestBed.inject(AuthHttpService);
   });
   afterEach(() => {
     httpMock.verify();
