@@ -1,8 +1,12 @@
-<div class="perfil-select-container">
+<div class="perfil-select-container mt-7">
+    <p class="sigo-color-dark-light login-titulo">Perfil con el que accederá</p>
+
     <div> 
         <p-dropdown [options]="perfilesUsuarioDropdown$|async"  optionLabel="name" placeholder="Selecione un perfil"></p-dropdown>
         <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
     </div>
-   
+
+    <span class=" mt-7 sigo-color-dark-light text-xs" >¿Desea acceder con otro usuario? <a  href="" id="recuperar-guia"> Logout</a> </span>   
+
 </div>
 

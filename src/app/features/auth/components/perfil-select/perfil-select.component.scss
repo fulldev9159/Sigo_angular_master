@@ -1,9 +1,14 @@
 :host ::ng-deep {
   .p-dropdown{
-    width:  100%;
+    width:  93%;
+    border-color: #bcbcbf;
   }
 
   .p-dropdown-label{
+    font-size: 0.7rem;
+  }
+
+  .p-dropdown-items{
     font-size: 0.7rem;
   }
 
