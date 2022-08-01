@@ -12,6 +12,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token-interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -25,6 +26,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
   imports: [
     CoreModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     StoreModule.forRoot(
       {},
       {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -12,7 +11,6 @@ export class MainLayoutComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    console.log(this.authService.isLoggin());
     this.isLoggin = this.authService.isLoggin();
   }
 }
