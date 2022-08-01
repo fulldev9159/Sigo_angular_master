@@ -7,10 +7,7 @@ import { UtilsService } from './utils.service';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private authFacade: AuthFacade,
-    private utilsService: UtilsService
-  ) {}
+  constructor() {}
 
   isLoggin(): boolean {
     return this.isAuth() && this.isProfiled();

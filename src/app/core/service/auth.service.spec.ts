@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { StoreModule } from '@ngrx/store';
-import { of } from 'rxjs';
 import { UtilsService } from './utils.service';
 
 describe('Auth Service', () => {
@@ -17,7 +16,7 @@ describe('Auth Service', () => {
     facade = TestBed.inject(AuthFacade);
     utilsService = TestBed.inject(UtilsService);
 
-    service = new AuthService(facade, utilsService);
+    service = new AuthService();
   });
 
   it('should be created', () => {

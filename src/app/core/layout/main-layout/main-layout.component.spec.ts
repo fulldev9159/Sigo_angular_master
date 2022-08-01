@@ -21,6 +21,7 @@ describe('MainLayoutComponent', () => {
     component = fixture.componentInstance;
     authService = TestBed.inject(AuthService);
     fixture.detectChanges();
+    localStorage.setItem('auth', JSON.stringify({ sessionData: null }));
   });
 
   it('should create', () => {
