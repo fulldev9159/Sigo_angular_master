@@ -1,14 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import * as authActions from '../auth/auth.actions';
+import * as perfilActions from '../perfil/perfil.actions';
+import * as loadingsActions from './loadings.actions';
 
 export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
   sendingLogin: boolean;
+  sendingPerfilesUser: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
   sendingLogin: false,
+  sendingPerfilesUser: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -20,5 +24,17 @@ export const reducerLoadings = createReducer(
   on(authActions.loginError, authActions.loginSuccess, state => ({
     ...state,
     sendingLogin: false,
-  }))
+  })),
+  on(loadingsActions.sendingPerfilesUser, state => ({
+    ...state,
+    sendingPerfilesUser: true,
+  })),
+  on(
+    perfilActions.getPerfilesUsuarioError,
+    perfilActions.getPerfilesUsuarioSuccess,
+    state => ({
+      ...state,
+      sendingPerfilesUser: false,
+    })
+  )
 );

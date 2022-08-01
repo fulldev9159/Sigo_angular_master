@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { environment } from '@environment';
+import { StoreModule } from '@ngrx/store';
 import { PerfilesHttpService } from '../service/perfiles-http.service';
 import { TokenInterceptor } from './token-interceptor';
 
@@ -13,7 +14,7 @@ describe('TOKEN Interceptor', () => {
   let service: PerfilesHttpService;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, StoreModule.forRoot({})],
       providers: [
         PerfilesHttpService,
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

@@ -11,10 +11,15 @@ import * as authActions from './auth.actions';
 export class AuthFacade {
   constructor(private store: Store<SessionData>) {}
 
+  // SESSION
   public getSessionData$(): Observable<SessionData> {
     return this.store.select(authSelectors.getSessionData);
   }
+  public clearSession(): void {
+    this.store.dispatch(authActions.ClearSession());
+  }
 
+  // LOGIN
   public Login(username: string, password: string): void {
     this.store.dispatch(authActions.login({ username, password }));
   }

@@ -17,5 +17,6 @@ export const reducerAuth = createReducer(
   on(authActions.loginSuccess, (state, { response }) => ({
     ...state,
     sessionData: response.data,
-  }))
+  })),
+  on(authActions.ClearSession, (state, {}) => initialState)
 );

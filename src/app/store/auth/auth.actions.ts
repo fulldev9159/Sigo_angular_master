@@ -15,3 +15,5 @@ export const loginError = createAction(
   '[AUTH] POST Login Error',
   props<{ error: any }>()
 );
+
+export const ClearSession = createAction('[AUTH] ClearSession');

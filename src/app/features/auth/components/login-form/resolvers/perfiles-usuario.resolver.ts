@@ -28,11 +28,9 @@ export class PerfilesUsuarioResolver
 
     return this.service.getPerfilesUsuario(user_id).pipe(
       tap(response => {
-        console.log(response);
         this.perfilFacade.getPerfilesUsuarioSuccess(response);
       }),
       catchError(error => {
-        console.log(error);
         this.perfilFacade.getPerfilesUsuarioError(error);
         return EMPTY;
       })

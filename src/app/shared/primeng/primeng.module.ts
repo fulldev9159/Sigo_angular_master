@@ -4,6 +4,7 @@ import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { DropdownModule } from 'primeng/dropdown';
     PasswordModule,
     ButtonModule,
     DropdownModule,
+    ProgressSpinnerModule,
   ],
   exports: [
     InputTextModule,
@@ -19,6 +21,7 @@ import { DropdownModule } from 'primeng/dropdown';
     PasswordModule,
     ButtonModule,
     DropdownModule,
+    ProgressSpinnerModule,
   ],
 })
 export class PrimeNgModule {}
