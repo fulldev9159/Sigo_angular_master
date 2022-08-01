@@ -414,6 +414,21 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const otValidarPago = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_AUTORIZAR_PAGOS'
+        );
+
+        if (otValidarPago) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Autorizar Pago',
+            onClick: (event: Event, item) => {
+              this.router.navigate(['/app/informacion/validar-pago', item.id]);
+            },
+          });
+        }
+
         return actions;
       },
     },

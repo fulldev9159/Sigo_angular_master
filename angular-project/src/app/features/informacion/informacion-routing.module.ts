@@ -42,6 +42,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./acta/acta.module').then(m => m.ActaModule),
       },
+      {
+        path: 'validar-pago/:id',
+        loadChildren: () =>
+          import('./validar-pago/validar-pago.module').then(
+            m => m.ValidarPagoModule
+          ),
+      },
     ],
   },
 ];

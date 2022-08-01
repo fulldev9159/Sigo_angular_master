@@ -32,6 +32,12 @@
       <span class="tab-title">Validar Acta</span>
     </a>
   </li>
+  <li >
+    <a href="" [routerLink]="['validar-pago',ot_id]" [routerLinkActive]="['is-active']" *ngIf="(loginAuth$ |async).rol==='SUPERVISOR'">
+      <span class="icon pi pi-fw pi-file"></span>
+      <span class="tab-title">Autorizar Pago</span>
+    </a>
+  </li>
   <li>
     <a href="" [routerLink]="['libro-obras',ot_id]" [routerLinkActive]="['is-active']">
       <span class="icon pi pi-fw pi-book"></span>
