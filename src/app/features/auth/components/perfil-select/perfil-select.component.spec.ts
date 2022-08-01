@@ -43,4 +43,18 @@ describe('PerfilSelectComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('select')).toBeDefined();
   });
+
+  // it('should display gestor/JP', (done: DoneFn) => {
+  //   spyOn(facade, 'getPerfilesUsuario$').and.returnValue(
+  //     of(PerfilUserMock200OK.data.perfiles)
+  //   );
+
+  //   component.perfilesUsuarioDropdown$.subscribe({
+  //     next: drops => {
+  //       expect(drops.length).toEqual(1);
+  //       done();
+  //     },
+  //     error: done.fail,
+  //   });
+  // });
 });
