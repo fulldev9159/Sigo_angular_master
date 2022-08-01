@@ -9,10 +9,19 @@ import { OtFacade } from '@storeOT/features/ot/ot.facade';
   styleUrls: ['./validar-pago.component.scss'],
 })
 export class ValidarPagoComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
-  constructor() {}
+  quienAutorizoPago$ = this.otFacade.quienAutorizoPago$();
+  subscription: Subscription = new Subscription();
+  constructor(private otFacade: OtFacade, private rutaActiva: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscription.add(
+      this.rutaActiva.params.subscribe((params: Params) => {
+        if (params.id) {
+          this.otFacade.quienAutorizoPago(+params.id);
+        }
+      })
+    );
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

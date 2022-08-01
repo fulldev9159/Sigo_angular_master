@@ -110,6 +110,8 @@ export interface StateOt {
   detalleActaUob: DetalleActaUob[];
   ultimoTipoPagoActa: string;
   sendingGeneracionActa: boolean;
+
+  quienAutorizoPago: any;
 }
 
 export const initialStateOt: StateOt = {
@@ -184,6 +186,8 @@ export const initialStateOt: StateOt = {
   detalleActaUob: [],
   ultimoTipoPagoActa: '',
   sendingGeneracionActa: false,
+
+  quienAutorizoPago: null,
 };
 
 export const reducerOt = createReducer(
@@ -710,5 +714,9 @@ export const reducerOt = createReducer(
         sendingGeneracionActa: false,
       };
     }
-  )
+  ),
+  on(OtActions.quienAutorizoPagoSuccess, (state, { response }) => ({
+    ...state,
+    quienAutorizoPago: response.data,
+  }))
 );

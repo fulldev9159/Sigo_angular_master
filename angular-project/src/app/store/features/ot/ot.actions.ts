@@ -788,3 +788,19 @@ export const solicitarPagoError = createAction(
   '[OT] GET  solicitarPago Error',
   props<{ error: any }>()
 );
+
+//  QUIEN AUTORIZO PAGO
+export const quienAutorizoPago = createAction(
+  '[OT] GET quienAutorizoPago',
+  props<{ ot_id: number }>()
+);
+
+export const quienAutorizoPagoSuccess = createAction(
+  '[OT] GET  quienAutorizoPago Success',
+  props<{ response: Response<any> }>()
+);
+
+export const quienAutorizoPagoError = createAction(
+  '[OT] GET  quienAutorizoPago Error',
+  props<{ error: any }>()
+);

@@ -592,4 +592,12 @@ export class OtFacade {
   public solicitarPago(ot_id: number): void {
     this.store.dispatch(otActions.solicitarPago({ ot_id }));
   }
+
+  // QUIEN AUTORIZO PAGO
+  public quienAutorizoPago(ot_id: number): void {
+    this.store.dispatch(otActions.quienAutorizoPago({ ot_id }));
+  }
+  public quienAutorizoPago$(): Observable<any[]> {
+    return this.store.select(otSelectors.quienAutorizoPago);
+  }
 }

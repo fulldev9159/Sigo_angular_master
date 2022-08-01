@@ -277,4 +277,14 @@ export class OTService {
       ot_id,
     });
   }
+
+  // SOLICITAR PAGO
+  quienAutorizoPago(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/ot_autorizacion_pago_otid/get`,
+      {
+        ot_id,
+      }
+    );
+  }
 }

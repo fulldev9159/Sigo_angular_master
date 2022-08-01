@@ -599,6 +599,20 @@ export class OtEffects {
       )
     )
   );
+  // QUIEN AUTORIZO PAGO
+  quienAutorizoPagoOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.quienAutorizoPago),
+      concatMap(({ ot_id }) =>
+        this.otService.quienAutorizoPago(ot_id).pipe(
+          map(response => otActions.quienAutorizoPagoSuccess({ response })),
+          catchError(err =>
+            of(otActions.quienAutorizoPagoError({ error: err }))
+          )
+        )
+      )
+    )
+  );
 
   // NOTIFICACIONES
   notifyOK$ = createEffect(

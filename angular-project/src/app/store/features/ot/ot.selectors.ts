@@ -247,3 +247,8 @@ export const sendingGeneracionActa = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.sendingGeneracionActa
 );
+
+export const quienAutorizoPago = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.quienAutorizoPago
+);
