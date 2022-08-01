@@ -16,12 +16,14 @@ export class TokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${
-        JSON.parse(localStorage.getItem('auth')).sessionData.token
-      }`,
-    });
-    req = req.clone({ headers });
+    if (!req.url.includes('/login/start')) {
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem('auth')).sessionData.token
+        }`,
+      });
+      req = req.clone({ headers });
+    }
     return next.handle(req);
   }
 }

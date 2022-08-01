@@ -5,24 +5,23 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { environment } from '@environment';
-import { Observable } from 'rxjs';
-import { AuthHttpService } from '../service/auth-http.service';
+import { PerfilesHttpService } from '../service/perfiles-http.service';
 import { TokenInterceptor } from './token-interceptor';
 
 describe('TOKEN Interceptor', () => {
   let httpMock: HttpTestingController;
-  let service: AuthHttpService;
+  let service: PerfilesHttpService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        AuthHttpService,
+        PerfilesHttpService,
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
       ],
     });
 
     httpMock = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(AuthHttpService);
+    service = TestBed.inject(PerfilesHttpService);
   });
   afterEach(() => {
     httpMock.verify();
@@ -38,10 +37,10 @@ describe('TOKEN Interceptor', () => {
       })
     );
 
-    service
-      .logIn('mgestor1', 'adasd')
-      .subscribe(res => expect(res).toBeTruthy());
-    const httpReq = httpMock.expectOne(`${environment.api}/login/start`);
+    service.getPerfilesUsuario(2).subscribe(res => expect(res).toBeTruthy());
+    const httpReq = httpMock.expectOne(
+      `${environment.api}/usuario/perfiles/get`
+    );
     expect(httpReq.request.headers.has('Authorization')).toEqual(true);
     expect(httpReq.request.headers.get('Authorization')).toEqual(
       'Bearer 123456789'
