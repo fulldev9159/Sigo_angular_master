@@ -8,6 +8,11 @@ import { AuthEffects } from './auth/auth.effects';
 import * as formAuthReduce from './auth/auth.reducers';
 // AUTH STORE
 
+// PERFIL STORE
+import { PerfilEffects } from './perfil/perfil.effects';
+import * as formPerfilReduce from './perfil/perfil.reducers';
+// PERFIL STORE
+
 // LOADINGS STORE
 import * as loadingReducer from './loadings/loadings.reducers';
 import { SharedModule } from '@sharedOT/shared.module';
@@ -22,6 +27,13 @@ import { SharedModule } from '@sharedOT/shared.module';
     StoreModule.forFeature(
       formAuthReduce.Featurekey,
       formAuthReduce.reducerAuth
+    ),
+
+    // PERFIL STORE
+    EffectsModule.forFeature([PerfilEffects]),
+    StoreModule.forFeature(
+      formPerfilReduce.Featurekey,
+      formPerfilReduce.reducerPerfil
     ),
 
     // LOADINGS STORE
