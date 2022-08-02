@@ -1,5 +1,5 @@
 import { createAction } from '@ngrx/store';
 
-export const sendingPerfilesUser = createAction(
+export const sendingGetPerfilesUser = createAction(
   '[loading] sendingPerfilesUser'
 );

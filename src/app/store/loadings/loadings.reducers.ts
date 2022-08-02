@@ -7,12 +7,14 @@ export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
   sendingLogin: boolean;
-  sendingPerfilesUser: boolean;
+  sendingGetPerfilesUser: boolean;
+  // sendingPerfilSelected: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
   sendingLogin: false,
-  sendingPerfilesUser: false,
+  sendingGetPerfilesUser: false,
+  // sendingPerfilSelected: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -25,16 +27,16 @@ export const reducerLoadings = createReducer(
     ...state,
     sendingLogin: false,
   })),
-  on(loadingsActions.sendingPerfilesUser, state => ({
+  on(loadingsActions.sendingGetPerfilesUser, state => ({
     ...state,
-    sendingPerfilesUser: true,
+    sendingGetPerfilesUser: true,
   })),
   on(
     perfilActions.getPerfilesUsuarioError,
     perfilActions.getPerfilesUsuarioSuccess,
     state => ({
       ...state,
-      sendingPerfilesUser: false,
+      sendingGetPerfilesUser: false,
     })
   )
 );

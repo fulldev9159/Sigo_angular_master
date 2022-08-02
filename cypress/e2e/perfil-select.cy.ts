@@ -39,6 +39,7 @@ it('button select shoulf be disabled', () => {
 it('if touch select and not select perfil should display requiered message', () => {
   cy.get('#perfil-select-button').should('be.disabled');
   cy.get('p-dropdown').click();
+  cy.get('.perfil-select-titulo').click();
   cy.get('p-dropdown+zwc-input-alert>small').contains(
     'Este campo es requerido'
   );
@@ -46,7 +47,7 @@ it('if touch select and not select perfil should display requiered message', () 
 
 it('should redirect to home if select perfil', () => {
   cy.get('p-dropdown').click();
-  cy.get('.p-element:first').click();
+  cy.get('.p-ripple').click();
   cy.get('#perfil-select-button').click();
   cy.location('pathname').should('eq', '/home');
 });

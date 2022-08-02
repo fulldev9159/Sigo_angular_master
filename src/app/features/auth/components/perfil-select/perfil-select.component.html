@@ -2,8 +2,8 @@
     <p class="sigo-color-dark-light perfil-select-titulo" > Perfil</p>
 
     <div> 
-        <p-dropdown [options]="perfilesUsuarioDropdown$|async"  optionLabel="name" placeholder="Selecione un perfil"></p-dropdown>
-        <i class="pi pi-spin pi-spinner left-12rem " style="font-size: 1rem;
+        <p-dropdown [options]="perfilesUsuarioDropdown$|async"  optionLabel="name" placeholder="Selecione un perfil" [formControl]="formControls.perfil_id" optionValue="code"></p-dropdown>
+        <i class="pi pi-spin pi-spinner left-12rem " *ngIf="sendingGetPerfilesUser$|async"  style="font-size: 1rem;
             top: -2rem;
             position: relative;"></i>
     </div>
@@ -12,7 +12,8 @@
         Pid="perfil-select-button"
         content="Seleccionar"
         Pclass="p-button-info p-button-sm mt-4 w-full"
-        
+        [sending]="sendingLogin$ | async"
+        [Pdisabled]="!formPerfilUser.valid"
         ></zwc-pbutton-sending>
 
     <span class=" mt-7 sigo-color-dark-light text-xs" >¿Desea acceder con otro usuario? <a  (click)="logout()" id="logout" style="cursor:pointer ;"> Logout</a> </span>   

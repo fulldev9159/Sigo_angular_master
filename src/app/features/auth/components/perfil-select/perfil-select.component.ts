@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResolveEnd, ResolveStart, Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
 import { filter, map, merge, Observable, take } from 'rxjs';
 
@@ -29,6 +30,10 @@ export class PerfilSelectComponent {
       take(1)
     );
 
+  sendingGetPerfilesUser$: Observable<boolean> =
+    this.loadingFacade.sendingGetPerfilesUser$();
+  sendingLogin$: Observable<boolean> = this.loadingFacade.sendigLoading$();
+
   formControls = {
     perfil_id: new FormControl('', [Validators.required]),
   };
@@ -37,7 +42,8 @@ export class PerfilSelectComponent {
 
   constructor(
     private perfilFacade: PerfilFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private loadingFacade: LoadingsFacade
   ) {}
 
   logout(): void {
