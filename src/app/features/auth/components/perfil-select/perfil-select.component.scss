@@ -1,7 +1,23 @@
+.perfil-select-container{
+  display: flex;
+  flex-direction: column;
+  height: 22rem;
+  justify-content: space-around;
+  .perfil-select-titulo{
+    font-size: 31px;
+    font-weight: 700;
+    margin-top: 14px;
+    align-self: center;
+    letter-spacing: 0.2rem;
+  }
+}
+
+
 :host ::ng-deep {
   .p-dropdown{
-    width:  93%;
+    width:  100%;
     border-color: #bcbcbf;
+    margin-top: 1rem;
   }
 
   .p-dropdown-label{

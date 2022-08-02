@@ -18,10 +18,12 @@ export class PerfilSelectComponent {
     .getPerfilesUsuario$()
     .pipe(
       map(perfiles =>
-        perfiles.map(perfil => ({
-          name: perfil.model_perfil_id.nombre,
-          code: perfil.id,
-        }))
+        perfiles.length > 0
+          ? perfiles.map(perfil => ({
+              name: perfil.model_perfil_id?.nombre,
+              code: perfil.id,
+            }))
+          : []
       ),
       take(1)
     );
