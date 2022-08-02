@@ -7,11 +7,11 @@
         <table style="width: 100%;" class="table-info">
           <tr>
             <td>Tipo Contrato</td>
-            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre : ' ---'}}</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre : ' ---'}}</td>
           </tr>
           <tr>
             <td>Nombre Contrato</td>
-            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_contrato_marco_id.nombre : ' ---'}}</td>
+            <td>{{(detalleOT$| async) ? (detalleOT$| async).ot.model_cubicacion_id.model_contrato_id.nombre : ' ---'}}</td>
           </tr>
           <tr>
             <td>Cubicación ID</td>
@@ -81,9 +81,9 @@
   </div>
   <div class="col-xs-12 col-md-6">
     <app-card [classCardHeader]="'bg-info'">
-      <ng-container card-header-title>Información Contrato {{(detalleOT$| async) ? (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre : ' ---'}}</ng-container>
+      <ng-container card-header-title>Información Contrato {{(detalleOT$| async) ? (detalleOT$| async).ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre : ' ---'}}</ng-container>
       <ng-container card-body>
-        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Móvil'">
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_cubicacion_id.model_tipo_contrato_id.nombre==='Móvil'">
           <table class="table-info" style="width: 100%;">
             <tr>
               <td>Plan de proyecto</td>
@@ -96,7 +96,7 @@
           </table>
         </ng-container>
 
-        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Bucle'">
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
           <table class="table-info" style="width: 100%;">
             <tr>
               <td>Oficina Central</td>
@@ -167,7 +167,7 @@
           </table>
         </ng-container>
 
-        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Ordinario'">
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Ordinario'">
           <table class="table-info" style="width: 100%;">
             <tr>
               <td>Carta de adjudicación</td>
@@ -188,7 +188,7 @@
           </table>
         </ng-container>
 
-        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_contrato_marco_id.model_tipo_contrato_id.nombre==='Fijo'">
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Fijo'">
           <table class="table-info" style="width: 100%;">
             <tr>
               <td>Tipo Número Interno</td>

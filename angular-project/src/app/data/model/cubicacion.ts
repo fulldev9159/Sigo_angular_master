@@ -84,6 +84,14 @@ export interface DetalleCubicacion {
   tipo_cubicacion_id: number;
   updated_at: Date;
   usuario_creador_id: number;
+  model_contrato_id: {
+    id: number;
+    nombre: string;
+    model_tipo_contrato_id: {
+      id: number;
+      nombre: string;
+    };
+  };
 }
 
 // TIPO CUBICACION 4 CUB
