@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { SnackMessageService } from './snack-message.service';
 import * as authActions from '@storeOT/auth/auth.actions';
+import * as perfilActions from '@storeOT/perfil/perfil.actions';
 
 interface ActionErr {
   error?: any;
@@ -43,6 +44,18 @@ export class AfterHttpService {
 
     if (action.type === authActions.Logout.type) {
       this.router.navigate(['/login/auth']);
+    }
+
+    if (
+      action.type === perfilActions.getPerfilesUsuarioSuccess.type &&
+      action.response.status.code === 0 &&
+      action.response.data.perfiles.length === 0
+    ) {
+      this.snackMessage.showMessage(
+        'No tiene perfiles asignados, comuníquese con el administrador de sistema',
+        'info',
+        6000
+      );
     }
   }
 }

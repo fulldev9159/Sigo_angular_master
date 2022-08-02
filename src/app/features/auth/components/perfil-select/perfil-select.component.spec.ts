@@ -11,6 +11,10 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { PerfilSelectComponent } from './perfil-select.component';
 import { getPerfilesUsuario } from '@storeOT/perfil/perfil.selectors';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
+import {
+  sendingGetPerfilesUser,
+  sendingLogin,
+} from '@storeOT/loadings/loadings.selectors';
 
 describe('PerfilSelectComponent', () => {
   let component: PerfilSelectComponent;
@@ -36,6 +40,14 @@ describe('PerfilSelectComponent', () => {
             {
               selector: getPerfilesUsuario,
               value: PerfilUserMock200OK.data.perfiles,
+            },
+            {
+              selector: sendingGetPerfilesUser,
+              value: false,
+            },
+            {
+              selector: sendingLogin,
+              value: false,
             },
           ],
         }),
