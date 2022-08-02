@@ -4,3 +4,7 @@
 <ng-container *ngIf="(loginAuth$ |async).rol==='GESTOR'">
   <app-validar-acta></app-validar-acta>
 </ng-container>
+
+<ng-container *ngIf="(loginAuth$ |async).rol!=='GESTOR' && (loginAuth$ |async).rol!=='ADM_EECC'">
+  <app-validar-pago></app-validar-pago>
+</ng-container>

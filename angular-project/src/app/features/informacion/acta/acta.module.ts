@@ -11,6 +11,7 @@ import { ValidarActaComponent } from './validar-acta/validar-acta.component';
 import { ActaTotalFormComponent } from './component/acta-total-form/acta-total-form.component';
 import { ActaPorcentajeFormComponent } from './component/acta-porcentaje-form/acta-porcentaje-form.component';
 import { ActaServicioFormComponent } from './component/acta-servicio-form/acta-servicio-form.component';
+import { ValidarPagoComponent } from './validar-pago/validar-pago.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ActaServicioFormComponent } from './component/acta-servicio-form/acta-s
     ActaTotalFormComponent,
     ActaPorcentajeFormComponent,
     ActaServicioFormComponent,
+    ValidarPagoComponent,
   ],
   imports: [
     CommonModule,
