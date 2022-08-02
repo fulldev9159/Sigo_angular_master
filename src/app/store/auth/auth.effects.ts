@@ -13,6 +13,7 @@ export class AuthEffects {
     private afterHttp: AfterHttpService
   ) {}
 
+  // LOGIIN
   Login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(authActions.login),
@@ -28,7 +29,7 @@ export class AuthEffects {
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(authActions.loginSuccess),
+        ofType(authActions.loginSuccess, authActions.Logout),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }

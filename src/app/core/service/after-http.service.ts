@@ -40,5 +40,9 @@ export class AfterHttpService {
     if (action.type === authActions.loginSuccess.type) {
       this.router.navigate(['/login/perfil-select']);
     }
+
+    if (action.type === authActions.Logout.type) {
+      this.router.navigate(['/login/auth']);
+    }
   }
 }

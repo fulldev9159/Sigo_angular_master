@@ -35,4 +35,6 @@ export class PerfilSelectComponent {
   formPerfilUser = new FormGroup(this.formControls);
 
   constructor(private perfilFacade: PerfilFacade) {}
+
+  logout(): void {}
 }

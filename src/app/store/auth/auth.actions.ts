@@ -1,6 +1,7 @@
 import { Login, Response } from '@model';
 import { createAction, props } from '@ngrx/store';
 
+// LOGIN
 export const login = createAction(
   '[AUTH] POST Login',
   props<{ username: string; password: string }>()
@@ -16,4 +17,6 @@ export const loginError = createAction(
   props<{ error: any }>()
 );
 
+// LOGOUT
 export const ClearSession = createAction('[AUTH] ClearSession');
+export const Logout = createAction('[AUTH] Logout');

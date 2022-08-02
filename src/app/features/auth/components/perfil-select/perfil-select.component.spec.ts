@@ -10,11 +10,14 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 import { PerfilSelectComponent } from './perfil-select.component';
 import { getPerfilesUsuario } from '@storeOT/perfil/perfil.selectors';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 
 describe('PerfilSelectComponent', () => {
   let component: PerfilSelectComponent;
   let fixture: ComponentFixture<PerfilSelectComponent>;
   let facade: PerfilFacade;
+  let authFacade: AuthFacade;
+
   const initialState: any = { perfilesUsuario: null };
 
   beforeEach(async () => {
@@ -43,6 +46,7 @@ describe('PerfilSelectComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     facade = TestBed.inject(PerfilFacade);
+    authFacade = TestBed.inject(AuthFacade);
   });
 
   it('should create', () => {
@@ -63,10 +67,19 @@ describe('PerfilSelectComponent', () => {
       next: drops => {
         expect(drops.length).toEqual(1);
         expect(drops[0].name).toEqual('Gestor/JP');
-        expect(drops[0].code).toEquial(2);
+        expect(drops[0].code).toEqual(2);
         done();
       },
       error: done.fail,
     });
+  });
+
+  it('logout click should call logout facade', () => {
+    const spyLogout = spyOn(component, 'logout');
+    const spyAuthServiceLogout = spyOn(authFacade, 'Logout');
+    const compiled = fixture.nativeElement;
+    compiled.querySelector('#logout').click();
+    expect(spyLogout).toHaveBeenCalled();
+    expect(spyAuthServiceLogout).toHaveBeenCalled();
   });
 });

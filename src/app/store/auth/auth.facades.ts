@@ -23,4 +23,10 @@ export class AuthFacade {
   public Login(username: string, password: string): void {
     this.store.dispatch(authActions.login({ username, password }));
   }
+
+  // LOGOUT
+  public Logout(): void {
+    this.store.dispatch(authActions.ClearSession());
+    this.store.dispatch(authActions.Logout());
+  }
 }
