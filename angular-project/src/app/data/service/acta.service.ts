@@ -7,6 +7,7 @@ import {
   DetalleActaUob,
   LastActa,
   RequestAceptarRechazarOT,
+  RequestAprobacionRechazoSolicitudPago,
   Response,
 } from '@data/model';
 
@@ -92,6 +93,16 @@ export class ActaService {
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/acta/validacion/update`,
+      request
+    );
+  }
+
+  // APROBAR RECHAZAR SOLICITUD PAGO
+  aprobarRechazarSolicitudPago(
+    request: RequestAprobacionRechazoSolicitudPago
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/ot_autorizacion_pago/autorizar`,
       request
     );
   }

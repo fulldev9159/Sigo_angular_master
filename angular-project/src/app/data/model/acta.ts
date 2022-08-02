@@ -88,3 +88,11 @@ export interface LastActa {
   ceco?: any;
   valor_total_clp: number;
 }
+
+export interface RequestAprobacionRechazoSolicitudPago {
+  ot_id: number;
+  acta_id: number;
+  ot_total: number;
+  autoriza_pago: string; // AUTORIZADO, NO_AUTORIZADO
+  tipo_rechazo?: number;
+}

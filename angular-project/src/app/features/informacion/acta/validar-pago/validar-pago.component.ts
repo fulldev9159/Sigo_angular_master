@@ -2,7 +2,12 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subscription, Observable, of } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { OtFacade } from '@storeOT/features/ot/ot.facade';
-import { LastActa, MotivoRechazo, RequestAceptarRechazarOT } from '@data';
+import {
+  LastActa,
+  MotivoRechazo,
+  RequestAceptarRechazarOT,
+  RequestAprobacionRechazoSolicitudPago,
+} from '@data';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface Acta {
@@ -53,6 +58,8 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
   formAprobarActa: FormGroup = new FormGroup(this.formAprobarActaControls);
 
   ot_id = -1;
+  acta_id;
+  ot_total;
 
   constructor(private otFacade: OtFacade, private rutaActiva: ActivatedRoute) {}
 
@@ -68,6 +75,8 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
     this.tipoRechazo$ = this.otFacade.getAllMotivoRechazoOT$();
     this.subscription.add(
       this.lastActa$.subscribe(lacta => {
+        this.acta_id = lacta.id;
+        this.ot_total = lacta.valor_total_clp;
         this.totalPago = lacta.valor_total_clp;
         if (lacta.many_acta_detalle_servicio) {
           this.acta = lacta.many_acta_detalle_servicio.map(servicio => ({
@@ -211,15 +220,14 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
   }
 
   AceptarActas(): void {
-    const request: RequestAceptarRechazarOT = {
+    const request: RequestAprobacionRechazoSolicitudPago = {
       ot_id: this.ot_id,
-      values: {
-        estado: 'VALIDADO',
-        observacion: this.formAprobarActa.get('detalle').value,
-      },
+      acta_id: this.acta_id,
+      ot_total: this.ot_total,
+      autoriza_pago: 'AUTORIZADO',
     };
 
-    this.otFacade.AceptarRechazarActaOT(request);
+    this.otFacade.AprobarRechazarSolicitudPago(request);
     this.displaAprobarActa = false;
   }
 
@@ -232,16 +240,15 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
   }
 
   RechazarActaAvance(): void {
-    const request: RequestAceptarRechazarOT = {
+    const request: RequestAprobacionRechazoSolicitudPago = {
       ot_id: this.ot_id,
-      values: {
-        estado: 'INVALIDADO',
-        observacion: this.formRechazoIncial.get('motivo').value,
-        tipo: +this.formRechazoIncial.get('tipo_id').value,
-      },
+      acta_id: this.acta_id,
+      ot_total: this.ot_total,
+      autoriza_pago: 'NO_AUTORIZADO',
+      tipo_rechazo: +this.formRechazoIncial.get('tipo_id').value,
     };
 
-    this.otFacade.AceptarRechazarActaOT(request);
+    this.otFacade.AprobarRechazarSolicitudPago(request);
     this.closeRechazoActaModal();
   }
 

@@ -41,6 +41,7 @@ import {
   RegistroLibroDeObras,
   RequestAutorizarInformeAvance,
   LastActa,
+  RequestAprobacionRechazoSolicitudPago,
 } from '@data';
 
 // GET OTS
@@ -802,5 +803,20 @@ export const quienAutorizoPagoSuccess = createAction(
 
 export const quienAutorizoPagoError = createAction(
   '[OT] GET  quienAutorizoPago Error',
+  props<{ error: any }>()
+);
+
+//  APROBAR RECHAZAR SOLICITUD PAGO
+export const AprobarRechazarSolicitudPago = createAction(
+  '[OT] GET AprobarRechazarSolicitudPago',
+  props<{ request: RequestAprobacionRechazoSolicitudPago }>()
+);
+
+export const AprobarRechazarSolicitudPagoSuccess = createAction(
+  '[OT] GET AprobarRechazarSolicitudPago Success',
+  props<{ response: Response<any> }>()
+);
+export const AprobarRechazarSolicitudPagoError = createAction(
+  '[OT] GET AprobarRechazarSolicitudPago Error',
   props<{ error: any }>()
 );

@@ -614,6 +614,23 @@ export class OtEffects {
     )
   );
 
+  // APROBAR RECHAZAR SOLICITUD PAGO
+  aprobarRechazarSolicitudPago$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AprobarRechazarSolicitudPago),
+      concatMap(({ request }) =>
+        this.actaService.aprobarRechazarSolicitudPago(request).pipe(
+          map(response =>
+            otActions.AprobarRechazarSolicitudPagoSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.AprobarRechazarSolicitudPagoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

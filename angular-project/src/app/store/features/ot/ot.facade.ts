@@ -42,6 +42,7 @@ import {
   OT,
   RequestAutorizarInformeAvance,
   LastActa,
+  RequestAprobacionRechazoSolicitudPago,
 } from '@data';
 @Injectable({
   providedIn: 'root',
@@ -599,5 +600,12 @@ export class OtFacade {
   }
   public quienAutorizoPago$(): Observable<any[]> {
     return this.store.select(otSelectors.quienAutorizoPago);
+  }
+
+  // ACEPTAR O RECHAZAR SOLICITUD PAGO
+  public AprobarRechazarSolicitudPago(
+    request: RequestAprobacionRechazoSolicitudPago
+  ): void {
+    this.store.dispatch(otActions.AprobarRechazarSolicitudPago({ request }));
   }
 }
