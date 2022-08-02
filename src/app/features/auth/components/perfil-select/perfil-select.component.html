@@ -1,12 +1,13 @@
 <div class="perfil-select-container">
     <p class="sigo-color-dark-light perfil-select-titulo" > Perfil</p>
 
-    <div> 
+    <div id="input-dropdown"> 
         <p-dropdown [options]="perfilesUsuarioDropdown$|async"  optionLabel="name" placeholder="Selecione un perfil" [formControl]="formControls.perfil_id" optionValue="code"></p-dropdown>
         <i class="pi pi-spin pi-spinner left-12rem " *ngIf="sendingGetPerfilesUser$|async"  style="font-size: 1rem;
             top: -2rem;
             position: relative;"></i>
     </div>
+    <zwc-input-alert [control]="formControls.perfil_id"> </zwc-input-alert>
 
     <zwc-pbutton-sending 
         Pid="perfil-select-button"

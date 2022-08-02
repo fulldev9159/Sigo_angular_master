@@ -40,7 +40,7 @@ it('if touch select and not select perfil should display requiered message', () 
   cy.get('#perfil-select-button').should('be.disabled');
   cy.get('p-dropdown').click();
   cy.get('.perfil-select-titulo').click();
-  cy.get('p-dropdown+zwc-input-alert>small').contains(
+  cy.get('#input-dropdown+zwc-input-alert>small').contains(
     'Este campo es requerido'
   );
 });
