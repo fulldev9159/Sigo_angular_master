@@ -225,6 +225,7 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
       acta_id: this.acta_id,
       ot_total: this.ot_total,
       autoriza_pago: 'AUTORIZADO',
+      observacion: this.formAprobarActa.get('detalle').value,
     };
 
     this.otFacade.AprobarRechazarSolicitudPago(request);
@@ -246,6 +247,7 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
       ot_total: this.ot_total,
       autoriza_pago: 'NO_AUTORIZADO',
       tipo_rechazo: +this.formRechazoIncial.get('tipo_id').value,
+      observacion: this.formRechazoIncial.get('motivo').value,
     };
 
     this.otFacade.AprobarRechazarSolicitudPago(request);
