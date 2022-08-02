@@ -9,12 +9,12 @@
     </div>
 
     <zwc-pbutton-sending 
-        Pid="login-button"
+        Pid="perfil-select-button"
         content="Seleccionar"
         Pclass="p-button-info p-button-sm mt-4 w-full"
         
         ></zwc-pbutton-sending>
 
-    <span class=" mt-7 sigo-color-dark-light text-xs" >¿Desea acceder con otro usuario? <a  href="" id="logout"> Logout</a> </span>   
+    <span class=" mt-7 sigo-color-dark-light text-xs" >¿Desea acceder con otro usuario? <a  (click)="logout()" id="logout" style="cursor:pointer ;"> Logout</a> </span>   
 
 </div>

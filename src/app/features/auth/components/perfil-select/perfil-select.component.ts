@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResolveEnd, ResolveStart, Router } from '@angular/router';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
 import { filter, map, merge, Observable, take } from 'rxjs';
 
@@ -34,7 +35,12 @@ export class PerfilSelectComponent {
 
   formPerfilUser = new FormGroup(this.formControls);
 
-  constructor(private perfilFacade: PerfilFacade) {}
+  constructor(
+    private perfilFacade: PerfilFacade,
+    private authFacade: AuthFacade
+  ) {}
 
-  logout(): void {}
+  logout(): void {
+    this.authFacade.Logout();
+  }
 }
