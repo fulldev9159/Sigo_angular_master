@@ -67,6 +67,7 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.rutaActiva.params.subscribe((params: Params) => {
         if (params.id) {
+          this.ot_id = +params.id;
           this.otFacade.quienAutorizoPago(+params.id);
         }
       })
@@ -95,11 +96,11 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
               mayuob =>
                 this.acta.find(
                   acta =>
-                    mayuob.model_informe_has_uob_id.informe_has_servicio_id !==
+                    mayuob.model_informe_has_uob_id.informe_has_servicio_id ===
                     acta.informe_has_servicio_id
                 )
-                  ? true
-                  : false
+                  ? false
+                  : true
             );
             const uos_con_servicios = lacta.many_acta_detalle_uob.filter(
               mayuob =>

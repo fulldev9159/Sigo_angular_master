@@ -42,16 +42,18 @@
                       </tr>     
                       
                       <ng-container *ngFor="let uo of servicio.uobs"> 
-                        <td class="label-table" style="background-color:#ff8e4e ;
-                        padding-left: 22px !important;">{{uo.codigo}}</td>
-                        <td class="data-secundaria">{{ uo.descripcion |titlecase}}</td>
-                        <!-- <td style="text-align: right" class="data-secundaria">---</td>
-                        <td style="text-align: right"class="data-secundaria">---</td> -->
-                        <td>
-                          {{uo.pago_cantidad}}
-                        </td>
-                        <td class="data-secundaria">{{uo.valor_detalle_clp/uo.pago_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td class="data-secundaria">{{uo.valor_detalle_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        <tr>
+                          <td class="label-table" style="background-color:#ff8e4e ;
+                          padding-left: 22px !important;">{{uo.codigo}}</td>
+                          <td class="data-secundaria">{{ uo.descripcion |titlecase}}</td>
+                          <!-- <td style="text-align: right" class="data-secundaria">---</td>
+                          <td style="text-align: right"class="data-secundaria">---</td> -->
+                          <td>
+                            {{uo.pago_cantidad}}
+                          </td>
+                          <td class="data-secundaria">{{uo.valor_detalle_clp/uo.pago_cantidad| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                          <td class="data-secundaria">{{uo.valor_detalle_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        </tr>
                       </ng-container>
                     </ng-container>
   
