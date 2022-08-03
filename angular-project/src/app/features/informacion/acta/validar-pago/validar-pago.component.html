@@ -80,6 +80,22 @@
     </div>
     <div class="ccol-md-4 col-xs-12"></div>
   </div>
+
+  <app-card [classCardHeader]="'bg-info'">
+    <ng-container card-header-title>Usuarios que han aprobado la solicitud de pago</ng-container>
+    <ng-container card-body>
+      <table style="width: 100%;">
+        <tr>
+          <th>
+            Usuario
+          </th>
+        </tr>
+        <tr *ngFor="let item of (quienAutorizoPago$| async) ? (quienAutorizoPago$| async) : []">
+          <td>{{item.model_proxy_id.model_usuario_id.nombres}}  {{item.model_proxy_id.model_usuario_id.apellidos}}</td>
+        </tr>
+      </table>
+    </ng-container>
+  </app-card>
   
   <div style="display: flex;justify-content:space-evenly;margin-top: 30px;">
     <button class="btn btn-secundary" (click)="DesplegarRechazoActa()">

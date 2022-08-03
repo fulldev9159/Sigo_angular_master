@@ -34,6 +34,7 @@ import {
   DetalleActaUob,
   RegistroLibroDeObras,
   LastActa,
+  QuienAutorizoActa,
 } from '@data';
 
 export const otFeatureKey = 'ot';
@@ -111,7 +112,7 @@ export interface StateOt {
   ultimoTipoPagoActa: string;
   sendingGeneracionActa: boolean;
 
-  quienAutorizoPago: any;
+  quienAutorizoPago: QuienAutorizoActa[];
 }
 
 export const initialStateOt: StateOt = {
@@ -187,7 +188,7 @@ export const initialStateOt: StateOt = {
   ultimoTipoPagoActa: '',
   sendingGeneracionActa: false,
 
-  quienAutorizoPago: null,
+  quienAutorizoPago: [],
 };
 
 export const reducerOt = createReducer(
@@ -717,6 +718,6 @@ export const reducerOt = createReducer(
   ),
   on(OtActions.quienAutorizoPagoSuccess, (state, { response }) => ({
     ...state,
-    quienAutorizoPago: response.data,
+    quienAutorizoPago: response.data.items,
   }))
 );

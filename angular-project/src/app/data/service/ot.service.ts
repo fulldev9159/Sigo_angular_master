@@ -30,6 +30,7 @@ import {
   CategoriaArchivo,
   ActaTipoPago,
   DetalleActaServicio,
+  QuienAutorizoActa,
 } from '@data';
 
 @Injectable({
@@ -279,8 +280,10 @@ export class OTService {
   }
 
   // SOLICITAR PAGO
-  quienAutorizoPago(ot_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
+  quienAutorizoPago(
+    ot_id: number
+  ): Observable<Response<{ items: QuienAutorizoActa[] }>> {
+    return this.http.post<Response<{ items: QuienAutorizoActa[] }>>(
       `${this.apiUrl}/ot/ot_autorizacion_pago_otid/get`,
       {
         ot_id,

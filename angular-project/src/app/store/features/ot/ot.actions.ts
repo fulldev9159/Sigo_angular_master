@@ -42,6 +42,7 @@ import {
   RequestAutorizarInformeAvance,
   LastActa,
   RequestAprobacionRechazoSolicitudPago,
+  QuienAutorizoActa,
 } from '@data';
 
 // GET OTS
@@ -798,7 +799,7 @@ export const quienAutorizoPago = createAction(
 
 export const quienAutorizoPagoSuccess = createAction(
   '[OT] GET  quienAutorizoPago Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<{ items: QuienAutorizoActa[] }> }>()
 );
 
 export const quienAutorizoPagoError = createAction(
