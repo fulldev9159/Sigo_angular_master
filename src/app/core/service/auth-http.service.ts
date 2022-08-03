@@ -19,4 +19,13 @@ export class AuthHttpService {
       password,
     });
   }
+
+  refeshLogin(proxy_id: number): Observable<Response<{ token: string }>> {
+    return this.http.post<Response<{ token: string }>>(
+      `${this.API_URL}/login/refresh`,
+      {
+        proxy_id,
+      }
+    );
+  }
 }

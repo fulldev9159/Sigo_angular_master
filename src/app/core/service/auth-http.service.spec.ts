@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { AuthHttpService } from './auth-http.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
-import { LoginMock200OK } from '@mocksOT';
+import { LoginMock200OK, LoginRefreshMock200OK } from '@mocksOT';
 import { of } from 'rxjs';
 
 describe('AuthHttpService', () => {
@@ -32,4 +32,15 @@ describe('AuthHttpService', () => {
       error: done.fail,
     });
   });
+
+  // it('should call refresh login and return token', (done: DoneFn) => {
+  //   httpClientSpy.post.and.returnValue(of(LoginRefreshMock200OK));
+  //   service.logIn('mgestor1', 'asdasd').subscribe({
+  //     next: response => {
+  //       expect(response).toEqual(LoginMock200OK);
+  //       done();
+  //     },
+  //     error: done.fail,
+  //   });
+  // });
 });

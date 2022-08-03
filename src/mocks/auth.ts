@@ -99,3 +99,11 @@ export let PerfilUserMock200OK: Response<{ perfiles: PerfilesUsuario[] }> = {
     ],
   },
 };
+
+export let LoginRefreshMock200OK: Response<{ token: string }> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    token:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTk1NDg5OTYsImlzcyI6InNpZ28iLCJuYmYiOjE2NTk1NDUzOTYsInNpZ29fcHJveHlfaWQiOjIsInNpZ29fdXNlcl9pZCI6Miwic2lnb19wZXJmaWxfaWQiOjh9.PBSB2fmv55Jq7GLp5R1ETQLtRjQWQKXpyGfKKbpQGLA',
+  },
+};
