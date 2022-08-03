@@ -137,3 +137,14 @@ update-demos-sigo:
   trigger: zweicom/cl-movistar/sigo/demos-sigo
   only:
     - develop
+
+UpdateDocker&Restart:
+  script:
+    # - ssh zweicom@34.123.214.117 "cd /home/zweicom/ansible/ && ansible-playbook -i sigo/inventory CI-CD/update_docker_mq_prod_sigo.yml --limit=10.184.59.21"
+    - ssh zweicom@34.123.214.117 "cd /home/zweicom/ansible/ && ansible-playbook -i sigo/inventory CI-CD/update_docker_mq_prod_sigo.yml --limit=10.184.59.38"
+    - ssh zweicom@34.123.214.117 "cd /home/zweicom/ansible/ && ansible-playbook -i sigo/inventory CI-CD/update_docker_mq_prod_sigo.yml --limit=10.184.59.39"
+  stage: update docker
+  tags:
+    - repo-machine
+  allow_failure: false
+  when: manual
