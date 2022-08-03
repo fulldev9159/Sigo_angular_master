@@ -29,4 +29,9 @@ export class AuthFacade {
     this.store.dispatch(authActions.ClearSession());
     this.store.dispatch(authActions.Logout());
   }
+
+  // REFRESH LOGIN
+  public refreshLogin(proxy_id: number): void {
+    this.store.dispatch(authActions.refreshLogin({ proxy_id }));
+  }
 }

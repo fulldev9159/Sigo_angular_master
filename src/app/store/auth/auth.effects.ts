@@ -26,10 +26,27 @@ export class AuthEffects {
     )
   );
 
+  // REFRESH LOGIIN
+  refreshLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.refreshLogin),
+      concatMap(({ proxy_id }) =>
+        this.loginService.refeshLogin(proxy_id).pipe(
+          map(response => authActions.refreshLoginSuccess({ response })),
+          catchError(error => of(authActions.refreshLoginError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(authActions.loginSuccess, authActions.Logout),
+        ofType(
+          authActions.loginSuccess,
+          authActions.Logout,
+          authActions.refreshLoginSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -38,7 +55,7 @@ export class AuthEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(authActions.loginError),
+        ofType(authActions.loginError, authActions.refreshLoginError),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

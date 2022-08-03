@@ -20,3 +20,19 @@ export const loginError = createAction(
 // LOGOUT
 export const ClearSession = createAction('[AUTH] ClearSession');
 export const Logout = createAction('[AUTH] Logout');
+
+// REFRESH LOGIN
+export const refreshLogin = createAction(
+  '[AUTH] POST refreshLogin',
+  props<{ proxy_id: number }>()
+);
+
+export const refreshLoginSuccess = createAction(
+  '[AUTH] POST refreshLogin Success',
+  props<{ response: Response<{ token: string }> }>()
+);
+
+export const refreshLoginError = createAction(
+  '[AUTH] POST refreshLogin Error',
+  props<{ error: any }>()
+);
