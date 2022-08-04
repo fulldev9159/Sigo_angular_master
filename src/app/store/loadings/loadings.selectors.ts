@@ -11,10 +11,15 @@ export const sendingLogin = createSelector(
 
 export const sendingGetPerfilesUser = createSelector(
   selectLoadings,
-  (state: reducer.StateLoadings) => state.sendingGetPerfilesUser
+  (state: reducer.StateLoadings) => state.sendingGetPerfilesUser4Login
 );
 
-// export const sendingPerfilSelected = createSelector(
-//   selectLoadings,
-//   (state: reducer.StateLoadings) => state.sendingPerfilSelected
-// );
+export const sendingRefreshLogin = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingRefreshLogin
+);
+
+export const sendingPermisosPerfilUser4Login = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingPermisosPerfilUser
+);

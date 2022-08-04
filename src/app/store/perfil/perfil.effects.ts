@@ -29,28 +29,28 @@ export class PerfilEffects {
     )
   );
 
-  getPermisosPerfilUsuario$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(perfilActions.getPermisosPerfilUsuario),
-      concatMap(() =>
-        this.perfilesHttpService.getPermisosPerfilUsuario().pipe(
-          map(response =>
-            perfilActions.getPermisosPerfilUsuarioSuccess({ response })
-          ),
-          catchError(error =>
-            of(perfilActions.getPermisosPerfilUsuarioError({ error }))
-          )
-        )
-      )
-    )
-  );
+  // getPermisosPerfilUsuario$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(perfilActions.getPermisosPerfilUsuario),
+  //     concatMap(() =>
+  //       this.perfilesHttpService.getPermisosPerfilUsuario().pipe(
+  //         map(response =>
+  //           perfilActions.getPermisosPerfilUsuarioSuccess({ response })
+  //         ),
+  //         catchError(error =>
+  //           of(perfilActions.getPermisosPerfilUsuarioError({ error }))
+  //         )
+  //       )
+  //     )
+  //   )
+  // );
 
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
-          perfilActions.getPerfilesUsuarioSuccess,
-          perfilActions.getPermisosPerfilUsuarioSuccess
+          perfilActions.getPerfilesUsuarioSuccess
+          // perfilActions.getPermisosPerfilUsuarioSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -61,8 +61,8 @@ export class PerfilEffects {
     () =>
       this.actions$.pipe(
         ofType(
-          perfilActions.getPerfilesUsuarioError,
-          perfilActions.getPermisosPerfilUsuarioError
+          perfilActions.getPerfilesUsuarioError
+          // perfilActions.getPermisosPerfilUsuarioError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

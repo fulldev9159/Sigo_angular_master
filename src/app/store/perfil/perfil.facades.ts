@@ -29,4 +29,9 @@ export class PerfilFacade {
   public getPerfilesUsuario$(): Observable<PerfilesUsuario[]> {
     return this.store.select(perfilSelectors.getPerfilesUsuario);
   }
+
+  // GET PERMISOS PERFIL USUARIO
+  // public getPermisosPerfilUsuario(): void {
+  //   this.store.dispatch(perfilActions.getPermisosPerfilUsuario());
+  // }
 }

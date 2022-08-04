@@ -26,12 +26,15 @@ export const reducerAuth = createReducer(
       token: response.data.token,
     },
   })),
-  on(perfilActions.getPermisosPerfilUsuarioSuccess, (state, { response }) => ({
-    ...state,
-    sessionData: {
-      ...state.sessionData,
-      permisos: response.data.permisos,
-    },
-  })),
+  on(
+    authActions.getPermisosPerfilUsuario4LoginSuccess,
+    (state, { response }) => ({
+      ...state,
+      sessionData: {
+        ...state.sessionData,
+        permisos: response.data.permisos,
+      },
+    })
+  ),
   on(authActions.ClearSession, (state, {}) => initialState)
 );

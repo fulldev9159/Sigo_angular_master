@@ -1,4 +1,4 @@
-import { Login, Response } from '@model';
+import { Accion, Login, Response } from '@model';
 import { createAction, props } from '@ngrx/store';
 
 // LOGIN
@@ -34,5 +34,20 @@ export const refreshLoginSuccess = createAction(
 
 export const refreshLoginError = createAction(
   '[AUTH] POST refreshLogin Error',
+  props<{ error: any }>()
+);
+
+// GET PERMISOS PERFIL USER LOGIN
+export const getPermisosPerfilUsuario4Login = createAction(
+  '[PERFIL] POST getPermisosPerfilUsuario4Login'
+);
+
+export const getPermisosPerfilUsuario4LoginSuccess = createAction(
+  '[PERFIL] POST getPermisosPerfilUsuario4Login Success',
+  props<{ response: Response<{ permisos: Accion[] }> }>()
+);
+
+export const getPermisosPerfilUsuario4LoginError = createAction(
+  '[PERFIL] POST getPermisosPerfilUsuario4Login Error',
   props<{ error: any }>()
 );

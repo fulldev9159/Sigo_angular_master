@@ -17,17 +17,17 @@ export const getPerfilesUsuarioError = createAction(
   props<{ error: any }>()
 );
 
-// GET PERMISOS PERFIL USUARIO
-export const getPermisosPerfilUsuario = createAction(
-  '[PERFIL] POST getPermisosPerfilUsuario'
-);
+// // GET PERMISOS PERFIL USUARIO
+// export const getPermisosPerfilUsuario = createAction(
+//   '[PERFIL] POST getPermisosPerfilUsuario'
+// );
 
-export const getPermisosPerfilUsuarioSuccess = createAction(
-  '[PERFIL] POST getPermisosPerfilUsuario Success',
-  props<{ response: Response<{ permisos: Accion[] }> }>()
-);
+// export const getPermisosPerfilUsuarioSuccess = createAction(
+//   '[PERFIL] POST getPermisosPerfilUsuario Success',
+//   props<{ response: Response<{ permisos: Accion[] }> }>()
+// );
 
-export const getPermisosPerfilUsuarioError = createAction(
-  '[PERFIL] POST getPermisosPerfilUsuario Error',
-  props<{ error: any }>()
-);
+// export const getPermisosPerfilUsuarioError = createAction(
+//   '[PERFIL] POST getPermisosPerfilUsuario Error',
+//   props<{ error: any }>()
+// );

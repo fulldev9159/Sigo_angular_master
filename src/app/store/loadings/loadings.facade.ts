@@ -23,5 +23,13 @@ export class LoadingsFacade {
     return this.store.select(loadingSelector.sendingGetPerfilesUser);
   }
 
-  // 
+  // REFRESH LOGIN
+  public sendingRefreshLogin$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingRefreshLogin);
+  }
+
+  // GET PERMISOS PERFIL USER
+  public sendingPermisosPerfilUser$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingPermisosPerfilUser4Login);
+  }
 }

@@ -32,7 +32,8 @@ export class PerfilSelectComponent {
 
   sendingGetPerfilesUser$: Observable<boolean> =
     this.loadingFacade.sendingGetPerfilesUser$();
-  sendingLogin$: Observable<boolean> = this.loadingFacade.sendigLoading$();
+  sendingPermisosPerfilUser$: Observable<boolean> =
+    this.loadingFacade.sendingPermisosPerfilUser$();
 
   formControls = {
     perfil_id: new FormControl('', [Validators.required]),

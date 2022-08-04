@@ -5,17 +5,20 @@ import { AfterHttpService } from './after-http.service';
 import { SnackMessageService } from './snack-message.service';
 
 import * as authActions from '@storeOT/auth/auth.actions';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 
 describe('AfterHttpService', () => {
   let service: AfterHttpService;
   let routerSpy: jasmine.SpyObj<Router>;
   let snakeMessage: SnackMessageService;
+  let authFacade: AuthFacade;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     snakeMessage = TestBed.inject(SnackMessageService);
-    service = new AfterHttpService(routerSpy, snakeMessage);
+    authFacade = TestBed.inject(AuthFacade);
+    service = new AfterHttpService(routerSpy, snakeMessage, authFacade);
   });
 
   it('should be created', () => {

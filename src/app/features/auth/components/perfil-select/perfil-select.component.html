@@ -13,7 +13,7 @@
         Pid="perfil-select-button"
         content="Seleccionar"
         Pclass="p-button-info p-button-sm mt-4 w-full"
-        [sending]="sendingLogin$ | async"
+        [sending]="sendingPermisosPerfilUser$ | async"
         [Pdisabled]="!formPerfilUser.valid"
         (call)="perfilar()"
         ></zwc-pbutton-sending>

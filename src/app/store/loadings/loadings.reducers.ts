@@ -7,14 +7,16 @@ export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
   sendingLogin: boolean;
-  sendingGetPerfilesUser: boolean;
-  // sendingPerfilSelected: boolean;
+  sendingGetPerfilesUser4Login: boolean;
+  sendingRefreshLogin: boolean;
+  sendingPermisosPerfilUser: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
   sendingLogin: false,
-  sendingGetPerfilesUser: false,
-  // sendingPerfilSelected: false,
+  sendingGetPerfilesUser4Login: false,
+  sendingRefreshLogin: false,
+  sendingPermisosPerfilUser: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -29,14 +31,34 @@ export const reducerLoadings = createReducer(
   })),
   on(loadingsActions.sendingGetPerfilesUser, state => ({
     ...state,
-    sendingGetPerfilesUser: true,
+    sendingGetPerfilesUser4Login: true,
   })),
   on(
     perfilActions.getPerfilesUsuarioError,
     perfilActions.getPerfilesUsuarioSuccess,
     state => ({
       ...state,
-      sendingGetPerfilesUser: false,
+      sendingGetPerfilesUser4Login: false,
+    })
+  ),
+  on(authActions.refreshLogin, state => ({
+    ...state,
+    sendingRefreshLogin: true,
+  })),
+  on(authActions.refreshLoginSuccess, authActions.refreshLoginError, state => ({
+    ...state,
+    sendingRefreshLogin: false,
+  })),
+  on(authActions.getPermisosPerfilUsuario4Login, state => ({
+    ...state,
+    sendingPermisosPerfilUser: true,
+  })),
+  on(
+    authActions.getPermisosPerfilUsuario4LoginSuccess,
+    authActions.getPermisosPerfilUsuario4LoginError,
+    state => ({
+      ...state,
+      sendingPermisosPerfilUser: false,
     })
   )
 );
