@@ -178,7 +178,7 @@ export class AlertMessageActions {
 
       if (
         action === otActions.createOTSuccess.type ||
-        otActions.AprobarRechazarActaOTSuccess.type ||
+        action === otActions.AprobarRechazarActaOTSuccess.type ||
         action === otActions.AprobarRechazarSolicitudPagoSuccess.type
       ) {
         this.router.navigate(['/app/ot/list-ot']);
