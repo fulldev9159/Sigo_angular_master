@@ -94,4 +94,13 @@ describe('PerfilSelectComponent', () => {
     expect(spyLogout).toHaveBeenCalled();
     // expect(spyAuthServiceLogout).toHaveBeenCalled();
   });
+
+  it('seleccionar click should call logout refresh login', () => {
+    const spyPerfilar = spyOn(component, 'perfilar');
+    const spyAuthServiceLogout = spyOn(authFacade, 'refreshLogin');
+    const compiled = fixture.nativeElement;
+    compiled.querySelector('#perfil-select-button').click();
+    expect(spyPerfilar).toHaveBeenCalled();
+    // expect(spyAuthServiceLogout).toHaveBeenCalled();
+  });
 });

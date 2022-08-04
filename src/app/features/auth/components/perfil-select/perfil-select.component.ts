@@ -46,6 +46,10 @@ export class PerfilSelectComponent {
     private loadingFacade: LoadingsFacade
   ) {}
 
+  perfilar(): void {
+    this.authFacade.refreshLogin(+this.formPerfilUser.get('perfil_id').value);
+  }
+
   logout(): void {
     this.authFacade.Logout();
   }

@@ -13,7 +13,7 @@ export class PerfilEffects {
     private afterHttp: AfterHttpService
   ) {}
 
-  Login$ = createEffect(() =>
+  getPerfilesUsuario$ = createEffect(() =>
     this.actions$.pipe(
       ofType(perfilActions.getPerfilesUsuario),
       concatMap(({ usuario_id }) =>
@@ -29,10 +29,29 @@ export class PerfilEffects {
     )
   );
 
+  getPermisosPerfilUsuario$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(perfilActions.getPermisosPerfilUsuario),
+      concatMap(() =>
+        this.perfilesHttpService.getPermisosPerfilUsuario().pipe(
+          map(response =>
+            perfilActions.getPermisosPerfilUsuarioSuccess({ response })
+          ),
+          catchError(error =>
+            of(perfilActions.getPermisosPerfilUsuarioError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(perfilActions.getPerfilesUsuarioSuccess),
+        ofType(
+          perfilActions.getPerfilesUsuarioSuccess,
+          perfilActions.getPermisosPerfilUsuarioSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -41,7 +60,10 @@ export class PerfilEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(perfilActions.getPerfilesUsuarioError),
+        ofType(
+          perfilActions.getPerfilesUsuarioError,
+          perfilActions.getPermisosPerfilUsuarioError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

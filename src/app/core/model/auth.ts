@@ -1,3 +1,5 @@
+import { Accion } from './accion';
+
 export interface Login {
   token: string;
   usuario_id: number;
@@ -6,7 +8,7 @@ export interface Login {
 
 export interface SessionData extends Login {
   nombre_perfil_select?: string;
-  permisos?: string[];
+  permisos?: Accion[];
   perfil_proxy_id?: number;
   multiperfiles?: boolean;
   rol?: string;

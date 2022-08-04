@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { SessionData } from '@model';
 import * as authActions from './auth.actions';
+import * as perfilActions from '../perfil/perfil.actions';
 
 export const Featurekey = 'auth';
 
@@ -23,6 +24,13 @@ export const reducerAuth = createReducer(
     sessionData: {
       ...state.sessionData,
       token: response.data.token,
+    },
+  })),
+  on(perfilActions.getPermisosPerfilUsuarioSuccess, (state, { response }) => ({
+    ...state,
+    sessionData: {
+      ...state.sessionData,
+      permisos: response.data.permisos,
     },
   })),
   on(authActions.ClearSession, (state, {}) => initialState)

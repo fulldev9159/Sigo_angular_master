@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { PerfilesUsuario, Response } from '@model';
+import { Accion, PerfilesUsuario, Response } from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,6 +20,13 @@ export class PerfilesHttpService {
     return this.http.post<Response<{ perfiles: PerfilesUsuario[] }>>(
       `${this.API_URL}/usuario/perfiles/get`,
       { usuario_id }
+    );
+  }
+
+  getPermisosPerfilUsuario(): Observable<Response<{ permisos: Accion[] }>> {
+    return this.http.post<Response<{ permisos: Accion[] }>>(
+      `${this.API_URL}/usuario/permisos/get`,
+      {}
     );
   }
 }

@@ -2,6 +2,7 @@ export * from './auth';
 export * from './perfil';
 export * from './rol';
 export * from './usuario';
+export * from './accion';
 
 export interface Response<T> {
   data: T;
