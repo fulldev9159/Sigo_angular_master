@@ -1,8 +1,8 @@
 <div class="flex flex-column align-items-center justify-content-evenly h-full" >
     <p class="sigo-color-dark-light login-titulo">Acceda utilizando su cuenta GUIA</p>
 
-    <form [formGroup]="formLogin" class="flex flex-column align-items-center justify-content-evenly h-full mt-4">
-        <span class="p-float-label p-input-icon-right">
+    <form [formGroup]="formLogin" autocomplete="nope" class="flex flex-column align-items-center justify-content-evenly h-full mt-4">
+        <span class="p-float-label p-input-icon-right field">
             <i class="pi pi-user"></i>
             <input type="text" pInputText name="username" class="p-inputtext-sm" [formControl]="formLoginControls.username"/>            
             <label for="float-input">Nombre Usuario</label>
