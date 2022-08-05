@@ -645,7 +645,8 @@ export class OtEffects {
           otActions.createRegistroLibroObrasSuccess,
           otActions.sendGeneracionActaSuccess,
           otActions.AprobarRechazarActaOTSuccess,
-          otActions.solicitarPagoSuccess
+          otActions.solicitarPagoSuccess,
+          otActions.AprobarRechazarSolicitudPagoSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -668,7 +669,8 @@ export class OtEffects {
           otActions.AceptarProveedorOTError,
           otActions.AceptarRechazarInformeAvanceOTError,
           otActions.AprobarRechazarActaOTError,
-          otActions.solicitarPagoError
+          otActions.solicitarPagoError,
+          otActions.AprobarRechazarSolicitudPagoError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(
