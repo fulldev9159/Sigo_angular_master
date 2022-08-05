@@ -1,5 +1,5 @@
-<div class="perfil-select-container">
-    <p class="sigo-color-dark-light perfil-select-titulo" > Perfil</p>
+<div class="perfil-select-container md:w-13rem md:mr-4 xl:w-13rem xl:mr-4 lg:w-13rem lg:mr-4">
+    <p class="sigo-color-dark-light perfil-select-titulo" > Seleccione un Perfil</p>
 
     <div id="input-dropdown"> 
         <p-dropdown [options]="perfilesUsuarioDropdown$|async"  optionLabel="name" placeholder="Selecione un perfil" [formControl]="formControls.perfil_id" optionValue="code"></p-dropdown>
