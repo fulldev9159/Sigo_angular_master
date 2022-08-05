@@ -29,19 +29,16 @@ export class TokenInterceptor implements HttpInterceptor {
       req = req.clone({ headers });
     }
     return next.handle(req).pipe(
-      tap(
-        (event: any) => {
-          // if (event instanceof HttpResponse) { }
-        },
-        (err: any) => {
+      tap({
+        error: (err: any) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
               this.authFacade.clearSession();
               this.router.navigate(['/login/auth']);
             }
           }
-        }
-      )
+        },
+      })
     );
   }
 }

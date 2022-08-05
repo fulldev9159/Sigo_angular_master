@@ -6,6 +6,7 @@ import { SnackMessageService } from './snack-message.service';
 
 import * as authActions from '@storeOT/auth/auth.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { StoreModule } from '@ngrx/store';
 
 describe('AfterHttpService', () => {
   let service: AfterHttpService;
@@ -14,7 +15,7 @@ describe('AfterHttpService', () => {
   let authFacade: AuthFacade;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule(StoreModule.forRoot({}));
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     snakeMessage = TestBed.inject(SnackMessageService);
     authFacade = TestBed.inject(AuthFacade);

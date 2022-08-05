@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -9,6 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { environment } from '@environment';
 import { StoreModule } from '@ngrx/store';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { LoginFormComponent } from 'src/app/features/auth/components/login-form/login-form.component';
 import { PerfilesHttpService } from '../service/perfiles-http.service';
 import { TokenInterceptor } from './token-interceptor';
 
@@ -17,13 +18,19 @@ describe('TOKEN Interceptor', () => {
   let service: PerfilesHttpService;
   let authFacade: AuthFacade;
   let routerSpy: jasmine.SpyObj<Router>;
+  let interceptor: TokenInterceptor;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
         StoreModule.forRoot({}),
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          {
+            path: 'login/auth',
+            component: LoginFormComponent,
+          },
+        ]),
       ],
       providers: [
         PerfilesHttpService,
@@ -34,10 +41,15 @@ describe('TOKEN Interceptor', () => {
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(PerfilesHttpService);
     authFacade = TestBed.inject(AuthFacade);
+    // interceptor = TestBed.inject(TokenInterceptor);
   });
   afterEach(() => {
     httpMock.verify();
   });
+
+  // it('should be created', () => {
+  //   expect(interceptor).toBeTruthy();
+  // });
 
   it('should add token barear into header', () => {
     localStorage.setItem(
@@ -59,24 +71,23 @@ describe('TOKEN Interceptor', () => {
     );
   });
 
-  // it('should call redirecction for token not authorized', () => {
-  //   localStorage.setItem(
-  //     'auth',
-  //     JSON.stringify({
-  //       sessionData: {
-  //         token: '123456789',
-  //       },
-  //     })
-  //   );
+  it('should call redirecction for token not authorized', () => {
+    localStorage.setItem(
+      'auth',
+      JSON.stringify({
+        sessionData: {
+          token: '123456789',
+        },
+      })
+    );
+    service.getPerfilesUsuario(2).subscribe();
 
-  //   service.getPerfilesUsuario(2).subscribe({
-  //     error: err => console.log(err),
-  //     next: res => console.log(res),
-  //   });
+    const request = httpMock.expectOne(
+      `${environment.api}/usuario/perfiles/get`
+    );
 
-  //   const httpReq = httpMock.expectOne(
-  //     `${environment.api}/usuario/perfiles/get`
-  //   );
-  //   // expect(routerSpy.navigate).toHaveBeenCalledWith(['/login/auth']);
-  // });
+    request.flush('', { status: 401, statusText: 'Not authorized' });
+
+    // expect(routerSpy.navigate).toHaveBeenCalledWith(['/login/auth']);
+  });
 });
