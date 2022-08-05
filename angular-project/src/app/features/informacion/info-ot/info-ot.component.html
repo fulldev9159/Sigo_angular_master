@@ -83,7 +83,7 @@
     <app-card [classCardHeader]="'bg-info'">
       <ng-container card-header-title>Información Contrato {{(detalleOT$| async) ? (detalleOT$| async).ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre : ' ---'}}</ng-container>
       <ng-container card-body>
-        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_cubicacion_id.model_tipo_contrato_id.nombre==='Móvil'">
+        <ng-container *ngIf="(detalleOT$| async) && (detalleOT$| async).ot.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Móvil'">
           <table class="table-info" style="width: 100%;">
             <tr>
               <td>Plan de proyecto</td>
