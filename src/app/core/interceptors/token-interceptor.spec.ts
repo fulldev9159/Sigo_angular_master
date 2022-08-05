@@ -72,6 +72,8 @@ describe('TOKEN Interceptor', () => {
   });
 
   it('should call redirecction for token not authorized', () => {
+    let bodyErr = null;
+
     localStorage.setItem(
       'auth',
       JSON.stringify({
@@ -80,7 +82,9 @@ describe('TOKEN Interceptor', () => {
         },
       })
     );
-    service.getPerfilesUsuario(2).subscribe();
+    service
+      .getPerfilesUsuario(2)
+      .subscribe({ error: () => (bodyErr = 'sdas') });
 
     const request = httpMock.expectOne(
       `${environment.api}/usuario/perfiles/get`
@@ -88,6 +92,6 @@ describe('TOKEN Interceptor', () => {
 
     request.flush('', { status: 401, statusText: 'Not authorized' });
 
-    // expect(routerSpy.navigate).toHaveBeenCalledWith(['/login/auth']);
+    expect(bodyErr).not.toBeNull();
   });
 });

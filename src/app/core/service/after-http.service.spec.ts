@@ -5,6 +5,7 @@ import { AfterHttpService } from './after-http.service';
 import { SnackMessageService } from './snack-message.service';
 
 import * as authActions from '@storeOT/auth/auth.actions';
+import * as perfilActions from '@storeOT/perfil/perfil.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { StoreModule } from '@ngrx/store';
 
@@ -13,13 +14,14 @@ describe('AfterHttpService', () => {
   let routerSpy: jasmine.SpyObj<Router>;
   let snakeMessage: SnackMessageService;
   let authFacade: AuthFacade;
-
+  let snackMessage: SnackMessageService;
   beforeEach(() => {
     TestBed.configureTestingModule(StoreModule.forRoot({}));
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     snakeMessage = TestBed.inject(SnackMessageService);
     authFacade = TestBed.inject(AuthFacade);
     service = new AfterHttpService(routerSpy, snakeMessage, authFacade);
+    snackMessage = TestBed.inject(SnackMessageService);
   });
 
   it('should be created', () => {
@@ -66,5 +68,67 @@ describe('AfterHttpService', () => {
     };
     service.successHandler(action);
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/login/perfil-select']);
+  });
+
+  it('afterHttpAction if action is "Logout" should redirect to "/login/auth"', () => {
+    const action = {
+      response: {
+        data: '',
+        status: {
+          code: 0,
+          desc: '',
+        },
+      },
+      type: authActions.Logout.type,
+    };
+    service.successHandler(action);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/login/auth']);
+  });
+
+  it('afterHttpAction if action is "getPerfilesUsuarioSuccess" and code 0 and data empty should display error message', () => {
+    spyOn(snackMessage, 'showMessage');
+    const action: any = {
+      response: {
+        data: { perfiles: [] },
+        status: {
+          code: 0,
+          desc: '',
+        },
+      },
+      type: perfilActions.getPerfilesUsuarioSuccess.type,
+    };
+    service.successHandler(action);
+    expect(snackMessage.showMessage).toHaveBeenCalled();
+  });
+
+  it('afterHttpAction if action is "refreshLoginSuccess" should call getPermisosPerfilUsuario4Login', () => {
+    spyOn(authFacade, 'getPermisosPerfilUsuario4Login');
+    const action = {
+      response: {
+        data: '',
+        status: {
+          code: 0,
+          desc: '',
+        },
+      },
+      type: authActions.refreshLoginSuccess.type,
+    };
+    service.successHandler(action);
+    expect(authFacade.getPermisosPerfilUsuario4Login).toHaveBeenCalled();
+  });
+
+  it('afterHttpAction if action is "getPermisosPerfilUsuario4LoginSuccess" should redirect to "/home"', () => {
+    const action = {
+      response: {
+        data: '',
+        status: {
+          code: 0,
+          desc: '',
+        },
+      },
+      type: authActions.getPermisosPerfilUsuario4LoginSuccess.type,
+    };
+    service.successHandler(action);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/home']);
   });
 });

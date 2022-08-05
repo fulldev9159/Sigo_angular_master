@@ -100,12 +100,17 @@ describe('PerfilSelectComponent', () => {
     // expect(spyAuthServiceLogout).toHaveBeenCalled();
   });
 
-  // it('seleccionar click should call logout refresh login', () => {
-  //   const spyPerfilar = spyOn(component, 'perfilar');
-  //   const spyAuthServiceLogout = spyOn(authFacade, 'refreshLogin');
-  //   const compiled = fixture.nativeElement;
-  //   compiled.querySelector('#perfil-select-button').click();
-  //   expect(spyPerfilar).toHaveBeenCalled();
-  //   // expect(spyAuthServiceLogout).toHaveBeenCalled();
-  // });
+  it('logout should call logout facade', () => {
+    spyOn(authFacade, 'Logout');
+    const compiled = fixture.nativeElement;
+    component.logout();
+    expect(authFacade.Logout).toHaveBeenCalled();
+  });
+
+  it('perfilar should call refresh login', () => {
+    spyOn(authFacade, 'refreshLogin');
+    const compiled = fixture.nativeElement;
+    component.perfilar();
+    expect(authFacade.refreshLogin).toHaveBeenCalled();
+  });
 });
