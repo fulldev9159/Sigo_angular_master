@@ -3,4 +3,6 @@ describe('Home Spec', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy.login('mgestor1', 'asdasd');
   });
+
+  
 });
