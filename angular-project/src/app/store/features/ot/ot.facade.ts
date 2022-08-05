@@ -608,4 +608,9 @@ export class OtFacade {
   ): void {
     this.store.dispatch(otActions.AprobarRechazarSolicitudPago({ request }));
   }
+
+  // CERRAR OT
+  public cerrarOT(ot_id: number): void {
+    this.store.dispatch(otActions.cerrarOT({ ot_id }));
+  }
 }

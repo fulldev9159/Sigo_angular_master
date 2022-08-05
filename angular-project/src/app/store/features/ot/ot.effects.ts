@@ -631,6 +631,19 @@ export class OtEffects {
     )
   );
 
+  // CERRAR OT
+  cerrarOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.cerrarOT),
+      concatMap(({ ot_id }) =>
+        this.otService.cerrarOT(ot_id).pipe(
+          map(response => otActions.cerrarOTSuccess({ response })),
+          catchError(error => of(otActions.cerrarOTError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

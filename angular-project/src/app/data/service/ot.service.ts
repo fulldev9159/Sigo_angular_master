@@ -290,4 +290,11 @@ export class OTService {
       }
     );
   }
+
+  // SOLICITAR PAGO
+  cerrarOT(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}/ot/ot/cerrar`, {
+      ot_id,
+    });
+  }
 }

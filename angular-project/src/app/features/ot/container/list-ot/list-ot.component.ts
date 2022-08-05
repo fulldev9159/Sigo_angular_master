@@ -65,6 +65,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displayRechazoInformeAcvanceModal = false;
   displayAuthInformeModal = false;
   displaySoliciarPago = false;
+  displayCerrarOT = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -429,6 +430,22 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const cerrarOT = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_FINALIZAR_OT'
+        );
+
+        if (cerrarOT) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Autorizar Pago',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.displayCerrarOT = true;
+            },
+          });
+        }
         return actions;
       },
     },
@@ -714,5 +731,15 @@ export class ListOtComponent implements OnInit, OnDestroy {
   solicitarPago(): void {
     this.displaySoliciarPago = false;
     this.otFacade.solicitarPago(this.idOtSelected);
+  }
+
+  closeCerrarOT(): void {
+    this.otFacade.selectOT(null);
+    this.displayCerrarOT = false;
+  }
+
+  cerrarOT(): void {
+    this.displayCerrarOT = false;
+    this.otFacade.cerrarOT(this.idOtSelected);
   }
 }

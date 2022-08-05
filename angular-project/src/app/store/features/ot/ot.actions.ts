@@ -821,3 +821,18 @@ export const AprobarRechazarSolicitudPagoError = createAction(
   '[OT] GET AprobarRechazarSolicitudPago Error',
   props<{ error: any }>()
 );
+
+//  CERRAR OT
+export const cerrarOT = createAction(
+  '[OT] GET CerrarOT',
+  props<{ ot_id: number }>()
+);
+
+export const cerrarOTSuccess = createAction(
+  '[OT] GET CerrarOT Success',
+  props<{ response: Response<any> }>()
+);
+export const cerrarOTError = createAction(
+  '[OT] GET CerrarOT Error',
+  props<{ error: any }>()
+);
