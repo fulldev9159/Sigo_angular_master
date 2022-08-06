@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
-import { of } from 'rxjs';
+import { provideMockStore } from '@ngrx/store/testing';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { isLoggin } from '@storeOT/auth/auth.selectors';
+import { elementAt, of } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
 
 import { MainLayoutComponent } from './main-layout.component';
@@ -9,17 +12,48 @@ import { MainLayoutComponent } from './main-layout.component';
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;
   let fixture: ComponentFixture<MainLayoutComponent>;
-  let authService: AuthService;
+  const initialState: any = { isLoggin: null };
+  let authFacade: AuthFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({}), RouterTestingModule],
+      imports: [
+        StoreModule.forRoot({}),
+        RouterTestingModule.withRoutes([
+          { path: '', redirectTo: 'home', pathMatch: 'full' },
+          {
+            path: 'home',
+            loadChildren: () =>
+              import('../../../features/home/home.module').then(
+                m => m.HomeModule
+              ),
+          },
+          {
+            path: 'login',
+            loadChildren: () =>
+              import('../../../features/auth/auth.module').then(
+                m => m.AuthModule
+              ),
+          },
+        ]),
+      ],
+      providers: [
+        provideMockStore({
+          initialState,
+          selectors: [
+            {
+              selector: isLoggin,
+              value: true,
+            },
+          ],
+        }),
+      ],
       declarations: [MainLayoutComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainLayoutComponent);
     component = fixture.componentInstance;
-    authService = TestBed.inject(AuthService);
+    authFacade = TestBed.inject(AuthFacade);
     fixture.detectChanges();
     localStorage.setItem('auth', JSON.stringify({ sessionData: null }));
   });
@@ -28,15 +62,39 @@ describe('MainLayoutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('main layout text doesnt show if isLoggin return false', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(false);
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')).toBeNull();
-  });
+  // it('main layout text doesnt show if isLoggin return false', () => {
+  //   const compiled = fixture.nativeElement as HTMLElement;
+  //   expect(compiled.querySelector('.layout-container')).toBeNull();
+  // });
 
   it('main layout text did show if isLoggin return true', () => {
-    spyOn(authService, 'isLoggin').and.returnValue(true);
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')).toBeDefined();
+    expect(compiled.querySelector('.layout-container')).not.toBeNull();
+  });
+
+  it('should listening resize window', () => {
+    window.dispatchEvent(new Event('resize'));
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('main').classList.length).toEqual(1);
+    expect(compiled.querySelector('main').classList[0]).toEqual(
+      'layout-container'
+    );
+  });
+
+  it('should togle add class layout-static-inactive and remove if call again', () => {
+    component.toggle();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('main').classList.length).toEqual(2);
+    expect(compiled.querySelector('main').classList[0]).toEqual(
+      'layout-container'
+    );
+    expect(compiled.querySelector('main').classList[1]).toEqual(
+      'layout-static-inactive'
+    );
+    component.toggle();
+    expect(compiled.querySelector('main').classList.length).toEqual(1);
+    expect(compiled.querySelector('main').classList[0]).toEqual(
+      'layout-container'
+    );
   });
 });

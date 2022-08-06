@@ -1,12 +1,12 @@
 <ng-container *ngIf="isLoggin$|async; else login">
-    <div class="layout-container">
+    <main class="layout-container">
         <zwc-side-bar></zwc-side-bar>
         <div class="layout-content-wrapper">
             asdasd
-            <button (click)="addclass()">add</button>
+            <button (click)="toggle()">toggle</button>
         </div>
         <div (click)="close()" class="layout-mask"></div>
-    </div>
+    </main>
 </ng-container>
 
 <ng-template #login >

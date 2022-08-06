@@ -25,16 +25,14 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
         } else {
           console.log('desktop');
           myTag.classList.remove('layout-mobile-active');
-          // myTag.classList.add('layout-static-inactive');
         }
       })
     );
   }
 
-  addclass() {
+  toggle() {
     let myTag = this.el.nativeElement.querySelector('.layout-container');
     if (window.innerWidth < 991) {
-      console.log('mobile');
       if (!myTag.classList.contains('layout-mobile-active')) {
         myTag.classList.remove('layout-static-inactive');
         myTag.classList.add('layout-mobile-active');
@@ -42,7 +40,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
         myTag.classList.remove('layout-mobile-active');
       }
     } else {
-      console.log('no mobile');
       if (!myTag.classList.contains('layout-static-inactive')) {
         myTag.classList.remove('layout-mobile-active');
         myTag.classList.add('layout-static-inactive');
