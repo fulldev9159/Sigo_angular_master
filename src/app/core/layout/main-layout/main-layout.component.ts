@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
@@ -10,8 +11,8 @@ import { AuthService } from '../../service/auth.service';
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
   isLoggin$: Observable<boolean> = this.authFacade.isLoggin$();
-
   resizeObservable$: Observable<Event> = fromEvent(window, 'resize');
+  faBars = faBars;
   subscription: Subscription = new Subscription();
 
   constructor(private authFacade: AuthFacade, private el: ElementRef) {}

@@ -2,9 +2,16 @@
     <main class="layout-container">
         <zwc-side-bar></zwc-side-bar>
         <div class="layout-content-wrapper">
-            asdasd
-            <button id="toggle" (click)="toggle()">toggle</button>
+            <nav class="navbar-container">
+                <button pButton pRipple class="p-button-text" style="color: white;" id="toggle" (click)="toggle()">
+                    <fa-icon [icon]="faBars" ></fa-icon>
+                </button>
+            </nav>
+            <div class="content-container">
+                <router-outlet></router-outlet>
+            </div>
         </div>
+       
         <div (click)="close()" class="layout-mask"></div>
     </main>
 </ng-container>
