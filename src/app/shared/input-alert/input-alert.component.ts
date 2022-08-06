@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,12 +6,10 @@ import { FormControl } from '@angular/forms';
   templateUrl: './input-alert.component.html',
   styleUrls: ['./input-alert.component.scss'],
 })
-export class InputAlertComponent implements OnInit {
+export class InputAlertComponent {
   @Input() control: FormControl;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   errorMessageFn(errors: any): string {
     if (errors.required) {

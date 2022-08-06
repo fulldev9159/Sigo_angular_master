@@ -9,3 +9,8 @@ export const getSessionData = createSelector(
   selectAuth,
   (state: reducer.StateAuth) => state.sessionData
 );
+
+export const isLoggin = createSelector(
+  selectAuth,
+  (state: reducer.StateAuth) => state.isLoggin
+);

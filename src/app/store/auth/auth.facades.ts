@@ -23,6 +23,9 @@ export class AuthFacade {
   public Login(username: string, password: string): void {
     this.store.dispatch(authActions.login({ username, password }));
   }
+  public isLoggin$(): Observable<boolean> {
+    return this.store.select(authSelectors.isLoggin);
+  }
 
   // LOGOUT
   public Logout(): void {

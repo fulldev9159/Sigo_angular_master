@@ -7,10 +7,12 @@ export const Featurekey = 'auth';
 
 export interface StateAuth {
   sessionData: SessionData;
+  isLoggin: boolean;
 }
 
 export const initialState: StateAuth = {
   sessionData: null,
+  isLoggin: false,
 };
 
 export const reducerAuth = createReducer(
@@ -34,6 +36,7 @@ export const reducerAuth = createReducer(
         ...state.sessionData,
         permisos: response.data.permisos,
       },
+      isLoggin: true,
     })
   ),
   on(authActions.ClearSession, (state, {}) => initialState)
