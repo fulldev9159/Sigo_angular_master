@@ -38,13 +38,22 @@
 
 declare namespace Cypress {
   interface Chainable {
-    login(username: string, password: string): void;
+    _login(username: string, password: string): void;
+    _select_profile(profile: string): void;
   }
 }
-Cypress.Commands.add('login', (username, password) => {
+Cypress.Commands.add('_login', (username, password) => {
   cy.get('input[name="username"]').clear().type(username);
   cy.get('input[name="password"]').clear().type(password);
   cy.get('#login-button').click();
+});
 
-  
+Cypress.Commands.add('_select_profile', profile => {
+  cy.get('#select_profile').click();
+  cy.get('li.p-ripple').each(($el, index, $list) => {
+    if ($el.text() === profile) {
+      $el.trigger('click');
+    }
+  });
+  cy.get('#perfil-select-button').click();
 });

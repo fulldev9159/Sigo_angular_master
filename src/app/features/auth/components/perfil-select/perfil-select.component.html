@@ -2,7 +2,7 @@
     <p class="sigo-color-dark-light perfil-select-titulo" > Seleccione un Perfil</p>
 
     <div id="input-dropdown"> 
-        <p-dropdown [options]="perfilesUsuarioDropdown$|async"  optionLabel="name" placeholder="Selecione un perfil" [formControl]="formControls.perfil_id" optionValue="code"></p-dropdown>
+        <p-dropdown id="select_profile" [options]="perfilesUsuarioDropdown$|async"  optionLabel="name" placeholder="Selecione un perfil" [formControl]="formControls.perfil_id" optionValue="code"></p-dropdown>
         <i class="pi pi-spin pi-spinner left-12rem " *ngIf="sendingGetPerfilesUser$|async"  style="font-size: 1rem;
             top: -2rem;
             position: relative;"></i>
