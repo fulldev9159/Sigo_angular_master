@@ -2,9 +2,12 @@
     .layout-container {
         min-height: 100vh;
         background-color: #eff3f7;
-        // .layout-content-wrapper {
-        //     // padding: 2rem; 
-        // }
+        .layout-content-wrapper {
+            // padding: 2rem; 
+            .content-container{
+                padding: 1rem;
+            }
+        }
     }
     
     @media screen and (min-width: 992px){
