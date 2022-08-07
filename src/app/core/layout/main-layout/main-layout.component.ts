@@ -1,5 +1,10 @@
-import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
@@ -8,11 +13,11 @@ import { AuthService } from '../../service/auth.service';
   selector: 'zwc-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
   isLoggin$: Observable<boolean> = this.authFacade.isLoggin$();
   resizeObservable$: Observable<Event> = fromEvent(window, 'resize');
-  faBars = faBars;
   subscription: Subscription = new Subscription();
 
   constructor(private authFacade: AuthFacade, private el: ElementRef) {}
@@ -34,6 +39,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   toggle() {
     let myTag = this.el.nativeElement.querySelector('.layout-container');
     if (window.innerWidth < 991) {
+      console.log(myTag);
       if (!myTag.classList.contains('layout-mobile-active')) {
         myTag.classList.remove('layout-static-inactive');
         myTag.classList.add('layout-mobile-active');
@@ -41,6 +47,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
         myTag.classList.remove('layout-mobile-active');
       }
     } else {
+      console.log(myTag);
       if (!myTag.classList.contains('layout-static-inactive')) {
         myTag.classList.remove('layout-mobile-active');
         myTag.classList.add('layout-static-inactive');

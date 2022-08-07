@@ -1,17 +1,12 @@
-.layout-container {
-    min-height: 100vh;
-    background-color: #eff3f7;
-    .layout-content-wrapper {
-        // padding: 2rem;
-        .navbar-container{
-            background-color: #5b94ba;
-            padding: 0.5rem 1rem;
-        }
+// :host ::ng-deep {
+    .layout-container {
+        min-height: 100vh;
+        background-color: #eff3f7;
+        // .layout-content-wrapper {
+        //     // padding: 2rem; 
+        // }
     }
-}
-
-:host ::ng-deep {
-
+    
     @media screen and (min-width: 992px){
         .layout-container .layout-content-wrapper {
             margin-left: 11rem;
@@ -60,4 +55,4 @@
             background-color: rgba(0, 0, 0, 0.4);
         }
     }
-}
+// }
