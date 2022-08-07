@@ -64,6 +64,7 @@ describe('PerfilSelectComponent', () => {
     fixture.detectChanges();
     facade = TestBed.inject(PerfilFacade);
     authFacade = TestBed.inject(AuthFacade);
+    component.perfilesUsuario = PerfilUserMock200OK.data.perfiles;
   });
 
   it('should create', () => {
@@ -108,6 +109,8 @@ describe('PerfilSelectComponent', () => {
   });
 
   it('perfilar should call refresh login', () => {
+    component.formPerfilUser.get('perfil_id').setValue('2');
+    fixture.detectChanges();
     spyOn(authFacade, 'refreshLogin');
     const compiled = fixture.nativeElement;
     component.perfilar();

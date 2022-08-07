@@ -14,7 +14,7 @@ export class SideBarComponent implements OnDestroy {
   sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
     .sessionData;
 
-  constructor(private perfilFacade: PerfilFacade) {}
+  constructor() {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

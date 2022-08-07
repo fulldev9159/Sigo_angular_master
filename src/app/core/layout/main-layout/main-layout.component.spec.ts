@@ -62,11 +62,6 @@ describe('MainLayoutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('main layout text doesnt show if isLoggin return false', () => {
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.layout-container')).toBeNull();
-  // });
-
   it('main layout text did show if isLoggin return true', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.layout-container')).not.toBeNull();
@@ -96,5 +91,27 @@ describe('MainLayoutComponent', () => {
     expect(compiled.querySelector('main').classList[0]).toEqual(
       'layout-container'
     );
+  });
+
+  it('logout should call logout facade', () => {
+    spyOn(authFacade, 'Logout');
+    const compiled = fixture.nativeElement;
+    component.logout();
+    expect(authFacade.Logout).toHaveBeenCalled();
+  });
+
+  it('closeToggle should be trusthy', () => {
+    component.closeToggle();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('main').classList.length).toEqual(1);
+    expect(compiled.querySelector('main').classList[0]).toEqual(
+      'layout-container'
+    );
+  });
+
+  it('change perfil should call reset perfil and redirect to perfil select', () => {
+    spyOn(authFacade, 'resetPerfil');
+    component.changePerfil();
+    expect(authFacade.resetPerfil).toHaveBeenCalled();
   });
 });
