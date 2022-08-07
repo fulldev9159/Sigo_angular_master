@@ -24,7 +24,7 @@ export const Logout = createAction('[AUTH] Logout');
 // REFRESH LOGIN
 export const refreshLogin = createAction(
   '[AUTH] POST refreshLogin',
-  props<{ proxy_id: number }>()
+  props<{ proxy_id: number; nombre_perfil: string; rol: string }>()
 );
 
 export const refreshLoginSuccess = createAction(

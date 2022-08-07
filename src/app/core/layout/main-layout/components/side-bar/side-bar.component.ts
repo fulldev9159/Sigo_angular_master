@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { PerfilesUsuario, SessionData } from '@model';
+import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
+import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'zwc-side-bar',
@@ -6,6 +9,14 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./side-bar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SideBarComponent {
-  constructor() {}
+export class SideBarComponent implements OnDestroy {
+  subscription: Subscription = new Subscription();
+  sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
+    .sessionData;
+
+  constructor(private perfilFacade: PerfilFacade) {}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

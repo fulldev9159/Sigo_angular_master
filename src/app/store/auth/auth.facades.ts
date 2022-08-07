@@ -34,8 +34,14 @@ export class AuthFacade {
   }
 
   // REFRESH LOGIN
-  public refreshLogin(proxy_id: number): void {
-    this.store.dispatch(authActions.refreshLogin({ proxy_id }));
+  public refreshLogin(
+    proxy_id: number,
+    nombre_perfil: string,
+    rol: string
+  ): void {
+    this.store.dispatch(
+      authActions.refreshLogin({ proxy_id, nombre_perfil, rol })
+    );
   }
 
   // GET PERMISOS PERFIL USUARIO 4 LOGIN
