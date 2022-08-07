@@ -21,6 +21,23 @@
             width: 9rem;
         }
     }
+    .sesion-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 7px 12px 6px 12px;
+        font-size: 13px;
+        height: 9rem;
+        justify-content: space-evenly;
+        text-align: center;
+        color: #eff3f7;
+        font-family: "Source Sans Pro", Arial, sans-serif;
+        border-bottom: 0.01rem solid #025b89;
+        background: #015682;
+        .icon-session{
+            font-size: 25px;
+        }
+    }
 }
 
 

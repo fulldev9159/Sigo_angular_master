@@ -6,7 +6,11 @@
 }
 
 html, 
-body { min-height: 100vh; height: 100vh; }
+body { 
+    min-height: 100vh;
+    height: 100vh; 
+    font-family: "Inter-Regular", system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
 
 .sigo-color-dark-light{
     color: #c0bfc7;
