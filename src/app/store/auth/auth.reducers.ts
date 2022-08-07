@@ -39,5 +39,13 @@ export const reducerAuth = createReducer(
       isLoggin: true,
     })
   ),
+  on(authActions.resetPerfil, (state, {}) => ({
+    ...state,
+    sessionData: {
+      ...state.sessionData,
+      permisos: [],
+    },
+    isLoggin: false,
+  })),
   on(authActions.ClearSession, (state, {}) => initialState)
 );

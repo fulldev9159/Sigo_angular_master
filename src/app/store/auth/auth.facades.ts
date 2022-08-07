@@ -42,4 +42,9 @@ export class AuthFacade {
   public getPermisosPerfilUsuario4Login(): void {
     this.store.dispatch(authActions.getPermisosPerfilUsuario4Login());
   }
+
+  // RESET PERFIL
+  public resetPerfil(): void {
+    this.store.dispatch(authActions.resetPerfil());
+  }
 }

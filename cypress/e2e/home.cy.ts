@@ -1,12 +1,6 @@
 import { testedViewports } from 'cypress/fixtures/testedViewports';
 
 describe('Home Spec', () => {
-  // it('should display home', () => {
-  //   cy.visit('http://localhost:4206/login/auth');
-  //   cy._login('mgestor1', 'asdasd');
-  //   cy._select_profile('Gestor/JP');
-  // });
-
   testedViewports.forEach(vieport => {
     describe(`on ${vieport}`, () => {
       beforeEach(() => {
@@ -41,5 +35,21 @@ describe('Home Spec', () => {
         }
       });
     });
+  });
+
+  beforeEach(() => {
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mgestor1', 'asdasd');
+    cy._select_profile('Gestor/JP');
+  });
+
+  it('should redirect to login if press logout', () => {
+    cy.get('#logout').click();
+    cy.location('pathname').should('eq', '/login/auth');
+  });
+
+  it('should redirect to perfil select if press cambiar perfil', () => {
+    cy.get('#cambiar-perfil').click();
+    cy.location('pathname').should('eq', '/login/perfil-select');
   });
 });

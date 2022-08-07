@@ -5,6 +5,7 @@ import {
   OnDestroy,
   ViewEncapsulation,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { AuthService } from '../../service/auth.service';
@@ -20,7 +21,11 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   resizeObservable$: Observable<Event> = fromEvent(window, 'resize');
   subscription: Subscription = new Subscription();
 
-  constructor(private authFacade: AuthFacade, private el: ElementRef) {}
+  constructor(
+    private authFacade: AuthFacade,
+    private el: ElementRef,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.subscription.add(
@@ -57,9 +62,18 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     }
   }
 
-  close(): void {
+  closeToggle(): void {
     let myTag = this.el.nativeElement.querySelector('.layout-container');
     myTag.classList.remove('layout-mobile-active');
+  }
+
+  logout(): void {
+    this.authFacade.Logout();
+  }
+
+  changePerfil(): void {
+    this.authFacade.resetPerfil();
+    this.router.navigate(['/login/perfil-select']);
   }
 
   ngOnDestroy(): void {

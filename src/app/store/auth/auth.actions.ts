@@ -51,3 +51,6 @@ export const getPermisosPerfilUsuario4LoginError = createAction(
   '[PERFIL] POST getPermisosPerfilUsuario4Login Error',
   props<{ error: any }>()
 );
+
+// RESET PERFIL
+export const resetPerfil = createAction('[PERFIL] POST resetPerfil ');
