@@ -44,7 +44,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   toggle() {
     let myTag = this.el.nativeElement.querySelector('.layout-container');
     if (window.innerWidth < 991) {
-      console.log(myTag);
       if (!myTag.classList.contains('layout-mobile-active')) {
         myTag.classList.remove('layout-static-inactive');
         myTag.classList.add('layout-mobile-active');
@@ -52,7 +51,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
         myTag.classList.remove('layout-mobile-active');
       }
     } else {
-      console.log(myTag);
       if (!myTag.classList.contains('layout-static-inactive')) {
         myTag.classList.remove('layout-mobile-active');
         myTag.classList.add('layout-static-inactive');

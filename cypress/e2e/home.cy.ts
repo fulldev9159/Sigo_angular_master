@@ -1,6 +1,6 @@
 import { testedViewports } from 'cypress/fixtures/testedViewports';
 
-describe('Home Spec', () => {
+describe('Home Spec responsive', () => {
   testedViewports.forEach(vieport => {
     describe(`on ${vieport}`, () => {
       beforeEach(() => {
@@ -36,7 +36,9 @@ describe('Home Spec', () => {
       });
     });
   });
+});
 
+describe('Home Spec', () => {
   beforeEach(() => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
