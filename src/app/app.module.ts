@@ -13,6 +13,7 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './core/interceptors/token-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -43,6 +44,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       logOnly: environment.production,
     }),
     StoreRouterConnectingModule.forRoot(),
+    NgxPermissionsModule.forRoot(),
   ],
   providers: [
     {

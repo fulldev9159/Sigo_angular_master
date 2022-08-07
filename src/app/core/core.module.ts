@@ -7,15 +7,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { SideBarComponent } from './layout/main-layout/components/side-bar/side-bar.component';
 import { SharedModule } from '@sharedOT/shared.module';
 import { NavbarComponent } from './layout/main-layout/components/navbar/navbar.component';
+import { MenuComponent } from './layout/main-layout/components/menu/menu.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
-  declarations: [MainLayoutComponent, SideBarComponent, NavbarComponent],
+  declarations: [
+    MainLayoutComponent,
+    SideBarComponent,
+    NavbarComponent,
+    MenuComponent,
+  ],
   imports: [
     BrowserModule,
     RouterModule,
     StoreSIGOModule,
     HttpClientModule,
     SharedModule,
+    NgxPermissionsModule,
   ],
   exports: [BrowserModule, MainLayoutComponent],
 })
