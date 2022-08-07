@@ -13,6 +13,13 @@
     #toggle{
         // color: white;
         margin-left: -7px;
+        .titulo{
+            letter-spacing: 3px;
+            margin-left: 9px;
+            color: #706b6b;
+            font-size: 16px;
+            font-weight: 100;
+        }
     }
 
     .menu{
@@ -27,5 +34,6 @@
                 background-color: #3F51B5 !important;
             }
         }
+
     }
 }
