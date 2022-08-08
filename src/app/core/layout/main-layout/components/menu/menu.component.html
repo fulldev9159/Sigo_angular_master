@@ -10,8 +10,12 @@
         <span>MODULOS</span>
       </li>
       <li *ngxPermissionsOnly="['OT_LISTAR']" routerLinkActive="active" id="menu-ot" class="titulo-menu">
-        <fa-icon [icon]="faOT" style="margin-left:10px"></fa-icon>
-        <span>OT</span>
+        <div  class="header-menu">
+          <fa-icon [icon]="faOT" style="    margin-left: -4px;
+          margin-right: 3px;"></fa-icon>
+          <span>OT</span>
+        </div>
+        
         <ul class="collapse show list-unstyled" id="otSub">
           <li *ngxPermissionsOnly="['OT_LISTAR']"  routerLinkActive="active-item">
             <a [routerLink]="['/app/ot/list-ot']" class="submenu-a">Listar OTs</a>
@@ -22,8 +26,11 @@
         </ul>
       </li>
       <li *ngxPermissionsOnly="['CUBICACION_LISTAR']" routerLinkActive="active" id="menu-cubicacion" class="titulo-menu">
-        <fa-icon [icon]="faCub"  style="margin-left:10px"></fa-icon>
-        <span>Cubicación</span>
+       <div  class="header-menu">
+          <fa-icon [icon]="faCub" style="    margin-left: -4px;
+          margin-right: 3px;"></fa-icon>
+          <span>Cubicación</span>
+       </div>
         <ul class="collapse list-unstyled" id="cubSub">
           <li *ngxPermissionsOnly="['CUBICACION_LISTAR']" routerLinkActive="active-item">
             <a [routerLink]="['/app/cubicacion/list-cub']" class="submenu-a">Listar Cubicaciones</a>
