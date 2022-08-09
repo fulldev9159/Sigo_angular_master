@@ -47,6 +47,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./acta/acta.module').then(m => m.ActaModule),
       },
+      {
+        path: 'agregar-servicios-adicionales/:id',
+        loadChildren: () =>
+          import('./servicios-adicionales/servicios-adicionales.module').then(
+            m => m.ServiciosAdicionalesModule
+          ),
+      },
     ],
   },
 ];
