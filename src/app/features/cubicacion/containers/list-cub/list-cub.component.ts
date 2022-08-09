@@ -13,9 +13,21 @@ export class ListCubComponent implements OnInit {
 
   ngOnInit(): void {
     this.navbarHeader = [
-      { label: 'Home' },
-      { label: 'Cubicación' },
-      { label: 'Listar Cubicación' },
+      { label: 'Home', icon: 'pi pi-home', routerLink: ['/home'] },
+      {
+        label: 'Cubicación',
+        icon: 'pi pi-shopping-bag',
+        routerLink: ['/cubicacion'],
+      },
+      { label: 'Listar Cubicación', styleClass: 'last-route' },
+      {
+        label: 'Nueva Cubicación',
+        icon: 'pi pi-plus',
+        separator: true,
+        id: 'new-cub',
+        styleClass: 'new-button',
+        routerLink: ['/cubicacion/form-cub'],
+      },
     ];
   }
 }

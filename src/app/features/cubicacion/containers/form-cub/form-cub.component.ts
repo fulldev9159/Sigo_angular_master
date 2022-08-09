@@ -13,9 +13,13 @@ export class FormCubComponent implements OnInit {
 
   ngOnInit(): void {
     this.navbarHeader = [
-      { label: 'Home' },
-      { label: 'Cubicación' },
-      { label: 'Crear Cubicación' },
+      { label: 'Home', icon: 'pi pi-home', routerLink: ['/home'] },
+      {
+        label: 'Cubicación',
+        icon: 'pi pi-shopping-bag',
+        routerLink: ['/cubicacion'],
+      },
+      { label: 'Formulario Cubicación', styleClass: 'last-route' },
     ];
   }
 }
