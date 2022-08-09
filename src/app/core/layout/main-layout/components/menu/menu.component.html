@@ -18,10 +18,10 @@
         
         <ul class="collapse show list-unstyled" id="otSub">
           <li *ngxPermissionsOnly="['OT_LISTAR']"  routerLinkActive="active-item">
-            <a [routerLink]="['/app/ot/list-ot']" class="submenu-a">Listar OTs</a>
+            <a [routerLink]="['/ot']" class="submenu-a">Listar OTs</a>
           </li>
           <li *ngxPermissionsOnly="['OT_CREAR']" routerLinkActive="active-item">
-            <a [routerLink]="['/app/ot/form-ot']" class="submenu-a">Crear OT</a>
+            <a [routerLink]="['/ot/form-ot']" class="submenu-a">Crear OT</a>
           </li>
         </ul>
       </li>
@@ -33,10 +33,10 @@
        </div>
         <ul class="collapse list-unstyled" id="cubSub">
           <li *ngxPermissionsOnly="['CUBICACION_LISTAR']" routerLinkActive="active-item">
-            <a [routerLink]="['/app/cubicacion/list-cub']" class="submenu-a">Listar Cubicaciones</a>
+            <a [routerLink]="['cubicacion']" class="submenu-a">Listar Cubicaciones</a>
           </li>
           <li *ngxPermissionsOnly="['CUBICACION_CREAR']"  routerLinkActive="active-item" id="listarCubSubMenu">
-            <a [routerLink]="['/app/cubicacion/form-cub']" class="submenu-a">Crear Cubicación</a>
+            <a [routerLink]="['/cubicacion/form-cub']" class="submenu-a">Crear Cubicación</a>
           </li>
         </ul>
       </li>

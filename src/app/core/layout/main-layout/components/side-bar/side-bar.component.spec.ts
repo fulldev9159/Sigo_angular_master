@@ -3,22 +3,22 @@ import { StoreModule } from '@ngrx/store';
 
 import { SideBarComponent } from './side-bar.component';
 
-describe('SideBarComponent', () => {
-  let component: SideBarComponent;
-  let fixture: ComponentFixture<SideBarComponent>;
+// describe('SideBarComponent', () => {
+//   let component: SideBarComponent;
+//   let fixture: ComponentFixture<SideBarComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
-      declarations: [SideBarComponent],
-    }).compileComponents();
+//   beforeEach(async () => {
+//     await TestBed.configureTestingModule({
+//       imports: [StoreModule.forRoot({})],
+//       declarations: [SideBarComponent],
+//     }).compileComponents();
 
-    fixture = TestBed.createComponent(SideBarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//     fixture = TestBed.createComponent(SideBarComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

@@ -4,15 +4,21 @@ import { PrimeNgModule } from './primeng/primeng.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InputAlertComponent } from './input-alert/input-alert.component';
 import { PbuttonSendingComponent } from './pbutton-sending/pbutton-sending.component';
+import { ContentLayoutComponent } from '../core/layout/content-layout/content-layout.component';
 
 @NgModule({
-  declarations: [InputAlertComponent, PbuttonSendingComponent],
+  declarations: [
+    InputAlertComponent,
+    PbuttonSendingComponent,
+    ContentLayoutComponent,
+  ],
   imports: [CommonModule, PrimeNgModule, FontAwesomeModule],
   exports: [
     PrimeNgModule,
     FontAwesomeModule,
     InputAlertComponent,
     PbuttonSendingComponent,
+    ContentLayoutComponent,
   ],
 })
 export class SharedModule {

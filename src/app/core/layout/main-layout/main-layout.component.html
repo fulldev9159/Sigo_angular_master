@@ -3,9 +3,7 @@
         <zwc-side-bar></zwc-side-bar>
         <div class="layout-content-wrapper">
             <zwc-navbar (toggle)="toggle()" (logout)="logout()" (changePerfil)="changePerfil()"></zwc-navbar>
-            <div class="content-container">
-                <router-outlet></router-outlet>
-            </div>
+            <router-outlet></router-outlet>
         </div>
         <div (click)="closeToggle()" class="layout-mask"></div>
     </main>

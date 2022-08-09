@@ -5,16 +5,25 @@ import { SigoGuard } from '@coreOT';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
+    path: 'login',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then(m => m.AuthModule),
+  },
+  {
     path: 'home',
     loadChildren: () =>
       import('./features/home/home.module').then(m => m.HomeModule),
     canLoad: [SigoGuard],
   },
   {
-    path: 'login',
+    path: 'cubicacion',
     loadChildren: () =>
-      import('./features/auth/auth.module').then(m => m.AuthModule),
+      import('./features/cubicacion/cubicacion.module').then(
+        m => m.CubicacionModule
+      ),
+    canLoad: [SigoGuard],
   },
+  { path: 'ot', loadChildren: () => import('./features/ot/ot.module').then(m => m.OtModule) },
 ];
 
 @NgModule({
