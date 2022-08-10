@@ -342,7 +342,7 @@ export class OtFacade {
     return this.store.select(otSelectors.getDetalleInformeAvance);
   }
 
-  public getDetalleInformeAvanceError$(): Observable<any> {
+  public getDetalleInformeAvanceError(error: any): Observable<any> {
     return this.store.select(otSelectors.getDetalleInformeAvanceError);
   }
 
