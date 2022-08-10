@@ -13,6 +13,11 @@ import { PerfilEffects } from './perfil/perfil.effects';
 import * as formPerfilReduce from './perfil/perfil.reducers';
 // PERFIL STORE
 
+// USUARIO STORE
+import { UsuarioEffects } from './usuario/usuario.effects';
+import * as formUsuarioReduce from './usuario/usuario.reducers';
+// USUARIO STORE
+
 // LOADINGS STORE
 import * as loadingReducer from './loadings/loadings.reducers';
 import { SharedModule } from '@sharedOT/shared.module';
@@ -34,6 +39,13 @@ import { SharedModule } from '@sharedOT/shared.module';
     StoreModule.forFeature(
       formPerfilReduce.Featurekey,
       formPerfilReduce.reducerPerfil
+    ),
+
+    // USUARIO STORE
+    EffectsModule.forFeature([UsuarioEffects]),
+    StoreModule.forFeature(
+      formUsuarioReduce.Featurekey,
+      formUsuarioReduce.reducerUsuario
     ),
 
     // LOADINGS STORE

@@ -3,6 +3,8 @@ export * from './perfil';
 export * from './rol';
 export * from './usuario';
 export * from './accion';
+export * from './usuario';
+export * from './contrato';
 
 export interface Response<T> {
   data: T;

@@ -1,3 +1,5 @@
+import { ModelContratoMarco } from './contrato';
+
 export interface ModelUsuario {
   apellidos: string;
   area_id: number;
@@ -15,6 +17,7 @@ export interface ModelUsuario {
   eliminable: boolean;
 }
 
+// USUARIO PROXY
 export interface ModelProxyUsuarios {
   created_at: Date;
   id: number;
@@ -28,4 +31,12 @@ export interface ModelProxyUsuarios {
 
 export interface ModelUsuarioSuperior extends ModelProxyUsuarios {
   model_usuario_id: ModelUsuario;
+}
+
+// CONTRATOS USUARIO
+export interface ContratosUser {
+  contrato_id: number;
+  model_contrato_id: ModelContratoMarco;
+  model_usuario_id: ModelUsuario;
+  usuario_id: number;
 }
