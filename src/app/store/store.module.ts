@@ -18,6 +18,11 @@ import { UsuarioEffects } from './usuario/usuario.effects';
 import * as formUsuarioReduce from './usuario/usuario.reducers';
 // USUARIO STORE
 
+// CUBICACION STORE
+import { CubicacionEffects } from './cubicacion/cubicacion.effects';
+import * as formCubicacionReduce from './cubicacion/cubicacion.reducers';
+// CUBICACION STORE
+
 // LOADINGS STORE
 import * as loadingReducer from './loadings/loadings.reducers';
 import { SharedModule } from '@sharedOT/shared.module';
@@ -46,6 +51,13 @@ import { SharedModule } from '@sharedOT/shared.module';
     StoreModule.forFeature(
       formUsuarioReduce.Featurekey,
       formUsuarioReduce.reducerUsuario
+    ),
+
+    // CUBICACION STORE
+    EffectsModule.forFeature([CubicacionEffects]),
+    StoreModule.forFeature(
+      formCubicacionReduce.Featurekey,
+      formCubicacionReduce.reducerCubicacion
     ),
 
     // LOADINGS STORE

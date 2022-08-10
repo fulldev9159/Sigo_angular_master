@@ -1,21 +1,21 @@
 import { createReducer, on } from '@ngrx/store';
-import { PerfilesUsuario } from '@model';
-import * as perfilActions from './cubicacion.actions';
+import { TipoCubicacion } from '@model';
+import * as cubicacionActions from './cubicacion.actions';
 
-export const Featurekey = 'perfil';
+export const Featurekey = 'cubicacion';
 
-export interface StatePerfil {
-  perfilesUsuario: PerfilesUsuario[];
+export interface StateCubicacion {
+  tipoCubicaciones: TipoCubicacion[];
 }
 
-export const initialState: StatePerfil = {
-  perfilesUsuario: [],
+export const initialState: StateCubicacion = {
+  tipoCubicaciones: [],
 };
 
-export const reducerPerfil = createReducer(
+export const reducerCubicacion = createReducer(
   initialState,
-  on(perfilActions.getPerfilesUsuarioSuccess, (state, { response }) => ({
+  on(cubicacionActions.getTipoCubicacionSuccess, (state, { response }) => ({
     ...state,
-    perfilesUsuario: response.data.perfiles,
+    tipoCubicaciones: response.data.items,
   }))
 );

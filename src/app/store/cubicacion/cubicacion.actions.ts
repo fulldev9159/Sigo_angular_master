@@ -1,33 +1,16 @@
-import { Accion, PerfilesUsuario, Response } from '@model';
+import { Accion, PerfilesUsuario, Response, TipoCubicacion } from '@model';
 import { createAction, props } from '@ngrx/store';
 
-// GET PERFILES USUARIO
-export const getPerfilesUsuario = createAction(
-  '[PERFIL] POST getPerfilesUsuario',
-  props<{ usuario_id: number }>()
+// GET TIPO DE CUBICACION
+export const getTipoCubicacion = createAction(
+  '[CUBICACION] getTipoCubicacion '
 );
 
-export const getPerfilesUsuarioSuccess = createAction(
-  '[PERFIL] POST getPerfilesUsuario Success',
-  props<{ response: Response<{ perfiles: PerfilesUsuario[] }> }>()
+export const getTipoCubicacionSuccess = createAction(
+  '[CUBICACION] getTipoCubicacion Success',
+  props<{ response: Response<{ items: TipoCubicacion[] }> }>()
 );
-
-export const getPerfilesUsuarioError = createAction(
-  '[PERFIL] POST getPerfilesUsuario Error',
+export const getTipoCubicacionError = createAction(
+  '[CUBICACION] getTipoCubicacion Error',
   props<{ error: any }>()
 );
-
-// // GET PERMISOS PERFIL USUARIO
-// export const getPermisosPerfilUsuario = createAction(
-//   '[PERFIL] POST getPermisosPerfilUsuario'
-// );
-
-// export const getPermisosPerfilUsuarioSuccess = createAction(
-//   '[PERFIL] POST getPermisosPerfilUsuario Success',
-//   props<{ response: Response<{ permisos: Accion[] }> }>()
-// );
-
-// export const getPermisosPerfilUsuarioError = createAction(
-//   '[PERFIL] POST getPermisosPerfilUsuario Error',
-//   props<{ error: any }>()
-// );

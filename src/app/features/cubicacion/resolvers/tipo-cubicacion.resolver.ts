@@ -4,37 +4,32 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-import { PerfilesUsuario, Response } from '@model';
-import { PerfilesHttpService } from '@services';
+import { Response, TipoCubicacion } from '@model';
+import { CubicacionHttpService } from '@services';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
-import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class PerfilesUsuarioResolver
-  implements Resolve<Response<{ perfiles: PerfilesUsuario[] }>>
+export class TipoCubicacionResolver
+  implements Resolve<Response<{ items: TipoCubicacion[] }>>
 {
   constructor(
-    private service: PerfilesHttpService,
-    private perfilFacade: PerfilFacade,
-    private loadingFacade: LoadingsFacade
+    private service: CubicacionHttpService,
+    private cubicacionFacade: CubicacionFacade
   ) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
-    | Observable<Response<{ perfiles: PerfilesUsuario[] }>>
-    | Promise<Response<{ perfiles: PerfilesUsuario[] }>> {
-    const user_id = JSON.parse(localStorage.getItem('auth')).sessionData
-      .usuario_id;
-
-    this.loadingFacade.sendingGetPerfilesUser();
-    return this.service.getPerfilesUsuario(user_id).pipe(
+    | Observable<Response<{ items: TipoCubicacion[] }>>
+    | Promise<Response<{ items: TipoCubicacion[] }>> {
+    return this.service.getTipoCubicacion().pipe(
       tap(response => {
-        this.perfilFacade.getPerfilesUsuarioSuccess(response);
+        this.cubicacionFacade.getTipoCubicacionSuccess(response);
       }),
       catchError(error => {
-        this.perfilFacade.getPerfilesUsuarioError(error);
+        this.cubicacionFacade.getTipoCubicacionError(error);
         return EMPTY;
       })
     );

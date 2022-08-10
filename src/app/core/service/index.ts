@@ -4,3 +4,4 @@ export * from './utils.service';
 export * from './after-http.service';
 export * from './perfiles-http.service';
 export * from './usuario-http.service';
+export * from './cubicacion-http.service';

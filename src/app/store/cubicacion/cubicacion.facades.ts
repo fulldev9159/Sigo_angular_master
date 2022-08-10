@@ -1,37 +1,34 @@
 import { Injectable } from '@angular/core';
-import { PerfilesUsuario, Response } from '@model';
+import { PerfilesUsuario, Response, TipoCubicacion } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as perfilSelectors from './cubicacion.selectors';
-import * as perfilActions from './cubicacion.actions';
+import * as cubicacionSelectors from './cubicacion.selectors';
+import * as cubicacionActions from './cubicacion.actions';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PerfilFacade {
+export class CubicacionFacade {
   constructor(private store: Store<any>) {}
 
-  // GET PERFILES USUARIO
-  public getPerfilesUsuario(usuario_id: number): void {
-    this.store.dispatch(perfilActions.getPerfilesUsuario({ usuario_id }));
+  // GET TIPOS DE CUBICACIONES
+  public getTipoCubicacion(): void {
+    this.store.dispatch(cubicacionActions.getTipoCubicacion());
   }
 
-  public getPerfilesUsuarioSuccess(
-    response: Response<{ perfiles: PerfilesUsuario[] }>
+  public getTipoCubicacionSuccess(
+    response: Response<{ items: TipoCubicacion[] }>
   ): void {
-    this.store.dispatch(perfilActions.getPerfilesUsuarioSuccess({ response }));
+    this.store.dispatch(
+      cubicacionActions.getTipoCubicacionSuccess({ response })
+    );
   }
 
-  public getPerfilesUsuarioError(error: any) {
-    this.store.dispatch(perfilActions.getPerfilesUsuarioError({ error }));
+  public getTipoCubicacionError(error: any) {
+    this.store.dispatch(cubicacionActions.getTipoCubicacionError({ error }));
   }
 
-  public getPerfilesUsuario$(): Observable<PerfilesUsuario[]> {
-    return this.store.select(perfilSelectors.getPerfilesUsuario);
+  public getTipoCubicacion$(): Observable<TipoCubicacion[]> {
+    return this.store.select(cubicacionSelectors.getTipoCubicacion);
   }
-
-  // GET PERMISOS PERFIL USUARIO
-  // public getPermisosPerfilUsuario(): void {
-  //   this.store.dispatch(perfilActions.getPermisosPerfilUsuario());
-  // }
 }
