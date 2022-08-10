@@ -533,6 +533,13 @@ export class OtFacade {
     this.store.dispatch(otActions.getDetalleOT({ id }));
   }
 
+  public getDetalleOTSuccess(response: Response<DataRespGetDetalleOT>): void {
+    this.store.dispatch(otActions.getDetalleOTSuccess({ response }));
+  }
+  public getDetalleOTError(error: any): void {
+    this.store.dispatch(otActions.getDetalleOTError({ error }));
+  }
+
   public getDetalleOT$(): Observable<DataRespGetDetalleOT> {
     return this.store.select(otSelectors.getDetalleOT);
   }

@@ -65,13 +65,13 @@ export interface RequestGetDatosUnidadObra4Cub {
 }
 
 export interface DetallesUnidadObra4Cub {
-  material_arr: Materiales4Cub[];
+  material_arr?: Materiales4Cub[];
   uo_codigo: string;
   uo_nombre: string;
   uo_precio_total_clp: number;
-  uo_unidad_id: number;
-  uo_unidad_codigo: string;
-  uo_unidad_descripcion: string;
+  uo_unidad_id?: number;
+  uo_unidad_codigo?: string;
+  uo_unidad_descripcion?: string;
 }
 
 export interface DetalleUnidadObraLastActa {

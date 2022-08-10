@@ -150,6 +150,12 @@ export class CubicacionFacade {
     );
   }
 
+  public getDatosServicio4CubSuccess(item_carrito: Carrito): void {
+    this.store.dispatch(
+      cubicacionActions.getDatosServicio4CubSuccess({ item_carrito })
+    );
+  }
+
   public datosUnidadObra4Cub(request: RequestGetDatosUnidadObra4Cub): void {
     this.store.dispatch(cubicacionActions.getDatosUnidadObra4Cub({ request }));
   }

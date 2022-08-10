@@ -119,28 +119,28 @@ export interface RequestGetDatosServicio4Cub {
 }
 
 export interface DetallesServicio4Cub {
-  precio_agencia: number;
-  precio_proveedor: number;
-  servicio_baremos: number;
+  precio_agencia?: number;
+  precio_proveedor?: number;
+  servicio_baremos?: number;
   servicio_codigo: string;
   servicio_id: number;
   servicio_nombre: string;
-  servicio_precio_final: number;
+  servicio_precio_final?: number;
   servicio_precio_final_clp: number;
-  servicio_tipo: number;
-  servicio_unidad_id: number;
+  servicio_tipo?: number;
+  servicio_unidad_id?: number;
 
   actividad_descripcion: string;
-  actividad_id: string;
+  actividad_id?: string;
 
-  servicio_tipo_moneda_codigo: string;
-  servicio_tipo_moneda_id: number;
+  servicio_tipo_moneda_codigo?: string;
+  servicio_tipo_moneda_id?: number;
   tipo_servicio_descripcion: string;
 
-  numero_producto: string;
+  numero_producto?: string;
 
-  servicio_unidad_codigo: string;
-  servicio_unidad_descripcion: string;
+  servicio_unidad_codigo?: string;
+  servicio_unidad_descripcion?: string;
 }
 
 export interface DetalleServicioLastActa {
