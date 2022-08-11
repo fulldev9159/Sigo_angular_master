@@ -32,9 +32,9 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       this.resizeObservable$.subscribe(e => {
         let myTag = this.el.nativeElement.querySelector('.layout-container');
         if (window.innerWidth < 991) {
-          console.log('mobile');
+          // console.log('mobile');
         } else {
-          console.log('desktop');
+          // console.log('desktop');
           myTag.classList.remove('layout-mobile-active');
         }
       })

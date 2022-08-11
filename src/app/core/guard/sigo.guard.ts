@@ -47,7 +47,6 @@ export class SigoGuard implements CanActivate, CanLoad {
       const permisos = JSON.parse(
         localStorage.getItem('auth')
       ).sessionData.permisos.map((x: Accion) => x.slug);
-      console.log(permisos);
       this.permissionsService.loadPermissions(permisos);
     }
 
