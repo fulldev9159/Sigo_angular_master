@@ -16,6 +16,11 @@ import {
   Actividad4Cub,
   Carrito,
   DatosUnidadObra4Cub,
+  NuevaUnidadObraAdicional,
+  NuevoServicio,
+  NuevoServicioAdicional,
+  NuevoUO,
+  RequestAgregarServicioAdicional,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
   RequestGetServicios4Cub,
@@ -23,6 +28,7 @@ import {
   SelectType,
   ServicioFromInfomeAvance,
   Servicios4Cub,
+  ServicioUOActualizar,
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
 } from '@data';
@@ -72,6 +78,8 @@ export class ServiciosAdicionalesComponent implements OnInit {
   contrato_marco_id = null;
   agencia_id = null;
   cmarco_has_proveedor_id = null;
+  ot_id = null;
+
   trashICon = faTrash;
 
   constructor(
@@ -89,6 +97,7 @@ export class ServiciosAdicionalesComponent implements OnInit {
         console.log(
           detalleOT.data.ot.model_cubicacion_id.cmarco_has_proveedor_id
         );
+        this.ot_id = detalleOT.data.ot.id;
         this.cubicacionFacade.actividad4cub(
           detalleOT.data.ot.model_cubicacion_id.cmarco_has_proveedor_id
         );
@@ -443,5 +452,70 @@ export class ServiciosAdicionalesComponent implements OnInit {
         ).get('unidades_obras').value as Array<{ uo_codigo: string }>
       ).findIndex(uo => uo.uo_codigo === uo_cod)
     );
+  }
+
+  agregarServiciosAdicionales(): void {
+    const isLocal = (item: { precargado?: boolean }) =>
+      item.precargado === undefined || item.precargado === false;
+
+    const notLocal = (item: { precargado?: boolean }) => !isLocal(item);
+
+    const servicios: {
+      precargado?: boolean;
+      servicio_rowid?: number;
+
+      servicio_id: number;
+      servicio_cod: string;
+      servicio_cantidad: number;
+      servicio_tipo: number;
+      actividad_id: number;
+      unidades_obras: {
+        precargado?: boolean;
+        uo_rowid?: number;
+
+        uo_cantidad: number;
+        uo_codigo: string;
+      }[];
+    }[] = this.formCub.get('table').value as Array<{
+      precargado?: boolean;
+      servicio_rowid?: number;
+
+      servicio_id: number;
+      servicio_cod: string;
+      servicio_cantidad: number;
+      servicio_tipo: number;
+      actividad_id: number;
+      unidades_obras: Array<{
+        precargado?: boolean;
+        uo_rowid?: number;
+
+        uo_cantidad: number;
+        uo_codigo: string;
+      }>;
+    }>;
+
+    const nuevos_servicios: NuevoServicioAdicional[] = servicios
+      .filter(isLocal)
+      .map(servicio => {
+        let unidad_obra: NuevaUnidadObraAdicional[] = [];
+        unidad_obra = servicio.unidades_obras.map(uo => ({
+          uob_codigo: uo.uo_codigo,
+          cantidad: +uo.uo_cantidad,
+        }));
+        return {
+          servicio_id: +servicio.servicio_id,
+          actividad_id: +servicio.actividad_id,
+          tipo_servicio_id: +servicio.servicio_tipo,
+          cantidad: +servicio.servicio_cantidad,
+          unidad_obra,
+        };
+      });
+
+    const request: RequestAgregarServicioAdicional = {
+      ot_id: this.ot_id,
+      adicionales_solicitados: nuevos_servicios,
+    };
+    console.log(nuevos_servicios);
+    this.cubicacionFacade.agregarServiciosAdicionales(request);
   }
 }

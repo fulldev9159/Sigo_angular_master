@@ -26,6 +26,7 @@ import {
   RequestCreateCubicacion,
   RequestDeleteDetallesCubicacion,
   RespDataGetDetalleCubs,
+  RequestAgregarServicioAdicional,
 } from '@data';
 @Injectable({
   providedIn: 'root',
@@ -186,6 +187,15 @@ export class CubicacionService {
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/cubicacion/detalles_cubicacion/delete`,
+      request
+    );
+  }
+
+  agregarServiciosAdicionales(
+    request: RequestAgregarServicioAdicional
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/servicio_adicional/solicitud/create`,
       request
     );
   }

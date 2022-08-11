@@ -7,6 +7,7 @@ import * as areaActions from '@storeOT/features/area/area.actions';
 import * as contratoActions from '@storeOT/features/contratos/contratos.actions';
 import * as userActions from '@storeOT/features/user/user.actions';
 import * as profileActions from '@storeOT/features/profile/profile.actions';
+import * as cubActions from '@storeOT/features/cubicacion/cubicacion.actions';
 
 import { CubicacionFacade } from '@storeOT/features/cubicacion/cubicacion.facade';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
@@ -179,7 +180,8 @@ export class AlertMessageActions {
       if (
         action === otActions.createOTSuccess.type ||
         action === otActions.AprobarRechazarActaOTSuccess.type ||
-        action === otActions.AprobarRechazarSolicitudPagoSuccess.type
+        action === otActions.AprobarRechazarSolicitudPagoSuccess.type ||
+        action === cubActions.agregarServiciosAdicionalesSuccess.type
       ) {
         this.router.navigate(['/app/ot/list-ot']);
       }

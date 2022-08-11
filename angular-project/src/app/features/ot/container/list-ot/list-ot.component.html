@@ -177,7 +177,8 @@
 <app-modal [display]="displayInformeAvanceModal" (CloseEvent)="closeInformeAvanceModal()" [style]="{ width: '50vw' }">
   <ng-container modal-header-title><i class="pi pi-book"></i>&nbsp;Informe de avance</ng-container>
   <ng-container modal-content>
-    <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async"></app-detalle-informe-avance-table>
+    <!-- <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async"></app-detalle-informe-avance-table> -->
+    <app-detalle-informe-avance-table [detalle]="detalleInformeAvance$ | async"></app-detalle-informe-avance-table>
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeInformeAvanceModal()">Cancelar</button>
@@ -199,7 +200,8 @@
 <app-modal [display]="displayAprobarInformeAvanceModal" (CloseEvent)="closeAprobarInformeAvanceModal()" [style]="{ width: '50vw' }">
   <ng-container modal-header-title><i class="pi pi-book"></i>&nbsp;Aprobar Informe de avance</ng-container>
   <ng-container modal-content>
-    <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-detalle-informe-avance-table>
+    <!-- <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-detalle-informe-avance-table> -->
+    <app-detalle-informe-avance-table [detalle]="detalleInformeAvance$ | async" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-detalle-informe-avance-table>
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeAprobarInformeAvanceModal()">Cancelar</button>

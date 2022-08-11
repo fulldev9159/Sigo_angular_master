@@ -22,6 +22,7 @@ import {
   RespDataGetDetalleCubs,
   DataRespEditCubicacion,
   RequestDeleteDetallesCubicacion,
+  RequestAgregarServicioAdicional,
 } from '@data';
 
 // GET ALL CUBS
@@ -284,6 +285,20 @@ export const deleteDetalleCubSuccess = createAction(
 );
 export const deleteDetalleCubError = createAction(
   '[Cubicacion] deleteDetalleCub Error',
+  props<{ error: any }>()
+);
+
+// DELETE DETALLE CUB
+export const agregarServiciosAdicionales = createAction(
+  '[Cubicacion] agregarServiciosAdicionales ',
+  props<{ request: RequestAgregarServicioAdicional }>()
+);
+export const agregarServiciosAdicionalesSuccess = createAction(
+  '[Cubicacion] agregarServiciosAdicionales Success',
+  props<{ response: Response<any> }>()
+);
+export const agregarServiciosAdicionalesError = createAction(
+  '[Cubicacion] agregarServiciosAdicionales Error',
   props<{ error: any }>()
 );
 

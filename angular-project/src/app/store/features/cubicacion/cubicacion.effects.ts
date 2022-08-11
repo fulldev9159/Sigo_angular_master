@@ -239,6 +239,22 @@ export class CubicacionEffects {
     )
   );
 
+  agregarServiciosAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.agregarServiciosAdicionales),
+      concatMap(({ request }) =>
+        this.cubService.agregarServiciosAdicionales(request).pipe(
+          map(response =>
+            cubActions.agregarServiciosAdicionalesSuccess({ response })
+          ),
+          catchError(err =>
+            of(cubActions.agregarServiciosAdicionalesError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   deleteDetalleCub$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.deleteDetalleCub),
@@ -262,7 +278,8 @@ export class CubicacionEffects {
           cubActions.deleteCubSuccess,
           cubActions.createCubSuccess,
           cubActions.deleteDetalleCubSuccess,
-          cubActions.clonCubSuccess
+          cubActions.clonCubSuccess,
+          cubActions.agregarServiciosAdicionalesSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -283,7 +300,8 @@ export class CubicacionEffects {
           cubActions.deleteCubError,
           cubActions.editCubError,
           cubActions.createCubError,
-          cubActions.deleteDetalleCubError
+          cubActions.deleteDetalleCubError,
+          cubActions.agregarServiciosAdicionalesError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

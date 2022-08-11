@@ -36,8 +36,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   detalleInformeAvance$: Observable<DetalleInformeAvance> =
     this.otFacade.getDetalleInformeAvance$();
-  detalleInformeAvanceError$: Observable<any> =
-    this.otFacade.getDetalleInformeAvanceError();
+  // detalleInformeAvanceError$: Observable<any> =
+  //   this.otFacade.getDetalleInformeAvanceError();
   sendingDetalleInformeAvance$: Observable<boolean> =
     this.otFacade.sendingDetalleInformeAvance$();
 

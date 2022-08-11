@@ -210,3 +210,23 @@ export interface Cubs4OT {
   cubicacion_nombre: string;
   tipo_contrato_marco_nombre: string;
 }
+
+// AGREGAR SERVICIOS ADICIONALES
+
+export interface RequestAgregarServicioAdicional {
+  ot_id: number;
+  adicionales_solicitados: NuevoServicioAdicional[];
+}
+
+export interface NuevoServicioAdicional {
+  servicio_id: number;
+  actividad_id: number;
+  tipo_servicio_id: number;
+  cantidad: number;
+  unidad_obra: NuevaUnidadObraAdicional[];
+}
+
+export interface NuevaUnidadObraAdicional {
+  uob_codigo: string;
+  cantidad: number;
+}
