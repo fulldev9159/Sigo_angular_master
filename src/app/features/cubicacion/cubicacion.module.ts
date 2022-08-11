@@ -5,10 +5,16 @@ import { CubicacionRoutingModule } from './cubicacion-routing.module';
 import { CubicacionComponent } from './cubicacion.component';
 import { SharedModule } from '@sharedOT/shared.module';
 import { ListCubComponent } from './containers/list-cub/list-cub.component';
-import { FormCubComponent } from './containers/form-cub/form-cub.component';
+import { FormCubContainerComponent } from './containers/form-cub/form-cub-container.component';
+import { FormularioComponent } from './components/formulario/formulario.component';
 
 @NgModule({
-  declarations: [CubicacionComponent, ListCubComponent, FormCubComponent],
+  declarations: [
+    CubicacionComponent,
+    ListCubComponent,
+    FormCubContainerComponent,
+    FormularioComponent,
+  ],
   imports: [CommonModule, CubicacionRoutingModule, SharedModule],
 })
 export class CubicacionModule {}

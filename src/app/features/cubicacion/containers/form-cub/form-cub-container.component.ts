@@ -3,10 +3,10 @@ import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'zwc-form-cub',
-  templateUrl: './form-cub.component.html',
-  styleUrls: ['./form-cub.component.scss'],
+  templateUrl: './form-cub-container.component.html',
+  styleUrls: ['./form-cub-container.component.scss'],
 })
-export class FormCubComponent implements OnInit {
+export class FormCubContainerComponent implements OnInit {
   navbarHeader: MenuItem[];
 
   constructor() {}

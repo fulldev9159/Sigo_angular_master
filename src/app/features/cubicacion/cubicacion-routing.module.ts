@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormCubComponent } from './containers/form-cub/form-cub.component';
+import { FormCubContainerComponent } from './containers/form-cub/form-cub-container.component';
 import { ListCubComponent } from './containers/list-cub/list-cub.component';
 import { CubicacionComponent } from './cubicacion.component';
 import { ContratosUsuarioResolver } from './resolvers/contratos-usuario.resolver';
@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'form-cub',
-        component: FormCubComponent,
+        component: FormCubContainerComponent,
         resolve: {
           contratosUsuario: ContratosUsuarioResolver,
           tipoCubicacion: TipoCubicacionResolver,
