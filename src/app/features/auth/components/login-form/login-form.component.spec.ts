@@ -33,6 +33,28 @@ describe('LoginFormComponent', () => {
     facade = TestBed.inject(AuthFacade);
     // loadingFacade = TestBed.inject(LoadingsFacade);
     fixture.detectChanges();
+    localStorage.setItem(
+      'auth',
+      JSON.stringify({
+        sessionData: {
+          nombre_perfil_select: 'Gestor/JP',
+          perfil_proxy_id: 2,
+          permisos: [
+            {
+              id: 1,
+              slug: 'OT_LISTAR',
+              nombre_corto: 'Listar',
+              descripcion: 'Poder visualizar OT',
+            },
+          ],
+          rol: 'Gestor/JP (Telefónica)',
+          token:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjAxODU3NjYsImlzcyI6InNpZ28iLCJuYmYiOjE2NjAxODIxNjY',
+          usuario_id: 2,
+          usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+        },
+      })
+    );
   });
 
   it('should create', () => {

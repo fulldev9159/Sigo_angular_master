@@ -62,56 +62,56 @@ describe('MainLayoutComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('main layout text did show if isLoggin return true', () => {
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.layout-container')).not.toBeNull();
-  // });
+  it('main layout text did show if isLoggin return true', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.layout-container')).not.toBeNull();
+  });
 
-  // it('should listening resize window', () => {
-  //   window.dispatchEvent(new Event('resize'));
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('main').classList.length).toEqual(1);
-  //   expect(compiled.querySelector('main').classList[0]).toEqual(
-  //     'layout-container'
-  //   );
-  // });
+  it('should listening resize window', () => {
+    window.dispatchEvent(new Event('resize'));
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('main').classList.length).toEqual(1);
+    expect(compiled.querySelector('main').classList[0]).toEqual(
+      'layout-container'
+    );
+  });
 
-  // it('should togle add class layout-static-inactive and remove if call again', () => {
-  //   component.toggle();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('main').classList.length).toEqual(2);
-  //   expect(compiled.querySelector('main').classList[0]).toEqual(
-  //     'layout-container'
-  //   );
-  //   expect(compiled.querySelector('main').classList[1]).toEqual(
-  //     'layout-static-inactive'
-  //   );
-  //   component.toggle();
-  //   expect(compiled.querySelector('main').classList.length).toEqual(1);
-  //   expect(compiled.querySelector('main').classList[0]).toEqual(
-  //     'layout-container'
-  //   );
-  // });
+  it('should togle add class layout-static-inactive and remove if call again', () => {
+    component.toggle();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('main').classList.length).toEqual(2);
+    expect(compiled.querySelector('main').classList[0]).toEqual(
+      'layout-container'
+    );
+    expect(compiled.querySelector('main').classList[1]).toEqual(
+      'layout-static-inactive'
+    );
+    component.toggle();
+    expect(compiled.querySelector('main').classList.length).toEqual(1);
+    expect(compiled.querySelector('main').classList[0]).toEqual(
+      'layout-container'
+    );
+  });
 
-  // it('logout should call logout facade', () => {
-  //   spyOn(authFacade, 'Logout');
-  //   const compiled = fixture.nativeElement;
-  //   component.logout();
-  //   expect(authFacade.Logout).toHaveBeenCalled();
-  // });
+  it('logout should call logout facade', () => {
+    spyOn(authFacade, 'Logout');
+    const compiled = fixture.nativeElement;
+    component.logout();
+    expect(authFacade.Logout).toHaveBeenCalled();
+  });
 
-  // it('closeToggle should be trusthy', () => {
-  //   component.closeToggle();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('main').classList.length).toEqual(1);
-  //   expect(compiled.querySelector('main').classList[0]).toEqual(
-  //     'layout-container'
-  //   );
-  // });
+  it('closeToggle should be trusthy', () => {
+    component.closeToggle();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('main').classList.length).toEqual(1);
+    expect(compiled.querySelector('main').classList[0]).toEqual(
+      'layout-container'
+    );
+  });
 
-  // it('change perfil should call reset perfil and redirect to perfil select', () => {
-  //   spyOn(authFacade, 'resetPerfil');
-  //   component.changePerfil();
-  //   expect(authFacade.resetPerfil).toHaveBeenCalled();
-  // });
+  it('change perfil should call reset perfil and redirect to perfil select', () => {
+    spyOn(authFacade, 'resetPerfil');
+    component.changePerfil();
+    expect(authFacade.resetPerfil).toHaveBeenCalled();
+  });
 });

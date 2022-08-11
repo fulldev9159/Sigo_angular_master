@@ -19,4 +19,22 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('toggleInt should emit', () => {
+    spyOn(component.toggle, 'emit');
+    component.toggleInt();
+    expect(component.toggle.emit).toHaveBeenCalled();
+  });
+
+  it('logoutInt should emit', () => {
+    spyOn(component.logout, 'emit');
+    component.logoutInt();
+    expect(component.logout.emit).toHaveBeenCalled();
+  });
+
+  it('changePerfilInt should emit', () => {
+    spyOn(component.changePerfil, 'emit');
+    component.changePerfilInt();
+    expect(component.changePerfil.emit).toHaveBeenCalled();
+  });
 });
