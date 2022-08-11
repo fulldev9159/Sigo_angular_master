@@ -13,9 +13,6 @@ describe('SideBarComponent', () => {
       declarations: [SideBarComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SideBarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
     localStorage.setItem(
       'auth',
       JSON.stringify({
@@ -38,6 +35,10 @@ describe('SideBarComponent', () => {
         },
       })
     );
+
+    fixture = TestBed.createComponent(SideBarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {

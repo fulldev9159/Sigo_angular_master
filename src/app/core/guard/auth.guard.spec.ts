@@ -17,7 +17,7 @@ function fakeRouterState(url: string): RouterStateSnapshot {
   } as RouterStateSnapshot;
 }
 
-describe('Auth Login', () => {
+describe('Auth Login GUARD', () => {
   let guard: AuthTokenGuard;
   let authService: AuthService;
   const dummyRoute = {} as ActivatedRouteSnapshot;
@@ -30,6 +30,13 @@ describe('Auth Login', () => {
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     authService = TestBed.inject(AuthService);
     guard = new AuthTokenGuard(routerSpy, authService);
+
+    localStorage.setItem(
+      'auth',
+      JSON.stringify({
+        sessionData: null,
+      })
+    );
   });
 
   it('should be created', () => {

@@ -40,6 +40,7 @@ declare namespace Cypress {
   interface Chainable {
     _login(username: string, password: string): void;
     _select_profile(profile: string): void;
+    _check_input(selector: string, validator: string): void;
   }
 }
 Cypress.Commands.add('_login', (username, password) => {
@@ -56,4 +57,15 @@ Cypress.Commands.add('_select_profile', profile => {
     }
   });
   cy.get('#perfil-select-button').click();
+});
+
+Cypress.Commands.add('_check_input', (selector, validator) => {
+  cy.get(selector).should('be.enabled');
+  if (validator === 'required') {
+    cy.get(selector).type('das');
+    cy.get(selector).clear();
+    cy.get(selector + '+zwc-input-alert>small').contains(
+      'Este campo es requerido'
+    );
+  }
 });

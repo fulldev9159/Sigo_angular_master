@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContratosUser, TipoCubicacion } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
@@ -36,6 +36,8 @@ export class FormularioComponent implements OnDestroy {
     cmarcoproveedor_id: new FormControl(null, [Validators.required]),
     table: new FormArray([]),
   };
+
+  formCub: FormGroup = new FormGroup(this.formCubControl);
 
   constructor(
     private formularioService: FormularioService,

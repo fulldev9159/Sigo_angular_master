@@ -14,4 +14,13 @@ export class FormularioService {
       return isValid ? null : { whitespace: true };
     };
   }
+
+  errorMessageFn(errors: any): string {
+    if (errors.required) {
+      return 'Este campo es requerido';
+    } else if (errors.minlength) {
+      return `El texto debe tener un tamaño mínimo de ${errors.minlength.requiredLength} caracteres`;
+    }
+    return 'Error sin mensaje definido';
+  }
 }

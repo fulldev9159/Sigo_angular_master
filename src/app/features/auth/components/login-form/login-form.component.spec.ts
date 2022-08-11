@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 import { SharedModule } from '@sharedOT/shared.module';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { sendingLogin } from '@storeOT/loadings/loadings.selectors';
 // import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
@@ -12,7 +14,7 @@ describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
   let facade: AuthFacade;
-  // let loadingFacade: LoadingsFacade;
+  const initialState: any = { sendingLogin: false };
 
   beforeEach(async () => {
     const env = { production: true, api: '' };
@@ -26,6 +28,17 @@ describe('LoginFormComponent', () => {
         StoreModule.forRoot({}),
       ],
       declarations: [LoginFormComponent],
+      providers: [
+        provideMockStore({
+          initialState,
+          selectors: [
+            {
+              selector: sendingLogin,
+              value: false,
+            },
+          ],
+        }),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginFormComponent);

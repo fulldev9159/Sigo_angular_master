@@ -1,13 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FormularioService } from 'src/app/core/service/formulario.service';
 
 @Component({
-  selector: 'zwc-input-alert',
-  templateUrl: './input-alert.component.html',
-  styleUrls: ['./input-alert.component.scss'],
+  selector: 'zwc-input-text',
+  templateUrl: './input-text.component.html',
+  styleUrls: ['./input-text.component.scss'],
 })
-export class InputAlertComponent {
+export class InputTextComponent {
+  @Input() Label = '';
+  @Input() name_input = '';
   @Input() control: FormControl;
 
   constructor(private formularioService: FormularioService) {}

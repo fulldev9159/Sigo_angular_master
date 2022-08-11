@@ -4,8 +4,6 @@ import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { isLoggin } from '@storeOT/auth/auth.selectors';
-import { elementAt, of } from 'rxjs';
-import { AuthService } from '../../service/auth.service';
 
 import { MainLayoutComponent } from './main-layout.component';
 
