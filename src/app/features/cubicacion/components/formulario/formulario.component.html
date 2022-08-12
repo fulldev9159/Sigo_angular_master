@@ -1,13 +1,11 @@
 <form >
     <div class="card">
         <div class="formgrid grid">
-            <div class="field col">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
                 <zwc-input-text Label="*Nombre de la Cubicación" [control]="formCubControl.nombre" name_input="input-nombre-cubicacion"></zwc-input-text>
             </div>
-            <div class="field col">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
                 <zwc-pdropdown [control]="formCubControl.tipocubicacion" Label="*Tipo Cubicación" dropdown_id="select-tipo-cubicacion" [data]="tipoCubicacion$|async" Pplaceholder="Selecione un tipo"></zwc-pdropdown>
-                <!-- <label></label>
-                <p-dropdown id="select-tipo-cubicacion" [options]="tipoCubicacion$|async"  optionLabel="name" placeholder="Selecione un tipo" optionValue="code"></p-dropdown> -->
             </div>
         </div>
     </div>
