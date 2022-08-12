@@ -10,5 +10,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.primeConfig.ripple = true;
+    this.primeConfig.setTranslation({
+      emptyMessage: 'Sin resultados',
+    });
   }
 }

@@ -1,4 +1,6 @@
-export let tipoCubicacionMOCK200OK = {
+import { Response, TipoCubicacion } from '@model';
+
+export let tipoCubicacionMOCK200OK: Response<{ items: TipoCubicacion[] }> = {
   status: { code: 0, desc: 'OK' },
   data: {
     items: [

@@ -18,3 +18,16 @@ describe('Crear Cubicacion', () => {
     );
   });
 });
+
+describe('Excepcion crear cubicación sin contratos asignado', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mtestsincontratos', 'asdasd');
+    cy._select_profile('Gestor/JP');
+    cy.get('#crear-cubicacion-sidebar').click();
+  });
+
+  it('should display message "No tiene contratos asignados. Favor contactar con el administrador del sistema" ', () => {
+    cy.get('.snackbar-container').should('exist');
+  });
+});

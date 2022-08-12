@@ -9,4 +9,19 @@
             </div>
         </div>
     </div>
+
+    <div class="grid mt-1">
+        <div class="col-12  md:col-6 lg:col-6 xl:col-6">
+            <div class="card">
+                <div class="field">
+                    <zwc-pdropdown [control]="formCubControl.contrato" Label="*Contrato Marco" dropdown_id="select-contrato_marco" [data]="contratoUsuarios$|async" Pplaceholder="Selecione un contrato marco"></zwc-pdropdown>
+                </div>
+                <div class="field">
+                    <label for="lastname1">Lastname</label>
+                    <input id="lastname1" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                </div>
+            </div>
+        </div>
+        <div class="col-12  md:col-6 lg:col-6 xl:col-6"></div>
+    </div>
 </form>

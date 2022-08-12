@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SnackMessageService } from './snack-message.service';
 import * as authActions from '@storeOT/auth/auth.actions';
 import * as perfilActions from '@storeOT/perfil/perfil.actions';
+import * as usuarioActions from '@storeOT/usuario/usuario.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 
 interface ActionErr {
@@ -70,6 +71,19 @@ export class AfterHttpService {
       action.type === authActions.getPermisosPerfilUsuario4LoginSuccess.type
     ) {
       this.router.navigate(['/home']);
+    }
+
+    // GET CONTRATOS USUARIO
+    if (
+      action.type === usuarioActions.getContratosUsuarioSuccess.type &&
+      action.response.status.code === 2 &&
+      action.response.data.items.length === 0
+    ) {
+      this.snackMessage.showMessage(
+        'No tiene contratos asignados. Favor contactar con el administrador del sistema',
+        'info',
+        6000
+      );
     }
   }
 }

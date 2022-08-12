@@ -17,8 +17,31 @@ interface Dropdown {
 })
 export class FormularioComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
-  contratoUsuarios$: Observable<ContratosUser[]> =
-    this.usuarioFacade.getContratosUsuario$();
+  contratoUsuarios$: Observable<Dropdown[]> = this.usuarioFacade
+    .getContratosUsuario$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.length > 0
+          ? tmp.sort((a, b) =>
+              a.model_contrato_id.nombre > b.model_contrato_id.nombre
+                ? 1
+                : b.model_contrato_id.nombre > a.model_contrato_id.nombre
+                ? -1
+                : 0
+            )
+          : [];
+      }),
+      map(values =>
+        values.length > 0
+          ? values.map(value => ({
+              name: value.model_contrato_id.nombre,
+              code: value.contrato_id,
+            }))
+          : []
+      ),
+      take(1)
+    );
   tipoCubicacion$: Observable<Dropdown[]> = this.cubicacionFacade
     .getTipoCubicacion$()
     .pipe(
