@@ -6,9 +6,7 @@
             </div>
             <div class="field col">
                 <label>*Tipo Cubicación</label>
-                <div id="input-dropdown"> 
-                    <p-dropdown id="select_profile" [options]="tipoCubicacion$|async"  optionLabel="name" placeholder="Selecione un perfil" optionValue="code"></p-dropdown>
-                </div>
+                <p-dropdown id="select-tipo-cubicacion" [options]="tipoCubicacion$|async"  optionLabel="name" placeholder="Selecione un tipo" optionValue="code"></p-dropdown>
             </div>
         </div>
     </div>

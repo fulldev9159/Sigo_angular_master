@@ -9,4 +9,8 @@ describe('Crear Cubicacion', () => {
   it('should display name cubicacion input text', () => {
     cy._check_input('input[name="input-nombre-cubicacion"]', 'required');
   });
+
+  it('should display dropdown tipo cubicacion', () => {
+    cy.get('#select-tipo-cubicacion').click();
+  });
 });

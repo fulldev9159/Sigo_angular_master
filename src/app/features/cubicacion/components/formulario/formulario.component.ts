@@ -3,9 +3,13 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContratosUser, TipoCubicacion } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
-import { Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription, take } from 'rxjs';
 import { FormularioService } from 'src/app/core/service/formulario.service';
 
+interface Dropdown {
+  name: string;
+  code: number;
+}
 @Component({
   selector: 'zwc-formulario',
   templateUrl: './formulario.component.html',
@@ -15,8 +19,31 @@ export class FormularioComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
   contratoUsuarios$: Observable<ContratosUser[]> =
     this.usuarioFacade.getContratosUsuario$();
-  tipoCubicacion$: Observable<TipoCubicacion[]> =
-    this.cubicacionFacade.getTipoCubicacion$();
+  tipoCubicacion$: Observable<Dropdown[]> = this.cubicacionFacade
+    .getTipoCubicacion$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.length > 0
+          ? tmp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [];
+      }),
+      map(values =>
+        values.length > 0
+          ? values.map(value => ({
+              name: value.descripcion,
+              code: value.id,
+            }))
+          : []
+      ),
+      take(1)
+    );
 
   formCubControl = {
     id: new FormControl(null),

@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ResolveEnd, ResolveStart, Router } from '@angular/router';
 import { PerfilesUsuario } from '@model';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
-import { filter, map, merge, Observable, take, tap } from 'rxjs';
+import { map, Observable, take, tap } from 'rxjs';
 
 interface Dropdown {
   name: string;
