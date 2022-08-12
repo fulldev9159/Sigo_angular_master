@@ -22,7 +22,10 @@ describe('FormularioComponent', () => {
         provideMockStore({
           initialState,
           selectors: [
-            { selector: getTipoCubicacion, value: tipoCubicacionMOCK200OK },
+            {
+              selector: getTipoCubicacion,
+              value: tipoCubicacionMOCK200OK.data.items,
+            },
           ],
         }),
       ],

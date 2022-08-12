@@ -5,8 +5,9 @@
                 <zwc-input-text Label="*Nombre de la Cubicación" [control]="formCubControl.nombre" name_input="input-nombre-cubicacion"></zwc-input-text>
             </div>
             <div class="field col">
-                <label>*Tipo Cubicación</label>
-                <p-dropdown id="select-tipo-cubicacion" [options]="tipoCubicacion$|async"  optionLabel="name" placeholder="Selecione un tipo" optionValue="code"></p-dropdown>
+                <zwc-pdropdown [control]="formCubControl.tipocubicacion" Label="*Tipo Cubicación" dropdown_id="select-tipo-cubicacion" [data]="tipoCubicacion$|async" Pplaceholder="Selecione un tipo"></zwc-pdropdown>
+                <!-- <label></label>
+                <p-dropdown id="select-tipo-cubicacion" [options]="tipoCubicacion$|async"  optionLabel="name" placeholder="Selecione un tipo" optionValue="code"></p-dropdown> -->
             </div>
         </div>
     </div>

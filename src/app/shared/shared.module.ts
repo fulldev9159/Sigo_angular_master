@@ -7,6 +7,7 @@ import { PbuttonSendingComponent } from './pbutton-sending/pbutton-sending.compo
 import { ContentLayoutComponent } from '../core/layout/content-layout/content-layout.component';
 import { InputTextComponent } from './input-text/input-text.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PdropdownComponent } from './pdropdown/pdropdown.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PbuttonSendingComponent,
     ContentLayoutComponent,
     InputTextComponent,
+    PdropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PbuttonSendingComponent,
     ContentLayoutComponent,
     InputTextComponent,
+    PdropdownComponent,
   ],
 })
 export class SharedModule {

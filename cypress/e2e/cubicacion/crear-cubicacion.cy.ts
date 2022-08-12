@@ -12,5 +12,9 @@ describe('Crear Cubicacion', () => {
 
   it('should display dropdown tipo cubicacion', () => {
     cy.get('#select-tipo-cubicacion').click();
+    cy.get('#select-tipo-cubicacion').click();
+    cy.get('#select-tipo-cubicacion+zwc-input-alert>small').contains(
+      'Este campo es requerido'
+    );
   });
 });

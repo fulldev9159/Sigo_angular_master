@@ -1,0 +1,26 @@
+.dropdown-container{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-bottom: calc(var(--margin-label) + 0.2rem);
+}
+
+:host ::ng-deep {
+  .p-dropdown{
+    width:  100%;
+    border-color: #bcbcbf;
+    // margin-top: 0.5rem;
+    border-color: var(--surface-border) !important;
+  }
+
+  .p-dropdown-label{
+    font-size: 0.7rem;
+    padding: 0.7rem;
+  }
+
+  .p-dropdown-items{
+    font-size: 0.7rem;
+  }
+}
