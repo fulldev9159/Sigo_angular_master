@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { CubicacionRoutingModule } from './cubicacion-routing.module';
 import { CubicacionComponent } from './cubicacion.component';
 import { SharedModule } from '@sharedOT/shared.module';
@@ -15,6 +17,12 @@ import { FormularioComponent } from './components/formulario/formulario.componen
     FormCubContainerComponent,
     FormularioComponent,
   ],
-  imports: [CommonModule, CubicacionRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    CubicacionRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class CubicacionModule {}
