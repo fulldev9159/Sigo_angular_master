@@ -1,16 +1,13 @@
 import { testedViewports } from 'cypress/fixtures/testedViewports';
 
 describe('Perfil Select responsive spec', () => {
+  it.only('should display perfil select', () => {
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mgestor1', 'asas');
+  });
   testedViewports.forEach(vieport => {
-    beforeEach(() => {
+    it.only(`should display sigo titulo,subtitulo, dropdown, perfil select button and logout  on ${vieport}`, () => {
       cy.viewport(vieport);
-      cy.visit('http://localhost:4206/login/auth');
-      cy.get('input[name="username"]').clear().type('mgestor1');
-      cy.get('input[name="password"]').clear().type('sdasd');
-      cy.get('#login-button').click();
-    });
-
-    it('should display sigo titulo,subtitulo, dropdown, perfil select button and logout', () => {
       cy.get('.titulo-principal').contains('SIGO');
       cy.get('.perfil-select-titulo').contains('Perfil');
       cy.get('p-dropdown').should('be.visible');

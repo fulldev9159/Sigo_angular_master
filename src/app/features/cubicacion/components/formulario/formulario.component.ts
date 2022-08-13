@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ContratosUser, TipoCubicacion } from '@model';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
@@ -133,6 +132,7 @@ export class FormularioComponent implements OnDestroy, OnInit {
   }
 
   formObserver(): void {
+    // CONTRATO MARCO
     this.subscription.add(
       this.formCub.get('contrato').valueChanges.subscribe(contrato_id => {
         this.formularioService.resetControls(this.formCub, [
@@ -145,6 +145,7 @@ export class FormularioComponent implements OnDestroy, OnInit {
         }
       })
     );
+    // AGENCIA
   }
 
   ngOnDestroy(): void {
