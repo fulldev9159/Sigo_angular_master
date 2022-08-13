@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +22,9 @@ export class FormularioService {
       return `El texto debe tener un tamaño mínimo de ${errors.minlength.requiredLength} caracteres`;
     }
     return 'Error sin mensaje definido';
+  }
+
+  resetControls(form: FormGroup, controlNames: string[]): void {
+    controlNames.forEach(control => form.get(control).reset());
   }
 }

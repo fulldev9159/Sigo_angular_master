@@ -8,13 +8,17 @@ import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
 import { FormularioComponent } from './formulario.component';
 import { tipoCubicacionMOCK200OK } from '@mocksOT';
 import { ContratosUsuarioMOCK200OK } from 'src/mocks/usuario';
+import { FormularioService } from 'src/app/core/service/formulario.service';
+import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 
 describe('FormularioComponent', () => {
   let component: FormularioComponent;
   let fixture: ComponentFixture<FormularioComponent>;
   let usuarioFacade: UsuarioFacade;
   let cubicacionFacade: CubicacionFacade;
+  let contratoFacade: ContratoFacade;
   let initialState: any = { tipoCubicaciones: [] };
+  let formService: FormularioService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,10 +45,35 @@ describe('FormularioComponent', () => {
     component = fixture.componentInstance;
     usuarioFacade = TestBed.inject(UsuarioFacade);
     cubicacionFacade = TestBed.inject(CubicacionFacade);
+    formService = TestBed.inject(FormularioService);
+    contratoFacade = TestBed.inject(ContratoFacade);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call resetControls with agencia, cmarcoproveedor_id,table as parameters if change contrato', () => {
+    let formServiceSpy = spyOn(formService, 'resetControls');
+    component.formCub.get('contrato').setValue(1);
+    fixture.detectChanges();
+    expect(formServiceSpy).toHaveBeenCalledWith(component.formCub, [
+      'agencia_id',
+      'cmarcoproveedor_id',
+      'table',
+    ]);
+  });
+
+  it('should disabled controls agencia', () => {});
+
+  // debe llamar a las agencias
+  it('should call getAgencias if change contrato', () => {
+    let getAgenciaSpy = spyOn(contratoFacade, 'getAgenciasContrato');
+    component.formCub.get('contrato').setValue(1);
+    fixture.detectChanges();
+    expect(getAgenciaSpy).toHaveBeenCalled();
+  });
+  // si no trae contratos debe bloquear todo
+  // dependiendo del contrato debe desplegar direccion
 });

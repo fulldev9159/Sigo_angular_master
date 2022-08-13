@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContratosUser, TipoCubicacion } from '@model';
+import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
 import { map, Observable, Subscription, take } from 'rxjs';
@@ -15,8 +16,9 @@ interface Dropdown {
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.scss'],
 })
-export class FormularioComponent implements OnDestroy {
+export class FormularioComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
+  // DATOS A USAR
   contratoUsuarios$: Observable<Dropdown[]> = this.usuarioFacade
     .getContratosUsuario$()
     .pipe(
@@ -68,6 +70,8 @@ export class FormularioComponent implements OnDestroy {
       take(1)
     );
 
+  // FORMULARIO
+
   formCubControl = {
     id: new FormControl(null),
     nombre: new FormControl(null, [
@@ -92,8 +96,28 @@ export class FormularioComponent implements OnDestroy {
   constructor(
     private formularioService: FormularioService,
     private usuarioFacade: UsuarioFacade,
-    private cubicacionFacade: CubicacionFacade
+    private cubicacionFacade: CubicacionFacade,
+    private contratoFacade: ContratoFacade
   ) {}
+
+  ngOnInit(): void {
+    this.formObserver();
+  }
+
+  formObserver(): void {
+    this.subscription.add(
+      this.formCub.get('contrato').valueChanges.subscribe(contrato_id => {
+        this.formularioService.resetControls(this.formCub, [
+          'agencia_id',
+          'cmarcoproveedor_id',
+          'table',
+        ]);
+        if (contrato_id && contrato_id !== null) {
+          this.contratoFacade.getAgenciasContrato(+contrato_id);
+        }
+      })
+    );
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

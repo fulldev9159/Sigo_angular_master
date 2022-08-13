@@ -1,37 +1,22 @@
-// import { Injectable } from '@angular/core';
-// import { PerfilesUsuario, Response } from '@model';
-// import { Store } from '@ngrx/store';
-// import { Observable } from 'rxjs';
-// import * as perfilSelectors from './contrato.selectors';
-// import * as perfilActions from './contrato.actions';
+import { Injectable } from '@angular/core';
+import { AgenciaContrato, PerfilesUsuario, Response } from '@model';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as contratoSelectors from './contrato.selectors';
+import * as contratoActions from './contrato.actions';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class PerfilFacade {
-//   constructor(private store: Store<any>) {}
+@Injectable({
+  providedIn: 'root',
+})
+export class ContratoFacade {
+  constructor(private store: Store<any>) {}
 
-//   // GET PERFILES USUARIO
-//   public getPerfilesUsuario(usuario_id: number): void {
-//     this.store.dispatch(perfilActions.getPerfilesUsuario({ usuario_id }));
-//   }
+  // GET AGENCIAS DE UN CONTRATO
+  public getAgenciasContrato(contrato_id: number): void {
+    this.store.dispatch(contratoActions.getAgenciasContrato({ contrato_id }));
+  }
 
-//   public getPerfilesUsuarioSuccess(
-//     response: Response<{ perfiles: PerfilesUsuario[] }>
-//   ): void {
-//     this.store.dispatch(perfilActions.getPerfilesUsuarioSuccess({ response }));
-//   }
-
-//   public getPerfilesUsuarioError(error: any) {
-//     this.store.dispatch(perfilActions.getPerfilesUsuarioError({ error }));
-//   }
-
-//   public getPerfilesUsuario$(): Observable<PerfilesUsuario[]> {
-//     return this.store.select(perfilSelectors.getPerfilesUsuario);
-//   }
-
-//   // GET PERMISOS PERFIL USUARIO
-//   // public getPermisosPerfilUsuario(): void {
-//   //   this.store.dispatch(perfilActions.getPermisosPerfilUsuario());
-//   // }
-// }
+  public getAgenciasContrato$(): Observable<AgenciaContrato[]> {
+    return this.store.select(contratoSelectors.getAgenciasContrato);
+  }
+}

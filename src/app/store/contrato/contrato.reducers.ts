@@ -1,21 +1,21 @@
-// import { createReducer, on } from '@ngrx/store';
-// import { PerfilesUsuario } from '@model';
-// import * as perfilActions from './contrato.actions';
+import { AgenciaContrato } from '@model';
+import { createReducer, on } from '@ngrx/store';
+import * as contratoActions from './contrato.actions';
 
-// export const Featurekey = 'perfil';
+export const Featurekey = 'contrato';
 
-// export interface StatePerfil {
-//   perfilesUsuario: PerfilesUsuario[];
-// }
+export interface StateContrato {
+  agenciasContrato: AgenciaContrato[];
+}
 
-// export const initialState: StatePerfil = {
-//   perfilesUsuario: [],
-// };
+export const initialState: StateContrato = {
+  agenciasContrato: [],
+};
 
-// export const reducerPerfil = createReducer(
-//   initialState,
-//   on(perfilActions.getPerfilesUsuarioSuccess, (state, { response }) => ({
-//     ...state,
-//     perfilesUsuario: response.data.perfiles,
-//   }))
-// );
+export const reducerContrato = createReducer(
+  initialState,
+  on(contratoActions.getAgenciasContratoSuccess, (state, { response }) => ({
+    ...state,
+    agenciasContrato: response.data.items,
+  }))
+);

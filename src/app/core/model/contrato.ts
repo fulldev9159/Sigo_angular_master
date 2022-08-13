@@ -12,3 +12,8 @@ export interface ModelContratoMarco {
   tipo_pago: string;
   validacion_operaciones: boolean;
 }
+
+export interface AgenciaContrato {
+  id: number;
+  nombre: string;
+}

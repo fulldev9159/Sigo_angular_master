@@ -1,71 +1,49 @@
-// import { Injectable } from '@angular/core';
-// import { Actions, createEffect, ofType } from '@ngrx/effects';
-// import { AfterHttpService, PerfilesHttpService } from '@services';
-// import * as perfilActions from './contrato.actions';
-// import { catchError, concatMap, map, tap } from 'rxjs/operators';
-// import { of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { AfterHttpService, ContratoHttpService } from '@services';
+import * as contratoActions from './contrato.actions';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
-// @Injectable()
-// export class PerfilEffects {
-//   constructor(
-//     private actions$: Actions,
-//     private perfilesHttpService: PerfilesHttpService,
-//     private afterHttp: AfterHttpService
-//   ) {}
+@Injectable()
+export class ContratoEffects {
+  constructor(
+    private actions$: Actions,
+    private contratoHttpService: ContratoHttpService,
+    private afterHttp: AfterHttpService
+  ) {}
 
-//   getPerfilesUsuario$ = createEffect(() =>
-//     this.actions$.pipe(
-//       ofType(perfilActions.getPerfilesUsuario),
-//       concatMap(({ usuario_id }) =>
-//         this.perfilesHttpService.getPerfilesUsuario(usuario_id).pipe(
-//           map(response =>
-//             perfilActions.getPerfilesUsuarioSuccess({ response })
-//           ),
-//           catchError(error =>
-//             of(perfilActions.getPerfilesUsuarioError({ error }))
-//           )
-//         )
-//       )
-//     )
-//   );
+  getAgenciasContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratoActions.getAgenciasContrato),
+      concatMap(({ contrato_id }) =>
+        this.contratoHttpService.getAgenciasContrato(contrato_id).pipe(
+          map(response =>
+            contratoActions.getAgenciasContratoSuccess({ response })
+          ),
+          catchError(error =>
+            of(contratoActions.getAgenciasContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
 
-//   // getPermisosPerfilUsuario$ = createEffect(() =>
-//   //   this.actions$.pipe(
-//   //     ofType(perfilActions.getPermisosPerfilUsuario),
-//   //     concatMap(() =>
-//   //       this.perfilesHttpService.getPermisosPerfilUsuario().pipe(
-//   //         map(response =>
-//   //           perfilActions.getPermisosPerfilUsuarioSuccess({ response })
-//   //         ),
-//   //         catchError(error =>
-//   //           of(perfilActions.getPermisosPerfilUsuarioError({ error }))
-//   //         )
-//   //       )
-//   //     )
-//   //   )
-//   // );
+  notifyAfte$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(contratoActions.getAgenciasContratoSuccess),
+        tap(action => this.afterHttp.successHandler(action))
+      ),
+    { dispatch: false }
+  );
 
-//   notifyAfte$ = createEffect(
-//     () =>
-//       this.actions$.pipe(
-//         ofType(
-//           perfilActions.getPerfilesUsuarioSuccess
-//           // perfilActions.getPermisosPerfilUsuarioSuccess
-//         ),
-//         tap(action => this.afterHttp.successHandler(action))
-//       ),
-//     { dispatch: false }
-//   );
-
-//   notifyAfterError = createEffect(
-//     () =>
-//       this.actions$.pipe(
-//         ofType(
-//           perfilActions.getPerfilesUsuarioError
-//           // perfilActions.getPermisosPerfilUsuarioError
-//         ),
-//         tap(action => this.afterHttp.errorHandler(action))
-//       ),
-//     { dispatch: false }
-//   );
-// }
+  notifyAfterError = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(contratoActions.getAgenciasContratoError),
+        tap(action => this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  );
+}

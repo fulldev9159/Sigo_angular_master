@@ -28,6 +28,11 @@ import * as loadingReducer from './loadings/loadings.reducers';
 import { SharedModule } from '@sharedOT/shared.module';
 // LOADINGS STORE
 
+// CONTRATO STORE
+import { ContratoEffects } from './contrato/contrato.effects';
+import * as formContratoReduce from './contrato/contrato.reducers';
+// CONTRATO STORE
+
 @NgModule({
   declarations: [],
   imports: [
@@ -64,6 +69,13 @@ import { SharedModule } from '@sharedOT/shared.module';
     StoreModule.forFeature(
       loadingReducer.FeatureKey,
       loadingReducer.reducerLoadings
+    ),
+
+    // CONTRATO STORE
+    EffectsModule.forFeature([ContratoEffects]),
+    StoreModule.forFeature(
+      formContratoReduce.Featurekey,
+      formContratoReduce.reducerContrato
     ),
     SharedModule,
   ],
