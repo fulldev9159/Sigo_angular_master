@@ -70,6 +70,27 @@ export class FormularioComponent implements OnDestroy, OnInit {
       take(1)
     );
 
+  agenciasContrato$: Observable<Dropdown[]> = this.contratoFacade
+    .getAgenciasContrato$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.length > 0
+          ? tmp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+            )
+          : [];
+      }),
+      map(values =>
+        values.length > 0
+          ? values.map(value => ({
+              name: value.nombre,
+              code: value.id,
+            }))
+          : []
+      )
+    );
+
   // FORMULARIO
 
   formCubControl = {

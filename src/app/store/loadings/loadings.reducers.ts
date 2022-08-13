@@ -10,6 +10,7 @@ export interface StateLoadings {
   sendingGetPerfilesUser4Login: boolean;
   sendingRefreshLogin: boolean;
   sendingPermisosPerfilUser: boolean;
+  sendingGetAgenciasContrato: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -17,6 +18,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetPerfilesUser4Login: false,
   sendingRefreshLogin: false,
   sendingPermisosPerfilUser: false,
+  sendingGetAgenciasContrato: false,
 };
 
 export const reducerLoadings = createReducer(

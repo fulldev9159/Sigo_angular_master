@@ -1,4 +1,8 @@
-import { tipoCubicacionMOCK200OK } from '../../../src/mocks';
+import {
+  tipoCubicacionMOCK200OK,
+  getAgenciasContratoMOCK200OK,
+  ContratosUsuarioMOCK200OK,
+} from '../../../src/mocks';
 
 describe('Testing Formulario Components', () => {
   it('should let enter to create cubicacion', () => {
@@ -37,24 +41,55 @@ describe('Testing Formulario Components', () => {
   });
 
   describe('Contrato Marco', (name = 'Contrato Marco') => {
+    let selector = '#select-contrato_marco';
+
     it(`should display dropdown ${name} as required`, () => {
-      cy._check_dropdown_required('#select-tipo-cubicacion');
+      cy._check_dropdown_required(selector);
     });
 
     it(`dropdown ${name} should display data`, () => {
-      let datos = tipoCubicacionMOCK200OK.data.items
+      let datos = ContratosUsuarioMOCK200OK.data.items
         .sort((a, b) =>
-          a.descripcion > b.descripcion
+          a.model_contrato_id.nombre > b.model_contrato_id.nombre
             ? 1
-            : b.descripcion > a.descripcion
+            : b.model_contrato_id.nombre > a.model_contrato_id.nombre
             ? -1
             : 0
         )
-        .map(value => value.descripcion);
-      cy.get('#select-tipo-cubicacion').click();
+        .map(value => value.model_contrato_id.nombre);
+      cy.get(selector).click();
       cy.get('li.p-ripple').each(($el, index, $list) => {
         expect($el.text()).eq(datos[index]);
       });
+    });
+
+    afterEach(() => {
+      cy.get('input[name="input-nombre-cubicacion"]').click();
+    });
+  });
+
+  describe('Agencia', (name = 'Agencia') => {
+    let selector = '#select-agencia';
+    it(`should display dropdown ${name} as required`, () => {
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._check_dropdown_required(selector);
+    });
+
+    it(`dropdown ${name} should display data`, () => {
+      let datos = getAgenciasContratoMOCK200OK.data.items
+        .sort((a, b) =>
+          a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+        )
+        .map(value => value.nombre);
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy.get(selector).click();
+      cy.get('li.p-ripple').each(($el, index, $list) => {
+        expect($el.text()).eq(datos[index]);
+      });
+    });
+
+    afterEach(() => {
+      cy.get('input[name="input-nombre-cubicacion"]').click();
     });
   });
 });
