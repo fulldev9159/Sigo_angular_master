@@ -4,8 +4,10 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
 import { getTipoCubicacion } from '@storeOT/cubicacion/cubicacion.selectors';
+import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
 import { FormularioComponent } from './formulario.component';
 import { tipoCubicacionMOCK200OK } from '@mocksOT';
+import { ContratosUsuarioMOCK200OK } from 'src/mocks/usuario';
 
 describe('FormularioComponent', () => {
   let component: FormularioComponent;
@@ -25,6 +27,10 @@ describe('FormularioComponent', () => {
             {
               selector: getTipoCubicacion,
               value: tipoCubicacionMOCK200OK.data.items,
+            },
+            {
+              selector: getContratosUsuario,
+              value: ContratosUsuarioMOCK200OK.data.items,
             },
           ],
         }),
