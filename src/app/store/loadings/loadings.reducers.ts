@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as authActions from '../auth/auth.actions';
 import * as perfilActions from '../perfil/perfil.actions';
 import * as loadingsActions from './loadings.actions';
+import * as contratosActions from '../contrato/contrato.actions';
 
 export const FeatureKey = 'loadings';
 
@@ -61,6 +62,18 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingPermisosPerfilUser: false,
+    })
+  ),
+  on(contratosActions.getAgenciasContrato, state => ({
+    ...state,
+    sendingGetAgenciasContrato: true,
+  })),
+  on(
+    contratosActions.getAgenciasContratoSuccess,
+    contratosActions.getAgenciasContratoError,
+    state => ({
+      ...state,
+      sendingGetAgenciasContrato: false,
     })
   )
 );

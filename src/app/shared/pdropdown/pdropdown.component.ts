@@ -12,5 +12,6 @@ export class PdropdownComponent {
   @Input() control: FormControl;
   @Input() data: any;
   @Input() Pplaceholder = '';
+  @Input() loading = false;
   constructor() {}
 }

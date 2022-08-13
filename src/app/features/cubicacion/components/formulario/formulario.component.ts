@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContratosUser, TipoCubicacion } from '@model';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
 import { map, Observable, Subscription, take } from 'rxjs';
 import { FormularioService } from 'src/app/core/service/formulario.service';
@@ -44,6 +45,7 @@ export class FormularioComponent implements OnDestroy, OnInit {
       ),
       take(1)
     );
+
   tipoCubicacion$: Observable<Dropdown[]> = this.cubicacionFacade
     .getTipoCubicacion$()
     .pipe(
@@ -114,11 +116,16 @@ export class FormularioComponent implements OnDestroy, OnInit {
 
   formCub: FormGroup = new FormGroup(this.formCubControl);
 
+  // LOADINGS
+  getAgenciaContratoLoading$: Observable<boolean> =
+    this.loadingFacade.sendingGetAgenciasContrato$();
+
   constructor(
     private formularioService: FormularioService,
     private usuarioFacade: UsuarioFacade,
     private cubicacionFacade: CubicacionFacade,
-    private contratoFacade: ContratoFacade
+    private contratoFacade: ContratoFacade,
+    private loadingFacade: LoadingsFacade
   ) {}
 
   ngOnInit(): void {

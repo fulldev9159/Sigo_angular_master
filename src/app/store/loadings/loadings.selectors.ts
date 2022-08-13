@@ -23,3 +23,8 @@ export const sendingPermisosPerfilUser4Login = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingPermisosPerfilUser
 );
+
+export const sendingGetAgenciasContrato = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetAgenciasContrato
+);

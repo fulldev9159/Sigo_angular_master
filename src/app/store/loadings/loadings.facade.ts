@@ -32,4 +32,9 @@ export class LoadingsFacade {
   public sendingPermisosPerfilUser$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingPermisosPerfilUser4Login);
   }
+
+  // GET AGENCIAS DE UN CONTRATO
+  public sendingGetAgenciasContrato$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetAgenciasContrato);
+  }
 }
