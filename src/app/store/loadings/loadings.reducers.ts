@@ -3,6 +3,7 @@ import * as authActions from '../auth/auth.actions';
 import * as perfilActions from '../perfil/perfil.actions';
 import * as loadingsActions from './loadings.actions';
 import * as contratosActions from '../contrato/contrato.actions';
+import * as proveedorActions from '../proveedor/proveedor.actions';
 
 export const FeatureKey = 'loadings';
 
@@ -12,6 +13,7 @@ export interface StateLoadings {
   sendingRefreshLogin: boolean;
   sendingPermisosPerfilUser: boolean;
   sendingGetAgenciasContrato: boolean;
+  sendingGetProveedorAgenciasContrato: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -20,6 +22,7 @@ export const initialStateLoading: StateLoadings = {
   sendingRefreshLogin: false,
   sendingPermisosPerfilUser: false,
   sendingGetAgenciasContrato: false,
+  sendingGetProveedorAgenciasContrato: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -74,6 +77,18 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetAgenciasContrato: false,
+    })
+  ),
+  on(proveedorActions.getProveedoresAgenciaContrato, state => ({
+    ...state,
+    sendingGetProveedorAgenciasContrato: true,
+  })),
+  on(
+    proveedorActions.getProveedoresAgenciaContratoSuccess,
+    proveedorActions.getProveedoresAgenciaContratoError,
+    state => ({
+      ...state,
+      sendingGetProveedorAgenciasContrato: false,
     })
   )
 );

@@ -2,6 +2,7 @@ import {
   tipoCubicacionMOCK200OK,
   getAgenciasContratoMOCK200OK,
   ContratosUsuarioMOCK200OK,
+  getProveedoresAgenciaContratoMOCK200OK,
 } from '../../../src/mocks';
 
 describe('Testing Formulario Components', () => {
@@ -82,6 +83,33 @@ describe('Testing Formulario Components', () => {
         )
         .map(value => value.nombre);
       cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy.get(selector).click();
+      cy.get('li.p-ripple').each(($el, index, $list) => {
+        expect($el.text()).eq(datos[index]);
+      });
+    });
+
+    afterEach(() => {
+      cy.get('input[name="input-nombre-cubicacion"]').click();
+    });
+  });
+
+  describe('Proveedor', (name = 'Proveedor') => {
+    let selector = '#select-proveedor';
+    it(`should display dropdown ${name} as required`, () => {
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      cy._check_dropdown_required(selector);
+    });
+
+    it(`dropdown ${name} should display data`, () => {
+      let datos = getProveedoresAgenciaContratoMOCK200OK.data.items
+        .sort((a, b) =>
+          a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+        )
+        .map(value => `${value.codigo_acuerdo} - ${value.nombre}`);
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
       cy.get(selector).click();
       cy.get('li.p-ripple').each(($el, index, $list) => {
         expect($el.text()).eq(datos[index]);

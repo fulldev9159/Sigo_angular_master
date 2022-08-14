@@ -33,6 +33,11 @@ import { ContratoEffects } from './contrato/contrato.effects';
 import * as formContratoReduce from './contrato/contrato.reducers';
 // CONTRATO STORE
 
+// PROVEEDOR STORE
+import { ProveedorEffects } from './proveedor/proveedor.effects';
+import * as formProveedorReduce from './proveedor/proveedor.reducers';
+// PROVEEDOR STORE
+
 @NgModule({
   declarations: [],
   imports: [
@@ -76,6 +81,13 @@ import * as formContratoReduce from './contrato/contrato.reducers';
     StoreModule.forFeature(
       formContratoReduce.Featurekey,
       formContratoReduce.reducerContrato
+    ),
+
+    // PROVEEDOR STORE
+    EffectsModule.forFeature([ProveedorEffects]),
+    StoreModule.forFeature(
+      formProveedorReduce.Featurekey,
+      formProveedorReduce.reducerProveedor
     ),
     SharedModule,
   ],

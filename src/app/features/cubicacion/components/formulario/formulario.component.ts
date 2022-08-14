@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
+import { ProveedorFacade } from '@storeOT/proveedor/proveedor.facades';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
 import { map, Observable, Subscription, take } from 'rxjs';
 import { FormularioService } from 'src/app/core/service/formulario.service';
@@ -92,6 +93,27 @@ export class FormularioComponent implements OnDestroy, OnInit {
       )
     );
 
+  proveedoresAgenciaContrato$: Observable<Dropdown[]> = this.proveedorFacade
+    .getProveedoresAgenciaContrato$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.length > 0
+          ? tmp.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+            )
+          : [];
+      }),
+      map(values =>
+        values.length > 0
+          ? values.map(value => ({
+              name: `${value.codigo_acuerdo} - ${value.nombre}`,
+              code: value.cmarco_has_proveedor_id,
+            }))
+          : []
+      )
+    );
+
   // FORMULARIO
 
   formCubControl = {
@@ -118,13 +140,16 @@ export class FormularioComponent implements OnDestroy, OnInit {
   // LOADINGS
   getAgenciaContratoLoading$: Observable<boolean> =
     this.loadingFacade.sendingGetAgenciasContrato$();
+  getProveedoresAgenciaContratoLoading$: Observable<boolean> =
+    this.loadingFacade.sendingGetProveedoresAgenciasContrato$();
 
   constructor(
     private formularioService: FormularioService,
     private usuarioFacade: UsuarioFacade,
     private cubicacionFacade: CubicacionFacade,
     private contratoFacade: ContratoFacade,
-    private loadingFacade: LoadingsFacade
+    private loadingFacade: LoadingsFacade,
+    private proveedorFacade: ProveedorFacade
   ) {}
 
   ngOnInit(): void {
@@ -138,7 +163,6 @@ export class FormularioComponent implements OnDestroy, OnInit {
         this.formularioService.resetControls(this.formCub, [
           'agencia_id',
           'cmarcoproveedor_id',
-          'table',
         ]);
         if (contrato_id && contrato_id !== null) {
           this.contratoFacade.getAgenciasContrato(+contrato_id);
@@ -146,6 +170,20 @@ export class FormularioComponent implements OnDestroy, OnInit {
       })
     );
     // AGENCIA
+    this.subscription.add(
+      this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
+        this.formularioService.resetControls(this.formCub, [
+          'cmarcoproveedor_id',
+        ]);
+        if (agencia_id && agencia_id !== null) {
+          let contrato_id = +this.formCub.get('contrato').value;
+          this.proveedorFacade.getProveedoresAgenciaContrato(
+            +agencia_id,
+            contrato_id
+          );
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {
