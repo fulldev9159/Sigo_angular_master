@@ -87,7 +87,6 @@ describe('FormularioComponent', () => {
     expect(formServiceSpy).toHaveBeenCalledWith(component.formCub, [
       'agencia_id',
       'cmarcoproveedor_id',
-      'table',
     ]);
   });
 

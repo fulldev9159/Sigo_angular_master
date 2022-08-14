@@ -164,6 +164,7 @@ export class FormularioComponent implements OnDestroy, OnInit {
           'agencia_id',
           'cmarcoproveedor_id',
         ]);
+
         if (contrato_id && contrato_id !== null) {
           this.contratoFacade.getAgenciasContrato(+contrato_id);
         }
