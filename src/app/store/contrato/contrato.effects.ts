@@ -29,10 +29,35 @@ export class ContratoEffects {
     )
   );
 
+  getActividadesContratoProveedor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratoActions.getActividadesContratoProveedor),
+      concatMap(({ cmarco_has_proveedor }) =>
+        this.contratoHttpService
+          .getActividadesContratoProveedor(cmarco_has_proveedor)
+          .pipe(
+            map(response =>
+              contratoActions.getActividadesContratoProveedorSuccess({
+                response,
+              })
+            ),
+            catchError(error =>
+              of(
+                contratoActions.getActividadesContratoProveedorError({ error })
+              )
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(contratoActions.getAgenciasContratoSuccess),
+        ofType(
+          contratoActions.getAgenciasContratoSuccess,
+          contratoActions.getActividadesContratoProveedorSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -41,7 +66,10 @@ export class ContratoEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(contratoActions.getAgenciasContratoError),
+        ofType(
+          contratoActions.getAgenciasContratoError,
+          contratoActions.getActividadesContratoProveedorError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

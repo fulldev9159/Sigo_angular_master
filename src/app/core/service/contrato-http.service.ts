@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { AgenciaContrato, Response } from '@model';
+import { ActividadContratoProveedor, AgenciaContrato, Response } from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,6 +19,15 @@ export class ContratoHttpService {
     return this.http.post<Response<{ items: AgenciaContrato[] }>>(
       `${this.API_URL}/cubicacion/agencias_from_contrato/get`,
       { contrato_id }
+    );
+  }
+
+  getActividadesContratoProveedor(
+    cmarco_has_proveedor: number
+  ): Observable<Response<{ items: ActividadContratoProveedor[] }>> {
+    return this.http.post<Response<{ items: ActividadContratoProveedor[] }>>(
+      `${this.API_URL}/cubicacion/actividad_from_cmarco_has_proveedor/get`,
+      { cmarco_has_proveedor }
     );
   }
 }

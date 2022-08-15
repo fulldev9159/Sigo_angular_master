@@ -225,6 +225,18 @@ export class FormularioComponent implements OnDestroy, OnInit {
         }
       })
     );
+    // PROVEEDOR
+    this.subscription.add(
+      this.formCub
+        .get('cmarcoproveedor_id')
+        .valueChanges.subscribe(cmarcoproveedor_id => {
+          if (cmarcoproveedor_id && cmarcoproveedor_id != null) {
+            this.contratoFacade.getActividadesContratoProveedor(
+              +cmarcoproveedor_id
+            );
+          }
+        })
+    );
   }
 
   ngOnDestroy(): void {

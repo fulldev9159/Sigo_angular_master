@@ -17,3 +17,8 @@ export interface AgenciaContrato {
   id: number;
   nombre: string;
 }
+
+export interface ActividadContratoProveedor {
+  actividad_id: number;
+  descripcion: string;
+}

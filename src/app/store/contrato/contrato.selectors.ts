@@ -9,3 +9,8 @@ export const getAgenciasContrato = createSelector(
   selectContrato,
   (state: reducer.StateContrato) => state.agenciasContrato
 );
+
+export const getActividadesContratoProveedor = createSelector(
+  selectContrato,
+  (state: reducer.StateContrato) => state.actividadesContratoProveedor
+);

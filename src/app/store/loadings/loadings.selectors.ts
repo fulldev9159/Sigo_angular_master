@@ -33,3 +33,8 @@ export const sendingGetProveedorAgenciasContrato = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetProveedorAgenciasContrato
 );
+
+export const sendingGetActividadesContratoProveedor = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetActividadesContratoProveedor
+);

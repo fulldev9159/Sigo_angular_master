@@ -3,6 +3,7 @@ import {
   getAgenciasContratoMOCK200OK,
   ContratosUsuarioMOCK200OK,
   getProveedoresAgenciaContratoMOCK200OK,
+  getActividadesContratoProveedorMOCK200ok,
 } from '../../../src/mocks';
 
 describe('Testing Formulario Components', () => {
@@ -146,6 +147,45 @@ describe('Testing Formulario Components', () => {
       cy.get('input[name="input-altura-desde"]').should('not.exist');
       cy.get('input[name="input-direccion-hasta"]').should('not.exist');
       cy.get('input[name="input-altura-hasta"]').should('not.exist');
+    });
+  });
+
+  describe('Actividad', (name = 'Actividad') => {
+    let selector = '#select-actividad';
+    it(`should display dropdown ${name} as required`, () => {
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      cy._select_dropdown(
+        '#select-agencia',
+        '330000659 - COBRA CHILE SERVICIOS S.A.'
+      );
+      cy._check_dropdown_required(selector);
+    });
+
+    it(`dropdown ${name} should display data`, () => {
+      let datos = getActividadesContratoProveedorMOCK200ok.data.items
+        .sort((a, b) =>
+          a.descripcion > b.descripcion
+            ? 1
+            : b.descripcion > a.descripcion
+            ? -1
+            : 0
+        )
+        .map(value => `${value.descripcion}`);
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      cy._select_dropdown(
+        '#select-agencia',
+        '330000659 - COBRA CHILE SERVICIOS S.A.'
+      );
+      cy.get(selector).click();
+      cy.get('li.p-ripple').each(($el, index, $list) => {
+        expect($el.text()).eq(datos[index]);
+      });
+    });
+
+    afterEach(() => {
+      cy.get('input[name="input-nombre-cubicacion"]').click();
     });
   });
 });

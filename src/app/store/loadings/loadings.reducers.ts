@@ -14,6 +14,7 @@ export interface StateLoadings {
   sendingPermisosPerfilUser: boolean;
   sendingGetAgenciasContrato: boolean;
   sendingGetProveedorAgenciasContrato: boolean;
+  sendingGetActividadesContratoProveedor: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -23,6 +24,7 @@ export const initialStateLoading: StateLoadings = {
   sendingPermisosPerfilUser: false,
   sendingGetAgenciasContrato: false,
   sendingGetProveedorAgenciasContrato: false,
+  sendingGetActividadesContratoProveedor: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -89,6 +91,18 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetProveedorAgenciasContrato: false,
+    })
+  ),
+  on(contratosActions.getActividadesContratoProveedor, state => ({
+    ...state,
+    sendingGetActividadesContratoProveedor: true,
+  })),
+  on(
+    contratosActions.getActividadesContratoProveedorSuccess,
+    contratosActions.getActividadesContratoProveedorError,
+    state => ({
+      ...state,
+      sendingGetActividadesContratoProveedor: false,
     })
   )
 );

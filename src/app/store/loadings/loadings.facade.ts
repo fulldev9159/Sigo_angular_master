@@ -44,4 +44,11 @@ export class LoadingsFacade {
       loadingSelector.sendingGetProveedorAgenciasContrato
     );
   }
+
+  // GET ACTIVIDADES DE UN CONTRATO/PROVEEDOR
+  public sendingGetActividadesContratoProveedor$(): Observable<boolean> {
+    return this.store.select(
+      loadingSelector.sendingGetActividadesContratoProveedor
+    );
+  }
 }
