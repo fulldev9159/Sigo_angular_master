@@ -175,7 +175,7 @@ describe('Testing Formulario Components', () => {
       cy._select_dropdown('#select-contrato_marco', 'BUCLE');
       cy._select_dropdown('#select-agencia', 'APOQUINDO');
       cy._select_dropdown(
-        '#select-agencia',
+        '#select-proveedor',
         '330000659 - COBRA CHILE SERVICIOS S.A.'
       );
       cy.get(selector).click();
