@@ -1,6 +1,7 @@
 .navbar-container{
     position: -webkit-sticky; /* Safari */
     position: sticky;
+    z-index: 999;
     top: 0;
     // background-color: #5b94ba;
     padding: 0.2rem 1rem;
