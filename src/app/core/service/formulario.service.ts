@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ValidatorFn } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +9,10 @@ export class FormularioService {
 
   noWhitespace(): any {
     return (control: FormControl) => {
+      console.log(control);
       const isWhitespace = (control.value || '').trim().length === 0;
       const isValid = !isWhitespace;
+      console.log(isValid ? null : { whitespace: true });
       return isValid ? null : { whitespace: true };
     };
   }
@@ -26,5 +28,23 @@ export class FormularioService {
 
   resetControls(form: FormGroup, controlNames: string[]): void {
     controlNames.forEach(control => form.get(control).reset());
+  }
+
+  addValidators(
+    form: FormGroup,
+    controlNames: string[],
+    Validators: ValidatorFn[]
+  ): void {
+    controlNames.forEach(control => {
+      form.get(control).setValidators(Validators);
+      form.updateValueAndValidity();
+    });
+  }
+
+  removeValidators(form: FormGroup, controlNames: string[]): void {
+    controlNames.forEach(control => {
+      form.get(control).clearValidators();
+      form.get(control).updateValueAndValidity();
+    });
   }
 }

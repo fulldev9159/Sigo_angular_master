@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ContratosUser } from '@model';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ProveedorFacade } from '@storeOT/proveedor/proveedor.facades';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
-import { map, Observable, Subscription, take } from 'rxjs';
+import { map, Observable, Subscription, take, tap } from 'rxjs';
 import { FormularioService } from 'src/app/core/service/formulario.service';
 
 interface Dropdown {
@@ -20,9 +21,12 @@ interface Dropdown {
 export class FormularioComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
+  contratosUsuario: ContratosUser[];
+  contrato_selected: ContratosUser;
   contratoUsuarios$: Observable<Dropdown[]> = this.usuarioFacade
     .getContratosUsuario$()
     .pipe(
+      tap(values => (this.contratosUsuario = values)),
       map(values => {
         let tmp = [...values];
         return tmp.length > 0
@@ -160,22 +164,58 @@ export class FormularioComponent implements OnDestroy, OnInit {
     // CONTRATO MARCO
     this.subscription.add(
       this.formCub.get('contrato').valueChanges.subscribe(contrato_id => {
+        // RESET
         this.formularioService.resetControls(this.formCub, [
           'agencia_id',
           'cmarcoproveedor_id',
         ]);
 
+        // CALL
         if (contrato_id && contrato_id !== null) {
           this.contratoFacade.getAgenciasContrato(+contrato_id);
+        }
+
+        // CONTRATOS BUCLE
+        this.contrato_selected = this.contratosUsuario.find(
+          contrato => contrato.contrato_id === contrato_id
+        );
+        if (
+          this.contrato_selected &&
+          this.contrato_selected.model_contrato_id.tipo_contrato_id === 4
+        ) {
+          this.formularioService.addValidators(
+            this.formCub,
+            [
+              'direcciondesde',
+              'direcciondesdealtura',
+              'direccionhasta',
+              'direccionhastaaltura',
+            ],
+            [
+              Validators.required,
+              this.formularioService.noWhitespace,
+              Validators.maxLength(100),
+            ]
+          );
+        } else {
+          this.formularioService.removeValidators(this.formCub, [
+            'direcciondesde',
+            'direcciondesdealtura',
+            'direccionhasta',
+            'direccionhastaaltura',
+          ]);
         }
       })
     );
     // AGENCIA
     this.subscription.add(
       this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
+        // RESET
         this.formularioService.resetControls(this.formCub, [
           'cmarcoproveedor_id',
         ]);
+
+        // CALL
         if (agencia_id && agencia_id !== null) {
           let contrato_id = +this.formCub.get('contrato').value;
           this.proveedorFacade.getProveedoresAgenciaContrato(

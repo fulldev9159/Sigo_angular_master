@@ -120,6 +120,34 @@ describe('Testing Formulario Components', () => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
   });
+
+  describe('Direccion', () => {
+    it(`should display dirección inputs for bucle contract`, () => {
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._check_input('input[name="input-direccion-desde"]', 'required');
+      cy._check_input('input[name="input-altura-desde"]', 'required');
+      cy._check_input('input[name="input-direccion-hasta"]', 'required');
+      cy._check_input('input[name="input-altura-hasta"]', 'required');
+    });
+
+    it('should not display dirección inputs for contracts doent bucle', () => {
+      cy._select_dropdown('#select-contrato_marco', 'CONTRATO_ORDINARIO');
+      cy.get('input[name="input-direccion-desde"]').should('not.exist');
+      cy.get('input[name="input-altura-desde"]').should('not.exist');
+      cy.get('input[name="input-direccion-hasta"]').should('not.exist');
+      cy.get('input[name="input-altura-hasta"]').should('not.exist');
+      cy._select_dropdown('#select-contrato_marco', 'UNIFICADO_MOVIL');
+      cy.get('input[name="input-direccion-desde"]').should('not.exist');
+      cy.get('input[name="input-altura-desde"]').should('not.exist');
+      cy.get('input[name="input-direccion-hasta"]').should('not.exist');
+      cy.get('input[name="input-altura-hasta"]').should('not.exist');
+      cy._select_dropdown('#select-contrato_marco', 'UNIFICADO_MOVIL');
+      cy.get('input[name="input-direccion-desde"]').should('not.exist');
+      cy.get('input[name="input-altura-desde"]').should('not.exist');
+      cy.get('input[name="input-direccion-hasta"]').should('not.exist');
+      cy.get('input[name="input-altura-hasta"]').should('not.exist');
+    });
+  });
 });
 
 describe('Excepcion crear cubicación sin contratos asignado', () => {

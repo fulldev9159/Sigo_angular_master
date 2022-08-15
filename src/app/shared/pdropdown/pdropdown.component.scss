@@ -5,6 +5,8 @@
 
 label{
     margin-bottom: calc(var(--margin-label) + 0.2rem);
+    color: #00507a;
+    font-weight: 500;
 }
 
 :host ::ng-deep {

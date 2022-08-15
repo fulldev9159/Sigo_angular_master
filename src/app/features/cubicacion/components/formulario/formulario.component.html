@@ -48,7 +48,27 @@
         </div>
         <div class="col-12  md:col-6 lg:col-6 xl:col-6">
             <div class="card">
-                
+                <div id="bucle-direccion" *ngIf="contrato_selected && contrato_selected.model_contrato_id.tipo_contrato_id===4">
+                    <div class="formgrid grid">
+                        <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                            <zwc-input-text Label="*Dirección desde:" [control]="formCubControl.direcciondesde" name_input="input-direccion-desde"></zwc-input-text>
+                        </div>
+                        <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                            <zwc-input-text Label="*Altura:" [control]="formCubControl.direcciondesdealtura" name_input="input-altura-desde"></zwc-input-text>
+                        </div>
+                        <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                            <zwc-input-text Label="*Dirección hasta:" [control]="formCubControl.direccionhasta" name_input="input-direccion-hasta"></zwc-input-text>
+                        </div>
+                        <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                            <zwc-input-text Label="*Altura:" [control]="formCubControl.direccionhastaaltura" name_input="input-altura-hasta"></zwc-input-text>
+                        </div>
+                    </div>
+                </div>
+                <div class="detalles">
+                    <label>Detalles:</label>
+                    <textarea [formControl]="formCubControl.descripcion" class="form-control" id="input-descripcion" placeholder="Agregue algún detalle de la cubicación" cols="30" rows="4"></textarea>
+                </div>
+               
             </div>
         </div>
     </div>
