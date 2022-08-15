@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     DropdownModule,
     ProgressSpinnerModule,
     BreadcrumbModule,
+    DividerModule,
   ],
   exports: [
     InputTextModule,
@@ -25,6 +27,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     DropdownModule,
     ProgressSpinnerModule,
     BreadcrumbModule,
+    DividerModule,
   ],
 })
 export class PrimeNgModule {}
