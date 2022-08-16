@@ -192,6 +192,23 @@ export const getDatosServicio4CubError = createAction(
   props<{ error: any }>()
 );
 
+// GET CARRITO ESPECIAL
+export const getDatosServicio4Especial = createAction(
+  '[Cubicacion] getDatosServicio4Especial ',
+  props<{
+    request_servicio: RequestGetDatosServicio4Cub;
+    request_uo: RequestGetDatosUnidadObra4Cub;
+  }>()
+);
+export const getDatosServicio4EspecialSuccess = createAction(
+  '[Cubicacion] getDatosServicio4EspecialSuccess Success',
+  props<{ item_carrito: Carrito }>()
+);
+export const getDatosServicio4EspecialError = createAction(
+  '[Cubicacion] getDatosServicio4EspecialError Error',
+  props<{ error: any }>()
+);
+
 // GET DATOS UNIDAD OBRA 4 CUB
 export const getDatosUnidadObra4Cub = createAction(
   '[Cubicacion] getDatosUnidadObra4Cub ',

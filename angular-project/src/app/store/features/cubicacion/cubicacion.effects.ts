@@ -175,6 +175,23 @@ export class CubicacionEffects {
     )
   );
 
+  getDatosServicio4Especial$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubActions.getDatosServicio4Especial),
+      concatMap(({ request_servicio: request_servicios, request_uo }) =>
+        this.cubService
+          .getDatosServicio4Cub(request_servicios, request_uo)
+          .pipe(
+            map(item_carrito =>
+              cubActions.getDatosServicio4EspecialSuccess({ item_carrito })
+            ),
+            catchError(err =>
+              of(cubActions.getDatosServicio4EspecialError({ error: err }))
+            )
+          )
+      )
+    )
+  );
   getDatosUnidadObra4Cub$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubActions.getDatosUnidadObra4Cub),

@@ -184,6 +184,73 @@ export const reducerCubicacion = createReducer(
       }
     }
   ),
+
+  on(
+    CubicacionActions.getDatosServicio4EspecialSuccess,
+    (state, { item_carrito }) => {
+      // const index = state.carrito.findIndex(
+      //   x => x.servicio_id === item_carrito.servicio_id
+      // );
+      // let uo_sin_material = false;
+      // if (item_carrito.unidades_obras[0].material_arr.length === 0) {
+      //   uo_sin_material = true;
+      // }
+
+      // if (uo_sin_material) {
+      //   return {
+      //     ...state,
+      //     uo_sin_materiales_alert: uo_sin_material,
+      //   };
+      // }
+
+      // if (index >= 0) {
+      //   const temp = copy(item_carrito);
+
+      //   temp.precargado = state.carrito[index].precargado;
+      //   temp.unidades_obras.push(...state.carrito[index].unidades_obras);
+      //   const uo_repetido = state.carrito[index].unidades_obras.find(
+      //     uo => uo.uo_codigo === item_carrito.unidades_obras[0].uo_codigo
+      //   );
+
+      //   if (uo_repetido) {
+      //     return {
+      //       ...state,
+      //       servciouo_repetido_alert: true,
+      //       uo_sin_materiales_alert: uo_sin_material,
+      //     };
+      //   } else {
+      //     if (state.carrito.length === 1) {
+      //       return {
+      //         ...state,
+      //         carrito: [temp],
+      //         servciouo_repetido_alert: false,
+      //         uo_sin_materiales_alert: uo_sin_material,
+      //       };
+      //     } else {
+      //       // console.log(state.carrito);
+      //       // const old_temp = copy(state.carrito);
+      //       const old_servicios = state.carrito.filter(
+      //         oldcarrito => oldcarrito.servicio_id !== item_carrito.servicio_id
+      //       );
+      //       // console.log('NEW', old_servicios);
+      //       return {
+      //         ...state,
+      //         carrito: [...old_servicios, temp],
+      //         servciouo_repetido_alert: false,
+      //         uo_sin_materiales_alert: uo_sin_material,
+      //       };
+      //     }
+      //   }
+      // } else {
+      return {
+        ...state,
+        carrito: [...state.carrito, item_carrito],
+        servciouo_repetido_alert: false,
+        uo_sin_materiales_alert: false,
+      };
+      // }
+    }
+  ),
   on(
     CubicacionActions.delteServiceCarrito4CreateCub,
     (state, { servicio_id }) => {

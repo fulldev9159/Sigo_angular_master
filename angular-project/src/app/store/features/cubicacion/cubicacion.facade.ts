@@ -157,6 +157,24 @@ export class CubicacionFacade {
     );
   }
 
+  public datosServicio4Especial(
+    request_servicio: RequestGetDatosServicio4Cub,
+    request_uo: RequestGetDatosUnidadObra4Cub
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.getDatosServicio4Especial({
+        request_servicio,
+        request_uo,
+      })
+    );
+  }
+
+  public getDatosServicio4EspecialSuccess(item_carrito: Carrito): void {
+    this.store.dispatch(
+      cubicacionActions.getDatosServicio4EspecialSuccess({ item_carrito })
+    );
+  }
+
   public datosUnidadObra4Cub(request: RequestGetDatosUnidadObra4Cub): void {
     this.store.dispatch(cubicacionActions.getDatosUnidadObra4Cub({ request }));
   }
