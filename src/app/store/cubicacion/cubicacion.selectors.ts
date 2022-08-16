@@ -14,3 +14,13 @@ export const contratoSelected = createSelector(
   selectCubicacion,
   (state: reducer.StateCubicacion) => state.contratoUserSelected
 );
+
+export const proveedorSelected = createSelector(
+  selectCubicacion,
+  (state: reducer.StateCubicacion) => state.proveedorSelected
+);
+
+export const agenciaSelected = createSelector(
+  selectCubicacion,
+  (state: reducer.StateCubicacion) => state.agenciaSelected
+);

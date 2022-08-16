@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ContratosUser } from '@model';
+import {
+  AgenciaContrato,
+  ContratosUser,
+  ProveedorAgenciaContrato,
+} from '@model';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
@@ -75,10 +79,11 @@ export class FormularioComponent implements OnDestroy, OnInit {
       ),
       take(1)
     );
-
+  agenciasContrato: AgenciaContrato[];
   agenciasContrato$: Observable<Dropdown[]> = this.contratoFacade
     .getAgenciasContrato$()
     .pipe(
+      tap(values => (this.agenciasContrato = values)),
       map(values => {
         let tmp = [...values];
         return tmp.length > 0
@@ -96,10 +101,11 @@ export class FormularioComponent implements OnDestroy, OnInit {
           : []
       )
     );
-
+  proveedoresAgenciaContrato: ProveedorAgenciaContrato[];
   proveedoresAgenciaContrato$: Observable<Dropdown[]> = this.proveedorFacade
     .getProveedoresAgenciaContrato$()
     .pipe(
+      tap(proveedores => (this.proveedoresAgenciaContrato = proveedores)),
       map(values => {
         let tmp = [...values];
         return tmp.length > 0
@@ -220,6 +226,10 @@ export class FormularioComponent implements OnDestroy, OnInit {
 
         // CALL
         if (agencia_id && agencia_id !== null) {
+          let agenciaSelected = this.agenciasContrato.find(
+            agencia => agencia.id === agencia_id
+          );
+          this.cubicacionFacade.agenciaSelected(agenciaSelected);
           let contrato_id = +this.formCub.get('contrato').value;
           this.proveedorFacade.getProveedoresAgenciaContrato(
             +agencia_id,
@@ -234,6 +244,12 @@ export class FormularioComponent implements OnDestroy, OnInit {
         .get('cmarcoproveedor_id')
         .valueChanges.subscribe(cmarcoproveedor_id => {
           if (cmarcoproveedor_id && cmarcoproveedor_id != null) {
+            let proveedorSelected: ProveedorAgenciaContrato =
+              this.proveedoresAgenciaContrato.find(
+                proveedor =>
+                  proveedor.cmarco_has_proveedor_id === cmarcoproveedor_id
+              );
+            this.cubicacionFacade.proveedorSelected(proveedorSelected);
             this.contratoFacade.getActividadesContratoProveedor(
               +cmarcoproveedor_id
             );

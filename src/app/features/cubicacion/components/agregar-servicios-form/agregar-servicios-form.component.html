@@ -24,5 +24,23 @@
                 [loading]="loadingGetTipoServiciosContrato$|async"></zwc-pdropdown>
             </div>
         </div>
+
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown 
+                [control]="formFilterControls.servicio_id" 
+                Label="Servicio" 
+                dropdown_id="select-servicio" 
+                [data]="serviciosAgenciaContratoProveedor$|async" 
+                Pplaceholder="Selecione un servicio"
+                [loading]="loadingGetServiciosAgenciaContratoProveedor$|async"
+                [Pfilter]="true" 
+                PfilterBy="name" 
+                [PshowClear]="true" ></zwc-pdropdown>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+               
+            </div>
+        </div>
     </div>
 </form>

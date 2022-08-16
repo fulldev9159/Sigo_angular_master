@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
+  AgenciaContrato,
   ContratosUser,
   PerfilesUsuario,
+  ProveedorAgenciaContrato,
   Response,
   TipoCubicacion,
 } from '@model';
@@ -46,5 +48,25 @@ export class CubicacionFacade {
 
   public contratoSelected$(): Observable<ContratosUser> {
     return this.store.select(cubicacionSelectors.contratoSelected);
+  }
+
+  // PROVEEDOR SELECTED
+  public proveedorSelected(proveedorSelected: ProveedorAgenciaContrato): void {
+    this.store.dispatch(
+      cubicacionActions.proveedorSelected({ proveedorSelected })
+    );
+  }
+
+  public proveedorSelected$(): Observable<ProveedorAgenciaContrato> {
+    return this.store.select(cubicacionSelectors.proveedorSelected);
+  }
+
+  // AGENCIA SELECTED
+  public agenciaSelected(agenciaSelected: AgenciaContrato): void {
+    this.store.dispatch(cubicacionActions.agenciaSelected({ agenciaSelected }));
+  }
+
+  public agenciaSelected$(): Observable<AgenciaContrato> {
+    return this.store.select(cubicacionSelectors.agenciaSelected);
   }
 }

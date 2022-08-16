@@ -4,6 +4,7 @@ import * as perfilActions from '../perfil/perfil.actions';
 import * as loadingsActions from './loadings.actions';
 import * as contratosActions from '../contrato/contrato.actions';
 import * as proveedorActions from '../proveedor/proveedor.actions';
+import * as serviciosActions from '../servicios/servicios.actions';
 
 export const FeatureKey = 'loadings';
 
@@ -16,6 +17,7 @@ export interface StateLoadings {
   sendingGetProveedorAgenciasContrato: boolean;
   sendingGetActividadesContratoProveedor: boolean;
   sendingGetTipoServiciosContrato: boolean;
+  sendingGetServiciosAgenciaContratoProveedor: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -27,6 +29,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetProveedorAgenciasContrato: false,
   sendingGetActividadesContratoProveedor: false,
   sendingGetTipoServiciosContrato: false,
+  sendingGetServiciosAgenciaContratoProveedor: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -117,6 +120,18 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetTipoServiciosContrato: false,
+    })
+  ),
+  on(serviciosActions.getServiciosAgenciaContratoProveedor, state => ({
+    ...state,
+    sendingGetServiciosAgenciaContratoProveedor: true,
+  })),
+  on(
+    serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
+    serviciosActions.getServiciosAgenciaContratoProveedorError,
+    state => ({
+      ...state,
+      sendingGetServiciosAgenciaContratoProveedor: false,
     })
   )
 );

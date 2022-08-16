@@ -1,0 +1,28 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '@environment';
+import {
+  Response,
+  RequestGetServiciosAgenciaContratoProveedor,
+  ServicioAgenciaContratoProveedor,
+} from '@model';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ServiciosHttpService {
+  API_URL = '';
+
+  constructor(private http: HttpClient) {
+    this.API_URL = environment.api || 'localhost:4004';
+  }
+
+  getServiciosAgenciaContratoProveedor(
+    request: RequestGetServiciosAgenciaContratoProveedor
+  ): Observable<Response<{ items: ServicioAgenciaContratoProveedor[] }>> {
+    return this.http.post<
+      Response<{ items: ServicioAgenciaContratoProveedor[] }>
+    >(`${this.API_URL}/cubicacion/combo_servicios/get`, request);
+  }
+}

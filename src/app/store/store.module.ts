@@ -38,6 +38,11 @@ import { ProveedorEffects } from './proveedor/proveedor.effects';
 import * as formProveedorReduce from './proveedor/proveedor.reducers';
 // PROVEEDOR STORE
 
+// SERVICIOS STORE
+import { ServiciosEffects } from './servicios/servicios.effects';
+import * as formServiciosReduce from './servicios/servicios.reducers';
+// SERVICIOS STORE
+
 @NgModule({
   declarations: [],
   imports: [
@@ -88,6 +93,13 @@ import * as formProveedorReduce from './proveedor/proveedor.reducers';
     StoreModule.forFeature(
       formProveedorReduce.Featurekey,
       formProveedorReduce.reducerProveedor
+    ),
+
+    // SERVICIOS STORE
+    EffectsModule.forFeature([ServiciosEffects]),
+    StoreModule.forFeature(
+      formServiciosReduce.Featurekey,
+      formServiciosReduce.reducerServicios
     ),
     SharedModule,
   ],

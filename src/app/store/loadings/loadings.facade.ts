@@ -56,4 +56,11 @@ export class LoadingsFacade {
   public sendingGetTipoServiciosContrato$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetTipoServiciosContrato);
   }
+
+  // GET  SERVICIOS DE UNA AGENCIA/CONTRATO/PROVEEDOR
+  public sendingGetServiciosAgenciaContratoProveedor$(): Observable<boolean> {
+    return this.store.select(
+      loadingSelector.sendingGetServiciosAgenciaContratoProveedor
+    );
+  }
 }

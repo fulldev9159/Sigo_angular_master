@@ -7,6 +7,8 @@ export * from './usuario';
 export * from './contrato';
 export * from './cubicacion';
 export * from './proveedor';
+export * from './servicio';
+// export * from './unidad-obra'
 
 export interface Response<T> {
   data: T;

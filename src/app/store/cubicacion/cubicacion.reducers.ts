@@ -1,5 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { ContratosUser, TipoCubicacion } from '@model';
+import {
+  AgenciaContrato,
+  ContratosUser,
+  ProveedorAgenciaContrato,
+  TipoCubicacion,
+} from '@model';
 import * as cubicacionActions from './cubicacion.actions';
 
 export const Featurekey = 'cubicacion';
@@ -7,11 +12,15 @@ export const Featurekey = 'cubicacion';
 export interface StateCubicacion {
   tipoCubicaciones: TipoCubicacion[];
   contratoUserSelected: ContratosUser;
+  proveedorSelected: ProveedorAgenciaContrato;
+  agenciaSelected: AgenciaContrato;
 }
 
 export const initialState: StateCubicacion = {
   tipoCubicaciones: [],
   contratoUserSelected: null,
+  proveedorSelected: null,
+  agenciaSelected: null,
 };
 
 export const reducerCubicacion = createReducer(
@@ -23,5 +32,13 @@ export const reducerCubicacion = createReducer(
   on(cubicacionActions.contratoSelected, (state, { contratoUserSelected }) => ({
     ...state,
     contratoUserSelected,
+  })),
+  on(cubicacionActions.proveedorSelected, (state, { proveedorSelected }) => ({
+    ...state,
+    proveedorSelected,
+  })),
+  on(cubicacionActions.agenciaSelected, (state, { agenciaSelected }) => ({
+    ...state,
+    agenciaSelected,
   }))
 );

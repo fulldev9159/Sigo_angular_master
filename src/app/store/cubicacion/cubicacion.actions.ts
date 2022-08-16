@@ -1,7 +1,9 @@
 import {
   Accion,
+  AgenciaContrato,
   ContratosUser,
   PerfilesUsuario,
+  ProveedorAgenciaContrato,
   Response,
   TipoCubicacion,
 } from '@model';
@@ -25,4 +27,16 @@ export const getTipoCubicacionError = createAction(
 export const contratoSelected = createAction(
   '[CUBICACION] contratoSelected ',
   props<{ contratoUserSelected: ContratosUser }>()
+);
+
+// SET PROVEEDOR SELECTED
+export const proveedorSelected = createAction(
+  '[CUBICACION] proveedorSelected ',
+  props<{ proveedorSelected: ProveedorAgenciaContrato }>()
+);
+
+// SET AGENCIA SELECTED
+export const agenciaSelected = createAction(
+  '[CUBICACION] agenciaSelected ',
+  props<{ agenciaSelected: AgenciaContrato }>()
 );

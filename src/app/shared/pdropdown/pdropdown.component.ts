@@ -13,5 +13,8 @@ export class PdropdownComponent {
   @Input() data: any;
   @Input() Pplaceholder = '';
   @Input() loading = false;
+  @Input() Pfilter = false;
+  @Input() PfilterBy = '';
+  @Input() PshowClear = false;
   constructor() {}
 }
