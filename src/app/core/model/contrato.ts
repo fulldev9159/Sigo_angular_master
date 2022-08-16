@@ -13,12 +13,20 @@ export interface ModelContratoMarco {
   validacion_operaciones: boolean;
 }
 
+// AGENCIAS DE UN CONTRATO
 export interface AgenciaContrato {
   id: number;
   nombre: string;
 }
 
+// ACTIVIDADES DE UN CONTRATO/PROVEEDOR
 export interface ActividadContratoProveedor {
   actividad_id: number;
   descripcion: string;
+}
+
+// TIPO DE SERVICIO DE UN CONTRATO
+export interface TipoServicioContrato {
+  descripcion: string;
+  id: number;
 }

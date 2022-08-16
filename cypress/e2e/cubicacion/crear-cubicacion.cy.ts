@@ -188,6 +188,48 @@ describe('Testing Formulario Components', () => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
   });
+
+  describe('Tipo Servicio', (name = 'Tipo Servicio') => {
+    let selector = '#select-tipo-servicio';
+    it(`should display dropdown ${name} as required`, () => {
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      cy._select_dropdown(
+        '#select-agencia',
+        '330000659 - COBRA CHILE SERVICIOS S.A.'
+      );
+
+      cy._select_dropdown('#select-actividad', 'DISEÑO');
+      cy._check_dropdown_required(selector);
+    });
+
+    it(`dropdown ${name} should display data`, () => {
+      let datos = getActividadesContratoProveedorMOCK200ok.data.items
+        .sort((a, b) =>
+          a.descripcion > b.descripcion
+            ? 1
+            : b.descripcion > a.descripcion
+            ? -1
+            : 0
+        )
+        .map(value => `${value.descripcion}`);
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      cy._select_dropdown(
+        '#select-proveedor',
+        '330000659 - COBRA CHILE SERVICIOS S.A.'
+      );
+      cy._select_dropdown('#select-actividad', 'DISEÑO');
+      cy.get(selector).click();
+      cy.get('li.p-ripple').each(($el, index, $list) => {
+        expect($el.text()).eq(datos[index]);
+      });
+    });
+
+    afterEach(() => {
+      cy.get('input[name="input-nombre-cubicacion"]').click();
+    });
+  });
 });
 
 describe('Excepcion crear cubicación sin contratos asignado', () => {

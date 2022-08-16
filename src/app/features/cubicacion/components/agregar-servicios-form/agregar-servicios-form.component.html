@@ -12,10 +12,16 @@
                 dropdown_id="select-actividad" 
                 [data]="actividadesContratoProveedor$|async" 
                 Pplaceholder="Selecione una actividad"
-                [loading]="getActividadesContratoProveedor$|async"></zwc-pdropdown>
+                [loading]="loadingGetActividadesContratoProveedor$|async"></zwc-pdropdown>
             </div>
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-
+                <zwc-pdropdown 
+                [control]="formFilterControls.tipo_servicio_id" 
+                Label="Tipo Servicio" 
+                dropdown_id="select-tipo-servicio" 
+                [data]="tipoServicioContrato$|async" 
+                Pplaceholder="Selecione un tipo servicio"
+                [loading]="loadingGetTipoServiciosContrato$|async"></zwc-pdropdown>
             </div>
         </div>
     </div>

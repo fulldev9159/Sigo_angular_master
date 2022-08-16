@@ -1,4 +1,9 @@
-import { ActividadContratoProveedor, AgenciaContrato, Response } from '@model';
+import {
+  ActividadContratoProveedor,
+  AgenciaContrato,
+  Response,
+  TipoServicioContrato,
+} from '@model';
 
 export let getAgenciasContratoMOCK200OK: Response<{
   items: AgenciaContrato[];
@@ -27,4 +32,11 @@ export let getActividadesContratoProveedorMOCK200ok: Response<{
       { actividad_id: 9, descripcion: 'MATRIZ' },
     ],
   },
+};
+
+export let getTipoServiciosContratoMOCK200ok: Response<{
+  items: TipoServicioContrato[];
+}> = {
+  status: { code: 0, desc: 'OK' },
+  data: { items: [{ id: 6, descripcion: 'PROYECTOS' }] },
 };

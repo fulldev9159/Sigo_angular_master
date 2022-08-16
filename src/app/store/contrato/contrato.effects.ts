@@ -51,12 +51,33 @@ export class ContratoEffects {
     )
   );
 
+  getTipoServiciosContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(contratoActions.getTipoServiciosContrato),
+      concatMap(({ actividad_id, contrato_marco_id }) =>
+        this.contratoHttpService
+          .getTipoServiciosContrato(actividad_id, contrato_marco_id)
+          .pipe(
+            map(response =>
+              contratoActions.getTipoServiciosContratoSuccess({
+                response,
+              })
+            ),
+            catchError(error =>
+              of(contratoActions.getTipoServiciosContratoError({ error }))
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           contratoActions.getAgenciasContratoSuccess,
-          contratoActions.getActividadesContratoProveedorSuccess
+          contratoActions.getActividadesContratoProveedorSuccess,
+          contratoActions.getTipoServiciosContratoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -68,7 +89,8 @@ export class ContratoEffects {
       this.actions$.pipe(
         ofType(
           contratoActions.getAgenciasContratoError,
-          contratoActions.getActividadesContratoProveedorError
+          contratoActions.getActividadesContratoProveedorError,
+          contratoActions.getTipoServiciosContratoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

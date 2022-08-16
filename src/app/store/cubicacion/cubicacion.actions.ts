@@ -1,4 +1,10 @@
-import { Accion, PerfilesUsuario, Response, TipoCubicacion } from '@model';
+import {
+  Accion,
+  ContratosUser,
+  PerfilesUsuario,
+  Response,
+  TipoCubicacion,
+} from '@model';
 import { createAction, props } from '@ngrx/store';
 
 // GET TIPO DE CUBICACION
@@ -13,4 +19,10 @@ export const getTipoCubicacionSuccess = createAction(
 export const getTipoCubicacionError = createAction(
   '[CUBICACION] getTipoCubicacion Error',
   props<{ error: any }>()
+);
+
+// SET CONTRATO SELECTED
+export const contratoSelected = createAction(
+  '[CUBICACION] contratoSelected ',
+  props<{ contratoUserSelected: ContratosUser }>()
 );

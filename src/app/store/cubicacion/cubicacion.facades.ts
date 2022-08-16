@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { PerfilesUsuario, Response, TipoCubicacion } from '@model';
+import {
+  ContratosUser,
+  PerfilesUsuario,
+  Response,
+  TipoCubicacion,
+} from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as cubicacionSelectors from './cubicacion.selectors';
@@ -30,5 +35,16 @@ export class CubicacionFacade {
 
   public getTipoCubicacion$(): Observable<TipoCubicacion[]> {
     return this.store.select(cubicacionSelectors.getTipoCubicacion);
+  }
+
+  // CONTRATO SELECTED
+  public contratoSelected(contratoUserSelected: ContratosUser): void {
+    this.store.dispatch(
+      cubicacionActions.contratoSelected({ contratoUserSelected })
+    );
+  }
+
+  public contratoSelected$(): Observable<ContratosUser> {
+    return this.store.select(cubicacionSelectors.contratoSelected);
   }
 }

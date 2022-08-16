@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ContratosUser } from '@model';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
-import { map, Observable, Subscription } from 'rxjs';
+import { combineLatest, map, Observable, Subscription } from 'rxjs';
 
 interface Dropdown {
   name: string;
@@ -13,7 +15,7 @@ interface Dropdown {
   templateUrl: './agregar-servicios-form.component.html',
   styleUrls: ['./agregar-servicios-form.component.scss'],
 })
-export class AgregarServiciosFormComponent {
+export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade
@@ -23,9 +25,9 @@ export class AgregarServiciosFormComponent {
         let tmp = [...values];
         return tmp.length > 0
           ? tmp.sort((a, b) =>
-              a.actividad_id > b.actividad_id
+              a.descripcion > b.descripcion
                 ? 1
-                : b.actividad_id > a.actividad_id
+                : b.descripcion > a.descripcion
                 ? -1
                 : 0
             )
@@ -41,6 +43,34 @@ export class AgregarServiciosFormComponent {
       )
     );
 
+  contratoSelected$: Observable<ContratosUser> =
+    this.cubicacionFacade.contratoSelected$();
+
+  tipoServicioContrato$: Observable<Dropdown[]> = this.contratoFacade
+    .getTipoServiciosContrato$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.length > 0
+          ? tmp.sort((a, b) =>
+              a.descripcion > b.descripcion
+                ? 1
+                : b.descripcion > a.descripcion
+                ? -1
+                : 0
+            )
+          : [];
+      }),
+      map(values =>
+        values.length > 0
+          ? values.map(value => ({
+              name: value.descripcion,
+              code: value.id,
+            }))
+          : []
+      )
+    );
+
   // FORMULARIO
   formFilterControls: any = {
     actividad_id: new FormControl(null, [Validators.required]),
@@ -51,11 +81,39 @@ export class AgregarServiciosFormComponent {
   formFilter: FormGroup = new FormGroup(this.formFilterControls);
 
   // LOADINGS
-  getActividadesContratoProveedor$ =
+  loadingGetActividadesContratoProveedor$ =
     this.loadingsFacade.sendingGetActividadesContratoProveedor$();
+  loadingGetTipoServiciosContrato$ =
+    this.loadingsFacade.sendingGetTipoServiciosContrato$();
 
   constructor(
     private contratoFacade: ContratoFacade,
+    private cubicacionFacade: CubicacionFacade,
     private loadingsFacade: LoadingsFacade
   ) {}
+
+  ngOnInit(): void {
+    this.subscription.add(
+      combineLatest([
+        this.contratoSelected$,
+        this.formFilter.get('actividad_id').valueChanges,
+      ]).subscribe(([contratoSelected, actividad_id]) => {
+        if (
+          actividad_id &&
+          actividad_id !== null &&
+          contratoSelected &&
+          contratoSelected !== null
+        ) {
+          this.contratoFacade.getTipoServiciosContrato(
+            actividad_id,
+            contratoSelected.contrato_id
+          );
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

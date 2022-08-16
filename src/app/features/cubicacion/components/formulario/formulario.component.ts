@@ -175,10 +175,13 @@ export class FormularioComponent implements OnDestroy, OnInit {
           this.contratoFacade.getAgenciasContrato(+contrato_id);
         }
 
-        // CONTRATOS BUCLE
+        // STORE CONTRATO SELECTED
         this.contrato_selected = this.contratosUsuario.find(
           contrato => contrato.contrato_id === contrato_id
         );
+        this.cubicacionFacade.contratoSelected(this.contrato_selected);
+
+        // CONTRATOS BUCLE
         if (
           this.contrato_selected &&
           this.contrato_selected.model_contrato_id.tipo_contrato_id === 4

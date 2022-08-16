@@ -9,3 +9,8 @@ export const getTipoCubicacion = createSelector(
   selectCubicacion,
   (state: reducer.StateCubicacion) => state.tipoCubicaciones
 );
+
+export const contratoSelected = createSelector(
+  selectCubicacion,
+  (state: reducer.StateCubicacion) => state.contratoUserSelected
+);

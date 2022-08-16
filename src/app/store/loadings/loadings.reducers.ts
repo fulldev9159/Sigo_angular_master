@@ -15,6 +15,7 @@ export interface StateLoadings {
   sendingGetAgenciasContrato: boolean;
   sendingGetProveedorAgenciasContrato: boolean;
   sendingGetActividadesContratoProveedor: boolean;
+  sendingGetTipoServiciosContrato: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -25,6 +26,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetAgenciasContrato: false,
   sendingGetProveedorAgenciasContrato: false,
   sendingGetActividadesContratoProveedor: false,
+  sendingGetTipoServiciosContrato: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -103,6 +105,18 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetActividadesContratoProveedor: false,
+    })
+  ),
+  on(contratosActions.getTipoServiciosContrato, state => ({
+    ...state,
+    sendingGetTipoServiciosContrato: true,
+  })),
+  on(
+    contratosActions.getTipoServiciosContratoSuccess,
+    contratosActions.getTipoServiciosContratoError,
+    state => ({
+      ...state,
+      sendingGetTipoServiciosContrato: false,
     })
   )
 );

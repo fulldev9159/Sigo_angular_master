@@ -1,4 +1,9 @@
-import { ActividadContratoProveedor, AgenciaContrato, Response } from '@model';
+import {
+  ActividadContratoProveedor,
+  AgenciaContrato,
+  Response,
+  TipoServicioContrato,
+} from '@model';
 import { createAction, props } from '@ngrx/store';
 
 // GET AGENCIAS DE UN CONTRATO
@@ -30,5 +35,21 @@ export const getActividadesContratoProveedorSuccess = createAction(
 
 export const getActividadesContratoProveedorError = createAction(
   '[CONTRATO] POST getActividadesContratoProveedor Error',
+  props<{ error: any }>()
+);
+
+// GET TIPOS DE SERVICIO DE UN CONTRATO
+export const getTipoServiciosContrato = createAction(
+  '[CONTRATO] POST getTipoServiciosContrato',
+  props<{ actividad_id: number; contrato_marco_id: number }>()
+);
+
+export const getTipoServiciosContratoSuccess = createAction(
+  '[CONTRATO] POST getTipoServiciosContrato Success',
+  props<{ response: Response<{ items: TipoServicioContrato[] }> }>()
+);
+
+export const getTipoServiciosContratoError = createAction(
+  '[CONTRATO] POST getTipoServiciosContrato Error',
   props<{ error: any }>()
 );

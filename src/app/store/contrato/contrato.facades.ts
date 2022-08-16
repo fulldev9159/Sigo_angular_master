@@ -4,6 +4,7 @@ import {
   AgenciaContrato,
   PerfilesUsuario,
   Response,
+  TipoServicioContrato,
 } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -36,5 +37,22 @@ export class ContratoFacade {
     ActividadContratoProveedor[]
   > {
     return this.store.select(contratoSelectors.getActividadesContratoProveedor);
+  }
+
+  // GET TIPOS SERVICIOS DE UN CONTRATO
+  public getTipoServiciosContrato(
+    actividad_id: number,
+    contrato_marco_id: number
+  ): void {
+    this.store.dispatch(
+      contratoActions.getTipoServiciosContrato({
+        actividad_id,
+        contrato_marco_id,
+      })
+    );
+  }
+
+  public getTipoServiciosContrato$(): Observable<TipoServicioContrato[]> {
+    return this.store.select(contratoSelectors.getTipoServiciosContrato);
   }
 }
