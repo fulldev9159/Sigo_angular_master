@@ -12,10 +12,11 @@ import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { combineLatest, map, Observable, Subscription } from 'rxjs';
+import { RequestGetUnidadObraServicio } from 'src/app/core/model/unidad-obra';
 
 interface Dropdown {
   name: string;
-  code: number;
+  code: number | string;
 }
 @Component({
   selector: 'zwc-agregar-servicios-form',
@@ -101,6 +102,30 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
         values.length > 0
           ? values.map(value => ({
               name: `${value.numero_producto} - ${value.descripcion}`,
+              code: value.codigo,
+            }))
+          : []
+      )
+    );
+  unidadesObraServicio$: Observable<Dropdown[]> = this.serviciosFacade
+    .getUnidadesObraServicio$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.length > 0
+          ? tmp.sort((a, b) =>
+              a.unidad_obra_cod > b.unidad_obra_cod
+                ? 1
+                : b.unidad_obra_cod > a.unidad_obra_cod
+                ? -1
+                : 0
+            )
+          : [];
+      }),
+      map(values =>
+        values.length > 0
+          ? values.map(value => ({
+              name: `${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}`,
               code: value.id,
             }))
           : []
@@ -111,7 +136,7 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
   formFilterControls: any = {
     actividad_id: new FormControl(null, [Validators.required]),
     tipo_servicio_id: new FormControl(null, [Validators.required]),
-    servicio_id: new FormControl('', [Validators.required]),
+    servicio_cod: new FormControl('', [Validators.required]),
     unidad_obra_cod: new FormControl(null, [Validators.required]),
   };
   formFilter: FormGroup = new FormGroup(this.formFilterControls);
@@ -123,6 +148,8 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
     this.loadingsFacade.sendingGetTipoServiciosContrato$();
   loadingGetServiciosAgenciaContratoProveedor$ =
     this.loadingsFacade.sendingGetServiciosAgenciaContratoProveedor$();
+  loadingGetUnidadesObraServicio$ =
+    this.loadingsFacade.sendingGetUnidadesObraServicios$();
 
   constructor(
     private contratoFacade: ContratoFacade,
@@ -174,6 +201,20 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
           this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
         }
       })
+    );
+
+    this.subscription.add(
+      this.formFilter
+        .get('servicio_cod')
+        .valueChanges.subscribe(servicio_cod => {
+          if (servicio_cod && servicio_cod !== null) {
+            let request: RequestGetUnidadObraServicio = {
+              servicio_cod,
+              actividad_id: +this.formFilter.get('actividad_id').value,
+            };
+            this.serviciosFacade.getUnidadesObraServicio(request);
+          }
+        })
     );
   }
 

@@ -1,3 +1,19 @@
+export interface ModelServicio {
+  id: number;
+  tipo_servicio_id: number;
+  unidad_id: number;
+  descripcion: string;
+  codigo: string;
+  estado: boolean;
+  es_pack_basico: boolean;
+  cantidad_default: number;
+  codigo_alcance: string;
+  puntos_baremos: number;
+  fecha_inicio: string;
+  fecha_fin: string;
+  requiere_evidencia: boolean;
+}
+
 //  GET SERVICIOS DE UNA AGENCIA/CONTRATO
 export interface RequestGetServiciosAgenciaContratoProveedor {
   agencia_id: number;

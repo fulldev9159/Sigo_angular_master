@@ -38,10 +38,35 @@ export class ServiciosEffects {
     )
   );
 
+  getUnidadesObraServicio$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.getUnidadesObraServicio),
+      concatMap(({ request }) =>
+        this.serviciosHttpService.getUnidadesObraServicio(request).pipe(
+          map(response =>
+            serviciosActions.getUnidadesObraServicioSuccess({
+              response,
+            })
+          ),
+          catchError(error =>
+            of(
+              serviciosActions.getUnidadesObraServicioError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(serviciosActions.getServiciosAgenciaContratoProveedorSuccess),
+        ofType(
+          serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
+          serviciosActions.getUnidadesObraServicioSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -50,7 +75,10 @@ export class ServiciosEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(serviciosActions.getServiciosAgenciaContratoProveedorError),
+        ofType(
+          serviciosActions.getServiciosAgenciaContratoProveedorError,
+          serviciosActions.getUnidadesObraServicioError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

@@ -63,4 +63,9 @@ export class LoadingsFacade {
       loadingSelector.sendingGetServiciosAgenciaContratoProveedor
     );
   }
+
+  // GET UNIDADES OBRA DE UN SERVICIO DE UNA AGENCIA/CONTRATO/PROVEEDOR
+  public sendingGetUnidadesObraServicios$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetUnidadesObraServicios);
+  }
 }

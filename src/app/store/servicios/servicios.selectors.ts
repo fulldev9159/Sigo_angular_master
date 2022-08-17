@@ -9,3 +9,8 @@ export const getServiciosAgenciaContratoProveedor = createSelector(
   selectServicios,
   (state: reducer.StateServicios) => state.serviciosAgenciaContratoProveedor
 );
+
+export const getUnidadesObraServicio = createSelector(
+  selectServicios,
+  (state: reducer.StateServicios) => state.unidadesObraServicio
+);

@@ -7,3 +7,4 @@ export * from './usuario-http.service';
 export * from './cubicacion-http.service';
 export * from './contrato-http.service';
 export * from './proveedor-http.service';
+export * from './servicios-http.service';
