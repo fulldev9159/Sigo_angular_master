@@ -1,11 +1,12 @@
-<p-divider align="left">
+<!-- <p-divider align="left">
     <span class="p-tag">Agregar Servicios</span>
-</p-divider>
+</p-divider> -->
 
 <form >
     <div class="card">
         <div class="formgrid grid">
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            <div class="field col-12">
+                <!-- <div class="field col-12 md:col-6 lg:col-6 xl:col-6"> -->
                 <zwc-pdropdown 
                 [control]="formFilterControls.actividad_id" 
                 Label="Actividad" 
@@ -14,7 +15,7 @@
                 Pplaceholder="Selecione una actividad"
                 [loading]="loadingGetActividadesContratoProveedor$|async"></zwc-pdropdown>
             </div>
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            <div class="field col-12 ">
                 <zwc-pdropdown 
                 [control]="formFilterControls.tipo_servicio_id" 
                 Label="Tipo Servicio" 
@@ -26,7 +27,7 @@
         </div>
 
         <div class="formgrid grid">
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            <div class="field col-12 ">
                 <zwc-pdropdown 
                 [control]="formFilterControls.servicio_cod" 
                 Label="Servicio" 
@@ -38,7 +39,7 @@
                 PfilterBy="name" 
                 [PshowClear]="true" ></zwc-pdropdown>
             </div>
-            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            <div class="field col-12">
                 <zwc-pdropdown 
                 [control]="formFilterControls.unidad_obra_cod" 
                 Label="Unidad de Obra" 
