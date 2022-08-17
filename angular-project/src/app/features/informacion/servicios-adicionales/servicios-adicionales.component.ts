@@ -257,13 +257,20 @@ export class ServiciosAdicionalesComponent implements OnInit {
 
     this.subscription.add(
       this.carrito$.subscribe(carrito => {
+        const clearFormArray = (formArray: FormArray) => {
+          while (formArray.length !== 0) {
+            formArray.removeAt(0);
+          }
+        };
+        clearFormArray(this.formCub.get('table') as FormArray);
         carrito.forEach(servicio => {
           // this.formCub.get('table').setValue([]);
-          const tableValue: Carrito[] = (this.formCub.get('table') as FormArray)
-            .value;
-          const index_table_servicio = tableValue.findIndex(
-            x => x.servicio_id === servicio.servicio_id
-          );
+
+          // const tableValue: Carrito[] = (this.formCub.get('table') as FormArray)
+          //   .value;
+          // const index_table_servicio = tableValue.findIndex(
+          //   x => x.servicio_id === servicio.servicio_id
+          // );
 
           // if (index_table_servicio === -1) {
           // console.log(
