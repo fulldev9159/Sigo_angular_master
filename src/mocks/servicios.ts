@@ -1,4 +1,5 @@
 import { Response, ServicioAgenciaContratoProveedor } from '@model';
+import { UnidadObraServicio } from 'src/app/core/model/unidad-obra';
 
 let ServicioAgenciaContratoProveedorMOCK200OK: Response<{
   items: ServicioAgenciaContratoProveedor[];
@@ -413,6 +414,43 @@ let ServicioAgenciaContratoProveedorMOCK200OK: Response<{
         numero_producto: 'D302',
         unidad_codigo: 'CU',
         unidad_desripcion: 'Cada Uno',
+      },
+    ],
+  },
+};
+
+let UnidadObraServicioMOCK200OK: Response<{ items: UnidadObraServicio[] }> = {
+  status: { code: 0, desc: '' },
+  data: {
+    items: [
+      {
+        id: 5,
+        actividad_id: 8,
+        servicio_cod: 'D004',
+        unidad_obra_cod: '0',
+        clave: 'DIBUJ',
+        model_servicio_cod: {
+          id: 5,
+          tipo_servicio_id: 6,
+          unidad_id: 4,
+          descripcion:
+            'DISEÑO DE PROYECTO INMOBILIARIO EN RED DE COAXIAL (DTH)',
+          codigo: 'D004',
+          estado: true,
+          es_pack_basico: false,
+          cantidad_default: 1,
+          codigo_alcance: 'C-000',
+          puntos_baremos: 46,
+          fecha_inicio: '2021-01-01T00:00:00Z',
+          fecha_fin: '2027-04-01T17:19:26Z',
+          requiere_evidencia: false,
+        },
+        model_unidad_obra_cod: {
+          codigo: '0',
+          descripcion: 'SIN UO',
+          unidad_id: 19,
+        },
+        model_actividad_id: { id: 8, codigo: 'I', descripcion: 'DISEÑO' },
       },
     ],
   },
