@@ -2,7 +2,7 @@
     <span class="p-tag">Agregar Servicios</span>
 </p-divider> -->
 
-<form >
+<form [formGroup]="formFilter" >
     <div class="card">
         <div class="formgrid grid">
             <div class="field col-12">
@@ -52,5 +52,7 @@
                 [PshowClear]="true" ></zwc-pdropdown>
             </div>
         </div>
+
+        <button (click)="agregarServicio()">Agregar >></button>
     </div>
 </form>

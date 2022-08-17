@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   ContratosUser,
   PerfilesUsuario,
-  RequestGetServiciosAgenciaContratoProveedor,
+  RequestGetDetallesServicioTipoAgenciaContratoProveedor,
+  RequestGetServicioTipoAgenciaContratoProveedor,
   Response,
   ServicioAgenciaContratoProveedor,
   TipoCubicacion,
@@ -24,7 +25,7 @@ export class ServiciosFacade {
 
   // GET SERVICIOS DE UNA AGENCIA/CONTRATO/PROVEEDOR
   public getServiciosAgenciaContratoProveedor(
-    request: RequestGetServiciosAgenciaContratoProveedor
+    request: RequestGetServicioTipoAgenciaContratoProveedor
   ): void {
     this.store.dispatch(
       serviciosActions.getServiciosAgenciaContratoProveedor({ request })
@@ -46,5 +47,48 @@ export class ServiciosFacade {
 
   public getUnidadesObraServicio$(): Observable<UnidadObraServicio[]> {
     return this.store.select(serviciosSelectors.getUnidadesObraServicio);
+  }
+
+  // SERVICIO SELECTED
+  public servicioSelected(
+    servicioSelected: ServicioAgenciaContratoProveedor
+  ): void {
+    this.store.dispatch(
+      serviciosActions.servicioSelected({ servicioSelected })
+    );
+  }
+
+  public servicioSelected$(): Observable<ServicioAgenciaContratoProveedor> {
+    return this.store.select(serviciosSelectors.servicioSelected);
+  }
+
+  // UNIDAD DE OBRA SELECTED
+  public unidadObraSelected(unidadObraSelected: UnidadObraServicio): void {
+    this.store.dispatch(
+      serviciosActions.unidadObraSelected({ unidadObraSelected })
+    );
+  }
+
+  public unidadObraSelected$(): Observable<UnidadObraServicio> {
+    return this.store.select(serviciosSelectors.unidadObraSelected);
+  }
+
+  // SERVICIO EXISTENTE
+  public theServiceExist(): Observable<boolean> {
+    return this.store.select(serviciosSelectors.theServicioExist);
+  }
+
+  // ADD SERVICIO TO CARRITO
+  public addServicioCarrito(
+    request: RequestGetDetallesServicioTipoAgenciaContratoProveedor
+  ): void {
+    this.store.dispatch(serviciosActions.addServicioCarrito({ request }));
+  }
+
+  // ADD UNIDAD DE OBRA TO SERVICIO TO CARRITO
+  public addUnidadObraCarrito(servicio_id: number, uo_codigo: string): void {
+    this.store.dispatch(
+      serviciosActions.addUnidadObraCarrito({ servicio_id, uo_codigo })
+    );
   }
 }

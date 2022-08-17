@@ -4,14 +4,15 @@ import {
   AgenciaContrato,
   ContratosUser,
   ProveedorAgenciaContrato,
-  RequestGetServiciosAgenciaContratoProveedor,
+  RequestGetDetallesServicioTipoAgenciaContratoProveedor,
+  RequestGetServicioTipoAgenciaContratoProveedor,
   ServicioAgenciaContratoProveedor,
 } from '@model';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
-import { combineLatest, map, Observable, Subscription } from 'rxjs';
+import { combineLatest, map, Observable, Subscription, tap } from 'rxjs';
 import { RequestGetUnidadObraServicio } from 'src/app/core/model/unidad-obra';
 
 interface Dropdown {
@@ -84,8 +85,10 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
   proveedorSelected$: Observable<ProveedorAgenciaContrato> =
     this.cubicacionFacade.proveedorSelected$();
 
+  serviciosAgenciaContratoProveedor: ServicioAgenciaContratoProveedor[];
   serviciosAgenciaContratoProveedor$: Observable<Dropdown[]> =
     this.serviciosFacade.getServiciosAgenciaContratoProveedor$().pipe(
+      tap(values => (this.serviciosAgenciaContratoProveedor = values)),
       map(values => {
         let tmp = [...values];
         return tmp.length > 0
@@ -192,7 +195,7 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
           tipo_servicio_id &&
           tipo_servicio_id !== null
         ) {
-          let request: RequestGetServiciosAgenciaContratoProveedor = {
+          let request: RequestGetServicioTipoAgenciaContratoProveedor = {
             actividad_id: +this.formFilter.get('actividad_id').value,
             agencia_id: agenciaSelected.id,
             cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
@@ -215,6 +218,29 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
             this.serviciosFacade.getUnidadesObraServicio(request);
           }
         })
+    );
+  }
+
+  agregarServicio(): void {
+    this.subscription.add(
+      combineLatest([this.proveedorSelected$, this.agenciaSelected$]).subscribe(
+        ([proveedorSelected, agenciaSelected]) => {
+          let servicio_id = this.serviciosAgenciaContratoProveedor.find(
+            value => value.codigo === this.formFilter.get('servicio_cod').value
+          ).id;
+          let request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
+            {
+              agencia_id: agenciaSelected.id,
+              cmarco_has_proveedor_id:
+                proveedorSelected.cmarco_has_proveedor_id,
+              servicio_id: +servicio_id,
+              tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
+              actividad_id: this.formFilter.get('actividad_id').value,
+            };
+
+          this.serviciosFacade.addServicioCarrito(request_service);
+        }
+      )
     );
   }
 

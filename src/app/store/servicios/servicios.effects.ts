@@ -60,12 +60,60 @@ export class ServiciosEffects {
     )
   );
 
+  addServicioCarrito$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.addServicioCarrito),
+      concatMap(({ request }) =>
+        this.serviciosHttpService
+          .getDetallesServiciosTipoAgenciaContratoProveedor(request)
+          .pipe(
+            map(response =>
+              serviciosActions.addServicioCarritoSuccess({
+                response,
+              })
+            ),
+            catchError(error =>
+              of(
+                serviciosActions.addServicioCarritoError({
+                  error,
+                })
+              )
+            )
+          )
+      )
+    )
+  );
+
+  addUnidadObraCarrito$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.addUnidadObraCarrito),
+      concatMap(({ servicio_id, uo_codigo }) =>
+        this.serviciosHttpService.getDetallesUnidadObraServicio(uo_codigo).pipe(
+          map(response =>
+            serviciosActions.addUnidadObraCarritoSuccess({
+              servicio_id,
+              response,
+            })
+          ),
+          catchError(error =>
+            of(
+              serviciosActions.addUnidadObraCarritoError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
-          serviciosActions.getUnidadesObraServicioSuccess
+          serviciosActions.getUnidadesObraServicioSuccess,
+          serviciosActions.addServicioCarritoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -77,7 +125,8 @@ export class ServiciosEffects {
       this.actions$.pipe(
         ofType(
           serviciosActions.getServiciosAgenciaContratoProveedorError,
-          serviciosActions.getUnidadesObraServicioError
+          serviciosActions.getUnidadesObraServicioError,
+          serviciosActions.addServicioCarritoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

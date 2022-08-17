@@ -8,7 +8,9 @@ export * from './contrato';
 export * from './cubicacion';
 export * from './proveedor';
 export * from './servicio';
-// export * from './unidad-obra'
+export * from './unidad-obra';
+export * from './carrito';
+export * from './material';
 
 export interface Response<T> {
   data: T;

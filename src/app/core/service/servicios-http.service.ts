@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import {
   Response,
-  RequestGetServiciosAgenciaContratoProveedor,
+  RequestGetServicioTipoAgenciaContratoProveedor,
   ServicioAgenciaContratoProveedor,
+  RequestGetDetallesServicioTipoAgenciaContratoProveedor,
+  DetallesServicioTipoAgenciaContratoProveedor,
 } from '@model';
-import { Observable } from 'rxjs';
+import { flatMap, map, mergeAll, mergeMap, Observable } from 'rxjs';
 import {
+  DetallesUnidadObraServicio,
   RequestGetUnidadObraServicio,
   UnidadObraServicio,
 } from '../model/unidad-obra';
@@ -23,7 +26,7 @@ export class ServiciosHttpService {
   }
 
   getServiciosAgenciaContratoProveedor(
-    request: RequestGetServiciosAgenciaContratoProveedor
+    request: RequestGetServicioTipoAgenciaContratoProveedor
   ): Observable<Response<{ items: ServicioAgenciaContratoProveedor[] }>> {
     return this.http.post<
       Response<{ items: ServicioAgenciaContratoProveedor[] }>
@@ -36,6 +39,25 @@ export class ServiciosHttpService {
     return this.http.post<Response<{ items: UnidadObraServicio[] }>>(
       `${this.API_URL}/cubicacion/unidades_obra_from_servicio/get`,
       request
+    );
+  }
+
+  getDetallesServiciosTipoAgenciaContratoProveedor(
+    request: RequestGetDetallesServicioTipoAgenciaContratoProveedor
+  ): Observable<
+    Response<{ items: DetallesServicioTipoAgenciaContratoProveedor[] }>
+  > {
+    return this.http.post<
+      Response<{ items: DetallesServicioTipoAgenciaContratoProveedor[] }>
+    >(`${this.API_URL}/cubicacion/datos_servicio/get`, request);
+  }
+
+  getDetallesUnidadObraServicio(
+    uo_codigo: string
+  ): Observable<Response<DetallesUnidadObraServicio>> {
+    return this.http.post<Response<DetallesUnidadObraServicio>>(
+      `${this.API_URL}/cubicacion/datos_unidad_obra_material/get`,
+      { uo_codigo }
     );
   }
 }
