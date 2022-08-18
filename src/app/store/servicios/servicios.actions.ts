@@ -57,15 +57,19 @@ export const unidadObraSelected = createAction(
 // GET DETALLES DE UN SERVICIO TIPO AGENCIA CONTRATO TO ADDING INTO CARRITO
 export const addServicioCarrito = createAction(
   '[SERVICIOS] addServicioCarrito',
-  props<{ request: RequestGetDetallesServicioTipoAgenciaContratoProveedor }>()
+  props<{
+    requestService: RequestGetDetallesServicioTipoAgenciaContratoProveedor;
+    uo_codigo: string;
+  }>()
 );
 
 export const addServicioCarritoSuccess = createAction(
   '[SERVICIOS] addServicioCarrito Success',
   props<{
-    response: Response<{
+    responseService: Response<{
       items: DetallesServicioTipoAgenciaContratoProveedor[];
     }>;
+    responseUnidadObra: Response<DetallesUnidadObraServicio>;
   }>()
 );
 export const addServicioCarritoError = createAction(
@@ -74,19 +78,19 @@ export const addServicioCarritoError = createAction(
 );
 
 // GET DETALLES DE UNA UNIDAD OBRA DE UN SERVICIO TO ADDING INTO CARRITO
-export const addUnidadObraCarrito = createAction(
-  '[SERVICIOS] addUnidadObraCarrito',
-  props<{ servicio_id: number; uo_codigo: string }>()
-);
+// export const addUnidadObraCarrito = createAction(
+//   '[SERVICIOS] addUnidadObraCarrito',
+//   props<{ servicio_id: number; uo_codigo: string }>()
+// );
 
-export const addUnidadObraCarritoSuccess = createAction(
-  '[SERVICIOS] addUnidadObraCarrito Success',
-  props<{
-    servicio_id: number;
-    response: Response<DetallesUnidadObraServicio>;
-  }>()
-);
-export const addUnidadObraCarritoError = createAction(
-  '[SERVICIOS] addUnidadObraCarrito Error',
-  props<{ error: any }>()
-);
+// export const addUnidadObraCarritoSuccess = createAction(
+//   '[SERVICIOS] addUnidadObraCarrito Success',
+//   props<{
+//     servicio_id: number;
+//     response: Response<DetallesUnidadObraServicio>;
+//   }>()
+// );
+// export const addUnidadObraCarritoError = createAction(
+//   '[SERVICIOS] addUnidadObraCarrito Error',
+//   props<{ error: any }>()
+// );

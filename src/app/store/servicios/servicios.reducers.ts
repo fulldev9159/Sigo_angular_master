@@ -1,4 +1,8 @@
-import { Carrito, ServicioAgenciaContratoProveedor } from '@model';
+import {
+  CarritoService,
+  CarritoUnidadObra,
+  ServicioAgenciaContratoProveedor,
+} from '@model';
 import { createReducer, on } from '@ngrx/store';
 import { UnidadObraServicio } from 'src/app/core/model/unidad-obra';
 import * as serviciosActions from './servicios.actions';
@@ -10,7 +14,8 @@ export interface StateServicios {
   unidadesObraServicio: UnidadObraServicio[];
   servicioSelected: ServicioAgenciaContratoProveedor;
   unidadObraSelected: UnidadObraServicio;
-  carrito: Carrito[];
+  carritoServices: CarritoService[];
+  // carritoUnidadObra: CarritoUnidadObra[];
 }
 
 export const initialState: StateServicios = {
@@ -18,7 +23,8 @@ export const initialState: StateServicios = {
   unidadesObraServicio: [],
   servicioSelected: null,
   unidadObraSelected: null,
-  carrito: [],
+  carritoServices: [],
+  // carritoUnidadObra: [],
 };
 
 export const reducerServicios = createReducer(
@@ -45,21 +51,38 @@ export const reducerServicios = createReducer(
     ...state,
     unidadObraSelected,
   })),
-  on(serviciosActions.addServicioCarritoSuccess, (state, { response }) => ({
-    ...state,
-    carrito: [
-      ...state.carrito,
-      {
-        servicio_id: response.data.items[0].servicio_id,
-        servicio_precio_final_clp:
-          response.data.items[0].servicio_precio_final_clp,
-        servicio_nombre: response.data.items[0].servicio_nombre,
-        actividad_descripcion: response.data.items[0].actividad_descripcion,
-        tipo_servicio_descripcion:
-          response.data.items[0].tipo_servicio_descripcion,
+  on(
+    serviciosActions.addServicioCarritoSuccess,
+    (state, { responseService, responseUnidadObra }) => ({
+      ...state,
+      carritoServices: [
+        ...state.carritoServices,
+        {
+          servicio_id: responseService.data.items[0].servicio_id,
+          servicio_precio_final_clp:
+            responseService.data.items[0].servicio_precio_final_clp,
+          servicio_nombre: responseService.data.items[0].servicio_nombre,
+          actividad_descripcion:
+            responseService.data.items[0].actividad_descripcion,
+          tipo_servicio_descripcion:
+            responseService.data.items[0].tipo_servicio_descripcion,
 
-        unidades_obras: [],
-      },
-    ],
-  }))
+          unidad_obras: {
+            uo_codigo: responseUnidadObra.data.uo_codigo,
+            uo_nombre: responseUnidadObra.data.uo_nombre,
+            uo_precio_total_clp: responseUnidadObra.data.uo_precio_total_clp,
+          },
+        },
+      ],
+      // carritoUnidadObra: [
+      //   ...state.carritoUnidadObra,
+      //   {
+      //     servicio_id: responseService.data.items[0].servicio_id,
+      //     uo_codigo: responseUnidadObra.data.uo_codigo,
+      //     uo_nombre: responseUnidadObra.data.uo_nombre,
+      //     uo_precio_total_clp: responseUnidadObra.data.uo_precio_total_clp,
+      //   },
+      // ],
+    })
+  )
 );

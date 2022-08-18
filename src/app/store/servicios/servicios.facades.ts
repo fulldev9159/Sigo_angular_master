@@ -80,15 +80,18 @@ export class ServiciosFacade {
 
   // ADD SERVICIO TO CARRITO
   public addServicioCarrito(
-    request: RequestGetDetallesServicioTipoAgenciaContratoProveedor
+    requestService: RequestGetDetallesServicioTipoAgenciaContratoProveedor,
+    uo_codigo: string
   ): void {
-    this.store.dispatch(serviciosActions.addServicioCarrito({ request }));
+    this.store.dispatch(
+      serviciosActions.addServicioCarrito({ requestService, uo_codigo })
+    );
   }
 
   // ADD UNIDAD DE OBRA TO SERVICIO TO CARRITO
-  public addUnidadObraCarrito(servicio_id: number, uo_codigo: string): void {
-    this.store.dispatch(
-      serviciosActions.addUnidadObraCarrito({ servicio_id, uo_codigo })
-    );
-  }
+  // public addUnidadObraCarrito(servicio_id: number, uo_codigo: string): void {
+  //   this.store.dispatch(
+  //     serviciosActions.addUnidadObraCarrito({ servicio_id, uo_codigo })
+  //   );
+  // }
 }

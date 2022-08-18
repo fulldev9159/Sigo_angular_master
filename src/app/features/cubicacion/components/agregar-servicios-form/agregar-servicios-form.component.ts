@@ -129,7 +129,7 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
         values.length > 0
           ? values.map(value => ({
               name: `${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}`,
-              code: value.id,
+              code: value.unidad_obra_cod,
             }))
           : []
       )
@@ -238,7 +238,10 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
               actividad_id: this.formFilter.get('actividad_id').value,
             };
 
-          this.serviciosFacade.addServicioCarrito(request_service);
+          this.serviciosFacade.addServicioCarrito(
+            request_service,
+            this.formFilter.get('unidad_obra_cod').value
+          );
         }
       )
     );

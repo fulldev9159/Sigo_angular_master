@@ -27,7 +27,7 @@ export const unidadObraSelected = createSelector(
 
 export const carrito = createSelector(
   selectServicios,
-  (state: reducer.StateServicios) => state.carrito
+  (state: reducer.StateServicios) => state.carritoServices
 );
 
 export const theServicioExist = createSelector(

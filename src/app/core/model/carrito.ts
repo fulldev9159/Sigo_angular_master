@@ -1,4 +1,4 @@
-export interface Carrito {
+export interface CarritoService {
   precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
   servicio_rowid?: number;
   servicio_cantidad?: number;
@@ -11,7 +11,8 @@ export interface Carrito {
   actividad_descripcion: string;
   tipo_servicio_descripcion: string;
 
-  unidades_obras: {
+  unidad_obras: {
+    // servicio_id: number;
     precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
     uo_rowid?: number;
     uo_cantidad?: number;
@@ -21,5 +22,18 @@ export interface Carrito {
     uo_codigo: string;
     uo_nombre: string;
     uo_precio_total_clp: number;
-  }[];
+  };
+}
+
+export interface CarritoUnidadObra {
+  servicio_id: number;
+  precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
+  uo_rowid?: number;
+  uo_cantidad?: number;
+  uob_unidad_medida_cod?: string;
+
+  // Data response http API
+  uo_codigo: string;
+  uo_nombre: string;
+  uo_precio_total_clp: number;
 }
