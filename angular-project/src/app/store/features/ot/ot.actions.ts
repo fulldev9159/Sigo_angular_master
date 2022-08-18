@@ -43,6 +43,7 @@ import {
   LastActa,
   RequestAprobacionRechazoSolicitudPago,
   QuienAutorizoActa,
+  RequestAceptarRechazarAdicionales,
 } from '@data';
 
 // GET OTS
@@ -834,5 +835,20 @@ export const cerrarOTSuccess = createAction(
 );
 export const cerrarOTError = createAction(
   '[OT] GET CerrarOT Error',
+  props<{ error: any }>()
+);
+
+//  ACEPTAR RECHAZAR ADICIONALES
+export const aceptarRechazarAdcionales = createAction(
+  '[OT] GET aceptarRechazarAdcionales',
+  props<{ request: RequestAceptarRechazarAdicionales }>()
+);
+
+export const aceptarRechazarAdcionalesSuccess = createAction(
+  '[OT] GET aceptarRechazarAdcionales Success',
+  props<{ response: Response<any> }>()
+);
+export const aceptarRechazarAdcionalesError = createAction(
+  '[OT] GET aceptarRechazarAdcionales Error',
   props<{ error: any }>()
 );

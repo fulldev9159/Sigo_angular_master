@@ -644,6 +644,23 @@ export class OtEffects {
     )
   );
 
+  // CERRAR OT
+  aceptarRechazarAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.aceptarRechazarAdcionales),
+      concatMap(({ request }) =>
+        this.otService.aceptarRechazarAdicionales(request).pipe(
+          map(response =>
+            otActions.aceptarRechazarAdcionalesSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.aceptarRechazarAdcionalesError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

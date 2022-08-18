@@ -43,6 +43,7 @@ import {
   RequestAutorizarInformeAvance,
   LastActa,
   RequestAprobacionRechazoSolicitudPago,
+  RequestAceptarRechazarAdicionales,
 } from '@data';
 @Injectable({
   providedIn: 'root',
@@ -619,5 +620,12 @@ export class OtFacade {
   // CERRAR OT
   public cerrarOT(ot_id: number): void {
     this.store.dispatch(otActions.cerrarOT({ ot_id }));
+  }
+
+  // ACEPTAR RECHAZAR ADICIONALES
+  public aceptarRechazarAdicionales(
+    request: RequestAceptarRechazarAdicionales
+  ): void {
+    this.store.dispatch(otActions.aceptarRechazarAdcionales({ request }));
   }
 }

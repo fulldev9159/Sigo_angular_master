@@ -228,3 +228,14 @@ export interface RequestAceptarRechazarOT {
 // GET POSIBLE SUPERVISOR DE TRABAJOS
 // tslint:disable-next-line
 export interface PosibleTrabajador extends IdNombreType {}
+
+// ACEPTAR/RECHAZAR ADICIONALES
+export interface RequestAceptarRechazarAdicionales {
+  ot_id: number;
+  adicionales_aceptados?: number[];
+  adicionales_rechazadas?: {
+    row_id: number;
+    causas_rechazo_id: number;
+    observacion: string;
+  };
+}
