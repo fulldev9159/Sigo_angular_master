@@ -22,18 +22,18 @@ export interface CarritoService {
     uo_codigo: string;
     uo_nombre: string;
     uo_precio_total_clp: number;
-  };
+  }[];
 }
 
-export interface CarritoUnidadObra {
-  servicio_id: number;
-  precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
-  uo_rowid?: number;
-  uo_cantidad?: number;
-  uob_unidad_medida_cod?: string;
+// export interface CarritoUnidadObra {
+//   servicio_id: number;
+//   precargado?: boolean; // si es true, viene de la carga inicial al editar la cubicacion
+//   uo_rowid?: number;
+//   uo_cantidad?: number;
+//   uob_unidad_medida_cod?: string;
 
-  // Data response http API
-  uo_codigo: string;
-  uo_nombre: string;
-  uo_precio_total_clp: number;
-}
+//   // Data response http API
+//   uo_codigo: string;
+//   uo_nombre: string;
+//   uo_precio_total_clp: number;
+// }

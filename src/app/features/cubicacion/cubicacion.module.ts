@@ -10,6 +10,7 @@ import { ListCubComponent } from './containers/list-cub/list-cub.component';
 import { FormCubContainerComponent } from './containers/form-cub/form-cub-container.component';
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { AgregarServiciosFormComponent } from './components/agregar-servicios-form/agregar-servicios-form.component';
+import { TableServicesComponent } from './components/table-services/table-services.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AgregarServiciosFormComponent } from './components/agregar-servicios-fo
     FormCubContainerComponent,
     FormularioComponent,
     AgregarServiciosFormComponent,
+    TableServicesComponent,
   ],
   imports: [
     CommonModule,

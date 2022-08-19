@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  CarritoService,
   ContratosUser,
   PerfilesUsuario,
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
@@ -94,4 +95,8 @@ export class ServiciosFacade {
   //     serviciosActions.addUnidadObraCarrito({ servicio_id, uo_codigo })
   //   );
   // }
+
+  public carrito$(): Observable<CarritoService[]> {
+    return this.store.select(serviciosSelectors.carrito);
+  }
 }

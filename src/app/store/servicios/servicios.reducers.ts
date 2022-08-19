@@ -1,6 +1,6 @@
 import {
   CarritoService,
-  CarritoUnidadObra,
+  // CarritoUnidadObra,
   ServicioAgenciaContratoProveedor,
 } from '@model';
 import { createReducer, on } from '@ngrx/store';
@@ -67,11 +67,13 @@ export const reducerServicios = createReducer(
           tipo_servicio_descripcion:
             responseService.data.items[0].tipo_servicio_descripcion,
 
-          unidad_obras: {
-            uo_codigo: responseUnidadObra.data.uo_codigo,
-            uo_nombre: responseUnidadObra.data.uo_nombre,
-            uo_precio_total_clp: responseUnidadObra.data.uo_precio_total_clp,
-          },
+          unidad_obras: [
+            {
+              uo_codigo: responseUnidadObra.data.uo_codigo,
+              uo_nombre: responseUnidadObra.data.uo_nombre,
+              uo_precio_total_clp: responseUnidadObra.data.uo_precio_total_clp,
+            },
+          ],
         },
       ],
       // carritoUnidadObra: [
