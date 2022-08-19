@@ -31,10 +31,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.resizeObservable$.subscribe(e => {
         let myTag = this.el.nativeElement.querySelector('.layout-container');
-        if (window.innerWidth < 991) {
-          // console.log('mobile');
-        } else {
-          // console.log('desktop');
+        if (window.innerWidth > 991) {
           myTag.classList.remove('layout-mobile-active');
         }
       })
@@ -42,21 +39,10 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   }
 
   toggle() {
-    let myTag = this.el.nativeElement.querySelector('.layout-container');
-    if (window.innerWidth < 991) {
-      if (!myTag.classList.contains('layout-mobile-active')) {
-        myTag.classList.remove('layout-static-inactive');
-        myTag.classList.add('layout-mobile-active');
-      } else {
-        myTag.classList.remove('layout-mobile-active');
-      }
+    if (this.getInnerWidth() < 991) {
+      this.setClassListToggle('layout-mobile-active', 'layout-static-inactive');
     } else {
-      if (!myTag.classList.contains('layout-static-inactive')) {
-        myTag.classList.remove('layout-mobile-active');
-        myTag.classList.add('layout-static-inactive');
-      } else {
-        myTag.classList.remove('layout-static-inactive');
-      }
+      this.setClassListToggle('layout-static-inactive', 'layout-mobile-active');
     }
   }
 
@@ -72,6 +58,17 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   changePerfil(): void {
     this.authFacade.resetPerfil();
     this.router.navigate(['/login/perfil-select']);
+  }
+
+  getInnerWidth(): number {
+    return window.innerWidth;
+  }
+
+  setClassListToggle(primario: string, secundario: string) {
+    console.log('claslist');
+    let myTag = this.el.nativeElement.querySelector('.layout-container');
+    myTag.classList.toggle(primario);
+    myTag.classList.toggle(secundario, false);
   }
 
   ngOnDestroy(): void {

@@ -112,4 +112,24 @@ describe('MainLayoutComponent', () => {
     component.changePerfil();
     expect(authFacade.resetPerfil).toHaveBeenCalled();
   });
+
+  it('should call toggle with mobile parameters class', () => {
+    spyOn(component, 'getInnerWidth').and.returnValue(900);
+    spyOn(component, 'setClassListToggle');
+    component.toggle();
+    expect(component.setClassListToggle).toHaveBeenCalledWith(
+      'layout-mobile-active',
+      'layout-static-inactive'
+    );
+  });
+
+  it('should call toggle with desktop parameters class', () => {
+    spyOn(component, 'getInnerWidth').and.returnValue(1000);
+    let toggleSpy = spyOn(component, 'setClassListToggle');
+    component.toggle();
+    expect(toggleSpy).toHaveBeenCalledWith(
+      'layout-static-inactive',
+      'layout-mobile-active'
+    );
+  });
 });
