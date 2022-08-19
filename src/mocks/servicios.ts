@@ -1,7 +1,7 @@
 import { Response, ServicioAgenciaContratoProveedor } from '@model';
 import { UnidadObraServicio } from 'src/app/core/model/unidad-obra';
 
-let ServicioAgenciaContratoProveedorMOCK200OK: Response<{
+export let ServiciosAgenciaContratoProveedorMOCK200OK: Response<{
   items: ServicioAgenciaContratoProveedor[];
 }> = {
   status: { code: 0, desc: 'OK' },
@@ -419,7 +419,9 @@ let ServicioAgenciaContratoProveedorMOCK200OK: Response<{
   },
 };
 
-let UnidadObraServicioMOCK200OK: Response<{ items: UnidadObraServicio[] }> = {
+export let UnidadObraServicioMOCK200OK: Response<{
+  items: UnidadObraServicio[];
+}> = {
   status: { code: 0, desc: '' },
   data: {
     items: [
