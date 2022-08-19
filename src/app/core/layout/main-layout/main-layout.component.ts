@@ -65,7 +65,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   }
 
   setClassListToggle(primario: string, secundario: string) {
-    console.log('claslist');
     let myTag = this.el.nativeElement.querySelector('.layout-container');
     myTag.classList.toggle(primario);
     myTag.classList.toggle(secundario, false);

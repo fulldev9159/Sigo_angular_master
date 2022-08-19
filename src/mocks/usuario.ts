@@ -177,3 +177,10 @@ export let ContratosUsuarioMOCK200OK: Response<{ items: ContratosUser[] }> = {
     ],
   },
 };
+
+export let ContratosUsuarioMOCK200OKSinContratos: Response<{
+  items: ContratosUser[];
+}> = {
+  status: { code: 2, desc: '2: Sin registros {1030}' },
+  data: { items: [] },
+};

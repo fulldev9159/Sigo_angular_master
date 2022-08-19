@@ -6,8 +6,10 @@ import { SnackMessageService } from './snack-message.service';
 
 import * as authActions from '@storeOT/auth/auth.actions';
 import * as perfilActions from '@storeOT/perfil/perfil.actions';
+import * as usuarioActions from '@storeOT/usuario/usuario.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { StoreModule } from '@ngrx/store';
+import { ContratosUsuarioMOCK200OKSinContratos } from '@mocksOT';
 
 describe('AfterHttpService', () => {
   let service: AfterHttpService;
@@ -130,5 +132,19 @@ describe('AfterHttpService', () => {
     };
     service.successHandler(action);
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/home']);
+  });
+
+  it('afterHttpAction if action is "getContratosUsuarioSuccess" and user has no contrats should display message "No tiene contratos asignados. Favor contactar con el administrador del sistema" ', () => {
+    spyOn(snackMessage, 'showMessage');
+    const action = {
+      response: ContratosUsuarioMOCK200OKSinContratos,
+      type: usuarioActions.getContratosUsuarioSuccess.type,
+    };
+    service.successHandler(action);
+    expect(snackMessage.showMessage).toHaveBeenCalledWith(
+      'No tiene contratos asignados. Favor contactar con el administrador del sistema',
+      'info',
+      6000
+    );
   });
 });
