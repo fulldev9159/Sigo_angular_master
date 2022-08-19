@@ -8,7 +8,7 @@ import {
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   DetallesServicioTipoAgenciaContratoProveedor,
 } from '@model';
-import { flatMap, map, mergeAll, mergeMap, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   DetallesUnidadObraServicio,
   RequestGetUnidadObraServicio,
@@ -22,7 +22,7 @@ export class ServiciosHttpService {
   API_URL = '';
 
   constructor(private http: HttpClient) {
-    this.API_URL = environment.api || 'localhost:4004';
+    this.API_URL = environment.api;
   }
 
   getServiciosAgenciaContratoProveedor(

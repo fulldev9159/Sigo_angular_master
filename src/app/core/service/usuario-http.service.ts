@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class UsuarioHttpService {
   API_URL = '';
   constructor(private http: HttpClient) {
-    this.API_URL = environment.api || 'localhost:4004';
+    this.API_URL = environment.api;
   }
 
   getContratosUsuario(

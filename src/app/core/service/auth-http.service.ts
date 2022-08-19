@@ -10,7 +10,7 @@ export class AuthHttpService {
   API_URL = '';
 
   constructor(private http: HttpClient) {
-    this.API_URL = environment.api || 'localhost:4004';
+    this.API_URL = environment.api;
   }
 
   logIn(username: string, password: string): Observable<Response<Login>> {

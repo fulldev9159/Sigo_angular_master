@@ -1,5 +1,12 @@
-import { Response, ServicioAgenciaContratoProveedor } from '@model';
-import { UnidadObraServicio } from 'src/app/core/model/unidad-obra';
+import {
+  DetallesServicioTipoAgenciaContratoProveedor,
+  Response,
+  ServicioAgenciaContratoProveedor,
+} from '@model';
+import {
+  DetallesUnidadObraServicio,
+  UnidadObraServicio,
+} from 'src/app/core/model/unidad-obra';
 
 export let ServiciosAgenciaContratoProveedorMOCK200OK: Response<{
   items: ServicioAgenciaContratoProveedor[];
@@ -457,3 +464,60 @@ export let UnidadObraServicioMOCK200OK: Response<{
     ],
   },
 };
+
+export let DetallesServicioTipoAgenciaContratoProveedorMOCK200OK: Response<{
+  items: DetallesServicioTipoAgenciaContratoProveedor[];
+}> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    items: [
+      {
+        servicio_id: 452,
+        servicio_codigo: 'T000',
+        servicio_nombre: 'ABANDONOS',
+        servicio_tipo: 1,
+        tipo_servicio_descripcion: 'CANALIZACION',
+        servicio_unidad_id: 19,
+        servicio_unidad_codigo: 'NN',
+        servicio_unidad_descripcion: 'SIN',
+        servicio_baremos: 0,
+        precio_proveedor: 3306,
+        servicio_tipo_moneda_id: 2,
+        servicio_tipo_moneda_codigo: 'CLP',
+        actividad_id: '1',
+        actividad_descripcion: 'ABANDONOS',
+        servicio_precio_final: 0,
+        servicio_precio_final_clp: 0,
+        numero_producto: 'T000',
+      },
+    ],
+  },
+};
+
+export let DetallesUnidadObraServicioMOCK200OK: Response<DetallesUnidadObraServicio> =
+  {
+    status: { code: 0, desc: 'OK' },
+    data: {
+      uo_precio_total_clp: 0,
+      uo_codigo: 'T001',
+      uo_nombre: 'A-TUBERIA 1 VIA (PVC 110)',
+      uo_unidad_id: 4,
+      uo_unidad_codigo: 'CU',
+      uo_unidad_descripcion: 'Cada Uno',
+      material_arr: [
+        {
+          material_cantidad: 0,
+          material_codigo: '0',
+          material_nombre: 'SIN MATERIAL',
+          material_unidad_id: 19,
+          material_unidad_codigo: 'NN',
+          material_unidad_descripcion: 'SIN',
+          material_valor: 0,
+          material_tipo_moneda_id: 2,
+          material_origen: 'TELEFONICA',
+          material_precio: 0,
+          material_precio_clp: 0,
+        },
+      ],
+    },
+  };

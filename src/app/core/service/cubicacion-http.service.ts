@@ -11,7 +11,7 @@ import { TipoCubicacion } from '../model/cubicacion';
 export class CubicacionHttpService {
   API_URL = '';
   constructor(private http: HttpClient) {
-    this.API_URL = environment.api || 'localhost:4004';
+    this.API_URL = environment.api;
   }
 
   getTipoCubicacion(): Observable<Response<{ items: TipoCubicacion[] }>> {

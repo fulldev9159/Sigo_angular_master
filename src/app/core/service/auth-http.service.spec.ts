@@ -33,14 +33,14 @@ describe('AuthHttpService', () => {
     });
   });
 
-  // it('should call refresh login and return token', (done: DoneFn) => {
-  //   httpClientSpy.post.and.returnValue(of(LoginRefreshMock200OK));
-  //   service.logIn('mgestor1', 'asdasd').subscribe({
-  //     next: response => {
-  //       expect(response).toEqual(LoginMock200OK);
-  //       done();
-  //     },
-  //     error: done.fail,
-  //   });
-  // });
+  it('should call refresh login and return token', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(LoginRefreshMock200OK));
+    service.refeshLogin(2).subscribe({
+      next: response => {
+        expect(response).toEqual(LoginRefreshMock200OK);
+        done();
+      },
+      error: done.fail,
+    });
+  });
 });

@@ -9,10 +9,8 @@ export class FormularioService {
 
   noWhitespace(): any {
     return (control: FormControl) => {
-      console.log(control);
       const isWhitespace = (control.value || '').trim().length === 0;
       const isValid = !isWhitespace;
-      console.log(isValid ? null : { whitespace: true });
       return isValid ? null : { whitespace: true };
     };
   }
