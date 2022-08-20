@@ -438,7 +438,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
           actions.push({
             icon: 'p-button-icon pi pi-file-excel',
             class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Autorizar Pago',
+            label: 'Cerrar OT',
             onClick: (event: Event, item) => {
               this.idOtSelected = item.id;
               this.etapa = item.etapa_slug;

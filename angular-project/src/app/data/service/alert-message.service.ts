@@ -200,7 +200,8 @@ export class AlertMessageActions {
         action === otActions.AceptarRechazarInformeAvanceOTSuccess.type ||
         action === otActions.AsignarSupervisorTrabajosOTSuccess.type ||
         action === otActions.AceptarRechazarInformeAvanceOTSuccess.type ||
-        action === otActions.solicitarPagoSuccess.type
+        action === otActions.solicitarPagoSuccess.type ||
+        action === otActions.cerrarOTSuccess.type
       ) {
         this.otFacade.getOts({
           filtro_propietario: 'TODAS',
