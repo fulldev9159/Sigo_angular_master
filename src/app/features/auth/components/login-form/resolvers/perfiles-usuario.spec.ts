@@ -5,11 +5,10 @@ import { PerfilesHttpService } from '@services';
 import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { PerfilUserMock200OK } from '@mocksOT';
-import { of } from 'rxjs';
+import { map, of, throwError } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StoreModule } from '@ngrx/store';
-import { provideMockStore } from '@ngrx/store/testing';
-import { sendingGetPerfilesUser } from '@storeOT/loadings/loadings.selectors';
+import { HttpErrorResponse } from '@angular/common/http';
 
 function fakeRouterState(url: string): RouterStateSnapshot {
   return {
@@ -68,12 +67,28 @@ describe('Perfiles Usuario resolver', () => {
     expect(resolver).toBeTruthy();
   });
 
-  it('should call getPerfilesUsuarioSucess', () => {
-    spyOn(service, 'getPerfilesUsuario')
-      .withArgs(2)
-      .and.returnValue(of(PerfilUserMock200OK));
-    resolver.resolve(dummyRoute, fakeRouterState('home'));
-    // let spyFacade = spyOn(perfilFacade, 'getPerfilesUsuarioSuccess');
-    // expect(spyFacade).toHaveBeenCalled();
+  it('should call getPerfilesUsuarioSucess', (done: DoneFn) => {
+    spyOn(perfilFacade, 'getPerfilesUsuarioSuccess');
+    spyOn(service, 'getPerfilesUsuario').and.returnValue(
+      of(PerfilUserMock200OK)
+    );
+    resolver.resolve(dummyRoute, fakeRouterState('home')).subscribe({
+      next: response => {
+        expect(perfilFacade.getPerfilesUsuarioSuccess).toHaveBeenCalled();
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call getPerfilesUsuarioErr', (done: DoneFn) => {
+    spyOn(perfilFacade, 'getPerfilesUsuarioError');
+    spyOn(service, 'getPerfilesUsuario').and.returnValue(throwError(() => {}));
+
+    resolver
+      .resolve(dummyRoute, fakeRouterState('home'))
+      .subscribe({ next: Response => done(), error: err => done() });
+
+    done();
   });
 });

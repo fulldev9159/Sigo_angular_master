@@ -19,20 +19,17 @@ export class PerfilesUsuarioResolver
     private perfilFacade: PerfilFacade,
     private loadingFacade: LoadingsFacade
   ) {}
+
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<Response<{ perfiles: PerfilesUsuario[] }>>
-    | Promise<Response<{ perfiles: PerfilesUsuario[] }>> {
+  ): Observable<Response<{ perfiles: PerfilesUsuario[] }>> {
     const user_id = JSON.parse(localStorage.getItem('auth')).sessionData
       .usuario_id;
 
     this.loadingFacade.sendingGetPerfilesUser();
     return this.service.getPerfilesUsuario(user_id).pipe(
-      tap(response => {
-        this.perfilFacade.getPerfilesUsuarioSuccess(response);
-      }),
+      tap(response => this.perfilFacade.getPerfilesUsuarioSuccess(response)),
       catchError(error => {
         this.perfilFacade.getPerfilesUsuarioError(error);
         return EMPTY;
