@@ -1,0 +1,28 @@
+stages:
+  - linter
+  - unit test
+
+variables:
+  CLI_VERSION: 10.1.6
+  GIT_STRATEGY: clone
+
+.connect_gcr: &connect_gcr
+  before_script:
+    - echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+    - docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
+
+linter:
+  stage: linter
+  image: trion/ng-cli-karma:${CLI_VERSION}
+  script:
+    - npm ci
+    - ng lint
+
+unit test:
+  stage: unit test
+  image: trion/ng-cli-karma:${CLI_VERSION}
+  script:
+    - npm ci
+    - ng test --code-coverage --progress false --watch false
+  coverage: '/^Statements\s*:\s*([^%]+)/'
