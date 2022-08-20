@@ -3,7 +3,7 @@ stages:
   - unit test
 
 variables:
-  CLI_VERSION: 10.1.6
+  CLI_VERSION: 14.1.0
   GIT_STRATEGY: clone
 
 .connect_gcr: &connect_gcr
