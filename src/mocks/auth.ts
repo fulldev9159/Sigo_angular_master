@@ -100,6 +100,14 @@ export let PerfilUserMock200OK: Response<{ perfiles: PerfilesUsuario[] }> = {
   },
 };
 
+export let PerfilUserMock200OKEmpty: Response<{ perfiles: PerfilesUsuario[] }> =
+  {
+    status: { code: 0, desc: 'OK' },
+    data: {
+      perfiles: [],
+    },
+  };
+
 export let LoginRefreshMock200OK: Response<{ token: string }> = {
   status: { code: 0, desc: 'OK' },
   data: {

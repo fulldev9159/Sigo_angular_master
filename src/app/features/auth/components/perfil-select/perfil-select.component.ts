@@ -21,12 +21,10 @@ export class PerfilSelectComponent {
     .pipe(
       tap(perfiles => (this.perfilesUsuario = perfiles)),
       map(perfiles =>
-        perfiles.length > 0
-          ? perfiles.map(perfil => ({
-              name: perfil.model_perfil_id?.nombre,
-              code: perfil.id,
-            }))
-          : []
+        perfiles.map(perfil => ({
+          name: perfil.model_perfil_id?.nombre,
+          code: perfil.id,
+        }))
       ),
       take(1)
     );
@@ -51,16 +49,14 @@ export class PerfilSelectComponent {
 
   perfilar(): void {
     const proxy_id_selected = +this.formPerfilUser.get('perfil_id').value;
-    const perfil_selected = this.perfilesUsuario.filter(
+    const perfil_selected = this.perfilesUsuario.find(
       perfil => perfil.id === proxy_id_selected
     );
-    if (perfil_selected.length > 1 || perfil_selected.length === 0) {
-      throw Error('Falla al obtener el perfil seleccionado');
-    }
+
     this.authFacade.refreshLogin(
       proxy_id_selected,
-      perfil_selected[0].model_perfil_id.nombre,
-      perfil_selected[0].model_perfil_id.model_rol_id.nombre
+      perfil_selected.model_perfil_id.nombre,
+      perfil_selected.model_perfil_id.model_rol_id.nombre
     );
   }
 

@@ -18,7 +18,7 @@
         
         <ng-container *ngIf="production">
             <div id="container-recaptcha" style="transform:scale(0.7);transform-origin:0;margin-left: 6rem;">
-                <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" [formControl]="formLoginControls.recaptcha"></re-captcha>
+                <re-captcha [siteKey]="siteKey" [formControl]="formLoginControls.recaptcha"></re-captcha>
             </div>
         </ng-container>
     

@@ -13,8 +13,4 @@ export class InputTextComponent {
   @Input() control: FormControl;
 
   constructor(private formularioService: FormularioService) {}
-
-  errorMessageFn(errors: any): string {
-    return this.formularioService.errorMessageFn(errors);
-  }
 }

@@ -43,5 +43,5 @@ export class LoginFormComponent implements OnInit {
     this.authFacade.Login(username, password);
   }
 
-  resolved(event: any): void {}
+  // resolved(event: any): void {}
 }
