@@ -6,7 +6,7 @@ import {
   getActividadesContratoProveedorMOCK200ok,
 } from '../../../src/mocks';
 
-describe('Testing Formulario Components', () => {
+describe.skip('Testing Formulario Components', () => {
   it('should let enter to create cubicacion', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
@@ -232,7 +232,7 @@ describe('Testing Formulario Components', () => {
   });
 });
 
-describe('Excepcion crear cubicación sin contratos asignado', () => {
+describe.skip('Excepcion crear cubicación sin contratos asignado', () => {
   beforeEach(() => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mtestsincontratos', 'asdasd');
