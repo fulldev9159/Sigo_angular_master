@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'zwc-form-cub',
   templateUrl: './form-cub-container.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./form-cub-container.component.scss'],
 })
 export class FormCubContainerComponent implements OnInit {

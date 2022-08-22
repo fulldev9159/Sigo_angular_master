@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { CarritoService } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Subscription } from 'rxjs';
@@ -6,6 +11,7 @@ import { map, Subscription } from 'rxjs';
 @Component({
   selector: 'zwc-table-services',
   templateUrl: './table-services.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./table-services.component.scss'],
 })
 export class TableServicesComponent implements OnDestroy {

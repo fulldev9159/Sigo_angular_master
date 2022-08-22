@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   AgenciaContrato,
@@ -22,6 +27,7 @@ interface Dropdown {
 @Component({
   selector: 'zwc-agregar-servicios-form',
   templateUrl: './agregar-servicios-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./agregar-servicios-form.component.scss'],
 })
 export class AgregarServiciosFormComponent implements OnInit, OnDestroy {

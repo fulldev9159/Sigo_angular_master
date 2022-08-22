@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   AgenciaContrato,
@@ -20,6 +25,7 @@ interface Dropdown {
 @Component({
   selector: 'zwc-formulario',
   templateUrl: './formulario.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./formulario.component.scss'],
 })
 export class FormularioComponent implements OnDestroy, OnInit {
