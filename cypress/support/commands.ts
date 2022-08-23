@@ -87,4 +87,5 @@ Cypress.Commands.add('_select_dropdown', (selector, item) => {
       $el.trigger('click');
     }
   });
+  cy.get(selector).click();
 });
