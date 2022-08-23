@@ -93,6 +93,32 @@ describe('FormularioComponent', () => {
     });
   });
 
+  it('should call contratoSelected facade with data contrato BUCLE', () => {
+    spyOn(cubicacionFacade, 'contratoSelected');
+    component.formCub.get('contrato').setValue(9); //BUCLE
+    fixture.detectChanges();
+    let contratoSelected = ContratosUsuarioMOCK200OK.data.items.find(
+      contrato => contrato.contrato_id === 9
+    );
+    expect(cubicacionFacade.contratoSelected).toHaveBeenCalledWith(
+      contratoSelected
+    );
+  });
+
+  it('if contract isnt BUCLE should call removeValidatos for direction section', () => {
+    spyOn(formService, 'removeValidators');
+    component.formCub.get('contrato').setValue(2); // CONTRATO_ORDINARIO
+    fixture.detectChanges();
+    expect(formService.removeValidators).toHaveBeenCalledWith(
+      component.formCub,
+      [
+        'direcciondesde',
+        'direcciondesdealtura',
+        'direccionhasta',
+        'direccionhastaaltura',
+      ]
+    );
+  });
   // it('should call resetControls with agencia, cmarcoproveedor_id,table as parameters if change contrato', () => {
   //   let formServiceSpy = spyOn(formService, 'resetControls');
   //   component.formCub.get('contrato').setValue(1);
