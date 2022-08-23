@@ -32,6 +32,7 @@ import {
 } from '@storeOT/loadings/loadings.selectors';
 import { getProveedoresAgenciasContrato } from '@storeOT/proveedor/proveedor.selectors';
 import {
+  carrito,
   getServiciosAgenciaContratoProveedor,
   getUnidadesObraServicio,
 } from '@storeOT/servicios/servicios.selectors';
@@ -124,6 +125,10 @@ describe('FormCubContainerComponent', () => {
             {
               selector: sendingGetUnidadesObraServicios,
               value: false,
+            },
+            {
+              selector: carrito,
+              value: null,
             },
           ],
         }),
