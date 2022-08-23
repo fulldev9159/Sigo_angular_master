@@ -6,6 +6,54 @@ import {
   getActividadesContratoProveedorMOCK200ok,
 } from '../../../src/mocks';
 
+describe.skip('Test responsive', () => {});
+describe('Test como se debe desplegar el formulario en un inicio', () => {
+  it('should let enter to create cubicacion', () => {
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mgestor1', 'asdasd');
+    cy._select_profile('Gestor/JP');
+    cy.get('#crear-cubicacion-sidebar').click();
+  });
+
+  it('should display name cubicacion input enabled', () => {
+    cy.get('input[name="input-nombre-cubicacion"]').should('be.enabled');
+  });
+
+  it('should display tipo cubicacion enabled', () => {
+    cy.get('#select-tipo-cubicacion>div').should(
+      'not.have.class',
+      'p-disabled'
+    );
+  });
+
+  it('should display Contrato Marco enabled', () => {
+    cy.get('#select-contrato_marco>div').should('not.have.class', 'p-disabled');
+  });
+
+  it('should display Agencia disabled', () => {
+    cy.get('#select-agencia>div').should('have.class', 'p-disabled');
+  });
+
+  it('should display Proveedor disabled', () => {
+    cy.get('#select-proveedor>div').should('have.class', 'p-disabled');
+  });
+
+  it('should display Actividad disabled', () => {
+    cy.get('#select-actividad>div').should('have.class', 'p-disabled');
+  });
+
+  it('should display Tipo Servicio disabled', () => {
+    cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
+  });
+
+  it('should display Servicio disabled', () => {
+    cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+  });
+
+  it('should display Unidad Obra disabled', () => {
+    cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+  });
+});
 describe.skip('Testing Formulario Components', () => {
   it('should let enter to create cubicacion', () => {
     cy.visit('http://localhost:4206/login/auth');

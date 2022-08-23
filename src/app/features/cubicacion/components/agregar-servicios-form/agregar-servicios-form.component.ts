@@ -30,7 +30,7 @@ interface Dropdown {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./agregar-servicios-form.component.scss'],
 })
-export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
+export class AgregarServiciosFormComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade
@@ -167,65 +167,65 @@ export class AgregarServiciosFormComponent implements OnInit, OnDestroy {
     private loadingsFacade: LoadingsFacade
   ) {}
 
-  ngOnInit(): void {
-    this.subscription.add(
-      combineLatest([
-        this.contratoSelected$,
-        this.formFilter.get('actividad_id').valueChanges,
-      ]).subscribe(([contratoSelected, actividad_id]) => {
-        if (
-          actividad_id &&
-          actividad_id !== null &&
-          contratoSelected &&
-          contratoSelected !== null
-        ) {
-          this.contratoFacade.getTipoServiciosContrato(
-            actividad_id,
-            contratoSelected.contrato_id
-          );
-        }
-      })
-    );
+  // ngOnInit(): void {
+  //   this.subscription.add(
+  //     combineLatest([
+  //       this.contratoSelected$,
+  //       this.formFilter.get('actividad_id').valueChanges,
+  //     ]).subscribe(([contratoSelected, actividad_id]) => {
+  //       if (
+  //         actividad_id &&
+  //         actividad_id !== null &&
+  //         contratoSelected &&
+  //         contratoSelected !== null
+  //       ) {
+  //         this.contratoFacade.getTipoServiciosContrato(
+  //           actividad_id,
+  //           contratoSelected.contrato_id
+  //         );
+  //       }
+  //     })
+  //   );
 
-    this.subscription.add(
-      combineLatest([
-        this.proveedorSelected$,
-        this.agenciaSelected$,
-        this.formFilter.get('tipo_servicio_id').valueChanges,
-      ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) => {
-        if (
-          agenciaSelected &&
-          agenciaSelected !== null &&
-          proveedorSelected &&
-          proveedorSelected !== null &&
-          tipo_servicio_id &&
-          tipo_servicio_id !== null
-        ) {
-          let request: RequestGetServicioTipoAgenciaContratoProveedor = {
-            actividad_id: +this.formFilter.get('actividad_id').value,
-            agencia_id: agenciaSelected.id,
-            cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
-            tipo_servicio_id,
-          };
-          this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
-        }
-      })
-    );
+  //   this.subscription.add(
+  //     combineLatest([
+  //       this.proveedorSelected$,
+  //       this.agenciaSelected$,
+  //       this.formFilter.get('tipo_servicio_id').valueChanges,
+  //     ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) => {
+  //       if (
+  //         agenciaSelected &&
+  //         agenciaSelected !== null &&
+  //         proveedorSelected &&
+  //         proveedorSelected !== null &&
+  //         tipo_servicio_id &&
+  //         tipo_servicio_id !== null
+  //       ) {
+  //         let request: RequestGetServicioTipoAgenciaContratoProveedor = {
+  //           actividad_id: +this.formFilter.get('actividad_id').value,
+  //           agencia_id: agenciaSelected.id,
+  //           cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
+  //           tipo_servicio_id,
+  //         };
+  //         this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
+  //       }
+  //     })
+  //   );
 
-    this.subscription.add(
-      this.formFilter
-        .get('servicio_cod')
-        .valueChanges.subscribe(servicio_cod => {
-          if (servicio_cod && servicio_cod !== null) {
-            let request: RequestGetUnidadObraServicio = {
-              servicio_cod,
-              actividad_id: +this.formFilter.get('actividad_id').value,
-            };
-            this.serviciosFacade.getUnidadesObraServicio(request);
-          }
-        })
-    );
-  }
+  //   this.subscription.add(
+  //     this.formFilter
+  //       .get('servicio_cod')
+  //       .valueChanges.subscribe(servicio_cod => {
+  //         if (servicio_cod && servicio_cod !== null) {
+  //           let request: RequestGetUnidadObraServicio = {
+  //             servicio_cod,
+  //             actividad_id: +this.formFilter.get('actividad_id').value,
+  //           };
+  //           this.serviciosFacade.getUnidadesObraServicio(request);
+  //         }
+  //       })
+  //   );
+  // }
 
   agregarServicio(): void {
     this.subscription.add(

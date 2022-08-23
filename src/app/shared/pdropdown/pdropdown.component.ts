@@ -16,5 +16,6 @@ export class PdropdownComponent {
   @Input() Pfilter = false;
   @Input() PfilterBy = '';
   @Input() PshowClear = false;
+  @Input() Pdisabled = false;
   constructor() {}
 }

@@ -11,6 +11,7 @@ export let getAgenciasContratoMOCK200OK: Response<{
   status: { code: 0, desc: 'OK' },
   data: {
     items: [
+      { id: 19, nombre: 'BBB' },
       { id: 20, nombre: 'APOQUINDO' },
       { id: 19, nombre: 'PROVIDENCIA' },
     ],

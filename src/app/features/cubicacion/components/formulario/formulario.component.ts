@@ -28,7 +28,7 @@ interface Dropdown {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./formulario.component.scss'],
 })
-export class FormularioComponent implements OnDestroy, OnInit {
+export class FormularioComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
   contratosUsuario: ContratosUser[];
@@ -39,23 +39,15 @@ export class FormularioComponent implements OnDestroy, OnInit {
       tap(values => (this.contratosUsuario = values)),
       map(values => {
         let tmp = [...values];
-        return tmp.length > 0
-          ? tmp.sort((a, b) =>
-              a.model_contrato_id.nombre > b.model_contrato_id.nombre
-                ? 1
-                : b.model_contrato_id.nombre > a.model_contrato_id.nombre
-                ? -1
-                : 0
-            )
-          : [];
+        return tmp.sort((a, b) =>
+          a.model_contrato_id.nombre > b.model_contrato_id.nombre ? 1 : -1
+        );
       }),
       map(values =>
-        values.length > 0
-          ? values.map(value => ({
-              name: value.model_contrato_id.nombre,
-              code: value.contrato_id,
-            }))
-          : []
+        values.map(value => ({
+          name: value.model_contrato_id.nombre,
+          code: value.contrato_id,
+        }))
       ),
       take(1)
     );
@@ -65,23 +57,13 @@ export class FormularioComponent implements OnDestroy, OnInit {
     .pipe(
       map(values => {
         let tmp = [...values];
-        return tmp.length > 0
-          ? tmp.sort((a, b) =>
-              a.descripcion > b.descripcion
-                ? 1
-                : b.descripcion > a.descripcion
-                ? -1
-                : 0
-            )
-          : [];
+        return tmp.sort((a, b) => (a.descripcion > b.descripcion ? 1 : -1));
       }),
       map(values =>
-        values.length > 0
-          ? values.map(value => ({
-              name: value.descripcion,
-              code: value.id,
-            }))
-          : []
+        values.map(value => ({
+          name: value.descripcion,
+          code: value.id,
+        }))
       ),
       take(1)
     );
@@ -92,19 +74,13 @@ export class FormularioComponent implements OnDestroy, OnInit {
       tap(values => (this.agenciasContrato = values)),
       map(values => {
         let tmp = [...values];
-        return tmp.length > 0
-          ? tmp.sort((a, b) =>
-              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-            )
-          : [];
+        return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
       }),
       map(values =>
-        values.length > 0
-          ? values.map(value => ({
-              name: value.nombre,
-              code: value.id,
-            }))
-          : []
+        values.map(value => ({
+          name: value.nombre,
+          code: value.id,
+        }))
       )
     );
   proveedoresAgenciaContrato: ProveedorAgenciaContrato[];
@@ -114,19 +90,13 @@ export class FormularioComponent implements OnDestroy, OnInit {
       tap(proveedores => (this.proveedoresAgenciaContrato = proveedores)),
       map(values => {
         let tmp = [...values];
-        return tmp.length > 0
-          ? tmp.sort((a, b) =>
-              a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-            )
-          : [];
+        return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
       }),
       map(values =>
-        values.length > 0
-          ? values.map(value => ({
-              name: `${value.codigo_acuerdo} - ${value.nombre}`,
-              code: value.cmarco_has_proveedor_id,
-            }))
-          : []
+        values.map(value => ({
+          name: `${value.codigo_acuerdo} - ${value.nombre}`,
+          code: value.cmarco_has_proveedor_id,
+        }))
       )
     );
 
@@ -148,7 +118,7 @@ export class FormularioComponent implements OnDestroy, OnInit {
     contrato: new FormControl(null, [Validators.required]),
     agencia_id: new FormControl(null, [Validators.required]),
     cmarcoproveedor_id: new FormControl(null, [Validators.required]),
-    table: new FormArray([]),
+    // table: new FormArray([]),
   };
 
   formCub: FormGroup = new FormGroup(this.formCubControl);
@@ -168,101 +138,101 @@ export class FormularioComponent implements OnDestroy, OnInit {
     private proveedorFacade: ProveedorFacade
   ) {}
 
-  ngOnInit(): void {
-    this.formObserver();
-  }
+  // ngOnInit(): void {
+  //   this.formObserver();
+  // }
 
-  formObserver(): void {
-    // CONTRATO MARCO
-    this.subscription.add(
-      this.formCub.get('contrato').valueChanges.subscribe(contrato_id => {
-        // RESET
-        this.formularioService.resetControls(this.formCub, [
-          'agencia_id',
-          'cmarcoproveedor_id',
-        ]);
+  // formObserver(): void {
+  //   // CONTRATO MARCO
+  //   this.subscription.add(
+  //     this.formCub.get('contrato').valueChanges.subscribe(contrato_id => {
+  //       // RESET
+  //       this.formularioService.resetControls(this.formCub, [
+  //         'agencia_id',
+  //         'cmarcoproveedor_id',
+  //       ]);
 
-        // CALL
-        if (contrato_id && contrato_id !== null) {
-          this.contratoFacade.getAgenciasContrato(+contrato_id);
-        }
+  //       // CALL
+  //       if (contrato_id && contrato_id !== null) {
+  //         this.contratoFacade.getAgenciasContrato(+contrato_id);
+  //       }
 
-        // STORE CONTRATO SELECTED
-        this.contrato_selected = this.contratosUsuario.find(
-          contrato => contrato.contrato_id === contrato_id
-        );
-        this.cubicacionFacade.contratoSelected(this.contrato_selected);
+  //       // STORE CONTRATO SELECTED
+  //       this.contrato_selected = this.contratosUsuario.find(
+  //         contrato => contrato.contrato_id === contrato_id
+  //       );
+  //       this.cubicacionFacade.contratoSelected(this.contrato_selected);
 
-        // CONTRATOS BUCLE
-        if (
-          this.contrato_selected &&
-          this.contrato_selected.model_contrato_id.tipo_contrato_id === 4
-        ) {
-          this.formularioService.addValidators(
-            this.formCub,
-            [
-              'direcciondesde',
-              'direcciondesdealtura',
-              'direccionhasta',
-              'direccionhastaaltura',
-            ],
-            [
-              Validators.required,
-              this.formularioService.noWhitespace,
-              Validators.maxLength(100),
-            ]
-          );
-        } else {
-          this.formularioService.removeValidators(this.formCub, [
-            'direcciondesde',
-            'direcciondesdealtura',
-            'direccionhasta',
-            'direccionhastaaltura',
-          ]);
-        }
-      })
-    );
-    // AGENCIA
-    this.subscription.add(
-      this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
-        // RESET
-        this.formularioService.resetControls(this.formCub, [
-          'cmarcoproveedor_id',
-        ]);
+  //       // CONTRATOS BUCLE
+  //       if (
+  //         this.contrato_selected &&
+  //         this.contrato_selected.model_contrato_id.tipo_contrato_id === 4
+  //       ) {
+  //         this.formularioService.addValidators(
+  //           this.formCub,
+  //           [
+  //             'direcciondesde',
+  //             'direcciondesdealtura',
+  //             'direccionhasta',
+  //             'direccionhastaaltura',
+  //           ],
+  //           [
+  //             Validators.required,
+  //             this.formularioService.noWhitespace,
+  //             Validators.maxLength(100),
+  //           ]
+  //         );
+  //       } else {
+  //         this.formularioService.removeValidators(this.formCub, [
+  //           'direcciondesde',
+  //           'direcciondesdealtura',
+  //           'direccionhasta',
+  //           'direccionhastaaltura',
+  //         ]);
+  //       }
+  //     })
+  //   );
+  //   // AGENCIA
+  //   this.subscription.add(
+  //     this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
+  //       // RESET
+  //       this.formularioService.resetControls(this.formCub, [
+  //         'cmarcoproveedor_id',
+  //       ]);
 
-        // CALL
-        if (agencia_id && agencia_id !== null) {
-          let agenciaSelected = this.agenciasContrato.find(
-            agencia => agencia.id === agencia_id
-          );
-          this.cubicacionFacade.agenciaSelected(agenciaSelected);
-          let contrato_id = +this.formCub.get('contrato').value;
-          this.proveedorFacade.getProveedoresAgenciaContrato(
-            +agencia_id,
-            contrato_id
-          );
-        }
-      })
-    );
-    // PROVEEDOR
-    this.subscription.add(
-      this.formCub
-        .get('cmarcoproveedor_id')
-        .valueChanges.subscribe(cmarcoproveedor_id => {
-          if (cmarcoproveedor_id && cmarcoproveedor_id != null) {
-            let proveedorSelected: ProveedorAgenciaContrato =
-              this.proveedoresAgenciaContrato.find(
-                proveedor =>
-                  proveedor.cmarco_has_proveedor_id === cmarcoproveedor_id
-              );
-            this.cubicacionFacade.proveedorSelected(proveedorSelected);
-            this.contratoFacade.getActividadesContratoProveedor(
-              +cmarcoproveedor_id
-            );
-          }
-        })
-    );
-  }
+  //       // CALL
+  //       if (agencia_id && agencia_id !== null) {
+  //         let agenciaSelected = this.agenciasContrato.find(
+  //           agencia => agencia.id === agencia_id
+  //         );
+  //         this.cubicacionFacade.agenciaSelected(agenciaSelected);
+  //         let contrato_id = +this.formCub.get('contrato').value;
+  //         this.proveedorFacade.getProveedoresAgenciaContrato(
+  //           +agencia_id,
+  //           contrato_id
+  //         );
+  //       }
+  //     })
+  //   );
+  //   // PROVEEDOR
+  //   this.subscription.add(
+  //     this.formCub
+  //       .get('cmarcoproveedor_id')
+  //       .valueChanges.subscribe(cmarcoproveedor_id => {
+  //         if (cmarcoproveedor_id && cmarcoproveedor_id != null) {
+  //           let proveedorSelected: ProveedorAgenciaContrato =
+  //             this.proveedoresAgenciaContrato.find(
+  //               proveedor =>
+  //                 proveedor.cmarco_has_proveedor_id === cmarcoproveedor_id
+  //             );
+  //           this.cubicacionFacade.proveedorSelected(proveedorSelected);
+  //           this.contratoFacade.getActividadesContratoProveedor(
+  //             +cmarcoproveedor_id
+  //           );
+  //         }
+  //       })
+  //   );
+  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

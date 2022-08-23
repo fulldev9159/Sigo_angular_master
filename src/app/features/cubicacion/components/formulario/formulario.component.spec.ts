@@ -80,31 +80,44 @@ describe('FormularioComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call resetControls with agencia, cmarcoproveedor_id,table as parameters if change contrato', () => {
-    let formServiceSpy = spyOn(formService, 'resetControls');
-    component.formCub.get('contrato').setValue(1);
-    fixture.detectChanges();
-    expect(formServiceSpy).toHaveBeenCalledWith(component.formCub, [
-      'agencia_id',
-      'cmarcoproveedor_id',
-    ]);
+  it('should contratoUsuarios$ have to be in order asc', (done: DoneFn) => {
+    component.contratoUsuarios$.subscribe({
+      next: respose => {
+        expect(respose[0].name).toEqual('BUCLE');
+        expect(respose[1].name).toEqual('CONTRATO_ORDINARIO');
+        expect(respose[2].name).toEqual('SBE_2018');
+        expect(respose[3].name).toEqual('UNIFICADO_FIJA');
+        expect(respose[4].name).toEqual('UNIFICADO_MOVIL');
+        done();
+      },
+    });
   });
 
-  it('should disabled controls agencia', () => {});
+  // it('should call resetControls with agencia, cmarcoproveedor_id,table as parameters if change contrato', () => {
+  //   let formServiceSpy = spyOn(formService, 'resetControls');
+  //   component.formCub.get('contrato').setValue(1);
+  //   fixture.detectChanges();
+  //   expect(formServiceSpy).toHaveBeenCalledWith(component.formCub, [
+  //     'agencia_id',
+  //     'cmarcoproveedor_id',
+  //   ]);
+  // });
 
-  it('should call getAgencias if change contrato', () => {
-    let getAgenciaSpy = spyOn(contratoFacade, 'getAgenciasContrato');
-    component.formCub.get('contrato').setValue(1);
-    fixture.detectChanges();
-    expect(getAgenciaSpy).toHaveBeenCalled();
-  });
-  // si no trae contratos debe bloquear todo
-  // dependiendo del contrato debe desplegar direccion
+  // it('should disabled controls agencia', () => {});
 
-  it('should call getProveedoresAgenciaContrato if change agencia', () => {
-    let getSpy = spyOn(proveedorFacade, 'getProveedoresAgenciaContrato');
-    component.formCub.get('agencia_id').setValue(1);
-    fixture.detectChanges();
-    expect(getSpy).toHaveBeenCalled();
-  });
+  // it('should call getAgencias if change contrato', () => {
+  //   let getAgenciaSpy = spyOn(contratoFacade, 'getAgenciasContrato');
+  //   component.formCub.get('contrato').setValue(1);
+  //   fixture.detectChanges();
+  //   expect(getAgenciaSpy).toHaveBeenCalled();
+  // });
+  // // si no trae contratos debe bloquear todo
+  // // dependiendo del contrato debe desplegar direccion
+
+  // it('should call getProveedoresAgenciaContrato if change agencia', () => {
+  //   let getSpy = spyOn(proveedorFacade, 'getProveedoresAgenciaContrato');
+  //   component.formCub.get('agencia_id').setValue(1);
+  //   fixture.detectChanges();
+  //   expect(getSpy).toHaveBeenCalled();
+  // });
 });
