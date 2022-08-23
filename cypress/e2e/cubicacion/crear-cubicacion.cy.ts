@@ -1,9 +1,10 @@
 import {
   tipoCubicacionMOCK200OK,
-  getAgenciasContratoMOCK200OK,
+  getAgenciasContratoMOCK200OK2,
   ContratosUsuarioMOCK200OK,
   getProveedoresAgenciaContratoMOCK200OK,
   getActividadesContratoProveedorMOCK200ok,
+  getAgenciasContratoMOCK200OK,
 } from '../../../src/mocks';
 
 it('should let enter to create cubicacion', () => {
@@ -146,14 +147,8 @@ describe('Testing comportamiento sección descripcion dependiendo del contrato',
     cy.get('input[name="input-altura-hasta"]').should('not.exist');
   });
 });
-describe.skip('Testing Formulario Components', () => {
-  it('should let enter to create cubicacion', () => {
-    cy.visit('http://localhost:4206/login/auth');
-    cy._login('mgestor1', 'asdasd');
-    cy._select_profile('Gestor/JP');
-    cy.get('#crear-cubicacion-sidebar').click();
-  });
 
+describe('Testing comportamiento inputs', () => {
   describe('Agencia', (name = 'Agencia') => {
     let selector = '#select-agencia';
     it(`should display dropdown ${name} as required`, () => {
@@ -177,6 +172,15 @@ describe.skip('Testing Formulario Components', () => {
     afterEach(() => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
+  });
+});
+
+describe.skip('Testing Formulario Components', () => {
+  it('should let enter to create cubicacion', () => {
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mgestor1', 'asdasd');
+    cy._select_profile('Gestor/JP');
+    cy.get('#crear-cubicacion-sidebar').click();
   });
 
   describe('Proveedor', (name = 'Proveedor') => {

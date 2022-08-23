@@ -5,13 +5,25 @@ import {
   TipoServicioContrato,
 } from '@model';
 
-export let getAgenciasContratoMOCK200OK: Response<{
+export let getAgenciasContratoMOCK200OK2: Response<{
   items: AgenciaContrato[];
 }> = {
   status: { code: 0, desc: 'OK' },
   data: {
     items: [
       { id: 19, nombre: 'BBB' },
+      { id: 20, nombre: 'APOQUINDO' },
+      { id: 19, nombre: 'PROVIDENCIA' },
+    ],
+  },
+};
+
+export let getAgenciasContratoMOCK200OK: Response<{
+  items: AgenciaContrato[];
+}> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    items: [
       { id: 20, nombre: 'APOQUINDO' },
       { id: 19, nombre: 'PROVIDENCIA' },
     ],

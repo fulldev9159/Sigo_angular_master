@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   ContratosUsuarioMOCK200OK,
   getActividadesContratoProveedorMOCK200ok,
-  getAgenciasContratoMOCK200OK,
+  getAgenciasContratoMOCK200OK2,
   getProveedoresAgenciaContratoMOCK200OK,
   getTipoServiciosContratoMOCK200ok,
   ServiciosAgenciaContratoProveedorMOCK200OK,
@@ -75,7 +75,7 @@ describe('FormCubContainerComponent', () => {
             },
             {
               selector: getAgenciasContrato,
-              value: getAgenciasContratoMOCK200OK.data.items,
+              value: getAgenciasContratoMOCK200OK2.data.items,
             },
             {
               selector: getProveedoresAgenciasContrato,

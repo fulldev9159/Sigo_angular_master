@@ -45,4 +45,12 @@ export class FormularioService {
       form.get(control).updateValueAndValidity();
     });
   }
+
+  checkAndEnable(form: FormGroup, key: string, array: any[]): void {
+    if (array.length > 0) {
+      form.get(key).enable({ emitEvent: false });
+    } else {
+      form.get(key).disable({ emitEvent: false });
+    }
+  }
 }

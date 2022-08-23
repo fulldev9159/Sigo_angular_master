@@ -72,6 +72,13 @@ export class FormularioComponent implements OnDestroy, OnInit {
     .getAgenciasContrato$()
     .pipe(
       tap(values => (this.agenciasContrato = values)),
+      tap(values =>
+        this.formularioService.checkAndEnable(
+          this.formCub,
+          'agencia_id',
+          values
+        )
+      ),
       map(values => {
         let tmp = [...values];
         return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
@@ -152,10 +159,11 @@ export class FormularioComponent implements OnDestroy, OnInit {
         //         'cmarcoproveedor_id',
         //       ]);
 
-        //       // CALL
-        //       if (contrato_id && contrato_id !== null) {
-        //         this.contratoFacade.getAgenciasContrato(+contrato_id);
-        //       }
+        // CALL
+        if (contrato_id && contrato_id !== null) {
+          this.formCub.get('agencia_id').disable({ emitEvent: false });
+          this.contratoFacade.getAgenciasContrato(+contrato_id);
+        }
 
         // STORE CONTRATO SELECTED
         this.contrato_selected = this.contratosUsuario.find(

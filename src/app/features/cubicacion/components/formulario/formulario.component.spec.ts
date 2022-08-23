@@ -7,7 +7,7 @@ import { getTipoCubicacion } from '@storeOT/cubicacion/cubicacion.selectors';
 import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
 import { FormularioComponent } from './formulario.component';
 import {
-  getAgenciasContratoMOCK200OK,
+  getAgenciasContratoMOCK200OK2,
   getProveedoresAgenciaContratoMOCK200OK,
   tipoCubicacionMOCK200OK,
 } from '@mocksOT';
@@ -54,7 +54,7 @@ describe('FormularioComponent', () => {
             },
             {
               selector: getAgenciasContrato,
-              value: getAgenciasContratoMOCK200OK.data.items,
+              value: getAgenciasContratoMOCK200OK2.data.items,
             },
             {
               selector: getProveedoresAgenciasContrato,
@@ -91,6 +91,13 @@ describe('FormularioComponent', () => {
         done();
       },
     });
+  });
+
+  it('should call getAgenciasContrato facade with data contrato BUCLE', () => {
+    spyOn(contratoFacade, 'getAgenciasContrato');
+    component.formCub.get('contrato').setValue(9); //BUCLE
+    fixture.detectChanges();
+    expect(contratoFacade.getAgenciasContrato).toHaveBeenCalledWith(9);
   });
 
   it('should call contratoSelected facade with data contrato BUCLE', () => {

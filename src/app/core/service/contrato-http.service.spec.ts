@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import {
   getActividadesContratoProveedorMOCK200ok,
-  getAgenciasContratoMOCK200OK,
+  getAgenciasContratoMOCK200OK2,
   getTipoServiciosContratoMOCK200ok,
 } from '@mocksOT';
 import { of } from 'rxjs';
@@ -27,10 +27,10 @@ describe('ContratoHttpService', () => {
   });
 
   it('should call getAgenciasContrato and return and AgenciaContrato Data', (done: DoneFn) => {
-    httpClientSpy.post.and.returnValue(of(getAgenciasContratoMOCK200OK));
+    httpClientSpy.post.and.returnValue(of(getAgenciasContratoMOCK200OK2));
     service.getAgenciasContrato(1).subscribe({
       next: response => {
-        expect(response).toEqual(getAgenciasContratoMOCK200OK);
+        expect(response).toEqual(getAgenciasContratoMOCK200OK2);
         done();
       },
       error: done.fail,
