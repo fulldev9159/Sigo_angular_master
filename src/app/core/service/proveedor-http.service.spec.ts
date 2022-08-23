@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { getProveedoresAgenciaContratoMOCK200OK } from '@mocksOT';
+import { getProveedoresAgenciaContratoMOCK200OK2 } from '@mocksOT';
 import { of } from 'rxjs';
 
 import { ProveedorHttpService } from './proveedor-http.service';
@@ -22,11 +22,11 @@ describe('ProveedorHttpService', () => {
 
   it('should call getProveedoresAgenciaContrato and return and ProveedorAgenciaContrato Data', (done: DoneFn) => {
     httpClientSpy.post.and.returnValue(
-      of(getProveedoresAgenciaContratoMOCK200OK)
+      of(getProveedoresAgenciaContratoMOCK200OK2)
     );
     service.getProveedoresAgenciaContrato(1, 1).subscribe({
       next: response => {
-        expect(response).toEqual(getProveedoresAgenciaContratoMOCK200OK);
+        expect(response).toEqual(getProveedoresAgenciaContratoMOCK200OK2);
         done();
       },
       error: done.fail,

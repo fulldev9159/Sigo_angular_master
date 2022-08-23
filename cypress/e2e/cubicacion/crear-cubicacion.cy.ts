@@ -2,9 +2,10 @@ import {
   tipoCubicacionMOCK200OK,
   getAgenciasContratoMOCK200OK2,
   ContratosUsuarioMOCK200OK,
-  getProveedoresAgenciaContratoMOCK200OK,
+  getProveedoresAgenciaContratoMOCK200OK2,
   getActividadesContratoProveedorMOCK200ok,
   getAgenciasContratoMOCK200OK,
+  getProveedoresAgenciaContratoMOCK200OK,
 } from '../../../src/mocks';
 
 it('should let enter to create cubicacion', () => {
@@ -153,7 +154,10 @@ describe('Testing comportamiento inputs', () => {
     let selector = '#select-agencia';
     it(`should display dropdown ${name} as required`, () => {
       cy._select_dropdown('#select-contrato_marco', 'BUCLE');
-      cy._check_dropdown_required(selector);
+      cy.get(selector).click();
+      cy.wait(1).then(() => {
+        cy._check_dropdown_required(selector);
+      });
     });
 
     it(`dropdown ${name} should display data`, () => {
@@ -173,22 +177,19 @@ describe('Testing comportamiento inputs', () => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
   });
-});
-
-describe.skip('Testing Formulario Components', () => {
-  it('should let enter to create cubicacion', () => {
-    cy.visit('http://localhost:4206/login/auth');
-    cy._login('mgestor1', 'asdasd');
-    cy._select_profile('Gestor/JP');
-    cy.get('#crear-cubicacion-sidebar').click();
-  });
 
   describe('Proveedor', (name = 'Proveedor') => {
     let selector = '#select-proveedor';
     it(`should display dropdown ${name} as required`, () => {
       cy._select_dropdown('#select-contrato_marco', 'BUCLE');
       cy._select_dropdown('#select-agencia', 'APOQUINDO');
-      cy._check_dropdown_required(selector);
+      cy.intercept(
+        'POST',
+        '/cubicacion/proveedores_from_agencia_contrato/get'
+      ).as('HTTPRESPONSE');
+      cy.wait('@HTTPRESPONSE').then(() => {
+        cy._check_dropdown_required(selector);
+      });
     });
 
     it(`dropdown ${name} should display data`, () => {
@@ -208,6 +209,15 @@ describe.skip('Testing Formulario Components', () => {
     afterEach(() => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
+  });
+});
+
+describe.skip('Testing Formulario Components', () => {
+  it('should let enter to create cubicacion', () => {
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mgestor1', 'asdasd');
+    cy._select_profile('Gestor/JP');
+    cy.get('#crear-cubicacion-sidebar').click();
   });
 
   describe('Actividad', (name = 'Actividad') => {

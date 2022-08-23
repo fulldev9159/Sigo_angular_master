@@ -75,7 +75,6 @@ Cypress.Commands.add('_check_input', (selector, validator) => {
 Cypress.Commands.add('_check_dropdown_required', selector => {
   cy.get(selector).click();
   cy.get(selector).click();
-  cy.get(selector).click();
   cy.get(selector + '+zwc-input-alert>small').contains(
     'Este campo es requerido'
   );

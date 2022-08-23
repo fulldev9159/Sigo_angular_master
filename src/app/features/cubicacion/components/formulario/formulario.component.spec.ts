@@ -8,7 +8,7 @@ import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
 import { FormularioComponent } from './formulario.component';
 import {
   getAgenciasContratoMOCK200OK2,
-  getProveedoresAgenciaContratoMOCK200OK,
+  getProveedoresAgenciaContratoMOCK200OK2,
   tipoCubicacionMOCK200OK,
 } from '@mocksOT';
 import { ContratosUsuarioMOCK200OK } from 'src/mocks/usuario';
@@ -58,7 +58,7 @@ describe('FormularioComponent', () => {
             },
             {
               selector: getProveedoresAgenciasContrato,
-              value: getProveedoresAgenciaContratoMOCK200OK.data.items,
+              value: getProveedoresAgenciaContratoMOCK200OK2.data.items,
             },
             { selector: sendingGetProveedorAgenciasContrato, value: false },
           ],
@@ -93,13 +93,6 @@ describe('FormularioComponent', () => {
     });
   });
 
-  it('should call getAgenciasContrato facade with data contrato BUCLE', () => {
-    spyOn(contratoFacade, 'getAgenciasContrato');
-    component.formCub.get('contrato').setValue(9); //BUCLE
-    fixture.detectChanges();
-    expect(contratoFacade.getAgenciasContrato).toHaveBeenCalledWith(9);
-  });
-
   it('should call contratoSelected facade with data contrato BUCLE', () => {
     spyOn(cubicacionFacade, 'contratoSelected');
     component.formCub.get('contrato').setValue(9); //BUCLE
@@ -126,6 +119,33 @@ describe('FormularioComponent', () => {
       ]
     );
   });
+
+  it('should call getAgenciasContrato facade with data contrato BUCLE', () => {
+    spyOn(contratoFacade, 'getAgenciasContrato');
+    component.formCub.get('contrato').setValue(9); //BUCLE
+    fixture.detectChanges();
+    expect(contratoFacade.getAgenciasContrato).toHaveBeenCalledWith(9);
+  });
+
+  it('should call getProveedoresAgenciaContrato if change agencia', () => {
+    spyOn(proveedorFacade, 'getProveedoresAgenciaContrato');
+    spyOn(cubicacionFacade, 'agenciaSelected');
+    component.formCub.get('contrato').setValue(9); //BUCLE
+    component.formCub.get('agencia_id').setValue(20); //APOQUINDO
+    fixture.detectChanges();
+
+    let agenciaSelected = getAgenciasContratoMOCK200OK2.data.items.find(
+      agencia => agencia.id === 20
+    );
+    expect(cubicacionFacade.agenciaSelected).toHaveBeenCalledWith(
+      agenciaSelected
+    );
+    expect(proveedorFacade.getProveedoresAgenciaContrato).toHaveBeenCalledWith(
+      20,
+      9
+    );
+  });
+
   // it('should call resetControls with agencia, cmarcoproveedor_id,table as parameters if change contrato', () => {
   //   let formServiceSpy = spyOn(formService, 'resetControls');
   //   component.formCub.get('contrato').setValue(1);
@@ -138,19 +158,6 @@ describe('FormularioComponent', () => {
 
   // it('should disabled controls agencia', () => {});
 
-  // it('should call getAgencias if change contrato', () => {
-  //   let getAgenciaSpy = spyOn(contratoFacade, 'getAgenciasContrato');
-  //   component.formCub.get('contrato').setValue(1);
-  //   fixture.detectChanges();
-  //   expect(getAgenciaSpy).toHaveBeenCalled();
-  // });
   // // si no trae contratos debe bloquear todo
   // // dependiendo del contrato debe desplegar direccion
-
-  // it('should call getProveedoresAgenciaContrato if change agencia', () => {
-  //   let getSpy = spyOn(proveedorFacade, 'getProveedoresAgenciaContrato');
-  //   component.formCub.get('agencia_id').setValue(1);
-  //   fixture.detectChanges();
-  //   expect(getSpy).toHaveBeenCalled();
-  // });
 });

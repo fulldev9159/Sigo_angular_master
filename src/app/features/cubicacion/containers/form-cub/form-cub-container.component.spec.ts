@@ -3,7 +3,7 @@ import {
   ContratosUsuarioMOCK200OK,
   getActividadesContratoProveedorMOCK200ok,
   getAgenciasContratoMOCK200OK2,
-  getProveedoresAgenciaContratoMOCK200OK,
+  getProveedoresAgenciaContratoMOCK200OK2,
   getTipoServiciosContratoMOCK200ok,
   ServiciosAgenciaContratoProveedorMOCK200OK,
   tipoCubicacionMOCK200OK,
@@ -79,7 +79,7 @@ describe('FormCubContainerComponent', () => {
             },
             {
               selector: getProveedoresAgenciasContrato,
-              value: getProveedoresAgenciaContratoMOCK200OK.data.items,
+              value: getProveedoresAgenciaContratoMOCK200OK2.data.items,
             },
             { selector: sendingGetProveedorAgenciasContrato, value: false },
             {

@@ -95,6 +95,13 @@ export class FormularioComponent implements OnDestroy, OnInit {
     .getProveedoresAgenciaContrato$()
     .pipe(
       tap(proveedores => (this.proveedoresAgenciaContrato = proveedores)),
+      tap(values =>
+        this.formularioService.checkAndEnable(
+          this.formCub,
+          'cmarcoproveedor_id',
+          values
+        )
+      ),
       map(values => {
         let tmp = [...values];
         return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
@@ -200,28 +207,29 @@ export class FormularioComponent implements OnDestroy, OnInit {
         }
       })
     );
-    //   // AGENCIA
-    //   this.subscription.add(
-    //     this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
-    //       // RESET
-    //       this.formularioService.resetControls(this.formCub, [
-    //         'cmarcoproveedor_id',
-    //       ]);
+    // AGENCIA
+    this.subscription.add(
+      this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
+        // RESET
+        // this.formularioService.resetControls(this.formCub, [
+        //   'cmarcoproveedor_id',
+        // ]);
 
-    //       // CALL
-    //       if (agencia_id && agencia_id !== null) {
-    //         let agenciaSelected = this.agenciasContrato.find(
-    //           agencia => agencia.id === agencia_id
-    //         );
-    //         this.cubicacionFacade.agenciaSelected(agenciaSelected);
-    //         let contrato_id = +this.formCub.get('contrato').value;
-    //         this.proveedorFacade.getProveedoresAgenciaContrato(
-    //           +agencia_id,
-    //           contrato_id
-    //         );
-    //       }
-    //     })
-    //   );
+        // CALL
+        if (agencia_id && agencia_id !== null) {
+          let agenciaSelected = this.agenciasContrato.find(
+            agencia => agencia.id === agencia_id
+          );
+          this.cubicacionFacade.agenciaSelected(agenciaSelected);
+          let contrato_id = +this.formCub.get('contrato').value;
+          this.proveedorFacade.getProveedoresAgenciaContrato(
+            +agencia_id,
+            contrato_id
+          );
+        }
+      })
+    );
+
     //   // PROVEEDOR
     //   this.subscription.add(
     //     this.formCub
