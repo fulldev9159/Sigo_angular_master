@@ -872,3 +872,18 @@ export const anularOTError = createAction(
   '[OT] GET anularOT Error',
   props<{ error: any }>()
 );
+
+//  APROBAR RECHAZAR OPERACIONES
+export const AprobarRechazarOperaciones = createAction(
+  '[OT] GET AprobarRechazarOperaciones',
+  props<{ request: RequestAceptarRechazarOT }>()
+);
+
+export const AprobarRechazarOperacionesSuccess = createAction(
+  '[OT] GET AprobarRechazarOperaciones Success',
+  props<{ response: Response<any> }>()
+);
+export const AprobarRechazarOperacionesError = createAction(
+  '[OT] GET AprobarRechazarOperaciones Error',
+  props<{ error: any }>()
+);

@@ -317,4 +317,13 @@ export class OTService {
       }
     );
   }
+
+  // RECHAZAR/ACEPTAR OPERACIONES
+  aceptarRechazarOperaciones(
+    request: RequestAceptarRechazarOT
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}`, {
+      request,
+    });
+  }
 }

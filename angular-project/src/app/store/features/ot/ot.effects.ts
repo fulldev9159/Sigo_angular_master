@@ -676,6 +676,23 @@ export class OtEffects {
     )
   );
 
+  // APROBAR RECHAZAR ACTA
+  aprobarRechazarOperaciones$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.AprobarRechazarOperaciones),
+      concatMap(({ request }) =>
+        this.otService.aceptarRechazarOperaciones(request).pipe(
+          map(response =>
+            otActions.AprobarRechazarOperacionesSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.AprobarRechazarOperacionesError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

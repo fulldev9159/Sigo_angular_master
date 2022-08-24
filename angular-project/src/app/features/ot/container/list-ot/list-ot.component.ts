@@ -68,6 +68,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displaySoliciarPago = false;
   displayCerrarOT = false;
   displayAnularOT = false;
+  displayAprobarRechazarOperaciones = false;
+  displayRechazoOperaciones = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -486,6 +488,24 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const aprobacionOpereaciones = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_APROBACION_OPERACIONES'
+        );
+
+        if (aprobacionOpereaciones) {
+          actions.push({
+            icon: 'p-button-icon pi pi-check',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Aprobar/rechazar OT',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.otFacade.getDetalleInformeAvance(item.id);
+              this.displayAprobarRechazarOperaciones = true;
+            },
+          });
+        }
+
         return actions;
       },
     },
@@ -798,5 +818,40 @@ export class ListOtComponent implements OnInit, OnDestroy {
   anularOT(): void {
     this.displayAnularOT = false;
     this.otFacade.anularOT(this.idOtSelected);
+  }
+
+  closeAprobarRechazarOperaciones(): void {
+    this.displayAprobarRechazarOperaciones = false;
+  }
+
+  DesplegarRechazoOperaciones(): void {
+    this.displayRechazoOperaciones = true;
+    this.otFacade.getAllMotivoRechazoOT('VALIDACION_OPERACIONES');
+  }
+
+  closeRechazoOperaciones(): void {
+    this.displayRechazoOperaciones = false;
+  }
+
+  RechazarOperaciones(): void {
+    const request: RequestAceptarRechazarOT = {
+      ot_id: this.idOtSelected,
+      values: {
+        estado: 'RECHAZADO',
+        observacion: this.formRechazoIncial.get('motivo').value,
+        tipo: +this.formRechazoIncial.get('tipo_id').value,
+      },
+    };
+    this.otFacade.AprobarRechazarOperaciones(request);
+  }
+
+  AceptarOperaciones(): void {
+    const request: RequestAceptarRechazarOT = {
+      ot_id: this.idOtSelected,
+      values: {
+        estado: 'ACEPTADO',
+      },
+    };
+    this.otFacade.AprobarRechazarOperaciones(request);
   }
 }
