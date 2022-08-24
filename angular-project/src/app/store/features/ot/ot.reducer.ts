@@ -44,6 +44,7 @@ export interface StateOt {
   otsEjecucion: OT[];
   itemsAbiertas: OT[];
   itemsCerradas: OT[];
+  itemsAnuladas: OT[];
 
   // CREATE OT
   contratosUser4OT: ContratosUser[];
@@ -119,6 +120,7 @@ export const initialStateOt: StateOt = {
   otsEjecucion: [],
   itemsAbiertas: [],
   itemsCerradas: [],
+  itemsAnuladas: [],
 
   contratosUser4OT: [],
   cubicaciones: [],
@@ -205,6 +207,10 @@ export const reducerOt = createReducer(
   on(OtActions.getOtSuccessCerradas, (state, { response }) => ({
     ...state,
     itemsCerradas: response.data.items,
+  })),
+  on(OtActions.getOtSuccessAnuladas, (state, { response }) => ({
+    ...state,
+    itemsAnuladas: response.data.items,
   })),
   on(OtActions.getDetalleOTSuccess, (state, { response }) => ({
     ...state,

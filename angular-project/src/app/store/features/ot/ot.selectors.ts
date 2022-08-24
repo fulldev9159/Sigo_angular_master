@@ -145,6 +145,11 @@ export const getOtCerradas = createSelector(
   (state: fromOt.StateOt) => state.itemsCerradas
 );
 
+export const getOtAnuladas = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.itemsAnuladas
+);
+
 export const getSelectedOT = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.selectedOT

@@ -299,6 +299,13 @@ export class OTService {
     });
   }
 
+  // ANULAR OT
+  anularOT(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}/ot/ot/anular`, {
+      ot_id,
+    });
+  }
+
   // RECHAZAR/ACEPTAR ADICIONALES
   aceptarRechazarAdicionales(
     request: RequestAceptarRechazarAdicionales

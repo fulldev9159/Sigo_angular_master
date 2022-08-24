@@ -42,6 +42,8 @@ export class OtEffects {
               return otActions.getOtAbiertasSuccess({ response });
             } else if (request.filtro_pestania === 'CERRADAS') {
               return otActions.getOtSuccessCerradas({ response });
+            } else if (request.filtro_pestania === 'ANULADAS') {
+              return otActions.getOtSuccessAnuladas({ response });
             }
           }),
           catchError(error => of(otActions.getOtsError({ error })))
@@ -661,6 +663,19 @@ export class OtEffects {
     )
   );
 
+  // ANULAR OT
+  anularOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.anularOT),
+      concatMap(({ ot_id }) =>
+        this.otService.anularOT(ot_id).pipe(
+          map(response => otActions.anularOTSuccess({ response })),
+          catchError(error => of(otActions.anularOTError({ error })))
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -700,7 +715,8 @@ export class OtEffects {
           otActions.AceptarRechazarInformeAvanceOTError,
           otActions.AprobarRechazarActaOTError,
           otActions.solicitarPagoError,
-          otActions.AprobarRechazarSolicitudPagoError
+          otActions.AprobarRechazarSolicitudPagoError,
+          otActions.anularOTError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

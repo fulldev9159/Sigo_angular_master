@@ -75,6 +75,9 @@
     <p-tabPanel header="Cerradas" id="cerradas" tooltip="Listar OTs cerradas">
       <app-table [config]="configTable" [items]="(itemsCerradas$ | async)"></app-table>
     </p-tabPanel>
+    <p-tabPanel header="Anuladas" id="anuladas" tooltip="Listar OTs anuladas">
+      <app-table [config]="configTable" [items]="(itemsAnuladas$ | async)"></app-table>
+    </p-tabPanel>
   </p-tabView>
 
 </div>
@@ -262,9 +265,9 @@
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeSolicitarPago()">Cancelar</button>
-        <button class="btn btn-primary" (click)="solicitarPago()">
-          <em class="pi mr-1" ></em>Enviar
-        </button>
+    <button class="btn btn-primary" (click)="solicitarPago()">
+      <em class="pi mr-1"></em>Enviar
+    </button>
   </ng-container>
 </app-modal>
 
@@ -276,9 +279,23 @@
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeCerrarOT()">Cancelar</button>
-        <button class="btn btn-primary" (click)="cerrarOT()">
-          <em class="pi mr-1" ></em>Enviar
-        </button>
+    <button class="btn btn-primary" (click)="cerrarOT()">
+      <em class="pi mr-1"></em>Enviar
+    </button>
   </ng-container>
 </app-modal>
 
+
+<app-modal [display]="displayAnularOT" (CloseEvent)="closeAnularOT()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title><i class="pi pi-book"></i>&nbsp;Cerrar OT</ng-container>
+  <ng-container modal-content>
+    ¿Está seguro que desea anular la ot?
+    <!-- <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-detalle-informe-avance-table> -->
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeAnularOT()">Cancelar</button>
+    <button class="btn btn-primary" (click)="anularOT()">
+      <em class="pi mr-1"></em>Enviar
+    </button>
+  </ng-container>
+</app-modal>

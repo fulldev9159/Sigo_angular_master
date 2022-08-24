@@ -77,6 +77,14 @@ export class OtFacade {
         },
       })
     );
+    this.store.dispatch(
+      otActions.getOTs({
+        request: {
+          ...request,
+          filtro_pestania: 'ANULADAS',
+        },
+      })
+    );
   }
 
   //   GET CONTRATOS USER 4 CUB
@@ -572,6 +580,10 @@ export class OtFacade {
     return this.store.select(otSelectors.getOtCerradas);
   }
 
+  public getOtAnuladas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getOtAnuladas);
+  }
+
   public rejectOT(otID: number, motivo: string): void {
     this.store.dispatch(otActions.rejectOT({ otID, motivo }));
   }
@@ -627,5 +639,10 @@ export class OtFacade {
     request: RequestAceptarRechazarAdicionales
   ): void {
     this.store.dispatch(otActions.aceptarRechazarAdcionales({ request }));
+  }
+
+  // APROBAR OT
+  public anularOT(ot_id: number): void {
+    this.store.dispatch(otActions.anularOT({ ot_id }));
   }
 }

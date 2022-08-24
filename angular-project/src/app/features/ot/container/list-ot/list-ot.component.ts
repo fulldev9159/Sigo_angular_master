@@ -44,6 +44,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   itemsEjecucion$: Observable<OT[]>;
   itemsAbiertas$: Observable<OT[]>;
   itemsCerradas$: Observable<OT[]>;
+  itemsAnuladas$: Observable<OT[]>;
 
   tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
 
@@ -66,6 +67,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displayAuthInformeModal = false;
   displaySoliciarPago = false;
   displayCerrarOT = false;
+  displayAnularOT = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -467,6 +469,23 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const anulatOT = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_ANULAR'
+        );
+
+        if (anulatOT) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Anular OT',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.displayAnularOT = true;
+            },
+          });
+        }
+
         return actions;
       },
     },
@@ -518,6 +537,14 @@ export class ListOtComponent implements OnInit, OnDestroy {
     );
 
     this.itemsCerradas$ = this.otFacade.getOtCerradas$().pipe(
+      tap(ots => {
+        this.closeAceptacionInicialModal();
+        this.closeAssignTrabajadorModal();
+        this.closeRegistrarLibroObraModal();
+      })
+    );
+
+    this.itemsAnuladas$ = this.otFacade.getOtAnuladas$().pipe(
       tap(ots => {
         this.closeAceptacionInicialModal();
         this.closeAssignTrabajadorModal();
@@ -707,6 +734,10 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.displayAprobarInformeAvanceModal = false;
   }
 
+  closeAnularOT(): void {
+    this.displayAnularOT = false;
+  }
+
   AceptarInformeAvance(): void {
     const request: RequestAutorizarInformeAvance = {
       ot_id: this.idOtSelected,
@@ -762,5 +793,10 @@ export class ListOtComponent implements OnInit, OnDestroy {
   cerrarOT(): void {
     this.displayCerrarOT = false;
     this.otFacade.cerrarOT(this.idOtSelected);
+  }
+
+  anularOT(): void {
+    this.displayAnularOT = false;
+    this.otFacade.anularOT(this.idOtSelected);
   }
 }

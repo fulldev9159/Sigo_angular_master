@@ -67,6 +67,11 @@ export const getOtSuccessCerradas = createAction(
   props<{ response: Response<{ items: OT[] }> }>()
 );
 
+export const getOtSuccessAnuladas = createAction(
+  '[Ot GetAll] GET Ot Success Anuladas',
+  props<{ response: Response<{ items: OT[] }> }>()
+);
+
 export const getOtsError = createAction(
   '[Ot GetAll] GET Ot Error',
   props<{ error: any }>()
@@ -850,5 +855,20 @@ export const aceptarRechazarAdcionalesSuccess = createAction(
 );
 export const aceptarRechazarAdcionalesError = createAction(
   '[OT] GET aceptarRechazarAdcionales Error',
+  props<{ error: any }>()
+);
+
+//  ANULAR OT
+export const anularOT = createAction(
+  '[OT] GET anularOT',
+  props<{ ot_id: number }>()
+);
+
+export const anularOTSuccess = createAction(
+  '[OT] GET anularOT Success',
+  props<{ response: Response<any> }>()
+);
+export const anularOTError = createAction(
+  '[OT] GET anularOT Error',
   props<{ error: any }>()
 );
