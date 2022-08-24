@@ -45,6 +45,7 @@ export interface StateOt {
   itemsAbiertas: OT[];
   itemsCerradas: OT[];
   itemsAnuladas: OT[];
+  itemsQuebradas: OT[];
 
   // CREATE OT
   contratosUser4OT: ContratosUser[];
@@ -121,6 +122,7 @@ export const initialStateOt: StateOt = {
   itemsAbiertas: [],
   itemsCerradas: [],
   itemsAnuladas: [],
+  itemsQuebradas: [],
 
   contratosUser4OT: [],
   cubicaciones: [],

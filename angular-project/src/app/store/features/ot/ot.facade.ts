@@ -86,6 +86,14 @@ export class OtFacade {
         },
       })
     );
+    this.store.dispatch(
+      otActions.getOTs({
+        request: {
+          ...request,
+          filtro_pestania: 'EN_TRAMITE',
+        },
+      })
+    );
   }
 
   //   GET CONTRATOS USER 4 CUB
@@ -583,6 +591,9 @@ export class OtFacade {
 
   public getOtAnuladas$(): Observable<OT[]> {
     return this.store.select(otSelectors.getOtAnuladas);
+  }
+  public getOtQuebradas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getOtQuebradas);
   }
 
   public rejectOT(otID: number, motivo: string): void {

@@ -78,6 +78,9 @@
     <p-tabPanel header="Anuladas" id="anuladas" tooltip="Listar OTs anuladas">
       <app-table [config]="configTable" [items]="(itemsAnuladas$ | async)"></app-table>
     </p-tabPanel>
+    <p-tabPanel header="Quebradas" id="quebradas" tooltip="Listar OTs quebradas">
+      <app-table [config]="configTable" [items]="(itemsQuebradas$ | async)"></app-table>
+    </p-tabPanel>
   </p-tabView>
 
 </div>

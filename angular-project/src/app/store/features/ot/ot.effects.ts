@@ -44,6 +44,8 @@ export class OtEffects {
               return otActions.getOtSuccessCerradas({ response });
             } else if (request.filtro_pestania === 'ANULADAS') {
               return otActions.getOtSuccessAnuladas({ response });
+            } else if (request.filtro_pestania === 'EN_TRAMITE') {
+              return otActions.getOtSuccessQuebradas({ response });
             }
           }),
           catchError(error => of(otActions.getOtsError({ error })))

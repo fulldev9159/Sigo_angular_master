@@ -73,6 +73,11 @@ export const getOtSuccessAnuladas = createAction(
   props<{ response: Response<{ items: OT[] }> }>()
 );
 
+export const getOtSuccessQuebradas = createAction(
+  '[Ot GetAll] GET Ot Success Quebradas',
+  props<{ response: Response<{ items: OT[] }> }>()
+);
+
 export const getOtsError = createAction(
   '[Ot GetAll] GET Ot Error',
   props<{ error: any }>()

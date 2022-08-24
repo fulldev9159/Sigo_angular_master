@@ -46,6 +46,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   itemsAbiertas$: Observable<OT[]>;
   itemsCerradas$: Observable<OT[]>;
   itemsAnuladas$: Observable<OT[]>;
+  itemsQuebradas$: Observable<OT[]>;
 
   tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
 
@@ -584,6 +585,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
     );
 
     this.itemsAnuladas$ = this.otFacade.getOtAnuladas$().pipe(
+      tap(ots => {
+        this.closeAceptacionInicialModal();
+        this.closeAssignTrabajadorModal();
+        this.closeRegistrarLibroObraModal();
+      })
+    );
+    this.itemsQuebradas$ = this.otFacade.getOtQuebradas$().pipe(
       tap(ots => {
         this.closeAceptacionInicialModal();
         this.closeAssignTrabajadorModal();

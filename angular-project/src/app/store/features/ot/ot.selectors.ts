@@ -150,6 +150,11 @@ export const getOtAnuladas = createSelector(
   (state: fromOt.StateOt) => state.itemsAnuladas
 );
 
+export const getOtQuebradas = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.itemsQuebradas
+);
+
 export const getSelectedOT = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.selectedOT
