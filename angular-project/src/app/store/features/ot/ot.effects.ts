@@ -691,7 +691,9 @@ export class OtEffects {
           otActions.sendGeneracionActaSuccess,
           otActions.AprobarRechazarActaOTSuccess,
           otActions.solicitarPagoSuccess,
-          otActions.AprobarRechazarSolicitudPagoSuccess
+          otActions.AprobarRechazarSolicitudPagoSuccess,
+          otActions.cerrarOTSuccess,
+          otActions.anularOTSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

@@ -85,7 +85,7 @@
             <table>
               <tr>
                 <td>Web</td>
-                <td>0.17.0</td>
+                <td>0.18.0</td>
               </tr>
               <tr>
                 <td>
@@ -120,7 +120,7 @@
       <div class="left-bar">
         <div *ngIf="(loginAuth$ | async) && (loginAuth$ | async).name" class="user-info">
           <span class="user-name" id="user-name">
-            {{(loginAuth$ | async).name | titlecase}}  pxid: {{(loginAuth$ | async).proxy_id}}
+            {{(loginAuth$ | async).name | titlecase}} pxid: {{(loginAuth$ | async).proxy_id}}
             <strong>{{(loginAuth$ |async).perfil}}</strong></span>
         </div>
       </div>

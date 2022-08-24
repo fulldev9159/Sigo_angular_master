@@ -93,7 +93,10 @@ export class AlertMessageActions {
         action === otActions.AsignarSupervisorTrabajosOTSuccess.type ||
         action === otActions.createRegistroLibroObrasSuccess.type ||
         action === otActions.sendGeneracionActaSuccess.type ||
-        action === otActions.AceptarRechazarInformeAvanceOTSuccess.type
+        action === otActions.AceptarRechazarInformeAvanceOTSuccess.type ||
+        action === otActions.solicitarPagoSuccess.type ||
+        action === otActions.cerrarOTSuccess.type ||
+        action === otActions.anularOTSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (
