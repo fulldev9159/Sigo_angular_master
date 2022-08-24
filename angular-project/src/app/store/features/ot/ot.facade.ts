@@ -44,6 +44,7 @@ import {
   LastActa,
   RequestAprobacionRechazoSolicitudPago,
   RequestAceptarRechazarAdicionales,
+  RequestAprobarRechazarOperaciones,
 } from '@data';
 @Injectable({
   providedIn: 'root',
@@ -647,7 +648,9 @@ export class OtFacade {
   }
 
   // ACEPTAR O RECHAZAR OPERACIONES
-  public AprobarRechazarOperaciones(request: RequestAceptarRechazarOT): void {
+  public AprobarRechazarOperaciones(
+    request: RequestAprobarRechazarOperaciones
+  ): void {
     this.store.dispatch(otActions.AprobarRechazarOperaciones({ request }));
   }
 

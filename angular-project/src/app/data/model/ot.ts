@@ -239,3 +239,10 @@ export interface RequestAceptarRechazarAdicionales {
     observacion: string;
   };
 }
+
+export interface RequestAprobarRechazarOperaciones {
+  ot_id: number; // a partir de la ot se obtiene el id de la aceptacion
+  estado: string; // APROBAR o RECHAZAR
+  tipo_rechazo_id?: number; //
+  observacion?: string;
+}

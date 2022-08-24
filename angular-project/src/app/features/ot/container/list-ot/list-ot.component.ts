@@ -14,6 +14,7 @@ import {
   DetalleInformeAvance,
   RequestAutorizarInformeAvance,
   OTService,
+  RequestAprobarRechazarOperaciones,
 } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subject, Subscription } from 'rxjs';
@@ -856,23 +857,19 @@ export class ListOtComponent implements OnInit, OnDestroy {
   }
 
   RechazarOperaciones(): void {
-    const request: RequestAceptarRechazarOT = {
+    const request: RequestAprobarRechazarOperaciones = {
       ot_id: this.idOtSelected,
-      values: {
-        estado: 'RECHAZADO',
-        observacion: this.formRechazoIncial.get('motivo').value,
-        tipo: +this.formRechazoIncial.get('tipo_id').value,
-      },
+      estado: 'RECHAZAR',
+      observacion: this.formRechazoIncial.get('motivo').value,
+      tipo_rechazo_id: +this.formRechazoIncial.get('tipo_id').value,
     };
     this.otFacade.AprobarRechazarOperaciones(request);
   }
 
   AceptarOperaciones(): void {
-    const request: RequestAceptarRechazarOT = {
+    const request: RequestAprobarRechazarOperaciones = {
       ot_id: this.idOtSelected,
-      values: {
-        estado: 'ACEPTADO',
-      },
+      estado: 'APROBAR',
     };
     this.otFacade.AprobarRechazarOperaciones(request);
   }

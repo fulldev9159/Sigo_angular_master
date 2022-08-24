@@ -32,6 +32,7 @@ import {
   DetalleActaServicio,
   QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
+  RequestAprobarRechazarOperaciones,
 } from '@data';
 
 @Injectable({
@@ -320,7 +321,7 @@ export class OTService {
 
   // RECHAZAR/ACEPTAR OPERACIONES
   aceptarRechazarOperaciones(
-    request: RequestAceptarRechazarOT
+    request: RequestAprobarRechazarOperaciones
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/ot_confirma_rechazo_operaciones/update`,
@@ -332,6 +333,9 @@ export class OTService {
 
   // CONFIRMAR RECHAZO OBRAS
   confirmarRechazoObras(ot_id: number): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.apiUrl}`, { ot_id });
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/ot_confirma_rechazo_operaciones/update`,
+      { ot_id }
+    );
   }
 }

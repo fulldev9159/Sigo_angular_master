@@ -44,6 +44,7 @@ import {
   RequestAprobacionRechazoSolicitudPago,
   QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
+  RequestAprobarRechazarOperaciones,
 } from '@data';
 
 // GET OTS
@@ -876,7 +877,7 @@ export const anularOTError = createAction(
 //  APROBAR RECHAZAR OPERACIONES
 export const AprobarRechazarOperaciones = createAction(
   '[OT] GET AprobarRechazarOperaciones',
-  props<{ request: RequestAceptarRechazarOT }>()
+  props<{ request: RequestAprobarRechazarOperaciones }>()
 );
 
 export const AprobarRechazarOperacionesSuccess = createAction(
