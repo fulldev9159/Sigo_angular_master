@@ -181,12 +181,13 @@ describe('Testing comportamiento inputs', () => {
   describe('Proveedor', (name = 'Proveedor') => {
     let selector = '#select-proveedor';
     it(`should display dropdown ${name} as required`, () => {
-      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
-      cy._select_dropdown('#select-agencia', 'APOQUINDO');
       cy.intercept(
         'POST',
         '/cubicacion/proveedores_from_agencia_contrato/get'
       ).as('HTTPRESPONSE');
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+
       cy.wait('@HTTPRESPONSE').then(() => {
         cy._check_dropdown_required(selector);
       });
