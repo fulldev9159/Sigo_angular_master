@@ -6,6 +6,7 @@ import {
   getActividadesContratoProveedorMOCK200ok,
   getAgenciasContratoMOCK200OK,
   getProveedoresAgenciaContratoMOCK200OK,
+  getTipoServiciosContratoMOCK200ok,
 } from '../../../src/mocks';
 
 it('should let enter to create cubicacion', () => {
@@ -258,19 +259,12 @@ describe('Testing comportamiento inputs', () => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
   });
-});
-
-describe.skip('Testing Formulario Components', () => {
-  it('should let enter to create cubicacion', () => {
-    cy.visit('http://localhost:4206/login/auth');
-    cy._login('mgestor1', 'asdasd');
-    cy._select_profile('Gestor/JP');
-    cy.get('#crear-cubicacion-sidebar').click();
-  });
 
   describe('Tipo Servicio', (name = 'Tipo Servicio') => {
     let selector = '#select-tipo-servicio';
     it(`should display dropdown ${name} as required`, () => {
+      cy.intercept('POST', '/cubicacion/tipo_servicio/get').as('HTTPRESPONSE');
+
       cy._select_dropdown('#select-contrato_marco', 'BUCLE');
       cy._select_dropdown('#select-agencia', 'APOQUINDO');
       cy._select_dropdown(
@@ -279,11 +273,13 @@ describe.skip('Testing Formulario Components', () => {
       );
 
       cy._select_dropdown('#select-actividad', 'DISEÑO');
-      cy._check_dropdown_required(selector);
+      cy.wait('@HTTPRESPONSE').then(() => {
+        cy._check_dropdown_required(selector);
+      });
     });
 
     it(`dropdown ${name} should display data`, () => {
-      let datos = getActividadesContratoProveedorMOCK200ok.data.items
+      let datos = getTipoServiciosContratoMOCK200ok.data.items
         .sort((a, b) =>
           a.descripcion > b.descripcion
             ? 1
@@ -300,7 +296,9 @@ describe.skip('Testing Formulario Components', () => {
       );
       cy._select_dropdown('#select-actividad', 'DISEÑO');
       cy.get(selector).click();
-      cy.get('li.p-ripple').each(($el, index, $list) => {
+      cy.get(
+        selector + '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
+      ).each(($el, index, $list) => {
         expect($el.text()).eq(datos[index]);
       });
     });
