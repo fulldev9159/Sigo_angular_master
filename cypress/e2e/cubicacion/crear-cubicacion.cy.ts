@@ -211,26 +211,23 @@ describe('Testing comportamiento inputs', () => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
   });
-});
-
-describe.skip('Testing Formulario Components', () => {
-  it('should let enter to create cubicacion', () => {
-    cy.visit('http://localhost:4206/login/auth');
-    cy._login('mgestor1', 'asdasd');
-    cy._select_profile('Gestor/JP');
-    cy.get('#crear-cubicacion-sidebar').click();
-  });
 
   describe('Actividad', (name = 'Actividad') => {
     let selector = '#select-actividad';
     it(`should display dropdown ${name} as required`, () => {
+      cy.intercept(
+        'POST',
+        '/cubicacion/actividad_from_cmarco_has_proveedor/get'
+      ).as('HTTPRESPONSE');
       cy._select_dropdown('#select-contrato_marco', 'BUCLE');
       cy._select_dropdown('#select-agencia', 'APOQUINDO');
       cy._select_dropdown(
-        '#select-agencia',
+        '#select-proveedor',
         '330000659 - COBRA CHILE SERVICIOS S.A.'
       );
-      cy._check_dropdown_required(selector);
+      cy.wait('@HTTPRESPONSE').then(() => {
+        cy._check_dropdown_required(selector);
+      });
     });
 
     it(`dropdown ${name} should display data`, () => {
@@ -250,7 +247,9 @@ describe.skip('Testing Formulario Components', () => {
         '330000659 - COBRA CHILE SERVICIOS S.A.'
       );
       cy.get(selector).click();
-      cy.get('li.p-ripple').each(($el, index, $list) => {
+      cy.get(
+        '#select-actividad>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
+      ).each(($el, index, $list) => {
         expect($el.text()).eq(datos[index]);
       });
     });
@@ -258,6 +257,15 @@ describe.skip('Testing Formulario Components', () => {
     afterEach(() => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
+  });
+});
+
+describe.skip('Testing Formulario Components', () => {
+  it('should let enter to create cubicacion', () => {
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mgestor1', 'asdasd');
+    cy._select_profile('Gestor/JP');
+    cy.get('#crear-cubicacion-sidebar').click();
   });
 
   describe('Tipo Servicio', (name = 'Tipo Servicio') => {

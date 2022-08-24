@@ -85,7 +85,7 @@ Cypress.Commands.add('_select_dropdown', (selector, item) => {
   cy.get('li.p-ripple').each(($el, index, $list) => {
     if ($el.text() === item) {
       $el.trigger('click');
+      cy.get(selector).click();
     }
   });
-  cy.get(selector).click();
 });

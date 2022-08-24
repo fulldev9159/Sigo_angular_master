@@ -166,17 +166,17 @@ export class FormularioComponent implements OnDestroy, OnInit {
         //         'cmarcoproveedor_id',
         //       ]);
 
-        // CALL
         if (contrato_id && contrato_id !== null) {
+          // CALL GET AGENCIAS
           this.formCub.get('agencia_id').disable({ emitEvent: false });
           this.contratoFacade.getAgenciasContrato(+contrato_id);
-        }
 
-        // STORE CONTRATO SELECTED
-        this.contrato_selected = this.contratosUsuario.find(
-          contrato => contrato.contrato_id === contrato_id
-        );
-        this.cubicacionFacade.contratoSelected(this.contrato_selected);
+          // STORE CONTRATO SELECTED
+          this.contrato_selected = this.contratosUsuario.find(
+            contrato => contrato.contrato_id === contrato_id
+          );
+          this.cubicacionFacade.contratoSelected(this.contrato_selected);
+        }
 
         // CONTRATOS BUCLE
         if (
@@ -215,12 +215,13 @@ export class FormularioComponent implements OnDestroy, OnInit {
         //   'cmarcoproveedor_id',
         // ]);
 
-        // CALL
         if (agencia_id && agencia_id !== null) {
+          // STORE AGENCIA SELECTED
           let agenciaSelected = this.agenciasContrato.find(
             agencia => agencia.id === agencia_id
           );
           this.cubicacionFacade.agenciaSelected(agenciaSelected);
+          // CALL GET PROVEEDORES
           let contrato_id = +this.formCub.get('contrato').value;
           this.proveedorFacade.getProveedoresAgenciaContrato(
             +agencia_id,
@@ -230,24 +231,27 @@ export class FormularioComponent implements OnDestroy, OnInit {
       })
     );
 
-    //   // PROVEEDOR
-    //   this.subscription.add(
-    //     this.formCub
-    //       .get('cmarcoproveedor_id')
-    //       .valueChanges.subscribe(cmarcoproveedor_id => {
-    //         if (cmarcoproveedor_id && cmarcoproveedor_id != null) {
-    //           let proveedorSelected: ProveedorAgenciaContrato =
-    //             this.proveedoresAgenciaContrato.find(
-    //               proveedor =>
-    //                 proveedor.cmarco_has_proveedor_id === cmarcoproveedor_id
-    //             );
-    //           this.cubicacionFacade.proveedorSelected(proveedorSelected);
-    //           this.contratoFacade.getActividadesContratoProveedor(
-    //             +cmarcoproveedor_id
-    //           );
-    //         }
-    //       })
-    //   );
+    // PROVEEDOR
+    this.subscription.add(
+      this.formCub
+        .get('cmarcoproveedor_id')
+        .valueChanges.subscribe(cmarcoproveedor_id => {
+          if (cmarcoproveedor_id && cmarcoproveedor_id != null) {
+            // STORE PROVEEDOR SELECTED
+            let proveedorSelected: ProveedorAgenciaContrato =
+              this.proveedoresAgenciaContrato.find(
+                proveedor =>
+                  proveedor.cmarco_has_proveedor_id === cmarcoproveedor_id
+              );
+            this.cubicacionFacade.proveedorSelected(proveedorSelected);
+
+            // CALL ACTIVIDADES DEL CONTRATO PROVEEDOR SELECTED
+            this.contratoFacade.getActividadesContratoProveedor(
+              +cmarcoproveedor_id
+            );
+          }
+        })
+    );
   }
 
   ngOnDestroy(): void {

@@ -19,6 +19,7 @@ import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { combineLatest, map, Observable, Subscription, tap } from 'rxjs';
 import { RequestGetUnidadObraServicio } from 'src/app/core/model/unidad-obra';
+import { FormularioService } from 'src/app/core/service/formulario.service';
 
 interface Dropdown {
   name: string;
@@ -36,25 +37,22 @@ export class AgregarServiciosFormComponent implements OnDestroy {
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade
     .getActividadesContratoProveedor$()
     .pipe(
+      tap(values =>
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          'actividad_id',
+          values
+        )
+      ),
       map(values => {
         let tmp = [...values];
-        return tmp.length > 0
-          ? tmp.sort((a, b) =>
-              a.descripcion > b.descripcion
-                ? 1
-                : b.descripcion > a.descripcion
-                ? -1
-                : 0
-            )
-          : [];
+        return tmp.sort((a, b) => (a.descripcion > b.descripcion ? 1 : -1));
       }),
       map(values =>
-        values.length > 0
-          ? values.map(value => ({
-              name: value.descripcion,
-              code: value.actividad_id,
-            }))
-          : []
+        values.map(value => ({
+          name: value.descripcion,
+          code: value.actividad_id,
+        }))
       )
     );
 
@@ -66,23 +64,13 @@ export class AgregarServiciosFormComponent implements OnDestroy {
     .pipe(
       map(values => {
         let tmp = [...values];
-        return tmp.length > 0
-          ? tmp.sort((a, b) =>
-              a.descripcion > b.descripcion
-                ? 1
-                : b.descripcion > a.descripcion
-                ? -1
-                : 0
-            )
-          : [];
+        return tmp.sort((a, b) => (a.descripcion > b.descripcion ? 1 : -1));
       }),
       map(values =>
-        values.length > 0
-          ? values.map(value => ({
-              name: value.descripcion,
-              code: value.id,
-            }))
-          : []
+        values.map(value => ({
+          name: value.descripcion,
+          code: value.id,
+        }))
       )
     );
 
@@ -97,23 +85,15 @@ export class AgregarServiciosFormComponent implements OnDestroy {
       tap(values => (this.serviciosAgenciaContratoProveedor = values)),
       map(values => {
         let tmp = [...values];
-        return tmp.length > 0
-          ? tmp.sort((a, b) =>
-              a.numero_producto > b.numero_producto
-                ? 1
-                : b.numero_producto > a.numero_producto
-                ? -1
-                : 0
-            )
-          : [];
+        return tmp.sort((a, b) =>
+          a.numero_producto > b.numero_producto ? 1 : -1
+        );
       }),
       map(values =>
-        values.length > 0
-          ? values.map(value => ({
-              name: `${value.numero_producto} - ${value.descripcion}`,
-              code: value.codigo,
-            }))
-          : []
+        values.map(value => ({
+          name: `${value.numero_producto} - ${value.descripcion}`,
+          code: value.codigo,
+        }))
       )
     );
   unidadesObraServicio$: Observable<Dropdown[]> = this.serviciosFacade
@@ -121,23 +101,15 @@ export class AgregarServiciosFormComponent implements OnDestroy {
     .pipe(
       map(values => {
         let tmp = [...values];
-        return tmp.length > 0
-          ? tmp.sort((a, b) =>
-              a.unidad_obra_cod > b.unidad_obra_cod
-                ? 1
-                : b.unidad_obra_cod > a.unidad_obra_cod
-                ? -1
-                : 0
-            )
-          : [];
+        return tmp.sort((a, b) =>
+          a.unidad_obra_cod > b.unidad_obra_cod ? 1 : -1
+        );
       }),
       map(values =>
-        values.length > 0
-          ? values.map(value => ({
-              name: `${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}`,
-              code: value.unidad_obra_cod,
-            }))
-          : []
+        values.map(value => ({
+          name: `${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}`,
+          code: value.unidad_obra_cod,
+        }))
       )
     );
 
@@ -164,7 +136,8 @@ export class AgregarServiciosFormComponent implements OnDestroy {
     private contratoFacade: ContratoFacade,
     private cubicacionFacade: CubicacionFacade,
     private serviciosFacade: ServiciosFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private formularioService: FormularioService
   ) {}
 
   // ngOnInit(): void {
