@@ -650,4 +650,9 @@ export class OtFacade {
   public AprobarRechazarOperaciones(request: RequestAceptarRechazarOT): void {
     this.store.dispatch(otActions.AprobarRechazarOperaciones({ request }));
   }
+
+  // CONFIRMAR RECHAZO OBRAS
+  public confirmarRechazoObras(ot_id: number): void {
+    this.store.dispatch(otActions.confirmarRechazoObras({ ot_id }));
+  }
 }

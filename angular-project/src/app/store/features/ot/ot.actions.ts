@@ -887,3 +887,18 @@ export const AprobarRechazarOperacionesError = createAction(
   '[OT] GET AprobarRechazarOperaciones Error',
   props<{ error: any }>()
 );
+
+//  CONFIRMAR RECHAZO OBRAS
+export const confirmarRechazoObras = createAction(
+  '[OT] GET ConfirmarRechazoObras',
+  props<{ ot_id: number }>()
+);
+
+export const confirmarRechazoObrasSuccess = createAction(
+  '[OT] GET ConfirmarRechazoObras Success',
+  props<{ response: Response<any> }>()
+);
+export const confirmarRechazoObrasError = createAction(
+  '[OT] GET confirmarRechazoObras Error',
+  props<{ error: any }>()
+);

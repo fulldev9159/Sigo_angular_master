@@ -322,8 +322,16 @@ export class OTService {
   aceptarRechazarOperaciones(
     request: RequestAceptarRechazarOT
   ): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.apiUrl}`, {
-      request,
-    });
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/ot_confirma_rechazo_operaciones/update`,
+      {
+        request,
+      }
+    );
+  }
+
+  // CONFIRMAR RECHAZO OBRAS
+  confirmarRechazoObras(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}`, { ot_id });
   }
 }

@@ -355,3 +355,17 @@
     </button>
   </ng-container>
 </app-modal>
+
+<app-modal [display]="displayRechazoOperaciones" (CloseEvent)="closeConfirmarRechazoObras()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title><i class="pi pi-book"></i>&nbsp;Cerrar OT</ng-container>
+  <ng-container modal-content>
+    ¿Está seguro que desea confirmar el rechazo de la ot?
+    <!-- <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-detalle-informe-avance-table> -->
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeConfirmarRechazoObras()">Cancelar</button>
+    <button class="btn btn-primary" (click)="confirmarRechazoObras()">
+      <em class="pi mr-1"></em>Enviar
+    </button>
+  </ng-container>
+</app-modal>

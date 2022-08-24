@@ -70,6 +70,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displayAnularOT = false;
   displayAprobarRechazarOperaciones = false;
   displayRechazoOperaciones = false;
+  displayConfirmarRechazoObras = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -506,6 +507,23 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        const aceptarRechazoOperaciones = (ot.acciones || []).find(
+          accion => accion.slug === 'OT_CONFIRMAR_RECHAZO_OBRAS'
+        );
+
+        if (aceptarRechazoOperaciones) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Confirmar Rechazo Obras',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.displayConfirmarRechazoObras = true;
+            },
+          });
+        }
+
         return actions;
       },
     },
@@ -833,6 +851,10 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.displayRechazoOperaciones = false;
   }
 
+  closeConfirmarRechazoObras(): void {
+    this.displayConfirmarRechazoObras = false;
+  }
+
   RechazarOperaciones(): void {
     const request: RequestAceptarRechazarOT = {
       ot_id: this.idOtSelected,
@@ -853,5 +875,10 @@ export class ListOtComponent implements OnInit, OnDestroy {
       },
     };
     this.otFacade.AprobarRechazarOperaciones(request);
+  }
+
+  confirmarRechazoObras(): void {
+    this.displayConfirmarRechazoObras = false;
+    this.otFacade.confirmarRechazoObras(this.idOtSelected);
   }
 }

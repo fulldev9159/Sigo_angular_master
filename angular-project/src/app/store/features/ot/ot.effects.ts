@@ -693,6 +693,21 @@ export class OtEffects {
     )
   );
 
+  // CONFIRMAR RECHAZO OBRAS
+  confirmarRechazoObras$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.confirmarRechazoObras),
+      concatMap(({ ot_id }) =>
+        this.otService.confirmarRechazoObras(ot_id).pipe(
+          map(response => otActions.confirmarRechazoObrasSuccess({ response })),
+          catchError(error =>
+            of(otActions.confirmarRechazoObrasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -710,7 +725,9 @@ export class OtEffects {
           otActions.solicitarPagoSuccess,
           otActions.AprobarRechazarSolicitudPagoSuccess,
           otActions.cerrarOTSuccess,
-          otActions.anularOTSuccess
+          otActions.anularOTSuccess,
+          otActions.AprobarRechazarOperacionesSuccess,
+          otActions.confirmarRechazoObrasSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -735,7 +752,9 @@ export class OtEffects {
           otActions.AprobarRechazarActaOTError,
           otActions.solicitarPagoError,
           otActions.AprobarRechazarSolicitudPagoError,
-          otActions.anularOTError
+          otActions.anularOTError,
+          otActions.AprobarRechazarOperacionesError,
+          otActions.confirmarRechazoObrasError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(
