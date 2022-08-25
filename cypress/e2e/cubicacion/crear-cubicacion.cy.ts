@@ -152,7 +152,7 @@ describe('Testing comportamiento sección descripcion dependiendo del contrato',
   });
 });
 
-describe('Testing comportamiento inputs', () => {
+describe('Testing comportamiento Selectores inicialmente', () => {
   describe('Agencia', (name = 'Agencia') => {
     let selector = '#select-agencia';
     it(`should display dropdown ${name} as required`, () => {
@@ -423,6 +423,17 @@ describe('Testing comportamiento inputs', () => {
     afterEach(() => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
     });
+  });
+});
+
+describe('Testing comportamiento Selectores al realizar cambios', () => {
+  it('if contrato changed all selectors should be disabled except agencia', () => {
+    cy._select_dropdown('#select-contrato_marco', 'SBE_2018');
+    cy.get('#select-proveedor>div').should('have.class', 'p-disabled');
+    cy.get('#select-actividad>div').should('have.class', 'p-disabled');
+    cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
   });
 });
 

@@ -40,3 +40,14 @@ export const agenciaSelected = createAction(
   '[CUBICACION] agenciaSelected ',
   props<{ agenciaSelected: AgenciaContrato }>()
 );
+
+// RESETS
+export const resetContratoSelected = createAction(
+  '[CUBICACION] resetContratoSelected '
+);
+export const resetProveedorSelected = createAction(
+  '[CUBICACION] resetProveedorSelected '
+);
+export const resetAgenciaSelected = createAction(
+  '[CUBICACION] resetAgenciaSelected '
+);

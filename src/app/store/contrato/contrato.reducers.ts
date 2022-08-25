@@ -39,5 +39,18 @@ export const reducerContrato = createReducer(
       ...state,
       tipoServiciosContrato: response.data.items,
     })
-  )
+  ),
+  //RESETS
+  on(contratoActions.resetAgenciasContrato, (state, {}) => ({
+    ...state,
+    agenciasContrato: [],
+  })),
+  on(contratoActions.resetActividadesContratoProveedor, (state, {}) => ({
+    ...state,
+    actividadesContratoProveedor: [],
+  })),
+  on(contratoActions.resetTipoServiciosContrato, (state, {}) => ({
+    ...state,
+    tipoServiciosContrato: [],
+  }))
 );

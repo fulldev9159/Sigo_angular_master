@@ -40,5 +40,18 @@ export const reducerCubicacion = createReducer(
   on(cubicacionActions.agenciaSelected, (state, { agenciaSelected }) => ({
     ...state,
     agenciaSelected,
+  })),
+  // RESETS
+  on(cubicacionActions.resetContratoSelected, (state, {}) => ({
+    ...state,
+    contratoUserSelected: null,
+  })),
+  on(cubicacionActions.resetAgenciaSelected, (state, {}) => ({
+    ...state,
+    agenciaSelected: null,
+  })),
+  on(cubicacionActions.resetProveedorSelected, (state, {}) => ({
+    ...state,
+    proveedorSelected: null,
   }))
 );

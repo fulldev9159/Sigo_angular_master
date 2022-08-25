@@ -6,6 +6,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { ProveedorFacade } from '@storeOT/proveedor/proveedor.facades';
+import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { MenuItem } from 'primeng/api';
 import { AgregarServiciosFormComponent } from '../../components/agregar-servicios-form/agregar-servicios-form.component';
 import { FormularioComponent } from '../../components/formulario/formulario.component';
@@ -37,7 +41,12 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
   })
   tableServicios: TableServicesComponent;
 
-  constructor() {}
+  constructor(
+    private proveedorFacade: ProveedorFacade,
+    private contratoFacade: ContratoFacade,
+    private cubicacionFacade: CubicacionFacade,
+    private servicioFacade: ServiciosFacade
+  ) {}
 
   ngOnInit(): void {
     this.navbarHeader = [
@@ -69,5 +78,16 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
     this.agregarServiciosForm.formFilter
       .get('unidad_obra_cod')
       .disable({ emitEvent: false });
+
+    // RESETS
+    this.formulario.formCub.get('contrato').valueChanges.subscribe(() => {
+      this.proveedorFacade.resetProveedoresAgenciaContrato();
+      this.cubicacionFacade.resetProveedorSelected();
+      this.contratoFacade.resetActividadesContratoProveedor();
+      this.contratoFacade.resetTipoServiciosContrato();
+      this.servicioFacade.resetServiciosAgenciaContratoProveedor();
+      this.servicioFacade.resetServicioSelected();
+      this.servicioFacade.resetUnidadesObraServicio();
+    });
   }
 }

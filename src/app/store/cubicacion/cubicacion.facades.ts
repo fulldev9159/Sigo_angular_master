@@ -69,4 +69,15 @@ export class CubicacionFacade {
   public agenciaSelected$(): Observable<AgenciaContrato> {
     return this.store.select(cubicacionSelectors.agenciaSelected);
   }
+
+  // RESETS
+  public resetContratoSelected(): void {
+    this.store.dispatch(cubicacionActions.resetContratoSelected());
+  }
+  public resetProveedorSelected(): void {
+    this.store.dispatch(cubicacionActions.resetProveedorSelected());
+  }
+  public resetAgenciaSelected(): void {
+    this.store.dispatch(cubicacionActions.resetAgenciaSelected());
+  }
 }

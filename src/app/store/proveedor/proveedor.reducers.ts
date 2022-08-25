@@ -20,5 +20,9 @@ export const reducerProveedor = createReducer(
       ...state,
       proveedoresAgenciaContrato: response.data.items,
     })
-  )
+  ),
+  on(proveedorActions.resetProveedoresAgenciaContrato, (state, {}) => ({
+    ...state,
+    proveedoresAgenciaContrato: [],
+  }))
 );

@@ -160,12 +160,6 @@ export class FormularioComponent implements OnDestroy, OnInit {
     // CONTRATO MARCO
     this.subscription.add(
       this.formCub.get('contrato').valueChanges.subscribe(contrato_id => {
-        //       // RESET
-        //       this.formularioService.resetControls(this.formCub, [
-        //         'agencia_id',
-        //         'cmarcoproveedor_id',
-        //       ]);
-
         if (contrato_id && contrato_id !== null) {
           // CALL GET AGENCIAS
           this.formCub.get('agencia_id').disable({ emitEvent: false });

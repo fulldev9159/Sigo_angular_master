@@ -70,14 +70,14 @@ export class ServiciosFacade {
     );
   }
 
-  public unidadObraSelected$(): Observable<UnidadObraServicio> {
-    return this.store.select(serviciosSelectors.unidadObraSelected);
-  }
+  // public unidadObraSelected$(): Observable<UnidadObraServicio> {
+  //   return this.store.select(serviciosSelectors.unidadObraSelected);
+  // }
 
-  // SERVICIO EXISTENTE
-  public theServiceExist(): Observable<boolean> {
-    return this.store.select(serviciosSelectors.theServicioExist);
-  }
+  // // SERVICIO EXISTENTE
+  // public theServiceExist(): Observable<boolean> {
+  //   return this.store.select(serviciosSelectors.theServicioExist);
+  // }
 
   // ADD SERVICIO TO CARRITO
   public addServicioCarrito(
@@ -89,14 +89,21 @@ export class ServiciosFacade {
     );
   }
 
-  // ADD UNIDAD DE OBRA TO SERVICIO TO CARRITO
-  // public addUnidadObraCarrito(servicio_id: number, uo_codigo: string): void {
-  //   this.store.dispatch(
-  //     serviciosActions.addUnidadObraCarrito({ servicio_id, uo_codigo })
-  //   );
-  // }
-
   public carrito$(): Observable<CarritoService[]> {
     return this.store.select(serviciosSelectors.carrito);
+  }
+
+  // RESETS
+  public resetServiciosAgenciaContratoProveedor(): void {
+    this.store.dispatch(
+      serviciosActions.resetServiciosAgenciaContratoProveedor()
+    );
+  }
+  public resetUnidadesObraServicio(): void {
+    this.store.dispatch(serviciosActions.resetUnidadesObraServicio());
+  }
+
+  public resetServicioSelected(): void {
+    this.store.dispatch(serviciosActions.resetServicioSelected());
   }
 }

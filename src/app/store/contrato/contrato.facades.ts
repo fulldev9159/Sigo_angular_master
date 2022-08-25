@@ -55,4 +55,15 @@ export class ContratoFacade {
   public getTipoServiciosContrato$(): Observable<TipoServicioContrato[]> {
     return this.store.select(contratoSelectors.getTipoServiciosContrato);
   }
+
+  //RESETS
+  public resetAgenciasContrato(): void {
+    this.store.dispatch(contratoActions.resetAgenciasContrato());
+  }
+  public resetActividadesContratoProveedor(): void {
+    this.store.dispatch(contratoActions.resetActividadesContratoProveedor());
+  }
+  public resetTipoServiciosContrato(): void {
+    this.store.dispatch(contratoActions.resetTipoServiciosContrato());
+  }
 }

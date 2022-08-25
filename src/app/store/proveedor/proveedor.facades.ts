@@ -34,4 +34,9 @@ export class ProveedorFacade {
   > {
     return this.store.select(proveedorSelectors.getProveedoresAgenciasContrato);
   }
+
+  // RESETS
+  public resetProveedoresAgenciaContrato(): void {
+    this.store.dispatch(proveedorActions.resetProveedoresAgenciaContrato());
+  }
 }

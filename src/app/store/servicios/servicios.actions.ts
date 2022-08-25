@@ -77,20 +77,13 @@ export const addServicioCarritoError = createAction(
   props<{ error: any }>()
 );
 
-// GET DETALLES DE UNA UNIDAD OBRA DE UN SERVICIO TO ADDING INTO CARRITO
-// export const addUnidadObraCarrito = createAction(
-//   '[SERVICIOS] addUnidadObraCarrito',
-//   props<{ servicio_id: number; uo_codigo: string }>()
-// );
-
-// export const addUnidadObraCarritoSuccess = createAction(
-//   '[SERVICIOS] addUnidadObraCarrito Success',
-//   props<{
-//     servicio_id: number;
-//     response: Response<DetallesUnidadObraServicio>;
-//   }>()
-// );
-// export const addUnidadObraCarritoError = createAction(
-//   '[SERVICIOS] addUnidadObraCarrito Error',
-//   props<{ error: any }>()
-// );
+// RESETS
+export const resetServiciosAgenciaContratoProveedor = createAction(
+  '[SERVICIOS] resetServiciosAgenciaContratoProveedor '
+);
+export const resetUnidadesObraServicio = createAction(
+  '[SERVICIOS] resetUnidadesObraServicio '
+);
+export const resetServicioSelected = createAction(
+  '[SERVICIOS] resetServicioSelected '
+);

@@ -53,3 +53,14 @@ export const getTipoServiciosContratoError = createAction(
   '[CONTRATO] POST getTipoServiciosContrato Error',
   props<{ error: any }>()
 );
+
+// RESETS
+export const resetAgenciasContrato = createAction(
+  '[CONTRATO] resetAgenciasContrato'
+);
+export const resetActividadesContratoProveedor = createAction(
+  '[CONTRATO] resetActividadesContratoProveedor'
+);
+export const resetTipoServiciosContrato = createAction(
+  '[CONTRATO] resetTipoServiciosContrato'
+);

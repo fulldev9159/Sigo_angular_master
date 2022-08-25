@@ -11,11 +11,13 @@ import {
 } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
+import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import {
   getActividadesContratoProveedor,
   getAgenciasContrato,
   getTipoServiciosContrato,
 } from '@storeOT/contrato/contrato.selectors';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import {
   agenciaSelected,
   contratoSelected,
@@ -30,7 +32,9 @@ import {
   sendingGetTipoServiciosContrato,
   sendingGetUnidadesObraServicios,
 } from '@storeOT/loadings/loadings.selectors';
+import { ProveedorFacade } from '@storeOT/proveedor/proveedor.facades';
 import { getProveedoresAgenciasContrato } from '@storeOT/proveedor/proveedor.selectors';
+import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import {
   carrito,
   getServiciosAgenciaContratoProveedor,
@@ -47,6 +51,10 @@ import { FormCubContainerComponent } from './form-cub-container.component';
 describe('FormCubContainerComponent', () => {
   let component: FormCubContainerComponent;
   let fixture: ComponentFixture<FormCubContainerComponent>;
+  let contratoFacade: ContratoFacade;
+  let proveedorFacade: ProveedorFacade;
+  let cubicacionFacade: CubicacionFacade;
+  let servicioFacade: ServiciosFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -138,9 +146,36 @@ describe('FormCubContainerComponent', () => {
     fixture = TestBed.createComponent(FormCubContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    contratoFacade = TestBed.inject(ContratoFacade);
+    proveedorFacade = TestBed.inject(ProveedorFacade);
+    cubicacionFacade = TestBed.inject(CubicacionFacade);
+    servicioFacade = TestBed.inject(ServiciosFacade);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Al cambiar de contrato se debe llamar al reset de proveedor, proveedorSelected,actividad,tipo servicio, servicio, servicioSelected y uo', () => {
+    spyOn(proveedorFacade, 'resetProveedoresAgenciaContrato');
+    spyOn(cubicacionFacade, 'resetProveedorSelected');
+    spyOn(contratoFacade, 'resetActividadesContratoProveedor');
+    spyOn(contratoFacade, 'resetTipoServiciosContrato');
+    spyOn(servicioFacade, 'resetServiciosAgenciaContratoProveedor');
+    spyOn(servicioFacade, 'resetServicioSelected');
+    spyOn(servicioFacade, 'resetUnidadesObraServicio');
+    component.formulario.formCub.get('contrato').setValue(2);
+    fixture.detectChanges();
+
+    expect(proveedorFacade.resetProveedoresAgenciaContrato).toHaveBeenCalled();
+    expect(cubicacionFacade.resetProveedorSelected).toHaveBeenCalled();
+    expect(contratoFacade.resetActividadesContratoProveedor).toHaveBeenCalled();
+    expect(contratoFacade.resetTipoServiciosContrato).toHaveBeenCalled();
+    expect(
+      servicioFacade.resetServiciosAgenciaContratoProveedor
+    ).toHaveBeenCalled();
+    expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
+    expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
   });
 });

@@ -13,7 +13,7 @@ export interface StateServicios {
   serviciosAgenciaContratoProveedor: ServicioAgenciaContratoProveedor[];
   unidadesObraServicio: UnidadObraServicio[];
   servicioSelected: ServicioAgenciaContratoProveedor;
-  unidadObraSelected: UnidadObraServicio;
+  // unidadObraSelected: UnidadObraServicio;
   carritoServices: CarritoService[];
   // carritoUnidadObra: CarritoUnidadObra[];
 }
@@ -22,7 +22,7 @@ export const initialState: StateServicios = {
   serviciosAgenciaContratoProveedor: [],
   unidadesObraServicio: [],
   servicioSelected: null,
-  unidadObraSelected: null,
+  // unidadObraSelected: null,
   carritoServices: [],
   // carritoUnidadObra: [],
 };
@@ -86,5 +86,17 @@ export const reducerServicios = createReducer(
       //   },
       // ],
     })
-  )
+  ),
+  on(serviciosActions.resetServiciosAgenciaContratoProveedor, (state, {}) => ({
+    ...state,
+    serviciosAgenciaContratoProveedor: [],
+  })),
+  on(serviciosActions.resetUnidadesObraServicio, (state, {}) => ({
+    ...state,
+    unidadesObraServicio: [],
+  })),
+  on(serviciosActions.resetServicioSelected, (state, {}) => ({
+    ...state,
+    servicioSelected: null,
+  }))
 );
