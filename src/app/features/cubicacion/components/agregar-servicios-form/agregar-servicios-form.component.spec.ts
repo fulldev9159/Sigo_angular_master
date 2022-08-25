@@ -100,11 +100,16 @@ describe('AgregarServiciosFormComponent', () => {
             },
             {
               selector: agenciaSelected,
-              value: null,
+              value: { id: 20, nombre: 'APOQUINDO' },
             },
             {
               selector: proveedorSelected,
-              value: null,
+              value: {
+                id: 15,
+                nombre: 'COBRA CHILE SERVICIOS S.A.',
+                codigo_acuerdo: '330000659',
+                cmarco_has_proveedor_id: 7,
+              },
             },
             {
               selector: getServiciosAgenciaContratoProveedor,
@@ -156,5 +161,21 @@ describe('AgregarServiciosFormComponent', () => {
     fixture.detectChanges();
 
     expect(contratoFacade.getTipoServiciosContrato).toHaveBeenCalledWith(1, 9);
+  });
+
+  it('should call servicios de una agencia al escoger el tipo de servicio', () => {
+    spyOn(serviciosFacade, 'getServiciosAgenciaContratoProveedor');
+    component.formFilter.get('actividad_id').setValue(1); //ABANDONOS
+    component.formFilter.get('tipo_servicio_id').setValue(2);
+    fixture.detectChanges();
+
+    expect(
+      serviciosFacade.getServiciosAgenciaContratoProveedor
+    ).toHaveBeenCalledWith({
+      actividad_id: 1,
+      agencia_id: 20,
+      cmarco_has_prov_id: 7,
+      tipo_servicio_id: 2,
+    });
   });
 });

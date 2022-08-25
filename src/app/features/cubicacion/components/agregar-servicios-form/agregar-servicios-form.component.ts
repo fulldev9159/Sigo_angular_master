@@ -90,11 +90,16 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
   serviciosAgenciaContratoProveedor$: Observable<Dropdown[]> =
     this.serviciosFacade.getServiciosAgenciaContratoProveedor$().pipe(
       tap(values => (this.serviciosAgenciaContratoProveedor = values)),
+      tap(values =>
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          'servicio_cod',
+          values
+        )
+      ),
       map(values => {
         let tmp = [...values];
-        return tmp.sort((a, b) =>
-          a.numero_producto > b.numero_producto ? 1 : -1
-        );
+        return tmp.sort((a, b) => (a.descripcion > b.descripcion ? 1 : -1));
       }),
       map(values =>
         values.map(value => ({
@@ -109,7 +114,10 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
       map(values => {
         let tmp = [...values];
         return tmp.sort((a, b) =>
-          a.unidad_obra_cod > b.unidad_obra_cod ? 1 : -1
+          a.model_unidad_obra_cod.descripcion >
+          b.model_unidad_obra_cod.descripcion
+            ? 1
+            : -1
         );
       }),
       map(values =>
@@ -167,30 +175,30 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
       })
     );
 
-    //   this.subscription.add(
-    //     combineLatest([
-    //       this.proveedorSelected$,
-    //       this.agenciaSelected$,
-    //       this.formFilter.get('tipo_servicio_id').valueChanges,
-    //     ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) => {
-    //       if (
-    //         agenciaSelected &&
-    //         agenciaSelected !== null &&
-    //         proveedorSelected &&
-    //         proveedorSelected !== null &&
-    //         tipo_servicio_id &&
-    //         tipo_servicio_id !== null
-    //       ) {
-    //         let request: RequestGetServicioTipoAgenciaContratoProveedor = {
-    //           actividad_id: +this.formFilter.get('actividad_id').value,
-    //           agencia_id: agenciaSelected.id,
-    //           cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
-    //           tipo_servicio_id,
-    //         };
-    //         this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
-    //       }
-    //     })
-    //   );
+    this.subscription.add(
+      combineLatest([
+        this.proveedorSelected$,
+        this.agenciaSelected$,
+        this.formFilter.get('tipo_servicio_id').valueChanges,
+      ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) => {
+        if (
+          agenciaSelected &&
+          agenciaSelected !== null &&
+          proveedorSelected &&
+          proveedorSelected !== null &&
+          tipo_servicio_id &&
+          tipo_servicio_id !== null
+        ) {
+          let request: RequestGetServicioTipoAgenciaContratoProveedor = {
+            actividad_id: +this.formFilter.get('actividad_id').value,
+            agencia_id: agenciaSelected.id,
+            cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
+            tipo_servicio_id,
+          };
+          this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
+        }
+      })
+    );
 
     //   this.subscription.add(
     //     this.formFilter

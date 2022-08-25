@@ -7,6 +7,7 @@ import {
   getAgenciasContratoMOCK200OK,
   getProveedoresAgenciaContratoMOCK200OK,
   getTipoServiciosContratoMOCK200ok,
+  ServiciosAgenciaContratoProveedorMOCK200OK,
 } from '../../../src/mocks';
 
 it('should let enter to create cubicacion', () => {
@@ -295,6 +296,55 @@ describe('Testing comportamiento inputs', () => {
         '330000659 - COBRA CHILE SERVICIOS S.A.'
       );
       cy._select_dropdown('#select-actividad', 'DISEÑO');
+      cy.get(selector).click();
+      cy.get(
+        selector + '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
+      ).each(($el, index, $list) => {
+        expect($el.text()).eq(datos[index]);
+      });
+    });
+
+    afterEach(() => {
+      cy.get('input[name="input-nombre-cubicacion"]').click();
+    });
+  });
+
+  describe('Servicios', (name = 'Servicios') => {
+    let selector = '#select-servicio';
+    it(`should display dropdown ${name} as required`, () => {
+      cy.intercept('POST', 'cubicacion/combo_servicios/get').as('HTTPRESPONSE');
+
+      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      cy._select_dropdown(
+        '#select-agencia',
+        '330000659 - COBRA CHILE SERVICIOS S.A.'
+      );
+
+      cy._select_dropdown('#select-actividad', 'DISEÑO');
+      cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
+      cy.wait('@HTTPRESPONSE').then(() => {
+        cy._check_dropdown_required(selector);
+      });
+    });
+
+    it(`dropdown ${name} should display data`, () => {
+      let datos = ServiciosAgenciaContratoProveedorMOCK200OK.data.items
+        .sort((a, b) =>
+          a.descripcion > b.descripcion
+            ? 1
+            : b.descripcion > a.descripcion
+            ? -1
+            : 0
+        )
+        .map(value => `${value.numero_producto} - ${value.descripcion}`);
+      // cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      // cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      // cy._select_dropdown(
+      //   '#select-proveedor',
+      //   '330000659 - COBRA CHILE SERVICIOS S.A.'
+      // );
+      // cy._select_dropdown('#select-actividad', 'DISEÑO');
       cy.get(selector).click();
       cy.get(
         selector + '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
