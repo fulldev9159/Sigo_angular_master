@@ -855,6 +855,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.displayRechazoOperaciones = true;
     this.otFacade.getAllMotivoRechazoOT('VALIDACION_OPERACIONES');
   }
+  12;
 
   closeRechazoOperaciones(): void {
     this.displayRechazoOperaciones = false;
@@ -872,6 +873,10 @@ export class ListOtComponent implements OnInit, OnDestroy {
       tipo_rechazo_id: +this.formRechazoIncial.get('tipo_id').value,
     };
     this.otFacade.AprobarRechazarOperaciones(request);
+    this.displayRechazoOperaciones = false;
+    this.displayAprobarRechazarOperaciones = false;
+
+    // TODO CERRAR COSAS
   }
 
   AceptarOperaciones(): void {
@@ -880,10 +885,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
       estado: 'APROBAR',
     };
     this.otFacade.AprobarRechazarOperaciones(request);
+    this.displayAprobarRechazarOperaciones = false;
   }
 
   confirmarRechazoObras(): void {
     this.displayConfirmarRechazoObras = false;
     this.otFacade.confirmarRechazoObras(this.idOtSelected);
+    // TODO CERRAR COSAS
   }
 }
