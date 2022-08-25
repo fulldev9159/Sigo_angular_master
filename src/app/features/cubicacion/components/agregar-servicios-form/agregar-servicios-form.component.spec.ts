@@ -178,4 +178,16 @@ describe('AgregarServiciosFormComponent', () => {
       tipo_servicio_id: 2,
     });
   });
+
+  it('should call unidades de obra del servicio escogido', () => {
+    spyOn(serviciosFacade, 'getUnidadesObraServicio');
+    component.formFilter.get('actividad_id').setValue(1); //ABANDONOS
+    component.formFilter.get('servicio_cod').setValue('D021');
+    fixture.detectChanges();
+
+    expect(serviciosFacade.getUnidadesObraServicio).toHaveBeenCalledWith({
+      servicio_cod: 'D021',
+      actividad_id: 1,
+    });
+  });
 });

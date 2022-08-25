@@ -111,6 +111,13 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
   unidadesObraServicio$: Observable<Dropdown[]> = this.serviciosFacade
     .getUnidadesObraServicio$()
     .pipe(
+      tap(values =>
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          'unidad_obra_cod',
+          values
+        )
+      ),
       map(values => {
         let tmp = [...values];
         return tmp.sort((a, b) =>
@@ -200,19 +207,19 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
       })
     );
 
-    //   this.subscription.add(
-    //     this.formFilter
-    //       .get('servicio_cod')
-    //       .valueChanges.subscribe(servicio_cod => {
-    //         if (servicio_cod && servicio_cod !== null) {
-    //           let request: RequestGetUnidadObraServicio = {
-    //             servicio_cod,
-    //             actividad_id: +this.formFilter.get('actividad_id').value,
-    //           };
-    //           this.serviciosFacade.getUnidadesObraServicio(request);
-    //         }
-    //       })
-    //   );
+    this.subscription.add(
+      this.formFilter
+        .get('servicio_cod')
+        .valueChanges.subscribe(servicio_cod => {
+          if (servicio_cod && servicio_cod !== null) {
+            let request: RequestGetUnidadObraServicio = {
+              servicio_cod,
+              actividad_id: +this.formFilter.get('actividad_id').value,
+            };
+            this.serviciosFacade.getUnidadesObraServicio(request);
+          }
+        })
+    );
   }
 
   agregarServicio(): void {

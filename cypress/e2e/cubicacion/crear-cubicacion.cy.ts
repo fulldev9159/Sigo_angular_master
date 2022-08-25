@@ -8,6 +8,7 @@ import {
   getProveedoresAgenciaContratoMOCK200OK,
   getTipoServiciosContratoMOCK200ok,
   ServiciosAgenciaContratoProveedorMOCK200OK,
+  UnidadObraServicioMOCK200OK,
 } from '../../../src/mocks';
 
 it('should let enter to create cubicacion', () => {
@@ -345,6 +346,72 @@ describe('Testing comportamiento inputs', () => {
       //   '330000659 - COBRA CHILE SERVICIOS S.A.'
       // );
       // cy._select_dropdown('#select-actividad', 'DISEÑO');
+      cy.get(selector).click();
+      cy.get(
+        selector + '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
+      ).each(($el, index, $list) => {
+        expect($el.text()).eq(datos[index]);
+      });
+    });
+
+    afterEach(() => {
+      cy.get('input[name="input-nombre-cubicacion"]').click();
+    });
+  });
+
+  describe('Unidad de Obra', (name = 'Unidad de obra') => {
+    let selector = '#select-unidad-obra';
+    it(`should display dropdown ${name} as required`, () => {
+      cy.intercept('POST', '/cubicacion/unidades_obra_from_servicio/get').as(
+        'HTTPRESPONSE'
+      );
+
+      // cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      // cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      // cy._select_dropdown(
+      //   '#select-agencia',
+      //   '330000659 - COBRA CHILE SERVICIOS S.A.'
+      // );
+
+      // cy._select_dropdown('#select-actividad', 'DISEÑO');
+      // cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
+      cy._select_dropdown(
+        '#select-servicio',
+        'D021 - DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)'
+      );
+      cy.get('#select-servicio').click();
+      cy.get('#select-servicio').click();
+      cy.wait('@HTTPRESPONSE').then(() => {
+        cy._check_dropdown_required(selector);
+      });
+    });
+
+    it(`dropdown ${name} should display data`, () => {
+      let datos = UnidadObraServicioMOCK200OK.data.items
+        .sort((a, b) =>
+          a.model_unidad_obra_cod.descripcion >
+          b.model_unidad_obra_cod.descripcion
+            ? 1
+            : b.model_unidad_obra_cod.descripcion >
+              a.model_unidad_obra_cod.descripcion
+            ? -1
+            : 0
+        )
+        .map(
+          value =>
+            `${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}`
+        );
+      // cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+      // cy._select_dropdown('#select-agencia', 'APOQUINDO');
+      // cy._select_dropdown(
+      //   '#select-proveedor',
+      //   '330000659 - COBRA CHILE SERVICIOS S.A.'
+      // );
+      // cy._select_dropdown('#select-actividad', 'DISEÑO');
+      cy._select_dropdown(
+        '#select-servicio',
+        'D021 - DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)'
+      );
       cy.get(selector).click();
       cy.get(
         selector + '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
