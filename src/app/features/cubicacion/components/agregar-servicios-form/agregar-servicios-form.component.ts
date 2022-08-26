@@ -168,11 +168,16 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
         this.contratoSelected$,
         this.formFilter.get('actividad_id').valueChanges,
       ]).subscribe(([contratoSelected, actividad_id]) => {
+        let preValues = this.formFilter.value;
+        let actualValue = this.formFilter.get('actividad_id').value;
+
         if (
           actividad_id &&
           actividad_id !== null &&
           contratoSelected &&
-          contratoSelected !== null
+          contratoSelected !== null &&
+          preValues.actividad_id === null &&
+          actualValue !== null
         ) {
           this.contratoFacade.getTipoServiciosContrato(
             actividad_id,
@@ -188,13 +193,17 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
         this.agenciaSelected$,
         this.formFilter.get('tipo_servicio_id').valueChanges,
       ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) => {
+        let preValues = this.formFilter.value;
+        let actualValue = this.formFilter.get('tipo_servicio_id').value;
         if (
           agenciaSelected &&
           agenciaSelected !== null &&
           proveedorSelected &&
           proveedorSelected !== null &&
           tipo_servicio_id &&
-          tipo_servicio_id !== null
+          tipo_servicio_id !== null &&
+          preValues.tipo_servicio_id === null &&
+          actualValue !== null
         ) {
           let request: RequestGetServicioTipoAgenciaContratoProveedor = {
             actividad_id: +this.formFilter.get('actividad_id').value,

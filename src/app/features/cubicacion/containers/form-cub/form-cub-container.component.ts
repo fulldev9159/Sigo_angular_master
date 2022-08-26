@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
@@ -81,6 +80,7 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
 
     // RESETS
     this.formulario.formCub.get('contrato').valueChanges.subscribe(() => {
+      this.cubicacionFacade.resetAgenciaSelected();
       this.proveedorFacade.resetProveedoresAgenciaContrato();
       this.cubicacionFacade.resetProveedorSelected();
       this.contratoFacade.resetActividadesContratoProveedor();
@@ -88,6 +88,26 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
       this.servicioFacade.resetServiciosAgenciaContratoProveedor();
       this.servicioFacade.resetServicioSelected();
       this.servicioFacade.resetUnidadesObraServicio();
+
+      this.formulario.formCub
+        .get('agencia_id')
+        .setValue(null, { emitEvent: false });
+
+      this.formulario.formCub
+        .get('cmarcoproveedor_id')
+        .setValue(null, { emitEvent: false });
+      this.agregarServiciosForm.formFilter
+        .get('actividad_id')
+        .setValue(null, { emitEvent: false });
+      this.agregarServiciosForm.formFilter
+        .get('tipo_servicio_id')
+        .setValue(null, { emitEvent: false });
+      this.agregarServiciosForm.formFilter
+        .get('servicio_cod')
+        .setValue(null, { emitEvent: false });
+      this.agregarServiciosForm.formFilter
+        .get('unidad_obra_cod')
+        .setValue(null, { emitEvent: false });
     });
   }
 }

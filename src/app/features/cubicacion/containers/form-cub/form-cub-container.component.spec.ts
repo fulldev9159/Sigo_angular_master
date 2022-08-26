@@ -157,8 +157,30 @@ describe('FormCubContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Al cambiar de contrato se debe llamar al reset de proveedor, proveedorSelected,actividad,tipo servicio, servicio, servicioSelected y uo', () => {
+  it('Al cambiar de contrato se debe llamar al reset de agenciaSelected,proveedor, proveedorSelected,actividad,tipo servicio, servicio, servicioSelected y uo', () => {
+    spyOn(cubicacionFacade, 'resetAgenciaSelected');
     spyOn(proveedorFacade, 'resetProveedoresAgenciaContrato');
+    spyOn(cubicacionFacade, 'resetProveedorSelected');
+    spyOn(contratoFacade, 'resetActividadesContratoProveedor');
+    spyOn(contratoFacade, 'resetTipoServiciosContrato');
+    spyOn(servicioFacade, 'resetServiciosAgenciaContratoProveedor');
+    spyOn(servicioFacade, 'resetServicioSelected');
+    spyOn(servicioFacade, 'resetUnidadesObraServicio');
+    component.formulario.formCub.get('contrato').setValue(2);
+    fixture.detectChanges();
+
+    expect(proveedorFacade.resetProveedoresAgenciaContrato).toHaveBeenCalled();
+    expect(cubicacionFacade.resetProveedorSelected).toHaveBeenCalled();
+    expect(contratoFacade.resetActividadesContratoProveedor).toHaveBeenCalled();
+    expect(contratoFacade.resetTipoServiciosContrato).toHaveBeenCalled();
+    expect(
+      servicioFacade.resetServiciosAgenciaContratoProveedor
+    ).toHaveBeenCalled();
+    expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
+    expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
+  });
+
+  it('Al cambiar de agencia se debe llamar al reset de proveedorSelected,actividad,tipo servicio, servicio, servicioSelected y uo', () => {
     spyOn(cubicacionFacade, 'resetProveedorSelected');
     spyOn(contratoFacade, 'resetActividadesContratoProveedor');
     spyOn(contratoFacade, 'resetTipoServiciosContrato');
