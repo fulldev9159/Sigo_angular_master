@@ -188,9 +188,9 @@ describe('FormCubContainerComponent', () => {
     spyOn(servicioFacade, 'resetServicioSelected');
     spyOn(servicioFacade, 'resetUnidadesObraServicio');
     component.formulario.formCub.get('contrato').setValue(2);
+    component.formulario.formCub.get('agencia_id').setValue(1);
     fixture.detectChanges();
 
-    expect(proveedorFacade.resetProveedoresAgenciaContrato).toHaveBeenCalled();
     expect(cubicacionFacade.resetProveedorSelected).toHaveBeenCalled();
     expect(contratoFacade.resetActividadesContratoProveedor).toHaveBeenCalled();
     expect(contratoFacade.resetTipoServiciosContrato).toHaveBeenCalled();
