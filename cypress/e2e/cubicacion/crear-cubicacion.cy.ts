@@ -11,6 +11,10 @@ import {
   UnidadObraServicioMOCK200OK,
 } from '../../../src/mocks';
 
+beforeEach(() => {
+  cy.viewport(1500, 1700);
+});
+
 it('should let enter to create cubicacion', () => {
   cy.visit('http://localhost:4206/login/auth');
   cy._login('mgestor1', 'asdasd');
