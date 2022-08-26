@@ -449,7 +449,7 @@ describe('Testing comportamiento Selectores al comenzar a realizar cambios de se
     cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
   });
 
-  it('All selectors should be disabled except contrato, agencia , proveedor and agencia if proveedor changed', () => {
+  it('All selectors should be disabled except contrato, agencia , proveedor and actividad if proveedor changed', () => {
     cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
       'HTTPRESPONSE-AGENCIA'
     );
@@ -509,6 +509,66 @@ describe('Testing comportamiento Selectores al comenzar a realizar cambios de se
 
     cy._select_dropdown('#select-proveedor', '3300193077 - AJ INGENIEROS S.A');
     cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+  });
+
+  it('only servicios y uo should be disabled if actividad changed', () => {
+    cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
+      'HTTPRESPONSE-AGENCIA'
+    );
+    cy.intercept(
+      'POST',
+      '/cubicacion/proveedores_from_agencia_contrato/get'
+    ).as('HTTPRESPONSE-PROVEEDORES');
+
+    cy.intercept(
+      'POST',
+      '/cubicacion/actividad_from_cmarco_has_proveedor/get'
+    ).as('HTTPRESPONSE-ACTIVIDAD');
+
+    cy.intercept('POST', '/cubicacion/tipo_servicio/get').as(
+      'HTTPRESPONSE-TIPO-SERVICIO'
+    );
+
+    cy.intercept('POST', 'cubicacion/combo_servicios/get').as(
+      'HTTPRESPONSE-SERVICIO'
+    );
+
+    cy.intercept('POST', '/cubicacion/unidades_obra_from_servicio/get').as(
+      'HTTPRESPONSE-UNIDAD-OBRA'
+    );
+
+    cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+    cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+    });
+    cy.wait('@HTTPRESPONSE-PROVEEDORES').then(() => {
+      cy._select_dropdown(
+        '#select-proveedor',
+        '330000659 - COBRA CHILE SERVICIOS S.A.'
+      );
+    });
+    cy.wait('@HTTPRESPONSE-ACTIVIDAD').then(() => {
+      cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
+    });
+
+    cy.wait('@HTTPRESPONSE-TIPO-SERVICIO').then(() => {
+      cy._select_dropdown('#select-tipo-servicio', 'CABLES');
+    });
+
+    cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
+      cy._select_dropdown(
+        '#select-servicio',
+        'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
+      );
+    });
+
+    cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
+      cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
+    });
+
+    cy._select_dropdown('#select-actividad', 'ABANDONOS');
     cy.get('#select-servicio>div').should('have.class', 'p-disabled');
     cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
   });

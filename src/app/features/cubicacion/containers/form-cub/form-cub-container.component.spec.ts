@@ -218,4 +218,20 @@ describe('FormCubContainerComponent', () => {
     expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
     expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
   });
+
+  it('Al cambiar de actividad se debe llamar al reset de tipo servicio, servicio, servicioSelected y uo', () => {
+    spyOn(contratoFacade, 'resetTipoServiciosContrato');
+    spyOn(servicioFacade, 'resetServiciosAgenciaContratoProveedor');
+    spyOn(servicioFacade, 'resetServicioSelected');
+    spyOn(servicioFacade, 'resetUnidadesObraServicio');
+    component.agregarServiciosForm.formFilter.get('actividad_id').setValue(1);
+    fixture.detectChanges();
+
+    expect(contratoFacade.resetTipoServiciosContrato).toHaveBeenCalled();
+    expect(
+      servicioFacade.resetServiciosAgenciaContratoProveedor
+    ).toHaveBeenCalled();
+    expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
+    expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
+  });
 });
