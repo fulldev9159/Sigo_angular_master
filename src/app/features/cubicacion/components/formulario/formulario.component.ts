@@ -22,6 +22,20 @@ interface Dropdown {
   name: string;
   code: number;
 }
+/**
+ * @description FORMULARIO QUE PERMITE INGRESAR:
+ *    - Nombre de una cubicacion
+ *    - Tipo de la cubicación
+ *    - Contrato de la cubicación
+ *    - Agencia de la cubicación
+ *    - Proveedor de la cubicación
+ *    - Dirección en caso de un contrato bucle
+ *    - Observación opcional
+ *
+ * Datos necesarios inicalmente:
+ *    - Contratos del usuario (getContratosUsuario)
+ *    - Tipos de Cubicaciones (getTipoCubicacion)
+ */
 @Component({
   selector: 'zwc-formulario',
   templateUrl: './formulario.component.html',
@@ -132,7 +146,6 @@ export class FormularioComponent implements OnDestroy, OnInit {
     contrato: new FormControl(null, [Validators.required]),
     agencia_id: new FormControl(null, [Validators.required]),
     cmarcoproveedor_id: new FormControl(null, [Validators.required]),
-    // table: new FormArray([]),
   };
 
   formCub: FormGroup = new FormGroup(this.formCubControl);
@@ -204,11 +217,6 @@ export class FormularioComponent implements OnDestroy, OnInit {
     // AGENCIA
     this.subscription.add(
       this.formCub.get('agencia_id').valueChanges.subscribe(agencia_id => {
-        // RESET
-        // this.formularioService.resetControls(this.formCub, [
-        //   'cmarcoproveedor_id',
-        // ]);
-
         if (agencia_id && agencia_id !== null) {
           // STORE AGENCIA SELECTED
           let agenciaSelected = this.agenciasContrato.find(

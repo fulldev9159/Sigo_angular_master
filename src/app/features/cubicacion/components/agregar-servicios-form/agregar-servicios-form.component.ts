@@ -25,6 +25,28 @@ interface Dropdown {
   name: string;
   code: number | string;
 }
+
+/**
+ * @description
+ *   FORMULARIO QUE PERMITE AGREGAR UN SERVICIO/UO AL CARRITO
+ *   DATOS QUE PERMITE USAR:
+ *    - Actividad
+ *    - Tipo de servicio
+ *       Necesita:
+ *          - Actividad (interno en esta clase)
+ *          - Contrato marco (se debe obtener por NGRX)
+ *    - Servicios
+ *          - Actividad (interno en esta clase)
+ *          - Agencia (se debe obtener por NGRX)
+ *          - SubContrato  (se debe obtener por NGRX)
+ *          - Tipo de servicio (interno en esta clase)
+ *    - UO de un servicio
+ *          - Actividad (interno en esta clase)
+ *          - Servicio Cod(interno en esa clase)
+ *
+ * Datos previos necesarios:
+ *     - Actividades de un contrato/agencia/proveedor (NGRX)
+ */
 @Component({
   selector: 'zwc-agregar-servicios-form',
   templateUrl: './agregar-servicios-form.component.html',
@@ -168,6 +190,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
         this.contratoSelected$,
         this.formFilter.get('actividad_id').valueChanges,
       ]).subscribe(([contratoSelected, actividad_id]) => {
+        // TODO: WA para determinar si es efectivamente un cambio de actividad escogido en el formulario o es un cambio de contrato
         let preValues = this.formFilter.value;
         let actualValue = this.formFilter.get('actividad_id').value;
 
@@ -187,6 +210,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
           contratoSelected !== null &&
           actividad_id_change
         ) {
+          // CALL GET TIPOS DE SERVICIOS
           this.contratoFacade.getTipoServiciosContrato(
             actividad_id,
             contratoSelected.contrato_id
@@ -201,6 +225,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
         this.agenciaSelected$,
         this.formFilter.get('tipo_servicio_id').valueChanges,
       ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) => {
+        // TODO: WA
         let preValues = this.formFilter.value;
         let actualValue = this.formFilter.get('tipo_servicio_id').value;
 
@@ -222,6 +247,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
           tipo_servicio_id !== null &&
           tipo_servicio_id_change
         ) {
+          // CALL GET SERVICIOS
           let request: RequestGetServicioTipoAgenciaContratoProveedor = {
             actividad_id: +this.formFilter.get('actividad_id').value,
             agencia_id: agenciaSelected.id,
@@ -238,6 +264,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
         .get('servicio_cod')
         .valueChanges.subscribe(servicio_cod => {
           if (servicio_cod && servicio_cod !== null) {
+            // CALL UNIDADES DE OBRAS
             let request: RequestGetUnidadObraServicio = {
               servicio_cod,
               actividad_id: +this.formFilter.get('actividad_id').value,

@@ -493,6 +493,100 @@ export let DetallesServicioTipoAgenciaContratoProveedorMOCK200OK: Response<{
   },
 };
 
+export let UnidadObraServicioMOCK200OKUnitTest: Response<{
+  items: UnidadObraServicio[];
+}> = {
+  status: { code: 0, desc: '' },
+  data: {
+    items: [
+      {
+        id: 11,
+        actividad_id: 8,
+        servicio_cod: 'D021',
+        unidad_obra_cod: '0',
+        clave: 'DIBUJ',
+        model_servicio_cod: {
+          id: 11,
+          tipo_servicio_id: 6,
+          unidad_id: 4,
+          descripcion: 'DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)',
+          codigo: 'D021',
+          estado: true,
+          es_pack_basico: false,
+          cantidad_default: 1,
+          codigo_alcance: 'C-000',
+          puntos_baremos: 18,
+          fecha_inicio: '2021-01-01T00:00:00Z',
+          fecha_fin: '2027-04-01T17:19:26Z',
+          requiere_evidencia: false,
+        },
+        model_unidad_obra_cod: {
+          codigo: '0',
+          descripcion: 'SIN UO',
+          unidad_id: 19,
+        },
+        model_actividad_id: { id: 8, codigo: 'I', descripcion: 'DISEÑO' },
+      },
+      {
+        id: 11,
+        actividad_id: 8,
+        servicio_cod: 'D021',
+        unidad_obra_cod: '0',
+        clave: 'DIBUJ',
+        model_servicio_cod: {
+          id: 11,
+          tipo_servicio_id: 6,
+          unidad_id: 4,
+          descripcion: 'DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)',
+          codigo: 'D021',
+          estado: true,
+          es_pack_basico: false,
+          cantidad_default: 1,
+          codigo_alcance: 'C-000',
+          puntos_baremos: 18,
+          fecha_inicio: '2021-01-01T00:00:00Z',
+          fecha_fin: '2027-04-01T17:19:26Z',
+          requiere_evidencia: false,
+        },
+        model_unidad_obra_cod: {
+          codigo: '0',
+          descripcion: 'AAA SIN UO',
+          unidad_id: 19,
+        },
+        model_actividad_id: { id: 8, codigo: 'I', descripcion: 'DISEÑO' },
+      },
+      {
+        id: 11,
+        actividad_id: 8,
+        servicio_cod: 'D021',
+        unidad_obra_cod: '0',
+        clave: 'DIBUJ',
+        model_servicio_cod: {
+          id: 11,
+          tipo_servicio_id: 6,
+          unidad_id: 4,
+          descripcion: 'DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)',
+          codigo: 'D021',
+          estado: true,
+          es_pack_basico: false,
+          cantidad_default: 1,
+          codigo_alcance: 'C-000',
+          puntos_baremos: 18,
+          fecha_inicio: '2021-01-01T00:00:00Z',
+          fecha_fin: '2027-04-01T17:19:26Z',
+          requiere_evidencia: false,
+        },
+        model_unidad_obra_cod: {
+          codigo: '0',
+          descripcion: 'VV',
+          unidad_id: 19,
+        },
+        model_actividad_id: { id: 8, codigo: 'I', descripcion: 'DISEÑO' },
+      },
+    ],
+  },
+};
+
 export let DetallesUnidadObraServicioMOCK200OK: Response<DetallesUnidadObraServicio> =
   {
     status: { code: 0, desc: 'OK' },

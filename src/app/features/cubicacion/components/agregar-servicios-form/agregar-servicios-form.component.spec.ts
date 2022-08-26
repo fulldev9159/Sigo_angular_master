@@ -1,9 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   getActividadesContratoProveedorMOCK200ok,
+  getActividadesContratoProveedorMOCK200okUnitTest,
   getTipoServiciosContratoMOCK200ok,
+  getTipoServiciosContratoMOCK200okUnitTest,
   ServiciosAgenciaContratoProveedorMOCK200OK,
   UnidadObraServicioMOCK200OK,
+  UnidadObraServicioMOCK200OKUnitTest,
 } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -55,7 +58,8 @@ describe('AgregarServiciosFormComponent', () => {
           selectors: [
             {
               selector: getActividadesContratoProveedor,
-              value: getActividadesContratoProveedorMOCK200ok.data.items,
+              value:
+                getActividadesContratoProveedorMOCK200okUnitTest.data.items,
             },
             {
               selector: contratoSelected,
@@ -96,7 +100,7 @@ describe('AgregarServiciosFormComponent', () => {
             },
             {
               selector: getTipoServiciosContrato,
-              value: getTipoServiciosContratoMOCK200ok.data.items,
+              value: getTipoServiciosContratoMOCK200okUnitTest.data.items,
             },
             {
               selector: agenciaSelected,
@@ -117,7 +121,7 @@ describe('AgregarServiciosFormComponent', () => {
             },
             {
               selector: getUnidadesObraServicio,
-              value: UnidadObraServicioMOCK200OK.data.items,
+              value: UnidadObraServicioMOCK200OKUnitTest.data.items,
             },
             {
               selector: sendingGetActividadesContratoProveedor,
