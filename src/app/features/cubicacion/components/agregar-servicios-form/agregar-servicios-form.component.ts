@@ -171,13 +171,21 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
         let preValues = this.formFilter.value;
         let actualValue = this.formFilter.get('actividad_id').value;
 
+        let actividad_id_change = false;
+        if (
+          (preValues.actividad_id === null && actualValue !== null) ||
+          (preValues.actividad_id !== null &&
+            preValues.actividad_id !== actividad_id)
+        ) {
+          actividad_id_change = true;
+        }
+
         if (
           actividad_id &&
           actividad_id !== null &&
           contratoSelected &&
           contratoSelected !== null &&
-          preValues.actividad_id === null &&
-          actualValue !== null
+          actividad_id_change
         ) {
           this.contratoFacade.getTipoServiciosContrato(
             actividad_id,
@@ -195,6 +203,16 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
       ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) => {
         let preValues = this.formFilter.value;
         let actualValue = this.formFilter.get('tipo_servicio_id').value;
+
+        let tipo_servicio_id_change = false;
+        if (
+          (preValues.tipo_servicio_id === null && actualValue !== null) ||
+          (preValues.tipo_servicio_id !== null &&
+            preValues.tipo_servicio_id !== tipo_servicio_id)
+        ) {
+          tipo_servicio_id_change = true;
+        }
+
         if (
           agenciaSelected &&
           agenciaSelected !== null &&
@@ -202,8 +220,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
           proveedorSelected !== null &&
           tipo_servicio_id &&
           tipo_servicio_id !== null &&
-          preValues.tipo_servicio_id === null &&
-          actualValue !== null
+          tipo_servicio_id_change
         ) {
           let request: RequestGetServicioTipoAgenciaContratoProveedor = {
             actividad_id: +this.formFilter.get('actividad_id').value,
