@@ -497,6 +497,70 @@ describe('Testing comportamiento Selectores al comenzar a realizar cambios de se
     cy.get('#select-servicio>div').should('have.class', 'p-disabled');
     cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
   });
+
+  it('All selectors should be disabled except contrato, agencia , proveedor and agencia if proveedor changed', () => {
+    cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
+      'HTTPRESPONSE-AGENCIA'
+    );
+    cy.intercept(
+      'POST',
+      '/cubicacion/proveedores_from_agencia_contrato/get'
+    ).as('HTTPRESPONSE-PROVEEDORES');
+
+    cy.intercept(
+      'POST',
+      '/cubicacion/actividad_from_cmarco_has_proveedor/get'
+    ).as('HTTPRESPONSE-ACTIVIDAD');
+
+    cy.intercept('POST', '/cubicacion/tipo_servicio/get').as(
+      'HTTPRESPONSE-TIPO-SERVICIO'
+    );
+
+    cy.intercept('POST', 'cubicacion/combo_servicios/get').as(
+      'HTTPRESPONSE-SERVICIO'
+    );
+
+    cy.intercept('POST', '/cubicacion/unidades_obra_from_servicio/get').as(
+      'HTTPRESPONSE-UNIDAD-OBRA'
+    );
+
+    cy._select_dropdown('#select-contrato_marco', 'SBE_2018');
+    cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
+      cy._select_dropdown(
+        '#select-agencia',
+        'Región Metropolitana de Santiago'
+      );
+    });
+    cy.wait('@HTTPRESPONSE-PROVEEDORES').then(() => {
+      cy._select_dropdown(
+        '#select-proveedor',
+        '3300193078 - 2021-2023 MARJOS Y COMPAÑIA LIMITADA'
+      );
+    });
+    cy.wait('@HTTPRESPONSE-ACTIVIDAD').then(() => {
+      cy._select_dropdown('#select-actividad', 'INSTALACIONES EN MOVIL');
+    });
+
+    cy.wait('@HTTPRESPONSE-TIPO-SERVICIO').then(() => {
+      cy._select_dropdown('#select-tipo-servicio', 'Adicionales');
+    });
+
+    cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
+      cy._select_dropdown(
+        '#select-servicio',
+        'ServMARJOS 625 - ADICIONAL-Acarreo con Animal para distancia mayor a 500 m_RM,V,VI,VII'
+      );
+    });
+
+    cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
+      cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
+    });
+
+    cy._select_dropdown('#select-proveedor', '3300193077 - AJ INGENIEROS S.A');
+    cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+  });
 });
 
 describe('Excepcion crear cubicación sin contratos asignado', () => {

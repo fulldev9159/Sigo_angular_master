@@ -200,4 +200,22 @@ describe('FormCubContainerComponent', () => {
     expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
     expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
   });
+
+  it('Al cambiar de proveedor se debe llamar al reset de actividad,tipo servicio, servicio, servicioSelected y uo', () => {
+    spyOn(contratoFacade, 'resetActividadesContratoProveedor');
+    spyOn(contratoFacade, 'resetTipoServiciosContrato');
+    spyOn(servicioFacade, 'resetServiciosAgenciaContratoProveedor');
+    spyOn(servicioFacade, 'resetServicioSelected');
+    spyOn(servicioFacade, 'resetUnidadesObraServicio');
+    component.formulario.formCub.get('cmarcoproveedor_id').setValue(1);
+    fixture.detectChanges();
+
+    expect(contratoFacade.resetActividadesContratoProveedor).toHaveBeenCalled();
+    expect(contratoFacade.resetTipoServiciosContrato).toHaveBeenCalled();
+    expect(
+      servicioFacade.resetServiciosAgenciaContratoProveedor
+    ).toHaveBeenCalled();
+    expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
+    expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
+  });
 });

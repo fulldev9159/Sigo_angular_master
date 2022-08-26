@@ -134,5 +134,28 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
         .get('unidad_obra_cod')
         .setValue(null, { emitEvent: false });
     });
+
+    this.formulario.formCub
+      .get('cmarcoproveedor_id')
+      .valueChanges.subscribe(() => {
+        this.contratoFacade.resetActividadesContratoProveedor();
+        this.contratoFacade.resetTipoServiciosContrato();
+        this.servicioFacade.resetServiciosAgenciaContratoProveedor();
+        this.servicioFacade.resetServicioSelected();
+        this.servicioFacade.resetUnidadesObraServicio();
+
+        this.agregarServiciosForm.formFilter
+          .get('actividad_id')
+          .setValue(null, { emitEvent: false });
+        this.agregarServiciosForm.formFilter
+          .get('tipo_servicio_id')
+          .setValue(null, { emitEvent: false });
+        this.agregarServiciosForm.formFilter
+          .get('servicio_cod')
+          .setValue(null, { emitEvent: false });
+        this.agregarServiciosForm.formFilter
+          .get('unidad_obra_cod')
+          .setValue(null, { emitEvent: false });
+      });
   }
 }
