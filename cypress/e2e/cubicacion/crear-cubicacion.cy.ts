@@ -147,23 +147,23 @@ describe('Testing comportamiento sección descripcion dependiendo del contrato',
     cy.get('input[name="input-altura-desde"]').should('not.exist');
     cy.get('input[name="input-direccion-hasta"]').should('not.exist');
     cy.get('input[name="input-altura-hasta"]').should('not.exist');
-    cy.get('#select-contrato_marco')
-      .click()
-      .contains('ul li > span', 'UNIFICADO_FIJA')
-      .click();
+    // cy.get('#select-contrato_marco')
+    //   .click()
+    //   .contains('ul li > span', 'UNIFICADO_FIJA')
+    //   .click();
 
-    cy.get('input[name="input-direccion-desde"]').should('not.exist');
-    cy.get('input[name="input-altura-desde"]').should('not.exist');
-    cy.get('input[name="input-direccion-hasta"]').should('not.exist');
-    cy.get('input[name="input-altura-hasta"]').should('not.exist');
-    cy.get('#select-contrato_marco')
-      .click()
-      .contains('ul li > span', 'UNIFICADO_MOVIL')
-      .click();
-    cy.get('input[name="input-direccion-desde"]').should('not.exist');
-    cy.get('input[name="input-altura-desde"]').should('not.exist');
-    cy.get('input[name="input-direccion-hasta"]').should('not.exist');
-    cy.get('input[name="input-altura-hasta"]').should('not.exist');
+    // cy.get('input[name="input-direccion-desde"]').should('not.exist');
+    // cy.get('input[name="input-altura-desde"]').should('not.exist');
+    // cy.get('input[name="input-direccion-hasta"]').should('not.exist');
+    // cy.get('input[name="input-altura-hasta"]').should('not.exist');
+    // cy.get('#select-contrato_marco')
+    //   .click()
+    //   .contains('ul li > span', 'UNIFICADO_MOVIL')
+    //   .click();
+    // cy.get('input[name="input-direccion-desde"]').should('not.exist');
+    // cy.get('input[name="input-altura-desde"]').should('not.exist');
+    // cy.get('input[name="input-direccion-hasta"]').should('not.exist');
+    // cy.get('input[name="input-altura-hasta"]').should('not.exist');
     cy.get('#select-contrato_marco').click();
   });
 });
@@ -377,59 +377,6 @@ describe('Testing comportamiento  de dropdown en una selección inicial', () => 
 });
 
 describe('Testing comportamiento Selectores al comenzar a realizar cambios de selecciones', () => {
-  beforeEach(() => {
-    // INTERCEPTORS
-    // cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
-    //   'HTTPRESPONSE-AGENCIA'
-    // );
-    // cy.intercept(
-    //   'POST',
-    //   '/cubicacion/proveedores_from_agencia_contrato/get'
-    // ).as('HTTPRESPONSE-PROVEEDORES');
-    // cy.intercept(
-    //   'POST',
-    //   '/cubicacion/actividad_from_cmarco_has_proveedor/get'
-    // ).as('HTTPRESPONSE-ACTIVIDAD');
-    // cy.intercept('POST', '/cubicacion/tipo_servicio/get').as(
-    //   'HTTPRESPONSE-TIPO-SERVICIO'
-    // );
-    // cy.intercept('POST', 'cubicacion/combo_servicios/get').as(
-    //   'HTTPRESPONSE-SERVICIO'
-    // );
-    // cy.intercept('POST', '/cubicacion/unidades_obra_from_servicio/get').as(
-    //   'HTTPRESPONSE-UNIDAD-OBRA'
-    // );
-    // INICIALIZAR TESTS
-    // cy._select_dropdown('#select-contrato_marco', 'SBE_2018');
-    // cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
-    //   cy._select_dropdown('#select-contrato_marco', 'BUCLE');
-    // });
-    // cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
-    //   cy._select_dropdown('#select-agencia', 'APOQUINDO');
-    // });
-    // cy.wait('@HTTPRESPONSE-PROVEEDORES').then(() => {
-    //   cy._select_dropdown(
-    //     '#select-proveedor',
-    //     '330000659 - COBRA CHILE SERVICIOS S.A.'
-    //   );
-    // });
-    // cy.wait('@HTTPRESPONSE-ACTIVIDAD').then(() => {
-    //   cy._select_dropdown('#select-actividad', 'DISEÑO');
-    // });
-    // cy.wait('@HTTPRESPONSE-TIPO-SERVICIO').then(() => {
-    //   cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
-    // });
-    // cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
-    //   cy._select_dropdown(
-    //     '#select-servicio',
-    //     'D021 - DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)'
-    //   );
-    // });
-    // cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
-    //   cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
-    // });
-  });
-
   it('All selectors should be disabled except contrato and agencia if contrato changed', () => {
     cy._select_dropdown('#select-contrato_marco', 'SBE_2018');
     cy.get('#select-proveedor>div').should('have.class', 'p-disabled');
