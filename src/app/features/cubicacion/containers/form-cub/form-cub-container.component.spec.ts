@@ -234,4 +234,20 @@ describe('FormCubContainerComponent', () => {
     expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
     expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
   });
+
+  it('Al cambiar de tipo servicio se debe llamar al reset de servicio, servicioSelected y uo', () => {
+    spyOn(servicioFacade, 'resetServiciosAgenciaContratoProveedor');
+    spyOn(servicioFacade, 'resetServicioSelected');
+    spyOn(servicioFacade, 'resetUnidadesObraServicio');
+    component.agregarServiciosForm.formFilter
+      .get('tipo_servicio_id')
+      .setValue(1);
+    fixture.detectChanges();
+
+    expect(
+      servicioFacade.resetServiciosAgenciaContratoProveedor
+    ).toHaveBeenCalled();
+    expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
+    expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
+  });
 });

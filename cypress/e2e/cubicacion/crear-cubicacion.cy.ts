@@ -142,6 +142,7 @@ describe('Testing comportamiento sección descripcion dependiendo del contrato',
       .click()
       .contains('ul li > span', 'CONTRATO_ORDINARIO')
       .click();
+    cy.get('input[name="input-nombre-cubicacion"]').click();
 
     cy.get('input[name="input-direccion-desde"]').should('not.exist');
     cy.get('input[name="input-altura-desde"]').should('not.exist');
@@ -164,7 +165,7 @@ describe('Testing comportamiento sección descripcion dependiendo del contrato',
     // cy.get('input[name="input-altura-desde"]').should('not.exist');
     // cy.get('input[name="input-direccion-hasta"]').should('not.exist');
     // cy.get('input[name="input-altura-hasta"]').should('not.exist');
-    cy.get('#select-contrato_marco').click();
+    // cy.get('#select-contrato_marco').click();
   });
 });
 
@@ -180,7 +181,6 @@ describe('Testing comportamiento  de dropdown en una selección inicial', () => 
         .click()
         .contains('ul li > span', 'BUCLE')
         .click();
-
       cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
         cy._check_dropdown_required(selector);
       });
@@ -370,8 +370,6 @@ describe('Testing comportamiento  de dropdown en una selección inicial', () => 
         expect($el.text()).eq(datos[index]);
       });
       cy.get(selector).click();
-      cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
-      cy.get('#select-unidad-obra').click();
     });
   });
 });
@@ -513,7 +511,7 @@ describe('Testing comportamiento Selectores al comenzar a realizar cambios de se
     cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
   });
 
-  it('only servicios y uo should be disabled if actividad changed', () => {
+  it('only tipo servicio, servicios y uo should be disabled if actividad changed', () => {
     cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
       'HTTPRESPONSE-AGENCIA'
     );
@@ -569,6 +567,56 @@ describe('Testing comportamiento Selectores al comenzar a realizar cambios de se
     });
 
     cy._select_dropdown('#select-actividad', 'ABANDONOS');
+    cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+
+    cy.get('input[name="input-nombre-cubicacion"]').click();
+  });
+
+  it('only tipo servicios y uo should be disabled if actividad changed', () => {
+    cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
+      'HTTPRESPONSE-AGENCIA'
+    );
+    cy.intercept(
+      'POST',
+      '/cubicacion/proveedores_from_agencia_contrato/get'
+    ).as('HTTPRESPONSE-PROVEEDORES');
+
+    cy.intercept(
+      'POST',
+      '/cubicacion/actividad_from_cmarco_has_proveedor/get'
+    ).as('HTTPRESPONSE-ACTIVIDAD');
+
+    cy.intercept('POST', '/cubicacion/tipo_servicio/get').as(
+      'HTTPRESPONSE-TIPO-SERVICIO'
+    );
+
+    cy.intercept('POST', 'cubicacion/combo_servicios/get').as(
+      'HTTPRESPONSE-SERVICIO'
+    );
+
+    cy.intercept('POST', '/cubicacion/unidades_obra_from_servicio/get').as(
+      'HTTPRESPONSE-UNIDAD-OBRA'
+    );
+
+    cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
+
+    cy.wait('@HTTPRESPONSE-TIPO-SERVICIO').then(() => {
+      cy._select_dropdown('#select-tipo-servicio', 'CABLES');
+    });
+
+    cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
+      cy._select_dropdown(
+        '#select-servicio',
+        'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
+      );
+    });
+
+    cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
+      cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
+    });
+
+    cy._select_dropdown('#select-tipo-servicio', 'DTH');
     cy.get('#select-servicio>div').should('have.class', 'p-disabled');
     cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
   });
