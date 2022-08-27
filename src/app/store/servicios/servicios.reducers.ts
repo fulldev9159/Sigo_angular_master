@@ -59,6 +59,7 @@ export const reducerServicios = createReducer(
         ...state.carritoServices,
         {
           servicio_id: responseService.data.items[0].servicio_id,
+          servicio_codigo: responseService.data.items[0].servicio_codigo,
           servicio_precio_final_clp:
             responseService.data.items[0].servicio_precio_final_clp,
           servicio_nombre: responseService.data.items[0].servicio_nombre,

@@ -6,6 +6,7 @@ export interface CarritoService {
 
   // Data response http API
   servicio_id: number;
+  servicio_codigo: string;
   servicio_precio_final_clp: number;
   servicio_nombre: string;
   actividad_descripcion: string;

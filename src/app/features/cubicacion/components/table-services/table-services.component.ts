@@ -24,12 +24,9 @@ export class TableServicesComponent implements OnDestroy {
           let indexService = acc.findIndex(
             value => value.servicio_id === curr.servicio_id
           );
-          console.log(indexService);
           if (indexService === -1) {
-            console.log('Nuevo', curr);
             acc.push(curr);
           } else {
-            console.log('old', curr);
             let temp = [
               ...acc.map(item => ({
                 ...item,
