@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { environment } from '@environment';
 
@@ -52,6 +52,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       useClass: TokenInterceptor,
       multi: true,
     },
+    { provide: LOCALE_ID, useValue: 'es-CL' },
   ],
   bootstrap: [AppComponent],
 })
