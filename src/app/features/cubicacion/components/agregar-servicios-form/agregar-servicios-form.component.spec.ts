@@ -8,6 +8,7 @@ import {
   UnidadObraServicioMOCK200OK,
   UnidadObraServicioMOCK200OKUnitTest,
 } from '@mocksOT';
+import { RequestGetDetallesServicioTipoAgenciaContratoProveedor } from '@model';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
@@ -193,5 +194,28 @@ describe('AgregarServiciosFormComponent', () => {
       servicio_cod: 'D021',
       actividad_id: 1,
     });
+  });
+
+  it('should call addServicioCarrito', () => {
+    spyOn(serviciosFacade, 'addServicioCarrito');
+    component.formFilter.get('servicio_cod').setValue('D001');
+    component.formFilter.get('tipo_servicio_id').setValue(1);
+    component.formFilter.get('actividad_id').setValue(1);
+    component.formFilter.get('unidad_obra_cod').setValue('cod');
+    fixture.detectChanges();
+
+    let request: RequestGetDetallesServicioTipoAgenciaContratoProveedor = {
+      agencia_id: 20,
+      cmarco_has_proveedor_id: 7,
+      servicio_id: 2,
+      tipo_servicio_id: 1,
+      actividad_id: 1,
+    };
+
+    component.agregarServicio();
+    expect(serviciosFacade.addServicioCarrito).toHaveBeenCalledWith(
+      request,
+      'cod'
+    );
   });
 });
