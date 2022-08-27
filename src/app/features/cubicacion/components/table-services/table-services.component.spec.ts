@@ -20,7 +20,38 @@ describe('TableServicesComponent', () => {
           selectors: [
             {
               selector: carrito,
-              value: null,
+              value: [
+                {
+                  servicio_id: 196,
+                  servicio_precio_final_clp: 4913.72,
+                  servicio_nombre:
+                    'PREPARAR EXTREMOS DE CABLES GRUPO A (HASTA 300 PRS)',
+                  actividad_descripcion: 'MATRIZ',
+                  tipo_servicio_descripcion: 'CABLES',
+                  unidad_obras: [
+                    {
+                      uo_codigo: 'D241',
+                      uo_nombre: 'BLOCK PROT.100/P QDF MONDRAGON',
+                      uo_precio_total_clp: 57200.64,
+                    },
+                  ],
+                },
+                {
+                  servicio_id: 196,
+                  servicio_precio_final_clp: 4913.72,
+                  servicio_nombre:
+                    'PREPARAR EXTREMOS DE CABLES GRUPO A (HASTA 300 PRS)',
+                  actividad_descripcion: 'MATRIZ',
+                  tipo_servicio_descripcion: 'CABLES',
+                  unidad_obras: [
+                    {
+                      uo_codigo: 'D240',
+                      uo_nombre: 'MODULO PROT.GAS. QDF MONDRAGON',
+                      uo_precio_total_clp: 3200,
+                    },
+                  ],
+                },
+              ],
             },
           ],
         }),
