@@ -77,6 +77,14 @@ export const addServicioCarritoError = createAction(
   props<{ error: any }>()
 );
 
+// ALERTA PARA INDICAR QUE YA EXISTE UN SERVICIO EN EL CARRITO
+export const alertServicioExistenteCarrito = createAction(
+  '[SERVICIOS] alertServicioExistenteCarrito',
+  props<{
+    value: boolean;
+  }>()
+);
+
 // RESETS
 export const resetServiciosAgenciaContratoProveedor = createAction(
   '[SERVICIOS] resetServiciosAgenciaContratoProveedor '

@@ -20,21 +20,12 @@ export const servicioSelected = createSelector(
   (state: reducer.StateServicios) => state.servicioSelected
 );
 
-// export const unidadObraSelected = createSelector(
-//   selectServicios,
-//   (state: reducer.StateServicios) => state.unidadObraSelected
-// );
-
 export const carrito = createSelector(
   selectServicios,
   (state: reducer.StateServicios) => state.carritoServices
 );
 
-// export const theServicioExist = createSelector(
-//   servicioSelected,
-//   unidadObraSelected,
-//   carrito,
-//   (servicioSelected, unidadObraSelected, carrito) => {
-//     return false;
-//   }
-// );
+export const alertServicioExistenteCarrito = createSelector(
+  selectServicios,
+  (state: reducer.StateServicios) => state.alertServicioExistenteCarrito
+);

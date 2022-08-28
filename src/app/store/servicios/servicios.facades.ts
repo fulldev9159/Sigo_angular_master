@@ -93,6 +93,17 @@ export class ServiciosFacade {
     return this.store.select(serviciosSelectors.carrito);
   }
 
+  // ALERTA PARA INDICAR QUE YA EXISTE UN SERVICIO EN EL CARRITO
+  public alertServicioExistenteCarrito(value: boolean): void {
+    this.store.dispatch(
+      serviciosActions.alertServicioExistenteCarrito({ value })
+    );
+  }
+
+  public alertServicioExistenteCarrito$(): Observable<boolean> {
+    return this.store.select(serviciosSelectors.alertServicioExistenteCarrito);
+  }
+
   // RESETS
   public resetServiciosAgenciaContratoProveedor(): void {
     this.store.dispatch(

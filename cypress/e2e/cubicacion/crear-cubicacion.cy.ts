@@ -694,12 +694,30 @@ describe.only('Tabla carrito', () => {
     cy.get('#agregar-button').should('be.enabled');
   });
 
-  it('El botón agregar servicio debería bloquearse mientras se agrega un servicio', () => {
+  it('El botón agregar servicio debería bloquearse mientras se agrega un servicio y Debería desplegar el mensaje "El servicio ya fue agregado a la cubicación" cuando el usuario ingrese el mismo servicio 2 veces', () => {
+    cy.intercept('POST', '/cubicacion/datos_unidad_obra_material/get').as(
+      'HTTPRESPONSE-DATA-SERVICE'
+    );
     cy.get('#agregar-button').click();
     cy.get('#agregar-button').should('be.disabled');
+
+    cy.wait('@HTTPRESPONSE-DATA-SERVICE').then(() => {
+      cy.get('#agregar-button').click();
+      cy.get(
+        '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
+      ).contains('El servicio ya fue agregado a la cubicación');
+    });
   });
 
-  it('Debería desplegar el mensaje "El servicio que desea ingresar ya se ha agregado" cuando el usuario ingrese el mismo servicio 2 veces', () => {});
+  it('El mensaje de alerta debería desaparecer si cambio de actividad', () => {
+    cy._select_dropdown(
+      '#select-servicio',
+      'J912 - ABRIR EMPALME COM. TIPO MECANICO TTRC O EFA'
+    );
+    cy.get(
+      '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
+    ).should('not.exist');
+  });
 
   // it('should add service and displayed into carrito', () => {
   //   cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(

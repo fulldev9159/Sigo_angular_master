@@ -25,6 +25,7 @@ import {
 } from '@storeOT/cubicacion/cubicacion.selectors';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import {
+  sendingAgregarServicioCarrito,
   sendingGetActividadesContratoProveedor,
   sendingGetServiciosAgenciaContratoProveedor,
   sendingGetTipoServiciosContrato,
@@ -32,6 +33,8 @@ import {
 } from '@storeOT/loadings/loadings.selectors';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import {
+  alertServicioExistenteCarrito,
+  carrito,
   getServiciosAgenciaContratoProveedor,
   getUnidadesObraServicio,
 } from '@storeOT/servicios/servicios.selectors';
@@ -140,6 +143,34 @@ describe('AgregarServiciosFormComponent', () => {
               selector: sendingGetUnidadesObraServicios,
               value: false,
             },
+            {
+              selector: sendingAgregarServicioCarrito,
+              value: false,
+            },
+            {
+              selector: alertServicioExistenteCarrito,
+              value: false,
+            },
+            {
+              selector: carrito,
+              value: [
+                {
+                  servicio_id: 2,
+                  servicio_codigo: 'string',
+                  servicio_precio_final_clp: 22,
+                  servicio_nombre: 'string',
+                  actividad_descripcion: 'string',
+                  tipo_servicio_descripcion: '',
+                  unidad_obras: [
+                    {
+                      uo_codigo: '0',
+                      uo_nombre: 'string',
+                      uo_precio_total_clp: 1,
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         }),
       ],
@@ -160,16 +191,21 @@ describe('AgregarServiciosFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call getTipoServiciosContrato if change agencia', () => {
+  it('should call getTipoServiciosContrato and AlertServivicioExistenteCarrito con parametro en falso if change actividad_id', () => {
     spyOn(contratoFacade, 'getTipoServiciosContrato');
+    spyOn(serviciosFacade, 'alertServicioExistenteCarrito');
     component.formFilter.get('actividad_id').setValue(1); //ABANDONOS
     fixture.detectChanges();
 
     expect(contratoFacade.getTipoServiciosContrato).toHaveBeenCalledWith(1, 9);
+    expect(serviciosFacade.alertServicioExistenteCarrito).toHaveBeenCalledWith(
+      false
+    );
   });
 
-  it('should call servicios de una agencia al escoger el tipo de servicio', () => {
+  it('should call servicios de una agencia y AlertServivicioExistenteCarrito con parametro en falso  al escoger el tipo de servicio', () => {
     spyOn(serviciosFacade, 'getServiciosAgenciaContratoProveedor');
+    spyOn(serviciosFacade, 'alertServicioExistenteCarrito');
     component.formFilter.get('actividad_id').setValue(1); //ABANDONOS
     component.formFilter.get('tipo_servicio_id').setValue(2);
     fixture.detectChanges();
@@ -182,10 +218,14 @@ describe('AgregarServiciosFormComponent', () => {
       cmarco_has_prov_id: 7,
       tipo_servicio_id: 2,
     });
+    expect(serviciosFacade.alertServicioExistenteCarrito).toHaveBeenCalledWith(
+      false
+    );
   });
 
-  it('should call unidades de obra del servicio escogido', () => {
+  it('should call unidades de obra del servicio escogido y AlertServivicioExistenteCarrito con parametro en falso', () => {
     spyOn(serviciosFacade, 'getUnidadesObraServicio');
+    spyOn(serviciosFacade, 'alertServicioExistenteCarrito');
     component.formFilter.get('actividad_id').setValue(1); //ABANDONOS
     component.formFilter.get('servicio_cod').setValue('D021');
     fixture.detectChanges();
@@ -194,6 +234,25 @@ describe('AgregarServiciosFormComponent', () => {
       servicio_cod: 'D021',
       actividad_id: 1,
     });
+    expect(serviciosFacade.alertServicioExistenteCarrito).toHaveBeenCalledWith(
+      false
+    );
+  });
+
+  it('should call AlertServivicioExistenteCarrito con parametro en falso al cambiar de UO', () => {
+    spyOn(serviciosFacade, 'getUnidadesObraServicio');
+    spyOn(serviciosFacade, 'alertServicioExistenteCarrito');
+    component.formFilter.get('actividad_id').setValue(1); //ABANDONOS
+    component.formFilter.get('servicio_cod').setValue('D021');
+    fixture.detectChanges();
+
+    expect(serviciosFacade.getUnidadesObraServicio).toHaveBeenCalledWith({
+      servicio_cod: 'D021',
+      actividad_id: 1,
+    });
+    expect(serviciosFacade.alertServicioExistenteCarrito).toHaveBeenCalledWith(
+      false
+    );
   });
 
   it('should call addServicioCarrito', () => {
@@ -219,5 +278,17 @@ describe('AgregarServiciosFormComponent', () => {
     );
   });
 
-  it('Debería llamar al facade alertServicioExistenteCarrito si el servicio que está agregando ya existe en el carrito', () => {});
+  it('Debería llamar al facade alertServicioExistenteCarrito si el servicio que está agregando ya existe en el carrito y no debe llamar a agregarServicioCarrito', () => {
+    spyOn(serviciosFacade, 'alertServicioExistenteCarrito');
+    spyOn(serviciosFacade, 'addServicioCarrito');
+    component.formFilter.get('servicio_cod').setValue('D001');
+    component.formFilter.get('unidad_obra_cod').setValue('0');
+    fixture.detectChanges();
+
+    component.agregarServicio();
+    expect(serviciosFacade.alertServicioExistenteCarrito).toHaveBeenCalledWith(
+      true
+    );
+    expect(serviciosFacade.addServicioCarrito).not.toHaveBeenCalled();
+  });
 });

@@ -25,6 +25,7 @@ import {
   proveedorSelected,
 } from '@storeOT/cubicacion/cubicacion.selectors';
 import {
+  sendingAgregarServicioCarrito,
   sendingGetActividadesContratoProveedor,
   sendingGetAgenciasContrato,
   sendingGetProveedorAgenciasContrato,
@@ -36,6 +37,7 @@ import { ProveedorFacade } from '@storeOT/proveedor/proveedor.facades';
 import { getProveedoresAgenciasContrato } from '@storeOT/proveedor/proveedor.selectors';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import {
+  alertServicioExistenteCarrito,
   carrito,
   getServiciosAgenciaContratoProveedor,
   getUnidadesObraServicio,
@@ -137,6 +139,15 @@ describe('FormCubContainerComponent', () => {
             {
               selector: carrito,
               value: null,
+            },
+
+            {
+              selector: sendingAgregarServicioCarrito,
+              value: false,
+            },
+            {
+              selector: alertServicioExistenteCarrito,
+              value: false,
             },
           ],
         }),
