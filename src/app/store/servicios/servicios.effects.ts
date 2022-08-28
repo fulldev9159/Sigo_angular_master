@@ -67,28 +67,24 @@ export class ServiciosEffects {
         this.serviciosHttpService
           .getDetallesServiciosTipoAgenciaContratoProveedor(requestService)
           .pipe(
-            mergeMap(
-              responseService =>
-                this.serviciosHttpService
-                  .getDetallesUnidadObraServicio(uo_codigo)
-                  .pipe(
-                    map(responseUnidadObra =>
-                      serviciosActions.addServicioCarritoSuccess({
-                        responseService,
-                        responseUnidadObra,
+            mergeMap(responseService =>
+              this.serviciosHttpService
+                .getDetallesUnidadObraServicio(uo_codigo)
+                .pipe(
+                  map(responseUnidadObra =>
+                    serviciosActions.addServicioCarritoSuccess({
+                      responseService,
+                      responseUnidadObra,
+                    })
+                  ),
+                  catchError(error =>
+                    of(
+                      serviciosActions.addServicioCarritoError({
+                        error,
                       })
-                    ),
-                    catchError(error =>
-                      of(
-                        serviciosActions.addServicioCarritoError({
-                          error,
-                        })
-                      )
                     )
                   )
-              // serviciosActions.addServicioCarritoSuccess({
-              //   response,
-              // })
+                )
             ),
             catchError(error =>
               of(
@@ -101,29 +97,6 @@ export class ServiciosEffects {
       )
     )
   );
-
-  // addUnidadObraCarrito$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(serviciosActions.addUnidadObraCarrito),
-  //     concatMap(({ servicio_id, uo_codigo }) =>
-  //       this.serviciosHttpService.getDetallesUnidadObraServicio(uo_codigo).pipe(
-  //         map(response =>
-  //           serviciosActions.addUnidadObraCarritoSuccess({
-  //             servicio_id,
-  //             response,
-  //           })
-  //         ),
-  //         catchError(error =>
-  //           of(
-  //             serviciosActions.addUnidadObraCarritoError({
-  //               error,
-  //             })
-  //           )
-  //         )
-  //       )
-  //     )
-  //   )
-  // );
 
   notifyAfte$ = createEffect(
     () =>

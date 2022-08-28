@@ -630,7 +630,10 @@ describe.only('Tabla carrito', () => {
     cy.get('#crear-cubicacion-sidebar').click();
   });
 
-  it('should add service and displayed into carrito', () => {
+  it('El botón agregar servicio debería habilitarse solo si tiene todos los campos requeridos', () => {
+    cy.get('#agregar-button').should('be.disabled');
+
+    // RELLENAR EL FORMULARIO PARA AGREGAR UN SERVICIO
     cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
       'HTTPRESPONSE-AGENCIA'
     );
@@ -667,27 +670,95 @@ describe.only('Tabla carrito', () => {
         '330000659 - COBRA CHILE SERVICIOS S.A.'
       );
     });
+    cy.get('#agregar-button').should('be.disabled');
     cy.wait('@HTTPRESPONSE-ACTIVIDAD').then(() => {
       cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
     });
+    cy.get('#agregar-button').should('be.disabled');
 
     cy.wait('@HTTPRESPONSE-TIPO-SERVICIO').then(() => {
       cy._select_dropdown('#select-tipo-servicio', 'CABLES');
     });
-
+    cy.get('#agregar-button').should('be.disabled');
     cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
       cy._select_dropdown(
         '#select-servicio',
         'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
       );
     });
-
+    cy.get('#agregar-button').should('be.disabled');
     cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
       cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
     });
-    cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.get('#agregar-button').click();
+
+    cy.get('#agregar-button').should('be.enabled');
   });
+
+  it('El botón agregar servicio debería bloquearse mientras se agrega un servicio', () => {
+    cy.get('#agregar-button').click();
+    cy.get('#agregar-button').should('be.disabled');
+  });
+
+  it('Debería desplegar el mensaje "El servicio que desea ingresar ya se ha agregado" cuando el usuario ingrese el mismo servicio 2 veces', () => {});
+
+  // it('should add service and displayed into carrito', () => {
+  //   cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
+  //     'HTTPRESPONSE-AGENCIA'
+  //   );
+  //   cy.intercept(
+  //     'POST',
+  //     '/cubicacion/proveedores_from_agencia_contrato/get'
+  //   ).as('HTTPRESPONSE-PROVEEDORES');
+
+  //   cy.intercept(
+  //     'POST',
+  //     '/cubicacion/actividad_from_cmarco_has_proveedor/get'
+  //   ).as('HTTPRESPONSE-ACTIVIDAD');
+
+  //   cy.intercept('POST', '/cubicacion/tipo_servicio/get').as(
+  //     'HTTPRESPONSE-TIPO-SERVICIO'
+  //   );
+
+  //   cy.intercept('POST', 'cubicacion/combo_servicios/get').as(
+  //     'HTTPRESPONSE-SERVICIO'
+  //   );
+
+  //   cy.intercept('POST', '/cubicacion/unidades_obra_from_servicio/get').as(
+  //     'HTTPRESPONSE-UNIDAD-OBRA'
+  //   );
+
+  //   // SELECT
+  //   cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+  //   cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
+  //     cy._select_dropdown('#select-agencia', 'APOQUINDO');
+  //   });
+  //   cy.wait('@HTTPRESPONSE-PROVEEDORES').then(() => {
+  //     cy._select_dropdown(
+  //       '#select-proveedor',
+  //       '330000659 - COBRA CHILE SERVICIOS S.A.'
+  //     );
+  //   });
+  //   cy.wait('@HTTPRESPONSE-ACTIVIDAD').then(() => {
+  //     cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
+  //   });
+
+  //   cy.wait('@HTTPRESPONSE-TIPO-SERVICIO').then(() => {
+  //     cy._select_dropdown('#select-tipo-servicio', 'CABLES');
+  //   });
+
+  //   cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
+  //     cy._select_dropdown(
+  //       '#select-servicio',
+  //       'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
+  //     );
+  //   });
+
+  //   cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
+  //     cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
+  //   });
+  //   cy.get('input[name="input-nombre-cubicacion"]').click();
+  //   cy.get('#agregar-button').click();
+  // });
 });
 
 describe('Excepcion crear cubicación sin contratos asignado', () => {

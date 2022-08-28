@@ -53,6 +53,13 @@
             </div>
         </div>
 
-        <button (click)="agregarServicio()" id="agregar-button">Agregar >></button>
+        <zwc-pbutton-sending 
+        Pid="agregar-button"
+        content="Agregar"
+        Pclass="p-button-info p-button-sm mt-4 w-full"
+        [Pdisabled]="!formFilter.valid && (loadingAgregarServicioCarrito$|async)===false"
+        [sending]="loadingAgregarServicioCarrito$|async"
+        (call)="agregarServicio()"
+        ></zwc-pbutton-sending>
     </div>
 </form>

@@ -68,4 +68,9 @@ export class LoadingsFacade {
   public sendingGetUnidadesObraServicios$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetUnidadesObraServicios);
   }
+
+  // AGREGAR SERVICIO A CARRITO
+  public sendingAgregarServicioCarrito$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingAgregarServicioCarrito);
+  }
 }

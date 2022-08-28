@@ -161,7 +161,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
   formFilterControls: any = {
     actividad_id: new FormControl(null, [Validators.required]),
     tipo_servicio_id: new FormControl(null, [Validators.required]),
-    servicio_cod: new FormControl('', [Validators.required]),
+    servicio_cod: new FormControl(null, [Validators.required]),
     unidad_obra_cod: new FormControl(null, [Validators.required]),
   };
   formFilter: FormGroup = new FormGroup(this.formFilterControls);
@@ -175,6 +175,8 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
     this.loadingsFacade.sendingGetServiciosAgenciaContratoProveedor$();
   loadingGetUnidadesObraServicio$ =
     this.loadingsFacade.sendingGetUnidadesObraServicios$();
+  loadingAgregarServicioCarrito$ =
+    this.loadingsFacade.sendingAgregarServicioCarrito$();
 
   constructor(
     private contratoFacade: ContratoFacade,
@@ -203,6 +205,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
           actividad_id_change = true;
         }
 
+        // CALL GET TIPOS DE SERVICIOS
         if (
           actividad_id &&
           actividad_id !== null &&
@@ -210,7 +213,6 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
           contratoSelected !== null &&
           actividad_id_change
         ) {
-          // CALL GET TIPOS DE SERVICIOS
           this.contratoFacade.getTipoServiciosContrato(
             actividad_id,
             contratoSelected.contrato_id
@@ -238,6 +240,7 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
           tipo_servicio_id_change = true;
         }
 
+        // CALL GET SERVICIOS
         if (
           agenciaSelected &&
           agenciaSelected !== null &&
@@ -247,7 +250,6 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
           tipo_servicio_id !== null &&
           tipo_servicio_id_change
         ) {
-          // CALL GET SERVICIOS
           let request: RequestGetServicioTipoAgenciaContratoProveedor = {
             actividad_id: +this.formFilter.get('actividad_id').value,
             agencia_id: agenciaSelected.id,
@@ -263,8 +265,8 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
       this.formFilter
         .get('servicio_cod')
         .valueChanges.subscribe(servicio_cod => {
+          // CALL UNIDADES DE OBRAS
           if (servicio_cod && servicio_cod !== null) {
-            // CALL UNIDADES DE OBRAS
             let request: RequestGetUnidadObraServicio = {
               servicio_cod,
               actividad_id: +this.formFilter.get('actividad_id').value,

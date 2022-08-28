@@ -54,3 +54,8 @@ export const sendingGetUnidadesObraServicios = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetUnidadesObraServicios
 );
+
+export const sendingAgregarServicioCarrito = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingAgregarServicioCarrito
+);
