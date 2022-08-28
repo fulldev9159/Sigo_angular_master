@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { CarritoService } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Subscription } from 'rxjs';
@@ -44,6 +45,13 @@ export class TableServicesComponent implements OnDestroy {
       }
     })
   );
+
+  // FORMULARIO
+  formTableControl = {
+    table: new FormArray([]),
+  };
+
+  formTable: FormGroup = new FormGroup(this.formTableControl);
 
   constructor(private serviciosFacade: ServiciosFacade) {}
 

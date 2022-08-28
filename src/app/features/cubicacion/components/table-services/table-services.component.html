@@ -1,6 +1,6 @@
 <!-- <pre>{{carrito$|async|json}}</pre> -->
-<div class="carrito-container">
-    <table>
+<form class="carrito-container" [formGroup]="formTable" >
+    <table  >
         <thead>
           <tr>
             <th colspan="7">Servicios</th>
@@ -11,7 +11,6 @@
             <th>Descripción</th>
             <th>Esp.</th>
             <th>Cantidad</th>
-            <!-- <th>Unidad</th> -->
             <th>Precio</th>
             <th>Total Servicio</th>
             <th></th>
@@ -20,69 +19,17 @@
             <th>Descripción</th>
             <th>Actividad</th>
             <th>Cantidad</th>
-            <!-- <th>Tipo Moneda</th> -->
             <th>Precio</th>
             <th>Total UO</th>
             <th></th>
           </tr>
         </thead>
-        <tbody >
+        <tbody formArrayName="table">
             <ng-container *ngFor="let item of carrito$|async;let i = index" >
                 <ng-container *ngIf="item.unidad_obras.length===1">
-                    <tr>
-                      <td>{{item.servicio_codigo}}</td>
-                      <td>{{item.servicio_nombre}}</td>
-                      <td>{{item.tipo_servicio_descripcion|titlecase}}</td>
-                      <td >
-                        <!-- <app-input [control]="formCntl(item.servicio_id,'servicio_cantidad')" Type="number"></app-input> -->
-                      </td>
-                      <td>{{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
-                      <td>
-                        <!-- {{+item.servicio_precio_final_clp*+formCntl(item.servicio_id,'servicio_cantidad').value | currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
-                    </td>
-                      <td>
-                        <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
-                          <div class="ui icon buttons mini basic">
-                            <button (click)="deleteServiceCarrito(item.servicio_id)" class="ui button eliminar-color">
-                              <fa-icon [icon]="trashICon"></fa-icon>
-                            </button>
-                          </div>
-                        </ng-container> -->
-  
-                        <!-- <ng-container *ngIf="item.precargado">
-                          <div class="ui icon buttons mini basic">
-                            <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">
-                              <fa-icon [icon]="trashICon"></fa-icon>
-                            </button>
-                          </div>
-                        </ng-container> -->
-                      </td>
-                      <td style="background-color: #ff8e4e;">{{item.unidad_obras[0].uo_codigo}}</td>
-                      <td>{{item.unidad_obras[0].uo_nombre}}</td>
-  
-                      <ng-container *ngIf="item.unidad_obras[0].uo_codigo==='0'">
-                        <td colspan="6" align="center">No Aplica</td>
-                      </ng-container>
-  
-                      <ng-container *ngIf="item.unidad_obras[0].uo_codigo!=='0'">
-                        <td>{{item.actividad_descripcion|titlecase}}</td>
-                        <td>
-                          <!-- <app-input [control]="formCntlUO(item.servicio_id,'uo_cantidad',item.unidades_obras[0].uo_codigo)" Type="number"></app-input> -->
-                        </td>
-                        <!-- <td >{{item.servicio_tipo_moneda_codigo}}</td> -->
-                        <td>{{item.unidad_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
-                        <td>
-                            <!-- {{item.unidad_obras[0].uo_precio_total_clp*+formCntlUO(item.servicio_id,'uo_cantidad',item.unidades_obras[0].uo_codigo).value| currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
-                        </td>
-                        <td>
-                          <!-- <div class="ui icon buttons mini basic">
-                            <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
-                          </div> -->
-                        </td>
-                      </ng-container>
-                    </tr>
-                  </ng-container>
+                    <tr zwc-base-td [item]="item"></tr>
+                </ng-container>
             </ng-container>
         </tbody>
     </table>
-</div>
+</form>

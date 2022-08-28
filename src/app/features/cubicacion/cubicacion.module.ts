@@ -11,6 +11,7 @@ import { FormCubContainerComponent } from './containers/form-cub/form-cub-contai
 import { FormularioComponent } from './components/formulario/formulario.component';
 import { AgregarServiciosFormComponent } from './components/agregar-servicios-form/agregar-servicios-form.component';
 import { TableServicesComponent } from './components/table-services/table-services.component';
+import { BaseTdComponent } from './components/table-services/components/base-td/base-td.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TableServicesComponent } from './components/table-services/table-servic
     FormularioComponent,
     AgregarServiciosFormComponent,
     TableServicesComponent,
+    BaseTdComponent,
   ],
   imports: [
     CommonModule,

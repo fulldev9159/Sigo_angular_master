@@ -8,6 +8,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { DividerModule } from 'primeng/divider';
 import { MessageModule } from 'primeng/message';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { MessageModule } from 'primeng/message';
     BreadcrumbModule,
     DividerModule,
     MessageModule,
+    InputNumberModule,
   ],
   exports: [
     InputTextModule,
@@ -31,6 +33,7 @@ import { MessageModule } from 'primeng/message';
     BreadcrumbModule,
     DividerModule,
     MessageModule,
+    InputNumberModule,
   ],
 })
 export class PrimeNgModule {}
