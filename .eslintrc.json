@@ -24,12 +24,7 @@
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
-            "prefix": "zwc",
-            "style": "kebab-case"
-          },
-          {
-            "type": "attribute",
+            "type": ["element", "attribute"],
             "prefix": "zwc",
             "style": "kebab-case"
           }
