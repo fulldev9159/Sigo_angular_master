@@ -1,23 +1,24 @@
-<td>
+<!-- SERVICIO -->
+<td [attr.rowspan]="+item.unidad_obras.length">
   {{ item.servicio_codigo }}
 </td>
-<td>
+<td [attr.rowspan]="+item.unidad_obras.length">
   {{ item.servicio_nombre }}
 </td>
-<td>
+<td [attr.rowspan]="+item.unidad_obras.length">
   {{ item.tipo_servicio_descripcion | titlecase }}
 </td>
-<td>
+<td [attr.rowspan]="+item.unidad_obras.length">
   <!-- <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
       <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert> -->
 </td>
-<td>
+<td [attr.rowspan]="+item.unidad_obras.length">
   {{ +item.servicio_precio_final_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
 </td>
-<td>
+<td [attr.rowspan]="+item.unidad_obras.length">
   <!-- {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
 </td>
-<td>
+<td [attr.rowspan]="+item.unidad_obras.length">
   <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
         <div class="ui icon buttons mini basic">
           <button (click)="deleteServiceCarrito(item.servicio_id)" class="ui button eliminar-color">
@@ -34,6 +35,8 @@
         </div>
       </ng-container> -->
 </td>
+
+<!-- UNIDAD DE OBRA -->
 <td style="background-color: #ff8e4e">
   {{ item.unidad_obras[0].uo_codigo }}
 </td>

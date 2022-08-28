@@ -12,6 +12,7 @@ import { FormularioComponent } from './components/formulario/formulario.componen
 import { AgregarServiciosFormComponent } from './components/agregar-servicios-form/agregar-servicios-form.component';
 import { TableServicesComponent } from './components/table-services/table-services.component';
 import { BaseTdComponent } from './components/table-services/components/base-td/base-td.component';
+import { MultiTdComponent } from './components/table-services/components/multi-td/multi-td.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BaseTdComponent } from './components/table-services/components/base-td/
     AgregarServiciosFormComponent,
     TableServicesComponent,
     BaseTdComponent,
+    MultiTdComponent,
   ],
   imports: [
     CommonModule,
