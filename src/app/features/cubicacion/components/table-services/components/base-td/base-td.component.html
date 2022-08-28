@@ -1,24 +1,24 @@
-    <td>
-      {{item.servicio_codigo}}
-    </td>
-    <td>
-      {{item.servicio_nombre}}
-    </td>
-    <td>
-      {{item.tipo_servicio_descripcion|titlecase}}
-    </td>
-    <td>
-      <!-- <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+<td>
+  {{ item.servicio_codigo }}
+</td>
+<td>
+  {{ item.servicio_nombre }}
+</td>
+<td>
+  {{ item.tipo_servicio_descripcion | titlecase }}
+</td>
+<td>
+  <!-- <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
       <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert> -->
-    </td>
-    <td>
-      {{+item.servicio_precio_final_clp| currency : 'CLP' : '$':'.0-2':'es-CL' }}
-    </td>
-    <td>
-      <!-- {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
-    </td>
-    <td>
-      <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
+</td>
+<td>
+  {{ +item.servicio_precio_final_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
+</td>
+<td>
+  <!-- {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
+</td>
+<td>
+  <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
         <div class="ui icon buttons mini basic">
           <button (click)="deleteServiceCarrito(item.servicio_id)" class="ui button eliminar-color">
             <fa-icon [icon]="trashICon"></fa-icon>
@@ -26,42 +26,45 @@
         </div>
       </ng-container> -->
 
-      <!-- <ng-container *ngIf="item.precargado">
+  <!-- <ng-container *ngIf="item.precargado">
         <div class="ui icon buttons mini basic">
           <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">
             <fa-icon [icon]="trashICon"></fa-icon>
           </button>
         </div>
       </ng-container> -->
-    </td>
-    <td style="background-color: #ff8e4e;">
-      {{item.unidad_obras[0].uo_codigo}}
-    </td>
-    <td>
-      {{item.unidad_obras[0].uo_nombre}}
-    </td>
+</td>
+<td style="background-color: #ff8e4e">
+  {{ item.unidad_obras[0].uo_codigo }}
+</td>
+<td>
+  {{ item.unidad_obras[0].uo_nombre }}
+</td>
 
-    <ng-container *ngIf="item.unidad_obras[0].uo_codigo==='0'">
-      <td colspan="6" align="center">No Aplica</td>
-    </ng-container>
+<ng-container *ngIf="item.unidad_obras[0].uo_codigo === '0'">
+  <td colspan="6" align="center">No Aplica</td>
+</ng-container>
 
-    <ng-container *ngIf="item.unidad_obras[0].uo_codigo!=='0'">
-      <td>
-        {{item.actividad_descripcion|titlecase}}
-      </td>
-      <td>
-        <!-- <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+<ng-container *ngIf="item.unidad_obras[0].uo_codigo !== '0'">
+  <td>
+    {{ item.actividad_descripcion | titlecase }}
+  </td>
+  <td>
+    <!-- <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
         <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert> -->
-      </td>
-      <td>
-        {{item.unidad_obras[0].uo_precio_total_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}
-      </td>
-      <td>
-          <!-- {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
-      </td>
-      <td>
-        <!-- <div class="ui icon buttons mini basic">
+  </td>
+  <td>
+    {{
+      item.unidad_obras[0].uo_precio_total_clp
+        | currency: 'CLP':'$':'.0-2':'es-CL'
+    }}
+  </td>
+  <td>
+    <!-- {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
+  </td>
+  <td>
+    <!-- <div class="ui icon buttons mini basic">
           <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
         </div> -->
-      </td>
-    </ng-container>
+  </td>
+</ng-container>
