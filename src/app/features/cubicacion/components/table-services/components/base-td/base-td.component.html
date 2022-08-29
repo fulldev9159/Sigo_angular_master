@@ -9,14 +9,14 @@
   {{ item.tipo_servicio_descripcion | titlecase }}
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length">
-  <!-- <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
-      <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert> -->
+  <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+  <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert>
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length">
   {{ +item.servicio_precio_final_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length">
-  <!-- {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
+  {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' : '$':'.0-2':'es-CL'}}
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length">
   <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
@@ -53,8 +53,8 @@
     {{ item.actividad_descripcion | titlecase }}
   </td>
   <td>
-    <!-- <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
-        <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert> -->
+    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+    <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
   </td>
   <td>
     {{
@@ -63,7 +63,7 @@
     }}
   </td>
   <td>
-    <!-- {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
+    {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : 'CLP' : '$':'.0-2':'es-CL'}}
   </td>
   <td>
     <!-- <div class="ui icon buttons mini basic">

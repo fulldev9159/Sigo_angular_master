@@ -9,7 +9,7 @@ import { CarritoService } from '@model';
 })
 export class BaseTdComponent {
   @Input() item: CarritoService = null;
-  @Input() controlServicioCantidad: FormControl = null;
-  @Input() controlUOCantidad: FormControl = null;
+  @Input() controlServicioCantidad: FormControl;
+  @Input() controlUOCantidad: FormControl;
   constructor() {}
 }

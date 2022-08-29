@@ -27,15 +27,32 @@
         <tbody formArrayName="table">
             <ng-container *ngFor="let item of carrito$|async;let i = index" >
                 <ng-container *ngIf="item.unidad_obras.length===1">
-                    <tr zwc-base-td [item]="item"></tr>
+                    <tr zwc-base-td 
+                        [item]="item" 
+                        [controlServicioCantidad]="getControlServiceCantidad(item.servicio_id)" 
+                        [controlUOCantidad]="getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)"
+                    >
+                    </tr>
                 </ng-container>
                 <ng-container *ngIf="item.unidad_obras.length>1">
-                  <tr zwc-base-td [item]="item"></tr>
+                  <tr zwc-base-td 
+                      [item]="item"
+                      [controlServicioCantidad]="getControlServiceCantidad(item.servicio_id)" 
+                      [controlUOCantidad]="getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)"
+                  >
+                 </tr>
                   <ng-container *ngFor="let uo of item.unidad_obras| slice:1; let iuo= index">
-                    <tr zwc-multi-td [uo]="uo"></tr>
+                    <tr zwc-multi-td 
+                        [uo]="uo"
+                        [controlUOCantidad]="getControlUOCantidad(item.servicio_id,uo.uo_codigo)"
+                    >
+                    </tr>
                   </ng-container>
                 </ng-container>
             </ng-container>
         </tbody>
     </table>
+
+    <pre>{{formTable.value|json}}</pre>
+    
 </form>

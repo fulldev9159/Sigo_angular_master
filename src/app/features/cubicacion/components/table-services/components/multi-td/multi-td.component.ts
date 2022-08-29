@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { CarritoUO } from '@model';
 
 @Component({
@@ -8,5 +9,7 @@ import { CarritoUO } from '@model';
 })
 export class MultiTdComponent {
   @Input() uo: CarritoUO = null;
+  @Input() controlUOCantidad: FormControl;
+
   constructor() {}
 }

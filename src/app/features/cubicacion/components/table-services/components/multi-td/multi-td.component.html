@@ -13,20 +13,18 @@
     <!-- {{ item.actividad_descripcion | titlecase }} -->
   </td>
   <td>
-    <!-- <app-input
-      [control]="formCntlUO(item.servicio_id, 'uo_cantidad', uo.uo_codigo)"
-      Type="number"
-    ></app-input> -->
+    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+    <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
   </td>
   <td>
     {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
   </td>
   <td>
-    <!-- {{
+    {{
       uo.uo_precio_total_clp *
-        +formCntlUO(item.servicio_id, 'uo_cantidad', uo.uo_codigo).value
+        +controlUOCantidad.value
         | currency: 'CLP':'$':'.0-2':'es-CL'
-    }} -->
+    }}
   </td>
   <td>
     <!-- <div class="ui icon buttons mini basic">
