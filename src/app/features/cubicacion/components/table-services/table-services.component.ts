@@ -47,6 +47,7 @@ export class TableServicesComponent implements OnDestroy {
 
           return acc;
         }, valueInitial);
+
         // CREAR FORMULARIO
         carritoReducerEstricto.forEach(servicio => {
           const carritoFormulario: CarritoService[] = (
@@ -138,7 +139,7 @@ export class TableServicesComponent implements OnDestroy {
   }
 
   getControlUOCantidad(
-    servicio_id: string,
+    servicio_id: number,
     uo_codigo: string
   ): AbstractControl {
     const tableForm = this.formTable.get('table') as FormArray;
