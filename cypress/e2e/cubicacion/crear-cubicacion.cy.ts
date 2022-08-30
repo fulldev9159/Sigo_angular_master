@@ -741,7 +741,7 @@ describe.only('Tabla carrito', () => {
     ).should('not.exist');
   });
 
-  it.only('should add service and displayed into carrito', () => {
+  it('should add service and displayed into carrito', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
     cy._select_profile('Gestor/JP');
@@ -909,6 +909,30 @@ describe.only('Tabla carrito', () => {
       .type('{del}5.24{enter}');
     data_service = {
       fila: 3,
+      servicio: 'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
+      tipo_servicio: 'Cables',
+      cantidad_servicio: 1,
+      precio: '$180,32',
+      total: '$180,32',
+      uo: 'D013 - CONECTOR ROJO CAL.24-19',
+      actividad: 'Matriz',
+      uo_precio: '$56,8',
+      cantidad_uo: 5.24,
+      uo_total: '$297,63',
+    };
+    cy._check_table_cub_service_uo(data_service);
+  });
+
+  it('delete items carrito', () => {
+    cy.get(
+      '.carrito-container> table > tbody > tr:nth-child(2) > td:nth-child(7)>button'
+    ).click();
+    cy.get(
+      '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(7)>button'
+    ).click();
+
+    let data_service = {
+      fila: 1,
       servicio: 'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
       tipo_servicio: 'Cables',
       cantidad_servicio: 1,

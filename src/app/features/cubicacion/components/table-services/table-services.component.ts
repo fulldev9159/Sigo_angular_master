@@ -162,6 +162,13 @@ export class TableServicesComponent implements OnDestroy {
 
   deleteServicioFromCarrito(data: { servicio_id: number }): void {
     this.serviciosFacade.deleteServicioFromCarrito(data.servicio_id);
+    (this.formTable.get('table') as FormArray).removeAt(
+      (
+        this.formTable.get('table').value as Array<{ servicio_id: string }>
+      ).findIndex(
+        serviceTable => +serviceTable.servicio_id === data.servicio_id
+      )
+    );
   }
 
   deleteUOFromServicioFromCarrito(data: {
@@ -171,6 +178,25 @@ export class TableServicesComponent implements OnDestroy {
     this.serviciosFacade.deleteUOFromServicioFromCarrito(
       data.servicio_id,
       data.uo_codigo
+    );
+
+    const index_service = (
+      this.formTable.get('table').value as Array<{ servicio_id: string }>
+    ).findIndex(serviceTable => +serviceTable.servicio_id === data.servicio_id);
+    (
+      (
+        (this.formTable.get('table') as FormArray).at(
+          index_service
+        ) as FormGroup
+      ).get('unidad_obras') as FormArray
+    ).removeAt(
+      (
+        (
+          (this.formTable.get('table') as FormArray).at(
+            index_service
+          ) as FormGroup
+        ).get('unidad_obras').value as Array<{ uo_codigo: string }>
+      ).findIndex(uo => uo.uo_codigo === data.uo_codigo)
     );
   }
 
