@@ -10,7 +10,7 @@
 </ng-container>
 <ng-container *ngIf="uo.uo_codigo !== '0'">
   <td>
-    <!-- {{ item.actividad_descripcion | titlecase }} -->
+    {{ uo.actividad_descripcion | titlecase }}
   </td>
   <td>
     <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>

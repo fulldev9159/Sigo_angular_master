@@ -9,7 +9,6 @@ export interface CarritoService {
   servicio_codigo: string;
   servicio_precio_final_clp: number;
   servicio_nombre: string;
-  actividad_descripcion: string;
   tipo_servicio_descripcion: string;
 
   unidad_obras: CarritoUO[];
@@ -26,4 +25,5 @@ export interface CarritoUO {
   uo_codigo: string;
   uo_nombre: string;
   uo_precio_total_clp: number;
+  actividad_descripcion: string;
 }

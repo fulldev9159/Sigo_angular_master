@@ -11,6 +11,28 @@ import {
   UnidadObraServicioMOCK200OK,
 } from '../../../src/mocks';
 
+interface DATA_TABLE_SERVICE_UO {
+  fila: number;
+  servicio: string;
+  tipo_servicio: string;
+  cantidad_servicio: number;
+  precio: string;
+  total: string;
+  uo: string;
+  actividad: string;
+  uo_precio: string;
+  uo_total: string;
+  cantidad_uo: number;
+}
+interface DATA_TABLE_UO {
+  fila: number;
+  uo: string;
+  actividad: string;
+  uo_precio: string;
+  uo_total: string;
+  cantidad_uo: number;
+}
+
 beforeEach(() => {
   cy.viewport(1500, 1700);
 });
@@ -719,64 +741,187 @@ describe.only('Tabla carrito', () => {
     ).should('not.exist');
   });
 
-  // it('should add service and displayed into carrito', () => {
-  //   cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
-  //     'HTTPRESPONSE-AGENCIA'
-  //   );
-  //   cy.intercept(
-  //     'POST',
-  //     '/cubicacion/proveedores_from_agencia_contrato/get'
-  //   ).as('HTTPRESPONSE-PROVEEDORES');
+  it.only('should add service and displayed into carrito', () => {
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mgestor1', 'asdasd');
+    cy._select_profile('Gestor/JP');
+    cy.get('#crear-cubicacion-sidebar').click();
 
-  //   cy.intercept(
-  //     'POST',
-  //     '/cubicacion/actividad_from_cmarco_has_proveedor/get'
-  //   ).as('HTTPRESPONSE-ACTIVIDAD');
+    cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
+      'HTTPRESPONSE-AGENCIA'
+    );
+    cy.intercept(
+      'POST',
+      '/cubicacion/proveedores_from_agencia_contrato/get'
+    ).as('HTTPRESPONSE-PROVEEDORES');
 
-  //   cy.intercept('POST', '/cubicacion/tipo_servicio/get').as(
-  //     'HTTPRESPONSE-TIPO-SERVICIO'
-  //   );
+    cy.intercept(
+      'POST',
+      '/cubicacion/actividad_from_cmarco_has_proveedor/get'
+    ).as('HTTPRESPONSE-ACTIVIDAD');
 
-  //   cy.intercept('POST', 'cubicacion/combo_servicios/get').as(
-  //     'HTTPRESPONSE-SERVICIO'
-  //   );
+    cy.intercept('POST', '/cubicacion/tipo_servicio/get').as(
+      'HTTPRESPONSE-TIPO-SERVICIO'
+    );
 
-  //   cy.intercept('POST', '/cubicacion/unidades_obra_from_servicio/get').as(
-  //     'HTTPRESPONSE-UNIDAD-OBRA'
-  //   );
+    cy.intercept('POST', 'cubicacion/combo_servicios/get').as(
+      'HTTPRESPONSE-SERVICIO'
+    );
 
-  //   // SELECT
-  //   cy._select_dropdown('#select-contrato_marco', 'BUCLE');
-  //   cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
-  //     cy._select_dropdown('#select-agencia', 'APOQUINDO');
-  //   });
-  //   cy.wait('@HTTPRESPONSE-PROVEEDORES').then(() => {
-  //     cy._select_dropdown(
-  //       '#select-proveedor',
-  //       '330000659 - COBRA CHILE SERVICIOS S.A.'
-  //     );
-  //   });
-  //   cy.wait('@HTTPRESPONSE-ACTIVIDAD').then(() => {
-  //     cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
-  //   });
+    cy.intercept('POST', '/cubicacion/unidades_obra_from_servicio/get').as(
+      'HTTPRESPONSE-UNIDAD-OBRA'
+    );
 
-  //   cy.wait('@HTTPRESPONSE-TIPO-SERVICIO').then(() => {
-  //     cy._select_dropdown('#select-tipo-servicio', 'CABLES');
-  //   });
+    cy.intercept('POST', '/cubicacion/datos_unidad_obra_material/get').as(
+      'HTTPRESPONSE-UNIDAD-OBRA-DETALLE'
+    );
 
-  //   cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
-  //     cy._select_dropdown(
-  //       '#select-servicio',
-  //       'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
-  //     );
-  //   });
+    // SELECT
 
-  //   cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
-  //     cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
-  //   });
-  //   cy.get('input[name="input-nombre-cubicacion"]').click();
-  //   cy.get('#agregar-button').click();
-  // });
+    // REVISAR AGREGANDO UN SERVICIO J101 CON 2 UNIDADES DE OBRA
+    cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+    cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
+      cy._select_dropdown('#select-agencia', 'APOQUINDO');
+    });
+    cy.wait('@HTTPRESPONSE-PROVEEDORES').then(() => {
+      cy._select_dropdown(
+        '#select-proveedor',
+        '330000659 - COBRA CHILE SERVICIOS S.A.'
+      );
+    });
+    cy.wait('@HTTPRESPONSE-ACTIVIDAD').then(() => {
+      cy._select_dropdown('#select-actividad', 'MATRIZ');
+    });
+
+    cy.wait('@HTTPRESPONSE-TIPO-SERVICIO').then(() => {
+      cy._select_dropdown('#select-tipo-servicio', 'LINEAS');
+    });
+
+    cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
+      cy._select_dropdown(
+        '#select-servicio',
+        'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B'
+      );
+    });
+
+    cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
+      cy._select_dropdown('#select-unidad-obra', 'C048 - CABLE 900-26 SUB');
+    });
+    cy.get('input[name="input-nombre-cubicacion"]').click();
+    cy.get('#agregar-button').click();
+
+    cy.wait('@HTTPRESPONSE-UNIDAD-OBRA-DETALLE').then(() => {
+      let data_service: DATA_TABLE_SERVICE_UO = {
+        fila: 1,
+        servicio: 'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio: 'Lineas',
+        cantidad_servicio: 1.0,
+        precio: '$471,6',
+        total: '$471,6',
+        uo: 'C048 - CABLE 900-26 SUB',
+        actividad: 'Matriz',
+        uo_precio: '$0',
+        cantidad_uo: 1,
+        uo_total: '$0',
+      };
+      cy._check_table_cub_service_uo(data_service);
+    });
+
+    cy._select_dropdown('#select-unidad-obra', 'C926 - CABLE 1800-26 PS');
+    cy.get('input[name="input-nombre-cubicacion"]').click();
+    cy.get('#agregar-button').click();
+
+    cy.wait('@HTTPRESPONSE-UNIDAD-OBRA-DETALLE').then(() => {
+      const data_uo: DATA_TABLE_UO = {
+        fila: 2,
+        uo: 'C926 - CABLE 1800-26 PS',
+        actividad: 'Matriz',
+        uo_precio: '$0',
+        cantidad_uo: 1,
+        uo_total: '$0',
+      };
+      cy._check_table_cub_uo(data_uo);
+    });
+
+    // AGREGAR OTRO SERVICIO MATRIZ CABLES J451 CON UNA UO
+    cy._select_dropdown('#select-tipo-servicio', 'CABLES');
+    cy.wait('@HTTPRESPONSE-SERVICIO').then(() => {
+      cy._select_dropdown(
+        '#select-servicio',
+        'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)'
+      );
+    });
+
+    cy.wait('@HTTPRESPONSE-UNIDAD-OBRA').then(() => {
+      cy._select_dropdown(
+        '#select-unidad-obra',
+        'D013 - CONECTOR ROJO CAL.24-19'
+      );
+    });
+    cy.get('input[name="input-nombre-cubicacion"]').click();
+    cy.get('#agregar-button').click();
+
+    cy.wait('@HTTPRESPONSE-UNIDAD-OBRA-DETALLE').then(() => {
+      const data_service: DATA_TABLE_SERVICE_UO = {
+        fila: 3,
+        servicio:
+          'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
+        tipo_servicio: 'Cables',
+        cantidad_servicio: 1,
+        precio: '$180,32',
+        total: '$180,32',
+        uo: 'D013 - CONECTOR ROJO CAL.24-19',
+        actividad: 'Matriz',
+        uo_precio: '$56,8',
+        cantidad_uo: 1,
+        uo_total: '$56,8',
+      };
+      cy._check_table_cub_service_uo(data_service);
+    });
+
+    // MODIFICAR LA CANTIDAD DEL SERVICIO J101
+    cy.get(
+      '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(4)>p-inputnumber>span>input'
+    )
+      .clear()
+      .type('{del}4.53{enter}');
+
+    let data_service = {
+      fila: 1,
+      servicio: 'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+      tipo_servicio: 'Lineas',
+      cantidad_servicio: 4.53,
+      precio: '$471,6',
+      total: '$2.136,35',
+      uo: 'C048 - CABLE 900-26 SUB',
+      actividad: 'Matriz',
+      uo_precio: '$0',
+      cantidad_uo: 1,
+      uo_total: '$0',
+    };
+    cy._check_table_cub_service_uo(data_service);
+
+    // MODIFICAR LA CANTIDAD DE LA UO D013
+    cy.get(
+      '.carrito-container> table > tbody > tr:nth-child(3) > td:nth-child(11)>p-inputnumber>span>input'
+    )
+      .clear()
+      .type('{del}5.24{enter}');
+    data_service = {
+      fila: 3,
+      servicio: 'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
+      tipo_servicio: 'Cables',
+      cantidad_servicio: 1,
+      precio: '$180,32',
+      total: '$180,32',
+      uo: 'D013 - CONECTOR ROJO CAL.24-19',
+      actividad: 'Matriz',
+      uo_precio: '$56,8',
+      cantidad_uo: 5.24,
+      uo_total: '$297,63',
+    };
+    cy._check_table_cub_service_uo(data_service);
+  });
 });
 
 describe('Excepcion crear cubicación sin contratos asignado', () => {

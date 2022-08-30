@@ -36,6 +36,29 @@
 //   }
 // }
 
+interface DATA_TABLE_SERVICE_UO {
+  fila: number;
+  servicio: string;
+  tipo_servicio: string;
+  cantidad_servicio: number;
+  precio: string;
+  total: string;
+  uo: string;
+  actividad: string;
+  uo_precio: string;
+  uo_total: string;
+  cantidad_uo: number;
+}
+
+interface DATA_TABLE_UO {
+  fila: number;
+  uo: string;
+  actividad: string;
+  uo_precio: string;
+  uo_total: string;
+  cantidad_uo: number;
+}
+
 declare namespace Cypress {
   interface Chainable {
     _login(username: string, password: string): void;
@@ -43,6 +66,8 @@ declare namespace Cypress {
     _check_input(selector: string, validator: string): void;
     _check_dropdown_required(selector: string): void;
     _select_dropdown(selector: string, item: string): void;
+    _check_table_cub_service_uo(servicio_uo: DATA_TABLE_SERVICE_UO): void;
+    _check_table_cub_uo(uo: DATA_TABLE_UO): void;
   }
 }
 Cypress.Commands.add('_login', (username, password) => {
@@ -82,4 +107,42 @@ Cypress.Commands.add('_check_dropdown_required', selector => {
 
 Cypress.Commands.add('_select_dropdown', (selector, item) => {
   cy.get(selector).click().contains('ul li > span', item).click();
+});
+
+Cypress.Commands.add('_check_table_cub_service_uo', servicio_uo => {
+  const fila = `.carrito-container> table > tbody > tr:nth-child(${servicio_uo.fila}) > td`;
+  cy.get(fila).eq(0).contains(servicio_uo.servicio.split('-')[0].trim());
+  cy.get(fila).eq(1).contains(servicio_uo.servicio.split('-')[1].trim());
+  cy.get(fila).eq(2).contains(servicio_uo.tipo_servicio);
+  cy.get(fila + ':nth-child(4)>p-inputnumber>span>input')
+    .invoke('val')
+    .then(val => {
+      expect(val).to.eql(servicio_uo.cantidad_servicio.toFixed(2));
+    });
+  cy.get(fila).eq(4).contains(servicio_uo.precio);
+
+  cy.get(fila).eq(7).contains(servicio_uo.uo.split('-')[0].trim());
+  cy.get(fila).eq(8).contains(servicio_uo.uo.split('-')[1].trim());
+  cy.get(fila).eq(9).contains(servicio_uo.actividad);
+  cy.get(fila + ':nth-child(11)>p-inputnumber>span>input')
+    .invoke('val')
+    .then(val => {
+      expect(val).to.eql(servicio_uo.cantidad_uo.toFixed(2));
+    });
+  cy.get(fila).eq(11).contains(servicio_uo.uo_precio);
+  cy.get(fila).eq(12).contains(servicio_uo.uo_total);
+});
+
+Cypress.Commands.add('_check_table_cub_uo', uo => {
+  const fila = `.carrito-container> table > tbody > tr:nth-child(${uo.fila}) > td`;
+  cy.get(fila).eq(0).contains(uo.uo.split('-')[0].trim());
+  cy.get(fila).eq(1).contains(uo.uo.split('-')[1].trim());
+  cy.get(fila).eq(2).contains(uo.actividad);
+  cy.get(fila + ':nth-child(4)>p-inputnumber>span>input')
+    .invoke('val')
+    .then(val => {
+      expect(val).to.eql(uo.cantidad_uo.toFixed(2));
+    });
+  cy.get(fila).eq(4).contains(uo.uo_precio);
+  cy.get(fila).eq(5).contains(uo.uo_total);
 });
