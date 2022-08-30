@@ -20,11 +20,11 @@
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length">
   <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
-        <div class="ui icon buttons mini basic">
-          <button (click)="deleteServiceCarrito(item.servicio_id)" class="ui button eliminar-color">
+        <div class="ui icon buttons mini basic"> -->
+          <button (click)="callDeleteServicioFromCarrito(item.servicio_id)" class="ui button eliminar-color">
             <fa-icon [icon]="trashICon"></fa-icon>
           </button>
-        </div>
+    <!-- </div>
       </ng-container> -->
 
   <!-- <ng-container *ngIf="item.precargado">

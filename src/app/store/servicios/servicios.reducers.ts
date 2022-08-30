@@ -81,6 +81,27 @@ export const reducerServicios = createReducer(
     ...state,
     alertServicioExistenteCarrito: value,
   })),
+  on(serviciosActions.deleteServicioFromCarrito, (state, { servicio_id }) => ({
+    ...state,
+    carritoServices: [
+      ...state.carritoServices.filter(
+        servicio => servicio.servicio_id !== servicio_id
+      ),
+    ],
+  })),
+  on(
+    serviciosActions.deleteUOFromServicioFromCarrito,
+    (state, { servicio_id, uo_codigo }) => ({
+      ...state,
+      carritoServices: [
+        ...state.carritoServices.filter(
+          servicio =>
+            servicio.servicio_id !== servicio_id ||
+            servicio.unidad_obras[0].uo_codigo !== uo_codigo
+        ),
+      ],
+    })
+  ),
   // RESETS
   on(serviciosActions.resetServiciosAgenciaContratoProveedor, (state, {}) => ({
     ...state,

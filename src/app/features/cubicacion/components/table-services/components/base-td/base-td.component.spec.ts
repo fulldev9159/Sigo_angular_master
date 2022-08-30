@@ -7,8 +7,10 @@ import localeEsCl from '@angular/common/locales/es-CL';
 import { BaseTdComponent } from './base-td.component';
 
 describe('BaseTdComponent', () => {
-  let fixture: ComponentFixture<TestComponent>;
-  let component: TestComponent;
+  let fixtureTest: ComponentFixture<TestComponent>;
+  let componentTest: TestComponent;
+  // let fixture: ComponentFixture<BaseTdComponent>;
+  // let component: BaseTdComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,14 +18,25 @@ describe('BaseTdComponent', () => {
       providers: [{ provide: LOCALE_ID, useValue: 'es-CL' }],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixtureTest = TestBed.createComponent(TestComponent);
+    componentTest = fixtureTest.componentInstance;
+    fixtureTest.detectChanges();
+
+    // fixture = TestBed.createComponent(BaseTdComponent);
+    // component = fixture.componentInstance;
+    // fixture.detectChanges();
     registerLocaleData(localeEsCl, 'es-CL');
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(componentTest).toBeTruthy();
+  });
+
+  it('should callDeleteServicioFromCarrito should call emmit', () => {
+    spyOn(componentTest, 'call');
+    const compiled = fixtureTest.nativeElement as HTMLElement;
+    compiled.querySelector('button').click();
+    expect(componentTest.call).toHaveBeenCalled();
   });
 
   @Component({
@@ -33,6 +46,7 @@ describe('BaseTdComponent', () => {
       [item]="item"
       [controlServicioCantidad]="formLoginControls.servicio_cantidad"
       [controlUOCantidad]="formLoginControls.servicio_cantidad"
+      (deleteServicio)="call($event)"
     ></tr>`,
   })
   class TestComponent {
@@ -65,5 +79,7 @@ describe('BaseTdComponent', () => {
     formLoginControls = {
       servicio_cantidad: new FormControl(1),
     };
+
+    call(data: { servicio_id: number }): void {}
   }
 });

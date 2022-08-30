@@ -7,8 +7,10 @@ import { MultiTdComponent } from './multi-td.component';
 import { registerLocaleData } from '@angular/common';
 
 describe('MultiTdComponent', () => {
-  let fixture: ComponentFixture<TestComponent>;
-  let component: TestComponent;
+  let fixtureTest: ComponentFixture<TestComponent>;
+  let componentTest: TestComponent;
+  // let fixture: ComponentFixture<MultiTdComponent>;
+  // let component: MultiTdComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,22 +18,32 @@ describe('MultiTdComponent', () => {
       providers: [{ provide: LOCALE_ID, useValue: 'es-CL' }],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixtureTest = TestBed.createComponent(TestComponent);
+    componentTest = fixtureTest.componentInstance;
+    fixtureTest.detectChanges();
+    // fixture = TestBed.createComponent(MultiTdComponent);
+    // component = fixture.componentInstance;
+    // fixture.detectChanges();
     registerLocaleData(localeEsCl, 'es-CL');
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(componentTest).toBeTruthy();
   });
 
+  it('should callDeleteUOFromServicioFromCarrito should call emmit', () => {
+    spyOn(componentTest, 'call');
+    const compiled = fixtureTest.nativeElement as HTMLElement;
+    compiled.querySelector('button').click();
+    expect(componentTest.call).toHaveBeenCalled();
+  });
   @Component({
     selector: `zwc-test-component`,
     template: ` <tr
       zwc-multi-td
       [uo]="item"
       [controlUOCantidad]="formLoginControls.uo_cantidad"
+      (deleteUO)="call()"
     ></tr>`,
   })
   class TestComponent {
@@ -39,10 +51,13 @@ describe('MultiTdComponent', () => {
       uo_codigo: 'C048',
       uo_nombre: 'CABLE 900-26 SUB',
       uo_precio_total_clp: 0,
+      actividad_descripcion: 'dasd',
     };
 
     formLoginControls = {
       uo_cantidad: new FormControl(1),
     };
+
+    call(): void {}
   }
 });

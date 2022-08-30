@@ -1,6 +1,8 @@
+import { LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { carrito } from '@storeOT/servicios/servicios.selectors';
 
 import { TableServicesComponent } from './table-services.component';
@@ -10,12 +12,14 @@ describe('TableServicesComponent', () => {
   let fixture: ComponentFixture<TableServicesComponent>;
   let initialState: any = { example: [] };
   let store: MockStore<any>;
+  let servicioFacade: ServiciosFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [StoreModule.forRoot({})],
       declarations: [TableServicesComponent],
       providers: [
+        { provide: LOCALE_ID, useValue: 'es-CL' },
         provideMockStore({
           initialState,
           selectors: [
@@ -32,6 +36,7 @@ describe('TableServicesComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     store = TestBed.inject(MockStore);
+    servicioFacade = TestBed.inject(ServiciosFacade);
   });
 
   it('should create', () => {
@@ -439,5 +444,89 @@ describe('TableServicesComponent', () => {
     ]);
     store.refreshState();
     expect(component.getControlUOCantidad(141, 'C048').value).toEqual(1);
+  });
+
+  it('deleteServicioFromCarrito should call facade deleteServicioFromCarrito with params', () => {
+    spyOn(servicioFacade, 'deleteServicioFromCarrito');
+    carrito.setResult([
+      {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        unidad_obras: [
+          {
+            uo_codigo: 'C048',
+            uo_nombre: 'CABLE 900-26 SUB',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+          },
+        ],
+      },
+      {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        unidad_obras: [
+          {
+            uo_codigo: 'C926',
+            uo_nombre: 'CABLE 1800-26 PS',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+          },
+        ],
+      },
+    ]);
+    store.refreshState();
+    component.deleteServicioFromCarrito({ servicio_id: 141 });
+    expect(servicioFacade.deleteServicioFromCarrito).toHaveBeenCalledWith(141);
+  });
+
+  it('deleteUOFromServicioFromCarrito should call facade deleteUOFromServicioFromCarrito with params', () => {
+    spyOn(servicioFacade, 'deleteUOFromServicioFromCarrito');
+    carrito.setResult([
+      {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        unidad_obras: [
+          {
+            uo_codigo: 'C048',
+            uo_nombre: 'CABLE 900-26 SUB',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+          },
+        ],
+      },
+      {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        unidad_obras: [
+          {
+            uo_codigo: 'C926',
+            uo_nombre: 'CABLE 1800-26 PS',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+          },
+        ],
+      },
+    ]);
+    store.refreshState();
+    component.deleteUOFromServicioFromCarrito({
+      servicio_id: 141,
+      uo_codigo: 'C048',
+    });
+    expect(servicioFacade.deleteUOFromServicioFromCarrito).toHaveBeenCalledWith(
+      141,
+      'C048'
+    );
   });
 });

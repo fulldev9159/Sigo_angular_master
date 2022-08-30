@@ -70,15 +70,6 @@ export class ServiciosFacade {
     );
   }
 
-  // public unidadObraSelected$(): Observable<UnidadObraServicio> {
-  //   return this.store.select(serviciosSelectors.unidadObraSelected);
-  // }
-
-  // // SERVICIO EXISTENTE
-  // public theServiceExist(): Observable<boolean> {
-  //   return this.store.select(serviciosSelectors.theServicioExist);
-  // }
-
   // ADD SERVICIO TO CARRITO
   public addServicioCarrito(
     requestService: RequestGetDetallesServicioTipoAgenciaContratoProveedor,
@@ -102,6 +93,25 @@ export class ServiciosFacade {
 
   public alertServicioExistenteCarrito$(): Observable<boolean> {
     return this.store.select(serviciosSelectors.alertServicioExistenteCarrito);
+  }
+
+  // DETELE FROM CARRITO
+  public deleteServicioFromCarrito(servicio_id: number): void {
+    this.store.dispatch(
+      serviciosActions.deleteServicioFromCarrito({ servicio_id })
+    );
+  }
+
+  public deleteUOFromServicioFromCarrito(
+    servicio_id: number,
+    uo_codigo: string
+  ): void {
+    this.store.dispatch(
+      serviciosActions.deleteUOFromServicioFromCarrito({
+        servicio_id,
+        uo_codigo,
+      })
+    );
   }
 
   // RESETS

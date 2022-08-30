@@ -85,6 +85,22 @@ export const alertServicioExistenteCarrito = createAction(
   }>()
 );
 
+// DELETE FROM CARRITO
+export const deleteServicioFromCarrito = createAction(
+  '[SERVICIOS] deleteServicioFromCarrito',
+  props<{
+    servicio_id: number;
+  }>()
+);
+
+export const deleteUOFromServicioFromCarrito = createAction(
+  '[SERVICIOS] deleteUOFromServicioFromCarrito',
+  props<{
+    servicio_id: number;
+    uo_codigo: string;
+  }>()
+);
+
 // RESETS
 export const resetServiciosAgenciaContratoProveedor = createAction(
   '[SERVICIOS] resetServiciosAgenciaContratoProveedor '

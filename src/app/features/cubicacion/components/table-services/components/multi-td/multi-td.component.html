@@ -27,6 +27,12 @@
     }}
   </td>
   <td>
+    <button
+    (click)="callDeleteUOFromServicioFromCarrito(servicio_id, uo.uo_codigo)"
+    class="ui button eliminar-color"
+  >
+    <fa-icon [icon]="trashICon"></fa-icon>
+  </button>
     <!-- <div class="ui icon buttons mini basic">
       <button
         *ngIf="uo.uo_codigo !== 0"
@@ -38,12 +44,7 @@
       <ng-container
         *ngIf="uo.precargado === undefined || uo.precargado === false"
       >
-        <button
-          (click)="deleteUOCarrito(item.servicio_id, uo.uo_codigo)"
-          class="ui button eliminar-color"
-        >
-          <fa-icon [icon]="trashICon"></fa-icon>
-        </button>
+       
       </ng-container>
       <ng-container *ngIf="uo.precargado">
         <div class="ui icon buttons mini basic">

@@ -160,6 +160,20 @@ export class TableServicesComponent implements OnDestroy {
     ).controls[index_uo].get('uo_cantidad');
   }
 
+  deleteServicioFromCarrito(data: { servicio_id: number }): void {
+    this.serviciosFacade.deleteServicioFromCarrito(data.servicio_id);
+  }
+
+  deleteUOFromServicioFromCarrito(data: {
+    servicio_id: number;
+    uo_codigo: string;
+  }): void {
+    this.serviciosFacade.deleteUOFromServicioFromCarrito(
+      data.servicio_id,
+      data.uo_codigo
+    );
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

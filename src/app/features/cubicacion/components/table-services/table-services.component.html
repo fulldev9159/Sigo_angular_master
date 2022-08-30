@@ -31,6 +31,7 @@
                         [item]="item" 
                         [controlServicioCantidad]="getControlServiceCantidad(item.servicio_id)" 
                         [controlUOCantidad]="getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)"
+                        (deleteServicio)="deleteServicioFromCarrito($event)"
                     >
                     </tr>
                 </ng-container>
@@ -39,12 +40,15 @@
                       [item]="item"
                       [controlServicioCantidad]="getControlServiceCantidad(item.servicio_id)" 
                       [controlUOCantidad]="getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)"
+                      (deleteServicio)="deleteServicioFromCarrito($event)"
                   >
                  </tr>
                   <ng-container *ngFor="let uo of item.unidad_obras| slice:1; let iuo= index">
                     <tr zwc-multi-td 
                         [uo]="uo"
                         [controlUOCantidad]="getControlUOCantidad(item.servicio_id,uo.uo_codigo)"
+                        [servicio_id]="item.servicio_id"
+                        (deleteUO)="deleteUOFromServicioFromCarrito($event)"
                     >
                     </tr>
                   </ng-container>
