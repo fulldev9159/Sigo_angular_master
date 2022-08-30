@@ -529,4 +529,58 @@ describe('TableServicesComponent', () => {
       'C048'
     );
   });
+
+  it('totalServicios should be 651.88 , totalUos should be 90 and total Cubicacion should be 741.88', () => {
+    carrito.setResult([
+      {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        unidad_obras: [
+          {
+            uo_codigo: 'C048',
+            uo_nombre: 'CABLE 900-26 SUB',
+            uo_precio_total_clp: 50,
+            actividad_descripcion: 'MATRIZ',
+          },
+        ],
+      },
+      {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        unidad_obras: [
+          {
+            uo_codigo: 'C926',
+            uo_nombre: 'CABLE 1800-26 PS',
+            uo_precio_total_clp: 40,
+            actividad_descripcion: 'MATRIZ',
+          },
+        ],
+      },
+      {
+        servicio_id: 2055,
+        servicio_codigo: 'J451',
+        servicio_precio_final_clp: 180.32,
+        servicio_nombre:
+          'EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
+        tipo_servicio_descripcion: 'CABLES',
+        unidad_obras: [
+          {
+            uo_codigo: '0',
+            uo_nombre: 'SIN UO',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+          },
+        ],
+      },
+    ]);
+    store.refreshState();
+    expect(component.totalServicios).toEqual(651.92);
+    expect(component.totalUOs).toEqual(90);
+  });
 });

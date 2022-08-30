@@ -13,15 +13,27 @@ import {
 } from '@angular/forms';
 import { CarritoService, CarritoUO } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
-import { map, Subscription } from 'rxjs';
+import { combineLatest, map, Subscription } from 'rxjs';
 
+interface ServiceTableCarrito {
+  servicio_id: number;
+  servicio_cantidad: number;
+  servicio_precio_final_clp: number;
+  unidad_obras: [
+    {
+      uo_codigo: string;
+      uo_cantidad: number;
+      uo_precio_total_clp: number;
+    }
+  ];
+}
 @Component({
   selector: 'zwc-table-services',
   templateUrl: './table-services.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./table-services.component.scss'],
 })
-export class TableServicesComponent implements OnDestroy {
+export class TableServicesComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
   carrito$ = this.serviciosFacade.carrito$().pipe(
     map(servicios => {
@@ -58,7 +70,7 @@ export class TableServicesComponent implements OnDestroy {
             x => x.servicio_id === servicio.servicio_id
           );
 
-          // NO EXISTE EL SERVICIO EN EL FORMULARIO
+          // NUEVO SERVICIO
           if (indexServiceFormulario === -1) {
             const group = new FormGroup({
               servicio_id: new FormControl(servicio.servicio_id, [
@@ -68,10 +80,11 @@ export class TableServicesComponent implements OnDestroy {
                 Validators.required,
                 Validators.min(0.01),
               ]),
+              servicio_precio_final_clp: new FormControl(
+                servicio.servicio_precio_final_clp
+              ),
               unidad_obras: new FormArray(
-                servicio.unidad_obras.map(uo => {
-                  return this.makeUOForm(uo);
-                })
+                servicio.unidad_obras.map(uo => this.makeUOForm(uo))
               ),
             });
             (this.formTable.get('table') as FormArray).push(group);
@@ -106,6 +119,9 @@ export class TableServicesComponent implements OnDestroy {
     })
   );
 
+  totalServicios = 0;
+  totalUOs = 0;
+
   // FORMULARIO
   formTableControl = {
     table: new FormArray([]),
@@ -114,6 +130,30 @@ export class TableServicesComponent implements OnDestroy {
   formTable: FormGroup = new FormGroup(this.formTableControl);
 
   constructor(private serviciosFacade: ServiciosFacade) {}
+
+  ngOnInit(): void {
+    this.subscription.add(
+      this.formTable.get('table').valueChanges.subscribe(table => {
+        this.totalServicios = 0;
+        this.totalUOs = 0;
+
+        if (table.length > 0) {
+          table.forEach((servicioTable: ServiceTableCarrito) => {
+            let precio_uo = servicioTable.unidad_obras.reduce(
+              (acc, curr) => acc + curr.uo_precio_total_clp * curr.uo_cantidad,
+              0
+            );
+
+            this.totalServicios =
+              this.totalServicios +
+              servicioTable.servicio_precio_final_clp *
+                servicioTable.servicio_cantidad;
+            this.totalUOs = this.totalUOs + precio_uo;
+          });
+        }
+      })
+    );
+  }
 
   makeUOForm(uo: CarritoUO): FormGroup {
     let cantidad = uo.uo_codigo === '0' ? 0 : 1;
@@ -125,6 +165,7 @@ export class TableServicesComponent implements OnDestroy {
         Validators.required,
         Validators.min(min),
       ]),
+      uo_precio_total_clp: new FormControl(uo.uo_precio_total_clp),
     });
   }
 
