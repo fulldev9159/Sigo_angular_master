@@ -59,9 +59,9 @@
             </tr>
             <tr>
               <td colspan="5" style="background-color: #efefef;">Total Servicios</td>
-              <td style="background-color: #efefef;">{{totalServicios| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              <td style="background-color: #efefef;" class="total-servicio-monto">{{totalServicios| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
               <td style="background-color: #efefef;" colspan="6">Total Unidades Obra</td>
-              <td style="background-color: #efefef;">{{totalUOs| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              <td style="background-color: #efefef;" class="total-uo-monto">{{totalUOs| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
               <td style="background-color: #efefef;"></td>
             </tr>
             <tr>
@@ -70,7 +70,7 @@
             <tr>
               <td style="background-color: #efefef;" colspan="4"></td>
               <td style="background-color: #efefef;">Total Cubicación</td>
-              <td style="background-color: #efefef;">{{totalServicios+totalUOs| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+              <td style="background-color: #efefef;" class="total-cubicacion-monto">{{totalServicios+totalUOs| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
               <td style="background-color: #efefef;" colspan="8"></td>
             </tr>
         </tbody>

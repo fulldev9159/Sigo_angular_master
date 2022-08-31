@@ -644,7 +644,7 @@ describe('Testing comportamiento Selectores al comenzar a realizar cambios de se
   });
 });
 
-describe.only('Tabla carrito', () => {
+describe('Tabla carrito', () => {
   it('ingresar', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
@@ -776,6 +776,11 @@ describe.only('Tabla carrito', () => {
       'HTTPRESPONSE-UNIDAD-OBRA-DETALLE'
     );
 
+    // VALIDAR MONTOS
+    cy.get('td[class="total-servicio-monto"]').contains('$0');
+    cy.get('td[class="total-uo-monto"]').contains('$0');
+    cy.get('td[class="total-cubicacion-monto"]').contains('$0');
+
     // SELECT
 
     // REVISAR AGREGANDO UN SERVICIO J101 CON 2 UNIDADES DE OBRA
@@ -827,6 +832,11 @@ describe.only('Tabla carrito', () => {
       cy._check_table_cub_service_uo(data_service);
     });
 
+    // VALIDAR MONTOS
+    cy.get('td[class="total-servicio-monto"]').contains('$471,6');
+    cy.get('td[class="total-uo-monto"]').contains('$0');
+    cy.get('td[class="total-cubicacion-monto"]').contains('$471,6');
+
     cy._select_dropdown('#select-unidad-obra', 'C926 - CABLE 1800-26 PS');
     cy.get('input[name="input-nombre-cubicacion"]').click();
     cy.get('#agregar-button').click();
@@ -842,6 +852,11 @@ describe.only('Tabla carrito', () => {
       };
       cy._check_table_cub_uo(data_uo);
     });
+
+    // VALIDAR MONTOS
+    cy.get('td[class="total-servicio-monto"]').contains('$471,6');
+    cy.get('td[class="total-uo-monto"]').contains('$0');
+    cy.get('td[class="total-cubicacion-monto"]').contains('$471,6');
 
     // AGREGAR OTRO SERVICIO MATRIZ CABLES J451 CON UNA UO
     cy._select_dropdown('#select-tipo-servicio', 'CABLES');
@@ -878,6 +893,10 @@ describe.only('Tabla carrito', () => {
       };
       cy._check_table_cub_service_uo(data_service);
     });
+    // VALIDAR MONTOS
+    cy.get('td[class="total-servicio-monto"]').contains('$651,92');
+    cy.get('td[class="total-uo-monto"]').contains('$56,8');
+    cy.get('td[class="total-cubicacion-monto"]').contains('$708,72');
 
     // MODIFICAR LA CANTIDAD DEL SERVICIO J101
     cy.get(
@@ -901,6 +920,11 @@ describe.only('Tabla carrito', () => {
     };
     cy._check_table_cub_service_uo(data_service);
 
+    // VALIDAR MONTOS
+    cy.get('td[class="total-servicio-monto"]').contains('$2.316,67');
+    cy.get('td[class="total-uo-monto"]').contains('$56,8');
+    cy.get('td[class="total-cubicacion-monto"]').contains('$2.373,47');
+
     // MODIFICAR LA CANTIDAD DE LA UO D013
     cy.get(
       '.carrito-container> table > tbody > tr:nth-child(3) > td:nth-child(11)>p-inputnumber>span>input'
@@ -921,6 +945,11 @@ describe.only('Tabla carrito', () => {
       uo_total: '$297,63',
     };
     cy._check_table_cub_service_uo(data_service);
+
+    // VALIDAR MONTOS
+    cy.get('td[class="total-servicio-monto"]').contains('$2.316,67');
+    cy.get('td[class="total-uo-monto"]').contains('$297,63');
+    cy.get('td[class="total-cubicacion-monto"]').contains('$2.614,3');
   });
 
   it('delete items carrito', () => {
@@ -945,6 +974,11 @@ describe.only('Tabla carrito', () => {
       uo_total: '$297,63',
     };
     cy._check_table_cub_service_uo(data_service);
+
+    // VALIDAR MONTOS
+    cy.get('td[class="total-servicio-monto"]').contains('$180,32');
+    cy.get('td[class="total-uo-monto"]').contains('$297,63');
+    cy.get('td[class="total-cubicacion-monto"]').contains('$477,95');
   });
 });
 
