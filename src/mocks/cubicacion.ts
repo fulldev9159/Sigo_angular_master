@@ -10,3 +10,8 @@ export let tipoCubicacionMOCK200OK: Response<{ items: TipoCubicacion[] }> = {
     ],
   },
 };
+
+export let saveCubicacionMOCK200ok: Response<{ cubicacion_id: number }> = {
+  status: { code: 0, desc: 'OK' },
+  data: { cubicacion_id: 3 },
+};
