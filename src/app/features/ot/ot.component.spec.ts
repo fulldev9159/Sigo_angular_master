@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OtComponent } from './ot.component';
@@ -8,9 +9,9 @@ describe('OtComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OtComponent ]
-    })
-    .compileComponents();
+      declarations: [OtComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(OtComponent);
     component = fixture.componentInstance;
