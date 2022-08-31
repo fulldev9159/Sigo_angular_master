@@ -10,7 +10,14 @@
             </div>
             <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
                 <zwc-table-services #tableServicios></zwc-table-services>
-                <!-- <pre>{{formulario.formCub.value|json}}</pre> -->
+                <zwc-pbutton-sending 
+                    Pid="crear-cubicacion"
+                    content="Crear nueva cubicación"
+                    Pclass="p-button-info p-button-sm mt-4 w-full"
+                    [Pdisabled]="!formulario.valid && !tableServicios.valid && (sendingSaveCubicacion$|async)===false"
+                    [sending]="sendingSaveCubicacion$|async"
+                    (call)="createCubicacion()"
+                ></zwc-pbutton-sending>
             </div>
         </div>
     </div> 

@@ -5,6 +5,7 @@ import * as loadingsActions from './loadings.actions';
 import * as contratosActions from '../contrato/contrato.actions';
 import * as proveedorActions from '../proveedor/proveedor.actions';
 import * as serviciosActions from '../servicios/servicios.actions';
+import * as cubicacionActions from '../cubicacion/cubicacion.actions';
 
 export const FeatureKey = 'loadings';
 
@@ -20,6 +21,7 @@ export interface StateLoadings {
   sendingGetServiciosAgenciaContratoProveedor: boolean;
   sendingGetUnidadesObraServicios: boolean;
   sendingAgregarServicioCarrito: boolean;
+  sendingSaveCubicacion: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -34,6 +36,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetServiciosAgenciaContratoProveedor: false,
   sendingGetUnidadesObraServicios: false,
   sendingAgregarServicioCarrito: false,
+  sendingSaveCubicacion: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -160,6 +163,24 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingAgregarServicioCarrito: false,
+    })
+  ),
+  on(
+    cubicacionActions.createCubicacion,
+    cubicacionActions.editCubicacion,
+    state => ({
+      ...state,
+      sendingSaveCubicacion: true,
+    })
+  ),
+  on(
+    cubicacionActions.createCubicacionSuccess,
+    cubicacionActions.createCubicacionError,
+    cubicacionActions.editCubicacionSuccess,
+    cubicacionActions.editCubicacionError,
+    state => ({
+      ...state,
+      sendingSaveCubicacion: false,
     })
   )
 );

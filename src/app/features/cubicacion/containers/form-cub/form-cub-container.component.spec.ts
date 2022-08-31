@@ -34,6 +34,7 @@ import {
   sendingGetServiciosAgenciaContratoProveedor,
   sendingGetTipoServiciosContrato,
   sendingGetUnidadesObraServicios,
+  sendingSaveCubicacion,
 } from '@storeOT/loadings/loadings.selectors';
 import { ProveedorFacade } from '@storeOT/proveedor/proveedor.facades';
 import { getProveedoresAgenciasContrato } from '@storeOT/proveedor/proveedor.selectors';
@@ -151,6 +152,10 @@ describe('FormCubContainerComponent', () => {
             },
             {
               selector: alertServicioExistenteCarrito,
+              value: false,
+            },
+            {
+              selector: sendingSaveCubicacion,
               value: false,
             },
           ],

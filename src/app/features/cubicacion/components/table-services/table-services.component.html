@@ -76,6 +76,10 @@
         </tbody>
     </table>
 
-    <pre>{{formTable.value|json}}</pre>
+    <div class="message" id="alert-carrito-vacio" *ngIf="(carrito$|async).length === 0" >
+      <p-message  severity="error" text="Al menos 1 servicio debe ser ingresado" styleClass="mr-2"></p-message>
+    </div>
+   
+    <!-- <pre>{{formTable.value|json}}</pre> -->
     
 </form>

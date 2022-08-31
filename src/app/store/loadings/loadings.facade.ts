@@ -73,4 +73,9 @@ export class LoadingsFacade {
   public sendingAgregarServicioCarrito$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingAgregarServicioCarrito);
   }
+
+  // SAVE CUBICACION
+  public sendingSaveCubicacion$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingSaveCubicacion);
+  }
 }

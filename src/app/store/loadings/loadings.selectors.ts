@@ -59,3 +59,8 @@ export const sendingAgregarServicioCarrito = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingAgregarServicioCarrito
 );
+
+export const sendingSaveCubicacion = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingSaveCubicacion
+);

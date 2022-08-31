@@ -256,6 +256,10 @@ export class FormularioComponent implements OnDestroy, OnInit {
     );
   }
 
+  get valid(): boolean {
+    return this.formCub.valid;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

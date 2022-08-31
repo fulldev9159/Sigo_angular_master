@@ -245,6 +245,10 @@ export class TableServicesComponent implements OnDestroy, OnInit {
     );
   }
 
+  get valid(): boolean {
+    return (this.formTable.get('table') as FormArray).length > 0;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

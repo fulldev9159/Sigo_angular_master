@@ -15,6 +15,7 @@ import { AgregarServiciosFormComponent } from '../../components/agregar-servicio
 import { FormularioComponent } from '../../components/formulario/formulario.component';
 import { TableServicesComponent } from '../../components/table-services/table-services.component';
 import localeEsCl from '@angular/common/locales/es-CL';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 
 @Component({
   selector: 'zwc-form-cub',
@@ -42,11 +43,15 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
   })
   tableServicios: TableServicesComponent;
 
+  // LOADINGS
+  sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
+
   constructor(
     private proveedorFacade: ProveedorFacade,
     private contratoFacade: ContratoFacade,
     private cubicacionFacade: CubicacionFacade,
-    private servicioFacade: ServiciosFacade
+    private servicioFacade: ServiciosFacade,
+    private loadingFacade: LoadingsFacade
   ) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
@@ -196,4 +201,6 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
           .setValue(null, { emitEvent: false });
       });
   }
+
+  createCubicacion(): void {}
 }
