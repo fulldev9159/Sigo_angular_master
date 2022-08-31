@@ -29,10 +29,46 @@ export class CubicacionEffects {
     )
   );
 
+  createCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.createCubicacion),
+      concatMap(({ request }) =>
+        this.cubicacionHttpService.saveCubicacion(request).pipe(
+          map(response =>
+            cubicacionActions.createCubicacionSuccess({ response })
+          ),
+          catchError(error =>
+            of(cubicacionActions.createCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  editCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.editCubicacion),
+      concatMap(({ request }) =>
+        this.cubicacionHttpService.saveCubicacion(request).pipe(
+          map(response =>
+            cubicacionActions.editCubicacionSuccess({ response })
+          ),
+          catchError(error =>
+            of(cubicacionActions.editCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(cubicacionActions.getTipoCubicacionSuccess),
+        ofType(
+          cubicacionActions.getTipoCubicacionSuccess,
+          cubicacionActions.createCubicacionSuccess,
+          cubicacionActions.editCubicacionSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -41,7 +77,11 @@ export class CubicacionEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(cubicacionActions.getTipoCubicacionError),
+        ofType(
+          cubicacionActions.getTipoCubicacionError,
+          cubicacionActions.createCubicacionError,
+          cubicacionActions.editCubicacionError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

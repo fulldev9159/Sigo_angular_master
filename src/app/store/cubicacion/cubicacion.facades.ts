@@ -4,6 +4,8 @@ import {
   ContratosUser,
   PerfilesUsuario,
   ProveedorAgenciaContrato,
+  RequestCreateCubicacion,
+  RequestEditCubicacion,
   Response,
   TipoCubicacion,
 } from '@model';
@@ -68,6 +70,15 @@ export class CubicacionFacade {
 
   public agenciaSelected$(): Observable<AgenciaContrato> {
     return this.store.select(cubicacionSelectors.agenciaSelected);
+  }
+
+  // CREATE CUBICACION
+  public createCubicacion(request: RequestCreateCubicacion): void {
+    this.store.dispatch(cubicacionActions.createCubicacion({ request }));
+  }
+  // EDIT CUBICACION
+  public editCubicacion(request: RequestEditCubicacion): void {
+    this.store.dispatch(cubicacionActions.editCubicacion({ request }));
   }
 
   // RESETS
