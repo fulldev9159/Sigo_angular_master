@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -13,7 +13,6 @@ import {
 } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
-import { SharedModule } from '@sharedOT/shared.module';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import {
   getActividadesContratoProveedor,
@@ -72,6 +71,7 @@ describe('FormCubContainerComponent', () => {
         AgregarServiciosFormComponent,
       ],
       providers: [
+        { provide: LOCALE_ID, useValue: 'es-CL' },
         provideMockStore({
           initialState,
           selectors: [

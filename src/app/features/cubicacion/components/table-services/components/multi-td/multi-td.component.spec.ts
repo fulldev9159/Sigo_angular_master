@@ -48,6 +48,9 @@ describe('MultiTdComponent', () => {
     ></tr>`,
   })
   class TestComponent {
+    constructor() {
+      registerLocaleData(localeEsCl, 'es-CL');
+    }
     item = {
       uo_codigo: 'C048',
       uo_nombre: 'CABLE 900-26 SUB',

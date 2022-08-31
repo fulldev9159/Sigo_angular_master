@@ -1,3 +1,4 @@
+import { registerLocaleData } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -13,6 +14,7 @@ import { MenuItem } from 'primeng/api';
 import { AgregarServiciosFormComponent } from '../../components/agregar-servicios-form/agregar-servicios-form.component';
 import { FormularioComponent } from '../../components/formulario/formulario.component';
 import { TableServicesComponent } from '../../components/table-services/table-services.component';
+import localeEsCl from '@angular/common/locales/es-CL';
 
 @Component({
   selector: 'zwc-form-cub',
@@ -45,7 +47,9 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
     private contratoFacade: ContratoFacade,
     private cubicacionFacade: CubicacionFacade,
     private servicioFacade: ServiciosFacade
-  ) {}
+  ) {
+    registerLocaleData(localeEsCl, 'es-CL');
+  }
 
   ngOnInit(): void {
     this.navbarHeader = [

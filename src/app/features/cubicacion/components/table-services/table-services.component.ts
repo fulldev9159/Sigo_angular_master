@@ -14,6 +14,8 @@ import {
 import { CarritoService, CarritoUO } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { combineLatest, map, Subscription } from 'rxjs';
+import localeEsCl from '@angular/common/locales/es-CL';
+import { registerLocaleData } from '@angular/common';
 
 interface ServiceTableCarrito {
   servicio_id: number;
@@ -129,7 +131,9 @@ export class TableServicesComponent implements OnDestroy, OnInit {
 
   formTable: FormGroup = new FormGroup(this.formTableControl);
 
-  constructor(private serviciosFacade: ServiciosFacade) {}
+  constructor(private serviciosFacade: ServiciosFacade) {
+    registerLocaleData(localeEsCl, 'es-CL');
+  }
 
   ngOnInit(): void {
     this.subscription.add(

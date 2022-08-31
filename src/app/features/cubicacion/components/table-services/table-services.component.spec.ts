@@ -121,14 +121,17 @@ describe('TableServicesComponent', () => {
         {
           servicio_id: 141,
           servicio_cantidad: 1,
+          servicio_precio_final_clp: 471.59999999999997,
           unidad_obras: [
             {
               uo_codigo: 'C048',
               uo_cantidad: 1,
+              uo_precio_total_clp: 0,
             },
             {
               uo_codigo: 'C926',
               uo_cantidad: 1,
+              uo_precio_total_clp: 0,
             },
           ],
         },
@@ -177,14 +180,17 @@ describe('TableServicesComponent', () => {
         {
           servicio_id: 141,
           servicio_cantidad: 1,
+          servicio_precio_final_clp: 471.59999999999997,
           unidad_obras: [
             {
               uo_codigo: 'C048',
               uo_cantidad: 1,
+              uo_precio_total_clp: 0,
             },
             {
               uo_codigo: 'C926',
               uo_cantidad: 1,
+              uo_precio_total_clp: 0,
             },
           ],
         },
@@ -231,28 +237,34 @@ describe('TableServicesComponent', () => {
         {
           servicio_id: 141,
           servicio_cantidad: 1,
+          servicio_precio_final_clp: 471.59999999999997,
           unidad_obras: [
             {
               uo_codigo: 'C048',
               uo_cantidad: 1,
+              uo_precio_total_clp: 0,
             },
             {
               uo_codigo: 'C926',
               uo_cantidad: 1,
+              uo_precio_total_clp: 0,
             },
             {
               uo_codigo: 'C881',
               uo_cantidad: 1,
+              uo_precio_total_clp: 0,
             },
           ],
         },
         {
           servicio_id: 2055,
           servicio_cantidad: 1,
+          servicio_precio_final_clp: 180.32,
           unidad_obras: [
             {
               uo_codigo: '0',
               uo_cantidad: 0,
+              uo_precio_total_clp: 0,
             },
           ],
         },

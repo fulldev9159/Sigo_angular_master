@@ -26,7 +26,6 @@ describe('BaseTdComponent', () => {
     // fixture = TestBed.createComponent(BaseTdComponent);
     // component = fixture.componentInstance;
     // fixture.detectChanges();
-    registerLocaleData(localeEsCl, 'es-CL');
   });
 
   it('should create', () => {
@@ -51,6 +50,9 @@ describe('BaseTdComponent', () => {
     ></tr>`,
   })
   class TestComponent {
+    constructor() {
+      registerLocaleData(localeEsCl, 'es-CL');
+    }
     item = {
       servicio_id: 141,
       servicio_codigo: 'J101',
