@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormArray, FormControl } from '@angular/forms';
 import localeEsCl from '@angular/common/locales/es-CL';
@@ -14,6 +14,7 @@ describe('BaseTdComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [BaseTdComponent, TestComponent],
       providers: [{ provide: LOCALE_ID, useValue: 'es-CL' }],
     }).compileComponents();

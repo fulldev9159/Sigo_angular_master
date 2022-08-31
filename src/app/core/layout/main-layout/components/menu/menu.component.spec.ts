@@ -1,4 +1,7 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { MenuComponent } from './menu.component';
 
@@ -8,9 +11,10 @@ describe('MenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuComponent ]
-    })
-    .compileComponents();
+      imports: [RouterTestingModule, NgxPermissionsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [MenuComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;

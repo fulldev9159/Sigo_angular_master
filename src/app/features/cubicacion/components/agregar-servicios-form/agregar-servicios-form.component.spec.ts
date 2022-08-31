@@ -1,4 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   getActividadesContratoProveedorMOCK200ok,
   getActividadesContratoProveedorMOCK200okUnitTest,
@@ -11,6 +13,7 @@ import {
 import { RequestGetDetallesServicioTipoAgenciaContratoProveedor } from '@model';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
+import { SharedModule } from '@sharedOT/shared.module';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 
 import {
@@ -54,7 +57,8 @@ describe('AgregarServiciosFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [StoreModule.forRoot({}), FormsModule, ReactiveFormsModule],
       declarations: [AgregarServiciosFormComponent],
       providers: [
         provideMockStore({

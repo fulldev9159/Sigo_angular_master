@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import localeEsCl from '@angular/common/locales/es-CL';
@@ -14,6 +14,7 @@ describe('MultiTdComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [MultiTdComponent, TestComponent],
       providers: [{ provide: LOCALE_ID, useValue: 'es-CL' }],
     }).compileComponents();

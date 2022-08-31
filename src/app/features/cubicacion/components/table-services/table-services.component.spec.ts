@@ -1,7 +1,13 @@
-import { LOCALE_ID } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  LOCALE_ID,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store, StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { SharedModule } from '@sharedOT/shared.module';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { carrito } from '@storeOT/servicios/servicios.selectors';
 
@@ -16,7 +22,8 @@ describe('TableServicesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [StoreModule.forRoot({}), FormsModule, ReactiveFormsModule],
       declarations: [TableServicesComponent],
       providers: [
         { provide: LOCALE_ID, useValue: 'es-CL' },

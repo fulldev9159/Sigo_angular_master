@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContentLayoutComponent } from './content-layout.component';
@@ -8,9 +9,9 @@ describe('ContentLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContentLayoutComponent ]
-    })
-    .compileComponents();
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [ContentLayoutComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ContentLayoutComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -18,6 +18,7 @@ describe('InputAlertComponent', () => {
         ValidatorRequiredComponent,
         ValidatorNotSupportedComponent,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixtureValRequiredComponent = TestBed.createComponent(

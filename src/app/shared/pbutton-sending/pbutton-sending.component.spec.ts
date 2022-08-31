@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PrimeNgModule } from '@sharedOT/primeng/primeng.module';
@@ -13,6 +13,7 @@ describe('PbuttonSendingComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PrimeNgModule],
       declarations: [PbuttonSendingComponent, HostComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixtureHost = TestBed.createComponent(HostComponent);

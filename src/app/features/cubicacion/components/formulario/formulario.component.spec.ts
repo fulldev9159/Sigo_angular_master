@@ -21,6 +21,8 @@ import {
   sendingGetAgenciasContrato,
   sendingGetProveedorAgenciasContrato,
 } from '@storeOT/loadings/loadings.selectors';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('FormularioComponent', () => {
   let component: FormularioComponent;
@@ -34,7 +36,8 @@ describe('FormularioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [StoreModule.forRoot({}), FormsModule, ReactiveFormsModule],
       declarations: [FormularioComponent],
       providers: [
         provideMockStore({
