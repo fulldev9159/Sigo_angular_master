@@ -639,13 +639,13 @@ describe('Testing comportamiento Selectores al comenzar a realizar cambios de se
     });
 
     cy._select_dropdown('#select-tipo-servicio', 'DTH');
-    cy.get('#select-servicio>div').should('have.class', 'p-disabled');
     cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
   });
 });
 
 describe('Tabla carrito', () => {
   it('ingresar', () => {
+    cy.viewport(1500, 1700);
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
     cy._select_profile('Gestor/JP');
@@ -742,6 +742,7 @@ describe('Tabla carrito', () => {
   });
 
   it('should add service and displayed into carrito', () => {
+    cy.viewport(1500, 1700);
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
     cy._select_profile('Gestor/JP');
