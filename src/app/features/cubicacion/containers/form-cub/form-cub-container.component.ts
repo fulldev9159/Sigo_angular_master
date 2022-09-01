@@ -76,7 +76,7 @@ export class FormCubContainerComponent
     this.navbarHeader = [
       { label: 'Home', icon: 'pi pi-home', routerLink: ['/home'] },
       {
-        label: 'Cubicación',
+        label: 'Listar Cubicaciones',
         icon: 'pi pi-shopping-bag',
         routerLink: ['/cubicacion'],
       },

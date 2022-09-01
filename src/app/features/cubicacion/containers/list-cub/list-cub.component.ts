@@ -19,7 +19,7 @@ export class ListCubComponent implements OnInit {
         icon: 'pi pi-shopping-bag',
         routerLink: ['/cubicacion'],
       },
-      { label: 'Listar Cubicación', styleClass: 'last-route' },
+      { label: 'Listar Cubicaciones', styleClass: 'last-route' },
       {
         label: 'Nueva Cubicación',
         icon: 'pi pi-plus',
