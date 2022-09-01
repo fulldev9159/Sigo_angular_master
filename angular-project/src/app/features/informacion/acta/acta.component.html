@@ -1,5 +1,6 @@
 <ng-container *ngIf="(loginAuth$ |async).rol==='ADM_EECC'">
-  <app-generar-acta></app-generar-acta>
+  <!-- <app-generar-acta></app-generar-acta> -->
+  <app-pre-acta-admin></app-pre-acta-admin>
 </ng-container>
 <ng-container *ngIf="(loginAuth$ |async).rol==='GESTOR'">
   <app-validar-acta></app-validar-acta>
