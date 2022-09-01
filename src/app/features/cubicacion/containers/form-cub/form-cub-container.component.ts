@@ -3,6 +3,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -16,8 +17,12 @@ import { FormularioComponent } from '../../components/formulario/formulario.comp
 import { TableServicesComponent } from '../../components/table-services/table-services.component';
 import localeEsCl from '@angular/common/locales/es-CL';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
-import { Observable } from 'rxjs';
-import { ProveedorAgenciaContrato, SessionData } from '@model';
+import { combineLatest, Observable, Subscription, take } from 'rxjs';
+import {
+  ProveedorAgenciaContrato,
+  RequestCreateCubicacion,
+  SessionData,
+} from '@model';
 
 @Component({
   selector: 'zwc-form-cub',
@@ -25,7 +30,10 @@ import { ProveedorAgenciaContrato, SessionData } from '@model';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./form-cub-container.component.scss'],
 })
-export class FormCubContainerComponent implements OnInit, AfterViewInit {
+export class FormCubContainerComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
+  subscription: Subscription = new Subscription();
   navbarHeader: MenuItem[];
   @ViewChild('formulario', {
     read: FormularioComponent,
@@ -210,5 +218,72 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
       });
   }
 
-  createCubicacion(): void {}
+  createCubicacion(): void {
+    console.log('click');
+    this.subscription.add(
+      combineLatest([this.proveedorSelected$, this.carrito$])
+        .pipe(take(1))
+        .subscribe(([proveedorSelected, carrito]) => {
+          const request: RequestCreateCubicacion = {
+            cubicacion_datos: {
+              nombre: this.formulario.formCub.get('nombre').value, // FORMULARIO
+              tipo_cubicacion_id:
+                +this.formulario.formCub.get('tipocubicacion').value, // FORMULARIO
+              contrato_id: +this.formulario.formCub.get('contrato').value, // FORMULARIO
+              agencia_id: +this.formulario.formCub.get('agencia_id').value, // FORMULARIO
+              proveedor_id: proveedorSelected.id, // NGRX proveedorselected
+              codigo_acuerdo: proveedorSelected.codigo_acuerdo, // NGRX proveedorselected
+              cmarco_has_proveedor_id:
+                +this.formulario.formCub.get('cmarcoproveedor_id').value, // FORMULARIO
+              usuario_creador_id: +this.sessionData.usuario_id, // LOCALSTORE
+              direccion_desde:
+                this.formulario.formCub.get('direcciondesde').value, // FORMULARIO
+              altura_desde: this.formulario.formCub.get('direcciondesdealtura')
+                .value, // FORMULARIO
+              direccion_hasta:
+                this.formulario.formCub.get('direccionhasta').value, // FORMULARIO
+              altura_hasta: this.formulario.formCub.get('direccionhastaaltura')
+                .value, // FORMULARIO
+              descripcion: this.formulario.formCub.get('descripcion').value, // FORMULARIO
+            },
+            cubicacion_detalle: {
+              nuevo: (
+                this.tableServicios.formTable.get('table').value as Array<{
+                  servicio_id: number;
+                  servicio_cantidad: number;
+                  unidad_obras: Array<{
+                    uo_cantidad: number;
+                    uo_codigo: string;
+                  }>;
+                }>
+              ).map(servicio => ({
+                servicio_id: servicio.servicio_id,
+                actividad_id: carrito.find(
+                  value =>
+                    value.servicio_id === servicio.servicio_id &&
+                    value.unidad_obras[0].uo_codigo ===
+                      servicio.unidad_obras[0].uo_codigo
+                ).unidad_obras[0].actividad_id,
+                tipo_servicio_id: carrito.find(
+                  value =>
+                    value.servicio_id === servicio.servicio_id &&
+                    value.unidad_obras[0].uo_codigo ===
+                      servicio.unidad_obras[0].uo_codigo
+                ).tipo_servicio_id,
+                cantidad: servicio.servicio_cantidad,
+                unidad_obra: servicio.unidad_obras.map(uo => ({
+                  uob_codigo: uo.uo_codigo,
+                  cantidad: uo.uo_cantidad,
+                })),
+              })),
+            },
+          };
+          this.cubicacionFacade.createCubicacion(request);
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

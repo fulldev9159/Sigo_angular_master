@@ -7,9 +7,13 @@ import { SnackMessageService } from './snack-message.service';
 import * as authActions from '@storeOT/auth/auth.actions';
 import * as perfilActions from '@storeOT/perfil/perfil.actions';
 import * as usuarioActions from '@storeOT/usuario/usuario.actions';
+import * as cubicacionActions from '@storeOT/cubicacion/cubicacion.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { StoreModule } from '@ngrx/store';
-import { ContratosUsuarioMOCK200OKSinContratos } from '@mocksOT';
+import {
+  ContratosUsuarioMOCK200OKSinContratos,
+  saveCubicacionMOCK200ok,
+} from '@mocksOT';
 
 describe('AfterHttpService', () => {
   let service: AfterHttpService;
@@ -146,5 +150,20 @@ describe('AfterHttpService', () => {
       'info',
       6000
     );
+  });
+
+  it('afterHttpAction if action is "createCubicacionSuccess" should display message "Cubicación creada con exito. Cubicación ID:3 " ', () => {
+    spyOn(snackMessage, 'showMessage');
+    const action = {
+      response: saveCubicacionMOCK200ok,
+      type: cubicacionActions.createCubicacionSuccess.type,
+    };
+    service.successHandler(action);
+    expect(snackMessage.showMessage).toHaveBeenCalledWith(
+      'Cubicación creada con exito. Cubicación ID:3',
+      'Exito',
+      6000
+    );
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/cubicacion/list-cub']);
   });
 });

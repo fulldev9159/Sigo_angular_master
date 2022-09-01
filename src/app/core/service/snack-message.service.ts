@@ -21,7 +21,7 @@ export class SnackMessageService {
         } else if (color === 'info') {
           return '#4c5fed';
         }
-        return '#2185D0';
+        return '#28960c';
       })(type),
       duration: dur ? dur : 7000,
     });

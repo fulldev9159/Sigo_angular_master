@@ -14,7 +14,7 @@
                     Pid="crear-cubicacion"
                     content="Crear nueva cubicación"
                     Pclass="p-button-info p-button-sm mt-4 w-full"
-                    [Pdisabled]="!formulario.valid && !tableServicios.valid && (sendingSaveCubicacion$|async)===false"
+                    [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
                     [sending]="sendingSaveCubicacion$|async"
                     (call)="createCubicacion()"
                 ></zwc-pbutton-sending>

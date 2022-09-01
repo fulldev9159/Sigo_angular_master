@@ -4,6 +4,7 @@ import { SnackMessageService } from './snack-message.service';
 import * as authActions from '@storeOT/auth/auth.actions';
 import * as perfilActions from '@storeOT/perfil/perfil.actions';
 import * as usuarioActions from '@storeOT/usuario/usuario.actions';
+import * as cubicacionActions from '@storeOT/cubicacion/cubicacion.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 
 interface ActionErr {
@@ -84,6 +85,16 @@ export class AfterHttpService {
         'info',
         6000
       );
+    }
+
+    // CREATE CUBICACIÓN
+    if (action.type === cubicacionActions.createCubicacionSuccess.type) {
+      this.snackMessage.showMessage(
+        `Cubicación creada con exito. Cubicación ID:${action.response.data.cubicacion_id}`,
+        'Exito',
+        6000
+      );
+      this.router.navigate(['/cubicacion/list-cub']);
     }
   }
 }

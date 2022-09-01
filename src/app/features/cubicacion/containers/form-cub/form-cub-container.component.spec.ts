@@ -299,9 +299,9 @@ describe('FormCubContainerComponent', () => {
   it('createCubicacion debe llamar al facade createCubicación con los datos del formulario', () => {
     spyOn(cubicacionFacade, 'createCubicacion');
     proveedorSelected.setResult({
-      cmarco_has_proveedor_id: 1,
+      cmarco_has_proveedor_id: 5,
       codigo_acuerdo: 'bbbb',
-      id: 2,
+      id: 4,
       nombre: 'dasdasd',
     });
 
@@ -317,23 +317,6 @@ describe('FormCubContainerComponent', () => {
           {
             uo_codigo: 'aaa',
             uo_nombre: 'CABLE 900-26 SUB',
-            uo_precio_total_clp: 0,
-            actividad_descripcion: 'MATRIZ',
-            actividad_id: 2,
-          },
-        ],
-      },
-      {
-        servicio_id: 141,
-        servicio_codigo: 'J101',
-        servicio_precio_final_clp: 471.59999999999997,
-        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
-        tipo_servicio_descripcion: 'LINEAS',
-        tipo_servicio_id: 1,
-        unidad_obras: [
-          {
-            uo_codigo: 'C926',
-            uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
             actividad_id: 2,
@@ -361,15 +344,16 @@ describe('FormCubContainerComponent', () => {
     component.tableServicios.formTable.get('table').patchValue([
       {
         servicio_id: 1,
-        cantidad: 4,
+        servicio_cantidad: 4,
         unidad_obras: [
           {
             uob_codigo: 'aaa',
-            cantidad: 5,
+            uo_cantidad: 5,
           },
         ],
       },
     ]);
+    fixture.detectChanges();
     const request = {
       cubicacion_datos: {
         nombre: 'aaaa', // FORMULARIO
@@ -404,6 +388,7 @@ describe('FormCubContainerComponent', () => {
       },
     };
 
+    component.createCubicacion();
     expect(cubicacionFacade.createCubicacion).toHaveBeenCalledWith(request);
   });
 });

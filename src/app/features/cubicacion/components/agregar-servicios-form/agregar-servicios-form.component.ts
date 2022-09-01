@@ -307,7 +307,6 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
       ])
         .pipe(take(1))
         .subscribe(([proveedorSelected, agenciaSelected, carrito]) => {
-          // console.log(carrito);
           const unidad_obra_cod = this.formFilter.get('unidad_obra_cod').value;
           const servicio_id = this.serviciosAgenciaContratoProveedor.find(
             value => value.codigo === this.formFilter.get('servicio_cod').value
@@ -318,11 +317,9 @@ export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
               servicio.servicio_id === servicio_id &&
               servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
           );
-          // console.log(servicioExiste);
           if (servicioExiste !== undefined) {
             this.serviciosFacade.alertServicioExistenteCarrito(true);
           } else {
-            // console.log('nuevo', this.formFilter.get('unidad_obra_cod').value);
             this.serviciosFacade.alertServicioExistenteCarrito(false);
             const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
               {
