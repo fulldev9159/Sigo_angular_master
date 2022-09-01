@@ -24,3 +24,8 @@ export const agenciaSelected = createSelector(
   selectCubicacion,
   (state: reducer.StateCubicacion) => state.agenciaSelected
 );
+
+export const listarCubicaciones = createSelector(
+  selectCubicacion,
+  (state: reducer.StateCubicacion) => state.listarCubicaciones
+);

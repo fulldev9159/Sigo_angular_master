@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Cubicacion } from '@model';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { MenuItem } from 'primeng/api';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'zwc-list-cub',
@@ -8,8 +11,16 @@ import { MenuItem } from 'primeng/api';
 })
 export class ListCubComponent implements OnInit {
   navbarHeader: MenuItem[];
+  cubicaciones$: Observable<Cubicacion[]> = this.cubicacionFacade
+    .listarCubicaciones$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.cubicacion_id > b.cubicacion_id ? 1 : -1));
+      })
+    );
 
-  constructor() {}
+  constructor(private cubicacionFacade: CubicacionFacade) {}
 
   ngOnInit(): void {
     this.navbarHeader = [

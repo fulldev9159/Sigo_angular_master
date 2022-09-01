@@ -4,6 +4,7 @@ import { FormCubContainerComponent } from './containers/form-cub/form-cub-contai
 import { ListCubComponent } from './containers/list-cub/list-cub.component';
 import { CubicacionComponent } from './cubicacion.component';
 import { ContratosUsuarioResolver } from './resolvers/contratos-usuario.resolver';
+import { CubicacionesResolver } from './resolvers/cubicaciones.resolver';
 import { TipoCubicacionResolver } from './resolvers/tipo-cubicacion.resolver';
 
 const routes: Routes = [
@@ -15,6 +16,9 @@ const routes: Routes = [
       {
         path: 'list-cub',
         component: ListCubComponent,
+        resolve: {
+          cubicaciones: CubicacionesResolver,
+        },
       },
       {
         path: 'form-cub',

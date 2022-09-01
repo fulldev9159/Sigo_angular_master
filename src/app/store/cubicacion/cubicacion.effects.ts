@@ -61,13 +61,30 @@ export class CubicacionEffects {
     )
   );
 
+  listarCubicaciones$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.listarCubicaciones),
+      concatMap(() =>
+        this.cubicacionHttpService.getCubicaciones().pipe(
+          map(response =>
+            cubicacionActions.listarCubicacionesSuccess({ response })
+          ),
+          catchError(error =>
+            of(cubicacionActions.listarCubicacionesError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           cubicacionActions.getTipoCubicacionSuccess,
           cubicacionActions.createCubicacionSuccess,
-          cubicacionActions.editCubicacionSuccess
+          cubicacionActions.editCubicacionSuccess,
+          cubicacionActions.listarCubicacionesSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -80,7 +97,8 @@ export class CubicacionEffects {
         ofType(
           cubicacionActions.getTipoCubicacionError,
           cubicacionActions.createCubicacionError,
-          cubicacionActions.editCubicacionError
+          cubicacionActions.editCubicacionError,
+          cubicacionActions.listarCubicacionesError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

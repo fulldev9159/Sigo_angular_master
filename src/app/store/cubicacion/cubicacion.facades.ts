@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   AgenciaContrato,
   ContratosUser,
+  Cubicacion,
   PerfilesUsuario,
   ProveedorAgenciaContrato,
   RequestCreateCubicacion,
@@ -79,6 +80,24 @@ export class CubicacionFacade {
   // EDIT CUBICACION
   public editCubicacion(request: RequestEditCubicacion): void {
     this.store.dispatch(cubicacionActions.editCubicacion({ request }));
+  }
+
+  // LISTAR CUBICACIONES
+  public listarCubicaciones(): void {
+    this.store.dispatch(cubicacionActions.listarCubicaciones());
+  }
+  public listarCubicacionesSuccess(
+    response: Response<{ items: Cubicacion[] }>
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.listarCubicacionesSuccess({ response })
+    );
+  }
+  public listarCubicacionesError(error: any): void {
+    this.store.dispatch(cubicacionActions.listarCubicacionesError({ error }));
+  }
+  public listarCubicaciones$(): Observable<Cubicacion[]> {
+    return this.store.select(cubicacionSelectors.listarCubicaciones);
   }
 
   // RESETS

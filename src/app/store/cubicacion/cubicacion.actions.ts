@@ -2,6 +2,7 @@ import {
   Accion,
   AgenciaContrato,
   ContratosUser,
+  Cubicacion,
   PerfilesUsuario,
   ProveedorAgenciaContrato,
   RequestCreateCubicacion,
@@ -67,6 +68,19 @@ export const editCubicacionSuccess = createAction(
 );
 export const editCubicacionError = createAction(
   '[CUBICACION] editCubicacion Error',
+  props<{ error: any }>()
+);
+
+// LISTAR CUBICACIONES
+export const listarCubicaciones = createAction(
+  '[CUBICACION] listarCubicaciones '
+);
+export const listarCubicacionesSuccess = createAction(
+  '[CUBICACION] listarCubicaciones Success',
+  props<{ response: Response<{ items: Cubicacion[] }> }>()
+);
+export const listarCubicacionesError = createAction(
+  '[CUBICACION] listarCubicaciones Error',
   props<{ error: any }>()
 );
 

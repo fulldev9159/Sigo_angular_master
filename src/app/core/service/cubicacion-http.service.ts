@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Response } from '@model';
+import { Response, Cubicacion } from '@model';
 import { Observable } from 'rxjs';
 import {
   RequestCreateCubicacion,
@@ -31,6 +31,13 @@ export class CubicacionHttpService {
     return this.http.post<Response<{ cubicacion_id: number }>>(
       `${this.API_URL}/cubicacion/cubicacion/save`,
       request
+    );
+  }
+
+  getCubicaciones(): Observable<Response<{ items: Cubicacion[] }>> {
+    return this.http.post<Response<{ items: Cubicacion[] }>>(
+      `${this.API_URL}/cubicacion/table_cubicaciones/get`,
+      {}
     );
   }
 }

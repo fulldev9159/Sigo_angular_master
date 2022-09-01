@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { saveCubicacionMOCK200ok, tipoCubicacionMOCK200OK } from '@mocksOT';
+import {
+  listaCubicacionesMOCK200ok,
+  saveCubicacionMOCK200ok,
+  tipoCubicacionMOCK200OK,
+} from '@mocksOT';
 import { of } from 'rxjs';
 import { RequestCreateCubicacion } from '../model/cubicacion';
 
@@ -59,6 +63,17 @@ describe('CubicacionHttpService', () => {
     service.saveCubicacion(request).subscribe({
       next: response => {
         expect(response).toEqual(saveCubicacionMOCK200ok);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call getCubicaciones and return and  Data', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(listaCubicacionesMOCK200ok));
+    service.getCubicaciones().subscribe({
+      next: response => {
+        expect(response).toEqual(listaCubicacionesMOCK200ok);
         done();
       },
       error: done.fail,
