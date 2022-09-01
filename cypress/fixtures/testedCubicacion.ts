@@ -34,7 +34,7 @@ export const BucleApoCobra = {
                   precio: '$57.200,64',
                 },
                 {
-                  nombre: 'D240	MODULO PROT.GAS. QDF MONDRAGON',
+                  nombre: 'D240 - MODULO PROT.GAS. QDF MONDRAGON',
                   precio: '$3.200',
                 },
                 {
@@ -42,7 +42,7 @@ export const BucleApoCobra = {
                   precio: '$0',
                 },
                 {
-                  nombre: 'D238	REGLETA CONEX.10/2 QDF-1 MONDR',
+                  nombre: 'D238 - REGLETA CONEX.10/2 QDF-1 MONDR',
                   precio: '$0',
                 },
                 {
@@ -88,19 +88,19 @@ export const BucleApoCobra = {
               nombre:
                 'D080 - DISEÑO DE RED PARA PROYECTOS DEL TIPO BROWNFIELD (CADA UIP)',
               precio: '$1.485',
-              unidad_obra: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO' }],
             },
             {
               nombre:
                 'D081 - DISEÑO DE RED PARA PROYECTOS DEL TIPO GREENFIELD (CADA UIP)',
               precio: '$1.485',
-              unidad_obra: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO' }],
             },
             {
               nombre:
                 'D083 - DISEÑO EN RED DE FO GPON (FTTX) BROWNFIELD (POR UIP). LEVANTAMIENTO DE INFORMACION',
               precio: '$297',
-              unidad_obra: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO' }],
             },
           ],
         },
@@ -116,7 +116,7 @@ export const BucleApoCobra = {
               nombre:
                 'J201 - INSTALAR CABLES EN EDIFICIOS Y CENTRALES TELEFONICAS',
               precio: '$982,5',
-              unidad_obra: [
+              unidad_obras: [
                 { nombre: 'H006 - ANGULO PLANO LEGRAND 40*16', precio: '$458' },
                 {
                   nombre: 'H005 - ANGULO INT./EXT.LEGRAND 40*16',
@@ -141,12 +141,12 @@ export const BucleApoCobra = {
               nombre:
                 'J726 - INST. REPARTIDOR MURAL, 1 VERTICAL, TIPO 2/3 VERTICALES',
               precio: '$22.008',
-              unidad_obra: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO' }],
             },
             {
               nombre: 'J730 - INST. ESCALERILLA SOPORTE',
               precio: '$12.851,1',
-              unidad_obra: [
+              unidad_obras: [
                 {
                   nombre: 'H134 - ESCALERILLA PC TIPO NEC 200*32',
                   precio: '$0',
@@ -156,7 +156,7 @@ export const BucleApoCobra = {
             {
               nombre: 'J728 - INST. PERFIL DE HIERRO PINTADO O GALVANIZADO',
               precio: '$1.257,6',
-              unidad_obra: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO' }],
             },
           ],
         },
