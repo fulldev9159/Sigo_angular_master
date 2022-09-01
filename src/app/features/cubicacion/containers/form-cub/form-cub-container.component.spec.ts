@@ -12,7 +12,7 @@ import {
   UnidadObraServicioMOCK200OK,
 } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import {
   getActividadesContratoProveedor,
@@ -60,6 +60,7 @@ describe('FormCubContainerComponent', () => {
   let proveedorFacade: ProveedorFacade;
   let cubicacionFacade: CubicacionFacade;
   let servicioFacade: ServiciosFacade;
+  let store: MockStore<any>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -163,6 +164,29 @@ describe('FormCubContainerComponent', () => {
       ],
     }).compileComponents();
 
+    localStorage.setItem(
+      'auth',
+      JSON.stringify({
+        sessionData: {
+          nombre_perfil_select: 'Gestor/JP',
+          perfil_proxy_id: 2,
+          permisos: [
+            {
+              id: 1,
+              slug: 'OT_LISTAR',
+              nombre_corto: 'Listar',
+              descripcion: 'Poder visualizar OT',
+            },
+          ],
+          rol: 'Gestor/JP (Telefónica)',
+          token:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjAxODU3NjYsImlzcyI6InNpZ28iLCJuYmYiOjE2NjAxODIxNjY',
+          usuario_id: 6,
+          usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+        },
+      })
+    );
+
     fixture = TestBed.createComponent(FormCubContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -171,6 +195,7 @@ describe('FormCubContainerComponent', () => {
     proveedorFacade = TestBed.inject(ProveedorFacade);
     cubicacionFacade = TestBed.inject(CubicacionFacade);
     servicioFacade = TestBed.inject(ServiciosFacade);
+    store = TestBed.inject(MockStore);
   });
 
   it('should create', () => {
@@ -269,5 +294,116 @@ describe('FormCubContainerComponent', () => {
     ).toHaveBeenCalled();
     expect(servicioFacade.resetServicioSelected).toHaveBeenCalled();
     expect(servicioFacade.resetUnidadesObraServicio).toHaveBeenCalled();
+  });
+
+  it('createCubicacion debe llamar al facade createCubicación con los datos del formulario', () => {
+    spyOn(cubicacionFacade, 'createCubicacion');
+    proveedorSelected.setResult({
+      cmarco_has_proveedor_id: 1,
+      codigo_acuerdo: 'bbbb',
+      id: 2,
+      nombre: 'dasdasd',
+    });
+
+    carrito.setResult([
+      {
+        servicio_id: 1,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 3,
+        unidad_obras: [
+          {
+            uo_codigo: 'aaa',
+            uo_nombre: 'CABLE 900-26 SUB',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+            actividad_id: 2,
+          },
+        ],
+      },
+      {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
+        unidad_obras: [
+          {
+            uo_codigo: 'C926',
+            uo_nombre: 'CABLE 1800-26 PS',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+            actividad_id: 2,
+          },
+        ],
+      },
+    ]);
+    store.refreshState();
+
+    // component.formulario.formCub.get('nombre').setValue('aaaa')
+    component.formulario.formCub.patchValue({
+      nombre: 'aaaa',
+      tipocubicacion: 1,
+      direcciondesde: 'cccc',
+      direcciondesdealtura: 'ddd',
+      direccionhasta: 'eee',
+      direccionhastaaltura: 'fff',
+      descripcion: '',
+      contrato: 2,
+      agencia_id: 3,
+      cmarcoproveedor_id: 5,
+    });
+    fixture.detectChanges();
+
+    component.tableServicios.formTable.get('table').patchValue([
+      {
+        servicio_id: 1,
+        cantidad: 4,
+        unidad_obras: [
+          {
+            uob_codigo: 'aaa',
+            cantidad: 5,
+          },
+        ],
+      },
+    ]);
+    const request = {
+      cubicacion_datos: {
+        nombre: 'aaaa', // FORMULARIO
+        tipo_cubicacion_id: 1, // FORMULARIO
+        contrato_id: 2, // FORMULARIO
+        agencia_id: 3, // FORMULARIO
+        proveedor_id: 4, // FORMULARIO
+        codigo_acuerdo: 'bbbb', // NGRX proveedorselected
+        cmarco_has_proveedor_id: 5, // FORMULARIO
+        usuario_creador_id: 6, // LOCALSTORE
+        direccion_desde: 'cccc', // FORMULARIO
+        altura_desde: 'ddd', // FORMULARIO
+        direccion_hasta: 'eee', // FORMULARIO
+        altura_hasta: 'fff', // FORMULARIO
+        descripcion: '', // FORMULARIO
+      },
+      cubicacion_detalle: {
+        nuevo: [
+          {
+            servicio_id: 1, // FORMULARIO
+            actividad_id: 2, // NGRX
+            tipo_servicio_id: 3, // NGRX
+            cantidad: 4, // FORMULARIO
+            unidad_obra: [
+              {
+                uob_codigo: 'aaa', // FORMULARIO
+                cantidad: 5, // FORMULARIO
+              },
+            ],
+          },
+        ],
+      },
+    };
+
+    expect(cubicacionFacade.createCubicacion).toHaveBeenCalledWith(request);
   });
 });

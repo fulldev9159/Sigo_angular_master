@@ -142,7 +142,7 @@ export class FormularioComponent implements OnDestroy, OnInit {
     direcciondesdealtura: new FormControl(null, []),
     direccionhasta: new FormControl(null, []),
     direccionhastaaltura: new FormControl(null, []),
-    descripcion: new FormControl(null, [Validators.required]),
+    descripcion: new FormControl('', [Validators.required]),
     contrato: new FormControl(null, [Validators.required]),
     agencia_id: new FormControl(null, [Validators.required]),
     cmarcoproveedor_id: new FormControl(null, [Validators.required]),

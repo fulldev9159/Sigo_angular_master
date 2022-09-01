@@ -58,18 +58,21 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -81,12 +84,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -96,12 +101,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -144,12 +151,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -159,12 +168,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -203,12 +214,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -218,12 +231,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -278,24 +293,28 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
           {
             uo_codigo: 'C881',
             uo_nombre: 'CABLE FS 1212-24 SUB.',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -306,12 +325,14 @@ describe('TableServicesComponent', () => {
         servicio_nombre:
           'EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
         tipo_servicio_descripcion: 'CABLES',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: '0',
             uo_nombre: 'SIN UO',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -324,12 +345,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -339,12 +362,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -354,12 +379,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C881',
             uo_nombre: 'CABLE FS 1212-24 SUB.',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -370,12 +397,14 @@ describe('TableServicesComponent', () => {
         servicio_nombre:
           'EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
         tipo_servicio_descripcion: 'CABLES',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: '0',
             uo_nombre: 'SIN UO',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -399,12 +428,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -414,12 +445,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -436,12 +469,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -451,12 +486,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -474,12 +511,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -489,12 +528,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -513,12 +554,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -528,12 +571,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -557,12 +602,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C048',
             uo_nombre: 'CABLE 900-26 SUB',
             uo_precio_total_clp: 50,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -572,12 +619,14 @@ describe('TableServicesComponent', () => {
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
             uo_precio_total_clp: 40,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },
@@ -588,12 +637,14 @@ describe('TableServicesComponent', () => {
         servicio_nombre:
           'EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
         tipo_servicio_descripcion: 'CABLES',
+        tipo_servicio_id: 1,
         unidad_obras: [
           {
             uo_codigo: '0',
             uo_nombre: 'SIN UO',
             uo_precio_total_clp: 0,
             actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
           },
         ],
       },

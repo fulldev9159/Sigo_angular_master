@@ -52,11 +52,11 @@ export interface DetallesServicioTipoAgenciaContratoProveedor {
   servicio_nombre: string;
   servicio_precio_final?: number;
   servicio_precio_final_clp: number;
-  servicio_tipo?: number;
+  servicio_tipo: number;
   servicio_unidad_id?: number;
 
   actividad_descripcion: string;
-  actividad_id?: string;
+  actividad_id: string;
 
   servicio_tipo_moneda_codigo?: string;
   servicio_tipo_moneda_id?: number;

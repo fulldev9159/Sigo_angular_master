@@ -16,6 +16,8 @@ import { FormularioComponent } from '../../components/formulario/formulario.comp
 import { TableServicesComponent } from '../../components/table-services/table-services.component';
 import localeEsCl from '@angular/common/locales/es-CL';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
+import { Observable } from 'rxjs';
+import { ProveedorAgenciaContrato, SessionData } from '@model';
 
 @Component({
   selector: 'zwc-form-cub',
@@ -43,6 +45,12 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
   })
   tableServicios: TableServicesComponent;
 
+  sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
+    .sessionData;
+  proveedorSelected$: Observable<ProveedorAgenciaContrato> =
+    this.cubicacionFacade.proveedorSelected$();
+  carrito$ = this.serviciosFacade.carrito$();
+
   // LOADINGS
   sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
 
@@ -50,7 +58,7 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
     private proveedorFacade: ProveedorFacade,
     private contratoFacade: ContratoFacade,
     private cubicacionFacade: CubicacionFacade,
-    private servicioFacade: ServiciosFacade,
+    private serviciosFacade: ServiciosFacade,
     private loadingFacade: LoadingsFacade
   ) {
     registerLocaleData(localeEsCl, 'es-CL');
@@ -94,9 +102,9 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
       this.cubicacionFacade.resetProveedorSelected();
       this.contratoFacade.resetActividadesContratoProveedor();
       this.contratoFacade.resetTipoServiciosContrato();
-      this.servicioFacade.resetServiciosAgenciaContratoProveedor();
-      this.servicioFacade.resetServicioSelected();
-      this.servicioFacade.resetUnidadesObraServicio();
+      this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+      this.serviciosFacade.resetServicioSelected();
+      this.serviciosFacade.resetUnidadesObraServicio();
 
       this.formulario.formCub
         .get('agencia_id')
@@ -123,9 +131,9 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
       this.cubicacionFacade.resetProveedorSelected();
       this.contratoFacade.resetActividadesContratoProveedor();
       this.contratoFacade.resetTipoServiciosContrato();
-      this.servicioFacade.resetServiciosAgenciaContratoProveedor();
-      this.servicioFacade.resetServicioSelected();
-      this.servicioFacade.resetUnidadesObraServicio();
+      this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+      this.serviciosFacade.resetServicioSelected();
+      this.serviciosFacade.resetUnidadesObraServicio();
 
       this.formulario.formCub
         .get('cmarcoproveedor_id')
@@ -149,9 +157,9 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
       .valueChanges.subscribe(() => {
         this.contratoFacade.resetActividadesContratoProveedor();
         this.contratoFacade.resetTipoServiciosContrato();
-        this.servicioFacade.resetServiciosAgenciaContratoProveedor();
-        this.servicioFacade.resetServicioSelected();
-        this.servicioFacade.resetUnidadesObraServicio();
+        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+        this.serviciosFacade.resetServicioSelected();
+        this.serviciosFacade.resetUnidadesObraServicio();
 
         this.agregarServiciosForm.formFilter
           .get('actividad_id')
@@ -171,9 +179,9 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
       .get('actividad_id')
       .valueChanges.subscribe(() => {
         this.contratoFacade.resetTipoServiciosContrato();
-        this.servicioFacade.resetServiciosAgenciaContratoProveedor();
-        this.servicioFacade.resetServicioSelected();
-        this.servicioFacade.resetUnidadesObraServicio();
+        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+        this.serviciosFacade.resetServicioSelected();
+        this.serviciosFacade.resetUnidadesObraServicio();
 
         this.agregarServiciosForm.formFilter
           .get('tipo_servicio_id')
@@ -189,9 +197,9 @@ export class FormCubContainerComponent implements OnInit, AfterViewInit {
     this.agregarServiciosForm.formFilter
       .get('tipo_servicio_id')
       .valueChanges.subscribe(() => {
-        this.servicioFacade.resetServiciosAgenciaContratoProveedor();
-        this.servicioFacade.resetServicioSelected();
-        this.servicioFacade.resetUnidadesObraServicio();
+        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+        this.serviciosFacade.resetServicioSelected();
+        this.serviciosFacade.resetUnidadesObraServicio();
 
         this.agregarServiciosForm.formFilter
           .get('servicio_cod')
