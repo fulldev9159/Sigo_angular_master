@@ -73,6 +73,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displayAprobarRechazarOperaciones = false;
   displayRechazoOperaciones = false;
   displayConfirmarRechazoObras = false;
+  displaySolicitarInformeTrabajosFinalizados = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -526,6 +527,26 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        // ADMIN SOLICITA AL TRABAJADOR QUE INFORME DE TRABAJOS FINALIZADOS
+        // ES EN LA ETAPA GENERAR NUEVA ACTA
+        // TODO: PENDIENTE CONFIRMAR CUAL SERÁ EL PERMISO
+        const solicitarInformeTrabajosFinalizados = (ot.acciones || []).find(
+          accion => accion.slug === ''
+        );
+
+        if (solicitarInformeTrabajosFinalizados) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Solicitar informe trabajos finalizados',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.displaySolicitarInformeTrabajosFinalizados = true;
+            },
+          });
+        }
+
         return actions;
       },
     },
@@ -893,4 +914,10 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.otFacade.confirmarRechazoObras(this.idOtSelected);
     // TODO CERRAR COSAS
   }
+
+  closeSolicitarInformeTrabajosFinalizados(): void {
+    this.displaySolicitarInformeTrabajosFinalizados = false;
+  }
+
+  solicitarInformeTrabajosFinalizados(): void {}
 }
