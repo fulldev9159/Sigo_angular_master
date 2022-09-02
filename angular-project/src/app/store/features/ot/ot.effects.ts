@@ -763,6 +763,23 @@ export class OtEffects {
     )
   );
 
+  // INFORMAR TRABAJOS FINALIZADOS
+  informarTrabajosFinalizados$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.informarTrabajosFinalizados),
+      concatMap(({ ot_id }) =>
+        this.otService.informarTrabajosFinalizados(ot_id).pipe(
+          map(response =>
+            otActions.informarTrabajosFinalizadosSuccess({ response })
+          ),
+          catchError(err =>
+            of(otActions.informarTrabajosFinalizadosError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -784,7 +801,8 @@ export class OtEffects {
           otActions.AprobarRechazarOperacionesSuccess,
           otActions.confirmarRechazoObrasSuccess,
           otActions.sendGeneracionActaSuccessOLD,
-          otActions.solicitarInformeTrabajosFinalizadosSuccess
+          otActions.solicitarInformeTrabajosFinalizadosSuccess,
+          otActions.informarTrabajosFinalizadosSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -813,7 +831,8 @@ export class OtEffects {
           otActions.AprobarRechazarOperacionesError,
           otActions.confirmarRechazoObrasError,
           otActions.sendGeneracionActaErrorOLD,
-          otActions.solicitarInformeTrabajosFinalizadosError
+          otActions.solicitarInformeTrabajosFinalizadosError,
+          otActions.informarTrabajosFinalizadosError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

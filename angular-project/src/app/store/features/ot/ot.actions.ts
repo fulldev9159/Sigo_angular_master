@@ -956,3 +956,18 @@ export const solicitarInformeTrabajosFinalizadosError = createAction(
   '[OT] GET solicitarInformeTrabajosFinalizados Error',
   props<{ error: any }>()
 );
+
+// SOLICITAR INFORME TRABAJOS FINALIZADOS
+export const informarTrabajosFinalizados = createAction(
+  '[OT] GET informarTrabajosFinalizados',
+  props<{ ot_id: number }>()
+);
+
+export const informarTrabajosFinalizadosSuccess = createAction(
+  '[OT] GET informarTrabajosFinalizados Success',
+  props<{ response: Response<any> }>()
+);
+export const informarTrabajosFinalizadosError = createAction(
+  '[OT] GETinformarTrabajosFinalizados Error',
+  props<{ error: any }>()
+);

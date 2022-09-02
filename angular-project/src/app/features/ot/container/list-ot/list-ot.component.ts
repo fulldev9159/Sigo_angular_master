@@ -18,7 +18,7 @@ import {
 } from '@data';
 import { ConfirmationService } from 'primeng/api';
 import { Observable, of, Subject, Subscription } from 'rxjs';
-import { map, tap, takeUntil } from 'rxjs/operators';
+import { map, tap, takeUntil, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AssignTrabajadorFormComponent } from '../../component/assign-trabajador-form/assign-trabajador-form.component';
 import { RegistrarLibroObraComponent } from '@featureOT/ot/component/registrar-libro-obra/registrar-libro-obra';
@@ -50,6 +50,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
   tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
 
+  comentarios$ = this.otFacade.getComentariosFinalizacionTrabajos$();
+
   responsable: 'TODAS';
   tipoOT: 0;
   selectedIndex = 0;
@@ -74,6 +76,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
   displayRechazoOperaciones = false;
   displayConfirmarRechazoObras = false;
   displaySolicitarInformeTrabajosFinalizados = false;
+  displayInformarTrabajosFinalizados = false;
 
   formRechazoInicialControls = {
     tipo_id: new FormControl(null, [Validators.required]),
@@ -84,6 +87,10 @@ export class ListOtComponent implements OnInit, OnDestroy {
     ]),
   };
   formRechazoIncial: FormGroup = new FormGroup(this.formRechazoInicialControls);
+
+  formTrabajosFinalizados: FormGroup = new FormGroup({
+    informe: new FormControl('', [Validators.required]),
+  });
 
   configTable = {
     header: true,
@@ -547,6 +554,26 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
+        // SUPERVISOR DE TRABAJOS DEBE INGRESAR UN INFORME DE TRABAJOS FINALIZADOS
+        // ESTA ES UNA NUEVA ETAPA OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS
+        // TODO: CONFIRMAR EL NOMBRE DE LA ACCION
+        const informarTrabajosFinalizados = (ot.acciones || []).find(
+          accion => accion.slug === ''
+        );
+
+        if (informarTrabajosFinalizados) {
+          actions.push({
+            icon: 'p-button-icon pi pi-file-excel',
+            class: 'p-button-rounded p-button-success p-mr-2',
+            label: 'Informar trabajos finalizados',
+            onClick: (event: Event, item) => {
+              this.idOtSelected = item.id;
+              this.etapa = item.etapa_slug;
+              this.displayInformarTrabajosFinalizados = true;
+            },
+          });
+        }
+
         return actions;
       },
     },
@@ -640,6 +667,13 @@ export class ListOtComponent implements OnInit, OnDestroy {
             });
           });
         }
+      })
+    );
+
+    this.subscription.add(
+      this.comentarios$.pipe(take(1)).subscribe(comentario => {
+        if (comentario)
+          this.formTrabajosFinalizados.get('informe').setValue(comentario);
       })
     );
   }
@@ -922,5 +956,14 @@ export class ListOtComponent implements OnInit, OnDestroy {
   solicitarInformeTrabajosFinalizados(): void {
     this.otFacade.solicitarInformeTrabajosFinalizados(this.idOtSelected);
     this.displaySolicitarInformeTrabajosFinalizados = false;
+  }
+
+  closeInformarTrabajosFinalizados(): void {
+    this.displayInformarTrabajosFinalizados = false;
+  }
+
+  InformarTrabajosFinalizados(): void {
+    this.otFacade.informarTrabajosFinalizados(this.idOtSelected);
+    this.displayInformarTrabajosFinalizados = false;
   }
 }

@@ -386,3 +386,22 @@
     </button>
   </ng-container>
 </app-modal>
+
+<app-modal [display]="displayInformarTrabajosFinalizados" (CloseEvent)="closeInformarTrabajosFinalizados()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title><i class="pi pi-book"></i>&nbsp;Informar Trabajos Finalizados</ng-container>
+  <ng-container modal-content>
+    <form [formGroup]="formTrabajosFinalizados">
+      <div class="col-12" id="control_observaciones">
+        <br>
+        <textarea formControlName="informe" class="form-control" placeholder="..." name="comentarios" id="comentarios" cols="30" rows="2"></textarea>
+        <br>
+      </div>
+    </form>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeInformarTrabajosFinalizados()">Cancelar</button>
+    <button class="btn btn-primary" (click)="InformarTrabajosFinalizados()">
+      <em class="pi mr-1"></em>Enviar
+    </button>
+  </ng-container>
+</app-modal>

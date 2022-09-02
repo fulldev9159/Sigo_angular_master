@@ -97,7 +97,8 @@ export class AlertMessageActions {
         action === otActions.solicitarPagoSuccess.type ||
         action === otActions.cerrarOTSuccess.type ||
         action === otActions.anularOTSuccess.type ||
-        action === otActions.solicitarInformeTrabajosFinalizadosSuccess.type
+        action === otActions.solicitarInformeTrabajosFinalizadosSuccess.type ||
+        action === otActions.informarTrabajosFinalizadosSuccess.type
       ) {
         this.snackService.showMessage(`Accion realizada con éxito`, 'OK', 3000);
       } else if (
@@ -209,7 +210,8 @@ export class AlertMessageActions {
         action === otActions.anularOTSuccess.type ||
         action === otActions.AprobarRechazarOperacionesSuccess.type ||
         action === otActions.confirmarRechazoObrasSuccess.type ||
-        action === otActions.solicitarInformeTrabajosFinalizadosSuccess.type
+        action === otActions.solicitarInformeTrabajosFinalizadosSuccess.type ||
+        action === otActions.informarTrabajosFinalizadosSuccess.type
       ) {
         this.otFacade.getOts({
           filtro_propietario: 'TODAS',
