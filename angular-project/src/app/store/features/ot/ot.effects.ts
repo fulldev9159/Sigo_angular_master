@@ -744,6 +744,25 @@ export class OtEffects {
     )
   );
 
+  // SOLICITAR INFORME TRABAJOS FINALIZADOS
+  solicitarInformeTrabajosFinalizados$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.solicitarInformeTrabajosFinalizados),
+      concatMap(({ ot_id }) =>
+        this.otService.solicitarInformeTrabajosFinalizados(ot_id).pipe(
+          map(response =>
+            otActions.solicitarInformeTrabajosFinalizadosSuccess({ response })
+          ),
+          catchError(err =>
+            of(
+              otActions.solicitarInformeTrabajosFinalizadosError({ error: err })
+            )
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -764,7 +783,8 @@ export class OtEffects {
           otActions.anularOTSuccess,
           otActions.AprobarRechazarOperacionesSuccess,
           otActions.confirmarRechazoObrasSuccess,
-          otActions.sendGeneracionActaSuccessOLD
+          otActions.sendGeneracionActaSuccessOLD,
+          otActions.solicitarInformeTrabajosFinalizadosSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -792,7 +812,8 @@ export class OtEffects {
           otActions.anularOTError,
           otActions.AprobarRechazarOperacionesError,
           otActions.confirmarRechazoObrasError,
-          otActions.sendGeneracionActaErrorOLD
+          otActions.sendGeneracionActaErrorOLD,
+          otActions.solicitarInformeTrabajosFinalizadosError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

@@ -919,5 +919,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
     this.displaySolicitarInformeTrabajosFinalizados = false;
   }
 
-  solicitarInformeTrabajosFinalizados(): void {}
+  solicitarInformeTrabajosFinalizados(): void {
+    this.otFacade.solicitarInformeTrabajosFinalizados(this.idOtSelected);
+    this.displaySolicitarInformeTrabajosFinalizados = false;
+  }
 }

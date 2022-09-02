@@ -698,4 +698,11 @@ export class OtFacade {
   public getComentariosFinalizacionTrabajos$(): Observable<LastActa> {
     return this.store.select(otSelectors.getComentariosFinalizacionTrabajos);
   }
+
+  // SOLICITAR INFORME TRABAJOS FINALIZADOS
+  public solicitarInformeTrabajosFinalizados(ot_id: number): void {
+    this.store.dispatch(
+      otActions.solicitarInformeTrabajosFinalizados({ ot_id })
+    );
+  }
 }

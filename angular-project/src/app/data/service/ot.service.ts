@@ -336,4 +336,11 @@ export class OTService {
       { ot_id }
     );
   }
+
+  // SOLICITAR INFORME TRABAJOS FINALIZADOS
+  solicitarInformeTrabajosFinalizados(
+    ot_id: number
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}`, { ot_id });
+  }
 }
