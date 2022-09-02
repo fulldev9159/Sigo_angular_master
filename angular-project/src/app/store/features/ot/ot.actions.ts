@@ -612,6 +612,24 @@ export const getUltimoTipoPagoActaSuccess = createAction(
 export const sendGeneracionActa = createAction(
   '[OT] GET sendGeneracionActa',
   props<{
+    request: any;
+  }>()
+);
+
+export const sendGeneracionActaSuccess = createAction(
+  '[OT] GET sendGeneracionActa Success',
+  props<{ response: Response<any> }>()
+);
+
+export const sendGeneracionActaError = createAction(
+  '[OT] GET sendGeneracionActa Error',
+  props<{ error: any }>()
+);
+
+//  ENVIAR GENERACION ACTA OLD
+export const sendGeneracionActaOLD = createAction(
+  '[OT] GET sendGeneracionActaOLD',
+  props<{
     ot_id: number;
     tipo_pago: string;
     detalle: {
@@ -629,13 +647,13 @@ export const sendGeneracionActa = createAction(
   }>()
 );
 
-export const sendGeneracionActaSuccess = createAction(
-  '[OT] GET sendGeneracionActa Success',
+export const sendGeneracionActaSuccessOLD = createAction(
+  '[OT] GET sendGeneracionActaSuccessOLD Success',
   props<{ response: Response<any> }>()
 );
 
-export const sendGeneracionActaError = createAction(
-  '[OT] GET sendGeneracionActa Error',
+export const sendGeneracionActaErrorOLD = createAction(
+  '[OT] GET sendGeneracionActaErrorOLD Error',
   props<{ error: any }>()
 );
 

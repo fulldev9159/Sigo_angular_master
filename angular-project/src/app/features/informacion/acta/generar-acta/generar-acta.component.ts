@@ -526,6 +526,6 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   }
 
   formSubmitted(ot_id: number, tipo_pago: string, detalle: Detalle): void {
-    this.otFacade.sendGeneracionActa(ot_id, tipo_pago, detalle);
+    this.otFacade.sendGeneracionActaOLD(ot_id, tipo_pago, detalle);
   }
 }

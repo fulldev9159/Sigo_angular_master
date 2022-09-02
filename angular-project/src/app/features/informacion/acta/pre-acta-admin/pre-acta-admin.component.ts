@@ -53,6 +53,10 @@ export class PreActaAdminComponent implements OnInit, OnDestroy {
     );
   }
 
+  enviarActa(): void {
+    this.otFacade.sendGeneracionActa(1);
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

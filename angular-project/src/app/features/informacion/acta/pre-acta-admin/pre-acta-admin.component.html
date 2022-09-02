@@ -87,3 +87,12 @@
   </div>
   <div class="ccol-md-4 col-xs-12"></div>
 </div>
+
+
+<div class="col-xs-12 col-md-12">
+  <div style="text-align: right">
+    <button class="btn btn-primary" (click)="enviarActa()" [class.disabled]="!formComentario.valid">
+      <em class="pi pi-send mr-1"></em>Enviar
+    </button>
+  </div>
+</div>

@@ -498,10 +498,25 @@ export class OtEffects {
   SendGeneracionActa$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.sendGeneracionActa),
-      concatMap(({ ot_id, tipo_pago, detalle }) =>
-        this.actaService.sendGeneracionActa(ot_id, tipo_pago, detalle).pipe(
+      concatMap(({ request }) =>
+        this.actaService.sendGeneracionActa(request).pipe(
           map(response => otActions.sendGeneracionActaSuccess({ response })),
           catchError(error => of(otActions.sendGeneracionActaError({ error })))
+        )
+      )
+    )
+  );
+
+  // SEND GENERACION ACTA
+  SendGeneracionActaOLD$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.sendGeneracionActaOLD),
+      concatMap(({ ot_id, tipo_pago, detalle }) =>
+        this.actaService.sendGeneracionActaOLD(ot_id, tipo_pago, detalle).pipe(
+          map(response => otActions.sendGeneracionActaSuccessOLD({ response })),
+          catchError(error =>
+            of(otActions.sendGeneracionActaErrorOLD({ error }))
+          )
         )
       )
     )
@@ -748,7 +763,8 @@ export class OtEffects {
           otActions.cerrarOTSuccess,
           otActions.anularOTSuccess,
           otActions.AprobarRechazarOperacionesSuccess,
-          otActions.confirmarRechazoObrasSuccess
+          otActions.confirmarRechazoObrasSuccess,
+          otActions.sendGeneracionActaSuccessOLD
         ),
         tap(action => {
           this.alertMessageAction.messageActions(
@@ -775,7 +791,8 @@ export class OtEffects {
           otActions.AprobarRechazarSolicitudPagoError,
           otActions.anularOTError,
           otActions.AprobarRechazarOperacionesError,
-          otActions.confirmarRechazoObrasError
+          otActions.confirmarRechazoObrasError,
+          otActions.sendGeneracionActaErrorOLD
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

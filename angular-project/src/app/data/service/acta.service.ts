@@ -59,7 +59,7 @@ export class ActaService {
     );
   }
 
-  sendGeneracionActa(
+  sendGeneracionActaOLD(
     ot_id: number,
     tipo_pago: string,
     detalle: {
@@ -85,6 +85,10 @@ export class ActaService {
       tipo_pago,
       detalle,
     });
+  }
+
+  sendGeneracionActa(request: any): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}`, request);
   }
 
   // ACEPTAR O RECHAZAR ACTA

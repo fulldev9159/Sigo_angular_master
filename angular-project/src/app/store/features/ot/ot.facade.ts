@@ -451,7 +451,12 @@ export class OtFacade {
   }
 
   // SEND GENERACION ACTA
-  public sendGeneracionActa(
+  public sendGeneracionActa(request: any): void {
+    this.store.dispatch(otActions.sendGeneracionActa({ request }));
+  }
+
+  // SEND GENERACION ACTA OLD
+  public sendGeneracionActaOLD(
     ot_id: number,
     tipo_pago: string,
     detalle: {
@@ -468,7 +473,7 @@ export class OtFacade {
     }
   ): void {
     this.store.dispatch(
-      otActions.sendGeneracionActa({ ot_id, tipo_pago, detalle })
+      otActions.sendGeneracionActaOLD({ ot_id, tipo_pago, detalle })
     );
   }
 
