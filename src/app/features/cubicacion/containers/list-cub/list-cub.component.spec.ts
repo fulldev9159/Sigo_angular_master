@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { listaCubicacionesMOCK200ok } from '@mocksOT';
 import { provideMockStore } from '@ngrx/store/testing';
 import { listarCubicaciones } from '@storeOT/cubicacion/cubicacion.selectors';
+import { sendingGetCubicaciones } from '@storeOT/loadings/loadings.selectors';
 
 import { ListCubComponent } from './list-cub.component';
 let initialState: any = { example: [] };
@@ -23,6 +24,10 @@ describe('ListCubComponent', () => {
             {
               selector: listarCubicaciones,
               value: listaCubicacionesMOCK200ok.data.items,
+            },
+            {
+              selector: sendingGetCubicaciones,
+              value: false,
             },
           ],
         }),

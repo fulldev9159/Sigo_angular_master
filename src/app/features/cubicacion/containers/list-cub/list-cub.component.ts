@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cubicacion } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { MenuItem } from 'primeng/api';
 import { map, Observable } from 'rxjs';
 
@@ -20,7 +21,13 @@ export class ListCubComponent implements OnInit {
       })
     );
 
-  constructor(private cubicacionFacade: CubicacionFacade) {}
+  // LOADINGS
+  getCubicacioneSending$ = this.loadingFacade.sendingGetCubicaciones$();
+
+  constructor(
+    private cubicacionFacade: CubicacionFacade,
+    private loadingFacade: LoadingsFacade
+  ) {}
 
   ngOnInit(): void {
     this.navbarHeader = [
@@ -40,5 +47,9 @@ export class ListCubComponent implements OnInit {
         routerLink: ['/cubicacion/form-cub'],
       },
     ];
+  }
+
+  getcubs() {
+    this.cubicacionFacade.listarCubicaciones();
   }
 }

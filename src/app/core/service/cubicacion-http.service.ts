@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import { Response, Cubicacion } from '@model';
-import { Observable } from 'rxjs';
+import { delay, Observable } from 'rxjs';
 import {
   RequestCreateCubicacion,
   RequestEditCubicacion,
@@ -39,5 +39,6 @@ export class CubicacionHttpService {
       `${this.API_URL}/cubicacion/table_cubicaciones/get`,
       {}
     );
+    // .pipe(delay(1500));
   }
 }

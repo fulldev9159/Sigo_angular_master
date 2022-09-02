@@ -78,4 +78,9 @@ export class LoadingsFacade {
   public sendingSaveCubicacion$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingSaveCubicacion);
   }
+
+  // GET CUBICACIONES
+  public sendingGetCubicaciones$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetCubicaciones);
+  }
 }
