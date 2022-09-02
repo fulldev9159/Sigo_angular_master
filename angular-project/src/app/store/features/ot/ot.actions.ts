@@ -908,3 +908,18 @@ export const confirmarRechazoObrasError = createAction(
   '[OT] GET confirmarRechazoObras Error',
   props<{ error: any }>()
 );
+
+//  COMENTARIOS FINALIZACION DE TRABAJOS
+export const getComentariosFinalizacionTrabajos = createAction(
+  '[OT] GET getComentariosFinalizacionTrabajos',
+  props<{ ot_id: number }>()
+);
+
+export const getComentariosFinalizacionTrabajosSuccess = createAction(
+  '[OT] GET getComentariosFinalizacionTrabajos Success',
+  props<{ response: Response<any> }>()
+);
+export const getComentariosFinalizacionTrabajosError = createAction(
+  '[OT] GET getComentariosFinalizacionTrabajos Error',
+  props<{ error: any }>()
+);

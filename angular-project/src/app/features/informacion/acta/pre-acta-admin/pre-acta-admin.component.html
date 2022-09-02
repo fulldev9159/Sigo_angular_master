@@ -65,6 +65,16 @@
   <div class="col-md-4 col-xs-12"></div>
 </div>
 
+<form [formGroup]="formComentario">
+  <div class="col-12" id="control_observaciones">
+    <br>
+    <label for="">Comentarios trabajos terminados</label>
+    <textarea formControlName="comentarios" class="form-control" placeholder="..." name="comentarios" id="comentarios" cols="30" rows="2"></textarea>
+    <br>
+  </div>
+</form>
+
+
 <div class="row" id="table-totales">
   <div class="col-md-4 col-xs-12"></div>
   <div class="col-md-4 col-xs-12">

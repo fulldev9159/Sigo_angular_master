@@ -710,6 +710,25 @@ export class OtEffects {
     )
   );
 
+  // COMENTARIOS TRABAJOS FINALIZADOS
+  getComentariosTrabajosFinalizados$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getComentariosFinalizacionTrabajos),
+      concatMap(({}) =>
+        this.actaService.getComentatiosfinalizacionTrabajos(1).pipe(
+          map(response =>
+            otActions.getComentariosFinalizacionTrabajosSuccess({ response })
+          ),
+          catchError(err =>
+            of(
+              otActions.getComentariosFinalizacionTrabajosError({ error: err })
+            )
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>

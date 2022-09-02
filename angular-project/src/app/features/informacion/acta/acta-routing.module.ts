@@ -8,6 +8,7 @@ import { TiposPagoResolver } from './resolvers/tipos-pago.resolver';
 import { DetalleServicioResolver } from './resolvers/detalle-servicio.resolver';
 import { DetalleUobResolver } from './resolvers/detalle-uob.resolver';
 import { LastActaResolver } from './resolvers/last-acta.resolver';
+import { ComentariosFinalizacionTrabajosResolver } from './resolvers/comentarios-finalizacion-trabajos.resolver';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       detalleServicio: DetalleServicioResolver,
       detalleUob: DetalleUobResolver,
       lastActa: LastActaResolver,
+      comentarios: ComentariosFinalizacionTrabajosResolver,
     },
   },
 ];

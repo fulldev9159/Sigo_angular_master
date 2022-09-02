@@ -262,3 +262,8 @@ export const quienAutorizoPago = createSelector(
   selectOt,
   (state: fromOt.StateOt) => state.quienAutorizoPago
 );
+
+export const getComentariosFinalizacionTrabajos = createSelector(
+  selectOt,
+  (state: fromOt.StateOt) => state.comentariosFinalizacionTrabajos
+);

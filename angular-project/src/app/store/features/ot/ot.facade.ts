@@ -669,4 +669,28 @@ export class OtFacade {
   public confirmarRechazoObras(ot_id: number): void {
     this.store.dispatch(otActions.confirmarRechazoObras({ ot_id }));
   }
+
+  // GET COMENTARIOS FINALIZACION TRABAJOS
+  public getComentariosFinalizacionTrabajos(ot_id: number): void {
+    this.store.dispatch(
+      otActions.getComentariosFinalizacionTrabajos({ ot_id })
+    );
+  }
+  public getComentariosFinalizacionTrabajosSuccess(
+    response: Response<any>
+  ): void {
+    this.store.dispatch(
+      otActions.getComentariosFinalizacionTrabajosSuccess({ response })
+    );
+  }
+
+  public getComentariosFinalizacionTrabajosError(error: any): void {
+    this.store.dispatch(
+      otActions.getComentariosFinalizacionTrabajosError({ error })
+    );
+  }
+
+  public getComentariosFinalizacionTrabajos$(): Observable<LastActa> {
+    return this.store.select(otSelectors.getComentariosFinalizacionTrabajos);
+  }
 }

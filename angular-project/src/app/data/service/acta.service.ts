@@ -106,4 +106,9 @@ export class ActaService {
       request
     );
   }
+
+  // OBTENER COMENTARIOS FINALIZACION DE TRABAJOS
+  getComentatiosfinalizacionTrabajos(request: any): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}`, request);
+  }
 }
