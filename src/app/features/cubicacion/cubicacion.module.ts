@@ -13,6 +13,7 @@ import { AgregarServiciosFormComponent } from './components/agregar-servicios-fo
 import { TableServicesComponent } from './components/table-services/table-services.component';
 import { BaseTdComponent } from './components/table-services/components/base-td/base-td.component';
 import { MultiTdComponent } from './components/table-services/components/multi-td/multi-td.component';
+import { TableListComponent } from './components/table-list/table-list.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MultiTdComponent } from './components/table-services/components/multi-t
     TableServicesComponent,
     BaseTdComponent,
     MultiTdComponent,
+    TableListComponent,
   ],
   imports: [
     CommonModule,
