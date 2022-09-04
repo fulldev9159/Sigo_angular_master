@@ -72,6 +72,7 @@ export class TableListComponent implements OnInit, OnDestroy {
     // TODO: SE PUEDE UTILIZAR UNA SELECCION MULTIPLE EN LOS SELECTORES
     // TODO: PODER FILTRAR POR MÁS DE UN ELEMENTO
     // TODO: AGREGAR FILTROS DE FECHA Y PRECIO
+    // TODO: MOVER TODO LO DE FILTROS A OTRO COMPONENTE. AVERIGUAR COMO HACER LA INTERACCION
     this.subscription.add(
       this.formFilter
         .get('cubicacion_id')

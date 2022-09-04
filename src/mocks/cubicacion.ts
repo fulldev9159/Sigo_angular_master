@@ -21,8 +21,8 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
   data: {
     items: [
       {
-        cubicacion_id: 1,
-        cubicacion_nombre: 'ZZZZZZZ',
+        cubicacion_id: 2,
+        cubicacion_nombre: 'AAAA',
         cubicacion_descripcion: 's',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,
@@ -55,8 +55,8 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
         total_tipo_moneda: 'CLP',
       },
       {
-        cubicacion_id: 2,
-        cubicacion_nombre: 'AAAAAAAA',
+        cubicacion_id: 1,
+        cubicacion_nombre: 'ZZZZZ',
         cubicacion_descripcion: 'c',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,

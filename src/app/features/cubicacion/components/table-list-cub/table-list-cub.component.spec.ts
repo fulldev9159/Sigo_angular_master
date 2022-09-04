@@ -46,12 +46,121 @@ describe('TableListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('if put "D" in search by nombre should return 2 item in the list', (done: DoneFn) => {
+  it('if put "D" in search by nombre should return 3 item in the list', (done: DoneFn) => {
     component.formFilter.get('nombre').setValue('D');
     fixture.detectChanges();
     component.cubicaciones$.subscribe({
       next: res => {
         expect(res.length).toEqual(3);
+        done();
+      },
+    });
+  });
+
+  it('if put "" after search "D" in search by nombre should return 8 item in the list', (done: DoneFn) => {
+    component.formFilter.get('nombre').setValue('D');
+    fixture.detectChanges();
+    component.formFilter.get('nombre').setValue('');
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(8);
+        done();
+      },
+    });
+  });
+
+  it('if put "2" in search by id should return 1 item in the list', (done: DoneFn) => {
+    component.formFilter.get('cubicacion_id').setValue(2);
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(1);
+        done();
+      },
+    });
+  });
+
+  it('if put "" after search "2" in search by id should return 8 item in the list', (done: DoneFn) => {
+    component.formFilter.get('cubicacion_id').setValue(2);
+    fixture.detectChanges();
+    component.formFilter.get('cubicacion_id').setValue('');
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(8);
+        done();
+      },
+    });
+  });
+
+  it('if put "BUCLE" in search by contrato marco should return 6 item in the list', (done: DoneFn) => {
+    component.formFilter.get('contrato_marco').setValue('BUCLE');
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(6);
+        done();
+      },
+    });
+  });
+
+  it('if put "" after search "BUCLE" in search by contrato marco should return 8 item in the list', (done: DoneFn) => {
+    component.formFilter.get('contrato_marco').setValue('BUCLE');
+    fixture.detectChanges();
+    component.formFilter.get('contrato_marco').setValue('');
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(8);
+        done();
+      },
+    });
+  });
+
+  it('if put "FULL" in search by contrato marco should return 3 item in the list', (done: DoneFn) => {
+    component.formFilter.get('tipo_cubicacion').setValue('Full');
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(3);
+        done();
+      },
+    });
+  });
+
+  it('if put "" after search "FULL" in search by contrato marco should return 8 item in the list', (done: DoneFn) => {
+    component.formFilter.get('tipo_cubicacion').setValue('Full');
+    fixture.detectChanges();
+    component.formFilter.get('tipo_cubicacion').setValue('');
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(8);
+        done();
+      },
+    });
+  });
+
+  it('if put "APOQUINDO" in search by contrato marco should return 6 item in the list', (done: DoneFn) => {
+    component.formFilter.get('agencia').setValue('APOQUINDO');
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(6);
+        done();
+      },
+    });
+  });
+
+  it('if put "" after search "APOQUINDO" in search by contrato marco should return 8 item in the list', (done: DoneFn) => {
+    component.formFilter.get('agencia').setValue('APOQUINDO');
+    fixture.detectChanges();
+    component.formFilter.get('agencia').setValue('');
+    fixture.detectChanges();
+    component.cubicaciones$.subscribe({
+      next: res => {
+        expect(res.length).toEqual(8);
         done();
       },
     });

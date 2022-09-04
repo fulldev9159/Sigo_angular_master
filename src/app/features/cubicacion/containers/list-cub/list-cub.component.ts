@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Cubicacion } from '@model';
-import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
-import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { MenuItem } from 'primeng/api';
-import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'zwc-list-cub',
