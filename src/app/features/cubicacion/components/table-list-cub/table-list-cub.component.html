@@ -61,7 +61,7 @@
                 <th style="width:100px">
 
                 </th>
-                <th style="width:200px">
+                <th style="width:240px">
 
                 </th>
             </tr>
@@ -90,7 +90,7 @@
                 </th>
                 <th style="width:100px" pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon>
                 </th>
-                <th style="width:200px">Operaciones</th>
+                <th style="width:240px">Operaciones</th>
             </tr>
 
         </ng-template>
@@ -105,7 +105,14 @@
                 <td style="width:200px">{{item.creador_usuario_nombre}}</td>
                 <td style="width:200px">{{item.cubicacion_fecha_creacion}}</td>
                 <td style="width:100px">{{item.total}}</td>
-                <td style="width:200px"> </td>
+                <td style="width:240px">
+                    <div class="ui icon buttons mini basic ">
+                      <button class="ui button generic-color "> Detalles </button>
+                      <button class="ui button generic-color"> Clonar </button>
+                    <button class="ui button generic-color" style="height: 100%;" > Editar </button>
+                    <button class="ui button eliminar-color" style="height: 100%;" ></button>
+                </div>
+                </td>
             </tr>
         </ng-template>
 
