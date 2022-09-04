@@ -46,7 +46,7 @@ import {
   getUnidadesObraServicio,
 } from '@storeOT/servicios/servicios.selectors';
 import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
-import { AgregarServiciosFormComponent } from '../../components/agregar-servicios-form/agregar-servicios-form.component';
+import { FormAgregarServiciosComponent } from '../../../../shared/form-agregar-servicios/form-agregar-servicios.component';
 import { FormularioComponent } from '../../components/formulario/formulario.component';
 import { TableServicesComponent } from '../../components/table-services/table-services.component';
 let initialState: any = { tipoCubicaciones: [] };
@@ -70,7 +70,7 @@ describe('FormCubContainerComponent', () => {
         FormCubContainerComponent,
         FormularioComponent,
         TableServicesComponent,
-        AgregarServiciosFormComponent,
+        FormAgregarServiciosComponent,
       ],
       providers: [
         { provide: LOCALE_ID, useValue: 'es-CL' },

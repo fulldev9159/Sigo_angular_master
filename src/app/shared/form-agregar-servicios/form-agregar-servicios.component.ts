@@ -49,12 +49,12 @@ interface Dropdown {
  *     - Actividades de un contrato/agencia/proveedor (NGRX)
  */
 @Component({
-  selector: 'zwc-agregar-servicios-form',
-  templateUrl: './agregar-servicios-form.component.html',
+  selector: 'zwc-form-agregar-servicios',
+  templateUrl: './form-agregar-servicios.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./agregar-servicios-form.component.scss'],
+  styleUrls: ['./form-agregar-servicios.component.scss'],
 })
-export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
+export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
   // DATOS A USAR
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade

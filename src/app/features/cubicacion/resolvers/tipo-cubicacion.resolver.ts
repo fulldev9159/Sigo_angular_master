@@ -7,7 +7,6 @@ import {
 import { Response, TipoCubicacion } from '@model';
 import { CubicacionHttpService } from '@services';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
-import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

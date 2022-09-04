@@ -43,11 +43,11 @@ import {
 } from '@storeOT/servicios/servicios.selectors';
 import { FormularioService } from 'src/app/core/service/formulario.service';
 
-import { AgregarServiciosFormComponent } from './agregar-servicios-form.component';
+import { FormAgregarServiciosComponent } from './form-agregar-servicios.component';
 
 describe('AgregarServiciosFormComponent', () => {
-  let component: AgregarServiciosFormComponent;
-  let fixture: ComponentFixture<AgregarServiciosFormComponent>;
+  let component: FormAgregarServiciosComponent;
+  let fixture: ComponentFixture<FormAgregarServiciosComponent>;
   let initialState: any = { example: [] };
   let contratoFacade: ContratoFacade;
   let cubicacionFacade: CubicacionFacade;
@@ -59,7 +59,7 @@ describe('AgregarServiciosFormComponent', () => {
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [StoreModule.forRoot({}), FormsModule, ReactiveFormsModule],
-      declarations: [AgregarServiciosFormComponent],
+      declarations: [FormAgregarServiciosComponent],
       providers: [
         provideMockStore({
           initialState,
@@ -180,7 +180,7 @@ describe('AgregarServiciosFormComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AgregarServiciosFormComponent);
+    fixture = TestBed.createComponent(FormAgregarServiciosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 

@@ -8,6 +8,7 @@ import { ContentLayoutComponent } from '../core/layout/content-layout/content-la
 import { InputTextComponent } from './input-text/input-text.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdropdownComponent } from './pdropdown/pdropdown.component';
+import { FormAgregarServiciosComponent } from './form-agregar-servicios/form-agregar-servicios.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { PdropdownComponent } from './pdropdown/pdropdown.component';
     ContentLayoutComponent,
     InputTextComponent,
     PdropdownComponent,
+    FormAgregarServiciosComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { PdropdownComponent } from './pdropdown/pdropdown.component';
     ContentLayoutComponent,
     InputTextComponent,
     PdropdownComponent,
+    FormAgregarServiciosComponent,
   ],
 })
 export class SharedModule {
