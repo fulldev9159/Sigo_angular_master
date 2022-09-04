@@ -6,20 +6,14 @@ import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { filter, map, Observable, Subscription, take } from 'rxjs';
 
 @Component({
-  selector: 'zwc-table-list',
-  templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.scss'],
+  selector: 'zwc-table-list-cub',
+  templateUrl: './table-list-cub.component.html',
+  styleUrls: ['./table-list-cub.component.scss'],
 })
 export class TableListComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  cubicaciones$: Observable<Cubicacion[]> = this.cubicacionFacade
-    .listarCubicaciones$()
-    .pipe(
-      map(values => {
-        let tmp = [...values];
-        return tmp.sort((a, b) => (a.cubicacion_id > b.cubicacion_id ? 1 : -1));
-      })
-    );
+  cubicaciones$: Observable<Cubicacion[]> =
+    this.cubicacionFacade.listarCubicaciones$();
 
   // LOADINGS
   getCubicacioneSending$ = this.loadingFacade.sendingGetCubicaciones$();
@@ -45,22 +39,9 @@ export class TableListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.formFilter.get('nombre').valueChanges.subscribe(nombre => {
-        this.cubicaciones$ = this.cubicacionFacade.listarCubicaciones$().pipe(
-          map(values => {
-            let tmp = [...values];
-            return tmp.sort((a, b) =>
-              a.cubicacion_id > b.cubicacion_id ? 1 : -1
-            );
-          })
-        );
+        this.cubicaciones$ = this.cubicacionFacade.listarCubicaciones$();
         if (nombre !== undefined && nombre) {
           this.cubicaciones$ = this.cubicacionFacade.listarCubicaciones$().pipe(
-            map(values => {
-              let tmp = [...values];
-              return tmp.sort((a, b) =>
-                a.cubicacion_id > b.cubicacion_id ? 1 : -1
-              );
-            }),
             map(values =>
               values.filter(value => {
                 const pattern = new RegExp(`^${nombre}`, 'g');

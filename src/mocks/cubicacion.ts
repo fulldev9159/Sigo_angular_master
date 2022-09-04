@@ -22,7 +22,7 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
     items: [
       {
         cubicacion_id: 1,
-        cubicacion_nombre: 'Test Operaciones',
+        cubicacion_nombre: 'ZZZZZZZ',
         cubicacion_descripcion: 's',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,
@@ -56,7 +56,7 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
       },
       {
         cubicacion_id: 2,
-        cubicacion_nombre: 'Revision planing',
+        cubicacion_nombre: 'AAAAAAAA',
         cubicacion_descripcion: 'c',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,
@@ -90,7 +90,7 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
       },
       {
         cubicacion_id: 3,
-        cubicacion_nombre: 'wer',
+        cubicacion_nombre: 'DDDDDDD',
         cubicacion_descripcion: 'wer',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,
@@ -124,7 +124,7 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
       },
       {
         cubicacion_id: 4,
-        cubicacion_nombre: 'póik´pkl',
+        cubicacion_nombre: 'QQQQQQQQ',
         cubicacion_descripcion: 'pklñm',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,
@@ -159,7 +159,7 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
       },
       {
         cubicacion_id: 5,
-        cubicacion_nombre: 'a',
+        cubicacion_nombre: 'QQWSSAS',
         cubicacion_descripcion: '',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,
@@ -193,7 +193,7 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
       },
       {
         cubicacion_id: 6,
-        cubicacion_nombre: 'a',
+        cubicacion_nombre: 'aAAAS',
         cubicacion_descripcion: '',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,
@@ -227,7 +227,7 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
       },
       {
         cubicacion_id: 7,
-        cubicacion_nombre: 'as',
+        cubicacion_nombre: 'DDSDSD',
         cubicacion_descripcion: '',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,
@@ -261,7 +261,7 @@ export let listaCubicacionesMOCK200ok: Response<{ items: Cubicacion[] }> = {
       },
       {
         cubicacion_id: 8,
-        cubicacion_nombre: 'a',
+        cubicacion_nombre: 'ddddd',
         cubicacion_descripcion: '',
         cubicacion_fecha_creacion: null,
         creador_usuario_id: 2,

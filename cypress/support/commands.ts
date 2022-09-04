@@ -68,6 +68,7 @@ declare namespace Cypress {
     _select_dropdown(selector: string, item: string): void;
     _check_table_cub_service_uo(servicio_uo: DATA_TABLE_SERVICE_UO): void;
     _check_table_cub_uo(uo: DATA_TABLE_UO): void;
+    _filter_table(name: string, search: string): void;
   }
 }
 Cypress.Commands.add('_login', (username, password) => {
@@ -145,4 +146,8 @@ Cypress.Commands.add('_check_table_cub_uo', uo => {
     });
   cy.get(fila).eq(4).contains(uo.uo_precio);
   cy.get(fila).eq(5).contains(uo.uo_total);
+});
+
+Cypress.Commands.add('_filter_table', (name, search) => {
+  cy.get(`input[name='${name}']`).type(`{del}${search}`);
 });

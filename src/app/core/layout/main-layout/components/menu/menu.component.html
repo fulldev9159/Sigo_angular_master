@@ -33,7 +33,7 @@
        </div>
         <ul class="collapse list-unstyled" id="cubSub">
           <li *ngxPermissionsOnly="['CUBICACION_LISTAR']" routerLinkActive="active-item">
-            <a [routerLink]="['cubicacion']" class="submenu-a">Listar Cubicaciones</a>
+            <a [routerLink]="['cubicacion']" class="submenu-a" id="listar-cubicacion-sidebar">Listar Cubicaciones</a>
           </li>
           <li *ngxPermissionsOnly="['CUBICACION_CREAR']"  routerLinkActive="active-item" id="listarCubSubMenu">
             <a [routerLink]="['/cubicacion/form-cub']" class="submenu-a" id="crear-cubicacion-sidebar">Crear Cubicación</a>
