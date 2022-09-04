@@ -51,7 +51,7 @@ describe('TableListComponent', () => {
     fixture.detectChanges();
     component.cubicaciones$.subscribe({
       next: res => {
-        expect(res.length).toEqual(2);
+        expect(res.length).toEqual(3);
         done();
       },
     });

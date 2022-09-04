@@ -1,99 +1,118 @@
- <!-- <pre>
+<!-- <pre>
             {{cubicaciones$|async|json}}
         </pre> -->
 
-        <!-- TODO: Agregar lazy loading cuando se tenga paginación desde el endpoint
+<!-- TODO: Agregar lazy loading cuando se tenga paginación desde el endpoint
         [lazy]="true" 
         [loading]="getCubicacioneSending$|async" 
         [totalRecords]="(cubicaciones$|async).length" -->
 <form [formGroup]="formFilter">
-    <p-table
-    #dt 
-    [value]="cubicaciones$|async" 
-    dataKey="id" 
-    styleClass="p-datatable-sm p-datatable-gridlines" 
-    responsiveLayout="scroll"
-    [paginator]="true" 
-    [rows]="10" 
-    scrollDirection="both"
-    [scrollable]="true" 
-    [globalFilterFields]="['nombre']"
-    >
-    <ng-template pTemplate="caption">
-        <div class="flex">
-            <span class="p-input-icon-left ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
-            </span>
-        </div>
-    </ng-template>
+    <p-table #dt [value]="cubicaciones$|async" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines"
+        responsiveLayout="scroll" [paginator]="true" [rows]="10" scrollDirection="both" [scrollable]="true"
+        [globalFilterFields]="['nombre']">
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th pFrozenColumn style="width:80px">
-                    <input type="text" style="width: 100%;" >
+                    <input type="number" style="width: 100%;" formControlName="cubicacion_id">
                 </th>
-                <th  style="width:200px">
+                <th style="width:200px">
                     <input type="text" style="width: 100%;" formControlName="nombre" name="filter-nombre-cubicacion">
                 </th>
                 <th style="width:200px"></th>
-                <th  style="width:200px">
-                    <input type="text" style="width: 100%;">
+                <th style="width:200px">
+                    <select name="" id="" formControlName="tipo_cubicacion">
+                        <option value=""></option>
+                        <ng-container *ngFor="let item of tipo_cubicacion_filter">
+                            <option [value]="item">{{item}}</option>
+                        </ng-container>
+                    </select>
                 </th>
-                <th  style="width:200px">
-                    <input type="text" style="width: 100%;">
+                <th style="width:200px">
+                    <select name="" id="" formControlName="contrato_marco">
+                        <option value=""></option>
+                        <ng-container *ngFor="let item of contratos_marcos_filter">
+                            <option [value]="item">{{item}}</option>
+                        </ng-container>
+                    </select>
                 </th>
-                <th  style="width:200px">
-                    <input type="text" style="width: 100%;">
+                <th style="width:200px">
+                    <select name="" id="" formControlName="agencia">
+                        <option value=""></option>
+                        <ng-container *ngFor="let item of agencias_filter">
+                            <option [value]="item">{{item}}</option>
+                        </ng-container>
+                    </select>
                 </th>
-                <th  style="width:200px">
-                    <input type="text" style="width: 100%;">
+                <th style="width:200px">
+
                 </th>
-                <th  style="width:200px">
-                    <input type="text" style="width: 100%;">
+                <th style="width:200px">
+
                 </th>
-                <th  style="width:100px">
-                    <input type="text" style="width: 100%;">
+                <th style="width:100px">
+
                 </th>
-                <th  style="width:200px">
-                   
+                <th style="width:200px">
+
                 </th>
             </tr>
             <tr>
-                <th style="width:80px" pSortableColumn="cubicacion_id" pFrozenColumn>ID <p-sortIcon field="cubicacion_id"></p-sortIcon></th>
-                <th  style="width:200px" pSortableColumn="cubicacion_nombre">Nombre <p-sortIcon field="cubicacion_nombre"></p-sortIcon></th>
-                <th style="width:200px" >Descripcion</th>
-                <th  style="width:200px" pSortableColumn="tipo_cubicacion_descripcion">Tipo Cubicación  <p-sortIcon field="tipo_cubicacion_descripcion"></p-sortIcon></th>
-                <th  style="width:200px" pSortableColumn="contrato_marco_nombre">Contrato Marco  <p-sortIcon field="contrato_marco_nombre"></p-sortIcon></th>
-                <th  style="width:200px" pSortableColumn="agencia_nombre">Agencia  <p-sortIcon field="agencia_nombre"></p-sortIcon></th>
-                <th  style="width:200px" pSortableColumn="creador_usuario_nombre">Creado Por  <p-sortIcon field="creador_usuario_nombre"></p-sortIcon></th>
-                <th  style="width:200px" pSortableColumn="cubicacion_fecha_creacion" >Fecha creación  <p-sortIcon field="cubicacion_fecha_creacion"></p-sortIcon></th>
-                <th  style="width:100px" pSortableColumn="total">Total  <p-sortIcon field="total"></p-sortIcon></th>
-                <th  style="width:200px" >Operaciones</th>
+                <th style="width:80px" pSortableColumn="cubicacion_id" pFrozenColumn>ID <p-sortIcon
+                        field="cubicacion_id"></p-sortIcon>
+                </th>
+                <th style="width:200px" pSortableColumn="cubicacion_nombre">Nombre <p-sortIcon
+                        field="cubicacion_nombre"></p-sortIcon>
+                </th>
+                <th style="width:200px">Descripcion</th>
+                <th style="width:200px" pSortableColumn="tipo_cubicacion_descripcion">Tipo Cubicación <p-sortIcon
+                        field="tipo_cubicacion_descripcion"></p-sortIcon>
+                </th>
+                <th style="width:200px" pSortableColumn="contrato_marco_nombre">Contrato Marco <p-sortIcon
+                        field="contrato_marco_nombre"></p-sortIcon>
+                </th>
+                <th style="width:200px" pSortableColumn="agencia_nombre">Agencia <p-sortIcon field="agencia_nombre">
+                    </p-sortIcon>
+                </th>
+                <th style="width:200px" pSortableColumn="creador_usuario_nombre">Creado Por <p-sortIcon
+                        field="creador_usuario_nombre"></p-sortIcon>
+                </th>
+                <th style="width:200px" pSortableColumn="cubicacion_fecha_creacion">Fecha creación <p-sortIcon
+                        field="cubicacion_fecha_creacion"></p-sortIcon>
+                </th>
+                <th style="width:100px" pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon>
+                </th>
+                <th style="width:200px">Operaciones</th>
             </tr>
-            
+
         </ng-template>
         <ng-template pTemplate="body" let-item>
             <tr>
-                <td  style="width:80px" pFrozenColumn>{{item.cubicacion_id}}</td>
-                <td style="width:200px" >{{item.cubicacion_nombre}}</td>
-                <td style="width:200px" >{{item.cubicacion_descripcion}}</td>
-                <td style="width:200px" >{{item.tipo_cubicacion_descripcion}}</td>
-                <td style="width:200px" >{{item.contrato_marco_nombre}}</td>
-                <td style="width:200px" >{{item.agencia_nombre}}</td>
-                <td style="width:200px" >{{item.creador_usuario_nombre}}</td>
-                <td style="width:200px" >{{item.cubicacion_fecha_creacion}}</td>
-                <td style="width:100px" >{{item.total}}</td>
-                <td  style="width:200px"> </td>
+                <td style="width:80px" pFrozenColumn>{{item.cubicacion_id}}</td>
+                <td style="width:200px">{{item.cubicacion_nombre}}</td>
+                <td style="width:200px">{{item.cubicacion_descripcion}}</td>
+                <td style="width:200px">{{item.tipo_cubicacion_descripcion}}</td>
+                <td style="width:200px">{{item.contrato_marco_nombre}}</td>
+                <td style="width:200px">{{item.agencia_nombre}}</td>
+                <td style="width:200px">{{item.creador_usuario_nombre}}</td>
+                <td style="width:200px">{{item.cubicacion_fecha_creacion}}</td>
+                <td style="width:100px">{{item.total}}</td>
+                <td style="width:200px"> </td>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="summary">
             <div class="p-d-flex p-ai-center p-jc-between">
-              En total hay {{(cubicaciones$|async) ? (cubicaciones$|async).length : 0 }} elementos.
+                En total hay {{(cubicaciones$|async) ? (cubicaciones$|async).length : 0 }} elementos.
             </div>
-          </ng-template>
+        </ng-template>
     </p-table>
 </form>
-      
-
-        <button (click)="getcubs()">Get cubs</button>
