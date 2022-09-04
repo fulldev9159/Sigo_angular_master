@@ -1,0 +1,320 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  AuthComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/auth/auth.component.ts</code>
+</p>
+
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>zwc-auth</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./auth.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./auth.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/features/auth/auth.component.ts:8</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+
+@Component({
+  selector: &#x27;zwc-auth&#x27;,
+  templateUrl: &#x27;./auth.component.html&#x27;,
+  styleUrls: [&#x27;./auth.component.scss&#x27;],
+})
+export class AuthComponent {
+  constructor() {}
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;main class&#x3D;&quot;container flex align-items-center justify-content-center min-vh-100 py-3 py-md-0 h-full&quot; style&#x3D;&quot;background-color: #e1f1f7;&quot;&gt;
+    &lt;p-card styleClass&#x3D;&quot;w-20rem md:w-full lg:w-full xl:w-full h-35rem lg:h-29rem md:h-29rem xl:h-29rem&quot;&gt;
+        &lt;div class&#x3D;&quot;grid &quot;&gt;
+            &lt;div class&#x3D;&quot;col-12 h-5rem md:col-6 lg:col-6 xl:col-6 flex align-content-start justify-content-center md:align-items-center lg:align-items-center md:h-auto lg:h-auto xl:h-auto&quot;&gt;
+                &lt;img class&#x3D;&quot;max-w-full  p-2 md:border-none lg:border-none xl:border-none md:w-13rem lg:w-13rem xl:w-13rem&quot; src&#x3D;&quot;assets/images/logo.png&quot; alt&#x3D;&quot;login&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12  md:col-6 lg:col-6 xl:col-6 mt-9 p-5&quot;&gt;
+                &lt;div class&#x3D;&quot;flex align-items-center flex-column&quot;&gt;
+                    &lt;!-- &lt;p class&#x3D;&quot;titulo-secundario sigo-color-dark&quot;&gt;Plataforma&lt;/p&gt; --&gt;
+                    &lt;p class&#x3D;&quot;titulo-principal sigo-color-dark&quot;&gt;SIGO &lt;span&gt;v1.0.0&lt;/span&gt;&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;router-outlet&gt;&lt;/router-outlet&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/p-card&gt;
+&lt;/main&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./auth.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.titulo-secundario{
+    font-size: 12px;
+    margin-left: -8px;
+    font-weight: 500;
+    letter-spacing: 0.02rem;
+}
+
+.titulo-principal{
+    font-size: 2rem;
+    letter-spacing: 9px;
+    font-weight: 600;
+    margin-left: 30px;
+    span{
+        margin-left: -26px;
+        letter-spacing: 1px;
+        font-size: 10px;
+        font-weight: 500;
+    }
+}
+
+:host ::ng-deep {
+    .h-35rem{
+        height: 35rem;
+    }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><main class="container flex align-items-center justify-content-center min-vh-100 py-3 py-md-0 h-full" style="background-color: #e1f1f7;">    <p-card styleClass="w-20rem md:w-full lg:w-full xl:w-full h-35rem lg:h-29rem md:h-29rem xl:h-29rem">        <div class="grid ">            <div class="col-12 h-5rem md:col-6 lg:col-6 xl:col-6 flex align-content-start justify-content-center md:align-items-center lg:align-items-center md:h-auto lg:h-auto xl:h-auto">                <img class="max-w-full  p-2 md:border-none lg:border-none xl:border-none md:w-13rem lg:w-13rem xl:w-13rem" src="assets/images/logo.png" alt="login">            </div>            <div class="col-12  md:col-6 lg:col-6 xl:col-6 mt-9 p-5">                <div class="flex align-items-center flex-column">                    <!-- <p class="titulo-secundario sigo-color-dark">Plataforma</p> -->                    <p class="titulo-principal sigo-color-dark">SIGO <span>v1.0.0</span></p>                </div>                <router-outlet></router-outlet>            </div>        </div>    </p-card></main></div>'
+    var COMPONENTS = [{'name': 'AgregarServiciosFormComponent', 'selector': 'zwc-agregar-servicios-form'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableFiltersListCubComponent', 'selector': 'zwc-table-filters-list-cub'},{'name': 'TableListComponent', 'selector': 'zwc-table-list-cub'},{'name': 'TableServicesComponent', 'selector': 'zwc-table-services'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AuthComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
