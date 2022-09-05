@@ -9,6 +9,9 @@ import { InputTextComponent } from './input-text/input-text.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdropdownComponent } from './pdropdown/pdropdown.component';
 import { FormAgregarServiciosComponent } from './form-agregar-servicios/form-agregar-servicios.component';
+import { FormTableServicesComponent } from './form-table-services/form-table-services.component';
+import { BaseTdComponent } from './form-table-services/components/base-td/base-td.component';
+import { MultiTdComponent } from './form-table-services/components/multi-td/multi-td.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { FormAgregarServiciosComponent } from './form-agregar-servicios/form-agr
     InputTextComponent,
     PdropdownComponent,
     FormAgregarServiciosComponent,
+    FormTableServicesComponent,
+    BaseTdComponent,
+    MultiTdComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +41,7 @@ import { FormAgregarServiciosComponent } from './form-agregar-servicios/form-agr
     InputTextComponent,
     PdropdownComponent,
     FormAgregarServiciosComponent,
+    FormTableServicesComponent,
   ],
 })
 export class SharedModule {

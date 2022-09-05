@@ -11,11 +11,11 @@ import { SharedModule } from '@sharedOT/shared.module';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { carrito } from '@storeOT/servicios/servicios.selectors';
 
-import { TableServicesComponent } from './table-services.component';
+import { FormTableServicesComponent } from './form-table-services.component';
 
 describe('TableServicesComponent', () => {
-  let component: TableServicesComponent;
-  let fixture: ComponentFixture<TableServicesComponent>;
+  let component: FormTableServicesComponent;
+  let fixture: ComponentFixture<FormTableServicesComponent>;
   let initialState: any = { example: [] };
   let store: MockStore<any>;
   let servicioFacade: ServiciosFacade;
@@ -24,7 +24,7 @@ describe('TableServicesComponent', () => {
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [StoreModule.forRoot({}), FormsModule, ReactiveFormsModule],
-      declarations: [TableServicesComponent],
+      declarations: [FormTableServicesComponent],
       providers: [
         { provide: LOCALE_ID, useValue: 'es-CL' },
         provideMockStore({
@@ -39,7 +39,7 @@ describe('TableServicesComponent', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TableServicesComponent);
+    fixture = TestBed.createComponent(FormTableServicesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     store = TestBed.inject(MockStore);

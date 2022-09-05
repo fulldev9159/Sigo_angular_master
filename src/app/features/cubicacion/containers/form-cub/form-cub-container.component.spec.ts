@@ -13,6 +13,7 @@ import {
 } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-table-services.component';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import {
   getActividadesContratoProveedor,
@@ -46,9 +47,8 @@ import {
   getUnidadesObraServicio,
 } from '@storeOT/servicios/servicios.selectors';
 import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
-import { FormAgregarServiciosComponent } from '../../../../shared/form-agregar-servicios/form-agregar-servicios.component';
+import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { FormularioComponent } from '../../components/formulario/formulario.component';
-import { TableServicesComponent } from '../../components/table-services/table-services.component';
 let initialState: any = { tipoCubicaciones: [] };
 
 import { FormCubContainerComponent } from './form-cub-container.component';
@@ -69,7 +69,7 @@ describe('FormCubContainerComponent', () => {
       declarations: [
         FormCubContainerComponent,
         FormularioComponent,
-        TableServicesComponent,
+        FormTableServicesComponent,
         FormAgregarServiciosComponent,
       ],
       providers: [

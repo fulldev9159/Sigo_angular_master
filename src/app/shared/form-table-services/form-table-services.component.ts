@@ -30,12 +30,12 @@ interface ServiceTableCarrito {
   ];
 }
 @Component({
-  selector: 'zwc-table-services',
-  templateUrl: './table-services.component.html',
+  selector: 'zwc-form-table-services',
+  templateUrl: './form-table-services.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./table-services.component.scss'],
+  styleUrls: ['./form-table-services.component.scss'],
 })
-export class TableServicesComponent implements OnDestroy, OnInit {
+export class FormTableServicesComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
   carrito$ = this.serviciosFacade.carrito$().pipe(
     map(servicios => {

@@ -12,9 +12,8 @@ import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { ProveedorFacade } from '@storeOT/proveedor/proveedor.facades';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { MenuItem } from 'primeng/api';
-import { FormAgregarServiciosComponent } from '../../../../shared/form-agregar-servicios/form-agregar-servicios.component';
+import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { FormularioComponent } from '../../components/formulario/formulario.component';
-import { TableServicesComponent } from '../../components/table-services/table-services.component';
 import localeEsCl from '@angular/common/locales/es-CL';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { combineLatest, Observable, Subscription, take } from 'rxjs';
@@ -23,6 +22,7 @@ import {
   RequestCreateCubicacion,
   SessionData,
 } from '@model';
+import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-table-services.component';
 
 @Component({
   selector: 'zwc-form-cub',
@@ -48,10 +48,10 @@ export class FormCubContainerComponent
   agregarServiciosForm: FormAgregarServiciosComponent;
 
   @ViewChild('tableServicios', {
-    read: TableServicesComponent,
+    read: FormTableServicesComponent,
     static: false,
   })
-  tableServicios: TableServicesComponent;
+  tableServicios: FormTableServicesComponent;
 
   sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
     .sessionData;
