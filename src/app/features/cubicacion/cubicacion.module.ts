@@ -9,8 +9,6 @@ import { SharedModule } from '@sharedOT/shared.module';
 import { ListCubComponent } from './containers/list-cub/list-cub.component';
 import { FormCubContainerComponent } from './containers/form-cub/form-cub-container.component';
 import { FormularioComponent } from './components/formulario/formulario.component';
-import { TableListComponent } from './components/table-list-cub/table-list-cub.component';
-import { TableFiltersListCubComponent } from './components/table-list-cub/components/table-filters-list-cub/table-filters-list-cub.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +16,6 @@ import { TableFiltersListCubComponent } from './components/table-list-cub/compon
     ListCubComponent,
     FormCubContainerComponent,
     FormularioComponent,
-    TableListComponent,
-    TableFiltersListCubComponent,
   ],
   imports: [
     CommonModule,
