@@ -294,7 +294,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface ModelServicio {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DetalleUOCubicacion } from &#x27;./unidad-obra&#x27;;
+
+export interface ModelServicio {
   id: number;
   tipo_servicio_id: number;
   unidad_id: number;
@@ -362,6 +364,59 @@ export interface DetallesServicioTipoAgenciaContratoProveedor {
 
   servicio_unidad_codigo?: string;
   servicio_unidad_descripcion?: string;
+}
+
+// DETALLE SERVICIO CUBICACION
+export interface Unidad {
+  id: number;
+  codigo: string;
+  descripcion: string;
+  estado: string;
+}
+
+export interface TipoMoneda {
+  id: number;
+  codigo: string;
+  nombre: string;
+}
+
+export interface Actividad {
+  codigo: string;
+  descripcion: string;
+  id: number;
+}
+
+export interface DetalleServicioCubicacion {
+  id: number;
+  cubicacion_id: number;
+  servicio_id: number;
+  actividad_id: number;
+  tipo_servicio_id: number;
+  cantidad: number;
+  unidad_id: number;
+  puntos_baremos: number;
+  prov_has_serv_precio: number;
+  precio_tipo_moneda_id: number;
+  factor_conversion_precio: number;
+  requiere_evidencia: boolean;
+  valor_unitario_clp: number;
+  model_servicio_id: ModelServicio;
+  model_unidad_id: Unidad;
+  model_precio_tipo_moneda_id: {
+    id: number;
+    codigo: string;
+    nombre: string;
+  };
+  many_cubicacion_has_uob: DetalleUOCubicacion[];
+
+  model_actividad_id: Actividad;
+  model_tipo_servicio_id: {
+    id: number;
+    codigo: string;
+    descripcion: string;
+    estado: boolean;
+    contrato_marco_id: number;
+  };
 }
 </code></pre>
     </div>

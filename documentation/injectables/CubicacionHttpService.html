@@ -96,6 +96,9 @@
                                 <a href="#getCubicaciones" >getCubicaciones</a>
                             </li>
                             <li>
+                                <a href="#getDetalleCubicacion" >getDetalleCubicacion</a>
+                            </li>
+                            <li>
                                 <a href="#getTipoCubicacion" >getTipoCubicacion</a>
                             </li>
                             <li>
@@ -124,7 +127,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -187,8 +190,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:38</a></div>
                 </td>
             </tr>
 
@@ -199,6 +202,75 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="../interfaces/Response.html" target="_self" >Observable&lt;Response&lt;literal type&gt;&gt;</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDetalleCubicacion"></a>
+                    <span class="name">
+                        <span ><b>getDetalleCubicacion</b></span>
+                        <a href="#getDetalleCubicacion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDetalleCubicacion(cubicacion_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:46</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>cubicacion_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;Response&lt;DetalleCubicacion&gt;&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -224,8 +296,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:21</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:22</a></div>
                 </td>
             </tr>
 
@@ -261,8 +333,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="29"
+                            class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:29</a></div>
                 </td>
             </tr>
 
@@ -340,7 +412,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/service/cubicacion-http.service.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -359,10 +431,11 @@ import { environment } from &#x27;@environment&#x27;;
 import { Response, Cubicacion } from &#x27;@model&#x27;;
 import { delay, Observable } from &#x27;rxjs&#x27;;
 import {
+  DetalleCubicacion,
   RequestCreateCubicacion,
   RequestEditCubicacion,
   TipoCubicacion,
-} from &#x27;../model/cubicacion&#x27;;
+} from &#x27;@model&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -395,6 +468,15 @@ export class CubicacionHttpService {
       {}
     );
     // .pipe(delay(1500));
+  }
+
+  getDetalleCubicacion(
+    cubicacion_id: number
+  ): Observable&lt;Response&lt;DetalleCubicacion&gt;&gt; {
+    return this.http.post&lt;Response&lt;DetalleCubicacion&gt;&gt;(
+      &#x60;${this.API_URL}/cubicacion/detalle/get2&#x60;,
+      { cubicacion_id }
+    );
   }
 }
 </code></pre>

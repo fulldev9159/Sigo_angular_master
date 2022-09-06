@@ -1,9 +1,24 @@
 :host ::ng-deep {
+    .card {
+        padding: 15px 15px 15px 15px;
+    }
+
+    .p-datatable {
+        border: 1px solid #efefef;
+        padding: 0.2rem;
+    }
+
+    fa-icon {
+        margin-right: 3px;
+        font-size: 0.7rem;
+        color: #545454;
+    }
+
     .p-datatable.p-datatable-sm .p-datatable-header {
         background: #efefef;
     }
 
-    .p-datatable .p-datatable-thead > tr > th {
+    .p-datatable .p-datatable-thead>tr>th {
         border: 0px;
         border-width: 0px;
         border-right: 1px solid #f4f4f4 !important;
@@ -11,10 +26,12 @@
         background-color: #efefef;
         font-size: 0.8rem;
         font-weight: 700;
-        p-sorticon > i {
+
+        p-sorticon>i {
             font-size: 0.8rem !important;
         }
     }
+
     td {
         padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
         border: 0 !important;
@@ -23,7 +40,7 @@
         font-size: 0.8rem;
     }
 
-    div > span > input {
+    div>span>input {
         height: 30px;
         border-color: #c3bebe;
         border-radius: 4px;
@@ -31,6 +48,7 @@
 
     .p-paginator-bottom {
         font-size: 0.8rem;
+
         span button {
             font-size: 0.8rem;
         }
@@ -80,7 +98,9 @@
         border-bottom-right-radius: 0 !important;
         border-top-right-radius: 0 !important;
     }
-    .ui.icon.button, .ui.icon.buttons .button {
+
+    .ui.icon.button,
+    .ui.icon.buttons .button {
         padding: 0.48571429em;
-      }
+    }
 }

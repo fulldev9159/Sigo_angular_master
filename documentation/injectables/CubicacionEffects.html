@@ -81,6 +81,9 @@
                                 <a href="#createCubicacion$" >createCubicacion$</a>
                             </li>
                             <li>
+                                <a href="#detalleCubicacion$" >detalleCubicacion$</a>
+                            </li>
+                            <li>
                                 <a href="#editCubicacion$" >editCubicacion$</a>
                             </li>
                             <li>
@@ -220,6 +223,45 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="detalleCubicacion$"></a>
+                    <span class="name">
+                        <span ><b>detalleCubicacion$</b></span>
+                        <a href="#detalleCubicacion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.detalleCubicacion),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.cubicacionHttpService.getDetalleCubicacion(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.detalleCubicacionSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.detalleCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -373,7 +415,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -410,7 +452,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -496,6 +538,22 @@ export class CubicacionEffects {
           ),
           catchError(error &#x3D;&gt;
             of(cubicacionActions.listarCubicacionesError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  detalleCubicacion$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.detalleCubicacion),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.cubicacionHttpService.getDetalleCubicacion(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.detalleCubicacionSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.detalleCubicacionError({ error }))
           )
         )
       )

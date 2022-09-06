@@ -47,7 +47,7 @@
   <li>Interfaces</li>
   <li
   >
-  Dropdown</li>
+  TipoMoneda</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/auth/components/perfil-select/perfil-select.component.ts</code>
+            <code>src/app/core/model/servicio.ts</code>
         </p>
 
 
@@ -84,15 +84,21 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#code" 
+                                        <a href="#codigo" 
 >
-                                            code
+                                            codigo
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#name" 
+                                        <a href="#id" 
 >
-                                            name
+                                            id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#nombre" 
+>
+                                            nombre
                                         </a>
                                 </li>
                             </ul>
@@ -110,9 +116,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="code"></a>
-                                        <span class="name "><b>code</b>
-                                            <a href="#code">
+                                        <a name="codigo"></a>
+                                        <span class="name "><b>codigo</b>
+                                            <a href="#codigo">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -120,7 +126,40 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>code:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>codigo:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -143,9 +182,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="name"></a>
-                                        <span class="name "><b>name</b>
-                                            <a href="#name">
+                                        <a name="nombre"></a>
+                                        <span class="name "><b>nombre</b>
+                                            <a href="#nombre">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -153,7 +192,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>name:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>nombre:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -177,71 +216,129 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
-import { PerfilesUsuario } from &#x27;@model&#x27;;
-import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
-import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
-import { PerfilFacade } from &#x27;@storeOT/perfil/perfil.facades&#x27;;
-import { map, Observable, take, tap } from &#x27;rxjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DetalleUOCubicacion } from &#x27;./unidad-obra&#x27;;
 
-interface Dropdown {
-  name: string;
-  code: number;
+export interface ModelServicio {
+  id: number;
+  tipo_servicio_id: number;
+  unidad_id: number;
+  descripcion: string;
+  codigo: string;
+  estado: boolean;
+  es_pack_basico: boolean;
+  cantidad_default: number;
+  codigo_alcance: string;
+  puntos_baremos: number;
+  fecha_inicio: string;
+  fecha_fin: string;
+  requiere_evidencia: boolean;
 }
-@Component({
-  selector: &#x27;zwc-perfil-select&#x27;,
-  templateUrl: &#x27;./perfil-select.component.html&#x27;,
-  styleUrls: [&#x27;./perfil-select.component.scss&#x27;],
-})
-export class PerfilSelectComponent {
-  perfilesUsuarioDropdown$: Observable&lt;Dropdown[]&gt; &#x3D; this.perfilFacade
-    .getPerfilesUsuario$()
-    .pipe(
-      tap(perfiles &#x3D;&gt; (this.perfilesUsuario &#x3D; perfiles)),
-      map(perfiles &#x3D;&gt;
-        perfiles.map(perfil &#x3D;&gt; ({
-          name: perfil.model_perfil_id?.nombre,
-          code: perfil.id,
-        }))
-      ),
-      take(1)
-    );
-  perfilesUsuario: PerfilesUsuario[];
 
-  sendingGetPerfilesUser$: Observable&lt;boolean&gt; &#x3D;
-    this.loadingFacade.sendingGetPerfilesUser$();
-  sendingPermisosPerfilUser$: Observable&lt;boolean&gt; &#x3D;
-    this.loadingFacade.sendingPermisosPerfilUser$();
+//  GET SERVICIOS DE UNA AGENCIA/CONTRATO
+export interface RequestGetServicioTipoAgenciaContratoProveedor {
+  agencia_id: number;
+  cmarco_has_prov_id: number;
+  tipo_servicio_id: number;
+  actividad_id: number;
+}
 
-  formControls &#x3D; {
-    perfil_id: new FormControl(&#x27;&#x27;, [Validators.required]),
+export interface ServicioAgenciaContratoProveedor {
+  codigo: string;
+  descripcion: string;
+  id: number;
+  puntos_baremos: number;
+  requiere_evidencia: boolean;
+  unidad_codigo: string;
+  unidad_desripcion: string;
+  unidad_id: number;
+  numero_producto: string;
+}
+
+// GET DETALLES DE UN SERVICIO DE UN TIPO DE UNA GENCIA/CONTRATO
+export interface RequestGetDetallesServicioTipoAgenciaContratoProveedor {
+  agencia_id: number;
+  cmarco_has_proveedor_id: number;
+  servicio_id: number;
+  tipo_servicio_id: number;
+  actividad_id: number;
+}
+
+export interface DetallesServicioTipoAgenciaContratoProveedor {
+  precio_agencia?: number;
+  precio_proveedor?: number;
+  servicio_baremos?: number;
+  servicio_codigo: string;
+  servicio_id: number;
+  servicio_nombre: string;
+  servicio_precio_final?: number;
+  servicio_precio_final_clp: number;
+  servicio_tipo: number;
+  servicio_unidad_id?: number;
+
+  actividad_descripcion: string;
+  actividad_id: string;
+
+  servicio_tipo_moneda_codigo?: string;
+  servicio_tipo_moneda_id?: number;
+  tipo_servicio_descripcion: string;
+
+  numero_producto?: string;
+
+  servicio_unidad_codigo?: string;
+  servicio_unidad_descripcion?: string;
+}
+
+// DETALLE SERVICIO CUBICACION
+export interface Unidad {
+  id: number;
+  codigo: string;
+  descripcion: string;
+  estado: string;
+}
+
+export interface TipoMoneda {
+  id: number;
+  codigo: string;
+  nombre: string;
+}
+
+export interface Actividad {
+  codigo: string;
+  descripcion: string;
+  id: number;
+}
+
+export interface DetalleServicioCubicacion {
+  id: number;
+  cubicacion_id: number;
+  servicio_id: number;
+  actividad_id: number;
+  tipo_servicio_id: number;
+  cantidad: number;
+  unidad_id: number;
+  puntos_baremos: number;
+  prov_has_serv_precio: number;
+  precio_tipo_moneda_id: number;
+  factor_conversion_precio: number;
+  requiere_evidencia: boolean;
+  valor_unitario_clp: number;
+  model_servicio_id: ModelServicio;
+  model_unidad_id: Unidad;
+  model_precio_tipo_moneda_id: {
+    id: number;
+    codigo: string;
+    nombre: string;
   };
+  many_cubicacion_has_uob: DetalleUOCubicacion[];
 
-  formPerfilUser &#x3D; new FormGroup(this.formControls);
-
-  constructor(
-    private perfilFacade: PerfilFacade,
-    private authFacade: AuthFacade,
-    private loadingFacade: LoadingsFacade
-  ) {}
-
-  perfilar(): void {
-    const proxy_id_selected &#x3D; +this.formPerfilUser.get(&#x27;perfil_id&#x27;).value;
-    const perfil_selected &#x3D; this.perfilesUsuario.find(
-      perfil &#x3D;&gt; perfil.id &#x3D;&#x3D;&#x3D; proxy_id_selected
-    );
-
-    this.authFacade.refreshLogin(
-      proxy_id_selected,
-      perfil_selected.model_perfil_id.nombre,
-      perfil_selected.model_perfil_id.model_rol_id.nombre
-    );
-  }
-
-  logout(): void {
-    this.authFacade.Logout();
-  }
+  model_actividad_id: Actividad;
+  model_tipo_servicio_id: {
+    id: number;
+    codigo: string;
+    descripcion: string;
+    estado: boolean;
+    contrato_marco_id: number;
+  };
 }
 </code></pre>
     </div>
@@ -280,7 +377,7 @@ export class PerfilSelectComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'Dropdown-1.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'TipoMoneda.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

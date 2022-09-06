@@ -6,9 +6,10 @@ describe('Listar Cubicaciones', () => {
     cy.get('#listar-cubicacion-sidebar').click();
   });
 
-  it('Debe desplegar 8 cubicaciones', () => {
+  it('Debe desplegar 4 cubicaciones', () => {
     cy.viewport(1500, 700);
-    cy.get('tbody').find('tr').should('have.length', 3);
-    cy._filter_table('filter-nombre-cubicacion', 'Te');
+    cy.get('tbody').find('tr').should('have.length', 4);
+    cy._filter_table('filter-nombre-cubicacion', 'Cubicacion Bucle');
+    cy.get('tbody').find('tr').should('have.length', 1);
   });
 });
