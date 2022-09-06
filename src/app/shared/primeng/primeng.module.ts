@@ -10,6 +10,7 @@ import { DividerModule } from 'primeng/divider';
 import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { TableModule } from 'primeng/table';
     MessageModule,
     InputNumberModule,
     TableModule,
+    DialogModule,
   ],
   exports: [
     InputTextModule,
@@ -37,6 +39,7 @@ import { TableModule } from 'primeng/table';
     MessageModule,
     InputNumberModule,
     TableModule,
+    DialogModule,
   ],
 })
 export class PrimeNgModule {}

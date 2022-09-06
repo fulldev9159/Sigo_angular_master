@@ -65,6 +65,9 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   formFilter: FormGroup = new FormGroup(this.formFilterControl);
 
+  // DIALOGS
+  display = false;
+
   constructor(
     private cubicacionFacade: CubicacionFacade,
     private loadingFacade: LoadingsFacade
@@ -269,6 +272,14 @@ export class ListCubComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+
+  confirmarElminacion(): void {
+    console.log('confirmar');
+  }
+
+  closeDialogConfirmacion(): void {
+    console.log('cancelar');
   }
 
   ngOnDestroy(): void {

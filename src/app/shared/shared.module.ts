@@ -12,6 +12,7 @@ import { FormAgregarServiciosComponent } from './form-agregar-servicios/form-agr
 import { FormTableServicesComponent } from './form-table-services/form-table-services.component';
 import { BaseTdComponent } from './form-table-services/components/base-td/base-td.component';
 import { MultiTdComponent } from './form-table-services/components/multi-td/multi-td.component';
+import { ViewConfirmacionComponent } from './view-confirmacion/view-confirmacion.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MultiTdComponent } from './form-table-services/components/multi-td/mult
     FormTableServicesComponent,
     BaseTdComponent,
     MultiTdComponent,
+    ViewConfirmacionComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { MultiTdComponent } from './form-table-services/components/multi-td/mult
     PdropdownComponent,
     FormAgregarServiciosComponent,
     FormTableServicesComponent,
+    ViewConfirmacionComponent,
   ],
 })
 export class SharedModule {
