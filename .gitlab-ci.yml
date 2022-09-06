@@ -1,5 +1,7 @@
 stages:
   - linter
+  - restart test environment
+  - reset testing database sigo
   - unit test
   - e2e test
 
