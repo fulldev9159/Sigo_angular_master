@@ -6,7 +6,13 @@ import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { map, Observable, Subscription, take, tap } from 'rxjs';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleInfo,
+  faClone,
+  faFilter,
+  faPencil,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'zwc-list-cub',
   templateUrl: './list-cub.component.html',
@@ -17,6 +23,10 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   navbarHeader: MenuItem[];
   filterIcon = faFilter;
+  infoIcon = faCircleInfo;
+  cloneIcon = faClone;
+  editIcon = faPencil;
+  trashICon = faTrash;
 
   // FILTROS
   tipo_cubicacion_filter: string[] = [];

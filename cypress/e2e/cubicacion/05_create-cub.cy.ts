@@ -159,5 +159,7 @@ describe('Create Cubicacion', () => {
     )
       .clear()
       .type('{del}10{enter}');
+
+    cy.get('button[id="crear-cubicacion"]').click();
   });
 });

@@ -61,7 +61,7 @@
                             <th style="width:200px"></th>
                             <th style="width:140px"></th>
                             <th style="width:100px"></th>
-                            <th style="width:240px"></th>
+                            <th style="width:300px"></th>
                         </tr>
                         <!-- HEADERS -->
                         <tr>
@@ -91,7 +91,7 @@
                             <th style="width:100px" pSortableColumn="total">Total <p-sortIcon field="total">
                                 </p-sortIcon>
                             </th>
-                            <th style="width:240px">Operaciones</th>
+                            <th style="width:300px">Operaciones</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-item>
@@ -105,13 +105,20 @@
                             <td style="width:200px">{{item.creador_usuario_nombre}}</td>
                             <td style="width:140px">{{item.cubicacion_fecha_creacion| date: 'dd/MM/yyyy'}}</td>
                             <td style="width:100px">{{item.total| currency: 'CLP':'$':'.0-2':'es-CL'}}</td>
-                            <td style="width:240px">
-                                <div class="ui icon buttons mini basic ">
-                                    <button class="ui button generic-color " (click)="showDetalleCubicacion()"> Detalles
+                            <td style="width:300px">
+                                <div class="buttons-operaciones ">
+                                    <button (click)="showDetalleCubicacion()">
+                                        <fa-icon [icon]="infoIcon"></fa-icon> Detalles
                                     </button>
-                                    <button class="ui button generic-color"> Clonar </button>
-                                    <button class="ui button generic-color" style="height: 100%;"> Editar </button>
-                                    <button class="ui button eliminar-color" style="height: 100%;"></button>
+                                    <button>
+                                        <fa-icon [icon]="cloneIcon"></fa-icon> Clonar
+                                    </button>
+                                    <button>
+                                        <fa-icon [icon]="editIcon"></fa-icon> Editar
+                                    </button>
+                                    <button style="background-color: #d32f2f;">
+                                        <fa-icon [icon]="trashICon"></fa-icon>Eliminar
+                                    </button>
                                 </div>
                             </td>
                         </tr>
