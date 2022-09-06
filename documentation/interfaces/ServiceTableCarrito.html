@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/cubicacion/components/table-services/table-services.component.ts</code>
+            <code>src/app/shared/form-table-services/form-table-services.component.ts</code>
         </p>
 
 
@@ -287,12 +287,12 @@ interface ServiceTableCarrito {
   ];
 }
 @Component({
-  selector: &#x27;zwc-table-services&#x27;,
-  templateUrl: &#x27;./table-services.component.html&#x27;,
+  selector: &#x27;zwc-form-table-services&#x27;,
+  templateUrl: &#x27;./form-table-services.component.html&#x27;,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: [&#x27;./table-services.component.scss&#x27;],
+  styleUrls: [&#x27;./form-table-services.component.scss&#x27;],
 })
-export class TableServicesComponent implements OnDestroy, OnInit {
+export class FormTableServicesComponent implements OnDestroy, OnInit {
   subscription: Subscription &#x3D; new Subscription();
   carrito$ &#x3D; this.serviciosFacade.carrito$().pipe(
     map(servicios &#x3D;&gt; {

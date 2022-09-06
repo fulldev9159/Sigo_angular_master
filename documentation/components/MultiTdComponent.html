@@ -64,7 +64,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/features/cubicacion/components/table-services/components/multi-td/multi-td.component.ts</code>
+    <code>src/app/shared/form-table-services/components/multi-td/multi-td.component.ts</code>
 </p>
 
 
@@ -202,7 +202,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/cubicacion/components/table-services/components/multi-td/multi-td.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/shared/form-table-services/components/multi-td/multi-td.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -228,7 +228,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/cubicacion/components/table-services/components/multi-td/multi-td.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/form-table-services/components/multi-td/multi-td.component.ts:14</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -249,7 +249,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/features/cubicacion/components/table-services/components/multi-td/multi-td.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/form-table-services/components/multi-td/multi-td.component.ts:13</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -275,7 +275,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/features/cubicacion/components/table-services/components/multi-td/multi-td.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/shared/form-table-services/components/multi-td/multi-td.component.ts:12</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -299,7 +299,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/cubicacion/components/table-services/components/multi-td/multi-td.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/shared/form-table-services/components/multi-td/multi-td.component.ts:15</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -333,7 +333,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/app/features/cubicacion/components/table-services/components/multi-td/multi-td.component.ts:23</a></div>
+                            class="link-to-prism">src/app/shared/form-table-services/components/multi-td/multi-td.component.ts:23</a></div>
                 </td>
             </tr>
 
@@ -417,7 +417,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/cubicacion/components/table-services/components/multi-td/multi-td.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/shared/form-table-services/components/multi-td/multi-td.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -566,7 +566,7 @@ export class MultiTdComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><td style="background-color: #ff8e4e">  {{ uo.uo_codigo }}</td><td>  {{ uo.uo_nombre }}</td><ng-container *ngIf="uo.uo_codigo === \'0\'">  <td colspan="6" align="center">No Aplica</td></ng-container><ng-container *ngIf="uo.uo_codigo !== \'0\'">  <td>    {{ uo.actividad_descripcion | titlecase }}  </td>  <td>    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>    <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>  </td>  <td>    {{ uo.uo_precio_total_clp | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\' }}  </td>  <td>    {{      uo.uo_precio_total_clp *        +controlUOCantidad.value        | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\'    }}  </td>  <td>    <button    (click)="callDeleteUOFromServicioFromCarrito(servicio_id, uo.uo_codigo)"    class="ui button eliminar-color"  >    <fa-icon [icon]="trashICon"></fa-icon>  </button>    <!-- <div class="ui icon buttons mini basic">      <button        *ngIf="uo.uo_codigo !== 0"        (click)="showMateriales(uo.material_arr)"        class="ui button generic-color"      >        Detalles      </button>      <ng-container        *ngIf="uo.precargado === undefined || uo.precargado === false"      >             </ng-container>      <ng-container *ngIf="uo.precargado">        <div class="ui icon buttons mini basic">          <button            (click)="              DisplayDeleteUOCarritoDefinitivo(                item.servicio_id,                uo.uo_codigo,                uo.uo_rowid              )            "            class="ui button eliminar-color"          >            <fa-icon [icon]="trashICon"></fa-icon>          </button>        </div>      </ng-container>    </div> -->    </td></ng-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableFiltersListCubComponent', 'selector': 'zwc-table-filters-list-cub'},{'name': 'TableListComponent', 'selector': 'zwc-table-list-cub'},{'name': 'TableServicesComponent', 'selector': 'zwc-table-services'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MultiTdComponent'};
 </script>

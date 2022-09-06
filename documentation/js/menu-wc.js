@@ -131,16 +131,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/CubicacionModule.html" data-type="entity-link" >CubicacionModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-CubicacionModule-784c698dee5174124161061e299de700e2a8fb6b2473c2c2b638667ea73c4df3fd622da176411534b2572742518a5aaf9b60352c2d54002a8d9000f42196b676"' : 'data-target="#xs-components-links-module-CubicacionModule-784c698dee5174124161061e299de700e2a8fb6b2473c2c2b638667ea73c4df3fd622da176411534b2572742518a5aaf9b60352c2d54002a8d9000f42196b676"' }>
+                                            'data-target="#components-links-module-CubicacionModule-425de56a6709d34e503eb743a9a68c25f8d576223aaf46e0bd606fc2a82719aa763fa11eebaae65648914f27d0e3b61f58ac349aafba1ed9ad0006393a684e40"' : 'data-target="#xs-components-links-module-CubicacionModule-425de56a6709d34e503eb743a9a68c25f8d576223aaf46e0bd606fc2a82719aa763fa11eebaae65648914f27d0e3b61f58ac349aafba1ed9ad0006393a684e40"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-CubicacionModule-784c698dee5174124161061e299de700e2a8fb6b2473c2c2b638667ea73c4df3fd622da176411534b2572742518a5aaf9b60352c2d54002a8d9000f42196b676"' :
-                                            'id="xs-components-links-module-CubicacionModule-784c698dee5174124161061e299de700e2a8fb6b2473c2c2b638667ea73c4df3fd622da176411534b2572742518a5aaf9b60352c2d54002a8d9000f42196b676"' }>
-                                            <li class="link">
-                                                <a href="components/BaseTdComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >BaseTdComponent</a>
-                                            </li>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-CubicacionModule-425de56a6709d34e503eb743a9a68c25f8d576223aaf46e0bd606fc2a82719aa763fa11eebaae65648914f27d0e3b61f58ac349aafba1ed9ad0006393a684e40"' :
+                                            'id="xs-components-links-module-CubicacionModule-425de56a6709d34e503eb743a9a68c25f8d576223aaf46e0bd606fc2a82719aa763fa11eebaae65648914f27d0e3b61f58ac349aafba1ed9ad0006393a684e40"' }>
                                             <li class="link">
                                                 <a href="components/CubicacionComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CubicacionComponent</a>
                                             </li>
@@ -152,18 +149,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             </li>
                                             <li class="link">
                                                 <a href="components/ListCubComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ListCubComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/MultiTdComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >MultiTdComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/TableFiltersListCubComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >TableFiltersListCubComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/TableListComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >TableListComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/TableServicesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >TableServicesComponent</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -218,13 +203,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/SharedModule.html" data-type="entity-link" >SharedModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-SharedModule-4a90ad3f8cd9921f36d4d58d3499571c9d79cf467b5a87741ebc7684db7fd041182d38c9f2a2e0b0774c2fae79eedde8ed4b9dbf3c5930d0b7b7527d78727972"' : 'data-target="#xs-components-links-module-SharedModule-4a90ad3f8cd9921f36d4d58d3499571c9d79cf467b5a87741ebc7684db7fd041182d38c9f2a2e0b0774c2fae79eedde8ed4b9dbf3c5930d0b7b7527d78727972"' }>
+                                            'data-target="#components-links-module-SharedModule-2f4feffce24debecfc159a79cdf0cab62c992ece1d4d0f08e37176eb5deeb72f9fd0793afd2b1fa0c9833123210d2cb24dabdbb0e499df61df1710fb18de01ad"' : 'data-target="#xs-components-links-module-SharedModule-2f4feffce24debecfc159a79cdf0cab62c992ece1d4d0f08e37176eb5deeb72f9fd0793afd2b1fa0c9833123210d2cb24dabdbb0e499df61df1710fb18de01ad"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-SharedModule-4a90ad3f8cd9921f36d4d58d3499571c9d79cf467b5a87741ebc7684db7fd041182d38c9f2a2e0b0774c2fae79eedde8ed4b9dbf3c5930d0b7b7527d78727972"' :
-                                            'id="xs-components-links-module-SharedModule-4a90ad3f8cd9921f36d4d58d3499571c9d79cf467b5a87741ebc7684db7fd041182d38c9f2a2e0b0774c2fae79eedde8ed4b9dbf3c5930d0b7b7527d78727972"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-SharedModule-2f4feffce24debecfc159a79cdf0cab62c992ece1d4d0f08e37176eb5deeb72f9fd0793afd2b1fa0c9833123210d2cb24dabdbb0e499df61df1710fb18de01ad"' :
+                                            'id="xs-components-links-module-SharedModule-2f4feffce24debecfc159a79cdf0cab62c992ece1d4d0f08e37176eb5deeb72f9fd0793afd2b1fa0c9833123210d2cb24dabdbb0e499df61df1710fb18de01ad"' }>
+                                            <li class="link">
+                                                <a href="components/BaseTdComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >BaseTdComponent</a>
+                                            </li>
                                             <li class="link">
                                                 <a href="components/ContentLayoutComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ContentLayoutComponent</a>
                                             </li>
@@ -232,10 +220,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                                 <a href="components/FormAgregarServiciosComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FormAgregarServiciosComponent</a>
                                             </li>
                                             <li class="link">
+                                                <a href="components/FormTableServicesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FormTableServicesComponent</a>
+                                            </li>
+                                            <li class="link">
                                                 <a href="components/InputAlertComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >InputAlertComponent</a>
                                             </li>
                                             <li class="link">
                                                 <a href="components/InputTextComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >InputTextComponent</a>
+                                            </li>
+                                            <li class="link">
+                                                <a href="components/MultiTdComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >MultiTdComponent</a>
                                             </li>
                                             <li class="link">
                                                 <a href="components/PbuttonSendingComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >PbuttonSendingComponent</a>
