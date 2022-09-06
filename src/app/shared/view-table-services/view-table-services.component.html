@@ -29,14 +29,14 @@
     <tbody>
         <ng-container *ngFor="let item of carritoServices$|async;let i = index">
             <ng-container *ngIf="item.unidad_obras.length===1">
-                <tr zwc-base-td-view [item]="item">
+                <tr zwc-view-service-table[item]="item">
                 </tr>
             </ng-container>
             <ng-container *ngIf="item.unidad_obras.length>1">
-                <tr zwc-base-td-view [item]="item">
+                <tr zwc-view-service-table [item]="item">
                 </tr>
                 <ng-container *ngFor="let uo of item.unidad_obras| slice:1; let iuo= index">
-                    <tr zwc-multi-td-view [uo]="uo">
+                    <tr zwc-view-uo-table [uo]="uo">
                     </tr>
                 </ng-container>
             </ng-container>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CarritoService } from '@model';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { CarritoService, CarritoUO } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map } from 'rxjs';
 
@@ -45,4 +45,90 @@ export class ViewTableServicesComponent implements OnInit {
   ngOnInit(): void {
     console.log();
   }
+}
+
+@Component({
+  selector: '[zwc-view-uo-table]',
+  template: `
+    <td style="background-color: #ff8e4e">
+      {{ uo.uo_codigo }}
+    </td>
+    <td>
+      {{ uo.uo_nombre }}
+    </td>
+
+    <ng-container *ngIf="uo.uo_codigo === '0'">
+      <td colspan="6" align="center">No Aplica</td>
+    </ng-container>
+
+    <ng-container *ngIf="uo.uo_codigo !== '0'">
+      <td>
+        {{ uo.actividad_descripcion | titlecase }}
+      </td>
+      <td>TODO</td>
+      <td>
+        {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
+      </td>
+      <td>TODO</td>
+      <td></td>
+    </ng-container>
+  `,
+  encapsulation: ViewEncapsulation.None,
+})
+export class ViewUOTableComponent {
+  @Input() uo: CarritoUO = null;
+  constructor() {}
+}
+
+@Component({
+  selector: '[zwc-view-service-table]',
+  template: `
+    <!-- SERVICIO -->
+    <td [attr.rowspan]="+item.unidad_obras.length">
+      {{ item.servicio_codigo }}
+    </td>
+    <td [attr.rowspan]="+item.unidad_obras.length">
+      {{ item.servicio_nombre }}
+    </td>
+    <td [attr.rowspan]="+item.unidad_obras.length">
+      {{ item.tipo_servicio_descripcion | titlecase }}
+    </td>
+    <td [attr.rowspan]="+item.unidad_obras.length">TODO</td>
+    <td [attr.rowspan]="+item.unidad_obras.length">
+      {{ +item.servicio_precio_final_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
+    </td>
+    <td [attr.rowspan]="+item.unidad_obras.length">TODO</td>
+    <td [attr.rowspan]="+item.unidad_obras.length"></td>
+
+    <!-- UNIDAD DE OBRA -->
+    <td style="background-color: #ff8e4e">
+      {{ item.unidad_obras[0].uo_codigo }}
+    </td>
+    <td>
+      {{ item.unidad_obras[0].uo_nombre }}
+    </td>
+
+    <ng-container *ngIf="item.unidad_obras[0].uo_codigo === '0'">
+      <td colspan="6" align="center">No Aplica</td>
+    </ng-container>
+
+    <ng-container *ngIf="item.unidad_obras[0].uo_codigo !== '0'">
+      <td>
+        {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
+      </td>
+      <td>TODO</td>
+      <td>
+        {{
+          item.unidad_obras[0].uo_precio_total_clp
+            | currency: 'CLP':'$':'.0-2':'es-CL'
+        }}
+      </td>
+      <td>TODO</td>
+      <td></td>
+    </ng-container>
+  `,
+})
+export class ViewServiceTableComponent {
+  @Input() item: CarritoService = null;
+  constructor() {}
 }
