@@ -133,5 +133,6 @@ export interface DetalleCubicacion {
   created_at: Date;
   updated_at: Date;
   valor_total_clp: number;
+  costo: number;
   many_cubicacion_has_servicio: DetalleServicioCubicacion[];
 }

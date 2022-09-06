@@ -11,7 +11,7 @@ import { map } from 'rxjs';
   templateUrl: './view-table-services.component.html',
   styleUrls: ['./view-table-services.component.scss'],
 })
-export class ViewTableServicesComponent implements OnInit {
+export class ViewTableServicesComponent {
   carritoServices$ = this.serviciosFacade.carrito$().pipe(
     map(servicios => {
       let valueInitial: CarritoService[] = [];
@@ -44,10 +44,6 @@ export class ViewTableServicesComponent implements OnInit {
     })
   );
   constructor(private serviciosFacade: ServiciosFacade) {}
-
-  ngOnInit(): void {
-    console.log();
-  }
 }
 
 @Component({

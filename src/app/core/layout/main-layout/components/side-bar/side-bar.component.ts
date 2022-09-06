@@ -10,15 +10,11 @@ import { map, Observable, Subscription } from 'rxjs';
   styleUrls: ['./side-bar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class SideBarComponent implements OnDestroy {
+export class SideBarComponent {
   subscription: Subscription = new Subscription();
   sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
     .sessionData;
   faUser = faUser;
 
   constructor() {}
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 }

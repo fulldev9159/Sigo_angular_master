@@ -325,7 +325,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
     this.display = true;
     this.serviciosFacade.resetCarritoServices();
     // NEW
-    this.cubicacionFacade.detalleCubicacion(10);
+    this.cubicacionFacade.detalleCubicacion(4);
   }
 
   confirmarElminacion(): void {

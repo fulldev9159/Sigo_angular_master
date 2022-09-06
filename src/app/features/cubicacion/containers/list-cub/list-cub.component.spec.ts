@@ -1,6 +1,9 @@
-import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { listaCubicacionesMOCK200ok } from '@mocksOT';
+import {
+  detalleCubicacionMOCK200Ok,
+  listaCubicacionesMOCK200ok,
+} from '@mocksOT';
 import { provideMockStore } from '@ngrx/store/testing';
 import {
   detalleCubicacion,
@@ -34,7 +37,7 @@ describe('ListCubComponent', () => {
             },
             {
               selector: detalleCubicacion,
-              value: null,
+              value: detalleCubicacionMOCK200Ok.data,
             },
           ],
         }),
