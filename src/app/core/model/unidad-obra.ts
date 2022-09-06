@@ -1,5 +1,5 @@
-import { MaterialesManoObra } from './material';
-import { ModelServicio } from './servicio';
+import { DetalleMaterialCubicacion, MaterialesManoObra } from './material';
+import { ModelServicio, Unidad } from './servicio';
 
 export interface ModelUnidadObra {
   codigo: string;
@@ -34,4 +34,18 @@ export interface DetallesUnidadObraServicio {
   uo_unidad_id?: number;
   uo_unidad_codigo?: string;
   uo_unidad_descripcion?: string;
+}
+
+// DETALLE UO CUBICACION
+export interface DetalleUOCubicacion {
+  id: number;
+  cubicacion_has_servicio_id: number;
+  unidad_obra_cod: string;
+  cantidad: number;
+  unidad_id: number;
+  clave: string;
+  valor_unitario_clp: number;
+  model_unidad_obra_cod: ModelUnidadObra;
+  model_unidad_id: Unidad;
+  many_cubicacion_has_material: DetalleMaterialCubicacion[];
 }

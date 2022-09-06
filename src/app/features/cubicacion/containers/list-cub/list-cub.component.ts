@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Cubicacion } from '@model';
+import { CarritoService, Cubicacion } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import {
@@ -13,6 +13,7 @@ import {
   take,
   tap,
 } from 'rxjs';
+import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 
 @Component({
   selector: 'zwc-list-cub',
@@ -48,6 +49,36 @@ export class ListCubComponent implements OnInit, OnDestroy {
       take(1)
     );
 
+  detalleCubicacion$ = this.cubicacionFacade.detalleCubicacion$().pipe(
+    tap(cubicacion => {
+      if (cubicacion) {
+        console.log(cubicacion);
+        cubicacion.many_cubicacion_has_servicio.forEach(service => {
+          service.many_cubicacion_has_uob.forEach(uo => {
+            let new_service: CarritoService = {
+              servicio_id: service.id,
+              servicio_codigo: service.model_servicio_id.codigo,
+              servicio_precio_final_clp: service.valor_unitario_clp,
+              servicio_nombre: service.model_servicio_id.descripcion,
+              tipo_servicio_descripcion:
+                service.model_tipo_servicio_id.descripcion,
+              tipo_servicio_id: service.tipo_servicio_id,
+              unidad_obras: [
+                {
+                  uo_codigo: uo.unidad_obra_cod,
+                  uo_nombre: uo.model_unidad_obra_cod.descripcion,
+                  uo_precio_total_clp: uo.valor_unitario_clp,
+                  actividad_descripcion: 'TODO',
+                  actividad_id: -1,
+                },
+              ],
+            };
+            this.serviciosFacade.addDirectServiceCarrito(new_service);
+          });
+        });
+      }
+    })
+  );
   // LOADINGS
   getCubicacioneSending$ = this.loadingFacade.sendingGetCubicaciones$();
 
@@ -70,6 +101,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
+    private serviciosFacade: ServiciosFacade,
     private loadingFacade: LoadingsFacade
   ) {}
 
@@ -272,6 +304,15 @@ export class ListCubComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    this.subscription.add(this.detalleCubicacion$.subscribe());
+  }
+
+  showDetalleCubicacion(): void {
+    this.display = true;
+    this.serviciosFacade.resetCarritoServices();
+    // NEW
+    this.cubicacionFacade.detalleCubicacion(10);
   }
 
   confirmarElminacion(): void {

@@ -1,3 +1,5 @@
+import { DetalleServicioCubicacion } from './servicio';
+
 // TIPO CUBICACION 4 CUB
 export interface TipoCubicacion {
   descripcion: string;
@@ -111,4 +113,25 @@ export interface Cubicacion {
   tipo_cubicacion_id: number;
   total: number;
   total_tipo_moneda: string;
+}
+
+export interface DetalleCubicacion {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  direccion_desde: string;
+  altura_desde: string;
+  direccion_hasta: string;
+  altura_hasta: string;
+  tipo_cubicacion_id: number;
+  contrato_id: number;
+  proveedor_id: number;
+  codigo_acuerdo: string;
+  cmarco_has_proveedor_id: number;
+  agencia_id: number;
+  usuario_creador_id: number;
+  created_at: Date;
+  updated_at: Date;
+  valor_total_clp: number;
+  many_cubicacion_has_servicio: DetalleServicioCubicacion[];
 }

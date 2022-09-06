@@ -1,4 +1,5 @@
 import {
+  CarritoService,
   DetallesServicioTipoAgenciaContratoProveedor,
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   RequestGetServicioTipoAgenciaContratoProveedor,
@@ -101,6 +102,14 @@ export const deleteUOFromServicioFromCarrito = createAction(
   }>()
 );
 
+// ADD CARRITO SERVICES
+export const addDirectServiceCarrito = createAction(
+  '[SERVICIOS] addDirectServiceCarrito',
+  props<{
+    service: CarritoService;
+  }>()
+);
+
 // RESETS
 export const resetServiciosAgenciaContratoProveedor = createAction(
   '[SERVICIOS] resetServiciosAgenciaContratoProveedor '
@@ -110,4 +119,7 @@ export const resetUnidadesObraServicio = createAction(
 );
 export const resetServicioSelected = createAction(
   '[SERVICIOS] resetServicioSelected '
+);
+export const resetCarritoServices = createAction(
+  '[SERVICIOS] resetCarritoServices '
 );

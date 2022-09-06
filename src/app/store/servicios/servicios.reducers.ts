@@ -104,6 +104,10 @@ export const reducerServicios = createReducer(
       ],
     })
   ),
+  on(serviciosActions.addDirectServiceCarrito, (state, { service }) => ({
+    ...state,
+    carritoServices: [...state.carritoServices, service],
+  })),
   // RESETS
   on(serviciosActions.resetServiciosAgenciaContratoProveedor, (state, {}) => ({
     ...state,
@@ -116,5 +120,9 @@ export const reducerServicios = createReducer(
   on(serviciosActions.resetServicioSelected, (state, {}) => ({
     ...state,
     servicioSelected: null,
+  })),
+  on(serviciosActions.resetCarritoServices, (state, {}) => ({
+    ...state,
+    carritoServices: [],
   }))
 );

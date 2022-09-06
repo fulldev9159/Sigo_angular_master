@@ -3,6 +3,7 @@ import {
   AgenciaContrato,
   ContratosUser,
   Cubicacion,
+  DetalleCubicacion,
   PerfilesUsuario,
   ProveedorAgenciaContrato,
   RequestCreateCubicacion,
@@ -98,6 +99,15 @@ export class CubicacionFacade {
   }
   public listarCubicaciones$(): Observable<Cubicacion[]> {
     return this.store.select(cubicacionSelectors.listarCubicaciones);
+  }
+
+  // DETALLE CUBICACION
+  public detalleCubicacion(cubicacion_id: number): void {
+    this.store.dispatch(cubicacionActions.detalleCubicacion({ cubicacion_id }));
+  }
+
+  public detalleCubicacion$(): Observable<DetalleCubicacion> {
+    return this.store.select(cubicacionSelectors.detalleCubicacion);
   }
 
   // RESETS

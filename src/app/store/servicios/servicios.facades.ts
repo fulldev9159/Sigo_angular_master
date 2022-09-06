@@ -114,6 +114,11 @@ export class ServiciosFacade {
     );
   }
 
+  // ADD SERVICE CARRITO
+  public addDirectServiceCarrito(service: CarritoService): void {
+    this.store.dispatch(serviciosActions.addDirectServiceCarrito({ service }));
+  }
+
   // RESETS
   public resetServiciosAgenciaContratoProveedor(): void {
     this.store.dispatch(
@@ -126,5 +131,8 @@ export class ServiciosFacade {
 
   public resetServicioSelected(): void {
     this.store.dispatch(serviciosActions.resetServicioSelected());
+  }
+  public resetCarritoServices(): void {
+    this.store.dispatch(serviciosActions.resetCarritoServices());
   }
 }

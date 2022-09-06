@@ -111,7 +111,8 @@
                         <td style="width:100px">{{item.total}}</td>
                         <td style="width:240px">
                             <div class="ui icon buttons mini basic ">
-                                <button class="ui button generic-color " (click)="display=true"> Detalles </button>
+                                <button class="ui button generic-color " (click)="showDetalleCubicacion()"> Detalles
+                                </button>
                                 <button class="ui button generic-color"> Clonar </button>
                                 <button class="ui button generic-color" style="height: 100%;"> Editar </button>
                                 <button class="ui button eliminar-color" style="height: 100%;"></button>
@@ -131,6 +132,8 @@
 </zwc-content-layout>
 
 <p-dialog header="Title" [(visible)]="display">
-    <zwc-view-confirmacion pregunta="¿Está seguro que desea eliminar esta cubicación?"
-        (cancelar)="closeDialogConfirmacion()" (confirmar)="confirmarElminacion()"></zwc-view-confirmacion>
+    <!-- <zwc-view-confirmacion pregunta="¿Está seguro que desea eliminar esta cubicación?"
+        (cancelar)="closeDialogConfirmacion()" (confirmar)="confirmarElminacion()"></zwc-view-confirmacion> -->
+
+    <zwc-view-table-services></zwc-view-table-services>
 </p-dialog>

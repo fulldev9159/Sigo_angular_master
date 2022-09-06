@@ -77,6 +77,22 @@ export class CubicacionEffects {
     )
   );
 
+  detalleCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.detalleCubicacion),
+      concatMap(({ cubicacion_id }) =>
+        this.cubicacionHttpService.getDetalleCubicacion(cubicacion_id).pipe(
+          map(response =>
+            cubicacionActions.detalleCubicacionSuccess({ response })
+          ),
+          catchError(error =>
+            of(cubicacionActions.detalleCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(

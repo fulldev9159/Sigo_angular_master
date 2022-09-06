@@ -3,6 +3,7 @@ import {
   AgenciaContrato,
   ContratosUser,
   Cubicacion,
+  DetalleCubicacion,
   PerfilesUsuario,
   ProveedorAgenciaContrato,
   RequestCreateCubicacion,
@@ -81,6 +82,20 @@ export const listarCubicacionesSuccess = createAction(
 );
 export const listarCubicacionesError = createAction(
   '[CUBICACION] listarCubicaciones Error',
+  props<{ error: any }>()
+);
+
+// DETEALLE CUBICACION
+export const detalleCubicacion = createAction(
+  '[CUBICACION] detalleCubicacion ',
+  props<{ cubicacion_id: number }>()
+);
+export const detalleCubicacionSuccess = createAction(
+  '[CUBICACION] detalleCubicacion Success',
+  props<{ response: Response<DetalleCubicacion> }>()
+);
+export const detalleCubicacionError = createAction(
+  '[CUBICACION] detalleCubicacion Error',
   props<{ error: any }>()
 );
 

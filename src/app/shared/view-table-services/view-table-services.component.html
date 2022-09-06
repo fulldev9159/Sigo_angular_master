@@ -1,0 +1,64 @@
+<!-- <pre>
+    {{carritoServices$|async|json}}
+</pre> -->
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="7">Servicios</th>
+            <th colspan="7">Unidad Obra</th>
+        </tr>
+        <tr>
+            <th>Cod</th>
+            <th>Descripción</th>
+            <th>Tipo</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total Servicio</th>
+            <th></th>
+
+            <th>Cód</th>
+            <th>Descripción</th>
+            <th>Actividad</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total UO</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of carritoServices$|async;let i = index">
+            <ng-container *ngIf="item.unidad_obras.length===1">
+                <tr zwc-base-td-view [item]="item">
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="item.unidad_obras.length>1">
+                <tr zwc-base-td-view [item]="item">
+                </tr>
+                <ng-container *ngFor="let uo of item.unidad_obras| slice:1; let iuo= index">
+                    <tr zwc-multi-td-view [uo]="uo">
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+        <tr>
+            <td colspan="14"></td>
+        </tr>
+        <!-- <tr>
+          <td colspan="5" style="background-color: #efefef;">Total Servicios</td>
+          <td style="background-color: #efefef;" class="total-servicio-monto">{{totalServicios| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+          <td style="background-color: #efefef;" colspan="6">Total Unidades Obra</td>
+          <td style="background-color: #efefef;" class="total-uo-monto">{{totalUOs| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+          <td style="background-color: #efefef;"></td>
+        </tr>
+        <tr>
+          <td colspan="14"></td>
+        </tr>
+        <tr>
+          <td style="background-color: #efefef;" colspan="4"></td>
+          <td style="background-color: #efefef;">Total Cubicación</td>
+          <td style="background-color: #efefef;" class="total-cubicacion-monto">{{totalServicios+totalUOs| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+          <td style="background-color: #efefef;" colspan="8"></td>
+        </tr> -->
+    </tbody>
+</table>
