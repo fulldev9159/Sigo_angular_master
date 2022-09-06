@@ -4,15 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CarritoService, Cubicacion } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
-import {
-  combineLatest,
-  filter,
-  map,
-  Observable,
-  Subscription,
-  take,
-  tap,
-} from 'rxjs';
+import { map, Observable, Subscription, take, tap } from 'rxjs';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 
 @Component({
@@ -21,12 +13,16 @@ import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
   styleUrls: ['./list-cub.component.scss'],
 })
 export class ListCubComponent implements OnInit, OnDestroy {
-  navbarHeader: MenuItem[];
   subscription: Subscription = new Subscription();
+
+  navbarHeader: MenuItem[];
+
+  // FILTROS
   tipo_cubicacion_filter: string[] = [];
   contratos_marcos_filter: string[] = [];
   agencias_filter: string[] = [];
 
+  // DATOS
   cubicaciones$: Observable<Cubicacion[]> = this.cubicacionFacade
     .listarCubicaciones$()
     .pipe(
@@ -36,6 +32,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
         return tmp.sort((a, b) => (a.cubicacion_id > b.cubicacion_id ? 1 : -1));
       }),
       tap(value => {
+        // DROPDOWN FILTROS
         this.tipo_cubicacion_filter = [
           ...new Set(value.map(item => item.tipo_cubicacion_descripcion)),
         ];
@@ -49,10 +46,10 @@ export class ListCubComponent implements OnInit, OnDestroy {
       take(1)
     );
 
+  // AGREGAR DATOS A CARRITO PARA DESPLIEGUE DE SERVICIOS
   detalleCubicacion$ = this.cubicacionFacade.detalleCubicacion$().pipe(
     tap(cubicacion => {
       if (cubicacion) {
-        console.log(cubicacion);
         cubicacion.many_cubicacion_has_servicio.forEach(service => {
           service.many_cubicacion_has_uob.forEach(uo => {
             let new_service: CarritoService = {
@@ -79,6 +76,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
       }
     })
   );
+
   // LOADINGS
   getCubicacioneSending$ = this.loadingFacade.sendingGetCubicaciones$();
 
@@ -124,6 +122,12 @@ export class ListCubComponent implements OnInit, OnDestroy {
       },
     ];
 
+    this.observerFilters();
+
+    this.subscription.add(this.detalleCubicacion$.subscribe());
+  }
+
+  observerFilters(): void {
     // TODO: SE PUEDE UTILIZAR UNA SELECCION MULTIPLE EN LOS SELECTORES
     // TODO: PODER FILTRAR POR MÁS DE UN ELEMENTO
     // TODO: AGREGAR FILTROS DE FECHA Y PRECIO
@@ -304,8 +308,6 @@ export class ListCubComponent implements OnInit, OnDestroy {
         }
       })
     );
-
-    this.subscription.add(this.detalleCubicacion$.subscribe());
   }
 
   showDetalleCubicacion(): void {

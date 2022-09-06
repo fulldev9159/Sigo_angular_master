@@ -2,7 +2,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { listaCubicacionesMOCK200ok } from '@mocksOT';
 import { provideMockStore } from '@ngrx/store/testing';
-import { listarCubicaciones } from '@storeOT/cubicacion/cubicacion.selectors';
+import {
+  detalleCubicacion,
+  listarCubicaciones,
+} from '@storeOT/cubicacion/cubicacion.selectors';
 import { sendingGetCubicaciones } from '@storeOT/loadings/loadings.selectors';
 
 import { ListCubComponent } from './list-cub.component';
@@ -28,6 +31,10 @@ describe('ListCubComponent', () => {
             {
               selector: sendingGetCubicaciones,
               value: false,
+            },
+            {
+              selector: detalleCubicacion,
+              value: null,
             },
           ],
         }),

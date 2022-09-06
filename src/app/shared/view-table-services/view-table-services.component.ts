@@ -3,6 +3,9 @@ import { CarritoService, CarritoUO } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map } from 'rxjs';
 
+/**
+ * @description DESPLIEGUE VISUAL LOS DATOS DEL STORE CARRITO
+ */
 @Component({
   selector: 'zwc-view-table-services',
   templateUrl: './view-table-services.component.html',

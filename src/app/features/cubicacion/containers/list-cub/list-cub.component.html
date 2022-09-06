@@ -1,9 +1,5 @@
 <zwc-content-layout [navbarHeader]="navbarHeader">
     <div content>
-        <!-- <pre>
-            {{cubicaciones$|async|json}}
-        </pre> -->
-
         <!-- TODO: Agregar lazy loading cuando se tenga paginación desde el endpoint
         [lazy]="true" 
         [loading]="getCubicacioneSending$|async" 
@@ -22,6 +18,7 @@
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
+                    <!-- FILTERS -->
                     <tr>
                         <th pFrozenColumn style="width:80px">
                             <input type="number" style="width: 100%;" formControlName="cubicacion_id">
@@ -68,6 +65,7 @@
 
                         </th>
                     </tr>
+                    <!-- HEADERS -->
                     <tr>
                         <th style="width:80px" pSortableColumn="cubicacion_id" pFrozenColumn>ID <p-sortIcon
                                 field="cubicacion_id"></p-sortIcon>
@@ -96,7 +94,6 @@
                         </th>
                         <th style="width:240px">Operaciones</th>
                     </tr>
-
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
                     <tr>

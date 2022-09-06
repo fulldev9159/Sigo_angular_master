@@ -8,7 +8,7 @@ describe('Listar Cubicaciones', () => {
 
   it('Debe desplegar 8 cubicaciones', () => {
     cy.viewport(1500, 700);
-    cy.get('tbody').find('tr').should('have.length', 8);
+    cy.get('tbody').find('tr').should('have.length', 3);
     cy._filter_table('filter-nombre-cubicacion', 'Te');
   });
 });
