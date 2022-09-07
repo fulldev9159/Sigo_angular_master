@@ -536,9 +536,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
         // ADMIN SOLICITA AL TRABAJADOR QUE INFORME DE TRABAJOS FINALIZADOS
         // ES EN LA ETAPA GENERAR NUEVA ACTA
-        // TODO: PENDIENTE CONFIRMAR CUAL SERÁ EL PERMISO
         const solicitarInformeTrabajosFinalizados = (ot.acciones || []).find(
-          accion => accion.slug === ''
+          accion => accion.slug === 'OT_SOLIC_INF_TRABAJO_FIN'
         );
 
         if (solicitarInformeTrabajosFinalizados) {
@@ -556,9 +555,8 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
         // SUPERVISOR DE TRABAJOS DEBE INGRESAR UN INFORME DE TRABAJOS FINALIZADOS
         // ESTA ES UNA NUEVA ETAPA OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS
-        // TODO: CONFIRMAR EL NOMBRE DE LA ACCION
         const informarTrabajosFinalizados = (ot.acciones || []).find(
-          accion => accion.slug === ''
+          accion => accion.slug === 'OT_INF_TRABAJO_FIN'
         );
 
         if (informarTrabajosFinalizados) {
