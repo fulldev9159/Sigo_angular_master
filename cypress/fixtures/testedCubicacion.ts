@@ -88,19 +88,19 @@ export const BucleApoCobra = {
               nombre:
                 'D080 - DISEÑO DE RED PARA PROYECTOS DEL TIPO BROWNFIELD (CADA UIP)',
               precio: '$1.485',
-              unidad_obras: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO', precio: '$0' }],
             },
             {
               nombre:
                 'D081 - DISEÑO DE RED PARA PROYECTOS DEL TIPO GREENFIELD (CADA UIP)',
               precio: '$1.485',
-              unidad_obras: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO', precio: '$0' }],
             },
             {
               nombre:
                 'D083 - DISEÑO EN RED DE FO GPON (FTTX) BROWNFIELD (POR UIP). LEVANTAMIENTO DE INFORMACION',
               precio: '$297',
-              unidad_obras: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO', precio: '$0' }],
             },
           ],
         },
@@ -141,7 +141,7 @@ export const BucleApoCobra = {
               nombre:
                 'J726 - INST. REPARTIDOR MURAL, 1 VERTICAL, TIPO 2/3 VERTICALES',
               precio: '$22.008',
-              unidad_obras: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO', precio: '$0' }],
             },
             {
               nombre: 'J730 - INST. ESCALERILLA SOPORTE',
@@ -156,7 +156,7 @@ export const BucleApoCobra = {
             {
               nombre: 'J728 - INST. PERFIL DE HIERRO PINTADO O GALVANIZADO',
               precio: '$1.257,6',
-              unidad_obras: [{ nombre: '0 - SIN UO' }],
+              unidad_obras: [{ nombre: '0 - SIN UO', precio: '$0' }],
             },
           ],
         },

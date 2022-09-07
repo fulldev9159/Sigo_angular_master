@@ -71,6 +71,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
               tipo_servicio_descripcion:
                 service.model_tipo_servicio_id.descripcion,
               tipo_servicio_id: service.tipo_servicio_id,
+              servicio_cantidad: service.cantidad,
               unidad_obras: [
                 {
                   uo_codigo: uo.unidad_obra_cod,
@@ -78,6 +79,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
                   uo_precio_total_clp: uo.valor_unitario_clp,
                   actividad_descripcion: 'TODO',
                   actividad_id: -1,
+                  uo_cantidad: uo.cantidad,
                 },
               ],
             };

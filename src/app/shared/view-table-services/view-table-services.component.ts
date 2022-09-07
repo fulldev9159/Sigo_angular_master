@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CarritoService, CarritoUO } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 /**
  * @description DESPLIEGUE VISUAL LOS DATOS DEL STORE CARRITO
@@ -12,6 +12,8 @@ import { map } from 'rxjs';
   styleUrls: ['./view-table-services.component.scss'],
 })
 export class ViewTableServicesComponent {
+  totalServicios = 0;
+  totalUOs = 0;
   carritoServices$ = this.serviciosFacade.carrito$().pipe(
     map(servicios => {
       let valueInitial: CarritoService[] = [];
@@ -41,6 +43,21 @@ export class ViewTableServicesComponent {
       } else {
         return [];
       }
+    }),
+    tap(servicios => {
+      if (servicios && servicios.length > 0) {
+        this.totalServicios = 0;
+        this.totalUOs = 0;
+        servicios.forEach(servicio => {
+          this.totalServicios =
+            this.totalServicios +
+            +servicio.servicio_cantidad * +servicio.servicio_precio_final_clp;
+          servicio.unidad_obras.forEach(uo => {
+            this.totalUOs =
+              this.totalUOs + +uo.uo_cantidad * +uo.uo_precio_total_clp;
+          });
+        });
+      }
     })
   );
   constructor(private serviciosFacade: ServiciosFacade) {}
@@ -57,18 +74,23 @@ export class ViewTableServicesComponent {
     </td>
 
     <ng-container *ngIf="uo.uo_codigo === '0'">
-      <td colspan="6" align="center">No Aplica</td>
+      <td colspan="4" align="center">No Aplica</td>
     </ng-container>
 
     <ng-container *ngIf="uo.uo_codigo !== '0'">
       <td>
         {{ uo.actividad_descripcion | titlecase }}
       </td>
-      <td>TODO</td>
+      <td>{{ uo.uo_cantidad }}</td>
       <td>
         {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
       </td>
-      <td>TODO</td>
+      <td>
+        {{
+          +uo.uo_precio_total_clp * +uo.uo_cantidad
+            | currency: 'CLP':'$':'.0-2':'es-CL'
+        }}
+      </td>
     </ng-container>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -91,11 +113,18 @@ export class ViewUOTableComponent {
     <td [attr.rowspan]="+item.unidad_obras.length">
       {{ item.tipo_servicio_descripcion | titlecase }}
     </td>
-    <td [attr.rowspan]="+item.unidad_obras.length">TODO</td>
+    <td [attr.rowspan]="+item.unidad_obras.length">
+      {{ item.servicio_cantidad }}
+    </td>
     <td [attr.rowspan]="+item.unidad_obras.length">
       {{ +item.servicio_precio_final_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
     </td>
-    <td [attr.rowspan]="+item.unidad_obras.length">TODO</td>
+    <td [attr.rowspan]="+item.unidad_obras.length">
+      {{
+        +item.servicio_precio_final_clp * +item.servicio_cantidad
+          | currency: 'CLP':'$':'.0-2':'es-CL'
+      }}
+    </td>
 
     <!-- UNIDAD DE OBRA -->
     <td style="background-color: #ff8e4e">
@@ -106,21 +135,27 @@ export class ViewUOTableComponent {
     </td>
 
     <ng-container *ngIf="item.unidad_obras[0].uo_codigo === '0'">
-      <td colspan="6" align="center">No Aplica</td>
+      <td colspan="4" align="center">No Aplica</td>
     </ng-container>
 
     <ng-container *ngIf="item.unidad_obras[0].uo_codigo !== '0'">
       <td>
         {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
       </td>
-      <td>TODO</td>
+      <td>{{ item.unidad_obras[0].uo_cantidad }}</td>
       <td>
         {{
           item.unidad_obras[0].uo_precio_total_clp
             | currency: 'CLP':'$':'.0-2':'es-CL'
         }}
       </td>
-      <td>TODO</td>
+      <td>
+        {{
+          +item.unidad_obras[0].uo_precio_total_clp *
+            +item.unidad_obras[0].uo_cantidad
+            | currency: 'CLP':'$':'.0-2':'es-CL'
+        }}
+      </td>
     </ng-container>
   `,
 })

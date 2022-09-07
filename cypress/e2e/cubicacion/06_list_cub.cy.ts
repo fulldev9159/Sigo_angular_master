@@ -18,22 +18,222 @@ describe('Listar Cubicaciones', () => {
   it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {
     cy.get('button[id="button-detalle-cubicacion"]').click();
 
-    cy.get('.carrito-container> table > tbody > tr:nth-child(1) > td')
+    let fila = '.carrito-container> table > tbody > tr:nth-child(1) > td';
+
+    // SERVICIO J451
+    cy.get(fila)
       .eq(0)
       .contains(
         BucleApoCobra.items[0].tipos_servicio[0].servicios[0].nombre
           .split('-')[0]
           .trim()
       );
-    cy.get('.carrito-container> table > tbody > tr:nth-child(1) > td')
+    cy.get(fila)
       .eq(1)
       .contains(
         BucleApoCobra.items[0].tipos_servicio[0].servicios[0].nombre
           .split('-')[1]
           .trim()
       );
-    cy.get('.carrito-container> table > tbody > tr:nth-child(1) > td')
-      .eq(2)
-      .contains('Cables');
+    cy.get(fila).eq(2).contains('Cables');
+    cy.get(fila).eq(3).contains('4.53');
+    cy.get(fila)
+      .eq(4)
+      .contains(BucleApoCobra.items[0].tipos_servicio[0].servicios[0].precio);
+    cy.get(fila).eq(5).contains('$816,85');
+    cy.get(fila)
+      .eq(6)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[0].unidad_obras[0].nombre
+          .split('-')[0]
+          .trim()
+      );
+    cy.get(fila)
+      .eq(7)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[0].unidad_obras[0].nombre
+          .split('-')[1]
+          .trim()
+      );
+    // cy.get(fila).eq(8).contains('Matriz');
+    cy.get(fila).eq(9).contains('10');
+    cy.get(fila).eq(10).contains('$56,8');
+    cy.get(fila).eq(11).contains('$568');
+
+    // SERVICIO J451 UO 2
+    fila = '.carrito-container> table > tbody > tr:nth-child(2) > td';
+    cy.get(fila)
+      .eq(0)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[0].unidad_obras[1].nombre
+          .split('-')[0]
+          .trim()
+      );
+    cy.get(fila)
+      .eq(1)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[0].unidad_obras[1].nombre
+          .split('-')[1]
+          .trim()
+      );
+    // cy.get(fila).eq(2).contains('Matriz');
+    cy.get(fila).eq(3).contains('1');
+    cy.get(fila)
+      .eq(4)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[0].unidad_obras[1]
+          .precio
+      );
+    cy.get(fila).eq(5).contains('$0');
+
+    // SERVICIO J456
+    fila = '.carrito-container> table > tbody > tr:nth-child(3) > td';
+
+    cy.get(fila)
+      .eq(0)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].nombre
+          .split('-')[0]
+          .trim()
+      );
+    cy.get(fila)
+      .eq(1)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].nombre
+          .split('-')[1]
+          .trim()
+      );
+    cy.get(fila).eq(2).contains('Cables');
+    cy.get(fila).eq(3).contains('105.7');
+    cy.get(fila)
+      .eq(4)
+      .contains(BucleApoCobra.items[0].tipos_servicio[0].servicios[1].precio);
+    cy.get(fila).eq(5).contains('$519.380,2');
+    cy.get(fila)
+      .eq(6)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[0].nombre
+          .split('-')[0]
+          .trim()
+      );
+    cy.get(fila)
+      .eq(7)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[0].nombre
+          .split('-')[1]
+          .trim()
+      );
+    // cy.get(fila).eq(8).contains('Matriz');
+    cy.get(fila).eq(9).contains('5.24');
+    cy.get(fila).eq(10).contains('$57.200,64');
+    cy.get(fila).eq(11).contains('$299.731');
+
+    // SERVICIO J456 UO D240
+    fila = '.carrito-container> table > tbody > tr:nth-child(4) > td';
+    cy.get(fila)
+      .eq(0)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[1].nombre
+          .split('-')[0]
+          .trim()
+      );
+    cy.get(fila)
+      .eq(1)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[1].nombre
+          .split('-')[1]
+          .trim()
+      );
+    // cy.get(fila).eq(2).contains('Matriz');
+    cy.get(fila).eq(3).contains('100');
+    cy.get(fila)
+      .eq(4)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[1]
+          .precio
+      );
+    cy.get(fila).eq(5).contains('$320.000');
+
+    // SERVICIO J456 UO D239
+    fila = '.carrito-container> table > tbody > tr:nth-child(5) > td';
+    cy.get(fila)
+      .eq(0)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[2].nombre
+          .split('-')[0]
+          .trim()
+      );
+    cy.get(fila)
+      .eq(1)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[2].nombre
+          .split('-')[1]
+          .trim()
+      );
+    // cy.get(fila).eq(2).contains('Matriz');
+    cy.get(fila).eq(3).contains('1');
+    cy.get(fila)
+      .eq(4)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[2]
+          .precio
+      );
+    cy.get(fila).eq(5).contains('$0');
+
+    // SERVICIO J456 UO D238
+    fila = '.carrito-container> table > tbody > tr:nth-child(6) > td';
+    cy.get(fila)
+      .eq(0)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[3].nombre
+          .split('-')[0]
+          .trim()
+      );
+    cy.get(fila)
+      .eq(1)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[3].nombre
+          .split('-')[1]
+          .trim()
+      );
+    // cy.get(fila).eq(2).contains('Matriz');
+    cy.get(fila).eq(3).contains('1');
+    cy.get(fila)
+      .eq(4)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[3]
+          .precio
+      );
+    cy.get(fila).eq(5).contains('$0');
+
+    // SERVICIO J456 UO D006
+    fila = '.carrito-container> table > tbody > tr:nth-child(7) > td';
+    cy.get(fila)
+      .eq(0)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[4].nombre
+          .split('-')[0]
+          .trim()
+      );
+    cy.get(fila)
+      .eq(1)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[4].nombre
+          .split('-')[1]
+          .trim()
+      );
+    // cy.get(fila).eq(2).contains('Matriz');
+    cy.get(fila).eq(3).contains('1');
+    cy.get(fila)
+      .eq(4)
+      .contains(
+        BucleApoCobra.items[0].tipos_servicio[0].servicios[1].unidad_obras[4]
+          .precio
+      );
+    cy.get(fila).eq(5).contains('$0');
+
+    cy.get('td[class="total-servicio-monto"]').contains('$2.923.750,85');
+    cy.get('td[class="total-uo-monto"]').contains('$2.222.723,55');
+    cy.get('td[class="total-cubicacion-monto"]').contains('$5.146.474,41');
   });
 });
