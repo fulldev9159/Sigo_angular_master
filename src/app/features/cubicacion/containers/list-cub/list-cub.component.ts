@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { FormControl, FormGroup } from '@angular/forms';
-import { CarritoService, Cubicacion } from '@model';
+import { CarritoService, Cubicacion, DetalleCubicacion } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { map, Observable, Subscription, take, tap } from 'rxjs';
@@ -57,8 +57,10 @@ export class ListCubComponent implements OnInit, OnDestroy {
       take(1)
     );
 
+  detalleCubicacion: DetalleCubicacion = null;
   // AGREGAR DATOS A CARRITO PARA DESPLIEGUE DE SERVICIOS
   detalleCubicacion$ = this.cubicacionFacade.detalleCubicacion$().pipe(
+    tap(detalleCubicacion => (this.detalleCubicacion = detalleCubicacion)),
     tap(cubicacion => {
       if (cubicacion) {
         cubicacion.many_cubicacion_has_servicio.forEach(service => {
@@ -135,10 +137,9 @@ export class ListCubComponent implements OnInit, OnDestroy {
         routerLink: ['/cubicacion/form-cub'],
       },
     ];
+    this.subscription.add(this.detalleCubicacion$.subscribe());
 
     this.observerFilters();
-
-    this.subscription.add(this.detalleCubicacion$.subscribe());
   }
 
   observerFilters(): void {

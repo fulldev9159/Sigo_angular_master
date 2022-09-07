@@ -146,9 +146,31 @@
         <div class="loading-modal-content" *ngIf="loagingGetDetalleCubicacion$|async  ; else content">
             <p>Loading...</p>
         </div>
-
     </ng-container>
     <ng-template #content>
+        <!-- TODO: NECESITO OBTENER EL TIPO CONTRATO  -->
+        <ng-container *ngIf="detalleCubicacion?.contrato_id===9">
+            <p-divider align="left">
+                <span class="p-tag">Detales de dirección</span>
+            </p-divider>
+            <table class="info-bucle-direccion">
+                <tr>
+                    <td style="background: #efefef;"><strong>Direccion desde</strong></td>
+                    <td>{{detalleCubicacion?.direccion_desde}}</td>
+                    <td style="background: #efefef;"><strong>Altura</strong> </td>
+                    <td>{{detalleCubicacion?.altura_desde}}</td>
+                </tr>
+                <tr>
+                    <td style="background: #efefef;"><strong>Direccion Hasta</strong> </td>
+                    <td>{{detalleCubicacion?.direccion_hasta}}</td>
+                    <td style="background: #efefef;"><strong>Altura</strong> </td>
+                    <td>{{detalleCubicacion?.altura_hasta}}</td>
+                </tr>
+            </table>
+        </ng-container>
+        <p-divider align="center">
+            <span class="p-tag">Cubicación</span>
+        </p-divider>
         <zwc-view-table-services></zwc-view-table-services>
     </ng-template>
 </p-dialog>

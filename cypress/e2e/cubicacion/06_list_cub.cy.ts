@@ -235,5 +235,8 @@ describe('Listar Cubicaciones', () => {
     cy.get('td[class="total-servicio-monto"]').contains('$2.923.750,85');
     cy.get('td[class="total-uo-monto"]').contains('$2.222.723,55');
     cy.get('td[class="total-cubicacion-monto"]').contains('$5.146.474,41');
+
+    cy.get('button.p-dialog-header-close').click();
+    // REVISAR CASO EN QUE SE ESCOGA VER DETALLE DE OTRO SERVICIO
   });
 });
