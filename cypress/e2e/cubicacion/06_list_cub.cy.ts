@@ -12,4 +12,8 @@ describe('Listar Cubicaciones', () => {
     cy._filter_table('filter-nombre-cubicacion', 'Cubicacion Bucle');
     cy.get('tbody').find('tr').should('have.length', 1);
   });
+
+  it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {
+    cy.get('button[id="button-detalle-cubicacion"]').click();
+  });
 });

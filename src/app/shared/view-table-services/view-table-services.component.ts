@@ -69,7 +69,6 @@ export class ViewTableServicesComponent {
         {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
       </td>
       <td>TODO</td>
-      <td></td>
     </ng-container>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -97,7 +96,6 @@ export class ViewUOTableComponent {
       {{ +item.servicio_precio_final_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
     </td>
     <td [attr.rowspan]="+item.unidad_obras.length">TODO</td>
-    <td [attr.rowspan]="+item.unidad_obras.length"></td>
 
     <!-- UNIDAD DE OBRA -->
     <td style="background-color: #ff8e4e">
@@ -123,7 +121,6 @@ export class ViewUOTableComponent {
         }}
       </td>
       <td>TODO</td>
-      <td></td>
     </ng-container>
   `,
 })

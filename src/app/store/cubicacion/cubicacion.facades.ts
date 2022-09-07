@@ -120,4 +120,7 @@ export class CubicacionFacade {
   public resetAgenciaSelected(): void {
     this.store.dispatch(cubicacionActions.resetAgenciaSelected());
   }
+  public resetDetalleCubicacion(): void {
+    this.store.dispatch(cubicacionActions.resetDetalleCubicacion());
+  }
 }

@@ -69,3 +69,8 @@ export const sendingGetCubicaciones = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetCubicaciones
 );
+
+export const sendingDetalleCubicacion = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingDetalleCubicacion
+);

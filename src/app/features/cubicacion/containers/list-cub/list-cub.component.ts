@@ -90,6 +90,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   // LOADINGS
   getCubicacioneSending$ = this.loadingFacade.sendingGetCubicaciones$();
+  loagingGetDetalleCubicacion$ = this.loadingFacade.sendingDetalleCubicacion$();
 
   // FORMULARIO
   formFilterControl = {
@@ -105,8 +106,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   formFilter: FormGroup = new FormGroup(this.formFilterControl);
 
-  // DIALOGS
-  display = false;
+  // MODALS
+  displayModalDetalleCubicacion = false;
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
@@ -322,10 +323,15 @@ export class ListCubComponent implements OnInit, OnDestroy {
   }
 
   showDetalleCubicacion(): void {
-    this.display = true;
+    this.displayModalDetalleCubicacion = true;
     this.serviciosFacade.resetCarritoServices();
     // NEW
     this.cubicacionFacade.detalleCubicacion(4);
+  }
+
+  closeModalDetalleCubicacion(): void {
+    this.serviciosFacade.resetCarritoServices();
+    this.cubicacionFacade.resetDetalleCubicacion();
   }
 
   confirmarElminacion(): void {

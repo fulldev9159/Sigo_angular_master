@@ -23,6 +23,7 @@ export interface StateLoadings {
   sendingAgregarServicioCarrito: boolean;
   sendingSaveCubicacion: boolean;
   sendingGetCubicaciones: boolean;
+  sendingDetalleCubicacion: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -39,6 +40,7 @@ export const initialStateLoading: StateLoadings = {
   sendingAgregarServicioCarrito: false,
   sendingSaveCubicacion: false,
   sendingGetCubicaciones: false,
+  sendingDetalleCubicacion: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -196,5 +198,17 @@ export const reducerLoadings = createReducer(
       ...state,
       sendingGetCubicaciones: false,
     })
-  )
+  ),
+  on(
+    cubicacionActions.detalleCubicacionSuccess,
+    cubicacionActions.detalleCubicacionError,
+    state => ({
+      ...state,
+      sendingDetalleCubicacion: false,
+    })
+  ),
+  on(cubicacionActions.detalleCubicacion, state => ({
+    ...state,
+    sendingDetalleCubicacion: true,
+  }))
 );

@@ -109,3 +109,7 @@ export const resetProveedorSelected = createAction(
 export const resetAgenciaSelected = createAction(
   '[CUBICACION] resetAgenciaSelected '
 );
+
+export const resetDetalleCubicacion = createAction(
+  '[CUBICACION] resetDetalleCubicacion '
+);

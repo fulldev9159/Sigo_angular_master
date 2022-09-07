@@ -5,14 +5,21 @@ import {
   listaCubicacionesMOCK200ok,
 } from '@mocksOT';
 import { provideMockStore } from '@ngrx/store/testing';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import {
   detalleCubicacion,
   listarCubicaciones,
 } from '@storeOT/cubicacion/cubicacion.selectors';
-import { sendingGetCubicaciones } from '@storeOT/loadings/loadings.selectors';
+import {
+  sendingDetalleCubicacion,
+  sendingGetCubicaciones,
+} from '@storeOT/loadings/loadings.selectors';
+import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 
 import { ListCubComponent } from './list-cub.component';
 let initialState: any = { example: [] };
+let serviciosFacade: ServiciosFacade;
+let cubicacionFacade: CubicacionFacade;
 
 describe('ListCubComponent', () => {
   let component: ListCubComponent;
@@ -39,6 +46,10 @@ describe('ListCubComponent', () => {
               selector: detalleCubicacion,
               value: detalleCubicacionMOCK200Ok.data,
             },
+            {
+              selector: sendingDetalleCubicacion,
+              value: false,
+            },
           ],
         }),
       ],
@@ -47,9 +58,20 @@ describe('ListCubComponent', () => {
     fixture = TestBed.createComponent(ListCubComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    serviciosFacade = TestBed.inject(ServiciosFacade);
+    cubicacionFacade = TestBed.inject(CubicacionFacade);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('closeModalDetalleCubicacion should call reset CarritoServices and resetDetalleCubicacion', () => {
+    spyOn(serviciosFacade, 'resetCarritoServices');
+    spyOn(cubicacionFacade, 'resetDetalleCubicacion');
+    component.closeModalDetalleCubicacion();
+    expect(serviciosFacade.resetCarritoServices).toHaveBeenCalled();
+    expect(cubicacionFacade.resetDetalleCubicacion).toHaveBeenCalled();
   });
 });

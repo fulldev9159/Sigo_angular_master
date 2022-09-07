@@ -107,7 +107,7 @@
                             <td style="width:100px">{{item.total| currency: 'CLP':'$':'.0-2':'es-CL'}}</td>
                             <td style="width:300px">
                                 <div class="buttons-operaciones ">
-                                    <button (click)="showDetalleCubicacion()">
+                                    <button (click)="showDetalleCubicacion()" id="button-detalle-cubicacion">
                                         <fa-icon [icon]="infoIcon"></fa-icon> Detalles
                                     </button>
                                     <button>
@@ -136,9 +136,18 @@
     </div>
 </zwc-content-layout>
 
-<p-dialog header="Title" [(visible)]="display">
+<p-dialog header="Detalles de Cubicación" [(visible)]="displayModalDetalleCubicacion" [draggable]="false" [modal]="true"
+    (onHide)="closeModalDetalleCubicacion()">
     <!-- <zwc-view-confirmacion pregunta="¿Está seguro que desea eliminar esta cubicación?"
         (cancelar)="closeDialogConfirmacion()" (confirmar)="confirmarElminacion()"></zwc-view-confirmacion> -->
+    <!--  -->
+    <ng-container>
+        <div class="loading-modal-content" *ngIf="loagingGetDetalleCubicacion$|async  ; else content">
+            <p>Loading...</p>
+        </div>
 
-    <zwc-view-table-services></zwc-view-table-services>
+    </ng-container>
+    <ng-template #content>
+        <zwc-view-table-services></zwc-view-table-services>
+    </ng-template>
 </p-dialog>

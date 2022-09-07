@@ -62,6 +62,31 @@
     .p-datatable-footer {
         font-size: 0.8rem;
     }
+
+    .loading-modal-content {
+        width: 47vw;
+        height: 48vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 21px;
+        color: #023a58;
+        background-color: #f0eeee;
+    }
+
+    .p-dialog .p-dialog-header {
+        padding: 1rem;
+        background: #404d99;
+        color: rgba(234, 234, 234, 0.87);
+    }
+
+    .p-dialog .p-dialog-header .p-dialog-header-icon {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .p-dialog .p-dialog-content {
+        padding: 17px 1.5rem 1.5rem 1.5rem;
+    }
 }
 
 .buttons-operaciones {
@@ -91,4 +116,7 @@
             background: #4b5ec5;
         }
     }
+
+
+
 }
