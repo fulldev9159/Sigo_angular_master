@@ -935,7 +935,9 @@ export const getComentariosFinalizacionTrabajos = createAction(
 
 export const getComentariosFinalizacionTrabajosSuccess = createAction(
   '[OT] GET getComentariosFinalizacionTrabajos Success',
-  props<{ response: Response<any> }>()
+  props<{
+    response: Response<{ ot_id: number; acta_id: number; observacion: string }>;
+  }>()
 );
 export const getComentariosFinalizacionTrabajosError = createAction(
   '[OT] GET getComentariosFinalizacionTrabajos Error',

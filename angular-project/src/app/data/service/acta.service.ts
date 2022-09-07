@@ -112,7 +112,13 @@ export class ActaService {
   }
 
   // OBTENER COMENTARIOS FINALIZACION DE TRABAJOS
-  getComentatiosfinalizacionTrabajos(request: any): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.apiUrl}`, request);
+  getComentatiosfinalizacionTrabajos(
+    ot_id: number
+  ): Observable<
+    Response<{ ot_id: number; acta_id: number; observacion: string }>
+  > {
+    return this.http.post<
+      Response<{ ot_id: number; acta_id: number; observacion: string }>
+    >(`${this.apiUrl}/ot/acta/trabajo/finalizado/observacion/get`, { ot_id });
   }
 }

@@ -695,7 +695,7 @@ export class OtFacade {
     );
   }
 
-  public getComentariosFinalizacionTrabajos$(): Observable<LastActa> {
+  public getComentariosFinalizacionTrabajos$(): Observable<string> {
     return this.store.select(otSelectors.getComentariosFinalizacionTrabajos);
   }
 

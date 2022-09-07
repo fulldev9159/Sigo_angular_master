@@ -729,8 +729,8 @@ export class OtEffects {
   getComentariosTrabajosFinalizados$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.getComentariosFinalizacionTrabajos),
-      concatMap(({}) =>
-        this.actaService.getComentatiosfinalizacionTrabajos(1).pipe(
+      concatMap(({ ot_id }) =>
+        this.actaService.getComentatiosfinalizacionTrabajos(ot_id).pipe(
           map(response =>
             otActions.getComentariosFinalizacionTrabajosSuccess({ response })
           ),

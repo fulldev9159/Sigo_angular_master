@@ -115,7 +115,7 @@ export interface StateOt {
   sendingGeneracionActa: boolean;
 
   quienAutorizoPago: QuienAutorizoActa[];
-  comentariosFinalizacionTrabajos: any;
+  comentariosFinalizacionTrabajos: string;
 }
 
 export const initialStateOt: StateOt = {
@@ -194,7 +194,7 @@ export const initialStateOt: StateOt = {
   sendingGeneracionActa: false,
 
   quienAutorizoPago: [],
-  comentariosFinalizacionTrabajos: null,
+  comentariosFinalizacionTrabajos: '',
 };
 
 export const reducerOt = createReducer(
@@ -730,8 +730,11 @@ export const reducerOt = createReducer(
     ...state,
     quienAutorizoPago: response.data.items,
   })),
-  on(OtActions.confirmarRechazoObrasSuccess, (state, { response }) => ({
-    ...state,
-    comentariosFinalizacionTrabajos: response.data.items,
-  }))
+  on(
+    OtActions.getComentariosFinalizacionTrabajosSuccess,
+    (state, { response }) => ({
+      ...state,
+      comentariosFinalizacionTrabajos: response.data.observacion,
+    })
+  )
 );
