@@ -69,6 +69,7 @@ services:
       DB_MAXLIFETIMECONNECTION: 300
       API_SCE_ADDRESS: https://demos-sce.zweicom.services/sce_api
       LDAP_GUIA_ADDRESS: ldap://openldap:1389
+      ASSETS_PATH: /go/bin/assets
       MOCKUP_PATH: /go/bin/mockups/
       TREEOT: mcl_OT_testing
       DEPLOY: test
