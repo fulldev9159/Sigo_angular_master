@@ -74,4 +74,11 @@ describe('ListCubComponent', () => {
     expect(serviciosFacade.resetCarritoServices).toHaveBeenCalled();
     expect(cubicacionFacade.resetDetalleCubicacion).toHaveBeenCalled();
   });
+
+  it('showDetalleCubicacion display modal, reset carritoService antes de llenarlo con nuevos datos y llamar al facade con id 1 ', () => {
+    spyOn(cubicacionFacade, 'detalleCubicacion');
+    component.showDetalleCubicacion(1);
+    expect(component.displayModalDetalleCubicacion).toBe(true);
+    expect(cubicacionFacade.detalleCubicacion).toHaveBeenCalledWith(1);
+  });
 });

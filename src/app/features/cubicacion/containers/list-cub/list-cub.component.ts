@@ -322,11 +322,10 @@ export class ListCubComponent implements OnInit, OnDestroy {
     );
   }
 
-  showDetalleCubicacion(): void {
+  showDetalleCubicacion(cubicacion_id: number): void {
     this.displayModalDetalleCubicacion = true;
     this.serviciosFacade.resetCarritoServices();
-    // NEW
-    this.cubicacionFacade.detalleCubicacion(4);
+    this.cubicacionFacade.detalleCubicacion(cubicacion_id);
   }
 
   closeModalDetalleCubicacion(): void {
