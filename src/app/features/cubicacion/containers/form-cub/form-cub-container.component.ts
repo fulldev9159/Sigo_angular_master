@@ -18,11 +18,13 @@ import localeEsCl from '@angular/common/locales/es-CL';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { combineLatest, Observable, Subscription, take } from 'rxjs';
 import {
+  DetalleCubicacion,
   ProveedorAgenciaContrato,
   RequestCreateCubicacion,
   SessionData,
 } from '@model';
 import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-table-services.component';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'zwc-form-cub',
@@ -67,7 +69,8 @@ export class FormCubContainerComponent
     private contratoFacade: ContratoFacade,
     private cubicacionFacade: CubicacionFacade,
     private serviciosFacade: ServiciosFacade,
-    private loadingFacade: LoadingsFacade
+    private loadingFacade: LoadingsFacade,
+    private route: ActivatedRoute
   ) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
@@ -82,6 +85,8 @@ export class FormCubContainerComponent
       },
       { label: 'Formulario Cubicación', styleClass: 'last-route' },
     ];
+
+    this.serviciosFacade.resetCarritoServices();
   }
 
   ngAfterViewInit(): void {
@@ -216,10 +221,72 @@ export class FormCubContainerComponent
           .get('unidad_obra_cod')
           .setValue(null, { emitEvent: false });
       });
+
+    this.subscription.add(
+      this.route.data.subscribe(({ detalleCubicacion }) => {
+        const detalle = detalleCubicacion.data;
+        if (detalle) {
+          if (this.formulario.formCub && detalle) {
+            const cubicacion = detalle as DetalleCubicacion;
+            const servicios = cubicacion.many_cubicacion_has_servicio ?? [];
+
+            const formData = {
+              id: `${cubicacion.id}`,
+
+              nombre: cubicacion.nombre,
+              tipocubicacion: cubicacion.tipo_cubicacion_id,
+              direcciondesde: cubicacion.direccion_desde,
+              direcciondesdealtura: cubicacion.altura_desde,
+              direccionhasta: cubicacion.direccion_hasta,
+              direccionhastaaltura: cubicacion.altura_hasta,
+              descripcion: cubicacion.descripcion,
+
+              contrato: cubicacion.contrato_id,
+            };
+
+            this.formulario.formCub.patchValue(formData);
+
+            setTimeout(() => {
+              this.formulario.formCub
+                .get('agencia_id')
+                .setValue(cubicacion.agencia_id);
+            }, 10);
+            setTimeout(() => {
+              this.formulario.formCub
+                .get('cmarcoproveedor_id')
+                .setValue(cubicacion.cmarco_has_proveedor_id);
+            }, 10);
+          }
+
+          // table: servicios.map(data_servicio => ({
+          //   precargado: true,
+          //   servicio_rowid: data_servicio.id,
+
+          //   servicio_id: data_servicio.servicio_id,
+          //   servicio_cantidad: data_servicio.cantidad,
+          //   servicio_precio_final_clp: data_servicio.valor_unitario_clp,
+          //   actividad_id: data_servicio.actividad_id,
+          //   servicio_tipo: data_servicio.tipo_servicio_id,
+
+          //   unidades_obras: data_servicio.many_cubicacion_has_uob.map(
+          //     data_unidad_obra => ({
+          //       precargado: true,
+          //       uo_rowid: data_unidad_obra.id,
+
+          //       uo_codigo: data_unidad_obra.unidad_obra_cod,
+          //       uo_cantidad: data_unidad_obra.cantidad,
+          //       uo_precio_total_clp: data_unidad_obra.valor_unitario_clp,
+          //     })
+          //   ),
+          // })),
+          // this.mode = 'edit';
+          // this.onInitEditionData(detalle);
+        }
+      })
+    );
   }
 
   createCubicacion(): void {
-    console.log('click');
     this.subscription.add(
       combineLatest([this.proveedorSelected$, this.carrito$])
         .pipe(take(1))

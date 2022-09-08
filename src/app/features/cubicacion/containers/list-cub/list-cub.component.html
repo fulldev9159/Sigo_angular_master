@@ -115,7 +115,8 @@
                                         id="button-clonar-cubicacion">
                                         <fa-icon [icon]="cloneIcon"></fa-icon> Clonar
                                     </button>
-                                    <button>
+                                    <button (click)="editarCubicacion(item.cubicacion_id)"
+                                        id="button-editar-cubicacion">
                                         <fa-icon [icon]="editIcon"></fa-icon> Editar
                                     </button>
                                     <button style="background-color: #d32f2f;"

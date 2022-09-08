@@ -13,6 +13,7 @@ import {
   faPencil,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 @Component({
   selector: 'zwc-list-cub',
   templateUrl: './list-cub.component.html',
@@ -118,7 +119,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
   constructor(
     private cubicacionFacade: CubicacionFacade,
     private serviciosFacade: ServiciosFacade,
-    private loadingFacade: LoadingsFacade
+    private loadingFacade: LoadingsFacade,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -363,6 +365,12 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   closeModalEliminarCubicacion(): void {
     this.displayModalEliminarCubicacion = false;
+  }
+
+  // EDITAR CUBICACION
+  editarCubicacion(cubicacion_id: number): void {
+    this.subscription.unsubscribe();
+    this.router.navigate(['/cubicacion/form-cub', cubicacion_id]);
   }
 
   ngOnDestroy(): void {

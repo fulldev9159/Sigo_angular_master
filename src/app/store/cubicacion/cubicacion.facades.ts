@@ -116,6 +116,15 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.detalleCubicacion({ cubicacion_id }));
   }
 
+  public detalleCubicacionSuccess(response: Response<DetalleCubicacion>): void {
+    this.store.dispatch(
+      cubicacionActions.detalleCubicacionSuccess({ response })
+    );
+  }
+  public detalleCubicacionError(error: any): void {
+    this.store.dispatch(cubicacionActions.detalleCubicacionError({ error }));
+  }
+
   public detalleCubicacion$(): Observable<DetalleCubicacion> {
     return this.store.select(cubicacionSelectors.detalleCubicacion);
   }
