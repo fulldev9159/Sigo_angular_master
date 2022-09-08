@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   ContratosUsuarioMOCK200OK,
+  detalleCubicacionMOCK200Ok,
   getActividadesContratoProveedorMOCK200ok,
   getAgenciasContratoMOCK200OK2,
   getProveedoresAgenciaContratoMOCK200OK2,
@@ -52,6 +53,9 @@ import { FormularioComponent } from '../../components/formulario/formulario.comp
 let initialState: any = { tipoCubicaciones: [] };
 
 import { FormCubContainerComponent } from './form-cub-container.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 describe('FormCubContainerComponent', () => {
   let component: FormCubContainerComponent;
@@ -61,11 +65,17 @@ describe('FormCubContainerComponent', () => {
   let cubicacionFacade: CubicacionFacade;
   let servicioFacade: ServiciosFacade;
   let store: MockStore<any>;
+  const route = { data: of({ detalleCubicacion: detalleCubicacionMOCK200Ok }) };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [StoreModule.forRoot({}), FormsModule, ReactiveFormsModule],
+      imports: [
+        StoreModule.forRoot({}),
+        FormsModule,
+        ReactiveFormsModule,
+        RouterTestingModule,
+      ],
       declarations: [
         FormCubContainerComponent,
         FormularioComponent,
@@ -73,6 +83,7 @@ describe('FormCubContainerComponent', () => {
         FormAgregarServiciosComponent,
       ],
       providers: [
+        { provide: ActivatedRoute, useValue: route },
         { provide: LOCALE_ID, useValue: 'es-CL' },
         provideMockStore({
           initialState,

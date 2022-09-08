@@ -226,8 +226,9 @@ export class FormCubContainerComponent
 
     this.subscription.add(
       this.route.data.subscribe(({ detalleCubicacion }) => {
-        const detalle = detalleCubicacion.data;
-        if (detalle) {
+        if (detalleCubicacion) {
+          const detalle = detalleCubicacion.data;
+
           if (this.formulario.formCub && detalle) {
             this.editMode = true;
             const cubicacion = detalle as DetalleCubicacion;

@@ -1,5 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import {
   detalleCubicacionMOCK200Ok,
   listaCubicacionesMOCK200ok,
@@ -27,6 +28,7 @@ describe('ListCubComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [ListCubComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
