@@ -45,6 +45,7 @@ import {
   RequestAprobacionRechazoSolicitudPago,
   RequestAceptarRechazarAdicionales,
   RequestAprobarRechazarOperaciones,
+  RequestValidateActa,
 } from '@data';
 @Injectable({
   providedIn: 'root',
@@ -456,25 +457,8 @@ export class OtFacade {
   }
 
   // SEND GENERACION ACTA OLD
-  public sendGeneracionActaOLD(
-    ot_id: number,
-    tipo_pago: string,
-    detalle: {
-      servicio: {
-        rowid: number;
-        cantidad: number;
-        porcentaje: number;
-      }[];
-      unidad_obra: {
-        rowid: number;
-        cantidad: number;
-        porcentaje: number;
-      }[];
-    }
-  ): void {
-    this.store.dispatch(
-      otActions.sendGeneracionActaOLD({ ot_id, tipo_pago, detalle })
-    );
+  public sendGeneracionActaOLD(request: RequestValidateActa): void {
+    this.store.dispatch(otActions.sendGeneracionActaOLD({ request }));
   }
 
   public sendingGeneracionActa$(): Observable<boolean> {

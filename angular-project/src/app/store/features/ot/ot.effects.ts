@@ -511,8 +511,8 @@ export class OtEffects {
   SendGeneracionActaOLD$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.sendGeneracionActaOLD),
-      concatMap(({ ot_id, tipo_pago, detalle }) =>
-        this.actaService.sendGeneracionActaOLD(ot_id, tipo_pago, detalle).pipe(
+      concatMap(({ request }) =>
+        this.actaService.sendGeneracionActaOLD(request).pipe(
           map(response => otActions.sendGeneracionActaSuccessOLD({ response })),
           catchError(error =>
             of(otActions.sendGeneracionActaErrorOLD({ error }))

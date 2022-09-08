@@ -9,7 +9,12 @@ import {
 } from '@angular/forms';
 import { Subscription, Observable, of, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ActaTipoPago, DetalleActaServicio, DetalleActaUob } from '@data';
+import {
+  ActaTipoPago,
+  DetalleActaServicio,
+  DetalleActaUob,
+  RequestValidateActa,
+} from '@data';
 
 interface Detalle {
   servicio: {
@@ -525,7 +530,20 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  formSubmitted(ot_id: number, tipo_pago: string, detalle: Detalle): void {
-    this.otFacade.sendGeneracionActaOLD(ot_id, tipo_pago, detalle);
+  formValidar(
+    ot_id: number,
+    tipo_pago: string,
+    values: { detalle: Detalle; estado: string }
+  ): void {
+    let request: RequestValidateActa = {
+      ot_id,
+      tipo_pago,
+      observacion: null,
+      estado: values.estado,
+      detalle: values.detalle,
+    };
+
+    console.log(request);
+    // this.otFacade.sendGeneracionActaOLD(ot_id, tipo_pago, detalle);
   }
 }

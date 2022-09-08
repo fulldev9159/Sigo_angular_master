@@ -45,6 +45,7 @@ import {
   QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
   RequestAprobarRechazarOperaciones,
+  RequestValidateActa,
 } from '@data';
 
 // GET OTS
@@ -630,20 +631,7 @@ export const sendGeneracionActaError = createAction(
 export const sendGeneracionActaOLD = createAction(
   '[OT] GET sendGeneracionActaOLD',
   props<{
-    ot_id: number;
-    tipo_pago: string;
-    detalle: {
-      servicio: {
-        rowid: number;
-        cantidad: number;
-        porcentaje: number;
-      }[];
-      unidad_obra: {
-        rowid: number;
-        cantidad: number;
-        porcentaje: number;
-      }[];
-    };
+    request: RequestValidateActa;
   }>()
 );
 

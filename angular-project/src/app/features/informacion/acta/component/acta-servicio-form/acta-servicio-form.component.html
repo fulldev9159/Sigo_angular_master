@@ -100,7 +100,27 @@
   <div class="ccol-md-4 col-xs-12"></div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="(sessionData$|async)?.nombre_perfil_select==='Gestor/JP'">
+  <div class="col-xs-12 col-md-12">
+    <div style="text-align: right">
+      <!-- <ng-container *ngIf="saving; else noSaving">
+        <button class="btn btn-primary disabled">
+          <em class="pi pi-spin pi-spinner mr-1"></em>Enviar
+        </button>
+      </ng-container> -->
+      <!-- <ng-template #noSaving> -->
+      <button class="btn btn-primary" (click)="validarInt()" [class.disabled]="!valid">
+        <em class="pi pi-send mr-1"></em>Aceptar
+      </button>
+      <button class="btn btn-primary" [class.disabled]="!valid">
+        <em class="pi pi-send mr-1"></em>Rechazar Falta implementar
+      </button>
+      <!-- </ng-template> -->
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
   <div class="col-xs-12 col-md-12">
     <div style="text-align: right">
       <ng-container *ngIf="saving; else noSaving">
@@ -115,6 +135,6 @@
       </ng-template>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- <button (click)="getFormObject()">Form</button> -->

@@ -26,7 +26,7 @@
                       <td class="data-secundaria">{{ +servicio.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                     </tr>
                     <ng-container *ngFor="let uo of unidadesObra.controls">
-                      <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value" >
+                      <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value">
                         <td class="label-table" style="background-color:#ff8e4e ;
                         padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
                         <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
@@ -37,8 +37,8 @@
                     </ng-container>
                   </ng-container>
                 </ng-container>
-                
-                
+
+
               </tbody>
             </table>
           </ng-container>
@@ -108,7 +108,7 @@
     <app-card [classCardHeader]="'bg-info'">
       <ng-container card-header-title>Total a Pagar</ng-container>
       <ng-container card-body>
-       <span class="total-pagar"> {{totalServicios + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}} </span>
+        <span class="total-pagar"> {{totalServicios + totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}} </span>
       </ng-container>
     </app-card>
   </div>
@@ -142,12 +142,12 @@
         </button>
       </ng-container> -->
       <!-- <ng-template #noSaving> -->
-        <button class="btn btn-primary" (click)="submit()" [class.disabled]="!valid">
-          <em class="pi pi-send mr-1"></em>Aceptar
-        </button>
-        <button class="btn btn-primary" (click)="submit()" [class.disabled]="!valid">
-          <em class="pi pi-send mr-1"></em>Rechazar
-        </button>
+      <button class="btn btn-primary" (click)="validarInt()" [class.disabled]="!valid">
+        <em class="pi pi-send mr-1"></em>Aceptar
+      </button>
+      <button class="btn btn-primary" [class.disabled]="!valid">
+        <em class="pi pi-send mr-1"></em>Rechazar Falta implementar
+      </button>
       <!-- </ng-template> -->
     </div>
   </div>

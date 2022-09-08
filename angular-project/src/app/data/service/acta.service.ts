@@ -8,6 +8,7 @@ import {
   LastActa,
   RequestAceptarRechazarOT,
   RequestAprobacionRechazoSolicitudPago,
+  RequestValidateActa,
   Response,
 } from '@data/model';
 
@@ -60,31 +61,12 @@ export class ActaService {
   }
 
   sendGeneracionActaOLD(
-    ot_id: number,
-    tipo_pago: string,
-    detalle: {
-      servicio: {
-        rowid: number;
-        cantidad: number;
-        porcentaje: number;
-      }[];
-      unidad_obra: {
-        rowid: number;
-        cantidad: number;
-        porcentaje: number;
-      }[];
-    }
+    request: RequestValidateActa
   ): Observable<Response<any>> {
-    console.log(`${this.apiUrl}/ot/acta/create`, {
-      ot_id,
-      tipo_pago,
-      detalle,
-    });
-    return this.http.post<Response<any>>(`${this.apiUrl}/ot/acta/create`, {
-      ot_id,
-      tipo_pago,
-      detalle,
-    });
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/acta/validate`,
+      request
+    );
   }
 
   sendGeneracionActa(request: any): Observable<Response<any>> {

@@ -246,3 +246,22 @@ export interface RequestAprobarRechazarOperaciones {
   tipo_rechazo_id?: number; //
   observacion?: string;
 }
+
+export interface RequestValidateActa {
+  ot_id: number;
+  tipo_pago: string;
+  observacion: string;
+  estado: string;
+  detalle: {
+    servicio: {
+      rowid: number;
+      cantidad: number;
+      porcentaje: number;
+    }[];
+    unidad_obra: {
+      rowid: number;
+      cantidad: number;
+      porcentaje: number;
+    }[];
+  };
+}

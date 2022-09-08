@@ -34,7 +34,10 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
   @Input() saving: boolean;
   @Input() totalServicios: number;
   @Input() totalUO: number;
-  @Output() submitted = new EventEmitter<Detalle>();
+  @Output() validar = new EventEmitter<{
+    detalle: Detalle;
+    estado: string;
+  }>();
   sessionData$: Observable<SessionData> = this.authFacade.getLogin$();
 
   constructor(private authFacade: AuthFacade) {}
@@ -104,9 +107,9 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
     return null;
   }
 
-  submit(): void {
+  validarInt(): void {
     if (this.valid) {
-      this.submitted.emit(this.values);
+      this.validar.emit({ detalle: this.values, estado: 'VALIDADO' });
     }
   }
 
