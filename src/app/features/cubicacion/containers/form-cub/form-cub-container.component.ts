@@ -61,6 +61,7 @@ export class FormCubContainerComponent
   proveedorSelected$: Observable<ProveedorAgenciaContrato> =
     this.cubicacionFacade.proveedorSelected$();
   carrito$ = this.serviciosFacade.carrito$();
+  editMode = false;
 
   // LOADINGS
   sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
@@ -228,8 +229,8 @@ export class FormCubContainerComponent
         const detalle = detalleCubicacion.data;
         if (detalle) {
           if (this.formulario.formCub && detalle) {
+            this.editMode = true;
             const cubicacion = detalle as DetalleCubicacion;
-            const servicios = cubicacion.many_cubicacion_has_servicio ?? [];
 
             const formData = {
               id: `${cubicacion.id}`,
@@ -251,32 +252,38 @@ export class FormCubContainerComponent
               this.formulario.formCub
                 .get('agencia_id')
                 .setValue(cubicacion.agencia_id);
-            }, 10);
+            }, 1000);
             setTimeout(() => {
               this.formulario.formCub
                 .get('cmarcoproveedor_id')
                 .setValue(cubicacion.cmarco_has_proveedor_id);
-            }, 10);
+            }, 1500);
 
             cubicacion.many_cubicacion_has_servicio.forEach(service => {
               service.many_cubicacion_has_uob.forEach(uo => {
                 let new_service: CarritoService = {
-                  servicio_id: service.id,
+                  precargado: true,
+                  servicio_rowid: service.id,
+                  servicio_cantidad: service.cantidad,
+
+                  servicio_id: service.servicio_id,
                   servicio_codigo: service.model_servicio_id.codigo,
                   servicio_precio_final_clp: service.valor_unitario_clp,
                   servicio_nombre: service.model_servicio_id.descripcion,
                   tipo_servicio_descripcion:
                     service.model_tipo_servicio_id.descripcion,
                   tipo_servicio_id: service.tipo_servicio_id,
-                  servicio_cantidad: service.cantidad,
                   unidad_obras: [
                     {
+                      precargado: true,
+                      uo_rowid: uo.id,
+                      uo_cantidad: uo.cantidad,
+
                       uo_codigo: uo.unidad_obra_cod,
                       uo_nombre: uo.model_unidad_obra_cod.descripcion,
                       uo_precio_total_clp: uo.valor_unitario_clp,
                       actividad_descripcion: 'TODO',
                       actividad_id: -1,
-                      uo_cantidad: uo.cantidad,
                     },
                   ],
                 };
@@ -284,30 +291,6 @@ export class FormCubContainerComponent
               });
             });
           }
-
-          // table: servicios.map(data_servicio => ({
-          //   precargado: true,
-          //   servicio_rowid: data_servicio.id,
-
-          //   servicio_id: data_servicio.servicio_id,
-          //   servicio_cantidad: data_servicio.cantidad,
-          //   servicio_precio_final_clp: data_servicio.valor_unitario_clp,
-          //   actividad_id: data_servicio.actividad_id,
-          //   servicio_tipo: data_servicio.tipo_servicio_id,
-
-          //   unidades_obras: data_servicio.many_cubicacion_has_uob.map(
-          //     data_unidad_obra => ({
-          //       precargado: true,
-          //       uo_rowid: data_unidad_obra.id,
-
-          //       uo_codigo: data_unidad_obra.unidad_obra_cod,
-          //       uo_cantidad: data_unidad_obra.cantidad,
-          //       uo_precio_total_clp: data_unidad_obra.valor_unitario_clp,
-          //     })
-          //   ),
-          // })),
-          // this.mode = 'edit';
-          // this.onInitEditionData(detalle);
         }
       })
     );
