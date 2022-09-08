@@ -118,7 +118,9 @@
                                     <button>
                                         <fa-icon [icon]="editIcon"></fa-icon> Editar
                                     </button>
-                                    <button style="background-color: #d32f2f;">
+                                    <button style="background-color: #d32f2f;"
+                                        (click)="showEliminarCubicacion(item.cubicacion_id)"
+                                        id="button-eliminar-cubicacion">
                                         <fa-icon [icon]="trashICon"></fa-icon>Eliminar
                                     </button>
                                 </div>
@@ -140,9 +142,6 @@
 
 <p-dialog header="Detalles de Cubicación" [(visible)]="displayModalDetalleCubicacion" [draggable]="false" [modal]="true"
     (onHide)="closeModalDetalleCubicacion()">
-    <!-- <zwc-view-confirmacion pregunta="¿Está seguro que desea eliminar esta cubicación?"
-        (cancelar)="closeDialogConfirmacion()" (confirmar)="confirmarElminacion()"></zwc-view-confirmacion> -->
-    <!--  -->
     <ng-container>
         <div class="loading-modal-content" *ngIf="loagingGetDetalleCubicacion$|async  ; else content">
             <p>Loading...</p>
@@ -188,4 +187,9 @@
         <zwc-clonador-cubicacion [detalleCubicacion]="detalleCubicacion"
             (closeModalDetalleCubicacionEmit)="closeModalClonarCubicacion()"></zwc-clonador-cubicacion>
     </ng-template>
+</p-dialog>
+
+<p-dialog header="Eliminar Cubicación" [(visible)]="displayModalEliminarCubicacion" [draggable]="false" [modal]="true">
+    <zwc-view-confirmacion pregunta="¿Está seguro que desea eliminar esta cubicación?"
+        (cancelar)="closeModalEliminarCubicacion()" (confirmar)="confirmarEliminarCubicacion()"></zwc-view-confirmacion>
 </p-dialog>

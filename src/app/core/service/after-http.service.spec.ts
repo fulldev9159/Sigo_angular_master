@@ -12,6 +12,7 @@ import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { StoreModule } from '@ngrx/store';
 import {
   ContratosUsuarioMOCK200OKSinContratos,
+  eliminarCubicacionMOCK200ok,
   saveCubicacionMOCK200ok,
 } from '@mocksOT';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
@@ -185,6 +186,22 @@ describe('AfterHttpService', () => {
     service.successHandler(action);
     expect(snackMessage.showMessage).toHaveBeenCalledWith(
       'Clonación realizada con éxito. Nueva Cubicación ID:3',
+      'Exito',
+      6000
+    );
+    expect(cubicacionFacade.listarCubicaciones).toHaveBeenCalled();
+  });
+
+  it('afterHttpAction if action is "eliminarCubicacion" should display message "Cubicación ID:6 eliminada con exito" y debe listar nuevamente las cubicaciones" ', () => {
+    spyOn(cubicacionFacade, 'listarCubicaciones');
+    spyOn(snackMessage, 'showMessage');
+    const action = {
+      response: eliminarCubicacionMOCK200ok,
+      type: cubicacionActions.eliminarCubicacionSuccess.type,
+    };
+    service.successHandler(action);
+    expect(snackMessage.showMessage).toHaveBeenCalledWith(
+      'Cubicación ID:6 eliminada con exito',
       'Exito',
       6000
     );

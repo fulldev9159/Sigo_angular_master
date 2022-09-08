@@ -86,6 +86,12 @@ export class CubicacionFacade {
   public editCubicacion(request: RequestEditCubicacion): void {
     this.store.dispatch(cubicacionActions.editCubicacion({ request }));
   }
+  // ELIMINAR CUBICACION
+  public eliminarCubicacion(cubicacion_id: number): void {
+    this.store.dispatch(
+      cubicacionActions.eliminarCubicacion({ cubicacion_id })
+    );
+  }
 
   // LISTAR CUBICACIONES
   public listarCubicaciones(): void {

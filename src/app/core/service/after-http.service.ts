@@ -108,5 +108,15 @@ export class AfterHttpService {
       );
       this.cubicacionFacade.listarCubicaciones();
     }
+
+    // ELIMINAR CUBICACIÓN
+    if (action.type === cubicacionActions.eliminarCubicacionSuccess.type) {
+      this.snackMessage.showMessage(
+        `Cubicación ID:${action.response.data.cubicacion_id} eliminada con exito`,
+        'Exito',
+        6000
+      );
+      this.cubicacionFacade.listarCubicaciones();
+    }
   }
 }

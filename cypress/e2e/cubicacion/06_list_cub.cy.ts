@@ -240,7 +240,7 @@ describe('Listar Cubicaciones', () => {
     // REVISAR CASO EN QUE SE ESCOGA VER DETALLE DE OTRO SERVICIO
   });
 
-  it('clonar cubicacion', () => {
+  it.skip('clonar cubicacion', () => {
     cy.intercept('POST', '/cubicacion/cubicacion/save').as(
       'HTTPRESPONSE-CUBICACION-SAVE'
     );
@@ -491,5 +491,12 @@ describe('Listar Cubicaciones', () => {
 
       cy.get('button.p-dialog-header-close').click();
     });
+  });
+
+  it.skip('eliminar Cubicacion', () => {
+    cy.get(`input[name='filter-nombre-cubicacion']`).clear();
+    cy._filter_table('filter-nombre-cubicacion', 'Cloned Cubicacion Bucle');
+    cy.get('tbody').find('tr').should('have.length', 1);
+    cy.get('button[id="button-eliminar-cubicacion"]').click();
   });
 });

@@ -51,4 +51,14 @@ export class CubicacionHttpService {
       { cubicacion_id }
     );
   }
+
+  // ELIMINAR CUBICACION
+  eliminarCubicacion(
+    cubicacion_id: number
+  ): Observable<Response<{ cubicacion_id: number }>> {
+    return this.http.post<Response<{ cubicacion_id: number }>>(
+      `${this.API_URL}/cubicacion/cubicacion/delete`,
+      { cubicacion_id }
+    );
+  }
 }

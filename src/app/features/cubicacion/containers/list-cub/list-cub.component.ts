@@ -90,6 +90,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
       }
     })
   );
+  cubicacion_id: number;
 
   // LOADINGS
   getCubicacioneSending$ = this.loadingFacade.sendingGetCubicaciones$();
@@ -112,6 +113,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   // MODALS
   displayModalDetalleCubicacion = false;
   displayModalClonarCubicacion = false;
+  displayModalEliminarCubicacion = false;
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
@@ -325,6 +327,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
     );
   }
 
+  // DETALLE CUBICACION
   showDetalleCubicacion(cubicacion_id: number): void {
     this.displayModalDetalleCubicacion = true;
     this.serviciosFacade.resetCarritoServices();
@@ -336,6 +339,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
     this.cubicacionFacade.resetDetalleCubicacion();
   }
 
+  // CLONAR CUBICACION
   showClonarCubicacion(cubicacion_id: number): void {
     this.displayModalClonarCubicacion = true;
     this.cubicacionFacade.detalleCubicacion(cubicacion_id);
@@ -346,12 +350,19 @@ export class ListCubComponent implements OnInit, OnDestroy {
     this.cubicacionFacade.resetDetalleCubicacion();
   }
 
-  confirmarElminacion(): void {
-    console.log('confirmar');
+  // ELIMINAR CUBICACION
+  showEliminarCubicacion(cubicacion_id: number): void {
+    this.cubicacion_id = cubicacion_id;
+    this.displayModalEliminarCubicacion = true;
   }
 
-  closeDialogConfirmacion(): void {
-    console.log('cancelar');
+  confirmarEliminarCubicacion(): void {
+    this.cubicacionFacade.eliminarCubicacion(this.cubicacion_id);
+    this.displayModalEliminarCubicacion = false;
+  }
+
+  closeModalEliminarCubicacion(): void {
+    this.displayModalEliminarCubicacion = false;
   }
 
   ngOnDestroy(): void {

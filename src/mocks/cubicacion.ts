@@ -2051,3 +2051,8 @@ export let detalleCubicacionMOCK200Ok: Response<DetalleCubicacion> = {
     ],
   },
 };
+
+export let eliminarCubicacionMOCK200ok: Response<{ cubicacion_id: number }> = {
+  status: { code: 0, desc: 'OK' },
+  data: { cubicacion_id: 6 },
+};
