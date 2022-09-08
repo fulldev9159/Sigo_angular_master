@@ -6,6 +6,7 @@ import * as perfilActions from '@storeOT/perfil/perfil.actions';
 import * as usuarioActions from '@storeOT/usuario/usuario.actions';
 import * as cubicacionActions from '@storeOT/cubicacion/cubicacion.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 
 interface ActionErr {
   error?: any;
@@ -30,7 +31,8 @@ export class AfterHttpService {
   constructor(
     private router: Router,
     private snackMessage: SnackMessageService,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private cubicacionFacade: CubicacionFacade
   ) {}
 
   errorHandler(action: ActionErr): void {
@@ -95,6 +97,16 @@ export class AfterHttpService {
         6000
       );
       this.router.navigate(['/cubicacion/list-cub']);
+    }
+
+    // CLONAR CUBICACIÓN
+    if (action.type === cubicacionActions.clonarCubicacionSuccess.type) {
+      this.snackMessage.showMessage(
+        `Clonación realizada con éxito. Nueva Cubicación ID:${action.response.data.cubicacion_id}`,
+        'Exito',
+        6000
+      );
+      this.cubicacionFacade.listarCubicaciones();
     }
   }
 }

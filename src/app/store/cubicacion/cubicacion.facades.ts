@@ -78,6 +78,10 @@ export class CubicacionFacade {
   public createCubicacion(request: RequestCreateCubicacion): void {
     this.store.dispatch(cubicacionActions.createCubicacion({ request }));
   }
+  // CLONAR CUBICACION
+  public clonarCubicacion(request: RequestCreateCubicacion): void {
+    this.store.dispatch(cubicacionActions.clonarCubicacion({ request }));
+  }
   // EDIT CUBICACION
   public editCubicacion(request: RequestEditCubicacion): void {
     this.store.dispatch(cubicacionActions.editCubicacion({ request }));

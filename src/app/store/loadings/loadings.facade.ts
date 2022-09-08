@@ -88,4 +88,9 @@ export class LoadingsFacade {
   public sendingDetalleCubicacion$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingDetalleCubicacion);
   }
+
+  // CLONAR CUBICACION
+  public sendingClonarCubicacion$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingClonarCubicacion);
+  }
 }

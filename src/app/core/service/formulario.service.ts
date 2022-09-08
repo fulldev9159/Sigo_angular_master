@@ -53,4 +53,17 @@ export class FormularioService {
       form.get(key).disable({ emitEvent: false });
     }
   }
+
+  // touch(): void {
+  //   Object.keys(this.form.controls).forEach(field => {
+  //     const control = this.form.get(field);
+  //     control.markAsTouched({
+  //       onlySelf: true,
+  //     });
+  //   });
+
+  //   this.form.markAsTouched({
+  //     onlySelf: true,
+  //   });
+  // }
 }

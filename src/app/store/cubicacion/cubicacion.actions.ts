@@ -58,6 +58,20 @@ export const createCubicacionError = createAction(
   props<{ error: any }>()
 );
 
+// CLONAR CUBICACION
+export const clonarCubicacion = createAction(
+  '[CUBICACION] clonarCubicacion ',
+  props<{ request: RequestCreateCubicacion }>()
+);
+export const clonarCubicacionSuccess = createAction(
+  '[CUBICACION] clonarCubicacion Success',
+  props<{ response: Response<{ cubicacion_id: number }> }>()
+);
+export const clonarCubicacionError = createAction(
+  '[CUBICACION] clonarCubicacion Error',
+  props<{ error: any }>()
+);
+
 // EDIT CUBICACION
 export const editCubicacion = createAction(
   '[CUBICACION] editCubicacion ',

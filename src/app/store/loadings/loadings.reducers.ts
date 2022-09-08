@@ -22,6 +22,7 @@ export interface StateLoadings {
   sendingGetUnidadesObraServicios: boolean;
   sendingAgregarServicioCarrito: boolean;
   sendingSaveCubicacion: boolean;
+  sendingClonarCubicacion: boolean;
   sendingGetCubicaciones: boolean;
   sendingDetalleCubicacion: boolean;
 }
@@ -41,6 +42,7 @@ export const initialStateLoading: StateLoadings = {
   sendingSaveCubicacion: false,
   sendingGetCubicaciones: false,
   sendingDetalleCubicacion: false,
+  sendingClonarCubicacion: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -210,5 +212,18 @@ export const reducerLoadings = createReducer(
   on(cubicacionActions.detalleCubicacion, state => ({
     ...state,
     sendingDetalleCubicacion: true,
-  }))
+  })),
+
+  on(cubicacionActions.clonarCubicacion, state => ({
+    ...state,
+    sendingClonarCubicacion: true,
+  })),
+  on(
+    cubicacionActions.clonarCubicacionSuccess,
+    cubicacionActions.clonarCubicacionError,
+    state => ({
+      ...state,
+      sendingClonarCubicacion: false,
+    })
+  )
 );

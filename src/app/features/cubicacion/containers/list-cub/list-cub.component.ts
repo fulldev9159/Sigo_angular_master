@@ -53,8 +53,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
         this.agencias_filter = [
           ...new Set(value.map(item => item.agencia_nombre)),
         ];
-      }),
-      take(1)
+      })
     );
 
   detalleCubicacion: DetalleCubicacion = null;
@@ -112,6 +111,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   // MODALS
   displayModalDetalleCubicacion = false;
+  displayModalClonarCubicacion = false;
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
@@ -333,6 +333,16 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   closeModalDetalleCubicacion(): void {
     this.serviciosFacade.resetCarritoServices();
+    this.cubicacionFacade.resetDetalleCubicacion();
+  }
+
+  showClonarCubicacion(cubicacion_id: number): void {
+    this.displayModalClonarCubicacion = true;
+    this.cubicacionFacade.detalleCubicacion(cubicacion_id);
+  }
+
+  closeModalClonarCubicacion(): void {
+    this.displayModalClonarCubicacion = false;
     this.cubicacionFacade.resetDetalleCubicacion();
   }
 

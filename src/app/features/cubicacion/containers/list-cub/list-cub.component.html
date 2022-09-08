@@ -111,7 +111,8 @@
                                         id="button-detalle-cubicacion">
                                         <fa-icon [icon]="infoIcon"></fa-icon> Detalles
                                     </button>
-                                    <button>
+                                    <button (click)="showClonarCubicacion(item.cubicacion_id)"
+                                        id="button-clonar-cubicacion">
                                         <fa-icon [icon]="cloneIcon"></fa-icon> Clonar
                                     </button>
                                     <button>
@@ -172,5 +173,19 @@
             <span class="p-tag">Cubicación</span>
         </p-divider>
         <zwc-view-table-services></zwc-view-table-services>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Clonar Cubicación" [(visible)]="displayModalClonarCubicacion" [draggable]="false" [modal]="true"
+    (onHide)="closeModalClonarCubicacion()">
+    <ng-container>
+        <div class="loading-modal-content" *ngIf="loagingGetDetalleCubicacion$|async  ; else contentClonar">
+            <p>Loading...</p>
+        </div>
+    </ng-container>
+    <ng-template #contentClonar>
+        <zwc-clonador-cubicacion [detalleCubicacion]="detalleCubicacion"
+            (closeModalDetalleCubicacionEmit)="closeModalClonarCubicacion()"></zwc-clonador-cubicacion>
     </ng-template>
 </p-dialog>

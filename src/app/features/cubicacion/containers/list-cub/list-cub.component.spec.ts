@@ -81,4 +81,18 @@ describe('ListCubComponent', () => {
     expect(component.displayModalDetalleCubicacion).toBe(true);
     expect(cubicacionFacade.detalleCubicacion).toHaveBeenCalledWith(1);
   });
+
+  it('showClonarCubicacion display modal llamar al facade con id 1 ', () => {
+    spyOn(cubicacionFacade, 'detalleCubicacion');
+    component.showClonarCubicacion(1);
+    expect(component.displayModalClonarCubicacion).toBe(true);
+    expect(cubicacionFacade.detalleCubicacion).toHaveBeenCalledWith(1);
+  });
+
+  it('closeModalClonarCubicacion should call resetDetalleCubicacion', () => {
+    spyOn(cubicacionFacade, 'resetDetalleCubicacion');
+    component.closeModalDetalleCubicacion();
+    expect(component.displayModalClonarCubicacion).toBe(false);
+    expect(cubicacionFacade.resetDetalleCubicacion).toHaveBeenCalled();
+  });
 });

@@ -14,6 +14,7 @@ import {
   ContratosUsuarioMOCK200OKSinContratos,
   saveCubicacionMOCK200ok,
 } from '@mocksOT';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 
 describe('AfterHttpService', () => {
   let service: AfterHttpService;
@@ -21,12 +22,19 @@ describe('AfterHttpService', () => {
   let snakeMessage: SnackMessageService;
   let authFacade: AuthFacade;
   let snackMessage: SnackMessageService;
+  let cubicacionFacade: CubicacionFacade;
   beforeEach(() => {
     TestBed.configureTestingModule(StoreModule.forRoot({}));
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     snakeMessage = TestBed.inject(SnackMessageService);
     authFacade = TestBed.inject(AuthFacade);
-    service = new AfterHttpService(routerSpy, snakeMessage, authFacade);
+    cubicacionFacade = TestBed.inject(CubicacionFacade);
+    service = new AfterHttpService(
+      routerSpy,
+      snakeMessage,
+      authFacade,
+      cubicacionFacade
+    );
     snackMessage = TestBed.inject(SnackMessageService);
   });
 
@@ -165,5 +173,21 @@ describe('AfterHttpService', () => {
       6000
     );
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/cubicacion/list-cub']);
+  });
+
+  it('afterHttpAction if action is "clonarCubicacionSuccess" should display message "Clonación realizada con éxito. Nueva Cubicación ID:3 " ', () => {
+    spyOn(cubicacionFacade, 'listarCubicaciones');
+    spyOn(snackMessage, 'showMessage');
+    const action = {
+      response: saveCubicacionMOCK200ok,
+      type: cubicacionActions.clonarCubicacionSuccess.type,
+    };
+    service.successHandler(action);
+    expect(snackMessage.showMessage).toHaveBeenCalledWith(
+      'Clonación realizada con éxito. Nueva Cubicación ID:3',
+      'Exito',
+      6000
+    );
+    expect(cubicacionFacade.listarCubicaciones).toHaveBeenCalled();
   });
 });

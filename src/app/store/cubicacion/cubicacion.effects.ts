@@ -45,6 +45,22 @@ export class CubicacionEffects {
     )
   );
 
+  clonarCubicacion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.clonarCubicacion),
+      concatMap(({ request }) =>
+        this.cubicacionHttpService.saveCubicacion(request).pipe(
+          map(response =>
+            cubicacionActions.clonarCubicacionSuccess({ response })
+          ),
+          catchError(error =>
+            of(cubicacionActions.clonarCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   editCubicacion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cubicacionActions.editCubicacion),
@@ -100,7 +116,8 @@ export class CubicacionEffects {
           cubicacionActions.getTipoCubicacionSuccess,
           cubicacionActions.createCubicacionSuccess,
           cubicacionActions.editCubicacionSuccess,
-          cubicacionActions.listarCubicacionesSuccess
+          cubicacionActions.listarCubicacionesSuccess,
+          cubicacionActions.clonarCubicacionSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -114,7 +131,8 @@ export class CubicacionEffects {
           cubicacionActions.getTipoCubicacionError,
           cubicacionActions.createCubicacionError,
           cubicacionActions.editCubicacionError,
-          cubicacionActions.listarCubicacionesError
+          cubicacionActions.listarCubicacionesError,
+          cubicacionActions.clonarCubicacionError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
