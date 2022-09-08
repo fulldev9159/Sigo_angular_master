@@ -767,8 +767,8 @@ export class OtEffects {
   informarTrabajosFinalizados$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.informarTrabajosFinalizados),
-      concatMap(({ ot_id }) =>
-        this.otService.informarTrabajosFinalizados(ot_id).pipe(
+      concatMap(({ ot_id, observacion }) =>
+        this.otService.informarTrabajosFinalizados(ot_id, observacion).pipe(
           map(response =>
             otActions.informarTrabajosFinalizadosSuccess({ response })
           ),

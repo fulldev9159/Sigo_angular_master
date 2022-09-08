@@ -186,7 +186,8 @@ export class AlertMessageActions {
         action === otActions.createOTSuccess.type ||
         action === otActions.AprobarRechazarActaOTSuccess.type ||
         action === otActions.AprobarRechazarSolicitudPagoSuccess.type ||
-        action === cubActions.agregarServiciosAdicionalesSuccess.type
+        action === cubActions.agregarServiciosAdicionalesSuccess.type ||
+        action === otActions.informarTrabajosFinalizadosSuccess.type
       ) {
         this.router.navigate(['/app/ot/list-ot']);
       }

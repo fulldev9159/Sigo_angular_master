@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DetalleActaServicio, DetalleActaUob } from '@data';
 import { OtFacade } from '@storeOT/index';
 import { Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-pre-acta-admin',
   templateUrl: './pre-acta-admin.component.html',
@@ -17,7 +17,12 @@ export class PreActaAdminComponent implements OnInit, OnDestroy {
     servicios: DetalleActaServicio[];
     unidades_obra: DetalleActaUob[];
   }> = this.otFacade.getDetalleActa$();
-  ot$: Observable<any> = this.otFacade.getDetalleOT$();
+  ot_id = -1;
+  ot$: Observable<any> = this.otFacade.getDetalleOT$().pipe(
+    map(detalleOT => {
+      this.ot_id = detalleOT.ot.id;
+    })
+  );
   saving$: Observable<boolean> = this.otFacade.sendingGeneracionActa$();
   totalServicios = 0;
   totalUO = 0;
@@ -54,7 +59,11 @@ export class PreActaAdminComponent implements OnInit, OnDestroy {
   }
 
   enviarActa(): void {
-    this.otFacade.sendGeneracionActa(1);
+    this.ot$.pipe(take(1)).subscribe();
+    this.otFacade.informarTrabajosFinalizados(
+      this.ot_id,
+      this.formComentario.get('comentarios').value
+    );
   }
 
   ngOnDestroy(): void {

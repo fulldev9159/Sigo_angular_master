@@ -400,7 +400,7 @@
   </ng-container>
   <ng-container modal-footer>
     <button class="btn btn-light mr-2" (click)="closeInformarTrabajosFinalizados()">Cancelar</button>
-    <button class="btn btn-primary" (click)="InformarTrabajosFinalizados()">
+    <button class="btn btn-primary" (click)="InformarTrabajosFinalizados()" [disabled]="!this.formTrabajosFinalizados.valid">
       <em class="pi mr-1"></em>Enviar
     </button>
   </ng-container>

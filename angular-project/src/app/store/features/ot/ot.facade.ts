@@ -707,7 +707,9 @@ export class OtFacade {
   }
 
   // INFORMAR TRABAJOS FINALIZADOS
-  public informarTrabajosFinalizados(ot_id: number): void {
-    this.store.dispatch(otActions.informarTrabajosFinalizados({ ot_id }));
+  public informarTrabajosFinalizados(ot_id: number, observacion: string): void {
+    this.store.dispatch(
+      otActions.informarTrabajosFinalizados({ ot_id, observacion })
+    );
   }
 }

@@ -962,7 +962,7 @@ export const solicitarInformeTrabajosFinalizadosError = createAction(
 // SOLICITAR INFORME TRABAJOS FINALIZADOS
 export const informarTrabajosFinalizados = createAction(
   '[OT] GET informarTrabajosFinalizados',
-  props<{ ot_id: number }>()
+  props<{ ot_id: number; observacion: string }>()
 );
 
 export const informarTrabajosFinalizadosSuccess = createAction(
