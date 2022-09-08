@@ -18,6 +18,7 @@ import localeEsCl from '@angular/common/locales/es-CL';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { combineLatest, Observable, Subscription, take } from 'rxjs';
 import {
+  CarritoService,
   DetalleCubicacion,
   ProveedorAgenciaContrato,
   RequestCreateCubicacion,
@@ -256,6 +257,32 @@ export class FormCubContainerComponent
                 .get('cmarcoproveedor_id')
                 .setValue(cubicacion.cmarco_has_proveedor_id);
             }, 10);
+
+            cubicacion.many_cubicacion_has_servicio.forEach(service => {
+              service.many_cubicacion_has_uob.forEach(uo => {
+                let new_service: CarritoService = {
+                  servicio_id: service.id,
+                  servicio_codigo: service.model_servicio_id.codigo,
+                  servicio_precio_final_clp: service.valor_unitario_clp,
+                  servicio_nombre: service.model_servicio_id.descripcion,
+                  tipo_servicio_descripcion:
+                    service.model_tipo_servicio_id.descripcion,
+                  tipo_servicio_id: service.tipo_servicio_id,
+                  servicio_cantidad: service.cantidad,
+                  unidad_obras: [
+                    {
+                      uo_codigo: uo.unidad_obra_cod,
+                      uo_nombre: uo.model_unidad_obra_cod.descripcion,
+                      uo_precio_total_clp: uo.valor_unitario_clp,
+                      actividad_descripcion: 'TODO',
+                      actividad_id: -1,
+                      uo_cantidad: uo.cantidad,
+                    },
+                  ],
+                };
+                this.serviciosFacade.addDirectServiceCarrito(new_service);
+              });
+            });
           }
 
           // table: servicios.map(data_servicio => ({
