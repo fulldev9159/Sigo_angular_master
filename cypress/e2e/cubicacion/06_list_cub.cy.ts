@@ -493,10 +493,18 @@ describe('Listar Cubicaciones', () => {
     });
   });
 
-  it.skip('eliminar Cubicacion', () => {
+  it('eliminar Cubicacion', () => {
     cy.get(`input[name='filter-nombre-cubicacion']`).clear();
     cy._filter_table('filter-nombre-cubicacion', 'Cloned Cubicacion Bucle');
     cy.get('tbody').find('tr').should('have.length', 1);
     cy.get('button[id="button-eliminar-cubicacion"]').click();
+
+    cy.get('#mensaje-confirmacion').contains(
+      '¿Está seguro que desea eliminar esta cubicación ID:5?'
+    );
+    cy.get('button[id="button-confirmar"]').click();
+    cy.get(`input[name='filter-nombre-cubicacion']`).clear();
+    cy._filter_table('filter-nombre-cubicacion', 'Cloned Cubicacion Bucle');
+    cy.get('tbody').find('tr').should('have.length', 0);
   });
 });

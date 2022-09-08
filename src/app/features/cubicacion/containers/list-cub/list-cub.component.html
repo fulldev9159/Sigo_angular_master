@@ -191,6 +191,6 @@
 </p-dialog>
 
 <p-dialog header="Eliminar Cubicación" [(visible)]="displayModalEliminarCubicacion" [draggable]="false" [modal]="true">
-    <zwc-view-confirmacion pregunta="¿Está seguro que desea eliminar esta cubicación?"
-        (cancelar)="closeModalEliminarCubicacion()" (confirmar)="confirmarEliminarCubicacion()"></zwc-view-confirmacion>
+    <zwc-view-confirmacion [pregunta]='mensajeConfirmacion' (cancelar)="closeModalEliminarCubicacion()"
+        (confirmar)="confirmarEliminarCubicacion()"></zwc-view-confirmacion>
 </p-dialog>

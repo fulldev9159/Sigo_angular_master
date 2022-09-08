@@ -116,6 +116,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
   displayModalClonarCubicacion = false;
   displayModalEliminarCubicacion = false;
 
+  mensajeConfirmacion = '';
+
   constructor(
     private cubicacionFacade: CubicacionFacade,
     private serviciosFacade: ServiciosFacade,
@@ -355,6 +357,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
   // ELIMINAR CUBICACION
   showEliminarCubicacion(cubicacion_id: number): void {
     this.cubicacion_id = cubicacion_id;
+    this.mensajeConfirmacion = `¿Está seguro que desea eliminar esta cubicación ID:${cubicacion_id}?`;
     this.displayModalEliminarCubicacion = true;
   }
 

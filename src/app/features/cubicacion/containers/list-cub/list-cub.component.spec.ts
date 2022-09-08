@@ -98,9 +98,12 @@ describe('ListCubComponent', () => {
     expect(cubicacionFacade.resetDetalleCubicacion).toHaveBeenCalled();
   });
 
-  it('showEliminarCubicacion display modal  and store cubicacion_id', () => {
+  it('showEliminarCubicacion display modal  and store cubicacion_id y crear el mensaje de confirmarción', () => {
     spyOn(cubicacionFacade, 'eliminarCubicacion');
     component.showEliminarCubicacion(1);
+    expect(component.mensajeConfirmacion).toEqual(
+      '¿Está seguro que desea eliminar esta cubicación ID:1?'
+    );
     expect(component.cubicacion_id).toEqual(1);
     expect(component.displayModalEliminarCubicacion).toBe(true);
   });
