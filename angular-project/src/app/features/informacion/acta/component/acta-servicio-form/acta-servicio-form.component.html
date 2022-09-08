@@ -110,10 +110,10 @@
       </ng-container> -->
       <!-- <ng-template #noSaving> -->
       <button class="btn btn-primary" (click)="validarInt()" [class.disabled]="!valid">
-        <em class="pi pi-send mr-1"></em>Aceptar
+        <em class="pi pi-send mr-1"></em>Validar
       </button>
-      <button class="btn btn-primary" [class.disabled]="!valid">
-        <em class="pi pi-send mr-1"></em>Rechazar Falta implementar
+      <button class="btn btn-primary" (click)="showModalInvalidar()" [class.disabled]="!valid">
+        <em class="pi pi-send mr-1"></em>Invalidar
       </button>
       <!-- </ng-template> -->
     </div>
@@ -138,3 +138,20 @@
 </div> -->
 
 <!-- <button (click)="getFormObject()">Form</button> -->
+
+<app-modal [display]="displayInvalidar" (CloseEvent)="closeModalInvalidar()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title style="text-align: center;">Motivo de la invalidación</ng-container>
+  <ng-container modal-content>
+    <!-- <pre>{{formRechazoIncial.value|json}}</pre> -->
+    <form [formGroup]="formInvalidar">
+      <label for="">* Motivo</label>
+      <textarea formControlName="motivo" class="form-control" placeholder="" name="observaciones" id="observaciones" cols="30" rows="2"></textarea>
+    </form>
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeModalInvalidar()">Cancelar</button>
+    <button class="btn btn-primary" [disabled]="!formInvalidar.valid" (click)="invalidar()">
+      <em class="pi pi-save mr-1"></em>Enviar
+    </button>
+  </ng-container>
+</app-modal>

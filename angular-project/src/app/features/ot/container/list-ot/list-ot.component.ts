@@ -868,6 +868,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
       observacion: this.formRechazoIncial.get('motivo').value,
       tipo: +this.formRechazoIncial.get('tipo_id').value,
     };
+    this.otFacade.AceptarRechazarInformeAvanceOT(request);
+    this.responsable = 'TODAS';
+    this.tipoOT = 0;
+    this.selectedIndex = 0;
+    this.selectedOTs = 'ABIERTAS';
+    this.displayAuthInformeModal = false;
   }
 
   sendDetalleInformeAvance(detalle: DetalleInformeAvance): void {

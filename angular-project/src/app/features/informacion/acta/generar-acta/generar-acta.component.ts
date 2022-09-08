@@ -533,17 +533,17 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   formValidar(
     ot_id: number,
     tipo_pago: string,
-    values: { detalle: Detalle; estado: string }
+    values: { detalle: Detalle; estado: string; observacion?: string }
   ): void {
     let request: RequestValidateActa = {
       ot_id,
       tipo_pago,
-      observacion: null,
+      observacion: values.observacion === undefined ? null : values.observacion,
       estado: values.estado,
       detalle: values.detalle,
     };
 
     console.log(request);
-    // this.otFacade.sendGeneracionActaOLD(ot_id, tipo_pago, detalle);
+    this.otFacade.sendGeneracionActaOLD(request);
   }
 }

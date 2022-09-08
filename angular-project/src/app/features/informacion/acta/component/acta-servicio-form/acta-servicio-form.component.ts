@@ -6,7 +6,12 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  AbstractControl,
+  Validators,
+} from '@angular/forms';
 import { SessionData } from '@data';
 import { AuthFacade } from '@storeOT/features/auth/auth.facade';
 import { Observable } from 'rxjs';
@@ -37,8 +42,13 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
   @Output() validar = new EventEmitter<{
     detalle: Detalle;
     estado: string;
+    observacion?: string;
   }>();
   sessionData$: Observable<SessionData> = this.authFacade.getLogin$();
+  displayInvalidar = false;
+  formInvalidar: FormGroup = new FormGroup({
+    motivo: new FormControl('', [Validators.required]),
+  });
 
   constructor(private authFacade: AuthFacade) {}
 
@@ -110,6 +120,23 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
   validarInt(): void {
     if (this.valid) {
       this.validar.emit({ detalle: this.values, estado: 'VALIDADO' });
+    }
+  }
+
+  showModalInvalidar() {
+    this.displayInvalidar = true;
+  }
+
+  closeModalInvalidar() {
+    this.displayInvalidar = false;
+  }
+  invalidar(): void {
+    if (this.valid) {
+      this.validar.emit({
+        detalle: this.values,
+        estado: 'INVALIDADO',
+        observacion: this.formInvalidar.get('motivo').value,
+      });
     }
   }
 
