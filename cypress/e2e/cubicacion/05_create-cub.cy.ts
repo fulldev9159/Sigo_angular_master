@@ -54,7 +54,7 @@ describe('Create Cubicacion', () => {
     cy.get('input[name="input-altura-desde"]').type('a');
     cy.get('input[name="input-direccion-hasta"]').type('a');
     cy.get('input[name="input-altura-hasta"]').type('a');
-    cy.get('input[id="input-descripcion"]').type(
+    cy.get('textarea[id="input-descripcion"]').type(
       'Una cubicación para realizar pruebas cypress'
     );
     cy.wait('@HTTPRESPONSE-AGENCIA').then(() => {
