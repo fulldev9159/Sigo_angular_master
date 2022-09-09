@@ -18,6 +18,7 @@ import {
   ViewTableServicesComponent,
   ViewUOTableComponent,
 } from './view-table-services/view-table-services.component';
+import { ColorPrecargadoDirective } from './directives/color-precargado.directive';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {
     ViewTableServicesComponent,
     ViewUOTableComponent,
     ViewServiceTableComponent,
+    ColorPrecargadoDirective,
   ],
   imports: [
     CommonModule,
@@ -54,6 +56,7 @@ import {
     FormTableServicesComponent,
     ViewConfirmacionComponent,
     ViewTableServicesComponent,
+    ColorPrecargadoDirective,
   ],
 })
 export class SharedModule {

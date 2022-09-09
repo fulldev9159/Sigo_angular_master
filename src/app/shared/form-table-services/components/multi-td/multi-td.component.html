@@ -1,38 +1,35 @@
 <td style="background-color: #ff8e4e">
   {{ uo.uo_codigo }}
 </td>
-<td>
+<td zwcColorPrecargado [condicion]="uo.precargado">
   {{ uo.uo_nombre }}
 </td>
 
 <ng-container *ngIf="uo.uo_codigo === '0'">
-  <td colspan="6" align="center">No Aplica</td>
+  <td colspan="6" align="center" zwcColorPrecargado [condicion]="uo.precargado">No Aplica</td>
 </ng-container>
 <ng-container *ngIf="uo.uo_codigo !== '0'">
-  <td>
+  <td zwcColorPrecargado [condicion]="uo.precargado">
     {{ uo.actividad_descripcion | titlecase }}
   </td>
-  <td>
+  <td zwcColorPrecargado [condicion]="uo.precargado">
     <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
     <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
   </td>
-  <td>
+  <td zwcColorPrecargado [condicion]="uo.precargado">
     {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
   </td>
-  <td>
+  <td zwcColorPrecargado [condicion]="uo.precargado">
     {{
-      uo.uo_precio_total_clp *
-        +controlUOCantidad.value
-        | currency: 'CLP':'$':'.0-2':'es-CL'
+    uo.uo_precio_total_clp *
+    +controlUOCantidad.value
+    | currency: 'CLP':'$':'.0-2':'es-CL'
     }}
   </td>
-  <td>
-    <button
-    (click)="callDeleteUOFromServicioFromCarrito(servicio_id, uo.uo_codigo)"
-    class="ui button eliminar-color"
-  >
-    <fa-icon [icon]="trashICon"></fa-icon>
-  </button>
+  <td zwcColorPrecargado [condicion]="uo.precargado">
+    <button (click)="callDeleteUOFromServicioFromCarrito(servicio_id, uo.uo_codigo)" class="ui button eliminar-color">
+      <fa-icon [icon]="trashICon"></fa-icon>
+    </button>
     <!-- <div class="ui icon buttons mini basic">
       <button
         *ngIf="uo.uo_codigo !== 0"
@@ -63,5 +60,5 @@
         </div>
       </ng-container>
     </div> -->
-    </td>
+  </td>
 </ng-container>

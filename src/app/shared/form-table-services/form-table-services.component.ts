@@ -78,10 +78,10 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
               servicio_id: new FormControl(servicio.servicio_id, [
                 Validators.required,
               ]),
-              servicio_cantidad: new FormControl(1, [
-                Validators.required,
-                Validators.min(0.01),
-              ]),
+              servicio_cantidad: new FormControl(
+                servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+                [Validators.required, Validators.min(0.01)]
+              ),
               servicio_precio_final_clp: new FormControl(
                 servicio.servicio_precio_final_clp
               ),
@@ -165,7 +165,7 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
 
     return new FormGroup({
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
-      uo_cantidad: new FormControl(cantidad, [
+      uo_cantidad: new FormControl(uo.uo_cantidad ? uo.uo_cantidad : cantidad, [
         Validators.required,
         Validators.min(min),
       ]),
