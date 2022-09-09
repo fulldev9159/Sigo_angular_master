@@ -240,7 +240,7 @@ describe('Listar Cubicaciones', () => {
     // REVISAR CASO EN QUE SE ESCOGA VER DETALLE DE OTRO SERVICIO
   });
 
-  it.skip('clonar cubicacion', () => {
+  it('clonar cubicacion', () => {
     cy.intercept('POST', '/cubicacion/cubicacion/save').as(
       'HTTPRESPONSE-CUBICACION-SAVE'
     );
@@ -494,6 +494,7 @@ describe('Listar Cubicaciones', () => {
   });
 
   it('eliminar Cubicacion', () => {
+    cy.wait(1);
     cy.get(`input[name='filter-nombre-cubicacion']`).clear();
     cy._filter_table('filter-nombre-cubicacion', 'Cloned Cubicacion Bucle');
     cy.get('tbody').find('tr').should('have.length', 1);
