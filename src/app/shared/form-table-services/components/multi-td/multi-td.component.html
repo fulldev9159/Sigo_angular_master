@@ -13,9 +13,13 @@
     {{ uo.actividad_descripcion | titlecase }}
   </td>
   <td zwcColorPrecargado [condicion]="uo.precargado">
-    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2" inputId="locale-german"
-      locale="de-DE"></p-inputNumber>
-    <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
+    <div class="container-cantidad">
+      <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2" inputId="locale-german"
+        locale="de-DE"></p-inputNumber>
+      <p [pTooltip]="uo.uob_unidad_medida_descripcion">{{uo.uob_unidad_medida_cod }}</p>
+      <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
+    </div>
+
   </td>
   <td zwcColorPrecargado [condicion]="uo.precargado">
     {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}

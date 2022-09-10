@@ -74,6 +74,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
                 service.model_tipo_servicio_id.descripcion,
               tipo_servicio_id: service.tipo_servicio_id,
               servicio_cantidad: service.cantidad,
+              servicio_unidad_cod: service.model_unidad_id.codigo,
+              servicio_unidad_descripcion: service.model_unidad_id.descripcion,
               unidad_obras: [
                 {
                   uo_codigo: uo.unidad_obra_cod,
@@ -82,6 +84,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
                   actividad_descripcion: service.model_actividad_id.descripcion,
                   actividad_id: -1,
                   uo_cantidad: uo.cantidad,
+                  uob_unidad_medida_cod: uo.model_unidad_id.codigo,
+                  uob_unidad_medida_descripcion: uo.model_unidad_id.descripcion,
                 },
               ],
             };

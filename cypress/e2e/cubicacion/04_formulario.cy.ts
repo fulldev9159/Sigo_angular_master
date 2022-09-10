@@ -905,7 +905,7 @@ describe('Tabla carrito', () => {
 
     // MODIFICAR LA CANTIDAD DEL SERVICIO J101
     cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(4)>p-inputnumber>span>input'
+      '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(4)>div>p-inputnumber>span>input'
     )
       .clear()
       .type('{del}4,53{enter}');
@@ -934,7 +934,7 @@ describe('Tabla carrito', () => {
 
     // MODIFICAR LA CANTIDAD DE LA UO D013
     cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(3) > td:nth-child(11)>p-inputnumber>span>input'
+      '.carrito-container> table > tbody > tr:nth-child(3) > td:nth-child(11)>div>p-inputnumber>span>input'
     )
       .clear()
       .type('{del}5,24{enter}');

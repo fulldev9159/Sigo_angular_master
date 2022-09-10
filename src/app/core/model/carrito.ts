@@ -3,6 +3,7 @@ export interface CarritoService {
   servicio_rowid?: number;
   servicio_cantidad?: number;
   servicio_unidad_cod?: string;
+  servicio_unidad_descripcion?: string;
 
   // Data response http API
   servicio_id: number;
@@ -21,6 +22,7 @@ export interface CarritoUO {
   uo_rowid?: number;
   uo_cantidad?: number;
   uob_unidad_medida_cod?: string;
+  uob_unidad_medida_descripcion?: string;
 
   // Data response http API
   uo_codigo: string;

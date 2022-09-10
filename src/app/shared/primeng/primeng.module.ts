@@ -11,6 +11,7 @@ import { MessageModule } from 'primeng/message';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { DialogModule } from 'primeng/dialog';
     InputNumberModule,
     TableModule,
     DialogModule,
+    TooltipModule,
   ],
   exports: [
     InputTextModule,
@@ -40,6 +42,7 @@ import { DialogModule } from 'primeng/dialog';
     InputNumberModule,
     TableModule,
     DialogModule,
+    TooltipModule,
   ],
 })
 export class PrimeNgModule {}

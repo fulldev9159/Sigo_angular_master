@@ -274,6 +274,9 @@ export class FormCubContainerComponent
                   tipo_servicio_descripcion:
                     service.model_tipo_servicio_id.descripcion,
                   tipo_servicio_id: service.tipo_servicio_id,
+                  servicio_unidad_cod: service.model_unidad_id.codigo,
+                  servicio_unidad_descripcion:
+                    service.model_unidad_id.descripcion,
                   unidad_obras: [
                     {
                       precargado: true,
@@ -286,6 +289,9 @@ export class FormCubContainerComponent
                       actividad_descripcion:
                         service.model_actividad_id.descripcion,
                       actividad_id: -1,
+                      uob_unidad_medida_cod: uo.model_unidad_id.codigo,
+                      uob_unidad_medida_descripcion:
+                        uo.model_unidad_id.descripcion,
                     },
                   ],
                 };
