@@ -329,7 +329,7 @@ describe('Listar Cubicaciones', () => {
             .split('-')[1]
             .trim()
         );
-      // cy.get(fila).eq(2).contains('Matriz');
+      cy.get(fila).eq(2).contains('Matriz');
       cy.get(fila).eq(3).contains('1');
       cy.get(fila)
         .eq(4)
@@ -397,7 +397,7 @@ describe('Listar Cubicaciones', () => {
             .split('-')[1]
             .trim()
         );
-      // cy.get(fila).eq(2).contains('Matriz');
+      cy.get(fila).eq(2).contains('Matriz');
       cy.get(fila).eq(3).contains('100');
       cy.get(fila)
         .eq(4)
@@ -423,7 +423,7 @@ describe('Listar Cubicaciones', () => {
             .split('-')[1]
             .trim()
         );
-      // cy.get(fila).eq(2).contains('Matriz');
+      cy.get(fila).eq(2).contains('Matriz');
       cy.get(fila).eq(3).contains('1');
       cy.get(fila)
         .eq(4)
@@ -449,7 +449,7 @@ describe('Listar Cubicaciones', () => {
             .split('-')[1]
             .trim()
         );
-      // cy.get(fila).eq(2).contains('Matriz');
+      cy.get(fila).eq(2).contains('Matriz');
       cy.get(fila).eq(3).contains('1');
       cy.get(fila)
         .eq(4)
@@ -475,7 +475,7 @@ describe('Listar Cubicaciones', () => {
             .split('-')[1]
             .trim()
         );
-      // cy.get(fila).eq(2).contains('Matriz');
+      cy.get(fila).eq(2).contains('Matriz');
       cy.get(fila).eq(3).contains('1');
       cy.get(fila)
         .eq(4)
