@@ -114,6 +114,6 @@ describe('Create Cubicacion', () => {
         .type(`${item.cantidad}{enter}`);
     });
 
-    // cy.get('button[id="crear-cubicacion"]').click();
+    cy.get('button[id="crear-cubicacion"]').click();
   });
 });
