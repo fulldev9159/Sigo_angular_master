@@ -13,7 +13,8 @@
     {{ uo.actividad_descripcion | titlecase }}
   </td>
   <td zwcColorPrecargado [condicion]="uo.precargado">
-    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2" inputId="locale-german"
+      locale="de-DE"></p-inputNumber>
     <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
   </td>
   <td zwcColorPrecargado [condicion]="uo.precargado">

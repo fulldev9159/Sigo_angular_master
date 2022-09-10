@@ -1,4 +1,4 @@
-import { BucleApoCobra } from 'cypress/fixtures/testedCubicacion';
+import { crearCubicacion } from 'cypress/fixtures/testedCubicacion';
 
 describe('Create Cubicacion', () => {
   it('should let enter to create cubicacion', () => {
@@ -10,8 +10,7 @@ describe('Create Cubicacion', () => {
   });
 
   it('create BUCLE CUB', () => {
-    cy.viewport(1500, 1700);
-    const data = BucleApoCobra;
+    const data = crearCubicacion;
 
     // INTERCEPTORS
     cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
@@ -44,7 +43,9 @@ describe('Create Cubicacion', () => {
 
     // FORMULARIO
 
-    cy.get('input[name="input-nombre-cubicacion"]').type('Cubicacion Bucle');
+    cy.get('input[name="input-nombre-cubicacion"]').type(
+      'Cubicacion Bucle Cypress'
+    );
     cy.get('#select-tipo-cubicacion')
       .click()
       .contains('ul li > span', 'Full')
@@ -70,99 +71,49 @@ describe('Create Cubicacion', () => {
     data.items.forEach(item => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
       cy.wait(150).then(() => {
-        cy._select_dropdown('#select-actividad', item.actividad);
+        cy._select_dropdown('#select-actividad', item.actividad.toUpperCase());
       });
-      item.tipos_servicio.forEach(tipo_servicio => {
+      cy.get('input[name="input-nombre-cubicacion"]').click();
+      cy.wait(150).then(() => {
+        cy._select_dropdown(
+          '#select-tipo-servicio',
+          item.tipo_servicio.toUpperCase()
+        );
+      });
+      cy.get('input[name="input-nombre-cubicacion"]').click();
+      cy.wait(150).then(() => {
+        cy._select_dropdown('#select-servicio', item.nombre);
+      });
+      item.unidad_obras.forEach((uo, index) => {
         cy.get('input[name="input-nombre-cubicacion"]').click();
-        cy.wait(50).then(() => {
-          cy._select_dropdown(
-            '#select-tipo-servicio',
-            tipo_servicio.tipo_servicio
-          );
-        });
-
-        tipo_servicio.servicios.forEach(servicio => {
+        cy.wait(250).then(() => {
+          cy._select_dropdown('#select-unidad-obra', uo.nombre);
           cy.get('input[name="input-nombre-cubicacion"]').click();
-          cy.wait(150).then(() => {
-            cy._select_dropdown('#select-servicio', servicio.nombre);
-          });
-          servicio.unidad_obras.forEach(uo => {
-            cy.get('input[name="input-nombre-cubicacion"]').click();
-            cy.wait(250).then(() => {
-              cy._select_dropdown('#select-unidad-obra', uo.nombre);
-              cy.get('input[name="input-nombre-cubicacion"]').click();
-              cy.wait(400).then(() => {
-                cy.get('#agregar-button').click();
-              });
-            });
+          cy.wait(400).then(() => {
+            cy.get('#agregar-button').click();
           });
         });
+
+        let column = index === 0 ? 9 : 2;
+        if (uo.nombre.split('-')[1].trim() !== 'SIN UO') {
+          cy.get('table')
+            .contains('td', uo.nombre.split('-')[1].trim())
+            .siblings()
+            .eq(column)
+            .find('p-inputnumber>span>input')
+            .clear()
+            .type(`${uo.cantidad}{enter}`);
+        }
       });
+      cy.get('table')
+        .contains('td', item.nombre.split('-')[1].trim())
+        .siblings()
+        .eq(2)
+        .find('p-inputnumber>span>input')
+        .clear()
+        .type(`${item.cantidad}{enter}`);
     });
-  });
 
-  it('cambiar cantidades', () => {
-    cy.viewport(1500, 1700);
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(4)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}4.53{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(11)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}10{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(3) > td:nth-child(11)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}5.24{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(4) > td:nth-child(4)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}100{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(3) > td:nth-child(4)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}105.70{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(8) > td:nth-child(4)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}501,1{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(14) > td:nth-child(11)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}9.4{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(15) > td:nth-child(4)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}430,2{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(16) > td:nth-child(4)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}2{enter}');
-
-    cy.get(
-      '.carrito-container> table > tbody > tr:nth-child(17) > td:nth-child(4)>p-inputnumber>span>input'
-    )
-      .clear()
-      .type('{del}10{enter}');
-
-    cy.get('button[id="crear-cubicacion"]').click();
+    // cy.get('button[id="crear-cubicacion"]').click();
   });
 });

@@ -79,7 +79,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
                   uo_codigo: uo.unidad_obra_cod,
                   uo_nombre: uo.model_unidad_obra_cod.descripcion,
                   uo_precio_total_clp: uo.valor_unitario_clp,
-                  actividad_descripcion: 'TODO',
+                  actividad_descripcion: service.model_actividad_id.descripcion,
                   actividad_id: -1,
                   uo_cantidad: uo.cantidad,
                 },

@@ -81,7 +81,7 @@ export class ViewTableServicesComponent {
       <td>
         {{ uo.actividad_descripcion | titlecase }}
       </td>
-      <td>{{ uo.uo_cantidad }}</td>
+      <td>{{ uo.uo_cantidad | number }}</td>
       <td>
         {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
       </td>
@@ -114,7 +114,7 @@ export class ViewUOTableComponent {
       {{ item.tipo_servicio_descripcion | titlecase }}
     </td>
     <td [attr.rowspan]="+item.unidad_obras.length">
-      {{ item.servicio_cantidad }}
+      {{ item.servicio_cantidad | number }}
     </td>
     <td [attr.rowspan]="+item.unidad_obras.length">
       {{ +item.servicio_precio_final_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
@@ -133,16 +133,15 @@ export class ViewUOTableComponent {
     <td>
       {{ item.unidad_obras[0].uo_nombre }}
     </td>
-
+    <td>
+      {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
+    </td>
     <ng-container *ngIf="item.unidad_obras[0].uo_codigo === '0'">
-      <td colspan="4" align="center">No Aplica</td>
+      <td colspan="3" align="center">No Aplica</td>
     </ng-container>
 
     <ng-container *ngIf="item.unidad_obras[0].uo_codigo !== '0'">
-      <td>
-        {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
-      </td>
-      <td>{{ item.unidad_obras[0].uo_cantidad }}</td>
+      <td>{{ item.unidad_obras[0].uo_cantidad | number }}</td>
       <td>
         {{
           item.unidad_obras[0].uo_precio_total_clp

@@ -908,7 +908,7 @@ describe('Tabla carrito', () => {
       '.carrito-container> table > tbody > tr:nth-child(1) > td:nth-child(4)>p-inputnumber>span>input'
     )
       .clear()
-      .type('{del}4.53{enter}');
+      .type('{del}4,53{enter}');
 
     // TODO: VER PQ FALLA EN PIPELINE
 
@@ -937,7 +937,7 @@ describe('Tabla carrito', () => {
       '.carrito-container> table > tbody > tr:nth-child(3) > td:nth-child(11)>p-inputnumber>span>input'
     )
       .clear()
-      .type('{del}5.24{enter}');
+      .type('{del}5,24{enter}');
     // TODO: VER PQ FALLA EN PIPELINE
 
     // data_service = {

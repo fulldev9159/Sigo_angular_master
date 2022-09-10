@@ -9,7 +9,9 @@
   {{ item.tipo_servicio_descripcion | titlecase }}
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">
-  <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+  <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" inputId="locale-german" locale="de-DE"
+    [minFractionDigits]="2">
+  </p-inputNumber>
   <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert>
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">
@@ -53,7 +55,8 @@
     {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
   </td>
   <td zwcColorPrecargado [condicion]="item.precargado">
-    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" inputId="locale-german" locale="de-DE"
+      [minFractionDigits]="2"></p-inputNumber>
     <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
   </td>
   <td zwcColorPrecargado [condicion]="item.precargado">
