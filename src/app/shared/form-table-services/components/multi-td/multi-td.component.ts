@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CarritoUO } from '@model';
+import { CarritoService, CarritoUO } from '@model';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,20 +10,20 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class MultiTdComponent {
   @Input() uo: CarritoUO = null;
-  @Input() servicio_id: number;
+  @Input() servicio: CarritoService;
   @Input() controlUOCantidad: FormControl;
   @Output() deleteUO = new EventEmitter<{
-    servicio_id: number;
-    uo_codigo: string;
+    servicio: CarritoService;
+    uo: CarritoUO;
   }>();
   trashICon = faTrash;
 
   constructor() {}
 
   callDeleteUOFromServicioFromCarrito(
-    servicio_id: number,
-    uo_codigo: string
+    servicio: CarritoService,
+    uo: CarritoUO
   ): void {
-    this.deleteUO.emit({ servicio_id, uo_codigo });
+    this.deleteUO.emit({ servicio, uo });
   }
 }

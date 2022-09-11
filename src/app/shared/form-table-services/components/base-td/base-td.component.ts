@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CarritoService } from '@model';
+import { CarritoService, CarritoUO } from '@model';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,22 +13,33 @@ export class BaseTdComponent {
   @Input() controlServicioCantidad: FormControl;
   @Input() controlUOCantidad: FormControl;
   @Output() deleteServicio = new EventEmitter<{
-    servicio_id: number;
+    servicio: CarritoService;
   }>();
-  @Output() showModalConfirmacion = new EventEmitter<{
-    servicio_id: number;
-    servicio_rowid: number;
+  @Output() deleteUO = new EventEmitter<{
+    servicio: CarritoService;
+    uo: CarritoUO;
   }>();
+  // @Output() showModalConfirmacion = new EventEmitter<{
+  //   servicio_id: number;
+  //   servicio_rowid: number;
+  // }>();
 
   trashICon = faTrash;
 
   constructor() {}
 
-  callDeleteServicioFromCarrito(servicio_id: number): void {
-    this.deleteServicio.emit({ servicio_id });
+  callDeleteServicioFromCarrito(servicio: CarritoService): void {
+    this.deleteServicio.emit({ servicio });
   }
 
-  callShowModalConfirmacion(servicio_id: number, servicio_rowid: number): void {
-    this.showModalConfirmacion.emit({ servicio_id, servicio_rowid });
+  callDeleteUOFromServicioFromCarrito(
+    servicio: CarritoService,
+    uo: CarritoUO
+  ): void {
+    this.deleteUO.emit({ servicio, uo });
   }
+
+  // callShowModalConfirmacion(servicio_id: number, servicio_rowid: number): void {
+  //   this.showModalConfirmacion.emit({ servicio_id, servicio_rowid });
+  // }
 }

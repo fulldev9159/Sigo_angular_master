@@ -131,12 +131,13 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
 
   formTable: FormGroup = new FormGroup(this.formTableControl);
 
+  servicios_eliminar: number[] = [];
+  uos_eliminar: number[] = [];
   // MODALS
-  displayModalConfirmacionEliminar = false;
-
-  mensajeConfirmacion: string;
-  servicio_id_eliminar: number;
-  servicio_rowid_eliminar: number;
+  // displayModalConfirmacionEliminar = false;
+  // mensajeConfirmacion: string;
+  // servicio_id_eliminar: number;
+  // servicio_rowid_eliminar: number;
 
   constructor(private serviciosFacade: ServiciosFacade) {
     registerLocaleData(localeEsCl, 'es-CL');
@@ -212,29 +213,36 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     ).controls[index_uo].get('uo_cantidad');
   }
 
-  deleteServicioFromCarrito(data: { servicio_id: number }): void {
-    this.serviciosFacade.deleteServicioFromCarrito(data.servicio_id);
+  deleteServicioFromCarrito(data: { servicio: CarritoService }): void {
+    if (data.servicio.precargado)
+      this.servicios_eliminar.push(data.servicio.servicio_rowid);
+
+    this.serviciosFacade.deleteServicioFromCarrito(data.servicio.servicio_id);
     (this.formTable.get('table') as FormArray).removeAt(
       (
         this.formTable.get('table').value as Array<{ servicio_id: string }>
       ).findIndex(
-        serviceTable => +serviceTable.servicio_id === data.servicio_id
+        serviceTable => +serviceTable.servicio_id === data.servicio.servicio_id
       )
     );
   }
 
   deleteUOFromServicioFromCarrito(data: {
-    servicio_id: number;
-    uo_codigo: string;
+    servicio: CarritoService;
+    uo: CarritoUO;
   }): void {
+    if (data.uo.uo_rowid) this.uos_eliminar.push(data.uo.uo_rowid);
+
     this.serviciosFacade.deleteUOFromServicioFromCarrito(
-      data.servicio_id,
-      data.uo_codigo
+      data.servicio.servicio_id,
+      data.uo.uo_codigo
     );
 
     const index_service = (
       this.formTable.get('table').value as Array<{ servicio_id: string }>
-    ).findIndex(serviceTable => +serviceTable.servicio_id === data.servicio_id);
+    ).findIndex(
+      serviceTable => +serviceTable.servicio_id === data.servicio.servicio_id
+    );
     (
       (
         (this.formTable.get('table') as FormArray).at(
@@ -248,28 +256,28 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
             index_service
           ) as FormGroup
         ).get('unidad_obras').value as Array<{ uo_codigo: string }>
-      ).findIndex(uo => uo.uo_codigo === data.uo_codigo)
+      ).findIndex(uo => uo.uo_codigo === data.uo.uo_codigo)
     );
   }
 
-  showModalConfirmacion(data: {
-    servicio_id: number;
-    servicio_rowid: number;
-  }): void {
-    this.displayModalConfirmacionEliminar = true;
-    this.servicio_id_eliminar = data.servicio_id;
-    this.servicio_rowid_eliminar = data.servicio_rowid;
-    this.mensajeConfirmacion = `Al realizar esta acción eliminará el servicio/uo de la cubicación existente ¿Confirma esta acción?`;
-  }
+  // showModalConfirmacion(data: {
+  //   servicio_id: number;
+  //   servicio_rowid: number;
+  // }): void {
+  //   this.displayModalConfirmacionEliminar = true;
+  //   this.servicio_id_eliminar = data.servicio_id;
+  //   this.servicio_rowid_eliminar = data.servicio_rowid;
+  //   this.mensajeConfirmacion = `Al realizar esta acción eliminará el servicio/uo de la cubicación existente ¿Confirma esta acción?`;
+  // }
 
-  closeModalElimarServicio(): void {
-    this.displayModalConfirmacionEliminar = false;
-  }
+  // closeModalElimarServicio(): void {
+  //   this.displayModalConfirmacionEliminar = false;
+  // }
 
-  eliminarServicioCarrito(): void {}
-  get valid(): boolean {
-    return (this.formTable.get('table') as FormArray).length > 0;
-  }
+  // eliminarServicioCarrito(): void {}
+  // get valid(): boolean {
+  //   return (this.formTable.get('table') as FormArray).length > 0;
+  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

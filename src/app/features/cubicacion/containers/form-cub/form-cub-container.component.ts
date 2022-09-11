@@ -368,6 +368,11 @@ export class FormCubContainerComponent
     );
   }
 
+  editarCubicacion(): void {
+    console.log(this.tableServicios.servicios_eliminar);
+    console.log(this.tableServicios.uos_eliminar);
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

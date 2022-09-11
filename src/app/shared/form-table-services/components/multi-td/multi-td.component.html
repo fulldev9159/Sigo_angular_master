@@ -32,11 +32,11 @@
     }}
   </td>
   <td zwcColorPrecargado [condicion]="uo.precargado">
-    <ng-container *ngIf="uo.precargado === undefined || uo.precargado === false">
-      <button (click)="callDeleteUOFromServicioFromCarrito(servicio_id, uo.uo_codigo)" class="ui button eliminar-color">
-        <fa-icon [icon]="trashICon"></fa-icon>
-      </button>
-    </ng-container>
+    <!-- <ng-container *ngIf="uo.precargado === undefined || uo.precargado === false"> -->
+    <button (click)="callDeleteUOFromServicioFromCarrito(servicio, uo)" class="ui button eliminar-color">
+      <fa-icon [icon]="trashICon"></fa-icon>
+    </button>
+    <!-- </ng-container> -->
     <!-- <div class="ui icon buttons mini basic">
       <button
         *ngIf="uo.uo_codigo !== 0"
