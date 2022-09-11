@@ -275,9 +275,10 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
   // }
 
   // eliminarServicioCarrito(): void {}
-  // get valid(): boolean {
-  //   return (this.formTable.get('table') as FormArray).length > 0;
-  // }
+
+  get valid(): boolean {
+    return (this.formTable.get('table') as FormArray).length > 0;
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
