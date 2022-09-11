@@ -14,6 +14,7 @@
                 <ng-container *ngIf="editMode;else createModeButton">
                     <zwc-pbutton-sending Pid="editar-cubicacion" content="Guardar cambios"
                         Pclass="p-button-info p-button-sm mt-4 w-full" [sending]="sendingSaveCubicacion$|async"
+                        [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
                         (call)="editarCubicacion()"></zwc-pbutton-sending>
                 </ng-container>
                 <ng-template #createModeButton>

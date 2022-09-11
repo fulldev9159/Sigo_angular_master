@@ -541,7 +541,25 @@ describe('TableServicesComponent', () => {
       },
     ]);
     store.refreshState();
-    component.deleteServicioFromCarrito({ servicio_id: 141 });
+    component.deleteServicioFromCarrito({
+      servicio: {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
+        unidad_obras: [
+          {
+            uo_codigo: 'C926',
+            uo_nombre: 'CABLE 1800-26 PS',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
+          },
+        ],
+      },
+    });
     expect(servicioFacade.deleteServicioFromCarrito).toHaveBeenCalledWith(141);
   });
 
@@ -585,8 +603,30 @@ describe('TableServicesComponent', () => {
     ]);
     store.refreshState();
     component.deleteUOFromServicioFromCarrito({
-      servicio_id: 141,
-      uo_codigo: 'C048',
+      servicio: {
+        servicio_id: 141,
+        servicio_codigo: 'J101',
+        servicio_precio_final_clp: 471.59999999999997,
+        servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+        tipo_servicio_descripcion: 'LINEAS',
+        tipo_servicio_id: 1,
+        unidad_obras: [
+          {
+            uo_codigo: 'C926',
+            uo_nombre: 'CABLE 1800-26 PS',
+            uo_precio_total_clp: 0,
+            actividad_descripcion: 'MATRIZ',
+            actividad_id: 1,
+          },
+        ],
+      },
+      uo: {
+        uo_codigo: 'C048',
+        uo_nombre: 'CABLE 1800-26 PS',
+        uo_precio_total_clp: 0,
+        actividad_descripcion: 'MATRIZ',
+        actividad_id: 1,
+      },
     });
     expect(servicioFacade.deleteUOFromServicioFromCarrito).toHaveBeenCalledWith(
       141,
