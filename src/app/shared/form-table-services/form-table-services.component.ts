@@ -131,6 +131,13 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
 
   formTable: FormGroup = new FormGroup(this.formTableControl);
 
+  // MODALS
+  displayModalConfirmacionEliminar = false;
+
+  mensajeConfirmacion: string;
+  servicio_id_eliminar: number;
+  servicio_rowid_eliminar: number;
+
   constructor(private serviciosFacade: ServiciosFacade) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
@@ -245,6 +252,21 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     );
   }
 
+  showModalConfirmacion(data: {
+    servicio_id: number;
+    servicio_rowid: number;
+  }): void {
+    this.displayModalConfirmacionEliminar = true;
+    this.servicio_id_eliminar = data.servicio_id;
+    this.servicio_rowid_eliminar = data.servicio_rowid;
+    this.mensajeConfirmacion = `Al realizar esta acción eliminará el servicio/uo de la cubicación existente ¿Confirma esta acción?`;
+  }
+
+  closeModalElimarServicio(): void {
+    this.displayModalConfirmacionEliminar = false;
+  }
+
+  eliminarServicioCarrito(): void {}
   get valid(): boolean {
     return (this.formTable.get('table') as FormArray).length > 0;
   }

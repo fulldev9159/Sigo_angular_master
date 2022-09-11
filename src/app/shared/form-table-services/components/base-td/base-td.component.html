@@ -24,13 +24,16 @@
   {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' : '$':'.0-2':'es-CL'}}
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">
-  <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
-        <div class="ui icon buttons mini basic"> -->
-  <button (click)="callDeleteServicioFromCarrito(item.servicio_id)" class="ui button eliminar-color">
-    <fa-icon [icon]="trashICon"></fa-icon>
-  </button>
-  <!-- </div>
-      </ng-container> -->
+  <ng-container *ngIf="item.precargado === undefined || item.precargado === false; else existente">
+    <button (click)="callDeleteServicioFromCarrito(item.servicio_id)" class="ui button eliminar-color">
+      <fa-icon [icon]="trashICon"></fa-icon>
+    </button>
+  </ng-container>
+  <ng-template #existente>
+    <button (click)="callShowModalConfirmacion(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">
+      <fa-icon [icon]="trashICon"></fa-icon>
+    </button>
+  </ng-template>
 
   <!-- <ng-container *ngIf="item.precargado">
         <div class="ui icon buttons mini basic">
@@ -77,6 +80,22 @@
     {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : 'CLP' : '$':'.0-2':'es-CL'}}
   </td>
   <td zwcColorPrecargado [condicion]="item.precargado">
+
+    <ng-container *ngIf="item.unidad_obras.length>1">
+      <ng-container *ngIf="item.precargado === undefined || item.precargado === false">
+        <button (click)="callDeleteUOFromServicioFromCarrito(item.servicio_id, item.unidad_obras[0].uo_codigo)"
+          class="ui button eliminar-color">
+          <fa-icon [icon]="trashICon"></fa-icon>
+        </button>
+      </ng-container>
+      <!-- <ng-template #existente>
+        <button (click)="show(item.servicio_id, item.unidad_obras[0].uo_codigo)"
+          class="ui button eliminar-color">
+          <fa-icon [icon]="trashICon"></fa-icon>
+        </button>
+      </ng-template> -->
+    </ng-container>
+
     <!-- <div class="ui icon buttons mini basic">
           <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
         </div> -->

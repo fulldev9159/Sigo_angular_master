@@ -15,6 +15,10 @@ export class BaseTdComponent {
   @Output() deleteServicio = new EventEmitter<{
     servicio_id: number;
   }>();
+  @Output() showModalConfirmacion = new EventEmitter<{
+    servicio_id: number;
+    servicio_rowid: number;
+  }>();
 
   trashICon = faTrash;
 
@@ -22,5 +26,9 @@ export class BaseTdComponent {
 
   callDeleteServicioFromCarrito(servicio_id: number): void {
     this.deleteServicio.emit({ servicio_id });
+  }
+
+  callShowModalConfirmacion(servicio_id: number, servicio_rowid: number): void {
+    this.showModalConfirmacion.emit({ servicio_id, servicio_rowid });
   }
 }

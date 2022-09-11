@@ -9,6 +9,7 @@ import {
   RequestCreateCubicacion,
   RequestEditCubicacion,
   Response,
+  StatusResponse,
   TipoCubicacion,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
@@ -124,6 +125,20 @@ export const detalleCubicacionSuccess = createAction(
 );
 export const detalleCubicacionError = createAction(
   '[CUBICACION] detalleCubicacion Error',
+  props<{ error: any }>()
+);
+
+// ELIMINAR SERVICIO CARRITO
+export const eliminarServicioCarrito = createAction(
+  '[CUBICACION] eliminarServicioCarrito ',
+  props<{ servicio?: number[]; unidad_obra?: number[] }>()
+);
+export const eliminarServicioCarritoSuccess = createAction(
+  '[CUBICACION] eliminarServicioCarrito Success',
+  props<{ response: { status: StatusResponse } }>()
+);
+export const eliminarServicioCarritoError = createAction(
+  '[CUBICACION] eliminarServicioCarrito Error',
   props<{ error: any }>()
 );
 

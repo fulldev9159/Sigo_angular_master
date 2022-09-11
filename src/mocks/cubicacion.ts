@@ -2,6 +2,7 @@ import {
   Cubicacion,
   DetalleCubicacion,
   Response,
+  StatusResponse,
   TipoCubicacion,
 } from '@model';
 
@@ -2055,4 +2056,8 @@ export let detalleCubicacionMOCK200Ok: Response<DetalleCubicacion> = {
 export let eliminarCubicacionMOCK200ok: Response<{ cubicacion_id: number }> = {
   status: { code: 0, desc: 'OK' },
   data: { cubicacion_id: 6 },
+};
+
+export let eliminarServicioCarritoMOCK200ok: { status: StatusResponse } = {
+  status: { code: 0, desc: 'OK' },
 };

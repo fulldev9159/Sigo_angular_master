@@ -129,6 +129,16 @@ export class CubicacionFacade {
     return this.store.select(cubicacionSelectors.detalleCubicacion);
   }
 
+  // ELIMINAR SERVICIO CARRITO
+  public eliminarServicioCarrito(
+    servicio?: number[],
+    unidad_obra?: number[]
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.eliminarServicioCarrito({ servicio, unidad_obra })
+    );
+  }
+
   // RESETS
   public resetContratoSelected(): void {
     this.store.dispatch(cubicacionActions.resetContratoSelected());

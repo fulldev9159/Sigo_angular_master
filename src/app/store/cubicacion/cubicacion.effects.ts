@@ -125,6 +125,24 @@ export class CubicacionEffects {
     )
   );
 
+  eliminarServicioCarrito$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.eliminarServicioCarrito),
+      concatMap(({ servicio, unidad_obra }) =>
+        this.cubicacionHttpService
+          .eliminarServicioCarrito(servicio, unidad_obra)
+          .pipe(
+            map(response =>
+              cubicacionActions.eliminarServicioCarritoSuccess({ response })
+            ),
+            catchError(error =>
+              of(cubicacionActions.eliminarServicioCarritoError({ error }))
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -134,7 +152,8 @@ export class CubicacionEffects {
           cubicacionActions.editCubicacionSuccess,
           cubicacionActions.listarCubicacionesSuccess,
           cubicacionActions.clonarCubicacionSuccess,
-          cubicacionActions.eliminarCubicacionSuccess
+          cubicacionActions.eliminarCubicacionSuccess,
+          cubicacionActions.eliminarServicioCarritoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -150,7 +169,8 @@ export class CubicacionEffects {
           cubicacionActions.editCubicacionError,
           cubicacionActions.listarCubicacionesError,
           cubicacionActions.clonarCubicacionError,
-          cubicacionActions.eliminarCubicacionError
+          cubicacionActions.eliminarCubicacionError,
+          cubicacionActions.eliminarServicioCarritoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

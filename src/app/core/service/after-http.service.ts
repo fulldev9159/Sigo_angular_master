@@ -15,7 +15,7 @@ interface ActionErr {
 
 interface ActionSuccess {
   response?: {
-    data: any;
+    data?: any;
     status: {
       code: number;
       desc: string;
@@ -117,6 +117,11 @@ export class AfterHttpService {
         6000
       );
       this.cubicacionFacade.listarCubicaciones();
+    }
+
+    // ELIMINAR SERVICIO CARRITO
+    if (action.type === cubicacionActions.eliminarServicioCarritoSuccess.type) {
+      this.snackMessage.showMessage(`Eliminación exitosa`, 'Exito', 6000);
     }
   }
 }

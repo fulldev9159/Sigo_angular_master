@@ -4,6 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import {
   detalleCubicacionMOCK200Ok,
   eliminarCubicacionMOCK200ok,
+  eliminarServicioCarritoMOCK200ok,
   listaCubicacionesMOCK200ok,
   saveCubicacionMOCK200ok,
   tipoCubicacionMOCK200OK,
@@ -98,6 +99,17 @@ describe('CubicacionHttpService', () => {
     service.eliminarCubicacion(1).subscribe({
       next: response => {
         expect(response).toEqual(eliminarCubicacionMOCK200ok);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call deleteServicioUOCarrito and return  Data', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(eliminarServicioCarritoMOCK200ok));
+    service.eliminarServicioCarrito([], []).subscribe({
+      next: response => {
+        expect(response).toEqual(eliminarServicioCarritoMOCK200ok);
         done();
       },
       error: done.fail,

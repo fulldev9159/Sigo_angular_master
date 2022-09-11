@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import {
   ContratosUsuarioMOCK200OKSinContratos,
   eliminarCubicacionMOCK200ok,
+  eliminarServicioCarritoMOCK200ok,
   saveCubicacionMOCK200ok,
 } from '@mocksOT';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
@@ -206,5 +207,19 @@ describe('AfterHttpService', () => {
       6000
     );
     expect(cubicacionFacade.listarCubicaciones).toHaveBeenCalled();
+  });
+
+  it('afterHttpAction if action is "eliminarServicioCarrito" should display message "Eliminación exitosa" " ', () => {
+    spyOn(snackMessage, 'showMessage');
+    const action = {
+      response: eliminarServicioCarritoMOCK200ok,
+      type: cubicacionActions.eliminarServicioCarritoSuccess.type,
+    };
+    service.successHandler(action);
+    expect(snackMessage.showMessage).toHaveBeenCalledWith(
+      'Eliminación exitosa',
+      'Exito',
+      6000
+    );
   });
 });

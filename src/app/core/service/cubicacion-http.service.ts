@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Response, Cubicacion } from '@model';
+import { Response, Cubicacion, StatusResponse } from '@model';
 import { delay, Observable } from 'rxjs';
 import {
   DetalleCubicacion,
@@ -59,6 +59,17 @@ export class CubicacionHttpService {
     return this.http.post<Response<{ cubicacion_id: number }>>(
       `${this.API_URL}/cubicacion/cubicacion/delete`,
       { cubicacion_id }
+    );
+  }
+
+  // ELIMINAR SERVICIO CUBICACION EXISTENTE
+  eliminarServicioCarrito(
+    servicio?: number[],
+    unidad_obra?: number[]
+  ): Observable<{ status: StatusResponse }> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/cubicacion/detalles_cubicacion/delete`,
+      { servicio, unidad_obra }
     );
   }
 }
