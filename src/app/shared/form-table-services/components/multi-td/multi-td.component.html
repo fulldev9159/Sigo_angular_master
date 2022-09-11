@@ -4,14 +4,14 @@
 <td zwcColorPrecargado [condicion]="uo.precargado">
   {{ uo.uo_nombre }}
 </td>
-
+<td zwcColorPrecargado [condicion]="uo.precargado">
+  {{ uo.actividad_descripcion | titlecase }}
+</td>
 <ng-container *ngIf="uo.uo_codigo === '0'">
-  <td colspan="6" align="center" zwcColorPrecargado [condicion]="uo.precargado">No Aplica</td>
+  <td colspan="5" align="center" zwcColorPrecargado [condicion]="uo.precargado">No Aplica</td>
 </ng-container>
 <ng-container *ngIf="uo.uo_codigo !== '0'">
-  <td zwcColorPrecargado [condicion]="uo.precargado">
-    {{ uo.actividad_descripcion | titlecase }}
-  </td>
+
   <td zwcColorPrecargado [condicion]="uo.precargado">
     <div class="container-cantidad">
       <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2" inputId="locale-german"
