@@ -67,6 +67,8 @@ export class FormCubContainerComponent
     this.cubicacionFacade.proveedorSelected$();
   carrito$ = this.serviciosFacade.carrito$();
   editMode = false;
+  cubicacion_id: number;
+  title: string;
 
   // LOADINGS
   sendingSaveCubicacion$ = this.loadingFacade.sendingSaveCubicacion$();
@@ -235,8 +237,10 @@ export class FormCubContainerComponent
           const detalle = detalleCubicacion.data;
 
           if (this.formulario.formCub && detalle) {
-            this.editMode = true;
             const cubicacion = detalle as DetalleCubicacion;
+            this.editMode = true;
+            this.cubicacion_id = cubicacion.id;
+            this.title = `Editar Cubicacion ID:${this.cubicacion_id}`;
 
             const formData = {
               id: `${cubicacion.id}`,
@@ -382,20 +386,18 @@ export class FormCubContainerComponent
       this.tableServicios.servicios_eliminar.length > 0 ||
       this.tableServicios.uos_eliminar.length > 0
     ) {
-      // this.cubicacionFacade.eliminarServicioCarrito(
-      //   this.tableServicios.servicios_eliminar,
-      //   this.tableServicios.uos_eliminar
-      // );
-      console.log(this.tableServicios.servicios_eliminar);
-      console.log(this.tableServicios.uos_eliminar);
+      this.cubicacionFacade.eliminarServicioCarrito(
+        this.tableServicios.servicios_eliminar,
+        this.tableServicios.uos_eliminar
+      );
+      // console.log(this.tableServicios.servicios_eliminar);
+      // console.log(this.tableServicios.uos_eliminar);
     }
 
     this.subscription.add(
-      combineLatest([this.proveedorSelected$, this.carrito$, this.route.data])
+      combineLatest([this.proveedorSelected$, this.carrito$])
         .pipe(take(1))
-        .subscribe(([proveedorSelected, carrito, detalleCubicacion]) => {
-          let detalleCub = detalleCubicacion as DetalleCubicacion;
-          let id = detalleCub.id;
+        .subscribe(([proveedorSelected, carrito]) => {
           const {
             nombre,
             tipocubicacion,
@@ -425,7 +427,7 @@ export class FormCubContainerComponent
               uo_cantidad: number;
               uo_codigo: string;
             }>;
-          }[] = this.formulario.formCub.get('table').value as Array<{
+          }[] = this.tableServicios.formTable.get('table').value as Array<{
             precargado: boolean;
             servicio_id: number;
             servicio_rowid: number;
@@ -499,7 +501,7 @@ export class FormCubContainerComponent
 
           const request: RequestEditCubicacion = {
             cubicacion_datos: {
-              id: +id,
+              id: +this.cubicacion_id,
               nombre,
               tipo_cubicacion_id: +tipocubicacion,
               contrato_id: contrato,
@@ -525,6 +527,7 @@ export class FormCubContainerComponent
           };
 
           console.log(request);
+          this.cubicacionFacade.editCubicacion(request);
         })
     );
   }

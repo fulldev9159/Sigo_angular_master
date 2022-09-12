@@ -100,6 +100,7 @@ declare namespace Cypress {
       uo: string
     ): void;
     _check_table_servicio_input(data: DATA_TABLE): void;
+    _check_table_servicio_view(data: DATA_TABLE): void;
   }
 }
 Cypress.Commands.add('_login', (username, password) => {
@@ -207,23 +208,23 @@ Cypress.Commands.add(
   '_add_service_carrito',
   (actividad: string, tipo_servicio: string, servicio: string, uo: string) => {
     cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.wait(200).then(() => {
+    cy.wait(1000).then(() => {
       cy._select_dropdown('#select-actividad', actividad);
     });
     cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.wait(200).then(() => {
+    cy.wait(1000).then(() => {
       cy._select_dropdown('#select-tipo-servicio', tipo_servicio);
     });
     cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.wait(200).then(() => {
+    cy.wait(1000).then(() => {
       cy._select_dropdown('#select-servicio', servicio);
     });
 
     cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.wait(250).then(() => {
+    cy.wait(1000).then(() => {
       cy._select_dropdown('#select-unidad-obra', uo);
       cy.get('input[name="input-nombre-cubicacion"]').click();
-      cy.wait(400).then(() => {
+      cy.wait(1000).then(() => {
         cy.get('#agregar-button').click();
       });
     });
@@ -365,6 +366,118 @@ Cypress.Commands.add('_check_table_servicio_input', data => {
         }
       });
     }
+  });
+
+  cy.get('td[class="total-servicio-monto"]').contains(data.totalServicios);
+  cy.get('td[class="total-uo-monto"]').contains(data.totalUOs);
+  cy.get('td[class="total-cubicacion-monto"]').contains(data.total);
+});
+
+Cypress.Commands.add('_check_table_servicio_view', data => {
+  data.items.forEach(servicio => {
+    cy.get('table')
+      .contains('td', servicio.nombre.split('-')[0].trim())
+      .siblings()
+      .eq(0)
+      .contains(servicio.nombre.split('-')[1].trim());
+
+    cy.get('table')
+      .contains('td', servicio.nombre.split('-')[0].trim())
+      .siblings()
+      .eq(1)
+      .contains(servicio.tipo_servicio);
+
+    cy.get('table')
+      .contains('td', servicio.nombre.split('-')[0].trim())
+      .siblings()
+      .eq(2)
+      .contains(servicio.cantidad);
+
+    cy.get('table')
+      .contains('td', servicio.nombre.split('-')[0].trim())
+      .siblings()
+      .eq(3)
+      .contains(servicio.precio);
+
+    cy.get('table')
+      .contains('td', servicio.nombre.split('-')[0].trim())
+      .siblings()
+      .eq(4)
+      .contains(servicio.total);
+
+    cy.get('table')
+      .contains('td', servicio.nombre.split('-')[0].trim())
+      .siblings()
+      .eq(5)
+      .contains(servicio.unidad_obras[0].nombre.split('-')[0].trim());
+
+    cy.get('table')
+      .contains('td', servicio.nombre.split('-')[0].trim())
+      .siblings()
+      .eq(6)
+      .contains(servicio.unidad_obras[0].nombre.split('-')[1].trim());
+
+    cy.get('table')
+      .contains('td', servicio.nombre.split('-')[0].trim())
+      .siblings()
+      .eq(7)
+      .contains(servicio.actividad);
+
+    if (servicio.unidad_obras[0].nombre !== '0 - SIN UO') {
+      cy.get('table')
+        .contains('td', servicio.nombre.split('-')[0].trim())
+        .siblings()
+        .eq(8)
+        .contains(servicio.unidad_obras[0].cantidad);
+
+      cy.get('table')
+        .contains('td', servicio.nombre.split('-')[0].trim())
+        .siblings()
+        .eq(9)
+        .contains(servicio.unidad_obras[0].precio);
+
+      cy.get('table')
+        .contains('td', servicio.nombre.split('-')[0].trim())
+        .siblings()
+        .eq(10)
+        .contains(servicio.unidad_obras[0].total);
+    }
+
+    servicio.unidad_obras.forEach((uo, index) => {
+      if (index !== 0) {
+        cy.get('table')
+          .contains('td', uo.nombre.split('-')[0].trim())
+          .siblings()
+          .eq(0)
+          .contains(uo.nombre.split('-')[1].trim());
+
+        cy.get('table')
+          .contains('td', uo.nombre.split('-')[0].trim())
+          .siblings()
+          .eq(1)
+          .contains(servicio.actividad);
+
+        if (uo.nombre !== '0 - SIN UO') {
+          cy.get('table')
+            .contains('td', uo.nombre.split('-')[0].trim())
+            .siblings()
+            .eq(2)
+            .contains(uo.cantidad);
+
+          cy.get('table')
+            .contains('td', uo.nombre.split('-')[0].trim())
+            .siblings()
+            .eq(3)
+            .contains(uo.precio);
+
+          cy.get('table')
+            .contains('td', uo.nombre.split('-')[0].trim())
+            .siblings()
+            .eq(4)
+            .contains(uo.total);
+        }
+      }
+    });
   });
 
   cy.get('td[class="total-servicio-monto"]').contains(data.totalServicios);

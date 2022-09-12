@@ -99,6 +99,16 @@ export class AfterHttpService {
       this.router.navigate(['/cubicacion/list-cub']);
     }
 
+    // EDITAR CUBICACIÓN
+    if (action.type === cubicacionActions.editCubicacionSuccess.type) {
+      this.snackMessage.showMessage(
+        `Cubicación ID:${action.response.data.cubicacion_id} editada con exito`,
+        'Exito',
+        6000
+      );
+      this.router.navigate(['/cubicacion/list-cub']);
+    }
+
     // CLONAR CUBICACIÓN
     if (action.type === cubicacionActions.clonarCubicacionSuccess.type) {
       this.snackMessage.showMessage(

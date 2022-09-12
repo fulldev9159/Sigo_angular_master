@@ -288,7 +288,30 @@ describe('Editar cubicacion', () => {
     cy._check_table_servicio_input(dataEdit);
 
     // GUARDAR
+    cy.get('button[id="editar-cubicacion"]').click();
+
+    cy.wait(1000);
   });
 
-  it('Comprobar cambios', () => {});
+  it('Comprobar cambios', () => {
+    cy.intercept('POST', '/cubicacion/detalle/get2').as(
+      'HTTPRESPONSE-GET-DETALLE-CUBICACION'
+    );
+    cy.viewport(w, h);
+    cy.visit('http://localhost:4206/login/auth');
+    cy._login('mgestor1', 'asdasd');
+    cy._select_profile('Gestor/JP');
+    cy.get('#listar-cubicacion-sidebar').click();
+
+    cy._filter_table(
+      'filter-nombre-cubicacion',
+      'Cubicacion Bucle Cypress Editada'
+    );
+    cy.get('tbody').find('tr').should('have.length', 1);
+    cy.get('button[id="button-detalle-cubicacion"]').click();
+    let dataEdit = CubicacionEditada;
+    cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
+      cy._check_table_servicio_view(dataEdit);
+    });
+  });
 });
