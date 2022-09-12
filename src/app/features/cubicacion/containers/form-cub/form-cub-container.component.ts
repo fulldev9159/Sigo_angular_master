@@ -20,9 +20,14 @@ import { combineLatest, Observable, Subscription, take } from 'rxjs';
 import {
   CarritoService,
   DetalleCubicacion,
+  NuevoServicio,
+  NuevoUO,
   ProveedorAgenciaContrato,
   RequestCreateCubicacion,
+  RequestEditCubicacion,
+  ServicioUOActualizar,
   SessionData,
+  UOAgregar,
 } from '@model';
 import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-table-services.component';
 import { ActivatedRoute, Route } from '@angular/router';
@@ -371,6 +376,157 @@ export class FormCubContainerComponent
   editarCubicacion(): void {
     console.log(this.tableServicios.servicios_eliminar);
     console.log(this.tableServicios.uos_eliminar);
+
+    // ELIMINAR SERVICIOS/UO QUE EXISTIAN EN LA CUBICACION SI EL USUARIO DECIDIÖ ELIMINAR UNO
+    if (
+      this.tableServicios.servicios_eliminar.length > 0 ||
+      this.tableServicios.uos_eliminar.length > 0
+    ) {
+      // this.cubicacionFacade.eliminarServicioCarrito(
+      //   this.tableServicios.servicios_eliminar,
+      //   this.tableServicios.uos_eliminar
+      // );
+      console.log(this.tableServicios.servicios_eliminar);
+      console.log(this.tableServicios.uos_eliminar);
+    }
+
+    this.subscription.add(
+      combineLatest([this.proveedorSelected$, this.carrito$, this.route.data])
+        .pipe(take(1))
+        .subscribe(([proveedorSelected, carrito, detalleCubicacion]) => {
+          let detalleCub = detalleCubicacion as DetalleCubicacion;
+          let id = detalleCub.id;
+          const {
+            nombre,
+            tipocubicacion,
+            direcciondesde,
+            direcciondesdealtura,
+            direccionhasta,
+            direccionhastaaltura,
+            descripcion,
+            contrato,
+            agencia_id,
+            cmarcoproveedor_id,
+          } = this.formulario.formCub.value;
+
+          const isLocal = (item: { precargado?: boolean }) =>
+            item.precargado === undefined || item.precargado === false;
+
+          const notLocal = (item: { precargado?: boolean }) => !isLocal(item);
+
+          const servicios: {
+            precargado: boolean;
+            servicio_rowid: number;
+            servicio_id: number;
+            servicio_cantidad: number;
+            unidad_obras: Array<{
+              precargado: boolean;
+              uo_rowid: number;
+              uo_cantidad: number;
+              uo_codigo: string;
+            }>;
+          }[] = this.formulario.formCub.get('table').value as Array<{
+            precargado: boolean;
+            servicio_id: number;
+            servicio_rowid: number;
+            servicio_cantidad: number;
+            unidad_obras: Array<{
+              precargado: boolean;
+              uo_rowid: number;
+              uo_cantidad: number;
+              uo_codigo: string;
+            }>;
+          }>;
+
+          const nuevos_servicios: NuevoServicio[] = servicios
+            .filter(isLocal)
+            .map(servicio => {
+              let unidad_obra: NuevoUO[] = [];
+              unidad_obra = servicio.unidad_obras.map(uo => ({
+                uob_codigo: uo.uo_codigo,
+                cantidad: +uo.uo_cantidad,
+              }));
+              return {
+                servicio_id: +servicio.servicio_id,
+                actividad_id: carrito.find(
+                  value =>
+                    value.servicio_id === servicio.servicio_id &&
+                    value.unidad_obras[0].uo_codigo ===
+                      servicio.unidad_obras[0].uo_codigo
+                ).unidad_obras[0].actividad_id,
+                tipo_servicio_id: +carrito.find(
+                  value =>
+                    value.servicio_id === servicio.servicio_id &&
+                    value.unidad_obras[0].uo_codigo ===
+                      servicio.unidad_obras[0].uo_codigo
+                ).tipo_servicio_id,
+                cantidad: +servicio.servicio_cantidad,
+                unidad_obra,
+              };
+            });
+
+          const servicios_actualizar: ServicioUOActualizar[] = servicios
+            .filter(notLocal)
+            .map(servicio => ({
+              rowid: servicio.servicio_rowid,
+              cantidad: +servicio.servicio_cantidad,
+            }));
+
+          const unidades_obra_actualizar: ServicioUOActualizar[] = servicios
+            .filter(notLocal)
+            .reduce((ac, servicio) => {
+              const unidades_obra = servicio.unidad_obras
+                .filter(notLocal)
+                .map(uo => ({
+                  rowid: uo.uo_rowid,
+                  cantidad: +uo.uo_cantidad,
+                }));
+              return ac.concat(unidades_obra);
+            }, []);
+
+          const nuevas_unidades_obra: UOAgregar[] = servicios
+            .filter(notLocal)
+            .reduce((ac, servicio) => {
+              const unidades_obra = servicio.unidad_obras
+                .filter(isLocal)
+                .map(uo => ({
+                  servicio_rowid: servicio.servicio_rowid,
+                  uob_codigo: uo.uo_codigo,
+                  uob_cantidad: +uo.uo_cantidad,
+                }));
+              return ac.concat(unidades_obra);
+            }, []);
+
+          const request: RequestEditCubicacion = {
+            cubicacion_datos: {
+              id: +id,
+              nombre,
+              tipo_cubicacion_id: +tipocubicacion,
+              contrato_id: contrato,
+              agencia_id,
+              proveedor_id: proveedorSelected.id,
+              codigo_acuerdo: proveedorSelected.codigo_acuerdo,
+              cmarco_has_proveedor_id: cmarcoproveedor_id,
+              usuario_creador_id: +this.sessionData.usuario_id, // TODO: CONFIRMAR SI DEBERÏA SER EL USUARIO QUE LO CREO O EL USUARIO QUE ESTÄ EDITANDO
+              direccion_desde: direcciondesde,
+              altura_desde: direcciondesdealtura,
+              direccion_hasta: direccionhasta,
+              altura_hasta: direccionhastaaltura,
+              descripcion,
+            },
+            cubicacion_detalle: {
+              nuevo: nuevos_servicios,
+              actualizar: {
+                servicio: servicios_actualizar,
+                unidad_obra: unidades_obra_actualizar,
+                agregar_uob_a_servicio: nuevas_unidades_obra,
+              },
+            },
+          };
+
+          console.log(request);
+        })
+    );
   }
 
   ngOnDestroy(): void {

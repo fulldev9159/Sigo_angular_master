@@ -1,4 +1,10 @@
-import { crearCubicacion } from 'cypress/fixtures/testedCubicacion';
+import {
+  crearCubicacion,
+  CubicacionEditada,
+} from 'cypress/fixtures/testedCubicacion';
+
+let w = 1900;
+let h = 1200;
 
 describe('Editar cubicacion', () => {
   it('should let enter to create cubicacion', () => {
@@ -9,13 +15,14 @@ describe('Editar cubicacion', () => {
   });
 
   it('Debe desplegar 4 cubicaciones', () => {
-    cy.viewport(1500, 700);
+    cy.viewport(w, h);
     // cy.get('tbody').find('tr').should('have.length', 4);
     cy._filter_table('filter-nombre-cubicacion', 'Cubicacion Bucle Cypress');
     cy.get('tbody').find('tr').should('have.length', 1);
   });
 
   it('Debe precargar los datos correspondientes', () => {
+    cy.viewport(w, h);
     const data = crearCubicacion;
     cy.get('button[id="button-editar-cubicacion"]').click();
     cy.get('input[name="input-nombre-cubicacion"]')
@@ -203,6 +210,8 @@ describe('Editar cubicacion', () => {
   });
 
   it('Realizar cambios', () => {
+    cy.viewport(w, h);
+    const data = crearCubicacion;
     // CAMBIAR FORMULARIO
     cy.get('input[name="input-nombre-cubicacion"]')
       .clear()
@@ -222,17 +231,61 @@ describe('Editar cubicacion', () => {
 
     // CAMBIAR CARRITO
     // ELIMINAR EL SERVICIO J456 Y LA UNIDAD OBRA H001
+    cy.get('table')
+      .contains('td', 'J456')
+      .siblings()
+      .eq(5)
+      .find('button')
+      .click();
+
+    cy.get('table')
+      .contains('td', 'H001')
+      .siblings()
+      .eq(5)
+      .find('button')
+      .click();
 
     // CAMBIAR CANTIDAD J451 A 15
+    cy._change_cantidad_servicio('J451', '15');
     // UO D012 A 14
+    cy._change_cantidad_uo(2, 'D012', '14');
     // UO C926 A 150,37
+    cy._change_cantidad_uo(9, 'C926', '150,37');
     // H006 A 9
+    cy._change_cantidad_uo(9, 'H006', '9');
     // H002 A 150
+    cy._change_cantidad_uo(2, 'H002', '150');
 
-    // AGREGAR 3 ITEMS
+    // AGREGAR J726
+    cy._add_service_carrito(
+      'FIBRA OPTICA',
+      'LINEAS',
+      'J726 - INST. REPARTIDOR MURAL, 1 VERTICAL, TIPO 2/3 VERTICALES',
+      '0 - SIN UO'
+    );
+    cy._change_cantidad_servicio('J726', '15');
+    // AGREGAR J730
+    cy._add_service_carrito(
+      'FIBRA OPTICA',
+      'LINEAS',
+      'J730 - INST. ESCALERILLA SOPORTE',
+      'H134 - ESCALERILLA PC TIPO NEC 200*32'
+    );
+    cy._change_cantidad_servicio('J730', '16');
+    cy._change_cantidad_uo(9, 'H134', '26');
 
     // AGREGAR C105 - CABLE PS 600-26 SUB. A J101
-    // AGREGAR H134 - A J730
+    cy._add_service_carrito(
+      'MATRIZ',
+      'LINEAS',
+      'J101 - INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
+      'C105 - CABLE PS 600-26 SUB.'
+    );
+    cy._change_cantidad_uo(2, 'C105', '80,32');
+
+    // VERIFICAR CARRITO
+    let dataEdit = CubicacionEditada;
+    cy._check_table_servicio_input(dataEdit);
 
     // GUARDAR
   });

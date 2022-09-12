@@ -75,6 +75,8 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
           // NUEVO SERVICIO
           if (indexServiceFormulario === -1) {
             const group = new FormGroup({
+              precargado: new FormControl(servicio.precargado, []),
+              servicio_rowid: new FormControl(servicio.servicio_rowid, []),
               servicio_id: new FormControl(servicio.servicio_id, [
                 Validators.required,
               ]),
@@ -172,6 +174,8 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     let min = uo.uo_codigo === '0' ? 0 : 0.01;
 
     return new FormGroup({
+      precargado: new FormControl(uo.precargado, []),
+      uo_rowid: new FormControl(uo.uo_rowid, []),
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
       uo_cantidad: new FormControl(uo.uo_cantidad ? uo.uo_cantidad : cantidad, [
         Validators.required,

@@ -305,7 +305,7 @@ export const CubicacionEditada = {
       nombre: 'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
       precio: '$180,32',
       cantidad: '15',
-      total: '$2.704,80',
+      total: '$2.704,8',
       tipo_servicio: 'Cables',
       actividad: 'Matriz',
       unidad_obras: [
@@ -410,7 +410,7 @@ export const CubicacionEditada = {
       nombre: 'J730 - INST. ESCALERILLA SOPORTE',
       precio: '$12.851,1',
       cantidad: '16',
-      total: '$330.120',
+      total: '$205.617,6',
       tipo_servicio: 'Lineas',
       actividad: 'Fibra Optica',
       unidad_obras: [
