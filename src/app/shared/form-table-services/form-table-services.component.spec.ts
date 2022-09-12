@@ -127,7 +127,7 @@ describe('TableServicesComponent', () => {
       table: [
         {
           // @ts-ignore
-          precargado: null,
+          precargado: false,
           // @ts-ignore
           servicio_rowid: null,
           servicio_id: 141,
@@ -136,7 +136,7 @@ describe('TableServicesComponent', () => {
           unidad_obras: [
             {
               // @ts-ignore
-              precargado: null,
+              precargado: false,
               // @ts-ignore
               uo_rowid: null,
               uo_codigo: 'C048',
@@ -145,7 +145,7 @@ describe('TableServicesComponent', () => {
             },
             {
               // @ts-ignore
-              precargado: null,
+              precargado: false,
               // @ts-ignore
               uo_rowid: null,
               uo_codigo: 'C926',
@@ -202,7 +202,7 @@ describe('TableServicesComponent', () => {
       table: [
         {
           // @ts-ignore
-          precargado: null,
+          precargado: false,
           // @ts-ignore
           servicio_rowid: null,
           servicio_id: 141,
@@ -211,7 +211,7 @@ describe('TableServicesComponent', () => {
           unidad_obras: [
             {
               // @ts-ignore
-              precargado: null,
+              precargado: false,
               // @ts-ignore
               uo_rowid: null,
               uo_codigo: 'C048',
@@ -219,7 +219,7 @@ describe('TableServicesComponent', () => {
               uo_precio_total_clp: 0,
             },
             {
-              precargado: null,
+              precargado: false,
               // @ts-ignore
               uo_rowid: null,
               uo_codigo: 'C926',
@@ -274,7 +274,7 @@ describe('TableServicesComponent', () => {
       table: [
         {
           // @ts-ignore
-          precargado: null,
+          precargado: false,
           // @ts-ignore
           servicio_rowid: null,
           servicio_id: 141,
@@ -283,7 +283,7 @@ describe('TableServicesComponent', () => {
           unidad_obras: [
             {
               // @ts-ignore
-              precargado: null,
+              precargado: false,
               // @ts-ignore
               uo_rowid: null,
               uo_codigo: 'C048',
@@ -292,7 +292,7 @@ describe('TableServicesComponent', () => {
             },
             {
               // @ts-ignore
-              precargado: null,
+              precargado: false,
               // @ts-ignore
               uo_rowid: null,
               uo_codigo: 'C926',
@@ -301,7 +301,7 @@ describe('TableServicesComponent', () => {
             },
             {
               // @ts-ignore
-              precargado: null,
+              precargado: false,
               // @ts-ignore
               uo_rowid: null,
               uo_codigo: 'C881',
@@ -312,7 +312,7 @@ describe('TableServicesComponent', () => {
         },
         {
           // @ts-ignore
-          precargado: null,
+          precargado: false,
           // @ts-ignore
           servicio_rowid: null,
           servicio_id: 2055,
@@ -321,7 +321,7 @@ describe('TableServicesComponent', () => {
           unidad_obras: [
             {
               // @ts-ignore
-              precargado: null,
+              precargado: false,
               // @ts-ignore
               uo_rowid: null,
               uo_codigo: '0',
@@ -336,7 +336,7 @@ describe('TableServicesComponent', () => {
     let formatoResultCarritoNuevoServicio = [
       {
         // @ts-ignore
-        precargado: null,
+        precargado: false,
         // @ts-ignore
         servicio_rowid: null,
         servicio_id: 141,
@@ -348,7 +348,7 @@ describe('TableServicesComponent', () => {
         unidad_obras: [
           {
             // @ts-ignore
-            precargado: null,
+            precargado: false,
             // @ts-ignore
             uo_rowid: null,
             uo_codigo: 'C048',
@@ -359,7 +359,7 @@ describe('TableServicesComponent', () => {
           },
           {
             // @ts-ignore
-            precargado: null,
+            precargado: false,
             // @ts-ignore
             uo_rowid: null,
             uo_codigo: 'C926',
@@ -370,7 +370,7 @@ describe('TableServicesComponent', () => {
           },
           {
             // @ts-ignore
-            precargado: null,
+            precargado: false,
             // @ts-ignore
             uo_rowid: null,
             uo_codigo: 'C881',
@@ -383,7 +383,7 @@ describe('TableServicesComponent', () => {
       },
       {
         // @ts-ignore
-        precargado: null,
+        precargado: false,
         // @ts-ignore
         servicio_rowid: null,
         servicio_id: 2055,
@@ -396,7 +396,7 @@ describe('TableServicesComponent', () => {
         unidad_obras: [
           {
             // @ts-ignore
-            precargado: null,
+            precargado: false,
             // @ts-ignore
             uo_rowid: null,
             uo_codigo: '0',
@@ -411,7 +411,7 @@ describe('TableServicesComponent', () => {
 
     carrito.setResult([
       {
-        precargado: null,
+        precargado: false,
         servicio_rowid: null,
         servicio_id: 141,
         servicio_codigo: 'J101',
@@ -421,7 +421,7 @@ describe('TableServicesComponent', () => {
         tipo_servicio_id: 1,
         unidad_obras: [
           {
-            precargado: null,
+            precargado: false,
             // @ts-ignore
             uo_rowid: null,
             uo_codigo: 'C048',
@@ -433,7 +433,7 @@ describe('TableServicesComponent', () => {
         ],
       },
       {
-        precargado: null,
+        precargado: false,
         servicio_rowid: null,
         servicio_id: 141,
         servicio_codigo: 'J101',
@@ -443,7 +443,7 @@ describe('TableServicesComponent', () => {
         tipo_servicio_id: 1,
         unidad_obras: [
           {
-            precargado: null,
+            precargado: false,
             uo_rowid: null,
             uo_codigo: 'C926',
             uo_nombre: 'CABLE 1800-26 PS',
@@ -454,7 +454,7 @@ describe('TableServicesComponent', () => {
         ],
       },
       {
-        precargado: null,
+        precargado: false,
         servicio_rowid: null,
         servicio_id: 141,
         servicio_codigo: 'J101',
@@ -464,7 +464,7 @@ describe('TableServicesComponent', () => {
         tipo_servicio_id: 1,
         unidad_obras: [
           {
-            precargado: null,
+            precargado: false,
             uo_rowid: null,
             uo_codigo: 'C881',
             uo_nombre: 'CABLE FS 1212-24 SUB.',
@@ -475,7 +475,7 @@ describe('TableServicesComponent', () => {
         ],
       },
       {
-        precargado: null,
+        precargado: false,
         servicio_rowid: null,
         servicio_id: 2055,
         servicio_codigo: 'J451',
@@ -486,7 +486,7 @@ describe('TableServicesComponent', () => {
         tipo_servicio_id: 1,
         unidad_obras: [
           {
-            precargado: null,
+            precargado: false,
             uo_rowid: null,
             uo_codigo: '0',
             uo_nombre: 'SIN UO',
