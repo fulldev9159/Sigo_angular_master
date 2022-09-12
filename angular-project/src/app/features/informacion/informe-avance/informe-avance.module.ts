@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InformeTrabajadorComponent } from './informe-trabajador/informe-trabajador.component';
 import { InformeAdmincontratoComponent } from './informe-admincontrato/informe-admincontrato.component';
 import { InputColorDirective } from '@utilsSIGO/input-color.directive';
+import { ServiciosAdicionalesComponent } from '../servicios-adicionales/servicios-adicionales.component';
 
 @NgModule({
   declarations: [

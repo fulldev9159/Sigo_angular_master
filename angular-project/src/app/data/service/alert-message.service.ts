@@ -186,7 +186,6 @@ export class AlertMessageActions {
         action === otActions.createOTSuccess.type ||
         action === otActions.AprobarRechazarActaOTSuccess.type ||
         action === otActions.AprobarRechazarSolicitudPagoSuccess.type ||
-        action === cubActions.agregarServiciosAdicionalesSuccess.type ||
         action === otActions.informarTrabajosFinalizadosSuccess.type ||
         action === otActions.sendGeneracionActaSuccessOLD.type
       ) {
@@ -196,7 +195,8 @@ export class AlertMessageActions {
       if (
         action === ca.clonCubSuccess.type ||
         action === otActions.sendGeneracionActaSuccess.type ||
-        action === authActions.loginSuccess.type
+        action === authActions.loginSuccess.type ||
+        action === cubActions.agregarServiciosAdicionalesSuccess.type
       ) {
         location.reload();
       }

@@ -3,7 +3,76 @@
   <p-message severity="info" text="No se puede generar una nueva acta hasta que la enviada termine de pagarse"></p-message>&nbsp;
 </ng-container> -->
 <!-- <ng-container *ngIf="(ot$|async) && (ot$|async).ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_GENERACION_ACTA'"> -->
+
+  
 <ng-container *ngIf="ot$ | async as ot">
+  <ng-container *ngIf="adicionalesPendientesAprobar">
+    <p style="padding: 10px;">Primero debe aprobar o rechazar los servicios adicionales. Una vez que todos los servicios adicionales sean aprobados podrá continuar validando el resto del acta</p>
+    <div class="row">
+      <ng-container *ngIf="formAdicionales">
+        <ng-container *ngIf="formAdicionales.get('servicios') as servicios">
+          <div class="col-xs-12 col-md-12">
+            <app-card [classCardHeader]="'bg-info'">
+              <ng-container card-header-title>Detalle servicios adicionales</ng-container>
+              <ng-container card-body>
+                <table style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>Cod.</th>
+                      <th>Descripción</th>
+                      <th style="text-align: right">Cantidad a Enviar</th>
+                      <th>Precio Un.</th>
+                      <th>Total</th>
+                      <th>Aprobar/Rechazar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngIf="formAdicionales.get('unidades_obra') as unidadesObra">
+                      <ng-container *ngFor="let servicio of servicios.controls">
+                        <tr>
+                          <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
+                          <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
+                          <td style="text-align: right">{{ servicio.get('cantidad_a_enviar').value }}</td>
+                          <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                          <td class="data-secundaria">{{ +servicio.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                          <td> 
+                            <select name="" id="">
+                              <option value="">seleccione una opción</option>
+                              <option value="1">Aprobar</option>
+                              <option value="">Rechazar</option>
+                            </select>
+                          </td>
+                        </tr>
+                        <ng-container *ngFor="let uo of unidadesObra.controls">
+                          <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value">
+                            <td class="label-table" style="background-color:#ff8e4e ;
+                            padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
+                            <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
+                            <td style="text-align: right">{{ uo.get('cantidad_a_enviar').value }}</td>
+                            <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                            <td class="data-secundaria">{{ +uo.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                            <td> 
+                              <select name="" id="">
+                                <option value="">seleccione una opción</option>
+                                <option value="1">Aprobar</option>
+                                <option value="">Rechazar</option>
+                              </select>
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </ng-container>
+            </app-card>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    
+  </ng-container>
+  
   <ng-container *ngIf="form">
     <div class="row" style="padding: 15px">
       <div class="col-xs-12 col-md-6">

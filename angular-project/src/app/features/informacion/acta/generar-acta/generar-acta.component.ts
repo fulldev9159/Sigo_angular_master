@@ -48,6 +48,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   totalUO: number;
   totalServicios_servicio: number;
   totalUO_servicio: number;
+  adicionalesPendientesAprobar: boolean;
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl({ value: '', disabled: true }, [
@@ -66,6 +67,11 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       servicios: new FormArray([]),
       unidades_obra: new FormArray([]),
     }),
+  });
+
+  formAdicionales: FormGroup = new FormGroup({
+    servicios: new FormArray([]),
+    unidades_obra: new FormArray([]),
   });
 
   mustBeANumber(control: FormControl): any {
@@ -90,6 +96,18 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     this.subscription.add(
       combineLatest([this.tiposPago$, this.detalleActa$]).subscribe(
         ([tiposPago, { ultimo_tipo_pago, servicios, unidades_obra }]) => {
+          console.log(
+            servicios.filter(
+              servicio => servicio.adicional_aceptacion_estado === 'PENDIENTE'
+            )
+          );
+          this.adicionalesPendientesAprobar =
+            servicios.filter(
+              servicio => servicio.adicional_aceptacion_estado === 'PENDIENTE'
+            ).length > 0;
+
+          if (this.adicionalesPendientesAprobar)
+            this.adicionales(servicios, unidades_obra);
           this.setMaxPorcentage(servicios, unidades_obra);
           this.loadTotalPorcentajeForm(servicios, unidades_obra);
           this.loadServicioForm(servicios, unidades_obra);
@@ -117,6 +135,69 @@ export class GenararActaComponent implements OnInit, OnDestroy {
         console.error(error.message);
       }
     }, 100);
+  }
+
+  adicionales(
+    servicios: DetalleActaServicio[],
+    unidades_obra: DetalleActaUob[]
+  ) {
+    console.log('holaS');
+    const serviciosForm = this.formAdicionales.get('servicios') as FormArray;
+    const unidadesObraForm = this.formAdicionales.get(
+      'unidades_obra'
+    ) as FormArray;
+
+    (servicios ?? [])
+      .filter(servicio => servicio.adicional_aceptacion_estado === 'PENDIENTE')
+      .forEach(servicio => {
+        serviciosForm.push(
+          new FormGroup({
+            id: new FormControl(`${servicio.id}`, []),
+            servicio_codigo: new FormControl(`${servicio.servicio_codigo}`, []),
+            descripcion: new FormControl(
+              `${servicio.servicio_descripcion}`,
+              []
+            ),
+            cantidad_total: new FormControl(`${servicio.cantidad_total}`, []),
+            precio_unitario: new FormControl(
+              `${servicio.valor_unitario_clp}`,
+              []
+            ),
+            precio_total_servicio: new FormControl(
+              `${+servicio.valor_unitario_clp * +servicio.cantidad_total}`,
+              []
+            ),
+            cantidad_a_enviar: new FormControl(
+              `${servicio.faltante_cantidad}`,
+              []
+            ),
+            aprobado: new FormControl(null, [Validators.required]),
+          })
+        );
+      });
+
+    (unidades_obra ?? []).forEach(uo => {
+      if (+uo.cantidad_total > 0) {
+        unidadesObraForm.push(
+          new FormGroup({
+            id: new FormControl(`${uo.id}`, []),
+            descripcion: new FormControl(`${uo.unidad_obra_desc}`, []), // TODO
+            uo_codigo: new FormControl(`${uo.unidad_obra_cod}`, []),
+            cantidad_total: new FormControl(`${uo.cantidad_total}`, []),
+            precio_unitario: new FormControl(`${uo.valor_unitario_clp}`, []),
+            precio_total_servicio: new FormControl(
+              `${+uo.valor_unitario_clp * +uo.cantidad_total}`,
+              []
+            ),
+            cantidad_a_enviar: new FormControl(`${uo.faltante_cantidad}`, []),
+            informe_has_servicio_id: new FormControl(
+              `${uo.informe_has_servicio_id}`,
+              []
+            ),
+          })
+        );
+      }
+    });
   }
 
   setMaxPorcentage(

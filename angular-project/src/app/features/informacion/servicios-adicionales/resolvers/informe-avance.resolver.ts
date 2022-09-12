@@ -10,7 +10,7 @@ import { EMPTY, Observable } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class InformeAvanceResolver
+export class InformeAvanceResolver2
   implements Resolve<Response<DetalleInformeAvance>>
 {
   constructor(
