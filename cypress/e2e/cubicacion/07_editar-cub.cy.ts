@@ -290,10 +290,10 @@ describe('Editar cubicacion', () => {
     // GUARDAR
     cy.get('button[id="editar-cubicacion"]').click();
 
-    cy.wait(1000);
+    cy.wait(700);
   });
 
-  it('Comprobar cambios', () => {
+  it.only('Comprobar cambios', () => {
     cy.intercept('POST', '/cubicacion/detalle/get2').as(
       'HTTPRESPONSE-GET-DETALLE-CUBICACION'
     );
@@ -311,6 +311,7 @@ describe('Editar cubicacion', () => {
     cy.get('button[id="button-detalle-cubicacion"]').click();
     let dataEdit = CubicacionEditada;
     cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
+      cy.wait(500);
       cy._check_table_servicio_view(dataEdit);
     });
   });
