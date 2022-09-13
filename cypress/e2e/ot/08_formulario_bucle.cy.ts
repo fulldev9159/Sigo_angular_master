@@ -9,4 +9,9 @@ it('should let enter to create cubicacion', () => {
   cy.get('#crear-ot-sidebar').click();
 });
 
-describe('Visibilidad e Interacción Inicial', () => {});
+describe('Visibilidad e Interacción Inicial', () => {
+  it('Debe desplegar el formulario base', () => {
+    cy.get('input[name="input-nombre-ot"]').should('be.enabled');
+    cy._check_input('input[name="input-nombre-ot"]', 'required');
+  });
+});

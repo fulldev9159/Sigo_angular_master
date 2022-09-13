@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -8,6 +9,19 @@ import { MenuItem } from 'primeng/api';
 })
 export class FormOtContainerComponent implements OnInit {
   navbarHeader: MenuItem[];
+
+  form: FormGroup = new FormGroup({
+    base: new FormGroup({
+      nombre: new FormControl('', [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      contrato: new FormControl(null, [Validators.required]),
+      cubicacion_id: new FormControl(null, [Validators.required]),
+    }),
+  });
+
   constructor() {}
 
   ngOnInit(): void {
