@@ -18,7 +18,8 @@
     <div class="card">
         <div class="formgrid grid">
             <div class="field col-12">
-
+                <zwc-pdropdown [control]="form.get('cubicacion_id')" Label="*Cubicación" dropdown_id="select-cubicacion"
+                    [data]="cubicacionesContrato$|async" Pplaceholder="Selecione una cubicación"></zwc-pdropdown>
             </div>
         </div>
     </div>

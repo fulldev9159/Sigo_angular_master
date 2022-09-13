@@ -7,9 +7,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ContratosUsuarioMOCK200OK } from '@mocksOT';
+import {
+  ContratosUsuarioMOCK200OK,
+  cubicacionContratoMOCK200ok,
+} from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { getCubicacionesContrato } from '@storeOT/cubicacion/cubicacion.selectors';
+import { sendingGetCubicacionesContrato } from '@storeOT/loadings/loadings.selectors';
 import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
 
 import { FormularioOtBaseComponent } from './formulario-ot-base.component';
@@ -21,6 +27,7 @@ describe('FormularioOtBaseComponent', () => {
   let fixture: ComponentFixture<FormularioOtBaseComponent>;
   let initialState: any = { example: [] };
   let store: MockStore<any>;
+  let cubicacionFacade: CubicacionFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -35,6 +42,14 @@ describe('FormularioOtBaseComponent', () => {
               selector: getContratosUsuario,
               value: ContratosUsuarioMOCK200OK.data.items,
             },
+            {
+              selector: getCubicacionesContrato,
+              value: cubicacionContratoMOCK200ok.data.items,
+            },
+            {
+              selector: sendingGetCubicacionesContrato,
+              value: false,
+            },
           ],
         }),
       ],
@@ -43,6 +58,8 @@ describe('FormularioOtBaseComponent', () => {
     fixtureTest = TestBed.createComponent(TestComponent);
     componentTest = fixtureTest.componentInstance;
     fixtureTest.detectChanges();
+
+    cubicacionFacade = TestBed.inject(CubicacionFacade);
 
     // fixture = TestBed.createComponent(FormularioOtBaseComponent);
     // component = fixture.componentInstance;
@@ -54,6 +71,12 @@ describe('FormularioOtBaseComponent', () => {
   it('should create', () => {
     expect(componentTest).toBeTruthy();
     // expect(component).toBeTruthy();
+  });
+
+  it('Debe llamar al facade getCubicacionesContrato con id 1 al escoger el contrato 1', () => {
+    spyOn(cubicacionFacade, 'getCubicacionesContrato');
+    componentTest.form.get('contrato').setValue(1);
+    expect(cubicacionFacade.getCubicacionesContrato).toHaveBeenCalledWith(1);
   });
 
   @Component({

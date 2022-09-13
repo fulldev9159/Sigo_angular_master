@@ -143,6 +143,22 @@ export class CubicacionEffects {
     )
   );
 
+  getCubicacionesContrato$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.getCubicacionesContrato),
+      concatMap(({ contrato_id }) =>
+        this.cubicacionHttpService.getCubicacionesContrato(contrato_id).pipe(
+          map(response =>
+            cubicacionActions.getCubicacionesContratoSuccess({ response })
+          ),
+          catchError(error =>
+            of(cubicacionActions.getCubicacionesContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(

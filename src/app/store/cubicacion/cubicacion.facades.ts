@@ -3,6 +3,7 @@ import {
   AgenciaContrato,
   ContratosUser,
   Cubicacion,
+  CubicacionContrato,
   DetalleCubicacion,
   PerfilesUsuario,
   ProveedorAgenciaContrato,
@@ -137,6 +138,17 @@ export class CubicacionFacade {
     this.store.dispatch(
       cubicacionActions.eliminarServicioCarrito({ servicio, unidad_obra })
     );
+  }
+
+  // CUBICACIONES DE UN CONTRATO ESPECIFICO
+  public getCubicacionesContrato(contrato_id: number): void {
+    this.store.dispatch(
+      cubicacionActions.getCubicacionesContrato({ contrato_id })
+    );
+  }
+
+  public getCubicacionesContrato$(): Observable<CubicacionContrato[]> {
+    return this.store.select(cubicacionSelectors.getCubicacionesContrato);
   }
 
   // RESETS

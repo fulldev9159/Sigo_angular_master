@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import {
+  cubicacionContratoMOCK200ok,
   detalleCubicacionMOCK200Ok,
   eliminarCubicacionMOCK200ok,
   eliminarServicioCarritoMOCK200ok,
@@ -110,6 +111,17 @@ describe('CubicacionHttpService', () => {
     service.eliminarServicioCarrito([], []).subscribe({
       next: response => {
         expect(response).toEqual(eliminarServicioCarritoMOCK200ok);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call getCubicacionesContrato and return  Data', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(cubicacionContratoMOCK200ok));
+    service.getCubicacionesContrato(1).subscribe({
+      next: response => {
+        expect(response).toEqual(cubicacionContratoMOCK200ok);
         done();
       },
       error: done.fail,

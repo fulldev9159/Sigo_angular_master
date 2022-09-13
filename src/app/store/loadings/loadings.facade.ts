@@ -93,4 +93,9 @@ export class LoadingsFacade {
   public sendingClonarCubicacion$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingClonarCubicacion);
   }
+
+  // CUBICACIONES DE UN CONTRATO ESPECIFICO
+  public sendingGetCubicacionesContrato$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetCubicacionesContrato);
+  }
 }

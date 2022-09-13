@@ -34,3 +34,8 @@ export const detalleCubicacion = createSelector(
   selectCubicacion,
   (state: reducer.StateCubicacion) => state.detalleCubicacion
 );
+
+export const getCubicacionesContrato = createSelector(
+  selectCubicacion,
+  (state: reducer.StateCubicacion) => state.cubicacionesContrato
+);

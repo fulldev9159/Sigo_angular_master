@@ -3,6 +3,7 @@ import {
   AgenciaContrato,
   ContratosUser,
   Cubicacion,
+  CubicacionContrato,
   DetalleCubicacion,
   ProveedorAgenciaContrato,
   TipoCubicacion,
@@ -18,6 +19,7 @@ export interface StateCubicacion {
   agenciaSelected: AgenciaContrato;
   listarCubicaciones: Cubicacion[];
   detalleCubicacion: DetalleCubicacion;
+  cubicacionesContrato: CubicacionContrato[];
 }
 
 export const initialState: StateCubicacion = {
@@ -27,6 +29,7 @@ export const initialState: StateCubicacion = {
   agenciaSelected: null,
   listarCubicaciones: [],
   detalleCubicacion: null,
+  cubicacionesContrato: [],
 };
 
 export const reducerCubicacion = createReducer(
@@ -55,6 +58,13 @@ export const reducerCubicacion = createReducer(
     ...state,
     detalleCubicacion: response.data,
   })),
+  on(
+    cubicacionActions.getCubicacionesContratoSuccess,
+    (state, { response }) => ({
+      ...state,
+      cubicacionesContrato: response.data.items,
+    })
+  ),
   // RESETS
   on(cubicacionActions.resetContratoSelected, (state, {}) => ({
     ...state,

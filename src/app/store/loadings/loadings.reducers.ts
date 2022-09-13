@@ -25,6 +25,7 @@ export interface StateLoadings {
   sendingClonarCubicacion: boolean;
   sendingGetCubicaciones: boolean;
   sendingDetalleCubicacion: boolean;
+  sendingGetCubicacionesContrato: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -43,6 +44,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetCubicaciones: false,
   sendingDetalleCubicacion: false,
   sendingClonarCubicacion: false,
+  sendingGetCubicacionesContrato: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -224,6 +226,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingClonarCubicacion: false,
+    })
+  ),
+
+  on(cubicacionActions.getCubicacionesContrato, state => ({
+    ...state,
+    sendingGetCubicacionesContrato: true,
+  })),
+  on(
+    cubicacionActions.getCubicacionesContratoSuccess,
+    cubicacionActions.getCubicacionesContratoError,
+    state => ({
+      ...state,
+      sendingGetCubicacionesContrato: false,
     })
   )
 );

@@ -3,6 +3,7 @@ import {
   AgenciaContrato,
   ContratosUser,
   Cubicacion,
+  CubicacionContrato,
   DetalleCubicacion,
   PerfilesUsuario,
   ProveedorAgenciaContrato,
@@ -139,6 +140,20 @@ export const eliminarServicioCarritoSuccess = createAction(
 );
 export const eliminarServicioCarritoError = createAction(
   '[CUBICACION] eliminarServicioCarrito Error',
+  props<{ error: any }>()
+);
+
+// CUBICACIONES DE UN CONTRATO ESPECIFICO
+export const getCubicacionesContrato = createAction(
+  '[CUBICACION] getCubicacionesContrato ',
+  props<{ contrato_id: number }>()
+);
+export const getCubicacionesContratoSuccess = createAction(
+  '[CUBICACION] getCubicacionesContrato Success',
+  props<{ response: Response<{ items: CubicacionContrato[] }> }>()
+);
+export const getCubicacionesContratoError = createAction(
+  '[CUBICACION] getCubicacionesContrato Error',
   props<{ error: any }>()
 );
 

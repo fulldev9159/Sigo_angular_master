@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Response, Cubicacion, StatusResponse } from '@model';
+import {
+  Response,
+  Cubicacion,
+  StatusResponse,
+  CubicacionContrato,
+} from '@model';
 import { delay, Observable } from 'rxjs';
 import {
   DetalleCubicacion,
@@ -70,6 +75,16 @@ export class CubicacionHttpService {
     return this.http.post<Response<any>>(
       `${this.API_URL}/cubicacion/detalles_cubicacion/delete`,
       { servicio, unidad_obra }
+    );
+  }
+
+  // CUBICACIONES DE UN CONTRATO ESPECIFICO
+  getCubicacionesContrato(
+    contrato_id: number
+  ): Observable<Response<{ items: CubicacionContrato[] }>> {
+    return this.http.post<Response<{ items: CubicacionContrato[] }>>(
+      `${this.API_URL}/ot/cubicaciones_from_contrato/get`,
+      { contrato_id }
     );
   }
 }

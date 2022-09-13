@@ -1,5 +1,6 @@
 import {
   Cubicacion,
+  CubicacionContrato,
   DetalleCubicacion,
   Response,
   StatusResponse,
@@ -2060,4 +2061,54 @@ export let eliminarCubicacionMOCK200ok: Response<{ cubicacion_id: number }> = {
 
 export let eliminarServicioCarritoMOCK200ok: { status: StatusResponse } = {
   status: { code: 0, desc: 'OK' },
+};
+
+export let cubicacionContratoMOCK200ok: Response<{
+  items: CubicacionContrato[];
+}> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    items: [
+      {
+        cubicacion_id: 1,
+        cubicacion_nombre: 'Testing Cubicacion Precargada NO USAR',
+        cubicacion_descripcion: 'Descripcion Precargada',
+        creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+        tipo_contrato_marco_nombre: 'Bucle',
+        agencia_id: 20,
+      },
+      {
+        cubicacion_id: 2,
+        cubicacion_nombre: 'Testing Cubicacion Precargada NO USAR 2',
+        cubicacion_descripcion: 'Descripcion Precargada',
+        creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+        tipo_contrato_marco_nombre: 'Bucle',
+        agencia_id: 20,
+      },
+      {
+        cubicacion_id: 3,
+        cubicacion_nombre: 'Testing Cubicacion Precargada NO USAR 3',
+        cubicacion_descripcion: 'Descripcion Precargada',
+        creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+        tipo_contrato_marco_nombre: 'Bucle',
+        agencia_id: 20,
+      },
+      {
+        cubicacion_id: 4,
+        cubicacion_nombre: 'Cubicacion Bucle Cypress Editada',
+        cubicacion_descripcion: 'Una cubicación para realizar pruebas cypress',
+        creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+        tipo_contrato_marco_nombre: 'Bucle',
+        agencia_id: 20,
+      },
+      {
+        cubicacion_id: 7,
+        cubicacion_nombre: 'test',
+        cubicacion_descripcion: 'sd',
+        creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+        tipo_contrato_marco_nombre: 'Bucle',
+        agencia_id: 19,
+      },
+    ],
+  },
 };

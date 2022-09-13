@@ -136,3 +136,13 @@ export interface DetalleCubicacion {
   costo: number;
   many_cubicacion_has_servicio: DetalleServicioCubicacion[];
 }
+
+// CUBICACIONES DE UN CONTRATO ESPECIFICO
+export interface CubicacionContrato {
+  agencia_id: number;
+  creador_usuario_nombre: string;
+  cubicacion_descripcion: string;
+  cubicacion_id: number;
+  cubicacion_nombre: string;
+  tipo_contrato_marco_nombre: string;
+}

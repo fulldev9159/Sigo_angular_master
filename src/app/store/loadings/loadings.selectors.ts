@@ -79,3 +79,8 @@ export const sendingClonarCubicacion = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingClonarCubicacion
 );
+
+export const sendingGetCubicacionesContrato = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetCubicacionesContrato
+);
