@@ -34,7 +34,7 @@
                           <td class="data-secundaria">{{ +servicio.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                           <td> 
                             <div style="display:flex;flex-direction: column;">
-                              {{servicio.get('validar').value?'Aprobado':'Rechazada'}}
+                              {{servicio.get('validar').value?'Rechazada':'Aprobada'}}
                               <p-inputSwitch [formControl]="servicio.get('validar')"></p-inputSwitch>
                             </div>
                           </td>
@@ -127,7 +127,7 @@
             </button>
           </ng-container> -->
           <!-- <ng-template #noSaving> -->
-          <button class="btn btn-primary" (click)="validarInt()" [class.disabled]="!valid" *ngIf="allAdicionalesAprobadosVal">
+          <button class="btn btn-primary" (click)="validar()" *ngIf="allAdicionalesAprobadosVal">
             <em class="pi pi-send mr-1"></em>Validar
           </button>
           <button class="btn btn-primary" (click)="showModalInvalidar()" >

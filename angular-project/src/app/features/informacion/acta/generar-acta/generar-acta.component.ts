@@ -644,7 +644,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
         this.formAdicionales.get('servicios').value as Array<{
           validar: boolean;
         }>
-      ).filter(servicio => !servicio.validar);
+      ).filter(servicio => servicio.validar);
 
       console.log(serviciosRechazados);
       if (serviciosRechazados.length === 0) {
