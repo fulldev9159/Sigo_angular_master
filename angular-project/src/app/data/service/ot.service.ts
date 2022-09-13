@@ -357,4 +357,9 @@ export class OTService {
       { ot_id, observacion }
     );
   }
+
+  // ELIMINAR SERVICIOS ADICIONALES
+  eliminarAdicional(servicios: number[]): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}`, { servicios });
+  }
 }

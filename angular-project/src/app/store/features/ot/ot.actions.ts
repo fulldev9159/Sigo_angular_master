@@ -961,3 +961,18 @@ export const informarTrabajosFinalizadosError = createAction(
   '[OT] GETinformarTrabajosFinalizados Error',
   props<{ error: any }>()
 );
+
+// ELIMINAR SERVICIOS ADICIONALES
+export const eliminarAdicional = createAction(
+  '[OT] GET eliminarAdicional',
+  props<{ servicios: number[] }>()
+);
+
+export const eliminarAdicionalSuccess = createAction(
+  '[OT] GET eliminarAdicional Success',
+  props<{ response: Response<any> }>()
+);
+export const eliminarAdicionalError = createAction(
+  '[OT] eliminarAdicional Error',
+  props<{ error: any }>()
+);

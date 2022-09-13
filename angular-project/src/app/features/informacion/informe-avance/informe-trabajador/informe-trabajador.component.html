@@ -133,13 +133,14 @@
                   <th>Descripción</th>
                   <th>Cantidad</th>
                   <th>Unidad</th>
-                  <th>Aprobado</th>
+
+                  <th>Estado Aprobación</th>
+                  <th>Operaciones</th>
 
                   <th>Cód</th>
                   <th>Descripción</th>
                   <th>Cantidad</th>
                   <th>Unidad</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -155,6 +156,9 @@
                           </td>
                           <td>{{ servicio.model_unidad_id.codigo }}</td>
                           <td>{{servicio.adicional_aceptacion_estado}}</td>
+                          <td> <button (click)="DisplayDeleteServicioCarritoDefinitivo(servicio.servicio_id,servicio.servicio_rowid)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button></td>
   
                           <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                           <td class="data-primaria">{{ servicio.many_informe_has_uob[0].model_unidad_obra_cod.descripcion }}</td>
@@ -182,7 +186,10 @@
                             <app-input [control]="form.at(servicioIndex).get('unidades_obras').at(0).get('cantidad')" Type="number" [errorMessageFn]="errorMessageFn"></app-input>
                           </td>
                           <td>{{ servicio.many_informe_has_uob[0].model_unidad_id.codigo }}</td>
-                          <td></td>
+                          <td>{{ servicio.adicional_aceptacion_estado}}</td>
+                          <td> <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                          </button></td>
                         </tr>
                       </ng-container>
   
@@ -636,3 +643,33 @@
     <button class="btn btn-primary" (click)="sendInforme()"><em class="pi pi-play mr-1" id="guardar-ot"></em>Si, Enviar informe</button>
   </ng-container>
 </app-modal> -->
+
+<app-modal [display]="displayDeleteConfirmServicio" (CloseEvent)="closeModalDeleteConfirmServicio()" [style]="{width: '50vw'}">
+  <ng-container modal-header-title></ng-container>
+  <ng-container modal-content>
+    <div class="row">
+      <div class="col">
+        <p style="font-size:20px;font-weight: 500;color:#003049;text-align: center;">Este servicio será eliminado definitivamente de la cubicación ¿Está seguro que desea eliminar este servicio?</p>
+        <div style="padding: 0 9rem 0 9rem;">
+          <div class="row">
+            <div class="col">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container modal-footer>
+    <div class="row">
+      <div class="col">
+        <button pButton type="button" (click)="DeleteServicioCarritoDefinitivo()" label="Si, eliminar" icon="pi pi-trash" class="p-button-sm mt-5 float-right" id="delete-user-button" style="    background: #ffb6b6;
+        border: #b36161;
+        margin-left: 10px;
+        color: #412727;"></button>
+        <button pButton type="button" (click)="closeModalDeleteConfirmServicio()" label="Cancelar" class="p-button-sm mt-5 float-right" id="close-delete-user-button" style="background: #b8b6b6;
+        border: gray;"></button>
+      </div>
+    </div>
+  </ng-container>
+</app-modal>

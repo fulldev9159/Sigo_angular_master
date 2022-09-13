@@ -18,6 +18,7 @@ import {
   NuevaUnidadObraAdicional,
   NuevoServicioAdicional,
   RequestAgregarServicioAdicional,
+  RequestDeleteDetallesCubicacion,
   RequestGetDatosServicio4Cub,
   RequestGetDatosUnidadObra4Cub,
   RequestGetServicios4Cub,
@@ -50,7 +51,11 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   id$: Observable<number> = this.detalleInformeAvance$.pipe(
     map(detalle => detalle.id)
   );
+  displayDeleteConfirmServicio = false;
+  trashICon = faTrash;
 
+  servicio_rowid = null;
+  servicio_id_del = null;
   form: FormArray;
 
   //// loginAuth$: Observable<any>;
@@ -95,8 +100,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   agencia_id = null;
   cmarco_has_proveedor_id = null;
   ot_id = null;
-
-  trashICon = faTrash;
 
   mustBeANumber(control: FormControl): any {
     const result = /^\d+$/.test(control.value);
@@ -750,5 +753,30 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     };
     console.log(nuevos_servicios);
     this.cubicacionFacade.agregarServiciosAdicionales(request);
+  }
+
+  closeModalDeleteConfirmServicio(): void {
+    this.displayDeleteConfirmServicio = false;
+    this.servicio_rowid = null;
+    this.servicio_id_del = null;
+  }
+
+  DisplayDeleteServicioCarritoDefinitivo(
+    servicio_id: string,
+    servicio_rowid: number
+  ): void {
+    this.displayDeleteConfirmServicio = true;
+    this.servicio_rowid = servicio_rowid;
+    this.servicio_id_del = servicio_id;
+    // console.log(this.servicio_rowid);
+  }
+
+  DeleteServicioCarritoDefinitivo(): void {
+    // const request: RequestDeleteDetallesCubicacion = {
+    //   servicio: [this.servicio_rowid],
+    // };
+    // this.otFacade.eliminarAdicional([this.servicio_rowid]);
+    // this.deleteServiceCarrito(+this.servicio_id_del);
+    // this.closeModalDeleteConfirmServicio();
   }
 }

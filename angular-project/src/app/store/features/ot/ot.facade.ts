@@ -696,4 +696,9 @@ export class OtFacade {
       otActions.informarTrabajosFinalizados({ ot_id, observacion })
     );
   }
+
+  //    ELIMINAR SERVICIO ADCIONAL
+  public eliminarAdicional(servicios: number[]): void {
+    this.store.dispatch(otActions.eliminarAdicional({ servicios }));
+  }
 }
