@@ -15,6 +15,7 @@ import {
   DetalleActaUob,
   RequestValidateActa,
 } from '@data';
+import { MenuItem } from 'primeng/api';
 
 interface Detalle {
   servicio: {
@@ -49,6 +50,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   totalServicios_servicio: number;
   totalUO_servicio: number;
   adicionalesPendientesAprobar: boolean;
+  actaValidada = false;
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl({ value: '', disabled: true }, [
@@ -89,7 +91,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
-
+  items: MenuItem[];
   constructor(private otFacade: OtFacade) {}
 
   ngOnInit(): void {
@@ -284,6 +286,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
           +servicio.valor_unitario_clp * +servicio.cantidad_total;
 
         if (+servicio.cantidad_total > 0) {
+          console.log(servicio.adicional_aceptacion_estado);
           serviciosForm.push(
             new FormGroup({
               id: new FormControl(`${servicio.id}`, []),
@@ -306,6 +309,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
               ),
               cantidad_a_enviar: new FormControl(
                 `${servicio.faltante_cantidad}`,
+                []
+              ),
+              adicional_aceptacion_estado: new FormControl(
+                `${servicio.adicional_aceptacion_estado}`,
                 []
               ),
             })

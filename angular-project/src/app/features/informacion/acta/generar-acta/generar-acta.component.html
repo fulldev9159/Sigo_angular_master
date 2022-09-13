@@ -3,11 +3,8 @@
   <p-message severity="info" text="No se puede generar una nueva acta hasta que la enviada termine de pagarse"></p-message>&nbsp;
 </ng-container> -->
 <!-- <ng-container *ngIf="(ot$|async) && (ot$|async).ot.model_tipo_etapa_ot_id.slug==='OT_ET_PAGO_GENERACION_ACTA'"> -->
-
-  
 <ng-container *ngIf="ot$ | async as ot">
   <ng-container *ngIf="adicionalesPendientesAprobar">
-    <p style="padding: 10px;">Primero debe aprobar o rechazar los servicios adicionales. Una vez que todos los servicios adicionales sean aprobados podrá continuar validando el resto del acta</p>
     <div class="row">
       <ng-container *ngIf="formAdicionales">
         <ng-container *ngIf="formAdicionales.get('servicios') as servicios">
@@ -72,8 +69,78 @@
     </div>
     
   </ng-container>
+
+  <div class="row" *ngIf="!actaValidada">
+    <ng-container *ngIf="form.get('total_porcentaje')">
+      <ng-container *ngIf="form.get('total_porcentaje').get('servicios') as servicios">
+        <div class="col-xs-12 col-md-12">
+          <app-card [classCardHeader]="'bg-info'">
+            <ng-container card-header-title>Detalle servicios</ng-container>
+            <ng-container card-body>
+              <table style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Cod.</th>
+                    <th>Descripción</th>
+                    <th style="text-align: right">Cantidad a Enviar</th>
+                    <th>Precio Un.</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngIf="form.get('total_porcentaje').get('unidades_obra') as unidadesObra">
+                    <ng-container *ngFor="let servicio of servicios.controls">
+                      <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value ==='ORIGINAL'">
+                        <tr>
+                          <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
+                          <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
+                          <td style="text-align: right">{{ servicio.get('cantidad_a_enviar').value }}</td>
+                          <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                          <td class="data-secundaria">{{ +servicio.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                        </tr>
+                        <ng-container *ngFor="let uo of unidadesObra.controls">
+                          <tr *ngIf="+uo.get('informe_has_servicio_id').value===+servicio.get('id').value">
+                            <td class="label-table" style="background-color:#ff8e4e ;
+                            padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
+                            <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
+                            <td style="text-align: right">{{ uo.get('cantidad_a_enviar').value }}</td>
+                            <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                            <td class="data-secundaria">{{ +uo.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
+                          </tr>
+                        </ng-container>
+                      </ng-container>
+                      
+                    </ng-container>
+                  </ng-container>
+                </tbody>
+              </table>
+            </ng-container>
+          </app-card>
+        </div>
+      </ng-container>
+    </ng-container>
+
+      <div class="col-xs-12 col-md-12">
+        <div style="text-align: right">
+          <!-- <ng-container *ngIf="saving; else noSaving">
+            <button class="btn btn-primary disabled">
+              <em class="pi pi-spin pi-spinner mr-1"></em>Enviar
+            </button>
+          </ng-container> -->
+          <!-- <ng-template #noSaving> -->
+          <button class="btn btn-primary" (click)="validarInt()" [class.disabled]="!valid">
+            <em class="pi pi-send mr-1"></em>Validar
+          </button>
+          <button class="btn btn-primary" (click)="showModalInvalidar()" [class.disabled]="!valid">
+            <em class="pi pi-send mr-1"></em>Invalidar
+          </button>
+          <!-- </ng-template> -->
+        </div>
+      </div>
+    
+  </div>
   
-  <ng-container *ngIf="form">
+  <ng-container *ngIf="form && !formAdicionales && actaValidada">
     <div class="row" style="padding: 15px">
       <div class="col-xs-12 col-md-6">
         <form [formGroup]="form">
