@@ -923,7 +923,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       },
     };
 
-    console.log(request);
+    // console.log(request);
     this.cubicacionFacade.createCub(request);
   }
 
@@ -1068,7 +1068,7 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
       },
     };
 
-    console.log(request);
+    // console.log(request);
     this.cubicacionFacade.editCub(request);
   }
 
@@ -1079,6 +1079,6 @@ export class FormCubContainerComponent implements OnInit, OnDestroy {
   }
 
   getform(): void {
-    console.log(this.formCub);
+    // console.log(this.formCub);
   }
 }

@@ -87,7 +87,7 @@ export class FormAreaComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    console.log(this.formArea.value);
+    // console.log(this.formArea.value);
     const request: RequestEditArea = {
       area_id: +this.formArea.get('id').value,
       values: {
@@ -98,7 +98,7 @@ export class FormAreaComponent implements OnInit, OnDestroy {
         activa: this.formArea.get('activa').value === 'activa' ? true : false,
       },
     };
-    console.log(request);
+    // console.log(request);
     this.areaFacade.updateArea(request);
   }
 }

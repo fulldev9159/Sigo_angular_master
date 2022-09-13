@@ -51,6 +51,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   totalUO_servicio: number;
   adicionalesPendientesAprobar: boolean;
   actaValidada = false;
+  allAdicionalesAprobadosVal = false;
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl({ value: '', disabled: true }, [
@@ -98,11 +99,11 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     this.subscription.add(
       combineLatest([this.tiposPago$, this.detalleActa$]).subscribe(
         ([tiposPago, { ultimo_tipo_pago, servicios, unidades_obra }]) => {
-          console.log(
-            servicios.filter(
-              servicio => servicio.adicional_aceptacion_estado === 'PENDIENTE'
-            )
-          );
+          // console.log(
+          //   servicios.filter(
+          //     servicio => servicio.adicional_aceptacion_estado === 'PENDIENTE'
+          //   )
+          // );
           this.adicionalesPendientesAprobar =
             servicios.filter(
               servicio => servicio.adicional_aceptacion_estado === 'PENDIENTE'
@@ -119,6 +120,12 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     );
     this.totalServicios_servicio = 0;
     this.totalUO_servicio = 0;
+
+    this.subscription.add(
+      this.formAdicionales
+        .get('servicios')
+        .valueChanges.subscribe(() => this.allAdiconalesAprobados())
+    );
   }
 
   checkAndFixTipoPago(tipoPago: string): void {
@@ -143,7 +150,6 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     servicios: DetalleActaServicio[],
     unidades_obra: DetalleActaUob[]
   ) {
-    console.log('holaS');
     const serviciosForm = this.formAdicionales.get('servicios') as FormArray;
     const unidadesObraForm = this.formAdicionales.get(
       'unidades_obra'
@@ -173,7 +179,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
               `${servicio.faltante_cantidad}`,
               []
             ),
-            aprobado: new FormControl(null, [Validators.required]),
+            validar: new FormControl(false, [Validators.required]),
           })
         );
       });
@@ -250,10 +256,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
                 (+servicio.cantidad_total * (+porcentaje / 100));
           });
 
-          console.log(porcentaje);
-
           unidadesObraForm.value.forEach(uo => {
-            console.log(uo);
             this.totalUO =
               this.totalUO +
               +uo.precio_unitario * (+uo.cantidad_total * (+porcentaje / 100));
@@ -286,7 +289,6 @@ export class GenararActaComponent implements OnInit, OnDestroy {
           +servicio.valor_unitario_clp * +servicio.cantidad_total;
 
         if (+servicio.cantidad_total > 0) {
-          console.log(servicio.adicional_aceptacion_estado);
           serviciosForm.push(
             new FormGroup({
               id: new FormControl(`${servicio.id}`, []),
@@ -631,7 +633,25 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       detalle: values.detalle,
     };
 
-    console.log(request);
+    // console.log(request);
     this.otFacade.sendGeneracionActaOLD(request);
+  }
+
+  allAdiconalesAprobados(): void {
+    if (this.formAdicionales) {
+      console.log('sadsa');
+      let serviciosRechazados = (
+        this.formAdicionales.get('servicios').value as Array<{
+          validar: boolean;
+        }>
+      ).filter(servicio => !servicio.validar);
+
+      console.log(serviciosRechazados);
+      if (serviciosRechazados.length === 0) {
+        this.allAdicionalesAprobadosVal = true;
+      } else {
+        this.allAdicionalesAprobadosVal = false;
+      }
+    }
   }
 }

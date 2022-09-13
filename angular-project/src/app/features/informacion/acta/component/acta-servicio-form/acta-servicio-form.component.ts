@@ -141,6 +141,6 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
   }
 
   getFormObject(): void {
-    console.log(this.form);
+    // console.log(this.form);
   }
 }

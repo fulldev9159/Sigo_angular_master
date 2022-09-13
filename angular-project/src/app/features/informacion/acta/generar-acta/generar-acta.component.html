@@ -33,11 +33,10 @@
                           <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                           <td class="data-secundaria">{{ +servicio.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                           <td> 
-                            <select name="" id="">
-                              <option value="">seleccione una opción</option>
-                              <option value="1">Aprobar</option>
-                              <option value="">Rechazar</option>
-                            </select>
+                            <div style="display:flex;flex-direction: column;">
+                              {{servicio.get('validar').value?'Aprobado':'Rechazada'}}
+                              <p-inputSwitch [formControl]="servicio.get('validar')"></p-inputSwitch>
+                            </div>
                           </td>
                         </tr>
                         <ng-container *ngFor="let uo of unidadesObra.controls">
@@ -49,11 +48,11 @@
                             <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                             <td class="data-secundaria">{{ +uo.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                             <td> 
-                              <select name="" id="">
+                              <!-- <select name="" id="">
                                 <option value="">seleccione una opción</option>
                                 <option value="1">Aprobar</option>
                                 <option value="">Rechazar</option>
-                              </select>
+                              </select> -->
                             </td>
                           </tr>
                         </ng-container>
@@ -128,10 +127,10 @@
             </button>
           </ng-container> -->
           <!-- <ng-template #noSaving> -->
-          <button class="btn btn-primary" (click)="validarInt()" [class.disabled]="!valid">
+          <button class="btn btn-primary" (click)="validarInt()" [class.disabled]="!valid" *ngIf="allAdicionalesAprobadosVal">
             <em class="pi pi-send mr-1"></em>Validar
           </button>
-          <button class="btn btn-primary" (click)="showModalInvalidar()" [class.disabled]="!valid">
+          <button class="btn btn-primary" (click)="showModalInvalidar()" >
             <em class="pi pi-send mr-1"></em>Invalidar
           </button>
           <!-- </ng-template> -->

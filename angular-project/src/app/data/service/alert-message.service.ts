@@ -136,7 +136,7 @@ export class AlertMessageActions {
 
       if (action === authActions.getPerrmisoPerfilSuccess.type) {
         this.authFacade.getLogin$().subscribe(loginAuth => {
-          console.log(loginAuth);
+          // console.log(loginAuth);
           if (loginAuth && loginAuth.permisos) {
             this.permissionsService.loadPermissions(loginAuth.permisos);
           }

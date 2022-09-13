@@ -84,14 +84,14 @@ export class ValidarActaComponent implements OnInit, OnDestroy {
           if (lacta.many_acta_detalle_uob) {
             const uos_sin_servicios = lacta.many_acta_detalle_uob.filter(
               mayuob => {
-                console.log(
-                  this.acta.find(
-                    acta =>
-                      mayuob.model_informe_has_uob_id
-                        .informe_has_servicio_id ===
-                      acta.informe_has_servicio_id
-                  )
-                );
+                // console.log(
+                //   this.acta.find(
+                //     acta =>
+                //       mayuob.model_informe_has_uob_id
+                //         .informe_has_servicio_id ===
+                //       acta.informe_has_servicio_id
+                //   )
+                // );
                 return this.acta.find(
                   acta =>
                     mayuob.model_informe_has_uob_id.informe_has_servicio_id !==

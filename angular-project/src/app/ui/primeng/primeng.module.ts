@@ -29,6 +29,7 @@ import { BadgeModule } from 'primeng/badge';
 import { SliderModule } from 'primeng/slider';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { StepsModule } from 'primeng/steps';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { StepsModule } from 'primeng/steps';
     SliderModule,
     InputNumberModule,
     StepsModule,
+    InputSwitchModule,
   ],
   exports: [
     MenuModule,
@@ -91,6 +93,7 @@ import { StepsModule } from 'primeng/steps';
     SliderModule,
     InputNumberModule,
     StepsModule,
+    InputSwitchModule,
   ],
   providers: [MessageService],
 })

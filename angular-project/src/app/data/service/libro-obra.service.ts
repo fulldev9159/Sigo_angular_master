@@ -21,7 +21,7 @@ export class LibroObraService {
   createRegistroLibroObras(
     request: ReqCreateRegistroLibroObra
   ): Observable<Response<any>> {
-    console.log('Create registro LO', request);
+    // console.log('Create registro LO', request);
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/libro_obras/create`,
       request
