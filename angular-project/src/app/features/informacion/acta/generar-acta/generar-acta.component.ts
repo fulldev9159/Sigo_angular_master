@@ -51,7 +51,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   totalUO_servicio: number;
   adicionalesPendientesAprobar: boolean;
   actaValidada = false;
-  allAdicionalesAprobadosVal = false;
+  allAdicionalesAprobadosVal = true;
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl({ value: '', disabled: true }, [
@@ -651,5 +651,9 @@ export class GenararActaComponent implements OnInit, OnDestroy {
         this.allAdicionalesAprobadosVal = false;
       }
     }
+  }
+
+  validar(): void {
+    this.actaValidada = true;
   }
 }
