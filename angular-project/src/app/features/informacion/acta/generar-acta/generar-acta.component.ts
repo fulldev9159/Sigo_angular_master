@@ -639,14 +639,12 @@ export class GenararActaComponent implements OnInit, OnDestroy {
 
   allAdiconalesAprobados(): void {
     if (this.formAdicionales) {
-      console.log('sadsa');
       let serviciosRechazados = (
         this.formAdicionales.get('servicios').value as Array<{
           validar: boolean;
         }>
       ).filter(servicio => servicio.validar);
 
-      console.log(serviciosRechazados);
       if (serviciosRechazados.length === 0) {
         this.allAdicionalesAprobadosVal = true;
       } else {

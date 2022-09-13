@@ -795,6 +795,23 @@ export class OtEffects {
     )
   );
 
+  // APROBAR RECHAZAR ADICIONALES
+  aprobarRechazarAdicional$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.aprobarRechazarAdicional),
+      concatMap(({ servicios }) =>
+        this.otService.aprobarRechazarAdicional(servicios).pipe(
+          map(response =>
+            otActions.aprobarRechazarAdicionalSuccess({ response })
+          ),
+          catchError(err =>
+            of(otActions.aprobarRechazarAdicionalError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -849,7 +866,8 @@ export class OtEffects {
           otActions.sendGeneracionActaErrorOLD,
           otActions.solicitarInformeTrabajosFinalizadosError,
           otActions.informarTrabajosFinalizadosError,
-          otActions.eliminarAdicionalError
+          otActions.eliminarAdicionalError,
+          otActions.aprobarRechazarAdicionalError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

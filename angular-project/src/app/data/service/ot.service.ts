@@ -362,4 +362,9 @@ export class OTService {
   eliminarAdicional(servicios: number[]): Observable<Response<any>> {
     return this.http.post<Response<any>>(`${this.apiUrl}`, { servicios });
   }
+
+  // APROBAR/RECHAZAR ADICIONAL
+  aprobarRechazarAdicional(servicios: number[]): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.apiUrl}`, { servicios });
+  }
 }

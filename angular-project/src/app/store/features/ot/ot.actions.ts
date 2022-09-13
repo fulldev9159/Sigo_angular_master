@@ -976,3 +976,18 @@ export const eliminarAdicionalError = createAction(
   '[OT] eliminarAdicional Error',
   props<{ error: any }>()
 );
+
+// APROBAR RECHAZAR ADICIONALES
+export const aprobarRechazarAdicional = createAction(
+  '[OT] GET aprobarRechazarAdicional',
+  props<{ servicios: number[] }>()
+);
+
+export const aprobarRechazarAdicionalSuccess = createAction(
+  '[OT] GET aprobarRechazarAdicional Success',
+  props<{ response: Response<any> }>()
+);
+export const aprobarRechazarAdicionalError = createAction(
+  '[OT] aprobarRechazarAdicional Error',
+  props<{ error: any }>()
+);

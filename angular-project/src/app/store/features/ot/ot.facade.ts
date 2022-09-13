@@ -701,4 +701,9 @@ export class OtFacade {
   public eliminarAdicional(servicios: number[]): void {
     this.store.dispatch(otActions.eliminarAdicional({ servicios }));
   }
+
+  // APROBAR RECHAZAR ADICIONALES
+  public aprobarRechazarAdicional(servicios: number[]): void {
+    this.store.dispatch(otActions.aprobarRechazarAdicional({ servicios }));
+  }
 }
