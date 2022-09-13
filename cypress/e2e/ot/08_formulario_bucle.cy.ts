@@ -13,5 +13,7 @@ describe('Visibilidad e Interacción Inicial', () => {
   it('Debe desplegar el formulario base', () => {
     cy.get('input[name="input-nombre-ot"]').should('be.enabled');
     cy._check_input('input[name="input-nombre-ot"]', 'required');
+
+    cy._check_dropdown_required('#select-contrato_marco');
   });
 });

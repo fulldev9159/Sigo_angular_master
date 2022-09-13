@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormControl,
@@ -7,26 +7,53 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ContratosUsuarioMOCK200OK } from '@mocksOT';
+import { StoreModule } from '@ngrx/store';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
 
 import { FormularioOtBaseComponent } from './formulario-ot-base.component';
 
 describe('FormularioOtBaseComponent', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+  let componentTest: TestComponent;
+  let fixtureTest: ComponentFixture<TestComponent>;
+  let component: FormularioOtBaseComponent;
+  let fixture: ComponentFixture<FormularioOtBaseComponent>;
+  let initialState: any = { example: [] };
+  let store: MockStore<any>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormsModule, ReactiveFormsModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [StoreModule.forRoot({}), FormsModule, ReactiveFormsModule],
       declarations: [FormularioOtBaseComponent, TestComponent],
+      providers: [
+        provideMockStore({
+          initialState,
+          selectors: [
+            {
+              selector: getContratosUsuario,
+              value: ContratosUsuarioMOCK200OK.data.items,
+            },
+          ],
+        }),
+      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixtureTest = TestBed.createComponent(TestComponent);
+    componentTest = fixtureTest.componentInstance;
+    fixtureTest.detectChanges();
+
+    // fixture = TestBed.createComponent(FormularioOtBaseComponent);
+    // component = fixture.componentInstance;
+    // fixture.detectChanges();
+
+    store = TestBed.inject(MockStore);
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(componentTest).toBeTruthy();
+    // expect(component).toBeTruthy();
   });
 
   @Component({

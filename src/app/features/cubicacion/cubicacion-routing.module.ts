@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormCubContainerComponent } from './containers/form-cub/form-cub-container.component';
 import { ListCubComponent } from './containers/list-cub/list-cub.component';
 import { CubicacionComponent } from './cubicacion.component';
-import { ContratosUsuarioResolver } from './resolvers/contratos-usuario.resolver';
+import { ContratosUsuarioResolver } from '../../core/resolvers/contratos-usuario.resolver';
 import { CubicacionesResolver } from './resolvers/cubicaciones.resolver';
 import { DetalleCubicacionResolver } from './resolvers/detalle-cubicacion.resolver';
 import { TipoCubicacionResolver } from './resolvers/tipo-cubicacion.resolver';
