@@ -12,9 +12,6 @@
             </div>
         </div>
     </div>
-    <p-divider align="left">
-        <span class="p-tag">Cubicación</span>
-    </p-divider>
     <div class="card">
         <div class="formgrid grid">
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
@@ -24,7 +21,7 @@
             </div>
             <div class="field  col-12 md:col-6 lg:col-6 xl:col-6">
                 <div class="message error-message"
-                    *ngIf="(cubicacionesContrato$|async).length===0 && form.get('contrato').value!==null ">
+                    *ngIf="(cubicacionesContrato$|async).length===0 && form.get('contrato').value!==null && (loadingGetCubicacionesContrato$|async)===false">
                     <small class="p-error block">
                         No existen cubicaciones creadas con el contrato marco escogido
                     </small>

@@ -5,5 +5,8 @@
             <span class="p-tag">Datos base</span>
         </p-divider>
         <zwc-formulario-ot-base [form]="form.get('base')"></zwc-formulario-ot-base>
+        <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre==='Bucle'">
+            <zwc-formulario-ot-bucle></zwc-formulario-ot-bucle>
+        </ng-container>
     </div>
 </zwc-content-layout>

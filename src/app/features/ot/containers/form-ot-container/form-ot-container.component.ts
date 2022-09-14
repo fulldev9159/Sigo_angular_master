@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
@@ -13,7 +14,10 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
 
   navbarHeader: MenuItem[];
 
-  contractType$ = new BehaviorSubject<string>('');
+  // contractType$ = new BehaviorSubject<string>('');
+
+  // DATA
+  cubiacionSelected$ = this.otFacade.cubicacionSelected$();
 
   form: FormGroup = new FormGroup({
     base: new FormGroup({
@@ -27,7 +31,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
     }),
   });
 
-  constructor() {}
+  constructor(private otFacade: OTFacade) {}
 
   ngOnInit(): void {
     this.navbarHeader = [
