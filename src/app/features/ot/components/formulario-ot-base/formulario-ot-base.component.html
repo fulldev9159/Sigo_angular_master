@@ -17,9 +17,19 @@
     </p-divider>
     <div class="card">
         <div class="formgrid grid">
-            <div class="field col-12">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
                 <zwc-pdropdown [control]="form.get('cubicacion_id')" Label="*Cubicación" dropdown_id="select-cubicacion"
-                    [data]="cubicacionesContrato$|async" Pplaceholder="Selecione una cubicación"></zwc-pdropdown>
+                    [data]="cubicacionesContrato$|async" Pplaceholder="Selecione una cubicación"
+                    [loading]="loadingGetCubicacionesContrato$|async"></zwc-pdropdown>
+            </div>
+            <div class="field  col-12 md:col-6 lg:col-6 xl:col-6">
+                <div class="error-message"
+                    *ngIf="(cubicacionesContrato$|async).length===0 && form.get('contrato').value!==null ">
+                    <small class="p-error block">
+                        No existen cubicaciones creadas con el contrato marco escogido
+                    </small>
+                </div>
+
             </div>
         </div>
     </div>

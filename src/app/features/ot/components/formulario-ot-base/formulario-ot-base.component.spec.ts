@@ -75,7 +75,8 @@ describe('FormularioOtBaseComponent', () => {
 
   it('Debe llamar al facade getCubicacionesContrato con id 1 al escoger el contrato 1', () => {
     spyOn(cubicacionFacade, 'getCubicacionesContrato');
-    componentTest.form.get('contrato').setValue(1);
+    componentTest.form.get('general').get('contrato').setValue(1);
+    fixtureTest.detectChanges();
     expect(cubicacionFacade.getCubicacionesContrato).toHaveBeenCalledWith(1);
   });
 

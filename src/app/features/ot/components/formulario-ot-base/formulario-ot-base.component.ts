@@ -56,7 +56,7 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
     );
 
   // LOADINGS
-  loadingGetCubicacionesContrato: Observable<boolean> =
+  loadingGetCubicacionesContrato$: Observable<boolean> =
     this.loadingFacade.sendingGetCubicacionesContrato$();
 
   constructor(
@@ -66,6 +66,8 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.form.get('cubicacion_id').disable();
+
     this.subscription.add(
       this.form.get('contrato').valueChanges.subscribe(contrato_id => {
         if (contrato_id !== null && contrato_id !== undefined) {
