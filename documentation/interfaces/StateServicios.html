@@ -360,7 +360,10 @@ export const reducerServicios &#x3D; createReducer(
           tipo_servicio_descripcion:
             responseService.data.items[0].tipo_servicio_descripcion,
           tipo_servicio_id: responseService.data.items[0].servicio_tipo,
-
+          servicio_unidad_cod:
+            responseService.data.items[0].servicio_unidad_codigo,
+          servicio_unidad_descripcion:
+            responseService.data.items[0].servicio_unidad_descripcion,
           unidad_obras: [
             {
               uo_codigo: responseUnidadObra.data.uo_codigo,
@@ -369,6 +372,10 @@ export const reducerServicios &#x3D; createReducer(
               actividad_descripcion:
                 responseService.data.items[0].actividad_descripcion,
               actividad_id: +responseService.data.items[0].actividad_id,
+
+              uob_unidad_medida_cod: responseUnidadObra.data.uo_unidad_codigo,
+              uob_unidad_medida_descripcion:
+                responseUnidadObra.data.uo_unidad_descripcion,
             },
           ],
         },

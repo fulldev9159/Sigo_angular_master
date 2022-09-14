@@ -78,6 +78,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#clonarCubicacion$" >clonarCubicacion$</a>
+                            </li>
+                            <li>
                                 <a href="#createCubicacion$" >createCubicacion$</a>
                             </li>
                             <li>
@@ -85,6 +88,15 @@
                             </li>
                             <li>
                                 <a href="#editCubicacion$" >editCubicacion$</a>
+                            </li>
+                            <li>
+                                <a href="#eliminarCubicacion$" >eliminarCubicacion$</a>
+                            </li>
+                            <li>
+                                <a href="#eliminarServicioCarrito$" >eliminarServicioCarrito$</a>
+                            </li>
+                            <li>
+                                <a href="#getCubicacionesContrato$" >getCubicacionesContrato$</a>
                             </li>
                             <li>
                                 <a href="#getTipoCubicacion$" >getTipoCubicacion$</a>
@@ -194,6 +206,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="clonarCubicacion$"></a>
+                    <span class="name">
+                        <span ><b>clonarCubicacion$</b></span>
+                        <a href="#clonarCubicacion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.clonarCubicacion),
+      concatMap(({ request }) &#x3D;&gt;
+        this.cubicacionHttpService.saveCubicacion(request).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.clonarCubicacionSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.clonarCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="createCubicacion$"></a>
                     <span class="name">
                         <span ><b>createCubicacion$</b></span>
@@ -261,7 +312,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -300,7 +351,126 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarCubicacion$"></a>
+                    <span class="name">
+                        <span ><b>eliminarCubicacion$</b></span>
+                        <a href="#eliminarCubicacion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.eliminarCubicacion),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.cubicacionHttpService.eliminarCubicacion(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.eliminarCubicacionSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.eliminarCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarServicioCarrito$"></a>
+                    <span class="name">
+                        <span ><b>eliminarServicioCarrito$</b></span>
+                        <a href="#eliminarServicioCarrito$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.eliminarServicioCarrito),
+      concatMap(({ servicio, unidad_obra }) &#x3D;&gt;
+        this.cubicacionHttpService
+          .eliminarServicioCarrito(servicio, unidad_obra)
+          .pipe(
+            map(response &#x3D;&gt;
+              cubicacionActions.eliminarServicioCarritoSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(cubicacionActions.eliminarServicioCarritoError({ error }))
+            )
+          )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCubicacionesContrato$"></a>
+                    <span class="name">
+                        <span ><b>getCubicacionesContrato$</b></span>
+                        <a href="#getCubicacionesContrato$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.getCubicacionesContrato),
+      concatMap(({ contrato_id }) &#x3D;&gt;
+        this.cubicacionHttpService.getCubicacionesContrato(contrato_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.getCubicacionesContratoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.getCubicacionesContratoError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:146</a></div>
                         </td>
                     </tr>
 
@@ -378,7 +548,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -405,7 +575,10 @@
           cubicacionActions.getTipoCubicacionSuccess,
           cubicacionActions.createCubicacionSuccess,
           cubicacionActions.editCubicacionSuccess,
-          cubicacionActions.listarCubicacionesSuccess
+          cubicacionActions.listarCubicacionesSuccess,
+          cubicacionActions.clonarCubicacionSuccess,
+          cubicacionActions.eliminarCubicacionSuccess,
+          cubicacionActions.eliminarServicioCarritoSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -415,7 +588,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:96</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:162</a></div>
                         </td>
                     </tr>
 
@@ -442,7 +615,10 @@
           cubicacionActions.getTipoCubicacionError,
           cubicacionActions.createCubicacionError,
           cubicacionActions.editCubicacionError,
-          cubicacionActions.listarCubicacionesError
+          cubicacionActions.listarCubicacionesError,
+          cubicacionActions.clonarCubicacionError,
+          cubicacionActions.eliminarCubicacionError,
+          cubicacionActions.eliminarServicioCarritoError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -452,7 +628,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:110</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:179</a></div>
                         </td>
                     </tr>
 
@@ -512,6 +688,22 @@ export class CubicacionEffects {
     )
   );
 
+  clonarCubicacion$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.clonarCubicacion),
+      concatMap(({ request }) &#x3D;&gt;
+        this.cubicacionHttpService.saveCubicacion(request).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.clonarCubicacionSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.clonarCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   editCubicacion$ &#x3D; createEffect(() &#x3D;&gt;
     this.actions$.pipe(
       ofType(cubicacionActions.editCubicacion),
@@ -522,6 +714,22 @@ export class CubicacionEffects {
           ),
           catchError(error &#x3D;&gt;
             of(cubicacionActions.editCubicacionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  eliminarCubicacion$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.eliminarCubicacion),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.cubicacionHttpService.eliminarCubicacion(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.eliminarCubicacionSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.eliminarCubicacionError({ error }))
           )
         )
       )
@@ -560,6 +768,40 @@ export class CubicacionEffects {
     )
   );
 
+  eliminarServicioCarrito$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.eliminarServicioCarrito),
+      concatMap(({ servicio, unidad_obra }) &#x3D;&gt;
+        this.cubicacionHttpService
+          .eliminarServicioCarrito(servicio, unidad_obra)
+          .pipe(
+            map(response &#x3D;&gt;
+              cubicacionActions.eliminarServicioCarritoSuccess({ response })
+            ),
+            catchError(error &#x3D;&gt;
+              of(cubicacionActions.eliminarServicioCarritoError({ error }))
+            )
+          )
+      )
+    )
+  );
+
+  getCubicacionesContrato$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.getCubicacionesContrato),
+      concatMap(({ contrato_id }) &#x3D;&gt;
+        this.cubicacionHttpService.getCubicacionesContrato(contrato_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.getCubicacionesContratoSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.getCubicacionesContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
@@ -567,7 +809,10 @@ export class CubicacionEffects {
           cubicacionActions.getTipoCubicacionSuccess,
           cubicacionActions.createCubicacionSuccess,
           cubicacionActions.editCubicacionSuccess,
-          cubicacionActions.listarCubicacionesSuccess
+          cubicacionActions.listarCubicacionesSuccess,
+          cubicacionActions.clonarCubicacionSuccess,
+          cubicacionActions.eliminarCubicacionSuccess,
+          cubicacionActions.eliminarServicioCarritoSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -581,7 +826,10 @@ export class CubicacionEffects {
           cubicacionActions.getTipoCubicacionError,
           cubicacionActions.createCubicacionError,
           cubicacionActions.editCubicacionError,
-          cubicacionActions.listarCubicacionesError
+          cubicacionActions.listarCubicacionesError,
+          cubicacionActions.clonarCubicacionError,
+          cubicacionActions.eliminarCubicacionError,
+          cubicacionActions.eliminarServicioCarritoError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

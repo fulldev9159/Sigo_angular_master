@@ -136,6 +136,13 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#servicio_unidad_descripcion" 
+>
+                                            servicio_unidad_descripcion
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#tipo_servicio_descripcion" 
 >
                                             tipo_servicio_descripcion
@@ -452,6 +459,44 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="servicio_unidad_descripcion"></a>
+                                        <span class="name "><b>servicio_unidad_descripcion</b>
+                                            <a href="#servicio_unidad_descripcion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>servicio_unidad_descripcion:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="tipo_servicio_descripcion"></a>
                                         <span class="name "><b>tipo_servicio_descripcion</b>
                                             <a href="#tipo_servicio_descripcion">
@@ -557,6 +602,7 @@
   servicio_rowid?: number;
   servicio_cantidad?: number;
   servicio_unidad_cod?: string;
+  servicio_unidad_descripcion?: string;
 
   // Data response http API
   servicio_id: number;
@@ -575,6 +621,7 @@ export interface CarritoUO {
   uo_rowid?: number;
   uo_cantidad?: number;
   uob_unidad_medida_cod?: string;
+  uob_unidad_medida_descripcion?: string;
 
   // Data response http API
   uo_codigo: string;

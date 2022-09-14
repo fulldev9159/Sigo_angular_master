@@ -77,8 +77,9 @@ import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { FormCubContainerComponent } from &#x27;./containers/form-cub/form-cub-container.component&#x27;;
 import { ListCubComponent } from &#x27;./containers/list-cub/list-cub.component&#x27;;
 import { CubicacionComponent } from &#x27;./cubicacion.component&#x27;;
-import { ContratosUsuarioResolver } from &#x27;./resolvers/contratos-usuario.resolver&#x27;;
+import { ContratosUsuarioResolver } from &#x27;../../core/resolvers/contratos-usuario.resolver&#x27;;
 import { CubicacionesResolver } from &#x27;./resolvers/cubicaciones.resolver&#x27;;
+import { DetalleCubicacionResolver } from &#x27;./resolvers/detalle-cubicacion.resolver&#x27;;
 import { TipoCubicacionResolver } from &#x27;./resolvers/tipo-cubicacion.resolver&#x27;;
 
 const routes: Routes &#x3D; [
@@ -100,6 +101,15 @@ const routes: Routes &#x3D; [
         resolve: {
           contratosUsuario: ContratosUsuarioResolver,
           tipoCubicacion: TipoCubicacionResolver,
+        },
+      },
+      {
+        path: &#x27;form-cub/:id&#x27;,
+        component: FormCubContainerComponent,
+        resolve: {
+          contratosUsuario: ContratosUsuarioResolver,
+          tipoCubicacion: TipoCubicacionResolver,
+          detalleCubicacion: DetalleCubicacionResolver,
         },
       },
     ],

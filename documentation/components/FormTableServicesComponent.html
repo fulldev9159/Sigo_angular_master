@@ -148,6 +148,9 @@
                                 <a href="#formTableControl" >formTableControl</a>
                             </li>
                             <li>
+                                <a href="#servicios_eliminar" >servicios_eliminar</a>
+                            </li>
+                            <li>
                                 <a href="#subscription" >subscription</a>
                             </li>
                             <li>
@@ -155,6 +158,9 @@
                             </li>
                             <li>
                                 <a href="#totalUOs" >totalUOs</a>
+                            </li>
+                            <li>
+                                <a href="#uos_eliminar" >uos_eliminar</a>
                             </li>
                         </ul>
                     </td>
@@ -226,7 +232,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:132</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:137</a></div>
                             </td>
                         </tr>
 
@@ -293,8 +299,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="208"
-                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:208</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="220"
+                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:220</a></div>
                 </td>
             </tr>
 
@@ -362,8 +368,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="219"
-                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:219</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="234"
+                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:234</a></div>
                 </td>
             </tr>
 
@@ -431,8 +437,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="176"
-                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:176</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="188"
+                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:188</a></div>
                 </td>
             </tr>
 
@@ -500,8 +506,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="186"
-                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:186</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="198"
+                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:198</a></div>
                 </td>
             </tr>
 
@@ -581,8 +587,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="162"
-                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:162</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="172"
+                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:172</a></div>
                 </td>
             </tr>
 
@@ -650,8 +656,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="252"
-                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:252</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="287"
+                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:287</a></div>
                 </td>
             </tr>
 
@@ -687,8 +693,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="138"
-                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:138</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="148"
+                            class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:148</a></div>
                 </td>
             </tr>
 
@@ -761,13 +767,15 @@
           // NUEVO SERVICIO
           if (indexServiceFormulario &#x3D;&#x3D;&#x3D; -1) {
             const group &#x3D; new FormGroup({
+              precargado: new FormControl(servicio.precargado ?? false, []),
+              servicio_rowid: new FormControl(servicio.servicio_rowid, []),
               servicio_id: new FormControl(servicio.servicio_id, [
                 Validators.required,
               ]),
-              servicio_cantidad: new FormControl(1, [
-                Validators.required,
-                Validators.min(0.01),
-              ]),
+              servicio_cantidad: new FormControl(
+                servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+                [Validators.required, Validators.min(0.01)]
+              ),
               servicio_precio_final_clp: new FormControl(
                 servicio.servicio_precio_final_clp
               ),
@@ -841,7 +849,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:132</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:134</a></div>
                         </td>
                     </tr>
 
@@ -874,7 +882,38 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:128</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="servicios_eliminar"></a>
+                    <span class="name">
+                        <span ><b>servicios_eliminar</b></span>
+                        <a href="#servicios_eliminar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:136</a></div>
                         </td>
                     </tr>
 
@@ -936,7 +975,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:124</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:126</a></div>
                         </td>
                     </tr>
 
@@ -967,7 +1006,38 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:125</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uos_eliminar"></a>
+                    <span class="name">
+                        <span ><b>uos_eliminar</b></span>
+                        <a href="#uos_eliminar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:137</a></div>
                         </td>
                     </tr>
 
@@ -996,7 +1066,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="248" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:248</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="283" class="link-to-prism">src/app/shared/form-table-services/form-table-services.component.ts:283</a></div>
                                 </td>
                             </tr>
 
@@ -1084,13 +1154,15 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
           // NUEVO SERVICIO
           if (indexServiceFormulario &#x3D;&#x3D;&#x3D; -1) {
             const group &#x3D; new FormGroup({
+              precargado: new FormControl(servicio.precargado ?? false, []),
+              servicio_rowid: new FormControl(servicio.servicio_rowid, []),
               servicio_id: new FormControl(servicio.servicio_id, [
                 Validators.required,
               ]),
-              servicio_cantidad: new FormControl(1, [
-                Validators.required,
-                Validators.min(0.01),
-              ]),
+              servicio_cantidad: new FormControl(
+                servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+                [Validators.required, Validators.min(0.01)]
+              ),
               servicio_precio_final_clp: new FormControl(
                 servicio.servicio_precio_final_clp
               ),
@@ -1140,6 +1212,14 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
 
   formTable: FormGroup &#x3D; new FormGroup(this.formTableControl);
 
+  servicios_eliminar: number[] &#x3D; [];
+  uos_eliminar: number[] &#x3D; [];
+  // MODALS
+  // displayModalConfirmacionEliminar &#x3D; false;
+  // mensajeConfirmacion: string;
+  // servicio_id_eliminar: number;
+  // servicio_rowid_eliminar: number;
+
   constructor(private serviciosFacade: ServiciosFacade) {
     registerLocaleData(localeEsCl, &#x27;es-CL&#x27;);
   }
@@ -1173,8 +1253,10 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     let min &#x3D; uo.uo_codigo &#x3D;&#x3D;&#x3D; &#x27;0&#x27; ? 0 : 0.01;
 
     return new FormGroup({
+      precargado: new FormControl(uo.precargado ?? false, []),
+      uo_rowid: new FormControl(uo.uo_rowid, []),
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
-      uo_cantidad: new FormControl(cantidad, [
+      uo_cantidad: new FormControl(uo.uo_cantidad ? uo.uo_cantidad : cantidad, [
         Validators.required,
         Validators.min(min),
       ]),
@@ -1214,29 +1296,36 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     ).controls[index_uo].get(&#x27;uo_cantidad&#x27;);
   }
 
-  deleteServicioFromCarrito(data: { servicio_id: number }): void {
-    this.serviciosFacade.deleteServicioFromCarrito(data.servicio_id);
+  deleteServicioFromCarrito(data: { servicio: CarritoService }): void {
+    if (data.servicio.precargado)
+      this.servicios_eliminar.push(data.servicio.servicio_rowid);
+
+    this.serviciosFacade.deleteServicioFromCarrito(data.servicio.servicio_id);
     (this.formTable.get(&#x27;table&#x27;) as FormArray).removeAt(
       (
         this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
       ).findIndex(
-        serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio_id
+        serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio.servicio_id
       )
     );
   }
 
   deleteUOFromServicioFromCarrito(data: {
-    servicio_id: number;
-    uo_codigo: string;
+    servicio: CarritoService;
+    uo: CarritoUO;
   }): void {
+    if (data.uo.uo_rowid) this.uos_eliminar.push(data.uo.uo_rowid);
+
     this.serviciosFacade.deleteUOFromServicioFromCarrito(
-      data.servicio_id,
-      data.uo_codigo
+      data.servicio.servicio_id,
+      data.uo.uo_codigo
     );
 
     const index_service &#x3D; (
       this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
-    ).findIndex(serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio_id);
+    ).findIndex(
+      serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio.servicio_id
+    );
     (
       (
         (this.formTable.get(&#x27;table&#x27;) as FormArray).at(
@@ -1250,9 +1339,25 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
             index_service
           ) as FormGroup
         ).get(&#x27;unidad_obras&#x27;).value as Array&lt;{ uo_codigo: string }&gt;
-      ).findIndex(uo &#x3D;&gt; uo.uo_codigo &#x3D;&#x3D;&#x3D; data.uo_codigo)
+      ).findIndex(uo &#x3D;&gt; uo.uo_codigo &#x3D;&#x3D;&#x3D; data.uo.uo_codigo)
     );
   }
+
+  // showModalConfirmacion(data: {
+  //   servicio_id: number;
+  //   servicio_rowid: number;
+  // }): void {
+  //   this.displayModalConfirmacionEliminar &#x3D; true;
+  //   this.servicio_id_eliminar &#x3D; data.servicio_id;
+  //   this.servicio_rowid_eliminar &#x3D; data.servicio_rowid;
+  //   this.mensajeConfirmacion &#x3D; &#x60;Al realizar esta acción eliminará el servicio/uo de la cubicación existente ¿Confirma esta acción?&#x60;;
+  // }
+
+  // closeModalElimarServicio(): void {
+  //   this.displayModalConfirmacionEliminar &#x3D; false;
+  // }
+
+  // eliminarServicioCarrito(): void {}
 
   get valid(): boolean {
     return (this.formTable.get(&#x27;table&#x27;) as FormArray).length &gt; 0;
@@ -1267,91 +1372,90 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;pre&gt;{{carrito$|async|json}}&lt;/pre&gt; --&gt;
-&lt;form class&#x3D;&quot;carrito-container&quot; [formGroup]&#x3D;&quot;formTable&quot; &gt;
-    &lt;table&gt;
-        &lt;thead&gt;
-          &lt;tr&gt;
-            &lt;th colspan&#x3D;&quot;7&quot;&gt;Servicios&lt;/th&gt;
-            &lt;th colspan&#x3D;&quot;7&quot;&gt;Unidad Obra&lt;/th&gt;
-          &lt;/tr&gt;
-          &lt;tr&gt;
-            &lt;th&gt;Cod&lt;/th&gt;
-            &lt;th&gt;Descripción&lt;/th&gt;
-            &lt;th&gt;Tipo&lt;/th&gt;
-            &lt;th&gt;Cantidad&lt;/th&gt;
-            &lt;th&gt;Precio&lt;/th&gt;
-            &lt;th&gt;Total Servicio&lt;/th&gt;
-            &lt;th&gt;&lt;/th&gt;
-    
-            &lt;th&gt;Cód&lt;/th&gt;
-            &lt;th&gt;Descripción&lt;/th&gt;
-            &lt;th&gt;Actividad&lt;/th&gt;
-            &lt;th&gt;Cantidad&lt;/th&gt;
-            &lt;th&gt;Precio&lt;/th&gt;
-            &lt;th&gt;Total UO&lt;/th&gt;
-            &lt;th&gt;&lt;/th&gt;
-          &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody formArrayName&#x3D;&quot;table&quot;&gt;
-            &lt;ng-container *ngFor&#x3D;&quot;let item of carrito$|async;let i &#x3D; index&quot; &gt;
-                &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras.length&#x3D;&#x3D;&#x3D;1&quot;&gt;
-                    &lt;tr zwc-base-td 
-                        [item]&#x3D;&quot;item&quot; 
-                        [controlServicioCantidad]&#x3D;&quot;getControlServiceCantidad(item.servicio_id)&quot; 
-                        [controlUOCantidad]&#x3D;&quot;getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)&quot;
-                        (deleteServicio)&#x3D;&quot;deleteServicioFromCarrito($event)&quot;
-                    &gt;
-                    &lt;/tr&gt;
-                &lt;/ng-container&gt;
-                &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras.length&gt;1&quot;&gt;
-                  &lt;tr zwc-base-td 
-                      [item]&#x3D;&quot;item&quot;
-                      [controlServicioCantidad]&#x3D;&quot;getControlServiceCantidad(item.servicio_id)&quot; 
-                      [controlUOCantidad]&#x3D;&quot;getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)&quot;
-                      (deleteServicio)&#x3D;&quot;deleteServicioFromCarrito($event)&quot;
-                  &gt;
-                 &lt;/tr&gt;
-                  &lt;ng-container *ngFor&#x3D;&quot;let uo of item.unidad_obras| slice:1; let iuo&#x3D; index&quot;&gt;
-                    &lt;tr zwc-multi-td 
-                        [uo]&#x3D;&quot;uo&quot;
-                        [controlUOCantidad]&#x3D;&quot;getControlUOCantidad(item.servicio_id,uo.uo_codigo)&quot;
-                        [servicio_id]&#x3D;&quot;item.servicio_id&quot;
-                        (deleteUO)&#x3D;&quot;deleteUOFromServicioFromCarrito($event)&quot;
-                    &gt;
-                    &lt;/tr&gt;
-                  &lt;/ng-container&gt;
-                &lt;/ng-container&gt;
-            &lt;/ng-container&gt;
-            &lt;tr&gt;
-              &lt;td colspan&#x3D;&quot;14&quot;&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td colspan&#x3D;&quot;5&quot; style&#x3D;&quot;background-color: #efefef;&quot;&gt;Total Servicios&lt;/td&gt;
-              &lt;td style&#x3D;&quot;background-color: #efefef;&quot; class&#x3D;&quot;total-servicio-monto&quot;&gt;{{totalServicios| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}&lt;/td&gt;
-              &lt;td style&#x3D;&quot;background-color: #efefef;&quot; colspan&#x3D;&quot;6&quot;&gt;Total Unidades Obra&lt;/td&gt;
-              &lt;td style&#x3D;&quot;background-color: #efefef;&quot; class&#x3D;&quot;total-uo-monto&quot;&gt;{{totalUOs| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}&lt;/td&gt;
-              &lt;td style&#x3D;&quot;background-color: #efefef;&quot;&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td colspan&#x3D;&quot;14&quot;&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-            &lt;tr&gt;
-              &lt;td style&#x3D;&quot;background-color: #efefef;&quot; colspan&#x3D;&quot;4&quot;&gt;&lt;/td&gt;
-              &lt;td style&#x3D;&quot;background-color: #efefef;&quot;&gt;Total Cubicación&lt;/td&gt;
-              &lt;td style&#x3D;&quot;background-color: #efefef;&quot; class&#x3D;&quot;total-cubicacion-monto&quot;&gt;{{totalServicios+totalUOs| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}&lt;/td&gt;
-              &lt;td style&#x3D;&quot;background-color: #efefef;&quot; colspan&#x3D;&quot;8&quot;&gt;&lt;/td&gt;
-            &lt;/tr&gt;
-        &lt;/tbody&gt;
-    &lt;/table&gt;
+&lt;form class&#x3D;&quot;carrito-container&quot; [formGroup]&#x3D;&quot;formTable&quot;&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th colspan&#x3D;&quot;7&quot;&gt;Servicios&lt;/th&gt;
+        &lt;th colspan&#x3D;&quot;7&quot;&gt;Unidad Obra&lt;/th&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Cod&lt;/th&gt;
+        &lt;th&gt;Descripción&lt;/th&gt;
+        &lt;th&gt;Tipo&lt;/th&gt;
+        &lt;th&gt;Cantidad&lt;/th&gt;
+        &lt;th&gt;Precio&lt;/th&gt;
+        &lt;th&gt;Total Servicio&lt;/th&gt;
+        &lt;th&gt;&lt;/th&gt;
 
-    &lt;div class&#x3D;&quot;message&quot; id&#x3D;&quot;alert-carrito-vacio&quot; *ngIf&#x3D;&quot;(carrito$|async).length &#x3D;&#x3D;&#x3D; 0&quot; &gt;
-      &lt;p-message  severity&#x3D;&quot;error&quot; text&#x3D;&quot;Al menos 1 servicio debe ser ingresado&quot; styleClass&#x3D;&quot;mr-2&quot;&gt;&lt;/p-message&gt;
-    &lt;/div&gt;
-   
-    &lt;!-- &lt;pre&gt;{{formTable.value|json}}&lt;/pre&gt; --&gt;
-    
+        &lt;th&gt;Cód&lt;/th&gt;
+        &lt;th&gt;Descripción&lt;/th&gt;
+        &lt;th&gt;Actividad&lt;/th&gt;
+        &lt;th&gt;Cantidad&lt;/th&gt;
+        &lt;th&gt;Precio&lt;/th&gt;
+        &lt;th&gt;Total UO&lt;/th&gt;
+        &lt;th&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody formArrayName&#x3D;&quot;table&quot;&gt;
+      &lt;ng-container *ngFor&#x3D;&quot;let item of carrito$|async;let i &#x3D; index&quot;&gt;
+        &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras.length&#x3D;&#x3D;&#x3D;1&quot;&gt;
+          &lt;tr zwc-base-td [item]&#x3D;&quot;item&quot; [controlServicioCantidad]&#x3D;&quot;getControlServiceCantidad(item.servicio_id)&quot;
+            [controlUOCantidad]&#x3D;&quot;getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)&quot;
+            (deleteServicio)&#x3D;&quot;deleteServicioFromCarrito($event)&quot; (deleteUO)&#x3D;&quot;deleteUOFromServicioFromCarrito($event)&quot;&gt;
+          &lt;/tr&gt;
+        &lt;/ng-container&gt;
+        &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras.length&gt;1&quot;&gt;
+          &lt;tr zwc-base-td [item]&#x3D;&quot;item&quot; [controlServicioCantidad]&#x3D;&quot;getControlServiceCantidad(item.servicio_id)&quot;
+            [controlUOCantidad]&#x3D;&quot;getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)&quot;
+            (deleteServicio)&#x3D;&quot;deleteServicioFromCarrito($event)&quot; (deleteUO)&#x3D;&quot;deleteUOFromServicioFromCarrito($event)&quot;&gt;
+          &lt;/tr&gt;
+          &lt;ng-container *ngFor&#x3D;&quot;let uo of item.unidad_obras| slice:1; let iuo&#x3D; index&quot;&gt;
+            &lt;tr zwc-multi-td [uo]&#x3D;&quot;uo&quot; [controlUOCantidad]&#x3D;&quot;getControlUOCantidad(item.servicio_id,uo.uo_codigo)&quot;
+              [servicio]&#x3D;&quot;item&quot; (deleteUO)&#x3D;&quot;deleteUOFromServicioFromCarrito($event)&quot;&gt;
+            &lt;/tr&gt;
+          &lt;/ng-container&gt;
+        &lt;/ng-container&gt;
+      &lt;/ng-container&gt;
+      &lt;tr&gt;
+        &lt;td colspan&#x3D;&quot;14&quot;&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td colspan&#x3D;&quot;5&quot; style&#x3D;&quot;background-color: #efefef;&quot;&gt;Total Servicios&lt;/td&gt;
+        &lt;td style&#x3D;&quot;background-color: #efefef;&quot; class&#x3D;&quot;total-servicio-monto&quot;&gt;{{totalServicios| currency : &#x27;CLP&#x27; :
+          &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}&lt;/td&gt;
+        &lt;td style&#x3D;&quot;background-color: #efefef;&quot; colspan&#x3D;&quot;6&quot;&gt;Total Unidades Obra&lt;/td&gt;
+        &lt;td style&#x3D;&quot;background-color: #efefef;&quot; class&#x3D;&quot;total-uo-monto&quot;&gt;{{totalUOs| currency : &#x27;CLP&#x27; :
+          &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}&lt;/td&gt;
+        &lt;td style&#x3D;&quot;background-color: #efefef;&quot;&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td colspan&#x3D;&quot;14&quot;&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style&#x3D;&quot;background-color: #efefef;&quot; colspan&#x3D;&quot;4&quot;&gt;&lt;/td&gt;
+        &lt;td style&#x3D;&quot;background-color: #efefef;&quot;&gt;Total Cubicación&lt;/td&gt;
+        &lt;td style&#x3D;&quot;background-color: #efefef;&quot; class&#x3D;&quot;total-cubicacion-monto&quot;&gt;{{totalServicios+totalUOs| currency :
+          &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}&lt;/td&gt;
+        &lt;td style&#x3D;&quot;background-color: #efefef;&quot; colspan&#x3D;&quot;8&quot;&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;div class&#x3D;&quot;message&quot; id&#x3D;&quot;alert-carrito-vacio&quot; *ngIf&#x3D;&quot;(carrito$|async).length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+    &lt;p-message severity&#x3D;&quot;error&quot; text&#x3D;&quot;Al menos 1 servicio debe ser ingresado&quot; styleClass&#x3D;&quot;mr-2&quot;&gt;&lt;/p-message&gt;
+  &lt;/div&gt;
+
+  &lt;!-- &lt;pre&gt;{{formTable.value|json}}&lt;/pre&gt; --&gt;
+
 &lt;/form&gt;
-</code></pre>
+
+
+&lt;!-- &lt;p-dialog header&#x3D;&quot;Eliminar Servicio existente&quot; [(visible)]&#x3D;&quot;displayModalConfirmacionEliminar&quot; [draggable]&#x3D;&quot;false&quot;
+  [modal]&#x3D;&quot;true&quot;&gt;
+  &lt;zwc-view-confirmacion [pregunta]&#x3D;&#x27;mensajeConfirmacion&#x27; (cancelar)&#x3D;&quot;closeModalElimarServicio()&quot;
+    (confirmar)&#x3D;&quot;eliminarServicioCarrito()&quot;&gt;&lt;/zwc-view-confirmacion&gt;
+&lt;/p-dialog&gt; --&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -1361,8 +1465,10 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
                 <pre class="line-numbers"><code class="language-scss">:host ::ng-deep {
   .carrito-container {
     overflow-y: scroll;
+
     table {
       width: 100%;
+
       th {
         border: 0;
         border-width: 0;
@@ -1373,6 +1479,7 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
         font-weight: 500;
         font-size: 10px;
       }
+
       td {
         padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
         border: 0 !important;
@@ -1389,22 +1496,50 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     padding: 0.5rem;
     font-size: 0.8rem;
   }
+
+  .container-cantidad {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    p {
+      margin-left: 5px;
+    }
+  }
 }
 
 :host ::ng-deep {
-  .message{
-      display: flex;
-      width: 100%;
-      justify-content: center;
+  .message {
+    display: flex;
+    width: 100%;
+    justify-content: center;
   }
+
   .p-inline-message {
-      padding: 0.5rem !important; 
+    padding: 0.5rem !important;
   }
+
   .p-inline-message .p-inline-message-text {
-      font-size: 0.8rem;
-      font-weight: 400;
-    }
-}</code></pre>
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+}
+
+// :host ::ng-deep {
+//   .p-dialog .p-dialog-header {
+//     padding: 1rem;
+//     background: #404d99;
+//     color: rgba(234, 234, 234, 0.87);
+//   }
+
+//   .p-dialog .p-dialog-header .p-dialog-header-icon {
+//     color: rgba(255, 255, 255, 0.6);
+//   }
+
+//   .p-dialog .p-dialog-content {
+//     padding: 17px 1.5rem 1.5rem 1.5rem;
+//   }
+// }</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -1432,9 +1567,9 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- <pre>{{carrito$|async|json}}</pre> --><form class="carrito-container" [formGroup]="formTable" >    <table>        <thead>          <tr>            <th colspan="7">Servicios</th>            <th colspan="7">Unidad Obra</th>          </tr>          <tr>            <th>Cod</th>            <th>Descripción</th>            <th>Tipo</th>            <th>Cantidad</th>            <th>Precio</th>            <th>Total Servicio</th>            <th></th>                <th>Cód</th>            <th>Descripción</th>            <th>Actividad</th>            <th>Cantidad</th>            <th>Precio</th>            <th>Total UO</th>            <th></th>          </tr>        </thead>        <tbody formArrayName="table">            <ng-container *ngFor="let item of carrito$|async;let i = index" >                <ng-container *ngIf="item.unidad_obras.length===1">                    <tr zwc-base-td                         [item]="item"                         [controlServicioCantidad]="getControlServiceCantidad(item.servicio_id)"                         [controlUOCantidad]="getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)"                        (deleteServicio)="deleteServicioFromCarrito($event)"                    >                    </tr>                </ng-container>                <ng-container *ngIf="item.unidad_obras.length>1">                  <tr zwc-base-td                       [item]="item"                      [controlServicioCantidad]="getControlServiceCantidad(item.servicio_id)"                       [controlUOCantidad]="getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)"                      (deleteServicio)="deleteServicioFromCarrito($event)"                  >                 </tr>                  <ng-container *ngFor="let uo of item.unidad_obras| slice:1; let iuo= index">                    <tr zwc-multi-td                         [uo]="uo"                        [controlUOCantidad]="getControlUOCantidad(item.servicio_id,uo.uo_codigo)"                        [servicio_id]="item.servicio_id"                        (deleteUO)="deleteUOFromServicioFromCarrito($event)"                    >                    </tr>                  </ng-container>                </ng-container>            </ng-container>            <tr>              <td colspan="14"></td>            </tr>            <tr>              <td colspan="5" style="background-color: #efefef;">Total Servicios</td>              <td style="background-color: #efefef;" class="total-servicio-monto">{{totalServicios| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td>              <td style="background-color: #efefef;" colspan="6">Total Unidades Obra</td>              <td style="background-color: #efefef;" class="total-uo-monto">{{totalUOs| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td>              <td style="background-color: #efefef;"></td>            </tr>            <tr>              <td colspan="14"></td>            </tr>            <tr>              <td style="background-color: #efefef;" colspan="4"></td>              <td style="background-color: #efefef;">Total Cubicación</td>              <td style="background-color: #efefef;" class="total-cubicacion-monto">{{totalServicios+totalUOs| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td>              <td style="background-color: #efefef;" colspan="8"></td>            </tr>        </tbody>    </table>    <div class="message" id="alert-carrito-vacio" *ngIf="(carrito$|async).length === 0" >      <p-message  severity="error" text="Al menos 1 servicio debe ser ingresado" styleClass="mr-2"></p-message>    </div>       <!-- <pre>{{formTable.value|json}}</pre> -->    </form></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
-    var DIRECTIVES = [];
+        var COMPONENT_TEMPLATE = '<div><!-- <pre>{{carrito$|async|json}}</pre> --><form class="carrito-container" [formGroup]="formTable">  <table>    <thead>      <tr>        <th colspan="7">Servicios</th>        <th colspan="7">Unidad Obra</th>      </tr>      <tr>        <th>Cod</th>        <th>Descripción</th>        <th>Tipo</th>        <th>Cantidad</th>        <th>Precio</th>        <th>Total Servicio</th>        <th></th>        <th>Cód</th>        <th>Descripción</th>        <th>Actividad</th>        <th>Cantidad</th>        <th>Precio</th>        <th>Total UO</th>        <th></th>      </tr>    </thead>    <tbody formArrayName="table">      <ng-container *ngFor="let item of carrito$|async;let i = index">        <ng-container *ngIf="item.unidad_obras.length===1">          <tr zwc-base-td [item]="item" [controlServicioCantidad]="getControlServiceCantidad(item.servicio_id)"            [controlUOCantidad]="getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)"            (deleteServicio)="deleteServicioFromCarrito($event)" (deleteUO)="deleteUOFromServicioFromCarrito($event)">          </tr>        </ng-container>        <ng-container *ngIf="item.unidad_obras.length>1">          <tr zwc-base-td [item]="item" [controlServicioCantidad]="getControlServiceCantidad(item.servicio_id)"            [controlUOCantidad]="getControlUOCantidad(item.servicio_id,item.unidad_obras[0].uo_codigo)"            (deleteServicio)="deleteServicioFromCarrito($event)" (deleteUO)="deleteUOFromServicioFromCarrito($event)">          </tr>          <ng-container *ngFor="let uo of item.unidad_obras| slice:1; let iuo= index">            <tr zwc-multi-td [uo]="uo" [controlUOCantidad]="getControlUOCantidad(item.servicio_id,uo.uo_codigo)"              [servicio]="item" (deleteUO)="deleteUOFromServicioFromCarrito($event)">            </tr>          </ng-container>        </ng-container>      </ng-container>      <tr>        <td colspan="14"></td>      </tr>      <tr>        <td colspan="5" style="background-color: #efefef;">Total Servicios</td>        <td style="background-color: #efefef;" class="total-servicio-monto">{{totalServicios| currency : \'CLP\' :          \'$\':\'.0-2\':\'es-CL\'}}</td>        <td style="background-color: #efefef;" colspan="6">Total Unidades Obra</td>        <td style="background-color: #efefef;" class="total-uo-monto">{{totalUOs| currency : \'CLP\' :          \'$\':\'.0-2\':\'es-CL\'}}</td>        <td style="background-color: #efefef;"></td>      </tr>      <tr>        <td colspan="14"></td>      </tr>      <tr>        <td style="background-color: #efefef;" colspan="4"></td>        <td style="background-color: #efefef;">Total Cubicación</td>        <td style="background-color: #efefef;" class="total-cubicacion-monto">{{totalServicios+totalUOs| currency :          \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td>        <td style="background-color: #efefef;" colspan="8"></td>      </tr>    </tbody>  </table>  <div class="message" id="alert-carrito-vacio" *ngIf="(carrito$|async).length === 0">    <p-message severity="error" text="Al menos 1 servicio debe ser ingresado" styleClass="mr-2"></p-message>  </div>  <!-- <pre>{{formTable.value|json}}</pre> --></form><!-- <p-dialog header="Eliminar Servicio existente" [(visible)]="displayModalConfirmacionEliminar" [draggable]="false"  [modal]="true">  <zwc-view-confirmacion [pregunta]=\'mensajeConfirmacion\' (cancelar)="closeModalElimarServicio()"    (confirmar)="eliminarServicioCarrito()"></zwc-view-confirmacion></p-dialog> --></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'FormTableServicesComponent'};
 </script>
 <script src="../js/tree.js"></script>

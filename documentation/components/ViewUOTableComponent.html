@@ -102,19 +102,30 @@
 &lt;/td&gt;
 
 &lt;ng-container *ngIf&#x3D;&quot;uo.uo_codigo &#x3D;&#x3D;&#x3D; &#x27;0&#x27;&quot;&gt;
-  &lt;td colspan&#x3D;&quot;6&quot; align&#x3D;&quot;center&quot;&gt;No Aplica&lt;/td&gt;
+  &lt;td colspan&#x3D;&quot;4&quot; align&#x3D;&quot;center&quot;&gt;No Aplica&lt;/td&gt;
 &lt;/ng-container&gt;
 
 &lt;ng-container *ngIf&#x3D;&quot;uo.uo_codigo !&#x3D;&#x3D; &#x27;0&#x27;&quot;&gt;
   &lt;td&gt;
     {{ uo.actividad_descripcion | titlecase }}
   &lt;/td&gt;
-  &lt;td&gt;TODO&lt;/td&gt;
+  &lt;td&gt;
+    &lt;div class&#x3D;&quot;container-cantidad&quot;&gt;
+      {{ uo.uo_cantidad | number }}
+      &lt;p [pTooltip]&#x3D;&quot;uo.uob_unidad_medida_descripcion&quot;&gt;
+        {{ uo.uob_unidad_medida_cod }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/td&gt;
   &lt;td&gt;
     {{ uo.uo_precio_total_clp | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}
   &lt;/td&gt;
-  &lt;td&gt;TODO&lt;/td&gt;
-  &lt;td&gt;&lt;/td&gt;
+  &lt;td&gt;
+    {{
+      +uo.uo_precio_total_clp * +uo.uo_cantidad
+        | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;
+    }}
+  &lt;/td&gt;
 &lt;/ng-container&gt;
 </code></pre></td>
             </tr>
@@ -170,7 +181,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/shared/view-table-services/view-table-services.component.ts:82</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/shared/view-table-services/view-table-services.component.ts:106</a></div>
                             </td>
                         </tr>
 
@@ -201,7 +212,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/shared/view-table-services/view-table-services.component.ts:82</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/shared/view-table-services/view-table-services.component.ts:106</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -219,7 +230,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnInit, ViewEncapsulation } from &#x27;@angular/core&#x27;;
 import { CarritoService, CarritoUO } from &#x27;@model&#x27;;
 import { ServiciosFacade } from &#x27;@storeOT/servicios/servicios.facades&#x27;;
-import { map } from &#x27;rxjs&#x27;;
+import { map, tap } from &#x27;rxjs&#x27;;
 
 /**
  * @description DESPLIEGUE VISUAL LOS DATOS DEL STORE CARRITO
@@ -229,7 +240,9 @@ import { map } from &#x27;rxjs&#x27;;
   templateUrl: &#x27;./view-table-services.component.html&#x27;,
   styleUrls: [&#x27;./view-table-services.component.scss&#x27;],
 })
-export class ViewTableServicesComponent implements OnInit {
+export class ViewTableServicesComponent {
+  totalServicios &#x3D; 0;
+  totalUOs &#x3D; 0;
   carritoServices$ &#x3D; this.serviciosFacade.carrito$().pipe(
     map(servicios &#x3D;&gt; {
       let valueInitial: CarritoService[] &#x3D; [];
@@ -259,13 +272,24 @@ export class ViewTableServicesComponent implements OnInit {
       } else {
         return [];
       }
+    }),
+    tap(servicios &#x3D;&gt; {
+      if (servicios &amp;&amp; servicios.length &gt; 0) {
+        this.totalServicios &#x3D; 0;
+        this.totalUOs &#x3D; 0;
+        servicios.forEach(servicio &#x3D;&gt; {
+          this.totalServicios &#x3D;
+            this.totalServicios +
+            +servicio.servicio_cantidad * +servicio.servicio_precio_final_clp;
+          servicio.unidad_obras.forEach(uo &#x3D;&gt; {
+            this.totalUOs &#x3D;
+              this.totalUOs + +uo.uo_cantidad * +uo.uo_precio_total_clp;
+          });
+        });
+      }
     })
   );
   constructor(private serviciosFacade: ServiciosFacade) {}
-
-  ngOnInit(): void {
-    console.log();
-  }
 }
 
 @Component({
@@ -279,19 +303,30 @@ export class ViewTableServicesComponent implements OnInit {
     &lt;/td&gt;
 
     &lt;ng-container *ngIf&#x3D;&quot;uo.uo_codigo &#x3D;&#x3D;&#x3D; &#x27;0&#x27;&quot;&gt;
-      &lt;td colspan&#x3D;&quot;6&quot; align&#x3D;&quot;center&quot;&gt;No Aplica&lt;/td&gt;
+      &lt;td colspan&#x3D;&quot;4&quot; align&#x3D;&quot;center&quot;&gt;No Aplica&lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;ng-container *ngIf&#x3D;&quot;uo.uo_codigo !&#x3D;&#x3D; &#x27;0&#x27;&quot;&gt;
       &lt;td&gt;
         {{ uo.actividad_descripcion | titlecase }}
       &lt;/td&gt;
-      &lt;td&gt;TODO&lt;/td&gt;
+      &lt;td&gt;
+        &lt;div class&#x3D;&quot;container-cantidad&quot;&gt;
+          {{ uo.uo_cantidad | number }}
+          &lt;p [pTooltip]&#x3D;&quot;uo.uob_unidad_medida_descripcion&quot;&gt;
+            {{ uo.uob_unidad_medida_cod }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
       &lt;td&gt;
         {{ uo.uo_precio_total_clp | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}
       &lt;/td&gt;
-      &lt;td&gt;TODO&lt;/td&gt;
-      &lt;td&gt;&lt;/td&gt;
+      &lt;td&gt;
+        {{
+          +uo.uo_precio_total_clp * +uo.uo_cantidad
+            | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;
+        }}
+      &lt;/td&gt;
     &lt;/ng-container&gt;
   &#x60;,
   encapsulation: ViewEncapsulation.None,
@@ -314,12 +349,23 @@ export class ViewUOTableComponent {
     &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
       {{ item.tipo_servicio_descripcion | titlecase }}
     &lt;/td&gt;
-    &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;TODO&lt;/td&gt;
+    &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
+      &lt;div class&#x3D;&quot;container-cantidad&quot;&gt;
+        {{ item.servicio_cantidad | number }}
+        &lt;p [pTooltip]&#x3D;&quot;item.servicio_unidad_descripcion&quot;&gt;
+          {{ item.servicio_unidad_cod }}
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/td&gt;
     &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
       {{ +item.servicio_precio_final_clp | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}
     &lt;/td&gt;
-    &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;TODO&lt;/td&gt;
-    &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;&lt;/td&gt;
+    &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
+      {{
+        +item.servicio_precio_final_clp * +item.servicio_cantidad
+          | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;
+      }}
+    &lt;/td&gt;
 
     &lt;!-- UNIDAD DE OBRA --&gt;
     &lt;td style&#x3D;&quot;background-color: #ff8e4e&quot;&gt;
@@ -328,24 +374,35 @@ export class ViewUOTableComponent {
     &lt;td&gt;
       {{ item.unidad_obras[0].uo_nombre }}
     &lt;/td&gt;
-
+    &lt;td&gt;
+      {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
+    &lt;/td&gt;
     &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; &#x27;0&#x27;&quot;&gt;
-      &lt;td colspan&#x3D;&quot;6&quot; align&#x3D;&quot;center&quot;&gt;No Aplica&lt;/td&gt;
+      &lt;td colspan&#x3D;&quot;3&quot; align&#x3D;&quot;center&quot;&gt;No Aplica&lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras[0].uo_codigo !&#x3D;&#x3D; &#x27;0&#x27;&quot;&gt;
       &lt;td&gt;
-        {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
+        &lt;div class&#x3D;&quot;container-cantidad&quot;&gt;
+          {{ item.unidad_obras[0].uo_cantidad | number }}
+          &lt;p [pTooltip]&#x3D;&quot;item.unidad_obras[0].uob_unidad_medida_descripcion&quot;&gt;
+            {{ item.unidad_obras[0].uob_unidad_medida_cod }}
+          &lt;/p&gt;
+        &lt;/div&gt;
       &lt;/td&gt;
-      &lt;td&gt;TODO&lt;/td&gt;
       &lt;td&gt;
         {{
           item.unidad_obras[0].uo_precio_total_clp
             | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;
         }}
       &lt;/td&gt;
-      &lt;td&gt;TODO&lt;/td&gt;
-      &lt;td&gt;&lt;/td&gt;
+      &lt;td&gt;
+        {{
+          +item.unidad_obras[0].uo_precio_total_clp *
+            +item.unidad_obras[0].uo_cantidad
+            | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;
+        }}
+      &lt;/td&gt;
     &lt;/ng-container&gt;
   &#x60;,
 })
@@ -383,9 +440,9 @@ export class ViewServiceTableComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><td style="background-color: #ff8e4e">  {{ uo.uo_codigo }}</td><td>  {{ uo.uo_nombre }}</td><ng-container *ngIf="uo.uo_codigo === \'0\'">  <td colspan="6" align="center">No Aplica</td></ng-container><ng-container *ngIf="uo.uo_codigo !== \'0\'">  <td>    {{ uo.actividad_descripcion | titlecase }}  </td>  <td>TODO</td>  <td>    {{ uo.uo_precio_total_clp | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\' }}  </td>  <td>TODO</td>  <td></td></ng-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
-    var DIRECTIVES = [];
+        var COMPONENT_TEMPLATE = '<div><td style="background-color: #ff8e4e">  {{ uo.uo_codigo }}</td><td>  {{ uo.uo_nombre }}</td><ng-container *ngIf="uo.uo_codigo === \'0\'">  <td colspan="4" align="center">No Aplica</td></ng-container><ng-container *ngIf="uo.uo_codigo !== \'0\'">  <td>    {{ uo.actividad_descripcion | titlecase }}  </td>  <td>    <div class="container-cantidad">      {{ uo.uo_cantidad | number }}      <p [pTooltip]="uo.uob_unidad_medida_descripcion">        {{ uo.uob_unidad_medida_cod }}      </p>    </div>  </td>  <td>    {{ uo.uo_precio_total_clp | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\' }}  </td>  <td>    {{      +uo.uo_precio_total_clp * +uo.uo_cantidad        | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\'    }}  </td></ng-container></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'ViewUOTableComponent'};
 </script>
 <script src="../js/tree.js"></script>

@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
     <li>Guards</li>
-    <li >ContratosUsuarioResolver</li>
+    <li >DetalleCubicacionResolver</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -60,7 +60,7 @@
             <h3>File</h3>
             </p>
             <p class="comment">
-                <code>src/app/core/resolvers/contratos-usuario.resolver.ts</code>
+                <code>src/app/features/cubicacion/resolvers/detalle-cubicacion.resolver.ts</code>
             </p>
 
 
@@ -102,12 +102,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(service: <a href="../injectables/UsuarioHttpService.html" target="_self">UsuarioHttpService</a>, usuarioFacade: <a href="../injectables/UsuarioFacade.html" target="_self">UsuarioFacade</a>)</code>
+<code>constructor(service: <a href="../injectables/CubicacionHttpService.html" target="_self">CubicacionHttpService</a>, cubicacionFacade: <a href="../injectables/CubicacionFacade.html" target="_self">CubicacionFacade</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/resolvers/contratos-usuario.resolver.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/cubicacion/resolvers/detalle-cubicacion.resolver.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -128,7 +128,7 @@
                                                         <td>service</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UsuarioHttpService.html" target="_self" >UsuarioHttpService</a></code>
+                                                                        <code><a href="../injectables/CubicacionHttpService.html" target="_self" >CubicacionHttpService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -137,10 +137,22 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>usuarioFacade</td>
+                                                        <td>cubicacionFacade</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UsuarioFacade.html" target="_self" >UsuarioFacade</a></code>
+                                                                        <code><a href="../injectables/CubicacionFacade.html" target="_self" >CubicacionFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -182,8 +194,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app/core/resolvers/contratos-usuario.resolver.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">src/app/features/cubicacion/resolvers/detalle-cubicacion.resolver.ts:22</a></div>
                 </td>
             </tr>
 
@@ -252,36 +264,42 @@
 import {
   ActivatedRouteSnapshot,
   Resolve,
+  Router,
   RouterStateSnapshot,
 } from &#x27;@angular/router&#x27;;
-import { ContratosUser, Response } from &#x27;@model&#x27;;
-import { UsuarioHttpService } from &#x27;@services&#x27;;
-import { UsuarioFacade } from &#x27;@storeOT/usuario/usuario.facades&#x27;;
+import { Cubicacion, DetalleCubicacion, Response } from &#x27;@model&#x27;;
+import { CubicacionHttpService } from &#x27;@services&#x27;;
+import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
 import { catchError, EMPTY, Observable, tap } from &#x27;rxjs&#x27;;
 
 @Injectable({ providedIn: &#x27;root&#x27; })
-export class ContratosUsuarioResolver
-  implements Resolve&lt;Response&lt;{ items: ContratosUser[] }&gt;&gt;
+export class DetalleCubicacionResolver
+  implements Resolve&lt;Response&lt;DetalleCubicacion&gt;&gt;
 {
   constructor(
-    private service: UsuarioHttpService,
-    private usuarioFacade: UsuarioFacade
+    private service: CubicacionHttpService,
+    private cubicacionFacade: CubicacionFacade,
+    private router: Router
   ) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
-    | Observable&lt;Response&lt;{ items: ContratosUser[] }&gt;&gt;
-    | Promise&lt;Response&lt;{ items: ContratosUser[] }&gt;&gt; {
-    const user_id &#x3D; JSON.parse(localStorage.getItem(&#x27;auth&#x27;)).sessionData
-      .usuario_id;
+    | Observable&lt;Response&lt;DetalleCubicacion&gt;&gt;
+    | Promise&lt;Response&lt;DetalleCubicacion&gt;&gt; {
+    const idStr &#x3D; route.paramMap.get(&#x27;id&#x27;);
 
-    return this.service.getContratosUsuario(user_id).pipe(
+    const id &#x3D; parseInt(idStr, 10);
+    if (isNaN(id)) {
+      this.router.navigate([&#x60;/not-found&#x60;], { skipLocationChange: true });
+      return null;
+    }
+    return this.service.getDetalleCubicacion(id).pipe(
       tap(response &#x3D;&gt; {
-        this.usuarioFacade.getContratosUsuarioSuccess(response);
+        this.cubicacionFacade.detalleCubicacionSuccess(response);
       }),
       catchError(error &#x3D;&gt; {
-        this.usuarioFacade.getContratosUsuarioError(error);
+        this.cubicacionFacade.detalleCubicacionError(error);
         return EMPTY;
       })
     );
@@ -327,7 +345,7 @@ export class ContratosUsuarioResolver
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'guard';
-            var COMPODOC_CURRENT_PAGE_URL = 'ContratosUsuarioResolver.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'DetalleCubicacionResolver.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

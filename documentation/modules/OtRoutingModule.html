@@ -74,15 +74,37 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { ContratosUsuarioResolver } from &#x27;src/app/core/resolvers/contratos-usuario.resolver&#x27;;
+import { FormOtContainerComponent } from &#x27;./containers/form-ot-container/form-ot-container.component&#x27;;
+import { ListOtContainerComponent } from &#x27;./containers/list-ot-container/list-ot-container.component&#x27;;
 import { OtComponent } from &#x27;./ot.component&#x27;;
 
-const routes: Routes &#x3D; [{ path: &#x27;&#x27;, component: OtComponent }];
+const routes: Routes &#x3D; [
+  {
+    path: &#x27;&#x27;,
+    component: OtComponent,
+    children: [
+      { path: &#x27;&#x27;, redirectTo: &#x27;list-ot&#x27;, pathMatch: &#x27;full&#x27; },
+      {
+        path: &#x27;list-ot&#x27;,
+        component: ListOtContainerComponent,
+      },
+      {
+        path: &#x27;form-ot&#x27;,
+        component: FormOtContainerComponent,
+        resolve: {
+          contratosUsuario: ContratosUsuarioResolver,
+        },
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class OtRoutingModule { }
+export class OtRoutingModule {}
 </code></pre>
     </div>
 </div>

@@ -145,6 +145,9 @@
                             <li>
                                 <a href="#callDeleteServicioFromCarrito" >callDeleteServicioFromCarrito</a>
                             </li>
+                            <li>
+                                <a href="#callDeleteUOFromServicioFromCarrito" >callDeleteUOFromServicioFromCarrito</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -181,6 +184,9 @@
                             <li>
                                 <a href="#deleteServicio" >deleteServicio</a>
                             </li>
+                            <li>
+                                <a href="#deleteUO" >deleteUO</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -202,7 +208,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -304,6 +310,27 @@
                         </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="deleteUO"></a>
+                        <b>deleteUO</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:18</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
 </section>
 
 
@@ -325,15 +352,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>callDeleteServicioFromCarrito(servicio_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+<code>callDeleteServicioFromCarrito(servicio: <a href="../interfaces/CarritoService.html" target="_self">CarritoService</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:31</a></div>
                 </td>
             </tr>
 
@@ -354,9 +381,90 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>servicio_id</td>
+                                    <td>servicio</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                <code><a href="../interfaces/CarritoService.html" target="_self" >CarritoService</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="callDeleteUOFromServicioFromCarrito"></a>
+                    <span class="name">
+                        <span ><b>callDeleteUOFromServicioFromCarrito</b></span>
+                        <a href="#callDeleteUOFromServicioFromCarrito"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>callDeleteUOFromServicioFromCarrito(servicio: <a href="../interfaces/CarritoService.html" target="_self">CarritoService</a>, uo: <a href="../interfaces/CarritoUO.html" target="_self">CarritoUO</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:35</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>servicio</td>
+                                    <td>
+                                                <code><a href="../interfaces/CarritoService.html" target="_self" >CarritoService</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>uo</td>
+                                    <td>
+                                                <code><a href="../interfaces/CarritoUO.html" target="_self" >CarritoUO</a></code>
                                     </td>
 
                                     <td>
@@ -405,7 +513,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -420,7 +528,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, OnInit, Output } from &#x27;@angular/core&#x27;;
 import { FormControl } from &#x27;@angular/forms&#x27;;
-import { CarritoService } from &#x27;@model&#x27;;
+import { CarritoService, CarritoUO } from &#x27;@model&#x27;;
 import { faTrash } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
 
 @Component({
@@ -433,49 +541,76 @@ export class BaseTdComponent {
   @Input() controlServicioCantidad: FormControl;
   @Input() controlUOCantidad: FormControl;
   @Output() deleteServicio &#x3D; new EventEmitter&lt;{
-    servicio_id: number;
+    servicio: CarritoService;
   }&gt;();
+  @Output() deleteUO &#x3D; new EventEmitter&lt;{
+    servicio: CarritoService;
+    uo: CarritoUO;
+  }&gt;();
+  // @Output() showModalConfirmacion &#x3D; new EventEmitter&lt;{
+  //   servicio_id: number;
+  //   servicio_rowid: number;
+  // }&gt;();
 
   trashICon &#x3D; faTrash;
 
   constructor() {}
 
-  callDeleteServicioFromCarrito(servicio_id: number): void {
-    this.deleteServicio.emit({ servicio_id });
+  callDeleteServicioFromCarrito(servicio: CarritoService): void {
+    this.deleteServicio.emit({ servicio });
   }
+
+  callDeleteUOFromServicioFromCarrito(
+    servicio: CarritoService,
+    uo: CarritoUO
+  ): void {
+    this.deleteUO.emit({ servicio, uo });
+  }
+
+  // callShowModalConfirmacion(servicio_id: number, servicio_rowid: number): void {
+  //   this.showModalConfirmacion.emit({ servicio_id, servicio_rowid });
+  // }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;!-- SERVICIO --&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
   {{ item.servicio_codigo }}
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
   {{ item.servicio_nombre }}
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
   {{ item.tipo_servicio_descripcion | titlecase }}
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
-  &lt;p-inputNumber [formControl]&#x3D;&quot;controlServicioCantidad&quot; mode&#x3D;&quot;decimal&quot; [minFractionDigits]&#x3D;&quot;2&quot;&gt;&lt;/p-inputNumber&gt;
-  &lt;zwc-input-alert [control]&#x3D;&quot;controlServicioCantidad&quot;&gt;&lt;/zwc-input-alert&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+  &lt;div class&#x3D;&quot;container-cantidad&quot;&gt;
+    &lt;p-inputNumber [formControl]&#x3D;&quot;controlServicioCantidad&quot; mode&#x3D;&quot;decimal&quot; inputId&#x3D;&quot;locale-german&quot; locale&#x3D;&quot;de-DE&quot;
+      [minFractionDigits]&#x3D;&quot;2&quot;&gt;
+    &lt;/p-inputNumber&gt;
+    &lt;p [pTooltip]&#x3D;&quot;item.servicio_unidad_descripcion&quot;&gt;{{item.servicio_unidad_cod}}&lt;/p&gt;
+    &lt;zwc-input-alert [control]&#x3D;&quot;controlServicioCantidad&quot;&gt;&lt;/zwc-input-alert&gt;
+  &lt;/div&gt;
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
   {{ +item.servicio_precio_final_clp | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
   {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot;&gt;
-  &lt;!-- &lt;ng-container *ngIf&#x3D;&quot;item.precargado &#x3D;&#x3D;&#x3D; undefined || item.precargado &#x3D;&#x3D;&#x3D; false&quot;&gt;
-        &lt;div class&#x3D;&quot;ui icon buttons mini basic&quot;&gt; --&gt;
-          &lt;button (click)&#x3D;&quot;callDeleteServicioFromCarrito(item.servicio_id)&quot; class&#x3D;&quot;ui button eliminar-color&quot;&gt;
-            &lt;fa-icon [icon]&#x3D;&quot;trashICon&quot;&gt;&lt;/fa-icon&gt;
-          &lt;/button&gt;
-    &lt;!-- &lt;/div&gt;
-      &lt;/ng-container&gt; --&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+  &lt;!-- &lt;ng-container *ngIf&#x3D;&quot;item.precargado &#x3D;&#x3D;&#x3D; undefined || item.precargado &#x3D;&#x3D;&#x3D; false; else existente&quot;&gt; --&gt;
+  &lt;button (click)&#x3D;&quot;callDeleteServicioFromCarrito(item)&quot; class&#x3D;&quot;ui button eliminar-color&quot;&gt;
+    &lt;fa-icon [icon]&#x3D;&quot;trashICon&quot;&gt;&lt;/fa-icon&gt;
+  &lt;/button&gt;
+  &lt;!-- &lt;/ng-container&gt; --&gt;
+  &lt;!-- &lt;ng-template #existente&gt;
+    &lt;button (click)&#x3D;&quot;callShowModalConfirmacion(item.servicio_id,item.servicio_rowid)&quot; class&#x3D;&quot;ui button eliminar-color&quot;&gt;
+      &lt;fa-icon [icon]&#x3D;&quot;trashICon&quot;&gt;&lt;/fa-icon&gt;
+    &lt;/button&gt;
+  &lt;/ng-template&gt; --&gt;
 
   &lt;!-- &lt;ng-container *ngIf&#x3D;&quot;item.precargado&quot;&gt;
         &lt;div class&#x3D;&quot;ui icon buttons mini basic&quot;&gt;
@@ -490,38 +625,59 @@ export class BaseTdComponent {
 &lt;td style&#x3D;&quot;background-color: #ff8e4e&quot;&gt;
   {{ item.unidad_obras[0].uo_codigo }}
 &lt;/td&gt;
-&lt;td&gt;
+&lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
   {{ item.unidad_obras[0].uo_nombre }}
+&lt;/td&gt;
+&lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+  {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
 &lt;/td&gt;
 
 &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; &#x27;0&#x27;&quot;&gt;
-  &lt;td colspan&#x3D;&quot;6&quot; align&#x3D;&quot;center&quot;&gt;No Aplica&lt;/td&gt;
+  &lt;td colspan&#x3D;&quot;5&quot; align&#x3D;&quot;center&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;No Aplica&lt;/td&gt;
 &lt;/ng-container&gt;
 
 &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras[0].uo_codigo !&#x3D;&#x3D; &#x27;0&#x27;&quot;&gt;
-  &lt;td&gt;
-    {{ item.unidad_obras[0].actividad_descripcion | titlecase }}
+
+  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+    &lt;div class&#x3D;&quot;container-cantidad&quot;&gt;
+      &lt;p-inputNumber [formControl]&#x3D;&quot;controlUOCantidad&quot; mode&#x3D;&quot;decimal&quot; inputId&#x3D;&quot;locale-german&quot; locale&#x3D;&quot;de-DE&quot;
+        [minFractionDigits]&#x3D;&quot;2&quot;&gt;&lt;/p-inputNumber&gt;
+      &lt;p [pTooltip]&#x3D;&quot;item.unidad_obras[0].uob_unidad_medida_descripcion&quot;&gt;{{item.unidad_obras[0].uob_unidad_medida_cod }}
+      &lt;/p&gt;
+      &lt;zwc-input-alert [control]&#x3D;&quot;controlUOCantidad&quot;&gt;&lt;/zwc-input-alert&gt;
+    &lt;/div&gt;
   &lt;/td&gt;
-  &lt;td&gt;
-    &lt;p-inputNumber [formControl]&#x3D;&quot;controlUOCantidad&quot; mode&#x3D;&quot;decimal&quot; [minFractionDigits]&#x3D;&quot;2&quot;&gt;&lt;/p-inputNumber&gt;
-    &lt;zwc-input-alert [control]&#x3D;&quot;controlUOCantidad&quot;&gt;&lt;/zwc-input-alert&gt;
-  &lt;/td&gt;
-  &lt;td&gt;
+  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
     {{
-      item.unidad_obras[0].uo_precio_total_clp
-        | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;
+    item.unidad_obras[0].uo_precio_total_clp
+    | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;
     }}
   &lt;/td&gt;
-  &lt;td&gt;
+  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
     {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}
   &lt;/td&gt;
-  &lt;td&gt;
+  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+
+    &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras.length&gt;1&quot;&gt;
+      &lt;!-- &lt;ng-container *ngIf&#x3D;&quot;item.precargado &#x3D;&#x3D;&#x3D; undefined || item.precargado &#x3D;&#x3D;&#x3D; false&quot;&gt; --&gt;
+      &lt;button (click)&#x3D;&quot;callDeleteUOFromServicioFromCarrito(item, item.unidad_obras[0])&quot;
+        class&#x3D;&quot;ui button eliminar-color&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;trashICon&quot;&gt;&lt;/fa-icon&gt;
+      &lt;/button&gt;
+      &lt;!-- &lt;/ng-container&gt; --&gt;
+      &lt;!-- &lt;ng-template #existente&gt;
+        &lt;button (click)&#x3D;&quot;show(item.servicio_id, item.unidad_obras[0].uo_codigo)&quot;
+          class&#x3D;&quot;ui button eliminar-color&quot;&gt;
+          &lt;fa-icon [icon]&#x3D;&quot;trashICon&quot;&gt;&lt;/fa-icon&gt;
+        &lt;/button&gt;
+      &lt;/ng-template&gt; --&gt;
+    &lt;/ng-container&gt;
+
     &lt;!-- &lt;div class&#x3D;&quot;ui icon buttons mini basic&quot;&gt;
           &lt;button *ngIf&#x3D;&quot;item.unidades_obras[0].uo_codigo!&#x3D;&#x3D;0&quot; (click)&#x3D;&quot;showMateriales(item.unidades_obras[0].material_arr)&quot; class&#x3D;&quot;ui button generic-color&quot;&gt;Detalles &lt;/button&gt;
         &lt;/div&gt; --&gt;
   &lt;/td&gt;
-&lt;/ng-container&gt;
-</code></pre>
+&lt;/ng-container&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -556,9 +712,9 @@ export class BaseTdComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- SERVICIO --><td [attr.rowspan]="+item.unidad_obras.length">  {{ item.servicio_codigo }}</td><td [attr.rowspan]="+item.unidad_obras.length">  {{ item.servicio_nombre }}</td><td [attr.rowspan]="+item.unidad_obras.length">  {{ item.tipo_servicio_descripcion | titlecase }}</td><td [attr.rowspan]="+item.unidad_obras.length">  <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>  <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert></td><td [attr.rowspan]="+item.unidad_obras.length">  {{ +item.servicio_precio_final_clp | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\' }}</td><td [attr.rowspan]="+item.unidad_obras.length">  {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td><td [attr.rowspan]="+item.unidad_obras.length">  <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false">        <div class="ui icon buttons mini basic"> -->          <button (click)="callDeleteServicioFromCarrito(item.servicio_id)" class="ui button eliminar-color">            <fa-icon [icon]="trashICon"></fa-icon>          </button>    <!-- </div>      </ng-container> -->  <!-- <ng-container *ngIf="item.precargado">        <div class="ui icon buttons mini basic">          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">            <fa-icon [icon]="trashICon"></fa-icon>          </button>        </div>      </ng-container> --></td><!-- UNIDAD DE OBRA --><td style="background-color: #ff8e4e">  {{ item.unidad_obras[0].uo_codigo }}</td><td>  {{ item.unidad_obras[0].uo_nombre }}</td><ng-container *ngIf="item.unidad_obras[0].uo_codigo === \'0\'">  <td colspan="6" align="center">No Aplica</td></ng-container><ng-container *ngIf="item.unidad_obras[0].uo_codigo !== \'0\'">  <td>    {{ item.unidad_obras[0].actividad_descripcion | titlecase }}  </td>  <td>    <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" [minFractionDigits]="2"></p-inputNumber>    <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>  </td>  <td>    {{      item.unidad_obras[0].uo_precio_total_clp        | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\'    }}  </td>  <td>    {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}  </td>  <td>    <!-- <div class="ui icon buttons mini basic">          <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>        </div> -->  </td></ng-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
-    var DIRECTIVES = [];
+        var COMPONENT_TEMPLATE = '<div><!-- SERVICIO --><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.servicio_codigo }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.servicio_nombre }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.tipo_servicio_descripcion | titlecase }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  <div class="container-cantidad">    <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" inputId="locale-german" locale="de-DE"      [minFractionDigits]="2">    </p-inputNumber>    <p [pTooltip]="item.servicio_unidad_descripcion">{{item.servicio_unidad_cod}}</p>    <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert>  </div></td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ +item.servicio_precio_final_clp | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\' }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false; else existente"> -->  <button (click)="callDeleteServicioFromCarrito(item)" class="ui button eliminar-color">    <fa-icon [icon]="trashICon"></fa-icon>  </button>  <!-- </ng-container> -->  <!-- <ng-template #existente>    <button (click)="callShowModalConfirmacion(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">      <fa-icon [icon]="trashICon"></fa-icon>    </button>  </ng-template> -->  <!-- <ng-container *ngIf="item.precargado">        <div class="ui icon buttons mini basic">          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">            <fa-icon [icon]="trashICon"></fa-icon>          </button>        </div>      </ng-container> --></td><!-- UNIDAD DE OBRA --><td style="background-color: #ff8e4e">  {{ item.unidad_obras[0].uo_codigo }}</td><td zwcColorPrecargado [condicion]="item.precargado">  {{ item.unidad_obras[0].uo_nombre }}</td><td zwcColorPrecargado [condicion]="item.precargado">  {{ item.unidad_obras[0].actividad_descripcion | titlecase }}</td><ng-container *ngIf="item.unidad_obras[0].uo_codigo === \'0\'">  <td colspan="5" align="center" zwcColorPrecargado [condicion]="item.precargado">No Aplica</td></ng-container><ng-container *ngIf="item.unidad_obras[0].uo_codigo !== \'0\'">  <td zwcColorPrecargado [condicion]="item.precargado">    <div class="container-cantidad">      <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" inputId="locale-german" locale="de-DE"        [minFractionDigits]="2"></p-inputNumber>      <p [pTooltip]="item.unidad_obras[0].uob_unidad_medida_descripcion">{{item.unidad_obras[0].uob_unidad_medida_cod }}      </p>      <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>    </div>  </td>  <td zwcColorPrecargado [condicion]="item.precargado">    {{    item.unidad_obras[0].uo_precio_total_clp    | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\'    }}  </td>  <td zwcColorPrecargado [condicion]="item.precargado">    {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}  </td>  <td zwcColorPrecargado [condicion]="item.precargado">    <ng-container *ngIf="item.unidad_obras.length>1">      <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false"> -->      <button (click)="callDeleteUOFromServicioFromCarrito(item, item.unidad_obras[0])"        class="ui button eliminar-color">        <fa-icon [icon]="trashICon"></fa-icon>      </button>      <!-- </ng-container> -->      <!-- <ng-template #existente>        <button (click)="show(item.servicio_id, item.unidad_obras[0].uo_codigo)"          class="ui button eliminar-color">          <fa-icon [icon]="trashICon"></fa-icon>        </button>      </ng-template> -->    </ng-container>    <!-- <div class="ui icon buttons mini basic">          <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>        </div> -->  </td></ng-container></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'BaseTdComponent'};
 </script>
 <script src="../js/tree.js"></script>

@@ -332,13 +332,15 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
           // NUEVO SERVICIO
           if (indexServiceFormulario &#x3D;&#x3D;&#x3D; -1) {
             const group &#x3D; new FormGroup({
+              precargado: new FormControl(servicio.precargado ?? false, []),
+              servicio_rowid: new FormControl(servicio.servicio_rowid, []),
               servicio_id: new FormControl(servicio.servicio_id, [
                 Validators.required,
               ]),
-              servicio_cantidad: new FormControl(1, [
-                Validators.required,
-                Validators.min(0.01),
-              ]),
+              servicio_cantidad: new FormControl(
+                servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+                [Validators.required, Validators.min(0.01)]
+              ),
               servicio_precio_final_clp: new FormControl(
                 servicio.servicio_precio_final_clp
               ),
@@ -388,6 +390,14 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
 
   formTable: FormGroup &#x3D; new FormGroup(this.formTableControl);
 
+  servicios_eliminar: number[] &#x3D; [];
+  uos_eliminar: number[] &#x3D; [];
+  // MODALS
+  // displayModalConfirmacionEliminar &#x3D; false;
+  // mensajeConfirmacion: string;
+  // servicio_id_eliminar: number;
+  // servicio_rowid_eliminar: number;
+
   constructor(private serviciosFacade: ServiciosFacade) {
     registerLocaleData(localeEsCl, &#x27;es-CL&#x27;);
   }
@@ -421,8 +431,10 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     let min &#x3D; uo.uo_codigo &#x3D;&#x3D;&#x3D; &#x27;0&#x27; ? 0 : 0.01;
 
     return new FormGroup({
+      precargado: new FormControl(uo.precargado ?? false, []),
+      uo_rowid: new FormControl(uo.uo_rowid, []),
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
-      uo_cantidad: new FormControl(cantidad, [
+      uo_cantidad: new FormControl(uo.uo_cantidad ? uo.uo_cantidad : cantidad, [
         Validators.required,
         Validators.min(min),
       ]),
@@ -462,29 +474,36 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
     ).controls[index_uo].get(&#x27;uo_cantidad&#x27;);
   }
 
-  deleteServicioFromCarrito(data: { servicio_id: number }): void {
-    this.serviciosFacade.deleteServicioFromCarrito(data.servicio_id);
+  deleteServicioFromCarrito(data: { servicio: CarritoService }): void {
+    if (data.servicio.precargado)
+      this.servicios_eliminar.push(data.servicio.servicio_rowid);
+
+    this.serviciosFacade.deleteServicioFromCarrito(data.servicio.servicio_id);
     (this.formTable.get(&#x27;table&#x27;) as FormArray).removeAt(
       (
         this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
       ).findIndex(
-        serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio_id
+        serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio.servicio_id
       )
     );
   }
 
   deleteUOFromServicioFromCarrito(data: {
-    servicio_id: number;
-    uo_codigo: string;
+    servicio: CarritoService;
+    uo: CarritoUO;
   }): void {
+    if (data.uo.uo_rowid) this.uos_eliminar.push(data.uo.uo_rowid);
+
     this.serviciosFacade.deleteUOFromServicioFromCarrito(
-      data.servicio_id,
-      data.uo_codigo
+      data.servicio.servicio_id,
+      data.uo.uo_codigo
     );
 
     const index_service &#x3D; (
       this.formTable.get(&#x27;table&#x27;).value as Array&lt;{ servicio_id: string }&gt;
-    ).findIndex(serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio_id);
+    ).findIndex(
+      serviceTable &#x3D;&gt; +serviceTable.servicio_id &#x3D;&#x3D;&#x3D; data.servicio.servicio_id
+    );
     (
       (
         (this.formTable.get(&#x27;table&#x27;) as FormArray).at(
@@ -498,9 +517,25 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
             index_service
           ) as FormGroup
         ).get(&#x27;unidad_obras&#x27;).value as Array&lt;{ uo_codigo: string }&gt;
-      ).findIndex(uo &#x3D;&gt; uo.uo_codigo &#x3D;&#x3D;&#x3D; data.uo_codigo)
+      ).findIndex(uo &#x3D;&gt; uo.uo_codigo &#x3D;&#x3D;&#x3D; data.uo.uo_codigo)
     );
   }
+
+  // showModalConfirmacion(data: {
+  //   servicio_id: number;
+  //   servicio_rowid: number;
+  // }): void {
+  //   this.displayModalConfirmacionEliminar &#x3D; true;
+  //   this.servicio_id_eliminar &#x3D; data.servicio_id;
+  //   this.servicio_rowid_eliminar &#x3D; data.servicio_rowid;
+  //   this.mensajeConfirmacion &#x3D; &#x60;Al realizar esta acción eliminará el servicio/uo de la cubicación existente ¿Confirma esta acción?&#x60;;
+  // }
+
+  // closeModalElimarServicio(): void {
+  //   this.displayModalConfirmacionEliminar &#x3D; false;
+  // }
+
+  // eliminarServicioCarrito(): void {}
 
   get valid(): boolean {
     return (this.formTable.get(&#x27;table&#x27;) as FormArray).length &gt; 0;

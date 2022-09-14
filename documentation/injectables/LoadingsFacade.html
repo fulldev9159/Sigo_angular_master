@@ -88,6 +88,14 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#sendingClonarCubicacion$" >sendingClonarCubicacion$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sendingDetalleCubicacion$" >sendingDetalleCubicacion$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#sendingGetActividadesContratoProveedor$" >sendingGetActividadesContratoProveedor$</a>
                             </li>
                             <li>
@@ -97,6 +105,10 @@
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#sendingGetCubicaciones$" >sendingGetCubicaciones$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sendingGetCubicacionesContrato$" >sendingGetCubicacionesContrato$</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -282,6 +294,84 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="sendingClonarCubicacion$"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>sendingClonarCubicacion$</b></span>
+                        <a href="#sendingClonarCubicacion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendingClonarCubicacion$()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/app/store/loadings/loadings.facade.ts:93</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendingDetalleCubicacion$"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>sendingDetalleCubicacion$</b></span>
+                        <a href="#sendingDetalleCubicacion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendingDetalleCubicacion$()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/app/store/loadings/loadings.facade.ts:88</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="sendingGetActividadesContratoProveedor$"></a>
                     <span class="name">
                         <span class="modifier">Public</span>
@@ -380,6 +470,45 @@
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="83"
                             class="link-to-prism">src/app/store/loadings/loadings.facade.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendingGetCubicacionesContrato$"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>sendingGetCubicacionesContrato$</b></span>
+                        <a href="#sendingGetCubicacionesContrato$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendingGetCubicacionesContrato$()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/app/store/loadings/loadings.facade.ts:98</a></div>
                 </td>
             </tr>
 
@@ -836,6 +965,21 @@ export class LoadingsFacade {
   // GET CUBICACIONES
   public sendingGetCubicaciones$(): Observable&lt;boolean&gt; {
     return this.store.select(loadingSelector.sendingGetCubicaciones);
+  }
+
+  // GET DETALLE CUBICACION
+  public sendingDetalleCubicacion$(): Observable&lt;boolean&gt; {
+    return this.store.select(loadingSelector.sendingDetalleCubicacion);
+  }
+
+  // CLONAR CUBICACION
+  public sendingClonarCubicacion$(): Observable&lt;boolean&gt; {
+    return this.store.select(loadingSelector.sendingClonarCubicacion);
+  }
+
+  // CUBICACIONES DE UN CONTRATO ESPECIFICO
+  public sendingGetCubicacionesContrato$(): Observable&lt;boolean&gt; {
+    return this.store.select(loadingSelector.sendingGetCubicacionesContrato);
   }
 }
 </code></pre>

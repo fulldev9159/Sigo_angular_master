@@ -287,77 +287,78 @@ export class MenuComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;sidebar-menu&quot;&gt;
-    &lt;ul&gt;
-      &lt;li class&#x3D;&quot;&quot;&gt;
-        &lt;a [routerLink]&#x3D;&quot;[&#x27;&#x27;]&quot; class&#x3D;&quot;menuprincipal-a&quot;&gt;
-          &lt;fa-icon [icon]&#x3D;&quot;faHouse&quot;  &gt;&lt;/fa-icon&gt;
-          &lt;span&gt;Dashboard&lt;/span&gt;
-        &lt;/a&gt;
-      &lt;/li&gt;
-      &lt;li class&#x3D;&quot;header-module&quot;&gt;
-        &lt;span&gt;MODULOS&lt;/span&gt;
-      &lt;/li&gt;
-      &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-ot&quot; class&#x3D;&quot;titulo-menu&quot;&gt;
-        &lt;div  class&#x3D;&quot;header-menu&quot;&gt;
-          &lt;fa-icon [icon]&#x3D;&quot;faOT&quot; style&#x3D;&quot;    margin-left: -4px;
+  &lt;ul&gt;
+    &lt;li class&#x3D;&quot;&quot;&gt;
+      &lt;a [routerLink]&#x3D;&quot;[&#x27;&#x27;]&quot; class&#x3D;&quot;menuprincipal-a&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;faHouse&quot;&gt;&lt;/fa-icon&gt;
+        &lt;span&gt;Dashboard&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class&#x3D;&quot;header-module&quot;&gt;
+      &lt;span&gt;MODULOS&lt;/span&gt;
+    &lt;/li&gt;
+    &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-ot&quot; class&#x3D;&quot;titulo-menu&quot;&gt;
+      &lt;div class&#x3D;&quot;header-menu&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;faOT&quot; style&#x3D;&quot;    margin-left: -4px;
           margin-right: 3px;&quot;&gt;&lt;/fa-icon&gt;
-          &lt;span&gt;OT&lt;/span&gt;
-        &lt;/div&gt;
-        
-        &lt;ul class&#x3D;&quot;collapse show list-unstyled&quot; id&#x3D;&quot;otSub&quot;&gt;
-          &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_LISTAR&#x27;]&quot;  routerLinkActive&#x3D;&quot;active-item&quot;&gt;
-            &lt;a [routerLink]&#x3D;&quot;[&#x27;/ot&#x27;]&quot; class&#x3D;&quot;submenu-a&quot;&gt;Listar OTs&lt;/a&gt;
-          &lt;/li&gt;
-          &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_CREAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active-item&quot;&gt;
-            &lt;a [routerLink]&#x3D;&quot;[&#x27;/ot/form-ot&#x27;]&quot; class&#x3D;&quot;submenu-a&quot;&gt;Crear OT&lt;/a&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-cubicacion&quot; class&#x3D;&quot;titulo-menu&quot;&gt;
-       &lt;div  class&#x3D;&quot;header-menu&quot;&gt;
-          &lt;fa-icon [icon]&#x3D;&quot;faCub&quot; style&#x3D;&quot;    margin-left: -4px;
-          margin-right: 3px;&quot;&gt;&lt;/fa-icon&gt;
-          &lt;span&gt;Cubicación&lt;/span&gt;
-       &lt;/div&gt;
-        &lt;ul class&#x3D;&quot;collapse list-unstyled&quot; id&#x3D;&quot;cubSub&quot;&gt;
-          &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active-item&quot;&gt;
-            &lt;a [routerLink]&#x3D;&quot;[&#x27;cubicacion&#x27;]&quot; class&#x3D;&quot;submenu-a&quot; id&#x3D;&quot;listar-cubicacion-sidebar&quot;&gt;Listar Cubicaciones&lt;/a&gt;
-          &lt;/li&gt;
-          &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_CREAR&#x27;]&quot;  routerLinkActive&#x3D;&quot;active-item&quot; id&#x3D;&quot;listarCubSubMenu&quot;&gt;
-            &lt;a [routerLink]&#x3D;&quot;[&#x27;/cubicacion/form-cub&#x27;]&quot; class&#x3D;&quot;submenu-a&quot; id&#x3D;&quot;crear-cubicacion-sidebar&quot;&gt;Crear Cubicación&lt;/a&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li class&#x3D;&quot;header-menu&quot; *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;,&#x27;PERFIL_CREAR&#x27;]&quot;&gt;
-        &lt;span&gt;ADMINISTRACION&lt;/span&gt;
-      &lt;/li&gt;
-      &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;,&#x27;PERFIL_CREAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-perfil&quot;&gt;
-        &lt;a [routerLink]&#x3D;&quot;[&#x27;/app/profile&#x27;]&quot;&gt;
-          &lt;i class&#x3D;&quot;pi pi-id-card&quot;&gt;&lt;/i&gt;
-          &lt;span&gt;Perfiles&lt;/span&gt;
-        &lt;/a&gt;
-      &lt;/li&gt;
-      &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;,&#x27;PERFIL_CREAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-usuario&quot;&gt;
-        &lt;a [routerLink]&#x3D;&quot;[&#x27;/app/user&#x27;]&quot;&gt;
-          &lt;i class&#x3D;&quot;pi pi-users&quot;&gt;&lt;/i&gt;
-          &lt;span&gt;Usuarios&lt;/span&gt;
-        &lt;/a&gt;
-      &lt;/li&gt;
-      &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-area&quot;&gt;
-        &lt;a [routerLink]&#x3D;&quot;[&#x27;/app/area&#x27;]&quot;&gt;
-          &lt;i class&#x3D;&quot;pi pi-globe&quot;&gt;&lt;/i&gt;
-          &lt;span&gt;Area&lt;/span&gt;
-        &lt;/a&gt;
-      &lt;/li&gt;
+        &lt;span&gt;OT&lt;/span&gt;
+      &lt;/div&gt;
 
-      &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-contratos&quot;&gt;
-        &lt;a [routerLink]&#x3D;&quot;[&#x27;/app/contratos&#x27;]&quot;&gt;
-          &lt;i class&#x3D;&quot;pi pi-briefcase&quot;&gt;&lt;/i&gt;
-          &lt;span&gt;Contratos&lt;/span&gt;
-        &lt;/a&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;</code></pre>
+      &lt;ul class&#x3D;&quot;collapse show list-unstyled&quot; id&#x3D;&quot;otSub&quot;&gt;
+        &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active-item&quot;&gt;
+          &lt;a [routerLink]&#x3D;&quot;[&#x27;/ot&#x27;]&quot; class&#x3D;&quot;submenu-a&quot; id&#x3D;&quot;listar-ot-sidebar&quot;&gt;Listar OTs&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_CREAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active-item&quot;&gt;
+          &lt;a [routerLink]&#x3D;&quot;[&#x27;/ot/form-ot&#x27;]&quot; class&#x3D;&quot;submenu-a&quot; id&#x3D;&quot;crear-ot-sidebar&quot;&gt;Crear OT&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-cubicacion&quot; class&#x3D;&quot;titulo-menu&quot;&gt;
+      &lt;div class&#x3D;&quot;header-menu&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;faCub&quot; style&#x3D;&quot;    margin-left: -4px;
+          margin-right: 3px;&quot;&gt;&lt;/fa-icon&gt;
+        &lt;span&gt;Cubicación&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;ul class&#x3D;&quot;collapse list-unstyled&quot; id&#x3D;&quot;cubSub&quot;&gt;
+        &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active-item&quot;&gt;
+          &lt;a [routerLink]&#x3D;&quot;[&#x27;cubicacion&#x27;]&quot; class&#x3D;&quot;submenu-a&quot; id&#x3D;&quot;listar-cubicacion-sidebar&quot;&gt;Listar Cubicaciones&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_CREAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active-item&quot; id&#x3D;&quot;listarCubSubMenu&quot;&gt;
+          &lt;a [routerLink]&#x3D;&quot;[&#x27;/cubicacion/form-cub&#x27;]&quot; class&#x3D;&quot;submenu-a&quot; id&#x3D;&quot;crear-cubicacion-sidebar&quot;&gt;Crear
+            Cubicación&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li class&#x3D;&quot;header-menu&quot; *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;,&#x27;PERFIL_CREAR&#x27;]&quot;&gt;
+      &lt;span&gt;ADMINISTRACION&lt;/span&gt;
+    &lt;/li&gt;
+    &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;,&#x27;PERFIL_CREAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-perfil&quot;&gt;
+      &lt;a [routerLink]&#x3D;&quot;[&#x27;/app/profile&#x27;]&quot;&gt;
+        &lt;i class&#x3D;&quot;pi pi-id-card&quot;&gt;&lt;/i&gt;
+        &lt;span&gt;Perfiles&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;,&#x27;PERFIL_CREAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-usuario&quot;&gt;
+      &lt;a [routerLink]&#x3D;&quot;[&#x27;/app/user&#x27;]&quot;&gt;
+        &lt;i class&#x3D;&quot;pi pi-users&quot;&gt;&lt;/i&gt;
+        &lt;span&gt;Usuarios&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-area&quot;&gt;
+      &lt;a [routerLink]&#x3D;&quot;[&#x27;/app/area&#x27;]&quot;&gt;
+        &lt;i class&#x3D;&quot;pi pi-globe&quot;&gt;&lt;/i&gt;
+        &lt;span&gt;Area&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+
+    &lt;li *ngxPermissionsOnly&#x3D;&quot;[&#x27;PERFIL_LISTAR&#x27;]&quot; routerLinkActive&#x3D;&quot;active&quot; id&#x3D;&quot;menu-contratos&quot;&gt;
+      &lt;a [routerLink]&#x3D;&quot;[&#x27;/app/contratos&#x27;]&quot;&gt;
+        &lt;i class&#x3D;&quot;pi pi-briefcase&quot;&gt;&lt;/i&gt;
+        &lt;span&gt;Contratos&lt;/span&gt;
+      &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -434,9 +435,9 @@ export class MenuComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="sidebar-menu">    <ul>      <li class="">        <a [routerLink]="[\'\']" class="menuprincipal-a">          <fa-icon [icon]="faHouse"  ></fa-icon>          <span>Dashboard</span>        </a>      </li>      <li class="header-module">        <span>MODULOS</span>      </li>      <li *ngxPermissionsOnly="[\'OT_LISTAR\']" routerLinkActive="active" id="menu-ot" class="titulo-menu">        <div  class="header-menu">          <fa-icon [icon]="faOT" style="    margin-left: -4px;          margin-right: 3px;"></fa-icon>          <span>OT</span>        </div>                <ul class="collapse show list-unstyled" id="otSub">          <li *ngxPermissionsOnly="[\'OT_LISTAR\']"  routerLinkActive="active-item">            <a [routerLink]="[\'/ot\']" class="submenu-a">Listar OTs</a>          </li>          <li *ngxPermissionsOnly="[\'OT_CREAR\']" routerLinkActive="active-item">            <a [routerLink]="[\'/ot/form-ot\']" class="submenu-a">Crear OT</a>          </li>        </ul>      </li>      <li *ngxPermissionsOnly="[\'CUBICACION_LISTAR\']" routerLinkActive="active" id="menu-cubicacion" class="titulo-menu">       <div  class="header-menu">          <fa-icon [icon]="faCub" style="    margin-left: -4px;          margin-right: 3px;"></fa-icon>          <span>Cubicación</span>       </div>        <ul class="collapse list-unstyled" id="cubSub">          <li *ngxPermissionsOnly="[\'CUBICACION_LISTAR\']" routerLinkActive="active-item">            <a [routerLink]="[\'cubicacion\']" class="submenu-a" id="listar-cubicacion-sidebar">Listar Cubicaciones</a>          </li>          <li *ngxPermissionsOnly="[\'CUBICACION_CREAR\']"  routerLinkActive="active-item" id="listarCubSubMenu">            <a [routerLink]="[\'/cubicacion/form-cub\']" class="submenu-a" id="crear-cubicacion-sidebar">Crear Cubicación</a>          </li>        </ul>      </li>      <li class="header-menu" *ngxPermissionsOnly="[\'PERFIL_LISTAR\',\'PERFIL_CREAR\']">        <span>ADMINISTRACION</span>      </li>      <li *ngxPermissionsOnly="[\'PERFIL_LISTAR\',\'PERFIL_CREAR\']" routerLinkActive="active" id="menu-perfil">        <a [routerLink]="[\'/app/profile\']">          <i class="pi pi-id-card"></i>          <span>Perfiles</span>        </a>      </li>      <li *ngxPermissionsOnly="[\'PERFIL_LISTAR\',\'PERFIL_CREAR\']" routerLinkActive="active" id="menu-usuario">        <a [routerLink]="[\'/app/user\']">          <i class="pi pi-users"></i>          <span>Usuarios</span>        </a>      </li>      <li *ngxPermissionsOnly="[\'PERFIL_LISTAR\']" routerLinkActive="active" id="menu-area">        <a [routerLink]="[\'/app/area\']">          <i class="pi pi-globe"></i>          <span>Area</span>        </a>      </li>      <li *ngxPermissionsOnly="[\'PERFIL_LISTAR\']" routerLinkActive="active" id="menu-contratos">        <a [routerLink]="[\'/app/contratos\']">          <i class="pi pi-briefcase"></i>          <span>Contratos</span>        </a>      </li>    </ul>  </div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
-    var DIRECTIVES = [];
+        var COMPONENT_TEMPLATE = '<div><div class="sidebar-menu">  <ul>    <li class="">      <a [routerLink]="[\'\']" class="menuprincipal-a">        <fa-icon [icon]="faHouse"></fa-icon>        <span>Dashboard</span>      </a>    </li>    <li class="header-module">      <span>MODULOS</span>    </li>    <li *ngxPermissionsOnly="[\'OT_LISTAR\']" routerLinkActive="active" id="menu-ot" class="titulo-menu">      <div class="header-menu">        <fa-icon [icon]="faOT" style="    margin-left: -4px;          margin-right: 3px;"></fa-icon>        <span>OT</span>      </div>      <ul class="collapse show list-unstyled" id="otSub">        <li *ngxPermissionsOnly="[\'OT_LISTAR\']" routerLinkActive="active-item">          <a [routerLink]="[\'/ot\']" class="submenu-a" id="listar-ot-sidebar">Listar OTs</a>        </li>        <li *ngxPermissionsOnly="[\'OT_CREAR\']" routerLinkActive="active-item">          <a [routerLink]="[\'/ot/form-ot\']" class="submenu-a" id="crear-ot-sidebar">Crear OT</a>        </li>      </ul>    </li>    <li *ngxPermissionsOnly="[\'CUBICACION_LISTAR\']" routerLinkActive="active" id="menu-cubicacion" class="titulo-menu">      <div class="header-menu">        <fa-icon [icon]="faCub" style="    margin-left: -4px;          margin-right: 3px;"></fa-icon>        <span>Cubicación</span>      </div>      <ul class="collapse list-unstyled" id="cubSub">        <li *ngxPermissionsOnly="[\'CUBICACION_LISTAR\']" routerLinkActive="active-item">          <a [routerLink]="[\'cubicacion\']" class="submenu-a" id="listar-cubicacion-sidebar">Listar Cubicaciones</a>        </li>        <li *ngxPermissionsOnly="[\'CUBICACION_CREAR\']" routerLinkActive="active-item" id="listarCubSubMenu">          <a [routerLink]="[\'/cubicacion/form-cub\']" class="submenu-a" id="crear-cubicacion-sidebar">Crear            Cubicación</a>        </li>      </ul>    </li>    <li class="header-menu" *ngxPermissionsOnly="[\'PERFIL_LISTAR\',\'PERFIL_CREAR\']">      <span>ADMINISTRACION</span>    </li>    <li *ngxPermissionsOnly="[\'PERFIL_LISTAR\',\'PERFIL_CREAR\']" routerLinkActive="active" id="menu-perfil">      <a [routerLink]="[\'/app/profile\']">        <i class="pi pi-id-card"></i>        <span>Perfiles</span>      </a>    </li>    <li *ngxPermissionsOnly="[\'PERFIL_LISTAR\',\'PERFIL_CREAR\']" routerLinkActive="active" id="menu-usuario">      <a [routerLink]="[\'/app/user\']">        <i class="pi pi-users"></i>        <span>Usuarios</span>      </a>    </li>    <li *ngxPermissionsOnly="[\'PERFIL_LISTAR\']" routerLinkActive="active" id="menu-area">      <a [routerLink]="[\'/app/area\']">        <i class="pi pi-globe"></i>        <span>Area</span>      </a>    </li>    <li *ngxPermissionsOnly="[\'PERFIL_LISTAR\']" routerLinkActive="active" id="menu-contratos">      <a [routerLink]="[\'/app/contratos\']">        <i class="pi pi-briefcase"></i>        <span>Contratos</span>      </a>    </li>  </ul></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'MenuComponent'};
 </script>
 <script src="../js/tree.js"></script>

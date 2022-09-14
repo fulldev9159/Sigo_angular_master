@@ -191,6 +191,7 @@ import * as perfilActions from &#x27;@storeOT/perfil/perfil.actions&#x27;;
 import * as usuarioActions from &#x27;@storeOT/usuario/usuario.actions&#x27;;
 import * as cubicacionActions from &#x27;@storeOT/cubicacion/cubicacion.actions&#x27;;
 import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
+import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
 
 interface ActionErr {
   error?: any;
@@ -199,7 +200,7 @@ interface ActionErr {
 
 interface ActionSuccess {
   response?: {
-    data: any;
+    data?: any;
     status: {
       code: number;
       desc: string;
@@ -215,7 +216,8 @@ export class AfterHttpService {
   constructor(
     private router: Router,
     private snackMessage: SnackMessageService,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private cubicacionFacade: CubicacionFacade
   ) {}
 
   errorHandler(action: ActionErr): void {
@@ -280,6 +282,41 @@ export class AfterHttpService {
         6000
       );
       this.router.navigate([&#x27;/cubicacion/list-cub&#x27;]);
+    }
+
+    // EDITAR CUBICACIÓN
+    if (action.type &#x3D;&#x3D;&#x3D; cubicacionActions.editCubicacionSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Cubicación ID:${action.response.data.cubicacion_id} editada con exito&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/cubicacion/list-cub&#x27;]);
+    }
+
+    // CLONAR CUBICACIÓN
+    if (action.type &#x3D;&#x3D;&#x3D; cubicacionActions.clonarCubicacionSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Clonación realizada con éxito. Nueva Cubicación ID:${action.response.data.cubicacion_id}&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.cubicacionFacade.listarCubicaciones();
+    }
+
+    // ELIMINAR CUBICACIÓN
+    if (action.type &#x3D;&#x3D;&#x3D; cubicacionActions.eliminarCubicacionSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Cubicación ID:${action.response.data.cubicacion_id} eliminada con exito&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.cubicacionFacade.listarCubicaciones();
+    }
+
+    // ELIMINAR SERVICIO CARRITO
+    if (action.type &#x3D;&#x3D;&#x3D; cubicacionActions.eliminarServicioCarritoSuccess.type) {
+      this.snackMessage.showMessage(&#x60;Eliminación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
     }
   }
 }
