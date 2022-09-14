@@ -36,6 +36,8 @@ export interface ServicioFromInfomeAvance {
   model_unidad_id: Unidad;
   model_monto_tipo_moneda_id: TipoMoneda;
   model_precio_tipo_moneda_id: TipoMoneda;
+
+  numero_producto: string;
   many_informe_has_uob: UnidadObraFromInformeAvance[];
 }
 

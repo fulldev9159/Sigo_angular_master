@@ -32,6 +32,7 @@ import {
 import { CubicacionFacade } from '@storeOT/index';
 import { ActivatedRoute } from '@angular/router';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { filter } from 'lodash';
 //// import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -41,8 +42,26 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
-  detalleInformeAvance$: Observable<DetalleInformeAvance> =
-    this.otFacade.getDetalleInformeAvance$();
+  detalleInformeAvance$: Observable<DetalleInformeAvance> = this.otFacade
+    .getDetalleInformeAvance$()
+    .pipe(
+      map(detalle => ({
+        ...detalle,
+        many_informe_has_servicio: detalle.many_informe_has_servicio.filter(
+          servicio => servicio.adicional_aceptacion_estado === 'ORIGINAL'
+        ),
+      }))
+    );
+  detalleAdicionales$: Observable<DetalleInformeAvance> = this.otFacade
+    .getDetalleInformeAvance$()
+    .pipe(
+      map(detalle => ({
+        ...detalle,
+        many_informe_has_servicio: detalle.many_informe_has_servicio.filter(
+          servicio => servicio.adicional_aceptacion_estado !== 'ORIGINAL'
+        ),
+      }))
+    );
   updating$: Observable<boolean> =
     this.otFacade.updatingDetalleInformeAvance$();
   otId$: Observable<number> = this.detalleInformeAvance$.pipe(
@@ -224,7 +243,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
               servicio_rowid: servicio.id,
               servicio_cantidad: servicio.cantidad,
 
-              servicio_codigo: servicio.model_servicio_id.codigo,
+              servicio_codigo: servicio.numero_producto,
               servicio_id: servicio.servicio_id,
               servicio_nombre: servicio.model_servicio_id.descripcion,
               servicio_precio_final_clp: servicio.valor_unitario_clp,
