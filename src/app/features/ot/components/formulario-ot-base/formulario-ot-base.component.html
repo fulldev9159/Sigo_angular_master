@@ -23,13 +23,17 @@
                     [loading]="loadingGetCubicacionesContrato$|async"></zwc-pdropdown>
             </div>
             <div class="field  col-12 md:col-6 lg:col-6 xl:col-6">
-                <div class="error-message"
+                <div class="message error-message"
                     *ngIf="(cubicacionesContrato$|async).length===0 && form.get('contrato').value!==null ">
                     <small class="p-error block">
                         No existen cubicaciones creadas con el contrato marco escogido
                     </small>
                 </div>
-
+                <div class="bg-blue-100 text-blue-500 message" *ngIf="form.get('cubicacion_id').value!==null ">
+                    <small class="p-info block">
+                        {{(cubicacionSelected$|async)?.cubicacion_descripcion}}
+                    </small>
+                </div>
             </div>
         </div>
     </div>

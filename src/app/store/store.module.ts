@@ -43,6 +43,11 @@ import { ServiciosEffects } from './servicios/servicios.effects';
 import * as formServiciosReduce from './servicios/servicios.reducers';
 // SERVICIOS STORE
 
+// OT STORE
+import { OTEffects } from './ot/ot.effects';
+import * as formOTReduce from './ot/ot.reducers';
+// OT STORE
+
 @NgModule({
   declarations: [],
   imports: [
@@ -101,6 +106,10 @@ import * as formServiciosReduce from './servicios/servicios.reducers';
       formServiciosReduce.Featurekey,
       formServiciosReduce.reducerServicios
     ),
+
+    // OT STORE
+    EffectsModule.forFeature([OTEffects]),
+    StoreModule.forFeature(formOTReduce.Featurekey, formOTReduce.reducerOT),
     SharedModule,
   ],
 })

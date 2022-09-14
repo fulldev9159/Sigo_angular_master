@@ -1,9 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { CubicacionContrato } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
+import { OTFacade } from '@storeOT/ot/ot.facades';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
-import { map, Observable, Subscription, take, tap } from 'rxjs';
+import { combineLatest, map, Observable, Subscription, take, tap } from 'rxjs';
 interface Dropdown {
   name: string;
   code: number;
@@ -37,10 +39,11 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
       take(1)
     );
 
+  cubicacioneContrato: CubicacionContrato[] = [];
   cubicacionesContrato$: Observable<Dropdown[]> = this.cubicacionFacade
     .getCubicacionesContrato$()
     .pipe(
-      // tap(values => (this.contratosUsuario = values)),
+      tap(values => (this.cubicacioneContrato = values)),
       map(values => {
         let tmp = [...values];
         return tmp.sort((a, b) =>
@@ -54,13 +57,14 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
         }))
       )
     );
-
+  cubicacionSelected$ = this.otFacade.cubicacionSelected$();
   // LOADINGS
   loadingGetCubicacionesContrato$: Observable<boolean> =
     this.loadingFacade.sendingGetCubicacionesContrato$();
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
+    private otFacade: OTFacade,
     private usuarioFacade: UsuarioFacade,
     private loadingFacade: LoadingsFacade
   ) {}
@@ -73,6 +77,17 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
         if (contrato_id !== null && contrato_id !== undefined) {
           this.form.get('cubicacion_id').enable();
           this.cubicacionFacade.getCubicacionesContrato(+contrato_id);
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.form.get('cubicacion_id').valueChanges.subscribe(cubicacion_id => {
+        if (cubicacion_id !== null && cubicacion_id !== undefined) {
+          let cubicacionSelected = this.cubicacioneContrato.filter(
+            value => value.cubicacion_id === +cubicacion_id
+          )[0];
+          this.otFacade.cubicacionSelected(cubicacionSelected);
         }
       })
     );

@@ -16,6 +16,8 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { getCubicacionesContrato } from '@storeOT/cubicacion/cubicacion.selectors';
 import { sendingGetCubicacionesContrato } from '@storeOT/loadings/loadings.selectors';
+import { OTFacade } from '@storeOT/ot/ot.facades';
+import { cubicacionSelected } from '@storeOT/ot/ot.selectors';
 import { getContratosUsuario } from '@storeOT/usuario/ususario.selectors';
 
 import { FormularioOtBaseComponent } from './formulario-ot-base.component';
@@ -28,6 +30,7 @@ describe('FormularioOtBaseComponent', () => {
   let initialState: any = { example: [] };
   let store: MockStore<any>;
   let cubicacionFacade: CubicacionFacade;
+  let otFacade: OTFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -50,6 +53,10 @@ describe('FormularioOtBaseComponent', () => {
               selector: sendingGetCubicacionesContrato,
               value: false,
             },
+            {
+              selector: cubicacionSelected,
+              value: cubicacionContratoMOCK200ok.data.items[0],
+            },
           ],
         }),
       ],
@@ -60,6 +67,7 @@ describe('FormularioOtBaseComponent', () => {
     fixtureTest.detectChanges();
 
     cubicacionFacade = TestBed.inject(CubicacionFacade);
+    otFacade = TestBed.inject(OTFacade);
 
     // fixture = TestBed.createComponent(FormularioOtBaseComponent);
     // component = fixture.componentInstance;
@@ -75,20 +83,34 @@ describe('FormularioOtBaseComponent', () => {
 
   it('Debe llamar al facade getCubicacionesContrato con id 1 al escoger el contrato 1', () => {
     spyOn(cubicacionFacade, 'getCubicacionesContrato');
-    componentTest.form.get('general').get('contrato').setValue(1);
+    componentTest.form.get('base').get('contrato').setValue(1);
     fixtureTest.detectChanges();
     expect(cubicacionFacade.getCubicacionesContrato).toHaveBeenCalledWith(1);
+  });
+
+  it('Debe almacenar la cubicacion escogida en el store usando el facade cubicacionSelected', () => {
+    spyOn(otFacade, 'cubicacionSelected');
+    componentTest.form.get('base').get('cubicacion_id').setValue(1);
+    fixtureTest.detectChanges();
+    expect(otFacade.cubicacionSelected).toHaveBeenCalledWith({
+      cubicacion_id: 1,
+      cubicacion_nombre: 'Testing Cubicacion Precargada NO USAR',
+      cubicacion_descripcion: 'Descripcion Precargada',
+      creador_usuario_nombre: 'JESSICA MOVISTAR CASTILLO 1',
+      tipo_contrato_marco_nombre: 'Bucle',
+      agencia_id: 20,
+    });
   });
 
   @Component({
     selector: `zwc-host-component2`,
     template: `<zwc-formulario-ot-base
-      [form]="form.get('general')"
+      [form]="form.get('base')"
     ></zwc-formulario-ot-base>`,
   })
   class TestComponent {
     form: FormGroup = new FormGroup({
-      general: new FormGroup({
+      base: new FormGroup({
         nombre: new FormControl('', [
           Validators.required,
           // this.noWhitespace,

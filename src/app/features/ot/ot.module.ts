@@ -8,6 +8,7 @@ import { ListOtContainerComponent } from './containers/list-ot-container/list-ot
 import { SharedModule } from '@sharedOT/shared.module';
 import { FormularioOtBaseComponent } from './components/formulario-ot-base/formulario-ot-base.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormularioOtBucleComponent } from './components/formulario-ot-bucle/formulario-ot-bucle.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormOtContainerComponent,
     ListOtContainerComponent,
     FormularioOtBaseComponent,
+    FormularioOtBucleComponent,
   ],
   imports: [
     CommonModule,

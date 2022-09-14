@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'zwc-form-ot-container',
   templateUrl: './form-ot-container.component.html',
   styleUrls: ['./form-ot-container.component.scss'],
 })
-export class FormOtContainerComponent implements OnInit {
+export class FormOtContainerComponent implements OnInit, OnDestroy {
+  subscription: Subscription = new Subscription();
+
   navbarHeader: MenuItem[];
+
+  contractType$ = new BehaviorSubject<string>('');
 
   form: FormGroup = new FormGroup({
     base: new FormGroup({
@@ -34,5 +39,9 @@ export class FormOtContainerComponent implements OnInit {
       },
       { label: 'Formulario OT', styleClass: 'last-route' },
     ];
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
