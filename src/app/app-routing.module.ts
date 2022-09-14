@@ -23,7 +23,11 @@ const routes: Routes = [
       ),
     canLoad: [SigoGuard],
   },
-  { path: 'ot', loadChildren: () => import('./features/ot/ot.module').then(m => m.OtModule) },
+  {
+    path: 'ot',
+    loadChildren: () => import('./features/ot/ot.module').then(m => m.OtModule),
+    canLoad: [SigoGuard],
+  },
 ];
 
 @NgModule({
