@@ -15,7 +15,6 @@ describe('Visibilidad e Interacción Inicial', () => {
   it('Debe desplegar el formulario base', () => {
     cy.get('input[name="input-nombre-ot"]').should('be.enabled');
     cy._check_input('input[name="input-nombre-ot"]', 'required');
-
     cy._check_dropdown_required('#select-contrato_marco');
   });
 
@@ -25,20 +24,7 @@ describe('Visibilidad e Interacción Inicial', () => {
 
   let selector = '#select-cubicacion';
 
-  it(`should display dropdown cubicaciones as required`, () => {
-    cy.intercept('POST', '/ot/cubicaciones_from_contrato/get').as(
-      'HTTPRESPONSE-CUBICACIONES'
-    );
-    cy.get('#select-contrato_marco')
-      .click()
-      .contains('ul li > span', 'BUCLE')
-      .click();
-    cy.wait('@HTTPRESPONSE-CUBICACIONES').then(() => {
-      cy._check_dropdown_required(selector);
-    });
-  });
-
-  it(`dropdown cubicaciones should display data`, () => {
+  it(`should display dropdown cubicaciones as required and with data`, () => {
     let datos = cubicacionContratoMOCK200ok.data.items
       .sort((a, b) =>
         a.cubicacion_nombre > b.cubicacion_nombre
@@ -48,11 +34,14 @@ describe('Visibilidad e Interacción Inicial', () => {
           : 0
       )
       .map(value => value.cubicacion_nombre);
-    cy.get(selector).click();
-    cy.get('li.p-ripple').each(($el, index, $list) => {
-      expect($el.text()).eq(datos[index]);
-    });
-    cy.get(selector).click();
+
+    cy._check_dropdown_async(
+      '/ot/cubicaciones_from_contrato/get',
+      '#select-contrato_marco',
+      'BUCLE',
+      '#select-cubicacion',
+      datos
+    );
   });
 
   it('Escoger un contrato sin cubicacion debe indicar un mensaje', () => {
@@ -82,13 +71,9 @@ describe('Visibilidad e Interacción Inicial', () => {
     );
 
     cy.wait(450);
-    cy._check_dropdown_required('#select-oficina-central');
     let datos = CentralesMOCK200ok.data.items
       .sort((a, b) => (a.idafac > b.idafac ? 1 : b.idafac > a.idafac ? -1 : 0))
       .map(value => `${value.idafac} - ${value.descripcion}`);
-    cy.get('#select-oficina-central').click();
-    cy.get('li.p-ripple').each(($el, index, $list) => {
-      expect($el.text()).eq(datos[index]);
-    });
+    cy._check_dropdown('#select-oficina-central', datos);
   });
 });

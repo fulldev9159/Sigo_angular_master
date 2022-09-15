@@ -101,6 +101,14 @@ declare namespace Cypress {
     ): void;
     _check_table_servicio_input(data: DATA_TABLE): void;
     _check_table_servicio_view(data: DATA_TABLE): void;
+    _check_dropdown_async(
+      url: string,
+      first_selector: string,
+      seleccion: string,
+      second_selector: string,
+      datos: any
+    ): void;
+    _check_dropdown(selector: string, datos: any): void;
   }
 }
 Cypress.Commands.add('_login', (username, password) => {
@@ -483,4 +491,37 @@ Cypress.Commands.add('_check_table_servicio_view', data => {
   cy.get('td[class="total-servicio-monto"]').contains(data.totalServicios);
   cy.get('td[class="total-uo-monto"]').contains(data.totalUOs);
   cy.get('td[class="total-cubicacion-monto"]').contains(data.total);
+});
+
+Cypress.Commands.add(
+  '_check_dropdown_async',
+  (
+    url: string,
+    first_selector: string,
+    seleccion: string,
+    second_selector: string,
+    datos: any
+  ) => {
+    cy.intercept('POST', url).as('HTTPRESPONSE');
+    cy._select_dropdown(first_selector, seleccion);
+
+    cy.wait('@HTTPRESPONSE').then(() => {
+      cy._check_dropdown_required(second_selector);
+      cy.get(second_selector).click();
+      cy.get('li.p-ripple').each(($el, index, $list) => {
+        expect($el.text()).eq(datos[index]);
+      });
+      cy.get(second_selector).click();
+    });
+  }
+);
+
+Cypress.Commands.add('_check_dropdown', (selector: string, datos: any) => {
+  cy._check_dropdown_required(selector);
+
+  cy.get(selector).click();
+  cy.get('li.p-ripple').each(($el, index, $list) => {
+    expect($el.text()).eq(datos[index]);
+  });
+  cy.get(selector).click();
 });
