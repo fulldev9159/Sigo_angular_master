@@ -4,6 +4,7 @@ import {
   OficinaCentral,
   Response,
   SolicitadoPor,
+  TipoDeRed,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
 
@@ -49,5 +50,16 @@ export const getComunasFromCubSuccess = createAction(
 );
 export const getComunasFromCublError = createAction(
   '[OT] getComunasFromCub Error',
+  props<{ error: any }>()
+);
+
+// CREATE OT CONTRATO BUCLE : GET TIPO DE RED
+export const getTipoDeRed = createAction('[OT] getTipoDeRed ');
+export const getTipoDeRedSuccess = createAction(
+  '[OT] getTipoDeRed Success',
+  props<{ response: Response<{ items: TipoDeRed[] }> }>()
+);
+export const getTipoDeRedError = createAction(
+  '[OT] getTipoDeRed Error',
   props<{ error: any }>()
 );

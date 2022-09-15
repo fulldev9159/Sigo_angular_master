@@ -1,4 +1,10 @@
-import { Comuna, OficinaCentral, Response, SolicitadoPor } from '@model';
+import {
+  Comuna,
+  OficinaCentral,
+  Response,
+  SolicitadoPor,
+  TipoDeRed,
+} from '@model';
 
 export let CentralesMOCK200ok: Response<{ items: OficinaCentral[] }> = {
   status: { code: 0, desc: '' },
@@ -296,6 +302,18 @@ export let ComunasMOCK200ok: Response<{ items: Comuna[] }> = {
       { comuna_id: 344, comuna_nombre: 'Isla de Maipo' },
       { comuna_id: 345, comuna_nombre: 'Padre Hurtado' },
       { comuna_id: 346, comuna_nombre: 'Peñaflor' },
+    ],
+  },
+};
+
+export let TipoRedMOCK200ok: Response<{ items: TipoDeRed[] }> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    items: [
+      { id: 1, descripcion: 'Cobre', estado: true },
+      { id: 2, descripcion: 'Fibra Optica', estado: true },
+      { id: 3, descripcion: 'ATP', estado: true },
+      { id: 4, descripcion: 'INFRACO', estado: true },
     ],
   },
 };

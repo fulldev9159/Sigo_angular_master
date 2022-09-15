@@ -20,3 +20,10 @@ export interface Comuna {
   comuna_id: number;
   comuna_nombre: string;
 }
+
+// GET TIPO DE RED
+export interface TipoDeRed {
+  descripcion: string;
+  estado: boolean;
+  id: number;
+}

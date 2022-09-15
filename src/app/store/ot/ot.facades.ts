@@ -14,6 +14,7 @@ import {
   Response,
   SolicitadoPor,
   TipoCubicacion,
+  TipoDeRed,
 } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -60,5 +61,14 @@ export class OTFacade {
 
   public getComunasFromCub$(): Observable<Comuna[]> {
     return this.store.select(otSelectors.getComunasFromCub);
+  }
+
+  // CREATE OT CONTRATO BUCLE : GET TIPO DE RED
+  public getTipoDeRed(): void {
+    this.store.dispatch(otActions.getTipoDeRed());
+  }
+
+  public getTipoDeRed$(): Observable<TipoDeRed[]> {
+    return this.store.select(otSelectors.getTipoDeRed);
   }
 }

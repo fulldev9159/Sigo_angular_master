@@ -4,6 +4,7 @@ import {
   CubicacionContrato,
   OficinaCentral,
   SolicitadoPor,
+  TipoDeRed,
 } from '@model';
 import * as OTActions from './ot.actions';
 
@@ -14,6 +15,7 @@ export interface StateOT {
   oficinaCentral: OficinaCentral[];
   solicitadoPor: SolicitadoPor[];
   comunas: Comuna[];
+  tipoDeRed: TipoDeRed[];
 }
 
 export const initialState: StateOT = {
@@ -21,6 +23,7 @@ export const initialState: StateOT = {
   oficinaCentral: [],
   solicitadoPor: [],
   comunas: [],
+  tipoDeRed: [],
 };
 
 export const reducerOT = createReducer(
@@ -40,5 +43,9 @@ export const reducerOT = createReducer(
   on(OTActions.getComunasFromCubSuccess, (state, { response }) => ({
     ...state,
     comunas: response.data.items,
+  })),
+  on(OTActions.getTipoDeRedSuccess, (state, { response }) => ({
+    ...state,
+    tipoDeRed: response.data.items,
   }))
 );

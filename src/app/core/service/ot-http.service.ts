@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { Comuna, OficinaCentral, Response, SolicitadoPor } from '@model';
+import {
+  Comuna,
+  OficinaCentral,
+  Response,
+  SolicitadoPor,
+  TipoDeRed,
+} from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -35,6 +41,13 @@ export class OtHttpService {
     return this.http.post<Response<{ items: Comuna[] }>>(
       `${this.API_URL}/ot/get_comunas_from_cubicacion/get`,
       { cubicacion_id }
+    );
+  }
+
+  getTipoDeRed(): Observable<Response<{ items: TipoDeRed[] }>> {
+    return this.http.post<Response<{ items: TipoDeRed[] }>>(
+      `${this.API_URL}/ot/tipo_red/getall`,
+      {}
     );
   }
 }

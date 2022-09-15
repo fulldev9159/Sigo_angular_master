@@ -112,4 +112,9 @@ export class LoadingsFacade {
   public sendingGetComunasFromCub$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetComunasFromCub);
   }
+
+  // TIPO DE RED
+  public sendingGetTipoDeRed$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetTipoDeRed);
+  }
 }

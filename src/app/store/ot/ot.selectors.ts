@@ -24,3 +24,8 @@ export const getComunasFromCub = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.comunas
 );
+
+export const getTipoDeRed = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.tipoDeRed
+);

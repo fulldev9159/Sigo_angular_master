@@ -58,6 +58,18 @@ export class FormularioOtBucleComponent implements OnInit, OnDestroy {
         }))
       )
     );
+  tipoDeRed$: Observable<Dropdown[]> = this.otFacade.getTipoDeRed$().pipe(
+    map(values => {
+      let tmp = [...values];
+      return tmp.sort((a, b) => (a.descripcion > b.descripcion ? 1 : -1));
+    }),
+    map(values =>
+      values.map(value => ({
+        name: value.descripcion,
+        code: value.id,
+      }))
+    )
+  );
 
   // LOADINGS
   loadingOficinaCentral$: Observable<boolean> =
@@ -66,6 +78,8 @@ export class FormularioOtBucleComponent implements OnInit, OnDestroy {
     this.loadingsFacade.sendingGetSolicitadoPor$();
   loadingComunasFromCub$: Observable<boolean> =
     this.loadingsFacade.sendingGetComunasFromCub$();
+  loadingTipoDeRed$: Observable<boolean> =
+    this.loadingsFacade.sendingGetTipoDeRed$();
 
   constructor(
     private otFacade: OTFacade,
@@ -79,6 +93,7 @@ export class FormularioOtBucleComponent implements OnInit, OnDestroy {
           this.otFacade.getOficinaCentral(cubicacionSelected.agencia_id);
           this.otFacade.getSolicitadoPor();
           this.otFacade.getComunasFromCub(cubicacionSelected.cubicacion_id);
+          this.otFacade.getTipoDeRed();
         }
       })
     );

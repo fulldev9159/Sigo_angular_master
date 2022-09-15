@@ -99,3 +99,8 @@ export const sendingGetComunasFromCub = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetComunasFromCub
 );
+
+export const sendingGetTipoDeRed = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetTipoDeRed
+);

@@ -52,6 +52,19 @@ export class OTEffects {
     )
   );
 
+  // CREATE OT CONTRATO BUCLE : GET TIPO DE RED
+  getTipoDeRed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeRed),
+      concatMap(() =>
+        this.otHttpService.getTipoDeRed().pipe(
+          map(response => otActions.getTipoDeRedSuccess({ response })),
+          catchError(error => of(otActions.getTipoDeRedError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(

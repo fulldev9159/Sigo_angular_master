@@ -3,6 +3,7 @@ import {
   ComunasMOCK200ok,
   cubicacionContratoMOCK200ok,
   SolicitadoPorMOCK200ok,
+  TipoRedMOCK200ok,
 } from '@mocksOT';
 
 beforeEach(() => {
@@ -114,6 +115,19 @@ describe('Visibilidad e Interacción Inicial', () => {
             : 0
         )
         .map(value => value.comuna_nombre)
+    );
+
+    cy._check_dropdown(
+      '#select-tipo-red',
+      TipoRedMOCK200ok.data.items
+        .sort((a, b) =>
+          a.descripcion > b.descripcion
+            ? 1
+            : b.descripcion > a.descripcion
+            ? -1
+            : 0
+        )
+        .map(value => value.descripcion)
     );
   });
 });
