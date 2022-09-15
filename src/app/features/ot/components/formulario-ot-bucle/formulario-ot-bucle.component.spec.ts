@@ -12,6 +12,7 @@ import {
   ComunasMOCK200ok,
   cubicacionContratoMOCK200ok,
   SolicitadoPorMOCK200ok,
+  TipoRedMOCK200ok,
 } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -20,6 +21,7 @@ import {
   sendingGetComunasFromCub,
   sendingGetOficinaCentral,
   sendingGetSolicitadoPor,
+  sendingGetTipoDeRed,
 } from '@storeOT/loadings/loadings.selectors';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import {
@@ -27,6 +29,7 @@ import {
   getComunasFromCub,
   getOficinaCentral,
   getSolicitadoPor,
+  getTipoDeRed,
 } from '@storeOT/ot/ot.selectors';
 
 import { FormularioOtBucleComponent } from './formulario-ot-bucle.component';
@@ -74,6 +77,14 @@ describe('FormularioOtBucleComponent', () => {
             },
             {
               selector: sendingGetComunasFromCub,
+              value: false,
+            },
+            {
+              selector: getTipoDeRed,
+              value: TipoRedMOCK200ok.data.items,
+            },
+            {
+              selector: sendingGetTipoDeRed,
               value: false,
             },
           ],
