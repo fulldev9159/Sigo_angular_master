@@ -157,5 +157,6 @@ describe('Visibilidad e Interacción Inicial', () => {
         )
         .map(value => value.descripcion)
     );
+    cy._check_input('input[name="input-nombre-proyectista"]', 'required');
   });
 });
