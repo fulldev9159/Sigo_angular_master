@@ -77,6 +77,7 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
         if (contrato_id !== null && contrato_id !== undefined) {
           this.form.get('cubicacion_id').enable();
           this.cubicacionFacade.getCubicacionesContrato(+contrato_id);
+          this.otFacade.cubicacionSelected(null);
         }
       })
     );

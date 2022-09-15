@@ -109,6 +109,13 @@ declare namespace Cypress {
       datos: any
     ): void;
     _check_dropdown(selector: string, datos: any): void;
+    _select_dropdown_async(
+      url: string,
+      first_selector: string,
+      first_seleccion: string,
+      second_selector: string,
+      second_seleccion: string
+    ): void;
   }
 }
 Cypress.Commands.add('_login', (username, password) => {
@@ -525,3 +532,22 @@ Cypress.Commands.add('_check_dropdown', (selector: string, datos: any) => {
   });
   cy.get(selector).click();
 });
+
+Cypress.Commands.add(
+  '_select_dropdown_async',
+  (
+    url: string,
+    first_selector: string,
+    first_seleccion: string,
+    second_selector: string,
+    second_seleccion: string
+  ) => {
+    cy.intercept('POST', url).as('HTTPRESPONSE');
+    cy._select_dropdown(first_selector, first_seleccion);
+    cy.get(first_selector).click();
+    cy.wait('@HTTPRESPONSE').then(() => {
+      cy._select_dropdown(second_selector, second_seleccion);
+      cy.get(second_selector).click();
+    });
+  }
+);

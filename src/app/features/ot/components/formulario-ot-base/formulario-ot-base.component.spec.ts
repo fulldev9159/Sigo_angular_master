@@ -81,11 +81,13 @@ describe('FormularioOtBaseComponent', () => {
     // expect(component).toBeTruthy();
   });
 
-  it('Debe llamar al facade getCubicacionesContrato con id 1 al escoger el contrato 1', () => {
+  it('Debe llamar al facade getCubicacionesContrato con id 1 al escoger el contrato 1 y resetear cubicacionSelected', () => {
     spyOn(cubicacionFacade, 'getCubicacionesContrato');
+    spyOn(otFacade, 'cubicacionSelected');
     componentTest.form.get('base').get('contrato').setValue(1);
     fixtureTest.detectChanges();
     expect(cubicacionFacade.getCubicacionesContrato).toHaveBeenCalledWith(1);
+    expect(otFacade.cubicacionSelected).toHaveBeenCalledWith(null);
   });
 
   it('Debe almacenar la cubicacion escogida en el store usando el facade cubicacionSelected', () => {

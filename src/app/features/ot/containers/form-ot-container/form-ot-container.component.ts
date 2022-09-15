@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
@@ -6,6 +11,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'zwc-form-ot-container',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './form-ot-container.component.html',
   styleUrls: ['./form-ot-container.component.scss'],
 })
@@ -63,6 +69,24 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         Validators.maxLength(255),
       ]),
       nombre_proyectista: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+    }),
+    ordinario: new FormGroup({
+      carta_adjudicacion: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      fecha_adjudicacion: new FormControl(null, [Validators.required]),
+      numero_pedido: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      materia: new FormControl(null, [
         Validators.required,
         // this.noWhitespace,
         Validators.maxLength(255),

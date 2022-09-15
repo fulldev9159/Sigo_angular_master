@@ -12,6 +12,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { TooltipModule } from 'primeng/tooltip';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { TooltipModule } from 'primeng/tooltip';
     TableModule,
     DialogModule,
     TooltipModule,
+    CalendarModule,
   ],
   exports: [
     InputTextModule,
@@ -43,6 +45,7 @@ import { TooltipModule } from 'primeng/tooltip';
     TableModule,
     DialogModule,
     TooltipModule,
+    CalendarModule,
   ],
 })
 export class PrimeNgModule {}
