@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { CentralesMOCK200ok } from 'src/mocks/ot';
+import { CentralesMOCK200ok, SolicitadoPorMOCK200ok } from 'src/mocks/ot';
 
 import { OtHttpService } from './ot-http.service';
 
@@ -28,6 +28,17 @@ describe('OtHttpService', () => {
     service.getOficinaCentral(1).subscribe({
       next: response => {
         expect(response).toEqual(CentralesMOCK200ok);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call getSolicitadoPor and return  Data', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(SolicitadoPorMOCK200ok));
+    service.getSolicitadoPor().subscribe({
+      next: response => {
+        expect(response).toEqual(SolicitadoPorMOCK200ok);
         done();
       },
       error: done.fail,

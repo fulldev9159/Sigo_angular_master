@@ -15,9 +15,7 @@ export class FormularioOtBucleComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
 
   // DATA
-  // cubicacionSelected: CubicacionContrato;
   cubicacionSelected$ = this.otFacade.cubicacionSelected$();
-  // .pipe(tap(values => (this.cubicacionSelected = values)));
   oficinasCentrales$: Observable<Dropdown[]> = this.otFacade
     .getOficinaCentral$()
     .pipe(
@@ -32,10 +30,26 @@ export class FormularioOtBucleComponent implements OnInit, OnDestroy {
         }))
       )
     );
+  solicitadoPor$: Observable<Dropdown[]> = this.otFacade
+    .getSolicitadoPor$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.descripcion > b.descripcion ? 1 : -1));
+      }),
+      map(values =>
+        values.map(value => ({
+          name: value.descripcion,
+          code: value.id,
+        }))
+      )
+    );
 
   // LOADINGS
   loadingOficinaCentral$: Observable<boolean> =
     this.loadingsFacade.sendingGetOficinaCentral$();
+  loadingSolicitadoPor$: Observable<boolean> =
+    this.loadingsFacade.sendingGetSolicitadoPor$();
 
   constructor(
     private otFacade: OTFacade,
@@ -47,6 +61,7 @@ export class FormularioOtBucleComponent implements OnInit, OnDestroy {
       this.cubicacionSelected$.subscribe(cubicacionSelected => {
         if (cubicacionSelected) {
           this.otFacade.getOficinaCentral(cubicacionSelected.agencia_id);
+          this.otFacade.getSolicitadoPor();
         }
       })
     );

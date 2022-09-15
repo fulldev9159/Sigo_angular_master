@@ -26,10 +26,25 @@ export class OTEffects {
     )
   );
 
+  // CREATE OT CONTRATO BUCLE : SOLICITADO POR
+  getSolicitadoPor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getSolicitadoPor),
+      concatMap(() =>
+        this.otHttpService.getSolicitadoPor().pipe(
+          map(response => otActions.getSolicitadoPorSuccess({ response })),
+          catchError(error => of(otActions.getSolicitadoPorError({ error })))
+        )
+      )
+    )
+  );
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.getOficinaCentralSuccess),
+        ofType(
+          otActions.getOficinaCentralSuccess,
+          otActions.getSolicitadoPorSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -38,7 +53,10 @@ export class OTEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.getOficinaCentralError),
+        ofType(
+          otActions.getOficinaCentralError,
+          otActions.getSolicitadoPorError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

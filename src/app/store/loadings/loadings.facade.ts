@@ -102,4 +102,9 @@ export class LoadingsFacade {
   public sendingGetOficinaCentral$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetOficinaCentral);
   }
+
+  // SOLICITADO POR
+  public sendingGetSolicitadoPor$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetSolicitadoPor);
+  }
 }

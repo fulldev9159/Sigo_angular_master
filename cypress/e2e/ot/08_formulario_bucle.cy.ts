@@ -1,4 +1,8 @@
-import { CentralesMOCK200ok, cubicacionContratoMOCK200ok } from '@mocksOT';
+import {
+  CentralesMOCK200ok,
+  cubicacionContratoMOCK200ok,
+  SolicitadoPorMOCK200ok,
+} from '@mocksOT';
 
 beforeEach(() => {
   cy.viewport(1500, 1700);
@@ -71,9 +75,26 @@ describe('Visibilidad e Interacción Inicial', () => {
     );
 
     cy.wait(450);
-    let datos = CentralesMOCK200ok.data.items
-      .sort((a, b) => (a.idafac > b.idafac ? 1 : b.idafac > a.idafac ? -1 : 0))
-      .map(value => `${value.idafac} - ${value.descripcion}`);
-    cy._check_dropdown('#select-oficina-central', datos);
+    cy._check_dropdown(
+      '#select-oficina-central',
+      CentralesMOCK200ok.data.items
+        .sort((a, b) =>
+          a.idafac > b.idafac ? 1 : b.idafac > a.idafac ? -1 : 0
+        )
+        .map(value => `${value.idafac} - ${value.descripcion}`)
+    );
+
+    cy._check_dropdown(
+      '#select-solicitado-por',
+      SolicitadoPorMOCK200ok.data.items
+        .sort((a, b) =>
+          a.descripcion > b.descripcion
+            ? 1
+            : b.descripcion > a.descripcion
+            ? -1
+            : 0
+        )
+        .map(value => value.descripcion)
+    );
   });
 });

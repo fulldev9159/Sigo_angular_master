@@ -7,7 +7,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CentralesMOCK200ok, cubicacionContratoMOCK200ok } from '@mocksOT';
+import {
+  CentralesMOCK200ok,
+  cubicacionContratoMOCK200ok,
+  SolicitadoPorMOCK200ok,
+} from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
@@ -16,6 +20,7 @@ import { OTFacade } from '@storeOT/ot/ot.facades';
 import {
   cubicacionSelected,
   getOficinaCentral,
+  getSolicitadoPor,
 } from '@storeOT/ot/ot.selectors';
 
 import { FormularioOtBucleComponent } from './formulario-ot-bucle.component';
@@ -48,6 +53,10 @@ describe('FormularioOtBucleComponent', () => {
             {
               selector: getOficinaCentral,
               value: CentralesMOCK200ok.data.items,
+            },
+            {
+              selector: getSolicitadoPor,
+              value: SolicitadoPorMOCK200ok.data.items,
             },
           ],
         }),

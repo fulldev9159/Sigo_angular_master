@@ -1,4 +1,4 @@
-import { OficinaCentral, Response } from '@model';
+import { OficinaCentral, Response, SolicitadoPor } from '@model';
 
 export let CentralesMOCK200ok: Response<{ items: OficinaCentral[] }> = {
   status: { code: 0, desc: '' },
@@ -212,6 +212,30 @@ export let CentralesMOCK200ok: Response<{ items: OficinaCentral[] }> = {
           estado: true,
         },
       },
+    ],
+  },
+};
+
+export let SolicitadoPorMOCK200ok: Response<{ items: SolicitadoPor[] }> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    items: [
+      { id: 1, descripcion: 'Telefonica Empresa' },
+      { id: 2, descripcion: 'MOP' },
+      { id: 3, descripcion: 'Servicio de Red' },
+      { id: 4, descripcion: 'Telefonica Movil' },
+      { id: 5, descripcion: 'Particulares' },
+      { id: 6, descripcion: 'PYMES' },
+      { id: 7, descripcion: 'Proyectos Complejos' },
+      { id: 8, descripcion: 'MARKETING' },
+      { id: 9, descripcion: 'Negocio Inmobiliario' },
+      { id: 10, descripcion: 'AREA IRT' },
+      { id: 11, descripcion: 'ATC' },
+      { id: 12, descripcion: 'SERVIU' },
+      { id: 13, descripcion: 'Municipalidad' },
+      { id: 14, descripcion: 'INFRACO' },
+      { id: 15, descripcion: 'INVENTARIO' },
+      { id: 16, descripcion: 'SOLICITUD ESPECIAL' },
     ],
   },
 };

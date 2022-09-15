@@ -14,3 +14,8 @@ export const getOficinaCentral = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.oficinaCentral
 );
+
+export const getSolicitadoPor = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.solicitadoPor
+);
