@@ -7,12 +7,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { cubicacionContratoMOCK200ok } from '@mocksOT';
+import { CentralesMOCK200ok, cubicacionContratoMOCK200ok } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { sendingGetOficinaCentral } from '@storeOT/loadings/loadings.selectors';
 import { OTFacade } from '@storeOT/ot/ot.facades';
-import { cubicacionSelected } from '@storeOT/ot/ot.selectors';
+import {
+  cubicacionSelected,
+  getOficinaCentral,
+} from '@storeOT/ot/ot.selectors';
 
 import { FormularioOtBucleComponent } from './formulario-ot-bucle.component';
 
@@ -28,7 +32,7 @@ describe('FormularioOtBucleComponent', () => {
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [StoreModule.forRoot({}), FormsModule, ReactiveFormsModule],
-      declarations: [FormularioOtBucleComponent],
+      declarations: [FormularioOtBucleComponent, TestComponent],
       providers: [
         provideMockStore({
           initialState,
@@ -36,6 +40,14 @@ describe('FormularioOtBucleComponent', () => {
             {
               selector: cubicacionSelected,
               value: cubicacionContratoMOCK200ok.data.items[0],
+            },
+            {
+              selector: sendingGetOficinaCentral,
+              value: false,
+            },
+            {
+              selector: getOficinaCentral,
+              value: CentralesMOCK200ok.data.items,
             },
           ],
         }),
