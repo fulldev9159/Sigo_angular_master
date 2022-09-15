@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import {
+  AreaDeNegocio,
   Comuna,
   OficinaCentral,
   Response,
@@ -58,6 +59,13 @@ export class OtHttpService {
     return this.http.post<Response<{ items: TipoDeTrabajo[] }>>(
       `${this.API_URL}/ot/get_tipo_trabajo_from_tipo_cubicacion/get`,
       { cubicacion_id }
+    );
+  }
+
+  getAreaDeNegocio(): Observable<Response<{ items: AreaDeNegocio[] }>> {
+    return this.http.post<Response<{ items: AreaDeNegocio[] }>>(
+      `${this.API_URL}/ot/ot_area_negocio/getall`,
+      {}
     );
   }
 }

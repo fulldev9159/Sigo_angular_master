@@ -1,4 +1,5 @@
 import {
+  AreaNegocioMOCK200ok,
   CentralesMOCK200ok,
   ComunasMOCK200ok,
   cubicacionContratoMOCK200ok,
@@ -142,6 +143,19 @@ describe('Visibilidad e Interacción Inicial', () => {
             : 0
         )
         .map(value => value.tipo_trabajo_descripcion)
+    );
+
+    cy._check_dropdown(
+      '#select-area-negocio',
+      AreaNegocioMOCK200ok.data.items
+        .sort((a, b) =>
+          a.descripcion > b.descripcion
+            ? 1
+            : b.descripcion > a.descripcion
+            ? -1
+            : 0
+        )
+        .map(value => value.descripcion)
     );
   });
 });

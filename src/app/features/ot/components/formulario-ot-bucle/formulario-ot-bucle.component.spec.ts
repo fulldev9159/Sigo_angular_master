@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import {
+  AreaNegocioMOCK200ok,
   CentralesMOCK200ok,
   ComunasMOCK200ok,
   cubicacionContratoMOCK200ok,
@@ -19,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import {
+  sendingGetAreaDeNegocio,
   sendingGetComunasFromCub,
   sendingGetOficinaCentral,
   sendingGetSolicitadoPor,
@@ -28,6 +30,7 @@ import {
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import {
   cubicacionSelected,
+  getAreaDeNegocio,
   getComunasFromCub,
   getOficinaCentral,
   getSolicitadoPor,
@@ -96,6 +99,14 @@ describe('FormularioOtBucleComponent', () => {
             },
             {
               selector: sendingGetTipoDeTrabajoFromCub,
+              value: false,
+            },
+            {
+              selector: getAreaDeNegocio,
+              value: AreaNegocioMOCK200ok.data.items,
+            },
+            {
+              selector: sendingGetAreaDeNegocio,
               value: false,
             },
           ],

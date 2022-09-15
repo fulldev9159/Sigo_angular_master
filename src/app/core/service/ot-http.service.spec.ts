@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import {
+  AreaNegocioMOCK200ok,
   CentralesMOCK200ok,
   ComunasMOCK200ok,
   SolicitadoPorMOCK200ok,
@@ -78,6 +79,17 @@ describe('OtHttpService', () => {
     service.getTipoDeTrabajoFromCub(1).subscribe({
       next: response => {
         expect(response).toEqual(TipoDeTrabajoMOCK200ok);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call getAreaDeNegocio and return  Data', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(AreaNegocioMOCK200ok));
+    service.getAreaDeNegocio().subscribe({
+      next: response => {
+        expect(response).toEqual(AreaNegocioMOCK200ok);
         done();
       },
       error: done.fail,

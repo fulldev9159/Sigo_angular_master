@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   AgenciaContrato,
+  AreaDeNegocio,
   Comuna,
   ContratosUser,
   Cubicacion,
@@ -80,5 +81,14 @@ export class OTFacade {
 
   public getTipoDeTrabajoFromCub$(): Observable<TipoDeTrabajo[]> {
     return this.store.select(otSelectors.getTipoDeTrabajoFromCub);
+  }
+
+  // CREATE OT CONTRATO BUCLE : GET AREA DE NEGOCIO
+  public getAreaDeNegocio(): void {
+    this.store.dispatch(otActions.getAreaDeNegocio());
+  }
+
+  public getAreaDeNegocio$(): Observable<AreaDeNegocio[]> {
+    return this.store.select(otSelectors.getAreaDeNegocio);
   }
 }

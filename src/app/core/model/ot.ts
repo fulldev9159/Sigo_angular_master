@@ -34,3 +34,9 @@ export interface TipoDeTrabajo {
   tipo_trabajo_descripcion: string;
   tipo_trabajo_id: number;
 }
+
+// GET AREA DE NEGOCIO
+export interface AreaDeNegocio {
+  descripcion: string;
+  id: number;
+}

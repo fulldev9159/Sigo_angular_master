@@ -1,4 +1,5 @@
 import {
+  AreaDeNegocio,
   Comuna,
   OficinaCentral,
   Response,
@@ -343,6 +344,16 @@ export let TipoDeTrabajoMOCK200ok: Response<{ items: TipoDeTrabajo[] }> = {
         tipo_trabajo_codigo: 'VYAS',
         tipo_trabajo_descripcion: 'VYAS-VPN',
       },
+    ],
+  },
+};
+
+export let AreaNegocioMOCK200ok: Response<{ items: AreaDeNegocio[] }> = {
+  status: { code: 0, desc: '' },
+  data: {
+    items: [
+      { id: 1, descripcion: 'NORMAL' },
+      { id: 2, descripcion: 'PREMIUM' },
     ],
   },
 };

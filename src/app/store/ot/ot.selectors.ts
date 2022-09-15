@@ -34,3 +34,8 @@ export const getTipoDeTrabajoFromCub = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.tipoDeTrabajoFromCub
 );
+
+export const getAreaDeNegocio = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.areaDeNegocio
+);

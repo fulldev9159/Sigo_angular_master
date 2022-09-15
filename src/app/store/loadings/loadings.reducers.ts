@@ -32,6 +32,7 @@ export interface StateLoadings {
   sendingGetComunasFromCub: boolean;
   sendingGetTipoDeRed: boolean;
   sendingGetTipoDeTrabajoFromCub: boolean;
+  sendingGetAreaDeNegocio: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -56,6 +57,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetComunasFromCub: false,
   sendingGetTipoDeRed: false,
   sendingGetTipoDeTrabajoFromCub: false,
+  sendingGetAreaDeNegocio: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -311,6 +313,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetTipoDeTrabajoFromCub: false,
+    })
+  ),
+
+  on(otActions.getAreaDeNegocio, state => ({
+    ...state,
+    sendingGetAreaDeNegocio: true,
+  })),
+  on(
+    otActions.getAreaDeNegocioSuccess,
+    otActions.getAreaDeNegocioError,
+    state => ({
+      ...state,
+      sendingGetAreaDeNegocio: false,
     })
   )
 );

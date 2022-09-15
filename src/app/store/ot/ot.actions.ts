@@ -1,4 +1,5 @@
 import {
+  AreaDeNegocio,
   Comuna,
   CubicacionContrato,
   OficinaCentral,
@@ -76,5 +77,16 @@ export const getTipoDeTrabajoFromCubSuccess = createAction(
 );
 export const getTipoDeTrabajoFromCubError = createAction(
   '[OT] getTipoDeTrabajoFromCub Error',
+  props<{ error: any }>()
+);
+
+// CREATE OT CONTRATO BUCLE : GET AREA DE NEGOCIO
+export const getAreaDeNegocio = createAction('[OT] getAreaDeNegocio ');
+export const getAreaDeNegocioSuccess = createAction(
+  '[OT] getAreaDeNegocio Success',
+  props<{ response: Response<{ items: AreaDeNegocio[] }> }>()
+);
+export const getAreaDeNegocioError = createAction(
+  '[OT] getAreaDeNegocio Error',
   props<{ error: any }>()
 );

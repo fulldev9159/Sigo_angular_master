@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  AreaDeNegocio,
   Comuna,
   CubicacionContrato,
   OficinaCentral,
@@ -18,6 +19,7 @@ export interface StateOT {
   comunas: Comuna[];
   tipoDeRed: TipoDeRed[];
   tipoDeTrabajoFromCub: TipoDeTrabajo[];
+  areaDeNegocio: AreaDeNegocio[];
 }
 
 export const initialState: StateOT = {
@@ -27,6 +29,7 @@ export const initialState: StateOT = {
   comunas: [],
   tipoDeRed: [],
   tipoDeTrabajoFromCub: [],
+  areaDeNegocio: [],
 };
 
 export const reducerOT = createReducer(
@@ -54,5 +57,9 @@ export const reducerOT = createReducer(
   on(OTActions.getTipoDeTrabajoFromCubSuccess, (state, { response }) => ({
     ...state,
     tipoDeTrabajoFromCub: response.data.items,
+  })),
+  on(OTActions.getAreaDeNegocioSuccess, (state, { response }) => ({
+    ...state,
+    areaDeNegocio: response.data.items,
   }))
 );

@@ -122,4 +122,8 @@ export class LoadingsFacade {
   public sendingGetTipoDeTrabajoFromCub$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetTipoDeTrabajoFromCub);
   }
+  // AREA DE NEGOCIO
+  public sendingGetAreaDeNegocio$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetAreaDeNegocio);
+  }
 }

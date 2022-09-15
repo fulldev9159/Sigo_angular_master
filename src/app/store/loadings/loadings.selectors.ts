@@ -109,3 +109,8 @@ export const sendingGetTipoDeTrabajoFromCub = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetTipoDeTrabajoFromCub
 );
+
+export const sendingGetAreaDeNegocio = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetAreaDeNegocio
+);
