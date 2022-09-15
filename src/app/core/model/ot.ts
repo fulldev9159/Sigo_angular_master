@@ -27,3 +27,10 @@ export interface TipoDeRed {
   estado: boolean;
   id: number;
 }
+
+// GET TIPO DE TRABAJO
+export interface TipoDeTrabajo {
+  tipo_trabajo_codigo: string;
+  tipo_trabajo_descripcion: string;
+  tipo_trabajo_id: number;
+}

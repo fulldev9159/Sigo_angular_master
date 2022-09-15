@@ -4,6 +4,7 @@ import {
   Response,
   SolicitadoPor,
   TipoDeRed,
+  TipoDeTrabajo,
 } from '@model';
 
 export let CentralesMOCK200ok: Response<{ items: OficinaCentral[] }> = {
@@ -314,6 +315,34 @@ export let TipoRedMOCK200ok: Response<{ items: TipoDeRed[] }> = {
       { id: 2, descripcion: 'Fibra Optica', estado: true },
       { id: 3, descripcion: 'ATP', estado: true },
       { id: 4, descripcion: 'INFRACO', estado: true },
+    ],
+  },
+};
+
+export let TipoDeTrabajoMOCK200ok: Response<{ items: TipoDeTrabajo[] }> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    items: [
+      {
+        tipo_trabajo_id: 8,
+        tipo_trabajo_codigo: 'FOE',
+        tipo_trabajo_descripcion: 'FO Empresa',
+      },
+      {
+        tipo_trabajo_id: 23,
+        tipo_trabajo_codigo: 'MOVIL_C',
+        tipo_trabajo_descripcion: 'PROYECTO FO MOVIL',
+      },
+      {
+        tipo_trabajo_id: 30,
+        tipo_trabajo_codigo: 'TIEMPO',
+        tipo_trabajo_descripcion: '@TIEMPO',
+      },
+      {
+        tipo_trabajo_id: 32,
+        tipo_trabajo_codigo: 'VYAS',
+        tipo_trabajo_descripcion: 'VYAS-VPN',
+      },
     ],
   },
 };

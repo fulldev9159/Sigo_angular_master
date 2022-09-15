@@ -51,7 +51,10 @@
                 </zwc-pdropdown>
             </div>
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-
+                <zwc-pdropdown [control]="form.get('tipo_trabajo_id')" Label="*Tipo de trabajo:"
+                    dropdown_id="select-tipo-trabajo" [data]="tipoDeTrabajoFromCub$|async"
+                    Pplaceholder="Selecione un tipo de trabajo" [loading]="loadingTipoDeTrabajoFromCub$|async">
+                </zwc-pdropdown>
             </div>
         </div>
     </div>

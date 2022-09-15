@@ -31,6 +31,7 @@ export interface StateLoadings {
   sendingGetSolicitadoPor: boolean;
   sendingGetComunasFromCub: boolean;
   sendingGetTipoDeRed: boolean;
+  sendingGetTipoDeTrabajoFromCub: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -54,6 +55,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetSolicitadoPor: false,
   sendingGetComunasFromCub: false,
   sendingGetTipoDeRed: false,
+  sendingGetTipoDeTrabajoFromCub: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -297,5 +299,18 @@ export const reducerLoadings = createReducer(
   on(otActions.getTipoDeRedSuccess, otActions.getTipoDeRedError, state => ({
     ...state,
     sendingGetTipoDeRed: false,
-  }))
+  })),
+
+  on(otActions.getTipoDeTrabajoFromCub, state => ({
+    ...state,
+    sendingGetTipoDeTrabajoFromCub: true,
+  })),
+  on(
+    otActions.getTipoDeTrabajoFromCubSuccess,
+    otActions.getTipoDeTrabajoFromCubError,
+    state => ({
+      ...state,
+      sendingGetTipoDeTrabajoFromCub: false,
+    })
+  )
 );

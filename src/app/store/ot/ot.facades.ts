@@ -15,6 +15,7 @@ import {
   SolicitadoPor,
   TipoCubicacion,
   TipoDeRed,
+  TipoDeTrabajo,
 } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -70,5 +71,14 @@ export class OTFacade {
 
   public getTipoDeRed$(): Observable<TipoDeRed[]> {
     return this.store.select(otSelectors.getTipoDeRed);
+  }
+
+  // CREATE OT CONTRATO BUCLE : GET TIPO DE TRABAJO
+  public getTipoDeTrabajoFromCub(cubicacion_id: number): void {
+    this.store.dispatch(otActions.getTipoDeTrabajoFromCub({ cubicacion_id }));
+  }
+
+  public getTipoDeTrabajoFromCub$(): Observable<TipoDeTrabajo[]> {
+    return this.store.select(otSelectors.getTipoDeTrabajoFromCub);
   }
 }

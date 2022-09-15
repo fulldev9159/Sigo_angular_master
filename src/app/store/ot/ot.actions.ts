@@ -5,6 +5,7 @@ import {
   Response,
   SolicitadoPor,
   TipoDeRed,
+  TipoDeTrabajo,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
 
@@ -61,5 +62,19 @@ export const getTipoDeRedSuccess = createAction(
 );
 export const getTipoDeRedError = createAction(
   '[OT] getTipoDeRed Error',
+  props<{ error: any }>()
+);
+
+// CREATE OT CONTRATO BUCLE : GET TIPO DE TRABAJO FROM CUBICACION
+export const getTipoDeTrabajoFromCub = createAction(
+  '[OT] getTipoDeTrabajoFromCub ',
+  props<{ cubicacion_id: number }>()
+);
+export const getTipoDeTrabajoFromCubSuccess = createAction(
+  '[OT] getTipoDeTrabajoFromCub Success',
+  props<{ response: Response<{ items: TipoDeTrabajo[] }> }>()
+);
+export const getTipoDeTrabajoFromCubError = createAction(
+  '[OT] getTipoDeTrabajoFromCub Error',
   props<{ error: any }>()
 );

@@ -29,3 +29,8 @@ export const getTipoDeRed = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.tipoDeRed
 );
+
+export const getTipoDeTrabajoFromCub = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.tipoDeTrabajoFromCub
+);

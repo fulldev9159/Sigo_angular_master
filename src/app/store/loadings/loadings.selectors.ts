@@ -104,3 +104,8 @@ export const sendingGetTipoDeRed = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetTipoDeRed
 );
+
+export const sendingGetTipoDeTrabajoFromCub = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetTipoDeTrabajoFromCub
+);

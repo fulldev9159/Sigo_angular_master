@@ -3,6 +3,7 @@ import {
   ComunasMOCK200ok,
   cubicacionContratoMOCK200ok,
   SolicitadoPorMOCK200ok,
+  TipoDeTrabajoMOCK200ok,
   TipoRedMOCK200ok,
 } from '@mocksOT';
 
@@ -128,6 +129,19 @@ describe('Visibilidad e Interacción Inicial', () => {
             : 0
         )
         .map(value => value.descripcion)
+    );
+
+    cy._check_dropdown(
+      '#select-tipo-trabajo',
+      TipoDeTrabajoMOCK200ok.data.items
+        .sort((a, b) =>
+          a.tipo_trabajo_descripcion > b.tipo_trabajo_descripcion
+            ? 1
+            : b.tipo_trabajo_descripcion > a.tipo_trabajo_descripcion
+            ? -1
+            : 0
+        )
+        .map(value => value.tipo_trabajo_descripcion)
     );
   });
 });

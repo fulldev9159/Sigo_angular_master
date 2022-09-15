@@ -6,6 +6,7 @@ import {
   CentralesMOCK200ok,
   ComunasMOCK200ok,
   SolicitadoPorMOCK200ok,
+  TipoDeTrabajoMOCK200ok,
   TipoRedMOCK200ok,
 } from 'src/mocks/ot';
 
@@ -66,6 +67,17 @@ describe('OtHttpService', () => {
     service.getTipoDeRed().subscribe({
       next: response => {
         expect(response).toEqual(TipoRedMOCK200ok);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call getTipoDeTrabajoFromCub and return  Data', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(TipoDeTrabajoMOCK200ok));
+    service.getTipoDeTrabajoFromCub(1).subscribe({
+      next: response => {
+        expect(response).toEqual(TipoDeTrabajoMOCK200ok);
         done();
       },
       error: done.fail,

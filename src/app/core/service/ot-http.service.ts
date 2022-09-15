@@ -7,6 +7,7 @@ import {
   Response,
   SolicitadoPor,
   TipoDeRed,
+  TipoDeTrabajo,
 } from '@model';
 import { Observable } from 'rxjs';
 
@@ -48,6 +49,15 @@ export class OtHttpService {
     return this.http.post<Response<{ items: TipoDeRed[] }>>(
       `${this.API_URL}/ot/tipo_red/getall`,
       {}
+    );
+  }
+
+  getTipoDeTrabajoFromCub(
+    cubicacion_id: number
+  ): Observable<Response<{ items: TipoDeTrabajo[] }>> {
+    return this.http.post<Response<{ items: TipoDeTrabajo[] }>>(
+      `${this.API_URL}/ot/get_tipo_trabajo_from_tipo_cubicacion/get`,
+      { cubicacion_id }
     );
   }
 }

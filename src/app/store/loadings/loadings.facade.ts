@@ -117,4 +117,9 @@ export class LoadingsFacade {
   public sendingGetTipoDeRed$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetTipoDeRed);
   }
+
+  // TIPO DE TRABAJO
+  public sendingGetTipoDeTrabajoFromCub$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetTipoDeTrabajoFromCub);
+  }
 }
