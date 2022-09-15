@@ -56,6 +56,23 @@
                     Pplaceholder="Selecione un tipo de trabajo" [loading]="loadingTipoDeTrabajoFromCub$|async">
                 </zwc-pdropdown>
             </div>
+            <div class="field col-12 ">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="control-tiene-boleta"
+                        formControlName="tiene_boleta_garantia">
+                    <label class="form-check-label" for="defaultCheck1">
+                        ¿Tiene boleta de garantía?
+                    </label>
+                </div>
+                <br>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="control-tiene-permiso"
+                        formControlName="tiene_permisos">
+                    <label class="form-check-label" for="defaultCheck1">
+                        ¿Tiene permisos?
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 </form>
