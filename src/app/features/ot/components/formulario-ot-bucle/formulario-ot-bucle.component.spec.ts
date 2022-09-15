@@ -15,7 +15,10 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
-import { sendingGetOficinaCentral } from '@storeOT/loadings/loadings.selectors';
+import {
+  sendingGetOficinaCentral,
+  sendingGetSolicitadoPor,
+} from '@storeOT/loadings/loadings.selectors';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import {
   cubicacionSelected,
@@ -57,6 +60,10 @@ describe('FormularioOtBucleComponent', () => {
             {
               selector: getSolicitadoPor,
               value: SolicitadoPorMOCK200ok.data.items,
+            },
+            {
+              selector: sendingGetSolicitadoPor,
+              value: false,
             },
           ],
         }),
