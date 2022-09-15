@@ -96,5 +96,10 @@ describe('Visibilidad e Interacción Inicial', () => {
         )
         .map(value => value.descripcion)
     );
+
+    cy._check_input('input[name="input-direccion"]', 'required');
+    cy._check_input('input[name="input-altura"]', 'required');
+    cy._check_input('input[name="input-piso"]', 'required');
+    cy._check_input('input[name="input-departamento"]', 'required');
   });
 });
