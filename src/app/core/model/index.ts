@@ -11,6 +11,8 @@ export * from './servicio';
 export * from './unidad-obra';
 export * from './carrito';
 export * from './material';
+export * from './ot';
+export * from './agencia';
 
 export interface Response<T> {
   data: T;
@@ -19,5 +21,10 @@ export interface Response<T> {
 
 export interface StatusResponse {
   desc: string;
+  code: number;
+}
+
+export interface Dropdown {
+  name: string;
   code: number;
 }

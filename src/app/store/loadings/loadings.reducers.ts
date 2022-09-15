@@ -6,6 +6,7 @@ import * as contratosActions from '../contrato/contrato.actions';
 import * as proveedorActions from '../proveedor/proveedor.actions';
 import * as serviciosActions from '../servicios/servicios.actions';
 import * as cubicacionActions from '../cubicacion/cubicacion.actions';
+import * as otActions from '../ot/ot.actions';
 
 export const FeatureKey = 'loadings';
 
@@ -26,6 +27,7 @@ export interface StateLoadings {
   sendingGetCubicaciones: boolean;
   sendingDetalleCubicacion: boolean;
   sendingGetCubicacionesContrato: boolean;
+  sendingGetOficinaCentral: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -45,6 +47,7 @@ export const initialStateLoading: StateLoadings = {
   sendingDetalleCubicacion: false,
   sendingClonarCubicacion: false,
   sendingGetCubicacionesContrato: false,
+  sendingGetOficinaCentral: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -239,6 +242,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetCubicacionesContrato: false,
+    })
+  ),
+
+  on(otActions.getOficinaCentral, state => ({
+    ...state,
+    sendingGetOficinaCentral: true,
+  })),
+  on(
+    otActions.getOficinaCentralSuccess,
+    otActions.getOficinaCentralError,
+    state => ({
+      ...state,
+      sendingGetOficinaCentral: false,
     })
   )
 );

@@ -29,6 +29,45 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       contrato: new FormControl(null, [Validators.required]),
       cubicacion_id: new FormControl(null, [Validators.required]),
     }),
+    bucle: new FormGroup({
+      oficina_central_id: new FormControl(null, [Validators.required]),
+      solicitante_id: new FormControl(null, [Validators.required]),
+      direccion: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      altura: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      piso: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      departamento: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      comuna_id: new FormControl(null, [Validators.required]),
+      tipo_red_id: new FormControl(null, [Validators.required]),
+      tipo_trabajo_id: new FormControl(null, [Validators.required]),
+      tiene_boleta_garantia: new FormControl(false, [Validators.required]),
+      tiene_permisos: new FormControl(false, [Validators.required]),
+      area_negocio: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      nombre_proyectista: new FormControl(null, [
+        Validators.required,
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+    }),
   });
 
   constructor(private otFacade: OTFacade) {}

@@ -1,4 +1,4 @@
-import { cubicacionContratoMOCK200ok } from '@mocksOT';
+import { CentralesMOCK200ok, cubicacionContratoMOCK200ok } from '@mocksOT';
 
 beforeEach(() => {
   cy.viewport(1500, 1700);
@@ -72,6 +72,23 @@ describe('Visibilidad e Interacción Inicial', () => {
     cy.get('input[name="input-nombre-ot"]').click();
     cy.wait('@HTTPRESPONSE-CUBICACIONES').then(() => {
       cy.get('.error-message>.p-error').should('not.exist');
+    });
+  });
+
+  it('Escoger contrato bucle debe desplegar el formulario correspondiente', () => {
+    cy._select_dropdown(
+      '#select-cubicacion',
+      'Cubicacion Bucle Cypress Editada'
+    );
+
+    cy.wait(450);
+    cy._check_dropdown_required('#select-oficina-central');
+    let datos = CentralesMOCK200ok.data.items
+      .sort((a, b) => (a.idafac > b.idafac ? 1 : b.idafac > a.idafac ? -1 : 0))
+      .map(value => `${value.idafac} - ${value.descripcion}`);
+    cy.get('#select-oficina-central').click();
+    cy.get('li.p-ripple').each(($el, index, $list) => {
+      expect($el.text()).eq(datos[index]);
     });
   });
 });

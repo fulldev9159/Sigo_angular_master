@@ -84,3 +84,8 @@ export const sendingGetCubicacionesContrato = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetCubicacionesContrato
 );
+
+export const sendingGetOficinaCentral = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetOficinaCentral
+);

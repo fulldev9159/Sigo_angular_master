@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as loadingSelector from './loadings.selectors';
 import * as loadingsActions from './loadings.actions';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -97,5 +96,10 @@ export class LoadingsFacade {
   // CUBICACIONES DE UN CONTRATO ESPECIFICO
   public sendingGetCubicacionesContrato$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetCubicacionesContrato);
+  }
+
+  // OFICINA CENTRAL
+  public sendingGetOficinaCentral$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetOficinaCentral);
   }
 }

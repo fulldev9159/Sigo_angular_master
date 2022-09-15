@@ -1,3 +1,19 @@
 <p-divider align="center">
     <span class="p-tag">Contrato Marco Bucle</span>
 </p-divider>
+
+<form [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('oficina_central_id')" Label="*Oficina Central"
+                    dropdown_id="select-oficina-central" [data]="oficinasCentrales$|async"
+                    Pplaceholder="Selecione una oficina central" [loading]="loadingOficinaCentral$|async">
+                </zwc-pdropdown>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+
+            </div>
+        </div>
+    </div>
+</form>

@@ -9,3 +9,8 @@ export const cubicacionSelected = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.cubicacionSelected
 );
+
+export const getOficinaCentral = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.oficinaCentral
+);

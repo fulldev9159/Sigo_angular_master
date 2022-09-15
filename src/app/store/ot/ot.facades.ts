@@ -5,6 +5,7 @@ import {
   Cubicacion,
   CubicacionContrato,
   DetalleCubicacion,
+  OficinaCentral,
   PerfilesUsuario,
   ProveedorAgenciaContrato,
   RequestCreateCubicacion,
@@ -23,7 +24,7 @@ import * as cubicacionActions from './ot.actions';
 export class OTFacade {
   constructor(private store: Store<any>) {}
 
-  // GET TIPOS DE CUBICACIONES
+  // GET CUBICACION SELECCIONADA
   public cubicacionSelected(cubicacionSelected: CubicacionContrato): void {
     this.store.dispatch(
       cubicacionActions.cubicacionSelected({ cubicacionSelected })
@@ -32,5 +33,14 @@ export class OTFacade {
 
   public cubicacionSelected$(): Observable<CubicacionContrato> {
     return this.store.select(otSelectors.cubicacionSelected);
+  }
+
+  // CREATE OT CONTRATO BUCLE : GET OFICINA CENTRAL
+  public getOficinaCentral(agencia_id: number): void {
+    this.store.dispatch(cubicacionActions.getOficinaCentral({ agencia_id }));
+  }
+
+  public getOficinaCentral$(): Observable<OficinaCentral[]> {
+    return this.store.select(otSelectors.getOficinaCentral);
   }
 }
