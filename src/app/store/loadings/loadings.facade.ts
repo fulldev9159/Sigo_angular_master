@@ -107,4 +107,9 @@ export class LoadingsFacade {
   public sendingGetSolicitadoPor$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetSolicitadoPor);
   }
+
+  // COMUNAS FROM CUB
+  public sendingGetComunasFromCub$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetComunasFromCub);
+  }
 }

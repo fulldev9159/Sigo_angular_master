@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import {
   CentralesMOCK200ok,
+  ComunasMOCK200ok,
   cubicacionContratoMOCK200ok,
   SolicitadoPorMOCK200ok,
 } from '@mocksOT';
@@ -16,12 +17,14 @@ import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import {
+  sendingGetComunasFromCub,
   sendingGetOficinaCentral,
   sendingGetSolicitadoPor,
 } from '@storeOT/loadings/loadings.selectors';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import {
   cubicacionSelected,
+  getComunasFromCub,
   getOficinaCentral,
   getSolicitadoPor,
 } from '@storeOT/ot/ot.selectors';
@@ -63,6 +66,14 @@ describe('FormularioOtBucleComponent', () => {
             },
             {
               selector: sendingGetSolicitadoPor,
+              value: false,
+            },
+            {
+              selector: getComunasFromCub,
+              value: ComunasMOCK200ok.data.items,
+            },
+            {
+              selector: sendingGetComunasFromCub,
               value: false,
             },
           ],

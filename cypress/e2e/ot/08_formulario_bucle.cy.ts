@@ -1,5 +1,6 @@
 import {
   CentralesMOCK200ok,
+  ComunasMOCK200ok,
   cubicacionContratoMOCK200ok,
   SolicitadoPorMOCK200ok,
 } from '@mocksOT';
@@ -101,5 +102,18 @@ describe('Visibilidad e Interacción Inicial', () => {
     cy._check_input('input[name="input-altura"]', 'required');
     cy._check_input('input[name="input-piso"]', 'required');
     cy._check_input('input[name="input-departamento"]', 'required');
+
+    cy._check_dropdown(
+      '#select-comuna',
+      ComunasMOCK200ok.data.items
+        .sort((a, b) =>
+          a.comuna_nombre > b.comuna_nombre
+            ? 1
+            : b.comuna_nombre > a.comuna_nombre
+            ? -1
+            : 0
+        )
+        .map(value => value.comuna_nombre)
+    );
   });
 });

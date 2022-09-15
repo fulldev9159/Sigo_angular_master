@@ -19,3 +19,8 @@ export const getSolicitadoPor = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.solicitadoPor
 );
+
+export const getComunasFromCub = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.comunas
+);

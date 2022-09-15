@@ -14,3 +14,9 @@ export interface SolicitadoPor {
   descripcion: string;
   id: number;
 }
+
+// GET COMUNAS
+export interface Comuna {
+  comuna_id: number;
+  comuna_nombre: string;
+}

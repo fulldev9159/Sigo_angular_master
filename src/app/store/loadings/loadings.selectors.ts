@@ -94,3 +94,8 @@ export const sendingGetSolicitadoPor = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetSolicitadoPor
 );
+
+export const sendingGetComunasFromCub = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetComunasFromCub
+);

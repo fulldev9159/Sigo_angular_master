@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   AgenciaContrato,
+  Comuna,
   ContratosUser,
   Cubicacion,
   CubicacionContrato,
@@ -50,5 +51,14 @@ export class OTFacade {
 
   public getSolicitadoPor$(): Observable<SolicitadoPor[]> {
     return this.store.select(otSelectors.getSolicitadoPor);
+  }
+
+  // CREATE OT CONTRATO BUCLE : GET COUMNAS FROM CUBICACION
+  public getComunasFromCub(cubicacion_id: number): void {
+    this.store.dispatch(otActions.getComunasFromCub({ cubicacion_id }));
+  }
+
+  public getComunasFromCub$(): Observable<Comuna[]> {
+    return this.store.select(otSelectors.getComunasFromCub);
   }
 }

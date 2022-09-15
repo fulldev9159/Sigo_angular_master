@@ -29,6 +29,7 @@ export interface StateLoadings {
   sendingGetCubicacionesContrato: boolean;
   sendingGetOficinaCentral: boolean;
   sendingGetSolicitadoPor: boolean;
+  sendingGetComunasFromCub: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -50,6 +51,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetCubicacionesContrato: false,
   sendingGetOficinaCentral: false,
   sendingGetSolicitadoPor: false,
+  sendingGetComunasFromCub: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -270,6 +272,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetSolicitadoPor: false,
+    })
+  ),
+
+  on(otActions.getComunasFromCub, state => ({
+    ...state,
+    sendingGetComunasFromCub: true,
+  })),
+  on(
+    otActions.getComunasFromCubSuccess,
+    otActions.getComunasFromCublError,
+    state => ({
+      ...state,
+      sendingGetComunasFromCub: false,
     })
   )
 );

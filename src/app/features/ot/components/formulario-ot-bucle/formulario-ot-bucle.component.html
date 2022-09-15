@@ -34,6 +34,16 @@
                 <zwc-input-text Label="*Departamento" [control]="form.get('departamento')"
                     name_input="input-departamento"></zwc-input-text>
             </div>
+
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('comuna_id')" Label="*Comuna:" dropdown_id="select-comuna"
+                    [data]="comunasFromCub$|async" Pplaceholder="Selecione una comuna"
+                    [loading]="loadingComunasFromCub$|async">
+                </zwc-pdropdown>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+
+            </div>
         </div>
     </div>
 </form>

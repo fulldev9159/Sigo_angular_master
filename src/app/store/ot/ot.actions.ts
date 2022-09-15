@@ -1,4 +1,5 @@
 import {
+  Comuna,
   CubicacionContrato,
   OficinaCentral,
   Response,
@@ -34,5 +35,19 @@ export const getSolicitadoPorSuccess = createAction(
 );
 export const getSolicitadoPorError = createAction(
   '[OT] getSolicitadoPor Error',
+  props<{ error: any }>()
+);
+
+// CREATE OT CONTRATO BUCLE : GET COUMNAS FROM CUBICACION
+export const getComunasFromCub = createAction(
+  '[OT] getComunasFromCub ',
+  props<{ cubicacion_id: number }>()
+);
+export const getComunasFromCubSuccess = createAction(
+  '[OT] getComunasFromCub Success',
+  props<{ response: Response<{ items: Comuna[] }> }>()
+);
+export const getComunasFromCublError = createAction(
+  '[OT] getComunasFromCub Error',
   props<{ error: any }>()
 );
