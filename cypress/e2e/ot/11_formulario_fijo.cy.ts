@@ -1,4 +1,6 @@
-describe('Formulario sección Contrato ORDINARIO', () => {
+import { TipoDeNumeroInternoMOCK200ok } from '@mocksOT';
+
+describe('Formulario serccion Contrato FIJO', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });
@@ -14,13 +16,18 @@ describe('Formulario sección Contrato ORDINARIO', () => {
     cy._select_dropdown_async(
       '/ot/cubicaciones_from_contrato/get',
       '#select-contrato_marco',
-      'CONTRATO_ORDINARIO',
+      'UNIFICADO_FIJA',
       '#select-cubicacion',
-      'Testing Cubicacion Ordinario Precargada NO USAR'
+      'Testing Cubicacion Fija Precargada NO USAR'
     );
 
-    cy._check_input('input[name="input-numero-carta"]', 'required');
-    cy._check_input('input[name="input-numero-pedido"]', 'required');
-    cy._check_input('input[name="input-materia"]', 'required');
+    cy._check_dropdown(
+      '#select-tipo-numero-interno',
+      TipoDeNumeroInternoMOCK200ok.data.items
+        .sort((a, b) =>
+          a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+        )
+        .map(value => value.nombre)
+    );
   });
 });

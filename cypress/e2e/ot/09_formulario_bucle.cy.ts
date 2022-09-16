@@ -8,7 +8,7 @@ import {
   TipoRedMOCK200ok,
 } from '@mocksOT';
 
-describe('Formulario sección Contrato Bucle', () => {
+describe('Formulario sección Contrato BUCLE', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
   });

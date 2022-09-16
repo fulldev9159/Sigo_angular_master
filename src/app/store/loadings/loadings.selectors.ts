@@ -114,3 +114,8 @@ export const sendingGetAreaDeNegocio = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetAreaDeNegocio
 );
+
+export const sendingGetTipoNumeroInterno = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetTipoNumeroInterno
+);

@@ -7,6 +7,7 @@ import {
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
+  TipoNumeroInterno,
 } from '@model';
 import * as OTActions from './ot.actions';
 
@@ -14,12 +15,15 @@ export const Featurekey = 'ot';
 
 export interface StateOT {
   cubicacionSelected: CubicacionContrato;
+  // CONTRATO BUCLE
   oficinaCentral: OficinaCentral[];
   solicitadoPor: SolicitadoPor[];
   comunas: Comuna[];
   tipoDeRed: TipoDeRed[];
   tipoDeTrabajoFromCub: TipoDeTrabajo[];
   areaDeNegocio: AreaDeNegocio[];
+  // CONTRATO FIJO
+  tipoNumeroInterno: TipoNumeroInterno[];
 }
 
 export const initialState: StateOT = {
@@ -30,6 +34,7 @@ export const initialState: StateOT = {
   tipoDeRed: [],
   tipoDeTrabajoFromCub: [],
   areaDeNegocio: [],
+  tipoNumeroInterno: [],
 };
 
 export const reducerOT = createReducer(
@@ -61,5 +66,9 @@ export const reducerOT = createReducer(
   on(OTActions.getAreaDeNegocioSuccess, (state, { response }) => ({
     ...state,
     areaDeNegocio: response.data.items,
+  })),
+  on(OTActions.getTipoDeNumeroInternoSuccess, (state, { response }) => ({
+    ...state,
+    tipoNumeroInterno: response.data.items,
   }))
 );

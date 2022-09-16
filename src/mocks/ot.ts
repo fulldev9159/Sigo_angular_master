@@ -6,6 +6,7 @@ import {
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
+  TipoNumeroInterno,
 } from '@model';
 
 export let CentralesMOCK200ok: Response<{ items: OficinaCentral[] }> = {
@@ -354,6 +355,23 @@ export let AreaNegocioMOCK200ok: Response<{ items: AreaDeNegocio[] }> = {
     items: [
       { id: 1, descripcion: 'NORMAL' },
       { id: 2, descripcion: 'PREMIUM' },
+    ],
+  },
+};
+
+export let TipoDeNumeroInternoMOCK200ok: Response<{
+  items: TipoNumeroInterno[];
+}> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    items: [
+      { id: 1, nombre: 'ABVA' },
+      { id: 2, nombre: '@TIEMPOS' },
+      { id: 3, nombre: 'COMPLEJOS' },
+      { id: 4, nombre: 'GANNO' },
+      { id: 5, nombre: 'N° SOLICITUD' },
+      { id: 6, nombre: 'CODIGO DE SITIO' },
+      { id: 7, nombre: 'FOLIO PROYECTO' },
     ],
   },
 };

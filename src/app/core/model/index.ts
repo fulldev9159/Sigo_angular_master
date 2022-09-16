@@ -13,7 +13,7 @@ export * from './carrito';
 export * from './material';
 export * from './ot';
 export * from './agencia';
-
+export * from './numero_interno';
 export interface Response<T> {
   data: T;
   status: StatusResponse;

@@ -7,6 +7,7 @@ import {
   CentralesMOCK200ok,
   ComunasMOCK200ok,
   SolicitadoPorMOCK200ok,
+  TipoDeNumeroInternoMOCK200ok,
   TipoDeTrabajoMOCK200ok,
   TipoRedMOCK200ok,
 } from 'src/mocks/ot';
@@ -90,6 +91,17 @@ describe('OtHttpService', () => {
     service.getAreaDeNegocio().subscribe({
       next: response => {
         expect(response).toEqual(AreaNegocioMOCK200ok);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call getTipoDeNumeroInterno and return  Data', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(TipoDeNumeroInternoMOCK200ok));
+    service.getTipoDeNumeroInterno().subscribe({
+      next: response => {
+        expect(response).toEqual(TipoDeNumeroInternoMOCK200ok);
         done();
       },
       error: done.fail,

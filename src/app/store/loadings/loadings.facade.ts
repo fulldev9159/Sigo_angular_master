@@ -126,4 +126,9 @@ export class LoadingsFacade {
   public sendingGetAreaDeNegocio$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetAreaDeNegocio);
   }
+
+  // NUMERO INTERNO
+  public sendingGetTipoNumeroInterno$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetTipoNumeroInterno);
+  }
 }

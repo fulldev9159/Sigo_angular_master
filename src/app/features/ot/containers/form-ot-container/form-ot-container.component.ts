@@ -92,6 +92,11 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         Validators.maxLength(255),
       ]),
     }),
+    fijo: new FormGroup({
+      tipo_numero_interno_id: new FormControl(null, [Validators.required]),
+      // numeros_internos: new FormArray([]),
+      numero_interno: new FormControl([]),
+    }),
   });
 
   constructor(private otFacade: OTFacade) {}

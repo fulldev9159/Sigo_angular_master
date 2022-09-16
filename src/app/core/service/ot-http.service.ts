@@ -9,6 +9,7 @@ import {
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
+  TipoNumeroInterno,
 } from '@model';
 import { Observable } from 'rxjs';
 
@@ -65,6 +66,16 @@ export class OtHttpService {
   getAreaDeNegocio(): Observable<Response<{ items: AreaDeNegocio[] }>> {
     return this.http.post<Response<{ items: AreaDeNegocio[] }>>(
       `${this.API_URL}/ot/ot_area_negocio/getall`,
+      {}
+    );
+  }
+
+  // FIJO
+  getTipoDeNumeroInterno(): Observable<
+    Response<{ items: TipoNumeroInterno[] }>
+  > {
+    return this.http.post<Response<{ items: TipoNumeroInterno[] }>>(
+      `${this.API_URL}/configuration/tipo_numero_interno/getall`,
       {}
     );
   }

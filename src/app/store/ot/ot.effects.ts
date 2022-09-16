@@ -95,6 +95,23 @@ export class OTEffects {
     )
   );
 
+  // CREATE OT CONTRATO BUCLE : GET TIPOS DE NUMERO INTERNO
+  getTipoDeNumeroInterno$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeNumeroInterno),
+      concatMap(() =>
+        this.otHttpService.getTipoDeNumeroInterno().pipe(
+          map(response =>
+            otActions.getTipoDeNumeroInternoSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.getTipoDeNumeroInternoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -104,7 +121,8 @@ export class OTEffects {
           otActions.getComunasFromCubSuccess,
           otActions.getTipoDeRedSuccess,
           otActions.getTipoDeTrabajoFromCubSuccess,
-          otActions.getAreaDeNegocioSuccess
+          otActions.getAreaDeNegocioSuccess,
+          otActions.getTipoDeNumeroInternoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -120,7 +138,8 @@ export class OTEffects {
           otActions.getComunasFromCublError,
           otActions.getTipoDeRedError,
           otActions.getTipoDeTrabajoFromCubError,
-          otActions.getAreaDeNegocioError
+          otActions.getAreaDeNegocioError,
+          otActions.getTipoDeNumeroInternoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
