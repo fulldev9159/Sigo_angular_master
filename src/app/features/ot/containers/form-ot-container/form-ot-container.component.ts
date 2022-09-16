@@ -95,6 +95,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
     fijo: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
       numero_interno: new FormControl('', [
+        Validators.required,
         // this.noWhitespace,
         Validators.maxLength(255),
       ]),
