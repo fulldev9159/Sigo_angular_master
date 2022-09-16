@@ -44,6 +44,8 @@ export class FormularioOtFijoComponent implements OnInit, OnDestroy {
     this.otFacade.getTipoDeNumeroInterno();
   }
 
+  agregarNumeroInterno(): void {}
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

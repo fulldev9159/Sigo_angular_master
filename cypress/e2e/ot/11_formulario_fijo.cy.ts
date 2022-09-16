@@ -31,5 +31,6 @@ describe('Formulario serccion Contrato FIJO', () => {
     );
 
     cy.get('input[name="input-numero-interno"]').should('be.disabled');
+    cy.get('#agregar-numero-interno').should('be.disabled');
   });
 });
