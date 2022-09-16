@@ -94,8 +94,11 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
     }),
     fijo: new FormGroup({
       tipo_numero_interno_id: new FormControl(null, [Validators.required]),
-      // numeros_internos: new FormArray([]),
-      numero_interno: new FormControl([]),
+      numero_interno: new FormControl('', [
+        // this.noWhitespace,
+        Validators.maxLength(255),
+      ]),
+      numeros_internos: new FormControl([]),
     }),
   });
 

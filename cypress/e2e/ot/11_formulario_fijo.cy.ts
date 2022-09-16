@@ -29,5 +29,7 @@ describe('Formulario serccion Contrato FIJO', () => {
         )
         .map(value => value.nombre)
     );
+
+    cy.get('input[name="input-numero-interno"]').should('be.disabled');
   });
 });
