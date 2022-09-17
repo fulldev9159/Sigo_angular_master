@@ -106,6 +106,19 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       plan_proyecto_id: new FormControl(null, [Validators.required]),
       sitio_id: new FormControl(null, [Validators.required]),
     }),
+    sustentoFinanciero: new FormGroup({
+      costos: new FormControl('capex', []),
+
+      pmo_codigo: new FormControl(null, []),
+      lp_codigo: new FormControl(null, []),
+      pep2_capex_id: new FormControl(null, []),
+      pep2_provisorio: new FormControl(null, []),
+
+      id_opex_codigo: new FormControl(null, []),
+      cuenta_sap_codigo: new FormControl(null, []),
+      ceco_codigo: new FormControl(null, []),
+      ceco_provisorio: new FormControl(null, []),
+    }),
   });
 
   constructor(private otFacade: OTFacade) {}

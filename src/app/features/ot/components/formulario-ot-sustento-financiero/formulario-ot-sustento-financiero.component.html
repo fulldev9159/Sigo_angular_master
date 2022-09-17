@@ -1,0 +1,28 @@
+<p-divider align="center">
+    <span class="p-tag">Sustento Financiero</span>
+</p-divider>
+
+<form [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 flex-row justify-content-evenly  md:col-4 lg:col-4 xl:col-4 md:flex-column lg:flex-column xl:flex-column"
+                style="display: flex;">
+                <p-radioButton name="costos" value="capex" label="Capex" [formControl]="form.get('costos')">
+                </p-radioButton>
+                <p-radioButton name="costos" value="opex" label="Opex" [formControl]="form.get('costos')">
+                </p-radioButton>
+
+            </div>
+
+            <div class="field col-12 md:col-8 lg:col-8 xl:col-8">
+                <div class="formgrid grid">
+                    <div class="field col-12 ">
+                        <input type="text">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
