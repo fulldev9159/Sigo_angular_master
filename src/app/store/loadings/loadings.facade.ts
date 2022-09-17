@@ -145,4 +145,9 @@ export class LoadingsFacade {
   public sendingGetSitioPlan$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetSitioPlan);
   }
+
+  // SUSTENTO FINANCIERO
+  public sendingGetSustentoFinanciero$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetSustentoFinanciero);
+  }
 }

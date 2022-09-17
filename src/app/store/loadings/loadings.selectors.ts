@@ -134,3 +134,8 @@ export const sendingGetSitioPlan = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetSitioPlan
 );
+
+export const sendingGetSustentoFinanciero = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetSustentoFinanciero
+);

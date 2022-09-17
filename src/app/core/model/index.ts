@@ -14,6 +14,8 @@ export * from './material';
 export * from './ot';
 export * from './agencia';
 export * from './numero_interno';
+export * from './sustento-financiero';
+
 export interface Response<T> {
   data: T;
   status: StatusResponse;
@@ -26,5 +28,5 @@ export interface StatusResponse {
 
 export interface Dropdown {
   name: string;
-  code: number;
+  code: number | string;
 }

@@ -4,6 +4,7 @@ import { CubicacionContrato } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTFacade } from '@storeOT/ot/ot.facades';
+import { SustentoFinancieroFacade } from '@storeOT/sustento-financiero/sustento-financiero.facades';
 import { UsuarioFacade } from '@storeOT/usuario/usuario.facades';
 import { combineLatest, map, Observable, Subscription, take, tap } from 'rxjs';
 interface Dropdown {
@@ -66,7 +67,8 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
     private cubicacionFacade: CubicacionFacade,
     private otFacade: OTFacade,
     private usuarioFacade: UsuarioFacade,
-    private loadingFacade: LoadingsFacade
+    private loadingFacade: LoadingsFacade,
+    private sustentoFinancieroFacade: SustentoFinancieroFacade
   ) {}
 
   ngOnInit(): void {
@@ -89,6 +91,14 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
             value => value.cubicacion_id === +cubicacion_id
           )[0];
           this.otFacade.cubicacionSelected(cubicacionSelected);
+
+          // TODO: MEJORAR COMO SE LLAMA AL GET PMO DEPENDIENDO DEL CONTRATO
+          if (
+            cubicacionSelected &&
+            cubicacionSelected.tipo_contrato_marco_nombre !== 'Móvil'
+          ) {
+            this.sustentoFinancieroFacade.getPMO('');
+          }
         }
       })
     );

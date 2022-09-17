@@ -17,8 +17,9 @@
             <div class="field col-12 md:col-8 lg:col-8 xl:col-8">
                 <div class="formgrid grid">
                     <div class="field col-12 ">
-                        <input type="text">
-
+                        <zwc-pdropdown [control]="form.get('pmo_codigo')" Label="*PMO:" dropdown_id="select-pmo"
+                            [data]="pmo$|async" Pplaceholder="Selecione un pmo">
+                        </zwc-pdropdown>
                     </div>
                 </div>
             </div>

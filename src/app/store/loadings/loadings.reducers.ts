@@ -8,7 +8,7 @@ import * as serviciosActions from '../servicios/servicios.actions';
 import * as cubicacionActions from '../cubicacion/cubicacion.actions';
 import * as otActions from '../ot/ot.actions';
 import * as numeroInternoActions from '../numero-interno/numero-interno.actions';
-
+import * as sustentoFinancieroActions from '../sustento-financiero/sustento-financiero.actions';
 export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
@@ -38,6 +38,7 @@ export interface StateLoadings {
   sendingGetOTsFromNumeroInterno: boolean;
   sendingGetPlanDeProyecto: boolean;
   sendingGetSitioPlan: boolean;
+  sendingGetSustentoFinanciero: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -67,6 +68,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetOTsFromNumeroInterno: false,
   sendingGetPlanDeProyecto: false,
   sendingGetSitioPlan: false,
+  sendingGetSustentoFinanciero: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -387,6 +389,38 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetSitioPlan: false,
+    })
+  ),
+
+  on(
+    sustentoFinancieroActions.getPMO,
+    sustentoFinancieroActions.getLineaPresupuestaria,
+    sustentoFinancieroActions.getPEP2,
+    sustentoFinancieroActions.getIDOpex,
+    sustentoFinancieroActions.getCuentaSAP,
+    sustentoFinancieroActions.getCECO,
+    state => ({
+      ...state,
+      sendingGetSustentoFinanciero: true,
+    })
+  ),
+  on(
+    sustentoFinancieroActions.getPMOSuccess,
+    sustentoFinancieroActions.getLineaPresupuestariaSuccess,
+    sustentoFinancieroActions.getPEP2Success,
+    sustentoFinancieroActions.getIDOpexSuccess,
+    sustentoFinancieroActions.getCuentaSAPSuccess,
+    sustentoFinancieroActions.getCECOSuccess,
+
+    sustentoFinancieroActions.getPmoError,
+    sustentoFinancieroActions.getLineaPresupuestariaError,
+    sustentoFinancieroActions.getPEP2Error,
+    sustentoFinancieroActions.getIDOpexError,
+    sustentoFinancieroActions.getCuentaSAPError,
+    sustentoFinancieroActions.getCECOError,
+    state => ({
+      ...state,
+      sendingGetSustentoFinanciero: false,
     })
   )
 );

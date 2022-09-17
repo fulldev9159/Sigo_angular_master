@@ -53,6 +53,10 @@ import { NumeroInternoEffects } from './numero-interno/numero-interno.effects';
 import * as formNumeroInternoReduce from './numero-interno/numero-interno.reducers';
 // NUMERO INTERNO STORE
 
+// SUSTENTO FINANCIERO STORE
+import { SustentoFinancieroEffects } from './sustento-financiero/sustento-financiero.effects';
+import * as formSustentoFinancieroReduce from './sustento-financiero/sustento-financiero.reducers';
+// SUSTENTO FINANCIERO STORE
 @NgModule({
   declarations: [],
   imports: [
@@ -121,6 +125,13 @@ import * as formNumeroInternoReduce from './numero-interno/numero-interno.reduce
     StoreModule.forFeature(
       formNumeroInternoReduce.Featurekey,
       formNumeroInternoReduce.reducerNumeroInterno
+    ),
+
+    // SUSTENTO FINANCIERO STORE
+    EffectsModule.forFeature([SustentoFinancieroEffects]),
+    StoreModule.forFeature(
+      formSustentoFinancieroReduce.Featurekey,
+      formSustentoFinancieroReduce.reducerSustentoFinanciero
     ),
 
     SharedModule,

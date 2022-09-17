@@ -5,3 +5,4 @@ export * from './usuario';
 export * from './proveedor';
 export * from './servicios';
 export * from './ot';
+export * from './sustento-financiero';
