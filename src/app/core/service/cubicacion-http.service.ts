@@ -6,6 +6,7 @@ import {
   Cubicacion,
   StatusResponse,
   CubicacionContrato,
+  AdminContratoFromCub,
 } from '@model';
 import { delay, Observable } from 'rxjs';
 import {
@@ -85,6 +86,15 @@ export class CubicacionHttpService {
     return this.http.post<Response<{ items: CubicacionContrato[] }>>(
       `${this.API_URL}/ot/cubicaciones_from_contrato/get`,
       { contrato_id }
+    );
+  }
+
+  getAdminContratoFromCub(
+    cubicacion_id: number
+  ): Observable<Response<{ items: AdminContratoFromCub[] }>> {
+    return this.http.post<Response<{ items: AdminContratoFromCub[] }>>(
+      `${this.API_URL}/ot/posibles_administradores/get`,
+      { cubicacion_id }
     );
   }
 }

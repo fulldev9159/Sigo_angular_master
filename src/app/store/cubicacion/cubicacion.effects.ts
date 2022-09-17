@@ -159,6 +159,22 @@ export class CubicacionEffects {
     )
   );
 
+  getAdminContratoFromCub$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(cubicacionActions.getAdminContratoFromCub),
+      concatMap(({ cubicacion_id }) =>
+        this.cubicacionHttpService.getAdminContratoFromCub(cubicacion_id).pipe(
+          map(response =>
+            cubicacionActions.getAdminContratoFromCubSuccess({ response })
+          ),
+          catchError(error =>
+            of(cubicacionActions.getAdminContratoFromCubError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(

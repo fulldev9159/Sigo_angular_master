@@ -170,4 +170,8 @@ export class LoadingsFacade {
   public sendingGetCECO$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetCECO);
   }
+
+  public sendingGetAdminContratoFromCub$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetAdminContratoFromCub);
+  }
 }

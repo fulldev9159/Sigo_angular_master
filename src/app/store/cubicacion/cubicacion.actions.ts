@@ -1,5 +1,6 @@
 import {
   Accion,
+  AdminContratoFromCub,
   AgenciaContrato,
   ContratosUser,
   Cubicacion,
@@ -154,6 +155,20 @@ export const getCubicacionesContratoSuccess = createAction(
 );
 export const getCubicacionesContratoError = createAction(
   '[CUBICACION] getCubicacionesContrato Error',
+  props<{ error: any }>()
+);
+
+// ADMIN DE CONTRATO FROM CUB
+export const getAdminContratoFromCub = createAction(
+  '[CUBICACION] getAdminContratoFromCub ',
+  props<{ cubicacion_id: number }>()
+);
+export const getAdminContratoFromCubSuccess = createAction(
+  '[CUBICACION] getAdminContratoFromCub Success',
+  props<{ response: Response<{ items: AdminContratoFromCub[] }> }>()
+);
+export const getAdminContratoFromCubError = createAction(
+  '[CUBICACION] getAdminContratoFromCub Error',
   props<{ error: any }>()
 );
 

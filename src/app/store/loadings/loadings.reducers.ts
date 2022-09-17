@@ -44,6 +44,7 @@ export interface StateLoadings {
   sendingGetOPEX: boolean;
   sendingGetSAP: boolean;
   sendingGetCECO: boolean;
+  sendingGetAdminContratoFromCub: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -79,6 +80,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetOPEX: false,
   sendingGetSAP: false,
   sendingGetCECO: false,
+  sendingGetAdminContratoFromCub: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -478,6 +480,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetCECO: false,
+    })
+  ),
+
+  on(cubicacionActions.getAdminContratoFromCub, state => ({
+    ...state,
+    sendingGetAdminContratoFromCub: true,
+  })),
+  on(
+    cubicacionActions.getAdminContratoFromCubSuccess,
+    cubicacionActions.getAdminContratoFromCubError,
+    state => ({
+      ...state,
+      sendingGetAdminContratoFromCub: false,
     })
   )
 );

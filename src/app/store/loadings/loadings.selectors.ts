@@ -162,3 +162,8 @@ export const sendingGetCECO = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetCECO
 );
+
+export const sendingGetAdminContratoFromCub = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetAdminContratoFromCub
+);

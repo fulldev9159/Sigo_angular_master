@@ -1,4 +1,5 @@
 import {
+  AdminContratoFromCub,
   Cubicacion,
   CubicacionContrato,
   DetalleCubicacion,
@@ -2111,4 +2112,11 @@ export let cubicacionContratoMOCK200ok: Response<{
       },
     ],
   },
+};
+
+export let adminContratoFromCubMOCK200ok: Response<{
+  items: AdminContratoFromCub[];
+}> = {
+  status: { code: 0, desc: 'OK' },
+  data: { items: [{ id: 1026, nombre: 'Luk GENERATEL SPA Antonella' }] },
 };

@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
+  AdminContratoFromCub,
   AgenciaContrato,
   ContratosUser,
   Cubicacion,
@@ -20,6 +21,7 @@ export interface StateCubicacion {
   listarCubicaciones: Cubicacion[];
   detalleCubicacion: DetalleCubicacion;
   cubicacionesContrato: CubicacionContrato[];
+  adminContratoFromCub: AdminContratoFromCub[];
 }
 
 export const initialState: StateCubicacion = {
@@ -30,6 +32,7 @@ export const initialState: StateCubicacion = {
   listarCubicaciones: [],
   detalleCubicacion: null,
   cubicacionesContrato: [],
+  adminContratoFromCub: [],
 };
 
 export const reducerCubicacion = createReducer(
@@ -63,6 +66,13 @@ export const reducerCubicacion = createReducer(
     (state, { response }) => ({
       ...state,
       cubicacionesContrato: response.data.items,
+    })
+  ),
+  on(
+    cubicacionActions.getAdminContratoFromCubSuccess,
+    (state, { response }) => ({
+      ...state,
+      adminContratoFromCub: response.data.items,
     })
   ),
   // RESETS

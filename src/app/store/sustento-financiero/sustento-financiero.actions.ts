@@ -3,93 +3,93 @@ import { createAction, props } from '@ngrx/store';
 
 // GET PMO
 export const getPMO = createAction(
-  '[OT] GET PMO',
+  '[SUSTENTO FINANCIERO] GET PMO',
   props<{ sitio_codigo: string }>()
 );
 
 export const getPMOSuccess = createAction(
-  '[OT] GET PMO Success',
+  '[SUSTENTO FINANCIERO] GET PMO Success',
   props<{ response: Response<{ items: PMO[] }> }>()
 );
 
 export const getPmoError = createAction(
-  '[OT] GET PMO Error',
+  '[SUSTENTO FINANCIERO] GET PMO Error',
   props<{ error: any }>()
 );
 
 // LP
 export const getLineaPresupuestaria = createAction(
-  '[OT] GET getLineaPresupuestaria',
+  '[SUSTENTO FINANCIERO] GET getLineaPresupuestaria',
   props<{ pmo_id: number }>()
 );
 
 export const getLineaPresupuestariaSuccess = createAction(
-  '[OT] GET getLineaPresupuestaria Success',
+  '[SUSTENTO FINANCIERO] GET getLineaPresupuestaria Success',
   props<{ response: Response<{ items: LP[] }> }>()
 );
 
 export const getLineaPresupuestariaError = createAction(
-  '[OT] GET getLineaPresupuestaria Error',
+  '[SUSTENTO FINANCIERO] GET getLineaPresupuestaria Error',
   props<{ error: any }>()
 );
 
 // PEP2
 export const getPEP2 = createAction(
-  '[OT] GET getPEP2',
+  '[SUSTENTO FINANCIERO] GET getPEP2',
   props<{ pmo_codigo: number; linea_presupuestaria_codigo: string }>()
 );
 
 export const getPEP2Success = createAction(
-  '[OT] GET getPEP2 Success',
+  '[SUSTENTO FINANCIERO] GET getPEP2 Success',
   props<{ response: Response<{ items: PEP2[] }> }>()
 );
 
 export const getPEP2Error = createAction(
-  '[OT] GET getPEP2 Error',
+  '[SUSTENTO FINANCIERO] GET getPEP2 Error',
   props<{ error: any }>()
 );
 
 // OPEX
-export const getIDOpex = createAction('[OT] GET getIDOpex');
+export const getIDOpex = createAction('[SUSTENTO FINANCIERO] GET getIDOpex');
 
 export const getIDOpexSuccess = createAction(
-  '[OT] GET getIDOpex Success',
+  '[SUSTENTO FINANCIERO] GET getIDOpex Success',
   props<{ response: Response<{ items: OPEX[] }> }>()
 );
 
 export const getIDOpexError = createAction(
-  '[OT] getIDOpex Error',
+  '[SUSTENTO FINANCIERO] getIDOpex Error',
   props<{ error: any }>()
 );
 
 // SAP
 export const getCuentaSAP = createAction(
-  '[OT] GET getCuentaSAP',
+  '[SUSTENTO FINANCIERO] GET getCuentaSAP',
   props<{ id_opex: string }>()
 );
 
 export const getCuentaSAPSuccess = createAction(
-  '[OT] GET getCuentaSAP Success',
+  '[SUSTENTO FINANCIERO] GET getCuentaSAP Success',
   props<{ response: Response<{ items: SAP[] }> }>()
 );
 
 export const getCuentaSAPError = createAction(
-  '[OT] GET getCuentaSAP Error',
+  '[SUSTENTO FINANCIERO] GET getCuentaSAP Error',
   props<{ error: any }>()
 );
 
 // CECO
 export const getCECO = createAction(
-  '[OT] GET getCECO',
+  '[SUSTENTO FINANCIERO] GET getCECO',
   props<{ id_opex: string; cuenta_sap: number }>()
 );
 
 export const getCECOSuccess = createAction(
-  '[OT] GET getCECO Success',
+  '[SUSTENTO FINANCIERO] GET getCECO Success',
   props<{ response: Response<{ items: CECO[] }> }>()
 );
 
 export const getCECOError = createAction(
-  '[OT] GET getCECO Error',
+  '[SUSTENTO FINANCIERO] GET getCECO Error',
   props<{ error: any }>()
 );

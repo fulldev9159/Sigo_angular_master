@@ -18,6 +18,17 @@
                     name="fecha-termino-ot" dateFormat="dd/mm/yy"></p-calendar>
             </div>
 
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('admin_contrato_id')" Label="*Administrador de Contrato:"
+                    dropdown_id="select-admin-contrato" [data]="adminContratoFromCub$|async"
+                    Pplaceholder="Selecione un administrador de contreto"
+                    [loading]="loadingAdminContratoFromCub$|async">
+                </zwc-pdropdown>
+            </div>
+
             <div class="field col-12">
                 <label for="">Observaciones</label>
                 <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones"
