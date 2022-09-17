@@ -1,0 +1,1334 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  FormularioOtSustentoFinancieroComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>zwc-formulario-ot-sustento-financiero</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./formulario-ot-sustento-financiero.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./formulario-ot-sustento-financiero.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ceco$" >ceco$</a>
+                            </li>
+                            <li>
+                                <a href="#lineaPresupuestaria$" >lineaPresupuestaria$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetCECO$" >loadingGetCECO$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetLP$" >loadingGetLP$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetOPEX$" >loadingGetOPEX$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetPEP2$" >loadingGetPEP2$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetSAP$" >loadingGetSAP$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingPMO$" >loadingPMO$</a>
+                            </li>
+                            <li>
+                                <a href="#opex$" >opex$</a>
+                            </li>
+                            <li>
+                                <a href="#pep2$" >pep2$</a>
+                            </li>
+                            <li>
+                                <a href="#pmo$" >pmo$</a>
+                            </li>
+                            <li>
+                                <a href="#sap$" >sap$</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#configCapex" >configCapex</a>
+                            </li>
+                            <li>
+                                <a href="#configOpex" >configOpex</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#form" >form</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(sustentoFinancieroFacade: <a href="../injectables/SustentoFinancieroFacade.html" target="_self">SustentoFinancieroFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:114</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>sustentoFinancieroFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SustentoFinancieroFacade.html" target="_self" >SustentoFinancieroFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>loadingsFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoadingsFacade.html" target="_self" >LoadingsFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="form"></a>
+                        <b>form</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:19</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configCapex"></a>
+                    <span class="name">
+                        <span ><b>configCapex</b></span>
+                        <a href="#configCapex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>configCapex()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="172"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:172</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configOpex"></a>
+                    <span class="name">
+                        <span ><b>configOpex</b></span>
+                        <a href="#configOpex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>configOpex()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="187"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:187</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="201"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:201</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="121"
+                            class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:121</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ceco$"></a>
+                    <span class="name">
+                        <span ><b>ceco$</b></span>
+                        <a href="#ceco$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sustentoFinancieroFacade.getCECO$().pipe(
+    map(values &#x3D;&gt; {
+      let tmp &#x3D; [...values];
+      return tmp.sort((a, b) &#x3D;&gt; (a.ceco &gt; b.ceco ? 1 : -1));
+    }),
+    map(values &#x3D;&gt;
+      values.map(value &#x3D;&gt; ({
+        name: value.ceco.toString(),
+        code: value.ceco,
+      }))
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lineaPresupuestaria$"></a>
+                    <span class="name">
+                        <span ><b>lineaPresupuestaria$</b></span>
+                        <a href="#lineaPresupuestaria$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sustentoFinancieroFacade
+    .getLP$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt;
+          a.linea_presupuestaria_codigo &gt; b.linea_presupuestaria_codigo ? 1 : -1
+        );
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.linea_presupuestaria_codigo,
+          code: value.linea_presupuestaria_codigo,
+        }))
+      )
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetCECO$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetCECO$</b></span>
+                        <a href="#loadingGetCECO$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetCECO$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetLP$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetLP$</b></span>
+                        <a href="#loadingGetLP$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetLP$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetOPEX$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetOPEX$</b></span>
+                        <a href="#loadingGetOPEX$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetOPEX$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetPEP2$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetPEP2$</b></span>
+                        <a href="#loadingGetPEP2$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetPEP2$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetSAP$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetSAP$</b></span>
+                        <a href="#loadingGetSAP$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetSAP$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingPMO$"></a>
+                    <span class="name">
+                        <span ><b>loadingPMO$</b></span>
+                        <a href="#loadingPMO$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetPMO$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="opex$"></a>
+                    <span class="name">
+                        <span ><b>opex$</b></span>
+                        <a href="#opex$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sustentoFinancieroFacade
+    .getIDsOpex$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.id_opex &gt; b.id_opex ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.id_opex.toString(),
+          code: value.id_opex,
+        }))
+      )
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pep2$"></a>
+                    <span class="name">
+                        <span ><b>pep2$</b></span>
+                        <a href="#pep2$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sustentoFinancieroFacade.getPEP2$().pipe(
+    map(values &#x3D;&gt; {
+      let tmp &#x3D; [...values];
+      return tmp.sort((a, b) &#x3D;&gt; (a.pep2 &gt; b.pep2 ? 1 : -1));
+    }),
+    map(values &#x3D;&gt;
+      values.map(value &#x3D;&gt; ({
+        name: value.pep2,
+        code: value.pep2,
+      }))
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pmo$"></a>
+                    <span class="name">
+                        <span ><b>pmo$</b></span>
+                        <a href="#pmo$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sustentoFinancieroFacade.getPMO$().pipe(
+    map(values &#x3D;&gt; {
+      let tmp &#x3D; [...values];
+      return tmp.sort((a, b) &#x3D;&gt; (a.pmo_codigo &gt; b.pmo_codigo ? 1 : -1));
+    }),
+    map(values &#x3D;&gt;
+      values.map(value &#x3D;&gt; ({
+        name: value.pmo_codigo.toString(),
+        code: value.pmo_codigo,
+      }))
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sap$"></a>
+                    <span class="name">
+                        <span ><b>sap$</b></span>
+                        <a href="#sap$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sustentoFinancieroFacade
+    .getCuentaSAP$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.cuenta_sap &gt; b.cuenta_sap ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.cuenta_sap.toString(),
+          code: value.cuenta_sap,
+        }))
+      )
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/ot/components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { Dropdown } from &#x27;@model&#x27;;
+import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
+import { SustentoFinancieroFacade } from &#x27;@storeOT/sustento-financiero/sustento-financiero.facades&#x27;;
+import { map, Observable, Subscription } from &#x27;rxjs&#x27;;
+
+// TODO: INCORPORAR EL PROVISORIO
+// TODO: PROBAR INTERACCIONES Y RESETEOS
+@Component({
+  selector: &#x27;zwc-formulario-ot-sustento-financiero&#x27;,
+  templateUrl: &#x27;./formulario-ot-sustento-financiero.component.html&#x27;,
+  styleUrls: [&#x27;./formulario-ot-sustento-financiero.component.scss&#x27;],
+})
+export class FormularioOtSustentoFinancieroComponent
+  implements OnDestroy, OnInit
+{
+  subscription: Subscription &#x3D; new Subscription();
+  @Input() form: FormGroup;
+
+  // DATOS
+  pmo$: Observable&lt;Dropdown[]&gt; &#x3D; this.sustentoFinancieroFacade.getPMO$().pipe(
+    map(values &#x3D;&gt; {
+      let tmp &#x3D; [...values];
+      return tmp.sort((a, b) &#x3D;&gt; (a.pmo_codigo &gt; b.pmo_codigo ? 1 : -1));
+    }),
+    map(values &#x3D;&gt;
+      values.map(value &#x3D;&gt; ({
+        name: value.pmo_codigo.toString(),
+        code: value.pmo_codigo,
+      }))
+    )
+  );
+
+  lineaPresupuestaria$: Observable&lt;Dropdown[]&gt; &#x3D; this.sustentoFinancieroFacade
+    .getLP$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt;
+          a.linea_presupuestaria_codigo &gt; b.linea_presupuestaria_codigo ? 1 : -1
+        );
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.linea_presupuestaria_codigo,
+          code: value.linea_presupuestaria_codigo,
+        }))
+      )
+    );
+
+  pep2$: Observable&lt;Dropdown[]&gt; &#x3D; this.sustentoFinancieroFacade.getPEP2$().pipe(
+    map(values &#x3D;&gt; {
+      let tmp &#x3D; [...values];
+      return tmp.sort((a, b) &#x3D;&gt; (a.pep2 &gt; b.pep2 ? 1 : -1));
+    }),
+    map(values &#x3D;&gt;
+      values.map(value &#x3D;&gt; ({
+        name: value.pep2,
+        code: value.pep2,
+      }))
+    )
+  );
+
+  opex$: Observable&lt;Dropdown[]&gt; &#x3D; this.sustentoFinancieroFacade
+    .getIDsOpex$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.id_opex &gt; b.id_opex ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.id_opex.toString(),
+          code: value.id_opex,
+        }))
+      )
+    );
+
+  sap$: Observable&lt;Dropdown[]&gt; &#x3D; this.sustentoFinancieroFacade
+    .getCuentaSAP$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.cuenta_sap &gt; b.cuenta_sap ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.cuenta_sap.toString(),
+          code: value.cuenta_sap,
+        }))
+      )
+    );
+
+  ceco$: Observable&lt;Dropdown[]&gt; &#x3D; this.sustentoFinancieroFacade.getCECO$().pipe(
+    map(values &#x3D;&gt; {
+      let tmp &#x3D; [...values];
+      return tmp.sort((a, b) &#x3D;&gt; (a.ceco &gt; b.ceco ? 1 : -1));
+    }),
+    map(values &#x3D;&gt;
+      values.map(value &#x3D;&gt; ({
+        name: value.ceco.toString(),
+        code: value.ceco,
+      }))
+    )
+  );
+
+  // LOADINGS
+  loadingPMO$: Observable&lt;boolean&gt; &#x3D; this.loadingsFacade.sendingGetPMO$();
+  loadingGetLP$: Observable&lt;boolean&gt; &#x3D; this.loadingsFacade.sendingGetLP$();
+  loadingGetPEP2$: Observable&lt;boolean&gt; &#x3D; this.loadingsFacade.sendingGetPEP2$();
+  loadingGetOPEX$: Observable&lt;boolean&gt; &#x3D; this.loadingsFacade.sendingGetOPEX$();
+  loadingGetSAP$: Observable&lt;boolean&gt; &#x3D; this.loadingsFacade.sendingGetSAP$();
+  loadingGetCECO$: Observable&lt;boolean&gt; &#x3D; this.loadingsFacade.sendingGetCECO$();
+
+  constructor(
+    private sustentoFinancieroFacade: SustentoFinancieroFacade,
+    private loadingsFacade: LoadingsFacade
+  ) {}
+
+  ngOnInit(): void {
+    this.sustentoFinancieroFacade.getIDsOpex();
+    this.configCapex();
+    this.subscription.add(
+      this.form.get(&#x27;costos&#x27;).valueChanges.subscribe(costos &#x3D;&gt; {
+        if (costos &amp;&amp; costos &#x3D;&#x3D;&#x3D; &#x27;capex&#x27;) this.configCapex();
+        if (costos &amp;&amp; costos &#x3D;&#x3D;&#x3D; &#x27;opex&#x27;) this.configOpex();
+      })
+    );
+
+    this.subscription.add(
+      this.form.get(&#x27;pmo_codigo&#x27;).valueChanges.subscribe(pmo_codigo &#x3D;&gt; {
+        if (pmo_codigo !&#x3D;&#x3D; null &amp;&amp; pmo_codigo !&#x3D;&#x3D; undefined) {
+          this.sustentoFinancieroFacade.getLP(+pmo_codigo);
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.form.get(&#x27;lp_codigo&#x27;).valueChanges.subscribe(lp_codigo &#x3D;&gt; {
+        if (lp_codigo !&#x3D;&#x3D; null &amp;&amp; lp_codigo !&#x3D;&#x3D; undefined) {
+          this.sustentoFinancieroFacade.getPEP2(
+            +this.form.value.pmo_codigo,
+            lp_codigo
+          );
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.form.get(&#x27;id_opex_codigo&#x27;).valueChanges.subscribe(id_opex_codigo &#x3D;&gt; {
+        if (id_opex_codigo !&#x3D;&#x3D; null &amp;&amp; id_opex_codigo !&#x3D;&#x3D; undefined) {
+          this.sustentoFinancieroFacade.getCuentaSAP(id_opex_codigo);
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.form
+        .get(&#x27;cuenta_sap_codigo&#x27;)
+        .valueChanges.subscribe(cuenta_sap_codigo &#x3D;&gt; {
+          if (cuenta_sap_codigo !&#x3D;&#x3D; null &amp;&amp; cuenta_sap_codigo !&#x3D;&#x3D; undefined) {
+            this.sustentoFinancieroFacade.getCECO(
+              this.form.value.id_opex_codigo,
+              +cuenta_sap_codigo
+            );
+          }
+        })
+    );
+  }
+
+  configCapex(): void {
+    this.form.get(&#x27;pmo_codigo&#x27;).setValidators([Validators.required]);
+    this.form.get(&#x27;lp_codigo&#x27;).setValidators([Validators.required]);
+    this.form.get(&#x27;pep2_capex_id&#x27;).setValidators([Validators.required]);
+
+    this.form.get(&#x27;id_opex_codigo&#x27;).setValidators(null);
+    this.form.get(&#x27;cuenta_sap_codigo&#x27;).setValidators(null);
+    this.form.get(&#x27;ceco_codigo&#x27;).setValidators(null);
+
+    this.form.get(&#x27;id_opex_codigo&#x27;).reset();
+    this.form.get(&#x27;cuenta_sap_codigo&#x27;).reset();
+    this.form.get(&#x27;ceco_codigo&#x27;).reset();
+    this.form.get(&#x27;ceco_provisorio&#x27;).reset();
+  }
+
+  configOpex(): void {
+    this.form.get(&#x27;pmo_codigo&#x27;).setValidators(null);
+    this.form.get(&#x27;lp_codigo&#x27;).setValidators(null);
+    this.form.get(&#x27;pep2_capex_id&#x27;).setValidators(null);
+
+    this.form.get(&#x27;id_opex_codigo&#x27;).setValidators([Validators.required]);
+    this.form.get(&#x27;cuenta_sap_codigo&#x27;).setValidators([Validators.required]);
+    this.form.get(&#x27;ceco_codigo&#x27;).setValidators([Validators.required]);
+
+    this.form.get(&#x27;pmo_codigo&#x27;).reset();
+    this.form.get(&#x27;lp_codigo&#x27;).reset();
+    this.form.get(&#x27;pep2_capex_id&#x27;).reset();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;p-divider align&#x3D;&quot;center&quot;&gt;
+    &lt;span class&#x3D;&quot;p-tag&quot;&gt;Sustento Financiero&lt;/span&gt;
+&lt;/p-divider&gt;
+
+&lt;form [formGroup]&#x3D;&quot;form&quot;&gt;
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 flex-row justify-content-evenly  md:col-4 lg:col-4 xl:col-4 md:flex-column lg:flex-column xl:flex-column&quot;
+                style&#x3D;&quot;display: flex;&quot;&gt;
+                &lt;p-radioButton name&#x3D;&quot;costos&quot; value&#x3D;&quot;capex&quot; label&#x3D;&quot;Capex&quot; [formControl]&#x3D;&quot;form.get(&#x27;costos&#x27;)&quot;&gt;
+                &lt;/p-radioButton&gt;
+                &lt;p-radioButton name&#x3D;&quot;costos&quot; value&#x3D;&quot;opex&quot; label&#x3D;&quot;Opex&quot; [formControl]&#x3D;&quot;form.get(&#x27;costos&#x27;)&quot;&gt;
+                &lt;/p-radioButton&gt;
+
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;field col-12 md:col-8 lg:col-8 xl:col-8&quot;&gt;
+                &lt;div class&#x3D;&quot;formgrid grid&quot; *ngIf&#x3D;&quot;form.get(&#x27;costos&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;capex&#x27;&quot;&gt;
+                    &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;pmo_codigo&#x27;)&quot; Label&#x3D;&quot;*PMO:&quot; dropdown_id&#x3D;&quot;select-pmo&quot;
+                            [data]&#x3D;&quot;pmo$|async&quot; Pplaceholder&#x3D;&quot;Selecione un pmo&quot; [loading]&#x3D;&quot;loadingPMO$|async&quot;&gt;
+                        &lt;/zwc-pdropdown&gt;
+
+                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;lp_codigo&#x27;)&quot; Label&#x3D;&quot;*Línea Presupuestaria:&quot;
+                            dropdown_id&#x3D;&quot;select-linea-presupuestaria&quot; [data]&#x3D;&quot;lineaPresupuestaria$|async&quot;
+                            Pplaceholder&#x3D;&quot;Selecione una línea presupuestaria&quot; [loading]&#x3D;&quot;loadingGetLP$|async&quot;&gt;
+                        &lt;/zwc-pdropdown&gt;
+
+                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;pep2_capex_id&#x27;)&quot; Label&#x3D;&quot;*PEP2:&quot; dropdown_id&#x3D;&quot;select-pep2&quot;
+                            [data]&#x3D;&quot;pep2$|async&quot; Pplaceholder&#x3D;&quot;Selecione un pep2&quot; [loading]&#x3D;&quot;loadingGetPEP2$|async&quot;&gt;
+                        &lt;/zwc-pdropdown&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;formgrid grid&quot; *ngIf&#x3D;&quot;form.get(&#x27;costos&#x27;).value&#x3D;&#x3D;&#x3D;&#x27;opex&#x27;&quot;&gt;
+                    &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;id_opex_codigo&#x27;)&quot; Label&#x3D;&quot;*ID Opex:&quot;
+                            dropdown_id&#x3D;&quot;select-opex&quot; [data]&#x3D;&quot;opex$|async&quot; Pplaceholder&#x3D;&quot;Selecione un opex id&quot;
+                            [loading]&#x3D;&quot;loadingGetOPEX$|async&quot;&gt;
+                        &lt;/zwc-pdropdown&gt;
+
+                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;cuenta_sap_codigo&#x27;)&quot; Label&#x3D;&quot;*Cuenta SAP:&quot;
+                            dropdown_id&#x3D;&quot;select-cuenta-sap&quot; [data]&#x3D;&quot;sap$|async&quot; Pplaceholder&#x3D;&quot;Selecione una cuenta sap&quot;
+                            [loading]&#x3D;&quot;loadingGetSAP$|async&quot;&gt;
+                        &lt;/zwc-pdropdown&gt;
+
+                        &lt;zwc-pdropdown [control]&#x3D;&quot;form.get(&#x27;ceco_codigo&#x27;)&quot; Label&#x3D;&quot;*CECO:&quot; dropdown_id&#x3D;&quot;select-ceco&quot;
+                            [data]&#x3D;&quot;ceco$|async&quot; Pplaceholder&#x3D;&quot;Selecione un ceco&quot; [loading]&#x3D;&quot;loadingGetCECO$|async&quot;&gt;
+                        &lt;/zwc-pdropdown&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./formulario-ot-sustento-financiero.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><p-divider align="center">    <span class="p-tag">Sustento Financiero</span></p-divider><form [formGroup]="form">    <div class="card">        <div class="formgrid grid">            <div class="field col-12 flex-row justify-content-evenly  md:col-4 lg:col-4 xl:col-4 md:flex-column lg:flex-column xl:flex-column"                style="display: flex;">                <p-radioButton name="costos" value="capex" label="Capex" [formControl]="form.get(\'costos\')">                </p-radioButton>                <p-radioButton name="costos" value="opex" label="Opex" [formControl]="form.get(\'costos\')">                </p-radioButton>            </div>            <div class="field col-12 md:col-8 lg:col-8 xl:col-8">                <div class="formgrid grid" *ngIf="form.get(\'costos\').value===\'capex\'">                    <div class="field col-12 ">                        <zwc-pdropdown [control]="form.get(\'pmo_codigo\')" Label="*PMO:" dropdown_id="select-pmo"                            [data]="pmo$|async" Pplaceholder="Selecione un pmo" [loading]="loadingPMO$|async">                        </zwc-pdropdown>                        <zwc-pdropdown [control]="form.get(\'lp_codigo\')" Label="*Línea Presupuestaria:"                            dropdown_id="select-linea-presupuestaria" [data]="lineaPresupuestaria$|async"                            Pplaceholder="Selecione una línea presupuestaria" [loading]="loadingGetLP$|async">                        </zwc-pdropdown>                        <zwc-pdropdown [control]="form.get(\'pep2_capex_id\')" Label="*PEP2:" dropdown_id="select-pep2"                            [data]="pep2$|async" Pplaceholder="Selecione un pep2" [loading]="loadingGetPEP2$|async">                        </zwc-pdropdown>                    </div>                </div>                <div class="formgrid grid" *ngIf="form.get(\'costos\').value===\'opex\'">                    <div class="field col-12 ">                        <zwc-pdropdown [control]="form.get(\'id_opex_codigo\')" Label="*ID Opex:"                            dropdown_id="select-opex" [data]="opex$|async" Pplaceholder="Selecione un opex id"                            [loading]="loadingGetOPEX$|async">                        </zwc-pdropdown>                        <zwc-pdropdown [control]="form.get(\'cuenta_sap_codigo\')" Label="*Cuenta SAP:"                            dropdown_id="select-cuenta-sap" [data]="sap$|async" Pplaceholder="Selecione una cuenta sap"                            [loading]="loadingGetSAP$|async">                        </zwc-pdropdown>                        <zwc-pdropdown [control]="form.get(\'ceco_codigo\')" Label="*CECO:" dropdown_id="select-ceco"                            [data]="ceco$|async" Pplaceholder="Selecione un ceco" [loading]="loadingGetCECO$|async">                        </zwc-pdropdown>                    </div>                </div>            </div>        </div>    </div></form></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
+    var ACTUAL_COMPONENT = {'name': 'FormularioOtSustentoFinancieroComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormularioOtSustentoFinancieroComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

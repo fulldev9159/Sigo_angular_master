@@ -190,6 +190,10 @@ export * from &#x27;./servicio&#x27;;
 export * from &#x27;./unidad-obra&#x27;;
 export * from &#x27;./carrito&#x27;;
 export * from &#x27;./material&#x27;;
+export * from &#x27;./ot&#x27;;
+export * from &#x27;./agencia&#x27;;
+export * from &#x27;./numero_interno&#x27;;
+export * from &#x27;./sustento-financiero&#x27;;
 
 export interface Response&lt;T&gt; {
   data: T;
@@ -199,6 +203,11 @@ export interface Response&lt;T&gt; {
 export interface StatusResponse {
   desc: string;
   code: number;
+}
+
+export interface Dropdown {
+  name: string;
+  code: number | string;
 }
 </code></pre>
     </div>

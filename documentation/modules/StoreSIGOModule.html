@@ -179,6 +179,20 @@ import { ServiciosEffects } from &#x27;./servicios/servicios.effects&#x27;;
 import * as formServiciosReduce from &#x27;./servicios/servicios.reducers&#x27;;
 // SERVICIOS STORE
 
+// OT STORE
+import { OTEffects } from &#x27;./ot/ot.effects&#x27;;
+import * as formOTReduce from &#x27;./ot/ot.reducers&#x27;;
+// OT STORE
+
+// NUMERO INTERNO STORE
+import { NumeroInternoEffects } from &#x27;./numero-interno/numero-interno.effects&#x27;;
+import * as formNumeroInternoReduce from &#x27;./numero-interno/numero-interno.reducers&#x27;;
+// NUMERO INTERNO STORE
+
+// SUSTENTO FINANCIERO STORE
+import { SustentoFinancieroEffects } from &#x27;./sustento-financiero/sustento-financiero.effects&#x27;;
+import * as formSustentoFinancieroReduce from &#x27;./sustento-financiero/sustento-financiero.reducers&#x27;;
+// SUSTENTO FINANCIERO STORE
 @NgModule({
   declarations: [],
   imports: [
@@ -237,6 +251,25 @@ import * as formServiciosReduce from &#x27;./servicios/servicios.reducers&#x27;;
       formServiciosReduce.Featurekey,
       formServiciosReduce.reducerServicios
     ),
+
+    // OT STORE
+    EffectsModule.forFeature([OTEffects]),
+    StoreModule.forFeature(formOTReduce.Featurekey, formOTReduce.reducerOT),
+
+    // NUMERO INTERNO STORE
+    EffectsModule.forFeature([NumeroInternoEffects]),
+    StoreModule.forFeature(
+      formNumeroInternoReduce.Featurekey,
+      formNumeroInternoReduce.reducerNumeroInterno
+    ),
+
+    // SUSTENTO FINANCIERO STORE
+    EffectsModule.forFeature([SustentoFinancieroEffects]),
+    StoreModule.forFeature(
+      formSustentoFinancieroReduce.Featurekey,
+      formSustentoFinancieroReduce.reducerSustentoFinanciero
+    ),
+
     SharedModule,
   ],
 })

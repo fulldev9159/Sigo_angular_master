@@ -97,7 +97,11 @@ const routes: Routes &#x3D; [
       )&quot;,
     canLoad: [SigoGuard],
   },
-  { path: &#x27;ot&#x27;, loadChildren: () &#x3D;&gt; &quot;import(&#x27;./features/ot/ot.module&#x27;).then(m &#x3D;&gt; m.OtModule)&quot; },
+  {
+    path: &#x27;ot&#x27;,
+    loadChildren: () &#x3D;&gt; &quot;import(&#x27;./features/ot/ot.module&#x27;).then(m &#x3D;&gt; m.OtModule)&quot;,
+    canLoad: [SigoGuard],
+  },
 ];
 
 @NgModule({
