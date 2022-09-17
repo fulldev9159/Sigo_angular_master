@@ -16,7 +16,7 @@ import {
 } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { sendingGetSustentoFinanciero } from '@storeOT/loadings/loadings.selectors';
+import { sendingGetPMO } from '@storeOT/loadings/loadings.selectors';
 import { SustentoFinancieroFacade } from '@storeOT/sustento-financiero/sustento-financiero.facades';
 import {
   getCECOs,
@@ -67,7 +67,7 @@ describe('FormularioOtSustentoFinancieroComponent', () => {
               value: CECOMOCK200ok.data.items,
             },
             {
-              selector: sendingGetSustentoFinanciero,
+              selector: sendingGetPMO,
               value: false,
             },
           ],

@@ -147,7 +147,27 @@ export class LoadingsFacade {
   }
 
   // SUSTENTO FINANCIERO
-  public sendingGetSustentoFinanciero$(): Observable<boolean> {
-    return this.store.select(loadingSelector.sendingGetSustentoFinanciero);
+  public sendingGetPMO$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetPMO);
+  }
+
+  public sendingGetLP$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetLP);
+  }
+
+  public sendingGetPEP2$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetPEP2);
+  }
+
+  public sendingGetOPEX$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetOPEX);
+  }
+
+  public sendingGetSAP$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetSAP);
+  }
+
+  public sendingGetCECO$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetCECO);
   }
 }

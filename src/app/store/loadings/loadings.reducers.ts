@@ -38,7 +38,12 @@ export interface StateLoadings {
   sendingGetOTsFromNumeroInterno: boolean;
   sendingGetPlanDeProyecto: boolean;
   sendingGetSitioPlan: boolean;
-  sendingGetSustentoFinanciero: boolean;
+  sendingGetPMO: boolean;
+  sendingGetLP: boolean;
+  sendingGetPEP2: boolean;
+  sendingGetOPEX: boolean;
+  sendingGetSAP: boolean;
+  sendingGetCECO: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -68,7 +73,12 @@ export const initialStateLoading: StateLoadings = {
   sendingGetOTsFromNumeroInterno: false,
   sendingGetPlanDeProyecto: false,
   sendingGetSitioPlan: false,
-  sendingGetSustentoFinanciero: false,
+  sendingGetPMO: false,
+  sendingGetLP: false,
+  sendingGetPEP2: false,
+  sendingGetOPEX: false,
+  sendingGetSAP: false,
+  sendingGetCECO: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -392,35 +402,82 @@ export const reducerLoadings = createReducer(
     })
   ),
 
-  on(
-    sustentoFinancieroActions.getPMO,
-    sustentoFinancieroActions.getLineaPresupuestaria,
-    sustentoFinancieroActions.getPEP2,
-    sustentoFinancieroActions.getIDOpex,
-    sustentoFinancieroActions.getCuentaSAP,
-    sustentoFinancieroActions.getCECO,
-    state => ({
-      ...state,
-      sendingGetSustentoFinanciero: true,
-    })
-  ),
+  on(sustentoFinancieroActions.getPMO, state => ({
+    ...state,
+    sendingGetPMO: true,
+  })),
   on(
     sustentoFinancieroActions.getPMOSuccess,
-    sustentoFinancieroActions.getLineaPresupuestariaSuccess,
-    sustentoFinancieroActions.getPEP2Success,
-    sustentoFinancieroActions.getIDOpexSuccess,
-    sustentoFinancieroActions.getCuentaSAPSuccess,
-    sustentoFinancieroActions.getCECOSuccess,
 
     sustentoFinancieroActions.getPmoError,
+    state => ({
+      ...state,
+      sendingGetPMO: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getLineaPresupuestaria, state => ({
+    ...state,
+    sendingGetLP: true,
+  })),
+  on(
+    sustentoFinancieroActions.getLineaPresupuestariaSuccess,
     sustentoFinancieroActions.getLineaPresupuestariaError,
+    state => ({
+      ...state,
+      sendingGetLP: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getPEP2, state => ({
+    ...state,
+    sendingGetPEP2: true,
+  })),
+  on(
+    sustentoFinancieroActions.getPEP2Success,
     sustentoFinancieroActions.getPEP2Error,
+    state => ({
+      ...state,
+      sendingGetPEP2: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getIDOpex, state => ({
+    ...state,
+    sendingGetOPEX: true,
+  })),
+  on(
+    sustentoFinancieroActions.getIDOpexSuccess,
     sustentoFinancieroActions.getIDOpexError,
+    state => ({
+      ...state,
+      sendingGetOPEX: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getCuentaSAP, state => ({
+    ...state,
+    sendingGetSAP: true,
+  })),
+  on(
+    sustentoFinancieroActions.getCuentaSAPSuccess,
     sustentoFinancieroActions.getCuentaSAPError,
+    state => ({
+      ...state,
+      sendingGetSAP: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getCECO, state => ({
+    ...state,
+    sendingGetCECO: true,
+  })),
+  on(
+    sustentoFinancieroActions.getCECOSuccess,
     sustentoFinancieroActions.getCECOError,
     state => ({
       ...state,
-      sendingGetSustentoFinanciero: false,
+      sendingGetCECO: false,
     })
   )
 );

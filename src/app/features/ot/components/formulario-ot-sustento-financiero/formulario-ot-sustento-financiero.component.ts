@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Dropdown } from '@model';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { SustentoFinancieroFacade } from '@storeOT/sustento-financiero/sustento-financiero.facades';
 import { map, Observable, Subscription } from 'rxjs';
 
@@ -99,7 +100,19 @@ export class FormularioOtSustentoFinancieroComponent implements OnDestroy {
       }))
     )
   );
-  constructor(private sustentoFinancieroFacade: SustentoFinancieroFacade) {}
+
+  // LOADINGS
+  loadingPMO$: Observable<boolean> = this.loadingsFacade.sendingGetPMO$();
+  loadingGetLP$: Observable<boolean> = this.loadingsFacade.sendingGetLP$();
+  loadingGetPEP2$: Observable<boolean> = this.loadingsFacade.sendingGetPEP2$();
+  loadingGetOPEX$: Observable<boolean> = this.loadingsFacade.sendingGetOPEX$();
+  loadingGetSAP$: Observable<boolean> = this.loadingsFacade.sendingGetSAP$();
+  loadingGetCECO$: Observable<boolean> = this.loadingsFacade.sendingGetCECO$();
+
+  constructor(
+    private sustentoFinancieroFacade: SustentoFinancieroFacade,
+    private loadingsFacade: LoadingsFacade
+  ) {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

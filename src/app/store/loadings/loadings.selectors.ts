@@ -135,7 +135,30 @@ export const sendingGetSitioPlan = createSelector(
   (state: reducer.StateLoadings) => state.sendingGetSitioPlan
 );
 
-export const sendingGetSustentoFinanciero = createSelector(
+export const sendingGetPMO = createSelector(
   selectLoadings,
-  (state: reducer.StateLoadings) => state.sendingGetSustentoFinanciero
+  (state: reducer.StateLoadings) => state.sendingGetPMO
+);
+
+export const sendingGetLP = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetLP
+);
+
+export const sendingGetPEP2 = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetPEP2
+);
+export const sendingGetOPEX = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetOPEX
+);
+
+export const sendingGetSAP = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetSAP
+);
+export const sendingGetCECO = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetCECO
 );
