@@ -18,9 +18,11 @@
             <zwc-formulario-ot-movil [form]="form.get('movil')"></zwc-formulario-ot-movil>
         </ng-container>
 
-        <!-- <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre!==null"> -->
-        <zwc-formulario-ot-sustento-financiero [form]="form.get('sustentoFinanciero')">
-        </zwc-formulario-ot-sustento-financiero>
-        <!-- </ng-container> -->
+        <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre!==null">
+            <zwc-formulario-ot-sustento-financiero [form]="form.get('sustentoFinanciero')">
+            </zwc-formulario-ot-sustento-financiero>
+
+            <zwc-formulario-ot-extras [form]="form.get('extras')"></zwc-formulario-ot-extras>
+        </ng-container>
     </div>
 </zwc-content-layout>

@@ -5,6 +5,8 @@ import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { SustentoFinancieroFacade } from '@storeOT/sustento-financiero/sustento-financiero.facades';
 import { map, Observable, Subscription } from 'rxjs';
 
+// TODO: INCORPORAR EL PROVISORIO
+// TODO: PROBAR INTERACCIONES Y RESETEOS
 @Component({
   selector: 'zwc-formulario-ot-sustento-financiero',
   templateUrl: './formulario-ot-sustento-financiero.component.html',

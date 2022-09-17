@@ -13,6 +13,7 @@ import { FormularioOtOrdinarioComponent } from './components/formulario-ot-ordin
 import { FormularioOtFijoComponent } from './components/formulario-ot-fijo/formulario-ot-fijo.component';
 import { FormularioOtMovilComponent } from './components/formulario-ot-movil/formulario-ot-movil.component';
 import { FormularioOtSustentoFinancieroComponent } from './components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component';
+import { FormularioOtExtrasComponent } from './components/formulario-ot-extras/formulario-ot-extras.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FormularioOtSustentoFinancieroComponent } from './components/formulario
     FormularioOtFijoComponent,
     FormularioOtMovilComponent,
     FormularioOtSustentoFinancieroComponent,
+    FormularioOtExtrasComponent,
   ],
   imports: [
     CommonModule,

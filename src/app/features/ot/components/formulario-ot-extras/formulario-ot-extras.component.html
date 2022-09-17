@@ -1,0 +1,28 @@
+<p-divider align="left">
+    <span class="p-tag">Información adicional</span>
+</p-divider>
+
+<form [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <label class="mr-1" for="">Fecha inicio</label>
+                <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                    inputStyleClass="form-control d-block" formControlName="fecha_inicio" id="fecha-inicio-ot"
+                    name="fecha-inicio-ot" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <label for="">Fecha termino</label>
+                <p-calendar [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                    inputStyleClass="form-control d-block" formControlName="fecha_fin" id="fecha-termino-ot"
+                    name="fecha-termino-ot" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+
+            <div class="field col-12">
+                <label for="">Observaciones</label>
+                <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones"
+                    id="observaciones" cols="30" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+</form>
