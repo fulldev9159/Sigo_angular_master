@@ -12,7 +12,9 @@
                 </zwc-pdropdown>
             </div>
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
-
+                <zwc-pdropdown [control]="form.get('sitio_id')" Label="*Sitio:" dropdown_id="select-sitio-plan"
+                    [data]="sitioPlan$|async" Pplaceholder="Selecione un sitio" [loading]="loadingSitioPlan$|async">
+                </zwc-pdropdown>
             </div>
         </div>
     </div>

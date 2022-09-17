@@ -7,6 +7,7 @@ import {
   OficinaCentral,
   PlanProyecto,
   Response,
+  Sitio,
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
@@ -75,6 +76,13 @@ export class OtHttpService {
     return this.http.post<Response<{ items: PlanProyecto[] }>>(
       `${this.API_URL}/ot/plan/getall`,
       {}
+    );
+  }
+
+  getSitioPlan(plan_id: number): Observable<Response<{ items: Sitio[] }>> {
+    return this.http.post<Response<{ items: Sitio[] }>>(
+      `${this.API_URL}/ot/sitio_plan_plid/get`,
+      { plan_id }
     );
   }
 }

@@ -5,6 +5,7 @@ import {
   CubicacionContrato,
   OficinaCentral,
   PlanProyecto,
+  Sitio,
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
@@ -90,5 +91,14 @@ export class OTFacade {
 
   public getPlanDeProyecto$(): Observable<PlanProyecto[]> {
     return this.store.select(otSelectors.getPlanDeProyecto);
+  }
+
+  // CREATE OT CONTRATO MOVIL : GET SITIOS DE UN PLAN PROYECTO
+  public getSitioPlanProyecto(plan_id: number): void {
+    this.store.dispatch(otActions.getSitioPlanProyecto({ plan_id }));
+  }
+
+  public getSitioPlanProyecto$(): Observable<Sitio[]> {
+    return this.store.select(otSelectors.getSitioPlanProyecto);
   }
 }

@@ -44,3 +44,8 @@ export const getPlanDeProyecto = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.planDeProyecto
 );
+
+export const getSitioPlanProyecto = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.sitioPlan
+);

@@ -5,6 +5,7 @@ import {
   CubicacionContrato,
   OficinaCentral,
   PlanProyecto,
+  Sitio,
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
@@ -24,6 +25,7 @@ export interface StateOT {
   areaDeNegocio: AreaDeNegocio[];
   // MOVIL
   planDeProyecto: PlanProyecto[];
+  sitioPlan: Sitio[];
 }
 
 export const initialState: StateOT = {
@@ -35,6 +37,7 @@ export const initialState: StateOT = {
   tipoDeTrabajoFromCub: [],
   areaDeNegocio: [],
   planDeProyecto: [],
+  sitioPlan: [],
 };
 
 export const reducerOT = createReducer(
@@ -70,5 +73,9 @@ export const reducerOT = createReducer(
   on(OTActions.getPlanDeProyectoSuccess, (state, { response }) => ({
     ...state,
     planDeProyecto: response.data.items,
+  })),
+  on(OTActions.getSitioPlanProyectoSuccess, (state, { response }) => ({
+    ...state,
+    sitioPlan: response.data.items,
   }))
 );

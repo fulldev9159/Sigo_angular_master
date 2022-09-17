@@ -7,12 +7,18 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { PlanProyectoMOCK200ok } from '@mocksOT';
+import { PlanProyectoMOCK200ok, SitoMOCK200ok } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { sendingGetPlanDeProyecto } from '@storeOT/loadings/loadings.selectors';
+import {
+  sendingGetPlanDeProyecto,
+  sendingGetSitioPlan,
+} from '@storeOT/loadings/loadings.selectors';
 import { OTFacade } from '@storeOT/ot/ot.facades';
-import { getPlanDeProyecto } from '@storeOT/ot/ot.selectors';
+import {
+  getPlanDeProyecto,
+  getSitioPlanProyecto,
+} from '@storeOT/ot/ot.selectors';
 
 import { FormularioOtMovilComponent } from './formulario-ot-movil.component';
 
@@ -40,6 +46,14 @@ describe('FormularioOtMovilComponent', () => {
               selector: sendingGetPlanDeProyecto,
               value: false,
             },
+            {
+              selector: getSitioPlanProyecto,
+              value: SitoMOCK200ok.data.items,
+            },
+            {
+              selector: sendingGetSitioPlan,
+              value: false,
+            },
           ],
         }),
       ],
@@ -59,7 +73,7 @@ describe('FormularioOtMovilComponent', () => {
   @Component({
     selector: `zwc-host-component2`,
     template: `<zwc-formulario-ot-movil
-      [form]="form.get('bucle')"
+      [form]="form.get('movil')"
     ></zwc-formulario-ot-movil>`,
   })
   class TestComponent {

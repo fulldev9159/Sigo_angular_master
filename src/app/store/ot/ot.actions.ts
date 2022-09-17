@@ -5,6 +5,7 @@ import {
   OficinaCentral,
   PlanProyecto,
   Response,
+  Sitio,
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
@@ -101,5 +102,19 @@ export const getPlanDeProyectoSuccess = createAction(
 );
 export const getPlanDeProyectoError = createAction(
   '[OT] getPlanDeProyecto Error',
+  props<{ error: any }>()
+);
+
+// CREATE OT CONTRATO MOVIL : GET SITIOS DE UN PLAN PROYECTO
+export const getSitioPlanProyecto = createAction(
+  '[OT] getSitioPlanProyecto',
+  props<{ plan_id: number }>()
+);
+export const getSitioPlanProyectoSuccess = createAction(
+  '[OT] getSitioPlanProyecto Success',
+  props<{ response: Response<{ items: Sitio[] }> }>()
+);
+export const getSitioPlanProyectoError = createAction(
+  '[OT] getSitioPlanProyecto Error',
   props<{ error: any }>()
 );

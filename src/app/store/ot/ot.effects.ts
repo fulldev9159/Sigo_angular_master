@@ -113,6 +113,21 @@ export class OTEffects {
     )
   );
 
+  // CREATE OT CONTRATO MOVIL : GET SITIOS DE UN PLAN PROYECTO
+  getSitioPlanProyecto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getSitioPlanProyecto),
+      concatMap(({ plan_id }) =>
+        this.otHttpService.getSitioPlan(plan_id).pipe(
+          map(response => otActions.getSitioPlanProyectoSuccess({ response })),
+          catchError(error =>
+            of(otActions.getSitioPlanProyectoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -123,7 +138,8 @@ export class OTEffects {
           otActions.getTipoDeRedSuccess,
           otActions.getTipoDeTrabajoFromCubSuccess,
           otActions.getAreaDeNegocioSuccess,
-          otActions.getPlanDeProyectoSuccess
+          otActions.getPlanDeProyectoSuccess,
+          otActions.getSitioPlanProyectoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -140,7 +156,8 @@ export class OTEffects {
           otActions.getTipoDeRedError,
           otActions.getTipoDeTrabajoFromCubError,
           otActions.getAreaDeNegocioError,
-          otActions.getPlanDeProyectoError
+          otActions.getPlanDeProyectoError,
+          otActions.getSitioPlanProyectoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

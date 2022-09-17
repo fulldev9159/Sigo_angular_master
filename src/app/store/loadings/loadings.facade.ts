@@ -141,4 +141,8 @@ export class LoadingsFacade {
   public sendingGetPlanDeProyecto$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetPlanDeProyecto);
   }
+  // SITIO PLAN
+  public sendingGetSitioPlan$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetSitioPlan);
+  }
 }

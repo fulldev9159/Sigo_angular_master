@@ -29,9 +29,25 @@ export class FormularioOtMovilComponent implements OnInit, OnDestroy {
         }))
       )
     );
+  sitioPlan$: Observable<Dropdown[]> = this.otFacade
+    .getSitioPlanProyecto$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
+      }),
+      map(values =>
+        values.map(value => ({
+          name: value.nombre,
+          code: value.id,
+        }))
+      )
+    );
   // LOADINGS
   loadingPlanDeProyecto$: Observable<boolean> =
     this.loadingsFacade.sendingGetPlanDeProyecto$();
+  loadingSitioPlan$: Observable<boolean> =
+    this.loadingsFacade.sendingGetSitioPlan$();
 
   constructor(
     private otFacade: OTFacade,
@@ -39,7 +55,19 @@ export class FormularioOtMovilComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.form.get('sitio_id').disable();
     this.otFacade.getPlanDeProyecto();
+
+    this.subscription.add(
+      this.form
+        .get('plan_proyecto_id')
+        .valueChanges.subscribe(plan_proyecto_id => {
+          if (plan_proyecto_id) {
+            this.otFacade.getSitioPlanProyecto(+plan_proyecto_id);
+            this.form.get('sitio_id').enable();
+          }
+        })
+    );
   }
 
   ngOnDestroy(): void {

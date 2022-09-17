@@ -1,4 +1,8 @@
-import { PlanProyectoMOCK200ok, TipoDeNumeroInternoMOCK200ok } from '@mocksOT';
+import {
+  PlanProyectoMOCK200ok,
+  SitoMOCK200ok,
+  TipoDeNumeroInternoMOCK200ok,
+} from '@mocksOT';
 
 describe('Formulario serccion Contrato FIJO', () => {
   beforeEach(() => {
@@ -29,5 +33,19 @@ describe('Formulario serccion Contrato FIJO', () => {
         )
         .map(value => value.nombre)
     );
+
+    cy.get('#select-sitio-plan>div').should('have.class', 'p-disabled');
+    cy._check_dropdown_async(
+      '/ot/sitio_plan_plid/get',
+      '#select-plan-proyecto',
+      '3G',
+      '#select-sitio-plan',
+      SitoMOCK200ok.data.items
+        .sort((a, b) =>
+          a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
+        )
+        .map(value => value.nombre)
+    );
+    cy.get('#select-sitio-plan>div').should('not.have.class', 'p-disabled');
   });
 });
