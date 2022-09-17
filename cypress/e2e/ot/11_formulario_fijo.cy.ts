@@ -18,7 +18,7 @@ describe('Formulario serccion Contrato FIJO', () => {
       '#select-contrato_marco',
       'UNIFICADO_FIJA',
       '#select-cubicacion',
-      'Testing Cubicacion Fija Precargada NO USAR'
+      'Testing Cubicacion FIJA Precargada NO USAR'
     );
 
     cy._check_dropdown(

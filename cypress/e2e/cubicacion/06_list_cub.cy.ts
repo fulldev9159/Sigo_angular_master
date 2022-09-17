@@ -304,7 +304,7 @@ describe('Listar Cubicaciones', () => {
     cy.get('button[id="button-eliminar-cubicacion"]').click();
 
     cy.get('#mensaje-confirmacion').contains(
-      '¿Está seguro que desea eliminar esta cubicación ID:5?'
+      '¿Está seguro que desea eliminar esta cubicación ID:8?'
     );
     cy.get('button[id="button-confirmar"]').click();
     cy.wait(1);
