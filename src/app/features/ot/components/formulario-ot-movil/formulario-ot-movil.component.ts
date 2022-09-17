@@ -1,9 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Dropdown } from '@model';
+import { Dropdown, Sitio } from '@model';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTFacade } from '@storeOT/ot/ot.facades';
-import { map, Observable, Subscription } from 'rxjs';
+import { SustentoFinancieroFacade } from '@storeOT/sustento-financiero/sustento-financiero.facades';
+import { map, Observable, Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'zwc-formulario-ot-movil',
@@ -29,9 +30,12 @@ export class FormularioOtMovilComponent implements OnInit, OnDestroy {
         }))
       )
     );
+
+  sitioPlan: Sitio[];
   sitioPlan$: Observable<Dropdown[]> = this.otFacade
     .getSitioPlanProyecto$()
     .pipe(
+      tap(values => (this.sitioPlan = values)),
       map(values => {
         let tmp = [...values];
         return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
@@ -51,7 +55,8 @@ export class FormularioOtMovilComponent implements OnInit, OnDestroy {
 
   constructor(
     private otFacade: OTFacade,
-    private loadingsFacade: LoadingsFacade
+    private loadingsFacade: LoadingsFacade,
+    private sustentoFinancieroFacade: SustentoFinancieroFacade
   ) {}
 
   ngOnInit(): void {
@@ -67,6 +72,14 @@ export class FormularioOtMovilComponent implements OnInit, OnDestroy {
             this.form.get('sitio_id').enable();
           }
         })
+    );
+
+    this.subscription.add(
+      this.form.get('sitio_id').valueChanges.subscribe(sitio_id => {
+        this.sustentoFinancieroFacade.getPMO(
+          this.sitioPlan.filter(sitio => sitio.id === sitio_id)[0].codigo
+        );
+      })
     );
   }
 
