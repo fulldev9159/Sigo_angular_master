@@ -4,6 +4,7 @@ import {
   Comuna,
   CubicacionContrato,
   OficinaCentral,
+  PlanProyecto,
   SolicitadoPor,
   TipoDeRed,
   TipoDeTrabajo,
@@ -80,5 +81,14 @@ export class OTFacade {
 
   public getAreaDeNegocio$(): Observable<AreaDeNegocio[]> {
     return this.store.select(otSelectors.getAreaDeNegocio);
+  }
+
+  // CREATE OT CONTRATO MOVIL : GET PLANES DE PROYECTO
+  public getPlanDeProyecto(): void {
+    this.store.dispatch(otActions.getPlanDeProyecto());
+  }
+
+  public getPlanDeProyecto$(): Observable<PlanProyecto[]> {
+    return this.store.select(otSelectors.getPlanDeProyecto);
   }
 }

@@ -39,3 +39,8 @@ export const getAreaDeNegocio = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.areaDeNegocio
 );
+
+export const getPlanDeProyecto = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.planDeProyecto
+);

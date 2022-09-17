@@ -5,6 +5,7 @@ import {
   AreaDeNegocio,
   Comuna,
   OficinaCentral,
+  PlanProyecto,
   Response,
   SolicitadoPor,
   TipoDeRed,
@@ -66,6 +67,13 @@ export class OtHttpService {
   getAreaDeNegocio(): Observable<Response<{ items: AreaDeNegocio[] }>> {
     return this.http.post<Response<{ items: AreaDeNegocio[] }>>(
       `${this.API_URL}/ot/ot_area_negocio/getall`,
+      {}
+    );
+  }
+
+  getPlanDeProyecto(): Observable<Response<{ items: PlanProyecto[] }>> {
+    return this.http.post<Response<{ items: PlanProyecto[] }>>(
+      `${this.API_URL}/ot/plan/getall`,
       {}
     );
   }

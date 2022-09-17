@@ -120,7 +120,12 @@ export const sendingGetTipoNumeroInterno = createSelector(
   (state: reducer.StateLoadings) => state.sendingGetTipoNumeroInterno
 );
 
-export const getOTFromNumeroInterno = createSelector(
+export const sendingGetOTsFromNumeroInterno = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetOTsFromNumeroInterno
+);
+
+export const sendingGetPlanDeProyecto = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetPlanDeProyecto
 );

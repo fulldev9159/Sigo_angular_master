@@ -36,6 +36,7 @@ export interface StateLoadings {
   sendingGetAreaDeNegocio: boolean;
   sendingGetTipoNumeroInterno: boolean;
   sendingGetOTsFromNumeroInterno: boolean;
+  sendingGetPlanDeProyecto: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -63,6 +64,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetAreaDeNegocio: false,
   sendingGetTipoNumeroInterno: false,
   sendingGetOTsFromNumeroInterno: false,
+  sendingGetPlanDeProyecto: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -357,6 +359,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetOTsFromNumeroInterno: false,
+    })
+  ),
+
+  on(otActions.getPlanDeProyecto, state => ({
+    ...state,
+    sendingGetPlanDeProyecto: true,
+  })),
+  on(
+    otActions.getPlanDeProyectoSuccess,
+    otActions.getPlanDeProyectoError,
+    state => ({
+      ...state,
+      sendingGetPlanDeProyecto: false,
     })
   )
 );

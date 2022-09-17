@@ -3,6 +3,7 @@ import {
   Comuna,
   CubicacionContrato,
   OficinaCentral,
+  PlanProyecto,
   Response,
   SolicitadoPor,
   TipoDeRed,
@@ -89,5 +90,16 @@ export const getAreaDeNegocioSuccess = createAction(
 );
 export const getAreaDeNegocioError = createAction(
   '[OT] getAreaDeNegocio Error',
+  props<{ error: any }>()
+);
+
+// CREATE OT CONTRATO MOVIL : GET PLANES DE PROYECTO
+export const getPlanDeProyecto = createAction('[OT] getPlanDeProyecto ');
+export const getPlanDeProyectoSuccess = createAction(
+  '[OT] getPlanDeProyecto Success',
+  props<{ response: Response<{ items: PlanProyecto[] }> }>()
+);
+export const getPlanDeProyectoError = createAction(
+  '[OT] getPlanDeProyecto Error',
   props<{ error: any }>()
 );

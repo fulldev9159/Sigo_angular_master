@@ -134,6 +134,11 @@ export class LoadingsFacade {
 
   // OTS FROM NUMERO INTERNO
   public sendingGetOTsFromNumeroInterno$(): Observable<boolean> {
-    return this.store.select(loadingSelector.getOTFromNumeroInterno);
+    return this.store.select(loadingSelector.sendingGetOTsFromNumeroInterno);
+  }
+
+  // PLANES DE PROYECTO
+  public sendingGetPlanDeProyecto$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetPlanDeProyecto);
   }
 }

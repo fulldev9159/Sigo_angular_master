@@ -6,6 +6,7 @@ import {
   AreaNegocioMOCK200ok,
   CentralesMOCK200ok,
   ComunasMOCK200ok,
+  PlanProyectoMOCK200ok,
   SolicitadoPorMOCK200ok,
   TipoDeNumeroInternoMOCK200ok,
   TipoDeTrabajoMOCK200ok,
@@ -91,6 +92,17 @@ describe('OtHttpService', () => {
     service.getAreaDeNegocio().subscribe({
       next: response => {
         expect(response).toEqual(AreaNegocioMOCK200ok);
+        done();
+      },
+      error: done.fail,
+    });
+  });
+
+  it('should call getPlanDeProyecto and return  Data', (done: DoneFn) => {
+    httpClientSpy.post.and.returnValue(of(PlanProyectoMOCK200ok));
+    service.getPlanDeProyecto().subscribe({
+      next: response => {
+        expect(response).toEqual(PlanProyectoMOCK200ok);
         done();
       },
       error: done.fail,

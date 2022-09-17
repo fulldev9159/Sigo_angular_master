@@ -40,3 +40,10 @@ export interface AreaDeNegocio {
   descripcion: string;
   id: number;
 }
+
+export interface PlanProyecto {
+  id: number;
+  nombre: string;
+  estado: boolean;
+  created_at: Date;
+}

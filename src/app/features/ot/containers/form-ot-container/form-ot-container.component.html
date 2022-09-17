@@ -14,5 +14,8 @@
         <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre==='Fijo'">
             <zwc-formulario-ot-fijo [form]="form.get('fijo')"></zwc-formulario-ot-fijo>
         </ng-container>
+        <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre==='Móvil'">
+            <zwc-formulario-ot-movil [form]="form.get('movil')"></zwc-formulario-ot-movil>
+        </ng-container>
     </div>
 </zwc-content-layout>

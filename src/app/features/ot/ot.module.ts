@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormularioOtBucleComponent } from './components/formulario-ot-bucle/formulario-ot-bucle.component';
 import { FormularioOtOrdinarioComponent } from './components/formulario-ot-ordinario/formulario-ot-ordinario.component';
 import { FormularioOtFijoComponent } from './components/formulario-ot-fijo/formulario-ot-fijo.component';
+import { FormularioOtMovilComponent } from './components/formulario-ot-movil/formulario-ot-movil.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormularioOtFijoComponent } from './components/formulario-ot-fijo/formu
     FormularioOtBucleComponent,
     FormularioOtOrdinarioComponent,
     FormularioOtFijoComponent,
+    FormularioOtMovilComponent,
   ],
   imports: [
     CommonModule,

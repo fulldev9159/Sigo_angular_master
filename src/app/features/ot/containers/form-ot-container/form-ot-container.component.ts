@@ -9,6 +9,7 @@ import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
+// TODO: VERIFIXAR COMPORTAMIENTO AL NAVEGAR: RESETEO DE TODO
 @Component({
   selector: 'zwc-form-ot-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -100,6 +101,10 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         Validators.maxLength(255),
       ]),
       ots_numero_interno: new FormControl([]),
+    }),
+    movil: new FormGroup({
+      plan_proyecto_id: new FormControl(null, [Validators.required]),
+      sitio_id: new FormControl(null, [Validators.required]),
     }),
   });
 

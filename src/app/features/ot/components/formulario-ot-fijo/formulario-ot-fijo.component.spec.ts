@@ -12,11 +12,14 @@ import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import {
-  getOTFromNumeroInterno,
+  sendingGetOTsFromNumeroInterno,
   sendingGetTipoNumeroInterno,
 } from '@storeOT/loadings/loadings.selectors';
 import { OTFacade } from '@storeOT/ot/ot.facades';
-import { getTipoDeNumeroInterno } from '@storeOT/numero-interno/numero-interno.selectors';
+import {
+  getOTFromNumeroInterno,
+  getTipoDeNumeroInterno,
+} from '@storeOT/numero-interno/numero-interno.selectors';
 
 import { FormularioOtFijoComponent } from './formulario-ot-fijo.component';
 import { NumeroInternoFacade } from '@storeOT/numero-interno/numero-interno.facades';
@@ -49,10 +52,10 @@ describe('FormularioOtFijoComponent', () => {
             },
             {
               selector: getOTFromNumeroInterno,
-              value: null,
+              value: [],
             },
             {
-              selector: getOTFromNumeroInterno,
+              selector: sendingGetOTsFromNumeroInterno,
               value: false,
             },
           ],
