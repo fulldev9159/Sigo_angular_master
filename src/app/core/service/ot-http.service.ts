@@ -69,14 +69,4 @@ export class OtHttpService {
       {}
     );
   }
-
-  // FIJO
-  getTipoDeNumeroInterno(): Observable<
-    Response<{ items: TipoNumeroInterno[] }>
-  > {
-    return this.http.post<Response<{ items: TipoNumeroInterno[] }>>(
-      `${this.API_URL}/configuration/tipo_numero_interno/getall`,
-      {}
-    );
-  }
 }

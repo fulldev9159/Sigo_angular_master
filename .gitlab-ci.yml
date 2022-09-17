@@ -24,7 +24,7 @@ linter:
 
 restart test environment:
   stage: restart test environment
-  # when: manual
+  when: manual
   image: tmaier/docker-compose:latest
   script:
     - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
@@ -58,6 +58,8 @@ reset database testing:
 unit test:
   stage: unit test
   # when: manual
+  needs:
+    - reset database testing
   image: trion/ng-cli-karma:${CLI_VERSION}
   script:
     - npm ci
@@ -67,6 +69,8 @@ unit test:
 e2e test:
   image: cypress/browsers:node14.15.0-chrome96-ff94
   stage: e2e test
+  needs:
+    - unit test
   # when: manual
   script:
     # install dependencies

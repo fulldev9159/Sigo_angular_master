@@ -13,7 +13,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { sendingGetTipoNumeroInterno } from '@storeOT/loadings/loadings.selectors';
 import { OTFacade } from '@storeOT/ot/ot.facades';
-import { getTipoDeNumeroInterno } from '@storeOT/ot/ot.selectors';
+import { getTipoDeNumeroInterno } from '@storeOT/numero-interno/numero-interno.selectors';
 
 import { FormularioOtFijoComponent } from './formulario-ot-fijo.component';
 

@@ -39,8 +39,3 @@ export const getAreaDeNegocio = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.areaDeNegocio
 );
-
-export const getTipoDeNumeroInterno = createSelector(
-  selectOT,
-  (state: reducer.StateOT) => state.tipoNumeroInterno
-);

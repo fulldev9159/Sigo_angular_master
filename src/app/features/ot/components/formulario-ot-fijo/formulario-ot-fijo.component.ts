@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Dropdown } from '@model';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
-import { OTFacade } from '@storeOT/ot/ot.facades';
+import { NumeroInternoFacade } from '@storeOT/numero-interno/numero-interno.facades';
 import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class FormularioOtFijoComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
 
   // DATA
-  tiposNumeroInterno$: Observable<Dropdown[]> = this.otFacade
+  tiposNumeroInterno$: Observable<Dropdown[]> = this.numeroInternoFacade
     .getTipoDeNumeroInterno$()
     .pipe(
       map(values => {
@@ -35,13 +35,13 @@ export class FormularioOtFijoComponent implements OnInit, OnDestroy {
     this.loadingsFacade.sendingGetTipoNumeroInterno$();
 
   constructor(
-    private otFacade: OTFacade,
+    private numeroInternoFacade: NumeroInternoFacade,
     private loadingsFacade: LoadingsFacade
   ) {}
 
   ngOnInit(): void {
     this.form.get('numero_interno').disable();
-    this.otFacade.getTipoDeNumeroInterno();
+    this.numeroInternoFacade.getTipoDeNumeroInterno();
 
     this.subscription.add(
       this.form

@@ -1,23 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
-  AgenciaContrato,
   AreaDeNegocio,
   Comuna,
-  ContratosUser,
-  Cubicacion,
   CubicacionContrato,
-  DetalleCubicacion,
   OficinaCentral,
-  PerfilesUsuario,
-  ProveedorAgenciaContrato,
-  RequestCreateCubicacion,
-  RequestEditCubicacion,
-  Response,
   SolicitadoPor,
-  TipoCubicacion,
   TipoDeRed,
   TipoDeTrabajo,
-  TipoNumeroInterno,
 } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -91,14 +80,5 @@ export class OTFacade {
 
   public getAreaDeNegocio$(): Observable<AreaDeNegocio[]> {
     return this.store.select(otSelectors.getAreaDeNegocio);
-  }
-
-  // CREATE OT CONTRATO FIJO : GET TIPOS DE NUMERO INTERNO
-  public getTipoDeNumeroInterno(): void {
-    this.store.dispatch(otActions.getTipoDeNumeroInterno());
-  }
-
-  public getTipoDeNumeroInterno$(): Observable<TipoNumeroInterno[]> {
-    return this.store.select(otSelectors.getTipoDeNumeroInterno);
   }
 }

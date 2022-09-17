@@ -48,6 +48,11 @@ import { OTEffects } from './ot/ot.effects';
 import * as formOTReduce from './ot/ot.reducers';
 // OT STORE
 
+// NUMERO INTERNO STORE
+import { NumeroInternoEffects } from './numero-interno/numero-interno.effects';
+import * as formNumeroInternoReduce from './numero-interno/numero-interno.reducers';
+// NUMERO INTERNO STORE
+
 @NgModule({
   declarations: [],
   imports: [
@@ -110,6 +115,14 @@ import * as formOTReduce from './ot/ot.reducers';
     // OT STORE
     EffectsModule.forFeature([OTEffects]),
     StoreModule.forFeature(formOTReduce.Featurekey, formOTReduce.reducerOT),
+
+    // NUMERO INTERNO STORE
+    EffectsModule.forFeature([NumeroInternoEffects]),
+    StoreModule.forFeature(
+      formNumeroInternoReduce.Featurekey,
+      formNumeroInternoReduce.reducerNumeroInterno
+    ),
+
     SharedModule,
   ],
 })

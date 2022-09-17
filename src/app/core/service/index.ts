@@ -9,3 +9,4 @@ export * from './contrato-http.service';
 export * from './proveedor-http.service';
 export * from './servicios-http.service';
 export * from './ot-http.service';
+export * from './numero-interno-http.service';

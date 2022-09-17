@@ -22,7 +22,7 @@ describe('OtHttpService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
     });
-    service = TestBed.inject(OtHttpService);
+    // service = TestBed.inject(OtHttpService);
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['post']);
     service = new OtHttpService(httpClientSpy);
   });
@@ -91,17 +91,6 @@ describe('OtHttpService', () => {
     service.getAreaDeNegocio().subscribe({
       next: response => {
         expect(response).toEqual(AreaNegocioMOCK200ok);
-        done();
-      },
-      error: done.fail,
-    });
-  });
-
-  it('should call getTipoDeNumeroInterno and return  Data', (done: DoneFn) => {
-    httpClientSpy.post.and.returnValue(of(TipoDeNumeroInternoMOCK200ok));
-    service.getTipoDeNumeroInterno().subscribe({
-      next: response => {
-        expect(response).toEqual(TipoDeNumeroInternoMOCK200ok);
         done();
       },
       error: done.fail,

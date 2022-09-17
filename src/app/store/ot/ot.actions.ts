@@ -91,16 +91,3 @@ export const getAreaDeNegocioError = createAction(
   '[OT] getAreaDeNegocio Error',
   props<{ error: any }>()
 );
-
-// CREATE OT CONTRATO FIJO : GET TIPOS DE NUMERO INTERNO
-export const getTipoDeNumeroInterno = createAction(
-  '[OT] getTipoDeNumeroInterno '
-);
-export const getTipoDeNumeroInternoSuccess = createAction(
-  '[OT] getTipoDeNumeroInterno Success',
-  props<{ response: Response<{ items: TipoNumeroInterno[] }> }>()
-);
-export const getTipoDeNumeroInternoError = createAction(
-  '[OT] getTipoDeNumeroInterno Error',
-  props<{ error: any }>()
-);

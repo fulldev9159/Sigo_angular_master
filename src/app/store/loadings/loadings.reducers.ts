@@ -7,6 +7,7 @@ import * as proveedorActions from '../proveedor/proveedor.actions';
 import * as serviciosActions from '../servicios/servicios.actions';
 import * as cubicacionActions from '../cubicacion/cubicacion.actions';
 import * as otActions from '../ot/ot.actions';
+import * as numeroInternoActions from '../numero-interno/numero-interno.actions';
 
 export const FeatureKey = 'loadings';
 
@@ -331,13 +332,13 @@ export const reducerLoadings = createReducer(
     })
   ),
 
-  on(otActions.getTipoDeNumeroInterno, state => ({
+  on(numeroInternoActions.getTipoDeNumeroInterno, state => ({
     ...state,
     sendingGetTipoNumeroInterno: true,
   })),
   on(
-    otActions.getTipoDeNumeroInternoSuccess,
-    otActions.getTipoDeNumeroInternoError,
+    numeroInternoActions.getTipoDeNumeroInternoSuccess,
+    numeroInternoActions.getTipoDeNumeroInternoError,
     state => ({
       ...state,
       sendingGetTipoNumeroInterno: false,
