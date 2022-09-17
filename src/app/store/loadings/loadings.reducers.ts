@@ -9,6 +9,7 @@ import * as cubicacionActions from '../cubicacion/cubicacion.actions';
 import * as otActions from '../ot/ot.actions';
 import * as numeroInternoActions from '../numero-interno/numero-interno.actions';
 import * as sustentoFinancieroActions from '../sustento-financiero/sustento-financiero.actions';
+import * as proyectosActions from '../proyectos/proyectos.actions';
 export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
@@ -45,6 +46,7 @@ export interface StateLoadings {
   sendingGetSAP: boolean;
   sendingGetCECO: boolean;
   sendingGetAdminContratoFromCub: boolean;
+  sendingGetProyectos: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -81,6 +83,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetSAP: false,
   sendingGetCECO: false,
   sendingGetAdminContratoFromCub: false,
+  sendingGetProyectos: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -493,6 +496,19 @@ export const reducerLoadings = createReducer(
     state => ({
       ...state,
       sendingGetAdminContratoFromCub: false,
+    })
+  ),
+
+  on(proyectosActions.getProyectos, state => ({
+    ...state,
+    sendingGetProyectos: true,
+  })),
+  on(
+    proyectosActions.getProyectosSuccess,
+    proyectosActions.getProyectosError,
+    state => ({
+      ...state,
+      sendingGetProyectos: false,
     })
   )
 );

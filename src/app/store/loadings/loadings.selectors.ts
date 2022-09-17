@@ -167,3 +167,8 @@ export const sendingGetAdminContratoFromCub = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetAdminContratoFromCub
 );
+
+export const sendingGetProyectos = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetProyectos
+);

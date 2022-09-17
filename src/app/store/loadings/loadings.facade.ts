@@ -174,4 +174,7 @@ export class LoadingsFacade {
   public sendingGetAdminContratoFromCub$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetAdminContratoFromCub);
   }
+  public sendingGetProyectos$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingGetProyectos);
+  }
 }

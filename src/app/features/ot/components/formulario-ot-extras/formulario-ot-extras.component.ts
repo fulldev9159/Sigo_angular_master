@@ -4,6 +4,7 @@ import { Dropdown } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTFacade } from '@storeOT/ot/ot.facades';
+import { ProyectosFacade } from '@storeOT/proyectos/proyectos.facades';
 import { map, Observable, Subscription } from 'rxjs';
 
 // TODO: MIGRAR VALIDACIONES DE FECHA
@@ -32,13 +33,31 @@ export class FormularioOtExtrasComponent implements OnInit, OnDestroy {
       )
     );
 
+  proyectos$: Observable<Dropdown[]> = this.proyectosFacade
+    .getProyectos$()
+    .pipe(
+      map(values => {
+        let tmp = [...values];
+        return tmp.sort((a, b) => (a.nombre > b.nombre ? 1 : -1));
+      }),
+      map(values =>
+        values.map(value => ({
+          name: value.nombre,
+          code: value.id,
+        }))
+      )
+    );
+
   // LOADINGS
   loadingAdminContratoFromCub$: Observable<boolean> =
     this.loadingsFacade.sendingGetAdminContratoFromCub$();
+  loadingProyectos$: Observable<boolean> =
+    this.loadingsFacade.sendingGetProyectos$();
 
   constructor(
     private cubicacionFacade: CubicacionFacade,
     private otFacade: OTFacade,
+    private proyectosFacade: ProyectosFacade,
     private loadingsFacade: LoadingsFacade
   ) {}
 
@@ -49,6 +68,7 @@ export class FormularioOtExtrasComponent implements OnInit, OnDestroy {
           this.cubicacionFacade.getAdminContratoFromCub(
             cubicacionSelected.cubicacion_id
           );
+        this.proyectosFacade.getProyectos();
       })
     );
   }
