@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environment';
 import { Response } from '@model';
 import { Observable } from 'rxjs';
-import { NumeroInternoHasOT, TipoNumeroInterno } from '../model/numero_interno';
+import {
+  OTFromNumeroInterno,
+  TipoNumeroInterno,
+} from '../model/numero_interno';
 
 @Injectable({
   providedIn: 'root',
@@ -23,10 +26,10 @@ export class NumeroInternoHttpService {
     );
   }
 
-  getNumeroInternoHasOT(
+  getOTFromNumeroInterno(
     numero_interno: string
-  ): Observable<Response<{ items: NumeroInternoHasOT[] }>> {
-    return this.http.post<Response<{ items: NumeroInternoHasOT[] }>>(
+  ): Observable<Response<{ items: OTFromNumeroInterno[] }>> {
+    return this.http.post<Response<{ items: OTFromNumeroInterno[] }>>(
       `${this.API_URL}/ot/ot_has_numero_interno_niid/get`,
       { numero_interno }
     );

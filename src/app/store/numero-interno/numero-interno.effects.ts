@@ -35,10 +35,30 @@ export class NumeroInternoEffects {
     )
   );
 
+  // CREATE OT CONTRATO BUCLE : GET OTS FROM NUMERO INTERNO
+  getOTFromNumeroInterno$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getOTFromNumeroInterno),
+      concatMap(({ numero_interno }) =>
+        this.numeroInternoHttp.getOTFromNumeroInterno(numero_interno).pipe(
+          map(response =>
+            otActions.getOTFromNumeroInternoSuccess({ response })
+          ),
+          catchError(error =>
+            of(otActions.getOTFromNumeroInternoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.getTipoDeNumeroInternoSuccess),
+        ofType(
+          otActions.getTipoDeNumeroInternoSuccess,
+          otActions.getOTFromNumeroInternoSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -47,7 +67,10 @@ export class NumeroInternoEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otActions.getTipoDeNumeroInternoError),
+        ofType(
+          otActions.getTipoDeNumeroInternoError,
+          otActions.getOTFromNumeroInternoError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TipoNumeroInterno } from '@model';
+import { OTFromNumeroInterno, TipoNumeroInterno } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as numeroInternoSelectors from './numero-interno.selectors';
@@ -18,5 +18,16 @@ export class NumeroInternoFacade {
 
   public getTipoDeNumeroInterno$(): Observable<TipoNumeroInterno[]> {
     return this.store.select(numeroInternoSelectors.getTipoDeNumeroInterno);
+  }
+
+  // CREATE OT CONTRATO FIJO : GET OT FROM NUMERO INTERNO
+  public getOTFromNumeroInterno(numero_interno: string): void {
+    this.store.dispatch(
+      numeroInternoActions.getOTFromNumeroInterno({ numero_interno })
+    );
+  }
+
+  public getOTFromNumeroInterno$(): Observable<OTFromNumeroInterno[]> {
+    return this.store.select(numeroInternoSelectors.getOTFromNumeroInterno);
   }
 }

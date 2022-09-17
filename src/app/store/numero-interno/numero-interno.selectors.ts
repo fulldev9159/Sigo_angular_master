@@ -8,3 +8,8 @@ export const getTipoDeNumeroInterno = createSelector(
   selectNumeroInterno,
   (state: reducer.StateNumeroInterno) => state.tipoNumeroInterno
 );
+
+export const getOTFromNumeroInterno = createSelector(
+  selectNumeroInterno,
+  (state: reducer.StateNumeroInterno) => state.otsFromNumeroInterno
+);

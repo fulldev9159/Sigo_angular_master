@@ -37,11 +37,16 @@ describe('Formulario serccion Contrato FIJO', () => {
 
   describe('comportamiento', () => {
     it('Al agregar un numero interno este debe aparecer debajo en la tabla', () => {
+      cy.intercept('POST', '/ot/ot_has_numero_interno_niid/get').as(
+        'HTTPRESPONSE'
+      );
+
       cy._select_dropdown('#select-tipo-numero-interno', '@TIEMPOS');
       cy.get('input[name="input-numero-interno"]').type('123456');
       cy.get('#agregar-numero-interno').click();
-
-      cy.get('tbody').contains('td', '123456');
+      cy.wait('@HTTPRESPONSE').then(() => {
+        cy.get('tbody').contains('td', '123456');
+      });
     });
   });
 });

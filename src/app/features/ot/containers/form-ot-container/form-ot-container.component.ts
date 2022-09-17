@@ -99,7 +99,7 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
         // this.noWhitespace,
         Validators.maxLength(255),
       ]),
-      numeros_internos: new FormControl([]),
+      ots_numero_interno: new FormControl([]),
     }),
   });
 

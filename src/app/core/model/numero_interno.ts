@@ -4,7 +4,7 @@ export interface TipoNumeroInterno {
 }
 
 // NUMERO INTERNO HAS OT
-export interface NumeroInternoHasOT {
+export interface OTFromNumeroInterno {
   id: number;
   ot_id: number;
   numero_interno: string;
