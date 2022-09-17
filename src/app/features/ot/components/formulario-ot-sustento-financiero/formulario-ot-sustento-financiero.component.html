@@ -15,10 +15,36 @@
             </div>
 
             <div class="field col-12 md:col-8 lg:col-8 xl:col-8">
-                <div class="formgrid grid">
+                <div class="formgrid grid" *ngIf="form.get('costos').value==='capex'">
                     <div class="field col-12 ">
                         <zwc-pdropdown [control]="form.get('pmo_codigo')" Label="*PMO:" dropdown_id="select-pmo"
                             [data]="pmo$|async" Pplaceholder="Selecione un pmo" [loading]="loadingPMO$|async">
+                        </zwc-pdropdown>
+
+                        <zwc-pdropdown [control]="form.get('lp_codigo')" Label="*Línea Presupuestaria:"
+                            dropdown_id="select-linea-presupuestaria" [data]="lineaPresupuestaria$|async"
+                            Pplaceholder="Selecione una línea presupuestaria" [loading]="loadingGetLP$|async">
+                        </zwc-pdropdown>
+
+                        <zwc-pdropdown [control]="form.get('pep2_capex_id')" Label="*PEP2:" dropdown_id="select-pep2"
+                            [data]="pep2$|async" Pplaceholder="Selecione un pep2" [loading]="loadingGetPEP2$|async">
+                        </zwc-pdropdown>
+                    </div>
+                </div>
+                <div class="formgrid grid" *ngIf="form.get('costos').value==='opex'">
+                    <div class="field col-12 ">
+                        <zwc-pdropdown [control]="form.get('id_opex_codigo')" Label="*ID Opex:"
+                            dropdown_id="select-opex" [data]="opex$|async" Pplaceholder="Selecione un opex id"
+                            [loading]="loadingGetOPEX$|async">
+                        </zwc-pdropdown>
+
+                        <zwc-pdropdown [control]="form.get('cuenta_sap_codigo')" Label="*Cuenta SAP:"
+                            dropdown_id="select-cuenta-sap" [data]="sap$|async" Pplaceholder="Selecione una cuenta sap"
+                            [loading]="loadingGetSAP$|async">
+                        </zwc-pdropdown>
+
+                        <zwc-pdropdown [control]="form.get('ceco_codigo')" Label="*CECO:" dropdown_id="select-ceco"
+                            [data]="ceco$|async" Pplaceholder="Selecione un ceco" [loading]="loadingGetCECO$|async">
                         </zwc-pdropdown>
                     </div>
                 </div>

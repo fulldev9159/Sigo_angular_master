@@ -74,6 +74,7 @@ export class FormularioOtMovilComponent implements OnInit, OnDestroy {
         })
     );
 
+    // TODO: REVISAR COMO OBTENGO PMO MOVIL
     this.subscription.add(
       this.form.get('sitio_id').valueChanges.subscribe(sitio_id => {
         this.sustentoFinancieroFacade.getPMO(
