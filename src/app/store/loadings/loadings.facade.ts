@@ -177,4 +177,8 @@ export class LoadingsFacade {
   public sendingGetProyectos$(): Observable<boolean> {
     return this.store.select(loadingSelector.sendingGetProyectos);
   }
+
+  public sendingCreateOT$(): Observable<boolean> {
+    return this.store.select(loadingSelector.sendingCreateOT);
+  }
 }

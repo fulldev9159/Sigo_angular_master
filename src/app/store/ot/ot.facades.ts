@@ -5,6 +5,10 @@ import {
   CubicacionContrato,
   OficinaCentral,
   PlanProyecto,
+  RequestCreateOTBucle,
+  RequestCreateOTFijo,
+  RequestCreateOTMovil,
+  RequestCreateOTOrdinario,
   Sitio,
   SolicitadoPor,
   TipoDeRed,
@@ -20,6 +24,17 @@ import * as otActions from './ot.actions';
 })
 export class OTFacade {
   constructor(private store: Store<any>) {}
+
+  // CREATE OT
+  public createOT(
+    request:
+      | RequestCreateOTBucle
+      | RequestCreateOTFijo
+      | RequestCreateOTMovil
+      | RequestCreateOTOrdinario
+  ): void {
+    this.store.dispatch(otActions.createOT({ request }));
+  }
 
   // GET CUBICACION SELECCIONADA
   public cubicacionSelected(cubicacionSelected: CubicacionContrato): void {

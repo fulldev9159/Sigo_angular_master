@@ -4,6 +4,10 @@ import {
   CubicacionContrato,
   OficinaCentral,
   PlanProyecto,
+  RequestCreateOTBucle,
+  RequestCreateOTFijo,
+  RequestCreateOTMovil,
+  RequestCreateOTOrdinario,
   Response,
   Sitio,
   SolicitadoPor,
@@ -12,6 +16,28 @@ import {
   TipoNumeroInterno,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
+
+// CREATE OT
+export const createOT = createAction(
+  '[OT] GET createOT',
+  props<{
+    request:
+      | RequestCreateOTBucle
+      | RequestCreateOTFijo
+      | RequestCreateOTMovil
+      | RequestCreateOTOrdinario;
+  }>()
+);
+
+export const createOTSuccess = createAction(
+  '[OT] GET createOT Success',
+  props<{ response: Response<any> }>()
+);
+
+export const createOTError = createAction(
+  '[OT] GET createOT Error',
+  props<{ error: any }>()
+);
 
 // SET CUBICACION SELECTED
 export const cubicacionSelected = createAction(

@@ -6,6 +6,10 @@ import {
   Comuna,
   OficinaCentral,
   PlanProyecto,
+  RequestCreateOTBucle,
+  RequestCreateOTFijo,
+  RequestCreateOTMovil,
+  RequestCreateOTOrdinario,
   Response,
   Sitio,
   SolicitadoPor,
@@ -22,6 +26,18 @@ export class OtHttpService {
   API_URL = '';
   constructor(private http: HttpClient) {
     this.API_URL = environment.api;
+  }
+
+  // CREATE OT
+
+  createOT(
+    request:
+      | RequestCreateOTBucle
+      | RequestCreateOTFijo
+      | RequestCreateOTMovil
+      | RequestCreateOTOrdinario
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.API_URL}/ot/ot/save`, request);
   }
 
   getOficinaCentral(

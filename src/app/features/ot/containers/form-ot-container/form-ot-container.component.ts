@@ -3,11 +3,15 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { FormularioOtBaseComponent } from '../../components/formulario-ot-base/formulario-ot-base.component';
+import { FormularioOtMovilComponent } from '../../components/formulario-ot-movil/formulario-ot-movil.component';
 
 // TODO: VERIFIXAR COMPORTAMIENTO AL NAVEGAR: RESETEO DE TODO
 @Component({
@@ -22,6 +26,19 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
   navbarHeader: MenuItem[];
 
   // contractType$ = new BehaviorSubject<string>('');
+
+  // VIEW CHILDS
+  @ViewChild('baseForm', {
+    read: FormularioOtBaseComponent,
+    static: false,
+  })
+  baseForm: FormularioOtBaseComponent;
+
+  @ViewChild('movilForm', {
+    read: FormularioOtMovilComponent,
+    static: false,
+  })
+  movilForm: FormularioOtMovilComponent;
 
   // DATA
   cubiacionSelected$ = this.otFacade.cubicacionSelected$();
@@ -128,7 +145,14 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
     }),
   });
 
-  constructor(private otFacade: OTFacade) {}
+  // LOADINGS
+  sendingCreateOT$: Observable<boolean> =
+    this.loadingsFacade.sendingCreateOT$();
+
+  constructor(
+    private otFacade: OTFacade,
+    private loadingsFacade: LoadingsFacade
+  ) {}
 
   ngOnInit(): void {
     this.navbarHeader = [
@@ -141,6 +165,12 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
       { label: 'Formulario OT', styleClass: 'last-route' },
     ];
   }
+
+  get valid(): boolean {
+    return true;
+  }
+
+  createOT(): void {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

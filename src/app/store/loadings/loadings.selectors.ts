@@ -172,3 +172,8 @@ export const sendingGetProyectos = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingGetProyectos
 );
+
+export const sendingCreateOT = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingCreateOT
+);

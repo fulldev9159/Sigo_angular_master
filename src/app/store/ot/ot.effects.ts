@@ -18,6 +18,19 @@ export class OTEffects {
     private numeroInternoHttp: NumeroInternoHttpService
   ) {}
 
+  // CREATE OT
+  createOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.createOT),
+      concatMap(({ request }) =>
+        this.otHttpService.createOT(request).pipe(
+          map(response => otActions.createOTSuccess({ response })),
+          catchError(error => of(otActions.createOTError({ error })))
+        )
+      )
+    )
+  );
+
   // CREATE OT CONTRATO BUCLE : GET OFICINA CENTRAL
   getOficinaCentral$ = createEffect(() =>
     this.actions$.pipe(
@@ -139,7 +152,8 @@ export class OTEffects {
           otActions.getTipoDeTrabajoFromCubSuccess,
           otActions.getAreaDeNegocioSuccess,
           otActions.getPlanDeProyectoSuccess,
-          otActions.getSitioPlanProyectoSuccess
+          otActions.getSitioPlanProyectoSuccess,
+          otActions.createOTSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -157,7 +171,8 @@ export class OTEffects {
           otActions.getTipoDeTrabajoFromCubError,
           otActions.getAreaDeNegocioError,
           otActions.getPlanDeProyectoError,
-          otActions.getSitioPlanProyectoError
+          otActions.getSitioPlanProyectoError,
+          otActions.createOTError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

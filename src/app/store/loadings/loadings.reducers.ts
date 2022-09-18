@@ -47,6 +47,7 @@ export interface StateLoadings {
   sendingGetCECO: boolean;
   sendingGetAdminContratoFromCub: boolean;
   sendingGetProyectos: boolean;
+  sendingCreateOT: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -84,6 +85,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetCECO: false,
   sendingGetAdminContratoFromCub: false,
   sendingGetProyectos: false,
+  sendingCreateOT: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -510,5 +512,14 @@ export const reducerLoadings = createReducer(
       ...state,
       sendingGetProyectos: false,
     })
-  )
+  ),
+
+  on(otActions.createOT, state => ({
+    ...state,
+    sendingCreateOT: true,
+  })),
+  on(otActions.createOTSuccess, otActions.createOTError, state => ({
+    ...state,
+    sendingCreateOT: false,
+  }))
 );

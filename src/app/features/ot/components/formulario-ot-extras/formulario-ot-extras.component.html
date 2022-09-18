@@ -26,12 +26,13 @@
             <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
                 <zwc-pdropdown [control]="form.get('admin_contrato_id')" Label="*Administrador de Contrato:"
                     dropdown_id="select-admin-contrato" [data]="adminContratoFromCub$|async"
-                    Pplaceholder="Selecione un administrador de contreto"
+                    Pplaceholder="Selecione un administrador de contrato"
                     [loading]="loadingAdminContratoFromCub$|async">
                 </zwc-pdropdown>
             </div>
 
-            <div class="field col-12">
+            <div class="field col-12" style="display: flex;
+            flex-direction: column;">
                 <label for="">Observaciones</label>
                 <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones"
                     id="observaciones" cols="30" rows="2"></textarea>
