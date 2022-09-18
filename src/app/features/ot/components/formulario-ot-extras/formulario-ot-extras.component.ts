@@ -73,6 +73,10 @@ export class FormularioOtExtrasComponent implements OnInit, OnDestroy {
     );
   }
 
+  get valid(): boolean {
+    return this.form.valid;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

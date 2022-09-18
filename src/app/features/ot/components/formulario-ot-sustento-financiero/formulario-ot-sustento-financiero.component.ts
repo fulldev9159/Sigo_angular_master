@@ -198,6 +198,10 @@ export class FormularioOtSustentoFinancieroComponent
     this.form.get('pep2_capex_id').reset();
   }
 
+  get valid(): boolean {
+    return this.form.valid;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

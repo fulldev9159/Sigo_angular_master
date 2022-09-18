@@ -10,4 +10,8 @@ export class FormularioOtOrdinarioComponent {
   @Input() form: FormGroup;
 
   constructor() {}
+
+  get valid(): boolean {
+    return this.form.valid;
+  }
 }

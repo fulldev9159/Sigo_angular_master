@@ -11,7 +11,12 @@ import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { FormularioOtBaseComponent } from '../../components/formulario-ot-base/formulario-ot-base.component';
+import { FormularioOtBucleComponent } from '../../components/formulario-ot-bucle/formulario-ot-bucle.component';
+import { FormularioOtExtrasComponent } from '../../components/formulario-ot-extras/formulario-ot-extras.component';
+import { FormularioOtFijoComponent } from '../../components/formulario-ot-fijo/formulario-ot-fijo.component';
 import { FormularioOtMovilComponent } from '../../components/formulario-ot-movil/formulario-ot-movil.component';
+import { FormularioOtOrdinarioComponent } from '../../components/formulario-ot-ordinario/formulario-ot-ordinario.component';
+import { FormularioOtSustentoFinancieroComponent } from '../../components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component';
 
 // TODO: VERIFIXAR COMPORTAMIENTO AL NAVEGAR: RESETEO DE TODO
 @Component({
@@ -39,6 +44,36 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
     static: false,
   })
   movilForm: FormularioOtMovilComponent;
+
+  @ViewChild('fijaForm', {
+    read: FormularioOtFijoComponent,
+    static: false,
+  })
+  fijaForm: FormularioOtFijoComponent;
+
+  @ViewChild('ordinarioForm', {
+    read: FormularioOtOrdinarioComponent,
+    static: false,
+  })
+  ordinarioForm: FormularioOtOrdinarioComponent;
+
+  @ViewChild('bucleForm', {
+    read: FormularioOtBucleComponent,
+    static: false,
+  })
+  bucleForm: FormularioOtBucleComponent;
+
+  @ViewChild('sustentoFinancieroForm', {
+    read: FormularioOtSustentoFinancieroComponent,
+    static: false,
+  })
+  sustentoFinancieroForm: FormularioOtSustentoFinancieroComponent;
+
+  @ViewChild('extrasForm', {
+    read: FormularioOtExtrasComponent,
+    static: false,
+  })
+  extrasForm: FormularioOtExtrasComponent;
 
   // DATA
   cubiacionSelected$ = this.otFacade.cubicacionSelected$();

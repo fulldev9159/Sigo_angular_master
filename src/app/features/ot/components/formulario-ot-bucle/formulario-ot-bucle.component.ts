@@ -138,6 +138,10 @@ export class FormularioOtBucleComponent implements OnInit, OnDestroy {
     );
   }
 
+  get valid(): boolean {
+    return this.form.valid;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

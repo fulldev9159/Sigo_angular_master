@@ -87,6 +87,10 @@ export class FormularioOtFijoComponent implements OnInit, OnDestroy {
     );
   }
 
+  get valid(): boolean {
+    return this.OTsNumetoInterno.length > 0;
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
