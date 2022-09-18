@@ -11,6 +11,10 @@ import {
   TipoNumeroInterno,
 } from '@model';
 
+export let CreateOT: Response<{ ot_id: number }> = {
+  status: { code: 0, desc: 'OK' },
+  data: { ot_id: 1 },
+};
 export let CentralesMOCK200ok: Response<{ items: OficinaCentral[] }> = {
   status: { code: 0, desc: '' },
   data: {

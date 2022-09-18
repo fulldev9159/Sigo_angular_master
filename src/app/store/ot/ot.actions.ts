@@ -31,7 +31,7 @@ export const createOT = createAction(
 
 export const createOTSuccess = createAction(
   '[OT] GET createOT Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<{ ot_id: number }> }>()
 );
 
 export const createOTError = createAction(

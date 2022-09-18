@@ -5,6 +5,7 @@ import * as authActions from '@storeOT/auth/auth.actions';
 import * as perfilActions from '@storeOT/perfil/perfil.actions';
 import * as usuarioActions from '@storeOT/usuario/usuario.actions';
 import * as cubicacionActions from '@storeOT/cubicacion/cubicacion.actions';
+import * as otActions from '@storeOT/ot/ot.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 
@@ -132,6 +133,16 @@ export class AfterHttpService {
     // ELIMINAR SERVICIO CARRITO
     if (action.type === cubicacionActions.eliminarServicioCarritoSuccess.type) {
       this.snackMessage.showMessage(`Eliminación exitosa`, 'Exito', 6000);
+    }
+
+    // CREATE OT
+    if (action.type === otActions.createOTSuccess.type) {
+      this.snackMessage.showMessage(
+        `Orden de trabajo creada con exito. OT ID:${action.response.data.ot_id}`,
+        'Exito',
+        6000
+      );
+      this.router.navigate(['/ot/list-ot']);
     }
   }
 }

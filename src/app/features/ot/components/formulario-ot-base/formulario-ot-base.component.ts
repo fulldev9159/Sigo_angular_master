@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CubicacionContrato } from '@model';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
@@ -14,6 +20,7 @@ interface Dropdown {
 
 @Component({
   selector: 'zwc-formulario-ot-base',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './formulario-ot-base.component.html',
   styleUrls: ['./formulario-ot-base.component.scss'],
 })
