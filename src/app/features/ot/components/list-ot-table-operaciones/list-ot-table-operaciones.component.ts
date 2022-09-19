@@ -5,7 +5,8 @@ import {
   faCircleInfo,
   faPlay,
 } from '@fortawesome/free-solid-svg-icons';
-import { Accion } from '@model';
+import { Accion, RequestAceptarRechazarOT } from '@model';
+import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 
 @Component({
   selector: 'zwc-list-ot-table-operaciones',
@@ -16,6 +17,8 @@ export class ListOtTableOperacionesComponent {
   // TODO: MIGRAR INFORMACIONES
   // TODO: MIGRAR AGREGAR REGISTRO LIBRO DE OBRAS
   // TODO: MIGRAR VER LIBRO DE OBRAS
+  // TODO: PROBAR COMPORTAMIENTO CON MAS DE UNA OT
+  // TODO: CORREGIR COMO SE VE EL TOOLTIP DEL AGREGAR REGISTRO LIBRO DE OBRAS
   @Input() acciones: Accion[];
   @Input() ot_id: number;
 
@@ -28,13 +31,25 @@ export class ListOtTableOperacionesComponent {
   displayModalAgregarRegistroLibroDeObras = false;
   displayModalAceptarInicial = false;
   displayModalRechazoOrdenDeTrabajo = false;
-  constructor() {}
+
+  constructor(private flujoOTFacade: FlujoOTFacade) {}
+
+  // ACCIONES ETAPA: OT_ET_AUTORIZACION_INICIAL
+  confirmarAceptacionOTInicial(): void {
+    const request: RequestAceptarRechazarOT = {
+      ot_id: this.ot_id,
+      values: {
+        estado: 'ACEPTADO',
+      },
+    };
+
+    this.flujoOTFacade.aceptarRechazarIncialOT(request);
+    this.displayModalRechazoOrdenDeTrabajo = false;
+  }
 
   rechazarOTInicial(): void {
     this.displayModalRechazoOrdenDeTrabajo = true;
   }
-
-  confirmarAceptacionOTInicial(): void {}
 
   findAccion(accion: string): boolean {
     return (

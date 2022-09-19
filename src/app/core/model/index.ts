@@ -16,6 +16,7 @@ export * from './agencia';
 export * from './numero_interno';
 export * from './sustento-financiero';
 export * from './proyectos';
+export * from './flujo-ot';
 
 export interface Response<T> {
   data: T;

@@ -6,8 +6,10 @@ import * as perfilActions from '@storeOT/perfil/perfil.actions';
 import * as usuarioActions from '@storeOT/usuario/usuario.actions';
 import * as cubicacionActions from '@storeOT/cubicacion/cubicacion.actions';
 import * as otActions from '@storeOT/ot/ot.actions';
+import * as flujoOTActions from '@storeOT/flujo-ot/flujo-ot.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { OTFacade } from '@storeOT/ot/ot.facades';
 
 interface ActionErr {
   error?: any;
@@ -33,7 +35,8 @@ export class AfterHttpService {
     private router: Router,
     private snackMessage: SnackMessageService,
     private authFacade: AuthFacade,
-    private cubicacionFacade: CubicacionFacade
+    private cubicacionFacade: CubicacionFacade,
+    private otFacade: OTFacade
   ) {}
 
   errorHandler(action: ActionErr): void {
@@ -143,6 +146,24 @@ export class AfterHttpService {
         6000
       );
       this.router.navigate(['/ot/list-ot']);
+    }
+
+    // ACEPTAR OT INICIAL
+    // TODO: AGREGAR UN MENSAJE
+    // TODO: USAR BIEN LOS FILTROS
+    if (action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type) {
+      let filtros = {
+        filtro_propietario: 'TODAS',
+        filtro_tipo: 0,
+      };
+      this.otFacade.getBandejaOT({
+        filtro_pestania: 'EN_EJECUCION',
+        ...filtros,
+      });
+      this.otFacade.getBandejaOT({
+        filtro_pestania: 'ABIERTAS',
+        ...filtros,
+      });
     }
   }
 }

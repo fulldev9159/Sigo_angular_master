@@ -62,6 +62,11 @@ import * as formSustentoFinancieroReduce from './sustento-financiero/sustento-fi
 import { ProyectosEffects } from './proyectos/proyectos.effects';
 import * as formProyectosReduce from './proyectos/proyectos.reducers';
 // PROYECTOS STORE
+
+// FLUJO OT STORE
+import { FlujoOTEffects } from './flujo-ot/flujo-ot.effects';
+import * as formFlujoOTReduce from './flujo-ot/flujo-ot.reducers';
+// FLUJO OT STORE
 @NgModule({
   declarations: [],
   imports: [
@@ -144,6 +149,13 @@ import * as formProyectosReduce from './proyectos/proyectos.reducers';
     StoreModule.forFeature(
       formProyectosReduce.Featurekey,
       formProyectosReduce.reducerProyectos
+    ),
+
+    // FLUJO OT STORE
+    EffectsModule.forFeature([FlujoOTEffects]),
+    StoreModule.forFeature(
+      formFlujoOTReduce.Featurekey,
+      formFlujoOTReduce.reducerFlujoOT
     ),
 
     SharedModule,
