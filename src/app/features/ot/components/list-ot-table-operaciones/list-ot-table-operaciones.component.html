@@ -34,3 +34,8 @@
         textConfirmar="Aceptar OT">
     </zwc-view-confirmacion>
 </p-dialog>
+
+<p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="displayModalRechazoOrdenDeTrabajo" [draggable]="false"
+    [modal]="true">
+    <zwc-view-rechazo></zwc-view-rechazo>
+</p-dialog>

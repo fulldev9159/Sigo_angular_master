@@ -27,9 +27,13 @@ export class ListOtTableOperacionesComponent {
   // MODALS
   displayModalAgregarRegistroLibroDeObras = false;
   displayModalAceptarInicial = false;
+  displayModalRechazoOrdenDeTrabajo = false;
   constructor() {}
 
-  rechazarOTInicial(): void {}
+  rechazarOTInicial(): void {
+    this.displayModalRechazoOrdenDeTrabajo = true;
+  }
+
   confirmarAceptacionOTInicial(): void {}
 
   findAccion(accion: string): boolean {
