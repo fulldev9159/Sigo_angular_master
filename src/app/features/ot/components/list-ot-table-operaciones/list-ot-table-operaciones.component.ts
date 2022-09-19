@@ -3,6 +3,7 @@ import {
   faBook,
   faBookMedical,
   faCircleInfo,
+  faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 import { Accion } from '@model';
 
@@ -17,6 +18,7 @@ export class ListOtTableOperacionesComponent {
   infoIcon = faCircleInfo;
   medicalIcon = faBookMedical;
   bookIcon = faBook;
+  playIcon = faPlay;
 
   // MODALS
   displayModalAgregarRegistroLibroDeObras = false;

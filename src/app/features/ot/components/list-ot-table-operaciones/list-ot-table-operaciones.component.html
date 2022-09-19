@@ -1,8 +1,15 @@
 <div class="container-acciones">
+    <!-- PLAY CONTINUAR -->
+
+    <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion('OT_ACEPTAR_INICIAL')">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
     <button id="info-button" pTooltip="Información">
         <fa-icon [icon]="infoIcon"></fa-icon>
     </button>
 
+    <!-- ACCIONES FIJAS -->
     <button id="ver-libro-obras-button" pTooltip="Ver libro de obras">
         <fa-icon [icon]="bookIcon"></fa-icon>
     </button>
