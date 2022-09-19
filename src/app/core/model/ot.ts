@@ -65,6 +65,39 @@ export interface RequestCreateOTFijo {
   };
 }
 
+// FILTROS OT
+export interface RequestBandejaOT {
+  filtro_pestania: string;
+  filtro_propietario: string;
+  filtro_tipo: number;
+}
+// BANDEJA OT
+export interface OT {
+  contrato_marco_nombre: string;
+  delegacion: string;
+  estado_otdesc: string;
+  estado_otid: number;
+  estado_slug: string;
+  etapa_otdesc: string;
+  etapa_otid: number;
+  etapa_slug: string;
+  fecha_inicio: string;
+  fecha_termino: string;
+  id: number;
+  nombre: string;
+  proveedor_id: number;
+  proveedor_nombre: string;
+  sce_session: string;
+  tipo_cubicacion_id: number;
+  usuario_nombre: string;
+  acciones: {
+    id: number;
+    slug: string;
+    nombre_corto: string;
+    descripcion: string;
+  }[];
+}
+
 // OFICINAS CENTRALES
 export interface OficinaCentral {
   id: number;

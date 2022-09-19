@@ -3,7 +3,9 @@ import {
   Comuna,
   CubicacionContrato,
   OficinaCentral,
+  OT,
   PlanProyecto,
+  RequestBandejaOT,
   RequestCreateOTBucle,
   RequestCreateOTFijo,
   RequestCreateOTMovil,
@@ -36,6 +38,96 @@ export const createOTSuccess = createAction(
 
 export const createOTError = createAction(
   '[OT] GET createOT Error',
+  props<{ error: any }>()
+);
+
+// BANDEJA OT EJECUCION
+export const getBandejaOTEjecucion = createAction(
+  '[OT] GET getBandejaOTEjecucion',
+  props<{
+    request: RequestBandejaOT;
+  }>()
+);
+
+export const getBandejaOTEjecucionSuccess = createAction(
+  '[OT] GET getBandejaOTEjecucion Success',
+  props<{ response: Response<{ items: OT[] }> }>()
+);
+
+export const getBandejaOTEjecucionError = createAction(
+  '[OT] GET getBandejaOTEjecucion Error',
+  props<{ error: any }>()
+);
+
+// BANDEJA OT ABIERTAS
+export const getBandejaOTAbiertas = createAction(
+  '[OT] GET getBandejaOTAbiertas',
+  props<{
+    request: RequestBandejaOT;
+  }>()
+);
+
+export const getBandejaOTAbiertasSuccess = createAction(
+  '[OT] GET getBandejaOTAbiertas Success',
+  props<{ response: Response<{ items: OT[] }> }>()
+);
+
+export const getBandejaOTAbiertasError = createAction(
+  '[OT] GET getBandejaOTAbiertas Error',
+  props<{ error: any }>()
+);
+
+// BANDEJA OT CERRADAS
+export const getBandejaOTCerradas = createAction(
+  '[OT] GET getBandejaOTCerradas',
+  props<{
+    request: RequestBandejaOT;
+  }>()
+);
+
+export const getBandejaOTCerradasSuccess = createAction(
+  '[OT] GET getBandejaOTCerradas Success',
+  props<{ response: Response<{ items: OT[] }> }>()
+);
+
+export const getBandejaOTCerradasError = createAction(
+  '[OT] GET getBandejaOTCerradas Error',
+  props<{ error: any }>()
+);
+
+// BANDEJA OT ANULADAS
+export const getBandejaOTAnuladas = createAction(
+  '[OT] GET getBandejaOTAnuladas',
+  props<{
+    request: RequestBandejaOT;
+  }>()
+);
+
+export const getBandejaOTAnuladasSuccess = createAction(
+  '[OT] GET getBandejaOTAnuladas Success',
+  props<{ response: Response<{ items: OT[] }> }>()
+);
+
+export const getBandejaOTAnuladasError = createAction(
+  '[OT] GET getBandejaOTAnuladas Error',
+  props<{ error: any }>()
+);
+
+// BANDEJA OT QUEBRADAS
+export const getBandejaOTQuebradas = createAction(
+  '[OT] GET getBandejaOTQuebradas',
+  props<{
+    request: RequestBandejaOT;
+  }>()
+);
+
+export const getBandejaOTQuebradasSuccess = createAction(
+  '[OT] GET getBandejaOTQuebradas Success',
+  props<{ response: Response<{ items: OT[] }> }>()
+);
+
+export const getBandejaOTQuebradasError = createAction(
+  '[OT] GET getBandejaOTQuebradas Error',
   props<{ error: any }>()
 );
 

@@ -4,7 +4,9 @@ import {
   Comuna,
   CubicacionContrato,
   OficinaCentral,
+  OT,
   PlanProyecto,
+  RequestBandejaOT,
   RequestCreateOTBucle,
   RequestCreateOTFijo,
   RequestCreateOTMovil,
@@ -115,5 +117,35 @@ export class OTFacade {
 
   public getSitioPlanProyecto$(): Observable<Sitio[]> {
     return this.store.select(otSelectors.getSitioPlanProyecto);
+  }
+
+  // BANDEJAS
+  public getBandejaOT(request: RequestBandejaOT): void {
+    if (request.filtro_pestania === 'EN_EJECUCION')
+      this.store.dispatch(otActions.getBandejaOTEjecucion({ request }));
+    else if (request.filtro_pestania === 'ABIERTAS')
+      this.store.dispatch(otActions.getBandejaOTAbiertas({ request }));
+    else if (request.filtro_pestania === 'CERRADAS')
+      this.store.dispatch(otActions.getBandejaOTCerradas({ request }));
+    else if (request.filtro_pestania === 'ANULADAS')
+      this.store.dispatch(otActions.getBandejaOTAnuladas({ request }));
+    else if (request.filtro_pestania === 'EN_TRAMITE')
+      this.store.dispatch(otActions.getBandejaOTQuebradas({ request }));
+  }
+
+  public getBandejaOTEjecucion$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getBandejaOTEjecucion);
+  }
+  public getBandejaOTAbiertas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getBandejaOTAbiertas);
+  }
+  public getBandejaOTCerradas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getBandejaOTCerradas);
+  }
+  public getBandejaOTAnuladas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getBandejaOTAnuladas);
+  }
+  public getBandejaOTQuebradas$(): Observable<OT[]> {
+    return this.store.select(otSelectors.getBandejaOTQuebradas);
   }
 }

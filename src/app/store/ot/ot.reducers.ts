@@ -4,6 +4,7 @@ import {
   Comuna,
   CubicacionContrato,
   OficinaCentral,
+  OT,
   PlanProyecto,
   Sitio,
   SolicitadoPor,
@@ -26,6 +27,13 @@ export interface StateOT {
   // MOVIL
   planDeProyecto: PlanProyecto[];
   sitioPlan: Sitio[];
+
+  // BANDEJAS
+  bandejaOTEjecucion: OT[];
+  bandejaOTAbiertas: OT[];
+  bandejaOTCerradas: OT[];
+  bandejaOTAnuladas: OT[];
+  bandejaOTQuebradas: OT[];
 }
 
 export const initialState: StateOT = {
@@ -38,6 +46,11 @@ export const initialState: StateOT = {
   areaDeNegocio: [],
   planDeProyecto: [],
   sitioPlan: [],
+  bandejaOTEjecucion: [],
+  bandejaOTAbiertas: [],
+  bandejaOTCerradas: [],
+  bandejaOTAnuladas: [],
+  bandejaOTQuebradas: [],
 };
 
 export const reducerOT = createReducer(
@@ -77,5 +90,25 @@ export const reducerOT = createReducer(
   on(OTActions.getSitioPlanProyectoSuccess, (state, { response }) => ({
     ...state,
     sitioPlan: response.data.items,
+  })),
+  on(OTActions.getBandejaOTEjecucionSuccess, (state, { response }) => ({
+    ...state,
+    bandejaOTEjecucion: response.data.items,
+  })),
+  on(OTActions.getBandejaOTAbiertasSuccess, (state, { response }) => ({
+    ...state,
+    bandejaOTAbiertas: response.data.items,
+  })),
+  on(OTActions.getBandejaOTCerradasSuccess, (state, { response }) => ({
+    ...state,
+    bandejaOTCerradas: response.data.items,
+  })),
+  on(OTActions.getBandejaOTAnuladasSuccess, (state, { response }) => ({
+    ...state,
+    bandejaOTAnuladas: response.data.items,
+  })),
+  on(OTActions.getBandejaOTQuebradasSuccess, (state, { response }) => ({
+    ...state,
+    bandejaOTQuebradas: response.data.items,
   }))
 );

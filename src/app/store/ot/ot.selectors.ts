@@ -49,3 +49,25 @@ export const getSitioPlanProyecto = createSelector(
   selectOT,
   (state: reducer.StateOT) => state.sitioPlan
 );
+
+// BANDEJAS
+export const getBandejaOTEjecucion = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.bandejaOTEjecucion
+);
+export const getBandejaOTAbiertas = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.bandejaOTAbiertas
+);
+export const getBandejaOTCerradas = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.bandejaOTCerradas
+);
+export const getBandejaOTAnuladas = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.bandejaOTAnuladas
+);
+export const getBandejaOTQuebradas = createSelector(
+  selectOT,
+  (state: reducer.StateOT) => state.bandejaOTQuebradas
+);

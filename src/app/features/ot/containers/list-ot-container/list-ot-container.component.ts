@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { OT } from '@model';
+import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'zwc-list-ot-container',
@@ -10,8 +12,17 @@ import { Subscription } from 'rxjs';
 export class ListOtContainerComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
+  // DATA
+  bandejaOTEjecucion$: Observable<OT[]> =
+    this.otFacade.getBandejaOTEjecucion$();
+  bandejaOTAbiertas$: Observable<OT[]> = this.otFacade.getBandejaOTAbiertas$();
+  bandejaOTCerradas$: Observable<OT[]> = this.otFacade.getBandejaOTCerradas$();
+  bandejaOTAnuladas$: Observable<OT[]> = this.otFacade.getBandejaOTAnuladas$();
+  bandejaOTQuebradas$: Observable<OT[]> =
+    this.otFacade.getBandejaOTQuebradas$();
+
   navbarHeader: MenuItem[];
-  constructor() {}
+  constructor(private otFacade: OTFacade) {}
 
   ngOnInit(): void {
     this.navbarHeader = [
@@ -26,11 +37,34 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
         routerLink: ['/ot/form-ot'],
       },
     ];
+
+    // GET BANDEJAS
+    let filtros = {
+      filtro_propietario: 'TODAS',
+      filtro_tipo: 0,
+    };
+    this.otFacade.getBandejaOT({
+      filtro_pestania: 'EN_EJECUCION',
+      ...filtros,
+    });
+    this.otFacade.getBandejaOT({
+      filtro_pestania: 'ABIERTAS',
+      ...filtros,
+    });
+    this.otFacade.getBandejaOT({
+      filtro_pestania: 'CERRADAS',
+      ...filtros,
+    });
+    this.otFacade.getBandejaOT({
+      filtro_pestania: 'ANULADAS',
+      ...filtros,
+    });
+    this.otFacade.getBandejaOT({
+      filtro_pestania: 'EN_TRAMITE',
+      ...filtros,
+    });
   }
 
-  handleChange(e: any) {
-    console.log(e);
-  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

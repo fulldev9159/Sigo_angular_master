@@ -5,7 +5,9 @@ import {
   AreaDeNegocio,
   Comuna,
   OficinaCentral,
+  OT,
   PlanProyecto,
+  RequestBandejaOT,
   RequestCreateOTBucle,
   RequestCreateOTFijo,
   RequestCreateOTMovil,
@@ -38,6 +40,16 @@ export class OtHttpService {
       | RequestCreateOTOrdinario
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(`${this.API_URL}/ot/ot/save`, request);
+  }
+
+  // GET BANDEJAS OT
+  getBandejaOT(
+    request: RequestBandejaOT
+  ): Observable<Response<{ items: OT[] }>> {
+    return this.http.post<Response<{ items: OT[] }>>(
+      `${this.API_URL}/ot/bandeja/get`,
+      request
+    );
   }
 
   getOficinaCentral(

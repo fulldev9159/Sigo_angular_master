@@ -141,6 +141,81 @@ export class OTEffects {
     )
   );
 
+  // BANDEJA OT EJECUCION
+  getBandejaOTEjecucion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTEjecucion),
+      concatMap(({ request }) =>
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response => otActions.getBandejaOTEjecucionSuccess({ response })),
+          catchError(error =>
+            of(otActions.getBandejaOTEjecucionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT ABIERTAS
+  getBandejaOTAbiertas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAbiertas),
+      concatMap(({ request }) =>
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response => otActions.getBandejaOTAbiertasSuccess({ response })),
+          catchError(error =>
+            of(otActions.getBandejaOTAbiertasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT CERRADAS
+  getBandejaOTCerradas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTCerradas),
+      concatMap(({ request }) =>
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response => otActions.getBandejaOTCerradasSuccess({ response })),
+          catchError(error =>
+            of(otActions.getBandejaOTCerradasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT ANULADAS
+  getBandejaOTAnuladas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAnuladas),
+      concatMap(({ request }) =>
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response => otActions.getBandejaOTAnuladasSuccess({ response })),
+          catchError(error =>
+            of(otActions.getBandejaOTAnuladasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT QUEBRADAS
+  getBandejaOTQuebradas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTQuebradas),
+      concatMap(({ request }) =>
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response => otActions.getBandejaOTQuebradasSuccess({ response })),
+          catchError(error =>
+            of(otActions.getBandejaOTQuebradasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -153,7 +228,12 @@ export class OTEffects {
           otActions.getAreaDeNegocioSuccess,
           otActions.getPlanDeProyectoSuccess,
           otActions.getSitioPlanProyectoSuccess,
-          otActions.createOTSuccess
+          otActions.createOTSuccess,
+          otActions.getBandejaOTEjecucionSuccess,
+          otActions.getBandejaOTAbiertasSuccess,
+          otActions.getBandejaOTCerradasSuccess,
+          otActions.getBandejaOTAnuladasSuccess,
+          otActions.getBandejaOTQuebradasSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -172,7 +252,12 @@ export class OTEffects {
           otActions.getAreaDeNegocioError,
           otActions.getPlanDeProyectoError,
           otActions.getSitioPlanProyectoError,
-          otActions.createOTError
+          otActions.createOTError,
+          otActions.getBandejaOTEjecucionError,
+          otActions.getBandejaOTAbiertasError,
+          otActions.getBandejaOTCerradasError,
+          otActions.getBandejaOTAnuladasError,
+          otActions.getBandejaOTQuebradasError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
