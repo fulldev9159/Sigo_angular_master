@@ -1,5 +1,25 @@
 <zwc-content-layout [navbarHeader]="navbarHeader">
     <div content>
         <zwc-list-ot-filtros></zwc-list-ot-filtros>
+
+        <div class="card">
+            <p-tabView (onChange)="handleChange($event)">
+                <p-tabPanel header="Ejecución" leftIcon="pi pi-play">
+                    <zwc-list-ot-table></zwc-list-ot-table>
+                </p-tabPanel>
+                <p-tabPanel header="Abiertas">
+                    <zwc-list-ot-table></zwc-list-ot-table>
+                </p-tabPanel>
+                <p-tabPanel header="Cerradas">
+                    <zwc-list-ot-table></zwc-list-ot-table>
+                </p-tabPanel>
+                <p-tabPanel header="Anuladas">
+                    <zwc-list-ot-table></zwc-list-ot-table>
+                </p-tabPanel>
+                <p-tabPanel header="Quebradas">
+                    <zwc-list-ot-table></zwc-list-ot-table>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
     </div>
 </zwc-content-layout>

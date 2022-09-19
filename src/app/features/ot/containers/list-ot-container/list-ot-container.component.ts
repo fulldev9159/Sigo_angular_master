@@ -28,6 +28,9 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
     ];
   }
 
+  handleChange(e: any) {
+    console.log(e);
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
