@@ -13,6 +13,9 @@ import { Accion } from '@model';
   styleUrls: ['./list-ot-table-operaciones.component.scss'],
 })
 export class ListOtTableOperacionesComponent {
+  // TODO: MIGRAR INFORMACIONES
+  // TODO: MIGRAR AGREGAR REGISTRO LIBRO DE OBRAS
+  // TODO: MIGRAR VER LIBRO DE OBRAS
   @Input() acciones: Accion[];
   @Input() ot_id: number;
 
