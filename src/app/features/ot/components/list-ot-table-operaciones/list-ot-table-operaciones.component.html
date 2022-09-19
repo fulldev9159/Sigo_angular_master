@@ -1,0 +1,19 @@
+<div class="container-acciones">
+    <button id="info-button" pTooltip="Información">
+        <fa-icon [icon]="infoIcon"></fa-icon>
+    </button>
+
+    <button id="ver-libro-obras-button" pTooltip="Ver libro de obras">
+        <fa-icon [icon]="bookIcon"></fa-icon>
+    </button>
+
+    <button id="add-libro-obras-button" pTooltip="Agregar registro libro de obras"
+        *ngIf="findAccion('OT_REGISTRAR_LIBRO_OBRAS')" (click)="displayModalAgregarRegistroLibroDeObras=true">
+        <fa-icon [icon]="medicalIcon"></fa-icon>
+    </button>
+</div>
+
+<p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"
+    [draggable]="false" [modal]="true">
+
+</p-dialog>

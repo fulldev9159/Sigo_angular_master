@@ -1,3 +1,4 @@
+import { Accion } from './accion';
 import { ModelAgencia } from './agencia';
 
 // CREATE OT
@@ -90,12 +91,7 @@ export interface OT {
   sce_session: string;
   tipo_cubicacion_id: number;
   usuario_nombre: string;
-  acciones: {
-    id: number;
-    slug: string;
-    nombre_corto: string;
-    descripcion: string;
-  }[];
+  acciones: Accion[];
 }
 
 // OFICINAS CENTRALES
