@@ -28,6 +28,11 @@
         }
     }
 
+    .p-datatable .p-datatable-thead>tr>th>div {
+        display: flex;
+        align-items: center;
+    }
+
     td {
         padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
         border: 0 !important;

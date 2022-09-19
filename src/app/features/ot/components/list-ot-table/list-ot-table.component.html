@@ -5,12 +5,16 @@
             <!-- FILTERS -->
             <tr>
                 <th pFrozenColumn style="width:80px">
-                    <fa-icon [icon]="filterIcon"></fa-icon>
-                    <input type="number" style="width: 100%;" formControlName="ot_id">
+                    <div>
+                        <fa-icon [icon]="filterIcon"></fa-icon>
+                        <input type="number" style="width: 100%;" formControlName="ot_id">
+                    </div>
                 </th>
                 <th style="width:200px">
-                    <fa-icon [icon]="filterIcon"></fa-icon>
-                    <input type="text" style="width: 100%;" formControlName="nombre" name="filter-nombre-ot">
+                    <div>
+                        <fa-icon [icon]="filterIcon"></fa-icon>
+                        <input type="text" style="width: 100%;" formControlName="nombre" name="filter-nombre-ot">
+                    </div>
                 </th>
                 <th style="width:140px"></th>
                 <th style="width:100px">
