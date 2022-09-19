@@ -1,15 +1,30 @@
 <nav class="navbar-container">
-    <button pButton pRipple class="p-button-text"  id="toggle" (click)="toggleInt()">
-        <fa-icon [icon]="faBars" ></fa-icon>
+    <button pButton pRipple class="p-button-text" id="toggle" (click)="toggleInt()">
+        <fa-icon [icon]="faBars"></fa-icon>
         <p class="titulo">SIGO</p>
     </button>
 
+    <!-- TODO: QUE SOLO APAREZCA PARA LOS GESTORES -->
+    <div class="buttons-principales-container">
+        <div class="button-menu">
+            <span>Costeo</span>
+            <button *ngxPermissionsOnly="['CUBICACION_LISTAR']" [routerLink]="['cubicacion']"
+                style="border-right: 0.07rem solid white;">Listar</button>
+            <button *ngxPermissionsOnly="['CUBICACION_CREAR']" [routerLink]="['/cubicacion/form-cub']">Crear</button>
+        </div>
+        <div class="button-menu">
+            <span>OT</span>
+            <button *ngxPermissionsOnly="['OT_LISTAR']" [routerLink]="['/ot']"
+                style="border-right: 0.07rem solid white;">Listar</button>
+            <button *ngxPermissionsOnly="['OT_CREAR']" [routerLink]="['/ot/form-ot']">Crear</button>
+        </div>
+    </div>
 
     <div class="menu">
-        <button pButton pRipple class="p-button-text" (click)="changePerfilInt()" id="cambiar-perfil" >
+        <button pButton pRipple class="p-button-text" (click)="changePerfilInt()" id="cambiar-perfil">
             Cambiar perfil
         </button>
-        <button pButton pRipple class="p-button-text" (click)="logoutInt()" id="logout" >
+        <button pButton pRipple class="p-button-text" (click)="logoutInt()" id="logout">
             Logout
         </button>
     </div>
