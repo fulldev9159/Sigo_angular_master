@@ -1,7 +1,8 @@
 <div class="container-acciones">
     <!-- PLAY CONTINUAR -->
 
-    <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion('OT_ACEPTAR_INICIAL')">
+    <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion('OT_ACEPTAR_INICIAL')"
+        (click)="displayModalAceptarInicial=true">
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
 
@@ -23,4 +24,13 @@
 <p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"
     [draggable]="false" [modal]="true">
 
+</p-dialog>
+
+<p-dialog header="Aceptación Incial de la OT" [(visible)]="displayModalAceptarInicial" [draggable]="false"
+    [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+    <zwc-view-confirmacion pregunta='¿Desea aceptar la continuidad de la orden de trabajo?'
+        (cancelar)="rechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()"
+        textConfirmar="Aceptar OT">
+    </zwc-view-confirmacion>
 </p-dialog>

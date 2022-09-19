@@ -14,6 +14,7 @@ import { Accion } from '@model';
 })
 export class ListOtTableOperacionesComponent {
   @Input() acciones: Accion[];
+  @Input() ot_id: number;
 
   infoIcon = faCircleInfo;
   medicalIcon = faBookMedical;
@@ -22,7 +23,11 @@ export class ListOtTableOperacionesComponent {
 
   // MODALS
   displayModalAgregarRegistroLibroDeObras = false;
+  displayModalAceptarInicial = false;
   constructor() {}
+
+  rechazarOTInicial(): void {}
+  confirmarAceptacionOTInicial(): void {}
 
   findAccion(accion: string): boolean {
     return (

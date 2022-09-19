@@ -5,10 +5,10 @@ margin-top: 10px;" id="mensaje-confirmacion">{{pregunta}}</p>
 <div class="container-button-confirmar">
     <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined" (click)="cancelarInt()">
         <fa-icon [icon]="cancelIcon" style="color: #ccc;"></fa-icon>
-        Cancelar
+        {{textCancel}}
     </button>
     <button pButton type="button" id="button-confirmar" (click)="confirmarInt()">
         <fa-icon [icon]="checkIcon"></fa-icon>
-        Si,confirmo
+        {{textConfirmar}}
     </button>
 </div>

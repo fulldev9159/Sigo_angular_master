@@ -11,6 +11,8 @@ import {
 })
 export class ViewConfirmacionComponent {
   @Input() pregunta: string;
+  @Input() textCancel: string = 'Cancelar';
+  @Input() textConfirmar: string = 'Si,confirmo';
   @Output() confirmar = new EventEmitter<void>();
   @Output() cancelar = new EventEmitter<void>();
   checkIcon = faSquareCheck;

@@ -67,7 +67,8 @@
                 <td style="width:140px">{{item.proveedor_nombre}}</td>
                 <td style="width:140px">{{item.usuario_nombre}}</td>
                 <td style="width:200px">
-                    <zwc-list-ot-table-operaciones [acciones]="item.acciones"></zwc-list-ot-table-operaciones>
+                    <zwc-list-ot-table-operaciones [acciones]="item.acciones" [ot_id]="item.id">
+                    </zwc-list-ot-table-operaciones>
                 </td>
             </tr>
         </ng-template>
