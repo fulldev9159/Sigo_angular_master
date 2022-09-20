@@ -49,6 +49,14 @@ export class AuthFacade {
     this.store.dispatch(authActions.getPermisosPerfilUsuario4Login());
   }
 
+  // SHOW MENU DETALLE OT
+  public showMenuDetalleOT(status: boolean): void {
+    this.store.dispatch(authActions.showMenuDetalleOT({ status }));
+  }
+  public showMenuDetalleOT$(): Observable<boolean> {
+    return this.store.select(authSelectors.showMenuDetalleOT);
+  }
+
   // RESET PERFIL
   public resetPerfil(): void {
     this.store.dispatch(authActions.resetPerfil());

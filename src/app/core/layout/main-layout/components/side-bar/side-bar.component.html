@@ -11,4 +11,7 @@
         <p style="font-size: 12px;">{{sessionData.nombre_perfil_select}} </p>
     </div>
     <!-- <zwc-menu></zwc-menu> -->
+    <ng-container *ngIf="showMenuDetalleOT$|async">
+        <zwc-menu-detalle-ot></zwc-menu-detalle-ot>
+    </ng-container>
 </div>

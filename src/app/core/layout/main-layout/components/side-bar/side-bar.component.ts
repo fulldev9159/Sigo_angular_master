@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { PerfilesUsuario, SessionData } from '@model';
+import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { PerfilFacade } from '@storeOT/perfil/perfil.facades';
 import { map, Observable, Subscription } from 'rxjs';
 
@@ -16,5 +17,8 @@ export class SideBarComponent {
     .sessionData;
   faUser = faUser;
 
-  constructor() {}
+  showMenuDetalleOT$: Observable<boolean> =
+    this.authFacade.showMenuDetalleOT$();
+
+  constructor(private authFacade: AuthFacade) {}
 }

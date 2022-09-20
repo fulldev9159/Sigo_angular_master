@@ -9,6 +9,7 @@ import { SharedModule } from '@sharedOT/shared.module';
 import { NavbarComponent } from './layout/main-layout/components/navbar/navbar.component';
 import { MenuComponent } from './layout/main-layout/components/menu/menu.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { MenuDetalleOtComponent } from './layout/main-layout/components/menu-detalle-ot/menu-detalle-ot.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     SideBarComponent,
     NavbarComponent,
     MenuComponent,
+    MenuDetalleOtComponent,
   ],
   imports: [
     BrowserModule,

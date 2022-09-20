@@ -8,11 +8,13 @@ export const Featurekey = 'auth';
 export interface StateAuth {
   sessionData: SessionData;
   isLoggin: boolean;
+  showMenuDetalleOT: boolean;
 }
 
 export const initialState: StateAuth = {
   sessionData: null,
   isLoggin: false,
+  showMenuDetalleOT: false,
 };
 
 export const reducerAuth = createReducer(
@@ -56,5 +58,10 @@ export const reducerAuth = createReducer(
     },
     isLoggin: false,
   })),
-  on(authActions.ClearSession, (state, {}) => initialState)
+  on(authActions.ClearSession, (state, {}) => initialState),
+
+  on(authActions.showMenuDetalleOT, (state, { status }) => ({
+    ...state,
+    showMenuDetalleOT: status,
+  }))
 );

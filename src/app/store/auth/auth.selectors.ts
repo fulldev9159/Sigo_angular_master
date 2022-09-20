@@ -14,3 +14,8 @@ export const isLoggin = createSelector(
   selectAuth,
   (state: reducer.StateAuth) => state.isLoggin
 );
+
+export const showMenuDetalleOT = createSelector(
+  selectAuth,
+  (state: reducer.StateAuth) => state.showMenuDetalleOT
+);

@@ -1,3 +1,15 @@
+.detalle-ot-container {
+    font-size: var(--size-text-sigo);
+    padding: 12px;
+    display: flex;
+    height: 74px;
+    background: #085b48;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+
 .sidebar-menu {
     padding: 23px 0px 8px 0px;
     font-size: 14px;

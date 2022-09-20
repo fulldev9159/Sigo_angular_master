@@ -28,6 +28,14 @@ const routes: Routes = [
     loadChildren: () => import('./features/ot/ot.module').then(m => m.OtModule),
     canLoad: [SigoGuard],
   },
+  {
+    path: 'ot-detalle',
+    loadChildren: () =>
+      import('./features/ot-detalle/ot-detalle.module').then(
+        m => m.OtDetalleModule
+      ),
+    canLoad: [SigoGuard],
+  },
 ];
 
 @NgModule({

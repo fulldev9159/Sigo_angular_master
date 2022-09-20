@@ -54,3 +54,10 @@ export const getPermisosPerfilUsuario4LoginError = createAction(
 
 // RESET PERFIL
 export const resetPerfil = createAction('[PERFIL] POST resetPerfil ');
+
+// TODO: MIGRAR A UN STORE SEPARADO
+// SHOW MENU DETALLE OT
+export const showMenuDetalleOT = createAction(
+  '[AUTH] POST showMenuDetalleOT',
+  props<{ status: boolean }>()
+);
