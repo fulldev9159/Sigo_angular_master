@@ -221,11 +221,11 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       this.route.data.subscribe(({ detalleOT, detalleInformeAvance }) => {
         this.formAdicionales.reset;
         this.cubicacionFacade.resetCarrito();
-        console.log(detalleOT);
-        console.log(detalleInformeAvance);
-        console.log(
-          detalleOT.data.ot.model_cubicacion_id.cmarco_has_proveedor_id
-        );
+        // console.log(detalleOT);
+        // console.log(detalleInformeAvance);
+        // console.log(
+        //   detalleOT.data.ot.model_cubicacion_id.cmarco_has_proveedor_id
+        // );
         this.ot_id = detalleOT.data.ot.id;
         this.cubicacionFacade.actividad4cub(
           detalleOT.data.ot.model_cubicacion_id.cmarco_has_proveedor_id
@@ -267,39 +267,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
           );
 
         this.cubicacionFacade.loadDatosServicio4CubAdicionales(carrito);
-        //   detalleInformeAvance.data.many_informe_has_servicio.forEach(
-        //   (servicio: ServicioFromInfomeAvance) => {
-        //     let item_carrito: Carrito;
-        //     item_carrito = {
-        //       precargado: true,
-        //       servicio_rowid: servicio.id,
-        //       servicio_cantidad: servicio.cantidad,
-
-        //       servicio_codigo: servicio.numero_producto,
-        //       servicio_id: servicio.servicio_id,
-        //       servicio_nombre: servicio.model_servicio_id.descripcion,
-        //       servicio_precio_final_clp: servicio.valor_unitario_clp,
-        //       actividad_descripcion: 'TODO',
-        //       tipo_servicio_descripcion: 'TODO',
-
-        //       unidades_obras: servicio.many_informe_has_uob.map(uo => ({
-        //         precargado: true,
-        //         uo_rowid: uo.id,
-        //         uo_cantidad: uo.cantidad,
-        //         uo_codigo: uo.unidad_obra_cod,
-        //         uo_nombre: uo.model_unidad_obra_cod.descripcion,
-        //         uo_precio_total_clp: uo.valor_unitario_clp,
-        //         material_arr: uo.many_informe_has_material.map(material => ({
-        //           material_nombre: material.model_material_cod.descripcion,
-        //         })),
-        //       })),
-        //     };
-
-        //     this.cubicacionFacade.getDatosServicio4EspecialSuccess(
-        //       item_carrito
-        //     );
-        //   }
-        // );
+        this.detector.detectChanges();
       })
     );
     this.servicios4Cub$ = this.cubicacionFacade.servicios4Cub$().pipe(
@@ -423,18 +391,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
         };
         clearFormArray(this.formAdicionales.get('table') as FormArray);
         carrito.forEach(servicio => {
-          // this.formCub.get('table').setValue([]);
-
-          // const tableValue: Carrito[] = (this.formCub.get('table') as FormArray)
-          //   .value;
-          // const index_table_servicio = tableValue.findIndex(
-          //   x => x.servicio_id === servicio.servicio_id
-          // );
-
-          // if (index_table_servicio === -1) {
-          // console.log(
-          //   'NUEVO SERVICIO'
-          // );
           const group = new FormGroup({
             precargado: new FormControl(servicio.precargado ?? false, []),
             servicio_rowid: new FormControl(
@@ -462,31 +418,6 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
             ),
           });
           (this.formAdicionales.get('table') as FormArray).push(group);
-          // }
-          // else {
-          //   // console.log(
-          //   //   'SERVICIO EXISTENTE'
-          //   // );
-          //   const UOTableForm = (this.formCub.get('table') as FormArray)
-          //     .at(index_table_servicio)
-          //     .get('unidades_obras') as FormArray;
-          //   const uosForm: DatosUnidadObra4Cub[] = UOTableForm.value;
-          //   const uosCarrito = servicio.unidades_obras;
-          //   const getUosNuevas = (
-          //     carritoActual: DatosUnidadObra4Cub[],
-          //     form: DatosUnidadObra4Cub[]
-          //   ) => {
-          //     return carritoActual.filter(object1 => {
-          //       return !form.some(object2 => {
-          //         return object1.uo_codigo === object2.uo_codigo;
-          //       });
-          //     });
-          //   };
-          //   const uosNuevas = getUosNuevas(uosCarrito, uosForm);
-          //   uosNuevas.forEach(uo => {
-          //     UOTableForm.push(this.makeUOForm(uo));
-          //   });
-          // }
         });
       })
     );
@@ -641,7 +572,10 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     const request_uo: RequestGetDatosUnidadObra4Cub = {
       uo_codigo: uob_cod,
     };
-    this.cubicacionFacade.datosServicio4Especial(request_servicio, request_uo);
+    this.cubicacionFacade.datosServicio4CubAdicionales(
+      request_servicio,
+      request_uo
+    );
     this.detector.detectChanges();
   }
 
@@ -803,7 +737,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       ot_id: this.ot_id,
       adicionales_solicitados: nuevos_servicios,
     };
-    console.log(nuevos_servicios);
+    // console.log(nuevos_servicios);
     this.cubicacionFacade.agregarServiciosAdicionales(request);
   }
 

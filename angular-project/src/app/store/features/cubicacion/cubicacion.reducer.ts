@@ -125,7 +125,7 @@ export const reducerCubicacion = createReducer(
     CubicacionActions.loadCarritoDatosServicio4CubAdicionales,
     (state, { carrito }) => ({
       ...state,
-      carritoAdicionales: carrito,
+      carritoAdicionales: [...state.carritoAdicionales, ...carrito],
       servciouo_repetido_alert: false, // TODO revisar
     })
   ),
@@ -214,6 +214,7 @@ export const reducerCubicacion = createReducer(
         };
       }
 
+      console.log('exist?', index);
       if (index >= 0) {
         // SERVICIO YA EXISTE servicio_id si es la primera vez, quiere decir que hay un servicio original existente
         // si hay un servicio adicional existente entonces se debe crear otro servicio adicional en primera instancia
@@ -221,7 +222,10 @@ export const reducerCubicacion = createReducer(
       } else {
         return {
           ...state,
-          carritoAdicionales: [...state.carrito, item_carrito],
+          carritoAdicionales: [
+            ...state.carritoAdicionales,
+            { ...item_carrito, adicional: 'NUEVO ADICIONAL' },
+          ],
           servciouo_repetido_alert: false,
           uo_sin_materiales_alert: uo_sin_material,
         };
