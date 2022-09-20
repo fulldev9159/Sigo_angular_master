@@ -48,6 +48,7 @@ export interface StateLoadings {
   sendingGetAdminContratoFromCub: boolean;
   sendingGetProyectos: boolean;
   sendingCreateOT: boolean;
+  sendingGetPosibleSupervisorTrabajos: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -86,6 +87,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetAdminContratoFromCub: false,
   sendingGetProyectos: false,
   sendingCreateOT: false,
+  sendingGetPosibleSupervisorTrabajos: false,
 };
 
 export const reducerLoadings = createReducer(

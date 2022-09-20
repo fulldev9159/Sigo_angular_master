@@ -6,6 +6,11 @@
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
 
+    <button id="play-button" pTooltip="Aceptación de la Orden de trabajo" *ngIf="findAccion('OT_ACEPTAR_PROVEEDOR')"
+        (click)="openModalAceptacionOTProveedor()">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
     <!-- ACCIONES FIJAS -->
     <button id="info-button" pTooltip="Información">
         <fa-icon [icon]="infoIcon"></fa-icon>
@@ -38,4 +43,28 @@
 <p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="displayModalRechazoOrdenDeTrabajo" [draggable]="false"
     [modal]="true">
     <zwc-view-rechazo></zwc-view-rechazo>
+</p-dialog>
+
+<p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false"
+    [modal]="true" [style]="{heigth: '50vh'}">
+    <p> Order de trabajo ID: {{ot_id}}</p>
+    <p>Si acepta esta orden de trabajo, escoja el supervisor de trabajos que la realizará</p>
+    <form novalidate autocomplete="off" [formGroup]="form">
+        <zwc-pdropdown [control]="form.get('trabajador_id')" Label="*Supervisor"
+            dropdown_id="select-supervisor-trabajos" [data]="posibleSupervisorDeTrabajo$|async"
+            Pplaceholder="Selecione una persona" [loading]="loadingPosibleSupervisorDeTrabajos$|async"></zwc-pdropdown>
+    </form>
+
+    <!-- TODO: AGREGAR LA VALIDACION AL BOTON ACEPTAR ORDEN -->
+    <div class="container-button-confirmar">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="rechazarOrdenProveedor()">
+            <fa-icon [icon]="cancelIcon" style="color: #ccc;"></fa-icon>
+            Rechazar Orden
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="aceptarOrdenProveedor()">
+            <fa-icon [icon]="checkIcon"></fa-icon>
+            Aceptar Orden
+        </button>
+    </div>
 </p-dialog>

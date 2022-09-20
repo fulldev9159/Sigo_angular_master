@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { RequestAceptarRechazarOT, Response } from '@model';
+import {
+  PosibleSupervisorTrabajo,
+  RequestAceptarRechazarOT,
+  Response,
+} from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,6 +24,16 @@ export class FlujoOtHttpService {
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/ot_aceptacion_inicial/update`,
       request
+    );
+  }
+
+  // POSIBLE SUPERVISOR DE TRABAJOS
+  getPosibleSupervisorDeTrabajos(
+    ot_id: number
+  ): Observable<Response<{ items: PosibleSupervisorTrabajo[] }>> {
+    return this.http.post<Response<{ items: PosibleSupervisorTrabajo[] }>>(
+      `${this.API_URL}/ot/posibles_trabajadores/get`,
+      { ot_id }
     );
   }
 }

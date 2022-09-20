@@ -177,3 +177,8 @@ export const sendingCreateOT = createSelector(
   selectLoadings,
   (state: reducer.StateLoadings) => state.sendingCreateOT
 );
+
+export const sendingGetPosibleSupervisorTrabajos = createSelector(
+  selectLoadings,
+  (state: reducer.StateLoadings) => state.sendingGetPosibleSupervisorTrabajos
+);

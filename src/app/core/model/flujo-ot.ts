@@ -7,3 +7,8 @@ export interface RequestAceptarRechazarOT {
     tipo?: number;
   };
 }
+
+export interface PosibleSupervisorTrabajo {
+  id: number;
+  nombre: string;
+}

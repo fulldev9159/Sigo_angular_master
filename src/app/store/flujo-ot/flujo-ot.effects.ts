@@ -31,10 +31,30 @@ export class FlujoOTEffects {
     )
   );
 
+  // GET POSIBLE SUPERVISOR DE TRABAJOS
+  getPosibleSupervisorDeTrabajos$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.getPosibleSupervisorDeTrabajos),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.getPosibleSupervisorDeTrabajos(ot_id).pipe(
+          map(response =>
+            flujoOTActions.getPosibleSupervisorDeTrabajosSuccess({ response })
+          ),
+          catchError(error =>
+            of(flujoOTActions.getPosibleSupervisorDeTrabajosError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(flujoOTActions.aceptarRechazarIncialOTSuccess),
+        ofType(
+          flujoOTActions.aceptarRechazarIncialOTSuccess,
+          flujoOTActions.getPosibleSupervisorDeTrabajosSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -43,7 +63,10 @@ export class FlujoOTEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(flujoOTActions.aceptarRechazarIncialOTError),
+        ofType(
+          flujoOTActions.aceptarRechazarIncialOTError,
+          flujoOTActions.getPosibleSupervisorDeTrabajosError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }
