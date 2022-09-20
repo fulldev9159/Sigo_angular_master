@@ -192,6 +192,29 @@ export const getDatosServicio4CubError = createAction(
   props<{ error: any }>()
 );
 
+// CARRITO ADICIONALES
+export const loadCarritoDatosServicio4CubAdicionales = createAction(
+  '[Cubicacion] loadCarritoDatosServicio4CubAdicionales ',
+  props<{
+    carrito: Carrito[];
+  }>()
+);
+export const getDatosServicio4CubAdicionales = createAction(
+  '[Cubicacion] getDatosServicio4CubAdicionales ',
+  props<{
+    request_servicio: RequestGetDatosServicio4Cub;
+    request_uo: RequestGetDatosUnidadObra4Cub;
+  }>()
+);
+export const getDatosServicio4CubAdicionalesSuccess = createAction(
+  '[Cubicacion] getDatosServicio4CubAdicionales Success',
+  props<{ item_carrito: Carrito }>()
+);
+export const getDatosServicio4CubAdicionalesError = createAction(
+  '[Cubicacion] getDatosServicio4CubAdicionales Error',
+  props<{ error: any }>()
+);
+
 // GET CARRITO ESPECIAL
 export const getDatosServicio4Especial = createAction(
   '[Cubicacion] getDatosServicio4Especial ',

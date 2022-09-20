@@ -142,12 +142,30 @@ export class CubicacionFacade {
     );
   }
 
+  public loadDatosServicio4CubAdicionales(carrito: Carrito[]): void {
+    this.store.dispatch(
+      cubicacionActions.loadCarritoDatosServicio4CubAdicionales({ carrito })
+    );
+  }
+
   public datosServicio4Cub(
     request_servicio: RequestGetDatosServicio4Cub,
     request_uo: RequestGetDatosUnidadObra4Cub
   ): void {
     this.store.dispatch(
       cubicacionActions.getDatosServicio4Cub({ request_servicio, request_uo })
+    );
+  }
+
+  public datosServicio4CubAdicionales(
+    request_servicio: RequestGetDatosServicio4Cub,
+    request_uo: RequestGetDatosUnidadObra4Cub
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.getDatosServicio4CubAdicionales({
+        request_servicio,
+        request_uo,
+      })
     );
   }
 
@@ -181,6 +199,10 @@ export class CubicacionFacade {
 
   public carrito$(): Observable<Carrito[]> {
     return this.store.select(cubicacionSelectors.carrito);
+  }
+
+  public carritoAdicionales$(): Observable<Carrito[]> {
+    return this.store.select(cubicacionSelectors.carritoAdicionales);
   }
 
   // SERVICIO UO REPETIDO ALERT

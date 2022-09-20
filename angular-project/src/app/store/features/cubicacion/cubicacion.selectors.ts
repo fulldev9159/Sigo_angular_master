@@ -60,6 +60,10 @@ export const carrito = createSelector(
   selectCubicacion,
   (state: fromCubicacion.StateCubicacion) => state.carrito
 );
+export const carritoAdicionales = createSelector(
+  selectCubicacion,
+  (state: fromCubicacion.StateCubicacion) => state.carritoAdicionales
+);
 
 export const servicioUORepetidoAlert = createSelector(
   selectCubicacion,

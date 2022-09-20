@@ -31,6 +31,8 @@ export interface StateCubicacion {
   servicios4cub: Servicios4Cub[];
   unidadObras4cub: UnidadObra4Cub[];
   carrito: Carrito[];
+  carritoAdicionales: Carrito[];
+
   servciouo_repetido_alert: boolean;
   uo_sin_materiales_alert: boolean;
   //   ///
@@ -54,6 +56,7 @@ export const initialStateCubicacion: StateCubicacion = {
   servicios4cub: [],
   unidadObras4cub: [],
   carrito: [],
+  carritoAdicionales: [],
   servciouo_repetido_alert: false,
   uo_sin_materiales_alert: false,
   //////
@@ -119,6 +122,14 @@ export const reducerCubicacion = createReducer(
     servciouo_repetido_alert: false, // TODO revisar
   })),
   on(
+    CubicacionActions.loadCarritoDatosServicio4CubAdicionales,
+    (state, { carrito }) => ({
+      ...state,
+      carritoAdicionales: carrito,
+      servciouo_repetido_alert: false, // TODO revisar
+    })
+  ),
+  on(
     CubicacionActions.getDatosServicio4CubSuccess,
     (state, { item_carrito }) => {
       const index = state.carrito.findIndex(
@@ -178,6 +189,39 @@ export const reducerCubicacion = createReducer(
         return {
           ...state,
           carrito: [...state.carrito, item_carrito],
+          servciouo_repetido_alert: false,
+          uo_sin_materiales_alert: uo_sin_material,
+        };
+      }
+    }
+  ),
+
+  on(
+    CubicacionActions.getDatosServicio4CubAdicionalesSuccess,
+    (state, { item_carrito }) => {
+      const index = state.carritoAdicionales.findIndex(
+        x => x.servicio_id === item_carrito.servicio_id
+      );
+      let uo_sin_material = false;
+      if (item_carrito.unidades_obras[0].material_arr.length === 0) {
+        uo_sin_material = true;
+      }
+
+      if (uo_sin_material) {
+        return {
+          ...state,
+          uo_sin_materiales_alert: uo_sin_material,
+        };
+      }
+
+      if (index >= 0) {
+        // SERVICIO YA EXISTE servicio_id si es la primera vez, quiere decir que hay un servicio original existente
+        // si hay un servicio adicional existente entonces se debe crear otro servicio adicional en primera instancia
+        // si ya se ha creado otro servicio servicio adicional no original se debe agregar la uo a esta
+      } else {
+        return {
+          ...state,
+          carritoAdicionales: [...state.carrito, item_carrito],
           servciouo_repetido_alert: false,
           uo_sin_materiales_alert: uo_sin_material,
         };

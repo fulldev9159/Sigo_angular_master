@@ -101,7 +101,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     table: new FormArray([]),
   };
 
-  formCub: FormGroup = new FormGroup(this.formCubControls);
+  formAdicionales: FormGroup = new FormGroup(this.formCubControls);
 
   actividad4Cub$: Observable<Actividad4Cub[]> =
     this.cubicacionFacade.actividad4cub$();
@@ -113,7 +113,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   uobs: UnidadObra4Cub[];
   servicioUORepetidoAlert$: Observable<boolean> = of(false);
   UOSinMaterialesAlert$: Observable<boolean> = of(false);
-  carrito$: Observable<Carrito[]>;
+  carritoAdicionales$: Observable<Carrito[]>;
 
   contrato_marco_id = null;
   agencia_id = null;
@@ -219,7 +219,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.route.data.subscribe(({ detalleOT, detalleInformeAvance }) => {
-        this.formCub.reset;
+        this.formAdicionales.reset;
         this.cubicacionFacade.resetCarrito();
         console.log(detalleOT);
         console.log(detalleInformeAvance);
@@ -235,22 +235,24 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
         this.agencia_id = detalleOT.data.ot.model_cubicacion_id.agencia_id;
         this.cmarco_has_proveedor_id =
           detalleOT.data.ot.model_cubicacion_id.cmarco_has_proveedor_id;
-        detalleInformeAvance.data.many_informe_has_servicio.forEach(
-          (servicio: ServicioFromInfomeAvance) => {
-            let item_carrito: Carrito;
-            item_carrito = {
-              precargado: true,
-              servicio_rowid: servicio.id,
-              servicio_cantidad: servicio.cantidad,
 
-              servicio_codigo: servicio.numero_producto,
-              servicio_id: servicio.servicio_id,
-              servicio_nombre: servicio.model_servicio_id.descripcion,
-              servicio_precio_final_clp: servicio.valor_unitario_clp,
+        const carrito: Carrito[] =
+          detalleInformeAvance.data.many_informe_has_servicio.map(
+            data_servicio => ({
+              precargado: true,
+              servicio_rowid: data_servicio.id,
+              servicio_cantidad: data_servicio.cantidad,
+
+              adicional: data_servicio.adicional_aceptacion_estado,
+
+              servicio_codigo: data_servicio.numero_producto,
+              servicio_id: data_servicio.servicio_id,
+              servicio_nombre: data_servicio.model_servicio_id.descripcion,
+              servicio_precio_final_clp: data_servicio.valor_unitario_clp,
               actividad_descripcion: 'TODO',
               tipo_servicio_descripcion: 'TODO',
 
-              unidades_obras: servicio.many_informe_has_uob.map(uo => ({
+              unidades_obras: data_servicio.many_informe_has_uob.map(uo => ({
                 precargado: true,
                 uo_rowid: uo.id,
                 uo_cantidad: uo.cantidad,
@@ -261,13 +263,43 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
                   material_nombre: material.model_material_cod.descripcion,
                 })),
               })),
-            };
+            })
+          );
 
-            this.cubicacionFacade.getDatosServicio4EspecialSuccess(
-              item_carrito
-            );
-          }
-        );
+        this.cubicacionFacade.loadDatosServicio4CubAdicionales(carrito);
+        //   detalleInformeAvance.data.many_informe_has_servicio.forEach(
+        //   (servicio: ServicioFromInfomeAvance) => {
+        //     let item_carrito: Carrito;
+        //     item_carrito = {
+        //       precargado: true,
+        //       servicio_rowid: servicio.id,
+        //       servicio_cantidad: servicio.cantidad,
+
+        //       servicio_codigo: servicio.numero_producto,
+        //       servicio_id: servicio.servicio_id,
+        //       servicio_nombre: servicio.model_servicio_id.descripcion,
+        //       servicio_precio_final_clp: servicio.valor_unitario_clp,
+        //       actividad_descripcion: 'TODO',
+        //       tipo_servicio_descripcion: 'TODO',
+
+        //       unidades_obras: servicio.many_informe_has_uob.map(uo => ({
+        //         precargado: true,
+        //         uo_rowid: uo.id,
+        //         uo_cantidad: uo.cantidad,
+        //         uo_codigo: uo.unidad_obra_cod,
+        //         uo_nombre: uo.model_unidad_obra_cod.descripcion,
+        //         uo_precio_total_clp: uo.valor_unitario_clp,
+        //         material_arr: uo.many_informe_has_material.map(material => ({
+        //           material_nombre: material.model_material_cod.descripcion,
+        //         })),
+        //       })),
+        //     };
+
+        //     this.cubicacionFacade.getDatosServicio4EspecialSuccess(
+        //       item_carrito
+        //     );
+        //   }
+        // );
       })
     );
     this.servicios4Cub$ = this.cubicacionFacade.servicios4Cub$().pipe(
@@ -380,16 +412,16 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
         })
     );
 
-    this.carrito$ = this.cubicacionFacade.carrito$();
+    this.carritoAdicionales$ = this.cubicacionFacade.carritoAdicionales$();
 
     this.subscription.add(
-      this.carrito$.subscribe(carrito => {
+      this.carritoAdicionales$.subscribe(carrito => {
         const clearFormArray = (formArray: FormArray) => {
           while (formArray.length !== 0) {
             formArray.removeAt(0);
           }
         };
-        clearFormArray(this.formCub.get('table') as FormArray);
+        clearFormArray(this.formAdicionales.get('table') as FormArray);
         carrito.forEach(servicio => {
           // this.formCub.get('table').setValue([]);
 
@@ -416,23 +448,20 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
               Validators.required,
               Validators.min(0),
             ]),
-            servicio_precio_final_clp: new FormControl(
-              servicio.servicio_precio_final_clp,
-              [Validators.required]
-            ),
             actividad_id: new FormControl(servicio.actividad_id, [
               Validators.required,
             ]),
             servicio_tipo: new FormControl(servicio.servicio_tipo, [
               Validators.required,
             ]),
+            adicional: new FormControl(servicio.adicional),
             unidades_obras: new FormArray(
               servicio.unidades_obras.map(uo => {
                 return this.makeUOForm(uo);
               })
             ),
           });
-          (this.formCub.get('table') as FormArray).push(group);
+          (this.formAdicionales.get('table') as FormArray).push(group);
           // }
           // else {
           //   // console.log(
@@ -642,10 +671,10 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     // console.log('control a buscar', servicio_id);
     const controlName = 'table';
     const index = (
-      this.formCub.get('table').value as Array<{ servicio_id: string }>
+      this.formAdicionales.get('table').value as Array<{ servicio_id: string }>
     ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id);
     // console.log('index encontrado', index);
-    return (this.formCub.controls[controlName] as FormArray).controls[
+    return (this.formAdicionales.controls[controlName] as FormArray).controls[
       index
     ].get(control);
   }
@@ -659,7 +688,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     // console.log(
     //   `servicio: ${servicio_id} - control ${control} - uo_codigo: ${uo_codigo}`
     // );
-    const tableForm = this.formCub.get('table') as FormArray;
+    const tableForm = this.formAdicionales.get('table') as FormArray;
     const tableValue: Carrito[] = tableForm.value;
     const index_service = tableValue.findIndex(
       tableServicio => tableServicio.servicio_id === +servicio_id
@@ -674,7 +703,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       uoTable => uoTable.uo_codigo === uo_codigo
     );
     return (
-      (this.formCub.controls[controlName] as FormArray).controls[
+      (this.formAdicionales.controls[controlName] as FormArray).controls[
         index_service
       ].get('unidades_obras') as FormArray
     ).controls[index_uo].get(control);
@@ -682,9 +711,11 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   deleteServiceCarrito(servicio_id: number): void {
     this.cubicacionFacade.deleteServiceCarrito4CreateCub(+servicio_id);
-    (this.formCub.get('table') as FormArray).removeAt(
+    (this.formAdicionales.get('table') as FormArray).removeAt(
       (
-        this.formCub.get('table').value as Array<{ servicio_id: string }>
+        this.formAdicionales.get('table').value as Array<{
+          servicio_id: string;
+        }>
       ).findIndex(serviceTable => +serviceTable.servicio_id === servicio_id)
     );
   }
@@ -692,16 +723,18 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   deleteUOCarrito(servicio_id: number, uo_cod: string): void {
     this.cubicacionFacade.deleteUOCarrito4CreateCub(+servicio_id, uo_cod);
     const index_service = (
-      this.formCub.get('table').value as Array<{ servicio_id: string }>
+      this.formAdicionales.get('table').value as Array<{ servicio_id: string }>
     ).findIndex(serviceTable => +serviceTable.servicio_id === servicio_id);
     (
       (
-        (this.formCub.get('table') as FormArray).at(index_service) as FormGroup
+        (this.formAdicionales.get('table') as FormArray).at(
+          index_service
+        ) as FormGroup
       ).get('unidades_obras') as FormArray
     ).removeAt(
       (
         (
-          (this.formCub.get('table') as FormArray).at(
+          (this.formAdicionales.get('table') as FormArray).at(
             index_service
           ) as FormGroup
         ).get('unidades_obras').value as Array<{ uo_codigo: string }>
@@ -731,7 +764,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
         uo_cantidad: number;
         uo_codigo: string;
       }[];
-    }[] = this.formCub.get('table').value as Array<{
+    }[] = this.formAdicionales.get('table').value as Array<{
       precargado?: boolean;
       servicio_rowid?: number;
 
