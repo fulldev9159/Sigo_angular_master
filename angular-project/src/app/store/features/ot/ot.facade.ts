@@ -46,6 +46,7 @@ import {
   RequestAceptarRechazarAdicionales,
   RequestAprobarRechazarOperaciones,
   RequestValidateActa,
+  RequestAdicionales,
 } from '@data';
 @Injectable({
   providedIn: 'root',
@@ -705,5 +706,10 @@ export class OtFacade {
   // APROBAR RECHAZAR ADICIONALES
   public aprobarRechazarAdicional(servicios: number[]): void {
     this.store.dispatch(otActions.aprobarRechazarAdicional({ servicios }));
+  }
+
+  // AGREGAR ADICIONALES
+  public agregarAdicionales(request: RequestAdicionales): void {
+    this.store.dispatch(otActions.agregarAdicionales({ request }));
   }
 }

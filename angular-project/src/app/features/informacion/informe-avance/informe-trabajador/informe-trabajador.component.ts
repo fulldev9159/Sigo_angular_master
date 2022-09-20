@@ -17,6 +17,7 @@ import {
   DetalleInformeAvance,
   NuevaUnidadObraAdicional,
   NuevoServicioAdicional,
+  RequestAdicionales,
   RequestAgregarServicioAdicional,
   RequestDeleteDetallesCubicacion,
   RequestGetDatosServicio4Cub,
@@ -536,6 +537,45 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
     if (this.valid) {
       this.otFacade.updateDetalleInformeAvance(ot_id, id, this.values);
+      let formularioCarrito = this.formAdicionales.get('table').value as Array<{
+        servicio_rowid: number;
+        servicio_id: number;
+        servicio_cantidad: number;
+        actividad_id: number;
+        servicio_tipo: number;
+        adicional: string;
+        dummy: string;
+        unidades_obras: {
+          precargado: boolean;
+          uo_rowid: number;
+
+          uo_codigo: string;
+          uo_cantidad: number;
+        }[];
+      }>;
+
+      let nuevosAdicionales = formularioCarrito
+        .filter(value => value.adicional === 'NUEVO ADICIONAL')
+        .map(value => ({
+          servicio_id: +value.servicio_id,
+          actividad_id: +value.actividad_id,
+          tipo_servicio_id: +value.servicio_tipo,
+          cantidad: value.servicio_cantidad,
+          unidad_obra: value.unidades_obras.map(uo => ({
+            uob_codigo: uo.uo_codigo,
+            cantidad: uo.uo_cantidad,
+          })),
+        }));
+      let request: RequestAdicionales = {
+        ot_id,
+        adicionales_solicitados: {
+          nuevo: nuevosAdicionales,
+        },
+      };
+
+      // console.log(request);
+
+      this.otFacade.agregarAdicionales(request);
     }
   }
 
@@ -650,7 +690,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       : tableValue.findIndex(
           tableServicio => tableServicio.servicio_id === +servicio_id
         );
-    console.log('index service UOB', index_service);
+    // console.log('index service UOB', index_service);
     const serviceFrom = tableForm.at(index_service);
     const UOForm: DatosUnidadObra4Cub[] =
       serviceFrom.get('unidades_obras').value;

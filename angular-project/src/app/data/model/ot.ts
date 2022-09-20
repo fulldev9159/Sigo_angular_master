@@ -265,3 +265,34 @@ export interface RequestValidateActa {
     }[];
   };
 }
+
+export interface RequestAdicionales {
+  ot_id: number;
+  adicionales_solicitados?: {
+    nuevo: {
+      servicio_id: number;
+      actividad_id: number;
+      tipo_servicio_id: number;
+      cantidad: number;
+      unidad_obra: {
+        uob_codigo: string;
+        cantidad: number;
+      }[];
+    }[];
+    actualizar?: {
+      servicio: {
+        rowid: number;
+        cantidad: number;
+      }[];
+      unidad_obra: {
+        rowid: number;
+        cantidad: number;
+      }[];
+      agregar_uob_a_servicio?: {
+        servicio_rowid: number;
+        uob_codigo: string;
+        uob_cantidad: number;
+      }[];
+    };
+  };
+}

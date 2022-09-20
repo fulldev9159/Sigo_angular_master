@@ -216,7 +216,7 @@ export const reducerCubicacion = createReducer(
 
       console.log('exist?', index);
       if (index >= 0) {
-        // Servicio existente
+        // Servicio original existente
         // Se agrega como servicio dummy nuevo
         return {
           ...state,

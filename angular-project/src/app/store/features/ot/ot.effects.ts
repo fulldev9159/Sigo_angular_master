@@ -812,6 +812,21 @@ export class OtEffects {
     )
   );
 
+  // AGREGAR ADICIONALES
+  agregarAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otActions.agregarAdicionales),
+      concatMap(({ request }) =>
+        this.otService.serviciosAdicionales(request).pipe(
+          map(response => otActions.agregarAdicionalesSuccess({ response })),
+          catchError(err =>
+            of(otActions.agregarAdicionalesError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   // NOTIFICACIONES
   notifyOK$ = createEffect(
     () =>
@@ -867,7 +882,8 @@ export class OtEffects {
           otActions.solicitarInformeTrabajosFinalizadosError,
           otActions.informarTrabajosFinalizadosError,
           otActions.eliminarAdicionalError,
-          otActions.aprobarRechazarAdicionalError
+          otActions.aprobarRechazarAdicionalError,
+          otActions.agregarAdicionalesError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(

@@ -46,6 +46,7 @@ import {
   RequestAceptarRechazarAdicionales,
   RequestAprobarRechazarOperaciones,
   RequestValidateActa,
+  RequestAdicionales,
 } from '@data';
 
 // GET OTS
@@ -989,5 +990,20 @@ export const aprobarRechazarAdicionalSuccess = createAction(
 );
 export const aprobarRechazarAdicionalError = createAction(
   '[OT] aprobarRechazarAdicional Error',
+  props<{ error: any }>()
+);
+
+// AGREGAR ADICIONALES
+export const agregarAdicionales = createAction(
+  '[OT] GET agregarAdicionales',
+  props<{ request: RequestAdicionales }>()
+);
+
+export const agregarAdicionalesSuccess = createAction(
+  '[OT] GET agregarAdicionales Success',
+  props<{ response: Response<any> }>()
+);
+export const agregarAdicionalesError = createAction(
+  '[OT] agregarAdicionales Error',
   props<{ error: any }>()
 );

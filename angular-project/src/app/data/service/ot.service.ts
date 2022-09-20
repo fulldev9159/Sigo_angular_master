@@ -33,6 +33,7 @@ import {
   QuienAutorizoActa,
   RequestAceptarRechazarAdicionales,
   RequestAprobarRechazarOperaciones,
+  RequestAdicionales,
 } from '@data';
 
 @Injectable({
@@ -366,5 +367,13 @@ export class OTService {
   // APROBAR/RECHAZAR ADICIONAL
   aprobarRechazarAdicional(servicios: number[]): Observable<Response<any>> {
     return this.http.post<Response<any>>(`${this.apiUrl}`, { servicios });
+  }
+
+  serviciosAdicionales(request: RequestAdicionales): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/servicio_adicional/solicitud/save
+      `,
+      request
+    );
   }
 }
