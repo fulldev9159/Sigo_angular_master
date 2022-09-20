@@ -411,6 +411,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
               Validators.required,
             ]),
             adicional: new FormControl(servicio.adicional),
+            dummy: new FormControl(servicio.dummy),
             unidades_obras: new FormArray(
               servicio.unidades_obras.map(uo => {
                 return this.makeUOForm(uo);
@@ -601,12 +602,28 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     });
   }
 
-  formCntl(servicio_id: string, control: string): AbstractControl {
+  formCntl(
+    servicio_id: string,
+    control: string,
+    dummy: boolean
+  ): AbstractControl {
     // console.log('control a buscar', servicio_id);
     const controlName = 'table';
-    const index = (
-      this.formAdicionales.get('table').value as Array<{ servicio_id: string }>
-    ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id);
+    const index = dummy
+      ? (
+          this.formAdicionales.get('table').value as Array<{
+            servicio_id: string;
+            dummy: boolean;
+          }>
+        ).findIndex(
+          serviceTable =>
+            serviceTable.servicio_id === servicio_id && serviceTable.dummy
+        )
+      : (
+          this.formAdicionales.get('table').value as Array<{
+            servicio_id: string;
+          }>
+        ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id);
     // console.log('index encontrado', index);
     return (this.formAdicionales.controls[controlName] as FormArray).controls[
       index
@@ -616,7 +633,8 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   formCntlUO(
     servicio_id: string,
     control: string,
-    uo_codigo: string
+    uo_codigo: string,
+    dummy: boolean
   ): AbstractControl {
     // console.log('Datos');
     // console.log(
@@ -624,10 +642,15 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     // );
     const tableForm = this.formAdicionales.get('table') as FormArray;
     const tableValue: Carrito[] = tableForm.value;
-    const index_service = tableValue.findIndex(
-      tableServicio => tableServicio.servicio_id === +servicio_id
-    );
-    // console.log('index service UOB', index_service);
+    const index_service = dummy
+      ? tableValue.findIndex(
+          tableServicio =>
+            tableServicio.servicio_id === +servicio_id && tableServicio.dummy
+        )
+      : tableValue.findIndex(
+          tableServicio => tableServicio.servicio_id === +servicio_id
+        );
+    console.log('index service UOB', index_service);
     const serviceFrom = tableForm.at(index_service);
     const UOForm: DatosUnidadObra4Cub[] =
       serviceFrom.get('unidades_obras').value;

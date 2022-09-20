@@ -107,6 +107,7 @@ export interface Carrito extends DetallesServicio4Cub {
   servicio_unidad_cod?: string;
 
   adicional?: string;
+  dummy?: boolean;
 
   unidades_obras: DatosUnidadObra4Cub[];
 }

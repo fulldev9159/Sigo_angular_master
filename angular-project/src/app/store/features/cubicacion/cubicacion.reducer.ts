@@ -216,9 +216,19 @@ export const reducerCubicacion = createReducer(
 
       console.log('exist?', index);
       if (index >= 0) {
-        // SERVICIO YA EXISTE servicio_id si es la primera vez, quiere decir que hay un servicio original existente
-        // si hay un servicio adicional existente entonces se debe crear otro servicio adicional en primera instancia
-        // si ya se ha creado otro servicio servicio adicional no original se debe agregar la uo a esta
+        // Servicio existente
+        // Se agrega como servicio dummy nuevo
+        return {
+          ...state,
+          carritoAdicionales: [
+            ...state.carritoAdicionales,
+            {
+              ...item_carrito,
+              adicional: 'NUEVO ADICIONAL',
+              dummy: true,
+            },
+          ],
+        };
       } else {
         return {
           ...state,
