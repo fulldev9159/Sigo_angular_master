@@ -190,8 +190,11 @@ import * as authActions from &#x27;@storeOT/auth/auth.actions&#x27;;
 import * as perfilActions from &#x27;@storeOT/perfil/perfil.actions&#x27;;
 import * as usuarioActions from &#x27;@storeOT/usuario/usuario.actions&#x27;;
 import * as cubicacionActions from &#x27;@storeOT/cubicacion/cubicacion.actions&#x27;;
+import * as otActions from &#x27;@storeOT/ot/ot.actions&#x27;;
+import * as flujoOTActions from &#x27;@storeOT/flujo-ot/flujo-ot.actions&#x27;;
 import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
 import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
+import { OTFacade } from &#x27;@storeOT/ot/ot.facades&#x27;;
 
 interface ActionErr {
   error?: any;
@@ -217,7 +220,8 @@ export class AfterHttpService {
     private router: Router,
     private snackMessage: SnackMessageService,
     private authFacade: AuthFacade,
-    private cubicacionFacade: CubicacionFacade
+    private cubicacionFacade: CubicacionFacade,
+    private otFacade: OTFacade
   ) {}
 
   errorHandler(action: ActionErr): void {
@@ -317,6 +321,37 @@ export class AfterHttpService {
     // ELIMINAR SERVICIO CARRITO
     if (action.type &#x3D;&#x3D;&#x3D; cubicacionActions.eliminarServicioCarritoSuccess.type) {
       this.snackMessage.showMessage(&#x60;Eliminación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+    }
+
+    // CREATE OT
+    if (action.type &#x3D;&#x3D;&#x3D; otActions.createOTSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Orden de trabajo creada con exito. OT ID:${action.response.data.ot_id}&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // ACEPTAR OT INICIAL
+    // TODO: AGREGAR UN MENSAJE
+    // TODO: USAR BIEN LOS FILTROS
+    if (
+      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aceptarRechazarIncialOTSuccess.type ||
+      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.asignarSupervisorTrabajoSuccess.type
+    ) {
+      let filtros &#x3D; {
+        filtro_propietario: &#x27;TODAS&#x27;,
+        filtro_tipo: 0,
+      };
+      this.otFacade.getBandejaOT({
+        filtro_pestania: &#x27;EN_EJECUCION&#x27;,
+        ...filtros,
+      });
+      this.otFacade.getBandejaOT({
+        filtro_pestania: &#x27;ABIERTAS&#x27;,
+        ...filtros,
+      });
     }
   }
 }

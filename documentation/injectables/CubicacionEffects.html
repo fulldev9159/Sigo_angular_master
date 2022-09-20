@@ -96,6 +96,9 @@
                                 <a href="#eliminarServicioCarrito$" >eliminarServicioCarrito$</a>
                             </li>
                             <li>
+                                <a href="#getAdminContratoFromCub$" >getAdminContratoFromCub$</a>
+                            </li>
+                            <li>
                                 <a href="#getCubicacionesContrato$" >getCubicacionesContrato$</a>
                             </li>
                             <li>
@@ -442,6 +445,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getAdminContratoFromCub$"></a>
+                    <span class="name">
+                        <span ><b>getAdminContratoFromCub$</b></span>
+                        <a href="#getAdminContratoFromCub$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.getAdminContratoFromCub),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.cubicacionHttpService.getAdminContratoFromCub(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.getAdminContratoFromCubSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.getAdminContratoFromCubError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getCubicacionesContrato$"></a>
                     <span class="name">
                         <span ><b>getCubicacionesContrato$</b></span>
@@ -588,7 +630,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:162</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:178</a></div>
                         </td>
                     </tr>
 
@@ -628,7 +670,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:179</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="195" class="link-to-prism">src/app/store/cubicacion/cubicacion.effects.ts:195</a></div>
                         </td>
                     </tr>
 
@@ -796,6 +838,22 @@ export class CubicacionEffects {
           ),
           catchError(error &#x3D;&gt;
             of(cubicacionActions.getCubicacionesContratoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getAdminContratoFromCub$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(cubicacionActions.getAdminContratoFromCub),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.cubicacionHttpService.getAdminContratoFromCub(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            cubicacionActions.getAdminContratoFromCubSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(cubicacionActions.getAdminContratoFromCubError({ error }))
           )
         )
       )

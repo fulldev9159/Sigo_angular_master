@@ -78,7 +78,25 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#createOT$" >createOT$</a>
+                            </li>
+                            <li>
                                 <a href="#getAreaDeNegocio$" >getAreaDeNegocio$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTAbiertas$" >getBandejaOTAbiertas$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTAnuladas$" >getBandejaOTAnuladas$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTCerradas$" >getBandejaOTCerradas$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTEjecucion$" >getBandejaOTEjecucion$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTQuebradas$" >getBandejaOTQuebradas$</a>
                             </li>
                             <li>
                                 <a href="#getComunasFromCub$" >getComunasFromCub$</a>
@@ -215,6 +233,41 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="createOT$"></a>
+                    <span class="name">
+                        <span ><b>createOT$</b></span>
+                        <a href="#createOT$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.createOT),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.createOT(request).pipe(
+          map(response &#x3D;&gt; otActions.createOTSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.createOTError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/store/ot/ot.effects.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getAreaDeNegocio$"></a>
                     <span class="name">
                         <span ><b>getAreaDeNegocio$</b></span>
@@ -239,7 +292,192 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/store/ot/ot.effects.ts:91</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/store/ot/ot.effects.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTAbiertas$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTAbiertas$</b></span>
+                        <a href="#getBandejaOTAbiertas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAbiertas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTAbiertasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTAbiertasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/store/ot/ot.effects.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTAnuladas$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTAnuladas$</b></span>
+                        <a href="#getBandejaOTAnuladas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAnuladas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTAnuladasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTAnuladasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/store/ot/ot.effects.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTCerradas$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTCerradas$</b></span>
+                        <a href="#getBandejaOTCerradas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTCerradas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTCerradasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTCerradasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/app/store/ot/ot.effects.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTEjecucion$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTEjecucion$</b></span>
+                        <a href="#getBandejaOTEjecucion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTEjecucion),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTEjecucionSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTEjecucionError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/store/ot/ot.effects.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTQuebradas$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTQuebradas$</b></span>
+                        <a href="#getBandejaOTQuebradas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTQuebradas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTQuebradasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTQuebradasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/app/store/ot/ot.effects.ts:205</a></div>
                         </td>
                     </tr>
 
@@ -274,7 +512,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/store/ot/ot.effects.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/store/ot/ot.effects.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -309,7 +547,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/store/ot/ot.effects.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/store/ot/ot.effects.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -344,7 +582,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/store/ot/ot.effects.ts:104</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/store/ot/ot.effects.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -381,7 +619,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/store/ot/ot.effects.ts:117</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/store/ot/ot.effects.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -416,7 +654,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/store/ot/ot.effects.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/store/ot/ot.effects.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -451,7 +689,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/store/ot/ot.effects.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/store/ot/ot.effects.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -490,7 +728,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/store/ot/ot.effects.ts:74</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/store/ot/ot.effects.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -521,7 +759,13 @@
           otActions.getTipoDeTrabajoFromCubSuccess,
           otActions.getAreaDeNegocioSuccess,
           otActions.getPlanDeProyectoSuccess,
-          otActions.getSitioPlanProyectoSuccess
+          otActions.getSitioPlanProyectoSuccess,
+          otActions.createOTSuccess,
+          otActions.getBandejaOTEjecucionSuccess,
+          otActions.getBandejaOTAbiertasSuccess,
+          otActions.getBandejaOTCerradasSuccess,
+          otActions.getBandejaOTAnuladasSuccess,
+          otActions.getBandejaOTQuebradasSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -531,7 +775,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/store/ot/ot.effects.ts:131</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/store/ot/ot.effects.ts:219</a></div>
                         </td>
                     </tr>
 
@@ -562,7 +806,13 @@
           otActions.getTipoDeTrabajoFromCubError,
           otActions.getAreaDeNegocioError,
           otActions.getPlanDeProyectoError,
-          otActions.getSitioPlanProyectoError
+          otActions.getSitioPlanProyectoError,
+          otActions.createOTError,
+          otActions.getBandejaOTEjecucionError,
+          otActions.getBandejaOTAbiertasError,
+          otActions.getBandejaOTCerradasError,
+          otActions.getBandejaOTAnuladasError,
+          otActions.getBandejaOTQuebradasError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -572,7 +822,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/store/ot/ot.effects.ts:149</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="243" class="link-to-prism">src/app/store/ot/ot.effects.ts:243</a></div>
                         </td>
                     </tr>
 
@@ -604,6 +854,19 @@ export class OTEffects {
     private afterHttp: AfterHttpService,
     private numeroInternoHttp: NumeroInternoHttpService
   ) {}
+
+  // CREATE OT
+  createOT$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.createOT),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.createOT(request).pipe(
+          map(response &#x3D;&gt; otActions.createOTSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.createOTError({ error })))
+        )
+      )
+    )
+  );
 
   // CREATE OT CONTRATO BUCLE : GET OFICINA CENTRAL
   getOficinaCentral$ &#x3D; createEffect(() &#x3D;&gt;
@@ -715,6 +978,81 @@ export class OTEffects {
     )
   );
 
+  // BANDEJA OT EJECUCION
+  getBandejaOTEjecucion$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTEjecucion),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTEjecucionSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTEjecucionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT ABIERTAS
+  getBandejaOTAbiertas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAbiertas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTAbiertasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTAbiertasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT CERRADAS
+  getBandejaOTCerradas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTCerradas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTCerradasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTCerradasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT ANULADAS
+  getBandejaOTAnuladas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAnuladas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTAnuladasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTAnuladasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT QUEBRADAS
+  getBandejaOTQuebradas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTQuebradas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTQuebradasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTQuebradasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
@@ -726,7 +1064,13 @@ export class OTEffects {
           otActions.getTipoDeTrabajoFromCubSuccess,
           otActions.getAreaDeNegocioSuccess,
           otActions.getPlanDeProyectoSuccess,
-          otActions.getSitioPlanProyectoSuccess
+          otActions.getSitioPlanProyectoSuccess,
+          otActions.createOTSuccess,
+          otActions.getBandejaOTEjecucionSuccess,
+          otActions.getBandejaOTAbiertasSuccess,
+          otActions.getBandejaOTCerradasSuccess,
+          otActions.getBandejaOTAnuladasSuccess,
+          otActions.getBandejaOTQuebradasSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -744,7 +1088,13 @@ export class OTEffects {
           otActions.getTipoDeTrabajoFromCubError,
           otActions.getAreaDeNegocioError,
           otActions.getPlanDeProyectoError,
-          otActions.getSitioPlanProyectoError
+          otActions.getSitioPlanProyectoError,
+          otActions.createOTError,
+          otActions.getBandejaOTEjecucionError,
+          otActions.getBandejaOTAbiertasError,
+          otActions.getBandejaOTCerradasError,
+          otActions.getBandejaOTAnuladasError,
+          otActions.getBandejaOTQuebradasError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

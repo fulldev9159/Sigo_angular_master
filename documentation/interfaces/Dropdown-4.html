@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/features/ot/components/formulario-ot-base/formulario-ot-base.component.ts</code>
+            <code>src/app/features/auth/components/perfil-select/perfil-select.component.ts</code>
         </p>
 
 
@@ -177,114 +177,70 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
-import { FormGroup } from &#x27;@angular/forms&#x27;;
-import { CubicacionContrato } from &#x27;@model&#x27;;
-import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { PerfilesUsuario } from &#x27;@model&#x27;;
+import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
 import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
-import { OTFacade } from &#x27;@storeOT/ot/ot.facades&#x27;;
-import { SustentoFinancieroFacade } from &#x27;@storeOT/sustento-financiero/sustento-financiero.facades&#x27;;
-import { UsuarioFacade } from &#x27;@storeOT/usuario/usuario.facades&#x27;;
-import { combineLatest, map, Observable, Subscription, take, tap } from &#x27;rxjs&#x27;;
+import { PerfilFacade } from &#x27;@storeOT/perfil/perfil.facades&#x27;;
+import { map, Observable, take, tap } from &#x27;rxjs&#x27;;
+
 interface Dropdown {
   name: string;
   code: number;
 }
-
 @Component({
-  selector: &#x27;zwc-formulario-ot-base&#x27;,
-  templateUrl: &#x27;./formulario-ot-base.component.html&#x27;,
-  styleUrls: [&#x27;./formulario-ot-base.component.scss&#x27;],
+  selector: &#x27;zwc-perfil-select&#x27;,
+  templateUrl: &#x27;./perfil-select.component.html&#x27;,
+  styleUrls: [&#x27;./perfil-select.component.scss&#x27;],
 })
-export class FormularioOtBaseComponent implements OnInit, OnDestroy {
-  subscription: Subscription &#x3D; new Subscription();
-  @Input() form: FormGroup;
-
-  contratoUsuarios$: Observable&lt;Dropdown[]&gt; &#x3D; this.usuarioFacade
-    .getContratosUsuario$()
+export class PerfilSelectComponent {
+  perfilesUsuarioDropdown$: Observable&lt;Dropdown[]&gt; &#x3D; this.perfilFacade
+    .getPerfilesUsuario$()
     .pipe(
-      // tap(values &#x3D;&gt; (this.contratosUsuario &#x3D; values)),
-      map(values &#x3D;&gt; {
-        let tmp &#x3D; [...values];
-        return tmp.sort((a, b) &#x3D;&gt;
-          a.model_contrato_id.nombre &gt; b.model_contrato_id.nombre ? 1 : -1
-        );
-      }),
-      map(values &#x3D;&gt;
-        values.map(value &#x3D;&gt; ({
-          name: value.model_contrato_id.nombre,
-          code: value.contrato_id,
+      tap(perfiles &#x3D;&gt; (this.perfilesUsuario &#x3D; perfiles)),
+      map(perfiles &#x3D;&gt;
+        perfiles.map(perfil &#x3D;&gt; ({
+          name: perfil.model_perfil_id?.nombre,
+          code: perfil.id,
         }))
       ),
       take(1)
     );
+  perfilesUsuario: PerfilesUsuario[];
 
-  cubicacioneContrato: CubicacionContrato[] &#x3D; [];
-  cubicacionesContrato$: Observable&lt;Dropdown[]&gt; &#x3D; this.cubicacionFacade
-    .getCubicacionesContrato$()
-    .pipe(
-      tap(values &#x3D;&gt; (this.cubicacioneContrato &#x3D; values)),
-      map(values &#x3D;&gt; {
-        let tmp &#x3D; [...values];
-        return tmp.sort((a, b) &#x3D;&gt;
-          a.cubicacion_nombre &gt; b.cubicacion_nombre ? 1 : -1
-        );
-      }),
-      map(values &#x3D;&gt;
-        values.map(value &#x3D;&gt; ({
-          name: value.cubicacion_nombre,
-          code: value.cubicacion_id,
-        }))
-      )
-    );
-  cubicacionSelected$ &#x3D; this.otFacade.cubicacionSelected$();
-  // LOADINGS
-  loadingGetCubicacionesContrato$: Observable&lt;boolean&gt; &#x3D;
-    this.loadingFacade.sendingGetCubicacionesContrato$();
+  sendingGetPerfilesUser$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingFacade.sendingGetPerfilesUser$();
+  sendingPermisosPerfilUser$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingFacade.sendingPermisosPerfilUser$();
+
+  formControls &#x3D; {
+    perfil_id: new FormControl(&#x27;&#x27;, [Validators.required]),
+  };
+
+  formPerfilUser &#x3D; new FormGroup(this.formControls);
 
   constructor(
-    private cubicacionFacade: CubicacionFacade,
-    private otFacade: OTFacade,
-    private usuarioFacade: UsuarioFacade,
-    private loadingFacade: LoadingsFacade,
-    private sustentoFinancieroFacade: SustentoFinancieroFacade
+    private perfilFacade: PerfilFacade,
+    private authFacade: AuthFacade,
+    private loadingFacade: LoadingsFacade
   ) {}
 
-  ngOnInit(): void {
-    this.form.get(&#x27;cubicacion_id&#x27;).disable();
-
-    this.subscription.add(
-      this.form.get(&#x27;contrato&#x27;).valueChanges.subscribe(contrato_id &#x3D;&gt; {
-        if (contrato_id !&#x3D;&#x3D; null &amp;&amp; contrato_id !&#x3D;&#x3D; undefined) {
-          this.form.get(&#x27;cubicacion_id&#x27;).enable();
-          this.cubicacionFacade.getCubicacionesContrato(+contrato_id);
-          this.otFacade.cubicacionSelected(null);
-        }
-      })
+  perfilar(): void {
+    const proxy_id_selected &#x3D; +this.formPerfilUser.get(&#x27;perfil_id&#x27;).value;
+    const perfil_selected &#x3D; this.perfilesUsuario.find(
+      perfil &#x3D;&gt; perfil.id &#x3D;&#x3D;&#x3D; proxy_id_selected
     );
 
-    this.subscription.add(
-      this.form.get(&#x27;cubicacion_id&#x27;).valueChanges.subscribe(cubicacion_id &#x3D;&gt; {
-        if (cubicacion_id !&#x3D;&#x3D; null &amp;&amp; cubicacion_id !&#x3D;&#x3D; undefined) {
-          let cubicacionSelected &#x3D; this.cubicacioneContrato.filter(
-            value &#x3D;&gt; value.cubicacion_id &#x3D;&#x3D;&#x3D; +cubicacion_id
-          )[0];
-          this.otFacade.cubicacionSelected(cubicacionSelected);
-
-          // TODO: MEJORAR COMO SE LLAMA AL GET PMO DEPENDIENDO DEL CONTRATO
-          if (
-            cubicacionSelected &amp;&amp;
-            cubicacionSelected.tipo_contrato_marco_nombre !&#x3D;&#x3D; &#x27;Móvil&#x27;
-          ) {
-            this.sustentoFinancieroFacade.getPMO(&#x27;&#x27;);
-          }
-        }
-      })
+    this.authFacade.refreshLogin(
+      proxy_id_selected,
+      perfil_selected.model_perfil_id.nombre,
+      perfil_selected.model_perfil_id.model_rol_id.nombre
     );
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  logout(): void {
+    this.authFacade.Logout();
   }
 }
 </code></pre>

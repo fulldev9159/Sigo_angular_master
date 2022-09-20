@@ -300,33 +300,32 @@ export class SideBarComponent {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">
-&lt;div class&#x3D;&quot;layout-sidebar&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;layout-sidebar&quot;&gt;
     &lt;div class&#x3D;&quot;img-container&quot;&gt;
         &lt;img src&#x3D;&quot;./assets/images/logo-movistar.png&quot; alt&#x3D;&quot;Logo empresa&quot;&gt;
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;sesion-container&quot;&gt;
-        &lt;div class&#x3D;&quot;icon-session&quot;&gt;&lt;fa-icon [icon]&#x3D;&quot;faUser&quot;  &gt;&lt;/fa-icon&gt;&lt;/div&gt;
-        &lt;p style&#x3D;&quot;font-weight: 700;&quot;&gt;{{sessionData.usuario_nombre | titlecase}} &lt;/p&gt;    
-        &lt;p style&#x3D;&quot;font-size: 10px;font-weight: 100;&quot;&gt;(proxy_id: {{sessionData.perfil_proxy_id}})&lt;/p&gt;       
-        &lt;p style&#x3D;&quot;font-size: 12px;&quot;&gt;{{sessionData.nombre_perfil_select}} &lt;/p&gt;    
+        &lt;div class&#x3D;&quot;icon-session&quot;&gt;
+            &lt;fa-icon [icon]&#x3D;&quot;faUser&quot;&gt;&lt;/fa-icon&gt;
+        &lt;/div&gt;
+        &lt;p style&#x3D;&quot;font-weight: 700;&quot;&gt;{{sessionData.usuario_nombre | titlecase}} &lt;/p&gt;
+        &lt;p style&#x3D;&quot;font-size: 10px;font-weight: 100;&quot;&gt;(proxy_id: {{sessionData.perfil_proxy_id}})&lt;/p&gt;
+        &lt;p style&#x3D;&quot;font-size: 12px;&quot;&gt;{{sessionData.nombre_perfil_select}} &lt;/p&gt;
     &lt;/div&gt;
-    &lt;zwc-menu&gt;&lt;/zwc-menu&gt;
-&lt;/div&gt;
-</code></pre>
+    &lt;!-- &lt;zwc-menu&gt;&lt;/zwc-menu&gt; --&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
                     <code>./side-bar.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">
-.layout-sidebar {
+                <pre class="line-numbers"><code class="language-scss">.layout-sidebar {
     position: fixed;
     height: 100%;
     top: 0;
     left: 0;
-    width: 11rem;
+    width: 8rem;
     background: #ffffff;
     border-right: 1px solid transparent;
     box-shadow: 0px 4px 4px #D9DDFC;
@@ -336,28 +335,32 @@ export class SideBarComponent {
     display: flex;
     color: #eff3f7;
     font-family: &quot;Source Sans Pro&quot;, Arial, sans-serif;
-    .img-container{
+
+    .img-container {
         width: 100%;
         align-self: center;
         background-color: #045b89;
-        img{
+
+        img {
             margin-top: 7px;
-            margin-left: 12px;
-            width: 9rem;
+            margin-left: 6px;
+            width: 7rem;
         }
     }
-    .sesion-container{
+
+    .sesion-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 7px 12px 6px 12px;
+        padding: 9px;
         font-size: 13px;
         height: 7rem;
         justify-content: space-evenly;
         text-align: center;
         border-bottom: 0.01rem solid #025b89;
         background: #015682;
-        .icon-session{
+
+        .icon-session {
             font-size: 25px;
         }
     }
@@ -366,20 +369,21 @@ export class SideBarComponent {
 
 
 // :host ::ng-deep {
-    @media screen and (min-width: 992px){
-        .layout-sidebar {
-            transition: transform 0.2s
-        }
+@media screen and (min-width: 992px) {
+    .layout-sidebar {
+        transition: transform 0.2s
     }
+}
 
-    @media screen and (max-width: 991px){
-        .layout-sidebar {
-            z-index: 999;
-            transform: translate(-100%);
-            transition: transform  0.2s;
-            box-shadow: none;
-        }        
+@media screen and (max-width: 991px) {
+    .layout-sidebar {
+        z-index: 999;
+        transform: translate(-100%);
+        transition: transform 0.2s;
+        box-shadow: none;
     }
+}
+
 // }</code></pre>
     </div>
 
@@ -408,8 +412,8 @@ export class SideBarComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="layout-sidebar">    <div class="img-container">        <img src="./assets/images/logo-movistar.png" alt="Logo empresa">    </div>    <div class="sesion-container">        <div class="icon-session"><fa-icon [icon]="faUser"  ></fa-icon></div>        <p style="font-weight: 700;">{{sessionData.usuario_nombre | titlecase}} </p>            <p style="font-size: 10px;font-weight: 100;">(proxy_id: {{sessionData.perfil_proxy_id}})</p>               <p style="font-size: 12px;">{{sessionData.nombre_perfil_select}} </p>        </div>    <zwc-menu></zwc-menu></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><div class="layout-sidebar">    <div class="img-container">        <img src="./assets/images/logo-movistar.png" alt="Logo empresa">    </div>    <div class="sesion-container">        <div class="icon-session">            <fa-icon [icon]="faUser"></fa-icon>        </div>        <p style="font-weight: 700;">{{sessionData.usuario_nombre | titlecase}} </p>        <p style="font-size: 10px;font-weight: 100;">(proxy_id: {{sessionData.perfil_proxy_id}})</p>        <p style="font-size: 12px;">{{sessionData.nombre_perfil_select}} </p>    </div>    <!-- <zwc-menu></zwc-menu> --></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'SideBarComponent'};
 </script>

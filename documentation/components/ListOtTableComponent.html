@@ -1,0 +1,759 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  ListOtTableComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/ot/components/list-ot-table/list-ot-table.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>zwc-list-ot-table</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./list-ot-table.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./list-ot-table.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#filterIcon" >filterIcon</a>
+                            </li>
+                            <li>
+                                <a href="#formFilter" >formFilter</a>
+                            </li>
+                            <li>
+                                <a href="#formFilterControl" >formFilterControl</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#data" >data</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/ot/components/list-ot-table/list-ot-table.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <b>data</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/OT.html" target="_self" >OT[]</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/ot/components/list-ot-table/list-ot-table.component.ts:15</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table/list-ot-table.component.ts:36</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/app/features/ot/components/list-ot-table/list-ot-table.component.ts:32</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterIcon"></a>
+                    <span class="name">
+                        <span ><b>filterIcon</b></span>
+                        <a href="#filterIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faFilter</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/ot/components/list-ot-table/list-ot-table.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formFilter"></a>
+                    <span class="name">
+                        <span ><b>formFilter</b></span>
+                        <a href="#formFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup(this.formFilterControl)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/ot/components/list-ot-table/list-ot-table.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formFilterControl"></a>
+                    <span class="name">
+                        <span ><b>formFilterControl</b></span>
+                        <a href="#formFilterControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    ot_id: new FormControl(&#x27;&#x27;, []),
+    nombre: new FormControl(&#x27;&#x27;, []),
+    contrato_marco: new FormControl(&#x27;&#x27;),
+    proveedor: new FormControl(&#x27;&#x27;),
+    gestor: new FormControl(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/ot/components/list-ot-table/list-ot-table.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/features/ot/components/list-ot-table/list-ot-table.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup } from &#x27;@angular/forms&#x27;;
+import { faFilter } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+import { OT } from &#x27;@model&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+
+@Component({
+  selector: &#x27;zwc-list-ot-table&#x27;,
+  templateUrl: &#x27;./list-ot-table.component.html&#x27;,
+  styleUrls: [&#x27;./list-ot-table.component.scss&#x27;],
+})
+export class ListOtTableComponent implements OnInit, OnDestroy {
+  subscription: Subscription &#x3D; new Subscription();
+
+  @Input() data: OT[];
+
+  filterIcon &#x3D; faFilter;
+
+  // FORMULARIO
+  formFilterControl &#x3D; {
+    ot_id: new FormControl(&#x27;&#x27;, []),
+    nombre: new FormControl(&#x27;&#x27;, []),
+    contrato_marco: new FormControl(&#x27;&#x27;),
+    proveedor: new FormControl(&#x27;&#x27;),
+    gestor: new FormControl(&#x27;&#x27;),
+  };
+
+  formFilter: FormGroup &#x3D; new FormGroup(this.formFilterControl);
+
+  constructor() {}
+
+  ngOnInit(): void {
+    console.log();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;form&gt;
+    &lt;p-table #dt [value]&#x3D;&quot;data&quot; dataKey&#x3D;&quot;id&quot; styleClass&#x3D;&quot;p-datatable-sm p-datatable-gridlines&quot; responsiveLayout&#x3D;&quot;scroll&quot;
+        [paginator]&#x3D;&quot;true&quot; [rows]&#x3D;&quot;10&quot; [globalFilterFields]&#x3D;&quot;[&#x27;nombre&#x27;]&quot;&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+            &lt;!-- FILTERS --&gt;
+            &lt;tr&gt;
+                &lt;th pFrozenColumn style&#x3D;&quot;width:80px&quot;&gt;
+                    &lt;div&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;filterIcon&quot;&gt;&lt;/fa-icon&gt;
+                        &lt;input type&#x3D;&quot;number&quot; style&#x3D;&quot;width: 100%;&quot; formControlName&#x3D;&quot;ot_id&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;
+                    &lt;div&gt;
+                        &lt;fa-icon [icon]&#x3D;&quot;filterIcon&quot;&gt;&lt;/fa-icon&gt;
+                        &lt;input type&#x3D;&quot;text&quot; style&#x3D;&quot;width: 100%;&quot; formControlName&#x3D;&quot;nombre&quot; name&#x3D;&quot;filter-nombre-ot&quot;&gt;
+                    &lt;/div&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:140px&quot;&gt;&lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:100px&quot;&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:100px&quot;&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:120px&quot;&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:140px&quot;&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:140px&quot;&gt;&lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;!-- HEADERS --&gt;
+            &lt;tr&gt;
+                &lt;th style&#x3D;&quot;width:80px&quot; pSortableColumn&#x3D;&quot;id&quot; pFrozenColumn&gt;ID &lt;p-sortIcon field&#x3D;&quot;id&quot;&gt;
+                    &lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot; pSortableColumn&#x3D;&quot;nombre&quot;&gt;Nombre &lt;p-sortIcon field&#x3D;&quot;nombre&quot;&gt;
+                    &lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:140px&quot;&gt;Etapa&lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:100px&quot; pSortableColumn&#x3D;&quot;fecha_inicio&quot;&gt;Fecha Inicio
+                    &lt;p-sortIcon field&#x3D;&quot;fecha_inicio&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:100px&quot; pSortableColumn&#x3D;&quot;fecha_termino&quot;&gt;Fecha Termino
+                    &lt;p-sortIcon field&#x3D;&quot;fecha_termino&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:120px&quot; pSortableColumn&#x3D;&quot;contrato_marco_nombre&quot;&gt;Contrato &lt;p-sortIcon
+                        field&#x3D;&quot;contrato_marco_nombre&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:140px&quot; pSortableColumn&#x3D;&quot;proveedor_nombre&quot;&gt;Proveedor&lt;p-sortIcon
+                        field&#x3D;&quot;proveedor_nombre&quot;&gt;
+                    &lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:140px&quot; pSortableColumn&#x3D;&quot;usuario_nombre&quot;&gt;Gestor&lt;p-sortIcon field&#x3D;&quot;usuario_nombre&quot;&gt;
+                    &lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;Operaciones&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/ng-template&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;body&quot; let-item&gt;
+            &lt;tr&gt;
+                &lt;td style&#x3D;&quot;width:80px&quot; pFrozenColumn&gt;{{item.id}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;{{item.nombre}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:140px&quot;&gt;{{item.etapa_otdesc}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:100px&quot;&gt;{{item.fecha_inicio| date: &#x27;dd/MM/yyyy&#x27;}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:100px&quot;&gt;{{item.fecha_termino| date: &#x27;dd/MM/yyyy&#x27;}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:120px&quot;&gt;{{item.contrato_marco_nombre}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:140px&quot;&gt;{{item.proveedor_nombre}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:140px&quot;&gt;{{item.usuario_nombre}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;
+                    &lt;zwc-list-ot-table-operaciones [acciones]&#x3D;&quot;item.acciones&quot; [ot_id]&#x3D;&quot;item.id&quot;&gt;
+                    &lt;/zwc-list-ot-table-operaciones&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/ng-template&gt;
+
+        &lt;ng-template pTemplate&#x3D;&quot;summary&quot;&gt;
+            &lt;div class&#x3D;&quot;p-d-flex p-ai-center p-jc-between&quot;&gt;
+                En total hay {{data ? data.length : 0 }} elementos.
+            &lt;/div&gt;
+        &lt;/ng-template&gt;
+    &lt;/p-table&gt;
+&lt;/form&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./list-ot-table.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host ::ng-deep {
+
+    .p-datatable {
+        border: 1px solid #efefef;
+    }
+
+    fa-icon {
+        margin-right: 3px;
+        font-size: 0.7rem;
+        color: #545454;
+    }
+
+    .p-datatable.p-datatable-sm .p-datatable-header {
+        background: #efefef;
+    }
+
+    .p-datatable .p-datatable-thead&gt;tr&gt;th {
+        border: 0px;
+        border-width: 0px;
+        border-right: 1px solid #f4f4f4 !important;
+        border-bottom: 1px solid #d1cece;
+        background-color: #efefef;
+        font-size: var(--size-text-sigo);
+        font-weight: 700;
+
+        p-sorticon&gt;i {
+            font-size: 0.8rem !important;
+        }
+    }
+
+    .p-datatable .p-datatable-thead&gt;tr&gt;th&gt;div {
+        display: flex;
+        align-items: center;
+    }
+
+    td {
+        padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
+        border: 0 !important;
+        border-right: 1px solid #d8d8d8 !important;
+        border-bottom: 1px solid #d8d8d8 !important;
+        font-size: var(--size-text-sigo);
+    }
+
+    div&gt;span&gt;input {
+        height: 30px;
+        border-color: #c3bebe;
+        border-radius: 4px;
+    }
+
+    .p-paginator-bottom {
+        font-size: 0.8rem;
+
+        span button {
+            font-size: 0.8rem;
+        }
+    }
+
+    .p-paginator-page {
+        min-width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
+
+    .p-datatable-footer {
+        font-size: 0.8rem;
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><form>    <p-table #dt [value]="data" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"        [paginator]="true" [rows]="10" [globalFilterFields]="[\'nombre\']">        <ng-template pTemplate="header">            <!-- FILTERS -->            <tr>                <th pFrozenColumn style="width:80px">                    <div>                        <fa-icon [icon]="filterIcon"></fa-icon>                        <input type="number" style="width: 100%;" formControlName="ot_id">                    </div>                </th>                <th style="width:200px">                    <div>                        <fa-icon [icon]="filterIcon"></fa-icon>                        <input type="text" style="width: 100%;" formControlName="nombre" name="filter-nombre-ot">                    </div>                </th>                <th style="width:140px"></th>                <th style="width:100px">                </th>                <th style="width:100px">                </th>                <th style="width:120px">                </th>                <th style="width:140px">                </th>                <th style="width:140px"></th>                <th style="width:200px"></th>            </tr>            <!-- HEADERS -->            <tr>                <th style="width:80px" pSortableColumn="id" pFrozenColumn>ID <p-sortIcon field="id">                    </p-sortIcon>                </th>                <th style="width:200px" pSortableColumn="nombre">Nombre <p-sortIcon field="nombre">                    </p-sortIcon>                </th>                <th style="width:140px">Etapa</th>                <th style="width:100px" pSortableColumn="fecha_inicio">Fecha Inicio                    <p-sortIcon field="fecha_inicio"></p-sortIcon>                </th>                <th style="width:100px" pSortableColumn="fecha_termino">Fecha Termino                    <p-sortIcon field="fecha_termino"></p-sortIcon>                </th>                <th style="width:120px" pSortableColumn="contrato_marco_nombre">Contrato <p-sortIcon                        field="contrato_marco_nombre"></p-sortIcon>                </th>                <th style="width:140px" pSortableColumn="proveedor_nombre">Proveedor<p-sortIcon                        field="proveedor_nombre">                    </p-sortIcon>                </th>                <th style="width:140px" pSortableColumn="usuario_nombre">Gestor<p-sortIcon field="usuario_nombre">                    </p-sortIcon>                </th>                <th style="width:200px">Operaciones</th>            </tr>        </ng-template>        <ng-template pTemplate="body" let-item>            <tr>                <td style="width:80px" pFrozenColumn>{{item.id}}</td>                <td style="width:200px">{{item.nombre}}</td>                <td style="width:140px">{{item.etapa_otdesc}}</td>                <td style="width:100px">{{item.fecha_inicio| date: \'dd/MM/yyyy\'}}</td>                <td style="width:100px">{{item.fecha_termino| date: \'dd/MM/yyyy\'}}</td>                <td style="width:120px">{{item.contrato_marco_nombre}}</td>                <td style="width:140px">{{item.proveedor_nombre}}</td>                <td style="width:140px">{{item.usuario_nombre}}</td>                <td style="width:200px">                    <zwc-list-ot-table-operaciones [acciones]="item.acciones" [ot_id]="item.id">                    </zwc-list-ot-table-operaciones>                </td>            </tr>        </ng-template>        <ng-template pTemplate="summary">            <div class="p-d-flex p-ai-center p-jc-between">                En total hay {{data ? data.length : 0 }} elementos.            </div>        </ng-template>    </p-table></form></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
+    var ACTUAL_COMPONENT = {'name': 'ListOtTableComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ListOtTableComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

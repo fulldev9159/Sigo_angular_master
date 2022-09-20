@@ -102,12 +102,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, snackMessage: <a href="../injectables/SnackMessageService.html" target="_self">SnackMessageService</a>, authFacade: <a href="../injectables/AuthFacade.html" target="_self">AuthFacade</a>, cubicacionFacade: <a href="../injectables/CubicacionFacade.html" target="_self">CubicacionFacade</a>)</code>
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, snackMessage: <a href="../injectables/SnackMessageService.html" target="_self">SnackMessageService</a>, authFacade: <a href="../injectables/AuthFacade.html" target="_self">AuthFacade</a>, cubicacionFacade: <a href="../injectables/CubicacionFacade.html" target="_self">CubicacionFacade</a>, otFacade: <a href="../injectables/OTFacade.html" target="_self">OTFacade</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/core/service/after-http.service.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/core/service/after-http.service.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -172,6 +172,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>otFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/OTFacade.html" target="_self" >OTFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -206,8 +218,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">src/app/core/service/after-http.service.ts:38</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/app/core/service/after-http.service.ts:42</a></div>
                 </td>
             </tr>
 
@@ -275,8 +287,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">src/app/core/service/after-http.service.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="50"
+                            class="link-to-prism">src/app/core/service/after-http.service.ts:50</a></div>
                 </td>
             </tr>
 
@@ -337,8 +349,11 @@ import * as authActions from &#x27;@storeOT/auth/auth.actions&#x27;;
 import * as perfilActions from &#x27;@storeOT/perfil/perfil.actions&#x27;;
 import * as usuarioActions from &#x27;@storeOT/usuario/usuario.actions&#x27;;
 import * as cubicacionActions from &#x27;@storeOT/cubicacion/cubicacion.actions&#x27;;
+import * as otActions from &#x27;@storeOT/ot/ot.actions&#x27;;
+import * as flujoOTActions from &#x27;@storeOT/flujo-ot/flujo-ot.actions&#x27;;
 import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
 import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
+import { OTFacade } from &#x27;@storeOT/ot/ot.facades&#x27;;
 
 interface ActionErr {
   error?: any;
@@ -364,7 +379,8 @@ export class AfterHttpService {
     private router: Router,
     private snackMessage: SnackMessageService,
     private authFacade: AuthFacade,
-    private cubicacionFacade: CubicacionFacade
+    private cubicacionFacade: CubicacionFacade,
+    private otFacade: OTFacade
   ) {}
 
   errorHandler(action: ActionErr): void {
@@ -464,6 +480,37 @@ export class AfterHttpService {
     // ELIMINAR SERVICIO CARRITO
     if (action.type &#x3D;&#x3D;&#x3D; cubicacionActions.eliminarServicioCarritoSuccess.type) {
       this.snackMessage.showMessage(&#x60;Eliminación exitosa&#x60;, &#x27;Exito&#x27;, 6000);
+    }
+
+    // CREATE OT
+    if (action.type &#x3D;&#x3D;&#x3D; otActions.createOTSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Orden de trabajo creada con exito. OT ID:${action.response.data.ot_id}&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // ACEPTAR OT INICIAL
+    // TODO: AGREGAR UN MENSAJE
+    // TODO: USAR BIEN LOS FILTROS
+    if (
+      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.aceptarRechazarIncialOTSuccess.type ||
+      action.type &#x3D;&#x3D;&#x3D; flujoOTActions.asignarSupervisorTrabajoSuccess.type
+    ) {
+      let filtros &#x3D; {
+        filtro_propietario: &#x27;TODAS&#x27;,
+        filtro_tipo: 0,
+      };
+      this.otFacade.getBandejaOT({
+        filtro_pestania: &#x27;EN_EJECUCION&#x27;,
+        ...filtros,
+      });
+      this.otFacade.getBandejaOT({
+        filtro_pestania: &#x27;ABIERTAS&#x27;,
+        ...filtros,
+      });
     }
   }
 }
