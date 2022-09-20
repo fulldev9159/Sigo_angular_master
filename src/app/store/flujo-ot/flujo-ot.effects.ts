@@ -48,12 +48,54 @@ export class FlujoOTEffects {
     )
   );
 
+  // ACEPTAR OT PROVEEDOR Y ASIGNAR SUPERVISOR DE TRABAJOS
+  aceptarOTProveedor$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.aceptarOTProveedor),
+      concatMap(({ request_aceptacion, ot_id, proxy_id, concepto }) =>
+        this.flujoOTServiceHttp
+          .aceptarRechazarOTProveedor(request_aceptacion)
+          .pipe(
+            map(response =>
+              flujoOTActions.asignarSupervisorTrabajo({
+                ot_id,
+                proxy_id,
+                concepto,
+              })
+            ),
+            catchError(error =>
+              of(flujoOTActions.aceptarOTProveedorError({ error }))
+            )
+          )
+      )
+    )
+  );
+
+  asignarSupervisorTrabajo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.asignarSupervisorTrabajo),
+      concatMap(({ ot_id, proxy_id, concepto }) =>
+        this.flujoOTServiceHttp
+          .updateUsuarioInvolucrado(ot_id, proxy_id, concepto)
+          .pipe(
+            map(response =>
+              flujoOTActions.asignarSupervisorTrabajoSuccess({ response })
+            ),
+            catchError(error =>
+              of(flujoOTActions.asignarSupervisorTrabajoError({ error }))
+            )
+          )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           flujoOTActions.aceptarRechazarIncialOTSuccess,
-          flujoOTActions.getPosibleSupervisorDeTrabajosSuccess
+          flujoOTActions.getPosibleSupervisorDeTrabajosSuccess,
+          flujoOTActions.asignarSupervisorTrabajoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -65,7 +107,9 @@ export class FlujoOTEffects {
       this.actions$.pipe(
         ofType(
           flujoOTActions.aceptarRechazarIncialOTError,
-          flujoOTActions.getPosibleSupervisorDeTrabajosError
+          flujoOTActions.getPosibleSupervisorDeTrabajosError,
+          flujoOTActions.aceptarOTProveedorError,
+          flujoOTActions.asignarSupervisorTrabajoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

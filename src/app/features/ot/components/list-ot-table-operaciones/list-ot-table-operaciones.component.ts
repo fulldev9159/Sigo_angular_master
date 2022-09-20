@@ -26,6 +26,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   // TODO: MIGRAR VER LIBRO DE OBRAS
   // TODO: PROBAR COMPORTAMIENTO CON MAS DE UNA OT
   // TODO: CORREGIR COMO SE VE EL TOOLTIP DEL AGREGAR REGISTRO LIBRO DE OBRAS
+  // TODO: MIGRAR CASO EN QUE FALLE EL ACEPTAR OT PROVEEDOR Y SE DEBA EMPEZAR EN LA ETAPA DE ASIGNACION
   @Input() acciones: Accion[];
   @Input() ot_id: number;
 
@@ -97,8 +98,24 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
     this.flujoOTFacade.getPosibleSupervisorDeTrabajos(this.ot_id);
   }
 
-  rechazarOrdenProveedor(): void {}
-  aceptarOrdenProveedor(): void {}
+  rechazarOrdenProveedor(): void {
+    this.displayModalRechazoOrdenDeTrabajo = true;
+  }
+  aceptarOrdenProveedor(): void {
+    const request: RequestAceptarRechazarOT = {
+      ot_id: this.ot_id,
+      values: {
+        estado: 'ACEPTADO',
+      },
+    };
+    this.flujoOTFacade.aceptarOTProveedor(
+      request,
+      this.ot_id,
+      +this.form.get('trabajador_id').value,
+      'SUPERVISOR_DE_TRABAJOS'
+    );
+    this.displayModalAceptarProveedor = false;
+  }
 
   findAccion(accion: string): boolean {
     return (

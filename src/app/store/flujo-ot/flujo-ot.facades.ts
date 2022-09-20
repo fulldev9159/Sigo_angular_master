@@ -28,4 +28,32 @@ export class FlujoOTFacade {
   > {
     return this.store.select(flujoOTSelectors.getPosibleSupervisorDeTrabajos);
   }
+
+  // ACEPTAR OT PROVEDOR
+  public aceptarOTProveedor(
+    request_aceptacion: RequestAceptarRechazarOT,
+    ot_id: number,
+    proxy_id: number,
+    concepto: string
+  ): void {
+    this.store.dispatch(
+      flujoOTActions.aceptarOTProveedor({
+        request_aceptacion,
+        ot_id,
+        proxy_id,
+        concepto,
+      })
+    );
+  }
+
+  // ASIGNAR SUPERVISOR DE TRABAJOS
+  public asignarSupervisorTrabajo(
+    ot_id: number,
+    proxy_id: number,
+    concepto: string
+  ): void {
+    this.store.dispatch(
+      flujoOTActions.asignarSupervisorTrabajo({ ot_id, proxy_id, concepto })
+    );
+  }
 }

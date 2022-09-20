@@ -36,4 +36,30 @@ export class FlujoOtHttpService {
       { ot_id }
     );
   }
+
+  // ACEPTAR O RECHAZAR OT PROVEEDOR
+  aceptarRechazarOTProveedor(
+    request_aceptacion: RequestAceptarRechazarOT
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/ot_aceptacion_eecc/update`,
+      request_aceptacion
+    );
+  }
+
+  // ACTUALIZAR USUARIO INVOLUCRADO
+  updateUsuarioInvolucrado(
+    ot_id: number,
+    proxy_id: number,
+    concepto: string
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/usuario_involucrado_ot/create`,
+      {
+        ot_id,
+        proxy_id,
+        concepto,
+      }
+    );
+  }
 }

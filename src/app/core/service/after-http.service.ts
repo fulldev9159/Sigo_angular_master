@@ -151,7 +151,10 @@ export class AfterHttpService {
     // ACEPTAR OT INICIAL
     // TODO: AGREGAR UN MENSAJE
     // TODO: USAR BIEN LOS FILTROS
-    if (action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type) {
+    if (
+      action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type ||
+      action.type === flujoOTActions.asignarSupervisorTrabajoSuccess.type
+    ) {
       let filtros = {
         filtro_propietario: 'TODAS',
         filtro_tipo: 0,
