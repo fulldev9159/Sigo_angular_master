@@ -234,16 +234,19 @@ export const reducerCubicacion = createReducer(
         };
       } else {
         // NUEVO ADICIONAL SIN SERVICIO ORIGINAL EXISTENTE
-        console.log('servicio adicional nuevo');
+        console.log('servicio adicional nuevo sin servicio original existente');
         const indexAdicional = state.carritoAdicionales.findIndex(
           x =>
             x.servicio_id === item_carrito.servicio_id &&
-            x.adicional === 'NUEVO ADICIONAL'
+            x.adicional !== 'ORIGINAL'
         );
         if (indexAdicional >= 0) {
           // SI EL ADICIONAL YA EXISTÍA
           console.log('Servicio adicional existente');
-          const temp = copy({ ...item_carrito, adicional: 'NUEVO ADICIONAL' });
+          const temp = copy({
+            ...item_carrito,
+            adicional: state.carritoAdicionales[indexAdicional].adicional,
+          });
           temp.precargado = state.carritoAdicionales[indexAdicional].precargado;
           temp.unidades_obras.push(
             ...state.carritoAdicionales[indexAdicional].unidades_obras
