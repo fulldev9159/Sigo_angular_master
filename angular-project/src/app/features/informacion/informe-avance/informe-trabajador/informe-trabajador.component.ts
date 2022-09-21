@@ -267,6 +267,39 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
             })
           );
 
+        console.log(
+          carrito
+            .filter(value => value.adicional !== 'ORIGINAL')
+            .map(value => value.servicio_id)
+        );
+        let ids_servicio_id_adicionales = carrito
+          .filter(value => value.adicional !== 'ORIGINAL')
+          .map(value => value.servicio_id);
+        console.log(
+          carrito
+            .filter(
+              value =>
+                ids_servicio_id_adicionales.includes(+value.servicio_id) &&
+                value.adicional === 'ORIGINAL'
+            )
+            .map(value => value.servicio_id)
+        );
+        let ids_servicios_adicionales_original_existente = carrito
+          .filter(
+            value =>
+              ids_servicio_id_adicionales.includes(+value.servicio_id) &&
+              value.adicional === 'ORIGINAL'
+          )
+          .map(value => value.servicio_id);
+
+        ids_servicios_adicionales_original_existente.forEach(value => {
+          console.log(value);
+          let index = carrito.findIndex(
+            i => i.servicio_id === value && i.adicional !== 'ORIGINAL'
+          );
+          console.log(carrito[index]);
+          carrito[index].dummy = true;
+        });
         this.cubicacionFacade.loadDatosServicio4CubAdicionales(carrito);
         this.detector.detectChanges();
       })
@@ -401,7 +434,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
             servicio_id: new FormControl(servicio.servicio_id, [
               Validators.required,
             ]),
-            servicio_cantidad: new FormControl(1, [
+            servicio_cantidad: new FormControl(servicio.servicio_cantidad, [
               Validators.required,
               Validators.min(0),
             ]),
@@ -560,7 +593,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
           servicio_id: +value.servicio_id,
           actividad_id: +value.actividad_id,
           tipo_servicio_id: +value.servicio_tipo,
-          cantidad: value.servicio_cantidad,
+          cantidad: value.dummy ? 0 : value.servicio_cantidad,
           unidad_obra: value.unidades_obras.map(uo => ({
             uob_codigo: uo.uo_codigo,
             cantidad: uo.uo_cantidad,
@@ -574,7 +607,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
         )
         .map(value => ({
           rowid: value.servicio_rowid,
-          cantidad: value.servicio_cantidad,
+          cantidad: value.dummy ? 0 : value.servicio_cantidad,
         }));
 
       let uo_actualizar = formularioCarrito

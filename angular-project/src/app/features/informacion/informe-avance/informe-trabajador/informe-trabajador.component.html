@@ -1,7 +1,7 @@
 <div class="row" style="padding: 15px">
   <ng-container *ngIf="detalleInformeAvance$ | async as detalle">
     <div class="col-xs-12 col-md-12">
-      <!-- <app-card [classCardHeader]="'bg-info'">
+      <app-card [classCardHeader]="'bg-info'">
         <ng-container card-header-title>Detalle informe de avance</ng-container>
         <ng-container card-body>
           <div class="table-carrito">
@@ -38,7 +38,7 @@
                           </td>
                           <td>{{ servicio.model_unidad_id.codigo }}</td>
                           <td></td>
-  
+
                           <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                           <td class="data-primaria">{{ servicio.many_informe_has_uob[0].model_unidad_obra_cod.descripcion }}</td>
                           <td class="data-secundaria">
@@ -48,7 +48,7 @@
                           <td></td>
                         </tr>
                       </ng-container>
-  
+
                       <ng-container *ngIf="servicio.many_informe_has_uob.length > 1">
                         <tr [formArray]="form">
                           <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="label-table">{{ servicio.numero_producto }}</td>
@@ -58,7 +58,7 @@
                           </td>
                           <td [attr.rowspan]="+servicio.many_informe_has_uob.length">{{ servicio.model_unidad_id.codigo }}</td>
                           <td [attr.rowspan]="+servicio.many_informe_has_uob.length"></td>
-  
+
                           <td class="label-table">{{ servicio.many_informe_has_uob[0].unidad_obra_cod }}</td>
                           <td class="data-primaria">{{ servicio.many_informe_has_uob[0].model_unidad_obra_cod.descripcion }}</td>
                           <td class="data-secundaria">
@@ -68,7 +68,7 @@
                           <td></td>
                         </tr>
                       </ng-container>
-  
+
                       <ng-container *ngIf="servicio.many_informe_has_uob.length > 1">
                         <ng-container *ngFor="let uo of servicio.many_informe_has_uob | slice:1; let uoIndex = index">
                           <tr [formArray]="form">
@@ -92,7 +92,7 @@
             </table>
           </div>
         </ng-container>
-      </app-card>  -->
+      </app-card>
     </div>
 
 
@@ -192,6 +192,7 @@
                         <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                         <td [ngClass]="item.precargado?'existente':'noexistente'">
                           <app-input *ngIf="!item.dummy" [control]="formCntl(item.servicio_id,'servicio_cantidad',item.dummy)" Type="number"></app-input>
+                          <p *ngIf="item.dummy">Servicio existente en informe avance</p>
                         </td>
                         <td>{{item.adicional}}</td>
                         <td [ngClass]="item.precargado?'existente':'noexistente'">
@@ -239,6 +240,7 @@
                         <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
                           <app-input *ngIf="!item.dummy" [control]="formCntl(item.servicio_id,'servicio_cantidad',item.dummy)" Type="number"></app-input>
+                          <p *ngIf="item.dummy">Servicio existente en informe avance</p>
                         </td>
                         <td [attr.rowspan]="+item.unidades_obras.length">{{item.adicional}}</td>
                         <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
