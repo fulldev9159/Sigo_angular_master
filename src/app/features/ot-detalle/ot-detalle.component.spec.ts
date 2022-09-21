@@ -1,19 +1,23 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
 
-import { OtComponent } from './ot-detalle.component';
+import { OtDetalleComponent } from './ot-detalle.component';
 
-describe('OtComponent', () => {
-  let component: OtComponent;
-  let fixture: ComponentFixture<OtComponent>;
+let initialState: any = { example: [] };
+
+describe('OtDetalleComponent', () => {
+  let component: OtDetalleComponent;
+  let fixture: ComponentFixture<OtDetalleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OtComponent],
+      imports: [StoreModule.forRoot({})],
+      declarations: [OtDetalleComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(OtComponent);
+    fixture = TestBed.createComponent(OtDetalleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

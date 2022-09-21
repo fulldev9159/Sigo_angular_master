@@ -17,6 +17,7 @@ import {
   saveCubicacionMOCK200ok,
 } from '@mocksOT';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { OTFacade } from '@storeOT/ot/ot.facades';
 
 describe('AfterHttpService', () => {
   let service: AfterHttpService;
@@ -25,17 +26,20 @@ describe('AfterHttpService', () => {
   let authFacade: AuthFacade;
   let snackMessage: SnackMessageService;
   let cubicacionFacade: CubicacionFacade;
+  let otFacade: OTFacade;
   beforeEach(() => {
     TestBed.configureTestingModule(StoreModule.forRoot({}));
     routerSpy = jasmine.createSpyObj<Router>('Router', ['navigate']);
     snakeMessage = TestBed.inject(SnackMessageService);
     authFacade = TestBed.inject(AuthFacade);
     cubicacionFacade = TestBed.inject(CubicacionFacade);
+    otFacade = TestBed.inject(OTFacade);
     service = new AfterHttpService(
       routerSpy,
       snakeMessage,
       authFacade,
-      cubicacionFacade
+      cubicacionFacade,
+      otFacade
     );
     snackMessage = TestBed.inject(SnackMessageService);
   });

@@ -3,13 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'zwc-menu-detalle-ot',
   templateUrl: './menu-detalle-ot.component.html',
-  styleUrls: ['./menu-detalle-ot.component.scss']
+  styleUrls: ['./menu-detalle-ot.component.scss'],
 })
-export class MenuDetalleOtComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class MenuDetalleOtComponent {
+  constructor() {}
 }

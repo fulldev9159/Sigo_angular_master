@@ -4,6 +4,7 @@ import { cubicacionContratoMOCK200ok } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { sendingCreateOT } from '@storeOT/loadings/loadings.selectors';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import { cubicacionSelected } from '@storeOT/ot/ot.selectors';
 
@@ -29,6 +30,10 @@ describe('FormOtContainerComponent', () => {
             {
               selector: cubicacionSelected,
               value: cubicacionContratoMOCK200ok.data.items[0],
+            },
+            {
+              selector: sendingCreateOT,
+              value: false,
             },
           ],
         }),
