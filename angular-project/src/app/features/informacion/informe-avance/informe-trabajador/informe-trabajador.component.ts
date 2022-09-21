@@ -566,10 +566,62 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
             cantidad: uo.uo_cantidad,
           })),
         }));
+      let servicio_actualizar = formularioCarrito
+        .filter(
+          value =>
+            value.adicional !== 'NUEVO ADICIONAL' &&
+            value.adicional !== 'ORIGINAL'
+        )
+        .map(value => ({
+          rowid: value.servicio_rowid,
+          cantidad: value.servicio_cantidad,
+        }));
+
+      let uo_actualizar = formularioCarrito
+        .filter(
+          value =>
+            value.adicional !== 'NUEVO ADICIONAL' &&
+            value.adicional !== 'ORIGINAL'
+        )
+        .map(value =>
+          value.unidades_obras.map(uo => {
+            if (uo.uo_rowid !== null) {
+              return { rowid: uo.uo_rowid, cantidad: uo.uo_cantidad };
+            }
+          })
+        );
+
+      let uo_agregar = formularioCarrito
+        .filter(
+          value =>
+            value.adicional !== 'NUEVO ADICIONAL' &&
+            value.adicional !== 'ORIGINAL'
+        )
+        .map(value =>
+          value.unidades_obras.map(uo => {
+            if (uo.uo_rowid === null) {
+              return {
+                servicio_rowid: value.servicio_rowid,
+                uob_codigo: uo.uo_codigo,
+                uob_cantidad: uo.uo_cantidad,
+              };
+            }
+          })
+        );
+
       let request: RequestAdicionales = {
         ot_id,
         adicionales_solicitados: {
           nuevo: nuevosAdicionales,
+          actualizar: {
+            servicio: servicio_actualizar,
+            unidad_obra: [...uo_actualizar.flat()].filter(
+              value => value !== undefined
+            ),
+            agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
+              value => value !== undefined
+            ),
+          },
         },
       };
 
@@ -739,70 +791,72 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     );
   }
 
-  agregarServiciosAdicionales(): void {
-    const isLocal = (item: { precargado?: boolean }) =>
-      item.precargado === undefined || item.precargado === false;
+  // agregarServiciosAdicionales(): void {
+  //   const isLocal = (item: { precargado?: boolean }) =>
+  //     item.precargado === undefined || item.precargado === false;
 
-    const notLocal = (item: { precargado?: boolean }) => !isLocal(item);
+  //   const notLocal = (item: { precargado?: boolean }) => !isLocal(item);
 
-    const servicios: {
-      precargado?: boolean;
-      servicio_rowid?: number;
+  //   const servicios: {
+  //     precargado?: boolean;
+  //     servicio_rowid?: number;
 
-      servicio_id: number;
-      servicio_cod: string;
-      servicio_cantidad: number;
-      servicio_tipo: number;
-      actividad_id: number;
-      unidades_obras: {
-        precargado?: boolean;
-        uo_rowid?: number;
+  //     servicio_id: number;
+  //     servicio_cod: string;
+  //     servicio_cantidad: number;
+  //     servicio_tipo: number;
+  //     actividad_id: number;
+  //     unidades_obras: {
+  //       precargado?: boolean;
+  //       uo_rowid?: number;
 
-        uo_cantidad: number;
-        uo_codigo: string;
-      }[];
-    }[] = this.formAdicionales.get('table').value as Array<{
-      precargado?: boolean;
-      servicio_rowid?: number;
+  //       uo_cantidad: number;
+  //       uo_codigo: string;
+  //     }[];
+  //   }[] = this.formAdicionales.get('table').value as Array<{
+  //     precargado?: boolean;
+  //     servicio_rowid?: number;
 
-      servicio_id: number;
-      servicio_cod: string;
-      servicio_cantidad: number;
-      servicio_tipo: number;
-      actividad_id: number;
-      unidades_obras: Array<{
-        precargado?: boolean;
-        uo_rowid?: number;
+  //     servicio_id: number;
+  //     servicio_cod: string;
+  //     servicio_cantidad: number;
+  //     servicio_tipo: number;
+  //     actividad_id: number;
+  //     unidades_obras: Array<{
+  //       precargado?: boolean;
+  //       uo_rowid?: number;
 
-        uo_cantidad: number;
-        uo_codigo: string;
-      }>;
-    }>;
+  //       uo_cantidad: number;
+  //       uo_codigo: string;
+  //     }>;
+  //   }>;
 
-    const nuevos_servicios: NuevoServicioAdicional[] = servicios
-      .filter(isLocal)
-      .map(servicio => {
-        let unidad_obra: NuevaUnidadObraAdicional[] = [];
-        unidad_obra = servicio.unidades_obras.map(uo => ({
-          uob_codigo: uo.uo_codigo,
-          cantidad: +uo.uo_cantidad,
-        }));
-        return {
-          servicio_id: +servicio.servicio_id,
-          actividad_id: +servicio.actividad_id,
-          tipo_servicio_id: +servicio.servicio_tipo,
-          cantidad: +servicio.servicio_cantidad,
-          unidad_obra,
-        };
-      });
+  //   const nuevos_servicios: NuevoServicioAdicional[] = servicios
+  //     .filter(isLocal)
+  //     .map(servicio => {
+  //       let unidad_obra: NuevaUnidadObraAdicional[] = [];
+  //       unidad_obra = servicio.unidades_obras.map(uo => ({
+  //         uob_codigo: uo.uo_codigo,
+  //         cantidad: +uo.uo_cantidad,
+  //       }));
+  //       return {
+  //         servicio_id: +servicio.servicio_id,
+  //         actividad_id: +servicio.actividad_id,
+  //         tipo_servicio_id: +servicio.servicio_tipo,
+  //         cantidad: +servicio.servicio_cantidad,
+  //         unidad_obra,
+  //       };
+  //     });
 
-    const request: RequestAgregarServicioAdicional = {
-      ot_id: this.ot_id,
-      adicionales_solicitados: nuevos_servicios,
-    };
-    // console.log(nuevos_servicios);
-    this.cubicacionFacade.agregarServiciosAdicionales(request);
-  }
+  //     const actualizaciones:
+
+  //   const request: RequestAgregarServicioAdicional = {
+  //     ot_id: this.ot_id,
+  //     adicionales_solicitados: nuevos_servicios,
+  //   };
+  //   // console.log(nuevos_servicios);
+  //   this.cubicacionFacade.agregarServiciosAdicionales(request);
+  // }
 
   closeModalDeleteConfirmServicio(): void {
     this.displayDeleteConfirmServicio = false;

@@ -246,6 +246,8 @@ export const reducerCubicacion = createReducer(
           const temp = copy({
             ...item_carrito,
             adicional: state.carritoAdicionales[indexAdicional].adicional,
+            servicio_rowid:
+              state.carritoAdicionales[indexAdicional].servicio_rowid,
           });
           temp.precargado = state.carritoAdicionales[indexAdicional].precargado;
           temp.unidades_obras.push(
