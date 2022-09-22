@@ -784,8 +784,8 @@ export class OtEffects {
   eliminarAdicionales$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.eliminarAdicional),
-      concatMap(({ servicios }) =>
-        this.otService.eliminarAdicional(servicios).pipe(
+      concatMap(({ servicio_adicional, unidad_obra }) =>
+        this.otService.eliminarAdicional(servicio_adicional, unidad_obra).pipe(
           map(response => otActions.eliminarAdicionalSuccess({ response })),
           catchError(err =>
             of(otActions.eliminarAdicionalError({ error: err }))

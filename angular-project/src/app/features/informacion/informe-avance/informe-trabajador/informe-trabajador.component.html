@@ -215,6 +215,7 @@
                               </div>
                             </ng-container> -->
                           </td>
+                          {{item.unidades_obras[0].uo_rowid}}
                           <td class="label-table uo" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
                           <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
   
@@ -263,6 +264,7 @@
                             </ng-container> -->
                           </td>
   
+                          {{item.unidades_obras[0].uo_rowid}}
                           <td class="label-table uo" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
                           <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
   
@@ -295,6 +297,7 @@
   
                       <ng-container *ngIf="item.unidades_obras.length>1 && item.adicional!=='ORIGINAL'">
                         <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
+                          {{uo.uo_rowid}}
                           <td class="label-table uo" style="background-color: #ff8e4e;">{{uo.uo_codigo}}</td>
                           <td class="data-primaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_nombre}}</td>
   

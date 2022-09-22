@@ -966,7 +966,7 @@ export const informarTrabajosFinalizadosError = createAction(
 // ELIMINAR SERVICIOS ADICIONALES
 export const eliminarAdicional = createAction(
   '[OT] GET eliminarAdicional',
-  props<{ servicios: number[] }>()
+  props<{ servicio_adicional: number[]; unidad_obra: number[] }>()
 );
 
 export const eliminarAdicionalSuccess = createAction(

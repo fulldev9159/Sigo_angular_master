@@ -699,8 +699,13 @@ export class OtFacade {
   }
 
   //    ELIMINAR SERVICIO ADCIONAL
-  public eliminarAdicional(servicios: number[]): void {
-    this.store.dispatch(otActions.eliminarAdicional({ servicios }));
+  public eliminarAdicional(
+    servicio_adicional: number[],
+    unidad_obra: number[]
+  ): void {
+    this.store.dispatch(
+      otActions.eliminarAdicional({ servicio_adicional, unidad_obra })
+    );
   }
 
   // APROBAR RECHAZAR ADICIONALES

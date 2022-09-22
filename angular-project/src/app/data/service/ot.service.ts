@@ -360,8 +360,14 @@ export class OTService {
   }
 
   // ELIMINAR SERVICIOS ADICIONALES
-  eliminarAdicional(servicios: number[]): Observable<Response<any>> {
-    return this.http.post<Response<any>>(`${this.apiUrl}`, { servicios });
+  eliminarAdicional(
+    servicio_adicional: number[],
+    unidad_obra: number[]
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.apiUrl}/ot/servicio_adicional/solicitud/delete`,
+      { servicio_adicional, unidad_obra }
+    );
   }
 
   // APROBAR/RECHAZAR ADICIONAL

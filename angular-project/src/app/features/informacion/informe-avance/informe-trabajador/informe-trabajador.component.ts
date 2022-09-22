@@ -270,23 +270,23 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
             })
           );
 
-        console.log(
-          carrito
-            .filter(value => value.adicional !== 'ORIGINAL')
-            .map(value => value.servicio_id)
-        );
+        // console.log(
+        //   carrito
+        //     .filter(value => value.adicional !== 'ORIGINAL')
+        //     .map(value => value.servicio_id)
+        // );
         let ids_servicio_id_adicionales = carrito
           .filter(value => value.adicional !== 'ORIGINAL')
           .map(value => value.servicio_id);
-        console.log(
-          carrito
-            .filter(
-              value =>
-                ids_servicio_id_adicionales.includes(+value.servicio_id) &&
-                value.adicional === 'ORIGINAL'
-            )
-            .map(value => value.servicio_id)
-        );
+        // console.log(
+        //   carrito
+        //     .filter(
+        //       value =>
+        //         ids_servicio_id_adicionales.includes(+value.servicio_id) &&
+        //         value.adicional === 'ORIGINAL'
+        //     )
+        //     .map(value => value.servicio_id)
+        // );
         let ids_servicios_adicionales_original_existente = carrito
           .filter(
             value =>
@@ -296,11 +296,11 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
           .map(value => value.servicio_id);
 
         ids_servicios_adicionales_original_existente.forEach(value => {
-          console.log(value);
+          // console.log(value);
           let index = carrito.findIndex(
             i => i.servicio_id === value && i.adicional !== 'ORIGINAL'
           );
-          console.log(carrito[index]);
+          // console.log(carrito[index]);
           carrito[index].dummy = true;
         });
         this.cubicacionFacade.loadDatosServicio4CubAdicionales(carrito);
@@ -438,10 +438,10 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
               Validators.required,
             ]),
             servicio_cod: new FormControl(servicio.servicio_codigo),
-            servicio_cantidad: new FormControl(servicio.servicio_cantidad, [
-              Validators.required,
-              Validators.min(0),
-            ]),
+            servicio_cantidad: new FormControl(
+              servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+              [Validators.required, Validators.min(0)]
+            ),
             actividad_id: new FormControl(servicio.actividad_id, [
               Validators.required,
             ]),
@@ -559,20 +559,14 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   //// }
 
   saveBorradorInformeAvance(ot_id: number, id: number): void {
-    ////   const lpus: LpuInformeAvanceDetalle[] = (
-    ////     this.form.get('table') as FormArray
-    ////   ).value.map(f => {
-    ////     return { detalle_id: f.detalle_id, cantidad_informada: f.informado };
-    ////   });
-
-    ////   const request: RequestSaveBorradorInformeAvance = {
-    ////     valores_detalles: lpus,
-    ////   };
-
-    ////   console.log(request);
-    ////   this.otFacade.saveBorradorInformeAvance(request);
-
+    console.log('services', this.servicios_adicionales_delete);
+    console.log('uos', this.uos_adicionales_delete);
     if (this.valid) {
+      this.otFacade.eliminarAdicional(
+        this.servicios_adicionales_delete,
+        this.uos_adicionales_delete
+      );
+
       this.otFacade.updateDetalleInformeAvance(ot_id, id, this.values);
       let formularioCarrito = this.formAdicionales.get('table').value as Array<{
         servicio_rowid: number;
@@ -815,9 +809,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     dummy: boolean
   ): AbstractControl {
     // console.log('Datos');
-    console.log(
-      `servicio: ${index_service} - control ${control} - uo_codigo: ${uo_codigo}`
-    );
+    // console.log(
+    //   `servicio: ${index_service} - control ${control} - uo_codigo: ${uo_codigo}`
+    // );
     const tableForm = this.formAdicionales.get('table') as FormArray;
     const tableValue: Carrito[] = tableForm.value;
 
@@ -831,13 +825,13 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       uoTable => uoTable.uo_codigo === uo_codigo
     );
 
-    console.log(
-      (
-        (this.formAdicionales.controls[controlName] as FormArray).controls[
-          index_service
-        ].get('unidades_obras') as FormArray
-      ).controls[index_uo].get(control)
-    );
+    // console.log(
+    //   (
+    //     (this.formAdicionales.controls[controlName] as FormArray).controls[
+    //       index_service
+    //     ].get('unidades_obras') as FormArray
+    //   ).controls[index_uo].get(control)
+    // );
     return (
       (this.formAdicionales.controls[controlName] as FormArray).controls[
         index_service
@@ -847,27 +841,32 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
 
   deleteServiceCarrito(index: number): void {
     console.log('delete servicio', index);
+    let row_id = (this.formAdicionales.get('table') as FormArray)
+      .at(index)
+      .get('servicio_rowid').value;
+
+    if (row_id) this.servicios_adicionales_delete.push(row_id);
     this.cubicacionFacade.deleteServiceCarritoAdicional(+index);
-    console.log(
-      'form',
-      (this.formAdicionales.get('table') as FormArray).at(index)
-    );
-    // (this.formAdicionales.get('table') as FormArray).removeAt(index);
   }
 
   deleteUOCarrito(index: number, uo_cod: string): void {
     console.log('delete uo', index);
-    this.cubicacionFacade.delteUOAdicionalCarrito(+index, uo_cod);
-    console.log(
-      'form',
+    let index_uo = (
       (
-        (
-          (this.formAdicionales.get('table') as FormArray).at(
-            index
-          ) as FormGroup
-        ).get('unidades_obras').value as Array<{ uo_codigo: string }>
-      ).findIndex(uo => uo.uo_codigo === uo_cod)
-    );
+        (this.formAdicionales.get('table') as FormArray).at(index) as FormGroup
+      ).get('unidades_obras').value as Array<{ uo_codigo: string }>
+    ).findIndex(uo => uo.uo_codigo === uo_cod);
+
+    let row_id = (
+      (
+        (this.formAdicionales.get('table') as FormArray).at(index) as FormGroup
+      ).get('unidades_obras') as FormArray
+    )
+      .at(index_uo)
+      .get('uo_rowid').value;
+    console.log(row_id);
+    if (row_id) this.uos_adicionales_delete.push(row_id);
+    this.cubicacionFacade.delteUOAdicionalCarrito(+index, uo_cod);
 
     // let index_uo = (
     //   (
