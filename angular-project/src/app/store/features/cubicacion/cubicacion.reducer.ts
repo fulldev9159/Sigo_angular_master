@@ -221,17 +221,74 @@ export const reducerCubicacion = createReducer(
         // Servicio original existente
         // Se agrega como servicio dummy nuevo
         console.log('Servicio original existente');
-        return {
-          ...state,
-          carritoAdicionales: [
-            ...state.carritoAdicionales,
-            {
-              ...item_carrito,
-              adicional: 'NUEVO ADICIONAL',
-              dummy: true,
-            },
-          ],
-        };
+
+        const indexAdicional = state.carritoAdicionales.findIndex(
+          x =>
+            x.servicio_id === item_carrito.servicio_id &&
+            x.adicional !== 'ORIGINAL'
+        );
+        if (indexAdicional >= 0) {
+          console.log(
+            'Servicio adicional existente de un servicio original existente'
+          );
+          const temp = copy({
+            ...item_carrito,
+            adicional: state.carritoAdicionales[indexAdicional].adicional,
+            dummy: state.carritoAdicionales[indexAdicional].dummy,
+            servicio_rowid:
+              state.carritoAdicionales[indexAdicional].servicio_rowid,
+          });
+          temp.precargado = state.carritoAdicionales[indexAdicional].precargado;
+          temp.unidades_obras.push(
+            ...state.carritoAdicionales[indexAdicional].unidades_obras
+          );
+          const uo_repetido = state.carritoAdicionales[
+            indexAdicional
+          ].unidades_obras.find(
+            uo => uo.uo_codigo === item_carrito.unidades_obras[0].uo_codigo
+          );
+          if (uo_repetido) {
+            return {
+              ...state,
+              servciouo_repetido_alert: true,
+              uo_sin_materiales_alert: uo_sin_material,
+            };
+          } else {
+            if (state.carritoAdicionales.length === 1) {
+              return {
+                ...state,
+                carritoAdicionales: [temp],
+                servciouo_repetido_alert: false,
+                uo_sin_materiales_alert: uo_sin_material,
+              };
+            } else {
+              // console.log(state.carrito);
+              // const old_temp = copy(state.carrito);
+              const old_servicios = state.carritoAdicionales.filter(
+                oldcarrito =>
+                  oldcarrito.servicio_id !== item_carrito.servicio_id
+              );
+              // console.log('NEW', old_servicios);
+              return {
+                ...state,
+                carritoAdicionales: [...old_servicios, temp],
+                servciouo_repetido_alert: false,
+              };
+            }
+          }
+        } else {
+          return {
+            ...state,
+            carritoAdicionales: [
+              ...state.carritoAdicionales,
+              {
+                ...item_carrito,
+                adicional: 'NUEVO ADICIONAL',
+                dummy: true,
+              },
+            ],
+          };
+        }
       } else {
         // NUEVO ADICIONAL SIN SERVICIO ORIGINAL EXISTENTE
         console.log('servicio adicional nuevo sin servicio original existente');

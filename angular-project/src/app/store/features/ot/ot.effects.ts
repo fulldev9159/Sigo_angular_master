@@ -850,7 +850,8 @@ export class OtEffects {
           otActions.sendGeneracionActaSuccessOLD,
           otActions.solicitarInformeTrabajosFinalizadosSuccess,
           otActions.informarTrabajosFinalizadosSuccess,
-          otActions.eliminarAdicionalSuccess
+          otActions.eliminarAdicionalSuccess,
+          otActions.agregarAdicionalesSuccess
         ),
         tap(action => {
           this.alertMessageAction.messageActions(

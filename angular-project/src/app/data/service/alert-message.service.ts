@@ -196,7 +196,8 @@ export class AlertMessageActions {
         action === ca.clonCubSuccess.type ||
         action === otActions.sendGeneracionActaSuccess.type ||
         action === authActions.loginSuccess.type ||
-        action === cubActions.agregarServiciosAdicionalesSuccess.type
+        action === cubActions.agregarServiciosAdicionalesSuccess.type ||
+        action === otActions.agregarAdicionalesSuccess.type
       ) {
         location.reload();
       }
