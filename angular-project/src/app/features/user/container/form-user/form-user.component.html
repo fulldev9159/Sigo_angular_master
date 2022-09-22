@@ -123,6 +123,9 @@
                   </app-select>
                 </div>
                 <br>
+                <p-checkbox [formControl]="formControls.delegated_auth" value="true"></p-checkbox>
+                <br>
+                <app-input [control]="formControls.password" label="Password" Name="Password"></app-input>
               </div>
             </div>
             <div class="row justify-content-center">
@@ -200,6 +203,8 @@
 
   </app-card>
 </div>
+
+<pre>{{ values | json }}</pre>
 
 
 <app-modal [display]="DisplayPermisosModal" (CloseEvent)="DisplayPermisosModal=false">

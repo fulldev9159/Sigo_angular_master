@@ -35,7 +35,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       Validators.required,
       this.noWhitespace,
     ]),
-    deletate_auth: new FormControl(true, [Validators.required]),
+    delegated_auth: new FormControl(['true'], [Validators.required]),
     password: new FormControl(null, []),
     username: new FormControl(null, [
       Validators.required,
@@ -443,4 +443,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   // onUpload(event: any): void {}
 
   // onDeleteFile(event: any): void {}
+  get values(): any {
+    return this.formUser.getRawValue();
+  }
 }
