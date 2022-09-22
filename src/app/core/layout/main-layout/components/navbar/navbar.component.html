@@ -9,15 +9,18 @@
             <span>
                 <fa-icon [icon]="faCub"></fa-icon> Costeo
             </span>
-            <button *ngxPermissionsOnly="['CUBICACION_LISTAR']" [routerLink]="['cubicacion']">Listar</button>
-            <button *ngxPermissionsOnly="['CUBICACION_CREAR']" [routerLink]="['/cubicacion/form-cub']">Crear</button>
+            <button *ngxPermissionsOnly="['CUBICACION_LISTAR']" [routerLink]="['cubicacion']"
+                id="navbar-list-cub">Listar</button>
+            <button *ngxPermissionsOnly="['CUBICACION_CREAR']" [routerLink]="['/cubicacion/form-cub']"
+                id="navbar-create-cub">Crear</button>
         </div>
         <div class="button-menu" *ngxPermissionsOnly="['OT_LISTAR','OT_CREAR']">
             <span>
                 <fa-icon [icon]="faOT"></fa-icon>OT
             </span>
-            <button *ngxPermissionsOnly="['OT_LISTAR']" [routerLink]="['/ot']">Listar</button>
-            <button *ngxPermissionsOnly="['OT_CREAR']" [routerLink]="['/ot/form-ot']">Crear</button>
+            <button *ngxPermissionsOnly="['OT_LISTAR']" [routerLink]="['/ot']" id="navbar-list-ot">Listar</button>
+            <button *ngxPermissionsOnly="['OT_CREAR']" [routerLink]="['/ot/form-ot']"
+                id="navbar-create-ot">Crear</button>
         </div>
     </div>
 

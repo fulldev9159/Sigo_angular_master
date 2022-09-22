@@ -6,7 +6,7 @@ describe('Create Cubicacion', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
     cy._select_profile('Gestor/JP');
-    cy.get('#crear-cubicacion-sidebar').click();
+    cy.get('button[id="navbar-create-cub"]').click();
   });
 
   it('create BUCLE CUB', () => {

@@ -5,7 +5,7 @@ describe('Listar Cubicaciones', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
     cy._select_profile('Gestor/JP');
-    cy.get('#listar-cubicacion-sidebar').click();
+    cy.get('button[id="navbar-list-cub"]').click();
   });
 
   it('Debe desplegar 4 cubicaciones', () => {

@@ -17,7 +17,7 @@ describe('Formulario sección Contrato BUCLE', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
     cy._select_profile('Gestor/JP');
-    cy.get('#crear-ot-sidebar').click();
+    cy.get('button[id="navbar-create-ot"]').click();
   });
 
   it('Escoger un contrato sin cubicacion debe indicar un mensaje', () => {

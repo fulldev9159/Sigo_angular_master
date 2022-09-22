@@ -39,7 +39,7 @@ it('should let enter to create cubicacion', () => {
   cy.visit('http://localhost:4206/login/auth');
   cy._login('mgestor1', 'asdasd');
   cy._select_profile('Gestor/JP');
-  cy.get('#crear-cubicacion-sidebar').click();
+  cy.get('button[id="navbar-create-cub"]').click();
 });
 
 describe.skip('Test responsive', () => {});
@@ -647,7 +647,7 @@ describe('Tabla carrito', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
     cy._select_profile('Gestor/JP');
-    cy.get('#crear-cubicacion-sidebar').click();
+    cy.get('button[id="navbar-create-cub"]').click();
   });
 
   it('El botón agregar servicio debería habilitarse solo si tiene todos los campos requeridos', () => {
@@ -746,7 +746,7 @@ describe('Tabla carrito', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');
     cy._select_profile('Gestor/JP');
-    cy.get('#crear-cubicacion-sidebar').click();
+    cy.get('button[id="navbar-create-cub"]').click();
 
     cy.intercept('POST', '/cubicacion/agencias_from_contrato/get').as(
       'HTTPRESPONSE-AGENCIA'
@@ -998,7 +998,7 @@ describe('Excepcion crear cubicación sin contratos asignado', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mtestsincontratos', 'asdasd');
     cy._select_profile('Gestor/JP');
-    cy.get('#crear-cubicacion-sidebar').click();
+    cy.get('button[id="navbar-create-cub"]').click();
   });
 
   it('should display message "No tiene contratos asignados. Favor contactar con el administrador del sistema" ', () => {

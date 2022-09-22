@@ -8,7 +8,7 @@ it('should let enter to create cubicacion', () => {
   cy.visit('http://localhost:4206/login/auth');
   cy._login('mgestor1', 'asdasd');
   cy._select_profile('Gestor/JP');
-  cy.get('#crear-ot-sidebar').click();
+  cy.get('button[id="navbar-create-ot"]').click();
 });
 
 describe('Visibilidad e Interacción Inicial', () => {
