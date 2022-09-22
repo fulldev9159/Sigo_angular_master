@@ -6,7 +6,14 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faBasketShopping,
+  faDollarSign,
+  faMoneyCheckAlt,
+  faMoneyCheckDollar,
+  faPersonDigging,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'zwc-navbar',
@@ -19,6 +26,8 @@ export class NavbarComponent {
   @Output() logout = new EventEmitter<void>();
   @Output() changePerfil = new EventEmitter<void>();
   faBars = faBars;
+  faOT = faPersonDigging;
+  faCub = faDollarSign;
 
   constructor(private el: ElementRef) {}
 

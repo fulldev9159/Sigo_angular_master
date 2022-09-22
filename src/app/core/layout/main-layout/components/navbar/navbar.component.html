@@ -6,12 +6,16 @@
 
     <div class="buttons-principales-container">
         <div class="button-menu" *ngxPermissionsOnly="['CUBICACION_LISTAR','CUBICACION_CREAR']">
-            <span>Costeo</span>
+            <span>
+                <fa-icon [icon]="faCub"></fa-icon> Costeo
+            </span>
             <button *ngxPermissionsOnly="['CUBICACION_LISTAR']" [routerLink]="['cubicacion']">Listar</button>
             <button *ngxPermissionsOnly="['CUBICACION_CREAR']" [routerLink]="['/cubicacion/form-cub']">Crear</button>
         </div>
-        <div class="button-menu">
-            <span *ngxPermissionsOnly="['OT_LISTAR','OT_CREAR']">OT</span>
+        <div class="button-menu" *ngxPermissionsOnly="['OT_LISTAR','OT_CREAR']">
+            <span>
+                <fa-icon [icon]="faOT"></fa-icon>OT
+            </span>
             <button *ngxPermissionsOnly="['OT_LISTAR']" [routerLink]="['/ot']">Listar</button>
             <button *ngxPermissionsOnly="['OT_CREAR']" [routerLink]="['/ot/form-ot']">Crear</button>
         </div>
