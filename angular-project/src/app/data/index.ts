@@ -15,3 +15,4 @@ export * from './service/alert-message.service';
 export * from './service/area.service';
 export * from './service/proyecto.service';
 export * from './service/libro-obra.service';
+export * from './service/guia-subgrupo.service';

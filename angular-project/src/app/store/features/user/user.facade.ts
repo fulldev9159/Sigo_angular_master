@@ -14,6 +14,7 @@ import {
   PosiblesContratosUser,
   PosiblesSuperiores,
   ModelProveedor,
+  GuiaSubgrupo,
   RequestActivateUser,
   RequestAgregarPerfilUsusario,
   RequestCreateUser,
@@ -94,6 +95,15 @@ export class UserFacade {
   // DELETE PERFIL USUARIO
   public deletePerfilUsuario(usuarioproxy_id: number): void {
     this.store.dispatch(userActions.deletePerfilUser({ usuarioproxy_id }));
+  }
+
+  // GET ALL GUIAS SUBGRUPO
+  public getAllGuiasSubgrupo(): void {
+    this.store.dispatch(userActions.getAllGuiasSubgrupo());
+  }
+
+  public getAllGuiasSubgrupo$(): Observable<GuiaSubgrupo[]> {
+    return this.store.select(userSelectors.getAllGuiasSubgrupo);
   }
 
   // GET ALL PROVEEDORES 4 CREATE USER

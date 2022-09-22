@@ -14,6 +14,7 @@ import {
   PerfilService,
   AlertMessageActions,
   ProveedorService,
+  GuiaSubgrupoService,
   AreaService,
   RequestAddFirmaUser,
   ContratosService,
@@ -26,6 +27,7 @@ export class UserEffects {
     private authService: AuthService,
     private perfilService: PerfilService,
     private proveedorService: ProveedorService,
+    private guiaSubgrupoService: GuiaSubgrupoService,
     private areaService: AreaService,
     private contratoService: ContratosService,
     private snackService: SnackBarService,
@@ -125,6 +127,20 @@ export class UserEffects {
         this.userService.deletePerfilUser(usuarioproxy_id).pipe(
           map(response => userActions.deletePerfilUserSuccess({ response })),
           catchError(error => of(userActions.deletePerfilUserError({ error })))
+        )
+      )
+    )
+  );
+
+  getGuiasSubgrupo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(userActions.getAllGuiasSubgrupo),
+      concatMap(() =>
+        this.guiaSubgrupoService.getAll().pipe(
+          map(response => userActions.getAllGuiasSubgrupoSuccess({ response })),
+          catchError(error =>
+            of(userActions.getAllGuiasSubgrupoError({ error }))
+          )
         )
       )
     )

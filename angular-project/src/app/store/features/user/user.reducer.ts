@@ -10,6 +10,7 @@ import {
   PosiblesContratosUser,
   PosiblesSuperiores,
   ModelProveedor,
+  GuiaSubgrupo,
   User,
 } from '@data';
 
@@ -24,6 +25,7 @@ export interface StateUser {
   posiblesSuperiores: PosiblesSuperiores[];
   perfilSelected: ListPerfilesUserType;
   proveedores4createUser: ModelProveedor[];
+  guiasSubgrupo: GuiaSubgrupo[];
   areas4createUser: Area[];
   contratosUser: ContratosUser[];
   posiblesContratosUSer: PosiblesContratosUser[];
@@ -40,6 +42,7 @@ export const initialStateUser: StateUser = {
   posiblesSuperiores: [],
   perfilSelected: null,
   proveedores4createUser: [],
+  guiasSubgrupo: [],
   areas4createUser: [],
   contratosUser: [],
   posiblesContratosUSer: [],
@@ -85,6 +88,10 @@ export const reducerUser = createReducer(
   on(UserActions.getPosiblesSuperioresSuccess, (state, { response }) => ({
     ...state,
     posiblesSuperiores: response.data.items,
+  })),
+  on(UserActions.getAllGuiasSubgrupoSuccess, (state, { response }) => ({
+    ...state,
+    guiasSubgrupo: response.data.items,
   })),
   on(
     UserActions.getAllProveedores4CreateUserSuccess,

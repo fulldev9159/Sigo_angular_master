@@ -10,6 +10,7 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import * as _ from 'lodash';
 import {
   Area,
+  GuiaSubgrupo,
   ModelProveedor,
   RequestCreateUser,
   ContratosUser,
@@ -30,6 +31,12 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   formControls = {
     id: new FormControl(null),
+    guia_subgrupo_id: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+    ]),
+    deletate_auth: new FormControl(true, [Validators.required]),
+    password: new FormControl(null, []),
     username: new FormControl(null, [
       Validators.required,
       this.noWhitespace,
@@ -68,6 +75,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   formUser: FormGroup = new FormGroup(this.formControls);
 
+  guiasSubgrupo$: Observable<GuiaSubgrupo[]>;
   proveedores4createUser$: Observable<ModelProveedor[]>;
   areas4createUser$: Observable<Area[]>;
   posiblesContractosUser$: Observable<PosiblesContratosUser[]>;
@@ -163,6 +171,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   initObservables(): void {
+    this.guiasSubgrupo$ = this.userFacade.getAllGuiasSubgrupo$();
     this.proveedores4createUser$ =
       this.userFacade.getAllProveedores4CreateUser$();
     this.areas4createUser$ = this.userFacade
@@ -348,6 +357,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   // --- INIT DATA ---
   initData(): void {
     this.userFacade.getAllProveedores4CreateUser(true);
+    this.userFacade.getAllGuiasSubgrupo();
     // this.profileFacade.getProfile();
   }
 
