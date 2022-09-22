@@ -121,6 +121,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   cmarco_has_proveedor_id = null;
   ot_id = null;
 
+  servicios_adicionales_delete: number[] = [];
+  uos_adicionales_delete: number[] = [];
+
   mustBeANumber(control: FormControl): any {
     const result = /^\d+$/.test(control.value);
     return result ? null : { benumber: true };
@@ -434,6 +437,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
             servicio_id: new FormControl(servicio.servicio_id, [
               Validators.required,
             ]),
+            servicio_cod: new FormControl(servicio.servicio_codigo),
             servicio_cantidad: new FormControl(servicio.servicio_cantidad, [
               Validators.required,
               Validators.min(0),
@@ -727,54 +731,96 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     });
   }
 
+  // formCntl(
+  //   servicio_id: string,
+  //   control: string,
+  //   dummy: boolean
+  // ): AbstractControl {
+  //   // console.log('control a buscar', servicio_id);
+  //   const controlName = 'table';
+  //   const index = dummy
+  //     ? (
+  //         this.formAdicionales.get('table').value as Array<{
+  //           servicio_id: string;
+  //           dummy: boolean;
+  //         }>
+  //       ).findIndex(
+  //         serviceTable =>
+  //           serviceTable.servicio_id === servicio_id && serviceTable.dummy
+  //       )
+  //     : (
+  //         this.formAdicionales.get('table').value as Array<{
+  //           servicio_id: string;
+  //         }>
+  //       ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id);
+  //   // console.log('index encontrado', index);
+  //   return (this.formAdicionales.controls[controlName] as FormArray).controls[
+  //     index
+  //   ].get(control);
+  // }
   formCntl(
-    servicio_id: string,
+    index_service: number,
     control: string,
     dummy: boolean
   ): AbstractControl {
     // console.log('control a buscar', servicio_id);
     const controlName = 'table';
-    const index = dummy
-      ? (
-          this.formAdicionales.get('table').value as Array<{
-            servicio_id: string;
-            dummy: boolean;
-          }>
-        ).findIndex(
-          serviceTable =>
-            serviceTable.servicio_id === servicio_id && serviceTable.dummy
-        )
-      : (
-          this.formAdicionales.get('table').value as Array<{
-            servicio_id: string;
-          }>
-        ).findIndex(serviceTable => serviceTable.servicio_id === servicio_id);
+
     // console.log('index encontrado', index);
     return (this.formAdicionales.controls[controlName] as FormArray).controls[
-      index
+      index_service
     ].get(control);
   }
 
+  // formCntlUO(
+  //   servicio_id: string,
+  //   control: string,
+  //   uo_codigo: string,
+  //   dummy: boolean
+  // ): AbstractControl {
+  //   // console.log('Datos');
+  //   // console.log(
+  //   //   `servicio: ${servicio_id} - control ${control} - uo_codigo: ${uo_codigo}`
+  //   // );
+  //   const tableForm = this.formAdicionales.get('table') as FormArray;
+  //   const tableValue: Carrito[] = tableForm.value;
+  //   const index_service = dummy
+  //     ? tableValue.findIndex(
+  //         tableServicio =>
+  //           tableServicio.servicio_id === +servicio_id && tableServicio.dummy
+  //       )
+  //     : tableValue.findIndex(
+  //         tableServicio => tableServicio.servicio_id === +servicio_id
+  //       );
+  //   // console.log('index service UOB', index_service);
+  //   const serviceFrom = tableForm.at(index_service);
+  //   const UOForm: DatosUnidadObra4Cub[] =
+  //     serviceFrom.get('unidades_obras').value;
+  //   // console.log('UOForm', UOForm);
+  //   const controlName = 'table';
+  //   const index_uo = UOForm.findIndex(
+  //     uoTable => uoTable.uo_codigo === uo_codigo
+  //   );
+  //   return (
+  //     (this.formAdicionales.controls[controlName] as FormArray).controls[
+  //       index_service
+  //     ].get('unidades_obras') as FormArray
+  //   ).controls[index_uo].get(control);
+  // }
+
   formCntlUO(
-    servicio_id: string,
+    index_service: number,
     control: string,
     uo_codigo: string,
     dummy: boolean
   ): AbstractControl {
     // console.log('Datos');
-    // console.log(
-    //   `servicio: ${servicio_id} - control ${control} - uo_codigo: ${uo_codigo}`
-    // );
+    console.log(
+      `servicio: ${index_service} - control ${control} - uo_codigo: ${uo_codigo}`
+    );
     const tableForm = this.formAdicionales.get('table') as FormArray;
     const tableValue: Carrito[] = tableForm.value;
-    const index_service = dummy
-      ? tableValue.findIndex(
-          tableServicio =>
-            tableServicio.servicio_id === +servicio_id && tableServicio.dummy
-        )
-      : tableValue.findIndex(
-          tableServicio => tableServicio.servicio_id === +servicio_id
-        );
+
     // console.log('index service UOB', index_service);
     const serviceFrom = tableForm.at(index_service);
     const UOForm: DatosUnidadObra4Cub[] =
@@ -784,6 +830,14 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     const index_uo = UOForm.findIndex(
       uoTable => uoTable.uo_codigo === uo_codigo
     );
+
+    console.log(
+      (
+        (this.formAdicionales.controls[controlName] as FormArray).controls[
+          index_service
+        ].get('unidades_obras') as FormArray
+      ).controls[index_uo].get(control)
+    );
     return (
       (this.formAdicionales.controls[controlName] as FormArray).controls[
         index_service
@@ -791,37 +845,60 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     ).controls[index_uo].get(control);
   }
 
-  deleteServiceCarrito(servicio_id: number): void {
-    this.cubicacionFacade.deleteServiceCarrito4CreateCub(+servicio_id);
-    (this.formAdicionales.get('table') as FormArray).removeAt(
-      (
-        this.formAdicionales.get('table').value as Array<{
-          servicio_id: string;
-        }>
-      ).findIndex(serviceTable => +serviceTable.servicio_id === servicio_id)
+  deleteServiceCarrito(index: number): void {
+    console.log('delete servicio', index);
+    this.cubicacionFacade.deleteServiceCarritoAdicional(+index);
+    console.log(
+      'form',
+      (this.formAdicionales.get('table') as FormArray).at(index)
     );
+    // (this.formAdicionales.get('table') as FormArray).removeAt(index);
   }
 
-  deleteUOCarrito(servicio_id: number, uo_cod: string): void {
-    this.cubicacionFacade.deleteUOCarrito4CreateCub(+servicio_id, uo_cod);
-    const index_service = (
-      this.formAdicionales.get('table').value as Array<{ servicio_id: string }>
-    ).findIndex(serviceTable => +serviceTable.servicio_id === servicio_id);
-    (
-      (
-        (this.formAdicionales.get('table') as FormArray).at(
-          index_service
-        ) as FormGroup
-      ).get('unidades_obras') as FormArray
-    ).removeAt(
+  deleteUOCarrito(index: number, uo_cod: string): void {
+    console.log('delete uo', index);
+    this.cubicacionFacade.delteUOAdicionalCarrito(+index, uo_cod);
+    console.log(
+      'form',
       (
         (
           (this.formAdicionales.get('table') as FormArray).at(
-            index_service
+            index
           ) as FormGroup
         ).get('unidades_obras').value as Array<{ uo_codigo: string }>
       ).findIndex(uo => uo.uo_codigo === uo_cod)
     );
+
+    // let index_uo = (
+    //   (
+    //     (this.formAdicionales.get('table') as FormArray).at(index) as FormGroup
+    //   ).get('unidades_obras').value as Array<{ uo_codigo: string }>
+    // ).findIndex(uo => uo.uo_codigo === uo_cod);
+
+    // (
+    //   (
+    //     (this.formAdicionales.get('table') as FormArray).at(index) as FormGroup
+    //   ).get('unidades_obras') as FormArray
+    // ).removeAt(index_uo);
+
+    // const index_service = (
+    //   this.formAdicionales.get('table').value as Array<{ servicio_id: string }>
+    // ).findIndex(serviceTable => +serviceTable.servicio_id === servicio_id);
+    // (
+    //   (
+    //     (this.formAdicionales.get('table') as FormArray).at(
+    //       index_service
+    //     ) as FormGroup
+    //   ).get('unidades_obras') as FormArray
+    // ).removeAt(
+    //   (
+    //     (
+    //       (this.formAdicionales.get('table') as FormArray).at(
+    //         index_service
+    //       ) as FormGroup
+    //     ).get('unidades_obras').value as Array<{ uo_codigo: string }>
+    //   ).findIndex(uo => uo.uo_codigo === uo_cod)
+    // );
   }
 
   // agregarServiciosAdicionales(): void {

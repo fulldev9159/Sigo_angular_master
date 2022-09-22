@@ -229,6 +229,20 @@ export class CubicacionFacade {
     );
   }
 
+  //  DELETE SERVICE FROM CARRITO 4 CREATE CUB
+  public deleteServiceCarritoAdicional(index: number): void {
+    this.store.dispatch(
+      cubicacionActions.delteServiceAdicionalCarrito({ index })
+    );
+  }
+
+  //  DELETE UO FROM CARRITO 4 CREATE CUB
+  public delteUOAdicionalCarrito(index: number, uo_cod: string): void {
+    this.store.dispatch(
+      cubicacionActions.delteUOAdicionalCarrito({ index, uo_cod })
+    );
+  }
+
   // CREATE  CUB
   public createCub(request: RequestCreateCubicacion): void {
     this.store.dispatch(cubicacionActions.createCub({ request }));

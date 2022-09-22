@@ -258,6 +258,18 @@ export const delteUOCarrito4CreateCub = createAction(
   props<{ servicio_id: number; uo_cod: string }>()
 );
 
+//  DELETE SERVICE ADICIONAL
+export const delteServiceAdicionalCarrito = createAction(
+  '[Cubicacion] delteServiceAdicionalCarrito ',
+  props<{ index: number }>()
+);
+
+//  DELETE UO ADICIONAL
+export const delteUOAdicionalCarrito = createAction(
+  '[Cubicacion] delteUOAdicionalCarrito ',
+  props<{ index: number; uo_cod: string }>()
+);
+
 // CREATE CUB
 export const createCub = createAction(
   '[Cubicacion] createCub ',

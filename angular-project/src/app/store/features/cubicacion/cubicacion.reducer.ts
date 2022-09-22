@@ -16,6 +16,7 @@ import {
   TipoServicioEspecialidad4Cub,
   UnidadObra4Cub,
 } from '@data';
+import { carritoAdicionales } from './cubicacion.selectors';
 
 export const CubicacionFeatureKey = 'cubicacion';
 
@@ -428,12 +429,6 @@ export const reducerCubicacion = createReducer(
   on(
     CubicacionActions.delteServiceCarrito4CreateCub,
     (state, { servicio_id }) => {
-      // console.log(
-      //   'Eliminar el indice',
-      //   ...state.carrito.filter(
-      //     servicios => servicios.servicio_codigo !== servicio_cod
-      //   )
-      // );
       return {
         ...state,
         carrito: [
@@ -457,9 +452,7 @@ export const reducerCubicacion = createReducer(
           uo => uo.uo_codigo !== uo_cod
         );
         temp_service.unidades_obras = temp_uo;
-        console.log('Temp UO', temp_uo);
         temp = temp.filter(servicios => servicios.servicio_id !== servicio_id);
-        console.log('tempTotal', temp);
         return {
           ...state,
           carrito: [...temp, temp_service],
@@ -471,6 +464,39 @@ export const reducerCubicacion = createReducer(
       };
     }
   ),
+  on(CubicacionActions.delteServiceAdicionalCarrito, (state, { index }) => {
+    console.log('Servicio:', state.carritoAdicionales[index]);
+    return {
+      ...state,
+      carritoAdicionales: state.carritoAdicionales.filter(
+        (value, index_service) => index_service !== index
+      ),
+    };
+  }),
+  on(CubicacionActions.delteUOAdicionalCarrito, (state, { index, uo_cod }) => {
+    console.log(
+      'uo',
+      state.carritoAdicionales[index].unidades_obras.findIndex(
+        value => value.uo_codigo === uo_cod
+      )
+    );
+    let index_uo = state.carritoAdicionales[index].unidades_obras.findIndex(
+      value => value.uo_codigo === uo_cod
+    );
+
+    let temp = copy(state.carritoAdicionales);
+    const temp_service = temp[index];
+    const temp_uo = temp[index].unidades_obras.filter(
+      uo => uo.uo_codigo !== uo_cod
+    );
+    temp_service.unidades_obras = temp_uo;
+    temp = temp.filter((value, index_service) => index_service !== index);
+    console.log('uo service filter', temp);
+    return {
+      ...state,
+      carritoAdicionales: [...temp, temp_service],
+    };
+  }),
   on(CubicacionActions.getAllCubsSuccess, (state, { response }) => ({
     ...state,
     allCubs: response.data.items,
