@@ -44,7 +44,7 @@
 
     .buttons-principales-container {
         display: flex;
-        width: 19vw;
+        width: 38vw;
         justify-content: space-between;
 
 
@@ -60,11 +60,12 @@
 
             button {
                 padding: 5px;
-                border: 0.07rem solid #3f51b5;
-                background: #3f51b5;
+                border: 0.07rem solid #0b5e8a;
+                background: #015682;
                 color: white;
                 font-size: 0.7rem;
                 cursor: pointer;
+                width: 108px;
 
                 &:hover {
                     background-color: #4b5cb9;
