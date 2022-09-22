@@ -4,7 +4,7 @@
   </div>
   <div class="col-md-8 col-xs-12 ">
     <ng-container *ngIf="control !== undefined">
-      <app-input-builder [control]="control" Type="{{ Type }}" Name="{{Name}}" [errorMessageFn]="errorMessageFn"> </app-input-builder>
+      <app-input-builder (changeInput)="input($event,index_service,index_uo)" [control]="control" Type="{{ Type }}" Name="{{Name}}" [errorMessageFn]="errorMessageFn"> </app-input-builder>
     </ng-container>
   </div>
 </div>
@@ -12,6 +12,6 @@
 <ng-container *ngIf="DisplayLabelMode==='up'||DisplayLabelMode==='none' || label===''">
   <label *ngIf="DisplayLabelMode==='up'" style=" margin-top: 1rem">{{ label }}</label>
   <ng-container *ngIf="control !== undefined">
-    <app-input-builder [control]="control" Type="{{ Type }}" Name="{{Name}}" [errorMessageFn]="errorMessageFn"> </app-input-builder>
+    <app-input-builder (changeInput)="input($event,index_service,index_uo)" [index_service]="index_service" [control]="control" Type="{{ Type }}" Name="{{Name}}" [errorMessageFn]="errorMessageFn"> </app-input-builder>
   </ng-container>
 </ng-container>

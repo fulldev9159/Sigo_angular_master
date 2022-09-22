@@ -222,6 +222,20 @@ export class CubicacionFacade {
     );
   }
 
+  public updateCantidadServicioAdicional(
+    new_cantidad: number,
+    index_servicio: number,
+    index_uo: number
+  ): void {
+    this.store.dispatch(
+      cubicacionActions.updateCantidadServicioAdicional({
+        new_cantidad,
+        index_servicio,
+        index_uo,
+      })
+    );
+  }
+
   //  DELETE UO FROM CARRITO 4 CREATE CUB
   public deleteUOCarrito4CreateCub(servicio_id: number, uo_cod: string): void {
     this.store.dispatch(

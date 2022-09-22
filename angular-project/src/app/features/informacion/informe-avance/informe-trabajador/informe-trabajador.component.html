@@ -186,15 +186,15 @@
                 <tbody>
                   <ng-container *ngFor="let item of carritoAdicionales$|async;let i = index" >
                     <ng-container  *ngIf="item.adicional!=='ORIGINAL'" >
-                      len: {{item.unidades_obras.length}}
-                      index: {{i}}
+                      <!-- len: {{item.unidades_obras.length}}
+                      index: {{i}} -->
                       <ng-container *ngIf="item.unidades_obras.length===1 && item.adicional!=='ORIGINAL'">
                         <tr>
                           <td>{{item.servicio_rowid}}</td>
                           <td class="label-table">{{item.servicio_codigo}}</td>
                           <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                           <td [ngClass]="item.precargado?'existente':'noexistente'">
-                            <app-input *ngIf="!item.dummy" [control]="formCntl(i,'servicio_cantidad',item.dummy)" Type="number"></app-input>
+                            <app-input *ngIf="!item.dummy" [control]="formCntl(i,'servicio_cantidad',item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)"></app-input>
                             <p *ngIf="item.dummy">Servicio existente en informe avance</p>
                           </td>
                           <td>{{item.adicional}}</td>
@@ -215,7 +215,7 @@
                               </div>
                             </ng-container> -->
                           </td>
-                          {{item.unidades_obras[0].uo_rowid}}
+                          <!-- {{item.unidades_obras[0].uo_rowid}} -->
                           <td class="label-table uo" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
                           <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
   
@@ -225,7 +225,7 @@
   
                           <ng-container *ngIf="item.unidades_obras[0].uo_codigo!=='0'">
                             <td class="data-secundaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
-                              <app-input [control]="formCntlUO(i,'uo_cantidad',item.unidades_obras[0].uo_codigo,item.dummy)" Type="number"></app-input>
+                              <app-input [control]="formCntlUO(i,'uo_cantidad',item.unidades_obras[0].uo_codigo,item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)" index_uo="0"></app-input>
                             </td>
                             <td></td>
                             <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
@@ -243,7 +243,7 @@
                           <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
                           <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                           <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
-                            <app-input *ngIf="!item.dummy" [control]="formCntl(i,'servicio_cantidad',item.dummy)" Type="number"></app-input>
+                            <app-input *ngIf="!item.dummy" [control]="formCntl(i,'servicio_cantidad',item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)"></app-input>
                             <p *ngIf="item.dummy">Servicio existente en informe avance</p>
                           </td>
                           <td [attr.rowspan]="+item.unidades_obras.length">{{item.adicional}}</td>
@@ -264,7 +264,7 @@
                             </ng-container> -->
                           </td>
   
-                          {{item.unidades_obras[0].uo_rowid}}
+                          <!-- {{item.unidades_obras[0].uo_rowid}} -->
                           <td class="label-table uo" style="background-color: #ff8e4e;">{{item.unidades_obras[0].uo_codigo}}</td>
                           <td class="data-primaria" [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">{{item.unidades_obras[0].uo_nombre}}</td>
   
@@ -273,7 +273,7 @@
                           </ng-container>
                           <ng-container *ngIf="item.unidades_obras[0].uo_codigo!=='0'">
                             <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
-                              <app-input [control]="formCntlUO(i,'uo_cantidad',item.unidades_obras[0].uo_codigo,item.dummy)" Type="number"></app-input>
+                              <app-input [control]="formCntlUO(i,'uo_cantidad',item.unidades_obras[0].uo_codigo,item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)" index_uo="0"></app-input>
                             </td>
                             <td [ngClass]="item.unidades_obras[0].precargado?'existente':'noexistente'">
                               <div class="ui icon buttons mini basic">
@@ -297,7 +297,7 @@
   
                       <ng-container *ngIf="item.unidades_obras.length>1 && item.adicional!=='ORIGINAL'">
                         <tr *ngFor="let uo of item.unidades_obras| slice:1; let iuo= index">
-                          {{uo.uo_rowid}}
+                          <!-- {{uo.uo_rowid}} -->
                           <td class="label-table uo" style="background-color: #ff8e4e;">{{uo.uo_codigo}}</td>
                           <td class="data-primaria" [ngClass]="uo.precargado?'existente':'noexistente'">{{uo.uo_nombre}}</td>
   
@@ -306,7 +306,7 @@
                           </ng-container>
                           <ng-container *ngIf="uo.uo_codigo!=='0'">
                             <td [ngClass]="uo.precargado?'existente':'noexistente'">
-                              <app-input [control]="formCntlUO(i,'uo_cantidad',uo.uo_codigo,item.dummy)" Type="number"></app-input>
+                              <app-input [control]="formCntlUO(i,'uo_cantidad',uo.uo_codigo,item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)" [index_uo]="iuo"></app-input>
                             </td>
   
                             <td [ngClass]="uo.precargado?'existente':'noexistente'">
@@ -811,7 +811,7 @@
         </ng-container>
       </ng-container> -->
 
-
+<!-- 
 <pre>
 {{formAdicionales.value|json}}
-</pre>
+</pre> -->

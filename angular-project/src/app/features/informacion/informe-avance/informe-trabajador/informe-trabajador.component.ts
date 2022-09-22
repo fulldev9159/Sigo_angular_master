@@ -715,7 +715,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       uo_rowid: new FormControl(uo.uo_rowid ?? null, []),
 
       uo_codigo: new FormControl(uo.uo_codigo, [Validators.required]),
-      uo_cantidad: new FormControl(cantidad, [
+      uo_cantidad: new FormControl(uo.uo_cantidad ? uo.uo_cantidad : cantidad, [
         Validators.required,
         Validators.min(min),
       ]),
@@ -990,5 +990,14 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
     // this.otFacade.eliminarAdicional([this.servicio_rowid]);
     // this.deleteServiceCarrito(+this.servicio_id_del);
     // this.closeModalDeleteConfirmServicio();
+  }
+
+  update_input(data: any) {
+    console.log('rem', data);
+    this.cubicacionFacade.updateCantidadServicioAdicional(
+      data.value,
+      data.index_service,
+      data.index_uo
+    );
   }
 }

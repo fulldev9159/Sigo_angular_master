@@ -270,6 +270,11 @@ export const delteUOAdicionalCarrito = createAction(
   props<{ index: number; uo_cod: string }>()
 );
 
+//  update cantidad servicio adicional
+export const updateCantidadServicioAdicional = createAction(
+  '[Cubicacion] updateCantidadServicioAdicional ',
+  props<{ new_cantidad: number; index_servicio: number; index_uo: number }>()
+);
 // CREATE CUB
 export const createCub = createAction(
   '[Cubicacion] createCub ',

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,13 @@ export class InputComponent implements OnInit {
   @Input() Name = '';
   @Input() Type = 'text';
   @Input() Min = '';
+  @Input() index_service = null;
+  @Input() index_uo = null;
+  @Output() changeInputMid = new EventEmitter<{
+    value: number;
+    index_service: any;
+    index_uo: any;
+  }>();
 
   @Input() errorMessageFn = errors => {
     if (errors.required) {
@@ -31,4 +38,11 @@ export class InputComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  input(event: any, index_service: any, index_uo: any) {
+    console.log('mid value', event.value);
+    console.log('mid i serv', index_service);
+    console.log('mid i uo', index_uo);
+    this.changeInputMid.emit({ value: event.value, index_service, index_uo });
+  }
 }

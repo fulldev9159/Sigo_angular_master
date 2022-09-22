@@ -497,6 +497,38 @@ export const reducerCubicacion = createReducer(
       carritoAdicionales: [...temp, temp_service],
     };
   }),
+  on(
+    CubicacionActions.updateCantidadServicioAdicional,
+    (state, { new_cantidad, index_servicio, index_uo }) => {
+      let temp = copy(state.carritoAdicionales);
+      return {
+        ...state,
+        carritoAdicionales: [
+          ...temp.map((value, index) => {
+            if (index === index_servicio) {
+              if (index_uo !== null) {
+                console.log(
+                  'reducer',
+                  value.unidades_obras[+index_uo].uo_cantidad
+                );
+                value.unidades_obras[+index_uo].uo_cantidad = new_cantidad;
+                console.log(
+                  'new reducer',
+                  value.unidades_obras[+index_uo].uo_cantidad
+                );
+                return value;
+              } else {
+                value.servicio_cantidad = new_cantidad;
+                return value;
+              }
+            } else {
+              return value;
+            }
+          }),
+        ],
+      };
+    }
+  ),
   on(CubicacionActions.getAllCubsSuccess, (state, { response }) => ({
     ...state,
     allCubs: response.data.items,
