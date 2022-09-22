@@ -8,11 +8,14 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Subscription, Observable, of, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import {
   ActaTipoPago,
+  DataRespGetDetalleOT,
   DetalleActaServicio,
   DetalleActaUob,
+  MotivoRechazo,
+  RequestAceptarRechazarAdicionales,
   RequestValidateActa,
 } from '@data';
 import { MenuItem } from 'primeng/api';
@@ -43,7 +46,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     servicios: DetalleActaServicio[];
     unidades_obra: DetalleActaUob[];
   }> = this.otFacade.getDetalleActa$();
-  ot$: Observable<any> = this.otFacade.getDetalleOT$();
+  ot_id = -1;
+  ot$: Observable<DataRespGetDetalleOT> = this.otFacade
+    .getDetalleOT$()
+    .pipe(tap(value => (this.ot_id = value?.ot.id)));
   saving$: Observable<boolean> = this.otFacade.sendingGeneracionActa$();
   totalServicios: number;
   totalUO: number;
@@ -52,6 +58,11 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   adicionalesPendientesAprobar: boolean;
   actaValidada = false;
   allAdicionalesAprobadosVal = true;
+  displayInvalidar = false;
+  formInvalidar: FormGroup = new FormGroup({
+    tipo_id: new FormControl(null, [Validators.required]),
+    motivo: new FormControl('', [Validators.required]),
+  });
 
   form: FormGroup = new FormGroup({
     tipo_pago: new FormControl({ value: '', disabled: true }, [
@@ -77,6 +88,13 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     unidades_obra: new FormArray([]),
   });
 
+  tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
+
+  tipo_pago = null;
+  tipoPago$: Observable<string> = this.otFacade
+    .getUltimoTipoPagoActa$()
+    .pipe(tap(value => (this.tipo_pago = value)));
+
   mustBeANumber(control: FormControl): any {
     const result = /^\d+$/.test(control.value);
     return result ? null : { benumber: true };
@@ -96,6 +114,8 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   constructor(private otFacade: OtFacade) {}
 
   ngOnInit(): void {
+    this.tipoRechazo$ = this.otFacade.getAllMotivoRechazoOT$();
+
     this.subscription.add(
       combineLatest([this.tiposPago$, this.detalleActa$]).subscribe(
         ([tiposPago, { ultimo_tipo_pago, servicios, unidades_obra }]) => {
@@ -653,7 +673,84 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     }
   }
 
+  showModalInvalidar(): void {
+    this.otFacade.getAllMotivoRechazoOT('ACTA');
+
+    this.displayInvalidar = true;
+  }
+
+  invalidar(): void {
+    if (this.formAdicionales.valid) {
+      console.log(this.formAdicionales.value);
+      let ids_validados = (
+        this.formAdicionales.get('servicios').value as Array<{
+          id: number;
+          validar: boolean;
+        }>
+      ).filter(value => !value.validar);
+
+      console.log(
+        'id validados',
+        ids_validados.map(value => +value.id)
+      );
+
+      let ids_invalidados = (
+        this.formAdicionales.get('servicios').value as Array<{
+          id: number;
+          validar: boolean;
+        }>
+      ).filter(value => value.validar);
+      console.log(
+        'id  invalidados',
+        ids_invalidados.map(value => +value.id)
+      );
+
+      let requestInvalidarAdicionales: RequestAceptarRechazarAdicionales = {
+        ot_id: this.ot_id,
+        adicionales_aceptados: ids_validados.map(value => +value.id),
+        adicionales_rechazadas: ids_invalidados.map(value => +value.id),
+        causas_rechazo_id: +this.formInvalidar.get('tipo_id').value,
+        observacion: this.formInvalidar.get('motivo').value,
+      };
+
+      this.otFacade.aceptarRechazarAdicionales(requestInvalidarAdicionales);
+
+      let requestInvalidar: RequestValidateActa = {
+        ot_id: this.ot_id,
+        tipo_pago: 'TOTAL',
+        observacion: this.formInvalidar.get('motivo').value,
+        estado: 'INVALIDADO',
+        detalle: {
+          servicio: (
+            this.form.get('total_porcentaje').get('servicios').value as Array<{
+              id: number;
+              cantidad_a_enviar: number;
+            }>
+          ).map(value => ({
+            rowid: +value.id,
+            cantidad: +value.cantidad_a_enviar,
+            porcentaje: 100,
+          })),
+          unidad_obra: (
+            this.form.get('total_porcentaje').get('unidades_obra')
+              .value as Array<{ id: number; cantidad_a_enviar: number }>
+          ).map(value => ({
+            rowid: +value.id,
+            cantidad: +value.cantidad_a_enviar,
+            porcentaje: 100,
+          })),
+        },
+      };
+
+      this.otFacade.sendGeneracionActaOLD(requestInvalidar);
+    }
+  }
+
   validar(): void {
     this.actaValidada = true;
+  }
+
+  closeModalInvalidar() {
+    this.displayInvalidar = false;
   }
 }

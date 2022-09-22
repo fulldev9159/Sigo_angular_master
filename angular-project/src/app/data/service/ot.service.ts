@@ -313,7 +313,7 @@ export class OTService {
     request: RequestAceptarRechazarAdicionales
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
-      `${this.apiUrl}/servicio_adicional_aceptacion/update`,
+      `${this.apiUrl}/ot/servicio_adicional_aceptacion/update`,
       {
         request,
       }
