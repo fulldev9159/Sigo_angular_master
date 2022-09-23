@@ -90,7 +90,7 @@ export class ActaTotalFormComponent implements OnInit, OnDestroy {
   }
 
   showModalInvalidar() {
-    this.displayInvalidar = true;
+    location.reload();
   }
 
   invalidar(): void {

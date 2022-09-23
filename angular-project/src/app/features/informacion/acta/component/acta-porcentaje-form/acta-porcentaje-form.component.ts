@@ -111,7 +111,7 @@ export class ActaPorcentajeFormComponent implements OnInit, OnDestroy {
   }
 
   showModalInvalidar() {
-    this.displayInvalidar = true;
+    location.reload();
   }
 
   closeModalInvalidar() {

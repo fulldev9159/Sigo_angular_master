@@ -124,7 +124,7 @@ export class ActaServicioFormComponent implements OnInit, OnDestroy {
   }
 
   showModalInvalidar() {
-    this.displayInvalidar = true;
+    location.reload();
   }
 
   closeModalInvalidar() {
