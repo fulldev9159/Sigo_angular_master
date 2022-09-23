@@ -233,7 +233,7 @@ export interface PosibleTrabajador extends IdNombreType {}
 export interface RequestAceptarRechazarAdicionales {
   ot_id: number;
   adicionales_aceptados?: number[];
-  adicionales_rechazadas?: number[];
+  adicionales_rechazados?: number[];
   causas_rechazo_id?: number;
   observacion?: string;
 }

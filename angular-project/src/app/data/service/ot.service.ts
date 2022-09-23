@@ -314,9 +314,7 @@ export class OTService {
   ): Observable<Response<any>> {
     return this.http.post<Response<any>>(
       `${this.apiUrl}/ot/servicio_adicional_aceptacion/update`,
-      {
-        request,
-      }
+      request
     );
   }
 
@@ -377,8 +375,7 @@ export class OTService {
 
   serviciosAdicionales(request: RequestAdicionales): Observable<Response<any>> {
     return this.http.post<Response<any>>(
-      `${this.apiUrl}/ot/servicio_adicional/solicitud/save
-      `,
+      `${this.apiUrl}/ot/servicio_adicional/solicitud/save`,
       request
     );
   }

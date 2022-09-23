@@ -126,7 +126,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
           // );
           this.adicionalesPendientesAprobar =
             servicios.filter(
-              servicio => servicio.adicional_aceptacion_estado === 'PENDIENTE'
+              servicio => servicio.adicional_aceptacion_estado !== 'ORIGINAL'
             ).length > 0;
 
           if (this.adicionalesPendientesAprobar)
@@ -176,7 +176,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     ) as FormArray;
 
     (servicios ?? [])
-      .filter(servicio => servicio.adicional_aceptacion_estado === 'PENDIENTE')
+      .filter(servicio => servicio.adicional_aceptacion_estado !== 'ORIGINAL')
       .forEach(servicio => {
         serviciosForm.push(
           new FormGroup({
@@ -708,11 +708,12 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       let requestInvalidarAdicionales: RequestAceptarRechazarAdicionales = {
         ot_id: this.ot_id,
         adicionales_aceptados: ids_validados.map(value => +value.id),
-        adicionales_rechazadas: ids_invalidados.map(value => +value.id),
+        adicionales_rechazados: ids_invalidados.map(value => +value.id),
         causas_rechazo_id: +this.formInvalidar.get('tipo_id').value,
         observacion: this.formInvalidar.get('motivo').value,
       };
 
+      console.log('request aprob adici', requestInvalidarAdicionales);
       this.otFacade.aceptarRechazarAdicionales(requestInvalidarAdicionales);
 
       let requestInvalidar: RequestValidateActa = {
@@ -742,6 +743,7 @@ export class GenararActaComponent implements OnInit, OnDestroy {
         },
       };
 
+      console.log('req inv act', requestInvalidar);
       this.otFacade.sendGeneracionActaOLD(requestInvalidar);
     }
   }
