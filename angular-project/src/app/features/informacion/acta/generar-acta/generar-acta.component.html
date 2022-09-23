@@ -183,24 +183,27 @@
       </div>
     </div>
     
-    <div class="row" style="padding: 15px">
-      <div class="col-xs-12 col-md-12">
-        <form [formGroup]="form">
-          <ng-container [ngSwitch]="form.get('tipo_pago').value">
-            <ng-container *ngSwitchCase="'TOTAL'">
-              <app-acta-total-form [saving]="saving$ | async" [form]="form.get('total_porcentaje')" (validar)="formValidar(ot.ot.id, form.get('tipo_pago').value, $event)" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-acta-total-form>
+    <ng-container *ngIf="ot$ | async as ot">
+      <div class="row" style="padding: 15px">
+        <div class="col-xs-12 col-md-12">
+          <form [formGroup]="form">
+            <ng-container [ngSwitch]="form.get('tipo_pago').value">
+              <ng-container *ngSwitchCase="'TOTAL'">
+                <app-acta-total-form [saving]="saving$ | async" [form]="form.get('total_porcentaje')" (validar)="formValidar(ot.ot.id, form.get('tipo_pago').value, $event)" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-acta-total-form>
+              </ng-container>
+              <ng-container *ngSwitchCase="'PORCENTAJE'">
+                <app-acta-porcentaje-form [saving]="saving$ | async" [porcentaje]="form.get('porcentaje')" [form]="form.get('total_porcentaje')" (validar)="formValidar(ot.ot.id, form.get('tipo_pago').value, $event)" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-acta-porcentaje-form>
+              </ng-container>
+              <ng-container *ngSwitchCase="'POR_SERVICIO'">
+                <app-acta-servicio-form [saving]="saving$ | async" [form]="form.get('por_servicio')" (validar)="formValidar(ot.ot.id, form.get('tipo_pago').value, $event)" [totalServicios]="totalServicios_servicio" [totalUO]="totalUO_servicio"></app-acta-servicio-form>
+              </ng-container>
+              <!--<ng-container *ngSwitchDefault>...</ng-container>-->
             </ng-container>
-            <ng-container *ngSwitchCase="'PORCENTAJE'">
-              <app-acta-porcentaje-form [saving]="saving$ | async" [porcentaje]="form.get('porcentaje')" [form]="form.get('total_porcentaje')" (validar)="formValidar(ot.ot.id, form.get('tipo_pago').value, $event)" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-acta-porcentaje-form>
-            </ng-container>
-            <ng-container *ngSwitchCase="'POR_SERVICIO'">
-              <app-acta-servicio-form [saving]="saving$ | async" [form]="form.get('por_servicio')" (validar)="formValidar(ot.ot.id, form.get('tipo_pago').value, $event)" [totalServicios]="totalServicios_servicio" [totalUO]="totalUO_servicio"></app-acta-servicio-form>
-            </ng-container>
-            <!--<ng-container *ngSwitchDefault>...</ng-container>-->
-          </ng-container>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </ng-container>
+    
 
     <!-- <pre>{{ values | json }}</pre> -->
 

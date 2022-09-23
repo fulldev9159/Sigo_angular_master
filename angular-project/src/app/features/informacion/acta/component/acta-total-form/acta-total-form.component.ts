@@ -84,6 +84,7 @@ export class ActaTotalFormComponent implements OnInit, OnDestroy {
   }
 
   validarInt(): void {
+    console.log('ssssc');
     if (this.valid) {
       this.validar.emit({ detalle: this.values, estado: 'VALIDADO' });
     }
