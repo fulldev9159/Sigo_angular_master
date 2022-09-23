@@ -35,7 +35,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       Validators.required,
       this.noWhitespace,
     ]),
-    delegated_auth: new FormControl(['true'], [Validators.required]),
+    delegated_auth: new FormControl(['true'], []),
     password: new FormControl(null, []),
     username: new FormControl(null, [
       Validators.required,
@@ -222,6 +222,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.initProveerdorFromControlEvent();
     this.initAreaFormControlEvent();
     this.initSuperiorFromControlEvent();
+    this.initDelegatedAuthFormControlEvent();
   }
 
   initProviderRadioFormControlEvent(): void {
@@ -298,6 +299,26 @@ export class FormUserComponent implements OnInit, OnDestroy {
             // this.disableSuperiorFormControl();
           }
         })
+    );
+  }
+
+  initDelegatedAuthFormControlEvent(): void {
+    this.subscription.add(
+      this.formUser.get('delegated_auth').valueChanges.subscribe(value => {
+        // TODO solo en creacion
+        if (value.length > 0) {
+          this.formUser.get('password').clearValidators();
+        } else {
+          this.formUser
+            .get('password')
+            .setValidators([
+              Validators.required,
+              this.noWhitespace,
+              Validators.maxLength(100),
+            ]);
+        }
+        this.formUser.get('password').updateValueAndValidity();
+      })
     );
   }
 
@@ -397,20 +418,6 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    const request: RequestCreateUser = {
-      username: this.formUser.get('username').value,
-      nombres: this.formUser.get('nombres').value,
-      apellidos: this.formUser.get('apellidos').value,
-      rut: this.formUser.get('rut').value,
-      celular: this.formUser.get('celular').value,
-      email: this.formUser.get('email').value,
-      proveedor_id: +this.formUser.get('proveedor_id').value,
-      area_id: +this.formUser.get('area_id').value,
-      contratos_marco: this.formUser.get('contratos_marco').value,
-      estado: true,
-    };
-
-    console.log(request);
     if (this.formUser.get('id').value !== null) {
       const updateRequest: RequestUpdateUser = {
         usuario_id: this.usuario_id,
@@ -436,6 +443,27 @@ export class FormUserComponent implements OnInit, OnDestroy {
       // // ToDo: Esto es un WA para que no se habra el modal
       // this.userFacade.SetDisplayDetalleModal(false);
     } else {
+      const delegated_auth =
+        this.formUser.get('delegated_auth').value.length > 0;
+      const request: RequestCreateUser = {
+        username: this.formUser.get('username').value,
+        nombres: this.formUser.get('nombres').value,
+        apellidos: this.formUser.get('apellidos').value,
+        rut: this.formUser.get('rut').value,
+        celular: this.formUser.get('celular').value,
+        email: this.formUser.get('email').value,
+        proveedor_id: +this.formUser.get('proveedor_id').value,
+        area_id: +this.formUser.get('area_id').value,
+        contratos_marco: this.formUser.get('contratos_marco').value,
+        estado: true,
+        guia_subgrupo_id: +this.formUser.get('guia_subgrupo_id').value,
+        delegated_auth,
+        password: delegated_auth
+          ? undefined
+          : this.formUser.get('password').value,
+      };
+
+      console.log(request);
       this.userFacade.createUser(request);
     }
   }

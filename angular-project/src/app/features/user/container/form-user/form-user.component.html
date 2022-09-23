@@ -109,7 +109,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12">
+              <div class="col-md-6 col-xs-12">
                 <div id="guia-subgrupo-select">
                   <app-select [control]="formControls.guia_subgrupo_id" label="* Guía Subgrupo">
                     <ng-container options>
@@ -123,9 +123,16 @@
                   </app-select>
                 </div>
                 <br>
-                <p-checkbox [formControl]="formControls.delegated_auth" value="true"></p-checkbox>
-                <br>
-                <app-input [control]="formControls.password" label="Password" Name="Password"></app-input>
+                <p-checkbox [formControl]="formControls.delegated_auth" label="Autenticar en GUIA" value="true"></p-checkbox>
+                <ng-container *ngIf="formControls.delegated_auth.value.length === 0">
+                  <br>
+                  <app-input [control]="formControls.password" label="Password" Name="Password"></app-input>
+                </ng-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <hr>
               </div>
             </div>
             <div class="row justify-content-center">

@@ -129,6 +129,9 @@ export interface RequestCreateUser {
   email: string;
   estado: boolean;
   contratos_marco: number[];
+  guia_subgrupo_id: number;
+  delegated_auth: boolean;
+  password?: string;
 }
 
 export interface RequestUpdateUser {
