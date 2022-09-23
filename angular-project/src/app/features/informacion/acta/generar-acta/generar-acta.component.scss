@@ -337,6 +337,13 @@ button {
 
 :host ::ng-deep {
 
+  .aprob-color{
+    background-color: green;
+  }
+
+  .recha-color{
+    background-color: #c65b5b;
+  }
   .pago-box {
     padding: 10px;
   }
