@@ -29,6 +29,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   DisplayPermisosModal = false;
   ModalDataPermissions = [];
 
+  showPassword = false;
   formControls = {
     id: new FormControl(null),
     guia_subgrupo_id: new FormControl(null, [

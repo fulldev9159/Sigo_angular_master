@@ -126,7 +126,13 @@
                 <p-checkbox [formControl]="formControls.delegated_auth" label="Autenticar en GUIA" value="true"></p-checkbox>
                 <ng-container *ngIf="formControls.delegated_auth.value.length === 0">
                   <br>
-                  <app-input [control]="formControls.password" [label]="usuario_id === null ? 'Password': 'Nueva Password'" Name="Password"></app-input>
+                  <app-input [control]="formControls.password" [Type]="showPassword ? 'text': 'password'" [label]="usuario_id === null ? 'Password': 'Nueva Password'" Name="Password"></app-input>
+                  <ng-container *ngIf="showPassword">
+                    <a style="cursor: pointer" (click)="showPassword = false">Ocultar contraseña</a>
+                  </ng-container>
+                  <ng-container *ngIf="!showPassword">
+                    <a style="cursor: pointer" (click)="showPassword = true">Mostrar contraseña</a>
+                  </ng-container>
                 </ng-container>
               </div>
             </div>
