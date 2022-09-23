@@ -77,6 +77,11 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       unidades_obra: new FormArray([]),
     }),
 
+    total_porcentaje_2: new FormGroup({
+      servicios: new FormArray([]),
+      unidades_obra: new FormArray([]),
+    }),
+
     por_servicio: new FormGroup({
       servicios: new FormArray([]),
       unidades_obra: new FormArray([]),
@@ -447,6 +452,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
                 ]
               ),
               selected: new FormControl(false, []),
+              adicional_aceptacion_estado: new FormControl(
+                `${servicio.adicional_aceptacion_estado}`,
+                []
+              ),
             })
           );
         }
@@ -777,6 +786,39 @@ export class GenararActaComponent implements OnInit, OnDestroy {
   }
 
   validar(): void {
+    let ids_validados = (
+      this.formAdicionales.get('servicios').value as Array<{
+        id: number;
+        validar: boolean;
+      }>
+    ).filter(value => !value.validar);
+
+    console.log(
+      'id validados',
+      ids_validados.map(value => +value.id)
+    );
+
+    let ids_invalidados = (
+      this.formAdicionales.get('servicios').value as Array<{
+        id: number;
+        validar: boolean;
+      }>
+    ).filter(value => value.validar);
+    console.log(
+      'id  invalidados',
+      ids_invalidados.map(value => +value.id)
+    );
+
+    let requestInvalidarAdicionales: RequestAceptarRechazarAdicionales = {
+      ot_id: this.ot_id,
+      adicionales_aceptados: ids_validados.map(value => +value.id),
+      adicionales_rechazados: ids_invalidados.map(value => +value.id),
+      causas_rechazo_id: +this.formInvalidar.get('tipo_id').value,
+      observacion: this.formInvalidar.get('motivo').value,
+    };
+
+    console.log('request aprob adici', requestInvalidarAdicionales);
+    this.otFacade.aceptarRechazarAdicionales(requestInvalidarAdicionales);
     this.actaValidada = true;
   }
 

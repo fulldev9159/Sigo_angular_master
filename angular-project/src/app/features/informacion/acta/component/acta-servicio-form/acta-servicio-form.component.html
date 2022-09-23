@@ -11,6 +11,7 @@
                   <th></th>
                   <th>Cod.</th>
                   <th>Descripción</th>
+                  <th>Servicio</th>
                   <th style="text-align: right">Cant. informe av.</th>
                   <th style="text-align: right">Cant. Pagada</th>
                   <th style="text-align: right">Cant. a Enviar</th>
@@ -26,6 +27,7 @@
                     </td>
                     <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
                     <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
+                    <td>{{ servicio.get('adicional_aceptacion_estado').value }}</td>
                     <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value }}</td>
                     <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_max_a_enviar').value }}</td>
                     <td>
@@ -45,6 +47,7 @@
                         <td class="label-table" style="background-color:#ff8e4e ;
                         padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
                         <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
+                        <td></td>
                         <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value }}</td>
                         <td style="text-align: right" class="data-secundaria">{{ uo.get('cantidad_total').value - uo.get('cantidad_max_a_enviar').value }}</td>
                         <td>

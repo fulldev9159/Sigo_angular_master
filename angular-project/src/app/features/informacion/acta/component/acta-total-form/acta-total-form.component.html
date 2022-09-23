@@ -10,6 +10,7 @@
                 <tr>
                   <th>Cod.</th>
                   <th>Descripción</th>
+                  <th>Servicio</th>
                   <th style="text-align: right">Cantidad a Enviar</th>
                   <th>Precio Un.</th>
                   <th>Total</th>
@@ -21,6 +22,7 @@
                     <tr>
                       <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
                       <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
+                      <td>{{ servicio.get('adicional_aceptacion_estado').value }}</td>
                       <td style="text-align: right">{{ servicio.get('cantidad_a_enviar').value }}</td>
                       <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                       <td class="data-secundaria">{{ +servicio.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
@@ -30,6 +32,7 @@
                         <td class="label-table" style="background-color:#ff8e4e ;
                         padding-left: 22px !important;">{{ uo.get('uo_codigo').value }}</td>
                         <td class="data-secundaria">{{ uo.get('descripcion').value|titlecase }}</td>
+                        <td></td>
                         <td style="text-align: right">{{ uo.get('cantidad_a_enviar').value }}</td>
                         <td class="data-secundaria">{{ +uo.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
                         <td class="data-secundaria">{{ +uo.get('precio_total_servicio').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
