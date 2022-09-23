@@ -126,7 +126,7 @@
                 <p-checkbox [formControl]="formControls.delegated_auth" label="Autenticar en GUIA" value="true"></p-checkbox>
                 <ng-container *ngIf="formControls.delegated_auth.value.length === 0">
                   <br>
-                  <app-input [control]="formControls.password" label="Password" Name="Password"></app-input>
+                  <app-input [control]="formControls.password" [label]="usuario_id === null ? 'Password': 'Nueva Password'" Name="Password"></app-input>
                 </ng-container>
               </div>
             </div>
@@ -210,9 +210,6 @@
 
   </app-card>
 </div>
-
-<pre>{{ values | json }}</pre>
-
 
 <app-modal [display]="DisplayPermisosModal" (CloseEvent)="DisplayPermisosModal=false">
   <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>

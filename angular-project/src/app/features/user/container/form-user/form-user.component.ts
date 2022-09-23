@@ -36,7 +36,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
       this.noWhitespace,
     ]),
     delegated_auth: new FormControl(['true'], []),
-    password: new FormControl(null, []),
+    password: new FormControl('', []),
     username: new FormControl(null, [
       Validators.required,
       this.noWhitespace,
@@ -127,6 +127,12 @@ export class FormUserComponent implements OnInit, OnDestroy {
             this.formUser.get('email').setValue(userSelected.email);
             this.formUser.get('rut').setValue(userSelected.rut);
             this.formUser.get('celular').setValue(userSelected.celular);
+            this.formUser
+              .get('guia_subgrupo_id')
+              .setValue(userSelected.guia_subgrupo_id);
+            this.formUser
+              .get('delegated_auth')
+              .setValue(userSelected.delegated_auth ? ['true'] : []);
 
             // ToDO: Que el endpoint de get proveedores retorne si este es interno o externo
             // const proveedor = proveedores.find(proveedor=>{proveedor.id===user.proveedor_id})
@@ -305,17 +311,29 @@ export class FormUserComponent implements OnInit, OnDestroy {
   initDelegatedAuthFormControlEvent(): void {
     this.subscription.add(
       this.formUser.get('delegated_auth').valueChanges.subscribe(value => {
-        // TODO solo en creacion
-        if (value.length > 0) {
-          this.formUser.get('password').clearValidators();
+        if (this.usuario_id === null) {
+          if (value.length > 0) {
+            this.formUser.get('password').clearValidators();
+          } else {
+            this.formUser
+              .get('password')
+              .setValidators([
+                Validators.required,
+                this.noWhitespace,
+                Validators.maxLength(100),
+              ]);
+          }
         } else {
-          this.formUser
-            .get('password')
-            .setValidators([
-              Validators.required,
-              this.noWhitespace,
-              Validators.maxLength(100),
-            ]);
+          if (value.length > 0) {
+            this.formUser.get('password').clearValidators();
+          } else {
+            this.formUser
+              .get('password')
+              .setValidators([
+                this.noWhitespaceIfHasValue,
+                Validators.maxLength(100),
+              ]);
+          }
         }
         this.formUser.get('password').updateValueAndValidity();
       })
@@ -388,7 +406,18 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   noWhitespace(control: FormControl): any {
-    const isWhitespace = (control.value || '').trim().length === 0;
+    const value = `${control.value || ''}`;
+    const isWhitespace = value.trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+
+  noWhitespaceIfHasValue(control: FormControl): any {
+    const value = `${control.value || ''}`;
+    if (value.length === 0) {
+      return null;
+    }
+    const isWhitespace = value.trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
@@ -419,6 +448,9 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   save(): void {
     if (this.formUser.get('id').value !== null) {
+      const delegated_auth =
+        this.formUser.get('delegated_auth').value.length > 0;
+      const newPassword = this.formUser.get('password').value;
       const updateRequest: RequestUpdateUser = {
         usuario_id: this.usuario_id,
         values: {
@@ -429,6 +461,13 @@ export class FormUserComponent implements OnInit, OnDestroy {
           email: this.formUser.get('email').value,
           proveedor_id: +this.formUser.get('proveedor_id').value,
           area_id: +this.formUser.get('area_id').value,
+          guia_subgrupo_id: +this.formUser.get('guia_subgrupo_id').value,
+          delegated_auth,
+          password: delegated_auth
+            ? undefined
+            : newPassword.length > 0
+            ? newPassword
+            : undefined,
         },
         contratos_marco: this.formUser.get('contratos_marco').value,
       };
