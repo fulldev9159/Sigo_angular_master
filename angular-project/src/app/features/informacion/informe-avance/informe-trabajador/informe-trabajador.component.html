@@ -190,7 +190,6 @@
                       index: {{i}} -->
                       <ng-container *ngIf="item.unidades_obras.length===1 && item.adicional!=='ORIGINAL'">
                         <tr>
-                          <td>{{item.servicio_rowid}}</td>
                           <td class="label-table">{{item.servicio_codigo}}</td>
                           <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                           <td [ngClass]="item.precargado?'existente':'noexistente'">
@@ -239,7 +238,6 @@
   
                       <ng-container *ngIf="item.unidades_obras.length>1 && item.adicional!=='ORIGINAL'">
                         <tr>
-                          <td [attr.rowspan]="+item.unidades_obras.length">{{item.servicio_rowid}}</td>
                           <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
                           <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                           <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
@@ -306,7 +304,7 @@
                           </ng-container>
                           <ng-container *ngIf="uo.uo_codigo!=='0'">
                             <td [ngClass]="uo.precargado?'existente':'noexistente'">
-                              <app-input [control]="formCntlUO(i,'uo_cantidad',uo.uo_codigo,item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)" [index_uo]="iuo"></app-input>
+                              <app-input [control]="formCntlUO(i,'uo_cantidad',uo.uo_codigo,item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)" [index_uo]="iuo+1"></app-input>
                             </td>
   
                             <td [ngClass]="uo.precargado?'existente':'noexistente'">
@@ -354,7 +352,7 @@
                 </button>
               </ng-container>
               <ng-template #noUpdating>
-                <button class="btn btn-primary" (click)="saveBorradorInformeAvance(otId, id)" [class.disabled]="!valid">
+                <button class="btn btn-primary" (click)="displayModalConfirmacion=true" [class.disabled]="!valid">
                   <em class="pi pi-save mr-1"></em>Guardar borrador
                 </button>
               </ng-template>
@@ -402,6 +400,27 @@
 </app-modal>
 
 
+<app-modal [display]="displayModalConfirmacion" (CloseEvent)="closeDisplayModalConfirmacion()" [style]="{ width: '50vw' }">
+  <ng-container modal-header-title><i class="pi pi-book"></i>&nbsp;Guardar Borrador</ng-container>
+  <ng-container modal-content>
+    ¿Está seguro que desea guardar los cambios?
+    <!-- <app-detalle-informe-avance-table [error]="detalleInformeAvanceError$ | async" [detalle]="detalleInformeAvance$ | async" [totalServicios]="totalServicios" [totalUO]="totalUO"></app-detalle-informe-avance-table> -->
+  </ng-container>
+  <ng-container modal-footer>
+    <button class="btn btn-light mr-2" (click)="closeDisplayModalConfirmacion()">Cancelar</button>
+
+    <ng-container *ngIf="otId$ | async as otId">
+      <ng-container *ngIf="id$ | async as id">
+        <button class="btn btn-primary" (click)="saveBorradorInformeAvance(otId, id)">
+          <em class="pi mr-1"></em>Enviar
+        </button>
+      </ng-container>
+    </ng-container>
+
+
+    
+  </ng-container>
+</app-modal>
 
 
 
@@ -811,7 +830,7 @@
         </ng-container>
       </ng-container> -->
 
-<!-- 
+
 <pre>
 {{formAdicionales.value|json}}
-</pre> -->
+</pre>

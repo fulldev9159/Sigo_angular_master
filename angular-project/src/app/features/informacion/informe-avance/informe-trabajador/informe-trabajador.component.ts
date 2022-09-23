@@ -124,6 +124,8 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   servicios_adicionales_delete: number[] = [];
   uos_adicionales_delete: number[] = [];
 
+  displayModalConfirmacion = false;
+
   mustBeANumber(control: FormControl): any {
     const result = /^\d+$/.test(control.value);
     return result ? null : { benumber: true };
@@ -999,5 +1001,9 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
       data.index_service,
       data.index_uo
     );
+  }
+
+  closeDisplayModalConfirmacion(): void {
+    this.displayModalConfirmacion = false;
   }
 }
