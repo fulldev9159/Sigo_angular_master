@@ -60,6 +60,14 @@
                             </tr>
                           </ng-container>
                         </ng-container>
+                        <tr>
+                          <td>Total Servicios</td>
+                          <td>{{totalSadicionales | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                          <td>Total UOs</td>
+                          <td>{{totalUadicionales | currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                          <td>Total</td>
+                          <td>{{totalSadicionales+totalUadicionales| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                        </tr>
                       </ng-container>
                     </tbody>
                   </table>
@@ -114,6 +122,14 @@
                         
                       </ng-container>
                     </ng-container>
+                    <tr>
+                      <td>Total Servicios</td>
+                      <td>{{totalServicios| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                      <td>Total UOs</td>
+                      <td>{{totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                      <td>Total</td>
+                      <td>{{totalServicios+totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
+                    </tr>
                   </tbody>
                 </table>
               </ng-container>
@@ -121,6 +137,13 @@
           </div>
         </ng-container>
       </ng-container>
+
+
+      <div style="margin-left: 39vw;
+      margin-top: 25px;">
+        <span>Total:</span>
+        <span>{{totalSadicionales+totalUadicionales+totalServicios+totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</span>
+      </div>
   
         <div class="col-xs-12 col-md-12">
           <div style="text-align: right">

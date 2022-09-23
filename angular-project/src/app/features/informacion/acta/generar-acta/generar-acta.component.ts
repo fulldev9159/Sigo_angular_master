@@ -94,6 +94,9 @@ export class GenararActaComponent implements OnInit, OnDestroy {
 
   tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
 
+  totalSadicionales = 0;
+  totalUadicionales = 0;
+
   tipo_pago = null;
   tipoPago$: Observable<string> = this.otFacade
     .getUltimoTipoPagoActa$()
@@ -193,6 +196,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     (servicios ?? [])
       .filter(servicio => servicio.adicional_aceptacion_estado !== 'ORIGINAL')
       .forEach(servicio => {
+        if (servicio.adicional_aceptacion_estado !== 'ORIGINAL')
+          this.totalSadicionales =
+            this.totalSadicionales +
+            +servicio.valor_unitario_clp * +servicio.cantidad_total;
         serviciosForm.push(
           new FormGroup({
             id: new FormControl(`${servicio.id}`, []),
@@ -221,6 +228,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
 
     (unidades_obra ?? []).forEach(uo => {
       if (+uo.cantidad_total > 0) {
+        if (uo.servicio_adicional_aceptacion_estado !== 'ORIGINAL')
+          this.totalUadicionales =
+            this.totalUadicionales +
+            +uo.valor_unitario_clp * +uo.cantidad_total;
         unidadesObraForm.push(
           new FormGroup({
             id: new FormControl(`${uo.id}`, []),
@@ -319,9 +330,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       this.totalUO = 0;
 
       (servicios ?? []).forEach(servicio => {
-        this.totalServicios =
-          this.totalServicios +
-          +servicio.valor_unitario_clp * +servicio.cantidad_total;
+        if (servicio.adicional_aceptacion_estado === 'ORIGINAL')
+          this.totalServicios =
+            this.totalServicios +
+            +servicio.valor_unitario_clp * +servicio.cantidad_total;
 
         if (+servicio.cantidad_total > 0) {
           serviciosForm.push(
@@ -358,8 +370,9 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       });
 
       (unidades_obra ?? []).forEach(uo => {
-        this.totalUO =
-          this.totalUO + +uo.valor_unitario_clp * +uo.cantidad_total;
+        if (uo.servicio_adicional_aceptacion_estado === 'ORIGINAL')
+          this.totalUO =
+            this.totalUO + +uo.valor_unitario_clp * +uo.cantidad_total;
         if (+uo.cantidad_total > 0) {
           unidadesObraForm.push(
             new FormGroup({
