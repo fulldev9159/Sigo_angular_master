@@ -88,6 +88,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     unidades_obra: new FormArray([]),
   });
 
+  formAprobarTodos: FormGroup = new FormGroup({
+    all: new FormControl(false),
+  });
+
   tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
 
   tipo_pago = null;
@@ -137,6 +141,17 @@ export class GenararActaComponent implements OnInit, OnDestroy {
           this.checkAndFixTipoPago(ultimo_tipo_pago);
         }
       )
+    );
+
+    this.subscription.add(
+      this.formAprobarTodos.get('all').valueChanges.subscribe(value => {
+        const serviciosForm = this.formAdicionales.get(
+          'servicios'
+        ) as FormArray;
+        serviciosForm.controls.map(control =>
+          control.get('validar').setValue(value)
+        );
+      })
     );
     this.totalServicios_servicio = 0;
     this.totalUO_servicio = 0;

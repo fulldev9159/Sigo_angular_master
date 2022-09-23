@@ -21,7 +21,9 @@
                         <th style="text-align: right">Cantidad a Enviar</th>
                         <th>Precio Un.</th>
                         <th>Total</th>
-                        <th>Aprobar/Rechazar</th>
+                        <th>Aprobar/Rechazar
+                          <p-inputSwitch [formControl]="formAprobarTodos.get('all')"></p-inputSwitch>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
