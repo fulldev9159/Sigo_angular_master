@@ -5,22 +5,26 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { DetalleOT, Response } from '@model';
-import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
+import { DetalleInformeAvance, Response } from '@model';
+import { InformeAvanceHttpService } from '@services';
+import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
-import { OtDetalleHttpService } from 'src/app/core/service/ot-detalle-http.service';
 
 @Injectable({ providedIn: 'root' })
-export class DetalleOTResolver implements Resolve<Response<DetalleOT>> {
+export class DetalleInformeAvanceResolver
+  implements Resolve<Response<DetalleInformeAvance>>
+{
   constructor(
-    private service: OtDetalleHttpService,
-    private OTDetalleFacade: OTDetalleFacade,
+    private service: InformeAvanceHttpService,
+    private iformeAvanceFacade: InformeAvanceFacade,
     private router: Router
   ) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Response<DetalleOT>> | Promise<Response<DetalleOT>> {
+  ):
+    | Observable<Response<DetalleInformeAvance>>
+    | Promise<Response<DetalleInformeAvance>> {
     const idStr = route.paramMap.get('id');
 
     const id = parseInt(idStr, 10);
@@ -29,12 +33,12 @@ export class DetalleOTResolver implements Resolve<Response<DetalleOT>> {
       this.router.navigate([`/not-found`], { skipLocationChange: true });
       return null;
     }
-    return this.service.getDetalleOT(id).pipe(
+    return this.service.getDetalleInformeAvance(id).pipe(
       tap(response => {
-        this.OTDetalleFacade.getDetalleOTSuccess(response);
+        this.iformeAvanceFacade.getDetalleInformeAvanceSuccess(response);
       }),
       catchError(error => {
-        this.OTDetalleFacade.getDetalleOTError(error);
+        this.iformeAvanceFacade.getDetalleInformeAvanceError(error);
         return EMPTY;
       })
     );

@@ -43,3 +43,22 @@ export interface DetalleMaterialCubicacion {
   model_tipo_moneda_id: TipoMoneda;
   model_material_cod: ModelMaterial;
 }
+
+// INFORME DE AVANCE
+export interface MaterialFromInformeAvance {
+  id: number;
+  material_cod: string;
+  informe_has_uob_id: number;
+  cantidad: number;
+  unidad_id: number;
+  tipo_moneda_id: number;
+  valor: number;
+  codigo_sap: string;
+  origen: string;
+  factor_conversion: number;
+  valor_unitario_clp: number;
+
+  model_unidad_id: Unidad;
+  model_tipo_moneda_id: TipoMoneda;
+  model_material_cod: ModelMaterial;
+}

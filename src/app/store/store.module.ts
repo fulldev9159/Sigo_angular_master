@@ -68,10 +68,15 @@ import { FlujoOTEffects } from './flujo-ot/flujo-ot.effects';
 import * as formFlujoOTReduce from './flujo-ot/flujo-ot.reducers';
 // FLUJO OT STORE
 
-// OT STORE
+// OT DETALLE STORE
 import { OTDetalleEffects } from './ot-detalle/ot-detalle.effects';
 import * as formOTDetalleReduce from './ot-detalle/ot-detalle.reducers';
-// OT STORE
+// OT DETALLE STORE
+
+// INFORME AVANCE STORE
+import { InformeAvanceEffects } from './informe-avance/informe-avance.effects';
+import * as formInformeAvanceReduce from './informe-avance/informe-avance.reducers';
+// INFORME AVANCE STORE
 
 @NgModule({
   declarations: [],
@@ -169,6 +174,13 @@ import * as formOTDetalleReduce from './ot-detalle/ot-detalle.reducers';
     StoreModule.forFeature(
       formOTDetalleReduce.Featurekey,
       formOTDetalleReduce.reducerOTDetalle
+    ),
+
+    // OT INFORME AVANCE
+    EffectsModule.forFeature([InformeAvanceEffects]),
+    StoreModule.forFeature(
+      formInformeAvanceReduce.Featurekey,
+      formInformeAvanceReduce.reducerInformeAvance
     ),
 
     SharedModule,

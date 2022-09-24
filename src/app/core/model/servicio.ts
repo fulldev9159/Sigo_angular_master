@@ -1,4 +1,7 @@
-import { DetalleUOCubicacion } from './unidad-obra';
+import {
+  DetalleUOCubicacion,
+  UnidadObraFromInformeAvance,
+} from './unidad-obra';
 
 export interface ModelServicio {
   id: number;
@@ -121,4 +124,34 @@ export interface DetalleServicioCubicacion {
     estado: boolean;
     contrato_marco_id: number;
   };
+}
+
+// INFORME AVANCE
+export interface ServicioFromInfomeAvance {
+  id: number;
+  informe_avance_id: number;
+  servicio_id: number;
+  actividad_id: number;
+  tipo_servicio_id: number;
+  cantidad: number; // USAR
+  unidad_id: number;
+  puntos_baremos: number;
+  prov_has_serv_precio: number;
+  precio_tipo_moneda_id: number;
+  factor_conversion_precio: number;
+  adicional_aceptacion_estado: string;
+  adicional_aceptacion_usuario_id: number;
+  adicional_aceptacion_fecha: Date;
+  adicional_causas_rechazo_id: number;
+  adicional_rechazo_observacion: string;
+  requiere_evidencia: boolean;
+  evidencia_id: number;
+  valor_unitario_clp: number;
+
+  model_servicio_id: ModelServicio;
+  model_unidad_id: Unidad;
+  model_precio_tipo_moneda_id: TipoMoneda;
+
+  numero_producto: string;
+  many_informe_has_uob: UnidadObraFromInformeAvance[];
 }

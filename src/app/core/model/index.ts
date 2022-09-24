@@ -21,6 +21,7 @@ export * from './ot-detalle';
 export * from './comuna';
 export * from './oficina-central';
 export * from './tipo-trabajo';
+export * from './informe-avance';
 export interface Response<T> {
   data: T;
   status: StatusResponse;

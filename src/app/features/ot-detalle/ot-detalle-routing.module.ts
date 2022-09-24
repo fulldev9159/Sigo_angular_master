@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { InformeAvanceComponent } from './components/informe-avance/informe-avance.component';
 import { OtDetalleComponent } from './ot-detalle.component';
 import { DetalleOTResolver } from './resolvers/cubicaciones.resolver';
+import { DetalleInformeAvanceResolver } from './resolvers/detalle-informe-avance.resolver';
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +19,7 @@ const routes: Routes = [
         component: InformeAvanceComponent,
         resolve: {
           detalleOT: DetalleOTResolver,
+          detalleInformeAvance: DetalleInformeAvanceResolver,
         },
       },
     ],

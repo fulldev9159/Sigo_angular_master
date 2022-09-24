@@ -13,3 +13,5 @@ export * from './numero-interno-http.service';
 export * from './sustento-financiero-http.service';
 export * from './proyectos-http.service';
 export * from './flujo-ot-http.service';
+export * from './ot-detalle-http.service';
+export * from './informe-avance-http.service';
