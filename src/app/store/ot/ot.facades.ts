@@ -3,7 +3,7 @@ import {
   AreaDeNegocio,
   Comuna,
   CubicacionContrato,
-  OficinaCentral,
+  OficinaCentralWithAgenciaModel,
   OT,
   PlanProyecto,
   RequestBandejaOT,
@@ -52,7 +52,7 @@ export class OTFacade {
     this.store.dispatch(otActions.getOficinaCentral({ agencia_id }));
   }
 
-  public getOficinaCentral$(): Observable<OficinaCentral[]> {
+  public getOficinaCentral$(): Observable<OficinaCentralWithAgenciaModel[]> {
     return this.store.select(otSelectors.getOficinaCentral);
   }
 

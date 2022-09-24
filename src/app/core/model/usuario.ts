@@ -15,6 +15,9 @@ export interface ModelUsuario {
   updated_at: Date;
   username: string;
   eliminable: boolean;
+  guia_subgrupo_id?: number; // TODO: ACTUALIZAR EL MOCK
+  delegated_auth?: boolean; // TODO: ACTUALIZAR EL MOCK
+  password?: string; // TODO: ACTUALIZAR EL MOCK
 }
 
 // USUARIO PROXY

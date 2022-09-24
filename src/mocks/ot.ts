@@ -1,7 +1,7 @@
 import {
   AreaDeNegocio,
   Comuna,
-  OficinaCentral,
+  OficinaCentralWithAgenciaModel,
   PlanProyecto,
   Response,
   Sitio,
@@ -15,7 +15,9 @@ export let CreateOT: Response<{ ot_id: number }> = {
   status: { code: 0, desc: 'OK' },
   data: { ot_id: 1 },
 };
-export let CentralesMOCK200ok: Response<{ items: OficinaCentral[] }> = {
+export let CentralesMOCK200ok: Response<{
+  items: OficinaCentralWithAgenciaModel[];
+}> = {
   status: { code: 0, desc: '' },
   data: {
     items: [

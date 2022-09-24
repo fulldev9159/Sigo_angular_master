@@ -3,7 +3,7 @@ import {
   AreaDeNegocio,
   Comuna,
   CubicacionContrato,
-  OficinaCentral,
+  OficinaCentralWithAgenciaModel,
   OT,
   PlanProyecto,
   Sitio,
@@ -18,7 +18,7 @@ export const Featurekey = 'ot';
 export interface StateOT {
   cubicacionSelected: CubicacionContrato;
   // CONTRATO BUCLE
-  oficinaCentral: OficinaCentral[];
+  oficinaCentral: OficinaCentralWithAgenciaModel[];
   solicitadoPor: SolicitadoPor[];
   comunas: Comuna[];
   tipoDeRed: TipoDeRed[];

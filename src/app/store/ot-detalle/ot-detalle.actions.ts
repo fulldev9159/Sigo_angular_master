@@ -1,0 +1,18 @@
+import { DetalleOT, Response } from '@model';
+import { createAction, props } from '@ngrx/store';
+
+// GET DETALLE OT
+export const getDetalleOT = createAction(
+  '[OT-DETALLE] GET Detalle OT',
+  props<{ id: number }>()
+);
+
+export const getDetalleOTSuccess = createAction(
+  '[OT-DETALLE] GET Detalle OT Success',
+  props<{ response: Response<DetalleOT> }>()
+);
+
+export const getDetalleOTError = createAction(
+  '[OT-DETALLE] GET Detalle OT Error',
+  props<{ error: any }>()
+);

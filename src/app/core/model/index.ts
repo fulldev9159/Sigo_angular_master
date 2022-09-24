@@ -17,7 +17,10 @@ export * from './numero_interno';
 export * from './sustento-financiero';
 export * from './proyectos';
 export * from './flujo-ot';
-
+export * from './ot-detalle';
+export * from './comuna';
+export * from './oficina-central';
+export * from './tipo-trabajo';
 export interface Response<T> {
   data: T;
   status: StatusResponse;

@@ -13,6 +13,11 @@ export interface ModelContratoMarco {
   validacion_operaciones: boolean;
 }
 
+export interface ContratoMarconWithTipoContratoModel
+  extends ModelContratoMarco {
+  model_tipo_contrato_id: { id: number; nombre: string };
+}
+
 // AGENCIAS DE UN CONTRATO
 export interface AgenciaContrato {
   id: number;

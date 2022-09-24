@@ -4,7 +4,7 @@ import { environment } from '@environment';
 import {
   AreaDeNegocio,
   Comuna,
-  OficinaCentral,
+  OficinaCentralWithAgenciaModel,
   OT,
   PlanProyecto,
   RequestBandejaOT,
@@ -54,11 +54,10 @@ export class OtHttpService {
 
   getOficinaCentral(
     agencia_id: number
-  ): Observable<Response<{ items: OficinaCentral[] }>> {
-    return this.http.post<Response<{ items: OficinaCentral[] }>>(
-      `${this.API_URL}/ot/centrales_agid/get`,
-      { agencia_id }
-    );
+  ): Observable<Response<{ items: OficinaCentralWithAgenciaModel[] }>> {
+    return this.http.post<
+      Response<{ items: OficinaCentralWithAgenciaModel[] }>
+    >(`${this.API_URL}/ot/centrales_agid/get`, { agencia_id });
   }
 
   getSolicitadoPor(): Observable<Response<{ items: SolicitadoPor[] }>> {

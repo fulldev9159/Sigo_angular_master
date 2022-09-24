@@ -1,3 +1,4 @@
+import { ContratoMarconWithTipoContratoModel } from './contrato';
 import { DetalleServicioCubicacion } from './servicio';
 
 // TIPO CUBICACION 4 CUB
@@ -135,6 +136,14 @@ export interface DetalleCubicacion {
   valor_total_clp: number;
   costo: number;
   many_cubicacion_has_servicio: DetalleServicioCubicacion[];
+}
+
+export interface DetalleCubicacionWithContratoModel
+  extends Omit<
+    DetalleCubicacion,
+    'many_cubicacion_has_servicio' | 'valor_total_clp'
+  > {
+  model_contrato_id: ContratoMarconWithTipoContratoModel;
 }
 
 // CUBICACIONES DE UN CONTRATO ESPECIFICO

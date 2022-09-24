@@ -67,6 +67,12 @@ import * as formProyectosReduce from './proyectos/proyectos.reducers';
 import { FlujoOTEffects } from './flujo-ot/flujo-ot.effects';
 import * as formFlujoOTReduce from './flujo-ot/flujo-ot.reducers';
 // FLUJO OT STORE
+
+// OT STORE
+import { OTDetalleEffects } from './ot-detalle/ot-detalle.effects';
+import * as formOTDetalleReduce from './ot-detalle/ot-detalle.reducers';
+// OT STORE
+
 @NgModule({
   declarations: [],
   imports: [
@@ -156,6 +162,13 @@ import * as formFlujoOTReduce from './flujo-ot/flujo-ot.reducers';
     StoreModule.forFeature(
       formFlujoOTReduce.Featurekey,
       formFlujoOTReduce.reducerFlujoOT
+    ),
+
+    // OT DETALLE STORE
+    EffectsModule.forFeature([OTDetalleEffects]),
+    StoreModule.forFeature(
+      formOTDetalleReduce.Featurekey,
+      formOTDetalleReduce.reducerOTDetalle
     ),
 
     SharedModule,

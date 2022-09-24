@@ -2,7 +2,7 @@ import {
   AreaDeNegocio,
   Comuna,
   CubicacionContrato,
-  OficinaCentral,
+  OficinaCentralWithAgenciaModel,
   OTFromNumeroInterno,
   Response,
   SolicitadoPor,

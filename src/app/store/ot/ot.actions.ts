@@ -2,7 +2,7 @@ import {
   AreaDeNegocio,
   Comuna,
   CubicacionContrato,
-  OficinaCentral,
+  OficinaCentralWithAgenciaModel,
   OT,
   PlanProyecto,
   RequestBandejaOT,
@@ -144,7 +144,7 @@ export const getOficinaCentral = createAction(
 );
 export const getOficinaCentralSuccess = createAction(
   '[OT] getOficinaCentral Success',
-  props<{ response: Response<{ items: OficinaCentral[] }> }>()
+  props<{ response: Response<{ items: OficinaCentralWithAgenciaModel[] }> }>()
 );
 export const getOficinaCentralError = createAction(
   '[OT] getOficinaCentral Error',
