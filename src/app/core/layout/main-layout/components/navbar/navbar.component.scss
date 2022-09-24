@@ -74,3 +74,29 @@
         }
     }
 }
+
+@media screen and (max-width: 991px) {
+    .navbar-container {
+        padding: 0rem 1rem;
+
+        .buttons-principales-container {
+            width: 39vw;
+
+            .button-menu {
+                button {
+                    width: 76px;
+                }
+            }
+        }
+
+        .p-button {
+            min-width: 0rem;
+        }
+
+        .menu {
+            button {
+                padding: 9px;
+            }
+        }
+    }
+}
