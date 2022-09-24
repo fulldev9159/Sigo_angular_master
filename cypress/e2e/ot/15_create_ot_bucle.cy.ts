@@ -20,6 +20,7 @@ describe('Create ot bucle', () => {
       'Cubicacion Bucle Cypress Editada'
     );
     cy.get('#crear-ot').should('be.disabled');
+    cy.get('input[name="input-nombre-ot"]').click();
 
     cy._select_dropdown('#select-oficina-central', '0189 - S.FCO LAS CONDES');
     cy._select_dropdown('#select-solicitado-por', 'ATC');
