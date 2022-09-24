@@ -18,6 +18,7 @@ export class InformeAvanceComponent implements OnDestroy, OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.serviciosFacade.resetCarritoServices();
     this.subscription.add(
       this.route.data.subscribe(({ detalleInformeAvance }) => {
         if (detalleInformeAvance) {
