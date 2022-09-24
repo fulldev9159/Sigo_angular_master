@@ -1,6 +1,12 @@
 <div class="detalle-ot-container">
-    <span>OT ID:</span>
-    <span>Nomber: OT ejemplo</span>
+    <ng-container *ngIf="otDetalle$|async as otDetalle">
+        <span>@OT-ID: <p>{{otDetalle.ot.id}}</p></span>
+        <span>Nombre:
+            <p>{{otDetalle.ot.nombre}}</p>
+        </span>
+    </ng-container>
+
+
 </div>
 
 <div class="sidebar-menu">

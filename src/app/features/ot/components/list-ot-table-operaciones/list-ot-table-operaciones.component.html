@@ -12,7 +12,7 @@
     </button>
 
     <!-- OT_ET_EJECUCION_TRABAJOS -->
-    <button id="play-button" pTooltip="Editar/enviar informe avance" [routerLink]="['/ot-detalle/informe-avance']"
+    <button id="play-button" pTooltip="Editar/enviar informe avance" [routerLink]="['/ot-detalle/informe-avance',ot_id]"
         *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_ENVIAR_INFORME_AVANCE')">
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>

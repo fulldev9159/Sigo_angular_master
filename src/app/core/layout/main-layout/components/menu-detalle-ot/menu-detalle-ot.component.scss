@@ -6,6 +6,14 @@
     background: #085b48;
     flex-direction: column;
     justify-content: space-evenly;
+
+    span:first-child {
+        margin-bottom: 3px;
+    }
+
+    span p {
+        font-weight: 700;
+    }
 }
 
 

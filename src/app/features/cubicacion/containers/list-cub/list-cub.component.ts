@@ -14,6 +14,8 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+
+//  TODO: DESHABILITAR BOTONES EDITAR Y ELIMINAR A CUBICACIONES UTILIZADAS
 @Component({
   selector: 'zwc-list-cub',
   templateUrl: './list-cub.component.html',
