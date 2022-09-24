@@ -13,7 +13,8 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./features/home/home.module').then(m => m.HomeModule),
-    canLoad: [SigoGuard],
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
   },
   {
     path: 'cubicacion',
@@ -21,12 +22,14 @@ const routes: Routes = [
       import('./features/cubicacion/cubicacion.module').then(
         m => m.CubicacionModule
       ),
-    canLoad: [SigoGuard],
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
   },
   {
     path: 'ot',
     loadChildren: () => import('./features/ot/ot.module').then(m => m.OtModule),
-    canLoad: [SigoGuard],
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
   },
   {
     path: 'ot-detalle',
@@ -34,7 +37,8 @@ const routes: Routes = [
       import('./features/ot-detalle/ot-detalle.module').then(
         m => m.OtDetalleModule
       ),
-    canLoad: [SigoGuard],
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
   },
 ];
 
