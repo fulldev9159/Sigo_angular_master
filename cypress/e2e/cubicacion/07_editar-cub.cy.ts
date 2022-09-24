@@ -30,7 +30,7 @@ describe('Editar cubicacion', () => {
       .then(val => {
         expect(val).to.eql('Cubicacion Bucle Cypress');
       });
-
+    cy.wait(1000);
     cy.get('#select-tipo-cubicacion>.p-dropdown>span').contains('Full');
     cy.get('#select-contrato_marco>.p-dropdown>span').contains('BUCLE');
     cy.wait(1000).then(() => {
