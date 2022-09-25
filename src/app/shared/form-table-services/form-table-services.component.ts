@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -13,7 +14,7 @@ import {
 } from '@angular/forms';
 import { CarritoService, CarritoUO } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
-import { combineLatest, map, Subscription } from 'rxjs';
+import { combineLatest, map, Observable, of, Subscription } from 'rxjs';
 import localeEsCl from '@angular/common/locales/es-CL';
 import { registerLocaleData } from '@angular/common';
 
@@ -37,92 +38,8 @@ interface ServiceTableCarrito {
 })
 export class FormTableServicesComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
-  carrito$ = this.serviciosFacade.carrito$().pipe(
-    map(servicios => {
-      let valueInitial: CarritoService[] = [];
-      if (servicios && servicios.length > 0) {
-        // ORDENAR DE MANERA ESTRICTA
-        const carritoReducerEstricto = servicios.reduce((acc, curr) => {
-          let indexService = acc.findIndex(
-            value => value.servicio_id === curr.servicio_id
-          );
-          if (indexService === -1) {
-            acc.push(curr);
-          } else {
-            let temp = [
-              ...acc.map(item => ({
-                ...item,
-                unidad_obras: [...item.unidad_obras],
-              })),
-            ];
-            temp[indexService].unidad_obras.push(...curr.unidad_obras);
-            acc[indexService] = temp[indexService];
-          }
-
-          return acc;
-        }, valueInitial);
-
-        // CREAR FORMULARIO
-        carritoReducerEstricto.forEach(servicio => {
-          const carritoFormulario: CarritoService[] = (
-            this.formTable.get('table') as FormArray
-          ).value;
-
-          const indexServiceFormulario = carritoFormulario.findIndex(
-            x => x.servicio_id === servicio.servicio_id
-          );
-
-          // NUEVO SERVICIO
-          if (indexServiceFormulario === -1) {
-            const group = new FormGroup({
-              precargado: new FormControl(servicio.precargado ?? false, []),
-              servicio_rowid: new FormControl(servicio.servicio_rowid, []),
-              servicio_id: new FormControl(servicio.servicio_id, [
-                Validators.required,
-              ]),
-              servicio_cantidad: new FormControl(
-                servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
-                [Validators.required, Validators.min(0.01)]
-              ),
-              servicio_precio_final_clp: new FormControl(
-                servicio.servicio_precio_final_clp
-              ),
-              unidad_obras: new FormArray(
-                servicio.unidad_obras.map(uo => this.makeUOForm(uo))
-              ),
-            });
-            (this.formTable.get('table') as FormArray).push(group);
-          } else {
-            // EXISTE EL SERVICIO EN EL FORMULARIO
-            // AÑADIR LA UOS NUEVAS
-            const UOTableForm = (this.formTable.get('table') as FormArray)
-              .at(indexServiceFormulario)
-              .get('unidad_obras') as FormArray;
-            const uosForm: CarritoUO[] = UOTableForm.value;
-            const uosCarrito = servicio.unidad_obras;
-            const getUosNuevas = (
-              carritoActual: CarritoUO[],
-              form: CarritoUO[]
-            ) => {
-              return carritoActual.filter(object1 => {
-                return !form.some(object2 => {
-                  return object1.uo_codigo === object2.uo_codigo;
-                });
-              });
-            };
-            const uosNuevas = getUosNuevas(uosCarrito, uosForm);
-            uosNuevas.forEach(uo => {
-              UOTableForm.push(this.makeUOForm(uo));
-            });
-          }
-        });
-        return carritoReducerEstricto;
-      } else {
-        return [];
-      }
-    })
-  );
-
+  @Input() data: CarritoService[] = null;
+  carrito$: Observable<CarritoService[]> = of([]);
   totalServicios = 0;
   totalUOs = 0;
 
@@ -146,6 +63,8 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.data ? this.LoadStaticMode() : this.LoadDynamicMode();
+
     this.subscription.add(
       this.formTable.get('table').valueChanges.subscribe(table => {
         this.totalServicios = 0;
@@ -168,6 +87,96 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
       })
     );
   }
+
+  LoadDynamicMode(): void {
+    this.carrito$ = this.serviciosFacade.carrito$().pipe(
+      map(servicios => {
+        let valueInitial: CarritoService[] = [];
+        if (servicios && servicios.length > 0) {
+          // ORDENAR DE MANERA ESTRICTA
+          const carritoReducerEstricto = servicios.reduce((acc, curr) => {
+            let indexService = acc.findIndex(
+              value => value.servicio_id === curr.servicio_id
+            );
+            if (indexService === -1) {
+              acc.push(curr);
+            } else {
+              let temp = [
+                ...acc.map(item => ({
+                  ...item,
+                  unidad_obras: [...item.unidad_obras],
+                })),
+              ];
+              temp[indexService].unidad_obras.push(...curr.unidad_obras);
+              acc[indexService] = temp[indexService];
+            }
+
+            return acc;
+          }, valueInitial);
+
+          // CREAR FORMULARIO
+          carritoReducerEstricto.forEach(servicio => {
+            const carritoFormulario: CarritoService[] = (
+              this.formTable.get('table') as FormArray
+            ).value;
+
+            const indexServiceFormulario = carritoFormulario.findIndex(
+              x => x.servicio_id === servicio.servicio_id
+            );
+
+            // NUEVO SERVICIO
+            if (indexServiceFormulario === -1) {
+              const group = new FormGroup({
+                precargado: new FormControl(servicio.precargado ?? false, []),
+                servicio_rowid: new FormControl(servicio.servicio_rowid, []),
+                servicio_id: new FormControl(servicio.servicio_id, [
+                  Validators.required,
+                ]),
+                servicio_cantidad: new FormControl(
+                  servicio.servicio_cantidad ? servicio.servicio_cantidad : 1,
+                  [Validators.required, Validators.min(0.01)]
+                ),
+                servicio_precio_final_clp: new FormControl(
+                  servicio.servicio_precio_final_clp
+                ),
+                unidad_obras: new FormArray(
+                  servicio.unidad_obras.map(uo => this.makeUOForm(uo))
+                ),
+              });
+              (this.formTable.get('table') as FormArray).push(group);
+            } else {
+              // EXISTE EL SERVICIO EN EL FORMULARIO
+              // AÑADIR LA UOS NUEVAS
+              const UOTableForm = (this.formTable.get('table') as FormArray)
+                .at(indexServiceFormulario)
+                .get('unidad_obras') as FormArray;
+              const uosForm: CarritoUO[] = UOTableForm.value;
+              const uosCarrito = servicio.unidad_obras;
+              const getUosNuevas = (
+                carritoActual: CarritoUO[],
+                form: CarritoUO[]
+              ) => {
+                return carritoActual.filter(object1 => {
+                  return !form.some(object2 => {
+                    return object1.uo_codigo === object2.uo_codigo;
+                  });
+                });
+              };
+              const uosNuevas = getUosNuevas(uosCarrito, uosForm);
+              uosNuevas.forEach(uo => {
+                UOTableForm.push(this.makeUOForm(uo));
+              });
+            }
+          });
+          return carritoReducerEstricto;
+        } else {
+          return [];
+        }
+      })
+    );
+  }
+
+  LoadStaticMode(): void {}
 
   makeUOForm(uo: CarritoUO): FormGroup {
     let cantidad = uo.uo_codigo === '0' ? 0 : 1;
@@ -263,22 +272,6 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
       ).findIndex(uo => uo.uo_codigo === data.uo.uo_codigo)
     );
   }
-
-  // showModalConfirmacion(data: {
-  //   servicio_id: number;
-  //   servicio_rowid: number;
-  // }): void {
-  //   this.displayModalConfirmacionEliminar = true;
-  //   this.servicio_id_eliminar = data.servicio_id;
-  //   this.servicio_rowid_eliminar = data.servicio_rowid;
-  //   this.mensajeConfirmacion = `Al realizar esta acción eliminará el servicio/uo de la cubicación existente ¿Confirma esta acción?`;
-  // }
-
-  // closeModalElimarServicio(): void {
-  //   this.displayModalConfirmacionEliminar = false;
-  // }
-
-  // eliminarServicioCarrito(): void {}
 
   get valid(): boolean {
     return (this.formTable.get('table') as FormArray).length > 0;
