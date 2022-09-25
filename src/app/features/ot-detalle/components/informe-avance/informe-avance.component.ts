@@ -4,6 +4,8 @@ import { CarritoService, DetalleInformeAvance } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { Subscription } from 'rxjs';
 
+// TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
+// TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
 @Component({
   selector: 'zwc-informe-avance',
   templateUrl: './informe-avance.component.html',
@@ -11,6 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class InformeAvanceComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
+  dataServicios: CarritoService[] = [];
 
   constructor(
     private serviciosFacade: ServiciosFacade,
@@ -57,9 +60,30 @@ export class InformeAvanceComponent implements OnDestroy, OnInit {
                   },
                 ],
               };
-              this.serviciosFacade.addDirectServiceCarrito(new_service);
+              this.dataServicios.push(new_service);
+              // this.serviciosFacade.addDirectServiceCarrito(new_service);
             });
           });
+          let valueInitial: CarritoService[] = [];
+          this.dataServicios = this.dataServicios.reduce((acc, curr) => {
+            let indexService = acc.findIndex(
+              value => value.servicio_id === curr.servicio_id
+            );
+            if (indexService === -1) {
+              acc.push(curr);
+            } else {
+              let temp = [
+                ...acc.map(item => ({
+                  ...item,
+                  unidad_obras: [...item.unidad_obras],
+                })),
+              ];
+              temp[indexService].unidad_obras.push(...curr.unidad_obras);
+              acc[indexService] = temp[indexService];
+            }
+
+            return acc;
+          }, valueInitial);
         }
       })
     );
