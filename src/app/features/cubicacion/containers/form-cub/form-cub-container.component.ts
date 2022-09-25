@@ -526,7 +526,6 @@ export class FormCubContainerComponent
             },
           };
 
-          console.log(request);
           this.cubicacionFacade.editCubicacion(request);
         })
     );

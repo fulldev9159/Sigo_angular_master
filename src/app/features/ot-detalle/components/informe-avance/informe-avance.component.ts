@@ -61,7 +61,7 @@ export class InformeAvanceComponent implements OnDestroy, OnInit {
                 ],
               };
               this.dataServicios.push(new_service);
-              // this.serviciosFacade.addDirectServiceCarrito(new_service);
+              this.serviciosFacade.addDirectServiceCarrito(new_service);
             });
           });
           let valueInitial: CarritoService[] = [];

@@ -30,23 +30,11 @@ interface Dropdown {
 /**
  * @description
  *   FORMULARIO QUE PERMITE AGREGAR UN SERVICIO/UO AL CARRITO
- *   DATOS QUE PERMITE USAR:
- *    - Actividad
- *    - Tipo de servicio
- *       Necesita:
- *          - Actividad (interno en esta clase)
- *          - Contrato marco (se debe obtener por NGRX)
- *    - Servicios
- *          - Actividad (interno en esta clase)
- *          - Agencia (se debe obtener por NGRX)
- *          - SubContrato  (se debe obtener por NGRX)
- *          - Tipo de servicio (interno en esta clase)
- *    - UO de un servicio
- *          - Actividad (interno en esta clase)
- *          - Servicio Cod(interno en esa clase)
- *
- * Datos previos necesarios:
- *     - Actividades de un contrato/agencia/proveedor (NGRX)
+ *   Datos que se deben precargar antes de usar este componente:
+ *       - Actividades -> contratoFacade.getActividadesContratoProveedor(cmarcoproveedor_id)
+ *       - contratoSelected -> this.cubicacionFacade.contratoSelected(contrato)
+ *       - agenciaSelected -> this.cubicacionFacade.agenciaSelected(agencia);
+ *       - proveedorSelected -> this.cubicacionFacade.agenciaSelected(proveedor);
  */
 @Component({
   selector: 'zwc-form-agregar-servicios',
@@ -307,16 +295,19 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
       ])
         .pipe(take(1))
         .subscribe(([proveedorSelected, agenciaSelected, carrito]) => {
+          // DATOS
           const unidad_obra_cod = this.formFilter.get('unidad_obra_cod').value;
           const servicio_id = this.serviciosAgenciaContratoProveedor.find(
             value => value.codigo === this.formFilter.get('servicio_cod').value
           ).id;
 
+          // REGLAS PARA PODER AGREGAR UN SERVICIO
           const servicioExiste = carrito.find(
             servicio =>
               servicio.servicio_id === servicio_id &&
               servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
           );
+
           if (servicioExiste !== undefined) {
             this.serviciosFacade.alertServicioExistenteCarrito(true);
           } else {
