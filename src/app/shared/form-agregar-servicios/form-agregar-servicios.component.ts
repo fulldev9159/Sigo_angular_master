@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -30,11 +31,13 @@ interface Dropdown {
 /**
  * @description
  *   FORMULARIO QUE PERMITE AGREGAR UN SERVICIO/UO AL CARRITO
- *   Datos que se deben precargar antes de usar este componente:
+ *   Datos que se deben precargar con NGRX antes de usar este componente:
  *       - Actividades -> contratoFacade.getActividadesContratoProveedor(cmarcoproveedor_id)
  *       - contratoSelected -> this.cubicacionFacade.contratoSelected(contrato)
  *       - agenciaSelected -> this.cubicacionFacade.agenciaSelected(agencia);
  *       - proveedorSelected -> this.cubicacionFacade.agenciaSelected(proveedor);
+ *   Datos que puede recibir como INPUT:
+ *       - serviciosAdicionales(boolean): Indica si las reglas a usar para agregar servicios son normales o para servicios adicionales
  */
 @Component({
   selector: 'zwc-form-agregar-servicios',
@@ -44,6 +47,7 @@ interface Dropdown {
 })
 export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
+  @Input() serviciosAdicionales = false;
   // DATOS A USAR
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade
     .getActividadesContratoProveedor$()
@@ -300,15 +304,22 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           const servicio_id = this.serviciosAgenciaContratoProveedor.find(
             value => value.codigo === this.formFilter.get('servicio_cod').value
           ).id;
+          const canAddService = this.serviciosAdicionales
+            ? this.passReglasAgregarServiciosAdicionales()
+            : this.passReglasAgregarServicios(
+                carrito,
+                servicio_id,
+                unidad_obra_cod
+              );
 
           // REGLAS PARA PODER AGREGAR UN SERVICIO
-          const servicioExiste = carrito.find(
-            servicio =>
-              servicio.servicio_id === servicio_id &&
-              servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
-          );
+          // const servicioExiste = carrito.find(
+          //   servicio =>
+          //     servicio.servicio_id === servicio_id &&
+          //     servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
+          // );
 
-          if (servicioExiste !== undefined) {
+          if (!canAddService) {
             this.serviciosFacade.alertServicioExistenteCarrito(true);
           } else {
             this.serviciosFacade.alertServicioExistenteCarrito(false);
@@ -324,11 +335,28 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
 
             this.serviciosFacade.addServicioCarrito(
               request_service,
-              this.formFilter.get('unidad_obra_cod').value
+              unidad_obra_cod
             );
           }
         })
     );
+  }
+
+  passReglasAgregarServicios(
+    carrito: CarritoService[],
+    servicio_id: number,
+    unidad_obra_cod: string
+  ): boolean {
+    const servicioExiste = carrito.find(
+      servicio =>
+        servicio.servicio_id === servicio_id &&
+        servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
+    );
+    return servicioExiste === undefined;
+  }
+
+  passReglasAgregarServiciosAdicionales(): boolean {
+    return true;
   }
 
   ngOnDestroy(): void {
