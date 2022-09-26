@@ -247,6 +247,7 @@ export class FormularioComponent implements OnDestroy, OnInit {
               );
             this.cubicacionFacade.proveedorSelected(proveedorSelected);
 
+            window.alert(cmarcoproveedor_id);
             // CALL ACTIVIDADES DEL CONTRATO PROVEEDOR SELECTED
             this.contratoFacade.getActividadesContratoProveedor(
               +cmarcoproveedor_id
