@@ -2,7 +2,7 @@
     <div content>
         <h1>{{editMode?title:'Creación de una nueva Cubicación/Costeo' }}</h1>
         <zwc-formulario #formulario></zwc-formulario>
-        <p-divider align="center">
+        <!-- <p-divider align="center">
             <span class="p-tag">Agregar Servicios</span>
         </p-divider>
         <div class="grid">
@@ -23,8 +23,20 @@
                         [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
                         [sending]="sendingSaveCubicacion$|async" (call)="createCubicacion()"></zwc-pbutton-sending>
                 </ng-template>
-
             </div>
-        </div>
+        </div> -->
+        <zwc-table-agregar-servicios #tableAgregarServicios></zwc-table-agregar-servicios>
+        <ng-container *ngIf="editMode;else createModeButton">
+            <zwc-pbutton-sending Pid="editar-cubicacion" content="Guardar cambios"
+                Pclass="p-button-info p-button-sm mt-4 w-full" [sending]="sendingSaveCubicacion$|async"
+                [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
+                (call)="editarCubicacion()"></zwc-pbutton-sending>
+        </ng-container>
+        <ng-template #createModeButton>
+            <zwc-pbutton-sending Pid="crear-cubicacion" content="Crear nueva cubicación"
+                Pclass="p-button-info p-button-sm mt-4 w-full"
+                [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
+                [sending]="sendingSaveCubicacion$|async" (call)="createCubicacion()"></zwc-pbutton-sending>
+        </ng-template>
     </div>
 </zwc-content-layout>

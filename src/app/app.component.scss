@@ -1,6 +1,11 @@
 :host ::ng-deep {
     .p-tag {
         background-color: #00507A !important;
+        font-weight: 100;
+    }
+
+    .p-divider .p-divider-content {
+        background: transparent;
     }
 
     h1 {
