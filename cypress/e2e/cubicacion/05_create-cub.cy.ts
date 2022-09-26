@@ -70,18 +70,18 @@ describe('Create Cubicacion', () => {
 
     data.items.forEach(item => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
-      cy.wait(150).then(() => {
+      cy.wait(200).then(() => {
         cy._select_dropdown('#select-actividad', item.actividad.toUpperCase());
       });
       cy.get('input[name="input-nombre-cubicacion"]').click();
-      cy.wait(150).then(() => {
+      cy.wait(200).then(() => {
         cy._select_dropdown(
           '#select-tipo-servicio',
           item.tipo_servicio.toUpperCase()
         );
       });
       cy.get('input[name="input-nombre-cubicacion"]').click();
-      cy.wait(150).then(() => {
+      cy.wait(200).then(() => {
         cy._select_dropdown('#select-servicio', item.nombre);
       });
       item.unidad_obras.forEach((uo, index) => {
