@@ -88,6 +88,9 @@ export class ListOtComponent implements OnInit, OnDestroy {
   };
   formRechazoIncial: FormGroup = new FormGroup(this.formRechazoInicialControls);
 
+  comentarioInforme$: Observable<string> =
+    this.otFacade.getComentariosFinalizacionTrabajos$();
+
   formTrabajosFinalizados: FormGroup = new FormGroup({
     informe: new FormControl('', [Validators.required]),
   });
@@ -567,7 +570,12 @@ export class ListOtComponent implements OnInit, OnDestroy {
             onClick: (event: Event, item) => {
               this.idOtSelected = item.id;
               this.etapa = item.etapa_slug;
-              this.displayInformarTrabajosFinalizados = true;
+              this.subscription.add(
+                this.comentarioInforme$.subscribe(value => {
+                  this.formTrabajosFinalizados.get('informe').setValue(value);
+                  this.displayInformarTrabajosFinalizados = true;
+                })
+              );
             },
           });
         }

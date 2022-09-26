@@ -97,6 +97,9 @@ export class GenararActaComponent implements OnInit, OnDestroy {
     all: new FormControl(false),
   });
 
+  comentarioInforme$: Observable<string> = this.otFacade
+    .getComentariosFinalizacionTrabajos$()
+    .pipe(map(value => value.replace(/\n/g, '<br>')));
   tipoRechazo$: Observable<MotivoRechazo[]> = of([]);
 
   totalSadicionales = 0;

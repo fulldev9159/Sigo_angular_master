@@ -145,6 +145,11 @@
         <span>{{totalSadicionales+totalUadicionales+totalServicios+totalUO| currency : 'CLP' : '$':'.0-2':'es-CL'}}</span>
       </div>
   
+
+<div style="width: 100%;margin-left: 35px"><h2> Informe de trabajos terminados</h2>
+  <p [outerHTML]="comentarioInforme$|async"></p></div>
+      
+
         <div class="col-xs-12 col-md-12">
           <div style="text-align: right">
             <!-- <ng-container *ngIf="saving; else noSaving">
