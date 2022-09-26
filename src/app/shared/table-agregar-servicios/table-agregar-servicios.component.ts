@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
 import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-table-services.component';
 
@@ -8,6 +8,8 @@ import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-t
   styleUrls: ['./table-agregar-servicios.component.scss'],
 })
 export class TableAgregarServiciosComponent {
+  @Input() mode: string;
+
   @ViewChild('agregarServiciosForm', {
     read: FormAgregarServiciosComponent,
     static: false,

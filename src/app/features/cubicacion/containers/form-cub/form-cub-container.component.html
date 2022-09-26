@@ -2,7 +2,7 @@
     <div content>
         <h1>{{editMode?title:'Creación de una nueva Cubicación/Costeo' }}</h1>
         <zwc-formulario #formulario></zwc-formulario>
-        <zwc-table-agregar-servicios #tableAgregarServicios></zwc-table-agregar-servicios>
+        <zwc-table-agregar-servicios #tableAgregarServicios mode="Cubicacion"></zwc-table-agregar-servicios>
         <ng-container *ngIf="editMode;else createModeButton">
             <zwc-pbutton-sending Pid="editar-cubicacion" content="Guardar cambios"
                 Pclass="p-button-info p-button-sm mt-4 w-full" [sending]="sendingSaveCubicacion$|async"

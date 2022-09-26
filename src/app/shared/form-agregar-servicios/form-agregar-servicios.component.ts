@@ -37,7 +37,10 @@ interface Dropdown {
  *       - agenciaSelected -> this.cubicacionFacade.agenciaSelected(agencia);
  *       - proveedorSelected -> this.cubicacionFacade.agenciaSelected(proveedor);
  *   Datos que puede recibir como INPUT:
- *       - serviciosAdicionales(boolean): Indica si las reglas a usar para agregar servicios son normales o para servicios adicionales
+ *       - mode: Hasta ahora solo existen 2 modos para agregar servicios al carrito. Si es para crear una cubicacion se llama
+ *       "mode: Cubicacion" donde existe una unica regla.
+ *       También existe el agregar servicios adicionales que tiene más reglas y mensajes asociados llamada
+ *      "mode: ServiciosAdicionales"
  */
 @Component({
   selector: 'zwc-form-agregar-servicios',
@@ -47,7 +50,7 @@ interface Dropdown {
 })
 export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
-  @Input() serviciosAdicionales = false;
+  @Input() mode: string;
   // DATOS A USAR
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade
     .getActividadesContratoProveedor$()
@@ -304,17 +307,18 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           const servicio_id = this.serviciosAgenciaContratoProveedor.find(
             value => value.codigo === this.formFilter.get('servicio_cod').value
           ).id;
-          const canAddService = this.serviciosAdicionales
-            ? this.passReglasAgregarServiciosAdicionales()
-            : this.passReglasAgregarServicios(
-                carrito,
-                servicio_id,
-                unidad_obra_cod
-              );
+          const canAddService =
+            this.mode === 'ServiciosAdicionales'
+              ? this.passReglasAgregarServiciosAdicionales()
+              : this.passReglasAgregarServicios(
+                  carrito,
+                  servicio_id,
+                  unidad_obra_cod
+                );
 
           // REGLAS PARA PODER AGREGAR UN SERVICIO
           // const servicioExiste = carrito.find(
-          //   servicio =>
+          //   servicio =>8
           //     servicio.servicio_id === servicio_id &&
           //     servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
           // );
