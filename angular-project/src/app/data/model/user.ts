@@ -15,6 +15,8 @@ export interface ModelUsuario {
   rut: string;
   updated_at: Date;
   username: string;
+  guia_subgrupo_id: number;
+  delegated_auth: boolean;
 }
 
 export interface ModelProxy {
@@ -129,6 +131,9 @@ export interface RequestCreateUser {
   email: string;
   estado: boolean;
   contratos_marco: number[];
+  guia_subgrupo_id: number;
+  delegated_auth: boolean;
+  password?: string;
 }
 
 export interface RequestUpdateUser {
@@ -141,6 +146,9 @@ export interface RequestUpdateUser {
     proveedor_id: number;
     area_id: number;
     email: string;
+    guia_subgrupo_id: number;
+    delegated_auth: boolean;
+    password?: string;
   };
   contratos_marco: number[];
 }

@@ -29,6 +29,7 @@ export * from './agencia';
 export * from './actividad';
 export * from './rol';
 export * from './acta';
+export * from './guia-subgrupo';
 
 export interface Response<T> {
   data: T;

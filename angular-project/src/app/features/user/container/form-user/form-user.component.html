@@ -108,6 +108,39 @@
                 <hr>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-6 col-xs-12">
+                <div id="guia-subgrupo-select">
+                  <app-select [control]="formControls.guia_subgrupo_id" label="* Guía Subgrupo">
+                    <ng-container options>
+                      <option value="null" selected disabled>Seleccione subgrupo</option>
+                      <ng-container *ngFor="let grupo of (guiasSubgrupo$ | async)">
+                        <option [value]="grupo.id">
+                          {{ grupo.descripcion }}
+                        </option>
+                      </ng-container>
+                    </ng-container>
+                  </app-select>
+                </div>
+                <br>
+                <p-checkbox [formControl]="formControls.delegated_auth" label="Autenticar en GUIA" value="true"></p-checkbox>
+                <ng-container *ngIf="formControls.delegated_auth.value.length === 0">
+                  <br>
+                  <app-input [control]="formControls.password" [Type]="showPassword ? 'text': 'password'" [label]="usuario_id === null ? 'Password': 'Nueva Password'" Name="Password"></app-input>
+                  <ng-container *ngIf="showPassword">
+                    <a style="cursor: pointer" (click)="showPassword = false">Ocultar contraseña</a>
+                  </ng-container>
+                  <ng-container *ngIf="!showPassword">
+                    <a style="cursor: pointer" (click)="showPassword = true">Mostrar contraseña</a>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <hr>
+              </div>
+            </div>
             <div class="row justify-content-center">
               <div class="col-md-6 col-xs-12">
                 <label for="">Contratos con los que puede trabajar</label>
@@ -183,7 +216,6 @@
 
   </app-card>
 </div>
-
 
 <app-modal [display]="DisplayPermisosModal" (CloseEvent)="DisplayPermisosModal=false">
   <ng-container modal-header-title>Lista de Permisos del perfil</ng-container>

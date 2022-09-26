@@ -34,6 +34,10 @@ export const getDisplayDetalleModal = createSelector(
   (state: fromUser.StateUser) => state.displayDetalleModal
 );
 
+export const getAllGuiasSubgrupo = createSelector(
+  selectUser,
+  (state: fromUser.StateUser) => state.guiasSubgrupo
+);
 export const getAllProveedores4CreateUser = createSelector(
   selectUser,
   (state: fromUser.StateUser) => state.proveedores4createUser

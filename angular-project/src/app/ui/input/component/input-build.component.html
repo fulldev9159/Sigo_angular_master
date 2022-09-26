@@ -1,4 +1,4 @@
-<ng-container *ngIf="Type==='text'">
+<ng-container *ngIf="Type==='text' || Type==='password'">
   <input [formControl]="control" class="form-control" type="{{ Type }}" name="{{Name}}">
 </ng-container>
 <ng-container *ngIf="Type==='number-currency'">

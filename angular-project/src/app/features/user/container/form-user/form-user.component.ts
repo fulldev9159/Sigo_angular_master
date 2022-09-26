@@ -10,6 +10,7 @@ import { ProfileFacade } from '@storeOT/features/profile/profile.facade';
 import * as _ from 'lodash';
 import {
   Area,
+  GuiaSubgrupo,
   ModelProveedor,
   RequestCreateUser,
   ContratosUser,
@@ -28,8 +29,15 @@ export class FormUserComponent implements OnInit, OnDestroy {
   DisplayPermisosModal = false;
   ModalDataPermissions = [];
 
+  showPassword = false;
   formControls = {
     id: new FormControl(null),
+    guia_subgrupo_id: new FormControl(null, [
+      Validators.required,
+      this.noWhitespace,
+    ]),
+    delegated_auth: new FormControl(['true'], []),
+    password: new FormControl('', []),
     username: new FormControl(null, [
       Validators.required,
       this.noWhitespace,
@@ -68,6 +76,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
 
   formUser: FormGroup = new FormGroup(this.formControls);
 
+  guiasSubgrupo$: Observable<GuiaSubgrupo[]>;
   proveedores4createUser$: Observable<ModelProveedor[]>;
   areas4createUser$: Observable<Area[]>;
   posiblesContractosUser$: Observable<PosiblesContratosUser[]>;
@@ -119,6 +128,12 @@ export class FormUserComponent implements OnInit, OnDestroy {
             this.formUser.get('email').setValue(userSelected.email);
             this.formUser.get('rut').setValue(userSelected.rut);
             this.formUser.get('celular').setValue(userSelected.celular);
+            this.formUser
+              .get('guia_subgrupo_id')
+              .setValue(userSelected.guia_subgrupo_id);
+            this.formUser
+              .get('delegated_auth')
+              .setValue(userSelected.delegated_auth ? ['true'] : []);
 
             // ToDO: Que el endpoint de get proveedores retorne si este es interno o externo
             // const proveedor = proveedores.find(proveedor=>{proveedor.id===user.proveedor_id})
@@ -163,6 +178,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   initObservables(): void {
+    this.guiasSubgrupo$ = this.userFacade.getAllGuiasSubgrupo$();
     this.proveedores4createUser$ =
       this.userFacade.getAllProveedores4CreateUser$();
     this.areas4createUser$ = this.userFacade
@@ -213,6 +229,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
     this.initProveerdorFromControlEvent();
     this.initAreaFormControlEvent();
     this.initSuperiorFromControlEvent();
+    this.initDelegatedAuthFormControlEvent();
   }
 
   initProviderRadioFormControlEvent(): void {
@@ -292,6 +309,38 @@ export class FormUserComponent implements OnInit, OnDestroy {
     );
   }
 
+  initDelegatedAuthFormControlEvent(): void {
+    this.subscription.add(
+      this.formUser.get('delegated_auth').valueChanges.subscribe(value => {
+        if (this.usuario_id === null) {
+          if (value.length > 0) {
+            this.formUser.get('password').clearValidators();
+          } else {
+            this.formUser
+              .get('password')
+              .setValidators([
+                Validators.required,
+                this.noWhitespace,
+                Validators.maxLength(100),
+              ]);
+          }
+        } else {
+          if (value.length > 0) {
+            this.formUser.get('password').clearValidators();
+          } else {
+            this.formUser
+              .get('password')
+              .setValidators([
+                this.noWhitespaceIfHasValue,
+                Validators.maxLength(100),
+              ]);
+          }
+        }
+        this.formUser.get('password').updateValueAndValidity();
+      })
+    );
+  }
+
   //  --- ENABLED ---
   checkAreaAndEnable(areas: Area[]): void {
     if (areas.length > 0) {
@@ -348,6 +397,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   // --- INIT DATA ---
   initData(): void {
     this.userFacade.getAllProveedores4CreateUser(true);
+    this.userFacade.getAllGuiasSubgrupo();
     // this.profileFacade.getProfile();
   }
 
@@ -357,7 +407,18 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   noWhitespace(control: FormControl): any {
-    const isWhitespace = (control.value || '').trim().length === 0;
+    const value = `${control.value || ''}`;
+    const isWhitespace = value.trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { whitespace: true };
+  }
+
+  noWhitespaceIfHasValue(control: FormControl): any {
+    const value = `${control.value || ''}`;
+    if (value.length === 0) {
+      return null;
+    }
+    const isWhitespace = value.trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { whitespace: true };
   }
@@ -387,21 +448,10 @@ export class FormUserComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
-    const request: RequestCreateUser = {
-      username: this.formUser.get('username').value,
-      nombres: this.formUser.get('nombres').value,
-      apellidos: this.formUser.get('apellidos').value,
-      rut: this.formUser.get('rut').value,
-      celular: this.formUser.get('celular').value,
-      email: this.formUser.get('email').value,
-      proveedor_id: +this.formUser.get('proveedor_id').value,
-      area_id: +this.formUser.get('area_id').value,
-      contratos_marco: this.formUser.get('contratos_marco').value,
-      estado: true,
-    };
-
-    console.log(request);
     if (this.formUser.get('id').value !== null) {
+      const delegated_auth =
+        this.formUser.get('delegated_auth').value.length > 0;
+      const newPassword = this.formUser.get('password').value;
       const updateRequest: RequestUpdateUser = {
         usuario_id: this.usuario_id,
         values: {
@@ -412,6 +462,13 @@ export class FormUserComponent implements OnInit, OnDestroy {
           email: this.formUser.get('email').value,
           proveedor_id: +this.formUser.get('proveedor_id').value,
           area_id: +this.formUser.get('area_id').value,
+          guia_subgrupo_id: +this.formUser.get('guia_subgrupo_id').value,
+          delegated_auth,
+          password: delegated_auth
+            ? undefined
+            : newPassword.length > 0
+            ? newPassword
+            : undefined,
         },
         contratos_marco: this.formUser.get('contratos_marco').value,
       };
@@ -426,6 +483,27 @@ export class FormUserComponent implements OnInit, OnDestroy {
       // // ToDo: Esto es un WA para que no se habra el modal
       // this.userFacade.SetDisplayDetalleModal(false);
     } else {
+      const delegated_auth =
+        this.formUser.get('delegated_auth').value.length > 0;
+      const request: RequestCreateUser = {
+        username: this.formUser.get('username').value,
+        nombres: this.formUser.get('nombres').value,
+        apellidos: this.formUser.get('apellidos').value,
+        rut: this.formUser.get('rut').value,
+        celular: this.formUser.get('celular').value,
+        email: this.formUser.get('email').value,
+        proveedor_id: +this.formUser.get('proveedor_id').value,
+        area_id: +this.formUser.get('area_id').value,
+        contratos_marco: this.formUser.get('contratos_marco').value,
+        estado: true,
+        guia_subgrupo_id: +this.formUser.get('guia_subgrupo_id').value,
+        delegated_auth,
+        password: delegated_auth
+          ? undefined
+          : this.formUser.get('password').value,
+      };
+
+      console.log(request);
       this.userFacade.createUser(request);
     }
   }
@@ -433,4 +511,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
   // onUpload(event: any): void {}
 
   // onDeleteFile(event: any): void {}
+  get values(): any {
+    return this.formUser.getRawValue();
+  }
 }

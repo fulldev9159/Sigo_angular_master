@@ -19,6 +19,7 @@ import {
   PosiblesContratosUser,
   ModelProveedor,
   PerfilesUser,
+  GuiaSubgrupo,
 } from '@data';
 
 // GET ALL USER
@@ -123,6 +124,21 @@ export const editarSuperiorPerfilUsuarioSuccess = createAction(
 
 export const editarSuperiorPerfilUsuarioError = createAction(
   '[User] GET editarSuperiorPerfilUsuario Error',
+  props<{ error: any }>()
+);
+
+// GET ALL GUIAS SUBGRUPO
+export const getAllGuiasSubgrupo = createAction(
+  '[User] GET getAllGuiasSubgrupo'
+);
+
+export const getAllGuiasSubgrupoSuccess = createAction(
+  '[User] GET getAllGuiasSubgrupo Success',
+  props<{ response: Response<{ items: GuiaSubgrupo[] }> }>()
+);
+
+export const getAllGuiasSubgrupoError = createAction(
+  '[User] GET getAllGuiasSubgrupo Error',
   props<{ error: any }>()
 );
 
