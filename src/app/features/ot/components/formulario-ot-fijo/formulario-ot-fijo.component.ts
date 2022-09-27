@@ -48,8 +48,8 @@ export class FormularioOtFijoComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // TODO: CONFIRMAR SI SE DEBE RESTRINGIR QUE EXISTA UN NUMERO UNICO
-    // TODO: CONFIRMAR SI AL CAMBIAR DE TIPO DE NUMERO SE DEBE RESETEAR TODOS LOS NUMEROS
+    // 78 TODO: CONFIRMAR SI SE DEBE RESTRINGIR QUE EXISTA UN NUMERO UNICO
+    // 79 TODO: CONFIRMAR SI AL CAMBIAR DE TIPO DE NUMERO SE DEBE RESETEAR TODOS LOS NUMEROS
     this.form.get('numero_interno').disable();
     this.numeroInternoFacade.getTipoDeNumeroInterno();
 

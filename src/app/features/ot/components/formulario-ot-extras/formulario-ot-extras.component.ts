@@ -7,7 +7,7 @@ import { OTFacade } from '@storeOT/ot/ot.facades';
 import { ProyectosFacade } from '@storeOT/proyectos/proyectos.facades';
 import { map, Observable, Subscription } from 'rxjs';
 
-// TODO: MIGRAR VALIDACIONES DE FECHA
+// 77 TODO: MIGRAR VALIDACIONES DE FECHA
 @Component({
   selector: 'zwc-formulario-ot-extras',
   templateUrl: './formulario-ot-extras.component.html',

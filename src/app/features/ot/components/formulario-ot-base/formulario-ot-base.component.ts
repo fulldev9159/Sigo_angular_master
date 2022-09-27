@@ -99,7 +99,7 @@ export class FormularioOtBaseComponent implements OnInit, OnDestroy {
           )[0];
           this.otFacade.cubicacionSelected(cubicacionSelected);
 
-          // TODO: MEJORAR COMO SE LLAMA AL GET PMO DEPENDIENDO DEL CONTRATO
+          // 76 TODO: MEJORAR COMO SE LLAMA AL GET PMO DEPENDIENDO DEL CONTRATO
           if (
             cubicacionSelected &&
             cubicacionSelected.tipo_contrato_marco_nombre !== 'Móvil'

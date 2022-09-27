@@ -21,8 +21,8 @@ import { map, Observable, Subscription } from 'rxjs';
 export class ListOtTableOperacionesComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
 
-  // TODO: MIGRAR INFORMACIONES
-  // TODO: MIGRAR AGREGAR REGISTRO LIBRO DE OBRAS
+  // 83 TODO: MIGRAR INFORMACIONES
+  // 84 TODO: MIGRAR AGREGAR REGISTRO LIBRO DE OBRAS
   // TODO: MIGRAR VER LIBRO DE OBRAS
   // TODO: PROBAR COMPORTAMIENTO CON MAS DE UNA OT
   // TODO: CORREGIR COMO SE VE EL TOOLTIP DEL AGREGAR REGISTRO LIBRO DE OBRAS

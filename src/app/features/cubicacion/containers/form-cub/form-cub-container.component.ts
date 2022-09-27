@@ -521,7 +521,7 @@ export class FormCubContainerComponent
               proveedor_id: proveedorSelected.id,
               codigo_acuerdo: proveedorSelected.codigo_acuerdo,
               cmarco_has_proveedor_id: cmarcoproveedor_id,
-              usuario_creador_id: +this.sessionData.usuario_id, // TODO: CONFIRMAR SI DEBERÏA SER EL USUARIO QUE LO CREO O EL USUARIO QUE ESTÄ EDITANDO
+              usuario_creador_id: +this.sessionData.usuario_id, // 72 TODO: CONFIRMAR SI DEBERÏA SER EL USUARIO QUE LO CREO O EL USUARIO QUE ESTÄ EDITANDO
               direccion_desde: direcciondesde,
               altura_desde: direcciondesdealtura,
               direccion_hasta: direccionhasta,
