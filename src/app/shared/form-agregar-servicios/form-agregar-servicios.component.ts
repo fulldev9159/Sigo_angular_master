@@ -37,10 +37,10 @@ interface Dropdown {
  *       - agenciaSelected -> this.cubicacionFacade.agenciaSelected(agencia);
  *       - proveedorSelected -> this.cubicacionFacade.agenciaSelected(proveedor);
  *   Datos que puede recibir como INPUT:
- *       - mode: Hasta ahora solo existen 2 modos para agregar servicios al carrito. Si es para crear una cubicacion se llama
- *       "mode: Cubicacion" donde existe una unica regla.
+ *       - reglasDeAgregacion: Hasta ahora solo existen 2 modos para agregar servicios al carrito. Si es para crear una cubicacion se llama
+ *       "reglasDeAgregacion: Cubicacion" donde existe una unica regla.
  *       También existe el agregar servicios adicionales que tiene más reglas y mensajes asociados llamada
- *      "mode: ServiciosAdicionales"
+ *      "reglasDeAgregacion: ServiciosAdicionales"
  */
 @Component({
   selector: 'zwc-form-agregar-servicios',
@@ -50,7 +50,7 @@ interface Dropdown {
 })
 export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
-  @Input() mode: string;
+  @Input() reglasDeAgregacion: string;
   // DATOS A USAR
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade
     .getActividadesContratoProveedor$()
@@ -308,7 +308,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
             value => value.codigo === this.formFilter.get('servicio_cod').value
           ).id;
           const canAddService =
-            this.mode === 'ServiciosAdicionales'
+            this.reglasDeAgregacion === 'ServiciosAdicionales'
               ? this.passReglasAgregarServiciosAdicionales()
               : this.passReglasAgregarServicios(
                   carrito,

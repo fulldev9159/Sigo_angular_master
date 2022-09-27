@@ -8,7 +8,7 @@ import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-t
   styleUrls: ['./table-agregar-servicios.component.scss'],
 })
 export class TableAgregarServiciosComponent {
-  @Input() mode: string;
+  @Input() reglasDeAgregacion: string;
 
   @ViewChild('agregarServiciosForm', {
     read: FormAgregarServiciosComponent,
