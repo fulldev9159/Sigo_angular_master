@@ -251,7 +251,8 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           proveedorSelected !== null &&
           tipo_servicio_id &&
           tipo_servicio_id !== null &&
-          tipo_servicio_id_change
+          tipo_servicio_id_change &&
+          +this.formFilter.get('actividad_id').value !== 0
         ) {
           let request: RequestGetServicioTipoAgenciaContratoProveedor = {
             actividad_id: +this.formFilter.get('actividad_id').value,

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./menu-detalle-ot.component.scss'],
 })
 export class MenuDetalleOtComponent {
-  // TODO: PROGRAMAR QUE OCURRE SI FALLA EL GET DETALLE OT
+  // 67 TODO: PROGRAMAR QUE OCURRE SI FALLA EL GET DETALLE OT
   otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
 
   constructor(private otDetalleFacade: OTDetalleFacade) {}

@@ -87,6 +87,7 @@ declare namespace Cypress {
     _select_profile(profile: string): void;
     _check_input(selector: string, validator: string): void;
     _check_dropdown_required(selector: string): void;
+    _check_dropdown_data(selector: string, data: any, order: string): void;
     _select_dropdown(selector: string, item: string): void;
     _check_table_cub_service_uo(servicio_uo: DATA_TABLE_SERVICE_UO): void;
     _check_table_cub_uo(uo: DATA_TABLE_UO): void;
@@ -146,6 +147,7 @@ Cypress.Commands.add('_check_input', (selector, validator) => {
 });
 
 Cypress.Commands.add('_check_dropdown_required', selector => {
+  cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
   cy.get(selector).click();
   cy.get(selector).click();
   cy.get(selector + '+zwc-input-alert>small').contains(
@@ -153,7 +155,34 @@ Cypress.Commands.add('_check_dropdown_required', selector => {
   );
 });
 
+Cypress.Commands.add('_check_dropdown_data', (selector, data, order) => {
+  let indexSplit = order.split('.');
+  indexSplit.length;
+  let datos = data
+    .sort((a: any, b: any) => {
+      let indexSplit = order.split('.');
+      if (indexSplit.length === 1)
+        return a[indexSplit[0]] > b[indexSplit[0]] ? 1 : -1;
+      if (indexSplit.length === 2)
+        return a[indexSplit[0]][indexSplit[1]] > b[indexSplit[0]][indexSplit[1]]
+          ? 1
+          : -1;
+      return a;
+    })
+    .map((value: any) => {
+      let indexSplit = order.split('.');
+      if (indexSplit.length === 1) return value[indexSplit[0]];
+      if (indexSplit.length === 2) return value[indexSplit[0]][indexSplit[1]];
+    });
+  cy.get(selector).click();
+  cy.get('li.p-ripple').each(($el, index, $list) => {
+    expect($el.text()).eq(datos[index]);
+  });
+  cy.get(selector).click();
+});
+
 Cypress.Commands.add('_select_dropdown', (selector, item) => {
+  cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
   cy.get(selector).click().contains('ul li > span', item).click();
 });
 
@@ -222,27 +251,18 @@ Cypress.Commands.add('_change_cantidad_uo', (column, uo_cod, cantidad) => {
 Cypress.Commands.add(
   '_add_service_carrito',
   (actividad: string, tipo_servicio: string, servicio: string, uo: string) => {
-    cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.wait(1000).then(() => {
-      cy._select_dropdown('#select-actividad', actividad);
-    });
-    cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.wait(1000).then(() => {
-      cy._select_dropdown('#select-tipo-servicio', tipo_servicio);
-    });
-    cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.wait(1000).then(() => {
-      cy._select_dropdown('#select-servicio', servicio);
-    });
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-actividad', actividad);
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-tipo-servicio', tipo_servicio);
 
-    cy.get('input[name="input-nombre-cubicacion"]').click();
-    cy.wait(1000).then(() => {
-      cy._select_dropdown('#select-unidad-obra', uo);
-      cy.get('input[name="input-nombre-cubicacion"]').click();
-      cy.wait(1000).then(() => {
-        cy.get('#agregar-button').click();
-      });
-    });
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-servicio', servicio);
+
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy._select_dropdown('#select-unidad-obra', uo);
+    cy.get('body').trigger('keydown', { keyCode: 27 });
+    cy.get('#agregar-button').click();
   }
 );
 
