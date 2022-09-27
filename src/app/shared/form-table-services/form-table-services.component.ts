@@ -30,6 +30,13 @@ interface ServiceTableCarrito {
     }
   ];
 }
+
+/**
+ * @description
+ *   PERMITE CREAR UNA TABLA CON LOS DATOS DE LOS SERVICIOS.
+ *   los datos desplegados pueden ser a manejados por el reducer carrito para poder agregar o quitar servicios o por data fija de la que solo se puede modiicar su cantidad
+ *
+ */
 @Component({
   selector: 'zwc-form-table-services',
   templateUrl: './form-table-services.component.html',
@@ -39,6 +46,7 @@ interface ServiceTableCarrito {
 export class FormTableServicesComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
   @Input() data: CarritoService[] = null;
+
   carrito$: Observable<CarritoService[]> = of([]);
   totalServicios = 0;
   totalUOs = 0;

@@ -37,6 +37,8 @@
 
 </p-dialog>
 
+
+<!-- OT_ET_AUTORIZACION_INICIAL -->
 <p-dialog header="Aceptación Incial de la OT" [(visible)]="displayModalAceptarInicial" [draggable]="false"
     [modal]="true">
     Order de trabajo ID: {{ot_id}}
@@ -51,6 +53,8 @@
     <zwc-view-rechazo></zwc-view-rechazo>
 </p-dialog>
 
+
+<!-- OT_ET_AUTORIZACION_PROVEEDOR -->
 <p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false"
     [modal]="true" [style]="{heigth: '50vh'}">
     <p> Order de trabajo ID: {{ot_id}}</p>
