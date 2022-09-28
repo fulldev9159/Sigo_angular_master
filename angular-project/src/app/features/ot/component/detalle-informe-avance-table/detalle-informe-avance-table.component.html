@@ -36,8 +36,8 @@
             <ng-container *ngFor="let servicio of detalle.many_informe_has_servicio; let servicioIndex = index">
               <ng-container *ngIf="servicio.many_informe_has_uob.length === 1">
                 <tr>
-                  <td class="label-table">{{ servicio.model_servicio_id.codigo }}</td>
-                  <td class="data-primaria">{{ servicio.model_servicio_id.descripcion }}</td>
+                  <td class="label-table">{{ servicio.numero_producto }}</td>
+                  <td class="data-primaria">{{servicio.adicional_aceptacion_estado!=='ORIGINAL'?'SERVICIO ADICIONAL - ':''}} {{ servicio.model_servicio_id.descripcion }}</td>
                   <td>{{ servicio.cantidad }}</td>
                   <td>{{ servicio.model_unidad_id.codigo }}</td>
                   <td *ngIf="(sessionData$|async)?.nombre_perfil_select==='Administrador EECC'">{{ +servicio.valor_unitario_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>
@@ -56,8 +56,8 @@
 
               <ng-container *ngIf="servicio.many_informe_has_uob.length > 1">
                 <tr>
-                  <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="label-table">{{ servicio.model_servicio_id.codigo }}</td>
-                  <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="data-primaria">{{ servicio.model_servicio_id.descripcion }}</td>
+                  <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="label-table">{{ servicio.numero_producto }}</td>
+                  <td [attr.rowspan]="+servicio.many_informe_has_uob.length" class="data-primaria">{{servicio.adicional_aceptacion_estado!=='ORIGINAL'?'SERVICIO ADICIONAL - ':''}}{{ servicio.model_servicio_id.descripcion }}</td>
                   <td [attr.rowspan]="+servicio.many_informe_has_uob.length">{{ servicio.cantidad }}</td>
                   <td [attr.rowspan]="+servicio.many_informe_has_uob.length">{{ servicio.model_unidad_id.codigo }}</td>
                   <td [attr.rowspan]="+servicio.many_informe_has_uob.length" *ngIf="(sessionData$|async)?.nombre_perfil_select==='Administrador EECC'">{{ +servicio.valor_unitario_clp| currency : 'CLP' : '$':'.0-2':'es-CL'}}</td>

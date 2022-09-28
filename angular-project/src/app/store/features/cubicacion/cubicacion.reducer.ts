@@ -278,17 +278,32 @@ export const reducerCubicacion = createReducer(
             }
           }
         } else {
-          return {
-            ...state,
-            carritoAdicionales: [
-              ...state.carritoAdicionales,
-              {
-                ...item_carrito,
-                adicional: 'NUEVO ADICIONAL',
-                dummy: true,
-              },
-            ],
-          };
+          console.log(state.carritoAdicionales[indexServicioOriginal]);
+
+          const uo_repetido = state.carritoAdicionales[
+            indexServicioOriginal
+          ].unidades_obras.find(
+            uo => uo.uo_codigo === item_carrito.unidades_obras[0].uo_codigo
+          );
+
+          if (uo_repetido) {
+            return {
+              ...state,
+              servciouo_repetido_alert: true,
+            };
+          } else {
+            return {
+              ...state,
+              carritoAdicionales: [
+                ...state.carritoAdicionales,
+                {
+                  ...item_carrito,
+                  adicional: 'NUEVO ADICIONAL',
+                  dummy: true,
+                },
+              ],
+            };
+          }
         }
       } else {
         // NUEVO ADICIONAL SIN SERVICIO ORIGINAL EXISTENTE

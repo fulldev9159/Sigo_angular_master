@@ -8,6 +8,7 @@ export interface ActaTipoPago {
 }
 
 export interface DetalleActaServicio {
+  servicio_numero_producto: string;
   adicional_aceptacion_estado: string;
   cantidad_total: number;
   evidencia_id: any;

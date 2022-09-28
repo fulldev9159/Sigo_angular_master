@@ -252,6 +252,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
               adicional: data_servicio.adicional_aceptacion_estado,
 
               servicio_codigo: data_servicio.numero_producto,
+              numero_producto: data_servicio.numero_producto,
               servicio_id: data_servicio.servicio_id,
               servicio_nombre: data_servicio.model_servicio_id.descripcion,
               servicio_precio_final_clp: data_servicio.valor_unitario_clp,

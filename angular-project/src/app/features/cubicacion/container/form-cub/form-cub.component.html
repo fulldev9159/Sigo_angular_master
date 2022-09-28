@@ -221,7 +221,7 @@
               <ng-container *ngFor="let item of carrito$|async;let i = index" [formGroupName]="i">
                 <ng-container *ngIf="item.unidades_obras.length===1">
                   <tr>
-                    <td class="label-table">{{item.servicio_codigo}}</td>
+                    <td class="label-table">{{item.numero_producto}}</td>
                     <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                     <td class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
                     <td [ngClass]="item.precargado?'existente':'noexistente'">
@@ -273,7 +273,7 @@
 
                 <ng-container *ngIf="item.unidades_obras.length>1">
                   <tr>
-                    <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
+                    <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.numero_producto}}</td>
                     <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                     <td [attr.rowspan]="+item.unidades_obras.length" class="data-secundaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.tipo_servicio_descripcion|titlecase}}</td>
                     <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">

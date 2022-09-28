@@ -20,7 +20,7 @@
                 <ng-container *ngIf="form.get('unidades_obra') as unidadesObra">
                   <ng-container *ngFor="let servicio of servicios.controls">
                     <tr>
-                      <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
+                      <td class="label-table">{{ servicio.get('numero_producto').value }}</td>
                       <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
                       <td>{{ servicio.get('adicional_aceptacion_estado').value }}</td>
                       <td style="text-align: right">{{ servicio.get('cantidad_a_enviar').value }}</td>

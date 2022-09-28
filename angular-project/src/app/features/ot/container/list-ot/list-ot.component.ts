@@ -539,22 +539,22 @@ export class ListOtComponent implements OnInit, OnDestroy {
 
         // ADMIN SOLICITA AL TRABAJADOR QUE INFORME DE TRABAJOS FINALIZADOS
         // ES EN LA ETAPA GENERAR NUEVA ACTA
-        const solicitarInformeTrabajosFinalizados = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_SOLIC_INF_TRABAJO_FIN'
-        );
+        // const solicitarInformeTrabajosFinalizados = (ot.acciones || []).find(
+        //   accion => accion.slug === 'OT_SOLIC_INF_TRABAJO_FIN'
+        // );
 
-        if (solicitarInformeTrabajosFinalizados) {
-          actions.push({
-            icon: 'p-button-icon pi pi-file-excel',
-            class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Solicitar informe trabajos finalizados',
-            onClick: (event: Event, item) => {
-              this.idOtSelected = item.id;
-              this.etapa = item.etapa_slug;
-              this.displaySolicitarInformeTrabajosFinalizados = true;
-            },
-          });
-        }
+        // if (solicitarInformeTrabajosFinalizados) {
+        //   actions.push({
+        //     icon: 'p-button-icon pi pi-file-excel',
+        //     class: 'p-button-rounded p-button-success p-mr-2',
+        //     label: 'Solicitar informe trabajos finalizados',
+        //     onClick: (event: Event, item) => {
+        //       this.idOtSelected = item.id;
+        //       this.etapa = item.etapa_slug;
+        //       this.displaySolicitarInformeTrabajosFinalizados = true;
+        //     },
+        //   });
+        // }
 
         // SUPERVISOR DE TRABAJOS DEBE INGRESAR UN INFORME DE TRABAJOS FINALIZADOS
         // ESTA ES UNA NUEVA ETAPA OT_ET_PAGO_INFORMAR_TRABAJOS_FINALIZADOS
@@ -876,6 +876,7 @@ export class ListOtComponent implements OnInit, OnDestroy {
       observacion: this.formRechazoIncial.get('motivo').value,
       tipo: +this.formRechazoIncial.get('tipo_id').value,
     };
+    this.displayAprobarInformeAvanceModal = false;
     this.otFacade.AceptarRechazarInformeAvanceOT(request);
     this.responsable = 'TODAS';
     this.tipoOT = 0;

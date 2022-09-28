@@ -212,6 +212,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
           new FormGroup({
             id: new FormControl(`${servicio.id}`, []),
             servicio_codigo: new FormControl(`${servicio.servicio_codigo}`, []),
+            numero_producto: new FormControl(
+              `${servicio.servicio_numero_producto}`,
+              []
+            ),
             descripcion: new FormControl(
               `${servicio.servicio_descripcion}`,
               []
@@ -351,6 +355,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
                 `${servicio.servicio_codigo}`,
                 []
               ),
+              numero_producto: new FormControl(
+                `${servicio.servicio_numero_producto}`,
+                []
+              ),
               descripcion: new FormControl(
                 `${servicio.servicio_descripcion}`,
                 []
@@ -427,6 +435,10 @@ export class GenararActaComponent implements OnInit, OnDestroy {
               id: new FormControl(`${servicio.id}`, []),
               servicio_codigo: new FormControl(
                 `${servicio.servicio_codigo}`,
+                []
+              ),
+              numero_producto: new FormControl(
+                `${servicio.servicio_numero_producto}`,
                 []
               ),
               descripcion: new FormControl(

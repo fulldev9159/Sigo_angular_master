@@ -194,7 +194,7 @@
                           index: {{i}} -->
                           <ng-container *ngIf="item.unidades_obras.length===1 && item.adicional!=='ORIGINAL'">
                             <tr>
-                              <td class="label-table">{{item.servicio_codigo}}</td>
+                              <td class="label-table">{{item.numero_producto}}</td>
                               <td class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                               <td [ngClass]="item.precargado?'existente':'noexistente'">
                                 <app-input *ngIf="!item.dummy" [control]="formCntl(i,'servicio_cantidad',item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)"></app-input>
@@ -242,7 +242,7 @@
       
                           <ng-container *ngIf="item.unidades_obras.length>1 && item.adicional!=='ORIGINAL'">
                             <tr>
-                              <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.servicio_codigo}}</td>
+                              <td [attr.rowspan]="+item.unidades_obras.length" class="label-table">{{item.numero_producto}}</td>
                               <td [attr.rowspan]="+item.unidades_obras.length" class="data-primaria" [ngClass]="item.precargado?'existente':'noexistente'">{{item.servicio_nombre}}</td>
                               <td [attr.rowspan]="+item.unidades_obras.length" [ngClass]="item.precargado?'existente':'noexistente'">
                                 <app-input *ngIf="!item.dummy" [control]="formCntl(i,'servicio_cantidad',item.dummy)" Type="number" [index_service]="i" (changeInputMid)="update_input($event)"></app-input>

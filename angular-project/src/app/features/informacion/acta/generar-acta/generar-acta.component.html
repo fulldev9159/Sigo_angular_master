@@ -30,7 +30,7 @@
                       <ng-container *ngIf="formAdicionales.get('unidades_obra') as unidadesObra">
                         <ng-container *ngFor="let servicio of servicios.controls">
                           <tr>
-                            <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
+                            <td class="label-table">{{ servicio.get('numero_producto').value }}</td>
                             <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
                             <td style="text-align: right">{{ servicio.get('cantidad_a_enviar').value }}</td>
                             <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
@@ -102,7 +102,7 @@
                       <ng-container *ngFor="let servicio of servicios.controls">
                         <ng-container *ngIf="servicio.get('adicional_aceptacion_estado').value ==='ORIGINAL'">
                           <tr>
-                            <td class="label-table">{{ servicio.get('servicio_codigo').value }}</td>
+                            <td class="label-table">{{ servicio.get('numero_producto').value }}</td>
                             <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
                             <td style="text-align: right">{{ servicio.get('cantidad_a_enviar').value }}</td>
                             <td class="data-secundaria">{{ +servicio.get('precio_unitario').value| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>
@@ -146,7 +146,7 @@
       </div>
   
 
-<div style="width: 100%;margin-left: 35px"><h2> Informe de trabajos terminados</h2>
+<div style="width: 100%;margin-left: 35px"><h2> Observaciones</h2>
   <p [outerHTML]="comentarioInforme$|async"></p></div>
       
 
