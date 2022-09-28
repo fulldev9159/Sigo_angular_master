@@ -465,25 +465,25 @@ export class ListOtComponent implements OnInit, OnDestroy {
           });
         }
 
-        const agregarServAdic = (ot.acciones || []).find(
-          accion => accion.slug === 'OT_AGREGAR_SERV_ADIC'
-        );
+        // const agregarServAdic = (ot.acciones || []).find(
+        //   accion => accion.slug === 'OT_AGREGAR_SERV_ADIC'
+        // );
 
-        if (agregarServAdic) {
-          actions.push({
-            icon: 'p-button-icon pi pi-file-excel',
-            class: 'p-button-rounded p-button-success p-mr-2',
-            label: 'Agregar servicios adicionales',
-            onClick: (event: Event, item) => {
-              this.idOtSelected = item.id;
-              this.etapa = item.etapa_slug;
-              this.router.navigate([
-                '/app/informacion/agregar-servicios-adicionales',
-                item.id,
-              ]);
-            },
-          });
-        }
+        // if (agregarServAdic) {
+        //   actions.push({
+        //     icon: 'p-button-icon pi pi-file-excel',
+        //     class: 'p-button-rounded p-button-success p-mr-2',
+        //     label: 'Agregar servicios adicionales',
+        //     onClick: (event: Event, item) => {
+        //       this.idOtSelected = item.id;
+        //       this.etapa = item.etapa_slug;
+        //       this.router.navigate([
+        //         '/app/informacion/agregar-servicios-adicionales',
+        //         item.id,
+        //       ]);
+        //     },
+        //   });
+        // }
 
         const anulatOT = (ot.acciones || []).find(
           accion => accion.slug === 'OT_ANULAR'
