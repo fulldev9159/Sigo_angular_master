@@ -26,8 +26,8 @@ import { FormularioOtMovilComponent } from '../../components/formulario-ot-movil
 import { FormularioOtOrdinarioComponent } from '../../components/formulario-ot-ordinario/formulario-ot-ordinario.component';
 import { FormularioOtSustentoFinancieroComponent } from '../../components/formulario-ot-sustento-financiero/formulario-ot-sustento-financiero.component';
 
-// TODO: VERIFIXAR COMPORTAMIENTO AL NAVEGAR: RESETEO DE TODO
-// TODO: PROBAR LAS DEMAS CREACIONES DE OT
+// 89 TODO: VERIFICAR COMPORTAMIENTO AL NAVEGAR: RESETEO DE TODO
+// 90 TODO: PROBAR LAS DEMAS CREACIONES DE OT
 @Component({
   selector: 'zwc-form-ot-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
