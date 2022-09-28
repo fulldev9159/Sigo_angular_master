@@ -50,7 +50,7 @@ interface Dropdown {
 })
 export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
-  @Input() reglasDeAgregacion: string;
+  @Input() reglasDeAgregacion: string; // Cubicacion - ServiciosAdicionales
   // DATOS A USAR
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade
     .getActividadesContratoProveedor$()

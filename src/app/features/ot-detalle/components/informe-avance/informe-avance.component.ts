@@ -33,6 +33,7 @@ export class InformeAvanceComponent implements OnDestroy, OnInit {
                 precargado: true,
                 servicio_rowid: service.id,
                 servicio_cantidad: service.cantidad,
+                adicional: service.adicional_aceptacion_estado,
 
                 servicio_id: service.servicio_id,
                 servicio_codigo: service.model_servicio_id.codigo,
@@ -60,8 +61,12 @@ export class InformeAvanceComponent implements OnDestroy, OnInit {
                   },
                 ],
               };
+
+              // PARA CARGAR INFORME DE AVANCE
               this.dataServicios.push(new_service);
-              this.serviciosFacade.addDirectServiceCarrito(new_service);
+              // PARA PRE CARGAR SERVICIOS ADICIONALES
+              if (new_service.adicional !== 'ORIGINAL')
+                this.serviciosFacade.addDirectServiceCarrito(new_service);
             });
           });
           let valueInitial: CarritoService[] = [];

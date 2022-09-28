@@ -4,6 +4,7 @@ export interface CarritoService {
   servicio_cantidad?: number;
   servicio_unidad_cod?: string;
   servicio_unidad_descripcion?: string;
+  adicional?: string;
 
   // Data response http API
   servicio_id: number;
