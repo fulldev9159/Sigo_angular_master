@@ -12,7 +12,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { CarritoService, CarritoUO } from '@model';
+import { CarritoService, CarritoUO, SessionData } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { combineLatest, map, Observable, of, Subscription } from 'rxjs';
 import localeEsCl from '@angular/common/locales/es-CL';
@@ -45,7 +45,7 @@ interface ServiceTableCarrito {
 })
 export class FormTableServicesComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
-  @Input() data: CarritoService[] = null;
+  @Input() StaticData: CarritoService[] = null;
 
   carrito$: Observable<CarritoService[]> = of([]);
   totalServicios = 0;
@@ -61,12 +61,17 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
   servicios_eliminar: number[] = [];
   uos_eliminar: number[] = [];
 
+  showDelete = true;
+
+  sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
+    .sessionData;
+
   constructor(private serviciosFacade: ServiciosFacade) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
 
   ngOnInit(): void {
-    this.data ? this.LoadStaticMode() : this.LoadDynamicMode();
+    this.StaticData ? this.LoadStaticMode() : this.LoadDynamicMode();
 
     this.subscription.add(
       this.formTable.get('table').valueChanges.subscribe(table => {
@@ -127,8 +132,9 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
   }
 
   LoadStaticMode(): void {
-    this.carrito$ = of(this.data);
-    this.makeForm(this.data);
+    this.showDelete = false;
+    this.carrito$ = of(this.StaticData);
+    this.makeForm(this.StaticData);
   }
 
   makeForm(servicios: CarritoService[]): void {
@@ -280,6 +286,14 @@ export class FormTableServicesComponent implements OnDestroy, OnInit {
         ).get('unidad_obras').value as Array<{ uo_codigo: string }>
       ).findIndex(uo => uo.uo_codigo === data.uo.uo_codigo)
     );
+  }
+
+  colSpanCalculate(): number {
+    let colspan = 7;
+    if (this.showDelete) colspan = colspan - 1;
+    if (this.sessionData.rol === 'Trabajador (EECC)') colspan = colspan - 2;
+
+    return colspan;
   }
 
   get valid(): boolean {

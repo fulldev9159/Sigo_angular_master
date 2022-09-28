@@ -21,17 +21,17 @@
     </div>
 
   </td>
-  <td zwcColorPrecargado [condicion]="uo.precargado">
+  <td zwcColorPrecargado [condicion]="uo.precargado" *ngIf="sessionData.rol!=='Trabajador (EECC)'">
     {{ uo.uo_precio_total_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
   </td>
-  <td zwcColorPrecargado [condicion]="uo.precargado">
+  <td zwcColorPrecargado [condicion]="uo.precargado" *ngIf="sessionData.rol!=='Trabajador (EECC)'">
     {{
     uo.uo_precio_total_clp *
     +controlUOCantidad.value
     | currency: 'CLP':'$':'.0-2':'es-CL'
     }}
   </td>
-  <td zwcColorPrecargado [condicion]="uo.precargado">
+  <td zwcColorPrecargado [condicion]="uo.precargado" *ngIf="showDelete">
     <!-- <ng-container *ngIf="uo.precargado === undefined || uo.precargado === false"> -->
     <button (click)="callDeleteUOFromServicioFromCarrito(servicio, uo)" class="ui button eliminar-color">
       <fa-icon [icon]="trashICon"></fa-icon>

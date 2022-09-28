@@ -17,13 +17,15 @@
     <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert>
   </div>
 </td>
-<td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">
+<td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado"
+  *ngIf="sessionData.rol!=='Trabajador (EECC)'">
   {{ +item.servicio_precio_final_clp | currency: 'CLP':'$':'.0-2':'es-CL' }}
 </td>
-<td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">
+<td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado"
+  *ngIf="sessionData.rol!=='Trabajador (EECC)'">
   {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' : '$':'.0-2':'es-CL'}}
 </td>
-<td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">
+<td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado" *ngIf="showDelete">
   <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false; else existente"> -->
   <button (click)="callDeleteServicioFromCarrito(item)" class="ui button eliminar-color">
     <fa-icon [icon]="trashICon"></fa-icon>
@@ -70,16 +72,16 @@
       <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
     </div>
   </td>
-  <td zwcColorPrecargado [condicion]="item.precargado">
+  <td zwcColorPrecargado [condicion]="item.precargado" *ngIf="sessionData.rol!=='Trabajador (EECC)'">
     {{
     item.unidad_obras[0].uo_precio_total_clp
     | currency: 'CLP':'$':'.0-2':'es-CL'
     }}
   </td>
-  <td zwcColorPrecargado [condicion]="item.precargado">
+  <td zwcColorPrecargado [condicion]="item.precargado" *ngIf="sessionData.rol!=='Trabajador (EECC)'">
     {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : 'CLP' : '$':'.0-2':'es-CL'}}
   </td>
-  <td zwcColorPrecargado [condicion]="item.precargado">
+  <td zwcColorPrecargado [condicion]="item.precargado" *ngIf="showDelete">
 
     <ng-container *ngIf="item.unidad_obras.length>1">
       <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false"> -->

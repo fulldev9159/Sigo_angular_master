@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CarritoService, CarritoUO } from '@model';
+import { CarritoService, CarritoUO, SessionData } from '@model';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -12,6 +12,7 @@ export class BaseTdComponent {
   @Input() item: CarritoService = null;
   @Input() controlServicioCantidad: FormControl;
   @Input() controlUOCantidad: FormControl;
+  @Input() showDelete = true;
   @Output() deleteServicio = new EventEmitter<{
     servicio: CarritoService;
   }>();
@@ -19,10 +20,9 @@ export class BaseTdComponent {
     servicio: CarritoService;
     uo: CarritoUO;
   }>();
-  // @Output() showModalConfirmacion = new EventEmitter<{
-  //   servicio_id: number;
-  //   servicio_rowid: number;
-  // }>();
+
+  sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
+    .sessionData;
 
   trashICon = faTrash;
 
@@ -38,8 +38,4 @@ export class BaseTdComponent {
   ): void {
     this.deleteUO.emit({ servicio, uo });
   }
-
-  // callShowModalConfirmacion(servicio_id: number, servicio_rowid: number): void {
-  //   this.showModalConfirmacion.emit({ servicio_id, servicio_rowid });
-  // }
 }
