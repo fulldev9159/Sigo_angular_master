@@ -225,6 +225,14 @@ export class ListOtComponent implements OnInit, OnDestroy {
               this.displayLibroObra = true;
             },
           },
+          {
+            icon: 'p-button-icon pi pi-book',
+            class: 'p-button-rounded p-button-info p-mr-2',
+            label: 'ver libro de obras',
+            onClick: (event: Event, item) => {
+              this.router.navigate(['/app/informacion/libro-obras', item.id]);
+            },
+          },
         ];
 
         const otAutorizarInicial = (ot.acciones || []).find(
