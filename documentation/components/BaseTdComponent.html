@@ -128,6 +128,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#sessionData" >sessionData</a>
+                            </li>
+                            <li>
                                 <a href="#trashICon" >trashICon</a>
                             </li>
                         </ul>
@@ -168,6 +171,9 @@
                             </li>
                             <li>
                                 <a href="#item" >item</a>
+                            </li>
+                            <li>
+                                <a href="#showDelete" >showDelete</a>
                             </li>
                         </ul>
                     </td>
@@ -286,6 +292,32 @@
                         </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showDelete"></a>
+                        <b>showDelete</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:15</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
 </section>
     <section>
     <h3 id="outputs">Outputs</h3>
@@ -305,7 +337,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:16</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -326,7 +358,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:19</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -499,6 +531,38 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="sessionData"></a>
+                    <span class="name">
+                        <span ><b>sessionData</b></span>
+                        <a href="#sessionData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/SessionData.html" target="_self" >SessionData</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>JSON.parse(localStorage.getItem(&#x27;auth&#x27;))
+    .sessionData</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/shared/form-table-services/components/base-td/base-td.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="trashICon"></a>
                     <span class="name">
                         <span ><b>trashICon</b></span>
@@ -528,7 +592,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, OnInit, Output } from &#x27;@angular/core&#x27;;
 import { FormControl } from &#x27;@angular/forms&#x27;;
-import { CarritoService, CarritoUO } from &#x27;@model&#x27;;
+import { CarritoService, CarritoUO, SessionData } from &#x27;@model&#x27;;
 import { faTrash } from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
 
 @Component({
@@ -540,6 +604,7 @@ export class BaseTdComponent {
   @Input() item: CarritoService &#x3D; null;
   @Input() controlServicioCantidad: FormControl;
   @Input() controlUOCantidad: FormControl;
+  @Input() showDelete &#x3D; true;
   @Output() deleteServicio &#x3D; new EventEmitter&lt;{
     servicio: CarritoService;
   }&gt;();
@@ -547,10 +612,9 @@ export class BaseTdComponent {
     servicio: CarritoService;
     uo: CarritoUO;
   }&gt;();
-  // @Output() showModalConfirmacion &#x3D; new EventEmitter&lt;{
-  //   servicio_id: number;
-  //   servicio_rowid: number;
-  // }&gt;();
+
+  sessionData: SessionData &#x3D; JSON.parse(localStorage.getItem(&#x27;auth&#x27;))
+    .sessionData;
 
   trashICon &#x3D; faTrash;
 
@@ -566,10 +630,6 @@ export class BaseTdComponent {
   ): void {
     this.deleteUO.emit({ servicio, uo });
   }
-
-  // callShowModalConfirmacion(servicio_id: number, servicio_rowid: number): void {
-  //   this.showModalConfirmacion.emit({ servicio_id, servicio_rowid });
-  // }
 }
 </code></pre>
     </div>
@@ -577,7 +637,7 @@ export class BaseTdComponent {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;!-- SERVICIO --&gt;
 &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
-  {{ item.servicio_codigo }}
+  {{ item.numero_producto }}
 &lt;/td&gt;
 &lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
   {{ item.servicio_nombre }}
@@ -594,13 +654,15 @@ export class BaseTdComponent {
     &lt;zwc-input-alert [control]&#x3D;&quot;controlServicioCantidad&quot;&gt;&lt;/zwc-input-alert&gt;
   &lt;/div&gt;
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;
+  *ngIf&#x3D;&quot;sessionData.rol!&#x3D;&#x3D;&#x27;Trabajador (EECC)&#x27;&quot;&gt;
   {{ +item.servicio_precio_final_clp | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27; }}
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;
+  *ngIf&#x3D;&quot;sessionData.rol!&#x3D;&#x3D;&#x27;Trabajador (EECC)&#x27;&quot;&gt;
   {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}
 &lt;/td&gt;
-&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+&lt;td [attr.rowspan]&#x3D;&quot;+item.unidad_obras.length&quot; zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot; *ngIf&#x3D;&quot;showDelete&quot;&gt;
   &lt;!-- &lt;ng-container *ngIf&#x3D;&quot;item.precargado &#x3D;&#x3D;&#x3D; undefined || item.precargado &#x3D;&#x3D;&#x3D; false; else existente&quot;&gt; --&gt;
   &lt;button (click)&#x3D;&quot;callDeleteServicioFromCarrito(item)&quot; class&#x3D;&quot;ui button eliminar-color&quot;&gt;
     &lt;fa-icon [icon]&#x3D;&quot;trashICon&quot;&gt;&lt;/fa-icon&gt;
@@ -647,16 +709,16 @@ export class BaseTdComponent {
       &lt;zwc-input-alert [control]&#x3D;&quot;controlUOCantidad&quot;&gt;&lt;/zwc-input-alert&gt;
     &lt;/div&gt;
   &lt;/td&gt;
-  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot; *ngIf&#x3D;&quot;sessionData.rol!&#x3D;&#x3D;&#x27;Trabajador (EECC)&#x27;&quot;&gt;
     {{
     item.unidad_obras[0].uo_precio_total_clp
     | currency: &#x27;CLP&#x27;:&#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;
     }}
   &lt;/td&gt;
-  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot; *ngIf&#x3D;&quot;sessionData.rol!&#x3D;&#x3D;&#x27;Trabajador (EECC)&#x27;&quot;&gt;
     {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : &#x27;CLP&#x27; : &#x27;$&#x27;:&#x27;.0-2&#x27;:&#x27;es-CL&#x27;}}
   &lt;/td&gt;
-  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot;&gt;
+  &lt;td zwcColorPrecargado [condicion]&#x3D;&quot;item.precargado&quot; *ngIf&#x3D;&quot;showDelete&quot;&gt;
 
     &lt;ng-container *ngIf&#x3D;&quot;item.unidad_obras.length&gt;1&quot;&gt;
       &lt;!-- &lt;ng-container *ngIf&#x3D;&quot;item.precargado &#x3D;&#x3D;&#x3D; undefined || item.precargado &#x3D;&#x3D;&#x3D; false&quot;&gt; --&gt;
@@ -712,8 +774,8 @@ export class BaseTdComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><!-- SERVICIO --><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.servicio_codigo }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.servicio_nombre }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.tipo_servicio_descripcion | titlecase }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  <div class="container-cantidad">    <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" inputId="locale-german" locale="de-DE"      [minFractionDigits]="2">    </p-inputNumber>    <p [pTooltip]="item.servicio_unidad_descripcion">{{item.servicio_unidad_cod}}</p>    <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert>  </div></td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ +item.servicio_precio_final_clp | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\' }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false; else existente"> -->  <button (click)="callDeleteServicioFromCarrito(item)" class="ui button eliminar-color">    <fa-icon [icon]="trashICon"></fa-icon>  </button>  <!-- </ng-container> -->  <!-- <ng-template #existente>    <button (click)="callShowModalConfirmacion(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">      <fa-icon [icon]="trashICon"></fa-icon>    </button>  </ng-template> -->  <!-- <ng-container *ngIf="item.precargado">        <div class="ui icon buttons mini basic">          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">            <fa-icon [icon]="trashICon"></fa-icon>          </button>        </div>      </ng-container> --></td><!-- UNIDAD DE OBRA --><td style="background-color: #ff8e4e">  {{ item.unidad_obras[0].uo_codigo }}</td><td zwcColorPrecargado [condicion]="item.precargado">  {{ item.unidad_obras[0].uo_nombre }}</td><td zwcColorPrecargado [condicion]="item.precargado">  {{ item.unidad_obras[0].actividad_descripcion | titlecase }}</td><ng-container *ngIf="item.unidad_obras[0].uo_codigo === \'0\'">  <td colspan="5" align="center" zwcColorPrecargado [condicion]="item.precargado">No Aplica</td></ng-container><ng-container *ngIf="item.unidad_obras[0].uo_codigo !== \'0\'">  <td zwcColorPrecargado [condicion]="item.precargado">    <div class="container-cantidad">      <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" inputId="locale-german" locale="de-DE"        [minFractionDigits]="2"></p-inputNumber>      <p [pTooltip]="item.unidad_obras[0].uob_unidad_medida_descripcion">{{item.unidad_obras[0].uob_unidad_medida_cod }}      </p>      <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>    </div>  </td>  <td zwcColorPrecargado [condicion]="item.precargado">    {{    item.unidad_obras[0].uo_precio_total_clp    | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\'    }}  </td>  <td zwcColorPrecargado [condicion]="item.precargado">    {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}  </td>  <td zwcColorPrecargado [condicion]="item.precargado">    <ng-container *ngIf="item.unidad_obras.length>1">      <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false"> -->      <button (click)="callDeleteUOFromServicioFromCarrito(item, item.unidad_obras[0])"        class="ui button eliminar-color">        <fa-icon [icon]="trashICon"></fa-icon>      </button>      <!-- </ng-container> -->      <!-- <ng-template #existente>        <button (click)="show(item.servicio_id, item.unidad_obras[0].uo_codigo)"          class="ui button eliminar-color">          <fa-icon [icon]="trashICon"></fa-icon>        </button>      </ng-template> -->    </ng-container>    <!-- <div class="ui icon buttons mini basic">          <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>        </div> -->  </td></ng-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+        var COMPONENT_TEMPLATE = '<div><!-- SERVICIO --><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.numero_producto }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.servicio_nombre }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  {{ item.tipo_servicio_descripcion | titlecase }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">  <div class="container-cantidad">    <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal" inputId="locale-german" locale="de-DE"      [minFractionDigits]="2">    </p-inputNumber>    <p [pTooltip]="item.servicio_unidad_descripcion">{{item.servicio_unidad_cod}}</p>    <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert>  </div></td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado"  *ngIf="sessionData.rol!==\'Trabajador (EECC)\'">  {{ +item.servicio_precio_final_clp | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\' }}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado"  *ngIf="sessionData.rol!==\'Trabajador (EECC)\'">  {{+item.servicio_precio_final_clp*+controlServicioCantidad.value | currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}</td><td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado" *ngIf="showDelete">  <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false; else existente"> -->  <button (click)="callDeleteServicioFromCarrito(item)" class="ui button eliminar-color">    <fa-icon [icon]="trashICon"></fa-icon>  </button>  <!-- </ng-container> -->  <!-- <ng-template #existente>    <button (click)="callShowModalConfirmacion(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">      <fa-icon [icon]="trashICon"></fa-icon>    </button>  </ng-template> -->  <!-- <ng-container *ngIf="item.precargado">        <div class="ui icon buttons mini basic">          <button (click)="DisplayDeleteServicioCarritoDefinitivo(item.servicio_id,item.servicio_rowid)" class="ui button eliminar-color">            <fa-icon [icon]="trashICon"></fa-icon>          </button>        </div>      </ng-container> --></td><!-- UNIDAD DE OBRA --><td style="background-color: #ff8e4e">  {{ item.unidad_obras[0].uo_codigo }}</td><td zwcColorPrecargado [condicion]="item.precargado">  {{ item.unidad_obras[0].uo_nombre }}</td><td zwcColorPrecargado [condicion]="item.precargado">  {{ item.unidad_obras[0].actividad_descripcion | titlecase }}</td><ng-container *ngIf="item.unidad_obras[0].uo_codigo === \'0\'">  <td colspan="5" align="center" zwcColorPrecargado [condicion]="item.precargado">No Aplica</td></ng-container><ng-container *ngIf="item.unidad_obras[0].uo_codigo !== \'0\'">  <td zwcColorPrecargado [condicion]="item.precargado">    <div class="container-cantidad">      <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" inputId="locale-german" locale="de-DE"        [minFractionDigits]="2"></p-inputNumber>      <p [pTooltip]="item.unidad_obras[0].uob_unidad_medida_descripcion">{{item.unidad_obras[0].uob_unidad_medida_cod }}      </p>      <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>    </div>  </td>  <td zwcColorPrecargado [condicion]="item.precargado" *ngIf="sessionData.rol!==\'Trabajador (EECC)\'">    {{    item.unidad_obras[0].uo_precio_total_clp    | currency: \'CLP\':\'$\':\'.0-2\':\'es-CL\'    }}  </td>  <td zwcColorPrecargado [condicion]="item.precargado" *ngIf="sessionData.rol!==\'Trabajador (EECC)\'">    {{item.unidad_obras[0].uo_precio_total_clp*+controlUOCantidad.value| currency : \'CLP\' : \'$\':\'.0-2\':\'es-CL\'}}  </td>  <td zwcColorPrecargado [condicion]="item.precargado" *ngIf="showDelete">    <ng-container *ngIf="item.unidad_obras.length>1">      <!-- <ng-container *ngIf="item.precargado === undefined || item.precargado === false"> -->      <button (click)="callDeleteUOFromServicioFromCarrito(item, item.unidad_obras[0])"        class="ui button eliminar-color">        <fa-icon [icon]="trashICon"></fa-icon>      </button>      <!-- </ng-container> -->      <!-- <ng-template #existente>        <button (click)="show(item.servicio_id, item.unidad_obras[0].uo_codigo)"          class="ui button eliminar-color">          <fa-icon [icon]="trashICon"></fa-icon>        </button>      </ng-template> -->    </ng-container>    <!-- <div class="ui icon buttons mini basic">          <button *ngIf="item.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(item.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>        </div> -->  </td></ng-container></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableAgregarServiciosComponent', 'selector': 'zwc-table-agregar-servicios'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
     var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
     var ACTUAL_COMPONENT = {'name': 'BaseTdComponent'};
 </script>

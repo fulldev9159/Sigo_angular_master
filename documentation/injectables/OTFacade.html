@@ -982,7 +982,7 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/OficinaCentral.html" target="_self" >Observable&lt;OficinaCentral[]&gt;</a></code>
+                        <b>Returns : </b>    <code>Observable&lt;OficinaCentralWithAgenciaModel[]&gt;</code>
 
                     </div>
                 </td>
@@ -1454,7 +1454,7 @@ import {
   AreaDeNegocio,
   Comuna,
   CubicacionContrato,
-  OficinaCentral,
+  OficinaCentralWithAgenciaModel,
   OT,
   PlanProyecto,
   RequestBandejaOT,
@@ -1503,7 +1503,7 @@ export class OTFacade {
     this.store.dispatch(otActions.getOficinaCentral({ agencia_id }));
   }
 
-  public getOficinaCentral$(): Observable&lt;OficinaCentral[]&gt; {
+  public getOficinaCentral$(): Observable&lt;OficinaCentralWithAgenciaModel[]&gt; {
     return this.store.select(otSelectors.getOficinaCentral);
   }
 

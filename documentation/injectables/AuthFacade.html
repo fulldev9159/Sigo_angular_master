@@ -110,6 +110,14 @@
                                     <span class="modifier">Public</span>
                                 <a href="#resetPerfil" >resetPerfil</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showMenuDetalleOT" >showMenuDetalleOT</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showMenuDetalleOT$" >showMenuDetalleOT$</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -571,6 +579,45 @@
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/app/store/auth/auth.facades.ts:61</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showMenuDetalleOT"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>showMenuDetalleOT</b></span>
+                        <a href="#showMenuDetalleOT"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showMenuDetalleOT(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="53"
                             class="link-to-prism">src/app/store/auth/auth.facades.ts:53</a></div>
                 </td>
@@ -581,7 +628,78 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>status</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showMenuDetalleOT$"></a>
+                    <span class="name">
+                        <span class="modifier">Public</span>
+                        <span ><b>showMenuDetalleOT$</b></span>
+                        <a href="#showMenuDetalleOT$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showMenuDetalleOT$()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/store/auth/auth.facades.ts:56</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                     </div>
                 </td>
@@ -643,6 +761,14 @@ export class AuthFacade {
   // GET PERMISOS PERFIL USUARIO 4 LOGIN
   public getPermisosPerfilUsuario4Login(): void {
     this.store.dispatch(authActions.getPermisosPerfilUsuario4Login());
+  }
+
+  // SHOW MENU DETALLE OT
+  public showMenuDetalleOT(status: boolean): void {
+    this.store.dispatch(authActions.showMenuDetalleOT({ status }));
+  }
+  public showMenuDetalleOT$(): Observable&lt;boolean&gt; {
+    return this.store.select(authSelectors.showMenuDetalleOT);
   }
 
   // RESET PERFIL

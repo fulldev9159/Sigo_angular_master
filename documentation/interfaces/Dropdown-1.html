@@ -65,7 +65,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/core/model/index.ts</code>
+            <code>src/app/shared/form-agregar-servicios/form-agregar-servicios.component.ts</code>
         </p>
 
 
@@ -177,39 +177,375 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export * from &#x27;./auth&#x27;;
-export * from &#x27;./perfil&#x27;;
-export * from &#x27;./rol&#x27;;
-export * from &#x27;./usuario&#x27;;
-export * from &#x27;./accion&#x27;;
-export * from &#x27;./usuario&#x27;;
-export * from &#x27;./contrato&#x27;;
-export * from &#x27;./cubicacion&#x27;;
-export * from &#x27;./proveedor&#x27;;
-export * from &#x27;./servicio&#x27;;
-export * from &#x27;./unidad-obra&#x27;;
-export * from &#x27;./carrito&#x27;;
-export * from &#x27;./material&#x27;;
-export * from &#x27;./ot&#x27;;
-export * from &#x27;./agencia&#x27;;
-export * from &#x27;./numero_interno&#x27;;
-export * from &#x27;./sustento-financiero&#x27;;
-export * from &#x27;./proyectos&#x27;;
-export * from &#x27;./flujo-ot&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import {
+  AgenciaContrato,
+  CarritoService,
+  ContratosUser,
+  ProveedorAgenciaContrato,
+  RequestGetDetallesServicioTipoAgenciaContratoProveedor,
+  RequestGetServicioTipoAgenciaContratoProveedor,
+  ServicioAgenciaContratoProveedor,
+} from &#x27;@model&#x27;;
+import { ContratoFacade } from &#x27;@storeOT/contrato/contrato.facades&#x27;;
+import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
+import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
+import { ServiciosFacade } from &#x27;@storeOT/servicios/servicios.facades&#x27;;
+import { combineLatest, map, Observable, Subscription, take, tap } from &#x27;rxjs&#x27;;
+import { RequestGetUnidadObraServicio } from &#x27;src/app/core/model/unidad-obra&#x27;;
+import { FormularioService } from &#x27;src/app/core/service/formulario.service&#x27;;
 
-export interface Response&lt;T&gt; {
-  data: T;
-  status: StatusResponse;
-}
-
-export interface StatusResponse {
-  desc: string;
-  code: number;
-}
-
-export interface Dropdown {
+interface Dropdown {
   name: string;
   code: number | string;
+}
+
+/**
+ * @example
+ *  Antes de usar este componente se debe precargar lo siguiente
+ *       - Actividades -&gt; contratoFacade.getActividadesContratoProveedor(cmarcoproveedor_id)
+ *       - contratoSelected -&gt; this.cubicacionFacade.contratoSelected(contrato)
+ *       - agenciaSelected -&gt; this.cubicacionFacade.agenciaSelected(agencia);
+ *       - proveedorSelected -&gt; this.cubicacionFacade.agenciaSelected(proveedor);
+ *
+ * Datos que puede recibir como INPUT:
+ *    - reglasDeAgregacion: Hasta ahora solo existen 2 modos para agregar servicios al carrito. Si es para crear una cubicacion se llama
+ *      &quot;reglasDeAgregacion: Cubicacion&quot; donde existe una unica regla.
+ *       También existe el agregar servicios adicionales que tiene más reglas y mensajes asociados llamada
+ *      &quot;reglasDeAgregacion: ServiciosAdicionales&quot;
+ */
+@Component({
+  selector: &#x27;zwc-form-agregar-servicios&#x27;,
+  templateUrl: &#x27;./form-agregar-servicios.component.html&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: [&#x27;./form-agregar-servicios.component.scss&#x27;],
+})
+export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
+  subscription: Subscription &#x3D; new Subscription();
+  @Input() reglasDeAgregacion: string; // Cubicacion - ServiciosAdicionales
+  // DATOS A USAR
+  actividadesContratoProveedor$: Observable&lt;Dropdown[]&gt; &#x3D; this.contratoFacade
+    .getActividadesContratoProveedor$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;actividad_id&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.descripcion,
+          code: value.actividad_id,
+        }))
+      )
+    );
+
+  contratoSelected$: Observable&lt;ContratosUser&gt; &#x3D;
+    this.cubicacionFacade.contratoSelected$();
+
+  tipoServicioContrato$: Observable&lt;Dropdown[]&gt; &#x3D; this.contratoFacade
+    .getTipoServiciosContrato$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;tipo_servicio_id&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.descripcion,
+          code: value.id,
+        }))
+      )
+    );
+
+  agenciaSelected$: Observable&lt;AgenciaContrato&gt; &#x3D;
+    this.cubicacionFacade.agenciaSelected$();
+  proveedorSelected$: Observable&lt;ProveedorAgenciaContrato&gt; &#x3D;
+    this.cubicacionFacade.proveedorSelected$();
+
+  serviciosAgenciaContratoProveedor: ServicioAgenciaContratoProveedor[];
+  serviciosAgenciaContratoProveedor$: Observable&lt;Dropdown[]&gt; &#x3D;
+    this.serviciosFacade.getServiciosAgenciaContratoProveedor$().pipe(
+      tap(values &#x3D;&gt; (this.serviciosAgenciaContratoProveedor &#x3D; values)),
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;servicio_cod&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: &#x60;${value.numero_producto} - ${value.descripcion}&#x60;,
+          code: value.codigo,
+        }))
+      )
+    );
+  unidadesObraServicio$: Observable&lt;Dropdown[]&gt; &#x3D; this.serviciosFacade
+    .getUnidadesObraServicio$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;unidad_obra_cod&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt;
+          a.model_unidad_obra_cod.descripcion &gt;
+          b.model_unidad_obra_cod.descripcion
+            ? 1
+            : -1
+        );
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: &#x60;${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}&#x60;,
+          code: value.unidad_obra_cod,
+        }))
+      )
+    );
+
+  carrito$: Observable&lt;CarritoService[]&gt; &#x3D; this.serviciosFacade.carrito$();
+
+  // FORMULARIO
+  formFilterControls: any &#x3D; {
+    actividad_id: new FormControl(null, [Validators.required]),
+    tipo_servicio_id: new FormControl(null, [Validators.required]),
+    servicio_cod: new FormControl(null, [Validators.required]),
+    unidad_obra_cod: new FormControl(null, [Validators.required]),
+  };
+  formFilter: FormGroup &#x3D; new FormGroup(this.formFilterControls);
+
+  // LOADINGS
+  loadingGetActividadesContratoProveedor$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetActividadesContratoProveedor$();
+  loadingGetTipoServiciosContrato$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetTipoServiciosContrato$();
+  loadingGetServiciosAgenciaContratoProveedor$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetServiciosAgenciaContratoProveedor$();
+  loadingGetUnidadesObraServicio$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetUnidadesObraServicios$();
+  loadingAgregarServicioCarrito$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingAgregarServicioCarrito$();
+
+  // EXTRAS
+  alertServicioExistenteCarrito$: Observable&lt;boolean&gt; &#x3D;
+    this.serviciosFacade.alertServicioExistenteCarrito$();
+
+  constructor(
+    private contratoFacade: ContratoFacade,
+    private cubicacionFacade: CubicacionFacade,
+    private serviciosFacade: ServiciosFacade,
+    private loadingsFacade: LoadingsFacade,
+    private formularioService: FormularioService
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription.add(
+      combineLatest([
+        this.contratoSelected$,
+        this.formFilter.get(&#x27;actividad_id&#x27;).valueChanges,
+      ]).subscribe(([contratoSelected, actividad_id]) &#x3D;&gt; {
+        // TODO: WA para determinar si es efectivamente un cambio de actividad escogido en el formulario o es un cambio de contrato
+        let preValues &#x3D; this.formFilter.value;
+        let actualValue &#x3D; this.formFilter.get(&#x27;actividad_id&#x27;).value;
+
+        let actividad_id_change &#x3D; false;
+        if (
+          (preValues.actividad_id &#x3D;&#x3D;&#x3D; null &amp;&amp; actualValue !&#x3D;&#x3D; null) ||
+          (preValues.actividad_id !&#x3D;&#x3D; null &amp;&amp;
+            preValues.actividad_id !&#x3D;&#x3D; actividad_id)
+        ) {
+          actividad_id_change &#x3D; true;
+        }
+
+        // CALL GET TIPOS DE SERVICIOS
+        if (
+          actividad_id &amp;&amp;
+          actividad_id !&#x3D;&#x3D; null &amp;&amp;
+          contratoSelected &amp;&amp;
+          contratoSelected !&#x3D;&#x3D; null &amp;&amp;
+          actividad_id_change
+        ) {
+          this.serviciosFacade.alertServicioExistenteCarrito(false);
+          this.contratoFacade.getTipoServiciosContrato(
+            actividad_id,
+            contratoSelected.contrato_id
+          );
+        }
+      })
+    );
+
+    this.subscription.add(
+      combineLatest([
+        this.proveedorSelected$,
+        this.agenciaSelected$,
+        this.formFilter.get(&#x27;tipo_servicio_id&#x27;).valueChanges,
+      ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) &#x3D;&gt; {
+        // TODO: WA
+        let preValues &#x3D; this.formFilter.value;
+        let actualValue &#x3D; this.formFilter.get(&#x27;tipo_servicio_id&#x27;).value;
+
+        let tipo_servicio_id_change &#x3D; false;
+        if (
+          (preValues.tipo_servicio_id &#x3D;&#x3D;&#x3D; null &amp;&amp; actualValue !&#x3D;&#x3D; null) ||
+          (preValues.tipo_servicio_id !&#x3D;&#x3D; null &amp;&amp;
+            preValues.tipo_servicio_id !&#x3D;&#x3D; tipo_servicio_id)
+        ) {
+          tipo_servicio_id_change &#x3D; true;
+        }
+
+        // CALL GET SERVICIOS
+        if (
+          agenciaSelected &amp;&amp;
+          agenciaSelected !&#x3D;&#x3D; null &amp;&amp;
+          proveedorSelected &amp;&amp;
+          proveedorSelected !&#x3D;&#x3D; null &amp;&amp;
+          tipo_servicio_id &amp;&amp;
+          tipo_servicio_id !&#x3D;&#x3D; null &amp;&amp;
+          tipo_servicio_id_change &amp;&amp;
+          +this.formFilter.get(&#x27;actividad_id&#x27;).value !&#x3D;&#x3D; 0
+        ) {
+          let request: RequestGetServicioTipoAgenciaContratoProveedor &#x3D; {
+            actividad_id: +this.formFilter.get(&#x27;actividad_id&#x27;).value,
+            agencia_id: agenciaSelected.id,
+            cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
+            tipo_servicio_id,
+          };
+          this.serviciosFacade.alertServicioExistenteCarrito(false);
+          this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.formFilter
+        .get(&#x27;servicio_cod&#x27;)
+        .valueChanges.subscribe(servicio_cod &#x3D;&gt; {
+          // CALL UNIDADES DE OBRAS
+          if (servicio_cod &amp;&amp; servicio_cod !&#x3D;&#x3D; null) {
+            this.serviciosFacade.alertServicioExistenteCarrito(false);
+            let request: RequestGetUnidadObraServicio &#x3D; {
+              servicio_cod,
+              actividad_id: +this.formFilter.get(&#x27;actividad_id&#x27;).value,
+            };
+            this.serviciosFacade.getUnidadesObraServicio(request);
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.formFilter
+        .get(&#x27;unidad_obra_cod&#x27;)
+        .valueChanges.subscribe(unidad_obra_cod &#x3D;&gt; {
+          // CALL UNIDADES DE OBRAS
+          if (unidad_obra_cod &amp;&amp; unidad_obra_cod !&#x3D;&#x3D; null) {
+            this.serviciosFacade.alertServicioExistenteCarrito(false);
+          }
+        })
+    );
+  }
+
+  agregarServicio(): void {
+    this.subscription.add(
+      combineLatest([
+        this.proveedorSelected$,
+        this.agenciaSelected$,
+        this.carrito$,
+      ])
+        .pipe(take(1))
+        .subscribe(([proveedorSelected, agenciaSelected, carrito]) &#x3D;&gt; {
+          // DATOS
+          const unidad_obra_cod &#x3D; this.formFilter.get(&#x27;unidad_obra_cod&#x27;).value;
+          const servicio_id &#x3D; this.serviciosAgenciaContratoProveedor.find(
+            value &#x3D;&gt; value.codigo &#x3D;&#x3D;&#x3D; this.formFilter.get(&#x27;servicio_cod&#x27;).value
+          ).id;
+          const canAddService &#x3D;
+            this.reglasDeAgregacion &#x3D;&#x3D;&#x3D; &#x27;ServiciosAdicionales&#x27;
+              ? this.passReglasAgregarServiciosAdicionales()
+              : this.passReglasAgregarServicios(
+                  carrito,
+                  servicio_id,
+                  unidad_obra_cod
+                );
+
+          // REGLAS PARA PODER AGREGAR UN SERVICIO
+          // const servicioExiste &#x3D; carrito.find(
+          //   servicio &#x3D;&gt;8
+          //     servicio.servicio_id &#x3D;&#x3D;&#x3D; servicio_id &amp;&amp;
+          //     servicio.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; unidad_obra_cod
+          // );
+
+          if (!canAddService) {
+            this.serviciosFacade.alertServicioExistenteCarrito(true);
+          } else {
+            this.serviciosFacade.alertServicioExistenteCarrito(false);
+            const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor &#x3D;
+              {
+                agencia_id: agenciaSelected.id,
+                cmarco_has_proveedor_id:
+                  proveedorSelected.cmarco_has_proveedor_id,
+                servicio_id: +servicio_id,
+                tipo_servicio_id: this.formFilter.get(&#x27;tipo_servicio_id&#x27;).value,
+                actividad_id: this.formFilter.get(&#x27;actividad_id&#x27;).value,
+              };
+
+            this.serviciosFacade.addServicioCarrito(
+              request_service,
+              unidad_obra_cod
+            );
+          }
+        })
+    );
+  }
+
+  passReglasAgregarServicios(
+    carrito: CarritoService[],
+    servicio_id: number,
+    unidad_obra_cod: string
+  ): boolean {
+    const servicioExiste &#x3D; carrito.find(
+      servicio &#x3D;&gt;
+        servicio.servicio_id &#x3D;&#x3D;&#x3D; servicio_id &amp;&amp;
+        servicio.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; unidad_obra_cod
+    );
+    return servicioExiste &#x3D;&#x3D;&#x3D; undefined;
+  }
+
+  passReglasAgregarServiciosAdicionales(): boolean {
+    return true;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
 </code></pre>
     </div>

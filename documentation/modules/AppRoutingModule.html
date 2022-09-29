@@ -87,7 +87,8 @@ const routes: Routes &#x3D; [
     path: &#x27;home&#x27;,
     loadChildren: () &#x3D;&gt;
       &quot;import(&#x27;./features/home/home.module&#x27;).then(m &#x3D;&gt; m.HomeModule)&quot;,
-    canLoad: [SigoGuard],
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
   },
   {
     path: &#x27;cubicacion&#x27;,
@@ -95,12 +96,23 @@ const routes: Routes &#x3D; [
       &quot;import(&#x27;./features/cubicacion/cubicacion.module&#x27;).then(\
         m &#x3D;&gt; m.CubicacionModule\
       )&quot;,
-    canLoad: [SigoGuard],
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
   },
   {
     path: &#x27;ot&#x27;,
     loadChildren: () &#x3D;&gt; &quot;import(&#x27;./features/ot/ot.module&#x27;).then(m &#x3D;&gt; m.OtModule)&quot;,
-    canLoad: [SigoGuard],
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
+  {
+    path: &#x27;ot-detalle&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./features/ot-detalle/ot-detalle.module&#x27;).then(\
+        m &#x3D;&gt; m.OtDetalleModule\
+      )&quot;,
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
   },
 ];
 

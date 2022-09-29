@@ -108,6 +108,13 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#delegated_auth" 
+>
+                                            delegated_auth
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#eliminable" 
 >
                                             eliminable
@@ -132,6 +139,13 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#guia_subgrupo_id" 
+>
+                                            guia_subgrupo_id
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#id" 
 >
                                             id
@@ -141,6 +155,13 @@
                                         <a href="#nombres" 
 >
                                             nombres
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#password" 
+>
+                                            password
                                         </a>
                                 </li>
                                 <li>
@@ -314,6 +335,44 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="delegated_auth"></a>
+                                        <span class="name "><b>delegated_auth</b>
+                                            <a href="#delegated_auth">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>delegated_auth:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="eliminable"></a>
                                         <span class="name "><b>eliminable</b>
                                             <a href="#eliminable">
@@ -446,6 +505,44 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="guia_subgrupo_id"></a>
+                                        <span class="name "><b>guia_subgrupo_id</b>
+                                            <a href="#guia_subgrupo_id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>guia_subgrupo_id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="id"></a>
                                         <span class="name "><b>id</b>
                                             <a href="#id">
@@ -502,6 +599,44 @@
                                         </td>
                                     </tr>
 
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="password"></a>
+                                        <span class="name "><b>password</b>
+                                            <a href="#password">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>password:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -662,6 +797,9 @@ export interface ModelUsuario {
   updated_at: Date;
   username: string;
   eliminable: boolean;
+  guia_subgrupo_id?: number; // 69 TODO: ACTUALIZAR EL MOCK
+  delegated_auth?: boolean; // 69 TODO: ACTUALIZAR EL MOCK
+  password?: string; // 69 TODO: ACTUALIZAR EL MOCK
 }
 
 // USUARIO PROXY

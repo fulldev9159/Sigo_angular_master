@@ -29,16 +29,16 @@ interface Dropdown {
 }
 
 /**
- * @description
- *   FORMULARIO QUE PERMITE AGREGAR UN SERVICIO/UO AL CARRITO
- *   Datos que se deben precargar con NGRX antes de usar este componente:
+ * @example
+ *  Antes de usar este componente se debe precargar lo siguiente
  *       - Actividades -> contratoFacade.getActividadesContratoProveedor(cmarcoproveedor_id)
  *       - contratoSelected -> this.cubicacionFacade.contratoSelected(contrato)
  *       - agenciaSelected -> this.cubicacionFacade.agenciaSelected(agencia);
  *       - proveedorSelected -> this.cubicacionFacade.agenciaSelected(proveedor);
- *   Datos que puede recibir como INPUT:
- *       - reglasDeAgregacion: Hasta ahora solo existen 2 modos para agregar servicios al carrito. Si es para crear una cubicacion se llama
- *       "reglasDeAgregacion: Cubicacion" donde existe una unica regla.
+ *
+ * Datos que puede recibir como INPUT:
+ *    - reglasDeAgregacion: Hasta ahora solo existen 2 modos para agregar servicios al carrito. Si es para crear una cubicacion se llama
+ *      "reglasDeAgregacion: Cubicacion" donde existe una unica regla.
  *       También existe el agregar servicios adicionales que tiene más reglas y mensajes asociados llamada
  *      "reglasDeAgregacion: ServiciosAdicionales"
  */

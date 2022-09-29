@@ -203,6 +203,17 @@ import * as formProyectosReduce from &#x27;./proyectos/proyectos.reducers&#x27;;
 import { FlujoOTEffects } from &#x27;./flujo-ot/flujo-ot.effects&#x27;;
 import * as formFlujoOTReduce from &#x27;./flujo-ot/flujo-ot.reducers&#x27;;
 // FLUJO OT STORE
+
+// OT DETALLE STORE
+import { OTDetalleEffects } from &#x27;./ot-detalle/ot-detalle.effects&#x27;;
+import * as formOTDetalleReduce from &#x27;./ot-detalle/ot-detalle.reducers&#x27;;
+// OT DETALLE STORE
+
+// INFORME AVANCE STORE
+import { InformeAvanceEffects } from &#x27;./informe-avance/informe-avance.effects&#x27;;
+import * as formInformeAvanceReduce from &#x27;./informe-avance/informe-avance.reducers&#x27;;
+// INFORME AVANCE STORE
+
 @NgModule({
   declarations: [],
   imports: [
@@ -292,6 +303,20 @@ import * as formFlujoOTReduce from &#x27;./flujo-ot/flujo-ot.reducers&#x27;;
     StoreModule.forFeature(
       formFlujoOTReduce.Featurekey,
       formFlujoOTReduce.reducerFlujoOT
+    ),
+
+    // OT DETALLE STORE
+    EffectsModule.forFeature([OTDetalleEffects]),
+    StoreModule.forFeature(
+      formOTDetalleReduce.Featurekey,
+      formOTDetalleReduce.reducerOTDetalle
+    ),
+
+    // OT INFORME AVANCE
+    EffectsModule.forFeature([InformeAvanceEffects]),
+    StoreModule.forFeature(
+      formInformeAvanceReduce.Featurekey,
+      formInformeAvanceReduce.reducerInformeAvance
     ),
 
     SharedModule,
