@@ -28,6 +28,8 @@ interface Dropdown {
   code: number | string;
 }
 
+// TODO: MEJORAR LÓGICA
+
 /**
  * @example
  *  Antes de usar este componente se debe precargar lo siguiente
@@ -41,6 +43,8 @@ interface Dropdown {
  *      "reglasDeAgregacion: Cubicacion" donde existe una unica regla.
  *       También existe el agregar servicios adicionales que tiene más reglas y mensajes asociados llamada
  *      "reglasDeAgregacion: ServiciosAdicionales"
+ *
+ *    - informeAvance Servicios del informe de avance original: necesario para identificar si el servicio/uo que se va a agregar como adicional existe en el informe de avance
  */
 @Component({
   selector: 'zwc-form-agregar-servicios',
@@ -51,6 +55,7 @@ interface Dropdown {
 export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
   @Input() reglasDeAgregacion: string; // Cubicacion - ServiciosAdicionales
+  @Input() informeAvance: CarritoService[] = [];
   // DATOS A USAR
   actividadesContratoProveedor$: Observable<Dropdown[]> = this.contratoFacade
     .getActividadesContratoProveedor$()
@@ -266,6 +271,8 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
       })
     );
 
+    // TODO: CAMBIAR SERVICIO_COD POR NUMERO PRODUCTO
+
     this.subscription.add(
       this.formFilter
         .get('servicio_cod')
@@ -310,7 +317,11 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           ).id;
           const canAddService =
             this.reglasDeAgregacion === 'ServiciosAdicionales'
-              ? this.passReglasAgregarServiciosAdicionales()
+              ? this.passReglasAgregarServiciosAdicionales(
+                  carrito,
+                  servicio_id,
+                  unidad_obra_cod
+                )
               : this.passReglasAgregarServicios(
                   carrito,
                   servicio_id,
@@ -323,7 +334,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           //     servicio.servicio_id === servicio_id &&
           //     servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
           // );
-
+          // TODO: CAMBIAR LOGICA PARA QUE EL MENSAJE DE ERROR EN SERVICIOS ADICIONALES SEA PERSONALIZADO
           if (!canAddService) {
             this.serviciosFacade.alertServicioExistenteCarrito(true);
           } else {
@@ -360,7 +371,20 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
     return servicioExiste === undefined;
   }
 
-  passReglasAgregarServiciosAdicionales(): boolean {
+  passReglasAgregarServiciosAdicionales(
+    carrito: CarritoService[],
+    servicio_id: number,
+    unidad_obra_cod: string
+  ): boolean {
+    // VERIFICAR EL SERVICIO QUE SE QUIERE AGREGAR ESTÁ EN EL INFORME DE AVANCE ORIGINAL
+    console.log('informe', this.informeAvance);
+    const servicioExiste = this.informeAvance.find(
+      servicio =>
+        servicio.servicio_id === servicio_id &&
+        servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
+    );
+
+    console.log('existe', servicioExiste);
     return false;
   }
 
