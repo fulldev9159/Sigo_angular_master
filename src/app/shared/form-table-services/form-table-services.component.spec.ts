@@ -55,6 +55,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -81,6 +82,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -98,6 +100,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -160,6 +163,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -177,6 +181,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -234,6 +239,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -251,6 +257,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -341,6 +348,7 @@ describe('TableServicesComponent', () => {
         servicio_rowid: null,
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -388,6 +396,7 @@ describe('TableServicesComponent', () => {
         servicio_rowid: null,
         servicio_id: 2055,
         servicio_codigo: 'J451',
+        numero_producto: 'J451',
         servicio_precio_final_clp: 180.32,
         servicio_nombre:
           'EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
@@ -415,6 +424,7 @@ describe('TableServicesComponent', () => {
         servicio_rowid: null,
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -437,6 +447,7 @@ describe('TableServicesComponent', () => {
         servicio_rowid: null,
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -458,6 +469,7 @@ describe('TableServicesComponent', () => {
         servicio_rowid: null,
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -479,6 +491,7 @@ describe('TableServicesComponent', () => {
         servicio_rowid: null,
         servicio_id: 2055,
         servicio_codigo: 'J451',
+        numero_producto: 'J451',
         servicio_precio_final_clp: 180.32,
         servicio_nombre:
           'EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
@@ -513,6 +526,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -530,6 +544,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -554,6 +569,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -571,6 +587,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -596,6 +613,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -613,6 +631,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -633,6 +652,7 @@ describe('TableServicesComponent', () => {
       servicio: {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -657,6 +677,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -674,6 +695,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -694,6 +716,7 @@ describe('TableServicesComponent', () => {
       servicio: {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -727,6 +750,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -744,6 +768,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 141,
         servicio_codigo: 'J101',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 471.59999999999997,
         servicio_nombre: 'INSTALAR CABLE EN CANALIZACION GRUPOS A Y B',
         tipo_servicio_descripcion: 'LINEAS',
@@ -761,6 +786,7 @@ describe('TableServicesComponent', () => {
       {
         servicio_id: 2055,
         servicio_codigo: 'J451',
+        numero_producto: 'J101',
         servicio_precio_final_clp: 180.32,
         servicio_nombre:
           'EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)',
