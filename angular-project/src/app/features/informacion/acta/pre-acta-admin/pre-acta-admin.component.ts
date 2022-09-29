@@ -37,10 +37,11 @@ export class PreActaAdminComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.detalleActa$.pipe(take(1)).subscribe(detalle => {
+        this.totalServicios = 0;
         detalle.servicios.forEach(servicio => {
           this.totalServicios =
             this.totalServicios +
-            servicio.faltante_cantidad * servicio.valor_unitario_clp;
+            +servicio.faltante_cantidad * +servicio.valor_unitario_clp;
         });
 
         detalle.unidades_obra.forEach(uo => {

@@ -82,8 +82,7 @@ export class ValidarPagoComponent implements OnInit, OnDestroy {
         if (lacta.many_acta_detalle_servicio) {
           this.acta = lacta.many_acta_detalle_servicio.map(servicio => ({
             informe_has_servicio_id: servicio.informe_has_servicio_id,
-            codigo:
-              servicio.model_informe_has_servicio_id.model_servicio_id.codigo,
+            codigo: servicio.model_informe_has_servicio_id.numero_producto,
             descripcion:
               servicio.model_informe_has_servicio_id.model_servicio_id
                 .descripcion,

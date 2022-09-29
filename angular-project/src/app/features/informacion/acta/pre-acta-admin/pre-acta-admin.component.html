@@ -22,7 +22,7 @@
               <ng-container *ngIf="(detalleActa$|async).unidades_obra as unidadesObra">
                 <ng-container *ngFor="let servicio of servicios">
                   <tr>
-                    <td class="label-table">{{ servicio.servicio_codigo }}</td>
+                    <td class="label-table">{{ servicio.servicio_numero_producto }}</td>
                     <td class="data-secundaria">{{ servicio.servicio_descripcion |titlecase}}</td>
                     <td style="text-align: right">{{ servicio.faltante_cantidad }}</td>
                     <td class="data-secundaria">{{ +servicio.valor_unitario_clp| currency : 'CLP' : '$':'.0-2':'es-CL' }}</td>

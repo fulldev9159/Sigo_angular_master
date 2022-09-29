@@ -150,6 +150,7 @@ export interface DetalleServicioLastActa {
   id: number;
   informe_has_servicio_id: number;
   model_informe_has_servicio_id: {
+    numero_producto: string;
     actividad_id: number;
     adicional_aceptacion_estado: string;
     adicional_aceptacion_fecha: Date;
