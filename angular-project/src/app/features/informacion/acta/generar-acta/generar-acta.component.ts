@@ -704,9 +704,44 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       estado: values.estado,
       detalle: values.detalle,
     };
+    let ids_validados = (
+      this.formAdicionales.get('servicios').value as Array<{
+        id: number;
+        validar: boolean;
+      }>
+    ).filter(value => !value.validar);
 
+    console.log(
+      'id validados',
+      ids_validados.map(value => +value.id)
+    );
+
+    let ids_invalidados = (
+      this.formAdicionales.get('servicios').value as Array<{
+        id: number;
+        validar: boolean;
+      }>
+    ).filter(value => value.validar);
+    console.log(
+      'id  invalidados',
+      ids_invalidados.map(value => +value.id)
+    );
+
+    let requestInvalidarAdicionales: RequestAceptarRechazarAdicionales = {
+      ot_id: this.ot_id,
+      adicionales_aceptados: ids_validados.map(value => +value.id),
+      adicionales_rechazados: ids_invalidados.map(value => +value.id),
+      causas_rechazo_id: +this.formInvalidar.get('tipo_id').value,
+      observacion: this.formInvalidar.get('motivo').value,
+    };
+
+    console.log('request aprob adici', requestInvalidarAdicionales);
+    this.otFacade.aceptarRechazarAdicionales(
+      request,
+      requestInvalidarAdicionales
+    );
     // console.log(request);
-    this.otFacade.sendGeneracionActaOLD(request);
+    // this.otFacade.sendGeneracionActaOLD(request);
   }
 
   allAdiconalesAprobados(): void {
@@ -766,7 +801,6 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       };
 
       console.log('request aprob adici', requestInvalidarAdicionales);
-      this.otFacade.aceptarRechazarAdicionales(requestInvalidarAdicionales);
 
       let requestInvalidar: RequestValidateActa = {
         ot_id: this.ot_id,
@@ -796,44 +830,15 @@ export class GenararActaComponent implements OnInit, OnDestroy {
       };
 
       console.log('req inv act', requestInvalidar);
-      this.otFacade.sendGeneracionActaOLD(requestInvalidar);
+      this.otFacade.aceptarRechazarAdicionales(
+        requestInvalidar,
+        requestInvalidarAdicionales
+      );
+      // this.otFacade.sendGeneracionActaOLD(requestInvalidar);
     }
   }
 
   validar(): void {
-    let ids_validados = (
-      this.formAdicionales.get('servicios').value as Array<{
-        id: number;
-        validar: boolean;
-      }>
-    ).filter(value => !value.validar);
-
-    console.log(
-      'id validados',
-      ids_validados.map(value => +value.id)
-    );
-
-    let ids_invalidados = (
-      this.formAdicionales.get('servicios').value as Array<{
-        id: number;
-        validar: boolean;
-      }>
-    ).filter(value => value.validar);
-    console.log(
-      'id  invalidados',
-      ids_invalidados.map(value => +value.id)
-    );
-
-    let requestInvalidarAdicionales: RequestAceptarRechazarAdicionales = {
-      ot_id: this.ot_id,
-      adicionales_aceptados: ids_validados.map(value => +value.id),
-      adicionales_rechazados: ids_invalidados.map(value => +value.id),
-      causas_rechazo_id: +this.formInvalidar.get('tipo_id').value,
-      observacion: this.formInvalidar.get('motivo').value,
-    };
-
-    console.log('request aprob adici', requestInvalidarAdicionales);
-    this.otFacade.aceptarRechazarAdicionales(requestInvalidarAdicionales);
     this.actaValidada = true;
   }
 

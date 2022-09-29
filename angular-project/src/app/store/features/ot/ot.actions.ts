@@ -859,7 +859,10 @@ export const cerrarOTError = createAction(
 //  ACEPTAR RECHAZAR ADICIONALES
 export const aceptarRechazarAdcionales = createAction(
   '[OT] GET aceptarRechazarAdcionales',
-  props<{ request: RequestAceptarRechazarAdicionales }>()
+  props<{
+    requestValidarActa: RequestValidateActa;
+    requestAdicionales: RequestAceptarRechazarAdicionales;
+  }>()
 );
 
 export const aceptarRechazarAdcionalesSuccess = createAction(

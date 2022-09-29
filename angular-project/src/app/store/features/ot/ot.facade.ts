@@ -638,9 +638,15 @@ export class OtFacade {
 
   // ACEPTAR RECHAZAR ADICIONALES
   public aceptarRechazarAdicionales(
-    request: RequestAceptarRechazarAdicionales
+    requestValidarActa: RequestValidateActa,
+    requestAdicionales: RequestAceptarRechazarAdicionales
   ): void {
-    this.store.dispatch(otActions.aceptarRechazarAdcionales({ request }));
+    this.store.dispatch(
+      otActions.aceptarRechazarAdcionales({
+        requestValidarActa,
+        requestAdicionales,
+      })
+    );
   }
 
   // APROBAR OT

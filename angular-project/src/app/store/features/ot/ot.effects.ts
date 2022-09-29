@@ -667,10 +667,10 @@ export class OtEffects {
   aceptarRechazarAdicionales$ = createEffect(() =>
     this.actions$.pipe(
       ofType(otActions.aceptarRechazarAdcionales),
-      concatMap(({ request }) =>
-        this.otService.aceptarRechazarAdicionales(request).pipe(
+      concatMap(({ requestValidarActa, requestAdicionales }) =>
+        this.otService.aceptarRechazarAdicionales(requestAdicionales).pipe(
           map(response =>
-            otActions.aceptarRechazarAdcionalesSuccess({ response })
+            otActions.sendGeneracionActaOLD({ request: requestValidarActa })
           ),
           catchError(error =>
             of(otActions.aceptarRechazarAdcionalesError({ error }))
@@ -884,7 +884,8 @@ export class OtEffects {
           otActions.informarTrabajosFinalizadosError,
           otActions.eliminarAdicionalError,
           otActions.aprobarRechazarAdicionalError,
-          otActions.agregarAdicionalesError
+          otActions.agregarAdicionalesError,
+          otActions.aceptarRechazarAdcionalesError
         ),
         tap(action =>
           this.alertMessageAction.messageActions(
