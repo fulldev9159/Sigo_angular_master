@@ -285,6 +285,7 @@ export class FormCubContainerComponent
 
                   servicio_id: service.servicio_id,
                   servicio_codigo: service.model_servicio_id.codigo,
+                  numero_producto: 'TODO',
                   servicio_precio_final_clp: service.valor_unitario_clp,
                   servicio_nombre: service.model_servicio_id.descripcion,
                   tipo_servicio_descripcion:
