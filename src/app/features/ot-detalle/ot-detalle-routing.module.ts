@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InformeAvanceComponent } from './components/informe-avance/informe-avance.component';
 import { OtDetalleComponent } from './ot-detalle.component';
-import { DetalleOTResolver } from './resolvers/cubicaciones.resolver';
+import { DetalleOTResolver } from './resolvers/detalleOT.resolver';
 import { DetalleInformeAvanceResolver } from './resolvers/detalle-informe-avance.resolver';
 const routes: Routes = [
   {

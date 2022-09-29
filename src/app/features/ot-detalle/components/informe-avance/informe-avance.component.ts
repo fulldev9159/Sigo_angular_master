@@ -1,6 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CarritoService, DetalleInformeAvance } from '@model';
+import {
+  AgenciaContrato,
+  CarritoService,
+  ContratosUser,
+  DetalleInformeAvance,
+  DetalleOT,
+  ProveedorAgenciaContrato,
+} from '@model';
+import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
+import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { Subscription } from 'rxjs';
 
@@ -17,17 +26,45 @@ export class InformeAvanceComponent implements OnDestroy, OnInit {
 
   constructor(
     private serviciosFacade: ServiciosFacade,
+    private contratoFacade: ContratoFacade,
+    private cubicacionFacade: CubicacionFacade,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.serviciosFacade.resetCarritoServices();
     this.subscription.add(
-      this.route.data.subscribe(({ detalleInformeAvance }) => {
+      this.route.data.subscribe(({ detalleOT, detalleInformeAvance }) => {
         if (detalleInformeAvance) {
-          const detalle = detalleInformeAvance.data as DetalleInformeAvance;
+          const detalleInforme =
+            detalleInformeAvance.data as DetalleInformeAvance;
+          const ot = detalleOT.data as DetalleOT;
 
-          detalle.many_informe_has_servicio.forEach(service => {
+          // PRECARGAR DATOS FILTROS PARA AGREGAR SERVICIOS
+          this.contratoFacade.getActividadesContratoProveedor(
+            +ot.ot.model_cubicacion_id.cmarco_has_proveedor_id
+          );
+
+          let contrato: ContratosUser = {
+            contrato_id: +ot.ot.model_cubicacion_id.contrato_id,
+          };
+          this.cubicacionFacade.contratoSelected(contrato);
+
+          let agencia: AgenciaContrato = {
+            id: ot.ot.model_cubicacion_id.agencia_id,
+            nombre: '',
+          };
+          this.cubicacionFacade.agenciaSelected(agencia);
+
+          let proveedor: ProveedorAgenciaContrato = {
+            cmarco_has_proveedor_id:
+              ot.ot.model_cubicacion_id.cmarco_has_proveedor_id,
+            id: ot.ot.model_cubicacion_id.proveedor_id,
+          };
+          this.cubicacionFacade.proveedorSelected(proveedor);
+
+          // CARGAR CARRITO
+          detalleInforme.many_informe_has_servicio.forEach(service => {
             service.many_informe_has_uob.forEach(uo => {
               let new_service: CarritoService = {
                 precargado: true,

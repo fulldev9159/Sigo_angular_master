@@ -39,7 +39,7 @@ export interface ModelUsuarioSuperior extends ModelProxyUsuarios {
 // CONTRATOS USUARIO
 export interface ContratosUser {
   contrato_id: number;
-  model_contrato_id: ModelContratoMarco;
-  model_usuario_id: ModelUsuario;
-  usuario_id: number;
+  model_contrato_id?: ModelContratoMarco;
+  model_usuario_id?: ModelUsuario;
+  usuario_id?: number;
 }

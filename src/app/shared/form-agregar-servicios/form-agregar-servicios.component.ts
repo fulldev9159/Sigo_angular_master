@@ -34,7 +34,7 @@ interface Dropdown {
  *       - Actividades -> contratoFacade.getActividadesContratoProveedor(cmarcoproveedor_id)
  *       - contratoSelected -> this.cubicacionFacade.contratoSelected(contrato)
  *       - agenciaSelected -> this.cubicacionFacade.agenciaSelected(agencia);
- *       - proveedorSelected -> this.cubicacionFacade.agenciaSelected(proveedor);
+ *       - proveedorSelected -> this.cubicacionFacade.proveedorSelected(proveedor);
  *
  * Datos que puede recibir como INPUT:
  *    - reglasDeAgregacion: Hasta ahora solo existen 2 modos para agregar servicios al carrito. Si es para crear una cubicacion se llama
@@ -361,7 +361,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   }
 
   passReglasAgregarServiciosAdicionales(): boolean {
-    return true;
+    return false;
   }
 
   ngOnDestroy(): void {
