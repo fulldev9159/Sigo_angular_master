@@ -14,13 +14,13 @@ import {
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   RequestGetServicioTipoAgenciaContratoProveedor,
   ServicioAgenciaContratoProveedor,
+  RequestGetUnidadObraServicio,
 } from '@model';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { combineLatest, map, Observable, Subscription, take, tap } from 'rxjs';
-import { RequestGetUnidadObraServicio } from 'src/app/core/model/unidad-obra';
 import { FormularioService } from 'src/app/core/service/formulario.service';
 
 interface Dropdown {
@@ -28,6 +28,7 @@ interface Dropdown {
   code: number | string;
 }
 
+// TODO: VER COMO MANEJAR EL RESETEO DE LOS DROPDOWN DESDE ESTE COMPONENTE
 // TODO: MEJORAR LÓGICA
 
 /**
@@ -184,6 +185,8 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   // EXTRAS
   alertServicioExistenteCarrito$: Observable<boolean> =
     this.serviciosFacade.alertServicioExistenteCarrito$();
+  alertMessageServicio$: Observable<string> =
+    this.serviciosFacade.alertMessageServicio$();
 
   constructor(
     private contratoFacade: ContratoFacade,
@@ -220,7 +223,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           contratoSelected !== null &&
           actividad_id_change
         ) {
-          this.serviciosFacade.alertServicioExistenteCarrito(false);
+          this.serviciosFacade.alertServicioExistenteCarrito(false, null);
           this.contratoFacade.getTipoServiciosContrato(
             actividad_id,
             contratoSelected.contrato_id
@@ -265,7 +268,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
             cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
             tipo_servicio_id,
           };
-          this.serviciosFacade.alertServicioExistenteCarrito(false);
+          this.serviciosFacade.alertServicioExistenteCarrito(false, null);
           this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
         }
       })
@@ -279,7 +282,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         .valueChanges.subscribe(servicio_cod => {
           // CALL UNIDADES DE OBRAS
           if (servicio_cod && servicio_cod !== null) {
-            this.serviciosFacade.alertServicioExistenteCarrito(false);
+            this.serviciosFacade.alertServicioExistenteCarrito(false, null);
             let request: RequestGetUnidadObraServicio = {
               servicio_cod,
               actividad_id: +this.formFilter.get('actividad_id').value,
@@ -295,7 +298,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         .valueChanges.subscribe(unidad_obra_cod => {
           // CALL UNIDADES DE OBRAS
           if (unidad_obra_cod && unidad_obra_cod !== null) {
-            this.serviciosFacade.alertServicioExistenteCarrito(false);
+            this.serviciosFacade.alertServicioExistenteCarrito(false, null);
           }
         })
     );
@@ -315,76 +318,123 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           const servicio_id = this.serviciosAgenciaContratoProveedor.find(
             value => value.codigo === this.formFilter.get('servicio_cod').value
           ).id;
-          const canAddService =
-            this.reglasDeAgregacion === 'ServiciosAdicionales'
-              ? this.passReglasAgregarServiciosAdicionales(
-                  carrito,
-                  servicio_id,
-                  unidad_obra_cod
-                )
-              : this.passReglasAgregarServicios(
-                  carrito,
-                  servicio_id,
-                  unidad_obra_cod
-                );
 
-          // REGLAS PARA PODER AGREGAR UN SERVICIO
-          // const servicioExiste = carrito.find(
-          //   servicio =>8
-          //     servicio.servicio_id === servicio_id &&
-          //     servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
-          // );
-          // TODO: CAMBIAR LOGICA PARA QUE EL MENSAJE DE ERROR EN SERVICIOS ADICIONALES SEA PERSONALIZADO
-          if (!canAddService) {
-            this.serviciosFacade.alertServicioExistenteCarrito(true);
-          } else {
-            this.serviciosFacade.alertServicioExistenteCarrito(false);
-            const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
-              {
-                agencia_id: agenciaSelected.id,
-                cmarco_has_proveedor_id:
-                  proveedorSelected.cmarco_has_proveedor_id,
-                servicio_id: +servicio_id,
-                tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
-                actividad_id: this.formFilter.get('actividad_id').value,
-              };
+          if (this.reglasDeAgregacion === 'Cubicacion')
+            this.ReglasAgregarServicios(
+              carrito,
+              servicio_id,
+              unidad_obra_cod,
+              proveedorSelected.cmarco_has_proveedor_id,
+              agenciaSelected.id
+            );
 
-            this.serviciosFacade.addServicioCarrito(
-              request_service,
+          if (this.reglasDeAgregacion === 'ServiciosAdicionales')
+            this.ReglasAgregarServiciosAdicionales(
+              carrito,
+              servicio_id,
               unidad_obra_cod
             );
-          }
         })
     );
   }
 
-  passReglasAgregarServicios(
+  ReglasAgregarServicios(
     carrito: CarritoService[],
     servicio_id: number,
-    unidad_obra_cod: string
-  ): boolean {
+    unidad_obra_cod: string,
+    cmarco_has_proveedor_id: number,
+    agencia_id: number
+  ): void {
     const servicioExiste = carrito.find(
       servicio =>
         servicio.servicio_id === servicio_id &&
         servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
     );
-    return servicioExiste === undefined;
+
+    if (servicioExiste !== undefined) {
+      this.serviciosFacade.alertServicioExistenteCarrito(
+        true,
+        'Servicio ya está en la cubicación'
+      );
+    } else {
+      this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+      const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
+        {
+          agencia_id,
+          cmarco_has_proveedor_id,
+          servicio_id: +servicio_id,
+          tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
+          actividad_id: this.formFilter.get('actividad_id').value,
+        };
+
+      this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
+    }
   }
 
-  passReglasAgregarServiciosAdicionales(
+  ReglasAgregarServiciosAdicionales(
     carrito: CarritoService[],
     servicio_id: number,
     unidad_obra_cod: string
   ): boolean {
-    // VERIFICAR EL SERVICIO QUE SE QUIERE AGREGAR ESTÁ EN EL INFORME DE AVANCE ORIGINAL
     console.log('informe', this.informeAvance);
-    const servicioExiste = this.informeAvance.find(
+
+    // SI SERVICIO/UO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL
+
+    const servicioYUOExistenEnInformeORIGINAL = this.informeAvance.find(
       servicio =>
         servicio.servicio_id === servicio_id &&
-        servicio.unidad_obras[0].uo_codigo === unidad_obra_cod
+        servicio.unidad_obras[0].uo_codigo === unidad_obra_cod &&
+        servicio.adicional === 'ORIGINAL'
     );
 
-    console.log('existe', servicioExiste);
+    console.log('existe', servicioYUOExistenEnInformeORIGINAL);
+
+    if (servicioYUOExistenEnInformeORIGINAL !== undefined) {
+      console.log(
+        'Es un servicio/UO existente en el informe de avance y es original'
+      );
+      // DEBE ENVIAR MENSAJE DE ERROR "Servicio y unidad de obra existentes en el informe de avance. Debe cambiar la cantidad en el informe de avance"
+    }
+
+    // SI SERVICIO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL PERO LA UO ES NUEVA
+
+    const servicioExisteYUOnoExisteEnInformeORIGINAL = this.informeAvance.find(
+      servicio =>
+        servicio.servicio_id === servicio_id &&
+        servicio.unidad_obras[0].uo_codigo !== unidad_obra_cod &&
+        servicio.adicional === 'ORIGINAL'
+    );
+
+    if (servicioExisteYUOnoExisteEnInformeORIGINAL !== undefined) {
+      console.log(
+        'Es un servicio original existente en el informe de avance pero la uo es nueva'
+      );
+      // SE DEBE ALMACENAR UN SERVICIO DUMMY JUNTO AL UO
+    }
+
+    // SI SERVICIO/UO EXISTE EN EL INFORME AVANCE PERO NO ES ORIGINAL (ADICIONAL QUE YA SE HA AGREGADO ANTES)
+    const servicioYUOExistenEnInformeADICIONAL = this.informeAvance.find(
+      servicio =>
+        servicio.servicio_id === servicio_id &&
+        servicio.unidad_obras[0].uo_codigo === unidad_obra_cod &&
+        servicio.adicional !== 'ORIGINAL'
+    );
+
+    if (servicioYUOExistenEnInformeADICIONAL !== undefined) {
+      console.log(
+        'Es un servicio y uo adicinal existente en el informe de avance'
+      );
+      // SE DEBE ENVIAR MENSAJE DE ERROR "Servicio y unidad de obra adicional existentes en el informe de avance. Debe cambiar la cantidad en el informe de avance"
+    }
+
+    if (
+      servicioYUOExistenEnInformeORIGINAL === undefined &&
+      servicioExisteYUOnoExisteEnInformeORIGINAL === undefined &&
+      servicioYUOExistenEnInformeADICIONAL === undefined
+    ) {
+      console.log('Es nuevo');
+    }
+
     return false;
   }
 

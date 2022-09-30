@@ -85,14 +85,18 @@ export class ServiciosFacade {
   }
 
   // ALERTA PARA INDICAR QUE YA EXISTE UN SERVICIO EN EL CARRITO
-  public alertServicioExistenteCarrito(value: boolean): void {
+  public alertServicioExistenteCarrito(value: boolean, message: string): void {
     this.store.dispatch(
-      serviciosActions.alertServicioExistenteCarrito({ value })
+      serviciosActions.alertServicioExistenteCarrito({ value, message })
     );
   }
 
   public alertServicioExistenteCarrito$(): Observable<boolean> {
     return this.store.select(serviciosSelectors.alertServicioExistenteCarrito);
+  }
+
+  public alertMessageServicio$(): Observable<string> {
+    return this.store.select(serviciosSelectors.alertMessageServicio);
   }
 
   // DETELE FROM CARRITO
