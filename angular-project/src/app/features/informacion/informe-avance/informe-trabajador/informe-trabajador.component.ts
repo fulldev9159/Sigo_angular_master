@@ -150,6 +150,7 @@ export class InformeTrabajadorComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.cubicacionFacade.resetCarrito();
     this.subscription.add(
       this.detalleInformeAvance$.subscribe(detalle => {
         this.form = new FormArray(

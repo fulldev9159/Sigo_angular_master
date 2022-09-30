@@ -81,6 +81,7 @@ export const reducerCubicacion = createReducer(
   on(CubicacionActions.resetCarrito, state => ({
     ...state,
     carrito: [],
+    carritoAdicionales: [],
   })),
   on(CubicacionActions.getContratosUser4CubSuccess, (state, { response }) => ({
     ...state,
