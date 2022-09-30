@@ -1,6 +1,6 @@
 import { testedViewports } from 'cypress/fixtures/testedViewports';
 
-describe('login spec', () => {
+describe('01_LOGIN_SPEC', () => {
   it('Home page should redirect to login', () => {
     cy.visit('http://localhost:4206/home');
     cy.location('pathname').should('eq', '/login/auth');
