@@ -27,7 +27,7 @@
                     </td>
                     <td class="label-table">{{ servicio.get('numero_producto').value }}</td>
                     <td class="data-secundaria">{{ servicio.get('descripcion').value |titlecase}}</td>
-                    <td>{{ servicio.get('adicional_aceptacion_estado').value }}</td>
+                    <td>{{ servicio.get('adicional_aceptacion_estado').value!=='ORIGINAL'?'ADICIONAL':'ORIGINAL' }}</td>
                     <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value }}</td>
                     <td style="text-align: right" class="data-secundaria">{{ servicio.get('cantidad_total').value - servicio.get('cantidad_max_a_enviar').value }}</td>
                     <td>
