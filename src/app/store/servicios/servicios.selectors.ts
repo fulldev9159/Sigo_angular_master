@@ -29,3 +29,8 @@ export const alertServicioExistenteCarrito = createSelector(
   selectServicios,
   (state: reducer.StateServicios) => state.alertServicioExistenteCarrito
 );
+
+export const alertMessageServicio = createSelector(
+  selectServicios,
+  (state: reducer.StateServicios) => state.alertMessageServicio
+);

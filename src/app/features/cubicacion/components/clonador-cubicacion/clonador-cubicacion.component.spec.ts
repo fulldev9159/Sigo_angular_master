@@ -114,6 +114,7 @@ describe('ClonadorCubicacionComponent', () => {
           factor_conversion_precio: 1,
           requiere_evidencia: false,
           valor_unitario_clp: 180.32,
+          numero_producto: 'J451',
           model_servicio_id: {
             id: 191,
             tipo_servicio_id: 5,

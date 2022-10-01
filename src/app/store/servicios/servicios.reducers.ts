@@ -15,6 +15,7 @@ export interface StateServicios {
   servicioSelected: ServicioAgenciaContratoProveedor;
   carritoServices: CarritoService[];
   alertServicioExistenteCarrito: boolean;
+  alertMessageServicio: string;
 }
 
 export const initialState: StateServicios = {
@@ -23,6 +24,7 @@ export const initialState: StateServicios = {
   servicioSelected: null,
   carritoServices: [],
   alertServicioExistenteCarrito: false,
+  alertMessageServicio: null,
 };
 
 export const reducerServicios = createReducer(
@@ -87,10 +89,14 @@ export const reducerServicios = createReducer(
       ],
     })
   ),
-  on(serviciosActions.alertServicioExistenteCarrito, (state, { value }) => ({
-    ...state,
-    alertServicioExistenteCarrito: value,
-  })),
+  on(
+    serviciosActions.alertServicioExistenteCarrito,
+    (state, { value, message }) => ({
+      ...state,
+      alertServicioExistenteCarrito: value,
+      alertMessageServicio: message,
+    })
+  ),
   on(serviciosActions.deleteServicioFromCarrito, (state, { servicio_id }) => ({
     ...state,
     carritoServices: [

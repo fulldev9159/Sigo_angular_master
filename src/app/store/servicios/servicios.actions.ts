@@ -83,6 +83,7 @@ export const alertServicioExistenteCarrito = createAction(
   '[SERVICIOS] alertServicioExistenteCarrito',
   props<{
     value: boolean;
+    message: string;
   }>()
 );
 

@@ -4,16 +4,15 @@ import {
 } from 'cypress/fixtures/testedCubicacion';
 
 describe('INFORME DE AVANCE', () => {
-  it('should let enter to create cubicacion', () => {
+  it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {
+    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
+
     cy.visit('http://localhost:4206/login/auth');
     cy._login('cctrabajador1', 'asdasd');
     cy._select_profile('Trabajador EECC');
     cy.get('button[id="navbar-list-ot"]').click();
     cy.get('button[id="play-button"]').click();
-  });
 
-  it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {
-    cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
     const data = CubicacionEditada;
 
     cy.wait('@HTTPRESPONSE').then(() => {
