@@ -98,25 +98,31 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       cy._check_input('input[name="input-altura-hasta"]', 'required');
     });
 
-    it('should not display dirección inputs for contracts doent bucle', () => {
-      cy._select_dropdown('#select-contrato_marco', 'CONTRATO_ORDINARIO');
-      cy.get('input[name="input-nombre-cubicacion"]').click();
-      cy.get('input[name="input-direccion-desde"]').should('not.exist');
-      cy.get('input[name="input-altura-desde"]').should('not.exist');
-      cy.get('input[name="input-direccion-hasta"]').should('not.exist');
-      cy.get('input[name="input-altura-hasta"]').should('not.exist');
-      cy._select_dropdown('#select-contrato_marco', 'UNIFICADO_FIJA');
-      cy.get('input[name="input-direccion-desde"]').should('not.exist');
-      cy.get('input[name="input-altura-desde"]').should('not.exist');
-      cy.get('input[name="input-direccion-hasta"]').should('not.exist');
-      cy.get('input[name="input-altura-hasta"]').should('not.exist');
-      cy._select_dropdown('#select-contrato_marco', 'UNIFICADO_MOVIL');
-      cy.get('input[name="input-direccion-desde"]').should('not.exist');
-      cy.get('input[name="input-altura-desde"]').should('not.exist');
-      cy.get('input[name="input-direccion-hasta"]').should('not.exist');
-      cy.get('input[name="input-altura-hasta"]').should('not.exist');
-      cy.get('input[name="input-nombre-cubicacion"]').click();
-    });
+    it(
+      'should not display dirección inputs for contracts doent bucle',
+      {
+        retries: 1,
+      },
+      () => {
+        cy._select_dropdown('#select-contrato_marco', 'CONTRATO_ORDINARIO');
+        cy.get('input[name="input-nombre-cubicacion"]').click();
+        cy.get('input[name="input-direccion-desde"]').should('not.exist');
+        cy.get('input[name="input-altura-desde"]').should('not.exist');
+        cy.get('input[name="input-direccion-hasta"]').should('not.exist');
+        cy.get('input[name="input-altura-hasta"]').should('not.exist');
+        cy._select_dropdown('#select-contrato_marco', 'UNIFICADO_FIJA');
+        cy.get('input[name="input-direccion-desde"]').should('not.exist');
+        cy.get('input[name="input-altura-desde"]').should('not.exist');
+        cy.get('input[name="input-direccion-hasta"]').should('not.exist');
+        cy.get('input[name="input-altura-hasta"]').should('not.exist');
+        cy._select_dropdown('#select-contrato_marco', 'UNIFICADO_MOVIL');
+        cy.get('input[name="input-direccion-desde"]').should('not.exist');
+        cy.get('input[name="input-altura-desde"]').should('not.exist');
+        cy.get('input[name="input-direccion-hasta"]').should('not.exist');
+        cy.get('input[name="input-altura-hasta"]').should('not.exist');
+        cy.get('input[name="input-nombre-cubicacion"]').click();
+      }
+    );
   });
 
   describe('Testing comportamiento de dropdown en una selección inicial', () => {
