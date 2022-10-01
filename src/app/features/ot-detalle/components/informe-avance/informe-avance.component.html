@@ -1,27 +1,29 @@
-<p-divider align="center">
-    <span class="p-tag">Informe de avance</span>
-</p-divider>
+<div class="container-informe-avance">
+    <p-divider align="center">
+        <span class="p-tag">Informe de avance</span>
+    </p-divider>
 
-<div class="card">
-    <div class=" grid">
-        <div class="field col-12 table-informe-avance">
-            <zwc-form-table-services [StaticData]="dataServicios"></zwc-form-table-services>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-informe-avance">
+                <zwc-form-table-services [StaticData]="dataServicios"></zwc-form-table-services>
+            </div>
+
         </div>
-
     </div>
-</div>
 
-<p-divider align="center">
-    <span class="p-tag">Servicios Adicionales</span>
-</p-divider>
+    <p-divider align="center">
+        <span class="p-tag">Servicios Adicionales</span>
+    </p-divider>
 
-<div class="card">
-    <div class=" grid">
-        <div class="field col-12 table-informe-avance">
-            <zwc-table-agregar-servicios #tableAgregarServiciosAdicionales reglasDeAgregacion="ServiciosAdicionales"
-                [informeAvance]="dataServicios">
-            </zwc-table-agregar-servicios>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-informe-avance">
+                <zwc-table-agregar-servicios #tableAgregarServiciosAdicionales reglasDeAgregacion="ServiciosAdicionales"
+                    [informeAvance]="dataServicios">
+                </zwc-table-agregar-servicios>
+            </div>
+
         </div>
-
     </div>
 </div>
