@@ -1,4 +1,9 @@
 import {
+  getTipoServiciosContratoMOCK200ok,
+  ServiciosAgenciaContratoProveedorMOCK200OK,
+  UnidadObraServicioMOCK200OK,
+} from '@mocksOT';
+import {
   crearCubicacion,
   CubicacionEditada,
 } from 'cypress/fixtures/testedCubicacion';
@@ -155,5 +160,135 @@ describe('INFORME DE AVANCE', () => {
         });
       });
     });
+  });
+
+  it('Debe desplegar el carrito para adicionales vacio', () => {
+    cy.get(
+      '.table-agregar-servicios-adicionales>zwc-table-agregar-servicios>div>div>zwc-form-table-services>form>table>tbody'
+    )
+      .find('tr')
+      .should('have.length', 0);
+  });
+
+  it('Debe desplegar los datos para poder agregar servicios adicionales', () => {
+    // TIPO SERVICIO
+    cy._select_dropdown('#select-actividad', 'DISEÑO');
+    cy._check_dropdown_required('#select-tipo-servicio');
+    cy._check_dropdown_data(
+      '#select-tipo-servicio',
+      getTipoServiciosContratoMOCK200ok.data.items,
+      'descripcion'
+    );
+
+    // TIPO SERVICIO
+    cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
+    cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
+
+    let datosServ = ServiciosAgenciaContratoProveedorMOCK200OK.data.items
+      .sort((a, b) =>
+        a.descripcion > b.descripcion
+          ? 1
+          : b.descripcion > a.descripcion
+          ? -1
+          : 0
+      )
+      .map(value => `${value.numero_producto} - ${value.descripcion}`);
+    cy.get('#select-servicio').click();
+    cy.get(
+      '#select-servicio' +
+        '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
+    ).each(($el, index, $list) => {
+      expect($el.text()).eq(datosServ[index]);
+    });
+    cy.get('#select-servicio').click();
+
+    // UO
+    cy._select_dropdown(
+      '#select-servicio',
+      'D021 - DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)'
+    );
+    // TODO: VER PORQUE SE PEGA
+    cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
+
+    // cy._check_dropdown_required('#select-unidad-obra');
+    let datos = UnidadObraServicioMOCK200OK.data.items
+      .sort((a, b) =>
+        a.model_unidad_obra_cod.descripcion >
+        b.model_unidad_obra_cod.descripcion
+          ? 1
+          : b.model_unidad_obra_cod.descripcion >
+            a.model_unidad_obra_cod.descripcion
+          ? -1
+          : 0
+      )
+      .map(
+        value =>
+          `${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}`
+      );
+    cy.get('#select-unidad-obra').click();
+    cy.get(
+      '#select-unidad-obra' +
+        '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
+    ).each(($el, index, $list) => {
+      expect($el.text()).eq(datos[index]);
+    });
+    cy.get('#select-unidad-obra').click();
+  });
+
+  it('Debe resetearse los filtros al cambiar de filtros', () => {
+    // CAMBIAR ACTIVIDAD
+    cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
+    cy._select_dropdown('#select-tipo-servicio', 'CABLES');
+    cy._select_dropdown(
+      '#select-servicio',
+      'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
+    );
+    cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
+
+    cy._select_dropdown('#select-actividad', 'ABANDONOS');
+    cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+
+    // CAMBIAR TIPO SERVICIO
+    cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
+    cy._select_dropdown('#select-tipo-servicio', 'CABLES');
+    cy._select_dropdown(
+      '#select-servicio',
+      'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
+    );
+    cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
+
+    cy._select_dropdown('#select-tipo-servicio', 'DTH');
+    cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+  });
+
+  it('Debe desplegar error si trata de ingresar el servicio J451-D03 con el mensaje "Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance"', () => {
+    cy._select_dropdown('#select-actividad', 'MATRIZ');
+    cy._select_dropdown('#select-tipo-servicio', 'CABLES');
+    cy._select_dropdown(
+      '#select-servicio',
+      'J451 - EMPALME DE UN PAR (CON CONECTOR INDIVIDUAL O DERIVADO)'
+    );
+    cy._select_dropdown(
+      '#select-unidad-obra',
+      'D013 - CONECTOR ROJO CAL.24-19'
+    );
+
+    cy.get('#agregar-button').click();
+    cy.get(
+      '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
+    ).contains(
+      'Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance'
+    );
+  });
+
+  it('El mensaje de alerta debería desaparecer si cambio de actividad', () => {
+    // cy._select_dropdown(
+    //   '#select-servicio',
+    //   'J912 - ABRIR EMPALME COM. TIPO MECANICO TTRC O EFA'
+    // );
+    // cy.get(
+    //   '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
+    // ).should('not.exist');
   });
 });

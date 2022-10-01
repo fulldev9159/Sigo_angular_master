@@ -50,18 +50,6 @@ export class FormCubContainerComponent
   })
   formulario: FormularioComponent;
 
-  // @ViewChild('agregarServiciosForm', {
-  //   read: FormAgregarServiciosComponent,
-  //   static: false,
-  // })
-  // agregarServiciosForm: FormAgregarServiciosComponent;
-
-  // @ViewChild('tableServicios', {
-  //   read: FormTableServicesComponent,
-  //   static: false,
-  // })
-  // tableServicios: FormTableServicesComponent;
-
   @ViewChild('tableAgregarServicios', {
     read: TableAgregarServiciosComponent,
     static: false,

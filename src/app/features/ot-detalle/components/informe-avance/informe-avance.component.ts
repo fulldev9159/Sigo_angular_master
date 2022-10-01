@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   AgenciaContrato,
@@ -8,6 +14,7 @@ import {
   DetalleOT,
   ProveedorAgenciaContrato,
 } from '@model';
+import { TableAgregarServiciosComponent } from '@sharedOT/table-agregar-servicios/table-agregar-servicios.component';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
@@ -20,9 +27,17 @@ import { Subscription } from 'rxjs';
   templateUrl: './informe-avance.component.html',
   styleUrls: ['./informe-avance.component.scss'],
 })
-export class InformeAvanceComponent implements OnDestroy, OnInit {
+export class InformeAvanceComponent
+  implements OnDestroy, OnInit, AfterViewInit
+{
   subscription: Subscription = new Subscription();
   dataServicios: CarritoService[] = [];
+
+  @ViewChild('tableAgregarServiciosAdicionales', {
+    read: TableAgregarServiciosComponent,
+    static: false,
+  })
+  tableAgregarServiciosAdicionales: TableAgregarServiciosComponent;
 
   constructor(
     private serviciosFacade: ServiciosFacade,
@@ -131,6 +146,55 @@ export class InformeAvanceComponent implements OnDestroy, OnInit {
       })
     );
   }
+
+  ngAfterViewInit(): void {
+    //SETTING INIT FORMULARIOS
+    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+      .get('tipo_servicio_id')
+      .disable({ emitEvent: false });
+    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+      .get('servicio_cod')
+      .disable({ emitEvent: false });
+    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+      .get('unidad_obra_cod')
+      .disable({ emitEvent: false });
+
+    // RESET
+    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+      .get('actividad_id')
+      .valueChanges.subscribe(() => {
+        this.contratoFacade.resetTipoServiciosContrato();
+        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+        this.serviciosFacade.resetServicioSelected();
+        this.serviciosFacade.resetUnidadesObraServicio();
+
+        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+          .get('tipo_servicio_id')
+          .setValue(null, { emitEvent: false });
+        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+          .get('servicio_cod')
+          .setValue(null, { emitEvent: false });
+        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+          .get('unidad_obra_cod')
+          .setValue(null, { emitEvent: false });
+      });
+
+    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+      .get('tipo_servicio_id')
+      .valueChanges.subscribe(() => {
+        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+        this.serviciosFacade.resetServicioSelected();
+        this.serviciosFacade.resetUnidadesObraServicio();
+
+        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+          .get('servicio_cod')
+          .setValue(null, { emitEvent: false });
+        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+          .get('unidad_obra_cod')
+          .setValue(null, { emitEvent: false });
+      });
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

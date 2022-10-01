@@ -191,7 +191,7 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
 
     describe('SERVICIO', () => {
       it('test', () => {
-        // SERVICIO
+        // TIPO SERVICIO
 
         cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
         cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
