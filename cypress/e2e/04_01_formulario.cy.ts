@@ -7,7 +7,7 @@ import {
   getTipoServiciosContratoMOCK200ok,
   ServiciosAgenciaContratoProveedorMOCK200OK,
   UnidadObraServicioMOCK200OK,
-} from '../../../src/mocks';
+} from '@mocksOT';
 
 interface DATA_TABLE_SERVICE_UO {
   fila: number;
