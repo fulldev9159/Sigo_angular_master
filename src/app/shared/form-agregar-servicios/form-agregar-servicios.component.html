@@ -40,7 +40,7 @@
             [sending]="loadingAgregarServicioCarrito$|async" (call)="agregarServicio()"></zwc-pbutton-sending>
 
         <div class="message" id="alert-sevicio-existente" *ngIf="alertServicioExistenteCarrito$|async">
-            <p-message severity="warn" [text]="alertMessageServicio$|async" styleClass="mr-2"></p-message>
+            <p-message severity="warn" [text]="alertMessageServicio$|async" styleClass="mr-2 mt-3"></p-message>
         </div>
     </div>
 </form>

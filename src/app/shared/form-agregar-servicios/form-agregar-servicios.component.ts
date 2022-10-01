@@ -332,7 +332,9 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
             this.ReglasAgregarServiciosAdicionales(
               carrito,
               servicio_id,
-              unidad_obra_cod
+              unidad_obra_cod,
+              proveedorSelected.cmarco_has_proveedor_id,
+              agenciaSelected.id
             );
         })
     );
@@ -371,10 +373,19 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
     }
   }
 
+  // TODO: REVISAR BIEN TODOS LOS CASOS
+  // TODO: CASO SERVICIO/UO NUEVOS NO EXISTENTES EN INFORME ORIGINAL
+  // TODO: CASO SERVICIO EXISTENTE EN INFORME ORIGINAL PERO UO ES NUEVA
+  // TODO: CASO SERVICIO/UO ADICIONAL YA AGREGADO ANTERIORMENTE
+  // TODO: CASO SERVICIO ADICIONAL YA AGREGADO ANTERIORMENTE PERO UO NUEVA
+  // TODO: CASO SERVICIO/UO ADICIONAL EXISTENTE EN EL CARRITO TEMPORAL ANTES DE GUARDAR BORRADOR
+
   ReglasAgregarServiciosAdicionales(
     carrito: CarritoService[],
     servicio_id: number,
-    unidad_obra_cod: string
+    unidad_obra_cod: string,
+    cmarco_has_proveedor_id: number,
+    agencia_id: number
   ): boolean {
     console.log('informe', this.informeAvance);
 
@@ -390,10 +401,10 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
     console.log('existe', servicioYUOExistenEnInformeORIGINAL);
 
     if (servicioYUOExistenEnInformeORIGINAL !== undefined) {
-      console.log(
-        'Es un servicio/UO existente en el informe de avance y es original'
+      this.serviciosFacade.alertServicioExistenteCarrito(
+        true,
+        'Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance'
       );
-      // DEBE ENVIAR MENSAJE DE ERROR "Servicio y unidad de obra existentes en el informe de avance. Debe cambiar la cantidad en el informe de avance"
     }
 
     // SI SERVICIO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL PERO LA UO ES NUEVA
@@ -432,7 +443,17 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
       servicioExisteYUOnoExisteEnInformeORIGINAL === undefined &&
       servicioYUOExistenEnInformeADICIONAL === undefined
     ) {
-      console.log('Es nuevo');
+      this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+      const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor =
+        {
+          agencia_id,
+          cmarco_has_proveedor_id,
+          servicio_id: +servicio_id,
+          tipo_servicio_id: this.formFilter.get('tipo_servicio_id').value,
+          actividad_id: this.formFilter.get('actividad_id').value,
+        };
+
+      this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
     }
 
     return false;
