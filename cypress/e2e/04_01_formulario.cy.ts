@@ -101,7 +101,7 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
     it(
       'should not display dirección inputs for contracts doent bucle',
       {
-        retries: 1,
+        retries: 2,
       },
       () => {
         cy._select_dropdown('#select-contrato_marco', 'CONTRATO_ORDINARIO');
@@ -260,36 +260,48 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
   });
 
   describe('Testing comportamiento Selectores al comenzar a realizar cambios de selecciones', () => {
-    it('All selectors should be disabled except contrato and agencia if contrato changed', () => {
-      cy._select_dropdown('#select-contrato_marco', 'SBE_2018');
-      cy.get('#select-proveedor>div').should('have.class', 'p-disabled');
-      cy.get('#select-actividad>div').should('have.class', 'p-disabled');
-      cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
-      cy.get('#select-servicio>div').should('have.class', 'p-disabled');
-      cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
-      cy.get('#select-contrato_marco').click();
-    });
+    it(
+      'All selectors should be disabled except contrato and agencia if contrato changed',
+      {
+        retries: 2,
+      },
+      () => {
+        cy._select_dropdown('#select-contrato_marco', 'SBE_2018');
+        cy.get('#select-proveedor>div').should('have.class', 'p-disabled');
+        cy.get('#select-actividad>div').should('have.class', 'p-disabled');
+        cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
+        cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+        cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+        cy.get('#select-contrato_marco').click();
+      }
+    );
 
-    it('All selectors should be disabled except contrato, agencia andproveedor if agencia changed', () => {
-      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
-      cy._select_dropdown('#select-agencia', 'APOQUINDO');
-      cy._select_dropdown(
-        '#select-proveedor',
-        '330000659 - COBRA CHILE SERVICIOS S.A.'
-      );
-      cy._select_dropdown('#select-actividad', 'DISEÑO');
-      cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
-      cy._select_dropdown(
-        '#select-servicio',
-        'D021 - DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)'
-      );
-      cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
-      cy._select_dropdown('#select-agencia', 'PROVIDENCIA');
-      cy.get('#select-actividad>div').should('have.class', 'p-disabled');
-      cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
-      cy.get('#select-servicio>div').should('have.class', 'p-disabled');
-      cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
-    });
+    it(
+      'All selectors should be disabled except contrato, agencia andproveedor if agencia changed',
+      {
+        retries: 2,
+      },
+      () => {
+        cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+        cy._select_dropdown('#select-agencia', 'APOQUINDO');
+        cy._select_dropdown(
+          '#select-proveedor',
+          '330000659 - COBRA CHILE SERVICIOS S.A.'
+        );
+        cy._select_dropdown('#select-actividad', 'DISEÑO');
+        cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
+        cy._select_dropdown(
+          '#select-servicio',
+          'D021 - DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)'
+        );
+        cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
+        cy._select_dropdown('#select-agencia', 'PROVIDENCIA');
+        cy.get('#select-actividad>div').should('have.class', 'p-disabled');
+        cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
+        cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+        cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+      }
+    );
 
     it('All selectors should be disabled except contrato, agencia , proveedor and actividad if proveedor changed', () => {
       cy._select_dropdown('#select-contrato_marco', 'SBE_2018');
@@ -317,27 +329,33 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
     });
 
-    it('only tipo servicio, servicios y uo should be disabled if actividad changed', () => {
-      cy._select_dropdown('#select-contrato_marco', 'BUCLE');
-      cy._select_dropdown('#select-agencia', 'APOQUINDO');
-      cy._select_dropdown(
-        '#select-proveedor',
-        '330000659 - COBRA CHILE SERVICIOS S.A.'
-      );
-      cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
-      cy._select_dropdown('#select-tipo-servicio', 'CABLES');
-      cy._select_dropdown(
-        '#select-servicio',
-        'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
-      );
-      cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
+    it(
+      'only tipo servicio, servicios y uo should be disabled if actividad changed',
+      {
+        retries: 2,
+      },
+      () => {
+        cy._select_dropdown('#select-contrato_marco', 'BUCLE');
+        cy._select_dropdown('#select-agencia', 'APOQUINDO');
+        cy._select_dropdown(
+          '#select-proveedor',
+          '330000659 - COBRA CHILE SERVICIOS S.A.'
+        );
+        cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
+        cy._select_dropdown('#select-tipo-servicio', 'CABLES');
+        cy._select_dropdown(
+          '#select-servicio',
+          'J679 - ATENCION DE ALARMAS DE PRESURIZACION. LOCALIZACION DE FUGAS EN VIA NEUMATICA SECUNDARIA.'
+        );
+        cy._select_dropdown('#select-unidad-obra', '0 - SIN UO');
 
-      cy._select_dropdown('#select-actividad', 'ABANDONOS');
-      cy.get('#select-servicio>div').should('have.class', 'p-disabled');
-      cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+        cy._select_dropdown('#select-actividad', 'ABANDONOS');
+        cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+        cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
 
-      cy.get('input[name="input-nombre-cubicacion"]').click();
-    });
+        cy.get('input[name="input-nombre-cubicacion"]').click();
+      }
+    );
 
     it('only tipo servicios y uo should be disabled if actividad changed', () => {
       cy._select_dropdown('#select-actividad', 'DISTRIBUCION');
