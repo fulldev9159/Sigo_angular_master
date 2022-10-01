@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DetalleOT, Response } from '@model';
+import { Accion, DetalleOT, Response } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as otDetalleSelectors from './ot-detalle.selectors';
@@ -26,5 +26,22 @@ export class OTDetalleFacade {
 
   public getDetalleOT$(): Observable<DetalleOT> {
     return this.store.select(otDetalleSelectors.detalleOT);
+  }
+
+  // GET ACCIONES OT
+  public accionesOT(ot_id: number): void {
+    this.store.dispatch(otDetalleActions.getAccionesOT({ ot_id }));
+  }
+
+  public accionesOTSuccess(acciones: Accion[]): void {
+    this.store.dispatch(otDetalleActions.getAccionesOTSuccess({ acciones }));
+  }
+
+  public accionesOTError(error: any): void {
+    this.store.dispatch(otDetalleActions.getAccionesOTTError({ error }));
+  }
+
+  public accionesOT$(): Observable<Accion[]> {
+    return this.store.select(otDetalleSelectors.accionesOT);
   }
 }

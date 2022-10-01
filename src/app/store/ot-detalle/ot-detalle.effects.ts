@@ -27,10 +27,28 @@ export class OTDetalleEffects {
     )
   );
 
+  // GET ACCIONES OT
+  getAccionesOT$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otDetalleActions.getAccionesOT),
+      concatMap(({ ot_id }) =>
+        this.otDetalleHttp.getAccionesOT(ot_id).pipe(
+          map(acciones => otDetalleActions.getAccionesOTSuccess({ acciones })),
+          catchError(error =>
+            of(otDetalleActions.getAccionesOTTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otDetalleActions.getDetalleOTSuccess),
+        ofType(
+          otDetalleActions.getDetalleOTSuccess,
+          otDetalleActions.getAccionesOTSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -39,7 +57,10 @@ export class OTDetalleEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(otDetalleActions.getDetalleOTError),
+        ofType(
+          otDetalleActions.getDetalleOTError,
+          otDetalleActions.getAccionesOTTError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

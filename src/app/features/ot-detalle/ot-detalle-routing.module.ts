@@ -4,6 +4,7 @@ import { InformeAvanceComponent } from './components/informe-avance/informe-avan
 import { OtDetalleComponent } from './ot-detalle.component';
 import { DetalleOTResolver } from './resolvers/detalleOT.resolver';
 import { DetalleInformeAvanceResolver } from './resolvers/detalle-informe-avance.resolver';
+import { AccionesOTResolver } from './resolvers/accionesOT.resolver';
 const routes: Routes = [
   {
     path: '',
@@ -20,6 +21,7 @@ const routes: Routes = [
         resolve: {
           detalleOT: DetalleOTResolver,
           detalleInformeAvance: DetalleInformeAvanceResolver,
+          accionesOT: AccionesOTResolver,
         },
       },
     ],

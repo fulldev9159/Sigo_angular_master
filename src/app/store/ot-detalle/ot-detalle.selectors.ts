@@ -9,3 +9,8 @@ export const detalleOT = createSelector(
   selectOTDetalle,
   (state: reducer.StateOTDetalle) => state.detalleOT
 );
+
+export const accionesOT = createSelector(
+  selectOTDetalle,
+  (state: reducer.StateOTDetalle) => state.acciones
+);

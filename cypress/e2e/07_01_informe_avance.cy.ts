@@ -291,4 +291,14 @@ describe('INFORME DE AVANCE', () => {
     //   '#alert-sevicio-existente>p-message>div>span.p-inline-message-text'
     // ).should('not.exist');
   });
+
+  it('Al guardar borrador sin hacer ningun cambio debería recargar los mismos datos anteriores', () => {});
+
+  it('Al agregar un servicio adicional no existente en el informe de avance y presionar guardar borrador debe actualizar la pagina con el nuevo adicional en el carrito', () => {});
+
+  it('Al intenet agregar el mismo adicional anterior debe desplegar el siguiente mensaje de error "" ', () => {});
+
+  it('Al agregar un uo adicional a un servicio adicional existente debe agregarlo al mismo servicio adicional y al presionar el boton guardar borrador debe cargar esa uo nueva', () => {});
+
+  it('Al agregar una uo adicional a un servicio original existente debe mostrar un servicio dummy y al presionar guardar borrador debe actualizar la pagina con ese nuevo adicional', () => {});
 });
