@@ -24,7 +24,7 @@ export class DetalleOTResolver implements Resolve<Response<DetalleOT>> {
     const idStr = route.paramMap.get('id');
 
     const id = parseInt(idStr, 10);
-    // TODO: CREAR UN PAGINA NOT-FOUND
+    // 93 TODO: CREAR UN PAGINA NOT-FOUND
     if (isNaN(id)) {
       this.router.navigate([`/not-found`], { skipLocationChange: true });
       return null;

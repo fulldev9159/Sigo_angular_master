@@ -13,8 +13,8 @@ import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { Subscription } from 'rxjs';
 
-// TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
-// TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
+// 92 TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
+// 92 TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
 @Component({
   selector: 'zwc-informe-avance',
   templateUrl: './informe-avance.component.html',

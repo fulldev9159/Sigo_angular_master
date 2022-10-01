@@ -1,7 +1,7 @@
 <zwc-content-layout [navbarHeader]="navbarHeader">
     <div content>
         <div class="card">
-            <!-- TODO: Agregar lazy loading cuando se tenga paginación desde el endpoint
+            <!-- 100 TODO: Agregar lazy loading cuando se tenga paginación desde el endpoint
         [lazy]="true" 
         [loading]="getCubicacioneSending$|async" 
         [totalRecords]="(cubicaciones$|async).length" -->
@@ -149,7 +149,7 @@
         </div>
     </ng-container>
     <ng-template #content>
-        <!-- TODO: NECESITO OBTENER EL TIPO CONTRATO  -->
+        <!-- 101 TODO: NECESITO OBTENER EL TIPO CONTRATO  -->
         <ng-container *ngIf="detalleCubicacion?.contrato_id===9">
             <p-divider align="left">
                 <span class="p-tag">Detales de dirección</span>

@@ -6,6 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-rechazo.component.scss'],
 })
 export class ViewRechazoComponent {
-  // TODO: PROGRAMAR/MIGRAR RECHAZO
+  // 98 TODO: PROGRAMAR/MIGRAR RECHAZO
   constructor() {}
 }
