@@ -3,6 +3,9 @@
   {{ item.numero_producto }}
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">
+  <ng-container *ngIf="item.adicional!=='ORIGINAL'">
+    <p-tag value="Servicio Adicional" severity="warning"></p-tag>
+  </ng-container>
   {{ item.servicio_nombre }}
 </td>
 <td [attr.rowspan]="+item.unidad_obras.length" zwcColorPrecargado [condicion]="item.precargado">

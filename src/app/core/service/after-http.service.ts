@@ -7,6 +7,7 @@ import * as usuarioActions from '@storeOT/usuario/usuario.actions';
 import * as cubicacionActions from '@storeOT/cubicacion/cubicacion.actions';
 import * as otActions from '@storeOT/ot/ot.actions';
 import * as flujoOTActions from '@storeOT/flujo-ot/flujo-ot.actions';
+import * as serviciosActions from '@storeOT/servicios/servicios.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { OTFacade } from '@storeOT/ot/ot.facades';
@@ -146,6 +147,16 @@ export class AfterHttpService {
         6000
       );
       this.router.navigate(['/ot/list-ot']);
+    }
+
+    // GUARDAR BORRADOR INFORME DE AVANCE
+    if (action.type === serviciosActions.agregarAdicionalesSuccess.type) {
+      this.snackMessage.showMessage(
+        `Se guarda el informe de avance exitosamente`,
+        'Exito',
+        6000
+      );
+      location.reload();
     }
 
     // ACEPTAR OT INICIAL

@@ -61,3 +61,12 @@
     font-weight: 400;
   }
 }
+
+:host ::ng-deep {
+  .p-tag {
+    font-size: 0.5rem;
+    letter-spacing: 0.02rem;
+    background-color: #F2D7A9 !important;
+    color: #ac7619;
+  }
+}

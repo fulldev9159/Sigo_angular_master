@@ -424,3 +424,47 @@ export const CubicacionEditada = {
     },
   ],
 };
+
+export const adicionalesBucle1 = {
+  items: [
+    {
+      nombre: 'T051 - INSTALAR DIVISOR, DERIVADOR (INCLUIDO TAP DIRECCIONABLE)',
+      precio: '$5.005,2',
+      cantidad: '4',
+      total: '$20.020,80',
+      tipo_servicio: 'Dth',
+      actividad: 'Distribucion',
+      unidad_obras: [
+        {
+          nombre: 'DT04 - SPLITTER 4 SALIDAS (SPLITTER 1X4)',
+          precio: '$0',
+          cantidad: '10',
+          total: '$0',
+        },
+        {
+          nombre: 'DT01 - CABLE COAXIAL RG11',
+          precio: '$0',
+          cantidad: '3',
+          total: '$0',
+        },
+      ],
+    },
+    {
+      nombre:
+        'T052 - INSTALAR AMPLIFICADOR O FUENTE DE ALIMENTACION HASTA 8 AMPERIOS',
+      precio: '$6.256,5',
+      cantidad: '2',
+      total: '$12.513,00',
+      tipo_servicio: 'Dth',
+      actividad: 'Distribucion',
+      unidad_obras: [
+        {
+          nombre: 'DT06 - CONECTOR RG11',
+          precio: '$0',
+          cantidad: '3',
+          total: '$0',
+        },
+      ],
+    },
+  ],
+};

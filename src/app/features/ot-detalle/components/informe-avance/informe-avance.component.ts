@@ -25,6 +25,7 @@ import { Subscription, take } from 'rxjs';
 
 // 92 TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
 // 92 TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
+// TODO: VER SI ES MEJOR UX REFRESCAR EL NGRX QUE LA PÁGINA AL GUARDAR BORRADOR
 @Component({
   selector: 'zwc-informe-avance',
   templateUrl: './informe-avance.component.html',
@@ -128,7 +129,8 @@ export class InformeAvanceComponent
                 };
 
                 // PARA CARGAR INFORME DE AVANCE
-                this.dataServicios.push(new_service);
+                if (new_service.adicional === 'ORIGINAL')
+                  this.dataServicios.push(new_service);
                 // PARA PRE CARGAR SERVICIOS ADICIONALES
                 if (new_service.adicional !== 'ORIGINAL')
                   this.serviciosFacade.addDirectServiceCarrito(new_service);
