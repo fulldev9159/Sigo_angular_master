@@ -13,13 +13,15 @@ import {
   ContratosUser,
   DetalleInformeAvance,
   DetalleOT,
+  NuevoServicioAdicional,
   ProveedorAgenciaContrato,
+  RequestAdicionales,
 } from '@model';
 import { TableAgregarServiciosComponent } from '@sharedOT/table-agregar-servicios/table-agregar-servicios.component';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 // 92 TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
 // 92 TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
@@ -33,7 +35,10 @@ export class InformeAvanceComponent
 {
   subscription: Subscription = new Subscription();
   dataServicios: CarritoService[] = [];
-  accionesOT: Accion[];
+  // TODO: MEJORAR MANERA DE ARMAR LOS DATOS DEL SERVICIO A AGREGAR, ACTUALMENTE SE BUSCA DESDE EL CARRITO HACIA EL CARRITO, TIENE UNA VUELTA MEDIA RARA
+  carrito$ = this.serviciosFacade.carrito$();
+  accionesOT: Accion[] = [];
+  ot_id: number;
 
   @ViewChild('tableAgregarServiciosAdicionales', {
     read: TableAgregarServiciosComponent,
@@ -59,6 +64,8 @@ export class InformeAvanceComponent
             const detalleInforme =
               detalleInformeAvance.data as DetalleInformeAvance;
             const ot = detalleOT.data as DetalleOT;
+
+            this.ot_id = ot.ot.id;
 
             // PRECARGAR DATOS FILTROS PARA AGREGAR SERVICIOS
             this.contratoFacade.getActividadesContratoProveedor(
@@ -203,6 +210,86 @@ export class InformeAvanceComponent
 
   accionExist(accion: string): boolean {
     return this.accionesOT.find(v => v.slug === accion) !== undefined;
+  }
+
+  guardarBorrador(): void {
+    this.subscription.add(
+      this.carrito$.pipe(take(1)).subscribe(carrito => {
+        // TODO: IMPLEMENTAR LA ELIMINACIÓN DE ADICIONALES ESCOGIDOS
+        // TODO: IMPLEMENTAR EL GUARDAR CAMBIOS DE INFORME DE AVANCE
+
+        console.log(
+          this.tableAgregarServiciosAdicionales.tableServicios.formTable.value
+        );
+
+        // SERVICIOS ADICIONALES
+        let formularioCarrito =
+          this.tableAgregarServiciosAdicionales.tableServicios.formTable.get(
+            'table'
+          ).value as Array<{
+            servicio_rowid: number;
+            servicio_id: number;
+            servicio_cantidad: number;
+            actividad_id: number;
+            servicio_tipo: number;
+            adicional: string;
+            dummy: string;
+            unidad_obras: {
+              precargado: boolean;
+              uo_rowid: number;
+              uo_codigo: string;
+              uo_cantidad: number;
+            }[];
+          }>;
+
+        console.log('form', formularioCarrito);
+        if (formularioCarrito.length > 0) {
+          // SERVICIOS/UO COMPLETAMENTE NUEVOS
+          let nuevosAdicionales: NuevoServicioAdicional[] = formularioCarrito
+            .filter(value => value.adicional === undefined)
+            .map(value => ({
+              servicio_id: +value.servicio_id,
+              actividad_id: +carrito.find(
+                servicio => servicio.servicio_id === +value.servicio_id
+              ).unidad_obras[0].actividad_id, // TODO: CONSULTAR SI EXISTE LA POSIBILIDAD DE QUE EXISTA UNA UO CON DISTINTOS TIPOS DE SERVICIO/ACTIVIDAD
+              tipo_servicio_id: +carrito.find(
+                servicio => servicio.servicio_id === +value.servicio_id
+              ).tipo_servicio_id,
+              cantidad: value.dummy ? 0 : value.servicio_cantidad,
+              unidad_obra: value.unidad_obras.map(uo => ({
+                uob_codigo: uo.uo_codigo,
+                cantidad: uo.uo_cantidad,
+              })),
+            }));
+
+          console.log('nuevos', nuevosAdicionales);
+
+          // SERVICIOS A ACTUALIZAR
+
+          // UO A ACTUALIZAR
+
+          // UO A AGREGAR
+
+          let request: RequestAdicionales = {
+            ot_id: this.ot_id,
+            adicionales_solicitados: {
+              nuevo: nuevosAdicionales,
+              // actualizar: {
+              //   servicio: servicio_actualizar,
+              //   unidad_obra: [...uo_actualizar.flat()].filter(
+              //     value => value !== undefined
+              //   ),
+              //   agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
+              //     value => value !== undefined
+              //   ),
+              // },
+            },
+          };
+
+          this.serviciosFacade.agregarAdicionales(request);
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {

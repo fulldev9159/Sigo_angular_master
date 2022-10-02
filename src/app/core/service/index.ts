@@ -15,3 +15,4 @@ export * from './proyectos-http.service';
 export * from './flujo-ot-http.service';
 export * from './ot-detalle-http.service';
 export * from './informe-avance-http.service';
+export * from './servicios-adicionales-http.service';

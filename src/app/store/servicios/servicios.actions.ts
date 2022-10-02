@@ -1,9 +1,11 @@
 import {
   CarritoService,
   DetallesServicioTipoAgenciaContratoProveedor,
+  RequestAdicionales,
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   RequestGetServicioTipoAgenciaContratoProveedor,
   Response,
+  ResponseAgregarAdicionales,
   ServicioAgenciaContratoProveedor,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
@@ -109,6 +111,21 @@ export const addDirectServiceCarrito = createAction(
   props<{
     service: CarritoService;
   }>()
+);
+
+// SERVICIOS ADICIONALES
+export const agregarAdicionales = createAction(
+  '[SERVICIOS] GET agregarAdicionales',
+  props<{ request: RequestAdicionales }>()
+);
+
+export const agregarAdicionalesSuccess = createAction(
+  '[SERVICIOS] GET agregarAdicionales Success',
+  props<{ response: Response<ResponseAgregarAdicionales> }>()
+);
+export const agregarAdicionalesError = createAction(
+  '[SERVICIOS] agregarAdicionales Error',
+  props<{ error: any }>()
 );
 
 // RESETS

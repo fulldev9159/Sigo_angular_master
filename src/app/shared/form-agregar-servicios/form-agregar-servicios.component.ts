@@ -388,8 +388,6 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
     cmarco_has_proveedor_id: number,
     agencia_id: number
   ): boolean {
-    console.log('informe', this.informeAvance);
-
     // SI SERVICIO/UO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL
 
     const servicioYUOExistenEnInformeORIGINAL = this.informeAvance.find(
@@ -398,8 +396,6 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         servicio.unidad_obras[0].uo_codigo === unidad_obra_cod &&
         servicio.adicional === 'ORIGINAL'
     );
-
-    console.log('existe', servicioYUOExistenEnInformeORIGINAL);
 
     if (servicioYUOExistenEnInformeORIGINAL !== undefined) {
       this.serviciosFacade.alertServicioExistenteCarrito(

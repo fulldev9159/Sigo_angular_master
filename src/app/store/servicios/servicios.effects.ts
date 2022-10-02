@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AfterHttpService, CubicacionHttpService } from '@services';
+import {
+  AfterHttpService,
+  CubicacionHttpService,
+  ServiciosAdicionalesHttpService,
+} from '@services';
 import * as serviciosActions from './servicios.actions';
 import { catchError, concatMap, map, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -11,6 +15,7 @@ export class ServiciosEffects {
   constructor(
     private actions$: Actions,
     private serviciosHttpService: ServiciosHttpService,
+    private serviciosAdicionalesHttpService: ServiciosAdicionalesHttpService,
     private afterHttp: AfterHttpService
   ) {}
 
@@ -98,13 +103,31 @@ export class ServiciosEffects {
     )
   );
 
+  // AGREGAR ADICIONALES
+  agregarAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionales),
+      concatMap(({ request }) =>
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response =>
+            serviciosActions.agregarAdicionalesSuccess({ response })
+          ),
+          catchError(err =>
+            of(serviciosActions.agregarAdicionalesError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
           serviciosActions.getUnidadesObraServicioSuccess,
-          serviciosActions.addServicioCarritoSuccess
+          serviciosActions.addServicioCarritoSuccess,
+          serviciosActions.agregarAdicionalesSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -117,7 +140,8 @@ export class ServiciosEffects {
         ofType(
           serviciosActions.getServiciosAgenciaContratoProveedorError,
           serviciosActions.getUnidadesObraServicioError,
-          serviciosActions.addServicioCarritoError
+          serviciosActions.addServicioCarritoError,
+          serviciosActions.agregarAdicionalesError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

@@ -22,6 +22,7 @@ export * from './comuna';
 export * from './oficina-central';
 export * from './tipo-trabajo';
 export * from './informe-avance';
+export * from './servicios_adicionales';
 export interface Response<T> {
   data: T;
   status: StatusResponse;

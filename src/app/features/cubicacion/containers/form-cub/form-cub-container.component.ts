@@ -376,9 +376,6 @@ export class FormCubContainerComponent
   }
 
   editarCubicacion(): void {
-    console.log(this.tableAgregarServicios?.tableServicios.servicios_eliminar);
-    console.log(this.tableAgregarServicios?.tableServicios.uos_eliminar);
-
     // ELIMINAR SERVICIOS/UO QUE EXISTIAN EN LA CUBICACION SI EL USUARIO DECIDIÖ ELIMINAR UNO
     if (
       this.tableAgregarServicios?.tableServicios.servicios_eliminar.length >
@@ -389,8 +386,6 @@ export class FormCubContainerComponent
         this.tableAgregarServicios?.tableServicios.servicios_eliminar,
         this.tableAgregarServicios?.tableServicios.uos_eliminar
       );
-      // console.log(this.tableAgregarServicios?.tableServicios.servicios_eliminar);
-      // console.log(this.tableAgregarServicios?.tableServicios.uos_eliminar);
     }
 
     this.subscription.add(

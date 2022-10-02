@@ -3,6 +3,7 @@ import {
   CarritoService,
   ContratosUser,
   PerfilesUsuario,
+  RequestAdicionales,
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   RequestGetServicioTipoAgenciaContratoProveedor,
   Response,
@@ -121,6 +122,11 @@ export class ServiciosFacade {
   // ADD SERVICE CARRITO
   public addDirectServiceCarrito(service: CarritoService): void {
     this.store.dispatch(serviciosActions.addDirectServiceCarrito({ service }));
+  }
+
+  // AGREGAR ADICIONALES
+  public agregarAdicionales(request: RequestAdicionales): void {
+    this.store.dispatch(serviciosActions.agregarAdicionales({ request }));
   }
 
   // RESETS

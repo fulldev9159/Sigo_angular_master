@@ -275,19 +275,12 @@ export class FormOtContainerComponent implements OnInit, OnDestroy {
     };
 
     if (this.cubicacionSelected)
-      console.log(
+      this.otFacade.createOT(
         this.makeRequest(
           requestBase,
           this.cubicacionSelected.tipo_contrato_marco_nombre
         )
       );
-
-    this.otFacade.createOT(
-      this.makeRequest(
-        requestBase,
-        this.cubicacionSelected.tipo_contrato_marco_nombre
-      )
-    );
   }
 
   makeRequest(
