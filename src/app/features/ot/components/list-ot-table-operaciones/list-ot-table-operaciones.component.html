@@ -14,19 +14,12 @@
     </button>
 
     <!-- OT_ET_EJECUCION_TRABAJOS  SUPERVISOR TRABAJOS-->
-    <button id="play-button" pTooltip="Editar/enviar informe avance" [routerLink]="['/ot-detalle/informe-avance',ot_id]"
-        *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_ENVIAR_INFORME_AVANCE')">
-        <fa-icon [icon]="playIcon"></fa-icon>
-    </button>
-
     <!-- OT_ET_PAGO_ACEPTACION_IA ADMIN EECC -->
     <!-- TODO: SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO -->
-    <button id="play-button" pTooltip="Editar/validar informe avance"
-        [routerLink]="['/ot-detalle/informe-avance',ot_id]"
-        *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_AUTORIZAR_INFORME_AVANCE')">
+    <button id="play-button" pTooltip="Editar/enviar informe avance" [routerLink]="['/ot-detalle/informe-avance',ot_id]"
+        *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_ENVIAR_INFORME_AVANCE')||findAccion('OT_AUTORIZAR_INFORME_AVANCE')">
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
-
 
     <!-- ACCIONES FIJAS -->
     <button id="info-button" pTooltip="Información">
