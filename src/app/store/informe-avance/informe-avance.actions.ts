@@ -1,4 +1,8 @@
-import { DetalleInformeAvance, Response } from '@model';
+import {
+  DetalleInformeAvance,
+  RequestAutorizarInformeAvance,
+  Response,
+} from '@model';
 import { createAction, props } from '@ngrx/store';
 
 //  GET DETALLE INFORME DE AVANCE
@@ -30,5 +34,21 @@ export const sendDetalleInformeAvanceSuccess = createAction(
 
 export const sendDetalleInformeAvanceError = createAction(
   '[INFORME AVANCE] sendDetalleInformeAvance Error',
+  props<{ error: any }>()
+);
+
+//  ACEPTAR/RECHAZAR INFORME DE AVANCE
+export const AceptarRechazarInformeAvanceOT = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT',
+  props<{ request: RequestAutorizarInformeAvance }>()
+);
+
+export const AceptarRechazarInformeAvanceOTSuccess = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT Success',
+  props<{ response: Response<any> }>()
+);
+
+export const AceptarRechazarInformeAvanceOTError = createAction(
+  '[OT] GET AceptarRechazarInformeAvanceOT Error',
   props<{ error: any }>()
 );

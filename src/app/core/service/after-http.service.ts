@@ -29,6 +29,8 @@ interface ActionSuccess {
   type: string;
 }
 
+// TODO: VER MANERA DE IDENTIFICAR SI ES UNA AUTORIZACION O RECHAZO DE INFORME DE AVANCE
+
 @Injectable({
   providedIn: 'root',
 })
@@ -187,6 +189,19 @@ export class AfterHttpService {
     ) {
       this.snackMessage.showMessage(
         `Informe enviado exitosamente`,
+        'Exito',
+        6000
+      );
+      this.router.navigate(['/ot/list-ot']);
+    }
+
+    // ACEPTACION DE INFORME DE AVANCE
+    if (
+      action.type ===
+      informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        `Acción realizada exitosamente`,
         'Exito',
         6000
       );

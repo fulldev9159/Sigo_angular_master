@@ -47,12 +47,36 @@ export class InformeAvanceEffects {
     )
   );
 
+  // ACEPTAR INFORME AVANCE
+  aceptarRechazarInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.AceptarRechazarInformeAvanceOT),
+      concatMap(({ request }) =>
+        this.informeAvanceHttp.autorizarInformeAvance(request).pipe(
+          map(response =>
+            informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess({
+              response,
+            })
+          ),
+          catchError(error =>
+            of(
+              informeAvanceActions.AceptarRechazarInformeAvanceOTError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           informeAvanceActions.getDetalleInformeAvanceSuccess,
-          informeAvanceActions.sendDetalleInformeAvanceSuccess
+          informeAvanceActions.sendDetalleInformeAvanceSuccess,
+          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -64,7 +88,8 @@ export class InformeAvanceEffects {
       this.actions$.pipe(
         ofType(
           informeAvanceActions.getDetalleInformeAvanceError,
-          informeAvanceActions.sendDetalleInformeAvanceError
+          informeAvanceActions.sendDetalleInformeAvanceError,
+          informeAvanceActions.AceptarRechazarInformeAvanceOTError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

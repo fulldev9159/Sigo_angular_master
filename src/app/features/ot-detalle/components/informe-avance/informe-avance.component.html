@@ -36,17 +36,34 @@
                     Atrás
                 </button>
             </div>
-            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending *ngIf="accionExist('OT_EDITAR_INFORME_AVANCE')" Pid="guardar-borrador-button"
-                    content="Guardar borrador" Pclass="p-button-info p-button-sm mt-4 w-full"
-                    (click)="guardarBorrador()"></zwc-pbutton-sending>
+            <div *ngIf="accionExist('OT_EDITAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="guardar-borrador-button" content="Guardar borrador"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="guardarBorrador()"></zwc-pbutton-sending>
             </div>
 
-            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
-                <zwc-pbutton-sending *ngIf="accionExist('OT_ENVIAR_INFORME_AVANCE')" Pid="enviar-button"
-                    content="Enviar informe de avance" Pclass="p-button-info p-button-sm mt-4 w-full"
-                    (click)="enviarInformeAvance()" [sending]="sendingSendInformeAvance$|async">
+            <div *ngIf="accionExist('OT_ENVIAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="enviar-button" content="Enviar informe de avance"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="enviarInformeAvance()"
+                    [sending]="sendingSendInformeAvance$|async">
+                </zwc-pbutton-sending>
+            </div>
+
+            <div *ngIf="accionExist('OT_AUTORIZAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="aceptar-button" content="Autorizar informe de avance"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="autorizarInformeAvance()"
+                    [sending]="sendingSendInformeAvance$|async">
+                </zwc-pbutton-sending>
+            </div>
+            <div *ngIf="accionExist('OT_AUTORIZAR_INFORME_AVANCE')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar informe de avance"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalRechazarInformeAvance()"
+                    [sending]="sendingSendInformeAvance$|async">
                 </zwc-pbutton-sending>
             </div>
         </div>
     </div>
+
+    <p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="showModalRechazarInformeAvance" [draggable]="false"
+        [modal]="true">
+        <zwc-view-rechazo></zwc-view-rechazo>
+    </p-dialog>

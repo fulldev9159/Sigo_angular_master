@@ -16,6 +16,7 @@ import {
   NuevoServicioAdicional,
   ProveedorAgenciaContrato,
   RequestAdicionales,
+  RequestAutorizarInformeAvance,
 } from '@model';
 import { TableAgregarServiciosComponent } from '@sharedOT/table-agregar-servicios/table-agregar-servicios.component';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
@@ -34,6 +35,9 @@ import { Observable, Subscription, take } from 'rxjs';
 // TODO: CONFIRMAR: SI EL ADMIN EECC REALIZA MODIFICACIONES AL INFORME DE AVANCE Y LO RECHAZA ESOS CAMBIOS TAMBIÉN SE DEBERAN GUARDAR
 // TODO: MOSTRAR EL TOTAL EN LA VISTA DEL ADMIN EECC
 // TODO: IMPLEMENTAR BOTON RECHAZAR INFORME DE AVANCE
+// TODO: PROBAR QUE OTROS USUARIOS DE OTRAS EMPRESAS NO PUEDAN ACCEDER AL ID DE UNA OT QUE NO ES DE SU EMPRESA
+// TODO: PROBAR SI AL CAMBIAR INFORMACION DEL INFORME Y APROBAR/RECHAZAR GUARDA EL CAMBIO
+// TODO: AGREGAR UN MODAL DE VALIDACIÓN DE ACCIÓN AL AUTORIZAR INFORME DE AVANCE
 @Component({
   selector: 'zwc-informe-avance',
   templateUrl: './informe-avance.component.html',
@@ -53,6 +57,9 @@ export class InformeAvanceComponent
   // LOADINGS
   sendingSendInformeAvance$: Observable<boolean> =
     this.loadingsFacade.sendingCreateOT$();
+
+  // MODAL
+  showModalRechazarInformeAvance = false;
 
   @ViewChild('tableAgregarServiciosAdicionales', {
     read: TableAgregarServiciosComponent,
@@ -316,6 +323,19 @@ export class InformeAvanceComponent
     // TODO: IMPLEMENTAR MENSAJE Y REDIRECCION AL ENVIAR EXITOSAMENTE
 
     this.informeAvanceFacade.sendDetalleInformeAvance(this.ot_id);
+  }
+
+  displayModalRechazarInformeAvance(): void {
+    this.showModalRechazarInformeAvance = true;
+  }
+
+  autorizarInformeAvance(): void {
+    const request: RequestAutorizarInformeAvance = {
+      ot_id: this.ot_id,
+      estado: 'APROBADO',
+    };
+
+    this.informeAvanceFacade.AceptarRechazarInformeAvanceOT(request);
   }
 
   ngOnDestroy(): void {

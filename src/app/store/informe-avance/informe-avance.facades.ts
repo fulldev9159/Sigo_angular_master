@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { DetalleInformeAvance, Response } from '@model';
+import {
+  DetalleInformeAvance,
+  RequestAutorizarInformeAvance,
+  Response,
+} from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as informeAvanceSelectors from './informe-avance.selectors';
@@ -35,9 +39,19 @@ export class InformeAvanceFacade {
     return this.store.select(informeAvanceSelectors.getDetalleInformeAvance);
   }
 
+  // SEND DETALLE INFORME AVANCE
   public sendDetalleInformeAvance(ot_id: number): void {
     this.store.dispatch(
       informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+    );
+  }
+
+  // ACEPTACION RECHAZO INFORME AVANCE
+  public AceptarRechazarInformeAvanceOT(
+    request: RequestAutorizarInformeAvance
+  ): void {
+    this.store.dispatch(
+      informeAvanceActions.AceptarRechazarInformeAvanceOT({ request })
     );
   }
 }

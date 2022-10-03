@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { DetalleInformeAvance, Response } from '@model';
+import {
+  DetalleInformeAvance,
+  RequestAutorizarInformeAvance,
+  Response,
+} from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -27,6 +31,15 @@ export class InformeAvanceHttpService {
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/informe_avance/send`,
       { ot_id }
+    );
+  }
+
+  autorizarInformeAvance(
+    request: RequestAutorizarInformeAvance
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/informe_avance/aprobacion/update`,
+      request
     );
   }
 }

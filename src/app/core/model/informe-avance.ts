@@ -14,3 +14,10 @@ export interface DetalleInformeAvance {
   costo: number;
   many_informe_has_servicio: ServicioFromInfomeAvance[];
 }
+
+export interface RequestAutorizarInformeAvance {
+  ot_id: number;
+  estado: string; // APROBADO, RECHAZADO
+  observacion?: string;
+  tipo?: number;
+}
