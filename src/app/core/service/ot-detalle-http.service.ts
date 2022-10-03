@@ -21,7 +21,7 @@ export class OtDetalleHttpService {
   }
 
   // GET ACCIONES OT
-  // TODO: VER A FUTURO CREAR UN ENDPOINT QUE RETORNE SOLO ESTO
+  // 104 TODO: VER A FUTURO CREAR UN ENDPOINT QUE RETORNE SOLO ESTO
   getAccionesOT(ot_id: number): Observable<Accion[]> {
     let request = {
       filtro_pestania: 'EN_EJECUCION',
