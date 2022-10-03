@@ -817,4 +817,6 @@ describe('INFORME DE AVANCE', () => {
   it('Al agregar un uo adicional a un servicio adicional existente debe agregarlo al mismo servicio adicional y al presionar el boton guardar borrador debe cargar esa uo nueva', () => {});
 
   it('Al agregar una uo adicional a un servicio original existente debe mostrar un servicio dummy y al presionar guardar borrador debe actualizar la pagina con ese nuevo adicional', () => {});
+
+  it('Enviar informe de avance debe desplegar el mensaje y redirigir al listar ot', () => {});
 });

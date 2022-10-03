@@ -16,3 +16,19 @@ export const getDetalleInformeAvanceError = createAction(
   '[INFORME AVANCE] GET getDetalleInformeAvance Error',
   props<{ error: any }>()
 );
+
+//  SEND DETALLE INFORME DE AVANCE
+export const sendDetalleInformeAvance = createAction(
+  '[INFORME AVANCE] sendDetalleInformeAvance',
+  props<{ ot_id: number }>()
+);
+
+export const sendDetalleInformeAvanceSuccess = createAction(
+  '[INFORME AVANCE] sendDetalleInformeAvance Success',
+  props<{ response: Response<any> }>()
+);
+
+export const sendDetalleInformeAvanceError = createAction(
+  '[INFORME AVANCE] sendDetalleInformeAvance Error',
+  props<{ error: any }>()
+);

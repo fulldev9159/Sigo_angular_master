@@ -22,4 +22,11 @@ export class InformeAvanceHttpService {
       { ot_id }
     );
   }
+
+  sendDetalleInformeAvance(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/informe_avance/send`,
+      { ot_id }
+    );
+  }
 }

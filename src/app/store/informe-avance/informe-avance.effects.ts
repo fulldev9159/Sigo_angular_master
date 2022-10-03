@@ -30,10 +30,30 @@ export class InformeAvanceEffects {
     )
   );
 
+  // SEND DETALLE INFORME DE AVANCE
+  SendDetalleInformeAvance$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(informeAvanceActions.sendDetalleInformeAvance),
+      concatMap(({ ot_id }) =>
+        this.informeAvanceHttp.sendDetalleInformeAvance(ot_id).pipe(
+          map(response =>
+            informeAvanceActions.sendDetalleInformeAvanceSuccess({ response })
+          ),
+          catchError(error =>
+            of(informeAvanceActions.sendDetalleInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(informeAvanceActions.getDetalleInformeAvanceSuccess),
+        ofType(
+          informeAvanceActions.getDetalleInformeAvanceSuccess,
+          informeAvanceActions.sendDetalleInformeAvanceSuccess
+        ),
         tap(action => this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -42,7 +62,10 @@ export class InformeAvanceEffects {
   notifyAfterError = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(informeAvanceActions.getDetalleInformeAvanceError),
+        ofType(
+          informeAvanceActions.getDetalleInformeAvanceError,
+          informeAvanceActions.sendDetalleInformeAvanceError
+        ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

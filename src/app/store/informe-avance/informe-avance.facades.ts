@@ -34,4 +34,10 @@ export class InformeAvanceFacade {
   public getDetalleInformeAvance$(): Observable<DetalleInformeAvance> {
     return this.store.select(informeAvanceSelectors.getDetalleInformeAvance);
   }
+
+  public sendDetalleInformeAvance(ot_id: number): void {
+    this.store.dispatch(
+      informeAvanceActions.sendDetalleInformeAvance({ ot_id })
+    );
+  }
 }

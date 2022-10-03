@@ -20,8 +20,10 @@ import {
 import { TableAgregarServiciosComponent } from '@sharedOT/table-agregar-servicios/table-agregar-servicios.component';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
+import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
+import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
-import { Subscription, take } from 'rxjs';
+import { Observable, Subscription, take } from 'rxjs';
 
 // 92 TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
 // 92 TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
@@ -41,6 +43,11 @@ export class InformeAvanceComponent
   accionesOT: Accion[] = [];
   ot_id: number;
 
+  // TODO: AGREGAR EL SENDING BORRADOR
+  // LOADINGS
+  sendingSendInformeAvance$: Observable<boolean> =
+    this.loadingsFacade.sendingCreateOT$();
+
   @ViewChild('tableAgregarServiciosAdicionales', {
     read: TableAgregarServiciosComponent,
     static: false,
@@ -51,6 +58,8 @@ export class InformeAvanceComponent
     private serviciosFacade: ServiciosFacade,
     private contratoFacade: ContratoFacade,
     private cubicacionFacade: CubicacionFacade,
+    private loadingsFacade: LoadingsFacade,
+    private informeAvanceFacade: InformeAvanceFacade,
     private route: ActivatedRoute
   ) {}
 
@@ -299,6 +308,8 @@ export class InformeAvanceComponent
     // TODO: IMPLEMENTAR EL CONFIRMAR ENVÍO DE INFORME DE AVANCE
     // TODO: IMPLEMENTAR EL GUARDAR ADICIONALES
     // TODO: IMPLEMENTAR MENSAJE Y REDIRECCION AL ENVIAR EXITOSAMENTE
+
+    this.informeAvanceFacade.sendDetalleInformeAvance(this.ot_id);
   }
 
   ngOnDestroy(): void {

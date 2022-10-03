@@ -870,3 +870,8 @@ export let DetalleInformeAvanceMOCK200ok: Response<DetalleInformeAvance> = {
     ],
   },
 };
+
+export let sendInformeAvanceMOCK200ok: Response<{ ot_id: number }> = {
+  status: { code: 0, desc: 'OK' },
+  data: { ot_id: 1 },
+};

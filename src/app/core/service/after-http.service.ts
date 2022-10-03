@@ -8,6 +8,7 @@ import * as cubicacionActions from '@storeOT/cubicacion/cubicacion.actions';
 import * as otActions from '@storeOT/ot/ot.actions';
 import * as flujoOTActions from '@storeOT/flujo-ot/flujo-ot.actions';
 import * as serviciosActions from '@storeOT/servicios/servicios.actions';
+import * as informeAvanceActions from '@storeOT/informe-avance/informe-avance.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { OTFacade } from '@storeOT/ot/ot.facades';
@@ -178,6 +179,18 @@ export class AfterHttpService {
         filtro_pestania: 'ABIERTAS',
         ...filtros,
       });
+    }
+
+    // ENVÍO DE INFORME DE AVANCE
+    if (
+      action.type === informeAvanceActions.sendDetalleInformeAvanceSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        `Informe enviado exitosamente`,
+        'Exito',
+        6000
+      );
+      this.router.navigate(['/ot/list-ot']);
     }
   }
 }

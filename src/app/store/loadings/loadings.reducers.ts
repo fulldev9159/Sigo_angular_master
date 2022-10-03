@@ -10,6 +10,7 @@ import * as otActions from '../ot/ot.actions';
 import * as numeroInternoActions from '../numero-interno/numero-interno.actions';
 import * as sustentoFinancieroActions from '../sustento-financiero/sustento-financiero.actions';
 import * as proyectosActions from '../proyectos/proyectos.actions';
+import * as informeAvanceActions from '../informe-avance/informe-avance.actions';
 export const FeatureKey = 'loadings';
 
 export interface StateLoadings {
@@ -49,6 +50,7 @@ export interface StateLoadings {
   sendingGetProyectos: boolean;
   sendingCreateOT: boolean;
   sendingGetPosibleSupervisorTrabajos: boolean;
+  sendingSendDetalleInformeAvance: boolean;
 }
 
 export const initialStateLoading: StateLoadings = {
@@ -88,6 +90,7 @@ export const initialStateLoading: StateLoadings = {
   sendingGetProyectos: false,
   sendingCreateOT: false,
   sendingGetPosibleSupervisorTrabajos: false,
+  sendingSendDetalleInformeAvance: false,
 };
 
 export const reducerLoadings = createReducer(
@@ -523,5 +526,18 @@ export const reducerLoadings = createReducer(
   on(otActions.createOTSuccess, otActions.createOTError, state => ({
     ...state,
     sendingCreateOT: false,
-  }))
+  })),
+
+  on(informeAvanceActions.sendDetalleInformeAvance, state => ({
+    ...state,
+    sendingSendDetalleInformeAvance: true,
+  })),
+  on(
+    informeAvanceActions.sendDetalleInformeAvanceSuccess,
+    informeAvanceActions.sendDetalleInformeAvanceError,
+    state => ({
+      ...state,
+      sendingSendDetalleInformeAvance: false,
+    })
+  )
 );
