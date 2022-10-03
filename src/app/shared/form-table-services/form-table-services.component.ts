@@ -31,6 +31,8 @@ interface ServiceTableCarrito {
   ];
 }
 
+// TODO: MOVER A LA DERECHA TODOS LOS PRECIOS
+
 /**
  * @description
  *   PERMITE CREAR UNA TABLA CON LOS DATOS DE LOS SERVICIOS.

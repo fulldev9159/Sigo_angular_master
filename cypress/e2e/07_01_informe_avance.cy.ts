@@ -818,5 +818,7 @@ describe('INFORME DE AVANCE', () => {
 
   it('Al agregar una uo adicional a un servicio original existente debe mostrar un servicio dummy y al presionar guardar borrador debe actualizar la pagina con ese nuevo adicional', () => {});
 
-  it('Enviar informe de avance debe desplegar el mensaje y redirigir al listar ot', () => {});
+  it('Enviar informe de avance debe desplegar el mensaje y redirigir al listar ot', () => {
+    cy.get('button[id="enviar-button"]').click();
+  });
 });
