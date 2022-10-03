@@ -219,6 +219,7 @@ export class InformeAvanceComponent
       this.carrito$.pipe(take(1)).subscribe(carrito => {
         // TODO: IMPLEMENTAR LA ELIMINACIÓN DE ADICIONALES ESCOGIDOS
         // TODO: IMPLEMENTAR EL GUARDAR CAMBIOS DE INFORME DE AVANCE
+        // TODO: DESPLEGAR MENSAJE DE APROBACIÓN PARA GUARDAR INFORME DE AVANCE
 
         console.log(
           this.tableAgregarServiciosAdicionales.tableServicios.formTable.value
@@ -292,6 +293,12 @@ export class InformeAvanceComponent
         }
       })
     );
+  }
+
+  enviarInformeAvance(): void {
+    // TODO: IMPLEMENTAR EL CONFIRMAR ENVÍO DE INFORME DE AVANCE
+    // TODO: IMPLEMENTAR EL GUARDAR ADICIONALES
+    // TODO: IMPLEMENTAR MENSAJE Y REDIRECCION AL ENVIAR EXITOSAMENTE
   }
 
   ngOnDestroy(): void {

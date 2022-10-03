@@ -44,7 +44,8 @@
 
             <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
                 <zwc-pbutton-sending *ngIf="accionExist('OT_ENVIAR_INFORME_AVANCE')" Pid="enviar-button"
-                    content="Enviar informe de avance" Pclass="p-button-info p-button-sm mt-4 w-full">
+                    content="Enviar informe de avance" Pclass="p-button-info p-button-sm mt-4 w-full"
+                    (click)="enviarInformeAvance()">
                 </zwc-pbutton-sending>
             </div>
         </div>
