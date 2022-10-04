@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./  /app
 
 RUN npm install
-RUN ng build --prod
+RUN ng build --configuration production
 
 RUN sed -i "s/commit_hash = ''/commit_hash = '${CI_COMMIT_SHA}'/" dist/web-sigo/index.html
 RUN sed -i "s/build_date = ''/build_date = '$(date)'/" dist/web-sigo/index.html
