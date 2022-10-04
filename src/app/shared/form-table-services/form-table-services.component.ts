@@ -32,6 +32,7 @@ interface ServiceTableCarrito {
 }
 
 // TODO: MOVER A LA DERECHA TODOS LOS PRECIOS
+// TODO: QUITAR FLAG DE ADICIONALES SI ES CUBICACION
 
 /**
  * @description

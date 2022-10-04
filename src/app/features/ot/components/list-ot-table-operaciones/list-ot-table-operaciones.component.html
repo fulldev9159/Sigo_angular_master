@@ -16,7 +16,8 @@
     <!-- OT_ET_EJECUCION_TRABAJOS  SUPERVISOR TRABAJOS-->
     <!-- OT_ET_PAGO_ACEPTACION_IA ADMIN EECC -->
     <!-- TODO: SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO -->
-    <button id="play-button" pTooltip="Editar/enviar informe avance" [routerLink]="['/ot-detalle/informe-avance',ot_id]"
+    <button id="play-button" pTooltip="Editar/enviar informe avance"
+        [routerLink]="['/informe-avance/informe-avance',ot_id]"
         *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_ENVIAR_INFORME_AVANCE')||findAccion('OT_AUTORIZAR_INFORME_AVANCE')">
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
@@ -37,6 +38,10 @@
 
 
 </div>
+
+
+
+<!-- MODALS -->
 
 <p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"
     [draggable]="false" [modal]="true">

@@ -5,6 +5,7 @@ import {
   faPersonDigging,
 } from '@fortawesome/free-solid-svg-icons';
 
+// TODO: MEJORAR LA APARICIÓN DE MENSAJES DE EXITO QUE BLOQUEAN LOS BOTONES DE ARRIBA
 @Component({
   selector: 'zwc-menu',
   templateUrl: './menu.component.html',

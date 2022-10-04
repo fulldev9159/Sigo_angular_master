@@ -40,6 +40,15 @@ const routes: Routes = [
     // canLoad: [SigoGuard],
     canActivate: [SigoGuard],
   },
+  {
+    path: 'informe-avance',
+    loadChildren: () =>
+      import('./features/informe-avance/informe-avance.module').then(
+        m => m.InformeAvanceModule
+      ),
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
 ];
 
 @NgModule({
