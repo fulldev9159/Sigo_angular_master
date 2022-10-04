@@ -49,6 +49,13 @@ const routes: Routes = [
     // canLoad: [SigoGuard],
     canActivate: [SigoGuard],
   },
+  {
+    path: 'acta',
+    loadChildren: () =>
+      import('./features/acta/acta.module').then(m => m.ActaModule),
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
 ];
 
 @NgModule({
