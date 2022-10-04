@@ -4,6 +4,8 @@ stages:
   - reset testing database sigo
   - unit test
   - e2e test
+  - deployment
+  - triggers
 
 variables:
   CLI_VERSION: 14.1.0
