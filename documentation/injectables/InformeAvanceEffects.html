@@ -78,6 +78,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#aceptarRechazarInformeAvance$" >aceptarRechazarInformeAvance$</a>
+                            </li>
+                            <li>
                                 <a href="#getDetalleInformeAvance$" >getDetalleInformeAvance$</a>
                             </li>
                             <li>
@@ -85,6 +88,9 @@
                             </li>
                             <li>
                                 <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                            <li>
+                                <a href="#SendDetalleInformeAvance$" >SendDetalleInformeAvance$</a>
                             </li>
                         </ul>
                     </td>
@@ -182,6 +188,51 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="aceptarRechazarInformeAvance$"></a>
+                    <span class="name">
+                        <span ><b>aceptarRechazarInformeAvance$</b></span>
+                        <a href="#aceptarRechazarInformeAvance$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.AceptarRechazarInformeAvanceOT),
+      concatMap(({ request }) &#x3D;&gt;
+        this.informeAvanceHttp.autorizarInformeAvance(request).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess({
+              response,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.AceptarRechazarInformeAvanceOTError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getDetalleInformeAvance$"></a>
                     <span class="name">
                         <span ><b>getDetalleInformeAvance$</b></span>
@@ -233,7 +284,11 @@
                         <i>Default value : </i><code>createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(informeAvanceActions.getDetalleInformeAvanceSuccess),
+        ofType(
+          informeAvanceActions.getDetalleInformeAvanceSuccess,
+          informeAvanceActions.sendDetalleInformeAvanceSuccess,
+          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess
+        ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -242,7 +297,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -265,7 +320,11 @@
                         <i>Default value : </i><code>createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(informeAvanceActions.getDetalleInformeAvanceError),
+        ofType(
+          informeAvanceActions.getDetalleInformeAvanceError,
+          informeAvanceActions.sendDetalleInformeAvanceError,
+          informeAvanceActions.AceptarRechazarInformeAvanceOTError
+        ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }
@@ -274,7 +333,46 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SendDetalleInformeAvance$"></a>
+                    <span class="name">
+                        <span ><b>SendDetalleInformeAvance$</b></span>
+                        <a href="#SendDetalleInformeAvance$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.sendDetalleInformeAvance),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.informeAvanceHttp.sendDetalleInformeAvance(ot_id).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.sendDetalleInformeAvanceSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(informeAvanceActions.sendDetalleInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/store/informe-avance/informe-avance.effects.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -319,10 +417,54 @@ export class InformeAvanceEffects {
     )
   );
 
+  // SEND DETALLE INFORME DE AVANCE
+  SendDetalleInformeAvance$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.sendDetalleInformeAvance),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.informeAvanceHttp.sendDetalleInformeAvance(ot_id).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.sendDetalleInformeAvanceSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(informeAvanceActions.sendDetalleInformeAvanceError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // ACEPTAR INFORME AVANCE
+  aceptarRechazarInformeAvance$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(informeAvanceActions.AceptarRechazarInformeAvanceOT),
+      concatMap(({ request }) &#x3D;&gt;
+        this.informeAvanceHttp.autorizarInformeAvance(request).pipe(
+          map(response &#x3D;&gt;
+            informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess({
+              response,
+            })
+          ),
+          catchError(error &#x3D;&gt;
+            of(
+              informeAvanceActions.AceptarRechazarInformeAvanceOTError({
+                error,
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(informeAvanceActions.getDetalleInformeAvanceSuccess),
+        ofType(
+          informeAvanceActions.getDetalleInformeAvanceSuccess,
+          informeAvanceActions.sendDetalleInformeAvanceSuccess,
+          informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess
+        ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -331,7 +473,11 @@ export class InformeAvanceEffects {
   notifyAfterError &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(informeAvanceActions.getDetalleInformeAvanceError),
+        ofType(
+          informeAvanceActions.getDetalleInformeAvanceError,
+          informeAvanceActions.sendDetalleInformeAvanceError,
+          informeAvanceActions.AceptarRechazarInformeAvanceOTError
+        ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

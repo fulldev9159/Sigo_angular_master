@@ -93,6 +93,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getAccionesOT" >getAccionesOT</a>
+                            </li>
+                            <li>
                                 <a href="#getDetalleOT" >getDetalleOT</a>
                             </li>
                         </ul>
@@ -161,6 +164,75 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAccionesOT"></a>
+                    <span class="name">
+                        <span ><b>getAccionesOT</b></span>
+                        <a href="#getAccionesOT"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAccionesOT(ot_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/core/service/ot-detalle-http.service.ts:25</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ot_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Accion.html" target="_self" >Observable&lt;Accion[]&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -276,8 +348,8 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Injectable } from &#x27;@angular/core&#x27;;
 import { environment } from &#x27;@environment&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
-import { DetalleOT, Response } from &#x27;@model&#x27;;
+import { map, Observable } from &#x27;rxjs&#x27;;
+import { Accion, DetalleOT, OT, Response } from &#x27;@model&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -293,6 +365,22 @@ export class OtDetalleHttpService {
       &#x60;${this.API_URL}/ot/ot_otid/get&#x60;,
       { id }
     );
+  }
+
+  // GET ACCIONES OT
+  // 104 TODO: VER A FUTURO CREAR UN ENDPOINT QUE RETORNE SOLO ESTO
+  getAccionesOT(ot_id: number): Observable&lt;Accion[]&gt; {
+    let request &#x3D; {
+      filtro_pestania: &#x27;EN_EJECUCION&#x27;,
+      filtro_propietario: &#x27;TODAS&#x27;,
+      filtro_tipo: 0,
+    };
+    return this.http
+      .post&lt;Response&lt;{ items: OT[] }&gt;&gt;(
+        &#x60;${this.API_URL}/ot/bandeja/get&#x60;,
+        request
+      )
+      .pipe(map(value &#x3D;&gt; value.data.items.find(v &#x3D;&gt; v.id &#x3D;&#x3D;&#x3D; ot_id).acciones));
   }
 }
 </code></pre>

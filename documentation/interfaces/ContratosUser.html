@@ -90,18 +90,21 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#model_contrato_id" 
 >
                                             model_contrato_id
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#model_usuario_id" 
 >
                                             model_usuario_id
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#usuario_id" 
 >
                                             usuario_id
@@ -178,6 +181,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -211,6 +219,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -244,6 +257,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -296,9 +314,9 @@ export interface ModelUsuarioSuperior extends ModelProxyUsuarios {
 // CONTRATOS USUARIO
 export interface ContratosUser {
   contrato_id: number;
-  model_contrato_id: ModelContratoMarco;
-  model_usuario_id: ModelUsuario;
-  usuario_id: number;
+  model_contrato_id?: ModelContratoMarco;
+  model_usuario_id?: ModelUsuario;
+  usuario_id?: number;
 }
 </code></pre>
     </div>

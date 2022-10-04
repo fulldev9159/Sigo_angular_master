@@ -192,6 +192,8 @@ import * as usuarioActions from &#x27;@storeOT/usuario/usuario.actions&#x27;;
 import * as cubicacionActions from &#x27;@storeOT/cubicacion/cubicacion.actions&#x27;;
 import * as otActions from &#x27;@storeOT/ot/ot.actions&#x27;;
 import * as flujoOTActions from &#x27;@storeOT/flujo-ot/flujo-ot.actions&#x27;;
+import * as serviciosActions from &#x27;@storeOT/servicios/servicios.actions&#x27;;
+import * as informeAvanceActions from &#x27;@storeOT/informe-avance/informe-avance.actions&#x27;;
 import { AuthFacade } from &#x27;@storeOT/auth/auth.facades&#x27;;
 import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
 import { OTFacade } from &#x27;@storeOT/ot/ot.facades&#x27;;
@@ -211,6 +213,8 @@ interface ActionSuccess {
   };
   type: string;
 }
+
+// 103 TODO: VER MANERA DE IDENTIFICAR SI ES UNA AUTORIZACION O RECHAZO DE INFORME DE AVANCE
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
@@ -333,6 +337,16 @@ export class AfterHttpService {
       this.router.navigate([&#x27;/ot/list-ot&#x27;]);
     }
 
+    // GUARDAR BORRADOR INFORME DE AVANCE
+    if (action.type &#x3D;&#x3D;&#x3D; serviciosActions.agregarAdicionalesSuccess.type) {
+      this.snackMessage.showMessage(
+        &#x60;Se guarda el informe de avance exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      location.reload();
+    }
+
     // ACEPTAR OT INICIAL
     // 70 TODO: AGREGAR UN MENSAJE
     // 71 TODO: USAR BIEN LOS FILTROS
@@ -352,6 +366,31 @@ export class AfterHttpService {
         filtro_pestania: &#x27;ABIERTAS&#x27;,
         ...filtros,
       });
+    }
+
+    // ENVÍO DE INFORME DE AVANCE
+    if (
+      action.type &#x3D;&#x3D;&#x3D; informeAvanceActions.sendDetalleInformeAvanceSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        &#x60;Informe enviado exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
+    }
+
+    // ACEPTACION DE INFORME DE AVANCE
+    if (
+      action.type &#x3D;&#x3D;&#x3D;
+      informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess.type
+    ) {
+      this.snackMessage.showMessage(
+        &#x60;Acción realizada exitosamente&#x60;,
+        &#x27;Exito&#x27;,
+        6000
+      );
+      this.router.navigate([&#x27;/ot/list-ot&#x27;]);
     }
   }
 }

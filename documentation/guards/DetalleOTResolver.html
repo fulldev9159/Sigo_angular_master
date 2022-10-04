@@ -60,7 +60,7 @@
             <h3>File</h3>
             </p>
             <p class="comment">
-                <code>src/app/features/ot-detalle/resolvers/cubicaciones.resolver.ts</code>
+                <code>src/app/features/informe-avance/resolvers/detalleOT.resolver.ts</code>
             </p>
 
 
@@ -107,7 +107,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/ot-detalle/resolvers/cubicaciones.resolver.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/informe-avance/resolvers/detalleOT.resolver.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -195,7 +195,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app/features/ot-detalle/resolvers/cubicaciones.resolver.ts:20</a></div>
+                            class="link-to-prism">src/app/features/informe-avance/resolvers/detalleOT.resolver.ts:20</a></div>
                 </td>
             </tr>
 
@@ -286,7 +286,7 @@ export class DetalleOTResolver implements Resolve&lt;Response&lt;DetalleOT&gt;&g
     const idStr &#x3D; route.paramMap.get(&#x27;id&#x27;);
 
     const id &#x3D; parseInt(idStr, 10);
-    // TODO: CREAR UN PAGINA NOT-FOUND
+    // 93 TODO: CREAR UN PAGINA NOT-FOUND
     if (isNaN(id)) {
       this.router.navigate([&#x60;/not-found&#x60;], { skipLocationChange: true });
       return null;

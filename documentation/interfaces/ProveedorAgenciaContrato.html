@@ -90,6 +90,7 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#codigo_acuerdo" 
 >
                                             codigo_acuerdo
@@ -102,6 +103,7 @@
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#nombre" 
 >
                                             nombre
@@ -178,6 +180,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -244,6 +251,11 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
 
 
 
@@ -257,9 +269,9 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface ProveedorAgenciaContrato {
   cmarco_has_proveedor_id: number;
-  codigo_acuerdo: string;
+  codigo_acuerdo?: string;
   id: number;
-  nombre: string;
+  nombre?: string;
 }
 </code></pre>
     </div>

@@ -114,6 +114,15 @@ const routes: Routes &#x3D; [
     // canLoad: [SigoGuard],
     canActivate: [SigoGuard],
   },
+  {
+    path: &#x27;informe-avance&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./features/informe-avance/informe-avance.module&#x27;).then(\
+        m &#x3D;&gt; m.InformeAvanceModule\
+      )&quot;,
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
 ];
 
 @NgModule({

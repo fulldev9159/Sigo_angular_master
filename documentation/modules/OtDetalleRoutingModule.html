@@ -76,8 +76,9 @@
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { InformeAvanceComponent } from &#x27;./components/informe-avance/informe-avance.component&#x27;;
 import { OtDetalleComponent } from &#x27;./ot-detalle.component&#x27;;
-import { DetalleOTResolver } from &#x27;./resolvers/cubicaciones.resolver&#x27;;
+import { DetalleOTResolver } from &#x27;./resolvers/detalleOT.resolver&#x27;;
 import { DetalleInformeAvanceResolver } from &#x27;./resolvers/detalle-informe-avance.resolver&#x27;;
+import { AccionesOTResolver } from &#x27;./resolvers/accionesOT.resolver&#x27;;
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
@@ -94,6 +95,7 @@ const routes: Routes &#x3D; [
         resolve: {
           detalleOT: DetalleOTResolver,
           detalleInformeAvance: DetalleInformeAvanceResolver,
+          accionesOT: AccionesOTResolver,
         },
       },
     ],

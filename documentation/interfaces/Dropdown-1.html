@@ -193,13 +193,13 @@ import {
   RequestGetDetallesServicioTipoAgenciaContratoProveedor,
   RequestGetServicioTipoAgenciaContratoProveedor,
   ServicioAgenciaContratoProveedor,
+  RequestGetUnidadObraServicio,
 } from &#x27;@model&#x27;;
 import { ContratoFacade } from &#x27;@storeOT/contrato/contrato.facades&#x27;;
 import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
 import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
 import { ServiciosFacade } from &#x27;@storeOT/servicios/servicios.facades&#x27;;
 import { combineLatest, map, Observable, Subscription, take, tap } from &#x27;rxjs&#x27;;
-import { RequestGetUnidadObraServicio } from &#x27;src/app/core/model/unidad-obra&#x27;;
 import { FormularioService } from &#x27;src/app/core/service/formulario.service&#x27;;
 
 interface Dropdown {
@@ -207,19 +207,24 @@ interface Dropdown {
   code: number | string;
 }
 
+// 94 TODO: MEJORAR LÓGICA
+// 119 TODO: VER COMO MANEJAR EL RESETEO DE LOS DROPDOWN DESDE ESTE COMPONENTE
+
 /**
  * @example
  *  Antes de usar este componente se debe precargar lo siguiente
  *       - Actividades -&gt; contratoFacade.getActividadesContratoProveedor(cmarcoproveedor_id)
  *       - contratoSelected -&gt; this.cubicacionFacade.contratoSelected(contrato)
  *       - agenciaSelected -&gt; this.cubicacionFacade.agenciaSelected(agencia);
- *       - proveedorSelected -&gt; this.cubicacionFacade.agenciaSelected(proveedor);
+ *       - proveedorSelected -&gt; this.cubicacionFacade.proveedorSelected(proveedor);
  *
  * Datos que puede recibir como INPUT:
  *    - reglasDeAgregacion: Hasta ahora solo existen 2 modos para agregar servicios al carrito. Si es para crear una cubicacion se llama
  *      &quot;reglasDeAgregacion: Cubicacion&quot; donde existe una unica regla.
  *       También existe el agregar servicios adicionales que tiene más reglas y mensajes asociados llamada
  *      &quot;reglasDeAgregacion: ServiciosAdicionales&quot;
+ *
+ *    - informeAvance Servicios del informe de avance original: necesario para identificar si el servicio/uo que se va a agregar como adicional existe en el informe de avance
  */
 @Component({
   selector: &#x27;zwc-form-agregar-servicios&#x27;,
@@ -230,6 +235,7 @@ interface Dropdown {
 export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   subscription: Subscription &#x3D; new Subscription();
   @Input() reglasDeAgregacion: string; // Cubicacion - ServiciosAdicionales
+  @Input() informeAvance: CarritoService[] &#x3D; [];
   // DATOS A USAR
   actividadesContratoProveedor$: Observable&lt;Dropdown[]&gt; &#x3D; this.contratoFacade
     .getActividadesContratoProveedor$()
@@ -358,6 +364,8 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   // EXTRAS
   alertServicioExistenteCarrito$: Observable&lt;boolean&gt; &#x3D;
     this.serviciosFacade.alertServicioExistenteCarrito$();
+  alertMessageServicio$: Observable&lt;string&gt; &#x3D;
+    this.serviciosFacade.alertMessageServicio$();
 
   constructor(
     private contratoFacade: ContratoFacade,
@@ -373,7 +381,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         this.contratoSelected$,
         this.formFilter.get(&#x27;actividad_id&#x27;).valueChanges,
       ]).subscribe(([contratoSelected, actividad_id]) &#x3D;&gt; {
-        // TODO: WA para determinar si es efectivamente un cambio de actividad escogido en el formulario o es un cambio de contrato
+        // 95 TODO: WA para determinar si es efectivamente un cambio de actividad escogido en el formulario o es un cambio de contrato
         let preValues &#x3D; this.formFilter.value;
         let actualValue &#x3D; this.formFilter.get(&#x27;actividad_id&#x27;).value;
 
@@ -394,7 +402,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           contratoSelected !&#x3D;&#x3D; null &amp;&amp;
           actividad_id_change
         ) {
-          this.serviciosFacade.alertServicioExistenteCarrito(false);
+          this.serviciosFacade.alertServicioExistenteCarrito(false, null);
           this.contratoFacade.getTipoServiciosContrato(
             actividad_id,
             contratoSelected.contrato_id
@@ -409,7 +417,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         this.agenciaSelected$,
         this.formFilter.get(&#x27;tipo_servicio_id&#x27;).valueChanges,
       ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) &#x3D;&gt; {
-        // TODO: WA
+        // 95 TODO: WA
         let preValues &#x3D; this.formFilter.value;
         let actualValue &#x3D; this.formFilter.get(&#x27;tipo_servicio_id&#x27;).value;
 
@@ -439,11 +447,13 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
             cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
             tipo_servicio_id,
           };
-          this.serviciosFacade.alertServicioExistenteCarrito(false);
+          this.serviciosFacade.alertServicioExistenteCarrito(false, null);
           this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
         }
       })
     );
+
+    // 96 TODO: CAMBIAR SERVICIO_COD POR NUMERO PRODUCTO
 
     this.subscription.add(
       this.formFilter
@@ -451,7 +461,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         .valueChanges.subscribe(servicio_cod &#x3D;&gt; {
           // CALL UNIDADES DE OBRAS
           if (servicio_cod &amp;&amp; servicio_cod !&#x3D;&#x3D; null) {
-            this.serviciosFacade.alertServicioExistenteCarrito(false);
+            this.serviciosFacade.alertServicioExistenteCarrito(false, null);
             let request: RequestGetUnidadObraServicio &#x3D; {
               servicio_cod,
               actividad_id: +this.formFilter.get(&#x27;actividad_id&#x27;).value,
@@ -467,7 +477,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         .valueChanges.subscribe(unidad_obra_cod &#x3D;&gt; {
           // CALL UNIDADES DE OBRAS
           if (unidad_obra_cod &amp;&amp; unidad_obra_cod !&#x3D;&#x3D; null) {
-            this.serviciosFacade.alertServicioExistenteCarrito(false);
+            this.serviciosFacade.alertServicioExistenteCarrito(false, null);
           }
         })
     );
@@ -487,60 +497,142 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
           const servicio_id &#x3D; this.serviciosAgenciaContratoProveedor.find(
             value &#x3D;&gt; value.codigo &#x3D;&#x3D;&#x3D; this.formFilter.get(&#x27;servicio_cod&#x27;).value
           ).id;
-          const canAddService &#x3D;
-            this.reglasDeAgregacion &#x3D;&#x3D;&#x3D; &#x27;ServiciosAdicionales&#x27;
-              ? this.passReglasAgregarServiciosAdicionales()
-              : this.passReglasAgregarServicios(
-                  carrito,
-                  servicio_id,
-                  unidad_obra_cod
-                );
 
-          // REGLAS PARA PODER AGREGAR UN SERVICIO
-          // const servicioExiste &#x3D; carrito.find(
-          //   servicio &#x3D;&gt;8
-          //     servicio.servicio_id &#x3D;&#x3D;&#x3D; servicio_id &amp;&amp;
-          //     servicio.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; unidad_obra_cod
-          // );
-
-          if (!canAddService) {
-            this.serviciosFacade.alertServicioExistenteCarrito(true);
-          } else {
-            this.serviciosFacade.alertServicioExistenteCarrito(false);
-            const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor &#x3D;
-              {
-                agencia_id: agenciaSelected.id,
-                cmarco_has_proveedor_id:
-                  proveedorSelected.cmarco_has_proveedor_id,
-                servicio_id: +servicio_id,
-                tipo_servicio_id: this.formFilter.get(&#x27;tipo_servicio_id&#x27;).value,
-                actividad_id: this.formFilter.get(&#x27;actividad_id&#x27;).value,
-              };
-
-            this.serviciosFacade.addServicioCarrito(
-              request_service,
-              unidad_obra_cod
+          if (this.reglasDeAgregacion &#x3D;&#x3D;&#x3D; &#x27;Cubicacion&#x27;)
+            this.ReglasAgregarServicios(
+              carrito,
+              servicio_id,
+              unidad_obra_cod,
+              proveedorSelected.cmarco_has_proveedor_id,
+              agenciaSelected.id
             );
-          }
+
+          if (this.reglasDeAgregacion &#x3D;&#x3D;&#x3D; &#x27;ServiciosAdicionales&#x27;)
+            this.ReglasAgregarServiciosAdicionales(
+              carrito,
+              servicio_id,
+              unidad_obra_cod,
+              proveedorSelected.cmarco_has_proveedor_id,
+              agenciaSelected.id
+            );
         })
     );
   }
 
-  passReglasAgregarServicios(
+  ReglasAgregarServicios(
     carrito: CarritoService[],
     servicio_id: number,
-    unidad_obra_cod: string
-  ): boolean {
+    unidad_obra_cod: string,
+    cmarco_has_proveedor_id: number,
+    agencia_id: number
+  ): void {
     const servicioExiste &#x3D; carrito.find(
       servicio &#x3D;&gt;
         servicio.servicio_id &#x3D;&#x3D;&#x3D; servicio_id &amp;&amp;
         servicio.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; unidad_obra_cod
     );
-    return servicioExiste &#x3D;&#x3D;&#x3D; undefined;
+
+    if (servicioExiste !&#x3D;&#x3D; undefined) {
+      this.serviciosFacade.alertServicioExistenteCarrito(
+        true,
+        &#x27;Servicio ya está en la cubicación&#x27;
+      );
+    } else {
+      this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+      const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor &#x3D;
+        {
+          agencia_id,
+          cmarco_has_proveedor_id,
+          servicio_id: +servicio_id,
+          tipo_servicio_id: this.formFilter.get(&#x27;tipo_servicio_id&#x27;).value,
+          actividad_id: this.formFilter.get(&#x27;actividad_id&#x27;).value,
+        };
+
+      this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
+    }
   }
 
-  passReglasAgregarServiciosAdicionales(): boolean {
-    return true;
+  // 120 TODO: REVISAR BIEN TODOS LOS CASOS
+  // 120 TODO: CASO SERVICIO/UO EXISTENTES EN EL INFORME ORIGINAL
+  // 120 TODO: CASO SERVICIO/UO NUEVOS NO EXISTENTES EN INFORME ORIGINAL
+  // 120 TODO: CASO SERVICIO EXISTENTE EN INFORME ORIGINAL PERO UO ES NUEVA
+  // 120 TODO: CASO SERVICIO/UO ADICIONAL YA AGREGADO ANTERIORMENTE
+  // 120 TODO: CASO SERVICIO ADICIONAL YA AGREGADO ANTERIORMENTE PERO UO NUEVA
+  // 120 TODO: CASO SERVICIO/UO ADICIONAL EXISTENTE EN EL CARRITO TEMPORAL ANTES DE GUARDAR BORRADOR
+
+  ReglasAgregarServiciosAdicionales(
+    carrito: CarritoService[],
+    servicio_id: number,
+    unidad_obra_cod: string,
+    cmarco_has_proveedor_id: number,
+    agencia_id: number
+  ): boolean {
+    // SI SERVICIO/UO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL
+
+    const servicioYUOExistenEnInformeORIGINAL &#x3D; this.informeAvance.find(
+      servicio &#x3D;&gt;
+        servicio.servicio_id &#x3D;&#x3D;&#x3D; servicio_id &amp;&amp;
+        servicio.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; unidad_obra_cod &amp;&amp;
+        servicio.adicional &#x3D;&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+    );
+
+    if (servicioYUOExistenEnInformeORIGINAL !&#x3D;&#x3D; undefined) {
+      this.serviciosFacade.alertServicioExistenteCarrito(
+        true,
+        &#x27;Servicio y unidad de obra ya existen en el informe de avance. Debe cambiar la cantidad en el informe de avance&#x27;
+      );
+    }
+
+    // SI SERVICIO EXISTE EN EL INFORME DE AVANCE Y ES SERVICIO ORIGINAL PERO LA UO ES NUEVA
+
+    const servicioExisteYUOnoExisteEnInformeORIGINAL &#x3D; this.informeAvance.find(
+      servicio &#x3D;&gt;
+        servicio.servicio_id &#x3D;&#x3D;&#x3D; servicio_id &amp;&amp;
+        servicio.unidad_obras[0].uo_codigo !&#x3D;&#x3D; unidad_obra_cod &amp;&amp;
+        servicio.adicional &#x3D;&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+    );
+
+    if (servicioExisteYUOnoExisteEnInformeORIGINAL !&#x3D;&#x3D; undefined) {
+      console.log(
+        &#x27;Es un servicio original existente en el informe de avance pero la uo es nueva&#x27;
+      );
+      // SE DEBE ALMACENAR UN SERVICIO DUMMY JUNTO AL UO
+    }
+
+    // SI SERVICIO/UO EXISTE EN EL INFORME AVANCE PERO NO ES ORIGINAL (ADICIONAL QUE YA SE HA AGREGADO ANTES)
+    const servicioYUOExistenEnInformeADICIONAL &#x3D; this.informeAvance.find(
+      servicio &#x3D;&gt;
+        servicio.servicio_id &#x3D;&#x3D;&#x3D; servicio_id &amp;&amp;
+        servicio.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; unidad_obra_cod &amp;&amp;
+        servicio.adicional !&#x3D;&#x3D; &#x27;ORIGINAL&#x27;
+    );
+
+    if (servicioYUOExistenEnInformeADICIONAL !&#x3D;&#x3D; undefined) {
+      console.log(
+        &#x27;Es un servicio y uo adicinal existente en el informe de avance&#x27;
+      );
+      // SE DEBE ENVIAR MENSAJE DE ERROR &quot;Servicio y unidad de obra adicional existentes en el informe de avance. Debe cambiar la cantidad en el informe de avance&quot;
+    }
+
+    if (
+      servicioYUOExistenEnInformeORIGINAL &#x3D;&#x3D;&#x3D; undefined &amp;&amp;
+      servicioExisteYUOnoExisteEnInformeORIGINAL &#x3D;&#x3D;&#x3D; undefined &amp;&amp;
+      servicioYUOExistenEnInformeADICIONAL &#x3D;&#x3D;&#x3D; undefined
+    ) {
+      this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+      const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor &#x3D;
+        {
+          agencia_id,
+          cmarco_has_proveedor_id,
+          servicio_id: +servicio_id,
+          tipo_servicio_id: this.formFilter.get(&#x27;tipo_servicio_id&#x27;).value,
+          actividad_id: this.formFilter.get(&#x27;actividad_id&#x27;).value,
+        };
+
+      this.serviciosFacade.addServicioCarrito(request_service, unidad_obra_cod);
+    }
+
+    return false;
   }
 
   ngOnDestroy(): void {

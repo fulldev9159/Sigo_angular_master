@@ -81,6 +81,9 @@
                                 <a href="#addServicioCarrito$" >addServicioCarrito$</a>
                             </li>
                             <li>
+                                <a href="#agregarAdicionales$" >agregarAdicionales$</a>
+                            </li>
+                            <li>
                                 <a href="#getServiciosAgenciaContratoProveedor$" >getServiciosAgenciaContratoProveedor$</a>
                             </li>
                             <li>
@@ -111,12 +114,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(actions$: Actions, serviciosHttpService: <a href="../injectables/ServiciosHttpService.html" target="_self">ServiciosHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>)</code>
+<code>constructor(actions$: Actions, serviciosHttpService: <a href="../injectables/ServiciosHttpService.html" target="_self">ServiciosHttpService</a>, serviciosAdicionalesHttpService: <a href="../injectables/ServiciosAdicionalesHttpService.html" target="_self">ServiciosAdicionalesHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -150,6 +153,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/ServiciosHttpService.html" target="_self" >ServiciosHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>serviciosAdicionalesHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ServiciosAdicionalesHttpService.html" target="_self" >ServiciosAdicionalesHttpService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -238,7 +253,46 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="agregarAdicionales$"></a>
+                    <span class="name">
+                        <span ><b>agregarAdicionales$</b></span>
+                        <a href="#agregarAdicionales$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionales),
+      concatMap(({ request }) &#x3D;&gt;
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response &#x3D;&gt;
+            serviciosActions.agregarAdicionalesSuccess({ response })
+          ),
+          catchError(err &#x3D;&gt;
+            of(serviciosActions.agregarAdicionalesError({ error: err }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -285,7 +339,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -330,7 +384,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -356,7 +410,8 @@
         ofType(
           serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
           serviciosActions.getUnidadesObraServicioSuccess,
-          serviciosActions.addServicioCarritoSuccess
+          serviciosActions.addServicioCarritoSuccess,
+          serviciosActions.agregarAdicionalesSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -366,7 +421,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:101</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -392,7 +447,8 @@
         ofType(
           serviciosActions.getServiciosAgenciaContratoProveedorError,
           serviciosActions.getUnidadesObraServicioError,
-          serviciosActions.addServicioCarritoError
+          serviciosActions.addServicioCarritoError,
+          serviciosActions.agregarAdicionalesError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
@@ -402,7 +458,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:114</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/store/servicios/servicios.effects.ts:137</a></div>
                         </td>
                     </tr>
 
@@ -417,7 +473,11 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
-import { AfterHttpService, CubicacionHttpService } from &#x27;@services&#x27;;
+import {
+  AfterHttpService,
+  CubicacionHttpService,
+  ServiciosAdicionalesHttpService,
+} from &#x27;@services&#x27;;
 import * as serviciosActions from &#x27;./servicios.actions&#x27;;
 import { catchError, concatMap, map, mergeMap, tap } from &#x27;rxjs/operators&#x27;;
 import { of } from &#x27;rxjs&#x27;;
@@ -428,6 +488,7 @@ export class ServiciosEffects {
   constructor(
     private actions$: Actions,
     private serviciosHttpService: ServiciosHttpService,
+    private serviciosAdicionalesHttpService: ServiciosAdicionalesHttpService,
     private afterHttp: AfterHttpService
   ) {}
 
@@ -515,13 +576,31 @@ export class ServiciosEffects {
     )
   );
 
+  // AGREGAR ADICIONALES
+  agregarAdicionales$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(serviciosActions.agregarAdicionales),
+      concatMap(({ request }) &#x3D;&gt;
+        this.serviciosAdicionalesHttpService.serviciosAdicionales(request).pipe(
+          map(response &#x3D;&gt;
+            serviciosActions.agregarAdicionalesSuccess({ response })
+          ),
+          catchError(err &#x3D;&gt;
+            of(serviciosActions.agregarAdicionalesError({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
         ofType(
           serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
           serviciosActions.getUnidadesObraServicioSuccess,
-          serviciosActions.addServicioCarritoSuccess
+          serviciosActions.addServicioCarritoSuccess,
+          serviciosActions.agregarAdicionalesSuccess
         ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
@@ -534,7 +613,8 @@ export class ServiciosEffects {
         ofType(
           serviciosActions.getServiciosAgenciaContratoProveedorError,
           serviciosActions.getUnidadesObraServicioError,
-          serviciosActions.addServicioCarritoError
+          serviciosActions.addServicioCarritoError,
+          serviciosActions.agregarAdicionalesError
         ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),

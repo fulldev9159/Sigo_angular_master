@@ -78,6 +78,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getAccionesOT$" >getAccionesOT$</a>
+                            </li>
+                            <li>
                                 <a href="#getDetalleOT$" >getDetalleOT$</a>
                             </li>
                             <li>
@@ -182,6 +185,43 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getAccionesOT$"></a>
+                    <span class="name">
+                        <span ><b>getAccionesOT$</b></span>
+                        <a href="#getAccionesOT$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.getAccionesOT),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.otDetalleHttp.getAccionesOT(ot_id).pipe(
+          map(acciones &#x3D;&gt; otDetalleActions.getAccionesOTSuccess({ acciones })),
+          catchError(error &#x3D;&gt;
+            of(otDetalleActions.getAccionesOTTError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getDetalleOT$"></a>
                     <span class="name">
                         <span ><b>getDetalleOT$</b></span>
@@ -229,7 +269,10 @@
                         <i>Default value : </i><code>createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(otDetalleActions.getDetalleOTSuccess),
+        ofType(
+          otDetalleActions.getDetalleOTSuccess,
+          otDetalleActions.getAccionesOTSuccess
+        ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -238,7 +281,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -261,7 +304,10 @@
                         <i>Default value : </i><code>createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(otDetalleActions.getDetalleOTError),
+        ofType(
+          otDetalleActions.getDetalleOTError,
+          otDetalleActions.getAccionesOTTError
+        ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }
@@ -270,7 +316,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/store/ot-detalle/ot-detalle.effects.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -312,10 +358,28 @@ export class OTDetalleEffects {
     )
   );
 
+  // GET ACCIONES OT
+  getAccionesOT$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otDetalleActions.getAccionesOT),
+      concatMap(({ ot_id }) &#x3D;&gt;
+        this.otDetalleHttp.getAccionesOT(ot_id).pipe(
+          map(acciones &#x3D;&gt; otDetalleActions.getAccionesOTSuccess({ acciones })),
+          catchError(error &#x3D;&gt;
+            of(otDetalleActions.getAccionesOTTError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(otDetalleActions.getDetalleOTSuccess),
+        ofType(
+          otDetalleActions.getDetalleOTSuccess,
+          otDetalleActions.getAccionesOTSuccess
+        ),
         tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
       ),
     { dispatch: false }
@@ -324,7 +388,10 @@ export class OTDetalleEffects {
   notifyAfterError &#x3D; createEffect(
     () &#x3D;&gt;
       this.actions$.pipe(
-        ofType(otDetalleActions.getDetalleOTError),
+        ofType(
+          otDetalleActions.getDetalleOTError,
+          otDetalleActions.getAccionesOTTError
+        ),
         tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
       ),
     { dispatch: false }

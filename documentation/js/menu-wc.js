@@ -183,6 +183,26 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/HomeRoutingModule.html" data-type="entity-link" >HomeRoutingModule</a>
                             </li>
                             <li class="link">
+                                <a href="modules/InformeAvanceModule.html" data-type="entity-link" >InformeAvanceModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                            'data-target="#components-links-module-InformeAvanceModule-7f482fa14f734310df4998cf7cefefa0249a532816086823c23e32ce01ed311d487202ad024db0c2f4d8f200812e27647e86794bfda7f0c5513501850848c12a"' : 'data-target="#xs-components-links-module-InformeAvanceModule-7f482fa14f734310df4998cf7cefefa0249a532816086823c23e32ce01ed311d487202ad024db0c2f4d8f200812e27647e86794bfda7f0c5513501850848c12a"' }>
+                                            <span class="icon ion-md-cog"></span>
+                                            <span>Components</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-InformeAvanceModule-7f482fa14f734310df4998cf7cefefa0249a532816086823c23e32ce01ed311d487202ad024db0c2f4d8f200812e27647e86794bfda7f0c5513501850848c12a"' :
+                                            'id="xs-components-links-module-InformeAvanceModule-7f482fa14f734310df4998cf7cefefa0249a532816086823c23e32ce01ed311d487202ad024db0c2f4d8f200812e27647e86794bfda7f0c5513501850848c12a"' }>
+                                            <li class="link">
+                                                <a href="components/InformeAvanceComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >InformeAvanceComponent</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/InformeAvanceRoutingModule.html" data-type="entity-link" >InformeAvanceRoutingModule</a>
+                            </li>
+                            <li class="link">
                                 <a href="modules/OtDetalleModule.html" data-type="entity-link" >OtDetalleModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
@@ -462,6 +482,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/ProyectosHttpService.html" data-type="entity-link" >ProyectosHttpService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/ServiciosAdicionalesHttpService.html" data-type="entity-link" >ServiciosAdicionalesHttpService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/ServiciosEffects.html" data-type="entity-link" >ServiciosEffects</a>
                                 </li>
                                 <li class="link">
@@ -518,6 +541,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="guards-links"' : 'id="xs-guards-links"' }>
                             <li class="link">
+                                <a href="guards/AccionesOTResolver.html" data-type="entity-link" >AccionesOTResolver</a>
+                            </li>
+                            <li class="link">
+                                <a href="guards/AccionesOTResolver-1.html" data-type="entity-link" >AccionesOTResolver</a>
+                            </li>
+                            <li class="link">
                                 <a href="guards/AuthTokenGuard.html" data-type="entity-link" >AuthTokenGuard</a>
                             </li>
                             <li class="link">
@@ -533,7 +562,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="guards/DetalleInformeAvanceResolver.html" data-type="entity-link" >DetalleInformeAvanceResolver</a>
                             </li>
                             <li class="link">
+                                <a href="guards/DetalleInformeAvanceResolver-1.html" data-type="entity-link" >DetalleInformeAvanceResolver</a>
+                            </li>
+                            <li class="link">
                                 <a href="guards/DetalleOTResolver.html" data-type="entity-link" >DetalleOTResolver</a>
+                            </li>
+                            <li class="link">
+                                <a href="guards/DetalleOTResolver-1.html" data-type="entity-link" >DetalleOTResolver</a>
                             </li>
                             <li class="link">
                                 <a href="guards/PerfilesUsuarioResolver.html" data-type="entity-link" >PerfilesUsuarioResolver</a>
@@ -573,10 +608,19 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/ActividadContratoProveedor.html" data-type="entity-link" >ActividadContratoProveedor</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/ActualizarServicioAdicional.html" data-type="entity-link" >ActualizarServicioAdicional</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/AdicionalesSolicitados.html" data-type="entity-link" >AdicionalesSolicitados</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/AdminContratoFromCub.html" data-type="entity-link" >AdminContratoFromCub</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/AgenciaContrato.html" data-type="entity-link" >AgenciaContrato</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/AgregarUOAdicionalAServicio.html" data-type="entity-link" >AgregarUOAdicionalAServicio</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/AreaDeNegocio.html" data-type="entity-link" >AreaDeNegocio</a>
@@ -708,7 +752,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/ModelUsuarioSuperior.html" data-type="entity-link" >ModelUsuarioSuperior</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/NuevaUOServicioAdicional.html" data-type="entity-link" >NuevaUOServicioAdicional</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/NuevoServicio.html" data-type="entity-link" >NuevoServicio</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/NuevoServicioAdicional.html" data-type="entity-link" >NuevoServicioAdicional</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/NuevoUO.html" data-type="entity-link" >NuevoUO</a>
@@ -756,6 +806,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/RequestAceptarRechazarOT.html" data-type="entity-link" >RequestAceptarRechazarOT</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/RequestAdicionales.html" data-type="entity-link" >RequestAdicionales</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/RequestAutorizarInformeAvance.html" data-type="entity-link" >RequestAutorizarInformeAvance</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/RequestBandejaOT.html" data-type="entity-link" >RequestBandejaOT</a>
                             </li>
                             <li class="link">
@@ -789,6 +845,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Response.html" data-type="entity-link" >Response</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/ResponseAgregarAdicionales.html" data-type="entity-link" >ResponseAgregarAdicionales</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Rol.html" data-type="entity-link" >Rol</a>
                             </li>
                             <li class="link">
@@ -796,6 +855,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/ServiceTableCarrito.html" data-type="entity-link" >ServiceTableCarrito</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ServicioAdicionalActualizar.html" data-type="entity-link" >ServicioAdicionalActualizar</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ServicioAgenciaContratoProveedor.html" data-type="entity-link" >ServicioAgenciaContratoProveedor</a>
@@ -889,6 +951,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/UnidadObraServicio.html" data-type="entity-link" >UnidadObraServicio</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/UOAdicionalActualizar.html" data-type="entity-link" >UOAdicionalActualizar</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/UOAgregar.html" data-type="entity-link" >UOAgregar</a>
