@@ -123,6 +123,22 @@ const routes: Routes &#x3D; [
     // canLoad: [SigoGuard],
     canActivate: [SigoGuard],
   },
+  {
+    path: &#x27;acta&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./features/acta/acta.module&#x27;).then(m &#x3D;&gt; m.ActaModule)&quot;,
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
+  {
+    path: &#x27;administracion&#x27;,
+    loadChildren: () &#x3D;&gt;
+      &quot;import(&#x27;./features/administracion/administracion.module&#x27;).then(\
+        m &#x3D;&gt; m.AdministracionModule\
+      )&quot;,
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
 ];
 
 @NgModule({

@@ -56,6 +56,15 @@ const routes: Routes = [
     // canLoad: [SigoGuard],
     canActivate: [SigoGuard],
   },
+  {
+    path: 'administracion',
+    loadChildren: () =>
+      import('./features/administracion/administracion.module').then(
+        m => m.AdministracionModule
+      ),
+    // canLoad: [SigoGuard],
+    canActivate: [SigoGuard],
+  },
 ];
 
 @NgModule({

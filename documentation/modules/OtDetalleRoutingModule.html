@@ -74,29 +74,28 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
-import { InformeAvanceComponent } from &#x27;./components/informe-avance/informe-avance.component&#x27;;
+import { AnexosComponent } from &#x27;./components/anexos/anexos.component&#x27;;
+import { InformacionComponent } from &#x27;./components/informacion/informacion.component&#x27;;
+import { LibroObrasComponent } from &#x27;./components/libro-obras/libro-obras.component&#x27;;
 import { OtDetalleComponent } from &#x27;./ot-detalle.component&#x27;;
-import { DetalleOTResolver } from &#x27;./resolvers/detalleOT.resolver&#x27;;
-import { DetalleInformeAvanceResolver } from &#x27;./resolvers/detalle-informe-avance.resolver&#x27;;
-import { AccionesOTResolver } from &#x27;./resolvers/accionesOT.resolver&#x27;;
+// TODO: AGREGAR NOT FOUND PAGE PARA RUTAS NO ENCONTRADAS
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;,
     component: OtDetalleComponent,
     children: [
-      { path: &#x27;&#x27;, redirectTo: &#x27;info&#x27;, pathMatch: &#x27;full&#x27; },
-      // {
-      //   path: &#x27;info&#x27;,
-      //   component: ListOtContainerComponent,
-      // },
+      { path: &#x27;&#x27;, redirectTo: &#x27;informacion&#x27;, pathMatch: &#x27;full&#x27; },
       {
-        path: &#x27;informe-avance/:id&#x27;,
-        component: InformeAvanceComponent,
-        resolve: {
-          detalleOT: DetalleOTResolver,
-          detalleInformeAvance: DetalleInformeAvanceResolver,
-          accionesOT: AccionesOTResolver,
-        },
+        path: &#x27;informacion/:id&#x27;,
+        component: InformacionComponent,
+      },
+      {
+        path: &#x27;libro-obras/:id&#x27;,
+        component: LibroObrasComponent,
+      },
+      {
+        path: &#x27;anexos/:id&#x27;,
+        component: AnexosComponent,
       },
     ],
   },
