@@ -3,13 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'zwc-list-perfiles-container',
   templateUrl: './list-perfiles-container.component.html',
-  styleUrls: ['./list-perfiles-container.component.scss']
+  styleUrls: ['./list-perfiles-container.component.scss'],
 })
-export class ListPerfilesContainerComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ListPerfilesContainerComponent {
+  constructor() {}
 }

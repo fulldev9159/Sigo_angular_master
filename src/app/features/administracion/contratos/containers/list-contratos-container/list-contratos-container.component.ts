@@ -3,13 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'zwc-list-contratos-container',
   templateUrl: './list-contratos-container.component.html',
-  styleUrls: ['./list-contratos-container.component.scss']
+  styleUrls: ['./list-contratos-container.component.scss'],
 })
-export class ListContratosContainerComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ListContratosContainerComponent {
+  constructor() {}
 }

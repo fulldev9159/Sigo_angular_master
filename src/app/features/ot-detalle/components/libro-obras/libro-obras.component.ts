@@ -3,13 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'zwc-libro-obras',
   templateUrl: './libro-obras.component.html',
-  styleUrls: ['./libro-obras.component.scss']
+  styleUrls: ['./libro-obras.component.scss'],
 })
-export class LibroObrasComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class LibroObrasComponent {
+  constructor() {}
 }
