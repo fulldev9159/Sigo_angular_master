@@ -25,26 +25,80 @@
         </thead>
         <tbody>
             <ng-container *ngFor="let servicio of data_carrito$|async;let i = index">
-                <tr>
+                <!-- TODO: VER COMO MEJORAR ESTE WA PARA LA VISUALIZACIÓN RESPONSIVA DE LA TABLA CON UNA UO -->
+                <tr style="height: 0.01rem;">
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         {{ servicio.numero_producto }}
                     </td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Descripción</td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Tipo</td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Cantidad</td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Precio Un.</td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Total</td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Acciones</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{ servicio.servicio_nombre }}</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{ servicio.tipo_servicio_descripcion }}</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                        <!-- <div class="container-cantidad">
+                            <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal"
+                                inputId="locale-german" locale="de-DE" [minFractionDigits]="2">
+                            </p-inputNumber>
+                            <p [pTooltip]="servicio.servicio_unidad_descripcion">{{servicio.servicio_unidad_cod}}</p>
+                            <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert>
+                        </div> -->
+                    </td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                        {{ +servicio.servicio_precio_final_clp |
+                        currency: 'CLP':'$':'.0-2':'es-CL' }}
+                    </td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                        <!-- {{+servicio.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' :
+                        '$':'.0-2':'es-CL'}} -->
+                    </td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                        <!-- <button
+                            (click)="callDeleteServicioFromCarrito(servicio)" class="ui button eliminar-color">
+                            <fa-icon [icon]="trashICon"></fa-icon>
+                        </button> -->
+                    </td>
                 </tr>
                 <ng-container *ngFor="let uo of servicio.unidad_obras; let iuo= index">
                     <tr>
                         <td>{{ uo.uo_codigo }}</td>
-                        <td>Descripción</td>
-                        <td>Tipo</td>
-                        <td>Cantidad</td>
-                        <td>Precio Un.</td>
-                        <td>Total</td>
-                        <td>Acciones</td>
+                        <td>{{ uo.uo_nombre }}</td>
+                        <td>{{ uo.actividad_descripcion }}</td>
+                        <!-- SIN UO -->
+                        <ng-container *ngIf="uo.uo_codigo === '0'">
+                            <td colspan="5" align="center">No Aplica</td>
+                        </ng-container>
+                        <!-- CON UO -->
+                        <ng-container *ngIf="uo.uo_codigo !== '0'">
+                            <td>
+                                <!-- <div class="container-cantidad">
+                                <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" inputId="locale-german" locale="de-DE"
+                                  [minFractionDigits]="2"></p-inputNumber>
+                                <p [pTooltip]="servicio.unidad_obras[0].uob_unidad_medida_descripcion">{{uo.uob_unidad_medida_cod }}
+                                </p>
+                                <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
+                              </div> -->
+                            </td>
+                            <td>
+                                {{
+                                uo.uo_precio_total_clp
+                                | currency: 'CLP':'$':'.0-2':'es-CL'
+                                }}
+                            </td>
+                            <td>
+                                <!-- {{uo.uo_precio_total_clp*+controlUOCantidad.value| currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
+                            </td>
+                            <td>
+
+                                <ng-container *ngIf="servicio.unidad_obras.length>1">
+                                    <!-- <button (click)="callDeleteUOFromServicioFromCarrito(servicio, servicio.unidad_obras[0])"
+                                  class="ui button eliminar-color">
+                                  <fa-icon [icon]="trashICon"></fa-icon>
+                                </button> -->
+                                </ng-container>
+
+                                <!-- <div class="ui icon buttons mini basic">
+                                    <button *ngIf="servicio.unidades_obras[0].uo_codigo!==0" (click)="showMateriales(servicio.unidades_obras[0].material_arr)" class="ui button generic-color">Detalles </button>
+                                  </div> -->
+                            </td>
+                        </ng-container>
                     </tr>
                 </ng-container>
             </ng-container>

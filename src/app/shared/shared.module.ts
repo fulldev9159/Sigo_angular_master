@@ -21,7 +21,6 @@ import {
 import { ColorPrecargadoDirective } from './directives/color-precargado.directive';
 import { ViewRechazoComponent } from './view-rechazo/view-rechazo.component';
 import { TableAgregarServiciosComponent } from './table-agregar-servicios/table-agregar-servicios.component';
-import { ExperimentalTableComponent } from './experimental-table/experimental-table.component';
 import { TableServiciosComponent } from './table-servicios/table-servicios.component';
 
 @NgModule({
