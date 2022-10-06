@@ -22,6 +22,7 @@ import { ColorPrecargadoDirective } from './directives/color-precargado.directiv
 import { ViewRechazoComponent } from './view-rechazo/view-rechazo.component';
 import { TableAgregarServiciosComponent } from './table-agregar-servicios/table-agregar-servicios.component';
 import { ExperimentalTableComponent } from './experimental-table/experimental-table.component';
+import { TableServiciosComponent } from './table-servicios/table-servicios.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ExperimentalTableComponent } from './experimental-table/experimental-ta
     ColorPrecargadoDirective,
     ViewRechazoComponent,
     TableAgregarServiciosComponent,
-    ExperimentalTableComponent,
+    TableServiciosComponent,
   ],
   imports: [
     CommonModule,
@@ -65,7 +66,7 @@ import { ExperimentalTableComponent } from './experimental-table/experimental-ta
     ColorPrecargadoDirective,
     ViewRechazoComponent,
     TableAgregarServiciosComponent,
-    ExperimentalTableComponent,
+    TableServiciosComponent,
   ],
 })
 export class SharedModule {
