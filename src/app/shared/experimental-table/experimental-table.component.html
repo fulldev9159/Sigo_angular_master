@@ -1,0 +1,53 @@
+<form class="carrito-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Servicios</th>
+                <th>Unidad Obra</th>
+            </tr>
+            <tr>
+                <th>Cod</th>
+                <th>Descripción</th>
+                <th>Tipo</th>
+                <th>Cantidad</th>
+                <th>Precio Un.</th>
+                <th>Total</th>
+                <th>Acciones</th>
+
+                <th>Cod</th>
+                <th>Descripción</th>
+                <th>Actividad</th>
+                <th>Cantidad</th>
+                <th>Precio Un.</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let servicio of data_carrito$|async;let i = index">
+                <tr>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                        {{ servicio.numero_producto }}
+                    </td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Descripción</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Tipo</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Cantidad</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Precio Un.</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Total</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">Acciones</td>
+                </tr>
+                <ng-container *ngFor="let uo of servicio.unidad_obras; let iuo= index">
+                    <tr>
+                        <td>{{ uo.uo_codigo }}</td>
+                        <td>Descripción</td>
+                        <td>Tipo</td>
+                        <td>Cantidad</td>
+                        <td>Precio Un.</td>
+                        <td>Total</td>
+                        <td>Acciones</td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+</form>
