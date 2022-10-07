@@ -184,6 +184,8 @@ Cypress.Commands.add('_check_dropdown_data', (selector, data, order) => {
 Cypress.Commands.add('_select_dropdown', (selector, item) => {
   cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
   cy.get(selector).click().contains('ul li > span', item).click();
+  cy.get(selector + '>.p-dropdown>span').contains(item, { timeout: 5000 });
+  cy.get('.p-ripple', { timeout: 5000 }).should('not.exist');
 });
 
 Cypress.Commands.add('_check_table_cub_service_uo', servicio_uo => {

@@ -31,6 +31,7 @@ interface DATA_TABLE_UO {
   cantidad_uo: number;
 }
 
+// TODO: AGREGAR EL TEST PARA VERIFICAR QUE AL AGREGAR O ELIMINAR UN SERVICIO LAS CANTIDADES NO SE RESETEEN
 describe('04_CUB_01_FORMULARIO_SPEC', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
@@ -445,9 +446,9 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       cy.get('button[id="navbar-create-cub"]').click();
 
       // VALIDAR MONTOS
-      cy.get('td[class="total-servicio-monto"]').contains('$0');
-      cy.get('td[class="total-uo-monto"]').contains('$0');
-      cy.get('td[class="total-cubicacion-monto"]').contains('$0');
+      cy.get('td[id="total-servicio-monto"]').contains('$0');
+      cy.get('td[id="total-uo-monto"]').contains('$0');
+      cy.get('td[id="total-cubicacion-monto"]').contains('$0');
 
       // SELECT
 
@@ -489,9 +490,9 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       // });
 
       // VALIDAR MONTOS
-      cy.get('td[class="total-servicio-monto"]').contains('$471,6');
-      cy.get('td[class="total-uo-monto"]').contains('$0');
-      cy.get('td[class="total-cubicacion-monto"]').contains('$471,6');
+      cy.get('td[id="total-servicio-monto"]').contains('$471,6');
+      cy.get('td[id="total-uo-monto"]').contains('$0');
+      cy.get('td[id="total-cubicacion-monto"]').contains('$471,6');
 
       cy._select_dropdown('#select-unidad-obra', 'C926 - CABLE 1800-26 PS');
       cy.get('input[name="input-nombre-cubicacion"]').click();
@@ -511,9 +512,9 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       // });
 
       // VALIDAR MONTOS
-      cy.get('td[class="total-servicio-monto"]').contains('$471,6');
-      cy.get('td[class="total-uo-monto"]').contains('$0');
-      cy.get('td[class="total-cubicacion-monto"]').contains('$471,6');
+      cy.get('td[id="total-servicio-monto"]').contains('$471,6');
+      cy.get('td[id="total-uo-monto"]').contains('$0');
+      cy.get('td[id="total-cubicacion-monto"]').contains('$471,6');
 
       // AGREGAR OTRO SERVICIO MATRIZ CABLES J451 CON UNA UO
       cy._select_dropdown('#select-tipo-servicio', 'CABLES');
@@ -549,9 +550,9 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       //   cy._check_table_cub_service_uo(data_service);
       // });
       // VALIDAR MONTOS
-      cy.get('td[class="total-servicio-monto"]').contains('$651,92');
-      cy.get('td[class="total-uo-monto"]').contains('$56,8');
-      cy.get('td[class="total-cubicacion-monto"]').contains('$708,72');
+      cy.get('td[id="total-servicio-monto"]').contains('$651,92');
+      cy.get('td[id="total-uo-monto"]').contains('$56,8');
+      cy.get('td[id="total-cubicacion-monto"]').contains('$708,72');
 
       // MODIFICAR LA CANTIDAD DEL SERVICIO J101
       cy.get(
@@ -578,13 +579,13 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       // cy._check_table_cub_service_uo(data_service);
 
       // VALIDAR MONTOS
-      cy.get('td[class="total-servicio-monto"]').contains('$2.316,67');
-      cy.get('td[class="total-uo-monto"]').contains('$56,8');
-      cy.get('td[class="total-cubicacion-monto"]').contains('$2.373,47');
+      cy.get('td[id="total-servicio-monto"]').contains('$2.316,67');
+      cy.get('td[id="total-uo-monto"]').contains('$56,8');
+      cy.get('td[id="total-cubicacion-monto"]').contains('$2.373,47');
 
       // MODIFICAR LA CANTIDAD DE LA UO D013
       cy.get(
-        '.carrito-container> table > tbody > tr:nth-child(3) > td:nth-child(11)>div>p-inputnumber>span>input'
+        '.carrito-container> table > tbody > tr:nth-child(5) > td:nth-child(4)>div>p-inputnumber>span>input'
       )
         .clear()
         .type('{del}5,24{enter}');
@@ -606,9 +607,9 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       // cy._check_table_cub_service_uo(data_service);
 
       // VALIDAR MONTOS
-      cy.get('td[class="total-servicio-monto"]').contains('$2.316,67');
-      cy.get('td[class="total-uo-monto"]').contains('$297,63');
-      cy.get('td[class="total-cubicacion-monto"]').contains('$2.614,3');
+      cy.get('td[id="total-servicio-monto"]').contains('$2.316,67');
+      cy.get('td[id="total-uo-monto"]').contains('$297,63');
+      cy.get('td[id="total-cubicacion-monto"]').contains('$2.614,3');
     });
 
     it('delete items carrito', () => {
@@ -637,9 +638,9 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       // cy._check_table_cub_service_uo(data_service);
 
       // VALIDAR MONTOS
-      cy.get('td[class="total-servicio-monto"]').contains('$180,32');
-      cy.get('td[class="total-uo-monto"]').contains('$297,63');
-      cy.get('td[class="total-cubicacion-monto"]').contains('$477,95');
+      cy.get('td[id="total-servicio-monto"]').contains('$180,32');
+      cy.get('td[id="total-uo-monto"]').contains('$297,63');
+      cy.get('td[id="total-cubicacion-monto"]').contains('$477,95');
     });
   });
 

@@ -10,6 +10,7 @@ describe('Create Cubicacion', () => {
   });
 
   it('create BUCLE CUB', () => {
+    cy.viewport(1500, 1700);
     const data = crearCubicacion;
     // FORMULARIO
     cy.get('input[name="input-nombre-cubicacion"]').type(
@@ -48,12 +49,12 @@ describe('Create Cubicacion', () => {
         cy.get('input[name="input-nombre-cubicacion"]').click();
         cy.get('#agregar-button').click();
 
-        let column = index === 0 ? 9 : 2;
+        // let column = index === 0 ? 9 : 2;
         if (uo.nombre.split('-')[1].trim() !== 'SIN UO') {
           cy.get('table')
             .contains('td', uo.nombre.split('-')[1].trim())
             .siblings()
-            .eq(column)
+            .eq(2)
             .find('p-inputnumber>span>input')
             .clear()
             .type(`${uo.cantidad}{enter}`);

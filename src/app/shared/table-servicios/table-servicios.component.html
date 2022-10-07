@@ -33,27 +33,28 @@
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{ servicio.servicio_nombre }}</td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{ servicio.tipo_servicio_descripcion }}</td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
-                        <!-- <div class="container-cantidad">
-                            <p-inputNumber [formControl]="controlServicioCantidad" mode="decimal"
-                                inputId="locale-german" locale="de-DE" [minFractionDigits]="2">
+                        <div class="container-cantidad">
+                            <p-inputNumber [formControl]="getControlServiceCantidad(servicio.servicio_id)"
+                                mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="2">
                             </p-inputNumber>
                             <p [pTooltip]="servicio.servicio_unidad_descripcion">{{servicio.servicio_unidad_cod}}</p>
-                            <zwc-input-alert [control]="controlServicioCantidad"></zwc-input-alert>
-                        </div> -->
+                            <zwc-input-alert [control]="getControlServiceCantidad(servicio.servicio_id)">
+                            </zwc-input-alert>
+                        </div>
                     </td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         {{ +servicio.servicio_precio_final_clp |
                         currency: 'CLP':'$':'.0-2':'es-CL' }}
                     </td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
-                        <!-- {{+servicio.servicio_precio_final_clp*+controlServicioCantidad.value | currency : 'CLP' :
-                        '$':'.0-2':'es-CL'}} -->
+                        {{+servicio.servicio_precio_final_clp*+getControlServiceCantidad(servicio.servicio_id).value |
+                        currency : 'CLP' :
+                        '$':'.0-2':'es-CL'}}
                     </td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
-                        <!-- <button
-                            (click)="callDeleteServicioFromCarrito(servicio)" class="ui button eliminar-color">
+                        <button (click)="deleteServicioFromCarrito(servicio)" class="ui button eliminar-color">
                             <fa-icon [icon]="trashICon"></fa-icon>
-                        </button> -->
+                        </button>
                     </td>
                 </tr>
                 <ng-container *ngFor="let uo of servicio.unidad_obras; let iuo= index">
@@ -68,13 +69,18 @@
                         <!-- CON UO -->
                         <ng-container *ngIf="uo.uo_codigo !== '0'">
                             <td>
-                                <!-- <div class="container-cantidad">
-                                <p-inputNumber [formControl]="controlUOCantidad" mode="decimal" inputId="locale-german" locale="de-DE"
-                                  [minFractionDigits]="2"></p-inputNumber>
-                                <p [pTooltip]="servicio.unidad_obras[0].uob_unidad_medida_descripcion">{{uo.uob_unidad_medida_cod }}
-                                </p>
-                                <zwc-input-alert [control]="controlUOCantidad"></zwc-input-alert>
-                              </div> -->
+                                <div class="container-cantidad">
+                                    <p-inputNumber
+                                        [formControl]="getControlUOCantidad(servicio.servicio_id,uo.uo_codigo)"
+                                        mode="decimal" inputId="locale-german" locale="de-DE" [minFractionDigits]="2">
+                                    </p-inputNumber>
+                                    <p [pTooltip]="servicio.unidad_obras[0].uob_unidad_medida_descripcion">
+                                        {{uo.uob_unidad_medida_cod }}
+                                    </p>
+                                    <zwc-input-alert
+                                        [control]="getControlUOCantidad(servicio.servicio_id,uo.uo_codigo)">
+                                    </zwc-input-alert>
+                                </div>
                             </td>
                             <td>
                                 {{
@@ -83,15 +89,16 @@
                                 }}
                             </td>
                             <td>
-                                <!-- {{uo.uo_precio_total_clp*+controlUOCantidad.value| currency : 'CLP' : '$':'.0-2':'es-CL'}} -->
+                                {{uo.uo_precio_total_clp*+getControlUOCantidad(servicio.servicio_id,uo.uo_codigo).value|
+                                currency : 'CLP' : '$':'.0-2':'es-CL'}}
                             </td>
                             <td>
 
                                 <ng-container *ngIf="servicio.unidad_obras.length>1">
-                                    <!-- <button (click)="callDeleteUOFromServicioFromCarrito(servicio, servicio.unidad_obras[0])"
-                                  class="ui button eliminar-color">
-                                  <fa-icon [icon]="trashICon"></fa-icon>
-                                </button> -->
+                                    <button (click)="deleteUOFromServicioFromCarrito(servicio, uo)"
+                                        class="ui button eliminar-color">
+                                        <fa-icon [icon]="trashICon"></fa-icon>
+                                    </button>
                                 </ng-container>
 
                                 <!-- <div class="ui icon buttons mini basic">
@@ -103,5 +110,21 @@
                 </ng-container>
             </ng-container>
         </tbody>
+        <tfoot>
+            <tr>
+                <td>Total Servicios</td>
+                <td id="total-servicio-monto">{{totalServicios| currency : 'CLP' :
+                    '$':'.0-2':'es-CL'}}</td>
+                <td>Total Unidades Obra</td>
+                <td id="total-uo-monto">{{totalUOs| currency : 'CLP' :
+                    '$':'.0-2':'es-CL'}}</td>
+                <td></td>
+
+                <td>Total:</td>
+                <td id="total-cubicacion-monto">{{totalServicios+totalUOs|
+                    currency :
+                    'CLP' : '$':'.0-2':'es-CL'}}</td>
+            </tr>
+        </tfoot>
     </table>
 </form>
