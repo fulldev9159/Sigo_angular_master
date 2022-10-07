@@ -13,7 +13,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { CarritoService, CarritoUO } from '@model';
+import { Accion, CarritoService, CarritoUO, SessionData } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Observable, of, Subscription } from 'rxjs';
 import localeEsCl from '@angular/common/locales/es-CL';
@@ -58,15 +58,25 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
   trashICon = faTrash;
 
+  colSpan = 7;
+
+  permisos: string[] = (
+    JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
+  ).permisos.map(value => value.slug);
+
   constructor(private serviciosFacade: ServiciosFacade) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
 
   ngOnInit(): void {
+    // DATA
     if (this.mode_source === 'aggregation')
       this.data_carrito$ = this.loadData(this.serviciosFacade.carrito$());
     if (this.mode_source === 'static')
       this.data_carrito$ = this.loadData(of(this.data_source));
+
+    // COLSPAN
+    if (!this.canSeePrices()) this.colSpan = this.colSpan - 2;
 
     // CALCULAR TOTALES
     this.subscription.add(
@@ -276,6 +286,10 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
         ).get('unidad_obras').value as Array<{ uo_codigo: string }>
       ).findIndex(uo => uo.uo_codigo === uo.uo_codigo)
     );
+  }
+
+  canSeePrices(): boolean {
+    return this.permisos.find(v => v === 'OT_VER_VALOR_SERV') !== undefined;
   }
 
   get valid(): boolean {

@@ -2,24 +2,24 @@
     <table>
         <thead>
             <tr>
-                <th>Servicios</th>
-                <th>Unidad Obra</th>
+                <th [attr.colspan]="colSpan">Servicios</th>
+                <th [attr.colspan]="colSpan">Unidad Obra</th>
             </tr>
             <tr>
                 <th>Cod</th>
                 <th>Descripción</th>
                 <th>Tipo</th>
                 <th>Cantidad</th>
-                <th>Precio Un.</th>
-                <th>Total</th>
+                <th *ngIf="canSeePrices()">Precio Un.</th>
+                <th *ngIf="canSeePrices()">Total</th>
                 <th>Acciones</th>
 
                 <th>Cod</th>
                 <th>Descripción</th>
                 <th>Actividad</th>
                 <th>Cantidad</th>
-                <th>Precio Un.</th>
-                <th>Total</th>
+                <th *ngIf="canSeePrices()">Precio Un.</th>
+                <th *ngIf="canSeePrices()">Total</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -42,11 +42,11 @@
                             </zwc-input-alert>
                         </div>
                     </td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
                         {{ +servicio.servicio_precio_final_clp |
                         currency: 'CLP':'$':'.0-2':'es-CL' }}
                     </td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1" *ngIf="canSeePrices()">
                         {{+servicio.servicio_precio_final_clp*+getControlServiceCantidad(servicio.servicio_id).value |
                         currency : 'CLP' :
                         '$':'.0-2':'es-CL'}}
@@ -82,13 +82,13 @@
                                     </zwc-input-alert>
                                 </div>
                             </td>
-                            <td>
+                            <td *ngIf="canSeePrices()">
                                 {{
                                 uo.uo_precio_total_clp
                                 | currency: 'CLP':'$':'.0-2':'es-CL'
                                 }}
                             </td>
-                            <td>
+                            <td *ngIf="canSeePrices()">
                                 {{uo.uo_precio_total_clp*+getControlUOCantidad(servicio.servicio_id,uo.uo_codigo).value|
                                 currency : 'CLP' : '$':'.0-2':'es-CL'}}
                             </td>
@@ -110,21 +110,29 @@
                 </ng-container>
             </ng-container>
         </tbody>
-        <tfoot>
+        <tfoot *ngIf="canSeePrices()">
             <tr>
+                <td></td>
+                <td></td>
                 <td>Total Servicios</td>
-                <td id="total-servicio-monto">{{totalServicios| currency : 'CLP' :
+                <td colspan="2" id="total-servicio-monto">{{totalServicios| currency : 'CLP' :
                     '$':'.0-2':'es-CL'}}</td>
                 <td>Total Unidades Obra</td>
-                <td id="total-uo-monto">{{totalUOs| currency : 'CLP' :
+                <td colspan="2" id="total-uo-monto">{{totalUOs| currency : 'CLP' :
                     '$':'.0-2':'es-CL'}}</td>
                 <td></td>
 
                 <td>Total:</td>
-                <td id="total-cubicacion-monto">{{totalServicios+totalUOs|
+                <td colspan="2" id="total-cubicacion-monto">{{totalServicios+totalUOs|
                     currency :
                     'CLP' : '$':'.0-2':'es-CL'}}</td>
+                <td></td>
+                <td></td>
             </tr>
         </tfoot>
     </table>
 </form>
+
+<div class="message" id="alert-carrito-vacio" *ngIf="(data_carrito$|async).length === 0">
+    <p-message severity="error" text="Al menos 1 servicio debe ser ingresado" styleClass="mr-2"></p-message>
+</div>
