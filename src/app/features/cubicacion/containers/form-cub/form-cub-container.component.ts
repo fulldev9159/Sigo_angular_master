@@ -29,9 +29,8 @@ import {
   SessionData,
   UOAgregar,
 } from '@model';
-import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-table-services.component';
 import { ActivatedRoute, Route } from '@angular/router';
-import { TableAgregarServiciosComponent } from '@sharedOT/table-agregar-servicios/table-agregar-servicios.component';
+import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
 
 @Component({
   selector: 'zwc-form-cub',
@@ -50,11 +49,17 @@ export class FormCubContainerComponent
   })
   formulario: FormularioComponent;
 
-  @ViewChild('tableAgregarServicios', {
-    read: TableAgregarServiciosComponent,
+  @ViewChild('agregarServiciosForm', {
+    read: FormAgregarServiciosComponent,
     static: false,
   })
-  tableAgregarServicios: TableAgregarServiciosComponent;
+  agregarServiciosForm: FormAgregarServiciosComponent;
+
+  @ViewChild('tableServicios', {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServicios: TableServiciosComponent;
 
   sessionData: SessionData = JSON.parse(localStorage.getItem('auth'))
     .sessionData;
@@ -99,16 +104,16 @@ export class FormCubContainerComponent
     this.formulario.formCub
       .get('cmarcoproveedor_id')
       .disable({ emitEvent: false });
-    this.tableAgregarServicios?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm.formFilter
       .get('actividad_id')
       .disable({ emitEvent: false });
-    this.tableAgregarServicios?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm.formFilter
       .get('tipo_servicio_id')
       .disable({ emitEvent: false });
-    this.tableAgregarServicios?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm.formFilter
       .get('servicio_cod')
       .disable({ emitEvent: false });
-    this.tableAgregarServicios?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm.formFilter
       .get('unidad_obra_cod')
       .disable({ emitEvent: false });
 
@@ -130,16 +135,16 @@ export class FormCubContainerComponent
       this.formulario.formCub
         .get('cmarcoproveedor_id')
         .setValue(null, { emitEvent: false });
-      this.tableAgregarServicios?.agregarServiciosForm.formFilter
+      this.agregarServiciosForm.formFilter
         .get('actividad_id')
         .setValue(null, { emitEvent: false });
-      this.tableAgregarServicios?.agregarServiciosForm.formFilter
+      this.agregarServiciosForm.formFilter
         .get('tipo_servicio_id')
         .setValue(null, { emitEvent: false });
-      this.tableAgregarServicios?.agregarServiciosForm.formFilter
+      this.agregarServiciosForm.formFilter
         .get('servicio_cod')
         .setValue(null, { emitEvent: false });
-      this.tableAgregarServicios?.agregarServiciosForm.formFilter
+      this.agregarServiciosForm.formFilter
         .get('unidad_obra_cod')
         .setValue(null, { emitEvent: false });
     });
@@ -155,16 +160,16 @@ export class FormCubContainerComponent
       this.formulario.formCub
         .get('cmarcoproveedor_id')
         .setValue(null, { emitEvent: false });
-      this.tableAgregarServicios?.agregarServiciosForm.formFilter
+      this.agregarServiciosForm.formFilter
         .get('actividad_id')
         .setValue(null, { emitEvent: false });
-      this.tableAgregarServicios?.agregarServiciosForm.formFilter
+      this.agregarServiciosForm.formFilter
         .get('tipo_servicio_id')
         .setValue(null, { emitEvent: false });
-      this.tableAgregarServicios?.agregarServiciosForm.formFilter
+      this.agregarServiciosForm.formFilter
         .get('servicio_cod')
         .setValue(null, { emitEvent: false });
-      this.tableAgregarServicios?.agregarServiciosForm.formFilter
+      this.agregarServiciosForm.formFilter
         .get('unidad_obra_cod')
         .setValue(null, { emitEvent: false });
     });
@@ -178,21 +183,21 @@ export class FormCubContainerComponent
         this.serviciosFacade.resetServicioSelected();
         this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('actividad_id')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('tipo_servicio_id')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('servicio_cod')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('unidad_obra_cod')
           .setValue(null, { emitEvent: false });
       });
 
-    this.tableAgregarServicios?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm.formFilter
       .get('actividad_id')
       .valueChanges.subscribe(() => {
         this.contratoFacade.resetTipoServiciosContrato();
@@ -200,28 +205,28 @@ export class FormCubContainerComponent
         this.serviciosFacade.resetServicioSelected();
         this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('tipo_servicio_id')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('servicio_cod')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('unidad_obra_cod')
           .setValue(null, { emitEvent: false });
       });
 
-    this.tableAgregarServicios?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm.formFilter
       .get('tipo_servicio_id')
       .valueChanges.subscribe(() => {
         this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
         this.serviciosFacade.resetServicioSelected();
         this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('servicio_cod')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServicios?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm.formFilter
           .get('unidad_obra_cod')
           .setValue(null, { emitEvent: false });
       });
@@ -338,9 +343,7 @@ export class FormCubContainerComponent
             },
             cubicacion_detalle: {
               nuevo: (
-                this.tableAgregarServicios?.tableServicios.formTable.get(
-                  'table'
-                ).value as Array<{
+                this.tableServicios.formTable.get('table').value as Array<{
                   servicio_id: number;
                   servicio_cantidad: number;
                   unidad_obras: Array<{
@@ -378,13 +381,12 @@ export class FormCubContainerComponent
   editarCubicacion(): void {
     // ELIMINAR SERVICIOS/UO QUE EXISTIAN EN LA CUBICACION SI EL USUARIO DECIDIÖ ELIMINAR UNO
     if (
-      this.tableAgregarServicios?.tableServicios.servicios_eliminar.length >
-        0 ||
-      this.tableAgregarServicios?.tableServicios.uos_eliminar.length > 0
+      this.tableServicios.servicios_eliminar.length > 0 ||
+      this.tableServicios.uos_eliminar.length > 0
     ) {
       this.cubicacionFacade.eliminarServicioCarrito(
-        this.tableAgregarServicios?.tableServicios.servicios_eliminar,
-        this.tableAgregarServicios?.tableServicios.uos_eliminar
+        this.tableServicios.servicios_eliminar,
+        this.tableServicios.uos_eliminar
       );
     }
 
@@ -421,9 +423,7 @@ export class FormCubContainerComponent
               uo_cantidad: number;
               uo_codigo: string;
             }>;
-          }[] = this.tableAgregarServicios?.tableServicios.formTable.get(
-            'table'
-          ).value as Array<{
+          }[] = this.tableServicios.formTable.get('table').value as Array<{
             precargado: boolean;
             servicio_id: number;
             servicio_rowid: number;

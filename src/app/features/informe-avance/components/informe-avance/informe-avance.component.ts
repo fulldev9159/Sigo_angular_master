@@ -18,7 +18,8 @@ import {
   RequestAdicionales,
   RequestAutorizarInformeAvance,
 } from '@model';
-import { TableAgregarServiciosComponent } from '@sharedOT/table-agregar-servicios/table-agregar-servicios.component';
+import { FormAgregarServiciosComponent } from '@sharedOT/form-agregar-servicios/form-agregar-servicios.component';
+import { TableServiciosComponent } from '@sharedOT/table-servicios/table-servicios.component';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { InformeAvanceFacade } from '@storeOT/informe-avance/informe-avance.facades';
@@ -44,6 +45,18 @@ import { Observable, Subscription, take } from 'rxjs';
 export class InformeAvanceComponent
   implements OnDestroy, OnInit, AfterViewInit
 {
+  @ViewChild('agregarServiciosForm', {
+    read: FormAgregarServiciosComponent,
+    static: false,
+  })
+  agregarServiciosForm: FormAgregarServiciosComponent;
+
+  @ViewChild('tableServicios', {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServicios: TableServiciosComponent;
+
   subscription: Subscription = new Subscription();
   dataServicios: CarritoService[] = [];
   // 112 TODO: MEJORAR MANERA DE ARMAR LOS DATOS DEL SERVICIO A AGREGAR, ACTUALMENTE SE BUSCA DESDE EL CARRITO HACIA EL CARRITO, TIENE UNA VUELTA MEDIA RARA
@@ -58,12 +71,6 @@ export class InformeAvanceComponent
 
   // MODAL
   showModalRechazarInformeAvance = false;
-
-  @ViewChild('tableAgregarServiciosAdicionales', {
-    read: TableAgregarServiciosComponent,
-    static: false,
-  })
-  tableAgregarServiciosAdicionales: TableAgregarServiciosComponent;
 
   constructor(
     private serviciosFacade: ServiciosFacade,
@@ -184,18 +191,18 @@ export class InformeAvanceComponent
 
   ngAfterViewInit(): void {
     //SETTING INIT FORMULARIOS
-    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm?.formFilter
       .get('tipo_servicio_id')
       .disable({ emitEvent: false });
-    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm?.formFilter
       .get('servicio_cod')
       .disable({ emitEvent: false });
-    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm?.formFilter
       .get('unidad_obra_cod')
       .disable({ emitEvent: false });
 
     // RESET
-    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm?.formFilter
       .get('actividad_id')
       .valueChanges.subscribe(() => {
         this.contratoFacade.resetTipoServiciosContrato();
@@ -203,28 +210,28 @@ export class InformeAvanceComponent
         this.serviciosFacade.resetServicioSelected();
         this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm?.formFilter
           .get('tipo_servicio_id')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm?.formFilter
           .get('servicio_cod')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm?.formFilter
           .get('unidad_obra_cod')
           .setValue(null, { emitEvent: false });
       });
 
-    this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+    this.agregarServiciosForm?.formFilter
       .get('tipo_servicio_id')
       .valueChanges.subscribe(() => {
         this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
         this.serviciosFacade.resetServicioSelected();
         this.serviciosFacade.resetUnidadesObraServicio();
 
-        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm?.formFilter
           .get('servicio_cod')
           .setValue(null, { emitEvent: false });
-        this.tableAgregarServiciosAdicionales?.agregarServiciosForm.formFilter
+        this.agregarServiciosForm?.formFilter
           .get('unidad_obra_cod')
           .setValue(null, { emitEvent: false });
       });
@@ -241,29 +248,25 @@ export class InformeAvanceComponent
         // 114 TODO: IMPLEMENTAR EL GUARDAR CAMBIOS DE INFORME DE AVANCE
         // 115 TODO: DESPLEGAR MENSAJE DE APROBACIÓN PARA GUARDAR INFORME DE AVANCE
 
-        console.log(
-          this.tableAgregarServiciosAdicionales.tableServicios.formTable.value
-        );
+        console.log(this.tableServicios.formTable.value);
 
         // SERVICIOS ADICIONALES
-        let formularioCarrito =
-          this.tableAgregarServiciosAdicionales.tableServicios.formTable.get(
-            'table'
-          ).value as Array<{
-            servicio_rowid: number;
-            servicio_id: number;
-            servicio_cantidad: number;
-            actividad_id: number;
-            servicio_tipo: number;
-            adicional: string;
-            dummy: string;
-            unidad_obras: {
-              precargado: boolean;
-              uo_rowid: number;
-              uo_codigo: string;
-              uo_cantidad: number;
-            }[];
-          }>;
+        let formularioCarrito = this.tableServicios.formTable.get('table')
+          .value as Array<{
+          servicio_rowid: number;
+          servicio_id: number;
+          servicio_cantidad: number;
+          actividad_id: number;
+          servicio_tipo: number;
+          adicional: string;
+          dummy: string;
+          unidad_obras: {
+            precargado: boolean;
+            uo_rowid: number;
+            uo_codigo: string;
+            uo_cantidad: number;
+          }[];
+        }>;
 
         console.log('form', formularioCarrito);
         if (formularioCarrito.length > 0) {

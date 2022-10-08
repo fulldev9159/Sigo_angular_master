@@ -320,14 +320,14 @@ Cypress.Commands.add('_check_table_servicio_input', data => {
         .eq(0)
         .contains(uo.nombre.split('-')[1].trim());
 
-      cy.get('.carrito-container>table')
-        .contains(
-          'td',
-          new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-        )
-        .siblings()
-        .eq(1)
-        .contains(servicio.actividad);
+      // cy.get('.carrito-container>table')
+      //   .contains(
+      //     'td',
+      //     new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+      //   )
+      //   .siblings()
+      //   .eq(1)
+      //   .contains(servicio.actividad);
 
       if (uo.nombre !== '0 - SIN UO') {
         cy.get('.carrito-container>table')
@@ -407,55 +407,17 @@ Cypress.Commands.add('_check_table_servicio_view', data => {
       .eq(4)
       .contains(servicio.total);
 
-    cy.get('.carrito-container>table')
-      .contains('td', servicio.nombre.split('-')[0].trim())
-      .siblings()
-      .eq(5)
-      .contains(servicio.unidad_obras[0].nombre.split('-')[0].trim());
-
-    cy.get('.carrito-container>table')
-      .contains('td', servicio.nombre.split('-')[0].trim())
-      .siblings()
-      .eq(6)
-      .contains(servicio.unidad_obras[0].nombre.split('-')[1].trim());
-
-    cy.get('.carrito-container>table')
-      .contains('td', servicio.nombre.split('-')[0].trim())
-      .siblings()
-      .eq(7)
-      .contains(servicio.actividad);
-
-    if (servicio.unidad_obras[0].nombre !== '0 - SIN UO') {
-      cy.get('.carrito-container>table')
-        .contains('td', servicio.nombre.split('-')[0].trim())
-        .siblings()
-        .eq(8)
-        .contains(servicio.unidad_obras[0].cantidad);
-
-      cy.get('.carrito-container>table')
-        .contains('td', servicio.nombre.split('-')[0].trim())
-        .siblings()
-        .eq(9)
-        .contains(servicio.unidad_obras[0].precio);
-
-      cy.get('.carrito-container>table')
-        .contains('td', servicio.nombre.split('-')[0].trim())
-        .siblings()
-        .eq(10)
-        .contains(servicio.unidad_obras[0].total);
-    }
-
     servicio.unidad_obras.forEach((uo, index) => {
-      if (index !== 0) {
-        cy.get('.carrito-container>table')
-          .contains(
-            'td',
-            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-          )
-          .siblings()
-          .eq(0)
-          .contains(uo.nombre.split('-')[1].trim());
+      cy.get('.carrito-container>table')
+        .contains(
+          'td',
+          new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+        )
+        .siblings()
+        .eq(0)
+        .contains(uo.nombre.split('-')[1].trim());
 
+      if (uo.nombre !== '0 - SIN UO')
         cy.get('.carrito-container>table')
           .contains(
             'td',
@@ -465,34 +427,33 @@ Cypress.Commands.add('_check_table_servicio_view', data => {
           .eq(1)
           .contains(servicio.actividad);
 
-        if (uo.nombre !== '0 - SIN UO') {
-          cy.get('.carrito-container>table')
-            .contains(
-              'td',
-              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-            )
-            .siblings()
-            .eq(2)
-            .contains(uo.cantidad);
+      if (uo.nombre !== '0 - SIN UO') {
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
+          .siblings()
+          .eq(2)
+          .contains(uo.cantidad);
 
-          cy.get('.carrito-container>table')
-            .contains(
-              'td',
-              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-            )
-            .siblings()
-            .eq(3)
-            .contains(uo.precio);
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
+          .siblings()
+          .eq(3)
+          .contains(uo.precio);
 
-          cy.get('.carrito-container>table')
-            .contains(
-              'td',
-              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-            )
-            .siblings()
-            .eq(4)
-            .contains(uo.total);
-        }
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
+          .siblings()
+          .eq(4)
+          .contains(uo.total);
       }
     });
   });

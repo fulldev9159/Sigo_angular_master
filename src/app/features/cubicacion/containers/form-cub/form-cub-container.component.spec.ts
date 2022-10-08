@@ -280,9 +280,7 @@ describe('FormCubContainerComponent', () => {
     spyOn(servicioFacade, 'resetServiciosAgenciaContratoProveedor');
     spyOn(servicioFacade, 'resetServicioSelected');
     spyOn(servicioFacade, 'resetUnidadesObraServicio');
-    component.tableAgregarServicios?.agregarServiciosForm.formFilter
-      .get('actividad_id')
-      .setValue(1);
+    component.agregarServiciosForm.formFilter.get('actividad_id').setValue(1);
     fixture.detectChanges();
 
     // expect(contratoFacade.resetTipoServiciosContrato).toHaveBeenCalled();
@@ -297,7 +295,7 @@ describe('FormCubContainerComponent', () => {
     spyOn(servicioFacade, 'resetServiciosAgenciaContratoProveedor');
     spyOn(servicioFacade, 'resetServicioSelected');
     spyOn(servicioFacade, 'resetUnidadesObraServicio');
-    component.tableAgregarServicios?.agregarServiciosForm.formFilter
+    component.agregarServiciosForm.formFilter
       .get('tipo_servicio_id')
       .setValue(1);
     fixture.detectChanges();

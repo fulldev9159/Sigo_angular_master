@@ -20,7 +20,6 @@ import {
 } from './view-table-services/view-table-services.component';
 import { ColorPrecargadoDirective } from './directives/color-precargado.directive';
 import { ViewRechazoComponent } from './view-rechazo/view-rechazo.component';
-import { TableAgregarServiciosComponent } from './table-agregar-servicios/table-agregar-servicios.component';
 import { TableServiciosComponent } from './table-servicios/table-servicios.component';
 
 @NgModule({
@@ -40,7 +39,6 @@ import { TableServiciosComponent } from './table-servicios/table-servicios.compo
     ViewServiceTableComponent,
     ColorPrecargadoDirective,
     ViewRechazoComponent,
-    TableAgregarServiciosComponent,
     TableServiciosComponent,
   ],
   imports: [
@@ -64,7 +62,6 @@ import { TableServiciosComponent } from './table-servicios/table-servicios.compo
     ViewTableServicesComponent,
     ColorPrecargadoDirective,
     ViewRechazoComponent,
-    TableAgregarServiciosComponent,
     TableServiciosComponent,
   ],
 })

@@ -2,18 +2,28 @@
     <div content>
         <h1>{{editMode?title:'Creación de una nueva Cubicación/Costeo' }}</h1>
         <zwc-formulario #formulario></zwc-formulario>
-        <zwc-table-agregar-servicios #tableAgregarServicios reglasDeAgregacion="Cubicacion">
-        </zwc-table-agregar-servicios>
+        <p-divider align="center">
+            <span class="p-tag">Agregar Servicios</span>
+        </p-divider>
+        <div class="grid">
+            <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                <zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion="Cubicacion">
+                </zwc-form-agregar-servicios>
+            </div>
+            <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
+                <zwc-table-servicios #tableServicios></zwc-table-servicios>
+            </div>
+        </div>
         <ng-container *ngIf="editMode;else createModeButton">
             <zwc-pbutton-sending Pid="editar-cubicacion" content="Guardar cambios"
                 Pclass="p-button-info p-button-sm mt-4 w-full" [sending]="sendingSaveCubicacion$|async"
-                [Pdisabled]="!formulario.valid || !tableAgregarServicios.tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
+                [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
                 (call)="editarCubicacion()"></zwc-pbutton-sending>
         </ng-container>
         <ng-template #createModeButton>
             <zwc-pbutton-sending Pid="crear-cubicacion" content="Crear nueva cubicación"
                 Pclass="p-button-info p-button-sm mt-4 w-full"
-                [Pdisabled]="!formulario.valid || !tableAgregarServicios.tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
+                [Pdisabled]="!formulario.valid || !tableServicios.valid || (sendingSaveCubicacion$|async)===true || (carrito$|async).length===0"
                 [sending]="sendingSaveCubicacion$|async" (call)="createCubicacion()"></zwc-pbutton-sending>
         </ng-template>
     </div>

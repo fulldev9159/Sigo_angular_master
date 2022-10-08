@@ -19,9 +19,20 @@
     <div class="card">
         <div class=" grid">
             <div class="field col-12 table-agregar-servicios-adicionales">
-                <zwc-table-agregar-servicios #tableAgregarServiciosAdicionales reglasDeAgregacion="ServiciosAdicionales"
-                    [informeAvance]="dataServicios">
-                </zwc-table-agregar-servicios>
+                <p-divider align="center">
+                    <span class="p-tag">Agregar Servicios</span>
+                </p-divider>
+                <div class="grid">
+                    <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                        <zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion="ServiciosAdicionales"
+                            [informeAvance]="dataServicios">
+                        </zwc-form-agregar-servicios>
+                    </div>
+                    <div class="field col-12 md:col-9 lg:col-9 xl:col-9">
+                        <zwc-table-servicios #tableServicios mode_source="static" [data_source]="dataServicios"
+                            [cantidad_editable]="true" [column_acciones]="false"></zwc-table-servicios>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
