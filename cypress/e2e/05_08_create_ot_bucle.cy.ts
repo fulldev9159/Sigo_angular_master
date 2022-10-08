@@ -38,13 +38,16 @@ describe('Create ot bucle', () => {
     cy.get('input[name="input-nombre-proyectista"]').type('Andoria algoritmo');
     cy.get('#crear-ot').should('be.disabled');
 
-    cy._select_dropdown_async(
-      '/ot/lps/get',
-      '#select-pmo',
-      '25',
-      '#select-linea-presupuestaria',
-      'CHI100'
-    );
+    cy._select_dropdown('#select-pmo', '25');
+    cy._select_dropdown('#select-linea-presupuestaria', 'CHI100');
+
+    // cy._select_dropdown_async(
+    //   '/ot/lps/get',
+    //   '#select-pmo',
+    //   '25',
+    //   '#select-linea-presupuestaria',
+    //   'CHI100'
+    // );
     cy.get('#crear-ot').should('be.disabled');
     cy._select_dropdown('#select-pep2', 'P-0077-22-2002-05106-021');
 

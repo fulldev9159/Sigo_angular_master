@@ -30,7 +30,12 @@
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         {{ servicio.numero_producto }}
                     </td>
-                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{ servicio.servicio_nombre }}</td>
+                    <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
+                        <ng-container *ngIf="servicio.adicional!=='ORIGINAL' && servicio.adicional!==undefined">
+                            <p-tag value="Servicio Adicional" severity="warning"></p-tag>
+                        </ng-container>
+                        {{ servicio.servicio_nombre }}
+                    </td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">{{ servicio.tipo_servicio_descripcion }}</td>
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         <div class="container-cantidad">

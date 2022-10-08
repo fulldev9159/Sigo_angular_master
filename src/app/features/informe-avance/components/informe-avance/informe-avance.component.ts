@@ -30,7 +30,6 @@ import { Observable, Subscription, take } from 'rxjs';
 // 92 TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
 // 92 TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
 // 105 TODO: VER SI ES MEJOR UX REFRESCAR EL NGRX QUE LA PÁGINA AL GUARDAR BORRADOR
-// TODO: CAMBIAR EL TAG INFORME DE AVANCE POR UN TITULO
 // 106 TODO: CONFIRMAR: SI EL ADMIN EECC REALIZA MODIFICACIONES AL INFORME DE AVANCE Y LO RECHAZA ESOS CAMBIOS TAMBIÉN SE DEBERAN GUARDAR
 // 107 TODO: MOSTRAR EL TOTAL EN LA VISTA DEL ADMIN EECC
 // 108 TODO: IMPLEMENTAR BOTON RECHAZAR INFORME DE AVANCE
@@ -51,14 +50,14 @@ export class InformeAvanceComponent
   })
   agregarServiciosForm: FormAgregarServiciosComponent;
 
-  @ViewChild('tableServicios', {
+  @ViewChild('tableServiciosAdicionales', {
     read: TableServiciosComponent,
     static: false,
   })
-  tableServicios: TableServiciosComponent;
+  tableServiciosAdicionales: TableServiciosComponent;
 
   subscription: Subscription = new Subscription();
-  dataServicios: CarritoService[] = [];
+  serviciosInformeAvance: CarritoService[] = [];
   // 112 TODO: MEJORAR MANERA DE ARMAR LOS DATOS DEL SERVICIO A AGREGAR, ACTUALMENTE SE BUSCA DESDE EL CARRITO HACIA EL CARRITO, TIENE UNA VUELTA MEDIA RARA
   carrito$ = this.serviciosFacade.carrito$();
   accionesOT: Accion[] = [];
@@ -157,32 +156,35 @@ export class InformeAvanceComponent
 
                 // PARA CARGAR INFORME DE AVANCE
                 if (new_service.adicional === 'ORIGINAL')
-                  this.dataServicios.push(new_service);
+                  this.serviciosInformeAvance.push(new_service);
                 // PARA PRE CARGAR SERVICIOS ADICIONALES
                 if (new_service.adicional !== 'ORIGINAL')
                   this.serviciosFacade.addDirectServiceCarrito(new_service);
               });
             });
             let valueInitial: CarritoService[] = [];
-            this.dataServicios = this.dataServicios.reduce((acc, curr) => {
-              let indexService = acc.findIndex(
-                value => value.servicio_id === curr.servicio_id
-              );
-              if (indexService === -1) {
-                acc.push(curr);
-              } else {
-                let temp = [
-                  ...acc.map(item => ({
-                    ...item,
-                    unidad_obras: [...item.unidad_obras],
-                  })),
-                ];
-                temp[indexService].unidad_obras.push(...curr.unidad_obras);
-                acc[indexService] = temp[indexService];
-              }
+            this.serviciosInformeAvance = this.serviciosInformeAvance.reduce(
+              (acc, curr) => {
+                let indexService = acc.findIndex(
+                  value => value.servicio_id === curr.servicio_id
+                );
+                if (indexService === -1) {
+                  acc.push(curr);
+                } else {
+                  let temp = [
+                    ...acc.map(item => ({
+                      ...item,
+                      unidad_obras: [...item.unidad_obras],
+                    })),
+                  ];
+                  temp[indexService].unidad_obras.push(...curr.unidad_obras);
+                  acc[indexService] = temp[indexService];
+                }
 
-              return acc;
-            }, valueInitial);
+                return acc;
+              },
+              valueInitial
+            );
           }
         }
       )
@@ -248,23 +250,25 @@ export class InformeAvanceComponent
         // 114 TODO: IMPLEMENTAR EL GUARDAR CAMBIOS DE INFORME DE AVANCE
         // 115 TODO: DESPLEGAR MENSAJE DE APROBACIÓN PARA GUARDAR INFORME DE AVANCE
 
-        console.log(this.tableServicios.formTable.value);
+        console.log(this.tableServiciosAdicionales.formTable.value);
 
         // SERVICIOS ADICIONALES
-        let formularioCarrito = this.tableServicios.formTable.get('table')
-          .value as Array<{
-          servicio_rowid: number;
-          servicio_id: number;
+        // TODO: OPTIMIZAR ESTRUCTURA DEL FORMULARIO TABLE
+        let formularioCarrito = this.tableServiciosAdicionales.formTable.get(
+          'table'
+        ).value as Array<{
+          precargado: boolean;
           servicio_cantidad: number;
-          actividad_id: number;
-          servicio_tipo: number;
-          adicional: string;
-          dummy: string;
+          servicio_id: number;
+          servicio_precio_final_clp: number;
+          servicio_rowid: number;
           unidad_obras: {
             precargado: boolean;
             uo_rowid: number;
             uo_codigo: string;
             uo_cantidad: number;
+
+            uo_precio_total_clp: number;
           }[];
         }>;
 
@@ -272,7 +276,7 @@ export class InformeAvanceComponent
         if (formularioCarrito.length > 0) {
           // SERVICIOS/UO COMPLETAMENTE NUEVOS
           let nuevosAdicionales: NuevoServicioAdicional[] = formularioCarrito
-            .filter(value => value.adicional === undefined)
+            .filter(value => !value.precargado)
             .map(value => ({
               servicio_id: +value.servicio_id,
               actividad_id: +carrito.find(
@@ -281,7 +285,8 @@ export class InformeAvanceComponent
               tipo_servicio_id: +carrito.find(
                 servicio => servicio.servicio_id === +value.servicio_id
               ).tipo_servicio_id,
-              cantidad: value.dummy ? 0 : value.servicio_cantidad,
+              // cantidad: value.dummy ? 0 : value.servicio_cantidad,
+              cantidad: value.servicio_cantidad,
               unidad_obra: value.unidad_obras.map(uo => ({
                 uob_codigo: uo.uo_codigo,
                 cantidad: uo.uo_cantidad,
@@ -290,11 +295,11 @@ export class InformeAvanceComponent
 
           console.log('nuevos', nuevosAdicionales);
 
-          // SERVICIOS A ACTUALIZAR
+          // TODO: SERVICIOS A ACTUALIZAR
 
-          // UO A ACTUALIZAR
+          // TODO: UO A ACTUALIZAR
 
-          // UO A AGREGAR
+          // TODO: UO A AGREGAR
 
           let request: RequestAdicionales = {
             ot_id: this.ot_id,
