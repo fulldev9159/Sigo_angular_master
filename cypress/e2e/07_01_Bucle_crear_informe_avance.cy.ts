@@ -5,11 +5,10 @@ import {
 } from '@mocksOT';
 import {
   adicionalesBucle1,
-  crearCubicacion,
   CubicacionEditada,
 } from 'cypress/fixtures/testedCubicacion';
 
-describe('INFORME DE AVANCE', () => {
+describe.skip('INFORME DE AVANCE', () => {
   it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 

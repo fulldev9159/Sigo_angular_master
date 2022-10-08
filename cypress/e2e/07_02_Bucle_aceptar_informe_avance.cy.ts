@@ -9,7 +9,7 @@ import {
   CubicacionEditada,
 } from 'cypress/fixtures/testedCubicacion';
 
-describe('ACEPTAR INFORME DE AVANCE ', () => {
+describe.skip('ACEPTAR INFORME DE AVANCE ', () => {
   it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {
     cy.intercept('POST', '/ot/informe_avance/detalle/get').as('HTTPRESPONSE');
 
