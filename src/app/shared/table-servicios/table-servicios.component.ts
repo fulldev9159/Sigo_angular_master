@@ -270,33 +270,38 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     servicio: CarritoService,
     uo: CarritoUO
   ): void {
+    // ALMACENAR LOS ROW ID DE UOS EXISTENTES PARA BORRAR EN DB
     if (uo.uo_rowid) this.uos_eliminar.push(uo.uo_rowid);
 
+    // ELIMINAR EN STORE
     this.serviciosFacade.deleteUOFromServicioFromCarrito(
       servicio.servicio_id,
       uo.uo_codigo
     );
 
-    const index_service = (
-      this.formTable.get('table').value as Array<{ servicio_id: string }>
-    ).findIndex(
-      serviceTable => +serviceTable.servicio_id === servicio.servicio_id
+    // ELIMINAR DEL FORMULARIO
+    let table_servicio = this.formTable.get('table').value as Array<{
+      servicio_id: string;
+    }>;
+    const index_service = table_servicio.findIndex(
+      v => +v.servicio_id === servicio.servicio_id
     );
-    (
-      (
-        (this.formTable.get('table') as FormArray).at(
-          index_service
-        ) as FormGroup
-      ).get('unidad_obras') as FormArray
-    ).removeAt(
-      (
-        (
-          (this.formTable.get('table') as FormArray).at(
-            index_service
-          ) as FormGroup
-        ).get('unidad_obras').value as Array<{ uo_codigo: string }>
-      ).findIndex(uo => uo.uo_codigo === uo.uo_codigo)
+
+    let table_serviceFormArray = this.formTable.get('table') as FormArray;
+    let table_serviceFormGroup = table_serviceFormArray.at(
+      index_service
+    ) as FormGroup;
+    let table_unidad_obrasFormArray = table_serviceFormGroup.get(
+      'unidad_obras'
+    ) as FormArray;
+
+    let table_unidad_obrasArray = table_serviceFormGroup.get('unidad_obras')
+      .value as Array<{ uo_codigo: string }>;
+    let index_uo = table_unidad_obrasArray.findIndex(
+      v => v.uo_codigo === uo.uo_codigo
     );
+
+    table_unidad_obrasFormArray.removeAt(index_uo);
   }
 
   canSeePrices(): boolean {

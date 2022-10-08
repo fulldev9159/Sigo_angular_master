@@ -231,7 +231,7 @@ Cypress.Commands.add('_filter_table', (name, search) => {
 });
 
 Cypress.Commands.add('_change_cantidad_servicio', (servicio_cod, cantidad) => {
-  cy.get('table')
+  cy.get('.carrito-container>table')
     .contains('td', servicio_cod)
     .siblings()
     .eq(2)
@@ -241,7 +241,7 @@ Cypress.Commands.add('_change_cantidad_servicio', (servicio_cod, cantidad) => {
 });
 
 Cypress.Commands.add('_change_cantidad_uo', (column, uo_cod, cantidad) => {
-  cy.get('table')
+  cy.get('.carrito-container>table')
     .contains('td', uo_cod)
     .siblings()
     .eq(column)
@@ -270,19 +270,19 @@ Cypress.Commands.add(
 
 Cypress.Commands.add('_check_table_servicio_input', data => {
   data.items.forEach(servicio => {
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(0)
       .contains(servicio.nombre.split('-')[1].trim());
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(1)
       .contains(servicio.tipo_servicio);
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(2)
@@ -298,182 +298,147 @@ Cypress.Commands.add('_check_table_servicio_input', data => {
         );
       });
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(3)
       .contains(servicio.precio);
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(4)
       .contains(servicio.total);
 
-    cy.get('table')
-      .contains('td', servicio.nombre.split('-')[0].trim())
-      .siblings()
-      .eq(6)
-      .contains(servicio.unidad_obras[0].nombre.split('-')[0].trim());
-
-    cy.get('table')
-      .contains('td', servicio.nombre.split('-')[0].trim())
-      .siblings()
-      .eq(7)
-      .contains(servicio.unidad_obras[0].nombre.split('-')[1].trim());
-
-    cy.get('table')
-      .contains('td', servicio.nombre.split('-')[0].trim())
-      .siblings()
-      .eq(8)
-      .contains(servicio.actividad);
-
-    if (servicio.unidad_obras[0].nombre !== '0 - SIN UO') {
-      cy.get('table')
-        .contains('td', servicio.unidad_obras[0].nombre.split('-')[0].trim())
+    servicio.unidad_obras.forEach((uo, index) => {
+      cy.get('.carrito-container>table')
+        .contains(
+          'td',
+          new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+        )
         .siblings()
-        .eq(9)
-        .find('p-inputnumber>span>input')
-        .invoke('val')
-        .then(val => {
-          expect(val).to.eql(
-            servicio.unidad_obras[0].cantidad.split(',')[1] === undefined
-              ? servicio.unidad_obras[0].cantidad + ',00'
-              : +servicio.unidad_obras[0].cantidad.split(',')[1] > 9
-              ? servicio.unidad_obras[0].cantidad
-              : servicio.unidad_obras[0].cantidad + 0
-          );
-        });
+        .eq(0)
+        .contains(uo.nombre.split('-')[1].trim());
 
-      cy.get('table')
-        .contains('td', servicio.unidad_obras[0].nombre.split('-')[0].trim())
+      cy.get('.carrito-container>table')
+        .contains(
+          'td',
+          new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+        )
         .siblings()
-        .eq(10)
-        .contains(servicio.unidad_obras[0].precio);
+        .eq(1)
+        .contains(servicio.actividad);
 
-      cy.get('table')
-        .contains('td', servicio.unidad_obras[0].nombre.split('-')[0].trim())
-        .siblings()
-        .eq(11)
-        .contains(servicio.unidad_obras[0].total);
+      if (uo.nombre !== '0 - SIN UO') {
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
+          .siblings()
+          .eq(2)
+          .find('p-inputnumber>span>input')
+          .invoke('val')
+          .then(val => {
+            expect(val).to.eql(
+              uo.cantidad.split(',')[1] === undefined
+                ? uo.cantidad + ',00'
+                : +uo.cantidad.split(',')[1] > 9
+                ? uo.cantidad
+                : uo.cantidad + 0
+            );
+          });
 
-      servicio.unidad_obras.forEach((uo, index) => {
-        if (index !== 0) {
-          cy.get('table')
-            .contains('td', uo.nombre.split('-')[0].trim())
-            .siblings()
-            .eq(0)
-            .contains(uo.nombre.split('-')[1].trim());
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
+          .siblings()
+          .eq(3)
+          .contains(uo.precio);
 
-          cy.get('table')
-            .contains('td', uo.nombre.split('-')[0].trim())
-            .siblings()
-            .eq(1)
-            .contains(servicio.actividad);
-
-          if (uo.nombre !== '0 - SIN UO') {
-            cy.get('table')
-              .contains('td', uo.nombre.split('-')[0].trim())
-              .siblings()
-              .eq(2)
-              .find('p-inputnumber>span>input')
-              .invoke('val')
-              .then(val => {
-                expect(val).to.eql(
-                  uo.cantidad.split(',')[1] === undefined
-                    ? uo.cantidad + ',00'
-                    : +uo.cantidad.split(',')[1] > 9
-                    ? uo.cantidad
-                    : uo.cantidad + 0
-                );
-              });
-
-            cy.get('table')
-              .contains('td', uo.nombre.split('-')[0].trim())
-              .siblings()
-              .eq(3)
-              .contains(uo.precio);
-
-            cy.get('table')
-              .contains('td', uo.nombre.split('-')[0].trim())
-              .siblings()
-              .eq(4)
-              .contains(uo.total);
-          }
-        }
-      });
-    }
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
+          .siblings()
+          .eq(4)
+          .contains(uo.total);
+      }
+    });
   });
 
-  cy.get('td[class="total-servicio-monto"]').contains(data.totalServicios);
-  cy.get('td[class="total-uo-monto"]').contains(data.totalUOs);
-  cy.get('td[class="total-cubicacion-monto"]').contains(data.total);
+  cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios);
+  cy.get('td[id="total-uo-monto"]').contains(data.totalUOs);
+  cy.get('td[id="total-cubicacion-monto"]').contains(data.total);
 });
 
 Cypress.Commands.add('_check_table_servicio_view', data => {
   data.items.forEach(servicio => {
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(0)
       .contains(servicio.nombre.split('-')[1].trim());
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(1)
       .contains(servicio.tipo_servicio);
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(2)
       .contains(servicio.cantidad);
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(3)
       .contains(servicio.precio);
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(4)
       .contains(servicio.total);
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(5)
       .contains(servicio.unidad_obras[0].nombre.split('-')[0].trim());
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(6)
       .contains(servicio.unidad_obras[0].nombre.split('-')[1].trim());
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', servicio.nombre.split('-')[0].trim())
       .siblings()
       .eq(7)
       .contains(servicio.actividad);
 
     if (servicio.unidad_obras[0].nombre !== '0 - SIN UO') {
-      cy.get('table')
+      cy.get('.carrito-container>table')
         .contains('td', servicio.nombre.split('-')[0].trim())
         .siblings()
         .eq(8)
         .contains(servicio.unidad_obras[0].cantidad);
 
-      cy.get('table')
+      cy.get('.carrito-container>table')
         .contains('td', servicio.nombre.split('-')[0].trim())
         .siblings()
         .eq(9)
         .contains(servicio.unidad_obras[0].precio);
 
-      cy.get('table')
+      cy.get('.carrito-container>table')
         .contains('td', servicio.nombre.split('-')[0].trim())
         .siblings()
         .eq(10)
@@ -482,33 +447,48 @@ Cypress.Commands.add('_check_table_servicio_view', data => {
 
     servicio.unidad_obras.forEach((uo, index) => {
       if (index !== 0) {
-        cy.get('table')
-          .contains('td', uo.nombre.split('-')[0].trim())
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
           .siblings()
           .eq(0)
           .contains(uo.nombre.split('-')[1].trim());
 
-        cy.get('table')
-          .contains('td', uo.nombre.split('-')[0].trim())
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
           .siblings()
           .eq(1)
           .contains(servicio.actividad);
 
         if (uo.nombre !== '0 - SIN UO') {
-          cy.get('table')
-            .contains('td', uo.nombre.split('-')[0].trim())
+          cy.get('.carrito-container>table')
+            .contains(
+              'td',
+              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+            )
             .siblings()
             .eq(2)
             .contains(uo.cantidad);
 
-          cy.get('table')
-            .contains('td', uo.nombre.split('-')[0].trim())
+          cy.get('.carrito-container>table')
+            .contains(
+              'td',
+              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+            )
             .siblings()
             .eq(3)
             .contains(uo.precio);
 
-          cy.get('table')
-            .contains('td', uo.nombre.split('-')[0].trim())
+          cy.get('.carrito-container>table')
+            .contains(
+              'td',
+              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+            )
             .siblings()
             .eq(4)
             .contains(uo.total);
@@ -517,9 +497,9 @@ Cypress.Commands.add('_check_table_servicio_view', data => {
     });
   });
 
-  cy.get('td[class="total-servicio-monto"]').contains(data.totalServicios);
-  cy.get('td[class="total-uo-monto"]').contains(data.totalUOs);
-  cy.get('td[class="total-cubicacion-monto"]').contains(data.total);
+  cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios);
+  cy.get('td[id="total-uo-monto"]').contains(data.totalUOs);
+  cy.get('td[id="total-cubicacion-monto"]').contains(data.total);
 });
 
 Cypress.Commands.add(

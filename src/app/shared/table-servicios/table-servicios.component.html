@@ -45,7 +45,7 @@
                             </ng-container>
 
                             <ng-template #cantidad_no_editable>
-                                {{servicio.servicio_cantidad}}
+                                {{servicio.servicio_cantidad| number}}
                                 <p [pTooltip]="servicio.servicio_unidad_descripcion">{{servicio.servicio_unidad_cod}}
                                 </p>
                             </ng-template>
@@ -97,7 +97,7 @@
                                     </ng-container>
 
                                     <ng-template #cantidad_no_editable>
-                                        {{uo.uo_cantidad}}
+                                        {{uo.uo_cantidad| number}}
                                         <p [pTooltip]="servicio.unidad_obras[0].uob_unidad_medida_descripcion">
                                             {{uo.uob_unidad_medida_cod }}
                                         </p>

@@ -49,155 +49,94 @@ describe('Listar Cubicaciones', () => {
 
       cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
         crearCubicacion.items.forEach(servicio => {
-          cy.get('table')
-            .contains('td', servicio.nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            })
+          cy.get('.carrito-container>table')
+            .contains('td', servicio.nombre.split('-')[0].trim())
             .siblings()
             .eq(0)
-            .contains(servicio.nombre.split('-')[1].trim(), { timeout: 10000 });
+            .contains(servicio.nombre.split('-')[1].trim());
 
-          cy.get('table')
-            .contains('td', servicio.nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            })
+          cy.get('.carrito-container>table')
+            .contains('td', servicio.nombre.split('-')[0].trim())
             .siblings()
             .eq(1)
-            .contains(servicio.tipo_servicio, { timeout: 10000 });
+            .contains(servicio.tipo_servicio);
 
-          cy.get('table')
-            .contains('td', servicio.nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            })
+          cy.get('.carrito-container>table')
+            .contains('td', servicio.nombre.split('-')[0].trim())
             .siblings()
             .eq(2)
-            .contains(servicio.cantidad, { timeout: 10000 });
+            .contains(servicio.cantidad);
 
-          cy.get('table')
-            .contains('td', servicio.nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            })
+          cy.get('.carrito-container>table')
+            .contains('td', servicio.nombre.split('-')[0].trim())
             .siblings()
             .eq(3)
-            .contains(servicio.precio, { timeout: 10000 });
+            .contains(servicio.precio);
 
-          cy.get('table')
-            .contains('td', servicio.nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            })
+          cy.get('.carrito-container>table')
+            .contains('td', servicio.nombre.split('-')[0].trim())
             .siblings()
             .eq(4)
-            .contains(servicio.total, { timeout: 10000 });
-
-          cy.get('table')
-            .contains('td', servicio.nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            })
-            .siblings()
-            .eq(5)
-            .contains(servicio.unidad_obras[0].nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            });
-
-          cy.get('table')
-            .contains('td', servicio.nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            })
-            .siblings()
-            .eq(6)
-            .contains(servicio.unidad_obras[0].nombre.split('-')[1].trim(), {
-              timeout: 10000,
-            });
-
-          cy.get('table')
-            .contains('td', servicio.nombre.split('-')[0].trim(), {
-              timeout: 10000,
-            })
-            .siblings()
-            .eq(7)
-            .contains(servicio.actividad, { timeout: 10000 });
-
-          if (servicio.unidad_obras[0].nombre !== '0 - SIN UO') {
-            cy.get('table')
-              .contains('td', servicio.nombre.split('-')[0].trim(), {
-                timeout: 10000,
-              })
-              .siblings()
-              .eq(8)
-              .contains(servicio.unidad_obras[0].cantidad, { timeout: 10000 });
-
-            cy.get('table')
-              .contains('td', servicio.nombre.split('-')[0].trim(), {
-                timeout: 10000,
-              })
-              .siblings()
-              .eq(9)
-              .contains(servicio.unidad_obras[0].precio, { timeout: 10000 });
-
-            cy.get('table')
-              .contains('td', servicio.nombre.split('-')[0].trim(), {
-                timeout: 10000,
-              })
-              .siblings()
-              .eq(10)
-              .contains(servicio.unidad_obras[0].total, { timeout: 10000 });
-          }
+            .contains(servicio.total);
 
           servicio.unidad_obras.forEach((uo, index) => {
-            if (index !== 0) {
-              cy.get('table')
-                .contains('td', uo.nombre.split('-')[0].trim(), {
-                  timeout: 10000,
-                })
+            cy.get('.carrito-container>table')
+              .contains(
+                'td',
+                new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+              )
+              .siblings()
+              .eq(0)
+              .contains(uo.nombre.split('-')[1].trim());
+
+            cy.get('.carrito-container>table')
+              .contains(
+                'td',
+                new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+              )
+              .siblings()
+              .eq(1)
+              .contains(servicio.actividad);
+
+            if (uo.nombre !== '0 - SIN UO') {
+              cy.get('.carrito-container>table')
+                .contains(
+                  'td',
+                  new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+                )
                 .siblings()
-                .eq(0)
-                .contains(uo.nombre.split('-')[1].trim(), { timeout: 10000 });
+                .eq(2)
+                .contains(uo.cantidad);
 
-              cy.get('table')
-                .contains('td', uo.nombre.split('-')[0].trim(), {
-                  timeout: 10000,
-                })
+              cy.get('.carrito-container>table')
+                .contains(
+                  'td',
+                  new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+                )
                 .siblings()
-                .eq(1)
-                .contains(servicio.actividad, { timeout: 10000 });
+                .eq(3)
+                .contains(uo.precio);
 
-              if (uo.nombre !== '0 - SIN UO') {
-                cy.get('table')
-                  .contains('td', uo.nombre.split('-')[0].trim(), {
-                    timeout: 10000,
-                  })
-                  .siblings()
-                  .eq(2)
-                  .contains(uo.cantidad, { timeout: 10000 });
-
-                cy.get('table')
-                  .contains('td', uo.nombre.split('-')[0].trim(), {
-                    timeout: 10000,
-                  })
-                  .siblings()
-                  .eq(3)
-                  .contains(uo.precio, { timeout: 10000 });
-
-                cy.get('table')
-                  .contains('td', uo.nombre.split('-')[0].trim(), {
-                    timeout: 10000,
-                  })
-                  .siblings()
-                  .eq(4)
-                  .contains(uo.total, { timeout: 10000 });
-              }
+              cy.get('.carrito-container>table')
+                .contains(
+                  'td',
+                  new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+                )
+                .siblings()
+                .eq(4)
+                .contains(uo.total);
             }
           });
         });
       });
 
-      cy.get('td[class="total-servicio-monto"]').contains(data.totalServicios, {
+      cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios, {
         timeout: 10000,
       });
-      cy.get('td[class="total-uo-monto"]').contains(data.totalUOs, {
+      cy.get('td[id="total-uo-monto"]').contains(data.totalUOs, {
         timeout: 10000,
       });
-      cy.get('td[class="total-cubicacion-monto"]').contains(data.total, {
+      cy.get('td[id="total-cubicacion-monto"]').contains(data.total, {
         timeout: 10000,
       });
 

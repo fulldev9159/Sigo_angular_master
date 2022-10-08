@@ -69,19 +69,19 @@ describe('Editar cubicacion', () => {
       });
 
     crearCubicacion.items.forEach(servicio => {
-      cy.get('table')
+      cy.get('.carrito-container>table')
         .contains('td', servicio.nombre.split('-')[0].trim())
         .siblings()
         .eq(0)
         .contains(servicio.nombre.split('-')[1].trim());
 
-      cy.get('table')
+      cy.get('.carrito-container>table')
         .contains('td', servicio.nombre.split('-')[0].trim())
         .siblings()
         .eq(1)
         .contains(servicio.tipo_servicio);
 
-      cy.get('table')
+      cy.get('.carrito-container>table')
         .contains('td', servicio.nombre.split('-')[0].trim())
         .siblings()
         .eq(2)
@@ -97,116 +97,84 @@ describe('Editar cubicacion', () => {
           );
         });
 
-      cy.get('table')
+      cy.get('.carrito-container>table')
         .contains('td', servicio.nombre.split('-')[0].trim())
         .siblings()
         .eq(3)
         .contains(servicio.precio);
 
-      cy.get('table')
+      cy.get('.carrito-container>table')
         .contains('td', servicio.nombre.split('-')[0].trim())
         .siblings()
         .eq(4)
         .contains(servicio.total);
 
-      cy.get('table')
-        .contains('td', servicio.nombre.split('-')[0].trim())
-        .siblings()
-        .eq(6)
-        .contains(servicio.unidad_obras[0].nombre.split('-')[0].trim());
-
-      cy.get('table')
-        .contains('td', servicio.nombre.split('-')[0].trim())
-        .siblings()
-        .eq(7)
-        .contains(servicio.unidad_obras[0].nombre.split('-')[1].trim());
-
-      cy.get('table')
-        .contains('td', servicio.nombre.split('-')[0].trim())
-        .siblings()
-        .eq(8)
-        .contains(servicio.actividad);
-
-      if (servicio.unidad_obras[0].nombre !== '0 - SIN UO') {
-        cy.get('table')
-          .contains('td', servicio.unidad_obras[0].nombre.split('-')[0].trim())
+      servicio.unidad_obras.forEach((uo, index) => {
+        // if (index !== 0) {
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
           .siblings()
-          .eq(9)
-          .find('p-inputnumber>span>input')
-          .invoke('val')
-          .then(val => {
-            expect(val).to.eql(
-              servicio.unidad_obras[0].cantidad.split(',')[1] === undefined
-                ? servicio.unidad_obras[0].cantidad + ',00'
-                : +servicio.unidad_obras[0].cantidad.split(',')[1] > 9
-                ? servicio.unidad_obras[0].cantidad
-                : servicio.unidad_obras[0].cantidad + 0
-            );
-          });
+          .eq(0)
+          .contains(uo.nombre.split('-')[1].trim());
 
-        cy.get('table')
-          .contains('td', servicio.unidad_obras[0].nombre.split('-')[0].trim())
+        cy.get('.carrito-container>table')
+          .contains(
+            'td',
+            new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+          )
           .siblings()
-          .eq(10)
-          .contains(servicio.unidad_obras[0].precio);
+          .eq(1)
+          .contains(servicio.actividad);
 
-        cy.get('table')
-          .contains('td', servicio.unidad_obras[0].nombre.split('-')[0].trim())
-          .siblings()
-          .eq(11)
-          .contains(servicio.unidad_obras[0].total);
+        if (uo.nombre !== '0 - SIN UO') {
+          cy.get('.carrito-container>table')
+            .contains(
+              'td',
+              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+            )
+            .siblings()
+            .eq(2)
+            .find('p-inputnumber>span>input')
+            .invoke('val')
+            .then(val => {
+              expect(val).to.eql(
+                uo.cantidad.split(',')[1] === undefined
+                  ? uo.cantidad + ',00'
+                  : +uo.cantidad.split(',')[1] > 9
+                  ? uo.cantidad
+                  : uo.cantidad + 0
+              );
+            });
 
-        servicio.unidad_obras.forEach((uo, index) => {
-          if (index !== 0) {
-            cy.get('table')
-              .contains('td', uo.nombre.split('-')[0].trim())
-              .siblings()
-              .eq(0)
-              .contains(uo.nombre.split('-')[1].trim());
+          cy.get('.carrito-container>table')
+            .contains(
+              'td',
+              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+            )
+            .siblings()
+            .eq(3)
+            .contains(uo.precio);
 
-            cy.get('table')
-              .contains('td', uo.nombre.split('-')[0].trim())
-              .siblings()
-              .eq(1)
-              .contains(servicio.actividad);
-
-            if (uo.nombre !== '0 - SIN UO') {
-              cy.get('table')
-                .contains('td', uo.nombre.split('-')[0].trim())
-                .siblings()
-                .eq(2)
-                .find('p-inputnumber>span>input')
-                .invoke('val')
-                .then(val => {
-                  expect(val).to.eql(
-                    uo.cantidad.split(',')[1] === undefined
-                      ? uo.cantidad + ',00'
-                      : +uo.cantidad.split(',')[1] > 9
-                      ? uo.cantidad
-                      : uo.cantidad + 0
-                  );
-                });
-
-              cy.get('table')
-                .contains('td', uo.nombre.split('-')[0].trim())
-                .siblings()
-                .eq(3)
-                .contains(uo.precio);
-
-              cy.get('table')
-                .contains('td', uo.nombre.split('-')[0].trim())
-                .siblings()
-                .eq(4)
-                .contains(uo.total);
-            }
-          }
-        });
-      }
+          cy.get('.carrito-container>table')
+            .contains(
+              'td',
+              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
+            )
+            .siblings()
+            .eq(4)
+            .contains(uo.total);
+        }
+        // }
+      });
+      // }
     });
 
-    cy.get('td[class="total-servicio-monto"]').contains(data.totalServicios);
-    cy.get('td[class="total-uo-monto"]').contains(data.totalUOs);
-    cy.get('td[class="total-cubicacion-monto"]').contains(data.total);
+    cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios);
+    cy.get('td[id="total-uo-monto"]').contains(data.totalUOs);
+    cy.get('td[id="total-cubicacion-monto"]').contains(data.total);
   });
 
   it('Realizar cambios', () => {
@@ -231,14 +199,14 @@ describe('Editar cubicacion', () => {
 
     // CAMBIAR CARRITO
     // ELIMINAR EL SERVICIO J456 Y LA UNIDAD OBRA H001
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', 'J456')
       .siblings()
       .eq(5)
       .find('button')
       .click();
 
-    cy.get('table')
+    cy.get('.carrito-container>table')
       .contains('td', 'H001')
       .siblings()
       .eq(5)
@@ -250,9 +218,9 @@ describe('Editar cubicacion', () => {
     // UO D012 A 14
     cy._change_cantidad_uo(2, 'D012', '14');
     // UO C926 A 150,37
-    cy._change_cantidad_uo(9, 'C926', '150,37');
+    cy._change_cantidad_uo(2, 'C926', '150,37');
     // H006 A 9
-    cy._change_cantidad_uo(9, 'H006', '9');
+    cy._change_cantidad_uo(2, 'H006', '9');
     // H002 A 150
     cy._change_cantidad_uo(2, 'H002', '150');
 
@@ -272,7 +240,7 @@ describe('Editar cubicacion', () => {
       'H134 - ESCALERILLA PC TIPO NEC 200*32'
     );
     cy._change_cantidad_servicio('J730', '16');
-    cy._change_cantidad_uo(9, 'H134', '26');
+    cy._change_cantidad_uo(2, 'H134', '26');
 
     // AGREGAR C105 - CABLE PS 600-26 SUB. A J101
     cy._add_service_carrito(

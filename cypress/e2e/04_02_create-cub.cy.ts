@@ -33,13 +33,10 @@ describe('Create Cubicacion', () => {
 
     data.items.forEach(item => {
       cy.get('input[name="input-nombre-cubicacion"]').click();
-      cy._select_dropdown('#select-actividad', item.actividad.toUpperCase());
+      cy._select_dropdown('#select-actividad', item.actividad);
 
       cy.get('input[name="input-nombre-cubicacion"]').click();
-      cy._select_dropdown(
-        '#select-tipo-servicio',
-        item.tipo_servicio.toUpperCase()
-      );
+      cy._select_dropdown('#select-tipo-servicio', item.tipo_servicio);
       cy.get('input[name="input-nombre-cubicacion"]').click();
       cy._select_dropdown('#select-servicio', item.nombre);
 

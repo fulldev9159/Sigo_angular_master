@@ -178,8 +178,8 @@ export const crearCubicacion = {
       precio: '$180,32',
       cantidad: '4,53',
       total: '$816,85',
-      tipo_servicio: 'Cables',
-      actividad: 'Matriz',
+      tipo_servicio: 'CABLES',
+      actividad: 'MATRIZ',
       unidad_obras: [
         {
           nombre: 'D013 - CONECTOR ROJO CAL.24-19',
@@ -200,8 +200,8 @@ export const crearCubicacion = {
       precio: '$4.913,72',
       cantidad: '105,7',
       total: '$519.380,2',
-      tipo_servicio: 'Cables',
-      actividad: 'Matriz',
+      tipo_servicio: 'CABLES',
+      actividad: 'MATRIZ',
       unidad_obras: [
         {
           nombre: 'D241 - BLOCK PROT.100/P QDF MONDRAGON',
@@ -228,8 +228,8 @@ export const crearCubicacion = {
       precio: '$471,6',
       cantidad: '5.011',
       total: '$2.363.187,6',
-      tipo_servicio: 'Lineas',
-      actividad: 'Matriz',
+      tipo_servicio: 'LINEAS',
+      actividad: 'MATRIZ',
       unidad_obras: [
         {
           nombre: 'C926 - CABLE 1800-26 PS',
@@ -251,8 +251,8 @@ export const crearCubicacion = {
       precio: '$1.485',
       cantidad: '5',
       total: '$7.425',
-      tipo_servicio: 'Proyectos',
-      actividad: 'Fttx',
+      tipo_servicio: 'PROYECTOS',
+      actividad: 'FTTX',
       unidad_obras: [
         {
           nombre: '0 - SIN UO',
@@ -267,8 +267,8 @@ export const crearCubicacion = {
       precio: '$982,5',
       cantidad: '10',
       total: '$9.825',
-      tipo_servicio: 'Lineas',
-      actividad: 'Fibra Optica',
+      tipo_servicio: 'LINEAS',
+      actividad: 'FIBRA OPTICA',
       unidad_obras: [
         {
           nombre: 'H006 - ANGULO PLANO LEGRAND 40*16',
@@ -306,8 +306,8 @@ export const CubicacionEditada = {
       precio: '$180,32',
       cantidad: '15',
       total: '$2.704,8',
-      tipo_servicio: 'Cables',
-      actividad: 'Matriz',
+      tipo_servicio: 'CABLES',
+      actividad: 'MATRIZ',
       unidad_obras: [
         {
           nombre: 'D013 - CONECTOR ROJO CAL.24-19',
@@ -328,8 +328,8 @@ export const CubicacionEditada = {
       precio: '$471,6',
       cantidad: '5.011',
       total: '$2.363.187,6',
-      tipo_servicio: 'Lineas',
-      actividad: 'Matriz',
+      tipo_servicio: 'LINEAS',
+      actividad: 'MATRIZ',
       unidad_obras: [
         {
           nombre: 'C926 - CABLE 1800-26 PS',
@@ -357,8 +357,8 @@ export const CubicacionEditada = {
       precio: '$1.485',
       cantidad: '5',
       total: '$7.425',
-      tipo_servicio: 'Proyectos',
-      actividad: 'Fttx',
+      tipo_servicio: 'PROYECTOS',
+      actividad: 'FTTX',
       unidad_obras: [
         {
           nombre: '0 - SIN UO',
@@ -373,8 +373,8 @@ export const CubicacionEditada = {
       precio: '$982,5',
       cantidad: '10',
       total: '$9.825',
-      tipo_servicio: 'Lineas',
-      actividad: 'Fibra Optica',
+      tipo_servicio: 'LINEAS',
+      actividad: 'FIBRA OPTICA',
       unidad_obras: [
         {
           nombre: 'H006 - ANGULO PLANO LEGRAND 40*16',
@@ -395,8 +395,8 @@ export const CubicacionEditada = {
       precio: '$22.008',
       cantidad: '15',
       total: '$330.120',
-      tipo_servicio: 'Lineas',
-      actividad: 'Fibra Optica',
+      tipo_servicio: 'LINEAS',
+      actividad: 'FIBRA OPTICA',
       unidad_obras: [
         {
           nombre: '0 - SIN UO',
@@ -411,8 +411,8 @@ export const CubicacionEditada = {
       precio: '$12.851,1',
       cantidad: '16',
       total: '$205.617,6',
-      tipo_servicio: 'Lineas',
-      actividad: 'Fibra Optica',
+      tipo_servicio: 'LINEAS',
+      actividad: 'FIBRA OPTICA',
       unidad_obras: [
         {
           nombre: 'H134 - ESCALERILLA PC TIPO NEC 200*32',
@@ -432,8 +432,8 @@ export const adicionalesBucle1 = {
       precio: '$5.005,2',
       cantidad: '4',
       total: '$20.020,80',
-      tipo_servicio: 'Dth',
-      actividad: 'Distribucion',
+      tipo_servicio: 'DTH',
+      actividad: 'DISTRIBUCION',
       unidad_obras: [
         {
           nombre: 'DT04 - SPLITTER 4 SALIDAS (SPLITTER 1X4)',
@@ -455,8 +455,8 @@ export const adicionalesBucle1 = {
       precio: '$6.256,5',
       cantidad: '2',
       total: '$12.513,00',
-      tipo_servicio: 'Dth',
-      actividad: 'Distribucion',
+      tipo_servicio: 'DTH',
+      actividad: 'DISTRIBUCION',
       unidad_obras: [
         {
           nombre: 'DT06 - CONECTOR RG11',

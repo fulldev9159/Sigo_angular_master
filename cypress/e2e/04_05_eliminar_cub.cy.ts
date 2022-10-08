@@ -1,5 +1,3 @@
-import { crearCubicacion } from 'cypress/fixtures/testedCubicacion';
-
 describe('Listar Cubicaciones', () => {
   it('should let enter to create cubicacion', () => {
     cy.visit('http://localhost:4206/login/auth');
