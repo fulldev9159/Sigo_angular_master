@@ -263,7 +263,7 @@ describe('Editar cubicacion', () => {
     cy.wait(700);
   });
 
-  it.only('Comprobar cambios', () => {
+  it('Comprobar cambios', () => {
     cy.intercept('POST', '/cubicacion/detalle/get2').as(
       'HTTPRESPONSE-GET-DETALLE-CUBICACION'
     );
