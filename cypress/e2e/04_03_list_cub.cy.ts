@@ -55,46 +55,7 @@ describe('Listar Cubicaciones', () => {
           .eq(4)
           .contains(servicio.total);
 
-        // cy.get('.carrito-container>table')
-        //   .contains('td', servicio.nombre.split('-')[0].trim())
-        //   .siblings()
-        //   .eq(5)
-        //   .contains(servicio.unidad_obras[0].nombre.split('-')[0].trim());
-
-        // cy.get('.carrito-container>table')
-        //   .contains('td', servicio.nombre.split('-')[0].trim())
-        //   .siblings()
-        //   .eq(6)
-        //   .contains(servicio.unidad_obras[0].nombre.split('-')[1].trim());
-
-        // cy.get('.carrito-container>table')
-        //   .contains('td', servicio.nombre.split('-')[0].trim())
-        //   .siblings()
-        //   .eq(7)
-        //   .contains(servicio.actividad);
-
-        // if (servicio.unidad_obras[0].nombre !== '0 - SIN UO') {
-        //   cy.get('.carrito-container>table')
-        //     .contains('td', servicio.nombre.split('-')[0].trim())
-        //     .siblings()
-        //     .eq(8)
-        //     .contains(servicio.unidad_obras[0].cantidad);
-
-        //   cy.get('.carrito-container>table')
-        //     .contains('td', servicio.nombre.split('-')[0].trim())
-        //     .siblings()
-        //     .eq(9)
-        //     .contains(servicio.unidad_obras[0].precio);
-
-        //   cy.get('.carrito-container>table')
-        //     .contains('td', servicio.nombre.split('-')[0].trim())
-        //     .siblings()
-        //     .eq(10)
-        //     .contains(servicio.unidad_obras[0].total);
-        // }
-
         servicio.unidad_obras.forEach((uo, index) => {
-          // if (index !== 0) {
           cy.get('.carrito-container>table')
             .contains(
               'td',
@@ -141,7 +102,6 @@ describe('Listar Cubicaciones', () => {
               .eq(4)
               .contains(uo.total);
           }
-          // }
         });
       });
 

@@ -17,8 +17,8 @@ import { AuthService } from '../../service/auth.service';
   encapsulation: ViewEncapsulation.None,
 })
 
-// TODO: HACER UN MENU PARA LA ADMINISTRACIÓN
-// TODO: VER QUE HACER CON EL MENU DE OT Y CUBICACION EN LA ADMINISTRACION
+// 121 TODO: HACER UN MENU PARA LA ADMINISTRACIÓN
+// 122 TODO: VER QUE HACER CON EL MENU DE OT Y CUBICACION EN LA ADMINISTRACION
 export class MainLayoutComponent implements OnInit, OnDestroy {
   isLoggin$: Observable<boolean> = this.authFacade.isLoggin$();
   resizeObservable$: Observable<Event> = fromEvent(window, 'resize');

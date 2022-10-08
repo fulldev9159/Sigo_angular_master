@@ -33,7 +33,7 @@ interface ServiceTableCarrito {
   ];
 }
 
-// TODO: AGREGAR BOTON DETALLES
+// 129 TODO: AGREGAR BOTON DETALLES
 // TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
 
 @Component({
@@ -47,8 +47,9 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   data_carrito$: Observable<CarritoService[]> = of([]);
   @Input() mode_source: string = 'aggregation'; // MODES: aggregation/static
   @Input() data_source: CarritoService[] = null;
-  // Al escoger mode aggregation la fuente de data será el ngrx carrito
-  // Al escoger mode static debe llamar a este componente junto a la data_source
+  // AL ESCOGER MODE aggregation LA FUENTE DE LA DATA SERÁ EL STORE CARRITO QUE SE PODRÁ MANIPULAR DESDE CUALQUIER PARTE
+  // PARA QUE LAS CANTIDADES SE MANTENGAN AL AGREGAR O MODIFICAR UN SERVICIO ESTAS DEBEN SER MANEJADAS POR EL COMPONENTE QUE LLAMA A ESTE COMPONENTE
+  // AL ESCOGER MODE static LA FUENTE DE LA DATA A DESPLEGAR SERÁ LA QUE SEA ENVIADA EN data_source Y A ESTA NO SE LE PRODRÁ AGREGAR O QUITAR SERVICIOS
   @Input() cantidad_editable: boolean = true;
   @Input() column_acciones: boolean = true;
   @Input() accion_delete: boolean = true;
