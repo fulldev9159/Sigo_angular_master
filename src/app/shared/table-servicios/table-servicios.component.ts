@@ -33,6 +33,9 @@ interface ServiceTableCarrito {
   ];
 }
 
+// TODO: AGREGAR BOTON DETALLES
+// TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
+
 @Component({
   selector: 'zwc-table-servicios',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,6 +50,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   // Al escoger mode aggregation la fuente de data será el ngrx carrito
   // Al escoger mode static debe llamar a este componente junto a la data_source
   @Input() cantidad_editable: boolean = true;
+  @Input() column_acciones: boolean = true;
   @Input() accion_delete: boolean = true;
   @Input() accion_detalle_materiales_uo = false;
   @Input() accion_aprobacion_servicio = false;
@@ -83,6 +87,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
 
     // COLSPAN
     if (!this.canSeePrices()) this.colSpan = this.colSpan - 2;
+    if (!this.column_acciones) this.colSpan = this.colSpan - 1;
 
     // CALCULAR TOTALES
     this.subscription.add(

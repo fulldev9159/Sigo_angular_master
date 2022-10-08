@@ -76,3 +76,9 @@
         color: #ac7619;
     }
 }
+
+@media screen and (max-width: 991px) {
+    .carrito-container td {
+        font-size: 0.5rem !important;
+    }
+}
