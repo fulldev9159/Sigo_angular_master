@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnDestroy,
@@ -13,7 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Accion, CarritoService, CarritoUO, SessionData } from '@model';
+import { CarritoService, CarritoUO, SessionData } from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { map, Observable, of, Subscription } from 'rxjs';
 import localeEsCl from '@angular/common/locales/es-CL';
@@ -43,6 +44,8 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   data_carrito$: Observable<CarritoService[]> = of([]);
   @Input() mode_source: string = 'aggregation'; // MODES: aggregation/static
   @Input() data_source: CarritoService[] = null;
+  // Al escoger mode aggregation la fuente de data será el ngrx carrito
+  // Al escoger mode static debe llamar a este componente junto a la data_source
   @Input() cantidad_editable: boolean = true;
   @Input() accion_delete: boolean = true;
   @Input() accion_detalle_materiales_uo = false;
@@ -64,7 +67,10 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     JSON.parse(localStorage.getItem('auth')).sessionData as SessionData
   ).permisos.map(value => value.slug);
 
-  constructor(private serviciosFacade: ServiciosFacade) {
+  constructor(
+    private serviciosFacade: ServiciosFacade,
+    private detector: ChangeDetectorRef
+  ) {
     registerLocaleData(localeEsCl, 'es-CL');
   }
 

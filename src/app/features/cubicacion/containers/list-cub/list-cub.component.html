@@ -173,7 +173,8 @@
             <span class="p-tag">Cubicación</span>
         </p-divider>
         <!-- <zwc-view-table-services></zwc-view-table-services> -->
-        <zwc-table-servicios></zwc-table-servicios>
+        <zwc-table-servicios mode_source="static" [data_source]="servicios" [cantidad_editable]="false">
+        </zwc-table-servicios>
     </ng-template>
 </p-dialog>
 

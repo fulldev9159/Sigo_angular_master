@@ -61,16 +61,18 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   detalleCubicacion: DetalleCubicacion = null;
   // AGREGAR DATOS A CARRITO PARA DESPLIEGUE DE SERVICIOS
+  servicios: CarritoService[] = [];
   detalleCubicacion$ = this.cubicacionFacade.detalleCubicacion$().pipe(
     tap(detalleCubicacion => (this.detalleCubicacion = detalleCubicacion)),
     tap(cubicacion => {
       if (cubicacion) {
+        this.servicios = [];
         cubicacion.many_cubicacion_has_servicio.forEach(service => {
           service.many_cubicacion_has_uob.forEach(uo => {
             let new_service: CarritoService = {
               servicio_id: service.id,
               servicio_codigo: service.model_servicio_id.codigo,
-              numero_producto: 'TODO',
+              numero_producto: service.numero_producto,
               servicio_precio_final_clp: service.valor_unitario_clp,
               servicio_nombre: service.model_servicio_id.descripcion,
               tipo_servicio_descripcion:
@@ -92,7 +94,8 @@ export class ListCubComponent implements OnInit, OnDestroy {
                 },
               ],
             };
-            this.serviciosFacade.addDirectServiceCarrito(new_service);
+            // this.serviciosFacade.addDirectServiceCarrito(new_service);
+            this.servicios.push(new_service);
           });
         });
       }
