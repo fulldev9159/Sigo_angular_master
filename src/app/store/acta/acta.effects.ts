@@ -38,13 +38,30 @@ export class ActaEffects {
       )
     )
   );
+  // ENVIAR INFORME TRABAJOS FINALIZADOS ALIAS: GENERAR ACTA
+  informarTrabajosFinalizados$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.informarTrabajosFinalizados),
+      concatMap(({ ot_id, observacion }) =>
+        this.actaHttp.informarTrabajosFinalizados(ot_id, observacion).pipe(
+          map(response =>
+            actaActions.informarTrabajosFinalizadosSuccess({ response })
+          ),
+          catchError(err =>
+            of(actaActions.informarTrabajosFinalizadosError({ error: err }))
+          )
+        )
+      )
+    )
+  );
 
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           actaActions.getServicios4ActaSuccess,
-          actaActions.getUOs4ActaSuccess
+          actaActions.getUOs4ActaSuccess,
+          actaActions.informarTrabajosFinalizadosSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -56,7 +73,8 @@ export class ActaEffects {
       this.actions$.pipe(
         ofType(
           actaActions.getServicios4ActaError,
-          actaActions.getUOs4ActaError
+          actaActions.getUOs4ActaError,
+          actaActions.informarTrabajosFinalizadosError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

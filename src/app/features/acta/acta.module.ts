@@ -6,6 +6,7 @@ import { ValidarActaContainerComponent } from './containers/validar-acta-contain
 import { ListActasComponent } from './containers/list-actas/list-actas.component';
 import { ActaRoutingModule } from './acta-routing.module';
 import { SharedModule } from '@sharedOT/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,12 @@ import { SharedModule } from '@sharedOT/shared.module';
     ValidarActaContainerComponent,
     ListActasComponent,
   ],
-  imports: [CommonModule, ActaRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    ActaRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class ActaModule {}

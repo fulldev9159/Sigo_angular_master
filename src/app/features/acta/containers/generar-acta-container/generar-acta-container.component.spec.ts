@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { GenerarActaContainerComponent } from './generar-acta-container.component';
 
@@ -8,9 +10,9 @@ describe('GenerarActaContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GenerarActaContainerComponent ]
-    })
-    .compileComponents();
+      imports: [StoreModule.forRoot({}), RouterTestingModule],
+      declarations: [GenerarActaContainerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GenerarActaContainerComponent);
     component = fixture.componentInstance;

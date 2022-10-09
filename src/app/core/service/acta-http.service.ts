@@ -36,4 +36,15 @@ export class ActaHttpService {
       }
     );
   }
+
+  // ENVIAR INFORME TRABAJOS FINALIZADOS ALIAS: GENERAR ACTA
+  informarTrabajosFinalizados(
+    ot_id: number,
+    observacion: string
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/acta/trabajo/finalizado/informar`,
+      { ot_id, observacion }
+    );
+  }
 }

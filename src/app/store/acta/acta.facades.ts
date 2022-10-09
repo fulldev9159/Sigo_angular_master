@@ -48,4 +48,11 @@ export class ActaFacade {
   public getUOs4Acta$(): Observable<DetalleUO4Acta[]> {
     return this.store.select(actaSelectors.getUOs4acta);
   }
+
+  // ENVIAR INFORME TRABAJOS FINALIZADOS ALIAS: GENERAR ACTA
+  public informarTrabajosFinalizados(ot_id: number, observacion: string): void {
+    this.store.dispatch(
+      actaActions.informarTrabajosFinalizados({ ot_id, observacion })
+    );
+  }
 }

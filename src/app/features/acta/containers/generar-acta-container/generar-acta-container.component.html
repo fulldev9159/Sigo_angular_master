@@ -23,6 +23,15 @@
                     content="Solicitar informe de fin de trabajos" Pclass="p-button-info p-button-sm mt-4 w-full"
                     (click)="solicitarInformeFinDeTrabajos()"></zwc-pbutton-sending>
             </div>
+            <!-- TODO: MEJORAR EL CSS -->
+            <!-- TODO: AGREGAR MENSAJE DE REQUERIDO -->
+            <form [formGroup]="formComentario">
+                <div class="col-12" id="control_observaciones">
+                    <textarea formControlName="comentarios" class="form-control" placeholder="" name="comentarios"
+                        id="comentarios" cols="30" rows="2"></textarea>
+                    <br>
+                </div>
+            </form>
         </div>
     </div>
 

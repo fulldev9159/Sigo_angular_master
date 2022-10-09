@@ -32,3 +32,18 @@ export const getUOs4ActaError = createAction(
   '[ACTA] GET getUOs4Acta Error',
   props<{ error: any }>()
 );
+
+// ENVIAR INFORME TRABAJOS FINALIZADOS ALIAS: GENERAR ACTA
+export const informarTrabajosFinalizados = createAction(
+  '[ACTA] GET informarTrabajosFinalizados',
+  props<{ ot_id: number; observacion: string }>()
+);
+
+export const informarTrabajosFinalizadosSuccess = createAction(
+  '[ACTA] GET informarTrabajosFinalizados Success',
+  props<{ response: Response<any> }>()
+);
+export const informarTrabajosFinalizadosError = createAction(
+  '[ACTA] GETinformarTrabajosFinalizados Error',
+  props<{ error: any }>()
+);

@@ -9,6 +9,7 @@ import * as otActions from '@storeOT/ot/ot.actions';
 import * as flujoOTActions from '@storeOT/flujo-ot/flujo-ot.actions';
 import * as serviciosActions from '@storeOT/servicios/servicios.actions';
 import * as informeAvanceActions from '@storeOT/informe-avance/informe-avance.actions';
+import * as actaActions from '@storeOT/acta/acta.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { OTFacade } from '@storeOT/ot/ot.facades';
@@ -200,6 +201,16 @@ export class AfterHttpService {
       action.type ===
       informeAvanceActions.AceptarRechazarInformeAvanceOTSuccess.type
     ) {
+      this.snackMessage.showMessage(
+        `Acción realizada exitosamente`,
+        'Exito',
+        6000
+      );
+      this.router.navigate(['/ot/list-ot']);
+    }
+
+    // GENERAR ACTA / INFORMAR TRABAJOS FINALIZADOS
+    if (action.type === actaActions.informarTrabajosFinalizadosSuccess.type) {
       this.snackMessage.showMessage(
         `Acción realizada exitosamente`,
         'Exito',
