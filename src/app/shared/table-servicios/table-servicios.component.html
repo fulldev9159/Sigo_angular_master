@@ -71,6 +71,16 @@
                             class="ui button eliminar-color">
                             <fa-icon [icon]="trashICon"></fa-icon>
                         </button>
+
+                        <ng-container *ngIf="accion_aprobacion_servicio_adic">
+                            <div style="display:flex;flex-direction: column;align-items: center;color:white;"
+                                [ngClass]="getControlService(servicio.servicio_id,'validar_adicional').value?'recha-color':'aprob-color'">
+                                {{getControlService(servicio.servicio_id,'validar_adicional').value?'Rechazada':'Aprobada'}}
+                                <p-inputSwitch
+                                    [formControl]="getControlService(servicio.servicio_id,'validar_adicional')">
+                                </p-inputSwitch>
+                            </div>
+                        </ng-container>
                     </td>
                 </tr>
                 <ng-container *ngFor="let uo of servicio.unidad_obras; let iuo= index">
@@ -87,7 +97,6 @@
                             <td>
                                 <div class="container-cantidad">
                                     <ng-container *ngIf="cantidad_editable;else cantidad_no_editable">
-
                                         <p-inputNumber
                                             [formControl]="getControlUOCantidad(servicio.servicio_id,uo.uo_codigo)"
                                             mode="decimal" inputId="locale-german" locale="de-DE"
@@ -100,7 +109,6 @@
                                             [control]="getControlUOCantidad(servicio.servicio_id,uo.uo_codigo)">
                                         </zwc-input-alert>
                                     </ng-container>
-
                                     <ng-template #cantidad_no_editable>
                                         {{uo.uo_cantidad| number}}
                                         <p [pTooltip]="servicio.unidad_obras[0].uob_unidad_medida_descripcion">

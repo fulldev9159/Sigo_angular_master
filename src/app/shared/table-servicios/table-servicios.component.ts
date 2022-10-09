@@ -54,7 +54,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
   @Input() column_acciones: boolean = true;
   @Input() accion_delete: boolean = true;
   @Input() accion_detalle_materiales_uo = false;
-  @Input() accion_aprobacion_servicio = false;
+  @Input() accion_aprobacion_servicio_adic = false;
 
   formTable: FormGroup = new FormGroup({ table: new FormArray([]) });
 
@@ -176,6 +176,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
           servicio_precio_final_clp: new FormControl(
             servicio.servicio_precio_final_clp
           ),
+          validar_adicional: new FormControl(false),
           unidad_obras: new FormArray(
             servicio.unidad_obras.map(uo => this.makeUOForm(uo))
           ),
@@ -222,12 +223,23 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     });
   }
 
+  // TODO: UNIFICAR getControl
+
   getControlServiceCantidad(servicio_id: number): AbstractControl {
     const index = (
       this.formTable.get('table').value as Array<{ servicio_id: string }>
     ).findIndex(serviceTable => +serviceTable.servicio_id === servicio_id);
     return (this.formTable.controls['table'] as FormArray).controls[index].get(
       'servicio_cantidad'
+    );
+  }
+
+  getControlService(servicio_id: number, control: string): AbstractControl {
+    const index = (
+      this.formTable.get('table').value as Array<{ servicio_id: string }>
+    ).findIndex(serviceTable => +serviceTable.servicio_id === servicio_id);
+    return (this.formTable.controls['table'] as FormArray).controls[index].get(
+      control
     );
   }
 

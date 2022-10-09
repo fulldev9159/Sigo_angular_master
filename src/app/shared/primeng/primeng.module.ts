@@ -16,6 +16,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TabViewModule } from 'primeng/tabview';
 import { TagModule } from 'primeng/tag';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { TagModule } from 'primeng/tag';
     RadioButtonModule,
     TabViewModule,
     TagModule,
+    InputSwitchModule,
   ],
   exports: [
     InputTextModule,
@@ -55,6 +57,7 @@ import { TagModule } from 'primeng/tag';
     RadioButtonModule,
     TabViewModule,
     TagModule,
+    InputSwitchModule,
   ],
 })
 export class PrimeNgModule {}

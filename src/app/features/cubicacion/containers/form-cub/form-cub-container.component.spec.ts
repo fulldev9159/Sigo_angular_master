@@ -14,7 +14,7 @@ import {
 } from '@mocksOT';
 import { StoreModule } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { FormTableServicesComponent } from '@sharedOT/form-table-services/form-table-services.component';
+import { FormTableServicesComponent } from '@sharedOT/form-table-services-deprecated/form-table-services.component';
 import { ContratoFacade } from '@storeOT/contrato/contrato.facades';
 import {
   getActividadesContratoProveedor,
