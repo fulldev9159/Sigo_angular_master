@@ -74,10 +74,13 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { AccionesOTResolver } from &#x27;src/app/core/resolvers/accionesOT.resolver&#x27;;
 import { ActaComponent } from &#x27;./acta.component&#x27;;
 import { GenerarActaContainerComponent } from &#x27;./containers/generar-acta-container/generar-acta-container.component&#x27;;
 import { ListActasComponent } from &#x27;./containers/list-actas/list-actas.component&#x27;;
 import { ValidarActaContainerComponent } from &#x27;./containers/validar-acta-container/validar-acta-container.component&#x27;;
+import { Servicios4ActaResolver } from &#x27;./resolvers/servicios4acta.resolver&#x27;;
+import { UOs4ActaResolver } from &#x27;./resolvers/uos4acta.resolver&#x27;;
 
 const routes: Routes &#x3D; [
   {
@@ -92,6 +95,11 @@ const routes: Routes &#x3D; [
       {
         path: &#x27;generar-acta/:id&#x27;,
         component: GenerarActaContainerComponent,
+        resolve: {
+          servicios4acta: Servicios4ActaResolver,
+          uos4acta: UOs4ActaResolver,
+          accionesOT: AccionesOTResolver,
+        },
       },
       {
         path: &#x27;validar-acta/:id&#x27;,
