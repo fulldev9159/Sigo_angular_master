@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 // 124 TODO: CONFIRMAR SI SOLO SE VAN A UTILIZAR LOS ENDPOINTS DE GET SERVICIOS FOR ACTA Y GET UOS FOR ACTA
 // 125 TODO: GENERAR REGLAS PARA DETERMINAR EN QUE CONDICION ESTÁ EL SERVICIO Y LA UO
 // TODO: CONFIRMAR SI NECESITO SABER EL TIPO DE PAGO
+// TODO: PROBAR SEGUNDO CICLO CON SERVICIOS Y UOS PAGADAS PARA VER COMO SE DESPLIEGA LA TABLA
 @Component({
   selector: 'zwc-generar-acta-container',
   templateUrl: './generar-acta-container.component.html',
@@ -22,6 +23,11 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
     this.subscription.add(
       this.route.data.subscribe(({ servicios4acta, uos4acta, accionesOT }) => {
         console.log(accionesOT);
+
+        // ORGANIZAR DATA PARA TABLA
+        // TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
+        // TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
+        // TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
 
         let servicios = servicios4acta.data.items as DetalleServicio4Acta[];
         let uob = uos4acta.data.items as DetalleUO4Acta[];
@@ -73,8 +79,6 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
       })
     );
   }
-
-  // SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
