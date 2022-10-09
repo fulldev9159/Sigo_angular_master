@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CarritoService, DetalleServicio4Acta, DetalleUO4Acta } from '@model';
+import {
+  Accion,
+  CarritoService,
+  DetalleServicio4Acta,
+  DetalleUO4Acta,
+} from '@model';
 import { ServiciosFacade } from '@storeOT/servicios/servicios.facades';
 import { Subscription } from 'rxjs';
 
@@ -16,6 +21,7 @@ import { Subscription } from 'rxjs';
 export class GenerarActaContainerComponent implements OnDestroy, OnInit {
   subscription: Subscription = new Subscription();
   acta: CarritoService[] = [];
+  accionesOT: Accion[] = [];
 
   constructor(private route: ActivatedRoute) {}
 
@@ -23,6 +29,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
     this.subscription.add(
       this.route.data.subscribe(({ servicios4acta, uos4acta, accionesOT }) => {
         console.log(accionesOT);
+        if (accionesOT) this.accionesOT = accionesOT;
 
         // ORGANIZAR DATA PARA TABLA
         // TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
@@ -78,6 +85,10 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
         console.log(this.acta);
       })
     );
+  }
+
+  accionExist(accion: string): boolean {
+    return this.accionesOT.find(v => v.slug === accion) !== undefined;
   }
 
   ngOnDestroy(): void {

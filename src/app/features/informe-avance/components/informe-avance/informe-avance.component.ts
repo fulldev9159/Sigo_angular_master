@@ -239,6 +239,7 @@ export class InformeAvanceComponent
       });
   }
 
+  // TODO: MOVER A UN PLANO GLOBAL
   accionExist(accion: string): boolean {
     return this.accionesOT.find(v => v.slug === accion) !== undefined;
   }
