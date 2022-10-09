@@ -35,6 +35,7 @@ interface ServiceTableCarrito {
 
 // 129 TODO: AGREGAR BOTON DETALLES
 // TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
+// TODO: MEJORAR CSS DEL SWITCH
 
 @Component({
   selector: 'zwc-table-servicios',

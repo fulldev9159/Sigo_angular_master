@@ -5,6 +5,7 @@ import { ActaComponent } from './acta.component';
 import { GenerarActaContainerComponent } from './containers/generar-acta-container/generar-acta-container.component';
 import { ListActasComponent } from './containers/list-actas/list-actas.component';
 import { ValidarActaContainerComponent } from './containers/validar-acta-container/validar-acta-container.component';
+import { ActaTipoPagoResolver } from './resolvers/actaTipoPago.resolver';
 import { Servicios4ActaResolver } from './resolvers/servicios4acta.resolver';
 import { UOs4ActaResolver } from './resolvers/uos4acta.resolver';
 
@@ -34,6 +35,7 @@ const routes: Routes = [
           servicios4acta: Servicios4ActaResolver,
           uos4acta: UOs4ActaResolver,
           accionesOT: AccionesOTResolver,
+          actaTipoPago: ActaTipoPagoResolver,
         },
       },
     ],

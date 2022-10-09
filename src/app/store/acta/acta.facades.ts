@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { DetalleServicio4Acta, DetalleUO4Acta, Response } from '@model';
+import {
+  ActaTipoPago,
+  DetalleServicio4Acta,
+  DetalleUO4Acta,
+  Response,
+} from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as actaSelectors from './acta.selectors';
@@ -54,5 +59,24 @@ export class ActaFacade {
     this.store.dispatch(
       actaActions.informarTrabajosFinalizados({ ot_id, observacion })
     );
+  }
+
+  // GET TIPO PAGO ACTA
+  public getActaTiposPago(): void {
+    this.store.dispatch(actaActions.getActaTiposPago());
+  }
+
+  public getActaTiposPagoSuccess(
+    response: Response<{ items: ActaTipoPago[] }>
+  ): void {
+    this.store.dispatch(actaActions.getActaTiposPagoSuccess({ response }));
+  }
+
+  public getActaTiposPagoError(error: any) {
+    this.store.dispatch(actaActions.getActaTiposPagoError({ error }));
+  }
+
+  public getActaTiposPago$(): Observable<ActaTipoPago[]> {
+    return this.store.select(actaSelectors.getActaTipoPago);
   }
 }

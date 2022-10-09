@@ -41,6 +41,23 @@
     </div>
 
 
+    <!-- TODO: QUE LA SELECCION DE TIPO DE PAGO APAREZCA SOLO SI APRUEBA TODOS LOS ADICIONALES -->
+
+    <p-divider align="center">
+        <span class="p-tag">Escoger tipo de pago</span>
+    </p-divider>
+
+
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pdropdown [control]="form.get('tipo_pago')" Label="*Tipo Cubicación" dropdown_id="select-tipo-pago"
+                    [data]="actaTipoPago" Pplaceholder="Selecione un tipo pago"></zwc-pdropdown>
+            </div>
+        </div>
+    </div>
+
+
     <p-divider align="center">
     </p-divider>
 

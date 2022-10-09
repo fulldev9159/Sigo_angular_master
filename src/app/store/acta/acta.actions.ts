@@ -1,4 +1,9 @@
-import { DetalleServicio4Acta, DetalleUO4Acta, Response } from '@model';
+import {
+  ActaTipoPago,
+  DetalleServicio4Acta,
+  DetalleUO4Acta,
+  Response,
+} from '@model';
 import { createAction, props } from '@ngrx/store';
 
 // GET DETALLE SERVICIO PARA GENERAR ACTA
@@ -45,5 +50,17 @@ export const informarTrabajosFinalizadosSuccess = createAction(
 );
 export const informarTrabajosFinalizadosError = createAction(
   '[ACTA] GETinformarTrabajosFinalizados Error',
+  props<{ error: any }>()
+);
+
+// TIPO PAGO ACTA
+export const getActaTiposPago = createAction('[ACTA] GET getActaTiposPago');
+
+export const getActaTiposPagoSuccess = createAction(
+  '[ACTA] GET getActaTiposPago Success',
+  props<{ response: Response<{ items: ActaTipoPago[] }> }>()
+);
+export const getActaTiposPagoError = createAction(
+  '[ACTA] GET getActaTiposPago Error',
   props<{ error: any }>()
 );

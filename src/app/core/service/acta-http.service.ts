@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment';
-import { DetalleServicio4Acta, DetalleUO4Acta, Response } from '@model';
+import {
+  ActaTipoPago,
+  DetalleServicio4Acta,
+  DetalleUO4Acta,
+  Response,
+} from '@model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -45,6 +50,14 @@ export class ActaHttpService {
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/acta/trabajo/finalizado/informar`,
       { ot_id, observacion }
+    );
+  }
+
+  // GET ACTA TIPOS PAGO
+  getActaTiposPago(): Observable<Response<{ items: ActaTipoPago[] }>> {
+    return this.http.post<Response<{ items: ActaTipoPago[] }>>(
+      `${this.API_URL}/ot/acta_tipo_pago/getall`,
+      {}
     );
   }
 }

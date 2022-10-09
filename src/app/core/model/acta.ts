@@ -54,3 +54,8 @@ export interface DetalleUO4Acta {
   servicio_requiere_evidencia: boolean;
   servicio_evidencia_id: number;
 }
+
+export interface ActaTipoPago {
+  id: number;
+  descripcion: string;
+}
