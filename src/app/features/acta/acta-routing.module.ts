@@ -30,6 +30,11 @@ const routes: Routes = [
       {
         path: 'validar-acta/:id',
         component: ValidarActaContainerComponent,
+        resolve: {
+          servicios4acta: Servicios4ActaResolver,
+          uos4acta: UOs4ActaResolver,
+          accionesOT: AccionesOTResolver,
+        },
       },
     ],
   },

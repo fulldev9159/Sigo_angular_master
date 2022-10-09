@@ -30,6 +30,13 @@
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
 
+    <!-- OT_ET_PAGO_VALIDACION_ACTA_GESTOR -->
+    <button id="play-button" pTooltip="Validar Acta" [routerLink]="['/acta/validar-acta',ot_id]"
+        *ngIf="findAccion('OT_VALIDAR_ACTA')">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+
     <!-- ACCIONES FIJAS -->
     <button id="info-button" pTooltip="Información">
         <fa-icon [icon]="infoIcon"></fa-icon>

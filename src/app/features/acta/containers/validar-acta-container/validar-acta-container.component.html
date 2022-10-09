@@ -1,1 +1,59 @@
-<p>validar-acta-container works!</p>
+<div class="container-acta">
+    <h1>Validación del Acta</h1>
+
+    <p-divider align="center">
+        <span class="p-tag">Autorizar Adicionales</span>
+    </p-divider>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-autorizar-adicionales">
+                <zwc-table-servicios #tableServiciosAutorizarAdicionales mode_source="static"
+                    [data_source]="acta_adicionales" [cantidad_editable]="false" [column_acciones]="true"
+                    [accion_delete]="false">
+                </zwc-table-servicios>
+            </div>
+
+        </div>
+    </div>
+
+    <p-divider align="center">
+        <span class="p-tag">Servicios cubicados</span>
+    </p-divider>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-servicios-cubicados">
+                <zwc-table-servicios #tableServicioCubicados mode_source="static" [data_source]="acta_originales"
+                    [cantidad_editable]="false" [column_acciones]="false">
+                </zwc-table-servicios>
+            </div>
+
+        </div>
+    </div>
+
+    <p-divider align="center">
+        <span class="p-tag">Observaciones</span>
+    </p-divider>
+
+    <div class="card">
+        <div class=" grid">
+
+        </div>
+    </div>
+
+
+    <p-divider align="center">
+    </p-divider>
+
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">
+                    Atrás
+                </button>
+            </div>
+            <div *ngIf="accionExist('OT_VALIDAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="generar-acta-button" content="Validar acta"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarActa()"></zwc-pbutton-sending>
+            </div>
+        </div>
+    </div>
