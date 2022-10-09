@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { InformeAvanceComponent } from './components/informe-avance/informe-avance.component';
 import { DetalleOTResolver } from './resolvers/detalleOT.resolver';
 import { DetalleInformeAvanceResolver } from './resolvers/detalle-informe-avance.resolver';
-import { AccionesOTResolver } from './resolvers/accionesOT.resolver';
+import { AccionesOTResolver } from '../../core/resolvers/accionesOT.resolver';
 const routes: Routes = [
   { path: '', redirectTo: 'informe-avance', pathMatch: 'full' },
   {

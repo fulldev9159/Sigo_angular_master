@@ -78,6 +78,11 @@ import { InformeAvanceEffects } from './informe-avance/informe-avance.effects';
 import * as formInformeAvanceReduce from './informe-avance/informe-avance.reducers';
 // INFORME AVANCE STORE
 
+// ACTA
+import { ActaEffects } from './acta/acta.effects';
+import * as formActaReduce from './acta/acta.reducers';
+// ACTA
+
 @NgModule({
   declarations: [],
   imports: [
@@ -181,6 +186,13 @@ import * as formInformeAvanceReduce from './informe-avance/informe-avance.reduce
     StoreModule.forFeature(
       formInformeAvanceReduce.Featurekey,
       formInformeAvanceReduce.reducerInformeAvance
+    ),
+
+    // ACTA
+    EffectsModule.forFeature([ActaEffects]),
+    StoreModule.forFeature(
+      formActaReduce.Featurekey,
+      formActaReduce.reducerActa
     ),
 
     SharedModule,
