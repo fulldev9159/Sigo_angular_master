@@ -62,4 +62,11 @@ export class FlujoOtHttpService {
       }
     );
   }
+
+  // SOLICITAR PAGO
+  solicitarPago(ot_id: number): Observable<Response<any>> {
+    return this.http.post<Response<any>>(`${this.API_URL}/ot/pago/request`, {
+      ot_id,
+    });
+  }
 }

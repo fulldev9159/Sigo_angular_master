@@ -40,6 +40,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   displayModalAceptarInicial = false;
   displayModalRechazoOrdenDeTrabajo = false;
   displayModalAceptarProveedor = false;
+  displayModalSolicitudPago = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -101,6 +102,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   rechazarOrdenProveedor(): void {
     this.displayModalRechazoOrdenDeTrabajo = true;
   }
+
   aceptarOrdenProveedor(): void {
     const request: RequestAceptarRechazarOT = {
       ot_id: this.ot_id,
@@ -122,6 +124,11 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
       this.acciones &&
       this.acciones.find(value => value.slug === accion) !== undefined
     );
+  }
+
+  confirmarSolicitarPago(): void {
+    this.flujoOTFacade.solicitarPago(this.ot_id);
+    this.displayModalSolicitudPago = false;
   }
 
   ngOnDestroy(): void {

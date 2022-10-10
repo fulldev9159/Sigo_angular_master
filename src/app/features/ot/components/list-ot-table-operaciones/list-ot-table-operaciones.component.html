@@ -36,6 +36,12 @@
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
 
+    <!-- OT_ET_PAGO_SOLICITUD_PAGO -->
+    <!-- TODO: VER COMO DESPLEGAR LAS 3 OPCIONES ADICIONALES -->
+    <button id="play-button" pTooltip="Solicitar Pago" *ngIf="findAccion('OT_SOLICITAR_PAGO')"
+        (click)="displayModalSolicitudPago=true">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
 
     <!-- ACCIONES FIJAS -->
     <button id="info-button" pTooltip="Información">
@@ -47,10 +53,10 @@
     </button>
 
     <button id="add-libro-obras-button" pTooltip="Agregar registro libro de obras"
-        *ngIf="findAccion('OT_REGISTRAR_LIBRO_OBRAS')" (click)="displayModalAgregarRegistroLibroDeObras=true">
+        *ngIf="findAccion('OT_REGISTRAR_LIBRO_OBRAS')" (click)="displayModalAgregarRegistroLibroDeObras=true"
+        (click)="displayModalSolicitudPago=true">
         <fa-icon [icon]="medicalIcon"></fa-icon>
     </button>
-
 
 </div>
 
@@ -60,7 +66,6 @@
 
 <p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"
     [draggable]="false" [modal]="true">
-
 </p-dialog>
 
 
@@ -103,4 +108,14 @@
             Aceptar Orden
         </button>
     </div>
+</p-dialog>
+
+
+
+<!-- OT_ET_PAGO_SOLICITUD_PAGO -->
+<p-dialog header="Solicitud de pago" [(visible)]="displayModalSolicitudPago" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+    <zwc-view-confirmacion pregunta='¿Comfirma solicitar pago?' (cancelar)="displayModalSolicitudPago=false"
+        (confirmar)="confirmarSolicitarPago()" textConfirmar="Confirmar">
+    </zwc-view-confirmacion>
 </p-dialog>

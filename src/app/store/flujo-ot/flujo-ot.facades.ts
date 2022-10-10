@@ -56,4 +56,9 @@ export class FlujoOTFacade {
       flujoOTActions.asignarSupervisorTrabajo({ ot_id, proxy_id, concepto })
     );
   }
+
+  // SOLICITAR PAGO
+  public solicitarPago(ot_id: number): void {
+    this.store.dispatch(flujoOTActions.solicitarPago({ ot_id }));
+  }
 }

@@ -168,7 +168,8 @@ export class AfterHttpService {
     // 71 TODO: USAR BIEN LOS FILTROS
     if (
       action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type ||
-      action.type === flujoOTActions.asignarSupervisorTrabajoSuccess.type
+      action.type === flujoOTActions.asignarSupervisorTrabajoSuccess.type ||
+      action.type === flujoOTActions.solicitarPagoSuccess.type
     ) {
       let filtros = {
         filtro_propietario: 'TODAS',

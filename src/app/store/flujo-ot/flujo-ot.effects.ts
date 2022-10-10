@@ -89,13 +89,27 @@ export class FlujoOTEffects {
     )
   );
 
+  // SOLICITAR PAGO
+  solicitarPago$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.solicitarPago),
+      concatMap(({ ot_id }) =>
+        this.flujoOTServiceHttp.solicitarPago(ot_id).pipe(
+          map(response => flujoOTActions.solicitarPagoSuccess({ response })),
+          catchError(error => of(flujoOTActions.solicitarPagoError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           flujoOTActions.aceptarRechazarIncialOTSuccess,
           flujoOTActions.getPosibleSupervisorDeTrabajosSuccess,
-          flujoOTActions.asignarSupervisorTrabajoSuccess
+          flujoOTActions.asignarSupervisorTrabajoSuccess,
+          flujoOTActions.solicitarPagoSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -109,7 +123,8 @@ export class FlujoOTEffects {
           flujoOTActions.aceptarRechazarIncialOTError,
           flujoOTActions.getPosibleSupervisorDeTrabajosError,
           flujoOTActions.aceptarOTProveedorError,
-          flujoOTActions.asignarSupervisorTrabajoError
+          flujoOTActions.asignarSupervisorTrabajoError,
+          flujoOTActions.solicitarPagoError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

@@ -55,16 +55,32 @@ export const aceptarOTProveedorError = createAction(
 
 //  ASIGNAR SUPERVISOR DE TRABAJOS
 export const asignarSupervisorTrabajo = createAction(
-  '[OT] GET asignarSupervisorTrabajo',
+  '[FLUJO OT] GET asignarSupervisorTrabajo',
   props<{ ot_id: number; proxy_id: number; concepto: string }>()
 );
 
 export const asignarSupervisorTrabajoSuccess = createAction(
-  '[OT] GET asignarSupervisorTrabajo Success',
+  '[FLUJO OT] GET asignarSupervisorTrabajo Success',
   props<{ response: Response<any> }>()
 );
 
 export const asignarSupervisorTrabajoError = createAction(
-  '[OT] GET asignarSupervisorTrabajo Error',
+  '[FLUJO OT] GET asignarSupervisorTrabajo Error',
+  props<{ error: any }>()
+);
+
+//  SOLICITAR PAGO
+export const solicitarPago = createAction(
+  '[FLUJO] GET solicitarPago',
+  props<{ ot_id: number }>()
+);
+
+export const solicitarPagoSuccess = createAction(
+  '[FLUJO] GET  solicitarPago Success',
+  props<{ response: Response<any> }>()
+);
+
+export const solicitarPagoError = createAction(
+  '[FLUJO] GET  solicitarPago Error',
   props<{ error: any }>()
 );
