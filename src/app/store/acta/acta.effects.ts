@@ -55,13 +55,44 @@ export class ActaEffects {
     )
   );
 
+  // TODO: REVISAR BIEN ESTÁ LOGICA DE AGRUPACION
+  // APROBAR RECHAZAR ADICIONALES Y VALIDAR ACTA
+  aceptarRechazarAdicionales$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.aceptarRechazarAdcionalesValidarActa),
+      concatMap(({ requestValidarActa, requestAdicionales }) =>
+        this.actaHttp.aceptarRechazarAdicionales(requestAdicionales).pipe(
+          map(response =>
+            actaActions.validarActa({ request: requestValidarActa })
+          ),
+          catchError(error =>
+            of(actaActions.aceptarRechazarAdcionalesValidarActaError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  validarActa$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actaActions.validarActa),
+      concatMap(({ request }) =>
+        this.actaHttp.validarActa(request).pipe(
+          map(response => actaActions.validarActaSuccess({ response })),
+          catchError(error => of(actaActions.validarActaError({ error })))
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(
           actaActions.getServicios4ActaSuccess,
           actaActions.getUOs4ActaSuccess,
-          actaActions.informarTrabajosFinalizadosSuccess
+          actaActions.informarTrabajosFinalizadosSuccess,
+          actaActions.validarActaSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -74,7 +105,9 @@ export class ActaEffects {
         ofType(
           actaActions.getServicios4ActaError,
           actaActions.getUOs4ActaError,
-          actaActions.informarTrabajosFinalizadosError
+          actaActions.informarTrabajosFinalizadosError,
+          actaActions.aceptarRechazarAdcionalesValidarActaError,
+          actaActions.validarActaError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

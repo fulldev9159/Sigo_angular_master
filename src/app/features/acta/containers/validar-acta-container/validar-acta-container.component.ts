@@ -8,11 +8,20 @@ import {
   DetalleServicio4Acta,
   DetalleUO4Acta,
   Dropdown,
+  RequestAceptarRechazarAdicionales,
+  RequestValidarActa,
 } from '@model';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
-import { Observable, Subscription } from 'rxjs';
+import { endWith, Observable, Subscription } from 'rxjs';
 
 // TODO: AGREGAR LAS OBSERVACIONES
+// TODO: CREAR LÓGICA PARA QUE EL BÓTON DE VALIDAR  SEA PRESIONABLE SOLO SI ACEPTA TODOS LOS ADICIONALES Y ESCOJA UN TIPO DE PAGO
+// TODO: HACER QUE EL COMPONENTE TABLA SERVICIOS RECIBA EL PORCETAJE ESCOGIDO Y CALCULE CUAL SERÁ EL TOTAL
+// TODO: QUITAR LOS SIN UO YA QUE SU CANTIDAD ES 0
+// TODO: QUITAR LAS CANTIDADES 0
+// TODO: PROGRAMAR EL BOTON INVALIDAR ACTA
+// TODO: AGREGAR UNA CONFIRMACION AL VALIDAR
+
 @Component({
   selector: 'zwc-validar-acta-container',
   templateUrl: './validar-acta-container.component.html',
@@ -29,9 +38,18 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   ot_id: number;
 
   form: FormGroup = new FormGroup({
-    tipo_pago: new FormControl({ value: null }, [Validators.required]),
+    tipo_pago: new FormControl(null, [Validators.required]),
+    // tipo_pago: new FormControl({ value: '', disabled: true }, [
+    //   Validators.required,
+    // ]),
+    porcentaje: new FormControl(100), // TODO: HACER QUE SEA REQUERIDO SI ESCOGE PAGO PORCENTUAL
   });
+
+  servicios: DetalleServicio4Acta[] = [];
+  uos: DetalleUO4Acta[] = [];
+
   constructor(private actaFacade: ActaFacade, private route: ActivatedRoute) {}
+
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(
@@ -42,7 +60,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
             this.actaTipoPago = (actaTipoPago.data.items as ActaTipoPago[]).map(
               value => ({
                 name: value.descripcion,
-                code: value.id,
+                code: value.descripcion,
               })
             );
 
@@ -53,6 +71,9 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
           let servicios = servicios4acta?.data.items as DetalleServicio4Acta[];
           let uob = uos4acta?.data.items as DetalleUO4Acta[];
+
+          this.servicios = servicios;
+          this.uos = uob;
 
           if (servicios && servicios.length > 0) {
             this.ot_id = servicios[0].ot_id;
@@ -118,6 +139,40 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
 
   accionExist(accion: string): boolean {
     return this.accionesOT.find(v => v.slug === accion) !== undefined;
+  }
+
+  validarActa(): void {
+    let request_validar_acta: RequestValidarActa = {
+      ot_id: this.ot_id,
+      tipo_pago: this.form.get('tipo_pago').value,
+      observacion: '', // TODO: AGREGAR LA OBSERVACION REAL AL REQUEST
+      estado: 'VALIDADO',
+      detalle: {
+        servicio: this.servicios.map(v => ({
+          rowid: v.id,
+          cantidad: v.faltante_cantidad,
+          porcentaje: 100,
+        })),
+        unidad_obra: this.uos.map(v => ({
+          rowid: v.id,
+          cantidad: v.faltante_cantidad,
+          porcentaje: 100,
+        })),
+      },
+    };
+
+    let adicionales_id = this.acta_adicionales.map(v => v.servicio_rowid);
+
+    let request_aprobar_adicionales: RequestAceptarRechazarAdicionales = {
+      ot_id: this.ot_id,
+      adicionales_aceptados: [...new Set(adicionales_id)],
+      adicionales_rechazados: [],
+    };
+
+    this.actaFacade.aceptarRechazarAdicionales(
+      request_validar_acta,
+      request_aprobar_adicionales
+    );
   }
 
   ngOnDestroy(): void {

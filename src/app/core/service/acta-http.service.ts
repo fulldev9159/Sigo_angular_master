@@ -5,6 +5,8 @@ import {
   ActaTipoPago,
   DetalleServicio4Acta,
   DetalleUO4Acta,
+  RequestAceptarRechazarAdicionales,
+  RequestValidarActa,
   Response,
 } from '@model';
 import { Observable } from 'rxjs';
@@ -58,6 +60,24 @@ export class ActaHttpService {
     return this.http.post<Response<{ items: ActaTipoPago[] }>>(
       `${this.API_URL}/ot/acta_tipo_pago/getall`,
       {}
+    );
+  }
+
+  // VALIDAR ACTA
+  validarActa(request: RequestValidarActa): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/acta/validate`,
+      request
+    );
+  }
+
+  // RECHAZAR/ACEPTAR ADICIONALES
+  aceptarRechazarAdicionales(
+    request: RequestAceptarRechazarAdicionales
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/servicio_adicional_aceptacion/update`,
+      request
     );
   }
 }

@@ -2,6 +2,8 @@ import {
   ActaTipoPago,
   DetalleServicio4Acta,
   DetalleUO4Acta,
+  RequestAceptarRechazarAdicionales,
+  RequestValidarActa,
   Response,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
@@ -62,5 +64,41 @@ export const getActaTiposPagoSuccess = createAction(
 );
 export const getActaTiposPagoError = createAction(
   '[ACTA] GET getActaTiposPago Error',
+  props<{ error: any }>()
+);
+
+// VALIDAR ACTA
+export const validarActa = createAction(
+  '[ACTA] GET validarActa',
+  props<{
+    request: RequestValidarActa;
+  }>()
+);
+
+export const validarActaSuccess = createAction(
+  '[ACTA] GET validarActa Success',
+  props<{ response: Response<any> }>()
+);
+
+export const validarActaError = createAction(
+  '[ACTA] GET validarActa Error',
+  props<{ error: any }>()
+);
+
+//  ACEPTAR RECHAZAR ADICIONALES Y VALIDAR ACTA
+export const aceptarRechazarAdcionalesValidarActa = createAction(
+  '[ACTA] GET aceptarRechazarAdcionalesValidarActa',
+  props<{
+    requestValidarActa: RequestValidarActa;
+    requestAdicionales: RequestAceptarRechazarAdicionales;
+  }>()
+);
+
+export const aceptarRechazarAdcionalesValidarActaSuccess = createAction(
+  '[ACTA] GET aceptarRechazarAdcionalesValidarActa Success',
+  props<{ response: Response<any> }>()
+);
+export const aceptarRechazarAdcionalesValidarActaError = createAction(
+  '[ACTA] GET aceptarRechazarAdcionalesValidarActa Error',
   props<{ error: any }>()
 );

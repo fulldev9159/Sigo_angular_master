@@ -218,5 +218,15 @@ export class AfterHttpService {
       );
       this.router.navigate(['/ot/list-ot']);
     }
+
+    // APROBAR/RECHAZAR ACTA Y VALIDAR ACTA
+    if (action.type === actaActions.validarActaSuccess.type) {
+      this.snackMessage.showMessage(
+        `Acción realizada exitosamente`,
+        'Exito',
+        6000
+      );
+      this.router.navigate(['/ot/list-ot']);
+    }
   }
 }

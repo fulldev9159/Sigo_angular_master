@@ -3,6 +3,8 @@ import {
   ActaTipoPago,
   DetalleServicio4Acta,
   DetalleUO4Acta,
+  RequestAceptarRechazarAdicionales,
+  RequestValidarActa,
   Response,
 } from '@model';
 import { Store } from '@ngrx/store';
@@ -78,5 +80,18 @@ export class ActaFacade {
 
   public getActaTiposPago$(): Observable<ActaTipoPago[]> {
     return this.store.select(actaSelectors.getActaTipoPago);
+  }
+
+  // ACEPTAR RECHAZAR ADICIONALES Y VALIDAR ACTA
+  public aceptarRechazarAdicionales(
+    requestValidarActa: RequestValidarActa,
+    requestAdicionales: RequestAceptarRechazarAdicionales
+  ): void {
+    this.store.dispatch(
+      actaActions.aceptarRechazarAdcionalesValidarActa({
+        requestValidarActa,
+        requestAdicionales,
+      })
+    );
   }
 }

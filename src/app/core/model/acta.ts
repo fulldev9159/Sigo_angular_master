@@ -59,3 +59,35 @@ export interface ActaTipoPago {
   id: number;
   descripcion: string;
 }
+
+export interface RequestValidarActa {
+  ot_id: number;
+  tipo_pago: string;
+  observacion: string;
+  estado: string;
+  detalle: {
+    servicio: Servicios4ValidarActa[];
+    unidad_obra: UOs4ValidarActa[];
+  };
+}
+
+export interface Servicios4ValidarActa {
+  rowid: number;
+  cantidad: number;
+  porcentaje: number;
+}
+
+export interface UOs4ValidarActa {
+  rowid: number;
+  cantidad: number;
+  porcentaje: number;
+}
+
+// ACEPTAR/RECHAZAR ADICIONALES
+export interface RequestAceptarRechazarAdicionales {
+  ot_id: number;
+  adicionales_aceptados?: number[];
+  adicionales_rechazados?: number[];
+  causas_rechazo_id?: number;
+  observacion?: string;
+}
