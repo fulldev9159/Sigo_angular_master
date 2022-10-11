@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccionesOTResolver } from 'src/app/core/resolvers/accionesOT.resolver';
 import { ActaComponent } from './acta.component';
 import { GenerarActaContainerComponent } from './containers/generar-acta-container/generar-acta-container.component';
-import { ListActasComponent } from './containers/list-actas/list-actas.component';
+import { ListActasContainerComponent } from './containers/list-actas-container/list-actas-container.component';
 import { ValidarActaContainerComponent } from './containers/validar-acta-container/validar-acta-container.component';
-import { ActaTipoPagoResolver } from './resolvers/actaTipoPago.resolver';
+import { ValidarPagoActaContainerComponent } from './containers/validar-pago-acta-container/validar-pago-acta-container.component';
+import { ActaTiposPagosResolver } from './resolvers/actaTipoPago.resolver';
+import { LastActaResolver } from './resolvers/lastActa.resolver';
 import { Servicios4ActaResolver } from './resolvers/servicios4acta.resolver';
 import { UOs4ActaResolver } from './resolvers/uos4acta.resolver';
 
@@ -17,7 +19,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'list-acta', pathMatch: 'full' },
       {
         path: 'list-actas',
-        component: ListActasComponent,
+        component: ListActasContainerComponent,
       },
       {
         path: 'generar-acta/:id',
@@ -35,7 +37,15 @@ const routes: Routes = [
           servicios4acta: Servicios4ActaResolver,
           uos4acta: UOs4ActaResolver,
           accionesOT: AccionesOTResolver,
-          actaTipoPago: ActaTipoPagoResolver,
+          actaTiposPagos: ActaTiposPagosResolver,
+        },
+      },
+      {
+        path: 'validar-pago-acta/:id',
+        component: ValidarPagoActaContainerComponent,
+        resolve: {
+          accionesOT: AccionesOTResolver,
+          lastActa: LastActaResolver,
         },
       },
     ],

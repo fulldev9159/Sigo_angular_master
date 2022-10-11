@@ -5,6 +5,7 @@ import {
   ActaTipoPago,
   DetalleServicio4Acta,
   DetalleUO4Acta,
+  LastActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -78,6 +79,16 @@ export class ActaHttpService {
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/servicio_adicional_aceptacion/update`,
       request
+    );
+  }
+
+  // GET LAST ACTA
+  getLastActa(ot_id: number): Observable<Response<LastActa>> {
+    return this.http.post<Response<LastActa>>(
+      `${this.API_URL}/ot/acta/detalle/get_last`,
+      {
+        ot_id,
+      }
     );
   }
 }

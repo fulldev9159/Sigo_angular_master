@@ -53,16 +53,16 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(
-        ({ servicios4acta, uos4acta, accionesOT, actaTipoPago }) => {
+        ({ servicios4acta, uos4acta, accionesOT, actaTiposPagos }) => {
           console.log(accionesOT);
           if (accionesOT) this.accionesOT = accionesOT;
-          if (actaTipoPago)
-            this.actaTipoPago = (actaTipoPago.data.items as ActaTipoPago[]).map(
-              value => ({
-                name: value.descripcion,
-                code: value.descripcion,
-              })
-            );
+          if (actaTiposPagos)
+            this.actaTipoPago = (
+              actaTiposPagos.data.items as ActaTipoPago[]
+            ).map(value => ({
+              name: value.descripcion,
+              code: value.descripcion,
+            }));
 
           // ORGANIZAR DATA PARA TABLA
           // TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS

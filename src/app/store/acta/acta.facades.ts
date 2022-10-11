@@ -3,6 +3,7 @@ import {
   ActaTipoPago,
   DetalleServicio4Acta,
   DetalleUO4Acta,
+  LastActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -94,4 +95,18 @@ export class ActaFacade {
       })
     );
   }
+
+  // GET LAST ACTA
+  // TODO: IMPLEMENTAR COMPLEMTAMENTE EL NGRX DEL LAST ACTA
+  public getLastActaSuccess(response: Response<LastActa>): void {
+    this.store.dispatch(actaActions.getLastActaSuccess({ response }));
+  }
+
+  public getLastActaError(error: any) {
+    this.store.dispatch(actaActions.getLastActaError({ error }));
+  }
+
+  // public getlastActa$(): Observable<ActaTipoPago[]> {
+  //   return this.store.select(actaSelectors.getActaTipoPago);
+  // }
 }

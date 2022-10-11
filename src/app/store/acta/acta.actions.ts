@@ -2,6 +2,7 @@ import {
   ActaTipoPago,
   DetalleServicio4Acta,
   DetalleUO4Acta,
+  LastActa,
   RequestAceptarRechazarAdicionales,
   RequestValidarActa,
   Response,
@@ -98,7 +99,26 @@ export const aceptarRechazarAdcionalesValidarActaSuccess = createAction(
   '[ACTA] GET aceptarRechazarAdcionalesValidarActa Success',
   props<{ response: Response<any> }>()
 );
+
 export const aceptarRechazarAdcionalesValidarActaError = createAction(
   '[ACTA] GET aceptarRechazarAdcionalesValidarActa Error',
+  props<{ error: any }>()
+);
+
+// GET LAST ACTA
+export const getLastActa = createAction(
+  '[ACTA] GET getLastActa',
+  props<{
+    ot_id: number;
+  }>()
+);
+
+export const getLastActaSuccess = createAction(
+  '[ACTA] GET getLastActa Success',
+  props<{ response: Response<LastActa> }>()
+);
+
+export const getLastActaError = createAction(
+  '[ACTA] GET getLastActaError Error',
   props<{ error: any }>()
 );

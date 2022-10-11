@@ -5,15 +5,13 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { ActaTipoPago, Response } from '@model';
+import { DetalleServicio4Acta, LastActa, Response } from '@model';
 import { ActaHttpService } from '@services';
 import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { catchError, EMPTY, Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class ActaTiposPagosResolver
-  implements Resolve<Response<{ items: ActaTipoPago[] }>>
-{
+export class LastActaResolver implements Resolve<Response<LastActa>> {
   constructor(
     private service: ActaHttpService,
     private actaFacade: ActaFacade,
@@ -22,15 +20,21 @@ export class ActaTiposPagosResolver
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<Response<{ items: ActaTipoPago[] }>>
-    | Promise<Response<{ items: ActaTipoPago[] }>> {
-    return this.service.getActaTiposPago().pipe(
+  ): Observable<Response<LastActa>> | Promise<Response<LastActa>> {
+    const idStr = route.paramMap.get('id');
+
+    const id = parseInt(idStr, 10);
+    // 93 TODO: CREAR UN PAGINA NOT-FOUND
+    if (isNaN(id)) {
+      this.router.navigate([`/not-found`], { skipLocationChange: true });
+      return null;
+    }
+    return this.service.getLastActa(id).pipe(
       tap(response => {
-        this.actaFacade.getActaTiposPagoSuccess(response);
+        this.actaFacade.getLastActaSuccess(response);
       }),
       catchError(error => {
-        this.actaFacade.getActaTiposPagoError(error);
+        this.actaFacade.getLastActaError(error);
         return EMPTY;
       })
     );
