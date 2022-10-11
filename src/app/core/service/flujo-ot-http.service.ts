@@ -4,6 +4,7 @@ import { environment } from '@environment';
 import {
   PosibleSupervisorTrabajo,
   RequestAceptarRechazarOT,
+  RequestAprobarRechazarOperaciones,
   Response,
 } from '@model';
 import { Observable } from 'rxjs';
@@ -68,5 +69,15 @@ export class FlujoOtHttpService {
     return this.http.post<Response<any>>(`${this.API_URL}/ot/pago/request`, {
       ot_id,
     });
+  }
+
+  // RECHAZAR/ACEPTAR OPERACIONES
+  aceptarRechazarOperaciones(
+    request: RequestAprobarRechazarOperaciones
+  ): Observable<Response<any>> {
+    return this.http.post<Response<any>>(
+      `${this.API_URL}/ot/aprobacion_operaciones/update`,
+      request
+    );
   }
 }

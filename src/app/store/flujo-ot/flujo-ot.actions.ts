@@ -1,6 +1,7 @@
 import {
   PosibleSupervisorTrabajo,
   RequestAceptarRechazarOT,
+  RequestAprobarRechazarOperaciones,
   Response,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
@@ -71,16 +72,32 @@ export const asignarSupervisorTrabajoError = createAction(
 
 //  SOLICITAR PAGO
 export const solicitarPago = createAction(
-  '[FLUJO] GET solicitarPago',
+  '[FLUJO OT] GET solicitarPago',
   props<{ ot_id: number }>()
 );
 
 export const solicitarPagoSuccess = createAction(
-  '[FLUJO] GET  solicitarPago Success',
+  '[FLUJO OT] GET  solicitarPago Success',
   props<{ response: Response<any> }>()
 );
 
 export const solicitarPagoError = createAction(
-  '[FLUJO] GET  solicitarPago Error',
+  '[FLUJO OT] GET  solicitarPago Error',
+  props<{ error: any }>()
+);
+
+// TODO: VER SI OPERACIONES DEBERÍA TENER SU PROPIO STORE
+// APROBAR RECHAZAR OPERACIONES
+export const aprobarRechazarOperaciones = createAction(
+  '[FLUJO OT] GET aprobarRechazarOperaciones',
+  props<{ request: RequestAprobarRechazarOperaciones }>()
+);
+
+export const aprobarRechazarOperacionesSuccess = createAction(
+  '[FLUJO OT] GET aprobarRechazarOperaciones Success',
+  props<{ response: Response<any> }>()
+);
+export const aprobarRechazarOperacionesError = createAction(
+  '[FLUJO OT] GET aprobarRechazarOperaciones Error',
   props<{ error: any }>()
 );

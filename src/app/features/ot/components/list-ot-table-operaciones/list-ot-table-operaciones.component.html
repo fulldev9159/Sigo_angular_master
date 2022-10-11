@@ -43,6 +43,13 @@
         <fa-icon [icon]="playIcon"></fa-icon>
     </button>
 
+    <!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->
+    <button id="play-button" pTooltip="Aprobar Obras" *ngIf="findAccion('OT_APROBACION_OPERACIONES')"
+        (click)="displayModalAprobacionOperaciones=true">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+
     <!-- ACCIONES FIJAS -->
     <button id="info-button" pTooltip="Información">
         <fa-icon [icon]="infoIcon"></fa-icon>
@@ -117,5 +124,16 @@
     Order de trabajo ID: {{ot_id}}
     <zwc-view-confirmacion pregunta='¿Comfirma solicitar pago?' (cancelar)="displayModalSolicitudPago=false"
         (confirmar)="confirmarSolicitarPago()" textConfirmar="Confirmar">
+    </zwc-view-confirmacion>
+</p-dialog>
+
+
+<!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->
+<!-- TODO: CONFIRMAR QUE INFORMACIÓN DEBO DESPLEGAR: INFORME DE AVANCE O LAST ACTA -->
+<p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionOperaciones" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+
+    <zwc-view-confirmacion pregunta='¿Desea aprobar esta acta?' (cancelar)="rechazarActaOperaciones()"
+        textCancel="Rechazar Acta" (confirmar)="aprobarActaOperaciones()" textConfirmar="Aprobar Acta">
     </zwc-view-confirmacion>
 </p-dialog>

@@ -8,7 +8,12 @@ import {
   faSquareCheck,
   faSquareXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import { Accion, Dropdown, RequestAceptarRechazarOT } from '@model';
+import {
+  Accion,
+  Dropdown,
+  RequestAceptarRechazarOT,
+  RequestAprobarRechazarOperaciones,
+} from '@model';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
 import { map, Observable, Subscription } from 'rxjs';
@@ -27,6 +32,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   // 86 TODO: PROBAR COMPORTAMIENTO CON MAS DE UNA OT
   // 87 TODO: CORREGIR COMO SE VE EL TOOLTIP DEL AGREGAR REGISTRO LIBRO DE OBRAS
   // 88 TODO: MIGRAR CASO EN QUE FALLE EL ACEPTAR OT PROVEEDOR Y SE DEBA EMPEZAR EN LA ETAPA DE ASIGNACION
+  // TODO: PROGRAMAR EL RECHAZO DEL ACTA POR PARTE DE OPERACIONES
   @Input() acciones: Accion[];
   @Input() ot_id: number;
 
@@ -41,6 +47,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   displayModalRechazoOrdenDeTrabajo = false;
   displayModalAceptarProveedor = false;
   displayModalSolicitudPago = false;
+  displayModalAprobacionOperaciones = false;
 
   // DATA
   posibleSupervisorDeTrabajo$: Observable<Dropdown[]> = this.flujoOTFacade
@@ -130,6 +137,17 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
     this.flujoOTFacade.solicitarPago(this.ot_id);
     this.displayModalSolicitudPago = false;
   }
+
+  aprobarActaOperaciones(): void {
+    const request: RequestAprobarRechazarOperaciones = {
+      ot_id: this.ot_id,
+      estado: 'APROBAR',
+    };
+    this.flujoOTFacade.aprobarRechazarOperaciones(request);
+    this.displayModalAprobacionOperaciones = false;
+  }
+
+  rechazarActaOperaciones(): void {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

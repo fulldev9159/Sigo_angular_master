@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PosibleSupervisorTrabajo, RequestAceptarRechazarOT } from '@model';
+import {
+  PosibleSupervisorTrabajo,
+  RequestAceptarRechazarOT,
+  RequestAprobarRechazarOperaciones,
+} from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as flujoOTSelectors from './flujo-ot.selectors';
@@ -60,5 +64,12 @@ export class FlujoOTFacade {
   // SOLICITAR PAGO
   public solicitarPago(ot_id: number): void {
     this.store.dispatch(flujoOTActions.solicitarPago({ ot_id }));
+  }
+
+  // ACEPTAR O RECHAZAR OPERACIONES
+  public aprobarRechazarOperaciones(
+    request: RequestAprobarRechazarOperaciones
+  ): void {
+    this.store.dispatch(flujoOTActions.aprobarRechazarOperaciones({ request }));
   }
 }

@@ -102,6 +102,23 @@ export class FlujoOTEffects {
     )
   );
 
+  // APROBAR RECHAZAR ACTA
+  aprobarRechazarOperaciones$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(flujoOTActions.aprobarRechazarOperaciones),
+      concatMap(({ request }) =>
+        this.flujoOTServiceHttp.aceptarRechazarOperaciones(request).pipe(
+          map(response =>
+            flujoOTActions.aprobarRechazarOperacionesSuccess({ response })
+          ),
+          catchError(error =>
+            of(flujoOTActions.aprobarRechazarOperacionesError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -109,7 +126,8 @@ export class FlujoOTEffects {
           flujoOTActions.aceptarRechazarIncialOTSuccess,
           flujoOTActions.getPosibleSupervisorDeTrabajosSuccess,
           flujoOTActions.asignarSupervisorTrabajoSuccess,
-          flujoOTActions.solicitarPagoSuccess
+          flujoOTActions.solicitarPagoSuccess,
+          flujoOTActions.aprobarRechazarOperacionesSuccess
         ),
         tap(action => this.afterHttp.successHandler(action))
       ),
@@ -124,7 +142,8 @@ export class FlujoOTEffects {
           flujoOTActions.getPosibleSupervisorDeTrabajosError,
           flujoOTActions.aceptarOTProveedorError,
           flujoOTActions.asignarSupervisorTrabajoError,
-          flujoOTActions.solicitarPagoError
+          flujoOTActions.solicitarPagoError,
+          flujoOTActions.aprobarRechazarOperacionesError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

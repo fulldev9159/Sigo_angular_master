@@ -169,7 +169,8 @@ export class AfterHttpService {
     if (
       action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type ||
       action.type === flujoOTActions.asignarSupervisorTrabajoSuccess.type ||
-      action.type === flujoOTActions.solicitarPagoSuccess.type
+      action.type === flujoOTActions.solicitarPagoSuccess.type ||
+      action.type === flujoOTActions.aprobarRechazarOperacionesSuccess.type
     ) {
       let filtros = {
         filtro_propietario: 'TODAS',
