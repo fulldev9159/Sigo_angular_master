@@ -117,7 +117,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
       tap(values =>
         this.formularioService.checkAndEnable(
           this.formFilter,
-          'servicio_cod',
+          'servicio_id',
           values
         )
       ),
@@ -128,7 +128,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
       map(values =>
         values.map(value => ({
           name: `${value.numero_producto} - ${value.descripcion}`,
-          code: value.codigo,
+          code: value.id,
         }))
       )
     );
@@ -165,7 +165,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
   formFilterControls: any = {
     actividad_id: new FormControl(null, [Validators.required]),
     tipo_servicio_id: new FormControl(null, [Validators.required]),
-    servicio_cod: new FormControl(null, [Validators.required]),
+    servicio_id: new FormControl(null, [Validators.required]),
     unidad_obra_cod: new FormControl(null, [Validators.required]),
   };
   formFilter: FormGroup = new FormGroup(this.formFilterControls);
@@ -277,19 +277,19 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
     // 96 TODO: CAMBIAR SERVICIO_COD POR NUMERO PRODUCTO
 
     this.subscription.add(
-      this.formFilter
-        .get('servicio_cod')
-        .valueChanges.subscribe(servicio_cod => {
-          // CALL UNIDADES DE OBRAS
-          if (servicio_cod && servicio_cod !== null) {
-            this.serviciosFacade.alertServicioExistenteCarrito(false, null);
-            let request: RequestGetUnidadObraServicio = {
-              servicio_cod,
-              actividad_id: +this.formFilter.get('actividad_id').value,
-            };
-            this.serviciosFacade.getUnidadesObraServicio(request);
-          }
-        })
+      this.formFilter.get('servicio_id').valueChanges.subscribe(servicio_id => {
+        // CALL UNIDADES DE OBRAS
+        if (servicio_id && servicio_id !== null) {
+          this.serviciosFacade.alertServicioExistenteCarrito(false, null);
+          let request: RequestGetUnidadObraServicio = {
+            servicio_cod: this.serviciosAgenciaContratoProveedor.find(
+              v => v.id === servicio_id
+            ).codigo,
+            actividad_id: +this.formFilter.get('actividad_id').value,
+          };
+          this.serviciosFacade.getUnidadesObraServicio(request);
+        }
+      })
     );
 
     this.subscription.add(
@@ -315,9 +315,7 @@ export class FormAgregarServiciosComponent implements OnDestroy, OnInit {
         .subscribe(([proveedorSelected, agenciaSelected, carrito]) => {
           // DATOS
           const unidad_obra_cod = this.formFilter.get('unidad_obra_cod').value;
-          const servicio_id = this.serviciosAgenciaContratoProveedor.find(
-            value => value.codigo === this.formFilter.get('servicio_cod').value
-          ).id;
+          const servicio_id = +this.formFilter.get('servicio_id').value;
 
           if (this.reglasDeAgregacion === 'Cubicacion')
             this.ReglasAgregarServicios(

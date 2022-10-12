@@ -338,7 +338,7 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
   describe('Tabla carrito', () => {
     it('ingresar', () => {
       cy.viewport(1500, 1700);
-      cy.visit('http://localhost:4206/login/auth');
+      cy.get('#logout').click();
       cy._login('mgestor1', 'asdasd');
       cy._select_profile('Gestor/JP');
       cy.get('button[id="navbar-create-cub"]').click();

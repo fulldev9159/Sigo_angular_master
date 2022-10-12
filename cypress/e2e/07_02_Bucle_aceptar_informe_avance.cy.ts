@@ -7,7 +7,7 @@ import {
   adicionalesBucle1,
   crearCubicacion,
   CubicacionEditada,
-} from 'cypress/fixtures/testedCubicacion';
+} from 'cypress/fixtures/testedCubicacionBUCLE';
 
 describe.skip('ACEPTAR INFORME DE AVANCE ', () => {
   it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {

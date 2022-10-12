@@ -242,6 +242,7 @@ Cypress.Commands.add('_check_table_cub_uo', uo => {
 });
 
 Cypress.Commands.add('_filter_table', (name, search) => {
+  cy.get(`input[name='${name}']`).clear();
   cy.get(`input[name='${name}']`).type(`{del}${search}`);
 });
 

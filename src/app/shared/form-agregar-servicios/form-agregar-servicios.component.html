@@ -22,10 +22,10 @@
 
         <div class="formgrid grid">
             <div class="field col-12 ">
-                <zwc-pdropdown [control]="formFilterControls.servicio_cod" Label="Servicio"
-                    dropdown_id="select-servicio" [data]="serviciosAgenciaContratoProveedor$|async"
-                    Pplaceholder="Selecione un servicio" [loading]="loadingGetServiciosAgenciaContratoProveedor$|async"
-                    [Pfilter]="true" PfilterBy="name" [PshowClear]="true"></zwc-pdropdown>
+                <zwc-pdropdown [control]="formFilterControls.servicio_id" Label="Servicio" dropdown_id="select-servicio"
+                    [data]="serviciosAgenciaContratoProveedor$|async" Pplaceholder="Selecione un servicio"
+                    [loading]="loadingGetServiciosAgenciaContratoProveedor$|async" [Pfilter]="true" PfilterBy="name"
+                    [PshowClear]="true"></zwc-pdropdown>
             </div>
             <div class="field col-12">
                 <zwc-pdropdown [control]="formFilterControls.unidad_obra_cod" Label="Unidad de Obra"
@@ -44,3 +44,5 @@
         </div>
     </div>
 </form>
+
+<!-- <pre>{{formFilter.value|json}}</pre> -->

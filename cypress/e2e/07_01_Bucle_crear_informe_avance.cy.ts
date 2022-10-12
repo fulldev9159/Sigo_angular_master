@@ -6,7 +6,7 @@ import {
 import {
   adicionalesBucle1,
   CubicacionEditada,
-} from 'cypress/fixtures/testedCubicacion';
+} from 'cypress/fixtures/testedCubicacionBUCLE';
 
 describe.skip('INFORME DE AVANCE', () => {
   it('Debe desplegar detalles de la cubicacion "Cubicacion Bucle"', () => {

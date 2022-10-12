@@ -1,4 +1,7 @@
-import { crearCubicacion } from 'cypress/fixtures/testedCubicacion';
+import { crearCubicacion } from 'cypress/fixtures/testedCubicacionBUCLE';
+import { crearCubicacionFIJA } from 'cypress/fixtures/testedCubicacionFIJO';
+import { crearCubicacionMOVIL } from 'cypress/fixtures/testedCubicacionMOVIL';
+import { crearCubicacionORDINARIO } from 'cypress/fixtures/testedCubicacionOrdinario';
 
 describe('Listar Cubicaciones', () => {
   it('should let enter to create cubicacion', () => {
@@ -24,86 +27,77 @@ describe('Listar Cubicaciones', () => {
     const data = crearCubicacion;
 
     cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
-      crearCubicacion.items.forEach(servicio => {
-        cy.get('.carrito-container>table')
-          .contains('td', servicio.nombre.split('-')[0].trim())
-          .siblings()
-          .eq(0)
-          .contains(servicio.nombre.split('-')[1].trim());
+      cy._check_table_servicio_view(data);
 
-        cy.get('.carrito-container>table')
-          .contains('td', servicio.nombre.split('-')[0].trim())
-          .siblings()
-          .eq(1)
-          .contains(servicio.tipo_servicio);
+      cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios);
+      cy.get('td[id="total-uo-monto"]').contains(data.totalUOs);
+      cy.get('td[id="total-cubicacion-monto"]').contains(data.total);
 
-        cy.get('.carrito-container>table')
-          .contains('td', servicio.nombre.split('-')[0].trim())
-          .siblings()
-          .eq(2)
-          .contains(servicio.cantidad);
+      cy.get('button.p-dialog-header-close').click();
+      cy.wait(100);
+    });
+  });
 
-        cy.get('.carrito-container>table')
-          .contains('td', servicio.nombre.split('-')[0].trim())
-          .siblings()
-          .eq(3)
-          .contains(servicio.precio);
+  it('Debe desplegar detalles de la cubicacion "Cubicacion Fijo"', () => {
+    cy.intercept('POST', '/cubicacion/detalle/get2').as(
+      'HTTPRESPONSE-GET-DETALLE-CUBICACION'
+    );
 
-        cy.get('.carrito-container>table')
-          .contains('td', servicio.nombre.split('-')[0].trim())
-          .siblings()
-          .eq(4)
-          .contains(servicio.total);
+    cy._filter_table('filter-nombre-cubicacion', 'Cubicacion FIJA Cypress');
+    cy.get('tbody').find('tr').should('have.length', 1);
 
-        servicio.unidad_obras.forEach((uo, index) => {
-          cy.get('.carrito-container>table')
-            .contains(
-              'td',
-              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-            )
-            .siblings()
-            .eq(0)
-            .contains(uo.nombre.split('-')[1].trim());
+    cy.get('button[id="button-detalle-cubicacion"]').click();
+    const data = crearCubicacionFIJA;
 
-          cy.get('.carrito-container>table')
-            .contains(
-              'td',
-              new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-            )
-            .siblings()
-            .eq(1)
-            .contains(servicio.actividad);
+    cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
+      cy._check_table_servicio_view(data);
 
-          if (uo.nombre !== '0 - SIN UO') {
-            cy.get('.carrito-container>table')
-              .contains(
-                'td',
-                new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-              )
-              .siblings()
-              .eq(2)
-              .contains(uo.cantidad);
+      cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios);
+      cy.get('td[id="total-uo-monto"]').contains(data.totalUOs);
+      cy.get('td[id="total-cubicacion-monto"]').contains(data.total);
 
-            cy.get('.carrito-container>table')
-              .contains(
-                'td',
-                new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-              )
-              .siblings()
-              .eq(3)
-              .contains(uo.precio);
+      cy.get('button.p-dialog-header-close').click();
+    });
+  });
 
-            cy.get('.carrito-container>table')
-              .contains(
-                'td',
-                new RegExp('^' + uo.nombre.split('-')[0].trim() + '$', 'g')
-              )
-              .siblings()
-              .eq(4)
-              .contains(uo.total);
-          }
-        });
-      });
+  it('Debe desplegar detalles de la cubicacion "Cubicacion Ordinario"', () => {
+    cy.intercept('POST', '/cubicacion/detalle/get2').as(
+      'HTTPRESPONSE-GET-DETALLE-CUBICACION'
+    );
+
+    cy._filter_table(
+      'filter-nombre-cubicacion',
+      'Cubicacion ORDINARIO Cypress'
+    );
+    cy.get('tbody').find('tr').should('have.length', 1);
+
+    cy.get('button[id="button-detalle-cubicacion"]').click();
+    const data = crearCubicacionORDINARIO;
+
+    cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
+      cy._check_table_servicio_view(data);
+
+      cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios);
+      cy.get('td[id="total-uo-monto"]').contains(data.totalUOs);
+      cy.get('td[id="total-cubicacion-monto"]').contains(data.total);
+
+      cy.get('button.p-dialog-header-close').click();
+    });
+  });
+
+  it('Debe desplegar detalles de la cubicacion "Cubicacion Movil"', () => {
+    cy.intercept('POST', '/cubicacion/detalle/get2').as(
+      'HTTPRESPONSE-GET-DETALLE-CUBICACION'
+    );
+
+    cy._filter_table('filter-nombre-cubicacion', 'Cubicacion MOVIL Cypress');
+    cy.get('tbody').find('tr').should('have.length', 1);
+
+    cy.get('button[id="button-detalle-cubicacion"]').click();
+    const data = crearCubicacionMOVIL;
+
+    cy.wait('@HTTPRESPONSE-GET-DETALLE-CUBICACION').then(() => {
+      cy._check_table_servicio_view(data);
 
       cy.get('td[id="total-servicio-monto"]').contains(data.totalServicios);
       cy.get('td[id="total-uo-monto"]').contains(data.totalUOs);

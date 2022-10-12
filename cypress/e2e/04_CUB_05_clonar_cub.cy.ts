@@ -1,4 +1,4 @@
-import { crearCubicacion } from 'cypress/fixtures/testedCubicacion';
+import { crearCubicacion } from 'cypress/fixtures/testedCubicacionBUCLE';
 
 describe('Listar Cubicaciones', () => {
   it('should let enter to create cubicacion', () => {

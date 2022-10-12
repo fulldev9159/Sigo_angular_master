@@ -1,7 +1,7 @@
 import {
   crearCubicacion,
   CubicacionEditada,
-} from 'cypress/fixtures/testedCubicacion';
+} from 'cypress/fixtures/testedCubicacionBUCLE';
 
 let w = 1900;
 let h = 1200;

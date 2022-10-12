@@ -111,7 +111,7 @@ export class FormCubContainerComponent
       .get('tipo_servicio_id')
       .disable({ emitEvent: false });
     this.agregarServiciosForm.formFilter
-      .get('servicio_cod')
+      .get('servicio_id')
       .disable({ emitEvent: false });
     this.agregarServiciosForm.formFilter
       .get('unidad_obra_cod')
@@ -142,7 +142,7 @@ export class FormCubContainerComponent
         .get('tipo_servicio_id')
         .setValue(null, { emitEvent: false });
       this.agregarServiciosForm.formFilter
-        .get('servicio_cod')
+        .get('servicio_id')
         .setValue(null, { emitEvent: false });
       this.agregarServiciosForm.formFilter
         .get('unidad_obra_cod')
@@ -167,7 +167,7 @@ export class FormCubContainerComponent
         .get('tipo_servicio_id')
         .setValue(null, { emitEvent: false });
       this.agregarServiciosForm.formFilter
-        .get('servicio_cod')
+        .get('servicio_id')
         .setValue(null, { emitEvent: false });
       this.agregarServiciosForm.formFilter
         .get('unidad_obra_cod')
@@ -190,7 +190,7 @@ export class FormCubContainerComponent
           .get('tipo_servicio_id')
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
-          .get('servicio_cod')
+          .get('servicio_id')
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
           .get('unidad_obra_cod')
@@ -209,7 +209,7 @@ export class FormCubContainerComponent
           .get('tipo_servicio_id')
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
-          .get('servicio_cod')
+          .get('servicio_id')
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
           .get('unidad_obra_cod')
@@ -224,7 +224,7 @@ export class FormCubContainerComponent
         this.serviciosFacade.resetUnidadesObraServicio();
 
         this.agregarServiciosForm.formFilter
-          .get('servicio_cod')
+          .get('servicio_id')
           .setValue(null, { emitEvent: false });
         this.agregarServiciosForm.formFilter
           .get('unidad_obra_cod')
