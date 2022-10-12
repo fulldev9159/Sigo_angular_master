@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
 
 import { ValidarActaContainerComponent } from './validar-acta-container.component';
 
@@ -8,9 +10,9 @@ describe('ValidarActaContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValidarActaContainerComponent ]
-    })
-    .compileComponents();
+      imports: [StoreModule.forRoot({}), RouterTestingModule],
+      declarations: [ValidarActaContainerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ValidarActaContainerComponent);
     component = fixture.componentInstance;

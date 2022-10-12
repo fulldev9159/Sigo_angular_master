@@ -31,14 +31,14 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
       this.route.data.subscribe(({ accionesOT, lastActa }) => {
         console.log(accionesOT);
         if (accionesOT) this.accionesOT = accionesOT;
-        let lastActaData: LastActa = lastActa.data;
+        let lastActaData: LastActa = lastActa?.data;
         console.log(lastActaData);
 
-        this.ot_id = lastActaData.ot_id;
+        this.ot_id = lastActaData?.ot_id;
         let servicios: DetalleServicioLastActa[] =
-          lastActaData.many_acta_detalle_servicio;
+          lastActaData?.many_acta_detalle_servicio;
         let uob: DetalleUnidadObraLastActa[] =
-          lastActaData.many_acta_detalle_uob;
+          lastActaData?.many_acta_detalle_uob;
 
         if (servicios && servicios.length > 0) {
           servicios.forEach(service => {
