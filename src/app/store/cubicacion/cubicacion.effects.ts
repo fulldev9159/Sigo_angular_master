@@ -115,7 +115,9 @@ export class CubicacionEffects {
       concatMap(({ cubicacion_id }) =>
         this.cubicacionHttpService.getDetalleCubicacion(cubicacion_id).pipe(
           map(response =>
-            cubicacionActions.detalleCubicacionSuccess({ response })
+            cubicacionActions.detalleCubicacionSuccess({
+              detalleCubicacion: response.data,
+            })
           ),
           catchError(error =>
             of(cubicacionActions.detalleCubicacionError({ error }))

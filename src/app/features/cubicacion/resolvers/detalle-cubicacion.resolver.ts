@@ -34,7 +34,7 @@ export class DetalleCubicacionResolver
     }
     return this.service.getDetalleCubicacion(id).pipe(
       tap(response => {
-        this.cubicacionFacade.detalleCubicacionSuccess(response);
+        this.cubicacionFacade.detalleCubicacionSuccess(response.data);
       }),
       catchError(error => {
         this.cubicacionFacade.detalleCubicacionError(error);

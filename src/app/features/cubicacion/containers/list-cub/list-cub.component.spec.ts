@@ -71,10 +71,12 @@ describe('ListCubComponent', () => {
 
   it('closeModalDetalleCubicacion should call reset CarritoServices and resetDetalleCubicacion', () => {
     spyOn(serviciosFacade, 'resetCarritoServices');
-    spyOn(cubicacionFacade, 'resetDetalleCubicacion');
+    spyOn(cubicacionFacade, 'detalleCubicacionSuccess');
     component.closeModalDetalleCubicacion();
     expect(serviciosFacade.resetCarritoServices).toHaveBeenCalled();
-    expect(cubicacionFacade.resetDetalleCubicacion).toHaveBeenCalled();
+    expect(cubicacionFacade.detalleCubicacionSuccess).toHaveBeenCalledWith(
+      null
+    );
   });
 
   it('showDetalleCubicacion display modal, reset carritoService antes de llenarlo con nuevos datos y llamar al facade con id 1 ', () => {
@@ -89,13 +91,6 @@ describe('ListCubComponent', () => {
     component.showClonarCubicacion(1);
     expect(component.displayModalClonarCubicacion).toBe(true);
     expect(cubicacionFacade.detalleCubicacion).toHaveBeenCalledWith(1);
-  });
-
-  it('closeModalClonarCubicacion should call resetDetalleCubicacion', () => {
-    spyOn(cubicacionFacade, 'resetDetalleCubicacion');
-    component.closeModalDetalleCubicacion();
-    expect(component.displayModalClonarCubicacion).toBe(false);
-    expect(cubicacionFacade.resetDetalleCubicacion).toHaveBeenCalled();
   });
 
   it('showEliminarCubicacion display modal  and store cubicacion_id y crear el mensaje de confirmarción', () => {
@@ -119,5 +114,14 @@ describe('ListCubComponent', () => {
   it('closeModalEliminarCubicacion hide modal', () => {
     component.closeModalEliminarCubicacion();
     expect(component.displayModalEliminarCubicacion).toBe(false);
+  });
+
+  it('closeModalClonarCubicacion should false displayModaClonarCubicacion and call facade detalleCubicacionSuccess with null parameter', () => {
+    spyOn(cubicacionFacade, 'detalleCubicacionSuccess');
+    component.closeModalClonarCubicacion();
+    expect(component.displayModalClonarCubicacion).toBe(false);
+    expect(cubicacionFacade.detalleCubicacionSuccess).toHaveBeenCalledWith(
+      null
+    );
   });
 });

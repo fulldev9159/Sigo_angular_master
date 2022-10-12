@@ -350,7 +350,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   closeModalDetalleCubicacion(): void {
     this.serviciosFacade.resetCarritoServices();
-    this.cubicacionFacade.resetDetalleCubicacion();
+    this.cubicacionFacade.detalleCubicacionSuccess(null);
   }
 
   // CLONAR CUBICACION
@@ -361,7 +361,7 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   closeModalClonarCubicacion(): void {
     this.displayModalClonarCubicacion = false;
-    this.cubicacionFacade.resetDetalleCubicacion();
+    this.cubicacionFacade.detalleCubicacionSuccess(null);
   }
 
   // ELIMINAR CUBICACION
@@ -378,12 +378,6 @@ export class ListCubComponent implements OnInit, OnDestroy {
 
   closeModalEliminarCubicacion(): void {
     this.displayModalEliminarCubicacion = false;
-  }
-
-  // EDITAR CUBICACION
-  editarCubicacion(cubicacion_id: number): void {
-    this.subscription.unsubscribe();
-    this.router.navigate(['/cubicacion/form-cub', cubicacion_id]);
   }
 
   ngOnDestroy(): void {

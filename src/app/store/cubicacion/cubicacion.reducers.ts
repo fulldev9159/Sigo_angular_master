@@ -57,10 +57,13 @@ export const reducerCubicacion = createReducer(
     ...state,
     listarCubicaciones: response.data.items,
   })),
-  on(cubicacionActions.detalleCubicacionSuccess, (state, { response }) => ({
-    ...state,
-    detalleCubicacion: response.data,
-  })),
+  on(
+    cubicacionActions.detalleCubicacionSuccess,
+    (state, { detalleCubicacion }) => ({
+      ...state,
+      detalleCubicacion,
+    })
+  ),
   on(
     cubicacionActions.getCubicacionesContratoSuccess,
     (state, { response }) => ({
@@ -87,9 +90,5 @@ export const reducerCubicacion = createReducer(
   on(cubicacionActions.resetProveedorSelected, (state, {}) => ({
     ...state,
     proveedorSelected: null,
-  })),
-  on(cubicacionActions.resetDetalleCubicacion, (state, {}) => ({
-    ...state,
-    detalleCubicacion: null,
   }))
 );

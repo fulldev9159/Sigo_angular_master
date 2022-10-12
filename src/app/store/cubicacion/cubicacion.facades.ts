@@ -117,9 +117,9 @@ export class CubicacionFacade {
     this.store.dispatch(cubicacionActions.detalleCubicacion({ cubicacion_id }));
   }
 
-  public detalleCubicacionSuccess(response: Response<DetalleCubicacion>): void {
+  public detalleCubicacionSuccess(detalleCubicacion: DetalleCubicacion): void {
     this.store.dispatch(
-      cubicacionActions.detalleCubicacionSuccess({ response })
+      cubicacionActions.detalleCubicacionSuccess({ detalleCubicacion })
     );
   }
   public detalleCubicacionError(error: any): void {
@@ -171,8 +171,5 @@ export class CubicacionFacade {
   }
   public resetAgenciaSelected(): void {
     this.store.dispatch(cubicacionActions.resetAgenciaSelected());
-  }
-  public resetDetalleCubicacion(): void {
-    this.store.dispatch(cubicacionActions.resetDetalleCubicacion());
   }
 }

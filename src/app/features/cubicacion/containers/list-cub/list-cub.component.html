@@ -115,7 +115,7 @@
                                         id="button-clonar-cubicacion">
                                         <fa-icon [icon]="cloneIcon"></fa-icon> Clonar
                                     </button>
-                                    <button (click)="editarCubicacion(item.cubicacion_id)"
+                                    <button [routerLink]="['/cubicacion/form-cub',item.cubicacion_id]"
                                         id="button-editar-cubicacion">
                                         <fa-icon [icon]="editIcon"></fa-icon> Editar
                                     </button>

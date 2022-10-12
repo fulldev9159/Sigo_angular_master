@@ -123,7 +123,7 @@ export const detalleCubicacion = createAction(
 );
 export const detalleCubicacionSuccess = createAction(
   '[CUBICACION] detalleCubicacion Success',
-  props<{ response: Response<DetalleCubicacion> }>()
+  props<{ detalleCubicacion: DetalleCubicacion }>()
 );
 export const detalleCubicacionError = createAction(
   '[CUBICACION] detalleCubicacion Error',
@@ -181,8 +181,4 @@ export const resetProveedorSelected = createAction(
 );
 export const resetAgenciaSelected = createAction(
   '[CUBICACION] resetAgenciaSelected '
-);
-
-export const resetDetalleCubicacion = createAction(
-  '[CUBICACION] resetDetalleCubicacion '
 );

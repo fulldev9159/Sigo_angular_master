@@ -31,7 +31,6 @@ interface DATA_TABLE_UO {
   cantidad_uo: number;
 }
 
-// TODO: AGREGAR EL TEST PARA VERIFICAR QUE AL AGREGAR O ELIMINAR UN SERVICIO LAS CANTIDADES NO SE RESETEEN
 describe('04_CUB_01_FORMULARIO_SPEC', () => {
   beforeEach(() => {
     cy.viewport(1500, 1700);
