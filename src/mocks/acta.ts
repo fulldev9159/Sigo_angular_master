@@ -1,4 +1,5 @@
 import {
+  ActaTipoPago,
   DetalleServicio4Acta,
   DetalleUO4Acta,
   LastActa,
@@ -551,6 +552,45 @@ export const GetDetalleUO4ActaMOCK200ok: Response<{ items: DetalleUO4Acta[] }> =
     },
   };
 
+export const informarTrabajosFinalizadosMOCK200ok: Response<{
+  ot_id: number;
+  acta_id: number;
+}> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    ot_id: 1,
+    acta_id: 1,
+  },
+};
+
+export const getTiposPagoActaMOCK200ok: Response<{ items: ActaTipoPago[] }> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    items: [
+      { id: 1, descripcion: 'TOTAL' },
+      { id: 2, descripcion: 'PORCENTAJE' },
+      { id: 3, descripcion: 'POR_SERVICIO' },
+    ],
+  },
+};
+
+export const validarActaMOCK200ok: Response<{ acta_id: number }> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    acta_id: 1,
+  },
+};
+
+export const aceptarRechazarAdicionalesMOCK200ok: Response<{
+  adicionales_aceptados: number[];
+  adicionales_rechazados: number[];
+}> = {
+  status: { code: 0, desc: 'OK' },
+  data: {
+    adicionales_aceptados: [],
+    adicionales_rechazados: [],
+  },
+};
 export const getLastActaMOCK200ok: Response<LastActa> = {
   status: { code: 0, desc: 'OK' },
   data: {

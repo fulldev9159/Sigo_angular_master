@@ -49,11 +49,21 @@ export class ActaHttpService {
   informarTrabajosFinalizados(
     ot_id: number,
     observacion: string
-  ): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
-      `${this.API_URL}/ot/acta/trabajo/finalizado/informar`,
-      { ot_id, observacion }
-    );
+  ): Observable<
+    Response<{
+      ot_id: number;
+      acta_id: number;
+    }>
+  > {
+    return this.http.post<
+      Response<{
+        ot_id: number;
+        acta_id: number;
+      }>
+    >(`${this.API_URL}/ot/acta/trabajo/finalizado/informar`, {
+      ot_id,
+      observacion,
+    });
   }
 
   // GET ACTA TIPOS PAGO
@@ -65,8 +75,10 @@ export class ActaHttpService {
   }
 
   // VALIDAR ACTA
-  validarActa(request: RequestValidarActa): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
+  validarActa(
+    request: RequestValidarActa
+  ): Observable<Response<{ acta_id: number }>> {
+    return this.http.post<Response<{ acta_id: number }>>(
       `${this.API_URL}/ot/acta/validate`,
       request
     );
@@ -75,11 +87,18 @@ export class ActaHttpService {
   // RECHAZAR/ACEPTAR ADICIONALES
   aceptarRechazarAdicionales(
     request: RequestAceptarRechazarAdicionales
-  ): Observable<Response<any>> {
-    return this.http.post<Response<any>>(
-      `${this.API_URL}/ot/servicio_adicional_aceptacion/update`,
-      request
-    );
+  ): Observable<
+    Response<{
+      adicionales_aceptados: number[];
+      adicionales_rechazados: number[];
+    }>
+  > {
+    return this.http.post<
+      Response<{
+        adicionales_aceptados: number[];
+        adicionales_rechazados: number[];
+      }>
+    >(`${this.API_URL}/ot/servicio_adicional_aceptacion/update`, request);
   }
 
   // GET LAST ACTA

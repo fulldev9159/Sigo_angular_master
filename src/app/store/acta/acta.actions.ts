@@ -49,7 +49,12 @@ export const informarTrabajosFinalizados = createAction(
 
 export const informarTrabajosFinalizadosSuccess = createAction(
   '[ACTA] GET informarTrabajosFinalizados Success',
-  props<{ response: Response<any> }>()
+  props<{
+    response: Response<{
+      ot_id: number;
+      acta_id: number;
+    }>;
+  }>()
 );
 export const informarTrabajosFinalizadosError = createAction(
   '[ACTA] GETinformarTrabajosFinalizados Error',
@@ -78,7 +83,7 @@ export const validarActa = createAction(
 
 export const validarActaSuccess = createAction(
   '[ACTA] GET validarActa Success',
-  props<{ response: Response<any> }>()
+  props<{ response: Response<{ acta_id: number }> }>()
 );
 
 export const validarActaError = createAction(
@@ -97,7 +102,12 @@ export const aceptarRechazarAdcionalesValidarActa = createAction(
 
 export const aceptarRechazarAdcionalesValidarActaSuccess = createAction(
   '[ACTA] GET aceptarRechazarAdcionalesValidarActa Success',
-  props<{ response: Response<any> }>()
+  props<{
+    response: Response<{
+      adicionales_aceptados: number[];
+      adicionales_rechazados: number[];
+    }>;
+  }>()
 );
 
 export const aceptarRechazarAdcionalesValidarActaError = createAction(

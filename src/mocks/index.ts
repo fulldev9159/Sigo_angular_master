@@ -8,3 +8,4 @@ export * from './ot';
 export * from './sustento-financiero';
 export * from './ot-detalle';
 export * from './informe-avance';
+export * from './acta';
