@@ -43,50 +43,39 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
     cy.get('button[id="navbar-create-cub"]').click();
   });
 
-  describe.skip('Test responsive', () => {});
+  it('should display inicial ', () => {
+    cy.get('input[name="input-nombre-cubicacion"]').should('be.enabled');
+    cy.get('#select-tipo-cubicacion>div').should(
+      'not.have.class',
+      'p-disabled'
+    );
+    cy.get('#select-contrato_marco>div').should('not.have.class', 'p-disabled');
+    cy.get('#select-agencia>div').should('have.class', 'p-disabled');
+    cy.get('#select-proveedor>div').should('have.class', 'p-disabled');
+    cy.get('#select-actividad>div').should('have.class', 'p-disabled');
+    cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-servicio>div').should('have.class', 'p-disabled');
+    cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
+  });
 
-  describe('Visubilidad e Interacción Incial', () => {
-    describe('Visibilidad', () => {
-      it('should display ', () => {
-        cy.get('input[name="input-nombre-cubicacion"]').should('be.enabled');
-        cy.get('#select-tipo-cubicacion>div').should(
-          'not.have.class',
-          'p-disabled'
-        );
-        cy.get('#select-contrato_marco>div').should(
-          'not.have.class',
-          'p-disabled'
-        );
-        cy.get('#select-agencia>div').should('have.class', 'p-disabled');
-        cy.get('#select-proveedor>div').should('have.class', 'p-disabled');
-        cy.get('#select-actividad>div').should('have.class', 'p-disabled');
-        cy.get('#select-tipo-servicio>div').should('have.class', 'p-disabled');
-        cy.get('#select-servicio>div').should('have.class', 'p-disabled');
-        cy.get('#select-unidad-obra>div').should('have.class', 'p-disabled');
-      });
-    });
+  it('should display tipo cubicacion y contrato marco', () => {
+    cy._check_input('input[name="input-nombre-cubicacion"]', 'required');
 
-    describe('Interacción', () => {
-      it('should display ', () => {
-        cy._check_input('input[name="input-nombre-cubicacion"]', 'required');
+    // TIPO CUBICACION
+    cy._check_dropdown_required('#select-tipo-cubicacion');
+    cy._check_dropdown_data(
+      '#select-tipo-cubicacion',
+      tipoCubicacionMOCK200OK.data.items,
+      'descripcion'
+    );
 
-        // TIPO CUBICACION
-        cy._check_dropdown_required('#select-tipo-cubicacion');
-        cy._check_dropdown_data(
-          '#select-tipo-cubicacion',
-          tipoCubicacionMOCK200OK.data.items,
-          'descripcion'
-        );
-
-        // CONTRATO MARCO
-        cy._check_dropdown_required('#select-contrato_marco');
-        cy._check_dropdown_data(
-          '#select-contrato_marco',
-          ContratosUsuarioMOCK200OK.data.items,
-          'model_contrato_id.nombre'
-        );
-      });
-    });
+    // CONTRATO MARCO
+    cy._check_dropdown_required('#select-contrato_marco');
+    cy._check_dropdown_data(
+      '#select-contrato_marco',
+      ContratosUsuarioMOCK200OK.data.items,
+      'model_contrato_id.nombre'
+    );
   });
 
   describe('Testing comportamiento sección descripcion dependiendo del contrato', () => {
@@ -125,138 +114,113 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
     );
   });
 
-  describe('Testing comportamiento de dropdown en una selección inicial', () => {
-    describe('Agencia', () => {
-      it('test', () => {
-        cy._select_dropdown('#select-contrato_marco', 'BUCLE');
-        cy.get('input[name="input-nombre-cubicacion"]').click();
+  it('Testing comportamiento de dropdown en una selección inicial', () => {
+    cy._select_dropdown('#select-contrato_marco', 'BUCLE');
 
-        // AGENCIA
-        cy._check_dropdown_required('#select-agencia');
-        cy._check_dropdown_data(
-          '#select-agencia',
-          getAgenciasContratoMOCK200OK.data.items,
-          'nombre'
-        );
-      });
+    // AGENCIA
+    cy._check_dropdown_required('#select-agencia');
+    cy._check_dropdown_data(
+      '#select-agencia',
+      getAgenciasContratoMOCK200OK.data.items,
+      'nombre'
+    );
+
+    // PROVEEDOR
+    cy._select_dropdown('#select-agencia', 'APOQUINDO');
+    cy._check_dropdown_required('#select-proveedor');
+    let datosProv = getProveedoresAgenciaContratoMOCK200OK.data.items
+      .sort((a, b) => (a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0))
+      .map(value => `${value.codigo_acuerdo} - ${value.nombre}`);
+    cy.get('#select-proveedor').click();
+    cy.get(
+      '#select-proveedor>div>.p-dropdown-panel>div>ul>p-dropdownitem> li.p-ripple'
+    ).each(($el, index, $list) => {
+      expect($el.text()).eq(datosProv[index]);
     });
-    describe('Proveedor', () => {
-      it('test', () => {
-        // PROVEEDOR
-        cy._select_dropdown('#select-agencia', 'APOQUINDO');
-        cy._check_dropdown_required('#select-proveedor');
-        let datosProv = getProveedoresAgenciaContratoMOCK200OK.data.items
-          .sort((a, b) =>
-            a.nombre > b.nombre ? 1 : b.nombre > a.nombre ? -1 : 0
-          )
-          .map(value => `${value.codigo_acuerdo} - ${value.nombre}`);
-        cy.get('#select-proveedor').click();
-        cy.get(
-          '#select-proveedor>div>.p-dropdown-panel>div>ul>p-dropdownitem> li.p-ripple'
-        ).each(($el, index, $list) => {
-          expect($el.text()).eq(datosProv[index]);
-        });
-        cy.get('#select-proveedor').click();
-      });
+    cy.get('#select-proveedor').click();
+
+    // FILTROS CARRITO
+    // ACTIVIDAD
+    cy._select_dropdown(
+      '#select-proveedor',
+      '330000659 - COBRA CHILE SERVICIOS S.A.'
+    );
+    cy._check_dropdown_required('#select-actividad');
+    cy._check_dropdown_data(
+      '#select-actividad',
+      getActividadesContratoProveedorMOCK200ok.data.items,
+      'descripcion'
+    );
+
+    // TIPO SERVICIO
+    cy._select_dropdown('#select-actividad', 'DISEÑO');
+    cy._check_dropdown_required('#select-tipo-servicio');
+    cy._check_dropdown_data(
+      '#select-tipo-servicio',
+      getTipoServiciosContratoMOCK200ok.data.items,
+      'descripcion'
+    );
+
+    // SERVICIO
+
+    cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
+    cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
+    // TODO: VER PORQUE SE PEGA
+    // cy.get('#select-servicio').click();
+    // cy.get('body').trigger('keydown', { keyCode: 27 });
+    // cy.get('#select-servicio' + '+zwc-input-alert>small').contains(
+    //   'Este campo es requerido'
+    // );
+
+    let datosServ = ServiciosAgenciaContratoProveedorMOCK200OK.data.items
+      .sort((a, b) =>
+        a.descripcion > b.descripcion
+          ? 1
+          : b.descripcion > a.descripcion
+          ? -1
+          : 0
+      )
+      .map(value => `${value.numero_producto} - ${value.descripcion}`);
+    cy.get('#select-servicio').click();
+    cy.get(
+      '#select-servicio' +
+        '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
+    ).each(($el, index, $list) => {
+      expect($el.text()).eq(datosServ[index]);
     });
+    cy.get('#select-servicio').click();
 
-    describe('ACTIVIDAD', () => {
-      it('test', () => {
-        // ACTIVIDAD
-        cy._select_dropdown(
-          '#select-proveedor',
-          '330000659 - COBRA CHILE SERVICIOS S.A.'
-        );
-        cy._check_dropdown_required('#select-actividad');
-        cy._check_dropdown_data(
-          '#select-actividad',
-          getActividadesContratoProveedorMOCK200ok.data.items,
-          'descripcion'
-        );
-      });
+    // UO
+    cy._select_dropdown(
+      '#select-servicio',
+      'D021 - DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)'
+    );
+    // TODO: VER PORQUE SE PEGA
+    cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
+
+    // cy._check_dropdown_required('#select-unidad-obra');
+    let datos = UnidadObraServicioMOCK200OK.data.items
+      .sort((a, b) =>
+        a.model_unidad_obra_cod.descripcion >
+        b.model_unidad_obra_cod.descripcion
+          ? 1
+          : b.model_unidad_obra_cod.descripcion >
+            a.model_unidad_obra_cod.descripcion
+          ? -1
+          : 0
+      )
+      .map(
+        value =>
+          `${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}`
+      );
+    cy.get('#select-unidad-obra').click();
+    cy.get(
+      '#select-unidad-obra' +
+        '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
+    ).each(($el, index, $list) => {
+      expect($el.text()).eq(datos[index]);
     });
-
-    describe('TIPO SERVICIO', () => {
-      it('test', () => {
-        // TIPO SERVICIO
-        cy._select_dropdown('#select-actividad', 'DISEÑO');
-        cy._check_dropdown_required('#select-tipo-servicio');
-        cy._check_dropdown_data(
-          '#select-tipo-servicio',
-          getTipoServiciosContratoMOCK200ok.data.items,
-          'descripcion'
-        );
-      });
-    });
-
-    describe('SERVICIO', () => {
-      it('test', () => {
-        // TIPO SERVICIO
-
-        cy._select_dropdown('#select-tipo-servicio', 'PROYECTOS');
-        cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
-        // TODO: VER PORQUE SE PEGA
-        // cy.get('#select-servicio').click();
-        // cy.get('body').trigger('keydown', { keyCode: 27 });
-        // cy.get('#select-servicio' + '+zwc-input-alert>small').contains(
-        //   'Este campo es requerido'
-        // );
-
-        let datosServ = ServiciosAgenciaContratoProveedorMOCK200OK.data.items
-          .sort((a, b) =>
-            a.descripcion > b.descripcion
-              ? 1
-              : b.descripcion > a.descripcion
-              ? -1
-              : 0
-          )
-          .map(value => `${value.numero_producto} - ${value.descripcion}`);
-        cy.get('#select-servicio').click();
-        cy.get(
-          '#select-servicio' +
-            '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
-        ).each(($el, index, $list) => {
-          expect($el.text()).eq(datosServ[index]);
-        });
-        cy.get('#select-servicio').click();
-      });
-    });
-
-    describe('UO', () => {
-      it('test', () => {
-        // UO
-        cy._select_dropdown(
-          '#select-servicio',
-          'D021 - DISEÑO DE RED INTERIOR RED DE F.O. (DITIFO)'
-        );
-        // TODO: VER PORQUE SE PEGA
-        cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
-
-        // cy._check_dropdown_required('#select-unidad-obra');
-        let datos = UnidadObraServicioMOCK200OK.data.items
-          .sort((a, b) =>
-            a.model_unidad_obra_cod.descripcion >
-            b.model_unidad_obra_cod.descripcion
-              ? 1
-              : b.model_unidad_obra_cod.descripcion >
-                a.model_unidad_obra_cod.descripcion
-              ? -1
-              : 0
-          )
-          .map(
-            value =>
-              `${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}`
-          );
-        cy.get('#select-unidad-obra').click();
-        cy.get(
-          '#select-unidad-obra' +
-            '>div>.p-dropdown-panel>div>ul>p-dropdownitem>li.p-ripple'
-        ).each(($el, index, $list) => {
-          expect($el.text()).eq(datos[index]);
-        });
-        cy.get('#select-unidad-obra').click();
-      });
-    });
+    cy.get('#select-unidad-obra').click();
   });
 
   describe('Testing comportamiento Selectores al comenzar a realizar cambios de selecciones', () => {
@@ -655,4 +619,6 @@ describe('04_CUB_01_FORMULARIO_SPEC', () => {
       cy.get('.snackbar-container').should('exist');
     });
   });
+
+  describe.skip('Test responsive', () => {});
 });

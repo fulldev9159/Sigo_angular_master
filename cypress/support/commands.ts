@@ -148,8 +148,14 @@ Cypress.Commands.add('_check_input', (selector, validator) => {
 
 Cypress.Commands.add('_check_dropdown_required', selector => {
   cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
+  cy.get(selector + '>div>div>.p-dropdown-items-wrapper', {
+    timeout: 5000,
+  }).should('not.exist');
   cy.get(selector).click();
   cy.get(selector).click();
+  cy.get(selector + '>div>div>.p-dropdown-items-wrapper', {
+    timeout: 5000,
+  }).should('not.exist');
   cy.get(selector + '+zwc-input-alert>small').contains(
     'Este campo es requerido'
   );
@@ -179,9 +185,14 @@ Cypress.Commands.add('_check_dropdown_data', (selector, data, order) => {
     expect($el.text()).eq(datos[index]);
   });
   cy.get(selector).click();
+  cy.get(selector + '>div>div>.p-dropdown-items-wrapper', {
+    timeout: 5000,
+  }).should('not.exist');
 });
 
 Cypress.Commands.add('_select_dropdown', (selector, item) => {
+  cy.get('.pi-spinner', { timeout: 5000 }).should('not.exist');
+
   cy.get(selector + '>div>div>.p-dropdown-items-wrapper', {
     timeout: 5000,
   }).should('not.exist');
