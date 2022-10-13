@@ -13,8 +13,14 @@
         <ul>
             <li routerLinkActive="active" id="detalleot-informacion">
                 <a [routerLink]="['/ot-detalle/informacion',otDetalle.ot.id]">
-                    <i class=" pi pi-id-card"></i>
+                    <fa-icon [icon]="infoIcon"></fa-icon>
                     <span>Información</span>
+                </a>
+            </li>
+            <li routerLinkActive="active" id="detalleot-costeos">
+                <a [routerLink]="['/ot-detalle/costeos',otDetalle.ot.id]">
+                    <fa-icon [icon]="costeosIcon"></fa-icon>
+                    <span>Costeos</span>
                 </a>
             </li>
             <!-- <li routerLinkActive="active" id="menu-usuario">

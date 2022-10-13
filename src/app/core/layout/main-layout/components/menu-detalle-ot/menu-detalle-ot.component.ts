@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  faCalculator,
+  faFileContract,
+  faInfo,
+} from '@fortawesome/free-solid-svg-icons';
 import { DetalleOT } from '@model';
 import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
 import { Observable } from 'rxjs';
@@ -12,6 +17,11 @@ export class MenuDetalleOtComponent {
   // 67 TODO: PROGRAMAR QUE OCURRE SI FALLA EL GET DETALLE OT
   // TODO: PROGRAMAR QUE SE VISUALICE EN EL MENÚ LA OPCION ESCOGIDA
   otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
+
+  // ICONS
+  infoIcon = faInfo;
+  costeosIcon = faCalculator;
+  actaInfo = faFileContract;
 
   constructor(private otDetalleFacade: OTDetalleFacade) {}
 }

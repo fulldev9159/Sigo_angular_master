@@ -6,9 +6,10 @@ import { SharedModule } from '@sharedOT/shared.module';
 import { LibroObrasComponent } from './components/libro-obras/libro-obras.component';
 import { InformacionComponent } from './components/informacion/informacion.component';
 import { AnexosComponent } from './components/anexos/anexos.component';
+import { CosteoComponent } from './components/costeo/costeo.component';
 
 @NgModule({
-  declarations: [OtDetalleComponent, LibroObrasComponent, InformacionComponent, AnexosComponent],
+  declarations: [OtDetalleComponent, LibroObrasComponent, InformacionComponent, AnexosComponent, CosteoComponent],
   imports: [CommonModule, OtDetalleRoutingModule, SharedModule],
 })
 export class OtDetalleModule {}
