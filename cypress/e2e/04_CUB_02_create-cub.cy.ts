@@ -70,6 +70,7 @@ describe('Create Cubicacion BUCLE', () => {
     });
 
     cy.get('button[id="crear-cubicacion"]').click();
+    cy.get('.snackbar-container').should('exist');
   });
 });
 
@@ -132,6 +133,7 @@ describe('Create Cubicacion FIJA', () => {
     });
 
     cy.get('button[id="crear-cubicacion"]').click();
+    cy.get('.snackbar-container').should('exist');
   });
 });
 
@@ -194,6 +196,7 @@ describe('Create Cubicacion ORDINARIO', () => {
     });
 
     cy.get('button[id="crear-cubicacion"]').click();
+    cy.get('.snackbar-container').should('exist');
   });
 });
 
@@ -256,5 +259,6 @@ describe('Create Cubicacion MOVIL', () => {
     });
 
     cy.get('button[id="crear-cubicacion"]').click();
+    cy.get('.snackbar-container').should('exist');
   });
 });

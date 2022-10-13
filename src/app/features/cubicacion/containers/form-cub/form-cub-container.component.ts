@@ -319,39 +319,49 @@ export class FormCubContainerComponent
       combineLatest([this.proveedorSelected$, this.carrito$])
         .pipe(take(1))
         .subscribe(([proveedorSelected, carrito]) => {
+          const {
+            nombre,
+            tipocubicacion,
+            direcciondesde,
+            direcciondesdealtura,
+            direccionhasta,
+            direccionhastaaltura,
+            descripcion,
+            contrato,
+            agencia_id,
+            cmarcoproveedor_id,
+          } = this.formulario.formCub.value;
+
+          // TODO: UNIFICAR TIPO FORMULARIO
+          const formTableArray = this.tableServicios?.formTable
+            ? (this.tableServicios.formTable.get('table').value as Array<{
+                servicio_id: number;
+                servicio_cantidad: number;
+                unidad_obras: Array<{
+                  uo_cantidad: number;
+                  uo_codigo: string;
+                }>;
+              }>)
+            : [];
+
           const request: RequestCreateCubicacion = {
             cubicacion_datos: {
-              nombre: this.formulario.formCub.get('nombre').value, // FORMULARIO
-              tipo_cubicacion_id:
-                +this.formulario.formCub.get('tipocubicacion').value, // FORMULARIO
-              contrato_id: +this.formulario.formCub.get('contrato').value, // FORMULARIO
-              agencia_id: +this.formulario.formCub.get('agencia_id').value, // FORMULARIO
+              nombre, // FORMULARIO
+              tipo_cubicacion_id: tipocubicacion, // FORMULARIO
+              contrato_id: +contrato, // FORMULARIO
+              agencia_id: +agencia_id, // FORMULARIO
               proveedor_id: proveedorSelected.id, // NGRX proveedorselected
               codigo_acuerdo: proveedorSelected.codigo_acuerdo, // NGRX proveedorselected
-              cmarco_has_proveedor_id:
-                +this.formulario.formCub.get('cmarcoproveedor_id').value, // FORMULARIO
+              cmarco_has_proveedor_id: +cmarcoproveedor_id, // FORMULARIO
               usuario_creador_id: +this.sessionData.usuario_id, // LOCALSTORE
-              direccion_desde:
-                this.formulario.formCub.get('direcciondesde').value, // FORMULARIO
-              altura_desde: this.formulario.formCub.get('direcciondesdealtura')
-                .value, // FORMULARIO
-              direccion_hasta:
-                this.formulario.formCub.get('direccionhasta').value, // FORMULARIO
-              altura_hasta: this.formulario.formCub.get('direccionhastaaltura')
-                .value, // FORMULARIO
-              descripcion: this.formulario.formCub.get('descripcion').value, // FORMULARIO
+              direccion_desde: direcciondesde, // FORMULARIO
+              altura_desde: direcciondesdealtura, // FORMULARIO
+              direccion_hasta: direccionhasta, // FORMULARIO
+              altura_hasta: direccionhastaaltura, // FORMULARIO
+              descripcion: descripcion, // FORMULARIO
             },
             cubicacion_detalle: {
-              nuevo: (
-                this.tableServicios.formTable.get('table').value as Array<{
-                  servicio_id: number;
-                  servicio_cantidad: number;
-                  unidad_obras: Array<{
-                    uo_cantidad: number;
-                    uo_codigo: string;
-                  }>;
-                }>
-              ).map(servicio => ({
+              nuevo: formTableArray.map(servicio => ({
                 servicio_id: servicio.servicio_id,
                 actividad_id: carrito.find(
                   value =>
