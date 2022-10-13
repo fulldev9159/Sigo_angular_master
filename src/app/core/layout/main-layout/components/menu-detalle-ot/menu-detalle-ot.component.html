@@ -1,33 +1,35 @@
-<div class="detalle-ot-container">
-    <ng-container *ngIf="otDetalle$|async as otDetalle">
+<ng-container *ngIf="otDetalle$|async as otDetalle">
+
+    <div class="detalle-ot-container">
         <span>@OT-ID: <p>{{otDetalle.ot.id}}</p></span>
         <span>Nombre:
             <p>{{otDetalle.ot.nombre}}</p>
         </span>
-    </ng-container>
 
 
-</div>
+    </div>
 
-<div class="sidebar-menu">
-    <ul>
-        <li routerLinkActive="active" id="menu-perfil">
-            <a [routerLink]="['/app/profile']">
-                <i class="pi pi-id-card"></i>
-                <span>Información</span>
-            </a>
-        </li>
-        <li routerLinkActive="active" id="menu-usuario">
+    <div class="sidebar-menu">
+        <ul>
+            <li routerLinkActive="active" id="detalleot-informacion">
+                <a [routerLink]="['/ot-detalle/informacion',otDetalle.ot.id]">
+                    <i class=" pi pi-id-card"></i>
+                    <span>Información</span>
+                </a>
+            </li>
+            <!-- <li routerLinkActive="active" id="menu-usuario">
             <a [routerLink]="['/app/user']">
                 <i class="pi pi-users"></i>
                 <span>Informe Avance</span>
             </a>
-        </li>
-        <li routerLinkActive="active" id="menu-area">
-            <a [routerLink]="['/app/area']">
-                <i class="pi pi-globe"></i>
-                <span>Acta</span>
-            </a>
-        </li>
-    </ul>
-</div>
+        </li> -->
+            <li routerLinkActive="active" id="menu-area">
+                <a [routerLink]="['/app/area']">
+                    <i class="pi pi-globe"></i>
+                    <span>Acta</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</ng-container>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DetalleOTResolver } from 'src/app/core/resolvers/detalleOT.resolver';
 import { AnexosComponent } from './components/anexos/anexos.component';
 import { InformacionComponent } from './components/informacion/informacion.component';
 import { LibroObrasComponent } from './components/libro-obras/libro-obras.component';
@@ -14,6 +15,9 @@ const routes: Routes = [
       {
         path: 'informacion/:id',
         component: InformacionComponent,
+        resolve: {
+          detalleOT: DetalleOTResolver,
+        },
       },
       {
         path: 'libro-obras/:id',

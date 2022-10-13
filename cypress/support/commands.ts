@@ -117,6 +117,16 @@ declare namespace Cypress {
       second_selector: string,
       second_seleccion: string
     ): void;
+    _check_info_base_ot(
+      tipo_contrato: string,
+      nombre_contrato: string,
+      cub_id: number,
+      cub_nom: string,
+      etapa: string,
+      estado: string,
+      propietario: string,
+      responsable: string
+    ): void;
   }
 }
 Cypress.Commands.add('_login', (username, password) => {
@@ -528,5 +538,44 @@ Cypress.Commands.add(
       cy._select_dropdown(second_selector, second_seleccion);
       cy.get(second_selector).click();
     });
+  }
+);
+
+Cypress.Commands.add(
+  '_check_info_base_ot',
+  (
+    tipo_contrato,
+    nombre_contrato,
+    cub_id,
+    cub_nom,
+    etapa,
+    estado,
+    propietario,
+    responsable
+  ) => {
+    cy.get(
+      '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(1) > :nth-child(2)'
+    ).contains(tipo_contrato);
+    cy.get(
+      '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(2) > :nth-child(2)'
+    ).contains(nombre_contrato);
+    cy.get(
+      '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(3) > :nth-child(2)'
+    ).contains(cub_id);
+    cy.get(
+      '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(4) > :nth-child(2)'
+    ).contains(cub_nom);
+    cy.get(
+      '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(7) > :nth-child(2)'
+    ).contains(etapa);
+    cy.get(
+      '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(8) > :nth-child(2)'
+    ).contains(estado);
+    cy.get(
+      '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(9) > :nth-child(2)'
+    ).contains(propietario);
+    cy.get(
+      '.info-base > :nth-child(1) > :nth-child(2) > :nth-child(10) > :nth-child(2)'
+    ).contains(responsable);
   }
 );

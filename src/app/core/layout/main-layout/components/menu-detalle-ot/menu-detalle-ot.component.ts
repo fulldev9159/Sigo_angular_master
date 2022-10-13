@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class MenuDetalleOtComponent {
   // 67 TODO: PROGRAMAR QUE OCURRE SI FALLA EL GET DETALLE OT
+  // TODO: PROGRAMAR QUE SE VISUALICE EN EL MENÚ LA OPCION ESCOGIDA
   otDetalle$: Observable<DetalleOT> = this.otDetalleFacade.getDetalleOT$();
 
   constructor(private otDetalleFacade: OTDetalleFacade) {}
