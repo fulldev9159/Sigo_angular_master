@@ -64,3 +64,19 @@
         font-size: 0.8rem;
     }
 }
+
+:host ::ng-deep {
+    .p-chip {
+        img {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-left: -10px;
+        }
+    }
+
+    .p-chip-text {
+        font-size: var(--size-text-sigo);
+        margin: 0;
+        padding: 1px;
+    }
+}

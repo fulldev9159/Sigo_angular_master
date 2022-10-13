@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { OT } from '@model';
@@ -9,10 +15,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './list-ot-table.component.html',
   styleUrls: ['./list-ot-table.component.scss'],
 })
-export class ListOtTableComponent implements OnInit, OnDestroy {
+export class ListOtTableComponent implements OnDestroy {
   subscription: Subscription = new Subscription();
 
   @Input() data: OT[];
+  @Input() table_id: string;
 
   filterIcon = faFilter;
 
@@ -28,10 +35,6 @@ export class ListOtTableComponent implements OnInit, OnDestroy {
   formFilter: FormGroup = new FormGroup(this.formFilterControl);
 
   constructor() {}
-
-  ngOnInit(): void {
-    console.log();
-  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

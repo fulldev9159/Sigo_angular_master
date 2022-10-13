@@ -5,19 +5,30 @@
         <div class="card" style="margin-top: 10px;padding: 0;">
             <p-tabView>
                 <p-tabPanel header="Ejecución" leftIcon="pi pi-play">
-                    <zwc-list-ot-table [data]="bandejaOTEjecucion$|async"></zwc-list-ot-table>
+                    <ng-template pTemplate="header">
+                        <fa-icon [icon]="playIcon"></fa-icon>
+                        Ejecución
+                        <p-tag [value]="(bandejaOTEjecucion$|async).length"></p-tag>
+                    </ng-template>
+                    <zwc-list-ot-table [data]="bandejaOTEjecucion$|async" table_id="table-ejecucion">
+                    </zwc-list-ot-table>
                 </p-tabPanel>
                 <p-tabPanel header="Abiertas">
-                    <zwc-list-ot-table [data]="bandejaOTAbiertas$|async"></zwc-list-ot-table>
+                    <ng-template pTemplate="header">
+                        Abiertas
+                        <p-tag [value]="(bandejaOTAbiertas$|async).length"></p-tag>
+                    </ng-template>
+                    <zwc-list-ot-table [data]="bandejaOTAbiertas$|async" table_id="table-abiertas"></zwc-list-ot-table>
                 </p-tabPanel>
                 <p-tabPanel header="Cerradas">
-                    <zwc-list-ot-table [data]="bandejaOTCerradas$|async"></zwc-list-ot-table>
+                    <zwc-list-ot-table [data]="bandejaOTCerradas$|async" table_id="table-cerradas"></zwc-list-ot-table>
                 </p-tabPanel>
                 <p-tabPanel header="Anuladas">
-                    <zwc-list-ot-table [data]="bandejaOTAnuladas$|async"></zwc-list-ot-table>
+                    <zwc-list-ot-table [data]="bandejaOTAnuladas$|async" table_id="table-anuladas"></zwc-list-ot-table>
                 </p-tabPanel>
                 <p-tabPanel header="Quebradas">
-                    <zwc-list-ot-table [data]="bandejaOTQuebradas$|async"></zwc-list-ot-table>
+                    <zwc-list-ot-table [data]="bandejaOTQuebradas$|async" table_id="table-quebradas">
+                    </zwc-list-ot-table>
                 </p-tabPanel>
             </p-tabView>
         </div>

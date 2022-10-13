@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { OT } from '@model';
 import { OTFacade } from '@storeOT/ot/ot.facades';
 import { MenuItem } from 'primeng/api';
@@ -20,6 +21,9 @@ export class ListOtContainerComponent implements OnInit, OnDestroy {
   bandejaOTAnuladas$: Observable<OT[]> = this.otFacade.getBandejaOTAnuladas$();
   bandejaOTQuebradas$: Observable<OT[]> =
     this.otFacade.getBandejaOTQuebradas$();
+
+  // ICONS
+  playIcon = faPlay;
 
   navbarHeader: MenuItem[];
   constructor(private otFacade: OTFacade) {}

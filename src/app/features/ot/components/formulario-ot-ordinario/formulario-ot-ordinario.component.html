@@ -13,8 +13,8 @@
             <div class="field col-12 ">
                 <label class="mr-1" for="">Fecha adjudicación</label>
                 <p-calendar [style]="{'width':'100%'}" inputStyleClass="form-control d-block"
-                    formControlName="fecha_adjudicacion" id="fecha-adjudicacion" name="fecha-adjudicacion"
-                    dateFormat="dd/mm/yy"></p-calendar>
+                    [inputStyle]="{'width':'100%','height':'2.5rem'}" formControlName="fecha_adjudicacion"
+                    id="fecha-adjudicacion" name="fecha-adjudicacion" dateFormat="dd/mm/yy"></p-calendar>
             </div>
             <div class="field col-12 ">
                 <zwc-input-text Label="*Número pedido" [control]="form.get('numero_pedido')"

@@ -5,9 +5,16 @@
 
     .p-tabview-nav-link {
         border: 0 !important;
+        font-size: var(--size-text-sigo);
+        color: #898989
     }
 
     .p-tabview-panels {
         padding: 0.4rem !important;
+    }
+
+    .p-tag {
+        font-size: 0.6rem;
+        margin-left: 4px;
     }
 }

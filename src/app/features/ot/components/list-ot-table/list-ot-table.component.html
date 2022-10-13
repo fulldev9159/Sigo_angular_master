@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="formFilter" [id]="table_id">
     <p-table #dt [value]="data" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"
         [paginator]="true" [rows]="10" [globalFilterFields]="['nombre']">
         <ng-template pTemplate="header">
@@ -60,7 +60,15 @@
             <tr>
                 <td style="width:80px" pFrozenColumn>{{item.id}}</td>
                 <td style="width:200px">{{item.nombre}}</td>
-                <td style="width:140px">{{item.etapa_otdesc}}</td>
+                <td style="width:140px">
+                    <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_INICIAL'">
+                        <p-chip [label]="item.etapa_otdesc" image="assets/images/logo.png"></p-chip>
+                    </ng-container>
+                    <ng-container *ngIf="item.etapa_slug==='OT_ET_AUTORIZACION_PROVEEDOR'">
+                        <p-chip [label]="item.etapa_otdesc" icon="pi pi-building"></p-chip>
+                    </ng-container>
+                    <!-- {{item.etapa_otdesc}} -->
+                </td>
                 <td style="width:100px">{{item.fecha_inicio| date: 'dd/MM/yyyy'}}</td>
                 <td style="width:100px">{{item.fecha_termino| date: 'dd/MM/yyyy'}}</td>
                 <td style="width:120px">{{item.contrato_marco_nombre}}</td>

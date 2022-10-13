@@ -17,6 +17,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TabViewModule } from 'primeng/tabview';
 import { TagModule } from 'primeng/tag';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     TabViewModule,
     TagModule,
     InputSwitchModule,
+    ChipModule,
   ],
   exports: [
     InputTextModule,
@@ -58,6 +60,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     TabViewModule,
     TagModule,
     InputSwitchModule,
+    ChipModule,
   ],
 })
 export class PrimeNgModule {}
