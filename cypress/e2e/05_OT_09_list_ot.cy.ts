@@ -28,7 +28,7 @@ describe('listar las ot', () => {
       .contains('td', 'OT Test FIJA Cypress')
       .should('have.length', 1);
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
-      .contains('td', 'OT Test ORDINARIA Cypress')
+      .contains('td', 'OT Test ORDINARIO Cypress')
       .should('have.length', 1);
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('td', 'OT Test MOVIL Cypress')
