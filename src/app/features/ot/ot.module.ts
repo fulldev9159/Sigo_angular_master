@@ -17,6 +17,7 @@ import { FormularioOtExtrasComponent } from './components/formulario-ot-extras/f
 import { ListOtFiltrosComponent } from './components/list-ot-filtros/list-ot-filtros.component';
 import { ListOtTableComponent } from './components/list-ot-table/list-ot-table.component';
 import { ListOtTableOperacionesComponent } from './components/list-ot-table-operaciones/list-ot-table-operaciones.component';
+import { RegistrarLibroObrasComponent } from './components/registrar-libro-obras/registrar-libro-obras.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ListOtTableOperacionesComponent } from './components/list-ot-table-oper
     ListOtFiltrosComponent,
     ListOtTableComponent,
     ListOtTableOperacionesComponent,
+    RegistrarLibroObrasComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,18 @@
+:host ::ng-deep {
+    span.p-ripple {
+        font-size: 0.7rem;
+    }
+}
+
+:host ::ng-deep {
+
+    .p-fileupload-filename,
+    .p-button-icon,
+    .p-fileupload-filename+div {
+        font-size: 0.7rem;
+    }
+
+    .p-fileupload-row>div>img {
+        width: 10vw;
+    }
+}

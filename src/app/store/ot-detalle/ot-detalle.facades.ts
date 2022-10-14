@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Accion, DetalleOT, Response } from '@model';
+import {
+  Accion,
+  CategoriaArchivo,
+  DetalleOT,
+  RequestCreateRegistroLibroObra,
+  Response,
+} from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as otDetalleSelectors from './ot-detalle.selectors';
@@ -43,5 +49,48 @@ export class OTDetalleFacade {
 
   public accionesOT$(): Observable<Accion[]> {
     return this.store.select(otDetalleSelectors.accionesOT);
+  }
+
+  // GET CATEGORIA DE ARCHIVOS
+  public getCategoriasArchivos(ot_id: number): void {
+    this.store.dispatch(otDetalleActions.getCategoriasArchivos());
+  }
+
+  public getCategoriasArchivosSuccess(
+    categoriaArchivo: CategoriaArchivo[]
+  ): void {
+    this.store.dispatch(
+      otDetalleActions.getCategoriasArchivosSuccess({ categoriaArchivo })
+    );
+  }
+
+  public getCategoriasArchivosError(error: any): void {
+    this.store.dispatch(otDetalleActions.getCategoriasArchivosError({ error }));
+  }
+
+  public getCategoriasArchivos$(): Observable<CategoriaArchivo[]> {
+    return this.store.select(otDetalleSelectors.categoriaArchivo);
+  }
+
+  // SUBIR ARCHIVO/REGISTRO LIBRO OBRAS
+  public subirArchivoLibroObrasYregistrarLibroObras(
+    tipo: number,
+    files: any,
+    request_libroobras: RequestCreateRegistroLibroObra
+  ): void {
+    this.store.dispatch(
+      otDetalleActions.subirArchivoLibroObrasYregistrarLibroObras({
+        categoria_id: tipo,
+        files,
+        request_libroobras,
+      })
+    );
+  }
+
+  // CREATE REGISTRO LIBRO OBRAS
+  public createRegistroLibroObras(
+    request: RequestCreateRegistroLibroObra
+  ): void {
+    this.store.dispatch(otDetalleActions.createRegistroLibroObras({ request }));
   }
 }

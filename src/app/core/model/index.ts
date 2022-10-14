@@ -24,6 +24,8 @@ export * from './tipo-trabajo';
 export * from './informe-avance';
 export * from './servicios_adicionales';
 export * from './acta';
+export * from './archivo';
+// export * from './libro-obras';
 export interface Response<T> {
   data: T;
   status: StatusResponse;

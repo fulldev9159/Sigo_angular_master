@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   faBook,
@@ -13,10 +13,13 @@ import {
   Dropdown,
   RequestAceptarRechazarOT,
   RequestAprobarRechazarOperaciones,
+  RequestCreateRegistroLibroObra,
 } from '@model';
 import { FlujoOTFacade } from '@storeOT/flujo-ot/flujo-ot.facades';
 import { LoadingsFacade } from '@storeOT/loadings/loadings.facade';
+import { OTDetalleFacade } from '@storeOT/ot-detalle/ot-detalle.facades';
 import { map, Observable, Subscription } from 'rxjs';
+import { RegistrarLibroObrasComponent } from '../registrar-libro-obras/registrar-libro-obras.component';
 
 @Component({
   selector: 'zwc-list-ot-table-operaciones',
@@ -33,8 +36,14 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   // 87 TODO: CORREGIR COMO SE VE EL TOOLTIP DEL AGREGAR REGISTRO LIBRO DE OBRAS
   // 88 TODO: MIGRAR CASO EN QUE FALLE EL ACEPTAR OT PROVEEDOR Y SE DEBA EMPEZAR EN LA ETAPA DE ASIGNACION
   // TODO: PROGRAMAR EL RECHAZO DEL ACTA POR PARTE DE OPERACIONES
+  // TODO: MIGRAR LOS TOUCH Y INVALID FORM DEL  REGISTRO DE LIBRO DE OBRAS
+  // TODO: AGREGAR EL SPINNER AL BOTON DE REGISTRO LIBRO DE OBRAS
+  // TODO: MEJORAR EL UX CUANDO SE CIERRA EL MODAL DEL REGISTRO DE OBRAS DEBE ESPERAR A QUE TERMINE EL ENDPOINT
   @Input() acciones: Accion[];
   @Input() ot_id: number;
+
+  @ViewChild(RegistrarLibroObrasComponent)
+  registrarLibroObraForm: RegistrarLibroObrasComponent;
 
   infoIcon = faCircleInfo;
   medicalIcon = faBookMedical;
@@ -80,6 +89,7 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
 
   constructor(
     private flujoOTFacade: FlujoOTFacade,
+    private otDetalleFacade: OTDetalleFacade,
     private loadingsFacade: LoadingsFacade
   ) {}
 
@@ -148,6 +158,27 @@ export class ListOtTableOperacionesComponent implements OnDestroy {
   }
 
   rechazarActaOperaciones(): void {}
+
+  // ACCIONES REGISTRAR LIBRO DE OBAS
+  registrarLibroObras(): void {
+    if (this.registrarLibroObraForm.valid) {
+      const request_registrar_libroObras: RequestCreateRegistroLibroObra = {
+        ot_id: this.ot_id,
+        observaciones:
+          this.registrarLibroObraForm.form.get('observaciones').value,
+      };
+
+      this.registrarLibroObraForm.filesform.clear();
+
+      this.otDetalleFacade.subirArchivoLibroObrasYregistrarLibroObras(
+        +this.registrarLibroObraForm.form.get('categoria').value,
+        this.registrarLibroObraForm.uploadedFiles['files'],
+        request_registrar_libroObras
+      );
+
+      this.displayModalAgregarRegistroLibroDeObras = false;
+    }
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

@@ -14,3 +14,8 @@ export const accionesOT = createSelector(
   selectOTDetalle,
   (state: reducer.StateOTDetalle) => state.acciones
 );
+
+export const categoriaArchivo = createSelector(
+  selectOTDetalle,
+  (state: reducer.StateOTDetalle) => state.categoriaArchivo
+);

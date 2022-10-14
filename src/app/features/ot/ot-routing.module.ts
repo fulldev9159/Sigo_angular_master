@@ -4,6 +4,7 @@ import { ContratosUsuarioResolver } from 'src/app/core/resolvers/contratos-usuar
 import { FormOtContainerComponent } from './containers/form-ot-container/form-ot-container.component';
 import { ListOtContainerComponent } from './containers/list-ot-container/list-ot-container.component';
 import { OtComponent } from './ot.component';
+import { CategoriaArchivosResolver } from './resolvers/categoriaArchivos.resolver';
 
 const routes: Routes = [
   {
@@ -14,6 +15,9 @@ const routes: Routes = [
       {
         path: 'list-ot',
         component: ListOtContainerComponent,
+        resolve: {
+          categoriaArchivos: CategoriaArchivosResolver,
+        },
       },
       {
         path: 'form-ot',

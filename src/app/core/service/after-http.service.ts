@@ -10,6 +10,7 @@ import * as flujoOTActions from '@storeOT/flujo-ot/flujo-ot.actions';
 import * as serviciosActions from '@storeOT/servicios/servicios.actions';
 import * as informeAvanceActions from '@storeOT/informe-avance/informe-avance.actions';
 import * as actaActions from '@storeOT/acta/acta.actions';
+import * as otDetalleActions from '@storeOT/ot-detalle/ot-detalle.actions';
 import { AuthFacade } from '@storeOT/auth/auth.facades';
 import { CubicacionFacade } from '@storeOT/cubicacion/cubicacion.facades';
 import { OTFacade } from '@storeOT/ot/ot.facades';
@@ -229,6 +230,15 @@ export class AfterHttpService {
         6000
       );
       this.router.navigate(['/ot/list-ot']);
+    }
+
+    // AGREGAR REGISTRO LIBRO OBRAS
+    if (action.type === otDetalleActions.createRegistroLibroObrasSuccess.type) {
+      this.snackMessage.showMessage(
+        `Registro subido exitosamente`,
+        'Exito',
+        6000
+      );
     }
   }
 }

@@ -77,6 +77,14 @@
 
 <p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"
     [draggable]="false" [modal]="true">
+
+    <zwc-registrar-libro-obras #registrarLibroObraForm></zwc-registrar-libro-obras>
+    <ng-template pTemplate="footer">
+        <zwc-pbutton-sending Pid="subir-registro" content="Subir registro"
+            Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!registrarLibroObraForm.valid"
+            [sending]="sendingCreateOT$|async" (call)="registrarLibroObras()"></zwc-pbutton-sending>
+    </ng-template>
+
 </p-dialog>
 
 
