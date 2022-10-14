@@ -3,6 +3,7 @@ import {
   faBook,
   faCalculator,
   faFileContract,
+  faFolderOpen,
   faInfo,
 } from '@fortawesome/free-solid-svg-icons';
 import { DetalleOT } from '@model';
@@ -24,6 +25,7 @@ export class MenuDetalleOtComponent {
   costeosIcon = faCalculator;
   actaInfo = faFileContract;
   libroObrasIcon = faBook;
+  anexosIcon = faFolderOpen;
 
   constructor(private otDetalleFacade: OTDetalleFacade) {}
 }

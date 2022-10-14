@@ -29,6 +29,12 @@
                     <span>Libro Obras</span>
                 </a>
             </li>
+            <li routerLinkActive="active" id="detalleot-anexos">
+                <a [routerLink]="['/ot-detalle/anexos',otDetalle.ot.id]">
+                    <fa-icon [icon]="anexosIcon"></fa-icon>
+                    <span>Documentos</span>
+                </a>
+            </li>
             <!-- <li routerLinkActive="active" id="menu-usuario">
             <a [routerLink]="['/app/user']">
                 <i class="pi pi-users"></i>

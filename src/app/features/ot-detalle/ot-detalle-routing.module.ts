@@ -39,6 +39,10 @@ const routes: Routes = [
       {
         path: 'anexos/:id',
         component: AnexosComponent,
+        resolve: {
+          registroLibroObras: RegistroLibroLobrasResolver,
+          detalleOT: DetalleOTResolver,
+        },
       },
     ],
   },
