@@ -31,7 +31,10 @@ export class RegistrarLibroObrasComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(({ categoriaArchivos }) => {
-        let tmp = [...(categoriaArchivos.data.items as CategoriaArchivo[])];
+        let data = categoriaArchivos
+          ? (categoriaArchivos?.data.items as CategoriaArchivo[])
+          : [];
+        let tmp = [...data];
         this.categoriaArchivos = tmp
           .sort((a, b) => (a.nombre > b.nombre ? 1 : -1))
           .map(value => ({

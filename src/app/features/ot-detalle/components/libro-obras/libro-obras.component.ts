@@ -33,7 +33,7 @@ export class LibroObrasComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription.add(
       this.route.data.subscribe(({ registroLibroObras }) => {
-        this.registrosLibroDeObras = registroLibroObras.data;
+        this.registrosLibroDeObras = registroLibroObras?.data;
       })
     );
   }
