@@ -165,27 +165,23 @@ export class AfterHttpService {
     }
 
     // ACEPTAR OT INICIAL
-    // 70 TODO: AGREGAR UN MENSAJE
-    // 71 TODO: USAR BIEN LOS FILTROS
-    if (
-      action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type ||
-      action.type === flujoOTActions.asignarSupervisorTrabajoSuccess.type ||
-      action.type === flujoOTActions.solicitarPagoSuccess.type ||
-      action.type === flujoOTActions.aprobarRechazarOperacionesSuccess.type
-    ) {
-      let filtros = {
-        filtro_propietario: 'TODAS',
-        filtro_tipo: 0,
-      };
-      this.otFacade.getBandejaOT({
-        filtro_pestania: 'EN_EJECUCION',
-        ...filtros,
-      });
-      this.otFacade.getBandejaOT({
-        filtro_pestania: 'ABIERTAS',
-        ...filtros,
-      });
+    if (action.type === flujoOTActions.aceptarRechazarIncialOTSuccess.type) {
+      this.snackMessage.showMessage(`Aprobación exitosa`, 'Exito', 6000);
+      this.reloadTableOT();
     }
+
+    // ACEPTAR OT PROVEEDOR Y ASIGNAR SUPERVISOR
+    if (action.type === flujoOTActions.asignarSupervisorTrabajoSuccess.type) {
+      this.snackMessage.showMessage(`Asignación exitosa`, 'Exito', 6000);
+      this.reloadTableOT();
+    }
+
+    // 70 TODO: AGREGAR UN MENSAJE
+    // if (
+    //   action.type === flujoOTActions.solicitarPagoSuccess.type ||
+    //   action.type === flujoOTActions.aprobarRechazarOperacionesSuccess.type
+    // ) {
+    // }
 
     // ENVÍO DE INFORME DE AVANCE
     if (
@@ -232,6 +228,16 @@ export class AfterHttpService {
       this.router.navigate(['/ot/list-ot']);
     }
 
+    // SOLICITAR PAGO
+    if (action.type === flujoOTActions.solicitarPagoSuccess.type) {
+      this.snackMessage.showMessage(
+        `Envío de solicitud exitosa`,
+        'Exito',
+        6000
+      );
+      this.reloadTableOT();
+    }
+
     // AGREGAR REGISTRO LIBRO OBRAS
     if (action.type === otDetalleActions.createRegistroLibroObrasSuccess.type) {
       this.snackMessage.showMessage(
@@ -240,5 +246,21 @@ export class AfterHttpService {
         6000
       );
     }
+  }
+
+  // 71 TODO: USAR BIEN LOS FILTROS
+  reloadTableOT(): void {
+    let filtros = {
+      filtro_propietario: 'TODAS',
+      filtro_tipo: 0,
+    };
+    this.otFacade.getBandejaOT({
+      filtro_pestania: 'EN_EJECUCION',
+      ...filtros,
+    });
+    this.otFacade.getBandejaOT({
+      filtro_pestania: 'ABIERTAS',
+      ...filtros,
+    });
   }
 }

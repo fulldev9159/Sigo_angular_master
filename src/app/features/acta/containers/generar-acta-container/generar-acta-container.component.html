@@ -18,7 +18,7 @@
 
     <div class="card">
         <div class=" grid">
-            <div *ngIf="accionExist('OT_SOLIC_INF_TRABAJO_FIN')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+            <div *ngIf="accionExist('OT_SOLIC_INF_TRABAJO_FIN')" class="field col-12">
                 <zwc-pbutton-sending Pid="solicitar-informe-fin-trabajos-button"
                     content="Solicitar informe de fin de trabajos" Pclass="p-button-info p-button-sm mt-4 w-full"
                     (click)="solicitarInformeFinDeTrabajos()"></zwc-pbutton-sending>
@@ -46,6 +46,7 @@
                     Atrás
                 </button>
             </div>
+            <!-- TODO: AGREGAR EL LOADING -->
             <div *ngIf="accionExist('OT_GENERAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
                 <zwc-pbutton-sending Pid="generar-acta-button" content="Generar acta"
                     Pclass="p-button-info p-button-sm mt-4 w-full" (click)="generarActa()"></zwc-pbutton-sending>

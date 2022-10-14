@@ -105,12 +105,14 @@
 
 
 <!-- OT_ET_AUTORIZACION_PROVEEDOR -->
+<!-- TODO: QUE EL SELECCIONAR SUPERVISOR SEA OBLIGATORIO SOLO EN EL CASO DE ACEPTAR LA ORDEN -->
 <p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false"
     [modal]="true" [style]="{heigth: '50vh'}">
     <p> Order de trabajo ID: {{ot_id}}</p>
-    <p>Si acepta esta orden de trabajo, escoja el supervisor de trabajos que la realizará</p>
+    <p>Escoja el supervisor de trabajos que la realizará el trabajo en caso de aceptar realizar la orden</p>
+    <br>
     <form novalidate autocomplete="off" [formGroup]="form">
-        <zwc-pdropdown [control]="form.get('trabajador_id')" Label="*Supervisor"
+        <zwc-pdropdown [control]="form.get('trabajador_id')" Label="* Supervisor"
             dropdown_id="select-supervisor-trabajos" [data]="posibleSupervisorDeTrabajo$|async"
             Pplaceholder="Selecione una persona" [loading]="loadingPosibleSupervisorDeTrabajos$|async"></zwc-pdropdown>
     </form>
@@ -119,11 +121,9 @@
     <div class="container-button-confirmar">
         <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
             (click)="rechazarOrdenProveedor()">
-            <fa-icon [icon]="cancelIcon" style="color: #ccc;"></fa-icon>
             Rechazar Orden
         </button>
         <button pButton type="button" id="button-confirmar" (click)="aceptarOrdenProveedor()">
-            <fa-icon [icon]="checkIcon"></fa-icon>
             Aceptar Orden
         </button>
     </div>
