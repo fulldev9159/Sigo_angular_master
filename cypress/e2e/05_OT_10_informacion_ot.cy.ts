@@ -22,7 +22,7 @@ describe('listar las ot', () => {
     cy._check_info_base_ot(
       'Bucle',
       'BUCLE',
-      10,
+      7,
       'Cubicacion Bucle Cypress Editada',
       'Autorizar inicialmente la OT',
       'Abierta',
@@ -93,7 +93,7 @@ describe('listar las ot', () => {
     cy._check_info_base_ot(
       'Fijo',
       'UNIFICADO_FIJA',
-      11,
+      9,
       'Cubicacion FIJA Cypress',
       'Autorizar OT por Proveedor',
       'Abierta',
@@ -175,7 +175,7 @@ describe('listar las ot', () => {
     cy._check_info_base_ot(
       'Móvil',
       'UNIFICADO_MOVIL',
-      12,
+      10,
       'Cubicacion MOVIL Cypress',
       'Autorizar OT por Proveedor',
       'Abierta',

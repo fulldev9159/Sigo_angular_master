@@ -36,7 +36,7 @@ describe('Listar Cubicaciones', () => {
     );
 
     cy.get('button[id="clonar-cubicacion"]').click();
-
+    cy.wait(2500);
     cy.wait('@HTTPRESPONSE-CUBICACION-SAVE').then(() => {
       cy.get(`input[name='filter-nombre-cubicacion']`).clear();
       cy._filter_table(
