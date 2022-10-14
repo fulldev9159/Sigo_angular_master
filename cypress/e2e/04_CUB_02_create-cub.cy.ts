@@ -77,9 +77,6 @@ describe('Create Cubicacion BUCLE', () => {
 describe('Create Cubicacion FIJA', () => {
   it('should let enter to create cubicacion', () => {
     cy.viewport(1500, 1700);
-    cy.visit('http://localhost:4206/login/auth');
-    cy._login('mgestor1', 'asdasd');
-    cy._select_profile('Gestor/JP');
     cy.get('button[id="navbar-create-cub"]').click();
   });
 
@@ -139,10 +136,6 @@ describe('Create Cubicacion FIJA', () => {
 
 describe('Create Cubicacion ORDINARIO', () => {
   it('should let enter to create cubicacion', () => {
-    cy.viewport(1500, 1700);
-    cy.visit('http://localhost:4206/login/auth');
-    cy._login('mgestor1', 'asdasd');
-    cy._select_profile('Gestor/JP');
     cy.get('button[id="navbar-create-cub"]').click();
   });
 
@@ -202,10 +195,6 @@ describe('Create Cubicacion ORDINARIO', () => {
 
 describe('Create Cubicacion MOVIL', () => {
   it('should let enter to create cubicacion', () => {
-    cy.viewport(1500, 1700);
-    cy.visit('http://localhost:4206/login/auth');
-    cy._login('mgestor1', 'asdasd');
-    cy._select_profile('Gestor/JP');
     cy.get('button[id="navbar-create-cub"]').click();
   });
 
