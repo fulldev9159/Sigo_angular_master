@@ -1,6 +1,6 @@
 import { crearCubicacion } from 'cypress/fixtures/testedCubicacionBUCLE';
 
-describe('Listar Cubicaciones', () => {
+describe('Clonar Cubicaciones', () => {
   it('should let enter to create cubicacion', () => {
     cy.visit('http://localhost:4206/login/auth');
     cy._login('mgestor1', 'asdasd');

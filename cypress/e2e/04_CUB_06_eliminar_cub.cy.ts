@@ -19,7 +19,7 @@ describe('Listar Cubicaciones', () => {
       '¿Está seguro que desea eliminar esta cubicación ID'
     );
     cy.get('button[id="button-confirmar"]').click();
-    cy.wait(1);
+    cy.wait(2500);
     cy.get(`input[name='filter-nombre-cubicacion']`).clear();
     cy._filter_table(
       'filter-nombre-cubicacion',

@@ -260,7 +260,7 @@ describe('Editar cubicacion', () => {
     // GUARDAR
     cy.get('button[id="editar-cubicacion"]').click();
 
-    cy.wait(700);
+    cy.wait(2500);
   });
 
   it('Comprobar cambios', () => {
