@@ -23,6 +23,12 @@
                     <span>Costeos</span>
                 </a>
             </li>
+            <li routerLinkActive="active" id="detalleot-libro-obras">
+                <a [routerLink]="['/ot-detalle/libro-obras',otDetalle.ot.id]">
+                    <fa-icon [icon]="libroObrasIcon"></fa-icon>
+                    <span>Libro Obras</span>
+                </a>
+            </li>
             <!-- <li routerLinkActive="active" id="menu-usuario">
             <a [routerLink]="['/app/user']">
                 <i class="pi pi-users"></i>

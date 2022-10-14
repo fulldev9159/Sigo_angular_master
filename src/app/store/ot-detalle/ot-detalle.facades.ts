@@ -3,6 +3,7 @@ import {
   Accion,
   CategoriaArchivo,
   DetalleOT,
+  RegistroLibroDeObras,
   RequestCreateRegistroLibroObra,
   Response,
 } from '@model';
@@ -52,7 +53,7 @@ export class OTDetalleFacade {
   }
 
   // GET CATEGORIA DE ARCHIVOS
-  public getCategoriasArchivos(ot_id: number): void {
+  public getCategoriasArchivos(): void {
     this.store.dispatch(otDetalleActions.getCategoriasArchivos());
   }
 
@@ -92,5 +93,26 @@ export class OTDetalleFacade {
     request: RequestCreateRegistroLibroObra
   ): void {
     this.store.dispatch(otDetalleActions.createRegistroLibroObras({ request }));
+  }
+
+  // GET REGISTROS LIBRO DE OBRAS
+  public getLibroObras(ot_id: number): void {
+    this.store.dispatch(otDetalleActions.getLibroObras({ ot_id }));
+  }
+
+  public getLibroObrassSuccess(
+    registrosLibroObras: RegistroLibroDeObras[]
+  ): void {
+    this.store.dispatch(
+      otDetalleActions.getLibroObrasSuccess({ registrosLibroObras })
+    );
+  }
+
+  public getLibroObrasError(error: any): void {
+    this.store.dispatch(otDetalleActions.getLibroObrasError({ error }));
+  }
+
+  public getLibroObras$(): Observable<RegistroLibroDeObras[]> {
+    return this.store.select(otDetalleSelectors.registrosLibroObras);
   }
 }

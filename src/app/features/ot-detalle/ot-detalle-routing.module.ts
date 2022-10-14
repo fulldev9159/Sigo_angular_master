@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DetalleOTResolver } from 'src/app/core/resolvers/detalleOT.resolver';
+import { RegistroLibroLobrasResolver } from 'src/app/core/resolvers/registrosLibroObras.resolver';
 import { AnexosComponent } from './components/anexos/anexos.component';
 import { CosteoComponent } from './components/costeo/costeo.component';
 import { InformacionComponent } from './components/informacion/informacion.component';
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'libro-obras/:id',
         component: LibroObrasComponent,
+        resolve: {
+          registroLibroObras: RegistroLibroLobrasResolver,
+          detalleOT: DetalleOTResolver,
+        },
       },
       {
         path: 'anexos/:id',

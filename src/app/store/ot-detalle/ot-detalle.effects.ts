@@ -107,6 +107,25 @@ export class OTDetalleEffects {
     )
   );
 
+  // GET LIBRO OBRAS
+  getLibroObras$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(otDetalleActions.getLibroObras),
+      concatMap(({ ot_id }) =>
+        this.libroObrasHttp.getLibroObras(ot_id).pipe(
+          map(response =>
+            otDetalleActions.getLibroObrasSuccess({
+              registrosLibroObras: response.data,
+            })
+          ),
+          catchError(error =>
+            of(otDetalleActions.getLibroObrasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -128,7 +147,8 @@ export class OTDetalleEffects {
           otDetalleActions.getAccionesOTTError,
           otDetalleActions.getCategoriasArchivosError,
           otDetalleActions.subirArchivoLibroObrasYregistrarLibroObrasError,
-          otDetalleActions.createRegistroLibroObrasError
+          otDetalleActions.createRegistroLibroObrasError,
+          otDetalleActions.getLibroObrasError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),

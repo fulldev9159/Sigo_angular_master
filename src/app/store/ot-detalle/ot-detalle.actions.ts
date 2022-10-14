@@ -6,6 +6,7 @@ import {
   Response,
 } from '@model';
 import { createAction, props } from '@ngrx/store';
+import { RegistroLibroDeObras } from 'src/app/core/model/libro-obras';
 
 // GET DETALLE OT
 export const getDetalleOT = createAction(
@@ -89,5 +90,21 @@ export const createRegistroLibroObrasSuccess = createAction(
 
 export const createRegistroLibroObrasError = createAction(
   '[OT-DETALLE] GET createRegistroLibroObras Error',
+  props<{ error: any }>()
+);
+
+//  GET LIBRO DE OBRAS
+export const getLibroObras = createAction(
+  '[OT-DETALLE] GET getLibroObras',
+  props<{ ot_id: number }>()
+);
+
+export const getLibroObrasSuccess = createAction(
+  '[OT-DETALLE] GET getLibroObras Success',
+  props<{ registrosLibroObras: RegistroLibroDeObras[] }>()
+);
+
+export const getLibroObrasError = createAction(
+  '[OT-DETALLE] GET getLibroObras Error',
   props<{ error: any }>()
 );

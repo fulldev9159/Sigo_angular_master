@@ -8,6 +8,7 @@ import {
   RespSubirArchivo,
 } from '@model';
 import { Observable } from 'rxjs';
+import { RegistroLibroDeObras } from '../model/libro-obras';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +57,14 @@ export class LibroObrasHttpService {
     return this.http.post<Response<any>>(
       `${this.API_URL}/ot/libro_obras/create`,
       request
+    );
+  }
+
+  // GET LIBRO DE OBRAS
+  getLibroObras(ot_id: number): Observable<Response<RegistroLibroDeObras[]>> {
+    return this.http.post<Response<RegistroLibroDeObras[]>>(
+      `${this.API_URL}/ot/libro_obras/get`,
+      { ot_id }
     );
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  faBook,
   faCalculator,
   faFileContract,
   faInfo,
@@ -22,6 +23,7 @@ export class MenuDetalleOtComponent {
   infoIcon = faInfo;
   costeosIcon = faCalculator;
   actaInfo = faFileContract;
+  libroObrasIcon = faBook;
 
   constructor(private otDetalleFacade: OTDetalleFacade) {}
 }
