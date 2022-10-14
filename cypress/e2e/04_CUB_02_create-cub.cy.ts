@@ -77,7 +77,7 @@ describe('Create Cubicacion BUCLE', () => {
 describe('Create Cubicacion FIJA', () => {
   it('should let enter to create cubicacion', () => {
     cy.viewport(1500, 1700);
-    cy.wait(400);
+    cy.wait(700);
     cy.get('button[id="navbar-create-cub"]').click();
   });
 
@@ -137,7 +137,7 @@ describe('Create Cubicacion FIJA', () => {
 
 describe('Create Cubicacion ORDINARIO', () => {
   it('should let enter to create cubicacion', () => {
-    cy.wait(400);
+    cy.wait(700);
     cy.get('button[id="navbar-create-cub"]').click();
   });
 
@@ -197,7 +197,7 @@ describe('Create Cubicacion ORDINARIO', () => {
 
 describe('Create Cubicacion MOVIL', () => {
   it('should let enter to create cubicacion', () => {
-    cy.wait(400);
+    cy.wait(700);
     cy.get('button[id="navbar-create-cub"]').click();
   });
 
