@@ -14,4 +14,21 @@
     <ng-container *ngIf="showMenuDetalleOT$|async">
         <zwc-menu-detalle-ot></zwc-menu-detalle-ot>
     </ng-container>
+
+    <div class="versiones-container">
+        <table>
+            <tr>
+                <td>Web</td>
+                <td>1.0.0</td>
+            </tr>
+            <tr>
+                <td>DB</td>
+                <td>{{(databaseVersion$|async)?.version}}</td>
+            </tr>
+            <tr>
+                <td>API</td>
+                <td>{{apiVersion$|async}}</td>
+            </tr>
+        </table>
+    </div>
 </div>

@@ -19,3 +19,13 @@ export const showMenuDetalleOT = createSelector(
   selectAuth,
   (state: reducer.StateAuth) => state.showMenuDetalleOT
 );
+
+export const getDatabaseVersion = createSelector(
+  selectAuth,
+  (state: reducer.StateAuth) => state.databaseVersion
+);
+
+export const getAPIVersion = createSelector(
+  selectAuth,
+  (state: reducer.StateAuth) => state.apiVersion
+);

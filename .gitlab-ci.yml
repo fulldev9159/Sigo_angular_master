@@ -81,32 +81,33 @@ e2e test:
     - npm start & ./node_modules/.bin/wait-on http://localhost:4206
     # run Cypress tests
     - npx cypress run
-# docker:
-#   <<: *connect_gcr
-#   stage: deployment
-#   when: manual
-#   # needs:
-#   #   - acceptance test
-#   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
-#   script:
-#     - docker-compose -f docker-compose.yml build --no-cache deploy
-#     - docker-compose -f docker-compose.yml push deploy
-#   # only:
-#   #   - develop
 
-# update-demos-sigo:
-#   stage: triggers
-#   needs:
-#     - docker
-#   variables:
-#     ORIGIN: $ORIGIN
-#     CI_PIPELINE_ID: $CI_PIPELINE_ID
-#     PRECURSOR: $CI_PROJECT_NAME
-#     CI_COMMIT_AUTHOR: $CI_COMMIT_AUTHOR
-#     CI_COMMIT_MESSAGE: $CI_COMMIT_MESSAGE
-#     CI_COMMIT_DESCRIPTION: $CI_COMMIT_DESCRIPTION
-#     CI_COMMIT_TITLE: $CI_COMMIT_TITLE
-#     GITLAB_USER_NAME: $GITLAB_USER_NAME
-#   trigger: zweicom/cl-movistar/sigo/demos-sigo
-#   # only:
-#   #   - develop
+docker:
+  <<: *connect_gcr
+  stage: deployment
+  # when: manual
+  needs:
+    - e2e test
+  image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+  script:
+    - docker-compose -f docker-compose.yml build --no-cache deploy
+    - docker-compose -f docker-compose.yml push deploy
+  # only:
+  #   - develop
+
+update-demos-sigo:
+  stage: triggers
+  needs:
+    - docker
+  variables:
+    ORIGIN: $ORIGIN
+    CI_PIPELINE_ID: $CI_PIPELINE_ID
+    PRECURSOR: $CI_PROJECT_NAME
+    CI_COMMIT_AUTHOR: $CI_COMMIT_AUTHOR
+    CI_COMMIT_MESSAGE: $CI_COMMIT_MESSAGE
+    CI_COMMIT_DESCRIPTION: $CI_COMMIT_DESCRIPTION
+    CI_COMMIT_TITLE: $CI_COMMIT_TITLE
+    GITLAB_USER_NAME: $GITLAB_USER_NAME
+  trigger: zweicom/cl-movistar/sigo/demos-sigo
+  # only:
+  #   - develop

@@ -44,7 +44,15 @@
     }
 }
 
-
+.versiones-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align-last: center;
+    font-size: 0.6rem;
+    margin-bottom: 10px;
+}
 
 // :host ::ng-deep {
 @media screen and (min-width: 992px) {

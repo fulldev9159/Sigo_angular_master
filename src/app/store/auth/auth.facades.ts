@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SessionData } from '@model';
+import { DatabaseVersion, SessionData } from '@model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as authSelectors from './auth.selectors';
@@ -60,5 +60,23 @@ export class AuthFacade {
   // RESET PERFIL
   public resetPerfil(): void {
     this.store.dispatch(authActions.resetPerfil());
+  }
+
+  // GET DATABASE VERSION
+  public getDatabaseVersion(): void {
+    this.store.dispatch(authActions.getDatabaseVersion());
+  }
+
+  public getDatabaseVersion$(): Observable<DatabaseVersion> {
+    return this.store.select(authSelectors.getDatabaseVersion);
+  }
+
+  // GET API VERSION
+  public getAPIVersion(): void {
+    this.store.dispatch(authActions.getAPIVersion());
+  }
+
+  public getAPIVersion$(): Observable<string> {
+    return this.store.select(authSelectors.getAPIVersion);
   }
 }

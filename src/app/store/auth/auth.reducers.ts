@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { SessionData } from '@model';
+import { DatabaseVersion, SessionData } from '@model';
 import * as authActions from './auth.actions';
 import * as perfilActions from '../perfil/perfil.actions';
 
@@ -9,12 +9,16 @@ export interface StateAuth {
   sessionData: SessionData;
   isLoggin: boolean;
   showMenuDetalleOT: boolean;
+  databaseVersion: DatabaseVersion;
+  apiVersion: string;
 }
 
 export const initialState: StateAuth = {
   sessionData: null,
   isLoggin: false,
   showMenuDetalleOT: false,
+  databaseVersion: null,
+  apiVersion: null,
 };
 
 export const reducerAuth = createReducer(
@@ -63,5 +67,13 @@ export const reducerAuth = createReducer(
   on(authActions.showMenuDetalleOT, (state, { status }) => ({
     ...state,
     showMenuDetalleOT: status,
+  })),
+  on(authActions.getDatabaseVersionSuccess, (state, { response }) => ({
+    ...state,
+    databaseVersion: response.data,
+  })),
+  on(authActions.getAPIVersionSuccess, (state, { response }) => ({
+    ...state,
+    apiVersion: response.data.api_version,
   }))
 );

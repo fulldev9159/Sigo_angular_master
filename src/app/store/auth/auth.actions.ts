@@ -1,4 +1,4 @@
-import { Accion, Login, Response } from '@model';
+import { Accion, DatabaseVersion, Login, Response } from '@model';
 import { createAction, props } from '@ngrx/store';
 
 // LOGIN
@@ -60,4 +60,30 @@ export const resetPerfil = createAction('[PERFIL] POST resetPerfil ');
 export const showMenuDetalleOT = createAction(
   '[AUTH] POST showMenuDetalleOT',
   props<{ status: boolean }>()
+);
+
+// VERSION DATABASE
+export const getDatabaseVersion = createAction('[AUTH] getDatabaseVersion');
+
+export const getDatabaseVersionSuccess = createAction(
+  '[AUTH]  getDatabaseVersion Success',
+  props<{ response: Response<DatabaseVersion> }>()
+);
+
+export const getDatabaseVersionError = createAction(
+  '[AUTH]  getDatabaseVersion Error',
+  props<{ error: any }>()
+);
+
+// VERSION API
+export const getAPIVersion = createAction('[AUTH] getAPIVersion');
+
+export const getAPIVersionSuccess = createAction(
+  '[AUTH]  getAPIVersion Success',
+  props<{ response: Response<{ api_version: string }> }>()
+);
+
+export const getAPIVersionError = createAction(
+  '[AUTH]  getAPIVersion Error',
+  props<{ error: any }>()
 );

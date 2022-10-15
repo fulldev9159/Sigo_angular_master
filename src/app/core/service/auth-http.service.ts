@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environment';
 import { Observable } from 'rxjs';
-import { Response, Login } from '@model';
+import { Response, Login,DatabaseVersion } from '@model';
 @Injectable({
   providedIn: 'root',
 })
@@ -26,6 +26,19 @@ export class AuthHttpService {
       {
         proxy_id,
       }
+    );
+  }
+
+  getDatabaseVersion(): Observable<Response<DatabaseVersion>> {
+    return this.http.post<Response<DatabaseVersion>>(
+      `${this.API_URL}/configuration/flyway_schema_history/getlast`,
+      {}
+    );
+  }
+
+  getAPIVersion(): Observable<Response<{ api_version: string }>> {
+    return this.http.get<Response<{ api_version: string }>>(
+      `${this.API_URL}/configuration/api/version/get`
     );
   }
 }

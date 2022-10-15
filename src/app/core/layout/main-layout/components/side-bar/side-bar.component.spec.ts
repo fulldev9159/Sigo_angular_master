@@ -2,7 +2,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
-import { showMenuDetalleOT } from '@storeOT/auth/auth.selectors';
+import {
+  getAPIVersion,
+  getDatabaseVersion,
+  showMenuDetalleOT,
+} from '@storeOT/auth/auth.selectors';
 
 import { SideBarComponent } from './side-bar.component';
 
@@ -24,6 +28,14 @@ describe('SideBarComponent', () => {
             {
               selector: showMenuDetalleOT,
               value: false,
+            },
+            {
+              selector: getDatabaseVersion,
+              value: null,
+            },
+            {
+              selector: getAPIVersion,
+              value: null,
             },
           ],
         }),

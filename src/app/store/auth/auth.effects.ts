@@ -15,6 +15,7 @@ export class AuthEffects {
     private actions$: Actions,
     private loginService: AuthHttpService,
     private perfilesHttpService: PerfilesHttpService,
+    private authHttpService: AuthHttpService,
     private afterHttp: AfterHttpService
   ) {}
 
@@ -61,6 +62,34 @@ export class AuthEffects {
     )
   );
 
+  getDatabaseVersion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.getDatabaseVersion),
+      concatMap(() =>
+        this.authHttpService.getDatabaseVersion().pipe(
+          map(response => authActions.getDatabaseVersionSuccess({ response })),
+          catchError(error =>
+            of(authActions.getDatabaseVersionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  getAPIVersion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.getAPIVersion),
+      concatMap(() =>
+        this.authHttpService.getAPIVersion().pipe(
+          map(response => authActions.getAPIVersionSuccess({ response })),
+          catchError(error => {
+            return of(authActions.getAPIVersionError({ error }));
+          })
+        )
+      )
+    )
+  );
+
   notifyAfte$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -81,7 +110,9 @@ export class AuthEffects {
         ofType(
           authActions.loginError,
           authActions.refreshLoginError,
-          authActions.getPermisosPerfilUsuario4LoginError
+          authActions.getPermisosPerfilUsuario4LoginError,
+          authActions.getDatabaseVersionError,
+          authActions.getAPIVersionError
         ),
         tap(action => this.afterHttp.errorHandler(action))
       ),
