@@ -86,7 +86,7 @@ export const solicitarPagoError = createAction(
   props<{ error: any }>()
 );
 
-// TODO: VER SI OPERACIONES DEBERÍA TENER SU PROPIO STORE
+// TODOCOMENT: VER SI OPERACIONES DEBERÍA TENER SU PROPIO STORE
 // APROBAR RECHAZAR OPERACIONES
 export const aprobarRechazarOperaciones = createAction(
   '[FLUJO OT] GET aprobarRechazarOperaciones',

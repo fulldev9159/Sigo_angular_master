@@ -55,7 +55,7 @@ export class ActaEffects {
     )
   );
 
-  // TODO: REVISAR BIEN ESTÁ LOGICA DE AGRUPACION
+  // TODOCOMENT: REVISAR BIEN ESTÁ LOGICA DE AGRUPACION
   // APROBAR RECHAZAR ADICIONALES Y VALIDAR ACTA
   aceptarRechazarAdicionales$ = createEffect(() =>
     this.actions$.pipe(

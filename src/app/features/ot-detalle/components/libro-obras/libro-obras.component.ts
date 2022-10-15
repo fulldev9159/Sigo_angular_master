@@ -4,7 +4,7 @@ import { environment } from '@environment';
 import { RegistroLibroDeObras } from '@model';
 import { Subscription } from 'rxjs';
 
-// TODO: MEJORAR CSS
+// 172 TODO: MEJORAR CSS
 @Component({
   selector: 'zwc-libro-obras',
   templateUrl: './libro-obras.component.html',

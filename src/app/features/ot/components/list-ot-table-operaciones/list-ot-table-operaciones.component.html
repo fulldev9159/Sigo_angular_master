@@ -15,7 +15,7 @@
 
     <!-- OT_ET_EJECUCION_TRABAJOS  SUPERVISOR TRABAJOS-->
     <!-- OT_ET_PAGO_ACEPTACION_IA ADMIN EECC -->
-    <!-- TODO: DATABASE SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO -->
+    <!-- TODOCOMENT: DATABASE SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO -->
     <button id="play-button" pTooltip="Editar/enviar informe avance"
         [routerLink]="['/informe-avance/informe-avance',ot_id]"
         *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_ENVIAR_INFORME_AVANCE')||findAccion('OT_AUTORIZAR_INFORME_AVANCE')">
@@ -24,7 +24,7 @@
 
 
     <!-- OT_ET_PAGO_GENERACION_ACTA -->
-    <!-- TODO: AGREGAR BOTON PARA LA ACCION DE SOLICITAR QUIEBRE -->
+    <!-- 182 TODO: AGREGAR BOTON PARA LA ACCION DE SOLICITAR QUIEBRE -->
     <button id="play-button" pTooltip="Generar Acta" [routerLink]="['/acta/generar-acta',ot_id]"
         *ngIf="findAccion('OT_GENERAR_ACTA')">
         <fa-icon [icon]="playIcon"></fa-icon>
@@ -37,7 +37,7 @@
     </button>
 
     <!-- OT_ET_PAGO_SOLICITUD_PAGO -->
-    <!-- TODO: VER COMO DESPLEGAR LAS 3 OPCIONES ADICIONALES -->
+    <!-- 183 TODO: VER COMO DESPLEGAR LAS 3 OPCIONES ADICIONALES -->
     <button id="play-button" pTooltip="Solicitar Pago" *ngIf="findAccion('OT_SOLICITAR_PAGO')"
         (click)="displayModalSolicitudPago=true">
         <fa-icon [icon]="playIcon"></fa-icon>
@@ -105,7 +105,7 @@
 
 
 <!-- OT_ET_AUTORIZACION_PROVEEDOR -->
-<!-- TODO: QUE EL SELECCIONAR SUPERVISOR SEA OBLIGATORIO SOLO EN EL CASO DE ACEPTAR LA ORDEN -->
+<!-- 184 TODO: QUE EL SELECCIONAR SUPERVISOR SEA OBLIGATORIO SOLO EN EL CASO DE ACEPTAR LA ORDEN -->
 <p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false"
     [modal]="true" [style]="{heigth: '50vh'}">
     <p> Order de trabajo ID: {{ot_id}}</p>
@@ -141,7 +141,6 @@
 
 
 <!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->
-<!-- TODO: CONFIRMAR QUE INFORMACIÓN DEBO DESPLEGAR: INFORME DE AVANCE O LAST ACTA -->
 <p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionOperaciones" [draggable]="false" [modal]="true">
     Order de trabajo ID: {{ot_id}}
 

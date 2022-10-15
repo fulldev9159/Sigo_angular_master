@@ -36,7 +36,7 @@ import { Observable, Subscription, take } from 'rxjs';
 // 109 TODO: PROBAR QUE OTROS USUARIOS DE OTRAS EMPRESAS NO PUEDAN ACCEDER AL ID DE UNA OT QUE NO ES DE SU EMPRESA
 // 110 TODO: PROBAR SI AL CAMBIAR INFORMACION DEL INFORME Y APROBAR/RECHAZAR GUARDA EL CAMBIO
 // 111 TODO: AGREGAR UN MODAL DE VALIDACIÓN DE ACCIÓN AL AUTORIZAR INFORME DE AVANCE
-// TODO: EL MENSAJE DE SERVICIO YA EXISTENTE PARECE PERO DESAPARECE SI VUELVO A ESCOGER OTRO SERVICIO YA EXISTENTE
+// 156 TODO: EL MENSAJE DE SERVICIO YA EXISTENTE PARECE PERO DESAPARECE SI VUELVO A ESCOGER OTRO SERVICIO YA EXISTENTE
 @Component({
   selector: 'zwc-informe-avance',
   templateUrl: './informe-avance.component.html',
@@ -240,7 +240,7 @@ export class InformeAvanceComponent
       });
   }
 
-  // TODO: MOVER A UN PLANO GLOBAL
+  // 157 TODO: MOVER A UN PLANO GLOBAL
   accionExist(accion: string): boolean {
     return this.accionesOT.find(v => v.slug === accion) !== undefined;
   }
@@ -255,7 +255,7 @@ export class InformeAvanceComponent
         console.log(this.tableServiciosAdicionales.formTable.value);
 
         // SERVICIOS ADICIONALES
-        // TODO: OPTIMIZAR ESTRUCTURA DEL FORMULARIO TABLE
+        //  TODO: OPTIMIZAR ESTRUCTURA DEL FORMULARIO TABLE
         let formularioCarrito = this.tableServiciosAdicionales.formTable.get(
           'table'
         ).value as Array<{
@@ -297,11 +297,11 @@ export class InformeAvanceComponent
 
           console.log('nuevos', nuevosAdicionales);
 
-          // TODO: SERVICIOS A ACTUALIZAR
+          // 158 TODO: SERVICIOS A ACTUALIZAR
 
-          // TODO: UO A ACTUALIZAR
+          // 159 TODO: UO A ACTUALIZAR
 
-          // TODO: UO A AGREGAR
+          // 160 TODO: UO A AGREGAR
 
           let request: RequestAdicionales = {
             ot_id: this.ot_id,

@@ -14,13 +14,13 @@ import {
 import { ActaFacade } from '@storeOT/acta/acta.facades';
 import { endWith, Observable, Subscription } from 'rxjs';
 
-// TODO: AGREGAR LAS OBSERVACIONES
-// TODO: CREAR LÓGICA PARA QUE EL BÓTON DE VALIDAR  SEA PRESIONABLE SOLO SI ACEPTA TODOS LOS ADICIONALES Y ESCOJA UN TIPO DE PAGO
-// TODO: HACER QUE EL COMPONENTE TABLA SERVICIOS RECIBA EL PORCETAJE ESCOGIDO Y CALCULE CUAL SERÁ EL TOTAL
-// TODO: QUITAR LOS SIN UO YA QUE SU CANTIDAD ES 0
-// TODO: QUITAR LAS CANTIDADES 0
-// TODO: PROGRAMAR EL BOTON INVALIDAR ACTA
-// TODO: AGREGAR UNA CONFIRMACION AL VALIDAR
+// 142 TODO: AGREGAR LAS OBSERVACIONES
+// 143 TODO: CREAR LÓGICA PARA QUE EL BÓTON DE VALIDAR  SEA PRESIONABLE SOLO SI ACEPTA TODOS LOS ADICIONALES Y ESCOJA UN TIPO DE PAGO
+// 144 TODO: HACER QUE EL COMPONENTE TABLA SERVICIOS RECIBA EL PORCETAJE ESCOGIDO Y CALCULE CUAL SERÁ EL TOTAL
+// 145 TODO: QUITAR LOS SIN UO YA QUE SU CANTIDAD ES 0
+// 146 TODO: QUITAR LAS CANTIDADES 0
+// 147 TODO: PROGRAMAR EL BOTON INVALIDAR ACTA
+// 148 TODO: AGREGAR UNA CONFIRMACION AL VALIDAR
 
 @Component({
   selector: 'zwc-validar-acta-container',
@@ -42,7 +42,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     // tipo_pago: new FormControl({ value: '', disabled: true }, [
     //   Validators.required,
     // ]),
-    porcentaje: new FormControl(100), // TODO: HACER QUE SEA REQUERIDO SI ESCOGE PAGO PORCENTUAL
+    porcentaje: new FormControl(100), // 149 TODO: HACER QUE SEA REQUERIDO SI ESCOGE PAGO PORCENTUAL
   });
 
   servicios: DetalleServicio4Acta[] = [];
@@ -65,9 +65,9 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
             }));
 
           // ORGANIZAR DATA PARA TABLA
-          // TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
-          // TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
-          // TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
+          // 150 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
+          // 151 TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
+          // 152 TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
 
           let servicios = servicios4acta?.data.items as DetalleServicio4Acta[];
           let uob = uos4acta?.data.items as DetalleUO4Acta[];
@@ -81,7 +81,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
               let servicioCarrito: CarritoService = {
                 precargado: true,
                 servicio_rowid: service.id,
-                servicio_cantidad: service.faltante_cantidad, // TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+                servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
                 adicional: service.adicional_aceptacion_estado,
 
                 servicio_id: service.servicio_id,
@@ -145,7 +145,7 @@ export class ValidarActaContainerComponent implements OnDestroy, OnInit {
     let request_validar_acta: RequestValidarActa = {
       ot_id: this.ot_id,
       tipo_pago: this.form.get('tipo_pago').value,
-      observacion: '', // TODO: AGREGAR LA OBSERVACION REAL AL REQUEST
+      observacion: '', // 153 TODO: AGREGAR LA OBSERVACION REAL AL REQUEST
       estado: 'VALIDADO',
       detalle: {
         servicio: this.servicios.map(v => ({

@@ -23,8 +23,8 @@
                     content="Solicitar informe de fin de trabajos" Pclass="p-button-info p-button-sm mt-4 w-full"
                     (click)="solicitarInformeFinDeTrabajos()"></zwc-pbutton-sending>
             </div>
-            <!-- TODO: MEJORAR EL CSS -->
-            <!-- TODO: AGREGAR MENSAJE DE REQUERIDO -->
+            <!-- 178 TODO: MEJORAR EL CSS -->
+            <!-- 179 TODO: AGREGAR MENSAJE DE REQUERIDO -->
             <form [formGroup]="formComentario">
                 <div class="col-12" id="control_observaciones">
                     <textarea formControlName="comentarios" class="form-control" placeholder="" name="comentarios"
@@ -46,7 +46,7 @@
                     Atrás
                 </button>
             </div>
-            <!-- TODO: AGREGAR EL LOADING -->
+            <!-- 180 TODO: AGREGAR EL LOADING -->
             <div *ngIf="accionExist('OT_GENERAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
                 <zwc-pbutton-sending Pid="generar-acta-button" content="Generar acta"
                     Pclass="p-button-info p-button-sm mt-4 w-full" (click)="generarActa()"></zwc-pbutton-sending>

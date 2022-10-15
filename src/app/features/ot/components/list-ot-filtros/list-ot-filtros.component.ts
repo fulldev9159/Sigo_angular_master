@@ -6,6 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-ot-filtros.component.scss'],
 })
 export class ListOtFiltrosComponent {
-  // TODO: AGREGAR LOS FILTROS
+  // TODOCOMENT: AGREGAR LOS FILTROS
   constructor() {}
 }

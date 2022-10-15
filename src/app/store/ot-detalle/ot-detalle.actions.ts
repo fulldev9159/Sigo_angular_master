@@ -40,7 +40,7 @@ export const getAccionesOTTError = createAction(
   props<{ error: any }>()
 );
 
-// TODO: MOVER A SU PROPIO STORE LIBRO DE OBRAS/ARCHIVOS
+// TODOCOMENT: MOVER A SU PROPIO STORE LIBRO DE OBRAS/ARCHIVOS
 
 //  GET CATEGORIAS DE ARCHIVOS
 export const getCategoriasArchivos = createAction(

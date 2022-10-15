@@ -34,9 +34,10 @@ interface ServiceTableCarrito {
 }
 
 // 129 TODO: AGREGAR BOTON DETALLES
-// TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
-// TODO: MEJORAR CSS DEL SWITCH
-// TODO: VER MEJOR MANERA DE REPREENTAR LA EDICIÓN DE SERVICIOS EXISTENTES UX
+// 173 TODO: MOVER A LA DERECHA LOS PRECIOS Y AGREGAR DECIMALES
+// 174 TODO: MEJORAR CSS DEL SWITCH
+// 175 TODO: VER MEJOR MANERA DE REPREENTAR LA EDICIÓN DE SERVICIOS EXISTENTES UX
+// 176 TODO: QUE NO DESPLIEGUE EL MENSAJE DE REQUERIDO CUANDO NO EXISTEN ADICIONALES
 
 @Component({
   selector: 'zwc-table-servicios',
@@ -225,7 +226,7 @@ export class TableServiciosComponent implements OnInit, OnDestroy {
     });
   }
 
-  // TODO: UNIFICAR getControl
+  // 177 TODO: UNIFICAR getControl
 
   getControlServiceCantidad(servicio_id: number): AbstractControl {
     const index = (

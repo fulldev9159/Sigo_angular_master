@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CategoriaArchivo, Dropdown } from '@model';
 import { Subscription } from 'rxjs';
 
-// TODO: CONFIRMAR DINÁMICA CUANDO SOLO SE QUIERE REGISTRAR UNA OBSERVACION
-// TODO: MEJORAR RESPONSIVE DEL ERROR FORMATO ARCHIVO EN CELULAR
+// 168 TODO: CONFIRMAR DINÁMICA CUANDO SOLO SE QUIERE REGISTRAR UNA OBSERVACION
+// 169 TODO: MEJORAR RESPONSIVE DEL ERROR FORMATO ARCHIVO EN CELULAR
 @Component({
   selector: 'zwc-registrar-libro-obras',
   templateUrl: './registrar-libro-obras.component.html',

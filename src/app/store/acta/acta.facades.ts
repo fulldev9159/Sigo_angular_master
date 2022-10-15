@@ -97,7 +97,7 @@ export class ActaFacade {
   }
 
   // GET LAST ACTA
-  // TODO: IMPLEMENTAR COMPLEMTAMENTE EL NGRX DEL LAST ACTA
+  // TODOCOMENT: IMPLEMENTAR COMPLETAMENTE EL NGRX DEL LAST ACTA
   public getLastActaSuccess(response: Response<LastActa>): void {
     this.store.dispatch(actaActions.getLastActaSuccess({ response }));
   }

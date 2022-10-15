@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DetalleOT, InfoOT, NumeroInterno, UsuarioInvolucrado } from '@model';
 import { Subscription } from 'rxjs';
 
-// TODO: VERIFICAR LAS FECHAS
+// 171 TODO: VERIFICAR LAS FECHAS
 @Component({
   selector: 'zwc-informacion',
   templateUrl: './informacion.component.html',

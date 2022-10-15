@@ -25,7 +25,7 @@
         </thead>
         <tbody>
             <ng-container *ngFor="let servicio of data_carrito$|async;let i = index">
-                <!-- TODO: VER COMO MEJORAR ESTE WA PARA LA VISUALIZACIÓN RESPONSIVA DE LA TABLA CON UNA UO -->
+                <!-- TODOCOMENT: VER COMO MEJORAR ESTE WA PARA LA VISUALIZACIÓN RESPONSIVA DE LA TABLA CON UNA UO -->
                 <tr style="height: 0.01rem;">
                     <td [attr.rowspan]="+servicio.unidad_obras.length + 1">
                         {{ servicio.numero_producto }}

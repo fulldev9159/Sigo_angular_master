@@ -13,7 +13,7 @@ export interface PosibleSupervisorTrabajo {
   nombre: string;
 }
 
-// TODO: VER SI OPERACIONES DEBERÍA TENER SU PROPIO TYPO
+// 134 TODO: VER SI OPERACIONES DEBERÍA TENER SU PROPIO TYPO
 // APROBAR RECHAZAR OPERACIONES
 export interface RequestAprobarRechazarOperaciones {
   ot_id: number;

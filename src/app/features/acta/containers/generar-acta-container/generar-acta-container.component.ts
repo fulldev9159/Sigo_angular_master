@@ -12,9 +12,9 @@ import { Subscription } from 'rxjs';
 
 // 124 TODO: CONFIRMAR SI SOLO SE VAN A UTILIZAR LOS ENDPOINTS DE GET SERVICIOS FOR ACTA Y GET UOS FOR ACTA
 // 125 TODO: GENERAR REGLAS PARA DETERMINAR EN QUE CONDICION ESTÁ EL SERVICIO Y LA UO
-// TODO: CONFIRMAR SI NECESITO SABER EL TIPO DE PAGO
-// TODO: PROBAR SEGUNDO CICLO CON SERVICIOS Y UOS PAGADAS PARA VER COMO SE DESPLIEGA LA TABLA
-// TODO: UTILIZAR EL ENDPOINT QUE INDICA SI ES PRIMERA ACTA. NO SE DEBE DESPLEGAR EL BOTON DE SOLICITAR INFORME TRABAJOS FINALIZADOS SI ES EL PRIMER CICLO
+// 135 TODO: CONFIRMAR SI NECESITO SABER EL TIPO DE PAGO
+// 136 TODO: PROBAR SEGUNDO CICLO CON SERVICIOS Y UOS PAGADAS PARA VER COMO SE DESPLIEGA LA TABLA
+// 137 TODO: UTILIZAR EL ENDPOINT QUE INDICA SI ES PRIMERA ACTA. NO SE DEBE DESPLEGAR EL BOTON DE SOLICITAR INFORME TRABAJOS FINALIZADOS SI ES EL PRIMER CICLO
 @Component({
   selector: 'zwc-generar-acta-container',
   templateUrl: './generar-acta-container.component.html',
@@ -39,9 +39,9 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
         if (accionesOT) this.accionesOT = accionesOT;
 
         // ORGANIZAR DATA PARA TABLA
-        // TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
-        // TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
-        // TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
+        // 138 TODO: PROGRAMAR CASO SI NO SE ENCUENTRAN UOS PARA EL SERVICIO ENTONCES TIENE TODOS LAS UO PAGADAS
+        // 139 TODO: PROGRAMAR CASOS EN QUE SE HA SELECCIONADO PAGO POR SERVICIO
+        // 140 TODO: CONFIRMAR COMO SERÍA MEJOR DESPLEGAR LOS SIN UO
 
         let servicios = servicios4acta?.data.items as DetalleServicio4Acta[];
         let uob = uos4acta?.data.items as DetalleUO4Acta[];
@@ -52,7 +52,7 @@ export class GenerarActaContainerComponent implements OnDestroy, OnInit {
             let servicioCarrito: CarritoService = {
               precargado: true,
               servicio_rowid: service.id,
-              servicio_cantidad: service.faltante_cantidad, // TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+              servicio_cantidad: service.faltante_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
               adicional: service.adicional_aceptacion_estado,
 
               servicio_id: service.servicio_id,

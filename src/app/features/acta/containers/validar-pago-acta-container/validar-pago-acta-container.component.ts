@@ -45,7 +45,7 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
             let servicioCarrito: CarritoService = {
               precargado: true,
               servicio_rowid: service.id,
-              servicio_cantidad: service.pago_cantidad, // TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
+              servicio_cantidad: service.pago_cantidad, // 141 TODO: CONFIRMAR SI DEBO USAR CANTIDAD FALTANTE O TOTAL
               adicional:
                 service.model_informe_has_servicio_id
                   .adicional_aceptacion_estado,
@@ -67,7 +67,7 @@ export class ValidarPagoActaContainerComponent implements OnInit, OnDestroy {
               unidad_obras: [],
             };
 
-            // TODO: PROGRAMAR CASO QUE NO TENGA UOB Y LOS CASOS QUE SOLO TENGA UOB Y NO SERVICIO
+            // 154 TODO: PROGRAMAR CASO QUE NO TENGA UOB Y LOS CASOS QUE SOLO TENGA UOB Y NO SERVICIO
             let uobs = uob.filter(
               v =>
                 v.model_informe_has_uob_id.model_informe_has_servicio_id
