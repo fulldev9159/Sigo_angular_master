@@ -11,7 +11,7 @@ describe('listar las ot', () => {
   });
 
   it('informacion ot BUCLE', () => {
-    cy.get('#p-tabpanel-1-label').click();
+    cy.get('.p-tabview-nav>li:nth-child(2)>a').click();
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('OT Test Bucle Cypress')
       .siblings()
@@ -82,7 +82,7 @@ describe('listar las ot', () => {
 
   it('informacion ot FIJO', () => {
     cy.get('button[id="navbar-list-ot"]').click();
-    cy.get('#p-tabpanel-1-label').click();
+    cy.get('.p-tabview-nav>li:nth-child(2)>a').click();
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('OT Test FIJA Cypress')
       .siblings()
@@ -93,7 +93,7 @@ describe('listar las ot', () => {
     cy._check_info_base_ot(
       'Fijo',
       'UNIFICADO_FIJA',
-      9,
+      8,
       'Cubicacion FIJA Cypress',
       'Autorizar OT por Proveedor',
       'Abierta',
@@ -123,7 +123,7 @@ describe('listar las ot', () => {
 
   it('informacion ot ORDINARIO', () => {
     cy.get('button[id="navbar-list-ot"]').click();
-    cy.get('#p-tabpanel-1-label').click();
+    cy.get('.p-tabview-nav>li:nth-child(2)>a').click();
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('OT Test ORDINARIO Cypress')
       .siblings()
@@ -134,7 +134,7 @@ describe('listar las ot', () => {
     cy._check_info_base_ot(
       'Ordinario',
       'CONTRATO_ORDINARIO',
-      13,
+      9,
       'Cubicacion ORDINARIO Cypress',
       'Autorizar OT por Proveedor',
       'Abierta',
@@ -164,7 +164,7 @@ describe('listar las ot', () => {
 
   it('informacion ot MOVIL', () => {
     cy.get('button[id="navbar-list-ot"]').click();
-    cy.get('#p-tabpanel-1-label').click();
+    cy.get('.p-tabview-nav>li:nth-child(2)>a').click();
     cy.get('#table-abiertas>p-table>div>div>table>tbody')
       .contains('OT Test MOVIL Cypress')
       .siblings()
