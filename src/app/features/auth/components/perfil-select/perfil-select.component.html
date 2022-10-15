@@ -1,0 +1,23 @@
+<div class="perfil-select-container md:w-13rem md:mr-4 xl:w-13rem xl:mr-4 lg:w-13rem lg:mr-4">
+    <p class="sigo-color-dark-light perfil-select-titulo" > Seleccione un Perfil</p>
+
+    <div id="input-dropdown"> 
+        <p-dropdown id="select_profile" [options]="perfilesUsuarioDropdown$|async"  optionLabel="name" placeholder="Selecione un perfil" [formControl]="formControls.perfil_id" optionValue="code"></p-dropdown>
+        <i class="pi pi-spin pi-spinner left-12rem " *ngIf="sendingGetPerfilesUser$|async"  style="font-size: 1rem;
+            top: -2rem;
+            position: relative;"></i>
+    </div>
+    <zwc-input-alert [control]="formControls.perfil_id"> </zwc-input-alert>
+
+    <zwc-pbutton-sending 
+        Pid="perfil-select-button"
+        content="Seleccionar"
+        Pclass="p-button-info p-button-sm mt-4 w-full"
+        [sending]="sendingPermisosPerfilUser$ | async"
+        [Pdisabled]="!formPerfilUser.valid"
+        (call)="perfilar()"
+        ></zwc-pbutton-sending>
+
+    <span class=" mt-7 sigo-color-dark-light text-xs" >¿Desea acceder con otro usuario? <a  (click)="logout()" id="logout" style="cursor:pointer ;"> Logout</a> </span>   
+
+</div>

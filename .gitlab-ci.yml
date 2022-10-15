@@ -1,0 +1,112 @@
+stages:
+  - linter
+  - restart test environment
+  - reset testing database sigo
+  - unit test
+  - e2e test
+  - deployment
+  - triggers
+
+variables:
+  CLI_VERSION: 14.1.0
+  GIT_STRATEGY: clone
+
+.connect_gcr: &connect_gcr
+  before_script:
+    - echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+    - docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
+
+linter:
+  stage: linter
+  image: trion/ng-cli-karma:${CLI_VERSION}
+  script:
+    - npm ci
+    - ng lint
+
+restart test environment:
+  stage: restart test environment
+  when: manual
+  image: tmaier/docker-compose:latest
+  script:
+    - sudo docker-compose pull mcl_otec_db_testing  mcl_api_otec_test
+    - echo $STACKDRIVER_SERVICE_KEY > stackdriver-gcp.json
+    - echo "deploying to google cloud"
+    - sudo systemctl status docker
+    - sudo docker-compose ps
+    - sudo docker-compose stop mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker-compose rm -f mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker-compose up -d mcl_otec_db_testing mcl_api_otec_test
+    - sudo docker-compose ps
+  tags:
+    - gcloud_tpb
+  environment: google cloud tpb
+
+reset database testing:
+  stage: reset testing database sigo
+  # when: manual
+  needs:
+    - restart test environment
+  script:
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"drop database  IF EXISTS OTEC\""
+    - ssh zweicom@34.122.92.38 "sudo docker exec web-sigo_mcl_otec_db_testing_1 mysql -uroot -ppass -e \"ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'pass'\""
+    - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && sudo docker run --rm -v /home/zweicom/sigo_database/OTEC/:/flyway/sql flyway/flyway -validateMigrationNaming=\"false\" -url=jdbc:mysql://34.122.92.38:3311  -schemas=OTEC -user=root -password=pass migrate && cd OTEC && ./Z001.sh"
+    - ssh zweicom@34.122.92.38 "cd sigo_database && git pull && mysql -uroot -ppass -h127.0.0.1 -P3311 OTEC -e 'source testing_script/data_testing.sql'"
+  tags:
+    - repo-machine
+  except:
+    - master
+
+unit test:
+  stage: unit test
+  # when: manual
+  needs:
+    - reset database testing
+  image: trion/ng-cli-karma:${CLI_VERSION}
+  script:
+    - npm ci
+    - ng test --code-coverage --progress false --watch false
+  coverage: '/^Statements\s*:\s*([^%]+)/'
+
+e2e test:
+  image: cypress/browsers:node14.15.0-chrome96-ff94
+  stage: e2e test
+  needs:
+    - unit test
+  # when: manual
+  script:
+    # install dependencies
+    - npm ci
+    # start the server in the background
+    - npm start & ./node_modules/.bin/wait-on http://localhost:4206
+    # run Cypress tests
+    - npx cypress run
+# docker:
+#   <<: *connect_gcr
+#   stage: deployment
+#   when: manual
+#   # needs:
+#   #   - acceptance test
+#   image: juanpabloaj/docker-compose-google-cloud-sdk:latest
+#   script:
+#     - docker-compose -f docker-compose.yml build --no-cache deploy
+#     - docker-compose -f docker-compose.yml push deploy
+#   # only:
+#   #   - develop
+
+# update-demos-sigo:
+#   stage: triggers
+#   needs:
+#     - docker
+#   variables:
+#     ORIGIN: $ORIGIN
+#     CI_PIPELINE_ID: $CI_PIPELINE_ID
+#     PRECURSOR: $CI_PROJECT_NAME
+#     CI_COMMIT_AUTHOR: $CI_COMMIT_AUTHOR
+#     CI_COMMIT_MESSAGE: $CI_COMMIT_MESSAGE
+#     CI_COMMIT_DESCRIPTION: $CI_COMMIT_DESCRIPTION
+#     CI_COMMIT_TITLE: $CI_COMMIT_TITLE
+#     GITLAB_USER_NAME: $GITLAB_USER_NAME
+#   trigger: zweicom/cl-movistar/sigo/demos-sigo
+#   # only:
+#   #   - develop

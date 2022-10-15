@@ -1,2 +1,14 @@
-<p>main-layout works!</p>
-<router-outlet></router-outlet>
+<ng-container *ngIf="isLoggin$|async; else login">
+    <main class="layout-container">
+        <zwc-side-bar></zwc-side-bar>
+        <div class="layout-content-wrapper">
+            <zwc-navbar (toggle)="toggle()" (logout)="logout()" (changePerfil)="changePerfil()"></zwc-navbar>
+            <router-outlet></router-outlet>
+        </div>
+        <div (click)="closeToggle()" class="layout-mask"></div>
+    </main>
+</ng-container>
+
+<ng-template #login >
+    <router-outlet></router-outlet>
+</ng-template>

@@ -1,0 +1,30 @@
+<p-divider align="center">
+    <span class="p-tag">Contrato Marco: Ordinario</span>
+</p-divider>
+
+<form [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 ">
+                <zwc-input-text Label="*Número carta" [control]="form.get('carta_adjudicacion')"
+                    name_input="input-numero-carta">
+                </zwc-input-text>
+            </div>
+            <div class="field col-12 ">
+                <label class="mr-1" for="">Fecha adjudicación</label>
+                <p-calendar [style]="{'width':'100%'}" inputStyleClass="form-control d-block"
+                    [inputStyle]="{'width':'100%','height':'2.5rem'}" formControlName="fecha_adjudicacion"
+                    id="fecha-adjudicacion" name="fecha-adjudicacion" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+            <div class="field col-12 ">
+                <zwc-input-text Label="*Número pedido" [control]="form.get('numero_pedido')"
+                    name_input="input-numero-pedido">
+                </zwc-input-text>
+            </div>
+            <div class="field col-12 ">
+                <zwc-input-text Label="*Materia" [control]="form.get('materia')" name_input="input-materia">
+                </zwc-input-text>
+            </div>
+        </div>
+    </div>
+</form>

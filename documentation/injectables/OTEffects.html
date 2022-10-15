@@ -1,0 +1,1179 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li >OTEffects</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/store/ot/ot.effects.ts</code>
+        </p>
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#createOT$" >createOT$</a>
+                            </li>
+                            <li>
+                                <a href="#getAreaDeNegocio$" >getAreaDeNegocio$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTAbiertas$" >getBandejaOTAbiertas$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTAnuladas$" >getBandejaOTAnuladas$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTCerradas$" >getBandejaOTCerradas$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTEjecucion$" >getBandejaOTEjecucion$</a>
+                            </li>
+                            <li>
+                                <a href="#getBandejaOTQuebradas$" >getBandejaOTQuebradas$</a>
+                            </li>
+                            <li>
+                                <a href="#getComunasFromCub$" >getComunasFromCub$</a>
+                            </li>
+                            <li>
+                                <a href="#getOficinaCentral$" >getOficinaCentral$</a>
+                            </li>
+                            <li>
+                                <a href="#getPlanDeProyecto$" >getPlanDeProyecto$</a>
+                            </li>
+                            <li>
+                                <a href="#getSitioPlanProyecto$" >getSitioPlanProyecto$</a>
+                            </li>
+                            <li>
+                                <a href="#getSolicitadoPor$" >getSolicitadoPor$</a>
+                            </li>
+                            <li>
+                                <a href="#getTipoDeRed$" >getTipoDeRed$</a>
+                            </li>
+                            <li>
+                                <a href="#getTipoDeTrabajoFromCub$" >getTipoDeTrabajoFromCub$</a>
+                            </li>
+                            <li>
+                                <a href="#notifyAfte$" >notifyAfte$</a>
+                            </li>
+                            <li>
+                                <a href="#notifyAfterError" >notifyAfterError</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(actions$: Actions, otHttpService: <a href="../injectables/OtHttpService.html" target="_self">OtHttpService</a>, afterHttp: <a href="../injectables/AfterHttpService.html" target="_self">AfterHttpService</a>, numeroInternoHttp: <a href="../injectables/NumeroInternoHttpService.html" target="_self">NumeroInternoHttpService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/store/ot/ot.effects.ts:13</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>actions$</td>
+                                                  
+                                                        <td>
+                                                                    <code>Actions</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>otHttpService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/OtHttpService.html" target="_self" >OtHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>afterHttp</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AfterHttpService.html" target="_self" >AfterHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>numeroInternoHttp</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/NumeroInternoHttpService.html" target="_self" >NumeroInternoHttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+            <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createOT$"></a>
+                    <span class="name">
+                        <span ><b>createOT$</b></span>
+                        <a href="#createOT$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.createOT),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.createOT(request).pipe(
+          map(response &#x3D;&gt; otActions.createOTSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.createOTError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/store/ot/ot.effects.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAreaDeNegocio$"></a>
+                    <span class="name">
+                        <span ><b>getAreaDeNegocio$</b></span>
+                        <a href="#getAreaDeNegocio$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getAreaDeNegocio),
+      concatMap(() &#x3D;&gt;
+        this.otHttpService.getAreaDeNegocio().pipe(
+          map(response &#x3D;&gt; otActions.getAreaDeNegocioSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getAreaDeNegocioError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/store/ot/ot.effects.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTAbiertas$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTAbiertas$</b></span>
+                        <a href="#getBandejaOTAbiertas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAbiertas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTAbiertasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTAbiertasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/store/ot/ot.effects.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTAnuladas$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTAnuladas$</b></span>
+                        <a href="#getBandejaOTAnuladas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAnuladas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTAnuladasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTAnuladasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/store/ot/ot.effects.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTCerradas$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTCerradas$</b></span>
+                        <a href="#getBandejaOTCerradas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTCerradas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTCerradasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTCerradasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/app/store/ot/ot.effects.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTEjecucion$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTEjecucion$</b></span>
+                        <a href="#getBandejaOTEjecucion$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTEjecucion),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTEjecucionSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTEjecucionError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/store/ot/ot.effects.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBandejaOTQuebradas$"></a>
+                    <span class="name">
+                        <span ><b>getBandejaOTQuebradas$</b></span>
+                        <a href="#getBandejaOTQuebradas$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTQuebradas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTQuebradasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTQuebradasError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/app/store/ot/ot.effects.ts:205</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getComunasFromCub$"></a>
+                    <span class="name">
+                        <span ><b>getComunasFromCub$</b></span>
+                        <a href="#getComunasFromCub$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getComunasFromCub),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.otHttpService.getComunasFromCub(cubicacion_id).pipe(
+          map(response &#x3D;&gt; otActions.getComunasFromCubSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getComunasFromCublError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/store/ot/ot.effects.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOficinaCentral$"></a>
+                    <span class="name">
+                        <span ><b>getOficinaCentral$</b></span>
+                        <a href="#getOficinaCentral$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getOficinaCentral),
+      concatMap(({ agencia_id }) &#x3D;&gt;
+        this.otHttpService.getOficinaCentral(agencia_id).pipe(
+          map(response &#x3D;&gt; otActions.getOficinaCentralSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getOficinaCentralError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/store/ot/ot.effects.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPlanDeProyecto$"></a>
+                    <span class="name">
+                        <span ><b>getPlanDeProyecto$</b></span>
+                        <a href="#getPlanDeProyecto$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getPlanDeProyecto),
+      concatMap(() &#x3D;&gt;
+        this.otHttpService.getPlanDeProyecto().pipe(
+          map(response &#x3D;&gt; otActions.getPlanDeProyectoSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getPlanDeProyectoError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/store/ot/ot.effects.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSitioPlanProyecto$"></a>
+                    <span class="name">
+                        <span ><b>getSitioPlanProyecto$</b></span>
+                        <a href="#getSitioPlanProyecto$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getSitioPlanProyecto),
+      concatMap(({ plan_id }) &#x3D;&gt;
+        this.otHttpService.getSitioPlan(plan_id).pipe(
+          map(response &#x3D;&gt; otActions.getSitioPlanProyectoSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getSitioPlanProyectoError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/store/ot/ot.effects.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSolicitadoPor$"></a>
+                    <span class="name">
+                        <span ><b>getSolicitadoPor$</b></span>
+                        <a href="#getSolicitadoPor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getSolicitadoPor),
+      concatMap(() &#x3D;&gt;
+        this.otHttpService.getSolicitadoPor().pipe(
+          map(response &#x3D;&gt; otActions.getSolicitadoPorSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getSolicitadoPorError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/store/ot/ot.effects.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTipoDeRed$"></a>
+                    <span class="name">
+                        <span ><b>getTipoDeRed$</b></span>
+                        <a href="#getTipoDeRed$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeRed),
+      concatMap(() &#x3D;&gt;
+        this.otHttpService.getTipoDeRed().pipe(
+          map(response &#x3D;&gt; otActions.getTipoDeRedSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getTipoDeRedError({ error })))
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/store/ot/ot.effects.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTipoDeTrabajoFromCub$"></a>
+                    <span class="name">
+                        <span ><b>getTipoDeTrabajoFromCub$</b></span>
+                        <a href="#getTipoDeTrabajoFromCub$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeTrabajoFromCub),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.otHttpService.getTipoDeTrabajoFromCub(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            otActions.getTipoDeTrabajoFromCubSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(otActions.getTipoDeTrabajoFromCubError({ error }))
+          )
+        )
+      )
+    )
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/store/ot/ot.effects.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="notifyAfte$"></a>
+                    <span class="name">
+                        <span ><b>notifyAfte$</b></span>
+                        <a href="#notifyAfte$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          otActions.getOficinaCentralSuccess,
+          otActions.getSolicitadoPorSuccess,
+          otActions.getComunasFromCubSuccess,
+          otActions.getTipoDeRedSuccess,
+          otActions.getTipoDeTrabajoFromCubSuccess,
+          otActions.getAreaDeNegocioSuccess,
+          otActions.getPlanDeProyectoSuccess,
+          otActions.getSitioPlanProyectoSuccess,
+          otActions.createOTSuccess,
+          otActions.getBandejaOTEjecucionSuccess,
+          otActions.getBandejaOTAbiertasSuccess,
+          otActions.getBandejaOTCerradasSuccess,
+          otActions.getBandejaOTAnuladasSuccess,
+          otActions.getBandejaOTQuebradasSuccess
+        ),
+        tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
+      ),
+    { dispatch: false }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/store/ot/ot.effects.ts:219</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="notifyAfterError"></a>
+                    <span class="name">
+                        <span ><b>notifyAfterError</b></span>
+                        <a href="#notifyAfterError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          otActions.getOficinaCentralError,
+          otActions.getSolicitadoPorError,
+          otActions.getComunasFromCublError,
+          otActions.getTipoDeRedError,
+          otActions.getTipoDeTrabajoFromCubError,
+          otActions.getAreaDeNegocioError,
+          otActions.getPlanDeProyectoError,
+          otActions.getSitioPlanProyectoError,
+          otActions.createOTError,
+          otActions.getBandejaOTEjecucionError,
+          otActions.getBandejaOTAbiertasError,
+          otActions.getBandejaOTCerradasError,
+          otActions.getBandejaOTAnuladasError,
+          otActions.getBandejaOTQuebradasError
+        ),
+        tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="243" class="link-to-prism">src/app/store/ot/ot.effects.ts:243</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
+import {
+  AfterHttpService,
+  NumeroInternoHttpService,
+  OtHttpService,
+} from &#x27;@services&#x27;;
+import * as otActions from &#x27;./ot.actions&#x27;;
+import { catchError, concatMap, map, tap } from &#x27;rxjs/operators&#x27;;
+import { of } from &#x27;rxjs&#x27;;
+
+@Injectable()
+export class OTEffects {
+  constructor(
+    private actions$: Actions,
+    private otHttpService: OtHttpService,
+    private afterHttp: AfterHttpService,
+    private numeroInternoHttp: NumeroInternoHttpService
+  ) {}
+
+  // CREATE OT
+  createOT$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.createOT),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.createOT(request).pipe(
+          map(response &#x3D;&gt; otActions.createOTSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.createOTError({ error })))
+        )
+      )
+    )
+  );
+
+  // CREATE OT CONTRATO BUCLE : GET OFICINA CENTRAL
+  getOficinaCentral$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getOficinaCentral),
+      concatMap(({ agencia_id }) &#x3D;&gt;
+        this.otHttpService.getOficinaCentral(agencia_id).pipe(
+          map(response &#x3D;&gt; otActions.getOficinaCentralSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getOficinaCentralError({ error })))
+        )
+      )
+    )
+  );
+
+  // CREATE OT CONTRATO BUCLE : SOLICITADO POR
+  getSolicitadoPor$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getSolicitadoPor),
+      concatMap(() &#x3D;&gt;
+        this.otHttpService.getSolicitadoPor().pipe(
+          map(response &#x3D;&gt; otActions.getSolicitadoPorSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getSolicitadoPorError({ error })))
+        )
+      )
+    )
+  );
+
+  // CREATE OT CONTRATO BUCLE : GET COUMNAS FROM CUBICACION
+  getComunasFromCub$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getComunasFromCub),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.otHttpService.getComunasFromCub(cubicacion_id).pipe(
+          map(response &#x3D;&gt; otActions.getComunasFromCubSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getComunasFromCublError({ error })))
+        )
+      )
+    )
+  );
+
+  // CREATE OT CONTRATO BUCLE : GET TIPO DE RED
+  getTipoDeRed$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeRed),
+      concatMap(() &#x3D;&gt;
+        this.otHttpService.getTipoDeRed().pipe(
+          map(response &#x3D;&gt; otActions.getTipoDeRedSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getTipoDeRedError({ error })))
+        )
+      )
+    )
+  );
+
+  // CREATE OT CONTRATO BUCLE : GET TIPO DE TRABAJO FROM CUB
+  getTipoDeTrabajoFromCub$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getTipoDeTrabajoFromCub),
+      concatMap(({ cubicacion_id }) &#x3D;&gt;
+        this.otHttpService.getTipoDeTrabajoFromCub(cubicacion_id).pipe(
+          map(response &#x3D;&gt;
+            otActions.getTipoDeTrabajoFromCubSuccess({ response })
+          ),
+          catchError(error &#x3D;&gt;
+            of(otActions.getTipoDeTrabajoFromCubError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // CREATE OT CONTRATO BUCLE : GET AREA DE NEGOCIO
+  getAreaDeNegocio$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getAreaDeNegocio),
+      concatMap(() &#x3D;&gt;
+        this.otHttpService.getAreaDeNegocio().pipe(
+          map(response &#x3D;&gt; otActions.getAreaDeNegocioSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getAreaDeNegocioError({ error })))
+        )
+      )
+    )
+  );
+
+  // CREATE OT CONTRATO MOVIL : GET PLANES DE PROYECTO
+  getPlanDeProyecto$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getPlanDeProyecto),
+      concatMap(() &#x3D;&gt;
+        this.otHttpService.getPlanDeProyecto().pipe(
+          map(response &#x3D;&gt; otActions.getPlanDeProyectoSuccess({ response })),
+          catchError(error &#x3D;&gt; of(otActions.getPlanDeProyectoError({ error })))
+        )
+      )
+    )
+  );
+
+  // CREATE OT CONTRATO MOVIL : GET SITIOS DE UN PLAN PROYECTO
+  getSitioPlanProyecto$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getSitioPlanProyecto),
+      concatMap(({ plan_id }) &#x3D;&gt;
+        this.otHttpService.getSitioPlan(plan_id).pipe(
+          map(response &#x3D;&gt; otActions.getSitioPlanProyectoSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getSitioPlanProyectoError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT EJECUCION
+  getBandejaOTEjecucion$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTEjecucion),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTEjecucionSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTEjecucionError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT ABIERTAS
+  getBandejaOTAbiertas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAbiertas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTAbiertasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTAbiertasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT CERRADAS
+  getBandejaOTCerradas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTCerradas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTCerradasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTCerradasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT ANULADAS
+  getBandejaOTAnuladas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTAnuladas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTAnuladasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTAnuladasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  // BANDEJA OT QUEBRADAS
+  getBandejaOTQuebradas$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(otActions.getBandejaOTQuebradas),
+      concatMap(({ request }) &#x3D;&gt;
+        this.otHttpService.getBandejaOT(request).pipe(
+          map(response &#x3D;&gt; otActions.getBandejaOTQuebradasSuccess({ response })),
+          catchError(error &#x3D;&gt;
+            of(otActions.getBandejaOTQuebradasError({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  notifyAfte$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          otActions.getOficinaCentralSuccess,
+          otActions.getSolicitadoPorSuccess,
+          otActions.getComunasFromCubSuccess,
+          otActions.getTipoDeRedSuccess,
+          otActions.getTipoDeTrabajoFromCubSuccess,
+          otActions.getAreaDeNegocioSuccess,
+          otActions.getPlanDeProyectoSuccess,
+          otActions.getSitioPlanProyectoSuccess,
+          otActions.createOTSuccess,
+          otActions.getBandejaOTEjecucionSuccess,
+          otActions.getBandejaOTAbiertasSuccess,
+          otActions.getBandejaOTCerradasSuccess,
+          otActions.getBandejaOTAnuladasSuccess,
+          otActions.getBandejaOTQuebradasSuccess
+        ),
+        tap(action &#x3D;&gt; this.afterHttp.successHandler(action))
+      ),
+    { dispatch: false }
+  );
+
+  notifyAfterError &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(
+          otActions.getOficinaCentralError,
+          otActions.getSolicitadoPorError,
+          otActions.getComunasFromCublError,
+          otActions.getTipoDeRedError,
+          otActions.getTipoDeTrabajoFromCubError,
+          otActions.getAreaDeNegocioError,
+          otActions.getPlanDeProyectoError,
+          otActions.getSitioPlanProyectoError,
+          otActions.createOTError,
+          otActions.getBandejaOTEjecucionError,
+          otActions.getBandejaOTAbiertasError,
+          otActions.getBandejaOTCerradasError,
+          otActions.getBandejaOTAnuladasError,
+          otActions.getBandejaOTQuebradasError
+        ),
+        tap(action &#x3D;&gt; this.afterHttp.errorHandler(action))
+      ),
+    { dispatch: false }
+  );
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'OTEffects.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

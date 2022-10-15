@@ -1,0 +1,21 @@
+<p-divider align="center">
+    <span class="p-tag">Contrato Marco: MOVIL</span>
+</p-divider>
+
+<form [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('plan_proyecto_id')" Label="*Plan de proyecto:"
+                    dropdown_id="select-plan-proyecto" [data]="planDeProyecto$|async"
+                    Pplaceholder="Selecione una oficina central" [loading]="loadingPlanDeProyecto$|async">
+                </zwc-pdropdown>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('sitio_id')" Label="*Sitio:" dropdown_id="select-sitio-plan"
+                    [data]="sitioPlan$|async" Pplaceholder="Selecione un sitio" [loading]="loadingSitioPlan$|async">
+                </zwc-pdropdown>
+            </div>
+        </div>
+    </div>
+</form>

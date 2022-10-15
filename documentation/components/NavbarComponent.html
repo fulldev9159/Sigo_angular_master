@@ -1,0 +1,818 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  NavbarComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/core/layout/main-layout/components/navbar/navbar.component.ts</code>
+</p>
+
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>zwc-navbar</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./navbar.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./navbar.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#faBars" >faBars</a>
+                            </li>
+                            <li>
+                                <a href="#faCub" >faCub</a>
+                            </li>
+                            <li>
+                                <a href="#faOT" >faOT</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changePerfilInt" >changePerfilInt</a>
+                            </li>
+                            <li>
+                                <a href="#logoutInt" >logoutInt</a>
+                            </li>
+                            <li>
+                                <a href="#toggleInt" >toggleInt</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#changePerfil" >changePerfil</a>
+                            </li>
+                            <li>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                <a href="#toggle" >toggle</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(el: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>el</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="changePerfil"></a>
+                        <b>changePerfil</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:27</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="logout"></a>
+                        <b>logout</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:26</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggle"></a>
+                        <b>toggle</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:25</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="changePerfilInt"></a>
+                    <span class="name">
+                        <span ><b>changePerfilInt</b></span>
+                        <a href="#changePerfilInt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>changePerfilInt()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:42</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logoutInt"></a>
+                    <span class="name">
+                        <span ><b>logoutInt</b></span>
+                        <a href="#logoutInt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logoutInt()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:38</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleInt"></a>
+                    <span class="name">
+                        <span ><b>toggleInt</b></span>
+                        <a href="#toggleInt"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleInt()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:34</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faBars"></a>
+                    <span class="name">
+                        <span ><b>faBars</b></span>
+                        <a href="#faBars"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faBars</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faCub"></a>
+                    <span class="name">
+                        <span ><b>faCub</b></span>
+                        <a href="#faCub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faDollarSign</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="faOT"></a>
+                    <span class="name">
+                        <span ><b>faOT</b></span>
+                        <a href="#faOT"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>faPersonDigging</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/core/layout/main-layout/components/navbar/navbar.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from &#x27;@angular/core&#x27;;
+import {
+  faBars,
+  faBasketShopping,
+  faDollarSign,
+  faMoneyCheckAlt,
+  faMoneyCheckDollar,
+  faPersonDigging,
+} from &#x27;@fortawesome/free-solid-svg-icons&#x27;;
+
+@Component({
+  selector: &#x27;zwc-navbar&#x27;,
+  templateUrl: &#x27;./navbar.component.html&#x27;,
+  styleUrls: [&#x27;./navbar.component.scss&#x27;],
+  encapsulation: ViewEncapsulation.None,
+})
+export class NavbarComponent {
+  @Output() toggle &#x3D; new EventEmitter&lt;void&gt;();
+  @Output() logout &#x3D; new EventEmitter&lt;void&gt;();
+  @Output() changePerfil &#x3D; new EventEmitter&lt;void&gt;();
+  faBars &#x3D; faBars;
+  faOT &#x3D; faPersonDigging;
+  faCub &#x3D; faDollarSign;
+
+  constructor(private el: ElementRef) {}
+
+  toggleInt(): void {
+    this.toggle.emit();
+  }
+
+  logoutInt(): void {
+    this.logout.emit();
+  }
+
+  changePerfilInt(): void {
+    this.changePerfil.emit();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;nav class&#x3D;&quot;navbar-container&quot;&gt;
+    &lt;button pButton pRipple class&#x3D;&quot;p-button-text&quot; id&#x3D;&quot;toggle&quot; (click)&#x3D;&quot;toggleInt()&quot;&gt;
+        &lt;fa-icon [icon]&#x3D;&quot;faBars&quot;&gt;&lt;/fa-icon&gt;
+        &lt;p class&#x3D;&quot;titulo&quot;&gt;SIGO&lt;/p&gt;
+    &lt;/button&gt;
+
+    &lt;div class&#x3D;&quot;buttons-principales-container&quot;&gt;
+        &lt;div class&#x3D;&quot;button-menu&quot; *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_LISTAR&#x27;,&#x27;CUBICACION_CREAR&#x27;]&quot;&gt;
+            &lt;span&gt;
+                &lt;fa-icon [icon]&#x3D;&quot;faCub&quot;&gt;&lt;/fa-icon&gt; Costeo
+            &lt;/span&gt;
+            &lt;button *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_LISTAR&#x27;]&quot; [routerLink]&#x3D;&quot;[&#x27;cubicacion&#x27;]&quot;
+                id&#x3D;&quot;navbar-list-cub&quot;&gt;Listar&lt;/button&gt;
+            &lt;button *ngxPermissionsOnly&#x3D;&quot;[&#x27;CUBICACION_CREAR&#x27;]&quot; [routerLink]&#x3D;&quot;[&#x27;/cubicacion/form-cub&#x27;]&quot;
+                id&#x3D;&quot;navbar-create-cub&quot;&gt;Crear&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;button-menu&quot; *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_LISTAR&#x27;,&#x27;OT_CREAR&#x27;]&quot;&gt;
+            &lt;span&gt;
+                &lt;fa-icon [icon]&#x3D;&quot;faOT&quot;&gt;&lt;/fa-icon&gt;OT
+            &lt;/span&gt;
+            &lt;button *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_LISTAR&#x27;]&quot; [routerLink]&#x3D;&quot;[&#x27;/ot&#x27;]&quot; id&#x3D;&quot;navbar-list-ot&quot;&gt;Listar&lt;/button&gt;
+            &lt;button *ngxPermissionsOnly&#x3D;&quot;[&#x27;OT_CREAR&#x27;]&quot; [routerLink]&#x3D;&quot;[&#x27;/ot/form-ot&#x27;]&quot;
+                id&#x3D;&quot;navbar-create-ot&quot;&gt;Crear&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;menu&quot;&gt;
+        &lt;button pButton pRipple class&#x3D;&quot;p-button-text&quot; (click)&#x3D;&quot;changePerfilInt()&quot; id&#x3D;&quot;cambiar-perfil&quot;&gt;
+            Cambiar perfil
+        &lt;/button&gt;
+        &lt;button pButton pRipple class&#x3D;&quot;p-button-text&quot; (click)&#x3D;&quot;logoutInt()&quot; id&#x3D;&quot;logout&quot;&gt;
+            Logout
+        &lt;/button&gt;
+    &lt;/div&gt;
+
+&lt;/nav&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./navbar.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.navbar-container {
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+    z-index: 999;
+    top: 0;
+    // background-color: #5b94ba;
+    padding: 0.2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 4px #00000040;
+    background-color: #eff3f7;
+
+    #toggle {
+        // color: white;
+        margin-left: -7px;
+
+        .titulo {
+            letter-spacing: 3px;
+            margin-left: 9px;
+            color: #706b6b;
+            font-size: 16px;
+            font-weight: 100;
+        }
+    }
+
+    .menu {
+        display: flex;
+        font-family: &quot;Inter-Regular&quot;, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+
+        button {
+            // color: #eff3f7;
+            font-size: 0.7rem;
+            font-weight: 400;
+
+            &amp;:hover {
+                color: #eff3f7 !important;
+                background-color: #3F51B5 !important;
+            }
+        }
+
+    }
+
+    .buttons-principales-container {
+        display: flex;
+        width: 41vw;
+        justify-content: space-between;
+
+
+        .button-menu {
+            font-size: 0.7rem;
+            border: 0.07rem solid #b7b2b2;
+            border-radius: 4px;
+            background: #e1e5ea;
+
+            span {
+                padding: 2px 7px;
+            }
+
+            button {
+                padding: 5px;
+                border: 0.07rem solid #0b5e8a;
+                background: #015682;
+                color: white;
+                font-size: 0.7rem;
+                cursor: pointer;
+                width: 108px;
+
+                &amp;:hover {
+                    background-color: #4b5cb9;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .navbar-container {
+        padding: 0rem 1rem;
+
+        .buttons-principales-container {
+            width: 39vw;
+
+            .button-menu {
+                button {
+                    width: 76px;
+                }
+            }
+        }
+
+        .p-button {
+            min-width: 0rem;
+        }
+
+        .menu {
+            button {
+                padding: 9px;
+            }
+        }
+    }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><nav class="navbar-container">    <button pButton pRipple class="p-button-text" id="toggle" (click)="toggleInt()">        <fa-icon [icon]="faBars"></fa-icon>        <p class="titulo">SIGO</p>    </button>    <div class="buttons-principales-container">        <div class="button-menu" *ngxPermissionsOnly="[\'CUBICACION_LISTAR\',\'CUBICACION_CREAR\']">            <span>                <fa-icon [icon]="faCub"></fa-icon> Costeo            </span>            <button *ngxPermissionsOnly="[\'CUBICACION_LISTAR\']" [routerLink]="[\'cubicacion\']"                id="navbar-list-cub">Listar</button>            <button *ngxPermissionsOnly="[\'CUBICACION_CREAR\']" [routerLink]="[\'/cubicacion/form-cub\']"                id="navbar-create-cub">Crear</button>        </div>        <div class="button-menu" *ngxPermissionsOnly="[\'OT_LISTAR\',\'OT_CREAR\']">            <span>                <fa-icon [icon]="faOT"></fa-icon>OT            </span>            <button *ngxPermissionsOnly="[\'OT_LISTAR\']" [routerLink]="[\'/ot\']" id="navbar-list-ot">Listar</button>            <button *ngxPermissionsOnly="[\'OT_CREAR\']" [routerLink]="[\'/ot/form-ot\']"                id="navbar-create-ot">Crear</button>        </div>    </div>    <div class="menu">        <button pButton pRipple class="p-button-text" (click)="changePerfilInt()" id="cambiar-perfil">            Cambiar perfil        </button>        <button pButton pRipple class="p-button-text" (click)="logoutInt()" id="logout">            Logout        </button>    </div></nav></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasComponent', 'selector': 'zwc-list-actas'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
+    var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'NavbarComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

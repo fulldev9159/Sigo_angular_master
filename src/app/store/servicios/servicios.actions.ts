@@ -1,0 +1,143 @@
+import {
+  CarritoService,
+  DetallesServicioTipoAgenciaContratoProveedor,
+  RequestAdicionales,
+  RequestGetDetallesServicioTipoAgenciaContratoProveedor,
+  RequestGetServicioTipoAgenciaContratoProveedor,
+  Response,
+  ResponseAgregarAdicionales,
+  ServicioAgenciaContratoProveedor,
+} from '@model';
+import { createAction, props } from '@ngrx/store';
+import {
+  DetallesUnidadObraServicio,
+  RequestGetUnidadObraServicio,
+  UnidadObraServicio,
+} from 'src/app/core/model/unidad-obra';
+
+// GET SERVICIOS DE UNA AGENCIA/CONTRATO/PROVEEDOR
+export const getServiciosAgenciaContratoProveedor = createAction(
+  '[SERVICIOS] getServiciosAgenciaContratoProveedor',
+  props<{ request: RequestGetServicioTipoAgenciaContratoProveedor }>()
+);
+
+export const getServiciosAgenciaContratoProveedorSuccess = createAction(
+  '[SERVICIOS] getServiciosAgenciaContratoProveedor Success',
+  props<{ response: Response<{ items: ServicioAgenciaContratoProveedor[] }> }>()
+);
+export const getServiciosAgenciaContratoProveedorError = createAction(
+  '[SERVICIOS] getServiciosAgenciaContratoProveedor Error',
+  props<{ error: any }>()
+);
+
+// GET UNIDADES DE OBRA DE UN SERVICIO DE UNA AGENCIA/CONTRATO/PROVEEDOR
+export const getUnidadesObraServicio = createAction(
+  '[SERVICIOS] getUnidadesObraServicio',
+  props<{ request: RequestGetUnidadObraServicio }>()
+);
+
+export const getUnidadesObraServicioSuccess = createAction(
+  '[SERVICIOS] getUnidadesObraServicio Success',
+  props<{ response: Response<{ items: UnidadObraServicio[] }> }>()
+);
+export const getUnidadesObraServicioError = createAction(
+  '[SERVICIOS] getUnidadesObraServicio Error',
+  props<{ error: any }>()
+);
+
+// SERVICIO SELECTED
+export const servicioSelected = createAction(
+  '[SERVICIOS] servicioSelected',
+  props<{ servicioSelected: ServicioAgenciaContratoProveedor }>()
+);
+
+// UNIDAD DE OBRA SELECTED
+export const unidadObraSelected = createAction(
+  '[SERVICIOS] unidadObraSelected',
+  props<{ unidadObraSelected: UnidadObraServicio }>()
+);
+
+// GET DETALLES DE UN SERVICIO TIPO AGENCIA CONTRATO TO ADDING INTO CARRITO
+export const addServicioCarrito = createAction(
+  '[SERVICIOS] addServicioCarrito',
+  props<{
+    requestService: RequestGetDetallesServicioTipoAgenciaContratoProveedor;
+    uo_codigo: string;
+  }>()
+);
+
+export const addServicioCarritoSuccess = createAction(
+  '[SERVICIOS] addServicioCarrito Success',
+  props<{
+    responseService: Response<{
+      items: DetallesServicioTipoAgenciaContratoProveedor[];
+    }>;
+    responseUnidadObra: Response<DetallesUnidadObraServicio>;
+  }>()
+);
+export const addServicioCarritoError = createAction(
+  '[SERVICIOS] addServicioCarrito Error',
+  props<{ error: any }>()
+);
+
+// ALERTA PARA INDICAR QUE YA EXISTE UN SERVICIO EN EL CARRITO
+export const alertServicioExistenteCarrito = createAction(
+  '[SERVICIOS] alertServicioExistenteCarrito',
+  props<{
+    value: boolean;
+    message: string;
+  }>()
+);
+
+// DELETE FROM CARRITO
+export const deleteServicioFromCarrito = createAction(
+  '[SERVICIOS] deleteServicioFromCarrito',
+  props<{
+    servicio_id: number;
+  }>()
+);
+
+export const deleteUOFromServicioFromCarrito = createAction(
+  '[SERVICIOS] deleteUOFromServicioFromCarrito',
+  props<{
+    servicio_id: number;
+    uo_codigo: string;
+  }>()
+);
+
+// ADD CARRITO SERVICES
+export const addDirectServiceCarrito = createAction(
+  '[SERVICIOS] addDirectServiceCarrito',
+  props<{
+    service: CarritoService;
+  }>()
+);
+
+// SERVICIOS ADICIONALES
+export const agregarAdicionales = createAction(
+  '[SERVICIOS] GET agregarAdicionales',
+  props<{ request: RequestAdicionales }>()
+);
+
+export const agregarAdicionalesSuccess = createAction(
+  '[SERVICIOS] GET agregarAdicionales Success',
+  props<{ response: Response<ResponseAgregarAdicionales> }>()
+);
+export const agregarAdicionalesError = createAction(
+  '[SERVICIOS] agregarAdicionales Error',
+  props<{ error: any }>()
+);
+
+// RESETS
+export const resetServiciosAgenciaContratoProveedor = createAction(
+  '[SERVICIOS] resetServiciosAgenciaContratoProveedor '
+);
+export const resetUnidadesObraServicio = createAction(
+  '[SERVICIOS] resetUnidadesObraServicio '
+);
+export const resetServicioSelected = createAction(
+  '[SERVICIOS] resetServicioSelected '
+);
+export const resetCarritoServices = createAction(
+  '[SERVICIOS] resetCarritoServices '
+);

@@ -1,0 +1,1205 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  TableListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>zwc-table-list-cub</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./table-list-cub.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./table-list-cub.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#agencias_filter" >agencias_filter</a>
+                            </li>
+                            <li>
+                                <a href="#contratos_marcos_filter" >contratos_marcos_filter</a>
+                            </li>
+                            <li>
+                                <a href="#cubicaciones$" >cubicaciones$</a>
+                            </li>
+                            <li>
+                                <a href="#formFilter" >formFilter</a>
+                            </li>
+                            <li>
+                                <a href="#formFilterControl" >formFilterControl</a>
+                            </li>
+                            <li>
+                                <a href="#getCubicacioneSending$" >getCubicacioneSending$</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#tipo_cubicacion_filter" >tipo_cubicacion_filter</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(cubicacionFacade: <a href="../injectables/CubicacionFacade.html" target="_self">CubicacionFacade</a>, loadingFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:64</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cubicacionFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CubicacionFacade.html" target="_self" >CubicacionFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>loadingFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoadingsFacade.html" target="_self" >LoadingsFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="254"
+                            class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:254</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:71</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="agencias_filter"></a>
+                    <span class="name">
+                        <span ><b>agencias_filter</b></span>
+                        <a href="#agencias_filter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contratos_marcos_filter"></a>
+                    <span class="name">
+                        <span ><b>contratos_marcos_filter</b></span>
+                        <a href="#contratos_marcos_filter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cubicaciones$"></a>
+                    <span class="name">
+                        <span ><b>cubicaciones$</b></span>
+                        <a href="#cubicaciones$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Cubicacion.html" target="_self" >Observable&lt;Cubicacion[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.cubicacionFacade
+    .listarCubicaciones$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        // HAY QUE REALIZAR ESTA ACCION PORQUE EL ORDEN DE PRIMENG POR COLUMNA NO FUNCIONA CON UN OBJETO INMUTABLE.
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.cubicacion_id &gt; b.cubicacion_id ? 1 : -1));
+      }),
+      tap(value &#x3D;&gt; {
+        this.tipo_cubicacion_filter &#x3D; [
+          ...new Set(value.map(item &#x3D;&gt; item.tipo_cubicacion_descripcion)),
+        ];
+        this.contratos_marcos_filter &#x3D; [
+          ...new Set(value.map(item &#x3D;&gt; item.contrato_marco_nombre)),
+        ];
+        this.agencias_filter &#x3D; [
+          ...new Set(value.map(item &#x3D;&gt; item.agencia_nombre)),
+        ];
+      }),
+      take(1)
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formFilter"></a>
+                    <span class="name">
+                        <span ><b>formFilter</b></span>
+                        <a href="#formFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup(this.formFilterControl)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formFilterControl"></a>
+                    <span class="name">
+                        <span ><b>formFilterControl</b></span>
+                        <a href="#formFilterControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cubicacion_id: new FormControl(&#x27;&#x27;, []),
+    nombre: new FormControl(&#x27;&#x27;, []),
+    tipo_cubicacion: new FormControl(&#x27;&#x27;),
+    contrato_marco: new FormControl(&#x27;&#x27;),
+    agencia: new FormControl(&#x27;&#x27;),
+    creado_por: new FormControl(&#x27;&#x27;),
+    fecha_creacion: new FormControl(&#x27;&#x27;),
+    total: new FormControl(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCubicacioneSending$"></a>
+                    <span class="name">
+                        <span ><b>getCubicacioneSending$</b></span>
+                        <a href="#getCubicacioneSending$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingFacade.sendingGetCubicaciones$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipo_cubicacion_filter"></a>
+                    <span class="name">
+                        <span ><b>tipo_cubicacion_filter</b></span>
+                        <a href="#tipo_cubicacion_filter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/cubicacion/components/table-list-cub/table-list-cub.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup } from &#x27;@angular/forms&#x27;;
+import { Cubicacion } from &#x27;@model&#x27;;
+import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
+import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
+import {
+  combineLatest,
+  filter,
+  map,
+  Observable,
+  Subscription,
+  take,
+  tap,
+} from &#x27;rxjs&#x27;;
+
+@Component({
+  selector: &#x27;zwc-table-list-cub&#x27;,
+  templateUrl: &#x27;./table-list-cub.component.html&#x27;,
+  styleUrls: [&#x27;./table-list-cub.component.scss&#x27;],
+})
+export class TableListComponent implements OnInit, OnDestroy {
+  subscription: Subscription &#x3D; new Subscription();
+  tipo_cubicacion_filter: string[] &#x3D; [];
+  contratos_marcos_filter: string[] &#x3D; [];
+  agencias_filter: string[] &#x3D; [];
+
+  cubicaciones$: Observable&lt;Cubicacion[]&gt; &#x3D; this.cubicacionFacade
+    .listarCubicaciones$()
+    .pipe(
+      map(values &#x3D;&gt; {
+        // HAY QUE REALIZAR ESTA ACCION PORQUE EL ORDEN DE PRIMENG POR COLUMNA NO FUNCIONA CON UN OBJETO INMUTABLE.
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.cubicacion_id &gt; b.cubicacion_id ? 1 : -1));
+      }),
+      tap(value &#x3D;&gt; {
+        this.tipo_cubicacion_filter &#x3D; [
+          ...new Set(value.map(item &#x3D;&gt; item.tipo_cubicacion_descripcion)),
+        ];
+        this.contratos_marcos_filter &#x3D; [
+          ...new Set(value.map(item &#x3D;&gt; item.contrato_marco_nombre)),
+        ];
+        this.agencias_filter &#x3D; [
+          ...new Set(value.map(item &#x3D;&gt; item.agencia_nombre)),
+        ];
+      }),
+      take(1)
+    );
+
+  // LOADINGS
+  getCubicacioneSending$ &#x3D; this.loadingFacade.sendingGetCubicaciones$();
+
+  // FORMULARIO
+  formFilterControl &#x3D; {
+    cubicacion_id: new FormControl(&#x27;&#x27;, []),
+    nombre: new FormControl(&#x27;&#x27;, []),
+    tipo_cubicacion: new FormControl(&#x27;&#x27;),
+    contrato_marco: new FormControl(&#x27;&#x27;),
+    agencia: new FormControl(&#x27;&#x27;),
+    creado_por: new FormControl(&#x27;&#x27;),
+    fecha_creacion: new FormControl(&#x27;&#x27;),
+    total: new FormControl(&#x27;&#x27;),
+  };
+
+  formFilter: FormGroup &#x3D; new FormGroup(this.formFilterControl);
+
+  constructor(
+    private cubicacionFacade: CubicacionFacade,
+    private loadingFacade: LoadingsFacade
+  ) {}
+
+  ngOnInit(): void {
+    // TODO: SE PUEDE UTILIZAR UNA SELECCION MULTIPLE EN LOS SELECTORES
+    // TODO: PODER FILTRAR POR MÁS DE UN ELEMENTO
+    // TODO: AGREGAR FILTROS DE FECHA Y PRECIO
+    // TODO: MOVER TODO LO DE FILTROS A OTRO COMPONENTE. AVERIGUAR COMO HACER LA INTERACCION
+    this.subscription.add(
+      this.formFilter
+        .get(&#x27;cubicacion_id&#x27;)
+        .valueChanges.subscribe(cubicacion_id &#x3D;&gt; {
+          this.cubicaciones$ &#x3D; this.cubicacionFacade.listarCubicaciones$().pipe(
+            map(values &#x3D;&gt; {
+              let tmp &#x3D; [...values];
+              return tmp.sort((a, b) &#x3D;&gt;
+                a.cubicacion_id &gt; b.cubicacion_id ? 1 : -1
+              );
+            }),
+            take(1)
+          );
+          if (
+            cubicacion_id !&#x3D;&#x3D; undefined &amp;&amp;
+            cubicacion_id !&#x3D;&#x3D; null &amp;&amp;
+            cubicacion_id !&#x3D;&#x3D; &#x27;&#x27;
+          ) {
+            this.formFilter.get(&#x27;nombre&#x27;).reset();
+            this.formFilter.get(&#x27;tipo_cubicacion&#x27;).reset();
+            this.formFilter.get(&#x27;contrato_marco&#x27;).reset();
+            this.formFilter.get(&#x27;agencia&#x27;).reset();
+            this.cubicaciones$ &#x3D; this.cubicacionFacade
+              .listarCubicaciones$()
+              .pipe(
+                map(values &#x3D;&gt;
+                  values.filter(value &#x3D;&gt; {
+                    return +value.cubicacion_id &#x3D;&#x3D;&#x3D; +cubicacion_id;
+                  })
+                ),
+                take(1)
+              );
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.formFilter.get(&#x27;nombre&#x27;).valueChanges.subscribe(nombre &#x3D;&gt; {
+        this.cubicaciones$ &#x3D; this.cubicacionFacade.listarCubicaciones$().pipe(
+          map(values &#x3D;&gt; {
+            let tmp &#x3D; [...values];
+            return tmp.sort((a, b) &#x3D;&gt;
+              a.cubicacion_id &gt; b.cubicacion_id ? 1 : -1
+            );
+          }),
+          take(1)
+        );
+        if (nombre !&#x3D;&#x3D; undefined &amp;&amp; nombre &amp;&amp; nombre !&#x3D;&#x3D; &#x27;&#x27;) {
+          this.formFilter.get(&#x27;cubicacion_id&#x27;).reset();
+          this.formFilter.get(&#x27;tipo_cubicacion&#x27;).reset();
+          this.formFilter.get(&#x27;contrato_marco&#x27;).reset();
+          this.formFilter.get(&#x27;agencia&#x27;).reset();
+          this.cubicaciones$ &#x3D; this.cubicacionFacade.listarCubicaciones$().pipe(
+            map(values &#x3D;&gt;
+              values.filter(value &#x3D;&gt; {
+                const pattern &#x3D; new RegExp(
+                  &#x60;^${(nombre as string).toLowerCase()}&#x60;,
+                  &#x27;g&#x27;
+                );
+                return pattern.test(value.cubicacion_nombre.toLowerCase())
+                  ? true
+                  : false;
+              })
+            ),
+            take(1)
+          );
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.formFilter
+        .get(&#x27;tipo_cubicacion&#x27;)
+        .valueChanges.subscribe(tipo_cubicacion &#x3D;&gt; {
+          this.cubicaciones$ &#x3D; this.cubicacionFacade.listarCubicaciones$().pipe(
+            map(values &#x3D;&gt; {
+              let tmp &#x3D; [...values];
+              return tmp.sort((a, b) &#x3D;&gt;
+                a.cubicacion_id &gt; b.cubicacion_id ? 1 : -1
+              );
+            }),
+            take(1)
+          );
+          if (
+            tipo_cubicacion !&#x3D;&#x3D; undefined &amp;&amp;
+            tipo_cubicacion &amp;&amp;
+            tipo_cubicacion !&#x3D;&#x3D; &#x27;&#x27;
+          ) {
+            this.formFilter.get(&#x27;nombre&#x27;).reset();
+            this.formFilter.get(&#x27;cubicacion_id&#x27;).reset();
+            this.formFilter.get(&#x27;contrato_marco&#x27;).reset();
+            this.formFilter.get(&#x27;agencia&#x27;).reset();
+            this.cubicaciones$ &#x3D; this.cubicacionFacade
+              .listarCubicaciones$()
+              .pipe(
+                map(values &#x3D;&gt;
+                  values.filter(value &#x3D;&gt; {
+                    const pattern &#x3D; new RegExp(&#x60;^${tipo_cubicacion}&#x60;, &#x27;g&#x27;);
+                    return pattern.test(value.tipo_cubicacion_descripcion)
+                      ? true
+                      : false;
+                  })
+                ),
+                take(1)
+              );
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.formFilter
+        .get(&#x27;contrato_marco&#x27;)
+        .valueChanges.subscribe(contrato_marco &#x3D;&gt; {
+          this.cubicaciones$ &#x3D; this.cubicacionFacade.listarCubicaciones$().pipe(
+            map(values &#x3D;&gt; {
+              let tmp &#x3D; [...values];
+              return tmp.sort((a, b) &#x3D;&gt;
+                a.cubicacion_id &gt; b.cubicacion_id ? 1 : -1
+              );
+            }),
+            take(1)
+          );
+          if (
+            contrato_marco !&#x3D;&#x3D; undefined &amp;&amp;
+            contrato_marco &amp;&amp;
+            contrato_marco !&#x3D;&#x3D; &#x27;&#x27;
+          ) {
+            this.formFilter.get(&#x27;nombre&#x27;).reset();
+            this.formFilter.get(&#x27;cubicacion_id&#x27;).reset();
+            this.formFilter.get(&#x27;tipo_cubicacion&#x27;).reset();
+            this.formFilter.get(&#x27;agencia&#x27;).reset();
+            this.cubicaciones$ &#x3D; this.cubicacionFacade
+              .listarCubicaciones$()
+              .pipe(
+                map(values &#x3D;&gt;
+                  values.filter(value &#x3D;&gt; {
+                    const pattern &#x3D; new RegExp(&#x60;^${contrato_marco}&#x60;, &#x27;g&#x27;);
+                    return pattern.test(value.contrato_marco_nombre)
+                      ? true
+                      : false;
+                  })
+                ),
+                take(1)
+              );
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.formFilter.get(&#x27;agencia&#x27;).valueChanges.subscribe(agencia &#x3D;&gt; {
+        this.cubicaciones$ &#x3D; this.cubicacionFacade.listarCubicaciones$().pipe(
+          map(values &#x3D;&gt; {
+            let tmp &#x3D; [...values];
+            return tmp.sort((a, b) &#x3D;&gt;
+              a.cubicacion_id &gt; b.cubicacion_id ? 1 : -1
+            );
+          }),
+          take(1)
+        );
+        if (agencia !&#x3D;&#x3D; undefined &amp;&amp; agencia &amp;&amp; agencia !&#x3D;&#x3D; &#x27;&#x27;) {
+          this.formFilter.get(&#x27;nombre&#x27;).reset();
+          this.formFilter.get(&#x27;cubicacion_id&#x27;).reset();
+          this.formFilter.get(&#x27;tipo_cubicacion&#x27;).reset();
+          this.formFilter.get(&#x27;contrato_marco&#x27;).reset();
+          this.cubicaciones$ &#x3D; this.cubicacionFacade.listarCubicaciones$().pipe(
+            map(values &#x3D;&gt;
+              values.filter(value &#x3D;&gt; {
+                const pattern &#x3D; new RegExp(&#x60;^${agencia}&#x60;, &#x27;g&#x27;);
+                return pattern.test(value.agencia_nombre) ? true : false;
+              })
+            ),
+            take(1)
+          );
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;pre&gt;
+            {{cubicaciones$|async|json}}
+        &lt;/pre&gt; --&gt;
+
+&lt;!-- TODO: Agregar lazy loading cuando se tenga paginación desde el endpoint
+        [lazy]&#x3D;&quot;true&quot; 
+        [loading]&#x3D;&quot;getCubicacioneSending$|async&quot; 
+        [totalRecords]&#x3D;&quot;(cubicaciones$|async).length&quot; --&gt;
+&lt;form [formGroup]&#x3D;&quot;formFilter&quot;&gt;
+    &lt;p-table #dt [value]&#x3D;&quot;cubicaciones$|async&quot; dataKey&#x3D;&quot;id&quot; styleClass&#x3D;&quot;p-datatable-sm p-datatable-gridlines&quot;
+        responsiveLayout&#x3D;&quot;scroll&quot; [paginator]&#x3D;&quot;true&quot; [rows]&#x3D;&quot;10&quot; scrollDirection&#x3D;&quot;both&quot; [scrollable]&#x3D;&quot;true&quot;
+        [globalFilterFields]&#x3D;&quot;[&#x27;nombre&#x27;]&quot;&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;caption&quot;&gt;
+            &lt;div class&#x3D;&quot;flex&quot;&gt;
+                &lt;span class&#x3D;&quot;p-input-icon-left ml-auto&quot;&gt;
+                    &lt;i class&#x3D;&quot;pi pi-search&quot;&gt;&lt;/i&gt;
+                    &lt;input pInputText type&#x3D;&quot;text&quot; (input)&#x3D;&quot;dt.filterGlobal($event.target.value, &#x27;contains&#x27;)&quot;
+                        placeholder&#x3D;&quot;Search keyword&quot; /&gt;
+                &lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/ng-template&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+            &lt;tr&gt;
+                &lt;th pFrozenColumn style&#x3D;&quot;width:80px&quot;&gt;
+                    &lt;input type&#x3D;&quot;number&quot; style&#x3D;&quot;width: 100%;&quot; formControlName&#x3D;&quot;cubicacion_id&quot;&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;
+                    &lt;input type&#x3D;&quot;text&quot; style&#x3D;&quot;width: 100%;&quot; formControlName&#x3D;&quot;nombre&quot; name&#x3D;&quot;filter-nombre-cubicacion&quot;&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;&lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;
+                    &lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; formControlName&#x3D;&quot;tipo_cubicacion&quot;&gt;
+                        &lt;option value&#x3D;&quot;&quot;&gt;&lt;/option&gt;
+                        &lt;ng-container *ngFor&#x3D;&quot;let item of tipo_cubicacion_filter&quot;&gt;
+                            &lt;option [value]&#x3D;&quot;item&quot;&gt;{{item}}&lt;/option&gt;
+                        &lt;/ng-container&gt;
+                    &lt;/select&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;
+                    &lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; formControlName&#x3D;&quot;contrato_marco&quot;&gt;
+                        &lt;option value&#x3D;&quot;&quot;&gt;&lt;/option&gt;
+                        &lt;ng-container *ngFor&#x3D;&quot;let item of contratos_marcos_filter&quot;&gt;
+                            &lt;option [value]&#x3D;&quot;item&quot;&gt;{{item}}&lt;/option&gt;
+                        &lt;/ng-container&gt;
+                    &lt;/select&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;
+                    &lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; formControlName&#x3D;&quot;agencia&quot;&gt;
+                        &lt;option value&#x3D;&quot;&quot;&gt;&lt;/option&gt;
+                        &lt;ng-container *ngFor&#x3D;&quot;let item of agencias_filter&quot;&gt;
+                            &lt;option [value]&#x3D;&quot;item&quot;&gt;{{item}}&lt;/option&gt;
+                        &lt;/ng-container&gt;
+                    &lt;/select&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;
+
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;
+
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:100px&quot;&gt;
+
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:240px&quot;&gt;
+
+                &lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;th style&#x3D;&quot;width:80px&quot; pSortableColumn&#x3D;&quot;cubicacion_id&quot; pFrozenColumn&gt;ID &lt;p-sortIcon
+                        field&#x3D;&quot;cubicacion_id&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot; pSortableColumn&#x3D;&quot;cubicacion_nombre&quot;&gt;Nombre &lt;p-sortIcon
+                        field&#x3D;&quot;cubicacion_nombre&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot;&gt;Descripcion&lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot; pSortableColumn&#x3D;&quot;tipo_cubicacion_descripcion&quot;&gt;Tipo Cubicación &lt;p-sortIcon
+                        field&#x3D;&quot;tipo_cubicacion_descripcion&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot; pSortableColumn&#x3D;&quot;contrato_marco_nombre&quot;&gt;Contrato Marco &lt;p-sortIcon
+                        field&#x3D;&quot;contrato_marco_nombre&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot; pSortableColumn&#x3D;&quot;agencia_nombre&quot;&gt;Agencia &lt;p-sortIcon field&#x3D;&quot;agencia_nombre&quot;&gt;
+                    &lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot; pSortableColumn&#x3D;&quot;creador_usuario_nombre&quot;&gt;Creado Por &lt;p-sortIcon
+                        field&#x3D;&quot;creador_usuario_nombre&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:200px&quot; pSortableColumn&#x3D;&quot;cubicacion_fecha_creacion&quot;&gt;Fecha creación &lt;p-sortIcon
+                        field&#x3D;&quot;cubicacion_fecha_creacion&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:100px&quot; pSortableColumn&#x3D;&quot;total&quot;&gt;Total &lt;p-sortIcon field&#x3D;&quot;total&quot;&gt;&lt;/p-sortIcon&gt;
+                &lt;/th&gt;
+                &lt;th style&#x3D;&quot;width:240px&quot;&gt;Operaciones&lt;/th&gt;
+            &lt;/tr&gt;
+
+        &lt;/ng-template&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;body&quot; let-item&gt;
+            &lt;tr&gt;
+                &lt;td style&#x3D;&quot;width:80px&quot; pFrozenColumn&gt;{{item.cubicacion_id}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;{{item.cubicacion_nombre}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;{{item.cubicacion_descripcion}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;{{item.tipo_cubicacion_descripcion}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;{{item.contrato_marco_nombre}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;{{item.agencia_nombre}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;{{item.creador_usuario_nombre}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:200px&quot;&gt;{{item.cubicacion_fecha_creacion}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:100px&quot;&gt;{{item.total}}&lt;/td&gt;
+                &lt;td style&#x3D;&quot;width:240px&quot;&gt;
+                    &lt;div class&#x3D;&quot;ui icon buttons mini basic &quot;&gt;
+                      &lt;button class&#x3D;&quot;ui button generic-color &quot;&gt; Detalles &lt;/button&gt;
+                      &lt;button class&#x3D;&quot;ui button generic-color&quot;&gt; Clonar &lt;/button&gt;
+                    &lt;button class&#x3D;&quot;ui button generic-color&quot; style&#x3D;&quot;height: 100%;&quot; &gt; Editar &lt;/button&gt;
+                    &lt;button class&#x3D;&quot;ui button eliminar-color&quot; style&#x3D;&quot;height: 100%;&quot; &gt;&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/ng-template&gt;
+
+        &lt;ng-template pTemplate&#x3D;&quot;summary&quot;&gt;
+            &lt;div class&#x3D;&quot;p-d-flex p-ai-center p-jc-between&quot;&gt;
+                En total hay {{(cubicaciones$|async) ? (cubicaciones$|async).length : 0 }} elementos.
+            &lt;/div&gt;
+        &lt;/ng-template&gt;
+    &lt;/p-table&gt;
+&lt;/form&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./table-list-cub.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host ::ng-deep {
+    .p-datatable.p-datatable-sm .p-datatable-header {
+        background: #efefef;
+    }
+
+    .p-datatable .p-datatable-thead &gt; tr &gt; th {
+        border: 0px;
+        border-width: 0px;
+        border-right: 1px solid #f4f4f4 !important;
+        border-bottom: 1px solid #d1cece;
+        background-color: #efefef;
+        font-size: 0.8rem;
+        font-weight: 700;
+        p-sorticon &gt; i {
+            font-size: 0.8rem !important;
+        }
+    }
+    td {
+        padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
+        border: 0 !important;
+        border-right: 1px solid #d8d8d8 !important;
+        border-bottom: 1px solid #d8d8d8 !important;
+        font-size: 0.8rem;
+    }
+
+    div &gt; span &gt; input {
+        height: 30px;
+        border-color: #c3bebe;
+        border-radius: 4px;
+    }
+
+    .p-paginator-bottom {
+        font-size: 0.8rem;
+        span button {
+            font-size: 0.8rem;
+        }
+    }
+
+    .p-paginator-page {
+        min-width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
+
+    .p-datatable-footer {
+        font-size: 0.8rem;
+    }
+}
+
+:host ::ng-deep {
+    ui.buttons {
+        display: inline-flex;
+        flex-direction: row;
+        font-size: 0;
+        vertical-align: baseline;
+        margin: 0 0.25em 0 0;
+        height: 2.4rem;
+        margin: 0.3rem 0px 0.3rem 0px;
+    }
+
+    .ui.basic.buttons {
+        box-shadow: none;
+        border: 1px solid rgba(34, 36, 38, 0.15);
+        border-radius: 0.28571429rem;
+    }
+
+
+    .ui.basic.buttons .button {
+        color: rgba(0, 0, 0, 0.6) !important;
+        font-weight: 400;
+        border-radius: 0.28571429rem;
+        border-top-right-radius: 0.285714rem;
+        border-bottom-right-radius: 0.285714rem;
+        text-transform: none;
+        text-shadow: none !important;
+        box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15);
+    }
+
+    .generic-color {
+        background: #f6f6f621;
+        border-bottom-right-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+    }
+    .ui.icon.button, .ui.icon.buttons .button {
+        padding: 0.48571429em;
+      }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- <pre>            {{cubicaciones$|async|json}}        </pre> --><!-- TODO: Agregar lazy loading cuando se tenga paginación desde el endpoint        [lazy]="true"         [loading]="getCubicacioneSending$|async"         [totalRecords]="(cubicaciones$|async).length" --><form [formGroup]="formFilter">    <p-table #dt [value]="cubicaciones$|async" dataKey="id" styleClass="p-datatable-sm p-datatable-gridlines"        responsiveLayout="scroll" [paginator]="true" [rows]="10" scrollDirection="both" [scrollable]="true"        [globalFilterFields]="[\'nombre\']">        <ng-template pTemplate="caption">            <div class="flex">                <span class="p-input-icon-left ml-auto">                    <i class="pi pi-search"></i>                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, \'contains\')"                        placeholder="Search keyword" />                </span>            </div>        </ng-template>        <ng-template pTemplate="header">            <tr>                <th pFrozenColumn style="width:80px">                    <input type="number" style="width: 100%;" formControlName="cubicacion_id">                </th>                <th style="width:200px">                    <input type="text" style="width: 100%;" formControlName="nombre" name="filter-nombre-cubicacion">                </th>                <th style="width:200px"></th>                <th style="width:200px">                    <select name="" id="" formControlName="tipo_cubicacion">                        <option value=""></option>                        <ng-container *ngFor="let item of tipo_cubicacion_filter">                            <option [value]="item">{{item}}</option>                        </ng-container>                    </select>                </th>                <th style="width:200px">                    <select name="" id="" formControlName="contrato_marco">                        <option value=""></option>                        <ng-container *ngFor="let item of contratos_marcos_filter">                            <option [value]="item">{{item}}</option>                        </ng-container>                    </select>                </th>                <th style="width:200px">                    <select name="" id="" formControlName="agencia">                        <option value=""></option>                        <ng-container *ngFor="let item of agencias_filter">                            <option [value]="item">{{item}}</option>                        </ng-container>                    </select>                </th>                <th style="width:200px">                </th>                <th style="width:200px">                </th>                <th style="width:100px">                </th>                <th style="width:240px">                </th>            </tr>            <tr>                <th style="width:80px" pSortableColumn="cubicacion_id" pFrozenColumn>ID <p-sortIcon                        field="cubicacion_id"></p-sortIcon>                </th>                <th style="width:200px" pSortableColumn="cubicacion_nombre">Nombre <p-sortIcon                        field="cubicacion_nombre"></p-sortIcon>                </th>                <th style="width:200px">Descripcion</th>                <th style="width:200px" pSortableColumn="tipo_cubicacion_descripcion">Tipo Cubicación <p-sortIcon                        field="tipo_cubicacion_descripcion"></p-sortIcon>                </th>                <th style="width:200px" pSortableColumn="contrato_marco_nombre">Contrato Marco <p-sortIcon                        field="contrato_marco_nombre"></p-sortIcon>                </th>                <th style="width:200px" pSortableColumn="agencia_nombre">Agencia <p-sortIcon field="agencia_nombre">                    </p-sortIcon>                </th>                <th style="width:200px" pSortableColumn="creador_usuario_nombre">Creado Por <p-sortIcon                        field="creador_usuario_nombre"></p-sortIcon>                </th>                <th style="width:200px" pSortableColumn="cubicacion_fecha_creacion">Fecha creación <p-sortIcon                        field="cubicacion_fecha_creacion"></p-sortIcon>                </th>                <th style="width:100px" pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon>                </th>                <th style="width:240px">Operaciones</th>            </tr>        </ng-template>        <ng-template pTemplate="body" let-item>            <tr>                <td style="width:80px" pFrozenColumn>{{item.cubicacion_id}}</td>                <td style="width:200px">{{item.cubicacion_nombre}}</td>                <td style="width:200px">{{item.cubicacion_descripcion}}</td>                <td style="width:200px">{{item.tipo_cubicacion_descripcion}}</td>                <td style="width:200px">{{item.contrato_marco_nombre}}</td>                <td style="width:200px">{{item.agencia_nombre}}</td>                <td style="width:200px">{{item.creador_usuario_nombre}}</td>                <td style="width:200px">{{item.cubicacion_fecha_creacion}}</td>                <td style="width:100px">{{item.total}}</td>                <td style="width:240px">                    <div class="ui icon buttons mini basic ">                      <button class="ui button generic-color "> Detalles </button>                      <button class="ui button generic-color"> Clonar </button>                    <button class="ui button generic-color" style="height: 100%;" > Editar </button>                    <button class="ui button eliminar-color" style="height: 100%;" ></button>                </div>                </td>            </tr>        </ng-template>        <ng-template pTemplate="summary">            <div class="p-d-flex p-ai-center p-jc-between">                En total hay {{(cubicaciones$|async) ? (cubicaciones$|async).length : 0 }} elementos.            </div>        </ng-template>    </p-table></form></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableFiltersListCubComponent', 'selector': 'zwc-table-filters-list-cub'},{'name': 'TableListComponent', 'selector': 'zwc-table-list-cub'},{'name': 'TableServicesComponent', 'selector': 'zwc-table-services'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TableListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TableListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<form novalidate autocomplete="off" [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12" style="display: flex;
+            flex-direction: column;">
+                <label for="">Observaciones</label>
+                <textarea formControlName="observaciones" class="form-control" placeholder="" name="observaciones"
+                    id="observaciones" cols="30" rows="5"></textarea>
+            </div>
+
+            <div class="field col-12">
+                <zwc-pdropdown [control]="form.get('categoria')" Label="* Categoria del archivo:"
+                    dropdown_id="select-cubicacion" [data]="categoriaArchivos" Pplaceholder="Selecione una categoria">
+                </zwc-pdropdown>
+            </div>
+
+            <div class="field col-12">
+                <label>Adjuntar evidencias</label>
+                <p-fileUpload chooseLabel="Agregar documento" name="demo[]" #filesform auto="true"
+                    (uploadHandler)="onUpload($event)" customUpload="true" multiple="multiple"
+                    accept=".docx,.doc,.gif,.json,.jpg,.jpeg,.pjpeg,.png,.txt,.pdf,.gzip,.zip,.rar,.7zip,zip,.dwg,.csv,.xls,.ppt,.pptx,text/plain"
+                    maxFileSize="50000000">
+                </p-fileUpload>
+                <label style="color: #464646;font-weight: 400;">
+                    <strong style="margin-left: 7px;margin-right: 7px;">Extensiones permitidas:</strong>
+                    <span style="word-spacing: 5px">.docx .doc .gif .json .jpg .jpeg .pjpeg .png .txt .pdf .gzip .zip
+                        .rar
+                        .7zip zip .dwg .csv .xls .ppt .pptx </span>
+                </label>
+            </div>
+
+
+        </div>
+    </div>
+</form>

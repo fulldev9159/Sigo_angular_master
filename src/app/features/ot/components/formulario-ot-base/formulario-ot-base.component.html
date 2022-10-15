@@ -1,0 +1,37 @@
+<form [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-input-text Label="*Nombre de la OT" [control]="form.get('nombre')" name_input="input-nombre-ot">
+                </zwc-input-text>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('contrato')" Label="*Contrato Marco"
+                    dropdown_id="select-contrato_marco" [data]="contratoUsuarios$|async"
+                    Pplaceholder="Selecione un contrato marco"></zwc-pdropdown>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('cubicacion_id')" Label="*Cubicación" dropdown_id="select-cubicacion"
+                    [data]="cubicacionesContrato$|async" Pplaceholder="Selecione una cubicación"
+                    [loading]="loadingGetCubicacionesContrato$|async"></zwc-pdropdown>
+            </div>
+            <div class="field  col-12 md:col-6 lg:col-6 xl:col-6">
+                <div class="message error-message"
+                    *ngIf="(cubicacionesContrato$|async).length===0 && form.get('contrato').value!==null && (loadingGetCubicacionesContrato$|async)===false">
+                    <small class="p-error block">
+                        No existen cubicaciones creadas con el contrato marco escogido
+                    </small>
+                </div>
+                <div class="bg-blue-100 text-blue-500 message" *ngIf="form.get('cubicacion_id').value!==null ">
+                    <small class="p-info block">
+                        {{(cubicacionSelected$|async)?.cubicacion_descripcion}}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,27 @@
+.detalles{
+    display: flex;
+    flex-direction: column;
+    label{
+        margin-bottom: 10px;
+        color: #00507a;
+        font-weight: 500;
+    }
+    #input-descripcion{
+        border: solid 0.07rem #e0e0e0;
+        padding: 7px;
+        font-size: 11px;
+        font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    }
+}
+
+:host ::ng-deep{
+    .p-divider .p-divider-content{
+        background: transparent;
+    }
+    .p-tag{
+        font-weight:   100;
+    }
+    .card{
+        height: 100%;
+    }
+}

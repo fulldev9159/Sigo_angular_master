@@ -1,0 +1,19 @@
+<div class="dropdown-container">
+    <label>{{Label}}</label>
+    <p-dropdown [id]="dropdown_id" 
+                [options]="data" 
+                [formControl]="control" 
+                optionLabel="name" 
+                [placeholder]="Pplaceholder"
+                optionValue="code"
+
+                [filter]="Pfilter" 
+                [filterBy]="PfilterBy" 
+                [showClear]="PshowClear" 
+                [disabled]="Pdisabled"
+                 ></p-dropdown>
+    <zwc-input-alert [control]="control"></zwc-input-alert>
+</div>
+<i  *ngIf="loading" class="pi pi-spin pi-spinner" style="font-size: 1rem;position: relative;
+top: -28px;
+left: 80%;"></i>

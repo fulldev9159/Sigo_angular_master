@@ -1,3 +1,5 @@
+[![coverage report](https://gitlab.com/zweicom/cl-movistar/sigo/web-sigo/badges/v14/coverage.svg)](https://gitlab.com/zweicom/cl-movistar/sigo/web-sigo/-/commits/v14) [![pipeline status](https://gitlab.com/zweicom/cl-movistar/sigo/web-sigo/badges/v14/pipeline.svg)](https://gitlab.com/zweicom/cl-movistar/sigo/web-sigo/-/commits/v14)
+
 # WebSigo
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.

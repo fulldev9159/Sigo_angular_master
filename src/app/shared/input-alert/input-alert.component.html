@@ -1,0 +1,3 @@
+<ng-container *ngIf="control.invalid && (control.dirty || control.touched)">
+    <small class="p-error block">{{errorMessageFn(control.errors)}}</small>
+</ng-container>

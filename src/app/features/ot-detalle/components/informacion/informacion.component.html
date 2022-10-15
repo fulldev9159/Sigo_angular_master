@@ -1,0 +1,244 @@
+<div class="container-component">
+    <h1>Información de la OT
+        <span>
+            "{{infoOT?.nombre}}"
+        </span>
+    </h1>
+
+
+    <div class="card">
+        <div class="formgrid grid info-base">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <p-divider align="center">
+                    <span class="p-tag">Información general</span>
+                </p-divider>
+                <table style="width: 100%;" class="table-info">
+                    <tr>
+                        <td>Tipo Contrato</td>
+                        <td>{{infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nombre Contrato</td>
+                        <td>{{infoOT?.model_cubicacion_id.model_contrato_id.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cubicación ID</td>
+                        <td>{{infoOT?.cubicacion_id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cubicación Nombre</td>
+                        <td>{{infoOT?.model_cubicacion_id.nombre}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Proyecto ID</td>
+                        <td>{{infoOT?.proyecto_id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Creado el</td>
+                        <td>{{infoOT?.created_at|date }}</td>
+                    </tr>
+                    <tr>
+                        <td>Etapa</td>
+                        <td>{{infoOT?.model_tipo_etapa_ot_id.nombre }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Estado</td>
+                        <td>{{infoOT?.model_tipo_estado_ot_id.nombre }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Propietario</td>
+                        <td>{{infoOT?.model_propietario_usuario_id.nombres + '
+                            ' + infoOT?.model_propietario_usuario_id.apellidos }}</td>
+                    </tr>
+                    <tr>
+                        <td>Responsable</td>
+                        <td>{{infoOT?.model_responsable_proxy_id.model_usuario_id.nombres + ' ' +
+                            infoOT?.model_responsable_proxy_id.model_usuario_id.apellidos }}</td>
+                    </tr>
+                    <tr>
+                        <td>Observaciones</td>
+                        <td>{{infoOT?.observaciones }}</td>
+                    </tr>
+                </table>
+                <p-divider align="center">
+                    <span class="p-tag">Fechas</span>
+                </p-divider>
+                <table class="table-info" style="width: 100%;">
+                    <tr>
+                        <td>Fecha Inicio OT</td>
+                        <td>{{infoOT?.fecha_inicio |date}}</td>
+                    </tr>
+                    <tr>
+                        <td>Fecha Fin OT</td>
+                        <td>{{infoOT?.fecha_fin |date}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <p-divider align="center">
+                    <span class="p-tag">Información Contrato
+                        {{infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre }}</span>
+                </p-divider>
+
+                <ng-container
+                    *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Móvil'">
+                    <table class="table-info" style="width: 100%;" id="table-contrato-movil">
+                        <tr>
+                            <td>Plan de proyecto</td>
+                            <td>{{infoOT?.model_plan_id.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <td>Sitio</td>
+                            <td>{{infoOT?.model_sitio_plan_id.nombre }}
+                            </td>
+                        </tr>
+                    </table>
+                </ng-container>
+
+                <ng-container
+                    *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Bucle'">
+                    <table class="table-info" style="width: 100%;" id="table-contrato-bucle">
+                        <tr>
+                            <td>Oficina Central</td>
+                            <td colspan="3">{{infoOT?.model_oficina_central_id.idafac }}</td>
+                        </tr>
+                        <tr>
+                            <td>Solicitado Por</td>
+                            <td colspan="3">{{infoOT?.model_solicitante_id.descripcion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección</td>
+                            <td>{{infoOT?.direccion }}</td>
+                            <td style="border: 0;
+                    border-width: 0;
+                    padding: 0.275rem;
+                    background-color: #efefef;
+                    font-weight: 600;
+                    text-align: right;
+                    padding-right: 10px;
+                    width: 28%;
+                    border-right: 1px solid #bdbbbb">Altura</td>
+                            <td style="font-weight: 400;
+                    padding-left: 5px;">{{infoOT?.altura }}</td>
+                        </tr>
+                        <tr>
+                            <td>Piso</td>
+                            <td>{{infoOT?.piso }}</td>
+                            <td style="border: 0;
+                    border-width: 0;
+                    padding: 0.275rem;
+                    background-color: #efefef;
+                    font-weight: 600;
+                    text-align: right;
+                    padding-right: 10px;
+                    width: 28%;
+                    border-right: 1px solid #bdbbbb">Departamento</td>
+                            <td style="font-weight: 400;
+                    padding-left: 5px;">{{infoOT?.departamento }}</td>
+                        </tr>
+                        <tr>
+                            <td>Comuna</td>
+                            <td colspan="3">{{infoOT?.model_comuna_id.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tipo Red</td>
+                            <td colspan="3">{{infoOT?.model_tipo_red_id.descripcion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tipo Trabajo</td>
+                            <td colspan="3">{{infoOT?.model_tipo_trabajo_id.descripcion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tiene Boleta garantía</td>
+                            <td colspan="3">{{infoOT?.tiene_boleta_garantia?'Si':'No' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tiene Permisos</td>
+                            <td colspan="3">{{infoOT?.tiene_permisos?'Si':'No'
+                                }}</td>
+                        </tr>
+                        <tr>
+                            <td>Área de negocio</td>
+                            <td colspan="3">{{infoOT?.area_negocio }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nombre Proyectista</td>
+                            <td colspan="3">{{infoOT?.nombre_proyectista }}</td>
+                        </tr>
+                    </table>
+                </ng-container>
+
+                <ng-container
+                    *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Ordinario'">
+                    <table class="table-info" style="width: 100%;" id="table-contrato-ordinario">
+                        <tr>
+                            <td>Carta de adjudicación</td>
+                            <td>{{infoOT?.carta_adjudicacion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha de adjudicación</td>
+                            <td>{{infoOT?.fecha_adjudicacion }}</td>
+                        </tr>
+                        <tr>
+                            <td>Número pedido</td>
+                            <td>{{infoOT?.numero_pedido }}</td>
+                        </tr>
+                        <tr>
+                            <td>Materia</td>
+                            <td>{{infoOT?.materia }}</td>
+                        </tr>
+                    </table>
+                </ng-container>
+
+
+                <ng-container
+                    *ngIf="infoOT?.model_cubicacion_id.model_contrato_id.model_tipo_contrato_id.nombre==='Fijo'">
+                    <table class="table-info" style="width: 100%;" id="table-tipo-num-interno">
+                        <tr>
+                            <td>Tipo Número Interno</td>
+                            <td>{{numeros_internos[0].model_tipo_numero_interno_id.nombre }}</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table style="width: 100%;" id="table-num-internos">
+                        <tr>
+                            <th>Números Internos</th>
+                        </tr>
+                        <tr *ngFor="let item of numeros_internos">
+                            <td>
+                                {{item.numero_interno}}</td>
+                        </tr>
+                    </table>
+                </ng-container>
+
+
+                <p-divider align="center">
+                    <span class="p-tag">Usuarios Involucrados</span>
+                </p-divider>
+
+                <table style="width: 100%;" id="table-usuarios-involucrados">
+                    <tr>
+                        <th>Cargo</th>
+                        <th>Usuario</th>
+                    </tr>
+                    <tr *ngFor="let item of usuarios_involucrados ">
+                        <td>
+                            <ng-container *ngIf="item.concepto==='ADM_CONTRATO'">Administrador Contratista
+                            </ng-container>
+                            <ng-container *ngIf="item.concepto==='SUPERVISOR_DE_TRABAJOS'">Supervisor de trabajos
+                            </ng-container>
+                        </td>
+                        <td>{{item.model_proxy_id.model_usuario_id.nombres}}
+                            {{item.model_proxy_id.model_usuario_id.apellidos}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

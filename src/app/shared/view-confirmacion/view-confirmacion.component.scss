@@ -1,0 +1,25 @@
+.container-button-confirmar {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 2rem;
+
+    button {
+        padding: 1.4rem !important;
+        font-size: 0.9rem;
+        height: 1rem;
+        font-weight: 100;
+
+        fa-icon {
+            margin-right: 9px;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+    }
+}
+
+#mensaje-confirmacion {
+    color: #525252;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}

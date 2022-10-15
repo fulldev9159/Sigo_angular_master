@@ -1,0 +1,151 @@
+<div class="container-acciones">
+    <!-- PLAY CONTINUAR -->
+
+    <!-- OT_ET_AUTORIZACION_INICIAL  JERARQUIA-->
+    <button id="play-button" pTooltip="Aceptación incial" *ngIf="findAccion('OT_ACEPTAR_INICIAL')"
+        (click)="displayModalAceptarInicial=true">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+    <!-- OT_ET_AUTORIZACION_PROVEEDOR ADMIN EECC-->
+    <button id="play-button" pTooltip="Aceptación de la Orden de trabajo" *ngIf="findAccion('OT_ACEPTAR_PROVEEDOR')"
+        (click)="openModalAceptacionOTProveedor()">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+    <!-- OT_ET_EJECUCION_TRABAJOS  SUPERVISOR TRABAJOS-->
+    <!-- OT_ET_PAGO_ACEPTACION_IA ADMIN EECC -->
+    <!-- TODO: DATABASE SE DEBE AGREGAR LA ACCION DE PODER EDITAR EL INFORME DE AVANCE AL ADMIN CONTRATO -->
+    <button id="play-button" pTooltip="Editar/enviar informe avance"
+        [routerLink]="['/informe-avance/informe-avance',ot_id]"
+        *ngIf="findAccion('OT_EDITAR_INFORME_AVANCE')||findAccion('OT_ENVIAR_INFORME_AVANCE')||findAccion('OT_AUTORIZAR_INFORME_AVANCE')">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+
+    <!-- OT_ET_PAGO_GENERACION_ACTA -->
+    <!-- TODO: AGREGAR BOTON PARA LA ACCION DE SOLICITAR QUIEBRE -->
+    <button id="play-button" pTooltip="Generar Acta" [routerLink]="['/acta/generar-acta',ot_id]"
+        *ngIf="findAccion('OT_GENERAR_ACTA')">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+    <!-- OT_ET_PAGO_VALIDACION_ACTA_GESTOR -->
+    <button id="play-button" pTooltip="Validar Acta" [routerLink]="['/acta/validar-acta',ot_id]"
+        *ngIf="findAccion('OT_VALIDAR_ACTA')">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+    <!-- OT_ET_PAGO_SOLICITUD_PAGO -->
+    <!-- TODO: VER COMO DESPLEGAR LAS 3 OPCIONES ADICIONALES -->
+    <button id="play-button" pTooltip="Solicitar Pago" *ngIf="findAccion('OT_SOLICITAR_PAGO')"
+        (click)="displayModalSolicitudPago=true">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+    <!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->
+    <button id="play-button" pTooltip="Aprobar Obras" *ngIf="findAccion('OT_APROBACION_OPERACIONES')"
+        (click)="displayModalAprobacionOperaciones=true">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+    <!-- OT_ET_PAGO_AUTORIZACION_SOLICITUD_PAGO -->
+    <button id="play-button" pTooltip="Autorizar pago Acta" [routerLink]="['/acta/validar-pago-acta',ot_id]"
+        *ngIf="findAccion('OT_AUTORIZAR_PAGOS')">
+        <fa-icon [icon]="playIcon"></fa-icon>
+    </button>
+
+    <!-- ACCIONES FIJAS -->
+    <button id="info-button" pTooltip="Información" [routerLink]="['/ot-detalle/informacion',ot_id]">
+        <fa-icon [icon]="infoIcon"></fa-icon>
+    </button>
+
+    <button id="ver-libro-obras-button" pTooltip="Ver libro de obras" [routerLink]="['/ot-detalle/libro-obras',ot_id]">
+        <fa-icon [icon]="bookIcon"></fa-icon>
+    </button>
+
+    <button id="add-libro-obras-button" pTooltip="Agregar registro libro de obras"
+        *ngIf="findAccion('OT_REGISTRAR_LIBRO_OBRAS')" (click)="displayModalAgregarRegistroLibroDeObras=true">
+        <fa-icon [icon]="medicalIcon"></fa-icon>
+    </button>
+
+</div>
+
+
+
+<!-- MODALS -->
+
+<p-dialog header="Agregar registro a libro de obras" [(visible)]="displayModalAgregarRegistroLibroDeObras"
+    [draggable]="false" [modal]="true">
+
+    <zwc-registrar-libro-obras #registrarLibroObraForm></zwc-registrar-libro-obras>
+    <ng-template pTemplate="footer">
+        <zwc-pbutton-sending Pid="subir-registro" content="Subir registro"
+            Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!registrarLibroObraForm.valid"
+            [sending]="sendingCreateOT$|async" (call)="registrarLibroObras()"></zwc-pbutton-sending>
+    </ng-template>
+
+</p-dialog>
+
+
+<!-- OT_ET_AUTORIZACION_INICIAL -->
+<p-dialog header="Aceptación Incial de la OT" [(visible)]="displayModalAceptarInicial" [draggable]="false"
+    [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+    <zwc-view-confirmacion pregunta='¿Desea aceptar la continuidad de la orden de trabajo?'
+        (cancelar)="rechazarOTInicial()" textCancel="Rechazar OT" (confirmar)="confirmarAceptacionOTInicial()"
+        textConfirmar="Aceptar OT">
+    </zwc-view-confirmacion>
+</p-dialog>
+
+<p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="displayModalRechazoOrdenDeTrabajo" [draggable]="false"
+    [modal]="true">
+    <zwc-view-rechazo></zwc-view-rechazo>
+</p-dialog>
+
+
+<!-- OT_ET_AUTORIZACION_PROVEEDOR -->
+<!-- TODO: QUE EL SELECCIONAR SUPERVISOR SEA OBLIGATORIO SOLO EN EL CASO DE ACEPTAR LA ORDEN -->
+<p-dialog header="Aceptación de la orden de trabajo" [(visible)]="displayModalAceptarProveedor" [draggable]="false"
+    [modal]="true" [style]="{heigth: '50vh'}">
+    <p> Order de trabajo ID: {{ot_id}}</p>
+    <p>Escoja el supervisor de trabajos que la realizará el trabajo en caso de aceptar realizar la orden</p>
+    <br>
+    <form novalidate autocomplete="off" [formGroup]="form">
+        <zwc-pdropdown [control]="form.get('trabajador_id')" Label="* Supervisor"
+            dropdown_id="select-supervisor-trabajos" [data]="posibleSupervisorDeTrabajo$|async"
+            Pplaceholder="Selecione una persona" [loading]="loadingPosibleSupervisorDeTrabajos$|async"></zwc-pdropdown>
+    </form>
+
+    <!-- 102 TODO: AGREGAR LA VALIDACION AL BOTON ACEPTAR ORDEN -->
+    <div class="container-button-confirmar">
+        <button pButton pRipple type="button" id="button-cancelar" class="p-button-outlined"
+            (click)="rechazarOrdenProveedor()">
+            Rechazar Orden
+        </button>
+        <button pButton type="button" id="button-confirmar" (click)="aceptarOrdenProveedor()">
+            Aceptar Orden
+        </button>
+    </div>
+</p-dialog>
+
+
+
+<!-- OT_ET_PAGO_SOLICITUD_PAGO -->
+<p-dialog header="Solicitud de pago" [(visible)]="displayModalSolicitudPago" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+    <zwc-view-confirmacion pregunta='¿Comfirma solicitar pago?' (cancelar)="displayModalSolicitudPago=false"
+        (confirmar)="confirmarSolicitarPago()" textConfirmar="Confirmar">
+    </zwc-view-confirmacion>
+</p-dialog>
+
+
+<!-- OT_ET_PAGO_APROBACION_OBRAS_OPERACIONES -->
+<!-- TODO: CONFIRMAR QUE INFORMACIÓN DEBO DESPLEGAR: INFORME DE AVANCE O LAST ACTA -->
+<p-dialog header="Aceptación acta" [(visible)]="displayModalAprobacionOperaciones" [draggable]="false" [modal]="true">
+    Order de trabajo ID: {{ot_id}}
+
+    <zwc-view-confirmacion pregunta='¿Desea aprobar esta acta?' (cancelar)="rechazarActaOperaciones()"
+        textCancel="Rechazar Acta" (confirmar)="aprobarActaOperaciones()" textConfirmar="Aprobar Acta">
+    </zwc-view-confirmacion>
+</p-dialog>

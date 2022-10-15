@@ -1,0 +1,107 @@
+:host ::ng-deep {
+    .card {
+        padding: 15px 15px 15px 15px;
+    }
+
+    .p-datatable {
+        border: 1px solid #efefef;
+        padding: 0.2rem;
+    }
+
+    fa-icon {
+        margin-right: 3px;
+        font-size: 0.7rem;
+        color: #545454;
+    }
+
+    .p-datatable.p-datatable-sm .p-datatable-header {
+        background: #efefef;
+    }
+
+    .p-datatable .p-datatable-thead>tr>th {
+        border: 0px;
+        border-width: 0px;
+        border-right: 1px solid #f4f4f4 !important;
+        border-bottom: 1px solid #d1cece;
+        background-color: #efefef;
+        font-size: 0.8rem;
+        font-weight: 700;
+
+        p-sorticon>i {
+            font-size: 0.8rem !important;
+        }
+    }
+
+    td {
+        padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
+        border: 0 !important;
+        border-right: 1px solid #d8d8d8 !important;
+        border-bottom: 1px solid #d8d8d8 !important;
+        font-size: var(--size-text-sigo);
+    }
+
+    div>span>input {
+        height: 30px;
+        border-color: #c3bebe;
+        border-radius: 4px;
+    }
+
+    .p-paginator-bottom {
+        font-size: 0.8rem;
+
+        span button {
+            font-size: 0.8rem;
+        }
+    }
+
+    .p-paginator-page {
+        min-width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
+
+    .p-datatable-footer {
+        font-size: 0.8rem;
+    }
+
+    .loading-modal-content {
+        width: 47vw;
+        height: 48vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 21px;
+        color: #023a58;
+        background-color: #f0eeee;
+    }
+
+
+}
+
+.buttons-operaciones {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+
+    fa-icon {
+        color: white;
+    }
+
+    button {
+        padding: 0.3rem;
+        border-radius: 5px;
+        border: 0;
+        background: #3f51b5;
+        color: white;
+        font-size: 12px;
+        font-weight: 100;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        width: 22%;
+        align-items: center;
+
+        &:hover {
+            background: #4b5ec5;
+        }
+    }
+}

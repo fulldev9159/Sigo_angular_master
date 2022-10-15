@@ -1,0 +1,100 @@
+<div class="container-acta">
+    <h1>Validación del Acta</h1>
+
+    <p-divider align="center">
+        <span class="p-tag">Autorizar Adicionales</span>
+    </p-divider>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-autorizar-adicionales">
+                <zwc-table-servicios #tableServiciosAutorizarAdicionales mode_source="static"
+                    [data_source]="acta_adicionales" [cantidad_editable]="false" [column_acciones]="true"
+                    [accion_delete]="false" [accion_aprobacion_servicio_adic]="true">
+                </zwc-table-servicios>
+            </div>
+
+        </div>
+    </div>
+
+    <p-divider align="center">
+        <span class="p-tag">Servicios cubicados</span>
+    </p-divider>
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 table-servicios-cubicados">
+                <zwc-table-servicios #tableServicioCubicados mode_source="static" [data_source]="acta_originales"
+                    [cantidad_editable]="false" [column_acciones]="false">
+                </zwc-table-servicios>
+            </div>
+
+        </div>
+    </div>
+
+    <p-divider align="center">
+        <span class="p-tag">Observaciones</span>
+    </p-divider>
+
+    <div class="card">
+        <div class=" grid">
+
+        </div>
+    </div>
+
+
+    <!-- TODO: QUE LA SELECCION DE TIPO DE PAGO APAREZCA SOLO SI APRUEBA TODOS LOS ADICIONALES -->
+
+    <p-divider align="center">
+        <span class="p-tag">Escoger tipo de pago del acta</span>
+    </p-divider>
+
+
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pdropdown [control]="form.get('tipo_pago')" Label="*Tipo de pago" dropdown_id="select-tipo-pago"
+                    [data]="actaTipoPago" Pplaceholder="Selecione un tipo pago"></zwc-pdropdown>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="form.get('tipo_pago').value!==null">
+        <div class=" grid">
+            <div class="field col-12 ">
+                <h2>Resumen del acta a aprobar</h2>
+
+                <ng-container *ngIf="form.get('tipo_pago').value==='TOTAL'">
+                    <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
+                        [column_acciones]="false">
+                    </zwc-table-servicios>
+                </ng-container>
+
+                <ng-container *ngIf="form.get('tipo_pago').value==='PORCENTAJE'">
+                    <label>Porcentaje a pagar</label>
+                    <p-inputNumber [formControl]="form.get('porcentaje')" suffix="%" [min]="0" [max]="100">
+                    </p-inputNumber>
+                    <zwc-table-servicios mode_source="static" [data_source]="acta" [cantidad_editable]="false"
+                        [column_acciones]="false">
+                    </zwc-table-servicios>
+                </ng-container>
+
+            </div>
+        </div>
+    </div>
+
+    <p-divider align="center">
+    </p-divider>
+
+    <div class="card">
+        <div class=" grid">
+            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">
+                    Atrás
+                </button>
+            </div>
+            <div *ngIf="accionExist('OT_VALIDAR_ACTA')" class="field col-12 md:col-4 lg:col-4 xl:col-4">
+                <zwc-pbutton-sending Pid="validar-acta-button" content="Validar acta"
+                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="validarActa()"></zwc-pbutton-sending>
+            </div>
+        </div>
+    </div>
+</div>

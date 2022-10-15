@@ -1,0 +1,32 @@
+<zwc-content-layout [navbarHeader]="navbarHeader">
+    <div content>
+        <h1>Creación de nueva orden de trabajo</h1>
+        <p-divider align="left">
+            <span class="p-tag">Datos base</span>
+        </p-divider>
+        <zwc-formulario-ot-base [form]="form.get('base')"></zwc-formulario-ot-base>
+        <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre==='Bucle'">
+            <zwc-formulario-ot-bucle [form]="form.get('bucle')"></zwc-formulario-ot-bucle>
+        </ng-container>
+        <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre==='Ordinario'">
+            <zwc-formulario-ot-ordinario [form]="form.get('ordinario')"></zwc-formulario-ot-ordinario>
+        </ng-container>
+        <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre==='Fijo'">
+            <zwc-formulario-ot-fijo [form]="form.get('fijo')"></zwc-formulario-ot-fijo>
+        </ng-container>
+        <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre==='Móvil'">
+            <zwc-formulario-ot-movil [form]="form.get('movil')"></zwc-formulario-ot-movil>
+        </ng-container>
+
+        <ng-container *ngIf="(cubiacionSelected$|async)?.tipo_contrato_marco_nombre!==null">
+            <zwc-formulario-ot-sustento-financiero [form]="form.get('sustentoFinanciero')">
+            </zwc-formulario-ot-sustento-financiero>
+
+            <zwc-formulario-ot-extras [form]="form.get('extras')"></zwc-formulario-ot-extras>
+        </ng-container>
+
+        <zwc-pbutton-sending Pid="crear-ot" content="Crear nueva Orden de Trabajo"
+            Pclass="p-button-info p-button-sm mt-4 w-full" [Pdisabled]="!valid" [sending]="sendingCreateOT$|async"
+            (call)="createOT()"></zwc-pbutton-sending>
+    </div>
+</zwc-content-layout>

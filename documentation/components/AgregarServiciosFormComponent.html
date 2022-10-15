@@ -1,0 +1,1681 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  AgregarServiciosFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>  FORMULARIO QUE PERMITE AGREGAR UN SERVICIO/UO AL CARRITO
+  DATOS QUE PERMITE USAR:</p>
+<ul>
+<li>Actividad</li>
+<li>Tipo de servicio
+ Necesita:
+- Actividad (interno en esta clase)
+- Contrato marco (se debe obtener por NGRX)</li>
+<li>Servicios
+- Actividad (interno en esta clase)
+- Agencia (se debe obtener por NGRX)
+- SubContrato  (se debe obtener por NGRX)
+- Tipo de servicio (interno en esta clase)</li>
+<li>UO de un servicio
+- Actividad (interno en esta clase)
+- Servicio Cod(interno en esa clase)</li>
+</ul>
+<p>Datos previos necesarios:
+    - Actividades de un contrato/agencia/proveedor (NGRX)</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>zwc-agregar-servicios-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./agregar-servicios-form.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./agregar-servicios-form.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#actividadesContratoProveedor$" >actividadesContratoProveedor$</a>
+                            </li>
+                            <li>
+                                <a href="#agenciaSelected$" >agenciaSelected$</a>
+                            </li>
+                            <li>
+                                <a href="#alertServicioExistenteCarrito$" >alertServicioExistenteCarrito$</a>
+                            </li>
+                            <li>
+                                <a href="#carrito$" >carrito$</a>
+                            </li>
+                            <li>
+                                <a href="#contratoSelected$" >contratoSelected$</a>
+                            </li>
+                            <li>
+                                <a href="#formFilter" >formFilter</a>
+                            </li>
+                            <li>
+                                <a href="#formFilterControls" >formFilterControls</a>
+                            </li>
+                            <li>
+                                <a href="#loadingAgregarServicioCarrito$" >loadingAgregarServicioCarrito$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetActividadesContratoProveedor$" >loadingGetActividadesContratoProveedor$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetServiciosAgenciaContratoProveedor$" >loadingGetServiciosAgenciaContratoProveedor$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetTipoServiciosContrato$" >loadingGetTipoServiciosContrato$</a>
+                            </li>
+                            <li>
+                                <a href="#loadingGetUnidadesObraServicio$" >loadingGetUnidadesObraServicio$</a>
+                            </li>
+                            <li>
+                                <a href="#proveedorSelected$" >proveedorSelected$</a>
+                            </li>
+                            <li>
+                                <a href="#serviciosAgenciaContratoProveedor" >serviciosAgenciaContratoProveedor</a>
+                            </li>
+                            <li>
+                                <a href="#serviciosAgenciaContratoProveedor$" >serviciosAgenciaContratoProveedor$</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#tipoServicioContrato$" >tipoServicioContrato$</a>
+                            </li>
+                            <li>
+                                <a href="#unidadesObraServicio$" >unidadesObraServicio$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#agregarServicio" >agregarServicio</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(contratoFacade: <a href="../injectables/ContratoFacade.html" target="_self">ContratoFacade</a>, cubicacionFacade: <a href="../injectables/CubicacionFacade.html" target="_self">CubicacionFacade</a>, serviciosFacade: <a href="../injectables/ServiciosFacade.html" target="_self">ServiciosFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>, formularioService: <a href="../injectables/FormularioService.html" target="_self">FormularioService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="186" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:186</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>contratoFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContratoFacade.html" target="_self" >ContratoFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cubicacionFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CubicacionFacade.html" target="_self" >CubicacionFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>serviciosFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ServiciosFacade.html" target="_self" >ServiciosFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>loadingsFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoadingsFacade.html" target="_self" >LoadingsFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>formularioService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/FormularioService.html" target="_self" >FormularioService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="agregarServicio"></a>
+                    <span class="name">
+                        <span ><b>agregarServicio</b></span>
+                        <a href="#agregarServicio"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>agregarServicio()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="301"
+                            class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:301</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="343"
+                            class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:343</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="196"
+                            class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:196</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actividadesContratoProveedor$"></a>
+                    <span class="name">
+                        <span ><b>actividadesContratoProveedor$</b></span>
+                        <a href="#actividadesContratoProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.contratoFacade
+    .getActividadesContratoProveedor$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;actividad_id&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.descripcion,
+          code: value.actividad_id,
+        }))
+      )
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="agenciaSelected$"></a>
+                    <span class="name">
+                        <span ><b>agenciaSelected$</b></span>
+                        <a href="#agenciaSelected$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/AgenciaContrato.html" target="_self" >Observable&lt;AgenciaContrato&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.cubicacionFacade.agenciaSelected$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="alertServicioExistenteCarrito$"></a>
+                    <span class="name">
+                        <span ><b>alertServicioExistenteCarrito$</b></span>
+                        <a href="#alertServicioExistenteCarrito$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.serviciosFacade.alertServicioExistenteCarrito$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="185" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="carrito$"></a>
+                    <span class="name">
+                        <span ><b>carrito$</b></span>
+                        <a href="#carrito$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CarritoService.html" target="_self" >Observable&lt;CarritoService[]&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.serviciosFacade.carrito$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:161</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contratoSelected$"></a>
+                    <span class="name">
+                        <span ><b>contratoSelected$</b></span>
+                        <a href="#contratoSelected$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ContratosUser.html" target="_self" >Observable&lt;ContratosUser&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.cubicacionFacade.contratoSelected$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formFilter"></a>
+                    <span class="name">
+                        <span ><b>formFilter</b></span>
+                        <a href="#formFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup(this.formFilterControls)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formFilterControls"></a>
+                    <span class="name">
+                        <span ><b>formFilterControls</b></span>
+                        <a href="#formFilterControls"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    actividad_id: new FormControl(null, [Validators.required]),
+    tipo_servicio_id: new FormControl(null, [Validators.required]),
+    servicio_cod: new FormControl(null, [Validators.required]),
+    unidad_obra_cod: new FormControl(null, [Validators.required]),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingAgregarServicioCarrito$"></a>
+                    <span class="name">
+                        <span ><b>loadingAgregarServicioCarrito$</b></span>
+                        <a href="#loadingAgregarServicioCarrito$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingAgregarServicioCarrito$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:181</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetActividadesContratoProveedor$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetActividadesContratoProveedor$</b></span>
+                        <a href="#loadingGetActividadesContratoProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetActividadesContratoProveedor$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetServiciosAgenciaContratoProveedor$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetServiciosAgenciaContratoProveedor$</b></span>
+                        <a href="#loadingGetServiciosAgenciaContratoProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetServiciosAgenciaContratoProveedor$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetTipoServiciosContrato$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetTipoServiciosContrato$</b></span>
+                        <a href="#loadingGetTipoServiciosContrato$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetTipoServiciosContrato$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingGetUnidadesObraServicio$"></a>
+                    <span class="name">
+                        <span ><b>loadingGetUnidadesObraServicio$</b></span>
+                        <a href="#loadingGetUnidadesObraServicio$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingGetUnidadesObraServicios$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="proveedorSelected$"></a>
+                    <span class="name">
+                        <span ><b>proveedorSelected$</b></span>
+                        <a href="#proveedorSelected$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;ProveedorAgenciaContrato&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.cubicacionFacade.proveedorSelected$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serviciosAgenciaContratoProveedor"></a>
+                    <span class="name">
+                        <span ><b>serviciosAgenciaContratoProveedor</b></span>
+                        <a href="#serviciosAgenciaContratoProveedor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ServicioAgenciaContratoProveedor[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serviciosAgenciaContratoProveedor$"></a>
+                    <span class="name">
+                        <span ><b>serviciosAgenciaContratoProveedor$</b></span>
+                        <a href="#serviciosAgenciaContratoProveedor$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.serviciosFacade.getServiciosAgenciaContratoProveedor$().pipe(
+      tap(values &#x3D;&gt; (this.serviciosAgenciaContratoProveedor &#x3D; values)),
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;servicio_cod&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: &#x60;${value.numero_producto} - ${value.descripcion}&#x60;,
+          code: value.codigo,
+        }))
+      )
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tipoServicioContrato$"></a>
+                    <span class="name">
+                        <span ><b>tipoServicioContrato$</b></span>
+                        <a href="#tipoServicioContrato$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.contratoFacade
+    .getTipoServiciosContrato$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;tipo_servicio_id&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.descripcion,
+          code: value.id,
+        }))
+      )
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unidadesObraServicio$"></a>
+                    <span class="name">
+                        <span ><b>unidadesObraServicio$</b></span>
+                        <a href="#unidadesObraServicio$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;Dropdown[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.serviciosFacade
+    .getUnidadesObraServicio$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;unidad_obra_cod&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt;
+          a.model_unidad_obra_cod.descripcion &gt;
+          b.model_unidad_obra_cod.descripcion
+            ? 1
+            : -1
+        );
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: &#x60;${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}&#x60;,
+          code: value.unidad_obra_cod,
+        }))
+      )
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/features/cubicacion/components/agregar-servicios-form/agregar-servicios-form.component.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from &#x27;@angular/core&#x27;;
+import { FormControl, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import {
+  AgenciaContrato,
+  CarritoService,
+  ContratosUser,
+  ProveedorAgenciaContrato,
+  RequestGetDetallesServicioTipoAgenciaContratoProveedor,
+  RequestGetServicioTipoAgenciaContratoProveedor,
+  ServicioAgenciaContratoProveedor,
+} from &#x27;@model&#x27;;
+import { ContratoFacade } from &#x27;@storeOT/contrato/contrato.facades&#x27;;
+import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
+import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
+import { ServiciosFacade } from &#x27;@storeOT/servicios/servicios.facades&#x27;;
+import { combineLatest, map, Observable, Subscription, take, tap } from &#x27;rxjs&#x27;;
+import { RequestGetUnidadObraServicio } from &#x27;src/app/core/model/unidad-obra&#x27;;
+import { FormularioService } from &#x27;src/app/core/service/formulario.service&#x27;;
+
+interface Dropdown {
+  name: string;
+  code: number | string;
+}
+
+/**
+ * @description
+ *   FORMULARIO QUE PERMITE AGREGAR UN SERVICIO/UO AL CARRITO
+ *   DATOS QUE PERMITE USAR:
+ *    - Actividad
+ *    - Tipo de servicio
+ *       Necesita:
+ *          - Actividad (interno en esta clase)
+ *          - Contrato marco (se debe obtener por NGRX)
+ *    - Servicios
+ *          - Actividad (interno en esta clase)
+ *          - Agencia (se debe obtener por NGRX)
+ *          - SubContrato  (se debe obtener por NGRX)
+ *          - Tipo de servicio (interno en esta clase)
+ *    - UO de un servicio
+ *          - Actividad (interno en esta clase)
+ *          - Servicio Cod(interno en esa clase)
+ *
+ * Datos previos necesarios:
+ *     - Actividades de un contrato/agencia/proveedor (NGRX)
+ */
+@Component({
+  selector: &#x27;zwc-agregar-servicios-form&#x27;,
+  templateUrl: &#x27;./agregar-servicios-form.component.html&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: [&#x27;./agregar-servicios-form.component.scss&#x27;],
+})
+export class AgregarServiciosFormComponent implements OnDestroy, OnInit {
+  subscription: Subscription &#x3D; new Subscription();
+  // DATOS A USAR
+  actividadesContratoProveedor$: Observable&lt;Dropdown[]&gt; &#x3D; this.contratoFacade
+    .getActividadesContratoProveedor$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;actividad_id&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.descripcion,
+          code: value.actividad_id,
+        }))
+      )
+    );
+
+  contratoSelected$: Observable&lt;ContratosUser&gt; &#x3D;
+    this.cubicacionFacade.contratoSelected$();
+
+  tipoServicioContrato$: Observable&lt;Dropdown[]&gt; &#x3D; this.contratoFacade
+    .getTipoServiciosContrato$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;tipo_servicio_id&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: value.descripcion,
+          code: value.id,
+        }))
+      )
+    );
+
+  agenciaSelected$: Observable&lt;AgenciaContrato&gt; &#x3D;
+    this.cubicacionFacade.agenciaSelected$();
+  proveedorSelected$: Observable&lt;ProveedorAgenciaContrato&gt; &#x3D;
+    this.cubicacionFacade.proveedorSelected$();
+
+  serviciosAgenciaContratoProveedor: ServicioAgenciaContratoProveedor[];
+  serviciosAgenciaContratoProveedor$: Observable&lt;Dropdown[]&gt; &#x3D;
+    this.serviciosFacade.getServiciosAgenciaContratoProveedor$().pipe(
+      tap(values &#x3D;&gt; (this.serviciosAgenciaContratoProveedor &#x3D; values)),
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;servicio_cod&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt; (a.descripcion &gt; b.descripcion ? 1 : -1));
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: &#x60;${value.numero_producto} - ${value.descripcion}&#x60;,
+          code: value.codigo,
+        }))
+      )
+    );
+  unidadesObraServicio$: Observable&lt;Dropdown[]&gt; &#x3D; this.serviciosFacade
+    .getUnidadesObraServicio$()
+    .pipe(
+      tap(values &#x3D;&gt;
+        this.formularioService.checkAndEnable(
+          this.formFilter,
+          &#x27;unidad_obra_cod&#x27;,
+          values
+        )
+      ),
+      map(values &#x3D;&gt; {
+        let tmp &#x3D; [...values];
+        return tmp.sort((a, b) &#x3D;&gt;
+          a.model_unidad_obra_cod.descripcion &gt;
+          b.model_unidad_obra_cod.descripcion
+            ? 1
+            : -1
+        );
+      }),
+      map(values &#x3D;&gt;
+        values.map(value &#x3D;&gt; ({
+          name: &#x60;${value.unidad_obra_cod} - ${value.model_unidad_obra_cod.descripcion}&#x60;,
+          code: value.unidad_obra_cod,
+        }))
+      )
+    );
+
+  carrito$: Observable&lt;CarritoService[]&gt; &#x3D; this.serviciosFacade.carrito$();
+
+  // FORMULARIO
+  formFilterControls: any &#x3D; {
+    actividad_id: new FormControl(null, [Validators.required]),
+    tipo_servicio_id: new FormControl(null, [Validators.required]),
+    servicio_cod: new FormControl(null, [Validators.required]),
+    unidad_obra_cod: new FormControl(null, [Validators.required]),
+  };
+  formFilter: FormGroup &#x3D; new FormGroup(this.formFilterControls);
+
+  // LOADINGS
+  loadingGetActividadesContratoProveedor$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetActividadesContratoProveedor$();
+  loadingGetTipoServiciosContrato$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetTipoServiciosContrato$();
+  loadingGetServiciosAgenciaContratoProveedor$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetServiciosAgenciaContratoProveedor$();
+  loadingGetUnidadesObraServicio$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingGetUnidadesObraServicios$();
+  loadingAgregarServicioCarrito$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingAgregarServicioCarrito$();
+
+  // EXTRAS
+  alertServicioExistenteCarrito$: Observable&lt;boolean&gt; &#x3D;
+    this.serviciosFacade.alertServicioExistenteCarrito$();
+
+  constructor(
+    private contratoFacade: ContratoFacade,
+    private cubicacionFacade: CubicacionFacade,
+    private serviciosFacade: ServiciosFacade,
+    private loadingsFacade: LoadingsFacade,
+    private formularioService: FormularioService
+  ) {}
+
+  ngOnInit(): void {
+    this.subscription.add(
+      combineLatest([
+        this.contratoSelected$,
+        this.formFilter.get(&#x27;actividad_id&#x27;).valueChanges,
+      ]).subscribe(([contratoSelected, actividad_id]) &#x3D;&gt; {
+        // TODO: WA para determinar si es efectivamente un cambio de actividad escogido en el formulario o es un cambio de contrato
+        let preValues &#x3D; this.formFilter.value;
+        let actualValue &#x3D; this.formFilter.get(&#x27;actividad_id&#x27;).value;
+
+        let actividad_id_change &#x3D; false;
+        if (
+          (preValues.actividad_id &#x3D;&#x3D;&#x3D; null &amp;&amp; actualValue !&#x3D;&#x3D; null) ||
+          (preValues.actividad_id !&#x3D;&#x3D; null &amp;&amp;
+            preValues.actividad_id !&#x3D;&#x3D; actividad_id)
+        ) {
+          actividad_id_change &#x3D; true;
+        }
+
+        // CALL GET TIPOS DE SERVICIOS
+        if (
+          actividad_id &amp;&amp;
+          actividad_id !&#x3D;&#x3D; null &amp;&amp;
+          contratoSelected &amp;&amp;
+          contratoSelected !&#x3D;&#x3D; null &amp;&amp;
+          actividad_id_change
+        ) {
+          this.serviciosFacade.alertServicioExistenteCarrito(false);
+          this.contratoFacade.getTipoServiciosContrato(
+            actividad_id,
+            contratoSelected.contrato_id
+          );
+        }
+      })
+    );
+
+    this.subscription.add(
+      combineLatest([
+        this.proveedorSelected$,
+        this.agenciaSelected$,
+        this.formFilter.get(&#x27;tipo_servicio_id&#x27;).valueChanges,
+      ]).subscribe(([proveedorSelected, agenciaSelected, tipo_servicio_id]) &#x3D;&gt; {
+        // TODO: WA
+        let preValues &#x3D; this.formFilter.value;
+        let actualValue &#x3D; this.formFilter.get(&#x27;tipo_servicio_id&#x27;).value;
+
+        let tipo_servicio_id_change &#x3D; false;
+        if (
+          (preValues.tipo_servicio_id &#x3D;&#x3D;&#x3D; null &amp;&amp; actualValue !&#x3D;&#x3D; null) ||
+          (preValues.tipo_servicio_id !&#x3D;&#x3D; null &amp;&amp;
+            preValues.tipo_servicio_id !&#x3D;&#x3D; tipo_servicio_id)
+        ) {
+          tipo_servicio_id_change &#x3D; true;
+        }
+
+        // CALL GET SERVICIOS
+        if (
+          agenciaSelected &amp;&amp;
+          agenciaSelected !&#x3D;&#x3D; null &amp;&amp;
+          proveedorSelected &amp;&amp;
+          proveedorSelected !&#x3D;&#x3D; null &amp;&amp;
+          tipo_servicio_id &amp;&amp;
+          tipo_servicio_id !&#x3D;&#x3D; null &amp;&amp;
+          tipo_servicio_id_change
+        ) {
+          let request: RequestGetServicioTipoAgenciaContratoProveedor &#x3D; {
+            actividad_id: +this.formFilter.get(&#x27;actividad_id&#x27;).value,
+            agencia_id: agenciaSelected.id,
+            cmarco_has_prov_id: proveedorSelected.cmarco_has_proveedor_id,
+            tipo_servicio_id,
+          };
+          this.serviciosFacade.alertServicioExistenteCarrito(false);
+          this.serviciosFacade.getServiciosAgenciaContratoProveedor(request);
+        }
+      })
+    );
+
+    this.subscription.add(
+      this.formFilter
+        .get(&#x27;servicio_cod&#x27;)
+        .valueChanges.subscribe(servicio_cod &#x3D;&gt; {
+          // CALL UNIDADES DE OBRAS
+          if (servicio_cod &amp;&amp; servicio_cod !&#x3D;&#x3D; null) {
+            this.serviciosFacade.alertServicioExistenteCarrito(false);
+            let request: RequestGetUnidadObraServicio &#x3D; {
+              servicio_cod,
+              actividad_id: +this.formFilter.get(&#x27;actividad_id&#x27;).value,
+            };
+            this.serviciosFacade.getUnidadesObraServicio(request);
+          }
+        })
+    );
+
+    this.subscription.add(
+      this.formFilter
+        .get(&#x27;unidad_obra_cod&#x27;)
+        .valueChanges.subscribe(unidad_obra_cod &#x3D;&gt; {
+          // CALL UNIDADES DE OBRAS
+          if (unidad_obra_cod &amp;&amp; unidad_obra_cod !&#x3D;&#x3D; null) {
+            this.serviciosFacade.alertServicioExistenteCarrito(false);
+          }
+        })
+    );
+  }
+
+  agregarServicio(): void {
+    this.subscription.add(
+      combineLatest([
+        this.proveedorSelected$,
+        this.agenciaSelected$,
+        this.carrito$,
+      ])
+        .pipe(take(1))
+        .subscribe(([proveedorSelected, agenciaSelected, carrito]) &#x3D;&gt; {
+          const unidad_obra_cod &#x3D; this.formFilter.get(&#x27;unidad_obra_cod&#x27;).value;
+          const servicio_id &#x3D; this.serviciosAgenciaContratoProveedor.find(
+            value &#x3D;&gt; value.codigo &#x3D;&#x3D;&#x3D; this.formFilter.get(&#x27;servicio_cod&#x27;).value
+          ).id;
+
+          const servicioExiste &#x3D; carrito.find(
+            servicio &#x3D;&gt;
+              servicio.servicio_id &#x3D;&#x3D;&#x3D; servicio_id &amp;&amp;
+              servicio.unidad_obras[0].uo_codigo &#x3D;&#x3D;&#x3D; unidad_obra_cod
+          );
+          if (servicioExiste !&#x3D;&#x3D; undefined) {
+            this.serviciosFacade.alertServicioExistenteCarrito(true);
+          } else {
+            this.serviciosFacade.alertServicioExistenteCarrito(false);
+            const request_service: RequestGetDetallesServicioTipoAgenciaContratoProveedor &#x3D;
+              {
+                agencia_id: agenciaSelected.id,
+                cmarco_has_proveedor_id:
+                  proveedorSelected.cmarco_has_proveedor_id,
+                servicio_id: +servicio_id,
+                tipo_servicio_id: this.formFilter.get(&#x27;tipo_servicio_id&#x27;).value,
+                actividad_id: this.formFilter.get(&#x27;actividad_id&#x27;).value,
+              };
+
+            this.serviciosFacade.addServicioCarrito(
+              request_service,
+              this.formFilter.get(&#x27;unidad_obra_cod&#x27;).value
+            );
+          }
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;p-divider align&#x3D;&quot;left&quot;&gt;
+    &lt;span class&#x3D;&quot;p-tag&quot;&gt;Agregar Servicios&lt;/span&gt;
+&lt;/p-divider&gt; --&gt;
+
+&lt;form [formGroup]&#x3D;&quot;formFilter&quot; &gt;
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12&quot;&gt;
+                &lt;!-- &lt;div class&#x3D;&quot;field col-12 md:col-6 lg:col-6 xl:col-6&quot;&gt; --&gt;
+                &lt;zwc-pdropdown 
+                [control]&#x3D;&quot;formFilterControls.actividad_id&quot; 
+                Label&#x3D;&quot;Actividad&quot; 
+                dropdown_id&#x3D;&quot;select-actividad&quot; 
+                [data]&#x3D;&quot;actividadesContratoProveedor$|async&quot; 
+                Pplaceholder&#x3D;&quot;Selecione una actividad&quot;
+                [loading]&#x3D;&quot;loadingGetActividadesContratoProveedor$|async&quot;&gt;&lt;/zwc-pdropdown&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+                &lt;zwc-pdropdown 
+                [control]&#x3D;&quot;formFilterControls.tipo_servicio_id&quot; 
+                Label&#x3D;&quot;Tipo Servicio&quot; 
+                dropdown_id&#x3D;&quot;select-tipo-servicio&quot; 
+                [data]&#x3D;&quot;tipoServicioContrato$|async&quot; 
+                Pplaceholder&#x3D;&quot;Selecione un tipo servicio&quot;
+                [loading]&#x3D;&quot;loadingGetTipoServiciosContrato$|async&quot;&gt;&lt;/zwc-pdropdown&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;formgrid grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 &quot;&gt;
+                &lt;zwc-pdropdown 
+                [control]&#x3D;&quot;formFilterControls.servicio_cod&quot; 
+                Label&#x3D;&quot;Servicio&quot; 
+                dropdown_id&#x3D;&quot;select-servicio&quot; 
+                [data]&#x3D;&quot;serviciosAgenciaContratoProveedor$|async&quot; 
+                Pplaceholder&#x3D;&quot;Selecione un servicio&quot;
+                [loading]&#x3D;&quot;loadingGetServiciosAgenciaContratoProveedor$|async&quot;
+                [Pfilter]&#x3D;&quot;true&quot; 
+                PfilterBy&#x3D;&quot;name&quot; 
+                [PshowClear]&#x3D;&quot;true&quot; &gt;&lt;/zwc-pdropdown&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;field col-12&quot;&gt;
+                &lt;zwc-pdropdown 
+                [control]&#x3D;&quot;formFilterControls.unidad_obra_cod&quot; 
+                Label&#x3D;&quot;Unidad de Obra&quot; 
+                dropdown_id&#x3D;&quot;select-unidad-obra&quot; 
+                [data]&#x3D;&quot;unidadesObraServicio$|async&quot; 
+                Pplaceholder&#x3D;&quot;Selecione una unidad de obra&quot;
+                [loading]&#x3D;&quot;loadingGetUnidadesObraServicio$|async&quot;
+                [Pfilter]&#x3D;&quot;true&quot; 
+                PfilterBy&#x3D;&quot;name&quot; 
+                [PshowClear]&#x3D;&quot;true&quot; &gt;&lt;/zwc-pdropdown&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;zwc-pbutton-sending 
+        Pid&#x3D;&quot;agregar-button&quot;
+        content&#x3D;&quot;Agregar&quot;
+        Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot;
+        [Pdisabled]&#x3D;&quot;!formFilter.valid &amp;&amp; (loadingAgregarServicioCarrito$|async)&#x3D;&#x3D;&#x3D;false&quot;
+        [sending]&#x3D;&quot;loadingAgregarServicioCarrito$|async&quot;
+        (call)&#x3D;&quot;agregarServicio()&quot;
+        &gt;&lt;/zwc-pbutton-sending&gt;
+
+        &lt;div class&#x3D;&quot;message&quot; id&#x3D;&quot;alert-sevicio-existente&quot; *ngIf&#x3D;&quot;alertServicioExistenteCarrito$|async&quot; &gt;
+            &lt;p-message  severity&#x3D;&quot;warn&quot; text&#x3D;&quot;El servicio ya fue agregado a la cubicación&quot; styleClass&#x3D;&quot;mr-2&quot;  &gt;&lt;/p-message&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./agregar-servicios-form.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host ::ng-deep{
+    .p-divider .p-divider-content{
+        background: transparent;
+    }
+    .p-tag{
+        font-weight:   100;
+    }
+}
+
+
+:host ::ng-deep {
+    .message{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    .p-inline-message {
+        padding: 0.5rem !important; 
+    }
+    .p-inline-message .p-inline-message-text {
+        font-size: 0.8rem;
+        font-weight: 400;
+      }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- <p-divider align="left">    <span class="p-tag">Agregar Servicios</span></p-divider> --><form [formGroup]="formFilter" >    <div class="card">        <div class="formgrid grid">            <div class="field col-12">                <!-- <div class="field col-12 md:col-6 lg:col-6 xl:col-6"> -->                <zwc-pdropdown                 [control]="formFilterControls.actividad_id"                 Label="Actividad"                 dropdown_id="select-actividad"                 [data]="actividadesContratoProveedor$|async"                 Pplaceholder="Selecione una actividad"                [loading]="loadingGetActividadesContratoProveedor$|async"></zwc-pdropdown>            </div>            <div class="field col-12 ">                <zwc-pdropdown                 [control]="formFilterControls.tipo_servicio_id"                 Label="Tipo Servicio"                 dropdown_id="select-tipo-servicio"                 [data]="tipoServicioContrato$|async"                 Pplaceholder="Selecione un tipo servicio"                [loading]="loadingGetTipoServiciosContrato$|async"></zwc-pdropdown>            </div>        </div>        <div class="formgrid grid">            <div class="field col-12 ">                <zwc-pdropdown                 [control]="formFilterControls.servicio_cod"                 Label="Servicio"                 dropdown_id="select-servicio"                 [data]="serviciosAgenciaContratoProveedor$|async"                 Pplaceholder="Selecione un servicio"                [loading]="loadingGetServiciosAgenciaContratoProveedor$|async"                [Pfilter]="true"                 PfilterBy="name"                 [PshowClear]="true" ></zwc-pdropdown>            </div>            <div class="field col-12">                <zwc-pdropdown                 [control]="formFilterControls.unidad_obra_cod"                 Label="Unidad de Obra"                 dropdown_id="select-unidad-obra"                 [data]="unidadesObraServicio$|async"                 Pplaceholder="Selecione una unidad de obra"                [loading]="loadingGetUnidadesObraServicio$|async"                [Pfilter]="true"                 PfilterBy="name"                 [PshowClear]="true" ></zwc-pdropdown>            </div>        </div>        <zwc-pbutton-sending         Pid="agregar-button"        content="Agregar"        Pclass="p-button-info p-button-sm mt-4 w-full"        [Pdisabled]="!formFilter.valid && (loadingAgregarServicioCarrito$|async)===false"        [sending]="loadingAgregarServicioCarrito$|async"        (call)="agregarServicio()"        ></zwc-pbutton-sending>        <div class="message" id="alert-sevicio-existente" *ngIf="alertServicioExistenteCarrito$|async" >            <p-message  severity="warn" text="El servicio ya fue agregado a la cubicación" styleClass="mr-2"  ></p-message>        </div>    </div></form></div>'
+    var COMPONENTS = [{'name': 'AgregarServiciosFormComponent', 'selector': 'zwc-agregar-servicios-form'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableFiltersListCubComponent', 'selector': 'zwc-table-filters-list-cub'},{'name': 'TableListComponent', 'selector': 'zwc-table-list-cub'},{'name': 'TableServicesComponent', 'selector': 'zwc-table-services'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AgregarServiciosFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AgregarServiciosFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

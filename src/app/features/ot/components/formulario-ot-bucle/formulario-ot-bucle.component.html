@@ -1,0 +1,89 @@
+<p-divider align="center">
+    <span class="p-tag">Contrato Marco: Bucle</span>
+</p-divider>
+
+<form [formGroup]="form">
+    <div class="card">
+        <div class="formgrid grid">
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('oficina_central_id')" Label="*Oficina Central:"
+                    dropdown_id="select-oficina-central" [data]="oficinasCentrales$|async"
+                    Pplaceholder="Selecione una oficina central" [loading]="loadingOficinaCentral$|async">
+                </zwc-pdropdown>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('solicitante_id')" Label="*Solcitado Por:"
+                    dropdown_id="select-solicitado-por" [data]="solicitadoPor$|async" Pplaceholder="Selecione un item"
+                    [loading]="loadingSolicitadoPor$|async">
+                </zwc-pdropdown>
+            </div>
+
+            <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                <zwc-input-text Label="*Dirección" [control]="form.get('direccion')" name_input="input-direccion">
+                </zwc-input-text>
+            </div>
+            <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                <zwc-input-text Label="*Altura" [control]="form.get('altura')" name_input="input-altura">
+                </zwc-input-text>
+            </div>
+
+            <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                <zwc-input-text Label="*Piso" [control]="form.get('piso')" name_input="input-piso"></zwc-input-text>
+            </div>
+            <div class="field col-12 md:col-3 lg:col-3 xl:col-3">
+                <zwc-input-text Label="*Departamento" [control]="form.get('departamento')"
+                    name_input="input-departamento"></zwc-input-text>
+            </div>
+
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('comuna_id')" Label="*Comuna:" dropdown_id="select-comuna"
+                    [data]="comunasFromCub$|async" Pplaceholder="Selecione una comuna"
+                    [loading]="loadingComunasFromCub$|async">
+                </zwc-pdropdown>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+            </div>
+
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('tipo_red_id')" Label="*Tipo de red:" dropdown_id="select-tipo-red"
+                    [data]="tipoDeRed$|async" Pplaceholder="Selecione un tipo de red"
+                    [loading]="loadingTipoDeRed$|async">
+                </zwc-pdropdown>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('tipo_trabajo_id')" Label="*Tipo de trabajo:"
+                    dropdown_id="select-tipo-trabajo" [data]="tipoDeTrabajoFromCub$|async"
+                    Pplaceholder="Selecione un tipo de trabajo" [loading]="loadingTipoDeTrabajoFromCub$|async">
+                </zwc-pdropdown>
+            </div>
+            <div class="field col-12 ">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="control-tiene-boleta"
+                        formControlName="tiene_boleta_garantia">
+                    <label class="form-check-label" for="defaultCheck1">
+                        ¿Tiene boleta de garantía?
+                    </label>
+                </div>
+                <br>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="control-tiene-permiso"
+                        formControlName="tiene_permisos">
+                    <label class="form-check-label" for="defaultCheck1">
+                        ¿Tiene permisos?
+                    </label>
+                </div>
+            </div>
+
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-pdropdown [control]="form.get('area_negocio')" Label="*Área de negocio:"
+                    dropdown_id="select-area-negocio" [data]="areaDeNegocio$|async"
+                    Pplaceholder="Selecione un área de negocio " [loading]="loadingAreaDeNegocio$|async">
+                </zwc-pdropdown>
+            </div>
+            <div class="field col-12 md:col-6 lg:col-6 xl:col-6">
+                <zwc-input-text Label="*Nombre de proyectista" [control]="form.get('nombre_proyectista')"
+                    name_input="input-nombre-proyectista"></zwc-input-text>
+            </div>
+        </div>
+    </div>
+</form>

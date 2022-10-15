@@ -1,0 +1,82 @@
+:host ::ng-deep {
+
+    .p-datatable {
+        border: 1px solid #efefef;
+    }
+
+    fa-icon {
+        margin-right: 3px;
+        font-size: 0.7rem;
+        color: #545454;
+    }
+
+    .p-datatable.p-datatable-sm .p-datatable-header {
+        background: #efefef;
+    }
+
+    .p-datatable .p-datatable-thead>tr>th {
+        border: 0px;
+        border-width: 0px;
+        border-right: 1px solid #f4f4f4 !important;
+        border-bottom: 1px solid #d1cece;
+        background-color: #efefef;
+        font-size: var(--size-text-sigo);
+        font-weight: 700;
+
+        p-sorticon>i {
+            font-size: 0.8rem !important;
+        }
+    }
+
+    .p-datatable .p-datatable-thead>tr>th>div {
+        display: flex;
+        align-items: center;
+    }
+
+    td {
+        padding: 0.1rem 0.2rem 0.1rem 0.6rem !important;
+        border: 0 !important;
+        border-right: 1px solid #d8d8d8 !important;
+        border-bottom: 1px solid #d8d8d8 !important;
+        font-size: var(--size-text-sigo);
+    }
+
+    div>span>input {
+        height: 30px;
+        border-color: #c3bebe;
+        border-radius: 4px;
+    }
+
+    .p-paginator-bottom {
+        font-size: 0.8rem;
+
+        span button {
+            font-size: 0.8rem;
+        }
+    }
+
+    .p-paginator-page {
+        min-width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
+
+    .p-datatable-footer {
+        font-size: 0.8rem;
+    }
+}
+
+:host ::ng-deep {
+    .p-chip {
+        img {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-left: -10px;
+        }
+    }
+
+    .p-chip-text {
+        font-size: var(--size-text-sigo);
+        margin: 0;
+        padding: 1px;
+    }
+}

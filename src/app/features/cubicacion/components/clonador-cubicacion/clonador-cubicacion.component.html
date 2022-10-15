@@ -1,0 +1,9 @@
+<form novalidate autocomplete="off" [formGroup]="form">
+    <zwc-input-text Label="*Nombre de la nueva Cubicación" [control]="formControls.nombre"
+        name_input="input-nombre-clone-cubicacion"></zwc-input-text>
+
+    <zwc-pbutton-sending Pid="clonar-cubicacion" content="Crear nueva cubicación"
+        Pclass="p-button-info p-button-sm mt-4 w-full"
+        [Pdisabled]="!form.valid || (sendingClonarCubicacion$|async)===true" [sending]="sendingClonarCubicacion$|async"
+        (call)="clonarCubicacion()"></zwc-pbutton-sending>
+</form>

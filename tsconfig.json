@@ -18,15 +18,25 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ]
+    "strictNullChecks": false,
+    "paths": {
+      "@environment": ["src/environments/environment"],
+      "@model": ["src/app/core/model"],
+      "@coreOT": ["src/app/core"],
+      "@sharedOT/*": ["src/app/shared/*"],
+      "@mocksOT": ["src/mocks"],
+      "@storeOT/*": ["src/app/store/*"],
+      "@services": ["src/app/core/service"]
+      // "@utilsSIGO/*": ["src/app/utils/*"],
+      // "@pages/*": ["src/app/pages/*"]
+    },
+    "lib": ["es2020", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
-  }
+    "strictTemplates": false
+  },
+  "exclude": ["node_modules", "cypress", "./cypress.config.ts"]
 }

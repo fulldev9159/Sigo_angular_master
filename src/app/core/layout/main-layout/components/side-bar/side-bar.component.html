@@ -1,0 +1,17 @@
+<div class="layout-sidebar">
+    <div class="img-container">
+        <img src="./assets/images/logo-movistar.png" alt="Logo empresa">
+    </div>
+    <div class="sesion-container">
+        <div class="icon-session">
+            <fa-icon [icon]="faUser"></fa-icon>
+        </div>
+        <p style="font-weight: 700;">{{sessionData.usuario_nombre | titlecase}} </p>
+        <p style="font-size: 10px;font-weight: 100;">(proxy_id: {{sessionData.perfil_proxy_id}})</p>
+        <p style="font-size: 12px;">{{sessionData.nombre_perfil_select}} </p>
+    </div>
+    <!-- <zwc-menu></zwc-menu> -->
+    <ng-container *ngIf="showMenuDetalleOT$|async">
+        <zwc-menu-detalle-ot></zwc-menu-detalle-ot>
+    </ng-container>
+</div>

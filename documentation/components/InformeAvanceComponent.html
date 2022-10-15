@@ -1,0 +1,1492 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li
+  >
+  InformeAvanceComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>zwc-informe-avance</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./informe-avance.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./informe-avance.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#accionesOT" >accionesOT</a>
+                            </li>
+                            <li>
+                                <a href="#agregarServiciosForm" >agregarServiciosForm</a>
+                            </li>
+                            <li>
+                                <a href="#carrito$" >carrito$</a>
+                            </li>
+                            <li>
+                                <a href="#ot_id" >ot_id</a>
+                            </li>
+                            <li>
+                                <a href="#sendingSendInformeAvance$" >sendingSendInformeAvance$</a>
+                            </li>
+                            <li>
+                                <a href="#serviciosInformeAvance" >serviciosInformeAvance</a>
+                            </li>
+                            <li>
+                                <a href="#showModalRechazarInformeAvance" >showModalRechazarInformeAvance</a>
+                            </li>
+                            <li>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                            <li>
+                                <a href="#tableServiciosAdicionales" >tableServiciosAdicionales</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#accionExist" >accionExist</a>
+                            </li>
+                            <li>
+                                <a href="#autorizarInformeAvance" >autorizarInformeAvance</a>
+                            </li>
+                            <li>
+                                <a href="#displayModalRechazarInformeAvance" >displayModalRechazarInformeAvance</a>
+                            </li>
+                            <li>
+                                <a href="#enviarInformeAvance" >enviarInformeAvance</a>
+                            </li>
+                            <li>
+                                <a href="#guardarBorrador" >guardarBorrador</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(serviciosFacade: <a href="../injectables/ServiciosFacade.html" target="_self">ServiciosFacade</a>, contratoFacade: <a href="../injectables/ContratoFacade.html" target="_self">ContratoFacade</a>, cubicacionFacade: <a href="../injectables/CubicacionFacade.html" target="_self">CubicacionFacade</a>, loadingsFacade: <a href="../injectables/LoadingsFacade.html" target="_self">LoadingsFacade</a>, informeAvanceFacade: <a href="../injectables/InformeAvanceFacade.html" target="_self">InformeAvanceFacade</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:72</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>serviciosFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ServiciosFacade.html" target="_self" >ServiciosFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>contratoFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContratoFacade.html" target="_self" >ContratoFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cubicacionFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CubicacionFacade.html" target="_self" >CubicacionFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>loadingsFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LoadingsFacade.html" target="_self" >LoadingsFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>informeAvanceFacade</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/InformeAvanceFacade.html" target="_self" >InformeAvanceFacade</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accionExist"></a>
+                    <span class="name">
+                        <span ><b>accionExist</b></span>
+                        <a href="#accionExist"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>accionExist(accion: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="242"
+                            class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:242</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>accion</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="autorizarInformeAvance"></a>
+                    <span class="name">
+                        <span ><b>autorizarInformeAvance</b></span>
+                        <a href="#autorizarInformeAvance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>autorizarInformeAvance()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="338"
+                            class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:338</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="displayModalRechazarInformeAvance"></a>
+                    <span class="name">
+                        <span ><b>displayModalRechazarInformeAvance</b></span>
+                        <a href="#displayModalRechazarInformeAvance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>displayModalRechazarInformeAvance()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="334"
+                            class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:334</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enviarInformeAvance"></a>
+                    <span class="name">
+                        <span ><b>enviarInformeAvance</b></span>
+                        <a href="#enviarInformeAvance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>enviarInformeAvance()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="326"
+                            class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:326</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardarBorrador"></a>
+                    <span class="name">
+                        <span ><b>guardarBorrador</b></span>
+                        <a href="#guardarBorrador"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>guardarBorrador()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="246"
+                            class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:246</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="194"
+                            class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:194</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="347"
+                            class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:347</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="83"
+                            class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:83</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="accionesOT"></a>
+                    <span class="name">
+                        <span ><b>accionesOT</b></span>
+                        <a href="#accionesOT"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Accion.html" target="_self" >Accion[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="agregarServiciosForm"></a>
+                    <span class="name">
+                        <span ><b>agregarServiciosForm</b></span>
+                        <a href="#agregarServiciosForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/FormAgregarServiciosComponent.html" target="_self" >FormAgregarServiciosComponent</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;agregarServiciosForm&#x27;, {read: FormAgregarServiciosComponent, static: false})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="carrito$"></a>
+                    <span class="name">
+                        <span ><b>carrito$</b></span>
+                        <a href="#carrito$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.serviciosFacade.carrito$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ot_id"></a>
+                    <span class="name">
+                        <span ><b>ot_id</b></span>
+                        <a href="#ot_id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendingSendInformeAvance$"></a>
+                    <span class="name">
+                        <span ><b>sendingSendInformeAvance$</b></span>
+                        <a href="#sendingSendInformeAvance$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingsFacade.sendingCreateOT$()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serviciosInformeAvance"></a>
+                    <span class="name">
+                        <span ><b>serviciosInformeAvance</b></span>
+                        <a href="#serviciosInformeAvance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CarritoService.html" target="_self" >CarritoService[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showModalRechazarInformeAvance"></a>
+                    <span class="name">
+                        <span ><b>showModalRechazarInformeAvance</b></span>
+                        <a href="#showModalRechazarInformeAvance"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tableServiciosAdicionales"></a>
+                    <span class="name">
+                        <span ><b>tableServiciosAdicionales</b></span>
+                        <a href="#tableServiciosAdicionales"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/TableServiciosComponent.html" target="_self" >TableServiciosComponent</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;tableServiciosAdicionales&#x27;, {read: TableServiciosComponent, static: false})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/informe-avance/components/informe-avance/informe-avance.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from &#x27;@angular/core&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import {
+  Accion,
+  AgenciaContrato,
+  CarritoService,
+  ContratosUser,
+  DetalleInformeAvance,
+  DetalleOT,
+  NuevoServicioAdicional,
+  ProveedorAgenciaContrato,
+  RequestAdicionales,
+  RequestAutorizarInformeAvance,
+} from &#x27;@model&#x27;;
+import { FormAgregarServiciosComponent } from &#x27;@sharedOT/form-agregar-servicios/form-agregar-servicios.component&#x27;;
+import { TableServiciosComponent } from &#x27;@sharedOT/table-servicios/table-servicios.component&#x27;;
+import { ContratoFacade } from &#x27;@storeOT/contrato/contrato.facades&#x27;;
+import { CubicacionFacade } from &#x27;@storeOT/cubicacion/cubicacion.facades&#x27;;
+import { InformeAvanceFacade } from &#x27;@storeOT/informe-avance/informe-avance.facades&#x27;;
+import { LoadingsFacade } from &#x27;@storeOT/loadings/loadings.facade&#x27;;
+import { ServiciosFacade } from &#x27;@storeOT/servicios/servicios.facades&#x27;;
+import { Observable, Subscription, take } from &#x27;rxjs&#x27;;
+
+// 92 TODO: CREAR LAS RESTRICCIONES DE ACCESO POR USUARIO Y ADEMÁS POR ETAPA
+// 92 TODO: SOLO DBE PERMITIR ENTRAR EN LA ETAPA DE EJECUCIÓN DE TRABAJOS
+// 105 TODO: VER SI ES MEJOR UX REFRESCAR EL NGRX QUE LA PÁGINA AL GUARDAR BORRADOR
+// 106 TODO: CONFIRMAR: SI EL ADMIN EECC REALIZA MODIFICACIONES AL INFORME DE AVANCE Y LO RECHAZA ESOS CAMBIOS TAMBIÉN SE DEBERAN GUARDAR
+// 107 TODO: MOSTRAR EL TOTAL EN LA VISTA DEL ADMIN EECC
+// 108 TODO: IMPLEMENTAR BOTON RECHAZAR INFORME DE AVANCE
+// 109 TODO: PROBAR QUE OTROS USUARIOS DE OTRAS EMPRESAS NO PUEDAN ACCEDER AL ID DE UNA OT QUE NO ES DE SU EMPRESA
+// 110 TODO: PROBAR SI AL CAMBIAR INFORMACION DEL INFORME Y APROBAR/RECHAZAR GUARDA EL CAMBIO
+// 111 TODO: AGREGAR UN MODAL DE VALIDACIÓN DE ACCIÓN AL AUTORIZAR INFORME DE AVANCE
+@Component({
+  selector: &#x27;zwc-informe-avance&#x27;,
+  templateUrl: &#x27;./informe-avance.component.html&#x27;,
+  styleUrls: [&#x27;./informe-avance.component.scss&#x27;],
+})
+export class InformeAvanceComponent
+  implements OnDestroy, OnInit, AfterViewInit
+{
+  @ViewChild(&#x27;agregarServiciosForm&#x27;, {
+    read: FormAgregarServiciosComponent,
+    static: false,
+  })
+  agregarServiciosForm: FormAgregarServiciosComponent;
+
+  @ViewChild(&#x27;tableServiciosAdicionales&#x27;, {
+    read: TableServiciosComponent,
+    static: false,
+  })
+  tableServiciosAdicionales: TableServiciosComponent;
+
+  subscription: Subscription &#x3D; new Subscription();
+  serviciosInformeAvance: CarritoService[] &#x3D; [];
+  // 112 TODO: MEJORAR MANERA DE ARMAR LOS DATOS DEL SERVICIO A AGREGAR, ACTUALMENTE SE BUSCA DESDE EL CARRITO HACIA EL CARRITO, TIENE UNA VUELTA MEDIA RARA
+  carrito$ &#x3D; this.serviciosFacade.carrito$();
+  accionesOT: Accion[] &#x3D; [];
+  ot_id: number;
+
+  // 126 TODO: AGREGAR EL SENDING BORRADOR
+  // LOADINGS
+  sendingSendInformeAvance$: Observable&lt;boolean&gt; &#x3D;
+    this.loadingsFacade.sendingCreateOT$();
+
+  // MODAL
+  showModalRechazarInformeAvance &#x3D; false;
+
+  constructor(
+    private serviciosFacade: ServiciosFacade,
+    private contratoFacade: ContratoFacade,
+    private cubicacionFacade: CubicacionFacade,
+    private loadingsFacade: LoadingsFacade,
+    private informeAvanceFacade: InformeAvanceFacade,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.serviciosFacade.resetCarritoServices();
+    this.subscription.add(
+      this.route.data.subscribe(
+        ({ detalleOT, detalleInformeAvance, accionesOT }) &#x3D;&gt; {
+          console.log(accionesOT);
+          if (accionesOT) this.accionesOT &#x3D; accionesOT;
+          if (detalleInformeAvance) {
+            const detalleInforme &#x3D;
+              detalleInformeAvance.data as DetalleInformeAvance;
+            const ot &#x3D; detalleOT.data as DetalleOT;
+
+            this.ot_id &#x3D; ot.ot.id;
+
+            // PRECARGAR DATOS FILTROS PARA AGREGAR SERVICIOS
+            this.contratoFacade.getActividadesContratoProveedor(
+              +ot.ot.model_cubicacion_id.cmarco_has_proveedor_id
+            );
+
+            let contrato: ContratosUser &#x3D; {
+              contrato_id: +ot.ot.model_cubicacion_id.contrato_id,
+            };
+            this.cubicacionFacade.contratoSelected(contrato);
+
+            let agencia: AgenciaContrato &#x3D; {
+              id: ot.ot.model_cubicacion_id.agencia_id,
+              nombre: &#x27;&#x27;,
+            };
+            this.cubicacionFacade.agenciaSelected(agencia);
+
+            let proveedor: ProveedorAgenciaContrato &#x3D; {
+              cmarco_has_proveedor_id:
+                ot.ot.model_cubicacion_id.cmarco_has_proveedor_id,
+              id: ot.ot.model_cubicacion_id.proveedor_id,
+            };
+            this.cubicacionFacade.proveedorSelected(proveedor);
+
+            // CARGAR CARRITO
+            detalleInforme.many_informe_has_servicio.forEach(service &#x3D;&gt; {
+              service.many_informe_has_uob.forEach(uo &#x3D;&gt; {
+                let new_service: CarritoService &#x3D; {
+                  precargado: true,
+                  servicio_rowid: service.id,
+                  servicio_cantidad: service.cantidad,
+                  adicional: service.adicional_aceptacion_estado,
+
+                  servicio_id: service.servicio_id,
+                  servicio_codigo: service.model_servicio_id.codigo,
+                  numero_producto: service.numero_producto,
+                  servicio_precio_final_clp: service.valor_unitario_clp,
+                  servicio_nombre: service.model_servicio_id.descripcion,
+                  tipo_servicio_descripcion: &#x27;TODO&#x27;,
+                  tipo_servicio_id: service.tipo_servicio_id,
+                  servicio_unidad_cod: service.model_unidad_id.codigo,
+                  servicio_unidad_descripcion:
+                    service.model_unidad_id.descripcion,
+                  unidad_obras: [
+                    {
+                      precargado: true,
+                      uo_rowid: uo.id,
+                      uo_cantidad: uo.cantidad,
+
+                      uo_codigo: uo.unidad_obra_cod,
+                      uo_nombre: uo.model_unidad_obra_cod.descripcion,
+                      uo_precio_total_clp: uo.valor_unitario_clp,
+                      actividad_descripcion: &#x27;TODO&#x27;,
+                      actividad_id: -1,
+                      uob_unidad_medida_cod: uo.model_unidad_id.codigo,
+                      uob_unidad_medida_descripcion:
+                        uo.model_unidad_id.descripcion,
+                    },
+                  ],
+                };
+
+                // PARA CARGAR INFORME DE AVANCE
+                if (new_service.adicional &#x3D;&#x3D;&#x3D; &#x27;ORIGINAL&#x27;)
+                  this.serviciosInformeAvance.push(new_service);
+                // PARA PRE CARGAR SERVICIOS ADICIONALES
+                if (new_service.adicional !&#x3D;&#x3D; &#x27;ORIGINAL&#x27;)
+                  this.serviciosFacade.addDirectServiceCarrito(new_service);
+              });
+            });
+            let valueInitial: CarritoService[] &#x3D; [];
+            this.serviciosInformeAvance &#x3D; this.serviciosInformeAvance.reduce(
+              (acc, curr) &#x3D;&gt; {
+                let indexService &#x3D; acc.findIndex(
+                  value &#x3D;&gt; value.servicio_id &#x3D;&#x3D;&#x3D; curr.servicio_id
+                );
+                if (indexService &#x3D;&#x3D;&#x3D; -1) {
+                  acc.push(curr);
+                } else {
+                  let temp &#x3D; [
+                    ...acc.map(item &#x3D;&gt; ({
+                      ...item,
+                      unidad_obras: [...item.unidad_obras],
+                    })),
+                  ];
+                  temp[indexService].unidad_obras.push(...curr.unidad_obras);
+                  acc[indexService] &#x3D; temp[indexService];
+                }
+
+                return acc;
+              },
+              valueInitial
+            );
+          }
+        }
+      )
+    );
+  }
+
+  ngAfterViewInit(): void {
+    //SETTING INIT FORMULARIOS
+    this.agregarServiciosForm?.formFilter
+      .get(&#x27;tipo_servicio_id&#x27;)
+      .disable({ emitEvent: false });
+    this.agregarServiciosForm?.formFilter
+      .get(&#x27;servicio_cod&#x27;)
+      .disable({ emitEvent: false });
+    this.agregarServiciosForm?.formFilter
+      .get(&#x27;unidad_obra_cod&#x27;)
+      .disable({ emitEvent: false });
+
+    // RESET
+    this.agregarServiciosForm?.formFilter
+      .get(&#x27;actividad_id&#x27;)
+      .valueChanges.subscribe(() &#x3D;&gt; {
+        this.contratoFacade.resetTipoServiciosContrato();
+        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+        this.serviciosFacade.resetServicioSelected();
+        this.serviciosFacade.resetUnidadesObraServicio();
+
+        this.agregarServiciosForm?.formFilter
+          .get(&#x27;tipo_servicio_id&#x27;)
+          .setValue(null, { emitEvent: false });
+        this.agregarServiciosForm?.formFilter
+          .get(&#x27;servicio_cod&#x27;)
+          .setValue(null, { emitEvent: false });
+        this.agregarServiciosForm?.formFilter
+          .get(&#x27;unidad_obra_cod&#x27;)
+          .setValue(null, { emitEvent: false });
+      });
+
+    this.agregarServiciosForm?.formFilter
+      .get(&#x27;tipo_servicio_id&#x27;)
+      .valueChanges.subscribe(() &#x3D;&gt; {
+        this.serviciosFacade.resetServiciosAgenciaContratoProveedor();
+        this.serviciosFacade.resetServicioSelected();
+        this.serviciosFacade.resetUnidadesObraServicio();
+
+        this.agregarServiciosForm?.formFilter
+          .get(&#x27;servicio_cod&#x27;)
+          .setValue(null, { emitEvent: false });
+        this.agregarServiciosForm?.formFilter
+          .get(&#x27;unidad_obra_cod&#x27;)
+          .setValue(null, { emitEvent: false });
+      });
+  }
+
+  accionExist(accion: string): boolean {
+    return this.accionesOT.find(v &#x3D;&gt; v.slug &#x3D;&#x3D;&#x3D; accion) !&#x3D;&#x3D; undefined;
+  }
+
+  guardarBorrador(): void {
+    this.subscription.add(
+      this.carrito$.pipe(take(1)).subscribe(carrito &#x3D;&gt; {
+        // 113 TODO: IMPLEMENTAR LA ELIMINACIÓN DE ADICIONALES ESCOGIDOS
+        // 114 TODO: IMPLEMENTAR EL GUARDAR CAMBIOS DE INFORME DE AVANCE
+        // 115 TODO: DESPLEGAR MENSAJE DE APROBACIÓN PARA GUARDAR INFORME DE AVANCE
+
+        console.log(this.tableServiciosAdicionales.formTable.value);
+
+        // SERVICIOS ADICIONALES
+        // TODO: OPTIMIZAR ESTRUCTURA DEL FORMULARIO TABLE
+        let formularioCarrito &#x3D; this.tableServiciosAdicionales.formTable.get(
+          &#x27;table&#x27;
+        ).value as Array&lt;{
+          precargado: boolean;
+          servicio_cantidad: number;
+          servicio_id: number;
+          servicio_precio_final_clp: number;
+          servicio_rowid: number;
+          unidad_obras: {
+            precargado: boolean;
+            uo_rowid: number;
+            uo_codigo: string;
+            uo_cantidad: number;
+
+            uo_precio_total_clp: number;
+          }[];
+        }&gt;;
+
+        console.log(&#x27;form&#x27;, formularioCarrito);
+        if (formularioCarrito.length &gt; 0) {
+          // SERVICIOS/UO COMPLETAMENTE NUEVOS
+          let nuevosAdicionales: NuevoServicioAdicional[] &#x3D; formularioCarrito
+            .filter(value &#x3D;&gt; !value.precargado)
+            .map(value &#x3D;&gt; ({
+              servicio_id: +value.servicio_id,
+              actividad_id: +carrito.find(
+                servicio &#x3D;&gt; servicio.servicio_id &#x3D;&#x3D;&#x3D; +value.servicio_id
+              ).unidad_obras[0].actividad_id, // 116 TODO: CONSULTAR SI EXISTE LA POSIBILIDAD DE QUE EXISTA UNA UO CON DISTINTOS TIPOS DE SERVICIO/ACTIVIDAD
+              tipo_servicio_id: +carrito.find(
+                servicio &#x3D;&gt; servicio.servicio_id &#x3D;&#x3D;&#x3D; +value.servicio_id
+              ).tipo_servicio_id,
+              // cantidad: value.dummy ? 0 : value.servicio_cantidad,
+              cantidad: value.servicio_cantidad,
+              unidad_obra: value.unidad_obras.map(uo &#x3D;&gt; ({
+                uob_codigo: uo.uo_codigo,
+                cantidad: uo.uo_cantidad,
+              })),
+            }));
+
+          console.log(&#x27;nuevos&#x27;, nuevosAdicionales);
+
+          // TODO: SERVICIOS A ACTUALIZAR
+
+          // TODO: UO A ACTUALIZAR
+
+          // TODO: UO A AGREGAR
+
+          let request: RequestAdicionales &#x3D; {
+            ot_id: this.ot_id,
+            adicionales_solicitados: {
+              nuevo: nuevosAdicionales,
+              // actualizar: {
+              //   servicio: servicio_actualizar,
+              //   unidad_obra: [...uo_actualizar.flat()].filter(
+              //     value &#x3D;&gt; value !&#x3D;&#x3D; undefined
+              //   ),
+              //   agregar_uob_a_servicio: [...uo_agregar.flat()].filter(
+              //     value &#x3D;&gt; value !&#x3D;&#x3D; undefined
+              //   ),
+              // },
+            },
+          };
+
+          this.serviciosFacade.agregarAdicionales(request);
+        }
+      })
+    );
+  }
+
+  enviarInformeAvance(): void {
+    // 117 TODO: IMPLEMENTAR EL CONFIRMAR ENVÍO DE INFORME DE AVANCE
+    // 118 TODO: IMPLEMENTAR EL GUARDAR ADICIONALES
+    // 127 TODO: IMPLEMENTAR MENSAJE Y REDIRECCION AL ENVIAR EXITOSAMENTE
+
+    this.informeAvanceFacade.sendDetalleInformeAvance(this.ot_id);
+  }
+
+  displayModalRechazarInformeAvance(): void {
+    this.showModalRechazarInformeAvance &#x3D; true;
+  }
+
+  autorizarInformeAvance(): void {
+    const request: RequestAutorizarInformeAvance &#x3D; {
+      ot_id: this.ot_id,
+      estado: &#x27;APROBADO&#x27;,
+    };
+
+    this.informeAvanceFacade.AceptarRechazarInformeAvanceOT(request);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container-informe-avance&quot;&gt;
+    &lt;h1&gt;Informe de avance&lt;/h1&gt;
+
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 table-informe-avance&quot;&gt;
+                &lt;zwc-table-servicios #tableServiciosInformeAvance mode_source&#x3D;&quot;static&quot;
+                    [data_source]&#x3D;&quot;serviciosInformeAvance&quot; [cantidad_editable]&#x3D;&quot;true&quot; [column_acciones]&#x3D;&quot;false&quot;&gt;
+                &lt;/zwc-table-servicios&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p-divider align&#x3D;&quot;center&quot;&gt;
+        &lt;span class&#x3D;&quot;p-tag&quot;&gt;Servicios Adicionales&lt;/span&gt;
+    &lt;/p-divider&gt;
+
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 table-agregar-servicios-adicionales&quot;&gt;
+                &lt;p-divider align&#x3D;&quot;center&quot;&gt;
+                    &lt;span class&#x3D;&quot;p-tag&quot;&gt;Agregar Servicios&lt;/span&gt;
+                &lt;/p-divider&gt;
+                &lt;div class&#x3D;&quot;grid&quot;&gt;
+                    &lt;div class&#x3D;&quot;field col-12 md:col-3 lg:col-3 xl:col-3&quot;&gt;
+                        &lt;zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion&#x3D;&quot;ServiciosAdicionales&quot;
+                            [informeAvance]&#x3D;&quot;serviciosInformeAvance&quot;&gt;
+                        &lt;/zwc-form-agregar-servicios&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;field col-12 md:col-9 lg:col-9 xl:col-9&quot;&gt;
+                        &lt;zwc-table-servicios #tableServiciosAdicionales&gt;
+                        &lt;/zwc-table-servicios&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p-divider align&#x3D;&quot;center&quot;&gt;
+    &lt;/p-divider&gt;
+
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+        &lt;div class&#x3D;&quot; grid&quot;&gt;
+            &lt;div class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+                &lt;button pButton pRipple type&#x3D;&quot;button&quot; id&#x3D;&quot;button-atrás&quot; class&#x3D;&quot;p-button-outlined&quot;&gt;
+                    Atrás
+                &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div *ngIf&#x3D;&quot;accionExist(&#x27;OT_EDITAR_INFORME_AVANCE&#x27;)&quot; class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+                &lt;zwc-pbutton-sending Pid&#x3D;&quot;guardar-borrador-button&quot; content&#x3D;&quot;Guardar borrador&quot;
+                    Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot; (click)&#x3D;&quot;guardarBorrador()&quot;&gt;&lt;/zwc-pbutton-sending&gt;
+            &lt;/div&gt;
+
+            &lt;div *ngIf&#x3D;&quot;accionExist(&#x27;OT_ENVIAR_INFORME_AVANCE&#x27;)&quot; class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+                &lt;zwc-pbutton-sending Pid&#x3D;&quot;enviar-button&quot; content&#x3D;&quot;Enviar informe de avance&quot;
+                    Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot; (click)&#x3D;&quot;enviarInformeAvance()&quot;
+                    [sending]&#x3D;&quot;sendingSendInformeAvance$|async&quot;&gt;
+                &lt;/zwc-pbutton-sending&gt;
+            &lt;/div&gt;
+
+            &lt;div *ngIf&#x3D;&quot;accionExist(&#x27;OT_AUTORIZAR_INFORME_AVANCE&#x27;)&quot; class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+                &lt;zwc-pbutton-sending Pid&#x3D;&quot;aceptar-button&quot; content&#x3D;&quot;Autorizar informe de avance&quot;
+                    Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot; (click)&#x3D;&quot;autorizarInformeAvance()&quot;
+                    [sending]&#x3D;&quot;sendingSendInformeAvance$|async&quot;&gt;
+                &lt;/zwc-pbutton-sending&gt;
+            &lt;/div&gt;
+            &lt;div *ngIf&#x3D;&quot;accionExist(&#x27;OT_AUTORIZAR_INFORME_AVANCE&#x27;)&quot; class&#x3D;&quot;field col-12 md:col-4 lg:col-4 xl:col-4&quot;&gt;
+                &lt;zwc-pbutton-sending Pid&#x3D;&quot;rechazar-button&quot; content&#x3D;&quot;Rechazar informe de avance&quot;
+                    Pclass&#x3D;&quot;p-button-info p-button-sm mt-4 w-full&quot; (click)&#x3D;&quot;displayModalRechazarInformeAvance()&quot;
+                    [sending]&#x3D;&quot;sendingSendInformeAvance$|async&quot;&gt;
+                &lt;/zwc-pbutton-sending&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p-dialog header&#x3D;&quot;Rechazo de la Orden de trabajo&quot; [(visible)]&#x3D;&quot;showModalRechazarInformeAvance&quot; [draggable]&#x3D;&quot;false&quot;
+        [modal]&#x3D;&quot;true&quot;&gt;
+        &lt;zwc-view-rechazo&gt;&lt;/zwc-view-rechazo&gt;
+    &lt;/p-dialog&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./informe-avance.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.container-informe-avance {
+    padding: 10px;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container-informe-avance">    <h1>Informe de avance</h1>    <div class="card">        <div class=" grid">            <div class="field col-12 table-informe-avance">                <zwc-table-servicios #tableServiciosInformeAvance mode_source="static"                    [data_source]="serviciosInformeAvance" [cantidad_editable]="true" [column_acciones]="false">                </zwc-table-servicios>            </div>        </div>    </div>    <p-divider align="center">        <span class="p-tag">Servicios Adicionales</span>    </p-divider>    <div class="card">        <div class=" grid">            <div class="field col-12 table-agregar-servicios-adicionales">                <p-divider align="center">                    <span class="p-tag">Agregar Servicios</span>                </p-divider>                <div class="grid">                    <div class="field col-12 md:col-3 lg:col-3 xl:col-3">                        <zwc-form-agregar-servicios #agregarServiciosForm reglasDeAgregacion="ServiciosAdicionales"                            [informeAvance]="serviciosInformeAvance">                        </zwc-form-agregar-servicios>                    </div>                    <div class="field col-12 md:col-9 lg:col-9 xl:col-9">                        <zwc-table-servicios #tableServiciosAdicionales>                        </zwc-table-servicios>                    </div>                </div>            </div>        </div>    </div>    <p-divider align="center">    </p-divider>    <div class="card">        <div class=" grid">            <div class="field col-12 md:col-4 lg:col-4 xl:col-4">                <button pButton pRipple type="button" id="button-atrás" class="p-button-outlined">                    Atrás                </button>            </div>            <div *ngIf="accionExist(\'OT_EDITAR_INFORME_AVANCE\')" class="field col-12 md:col-4 lg:col-4 xl:col-4">                <zwc-pbutton-sending Pid="guardar-borrador-button" content="Guardar borrador"                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="guardarBorrador()"></zwc-pbutton-sending>            </div>            <div *ngIf="accionExist(\'OT_ENVIAR_INFORME_AVANCE\')" class="field col-12 md:col-4 lg:col-4 xl:col-4">                <zwc-pbutton-sending Pid="enviar-button" content="Enviar informe de avance"                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="enviarInformeAvance()"                    [sending]="sendingSendInformeAvance$|async">                </zwc-pbutton-sending>            </div>            <div *ngIf="accionExist(\'OT_AUTORIZAR_INFORME_AVANCE\')" class="field col-12 md:col-4 lg:col-4 xl:col-4">                <zwc-pbutton-sending Pid="aceptar-button" content="Autorizar informe de avance"                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="autorizarInformeAvance()"                    [sending]="sendingSendInformeAvance$|async">                </zwc-pbutton-sending>            </div>            <div *ngIf="accionExist(\'OT_AUTORIZAR_INFORME_AVANCE\')" class="field col-12 md:col-4 lg:col-4 xl:col-4">                <zwc-pbutton-sending Pid="rechazar-button" content="Rechazar informe de avance"                    Pclass="p-button-info p-button-sm mt-4 w-full" (click)="displayModalRechazarInformeAvance()"                    [sending]="sendingSendInformeAvance$|async">                </zwc-pbutton-sending>            </div>        </div>    </div>    <p-dialog header="Rechazo de la Orden de trabajo" [(visible)]="showModalRechazarInformeAvance" [draggable]="false"        [modal]="true">        <zwc-view-rechazo></zwc-view-rechazo>    </p-dialog></div>'
+    var COMPONENTS = [{'name': 'ActaComponent', 'selector': 'zwc-acta'},{'name': 'AnexosComponent', 'selector': 'zwc-anexos'},{'name': 'AppComponent', 'selector': 'zwc-app-root'},{'name': 'AreasComponent', 'selector': 'zwc-areas'},{'name': 'AuthComponent', 'selector': 'zwc-auth'},{'name': 'BaseTdComponent', 'selector': '[zwc-base-td]'},{'name': 'ClonadorCubicacionComponent', 'selector': 'zwc-clonador-cubicacion'},{'name': 'ContentLayoutComponent', 'selector': 'zwc-content-layout'},{'name': 'ContratosComponent', 'selector': 'zwc-contratos'},{'name': 'CubicacionComponent', 'selector': 'zwc-cubicacion'},{'name': 'FormAgregarServiciosComponent', 'selector': 'zwc-form-agregar-servicios'},{'name': 'FormAreasContainerComponent', 'selector': 'zwc-form-areas-container'},{'name': 'FormContratosContainerComponent', 'selector': 'zwc-form-contratos-container'},{'name': 'FormCubContainerComponent', 'selector': 'zwc-form-cub'},{'name': 'FormOtContainerComponent', 'selector': 'zwc-form-ot-container'},{'name': 'FormPerfilesContainerComponent', 'selector': 'zwc-form-perfiles-container'},{'name': 'FormTableServicesComponent', 'selector': 'zwc-form-table-services'},{'name': 'FormularioComponent', 'selector': 'zwc-formulario'},{'name': 'FormularioOtBaseComponent', 'selector': 'zwc-formulario-ot-base'},{'name': 'FormularioOtBucleComponent', 'selector': 'zwc-formulario-ot-bucle'},{'name': 'FormularioOtExtrasComponent', 'selector': 'zwc-formulario-ot-extras'},{'name': 'FormularioOtFijoComponent', 'selector': 'zwc-formulario-ot-fijo'},{'name': 'FormularioOtMovilComponent', 'selector': 'zwc-formulario-ot-movil'},{'name': 'FormularioOtOrdinarioComponent', 'selector': 'zwc-formulario-ot-ordinario'},{'name': 'FormularioOtSustentoFinancieroComponent', 'selector': 'zwc-formulario-ot-sustento-financiero'},{'name': 'FormUsuarioContainerComponent', 'selector': 'zwc-form-usuario-container'},{'name': 'GenerarActaContainerComponent', 'selector': 'zwc-generar-acta-container'},{'name': 'HomeComponent', 'selector': 'zwc-home'},{'name': 'InformacionComponent', 'selector': 'zwc-informacion'},{'name': 'InformeAvanceComponent', 'selector': 'zwc-informe-avance'},{'name': 'InputAlertComponent', 'selector': 'zwc-input-alert'},{'name': 'InputTextComponent', 'selector': 'zwc-input-text'},{'name': 'LibroObrasComponent', 'selector': 'zwc-libro-obras'},{'name': 'ListActasComponent', 'selector': 'zwc-list-actas'},{'name': 'ListAreasContainerComponent', 'selector': 'zwc-list-areas-container'},{'name': 'ListContratosContainerComponent', 'selector': 'zwc-list-contratos-container'},{'name': 'ListCubComponent', 'selector': 'zwc-list-cub'},{'name': 'ListOtContainerComponent', 'selector': 'zwc-list-ot-container'},{'name': 'ListOtFiltrosComponent', 'selector': 'zwc-list-ot-filtros'},{'name': 'ListOtTableComponent', 'selector': 'zwc-list-ot-table'},{'name': 'ListOtTableOperacionesComponent', 'selector': 'zwc-list-ot-table-operaciones'},{'name': 'ListPerfilesContainerComponent', 'selector': 'zwc-list-perfiles-container'},{'name': 'ListUsuarioContainerComponent', 'selector': 'zwc-list-usuario-container'},{'name': 'LoginFormComponent', 'selector': 'zwc-login-form'},{'name': 'MainLayoutComponent', 'selector': 'zwc-main-layout'},{'name': 'MenuComponent', 'selector': 'zwc-menu'},{'name': 'MenuDetalleOtComponent', 'selector': 'zwc-menu-detalle-ot'},{'name': 'MultiTdComponent', 'selector': '[zwc-multi-td]'},{'name': 'NavbarComponent', 'selector': 'zwc-navbar'},{'name': 'OtComponent', 'selector': 'zwc-ot'},{'name': 'OtDetalleComponent', 'selector': 'zwc-ot-detalle'},{'name': 'PbuttonSendingComponent', 'selector': 'zwc-pbutton-sending'},{'name': 'PdropdownComponent', 'selector': 'zwc-pdropdown'},{'name': 'PerfilesComponent', 'selector': 'zwc-perfiles'},{'name': 'PerfilSelectComponent', 'selector': 'zwc-perfil-select'},{'name': 'SideBarComponent', 'selector': 'zwc-side-bar'},{'name': 'TableServiciosComponent', 'selector': 'zwc-table-servicios'},{'name': 'UsuarioComponent', 'selector': 'zwc-usuario'},{'name': 'ValidarActaContainerComponent', 'selector': 'zwc-validar-acta-container'},{'name': 'ViewConfirmacionComponent', 'selector': 'zwc-view-confirmacion'},{'name': 'ViewRechazoComponent', 'selector': 'zwc-view-rechazo'},{'name': 'ViewServiceTableComponent', 'selector': '[zwc-view-service-table]'},{'name': 'ViewTableServicesComponent', 'selector': 'zwc-view-table-services'},{'name': 'ViewUOTableComponent', 'selector': '[zwc-view-uo-table]'}];
+    var DIRECTIVES = [{'name': 'ColorPrecargadoDirective', 'selector': '[zwcColorPrecargado]'}];
+    var ACTUAL_COMPONENT = {'name': 'InformeAvanceComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'InformeAvanceComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

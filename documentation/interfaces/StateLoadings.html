@@ -1,0 +1,2157 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>web-sigo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">web-sigo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li
+  >
+  StateLoadings</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/store/loadings/loadings.reducers.ts</code>
+        </p>
+
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#sendingAgregarServicioCarrito" 
+>
+                                            sendingAgregarServicioCarrito
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingClonarCubicacion" 
+>
+                                            sendingClonarCubicacion
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingCreateOT" 
+>
+                                            sendingCreateOT
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingDetalleCubicacion" 
+>
+                                            sendingDetalleCubicacion
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetActividadesContratoProveedor" 
+>
+                                            sendingGetActividadesContratoProveedor
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetAdminContratoFromCub" 
+>
+                                            sendingGetAdminContratoFromCub
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetAgenciasContrato" 
+>
+                                            sendingGetAgenciasContrato
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetAreaDeNegocio" 
+>
+                                            sendingGetAreaDeNegocio
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetCECO" 
+>
+                                            sendingGetCECO
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetComunasFromCub" 
+>
+                                            sendingGetComunasFromCub
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetCubicaciones" 
+>
+                                            sendingGetCubicaciones
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetCubicacionesContrato" 
+>
+                                            sendingGetCubicacionesContrato
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetLP" 
+>
+                                            sendingGetLP
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetOficinaCentral" 
+>
+                                            sendingGetOficinaCentral
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetOPEX" 
+>
+                                            sendingGetOPEX
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetOTsFromNumeroInterno" 
+>
+                                            sendingGetOTsFromNumeroInterno
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetPEP2" 
+>
+                                            sendingGetPEP2
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetPerfilesUser4Login" 
+>
+                                            sendingGetPerfilesUser4Login
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetPlanDeProyecto" 
+>
+                                            sendingGetPlanDeProyecto
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetPMO" 
+>
+                                            sendingGetPMO
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetPosibleSupervisorTrabajos" 
+>
+                                            sendingGetPosibleSupervisorTrabajos
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetProveedorAgenciasContrato" 
+>
+                                            sendingGetProveedorAgenciasContrato
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetProyectos" 
+>
+                                            sendingGetProyectos
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetSAP" 
+>
+                                            sendingGetSAP
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetServiciosAgenciaContratoProveedor" 
+>
+                                            sendingGetServiciosAgenciaContratoProveedor
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetSitioPlan" 
+>
+                                            sendingGetSitioPlan
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetSolicitadoPor" 
+>
+                                            sendingGetSolicitadoPor
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetTipoDeRed" 
+>
+                                            sendingGetTipoDeRed
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetTipoDeTrabajoFromCub" 
+>
+                                            sendingGetTipoDeTrabajoFromCub
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetTipoNumeroInterno" 
+>
+                                            sendingGetTipoNumeroInterno
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetTipoServiciosContrato" 
+>
+                                            sendingGetTipoServiciosContrato
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingGetUnidadesObraServicios" 
+>
+                                            sendingGetUnidadesObraServicios
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingLogin" 
+>
+                                            sendingLogin
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingPermisosPerfilUser" 
+>
+                                            sendingPermisosPerfilUser
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingRefreshLogin" 
+>
+                                            sendingRefreshLogin
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingSaveCubicacion" 
+>
+                                            sendingSaveCubicacion
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sendingSendDetalleInformeAvance" 
+>
+                                            sendingSendDetalleInformeAvance
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingAgregarServicioCarrito"></a>
+                                        <span class="name "><b>sendingAgregarServicioCarrito</b>
+                                            <a href="#sendingAgregarServicioCarrito">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingAgregarServicioCarrito:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingClonarCubicacion"></a>
+                                        <span class="name "><b>sendingClonarCubicacion</b>
+                                            <a href="#sendingClonarCubicacion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingClonarCubicacion:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingCreateOT"></a>
+                                        <span class="name "><b>sendingCreateOT</b>
+                                            <a href="#sendingCreateOT">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingCreateOT:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingDetalleCubicacion"></a>
+                                        <span class="name "><b>sendingDetalleCubicacion</b>
+                                            <a href="#sendingDetalleCubicacion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingDetalleCubicacion:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetActividadesContratoProveedor"></a>
+                                        <span class="name "><b>sendingGetActividadesContratoProveedor</b>
+                                            <a href="#sendingGetActividadesContratoProveedor">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetActividadesContratoProveedor:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetAdminContratoFromCub"></a>
+                                        <span class="name "><b>sendingGetAdminContratoFromCub</b>
+                                            <a href="#sendingGetAdminContratoFromCub">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetAdminContratoFromCub:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetAgenciasContrato"></a>
+                                        <span class="name "><b>sendingGetAgenciasContrato</b>
+                                            <a href="#sendingGetAgenciasContrato">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetAgenciasContrato:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetAreaDeNegocio"></a>
+                                        <span class="name "><b>sendingGetAreaDeNegocio</b>
+                                            <a href="#sendingGetAreaDeNegocio">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetAreaDeNegocio:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetCECO"></a>
+                                        <span class="name "><b>sendingGetCECO</b>
+                                            <a href="#sendingGetCECO">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetCECO:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetComunasFromCub"></a>
+                                        <span class="name "><b>sendingGetComunasFromCub</b>
+                                            <a href="#sendingGetComunasFromCub">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetComunasFromCub:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetCubicaciones"></a>
+                                        <span class="name "><b>sendingGetCubicaciones</b>
+                                            <a href="#sendingGetCubicaciones">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetCubicaciones:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetCubicacionesContrato"></a>
+                                        <span class="name "><b>sendingGetCubicacionesContrato</b>
+                                            <a href="#sendingGetCubicacionesContrato">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetCubicacionesContrato:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetLP"></a>
+                                        <span class="name "><b>sendingGetLP</b>
+                                            <a href="#sendingGetLP">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetLP:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetOficinaCentral"></a>
+                                        <span class="name "><b>sendingGetOficinaCentral</b>
+                                            <a href="#sendingGetOficinaCentral">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetOficinaCentral:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetOPEX"></a>
+                                        <span class="name "><b>sendingGetOPEX</b>
+                                            <a href="#sendingGetOPEX">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetOPEX:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetOTsFromNumeroInterno"></a>
+                                        <span class="name "><b>sendingGetOTsFromNumeroInterno</b>
+                                            <a href="#sendingGetOTsFromNumeroInterno">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetOTsFromNumeroInterno:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetPEP2"></a>
+                                        <span class="name "><b>sendingGetPEP2</b>
+                                            <a href="#sendingGetPEP2">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetPEP2:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetPerfilesUser4Login"></a>
+                                        <span class="name "><b>sendingGetPerfilesUser4Login</b>
+                                            <a href="#sendingGetPerfilesUser4Login">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetPerfilesUser4Login:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetPlanDeProyecto"></a>
+                                        <span class="name "><b>sendingGetPlanDeProyecto</b>
+                                            <a href="#sendingGetPlanDeProyecto">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetPlanDeProyecto:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetPMO"></a>
+                                        <span class="name "><b>sendingGetPMO</b>
+                                            <a href="#sendingGetPMO">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetPMO:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetPosibleSupervisorTrabajos"></a>
+                                        <span class="name "><b>sendingGetPosibleSupervisorTrabajos</b>
+                                            <a href="#sendingGetPosibleSupervisorTrabajos">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetPosibleSupervisorTrabajos:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetProveedorAgenciasContrato"></a>
+                                        <span class="name "><b>sendingGetProveedorAgenciasContrato</b>
+                                            <a href="#sendingGetProveedorAgenciasContrato">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetProveedorAgenciasContrato:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetProyectos"></a>
+                                        <span class="name "><b>sendingGetProyectos</b>
+                                            <a href="#sendingGetProyectos">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetProyectos:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetSAP"></a>
+                                        <span class="name "><b>sendingGetSAP</b>
+                                            <a href="#sendingGetSAP">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetSAP:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetServiciosAgenciaContratoProveedor"></a>
+                                        <span class="name "><b>sendingGetServiciosAgenciaContratoProveedor</b>
+                                            <a href="#sendingGetServiciosAgenciaContratoProveedor">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetServiciosAgenciaContratoProveedor:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetSitioPlan"></a>
+                                        <span class="name "><b>sendingGetSitioPlan</b>
+                                            <a href="#sendingGetSitioPlan">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetSitioPlan:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetSolicitadoPor"></a>
+                                        <span class="name "><b>sendingGetSolicitadoPor</b>
+                                            <a href="#sendingGetSolicitadoPor">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetSolicitadoPor:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetTipoDeRed"></a>
+                                        <span class="name "><b>sendingGetTipoDeRed</b>
+                                            <a href="#sendingGetTipoDeRed">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetTipoDeRed:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetTipoDeTrabajoFromCub"></a>
+                                        <span class="name "><b>sendingGetTipoDeTrabajoFromCub</b>
+                                            <a href="#sendingGetTipoDeTrabajoFromCub">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetTipoDeTrabajoFromCub:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetTipoNumeroInterno"></a>
+                                        <span class="name "><b>sendingGetTipoNumeroInterno</b>
+                                            <a href="#sendingGetTipoNumeroInterno">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetTipoNumeroInterno:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetTipoServiciosContrato"></a>
+                                        <span class="name "><b>sendingGetTipoServiciosContrato</b>
+                                            <a href="#sendingGetTipoServiciosContrato">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetTipoServiciosContrato:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingGetUnidadesObraServicios"></a>
+                                        <span class="name "><b>sendingGetUnidadesObraServicios</b>
+                                            <a href="#sendingGetUnidadesObraServicios">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingGetUnidadesObraServicios:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingLogin"></a>
+                                        <span class="name "><b>sendingLogin</b>
+                                            <a href="#sendingLogin">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingLogin:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingPermisosPerfilUser"></a>
+                                        <span class="name "><b>sendingPermisosPerfilUser</b>
+                                            <a href="#sendingPermisosPerfilUser">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingPermisosPerfilUser:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingRefreshLogin"></a>
+                                        <span class="name "><b>sendingRefreshLogin</b>
+                                            <a href="#sendingRefreshLogin">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingRefreshLogin:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingSaveCubicacion"></a>
+                                        <span class="name "><b>sendingSaveCubicacion</b>
+                                            <a href="#sendingSaveCubicacion">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingSaveCubicacion:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sendingSendDetalleInformeAvance"></a>
+                                        <span class="name "><b>sendingSendDetalleInformeAvance</b>
+                                            <a href="#sendingSendDetalleInformeAvance">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sendingSendDetalleInformeAvance:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { createReducer, on } from &#x27;@ngrx/store&#x27;;
+import * as authActions from &#x27;../auth/auth.actions&#x27;;
+import * as perfilActions from &#x27;../perfil/perfil.actions&#x27;;
+import * as loadingsActions from &#x27;./loadings.actions&#x27;;
+import * as contratosActions from &#x27;../contrato/contrato.actions&#x27;;
+import * as proveedorActions from &#x27;../proveedor/proveedor.actions&#x27;;
+import * as serviciosActions from &#x27;../servicios/servicios.actions&#x27;;
+import * as cubicacionActions from &#x27;../cubicacion/cubicacion.actions&#x27;;
+import * as otActions from &#x27;../ot/ot.actions&#x27;;
+import * as numeroInternoActions from &#x27;../numero-interno/numero-interno.actions&#x27;;
+import * as sustentoFinancieroActions from &#x27;../sustento-financiero/sustento-financiero.actions&#x27;;
+import * as proyectosActions from &#x27;../proyectos/proyectos.actions&#x27;;
+import * as informeAvanceActions from &#x27;../informe-avance/informe-avance.actions&#x27;;
+export const FeatureKey &#x3D; &#x27;loadings&#x27;;
+
+export interface StateLoadings {
+  sendingLogin: boolean;
+  sendingGetPerfilesUser4Login: boolean;
+  sendingRefreshLogin: boolean;
+  sendingPermisosPerfilUser: boolean;
+  sendingGetAgenciasContrato: boolean;
+  sendingGetProveedorAgenciasContrato: boolean;
+  sendingGetActividadesContratoProveedor: boolean;
+  sendingGetTipoServiciosContrato: boolean;
+  sendingGetServiciosAgenciaContratoProveedor: boolean;
+  sendingGetUnidadesObraServicios: boolean;
+  sendingAgregarServicioCarrito: boolean;
+  sendingSaveCubicacion: boolean;
+  sendingClonarCubicacion: boolean;
+  sendingGetCubicaciones: boolean;
+  sendingDetalleCubicacion: boolean;
+  sendingGetCubicacionesContrato: boolean;
+  sendingGetOficinaCentral: boolean;
+  sendingGetSolicitadoPor: boolean;
+  sendingGetComunasFromCub: boolean;
+  sendingGetTipoDeRed: boolean;
+  sendingGetTipoDeTrabajoFromCub: boolean;
+  sendingGetAreaDeNegocio: boolean;
+  sendingGetTipoNumeroInterno: boolean;
+  sendingGetOTsFromNumeroInterno: boolean;
+  sendingGetPlanDeProyecto: boolean;
+  sendingGetSitioPlan: boolean;
+  sendingGetPMO: boolean;
+  sendingGetLP: boolean;
+  sendingGetPEP2: boolean;
+  sendingGetOPEX: boolean;
+  sendingGetSAP: boolean;
+  sendingGetCECO: boolean;
+  sendingGetAdminContratoFromCub: boolean;
+  sendingGetProyectos: boolean;
+  sendingCreateOT: boolean;
+  sendingGetPosibleSupervisorTrabajos: boolean;
+  sendingSendDetalleInformeAvance: boolean;
+}
+
+export const initialStateLoading: StateLoadings &#x3D; {
+  sendingLogin: false,
+  sendingGetPerfilesUser4Login: false,
+  sendingRefreshLogin: false,
+  sendingPermisosPerfilUser: false,
+  sendingGetAgenciasContrato: false,
+  sendingGetProveedorAgenciasContrato: false,
+  sendingGetActividadesContratoProveedor: false,
+  sendingGetTipoServiciosContrato: false,
+  sendingGetServiciosAgenciaContratoProveedor: false,
+  sendingGetUnidadesObraServicios: false,
+  sendingAgregarServicioCarrito: false,
+  sendingSaveCubicacion: false,
+  sendingGetCubicaciones: false,
+  sendingDetalleCubicacion: false,
+  sendingClonarCubicacion: false,
+  sendingGetCubicacionesContrato: false,
+  sendingGetOficinaCentral: false,
+  sendingGetSolicitadoPor: false,
+  sendingGetComunasFromCub: false,
+  sendingGetTipoDeRed: false,
+  sendingGetTipoDeTrabajoFromCub: false,
+  sendingGetAreaDeNegocio: false,
+  sendingGetTipoNumeroInterno: false,
+  sendingGetOTsFromNumeroInterno: false,
+  sendingGetPlanDeProyecto: false,
+  sendingGetSitioPlan: false,
+  sendingGetPMO: false,
+  sendingGetLP: false,
+  sendingGetPEP2: false,
+  sendingGetOPEX: false,
+  sendingGetSAP: false,
+  sendingGetCECO: false,
+  sendingGetAdminContratoFromCub: false,
+  sendingGetProyectos: false,
+  sendingCreateOT: false,
+  sendingGetPosibleSupervisorTrabajos: false,
+  sendingSendDetalleInformeAvance: false,
+};
+
+export const reducerLoadings &#x3D; createReducer(
+  initialStateLoading,
+  on(authActions.login, state &#x3D;&gt; ({
+    ...state,
+    sendingLogin: true,
+  })),
+  on(authActions.loginError, authActions.loginSuccess, state &#x3D;&gt; ({
+    ...state,
+    sendingLogin: false,
+  })),
+  on(loadingsActions.sendingGetPerfilesUser, state &#x3D;&gt; ({
+    ...state,
+    sendingGetPerfilesUser4Login: true,
+  })),
+  on(
+    perfilActions.getPerfilesUsuarioError,
+    perfilActions.getPerfilesUsuarioSuccess,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetPerfilesUser4Login: false,
+    })
+  ),
+  on(authActions.refreshLogin, state &#x3D;&gt; ({
+    ...state,
+    sendingRefreshLogin: true,
+  })),
+  on(authActions.refreshLoginSuccess, authActions.refreshLoginError, state &#x3D;&gt; ({
+    ...state,
+    sendingRefreshLogin: false,
+  })),
+  on(authActions.getPermisosPerfilUsuario4Login, state &#x3D;&gt; ({
+    ...state,
+    sendingPermisosPerfilUser: true,
+  })),
+  on(
+    authActions.getPermisosPerfilUsuario4LoginSuccess,
+    authActions.getPermisosPerfilUsuario4LoginError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingPermisosPerfilUser: false,
+    })
+  ),
+  on(contratosActions.getAgenciasContrato, state &#x3D;&gt; ({
+    ...state,
+    sendingGetAgenciasContrato: true,
+  })),
+  on(
+    contratosActions.getAgenciasContratoSuccess,
+    contratosActions.getAgenciasContratoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetAgenciasContrato: false,
+    })
+  ),
+  on(proveedorActions.getProveedoresAgenciaContrato, state &#x3D;&gt; ({
+    ...state,
+    sendingGetProveedorAgenciasContrato: true,
+  })),
+  on(
+    proveedorActions.getProveedoresAgenciaContratoSuccess,
+    proveedorActions.getProveedoresAgenciaContratoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetProveedorAgenciasContrato: false,
+    })
+  ),
+  on(contratosActions.getActividadesContratoProveedor, state &#x3D;&gt; ({
+    ...state,
+    sendingGetActividadesContratoProveedor: true,
+  })),
+  on(
+    contratosActions.getActividadesContratoProveedorSuccess,
+    contratosActions.getActividadesContratoProveedorError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetActividadesContratoProveedor: false,
+    })
+  ),
+  on(contratosActions.getTipoServiciosContrato, state &#x3D;&gt; ({
+    ...state,
+    sendingGetTipoServiciosContrato: true,
+  })),
+  on(
+    contratosActions.getTipoServiciosContratoSuccess,
+    contratosActions.getTipoServiciosContratoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetTipoServiciosContrato: false,
+    })
+  ),
+  on(serviciosActions.getServiciosAgenciaContratoProveedor, state &#x3D;&gt; ({
+    ...state,
+    sendingGetServiciosAgenciaContratoProveedor: true,
+  })),
+  on(
+    serviciosActions.getServiciosAgenciaContratoProveedorSuccess,
+    serviciosActions.getServiciosAgenciaContratoProveedorError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetServiciosAgenciaContratoProveedor: false,
+    })
+  ),
+  on(serviciosActions.getUnidadesObraServicio, state &#x3D;&gt; ({
+    ...state,
+    sendingGetUnidadesObraServicios: true,
+  })),
+  on(
+    serviciosActions.getUnidadesObraServicioSuccess,
+    serviciosActions.getUnidadesObraServicioError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetUnidadesObraServicios: false,
+    })
+  ),
+  on(serviciosActions.addServicioCarrito, state &#x3D;&gt; ({
+    ...state,
+    sendingAgregarServicioCarrito: true,
+  })),
+  on(
+    serviciosActions.addServicioCarritoSuccess,
+    serviciosActions.addServicioCarritoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingAgregarServicioCarrito: false,
+    })
+  ),
+  on(
+    cubicacionActions.createCubicacion,
+    cubicacionActions.editCubicacion,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingSaveCubicacion: true,
+    })
+  ),
+  on(
+    cubicacionActions.createCubicacionSuccess,
+    cubicacionActions.createCubicacionError,
+    cubicacionActions.editCubicacionSuccess,
+    cubicacionActions.editCubicacionError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingSaveCubicacion: false,
+    })
+  ),
+  on(cubicacionActions.listarCubicaciones, state &#x3D;&gt; ({
+    ...state,
+    sendingGetCubicaciones: true,
+  })),
+  on(
+    cubicacionActions.listarCubicacionesSuccess,
+    cubicacionActions.listarCubicacionesError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetCubicaciones: false,
+    })
+  ),
+  on(
+    cubicacionActions.detalleCubicacionSuccess,
+    cubicacionActions.detalleCubicacionError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingDetalleCubicacion: false,
+    })
+  ),
+  on(cubicacionActions.detalleCubicacion, state &#x3D;&gt; ({
+    ...state,
+    sendingDetalleCubicacion: true,
+  })),
+
+  on(cubicacionActions.clonarCubicacion, state &#x3D;&gt; ({
+    ...state,
+    sendingClonarCubicacion: true,
+  })),
+  on(
+    cubicacionActions.clonarCubicacionSuccess,
+    cubicacionActions.clonarCubicacionError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingClonarCubicacion: false,
+    })
+  ),
+
+  on(cubicacionActions.getCubicacionesContrato, state &#x3D;&gt; ({
+    ...state,
+    sendingGetCubicacionesContrato: true,
+  })),
+  on(
+    cubicacionActions.getCubicacionesContratoSuccess,
+    cubicacionActions.getCubicacionesContratoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetCubicacionesContrato: false,
+    })
+  ),
+
+  on(otActions.getOficinaCentral, state &#x3D;&gt; ({
+    ...state,
+    sendingGetOficinaCentral: true,
+  })),
+  on(
+    otActions.getOficinaCentralSuccess,
+    otActions.getOficinaCentralError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetOficinaCentral: false,
+    })
+  ),
+
+  on(otActions.getSolicitadoPor, state &#x3D;&gt; ({
+    ...state,
+    sendingGetSolicitadoPor: true,
+  })),
+  on(
+    otActions.getSolicitadoPorSuccess,
+    otActions.getSolicitadoPorError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetSolicitadoPor: false,
+    })
+  ),
+
+  on(otActions.getComunasFromCub, state &#x3D;&gt; ({
+    ...state,
+    sendingGetComunasFromCub: true,
+  })),
+  on(
+    otActions.getComunasFromCubSuccess,
+    otActions.getComunasFromCublError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetComunasFromCub: false,
+    })
+  ),
+
+  on(otActions.getTipoDeRed, state &#x3D;&gt; ({
+    ...state,
+    sendingGetTipoDeRed: true,
+  })),
+  on(otActions.getTipoDeRedSuccess, otActions.getTipoDeRedError, state &#x3D;&gt; ({
+    ...state,
+    sendingGetTipoDeRed: false,
+  })),
+
+  on(otActions.getTipoDeTrabajoFromCub, state &#x3D;&gt; ({
+    ...state,
+    sendingGetTipoDeTrabajoFromCub: true,
+  })),
+  on(
+    otActions.getTipoDeTrabajoFromCubSuccess,
+    otActions.getTipoDeTrabajoFromCubError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetTipoDeTrabajoFromCub: false,
+    })
+  ),
+
+  on(otActions.getAreaDeNegocio, state &#x3D;&gt; ({
+    ...state,
+    sendingGetAreaDeNegocio: true,
+  })),
+  on(
+    otActions.getAreaDeNegocioSuccess,
+    otActions.getAreaDeNegocioError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetAreaDeNegocio: false,
+    })
+  ),
+
+  on(numeroInternoActions.getTipoDeNumeroInterno, state &#x3D;&gt; ({
+    ...state,
+    sendingGetTipoNumeroInterno: true,
+  })),
+  on(
+    numeroInternoActions.getTipoDeNumeroInternoSuccess,
+    numeroInternoActions.getTipoDeNumeroInternoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetTipoNumeroInterno: false,
+    })
+  ),
+
+  on(numeroInternoActions.getOTFromNumeroInterno, state &#x3D;&gt; ({
+    ...state,
+    sendingGetOTsFromNumeroInterno: true,
+  })),
+  on(
+    numeroInternoActions.getOTFromNumeroInternoSuccess,
+    numeroInternoActions.getOTFromNumeroInternoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetOTsFromNumeroInterno: false,
+    })
+  ),
+
+  on(otActions.getPlanDeProyecto, state &#x3D;&gt; ({
+    ...state,
+    sendingGetPlanDeProyecto: true,
+  })),
+  on(
+    otActions.getPlanDeProyectoSuccess,
+    otActions.getPlanDeProyectoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetPlanDeProyecto: false,
+    })
+  ),
+
+  on(otActions.getSitioPlanProyecto, state &#x3D;&gt; ({
+    ...state,
+    sendingGetSitioPlan: true,
+  })),
+  on(
+    otActions.getSitioPlanProyectoSuccess,
+    otActions.getSitioPlanProyectoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetSitioPlan: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getPMO, state &#x3D;&gt; ({
+    ...state,
+    sendingGetPMO: true,
+  })),
+  on(
+    sustentoFinancieroActions.getPMOSuccess,
+
+    sustentoFinancieroActions.getPmoError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetPMO: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getLineaPresupuestaria, state &#x3D;&gt; ({
+    ...state,
+    sendingGetLP: true,
+  })),
+  on(
+    sustentoFinancieroActions.getLineaPresupuestariaSuccess,
+    sustentoFinancieroActions.getLineaPresupuestariaError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetLP: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getPEP2, state &#x3D;&gt; ({
+    ...state,
+    sendingGetPEP2: true,
+  })),
+  on(
+    sustentoFinancieroActions.getPEP2Success,
+    sustentoFinancieroActions.getPEP2Error,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetPEP2: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getIDOpex, state &#x3D;&gt; ({
+    ...state,
+    sendingGetOPEX: true,
+  })),
+  on(
+    sustentoFinancieroActions.getIDOpexSuccess,
+    sustentoFinancieroActions.getIDOpexError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetOPEX: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getCuentaSAP, state &#x3D;&gt; ({
+    ...state,
+    sendingGetSAP: true,
+  })),
+  on(
+    sustentoFinancieroActions.getCuentaSAPSuccess,
+    sustentoFinancieroActions.getCuentaSAPError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetSAP: false,
+    })
+  ),
+
+  on(sustentoFinancieroActions.getCECO, state &#x3D;&gt; ({
+    ...state,
+    sendingGetCECO: true,
+  })),
+  on(
+    sustentoFinancieroActions.getCECOSuccess,
+    sustentoFinancieroActions.getCECOError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetCECO: false,
+    })
+  ),
+
+  on(cubicacionActions.getAdminContratoFromCub, state &#x3D;&gt; ({
+    ...state,
+    sendingGetAdminContratoFromCub: true,
+  })),
+  on(
+    cubicacionActions.getAdminContratoFromCubSuccess,
+    cubicacionActions.getAdminContratoFromCubError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetAdminContratoFromCub: false,
+    })
+  ),
+
+  on(proyectosActions.getProyectos, state &#x3D;&gt; ({
+    ...state,
+    sendingGetProyectos: true,
+  })),
+  on(
+    proyectosActions.getProyectosSuccess,
+    proyectosActions.getProyectosError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingGetProyectos: false,
+    })
+  ),
+
+  on(otActions.createOT, state &#x3D;&gt; ({
+    ...state,
+    sendingCreateOT: true,
+  })),
+  on(otActions.createOTSuccess, otActions.createOTError, state &#x3D;&gt; ({
+    ...state,
+    sendingCreateOT: false,
+  })),
+
+  on(informeAvanceActions.sendDetalleInformeAvance, state &#x3D;&gt; ({
+    ...state,
+    sendingSendDetalleInformeAvance: true,
+  })),
+  on(
+    informeAvanceActions.sendDetalleInformeAvanceSuccess,
+    informeAvanceActions.sendDetalleInformeAvanceError,
+    state &#x3D;&gt; ({
+      ...state,
+      sendingSendDetalleInformeAvance: false,
+    })
+  )
+);
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'StateLoadings.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
